@@ -15,7 +15,8 @@
 .NuGet/
 artifacts/
 target/
-/**/_site/
+/_site/*
+!/_site/staticwebapp.config.json
 .vscode/
 .vs/
 
