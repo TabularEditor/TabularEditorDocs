@@ -1,8 +1,18 @@
 {
     "routes": [
         {
-            "route": "/projects/te3/en/latest",
-            "redirect": "/te3",
+            "route": "/projects/te3/en/latest/editions.html",
+            "redirect": "/te3/editions.html",
+            "statusCode": 301
+        },
+        {
+            "route": "/projects/te3/en/latest/security-privacy.html",
+            "redirect": "/te3/security-privacy.html",
+            "statusCode": 301
+        },
+        {
+            "route": "/projects/te3/en/latest/downloads.html",
+            "redirect": "/te3/downloads.html",
             "statusCode": 301
         },
         {
