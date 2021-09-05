@@ -19,6 +19,17 @@
             "route": "/Useful-script-snippets.html",
             "redirect": "/te2/Useful-script-snippets.html",
             "statusCode": 301
+        },
+        {
+            "route": "/projects/te3/en/latest",
+            "redirect": "/te3",
+            "statusCode": 301
+        },
+        {
+            "route": "/projects/te3/en/latest/getting-started.html",
+            "redirect": "/te3/getting-started.html",
+            "statusCode": 301
         }
+
     ]
 }
