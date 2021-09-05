@@ -1,0 +1,14 @@
+{
+    "routes": [
+        {
+            "route": "/projects/te3/en/latest",
+            "redirect": "/te3",
+            "statusCode": 301
+        },
+        {
+            "route": "/Useful-script-snippets.html",
+            "redirect": "/te2/Useful-script-snippets.html",
+            "statusCode": 301
+        }
+    ]
+}
