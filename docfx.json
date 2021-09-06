@@ -7,6 +7,10 @@
                 "files": [ "te3/**/*.md", "te2/**/*.md", "*.md", "toc.yml" ]
             }
         ],
+        "template": [
+            "default",
+            "templates/default"
+        ],
         "resource": [
             {
                 "files": [ "images/**", "te3/images/**" ]

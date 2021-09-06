@@ -1,6 +1,15 @@
+---
+title: Importing Tables
+author: Daniel Otykier
+updated: 2021-09-06
+applies_to:
+  editions:
+    - edition: Desktop
+      partial: TE3 Desktop Edition includes this feature. External tools adding/editing tables and columns to a Power BI Desktop model is not supported by Microsoft, however.
+    - edition: Business
+    - edition: Enterprise
+---
 # Importing Tables
-
-**Applies to:** <span title="TE3 Desktop Edition includes this feature. External tools adding/editing tables and columns to a Power BI Desktop model is not supported by Microsoft.">&#9888;Desktop Edition</span>, &#10004;Business Edition, &#10004;Enterprise Edition
 
 Tabular Editor 3 (starting with version 3.1.0) features a new **Table Import Wizard** that helps you create a data source in your model, and import tables/views from relational data sources such as a SQL Server database.
 

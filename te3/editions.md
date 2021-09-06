@@ -1,3 +1,7 @@
+---
+title: Importing Tables
+author: Daniel Otykier
+---
 # Tabular Editor 3 Editions
 
 ## Supported Data Modelling Scenarios

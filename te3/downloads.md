@@ -1,3 +1,7 @@
+---
+title: Importing Tables
+author: Daniel Otykier
+---
 # Tabular Editor 3 Downloads
 
 This page provides download and installation instructions for Tabular Editor 3.

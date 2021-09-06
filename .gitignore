@@ -41,3 +41,4 @@ debugSettings.json
 launchSettings.json
 project.lock.json
 *.sublime-workspace
+/_exported_templates/default

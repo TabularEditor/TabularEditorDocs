@@ -1,11 +1,20 @@
+---
+title: Create an Analysis Services Model
+author: Daniel Otykier
+updated: 2021-09-06
+applies_to:
+  editions:
+    - edition: Desktop
+      none: x
+    - edition: Business
+    - edition: Enterprise
+---
 # Creating your first Analysis Services Model
-
-**Applies to:** &#10060;<del>Desktop Edition</del>, &#10004;Business Edition, &#10004;Enterprise Edition
 
 This page walks you through the process of creating a new Analysis Services tabular model from scratch using Tabular Editor 3.
 
 > [!NOTE]
-> Tabular Editor 3 Business Edition is limited to [SQL Server Standard Edition](https://docs.microsoft.com/en-us/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models>) and [Azure Analysis Services Basic Tier](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#basic-tier>). Note that certain modelling features are not supported at these tiers.
+> Tabular Editor 3 Business Edition is limited to [SQL Server Standard Edition](https://docs.microsoft.com/en-us/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) and [Azure Analysis Services Basic Tier](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#basic-tier). Note that certain modelling features are not supported at these tiers.
 
 ##### Creating a new model
 
@@ -18,6 +27,8 @@ This page walks you through the process of creating a new Analysis Services tabu
   - 1400 (Works with SQL Server 2017 or newer, and Azure Analysis Services)
   - 1500 (Works with SQL Server 2019 or Azure Analysis Services)
 - For the best development experience, check the "Use workspace database" option. This requires that you have an instance of Analysis Services available on which your workspace database will be deployed. This could be a local or a remote instance of SQL Server Analysis Services or it could be an instance of Azure Analysis Services. When you click OK, you will be prompted to enter the connection string for the Analysis Services instance in which you want the workspace database created.
+
+  [Learn more about workspace databases](workspace-mode.md).
 
 > [!NOTE]
 > With a workspace database, you can validate Power Query (M expressions) and import table schema from Power Query expressions. You can also refresh and query data in the workspace database, making it easier to debug and test your DAX expressions.

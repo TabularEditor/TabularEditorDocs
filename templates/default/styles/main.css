@@ -1,0 +1,24 @@
+.emoji {
+    font-weight: 400;
+    font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
+}
+.metadata {
+    display: flex; flex-wrap: wrap; list-style: none; margin: 0!important; padding: .125rem 0 0 0!important;
+    font-size: 1.0rem;
+}
+.metadata>li:not(:last-of-type):not(:only-of-type):after {
+    padding-left: 5px;
+    padding-right: 5px;
+    content: "\2022";
+}
+.applies-to {
+    display: inline-flex; flex-wrap: wrap; list-style: none; margin: 0!important; padding: .125rem 0 0 0!important;
+}
+.applies-to>li:not(:last-of-type):not(:only-of-type):after {
+    padding-left: 5px;
+    padding-right: 5px;
+    content: "\2022";
+}
+.applies-to-div {
+    padding-bottom: 10px;
+}

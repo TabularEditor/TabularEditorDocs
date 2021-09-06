@@ -1,6 +1,15 @@
+---
+title: Create a Power BI Dataset
+author: Daniel Otykier
+updated: 2021-09-06
+applies_to:
+  editions:
+    - edition: Desktop
+      none: x
+    - edition: Business
+    - edition: Enterprise
+---
 # Creating your first Power BI dataset
-
-**Applies to:** &#10060;<del>Desktop Edition</del>, &#10004;Business Edition, &#10004;Enterprise Edition
 
 This page walks you through the process of creating a new Power BI dataset from scratch using Tabular Editor 3.
 

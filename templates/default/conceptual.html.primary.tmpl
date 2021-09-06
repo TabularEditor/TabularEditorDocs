@@ -1,0 +1,16 @@
+{{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
+{{!master(layout/_master.tmpl)}}
+{{{rawTitle}}}
+{{#updated}}
+<ul class="metadata"><li>{{updated}}</li><li>{{author}}</li></ul>
+{{/updated}}
+{{#applies_to}}
+<div class="applies-to-div"><strong>Applies to: </strong><ul class="applies-to">
+  {{#editions}}
+    {{#none}}<li><span><span class="emoji">&#10060;</span> <del>{{edition}} Edition</del></span></li>{{/none}}
+    {{#partial}}<li><span title="{{partial}}"><span class="emoji">&#9888;</span> {{edition}} Edition</span></li>{{/partial}}
+    {{^partial}}{{^none}}<li><span><span class="emoji">&#10004;</span> {{edition}} Edition</span></li>{{/none}}{{/partial}}
+  {{/editions}}
+</ul></div>
+{{/applies_to}}
+{{{conceptual}}}
