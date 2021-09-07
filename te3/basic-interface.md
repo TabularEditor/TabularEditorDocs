@@ -21,6 +21,8 @@ The first time you launch Tabular Editor 3 and load a data model, you will be pr
 7. **Messages view**: Tabular Editor 3 continuously analyzes the DAX expressions on your model for semantic errors. Any such errors are outputted here. In addition, messages shown in this view, can originate from C# scripts or from error messages reported by Analysis Services.
 8. **Status bar**: The status bar provides various contextual information about the current selection, Best Practice Analyzer findings, etc.
 
+There are a number of additional views available, serving various purposes. More information in the [View menu](#view) section.
+
 ## Customizing the user interface
 
 All UI elements may be resized and/or rearranged to fit your needs. You can even drag individual views out of the main view, thus splitting up an instance of Tabular Editor 3 across multiple monitors. Tabular Editor 3 will save the customization when the application is closed, and reload it automatically upon next launch.
@@ -116,6 +118,13 @@ The **Edit** menu contains standard Windows application menu options for editing
 - **Code assist**: This option is available when editing DAX code. It provides a shortcut to various code assist features relevant for editing DAX code. See [DAX editor](dax-editor.md#code-assist-features) for more information.
 
 ### View
+
+The **View** menu lets you navigate between the different views of the Tabular Editor 3 UI. Note that documents are not shown in the View menu. To navigate between documents, use the [Window menu](#window).
+
+![View Menu](images/view-menu.png)
+
+- **TOM Explorer**: Sets focus to the TOM Explorer view, unhiding it if it has been hidden. The TOM Explorer presents a hierarchichal view of the entire [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) of the currently loaded model metadata.
+- **Best Practice Analyzer**: Sets focus to the Best Practice Analyzer view, unhiding it if it has been hidden. The Best Practice Analyzer helps improve the quality of your model by letting you specify rules for best practice validation.
 
 ### Model
 
