@@ -48,9 +48,72 @@ For the vector based themes (Basic and Bezier), use the **Window > Palette** men
 
 The following section describes the menus in Tabular Editor 3 in more details (WIP).
 
+We use the term **Active document** in the following section, to mean that the cursor is placed within a document such as the Expression Editor or the "DAX Script 1" tab in the screenshot below. Some keyboard shortcuts and menu options behave differently depending on whether there is an active document or not, and what type of document is active.
+
+![Active Document](images/active-document.png)
+
 ### File
 
+The **File** menu primarily contains menu items for dealing with loading and saving model metadata and supporting files and documents.
+
+![File Menu](images/file-menu.png)
+
+- **New**: Opens a submenu that allows you to create a new blank data model (Ctrl+N), or create various [supporting files](supported-files.md#supporting-files) such as a new DAX Query or DAX Script (text files) or a data model diagram (JSON file). Supporting files (with the exception of C# scripts), can be created only when a model is already loaded in Tabular Editor.
+  
+  ![File Menu New](images/file-menu-new.png)
+
+> [!IMPORTANT]
+> The **New > Model...** option is not available in Tabular Editor 3 Desktop Edition, as this edition may only be used as an External Tool for Poewr BI Desktop. [More information](editions.md).
+
+- **Open**: Opens a submenu with options for loading a data model from various sources, as well as on option for loading any other type of file. The submenu options are:
+
+  ![File Menu Open](images/file-menu-open.png)
+
+  - **Model from file...** Open model metadata from a file such as a .bim or .pbit file.
+  - **Model from DB...** Specify Analysis Services or Power BI XMLA connection details, or connect to a local instance of Analysis Services (such as Visual Studio's Integrated Workspace server or Power BI Desktop), in order to load model metadata from a tabular model that has already been deployed.
+  - **Model from folder...** Open model metadata from a folder structure which was previously saved using any version of Tabular Editor.
+  - **File...** displays a dialog that lets you open any type of file supported by Tabular Editor 3, based on the file name extension. See [Supported file types](supported-files.md) for more information.
+
+    ![Supported File Types](images/supported-file-types.png)
+
+> [!IMPORTANT]
+> In Tabular Editor 3 Desktop Edition the **Open > Model from file...** and **Open > Model from folder...** options are not available and the **Open > File...** dialog only allows opening [supporting files](supported-files.md#supporting-files), not files containing metadata.
+
+- **Revert**: This option lets you reload the model metadata from the source, discarding any changes that are made in Tabular Editor, which have not yet been saved. This option is useful when Tabular Editor 3 is used as an External Tool for Power BI Desktop, and a change is made in Power BI Desktop while Tabular Editor 3 is connected. By choosing **Revert**, Tabular Editor 3 can reload the model metadata from Power BI Desktop without having to reconnect.
+- **Close**: This closes the active document (for example a DAX Query, a C# script or a data model diagram). If the document has unsaved changes, Tabular Editor will prompt you to save the changes before closing.
+- **Close model**: This unloads the currently loaded model metadata from Tabular Editor. If you made changes to the metadata, Tabular Editor will prompt you to save the changes before closing.
+- **Save**: This saves the active document back to the source file. If no document is active, this saves the model metadata back to the source, which could be a Model.bim file, a Database.json (folder structure) or a connected instance of Analysis Services (including Power BI Desktop) or the Power BI XMLA endpoint.
+- **Save as...** This allows you to save the active document as a new file. If no document is active, this allows you to save the model metadata as a new file, using the .bim (JSON-based) file.
+- **Save to folder...** This allows you to save the model metadata as a [folder structure](../common/save-to-folder.md).
+- **Save all**: Saves all unsaved documents and model metadata at once.
+- **Recent files**: Displays a list of recently used supporting files allowing you to quickly reopen them.
+- **Recent tabular models**: Displays a list of recently used model metadata files or folders, allowing you to quickly reload model metadata from one of these.
+
+> [!IMPORTANT]
+> In Tabular Editor 3 Desktop Edition the **Save to folder** and **Recent tabular models** options are disabled. In addition, the **Save as** option is only enabled for [supporting files](supported-files.md#supporting-files).
+
+- **Exit**: Shuts down the Tabular Editor 3 application. You are prompted to save any unsaved files or model metadata before the application is shut down.
+
 ### Edit
+
+The **Edit** menu contains standard Windows application menu options for editing a document or making changes to the currently loaded model metadata.
+
+![Edit Menu](images/edit-menu.png)
+
+- **Undo**: This option undoes the last change made to the model metadata. When there is no active document, the familiar CTRL+Z shortcut maps to this option.
+- **Redo**: This option undoes the last undo against the model metadata. When there is no active document, the familiar CTRL+Y shortcut maps to this option.
+- **Undo typing**: Undoes the last text change in the currently active document. When there is no active document, this option is not available.
+- **Redo typing**: Undoes the last undo within the currently active document. When there is no active document, this option is not available.
+- **Find**: Displays the "Find and replace" dialog with the "Find" tab selected. [More information](find-replace.md#find).
+- **Replace**: Displays the "Find and replace" dialog with the "Replace" tab selected. [More information](find-replace.md#replace).
+- **Cut / Copy / Paste**: These are the familiar Windows editing operations. If there is an active document, then these apply to the text selection within that document. Otherwise, these options may be used to manipulate objects in the TOM Explorer. For example, you can duplicate multiple measures by holding down the SHIFT or CTRL key while selecting the measures in the TOM Explorer, then hitting CTRL+C followed by CTRL+V.
+- **Delete**: Deletes the selected text in the active document, or the currently selected object(s) in the TOM Explorer if there is no active document.
+
+> [!NOTE]
+> Tabular Editor generally only prompts for object deletion when multiple objects are selected, or when there are dependencies to the object(s) being deleted. Object deletion can be undone by using the **Undo** option (CTRL+Z).
+
+- **Select all**: Selects all text in the currently active document, or all objects belonging to the same parent within the TOM Exporer.
+- **Code assist**: This option is available when editing DAX code. It provides a shortcut to various code assist features relevant for editing DAX code. See [DAX editor](dax-editor.md#code-assist-features) for more information.
 
 ### View
 

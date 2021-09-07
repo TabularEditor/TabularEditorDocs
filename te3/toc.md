@@ -5,6 +5,8 @@
 
 # Documentation
 ## [User Interface overview](basic-interface.md)
+## [Find and replace](find-replace.md)
+## [Supported file types](supported-files.md)
 ## [Security overview](security-privacy.md)
 
 # Tutorials and how-to's

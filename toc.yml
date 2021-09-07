@@ -1,5 +1,8 @@
 ﻿- name: Home
   href: index.md
+- name: Common features
+  href: common/
+  homepage: common/common-features.md
 - name: Tabular Editor 2
   href: te2/
   homepage: te2/Getting-Started.md
