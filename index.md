@@ -65,3 +65,9 @@ Tabular Editor 3.x is a more advanced application which offers a premium experie
 ## Conclusion
 
 If you are new to tabular modeling in general, we recommend that you use the standard tools until you familiarize yourself with concepts such as calculated tables, measures, relationships, DAX, etc. At that point, try to give Tabular Editor 2.x a spin, and see how much faster it enables you to achieve certain tasks. If you like it and want more, consider Tabular Editor 3.x!
+
+## Next steps
+
+- [Tabular Editor 2.x documentation](te2/Getting-Started.md)
+- [Tabular Editor 3.x documentation](te3/getting-started.md)
+- [Common features](common/common-features.md)
