@@ -4,6 +4,6 @@
 
 ## Code assist features
 
-![Dax Code Assist](images/dax-code-assist.png)
+![Dax Code Assist](~/images/dax-code-assist.png)
 
 (WIP)

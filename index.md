@@ -30,7 +30,7 @@ Lastly, thanks to the "Save-to-folder" functionality, a new file format where ev
 
 Tabular Editor 2.x is a lightweight application for quickly modifying the TOM (Tabular Object Model) of an Analysis Services or Power BI data model. The tool was originally released in 2016 and receives regular updates and bugfixes.
 
-![Tabular Editor 2.x](images/te2.png)
+![Tabular Editor 2.x](~/images/te2.png)
 
 **Tabular Editor 2.x main features:**
 
@@ -48,7 +48,7 @@ Tabular Editor 2.x is a lightweight application for quickly modifying the TOM (T
 
 Tabular Editor 3.x is a more advanced application which offers a premium experience with many convenient features to combine all your data modeling and development needs in one single tool.
 
-![Tabular Editor 3.x](images/te3.png)
+![Tabular Editor 3.x](~/images/te3.png)
 
 **Tabular Editor 3.x main features:**
 

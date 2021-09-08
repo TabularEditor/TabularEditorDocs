@@ -4,19 +4,28 @@
 ## [Compare editions](editions.md)
 
 # Documentation
-## [User Interface overview](basic-interface.md)
-## [Find and replace](find-replace.md)
+## [User Interface](basic-interface.md)
+### @tom-explorer-view
+### @bpa-view
+### @messages-view
+### @data-refresh-view
+### @macros-view
+### @find-replace
 ## [Supported file types](supported-files.md)
+## Features
+### [C-sharp scripts](csharp-scripts.md)
 ## [Security overview](security-privacy.md)
 
-# Tutorials and how-to's
-## [Create an Analysis Services Model](new-as-model.md)
-## [Create a Power BI dataset](new-pbi-model.md)
-## [Workspace Mode](workspace-mode.md)
-## [Importing Tables](importing-tables.md)
+# Tutorials and walkthroughs
+## @new-as-model
+## @new-pbi-model
+## @workspace-mode
+## @importing-tables
+## @creating-macros
 
 # Other resources
 ## [All downloads](downloads.md)
 ## [Standard License Terms](te3-eula.md)
 ## [Third Party Notices](third-party-notices.md)
 ## [Privacy Policy](privacy-policy.md)
+## @roadmap

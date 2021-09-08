@@ -1,3 +1,9 @@
+---
+uid: security-privacy
+title: Tabular Editor 3 Security and Privacy
+author: Daniel Otykier
+updated: 2021-06-15
+---
 # Tabular Editor 3 Security and Privacy
 
 This document describes the security and privacy considerations of Tabular Editor 3 and its use. In the following, the phrase "Tabular Editor" can mean both the commercial tool Tabular Editor 3, as well as the open-source tool Tabular Editor 2.X. Whenever something considers only one of the tools, we will use their explicit names "Tabular Editor 3" or "Tabular Editor 2.X".

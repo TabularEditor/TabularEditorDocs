@@ -1,6 +1,8 @@
 ---
+uid: editions
 title: Importing Tables
-author: Daniel Otykier
+author: Søren Toft Joensen
+updated: 2021-07-10
 ---
 # Tabular Editor 3 Editions
 

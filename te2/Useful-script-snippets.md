@@ -1,3 +1,8 @@
+---
+uid: useful-script-snippets
+title: C# Scripts
+author: Daniel Otykier
+---
 # Useful Script Snippets
 
 Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](/Advanced-Scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](/Custom-Actions), so that you can easily reuse them from the context menu.'

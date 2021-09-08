@@ -29,7 +29,11 @@
             "route": "/projects/te3/en/latest/getting-started.html",
             "redirect": "/te3/getting-started.html",
             "statusCode": 301
+        },
+        {
+            "route": "/Custom-Actions.html",
+            "redirect": "/te3/creating-macros.html",
+            "statusCode": 301
         }
-
     ]
 }

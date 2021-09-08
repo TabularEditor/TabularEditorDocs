@@ -1,3 +1,9 @@
+---
+uid: third-party-notices
+title: Third Party Notices
+author: Daniel Otykier
+updated: 2021-06-01
+---
 # Third Party Notices
 
 **Third Party Notices for Tabular Editor 3**

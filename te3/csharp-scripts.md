@@ -1,16 +1,30 @@
-# Advanced Scripting
+---
+uid: csharp-scripts
+title: C# Scripts
+author: Daniel Otykier
+updated: 2021-09-08
+applies_to:
+  editions:
+    - edition: Desktop
+    - edition: Business
+    - edition: Enterprise
+---
+# C# Scripts
 
-This is an introduction to the Advanced Scripting capabilities of Tabular Editor. Information in this document is subject to change. Also, make sure to check out the article on [Useful script snippets](/Useful-script-snippets), for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor.
+This is an introduction to the C# Scripting capabilities of Tabular Editor 3. Information in this document is subject to change. Also, make sure to check out the article on @useful-script-snippets, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor.
 
-## What is Advanced Scripting?
+## Why C# scripting?
 The goal of the UI of Tabular Editor is to make it easy to perform most tasks commonly needed when building Tabular Models. For example, changing the Display Folder of multiple measures at once is just a matter of selecting the objects in the explorer tree and then dragging and dropping them around. The right-click context menu of the explorer tree provides a convenient way to perform many of these tasks, such as adding/removing objects from perspectives, renaming multiple objects, etc.
 
-There may be many other common workflow tasks, which are not as easily performed through the UI however. For this reason, Tabular Editor introduces Advanced Scripting, which lets advanced users write a script using C# syntax, to more directly manipulate the objects in the loaded Tabular Model.
+There may be many other common workflow tasks, which are not as easily performed through the UI however. For this reason, Tabular Editor offers C# scripting, which lets advanced users write a script using C# syntax, to more directly manipulate the objects in the loaded Tabular Model.
+
+> [!NOTE]
+> The C# script editor in Tabular Editor 3 does not yet have IntelliSense(TM)-like capabilities enabled. This feature will be available in a later release. View @roadmap for more information.
 
 ## Objects
 The scripting API provides access to two top-level objects, `Model` and `Selected`. The former contains methods and properties that allow you to manipulate all objects in the Tabular Model, whereas the latter exposes only objects that are currently selected in the explorer tree.
 
-The `Model` object is a wrapper of the [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) class, exposing a subset of it‚Äôs properties, with some additional methods and properties for easier operations on translations, perspectives and object collections. The same applies to any descendant objects, such as Table, Measure, Column, etc. which all have corresponding wrapper objects. Please see ***Appendix A*** for a complete listing of objects, properties and methods in the Tabular Editor wrapper library.
+The `Model` object is a wrapper of the [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) class, exposing a subset of itís properties, with some additional methods and properties for easier operations on translations, perspectives and object collections. The same applies to any descendant objects, such as Table, Measure, Column, etc. which all have corresponding wrapper objects. Please see ***Appendix A*** for a complete listing of objects, properties and methods in the Tabular Editor wrapper library.
 
 The main advantage of working through this wrapper is, that all changes will be undoable from the Tabular Editor UI. Simply press CTRL+Z after executing a script, and you will see that all changes made by the script are immediately undone. Furthermore, the wrapper provides convenient methods that turn many common tasks into simple one-liners. We will provide some examples below. It is assumed that the reader is already somewhat familiar with C# and LINQ, as these aspects of Tabular Editors scripting capabilities will not be covered here. Users unfamiliar with C# and LINQ should still be able to follow the examples given below.
 
@@ -23,7 +37,7 @@ Say you want to change the Format String of your [Sales Amount] measure in the '
 Model.Tables["FactInternetSales"].Measures["Sales Amount"]
 ```
 
-Adding an extra dot (.) after the right-most bracket, should make the autocomplete menu pop up, showing you which properties and methods exist on this particular measure. Simply choose ‚ÄúFormatString‚Äù in the menu, or write the first few letters and hit Tab. Then, enter an equal sign followed by ‚Äú0.0%‚Äù. Let us also change the Display Folder of this measure. Your final code should look like this:
+Adding an extra dot (.) after the right-most bracket, should make the autocomplete menu pop up, showing you which properties and methods exist on this particular measure. Simply choose ìFormatStringî in the menu, or write the first few letters and hit Tab. Then, enter an equal sign followed by ì0.0%î. Let us also change the Display Folder of this measure. Your final code should look like this:
 
 ```csharp
 Model.Tables["FactInternetSales"].Measures["Sales Amount"].FormatString = "0.0%";
@@ -32,7 +46,7 @@ Model.Tables["FactInternetSales"].Measures["Sales Amount"].DisplayFolder = "New 
 
 **Note:** Remember to put the semicolon (;) at the end of each line. This is a requirement of C#. If you forget it, you will get a syntax error message when trying to execute the script.
 
-Hit F5 or the ‚ÄùPlay‚Äù button above the script editor to execute the script. Immediately, you should see the measure moving around in the explorer tree, reflecting the changed Display Folder. If you examine the measure in the Property Grid, you should also see that the Format String property has changed accordingly.
+Hit F5 or the îPlayî button above the script editor to execute the script. Immediately, you should see the measure moving around in the explorer tree, reflecting the changed Display Folder. If you examine the measure in the Property Grid, you should also see that the Format String property has changed accordingly.
 
 ### Working with multiple objects at once
 Many objects in the object model, are actually collections of multiple objects. For example, each Table object has a Measures collection. The wrapper exposes a series of convenient properties and methods on these collections, to make it easy to set the same property on multiple objects at once. This is described in detail below. Additionally, you may use all the standard LINQ extension methods to filter and browse the objects of a collection.
@@ -62,12 +76,10 @@ This predicate would return true only if the Name of the measure contains the ch
 
 Going back to the examples above, `map` is a lambda expression that takes a single object as input, and returns any single object as output. `action` is a lambda expression that takes a single object as input, but does not return any value.
 
-Use the IntelliSense functionality of the Advanced Script editor to see what other LINQ methods exist, or refer to the [LINQ-to-Objects documentation](https://msdn.microsoft.com/en-us/library/9eekhta0.aspx).
-
 ## Working with the **Model** object
-To quickly reference any object in the currently loaded Tabular Model, you can drag and drop the object from the explorer tree and into the Advanced Scripting editor:
+To quickly reference any object in the currently loaded Tabular Model, you can drag and drop the object from the explorer tree and into the C# script editor:
 
-![Dragging and dropping an object into the Advanced Scripting editor](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/DragDropTOM.gif)
+![Dragging and dropping an object into the C# script editor](~/images/drag-object-to-script.gif)
 
 Please refer to the [TOM documentation](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) for an overview of which properties exist on the Model and its descendant objects. Additionally, refer to ***Appendix A*** for a complete listing of the properties and methods exposed by the wrapper object.
 
@@ -83,20 +95,20 @@ refers to the currently selected hierarchy in the tree, provided that one and on
 
 `Selected.Hierarchies`
 
-All properties that exist on the singular object, also exist on its plural form, with a few exceptions. This means that you can set the value of these properties for multiple objects at once, with just one line of code and without using the LINQ extension methods mentioned above. For example, say you wanted to move all currently selected measures into a new Display Folder called ‚ÄúTest‚Äù:
+All properties that exist on the singular object, also exist on its plural form, with a few exceptions. This means that you can set the value of these properties for multiple objects at once, with just one line of code and without using the LINQ extension methods mentioned above. For example, say you wanted to move all currently selected measures into a new Display Folder called ìTestî:
 
 `Selected.Measures.DisplayFolder = "Test";`
 
 If no measures are currently selected in the tree, the above code does nothing, and no error is raised. Otherwise, the DisplayFolder property will be set to "Test" on all selected measures (even measures residing within folders, as the `Selected` object also includes objects in selected folders). If you use the singular form `Measure` instead of `Measures`, you will get an error unless the current selection contains exactly one measure.
 
-Although we cannot set the Name property of multiple objects at once, we still have some options available. If we just want to replace all occurrences of some character string with another, we can use the provided ‚ÄúRename‚Äù method, like so:
+Although we cannot set the Name property of multiple objects at once, we still have some options available. If we just want to replace all occurrences of some character string with another, we can use the provided ìRenameî method, like so:
 
 ```csharp
 Selected.Measures
         .Rename("Amount", "Value");
 ```
 
-This would replace any occurence of the word ‚ÄùAmount‚Äù with the word ‚ÄùValue‚Äù in the names of all currently selected measures.
+This would replace any occurence of the word îAmountî with the word îValueî in the names of all currently selected measures.
 Alternatively, we may use the LINQ ForEach()-method, as described above, to include more advanced logic:
 
 ```csharp
@@ -113,25 +125,27 @@ Selected.Measures
 ```
 
 ## Helper methods
-To make debugging scripts easier, Tabular Editor provides a set of special helper methods. Internally, these are static methods decorated with the `[ScriptMethod]`-attribute. This attribute allows scripts to call the methods directly, without the need to specify a namespace or class name. Plugins may also use the `[ScriptMethod]` attribute to expose public static methods for scripting in a similar way.
+Tabular Editor provides a set of special helper methods to make certain script tasks easier to achieve. Note that some of these may be invoked as extension methods. For example, `object.Output();` and `Output(object);` are equivalent.
 
-As of 2.7.4, Tabular Editor provides the following script methods. Note that some of these may be invoked as extension methods. For example, `object.Output();` and `Output(object);` are equivalent.
+* `void Output(object value)` - halts script execution and displays information about the provided object. When the script is running as part of a command line execution, this will write a string representation of the object to the console.
+* `void SaveFile(string filePath, string content)` - convenient way to save text data to a file.
+* `string ReadFile(string filePath)` - convenient way to load text data from a file.
+* `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties)` - convenient way to export a set of properties from multiple objects as a TSV string.
+* `void ImportProperties(string tsvData)` - convenient way to load properties into multiple objects from a TSV string.
+* `void CustomAction(string name)` - invoke a macro by name.
+* `void CustomAction(this IEnumerable<ITabularNamedObject> objects, string name)` - invoke a macro on the specified objects.
+* `string ConvertDax(string dax, bool useSemicolons)` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
+* `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
+* `void FormatDax(this IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
+* `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
+* `void Info(string)` - Writes an informational message to the console (only when the script is executed as part of a command line execution).
+* `void Warning(string)` - Writes a warning message to the console (only when the script is executed as part of a command line execution).
+* `void Error(string)` - Writes an error message to the console (only when the script is executed as part of a command line execution).
+* `T SelectObject(this IEnumerable<T> objects, T preselect = null, string label = "Select object") where T: TabularNamedObject` - Displays a dialog to the user prompting to select one of the objects specified. If the user cancels the dialog, this method returns null.
+* `void CollectVertiPaqAnalyzerStats()` - If Tabular Editor is connected to an instance of Analysis Services, this runs the VertiPaq Analyzer statistics collector.
+* `long GetCardinality(this Column column)` - If VertiPaq Analyzer statistics are available for the current model, this method returns the cardinality of the specified column.
 
-* `Output(object);` - halts script execution and displays information about the provided object. When the script is running as part of a command line execution, this will write a string representation of the object to the console.
-* `SaveFile(filePath, content);` - convenient way to save text data to a file.
-* `ReadFile(filePath);` - convenient way to load text data from a file.
-* `ExportProperties(objects, properties);` - convenient way to export a set of properties from multiple objects as a TSV string.
-* `ImportProperties(tsvData);` - convenient way to load properties into multiple objects from a TSV string.
-* `CustomAction(name);` - invoke a Custom Action by name.
-* `CustomAction(objects, name);` - invoke a Custom Action on the specified objects.
-* `ConvertDax(dax, useSemicolons);` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
-* ~~`FormatDax(string dax);`~~ - formats a DAX expression using www.daxformatter.com (Deprecated, please don't use!)
-* `FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
-* `FormatDax(IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
-* `CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
-* `Info(string);` - Writes an informational message to the console (only when the script is executed as part of a command line execution).
-* `Warning(string);` - Writes a warning message to the console (only when the script is executed as part of a command line execution).
-* `Error(string);` - Writes an error message to the console (only when the script is executed as part of a command line execution).
+For a full list of available helper methods and their syntax, view @script-helper-methods.
 
 ### Debugging scripts
 As mentioned above, you can use the `Output(object);` method to pause script execution, and open a dialog box with information about the passed object. You can also use this method as an extension method, invoking it as `object.Output();`. The script is resumed when the dialog is closed.
@@ -158,7 +172,7 @@ You can tick the "Don't show more outputs" checkbox at the lower left-hand corne
 
 ## .NET references
 
-[Tabular Editor version 2.8.6](https://github.com/otykier/TabularEditor/tree/2.8.6) makes it a lot easier to write complex scripts. Thanks to the new pre-processor, you can now use the `using` keyword to shorten class names, etc. just like in regular C# source code. In addition, you can include external assemblies by using the syntax `#r "<assembly name or DLL path>"` similar to .csx scripts used in Azure Functions.
+You can use the `using` keyword to shorten class names, etc. just like in regular C# source code. In addition, you can include external assemblies by using the syntax `#r "<assembly name or DLL path>"` similar to .csx scripts used in Azure Functions.
 
 For example, the following script will now work as expected:
 
@@ -206,9 +220,9 @@ In addition, the following .NET Framework assemblies are loaded by default:
 
 ## Compiling with Roslyn
 
-If you prefer to compile your scripts using the new Roslyn compiler introduced with Visual Studio 2017, you can set this up under File > Preferences > General, starting with Tabular Editor version 2.12.2. This allows you to use newer C# language features such as string interpolation. Simply specify the path to the directory that holds the compiler executable (`csc.exe`) and specify the language version as an option for the compiler:
+If you prefer to compile your scripts using the new Roslyn compiler introduced with Visual Studio 2017, you can set this up under **Tools > Preferences > Tabular Editor > C# SCripts and Maros**. This allows you to use newer C# language features such as string interpolation. Simply specify the path to the directory that holds the compiler executable (`csc.exe`) and specify the language version as an option for the compiler:
 
-![image](https://user-images.githubusercontent.com/8976200/92464140-0902f580-f1cd-11ea-998a-b6ecce57b399.png)
+![Custom Compiler Te3](../images/custom-compiler-te3.png)
 
 ### Visual Studio 2017
 
