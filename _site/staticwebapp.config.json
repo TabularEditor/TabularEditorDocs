@@ -26,6 +26,11 @@
             "statusCode": 301
         },
         {
+            "route": "/projects/te3",
+            "redirect": "/te3",
+            "statusCode": 301
+        },
+        {
             "route": "/projects/te3/en/latest/getting-started.html",
             "redirect": "/te3/getting-started.html",
             "statusCode": 301
