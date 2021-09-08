@@ -1,6 +1,6 @@
 ﻿---
 uid: editions
-title: Importing Tables
+title: Compare editions
 author: Søren Toft Joensen
 updated: 2021-07-10
 ---
