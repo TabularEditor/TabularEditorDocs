@@ -1,12 +1,12 @@
 ﻿---
 uid: dax-editor
-title: Getting Started
+title: DAX Editor
 author: Daniel Otykier
 updated: 2021-09-08
 ---
 # DAX Editor
 
-(WIP)
+
 
 ## Code assist features
 

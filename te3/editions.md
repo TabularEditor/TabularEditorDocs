@@ -6,6 +6,8 @@ updated: 2021-07-10
 ---
 # Tabular Editor 3 Editions
 
+This document provides an overview and comparison of the different editions of Tabular Editor 3.
+
 ## Supported Data Modelling Scenarios
 
 The main difference between the various editions of Tabular Editor 3, is which types of tabular data modelling scenarios they support. To understand this difference, consider that Analysis Services (Tabular) exists in a number of different "flavors":

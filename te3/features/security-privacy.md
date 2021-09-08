@@ -1,6 +1,6 @@
 ﻿---
 uid: security-privacy
-title: Tabular Editor 3 Security and Privacy
+title: Security overview
 author: Daniel Otykier
 updated: 2021-06-15
 ---

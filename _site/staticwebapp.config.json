@@ -7,12 +7,12 @@
         },
         {
             "route": "/projects/te3/en/latest/security-privacy.html",
-            "redirect": "/te3/security-privacy.html",
+            "redirect": "/te3/features/security-privacy.html",
             "statusCode": 301
         },
         {
             "route": "/projects/te3/en/latest/downloads.html",
-            "redirect": "/te3/downloads.html",
+            "redirect": "/te3/other/downloads.html",
             "statusCode": 301
         },
         {
@@ -32,7 +32,7 @@
         },
         {
             "route": "/Custom-Actions.html",
-            "redirect": "/te3/creating-macros.html",
+            "redirect": "/te3/tutorials/creating-macros.html",
             "statusCode": 301
         }
     ]

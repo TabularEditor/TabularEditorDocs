@@ -67,7 +67,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
   ![File Menu New](~/images/file-menu-new.png)
 
 > [!IMPORTANT]
-> The **New > Model...** option is not available in Tabular Editor 3 Desktop Edition, as this edition may only be used as an External Tool for Poewr BI Desktop. [More information](editions.md).
+> The **New > Model...** option is not available in Tabular Editor 3 Desktop Edition, as this edition may only be used as an External Tool for Poewr BI Desktop. [More information](xref:editions).
 
 - **Open**: Opens a submenu with options for loading a data model from various sources, as well as on option for loading any other type of file. The submenu options are:
 
@@ -76,7 +76,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
   - **Model from file...** Open model metadata from a file such as a .bim or .pbit file.
   - **Model from DB...** Specify Analysis Services or Power BI XMLA connection details, or connect to a local instance of Analysis Services (such as Visual Studio's Integrated Workspace server or Power BI Desktop), in order to load model metadata from a tabular model that has already been deployed.
   - **Model from folder...** Open model metadata from a folder structure which was previously saved using any version of Tabular Editor.
-  - **File...** displays a dialog that lets you open any type of file supported by Tabular Editor 3, based on the file name extension. See [Supported file types](supported-files.md) for more information.
+  - **File...** displays a dialog that lets you open any type of file supported by Tabular Editor 3, based on the file name extension. See [Supported file types](xref:supported-files) for more information.
 
     ![Supported File Types](~/images/supported-file-types.png)
 
@@ -88,7 +88,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
 - **Close model**: This unloads the currently loaded model metadata from Tabular Editor. If you made changes to the metadata, Tabular Editor will prompt you to save the changes before closing.
 - **Save**: This saves the active document back to the source file. If no document is active, this saves the model metadata back to the source, which could be a Model.bim file, a Database.json (folder structure) or a connected instance of Analysis Services (including Power BI Desktop) or the Power BI XMLA endpoint.
 - **Save as...** This allows you to save the active document as a new file. If no document is active, this allows you to save the model metadata as a new file, using the .bim (JSON-based) file.
-- **Save to folder...** This allows you to save the model metadata as a [folder structure](../common/save-to-folder.md).
+- **Save to folder...** This allows you to save the model metadata as a [folder structure](xref:save-to-folder).
 - **Save all**: Saves all unsaved documents and model metadata at once.
 - **Recent files**: Displays a list of recently used supporting files allowing you to quickly reopen them.
 - **Recent tabular models**: Displays a list of recently used model metadata files or folders, allowing you to quickly reload model metadata from one of these.
@@ -123,7 +123,7 @@ The **Edit** menu contains standard Windows application menu options for editing
 
 The **View** menu lets you navigate between the different views of the Tabular Editor 3 UI. If a view has been hidden, click on the view title in this menu will unhide the view and bring it into focus. Note that documents are not shown in the View menu. To navigate between documents, use the [Window menu](#window).
 
-![View Menu](../images/view-menu.png)
+![View Menu](~/images/view-menu.png)
 
 - **TOM Explorer**: The TOM Explorer presents a hierarchichal view of the entire [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) of the currently loaded model metadata. See @tom-explorer-view for more information.
 - **Best Practice Analyzer**: The Best Practice Analyzer helps improve the quality of your model by letting you specify rules for best practice validation. See @bpa-view for more information.

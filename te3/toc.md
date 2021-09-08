@@ -1,21 +1,21 @@
 ﻿# Introduction
-## [Getting started](getting-started.md)
-## [What's new in Tabular Editor 3](whats-new.md)
-## [Compare editions](editions.md)
+## @getting-started
+## @whats-new
+## @editions
 
 # Documentation
-## [User Interface](basic-interface.md)
+## @basic-interface
 ### @tom-explorer-view
 ### @bpa-view
 ### @messages-view
 ### @data-refresh-view
 ### @macros-view
 ### @find-replace
-## [Supported file types](supported-files.md)
 ## Features
 ### @dax-editor
 ### @csharp-scripts
-## [Security overview](security-privacy.md)
+## @supported-files
+## @security-privacy
 
 # Tutorials and walkthroughs
 ## @new-as-model
@@ -25,8 +25,8 @@
 ## @creating-macros
 
 # Other resources
-## [All downloads](downloads.md)
-## [Standard License Terms](te3-eula.md)
-## [Third Party Notices](third-party-notices.md)
-## [Privacy Policy](privacy-policy.md)
+## @downloads
+## @te3-eula
+## @third-party-notices
+## @privacy-policy
 ## @roadmap

@@ -1,6 +1,8 @@
 ﻿---
+uid: whats-new
 title: What's new in Tabular Editor 3
 author: Daniel Otykier
+updated: 2021-06-01
 ---
 # What's new in Tabular Editor 3?
 

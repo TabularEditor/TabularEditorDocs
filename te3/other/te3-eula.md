@@ -1,5 +1,5 @@
 ﻿---
-uid: eula
+uid: te3-eula
 title: Tabular Editor 3 Standard License Terms
 author: Søren Toft Joensen
 updated: 2021-07-10

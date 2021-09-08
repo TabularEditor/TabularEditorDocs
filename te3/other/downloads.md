@@ -1,8 +1,10 @@
 ﻿---
-title: Importing Tables
+uid: downloads
+title: All downloads
 author: Daniel Otykier
+updated: 2021-09-06
 ---
-# Tabular Editor 3 Downloads
+# All downloads
 
 This page provides download and installation instructions for Tabular Editor 3.
 
