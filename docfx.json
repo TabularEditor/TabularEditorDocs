@@ -9,7 +9,8 @@
         ],
         "template": [
             "default",
-            "templates/default"
+            "templates/default",
+            "templates/lightbox-featherlight"
         ],
         "resource": [
             {
