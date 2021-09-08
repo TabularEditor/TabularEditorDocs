@@ -16,8 +16,8 @@ applies_to:
 The macros view displays a list of all macros currently saved in your `%localappdata%\TabularEditor3\MacroActions.json` file.
 
 - You can delete a macro by clicking on the "X" button at the top left corner of the view.
-- You can edit a macro by double-clicking on the list item. This will bring up a [C# script document](xref:csharp-scripts) containing the code that will be executed when the macro is invoked. To save your changes to the macro, click the "Edit Macro..." toolbar button (see screenshot below) or use the **C# Script > Edit Macro...** menu option.
-- To create a new macro, start by creating a new [C# script](xref:csharp-scripts), then save it as a macro using the **C# Script > Save as Macro...** menu option.
+- You can edit a macro by double-clicking on the list item. This will bring up a [C# script document](xref:csharp-scripts) containing the code that will be executed when the macro is invoked. To save your changes to the macro, click the "Edit Macro..." toolbar button (see screenshot below) or use the **C# Script > Edit Macro...** menu item.
+- To create a new macro, start by creating a new [C# script](xref:csharp-scripts), then save it as a macro using the **C# Script > Save as Macro...** menu item.
 
 ![Edit Macro](~/images/edit-macro.png)
 

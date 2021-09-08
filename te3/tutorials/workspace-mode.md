@@ -38,7 +38,7 @@ After entering the Analysis Services server details and (optional) credentials, 
 
 Tabular Editor suggests a new unique name for your workspace database, based on your Windows user name and the current date and time, but you are free to change this to a more meaningful name.
 
-After hitting OK, your new model is created and the workspace database is deployed and connected. At this point, hit save (Ctrl+S) to save your model as a Model.bim file. You may also choose the File > Save to Folder... menu option if you intend to store the model metadata in a version control system such as Git.
+After hitting OK, your new model is created and the workspace database is deployed and connected. At this point, hit save (Ctrl+S) to save your model as a Model.bim file. You may also choose the File > Save to Folder... menu item if you intend to store the model metadata in a version control system such as Git.
 
 ![Save New To Folder](~/images/save-new-to-folder.png)
 

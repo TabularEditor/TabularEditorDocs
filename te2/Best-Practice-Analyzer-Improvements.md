@@ -24,7 +24,7 @@ The Best Practice Analyzer window continuously lists all the **effective rules**
 * **Apply fix**: This option is also available for rules than have an easy fix, as mentioned above. Instead of copying the script to the clipboard, it will be executed immediately.
 
 ## Managing Best Practice Rules
-If you need to add, remove or modify the rules applying to your model, there's a brand new UI for that as well. You can bring it up by clicking the top-left button on the Best Practice Analyzer window, or by using the "Tools > Manage BPA Rules..." menu option in the main window.
+If you need to add, remove or modify the rules applying to your model, there's a brand new UI for that as well. You can bring it up by clicking the top-left button on the Best Practice Analyzer window, or by using the "Tools > Manage BPA Rules..." menu item in the main window.
 
 ![image](https://user-images.githubusercontent.com/8976200/53632990-2f29fb80-3c0e-11e9-82fe-ee9c921662c7.png)
 

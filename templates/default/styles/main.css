@@ -29,3 +29,7 @@
     margin-right: auto;
     display: block;
 }
+.toc .nav .level3 li {
+    margin-top: 3px;
+    margin-left: 5px;
+}

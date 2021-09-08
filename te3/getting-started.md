@@ -61,5 +61,5 @@ A system administrator may assign Tabular Editor 3 licenses by specifying the Li
 
 ## Next steps
 
-- [Overview of Tabular Editor 3's user interface](xref:basic-interface)
+- [Overview of Tabular Editor 3's user interface](xref:user-interface)
 - [What's new in Tabular Editor 3](whats-new.md)

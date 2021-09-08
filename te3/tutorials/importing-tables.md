@@ -83,7 +83,7 @@ If columns are added/changed in the source, you can use Tabular Editor's **Updat
 
 ![Update Table Schema](~/images/update-table-schema.png)
 
-This menu option can be invoked at the model level, as well as on a collection of tables or even individual table partitions.
+This menu item can be invoked at the model level, as well as on a collection of tables or even individual table partitions.
 
 When using this option, Tabular Editor will connect to all the relevant data sources (prompting for credentials as needed), in order to determine if new columns need to be added or existing column modified or removed.
 

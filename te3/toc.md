@@ -4,7 +4,7 @@
 ## @editions
 
 # Documentation
-## @basic-interface
+## @user-interface
 ### @tom-explorer-view
 ### @bpa-view
 ### @messages-view
@@ -13,8 +13,10 @@
 ### @find-replace
 ## Features
 ### @dax-editor
+### @dax-scripts
 ### @csharp-scripts
 ## @supported-files
+## @preferences
 ## @security-privacy
 
 # Tutorials and walkthroughs
