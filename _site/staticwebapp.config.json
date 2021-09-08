@@ -16,7 +16,7 @@
             "statusCode": 301
         },
         {
-            "route": "/projects/te3/downloads.html",
+            "route": "/te3/downloads.html",
             "redirect": "/te3/other/downloads.html",
             "statusCode": 301
         },
