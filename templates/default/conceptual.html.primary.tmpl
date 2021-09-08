@@ -13,6 +13,20 @@
   {{/editions}}
 </ul></div>
 {{/applies_to}}
-<div class="conceptual-content">
+<div id="conceptual-content" class="conceptual-content">
 {{{conceptual}}}
 </div>
+<script type="text/javascript">
+function scaleImages() {
+    var content = document.getElementById("conceptual-content");
+    var myImgs = content.getElementsByTagName('img');
+    for (var i = 0; i < myImgs.length; i++) {
+      var width = myImgs[i].naturalWidth,
+          height = myImgs[i].naturalHeight;
+
+      myImgs[i].width = width / 2;
+      myImgs[i].height = height / 2;
+    }
+}
+window.onload = scaleImages;
+</script>

@@ -16,6 +16,11 @@
             "statusCode": 301
         },
         {
+            "route": "/projects/te3/downloads.html",
+            "redirect": "/te3/other/downloads.html",
+            "statusCode": 301
+        },
+        {
             "route": "/Useful-script-snippets.html",
             "redirect": "/te2/Useful-script-snippets.html",
             "statusCode": 301
