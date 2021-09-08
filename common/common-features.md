@@ -1,4 +1,4 @@
-# Common features
+﻿# Common features
 
 A lot of Tabular Editor functionality is shared between both Tabular Editor 2.x and Tabular Editor 3.x. This section holds articles that are related to such shared functionality.
 

@@ -1,4 +1,4 @@
-# Getting Started
+﻿# Getting Started
 
 ## Installation
 Simply download the .msi file from the [Release page](https://github.com/otykier/TabularEditor/releases/latest) and run the .msi installation.

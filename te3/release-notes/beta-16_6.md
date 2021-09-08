@@ -1,4 +1,4 @@
-# Tabular Editor 3 BETA-16.6 Release Notes
+﻿# Tabular Editor 3 BETA-16.6 Release Notes
 
 - Download [Tabular Editor 3 BETA-16.6](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-16.6.x86.msi)
 - Download [Tabular Editor 3 BETA-16.6 (64 bit)](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-16.6.x64.msi)

@@ -1,4 +1,4 @@
-# Master Model Pattern
+﻿# Master Model Pattern
 
 It is not uncommon to have several Tabular models in an organisation, with a substantial amount of functional overlap. For the development team, keeping these models up to date with shared features can be a pain point. In this article, we'll see an alternate approach that may be suitable in situations where it makes sense to combine all these models into a single "Master" model, that is then deployed partially into several different subset models. Tabular Editor enables this approach by utilising perspectives in a special way (while still allowing perspectives to work the usual way).
 
@@ -141,7 +141,7 @@ When adding new *user* perspectives to the model, remember to add the same annot
 ### Controlling object metadata
 There may also be situations where the same measure should have slightly different expressions or format strings across the different model versions. Again, we can use annotation to provide the metadata per developer perspective, and then apply the metadata when we script out the final model.
 
-The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](/Useful-script-snippets#export-object-properties-to-a-file) script function. However, that’s a little overkill for our use case, so let’s just specify directly which properties we want to store as annotations. Create the following script:
+The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](/Useful-script-snippets#export-object-properties-to-a-file) script function. However, thatâ€™s a little overkill for our use case, so letâ€™s just specify directly which properties we want to store as annotations. Create the following script:
 ```csharp
 foreach(var m in Selected.Measures) { 
     m.SetAnnotation(Selected.Perspective.Name + "_Expression", m.Expression);

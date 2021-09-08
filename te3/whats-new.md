@@ -1,4 +1,4 @@
----
+﻿---
 title: What's new in Tabular Editor 3
 author: Daniel Otykier
 ---

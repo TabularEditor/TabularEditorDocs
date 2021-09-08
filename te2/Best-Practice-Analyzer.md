@@ -1,4 +1,4 @@
-# Best Practice Analyzer
+﻿# Best Practice Analyzer
 
 > [!NOTE]
 > Some of the information and screenshots in this article is outdated, as the Best Practice Analyzer has received a [complete overhaul in Tabular Editor v. 2.8.1](Best-Practice-Analyzer-Improvements.md). Information on Dynamic LINQ (rule expressions) is still up-to-date.
@@ -101,7 +101,7 @@ and (not UsedInSortBy.Any())
 and (not UsedInHierarchies.Any())
 ``` 
 
-The same technique can be used to find unused measures. It's a little simpler, since measures can't participate in relationships, etc. So instead, let's spice things up a bit, by also considering whether any downstream objects that reference a given measure, are visible or not. That is, if measure [A] is referenced by measure [B], and both measure [A] and [B] are hidden, and no other DAX expressions refer to these two measures, we should let the developer know that it is safe to remove both of them:
+The same technique can be used to find unused measures. It's a little simpler, since measures can't participate in relationships, etc. So instead, let's spice things up a bit, by also considering whether any downstream objects that reference a given measure, are visible or not. That is, if measure [A] is referenced by measure [B], and both measure [A]Â and [B] are hidden, and no other DAX expressions refer to these two measures, we should let the developer know that it is safe to remove both of them:
 
 ```
 (IsHidden or Table.IsHidden)

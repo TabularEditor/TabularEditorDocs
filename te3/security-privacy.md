@@ -1,4 +1,4 @@
----
+﻿---
 uid: security-privacy
 title: Tabular Editor 3 Security and Privacy
 author: Daniel Otykier

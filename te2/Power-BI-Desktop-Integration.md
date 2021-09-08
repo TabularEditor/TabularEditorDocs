@@ -1,4 +1,4 @@
-# Power BI Desktop Integration
+﻿# Power BI Desktop Integration
 
 As of July 2020, [Power BI Desktop adds support for External Tools](https://docs.microsoft.com/da-dk/power-bi/create-reports/desktop-external-tools). This allows Tabular Editor to perform certain modelling operations when working with Imported or DirectQuery data in Desktop.
 

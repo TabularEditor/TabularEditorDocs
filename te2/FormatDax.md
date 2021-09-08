@@ -1,4 +1,4 @@
-# FormatDax deprecation
+﻿# FormatDax deprecation
 
 The `FormatDax` method (which is one of the available [helper methods](/Advanced-Scripting.md#helper-methods) in Tabular Editor) has been deprecated with the release of Tabular Editor 2.13.0.
 

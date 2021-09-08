@@ -1,4 +1,4 @@
-# Incremental Refresh
+﻿# Incremental Refresh
 
 Datasets hosted in the Power BI service can have [Incremental Refresh](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) set up on one or more tables. To configure or modify Incremental Refresh on a Power BI dataset, you can either use the [XMLA endpoint of the Power BI service directly](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla), or you can use Tabular Editor connected to the XMLA endpoint, as described below:
 

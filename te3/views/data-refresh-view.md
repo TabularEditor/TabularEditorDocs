@@ -1,4 +1,4 @@
----
+﻿---
 uid: data-refresh-view
 title: Data Refresh view
 author: Daniel Otykier

@@ -1,4 +1,4 @@
-# Video Tutorials
+﻿# Video Tutorials
 
 In collaboration with [PowerBI.Tips](https://powerbi.tips/about/) Daniel Otykier conducts 4 hours of training related to the Tabular Editor Program. Watch the following videos below to learn more about this tool and see how to use it in your everyday job.
 

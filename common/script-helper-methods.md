@@ -1,4 +1,4 @@
----
+﻿---
 uid: script-helper-methods
 title: C# Script Helper Methods
 author: Daniel Otykier

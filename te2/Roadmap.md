@@ -1,4 +1,4 @@
-# Roadmap
+﻿# Roadmap
 
 * Scripting objects into TMSL or DAX (compatible with DAX Editor)
 * IntelliSense in DAX expression editor

@@ -1,4 +1,4 @@
-# Supported file types
+﻿# Supported file types
 
 Tabular Editor 3 uses a number of different file formats and document types, some of which are not used by Analysis Services or Power BI. This article provides an overview and a description of each of these file types.
 

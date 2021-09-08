@@ -1,7 +1,7 @@
----
+﻿---
 uid: eula
 title: Tabular Editor 3 Standard License Terms
-author: S�ren Toft Joensen
+author: Søren Toft Joensen
 updated: 2021-07-10
 ---
 # Tabular Editor 3 Standard License Terms 

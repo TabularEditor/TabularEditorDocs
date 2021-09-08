@@ -1,4 +1,4 @@
----
+﻿---
 uid: third-party-notices
 title: Third Party Notices
 author: Daniel Otykier
@@ -452,14 +452,14 @@ MICROSOFT SOFTWARE LICENSE TERMS
 MICROSOFT ANALYSIS MANAGEMENT OBJECTS (AMO)
 
 IF YOU LIVE IN (OR ARE A BUSINESS WITH A PRINCIPAL PLACE OF BUSINESS IN)
-THE UNITED STATES, PLEASE READ THE “BINDING ARBITRATION AND CLASS ACTION
-WAIVER” SECTION BELOW. IT AFFECTS HOW DISPUTES ARE RESOLVED.
+THE UNITED STATES, PLEASE READ THE â€œBINDING ARBITRATION AND CLASS ACTION
+WAIVERâ€ SECTION BELOW. IT AFFECTS HOW DISPUTES ARE RESOLVED.
 
 These license terms are an agreement between you and Microsoft Corporation
 (or one of its affiliates). They apply to the software named above and any
 Microsoft services or software updates (except to the extent such services
 or updates are accompanied by new or additional terms, in which case those
-different terms apply prospectively and do not alter your or Microsoft’s
+different terms apply prospectively and do not alter your or Microsoftâ€™s
 rights relating to pre-updated software or services). IF YOU COMPLY WITH
 THESE LICENSE TERMS, YOU HAVE THE RIGHTS BELOW. BY USING THE SOFTWARE, YOU
 ACCEPT THESE TERMS.
@@ -479,7 +479,7 @@ ACCEPT THESE TERMS.
 	  its subsidiaries, and its affiliated companies (including prospectively)
 	  any competitive use, access, and benchmarking test restrictions in the
 	  terms governing your software to the extent your terms of use are, or
-	  purport to be, more restrictive than Microsoft’s terms. If you do not
+	  purport to be, more restrictive than Microsoftâ€™s terms. If you do not
 	  waive any such purported restrictions in the terms governing your
 	  software, you are not allowed to access or use this software, and will
 	  not do so.
@@ -507,31 +507,31 @@ ACCEPT THESE TERMS.
       ii.  require distributors and external end users to agree to terms that
 	       protect it and Microsoft at least as much as this agreement; and
       iii. indemnify, defend, and hold harmless Microsoft from any claims,
-	       including attorneys’ fees, related to the distribution or use of
+	       including attorneysâ€™ fees, related to the distribution or use of
 		   your applications, except to the extent that any claim is based
 		   solely on the unmodified distributable code.
 		   
    c) Distribution Restrictions. You may not:
           
-      i.  use Microsoft’s trademarks or trade dress in your application in any
+      i.  use Microsoftâ€™s trademarks or trade dress in your application in any
 	      way that suggests your application comes from or is endorsed by Microsoft;
 		  or
       ii. modify or distribute the source code of any distributable code so that
 	      any part of it becomes subject to any license that requires that the
-		  distributable code, any other part of the software, or any of Microsoft’s
+		  distributable code, any other part of the software, or any of Microsoftâ€™s
 		  other intellectual property be disclosed or distributed in source code
 		  form, or that others have the right to modify it.
 		  
 3. DATA COLLECTION. The software may collect information about you and your use of
    the software and send that to Microsoft. Microsoft may use this information to
-   provide services and improve Microsoft’s products and services. Your opt-out
+   provide services and improve Microsoftâ€™s products and services. Your opt-out
    rights, if any, are described in the product documentation. Some features in the
    software may enable collection of data from users of your applications that access
    or use the software. If you use these features to enable data collection in your
    applications, you must comply with applicable law, including getting any required
    user consent, and maintain a prominent privacy policy that accurately informs
    users about how you use, collect, and share their data. You can learn more about
-   Microsoft’s data collection and use in the product documentation and the Microsoft
+   Microsoftâ€™s data collection and use in the product documentation and the Microsoft
    Privacy Statement at https://go.microsoft.com/fwlink/?LinkId=521839. You agree to
    comply with all applicable provisions of the Microsoft Privacy Statement.
    
@@ -557,7 +557,7 @@ ACCEPT THESE TERMS.
    visit http://aka.ms/exporting.
    
 6. SUPPORT SERVICES. Microsoft is not obligated under this agreement to provide any
-   support services for the software. Any support provided is “as is”, “with all faults”,
+   support services for the software. Any support provided is â€œas isâ€, â€œwith all faultsâ€,
    and without warranty of any kind.
    
 7. UPDATES. The software may periodically check for updates, and download and install
@@ -569,9 +569,9 @@ ACCEPT THESE TERMS.
 8. BINDING ARBITRATION AND CLASS ACTION WAIVER. This Section applies if you live in
    (or, if a business, your principal place of business is in) the United States. If
    you and Microsoft have a dispute, you and Microsoft agree to try for 60 days to
-   resolve it informally. If you and Microsoft can’t, you and Microsoft agree to binding
+   resolve it informally. If you and Microsoft canâ€™t, you and Microsoft agree to binding
    individual arbitration before the American Arbitration Association under the Federal
-   Arbitration Act (“FAA”), and not to sue in court in front of a judge or jury. Instead,
+   Arbitration Act (â€œFAAâ€), and not to sue in court in front of a judge or jury. Instead,
    a neutral arbitrator will decide. Class action lawsuits, class-wide arbitrations,
    private attorney- general actions, and any other proceeding where someone acts in a
    representative capacity are not allowed; nor is combining individual proceedings
@@ -631,7 +631,7 @@ ACCEPT THESE TERMS.
 		   In other cases of slight negligence, Microsoft will not be liable for slight
 		   negligence.
 		   
-12. DISCLAIMER OF WARRANTY. THE SOFTWARE IS LICENSED “AS IS.” YOU BEAR THE RISK OF USING
+12. DISCLAIMER OF WARRANTY. THE SOFTWARE IS LICENSED â€œAS IS.â€ YOU BEAR THE RISK OF USING
     IT. MICROSOFT GIVES NO EXPRESS WARRANTIES, GUARANTEES, OR CONDITIONS. TO THE EXTENT
 	PERMITTED UNDER APPLICABLE LAWS, MICROSOFT EXCLUDES ALL IMPLIED WARRANTIES, INCLUDING
 	MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
@@ -655,39 +655,39 @@ ACCEPT THESE TERMS.
 Please note: As this software is distributed in Canada, some of the clauses in this
 agreement are provided below in French.
 
-Remarque: Ce logiciel étant distribué au Canada, certaines des clauses dans ce contrat
-sont fournies ci-dessous en français.
+Remarque: Ce logiciel Ã©tant distribuÃ© au Canada, certaines des clauses dans ce contrat
+sont fournies ci-dessous en franÃ§ais.
 
-EXONÉRATION DE GARANTIE. Le logiciel visé par une licence est offert « tel quel ». Toute
-utilisation de ce logiciel est à votre seule risque et péril. Microsoft n’accorde aucune
-autre garantie expresse. Vous pouvez bénéficier de droits additionnels en vertu du droit
+EXONÃ‰RATION DE GARANTIE. Le logiciel visÃ© par une licence est offert Â« tel quel Â». Toute
+utilisation de ce logiciel est Ã  votre seule risque et pÃ©ril. Microsoft nâ€™accorde aucune
+autre garantie expresse. Vous pouvez bÃ©nÃ©ficier de droits additionnels en vertu du droit
 local sur la protection des consommateurs, que ce contrat ne peut modifier. La ou elles
-sont permises par le droit locale, les garanties implicites de qualité marchande,
-d’adéquation à un usage particulier et d’absence de contrefaçon sont exclues.
+sont permises par le droit locale, les garanties implicites de qualitÃ© marchande,
+dâ€™adÃ©quation Ã  un usage particulier et dâ€™absence de contrefaÃ§on sont exclues.
 
-LIMITATION DES DOMMAGES-INTÉRÊTS ET EXCLUSION DE RESPONSABILITÉ POUR LES DOMMAGES. Vous
+LIMITATION DES DOMMAGES-INTÃ‰RÃŠTS ET EXCLUSION DE RESPONSABILITÃ‰ POUR LES DOMMAGES. Vous
 ouvez obtenir de Microsoft et de ses fournisseurs une indemnisation en cas de dommages
-directs uniquement à hauteur de 5,00 $ US. Vous ne pouvez prétendre à aucune indemnisation
-pour les autres dommages, y compris les dommages spéciaux, indirects ou accessoires et
-pertes de bénéfices.
+directs uniquement Ã  hauteur de 5,00 $ US. Vous ne pouvez prÃ©tendre Ã  aucune indemnisation
+pour les autres dommages, y compris les dommages spÃ©ciaux, indirects ou accessoires et
+pertes de bÃ©nÃ©fices.
 
 Cette limitation concerne:
 
- • tout ce qui est relié au logiciel, aux services ou au contenu (y compris le code)
+ â€¢ tout ce qui est reliÃ© au logiciel, aux services ou au contenu (y compris le code)
    figurant sur des sites Internet tiers ou dans des programmes tiers; et
- • les réclamations au titre de violation de contrat ou de garantie, ou au titre de
-   responsabilité stricte, de négligence ou d’une autre faute dans la limite autorisée
+ â€¢ les rÃ©clamations au titre de violation de contrat ou de garantie, ou au titre de
+   responsabilitÃ© stricte, de nÃ©gligence ou dâ€™une autre faute dans la limite autorisÃ©e
    par la loi en vigueur.
    
-Elle s’applique également, même si Microsoft connaissait ou devrait connaître
-l’éventualité d’un tel dommage. Si votre pays n’autorise pas l’exclusion ou la limitation
-de responsabilité pour les dommages indirects, accessoires ou de quelque nature que ce
-soit, il se peut que la limitation ou l’exclusion ci-dessus ne s’appliquera pas à votre
-égard.
+Elle sâ€™applique Ã©galement, mÃªme si Microsoft connaissait ou devrait connaÃ®tre
+lâ€™Ã©ventualitÃ© dâ€™un tel dommage. Si votre pays nâ€™autorise pas lâ€™exclusion ou la limitation
+de responsabilitÃ© pour les dommages indirects, accessoires ou de quelque nature que ce
+soit, il se peut que la limitation ou lâ€™exclusion ci-dessus ne sâ€™appliquera pas Ã  votre
+Ã©gard.
 
-EFFET JURIDIQUE. Le présent contrat décrit certains droits juridiques. Vous pourriez avoir
-d’autres droits prévus par les lois de votre pays. Le présent contrat ne modifie pas les
-droits que vous confèrent les lois de votre pays si celles-ci ne le permettent pas.
+EFFET JURIDIQUE. Le prÃ©sent contrat dÃ©crit certains droits juridiques. Vous pourriez avoir
+dâ€™autres droits prÃ©vus par les lois de votre pays. Le prÃ©sent contrat ne modifie pas les
+droits que vous confÃ¨rent les lois de votre pays si celles-ci ne le permettent pas.
 
 -----------------------------------------------------------------
 
@@ -704,7 +704,7 @@ Last revised January, 2021
 END-USER LICENSE AGREEMENT
 FOR ALL SOFTWARE DEVELOPMENT PRODUCT(S) INCLUDED IN THIS DISTRIBUTION
 
-IMPORTANT - PLEASE READ THIS END-USER LICENSE AGREEMENT (“AGREEMENT”) CAREFULLY BEFORE DOWNLOADING OR USING THE SOFTWARE DEVELOPMENT PRODUCT(S) INCLUDED IN THIS DISTRIBUTION/INSTALLATION. 
+IMPORTANT - PLEASE READ THIS END-USER LICENSE AGREEMENT (â€œAGREEMENTâ€) CAREFULLY BEFORE DOWNLOADING OR USING THE SOFTWARE DEVELOPMENT PRODUCT(S) INCLUDED IN THIS DISTRIBUTION/INSTALLATION. 
 
 This Developer Express Inc ("DEVEXPRESS") AGREEMENT constitutes a legally binding agreement between you or the business and/or entity which you represent ("You" or "LICENSEE") and DEVEXPRESS for all DEVEXPRESS products, frameworks, widgets, source code, demos, intermediate files, media, printed materials, and documentation ("SOFTWARE DEVELOPMENT PRODUCT(S)") included in this distribution/installation. 
 
@@ -865,9 +865,9 @@ The SOFTWARE DEVELOPMENT PRODUCT(S) is protected by copyright laws and internati
 
 8. OPEN SOURCE LIBRARIES.
 
-The SOFTWARE DEVELOPMENT PRODUCT(S) found in this installation package may include or require certain third-party, open source components or libraries (“THE OPEN SOURCE LIBRARIES”).
+The SOFTWARE DEVELOPMENT PRODUCT(S) found in this installation package may include or require certain third-party, open source components or libraries (â€œTHE OPEN SOURCE LIBRARIESâ€).
 
-Where applicable, DEVEXPRESS may include a “NOTICE” file to provide a list of THE OPEN SOURCE LIBRARIES required for certain portions of the documentation, sample source code, and other demo projects.
+Where applicable, DEVEXPRESS may include a â€œNOTICEâ€ file to provide a list of THE OPEN SOURCE LIBRARIES required for certain portions of the documentation, sample source code, and other demo projects.
 
 THE OPEN SOURCE LIBRARIES included in the SOFTWARE DEVELOPMENT PRODUCT(S) are done so pursuant to each individual open source library license and subject to the disclaimers and limitations on liability set forth in each open source library license.
 
@@ -882,11 +882,11 @@ Copyright (C) 2000-2020 The Legion of the Bouncy Castle Inc.
 Portions of the Bouncy Castle Library used to support X.509, CMS (RFC 3852), and Time Stamp Protocol (RFC 3161).
 https://github.com/bcgit/bc-csharp/blob/master/crypto/License.html
 
-Reporting.Import (Open Source – MIT License)
+Reporting.Import (Open Source â€“ MIT License)
 Copyright (c) 2018 Developer Express Inc.
 https://github.com/DevExpress/Reporting.Import/blob/master/LICENSE
 
-System.Data.SQLite and System.Data.SQLite.EF6 (Open Source – Microsoft Public License)
+System.Data.SQLite and System.Data.SQLite.EF6 (Open Source â€“ Microsoft Public License)
 https://system.data.sqlite.org/index.html/doc/trunk/www/copyright.wiki 
 
 9. TWELVE (12) MONTH SUBSCRIPTION AND UPDATES.
@@ -925,7 +925,7 @@ You hereby agree to indemnify DEVEXPRESS and its officers, directors, employees,
 
 15. U.S. GOVERNMENT RESTRICTED RIGHTS.
 
-For SOFTWARE DEVELOPMENT PRODUCT(S) purchased, installed, copied or otherwise used on behalf of any United States Government agency or department (“US GOVT”), US GOVT agrees that the SOFTWARE DEVELOPMENT PRODUCT(S) are acquired with restricted rights according to the following:
+For SOFTWARE DEVELOPMENT PRODUCT(S) purchased, installed, copied or otherwise used on behalf of any United States Government agency or department (â€œUS GOVTâ€), US GOVT agrees that the SOFTWARE DEVELOPMENT PRODUCT(S) are acquired with restricted rights according to the following:
 
 For the Department of Defense: The SOFTWARE DEVELOPMENT PRODUCT(S) is "Commercial Computer Software" as defined in Clause 252.227-7013(c)(1) of the DFARS.
 
@@ -955,7 +955,7 @@ DEVEXPRESS collects personally identifiable information whenever you purchase/li
 
 DEVEXPRESS does not wish to receive, act to procure, nor desire to solicit, confidential or proprietary materials and information from you through the use of the SOFTWARE DEVELOPMENT PRODUCT(S) or SUPPORT SERVICES. Any and all materials, attachments, or information submitted by you as part of error submissions, or divulged during chats, online discussions, Support Center submissions, or made available to DEVEXPRESS in any manner will be deemed NOT to be confidential by DEVEXPRESS. You acknowledge that submissions to DEVEXPRESS will not be considered confidential or proprietary and that DEVEXPRESS will be under no obligation to keep such information confidential.
 
-Your election to use the SOFTWARE DEVELOPMENT PRODUCT(S) indicates your acceptance of the terms of this AGREEMENT. You are responsible for maintaining confidentiality of your username, password and other sensitive information. You are responsible for all activities that occur in your user account and in case of any unauthorized activity on your account, you agree to inform DEVEXPRESS immediately by any method listed on the DEVEXPRESS website’s Contacts page. DEVEXPRESS is not responsible for any loss or damage to you or to any third party incurred as a result of any unauthorized access and/or use of your user account, or otherwise.
+Your election to use the SOFTWARE DEVELOPMENT PRODUCT(S) indicates your acceptance of the terms of this AGREEMENT. You are responsible for maintaining confidentiality of your username, password and other sensitive information. You are responsible for all activities that occur in your user account and in case of any unauthorized activity on your account, you agree to inform DEVEXPRESS immediately by any method listed on the DEVEXPRESS websiteâ€™s Contacts page. DEVEXPRESS is not responsible for any loss or damage to you or to any third party incurred as a result of any unauthorized access and/or use of your user account, or otherwise.
 
 DEVEXPRESS may disclose or report Confidential Information in limited circumstances where it believes in good faith that disclosure is required under the law. For example, DEVEXPRESS may be required to disclose Confidential Information to cooperate with regulators or law enforcement authorities, to comply with a legal process such as a court order, subpoena, search warrant, or a law enforcement request. Additionally, if the ownership of all or substantially all of our business changes or we otherwise transfer assets relating to our business or the SOFTWARE DEVELOPMENT PRODUCT(S) to a third party, such as by merger, acquisition, bankruptcy proceeding or otherwise, we may transfer or sell your personal information to the new owner. In such a case, unless permitted otherwise by applicable law, your information would remain subject to the promises made in the applicable privacy policy unless you agree differently.
 
@@ -980,7 +980,7 @@ The Customer Experience Program only collects information related to DEVEXPRESS 
 
 19.2 DEMO FEEDBACK
 
-The Demo Feedback feature presented within the included demo applications of the SOFTWARE DEVELOPMENT PRODUCT(S), allows you to send feedback to DEVEXPRESS and, optionally, include any additional information to describe the specific compliment or concern you may have with regards to the demo application. Although Demo Feedback doesn’t intentionally collect personally identifiable information, it is possible that such information might be captured in the feedback text you provide. DEVEXPRESS does not wish to receive such information nor will it use this information to identify you.
+The Demo Feedback feature presented within the included demo applications of the SOFTWARE DEVELOPMENT PRODUCT(S), allows you to send feedback to DEVEXPRESS and, optionally, include any additional information to describe the specific compliment or concern you may have with regards to the demo application. Although Demo Feedback doesnâ€™t intentionally collect personally identifiable information, it is possible that such information might be captured in the feedback text you provide. DEVEXPRESS does not wish to receive such information nor will it use this information to identify you.
 
 Except as otherwise described in this statement, Demo Feedback does not transmit personal information to DEVEXPRESS.
 

@@ -1,4 +1,4 @@
-# Tabular Editor
+﻿# Tabular Editor
 
 Tabular Editor is a tool that lets you easily manipulate and manage measures, calculated columns, display folders, perspectives and translations in Analysis Services Tabular and Power BI Models.
 

@@ -1,4 +1,4 @@
----
+﻿---
 uid: messages-view
 title: Messages view
 author: Daniel Otykier

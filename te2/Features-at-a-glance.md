@@ -1,4 +1,4 @@
-# Basic Features
+﻿# Basic Features
 
 The following article will give you a quick overview of the most important features of Tabular Editor.
 

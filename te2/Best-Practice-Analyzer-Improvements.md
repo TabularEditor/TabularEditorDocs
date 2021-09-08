@@ -1,4 +1,4 @@
-# Best Practice Analyzer Improvements
+﻿# Best Practice Analyzer Improvements
 
 As of [Tabular Editor 2.8.1](https://github.com/otykier/TabularEditor/releases/tag/2.8.1), the Best Practice Analyzer has received a major overhaul.
 

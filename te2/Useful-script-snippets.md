@@ -1,4 +1,4 @@
----
+﻿---
 uid: useful-script-snippets
 title: C# Scripts
 author: Daniel Otykier
@@ -389,9 +389,9 @@ string.Join(",\r\n",
 ***
 
 ## Auto-creating relationships
-If you’re consistently using a certain set of naming conventions within your team, you’ll quickly find that scripts can be even more powerful.
+If youâ€™re consistently using a certain set of naming conventions within your team, youâ€™ll quickly find that scripts can be even more powerful.
 
-The following script, when executed on one or more fact tables, will automatically create relationships to all relevant dimension tables, based on column names. The script will search for fact table columns having the name pattern `xxxyyyKey` where the xxx is an optional qualifier for role-playing use, and the yyy is the dimension table name. On the dimension table, a column named `yyyKey` must exist and have the same data type as the column on the fact table. For example, a column named “ProductKey” will be related to the “ProductKey” column on the Product table. You can specify a different column name suffix to use in place of "Key".
+The following script, when executed on one or more fact tables, will automatically create relationships to all relevant dimension tables, based on column names. The script will search for fact table columns having the name pattern `xxxyyyKey` where the xxx is an optional qualifier for role-playing use, and the yyy is the dimension table name. On the dimension table, a column named `yyyKey` must exist and have the same data type as the column on the fact table. For example, a column named â€œProductKeyâ€ will be related to the â€œProductKeyâ€ column on the Product table. You can specify a different column name suffix to use in place of "Key".
 
 If a relationship already exists between the fact and dimension table, the script will create the new relationship as inactive.
 

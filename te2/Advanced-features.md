@@ -1,4 +1,4 @@
-# Advanced Features
+﻿# Advanced Features
 
 In addition to the features mentioned in the [Features at a glance](/Features-at-a-glance) article, Tabular Editor also supports the following features for advanced usage.
 

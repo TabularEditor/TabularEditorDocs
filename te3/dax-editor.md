@@ -1,4 +1,4 @@
----
+﻿---
 uid: dax-editor
 title: Getting Started
 author: Daniel Otykier

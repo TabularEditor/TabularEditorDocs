@@ -1,4 +1,4 @@
-# Advanced Object Filtering
+﻿# Advanced Object Filtering
 
 This article describes how to use the "Filter" textbox within Tabular Editor - an incredibly useful feature when navigating complex models.
 

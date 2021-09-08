@@ -1,4 +1,4 @@
-# SQL Server 2017 Support
+﻿# SQL Server 2017 Support
 
 Starting from version 2.3, Tabular Editor now also supports SQL Server 2017 (Compatibility Level 1400). This means that the Tabular Editor UI exposes some of the new functionality described [here](https://blogs.msdn.microsoft.com/analysisservices/2017/04/19/whats-new-in-sql-server-2017-ctp-2-0-for-analysis-services/).
 

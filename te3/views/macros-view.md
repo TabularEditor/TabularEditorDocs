@@ -1,4 +1,4 @@
----
+﻿---
 uid: macros-view
 title: Macros view
 author: Daniel Otykier

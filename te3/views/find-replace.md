@@ -1,4 +1,4 @@
----
+﻿---
 uid: find-replace
 title: Find and replace
 author: Daniel Otykier

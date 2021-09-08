@@ -1,4 +1,4 @@
-# Custom Actions
+﻿# Custom Actions
 > [!NOTE]
 > Please note that this functionality is unrelated to the Custom Actions feature available for Multidimensional models.
 

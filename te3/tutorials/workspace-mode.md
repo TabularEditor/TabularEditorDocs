@@ -1,4 +1,4 @@
----
+﻿---
 uid: workspace-mode
 title: (Walkthrough) Workspace Mode
 author: Daniel Otykier
