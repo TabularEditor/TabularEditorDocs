@@ -13,7 +13,8 @@
 ### @find-replace
 ## [Supported file types](supported-files.md)
 ## Features
-### [C-sharp scripts](csharp-scripts.md)
+### @dax-editor
+### @csharp-scripts
 ## [Security overview](security-privacy.md)
 
 # Tutorials and walkthroughs

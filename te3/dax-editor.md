@@ -1,3 +1,9 @@
+---
+uid: dax-editor
+title: Getting Started
+author: Daniel Otykier
+updated: 2021-09-08
+---
 # DAX Editor
 
 (WIP)
