@@ -1,6 +1,6 @@
 ﻿---
 uid: roadmap
-title: Tabular Editor 3 Roadmap
+title: Roadmap
 author: Daniel Otykier
 updated: 2021-09-08
 ---

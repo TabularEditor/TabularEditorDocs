@@ -4,7 +4,7 @@ title: All downloads
 author: Daniel Otykier
 updated: 2021-09-06
 ---
-# All downloads
+# Tabular Editor 3 Downloads
 
 This page provides download and installation instructions for Tabular Editor 3.
 

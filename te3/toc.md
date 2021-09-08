@@ -26,7 +26,9 @@
 
 # Other resources
 ## @downloads
+## @roadmap
+
+# Legal
 ## @te3-eula
 ## @third-party-notices
 ## @privacy-policy
-## @roadmap

@@ -19,6 +19,6 @@
     padding-right: 5px;
     content: "\2022";
 }
-.applies-to-div {
-    padding-bottom: 10px;
+.conceptual-content {
+    padding-top: 10px;
 }

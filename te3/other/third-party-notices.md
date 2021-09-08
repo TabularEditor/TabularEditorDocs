@@ -4,9 +4,7 @@ title: Third Party Notices
 author: Daniel Otykier
 updated: 2021-06-01
 ---
-# Third Party Notices
-
-**Third Party Notices for Tabular Editor 3**
+# Tabular Editor 3 Third Party Notices
 
 This product incorporates third party components from the projects
 listed below. The original copyright notices and the licenses under
