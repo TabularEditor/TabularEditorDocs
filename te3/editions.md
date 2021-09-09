@@ -2,7 +2,7 @@
 uid: editions
 title: Compare editions
 author: Søren Toft Joensen
-updated: 2021-07-10
+updated: 2021-09-09
 ---
 # Tabular Editor 3 Editions
 
@@ -13,9 +13,12 @@ This document provides an overview and comparison of the different editions of T
 The main difference between the various editions of Tabular Editor 3, is which types of tabular data modelling scenarios they support. To understand this difference, consider that Analysis Services (Tabular) exists in a number of different "flavors":
 
 - Power BI Desktop
-- Power BI Premium through the XMLA Endpoint (Premium Per User or **Premium/Embedded Capacity gen1/gen2**)
+- Power BI Premium through the XMLA Endpoint (Premium Per User or **Premium Capacity [A, EM or P SKUs]**)
 - SQL Server (2016+) Analysis Services (Editions: Developer, Standard, **Enterprise**)
 - Azure Analysis Services (Tiers: Developer, Basic, **Standard**)
+
+> [!IMPORTANT]
+> Tabular Editor only allows editing data models using Compatibility Level 1200 or higher. This is the default on any instance of Analysis Services starting from SQL Server 2016.
 
 We consider the **highlighted** flavors of Analysis Services to be Enterprise-Tier, and as such, these may only be used with Tabular Editor 3 Enterprise Edition. Please refer to the matrix below for the full overview of supported scenarios:
 
@@ -58,6 +61,9 @@ There are no feature differences across the Tabular Editor 3 editions for Power 
 > [!NOTE]
 > Please keep in mind that Power BI Desktop [currently does not support all Data Modelling operations](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). For this reason, Tabular Editor 3 by default blocks operations that are not supported by Power BI Desktop. However, this restriction can be removed under Tools > Preferences > Power BI.
 
+> [!IMPORTANT]
+> Tabular Editor can only be used as an external tool for Power BI Desktop when the Power BI report (.pbix or .pbit) file contains a data model (Import, DirectQuery or Composite). **Reports using Live connection are not supported** since these reports do not contain a data model.
+
 ## Personal vs. Transferable licenses
 
 Our Desktop Edition and Business Edition uses a personal licensing model. This means, that a user receives their own personal License Key, which can not be shared or transferred to other users. When a user no longer requires the product, their subscription should be cancelled to avoid recurring payments.
@@ -88,7 +94,7 @@ Our Enterprise Edition is priced in tiers, according to the following table (sim
 
 As an example, if you need 12 seats, the price breaks down as follow:
 
-```
+```text
 Seats 1-5:    5 x 950.00 = $  4,750.00
 Seats 6-10:   5 x 900.00 = $  4,500.00
 Seats 11-12:  2 x 850.00 = $  1,700.00

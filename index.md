@@ -1,4 +1,10 @@
-﻿# Tabular Editor
+﻿---
+uid: index
+title: Tabular Editor
+author: Daniel Otykier
+updated: 2021-09-09
+---
+# Tabular Editor
 
 Tabular Editor is a tool that lets you easily manipulate and manage measures, calculated columns, display folders, perspectives and translations in Analysis Services Tabular and Power BI Models.
 
@@ -16,11 +22,11 @@ Tabular Editor 3 is the evolution of Tabular Editor 2. It has been designed for 
 
 ### Common features
 
-Both tools provide the same features in terms of which data modeling options are available, by basically exposing every object and property of the [AMO/TOM client library created by Microsoft](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), in an intuitive and responsive user interface. You can edit advanced object properties that are not available through the standard tools. The tools can load model metadata from files or from any instance of Analysis Services. Changes are only synchronized when you hit Ctrl+S (save) thus providing an "offline" editing experience which most people consider to be superior to the "always synchronized"-mode of the standard tools. This is especially noticable when working on large and complex data models.
+Both tools provide the same features in terms of which data modeling options are available, by basically exposing every object and property of the [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), in an intuitive and responsive user interface. You can edit advanced object properties that are not available through the standard tools. The tools can load model metadata from files or from any instance of Analysis Services. Changes are only synchronized when you hit Ctrl+S (save) thus providing an "offline" editing experience which most people consider to be superior to the "always synchronized"-mode of the standard tools. This is especially noticable when working on large and complex data models.
 
 In addition, both tools enables making multiple model metadata changes in batches, renaming objects in batches, copy/pasting objects, dragging/dropping objects across tables and display folders, etc. The tools even have undo/redo support.
 
-Both tools feature the Best Practice Analyzer, which continuously scans the model metadata for rules that can define on your own, e.g. to enforce certain naming conventions, make sure non-dimension attribute columns are always hidden, etc.
+Both tools feature the Best Practice Analyzer, which continuously scans the model metadata for rules that you can define on your own, e.g. to enforce certain naming conventions, make sure non-dimension attribute columns are always hidden, etc.
 
 You can also write and execute C#-style scripts in both tools, for automating repetitive tasks such as generating time-intelligence measures and auto-detecting relationships based on column names.
 
