@@ -24,7 +24,7 @@ External tools may connect to the instance of Analysis Services managed by Power
 
 <img class="noscale" src="../images/external-tool-architecture.png" />
 
-Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata, through [Microsoft-provided client libraries](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). In this regard, the Analysis Services instance managed by Power BI Desktop is no different from any other type of Analysis Services instance.
+Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). In this regard, the Analysis Services instance managed by Power BI Desktop is no different from any other type of Analysis Services instance.
 
 ## Data modeling operations
 
@@ -53,7 +53,9 @@ All Tabular Object Model (TOM) metadata can be accessed for read-only. Write ope
 
 When using Tabular Editor 3 (any edition) as an external tool for Power BI Desktop, all unsupported operations according to the list above, are disabled by default. In other words, Tabular Editor will not allow you to add or rename tables, columns, etc. on a Power BI Desktop model.
 
-Though unsupported, it turns out that a number of operations can still be applied without causing issues. For example, setting properties such as Display Folder, Description, Summarization, etc. on individual columns using an external tool seems to work just fine at the time of writing. For this reason, Tabular Editor has an option that allows advanced users to experiment, by allowing all data modeling operations even when connected to a Power BI Desktop model. You can enable this option under **Tools > Preferences > Power BI > Allow *unsupported* modeling operations**.
+Though unsupported, it turns out that a number of operations can still be applied without causing issues. For example, setting properties such as Display Folder, Description, Summarization, etc. on individual columns using an external tool seems to work just fine at the time of writing. For this reason, Tabular Editor has an option that allows advanced users to experiment, by allowing all data modeling operations even when connected to a Power BI Desktop model. You can enable this option under **Tools > Preferences > Power BI > Allow *unsupported* modeling operations**, but make sure you understand the risks involved before doing so.
+
+Once Tabular Editor's **Allow *unsupported* modeling operations** feature is enabled, Tabular Editor will no longer block any modeling operation, but instead provide you full read/write access to all TOM objects and properties.
 
 > [!WARNING]
 > Microsoft Support will not be able to assist you, if unsupported changes are made your .pbix file through External Tools. Our recommendation is to always keep a backup of the .pbix or .pbit file before launching any external tool that allows making changes to your data model.
