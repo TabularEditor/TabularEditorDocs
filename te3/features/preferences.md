@@ -21,7 +21,7 @@ To access the preferences dialog, go to **Tools > Preferences**.
 
 ### Power BI
 
-- **Allow unsupported editing**: This option is only relevant when Tabular Editor 3 is used as an external tool for Power BI Desktop. When checked, all TOM data modelling properties are available for editing when connected to an instance of Power BI Desktop. It's generally recommended to leave this unchecked, to make sure that you do not accidentally make changes to your Power BI file, [that are not supported by Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-external-tools#supported-write-operations).
+- **Allow unsupported editing**: This option is only relevant when Tabular Editor 3 is used as an external tool for Power BI Desktop. When checked, all TOM data modeling properties are available for editing when connected to an instance of Power BI Desktop. It's generally recommended to leave this unchecked, to make sure that you do not accidentally make changes to your Power BI file, [that are not supported by Power BI Desktop](xref:desktop-limitations).
 
 ### Metadata Synchronization
 

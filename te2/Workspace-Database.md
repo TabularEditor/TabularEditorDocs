@@ -1,5 +1,5 @@
 ﻿## Introducing Workspace Databases
-Tabular Editor 3.0 supports editing model metadata loaded from disk with a simultaneous connection to a database deployed to an instance of Analysis Services. We call this database the _workspace database_. Going forward, this is the recommended approach to tabular modelling within Tabular Editor.
+Tabular Editor 3.0 supports editing model metadata loaded from disk with a simultaneous connection to a database deployed to an instance of Analysis Services. We call this database the _workspace database_. Going forward, this is the recommended approach to tabular modeling within Tabular Editor.
 
 This makes the development workflow a lot simpler, since you only need to hit Save (Ctrl+S) once, to simultaneously save your changes to the disk **and** update the metadata in the workspace database. This also has the advantage, that any error messages returned from Analysis Services, are immediately visible in Tabular Editor upon hitting Save. In a sense, this is similar to the way SSDT / Visual Studio or Power BI Desktop does, except that you are in control of when the workspace database is updated.
 

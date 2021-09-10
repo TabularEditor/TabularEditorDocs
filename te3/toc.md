@@ -2,6 +2,7 @@
 ## @getting-started
 ## @whats-new
 ## @editions
+## @desktop-limitations
 
 # Documentation
 ## @user-interface

@@ -21,11 +21,13 @@ function scaleImages() {
     var content = document.getElementById("conceptual-content");
     var myImgs = content.getElementsByTagName('img');
     for (var i = 0; i < myImgs.length; i++) {
-      var width = myImgs[i].naturalWidth,
-          height = myImgs[i].naturalHeight;
+        var img = myImgs[i];
+        if(img.classList.contains("noscale")) continue;
+        var width = img.naturalWidth,
+            height = img.naturalHeight;
 
-      myImgs[i].width = width / 2;
-      myImgs[i].height = height / 2;
+        img.width = width / 2;
+        img.height = height / 2;
     }
 }
 window.onload = scaleImages;

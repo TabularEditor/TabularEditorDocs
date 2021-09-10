@@ -8,11 +8,11 @@ updated: 2021-09-09
 
 This document provides an overview and comparison of the different editions of Tabular Editor 3.
 
-## Supported Data Modelling Scenarios
+## Supported Data Modeling Scenarios
 
-The main difference between the various editions of Tabular Editor 3, is which types of tabular data modelling scenarios they support. To understand this difference, consider that Analysis Services (Tabular) exists in a number of different "flavors":
+The main difference between the various editions of Tabular Editor 3, is which types of tabular data modeling scenarios they support. To understand this difference, consider that Analysis Services (Tabular) exists in a number of different "flavors":
 
-- Power BI Desktop
+- Power BI Desktop (make sure you you understand the [limitations](xref:desktop-limitations))
 - Power BI Premium through the XMLA Endpoint (Premium Per User or **Premium Capacity [A, EM or P SKUs]**)
 - SQL Server (2016+) Analysis Services (Editions: Developer, Standard, **Enterprise**)
 - Azure Analysis Services (Tiers: Developer, Basic, **Standard**)
@@ -24,18 +24,18 @@ We consider the **highlighted** flavors of Analysis Services to be Enterprise-Ti
 
 |Scenario / Edition|Desktop|Business|Enterprise
 |---|---|---|---|
-|External Tool for Power BI Desktop|&#10004;|&#10004;|&#10004;|
-|Load/save model metadata to disk**|&#10060;|&#10004;*|&#10004;|
-|Workspace Mode***|&#10060;|&#10004;*|&#10004;|
-|Power BI Premium Per User|&#10060;|&#10004;|&#10004;|
-|SQL Server Developer Edition|&#10060;|&#10004;*|&#10004;|
-|SQL Server Standard Edition|&#10060;|&#10004;|&#10004;|
-|SQL Server Enterprise Edition|&#10060;|&#10060;|&#10004;|
-|Azure AS Developer Tier|&#10060;|&#10004;*|&#10004;|
-|Azure AS Basic Tier|&#10060;|&#10004;|&#10004;|
-|Azure AS Standard Tier|&#10060;|&#10060;|&#10004;|
-|Power BI Premium Capacity (P SKUs)|&#10060;|&#10060;|&#10004;|
-|Power BI Embedded Capacity (A/EM SKUs)|&#10060;|&#10060;|&#10004;|
+|External Tool for Power BI Desktop|<span class="emoji"><span class="emoji">&#10004;</span></span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Load/save model metadata to disk**|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
+|Workspace Mode***|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
+|Power BI Premium Per User|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|SQL Server Developer Edition|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
+|SQL Server Standard Edition|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|SQL Server Enterprise Edition|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|Azure AS Developer Tier|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
+|Azure AS Basic Tier|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Azure AS Standard Tier|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|Power BI Premium Capacity (P SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|Power BI Embedded Capacity (A/EM SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 
 \***Note:** Enterprise Edition is required if the Analysis Services data model contains perspectives or tables with multiple partitions (does not apply to Power BI Desktop or Power BI Premium Per User models).
 
@@ -43,26 +43,26 @@ We consider the **highlighted** flavors of Analysis Services to be Enterprise-Ti
 
 \*\*\***Note:** Workspace Mode allows Tabular Editor 3 to simultaneously save model metadata to disk and synchronize a database on any of the editions of Analysis Services or Power BI supported by the Tabular Editor 3 edition purchased.
 
-## Modelling Restrictions for non-Power BI models
+## Modeling Restrictions for non-Power BI models
 
-Specifically for Analysis Services (not Power BI) data models, we restrict a few data modelling operations inside Tabular Editor 3 as well, corresponding to the restrictions on Azure Analysis Services Basic Tier and SQL Server Analysis Services Standard Edition:
+Specifically for Analysis Services (not Power BI) data models, we restrict a few data modeling operations inside Tabular Editor 3 as well, corresponding to the restrictions on Azure Analysis Services Basic Tier and SQL Server Analysis Services Standard Edition:
 
-|Modelling Feature / Edition|Business|Enterprise
+|modeling Feature / Edition|Business|Enterprise
 |---|---|---|
-|Perspectives|&#10060;|&#10004;|
-|Multiple partitions|&#10060;|&#10004;|
+|Perspectives|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|Multiple partitions|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 
 There are no other feature differences between the Tabular Editor 3 editions, than the ones listed above. 
 
-## Modelling Restrictions for Power BI models
+## Modeling Restrictions for Power BI models
 
 There are no feature differences across the Tabular Editor 3 editions for Power BI data models.
 
 > [!NOTE]
-> Please keep in mind that Power BI Desktop [currently does not support all Data Modelling operations](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). For this reason, Tabular Editor 3 by default blocks operations that are not supported by Power BI Desktop. However, this restriction can be removed under Tools > Preferences > Power BI.
+> Please keep in mind that Power BI Desktop [currently does not support all Data modeling operations](xref:desktop-limitations). For this reason, Tabular Editor 3 by default blocks operations that are not supported by Power BI Desktop. However, this restriction can be removed under Tools > Preferences > Power BI.
 
 > [!IMPORTANT]
-> Tabular Editor can only be used as an external tool for Power BI Desktop when the Power BI report (.pbix or .pbit) file contains a data model (Import, DirectQuery or Composite). **Reports using Live connection are not supported** since these reports do not contain a data model.
+> Tabular Editor can only be used as an external tool for Power BI Desktop when the Power BI report (.pbix or .pbit) file contains a data model (Import, DirectQuery or Composite). **Reports using Live connection are not supported** since these reports do not contain a data model. [More information](xref:desktop-limitations).
 
 ## Personal vs. Transferable licenses
 
