@@ -3,6 +3,7 @@
 ## @whats-new
 ## @editions
 ## @desktop-limitations
+## @powerbi-xmla
 
 # Documentation
 ## @user-interface
