@@ -1,6 +1,11 @@
 {
     "routes": [
         {
+            "route": "/Workspace-Database.html",
+            "redirect": "/te3/tutorials/workspace-mode.html",
+            "statusCode": 301
+        },
+        {
             "route": "/projects/te3/en/latest/editions.html",
             "redirect": "/te3/editions.html",
             "statusCode": 301
