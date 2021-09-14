@@ -67,7 +67,7 @@ Tabular Editor 3 introduces a new JSON based file, to store developer- and model
 
 When you open a Model.bim or Database.json file in Tabular Editor 3, the file will be created using the name of the file you loaded and your Windows user name. For example, if I open a file called `AdventureWorks.bim`, the user options file will be saved as `AdventureWorks.DanielOtykier.tmuo`. Tabular Editor searches for a file with such a name every time a model is loaded from disk.
 
-> ![IMPORTANT]
+> [!IMPORTANT]
 > The **.tmuo** file contains user-specific preferences, and as such it should not be included in a shared version control environment. If you're using Git for version control, make sure to include the `.tmuo` extension in your `.gitignore` file.
 
 Below is an example of the file content:
