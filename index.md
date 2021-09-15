@@ -10,7 +10,7 @@ Tabular Editor is a tool that lets you easily manipulate and manage measures, ca
 
 The tool is available in two different versions:
 
-- Tabular Editor 2.x (free, open source) - [GitHub project page](https://github.com/TabularEditor/TabularEditor)
+- Tabular Editor 2.x (free, [MIT license](https://github.com/TabularEditor/TabularEditor/blob/master/LICENSE)) - [GitHub project page](https://github.com/TabularEditor/TabularEditor)
 - Tabular Editor 3.x (commercial) - [Home page](https://tabulareditor.com)
 
 ## Description
@@ -19,6 +19,44 @@ This site contains the documentation for both versions. Select your version in t
 ## Choosing between TE2 and TE3
 
 Tabular Editor 3 is the evolution of Tabular Editor 2. It has been designed for those who seek a "one-tool-to-rule-them-all" solution for Tabular data modeling and development.
+
+### Feature overview
+
+The table below lists all the main features of both tools.
+
+||TE2 (Free)|TE3 (Commercial)|
+|---|---|---|
+|Edit all TOM objects and properties|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Batch editing and renaming|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Copy/paste and drag/drop support|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Undo/redo data modeling operations|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Load/save model metadata to disk|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
+|Save-to-folder|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
+|[daxformatter.com](https://daxformatter.com) integration|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Advanced data modeling (OLS, Perspectives, Calculation Groups, Metadata Translations, etc.)|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
+|Syntax highlighting and automatic formula fixup|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|View DAX dependencies between objects|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Import Table Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Deployment Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
+|Best Practice Analyzer|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|C# scripting and automation|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Use as External Tool for Power BI Desktop|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Connect to SSAS/Azure AS/Power BI Premium|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
+|Command-line interface|<span class="emoji">&#10004;</span>|*[Coming soon](xref:roadmap)*|
+|Premium, customizable user-interface with high-DPI, multi-monitor and theming support||<span class="emoji">&#10004;</span>|
+|World-class DAX editor with IntelliSense<sup>TM</sup>-like features||<span class="emoji">&#10004;</span>|
+|Offline DAX syntax checking and column/data type inference||<span class="emoji">&#10004;</span>|
+|Improved Table Import Wizard and Table Schema Update check with Power Query support||<span class="emoji">&#10004;</span>|
+|DAX querying, table preview and Pivot Grids||<span class="emoji">&#10004;</span>|
+|Create diagrams for visualizing and editing table relationships||<span class="emoji">&#10004;</span>|
+|Execute data refresh operations in the background||<span class="emoji">&#10004;</span>*|
+|C# macro recorder||<span class="emoji">&#10004;</span>|
+|Edit multiple DAX expressions in a single document using DAX scripting||<span class="emoji">&#10004;</span>|
+|[VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) integration||<span class="emoji">&#10004;</span>|
+
+\***Note:** Limitations apply depending on which [edition](xref:editions) of Tabular Editor 3 you are using.
+
+Below is a more detailed description of some of the features listed above.
 
 ### Common features
 
@@ -76,4 +114,5 @@ If you are new to tabular modeling in general, we recommend that you use the sta
 
 - [Tabular Editor 2.x documentation](te2/Getting-Started.md)
 - [Tabular Editor 3.x documentation](te3/getting-started.md)
+- [Tabular Editor 3 roadmap](xref:roadmap)
 - [Common features](common/common-features.md)
