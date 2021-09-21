@@ -4,7 +4,15 @@
 Simply download the .msi file from the [Release page](https://github.com/otykier/TabularEditor/releases/latest) and run the .msi installation.
 
 ## Prerequisites
-Tabular Editor uses the [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) to load and save metadata to and from Model.bim files or existing databases. This is included in the .msi installer. Visit the official Microsoft documentation for [Analysis Services Client Libraries](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-data-providers).
+None.
+
+> [!NOTE]
+> Tabular Editor uses the [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) to load and save metadata to and from Model.bim files or existing databases. This is included in the .msi installer. Visit the official Microsoft documentation for [Analysis Services Client Libraries](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-data-providers).
+
+## System requirements
+
+- **Operating system:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 or newer
+- **.NET Framework:** [4.7.2](https://dotnet.microsoft.com/download/dotnet-framework)
 
 ## Working with Tabular Editor
 
