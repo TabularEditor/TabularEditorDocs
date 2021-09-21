@@ -1,4 +1,10 @@
-﻿# Getting Started
+﻿---
+uid: getting-started-te2
+title: Getting Started
+author: Daniel Otykier
+updated: 2021-09-21
+---
+# Getting Started
 
 ## Installation
 Simply download the .msi file from the [Release page](https://github.com/otykier/TabularEditor/releases/latest) and run the .msi installation.
