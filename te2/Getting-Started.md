@@ -12,7 +12,7 @@ None.
 ## System requirements
 
 - **Operating system:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 or newer
-- **.NET Framework:** [4.7.2](https://dotnet.microsoft.com/download/dotnet-framework)
+- **.NET Framework:** [4.6](https://dotnet.microsoft.com/download/dotnet-framework)
 
 ## Working with Tabular Editor
 
