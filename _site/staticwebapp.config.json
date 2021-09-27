@@ -1,6 +1,16 @@
 {
     "routes": [
         {
+            "route": "/Advanced-Scripting.html",
+            "redirect": "/te3/features/csharp-scripts.html",
+            "statusCode": 301
+        },
+        {
+            "route": "/roslyn",
+            "redirect": "/te3/features/csharp-scripts.html#compiling-with-roslyn",
+            "statusCode": 301
+        },
+        {
             "route": "/tmuo",
             "redirect": "/te3/features/user-options.html",
             "statusCode": 301
