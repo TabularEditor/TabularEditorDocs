@@ -19,6 +19,7 @@
 ### @csharp-scripts
 ## @supported-files
 ## @preferences
+## @user-options
 ## @security-privacy
 
 # Tutorials and walkthroughs
