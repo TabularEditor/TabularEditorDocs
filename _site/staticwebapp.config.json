@@ -12,7 +12,7 @@
         },
         {
             "route": "/roslyn",
-            "redirect": "/te3/features/csharp-scripts.html#compiling-with-roslyn",
+            "redirect": "/te3/features/roslyn.html",
             "statusCode": 301
         },
         {
