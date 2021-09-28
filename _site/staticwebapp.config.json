@@ -11,6 +11,11 @@
             "statusCode": 301
         },
         {
+            "route": "/eula",
+            "redirect": "/te3/other/te3-eula.html",
+            "statusCode": 301
+        },
+        {
             "route": "/tmuo",
             "redirect": "/te3/features/user-options.html",
             "statusCode": 301
