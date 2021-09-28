@@ -40,7 +40,7 @@ If you need to create a new data source, Tabular Editor provides you with a list
 
 ![Create New Source](~/images/create-new-source.png)
 
-Note that Analysis Services and Power BI in particular supports a much wider range of data sources, however the sources listed in the screenshot above are the ones that Tabular Editor is able to connect for the purpose of automatically importing table metadata (that is, column names and data types).
+Note that Analysis Services and Power BI in particular supports a much wider range of data sources, however the sources listed in the screenshot above are the ones that Tabular Editor is able to connect for the purpose of automatically importing table metadata (that is, column names and data types). For data sources not on this list, Tabular Editor 3 can still [update table schema by utilising Analysis Services](#updating-table-schema-through-analysis-services).
 
 After choosing one of the data sources on the list, Tabular Editor displays a connection details dialog, allowing you to specify server addresses, credentials, etc. specific to the data source you want to create. The settings that you specify should be those that Tabular Editor should use for establishing a local connection to the source. These settings are saved in your @user-options.
 
@@ -101,3 +101,29 @@ To avoid breaking existing DAX formulas that rely on the `[Tax Amount]` column, 
 If you do not want the name change to be propagated to the imported column (but only want to update the SourceColumn property to reflect the changed name in the data source), you can deselect the `Name` update operation in the dropdown:
 
 ![Deselect Name](~/images/deselect-name.png)
+
+## Updating table schema through Analysis Services
+
+By default, Tabular Editor 3 attempts to connect directly to the data source, for purposes of updating the imported table schema. Naturally, this only works when the data source is one that is supported by Tabular Editor 3. If you need to update the schema of a table imported from a data source that is not supported by Tabular Editor 3, you can enable the **Use Analysis Services for change detection** option under **Tools > Preferences > Schema Compare**.
+
+![Update Table Schema Through As](../../images/update-table-schema-through-as.png)
+
+When this option is enabled and Tabular Editor 3 is connected to Analysis Services or the Power BI XMLA endpoint, you can update the schema of tables imported from **any** data source supported by Analysis Services or Power BI.
+
+> [!NOTE]
+> The **Use Analysis Services for change detection** option only works while Tabular Editor 3 is connected to Analysis Services or the Power BI XMLA endpoint. For this reason, we recommend that developers always use the [Workspace Mode](xref:workspace-mode) when developing models.
+
+When the **Use Analysis Services for change detection** option is enabled, Tabular Editor 3 will use the following technique when a schema update is requested:
+
+1. A new transaction is created against the connected Analysis Services instance
+2. A new temporary table is added to the model. This table uses a Power Query partition expression that returns the schema of the original expression, of which a schema update was requested. This is done using the [`Table.Schema` M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema).
+3. The temporary table is refreshed by Analysis Services. Analysis Services takes care of connecting to the data source in order to retrieve the updated schema.
+4. Tabular Editor 3 queries the content of the temporary table to obtain the schema metadata.
+5. The transaction is rolled back, leaving the Analysis Services database or Power BI dataset in the original state it was in before step 1.
+6. Tabular Editor 3 displays the "Apply Schema Changes" dialog as shown above, in case there are any schema changes.
+
+Using this technique, Tabular Editor 3 makes it possible to import and update tables from data sources otherwise not supported.
+
+### Importing new tables through Analysis Services
+
+In order to import a table from a data source otherwise not suported, you can simply copy an existing table from that data source, modify the M expression on the partition query of the copied table, then save your changes to the workspace database and update the table schema as described above.
