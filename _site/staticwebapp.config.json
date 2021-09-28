@@ -1,6 +1,11 @@
 {
     "routes": [
         {
+            "route": "/privacy-policy.html",
+            "redirect": "/te3/other/privacy-policy.html",
+            "statusCode": 301
+        },
+        {
             "route": "/Advanced-Scripting.html",
             "redirect": "/te3/features/csharp-scripts.html",
             "statusCode": 301
