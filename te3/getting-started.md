@@ -59,6 +59,18 @@ A system administrator may assign Tabular Editor 3 licenses by specifying the Li
 
 ![Registry Editor](~/images/registry-editor.png)
 
+### Changing a license key through the registry
+
+If for some reason you are unable to change the license key using the procedure outlined above, you can always "reset" the license assigned to Tabular Editor 3 by using the Registry Editor.
+
+1. Close all instances of Tabular Editor 3
+2. Open the Registry Editor in Windows (Start > Run > regedit.msc)
+3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above)
+4. Delete all values within this key
+5. Close the Registry Editor and restart Tabular Editor 3
+
+Tabular Editor 3 should now prompt you for a license key, similar to when the tool was first installed on the machine.
+
 ## Next steps
 
 - [Overview of Tabular Editor 3's user interface](xref:user-interface)
