@@ -21,6 +21,11 @@
             "statusCode": 301
         },
         {
+            "route": "/workspace",
+            "redirect": "/te3/tutorials/workspace-mode.html",
+            "statusCode": 301
+        },
+        {
             "route": "/Workspace-Database.html",
             "redirect": "/te3/tutorials/workspace-mode.html",
             "statusCode": 301
