@@ -13,10 +13,6 @@ We recommend downloading the MSI 64-bit installer, which is suitable in most sce
 
 ![Install](~/images/install.png)
 
-### Opting out of telemetry collection
-
-Tabular Editor 3 collects anonymous usage data and telemetry, which helps us improve the product. You can opt out at any time by launching Tabular Editor 3 and navigating to **Tools > Preferences > Updates and Feedback**. Uncheck the **Help improve Tabular Editor by collecting anonymous usage data** checkbox to opt out.
-
 ## Activating your installation
 
 The first time you launch Tabular Editor 3 on a new machine, you are prompted to activate the product.
@@ -32,13 +28,6 @@ Once you purchase a license for Tabular Editor 3, you should receive an e-mail w
 > [!NOTE]
 > For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
 
-### Requesting a trial license
-
-If you haven't used Tabular Editor 3 before, you are eligible to a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
-
-> [!NOTE]
-> Tabular Editor ApS will not sent unsolicited e-mails or forward your e-mail address to third parties, when signing up for a 30-day trial license. View our @privacy-policy for more information.
-
 ### Changing a license key
 
 When Tabular Editor 3 is activated, you may change your license key in the Help menu by choosing "About Tabular Editor".
@@ -51,4 +40,36 @@ For more details on managing the license keys, see [Registry details](xref:getti
 
 ## Basic configuration
 
-WIP
+After Tabular Editor 3 is activated, we recommend spending a few minutes familiarizing yourself with the [basic interface](xref:user-interface). In addition, Tabular Editor 3 provides many different configuration options. The default settings are sufficient for most development scenarios, but there are a few important configuration options that you should always review.
+
+### Check for updates on start-up
+
+By default, whenever Tabular Editor 3 is launched, the tool will check online to see if a newer version is available. You can control how this update check is performed under **Tools > Preferences > Updates and Feedback**.
+
+> [!NOTE]
+> We recommend always using the latest version of Tabular Editor 3. Our support team will generally assume that you are always using the latest version before submitting a bug report.
+
+### Opting out of telemetry collection
+
+Tabular Editor 3 collects anonymous usage data and telemetry, which helps us improve the product. You can opt out at any time by launching Tabular Editor 3 and navigating to **Tools > Preferences > Updates and Feedback**. Uncheck the **Help improve Tabular Editor by collecting anonymous usage data** checkbox to opt out.
+
+![Collect Telemetry](~/images/collect-telemetry.png)
+
+### Proxy settings
+
+If you are on a network with limited Internet connectivity, you can specify the address, username and password of a proxy server under **Tools > Preferences > Proxy Settings**. This is required before Tabular Editor 3 can use any features that rely on outgoing web requests. Specifically, these are:
+
+- Update checks
+- Product activation
+- DAX Formatting
+- Download of Best Practice Rules from external URLs
+
+### Other preferences
+
+In addition to the settings mentioned above, Tabular Editor 3 contains many other settings for controlling various application behavior, allowing you to closely tailor the tool to your needs. To learn more about other these settings, see @preferences.
+
+## Next steps
+
+- @migrate-from-vs
+- @migrate-from-desktop
+- @migrate-from-te2

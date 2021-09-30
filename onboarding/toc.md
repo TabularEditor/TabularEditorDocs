@@ -1,4 +1,4 @@
-﻿# [Tabular Editor 3 Onboarding](index.md)
+﻿# [Welcome](index.md)
 # @general-introduction
 ## @installation-activation-basic
 ## @migrate-from-vs
