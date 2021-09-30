@@ -1,5 +1,5 @@
 ﻿---
-title: Importing Tables
+title: Tabular Editor 3
 author: Daniel Otykier
 ---
 # Tabular Editor 3

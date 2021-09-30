@@ -4,7 +4,7 @@
     "build": {
         "content": [
             {
-                "files": [ "te3/**/*.md", "te2/**/*.md", "common/**/*.md", "*.md", "toc.yml" ]
+                "files": [ "te3/**/*.md", "te2/**/*.md", "onboarding/**/*.md", "common/**/*.md", "*.md", "toc.yml" ]
             }
         ],
         "template": [

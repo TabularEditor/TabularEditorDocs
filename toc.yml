@@ -1,11 +1,14 @@
 ﻿- name: Home
   href: index.md
+- name: TE2 Docs
+  href: te2/
+  homepage: te2/Getting-Started.md
+- name: TE3 Onboarding
+  href: onboarding/
+  homepage: onboarding/index.md
+- name: TE3 Docs
+  href: te3/
+  homepage: te3/getting-started.md
 - name: Common features
   href: common/
   homepage: common/common-features.md
-- name: Tabular Editor 2
-  href: te2/
-  homepage: te2/Getting-Started.md
-- name: Tabular Editor 3
-  href: te3/
-  homepage: te3/getting-started.md
