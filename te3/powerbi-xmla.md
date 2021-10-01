@@ -40,7 +40,7 @@ The workflow is then:
 
 1. Create a new data model in Tabular Editor or connect to an existing dataset through the Power BI XMLA endpoint
 2. Save this model as a **Model.bim** file or use Tabular Editor's [Save to folder](xref:save-to-folder) option.
-3. Whenever you want to make changes to the model, load the file/folder you saved in step 2. The first time you do this, decide whether you want to use a [workspace database](@workspace-mode) or not.
+3. Whenever you want to make changes to the model, load the file/folder you saved in step 2. The first time you do this, decide whether you want to use a [workspace database](xref:workspace-mode) or not.
 4. Once you are ready to publish your changes to the Power BI service, perform a deployment through Tabular Editor (**Model > Deploy...**), thus creating a new or overwriting an existing dataset in a Power BI workspace.
 
 ## Next steps

@@ -20,3 +20,5 @@ However, as you familiarize yourself with Tabular Editor 3, you might still find
 
 The only exception is, if you decide to use Tabular Editor's [Save-to-folder](xref:parallel-development#what-is-save-to-folder) feature, as this file format is not supported by Visual Studio. However, you can easily recreate a Model.bim file for use with Visual Studio, using the **File > Save as...** option in Tabular Editor.
 
+> [!NOTE]
+> If you often face the need to convert back and forth between Tabular Editor's folder structure file format and Visual Studio's model.bim file format, consider writing a small Windows command script using [Tabular Editor 2.x CLI](xref:command-line-options) to automate the conversion process.

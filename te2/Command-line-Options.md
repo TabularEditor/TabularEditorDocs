@@ -1,4 +1,10 @@
-﻿# Command Line
+﻿---
+uid: command-line-options
+title: Command Line
+author: Daniel Otykier
+updated: 2021-08-26
+---
+# Command Line
 
 Tabular Editor can be executed from the command-line to perform various tasks, which may be useful in Automated Build and Deployment scenarios, etc.
 
