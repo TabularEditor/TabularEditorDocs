@@ -76,7 +76,7 @@ The table below lists the number of installations that can be active at a time, 
 
 | |Desktop|Business|Enterprise|
 |---|---|---|---|
-|Installations|1|1|3|
+|Installations per user|1|1|3|
 
 You can deactivate an existing installation at any time from within the tool itself, by choosing the "Change license key..." option under "Help > About Tabular Editor". You may also <a href="mailto:support@tabulareditor.com?subject=Deactivation">contact support</a> if you need our assistance in deactivating an installation.
 
