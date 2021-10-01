@@ -47,7 +47,7 @@ Similarly, leaving out "Deploy Table Partitions", will make sure that existing p
 When the "Deploy Roles" box is checked, the roles in the target database will be updated to reflect what you have in the loaded model, however if the "Deploy Role Members" is unchecked, the members of each role will be unchanged in the target database.
 
 ## Metadata Backup
-If you wish, Tabular Editor can automatically save a backup copy of the existing model metadata, prior to each save (when connected to an existing database) or deployment. This is useful if you're not using Version Control software, but still need to rollback to a previous version of your model.
+If you wish, Tabular Editor can automatically save a backup copy of the existing model metadata, prior to each save (when connected to an existing database) or deployment. This is useful if you're not using a version control system, but still need to rollback to a previous version of your model.
 
 To enable this setting, go to "File" > "Preferences", enable the checkbox and choose a folder to place the metadata backups:
 
@@ -66,7 +66,7 @@ To visualize the dependency tree, right-click the object in the explorer tree an
 Select one or more cultures in the Explorer Tree, right-click and choose "Export Translations..." to generate a .json file that can be imported later in either Tabular Editor or Visual Studio. Choose "Import Translations..." to import a corresponding .json file. You can choose whether to overwrite existing translations. If you don't, translations defined in the .json file will only be applied to objects that do not already have a translation for the given culture.
 
 ## Folder Serialization
-This feature allows you to more easily integrate your SSAS Tabular Models in a file-based source control environment such as TFS, SubVersion or Git. By choosing "File" > "Save to Folder...", Tabular Editor will deconstruct the Model.bim file and save its content as separate files in a folder structure similar to the structure of the JSON within the Model.bim. When subsequently saving the model, only files with changed metadata will be touched, meaning most version control software can easily detect which changes have been done to the model, making source merging and conflict handling a lot easier, than when working with a single Model.bim file.
+This feature allows you to more easily integrate your SSAS Tabular Models in a file-based source control environment such as TFS, SubVersion or Git. By choosing "File" > "Save to Folder...", Tabular Editor will deconstruct the Model.bim file and save its content as separate files in a folder structure similar to the structure of the JSON within the Model.bim. When subsequently saving the model, only files with changed metadata will be touched, meaning most version control systems can easily detect which changes have been done to the model, making source merging and conflict handling a lot easier, than when working with a single Model.bim file.
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/22483167/5e07ad52-e7fc-11e6-890f-5c0d20fff0cb.png)
 
