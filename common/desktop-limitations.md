@@ -4,6 +4,23 @@ When using Tabular Editor (any edition) as an [external tool for Power BI Deskto
 
 The limitations mentioned in this article apply to Tabular Editor 2.x as well.
 
+## Power BI file types
+
+When using Power BI, you will encounter two different file types commonly used:
+
+- **.pbix** (Power BI Report)
+- **.pbit** (Power BI Template)
+
+Both these files can be opened in Power BI Desktop and essentially defines everything related to a Power BI report: Data sources, Power Query transformations, the tabular data model, report pages, visuals, bookmarks, etc.
+
+The main difference between the two, is that the **.pbix file contains model data**, where as the **.pbit file contains no data**. In addition, it turns out that the latter of the two contains model **metadata** in the JSON-based [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) format, which can be loaded by Tabular Editor. A .pbix file on the other hand, does not contain the model metadata in this format, and therefore, **a .pbix file cannot be loaded directly in Tabular Editor** in any way. Instead, you will have to rely on the External Tools integration, which requires you to load the .pbix file in Power BI Desktop, as described below.
+
+> [!WARNING]
+> Even though it is technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. As such, there is always a risk of making changes to the .pbit file which would cause the file to become unloadable in Power BI Desktop, or cause stability issues once loaded. In this case, Microsoft support will be unable to assist you.
+
+> [!NOTE]
+> Since **Tabular Editor 3 Desktop Edition** is only intended to be used as an External Tool for Power BI Desktop, this edition does not allow loading and saving a .pbit file. You may however still use Tabular Editor 2.x for this purpose. See <xref:editions> to learn more about the difference between the Tabular Editor 3 editions.
+
 ## External Tool architecture
 
 When a Power BI Desktop report (.pbix or .pbit file) contains a data model (that is, one or more tables have been added in Import or DirectQuery mode), that data model is hosted inside an instance of Analysis Services managed by Power BI Desktop. External Tools may connect to this instance of Analysis Services for different purposes.
