@@ -87,7 +87,11 @@ To learn more, see <xref:importing-tables>.
 
 ### Workspace mode
 
-(WIP)
+Tabular Editor 3 introduces the concept of **workspace mode**, in which model metadata is loaded from disk (Model.bim or Database.json), and then immediately deployed to an Analysis Services instance of your choice. Whenever you hit Save (CTRL+S), the workspace database is synchronized and updated model metadata is saved back to the disk. The advantage of this approach, is that Tabular Editor is connected to Analysis Services, thus enabling the [connected features](#connected-features) listed below, while also making it easy to update the source files on disk. With Tabular Editor 2.x, you had to open a model from a database, and then remember to manually save to disk once in a while.
+
+This approach is ideal to enable [parallel development](xref:parallel-development) and model metadata integration with version control systems.
+
+For more information, see <xref:workspace-mode>.
 
 ### Connected features
 
@@ -103,15 +107,34 @@ The new connected features are:
 
 ### Diagrams
 
-(WIP)
+One highly requested feature of Tabular Editor 2.x, was the ability to better visualize relationships between tables. With Tabular Editor 3, you can now create model diagrams. Each diagram is a simple JSON file that holds the names and coordinates of tables to be included in the diagram. Tabular Editor 3 then renders the tables and relationships and provides features for easily editing relationships, adding additional tables to the diagram based on existing relationships, etc.
 
-### Macro recorder
+![Easily add related tables](~/images/diagram-menu.png)
 
-(WIP)
+See [Working with diagrams](xref:importing-tables-data-modeling#working-with-diagrams) for more information.
+
+### C# Scripts and Macro recorder
+
+The **Advanced Scripting** feature of Tabular Editor 2.x has carried over to Tabular Editor 3 as **C# Scripts**. One important difference in Tabular Editor 3 is that you are no longer limited to working with a single script. Instead, using the **File > New > C# Script** option, you can create and work with as many C# scripts as you need. Similar to Tabular Editor 2.x, these scripts can be saved as reusable actions that are integrated directly into the right-click context menu of the TOM Explorer. In Tabular Editor 3, we call these actions **Macros**, and you can even create your own menus and toolbars to which you can add macros.
+
+Most importantly, Tabular Editor 3 features a **Macro recorder** that you can use to automatically generate C# code from user interactions.
+
+> [!NOTE]
+> At the time of writing, the C# script editor in Tabular Editor 3 does not include IntelliSense-like featurs. This is scheduled for release at a later time.
+
+To learn more, see @cs-scripts-and-macros.
 
 ### DAX Scripting
 
-(WIP)
+The last important feature you need to know about, when coming from Tabular Editor 2.x, is **DAX Scripting**. With this feature, you can create documents that allow you to edit the DAX expression and basic properties of several calculated objects at once. Calculated objects are measures, calculated columns, calculated tables, etc.
+
+This is very convenient when authoring complex business logic across several objects. By (multi)selecting objects in the TOM Explorer, right-clicking and choosing the **Script DAX** option, you get a new DAX script containing the definitions of all selected objects. The DAX script editor of course has all of the same DAX capabilities of the Expression Editor and the DAX query editor. 
+
+When working in **connected** or **workspace** mode, DAX scripting is an incredibly powerful tool to quickly modify and test updated business logic, for example when using it in conjunction with a Pivot Grid as shown in the screenshot below. Simply hitting SHIFT+F5 causes the database to be updated based on the DAX expressions in the script, after which the Pivot Grid will immediately update.
+
+![Dax Scripting And Pivot](../images/dax-scripting-and-pivot.png)
+
+To learn more, see @dax-script-introduction.
 
 ## Next steps
 
