@@ -110,7 +110,7 @@ As such, Save-to-folder serialization greatly reduces the chance that merge conf
 
 ## UI differences
 
-This section lists the most important differences between the user interfaces of Tabular Editor 3 and Visual Studio for tabular model development.
+This section lists the most important differences between the user interfaces of Tabular Editor 3 and Visual Studio for tabular model development. If you are an avid Visual Studio user, you should feel quite comfortable with Tabular Editor 3's user interface. If you would like a more detailed walkthrough, please see <xref:user-interface>.
 
 ### Tabular Model Explorer vs. TOM Explorer
 

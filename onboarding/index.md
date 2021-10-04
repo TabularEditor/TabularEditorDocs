@@ -22,8 +22,8 @@ Topics covered in this guide:
   - @migrate-from-te2
 - @parallel-development
   - Optimizing development workflow using Workspace Mode
-  - Setting up Power BI Dataset CI/CD with Azure DevOps and Tabular Editor
-  - Setting up Analysis Services CI/CD with Azure DevOps and Tabular Editor
+  - @powerbi-cicd
+  - @as-cicd
 - Boosting productivity with Tabular Editor 3
   - @importing-tables-data-modeling
   - @refresh-preview-query

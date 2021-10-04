@@ -1,6 +1,6 @@
 ﻿---
-uid: creating-macros
-title: (Tutorial) Creating macros
+uid: properties-view
+title: Properties view
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -9,6 +9,6 @@ applies_to:
     - edition: Business
     - edition: Enterprise
 ---
-# (Tutorial) Creating macros
+# Using the Properties grid in Tabular Editor 3
 
 (WIP)
