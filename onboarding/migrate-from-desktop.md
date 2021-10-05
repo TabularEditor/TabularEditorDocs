@@ -133,7 +133,7 @@ Once the measure is selected, locate the `Format String` property in the **Prope
 
 ### How to modify the DAX expression of multiple measures
 
-Tabular Editor 3 allows you to select multiple measures in order to create a [DAX Script](xref:dax-scripts), which lets you modify the DAX expression and various properties of all selected measures at once.
+Tabular Editor 3 allows you to select multiple measures in order to create a **DAX Script**, which lets you modify the DAX expression and various properties of all selected measures at once.
 
 To create a DAX script based on existing measures, simply select the measures in the **TOM Explorer** (hold down the CTLR key to select multiple objects or hold down the SHIFT key to select a range of objects). Then, right click and hit **Script DAX**.
 
@@ -143,6 +143,8 @@ You can add or modify properties such as `Description`, `FormatString`, `Visible
 
 Hit F5 to apply the script to the data model. Note that unlike the **Expression Editor**, navigating to a different object will not automatically apply any changes made to the script. You can still use the **Edit > Undo** (CTRL+Z) option to roll back any changes applied by a DAX script.
 
+See @dax-script-introduction for more information.
+
 ### How to preview data in a table
 
 To view the contents of a table (similar to the Data Tab in Power BI Desktop), simply right-click on a table and choose "Preview data". This will open a new tab containing a preview of the table content. You can scroll through all rows of the table, as well as apply sorting or filtering to columns. Unlike Power BI Desktop, you can open as many of these preview tabs as you like and arrange them next to each other in the user interface. The preview also works for tables in [DirectQuery mode](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery) (although the preview will be limited to the first 100 records).
@@ -151,6 +153,8 @@ To view the contents of a table (similar to the Data Tab in Power BI Desktop), s
 
 > [!NOTE]
 > The **Preview data** feature is only available when Tabular Editor is connected to Power BI Desktop or a dataset in the Power BI XMLA endpoint.
+
+See @refresh-preview-query for more information.
 
 ### How to add a calculation group
 
@@ -171,6 +175,8 @@ To add a new table to a model, use the **Model > Import tables...** option. Tabu
 
 > [!IMPORTANT]
 > This option is not available by default when using Tabular Editor as an external tool, since adding/editing tables through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).
+
+See @importing-tables-data-modeling for more information.
 
 ### How to modify a Power Query expression on a table
 
@@ -207,6 +213,8 @@ The easiest way to add relationships between two tables is to create a new diagr
 4. Confirm the relationship settings and hit "OK".
 
 ![Shared Expression](~/images/create-relationship-through-diagram.gif)
+
+See [Working with diagrams](xref:importing-tables-data-modeling#working-with-diagrams) for more information.
 
 > [!IMPORTANT]
 > Relationships cannot be modified when using Tabular Editor as an external tool, since editing relationships through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).

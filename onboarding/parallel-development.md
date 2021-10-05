@@ -100,20 +100,86 @@ To enable parallel development, we must be able to store the model metadata in o
 > [!NOTE]
 > Power BI Desktop is still needed for purpose of creating the visual part of the report. It is a [best practice to always separate reports from models](https://docs.microsoft.com/en-us/power-bi/guidance/report-separate-from-model). In case you have an existing Power BI file that contains both, [this blog post](https://powerbi.tips/2020/06/split-an-existing-power-bi-file-into-a-model-and-report/) ([video](https://www.youtube.com/watch?v=PlrtBm9YN_Q))  describes how to split it into a model file and a report file.
 
-# Using git
+# Tabular Editor and git
 
-(WIP)
+Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. It is the most popular version control system right now, and it is available through multiple hosted options, such as [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/repos/), [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/) and others.
+
+A detailed description of git is outside the scope of this article. There are, however, many resources available online if you want to learn more. We recommend the [Pro Git](https://git-scm.com/book/en/v2) book for reference.
+
+> [!NOTE]
+> Tabular Editor 3 does not currently have any integration with git or other version control systems. To manage your git repository, commit code changes, create branches, etc., you will have to use the git command line or another tool, such as the [Visual Studio Team Explorer](https://docs.microsoft.com/en-us/azure/devops/user-guide/work-team-explorer?view=azure-devops#git-version-control-and-repository) or [TortoiseGit](https://tortoisegit.org/).
+
+As mentioned earlier, we recommend using Tabular Editor's [Save to Folder](#what-is-save-to-folder) option when saving model metadata to a git code repository.
 
 ## Branching strategy
 
-(WIP)
+What follows is a discussion of branching strategies to employ when developing tabular models.
+
+The branching strategy will dictate what the daily development workflow will be like, and in many cases, branches will tie directly into the project methods used by your team. For example, using the [agile process within Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/boards/work-items/guidance/agile-process-workflow?view=azure-devops), your backlog would consist of **Epics**, **Features**, **User Stories**, **Tasks** and **Bugs**.
+
+In the agile terminology, a **User Story** is a deliverable, testable piece of work. The User Story may consist of several **Tasks**, that are smaller pieces of work that need to be performed, typically by a developer, before the User Story may be delivered. In the ideal world, all User Stories have been broken down into manageable tasks, each taking only a couple of hours to complete, adding up to no more than a handful of days for the entire User Story. This would make a User Story an ideal candidate for a so-called Topic Branch, where the developer could make one or more commits for each of the tasks within the User Story. Once all tasks are done, you want to deliver the User Story to the client, at which time the topic branch is merged into a delivery branch (for example, a "Test" branch), and the code deployed to a testing environment.
+
+Determining a suitable branching strategy depends on many different factors. In general, Microsoft recommends the [Trunk-based Development](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops) ([video](https://youtu.be/t_4lLR6F_yk?t=232)) strategy, for agile and continuous delivery of small increments. The main idea is to create branches off the "Main" branch for every new feature or bugfix (see image below). Code review processes are enforced through pull requests from feature branches into Main, and using the Branch Policy feature of Azure DevOps, we can set up rules that require code to build cleanly before a pull request can be completed.
+
+![Trunk Based Development](~/images/trunk-based-development.png)
+
+### Trunk-based Development
+
+However, such a strategy might not be feasible in a Business Intelligence development teams, for a number of reasons:
+
+- New features often require prolonged testing and validation by business users, which may take several weeks to complete. As such, you will likely need a user-faced test environment.
+- BI solutions are multi-tiered, typically consisting of a Data Warehouse tier with ETL, a Master Data Management tier, a semantic layer and reports. Dependencies exist between these layers, that further complicate testing and deployment.
+- The BI team may be responsible for developing and maintaining several different semantic models, serving different areas of business (Sales, Inventory, Logistics, Finance, HR, etc.), at different maturity stages and at varying development pace.
+- The most important aspect of a BI solution is the data! As a BI developer, you don not have the luxury of simply checking out the code from source control, hitting F5 and having a full solution up and running in the few minutes it takes to compile the code. Your solution needs data, and that data has to be loaded, ETL'ed or processed across several layers to make it to the end user. Including data in your DevOps workflows could blow up build and deployment times from minutes to hours or even days. In some scenarios, it might not even be possible, due to ressource or economy constraints.
+
+There is no doubt that a BI team would benefit from a branching strategy that supports parallel development on any of the layers in the full BI solution, in a way that lets them mix and match features that are ready for testing. But especially due to the last bullet point above, we need to think carefully about how we are going to handle the data. If we add a new attribute to a dimension, for example, do we want to automatically load the dimension as part of our build and deployment pipelines? If it only takes a few minutes to load such a dimension, that would probably be fine, but what if we are adding a new column to a multi-billion row fact table? And if developers are working on new features in parallel, should each developer have their own development database, or how do we otherwise prevent them from stepping on each others toes in a shared database?
+
+There is no easy answer to the questions above - especially when considering all the tiers of a BI solution, and the different constellations and prefered workflows of BI teams across the planet. Also, when we dive into actual build, deployment and test automation, we are going to focus mostly on Analysis Services. The ETL- and database tiers have their own challenges from a DevOps perspective, which are outside the scope of this article. But before we move on, let us take a look at another branching strategy, and how it could potentially be adopted to BI workflows.
+
+### GitFlow branching and deployment environments
+
+The strategy described below is based on [GitFlow by Vincent Driessen](https://nvie.com/posts/a-successful-git-branching-model/).
+
+![Gitflow](~/images/gitflow.png)
+
+Implementing a branching strategy similar to this, can help solve some of the DevOps problems typically encountered by BI teams, provided you put some thought into how the branches correlate to your deployment environments. In an ideal world, you would need at least 4 different environments to fully support GitFlow:
+
+- The **production** environment, which should always contain the code at the HEAD of the master branch.
+- A **canary** environment, which should always contain the code at the HEAD of the develop branch. This is where you typically schedule nightly deployments and run your integration testing, to make sure that the features going into the next release to production play nicely together.
+- One or more **UAT** environments where you and your business users test and validate new features. Deployment happens directly from the feature branch containing the code that needs to be tested. You will need multiple test environments if you want to test multiple new features in parallel. With some coordination effort, a single test environment is usually enough, as long as you carefully consider the dependencies between your BI tiers.
+- One or more **sandbox** environments where you and your team can develop new features, without impacting any of the environments above. As with the test environment, it is usually enough to have a single, shared, sandbox environment.
+
+We must emphasize that there is really no "one-size-fits-all" solution to these considerations. Maybe you are not building your solution in the Cloud, and therefore do not have the scalability or flexibility to spin up new resources in seconds or minutes. Or maybe your data volumes are very large, making it impractical to replicate environments due to resource/economy/time constraints. Before moving on, also make sure to ask yourself the question of whether you truly need to support parallel development and testing. This is rarely the case for small teams with only a few stakeholders, in which case you can still benefit from CI/CD, but where GitFlow branching might be overkill.
+
+Even if you do need to support parallel development, you may find that multiple developers can easily share the same development or sandbox environment, without encountering too much trouble. Specifically for tabular models, though, we recommend that developers still use individual [workspace databases](xref:workspace-mode) to avoid "stepping over each others toes".
 
 ## Common workflow
 
-(WIP)
+Assuming you already have a git repository set up and aligned to your branching strategy, adding your tabular model "source code" to the repository is simply a matter of using Tabular Editor to save the metadata to a new branch in a local repository. Then, you stage and commit the new files, push your branch to the remote repository and create a pull request to get your branch merged into the main branch.
+
+The exact workflow depends on your branching strategy and how your git repositories have been set up. In general, the workflow would look something like this:
+
+1. Before starting work on a new feature, create a new feature branch in git. In a trunk-based development scenario, you would need the following git commands to checkout the main branch, get the latest version of the code, and create the feature branch from there:
+   ```cmd
+   git checkout main
+   git pull
+   git checkout -b "feature\AddTaxCalculation"
+   ```
+2. Open your model metadata from the local git repository in Tabular Editor. Ideally, use a [workspace database](xref:workspace-mode), to make it easier to test and debug DAX code.
+3. Make the necessary changes to your model using Tabular Editor. Continuously save the changes (CTRL+S). Regularly commit code changes to git after you save, to avoid losing work and to keep a full history of all changes that were made:
+   ```cmd
+   git add .
+   git commit -m "Description of what was changed and why since last commit"
+   git push
+   ```
+4. If you are not using a workspace database, use Tabular Editor's **Model > Deploy...** option to deploy to a sandbox/development environment, in order to test the changes made to the model metadata.
+6. When done, and all code has been committed and pushed to the remote repository, you submit a pull request in order to get your code integrated with the main branch. If a merge conflict is encountered, you will have to resolve it locally, using for example the Visual Studio Team Explorer or by simply opening the .json files in a text editor to resolve the conflicts (git inserts conflict markers to indicate which part of the code has conflicts).
+7. Once all conflicts are resolved, there may be a process of code review, automated build/test execution based on branch policies, etc. to get the pull request completed. This, however, depends on your branching strategy and overall setup.
+
+We present more details about how to configure git branch policies, set up automated build and deployment pipelines, etc. using Azure DevOps in the following articles. Similar techniques can be used in other automated build and git hosting environments, such as TeamCity, GitHub, etc.
 
 # Next steps
 
-- @optimizing-workflow-workspace-mode
 - @powerbi-cicd
 - @as-cicd
+- @optimizing-workflow-workspace-mode

@@ -27,8 +27,8 @@ Topics covered in this guide:
 - @boosting-productivity-te3
   - @importing-tables-data-modeling
   - @refresh-preview-query
-  - Creating and testing DAX calculations
+  - @creating-and-testing-dax
   - @dax-script-introduction
-  - Improve code quality with the Best Practice Analyzer
+  - @bpa
   - @cs-scripts-and-macros
-  - Personalizing and configuring Tabular Editor 3 to suit your needs
+  - @personalizing-te3
