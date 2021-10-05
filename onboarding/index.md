@@ -21,10 +21,10 @@ Topics covered in this guide:
   - @migrate-from-desktop
   - @migrate-from-te2
 - @parallel-development
-  - Optimizing development workflow using Workspace Mode
+  - @optimizing-workflow-workspace-mode
   - @powerbi-cicd
   - @as-cicd
-- Boosting productivity with Tabular Editor 3
+- @boosting-productivity-te3
   - @importing-tables-data-modeling
   - @refresh-preview-query
   - Creating and testing DAX calculations

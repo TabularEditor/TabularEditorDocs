@@ -5,7 +5,7 @@
 ## @migrate-from-desktop
 ## @migrate-from-te2
 # @parallel-development
-## Optimizing development workflow using Workspace Mode
+## @optimizing-workflow-workspace-mode
 ## @powerbi-cicd
 ## @as-cicd
 # @boosting-productivity-te3
