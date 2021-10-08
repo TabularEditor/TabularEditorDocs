@@ -6,7 +6,7 @@ updated: 2021-09-30
 applies_to:
   editions:
     - edition: Desktop
-      partial: Refreshing tables through external tools is currently not supported by Power BI Desktop
+      partial: Refreshing tables through external tools is currently not supported by Power BI Desktop, even though Tabular Editor 3 Desktop Edition allows this operation. Querying data is fully supported.
     - edition: Business
     - edition: Enterprise
 ---
@@ -59,6 +59,18 @@ While a refresh is in progress you can continue work on your data model, queryin
 > [!NOTE]
 > Currently, [Power BI Desktop does not support refresh operations triggered from external tools](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). For this reason, Tabular Editor 3 hides these options when connected to an instance of Power BI Desktop. You can override this behavior by enabling **Tools > Preferences > Allow unsupported modeling operations**.
 
+## Supported refresh operations
+
+Tabular Editor 3 supports refresh operations on different object types. The supported refresh types are shown below:
+
+- **Model** (Automatic, calculate, full)
+- **(Imported) Table** (Automatic, calculate, data only, full)
+- **Partition** (Full)
+- **Calculated Table** (Calculate)
+- **Calculation Group** (Calculate)
+
+See [Refresh Types](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) for more information about the types of refresh operations supported by Analysis Services / Power BI.
+
 # Previewing table data
 
 At certain points during DAX authoring and data model development, you may need to inspect the contents of your tables on a row-by-row basis. Of course, you could write a DAX query to achieve this, but Tabular Editor 3 makes that even easier by allowing you to preview table data directly. To do this, right-click on a table and choose the **Preview data** option.
@@ -73,7 +85,9 @@ If one or more calculated columns are in an invalid state, those columns contain
 
 # Pivot Grids
 
-After adding or editing DAX measures in a model, it is common for model developers to test these measures. Traditionally, this was typically done using client tools such as Excel or Power BI. With Tabular Editor 3, you can now use **Pivot Grids** which behave much like the famous PivotTables of Excel. To create a new Pivot Grid, use the **File > New > Pivot Grid** option. From here, you can either drag measures, columns and hierarchies from the TOM Explorer into the grid, or you can use the **Pivot Grid > Show fields** menu option to display a popup list of all fields that can be dragged into the Pivot Grid (see screenshot below).
+After adding or editing DAX measures in a model, it is common for model developers to test these measures. Traditionally, this was typically done using client tools such as Excel or Power BI. With Tabular Editor 3, you can now use **Pivot Grids** which behave much like the famous PivotTables of Excel. The Pivot Grid lets you quickly create summarized views of the data in your model, allowing you test the behavior of your DAX measures when filtering and slicing by various columns and hierarchies.
+
+To create a new Pivot Grid, use the **File > New > Pivot Grid** option. From here, you can either drag measures, columns and hierarchies from the TOM Explorer into the grid, or you can use the **Pivot Grid > Show fields** menu option to display a popup list of all fields that can be dragged into the Pivot Grid (see screenshot below).
 
 ![Show Fields Pivot](~/images/show-fields-pivot.png)
 
@@ -85,12 +99,47 @@ The Pivot Grid is automatically refreshed when a change is made to the model or 
 
 # DAX Queries
 
-(WIP)
+A more direct way to query the data in your model, is to write a DAX query. Use the **File > New > DAX Query** menu option to create a new DAX query document. You can have multiple DAX query documents open at the same time.
+
+DAX queries can be saved and loaded to and from standalone files using the `.dax` or `.msdax` file extension. See @supported-files for more information.
+
+Type your DAX `EVALUATE` query into the editor and hit **Query > Execute** (F5) to send the query to Analysis Services and see the result. By default, Tabular Editor 3 limits the number of rows returned from Analysis Services to 1000, but this can be changed under **Tools > Preferences > Data Browsing > DAX Query**. If a query exceeds this limit, Tabular Editor 3 displays a shortcut that lets you retrieve all records (see screenshot below).
+
+![Query Rowset Limit](~/images/query-rowset-limit.png)
+
+> [!WARNING]
+> Displaying a large number of records in the query result window could take a while and drastically increase the memory consumed by Tabular Editor 3.
+
+Tabular Editor 3 uses the same DAX code editor for query editing as for defining DAX expressions on objects. As such, all the features regarding code-completion, auto-formatting, etc. are available. See @dax-editor for more information. In addition, since a DAX query has a slightly different syntax than object expressions, the DAX query editor provides a few more options for common tasks.
+
+For example, if you right-click on a measure reference, there is an option to **Define measure** as seen on the screenshot below. This option will add a `DEFINE MEASURE` statement at the top of your DAX query, allowing you to easily modify the DAX expression of that measure within the scope of the query.
+
+![Dax Query Features](~/images/dax-query-features.png)
+
+In addition, a DAX query can contain multiple `EVALUATE` statements. When that is the case, Tabular Editor 3 displays the result from each such statement on a separate, numbered tab. If you only want to execute a single `EVALUATE` statement, even though your document contains multiple, you can place the cursor somewhere within the statement you want to execute, and then use the **Query > Execute selection** (SHIFT+F5) option.
+
+A DAX query in Tabular Editor 3 is automatically refreshed when a change is made to the model or a refresh operation finishes. You can toggle this auto-refresh capability within the **Query** menu.
 
 # VertiPaq Analyzer
 
-(WIP)
+Tabular Editor 3 includes a version of the open-source [VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) tool, created by [SQLBI](https://sqlbi.com). VertiPaq Analyzer is useful to analyze VertiPaq storage structures for your Power BI or Tabular data model.
+
+With Tabular Editor 3, you can collect VertiPaq Analyzer statistics while you are connected to any instance of Analysis Services. You can also export the statistics as a [.vpax file](https://www.youtube.com/watch?v=zRa9y01Ub30), or import statistics from a .vpax file.
+
+To collect statistics, simply hit the **Collect stats** button in the **VertiPaq Analyzer** view.
+
+![Vertipaq Analyzer Collect Stats](~/images/vertipaq-analyzer-collect-stats.png)
+
+Once statistics are collected, VertiPaq Analyzer displays a summary of the model size, number of tables, etc. You can find more detailed statistics on the **Tables**, **Columns**, **Relationships** and **Partitions** tabs.
+
+Additionally, whenever statistics have been loaded, Tabular Editor 3 will display cardinality and size information as a tooltip when hovering the mouse cursor over objects in the TOM Explorer:
+
+![Vertipaq Analyzer Stats in TOM Explorer](~/images/vertipaq-analyzer-stats.png)
+
+...or when hovering the mouse cursor over object references in DAX expressions:
+
+![Vertipaq Analyzer Stats in a DAX expression](../images/vertipaq-analyzer-stats-dax.png)
 
 # Next steps
 
-(WIP)
+- @creating-and-testing-dax

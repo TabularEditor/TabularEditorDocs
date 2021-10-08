@@ -75,3 +75,4 @@ Tabular Editor 3 should now prompt you for a license key, similar to when the to
 
 - [Overview of Tabular Editor 3's user interface](xref:user-interface)
 - [What's new in Tabular Editor 3](whats-new.md)
+- [Tabular Editor 3 Onboarding Guide](xref:onboarding-te3)

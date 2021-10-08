@@ -12,4 +12,8 @@ Tabular Editor 3 uses a number of different file formats and document types, som
 
 Supporting files are files which are not used by Analysis Services or Power BI. Instead, these files all support different kinds of development workflow in Tabular Editor 3 and other tools.
 
+## Diagram file (.te3diag)
+
+
+
 (WIP)

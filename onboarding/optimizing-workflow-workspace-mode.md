@@ -12,5 +12,10 @@ applies_to:
 ---
 
 # Optimizing development workflow using Workspace Mode
+[!include[workspace-mode](~/te3/workspace-mode.partial.md)]
 
-(WIP)
+# Next steps
+
+- @powerbi-cicd
+- @as-cicd
+- @boosting-productivity-te3

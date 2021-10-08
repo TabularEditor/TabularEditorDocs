@@ -57,3 +57,4 @@ In addition to the features listed above, Tabular Editor 3 will have full featur
 - [Overview of Tabular Editor 3's User Interface](xref:user-interface)
 - @security-privacy
 - @preferences
+- [Tabular Editor 3 Onboarding Guide](xref:onboarding-te3)

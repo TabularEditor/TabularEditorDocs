@@ -75,7 +75,7 @@ If you are new to Tabular Editor, we recommend reading through the following res
 
 - [Getting to know Tabular Editor 3's User Interface](xref:user-interface)
 - [TOM Explorer view](xref:tom-explorer-view)
-- [Properties grid](xref:properties-view)
+- [Properties view](xref:properties-view)
 - [DAX editor](xref:dax-editor)
 
 ## Tabular Editor 3 how-tos
