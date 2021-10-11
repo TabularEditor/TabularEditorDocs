@@ -106,6 +106,18 @@ Whenever a change is made to an object or property in Tabular Editor, the comple
 > [!NOTE]
 > All text editors in Tabular Editor 3 have their own undo/redo history, so if the cursor is currently within a text editor, the keyboard shortcuts will undo/redo the typing within that editor. You can use the options in the **Edit** menu to perform an undo/redo at the model level, or deactivate the current text editor by clicking on another element in the user interface (such as the TOM Explorer).
 
+# Navigation
+
+While the cursor is over an object reference in the DAX editor, right-click and choose **Go to definition** (F12) to quickly jump to that object. Of course, you can also navigate between objects using the TOM Explorer.
+
+You can use the arrow buttons in the top right corner of the **Expression Editor** to jump quickly back and forth between objects visited.
+
+## DAX Dependencies
+
+To view DAX dependencies between objects, select an object in the **TOM Explorer**, then right-click and choose **Show dependencies** (SHIFT+F12). This will open a window that displays the dependencies (in both directions) of the selected object. Double-click on an object in this window to quickly navigate to that object.
+
+![Dax Dependencies And Tom Explorer](~/images/dax-dependencies-and-tom-explorer.png)
+
 # Display folders
 
 Once your model starts to gain a considerable number of measures, a good practice is to organize them using Display Folders. In Tabular Editor, to create a Display Folder, either edit the `Display Folder` property through the **Properties** view, or alternatively, right-click on the measure(s), and select the **Create > Display Folder** option.
