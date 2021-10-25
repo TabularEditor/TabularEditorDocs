@@ -56,6 +56,11 @@
             "statusCode": 301
         },
         {
+            "route": "/other/downloads.html",
+            "redirect": "/te3/other/downloads.html",
+            "statusCode": 301
+        },
+        {
             "route": "/te3/downloads.html",
             "redirect": "/te3/other/downloads.html",
             "statusCode": 301
