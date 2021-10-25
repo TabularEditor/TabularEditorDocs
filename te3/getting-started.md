@@ -8,7 +8,7 @@ updated: 2021-09-08
 
 ## Installation
 
-Download the latest version of Tabular Editor 3 from our [downloads page](xref:downloads).
+Download the latest version of Tabular Editor 3 from our [downloads page](~/te3/other/downloads.html).
 
 ## Prerequisites
 
