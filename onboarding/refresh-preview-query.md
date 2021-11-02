@@ -120,6 +120,23 @@ In addition, a DAX query can contain multiple `EVALUATE` statements. When that i
 
 A DAX query in Tabular Editor 3 is automatically refreshed when a change is made to the model or a refresh operation finishes. You can toggle this auto-refresh capability within the **Query** menu.
 
+# Impersonation
+
+When querying the data in the model, it is sometimes useful to be able to impersonate a specific user or a combination of roles, to see what the behavior of the model from an end user perspective would be. Tabular Editor 3 allows you to impersonate a specific user or one or more roles, by clicking on the **Impersonate...** button. This applies to [Table previews](#previewing-table-data), [Pivot Grids](#pivot-grids) and [DAX queries](dax-queries). 
+
+> [!NOTE]
+> To impersonate a user, Tabular Editor adds the [`EffectiveUserName` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) to the connection string, when connecting to Analysis Services. To impersonate a role, Tabular Editor adds the [`Roles` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) to the connection string. This only applies to the data view (i.e. the DAX query, the Pivot Grid or the Table Preview) where the impersonation is specified.
+
+When clicking on the **Impersonation..** button (which can also be found through the **Query**, **Pivot Grid** or **Table Preview** menu, depending on which type of data view is active), a popup allows you to specify either a user, or select one or more roles.
+
+![Select Impersonation](~/images/select-impersonation.png)
+
+Once the impersonation is enabled, the **Impersonation..** button is checked, and the impersonation will be applied to the current data view. By clicking on the small arrow next to the **Impersonation..** button, you can view and quickly switch between the 10 most recent impersonations used.
+
+![Impersonation Dropdown](~/images/impersonation-dropdown.png)
+
+When auto-refresh is enabled on a data view, changing the impersonation will immediately refresh the view. 
+
 # VertiPaq Analyzer
 
 Tabular Editor 3 includes a version of the open-source [VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) tool, created by [SQLBI](https://sqlbi.com). VertiPaq Analyzer is useful to analyze VertiPaq storage structures for your Power BI or Tabular data model.
