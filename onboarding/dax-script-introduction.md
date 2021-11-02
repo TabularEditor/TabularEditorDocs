@@ -30,15 +30,21 @@ DAX scripts can be saved as text files, using the `.te3daxs` file extension. To 
 > [!NOTE]
 > DAX scripts are not model specific, but since DAX expressions may point to measures, columns and tables defined in the model, there are no guarantees that any DAX script can be applied to any model. DAX scripts are mostly useful for working with several DAX objects within a single document, in the context of a specific data model.
 
-## DAX script features
+## DAX script editor
 
-The DAX script editor has all the capabilities of the DAX editor used elsewhere in Tabular Editor 3. Specifically, auto-complete, auto-formatting, calltips, etc. In addition, to easily manage large DAX scripts, two dropdowns are displayed at the top of the DAX script view. The dropdown on the left allows you to jump between objects defined in the script, where as the dropdown on the right allows you to jump between properties on the current object.
+The DAX script editor has all the capabilities of the DAX editor used elsewhere in Tabular Editor 3. Specifically, auto-complete, auto-formatting, calltips, etc.
+
+In addition, to easily manage large DAX scripts, two dropdowns are displayed at the top of the DAX script view. The dropdown on the left allows you to jump between objects defined in the script, where as the dropdown on the right allows you to jump between properties on the current object.
 
 ![Dax Script Navigation](~/images/dax-script-navigation.png)
+
+## Define measures
 
 If you want to include the definition of a measure that is referenced in the script, but not already defined in the script, you can do so by right-clicking on a measure reference, and choose the "Define Measure" or "Define Measure with dependencies" option.
 
 ![Define Measure With Deps](~/images/define-measure-with-deps.png)
+
+## Shortcuts
 
 To apply the script to the model, use the following shortcuts:
 
