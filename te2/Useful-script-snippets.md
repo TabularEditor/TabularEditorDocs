@@ -1,6 +1,6 @@
 ﻿---
 uid: useful-script-snippets
-title: C# Scripts
+title: Useful script snippets
 author: Daniel Otykier
 ---
 # Useful Script Snippets

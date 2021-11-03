@@ -6,4 +6,11 @@ updated: 2021-09-28
 ---
 
 # Personalizing and configuring Tabular Editor 3 to suit your needs
+
+Tabular Editor 3 provides a wide range of configuration options, that allow you to tweak the tool to your specific needs and preferred workflows.
+
 (WIP)
+
+# Next steps
+
+- @boosting-productivity-te3
