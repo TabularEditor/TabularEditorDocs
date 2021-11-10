@@ -880,11 +880,11 @@ Copyright (C) 2000-2020 The Legion of the Bouncy Castle Inc.
 Portions of the Bouncy Castle Library used to support X.509, CMS (RFC 3852), and Time Stamp Protocol (RFC 3161).
 https://github.com/bcgit/bc-csharp/blob/master/crypto/License.html
 
-Reporting.Import (Open Source â€“ MIT License)
+Reporting.Import (Open Source â€" MIT License)
 Copyright (c) 2018 Developer Express Inc.
 https://github.com/DevExpress/Reporting.Import/blob/master/LICENSE
 
-System.Data.SQLite and System.Data.SQLite.EF6 (Open Source â€“ Microsoft Public License)
+System.Data.SQLite and System.Data.SQLite.EF6 (Open Source â€" Microsoft Public License)
 https://system.data.sqlite.org/index.html/doc/trunk/www/copyright.wiki 
 
 9. TWELVE (12) MONTH SUBSCRIPTION AND UPDATES.

@@ -17,7 +17,7 @@ To help explain things as clearly as possible in this Privacy Policy, every time
 - **Device**:Â any internet connected device such as a phone, tablet, computer or any other device that can be used to visit Tabular Editor and use the services.
 - **IP address**: Every device connected to the Internet is assigned a number known as an Internet protocol (IP) address. These numbers are usually assigned in geographic blocks. An IP address can often be used to identify the location from which a device is connecting to the Internet.
 - **Personnel**:Â refers to those individuals who are employed by Tabular Editor or are under contract to perform a service on behalf of one of the parties.
-- **Personal Data**: any information that directly, indirectly, or in connection with other information â€” including a personal identification number â€” allows for the identification or identifiability of a natural person.
+- **Personal Data**: any information that directly, indirectly, or in connection with other information â€" including a personal identification number â€" allows for the identification or identifiability of a natural person.
 - **Service**: refers to the service provided by Tabular Editor as described in the relative terms (if available) and on this platform.
 - **Third-party service**:Â refers to advertisers, contest sponsors, promotional and marketing partners, and others who provide our content or whose products or services we think may interest you.
 - **Website**: Tabular Editor."â€™s" site, which can be accessed via this URL: https://tabulareditor.com

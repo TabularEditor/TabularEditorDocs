@@ -21,3 +21,4 @@
 ## [Advanced Filtering](Advanced-Filtering-of-the-Explorer-Tree.md)
 ## [Master Model Pattern](Master-model-pattern.md)
 ## [Incremental Refresh](incremental-refresh.md)
+## [Importing Tables from Excel](importing-tables-from-excel.md)
