@@ -13,7 +13,7 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 - &#9746; Import Table Wizard (available since v. [3.1.0](release-notes/3_1_0.md))
 
 **Planned for Q4 2021:**
-- &#9744; Offline DAX formatting
+- &#9746; Offline DAX formatting (available since v. [3.1.6](release-notes/3_1_6.md))
 - &#9744; Standalone CLI application
 - &#9744; Perspective Editor (view that can be opened when selecting one or more perspectives, allowing you to check/uncheck objects visible in those perspectives)
 - &#9744; Metadata Translation Editor (view that can be opened when selecting one or more cultures, similar to the Tabular Translator tool)
