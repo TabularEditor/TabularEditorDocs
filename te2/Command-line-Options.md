@@ -29,7 +29,7 @@ Tabular Editor 2.16.0 (build 2.16.7781.40242)
 Usage:
 
 TABULAREDITOR ( file | server database ) [-S script1 [script2] [...]]
-    [-SC] [-A [rules] | -AX rules] [(-B | -F) output [id]] [-V] [-T resultsfile]
+    [-SC] [-A [rules] | -AX rules] [(-B | -F) output [id]] [-V | -G] [-T resultsfile]
     [-D [server database [-L user pass] [-O [-C [plch1 value1 [plch2 value2 [...]]]]
         [-P [-Y]] [-R [-M]]]
         [-X xmla_script]] [-W] [-E]]
@@ -56,6 +56,7 @@ database            Database ID of the model to load
   output              Full path of the folder to save to. Folder is created if it does not exist.
   id                  Optional id/name to assign to the Database object when saving.
 -V / -VSTS          Output Visual Studio Team Services logging commands.
+-G / -GITHUB        Output GitHub Actions workflow commands.
 -T / -TRX         Produces a VSTEST (trx) file with details on the execution.
   resultsfile       File name of the VSTEST XML file.
 -D / -DEPLOY        Command-line deployment
