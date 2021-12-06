@@ -66,7 +66,7 @@ If for some reason you are unable to change the license key using the procedure 
 1. Close all instances of Tabular Editor 3
 2. Open the Registry Editor in Windows (Start > Run > regedit.msc)
 3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above)
-4. Delete all values within this key
+4. Delete the User, LicenseKey and Activation values
 5. Close the Registry Editor and restart Tabular Editor 3
 
 Tabular Editor 3 should now prompt you for a license key, similar to when the tool was first installed on the machine.
