@@ -11,6 +11,11 @@
             "statusCode": 301
         },
         {
+            "route": "/Best-Practice-Analyzer.html",
+            "redirect": "/te2/Best-Practice-Analyzer.html",
+            "statusCode": 301
+        },
+        {
             "route": "/roslyn",
             "redirect": "/te3/features/roslyn.html",
             "statusCode": 301
