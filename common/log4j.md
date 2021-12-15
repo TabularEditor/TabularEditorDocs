@@ -1,3 +1,9 @@
+---
+uid: log4j
+title: Log4j vulnerability
+author: Daniel Otykier
+updated: 2021-12-15
+---
 # Log4j vulnerability
 
 On December 9, 2021, the [Log4j vulnerability](https://logging.apache.org/log4j/2.x/security.html) was uncovered. Naturally, IT organizations worldwide took steps to ensure that affected software was patched immediately.
