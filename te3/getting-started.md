@@ -36,6 +36,8 @@ Once you purchase a license for Tabular Editor 3, you should receive an e-mail w
 > [!NOTE]
 > For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
 
+Note that Tabular Editor 3 installations are activated **per user**. In other words, if multiple users share the same machine, each user will have to activate the product on their Windows user profile.
+
 ### Requesting a trial license
 
 If you haven't used Tabular Editor 3 before, you are eligible to a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
@@ -49,7 +51,14 @@ When Tabular Editor 3 is activated, you may change your license key in the Help 
 
 ![About Te3](~/images/about-te3.png)
 
-In the dialog, select "Change license key". Note that this option is only available if no model is loaded in Tabular Editor. IF you already loaded a model you can close it under File > Close model.
+In the dialog, select "Change license key". Note that this option is only available if no model is loaded in Tabular Editor. If you already loaded a model you can close it under File > Close model. Once you click "Change license key", Tabular Editor will prompt you whether you want to remove the current license:
+
+![image](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
+
+By accepting this, the current license is removed, and you will have to re-enter a license key to use the product.
+
+> [!IMPORTANT]
+> Once a license key is removed, as described above, the product will not be usable by the current user on that machine until a new license key is entered.
 
 #### Registry details
 
