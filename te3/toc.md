@@ -17,6 +17,7 @@
 ### @dax-editor
 ### @dax-scripts
 ### @csharp-scripts
+### @dax-debugger
 ## @supported-files
 ## @preferences
 ## @user-options
