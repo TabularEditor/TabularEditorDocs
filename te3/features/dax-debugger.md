@@ -91,7 +91,7 @@ This view provides information about the DAX evaluation context of the current s
 
 ![Evaluation Context](../../images/evaluation-context.png)
 
-You can double-click on an item in the Evaluation Context stack, to bring the focus to that item. This will cause all **Watch** expressions to be reevaluated in the new context (that is, all contexts from the bottom of the stack up to and including the currently focused item). This is illustrated in the animation below:
+You can double-click on an item in the Evaluation Context stack, to bring the focus to that item. This will cause all **Watch** expressions to be reevaluated in the new context (that is, all contexts from the bottom of the stack up to and including the currently focused item). This is illustrated in the animation below. Notice also how you can inspect the value of individual columns by paging through rows within the current row context:
 
 ![Call Tree](../../images/navigating-evaluation-context.gif)
 
