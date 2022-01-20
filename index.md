@@ -53,6 +53,7 @@ The table below lists all the main features of both tools.
 |C# macro recorder||<span class="emoji">&#10004;</span>|
 |Edit multiple DAX expressions in a single document using DAX scripting||<span class="emoji">&#10004;</span>|
 |[VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) integration||<span class="emoji">&#10004;</span>|
+|[DAX debugger](xref:dax-debugger)||<span class="emoji">&#10004;</span>|
 
 \***Note:** Limitations apply depending on which [edition](xref:editions) of Tabular Editor 3 you are using.
 
@@ -105,6 +106,7 @@ Tabular Editor 3.x is a more advanced application which offers a premium experie
 - Diagram editor to easily visualize and edit table relationships
 - New DAX Scripting capability to edit DAX expressions for multiple objects in a single document
 - VertiPaq Analyzer integration
+- DAX debugger
 
 ## Conclusion
 

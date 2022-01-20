@@ -19,7 +19,7 @@ Tabular Editor 3 adds the following features that are not available in the open-
   - Many Code Assist features (aka. "IntelliSense")
   - Offline syntax and semantic checking and highlighting
   - **Roadmap:** Configurable hotkeys and color schemes
-  - **Roadmap:** DAX debugging
+  - DAX debugging
 - Full offline metadata analysis with syntax and semantic checking
   - Metadata automatically inferred for calculated objects, without being connected to AS
   - Messages view that displays all DAX errors/warnings and allows you to quickly navigate to the code that has issues
@@ -35,7 +35,7 @@ Tabular Editor 3 adds the following features that are not available in the open-
   - Edit multiple measures in a single script
   - Supports editing various measure properties (DisplayFolder, Description, IsHidden, KPIs, etc.) in addition to the DAX expression itself
   - Support for calculated tables and calculated columns
-  - **Roadmap:** Support for calculation groups/items
+  - Support for calculation groups/items
 - Macro recorder (C# aka. "Advanced Scripting")
   - Scripts can be saved as reusable macros (aka. "custom actions") that are fully customizable with the rest of the UI shell
 - New connected features:
