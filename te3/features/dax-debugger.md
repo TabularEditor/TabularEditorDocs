@@ -91,11 +91,13 @@ This view provides information about the DAX evaluation context of the current s
 
 ![Evaluation Context](../../images/evaluation-context.png)
 
-You can double-click on an item in the Evaluation Context stack, to bring the focus to that item. This will cause all **Watch** expressions to be reevaluated in the new context (that is, all contexts from the bottom of the stack up to and including the currently focused item). This is illustrated in the animation below. Notice also how you can inspect the value of individual columns by paging through rows within the current row context:
+You can double-click on an item in the Evaluation Context stack, to bring the focus to that item. This will cause all **Watch** expressions to be reevaluated in the new context (that is, all contexts from the bottom of the stack up to and including the currently focused item). This is illustrated in the animation below. Notice also how you can inspect the value of individual columns in the active row context by paging through rows within any active iterations:
 
 ![Call Tree](../../images/navigating-evaluation-context.gif)
 
 Lastly, you can browse the first 1000 rows of any iterator, setting the current row context to a specific row within those first 1000, by clicking on the Zoom button within the **Row** column.
+
+![Browse Row Contexts](../../images/browse-row-contexts.png)
 
 ## Call Tree
 This view provides an outline of the entire calculation and lets you easily navigate between subexpressions by double-clicking (you can also use shortcut keys for navigation). The tree also provides information about context transitions, iterations and row contexts. Branches of code that will not be executed (for example in an `IF` or `SWITCH` call, or when an iterator is empty) are striked out.
