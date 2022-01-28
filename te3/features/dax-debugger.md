@@ -82,9 +82,18 @@ This view allows you to enter any DAX expression, which will be calculated withi
 
 ![Watch](../../images/watch.png)
 
-By clicking on the Zoom button within the **Value** column, the debugger will open a new DAX query document, that defines the context of the calculation as well as the calculation itself, allowing you to inspect the results in more details. This is particularly useful when the watch expression is a table expression, as illustrated on the screenshot below:
+To quickly add a variable, measure or subexpression to the Watch view, simply highlight a portion of code and drag it into the Watch view. You can also place the cursor over the expression you want to add, then right-click and choose **Watch this expression**:
+
+![Quick Add To Watch](../../images/quick-add-to-watch.png)
+
+To add, duplicate or delete Watch expressions, use the right-click context menu of the Watch view:
+
+![Watch Context Menu](../../images/watch-context-menu.png)
+
+The **Generate query** option is identical to the Zoom button within the **Value** column, highlighted in the screenshot below. By clicking this, the debugger will open a new DAX query document, that defines the context of the calculation as well as the calculation itself, allowing you to inspect the results in more details. This is particularly useful when the watch expression is a table expression, as shown below:
 
 ![Inspect Watch](../../images/inspect-watch.png)
+
 
 ## Evaluation Context
 This view provides information about the DAX evaluation context of the current subexpression. For example, a `CALCULATE` expression might perform a context transition or add a filter to the evaluation context, or a `SUMX` iterator might add a row context.
