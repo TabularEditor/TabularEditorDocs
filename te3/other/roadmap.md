@@ -21,10 +21,10 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 **Planned for Q1 2022:**
 - &#9744; Perspective Editor (view that can be opened when selecting one or more perspectives, allowing you to check/uncheck objects visible in those perspectives)
 - &#9744; Metadata Translation Editor (view that can be opened when selecting one or more cultures, similar to the Tabular Translator tool)
-- &#9744; C# code assist (autocomplete, calltips, etc.)
 - &#9744; Git integration
 
 **Long term (2022)**
+- C# code assist (autocomplete, calltips, etc.)
 - Standalone CLI application
 - Configurable Daxscilla autocomplete code snippets
 - Configurable theming for code editors (syntax highlighting colors)
