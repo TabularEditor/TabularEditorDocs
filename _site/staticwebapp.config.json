@@ -1,6 +1,11 @@
 {
     "routes": [
         {
+            "route": "/te3/other/release-notes",
+            "redirect": "/te3/other/release-notes/3.2.2.html",
+            "statusCode": 301
+        },
+        {
             "route": "/privacy-policy.html",
             "redirect": "/te3/other/privacy-policy.html",
             "statusCode": 301
