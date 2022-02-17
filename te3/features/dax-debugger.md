@@ -104,6 +104,10 @@ You can double-click on an item in the Evaluation Context stack, to bring the fo
 
 ![Call Tree](../../images/navigating-evaluation-context.gif)
 
+You can also toggle individual filters from the outer filter context (for example, grouping columns on the [`SUMMARIZECOLUMNS`](https://dax.guide/summarizecolumns) call that generated the query or filters specified in a Pivot Grid). This is illustrated in the animation below. Filters toggled this way will apply to both Watch and Locals.
+
+![Call Tree](../../images/toggle-filters.gif)
+
 Lastly, you can browse the first 1000 rows of any iterator, setting the current row context to a specific row within those first 1000, by clicking on the Zoom button within the **Row** column.
 
 ![Browse Row Contexts](../../images/browse-row-contexts.png)
