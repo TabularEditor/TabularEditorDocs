@@ -20,6 +20,7 @@
 ### @dax-debugger
 ## @supported-files
 ## @preferences
+## @shortcuts
 ## @user-options
 ## @security-privacy
 
