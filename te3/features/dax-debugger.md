@@ -14,7 +14,7 @@ applies_to:
 > [!NOTE]
 > The DAX debugger was introduced in version 3.2.0. Information in this article is subject to change as we add more capabilities to the debugger.
 
-![Dax Debugger](../../images/dax-debugger.png)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/m4g9BxcUf4U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 It is no secret that DAX is a relatively complex language which is difficult to master. Most data model developers have probably experienced a situation, where the DAX code did not return the expected result. In this situation, it is helpful to break down the code, variable by variable and function call by function call, to better understand what is going on.
 
