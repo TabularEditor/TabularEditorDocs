@@ -581,7 +581,7 @@ The following methods are available:
 
 | Method | Description |
 | ------ | ----------- |
-| `void ExecuteCommand(string tmsl)` | This methods passes the specified TMSL script to the connected instance of Analysis Services. This is useful when you want to refresh data in a table on the AS instance. Note that if you use this method to perform metadata changes to your model, your local model metadata will become out-of-sync with the metadata on the AS instance, and you may receive a version conflict warning the next time you try to save the model metadata. |
+| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | This methods passes the specified TMSL or XMLA script to the connected instance of Analysis Services. This is useful when you want to refresh data in a table on the AS instance. Note that if you use this method to perform metadata changes to your model, your local model metadata will become out-of-sync with the metadata on the AS instance, and you may receive a version conflict warning the next time you try to save the model metadata. Set the `isXmla` parameter to `true` if  sending an XMLA script. |
 | `IDataReader ExecuteReader(string dax)` | Executes the specified DAX *query* against the connected AS database and returns the resulting [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) object. Note that you can not have multiple open data readers at once. Tabular Editor will automatically close them in case you forget to explicitly close or dispose the reader. |
 | `DataSet ExecuteDax(string dax)` | Executes the specified DAX *query* against the connected AS database and returns a [DataSet](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) object containing the data returned from the query. Returning very large data tables is not recommended as they may cause out-of-memory or other stability errors. |
 | `object EvaluateDax(string dax)` | Executes the specified DAX *expression* against the connected AS database and returns an object representing the result. If the DAX expression is scalar, an object of the relevant type is returned (string, long, decimal, double, DateTime). If the DAX expression is table-valued, a [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6) is returned. |
@@ -602,6 +602,20 @@ var tmsl = "{ \"refresh\": { \"type\": \"%type%\", \"objects\": [ { \"database\"
     .Replace("%table%", table);
 
 ExecuteCommand(tmsl);
+```
+
+### Clearing the Analysis Services engine cache
+
+As of Tabular Editor 2.16.6 or Tabular Editor 3.2.3, you can use the following syntax to send raw XMLA commands to Analysis Services. The example below shows how this can be used to clear the AS engine cache:
+
+```csharp
+var clearCacheXmla = string.Format(@"<ClearCache xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">  
+  <Object>
+    <DatabaseID>{0}</DatabaseID>
+  </Object>
+</ClearCache>", Model.Database.ID);
+
+ExecuteCommand(clearCacheXmla, isXmla: true);
 ```
 
 ### Visualize query results
