@@ -17,10 +17,12 @@ The main difference between the various editions of Tabular Editor 3, is which t
 - SQL Server (2016+) Analysis Services (Editions: Developer, Standard, **Enterprise**)
 - Azure Analysis Services (Tiers: Developer, Basic, **Standard**)
 
-> [!IMPORTANT]
-> Tabular Editor only allows editing data models using Compatibility Level 1200 or higher. This is the default on any instance of Analysis Services starting from SQL Server 2016.
+We consider the **highlighted** flavors of Analysis Services to be Enterprise-Tier, and as such, these may only be used with Tabular Editor 3 Enterprise Edition.
 
-We consider the **highlighted** flavors of Analysis Services to be Enterprise-Tier, and as such, these may only be used with Tabular Editor 3 Enterprise Edition. Please refer to the matrix below for the full overview of supported scenarios:
+> [!IMPORTANT]
+> Tabular Editor only allows editing data models using Compatibility Level 1200 or higher. This is the default on any instance of Analysis Services starting from SQL Server 2016. For the same reason, Tabular Editor does not support Excel PowerPivot, as this uses an earlier Compatibility Level.
+
+Please refer to the matrix below for the full overview of supported scenarios:
 
 |Scenario / Edition|Desktop|Business|Enterprise
 |---|---|---|---|
