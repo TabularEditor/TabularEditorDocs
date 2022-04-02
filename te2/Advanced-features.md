@@ -72,7 +72,7 @@ This feature allows you to more easily integrate your SSAS Tabular Models in a f
 
 By default, objects are serialized down to the lowest object level (meaning measures, columns and hierarchies are stored as individual .json files).
 
-Additionally, Tabular Editor's [command-line syntax](/Command-line-Options) supports loading a model from this folder structure and deploying it directly to a database, making it easy for you to automate builds for continuous integration workflows.
+Additionally, Tabular Editor's [command-line syntax](xref:command-line-options) supports loading a model from this folder structure and deploying it directly to a database, making it easy for you to automate builds for continuous integration workflows.
 
 If you want to customize the granularity at which metadata is saved to individual files, go to File > Preferences and click the "Save to folder"-tab. Here, it's possible to toggle some serialization options which are passed to the TOM when serializing into JSON. Furthermore, you can check/uncheck the types of objects for which individual files will be generated. In some Version Control scenarios, you might want to store everything related to one table in a file on its own, where as in other scenarios you may need individual files for columns and measures.
 
