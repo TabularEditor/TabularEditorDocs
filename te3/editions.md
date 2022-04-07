@@ -72,15 +72,20 @@ Our Desktop Edition and Business Edition uses a personal licensing model. This m
 
 Our Enterprise Edition uses a transferable licensing model. The license administrator receives a single License Key, which is then valid for a number of named users up to the quantity purchased. Users are identified by their e-mail address, which is entered the first time a user activates an installation of Tabular Editor 3. The license administrator may <a href="mailto:support@tabulareditor.com?subject=Transferable%20License%20Rotation">contact support</a> in case a user should be removed from the license, such as when an employee leaves the team.
 
-## Number of installations per user
+## Multiple installations
 
-The table below lists the number of installations that can be active at a time, for any given user, using the specified type of license:
+Each Tabular Editor 3 user is allowed to install the tool on multiple machines depending on the type of license held:
 
 | |Desktop|Business|Enterprise|
 |---|---|---|---|
-|Installations per user|1|1|3|
+|Simultaneous installations|1|2|3|
 
-You can deactivate an existing installation at any time from within the tool itself, by choosing the "Change license key..." option under "Help > About Tabular Editor". You may also <a href="mailto:support@tabulareditor.com?subject=Deactivation">contact support</a> if you need our assistance in deactivating an installation.
+> [!NOTE]
+> Sharing a single license among multiple users is against our [licensing terms](https://tabulareditor.com/license-terms).
+
+You can deactivate an existing installation at any time from within the tool itself, by choosing the "Change license key..." option under "Help > About Tabular Editor". You can also deactivate an installation through our [self-service portal](https://tabulareditor.com/sign-in) by navigating to the "Licenses" tab.
+
+If you need more simultaneous installations of Tabular Editor 3 than listed above, please contact [licensing@tabulareditor.com](mailto:licensing@tabulareditor.com).
 
 ## Enterprise Edition Volume Discounts
 
