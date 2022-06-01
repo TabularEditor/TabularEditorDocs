@@ -26,6 +26,7 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 - &#9744; Git integration
 - &#9744; Standalone CLI application
 - &#9744; Configurable hotkeys
+- &#9744; Import Table Wizard support for Power BI datammarts
 
 **Long term**
 - Configurable Daxscilla autocomplete code snippets
