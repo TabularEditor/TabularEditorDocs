@@ -10,11 +10,11 @@ This page provides download and installation instructions for Tabular Editor 3.
 
 ## Production builds
 
-- Latest production release (x64): [TabularEditor.3.2.3.x64.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.2.3.x64.msi)
-- Latest production release (x86): [TabularEditor.3.2.3.x86.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.2.3.x86.msi)
-- Portable version: [TabularEditor.3.2.3.x64.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.2.3.x64.zip), [TabularEditor.3.2.3.x86.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.2.3.x86.zip)
+- Latest production release (x64): [TabularEditor.3.3.0.x64.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.3.0.x64.msi)
+- Latest production release (x86): [TabularEditor.3.3.0.x86.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.3.0.x86.msi)
+- Portable version: [TabularEditor.3.3.0.x64.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.3.0.x64.zip), [TabularEditor.3.3.0.x86.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.3.0.x86.zip)
 
-Read the [latest release notes](release-notes/3_2_3.md).
+Read the [latest release notes](release-notes/3_3_0.md).
 
 ## Installation Instructions
 
@@ -26,6 +26,11 @@ It is not necessary to remove previous installations when upgrading to a newer v
 
 ## History
 
+- 2021-06-16 (*[Release notes](release-notes/3_3_0.md)*):
+  - [TabularEditor.3.3.0.x64.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.3.0.x64.msi)
+  - [TabularEditor.3.3.0.x86.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.3.0.x86.msi)
+  - [TabularEditor.3.3.0.x64.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.3.0.x64.zip)
+  - [TabularEditor.3.3.0.x86.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.3.0.x86.zip)
 - 2021-04-07 (*[Release notes](release-notes/3_2_3.md)*):
   - [TabularEditor.3.2.3.x64.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.2.3.x64.msi)
   - [TabularEditor.3.2.3.x86.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.2.3.x86.msi)
