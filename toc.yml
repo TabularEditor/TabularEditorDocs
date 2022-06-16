@@ -12,3 +12,6 @@
 - name: TE3 Onboarding Guide
   href: onboarding/
   homepage: onboarding/index.md
+- name: API
+  href: api/
+  homepage: api/index.md

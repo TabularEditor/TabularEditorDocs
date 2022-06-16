@@ -42,3 +42,5 @@ launchSettings.json
 project.lock.json
 *.sublime-workspace
 /_exported_templates/default
+/api/*.yml
+/api/.manifest
