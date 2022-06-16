@@ -1,0 +1,1189 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TabularEditor3.Shared</name>
+    </assembly>
+    <members>
+        <member name="P:TabularEditor.Shared.BPA.AnalyzerResult.Ignored">
+            <summary>
+            Indicates whether this rule should be ignored on this particular object
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.BPA.Analyzer.BasePath">
+            <summary>
+            Base path when the analyzer searches for rule files (typically the same path as the Model.bim or database.json file is stored in)
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.BPA.RuleScopeHelper.Enumerate(TabularEditor.Shared.BPA.RuleScope)">
+            <summary>
+            Enumerates the currently set flags on this Enum as individual Enum values.
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1">
+            <summary>
+            Provides a set of methods for changing multiple object properties at once, as well
+            as accessing specific items by name.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ForEach(System.Action{`0})">
+            <summary>
+            Provide a lambda statement that is executed once for each object in the collection.
+            </summary>
+            <example>
+            .ForEach(obj => obj.Name += " OLD");
+            </example>
+            <param name="action">The action to perform on each object in the collection</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Where(System.Func{`0,System.Boolean})">
+            <summary>
+            Filters the collection using a lambda expression which should return true.
+            </summary>
+            <example>
+            .Where(Measure => Measure.Description == "")
+            </example>
+            <param name="predicate">The filter predicate.</param>
+            <returns>The filtered list of objects that satisfy the predicate.</returns>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Item(System.String)">
+            <summary>
+            Finds an object in the collection by name, using DAX syntax:
+                [Measure Name]
+                'Table Name'[Column Name]
+            </summary>
+            <param name="search"></param>
+            <returns></returns>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.DisplayFolder">
+            <summary>
+            Sets the DisplayFolder property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.IsHidden">
+            <summary>
+            Sets the IsHidden property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.IsActive">
+            <summary>
+            Sets the IsActive property of all relationships in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.FormatString">
+            <summary>
+            Sets the FormatString property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Expression">
+            <summary>
+            Sets the Expression property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Description">
+            <summary>
+            Sets the Description property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ShowInPerspective(System.String)">
+            <summary>
+            Adds all objects in the collection to the given perspective.
+            </summary>
+            <param name="perspectiveName"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ShowInPerspective(TabularEditor.TOMWrapper.Perspective)">
+            <summary>
+            Adds all objects in the collection to the given perspective.
+            </summary>
+            <param name="perspective"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.HideInPerspective(System.String)">
+            <summary>
+            Removes all objects in the collection from the given perspective.
+            </summary>
+            <param name="perspectiveName"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.HideInPerspective(TabularEditor.TOMWrapper.Perspective)">
+            <summary>
+            Removes all objects in the collection from the given perspective.
+            </summary>
+            <param name="perspective"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ShowInAllPerspectives">
+            <summary>
+            Adds all objects in the collection to all perspectives of the model.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.HideInAllPerspectives">
+            <summary>
+            Removes all objects in the collection from all perspectives of the model.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Rename(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Specify a search pattern and a replacement value, that will be applied to the Names of the objects in the collection.
+            </summary>
+            <param name="pattern">Search pattern (i.e. what to find)</param>
+            <param name="replacement">Replacement (the text to replace)</param>
+            <param name="regex">Set to true if the search pattern and replacement strings use regular expressions</param>
+            <param name="includeNameTranslations">Set to true if the replacement should be performed in the metadata name translations as well</param>
+            <param name="matchCase">Set to true to perform a case-sensitive search</param>
+            <param name="wholeWordsOnly">Set to true to search for whole words only</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ReplaceExpression(System.String,System.String,System.Boolean)">
+            <summary>
+            Specify a search pattern and a replacement value, that will be applied to the Expression of the objects in the collection.
+            </summary>
+            <param name="pattern">The search pattern</param>
+            <param name="replacement">The replacement value</param>
+            <param name="regex">Set to true to perform search and replace using regular expressions</param>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Name">
+            <summary>
+            Sets the name of the object (provided the collection only contains a single object).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Delete">
+            <summary>
+            Deletes all objects in the collection.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.SelectionHelper.Summary(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Boolean,System.Boolean)">
+            <summary>
+            Returns a string with a short description of the types of objects in the <paramref name="items"/> collection.
+            </summary>
+            <param name="items">The collection to summarize</param>
+            <param name="onlyTypeNames">Set to false to always show the types of objects in the collection</param>
+            <param name="capitalize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.SelectionHelper.Edit``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Convenient extension method for converting an <see cref="T:System.Collections.Generic.IEnumerable`1"/> to a <see cref="T:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1"/>, the latter containing
+            a wider range of methods for easily manipulating multiple objects at once.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="items"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.SelectionHelper.FindByDAX``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Search a collection of objects using a DAX reference
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="items"></param>
+            <param name="name"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.TypesHelper.HasX(TabularEditor.Shared.Interaction.Context,TabularEditor.Shared.Interaction.Context)">
+            <summary>
+            Returns true if context contains one or more of the specified flags.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.TypesHelper.Has1(TabularEditor.Shared.Interaction.Context,TabularEditor.Shared.Interaction.Context)">
+            <summary>
+            Returns true if context contains exactly one of the specified flags.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.TypesHelper.Just1(TabularEditor.Shared.Interaction.Context)">
+            <summary>
+            Checks if one and only one bit is set in the specified context enum flags.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TabularEditor.Shared.Interaction.Context">
+            <summary>
+            Determines the context of the current selection in the Explorer Tree. Only one of the contexts
+            can be selected at a time. For example, it is not possible to simultaneously select a table and
+            a data source. Objects inside tables (columns, measures, hierarchies, folders) may be simultaneously
+            selected, and therefore the context when one or more of these objects are selected is simply
+            "TableObject".
+            
+            While a given selection in the Explorer Tree can only have one context, it is possible for context
+            menu items to be visible under several contexts, which is why the enum is treated as Flags.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.None">
+            <summary>
+            Nothing selected in the tree
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Model">
+            <summary>
+            Context menu opened on Model node
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Tables">
+            <summary>
+            Context menu opened on the "Tables" group node
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.DataSources">
+            <summary>
+            Context menu opened on the "Data Sources" group node
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Perspectives">
+            <summary>
+            Context menu opened on the "Perspectives" group node
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Translations">
+            <summary>
+            Context menu opened on the "Translations" group node
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Roles">
+            <summary>
+            Context menu opened on the "Roles" group node
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Relationships">
+            <summary>
+            Context menu opened on the "Relationships" group node
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.PartitionCollection">
+            <summary>
+            Context menu opened on the "Partitions" node
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Expressions">
+            <summary>
+            Context menu opened on the "Shared Expressions" group node
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.TablePermission">
+            <summary>
+            Context menu opened on a Table Permission
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Table">
+            <summary>
+            Context menu opened on one or more tables
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Measure">
+            <summary>
+            Context menu opened on one or more measures (or on a display folder containing measures)
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Column">
+            <summary>
+            Context menu opened on one or more columns (or on a display folder containing columns)
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Hierarchy">
+            <summary>
+            Context menu opened on one or more hierarchies (or on a display folder containing hierarchies)
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Level">
+            <summary>
+            Context menu opened on one or more hierarchy levels
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Partition">
+            <summary>
+            Context menu opened on one or more table partitions
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Relationship">
+            <summary>
+            Context menu opened on one or more relationships
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.DataSource">
+            <summary>
+            Context menu opened on one or more data sources
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Role">
+            <summary>
+            Context menu opened on one or more roles
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Perspective">
+            <summary>
+            Context menu opened on one or more perspectives
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Translation">
+            <summary>
+            Context menu opened on one or more cultures
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.KPI">
+            <summary>
+            Context menu opened on a KPI object
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Expression">
+            <summary>
+            Context menu for a shared expression
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.CalculationGroupTable">
+            <summary>
+            Context menu for a calculation group
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.CalculationItem">
+            <summary>
+            Context menu for a calculation item
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.CalculationItemCollection">
+            <summary>
+            Context menu for a calculation item collection
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Tool">
+            <summary>
+            Special context for actions that can be executed regardless of the current selection,
+            but where the action should show up in the "Tools" menu only.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Interaction.Selection">
+            <summary>
+            Provides a range of collections containing the TOM objects that are currently selected
+            in the TreeView. Each collection is statically typed, making it very easy to work with
+            the objects in the collection. A handful of convenient methods for adding, deleting,
+            duplicating and changing multiple object's properties at once are also provided.
+            
+            If one or more Display Folders are selected, their child objects are also considered
+            selected.
+            
+            Additionally, a range of properties have been provided, to give some overall information
+            about the selection.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Context">
+            <summary>
+            Indicates where in the Explorer Tree the current selection has been made.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.Selection.GetNodeContexts(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject})">
+            <summary>
+            Iterates through the passed list of nodes, to return the combined context of the items represented by the nodes.
+            </summary>
+            <param name="objects"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.Selection.GetNodeContext(TabularEditor.TOMWrapper.ITabularNamedObject)">
+            <summary>
+            Returns the "context" commonly associated with the given object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.DirectCount">
+            <summary>
+            The number of objects directly selected in the Explorer Tree (not counting any child objects).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Measure">
+            <summary>
+            The currently selected measure (if exactly one measure is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CurrentFolder">
+            <summary>
+            Gets the current folder of the selection. If multiple folders are selected, the parent folder is returned.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Measures">
+            <summary>
+            All currently selected measures (including measures within selected Display Folders).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Hierarchy">
+            <summary>
+            The currently selected hierarchy (if exactly one hierarchy is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Hierarchies">
+            <summary>
+            All currently selected hierarchies (including hierarchies within selected Display Folders).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Level">
+            <summary>
+            The currently selected level (if exactly one level is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.KPI">
+            <summary>
+            he currently selected KPI.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Levels">
+            <summary>
+            The currently selected levels.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Column">
+            <summary>
+            The currently selected column (if exactly one column is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Columns">
+            <summary>
+            All currently selected columns (including columns within selected Display Folders).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Cultures">
+            <summary>
+            All currently selected cultures.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.DataSources">
+            <summary>
+            All currently selected data sources.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.DataSource">
+            <summary>
+            The currently selected data source.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Roles">
+            <summary>
+            All currently selected roles.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.SingleColumnRelationships">
+            <summary>
+            All currently selected relationships.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Perspectives">
+            <summary>
+            All currently selected perspectives.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CalculationItem">
+            <summary>
+            The currently selected calculation item (if exactly one calculation item is selected in the explorer tree.)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CalculationItems">
+            <summary>
+            All currently selected calculation items.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.TablePermissions">
+            <summary>
+            All currently selected table permissions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CalculationGroup">
+            <summary>
+            The currently selected calculation group (if exactly one calculation group is selected in the explorer tree.)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CalculationGroups">
+            <summary>
+            All currently selected calculation groups.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CalculatedColumn">
+            <summary>
+            The currently selected calculated column (if exactly one calculated column is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CalculatedColumns">
+            <summary>
+            All currently selected calculated columns (including calculated columns within selected Display Folders).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CalculatedTableColumns">
+            <summary>
+            All currently selected calculated table columns (including calculated table columns within selected Display Folders).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.DataColumn">
+            <summary>
+            The currently selected data column (if exactly one data column is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.DataColumns">
+            <summary>
+            All currently selected data columns (including data columns within selected Display Folders).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CalculatedTable">
+            <summary>
+            The currently selected calculated table (if exactly one calculated table is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.CalculatedTables">
+            <summary>
+            All currently selected calculated tables.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Partitions">
+            <summary>
+            All currently selected partitions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Partition">
+            <summary>
+            The currently selected partition (if exactly one partition is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.ActivePerspectives">
+            <summary>
+            The currently selected perspectives in the dropdown above the explorer tree.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.ActiveCulture">
+            <summary>
+            The currently selected culture in the dropdown above the explorer tree.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Culture">
+            <summary>
+            The currently selected culture (if exactly one culture is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Perspective">
+            <summary>
+            The currently selected perspective (if exactly one perspective is selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.HasTable">
+            <summary>
+            Returns true only when a single table is unambiguously selected (either by direct selection of a single table, or by selecting one or more objects within the same table).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Table">
+            <summary>
+            The currently selected table (if exactly one table is selected in the explorer tree) or the table of selected child objects.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Tables">
+            <summary>
+            The currently selected tables (if one or more tables have been directly selected in the explorer tree).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Direct">
+            <summary>
+            A collection of objects (including display folders) that are directly selected in the explorer tree. Does not include
+            child objects.
+            </summary>    
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Folders">
+            <summary>
+            Gets the currently selected display folders in the explorer tree.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Groups">
+            <summary>
+            Gets the currently selected object groups in the explorer tree.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.ScriptHost">
+            <summary>
+            This is the host class in which a C# script is executed
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptHost.Model">
+            <summary>
+            The currently loaded <see cref="T:TabularEditor.TOMWrapper.Model"/>.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptHost.Selected">
+            <summary>
+            An object that represents the current selection in the TOM Explorer.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Output(System.Object)">
+            <summary>
+            Displays detail information about the specified object.
+            </summary>
+            <param name="value">An object or collection of objects</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Info(System.String)">
+            <summary>
+            Displays an informational message
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Warning(System.String)">
+            <summary>
+            Displays a warning message
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Error(System.String)">
+            <summary>
+            Displays an error message
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectColumn(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Column},TabularEditor.TOMWrapper.Column,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a column from the specified list of columns.
+            </summary>
+            <param name="columns">A list of columns to be shown to the user</param>
+            <param name="preselect">(Optional) A column from the list of columns, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected column or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectColumn(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.Column,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a column from the specified table.
+            </summary>
+            <param name="table">The table from which the user should select a column</param>
+            <param name="preselect">(Optional) A column from the list of columns, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected column or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectTable(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Table},TabularEditor.TOMWrapper.Table,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a table from the specified list of tables.
+            </summary>
+            <param name="tables">A list of tables to be shown to the user</param>
+            <param name="preselect">(Optional) A table from the list of tables, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected table or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectTable(TabularEditor.TOMWrapper.Table,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a table from the model.
+            </summary>
+            <param name="preselect">(Optional) A table which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected table or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectTable(TabularEditor.TOMWrapper.Model,TabularEditor.TOMWrapper.Table,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a table from the model.
+            </summary>
+            <param name="model">The model from which a table should be selected by the user</param>
+            <param name="preselect">(Optional) A table which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected table or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectMeasure(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure},TabularEditor.TOMWrapper.Measure,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a measure from the specified list of measures.
+            </summary>
+            <param name="measures">A list of measures to be shown to the user</param>
+            <param name="preselect">(Optional) A measure from the list of measures, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected measure or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectMeasure(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.Measure,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a measure from the specified table.
+            </summary>
+            <param name="table">A table containing the measures that will be shown to the user</param>
+            <param name="preselect">(Optional) A measure from the table, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected measure or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectMeasure(TabularEditor.TOMWrapper.Measure,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a measure from the model.
+            </summary>
+            <param name="preselect">(Optional) A measure from the model, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected measure or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectMeasure(TabularEditor.TOMWrapper.Model,TabularEditor.TOMWrapper.Measure,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a measure from the model.
+            </summary>
+            <param name="model">The model from which a measure should be selected by the user</param>
+            <param name="preselect">(Optional) A measure from the model, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected measure or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectObject``1(System.Collections.Generic.IEnumerable{``0},``0,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a model object from a list of objects.
+            </summary>
+            <typeparam name="T">The type of objects shown to the user</typeparam>
+            <param name="objects">A list of objects to be shown to the user</param>
+            <param name="preselect">(Optional) An object from the list, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected object or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SelectObjects``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Displays a dialog that allows the user to select one or more model objects from a list of objects.
+            </summary>
+            <typeparam name="T">The type of objects shown to the user</typeparam>
+            <param name="objects">A list of objects to be shown to the user</param>
+            <param name="preselect">(Optional) A list of objects which are preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected object(s) or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.EvaluateDax(System.String)">
+            <summary>
+            Evaluates the specified DAX expression against the connected database and returns a data table or scalar value containing the result.
+            </summary>
+            <param name="dax">The DAX expression to be evaluated</param>
+            <returns>A <see cref="T:System.Data.DataTable"/> if the DAX expression returns a table value, otherwise a primitive type representing the scalar value of the evaluation.</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.ExecuteDax(System.String)">
+            <summary>
+            Executes the specified DAX query.
+            </summary>
+            <param name="dax">A DAX query which contains one or more EVALUATE statements.</param>
+            <returns>A <see cref="T:System.Data.DataSet"/> object which contains the resulting datasets from the query.</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.ExecuteReader(System.String)">
+            <summary>
+            Executes the specified DAX query.
+            </summary>
+            <param name="dax">A DAX query which contains one or more EVALUATE statements.</param>
+            <returns>An <see cref="T:System.Data.IDataReader"/>-object that allows you to iterate the results of the query.</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.ExecuteCommand(System.String,System.Boolean)">
+            <summary>
+            Executes the specified TMSL or XMLA command.
+            </summary>
+            <param name="tmslOrXmla">A TMSL or XMLA string.</param>
+            <param name="isXmla">Set to true if <paramref name="tmslOrXmla"/> is XMLA.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CustomAction(System.String)">
+            <summary>
+            Invoke the custom action (aka. macro) with the given name.
+            </summary>
+            <param name="actionName">Name of the custom action (macro)</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CustomAction(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)">
+            <summary>
+            Invoke the custom action (aka. macro) on the given set of objects.
+            </summary>
+            <param name="selection">A set of objects to be passed to the custom action as the current selection</param>
+            <param name="actionName">Name of the custom action (macro)</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CustomAction(TabularEditor.TOMWrapper.ITabularNamedObject,System.String)">
+            <summary>
+            Invoke the custom action (aka. macro) on the given object.
+            </summary>
+            <param name="selection">An object to be passed to the custom action as the current selection</param>
+            <param name="actionName">Name of the custom action (macro)</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.ExportProperties(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)">
+            <summary>
+            Returns a string representation (tab separated format) of properties for the specified objects
+            </summary>
+            <param name="objects">A list of objects</param>
+            <param name="properties">(Optional) A comma-separated list of properties to export. If omitted, only basic properties are exported.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.ImportProperties(System.String)">
+            <summary>
+            Applies properties to objects based on a string representation (tab separated format) of property values to assign, such as obtained by <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.ExportProperties(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)"/>.
+            </summary>
+            <param name="tsvData">The tab separated property values to assign</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.GetObjectPath(TabularEditor.TOMWrapper.TabularObject)">
+            <summary>
+            Returns a string representation that uniquely identifies the specified object within the model.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.ResolveObjectPath(System.String)">
+            <summary>
+            Resolves an object within the model based on a string such as the one obtained by <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.GetObjectPath(TabularEditor.TOMWrapper.TabularObject)"/>.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.LineBreakFirstChar(System.String,System.Boolean)">
+            <summary>
+            Ensures that a DAX expression starts with a line break.
+            </summary>
+            <remarks>
+            In Power BI Desktop, DAX expressions are shown on a formula bar with the name of the object prepended. For this reason, it is often useful to have a line break as the first character of the actual DAX expression.
+            </remarks>
+            <param name="dax">The DAX expression</param>
+            <param name="onlyIfMultiline">Set to true if the line break character should only be inserted when the DAX expression itself spans multiple lines.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.ConvertDax(System.String,System.Boolean)">
+            <summary>
+            Changes the character used for decimals and list separators in a DAX expression.
+            </summary>
+            <param name="dax">The original DAX expression</param>
+            <param name="useSemicolons">Set to true when converting from Non-US-style DAX to US-style DAX, or false for vice versa.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.FormatDax(TabularEditor.TOMWrapper.IDaxDependantObject)">
+            <summary>
+            Flags the specified object for formatting after script execution or the next time <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.CallDaxFormatter(System.Nullable{System.Boolean},System.Nullable{System.Boolean})"/> is called.
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CallDaxFormatter(System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            Format all DAX expressions on objects currently flagged for formatting.
+            </summary>
+            <param name="shortFormat"></param>
+            <param name="skipSpaceAfterFunctionName"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.FormatDax(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.IDaxDependantObject},System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            Format all DAX expressions on the specified objects.
+            </summary>
+            <param name="objects"></param>
+            <param name="shortFormat"></param>
+            <param name="skipSpaceAfterFunctionName"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.FormatDax(System.String,System.Nullable{System.Boolean},System.Boolean)">
+            <summary>
+            Format the specified DAX expression
+            </summary>
+            <param name="dax"></param>
+            <param name="shortFormat"></param>
+            <param name="skipSpaceAfterFunctionName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CollectVertiPaqAnalyzerStats">
+            <summary>
+            Collects VertiPaq Analyzer statistics for the currently loaded model.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.ReadFile(System.String)">
+            <summary>
+            Read the specified file as text
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.SaveFile(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Saves the specified text to a file
+            </summary>
+            <param name="filePath">Path of the file - file will be created if it does not already exist, and overwritten otherwise</param>
+            <param name="content">Content to write to the file</param>
+            <param name="encoding">(Optional) Encoding to use</param>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.ScriptMethodAttribute">
+            <summary>
+            Public static methods that are decorated with this attribute, will be exposed to
+            the scripting engine as top-level methods, so that the end-user does not need to
+            specify the class name to invoke the method.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Scripting.ScriptRewriter">
+            <summary>
+            The <see cref="T:TabularEditor.Shared.Scripting.ScriptRewriter"/> is used to rewrite C# scripts before compilation.
+            </summary>
+            <remarks>
+            The ScriptRewriter uses Roslyn to construct a <see cref="T:Microsoft.CodeAnalysis.SyntaxTree"/> of the code, for purposes of rewriting the code in a few ways.
+            
+            1) Some global method calls have an optional lineNumber parameter, for example <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.Info(System.String,System.Int32)"/>. The ScriptRewriter will add the line
+            number to this call, when it is omitted in the script.
+            
+            2) Macros are stored as a collection of C# scripts in a JSON file. A macro may have an Enabled-script, which is just a script that must return a boolean value.
+            For performance reasons, we combine all macros into a single C# code file before compiling. This code file is not a script, since it will be constructed as
+            a number of namespaces, each containing a class representing the macro. As each macro script may contain "#r"-directives or "using" directives, we must first
+            parse the macro code separately, remove the directives, then put them back in when the combind code is generated. All unique "#r" directives are added at the
+            top of the code file, where as the "using" directives for each macro is added within the namespace of that class.
+            </remarks>
+        </member>
+        <member name="T:TabularEditor.Shared.SensitiveException">
+            <summary>
+            Represents an exception that may contain PII/sensitive information in the message text. When the exception is sent to the telemetry service,
+            the telemetry will use the message string
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.SensitiveException.PublicMessage">
+            <summary>
+            A message that has been stripped of sensitive information.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.AutomaticPowerQuerySchemaDetector">
+            <summary>
+            This schema detector utilises the mashup engine on Analysis Service to detect a schema for any table that uses
+            an M (Power Query) or a Policy Range partition source. It does so by initiating a transaction against the AS
+            server in which a temporary table is created. This temporary table wraps the original table partition query in
+            a call to the Table.Schema M-function, thus returning only the resulting schema from the source. The temporary
+            table is added to the model and refreshed within the same transaction. Then, the temporary table is queried, to
+            obtain the schema result, and finally the transaction is rolled back, so the Analysis Services model is left
+            untouched.
+            
+            As of May 30th, the detector can also work with QueryPartitionSources that reference legacy or structured data
+            sources, simply by wrapping the provider query in a call to the M-function: Value.NativeQuery. The AS engine
+            takes care of converting a provider data source to an equivalent structured data source, if needed. Of course
+            this only works on compatibility level 1400+ models.
+            
+            This detector requires that the credentials for the data source are already present on the server.
+            TODO: Handle DirectQuery / user-delegated credentails
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.FileSystemHelper.DirectoryFromPath(System.String)">
+            <summary>
+            Returns the directory of the provided filePath.
+             - If <paramref name="filePath"/> is a directory, it is returned.
+             - If <paramref name="filePath"/> is a file, its parent directory is returned.
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.FileSystemHelper.GetAbsolutePath(System.String,System.String)">
+            <summary>
+            Constructs an absolute path from a base path and a path which can be absolute (in which case it is returned as-is) or relative with respect to the base path.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.FileSystemHelper.GetRelativePath(System.String,System.String)">
+            <summary>
+            Creates a relative path from one file or folder to another.
+            </summary>
+            <param name="fromPath">Contains the directory that defines the start of the relative path.</param>
+            <param name="toPath">Contains the path that defines the endpoint of the relative path.</param>
+            <returns>The relative path from the start directory to the end path.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="fromPath"/> or <paramref name="toPath"/> is <c>null</c>.</exception>
+            <exception cref="T:System.UriFormatException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.IModelManagerService.UnsavedModelCheck">
+            <summary>
+            Checks if the currently loaded model (if any) has unsaved chanages, and prompt the user if they want to save it.
+            Returns false if the operation should be cancelled.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.PromptIcon">
+            <summary>
+            Corresponds to MessageBoxIcon
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.PromptResult">
+            <summary>
+            Corresponds to Windows.Forms.DialogResult
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.PromptOptions">
+            <summary>
+            Corresponds to Windows.Forms.MessageBoxButtons
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.IpHelper">
+            <summary>
+            <see cref="!:http://msdn2.microsoft.com/en-us/library/aa366073.aspx"/>
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.IpHelper.GetExtendedTcpTable(System.IntPtr,System.Int32@,System.Boolean,System.Int32,TabularEditor.Shared.Services.IpHelper.TcpTableType,System.Int32)">
+            <summary>
+            <see cref="!:http://msdn2.microsoft.com/en-us/library/aa365928.aspx"/>
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.IpHelper.TcpTableType">
+            <summary>
+            <see cref="!:http://msdn2.microsoft.com/en-us/library/aa366386.aspx"/>
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.IpHelper.TcpTable">
+            <summary>
+            <see cref="!:http://msdn2.microsoft.com/en-us/library/aa366921.aspx"/>
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.IpHelper.TcpRow">
+            <summary>
+            <see cref="!:http://msdn2.microsoft.com/en-us/library/aa366913.aspx"/>
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.ModelProcessingService.CheckModelMetadata">
+            <summary>
+            Checks whether the model metadata is up-to-date with the currently deployed metadata. Returns 'false' if the current operation should be cancelled.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.Preferences.ProxyUseDefaultCredentials">
+            <summary>
+            Indicate whether the <see cref="!:CredentialCache.DefaultCredentials"/> system credentials of the application are sent with requests.
+            https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.Preferences.ProxyAddress">
+            <summary>
+            The address of the proxy server.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.Preferences.ProxyBypassOnLocal">
+            <summary>
+            Indicates whether to bypass the proxy server for local addresses. The default value is true.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.Preferences.ProxyPasswordEncrypted">
+            <summary>
+            Stores an encrypted version of the user password. Use the string Decrypt() extension method to decrypt.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.OdbcConnectionExtension.GetTables(System.Data.Odbc.OdbcConnection,System.String,System.String,System.String,System.String)">
+            <summary>
+            Extension for calling the ODBC low-level GetTablesW method directly.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.OdbcConnectionExtension.GetColumns(System.Data.Odbc.OdbcConnection,System.String,System.String,System.String,System.String)">
+            <summary>
+            Extension for calling the ODBC low-level GetColumnsW method directly.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.IdentifierQuoting.Backtick">
+            <summary>
+            Indicates that every identifier must be enclosed in a pair of backticks
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.IdentifierQuoting.BacktickFull">
+            <summary>
+            Indicates that the full (multi-part) object reference should be enclosed in a single pair of backticks
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Telemetry.ErrorReport(System.String)">
+            <summary>
+            Note - this gets sent even if <see cref="P:TabularEditor.Shared.Services.Preferences.CollectTelemetry"/> is disabled.
+            </summary>
+            <param name="errorReport"></param>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.SensitiveProcessor">
+            <summary>
+            Process telemetry exceptions to ensure that the exception message does not contain sensitive data
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.IVirtualDataSourceService.ValidateCredentials(TabularEditor.Shared.Services.TableImportSettings)">
+            <summary>
+            Call this method to ensure that a source has the necessary passwords, etc. for connection to be established.
+            The implementation may show a dialog to the user to prompt for passwords, etc. Returns false if the source could not be validated.
+            </summary>
+            <param name=""></param>
+            <returns></returns>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.WebProxyWrapper.LoopbackProxyBypassRule">
+            <summary>
+            A special proxy bypass rule which has the effect of subtracting the implicit loopback rules
+            https://chromium.googlesource.com/chromium/src/+/HEAD/net/docs/proxy.md#overriding-the-implicit-bypass-rules
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.UserEncryptedConnectionStringSerializer">
+            <summary>
+            This class ensures that a connection string is encrypted/decrypted in case it contains sensitive data.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.IApp.UiInvokeAsync(System.Action)">
+            <summary>
+            Runs the specified action asynchronously on the UI thread
+            </summary>
+        </member>
+        <member name="M:TabularEditor.IApp.UiInvoke(System.Action)">
+            <summary>
+            Runs the specified action synchronously on the UI thread
+            </summary>
+        </member>
+        <member name="M:TabularEditor.IApp.SaveAndClose(System.Boolean)">
+            <summary>
+            Checks if the model has any unsaved changes (possibly prompting user if they want to save their changes).
+            </summary>
+            <returns>True if the current operation can proceed (possibly causing loss of changes). False to cancel the current operation.</returns>
+            <param name="closePersistent">Set to true to close all documents. Set to false will leave documents that persist across models open.</param>
+        </member>
+        <member name="M:TabularEditor.Scripting.ScriptHelper.SelectColumn(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Column},TabularEditor.TOMWrapper.Column,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a column from the specified collection.
+            </summary>
+            <param name="columns">A list of columns to be shown to the user</param>
+            <param name="preselect">(Optional) A column from the list of columns, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected column or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Scripting.ScriptHelper.SelectColumn(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.Column,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a column from the specified table.
+            </summary>
+            <param name="table">The table from which the user should select a column</param>
+            <param name="preselect">(Optional) A column from the list of columns, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected column or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Scripting.ScriptHelper.SelectTable(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Table},TabularEditor.TOMWrapper.Table,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a table from the specified list of tables.
+            </summary>
+            <param name="tables">A list of tables to be shown to the user</param>
+            <param name="preselect">(Optional) A table from the list of tables, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected table or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Scripting.ScriptHelper.SelectTable(TabularEditor.TOMWrapper.Model,TabularEditor.TOMWrapper.Table,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a table from the model.
+            </summary>
+            <param name="model">The model from which the user should select a table</param>
+            <param name="preselect">(Optional) A table which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected table or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Scripting.ScriptHelper.SelectMeasure(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure},TabularEditor.TOMWrapper.Measure,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a measure from the specified list of measures.
+            </summary>
+            <param name="measures">A list of measures to be shown to the user</param>
+            <param name="preselect">(Optional) A measure from the list of measures, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected measure or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Scripting.ScriptHelper.SelectMeasure(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.Measure,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a measure from the specified table.
+            </summary>
+            <param name="table">A table containing the measures that will be shown to the user</param>
+            <param name="preselect">(Optional) A measure from the table, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected measure or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Scripting.ScriptHelper.SelectMeasure(TabularEditor.TOMWrapper.Model,TabularEditor.TOMWrapper.Measure,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a measure from the model.
+            </summary>
+            <param name="model">The model from which a measure should be selected by the user</param>
+            <param name="preselect">(Optional) A measure from the model, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected measure or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Scripting.ScriptHelper.SelectObject``1(System.Collections.Generic.IEnumerable{``0},``0,System.String)">
+            <summary>
+            Displays a dialog that allows the user to select a model object from a list of objects.
+            </summary>
+            <typeparam name="T">The type of objects shown to the user</typeparam>
+            <param name="objects">A list of objects to be shown to the user</param>
+            <param name="preselect">(Optional) An object from the list, which is preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected object or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="M:TabularEditor.Scripting.ScriptHelper.SelectObjects``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            Displays a dialog that allows the user to select one or more model objects from a list of objects.
+            </summary>
+            <typeparam name="T">The type of objects shown to the user</typeparam>
+            <param name="objects">A list of objects to be shown to the user</param>
+            <param name="preselect">(Optional) A list of objects which are preselected when the dialog is shown</param>
+            <param name="label">(Optional) A label to be shown within the dialog</param>
+            <returns>The selected object(s) or null if the user cancels out of the dialog</returns>
+        </member>
+        <member name="T:System.Linq.Dynamic.DynamicQueryable">
+            <summary>
+            Microsoft provided class. It allows dynamic string based querying. 
+            Very handy when, at compile time, you don't know the type of queries that will be generated.
+            </summary>
+        </member>
+        <member name="M:System.Linq.Dynamic.DynamicQueryable.Aggregate(System.Linq.IQueryable,System.String,System.String)">
+            <summary>
+            Dynamically runs an aggregate function on the IQueryable.
+            </summary>
+            <param name="source">The IQueryable data source.</param>
+            <param name="function">The name of the function to run. Can be Sum, Average, Min, Max.</param>
+            <param name="member">The name of the property to aggregate over.</param>
+            <returns>The value of the aggregate function run over the specified property.</returns>
+        </member>
+    </members>
+</doc>
