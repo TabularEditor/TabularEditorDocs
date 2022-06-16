@@ -44,7 +44,7 @@ The table below lists all the main features of both tools.
 |Connect to SSAS/Azure AS/Power BI Premium|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
 |Command-line interface|<span class="emoji">&#10004;</span>|*[Coming soon](xref:roadmap)*|
 |Premium, customizable user-interface with high-DPI, multi-monitor and theming support||<span class="emoji">&#10004;</span>|
-|World-class DAX editor with IntelliSense<sup>TM</sup>-like features||<span class="emoji">&#10004;</span>|
+|World-class DAX editor with IntelliSense<sup>TM</sup>-like features, offline formatting, and more||<span class="emoji">&#10004;</span>|
 |Offline DAX syntax checking and column/data type inference||<span class="emoji">&#10004;</span>|
 |Improved Table Import Wizard and Table Schema Update check with Power Query support||<span class="emoji">&#10004;</span>|
 |DAX querying, table preview and Pivot Grids||<span class="emoji">&#10004;</span>|

@@ -21,8 +21,8 @@ Datasets hosted in the Power BI service can have [Incremental Refresh](https://d
 4. Next, select the table on which you want to enable incremental refresh
 5. Set the `EnableRefreshPolicy` property on the table to "true":
   ![Enable Refresh Policy](https://user-images.githubusercontent.com/8976200/121339872-3842c080-c91f-11eb-8e63-a051b34fb36f.png)
-6. Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partititions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source).
-  ![Configure Properties](https://user-images.githubusercontent.com/8976200/121342866-5f4ec180-c922-11eb-8a7a-cef44d3a407b.png)
+6. Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partititions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
+  ![Configure Properties](https://user-images.githubusercontent.com/45298358/170603450-8232ad55-0b4a-4ead-b113-786a781f94ad.png)
 7. Save your model (Ctrl+S).
 8. Right-click on the table and choose "Apply Refresh Policy".
   ![Apply Refresh Policy](https://user-images.githubusercontent.com/8976200/121342947-78577280-c922-11eb-82b5-a517fbe86c3e.png)
@@ -49,3 +49,5 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 ```
 
 ![Use scripts to apply refresh policy](https://user-images.githubusercontent.com/8976200/121344362-f9633980-c923-11eb-916c-44a35cf03a36.png)
+
+
