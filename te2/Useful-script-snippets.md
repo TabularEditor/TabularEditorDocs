@@ -90,10 +90,10 @@ foreach(var m in Selected.Measures) {
     
     // Year-over-year %:
     m.Table.AddMeasure(
-        m.Name + " YoY%",                                           // Name
-        "DIVIDE(" + m.DaxObjectName + ", [" + m.Name + " YoY])",    // DAX expression
-        m.DisplayFolder                                             // Display Folder
-    ).FormatString = "0.0 %";  // Set format string as percentage
+        m.Name + " YoY%",                                       // Name
+        "DIVIDE([" + m.Name + " YoY], [" + m.Name + " PY])",    // DAX expression
+        m.DisplayFolder                                         // Display Folder
+    ).FormatString = "0.0 %";                                   // Set format string as percentage
     
     // Quarter-to-date:
     m.Table.AddMeasure(
