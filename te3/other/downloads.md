@@ -27,7 +27,7 @@ It is not necessary to remove previous installations when upgrading to a newer v
 
 ## History
 
-- 2022-07-02 (*[Release notes](release-notes/3_3_3.md)*):
+- 2022-07-17 (*[Release notes](release-notes/3_3_3.md)*):
   - [TabularEditor.3.3.3.Installer.x64.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.3.3.Installer.x64.exe)
   - [TabularEditor.3.3.3.Installer.x86.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.3.3.Installer.x86.exe)
   - [TabularEditor.3.3.3.x64.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.3.3.x64.zip)
