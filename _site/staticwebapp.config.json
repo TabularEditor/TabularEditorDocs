@@ -2,7 +2,7 @@
     "routes": [
         {
             "route": "/te3/other/release-notes",
-            "redirect": "/te3/other/release-notes/3_3_3.html",
+            "redirect": "/te3/other/release-notes/3_3_4.html",
             "statusCode": 301
         },
         {
