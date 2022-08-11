@@ -7,7 +7,7 @@ updated: 2022-08-11
 
 # Policies
 
-Some IT organisations may wish to limit certain features of Tabular Editor. This is possibly through the use of group policies.
+Some IT organisations may wish to limit certain features of Tabular Editor. This is possible through the use of group policies, by setting certain values in the Windows registry.
 
 Below is a listing of the policies that can be controlled.
 
