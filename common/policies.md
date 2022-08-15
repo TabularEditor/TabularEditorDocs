@@ -19,17 +19,19 @@ Below is a listing of the policies that can be controlled. To enforce one or mor
 
 **Registry key:** Software\Policies\Kapacity\Tabular Editor\
 
-|Value|Description|
+|Value|When enforced...|
 |--|--|
-| DisableUpdates | When this is set to any value except 0, Tabular Editor will not check if newer versions are available online. Moreover, users cannot manually check if new updates are available through the tool. |
-| DisableCSharpScripts | When this is set to any value except 0, Tabular Editor will not let users create and execute C# scripts. |
-| DisableMacros | When this is set to any value except 0, Tabular Editor will not let users save or run macros (aka. "Custom actions"). Moreover, macros defined in the %LocalAppData% folder will not be loaded and compiled upon application startup. |
-| DisableBpaDownload | When this is set to any value except 0, Tabular Editor will not allow Best Practice Analyzer rules to be downloaded from the web. |
-| DisableWebDaxFormatter | When this is set to any value except 0, Tabular Editor will disable the DAX code formatter, which performs a webrequest to daxformatter.com. |
+| DisableUpdates | Tabular Editor will not check if newer versions are available online. Moreover, users cannot manually check if new updates are available through the tool. |
+| DisableCSharpScripts | Tabular Editor will not let users create and execute C# scripts. |
+| DisableMacros | Tabular Editor will not let users save or run macros (aka. "Custom actions"). Moreover, macros defined in the %LocalAppData% folder will not be loaded and compiled upon application startup. |
+| DisableBpaDownload | Tabular Editor will not allow Best Practice Analyzer rules to be downloaded from the web. |
+| DisableWebDaxFormatter | Tabular Editor will disable the DAX code formatter, which performs a webrequest to daxformatter.com. |
+| DisableErrorReports | **(TE3 Only)** Tabular Editor will not allow users to send error/crash reports to the Tabular Editor 3 support team. |
+| DisableTelemetry | **(TE3 Only)** Tabular Editor will not collect and send anonymous usage data to the Tabular Editor 3 support team. |
 
 ## Disabling web communications
 
-If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload` and `DisableWebDaxFormatter` policies.
+If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports` and `DisableTelemetry` policies.
 
 ## Disabling custom scripts
 
