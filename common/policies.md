@@ -23,7 +23,7 @@ Below is a listing of the policies that can be controlled. To enforce one or mor
 |--|--|
 | DisableUpdates | Tabular Editor will not check if newer versions are available online. Moreover, users cannot manually check if new updates are available through the tool. |
 | DisableCSharpScripts | Tabular Editor will not let users create and execute C# scripts. |
-| DisableMacros | Tabular Editor will not let users save or run macros (aka. "Custom actions"). Moreover, macros defined in the %LocalAppData% folder will not be loaded and compiled upon application startup. |
+| DisableMacros | Tabular Editor will not let users save or run macros. Moreover, macros defined in the %LocalAppData% folder will not be loaded and compiled upon application startup. |
 | DisableBpaDownload | Tabular Editor will not allow Best Practice Analyzer rules to be downloaded from the web. |
 | DisableWebDaxFormatter | Tabular Editor will disable the DAX code formatter, which performs a webrequest to daxformatter.com. |
 | DisableErrorReports | **(TE3 Only)** Tabular Editor will not allow users to send error/crash reports to the Tabular Editor 3 support team. |
