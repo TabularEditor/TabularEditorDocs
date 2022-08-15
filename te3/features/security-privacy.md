@@ -46,6 +46,9 @@ Tabular Editor may perform requests to online resources (web URLs) only in the f
 
 \***Any information we obtain through the license activation service, the usage telemetry or the error reports, is kept confidential. We will not share, publish or distribute the data collected in any way, shape or form.**
 
+> [!NOTE]
+> System administrators may enforce certain [policies](https://docs.tabulareditor.com/common/policies.html) which can be used to disable most of the features shown on the list above.
+
 ## Application Security
 
 Tabular Editor does not require any elevated privileges on the Windows machine in which it is installed, neither does it access any restricted resources on the machine. One exception from this rule, is if using the Tabular Editor installer file (.msi), in which case the executable and support files required by the tool, are by default copied to the `Program Files` folder, which typically requires elevated permission. Both the Tabular Editor binary files as well as the installer file, have been signed with a code signing certificate issued to Kapacity A/S, which is your guarantee that the code has not been tampered with by any 3rd party.
