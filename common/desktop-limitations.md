@@ -71,4 +71,4 @@ Once this feature is enabled, Tabular Editor will no longer block any modeling o
 ![Warning shown when unsupported modeling is enabled](~/images/pbi-desktop-warning.png)
 
 > [!WARNING]
-> If your .pbix or .pbit file becomes corrupt or causes Power BI Desktop instability due to unsupported changes made through an External Tool, Microsoft Support will not be able to assist you. For this reason, **always** keep a backup of your .pbix or .pbit file beofre launching any External Tool that allows making changes to your data model.
+> If your .pbix or .pbit file becomes corrupt or causes Power BI Desktop instability due to unsupported changes made through an External Tool, Microsoft Support will not be able to assist you. For this reason, **always** keep a backup of your .pbix or .pbit file before launching any External Tool that allows making changes to your data model.

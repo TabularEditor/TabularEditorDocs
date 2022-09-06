@@ -75,7 +75,21 @@ The following shortcuts are available as of Tabular Editor v. 3.2.2.
 |Navigate back|Alt+Left arrow|
 |Navigate forward|Alt+Right arrow|
 
-## DAX code editing
+## Text/code editing (general)
+
+|Command|Shortcut|
+|---|---|
+|Cut line|Ctrl+L|
+|Delete line|Ctrl+Shift+L|
+|Copy line|Ctrl+Shift+T|
+|Transpose lines|Ctrl+T|
+|Duplicate line|Ctrl+D|
+|Lowercase line|Ctrl+U|
+|Uppercase line|Ctrl+Shift+U|
+|Move lines up|Alt+Up arrow|
+|Move lines down|Alt+Down arrow|
+
+## DAX code
 
 |Command|Shortcut|
 |---|---|
@@ -89,8 +103,6 @@ The following shortcuts are available as of Tabular Editor v. 3.2.2.
 |Comment lines|Ctrl+Shift+K|
 |Uncomment lines|Ctrl+Shift+U|
 |Toggle comments|Ctrl+/|
-|Move lines up|Alt+Up arrow|
-|Move lins down|Alt+Down arrow|
 
 ## DAX Query
 
