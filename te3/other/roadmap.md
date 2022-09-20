@@ -23,12 +23,14 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 - &#9746; C# code assist (autocomplete, calltips, etc.)
 - &#9746; Import Table Wizard support for Snowflake
 - &#9746; Import Table Wizard support for Power BI dataflows
+- &#9744; Import Table Wizard support for Databricks
 - &#9744; Perspective Editor (view that can be opened when selecting one or more perspectives, allowing you to check/uncheck objects visible in those perspectives)
 - &#9744; Metadata Translation Editor (view that can be opened when selecting one or more cultures, similar to the Tabular Translator tool)
 - &#9744; Git integration
 - &#9744; Standalone CLI application
 - &#9744; Configurable hotkeys
-- &#9744; Import Table Wizard support for Power BI datamarts
+- &#9744; DAX Debugger Filter Context visualizer
+- &#9744; Import Table Wizard support for Power BI datamarts*
 
 **Long term**
 - Configurable Daxscilla autocomplete code snippets
