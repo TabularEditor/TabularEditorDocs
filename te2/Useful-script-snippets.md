@@ -133,7 +133,7 @@ foreach(var m in Selected.Measures) {
 
 ***
 
-### Setting default translations
+## Setting default translations
 
 Sometimes it is useful to have default translations applied to all (visible) objects. In this case, a default translation is just the original name/description/display folder of an object. One of the advantages of this, is that all translation objects will be included when exporting translations in the JSON format, i.e. for use with [SSAS Tabular Translator](https://www.sqlbi.com/tools/ssas-tabular-translator/).
 
