@@ -116,19 +116,61 @@ foreach(var m in Selected.Measures) {
 If you want to set additional properties on the newly created measure, the above script can be modified like so:
 
 ```csharp
-// Creates a TOTALYTD measure for every selected measure.
-foreach(var m in Selected.Measures) {
-    var newMeasure = m.Table.AddMeasure(
-        m.Name + " YTD",                                       // Name
-        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // DAX expression
-        m.DisplayFolder                                        // Display Folder
-    );
-    newMeasure.FormatString = m.FormatString;               // Copy format string from original measure
-    foreach(var c in Model.Cultures) {
-        newMeasure.TranslatedNames[c] = m.TranslatedNames[c] + " YTD"; // Copy translated names for every culture
-        newMeasure.TranslatedDisplayFolders[c] = m.TranslatedDisplayFolders[c]; // Copy translated display folders
+// Apply default translations to all (visible) translatable objects, across all cultures in the model:
+foreach(var culture in Model.Cultures)
+{
+    ApplyDefaultTranslation(Model, culture);
+    foreach(var perspective in Model.Perspectives)
+        ApplyDefaultTranslation(perspective, culture);
+    foreach(var table in Model.Tables.Where(t => t.IsVisible))
+        ApplyDefaultTranslation(table, culture);
+    foreach(var measure in Model.AllMeasures.Where(m => m.IsVisible))
+        ApplyDefaultTranslation(measure, culture);
+    foreach(var column in Model.AllColumns.Where(c => c.IsVisible))
+        ApplyDefaultTranslation(column, culture);
+    foreach(var hierarchy in Model.AllHierarchies.Where(h => h.IsVisible))
+        ApplyDefaultTranslation(hierarchy, culture);
+    foreach(var level in Model.AllLevels.Where(l => l.Hierarchy.IsVisible))
+        ApplyDefaultTranslation(level, culture);
+}
+
+void ApplyDefaultTranslation(ITranslatableObject obj, Culture culture)
+{
+    // Only apply the default translation when a translation does not already exist:
+    if(string.IsNullOrEmpty(obj.TranslatedNames[culture]))
+    {
+        // Default name translation:
+        obj.TranslatedNames[culture] = obj.Name;
+
+        // Default description translation:
+        var dObj = obj as IDescriptionObject;
+        if(dObj != null && string.IsNullOrEmpty(obj.TranslatedDescriptions[culture])
+            && !string.IsNullOrEmpty(dObj.Description))
+        {
+            obj.TranslatedDescriptions[culture] = dObj.Description;
+        }
+
+        // Default display folder translation:
+        var fObj = obj as IFolderObject;
+        if(fObj != null && string.IsNullOrEmpty(fObj.TranslatedDisplayFolders[culture])
+            && !string.IsNullOrEmpty(fObj.DisplayFolder))
+        {
+            fObj.TranslatedDisplayFolders[culture] = fObj.DisplayFolder;
+        }
     }
 }
+```
+
+***
+
+### Setting default translations
+
+Sometimes it is useful to have default translations applied to all (visible) objects. In this case, a default translation is just the original name/description/display folder of an object. One of the advantages of this, is that all translation objects will be included when exporting translations in the JSON format, i.e. for use with [SSAS Tabular Translator](https://www.sqlbi.com/tools/ssas-tabular-translator/).
+
+The script below will loop through all cultures in the model, and for every visible object, that doesn't already have a translation, it will assign the default values:
+
+```csharp
+
 ```
 
 ***
