@@ -1,4 +1,4 @@
-﻿# SQL Server 2017 Support
+﻿# SQL Server 2017対応
 
 バージョン2.3から、Tabular EditorはSQL Server 2017 (Compatibility Level 1400)もサポートするようになりました。これは、Tabular Editor の UI が、[こちら](https://blogs.msdn.microsoft.com/analysisservices/2017/04/19/whats-new-in-sql-server-2017-ctp-2-0-for-analysis-services/) で説明されている新機能の一部を公開することを意味します。
 
@@ -8,13 +8,13 @@
 
 ここでは、Tabular Editorで新機能がどのように使用されるかを簡単に説明します。
 
-## Date Relationships
+## 日付リレーションシップ
 
 すべてのリレーションシップで、プロパティ・グリッドの「Join on Date Behavior」プロパティが公開されるようになりました。
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25297821/9dd46be0-26f0-11e7-92bf-10a921ed20dc.png)
 
-## Variations (column/hierarchy reuse)
+## バリエーション（列・階層再利用）
 
 プロパティグリッドの「バリエーション」プロパティを展開することで、カラムにバリエーションを設定できます。
 

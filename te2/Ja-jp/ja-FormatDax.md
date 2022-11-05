@@ -1,10 +1,10 @@
-﻿# FormatDax deprecation
+﻿# FormatDaxの非推奨
 
 Tabular Editorで利用可能な[ヘルパーメソッド](/Advanced-Scripting.md#helper-methods)の1つである `FormatDax` メソッドはTabular Editor 2.13.0 のリリースで非推奨とされました。
 
 非推奨になった理由は、https://www.daxformatter.com/ のウェブサービスで、複数のリクエストを連続して行うと負荷が高くなり、その結果、ウェブサービス側で問題が発生するようになったからです。これは、`FormatDax`メソッドがスクリプト内で呼び出されるたびにウェブリクエストを実行するためで、多くの人が以下のようなスクリプトを使用してきました。
 
-**Don't do this!**
+**やめてくれ！**
 
 ```csharp
 foreach(var m in Model.AllMeasures)
@@ -18,7 +18,7 @@ foreach(var m in Model.AllMeasures)
 
 この問題に対処するため、Tabular Editor 2.13.0では、上記の構文で `FormatDax` が連続して3回以上呼び出されると警告を表示するようにしました。さらに、それ以降の呼び出しは、各呼び出しの間に5秒の遅延を設けて、スロットルされます。
 
-## Alternative syntax
+## 代替構文
 
 Tabular Editor 2.13.0では、FormatDaxを呼び出す方法が2種類導入されています。上記のスクリプトは、以下のどちらかに書き換えることができます。
 
@@ -50,7 +50,7 @@ foreach(var m in Model.AllMeasures)
 FormatDax(Model.AllMeasures);
 ```
 
-## More details
+## 詳細はこちら
 
 技術的には、`FormatDax` は2つのオーバーロードされた拡張メソッドとして実装されています。
 

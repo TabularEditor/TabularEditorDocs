@@ -1,22 +1,22 @@
-﻿# Getting Started
+﻿# はじめに
 
-## Installation
+## インストール
 
 [リリースページ](https://github.com/otykier/TabularEditor/releases/latest)から.msiファイルをダウンロードし、.msiのインストールを実行するだけです。
 
-## Prerequisites
+## 前提条件
 
 なし。
 
 > [!NOTE]
 > Tabular Editor は [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) を使用して Model.bim ファイルや既存のデータベースとの間でメタデータの読み込みと保存を行います。これは.msiインストーラーに含まれています。[Analysis Services Client Libraries](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-data-providers)については、マイクロソフト社の公式ドキュメントをご覧ください。
 
-## System requirements
+## システム要件
 
 - **Operating system:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 or newer
 - **.NET Framework:** [4.6](https://dotnet.microsoft.com/download/dotnet-framework)
 
-## Working with Tabular Editor
+## Tabular Editorでの作業
 
 推奨されるワークフローは、通常通りSSDTを使ってテーブルとリレーションシップを設定し、あとはTabular Editorで行うことです。つまり計算列、メジャー、階層、パースペクティブ、トランスレーション、表示フォルダー、その他あらゆる種類の微調整を行います。
 
@@ -48,7 +48,7 @@ OK "をクリックすると、サーバー上のデータベースのリスト�
 
 モデルを別の場所にデプロイしたい場合、"Model" メニューから "Deploy" を選択してください。
 
-## Deployment
+## デプロイメント
 
 Tabular Editorにはデプロイメントウィザードがあり、SSDTからデプロイする場合と比較して既存のデータベースにデプロイする場合、いくつかの利点があります。デプロイ先のサーバーとデータベースを選択した後、手元にあるデプロイ用の以下のオプションがあります。
 
@@ -60,11 +60,11 @@ Tabular Editorにはデプロイメントウィザードがあり、SSDTから�
 
 ロールのデプロイ "にチェックを入れると、ターゲットデータベース内のロールはロードしたモデルの内容に更新されますが、"ロールメンバーのデプロイ "にチェックを入れないと、各ロールのメンバーはターゲットデータベースで変更されません。
 
-## Command Line usage
+## コマンドラインの使用方法
 
-コマンド ラインを使用して、自動デプロイメントを行うことができます。GUI で利用可能なすべてのデプロイメントオプションは、コマンドラインでも利用可能です。
+コマンド ラインを使用して、自動デプロイメントを行うことができます。GUIで利用可能なすべてのデプロイメントオプションは、コマンドラインでも利用可能です。
 
-### Deployment Examples
+### 展開例
 
 `TabularEditor.exe c:\Projects\Model.bim`
 
@@ -85,15 +85,14 @@ Tabular Editor GUIを開き、指定されたModel.bimファイルをロード�
 
 > [!NOTE]
 > TabularEditor.exe は Windows Forms アプリケーションなので、コマンドラインから実行するとアプリケーションが別のスレッドで実行され、呼び出し元にすぐに制御が戻されます。これは、バッチジョブの一部としてデプロイメントを実行する場合、ジョブを進める前にデプロイメントが成功するのを待つ必要があり、問題を引き起こす可能性があります。このような問題が発生した場合は、`start /wait` を使用して TabularEditor がその仕事を終えてから呼び出し元に制御を戻してください。
-> 
 > `start /wait TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
-## Advanced Scripting
+## アドバンスト・スクリプティング
 
 Tabular Editorでは、C#を使用してロードされたモデルへの変更をスクリプト化できます。これは、一度に多くのオブジェクトにいくつかの変更を適用したい場合に実用的です。アドバンスト・スクリプト・エディターは、2つのオブジェクトにアクセスできます。
 
-* `Selected` は、エクスプローラツリーで現在選択されているすべてのオブジェクトを表します。
-* `Model` で、Tabular Object Modelのツリー全体を表します。
+- `Selected` は、エクスプローラツリーで現在選択されているすべてのオブジェクトを表します。
+- `Model` で、Tabular Object Modelのツリー全体を表します。
 
 アドバンスト・スクリプト・エディターには、使い始めに必要なインテリセンス機能がいくつか用意されています。
 

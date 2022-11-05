@@ -1,4 +1,4 @@
-﻿# Best Practice Analyzer
+﻿# ベストプラクティス・アナライザー
 
 > ベストプラクティス・アナライザーは Tabular Editor v. 2.8.1 で全面的に改良されたため、この記事の情報やスクリーンショットの一部は古くなっています[Best-Practice-Analyzer-Improvements.md](Best-Practice-Analyzer-Improvements.md)。Dynamic LINQ (ルール式) に関する情報は、現在も最新です。
 
@@ -80,7 +80,7 @@ not Name.StartsWith(Table.Name)
 (Name.EndsWith("Key") or Name.EndsWith("ID")) and SummarizeBy <> "None"
 ```
 
-## Finding unused objects
+## 未使用のオブジェクトを探す
 
 表形式モデルを構築する場合、高い基数を持つ列を何としても避けることが重要です。典型的な原因は、誤ってモデルにインポートされたシステムのタイムスタンプやテクニカルキーなどです。一般的に、モデルには実際に必要なカラムだけが含まれるようにすべきです。ベストプラクティス・アナライザーが、どのカラムが全く必要ない可能性が高いかを教えてくれるとしたら、それは素晴らしいことだと思いませんか？
 
@@ -112,7 +112,7 @@ and not ReferencedBy.AllTables.Any(not IsHidden)
 and not ReferencedBy.Roles.Any()
 ```
 
-## Fixing objects
+## オブジェクトを修正する
 
 場合によっては、ルールの基準を満たすオブジェクトの問題を自動的に修正することが可能です。たとえば、オブジェクトに単純なプロパティを設定するだけでよい場合です。次のルールの背後にあるJSONを詳しく見てみましょう。
 
@@ -138,10 +138,10 @@ and not ReferencedBy.Roles.Any()
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25298489/9035bab6-26f5-11e7-8134-8502daaf4132.png)
 
-Remember that you can always undo (CTRL+Z) changes done to a model after script execution.
+スクリプトの実行後、モデルへの変更はいつでも取り消し（CTRL+Z）できることを忘れないでください。
 
-Feedback on this new tool is most welcome! In the future, we plan to provide a set of universal Best Practices that will ship with Tabular Editor to get you started. Furthermore, plans are in motion to make the Best Practice Analyzer available as a plug-in to Visual Studio, so those of you not using Tabular Editor can still benefit from it.
+この新しいツールに関するフィードバックは大歓迎です。将来的には、Tabular Editorに同梱される普遍的なベストプラクティスのセットを提供し、使い始められるようにする予定です。さらに、ベストプラクティスアナライザーをVisual Studioのプラグインとして利用できるようにする計画も進行中ですので、Tabular Editorを使用していない方でもその恩恵を受けることができます。
 
-## Official Best Practice Rules
+## 公式ベストプラクティスルール
 
-To provide Tabular Editor users with a set of standard Best Practices, a new GitHub [repository has been created here](https://github.com/TabularEditor/BestPracticeRules), that will serve as a public collection of Best Practice Rules that the community can contribute to. Any rules that are deemed to be generally viable for all kinds of Tabular modeling, will be included in periodic "Releases" at that repository. At a later time, Tabular Editor will be able to automatically fetch these rules from the GitHub repository, eliminating the need to manually download the BPARules.json file from the repository.
+Tabular Editorのユーザーに標準的なベストプラクティスのセットを提供するために、新しいGitHub [リポジトリはこちら](https://github.com/TabularEditor/BestPracticeRules)が作成され、コミュニティが貢献できるベストプラクティスルールの公開コレクションとして使用されます。あらゆる種類のTabularモデリングで一般的に実行可能であると判断されたルールは、このリポジトリで定期的に「リリース」に含まれる予定です。後日、Tabular EditorはこれらのルールをGitHubリポジトリから自動的に取得できるようになり、リポジトリからBPARules.jsonファイルを手動でダウンロードする必要がなくなります。

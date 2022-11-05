@@ -1,5 +1,5 @@
 ﻿
-この記事では、Tabular Editor の Advanced Scripting 機能を使用して、複数のオブジェクトにまたがる DAX ロジックを一貫した方法で維持する方法について説明します。Useful Script Snippets の記事](/Useful-script-snippets) では、同様のロジックを持つ [Custom Actions を使用して多数のメジャーをすばやく生成する方法](/Useful-script-snippets#generate-timeintelligence-measures) を既に紹介しましたが、これは例えばタイムインテリジェント計算の作成時に便利なものです。
+この記事では、Tabular Editor の Advanced Scripting機能を使用して、複数のオブジェクトにまたがるDAXロジックを一貫した方法で維持する方法について説明します。Useful Script Snippetsの記事](/Useful-script-snippets) では、同様のロジックを持つ [Custom Actions を使用して多数のメジャーをすばやく生成する方法](/Useful-script-snippets#generate-timeintelligence-measures) を既に紹介しましたが、これはたとえばタイムインテリジェント計算の作成時に便利なものです。
 
 この記事では、このアイデアを発展させて、TSVファイル（Tabulator Separated Values）内で必要なすべての計算を一元的に定義できるスクリプトの「フレームワーク」を作成することにする。TSVファイルを使う利点は、Excelで簡単に編集できるのと同時に、Tabular Editorのスクリプトから簡単にパースして読み込むことができることです。
 
@@ -15,6 +15,6 @@
 
 ***TODO***
 
-というのも、私たちが作ろうとしている計算が、有効なフィルタのコンテキスト内で評価された1つ以上の基本指標から構築できる限りにおいて、です。
+というのも、私たちが作ろうとしている計算が、有効なフィルターのコンテキスト内で評価された1つ以上の基本指標から構築できる限りにおいて、です。
 
 ***TODO***

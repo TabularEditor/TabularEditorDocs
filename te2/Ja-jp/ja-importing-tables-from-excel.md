@@ -1,14 +1,8 @@
-﻿---
-uid: importing-tables-from-excel
-title: Importing Tables from Excel
-author: Daniel Otykier
-updated: 2021-11-10
----
-# Importing Tables from Excel
+﻿# Excelからテーブルをインポートする
 
 Excelワークシートをテーブルとして表形式モデルに追加する必要がある場合、Tabular Editor 2.xとExcel ODBCドライバーを使用すれば可能です。
 
-# Prerequisites
+## 前提条件
 
 Tabular Editor 2.xは32ビットのアプリケーションで、多くの人は通常64ビット版のOffice（64ビット版Excel ODBCドライバーを含む）をインストールしています。残念ながら、Tabular Editor 2.xは64ビットドライバーを使用することができず、32ビットドライバーをダウンロードしてインストールしようとすると、すでに64ビット版のOfficeがインストールされている場合はエラーになります。しかし、この回避策を用いることで、64ビット版Officeの隣に32ビット版Excel ODBCドライバーをインストールすることは可能です。
 
@@ -24,7 +18,7 @@ Tabular Editor 2.xは32ビットのアプリケーションで、多くの人は
 
   ![Excel Odbc 32 64](../images/excel-odbc-32-64.png)
 
-# Setting up an ODBC data source
+## ODBCデータソースのセットアップ
 
 上記のように32ビットODBC Excelドライバーがインストールされていることを確認した後、Tabular Editor 2.xでExcelファイルからテーブルを追加するには、以下の手順が必要です。
 
@@ -65,6 +59,6 @@ Tabular Editor 2.xは32ビットのアプリケーションで、多くの人は
 
   Replace the `<excel file path>` and `<sheet name>` placeholders with their actual values.
 
-# Conclusion
+## 結論
 
 ExcelファイルからのテーブルのインポートはTabular Editor 2.xでも可能ですが、上記のようにODBC Excelドライバーを使用する必要があり、若干複雑になっています。

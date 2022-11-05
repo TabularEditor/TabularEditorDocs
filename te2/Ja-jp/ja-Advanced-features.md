@@ -22,19 +22,19 @@ Tabular Editorでロールを扱う最大の利点は、各テーブルオブジ
 
 ![](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/RLSRoleContext.png)
 
-## View Table Partitions
+## テーブル・パーティションを表示
 
 TODO
 
-## DAX Expression Editor
+## DAX式エディタ
 
 TODO
 
-## Script Editor
+## スクリプトエディタ
 
 TODO (For now, please view [this article](/Advanced-Scripting))
 
-## Scripting/referencing objects
+## スクリプト／オブジェクトの参照
 
 ドラッグ＆ドロップ機能を使用し、以下の方法でオブジェクトをスクリプト出力できます。
 
@@ -44,7 +44,7 @@ TODO (For now, please view [this article](/Advanced-Scripting))
 
 * オブジェクトをAdvanced Script Editorにドラッグすると、TOMツリーを介してオブジェクトにアクセスするC#コードが挿入されます。
 
-## Deployment Wizard
+## デプロイメントウィザード
 
 Tabular Editorにはデプロイメントウィザードがあり、SSDTからデプロイする場合と比較して、既存のデータベースにデプロイする場合の利点があります。デプロイ先のサーバーとデータベースを選択した後、手元のデプロイ用に以下のオプションが用意されています。
 
@@ -74,11 +74,11 @@ Tabular Editorは、モデル内のすべてのメジャー、計算カラム、
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/22482528/b37d27e2-e7f9-11e6-8b89-c503f9fffcac.png)
 
-## Import/Export Translations
+## インポート/エクスポート翻訳
 
 エクスプローラツリーで1つまたは複数のカルチャーを選択し、右クリックして「Export Translations...」を選択すると後でTabular EditorまたはVisual Studioでインポート可能な.jsonファイルが生成されます。Import Translations...」を選択すると、対応する.jsonファイルがインポートされます。既存の翻訳を上書きするかどうかを選択できます。上書きしない場合、.jsonファイルで定義された翻訳は、指定されたカルチャーの翻訳をまだ持っていないオブジェクトにのみ適用されます。
 
-## Folder Serialization
+## フォルダーシリアル化
 
 この機能により、TFS、SubVersion、Gitなどのファイルベースのソース管理環境で、SSAS Tabular Modelsをより簡単に統合できます。File" > "Save to Folder... "を選択すると、Tabular EditorはModel.bimファイルを分解し、その内容をModel.bim内のJSONの構造に似たフォルダー構造で個別のファイルとして保存します。その後モデルを保存する際、変更されたメタデータを持つファイルのみが扱われます。つまり、ほとんどのバージョン管理システムはモデルに対して行われた変更を簡単に検出でき、単一のModel.bimファイルを扱う場合よりもソースのマージやコンフリクト処理がずっと簡単になるのです。
 
@@ -94,7 +94,7 @@ Tabular Editorは、モデル内のすべてのメジャー、計算カラム、
 
 <img src="https://cloud.githubusercontent.com/assets/8976200/25333606/30578a78-28eb-11e7-9885-0fc66f5e4046.png" width="300" />
 
-## User Settings Files
+## ユーザー設定ファイル
 
 Tabular Editorを実行すると、いくつかの追加ファイルがディスクの様々な場所に書き込まれます。以下は、これらのファイルの説明とその内容です。
 
@@ -113,4 +113,3 @@ Tabular Editorを実行すると、いくつかの追加ファイルがディス
 - **RecentFiles.json** 最近開いた.bimファイルのリストを保存する。このリストの直近の10項目は、「ファイル」→「最近使ったファイル」メニューに表示されます。
 
 - **RecentServers.json** 最近開いた.bimファイルのリストを保存する。このリストの直近の10項目は、「ファイル」→「最近使ったファイル」メニューに表示されます。
-- 

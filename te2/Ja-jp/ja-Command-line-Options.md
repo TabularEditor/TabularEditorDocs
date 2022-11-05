@@ -159,17 +159,17 @@ $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
        -ArgumentList "Model.bim -S ClearConnectionStrings.cs -D localhost\tabular MyModel -C SQLDW `"Provider=SQLOLEDB.1;Data Source=sqldwprod;Persist Security Info=False;Integrated Security=SSPI;Initial Catalog=DW`""
 ```
 
-上記のコマンドは、Model.bim ファイルを "localhosttabular" SSAS インスタンスに "MyModel" という新しい SSAS データベースとしてデプロイするものです。デプロイ前に、このスクリプトは、プロバイダー（レガシー）データソースのすべての接続文字列を、プレースホルダーとして使用するデータソースの名前に置き換えるために使用されます。SQLDW」という名前のデータソースが1つだけあると仮定すると、-Cスイッチによって接続文字列が更新され、「SQLDW」が指定した文字列全体に置き換えられます。
+上記のコマンドは、Model.bimファイルを "localhosttabular" SSASインスタンスに "MyModel" という新しいSSASデータベースとしてデプロイするものです。デプロイ前に、このスクリプトは、プロバイダー（レガシー）データソースのすべての接続文字列を、プレースホルダーとして使用するデータソースの名前に置き換えるため使用されます。「SQLDW」という名前のデータソースが1つだけあると仮定すると、-Cスイッチによって接続文字列が更新され、「SQLDW」が指定した文字列全体に置き換えられます。
 
-このテクニックは、異なる（同一の）ソースからのデータを処理する複数の環境に同じモデルをデプロイしたい場合、例えば、プロダクション、プレプロダクション、UATデータベースなどのシナリオで有用です。Azure DevOps (下記参照) を使用する場合、実際に使用する接続文字列をコマンドにハードコードするのではなく、変数を使用して保存することを検討してください。
+このテクニックは、異なる（同一の）ソースからのデータを処理する複数の環境に同じモデルをデプロイしたい場合、たとえば、プロダクション、プレプロダクション、UATデータベースなどのシナリオで有用です。Azure DevOps（下記参照）を使用する場合、実際に使用する接続文字列をコマンドにハードコードするのではなく、変数を使用して保存することを検討してください。
 
 ## Integration with Azure DevOps
 
 Azure DevOpsパイプライン内でTabular Editor CLIを使用したい場合、スクリプトで実行されるTabularEditor.exeコマンドに「-V」スイッチを使用する必要があります。このスイッチにより、Tabular Editorはログコマンドを[Azure DevOpsが読める形式](https://github.com/Microsoft/vsts-tasks/blob/master/docs/authoring/commands.md)で出力するようになります。これにより、Azure DevOpsはエラーなどに適切に対応できるようになります。
 
-コマンドラインを通じてデプロイメントを実行する場合、未処理のオブジェクトに関する情報がプロンプトに出力されます。自動化されたデプロイメントシナリオでは、例えば新しいカラムを追加したり、計算テーブルの DAX 式を変更したりするときなど、オブジェクトが未処理になる状況にビルドエージェントを反応させたい場合があります。この場合、前述の「-V」スイッチに加えて「-W」スイッチを使用することで、この情報を警告として出力することができる。そうすることで、デプロイ完了後に Azure DevOps に「SucceededWithIssues」ステータスが返されるようになる。また、デプロイ成功後にサーバーからDAXエラーが報告された場合に、デプロイがステータス「Failed」を返すようにしたい場合は、「-E」スイッチを使用することもできます。
+コマンドラインを通じてデプロイメントを実行する場合、未処理のオブジェクトに関する情報がプロンプトに出力されます。自動化されたデプロイメントシナリオでは、たとえば新しいカラムを追加したり、計算テーブルのDAX式を変更したりするときなど、オブジェクトが未処理の状況にビルドエージェントを反応させたい場合があります。この場合、前述の「-V」スイッチに加えて「-W」スイッチを使用することで、この情報を警告として出力することができる。そうすることで、デプロイ完了後Azure DevOpsに「SucceededWithIssues」ステータスが返されます。また、デプロイ成功後にサーバーからDAXエラーが報告された場合、デプロイがステータス「Failed」を返すようにしたい場合は、「-E」スイッチを使用することもできます。
 
-Azure DevOpsパイプラインのCommand Line Task内でTabularEditor.exeを実行する場合、`start /wait`は必要ではありません。これは、タスクによって生成されたすべてのスレッドが終了するまで、Command Line Taskが完了しないためです。言い換えれば、TabularEditor.exeの呼び出しの後に追加のコマンドがある場合にのみ、`start /wait` を使用する必要があります。TabularEditor.exeからの出力をパイプラインログに正しく戻すには、`/B`スイッチが必要です。
+Azure DevOpsパイプラインのCommand Line Task内でTabularEditor.exeを実行する場合、`start /wait`は必要ありません。これは、タスクによって生成されたすべてのスレッドが終了するまで、Command Line Taskが完了しないためです。言い換えれば、TabularEditor.exeの呼び出しの後に追加のコマンドがある場合にのみ、`start /wait` を使用する必要があります。TabularEditor.exeからの出力をパイプラインログに正しく戻すには、`/B`スイッチが必要です。
 
 ```shell
 TabularEditor.exe "C:\Projects\My Model\Model.bim" -D ssasserver databasename -O -C -P -V -E -W
@@ -188,11 +188,11 @@ start /B /wait TabularEditor.exe "C:\Projects\Sales\Model.bim" -D ssasserver Sal
 
 何らかの理由でデプロイに失敗した場合、「-W」スイッチを使用しているかどうかにかかわらず、Tabular EditorはAzure DevOpsに「Failed」ステータスを返します。
 
-Azure DevOpsとTabular Editorの詳細については、このブログシリーズ](https://tabulareditor.github.io/2019/02/20/DevOps1.html) (特に[第3章](https://tabulareditor.github.io/2019/10/08/DevOps3.html) 以降) をご覧ください。
+Azure DevOpsとTabular Editorの詳細については、このブログシリーズ](https://tabulareditor.github.io/2019/02/20/DevOps1.html) (とくに[第3章](https://tabulareditor.github.io/2019/10/08/DevOps3.html) 以降) をご覧ください。
 
 ### Azure DevOps PowerShell Task
 
-コマンドラインタスクの代わりにPowerShellタスクを使いたい場合は、上記のように `Start-Process` コマンドレットを使って TabularEditor.exe を実行する必要があります。さらに、PowerShellスクリプトのexitパラメーターにプロセスの終了コードを渡して、Tabular Editorで発生したエラーがPowerShellタスクの失敗の原因になるようにしてください。
+コマンドラインタスクの代わりにPowerShellタスクを使いたい場合は、上記のように `Start-Process` コマンドレットを使ってTabularEditor.exeを実行する必要があります。さらに、PowerShellスクリプトのexitパラメーターにプロセスの終了コードを渡して、Tabular Editorで発生したエラーがPowerShellタスクの失敗の原因にしてください。
 
 ```powershell
 $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
@@ -202,7 +202,7 @@ exit $p.ExitCode
 
 ## Running the Best Practice Analyzer
 
-「-A」スイッチを使用すると、ローカルマシン（%AppData%... \LocalTabularEditor</BPARules.json file）またはモデル自体のアノテーションとして定義されたベストプラクティスルールに違反するすべてのオブジェクトをTabular Editorでモデルスキャンするように設定できます。また、「-A」スイッチの後にベストプラクティスルールを含む.jsonファイルのパスを指定すると、そのファイルに定義されたルールを使ってモデルをスキャンすることができます。違反のあるオブジェクトは、コンソールに出力されます。
+「-A」スイッチを使用すると、ローカルマシン（%AppData%... \LocalTabularEditor</BPARules.json file）またはモデル自体のアノテーションとして定義されたベストプラクティスルールに違反するすべてのオブジェクトをTabular Editorでモデルスキャンするように設定できます。また、「-A」スイッチの後にベストプラクティスルールを含む.jsonファイルのパスを指定すると、そのファイルに定義されたルールを使ってモデルをスキャンできます。違反のあるオブジェクトは、コンソールに出力されます。
 
 「-V」スイッチも使用している場合、各ルールの深刻度によって、ルール違反がビルドパイプラインにどのように報告されるかが決まります。
 
@@ -212,13 +212,13 @@ exit $p.ExitCode
 
 ## Performing a data source schema check
 
-[バージョン 2.8](https://github.com/otykier/TabularEditor/releases/tag/2.8) では、-SC (-SCHEMACHECK) スイッチを使用して、テーブルソースクエリを検証することができます。これは [Refresh Table Metadata UI](/Importing-Tables#refreshing-table-metadata) の実行と同等ですが、モデルへの変更は行われませんが、スキーマの相違はコンソールに報告されます。変更されたデータ型とソースに追加されたカラムは、警告としてレポートされます。ソースにない列はエラーとして報告されます。SC（-SCHEMACHECK）スイッチと-S（-SCRIPT）スイッチの両方を指定すると、スクリプトが正常に実行された後にスキーマ チェックが実行されるため、スキーマ チェックが実行される前にデータ ソースのプロパティを変更できます（たとえば、資格情報パスワードを指定するためなど）。
+[バージョン 2.8](https://github.com/otykier/TabularEditor/releases/tag/2.8) では、-SC (-SCHEMACHECK) スイッチを使用して、テーブルソースクエリを検証できます。これは [Refresh Table Metadata UI](/Importing-Tables#refreshing-table-metadata) の実行と同等ですが、モデルへの変更は行われませんが、スキーマの相違はコンソールに報告されます。変更されたデータ型とソースに追加されたカラムは、警告としてレポートされます。ソースにない列はエラーとして報告されます。SC（-SCHEMACHECK）スイッチと-S（-SCRIPT）スイッチの両方を指定すると、スクリプトが正常に実行された後にスキーマ チェックが実行されるため、スキーマ チェックが実行される前にデータ ソースのプロパティを変更できます（たとえば、資格情報パスワードを指定するためなど）。
 
 また、スキーマチェックを行う際に、テーブルやカラムを特定の方法で処理したい場合は、アノテーションを付けることができます。[詳細はこちら](/Importing-Tables#ignoring-objects)を参照してください。
 
 ## Command Line output and Exit Codes
 
-コマンドラインは、使用されたスイッチや実行中に遭遇したイベントに応じて、様々な詳細を提供します。Exit Codes は [version 2.7.4] (https://github.com/otykier/TabularEditor/releases/tag/2.7.4) で導入されました。
+コマンドラインは、使用されたスイッチや実行中遭遇したイベントに応じて、さまざまな詳細を提供します。Exit Codesは [version 2.7.4](https://github.com/otykier/TabularEditor/releases/tag/2.7.4) で導入されました。
 
 |Level|Command|Message|Clarification|
 |---|---|---|---|
@@ -232,7 +232,7 @@ exit $p.ExitCode
 |Information|-SCRIPT|Script line #: ...|スクリプト内で `Info(string)` メソッドまたは `Output(string)` メソッドを使用する。|
 |Warning|-SCRIPT|Script warning: ...|スクリプト内で `Warning(string)` メソッドを使用する。|
 |Error|-SCRIPT|Script error: ...|スクリプト内で `Error(string)` メソッドを使用する。|
-|Error|-FOLDER, -BIM|-FOLDER and -BIM arguments are mutually exclusive.|Tabular Editorで、現在ロードされているモデルを一度の実行でフォルダ構造および.bimファイルに保存できない。|
+|Error|-FOLDER, -BIM|-FOLDER and -BIM arguments are mutually exclusive.|Tabular Editorで、現在ロードされているモデルを一度の実行でフォルダー構造および.bimファイルに保存できない。|
 |Error|-ANALYZE|Rulefile not found: ...||
 |Error|-ANALYZE|Invalid rulefile: ...|指定されたBPAルールファイルが破損しているか、有効なJSONを含んでいません。|
 |Information|-ANALYZE|... violates rule ...|重大度レベル1以下のルールに対するベストプラクティス・アナライザーの結果。|

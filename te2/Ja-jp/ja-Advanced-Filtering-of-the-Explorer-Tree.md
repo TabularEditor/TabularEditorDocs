@@ -12,7 +12,7 @@
 * ![image](https://user-images.githubusercontent.com/8976200/46567940-2ffb8180-c93d-11e8-9fba-84fbb79b6bb3.png) **Hierarchical by children**: この検索は、_child_オブジェクト（メジャー、カラム、階層など）に適用されます。親オブジェクトは、検索条件に一致する子オブジェクトを少なくとも1つ持っている場合にのみ表示されます。
 * ![image](https://user-images.githubusercontent.com/8976200/46567941-37bb2600-c93d-11e8-9c02-86502f41bce8.png) **Flat**: 検索はすべてのオブジェクトに適用され、結果はフラットなリストで表示されます。子項目を含むオブジェクトは、引き続き階層的に表示されます。
 
-## Simple search
+## 簡易検索
 
 [Filter]テキストボックスに何かを入力して[Enter]を押すと、オブジェクト名の中で大文字と小文字を区別しないシンプルな検索が行われます。例えば、Filterテキストボックスに「sales」と入力し、「By Parent」フィルタリングモードを使用すると、次のような結果が得られます。
 
