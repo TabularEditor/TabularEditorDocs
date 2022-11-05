@@ -1,0 +1,98 @@
+﻿# Roadmap
+
+* TMSLまたはDAXへのオブジェクトのスクリプト化（DAX Editorとの互換性）
+* DAX式エディターのインテリセンス
+* Visual Studio用のプラグインの作成、Tabular Editorの起動
+* Tabular Editorプラグインのアーキテクチャ／開発者向け公開API
+* VSTSを用いたビルド、テスト、公開、ドキュメントの自動化
+* [Done]Formula fix-up (i'e., DAX expression when renamed objects)
+* [Done]オブジェクトの依存関係を示すUI
+* [Done]コマンドラインからのスクリプト変更の可能性
+* [Done]より多くのオブジェクトの読み取り／編集の可能性。オブジェクト名の変更時にDAX式を自動的に修正）
+* [Done]オブジェクトの依存関係を表示するUI
+* [Done]コマンドラインからのスクリプト変更
+* [Done]より多くのオブジェクトタイプ（テーブル、パーティション、データカラム）を読み込み/編集可能
+* [Done]Source Controlワークフローに統合するためにModel.bimを複数のjsonファイル（たとえば、テーブルごとに1ファイル）に分割
+* [Done]Import/Export Translations（翻訳のインポート/エクスポート
+
+## Scripting objects into TMSL or DAX
+
+エクスプローラツリーで1つまたは複数のオブジェクトを選択すると、そのオブジェクトのスクリプトを生成できるようにする必要があります。実際には、オブジェクトを他のテキストエディター（またはSSMS）にドラッグ＆ドロップすることですでに可能ですが、エンドユーザーに何が起こっているかをより明確に伝えるために、同様の右クリックオプションがあるべきです。TMSLスクリプト（SSMS用）と[DAX Editor](https://github.com/DaxEditor/)で使用可能なDAXスタイルのコードの両方を生成することが可能であるべきです。
+
+今日、メジャーと計算カラムはTabular Editorのインスタンス間でドラッグしてモデル間でコピーできますが、この機能をより良く公開するために、クリップボードまたはファイルから提供されたTMSLの一部をインポートするUIオプションがあるべきです。[this issue](https://github.com/otykier/TabularEditor/issues/69)を参照してください。最後に、標準的なコピー＆ペーストのショートカットを有効にする必要があります。
+
+## Create plug-in for Visual Studio, to launch Tabular Editor
+
+Model.bimファイルが閉じていることを確認し、Model.bimファイルをロードした状態でTabularEditor.exeを起動する、Visual Studioのシンプルなコンテキストメニュー拡張機能です。
+
+## IntelliSense in DAX expression editor
+
+エクスプレッション・エディターでDAXコードを記述する際、テーブル名、カラム名、メジャー名、関数（およびその引数）を補完するためのオートコンプリートボックスがポップアップ表示されるようにする必要があります。
+
+[This issue](https://github.com/otykier/TabularEditor/issues/64)もご参照ください。
+
+## Tabular Editor plug-in architecture / public API for developers
+
+C#を使って表形式モデルをスクリプトすることを好む人たちは、 今日すでに、アナリシス・サービスTOM APIを直接使う代わりに、「TOMWrapper.dll」を使うことができます。たとえば、TOMWrapperネームスペースでは、 便利なメソッドやプロパティを利用できるため、パースペクティブやトランスレーションを簡単に操作できます。
+
+さらに一歩進んで、開発者向けに、より多くのタブラー・エディターの機能を公開するのもおもしろいでしょう。
+
+* DAXオブジェクトのパース
+* ベストプラクティス・アナライザーの結果にアクセスする
+* Tabular EditorのUI（カスタムUIの有無にかかわらず、Tabular Editorの「プラグイン」を作成可能にすること）
+
+## Automated build, test, publishing and documentation using VSTS
+
+VSTSを利用したDevOps、Tabular Editorのソースコード全般のクリーンアップ。
+
+## Formula fix-up
+
+モデル・オブジェクトの名前が変更された場合、そのオブジェクトを参照しているすべてのDAX式は、変更された名前を反映するように更新される必要があります。
+
+**Update**: 2.2より、この機能は「ファイル」→「環境設定」トグルでオンできるようになりました。
+
+## UI for showing object dependencies
+
+メジャーまたは計算された列を右クリックすると、ポップアップ ダイアログに依存関係ツリーが表示されるようにする必要があります。選択したオブジェクトに依存するオブジェクト、または選択したオブジェクトに依存するオブジェクトのいずれかを表示できるようにする必要があります。
+
+**Update**:2.2より、この機能が利用できるようになりました。オブジェクトを右クリックして、"Show dependencies... "を選択するだけです。
+
+## Scripting changes from the command-line
+
+今日、コマンドラインから直接モデルをデプロイすることが可能です。同様に、モデル上で実行されるC#スクリプトを含む.csファイルをパイプで渡すことができるはずです。スクリプトの実行後、更新されたモデルを保存またはデプロイすることが可能であるべきです。そのためには、現在のコマンドラインオプションを少し変更する必要があります。
+
+**Update**:2.3では、"-S "スイッチを使うことで、コマンドラインからスクリプトを実行することができるようになりました。デプロイは通常通り行われますが、修正したモデルを.bimとして保存したい場合は、"-B "スイッチを使用します。
+
+## Possibility to read/edit more object types
+
+現在、Tabular EditorではエンドユーザーはTabular Object Modelのオブジェクトのサブセットしか読み、編集することができません。モデルツリー内のすべてのオブジェクトをTabular Editorでアクセスできるようにすることが望まれます。リレーションシップ、KPI、計算テーブル、ロールは直接編集可能であるべきです。データソース、テーブル、データカラム、テーブルパーティションはいくつかの制約のもと編集可能であるべきです（例えば、Tabular Editorが任意のデータソースとクエリーからデータスキーマをフェッチできることを期待してはいけません）。
+
+**Update**: 2.1では、多くの新しいオブジェクトタイプがツリーエクスプローラーに直接表示されます。右クリックメニューを使用して、これらのオブジェクトの多く（ロール、パースペクティブ、翻訳）を作成、複製、削除できます。リレーションシップやデータソースの作成/削除のサポートはまだ不足していますが、これは将来のリリースで提供される予定です。
+
+**Update**: 2.2より、リレーションシップの作成と削除ができるようになりました。オブジェクトの種類は後ほど紹介します。
+
+**Update**: 2.3から、テーブル、パーティション、データカラムの編集が可能になりました。Visual Studioはブランクモデル自体の作成にのみ必要で、他のすべてはTabular Editorで行うことができるようになりました。
+
+**Update**: 前回のアップデートが嘘のように!KPIを忘れていました - しかし、バージョン2.4から作成/編集/削除ができるようになりました。
+
+## Split a Model.bim into multiple json files
+
+Model.bimファイルのレイアウトと構造は、ソース管理およびバージョン管理の目的には恐ろしいものです。タブラーオブジェクトモデル全体が1つのファイルに書き込まれているだけでなく、このファイルには「ModifiedTime」情報が構造上のいたるところに含まれており、ソースコントロールのDIFF操作を無意味なものにしています。
+
+Tabular Modelのリリース管理ワークフローを改善するために、Tabular EditorでModel.bimファイルをメジャーや計算カラムなどの個別ファイルを含むフォルダー構造として保存/ロードできるとおもしろいですね。このフォーマットから/へのModel.bimファイルのエクスポート/インポートに利用できるコマンドラインオプションがあるべきで、このフォーマットから直接デプロイが可能であるべきです（Model.bimファイル自体を必要としないケースで）。これらの個々のファイルは、Model.bimファイルと同じJSONを含みますが、"ModifiedTime "の情報は含みません。これにより、バージョン管理システムで簡単に使用でき、複数の開発者が同じモデルで一度に作業できるようになります。
+
+**Update**: [Available in 2.2](/Advanced-features#folder-serialization).
+
+**Update**: 2.3では、パースペクティブとトランスレーションのメタデータを、個々のオブジェクトのアノテーションとして保存するオプションがあります。これは、複数の開発者がいるソース管理シナリオで、開発者が翻訳やパースペクティブメンバーシップなどを変更したときに、多くの編集を受ける単一のファイルを持つことを避けるために便利です。
+
+## Power BI Compatibility
+
+現在、Power BI DesktopでホストされているモデルにTabular Editorを接続することはすでに可能です。やり方は、[ExcelやSSMSの場合はこちら](http://biinsight.com/connect-to-power-bi-desktop-model-from-excel-and-ssms/)と同じようなものです。この方法で、Power BI Desktopのモデルに表示フォルダを追加することができ、.pbixファイルを保存して開き直った後でも、実際にPower BIに表示されたままになります。ただし、互換性レベルの問題があるようなので、事前に調べておく必要があります。
+
+**Update**:2.1より、Tabular EditorはPower BI DesktopとVisual Studio Integrated Workspacesの実行中のインスタンスを検出するようになりました。これらのインスタンスに接続し、通常のインスタンスと同様に変更を加えることができますが、Power BIや統合ワークスペースのモデルを変更するこの方法は、Microsoftによってサポートされていません。
+
+## Import/Export translations
+
+これはSSDTの標準機能で、Tabular Editorにもあると便利な機能です。
+
+**Update**: [Available in 2.2](/Advanced-features#import-export-translations).
