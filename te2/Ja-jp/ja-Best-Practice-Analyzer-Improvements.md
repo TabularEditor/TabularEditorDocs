@@ -2,7 +2,7 @@
 
 [Tabular Editor 2.8.1](https://github.com/otykier/TabularEditor/releases/tag/2.8.1)では、ベストプラクティスアナライザーが大きく見直されました。
 
-まず最初に気づくのは、Tabular Editorがベストプラクティスの問題数をメインUI内で直接レポートするようになったことです。
+最初に気づくのは、Tabular Editorがベストプラクティスの問題数をメインUI内で直接レポートするようになったことです。
 
 ![image](https://user-images.githubusercontent.com/8976200/53631987-baee5880-3c0b-11e9-9d66-e906cccce2be.png)
 

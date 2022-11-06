@@ -1,10 +1,10 @@
 ﻿# SQL Server 2017対応
 
-バージョン2.3から、Tabular EditorはSQL Server 2017 (Compatibility Level 1400)もサポートするようになりました。これは、Tabular Editor の UI が、[こちら](https://blogs.msdn.microsoft.com/analysisservices/2017/04/19/whats-new-in-sql-server-2017-ctp-2-0-for-analysis-services/) で説明されている新機能の一部を公開することを意味します。
+バージョン2.3から、Tabular EditorはSQL Server 2017 (Compatibility Level 1400)もサポートするようになりました。これは、Tabular EditorのUIが、[こちら](https://blogs.msdn.microsoft.com/analysisservices/2017/04/19/whats-new-in-sql-server-2017-ctp-2-0-for-analysis-services/) で説明されている新機能の一部を公開することを意味します。
 
 ただし、これらの機能を使用するには、[Tabular Editor の適切なビルド](https://github.com/otykier/TabularEditor/releases/tag/2.5-CL1400) をダウンロードする必要があることに注意してください。これは、SQL Server 2017 / SSDT 17.0向けに新しいクライアントライブラリのセットがMicrosoftから提供されており、これらのライブラリはTabular EditorのSQL Server 2016-ビルドと互換性がないためです。新しいライブラリは、新しい[SSDTのバージョン](https://docs.microsoft.com/en-us/sql/ssdt/download-sql-server-data-tools-ssdt)から取得できます（Visual Studio 2015が必要です）。
 
-互換性レベル1400の機能が必要ない場合は、SQL Server 2016-ビルドの[Tabular Editor](https://github.com/otykier/TabularEditor/releases/tag/2.5)を使用することができます。
+互換性レベル1400の機能が必要ない場合は、SQL Server 2016-ビルドの[Tabular Editor](https://github.com/otykier/TabularEditor/releases/tag/2.5)を使用できます。
 
 ここでは、Tabular Editorで新機能がどのように使用されるかを簡単に説明します。
 
