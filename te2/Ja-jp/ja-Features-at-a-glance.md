@@ -4,7 +4,7 @@
 
 ## Load/save Model.bim files
 
-CTRL+Oを押すと、ファイルを開くダイアログが表示され、Tabular Editorに読み込むModel.bimファイルを選択できます。このファイルは互換性レベル1200以上でなければなりません（JSON形式）。CTRL+SはTabular Editorで行った変更をファイルに戻して保存します（Tabular Editorを使用する前にModel.bimファイルをバックアップしておくことをおすすめします）。ロードしたモデルをAnalysis Servicesサーバーインスタンスにデプロイする場合は、以下の[デプロイメント](/Features-at-a-glance#deployment)をご覧ください。
+CTRL+Oを押すと、ファイルを開くダイアログが表示され、Tabular Editorに読み込むModel.bimファイルを選択できます。このファイルは互換性レベル1200以上でなければなりません（JSON形式）。CTRL+SはTabular Editorで行った変更をファイルに戻して保存します（Tabular Editorを使用する前にModel.bimファイルをバックアップしておくことをオススメします）。ロードしたモデルをAnalysis Servicesサーバーインスタンスにデプロイする場合は、以下の[デプロイメント](/ja-Features-at-a-glance)をご覧ください。
 
 ## SSAS Tabularデータベースへの接続/デプロイメント
 

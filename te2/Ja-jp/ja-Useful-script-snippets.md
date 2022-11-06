@@ -29,7 +29,7 @@ foreach(var c in Selected.Columns)
 }
 ```
 
-このスニペットでは、`<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` 関数を使用して、テーブル上に新しいメジャーを作成します。DAX 式で使用する列の完全修飾名を取得するために、`DaxObjectFullName` プロパティを使用しています: `'TableName'[ColumnName]`.
+このスニペットでは、`<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` 関数を使用して、テーブル上に新しいメジャーを作成します。DAX式で使用する列の完全修飾名を取得するために、`DaxObjectFullName` プロパティを使用しています: `'TableName'[ColumnName]`.
 
 ***
 
@@ -136,7 +136,7 @@ foreach(var m in Selected.Measures) {
 
 ## デフォルトの翻訳を設定する
 
-すべての（目に見える）オブジェクトにデフォルトの翻訳を適用しておくと便利な場合があります。この場合、デフォルトの翻訳は、オブジェクトのオリジナルの名前/説明/表示フォルダだけです。この利点は、JSON 形式で翻訳をエクスポートするときに、すべての翻訳オブジェクトを含めることができることです。
+すべての（目に見える）オブジェクトにデフォルトの翻訳を適用しておくと便利な場合があります。この場合、デフォルトの翻訳は、オブジェクトのオリジナルの名前/説明/表示フォルダーだけです。この利点は、JSON形式で翻訳をエクスポートするときに、すべての翻訳オブジェクトを含めることができることです。
 
 以下のスクリプトは、モデル内のすべてのカルチャをループし、まだ翻訳がないすべての可視オブジェクトに対して、デフォルト値を割り当てます。
 
@@ -766,7 +766,7 @@ using(var fileWriter = new StreamWriter(file))
 }
 ```
 
-他にも面白い使い方を思いついたら、ぜひ [community scripts repository](https://github.com/TabularEditor/Scripts) で共有することを検討してみてください。ありがとうございました。
+他にもおもしろい使い方を思いついたら、ぜひ [community scripts repository](https://github.com/TabularEditor/Scripts) で共有することを検討してみてください。ありがとうございました。
 
 ***
 

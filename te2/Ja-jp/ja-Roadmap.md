@@ -21,7 +21,7 @@
 
 今日、メジャーと計算カラムはTabular Editorのインスタンス間でドラッグしてモデル間でコピーできますが、この機能をより良く公開するために、クリップボードまたはファイルから提供されたTMSLの一部をインポートするUIオプションがあるべきです。[this issue](https://github.com/otykier/TabularEditor/issues/69)を参照してください。最後に、標準的なコピー＆ペーストのショートカットを有効にする必要があります。
 
-## Tabular Editorを起動するためのVisual Studio用プラグインを作成する。
+## Tabular Editorを起動するためのVisual Studio用プラグインを作成する
 
 Model.bimファイルが閉じていることを確認し、Model.bimファイルをロードした状態でTabularEditor.exeを起動する、Visual Studioのシンプルなコンテキストメニュー拡張機能です。
 
@@ -87,7 +87,7 @@ Tabular Modelのリリース管理ワークフローを改善するために、T
 
 ## Power BIとの互換性
 
-現在、Power BI DesktopでホストされているモデルにTabular Editorを接続することはすでに可能です。やり方は、[ExcelやSSMSの場合はこちら](http://biinsight.com/connect-to-power-bi-desktop-model-from-excel-and-ssms/)と同じようなものです。この方法で、Power BI Desktopのモデルに表示フォルダを追加することができ、.pbixファイルを保存して開き直った後でも、実際にPower BIに表示されたままになります。ただし、互換性レベルの問題があるようなので、事前に調べておく必要があります。
+現在、Power BI DesktopでホストされているモデルにTabular Editorを接続することはすでに可能です。やり方は、[ExcelやSSMSの場合はこちら](http://biinsight.com/connect-to-power-bi-desktop-model-from-excel-and-ssms/)と同じようなものです。この方法で、Power BI Desktopのモデルに表示フォルダーを追加することができ、.pbixファイルを保存して開き直った後でも、実際にPower BIに表示されたままです。ただし、互換性レベルの問題があるようなので、事前に調べておく必要があります。
 
 **Update**:2.1より、Tabular EditorはPower BI DesktopとVisual Studio Integrated Workspacesの実行中のインスタンスを検出するようになりました。これらのインスタンスに接続し、通常のインスタンスと同様に変更を加えることができますが、Power BIや統合ワークスペースのモデルを変更するこの方法は、Microsoftによってサポートされていません。
 

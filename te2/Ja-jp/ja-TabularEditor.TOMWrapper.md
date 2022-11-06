@@ -151,7 +151,6 @@ Methods
 | `void` | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |  | 
 | `void` | Undelete(`ITabularObjectCollection` collection) |  | 
 
-
 ## `ColumnCollection`
 
 Column用のコレクションクラスです。一度に複数のオブジェクトにプロパティを設定するための便利なプロパティを提供します。
@@ -186,7 +185,6 @@ Properties
 | `String` | SourceProviderType |  | 
 | `AggregateFunction` | SummarizeBy |  | 
 | `Int32` | TableDetailPosition |  | 
-
 
 Methods
 
@@ -223,7 +221,6 @@ Properties
 | `String` | StatsTableCaptions |  | 
 | `Boolean` | Unassigned |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -235,7 +232,6 @@ Methods
 | `void` | OnPropertyChanged(`String` propertyName, `Object` oldValue, `Object` newValue) |  | 
 | `void` | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |  | 
 | `void` | Undelete(`ITabularObjectCollection` collection) |  | 
-
 
 ## `CultureCollection`
 
@@ -259,7 +255,6 @@ Methods
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `String` | ToString() |  | 
-
 
 ## `CultureConverter`
 
@@ -305,13 +300,11 @@ Properties
 | `Database` | TOMDatabase |  | 
 | `Nullable<Int64>` | Version |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `String` | ToString() |  | 
-
 
 ## `DataColumn`
 
@@ -349,14 +342,12 @@ Properties
 | `TranslationIndexer` | TranslatedDescriptions | Collection of localized descriptions for this DataSource. | 
 | `DataSourceType` | Type | Gets or sets the Type of the DataSource. | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `String` | GetAnnotation(`String` name) |  | 
 | `void` | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |  | 
-
 
 ## `DataSourceCollection`
 
@@ -382,7 +373,6 @@ Methods
 | --- | --- | --- | 
 | `String` | ToString() |  | 
 
-
 ## `Dependency`
 
 ```csharp
@@ -398,7 +388,6 @@ Fields
 | `Boolean` | fullyQualified |  | 
 | `Int32` | to |  | 
 
-
 ## `DependencyHelper`
 
 ```csharp
@@ -412,7 +401,6 @@ Static Methods
 | --- | --- | --- | 
 | `void` | AddDep(this `IExpressionObject` target, `IDaxObject` dependsOn, `Int32` fromChar, `Int32` toChar, `Boolean` fullyQualified) |  | 
 | `String` | NoQ(this `String` objectName, `Boolean` table = False) | Removes qualifiers such as ' ' and [ ] around a name. | 
-
 
 ## `DeploymentMode`
 
@@ -428,7 +416,6 @@ Enum
 | --- | --- | --- | 
 | `0` | CreateDatabase |  | 
 | `1` | CreateOrAlter |  | 
-
 
 ## `DeploymentOptions`
 
@@ -447,14 +434,12 @@ Fields
 | `Boolean` | DeployRoleMembers |  | 
 | `Boolean` | DeployRoles |  | 
 
-
 Static Fields
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `DeploymentOptions` | Default |  | 
 | `DeploymentOptions` | StructureOnly |  | 
-
 
 ## `DeploymentResult`
 
@@ -469,7 +454,6 @@ Fields
 | --- | --- | --- | 
 | `IReadOnlyList<String>` | Issues |  | 
 | `IReadOnlyList<String>` | Warnings |  | 
-
 
 ## `DeploymentStatus`
 
@@ -486,7 +470,6 @@ Enum
 | `0` | ChangesSaved |  | 
 | `1` | DeployComplete |  | 
 | `2` | DeployCancelled |  | 
-
 
 ## `Folder`
 
@@ -518,13 +501,11 @@ Properties
 | `TranslationIndexer` | TranslatedDisplayFolders |  | 
 | `TranslationIndexer` | TranslatedNames |  | 
 
-
 Events
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `PropertyChangedEventHandler` | PropertyChanged |  | 
-
 
 Methods
 
@@ -537,13 +518,11 @@ Methods
 | `void` | SetFolderName(`String` newName) |  | 
 | `void` | UndoSetPath(`String` value) |  | 
 
-
 Static Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `Folder` | CreateFolder(`Table` table, `String` path = , `Boolean` useFixedCulture = False, `Culture` fixedCulture = null) |  | 
-
 
 ## `FolderHelper`
 
@@ -611,7 +590,6 @@ Methods
 | `void` | SetLevelOrder(`IList<Level>` order) |  | 
 | `void` | Undelete(`ITabularObjectCollection` collection) |  | 
 
-
 ## `HierarchyCollection`
 
 Hierarchyのコレクションクラス。複数のオブジェクトに一度にプロパティを設定するための便利なプロパティを提供します。
@@ -631,13 +609,11 @@ Properties
 | `Boolean` | IsHidden |  | 
 | `Table` | Parent |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `String` | ToString() |  | 
-
 
 ## `HierarchyColumnConverter`
 
@@ -654,7 +630,6 @@ Methods
 | `Boolean` | GetStandardValuesExclusive(`ITypeDescriptorContext` context) |  | 
 | `Boolean` | IsValid(`ITypeDescriptorContext` context, `Object` value) |  | 
 
-
 ## `IAnnotationObject`
 
 ```csharp
@@ -670,7 +645,6 @@ Methods
 | `String` | GetAnnotation(`String` name) |  | 
 | `void` | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |  | 
 
-
 ## `IClonableObject`
 
 ```csharp
@@ -683,7 +657,6 @@ Methods
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `TabularNamedObject` | Clone(`String` newName, `Boolean` includeTranslations) |  | 
-
 
 ## `IDaxObject`
 
@@ -701,7 +674,6 @@ Properties
 | `String` | DaxObjectName |  | 
 | `String` | DaxTableName |  | 
 | `HashSet<IExpressionObject>` | Dependants |  | 
-
 
 ## `IDescriptionObject`
 
@@ -762,13 +734,11 @@ Properties
 | --- | --- | --- | 
 | `Table` | ParentTable |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `IEnumerable<IDetailObject>` | GetChildrenByFolders(`Boolean` recursive = False) |  | 
-
 
 ## `IErrorMessageObject`
 
@@ -784,7 +754,6 @@ Properties
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `String` | ErrorMessage |  | 
-
 
 ## `IExpressionObject`
 
@@ -849,7 +818,6 @@ Properties
 | `String` | Name |  | 
 | `TranslationIndexer` | TranslatedNames |  | 
 
-
 ## `ITabularObject`
 
 ```csharp
@@ -864,7 +832,6 @@ Properties
 | --- | --- | --- | 
 | `Model` | Model |  | 
 | `ObjectType` | ObjectType |  | 
-
 
 ## `ITabularObjectCollection`
 
@@ -882,7 +849,6 @@ Properties
 | `TabularModelHandler` | Handler |  | 
 | `IEnumerable<String>` | Keys |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -894,7 +860,6 @@ Methods
 | `ITabularObjectCollection` | GetCurrentCollection() |  | 
 | `Int32` | IndexOf(`TabularNamedObject` obj) |  | 
 | `void` | Remove(`TabularNamedObject` obj) |  | 
-
 
 ## `ITabularObjectContainer`
 
@@ -910,7 +875,6 @@ Methods
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `IEnumerable<ITabularNamedObject>` | GetChildren() |  | 
-
 
 ## `ITabularPerspectiveObject`
 
@@ -928,7 +892,6 @@ Properties
 | --- | --- | --- | 
 | `PerspectiveIndexer` | InPerspective |  | 
 
-
 ## `ITabularTableObject`
 
 特定のテーブルに属するオブジェクト。
@@ -944,7 +907,6 @@ Properties
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `Table` | Table |  | 
-
 
 Methods
 
@@ -1039,7 +1001,6 @@ Properties
 | `String` | Description |  | 
 | `Hierarchy` | Parent |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -1047,7 +1008,6 @@ Methods
 | `void` | Add(`Level` item) |  | 
 | `Boolean` | Remove(`Level` item) |  | 
 | `String` | ToString() |  | 
-
 
 ## `LogicalGroup`
 
@@ -1067,20 +1027,17 @@ Properties
 | `ObjectType` | ObjectType |  | 
 | `TranslationIndexer` | TranslatedNames |  | 
 
-
 Events
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `PropertyChangedEventHandler` | PropertyChanged |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `IEnumerable<ITabularNamedObject>` | GetChildren() |  | 
-
 
 ## `LogicalTreeOptions`
 
@@ -1104,7 +1061,6 @@ Enum
 | `128` | AllObjectTypes |  | 
 | `256` | ShowRoot |  | 
 | `447` | Default |  | 
-
 
 ## `Measure`
 
@@ -1141,7 +1097,6 @@ Properties
 | `Table` | Table |  | 
 | `TranslationIndexer` | TranslatedDescriptions | このメジャーに関するローカライズされた説明文のコレクション。 | 
 | `TranslationIndexer` | TranslatedDisplayFolders | この小節のローカライズされた表示フォルダのコレクション。 | 
-
 
 Methods
 
@@ -1307,13 +1262,11 @@ Properties
 | `ModelPermission` | ModelPermission |  | 
 | `Model` | Parent |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `String` | ToString() |  | 
-
 
 ## `NullTree`
 
@@ -1332,7 +1285,6 @@ Methods
 | `void` | OnNodesRemoved(`ITabularObject` parent, `ITabularObject[]` children) |  | 
 | `void` | OnStructureChanged(`ITabularNamedObject` obj = null) |  | 
 
-
 ## `ObjectOrder`
 
 ```csharp
@@ -1347,7 +1299,6 @@ Enum
 | --- | --- | --- | 
 | `0` | Alphabetical |  | 
 | `1` | Metadata |  | 
-
 
 ## `ObjectType`
 
@@ -1388,7 +1339,6 @@ Enum
 | `36` | TablePermission |  | 
 | `1000` | Database |  | 
 
-
 ## `Partition`
 
 Partitionの基底クラス宣言
@@ -1419,7 +1369,6 @@ Properties
 | `Table` | Table |  | 
 | `TranslationIndexer` | TranslatedDescriptions | このパーティションに関するローカライズされた説明文のコレクション。 | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -1429,7 +1378,6 @@ Methods
 | `String` | GetAnnotation(`String` name) |  | 
 | `void` | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |  | 
 | `void` | Undelete(`ITabularObjectCollection` collection) |  | 
-
 
 ## `PartitionCollection`
 
@@ -1450,13 +1398,11 @@ Properties
 | `ModeType` | Mode |  | 
 | `Table` | Parent |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `String` | ToString() |  | 
-
 
 ## `Perspective`
 
@@ -1476,7 +1422,6 @@ Properties
 | `Perspective` | MetadataObject |  | 
 | `TranslationIndexer` | TranslatedDescriptions | このパースペクティブのローカライズされた説明文のコレクション。 | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -1486,7 +1431,6 @@ Methods
 | `String` | GetAnnotation(`String` name) |  | 
 | `void` | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |  | 
 | `void` | Undelete(`ITabularObjectCollection` collection) |  | 
-
 
 ## `PerspectiveCollection`
 
@@ -1512,7 +1456,6 @@ Methods
 | --- | --- | --- | 
 | `String` | ToString() |  | 
 
-
 ## `PerspectiveColumnIndexer`
 
 ```csharp
@@ -1527,14 +1470,12 @@ Properties
 | --- | --- | --- | 
 | `Column` | Column |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `void` | Refresh() |  | 
 | `void` | SetInPerspective(`Perspective` perspective, `Boolean` included) |  | 
-
 
 ## `PerspectiveHierarchyIndexer`
 
@@ -1550,14 +1491,12 @@ Properties
 | --- | --- | --- | 
 | `Hierarchy` | Hierarchy |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `void` | Refresh() |  | 
 | `void` | SetInPerspective(`Perspective` perspective, `Boolean` included) |  | 
-
 
 ## `PerspectiveIndexer`
 
@@ -1573,7 +1512,6 @@ Fields
 | --- | --- | --- | 
 | `TabularNamedObject` | TabularObject |  | 
 
-
 Properties
 
 | Type | Name | Summary | 
@@ -1583,7 +1521,6 @@ Properties
 | `IEnumerable<String>` | Keys |  | 
 | `Dictionary<Perspective, Boolean>` | PerspectiveMap |  | 
 | `String` | Summary |  | 
-
 
 Methods
 
@@ -1599,7 +1536,6 @@ Methods
 | `void` | Refresh() |  | 
 | `void` | SetInPerspective(`Perspective` perspective, `Boolean` included) |  | 
 
-
 ## `PerspectiveMeasureIndexer`
 
 ```csharp
@@ -1614,14 +1550,12 @@ Properties
 | --- | --- | --- | 
 | `Measure` | Measure |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `void` | Refresh() |  | 
 | `void` | SetInPerspective(`Perspective` perspective, `Boolean` included) |  | 
-
 
 ## `PerspectiveTableIndexer`
 
@@ -1638,7 +1572,6 @@ Properties
 | `Boolean` | Item |  | 
 | `Table` | Table |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -1646,7 +1579,6 @@ Methods
 | `PerspectiveTable` | EnsurePTExists(`Perspective` perspective) |  | 
 | `void` | Refresh() |  | 
 | `void` | SetInPerspective(`Perspective` perspective, `Boolean` included) |  | 
-
 
 ## `ProviderDataSource`
 
@@ -1677,7 +1609,6 @@ Properties
 | `String` | SourceID |  | 
 | `Int32` | Timeout | ProviderDataSourceのタイムアウトを取得または設定します。 | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -1685,7 +1616,6 @@ Methods
 | `Boolean` | Browsable(`String` propertyName) |  | 
 | `Boolean` | Editable(`String` propertyName) |  | 
 | `void` | Init() |  | 
-
 
 ## `Relationship`
 
@@ -1741,13 +1671,11 @@ Properties
 | `Boolean` | RelyOnReferentialIntegrity |  | 
 | `SecurityFilteringBehavior` | SecurityFilteringBehavior |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `String` | ToString() |  | 
-
 
 ## `RelationshipCollection2`
 
@@ -1768,13 +1696,11 @@ Properties
 | `Boolean` | RelyOnReferentialIntegrity |  | 
 | `SecurityFilteringBehavior` | SecurityFilteringBehavior |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `String` | ToString() |  | 
-
 
 ## `RoleRLSIndexer`
 
@@ -1792,7 +1718,6 @@ Fields
 | --- | --- | --- | 
 | `ModelRole` | Role |  | 
 
-
 Properties
 
 | Type | Name | Summary | 
@@ -1802,7 +1727,6 @@ Properties
 | `IEnumerable<String>` | Keys |  | 
 | `Dictionary<Table, String>` | RLSMap |  | 
 | `String` | Summary |  | 
-
 
 Methods
 
@@ -1814,7 +1738,6 @@ Methods
 | `IEnumerator<String>` | GetEnumerator() |  | 
 | `void` | Refresh() |  | 
 | `void` | SetRLS(`Table` table, `String` filterExpression) |  | 
-
 
 ## `SerializeOptions`
 
@@ -1833,7 +1756,6 @@ Fields
 | `HashSet<String>` | Levels |  | 
 | `Boolean` | PrefixFilenames |  | 
 | `Boolean` | SplitMultilineStrings |  | 
-
 
 Static Properties
 
@@ -1863,7 +1785,6 @@ Properties
 | `RelationshipEndCardinality` | ToCardinality |SingleColumnRelationship の ToCardinality を取得または設定する。 | 
 | `Column` | ToColumn | SingleColumnRelationship の ToColumn を取得または設定する。 | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -1876,7 +1797,6 @@ Methods
 | `void` | OnPropertyChanging(`String` propertyName, `Object` newValue, `Boolean&` undoable, `Boolean&` cancel) |  | 
 | `String` | ToString() |  | 
 | `void` | Undelete(`ITabularObjectCollection` collection) |  | 
-
 
 ## `Table`
 
@@ -1914,7 +1834,6 @@ Properties
 | `PartitionSourceType` | SourceType |  | 
 | `TranslationIndexer` | TranslatedDescriptions | この表のローカライズされた説明文のコレクション。 | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -1939,7 +1858,6 @@ Methods
 | `void` | OnPropertyChanging(`String` propertyName, `Object` newValue, `Boolean&` undoable, `Boolean&` cancel) |  | 
 | `void` | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |  | 
 | `void` | Undelete(`ITabularObjectCollection` collection) |  | 
-
 
 Static Fields
 
@@ -1967,13 +1885,11 @@ Properties
 | `Boolean` | IsHidden |  | 
 | `Model` | Parent |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `String` | ToString() |  | 
-
 
 ## `TableExtension`
 
@@ -1987,7 +1903,6 @@ Static Methods
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `PartitionSourceType` | GetSourceType(this `Table` table) |  | 
-
 
 ## `TableRLSIndexer`
 
@@ -2005,7 +1920,6 @@ Fields
 | --- | --- | --- | 
 | `Table` | Table |  | 
 
-
 Properties
 
 | Type | Name | Summary | 
@@ -2015,7 +1929,6 @@ Properties
 | `IEnumerable<String>` | Keys |  | 
 | `Dictionary<ModelRole, String>` | RLSMap |  | 
 | `String` | Summary |  | 
-
 
 Methods
 
@@ -2027,7 +1940,6 @@ Methods
 | `IEnumerator<String>` | GetEnumerator() |  | 
 | `void` | Refresh() |  | 
 | `void` | SetRLS(`ModelRole` role, `String` filterExpression) |  | 
-
 
 ## `TabularCollectionHelper`
 
@@ -2050,7 +1962,6 @@ Static Methods
 | `void` | InPerspective(this `IEnumerable<Measure>` measures, `Perspective` perspective, `Boolean` value) |  | 
 | `void` | SetDisplayFolder(this `IEnumerable<Measure>` measures, `String` displayFolder) |  | 
 
-
 ## `TabularCommonActions`
 
 複数のオブジェクトを一度に変更するような、Tabularモデル上の一般的な操作のための便利なメソッドを提供します。  例えば、これらのメソッドは、階層レベルや表示フォルダーなどを変更する UI ドラッグ＆ドロップ操作を簡単に実行するために使用されます。
@@ -2066,7 +1977,6 @@ Properties
 | --- | --- | --- | 
 | `TabularModelHandler` | Handler |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -2078,7 +1988,6 @@ Methods
 | `String` | NewMeasureName(`String` prefix) |  | 
 | `void` | ReorderLevels(`IEnumerable<Level>` levels, `Int32` firstOrdinal) |  | 
 | `void` | SetContainer(`IEnumerable<IDetailObject>` objects, `IDetailObjectContainer` newContainer, `Culture` culture) |  | 
-
 
 ## `TabularConnection`
 
@@ -2094,7 +2003,6 @@ Static Methods
 | `String` | GetConnectionString(`String` serverName) |  | 
 | `String` | GetConnectionString(`String` serverName, `String` userName, `String` password) |  | 
 
-
 ## `TabularCultureHelper`
 
 ```csharp
@@ -2107,7 +2015,6 @@ Static Methods
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `Boolean` | ImportTranslations(`String` culturesJson, `Model` Model, `Boolean` overwriteExisting, `Boolean` haltOnError) |  | 
-
 
 ## `TabularDeployer`
 
@@ -2126,7 +2033,6 @@ Static Methods
 | `void` | SaveModelMetadataBackup(`String` connectionString, `String` targetDatabaseID, `String` backupFilePath) |  | 
 | `void` | WriteZip(`String` fileName, `String` content) |  | 
 
-
 ## `TabularModelHandler`
 
 ```csharp
@@ -2141,7 +2047,6 @@ Fields
 | --- | --- | --- | 
 | `Dictionary<String, ITabularObjectCollection>` | WrapperCollections |  | 
 | `Dictionary<MetadataObject, TabularObject>` | WrapperLookup |  | 
-
 
 Properties
 
@@ -2159,7 +2064,6 @@ Properties
 | `TabularTree` | Tree |  | 
 | `UndoManager` | UndoManager |  | 
 | `Int64` | Version |  | 
-
 
 Methods
 
@@ -2189,7 +2093,6 @@ Methods
 | `void` | UpdateObject(`ITabularObject` obj) |  | 
 | `void` | UpdateTables() |  | 
 
-
 Static Fields
 
 | Type | Name | Summary | 
@@ -2199,13 +2102,11 @@ Static Fields
 | `String` | PROP_ISCONNECTED |  | 
 | `String` | PROP_STATUS |  | 
 
-
 Static Properties
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `TabularModelHandler` | Singleton |  | 
-
 
 Static Methods
 
@@ -2213,7 +2114,6 @@ Static Methods
 | --- | --- | --- | 
 | `List<Tuple<NamedMetadataObject, String>>` | CheckErrors(`Database` database) |  | 
 | `List<Tuple<NamedMetadataObject, ObjectState>>` | CheckProcessingState(`Database` database) |  | 
-
 
 ## `TabularNamedObject`
 
@@ -2233,7 +2133,6 @@ Properties
 | `String` | Name |  | 
 | `TranslationIndexer` | TranslatedNames | このオブジェクトのローカライズされた名前のコレクション。 | 
 
-
 Methods
 
 | Type | Name | Summary | 
@@ -2243,7 +2142,6 @@ Methods
 | `void` | Delete() |  | 
 | `void` | Init() |  | 
 | `void` | Undelete(`ITabularObjectCollection` collection) | 削除操作を取り消すには、ハッキーな回避策が必要です。  派生クラスは、対象のオブジェクトが "所有する" すべてのオブジェクトを更新するように注意する必要があります。例えば、メジャーは、その KPI のラッパー (存在する場合) を更新するように注意する必要があります。 | 
-
 
 ## `TabularObject`
 
@@ -2260,7 +2158,6 @@ Fields
 | `ITabularObjectCollection` | Collection |  | 
 | `TabularModelHandler` | Handler |  | 
 
-
 Properties
 
 | Type | Name | Summary | 
@@ -2272,14 +2169,12 @@ Properties
 | `TranslationIndexer` | TranslatedDescriptions |  | 
 | `TranslationIndexer` | TranslatedDisplayFolders |  | 
 
-
 Events
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `PropertyChangedEventHandler` | PropertyChanged |  | 
 | `PropertyChangingEventHandler` | PropertyChanging |  | 
-
 
 Methods
 
@@ -2289,7 +2184,6 @@ Methods
 | `void` | OnPropertyChanged(`String` propertyName, `Object` oldValue, `Object` newValue) |  | 
 | `void` | OnPropertyChanging(`String` propertyName, `Object` newValue, `Boolean&` undoable, `Boolean&` cancel) | オブジェクトのプロパティが変更される前に呼び出されます。派生クラスは、変更がどのように処理されるかを制御することができます。  このメソッド内でArgumentExceptionを投げると、UIにエラーメッセージが表示されます。 | 
 | `Boolean` | SetField(`T&` field, `T` value, `String` propertyName = null) |  | 
-
 
 ## `TabularObjectCollection<T, TT, TP>`
 
@@ -2316,13 +2210,11 @@ Properties
 | `String` | Summary |  | 
 | `Object` | SyncRoot |  | 
 
-
 Events
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `NotifyCollectionChangedEventHandler` | CollectionChanged |  | 
-
 
 Methods
 
@@ -2352,7 +2244,6 @@ Methods
 | `void` | Remove(`Object` value) |  | 
 | `void` | RemoveAt(`Int32` index) |  | 
 
-
 ## `TabularObjectComparer`
 
 ```csharp
@@ -2367,14 +2258,12 @@ Properties
 | --- | --- | --- | 
 | `ObjectOrder` | Order |  | 
 
-
 Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `Int32` | Compare(`Object` x, `Object` y) |  | 
 | `Int32` | Compare(`ITabularNamedObject` x, `ITabularNamedObject` y) |  | 
-
 
 ## `TabularObjectHelper`
 
@@ -2396,7 +2285,6 @@ Static Methods
 | `Boolean` | SetName(this `ITabularNamedObject` obj, `String` newName, `Culture` culture) |  | 
 | `String` | SplitCamelCase(this `String` str) |  | 
 
-
 ## `TabularTree`
 
 TabularLogicalModelはTreeViewAdvコントロールに表示するためのTabularObject間の関係を制御します。個々のTabularObjectは他のオブジェクトとの論理的な関係（例えば、特定のカルチャーのDisplayFoldersを通して）を知りませんし、気にすることもありません。TabularObjectはTabular Object Modelから直接継承される物理的な関係のみを気にします（例えば、メジャーはテーブルに属する、など）。
@@ -2413,7 +2301,6 @@ Fields
 | --- | --- | --- | 
 | `Dictionary<String, Folder>` | FolderTree |  | 
 
-
 Properties
 
 | Type | Name | Summary | 
@@ -2426,13 +2313,11 @@ Properties
 | `Perspective` | Perspective |  | 
 | `Int32` | UpdateLocks |  | 
 
-
 Events
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
 | `PropertyChangedEventHandler` | PropertyChanged |  | 
-
 
 Methods
 
@@ -2455,7 +2340,6 @@ Methods
 | `void` | UpdateFolder(`Folder` folder, `String` oldFullPath = null) |  | 
 | `Boolean` | VisibleInTree(`ITabularNamedObject` tabularObject) |  | 
 
-
 ## `TranslationIndexer`
 
 ```csharp
@@ -2474,7 +2358,6 @@ Properties
 | `IEnumerable<String>` | Keys |  | 
 | `String` | Summary |  | 
 | `Int32` | TranslatedCount |  | 
-
 
 Methods
 

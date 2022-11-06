@@ -4,11 +4,11 @@
 
 基本的に、Tabular EditorはAnalysis Services Tabular Modelを構成するメタデータを編集するためのUIを提供します。モデルの編集にTabular Editorを使う場合とVisual Studioを使う場合の主な違いは、Tabular Editorは_data_をロードしないことです - _metadata_のみです。つまり、メジャーや表示フォルダーなどを作成および変更する際に、検証や計算が行われないということです。検証や計算は、ユーザーが変更をデータベースに保存することを選択したときにのみ実行されます。これは、Visual Studioでの作業が遅くなりがちな中型から大型のモデルに対して、より良い開発者体験を提供します。
 
-さらに、Tabular Editorには多くの[Features](Features-at-a-glance.md)があり、一般的に生産性を高め、特定の作業を容易にできます。
+さらに、Tabular Editorには多くの[Features](ja-Features-at-a-glance.md)があり、一般的に生産性を高め、特定の作業を容易にできます。
 
 ## なぜSSAS Tabularにさらに別のツールが必要なのか？
 
-Analysis Services Tabularで作業する場合、SQL Server Data Tools (Visual Studio), [DAX Editor](https://www.sqlbi.com/tools/dax-editor/), [DAX Studio](https://www.sqlbi.com/tools/dax-studio/), [BISM Normalizer](http://bism-normalizer.com/) and [BIDSHelper](https://bidshelper.codeplex.com/) にすでに慣れているかも知れません。これらはすべて優れたツールで、それぞれ独自の目的を持っています。Tabular Editorはこれらのツールに取って代わるものではなく、むしろこれらのツールを補足するものと考えるべきでしょう。なぜTabular Editorが正当化されるのか、[Features at a glance](Features-at-a-glance.md) articleをご覧ください。
+Analysis Services Tabularで作業する場合、SQL Server Data Tools (Visual Studio), [DAX Editor](https://www.sqlbi.com/tools/dax-editor/), [DAX Studio](https://www.sqlbi.com/tools/dax-studio/), [BISM Normalizer](http://bism-normalizer.com/) や [BIDSHelper](https://bidshelper.codeplex.com/) にすでに慣れているかも知れません。これらはすべて優れたツールで、それぞれ独自の目的を持っています。Tabular Editorはこれらのツールに取って代わるものではなく、むしろこれらのツールを補足するものと考えるべきでしょう。なぜTabular Editorが正当化されるのか、[Features at a glance](ja-Features-at-a-glance.md) articleをご覧ください。
 
 ## なぜTabular EditorはVisual Studioのプラグインとして利用できないのですか？
 
@@ -18,4 +18,4 @@ Visual Studio内でTabular Modelsを扱うためのより良いユーザー体�
 
 ## 今後のリリースではどのような機能が予定されていますか？
 
-現在のロードマップは[こちら](Roadmap.md)でご覧になれます。
+現在のロードマップは[こちら](ja-Roadmap.md)でご覧になれます。

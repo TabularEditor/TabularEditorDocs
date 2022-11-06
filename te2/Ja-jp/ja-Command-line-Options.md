@@ -1,24 +1,19 @@
-﻿---
-uid: command-line-options
-title: Command Line
-author: Daniel Otykier
-updated: 2021-08-26
----
+﻿# Command Line
 
-# Command Line
+Tabular Editorは、コマンドラインから実行してさまざまなタスクを実行することができ、自動ビルドやデプロイメントシナリオなどで有用です。
 
-Tabular Editorは、コマンドラインから実行して様々なタスクを実行することができ、自動ビルドやデプロイメントシナリオなどで有用である。
-
-**Note:** TabularEditor.exe は WinForms アプリケーションなので、Windows のコマンドプロンプトから直接実行すると、スレッドがすぐにプロンプトに戻ります。このため、コマンドスクリプトなどで問題が発生することがあります。TabularEditor.exeのコマンドラインタスクが完了するのを待つには、常に以下の方法で実行してください。`start /wait TabularEditor ...` を使って実行してください。
+**Note:** TabularEditor.exeはWinFormsアプリケーションなので、Windowsのコマンドプロンプトから直接実行すると、スレッドがすぐにプロンプトに戻ります。このため、コマンドスクリプトなどで問題が発生します。TabularEditor.exeのコマンドラインタスクが完了するのを待つには、常に以下の方法で実行してください。`start /wait TabularEditor ...` を使って実行してください。
 
 Tabular Editorで利用できるコマンドラインオプションを表示するには、次のコマンドを実行します。
 
 **Windows Command line:**
+
 ```shell
 start /wait TabularEditor.exe /?
 ```
 
 **PowerShell:**
+
 ```powershell
 $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru -ArgumentList "/?"
 ```
@@ -87,14 +82,16 @@ database            Database ID of the model to load
 
 ## Connecting to Azure Analysis Services
 
-コマンドのサーバー名の代わりに、任意の有効な SSAS 接続文字列を使用することができます。次のコマンドは、Azure Analysis Services からモデルをロードし、それを Model.bim ファイルとしてローカルに保存します。
+コマンドのサーバー名の代わりに、任意の有効なSSAS接続文字列を使用できます。次のコマンドは、Azure Analysis Servicesからモデルをロードし、それをModel.bimファイルとしてローカルに保存します。
 
 **Windows Command Line:**
+
 ```shell
 start /wait TabularEditor.exe "Provider=MSOLAP;Data Source=asazure://northeurope.asazure.windows.net/MyAASServer;User ID=xxxx;Password=xxxx;Persist Security Info=True;Impersonation Level=Impersonate" MyModelDB -B "C:\Projects\FromAzure\Model.bim"
 ```
 
 **PowerShell:**
+
 ```powershell
 $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
        -ArgumentList "`"Provider=MSOLAP;Data Source=asazure://northeurope.asazure.windows.net/MyAASServer;User ID=xxxx;Password=xxxx;Persist Security Info=True;Impersonation Level=Impersonate`" MyModelDB -B C:\Projects\FromAzure\Model.bim"
@@ -111,19 +108,21 @@ Provider=MSOLAP;Data Source=asazure://northeurope.asazure.windows.net/MyAASServe
 Tabular Editor内でスクリプトを作成し、デプロイ前にこのスクリプトをModel.bimファイルに適用したい場合、コマンドラインオプション「-S」（Script）を使用することができます。
 
 **Windows Command Line:**
+
 ```shell
 start /wait TabularEditor.exe "C:\Projects\MyModel\Model.bim" -S "C:\Projects\MyModel\MyScript.cs" -D localhost\tabular MyModel
 ```
 
 **PowerShell:**
+
 ```powershell
 $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
        -ArgumentList "`"C:\Projects\MyModel\Model.bim`" -S `"C:\Projects\MyModel\MyScript.cs`" -D `"localhost\tabular`" `"MyModel`""
 ```
 
-このコマンドは、Model.bim ファイルを Tabular Editor で読み込み、指定されたスクリプトを適用して、変更されたモデルを新しいデータベース "MyModel" として "localhosttabular" サーバーにデプロイします。サーバー上の同名の既存データベースを上書きする場合は、"-O" (Overwrite) スイッチを使用します。
+このコマンドは、Model.bimファイルをTabular Editorで読み込み、指定されたスクリプトを適用して、変更されたモデルを新しいデータベース "MyModel" として "localhosttabular" サーバーにデプロイします。サーバー上の同名の既存データベースを上書きする場合は、"-O" (Overwrite) スイッチを使用します。
 
-D" (Deploy) スイッチの代わりに "-B" (Build) スイッチを使用すると、変更したモデルをサーバーに直接デプロイする代わりに、新しい Model.bim ファイルとして出力することができます。これは、他のデプロイツールを使ってモデルをデプロイしたい場合や、デプロイ前にVisual StudioやTabular Editorでモデルを検査したい場合などに便利です。また、自動ビルドのシナリオで、デプロイ前に修正したモデルをリリースの成果物として保存したい場合にも有用です。
+D" (Deploy) スイッチの代わりに "-B" (Build) スイッチを使用すると、変更したモデルを直接デプロイする代わりに、新しいModel.bimファイルとして出力できます。これは、他のデプロイツールを使ってモデルをデプロイしたい場合や、デプロイ前にVisual StudioやTabular Editorでモデルを検査したい場合などに便利です。また、自動ビルドのシナリオで、デプロイ前に修正したモデルをリリースの成果物として保存したい場合にも有用です。
 
 ## Modifying connection strings during deployment
 
@@ -133,7 +132,7 @@ D" (Deploy) スイッチの代わりに "-B" (Build) スイッチを使用する
 Provider=SQLOLEDB.1;Data Source=sqldwdev;Persist Security Info=False;Integrated Security=SSPI;Initial Catalog=DW
 ```
 
-デプロイ時に、この文字列を変更して、UATまたは本番用データベースを指すようにしたい。そのためには、まず接続文字列全体をプレースホルダの値に変更するスクリプトを使用し、次に-Cスイッチを使用してプレースホルダと実際の接続文字列を入れ替えるのが最適な方法です。
+デプロイ時に、この文字列を変更して、UATまたは本番用データベースを指すようにしたい。そのためには、まず接続文字列全体をプレースホルダーの値に変更するスクリプトを使用し、次に-Cスイッチを使用してプレースホルダーと実際の接続文字列を入れ替えるのが最適な方法です。
 
 以下のスクリプトを "ClearConnectionStrings.cs "などと呼ばれるファイルに記述する。
 
@@ -146,14 +145,16 @@ foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
     ds.ConnectionString = ds.Name;
 ```
 
-以下のコマンドでTabular Editorにスクリプトの実行を指示し、プレースホルダの入れ替えを実行することができます。
+以下のコマンドでTabular Editorにスクリプトの実行を指示し、プレースホルダーの入れ替えを実行できます。
 
 **Windows Command Line:**
+
 ```shell
 start /wait TabularEditor.exe "Model.bim" -S "ClearConnectionStrings.cs" -D localhost\tabular MyModel -C "SQLDW" "Provider=SQLOLEDB.1;Data Source=sqldwprod;Persist Security Info=False;Integrated Security=SSPI;Initial Catalog=DW"
 ```
 
 **PowerShell:**
+
 ```powershell
 $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
        -ArgumentList "Model.bim -S ClearConnectionStrings.cs -D localhost\tabular MyModel -C SQLDW `"Provider=SQLOLEDB.1;Data Source=sqldwprod;Persist Security Info=False;Integrated Security=SSPI;Initial Catalog=DW`""
@@ -188,7 +189,7 @@ start /B /wait TabularEditor.exe "C:\Projects\Sales\Model.bim" -D ssasserver Sal
 
 何らかの理由でデプロイに失敗した場合、「-W」スイッチを使用しているかどうかにかかわらず、Tabular EditorはAzure DevOpsに「Failed」ステータスを返します。
 
-Azure DevOpsとTabular Editorの詳細については、このブログシリーズ](https://tabulareditor.github.io/2019/02/20/DevOps1.html) (とくに[第3章](https://tabulareditor.github.io/2019/10/08/DevOps3.html) 以降) をご覧ください。
+Azure DevOpsとTabular Editorの詳細については、このブログシリーズ](https://tabulareditor.github.io/2019/02/20/DevOps1.html) (とくに[第3章](https://tabulareditor.github.io/2019/10/08/DevOps3.html) 以降）をご覧ください。
 
 ### Azure DevOps PowerShell Task
 

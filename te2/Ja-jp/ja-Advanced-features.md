@@ -14,7 +14,7 @@ Yesを選択すると、選択したテーブルがクリップボード内の�
 
 バージョン2.1では、エクスプローラツリーにロールが表示されるようになりました。ツリーを右クリックして、新しいロールの作成、既存のロールの削除や複製を行うことができます。エクスプローラツリーでロールを見つけ、プロパティグリッドの「Role Members」プロパティに移動すると、各ロールのメンバーを表示および編集できます。デプロイ時に、[デプロイウィザード](/Advanced-features#deployment-wizard)はデフォルトでロールメンバーをデプロイしないので注意してください。
 
-Tabular Editorでロールを扱う最大の利点は、各テーブルオブジェクトに「Row Level Filters」プロパティがあり、すべてのロールに対してそのテーブルで定義されたフィルタを表示および編集できることです。
+Tabular Editorでロールを扱う最大の利点は、各テーブルオブジェクトに「Row Level Filters」プロパティがあり、すべてのロールに対してそのテーブルで定義されたフィルターを表示および編集できることです。
 
 ![](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/RLSTableContext.png)
 
@@ -26,11 +26,11 @@ Tabular Editorでロールを扱う最大の利点は、各テーブルオブジ
 
 TODO
 
-## DAX式エディタ
+## DAX式エディター
 
 TODO
 
-## スクリプトエディタ
+## スクリプトエディター
 
 TODO (For now, please view [this article](/Advanced-Scripting))
 

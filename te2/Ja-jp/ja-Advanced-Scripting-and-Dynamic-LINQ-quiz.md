@@ -31,7 +31,7 @@ Tabular EditorのAdvanced ScriptingとDynamic LINQフィルター式について
 
 #### Question #3) ダイレクトメジャー依存の数を数える
 
-* 現在選択されているメジャーを直接参照しているメジャーの数を知るにはどうしたらよいのでしょうか。"依存関係の表示" ダイアログに対して、いつでも答えを確認することができます。
+* 現在選択されているメジャーを直接参照しているメジャーの数を知るにはどうしたらよいのでしょうか。"依存関係の表示" ダイアログに対して、いつでも答えを確認できます。
 
 <details><summary><i>C# スクリプト ソリューション</i></summary> <pre><code>Selected.Measure.ReferencedBy.Measures.Count().Output();</code></pre> <b>説明:</b> <code>Selected.Measure</code> は、エクスプローラ ツリーの現在選択中のメジャーを指します。DAX を通して参照できるすべてのオブジェクト (メジャー、テーブル、列、KPI) は、<code>ReferencedBy</code> プロパティを持ち、これは、前者を直接参照するオブジェクトの特別なコレクションです。LINQ メソッド <code>.OfType&lt;Measure&gt;()</code> を使用して、コレクションをメジャーだけに絞り込むこともできますが、この特定のコレクションには、これを実行する便利なプロパティのセットが含まれています。そのうちの 1 つが、<code>Measures</code> です。<br/><br/><br/> このコレクションには、これを行う便利なプロパティが含まれています。
 </details>
@@ -97,4 +97,4 @@ Hint: そのための正規表現は次のようになります。 `Total.*Amoun
 <details><summary><i>Dynamic LINQ solution</i></summary>
 <pre><code>:Regex.IsMatch(Name, "Total.*Amount", "IgnoreCase")</code></pre></details>
 
-#### 今後もご期待ください...
+#### 今後もご期待ください

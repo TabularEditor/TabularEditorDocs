@@ -1,6 +1,6 @@
 ﻿# FormatDaxの非推奨
 
-Tabular Editorで利用可能な[ヘルパーメソッド](/Advanced-Scripting.md#helper-methods)の1つである `FormatDax` メソッドはTabular Editor 2.13.0 のリリースで非推奨とされました。
+Tabular Editorで利用可能な[ヘルパーメソッド](/Advanced-Scripting.md#helper-methods)の1つである `FormatDax` メソッドはTabular Editor 2.13.0のリリースで非推奨とされました。
 
 非推奨になった理由は、https://www.daxformatter.com/ のウェブサービスで、複数のリクエストを連続して行うと負荷が高くなり、その結果、ウェブサービス側で問題が発生するようになったからです。これは、`FormatDax`メソッドがスクリプト内で呼び出されるたびにウェブリクエストを実行するためで、多くの人が以下のようなスクリプトを使用してきました。
 

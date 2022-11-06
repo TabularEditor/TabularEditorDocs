@@ -20,7 +20,7 @@
 
 推奨されるワークフローは、通常通りSSDTを使ってテーブルとリレーションシップを設定し、あとはTabular Editorで行うことです。つまり計算列、メジャー、階層、パースペクティブ、トランスレーション、表示フォルダー、その他あらゆる種類の微調整を行います。
 
-Model.bim ファイルを読み込むには、File メニューから Open > From File... オプションを選択するか（CTRL+O）、既存のデータベースを Analysis Services のインスタンスから Open > From DB... オプションを選択します。後者の場合、サーバー名とオプションの認証情報を入力するよう求められます。
+Model.bimファイルを読み込むには、FileメニューからOpen > From File... オプションを選択するか（CTRL+O）、既存のデータベースをAnalysis ServicesのインスタンスからOpen > From DB... オプションを選択します。後者の場合、サーバー名とオプションの認証情報を入力するよう求められます。
 
 ![既にデプロイされているTabularモデルへの接続](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/Connect.png)
 
@@ -81,7 +81,7 @@ Tabular Editor GUIを開き、指定されたModel.bimファイルをロード�
 * `-R` Overwrite **r**oles
 * `-M` Overwrite role **m**embers
 
-コマンドラインオプションの詳細については、[以下を参照してください。](/Command-line-Options)
+コマンドラインオプションの詳細については、[以下を参照してください。](/ja-Command-line-Options)
 
 > [!NOTE]
 > TabularEditor.exe は Windows Forms アプリケーションなので、コマンドラインから実行するとアプリケーションが別のスレッドで実行され、呼び出し元にすぐに制御が戻されます。これは、バッチジョブの一部としてデプロイメントを実行する場合、ジョブを進める前にデプロイメントが成功するのを待つ必要があり、問題を引き起こす可能性があります。このような問題が発生した場合は、`start /wait` を使用して TabularEditor がその仕事を終えてから呼び出し元に制御を戻してください。
