@@ -1,14 +1,3 @@
----
-uid: dax-script-introduction
-title: Using the DAX Scripting feature
-author: Daniel Otykier
-updated: 2021-10-08
-applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
----
 # Using the DAX Scripting feature
 
 In the [previous article](xref:creating-and-testing-dax), you learned how to add and edit calculated objects such as measures, calculated columns, etc. in your model.

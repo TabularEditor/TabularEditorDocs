@@ -1,149 +1,133 @@
----
-uid: cs-scripts-and-macros
-title: Introduction to C# scripts and macros
-author: Daniel Otykier
-updated: 2021-11-03
----
-# Introduction to C# scripts and macros
+# C#スクリプトとマクロの紹介
 
-Any software that claims to improve your productivity should provide some means of **automating user interactions**. In Tabular Editor, you can write C# scripts for exactly this purpose. With C# scripts in Tabular Editor, you can, for example:
+生産性の向上を謳うソフトウェアであれば、ユーザーとのやりとりを**自動化する手段を提供する必要があります。Tabular Editorでは、まさにこの目的のためにC#スクリプトを書くことができます。Tabular EditorのC#スクリプトを使用すると、例えば次のようなことができます。
 
-- Automate creation of TOM objects such as measures, tables, calculation items
-- Interact with the currently selected object(s) in the TOM Explorer
-- Automatically assign properties to multiple objects
-- Import and export metadata in various formats, for auditing or documentation purposes
+- メジャー、テーブル、計算項目などのTOMオブジェクトの作成を自動化する。
+- TOMエクスプローラーで現在選択されているオブジェクトとのインタラクション
+- 複数のオブジェクトに自動的にプロパティを割り当てる
+- 監査や文書化のために、さまざまなフォーマットでメタデータをインポートおよびエクスポートする。
 
-If a script modifies your model metadata, you will be able to view the modifications immediately in the TOM Explorer and the Properties view. Moreover, you can **undo script changes**, effectively rolling back the model metadata to the point before the script was executed. If a script fails execution, the changes are automatically rolled back by default.
+スクリプトによってモデルのメタデータが変更された場合、TOM ExplorerとPropertiesビューで変更内容をすぐに確認できます。さらに、**スクリプトの変更を取り消す**ことができ、効果的にモデル・メタデータをスクリプト実行前のポイントにロールバックできます。スクリプトの実行に失敗した場合、デフォルトで自動的に変更がロールバックされます。
 
-Tabular Editor 3 includes a simple **script recorder** which helps you learn the syntax used, by incrementally adding lines of script code as you make changes to your model.
+Tabular Editor 3にはシンプルな**script recorder**があり、モデルに変更を加える際にスクリプトコードの行を徐々に追加することで、使用する構文の習得に役立ちます。
 
-A script can be saved as a standalone file (`.csx` file extension), which can be shared among Tabular Editor users. In addition, a script can be stored as a reusable **macro**, which integrates the script more closely with Tabular Editors user interface.
+スクリプトはスタンドアロンファイル（拡張子 `.csx`）として保存でき、Tabular Editorのユーザー間で共有できます。さらに、スクリプトは再利用可能な**マクロ**として保存することができ、スクリプトをTabular Editorのユーザーインターフェイスとより密接に統合させることができます。
 
-# Creating a script
+## スクリプトの作成
 
-To create a new C# script, use the **File > New > C# Script** menu option. Note that this option is available even when no model is loaded in Tabular Editor.
+新しいC#スクリプトを作成するには、**File > New > C# Script** メニューオプションを使用します。このオプションは、Tabular Editorにモデルがロードされていない場合でも利用できることに注意してください。
 
-For your first script, enter the following code:
+最初のスクリプトには、次のコードを入力します。
 
 ```csharp
 Info("Hello world!");
 ```
 
-Hit F5 to run the code.
+F5キーを押して、コードを実行します。
 
-![Your very first script](~/images/first-script.png)
+あなたの最初のスクリプト](~/images/first-script.png)
 
-If you made a mistake while typing the code, any syntax errors will be shown in the **Messages view**.
+もし、コードを入力するときに間違えた場合は、シンタックスエラーが **Messages ビュー** に表示されます。
 
-- To save the script as a file, simply hit **File > Save** (Ctrl+S).
-- To open a script from a file, use the **File > Open > File...** (Ctrl+O) option. The Open File dialog will look for files with the `.cs` or `.csx` extensions by default.
+- スクリプトをファイルとして保存するには、**ファイル > 保存** (Ctrl+S)を押すだけです。
+- ファイルからスクリプトを開くには、**ファイル > 開く > ファイル...** (Ctrl+O)オプションを使用します。ファイルを開くダイアログは、デフォルトで `.cs` または `.csx` の拡張子を持つファイルを探します。
 
-# Using the script recorder
+## スクリプトレコーダーの使用
 
-While a C# script is in focus, you can start the script recorder in Tabular Editor by using the **C# Script > Record script** menu option. While the script is recording, any change you make to your model metadata will cause additional lines of code to be added to the script. Note that you cannot edit the script manually until you stop the recording.
+C#スクリプトにフォーカスがあるとき、Tabular Editorの**C# Script > Record script** メニューオプションを使用すると、スクリプトレコーダーを起動できます。スクリプトが記録されている間、モデルのメタデータに変更を加えると、スクリプトに追加のコード行が追加されます。記録を停止するまで、スクリプトを手動で編集することはできないので注意してください。
 
-![Csharp Script Recorder](~/images/csharp-script-recorder.png)
+![Csharpスクリプトレコーダー](../../images/csharp-script-recorder.png)
 
-# Accessing model metadata
+## モデルのメタデータにアクセスする
 
-In order to access specific objects within the currently loaded model, you need to use the C# syntax for navigating through the Tabular Object Model (TOM) hierarchy. The root of this hierarchy is the `Model` object.
+現在ロードされているモデル内の特定のオブジェクトにアクセスするためには、Tabular Object Model (TOM) 階層をナビゲートするためのC# 構文を使用する必要があります。この階層のルートは `Model` オブジェクトです。
 
-The script below outputs the name of the currently loaded model. If no model is loaded, a warning is displayed.
+以下のスクリプトは、現在ロードされているモデルの名前を出力します。もし、モデルがロードされていない場合は、警告が表示されます。
 
 ```csharp
 if(Model != null)
-    Info("The name of the current model is: " + Model.Name);
+    Info("現在のモデルの名前は: " + Model.Name);
 else
     Warning("No model is currently loaded!");
 ```
 
-The `Model` object is a wrapper of the [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) class, exposing a subset of its properties, with some additional methods and properties for convenience.
+`Model` オブジェクトは [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) クラスのラッパーであり、そのプロパティのサブセットを公開し、便宜上いくつかのメソッドとプロパティを追加しています。
 
-To access a specific measure, you will need to know the name of that measure as well as the name of the table the measure resides in:
+特定のメジャーにアクセスするには、そのメジャーの名前と、そのメジャーが存在するテーブルの名前を知っている必要があります。
 
 ```csharp
 var myMeasure = Model.Tables["Internet Sales"].Measures["Internet Total Sales"];
-myMeasure.Description = "The formula for this measure is: " + myMeasure.Expression;
+myMeasure.Description = "The formula for this measure is:" + myMeasure.Expression;
 ```
 
-Line 1 in the script above locates the "Internet Total Sales" measure on the "Internet Sales" table, then stores a reference to that measure in the `myMeasure` variable.
+上記のスクリプトの行1は、"Internet Sales" テーブルの "Internet Total Sales" メジャーを特定し、そのメジャーへの参照を `myMeasure` 変数に格納します。
 
-Line 2 in the script sets the description of the measure, based on a hardcoded string and the (DAX) expression of the measure.
+スクリプトの2行目では、ハードコードされた文字列とメジャーの (DAX) 式に基づいて、メジャーの説明を設定しています。
 
-Tabular Editor can auto-generate the code that references a specific object, by dragging and dropping the object from the TOM Explorer into the C# script view.
+Tabular Editorは、TOM ExplorerからC#スクリプトビューにオブジェクトをドラッグ＆ドロップすることで、特定のオブジェクトを参照するコードを自動生成できます。
 
-![Generate an object reference by dragging](~/images/generate-csharp-code.gif)
+ドラッグでオブジェクト参照を生成](~/images/generate-csharp-code.gif)
 
-Most TOM objects (tables, columns, measures, etc.) in Tabular Editor, exposes the same set of properties that are available when using the AMO/TOM client libraries directly. For this reason, you can refer to [Microsoft's AMO/TOM documentation](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet), to learn which properties are available. For example, [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) is the documentation for available measure properties.
+Tabular EditorのほとんどのTOMオブジェクト（テーブル、カラム、メジャーなど）は、AMO/TOMクライアントライブラリを直接使用するときに利用できるのと同じプロパティのセットを公開しています。このため、どのプロパティが利用できるかは、[Microsoft's AMO/TOM documentation](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet) を参照するとよいでしょう。例えば、[こちら](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) は、利用可能なメジャープロパティのドキュメントです。
 
-# Accessing current TOM Explorer selection
+## 現在の TOM Explorer の選択にアクセスする
 
-To make scripts reusable, it is rarely enough to be able to reference objects in the model directly by name, as shown above. Instead, it is useful to refer to whichever object(s) is currently selected in Tabular Editor's **TOM Explorer view**. This is possible through the use of the `Selected` object.
+スクリプトを再利用可能にするには、上記のように、モデル内のオブジェクトを名前で直接参照できるだけでは不十分なことがあります。その代わりに、Tabular Editorの**TOM Explorerビュー**で現在選択されているオブジェクトを参照することが有効です。これは `Selected` オブジェクトを使用することで可能になります。
 
 ```csharp
-Info("You have currently selected: " + Selected.Measures.Count + " measure(s).");
+Info("現在、選択されています。" + Selected.Measures.Count + " メジャー(s).");
 ```
 
-The `Selected` object by itself is a collection of all objects currently selected, including objects within selected display folders. In addition, the `Selected` object contains multiple properties that makes it easy to refer to specific object types, such as the `.Measures` property shown in the example above. In general, these properties exist in both a plural (`.Measures`) and a singular (`.Measure`) form. The former is a collection that you can iterate through, and which will be empty if the current selection does not contain any objects of that type, where as the latter is a reference to the currently selected object, if and only if exactly one of that type of object is selected.
+`Selected` オブジェクトは、それ自体、現在選択されているすべてのオブジェクトのコレクションで、選択されたディスプレイフォルダー内のオブジェクトも含まれます。さらに、`Selected` オブジェクトは複数のプロパティを含んでおり、上記の例で示した `.Measures` プロパティのような特定のオブジェクトタイプを簡単に参照できます。一般的に、これらのプロパティは、複数形（`.Measures`）と単数形（`.Measure`）の両方が存在します。一方、後者は現在選択されているオブジェクトへの参照であり、そのオブジェクトの種類が1つだけ選択されている場合にのみ使用できます。
 
-The @useful-script-snippets article contains many examples of scripts that use the `Selected` object to perform various tasks.
+usful-script-snippetsの記事には、`Selected`オブジェクトを使用してさまざまなタスクを実行するスクリプトの例が多数掲載されています。
 
-# Interacting with the user
+## ユーザーとのインタラクション
 
-In the examples above, we used the `Info(...)` and `Warning(...)` global methods to show a message to the user in various flavors. Tabular Editor provides a number of these global methods as well as extension methods for showing and collecting information, and for various other common tasks. The most commonly used are listed below:
+上記の例では、`Info(...)` と `Warning(...)` グローバルメソッドを使って、さまざまなフレーバーでユーザーへのメッセージを表示させることができました。Tabular Editorはこれらのグローバルメソッドに加え、情報を表示したり収集したりするための拡張メソッドや、その他さまざまな一般的なタスクのためのメソッドを多数提供しています。もっともよく使われるものを以下にリストアップします。
 
-* `void Output(object value)` - halts script execution and displays detailed information about the provided object. When the provided object is a TOM object or a collection of TOM objects, a detailed view of all properties are shown.
-* `void SaveFile(string filePath, string content)` - convenient way to save text data to a file.
-* `string ReadFile(string filePath)` - convenient way to load text data from a file.
-* `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties = "...")` - convenient way to export a set of properties from multiple objects as a TSV string.
-* `void ImportProperties(string tsvData)` - convenient way to load properties into multiple objects from a TSV string.
-* `string ConvertDax(dax, useSemicolons)` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
-* `void FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
-* `void FormatDax(IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
-* `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
-* `void Info(string message)` - Displays an informational message.
-* `void Warning(string message)` - Displays a warning message.
-* `void Error(string message)` - Displays an error message.
-* `measure SelectMeasure(Measure preselect = null, string label = "...")` - Displays a list of all measures and �prompts the user to select one.
-* `T SelectObject<T>(this IEnumerable<T> objects, T preselect = null, string label = "...") where T: TabularNamedObject` - Displays a list of the provided objects, prompting the user to select one, and returns that object (or null if the cancel button was pressed).
-* `IList<T> SelectObjects<T>(this IEnumerable<T> objects, IEnumerable<T> preselect = null, string label = "...") where T: TabularNamedObject` - Displays a list of the provided objects, prompting the user to select any number of objects and returns the list of objects selected (or null if the cancel button was pressed).
+* `void Output(object value)` - スクリプトの実行を停止し、提供されたオブジェクトに関する詳細な情報を表示する。提供されたオブジェクトがTOMオブジェクトまたはTOMオブジェクトのコレクションである場合、すべてのプロパティの詳細なビューが表示されます。
+* `void SaveFile(string filePath, string content)` - テキストデータをファイルに保存するための便利な方法です。
+* `string ReadFile(string filePath)` - ファイルからテキストデータをロードする便利な方法です。
+* `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties = "...")` - 複数のオブジェクトからプロパティのセットをTSV文字列としてエクスポートするための便利な方法です。
+* `void ImportProperties(string tsvData)` - 複数のオブジェクトに、TSV文字列からプロパティをロードする便利な方法です。
+* `string ConvertDax(dax, useSemicolons)` - DAX式をUS/UKと非US/UKロケールの間で変換します。`useSemicolons` がtrueの場合（デフォルト）、 `dax` 文字列はネイティブのUS/UKフォーマットからnon-US/UKフォーマットに変換されます。つまり、カンマ (リストセパレーター) はセミコロンに、ピリオド (小数点以下のセパレーター) はカンマに変換されます。UseSemicolons` がfalseに設定されている場合は、その逆となります。
+* `void FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - 与えられたコレクション内のすべてのオブジェクトに対してDAX式をフォーマットします。
+* `void FormatDax(IDaxDependantObject obj)` - スクリプトの実行が完了したとき、あるいは `CallDaxFormatter` メソッドが呼ばれたときに、DAX式のフォーマット用にオブジェクトをキューに入れます。
+* `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - これまでにキューイングされたオブジェクトに対して、すべてのDAX式をフォーマットします。
+* `void Info(string message)` - 情報メッセージを表示します。
+* `void Warning(string message)` - 警告メッセージを表示する。
+* `void Error(string message)` - エラーメッセージを表示します。
+* `measure SelectMeasure(Measure preselect = null, string label = "...")` - すべてのメジャーのリストを表示し、ユーザが1つを選択するように促します。
+* `T SelectObject<T>(this IEnumerable<T> objects, T preselect = null, string label = "...") ここでT: TabularNamedObject` - 指定されたオブジェクトのリストを表示し、ユーザーに1つを選択するように促します。
+* `IList<T> SelectObjects<T>(this IEnumerable<T> objects, IEnumerable<T> preselect = null, string label = "...") where T: TabularNamedObject` - 提供されたオブジェクトのリストを表示し、ユーザーに任意の数のオブジェクトを選択するように促し、選択されたオブジェクトのリスト（またはキャンセルボタンが押された場合はnull）を返します。
 
-# Saving a script as a macro
+## スクリプトをマクロとして保存する
 
-Scripts that you use often can be saved as reusabe macros, which are always available when you launch Tabular Editor. Moreover, macros are automatically integrated in the context menu of the **TOM Explorer view** and you can even use the **Tools > Customize...** option to add macros to existing or custom menus and toolbars.
+よく使うスクリプトは再利用可能なマクロとして保存でき、Tabular Editorを起動すると常に利用可能です。さらに、マクロは**TOM Explorerビュー**のコンテキストメニューに自動的に統合され、**Tools > Customize...**オプションを使用して既存またはカスタムのメニューやツールバーにマクロを追加することも可能です。
 
-To save a script as a macro, use the **C# Script > Save as Macro...** option.
+スクリプトをマクロとして保存するには、**C# Script > Save as Macro...** オプションを使用します。
 
-![Save New Macro](~/images/save-new-macro.png)
+新しいマクロを保存](../../images/save-new-macro.png)
 
-Provide a name for your macro. You can use backslashes to organize macros into folders, i.e. a name such as "My Macros\Test" will create a "My Macros" submenu in the context menu of the TOM Explorer, and within this submenu there will be a "Test" menu option that invokes the script.
+マクロの名前を指定します。たとえば、"My MacrosTest "という名前を付けると、TOM Explorerのコンテキストメニューに "My Macros "というサブメニューができ、このサブメニューの中にスクリプトを呼び出す "Test "というメニューオプションができます。
 
-You may also provide an optional tooltip which will be displayed when hovering over the menu option created by the macro.
+また、マクロによって作成されたメニューオプションの上にカーソルを置くと表示されるツールチップをオプションで指定できます。
 
-You should also specify the macro context, which specifies the type(s) of objects that needs to be selected in order for the macro to be available in the context menu.
+また、マクロのコンテキストを指定する必要があります。これは、コンテキストメニューでマクロを利用するために選択する必要があるオブジェクトの種類を指定します。
 
-Lastly, you can specify a C# expression which should evaluate to true/false (typically based on the `Selected` or `Model` objects) under **Macro enabled condition (advanced)**. This lets you control more granularly whether the macro should be enabled or not, based on the current selection. For example, you could use the following expression:
+最後に、**Macro enabled condition (advanced)** で、（通常は `Selected` または `Model` オブジェクトに基づいて）真/偽に評価されるべき C# 式を指定できます。これにより、現在の選択範囲に基づいて、マクロを有効にするかどうかをより詳細に制御できます。たとえば、以下のような表現が可能です。
 
 ```csharp
 Selected.Measures.Count == 1
 ```
 
-to enable your macro only when exactly 1 measure is selected.
+とすると、ちょうど1つのメジャーが選択されたときだけマクロを有効にできます。
 
-# Managing macros
+## マクロの管理
 
-You can view all previously saved macros in the **Macros view**. To bring this view into focus, use the **View > Macros** menu option. This view allows you to:
+過去に保存したすべてのマクロは、**マクロビュー**に表示できます。このビューを表示するには、メニューオプションの **表示 > マクロ** を使用します。このビューでは、以下のことが可能です。
 
-- **Rename a macro** (simply put the cursor into the **Name** column and type the new name)
-- **Delete a macro.** Select it and click the red "X" button above the list of macros.
-- **Edit a macro.** Double-click the macro in the list (double-click on the "Id" column of the list). This will open the macro in a new C# script view, where you can make code changes. Hit Ctrl+S to save the code changes. If you need to edit other macro properties (tooltip, macro context, etc.), use the **C# Script > Edit Macro...** menu option.
-
-# Next steps
-
-- @personalizing-te3
-- @boosting-productivity-te3
-
-# Further reading
-
-- @csharp-scripts
-- @useful-script-snippets
+- **Rename a macro** (カーソルを**名前**列に置き、新しい名前を入力するだけ)
+- **Delete a macro.**それを選択し、マクロのリストの上にある赤い「X」ボタンをクリックします。
+- **Edit a macro.** リストでマクロをダブルクリックします（リストの「Id」列をダブルクリックします）。これにより、マクロが新しいC#スクリプトビューで開かれ、そこでコードを変更できます。Ctrl+Sを押して、コードの変更を保存します。他のマクロプロパティ（ツールチップ、マクロコンテキストなど）を編集する必要がある場合は、**C# Script > Edit Macro...** メニューオプションを使用します。

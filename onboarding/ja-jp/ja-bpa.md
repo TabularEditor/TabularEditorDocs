@@ -1,114 +1,104 @@
----
-uid: bpa
-title: Improve code quality with the Best Practice Analyzer
-author: Daniel Otykier
-updated: 2021-11-02
----
+# ベストプラクティスアナライザーでコード品質を向上させる
 
-# Improve code quality with the Best Practice Analyzer
+ここまでで、Tabular Object Model（TOM）が比較的複雑なデータ構造であり、多くの異なるタイプのオブジェクトとプロパティを持つことはすでにご存じでしょう。これらのプロパティに割り当てるべき最適な値は必ずしも明確でなく、多くの場合、特定のユースケースやモデル設計に依存します。Tabular Editorの**Best Practice Analyzer**はTOMを継続的にスキャンし、定義可能なベストプラクティスルールに違反がないかどうかを調べます。これにより、オブジェクトのプロパティが常に理想的な値に設定されているかどうかを確認できます。
 
-By now, you are probably already aware that the Tabular Object Model (TOM) is a relatively complex data structure, with many different types of objects and properties. It is not always clear what the best values to assign to these properties are, and many times it depends on specific use cases or model designs. Tabular Editor's **Best Practice Analyzer** continuously scans the TOM for violations of best practice rules that you can define. This helps you verify that object properties are always set to their ideal values.
+ベストプラクティス・アナライザーで確認できること。
 
-Things you can check with the Best Practice Analyzer:
+- **DAX式** 特定のDAX関数または構成要素が使用されたときに警告するルールを作成します。
+- **書式設定** 書式文字列や説明などを指定するよう促すルールを作成します。
+- **命名規則** 特定のタイプのオブジェクト（キー列、隠し列など）が特定の名前パターンにしたがっているかどうかをチェックするルールを作成します。
+- **パフォーマンス** 計算列の数を減らすことを推奨するなど、モデルのパフォーマンスに関連するさまざまな側面をチェックするルールを作成します。
 
-- **DAX Expressions** Create rules that warn you when certain DAX functions or constructs are used.
-- **Formatting** Create rules that remind you to specify format strings, descriptions, etc.
-- **Naming conventions** Create rules that check whether certain types of objects (e.g. key columns, hidden columns, etc.) follow certain name patterns.
-- **Performance** Create rules that check various performance-related aspects of your model, for example to encourage reducing the number of calculated columns, etc.
+Best Practice Analyzerは、モデルの完全なメタデータにアクセスでき、より高度なシナリオのためにVertiPaq Analyzerの統計にもアクセスできます。
 
-The Best Practice Analyzer has access to the full metadata of the model, and can also access VertiPaq Analyzer statistics for more advanced scenarios.
+> [!NOTE]。
+> Tabular EditorにはBPAルールが付属していません。最初に独自のルールを定義するか、[Power BI CAT Team が推奨するルール](https://powerbi.microsoft.com/en-ca/blog/best-practice-rules-to-improve-your-models-performance/) のような標準的なルールセットを使用する必要があります。
 
-> [!NOTE]
-> Tabular Editor does not ship with any rules out-of-the-box. You will have to define your own rules initially, or use a set of standard rules such as [those recommended by the Power BI CAT Team](https://powerbi.microsoft.com/en-ca/blog/best-practice-rules-to-improve-your-models-performance/).
+## ベストプラクティスルールの管理
 
-# Managing Best Practice Rules
+モデルに適用するルールを追加、削除、または修正するには、「ツール > BPAルールの管理...」メニュー オプションを使用します。
 
-In order to add, remove or modify rules applying to your model, use the "Tools > Manage BPA Rules..." menu option.
+![BPAマネージャー](../../images/bpa-manager.png)
 
-![Bpa Manager](~/images/bpa-manager.png)
+このUIには2つのリストがあります。一番上のリストは、現在ロードされているルールの**コレクション**を表します。このリストでコレクションを選択すると、そのコレクション内で定義されているすべてのルールが下のリストに表示されます。モデルがロードされると、以下の3つのルール・コレクションが表示されます。
 
-This UI contains two lists: The top list represents the **collections** of rules that are currently loaded. Selecting a collection in this list, will display all the rules that are defined within this collection in the bottom list. When a model is loaded, you will see the following three rule collections:
+* **現在のモデル内のルール** **Rules within the current model**: 名前が示すように、これは、現在のモデル内で定義されたルールのコレクションです。ルール定義は、Modelオブジェクトのアノテーションとして保存されます。
+* **ローカルユーザーのルール** **Rules for local user**: これらは `%LocalAppData%TabularEditor3 FilterBPARules.json` ファイルに格納されているルールです。これらのルールは、現在ログインしているWindowsユーザーがTabular Editorにロードするすべてのモデルに適用されます。
+* **Rules on the local machine**: これらのルールは `%ProgramData%TabularEditorTabularPARules.json` に格納されます。これらのルールは、現在のマシンでTabular Editorにロードされるすべてのモデルに適用されます。
 
-* **Rules within the current model**: As the name indicates, this is the collection of rules that have been defined within the current model. The rule definitions are stored as an annotation on the Model object.
-* **Rules for the local user**: These are rules that are stored in your `%LocalAppData%\TabularEditor3\BPARules.json` file. These rules will apply to all models that are loaded in Tabular Editor by the currently logged in Windows user.
-* **Rules on the local machine**: These rules are stored in the `%ProgramData%\TabularEditor\BPARules.json`. These rules will apply to all models that are loaded in Tabular Editor on the current machine.
+同じルール（IDによる）が複数のコレクションにある場合、優先順位は上から下になります。つまり、モデル内で定義されたルールは、ローカルマシンで定義された同じIDのルールよりも優先されます。これにより、たとえば、モデル特有の慣習を考慮に入れて、既存のルールを上書きできます。
 
-If the same rule (by ID) is located in more than one collection, the order of precedence is from top to bottom, meaning a rule defined within the model takes precedence over a rule, with the same ID, defined on the local machine. This allows you to override existing rules, for example to take model specific conventions into account.
+リストの上部には、**(Effective rules)**という特別なコレクションが表示されます。このコレクションを選択すると、現在ロードされているモデルに実際に適用されるルールのリストが表示され、前述のように、同一のIDを持つルールの優先順位が尊重されます。下のリストには、ルールがどのコレクションに属しているかが表示されます。また、より高い優先順位のコレクションに同じIDのルールが存在する場合、そのルールの名前は打ち消されることに注意してください。
 
-At the top of the list, you'll see a special collection called **(Effective rules)**. Selecting this collection will show you the list of rules that actually apply to the currently loaded model, respecting the precedence of rules with identical ID's, as mentioned above. The lower list will indicate which collection a rule belongs to. Also, you will notice that a rule will have its name striked out, if a rule with a similar ID exists in a collection of higher precedence:
+![ルールの上書き](../../images/rule-overrides.png)
 
-![Rule Overrides](~/images/rule-overrides.png)
+## コレクションの追加
 
-## Adding additional collections
-Rule collections can be added to a specific model. If you have a rules file located on a network share, you can include that file as a rule collection in the current model. If you have write access to the location of the file, you'll also be able to add/modify/remove rules from the file. Rule collections that are added this way take precedence over rules that are defined within the model. If you add multiple such collections, you can shift them up and down to control their mutual precedence.
+ルールコレクションは、特定のモデルに追加できます。ネットワーク共有にルールファイルがある場合、そのファイルをルールコレクションとして現在のモデルに含めることができます。ファイルの場所への書き込み権限があれば、そのファイルからルールを追加/変更/削除することもできます。この方法で追加されたルール・コレクションは、モデル内で定義されたルールよりも優先されます。このようなコレクションを複数追加した場合、それらを上下に移動して、相互の優先順位を制御できます。
 
-Click the "Add..." button to add a new rule collection to the model. This provides the following options:
+「追加...」ボタンをクリックすると、新しいルール・コレクションをモデルに追加できます。これには、以下のオプションがあります。
 
-![Add Best Practice rule collection](~/images/add-rule-file.png)
+![ベストプラクティスルールコレクションの追加](../../images/add-rule-file.png)
 
-* **Create new Rule File**: This will create a new, empty, .json file at a specified location, which you can subsequently add rules to. When choosing the file, notice that there is an option for using relative file paths. This is useful when you want to store the rule file in the same code repository as the current model. However, please be aware that a relative rule file reference only works, when the model has been loaded from disk (since there is no working directory when loading a model from an instance of Analysis Services).
-* **Include local Rule File**: Use this option if you already have a .json file containing rules, that you want to include in your model. Again, you have the option of using relative file paths, which may be beneficial if the file is located close to the model metadata. If the file is located on a network share (or generally, on a drive different than where the currently loaded model metadata resides), you can only include it using an absolute path.
-* **Include Rule File from URL**: This option lets you specify an HTTP/HTTPS URL, that should return a valid set of rules (in json format). This is useful if you want to include rules from an online source, for example the [standard BPA rules](https://raw.githubusercontent.com/TabularEditor/BestPracticeRules/master/BPARules-standard.json) from the [BestPracticeRules GitHub site](https://github.com/TabularEditor/BestPracticeRules). Note that rule collections added from online sources will be read-only.
+* **Create new Rule File** **Create new Rule File**: 指定された場所に新しい空の .jsonファイルが作成され、その後ルールを追加できます。ファイルを選択する際、相対的なファイルパスを使用するオプションがあることに注意してください。これは、現在のモデルと同じコードリポジトリにルールファイルを保存したい場合に便利です。ただし、相対的なルール・ファイルの参照は、モデルがディスクからロードされたときにのみ機能することに注意してください（Analysis Servicesのインスタンスからモデルをロードするときには作業ディレクトリが存在しないため）。
+* **ローカル・ルール・ファイルを含める** **Include local Rule File**: ルールを含む .jsonファイルをすでに持っていて、それをモデルに含めたい場合はこのオプションを使用します。ここでも、相対ファイルパスを使用するオプションがあり、ファイルがモデルのメタデータへ近い場所にある場合は有効です。ファイルがネットワーク共有（または一般に、現在ロードされているモデル・メタデータが存在する場所とは異なるドライブ）にある場合、絶対パスを使用してのみインクルードできます。
+* **Include Rule File from URL**: このオプションでは、有効なルールセット（json形式）を返すHTTP/HTTPS URLを指定できます。これは、オンラインソースのルール、たとえば [BestPracticeRules GitHub サイト](https://github.com/TabularEditor/BestPracticeRules) の [標準 BPA ルール](https://raw.githubusercontent.com/TabularEditor/BestPracticeRules/master/BPARules-standard.json) を含めたい場合に便利です。オンラインソースから追加されたルールコレクションは、読み取り専用になります。
 
-## Modifying rules within a collection
-The lower part of the screen will let you add, edit, clone and delete rules within the currently selected collection, provided you have write access to the location where the collection is stored. Moreover, the "Move to..." button allows you to move or copy the selected rule to another collection, making it easy to manage multiple collections of rules.
+## コレクション内のルールを修正する
 
-## Adding rules
+画面の下部では、現在選択されているコレクション内のルールを追加、編集、クローン、削除できます（コレクションが保存されている場所への書き込み権限がある場合）。さらに、"Move to... "ボタンを使用すると、選択したルールを別のコレクションに移動またはコピーすることができ、複数のルールのコレクションを簡単に管理できます。
 
-To add a new rule to a collection, click on the **New rule...** button. This brings up the Best Practice Rule editor (see screenshot below).
+## ルールの追加
 
-![Bpa Rule Editor](~/images/bpa-rule-editor.png)
+コレクションに新しいルールを追加するには、**New rule...**ボタンをクリックします。これにより、ベストプラクティスルールエディターが表示されます（以下のスクリーンショットを参照）。
 
-When creating a new rule, you must specify the following details:
+![BPAルールエディタ](../../images/bpa-rule-editor.png)
 
-- **Name**: The name of the rule, which will be displayed to users of Tabular Editor
-- **ID**: An internal ID of the rule. Must be unique within a rule collection. If multiple rules have identical IDs across different collections, only the rule within the collection of the highest precedence is applied.
-- **Severity**: The severity is not used within Tabular Editor's UI, but when running a Best Practice Analysis through [Tabular Editor's command line interface](xref:command-line-options), the number determines how "severe" a rule violation is.
-  - 1 = Information only
-  - 2 = Warning
-  - 3 (or above) = Error
-- **Category**: This is used for logically grouping rules together to make management of rules easier.
-- **Description** (optional): Can be used to provide a description of what the rule is intended for. Will be shown in the Best Practice Analyzer view as a tooltip. You may use the following placeholder values within the description field, to provide a more contextual message:
-  - `%object%` returns a fully qualified DAX reference (if applicable) to the current object
-  - `%objectname%` returns only the name of the current object
-  - `%objecttype%` returns the type of the current object
-- **Applies to**: Select the type of object(s) to which the rule should apply.
-- **Expression**: Type a [Dynamic LINQ](https://dynamic-linq.net/expression-language) search expression which should evaluate to `true` for those objects (among the object types selected in the **Applies to** dropdown) that violate the rule. The Dynamic LINQ expression can access the TOM properties available on the selected object types, as well as a wide range of standard .NET methods and properties.
-- **Minimum compatibility level**: Some TOM properties are not available at all compatibility levels. If you are creating generic rules, use this dropdown to specify the minimum compatibility level of the models to which the rule should apply.
+新しいルールを作成する場合、以下の詳細を指定する必要があります。
 
-When a rule is saved to a rule collection on disk, all of the above properties are stored in a JSON format. You can add/edit/delete rules by editing the JSON file as well, which also allows you to specify the `FixExpression` property on a rule. This is a string that is used to generate a [C# script](xref:cs-scripts-and-macros) which will be applied to the model in order to fix the rule violation.
+- **名前**: ルールの名前。Tabular Editorのユーザーに表示されます。
+- **ID**：ルールの内部ID。ルールの内部ID。ルールコレクション内で一意である必要があります。異なるコレクション間で複数のルールが同じIDを持つ場合、最も優先順位の高いコレクション内のルールのみが適用されます。
+- 重要度**。厳しさはTabular EditorのUIでは使用されませんが、[Tabular Editorのコマンドラインインターフェース](xref:command-line-options)でベストプラクティス分析を実行する場合、ルール違反がどのくらい「厳しい」かをこの数値で決定します。
+  - 1 = 情報のみ
+  - 2 = 警告
+  - 3（またはそれ以上）= エラー
+- **カテゴリ**。ルールを論理的にグループ化し、ルール管理を容易にするため、使用されます。
+- **説明** (オプション): ルールの目的を説明するために使用します。ベストプラクティス・アナライザーのビューにツールチップとして表示されます。説明フィールドでは、以下のプレースホルダー値を使用して、より文脈に沿ったメッセージを提供できます。
+  - object%` は、現在のオブジェクトへの完全修飾されたDAXリファレンスを返します（該当する場合）。
+  - objectname%` は、現在のオブジェクトの名前のみを返します。
+  - objecttype%` は現在のオブジェクトのタイプを返します。
+- **Applies to**: ルールを適用するオブジェクトの種類を選択します。
+- **Expression**: Dynamic LINQ](https://dynamic-linq.net/expression-language) 検索式を入力します。（**Applies to** ドロップダウンで選択したオブジェクト タイプのうち）ルールに違反するオブジェクトに対して `true` と評価されるはずの式です。Dynamic LINQ式は、選択されたオブジェクトタイプで利用可能なTOMプロパティだけでなく、幅広い標準.NETメソッドとプロパティにアクセスできます。
+- **最小限の互換性レベル**。一部のTOMプロパティは、すべての互換性レベルでは使用できません。汎用ルールを作成する場合は、このドロップダウンを使用して、ルールが適用されるべきモデルの最小互換性レベルを指定します。
 
-# Using the Best Practice Analyzer view
+ルールがディスク上のルールコレクションに保存されると、上記のすべてのプロパティが JSON 形式で保存されます。JSONファイルを編集することで、ルールの追加・編集・削除を行うことができます。また、ルールに `FixExpression` プロパティを指定することも可能です。これは、ルール違反修正するため、モデルに適用される[C#スクリプト](xref:cs-scripts-and-macros)を生成するために使用される文字列です。
 
-Tabular Editor displays the best practice rule violations within the **Best Practice Analyzer view**. You can also see the number of rule violations in the status bar at the bottom of the main window. To bring the view into focus, use the **View > Best Practice Analyzer** menu option or blick on the "# BP issues" button in the status bar.
+## ベストプラクティス・アナライザー・ビューの使用
 
-![Best Practice Analyzer View](~/images/best-practice-analyzer-view.png)
+Tabular Editorは、ベストプラクティスルール違反を**Best Practice Analyzer**ビューに表示します。また、メインウィンドウの下部にあるステータスバーでルール違反の件数を確認できます。ビューにフォーカスを当てるには、**表示 > ベストプラクティス アナライザー** メニューオプションを使用するか、ステータスバーの「# BP issues」ボタンをクリックします。
 
-The **Best Practice Analyzer view** shows a list of all rules that have objects in violation. Below each rule is a list of the violating objects. You can double-click on an object in the list, to navigate to that object in the **TOM Explorer**.
+ベストプラクティス・アナライザー・ビュー](~/images/best-practice-analyzer-view.png)
 
-![Item options](~/images/bpa-options.png)
+ベストプラクティス アナライザー ビュー**には、違反のオブジェクトを持つすべてのルールのリストが表示されます。各ルールの下には、違反しているオブジェクトのリストが表示されます。リスト内のオブジェクトをダブルクリックすると、**TOM Explorer**でそのオブジェクトに移動できます。
 
-When right-clicking on an object, you are presented with a number of options as shown above. These are:
+![アイテムオプション](../../images/bpa-options.png)
 
-- **Go to object**: This is identical to double-clicking on an object, in order to navigate to that object in the **TOM Explorer**.
-- **Ignore object**: This adds an annotation on the object, instructing the Best Practice Analyzer to ignore this particular rule on that object. Ignored rules are specified using their ID.
-- **Generate fix script**: This option is available only if a rule has the `FixExpression` property specified. When choosing this option, Tabular Editor creates a new C# script based on the `FixExpression` of the selected rule(s).
-- **Apply fix**: This option is available only if a rule has the `FixExpression` property specified. When choosing this option, Tabular Editor executes the `FixExpression` of the selected rule(s) in order to automatically fix the rule violation.
+オブジェクトを右クリックすると、上記のようないくつかのオプションが表示されます。これらは以下の通りです。
 
-> [!NOTE]
-> You can multi-select objects in the Best Practice Analyzer view, by holding down the Shift or Ctrl keys.
+- オブジェクトに移動する**。オブジェクトへ移動**：オブジェクトをダブルクリックして、**TOM Explorer**でそのオブジェクトに移動するのと同じです。
+- オブジェクトを無視する**。オブジェクトに注釈が追加され、ベストプラクティス・アナライザーがそのオブジェクトの特定のルールを無視するように指示します。無視されるルールはIDで指定します。
+- 修正スクリプトを生成する**。このオプションは、ルールに `FixExpression` プロパティが指定されている場合にのみ利用可能です。このオプションを選択すると、Tabular Editorは選択されたルールの `FixExpression` に基づいて新しいC#スクリプトを作成します。
+- **Apply fix**: このオプションは、ルールに `FixExpression` プロパティが指定されている場合にのみ利用可能です。このオプションを選択すると、Tabular Editorはルール違反を自動的に修正するために、選択されたルールの `FixExpression` を実行します。
 
-The options shown above are also available as toolbar buttons at the top of the **Best Practice Analyzer view**. In addition, there are buttons available for expanding/collapsing all items, showing ignored rules/objects and for performing a manual refresh (which is needed when background scans are disabled, see below).
+> [!注意]。
+> ベストプラクティス・アナライザーのビューでは、ShiftキーまたはCtrlキーを押しながらオブジェクトを複数選択することができます。
 
-# Disabling the Best Practice Analyzer
+上記のオプションは、**Best Practice Analyzerビュー**の上部にあるツールバーボタンとしても利用可能です。さらに、すべてのアイテムの拡大/縮小、無視されたルール/オブジェクトの表示、手動更新（バックグラウンドスキャンが無効な場合に必要、下記参照）を行うためのボタンも用意されています。
 
-In some cases, you may want to disable the Best Practice Analyzer background scan. For example, when you have rules that take a relatively long time to evaluate, or when you are working with very large models.
+## ベストプラクティス・アナライザーを無効にする
 
-The background scan can be disabled under **Tools > Preferences > Features > Best Practice Analyzer** by unchecking the **Scan for Best Practice violations in the background**.
+場合によっては、ベストプラクティス・アナライザーのバックグラウンドスキャンを無効にできます。たとえば、評価に比較的長い時間のかかるルールがある場合や、非常に大きなモデルを扱っている場合などです。
 
-Note that you can still manually perform a scan using the **Refresh** button of the **Best Practice Analyzer view**, as mentioned above, even when background scans are disabled.
+バックグラウンドスキャンは、**Tools > Preferences > Features > Best Practice Analyzer** で、**Scan for Best Practice violations in the background** のチェックを外して無効にできます。
 
-# Next steps
-
-- @cs-scripts-and-macros
-- @personalizing-te3
+なお、バックグラウンドスキャンを無効にしていても、上記のように **Best Practice Analyzer ビュー** の **Refresh** ボタンを使って手動でスキャンを実行することは可能です。

@@ -1,131 +1,113 @@
----
-uid: creating-and-testing-dax
-title: Adding measures and other calculated objects
-author: Daniel Otykier
-updated: 2021-10-08
-applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
----
+# メジャーや他の計算オブジェクトを追加する
 
-# Adding measures and other calculated objects
+Tabular Editor 2.xが2017年初頭にリリースされて以来、メジャー間のDAX式をすばやく修正する機能は、常にツールのもっとも人気のある機能でした。戻る/進むナビゲーション、コピー/ペースト操作、DAX依存性の視覚化、アンドゥ/リドゥのサポートと組み合わせて、このツールは常に、複数の小さな変更を素早く行う能力が重要である、大規模で複雑なデータモデルを扱う人にとって好ましい選択肢となってきました。
 
-Ever since Tabular Editor 2.x got released in early 2017, the ability to quickly modify DAX expressions across measures has always been the most popular feature of the tool. Combined with back and forward navigation, copy/paste operations, DAX dependency visualisation and undo/redo support, the tool has always been the preferred option for anyone working with large and complex data models, where the ability to quickly make multiple smaller changes is crucial.
+この点で、Tabular Editor 2.xのユーザーからの唯一の不満は、DAXコードアシスト機能（時に「IntelliSense」と呼ばれる）がないことでした。とくにDAXに100％精通しているわけではない場合（そうである人はほとんどいません！）、DAXコードエディターが構文や関数パラメーターなどを覚えるのを助けてくれるのは非常に便利です。
 
-The only complaint in this regard, by users of Tabular Editor 2.x, was the lack of DAX code assist features (sometimes called "IntelliSense"). Especially when you are not a 100% proficient with DAX (and very few people are!), having the DAX code editor assist you in remembering syntax, function parameters, etc. is incredibly helpful.
+これはすべて、Tabular Editor 3にある新しいDAXコードエディターで対処されます。
 
-This has all been addressed with the new DAX code editor used by Tabular Editor 3.
+![複雑なDAX式の編集](../../images/dax-editor-screenshot.png)
 
-![Editing a complex DAX expression](~/images/dax-editor-screenshot.png)
+この資料では、メジャーおよびその他の計算オブジェクトを作成する方法、およびこれらのオブジェクトのDAX式を変更する方法について説明します。DAXコード・エディターの多くの機能の詳細については、<xref:dax-editor> を参照してください。
 
-The remainder of this article describes how to create measures and other calculated objects, and how to modify the DAX expressions on these objects. To learn more about the many features of the DAX code editor, see <xref:dax-editor>.
+## メジャーの追加
 
-# Adding measures
+モデルに [いくつかのテーブルをインポート](ja-importing-tables-data-modeling.md) して [テーブル間のリレーションシップを作成](ja-importing-tables-data-modeling.md) したら、次はビジネス・ロジックを含むいくつかの明示的メジャーを追加する番です。
 
-Once you have [imported some tables](xref:importing-tables-data-modeling#importing-new-tables) to your model and [created relationships between them](xref:importing-tables-data-modeling#modifying-relationships-using-the-diagram), it is time to add some explicit measures containing your business logic.
+> [!TIP］
+> 技術的には、Power BI レポートでデータを視覚化する前に、明示的なメジャーをモデルに追加する必要はありません。しかし、MDXベースのクライアントツール（ExcelやTabular Editor 3のPivot Gridなど）では明示的なメジャーが必要なため、常に追加しておくことがベストプラクティスです。また、[Calculation Groups](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) は明示的なメジャーにのみ適用されます。
 
-> [!TIP]
-> Technically, you are not required to add explicit measures to your model before visualizing data in a Power BI report. However, it is a best practice to always do so, as MDX-based client tools (such as Excel and Tabular Editor 3's Pivot Grid) requires explicit measures. In addition, [Calculation Groups](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) only apply to explicit measures.
+Tabular Editorを使用して新しいメジャーを追加するには、メジャーを追加するテーブルを右クリックし、**Create > Measure** (ALT+1) を選択します。
 
-To add a new measure using Tabular Editor, right-click on the table in which you want to add the measure, then choose **Create > Measure** (ALT+1).
+![新しいメジャーの追加](../../images/adding-new-measure.png)
 
-![Adding New Measure](~/images/adding-new-measure.png)
+新しいメジャーを追加すると、そのメジャーの名前を編集できるようになります。メジャーの名前を入力したら、ENTERキーを押します。名前は後で**Properties**ビューで編集するか、**TOM Explorer**でメジャーを選択した状態でF2を押すと、いつでも編集できます。
 
-When a new measure is added, the name of that measure will be editable. Hit ENTER when you have provided a name for the measure. You can always edit the name later in the **Properties** view or by pressing F2 while the measure is selected in the **TOM Explorer**.
+**Expression Editor** ビューは、メジャーのDAX式を指定するために使用されます。コードを入力すると、DAXエディターによってコードの候補が表示され、構文エラーや意味上のエラーが下線表示されることに注意してください。
 
-The **Expression Editor** view is used to provide the DAX expression for the measure. As you enter the code, notice how the DAX editor provides code suggestions and even underlines syntax or semantic errors.
+メジャーを追加する![DAXエディタ](../../images/add-measure-edit-dax.png)
 
-![Add Measure Edit Dax](~/images/add-measure-edit-dax.png)
+**Expression Editor** の左上隅にあるドロップダウン・ボックスは、現在選択されているオブジェクトのさまざまなDAXプロパティを切り替えるために使用されます。たとえば、Analysis Servicesの新しいバージョンでは、メジャーは[`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)と同様に `Expression` プロパティを持っています。その他の種類のオブジェクトには、DAXコードを含むさまざまなプロパティがあります。たとえば、[KPI](https://docs.microsoft.com/en-us/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions)には3つの異なるDAXプロパティがあります。Tabular EditorでKPIを追加するには、メジャーを右クリックし、**Create > KPI** を選択します。
 
-The dropdown box at the top left corner of the **Expression Editor** is used to switch between different DAX properties of the currently selected object. For example, in newer versions of Analysis Services, measures have an `Expression` property as well as a [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/). Other types of objects can have different properties that contain DAX code. For example, [KPIs](https://docs.microsoft.com/en-us/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) have three different DAX properties. To add a KPI in Tabular Editor, right-click on a measure and choose **Create > KPI**.
+[KPIの編集](../../images/editing-kpis.png)を選択します。
 
-![Editing Kpis](~/images/editing-kpis.png)
+メジャーを非表示にする場合は、右クリックして、**Make invisible** (CTRL+I) オプションを選択するだけです。同様に、**Make visible** (CTRL+U) オプションを選択すると、メジャーを非表示にできます。
 
-If you want your measure to be hidden, simply right-click and choose the **Make invisible** (CTRL+I) option. Likewise, you can unhide a measure by choosing the **Make visible** (CTRL+U) option.
+## その他のメジャーのプロパティ
 
-## Other measure properties
+`Name`, `Expression`, `Hidden` プロパティに加えて、**Properties** ビューを使用して、**TOM Explorer** で現在選択されているオブジェクトのすべてのプロパティの値を確認および編集できます。メジャーでは、たとえばここで `Format String` を設定できます。詳しくは、[プロパティビュー](xref:properties-view)を参照してください。
 
-In addition to the `Name`, `Expression` and `Hidden` properties, you can use the **Properties** view to review and edit the value of all properties of the currently selected object(s) in the **TOM Explorer**. For measures, this is where you can set the `Format String`, for example. For more information, see [Properties view](xref:properties-view).
+## 計算されたカラムを追加する
 
-# Adding calculated columns
+計算されたカラムを追加するには、カラムを追加したいテーブルを右クリックし、 **Create > Calculated Column** (ALT+2)を選択します。列の名前を付け、上記のメジャーの場合と同様に、**式エディター** を使用してそのDAX式を編集します。
 
-To add a calculated column, right-click on the table on which you want to add the column, and choose **Create > Calculated Column** (ALT+2). Give the column a name and edit its DAX expression using the **Expression Editor**, similar to how we did for measures above.
+> [重要] このオプションはデフォルトでは使用できません。
+> Power BI Desktop モデルに接続している場合、このオプションはデフォルトでは使用できません。これは、[Power BI Desktop がサポートする外部ツールの制限](xref:desktop-limitations) に起因するものです。詳しくはリンクをクリックしてください。
 
-> [!IMPORTANT]
-> This option is not available by default when connected to a Power BI Desktop model. This is because of the [limitations of Power BI Desktop support for external tools](xref:desktop-limitations). Click the link to learn more.
+> [!注意]を参照してください。
+> 計算列の DAX 式が変更された場合、その列をレポートで使用するには、その列が存在するテーブルをリフレッシュする必要があります。詳しくは <xref:refresh-preview-query#refreshing-data> を参照してください。
 
-> [!NOTE]
-> When the DAX expression of a calculated column has been changed, the table in which the column resides has to be refreshed before the column can be used in a report. See <xref:refresh-preview-query#refreshing-data> for more information.
+## 計算されたテーブルの追加
 
-# Adding calculated tables
+計算テーブルを追加するには、モデルまたは "Tables"フォルダーを右クリックし、**Create > Calculated Table** (ALT+6)を選択します。テーブルに名前を付け、上記のメジャーの場合と同様に、**式エディター** を使用してそのDAX式を編集します。DAX式を変更すると、テーブルの列が自動的に変更されることに注意してください。他のDAX式がテーブルを参照する場合、または列が階層構造で使用される場合、これはカスケード効果を引き起こす可能性があります。
 
-To add a calculated table, right-click on the model or on the "Tables" folder, and choose **Create > Calculated Table** (ALT+6). Give the table a name and edit its DAX expression using the **Expression Editor**, similar to how we did for measures above. Notice that the columns on the table changes automatically, when you make a change to the DAX expression. This can cause cascading effects, if other DAX expressions reference the table, or if columns are used in a hierarchy.
+> [!重要] このオプションはデフォルトでは使用できません。
+> Power BI Desktop モデルに接続している場合、このオプションはデフォルトでは使用できません。これは、[外部ツールの Power BI Desktop サポートの制限](xref:desktop-limitations) に起因するものです。詳しくはリンクをクリックしてください。
 
-> [!IMPORTANT]
-> This option is not available by default when connected to a Power BI Desktop model. This is because of the [limitations of Power BI Desktop support for external tools](xref:desktop-limitations). Click the link to learn more.
+> [!注意]を参照してください。
+> 計算テーブルの DAX 式が変更された場合、そのテーブルをレポートで使用する前にリフレッシュする必要があります。詳しくは<xref:refresh-preview-query#refreshing-data>を参照してください。
 
-> [!NOTE]
-> When the DAX expression of a calculated table has been changed, the table has to be refreshed before it can be used in a report. See <xref:refresh-preview-query#refreshing-data> for more information.
+## 計算グループの追加
 
-# Adding calculation groups
+[計算グループ](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions)を追加するには、モデルまたは「テーブル」フォルダーを右クリックし、**作成 > 計算グループ** (ALT+7)を選択します。計算グループには名前を付けます。また、デフォルトの**Name**列には、別の名前を考えてください。
 
-To add a [calculation group](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), right-click on the model or on the "Tables" folder, and choose **Create > Calculation Group** (ALT+7). Give the Calculation Group a name. Also consider a different name for the default **Name** column.
+> [!重要]。
+> このオプションは、互換性レベル1500以上のモデルでのみ利用可能です。
 
-> [!IMPORTANT]
-> This option is only available on models at compatibility level 1500 or higher.
+計算項目を追加するには、新しく作成した計算グループを右クリックし、**Create > Calculation Item**を選択します。計算項目に名前を付け、上記のメジャーの場合と同様に **Expression Editor** を使用してそのDAX式を編集します。
 
-To add calculation items, right-click on the newly created calculation group and choose **Create > Calculation Item**. Give the Calculation Item a name and edit its DAX expression using the **Expression Editor** similar to how we did for measures above.
+計算項目は、TOM Explorerでドラッグするか、**Properties** ビューで `Ordinal` プロパティを設定することにより、表示順序を変更できます。
 
-You can arrange the display order of Calculation Items by dragging them around in the TOM Explorer, or by setting the `Ordinal` property within the **Properties** view.
+> [!注意]。
+> 計算項目が追加、名前変更、または計算グループから削除された場合、計算グループをリフレッシュしてからでないと、レポートで使用することができません。詳しくは<xref:refresh-preview-query#refreshing-data>を参照してください。
 
-> [!NOTE]
-> When Calculation Items are added, renamed or removed from a Calculation Group, the Calculation Group has to be refreshed before it can be used in a report. See <xref:refresh-preview-query#refreshing-data> for more information.
+## 一般的なモデリング操作
 
-# Common modeling operations
+## コピー／ペースト
 
-## Copy / paste
+TOMエクスプローラーのすべてのオブジェクトはTabular Editorでコピー＆ペーストできます。異なるTabular Editorのインスタンス間、そしてTabular Editor 2.xとTabular Editor 3間でもコピー＆ペーストが可能です。おなじみのキーボードショートカットを使用できます。
 
-All objects in the TOM Explorer can be copied and pasted with Tabular Editor. You can even copy and paste between different instances of Tabular Editor, and even between Tabular Editor 2.x and Tabular Editor 3. You can use the familiar keyboard shortcuts:
+- 編集 > コピー** (CTRL+C)
+- 編集 > カット** (CTRL+X)
+- 編集 > 貼り付け** (CTRL+V)
 
-- **Edit > Copy** (CTRL+C)
-- **Edit > Cut** (CTRL+X)
-- **Edit > Paste** (CTRL+V)
+> [!TIP]です。
+> あるテーブルを別のテーブルに置き換え、そのテーブルとの既存のリレーションシップをすべて保持したい場合、テーブルをクリップボードにコピーし、TOMエクスプローラで置き換えたいテーブルを選択して貼り付けます。選択したテーブルをクリップボードにあるテーブルと置き換えるかどうか確認するプロンプトが表示されます。
 
-> [!TIP]
-> If you want to replace one table with another, retaining all existing relationships to/from that table, copy a table to the clipboard, then select the table you wish to replace in the TOM Explorer and paste. You will be prompted whether you want to replace the selected table with the one in the clipboard.
+## 元に戻す/やり直し
 
-## Undo / redo
+Tabular Editorのオブジェクトやプロパティに変更が加えられると、その変更履歴が完全に追跡され、加えられたすべての変更を元に戻すことができます。使い慣れたキーボードショートカットを使用できます。
 
-Whenever a change is made to an object or property in Tabular Editor, the complete history of changes is tracked, allowing you to undo every change made. You can use the familiar keyboard shortcuts:
+- 編集 > 元に戻す** (CTRL+Z)
+- 編集 > やり直し** (CTRL+Y)
 
-- **Edit > Undo** (CTRL+Z)
-- **Edit > Redo** (CTRL+Y)
+> [!注意]。
+> Tabular Editor 3のすべてのテキストエディタは、独自の取り消し/やり直し履歴を持つため、カーソルが現在テキストエディタ内にある場合、キーボードショートカットはそのエディタ内で入力の取り消し/やり直しを行います。モデルレベルでのアンドゥ/リドゥを実行するには、**Edit**メニューのオプションを使用するか、ユーザーインターフェイスの他の要素（TOM Explorerなど）をクリックして現在のテキストエディターを無効化することができます。
 
-> [!NOTE]
-> All text editors in Tabular Editor 3 have their own undo/redo history, so if the cursor is currently within a text editor, the keyboard shortcuts will undo/redo the typing within that editor. You can use the options in the **Edit** menu to perform an undo/redo at the model level, or deactivate the current text editor by clicking on another element in the user interface (such as the TOM Explorer).
+## ナビゲーション
 
-# Navigation
+DAXエディター内のオブジェクト参照にカーソルを合わせた状態で右クリックし、**Go to definition** (F12)を選択すると、そのオブジェクトに素早くジャンプできます。もちろん、TOMエクスプローラーを使用してオブジェクト間を移動することもできます。
 
-While the cursor is over an object reference in the DAX editor, right-click and choose **Go to definition** (F12) to quickly jump to that object. Of course, you can also navigate between objects using the TOM Explorer.
+**式エディター**の右上にある矢印ボタンを使用すると、訪問したオブジェクト間を素早く行き来できます。
 
-You can use the arrow buttons in the top right corner of the **Expression Editor** to jump quickly back and forth between objects visited.
+## DAX依存関係
 
-## DAX Dependencies
+オブジェクト間のDAX依存関係を表示するには、**TOM Explorer**でオブジェクトを選択し、右クリックして**Show dependencies** (SHIFT+F12)を選択します。これにより、選択したオブジェクトの依存関係（両方向）を表示するウィンドウが開きます。このウィンドウでオブジェクトをダブルクリックすると、そのオブジェクトにすばやく移動できます。
 
-To view DAX dependencies between objects, select an object in the **TOM Explorer**, then right-click and choose **Show dependencies** (SHIFT+F12). This will open a window that displays the dependencies (in both directions) of the selected object. Double-click on an object in this window to quickly navigate to that object.
+Dax Dependencies And Tom Explorer](../../images/dax-dependencies-and-tom-explorer.png)
 
-![Dax Dependencies And Tom Explorer](~/images/dax-dependencies-and-tom-explorer.png)
+## フォルダーを表示する
 
-# Display folders
+モデルがかなりの数のメジャーを獲得し始めると、表示フォルダーを使用してそれらを整理することが良い習慣となります。Tabular Editorで、ディスプレイ・フォルダーを作成するには、**Properties** ビューで `Display Folder` プロパティを編集するか、またはメジャーを右クリックし**Create > Display Folder** オプションを選択します。
 
-Once your model starts to gain a considerable number of measures, a good practice is to organize them using Display Folders. In Tabular Editor, to create a Display Folder, either edit the `Display Folder` property through the **Properties** view, or alternatively, right-click on the measure(s), and select the **Create > Display Folder** option.
-
-You can also cut/copy/paste or drag and drop objects between display folders.
-
-# Next steps
-
-- @dax-script-introduction
-- @bpa
-- @cs-scripts-and-macros
+また、ディスプレイフォルダー間でオブジェクトをカット／コピー／ペーストしたり、ドラッグ＆ドロップすることもできます。
