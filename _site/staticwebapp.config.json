@@ -81,6 +81,11 @@
             "statusCode": 301
         },
         {
+            "route": "/Command-line-Options.html",
+            "redirect": "/te2/Command-line-Options.html",
+            "statusCode": 301
+        },
+        {
             "route": "/projects/te3/en/latest",
             "redirect": "/te3",
             "statusCode": 301
