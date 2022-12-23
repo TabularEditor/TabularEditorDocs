@@ -41,6 +41,10 @@ To access the preferences dialog, go to **Tools > Preferences**.
 - **Help improve Tabular Editor by collecting anonymous usage data**: Data does not contain any personally identifiable information, nor any information about the structure or content of your data models. If you would still like to opt out of telemetry, uncheck this.
 - **Send error reports**: In cases of crashes, Tabular Editor displays an option for sending a crash report when this is checked. Crash reports are very helpful when debugging, so please leave this checked if you don't mind!
 
+## Tabular Editor > Keyboard
+
+![image](~/images/keyboard-mappings.png)
+
 ## Data Browsing > Pivot Grid / DAX Query
 
 ![image](https://user-images.githubusercontent.com/8976200/104601874-0df41c00-567b-11eb-8ba1-41a992e5664f.png)
