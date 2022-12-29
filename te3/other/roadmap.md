@@ -8,12 +8,14 @@ updated: 2021-09-08
 
 Below is an overview of major new features to be shipped with Tabular Editor 3 updates in the short- to long term:
 
-**Planned for 2022:**
+**SHipped in 2022:**
+- &#9746; DAX Debugger
 - &#9746; .NET 6 migration
 - &#9746; C# code assist (autocomplete, calltips, etc.)
 - &#9746; Import Table Wizard support for Snowflake
 - &#9746; Import Table Wizard support for Power BI dataflows
 - &#9746; Configurable hotkeys
+- &#9746; Support for DAX window functions
 - &#9746; Git integration (private preview)
 
 **Planned for 2023 Q1:**
