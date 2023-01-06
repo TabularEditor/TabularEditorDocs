@@ -33,6 +33,23 @@ That's it! At this point, you should see that the Power BI service has automatic
 
 The next step is to refresh the data in the partitions. You can use the Power BI service for that, or you can refresh the partitions in batches using [XMLA/TMSL through SQL Server Management Studio](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms), or even using [Tabular Editor's scripting](https://www.elegantbi.com/post/datarefreshintabulareditor).
 
+### Full refresh with incremental refresh policy applied
+If you have applied a refresh policy to your table and wish to perform a full refresh, you must ensure that you set [applyRefreshPolicy to false](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#override-incremental-refresh-behavior) in your script. This will ensure that you perform a full refresh of all the partitions in your table. 
+The TMSL Command would in our example look like this:
+  ```
+{
+  "refresh": {
+    "type": "full",
+    "applyRefreshPolicy": false
+    "objects": [
+      {
+        "database": "Model",
+        "table": "Internet Sales"
+      }
+    ]
+  }
+}
+  ```
 ## Modifying existing refresh policies
 
 You can also use Tabular Editor to modify existing refresh policies that has been set up using Power BI Desktop. Simply follow step 6-8 above in this case.
