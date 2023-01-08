@@ -1,6 +1,6 @@
 ﻿---
 uid: importing-tables
-title: (Tutorial) Importing Tables
+title: Importing Tables
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:

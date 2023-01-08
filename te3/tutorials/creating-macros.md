@@ -1,6 +1,6 @@
 ﻿---
 uid: creating-macros
-title: (Tutorial) Creating macros
+title: Creating macros
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
