@@ -33,6 +33,7 @@
 ## Adding New Tables & Data Sources
 ### @importing-tables
 ## Incremental Refresh
+### @incremental-refresh-about
 ### @incremental-refresh-modify
 ### @incremental-refresh-setup
 ## Automation with C# Scripting & Macros
