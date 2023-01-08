@@ -1,6 +1,6 @@
 ---
 uid: incremental-refresh-setup
-title: Set Up a Refresh Policy
+title: Set Up a New Refresh Policy
 author: Kurt Buhler
 updated: 2023-01-09
 applies_to:
@@ -10,11 +10,11 @@ applies_to:
     - edition: Business
     - edition: Enterprise
 ---
-# Incremental Refresh
+# Setting up Incremental Refresh
 
-Datasets hosted in the Power BI service can have [Incremental Refresh](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) set up on one or more tables. To configure or modify Incremental Refresh on a Power BI dataset, you can either use the [XMLA endpoint of the Power BI service directly](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla), or you can use Tabular Editor connected to the XMLA endpoint, as described below:
+To set up Incremental Refresh, you must configure a new Refresh Policy for the table. This is easily done by configuring the Refresh Policy properties once _EnableRefreshPolicy_ is set to `True`. A full overview of these properties is [here](docs.tabulareditor.com/te3/incremental-refresh-about.html#RefreshPolicyPropertiesOverview).
 
-## Setting up Incremental Refresh from scratch with Tabular Editor
+## Set up from scratch with Tabular Editor
 
 1. Connect to the Power BI XMLA R/W endpoint of your workspace, and open the dataset on which you want to configure Incremental Refresh.
 2. Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)), so let's start by adding two new Shared Expressions in Tabular Editor:
@@ -38,39 +38,3 @@ That's it! At this point, you should see that the Power BI service has automatic
 ![Generated Partitions](https://user-images.githubusercontent.com/8976200/121343417-eef47000-c922-11eb-8731-1ac4dde916ef.png)
 
 The next step is to refresh the data in the partitions. You can use the Power BI service for that, or you can refresh the partitions in batches using [XMLA/TMSL through SQL Server Management Studio](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms), or even using [Tabular Editor's scripting](https://www.elegantbi.com/post/datarefreshintabulareditor).
-
-### Full refresh with incremental refresh policy applied
-If you have applied a refresh policy to your table and wish to perform a full refresh, you must ensure that you set [applyRefreshPolicy to false](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#override-incremental-refresh-behavior) in your script. This will ensure that you perform a full refresh of all the partitions in your table. 
-The TMSL Command would in our example look like this:
-  ```
-{
-  "refresh": {
-    "type": "full",
-    "applyRefreshPolicy": false
-    "objects": [
-      {
-        "database": "Model",
-        "table": "Internet Sales"
-      }
-    ]
-  }
-}
-  ```
-## Modifying existing refresh policies
-
-You can also use Tabular Editor to modify existing refresh policies that has been set up using Power BI Desktop. Simply follow step 6-8 above in this case.
-
-## Applying refresh policies with `EffectiveDate`
-
-If you want to generate partitions while overriding the current date (for purposes of generating different rolling window ranges), you can use a small script in Tabular Editor to apply the refresh policy with the [EffectiveDate](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters) parameter.
-
-With the incremental refresh table selected, run the following script in Tabular Editor's "Advanced Scripting" pane, in place of step 8 above:
-
-```csharp
-var effectiveDate = new DateTime(2020, 1, 1);  // Todo: replace with your effective date
-Selected.Table.ApplyRefreshPolicy(effectiveDate);
-```
-
-![Use scripts to apply refresh policy](https://user-images.githubusercontent.com/8976200/121344362-f9633980-c923-11eb-916c-44a35cf03a36.png)
-
-
