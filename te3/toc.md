@@ -30,13 +30,13 @@
 ## Create a New Model
 ### @new-as-model
 ### @new-pbi-model
-## Adding New Tables & Data Sources
+## Adding Tables & Data Sources
 ### @importing-tables
 ## Incremental Refresh
 ### @incremental-refresh-about
 ### @incremental-refresh-modify
 ### @incremental-refresh-setup
-## Automation with C# Scripting & Macros
+## Automation with C# Scripting
 ### @creating-macros
 
 # Other resources
