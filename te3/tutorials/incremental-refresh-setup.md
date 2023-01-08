@@ -1,8 +1,14 @@
 ---
 uid: incremental-refresh-setup
-title: Set Up Incremental Refresh
+title: Set Up a Refresh Policy
 author: Kurt Buhler
 updated: 2023-01-09
+applies_to:
+  editions:
+    - edition: Desktop
+      none: x
+    - edition: Business
+    - edition: Enterprise
 ---
 # Incremental Refresh
 

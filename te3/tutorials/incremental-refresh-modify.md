@@ -1,8 +1,14 @@
 ---
 uid: incremental-refresh-modify
-title: Modify an Existing Incremental Refresh Policy
+title: Modify an Existing Refresh Policy
 author: Kurt Buhler
 updated: 2023-01-09
+applies_to:
+  editions:
+    - edition: Desktop
+      none: x
+    - edition: Business
+    - edition: Enterprise
 ---
 # Incremental Refresh
 
