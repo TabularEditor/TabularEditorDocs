@@ -10,57 +10,105 @@ applies_to:
     - edition: Business
     - edition: Enterprise
 ---
-# Incremental Refresh
+# Modifying Incremental Refresh
 
-Datasets hosted in the Power BI service can have [Incremental Refresh](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) set up on one or more tables. To configure or modify Incremental Refresh on a Power BI dataset, you can either use the [XMLA endpoint of the Power BI service directly](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla), or you can use Tabular Editor connected to the XMLA endpoint, as described below:
+To change Incremental Refresh, you adjust the Refresh Policy properties. Depending on what you want to change, you will adjust a different property. A full overview of these properties is [here](docs.tabulareditor.com/te3/incremental-refresh-about.html#RefreshPolicyPropertiesOverview). 
 
-## Setting up Incremental Refresh from scratch with Tabular Editor
+## Change Incremental Refresh
 
-1. Connect to the Power BI XMLA R/W endpoint of your workspace, and open the dataset on which you want to configure Incremental Refresh.
-2. Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)), so let's start by adding two new Shared Expressions in Tabular Editor:
-  ![Add shared expressions](https://user-images.githubusercontent.com/8976200/121341006-8906e900-c920-11eb-97af-ee683ff40609.png)
-3. Name them `RangeStart` and `RangeEnd` respectively, set their `Kind` property to "M" and set their expression to the following (the actual date/time value you specify doesn't matter, as it will be set by the PBI service when starting the data refresh):
-  ```M
-  #datetime(2021, 6, 9, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
-  ```
-  ![Set kind property](https://user-images.githubusercontent.com/8976200/121342389-dc2d6b80-c921-11eb-8848-b67950e55e36.png)
-4. Next, select the table on which you want to enable incremental refresh
-5. Set the `EnableRefreshPolicy` property on the table to "true":
-  ![Enable Refresh Policy](https://user-images.githubusercontent.com/8976200/121339872-3842c080-c91f-11eb-8e63-a051b34fb36f.png)
-6. Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partititions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
-  ![Configure Properties](https://user-images.githubusercontent.com/45298358/170603450-8232ad55-0b4a-4ead-b113-786a781f94ad.png)
-7. Save your model (Ctrl+S).
-8. Right-click on the table and choose "Apply Refresh Policy".
-  ![Apply Refresh Policy](https://user-images.githubusercontent.com/8976200/121342947-78577280-c922-11eb-82b5-a517fbe86c3e.png)
+Below is a general description of how you modify an existing Refresh Policy:
 
-That's it! At this point, you should see that the Power BI service has automatically generated the partitions on your table, based on the policy you specified.
+1. Connect to the model
+2. Select the table already configured for Incremental Refresh
+3. In the _Properties_ window, go to the _Refresh Policy_ section.
+4. Change the __Property__ specified in the below sections, depending on what you want to change
+5. Right-click the table and select _Apply Refresh Policy_
+6. Deploy the model changes
+7. Select and right-click all partitions and select _Refresh > Full refresh (partition)_
 
-![Generated Partitions](https://user-images.githubusercontent.com/8976200/121343417-eef47000-c922-11eb-8731-1ac4dde916ef.png)
+--------------------------
 
-The next step is to refresh the data in the partitions. You can use the Power BI service for that, or you can refresh the partitions in batches using [XMLA/TMSL through SQL Server Management Studio](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms), or even using [Tabular Editor's scripting](https://www.elegantbi.com/post/datarefreshintabulareditor).
+Below is an overview of common changes one might make to an existing Refresh Policy:
 
-### Full refresh with incremental refresh policy applied
-If you have applied a refresh policy to your table and wish to perform a full refresh, you must ensure that you set [applyRefreshPolicy to false](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#override-incremental-refresh-behavior) in your script. This will ensure that you perform a full refresh of all the partitions in your table. 
-The TMSL Command would in our example look like this:
-  ```
-{
-  "refresh": {
-    "type": "full",
-    "applyRefreshPolicy": false
-    "objects": [
-      {
-        "database": "Model",
-        "table": "Internet Sales"
-      }
-    ]
-  }
-}
-  ```
-## Modifying existing refresh policies
+### A. Extend or Reduce the Window for Archived Data
 
-You can also use Tabular Editor to modify existing refresh policies that has been set up using Power BI Desktop. Simply follow step 6-8 above in this case.
+__Purpose:__ Add or reduce the amount of data in the model.
 
-## Applying refresh policies with `EffectiveDate`
+__Property:__ <span style="color:#BC4A47">_RollingWindowPeriods_</span>
+
+__Note:__ You can also change the <span style="color:#BC4A47">_RollingWindowGranularity_</span> to make a more fine-grain selection, i.e. from 3 Years to 36 Months.
+
+### B. Extend or Reduce the Window for Refreshed Data
+
+__Purpose:__ Add or reduce the amount of data being refreshed in a scheduled refresh operation.
+
+__Property:__ <span style="color:#455C86">_IncrementalWindowPeriods_</span>
+
+__Note:__ You can also change the <span style="color:#455C86">_IncrementalWindowGranularity_</span> to make a more fine-grain selection, i.e. from 3 Years to 36 Months.
+
+### C. Only Refresh Complete Periods
+
+__Purpose:__ Exclude partial (incomplete) periods from the <span style="color:#BC4A47">Rolling Window</span>
+
+__Property:__ <span style="color:#455C86">_IncrementalWindowPeriodsOffset_</span> = -1
+
+__Note:__ You can further offset this window to refresh i.e. only the periods behind the most recent complete period. 
+
+### D. Change Incremental Refresh Mode
+
+__Purpose:__ To change from `Import` to `Hybrid` tables, or vice-versa.
+
+__Property:__ _Mode_
+
+__Note:__ Follow the below process to change Incremental Refresh Mode:
+
+5. Change _Mode_ to the desired value `Import` or `Hybrid`
+6. Right-click the table and select _Apply Refresh Policy_
+7. Deploy the model changes
+8. Select and right-click all partitions and select _Refresh > Full refresh (partition)_
+
+> [!NOTE]
+> It is recommended to check that the Rolling Window is appropriately set for the _Mode_ selected. When switching from `Import` to `Hybrid` Mode, the latest Policy Range Partition will become the DirectQuery partition. You may wish
+
+### E. Add 'Detect Data Changes'
+
+__Purpose:__ To configure that archived data will refresh if the value of a date column (i.e. _LastUpdate_) changes.
+
+__Property:__ _PollingExpression_
+
+__Note:__ Follow the below process to configure 'Detect Data Changes':
+
+5. When the table is selected, in the _Expression Editor_ window, select _Polling Expression_ from the top-left dropdown
+6. Copy in the below M Expression, replacing _LastUpdate_ with your desired column name.
+
+```M
+// Retrieves the maximum value of the column [LastUpdate]
+// Replace LastUpdate with your own column name
+// The data will refresh for any records where the value in this column
+//    equals the maximum value in the column across the entire table
+let
+    #"maxLastUpdate" =
+        List.max(
+            // Replace the below with your column and table name
+            Orders[LastUpdate] 
+        ),
+
+    accountForNu11 =
+        if #"maxLastUpdate" = null
+        then #datetime(1901, 01, 01, 00, 00, 00)
+        else #"maxLastUpdate"
+in
+    accountForNu11
+```
+
+7. Right-click the table and select _Apply Refresh Policy_
+8. Deploy the model changes
+9. Select and right-click all partitions and select _Refresh > Full refresh (partition)_
+
+> [!WARNING]
+> Any records will update if the value equals the maximum value in the column. It does not necessarily update explicitly  because the value has changed, or if the value equals the refresh date.
+
+### F. Applying refresh policies with `EffectiveDate`
 
 If you want to generate partitions while overriding the current date (for purposes of generating different rolling window ranges), you can use a small script in Tabular Editor to apply the refresh policy with the [EffectiveDate](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters) parameter.
 
@@ -73,4 +121,19 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 
 ![Use scripts to apply refresh policy](https://user-images.githubusercontent.com/8976200/121344362-f9633980-c923-11eb-916c-44a35cf03a36.png)
 
+### G. Disable Incremental Refresh
+
+__Purpose:__ To disable a refresh policy because it is not needed or the use-case no longer fits.
+
+__Property:__ _EnableRefreshPolicy_
+
+__Note:__ To disable Incremental Refresh, follow the below steps:
+
+5. With the table selected, in the _Expression Editor_ window, select _Source Expression_ from the top-left dropdown
+6. Copy the _Source Expression_ to a separate text editor window.
+7. Change _EnableRefreshPolicy_ to `False`
+8. Select and delete all of the Policy Range partitions
+9. Right-click the table and select _Create > New Partition_
+10. Copy the _Source Expression_ from __Step 6__ into the _Expression Editor_ as the _M Expression_ when selecting the new partition. 
+11. Set the partition _kind_ property to `M`
 
