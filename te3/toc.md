@@ -25,11 +25,18 @@
 ## @security-privacy
 
 # Tutorials and walkthroughs
-## @new-as-model
-## @new-pbi-model
-## @workspace-mode
-## @importing-tables
-## @creating-macros
+## Connect to a Model
+### @workspace-mode
+## Create a New Model
+### @new-as-model
+### @new-pbi-model
+## Adding New Tables & Data Sources
+### @importing-tables
+## Incremental Refresh
+### @incremental-refresh-modify
+### @incremental-refresh-setup
+## Automation with C# Scripting & Macros
+### @creating-macros
 
 # Other resources
 ## @downloads
