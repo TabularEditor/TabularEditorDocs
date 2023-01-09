@@ -20,6 +20,8 @@ applies_to:
 
 To set up Incremental Refresh, you must configure a new Refresh Policy for the table. This is easily done by configuring the Refresh Policy properties once _EnableRefreshPolicy_ is set to `True`:
 
+<br></br>
+
 ## Set up from scratch with Tabular Editor
 
 1. Connect to the Power BI XMLA endpoint of your workspace, and open the dataset upon which you want to configure Incremental Refresh.
