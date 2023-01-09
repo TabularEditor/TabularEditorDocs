@@ -10,24 +10,34 @@ applies_to:
     - edition: Business
     - edition: Enterprise
 ---
-# Incremental Refresh
+# What is a Refresh Policy?
 
-Datasets hosted in the Power BI service can have [Incremental Refresh](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) configured for one or more data tables. <span style="color:#01a99d">__The purpose of Incremental Refresh is to achieve faster, more efficient refreshes by only retrieving recent/changing data, _incrementally refreshing_ the table.__</span> To do this, the table is automatically divided into partitions, such that only recent or changing data is refreshed ("hot" partitions) or even retrieved in real-time (["Direct Query" partitions in "Hybrid Tables"](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)) while older, static data is archived ("cold" partitions). 
+<br></br>
 
-Incremental refresh can be easily configured and modified from within Tabular Editor.
+![Incremental Refresh Visual Abstract](../../images/incremental-refresh-header.png)
+
+<br></br>
+
+Datasets hosted in the Power BI service can have [Incremental Refresh](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) configured for one or more data tables. __The purpose of Incremental Refresh is to achieve faster, more efficient refreshes by only retrieving recent/changing data, _incrementally refreshing_ the table.__ To do this, the table is automatically divided into partitions, such that only recent or changing data is <span style="color:#01a99d">refreshed ("hot" partitions)</span> or even <span style="color:#8d7bae">retrieved in real-time (["Direct Query" partitions in "Hybrid Tables"](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables))</span> while <span style="color:#939799">older, static data is archived ("cold" partitions).</span>
+
+_Incremental refresh can be easily configured and modified from within Tabular Editor._
 
 <div class="NOTE">
   <h5>WHY CONFIGURE INCREMENTAL REFRESH?</h5>
-  Configuring incremental refresh has a number of benefits, particularly for larger data models:  
+  Configuring incremental refresh can be beneficial for your data model:  
   <li> Reduce refresh time & resource consumption
   <li> Experience shorter and more dependable scheduled refreshes
 </div>
 
-## How does it work?
+<br></br>
+
+### How does it work?
 
 To create the partitions, Power BI uses the `RangeStart` and `RangeEnd` _datetime_ parameters in Power Query. These parameters are used in a filter step of the table partition M Expression, filtering a table date column. 
 
 An example is given below. Incremental Refresh is applied to a table _'Orders'_ upon the _[Order Date]_ column:
+
+<br></br>
 
 # [Filter Step Only](#tab/filterstep)
 ```M
@@ -103,7 +113,9 @@ in
 
 The number, type and refresh behavior of table partitions depends on the configured table Refresh Policy.
 
-## What is a Refresh Policy?
+<br></br>
+
+### What is a Refresh Policy?
 
 A <span style="color:#01a99d">__Refresh Policy__</span> determines how the data is partitioned, and which of these Policy Range Partitions will be updated upon refresh. It consists of a set of table TOM properties which can be setup or changed.
 
@@ -113,7 +125,13 @@ A <span style="color:#01a99d">__Refresh Policy__</span> determines how the data 
   To configure incremental refresh for a local Power BI Desktop model, use the Power BI Desktop user interface.</p>
 </div>
 
-## Refresh Policy properties
+<br></br>
+
+### Refresh Policy properties
+
+<img src="../../images/Incremental-refresh-properties.png" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
+
+<br></br>
 
 Four different kinds of properties make up a basic Refresh Policy:
 1. <span style="color:#455C86">__Incremental Window__</span> __Properties__: The period window wherein data is <span style="color:#455C86">_kept up-to-date_</span>.
@@ -121,7 +139,24 @@ Four different kinds of properties make up a basic Refresh Policy:
 3. __Source Expressions__: Define table schema and Power Query transformations of the table.
 4. __Mode__: Whether `Import` or `Hybrid` tables are used.
 
-### Advanced Properties
+
+<br></br>
+
+![Incremental Refresh Policy Windows](../../images/incremental-refresh-policy-windows.png)
+
+<br></br>
+
+#### Comparing to Power BI Desktop
+
+In Power BI Desktop, these properties are named differently. Below is an overview of how the properties match the Power BI Desktop user interface.
+
+<br></br>
+
+![Incremental Refresh Policy Windows Properties](../../images/incremental-refresh-window-properties.png)
+
+<br></br>
+
+#### Advanced Properties
 
 Depending on the configured properties, Incremental Refresh may function differently. Below is an overview of the different Incremental Refresh configurations:
 
@@ -133,12 +168,25 @@ In the <span style="color:#01a99d">__*[hybrid](https://learn.microsoft.com/en-us
 
 This is configured with the <em>Mode</em> property when set to <code>Hybrid</code>. 
 
+<br></br>
+
+![Incremental Refresh Policy Windows](../../images/incremental-refresh-mode-pbi-match.png)
+
+<br></br>
+
+
 # [Only Refresh Complete Periods](#tab/completeperiods)
 In this configuration, <span style="color:#01a99d">__*the policy range will not include the current period in the _rolling window_*__</span>. 
 
 In the standard configuration of Incremental Refresh, the current period is always in the _rolling window_. This might not be the desired behavior, as the data will change with each refresh. If the users do not expect to see partial data for a partial day, you can configure 'Only Refresh Complete Periods'.
 
 This is configured with the <em>IncrementalPeriodsOffset</em> property. In the above example, a value of <code>-1</code> for an <em>IncrementalGranularity</em> of <code>Day</code> will exclude the current date from the _rolling window_ and thus the data scope; only complete days will be refreshed.
+
+<br></br>
+
+![Incremental Refresh Policy Windows](../../images/incremental-refresh-period-offset-pbi-match.png)
+
+<br></br>
 
 # [Detect Data Changes](#tab/datachanges)
 In configuration with Detect Data Changes, <span style="color:#01a99d">__*records in the archived partitions are refreshed if the value of a date column updates to the maximum value in that column.*__</span>
@@ -162,10 +210,15 @@ in
     accountForNu11
 ```
 
+<br></br>
+
+![Incremental Refresh Policy Windows](../../images/incremental-refresh-detect-changes-pbi-match.png)
+
+<br></br>
 
 ***
 
-### Overview of all properties
+#### Overview of all properties
 
 _Below is an overview of the TOM Properties in a data model used to configure Incremental Refresh:_
 
@@ -208,25 +261,25 @@ _Below is an overview of the TOM Properties in a data model used to configure In
                 <td class="formatting"><code>True</code> or <code>False</code>.</td>
             </tr>
             <tr>
-                <td class="formatting"><span style="color:#455C86"><em><b>IncrementalGranularity</b></em></span></td>
+                <td class="formatting"><span style="color:#455C86" id="incrementalgranularity"><em><b>IncrementalGranularity</b></em></span></td>
                 <td class="formatting">Incremental Refresh Period</td>
                 <td class="formatting">The granularity of the incremental window.<br /><br>Example:<br /><em>"Refresh data in the last 30 <strong><em>days</em></strong> before refresh date."</em></td>
                 <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> or <code>Year</code>. Must be smaller than or equal to the IncrementalGranularity.</td>
             </tr>
             <tr>
-                <td class="formatting"><span style="color:#455C86"><em><b>IncrementalPeriods</b></em></span></td>
+                <td class="formatting"><span style="color:#455C86" id="incrementalperiods"><em><b>IncrementalPeriods</b></em></span></td>
                 <td class="formatting">Number of Incremental Refresh Periods</td>
                 <td class="formatting">The number of periods for the incremental window.<br /><br>Example:<br /><em>"Refresh data in the last <strong><em>30</em></strong> days before refresh date."</em></td>
                 <td class="formatting">An integer of the number of <em>IncrementalGranularity</em> periods. Must define a total period smaller than the <em>RollingWindowPeriods</em></td>
             </tr>
             <tr>
-                <td class="formatting"><span style="color:#455C86"><b><em>IncrementalPeriodsOffset</b></em></span></td>
+                <td class="formatting"><span style="color:#455C86" id="incrementaloffset"><b><em>IncrementalPeriodsOffset</b></em></span></td>
                 <td class="formatting">Only refresh complete days</td>
-                <td class="formatting">The offset to be applied to <em>IncrementalPeriods</em>.<br /><br>Example for <em>IncrementalPeriodsOffset</em>=<code>-1</code>, <br /><em>IncrementalPeriods</em> = <code>30</code><br /><em>IncrementalGranularity</em> = <code>Day</code>: <br /><em>"Only refresh data in the last 30 days from refresh date -1 Day.</em></td>
+                <td class="formatting">The offset to be applied to <em>IncrementalPeriods</em>.<br /><br>Example for:<br /><em>IncrementalPeriodsOffset</em>=<code>-1</code>; <br /><em>IncrementalPeriods</em> = <code>30</code>;<br /><em>IncrementalGranularity</em> = <code>Day</code>: <br /><em>"Only refresh data in the last 30 days, from the day before refresh date.</em></td>
                 <td class="formatting">An integer of the number of <em>IncrementalGranularity</em> periods to shift the Incremental window.</td>
             </tr>
             <tr>
-                <td class="formatting"><b><em>Mode</b></em></td>
+                <td class="formatting"><span id="refreshpolicymode"><b><em>Mode</b></em></span></td>
                 <td class="formatting">Get the latest data in real time with DirectQuery</td>
                 <td class="formatting">Specifies whether Incremental Refresh is configured with only import partitions or also a DirectQuery partition, to result in a <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"Hybrid Table"</a>.</td>
                 <td class="formatting"><code>Import</code> or <code>Hybrid</code>.</td>
@@ -238,19 +291,19 @@ _Below is an overview of the TOM Properties in a data model used to configure In
                 <td class="formatting">Can only contain a single value: <code>Basic</code>.</td>
             </tr>
             <tr>
-                <td class="formatting"><b><em>PollingExpression</b><br />(Optional)</em></td>
+                <td class="formatting"><span id="pollingexpression"><b><em>PollingExpression</b><br />(Optional)</em></span></td>
                 <td class="formatting">Detect Data Changes</td>
                 <td class="formatting">The M Expression used to detect changes in a specific column such as <em>LastUpdateDate</em><br /><br>In Tabular Editor, <strong>the <em>Polling Expression</em> can be viewed and modified from the <em>Expression Editor</em> window</strong> by selecting it from the dropdown menu in the top-left.</td>.
                 <td class="formatting">A valid M Expression that returns a scalar value of the latest date in a column. All records in archive partitions containing that value for the column will be refreshed.</td>
             </tr>
             <tr>
-                <td class="formatting"><span style="color:#BC4A47"><b><em>RollingWindowGranularity</b></em></span></td>
+                <td class="formatting"><span style="color:#BC4A47" id="rollinggranularity"><b><em>RollingWindowGranularity</b></em></span></td>
                 <td class="formatting">Archive Data Period</td>
                 <td class="formatting">The granularity of the rolling window.<br /><br>Example:<br /><em>"Archive data starting 3 <strong><em>years</em></strong> before refresh date."</em></td>
                 <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> or <code>Year</code>. Must be larger than or equal to the IncrementalGranularity.</td>
             </tr>
             <tr>
-                <td class="formatting"><span style="color:#BC4A47"><b><em>RollingWindowPeriods</b></em></span></td>
+                <td class="formatting"><span style="color:#BC4A47" id="rollingperiods"><b><em>RollingWindowPeriods</b></em></span></td>
                 <td class="formatting">Number of Archive Data Periods</td>
                 <td class="formatting">The number of periods for the rolling window.<br /><br>Example:<br /><em>"Archive data starting <strong><em>3</em></strong> years before refresh date."</em></td>
                 <td class="formatting">An integer of the number of <em>RollingWindowGranularity</em> periods. Must define a total period larger than the   <em>IncrementalPeriods</em></td>
@@ -269,7 +322,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Enable Refresh Policy Property -->
 <script>
   tippy('#enablerefreshpolicy', {
-    content: '<img src="https://tabulareditor.com/assets/te3-logo.d5e43907.svg" width=200px height=200px alt="image">',
+    content: '<img src="../../images/incremental-refresh-enable-refresh-policy-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -279,7 +332,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Incremental Granularity Property -->
 <script>
   tippy('#incrementalgranularity', {
-    content: '<img src="https://tabulareditor.com/assets/te3-logo.d5e43907.svg" width=200px height=200px alt="image">',
+    content: '<img src="../../images/incremental-refresh-incremental-granularity-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -289,7 +342,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Incremental Periods Property -->
 <script>
   tippy('#incrementalperiods', {
-    content: '<img src="https://tabulareditor.com/assets/te3-logo.d5e43907.svg" width=200px height=200px alt="image">',
+    content: '<img src="../../images/incremental-refresh-incremental-period-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -298,8 +351,8 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 
 <!-- Incremental Periods Offset Property -->
 <script>
-  tippy('#incrementalperiodsoffset', {
-    content: '<img src="https://tabulareditor.com/assets/te3-logo.d5e43907.svg" width=200px height=200px alt="image">',
+  tippy('#incrementaloffset', {
+    content: '<img src="../../images/incremental-refresh-period-offset-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -309,17 +362,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Refresh Policy Mode Property -->
 <script>
   tippy('#refreshpolicymode', {
-    content: '<img src="https://tabulareditor.com/assets/te3-logo.d5e43907.svg" width=200px height=200px alt="image">',
-    followCursor: true,
-    arrow: true,
-    placement: 'left',
-  });
-</script>
-
-<!-- Refresh Policy Type Property -->
-<script>
-  tippy('#refreshpolicytype', {
-    content: '<img src="https://tabulareditor.com/assets/te3-logo.d5e43907.svg" width=200px height=200px alt="image">',
+    content: '<img src="../../images/incremental-refresh-mode-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -329,17 +372,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Polling Expression Property -->
 <script>
   tippy('#pollingexpression', {
-    content: '<img src="https://tabulareditor.com/assets/te3-logo.d5e43907.svg" width=200px height=200px alt="image">',
-    followCursor: true,
-    arrow: true,
-    placement: 'left',
-  });
-</script>
-
-<!-- Source Expression Property -->
-<script>
-  tippy('#sourceexpression', {
-    content: '<img src="https://tabulareditor.com/assets/te3-logo.d5e43907.svg" width=200px height=200px alt="image">',
+    content: '<img src="../../images/incremental-refresh-detect-changes-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -348,8 +381,8 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 
 <!-- Rolling Window Granularity Property -->
 <script>
-  tippy('#rollingwindowgranularity', {
-    content: '<img src="https://tabulareditor.com/assets/te3-logo.d5e43907.svg" width=200px height=200px alt="image">',
+  tippy('#rollinggranularity', {
+    content: '<img src="../../images/incremental-refresh-rolling-granularity-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -358,8 +391,8 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 
 <!-- Rolling Window Periods Property -->
 <script>
-  tippy('#rollingwindowperiods', {
-    content: '<img src="https://tabulareditor.com/assets/te3-logo.d5e43907.svg" width=200px height=200px alt="image">',
+  tippy('#rollingperiods', {
+    content: '<img src="../../images/incremental-refresh-rolling-window-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',

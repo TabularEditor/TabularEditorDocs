@@ -12,13 +12,40 @@ applies_to:
 ---
 # Modifying Incremental Refresh Table Schemas
 
+<br></br>
+
+![Incremental Refresh Workspace Mode Visual Abstract](../../images/incremental-refresh-update-schema-header.png)
+
+<br></br>
+
 __When adding or removing columns from a table configured with Incremental Refresh, you must update the table schema.__ Generally, this follows the same protocol as updating table schemas for single-partition tables. Tabular Editor can detect and update the schema for you, automatically: 
 
 1. __Detect schema changes:__ Right-click the table and select _'Update table schema...'_.
+
+  <br></br>
+
+  <img src="../../images/incremental-refresh-update-table-schema.png" alt="Update Table Schema" style="width:450px !important"/>
+
+  <br></br>
+
 2. __Apply detected schema changes:__ In the _'Apply Schema Changes'_ dialogue, confirm the desired schema changes.
 3. __Apply changes:__ Deploy the model changes.
 4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
+
+  <br></br>
+
+  <img src="../../images/incremental-refresh-apply-refresh-policy.png" alt="Apply Refresh Policy" style="width:450px !important"/>
+
+  <br></br>
+
 5. __Refresh all partitions:__ Select and right-click all partitions. Select _Refresh > Full refresh (partition)_.
+
+  <br></br>
+  
+  <img src="../../images/incremental-refresh-refresh-all-partitions.png" alt="Refresh All Partitions" style="width:450px !important"/>
+  
+  
+  <br></br>
 
 ### Schema Update Considerations with Incremental Refresh
 
@@ -32,6 +59,12 @@ __When adding or removing columns from a table configured with Incremental Refre
   <h5>CHECK SOURCE EXPRESSION BEFORE UPDATING SCHEMA</h5>
   <p>If schema changes arise from the Data Source, you may still need to apply changes to your Power Query <b><em>Source Expression</em></b> or <b><em>Polling Expression</em></b>. It is recommended that you carefully check these expressions before using <em>'Update table schema...'</em></p>
 </div>
+
+<br></br>
+
+------------------------------------
+
+<br></br>
 
 ### Removing Columns
 
@@ -73,6 +106,12 @@ If you are __unable to automatically update the table schema__ using _'Update ta
   <h5>DELETED COLUMN OBJECTS MAY STILL BE QUERIED</h5>
   <p>Deleting column objects from the model does not prevent them from being queried if they still exist in the source and are not removed in the Native Query or <b><em>Source Expression</em></b>. Columns queried but not used can have a negative impact on refresh time and resource usage. It is recommended that you remove columns from both metadata and either data sources (i.e. views) or in the <b><em>Source Expression</em></b>.</p>
 </div>
+
+<br></br>
+
+------------------------------------
+
+<br></br>
 
 ### Adding Columns
 
