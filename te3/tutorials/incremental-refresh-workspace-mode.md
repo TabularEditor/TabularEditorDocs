@@ -41,3 +41,5 @@ To deploy the model, go _Model > Deploy..._ which opens the Deployment Wizard. H
   ![Incremental Refresh Workspace Mode Visual Abstract](../../images/incremental-refresh-deploy-partitions.png)
 
   <br></br>
+
+By deploying the model without these Policy Range partitions, you are mitigating any potential impact due to out-of-sync incremental refresh partitions between the metadata and remote model.

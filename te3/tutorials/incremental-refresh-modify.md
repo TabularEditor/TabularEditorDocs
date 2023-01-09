@@ -66,7 +66,7 @@ Below is an overview of common changes one might make to an existing Refresh Pol
 
 __Purpose:__ Add or reduce the amount of data in the model.
 
-__Property:__ <span style="color:#BC4A47">_RollingWindowPeriods_</span>. Increase it to extend the window (more data); decrease it to reduce the window (less data).
+__Property:__ <span style="color:#BC4A47">_RollingWindowPeriods_</span>. Increase to extend the window (more data); decrease to reduce the window (less data).
 
 __Note:__ You can also change the <span style="color:#BC4A47">_RollingWindowGranularity_</span> to make a more fine-grain selection, i.e. from 3 Years to 36 Months.
 
@@ -80,7 +80,7 @@ __Note:__ You can also change the <span style="color:#BC4A47">_RollingWindowGran
 
 __Purpose:__ Add or reduce the amount of data being refreshed in a scheduled refresh operation.
 
-__Property:__ <span style="color:#455C86">_IncrementalWindowPeriods_</span>. Increase it to extend the window (more data); decrease it to reduce the window (less data).
+__Property:__ <span style="color:#455C86">_IncrementalWindowPeriods_</span>. Increase to extend the window (more data); decrease to reduce the window (less data).
 
 __Note:__ You can also change the <span style="color:#455C86">_IncrementalWindowGranularity_</span> to make a more fine-grain selection, i.e. from 3 Years to 36 Months.
 
@@ -112,10 +112,10 @@ __Property:__ _Mode_
 
 __Note:__ Follow the below process to change Incremental Refresh Mode:
 
-5. Change _Mode_ to the desired value `Import` or `Hybrid`
-6. Right-click the table and select _Apply Refresh Policy_
-7. Deploy the model changes
-8. Select and right-click all partitions and select _Refresh > Full refresh (partition)_
+1. Change _Mode_ to the desired value `Import` or `Hybrid`
+2. Right-click the table and select _Apply Refresh Policy_
+3. Deploy the model changes
+4. Select and right-click all partitions and select _Refresh > Full refresh (partition)_
 
 > [!NOTE]
 > It is recommended to check that the Rolling Window is appropriately set for the selected _Mode_. When switching from `Import` to `Hybrid` Mode, the latest Policy Range Partition will become the DirectQuery partition. You may wish to opt for a more fine-grain window, to limit the amount of data queried with DirectQuery.
@@ -134,8 +134,8 @@ __Property:__ _PollingExpression_. Add a valid M Expression which returns a maxi
 
 __Note:__ Follow the below process to configure 'Detect Data Changes':
 
-5. When the table is selected, in the _Expression Editor_ window, select _Polling Expression_ from the top-left dropdown
-6. Copy in the below M Expression, replacing _LastUpdate_ with your desired column name.
+1. When the table is selected, in the _Expression Editor_ window, select _Polling Expression_ from the top-left dropdown
+2. Copy in the below M Expression, replacing _LastUpdate_ with your desired column name.
 
 ```M
 // Retrieves the maximum value of the column [LastUpdate]
@@ -157,9 +157,9 @@ in
     accountForNu11
 ```
 
-7. Right-click the table and select _Apply Refresh Policy_
-8. Deploy the model changes
-9. Select and right-click all partitions and select _Refresh > Full refresh (partition)_
+3. Right-click the table and select _Apply Refresh Policy_
+4. Deploy the model changes
+5. Select and right-click all partitions and select _Refresh > Full refresh (partition)_
 
 > [!WARNING]
 > Any records will update if the value equals the maximum value in the column. It does not necessarily update explicitly  because the value has changed, or if the value equals the refresh date.
@@ -174,7 +174,7 @@ in
 
 If you want to generate partitions while overriding the current date (for purposes of generating different rolling window ranges), you can use a small script in Tabular Editor to apply the refresh policy with the [EffectiveDate](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters) parameter.
 
-With the incremental refresh table selected, run the following script in Tabular Editor's "Advanced Scripting" pane, in place of step 8 above:
+With the incremental refresh table selected, run the following script in Tabular Editor's _'New C# Script'_ pane instead of applying the refresh policy by right-clicking the table.
 
 ```csharp
 // Todo: replace with your effective date
