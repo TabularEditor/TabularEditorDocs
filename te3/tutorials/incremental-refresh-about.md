@@ -33,7 +33,7 @@ _Incremental refresh can be easily configured and modified from within Tabular E
 
 ### How does it work?
 
-To create the partitions, Power BI uses the `RangeStart` and `RangeEnd` _datetime_ parameters in Power Query. These parameters are used in a filter step of the table partition M Expression, filtering a table date column. 
+To create the partitions, Power BI uses the `RangeStart` and `RangeEnd` _datetime_ parameters in Power Query. These parameters are used in a filter step of the table partition M Expression, filtering a table datetime column. Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart` or `RangeEnd` to datetime. For more information about this, see [here](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
 An example is given below. Incremental Refresh is applied to a table _'Orders'_ upon the _[Order Date]_ column:
 
@@ -47,8 +47,8 @@ An example is given below. Incremental Refresh is applied to a table _'Orders'_ 
     Table.SelectRows(
         Navigation,
         each 
-            [OrderDate] <= #"RangeStart" and 
-            [OrderDate] > #"RangeEnd"
+            [OrderDate] >= #"RangeStart" and 
+            [OrderDate] < #"RangeEnd"
     )
 ```
 
@@ -69,8 +69,8 @@ let
         Table.SelectRows(
             Navigation,
             each 
-                [OrderDate] <= #"RangeStart" and 
-                [OrderDate] > #"RangeEnd"
+                [OrderDate] >= #"RangeStart" and 
+                [OrderDate] < #"RangeEnd"
         )
 in
     #"Incremental Refresh Filter Step"
@@ -79,9 +79,8 @@ in
 # [RangeStart](#tab/rangestart)
 ```M
 // It does not matter what the initial value is for the RangeStart parameter
-// RangeStart should be greater than RangeEnd
 // The parameter must be of data type "datetime"
-#datetime(2022, 12, 31, 0, 0, 0) 
+#datetime(2022, 12, 01, 0, 0, 0) 
     meta 
         [
             IsParameterQuery = true, 
@@ -93,9 +92,8 @@ in
 # [RangeEnd](#tab/rangend)
 ```M
 // It does not matter what the initial value is for the RangeEnd parameter
-// RangeEnd should be less than RangeStart
 // The parameter must be of data type "datetime"
-#datetime(2022, 12, 01, 0, 0, 0) 
+#datetime(2022, 12, 31, 0, 0, 0) 
     meta 
         [
             IsParameterQuery = true, 
