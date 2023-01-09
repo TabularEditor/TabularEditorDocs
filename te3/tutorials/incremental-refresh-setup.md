@@ -24,8 +24,8 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 
 ## Set up from scratch with Tabular Editor
 
-1. Connect to the Power BI XMLA endpoint of your workspace, and open the dataset upon which you want to configure Incremental Refresh.
-2. Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)). Add two new Shared Expressions in Tabular Editor:
+1. __Connect to the model:__ Connect to the Power BI XMLA endpoint of your workspace, and open the dataset upon which you want to configure Incremental Refresh.
+2. __Create the `RangeStart` and `RangeEnd` Parameters:__ Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)). Add two new Shared Expressions in Tabular Editor:
 
   <br></br>
 
@@ -33,7 +33,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 
   <br></br>
 
-3. Name them `RangeStart` and `RangeEnd` respectively, set their `Kind` property to "M" and set their expression to the following (the actual date/time value you specify doesn't matter, as it will be set by Power BI Service when starting the data refresh):
+3. __Configure the `RangeStart` and `RangeEnd` Parameters:__ Name them `RangeStart` and `RangeEnd` respectively, set their `Kind` property to "M" and set their expression to the following (the actual date/time value you specify doesn't matter, as it will be set by Power BI Service when starting the data refresh):
 
   ```M
   #datetime(2021, 6, 9, 0, 0, 0) 
@@ -45,8 +45,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
       ]
   ```
 
-4. Next, select the table for which you want to configure incremental refresh
-5. Set the `EnableRefreshPolicy` property on the table to `True`:
+4. __Enable the Table Refresh Policy:__ Next, select the table for which you want to configure incremental refresh. Set the `EnableRefreshPolicy` property on the table to `True`:
 
   <br></br>
 
@@ -54,16 +53,16 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 
   <br></br>
 
-6. Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partititions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
+5. __Configure Refresh Policy:__ Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partititions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
 
-  - __Source Expression:__ The M Expression that be added to partitions created by the Refresh Policy.
-  - __IncrementalWindowGranularity:__ The granularity of the incremental (refresh) window.
-  - __IncrementalWindowPeriods:__ # periods (of granularity specified above) wherein data should be refreshed.
-  - __IncrementalWindowPeriodsOffset:__ Set to `-1` to set _'Only Refresh Complete Periods'_
-  - __RollingWindowGranularity:__ The granularity of the rolling (archive) window.
-  - __RollingWindowPeriods:__ # periods (of granularity specified above) wherein data should be archived.
-  - __Mode:__ Whether it is standard `Import` Refresh Policy or `Hybrid`, where the last partition is DirectQuery.
-  - __PollingExpression:__ A valid M Expression configured to detect data changes. For more information about _Polling Expression_ or other Refresh Policy properties, see [here](xref:incremental-refresh-about#overview-of-all-properties).
+    - __Source Expression:__ The M Expression that be added to partitions created by the Refresh Policy.
+    - __IncrementalWindowGranularity:__ The granularity of the incremental (refresh) window.
+    - __IncrementalWindowPeriods:__ # periods (of granularity specified above) wherein data should be refreshed.
+    - __IncrementalWindowPeriodsOffset:__ Set to `-1` to set _'Only Refresh Complete Periods'_
+    - __RollingWindowGranularity:__ The granularity of the rolling (archive) window.
+    - __RollingWindowPeriods:__ # periods (of granularity specified above) wherein data should be archived.
+    - __Mode:__ Whether it is standard `Import` Refresh Policy or `Hybrid`, where the last partition is DirectQuery.
+    - __PollingExpression:__ A valid M Expression configured to detect data changes. For more information about _Polling Expression_ or other Refresh Policy properties, see [here](xref:incremental-refresh-about#overview-of-all-properties).
   
   <br></br>
 
@@ -71,8 +70,8 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
   
   <br></br>
 
-7. Save your model (Ctrl+S).
-8. Right-click on the table and choose "Apply Refresh Policy".
+6. __Apply Model Changes:__ Save your model (Ctrl+S).
+7. __Apply Refresh Policy:__ Right-click on the table and choose "Apply Refresh Policy".
 
   <br></br>
   
@@ -88,7 +87,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
   
   <br></br>
 
-9. __Refresh all partitions:__ Select and right-click all partitions. Select _Refresh > Full refresh (partition)_.
+8. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_.
 
   <br></br>
 
