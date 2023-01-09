@@ -56,7 +56,7 @@ __When adding or removing columns from a table configured with Incremental Refre
   - `Table.SelectColumns` step lists columns to be kept; the new column is not added to this list.
 
 <div class="WARNING">
-  <h5>CHECK SOURCE EXPRESSION BEFORE UPDATING SCHEMA</h5>
+  <h5>CHECK M EXPRESSIONS BEFORE UPDATING THE TABLE SCHEMA</h5>
   <p>If schema changes arise from the Data Source, you may still need to apply changes to your Power Query <b><em>Source Expression</em></b> or <b><em>Polling Expression</em></b>. It is recommended that you carefully check these expressions before using <em>'Update table schema...'</em></p>
 </div>
 
