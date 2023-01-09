@@ -45,7 +45,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
       ]
   ```
 
-4. __Enable the Table Refresh Policy:__ Next, select the table for which you want to configure incremental refresh. In the _'Expression Editor' window, Select __'M Expression'__ from the dropdown, and alter the Power Query M Expression such that there is a filter step on the date column for which you will enable incremental refresh. 
+4. __Configure the Table Refresh:__ Next, select the table for which you want to configure incremental refresh. In the _'Expression Editor' window, Select __'M Expression'__ from the dropdown, and alter the Power Query M Expression such that there is a filter step on the date column for which you will enable incremental refresh. 
 
   _An example of one such valid filter step is below:_
   
@@ -112,3 +112,5 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
   <img src="../../images/incremental-refresh-refresh-all-partitions.png" alt="Refresh All Partitions" style="width:400px !important"/>
   
   <br></br>
+
+Finally, you can configure the scheduled refresh in Power BI Service. Power BI will automatically handle the partitioning of your table. You can always connect to the remote model to view and validate the partitions, i.e. using the VertiPaq Analyzer. When continuing to develop this model, ensure you are careful when using _Workspace Mode_ that you don't accidentally overwrite partitions created by the Power BI Service, as described in [this article.](xref:incremental-refresh-about#overview-of-all-properties) To avoid this situation, it's recommended that you develop from the model metadata, deploying changes without partitions managed by incremental refresh policies. 
