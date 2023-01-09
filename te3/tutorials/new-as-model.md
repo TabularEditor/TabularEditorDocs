@@ -1,6 +1,6 @@
 ﻿---
 uid: new-as-model
-title: (Tutorial) Create an Analysis Services Model
+title: Create an Analysis Services Model
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:

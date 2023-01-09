@@ -1,6 +1,6 @@
 ﻿---
 uid: new-pbi-model
-title: (Tutorial) Create a Power BI Dataset
+title: Create a Power BI Dataset
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:
