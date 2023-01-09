@@ -17,7 +17,7 @@ Datasets hosted in the Power BI service can have [Incremental Refresh](https://l
 Incremental refresh can be easily configured and modified from within Tabular Editor.
 
 <div class="NOTE">
-  <h5>WHY SET UP INCREMENTAL REFRESH?</h5>
+  <h5>WHY CONFIGURE INCREMENTAL REFRESH?</h5>
   Configuring incremental refresh has a number of benefits, particularly for larger data models:  
   <li> Reduce refresh time & resource consumption
   <li> Experience shorter and more dependable scheduled refreshes
@@ -210,13 +210,13 @@ _Below is an overview of the TOM Properties in a data model used to configure In
             <tr>
                 <td class="formatting"><span style="color:#455C86"><em><b>IncrementalGranularity</b></em></span></td>
                 <td class="formatting">Incremental Refresh Period</td>
-                <td class="formatting">The granularity of the incremental window.<br /><br>Example: <em>"Refresh data in the last 30 <strong><em>days</em></strong> before refresh date."</em></td>
+                <td class="formatting">The granularity of the incremental window.<br /><br>Example:<br /><em>"Refresh data in the last 30 <strong><em>days</em></strong> before refresh date."</em></td>
                 <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> or <code>Year</code>. Must be smaller than or equal to the IncrementalGranularity.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#455C86"><em><b>IncrementalPeriods</b></em></span></td>
                 <td class="formatting">Number of Incremental Refresh Periods</td>
-                <td class="formatting">The number of periods for the incremental window.<br /><br>Example: <em>"Refresh data in the last <strong><em>30</em></strong> days before refresh date."</em></td>
+                <td class="formatting">The number of periods for the incremental window.<br /><br>Example:<br /><em>"Refresh data in the last <strong><em>30</em></strong> days before refresh date."</em></td>
                 <td class="formatting">An integer of the number of <em>IncrementalGranularity</em> periods. Must define a total period smaller than the <em>RollingWindowPeriods</em></td>
             </tr>
             <tr>
@@ -246,13 +246,13 @@ _Below is an overview of the TOM Properties in a data model used to configure In
             <tr>
                 <td class="formatting"><span style="color:#BC4A47"><b><em>RollingWindowGranularity</b></em></span></td>
                 <td class="formatting">Archive Data Period</td>
-                <td class="formatting">The granularity of the rolling window.<br /><br>Example: <em>"Archive data starting 3 <strong><em>years</em></strong> before refresh date."</em></td>
+                <td class="formatting">The granularity of the rolling window.<br /><br>Example:<br /><em>"Archive data starting 3 <strong><em>years</em></strong> before refresh date."</em></td>
                 <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> or <code>Year</code>. Must be larger than or equal to the IncrementalGranularity.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#BC4A47"><b><em>RollingWindowPeriods</b></em></span></td>
                 <td class="formatting">Number of Archive Data Periods</td>
-                <td class="formatting">The number of periods for the rolling window.<br /><br>Example: <em>"Archive data starting <strong><em>3</em></strong> years before refresh date."</em></td>
+                <td class="formatting">The number of periods for the rolling window.<br /><br>Example:<br /><em>"Archive data starting <strong><em>3</em></strong> years before refresh date."</em></td>
                 <td class="formatting">An integer of the number of <em>RollingWindowGranularity</em> periods. Must define a total period larger than the   <em>IncrementalPeriods</em></td>
             </tr>
             <tr>
