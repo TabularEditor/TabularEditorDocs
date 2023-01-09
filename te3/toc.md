@@ -37,6 +37,7 @@
 ### @incremental-refresh-modify
 ### @incremental-refresh-setup
 ### @incremental-refresh-schema
+### @incremental-refresh-workspace-mode
 ## Automation with C# Scripting
 ### @creating-macros
 
