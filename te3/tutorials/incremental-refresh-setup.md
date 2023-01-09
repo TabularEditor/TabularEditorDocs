@@ -45,7 +45,25 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
       ]
   ```
 
-4. __Enable the Table Refresh Policy:__ Next, select the table for which you want to configure incremental refresh. Set the `EnableRefreshPolicy` property on the table to `True`:
+4. __Enable the Table Refresh Policy:__ Next, select the table for which you want to configure incremental refresh. In the _'Expression Editor' window, Select __'M Expression'__ from the dropdown, and alter the Power Query M Expression such that there is a filter step on the date column for which you will enable incremental refresh. 
+
+  _An example of one such valid filter step is below:_
+  
+  ```M
+  // The filter step must be able to fold back to the data source
+  // No steps before this should break query folding
+  #"Incremental Refresh Filter Step" = 
+      Table.SelectRows(
+          Navigation,
+          each 
+              [OrderDate] >= #"RangeStart" and 
+              [OrderDate] < #"RangeEnd"
+      )
+  ```
+
+  Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart` or `RangeEnd` to the appropriate data type. For more information about this, see [here](https://learn.microsoft.com/en-us/power-bi/connect-data/  incremental-refresh-overview#supported-data-sources)
+
+5. __Enable the Table Refresh Policy:__ In the _'Properties'_ window, set the `EnableRefreshPolicy` property on the table to `True`:
 
   <br></br>
 
@@ -53,7 +71,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 
   <br></br>
 
-5. __Configure Refresh Policy:__ Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partititions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
+6. __Configure Refresh Policy:__ Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partititions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
 
     - __Source Expression:__ The M Expression that be added to partitions created by the Refresh Policy.
     - __IncrementalWindowGranularity:__ The granularity of the incremental (refresh) window.
@@ -70,8 +88,8 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
   
   <br></br>
 
-6. __Apply Model Changes:__ Save your model (Ctrl+S).
-7. __Apply Refresh Policy:__ Right-click on the table and choose "Apply Refresh Policy".
+7. __Apply Model Changes:__ Save your model (Ctrl+S).
+8. __Apply Refresh Policy:__ Right-click on the table and choose "Apply Refresh Policy".
 
   <br></br>
   
@@ -87,7 +105,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
   
   <br></br>
 
-8. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_.
+9. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_.
 
   <br></br>
 
