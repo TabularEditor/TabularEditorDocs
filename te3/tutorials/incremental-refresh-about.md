@@ -33,7 +33,7 @@ _Incremental refresh can be easily configured and modified from within Tabular E
 
 ### How does it work?
 
-To create the partitions, Power BI uses the `RangeStart` and `RangeEnd` _datetime_ parameters in Power Query. These parameters are used in a filter step of the table partition M Expression, filtering a table datetime column. Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart` or `RangeEnd` to the appropriate data type. For more information about this, see [here](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
+To create the partitions, Power BI uses the `RangeStart` and `RangeEnd` _datetime_ parameters in Power Query. These parameters are used in a filter step of the table partition M Expression, filtering a table datetime column. Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart`, `RangeEnd` or the date column to the appropriate data type. For more information about this, see [here](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
 An example is given below. Incremental Refresh is applied to a table _'Orders'_ upon the _[Order Date]_ column:
 
@@ -159,10 +159,10 @@ In Power BI Desktop, these properties are named differently. Below is an overvie
 Depending on the configured properties, Incremental Refresh may function differently. Below is an overview of the different Incremental Refresh configurations:
 
 # [Standard (Import)](#tab/import)
-In the <span style="color:#01a99d">__*standard configuration*__</span> of Incremental Refresh, __all partitions are imported in-memory__. Partitions in the <span style="color:#455C86">_incremental window_</span> are archived, while those in the <span style="color:#BC4A47">_rolling window_</span> are refreshed. 
+In the <span style="color:#01a99d">__*standard configuration*__</span> of Incremental Refresh, __all partitions are imported in-memory__. Partitions in the <span style="color:#BC4A47">_rolling window_</span> are archived, while those in the <span style="color:#455C86">_incremental window_</span> are refreshed. 
 
 # [Hybrid](#tab/hybrid)
-In the <span style="color:#01a99d">__*[hybrid](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)*__</span> configuration of Incremental Refresh, the latest policy range partition in the <span style="color:#BC4A47">_rolling window_</span> is queried in real time using DirectQuery.
+In the <span style="color:#01a99d">__*[hybrid](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)*__</span> configuration of Incremental Refresh, the latest policy range partition in the <span style="color:#455C86">_incremental window_</span> is queried in real time using DirectQuery.
 
 This is configured with the <em>Mode</em> property when set to <code>Hybrid</code>. 
 
@@ -176,9 +176,9 @@ This is configured with the <em>Mode</em> property when set to <code>Hybrid</cod
 # [Only Refresh Complete Periods](#tab/completeperiods)
 In this configuration, <span style="color:#01a99d">__*the policy range will not include the current period in the _rolling window_*__</span>. 
 
-In the standard configuration of Incremental Refresh, the current period is always in the _rolling window_. This might not be the desired behavior, as the data will change with each refresh. If the users do not expect to see partial data for a partial day, you can configure 'Only Refresh Complete Periods'.
+In the standard configuration of Incremental Refresh, the current period is always in the <span style="color:#455C86">_incremental window_</span>. This might not be the desired behavior, as the data will change with each refresh. If the users do not expect to see partial data for a partial day, you can configure 'Only Refresh Complete Periods'.
 
-This is configured with the <em>IncrementalPeriodsOffset</em> property. In the above example, a value of <code>-1</code> for an <em>IncrementalGranularity</em> of <code>Day</code> will exclude the current date from the _rolling window_ and thus the data scope; only complete days will be refreshed.
+This is configured with the <em>IncrementalPeriodsOffset</em> property. In the above example, a value of <code>-1</code> for an <em>IncrementalGranularity</em> of <code>Day</code> will exclude the current date from the <span style="color:#455C86">_incremental window_</span> and thus the data scope; only complete days will be refreshed.
 
 <br></br>
 
@@ -189,7 +189,7 @@ This is configured with the <em>IncrementalPeriodsOffset</em> property. In the a
 # [Detect Data Changes](#tab/datachanges)
 In configuration with Detect Data Changes, <span style="color:#01a99d">__*records in the archived partitions are refreshed if the value of a date column updates to the maximum value in that column.*__</span>
 
-The purpose of Detect Data Changes is to account for situations where historical data might still infrequently be updated. An example might be Order Lines data which receive a new Requested Delivery Date. Using Detect Data Changes, a single date column in the table is watched for changes. All records will be refreshed where the value equals the maximum value in that column. For example with the column _[DateOfLastUpdate]_, if the latest value is 2023-01-08, all records with the value 2023-01-08 will be refreshed, even if they are in the archived, historical partitions. 
+The purpose of Detect Data Changes is to account for situations where historical data might still infrequently be updated. An example might be Order Lines data which receive a new Requested Delivery Date, or have their status changed to 'Cancelled'. Using Detect Data Changes, a single date column in the table is watched for changes. All records will be refreshed where the value equals the maximum value in that column, including those archived in the <span style="color:#BC4A47">_rolling window_</span>. For example with the column _[DateOfLastUpdate]_, if the latest value is 2023-01-08, all records with the value 2023-01-08 will be refreshed, even if they are in the archived, historical partitions of the <span style="color:#BC4A47">_rolling window_</span>. 
 
 This is configured when the <em>Polling Expression</em> contains a valid M Expression that returns the maximum of a datetime column in the table. An example of a valid <em>Polling Expression</em> is below:
 ```M
