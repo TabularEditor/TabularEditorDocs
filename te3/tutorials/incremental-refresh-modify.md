@@ -46,7 +46,7 @@ Below is a general description of how you modify an existing Refresh Policy:
 
     <br></br>
 
-7. __Refresh all partitions:__ Select and right-click all partitions. Select _Refresh > Full refresh (partition)_.
+7. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
     <br></br>
 
@@ -115,7 +115,7 @@ __Note:__ Follow the below process to change Incremental Refresh Mode:
 1. Change _Mode_ to the desired value `Import` or `Hybrid`
 2. Right-click the table and select _Apply Refresh Policy_
 3. Deploy the model changes
-4. Select and right-click all partitions and select _Refresh > Full refresh (partition)_
+4. Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
 > [!NOTE]
 > It is recommended to check that the Rolling Window is appropriately set for the selected _Mode_. When switching from `Import` to `Hybrid` Mode, the latest Policy Range Partition will become the DirectQuery partition. You may wish to opt for a more fine-grain window, to limit the amount of data queried with DirectQuery.
@@ -159,7 +159,7 @@ in
 
 3. Right-click the table and select _Apply Refresh Policy_
 4. Deploy the model changes
-5. Select and right-click all partitions and select _Refresh > Full refresh (partition)_
+5. Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
 > [!WARNING]
 > Any records will update if the value equals the maximum value in the column. It does not necessarily update explicitly  because the value has changed, or if the value equals the refresh date.
@@ -205,4 +205,4 @@ __Note:__ To disable Incremental Refresh, follow the below steps:
 4. __Create a new M Partition:__ Right-click the table and select _Create > New Partition_. Set the partition _kind_ property to `M`.
 5. __Paste the _Source Expression_:__ Copy the _Source Expression_ from __Step 6__ into the _Expression Editor_ as the _M Expression_ when selecting the new partition. 
 6. __Apply Changes:__ Deploy the model changes.
-7. __Refresh the Table:__ Select and right-click the table. Select _Refresh > Full refresh (table)_. 
+7. __Refresh the Table:__ Select and right-click the table. Select _Refresh > Full refresh (table)_. You can right-click the table and select _'Preview data'_ to see the result.
