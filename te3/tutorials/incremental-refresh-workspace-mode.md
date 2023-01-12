@@ -18,6 +18,11 @@ applies_to:
   
   <br></br>
 
+> [!IMPORTANT]
+> Setting up Incremental Refresh with Tabular Editor is limited to Power BI Datasets in PPU or Premium Capacity.
+
+<br></br>
+
 Incremental Refresh creates new partitions upon the first scheduled refresh in a day. As a result, any local metadata (i.e. `.bim` or `database.json`) will be out-of-sync with the remote model metadata after the refresh. As a result, __when working with a model that has tables configured with Incremental Refresh, _Workspace Mode_ is not recommended__. 
 
 <br></br>

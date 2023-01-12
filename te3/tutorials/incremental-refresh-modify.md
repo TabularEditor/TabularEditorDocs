@@ -18,6 +18,11 @@ applies_to:
 
 <br></br>
 
+> [!IMPORTANT]
+> Setting up this type of Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service.
+
+<br></br>
+
 __Incremental Refresh is changed by adjusting the Refresh Policy properties.__ Depending on what you want to change, you will adjust a different property. A full overview of these properties is [here](xref:incremental-refresh-about#overview-of-all-properties). 
 
 <br></br>

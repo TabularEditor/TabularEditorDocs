@@ -22,6 +22,10 @@ Datasets hosted in the Power BI service can have [Incremental Refresh](https://l
 
 _Incremental refresh can be easily configured and modified from within Tabular Editor._
 
+> [!IMPORTANT]
+> Setting up this type of Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service.
+<br></br>
+
 <div class="NOTE">
   <h5>WHY CONFIGURE INCREMENTAL REFRESH?</h5>
   Configuring incremental refresh can be beneficial for your data model:  
