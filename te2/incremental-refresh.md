@@ -67,4 +67,15 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 
 ![Use scripts to apply refresh policy](https://user-images.githubusercontent.com/8976200/121344362-f9633980-c923-11eb-916c-44a35cf03a36.png)
 
+## Removing Incremental Refresh using Tabular Editor
 
+You may need to remove the incremental refresh policy from a table.
+
+1. Select the table in the TOM view and get the M code from the SourceExpression property and save it somewhere.
+2. Change the EnableRefreshPolicy value from TRUE to FALSE.
+3. Right-click on the table and create a new M partition.
+4. Paste in the M code from step 1 above as the partition's expression.
+5. Edit the M code to remove the step that contains the Table.SelectRows() function for the RangeStart/RangeEnd parameters.
+6. Delete all of the historical partitions. They have a SourceType of "Policy Range".
+7. Refresh the table (Tabular Editor 3) or in the service refresh the dataset to repopulate the table.
+8. Optionally delete the RangeStart/RangeEnd shared expressions if there are no other tables in the model with an Incremental Refresh policy set.
