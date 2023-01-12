@@ -19,7 +19,7 @@ applies_to:
   <br></br>
 
 > [!IMPORTANT]
-> Setting up Incremental Refresh with Tabular Editor is limited to Power BI Datasets in PPU or Premium Capacity.
+> Setting up Incremental Refresh with Tabular Editor 3 is limited to Power BI Datasets in PPU or Premium Capacity.
 
 <br></br>
 
