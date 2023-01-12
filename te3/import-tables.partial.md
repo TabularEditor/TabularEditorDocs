@@ -91,7 +91,7 @@ When using this option, Tabular Editor will connect to all the relevant data sou
 
 ![Schema Compare Dialog](~/images/schema-compare-dialog.png)
 
-In the screenshot above, Tabular Editor detecgted a few new columns, a single data type change, and two columns that were renamed in the source. Note that detection of a column rename only works for simple changes. In other cases, a name change usually results in Tabular Editor detecting a column removal and a column addition, which is the case for the `Tax Amount` column below, which seems to have been renamed to `TaxAmt` in the source.
+In the screenshot above, Tabular Editor detected a few new columns, a single data type change, and two columns that were renamed in the source. Note that detection of a column rename only works for simple changes. In other cases, a name change usually results in Tabular Editor detecting a column removal and a column addition, which is the case for the `Tax Amount` column below, which seems to have been renamed to `TaxAmt` in the source.
 
 To avoid breaking existing DAX formulas that rely on the `[Tax Amount]` column, you can hold down the Ctrl-button and click on the two rows in the Schema Change dialog, then right-click in order to combine the column removal and column addition into a single SourceColumn update operation:
 
