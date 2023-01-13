@@ -18,10 +18,15 @@ applies_to:
 
 <br></br>
 
+
 __Incremental Refresh is changed by adjusting the Refresh Policy properties.__ Depending on what you want to change, you will adjust a different property. A full overview of these properties is [here](xref:incremental-refresh-about#overview-of-all-properties). 
 
 <br></br>
 
+> [!IMPORTANT]
+> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+
+<br></br>
 ## Change Incremental Refresh
 
 Below is a general description of how you modify an existing Refresh Policy:

@@ -30,6 +30,10 @@ _Incremental refresh can be easily configured and modified from within Tabular E
 </div>
 
 <br></br>
+> [!IMPORTANT]
+> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+<br></br>
+
 
 ### How does it work?
 

@@ -22,6 +22,11 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 
 <br></br>
 
+> [!IMPORTANT]
+> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+
+<br></br>
+
 ### Configure a New Refresh Policy
 
 1. __Connect to the model:__ Connect to the Power BI XMLA endpoint of your workspace, and open the dataset upon which you want to configure Incremental Refresh.
