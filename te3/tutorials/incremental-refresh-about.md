@@ -45,7 +45,7 @@ An example is given below. Incremental Refresh is applied to a table _'Orders'_ 
 
 # [Filter Step Only](#tab/filterstep)
 ```M
-// The filter step must be able to fold back to the data source
+// The filter step should ideally be able to fold back to the data source
 // No steps before this should break query folding
 #"Incremental Refresh Filter Step" = 
     Table.SelectRows(
@@ -59,7 +59,7 @@ An example is given below. Incremental Refresh is applied to a table _'Orders'_ 
 # [Full M Expression](#tab/fullexp)
 ```M
 let
-    // The data source must support Query Folding
+    // The data source should ideally support Query Folding
     Source = Sql.Database(#"ServerParameter", #"DatabaseParameter"),
 
     Navigation = 
@@ -67,7 +67,7 @@ let
             [ Schema="DW_fact", Item="Internet Sales" ] 
         } [Data],
 
-    // The filter step must be able to fold back to the data source
+    // The filter step should ideally be able to fold back to the data source
     // No steps before this should break query folding
     #"Incremental Refresh Filter Step" = 
         Table.SelectRows(
@@ -108,9 +108,9 @@ in
 ***
 
 <div class="WARNING">
-  <h5>INCREMENTAL REFRESH ONLY WORKS WITH QUERY FOLDING</h5>
-  Incremental Refresh can only be configured with data sources that support <a href="https://learn.microsoft.com/en-us/power-query/power-query-folding">Power Query query folding</a>.
-  Query folding must not be <a href="https://learn.microsoft.com/en-us/power-query/step-folding-indicators">broken</a> before the filter step is applied.
+  <h5>INCREMENTAL REFRESH IS DESIGNED FOR QUERY FOLDING</h5>
+  Incremental Refresh is <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding">designed</a> to be configured with data sources that support <a href="https://learn.microsoft.com/en-us/power-query/power-query-folding">Power Query query folding</a>.
+  Ideally, query folding should not be <a href="https://learn.microsoft.com/en-us/power-query/step-folding-indicators">broken</a> before the filter step is applied. There is no explicit requirement for the final query to fold, <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.">except when implementing Hybrid Tables using DirectQuery.</a> 
 </div>
 
 The number, type and refresh behavior of table partitions depends on the configured table Refresh Policy.
