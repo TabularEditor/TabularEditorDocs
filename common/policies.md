@@ -17,7 +17,7 @@ Some IT organisations may wish to limit certain features of Tabular Editor. This
 
 Below is a listing of the policies that can be controlled. To enforce one or more of these policies, add a non-zero DWORD value to the registry key. The name of the value specifies which policy to enforce.
 
-**Registry key:** Software\Policies\Kapacity\Tabular Editor\
+**Registry key:** HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor\
 
 |Value|When enforced...|
 |--|--|
