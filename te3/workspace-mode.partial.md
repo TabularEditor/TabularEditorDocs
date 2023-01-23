@@ -47,6 +47,9 @@ Your options are:
 
 Information about whether to connect to a workspace database for a given model, and which workspace server and database to use is stored in the [Tabular Model User Options (.tmuo) file](xref:user-options).
 
+> [!WARNING]
+> When choosing a workspace database, Tabular Editor 3 will deploy the loaded model metadata onto that workspace database. For this reason, you should never use a production database as your workspace database. Moreover, we recommend using a separate Analysis Services instance/Power BI workspace for your workspace databases. 
+
 # Advantages of workspace mode
 
 The main advantage of workspace mode, is that it allows Tabular Editor to stay connected to an instance of Analysis Services. In other words, Tabular Editor 3's new [connected features](xref:migrate-from-te2#connected-features) are enabled. But even if you choose not to use these features, it is much easier to synchronize an instance of Analysis Services for purposes of testing your changes. All you have to do is hit Save (CTRL+S). This is similar to when Tabular Editor opens model metadata directly from an instance of Analysis Services, but with workspace mode, the model metadata is simultaneously saved to disk.
