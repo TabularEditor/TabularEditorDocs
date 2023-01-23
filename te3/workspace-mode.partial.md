@@ -40,7 +40,7 @@ If you open an existing Model.bim or Database.json file, Tabular Editor 3 will p
 
 Your options are:
 
-- **Yes**: Connect to an instance of Analysis Services and choose an existing workspace database or create a new one. The next time you load the same Model.bim or Database.json file, Tabular Editor will connect to the same workspace database.
+- **Yes**: Connect to an instance of Analysis Services and choose an existing workspace database or create a new one. The next time you load the same Model.bim or Database.json file, Tabular Editor will connect to the same workspace database. Tabular Editor will perform a deployment of the Model.bim or Database.json file onto the selected workspace database.
 - **No**: Tabular Editor will load the metadata in the file offline with no connectivity to Analysis Services.
 - **Don't ask again**: Same as above, but Tabular Editor will no longer ask you to connect to a workspace database the next time you open the same Model.bim or Database.json file.
 - **Cancel**: The file is not loaded at all.
