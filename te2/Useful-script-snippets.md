@@ -238,6 +238,44 @@ foreach(var m in Selected.Measures) {
 
 ***
 
+## Generating partitions
+
+If you need to provide custom partitioning for a table, C# scripting can help you quickly generate many partitions. The basic idea is to add an annotation to your table, containing the SQL or M query to use as a template for each partition. The script will then swap in filter parameters as needed. For example, using SQL partitions, we could add an annotation named `PartitionTemplateSQL` and set its value to `SELECT * FROM fact_ResellerSales WHERE CalendarID BETWEEN {0} AND {1}`. The `{0}` and `{1}` placeholders will be replaced by our script, when generating the final partitions. In this case, `CalendarID` is an integer, but in general, it is your job to ensure that the resulting string is a valid SQL (or M) query.
+
+![](https://user-images.githubusercontent.com/8976200/70135273-07c6fa00-168a-11ea-84f6-90f0b3498ed8.png)
+
+The example here generates one partition per month. Select a table that has the `PartitionTemplateSQL` annotation assigned, then run the script.
+
+```csharp
+var firstPartition = new DateTime(2018,1,1); // First partition date
+var lastPartition = new DateTime(2020,12,1); // Last partition date
+
+var templateSql = Selected.Table.GetAnnotation("PartitionTemplateSQL");
+if(string.IsNullOrEmpty(templateSql)) throw new Exception("No partition template!");
+
+var currentPartition = firstPartition;
+while(currentPartition <= lastPartition)
+{
+    // Calculate the from and to CalendarID's (integer values) based on the currentPartition date:
+    var calendarIdFrom = currentPartition.ToString("yyyyMMdd");
+    var calendarIdTo = currentPartition.AddMonths(1).AddDays(-1).ToString("yyyyMMdd");
+    
+    // Determine a unique name for the partition - since we're partitioning at a monthly level, we just use yyyyMM:
+    var partitionName = Selected.Table.Name + "_" + currentPartition.ToString("yyyyMM");
+    
+    // Swap in the placeholder values in the partition template SQL:
+    var partitionQuery = string.Format(templateSql, calendarIdFrom, calendarIdTo);
+    
+    // Create the partition (use .AddMPartition if you used an M query template instead of SQL):
+    Selected.Table.AddPartition(partitionName, partitionQuery);
+    
+    // Increment to next month (change this to .AddDays, .AddYears, etc. if you need more or fewer partitions):
+    currentPartition = currentPartition.AddMonths(1);
+}
+```
+
+***
+
 ## Export object properties to a file
 For some workflows, it may be useful to edit multiple object properties in bulk using Excel. Use the following snippet to export a standard set of properties to a .TSV file, which can then be subsequently imported (see below).
 ```csharp
