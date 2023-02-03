@@ -8,7 +8,8 @@
                     ]
                 }
             ],
-            "dest": "api"
+            "dest": "api",
+            "filter": "filterConfig.yml"
         }
     ],
     "build": {
@@ -20,7 +21,8 @@
         "template": [
             "default",
             "templates/default",
-            "templates/lightbox-featherlight"
+            "templates/lightbox-featherlight",
+            "templates/api"
         ],
         "resource": [
             {

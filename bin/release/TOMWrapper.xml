@@ -140,7 +140,7 @@
             Return a list of tokens representing the DAX expression on the current object.
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Utils.DaxDependencyHelper.Tokenize(TabularEditor.TOMWrapper.IDaxDependantObject,TabularEditor.TOMWrapper.Utils.DAXProperty)">
+        <member name="M:TabularEditor.TOMWrapper.Utils.DaxDependencyHelper.Tokenize(TabularEditor.TOMWrapper.IDaxDependantObject,TabularEditor.TOMWrapper.ExpressionProperty)">
             <summary>
             Return a list of tokens representing the specified DAX property on the current object.
             </summary>
@@ -175,7 +175,7 @@
             Various methods for scripting TOM objects into TMSL
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Utils.Scripter.ScriptCreateOrReplace(TabularEditor.TOMWrapper.TabularModelHandler)">
+        <member name="M:TabularEditor.TOMWrapper.Utils.Scripter.ScriptCreateOrReplace(TabularEditor.TOMWrapper.Database)">
             <summary>
             Scripts the entire database as a CreateOrReplace
             </summary>
@@ -239,6 +239,11 @@
             <param name="objects"></param>
             <param name="refreshType"></param>
             <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Utils.TabularTreeIterator.GetChildren(TabularEditor.TOMWrapper.ITabularObjectContainer,TabularEditor.TOMWrapper.LogicalTreeOptions,System.Func{TabularEditor.TOMWrapper.ITabularNamedObject,System.Boolean})">
+            <summary>
+            This method encapsulates the logic of how the tree representation of the tabular model should be structured
+            </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.PowerBI.PowerBIGovernance">
             <summary>
@@ -351,7 +356,7 @@
             When the expression of a measure is changed, the resulting data type of the measure might change, potentially causing cascasdes.
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeKpiExpressionChange(TabularEditor.TOMWrapper.KPI,TabularEditor.TOMWrapper.Utils.DAXProperty)">
+        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeKpiExpressionChange(TabularEditor.TOMWrapper.KPI,Dax.Analyzer.KpiProperty)">
             <summary>
             When the expression of a KPI is changed, the resulting data type of the KPI might change, potentially causing cascasdes.
             </summary>
@@ -2841,6 +2846,11 @@
             An expression that is use to calculate the status of this KPI. Alias for <see cref="P:TabularEditor.TOMWrapper.KPI.StatusExpression"/>
             </summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.KPI.ReferencedBy">
+            <summary>
+            Gets the list of objects that reference this measure.
+            </summary>
+        </member>
         <member name="T:TabularEditor.TOMWrapper.Level">
             <summary>
             Represents a level in a hierarchy that provides a logical hierarchical drilldown path for client applications. It is a child of a Hierarchy object. The level is based on the values in a column.
@@ -3246,6 +3256,11 @@
             A DAX expression specifying detail rows for this measure (drill-through in client tools).
             </summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Measure.FormatStringExpression">
+            <summary>
+            DAX expression that specifies the format of the cell content.
+            </summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Measure.DaxObjectName">
             <summary>
             Gets a valid DAX reference to this measure
@@ -3484,6 +3499,11 @@
             Maximum degree of parallelism for query in formula engine
             </summary><remarks>This property is only supported when the compatibility level of the database is at 1569 or above.</remarks>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.DisableSystemDefaultExpression">
+            <summary>
+            Disable system defined default expression behavior for calculation groups.
+            </summary><remarks>This property is only supported when the compatibility level of the database is at Internal or above.</remarks>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Model.DefaultMeasure">
             <summary>
             A reference to a default measure.
@@ -3559,12 +3579,20 @@
         </member>
         <member name="M:TabularEditor.TOMWrapper.Model.AddExpression(System.String,System.String)">
             <summary>
-            Adds a new <see cref="T:TabularEditor.TOMWrapper.NamedExpression"/> (aka. Shared Expression) to the <see cref="T:TabularEditor.TOMWrapper.Model"/>.
+            Alias for <see cref="M:TabularEditor.TOMWrapper.Model.AddSharedExpression(System.String,System.String)"/>
             </summary>
             <param name="name">The name of the new shared expression</param>
             <param name="expression">The M/Power Query string to add to the shared expression</param>
             <returns>The newly added shared expression</returns>
             <exception cref="T:TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException"></exception>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Model.AddSharedExpression(System.String,System.String)">
+            <summary>
+            Adds a new <see cref="T:TabularEditor.TOMWrapper.NamedExpression"/> (aka. Shared Expression) to the <see cref="T:TabularEditor.TOMWrapper.Model"/>.
+            </summary>
+            <param name="name">The name of the new shared expression</param>
+            <param name="expression">The M/Power Query string to add to the shared expression</param>
+            <returns>The newly added shared expression</returns>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Model.AddCalculatedTable(System.String,System.String)">
             <summary>
@@ -3670,6 +3698,11 @@
         <member name="P:TabularEditor.TOMWrapper.Model.AllMeasures">
             <summary>
             A collection of every measure across all tables in the model.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.AllKPIs">
+            <summary>
+            A collection of every KPI across all tables in the model.
             </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Model.AllLevels">
@@ -4947,6 +4980,11 @@
             A boolean value that indicates whether the table is managed by the system. The system takes ownership of creation and deletion of such tables.
             </summary><remarks>This property is only supported when the compatibility level of the database is at 1562 or above.</remarks>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.ExcludeFromAutomaticAggregations">
+            <summary>
+            An indication whether the table is excluded from the automatic aggregations feature.
+            </summary><remarks>This property is only supported when the compatibility level of the database is at 1572 or above.</remarks>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Table.InPerspective">
             <Summary>
             Collection of perspectives in which this Table is visible.
@@ -5050,6 +5088,21 @@
             </summary>
             <param name="name">The name of the partition</param>
             <param name="expression">The M expression to assign to the partition.</param>
+            <returns>A reference to the newly added partition.</returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Table.AddPolicyRangePartition(System.String)">
+            <summary>
+            Adds a new Policy Range partition to the table and returns a reference to the partition.
+            </summary>
+            <param name="name">The name of the partition</param>
+            <returns>A reference to the newly added partition.</returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Table.AddEntityPartition(System.String,System.String)">
+            <summary>
+            Adds a new Entity (DQ over AS) partition to the table and returns a reference to the partition.
+            </summary>
+            <param name="name">The name of the partition</param>
+            <param name="entityName">The name of the entity (source table) to assign to the partition.</param>
             <returns>A reference to the newly added partition.</returns>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Table.AddCalculatedColumn(System.String,System.String,System.String,TabularEditor.TOMWrapper.IInsertOptions)">
@@ -5168,7 +5221,7 @@
         </member>
         <member name="M:TabularEditor.TOMWrapper.Table.GetChildren">
             <summary>
-            Returns all columns, measures and hierarchies inside this table.
+            Returns all columns, measures, and hierarchies inside this table.
             </summary>
             <returns></returns>
         </member>
@@ -5319,6 +5372,11 @@
         <member name="P:TabularEditor.TOMWrapper.TableCollection.SystemManaged">
             <summary>
             Sets the SystemManaged property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TableCollection.ExcludeFromAutomaticAggregations">
+            <summary>
+            Sets the ExcludeFromAutomaticAggregations property of all objects in the collection at once.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.WindowsModelRoleMember">
@@ -6251,7 +6309,7 @@
         </member>
         <member name="T:TabularEditor.TOMWrapper.IExpressionObject">
             <summary>
-            Objects that have an expression (measure, calcualted column, partition, etc.)
+            Objects that have an expression (measure, calculated column, partition, etc.)
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.IDaxDependantObject">
@@ -6332,11 +6390,12 @@
             of the type held by the array.
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Serialization.SplitModelSerializer.FileWriter.Sanitize(System.String)">
+        <member name="M:TabularEditor.TOMWrapper.Serialization.SplitModelSerializer.FileWriter.Sanitize(System.String,System.Boolean)">
             <summary>
             Sanitize a string to turn it into a valid file name
             </summary>
             <param name="fileName"></param>
+            <param name="isFolder">Set to true when the name represents a folder (which cannot end with a blank char)</param>
             <returns></returns>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Serialization.SplitModelSerializer.FileWriter.SaveToFolder(TabularEditor.TOMWrapper.Model,System.String,TabularEditor.TOMWrapper.Serialization.SerializeOptions,System.Collections.Generic.Dictionary{System.String,TabularEditor.TOMWrapper.Serialization.DataSourceProperties})">
@@ -6551,11 +6610,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.TabularModelHandler.BeginUpdate(System.String)">
+        <member name="M:TabularEditor.TOMWrapper.TabularModelHandler.BeginUpdate(System.String,TabularEditor.TOMWrapper.Undo.UndoGroup)">
             <summary>
             Begins a batch update
             </summary>
             <param name="undoName"></param>
+            <param name="group">See comment on <see cref="T:TabularEditor.TOMWrapper.Undo.UndoGroup"/></param>
         </member>
         <member name="M:TabularEditor.TOMWrapper.TabularModelHandler.EndUpdate(System.Boolean,System.Boolean,System.Boolean)">
             <summary>
@@ -6850,11 +6910,6 @@
             <param name="newPath">The new DisplayFolder path, replacing oldPath</param>
             <param name="culture">The culture to which the change should apply</param>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.TabularTree.GetChildren(TabularEditor.TOMWrapper.ITabularObjectContainer)">
-            <summary>
-            This method encapsulates the logic of how the tree representation of the tabular model should be structured
-            </summary>
-        </member>
         <member name="M:TabularEditor.TOMWrapper.TabularTree.OnNodesChanged(TabularEditor.TOMWrapper.ITabularObject)">
             <summary>
             Call this method to signal to the TreeView that a node needs repaint, typically
@@ -6863,7 +6918,7 @@
             </summary>
             <param name="nodeItem"></param>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.TabularTree.OnNodeNameChanged(TabularEditor.TOMWrapper.ITabularNamedObject)">
+        <member name="M:TabularEditor.TOMWrapper.TabularTree.OnNodeNameChanged(TabularEditor.TOMWrapper.IInternalTabularObject)">
             <summary>
             Call this method to signal to the TreeView that a nodes name was changed. When
             using the OrderByName option, this typically requires a call to OnStructureChanged
@@ -6934,12 +6989,19 @@
             </summary>
             <param name="handler"></param>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Undo.UndoManager.BeginBatch(System.String,System.Boolean)">
+        <member name="F:TabularEditor.TOMWrapper.Undo.UndoManager.GroupSeparationDelay">
+            <summary>
+            If two batch actions with the same <see cref="P:TabularEditor.TOMWrapper.Undo.UndoBatchAction.Group"/> are performed sequentially and less
+            than the number of milliseconds specified here, they will be grouped together when performing undo/redo.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Undo.UndoManager.BeginBatch(System.String,System.Boolean,TabularEditor.TOMWrapper.Undo.UndoGroup)">
             <summary>
             Begins a batch of undoable operations.
             </summary>
             <param name="batchName">A descriptive name for the batch.</param>
             <param name="internalBatch"></param>
+            <param name="group">Sequential batch actions having the same group will be undone/redone together</param>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Undo.UndoManager.EndBatch(System.Boolean)">
             <summary>
@@ -6953,6 +7015,13 @@
             Call this method when an action is performed, that should be undoable
             </summary>
             <param name="action"></param>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.Undo.UndoGroup">
+            <summary>
+            Undo groups are used to link undo batches together. When a sequence of undo batches have the same
+            UndoGroup, they will all be undone as one. This is useful when the UI creates an undo batch for each
+            interaction when these interactions are expected to happen in short succession.
+            </summary>
         </member>
         <member name="T:TabularEditor.Messages">
             <summary>
@@ -7075,6 +7144,17 @@
             form is closed.
             </summary>
         </member>
+        <member name="T:TabularEditor.PropertyGridUI.TableColumnConverter">
+            <summary>
+            Allows the user to select any column on the same table as the current item, except the selected item(s) itself.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.PropertyGridUI.AllOtherTablesColumnConverter">
+            <summary>
+            Allows the user to select any column across all columns in the model, EXCEPT columns
+            on the same table as the current item.
+            </summary>
+        </member>
         <member name="T:TabularEditor.PropertyGridUI.VirtualObjectConverter">
             <summary>
             The VirtualObjectConverter provides functionality similar to the ExpandableObjectConverter.
@@ -7150,6 +7230,12 @@
             Use this attribute on properties that needs to have invokable actions in the Property Grid
             </summary>
         </member>
+        <member name="T:TabularEditor.PropertyGridUI.ResetPropertyActionAttribute">
+            <summary>
+            Use this to indicate that a method call corresponds to resetting the property. This will set the <see cref="P:TabularEditor.PropertyGridUI.PropertyAction.IsResetAction"/> to true,
+            indicating to clients that it is not necessary to show an explicit "Reset" menu option, when the action is available.
+            </summary>
+        </member>
         <member name="T:TabularEditor.DesignerHost">
             <summary>
             The DesignerHost is a custom implementation of IDesignerHost and ISite, which is needed to hookup
@@ -7185,6 +7271,13 @@
             <param name="value"></param>
             <param name="chars"></param>
             <param name="addEllipsis"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.StringHelper.SplitCamelCase(System.String)">
+            <summary>
+            Splits a string typed as CamelCase (aka. PascalCase) into separate words.
+            </summary>
+            <param name="str"></param>
             <returns></returns>
         </member>
         <member name="M:TabularEditor.StringHelper.Right(System.String,System.Int32)">
