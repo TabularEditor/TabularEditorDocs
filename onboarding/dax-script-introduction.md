@@ -17,7 +17,7 @@ As your model grows in complexity, you may reach a point in which it starts to b
 
 This is exactly the purpose of the new **DAX script** feature introduced in Tabular Editor 3.
 
-To use this feature, locate the measures for which you would like to generate a single document, in the TOM Explorer. Multi-select the measures, then right-click and choose **Script DAX**. A new document is created, containing the definition of all the selected measures. You can also generate a DAX script for all measures within a table or all measures within the model, by choosing the table or model object respectively.
+To use this feature, locate the objects for which you would like to generate a single document, in the TOM Explorer. Multi-select the objects, then right-click and choose **Script DAX**. A new document is created, containing the DAX expressions and basic properties of all the selected objects. You can also generate a DAX script for all objects within a table or all objects within the model, by choosing the table or model object respectively.
 
 ![Dax Script](~/images/dax-script.png)
 
