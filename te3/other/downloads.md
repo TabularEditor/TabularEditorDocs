@@ -8,6 +8,9 @@ updated: 2023-02-03
 
 This page provides download and installation instructions for Tabular Editor 3.
 
+> [!IMPORTANT]
+> If you’re upgrading from 3.4.0, you will have to manually uninstall before installing any newer version. We apologize for the inconvenience.
+
 ## Production builds
 
 - Latest production release (x64): [TabularEditor.3.4.1.Installer.x64.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.4.1.Installer.x64.exe)
