@@ -19,11 +19,11 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 - &#9746; Git integration (private preview)
 
 **Planned for 2023 Q1:**
-- &#9744; Perspective Editor (view that can be opened when selecting one or more perspectives, allowing you to check/uncheck objects visible in those perspectives)
+- &#9746; Perspective Editor (view that can be opened when selecting one or more perspectives, allowing you to check/uncheck objects visible in those perspectives)
 - &#9744; Metadata Translation Editor (view that can be opened when selecting one or more cultures, similar to the Tabular Translator tool)
 - &#9744; Standalone CLI application
 - &#9744; DAX Debugger Filter Context visualizer
-- &#9744; Import Table Wizard support for Power BI datamarts (pending SQL endpoint availability)
+- &#9744; Import Table Wizard support for Power BI datamarts (pending Power BI REST support)
 - &#9744; Import Table Wizard support for Databricks (pending availability of REST endpoint for fetching metadata/schema)
 
 **Planned for 2023 Q2:**
