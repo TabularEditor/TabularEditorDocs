@@ -2,7 +2,7 @@
 uid: roadmap
 title: Roadmap
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2023-02-03
 ---
 # Tabular Editor 3 Roadmap
 
