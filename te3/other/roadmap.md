@@ -8,14 +8,18 @@ updated: 2023-02-03
 
 Below is an overview of major new features to be shipped with Tabular Editor 3 updates in the short- to long term:
 
-# [Planned for 2023 Q1:](#tab/PlannedQ1)
-- &#9746; Perspective Editor (view that can be opened when selecting one or more perspectives, allowing you to check/uncheck objects visible in those perspectives)
-- &#9744; Metadata Translation Editor (view that can be opened when selecting one or more cultures, similar to the Tabular Translator tool)
-- &#9744; Import Table Wizard support for Databricks (pending availability of REST endpoint for fetching metadata/schema)
-- &#9744; Improved Support for Oracle Databases
-- &#9746; Import Table Wizard support for Power BI datamarts (Use Datamart SQL Endpoint)
+# [Planned for 2023 Q1](#tab/PlannedQ1)
+❎  Perspective Editor (view that can be opened when selecting one or more perspectives, allowing you to check/uncheck objects visible in those perspectives)
 
-# [Future Features:](#tab/FutureFeatures)
+&#9744; Metadata Translation Editor (view that can be opened when selecting one or more cultures, similar to the Tabular Translator tool)
+
+&#9744; Import Table Wizard support for Databricks (pending availability of REST endpoint for fetching metadata/schema)
+
+&#9744; Improved Support for Oracle Databases
+
+❎  Import Table Wizard support for Power BI datamarts (Use Datamart SQL Endpoint)
+
+# [Future Features](#tab/FutureFeatures)
 - Standalone CLI application
 - Git integration
 - DAX Debugger Filter Context visualizer
@@ -26,12 +30,33 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 a variable)
 - Incremental deployment (a la [ALM Toolkit](http://alm-toolkit.com/))
 
-# [Shipped in 2022:](#tab/shipped2022)
-- &#9746; DAX Debugger
-- &#9746; .NET 6 migration
-- &#9746; C# code assist (autocomplete, calltips, etc.)
-- &#9746; Import Table Wizard support for Snowflake
-- &#9746; Import Table Wizard support for Power BI dataflows
-- &#9746; Configurable hotkeys
-- &#9746; Support for DAX window functions
-- &#9746; Git integration (private preview)
+# [Shipped](#tab/shipped)
+## Shipped in 2022
+
+❎  DAX Debugger
+
+❎  .NET 6 migration
+
+❎  C# code assist (autocomplete, calltips, etc.)
+
+❎  Import Table Wizard support for Snowflake
+
+❎  Import Table Wizard support for Power BI dataflows
+
+❎  Configurable hotkeys
+
+❎  Support for DAX window functions
+
+❎  Git integration (private preview)
+
+## Shipped in 2021
+❎  Import Table Wizard
+
+❎  Portable Version
+
+❎  Pivot Grid, Table Preview and DAX Query impersonation of a specific role or user, making it easy to test RLS/OLS
+
+❎  DAX Script support for calculation groups and calculation items
+
+❎  Offline DAX formatting
+
