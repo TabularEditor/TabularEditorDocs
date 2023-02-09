@@ -86,13 +86,10 @@ Click the "Add..." button to add a new rule collection to the model. This provid
 The lower part of the screen will let you add, edit, clone and delete rules within the currently selected collection, provided you have write access to the location where the collection is stored. Also, the "Move to..." button allows you to move or copy the selected rule to another collection, making it easy to manage multiple collections of rules. Please see our article with [samples of rule expressions ](/common/using-bpa-sample-rules-expressions.md) for more information on how to use that.
 
 #### Rule Description Placeholders
-One small improvement compared to previous versions, is that you can now use the following placeholder values within the Best Practice Rule's description. This provides more customizable descriptions that will appear as tooltips in the Best Practice UI:
+You can use placeholder values within the Best Practice Rule's description. This provides more customizable descriptions that will appear as tooltips in the Best Practice UI:
 
 * `%object%` returns a fully qualified DAX reference (if applicable) to the current object
 * `%objectname%` returns only the name of the current object
 * `%objecttype%` returns the type of the current object
 
-![image](https://user-images.githubusercontent.com/8976200/53671918-587f7180-3c78-11e9-855f-ed497f2c0c98.png)
-
-
-
+![BPA Manage Rules UI](../../images/common/BPAOverviewRuleDescriptionPlaceHolders.png)
