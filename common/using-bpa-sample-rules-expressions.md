@@ -1,6 +1,6 @@
 ﻿---
 uid: using-bpa-sample-rules-expressions
-title: Sample Rules Expression
+title: BPA Sample Rules Expression
 author: Daniel Otykier
 updated: 2023-02-09
 ---
