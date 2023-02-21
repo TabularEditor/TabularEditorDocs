@@ -13,12 +13,50 @@ The tool is available in two different versions:
 - Tabular Editor 2.x (free, [MIT license](https://github.com/TabularEditor/TabularEditor/blob/master/LICENSE)) - [GitHub project page](https://github.com/TabularEditor/TabularEditor)
 - Tabular Editor 3.x (commercial) - [Home page](https://tabulareditor.com)
 
-## Description
+## Documentation
 This site contains the documentation for both versions. Select your version in the navigation bar at the top of the screen for product specific documentation.
 
-## Choosing between TE2 and TE3
+## Choosing between TE3 and TE2
 
 Tabular Editor 3 is the evolution of Tabular Editor 2. It has been designed for those who seek a "one-tool-to-rule-them-all" solution for Tabular data modeling and development.
+
+### [Tabular Editor 3](#tab/TE3) 
+Tabular Editor 3 is a more advanced application which offers a premium experience with many convenient features to combine all your data modeling and development needs in one single tool.
+
+![Tabular Editor 3](~/images/te3.png)
+
+**Tabular Editor 3 main features:**
+
+- A highly-customizable and familiar UI
+- High-DPI, multi-monitor and theming support (yes, dark mode is available!)
+- World class DAX editor with syntax highlighting, semantic checking, auto-complete and much, much more
+- Table browser, Pivot Grid browser and DAX Query editor
+- Import Table Wizard with support for Power Query data sources
+- Data Refresh view allows you to queue and execute refresh operations in the background
+- Diagram editor to easily visualize and edit table relationships
+- New DAX Scripting capability to edit DAX expressions for multiple objects in a single document
+- VertiPaq Analyzer integration
+- DAX debugger
+
+### [Tabular Editor 2.x](#tab/TE2) 
+
+Tabular Editor 2.x is a lightweight application for quickly modifying the TOM (Tabular Object Model) of an Analysis Services or Power BI data model. The tool was originally released in 2016 and receives regular updates and bugfixes.
+
+![Tabular Editor 2.x](~/images/te2.png)
+
+**Tabular Editor 2.x main features:**
+
+- A very lightweight application with a simple and intuitive interface for navigating the TOM
+- DAX Dependency View, and keyboard shortcuts for navigating between DAX objects
+- Support for editing model perspectives and metadata translations
+- Batch renaming
+- Search box for quickly navigating large and complex models
+- Deployment Wizard
+- Best Practice Analyzer
+- Advanced Scripting using C#-style scripts for automating repeated tasks
+- Command line interface (can be used to integrate Tabular Editor and DevOps pipelines)
+***
+
 
 ### Feature overview
 
@@ -70,43 +108,6 @@ Both tools feature the Best Practice Analyzer, which continuously scans the mode
 You can also write and execute C#-style scripts in both tools, for automating repetitive tasks such as generating time-intelligence measures and auto-detecting relationships based on column names.
 
 Lastly, thanks to the "Save-to-folder" functionality, a new file format where every object in the model is saved as an individual file, enables parallel development and version control integration, which is something that is not easy to achieve using only the standard tools. 
-
-### Tabular Editor 2.x
-
-Tabular Editor 2.x is a lightweight application for quickly modifying the TOM (Tabular Object Model) of an Analysis Services or Power BI data model. The tool was originally released in 2016 and receives regular updates and bugfixes.
-
-![Tabular Editor 2.x](~/images/te2.png)
-
-**Tabular Editor 2.x main features:**
-
-- A very lightweight application with a simple and intuitive interface for navigating the TOM
-- DAX Dependency View, and keyboard shortcuts for navigating between DAX objects
-- Support for editing model perspectives and metadata translations
-- Batch renaming
-- Search box for quickly navigating large and complex models
-- Deployment Wizard
-- Best Practice Analyzer
-- Advanced Scripting using C#-style scripts for automating repeated tasks
-- Command line interface (can be used to integrate Tabular Editor and DevOps pipelines)
-
-### Tabular Editor 3.x
-
-Tabular Editor 3.x is a more advanced application which offers a premium experience with many convenient features to combine all your data modeling and development needs in one single tool.
-
-![Tabular Editor 3.x](~/images/te3.png)
-
-**Tabular Editor 3.x main features:**
-
-- A highly-customizable and familiar UI
-- High-DPI, multi-monitor and theming support (yes, dark mode is available!)
-- World class DAX editor with syntax highlighting, semantic checking, auto-complete and much, much more
-- Table browser, Pivot Grid browser and DAX Query editor
-- Import Table Wizard with support for Power Query data sources
-- Data Refresh view allows you to queue and execute refresh operations in the background
-- Diagram editor to easily visualize and edit table relationships
-- New DAX Scripting capability to edit DAX expressions for multiple objects in a single document
-- VertiPaq Analyzer integration
-- DAX debugger
 
 ## Conclusion
 
