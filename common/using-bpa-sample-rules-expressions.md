@@ -1,8 +1,8 @@
 ﻿---
 uid: using-bpa-sample-rules-expressions
 title: BPA Sample Rules Expression
-author: Daniel Otykier
-updated: 2023-02-09
+author: Morten Lønskov
+updated: 2023-02-21
 ---
 #  Rule Expression Samples
 In this section, you'll see some examples of Dynamic LINQ expressions that can be used to define rules. The expression that is entered in the Rule Expression Editor, will be evaluated whenever focus leaves the textbox, and any syntax errors will be shown on top of the screen:
