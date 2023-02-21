@@ -1,8 +1,8 @@
 ﻿---
 uid: tom-explorer-view
 title: TOM Explorer view
-author: Daniel Otykier
-updated: 2021-09-08
+author: Morten Lønskov
+updated: 2023-02-21
 applies_to:
   editions:
     - edition: Desktop
