@@ -100,8 +100,8 @@ The following shortcuts are available as of Tabular Editor v. 3.2.2.
 |Show calltip|Ctrl+Shift+Space|
 |Format DAX|F6|
 |Format DAX (Short lines)|Ctrl+F6|
-|Comment lines|Ctrl+Shift+K|
-|Uncomment lines|Ctrl+Shift+U|
+|Comment lines|Ctrl+K|
+|Uncomment lines|Ctrl+U|
 |Toggle comments|Ctrl+/|
 
 ## DAX Query
