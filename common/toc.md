@@ -3,5 +3,6 @@
 ## [Policies](policies.md)
 ## [Save to folder](save-to-folder.md)
 ## [Best Practice Analyzer](xref:using-bpa)
+### [BPA Sample Rules Expression](xref:using-bpa-sample-rules-expressions)
 # C#/Advanced Scripting
 ## @script-helper-methods
