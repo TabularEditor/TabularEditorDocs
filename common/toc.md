@@ -8,5 +8,6 @@
 ## Script Library
 ### Beginner
 #### @script-edit-hidden-partitions
+#### @create-sum-measures-from-columns
 ### Advanced
 ## @script-helper-methods

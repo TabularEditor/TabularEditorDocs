@@ -10,7 +10,7 @@ updated: 2023-02-21
 Calculated Tables, Calculation Groups and Field Parameters do not have partitions displayed in Tabular Editor. This is on purpose as these should/can not generally be edited. The partition's properties can however still be accessed and edited with bellow script snippet.
 # Script
 
-```C#
+```csharp
 Selected.Table.Partitions[0].Output();
 ```
 
