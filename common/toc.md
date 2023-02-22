@@ -5,4 +5,7 @@
 ## [Best Practice Analyzer](xref:using-bpa)
 ### [BPA Sample Rules Expression](xref:using-bpa-sample-rules-expressions)
 # C#/Advanced Scripting
+## Script Library
+### Beginner
+#### @c-script-edit-hidden-partitions
 ## @script-helper-methods
