@@ -44,6 +44,7 @@ However, due to the way Power BI Desktop interoperates with Analysis Services, t
 - Create perspectives to define focused, business-domain specific views of dataset metadata.
 - Apply metadata translations to support multi-language versions within a single dataset.
 - Add dataset roles for row-level security (RLS) and object-level security (OLS) rules to restrict data access.
+- Define and edit field parameters.
 
 ### Data modeling limitations
 All Tabular Object Model (TOM) metadata can be accessed for read-only. Write operations are limited because Power BI Desktop must remain in-sync with the external modifications, therefore the following operations are not supported:

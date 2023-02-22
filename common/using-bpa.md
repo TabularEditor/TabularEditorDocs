@@ -76,7 +76,7 @@ Tabular Editor provides the possibility of including rules from other sources on
 
 Click the "Add..." button to add a new rule collection to the model. This provides the following options:
 
-![BPA Manage Rules UI](../../images/common/PBAOverviewManageRulesPopUpCreateNewRuleFile.png)
+![BPA Manage Rules UI](~/images/common/PBAOverviewManageRulesPopUpCreateNewRuleFile.png)
 
 * **Create new Rule File**: This will create a new, empty, .json file at the specified location, which you can subsequently add rules to. When choosing the file, notice that there is an option for using relative file paths. This is useful when you want to store the rule file in the same code repository as the current model. However, please be aware that a relative rule file reference only works, when the model has been loaded from disk (since there is no working directory when loading a model from an instance of Analysis Services).
 * **Include local Rule File**: Use this option if you already have a .json file containing rules, that you want to include in your model. Again, you have the option of using relative file paths, which may be beneficial if the file is located close to the model metadata. If the file is located on a network share (or generally, on a drive different than where the currently loaded model metadata resides), you can only include it using an absolute path.
@@ -92,4 +92,4 @@ You can use placeholder values within the Best Practice Rule's description. This
 * `%objectname%` returns only the name of the current object
 * `%objecttype%` returns the type of the current object
 
-![BPA Manage Rules UI](../../images/common/BPAOverviewRuleDescriptionPlaceHolders.png)
+![BPA Manage Rules UI](~/images/common/BPAOverviewRuleDescriptionPlaceHolders.png)
