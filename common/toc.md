@@ -7,6 +7,6 @@
 # C#/Advanced Scripting
 ## Script Library
 ### Beginner
-#### [BPA Sample Rules Expression](xref:script-edit-hidden-partitions)
+#### @script-edit-hidden-partitions
 ### Advanced
 ## @script-helper-methods
