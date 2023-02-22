@@ -8,4 +8,5 @@
 ## Script Library
 ### Beginner
 #### @c-script-edit-hidden-partitions
+### Advanced
 ## @script-helper-methods
