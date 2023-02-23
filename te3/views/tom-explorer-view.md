@@ -19,7 +19,7 @@ The TOM Explorer consists of two main areas, firstly the data model objects and 
 <br></br>
 
 ## Data Model Objects
-You can fold out objects in the TOM Explorer to see their children and follow the hierarchy of objects downwards. And if you right click on any object you will be given a list of options to interact with that specific object. As you can see bellow there are several options that you can use with a table. It is with this menu that you for example can easily refresh your tables and see the status of that refresh in the [Data Refresh View](@data-refresh-view)
+You can fold out objects in the TOM Explorer to see their children and follow the hierarchy of objects downwards. And if you right click on any object you will be given a list of options to interact with that specific object. As you can see bellow there are several options that you can use with a table. It is with this menu that you for example can easily refresh your tables and see the status of that refresh in the @data-refresh-view
 
 ![Tom Explorer Interaction](../../images/user-interface/TomExplorerRightClick.png)
 
