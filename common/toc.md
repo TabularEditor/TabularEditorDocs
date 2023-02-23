@@ -5,4 +5,9 @@
 ## [Best Practice Analyzer](xref:using-bpa)
 ### [BPA Sample Rules Expression](xref:using-bpa-sample-rules-expressions)
 # C#/Advanced Scripting
+## Script Library
+### Beginner
+#### @script-edit-hidden-partitions
+#### @create-sum-measures-from-columns
+### Advanced
 ## @script-helper-methods
