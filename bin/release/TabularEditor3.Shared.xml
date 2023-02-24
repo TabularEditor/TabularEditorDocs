@@ -795,7 +795,7 @@
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)">
             <summary>
-            Outputs detailed information about the specified object.
+            Displays detailed information about the specified object or collection of objects in a popup dialog. When executed through the UI, the user has an option to ignore additional popups. When the script is running in the CLI, the information is written to the console.
             </summary>
             <param name="value"></param>
         </member>
@@ -850,25 +850,25 @@
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Output(System.Object)">
             <summary>
-            Displays detail information about the specified object.
+            Displays detailed information about the specified object or collection of objects in a popup dialog. When executed through the UI, the user has an option to ignore additional popups. When the script is running in the CLI, the information is written to the console.
             </summary>
             <param name="value">An object or collection of objects</param>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Info(System.String)">
             <summary>
-            Displays an informational message
+            Displays an informational message in a popup dialog. When the script is running in the CLI, an information message is written to the console.
             </summary>
             <param name="message"></param>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Warning(System.String)">
             <summary>
-            Displays a warning message
+            Displays a warning message in a popup dialog. When the script is running in the CLI, a warning message is written to the console.
             </summary>
             <param name="message"></param>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Error(System.String)">
             <summary>
-            Displays an error message
+            Displays an error message in a popup dialog. When the script is running in the CLI, an error message is written to the console.
             </summary>
             <param name="message"></param>
         </member>
