@@ -117,7 +117,7 @@ To make debugging scripts easier, Tabular Editor provides a set of special helpe
 
 As of 2.7.4, Tabular Editor provides the following script methods. Note that some of these may be invoked as extension methods. For example, `object.Output();` and `Output(object);` are equivalent.
 
-* `Output(object);` - halts script execution and displays information about the provided object. When the script is running as part of a command line execution, this will write a string representation of the object to the console.
+* `Output(object);` - displays detailed information about the specified object or collection of objects in a popup dialog. When executed through the UI, the user has an option to ignore additional popups. When executed through the CLI, the information is outputted to the console.
 * `SaveFile(filePath, content);` - convenient way to save text data to a file.
 * `ReadFile(filePath);` - convenient way to load text data from a file.
 * `ExportProperties(objects, properties);` - convenient way to export a set of properties from multiple objects as a TSV string.
@@ -125,13 +125,14 @@ As of 2.7.4, Tabular Editor provides the following script methods. Note that som
 * `CustomAction(name);` - invoke a Custom Action by name.
 * `CustomAction(objects, name);` - invoke a Custom Action on the specified objects.
 * `ConvertDax(dax, useSemicolons);` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
-* ~~`FormatDax(string dax);`~~ - formats a DAX expression using www.daxformatter.com (Deprecated, please don't use!)
 * `FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
 * `FormatDax(IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
 * `CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
-* `Info(string);` - Writes an informational message to the console (only when the script is executed as part of a command line execution).
-* `Warning(string);` - Writes a warning message to the console (only when the script is executed as part of a command line execution).
-* `Error(string);` - Writes an error message to the console (only when the script is executed as part of a command line execution).
+* `Info(string);` - Displays an informational message in a popup dialog. When the script is running in the CLI, an information message is written to the console.
+* `Warning(string);` - Displays a warning message in a popup dialog. When the script is running in the CLI, a warning message is written to the console.
+* `Error(string);` - Displays an error message in a popup dialog. When the script is running in the CLI, an error message is written to the console.
+
+You can find an updated list of all helper methods [here](xref:script-helper-methods).
 
 ### Debugging scripts
 As mentioned above, you can use the `Output(object);` method to pause script execution, and open a dialog box with information about the passed object. You can also use this method as an extension method, invoking it as `object.Output();`. The script is resumed when the dialog is closed.
