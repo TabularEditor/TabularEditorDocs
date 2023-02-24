@@ -15,7 +15,7 @@ Specifically, the objects available for scripting are those found in the **TOMWr
 
 When writing a script in Tabular Editor, the two most common objects used are [`Selected`](xref:TabularEditor.Shared.Interaction.Selection), which lets you access objects currently selected in the TOM Explorer, and [`Model`](xref:TabularEditor.TOMWrapper.Model), which lets you access any object within the currently loaded data model. Both these objects are available as member properties on the global [`ScriptHost`](xref:TabularEditor.Shared.Scripting.ScriptHost) object.
 
-Take a look at the [`ScriptHost` methods](xref:TabularEditor.Shared.Scripting.ScriptHost#methods) for an overview of useful methods that are also available when writing scripts in Tabular Editor.
+In addition, the `ScriptHost` object holds static methods which are exposed to the script as global methods (i.e. methods you can call without the `ScriptHost` prefix). These methods are also known as (xref:script-helper-methods).
 
 ## Example
 
