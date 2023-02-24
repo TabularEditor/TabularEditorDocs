@@ -7,7 +7,7 @@ author: Daniel Otykier
 
 Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](/Advanced-Scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](/Custom-Actions), so that you can easily reuse them from the context menu.'
 
-If you want to explore other scripts or want to contribute your own, please go to the [Tabular Editor Scripts repository](https://github.com/TabularEditor/Scripts).
+Also, make sure to check out our script library @csharp-script-library, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor.
 
 ***
 
