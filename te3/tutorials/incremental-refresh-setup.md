@@ -49,8 +49,17 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
           IsParameterQueryRequired=true
         ]
   ```
+4. __Copy Partition M Code__: Navigate to the table for which you want to configure incremental refresh. Fold it out and select your partition containing your Power Query M Expression. Copy your code to Notepad, you will need it in step 6.
 
-4. __Configure the Table Refresh:__ Next, select the table for which you want to configure incremental refresh. In the _'Expression Editor' window, Select __'M Expression'__ from the dropdown, and alter the Power Query M Expression such that there is a filter step on the date column for which you will enable incremental refresh. 
+5. __Enable the Table Refresh Policy:__ In the _'Properties'_ window, set the `EnableRefreshPolicy` property on the table to `True`:
+
+  <br></br>
+
+  <img src="../../images/incremental-refresh-enable-refresh-policy.png" alt="Apply Refresh Policy" style="width:400px !important"/>
+
+  <br></br>
+
+6. __Configure the Table Refresh:__ Next, select the table for which you want to configure incremental refresh. In the _'Expression Editor' window, Select __'M Expression'__ from the dropdown, insert your Power Query M Expression from step 4 and alter the Power Query M Expression such that there is a filter step on the date column for which you will enable incremental refresh. 
 
   _An example of one such valid filter step is below:_
   
@@ -68,15 +77,9 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 
   Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart` or `RangeEnd` to the appropriate data type. For more information about this, see [here](https://learn.microsoft.com/en-us/power-bi/connect-data/  incremental-refresh-overview#supported-data-sources)
 
-5. __Enable the Table Refresh Policy:__ In the _'Properties'_ window, set the `EnableRefreshPolicy` property on the table to `True`:
 
-  <br></br>
 
-  <img src="../../images/incremental-refresh-enable-refresh-policy.png" alt="Apply Refresh Policy" style="width:400px !important"/>
-
-  <br></br>
-
-6. __Configure Refresh Policy:__ Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partititions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
+7. __Configure Refresh Policy:__ Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partititions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
 
     - __Source Expression:__ The M Expression that be added to partitions created by the Refresh Policy.
     - __IncrementalWindowGranularity:__ The granularity of the incremental (refresh) window.
@@ -93,8 +96,8 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
   
   <br></br>
 
-7. __Apply Model Changes:__ Save your model (Ctrl+S).
-8. __Apply Refresh Policy:__ Right-click on the table and choose "Apply Refresh Policy".
+8. __Apply Model Changes:__ Save your model (Ctrl+S).
+9. __Apply Refresh Policy:__ Right-click on the table and choose "Apply Refresh Policy".
 
   <br></br>
   
@@ -110,7 +113,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
   
   <br></br>
 
-9. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
+10. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
   <br></br>
 
