@@ -6,3 +6,5 @@ The site uses [DocFX](https://dotnet.github.io/docfx/) and GitHub flavoured mark
 
 # How to contribute
 All contributions are welcome. We will review all pull requests submitted.
+
+To test your changes locally, download [DocFX](https://dotnet.github.io/docfx/) and run the command `docfx --serve` in the root of the project.
