@@ -6,8 +6,10 @@
 ### [BPA Sample Rules Expression](xref:using-bpa-sample-rules-expressions)
 # C#/Advanced Scripting
 ## @csharp-script-library
-### Beginner
+### @script-library-beginner
+#### @script-count-rows
+#### @script-count-things
 #### @script-edit-hidden-partitions
 #### @create-sum-measures-from-columns
-### Advanced
+### @script-library-advanced
 ## @script-helper-methods
