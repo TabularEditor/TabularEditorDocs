@@ -12,6 +12,7 @@
 
 # Advanced Topics
 ## [Advanced Scripting](Advanced-Scripting.md)
+### @csharp-script-library
 ## [FormatDax deprecation](FormatDax.md)
 ## [Useful Script Snippets](Useful-script-snippets.md)
 ## [Custom Actions](Custom-Actions.md)
