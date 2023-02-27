@@ -11,7 +11,7 @@ applies_to:
 ---
 # C# Scripts
 
-This is an introduction to the C# Scripting capabilities of Tabular Editor 3. Information in this document is subject to change. Also, make sure to check out the article on @useful-script-snippets, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor.
+This is an introduction to the C# Scripting capabilities of Tabular Editor 3. Information in this document is subject to change. Also, make sure to check out our script library @csharp-script-library, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor.
 
 ## Why C# scripting?
 The goal of the UI of Tabular Editor is to make it easy to perform most tasks commonly needed when building Tabular Models. For example, changing the Display Folder of multiple measures at once is just a matter of selecting the objects in the explorer tree and then dragging and dropping them around. The right-click context menu of the explorer tree provides a convenient way to perform many of these tasks, such as adding/removing objects from perspectives, renaming multiple objects, etc.
