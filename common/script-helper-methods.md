@@ -16,8 +16,8 @@ The full list of these can be found in the [API documentation](xref:TabularEdito
 
 Below is a summary of these methods. Click on a method name to browse the API documentation for that method.
 
-| Method | Purpose |
-| --- | --- |
+| <div style="width:250px">Method</div> | Purpose |
+| ----- | --- |
 | [`CallDaxFormatter`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_CallDaxFormatter_System_Nullable_System_Boolean__System_Nullable_System_Boolean__) | Format all DAX expressions on objects currently flagged for formatting. |
 | [`CollectVertiPaqAnalyzerStats`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_CollectVertiPaqAnalyzerStats) | Collects VertiPaq Analyzer statistics for the currently loaded model. |
 | [`ConvertDax`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_ConvertDax_System_String_System_Boolean_) | Changes the character used for decimals and list separators in a DAX expression. |
