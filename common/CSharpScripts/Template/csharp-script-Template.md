@@ -30,6 +30,6 @@ applies_to:
 
 ## Example Output
 
-![Edit Hidden Partitions](~/images/Cscripts/)
+![Edit Hidden Partitions](~/images/Cscripts/show-hidden-partitions.png)
 
 
