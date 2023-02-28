@@ -1,7 +1,7 @@
 ---
 uid: script-helper-methods
 title: C# Script Helper Methods
-updated: 2023-02-24
+updated: 2023-02-27
 applies_to:
   versions:
     - version: 2.x
@@ -16,7 +16,7 @@ The full list of these can be found in the [API documentation](xref:TabularEdito
 
 Below is a summary of these methods. Click on a method name to browse the API documentation for that method.
 
-| <div style="width:250px">Method</div> | Purpose |
+| <div style="width:210px">Method</div> | Purpose |
 | --- | --- |
 | [`CallDaxFormatter`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_CallDaxFormatter_System_Nullable_System_Boolean__System_Nullable_System_Boolean__) | Format all DAX expressions on objects currently flagged for formatting. |
 | [`CollectVertiPaqAnalyzerStats`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_CollectVertiPaqAnalyzerStats) | Collects VertiPaq Analyzer statistics for the currently loaded model. |
@@ -33,14 +33,17 @@ Below is a summary of these methods. Click on a method name to browse the API do
 | [`ImportProperties`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_ImportProperties_System_String_) | Applies properties to objects based on a string representation (tab separated format) of property values to assign,<br>such as obtained by [`ExportProperties`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_ExportProperties_System_Collections_Generic_IEnumerable_TabularEditor_TOMWrapper_ITabularNamedObject__System_String_) . |
 | [`Info`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_Info_System_String_) | Displays an informational message in a popup dialog. When the script is running in the CLI, an information message is written to the console. |
 | [`LineBreakFirstChar`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_LineBreakFirstChar_System_String_System_Boolean_) | Ensures that a DAX expression starts with a line break. |
+| [`Model`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_Model) | The currently loaded [`Model`](xref:TabularEditor.TOMWrapper.Model) . |
 | [`Output`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_Output_System_Object_) | Displays detailed information about the specified object or collection of objects in a popup dialog. When executed through the UI, the user has an option to ignore additional popups. When the script is running in the CLI, the information is written to the console. |
 | [`ReadFile`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_ReadFile_System_String_) | Read the specified file as text |
 | [`ResolveObjectPath`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_ResolveObjectPath_System_String_) | Resolves an object within the model based on a string such as the one obtained by [`GetObjectPath`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_GetObjectPath_TabularEditor_TOMWrapper_TabularObject_) . |
 | [`SaveFile`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_SaveFile_System_String_System_String_System_Text_Encoding_) | Saves the specified text to a file |
 | [`SelectColumn`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_SelectColumn_System_Collections_Generic_IEnumerable_TabularEditor_TOMWrapper_Column__TabularEditor_TOMWrapper_Column_System_String_) (+1) | Displays a dialog that allows the user to select a column from the specified list of columns. |
+| [`Selected`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_Selected) | An object that represents the current selection in the TOM Explorer. |
 | [`SelectMeasure`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_SelectMeasure_System_Collections_Generic_IEnumerable_TabularEditor_TOMWrapper_Measure__TabularEditor_TOMWrapper_Measure_System_String_) (+3) | Displays a dialog that allows the user to select a measure from the specified list of measures. |
 | [`SelectObject`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_SelectObject__1_System_Collections_Generic_IEnumerable___0____0_System_String_) | Displays a dialog that allows the user to select a model object from a list of objects. |
 | [`SelectObjects`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_SelectObjects__1_System_Collections_Generic_IEnumerable___0__System_Collections_Generic_IEnumerable___0__System_String_) | Displays a dialog that allows the user to select one or more model objects from a list of objects. |
 | [`SelectTable`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_SelectTable_System_Collections_Generic_IEnumerable_TabularEditor_TOMWrapper_Table__TabularEditor_TOMWrapper_Table_System_String_) (+2) | Displays a dialog that allows the user to select a table from the specified list of tables. |
 | [`SuspendWaitForm`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_SuspendWaitForm_System_Action_) (+1) | Hides the "Please wait" spinner while performing the specified action. Useful if the action displays custom dialogs / UI to the end user. |
+| [`WaitFormVisible`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_WaitFormVisible) | Toggle the "Please wait" spinner on/off. Useful if you want to display custom dialogs / UI to the end user. |
 | [`Warning`](xref:TabularEditor.Shared.Scripting.ScriptHost#TabularEditor_Shared_Scripting_ScriptHost_Warning_System_String_) | Displays a warning message in a popup dialog. When the script is running in the CLI, a warning message is written to the console. |
