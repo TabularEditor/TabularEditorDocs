@@ -43,6 +43,8 @@ This snippet goes through the model and counts the different object types, displ
 You can comment out 
 
 ## Example Output
-<div>
-<img src="~/images/Cscripts/script-count-rows-output.png" width=100% />
-</div>
+<img src="~/images/Cscripts/script-count-rows-output.png" alt="Image description" id="count-rows-output">
+<script>
+    var img = document.getElementById("count-rows-output");
+    img.style.width = "400px";
+</script>

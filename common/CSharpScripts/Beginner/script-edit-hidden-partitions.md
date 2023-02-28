@@ -20,5 +20,8 @@ Selected.Table.Partitions[0].Output();
 
 
 ### Example Output
-![Edit Hidden Partitions](~/images/Cscripts/show-hidden-partitions.png)
-
+<img src="~/images/Cscripts/show-hidden-partitions.png" alt="Image description" id="count-rows-output">
+<script>
+    var img = document.getElementById("count-rows-output");
+    img.style.width = "400px";
+</script>

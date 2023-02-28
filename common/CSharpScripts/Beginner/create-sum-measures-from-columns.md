@@ -40,6 +40,8 @@ foreach(var c in Selected.Columns)
 This snippet uses the `<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` function to create a new measure on the table. We use the `DaxObjectFullName` property to get the fully qualified name of the column for use in the DAX expression: `'TableName'[ColumnName]`.
 
 ## Example Output
-![Edit Hidden Partitions](~/images/Cscripts/create-sum-measures-from-columns.png)
-
-
+<img src="~/images/Cscripts/create-sum-measures-from-columns.png" alt="Image description" id="count-rows-output">
+<script>
+    var img = document.getElementById("count-rows-output");
+    img.style.width = "400px";
+</script>
