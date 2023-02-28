@@ -192,6 +192,7 @@ This snippet goes through the model and counts the different object types, displ
 You can comment out 
 
 ## Example Output
+<br>
 <img src="~/images/Cscripts/script-count-things-output.png" alt="Image description" id="count-things-output">
 <script>
     var img = document.getElementById("count-things-output");
