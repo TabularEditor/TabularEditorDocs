@@ -14,6 +14,7 @@
 #### @script-edit-hidden-partitions
 #### @script-create-m-parameter
 #### @create-sum-measures-from-columns
+#### @script-find-replace
 
 ### @script-library-advanced
 #### @script-create-date-table

@@ -10,7 +10,7 @@ applies_to:
 # Create M Partition
 
 ## Script Purpose
-If you want to see all the measures that have errors and have the option to delete them from the model.
+If you want to see all the measures that have errors and have the option to delete them from the model, saving a back-up .tsv of the deleted measures to a selected directory (in case you want to re-add them, later).
 
 ## Script
 
@@ -18,70 +18,78 @@ If you want to see all the measures that have errors and have the option to dele
 ```csharp
 // This script scans the model and shows all measures with errors, giving the option to remove them.
 //
-//using System.Windows.Forms;
-
-// Note - the .GetSemantics(...) method is only available in TE3
+// .GetSemantics(...) method is only available in TE3
+using System.Windows.Forms;
 var measuresWithError = Model.AllMeasures.Where(m => m.GetSemantics(ExpressionProperty.Expression).HasError).ToList();
+
+// If no measures with errors, end script with error.
+if ( measuresWithError.Count == 0 )
+{ 
+Error ( "No measures with errors! 👍" );
+}
+
+// Handle erroneous measures
+else 
+{
 
 // View the list of measures with an error
 measuresWithError.Output();
 
 //   From the list, you can select 1 or more measures to delete
-
 var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Select measures to delete.\nYou will be able to export a back-up, later.");
 
-// Delete the selected measures
-try
-{
-    foreach ( var _m in _ToDelete ) 
-        {
-            _m.Delete();
-        }
-
-    Info ( 
-        "Deleted " + 
-        Convert.ToString(_ToDelete.Count()) + 
-        " measures with errors." 
-    );
-
-    // Create an instance of the FolderBrowserDialog class
-    FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+    // Delete the selected measures
+    try
+    {
+        foreach ( var _m in _ToDelete ) 
+            {
+                _m.Delete();
+            }
     
-    // Set the title of the dialog box
-    folderBrowserDialog.Description = "Select a directory to output a backup of the deleted measures.";
+        Info ( 
+            "Deleted " + 
+            Convert.ToString(_ToDelete.Count()) + 
+            " measures with errors." 
+        );
     
-    // Set the root folder of the dialog box
-    folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
+        // Create an instance of the FolderBrowserDialog class
+        FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+        
+        // Set the title of the dialog box
+        folderBrowserDialog.Description = "Select a directory to output a backup of the deleted measures.";
+        
+        // Set the root folder of the dialog box
+        folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
+        
+        // Show the dialog box and get the result
+        DialogResult result = folderBrowserDialog.ShowDialog();
+        
+        // Check if the user clicked the OK button and get the selected path
+        if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
+            {
+                // Get the output path as a string
+                string _outputPath = folderBrowserDialog.SelectedPath;
+                
+                // Get the properties of the deleted measures
+                var _backup = ExportProperties( _ToDelete );
     
-    // Show the dialog box and get the result
-    DialogResult result = folderBrowserDialog.ShowDialog();
+                // Save a backup of the deleted measures
+                SaveFile( _outputPath + "/DeletedMeasures-" + Model.Name + DateTime.Today.ToString("-yyyy-MM-dd") + ".tsv", _backup);
     
-    // Check if the user clicked the OK button and get the selected path
-    if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
-        {
-            // Get the output path as a string
-            string _outputPath = folderBrowserDialog.SelectedPath;
-            
-            // Get the properties of the deleted measures
-            var _backup = ExportProperties( _ToDelete );
- 
-            // Save a backup of the deleted measures
-            SaveFile( _outputPath + "/DeletedMeasures-" + Model.Name + DateTime.Today.ToString("-yyyy-MM-dd") + ".tsv", _backup);
-
-            Info ( 
-                "Exported a backup of " + 
-                Convert.ToString(_ToDelete.Count()) +
-                " Measures to " + 
-                _outputPath
-            );
-        }
+                Info ( 
+                    "Exported a backup of " + 
+                    Convert.ToString(_ToDelete.Count()) +
+                    " Measures to " + 
+                    _outputPath
+                );
+            }
+    }
+    catch
+    // Display an info box if no measure was selected
+    {
+    Info ( "No measure selected." );
+    }
 }
-catch
-// Display an info box if no measure was selected
-{
-Info ( "No measure selected." );
-}
-
 ```
 ### Explanation
 This snippet gets all the measures that have errors according to the Tabular Editor Semantic Analysis. It then will display them in an output box where you can manually browse them or make changes. Thereafter, measures can be selected for removal. The removed measures can be saved as a back-up .tsv file in case you want to import them, later.
