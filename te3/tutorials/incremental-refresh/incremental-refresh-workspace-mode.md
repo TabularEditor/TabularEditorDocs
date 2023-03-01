@@ -14,7 +14,7 @@ applies_to:
 
   <br></br>
   
-  ![Incremental Refresh Workspace Mode Visual Abstract](../../images/incremental-refresh-workspace-mode.png)
+  ![Incremental Refresh Workspace Mode Visual Abstract](~/images/incremental-refresh-workspace-mode.png)
   
 
 
@@ -34,7 +34,7 @@ The reason is because _Workspace Mode_ will overwrite the remote model metadata 
 
   <br></br>
 
-  ![Incremental Refresh Workspace Mode Visual Abstract](../../images/incremental-refresh-workspace-mode-out-of-sync.png)
+  ![Incremental Refresh Workspace Mode Visual Abstract](~/images/incremental-refresh-workspace-mode-out-of-sync.png)
 
   <br></br>
 
@@ -45,7 +45,7 @@ To deploy the model, go _Model > Deploy..._ which opens the Deployment Wizard. H
 
   <br></br>
 
-  ![Incremental Refresh Workspace Mode Visual Abstract](../../images/incremental-refresh-deploy-partitions.png)
+  ![Incremental Refresh Workspace Mode Visual Abstract](~/images/incremental-refresh-deploy-partitions.png)
 
   <br></br>
 

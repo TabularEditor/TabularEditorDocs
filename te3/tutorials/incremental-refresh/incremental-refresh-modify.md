@@ -14,7 +14,7 @@ applies_to:
 
 <br></br>
 
-![Incremental Refresh Visual Abstract](../../images/incremental-refresh-modify-a-refresh-policy.png)
+![Incremental Refresh Visual Abstract](~/images/incremental-refresh-modify-a-refresh-policy.png)
 
 <br></br>
 
@@ -37,7 +37,7 @@ Below is a general description of how you modify an existing Refresh Policy:
 
     <br></br>
 
-    <img src="../../images/Incremental-refresh-properties.png" alt="Properties of Incremental Refresh" style="width:704px !important"/>
+    <img src="~/images/Incremental-refresh-properties.png" alt="Properties of Incremental Refresh" style="width:704px !important"/>
 
     <br></br>
 
@@ -47,7 +47,7 @@ Below is a general description of how you modify an existing Refresh Policy:
 
     <br></br>
 
-    <img src="../../images/incremental-refresh-apply-refresh-policy.png" alt="Apply Refresh Policy" style="width:450px !important"/>
+    <img src="~/images/incremental-refresh-apply-refresh-policy.png" alt="Apply Refresh Policy" style="width:450px !important"/>
 
     <br></br>
 
@@ -55,7 +55,7 @@ Below is a general description of how you modify an existing Refresh Policy:
 
     <br></br>
 
-    <img src="../../images/incremental-refresh-refresh-all-partitions.png" alt="Refresh All Partitions" style="width:450px !important"/>
+    <img src="~/images/incremental-refresh-refresh-all-partitions.png" alt="Refresh All Partitions" style="width:450px !important"/>
 
     <br></br>
 <br></br>
@@ -188,7 +188,7 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 ```
 <br></br>
 
-<img src="../../images/effective-date-te3.png" alt="Effective Date" style="width:700px !important"/>
+<img src="~/images/effective-date-te3.png" alt="Effective Date" style="width:700px !important"/>
 
 <br></br>
 
