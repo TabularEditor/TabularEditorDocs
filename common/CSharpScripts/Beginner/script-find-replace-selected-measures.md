@@ -42,6 +42,9 @@ using (Form prompt = new Form())
     prompt.Text = "Find and Replace Dialog";
     prompt.StartPosition = FormStartPosition.CenterScreen;
 
+    // Set the AutoScaleMode property to Dpi
+    prompt.AutoScaleMode = AutoScaleMode.Dpi;
+
     // Find / Replace input positions & config
     Label findLabel = new Label() { Left = 20, Top = 20, Text = "Find:" };
     TextBox findBox = new TextBox() { Left = findLabel.Right + 20, Top = 20, Width = 150 };
@@ -111,10 +114,10 @@ using (Form prompt = new Form())
         }
     else
         {
-            // The user clicked Cancel, so exit the script with an error message
-            throw new Exception("Find/Replace cancelled!");
+            Error("Find/Replace cancelled!");
         }
 }
+
 ```
 ### Explanation
 This snippet will create a pop-up dialogue with WinForms that will let you input a substring to search the selected measures and replace with a different substring. A success box dialogue will inform you that the find/replace was successful.
