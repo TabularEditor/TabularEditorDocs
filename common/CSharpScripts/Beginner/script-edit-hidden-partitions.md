@@ -20,5 +20,9 @@ Selected.Table.Partitions[0].Output();
 
 
 ### Example Output
-![Edit Hidden Partitions](~/images/Cscripts/show-hidden-partitions.png)
-
+<br>
+<img src="~/images/Cscripts/show-hidden-partitions.png" alt="Image description" id="show-hidden-partitions">
+<script>
+    var img = document.getElementById("show-hidden-partitions");
+    img.style.width = "650px";
+</script>

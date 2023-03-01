@@ -41,6 +41,7 @@
 ### @incremental-refresh-workspace-mode
 ## Automation with C# Scripting
 ### @creating-macros
+### @csharp-script-library
 
 # Other resources
 ## @downloads

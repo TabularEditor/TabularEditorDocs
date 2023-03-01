@@ -29,7 +29,9 @@ applies_to:
 
 
 ## Example Output
-
-![Edit Hidden Partitions](~/images/Cscripts/)
-
-
+<br>
+<img src="~/images/Cscripts/script-count-things-output.png" alt="Image description" id="count-things-output">
+<script>
+    var img = document.getElementById("count-things-output");
+    img.style.width = "400px";
+</script>
