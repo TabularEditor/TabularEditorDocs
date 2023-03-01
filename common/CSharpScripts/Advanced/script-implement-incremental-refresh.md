@@ -102,11 +102,14 @@ catch
 
         // Incremental Refresh Configuration
         // ----------------------------------------------------------------------------------------------------------------------------//
+
+        // Label for how long data should be stored
         var storeDataLabel = new Label();
         storeDataLabel.Text = "Store data in the last:";
         storeDataLabel.Location = new System.Drawing.Point(20, 20);
-        storeDataLabel.AutoSize = true; // set AutoSize to false
+        storeDataLabel.AutoSize = true;
         
+        // User input for how long data should be stored
         var storeDataTextBox = new TextBox();
         storeDataTextBox.Location = new System.Drawing.Point(150, 20);
         storeDataTextBox.Size = new System.Drawing.Size(100, 20);
@@ -114,53 +117,63 @@ catch
         // Adjust the Location of the storeDataLabel to align with the storeDataTextBox
         storeDataLabel.Location = new System.Drawing.Point(storeDataTextBox.Location.X - storeDataLabel.Width - 20, storeDataTextBox.Location.Y + 4);
         
+        // User selection for how long data should be stored (granularity)
         var storeDataComboBox = new ComboBox();
         storeDataComboBox.Location = new System.Drawing.Point(270, 20);
         storeDataComboBox.Size = new System.Drawing.Size(100, 20);
         storeDataComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         storeDataComboBox.Items.AddRange(new object[] { "days", "months", "quarters", "years" });
         
+        // Label for how much data should be refreshed
         var refreshDataLabel = new Label();
         refreshDataLabel.Text = "Refresh data in the last:";
         refreshDataLabel.Location = new System.Drawing.Point(20, 60);
-        refreshDataLabel.AutoSize = true; // set AutoSize to false
+        refreshDataLabel.AutoSize = true;
         
+        // User input for how much data should be refreshed
         var refreshDataTextBox = new TextBox();
         refreshDataTextBox.Location = new System.Drawing.Point(150, 60);
         refreshDataTextBox.Size = new System.Drawing.Size(100, 20);
         
-        // Adjust the Location of the storeDataLabel to align with the storeDataTextBox
+        // Adjust the Location of the refreshDataLabel to align with the refreshDataTextBox
         refreshDataLabel.Location = new System.Drawing.Point(refreshDataTextBox.Location.X - refreshDataLabel.Width - 32, refreshDataTextBox.Location.Y + 4);
         
+        // User selection for how much data should be refreshed (Period)
         var refreshDataComboBox = new ComboBox();
         refreshDataComboBox.Location = new System.Drawing.Point(270, 60);
         refreshDataComboBox.Size = new System.Drawing.Size(100, 20);
         refreshDataComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         refreshDataComboBox.Items.AddRange(new object[] { "days", "months", "quarters", "years" });
         
+        // User input to refresh full periods or not
         var fullPeriodsCheckBox = new CheckBox();
         fullPeriodsCheckBox.Text = "Refresh only full periods";
         fullPeriodsCheckBox.Location = new System.Drawing.Point(20, 100);
-        fullPeriodsCheckBox.AutoSize = true; // set AutoSize to false
+        fullPeriodsCheckBox.AutoSize = true;
         
+        // Form OK button
         var okButton = new Button();
         okButton.Text = "OK";
         okButton.Location = new System.Drawing.Point(200, 140);
         okButton.Size = new System.Drawing.Size(80, 25);
         okButton.DialogResult = DialogResult.OK;
         
+        // Form cancel button
         var cancelButton = new Button();
         cancelButton.Text = "Cancel";
         cancelButton.Location = new System.Drawing.Point(300, 140);
         cancelButton.Size = new System.Drawing.Size(80, 25);
         cancelButton.DialogResult = DialogResult.Cancel;
         
+        // Form config
         var form = new Form();
         form.Text = "Incremental Refresh configuration:";
-        form.ClientSize = new System.Drawing.Size(450, 200); // increased width to 450
+        form.ClientSize = new System.Drawing.Size(450, 200);
         form.FormBorderStyle = FormBorderStyle.FixedDialog;
         form.MaximizeBox = false;
         form.MinimizeBox = false;
+
+        // Add controls to form specified above
         form.Controls.Add(storeDataLabel);
         form.Controls.Add(storeDataTextBox);
         form.Controls.Add(storeDataComboBox);
@@ -171,8 +184,10 @@ catch
         form.Controls.Add(okButton);
         form.Controls.Add(cancelButton);
         
+        // Draw the form
         var result = form.ShowDialog();
         
+        // Get the values of the user input if entered
         if (result == DialogResult.OK)
         {
             var storeDataValue = storeDataTextBox.Text;
@@ -181,11 +196,11 @@ catch
             var refreshDataComboBoxValue = refreshDataComboBox.SelectedItem.ToString();
             var fullPeriodsChecked = fullPeriodsCheckBox.Checked;
         
-            // Use the input values in downstream parts of the script
-            // ...
-        
             // Display the input values in a message box
-            var message = string.Format("Store data in the last: {0} {1}\nRefresh data in the last: {2} {3}\nRefresh only full periods: {4}",
+            var message = string.Format(
+                "Store data in the last: {0} {1}" + 
+                "\nRefresh data in the last: {2} {3}" + 
+                "\nRefresh only full periods: {4}",
                 storeDataTextBox.Text,
                 storeDataComboBox.SelectedItem.ToString(),
                 refreshDataTextBox.Text,
@@ -196,6 +211,7 @@ catch
 
             // ----------------------------------------------------------------------------------------------------------------------------//
         
+        // Convert StoreDataGranularity to correct TOM Property
         var StoreDataGranularity = RefreshGranularityType.Month;
         switch (storeDataComboBox.SelectedItem.ToString())
         {
@@ -220,6 +236,7 @@ catch
                 break;
         }
 
+        // Convert RefreshDataGranularity to correct TOM Property
         var RefreshDataGranularity = RefreshGranularityType.Year;
         switch (refreshDataComboBox.SelectedItem.ToString())
         {
@@ -244,6 +261,7 @@ catch
                 break;
         }
 
+        // Convert RefreshCompletePeriods checkbox to correct TOM property
         int RefreshCompletePeriods;
         if ( fullPeriodsCheckBox.Checked == true )
         { 
@@ -253,6 +271,7 @@ catch
         {
         RefreshCompletePeriods = 0;
         }
+
 
         // Set incremental window: period to be refreshed
         // -------------------------------------------------------//
@@ -275,6 +294,8 @@ catch
         //    On Jan 1, 2024, it will drop 2022 automatically.
         _Table.RollingWindowPeriods = Convert.ToInt16(refreshDataTextBox.Text);
         
+
+        // If the selected date column is an integer of type YYYYMMDD...
         if ( Selected.Column.DataType == DataType.Int64 )
         {
             // Add DateTimeToInt Function
@@ -326,6 +347,8 @@ catch
                 @"    #""Incremental Refresh""";
         }
         
+
+        // Otherwise treat it like a normal date/datetime column
         else
         {
             // Source expression obtained from the original M partition
