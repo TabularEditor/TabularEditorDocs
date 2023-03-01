@@ -33,7 +33,7 @@ To use the script, select the date column in the table for which you want to con
 
 ## Script
 
-### Implement Incremental Refresh for a DateTime, Date or Int column
+### Implement Incremental Refresh for Selected Column
 ```csharp
 // This script will automatically generate an Incremental Refresh policy for a selected table
 // It is generated based on the selected column
@@ -49,29 +49,7 @@ try
     var test1 = Model.Expressions.Contains( Model.Expressions["RangeStart"] );
     var test2 = Model.Expressions.Contains( Model.Expressions["RangeEnd"] );
     Error (
-        "RangeEnd or RangeStart already exists!\n\n" + 
-        @"⢰⣶⣶⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⢻⣿⣿⡏⠉⠓⠦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀
-⠀⠀⢹⣿⡇⠀⠀⠀⠈⠙⠲⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⡴⠖⢾⣿⣿⣿⡟
-⠀⠀⠀⠹⣷⠀⠀⠀⠀⠀⠀⠀⠙⠦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⠶⠚⠋⠁⠀⠀⣸⣿⣿⡟⠀
-⠀⠀⠀⠀⠹⣇⠀⠀⠀⠀⠀⠀⠀⠀⠈⠓⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡴⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀⣿⣿⠏⠀⠀
-⠀⠀⠀⠀⠀⠙⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⡀⠀⠀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⠀⣀⡤⠖⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡿⠃⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠈⢳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡟⠁⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⡀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⢀⡴⠋⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣦⣠⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⡄⠀⠀⢀⡴⠟⠁⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣦⠾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠏⠀⠀⠀⠀⣠⣴⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡴⣶⣦⡀⠀⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡏⠀⠀⠀⠀⠀⣯⣀⣼⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣄⣬⣿⡇⠀⠀⠀⠀⠀⠀⠘⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠁⠀⠀⠀⠀⠀⠻⣿⡿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠿⠿⠟⠀⠀⠀⠀⠀⠀⠀⠀⢹⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⢀⡇⠀⢀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣷⣶⠤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢿⡀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⢸⢁⡾⠋⠉⠉⠙⢷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠞⠋⠉⠛⢶⡄⠀⠀⠘⡇⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⣿⠸⣇⠀⠀⠀⠀⣸⠇⠀⠀⠀⠀⠀⢀⣠⠤⠴⠶⠶⣤⡀⠀⠀⠀⠀⠀⠀⣇⠀⠀⠀⠀⢀⡇⠀⠀⠀⢿⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⢿⠀⠉⠳⠶⠶⠞⠁⠀⠀⠀⠀⠀⠀⢾⡅⠀⠀⠀⠀⠈⣷⠀⠀⠀⠀⠀⠀⠙⠷⢦⡤⠴⠛⠁⠀⠀⢸⡀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠈⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣤⡀⠀⠀⣠⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡇⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣇⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣇⣀⣀⣀⣠⣠⣠⣠⣠⣀⣀⣀⣀⣀⣀⣄⣄⣄⣄⣄⣠⣀⣀⣀⣀⣠⣠⣠⣠⣠⣠⣀⣀⣀⣀⣀⣼⡆⠀⠀" +
+        "RangeEnd or RangeStart already exists!\n\n" +
         "\n\nTerminating script without making changes."
     );
 }
@@ -299,38 +277,94 @@ catch
         
         if ( Selected.Column.DataType == DataType.Int64 )
         {
+            // Add DateTimeToInt Function
+            var _DateTimeToInt = Model.AddExpression( 
+                "fxDateTimeToInt", 
+                @"(x as datetime) => 
+    Date.Year(x)    * 10000 + 
+    Date.Month(x)   * 100 + 
+    Date.Day(x)"
+            );
+
+            _DateTimeToInt.SetAnnotation("PBI_ResultType", "Function");
+            _DateTimeToInt.Kind = ExpressionKind.M;
+
             // Source expression obtained from the original M partition
             _Table.SourceExpression = 
-                _MExpression.Split("\nin")[0].TrimEnd() +               // Gets expression before final "in" keyword
-                ",\n" +                                                 // Adds comma and newline
-                @"    #""Incremental Refresh"" = Table.SelectRows( " +  // Adds step called "Incremental Refresh" for filtering
-                _MExpression.Split("\nin")[1].TrimStart() +             // Gets name of last step (after "in" keyword)
-                @", each " +                                            // Adds 'each' keyword
-                Selected.Column.DaxObjectName +                         // Bases incremental refresh on current column name
-                @" >= fxDateTimeToInt ( #""RangeStart"" ) and " +                           // Greater than or equal to RangeStart
-                Selected.Column.DaxObjectName +                         // and
-                @" < fxDateTimeToInt ( #""RangeEnd"" ) )" +                                 // Less than RangeEnd
-                "\nin\n" +                                              // re-add 'in' keyword
-                @"    #""Incremental Refresh""";                        // Reference final step just added
+
+                // Gets expression before final "in" keyword
+                _MExpression.Split("\nin")[0].TrimEnd() +
+
+                // Adds comma and newline
+                ",\n" +
+
+                // Adds step called "Incremental Refresh" for filtering
+                @"    #""Incremental Refresh"" = Table.SelectRows( " +
+
+                // Gets name of last step (after "in" keyword)
+                _MExpression.Split("\nin")[1].TrimStart() +
+
+                // Adds 'each' keyword
+                @", each " +
+
+                // Bases incremental refresh on current column name
+                Selected.Column.DaxObjectName +
+
+                // Greater than or equal to RangeStart
+                @" >= fxDateTimeToInt ( #""RangeStart"" ) and " +
+
+                // and
+                Selected.Column.DaxObjectName +
+
+                // Less than RangeEnd
+                @" < fxDateTimeToInt ( #""RangeEnd"" ) )" +
+
+                // re-add 'in' keyword
+                "\nin\n" +
+
+                // Reference final step just added
+                @"    #""Incremental Refresh""";
         }
         
         else
         {
             // Source expression obtained from the original M partition
             _Table.SourceExpression = 
-                _MExpression.Split("\nin")[0].TrimEnd() +               // Gets expression before final "in" keyword
-                ",\n" +                                                 // Adds comma and newline
-                @"    #""Incremental Refresh"" = Table.SelectRows( " +  // Adds step called "Incremental Refresh" for filtering
-                _MExpression.Split("\nin")[1].TrimStart() +             // Gets name of last step (after "in" keyword)
-                @", each " +                                            // Adds 'each' keyword
-                Selected.Column.DaxObjectName +                         // Bases incremental refresh on current column name
-                @" >= Date.From ( #""RangeStart"" ) and " +                           // Greater than or equal to RangeStart
-                Selected.Column.DaxObjectName +                         // and
-                @" < Date.From ( #""RangeEnd"" ) )" +                                 // Less than RangeEnd
-                "\nin\n" +                                              // re-add 'in' keyword
-                @"    #""Incremental Refresh""";                        // Reference final step just added
+                // Gets expression before final "in" keyword
+                _MExpression.Split("\nin")[0].TrimEnd() +
+
+                // Adds comma and newline
+                ",\n" +
+                
+                // Adds step called "Incremental Refresh" for filtering
+                @"    #""Incremental Refresh"" = Table.SelectRows( " +
+                
+                // Gets name of last step (after "in" keyword)
+                _MExpression.Split("\nin")[1].TrimStart() +
+                
+                // Adds 'each' keyword
+                @", each " +
+                
+                // Bases incremental refresh on current column name
+                Selected.Column.DaxObjectName +
+                
+                // Greater than or equal to RangeStart
+                @" >= Date.From ( #""RangeStart"" ) and " +
+                
+                // and
+                Selected.Column.DaxObjectName +
+                
+                // Less than RangeEnd
+                @" < Date.From ( #""RangeEnd"" ) )" +
+                
+                // re-add 'in' keyword
+                "\nin\n" +
+                
+                // Reference final step just added
+                @"    #""Incremental Refresh""";
         }
 
+        // Success message
         Info ( 
         "Successfully configured the Incremental Refresh policy.\n" + 
         "\nSelect the table and right-click on 'Apply Refresh Policy...'" + 
