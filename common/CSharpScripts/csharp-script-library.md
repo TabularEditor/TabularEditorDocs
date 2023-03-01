@@ -15,7 +15,8 @@ updated: 2023-02-23
 
 This section contains official Tabular Editor scripts that have been verified and validated by the Tabular Editor team. These scripts are used in demos, conferences and documentation by the Tabular Editor team, and are maintained here for your convenience.  Use of these scripts are still your own responsibility.
 
-There are also other resources online with C# Scripts that are maintained by the community such as PowerBI.tips excellent repository: [PowerBI.Tips C# Script Repository](https://github.com/PowerBI-tips/TabularEditor-Scripts)
+There are also other resources online with C# Scripts that are maintained by the community such as PowerBI.tips excellent repository: [PowerBI.Tips C# Script Repository](https://github.com/PowerBI-tips/TabularEditor-Scripts) and Michael Kovalsky's excellent blog [ElegantBI](https://www.elegantbi.com/) and [Repository for Tabular Scripts](https://github.com/m-kovalsky/Tabular)
+
 
 ## Tabular Editor Versions
 At the top of each script is noted whether the script can be used in TE2.x (Tabular Editor 2) and/or TE3.x (Tabular Editor 3)
