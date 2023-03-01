@@ -40,6 +40,13 @@
 ### @importing-tables
 
 ## Configuring Data Security
+### @data-security-about
+### @data-security-considerations
+### @data-security-modify-rls
+### @data-security-setup-rls
+### @data-security-setup-rls
+### @data-security-testing
+
 
 ## Incremental Refresh
 ### @incremental-refresh-about
