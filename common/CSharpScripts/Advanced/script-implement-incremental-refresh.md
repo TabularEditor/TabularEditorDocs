@@ -107,7 +107,7 @@ else
     
 
     // Incremental Refresh Configuration
-    // ----------------------------------------------------------------------------------------------------------------------------//
+    // --------------------------------------------------------//
 
     // Label for how long data should be stored
     var storeDataLabel = new Label();
@@ -121,7 +121,11 @@ else
     storeDataTextBox.Size = new System.Drawing.Size(100, 20);
     
     // Adjust the Location of the storeDataLabel to align with the storeDataTextBox
-    storeDataLabel.Location = new System.Drawing.Point(storeDataTextBox.Location.X - storeDataLabel.Width - 20, storeDataTextBox.Location.Y + 4);
+    storeDataLabel.Location = 
+        new System.Drawing.Point(
+        storeDataTextBox.Location.X - storeDataLabel.Width - 20, 
+        storeDataTextBox.Location.Y + 4
+        );
     
     // User selection for how long data should be stored (granularity)
     var storeDataComboBox = new ComboBox();
@@ -142,7 +146,11 @@ else
     refreshDataTextBox.Size = new System.Drawing.Size(100, 20);
     
     // Adjust the Location of the refreshDataLabel to align with the refreshDataTextBox
-    refreshDataLabel.Location = new System.Drawing.Point(refreshDataTextBox.Location.X - refreshDataLabel.Width - 32, refreshDataTextBox.Location.Y + 4);
+    refreshDataLabel.Location = 
+        new System.Drawing.Point(
+        refreshDataTextBox.Location.X - refreshDataLabel.Width - 32, 
+        refreshDataTextBox.Location.Y + 4
+        );
     
     // User selection for how much data should be refreshed (Period)
     var refreshDataComboBox = new ComboBox();
@@ -224,7 +232,7 @@ else
     
         Info(message);
 
-        // ----------------------------------------------------------------------------------------------------------------------------//
+    // --------------------------------------------------------//
     
         // Convert StoreDataGranularity to correct TOM Property
         var StoreDataGranularity = RefreshGranularityType.Month;
