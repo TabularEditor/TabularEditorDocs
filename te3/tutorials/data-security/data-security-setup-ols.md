@@ -21,10 +21,10 @@ __OLS is changed by adjusting the Roles or Object Permissions defined for Tables
 
 ---
 
-- [__About Data Security and RLS/OLS:__](/data-security-about.md) A functional overview of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
-- [__Modify/Setup an RLS Configuration:__](/data-security-setup-rls.md) How to configure <span style="color:#01a99d">RLS</span> in a dataset.
+- [__About Data Security and RLS/OLS:__](data-security-about.md) A functional overview of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
+- [__Modify/Setup an RLS Configuration:__](data-security-setup-rls.md) How to configure <span style="color:#01a99d">RLS</span> in a dataset.
 - __Modify/Setup an OLS Configuration (This Article):__ How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
-- [__Testing RLS/OLS with Impersonation:__](/data-security-testing.md) How to easily validate Data Security with Tabular Editor.
+- [__Testing RLS/OLS with Impersonation:__](data-security-testing.md) How to easily validate Data Security with Tabular Editor.
 
 ---
 

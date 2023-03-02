@@ -26,9 +26,9 @@ _Both RLS & OLS can be easily configured, modified and tested from within Tabula
 ---
 
 - __About Data Security and RLS/OLS (This Article):__ A functional overview of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
-- [__Modify/Setup an RLS Configuration:__](/data-security-setup-rls.md) How to configure <span style="color:#01a99d">RLS</span> in a dataset.
-- [__Modify/Setup an OLS Configuration:__](/data-security-setup-ols.md) How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
-- [__Testing RLS/OLS with Impersonation:__](/data-security-testing.md) How to easily validate Data Security with Tabular Editor.
+- [__Modify/Setup an RLS Configuration:__](data-security-setup-rls.md) How to configure <span style="color:#01a99d">RLS</span> in a dataset.
+- [__Modify/Setup an OLS Configuration:__](data-security-setup-ols.md) How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
+- [__Testing RLS/OLS with Impersonation:__](data-security-testing.md) How to easily validate Data Security with Tabular Editor.
 
 <br>
 

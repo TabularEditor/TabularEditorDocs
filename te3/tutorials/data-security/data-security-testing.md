@@ -21,15 +21,14 @@ applies_to:
 __DAX Queries__, __Pivot Grid__, or __Preview Data__ enable testing of Data Security in Tabular Editor. It is recommended to *always* test Data Security with any changes to configuration, to mitigate risk of incorrect RLS/OLS implementation and the consequences thereof.
 
 > [!IMPORTANT]
-> Testing Data Security with Impersonation using Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service.
-> <br>TE3 Desktop Licenses cannot benefit from this feature. This is because roles are assigned in the Power BI Service.
+> Testing Data Security with Impersonation using Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. TE3 Desktop Licenses cannot benefit from this feature. This is because roles are assigned in the Power BI Service.
 
 ---
 
 
-- [__About Data Security and RLS/OLS:__](/data-security-about.md) A functional overview of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
-- [__Modify/Setup an RLS Configuration:__](/data-security-setup-rls.md) How to configure <span style="color:#01a99d">RLS</span> in a dataset.
-- [__Modify/Setup an OLS Configuration:__](/data-security-setup-ols.md) How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
+- [__About Data Security and RLS/OLS:__](data-security-about.md) A functional overview of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
+- [__Modify/Setup an RLS Configuration:__](data-security-setup-rls.md) How to configure <span style="color:#01a99d">RLS</span> in a dataset.
+- [__Modify/Setup an OLS Configuration:__](data-security-setup-ols.md) How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
 - __Testing RLS/OLS with Impersonation (This Article):__ How to easily validate Data Security with Tabular Editor.
 
 ---
