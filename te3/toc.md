@@ -44,7 +44,7 @@
 ### @data-security-considerations
 ### @data-security-modify-rls
 ### @data-security-setup-rls
-### @data-security-setup-rls
+### @data-security-setup-ols
 ### @data-security-testing
 
 
