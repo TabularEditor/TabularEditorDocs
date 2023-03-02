@@ -6,7 +6,6 @@ updated: 2023-03-02
 applies_to:
   editions:
     - edition: Desktop
-      none: x
     - edition: Business
     - edition: Enterprise
 ---
@@ -26,12 +25,10 @@ _Both RLS & OLS can be easily configured, modified and tested from within Tabula
 
 ---
 
-1. __About Data Security and RLS/OLS (This Article):__ Overview of the key points about <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
-2. __Considerations & Best Practices of RLS/OLS:__ Key ingredients to get Data Security working successfully in your model, and some common limitations / considerations of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span> implementation both separately and together. 
-3. __Modify an Existing RLS Configuration:__ How to find and change an existing dataset <span style="color:#01a99d">RLS</span> configuration.
-4. __Set-up a new RLS Configuration:__ How to set-up <span style="color:#01a99d">RLS</span> 'from scratch' in a dataset. 
-5. __Modify/Set-up an OLS Configuration:__ How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
-6. __Testing RLS/OLS with Impersonation:__ How to easily validate Data Security with Tabular Editor.
+- __About Data Security and RLS/OLS (This Article):__ A functional overview of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
+- [__Modify/Setup an RLS Configuration:__](/data-security-setup-rls.md) How to configure <span style="color:#01a99d">RLS</span> in a dataset.
+- [__Modify/Setup an OLS Configuration:__](/data-security-setup-ols.md) How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
+- [__Testing RLS/OLS with Impersonation:__](/data-security-testing.md) How to easily validate Data Security with Tabular Editor.
 
 <br>
 
@@ -110,7 +107,6 @@ Users must be given dataset access according to the [usage scenario](https://lea
 > __*If a user is an Admin, Member or Contributor, they will be able to see all the data*__. 
 > <br><br>
 > As much as is reasonable, try to distribute and manage permissions via Power BI Apps.
-> For more information, see the article about [Considerations & Best Practices](data-security-considerations.md).
 
 
 #### 5. __Validating Security:__ 
@@ -125,8 +121,8 @@ RLS and OLS can only be tested with impersonation once user groups have been add
 
 > [!NOTE]
 > To validate data security with impersonation, the below factors must be all true:
-> - The user must have access to the dataset.
 > - The user must be assigned a role.
+> - The user must have read permissions to the dataset.
 > - The user must have __build permissions__ to the dataset. 
 
 
@@ -135,6 +131,9 @@ RLS and OLS can only be tested with impersonation once user groups have been add
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 6:</strong> A demonstration of RLS testing in Tabular Editor using impersonation. Shown is testing with (A) Data Preview, (B) DAX Queries and (C) Pivot Grid.</figcaption>
 </figure>
 
+
+> [!IMPORTANT]
+> Testing Data Security with Impersonation using Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. TE3 Desktop Licenses cannot benefit from this feature. This is because roles are assigned in the Power BI Service.
 
 ---
 
@@ -323,7 +322,7 @@ _Users granted Build Permissions to the dataset are added to the Build Azure AD 
 
 
 # [❌ No Roles](#tab/role)
-If a Data Security Role exists in the dataset, no user will be able to read any data until they are added to the role. 
+__No user will be able to read any data until they are added to the role__, so long as Data Security is configured in the dataset. 
 
 ![No Access or No Role](~/images/data-security/data-security-no-role.png)
 
@@ -332,7 +331,7 @@ If a Data Security Role exists in the dataset, no user will be able to read any 
 
 
 # [❌ No Access](#tab/access)
-If a user is added to a security role, this will not automatically grant them read access to the dataset. They will still not be able to access any dataset or reports. 
+__If a user is added to a security role, this will not automatically grant them read access to the dataset.__ They will still not be able to access any dataset or reports. 
 
 ![No Access or No Role](~/images/data-security/data-security-no-access.png)
 
@@ -353,9 +352,9 @@ __If a user is given access to a dataset via the Admin, Member or Contributor ro
 > __It is a best practice to avoid distribution via Workspace Roles, where feasible.__
 > <br> If necessary, ensure that the __Principle of Least Permissions__ is applied : users should have the minimum access necessary to do what they need.
 
-
 ---
 
+---
 
 ### Hard Limitations
 Some reporting or data modeling features will not work with RLS or OLS configuration. Examples are:
@@ -372,6 +371,9 @@ Some reporting or data modeling features will not work with RLS or OLS configura
     - Quick Insights
     - Smart Narrative
     - Excel Data Types gallery
+
+
+---
 
 
 ### Further Reading & References

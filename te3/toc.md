@@ -26,7 +26,6 @@
 ## @user-options
 ## @security-privacy
 
-
 # Tutorials and walkthroughs
 
 ## Connect to a Model
@@ -41,12 +40,9 @@
 
 ## Configuring Data Security
 ### @data-security-about
-### @data-security-considerations
-### @data-security-modify-rls
 ### @data-security-setup-rls
 ### @data-security-setup-ols
 ### @data-security-testing
-
 
 ## Incremental Refresh
 ### @incremental-refresh-about
