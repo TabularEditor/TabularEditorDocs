@@ -12,7 +12,12 @@ applies_to:
 ---
 # Setting up Incremental Refresh
 
+
 ![Incremental Refresh Setup Visual Abstract](~/images/incremental-refresh-setup-refresh-policy.png)
+
+
+---
+
 
 To set up Incremental Refresh, you must configure a new Refresh Policy for the table. This is easily done by configuring the Refresh Policy properties once _EnableRefreshPolicy_ is set to `True`:
 

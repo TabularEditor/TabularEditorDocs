@@ -12,11 +12,11 @@ applies_to:
 ---
 # Modifying Incremental Refresh
 
-<br></br>
 
 ![Incremental Refresh Visual Abstract](~/images/incremental-refresh-modify-a-refresh-policy.png)
 
-<br></br>
+
+---
 
 
 __Incremental Refresh is changed by adjusting the Refresh Policy properties.__ Depending on what you want to change, you will adjust a different property. A full overview of these properties is [here](xref:incremental-refresh-about#overview-of-all-properties). 
@@ -61,7 +61,7 @@ Below is a general description of how you modify an existing Refresh Policy:
 <br></br>
 
 
---------------------------
+---
 
 Below is an overview of common changes one might make to an existing Refresh Policy:
 
@@ -77,7 +77,7 @@ __Note:__ You can also change the <span style="color:#BC4A47">_RollingWindowGran
 
 <br></br>
 
-------------------------------------
+---
 
 <br></br>
 
@@ -91,7 +91,7 @@ __Note:__ You can also change the <span style="color:#455C86">_IncrementalWindow
 
 <br></br>
 
-------------------------------------
+---
 
 <br></br>
 
@@ -105,7 +105,7 @@ __Note:__ You can further offset this window to refresh i.e. only the periods be
 
 <br></br>
 
-------------------------------------
+---
 
 <br></br>
 
@@ -127,7 +127,7 @@ __Note:__ Follow the below process to change Incremental Refresh Mode:
 
 <br></br>
 
-------------------------------------
+---
 
 <br></br>
 
@@ -171,7 +171,7 @@ in
 
 <br></br>
 
-------------------------------------
+---
 
 <br></br>
 
@@ -192,7 +192,7 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 
 <br></br>
 
-------------------------------------
+---
 
 <br></br>
 

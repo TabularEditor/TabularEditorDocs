@@ -12,11 +12,11 @@ applies_to:
 ---
 # Modifying Incremental Refresh Table Schemas
 
-<br></br>
 
 ![Incremental Refresh Workspace Mode Visual Abstract](~/images/incremental-refresh-update-schema-header.png)
 
-<br></br>
+
+---
 
 > [!IMPORTANT]
 > Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.

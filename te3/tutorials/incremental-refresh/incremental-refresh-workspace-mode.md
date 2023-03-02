@@ -12,13 +12,11 @@ applies_to:
 ---
 # Avoid Workspace Mode with Incremental Refresh
 
-  <br></br>
   
-  ![Incremental Refresh Workspace Mode Visual Abstract](~/images/incremental-refresh-workspace-mode.png)
-  
+![Incremental Refresh Workspace Mode Visual Abstract](~/images/incremental-refresh-workspace-mode.png)
 
 
-<br></br>
+---
 
 Incremental Refresh creates new partitions upon the first scheduled refresh in a day. As a result, any local metadata (i.e. `.bim` or `database.json`) will be out-of-sync with the remote model metadata after the refresh. As a result, __when working with a model that has tables configured with Incremental Refresh, _Workspace Mode_ is not recommended__. 
 
