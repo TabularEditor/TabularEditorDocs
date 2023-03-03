@@ -62,7 +62,7 @@ _Roles_ are groups of users who have the same permission / data security logic. 
 
 #### 2. __Specify Rules:__ 
 _Rules_ are applied for each role to one or more objects, depending on the security type:
-- _<span style="color:#01a99d">RLS Table Permissions:</span>_ DAX table expressions -- return each row evaluating `True`. These permissions traverse relationships; the design of the model is imperative to good RLS rules.
+- _<span style="color:#01a99d">RLS Table Permissions:</span>_ DAX table expressions -- return each row evaluating `True`. These permissions traverse relationships; __the design of the model is imperative to good RLS rules.__
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/images/data-security/data-security-table-permissions.png" alt="Data Security Create Role" style="width: 550px;"/>
@@ -95,7 +95,7 @@ Once configured in the dataset, users must be added to their respective roles.
 > <br>Using this approach is preferred you can centralize management of security & user segmentation.
 
 #### 4. __Provision Users Access to the Dataset:__ 
-Users must be given dataset access according to the [usage scenario](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-usage-scenario-overview).
+_Power BI:_ Users must be given dataset access according to the [usage scenario](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-usage-scenario-overview).
 - _App Audience:_ Users / their Azure AD Groups are added to the appropriate [App Audience](https://data-goblins.com/power-bi/app-audiences).
 - _Workspace Viewer:_ Users / their Azure AD Groups are added as [Workspace Viewers](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-workspaces-workspace-level-planning#workspace-access)
 - _Dataset Readers:_ Users / their Azure AD Groups are given [Dataset-specific permissions](https://learn.microsoft.com/en-us/power-bi/connect-data/service-datasets-manage-access-permissions) via a Dataset or dependent item (i.e. Report).
