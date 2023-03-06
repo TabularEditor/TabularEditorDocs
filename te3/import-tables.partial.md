@@ -78,7 +78,7 @@ At this point, you should see your tables imported with all columns, data types 
 
 # Updating table schema
 
-If columns are added/changed in the source, you can use Tabular Editor's **Update table schema** feature at any time.
+If columns are added/changed in the source, or if you recently modified a partition expression or query, you can use Tabular Editor's **Update table schema** feature at any time.
 
 ![Update Table Schema](~/images/update-table-schema.png)
 
