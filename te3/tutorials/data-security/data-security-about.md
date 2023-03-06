@@ -360,13 +360,12 @@ __If a user is given access to a dataset via the Admin, Member or Contributor ro
 Some reporting or data modeling features will not work with RLS or OLS configuration. Examples are:
 
 1. [RLS Limitations](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#considerations-and-limitations)
-    - Power BI - Analysis Services Live Connections
     - Service Principles added to RLS Roles
     - Testing with Direct Query models using SSO
     - [Publish-to-Web in Power BI](https://learn.microsoft.com/en-us/power-bi/guidance/rls-guidance#when-to-avoid-using-rls)
 
 2. [OLS Limitations](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-ols?tabs=table#considerations-and-limitations)
-    - Combining RLS roles & OLS roles (discussed above)
+    - Combining separate RLS roles & OLS roles (discussed above)
     - Q&A features
     - Quick Insights
     - Smart Narrative

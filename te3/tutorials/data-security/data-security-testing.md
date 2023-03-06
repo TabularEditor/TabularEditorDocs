@@ -21,7 +21,8 @@ applies_to:
 __DAX Queries__, __Pivot Grid__, or __Preview Data__ enable testing of Data Security in Tabular Editor. It is recommended to *always* test Data Security with any changes to configuration, to mitigate risk of incorrect RLS/OLS implementation and the consequences thereof.
 
 > [!IMPORTANT]
-> Testing Data Security with Impersonation using Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. TE3 Desktop Licenses cannot benefit from this feature. This is because roles are assigned in the Power BI Service.
+> Testing Data Security with Impersonation using Tabular Editor 3 is limited to datasets hosted in an Analysis Services instance or the Power BI Service. 
+> <br>Tabular Editor 3 Desktop Licenses cannot benefit from this feature.
 
 ---
 
@@ -37,14 +38,14 @@ __DAX Queries__, __Pivot Grid__, or __Preview Data__ enable testing of Data Secu
 
 __Data Security can be easily tested using _Impersonation_ in Tabular Editor 3.__ Impersonation is a feature that lets you view a query result as a model Role or User. It is similar to the _'View As Role...'_ feature in the Power BI service, with two key differences:
 
-1. The User requires __dataset Build permissions__ in addition to Role assignment & Dataset Read access. 
-2. Any query can be executed; it is not limited to available reports.
+1. The End-User being impersonated requires __dataset Build permissions__ in addition to Role assignment & Dataset Read access. 
+2. Any query can be executed within Tabular Editor 3; it is not limited to available report visuals, as in the Power BI Service.
 
- This is valuable, as it lets the developer run defined tests to see how the result would be viewed by any user with Build permissions. This helps ensure that even for complex queries and DAX expressions, the Data Security works as expected, and users only see what they should see.
+ This is valuable, as it lets the developer run defined tests to see how the result would be viewed by any end-user with Build permissions. This helps ensure that even for complex queries and DAX expressions, the Data Security works as expected, and users only see what they should see.
 
 
 > [!IMPORTANT]
-> Ensure that Build permissions are not provisioned by providing users Workspace Roles (Contributor, Member, Admin), as these roles have __Write__ permissions to the dataset and thus bypass Data Security; the testing will appear to not work, even if it's configured correctly. 
+> Ensure that Build permissions are not provisioned by providing end-users Workspace Roles (Contributor, Member, Admin), as these roles have __Write__ permissions to the dataset and thus bypass Data Security; the testing will appear to not work, even if it's configured correctly. 
 
 
 <figure style="padding-top: 15px;">
@@ -57,11 +58,12 @@ __Data Security can be easily tested using _Impersonation_ in Tabular Editor 3._
 ## How to Test with Impersonation
 To test with impersonation, follow the below steps:
 
-1. __Ensure the Dataset Configuration & Access is correct:__
-  - Users have been assigned to the appropriate Roles
-  - Users have been provisioned Dataset Read Access
-  - Users have been provisioned Dataset Build Access
-  - Users _are not_ Workspace Contributors, Members or Admins
+1. __Ensure that the Dataset Configuration & Access is correct:__
+End-users being impersonated...
+  - _...have been assigned to the appropriate __Roles__._
+  - _...have been provisioned __Dataset Read Access__._
+  - _...have been provisioned __Dataset Build Access__. (Power BI)_
+  - _...__are not__ Workspace Contributors, Members or Admins (Power BI)_.
 
 2. __Create a new DAX Query, Pivot Grid or Preview Data window:__ 
   - It's recommended that you start with _Preview Data_ to observe the effect on model tables

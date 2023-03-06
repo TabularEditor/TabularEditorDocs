@@ -104,3 +104,5 @@ Successfully combining RLS with OLS requires designing a model and Data Security
 
 ### 6. Configure OLS for Measures
 Natively, OLS works only on Columns, Tables and their dependents; there is no `Object-Level Security` property for measures. However, since OLS also applies to dependents, it is possible to design OLS that works on measures via disconnected tables or calculation groups. To do this, the measure DAX has to be altered to evaluate a column or calculation group configured with RLS. If the `Object-Level Security` property of that object is `None`, then the Measure will not evaluate. 
+
+See also [this article by SQLBI](https://www.sqlbi.com/articles/hiding-measures-by-using-object-level-security-in-power-bi/) which explains this approach in detail.

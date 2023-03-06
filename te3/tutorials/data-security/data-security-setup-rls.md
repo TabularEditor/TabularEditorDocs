@@ -106,6 +106,36 @@ To modify an existing Table Permission for a specific role:
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 5:</strong> An example of how RLS can be validated from the DAX query window by using the Filter Expression inside of an Iterator over the Table (or part of the table, like the user alias). In this example, the original RLS Filter Expression in the Table Permission has been modified (Yellow) where an explicit User Principal Name in the dataset is added instead, to test (Green). The RLS code is executed inside of the ADDCOLUMNS iterator over a relevant part of the table. The checkmark indicates any row that evaluates to TRUE. The test demonstrates that the RLS is - for this UPN - working as expected, since <i>Gal Aehad</i> is the only user returning TRUE when their UPN is given.</figcaption>
 </figure>
 
+```dax
+EVALUATE
+
+// Create a table to test your RLS
+ADDCOLUMNS ( 
+  VALUES ( 'Regions'[Territory Directors] ),
+  "@RLS-Validation",
+
+    // RLS Code
+    VAR _CurrentUser = 
+      SELECTCOLUMNS (
+        FILTER ( 
+          'Employees', 
+          'Employees'[Employee Email]
+
+            // Replace USERPRINCIPALNAME() with a user email to test
+            = "gal.aehad@spaceparts.co" // USERPRINCIPALNAME ()
+        ),
+        "@Name", 'Employees'[Employee Name]
+      )
+    RETURN
+      'Regions'[Territory Directors] IN _CurrentUser
+
+)
+
+// Order from TRUE() to FALSE()
+// Where it is TRUE() the data will be visible
+ORDER BY [@RLS-Validation] DESC
+```
+
 ---
 
 ### 5. Add a New Table Permission to a Role
@@ -132,8 +162,9 @@ To add a new table permission:
 ### 6. Assign or Remove Users from a Role
 To assign users to a role:
 
-- _Power BI:_ This is done in the _Power BI Service_ from the Dataset Security settings.
-- _AAS/SSAS:_
+> [!NOTE]
+> In Power BI, this is done in the _Power BI Service_, from the Dataset Security settings.
+
   1. __Right-Click the Role:__ Select 'Edit members...
 
 <figure style="padding-top: 15px;">
