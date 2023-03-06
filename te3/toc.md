@@ -13,6 +13,7 @@
 ### @data-refresh-view
 ### @macros-view
 ### @find-replace
+
 ## Features
 ### @dax-editor
 ### @dax-scripts
@@ -26,19 +27,30 @@
 ## @security-privacy
 
 # Tutorials and walkthroughs
+
 ## Connect to a Model
 ### @workspace-mode
+
 ## Create a New Model
 ### @new-as-model
 ### @new-pbi-model
+
 ## Adding Tables & Data Sources
 ### @importing-tables
+
+## Configuring Data Security
+### @data-security-about
+### @data-security-setup-rls
+### @data-security-setup-ols
+### @data-security-testing
+
 ## Incremental Refresh
 ### @incremental-refresh-about
 ### @incremental-refresh-modify
 ### @incremental-refresh-setup
 ### @incremental-refresh-schema
 ### @incremental-refresh-workspace-mode
+
 ## Automation with C# Scripting
 ### @creating-macros
 ### @csharp-script-library

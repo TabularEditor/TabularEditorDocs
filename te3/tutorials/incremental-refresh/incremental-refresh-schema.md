@@ -12,11 +12,11 @@ applies_to:
 ---
 # Modifying Incremental Refresh Table Schemas
 
-<br></br>
 
-![Incremental Refresh Workspace Mode Visual Abstract](../../images/incremental-refresh-update-schema-header.png)
+![Incremental Refresh Workspace Mode Visual Abstract](~/images/incremental-refresh-update-schema-header.png)
 
-<br></br>
+
+---
 
 > [!IMPORTANT]
 > Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
@@ -29,7 +29,7 @@ __When adding or removing columns from a table configured with Incremental Refre
 
   <br></br>
 
-  <img src="../../images/incremental-refresh-update-table-schema.png" alt="Update Table Schema" style="width:450px !important"/>
+  <img src="~/images/incremental-refresh-update-table-schema.png" alt="Update Table Schema" style="width:450px !important"/>
 
   <br></br>
 
@@ -39,7 +39,7 @@ __When adding or removing columns from a table configured with Incremental Refre
 
   <br></br>
 
-  <img src="../../images/incremental-refresh-apply-refresh-policy.png" alt="Apply Refresh Policy" style="width:450px !important"/>
+  <img src="~/images/incremental-refresh-apply-refresh-policy.png" alt="Apply Refresh Policy" style="width:450px !important"/>
 
   <br></br>
 
@@ -47,7 +47,7 @@ __When adding or removing columns from a table configured with Incremental Refre
 
   <br></br>
   
-  <img src="../../images/incremental-refresh-refresh-all-partitions.png" alt="Refresh All Partitions" style="width:450px !important"/>
+  <img src="~/images/incremental-refresh-refresh-all-partitions.png" alt="Refresh All Partitions" style="width:450px !important"/>
   
   
   <br></br>

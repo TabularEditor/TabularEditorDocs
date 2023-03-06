@@ -12,11 +12,11 @@ applies_to:
 ---
 # What is a Refresh Policy?
 
-<br></br>
 
-![Incremental Refresh Visual Abstract](../../images/incremental-refresh-header.png)
+![Incremental Refresh Visual Abstract](~/images/incremental-refresh-header.png)
 
-<br></br>
+
+---
 
 Datasets hosted in the Power BI service can have [Incremental Refresh](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) configured for one or more data tables. __The purpose of Incremental Refresh is to achieve faster, more efficient refreshes by only retrieving recent/changing data, _incrementally refreshing_ the table.__ To do this, the table is automatically divided into partitions, such that only recent or changing data is <span style="color:#01a99d">refreshed ("hot" partitions)</span> or even <span style="color:#8d7bae">retrieved in real-time (["Direct Query" partitions in "Hybrid Tables"](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables))</span> while <span style="color:#939799">older, static data is archived ("cold" partitions).</span>
 
@@ -131,7 +131,7 @@ A <span style="color:#01a99d">__Refresh Policy__</span> determines how the data 
 
 ### Refresh Policy properties
 
-<img src="../../images/Incremental-refresh-properties.png" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
+<img src="~/images/Incremental-refresh-properties.png" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
 
 <br></br>
 
@@ -144,7 +144,7 @@ Four different kinds of properties make up a basic Refresh Policy:
 
 <br></br>
 
-![Incremental Refresh Policy Windows](../../images/incremental-refresh-policy-windows.png)
+![Incremental Refresh Policy Windows](~/images/incremental-refresh-policy-windows.png)
 
 <br></br>
 
@@ -154,7 +154,7 @@ In Power BI Desktop, these properties are named differently. Below is an overvie
 
 <br></br>
 
-![Incremental Refresh Policy Windows Properties](../../images/incremental-refresh-window-properties.png)
+![Incremental Refresh Policy Windows Properties](~/images/incremental-refresh-window-properties.png)
 
 <br></br>
 
@@ -172,7 +172,7 @@ This is configured with the <em>Mode</em> property when set to <code>Hybrid</cod
 
 <br></br>
 
-![Incremental Refresh Policy Windows](../../images/incremental-refresh-mode-pbi-match.png)
+![Incremental Refresh Policy Windows](~/images/incremental-refresh-mode-pbi-match.png)
 
 <br></br>
 
@@ -186,7 +186,7 @@ This is configured with the <em>IncrementalPeriodsOffset</em> property. In the a
 
 <br></br>
 
-![Incremental Refresh Policy Windows](../../images/incremental-refresh-period-offset-pbi-match.png)
+![Incremental Refresh Policy Windows](~/images/incremental-refresh-period-offset-pbi-match.png)
 
 <br></br>
 
@@ -214,7 +214,7 @@ in
 
 <br></br>
 
-![Incremental Refresh Policy Windows](../../images/incremental-refresh-detect-changes-pbi-match.png)
+![Incremental Refresh Policy Windows](~/images/incremental-refresh-detect-changes-pbi-match.png)
 
 <br></br>
 
@@ -324,7 +324,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Enable Refresh Policy Property -->
 <script>
   tippy('#enablerefreshpolicy', {
-    content: '<img src="../../images/incremental-refresh-enable-refresh-policy-pbi.png" width=385.7px height=492.765px alt="image">',
+    content: '<img src="~/images/incremental-refresh-enable-refresh-policy-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -334,7 +334,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Incremental Granularity Property -->
 <script>
   tippy('#incrementalgranularity', {
-    content: '<img src="../../images/incremental-refresh-incremental-granularity-pbi.png" width=385.7px height=492.765px alt="image">',
+    content: '<img src="~/images/incremental-refresh-incremental-granularity-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -344,7 +344,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Incremental Periods Property -->
 <script>
   tippy('#incrementalperiods', {
-    content: '<img src="../../images/incremental-refresh-incremental-period-pbi.png" width=385.7px height=492.765px alt="image">',
+    content: '<img src="~/images/incremental-refresh-incremental-period-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -354,7 +354,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Incremental Periods Offset Property -->
 <script>
   tippy('#incrementaloffset', {
-    content: '<img src="../../images/incremental-refresh-period-offset-pbi.png" width=385.7px height=492.765px alt="image">',
+    content: '<img src="~/images/incremental-refresh-period-offset-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -364,7 +364,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Refresh Policy Mode Property -->
 <script>
   tippy('#refreshpolicymode', {
-    content: '<img src="../../images/incremental-refresh-mode-pbi.png" width=385.7px height=492.765px alt="image">',
+    content: '<img src="~/images/incremental-refresh-mode-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -374,7 +374,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Polling Expression Property -->
 <script>
   tippy('#pollingexpression', {
-    content: '<img src="../../images/incremental-refresh-detect-changes-pbi.png" width=385.7px height=492.765px alt="image">',
+    content: '<img src="~/images/incremental-refresh-detect-changes-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -384,7 +384,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Rolling Window Granularity Property -->
 <script>
   tippy('#rollinggranularity', {
-    content: '<img src="../../images/incremental-refresh-rolling-granularity-pbi.png" width=385.7px height=492.765px alt="image">',
+    content: '<img src="~/images/incremental-refresh-rolling-granularity-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
@@ -394,7 +394,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 <!-- Rolling Window Periods Property -->
 <script>
   tippy('#rollingperiods', {
-    content: '<img src="../../images/incremental-refresh-rolling-window-pbi.png" width=385.7px height=492.765px alt="image">',
+    content: '<img src="~/images/incremental-refresh-rolling-window-pbi.png" width=385.7px height=492.765px alt="image">',
     followCursor: true,
     arrow: true,
     placement: 'left',
