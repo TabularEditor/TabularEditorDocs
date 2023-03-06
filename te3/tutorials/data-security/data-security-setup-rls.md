@@ -102,7 +102,7 @@ To modify an existing Table Permission for a specific role:
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/images/data-security/data-security-rls-validation-example.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/images/data-security/data-security-rls-validation.png" alt="Data Security Validation" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 5:</strong> An example of how RLS can be validated from the DAX query window by using the Filter Expression inside of an Iterator over the Table (or part of the table, like the user alias). In this example, the original RLS Filter Expression in the Table Permission has been modified (Yellow) where an explicit User Principal Name in the dataset is added instead, to test (Green). The RLS code is executed inside of the ADDCOLUMNS iterator over a relevant part of the table. The checkmark indicates any row that evaluates to TRUE. The test demonstrates that the RLS is - for this UPN - working as expected, since <i>Gal Aehad</i> is the only user returning TRUE when their UPN is given.</figcaption>
 </figure>
 
