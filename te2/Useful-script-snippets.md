@@ -410,19 +410,19 @@ foreach(var row in tsvRows.Skip(1))
 
 If you need to automate this process, save the above script into a file and use the [Tabular Editor CLI](/Command-line-Options) as follows:
 
-```
+```powershell
 start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
 ```
 
 for example:
 
-```
+```powershell
 start /wait TabularEditor.exe "c:\Projects\AdventureWorks\Model.bim" -S "c:\Projects\AutogenMeasures.cs" -B "c:\Projects\AdventureWorks\Build\Model.bim"
 ```
 
 ...or, if you prefer to run the script against an already deployed database:
 
-```
+```powershell
 start /wait TabularEditor.exe "localhost" "AdventureWorks" -S "c:\Projects\AutogenMeasures.cs" -D "localhost" "AdventureWorks" -O
 ```
 
