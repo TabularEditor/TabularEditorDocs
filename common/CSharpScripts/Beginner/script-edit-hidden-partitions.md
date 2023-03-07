@@ -20,9 +20,8 @@ Selected.Table.Partitions[0].Output();
 
 
 ### Example Output
-<br>
-<img src="~/images/Cscripts/show-hidden-partitions.png" alt="Image description" id="show-hidden-partitions">
-<script>
-    var img = document.getElementById("show-hidden-partitions");
-    img.style.width = "650px";
-</script>
+
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/images/Cscripts/show-hidden-partitions.png" alt="An example of the output box that appears, letting the user view and edit hidden partitions in the model." style="width: 550px;"/>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the output box that appears, letting the user view and edit hidden partitions in the model.</figcaption>
+</figure>
