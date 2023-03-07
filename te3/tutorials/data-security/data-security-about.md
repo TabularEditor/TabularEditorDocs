@@ -48,9 +48,9 @@ Data Security works at the level of the model. It is configured following the be
 
 #### 1. __Create Roles:__ 
 _Roles_ are groups of users who have the same permission / data security logic. _Users_ in this case are identified by their email, or the email of an [Azure AD Security Group](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#integration-with-azure-ad). Examples of roles:
-    - Users in the same region, team or department (_EMEA_, _UA Sales Team_).
-    - Users with the same role, function or access clearance (_Key Account Managers_, _SC Clearance_).
-    - Groups defined by other business logic or arbitrary rules (_Externals_, _Build Users_). 
+  - Users in the same region, team or department (_EMEA_, _UA Sales Team_).
+  - Users with the same role, function or access clearance (_Key Account Managers_, _SC Clearance_).
+  - Groups defined by other business logic or arbitrary rules (_Externals_, _Build Users_). 
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
