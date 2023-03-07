@@ -21,8 +21,7 @@ applies_to:
 __DAX Queries__, __Pivot Grid__, or __Preview Data__ enable testing of Data Security in Tabular Editor. It is recommended to *always* test Data Security with any changes to configuration, to mitigate risk of incorrect RLS/OLS implementation and the consequences thereof.
 
 > [!IMPORTANT]
-> Testing Data Security with Impersonation using Tabular Editor 3 is limited to datasets hosted in an Analysis Services instance or the Power BI Service. 
-> <br>Tabular Editor 3 Desktop Licenses cannot benefit from this feature.
+> Testing Data Security with Impersonation using Tabular Editor 3 is limited to datasets hosted in an Analysis Services instance or the Power BI Service. Tabular Editor 3 Desktop Licenses cannot benefit from this feature.
 
 ---
 
