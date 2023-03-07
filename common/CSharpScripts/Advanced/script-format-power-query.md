@@ -114,9 +114,8 @@ This snippet creates an HTTP POST request of the Power Query in the M Partition 
 Some manual formatting is done to make the code further readable. 
 
 ## Example Output
-<br>
-<img src="~/images/Cscripts/script-format-power-query.png" alt="Image description" id="script-format-power-query">
-<script>
-    var img = document.getElementById("script-format-power-query");
-    img.style.width = "400px";
-</script>
+
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/images/Cscripts/script-format-power-query.png" alt="Format Power Query example" style="width: 550px;"/>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An illustration of the script formatting Power Query code.</figcaption>
+</figure>
