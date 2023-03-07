@@ -7,11 +7,10 @@ updated: 2023-02-23
 ---
 # C# Script Library
 
-<br></br>
 
-![C# Script Library](../../images/CScripts/script-library-header.png)
+![C# Script Library](~/images/CScripts/script-library-header.png)
 
-<br></br>
+---
 
 This section contains official Tabular Editor scripts that have been verified and validated by the Tabular Editor team. These scripts are used in demos, conferences and documentation by the Tabular Editor team, and are maintained here for your convenience.  Use of these scripts are still your own responsibility.
 
@@ -19,7 +18,7 @@ There are also other resources online with C# Scripts that are maintained by the
 
 
 ## Tabular Editor Versions
-At the top of each script is noted whether the script can be used in TE2.x (Tabular Editor 2) and/or TE3.x (Tabular Editor 3)
+The top of each article denotes script compatability in TE2.x (Tabular Editor 2) and/or TE3.x (Tabular Editor 3)
 
 ### Scripting with Tabular Editor as a Power BI External Tool
 <br></br>
