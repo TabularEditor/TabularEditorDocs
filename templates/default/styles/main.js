@@ -2,7 +2,8 @@
 var s = document.createElement("script");
 s.src = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js";
 s.onload = function () {
-    // Register dax as a custom language for highlight.js
+
+    // Register dax as a custom language for highlight.js; modified from https://github.com/highlightjs/highlight.js/pull/1560
     hljs.registerLanguage('dax', function (hljs) {
         var IDENT_RE = '[a-zA-Z][a-zA-Z0-9._]*';
         return {
@@ -110,10 +111,12 @@ s.onload = function () {
         };
     }
     );
-    // Highlight the DAX code
+
+    // Highlight the DAX code once the hljs script loads
     $('code.lang-dax').each(function (i, block) {
         hljs.highlightBlock(block);
     });
+
     $(function () {
         var copyToClipboard = function (text) {
             // Create a textblock and assign the text and add to document
@@ -138,12 +141,18 @@ s.onload = function () {
         $("code.hljs").each(function () {
             var $this = $(this);
             var language = /lang-(.+?)(\s|$)/.exec($this.attr("class"))[1].toUpperCase();
+
+            // If the language ```csharp then show 'C#'
             if (language === 'CSHARP') {
                 language = "C#";
             }
+
+            // If the language ```M then show 'POWER QUERY'
             if (language === 'M') {
                 language = "POWER QUERY";
             }
+
+            // Code container header styling
             var $codeHeader = $(
                 '<div class="code-header">' +
                 '    <span class="language">' + language + '</span>' +
@@ -169,6 +178,8 @@ s.onload = function () {
                 // Only add the code header element before the code container if it is inside a tabGroup
                 var $parentTab = $codeContainer.closest('[role="tabpanel"]');
                 if ($parentTab.length > 0) {
+
+                    // Show the code header if there are no tabs
                     $codeHeader.insertBefore($codeContainer);
                 }
 
@@ -177,6 +188,7 @@ s.onload = function () {
                 $codeContainer.before($codeHeader);
             };
 
+            // Hide copy code button and show checkmark
             $codeHeader.find("button").click(function () {
                 copyToClipboard($this.closest("pre").text());
                 var successAlert = $(this).find(".successful-copy-alert");
@@ -187,76 +199,5 @@ s.onload = function () {
     });
 
 };
+
 document.head.appendChild(s);
-
-$(function () {
-    var copyToClipboard = function (text) {
-        // Create a textblock and assign the text and add to document
-        var el = document.createElement('textarea');
-        el.value = text;
-        document.body.appendChild(el);
-        el.style.display = "block";
-
-        // select the entire textblock
-        if (window.document.documentMode)
-            el.setSelectionRange(0, el.value.length);
-        else
-            el.select();
-
-        // copy to clipboard
-        document.execCommand('copy');
-
-        // clean up element
-        document.body.removeChild(el);
-    }
-
-    $("code.hljs").each(function () {
-        var $this = $(this);
-        var language = /lang-(.+?)(\s|$)/.exec($this.attr("class"))[1].toUpperCase();
-        if (language === 'CSHARP') {
-            language = "C#";
-        }
-        if (language === 'M') {
-            language = "POWER QUERY";
-        }
-        var $codeHeader = $(
-            '<div class="code-header">' +
-            '    <span class="language">' + language + '</span>' +
-            '    <button type="button" class="action" aria-label="Copy code">' +
-            '		<span class="icon"><span class="glyphicon glyphicon-duplicate" role="presentation"></span></span>' +
-            '		<span>Copy</span>' +
-            '		<div class="successful-copy-alert is-transparent" aria-hidden="true">' +
-            '			<span class="icon is-size-large">' +
-            '				<span class="glyphicon glyphicon-ok" role="presentation"></span>' +
-            '			</span>' +
-            '		</div>' +
-            '	</button>' +
-            '</div>'
-        );
-
-        // Create the code container element
-        var $codeContainer = $this.closest("pre").wrap('<div class="code-container"></div>').parent();
-
-        // Check if there are any tabGroups on the page
-        var tabGroups = $(".tabGroup");
-        // Check if there are any tabGroups on the page
-        if (tabGroups.length > 0) {
-            // Only add the code header element before the code container if it is inside a tabGroup
-            var $parentTab = $codeContainer.closest('[role="tabpanel"]');
-            if ($parentTab.length > 0) {
-                $codeHeader.insertBefore($codeContainer);
-            }
-
-        } else {
-            // If there are no tabGroups, add the code header element before the code container
-            $codeContainer.before($codeHeader);
-        };
-
-        $codeHeader.find("button").click(function () {
-            copyToClipboard($this.closest("pre").text());
-            var successAlert = $(this).find(".successful-copy-alert");
-            successAlert.removeClass("is-transparent");
-            setTimeout(function () { successAlert.addClass("is-transparent"); }, 2000);
-        });
-    });
-});
