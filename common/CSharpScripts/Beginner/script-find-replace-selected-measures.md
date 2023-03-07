@@ -160,6 +160,6 @@ This snippet will create a pop-up dialogue with WinForms that will let you input
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/images/Cscripts/script-find-replace-success" alt="An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script." style="width: 550px;"/>
+  <img class="noscale" src="~/images/Cscripts/script-find-replace-success.png" alt="An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script." style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script.</figcaption>
 </figure>
