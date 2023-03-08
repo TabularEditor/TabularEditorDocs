@@ -7,8 +7,7 @@ updated: 2023-02-23
 ---
 # C# Script Library
 
-
-![C# Script Library](~/images/CScripts/script-library-header.png)
+![C# Script Library](~/images/Cscripts/script-library-header.png)
 
 ---
 
