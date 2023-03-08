@@ -11,9 +11,7 @@ applies_to:
 ---
 # What is Data Security?
 
-
 ![Data Security Visual Abstract](~/images/data-security/data-security-visual-abstract.png)
-
 
 ---
 
@@ -30,8 +28,6 @@ _Both RLS & OLS can be easily configured, modified and tested from within Tabula
 - [__Modify/Setup an OLS Configuration:__](data-security-setup-ols.md) How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
 - [__Testing RLS/OLS with Impersonation:__](data-security-testing.md) How to easily validate Data Security with Tabular Editor.
 
-<br>
-
 <div class="NOTE">
   <h5>WHY CONFIGURE ROW- OR OBJECT-LEVEL SECURITY?</h5>
   Configuring RLS or OLS can be benificial for your model & reporting:  
@@ -44,7 +40,6 @@ _Both RLS & OLS can be easily configured, modified and tested from within Tabula
 
 ### How Does it Work?
 Data Security works at the level of the model. It is configured following the below steps:
-
 
 #### 1. __Create Roles:__ 
 _Roles_ are groups of users who have the same permission / data security logic. _Users_ in this case are identified by their email, or the email of an [Azure AD Security Group](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#integration-with-azure-ad). Examples of roles:
@@ -100,14 +95,12 @@ _Power BI:_ Users must be given dataset access according to the [usage scenario]
 - _Workspace Viewer:_ Users / their Azure AD Groups are added as [Workspace Viewers](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-workspaces-workspace-level-planning#workspace-access)
 - _Dataset Readers:_ Users / their Azure AD Groups are given [Dataset-specific permissions](https://learn.microsoft.com/en-us/power-bi/connect-data/service-datasets-manage-access-permissions) via a Dataset or dependent item (i.e. Report).
 
-
 > [!WARNING]
 > Users given [Admin, Member or Contributor Workspace Roles](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-roles-new-workspaces#workspace-roles) have __*write permissions*__ to a dataset. As such, Data Security like RLS and OLS will not filter or block data for users with these roles.
 > <br><br>
 > __*If a user is an Admin, Member or Contributor, they will be able to see all the data*__. 
 > <br><br>
 > As much as is reasonable, try to distribute and manage permissions via Power BI Apps.
-
 
 #### 5. __Validating Security:__ 
 RLS and OLS can only be tested with impersonation once user groups have been added & granted access. Validate security via:
@@ -125,12 +118,10 @@ RLS and OLS can only be tested with impersonation once user groups have been add
 > - The user must have read permissions to the dataset.
 > - The user must have __build permissions__ to the dataset. 
 
-
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 6:</strong> A demonstration of RLS testing in Tabular Editor using impersonation. Shown is testing with (A) Data Preview, (B) DAX Queries and (C) Pivot Grid.</figcaption>
 </figure>
-
 
 > [!IMPORTANT]
 > Testing Data Security with Impersonation using Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. TE3 Desktop Licenses cannot benefit from this feature. This is because roles are assigned in the Power BI Service.
@@ -160,12 +151,10 @@ __With RLS configured, data is filtered to only rows the user are allowed to see
 
 The most simple Table Permissions are _Static_:
 
-
 ```dax
 // Table Permission for 'Regions' table and 'CTG' role
 'Regions'[Territory] = "Central Transit Gate"
 ```
-
 
 ![Configuration of static RLS](~/images/data-security/data-security-static-rls.png)
 
@@ -192,7 +181,6 @@ The security table will then return logic that applies the table filter to that 
 This is referred to as _Dynamic_ RLS as the result will change depending on the user; the `USERPRINCIPALNAME()`.
 Below is an example of a Dynamic RLS Table permission:
 
-
 ```dax
 // Table Permission for 'Regions' table and 'Territory Directors' role.
 
@@ -208,7 +196,6 @@ SELECTCOLUMNS (
 RETURN 
 'Regions'[Territory Directors] IN _CurrentUser
 ```
-
 
 The above table permission gets the Employee Name alias from the 'Employees' table, which is applied without a relationship to the 'Regions' table. 
 The result for any user added to this role is that they will only see data where:

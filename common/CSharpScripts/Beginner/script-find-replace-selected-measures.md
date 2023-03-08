@@ -17,17 +17,18 @@ An input box lets the user enter the text to find and a subsequent input lets th
 ## Script
 
 ```csharp
-// Use this script to find & replace in all the DAX expressions of the selected measures
+#r "System.Drawing"
 
+using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-// ---------------------------------------------------------------------//
-// CONFIG
+// Hide the 'Running Macro' spinbox
+ScriptHelper.WaitFormVisible = false;
+
 // Replace Selected.Measures with Model.AllMeasures to scan all measures
-var _measures = Selected.Measures; // Model.AllMeasures;
-// Replace _m.Expression with _m.Name to find & replace in names.
-// ---------------------------------------------------------------------//
+var _measures = Model.AllMeasures;
+    // Optional: Replace _m.Expression with _m.Name to find & replace in names.
 
 // Initialize _find and _replace string variables
 string _find = "Find";
@@ -36,24 +37,53 @@ string _replace = "Replace";
 // WinForms prompt to get Find & Replace input
 using (Form prompt = new Form())
 {
+    Font formFont = new Font("Segoe UI", 11); 
+
     // Prompt config
-    prompt.Width = 350;
-    prompt.Height = 180;
+    prompt.AutoSize = true;
+    prompt.MinimumSize = new Size(350, 120);
     prompt.Text = "Find and Replace Dialog";
     prompt.StartPosition = FormStartPosition.CenterScreen;
 
     // Set the AutoScaleMode property to Dpi
     prompt.AutoScaleMode = AutoScaleMode.Dpi;
 
-    // Find / Replace input positions & config
-    Label findLabel = new Label() { Left = 20, Top = 20, Text = "Find:" };
-    TextBox findBox = new TextBox() { Left = findLabel.Right + 20, Top = 20, Width = 150 };
-    Label replaceLabel = new Label() { Left = 20, Top = 60, Text = "Replace:" };
-    TextBox replaceBox = new TextBox() { Left = replaceLabel.Right + 20, Top = 60, Width = 150 };
-    Button okButton = new Button() { Text = "OK", Left = 20, Width = 75, Top = 100 };
-    Button cancelButton = new Button() { Text = "Cancel", Left = 100, Width = 75, Top = 100 };
+    // Find: label
+    Label findLabel = new Label() { Text = "Find:" };
+    findLabel.Location = new Point(20, 20);
+    findLabel.Width = 80;
+    findLabel.Font = formFont;
 
-    // Buttons
+    // Textbox for inputing the substring text
+    TextBox findBox = new TextBox();
+    findBox.Width = 200;
+    findBox.Location = new Point(findLabel.Location.X + findLabel.Width + 20, findLabel.Location.Y - 4);
+    findBox.SelectedText = "Find this Text";
+    findBox.Font = formFont;
+
+    // Replace: label
+    Label replaceLabel = new Label() { Left = 20, Top = 60, Text = "Replace:" };
+    replaceLabel.Width = 80;
+    replaceLabel.Font = formFont;
+
+    // Textbox for inputting the substring text
+    TextBox replaceBox = new TextBox() { Left = replaceLabel.Right + 20, Top = replaceLabel.Location.Y - 4, Width = findBox.Width };
+    replaceBox.SelectedText = "Replace with this Text";
+    replaceBox.Font = formFont;
+
+    // OK Button
+    Button okButton = new Button() { Text = "OK", Left = 20, Width = 75, Top = replaceBox.Location.Y + replaceBox.Height + 20 };
+    okButton.MinimumSize = new Size(75, 25);
+    okButton.AutoSize = true;
+    okButton.Font = formFont;
+
+    // Cancel Button
+    Button cancelButton = new Button() { Text = "Cancel", Left = okButton.Location.X + okButton.Width + 10, Top = okButton.Location.Y };
+    cancelButton.MinimumSize = new Size(75, 25);
+    cancelButton.AutoSize = true;
+    cancelButton.Font = formFont;
+
+    // Button actions
     okButton.Click += (sender, e) => { _find = findBox.Text; _replace = replaceBox.Text; prompt.DialogResult = DialogResult.OK; };
     cancelButton.Click += (sender, e) => { prompt.DialogResult = DialogResult.Cancel; };
 
@@ -123,16 +153,13 @@ using (Form prompt = new Form())
 This snippet will create a pop-up dialogue with WinForms that will let you input a substring to search the selected measures and replace with a different substring. A success box dialogue will inform you that the find/replace was successful.
 
 ### Example Output
-<br>
-<img src="~/images/Cscripts/script-find-replace-dialogue.png" alt="Image description" id="script-find-replace-dialogue">
-<script>
-    var img = document.getElementById("script-find-replace-dialogue");
-    img.style.width = "400px";
-</script>
 
-<br>
-<img src="~/images/Cscripts/script-find-replace-success.png" alt="Image description" id="script-find-replace-success">
-<script>
-    var img = document.getElementById("script-find-replace-success");
-    img.style.width = "400px";
-</script>
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/images/Cscripts/script-find-replace-dialogue.png" alt="An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced." style="width: 550px;"/>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced.</figcaption>
+</figure>
+
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/images/Cscripts/script-find-replace-success.png" alt="An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script." style="width: 550px;"/>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script.</figcaption>
+</figure>
