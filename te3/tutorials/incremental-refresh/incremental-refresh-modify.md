@@ -21,12 +21,12 @@ applies_to:
 
 __Incremental Refresh is changed by adjusting the Refresh Policy properties.__ Depending on what you want to change, you will adjust a different property. A full overview of these properties is [here](xref:incremental-refresh-about#overview-of-all-properties). 
 
-<br></br>
 
 > [!IMPORTANT]
 > Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
 
-<br></br>
+---
+
 ## Change Incremental Refresh
 
 Below is a general description of how you modify an existing Refresh Policy:
@@ -35,37 +35,21 @@ Below is a general description of how you modify an existing Refresh Policy:
 2. __Select the Table:__ Select the table already configured for Incremental Refresh.
 3. __Find 'Refresh Policy' properties:__ In the _Properties_ window, go to the _Refresh Policy_ section.
 
-    <br></br>
-
-    <img src="~/images/Incremental-refresh-properties.png" alt="Properties of Incremental Refresh" style="width:704px !important"/>
-
-    <br></br>
+    <img src="~/images/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
 
 4. __Change the property:__ Change the __Property__ specified in the below sections, depending on what you want to change. For an overview of all Refresh Policy properties and what they do, see [here](xref:incremental-refresh-about#overview-of-all-properties).
 5. __Apply Changes:__ Deploy the model changes.
 4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
 
-    <br></br>
-
-    <img src="~/images/incremental-refresh-apply-refresh-policy.png" alt="Apply Refresh Policy" style="width:450px !important"/>
-
-    <br></br>
+    <img src="~/images/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
 7. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
-    <br></br>
-
-    <img src="~/images/incremental-refresh-refresh-all-partitions.png" alt="Refresh All Partitions" style="width:450px !important"/>
-
-    <br></br>
-<br></br>
-
+    <img src="~/images/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
 
 ---
 
 Below is an overview of common changes one might make to an existing Refresh Policy:
-
-<br></br>
 
 ### Extend or Reduce the Window for Archived Data
 
@@ -188,7 +172,7 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 ```
 <br></br>
 
-<img src="~/images/effective-date-te3.png" alt="Effective Date" style="width:700px !important"/>
+<img src="~/images/effective-date-te3.png" class="noscale" alt="Effective Date" style="width:700px !important"/>
 
 <br></br>
 
