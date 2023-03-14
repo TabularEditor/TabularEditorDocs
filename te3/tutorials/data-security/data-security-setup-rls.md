@@ -169,7 +169,7 @@ You can assign and remove users/groups from roles through Tabular Editor.
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 7:</strong>Users can be assigned to roles by right-clicking a Role and selecting <i>'Edit members...'.</i></figcaption>
 </figure>
 
-  2. Click the __dropdown button__ on the __Add Windows AD Member__ button and choose __Azure AD Member__:
+  2. Click the __dropdown button__ on the 'Add Windows AD Member' button and choose __Azure AD Member__:
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/images/data-security/data-security-edit-members-dialog.png" alt="Data Security Create Role" style="width: 550px;"/>
