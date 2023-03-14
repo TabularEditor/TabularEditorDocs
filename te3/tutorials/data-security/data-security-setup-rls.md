@@ -2,7 +2,7 @@
 uid: data-security-setup-rls
 title: Setup or Modify RLS
 author: Kurt Buhler
-updated: 2023-03-02
+updated: 2023-03-14
 applies_to:
   editions:
     - edition: Desktop
@@ -58,12 +58,12 @@ To add a Role to the model:
 </figure>
 
 
-3. __Set the `Model Permission` Property to `Read`:__ This is necessary for Power BI datasets.
+3. __Set the `Model Permission` Property to `Read`:__ This is necessary for any members of the role to be able to access the dataset at all.
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> Setting the Model Permission property is necessary for Power BI.</figcaption>
+  <img class="noscale" src="~/images/data-security/data-security-model-permission-read.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> Setting the Model Permission property is necessary.</figcaption>
 </figure>
 
 
@@ -160,23 +160,30 @@ To add a new table permission:
 ---
 
 ### 6. Assign or Remove Users from a Role
-To assign users to a role:
+You can assign and remove users/groups from roles through Tabular Editor.
 
-> [!NOTE]
-> In Power BI, this is done in the _Power BI Service_, from the Dataset Security settings.
-
-  1. __Right-Click the Role:__ Select 'Edit members...
-
+  1. Right-Click the __Role__, select __Edit members__...
+  
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/images/data-security/data-security-edit-members.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 7:</strong> For AAS/SSAS models, users can be assigned to roles by right-clicking a Role and selecting <i>'Edit members...'.</i></figcaption>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 7:</strong>Users can be assigned to roles by right-clicking a Role and selecting <i>'Edit members...'.</i></figcaption>
 </figure>
 
-  2. __Select 'Add Windows AD Members':__ Add users according to their AD identities.
+  2. Click the __dropdown button__ on the __Add Windows AD Member__ button and choose __Azure AD Member__:
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/images/data-security/data-security-edit-members-dialog.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 8:</strong> For AAS/SSAS models, users can be added via the <i>'Edit members...'</i> dialog box.</figcaption>
 </figure>
+
+  3. Specify the Azure AD user identity (typically, the user e-mail address) as the __Member Name__ property.
+  4. Click __OK__.
+  5. __Save__ the model.
+
+> [!IMPORTANT]
+> If your organisation is using on-premises Active Directory with SQL Server Analysis Services, you will need to use the __Windows AD Member__ option instead of __Azure AD Member__.
+
+> [!NOTE]
+> Once a Power BI dataset has been published to the Power BI Service, you can also manage role members through the [Dataset Security settings](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#manage-security-on-your-model). Alternatively, you can manage role members through [SQL Server Management Studio](https://learn.microsoft.com/en-us/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) (this applies to AAS/SSAS models in addition to Power BI dataset).
 
 ---
