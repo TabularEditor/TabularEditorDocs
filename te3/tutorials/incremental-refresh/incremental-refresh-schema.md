@@ -21,36 +21,25 @@ applies_to:
 > [!IMPORTANT]
 > Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
 
-<br></br>
+---
 
 __When adding or removing columns from a table configured with Incremental Refresh, you must update the table schema.__ Generally, this follows the same protocol as updating table schemas for single-partition tables. Tabular Editor can detect and update the schema for you, automatically: 
 
 1. __Detect schema changes:__ Right-click the table and select _'Update table schema...'_.
 
-  <br></br>
-
-  <img src="~/images/incremental-refresh-update-table-schema.png" alt="Update Table Schema" style="width:450px !important"/>
-
-  <br></br>
+  <img src="~/images/incremental-refresh-update-table-schema.png" class="noscale" alt="Update Table Schema" style="width:450px !important"/>
 
 2. __Apply detected schema changes:__ In the _'Apply Schema Changes'_ dialogue, confirm the desired schema changes.
 3. __Apply changes:__ Deploy the model changes.
 4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
 
-  <br></br>
-
-  <img src="~/images/incremental-refresh-apply-refresh-policy.png" alt="Apply Refresh Policy" style="width:450px !important"/>
-
-  <br></br>
+  <img src="~/images/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
 5. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
-  <br></br>
-  
-  <img src="~/images/incremental-refresh-refresh-all-partitions.png" alt="Refresh All Partitions" style="width:450px !important"/>
-  
-  
-  <br></br>
+  <img src="~/images/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
+
+---
 
 ### Schema Update Considerations with Incremental Refresh
 
@@ -65,11 +54,7 @@ __When adding or removing columns from a table configured with Incremental Refre
   <p>If schema changes arise from the Data Source, you may still need to apply changes to your Power Query <b><em>Source Expression</em></b> or <b><em>Polling Expression</em></b>. It is recommended that you carefully check these expressions before using <em>'Update table schema...'</em></p>
 </div>
 
-<br></br>
-
-------------------------------------
-
-<br></br>
+---
 
 ### Removing Columns
 
@@ -112,11 +97,7 @@ If you are __unable to automatically update the table schema__ using _'Update ta
   <p>Deleting column objects from the model does not prevent them from being queried if they still exist in the source and are not removed in the Native Query or <b><em>Source Expression</em></b>. Columns queried but not used can have a negative impact on refresh time and resource usage. It is recommended that you remove columns from both metadata and either data sources (i.e. views) or in the <b><em>Source Expression</em></b>.</p>
 </div>
 
-<br></br>
-
-------------------------------------
-
-<br></br>
+---
 
 ### Adding Columns
 

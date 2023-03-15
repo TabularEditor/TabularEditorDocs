@@ -29,11 +29,10 @@ _Incremental refresh can be easily configured and modified from within Tabular E
   <li> Experience shorter and more dependable scheduled refreshes
 </div>
 
-<br></br>
 > [!IMPORTANT]
 > Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
-<br></br>
 
+---
 
 ### How does it work?
 
@@ -115,7 +114,7 @@ in
 
 The number, type and refresh behavior of table partitions depends on the configured table Refresh Policy.
 
-<br></br>
+---
 
 ### What is a Refresh Policy?
 
@@ -127,13 +126,11 @@ A <span style="color:#01a99d">__Refresh Policy__</span> determines how the data 
   To configure incremental refresh for a local Power BI Desktop model, use the Power BI Desktop user interface.</p>
 </div>
 
-<br></br>
+---
 
 ### Refresh Policy properties
 
-<img src="~/images/Incremental-refresh-properties.png" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
-
-<br></br>
+<img src="~/images/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
 
 Four different kinds of properties make up a basic Refresh Policy:
 1. <span style="color:#455C86">__Incremental Window__</span> __Properties__: The period window wherein data is <span style="color:#455C86">_kept up-to-date_</span>.
@@ -141,22 +138,17 @@ Four different kinds of properties make up a basic Refresh Policy:
 3. __Source Expressions__: Define table schema and Power Query transformations of the table.
 4. __Mode__: Whether `Import` or `Hybrid` tables are used.
 
-
-<br></br>
-
 ![Incremental Refresh Policy Windows](~/images/incremental-refresh-policy-windows.png)
 
-<br></br>
+---
 
 #### Comparing to Power BI Desktop
 
 In Power BI Desktop, these properties are named differently. Below is an overview of how the properties match the Power BI Desktop user interface.
 
-<br></br>
-
 ![Incremental Refresh Policy Windows Properties](~/images/incremental-refresh-window-properties.png)
 
-<br></br>
+---
 
 #### Advanced Properties
 
@@ -170,12 +162,7 @@ In the <span style="color:#01a99d">__*[hybrid](https://learn.microsoft.com/en-us
 
 This is configured with the <em>Mode</em> property when set to <code>Hybrid</code>. 
 
-<br></br>
-
 ![Incremental Refresh Policy Windows](~/images/incremental-refresh-mode-pbi-match.png)
-
-<br></br>
-
 
 # [Only Refresh Complete Periods](#tab/completeperiods)
 In this configuration, <span style="color:#01a99d">__*the policy range will not include the current period in the _rolling window_*__</span>. 
@@ -184,11 +171,7 @@ In the standard configuration of Incremental Refresh, the current period is alwa
 
 This is configured with the <em>IncrementalPeriodsOffset</em> property. In the above example, a value of <code>-1</code> for an <em>IncrementalGranularity</em> of <code>Day</code> will exclude the current date from the <span style="color:#455C86">_incremental window_</span> and thus the data scope; only complete days will be refreshed.
 
-<br></br>
-
 ![Incremental Refresh Policy Windows](~/images/incremental-refresh-period-offset-pbi-match.png)
-
-<br></br>
 
 # [Detect Data Changes](#tab/datachanges)
 In configuration with Detect Data Changes, <span style="color:#01a99d">__*records in the archived partitions are refreshed if the value of a date column updates to the maximum value in that column.*__</span>
@@ -212,13 +195,11 @@ in
     accountForNu11
 ```
 
-<br></br>
-
 ![Incremental Refresh Policy Windows](~/images/incremental-refresh-detect-changes-pbi-match.png)
 
-<br></br>
-
 ***
+
+---
 
 #### Overview of all properties
 
