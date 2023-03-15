@@ -837,9 +837,9 @@ foreach(var p in Model.AllPartitions.OfType<MPartition>())
 
 ## Replace Power Query data sources and partitions with Legacy
 
-If you are working with a Power BI-based model that uses Power Query (M) expressions for partitions against a SQL Server-based data source, you will unfortunately not be able to use Tabular Editor's Data Import wizard or perform a schema check (i.e. comparing imported columns with columns in the data source).
+If you are working with a Power BI-based model that uses Power Query (M) expressions for partitions against a SQL Server-based data source, you will unfortunately not be able to use Tabular Editor 2's Data Import wizard or perform a schema check (i.e. comparing imported columns with columns in the data source).
 
-To solve this issue, you can run the following script on your model, to replace the power query partitions with corresponding native SQL query partitions, and to create a legacy (provider) data source on the model, which will work with Tabular Editor's Import Data wizard:
+To solve this issue, you can run the following script on your model, to replace the power query partitions with corresponding native SQL query partitions, and to create a legacy (provider) data source on the model, which will work with Tabular Editor 2's Import Data wizard:
 
 There are two versions of the script: The first one uses the MSOLEDBSQL provider for the created legacy data source, and hardcoded credentials. This is useful for local development. The second one uses the SQLNCLI provider, which is available on Microsoft-hosted build agents on Azure DevOps, and reads credentials and server/database names from environment variables, making the script useful for integration in Azure Pipeliens.
 
