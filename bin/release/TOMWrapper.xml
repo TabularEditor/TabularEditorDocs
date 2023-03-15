@@ -99,17 +99,17 @@
             Indicates whether the user is providing credentials for a data source that already exists in the destination model
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.Utils.DeploymentOptions.Default">
+        <member name="P:TabularEditor.TOMWrapper.Utils.DeploymentOptions.Default">
             <summary>
             Default deployment. Does not overwrite connections, partitions or role members.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.Utils.DeploymentOptions.Full">
+        <member name="P:TabularEditor.TOMWrapper.Utils.DeploymentOptions.Full">
             <summary>
             Full deployment.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.Utils.DeploymentOptions.StructureOnly">
+        <member name="P:TabularEditor.TOMWrapper.Utils.DeploymentOptions.StructureOnly">
             <summary>
             StructureOnly deployment. Does not overwrite roles or role members.
             </summary>
@@ -240,7 +240,7 @@
             <param name="refreshType"></param>
             <returns></returns>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Utils.TabularTreeIterator.GetChildren(TabularEditor.TOMWrapper.ITabularObjectContainer,TabularEditor.TOMWrapper.LogicalTreeOptions,System.Func{TabularEditor.TOMWrapper.ITabularNamedObject,System.Boolean})">
+        <member name="M:TabularEditor.TOMWrapper.Utils.TabularTreeIterator.GetChildren(TabularEditor.TOMWrapper.ITabularObjectContainer,TabularEditor.TOMWrapper.LogicalTreeOptions,System.Func{TabularEditor.TOMWrapper.ITabularNamedObject,System.Boolean},TabularEditor.TOMWrapper.FolderCache)">
             <summary>
             This method encapsulates the logic of how the tree representation of the tabular model should be structured
             </summary>
@@ -3502,7 +3502,7 @@
         <member name="P:TabularEditor.TOMWrapper.Model.DisableSystemDefaultExpression">
             <summary>
             Disable system defined default expression behavior for calculation groups.
-            </summary><remarks>This property is only supported when the compatibility level of the database is at Internal or above.</remarks>
+            </summary><remarks>This property is only supported when the compatibility level of the database is at Preview or above.</remarks>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Model.DefaultMeasure">
             <summary>
@@ -3593,6 +3593,17 @@
             <param name="name">The name of the new shared expression</param>
             <param name="expression">The M/Power Query string to add to the shared expression</param>
             <returns>The newly added shared expression</returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Model.ApplyRefreshPolicy">
+            <summary>
+            Applies refresh policy on all tables in the model, where Incremental Refresh Policy has been configured.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Model.ApplyRefreshPolicy(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Table})">
+            <summary>
+            Applies refresh policy on the specified tables.
+            </summary>
+            <param name="tables">The tables on which to apply refresh policy</param>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Model.AddCalculatedTable(System.String,System.String)">
             <summary>
@@ -5054,6 +5065,11 @@
             Gets whether the table is visible to end users. This is the case if the table contains visible measures.
             </summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.TableGroup">
+            <summary>
+            Gets or sets the name of the Table Group in which this table is displayed (Tabular Editor only)
+            </summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Table.DependsOn">
             <summary>
             Gets the list of objects that this table depends on based on its DAX expression.
@@ -5225,12 +5241,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Table.GetChildrenByFolders">
-            <summary>
-            Returns all columns, measures and hierarchies at the root of the table (i.e. those that have an empty DisplayFolder string).
-            </summary>
-            <returns></returns>
-        </member>
         <member name="P:TabularEditor.TOMWrapper.Table.ObjectLevelSecurity">
             <summary>
             Provides a convenient way to get or set the Object-Level permissions assigned to this table across different roles.
@@ -5239,12 +5249,6 @@
         <member name="P:TabularEditor.TOMWrapper.Table.ErrorMessage">
             <summary>
             Gets the error message currently reported on this table.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Table.PropagateChildErrors">
-            <summary>
-            Loops through all child objects and propagates any error messages to their immediate parents - this should be called
-            whenever the folder structure is changed
             </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Table.DefaultDetailRowsExpression">
@@ -6170,9 +6174,13 @@
             Any child folders are retained (but will be moved up the display folder hierarchy).
             </summary>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.Folder.IsVisible">
+        <member name="T:TabularEditor.TOMWrapper.FolderCache">
             <summary>
-            Gets the visibility of the Folder. Shorthand for !<see cref="P:TabularEditor.TOMWrapper.Folder.IsHidden"/>.
+            Display Folders are not represented as individual objects in TOM. Instead, an object that can be shown in a Display Folder,
+            has a DisplayFolder (string) property. However, due to the way most TreeView-style UI components work, it is beneficial
+            to construct a cache of display folder objects for each table. Each folder object has a list of child objects. The cache
+            needs to be reconstructured when objects are moved around, or when the display culture is changed (as display folders are
+            translatable).
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.GroupingColumnCollection.Add(TabularEditor.TOMWrapper.Column)">
@@ -6334,13 +6342,6 @@
              - Columns
              - Hierarchies
              - Folders
-            </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.IFolder">
-            <summary>
-            Represents an objects that can contain IFolderObject's
-             - Folders
-             - Table
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.MPartition.Clone(System.String,TabularEditor.TOMWrapper.Table)">
@@ -6893,22 +6894,14 @@
         </member>
         <member name="T:TabularEditor.TOMWrapper.TabularTree">
             <summary>
-            The TabularLogicalModel controls the relation between TabularObjects for display in the TreeViewAdv
-            control. Each individual TabularObject does not know or care about its logical relation to other
+            The TabularTree represents the logical structure of objects in the TOM, that we are going to
+            display to the user through the TOM Explorer. The tree maintains a cache of the folder structure
+            within each table, which may change depending on the selected language (culture).
+            Each individual TabularObject does not know or care about its logical relation to other
             objects (for example, through DisplayFolders in a specific culture). TabularObjects only care
             about their physical relations which are inherited from the Tabular Object Model directly (i.e.,
             a measure belongs to a table, etc.).
             </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.TabularTree.ModifyDisplayFolder(TabularEditor.TOMWrapper.Table,System.String,System.String,TabularEditor.TOMWrapper.Culture)">
-            <summary>
-            Updates the DisplayFolder property of all tabular objects within one table. Objects residing
-            in subfolders to the updated path, will also be updated.
-            </summary>
-            <param name="table">The table in which to perform the update</param>
-            <param name="oldPath">The current DisplayFolder (parent) path of the objecs</param>
-            <param name="newPath">The new DisplayFolder path, replacing oldPath</param>
-            <param name="culture">The culture to which the change should apply</param>
         </member>
         <member name="M:TabularEditor.TOMWrapper.TabularTree.OnNodesChanged(TabularEditor.TOMWrapper.ITabularObject)">
             <summary>

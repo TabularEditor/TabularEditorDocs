@@ -801,19 +801,59 @@
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.CustomAction(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)">
             <summary>
-            Executes the specified macro (known as "Custom Action" in Tabular Editor 2.x) on the current set of objects.
+            Run a macro on a selection of objects. Alias for <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Macro(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)"/>
             </summary>
-            <param name="selection"></param>
-            <param name="actionName"></param>
-            <exception cref="T:System.InvalidOperationException"></exception>
+            <param name="selection">The object selection on which the macro should run.</param>
+            <param name="macroName">Name of the macro. Use fully path of macro in case of ambiguity.</param>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.CustomAction(TabularEditor.TOMWrapper.ITabularNamedObject,System.String)">
             <summary>
-            Executes the specified macro (known as "Custom Action" in Tabular Editor 2.x) on the current set of objects.
+            Run a macro on an object. Alias for <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Macro(TabularEditor.TOMWrapper.ITabularNamedObject,System.String)"/>
             </summary>
-            <param name="selection"></param>
-            <param name="actionName"></param>
-            <exception cref="T:System.InvalidOperationException"></exception>
+            <param name="selection">The object on which the macro should be run.</param>
+            <param name="macroName">Name of the macro. Use fully path of macro in case of ambiguity.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.CustomAction(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Int32)">
+            <summary>
+            Run a macro on a selection of objects. Alias for <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Macro(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Int32)"/>
+            </summary>
+            <param name="selection">The object selection on which the macro should run.</param>
+            <param name="macroId">Id of the macro</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.CustomAction(TabularEditor.TOMWrapper.ITabularNamedObject,System.Int32)">
+            <summary>
+            Run a macro on an object. Alias for <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Macro(TabularEditor.TOMWrapper.ITabularNamedObject,System.Int32)"/>
+            </summary>
+            <param name="selection">The object on which the macro should be run.</param>
+            <param name="macroId">Id of the macro</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.Macro(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)">
+            <summary>
+            Run a macro on a selection of objects.
+            </summary>
+            <param name="selection">The object selection on which the macro should run.</param>
+            <param name="macroName">Name of the macro. Use fully path of macro in case of ambiguity.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.Macro(TabularEditor.TOMWrapper.ITabularNamedObject,System.String)">
+            <summary>
+            Run a macro on an object.
+            </summary>
+            <param name="selection">The object on which the macro should be run.</param>
+            <param name="macroName">Name of the macro. Use fully path of macro in case of ambiguity.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.Macro(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Int32)">
+            <summary>
+            Run a macro on a selection of objects.
+            </summary>
+            <param name="selection">The object selection on which the macro should run.</param>
+            <param name="macroId">Id of the macro</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.Macro(TabularEditor.TOMWrapper.ITabularNamedObject,System.Int32)">
+            <summary>
+            Run a macro on an object.
+            </summary>
+            <param name="selection">The object on which the macro should be run.</param>
+            <param name="macroId">Id of the macro</param>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.ExportProperties(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)">
             <summary>
@@ -1022,23 +1062,83 @@
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CustomAction(System.String)">
             <summary>
-            Invoke the custom action (aka. macro) with the given name.
+            Run a macro. Alias for <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(System.String)"/>.
             </summary>
-            <param name="actionName">Name of the custom action (macro)</param>
+            <param name="macroName">Name of the macro. Use fully path of macro in case of ambiguity.</param>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CustomAction(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)">
             <summary>
-            Invoke the custom action (aka. macro) on the given set of objects.
+            Run a macro on a selection of objects. Alias for <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)"/>
             </summary>
-            <param name="selection">A set of objects to be passed to the custom action as the current selection</param>
-            <param name="actionName">Name of the custom action (macro)</param>
+            <param name="selection">The object selection on which the macro should run.</param>
+            <param name="macroName">Name of the macro. Use fully path of macro in case of ambiguity.</param>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CustomAction(TabularEditor.TOMWrapper.ITabularNamedObject,System.String)">
             <summary>
-            Invoke the custom action (aka. macro) on the given object.
+            Run a macro on an object. Alias for <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(TabularEditor.TOMWrapper.ITabularNamedObject,System.String)"/>
             </summary>
-            <param name="selection">An object to be passed to the custom action as the current selection</param>
-            <param name="actionName">Name of the custom action (macro)</param>
+            <param name="selection">The object on which the macro should be run.</param>
+            <param name="macroName">Name of the macro. Use fully path of macro in case of ambiguity.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CustomAction(System.Int32)">
+            <summary>
+            Run a macro. Alias for <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(System.Int32)"/>
+            </summary>
+            <param name="macroId">Id of the macro</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CustomAction(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Int32)">
+            <summary>
+            Run a macro on a selection of objects. Alias for <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Int32)"/>
+            </summary>
+            <param name="selection">The object selection on which the macro should run.</param>
+            <param name="macroId">Id of the macro</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CustomAction(TabularEditor.TOMWrapper.ITabularNamedObject,System.Int32)">
+            <summary>
+            Run a macro on an object. Alias for <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(TabularEditor.TOMWrapper.ITabularNamedObject,System.Int32)"/>
+            </summary>
+            <param name="selection">The object on which the macro should be run.</param>
+            <param name="macroId">Id of the macro</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(System.String)">
+            <summary>
+            Run a macro.
+            </summary>
+            <param name="macroName">Name of the macro. Use fully path of macro in case of ambiguity.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)">
+            <summary>
+            Run a macro on a selection of objects.
+            </summary>
+            <param name="selection">The object selection on which the macro should run.</param>
+            <param name="macroName">Name of the macro. Use fully path of macro in case of ambiguity.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(TabularEditor.TOMWrapper.ITabularNamedObject,System.String)">
+            <summary>
+            Run a macro on an object.
+            </summary>
+            <param name="selection">The object on which the macro should be run.</param>
+            <param name="macroName">Name of the macro. Use fully path of macro in case of ambiguity.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(System.Int32)">
+            <summary>
+            Run a macro.
+            </summary>
+            <param name="macroId">Id of the macro</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Int32)">
+            <summary>
+            Run a macro on a selection of objects.
+            </summary>
+            <param name="selection">The object selection on which the macro should run.</param>
+            <param name="macroId">Id of the macro</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Macro(TabularEditor.TOMWrapper.ITabularNamedObject,System.Int32)">
+            <summary>
+            Run a macro on an object.
+            </summary>
+            <param name="selection">The object on which the macro should be run.</param>
+            <param name="macroId">Id of the macro</param>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.ExportProperties(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)">
             <summary>

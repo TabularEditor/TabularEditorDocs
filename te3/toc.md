@@ -17,6 +17,7 @@
 ## Features
 ### @dax-editor
 ### @dax-scripts
+### @table-groups
 ### @csharp-scripts
 ### @perspective-editor
 ### @dax-debugger
