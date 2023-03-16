@@ -66,3 +66,15 @@ foreach(var table in Model.Tables)
     }
 }
 ```
+
+## Hiding Table Groups
+
+If you prefer to always see the full, ungrouped list of tables in the TOM Explorer, but you're collaborating with others on a model containing table group annotations, you can still disable table groups altogether, for your Tabular Editor 3 installation. This is done through the **Tools > Preferences** dialog. Navigate to the **TOM Explorer** page, then uncheck **Use table groups** under **Display and filtering**:
+
+![Table Groups Disable](../../images/table-groups-disable.png)
+
+> [!NOTE]
+> Even though you have disabled table groups as described above, tables in your model may still have the `TabularEditor_TableGroup` annotation assigned. If you wish to clear all such annotations from the model, you can use the following C# script:
+> ```csharp
+> foreach(var table in Model.Tables) table.TableGroup = null;
+> ```
