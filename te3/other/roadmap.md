@@ -8,14 +8,16 @@ updated: 2023-02-03
 
 Below is an overview of major new features to be shipped with Tabular Editor 3 updates in the short- to long term:
 
-# [Planned for 2023 Q1](#tab/PlannedQ1)
-❎  Perspective Editor (view that can be opened when selecting one or more perspectives, allowing you to check/uncheck objects visible in those perspectives)
+# [Planned for 2023 Q2](#tab/PlannedQ1)
 
 &#9744; Metadata Translation Editor (view that can be opened when selecting one or more cultures, similar to the Tabular Translator tool)
 
 &#9744; Import Table Wizard support for Databricks (pending availability of REST endpoint for fetching metadata/schema)
 
-&#9744; Improved Support for Oracle Databases
+## Shipped in 2023
+❎  Perspective Editor (view that can be opened when selecting one or more perspectives, allowing you to check/uncheck objects visible in those perspectives)
+
+❎ Improved Support for Oracle Databases
 
 ❎  Import Table Wizard support for Power BI datamarts (Use Datamart SQL Endpoint)
 
