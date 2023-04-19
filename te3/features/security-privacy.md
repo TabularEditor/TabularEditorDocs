@@ -48,9 +48,9 @@ Tabular Editor may perform requests to online resources (web URLs) only in the f
 
 **Firewall allowlist / acceptlist**
 To allow traffic to the above mentioned web requests, you'll have to whitelist:
-- License activation / upgrade checks: https://api.tabulareditor.com
-- Usage telemetry / Error reports: https://*.in.applicationinsights.azure.com
-- DAX Formatter (Tabular Editor 2.x only): https://www.daxformatter.com
+- License activation / upgrade checks: **https://api.tabulareditor.com**
+- Usage telemetry / Error reports: **https://*.in.applicationinsights.azure.com**
+- DAX Formatter (Tabular Editor 2.x only): **https://www.daxformatter.com**
 - Import Best Practice Rules / C# Scripts: Depends on the context
 
 > [!NOTE]
