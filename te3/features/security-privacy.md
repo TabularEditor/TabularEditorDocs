@@ -46,6 +46,13 @@ Tabular Editor may perform requests to online resources (web URLs) only in the f
 
 \***Any information we obtain through the license activation service, the usage telemetry or the error reports, is kept confidential. We will not share, publish or distribute the data collected in any way, shape or form.**
 
+**Firewall allowlist / acceptlist**
+To allow traffic to the above mentioned web requests, you'll have to whitelist:
+- License activation / upgrade checks: **https://api.tabulareditor.com**
+- Usage telemetry / Error reports: **https://*.in.applicationinsights.azure.com**
+- DAX Formatter (Tabular Editor 2.x only): **https://www.daxformatter.com**
+- Import Best Practice Rules / C# Scripts: Depends on the context
+
 > [!NOTE]
 > A system administrator may enforce certain [policies](https://docs.tabulareditor.com/common/policies.html), which can be used to disable some or all of the features shown on the list above.
 
