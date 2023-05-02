@@ -119,9 +119,6 @@ The **Advanced Scripting** feature of Tabular Editor 2.x has carried over to Tab
 
 Most importantly, Tabular Editor 3 features a **Macro recorder** that you can use to automatically generate C# code from user interactions.
 
-> [!NOTE]
-> At the time of writing, the C# script editor in Tabular Editor 3 does not include IntelliSense-like featurs. This is scheduled for release at a later time.
-
 To learn more, see @cs-scripts-and-macros.
 
 ### DAX Scripting
