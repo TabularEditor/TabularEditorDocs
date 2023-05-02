@@ -1,6 +1,6 @@
 ﻿# Advanced Features
 
-In addition to the features mentioned in the [Features at a glance](/Features-at-a-glance) article, Tabular Editor also supports the following features for advanced usage.
+In addition to the features mentioned in the [Features at a glance](/te2/Features-at-a-glance) article, Tabular Editor also supports the following features for advanced usage.
 
 ## Replace tables
 As of version 2.7, you can now replace a table simply by copying (CTRL+C) one table - even from another instance of Tabular Editor - and then selecting the table you want to replace, before hitting paste (CTRL+V). A prompt will ask you to confirm whether you really want to replace the table ("Yes"), insert as a new table ("No") or cancel the operation entirely:
@@ -10,7 +10,7 @@ As of version 2.7, you can now replace a table simply by copying (CTRL+C) one ta
 If you choose "Yes", the selected table will be replaced with the table in the clipboard. Furthermore, all relationships pointing to or from that table will be updated to use the new table. For this to work, columns participating in relationships must have the same name and data type in both the original table, and the inserted table.
 
 ## Roles and Row-Level Security
-As of version 2.1, Roles are now visible in the Explorer Tree. You can right-click the tree to create new roles, delete or duplicate existing roles. You can view and edit the members of each role, by locating the role in the Explorer Tree, and navigating to the "Role Members" property in the Property Grid. Note that when deploying, the [Deployment Wizard](/Advanced-features#deployment-wizard) does not deploy role members by default.
+As of version 2.1, Roles are now visible in the Explorer Tree. You can right-click the tree to create new roles, delete or duplicate existing roles. You can view and edit the members of each role, by locating the role in the Explorer Tree, and navigating to the "Role Members" property in the Property Grid. Note that when deploying, the [Deployment Wizard](/te2/Advanced-features#deployment-wizard) does not deploy role members by default.
 
 The biggest advantage of working with Roles through Tabular Editor, is that each Table object has a "Row Level Filters" property, which lets you view and edit the filters defined on that table, across all roles:
 
@@ -25,7 +25,7 @@ TODO
 ## DAX Expression Editor
 TODO
 ## Script Editor
-TODO (For now, please view [this article](/Advanced-Scripting))
+TODO (For now, please view [this article](/te2/Advanced-Scripting))
 ## Scripting/referencing objects
 You can use drag-and-drop functionality, to script out objects in the following ways:
 
