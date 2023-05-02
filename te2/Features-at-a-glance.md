@@ -3,7 +3,7 @@
 The following article will give you a quick overview of the most important features of Tabular Editor.
 
 ## Load/save Model.bim files
-Hitting CTRL+O shows an Open File dialog, which lets you select a Model.bim file to load in Tabular Editor. The file must be of Compatibility Level 1200 or newer (JSON format). CTRL+S saves any changes you make in Tabular Editor back to the file (we recommend backing up your Model.bim files before using Tabular Editor). If you want to deploy the loaded model to an Analysis Services server instance, see [Deployment](/Features-at-a-glance#deployment) below.
+Hitting CTRL+O shows an Open File dialog, which lets you select a Model.bim file to load in Tabular Editor. The file must be of Compatibility Level 1200 or newer (JSON format). CTRL+S saves any changes you make in Tabular Editor back to the file (we recommend backing up your Model.bim files before using Tabular Editor). If you want to deploy the loaded model to an Analysis Services server instance, see [Deployment](/te2/Features-at-a-glance#deployment) below.
 
 ## Connect/deploy to SSAS Tabular Databases
 Hitting CTRL+SHIFT+O lets you open a Tabular Model directly from a Tabular Database that has already been deployed. Enter the server address and (optionally) provide a username and password. After hitting "OK", you will be prompted with a list of databases and the server. Select the one you want to load, and click "OK" again. 
@@ -17,7 +17,7 @@ Any time you press CTRL+S after the database has been loaded, the database will 
 If you want to save the connected model to a Model.bim file, choose "Save As..." from the "File" menu.
 
 ## Deployment
-If you want to deploy the currently loaded model to a new database, or overwrite an existing database with the model changes (for example when loading from a Model.bim file), use the Deployment Wizard under "Model" > "Deploy...". The wizard will guide you through the deployment process, and allow you to choose which areas of the model to deploy. More information can be found [here](/Advanced-features#deployment-wizard).
+If you want to deploy the currently loaded model to a new database, or overwrite an existing database with the model changes (for example when loading from a Model.bim file), use the Deployment Wizard under "Model" > "Deploy...". The wizard will guide you through the deployment process, and allow you to choose which areas of the model to deploy. More information can be found [here](/te2/Advanced-features#deployment-wizard).
 
 ## Hierarchical display
 Objects of the loaded model are shown in the Explorer Tree, on the left side of the screen. By default, all object types (visible tables, roles, relationships, etc.) are shown. If you only want to see tables, measures, columns and hierarchies, go to the "View" menu and toggle off "Show all object types".
@@ -28,14 +28,14 @@ Expanding a table in the "Tables" group, you will find the measures, columns and
 
 ![](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/DisplayFolders.png)
 
-Use the buttons immediately above the Explorer Tree, to toggle invisible objects, display folders, measures, columns and hierarchies, or to filter objects by name. You can rename an object by selecting it in then hitting F2. This also works for display folders. If you double-click a measure or calculated column, you may edit its [DAX expression](/Advanced-features#dax-expression-editor). Right-clicking will show a context menu, providing a range of handy shortcuts for operations such as setting visibility, perspective inclusion, adding columns to a hierarchy, etc.
+Use the buttons immediately above the Explorer Tree, to toggle invisible objects, display folders, measures, columns and hierarchies, or to filter objects by name. You can rename an object by selecting it in then hitting F2. This also works for display folders. If you double-click a measure or calculated column, you may edit its [DAX expression](/te2/Advanced-features#dax-expression-editor). Right-clicking will show a context menu, providing a range of handy shortcuts for operations such as setting visibility, perspective inclusion, adding columns to a hierarchy, etc.
 
 ## Editing properties
 The Property Grid on the lower right side of the screen, shows most of the properties for the object(s) selected in the Explorer Tree. If you select multiple objects at once, the Property Grid lets you simultaneously edit properties for the selected objects. This is useful for example when setting the Format String property. Examples of properties you can set through the Property Grid:
 
 * Name (you can rename objects directly in the Explorer Tree by hitting F2)
 * Description
-* Display Folder (can also be renamed directly in the Explorer Tree, also [drag/drop](/Features-at-a-glance#drag-and-drop-objects))
+* Display Folder (can also be renamed directly in the Explorer Tree, also [drag/drop](/te2/Features-at-a-glance#drag-and-drop-objects))
 * Hidden (can be set for multiple objects through the right-click context menu in the Explorer Tree)
 * Format String
 
@@ -58,7 +58,7 @@ Notice how the display folder property of every single object below the folder i
 (This works with translations too!)
 
 ## Working with Perspectives and Translations
-You can add/edit existing perspectives and translations (cultures), by clicking the Model node in the Explorer Tree, and locating the relevant properties at the bottom of the property grid. Alternatively, when your Explorer Tree is [showing all object types](/Features-at-a-glance#hierarchical-display), you can view and edit perspectives, cultures and roles directly in the tree.
+You can add/edit existing perspectives and translations (cultures), by clicking the Model node in the Explorer Tree, and locating the relevant properties at the bottom of the property grid. Alternatively, when your Explorer Tree is [showing all object types](/te2/Features-at-a-glance#hierarchical-display), you can view and edit perspectives, cultures and roles directly in the tree.
 
 ![](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/RolesPerspectivesTranslations.png)
 
