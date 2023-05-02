@@ -826,9 +826,12 @@ var GetDatabase = new Func<string, string>(m => split(m)[1]);  // Database name 
 // with the ones specified in environment variables:
 foreach(var p in Model.AllPartitions.OfType<MPartition>())
 {
-    var oldServer = "\"" + GetServer(p.Expression) + "\"";
-    var oldDatabase = "\"" + GetDatabase(p.Expression) + "\"";
-    p.Expression = p.Expression.Replace(oldServer, server).Replace(oldDatabase, database);
+    if (p.Expression.Contains("Source = Sql.Database"))
+        {
+            var oldServer = "\"" + GetServer(p.Expression) + "\"";
+            var oldDatabase = "\"" + GetDatabase(p.Expression) + "\"";
+            p.Expression = p.Expression.Replace(oldServer, server).Replace(oldDatabase, database);
+       }
 }
 ```
 
