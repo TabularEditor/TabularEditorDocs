@@ -133,7 +133,7 @@ __Note:__ Follow the below process to configure 'Detect Data Changes':
 //    equals the maximum value in the column across the entire table
 let
     #"maxLastUpdate" =
-        List.max(
+        List.Max(
             // Replace the below with your column and table name
             Orders[LastUpdate] 
         ),
