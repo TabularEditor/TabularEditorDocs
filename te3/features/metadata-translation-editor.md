@@ -1,6 +1,6 @@
 ﻿---
 uid: metadata-translation-editor
-title: Perspective Editor
+title: Metadata Translation Editor
 author: Šarūnas Jučius
 updated: 2023-04-18
 applies_to:
