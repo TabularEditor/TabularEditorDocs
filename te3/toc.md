@@ -20,7 +20,6 @@
 ### @table-groups
 ### @csharp-scripts
 ### @perspective-editor
-### @metadata-translation-editor
 ### @dax-debugger
 ## @supported-files
 ## @preferences
