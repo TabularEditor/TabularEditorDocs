@@ -2,7 +2,7 @@
 uid: downloads
 title: All downloads
 author: Daniel Otykier
-updated: 2023-5-17
+updated: 2023-5-22
 ---
 # Tabular Editor 3 Downloads
 
@@ -10,12 +10,12 @@ This page provides download and installation instructions for Tabular Editor 3.
 
 ## Production builds
 
-- Latest production release (x64): [TabularEditor.3.7.0.Installer.x64.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.Installer.x64.exe)
-- Latest production release (x86): [TabularEditor.3.7.0.Installer.x86.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.Installer.x86.exe)
-- Portable version: [TabularEditor.3.7.0.x64.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.x64.zip), [TabularEditor.3.7.0.x86.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.x86.zip)
-- MSI version: [TabularEditor.3.7.0.x64.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.x64.msi), [TabularEditor.3.7.0.x86.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.x86.msi)
+- Latest production release (x64): [TabularEditor.3.7.1.Installer.x64.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.Installer.x64.exe)
+- Latest production release (x86): [TabularEditor.3.7.1.Installer.x86.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.Installer.x86.exe)
+- Portable version: [TabularEditor.3.7.1.x64.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.x64.zip), [TabularEditor.3.7.1.x86.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.x86.zip)
+- MSI version: [TabularEditor.3.7.1.x64.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.x64.msi), [TabularEditor.3.7.1.x86.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.x86.msi)
 
-Read the [latest release notes](release-notes/3_7_0.md).
+Read the [latest release notes](release-notes/3_7_1.md).
 
 ## Installation Instructions
 
@@ -27,13 +27,13 @@ It is not necessary to remove previous installations when upgrading to a newer v
 
 ## History
 
-- 2023-05-17 **Tabular Editor 3.7.0** (*[Release notes](release-notes/3_7_0.md)*)
-  - [TabularEditor.3.7.0.Installer.x64.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.Installer.x64.exe)
-  - [TabularEditor.3.7.0.Installer.x86.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.Installer.x86.exe)
-  - [TabularEditor.3.7.0.x64.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.x64.zip)
-  - [TabularEditor.3.7.0.x86.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.x86.zip)
-  - [TabularEditor.3.7.0.x64.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.x64.msi)
-  - [TabularEditor.3.7.0.x86.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.7.0.x86.msi)
+- 2023-05-22 **Tabular Editor 3.7.1** (*[Release notes](release-notes/3_7_1.md)*)
+  - [TabularEditor.3.7.1.Installer.x64.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.Installer.x64.exe)
+  - [TabularEditor.3.7.1.Installer.x86.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.Installer.x86.exe)
+  - [TabularEditor.3.7.1.x64.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.x64.zip)
+  - [TabularEditor.3.7.1.x86.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.x86.zip)
+  - [TabularEditor.3.7.1.x64.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.x64.msi)
+  - [TabularEditor.3.7.1.x86.msi](https://cdn.tabulareditor.com/files/TabularEditor.3.7.1.x86.msi)
 - 2023-04-19 **Tabular Editor 3.6.0** (*[Release notes](release-notes/3_6_0.md)*)
   - [TabularEditor.3.6.0.Installer.x64.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.6.0.Installer.x64.exe)
   - [TabularEditor.3.6.0.Installer.x86.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.6.0.Installer.x86.exe)
