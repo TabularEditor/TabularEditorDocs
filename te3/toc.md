@@ -23,6 +23,7 @@
 ### @metadata-translation-editor
 ### @dax-debugger
 ## @supported-files
+### @tmdl
 ## @preferences
 ## @shortcuts
 ## @user-options

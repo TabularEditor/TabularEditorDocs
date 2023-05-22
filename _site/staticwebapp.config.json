@@ -21,6 +21,11 @@
             "statusCode": 301
         },
         {
+            "route": "/tmdl",
+            "redirect": "/te3/features/tmdl.html",
+            "statusCode": 301
+        },
+        {
             "route": "/roslyn",
             "redirect": "/te3/features/roslyn.html",
             "statusCode": 301
