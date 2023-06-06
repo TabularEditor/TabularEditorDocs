@@ -21,6 +21,12 @@ To use this feature, locate the objects for which you would like to generate a s
 
 Editing objects through a DAX script is slightly different than editing through the **Expression Editor**. With the latter, changes are applied immediately when you navigate to a different object. In a DAX script, however, changes are not applied until you explicitly do so by using the **Script > Apply** (F5) option. If you are connected to an instance of Analysis Services, you can use the **Script > Apply & Sync** (SHIFT+F5) option to simultaneously apply the changes and save the updated model metadata to Analysis Services.
 
+You can undo/redo changes made by a DAX script using the usual keyboard shortcuts (Ctrl+Z / Ctrl+Y).
+
+## Multiple DAX scripts
+
+You can create as many DAX scripts as you want, if you prefer to have multiple document windows open instead of a single one. This way, you can use the usual IDE features to place the documents side by side, on different monitors, etc. Be aware, that the code within DAX script windows is not updated automatically when changes are made to the object expression/properties in the TOM. So in other words, if you have two or more DAX scripts containing the definition of the same object(s), then the last script to be applied (F5), will always override any changes made through other DAX scripts, or directly through the **Properties View**.
+
 ## Working with DAX script files
 
 DAX scripts can be saved as text files, using the `.te3daxs` file extension. To save a DAX script as a file, simply use the **File > Save** (Ctrl+S) option. To open a DAX script from a text file, use the **File > Open > File...** (Ctrl+O) option.
