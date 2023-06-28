@@ -33,7 +33,7 @@ To access the preferences dialog, go to **Tools > Preferences**.
 
 - **Scan for Best Practice violations in the background** If unchecked, you will have to explicitly run a Best Practice Analysis from inside the Best Practice Analyzer tool window, to view if there are any violations. If checked, the scan happens continuously on a background thread whenever changes are made. For very large models, or models with very complex Best Practice rules, this may cause issues.
 
-## Tabular Editor > Updated and Feedback
+## Tabular Editor > Updates and Feedback
 
 ![image](https://user-images.githubusercontent.com/8976200/104601469-92926a80-567a-11eb-9499-1d1c8d967c72.png)
 
