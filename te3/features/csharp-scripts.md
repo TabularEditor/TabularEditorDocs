@@ -154,11 +154,11 @@ The dialog will appear in one of four different ways, depending on the kind of o
 
 - Singular objects (such as strings, ints and DateTimes, except any object that derives from TabularNamedObject) will be displayed as a simple message dialog, by invoking the `.ToString()` method on the object:
 
-![image](https://user-images.githubusercontent.com/8976200/29941982-9917d0cc-8e94-11e7-9e78-24aaf11fd311.png)
+![image](https://github.com/TabularEditor/TabularEditorDocs/assets/45298358/39dd0e26-1c2d-4149-9c49-6243064cf030)
 
-- Singular TabularNamedObjects (such as Tables, Measures or any other TOM NamedMetadataObject available in Tabular Editor) will be shown in a Property Grid, similar to when an object has been selected in the Tree Explorer. Properties on the object may be edited in the grid, but note that if an error is encountered at a later point in the script execution, the edit will be automatically undone, if "Rollback on error" is enabled:
+- Singular TabularNamedObjects (such as Tables, Measures or any other TOM NamedMetadataObject available in Tabular Editor) will be shown in a Property Grid, similar to when an object has been selected in the Tree Explorer. Properties on the object may be edited in the grid, but note that if an error is encountered at a later point in the script execution, the edit will be automatically undone, if "Auto-Rollback" is enabled:
 
-![image](https://user-images.githubusercontent.com/8976200/29941852-2acc9846-8e94-11e7-9380-f84fef26a78c.png)
+![image](https://github.com/TabularEditor/TabularEditorDocs/assets/45298358/5737b054-1546-4677-b9bf-279667c5af95)
 
 - Any IEnumerable of objects (except TabularNamedObjects) will be displayed in a list, where each list item shows the `.ToString()` value and type of the object in the IEnumerable:
 
