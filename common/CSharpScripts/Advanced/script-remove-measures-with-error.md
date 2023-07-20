@@ -7,7 +7,7 @@ applies_to:
   versions:
     - version: 3.x
 ---
-# Create M Partition
+# View/Remove Measures with Errors
 
 ## Script Purpose
 If you want to see all the measures that have errors and have the option to delete them from the model, saving a back-up .tsv of the deleted measures to a selected directory (in case you want to re-add them, later).
