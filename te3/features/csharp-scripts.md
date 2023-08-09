@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2021-09-08
+updated: 2023-08-09
 applies_to:
   editions:
     - edition: Desktop
@@ -154,19 +154,19 @@ The dialog will appear in one of four different ways, depending on the kind of o
 
 - Singular objects (such as strings, ints and DateTimes, except any object that derives from TabularNamedObject) will be displayed as a simple message dialog, by invoking the `.ToString()` method on the object:
 
-![image](https://github.com/TabularEditor/TabularEditorDocs/assets/45298358/39dd0e26-1c2d-4149-9c49-6243064cf030)
+![C-sharp Output](../../images/c-sharp-script-output-function)
 
 - Singular TabularNamedObjects (such as Tables, Measures or any other TOM NamedMetadataObject available in Tabular Editor) will be shown in a Property Grid, similar to when an object has been selected in the Tree Explorer. Properties on the object may be edited in the grid, but note that if an error is encountered at a later point in the script execution, the edit will be automatically undone, if "Auto-Rollback" is enabled:
 
-![image](https://github.com/TabularEditor/TabularEditorDocs/assets/45298358/5737b054-1546-4677-b9bf-279667c5af95)
+![C-sharp Output](../../images/c-sharp-script-auto-rollback)
 
 - Any IEnumerable of objects (except TabularNamedObjects) will be displayed in a list, where each list item shows the `.ToString()` value and type of the object in the IEnumerable:
 
-![image](https://user-images.githubusercontent.com/8976200/29942113-02dad928-8e95-11e7-9c04-5bb87b396f3f.png)
+![C-sharp Output](../../images/c-sharp-script-output-to-string-function.png)
 
 - Any IEnumerable of TabularNamedObjects will cause the dialog to display a list of the objects on the left, and a Property Grid on the right. The Property Grid will be populated from whatever object is selected in the list, and properties may be edited just as when a single TabularNamedObject is being output:
 
-![image](https://user-images.githubusercontent.com/8976200/29942190-498cbb5c-8e95-11e7-8455-32750767cf13.png)
+![C-sharp Output](../../images/c-sharp-script-output-function-enumerated.png)
 
 You can tick the "Don't show more outputs" checkbox at the lower left-hand corner, to prevent the script from halting on any further `.Output()` invocations.
 
