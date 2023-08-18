@@ -25,22 +25,32 @@ To save your model to folder, follow these steps:
 
 
 ## Serialization settings
-The serialisation settings defines how the model objects are split into seperate files. In these settings you can also define if you wish to use JSON or TMDL formats.
-
+The serialization settings defines how the model objects are split into separate files. In these settings you can also define if you wish to use JSON or TMDL formats.
 > [!NOTE]
 >JSON is the default format as TMDL is currently in preview. 
 
 
 ### [Tabular Editor 2 Preferences](#tab/TE2Preferences)
-Serialisation settings are found under File > Preferences > Serialization 
+Serialization settings are found under File > Preferences > Serialization 
 ![TE2 Preferences](~/images/common/TE2SaveToFolderSerializationSettings.png)
 
 The settings shown above are those set as default when using Tabular Editor 3, but are not those that are set per default by Tabular Editor 2.X
 
 ### [Tabular Editor 3 Preferences](#tab/TE3Preferences)
-Serialisation settings are found under Tools > Preferences > File Formats
+Serialization settings are found under Tools > Preferences > File Formats
 The tabs General and Save-to-folder contains settings regarding the serialization of the model. 
 
 ![TE3 Preferences](~/images/common/TE3SaveToFolderSerializationSettings.png)
 
 Tabular Editor 3 has a default setting for JSON serialization and you must actively choose a different setting in serialization mode, which is also where you change to the TMDL format. 
+***
+### Serialization Model Annotation
+Tabular Editor saves the serialization settings on your model so that they will always stay the same no matter who is working on the model. This ensures that a developer's local preferences do not overwrite model's setting and lead to a unmanageable merge in your source control. You can find these annotations in the TOM Explorer properties of the Model > Annotations > TabularEditor_SerializeOptions
+![TE3 Preferences](~/images/common/SaveToFolderModelAnnotation.png)
+
+
+#### Overwriting Model Serialization
+The model's annotation can be overwritten if so desired. First set up the serialization preferences inside Tabular Editor and go to File > Save to Folder. 
+This open up Windows Explorer and here the ticket button needs to be unselected. 
+
+![TE3 Preferences](~/images/common/SaveToFolderOverwriteModelAnnotation.png)
