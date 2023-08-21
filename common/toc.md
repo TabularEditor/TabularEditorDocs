@@ -4,6 +4,13 @@
 ## [Save to folder](save-to-folder.md)
 ## [Best Practice Analyzer](xref:using-bpa)
 ### [BPA Sample Rules Expression](xref:using-bpa-sample-rules-expressions)
+## [Dataset Types](Datasets/dataset-types.md)
+### [Direct Lake Datasets](Datasets/direct-lake-dataset.md)
+
+
+
+
+
 # C#/Advanced Scripting
 
 ## @csharp-script-library
