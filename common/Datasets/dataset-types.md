@@ -18,36 +18,32 @@ applies_to:
 
 Tabular Editor can work with several different dataset types. Bellow is an overview of which dataset types work with Tabular Editor and the capabilities that can be used with each dataset type. 
 
-
-|Dataset Type|Import|Direct Lake (Standalone) | Direct Lake (Default)|PBIX|PBIP|
+|Capability|Import|Direct Lake (Standalone) | Direct Lake (Default)|PBIX|PBIP|
 |---|---|---|---|---|
 |Connect in Tabular Editor|✔️|✔️|❌|✔️|✔️|
 |Create new dataset|✔️|❌|--|✔️|✔️|
 |Write Measures|✔️|✔️|--|✔️|✔️|
-|Create Tables|✔️|✔️^1|--|✔️|✔️|
-|Create Partitions|✔️|✔️^1|--|✔️|✔️|
+|Create Tables|✔️|✔️^1|--|❌|✔️|
+|Create Partitions|✔️|✔️^1|--|❌|✔️|
 |Create Calculated Tables|✔️|❌|--|✔️|✔️|
-|Create Calc. Columns|✔️|❌|--|✔️|✔️|
+|Create Calculated Columns|✔️|❌|--|✔️|✔️|
 |Create Calculation Groups|✔️|❌|--|✔️|✔️|
 |Create Relationships|✔️|✔️|--|✔️|✔️|
 |Create Roles|✔️|❌|--|✔️|✔️|--
 |Create Perspectives|✔️|✔️|--|✔️|✔️|
 |Create Translations|✔️|✔️|--|✔️|✔️|
-|Create Diagrams**|✔️|✔️|--|✔️|✔️|
-|Use Preview Data**|✔️|✔️|--|✔️|✔️|
-|Use Pivot Grids**|✔️|✔️|--|✔️|✔️|
-|Use DAX Queries**|✔️|✔️|--|✔️|✔️|
-|Use DAX Debugger**|✔️|✔️|--|✔️|✔️|
-|Use Vertipac Analyser**|✔️|✔️|--|✔️|✔️|
+|Use Diagrams^2|✔️|✔️|--|✔️|✔️|
+|Use Preview Data^2|✔️|✔️|--|✔️|✔️|
+|Use Pivot Grids^2|✔️|✔️|--|✔️|✔️|
+|Use DAX Queries^2|✔️|✔️|--|✔️|✔️|
+|Use DAX Debugger^2|✔️|✔️|--|✔️|✔️|
+|Use Vertipac Analyser^2|✔️|✔️|--|✔️|✔️|
 |Use Best Practice Analyser|✔️|✔️|--|✔️|✔️|
-|Process Model and Tables**|✔️|N/A|--|❌|❌|
+|Process Model and Tables^2|✔️|N/A|--|❌|❌|
 |Delete Objects|✔️|✔️|--|✔️|✔️|
 
-
-
-** Tabular Editor 3 features, some dataset such a Direct Lake requires Enterprise license. 
-
 [^1] The partition must be an Entity Partition to work correctly.
+[^2] Tabular Editor 3 features only. Operations performed through the XMLA endpoint requires a Business or Enterprise license. [More information](xref:editions).
 
 ## Unsupported Dataset
 
