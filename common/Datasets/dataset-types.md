@@ -18,35 +18,40 @@ applies_to:
 
 Tabular Editor can work with several different dataset types. Bellow is an overview of which dataset types work with Tabular Editor and the capabilities that can be used with each dataset type. 
 
-|Capability|Import|Direct Lake (Standalone) | Direct Lake (Default)|PBIX|PBIP|
+
+|Dataset Type|Import|Direct Lake (Standalone) | Direct Lake (Default)|PBIX|PBIP|
 |---|---|---|---|---|
 |Connect in Tabular Editor|✔️|✔️|❌|✔️|✔️|
 |Create new dataset|✔️|❌|--|✔️|✔️|
 |Write Measures|✔️|✔️|--|✔️|✔️|
-|Create Tables|✔️|✔️^1|--|❌|✔️|
-|Create Partitions|✔️|✔️^1|--|❌|✔️|
-|Create Calculated Tables|✔️|❌|--|✔️|✔️|
-|Create Calculated Columns|✔️|❌|--|✔️|✔️|
-|Create Calculation Groups|✔️|❌|--|✔️|✔️|
-|Create Relationships|✔️|✔️|--|✔️|✔️|
-|Create Roles|✔️|❌|--|✔️|✔️|--
-|Create Perspectives|✔️|✔️|--|✔️|✔️|
-|Create Translations|✔️|✔️|--|✔️|✔️|
-|Use Diagrams^2|✔️|✔️|--|✔️|✔️|
-|Use Preview Data^2|✔️|✔️|--|✔️|✔️|
-|Use Pivot Grids^2|✔️|✔️|--|✔️|✔️|
-|Use DAX Queries^2|✔️|✔️|--|✔️|✔️|
-|Use DAX Debugger^2|✔️|✔️|--|✔️|✔️|
-|Use Vertipac Analyser^2|✔️|✔️|--|✔️|✔️|
-|Use Best Practice Analyser|✔️|✔️|--|✔️|✔️|
-|Process Model and Tables^2|✔️|N/A|--|❌|❌|
+|Create & Edit Tables|✔️|✔️<sup>[1](#DirectLake)</sup>|--|❌|✔️|
+|Create & Edit Partitions|✔️|✔️<sup>[1](#DirectLake)</sup>|--|❌|✔️|
+|Create & Edit Columns|✔️|✔️<sup>[1](#DirectLake)</sup>|--|✔️|✔️|
+|Create & Edit Calculated Tables|✔️|❌|--|✔️|✔️|
+|Create & Edit Calculated Columns|✔️|❌|--|✔️|✔️|
+|Create & Edit Calculation Groups|✔️|❌|--|✔️|✔️|
+|Create & Edit Relationships|✔️|✔️|--|✔️|✔️|
+|Create & Edit Roles|✔️|❌|--|✔️|✔️|--
+|Create & Edit Perspectives|✔️|✔️|--|✔️|✔️|
+|Create & Edit Translations|✔️|✔️|--|✔️|✔️|
+|Use Best Practice Analyzer|✔️|✔️|--|✔️|✔️|
+|Create Diagrams<sup>[2](#TE3Prem)</sup>|✔️|✔️|--|✔️|✔️|
+|Use Preview Data<sup>[2](#TE3Prem)</sup>|✔️|✔️|--|✔️|✔️|
+|Use Pivot Grids<sup>[2](#TE3Prem)</sup>|✔️|✔️|--|✔️|✔️|
+|Use DAX Queries<sup>[2](#TE3Prem)</sup>|✔️|✔️|--|✔️|✔️|
+|Use DAX Debugger<sup>[2](#TE3Prem)</sup>|✔️|✔️|--|✔️|✔️|
+|Use Vertipac Analyzer<sup>[2](#TE3Prem)</sup>|✔️|✔️|--|✔️|✔️|
+|Process Model and Tables<sup>[2](#TE3Prem)</sup>|✔️|N/A|--|❌|❌|
 |Delete Objects|✔️|✔️|--|✔️|✔️|
 
-[^1] The partition must be an Entity Partition to work correctly.
-[^2] Tabular Editor 3 features only. Operations performed through the XMLA endpoint requires a Business or Enterprise license. [More information](xref:editions).
+
+
+
+<a name="DirectLake">1</a> - The partition must be an Entity Partition to work correctly.
+
+<a name="TE3Prem">2</a> - Tabular Editor 3 features only. Operations performed through the XMLA endpoint requires a Business or Enterprise license. [More information](xref:editions).
 
 ## Unsupported Dataset
-
 The following datasets types do not support XMLA write operations and can as such not be used by Tabular Editor.
 
 - Datasets based on a live connection to an Azure Analysis Services or SQL Server Analysis Services model.
