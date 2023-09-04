@@ -19,7 +19,7 @@ To save your model to folder, follow these steps:
 
 1. Click on File > Save To Folder
 2. Choose a folder where you want to save your model files. 
-3. Click on Save. Tabular Editor will create or update the files in the selected folder, using the JSON or TMDL format as specified in the [serialization settings](#Serialization-settings).
+3. Click on Save. Tabular Editor will create or update the files in the selected folder, using the JSON or TMDL format as specified in the serialization settings.
 4. You can now use the files in the folder for version control, deployment, or backup purposes.
 
 
