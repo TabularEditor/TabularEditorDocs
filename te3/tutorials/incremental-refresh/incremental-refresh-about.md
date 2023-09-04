@@ -168,6 +168,9 @@ In this configuration, not all records are refreshed in the <span style="color:#
 
 Typically, you use the Polling Expression on a DateTime column of a table to identify the latest date. If any records match that date, they'll be refreshed. A common example is using a column like [LastUpdateDt] to label records that were updated or added with the current DateTime value. Any records that have values equal to the latest [LastUpdateDt] are refreshed.
 
+> [!NOTE]
+> Records in archived partitions are _not_ refreshed.
+
 An example of a valid `Polling Expression` property is below. You can use this as a template when configuring _Detect Data Changes_ in your model from Tabular Editor:
 
 ```M
