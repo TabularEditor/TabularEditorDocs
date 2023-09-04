@@ -12,9 +12,7 @@ applies_to:
 ---
 # What is a Refresh Policy?
 
-
-![Incremental Refresh Visual Abstract](~/images/incremental-refresh-header.png)
-
+![Incremental Refresh Visual Abstract](../../../images/incremental-refresh-header.png)
 
 ---
 
@@ -22,12 +20,10 @@ Datasets hosted in the Power BI service can have [Incremental Refresh](https://l
 
 _Incremental refresh can be easily configured and modified from within Tabular Editor._
 
-<div class="NOTE">
-  <h5>WHY CONFIGURE INCREMENTAL REFRESH?</h5>
-  Configuring incremental refresh can be beneficial for your data model:  
-  <li> Reduce refresh time & resource consumption
-  <li> Experience shorter and more dependable scheduled refreshes
-</div>
+> [!NOTE]
+> Configuring incremental refresh can be beneficial for your data model:  
+> - Reduce refresh time & resource consumption
+> - Experience shorter and more dependable scheduled refreshes
 
 > [!IMPORTANT]
 > Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
@@ -40,7 +36,6 @@ To create the partitions, Power BI uses the `RangeStart` and `RangeEnd` _datetim
 
 An example is given below. Incremental Refresh is applied to a table _'Orders'_ upon the _[Order Date]_ column:
 
-<br></br>
 
 # [Filter Step Only](#tab/filterstep)
 ```M
@@ -106,39 +101,34 @@ in
 ```
 ***
 
-<div class="WARNING">
-  <h5>INCREMENTAL REFRESH IS DESIGNED FOR QUERY FOLDING</h5>
-  Incremental Refresh is <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding">designed</a> to be configured with data sources that support <a href="https://learn.microsoft.com/en-us/power-query/power-query-folding">Power Query query folding</a>.
-  Ideally, query folding should not be <a href="https://learn.microsoft.com/en-us/power-query/step-folding-indicators">broken</a> before the filter step is applied. There is no explicit requirement for the final query to fold, <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.">except when implementing Hybrid Tables using DirectQuery.</a> 
-</div>
+> [!WARNING]
+> Incremental refresh is designed for data sources that support [Power Query query folding](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding). Ideally, [query folding shouldn't be broken](https://learn.microsoft.com/en-us/power-query/step-folding-indicators) before the filter step is applied.
+> There's no explicit requirement for the final query to fold, except when implementing [Hybrid Tables](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.).
 
-The number, type and refresh behavior of table partitions depends on the configured table Refresh Policy.
+
 
 ---
 
 ### What is a Refresh Policy?
 
-A <span style="color:#01a99d">__Refresh Policy__</span> determines how the data is partitioned, and which of these Policy Range Partitions will be updated upon refresh. It consists of a set of table TOM properties which can be setup or changed.
+A _Refresh Policy_ determines how the data is partitioned, and which of these Policy Range Partitions will be updated upon refresh. It consists of a set of table TOM properties which can be setup or changed.
 
-<div class="WARNING">
-  <h5>POWER BI DESKTOP LIMITATIONS</h5>
-  <p>Configuring incremental refresh when connected to a local Power BI Desktop model is not supported.
-  To configure incremental refresh for a local Power BI Desktop model, use the Power BI Desktop user interface.</p>
-</div>
+> [!WARNING]
+> __Power BI Desktop limitations:__ Configuring incremental refresh when connected to a local Power BI Desktop model is not supported. To configure incremental refresh for a local Power BI Desktop model, use the Power BI Desktop user interface.
 
 ---
 
 ### Refresh Policy properties
 
-<img src="~/images/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
+<img src="../../../images/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
 
 Four different kinds of properties make up a basic Refresh Policy:
-1. <span style="color:#455C86">__Incremental Window__</span> __Properties__: The period window wherein data is <span style="color:#455C86">_kept up-to-date_</span>.
-2. <span style="color:#BC4A47">__Rolling Window__</span> __Properties__: The period window wherein data is <span style="color:#BC4A47">_archived_</span>.
-3. __Source Expressions__: Define table schema and Power Query transformations of the table.
+1. <span style="color:#455C86">__Incremental window__</span> __properties__: The period window wherein data is <span style="color:#455C86">_kept up-to-date_</span>.
+2. <span style="color:#BC4A47">__Rolling window__</span> __properties__: The period window wherein data is <span style="color:#BC4A47">_archived_</span>.
+3. __Source expressions__: Define table schema and Power Query transformations of the table.
 4. __Mode__: Whether `Import` or `Hybrid` tables are used.
 
-![Incremental Refresh Policy Windows](~/images/incremental-refresh-policy-windows.png)
+![Incremental Refresh Policy Windows](../../../images/incremental-refresh-policy-windows.png)
 
 ---
 
@@ -146,7 +136,7 @@ Four different kinds of properties make up a basic Refresh Policy:
 
 In Power BI Desktop, these properties are named differently. Below is an overview of how the properties match the Power BI Desktop user interface.
 
-![Incremental Refresh Policy Windows Properties](~/images/incremental-refresh-window-properties.png)
+![Incremental Refresh Policy Windows Properties](../../../images/incremental-refresh-window-properties.png)
 
 ---
 
@@ -155,36 +145,40 @@ In Power BI Desktop, these properties are named differently. Below is an overvie
 Depending on the configured properties, Incremental Refresh may function differently. Below is an overview of the different Incremental Refresh configurations:
 
 # [Standard (Import)](#tab/import)
-In the <span style="color:#01a99d">__*standard configuration*__</span> of Incremental Refresh, __all partitions are imported in-memory__. Partitions in the <span style="color:#BC4A47">_rolling window_</span> are archived, while those in the <span style="color:#455C86">_incremental window_</span> are refreshed. 
+In the standard configuration of Incremental Refresh, all partitions are imported in-memory. Partitions in the <span style="color:#BC4A47">rolling window</span> are archived, while those in the <span style="color:#455C86">incremental window</span> are refreshed. 
 
 # [Hybrid](#tab/hybrid)
-In the <span style="color:#01a99d">__*[hybrid](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)*__</span> configuration of Incremental Refresh, the latest policy range partition in the <span style="color:#455C86">_incremental window_</span> is queried in real time using DirectQuery.
+In the <span style="color:#01a99d">__*[hybrid](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)*__</span> configuration of Incremental Refresh, the latest policy range partition in the <span style="color:#455C86">incremental window</span> is queried in real time using DirectQuery.
 
 This is configured with the <em>Mode</em> property when set to <code>Hybrid</code>. 
 
-![Incremental Refresh Policy Windows](~/images/incremental-refresh-mode-pbi-match.png)
+![Incremental Refresh Policy Windows](../../../images/incremental-refresh-mode-pbi-match.png)
 
 # [Only Refresh Complete Periods](#tab/completeperiods)
-In this configuration, <span style="color:#01a99d">__*the policy range will not include the current period in the _rolling window_*__</span>. 
+In this configuration, the policy range will not include the current period in the <span style="color:#BC4A47">rolling window</span>. 
 
-In the standard configuration of Incremental Refresh, the current period is always in the <span style="color:#455C86">_incremental window_</span>. This might not be the desired behavior, as the data will change with each refresh. If the users do not expect to see partial data for a partial day, you can configure 'Only Refresh Complete Periods'.
+In the standard configuration of Incremental Refresh, the current period is always in the <span style="color:#455C86">incremental window</span>. This might not be the desired behavior, as the data will change with each refresh. If the users do not expect to see partial data for a partial day, you can configure 'Only Refresh Complete Periods'.
 
-This is configured with the <em>IncrementalPeriodsOffset</em> property. In the above example, a value of <code>-1</code> for an <em>IncrementalGranularity</em> of <code>Day</code> will exclude the current date from the <span style="color:#455C86">_incremental window_</span> and thus the data scope; only complete days will be refreshed.
+This is configured with the <em>IncrementalPeriodsOffset</em> property. In the above example, a value of <code>-1</code> for an <em>IncrementalGranularity</em> of <code>Day</code> will exclude the current date from the <span style="color:#455C86">incremental window</span> and thus the data scope; only complete days will be refreshed.
 
-![Incremental Refresh Policy Windows](~/images/incremental-refresh-period-offset-pbi-match.png)
+![Incremental Refresh Policy Windows](../../../images/incremental-refresh-period-offset-pbi-match.png)
 
 # [Detect Data Changes](#tab/datachanges)
-In configuration with Detect Data Changes, <span style="color:#01a99d">__*records in the archived partitions are refreshed if the value of a date column updates to the maximum value in that column.*__</span>
+In this configuration, not all records are refreshed in the <span style="color:#455C86">incremental window</span>. Instead, records are only refreshed if they change. Detect data changes can further optimize refresh performance when using incremental refresh. To identify data changes you use a _Polling Expression_. A Polling Expression is a separate property that expects a valid M Expression to identify a maximum date from a list of dates.
 
-The purpose of Detect Data Changes is to account for situations where historical data might still infrequently be updated. An example might be Order Lines data which receive a new Requested Delivery Date, or have their status changed to 'Cancelled'. Using Detect Data Changes, a single date column in the table is watched for changes. All records will be refreshed where the value equals the maximum value in that column, including those archived in the <span style="color:#BC4A47">_rolling window_</span>. For example with the column _[DateOfLastUpdate]_, if the latest value is 2023-01-08, all records with the value 2023-01-08 will be refreshed, even if they are in the archived, historical partitions of the <span style="color:#BC4A47">_rolling window_</span>. 
+Typically, you use the Polling Expression on a DateTime column of a table to identify the latest date. If any records match that date, they'll be refreshed. A common example is using a column like [LastUpdateDt] to label records that were updated or added with the current DateTime value. Any records that have values equal to the latest [LastUpdateDt] are refreshed.
 
-This is configured when the <em>Polling Expression</em> contains a valid M Expression that returns the maximum of a datetime column in the table. An example of a valid <em>Polling Expression</em> is below:
+> [!NOTE]
+> Records in archived partitions are _not_ refreshed.
+
+An example of a valid `Polling Expression` property is below. You can use this as a template when configuring _Detect Data Changes_ in your model from Tabular Editor:
+
 ```M
-// Retrieves the maximum value of the column [DateOfLastUpdate]
+// Retrieves the maximum value of the column [LastUpdateDt]
 let
     #"maxDateOfLastUpdate" =
         List.max(
-            Orders[DateOfLastUpdate]
+            Orders[LastUpdateDt]
         ),
 
     accountForNu11 =
@@ -195,19 +189,13 @@ in
     accountForNu11
 ```
 
-![Incremental Refresh Policy Windows](~/images/incremental-refresh-detect-changes-pbi-match.png)
+![Incremental Refresh Policy Windows](../../../images/incremental-refresh-detect-changes-pbi-match.png)
 
 ***
-
----
 
 #### Overview of all properties
 
 _Below is an overview of the TOM Properties in a data model used to configure Incremental Refresh:_
-
-<!-- Include Tippy.js JavaScript -->
-<script src="https://unpkg.com/popper.js@1"></script>
-<script src="https://unpkg.com/tippy.js@5"></script>
 
 <!-- Specific styling for the below table -->
 <style>
@@ -277,7 +265,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
                 <td class="formatting"><span id="pollingexpression"><b><em>PollingExpression</b><br />(Optional)</em></span></td>
                 <td class="formatting">Detect Data Changes</td>
                 <td class="formatting">The M Expression used to detect changes in a specific column such as <em>LastUpdateDate</em><br /><br>In Tabular Editor, <strong>the <em>Polling Expression</em> can be viewed and modified from the <em>Expression Editor</em> window</strong> by selecting it from the dropdown menu in the top-left.</td>.
-                <td class="formatting">A valid M Expression that returns a scalar value of the latest date in a column. All records in archive partitions containing that value for the column will be refreshed.</td>
+                <td class="formatting">A valid M Expression that returns a scalar value of the latest date in a column. All records in incremental window hot partitions containing that value for the column will be refreshed.<br><br>Records in archived partitions are <i>not</i> refreshed.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#BC4A47" id="rollinggranularity"><b><em>RollingWindowGranularity</b></em></span></td>
@@ -300,84 +288,3 @@ _Below is an overview of the TOM Properties in a data model used to configure In
         </tbody>
     </table>
 </div>
-
-<!-- Tippy dynamic tooltips -->
-<!-- Enable Refresh Policy Property -->
-<script>
-  tippy('#enablerefreshpolicy', {
-    content: '<img src="~/images/incremental-refresh-enable-refresh-policy-pbi.png" width=385.7px height=492.765px alt="image">',
-    followCursor: true,
-    arrow: true,
-    placement: 'left',
-  });
-</script>
-
-<!-- Incremental Granularity Property -->
-<script>
-  tippy('#incrementalgranularity', {
-    content: '<img src="~/images/incremental-refresh-incremental-granularity-pbi.png" width=385.7px height=492.765px alt="image">',
-    followCursor: true,
-    arrow: true,
-    placement: 'left',
-  });
-</script>
-
-<!-- Incremental Periods Property -->
-<script>
-  tippy('#incrementalperiods', {
-    content: '<img src="~/images/incremental-refresh-incremental-period-pbi.png" width=385.7px height=492.765px alt="image">',
-    followCursor: true,
-    arrow: true,
-    placement: 'left',
-  });
-</script>
-
-<!-- Incremental Periods Offset Property -->
-<script>
-  tippy('#incrementaloffset', {
-    content: '<img src="~/images/incremental-refresh-period-offset-pbi.png" width=385.7px height=492.765px alt="image">',
-    followCursor: true,
-    arrow: true,
-    placement: 'left',
-  });
-</script>
-
-<!-- Refresh Policy Mode Property -->
-<script>
-  tippy('#refreshpolicymode', {
-    content: '<img src="~/images/incremental-refresh-mode-pbi.png" width=385.7px height=492.765px alt="image">',
-    followCursor: true,
-    arrow: true,
-    placement: 'left',
-  });
-</script>
-
-<!-- Polling Expression Property -->
-<script>
-  tippy('#pollingexpression', {
-    content: '<img src="~/images/incremental-refresh-detect-changes-pbi.png" width=385.7px height=492.765px alt="image">',
-    followCursor: true,
-    arrow: true,
-    placement: 'left',
-  });
-</script>
-
-<!-- Rolling Window Granularity Property -->
-<script>
-  tippy('#rollinggranularity', {
-    content: '<img src="~/images/incremental-refresh-rolling-granularity-pbi.png" width=385.7px height=492.765px alt="image">',
-    followCursor: true,
-    arrow: true,
-    placement: 'left',
-  });
-</script>
-
-<!-- Rolling Window Periods Property -->
-<script>
-  tippy('#rollingperiods', {
-    content: '<img src="~/images/incremental-refresh-rolling-window-pbi.png" width=385.7px height=492.765px alt="image">',
-    followCursor: true,
-    arrow: true,
-    placement: 'left',
-  });
-</script>

@@ -79,7 +79,7 @@ Going back to the examples above, `map` is a lambda expression that takes a sing
 ## Working with the **Model** object
 To quickly reference any object in the currently loaded Tabular Model, you can drag and drop the object from the explorer tree and into the C# script editor:
 
-![Dragging and dropping an object into the C# script editor](~/images/drag-object-to-script.gif)
+![Dragging and dropping an object into the C# script editor](../../images/drag-object-to-script.gif)
 
 Please refer to the [TOM documentation](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) for an overview of which properties exist on the Model and its descendant objects. Additionally, refer to <xref:api-index> for a complete listing of the properties and methods exposed by the wrapper object.
 
@@ -154,11 +154,11 @@ The dialog will appear in one of four different ways, depending on the kind of o
 
 - Singular objects (such as strings, ints and DateTimes, except any object that derives from TabularNamedObject) will be displayed as a simple message dialog, by invoking the `.ToString()` method on the object:
 
-![C-sharp Output](../../images/c-sharp-script-output-function)
+![C-sharp Output](../../images/c-sharp-script-output-function.png)
 
 - Singular TabularNamedObjects (such as Tables, Measures or any other TOM NamedMetadataObject available in Tabular Editor) will be shown in a Property Grid, similar to when an object has been selected in the Tree Explorer. Properties on the object may be edited in the grid, but note that if an error is encountered at a later point in the script execution, the edit will be automatically undone, if "Auto-Rollback" is enabled:
 
-![C-sharp Output](../../images/c-sharp-script-auto-rollback)
+![C-sharp Output](../../images/c-sharp-script-auto-rollback.png)
 
 - Any IEnumerable of objects (except TabularNamedObjects) will be displayed in a list, where each list item shows the `.ToString()` value and type of the object in the IEnumerable:
 
