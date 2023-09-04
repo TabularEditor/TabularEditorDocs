@@ -265,7 +265,7 @@ _Below is an overview of the TOM Properties in a data model used to configure In
                 <td class="formatting"><span id="pollingexpression"><b><em>PollingExpression</b><br />(Optional)</em></span></td>
                 <td class="formatting">Detect Data Changes</td>
                 <td class="formatting">The M Expression used to detect changes in a specific column such as <em>LastUpdateDate</em><br /><br>In Tabular Editor, <strong>the <em>Polling Expression</em> can be viewed and modified from the <em>Expression Editor</em> window</strong> by selecting it from the dropdown menu in the top-left.</td>.
-                <td class="formatting">A valid M Expression that returns a scalar value of the latest date in a column. All records in archive partitions containing that value for the column will be refreshed.</td>
+                <td class="formatting">A valid M Expression that returns a scalar value of the latest date in a column. All records in incremental window hot partitions containing that value for the column will be refreshed.<br><br>Records in archived partitions are <i>not</i> refreshed.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#BC4A47" id="rollinggranularity"><b><em>RollingWindowGranularity</b></em></span></td>
