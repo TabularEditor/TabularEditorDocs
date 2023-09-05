@@ -79,7 +79,7 @@ Going back to the examples above, `map` is a lambda expression that takes a sing
 ## Working with the **Model** object
 To quickly reference any object in the currently loaded Tabular Model, you can drag and drop the object from the explorer tree and into the C# script editor:
 
-![Dragging and dropping an object into the C# script editor](~/images/drag-object-to-script.gif)
+![Dragging and dropping an object into the C# script editor](../../images/drag-object-to-script.gif)
 
 Please refer to the [TOM documentation](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) for an overview of which properties exist on the Model and its descendant objects. Additionally, refer to <xref:api-index> for a complete listing of the properties and methods exposed by the wrapper object.
 
@@ -154,11 +154,11 @@ The dialog will appear in one of four different ways, depending on the kind of o
 
 - Singular objects (such as strings, ints and DateTimes, except any object that derives from TabularNamedObject) will be displayed as a simple message dialog, by invoking the `.ToString()` method on the object:
 
-![C-sharp Output](../../images/c-sharp-script-output-function)
+![C-sharp Output](../../images/c-sharp-script-output-function.png)
 
 - Singular TabularNamedObjects (such as Tables, Measures or any other TOM NamedMetadataObject available in Tabular Editor) will be shown in a Property Grid, similar to when an object has been selected in the Tree Explorer. Properties on the object may be edited in the grid, but note that if an error is encountered at a later point in the script execution, the edit will be automatically undone, if "Auto-Rollback" is enabled:
 
-![C-sharp Output](../../images/c-sharp-script-auto-rollback)
+![C-sharp Output](../../images/c-sharp-script-auto-rollback.png)
 
 - Any IEnumerable of objects (except TabularNamedObjects) will be displayed in a list, where each list item shows the `.ToString()` value and type of the object in the IEnumerable:
 
@@ -218,34 +218,23 @@ In addition, the following .NET Framework assemblies are loaded by default:
 - TabularEditor.Exe
 - Microsoft.AnalysisServices.Tabular.Dll
 
-## Compiling with Roslyn
+## Compatibility
 
-If you prefer to compile your scripts using the new Roslyn compiler introduced with Visual Studio 2017, you can set this up under **Tools > Preferences > Tabular Editor > C# SCripts and Maros**. This allows you to use newer C# language features such as string interpolation. Simply specify the path to the directory that holds the compiler executable (`csc.exe`) and specify the language version as an option for the compiler:
+The scripting APIs for Tabular Editor 2 and Tabular Editor 3 are mostly compatible, however, there are cases where you want to conditionally compile code depending on which version you're using. For this, you can use preprocessor directives, which were introduced in Tabular Editor 3.10.0.
 
-![Custom Compiler Te3](~/images/custom-compiler-te3.png)
-
-### Visual Studio 2017
-
-For a typical Visual Studio 2017 Enterprise installation, the Roslyn compiler is located here:
-
-```
-c:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\Roslyn
-```
-
-This includes the C# 6.0 language features by default.
-
-![image](https://user-images.githubusercontent.com/8976200/92464584-a52cfc80-f1cd-11ea-9b66-3b47ac36f6c6.png)
-
-### Visual Studio 2019
-
-For a typical Visual Studio 2019 Community installation, the Roslyn compiler is located here:
-
-```
-c:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\Roslyn
+```csharp
+#if TE3
+    // This code will only be compiled when the script is running in TE3 (version 3.10.0 or newer).
+    Info("Hello from TE3!");
+#else
+    // This code will be compiled in all other cases.
+    Info("Hello from TE2!");
+#endif
 ```
 
-The compiler that ships with VS2019 supports C# 8.0 language features, which can be enabled by specifying the following as compiler options:
+If you need to know the exact version of Tabular Editor at script runtime, you can inspect the assembly version:
 
-```
--langversion:8.0
+```csharp
+var currentVersion = typeof(Model).Assembly.GetName().Version;
+Info(currentVersion.ToString());
 ```
