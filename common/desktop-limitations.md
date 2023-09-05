@@ -1,8 +1,32 @@
-# Power BI Desktop limitations
+---
+uid: desktop-limitations
+title: Power BI Desktop Limitations
+author: Morten Lønskov
+updated: 2023-08-21
+applies_to:
+  versions:
+    - version: 2.x
+    - version: 3.x
+  editions:
+    - edition: Desktop
+    - edition: Business
+    - edition: Enterprise
+---
 
-When using Tabular Editor (any edition) as an [external tool for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools), there are a number of limitations to be aware about. This article provides more details on these limitations.
+
+# Power BI Desktop limitations
+When using Tabular Editor (any edition) as an [external tool for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools), there are a few limitations to be aware about.
 
 The limitations mentioned in this article apply to Tabular Editor 2.x as well.
+
+> [!NOTE]
+> The June 2023 Power BI Desktop update has relaxed most of the limitations that previously existed and almost all operations against a Power BI Desktop dataset is now possible. With a few notable exceptions. We have preserved the pre June 2023 limitations inside this article. 
+
+## Unsupported Operations
+The limitations can be summarized to be the following, but please see bellow for further details. 
+
+The only objects in a dataset that cannot be changed are tables and columns. 
+
 
 ## Power BI file types
 
@@ -38,7 +62,34 @@ Once connected to the instance of Analysis Services, an external tool can obtain
 
 However, due to the way Power BI Desktop interoperates with Analysis Services, there are a few important limitations to the type of changes external tools may apply to the model metadata. These are listed [in the official documentation for External Tools](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) and repeated here for convenience:
 
-### Supported write operations
+### [Supported write operations](#tab/postjune2023)
+#### June 2023 Power BI Desktop and later
+
+| Object                        | Connect to AS instance    |
+|-------------------------------|---------------------------|
+| Tables                        | No                        |
+| Columns                       | Yes <sup>[1](#columns)</sup>                        |
+| Calculated tables             | Yes                       |
+| Calculated columns            | Yes                       |
+| Relationships                 | Yes                       |
+| Measures                      | Yes                       |
+| Model KPIs                    | Yes                       |
+| Calculation groups            | Yes                       |
+| Perspectives                  | Yes                       |
+| Translations                  | Yes                       |
+| Row Level Security (RLS)      | Yes                       |
+| Object Level Security (OLS)   | Yes                       |
+| Annotations                   | Yes                       |
+| M expressions                 | No                        |
+
+<a name="columns">1</a> - When using external tools to connect to the AS instance, changing a column's data type is supported, however, renaming columns is not supported.
+
+Power BI Desktop *project files* offer a broader scope of supported write operations. Those objects and operations that are not supported through using Tabular Editor as an External Tool may be supported by editing Power BI Desktop project files. Please refer to Microsoft documentation to learn more: [Power BI Desktop projects - Model authoring](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring).
+
+
+### [Pre June 2023 Supported write operations](#tab/prejune2023)
+#### Pre June 2023 Power BI Desktop
+
 - Define and edit measures for calculations, including format string, KPI, and detail rows settings.
 - Add calculation groups for calculation reusability in complex models.
 - Create perspectives to define focused, business-domain specific views of dataset metadata.
@@ -46,7 +97,11 @@ However, due to the way Power BI Desktop interoperates with Analysis Services, t
 - Add dataset roles for row-level security (RLS) and object-level security (OLS) rules to restrict data access.
 - Define and edit field parameters.
 
-### Data modeling limitations
+Though unsupported, it turns out that a number of operations can still be applied without causing issues. For example, setting properties such as Display Folder, Description, Summarization, etc. on individual columns using an external tool seems to work just fine at the time of writing. For this reason, Tabular Editor has an option that allows advanced users to experiment, by allowing all data modeling operations even when connected to a Power BI Desktop model. You can enable this option under **Tools > Preferences > Power BI > Allow *unsupported* modeling operations**, but make sure you understand the risks involved before doing so.
+
+---
+
+## Data modeling limitations
 All Tabular Object Model (TOM) metadata can be accessed for read-only. Write operations are limited because Power BI Desktop must remain in-sync with the external modifications, therefore the following operations are not supported:
 
 - Any TOM object types not covered in Supported write operations, such as tables and columns.
@@ -60,9 +115,9 @@ All Tabular Object Model (TOM) metadata can be accessed for read-only. Write ope
 
 # Tabular Editor and Power BI Desktop
 
-When using Tabular Editor (any edition) as an external tool for Power BI Desktop, all unsupported operations according to the list above, are disabled by default. In other words, Tabular Editor will not allow you to add or rename tables, columns, etc. on a Power BI Desktop model.
+When using Tabular Editor (any edition) as an external tool for Power BI Desktop, all unsupported operations according to the list above, are disabled by default. In other words, Tabular Editor will not allow you to add or rename tables, columns, perform refreshes etc. on a Power BI Desktop model.
 
-Though unsupported, it turns out that a number of operations can still be applied without causing issues. For example, setting properties such as Display Folder, Description, Summarization, etc. on individual columns using an external tool seems to work just fine at the time of writing. For this reason, Tabular Editor has an option that allows advanced users to experiment, by allowing all data modeling operations even when connected to a Power BI Desktop model. You can enable this option under **Tools > Preferences > Power BI > Allow *unsupported* modeling operations**, but make sure you understand the risks involved before doing so.
+Though unsupported, it turns out that a number of operations can still be applied without causing issues. For this reason, Tabular Editor has an option that allows advanced users to experiment, by allowing all data modeling operations even when connected to a Power BI Desktop model. You can enable this option under **Tools > Preferences > Power BI > Allow *unsupported* modeling operations**, but make sure you understand the risks involved before doing so.
 
 > [!NOTE]
 > In Tabular Editor 2.x, this setting is available under **File > Preferences > Allow unsupported Power BI features (experimental)**
