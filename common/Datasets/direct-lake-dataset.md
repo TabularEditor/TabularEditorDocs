@@ -22,7 +22,7 @@ Direct Lake datasets connect directly to data sources stored in [Fabric One Lake
 > Changing a Direct Lake dataset through the XMLA endpoint will block your ability to change the Direct Lake dataset inside the Fabric Service. Only XMLA endpoint can then edit the Direct Lake This is one of the current limitations of this preview 
 feature.
 
-Tabular Editor 3 can create and connect to this type of dataset. For a tutorial on this please refer to our blog article:[Direct Lake Datasets: How to use them with Tabular Editor](TODO: Instert Link)
+Tabular Editor 3 can create and connect to this type of dataset. For a tutorial on this please refer to our blog article:[Direct Lake Datasets: How to use them with Tabular Editor](https://blog.tabulareditor.com/2023/08/23/fabric-direct-lake-dataset/)
 
 Tabular Editor 2 can connect to Direct Lake datasets, but does not have any built in functionality to create new tables or direct lake datasets. This needs to be done manually or with a C# script. 
 
