@@ -240,6 +240,7 @@ Info(currentVersion.ToString());
 ```
 
 The public product version (for example, "2.20.2" or "3.10.1") can be found using this code:
+
 ```csharp
 using System.Diagnostics;
 
@@ -248,8 +249,8 @@ productVersion.Output(); // productVersion is a string ("2.20.2" or "3.10.1", fo
 ```
 
 If you just want the major version number (as an integer), use:
-```csharp
 
+```csharp
 var majorVersion = Selected.GetType().Assembly.GetName().Version.Major;
 majorVersion.Output(); // majorVersion is an integer (2 or 3)
 ```
