@@ -239,7 +239,7 @@ var currentVersion = typeof(Model).Assembly.GetName().Version;
 Info(currentVersion.ToString());
 ```
 
-The public product version (2.20.2 or 3.10.1) can be found using this code:
+The public product version (for example, "2.20.2" or "3.10.1") can be found using this code:
 ```csharp
 using System.Diagnostics;
 
