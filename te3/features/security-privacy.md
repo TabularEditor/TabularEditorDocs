@@ -10,9 +10,9 @@ This document describes the security and privacy considerations of Tabular Edito
 
 ## Microsoft advice on third-party tools such as Tabular Editor
 
-Microsoft's Power BI team supports the use of community third-party tools as communicated here: [Community and third-party tools for developing enterprise-level Power BI and Analysis Services models]( https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices)
+Microsoft supports the use of community third-party tools as communicated here: [Community and third-party tools for developing enterprise-level Power BI and Analysis Services models]( https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices)
 
-Microsoft's Power BI implementation planning documentation specifically include Tabular Editor in advanced data modeling scenarios and enterprise development: [Power BI usage scenarios: Advanced data model management](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
+Microsoft's Power BI implementation planning documentation specifically includes Tabular Editor in advanced data modeling scenarios and enterprise development: [Power BI usage scenarios: Advanced data model management](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
 
 ## Metadata and Data Privacy
 
