@@ -35,6 +35,7 @@ Tabular Editor can work with several different dataset types. Bellow is an overv
 |Create & Edit Perspectives|✔️|✔️|✔️|✔️|
 |Create & Edit Translations|✔️|✔️|✔️|✔️|
 |Use Best Practice Analyzer|✔️|✔️|✔️|✔️|
+|Edit All TOM properties|✔️|✔️|❌|✔️|
 |Create Diagrams<sup>[2](#TE3Prem)</sup>|✔️|✔️|✔️|✔️|
 |Use Preview Data<sup>[2](#TE3Prem)</sup>|✔️|✔️|✔️|✔️|
 |Use Pivot Grids<sup>[2](#TE3Prem)</sup>|✔️|✔️|✔️|✔️|
