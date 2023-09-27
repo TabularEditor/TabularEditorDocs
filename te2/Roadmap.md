@@ -16,7 +16,7 @@
 
 It should be possible, when selecting one or more objects in the explorer tree, to generate a script for these objects. In fact, this is already possible by dragging and dropping the objects into another text editor (or SSMS), but there should be a similar right-click option to more clearly communicate to end-users what's going on. It should be possible to generate both TMSL scripts (for SSMS) or DAX-style code, usable in [DAX Editor](https://github.com/DaxEditor/).
 
-Today, measures and calculated columns can be dragged between instances of Tabular Editor to copy them between models, but to better expose this functionality, there should be an UI option for importing a provided piece of TMSL, either from the clipboard or from a file. See [this issue](https://github.com/otykier/TabularEditor/issues/69). Lastly, the standard copy-paste shortcuts should be enabled.
+Today, measures and calculated columns can be dragged between instances of Tabular Editor to copy them between models, but to better expose this functionality, there should be an UI option for importing a provided piece of TMSL, either from the clipboard or from a file. See [this issue](https://github.com/TabularEditor/TabularEditor/issues/69). Lastly, the standard copy-paste shortcuts should be enabled.
 
 ## Create plug-in for Visual Studio, to launch Tabular Editor
 
@@ -26,7 +26,7 @@ A simple context menu extension to Visual Studio, that will simply ensure the Mo
 
 When writing DAX code in the expression editor, an autocompletebox should pop-up to help complete table names, column names, measure names or functions (and their arguments).
 
-See also [this issue](https://github.com/otykier/TabularEditor/issues/64).
+See also [this issue](https://github.com/TabularEditor/TabularEditor/issues/64).
 
 ## Tabular Editor plug-in architecture / public API for developers
 

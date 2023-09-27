@@ -8,7 +8,7 @@ Say you have created a useful script using the `Selected` object, and you want t
 
 After saving the custom action, you will see that it is now available directly from the right-click context menu of the explorer tree, making it very easy to invoke the script on any objects selected in the tree. You can create as many custom actions as you want. Use backslashes (\\) in the names to create a submenu structure within the context menu.
 
-![Custom Actions show up directly in the context menu](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/InvokeCustomAction.png)
+![Custom Actions show up directly in the context menu](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/InvokeCustomAction.png)
 
 Custom Actions are stored in the CustomActions.json file within %AppData%\Local\TabularEditor. In the above example, the contents of this file will look like this:
 

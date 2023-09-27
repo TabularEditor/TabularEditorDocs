@@ -180,7 +180,7 @@ For tables that have multiple partitions, we specify the WHERE criteria using "p
 
 ![image](https://user-images.githubusercontent.com/8976200/44737015-b3f05d00-aaa5-11e8-9bad-cadd5b4dae35.png)
 
-Define the placeholder values within each partition (note, you must be using [Tabular Editor v. 2.7.3](https://github.com/otykier/TabularEditor/releases/tag/2.7.3) or newer to edit partition annotations through the UI):
+Define the placeholder values within each partition (note, you must be using [Tabular Editor v. 2.7.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.3) or newer to edit partition annotations through the UI):
 
 ![image](https://user-images.githubusercontent.com/8976200/44737199-2a8d5a80-aaa6-11e8-8813-8189b593da98.png)
 

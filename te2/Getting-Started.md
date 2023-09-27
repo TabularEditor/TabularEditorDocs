@@ -7,7 +7,7 @@ updated: 2021-09-21
 # Getting Started
 
 ## Installation
-Simply download the .msi file from the [Release page](https://github.com/otykier/TabularEditor/releases/latest) and run the .msi installation.
+Simply download the .msi file from the [Release page](https://github.com/TabularEditor/TabularEditor/releases/latest) and run the .msi installation.
 
 ## Prerequisites
 None.
@@ -26,19 +26,19 @@ The recommended workflow is to set up the tables and relationships using SSDT as
 
 Load a Model.bim file by choosing the Open > From File... option in the File menu (CTRL+O), or open an existing database from an instance of Analysis Services by choosing the Open > From DB... option. In the latter case, you will be prompted for a server name and optional credentials:
 
-![Connecting to an already deployed Tabular Model](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/Connect.png)
+![Connecting to an already deployed Tabular Model](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
 
-This also works with the new Azure Analysis Services PaaS. The "Local Instance" dropdown, may be used to browse and connect to any running instances of Power BI Desktop or Visual Studio Integrated Workspaces. **Note that although Tabular Editor can make changes to a Power BI model through the TOM, not all modeling operations are supported by Microsoft. [More information](/Power-BI-Desktop-Integration)**
+This also works with the new Azure Analysis Services PaaS. The "Local Instance" dropdown, may be used to browse and connect to any running instances of Power BI Desktop or Visual Studio Integrated Workspaces. **Note that although Tabular Editor can make changes to a Power BI model through the TOM, not all modeling operations are supported by Microsoft. [More information](/te2/Power-BI-Desktop-Integration.html)**
 
 After clicking "OK", you will be presented with a list of databases on the server.
 
 This is how the UI looks after a model has been loaded into Tabular Editor:
 
-![The main UI of Tabular Editor](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/Main%20UI.png)
+![The main UI of Tabular Editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Main%20UI.png)
 
 The tree on the left side of the screen, displays all tables in the Tabular Model. Expanding a table will show all columns, measures and hierarchies within the table, grouped by their Display Folders. Use the buttons just above the tree, to toggle display folders, hidden objects, certain types of objects, or filter out objects by names. Right-clicking anywhere in the tree, will bring up a context menu with common actions, such as adding new measures, making an object hidden, duplicating objects, deleting objects, etc. Hit F2 to rename the currently selected object or multiselect and right-click to batch rename multiple objects.
 
-![Batch Renaming lets you rename multiple objects simultaneously](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/BatchRename.png)
+![Batch Renaming lets you rename multiple objects simultaneously](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/BatchRename.png)
 
 On the top right side of the main UI, you see the DAX Editor, which may be used to edit the DAX expression of any measure or calculated column in the model. Click the "DAX Formatter" button to automatically format the code through www.daxformatter.com.
 
@@ -46,7 +46,7 @@ Use the property grid in the lower right corner, to examine and set properties o
 
 To edit perspectives or translations (cultures), select the "Model" object in the tree, and locate the "Model Perspectives" or "Model Cultures" properties, in the property grid. Click the small elipsis button to open a collection editor for adding/removing/editing perspectives/cultures.
 
-![Editing perspectives - click the elipsis button to the right](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/Edit%20Perspectives.png)
+![Editing perspectives - click the elipsis button to the right](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Edit%20Perspectives.png)
 
 To save your changes back to the Model.bim file, click the save button or hit CTRL+S. If you opened an existing Tabular Database, the changes are saved directly back to the database. You will be prompted if the database was changed since you loaded it into Tabular Editor. You can always undo your changes by pressing CTRL+Z.
 
@@ -55,7 +55,7 @@ If you want to deploy your model to another location, go to the "Model" menu and
 ## Deployment
 Tabular Editor comes with a deployment wizard that provides a few benefits compared to deploying from SSDT - especially when deploying to an existing database. After choosing a server and a database to deploy to, you have the following options for the deployment at hand:
 
-![Deployment Wizard](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/Deployment.png)
+![Deployment Wizard](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
 
 Leaving the "Deploy Connections" box unchecked, will make sure that all the data sources on the target database stay untouched. You will get an error if your model contains one or more tables with a data source, that does not already exist in the target database.
 
@@ -83,7 +83,7 @@ By default, partitions, data sources and roles will not be overwritten in the ta
 * `-R` Overwrite **r**oles
 * `-M` Overwrite role **m**embers
 
-More information on command-line options can be found [here](/Command-line-Options).
+More information on command-line options can be found [here](/te2/Command-line-Options.html).
 
 > [!NOTE]
 > Since TabularEditor.exe is a Windows Forms application, running it from the command line will execute the application in a different thread, returning control to the caller immediately. This may cause issues when running deployments as part of a batch job where you need to await succesful deployment before proceeding with the job. If you experience these issues, use `start /wait` to let TabularEditor finish its job before returning control to the caller:
@@ -98,6 +98,6 @@ Tabular Editor lets you use C# to script changes to the loaded model. This is pr
 
 The Advanced Script editor has some limited IntelliSense functionality to get you started:
 
-![IntelliSense helps you create scripts for Tabular Editor](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/AdvancedEditor%20intellisense.png)
+![IntelliSense helps you create scripts for Tabular Editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AdvancedEditor%20intellisense.png)
 
-More documentation and examples on Advanced Scripting, can be [found here](/Advanced-Scripting).
+More documentation and examples on Advanced Scripting, can be [found here](/te2/Advanced-Scripting.html).

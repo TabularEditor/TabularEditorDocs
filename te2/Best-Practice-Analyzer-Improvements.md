@@ -1,6 +1,6 @@
 ﻿# Best Practice Analyzer Improvements
 
-As of [Tabular Editor 2.8.1](https://github.com/otykier/TabularEditor/releases/tag/2.8.1), the Best Practice Analyzer has received a major overhaul.
+As of [Tabular Editor 2.8.1](https://github.com/TabularEditor/TabularEditor/releases/tag/2.8.1), the Best Practice Analyzer has received a major overhaul.
 
 The first thing you'll notice, is that Tabular Editor now reports the number of Best Practice issues directly within the main UI:
 

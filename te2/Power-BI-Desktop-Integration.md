@@ -7,7 +7,7 @@ As of July 2020, [Power BI Desktop adds support for External Tools](https://docs
 ## Prerequisites
 
 - [July 2020 version of Power BI Desktop](https://www.microsoft.com/en-us/download/details.aspx?id=58494) (or newer)
-- [Latest version of Tabular Editor](https://github.com/otykier/TabularEditor/releases/latest)
+- [Latest version of Tabular Editor](https://github.com/TabularEditor/TabularEditor/releases/latest)
 - Enable [Enhanced Metadata](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-enhanced-dataset-metadata) under Power BI Desktop's Preview Features
 
 Also, it is highly recommended that [automatic date/time](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-auto-date-time) is **disabled** (Power BI Desktop setting under "Data Load").
