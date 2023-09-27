@@ -14,11 +14,11 @@ As of version 2.1, Roles are now visible in the Explorer Tree. You can right-cli
 
 The biggest advantage of working with Roles through Tabular Editor, is that each Table object has a "Row Level Filters" property, which lets you view and edit the filters defined on that table, across all roles:
 
-![](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/RLSTableContext.png)
+![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/RLSTableContext.png)
 
 Of course, you can also view the filters across all tables in one particular role, similar to the UI of SSMS or Visual Studio:
 
-![](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/RLSRoleContext.png)
+![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/RLSRoleContext.png)
 
 ## View Table Partitions
 TODO
@@ -38,7 +38,7 @@ JSON code representing the dragged object(s) will be created. When dragging the 
 ## Deployment Wizard
 Tabular Editor comes with a deployment wizard that provides a few benefits compared to deploying from SSDT - especially when deploying to an existing database. After choosing a server and a database to deploy to, you have the following options for the deployment at hand:
 
-![Deployment Wizard](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/Deployment.png)
+![Deployment Wizard](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
 
 Leaving the "Deploy Connections" box unchecked, will make sure that all the data sources on the target database stay untouched. You will get an error if your model contains one or more tables with a data source, that does not already exist in the target database.
 

@@ -631,7 +631,7 @@ tsv.Output();
 ***
 
 ## Setting up Aggregations (Power BI Dataset only)
-As of [Tabular Editor 2.11.3](https://github.com/otykier/TabularEditor/releases/tag/2.11.3), you can now set the `AlternateOf` property on a column, enabling you to define aggregation tables on your model. This feature is enabled for Power BI Datasets (Compatibility Level 1460 or higher) through the Power BI Service XMLA endpoint.
+As of [Tabular Editor 2.11.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.11.3), you can now set the `AlternateOf` property on a column, enabling you to define aggregation tables on your model. This feature is enabled for Power BI Datasets (Compatibility Level 1460 or higher) through the Power BI Service XMLA endpoint.
 
 Select a range of columns and run the following script to initiate the `AlternateOf` property on them:
 
@@ -667,7 +667,7 @@ After running the script, you should see that the `AlternateOf` property has bee
 
 ## Querying Analysis Services
 
-As of version [2.12.1](https://github.com/otykier/TabularEditor/releases/tag/2.12.1), Tabular Editor now provides a number of helper methods for executing DAX queries and evaluating DAX expressions against your model. These methods work only when model metadata have been loaded directly from an instance of Analysis Services, such as when using the "File > Open > From DB..." option, or when using the Power BI external tools integration of Tabular Editor.
+As of version [2.12.1](https://github.com/TabularEditor/TabularEditor/releases/tag/2.12.1), Tabular Editor now provides a number of helper methods for executing DAX queries and evaluating DAX expressions against your model. These methods work only when model metadata have been loaded directly from an instance of Analysis Services, such as when using the "File > Open > From DB..." option, or when using the Power BI external tools integration of Tabular Editor.
 
 The following methods are available:
 

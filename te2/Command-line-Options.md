@@ -207,12 +207,12 @@ If you're also using the "-V" switch, the severity level of each rule will deter
 
 ## Performing a data source schema check
 
-As of [version 2.8](https://github.com/otykier/TabularEditor/releases/tag/2.8), you can use the -SC (-SCHEMACHECK) switch to validate table source queries. This is equivalent to invoking the [Refresh Table Metadata UI](/Importing-Tables#refreshing-table-metadata) except that no changes will be made to the model, but schema differences will be reported to the console. Changed Data Types and columns that were added to the source will be reported as warnings. Missing source columns will be reported as errors. If both the -SC (-SCHEMACHECK) and -S (-SCRIPT) switch are specified, the schema check will run AFTER the script has successfully executed, allowing you to modify Data Source properties before the schema check is performed, for example in order to specify a credential password.
+As of [version 2.8](https://github.com/TabularEditor/TabularEditor/releases/tag/2.8), you can use the -SC (-SCHEMACHECK) switch to validate table source queries. This is equivalent to invoking the [Refresh Table Metadata UI](xref:importing-tables-te2#refreshing-table-metadata) except that no changes will be made to the model, but schema differences will be reported to the console. Changed Data Types and columns that were added to the source will be reported as warnings. Missing source columns will be reported as errors. If both the -SC (-SCHEMACHECK) and -S (-SCRIPT) switch are specified, the schema check will run AFTER the script has successfully executed, allowing you to modify Data Source properties before the schema check is performed, for example in order to specify a credential password.
 
-You can also annotate tables and columns if you want the schema check to treat them in a specific way. [More information here](/Importing-Tables#ignoring-objects).
+You can also annotate tables and columns if you want the schema check to treat them in a specific way. [More information here](xref:importing-tables-te2#ignoring-objects).
 
 ## Command Line output and Exit Codes
-The command line provides various details, depending on the switches used and any events encountered during execution. Exit Codes were introduced in [version 2.7.4](https://github.com/otykier/TabularEditor/releases/tag/2.7.4).
+The command line provides various details, depending on the switches used and any events encountered during execution. Exit Codes were introduced in [version 2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4).
 
 |Level|Command|Message|Clarification|
 |---|---|---|---|

@@ -21,6 +21,11 @@
             "statusCode": 301
         },
         {
+            "route": "/Importing-Tables.html",
+            "redirect": "/te2/Importing-Tables.html",
+            "statusCode": 301
+        },
+        {
             "route": "/tmdl",
             "redirect": "/te3/features/tmdl.html",
             "statusCode": 301
@@ -88,6 +93,11 @@
         {
             "route": "/Command-line-Options.html",
             "redirect": "/te2/Command-line-Options.html",
+            "statusCode": 301
+        },
+        {
+            "route": "/Power-BI-Desktop-Integration.html",
+            "redirect": "/te2/Power-BI-Desktop-Integration.html",
             "statusCode": 301
         },
         {

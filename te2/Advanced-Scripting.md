@@ -66,7 +66,7 @@ Use the IntelliSense functionality of the Advanced Script editor to see what oth
 ## Working with the **Model** object
 To quickly reference any object in the currently loaded Tabular Model, you can drag and drop the object from the explorer tree and into the Advanced Scripting editor:
 
-![Dragging and dropping an object into the Advanced Scripting editor](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/DragDropTOM.gif)
+![Dragging and dropping an object into the Advanced Scripting editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/DragDropTOM.gif)
 
 Please refer to the [TOM documentation](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) for an overview of which properties exist on the Model and its descendant objects. Additionally, refer to <xref:api-index> for a complete listing of the properties and methods exposed by the wrapper object.
 
@@ -158,7 +158,7 @@ You can tick the "Don't show more outputs" checkbox at the lower left-hand corne
 
 ## .NET references
 
-[Tabular Editor version 2.8.6](https://github.com/otykier/TabularEditor/tree/2.8.6) makes it a lot easier to write complex scripts. Thanks to the new pre-processor, you can now use the `using` keyword to shorten class names, etc. just like in regular C# source code. In addition, you can include external assemblies by using the syntax `#r "<assembly name or DLL path>"` similar to .csx scripts used in Azure Functions.
+[Tabular Editor version 2.8.6](https://github.com/TabularEditor/TabularEditor/tree/2.8.6) makes it a lot easier to write complex scripts. Thanks to the new pre-processor, you can now use the `using` keyword to shorten class names, etc. just like in regular C# source code. In addition, you can include external assemblies by using the syntax `#r "<assembly name or DLL path>"` similar to .csx scripts used in Azure Functions.
 
 For example, the following script will now work as expected:
 

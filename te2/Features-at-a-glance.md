@@ -8,7 +8,7 @@ Hitting CTRL+O shows an Open File dialog, which lets you select a Model.bim file
 ## Connect/deploy to SSAS Tabular Databases
 Hitting CTRL+SHIFT+O lets you open a Tabular Model directly from a Tabular Database that has already been deployed. Enter the server address and (optionally) provide a username and password. After hitting "OK", you will be prompted with a list of databases and the server. Select the one you want to load, and click "OK" again. 
 
-![](https://github.com/otykier/TabularEditor/blob/master/Documentation/Connect.png)
+![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
 
 The dialog shown also lets you connect to Azure Analysis Services instances, if you provide the full name of the Azure AS instance, starting with "azureas://". The "Local Instance" dropdown, may be used to browse and connect to any running instances of Power BI Desktop or Visual Studio Integrated Workspaces. **Note that although Tabular Editor can make changes to a Power BI model through the TOM, this is not supported by Microsoft and may corrupt your .pbix file. Proceed at your own risk!**
 
@@ -22,11 +22,11 @@ If you want to deploy the currently loaded model to a new database, or overwrite
 ## Hierarchical display
 Objects of the loaded model are shown in the Explorer Tree, on the left side of the screen. By default, all object types (visible tables, roles, relationships, etc.) are shown. If you only want to see tables, measures, columns and hierarchies, go to the "View" menu and toggle off "Show all object types".
 
-![](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/AllObjectTypes.png)
+![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AllObjectTypes.png)
 
 Expanding a table in the "Tables" group, you will find the measures, columns and hierarchies contained in the table presented in their respective display folders by default. This way, objects are arranged similar to how end-users would see them in client tools:
 
-![](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/DisplayFolders.png)
+![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/DisplayFolders.png)
 
 Use the buttons immediately above the Explorer Tree, to toggle invisible objects, display folders, measures, columns and hierarchies, or to filter objects by name. You can rename an object by selecting it in then hitting F2. This also works for display folders. If you double-click a measure or calculated column, you may edit its [DAX expression](/te2/Advanced-features#dax-expression-editor). Right-clicking will show a context menu, providing a range of handy shortcuts for operations such as setting visibility, perspective inclusion, adding columns to a hierarchy, etc.
 
@@ -44,14 +44,14 @@ Different properties exist, depending on what kind of object was selected.
 ## Duplicate objects and batch renamings
 The right-click context menu in the Explorer Tree lets you duplicate measures and columns. The duplicated objects will have their names suffixed by "copy". Furthermore, you can perform batch renames by selecting multiple objects and right-clicking in the Explorer Tree.
 
-![](https://github.com/otykier/TabularEditor/blob/master/Documentation/BatchRename.png)
+![](https://github.com/TabularEditor/TabularEditor/blob/master/Documentation/BatchRename.png)
 
 You may use RegEx for your renamings, and optionally choose whether translations should be renamed as well.
 
 ## Drag and drop objects
 By far the most useful feature of Tabular Editor, when working on models with many measures/columns organised in display folders. Check out the animation below:
 
-![](https://github.com/otykier/TabularEditor/blob/master/Documentation/DragDropFolders.gif)
+![](https://github.com/TabularEditor/TabularEditor/blob/master/Documentation/DragDropFolders.gif)
 
 Notice how the display folder property of every single object below the folder is changed, when the entire folder is dragged. No more going over measures/columns one-by-one, to change the display folder structure. What you see is what you get.
 
@@ -60,7 +60,7 @@ Notice how the display folder property of every single object below the folder i
 ## Working with Perspectives and Translations
 You can add/edit existing perspectives and translations (cultures), by clicking the Model node in the Explorer Tree, and locating the relevant properties at the bottom of the property grid. Alternatively, when your Explorer Tree is [showing all object types](/te2/Features-at-a-glance#hierarchical-display), you can view and edit perspectives, cultures and roles directly in the tree.
 
-![](https://raw.githubusercontent.com/otykier/TabularEditor/master/Documentation/RolesPerspectivesTranslations.png)
+![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/RolesPerspectivesTranslations.png)
 
 You can duplicate an existing perspective, role or translation by opening the right-click menu and choose "Duplicate". This will create an exact copy of the object, which you can then modify to your needs.
 

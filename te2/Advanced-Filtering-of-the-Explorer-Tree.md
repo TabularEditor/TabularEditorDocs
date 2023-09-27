@@ -3,7 +3,7 @@
 This article describes how to use the "Filter" textbox within Tabular Editor - an incredibly useful feature when navigating complex models.
 
 ## Filtering Mode
-As of [2.7.4](https://github.com/otykier/TabularEditor/releases/tag/2.7.4), Tabular Editor now lets you decide how the filter should apply to objects in the hierarchy, and how search results are displayed. This is controlled using the three right-most toolbar buttons next to the Filter button:
+As of [2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4), Tabular Editor now lets you decide how the filter should apply to objects in the hierarchy, and how search results are displayed. This is controlled using the three right-most toolbar buttons next to the Filter button:
 
 ![image](https://user-images.githubusercontent.com/8976200/46567931-08a4b480-c93d-11e8-96fd-e197e87a0587.png)
 

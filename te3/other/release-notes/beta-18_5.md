@@ -15,6 +15,6 @@
 
 - Added multiline string editor for table SourceExpressions
 - Ensure relationship names are not regenerated when cutting and pasting
-- Added BPA support for the `it` keyword in FixExpressions, see https://github.com/otykier/TabularEditor/issues/846
+- Added BPA support for the `it` keyword in FixExpressions, see https://github.com/TabularEditor/TabularEditor/issues/846
 - Improved behavior of Find/Replace window when switching between documents/UI elements
 - Fixed a bug with the precedence order of the NOT keyword, see https://github.com/TabularEditor/TabularEditor3/issues/5.
