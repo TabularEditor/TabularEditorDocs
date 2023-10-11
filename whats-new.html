@@ -3,39 +3,16 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
-        }
-
-        .light-mode {
-            
-        }
-        .dark-mode {
-            background-color: #333;
-            color: #fff;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        /* Create two equal columns that floats next to each other */
-        .column {
-            float: left;
-            width: 50%;
-            padding: 10px;
-        }
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif; }
+        .light-mode { }
+        .dark-mode { background-color: #333; color: #fff; }
+        * { box-sizing: border-box; }
+        .column { float: left; width: 50%; padding: 10px; }
+        .row:after { content: ""; display: table; clear: both; }
     </style>
 </head>
 <body id="body-element">
-
+    <!--- CONTENT GOES BELOW THIS LINE -->
     <h2>What's new</h2>
 
     <div class="row">
@@ -48,6 +25,8 @@
             <p>Some text..</p>
         </div>
     </div>
+
+    <!--- CONTENT GOES ABOVE THIS LINE -->
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
