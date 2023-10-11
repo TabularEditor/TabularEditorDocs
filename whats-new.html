@@ -3,6 +3,18 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
+        }
+
+        .light-mode {
+            
+        }
+        .dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -12,7 +24,6 @@
             float: left;
             width: 50%;
             padding: 10px;
-            height: 300px; /* Should be removed. Only for demonstration */
         }
 
         /* Clear floats after the columns */
@@ -23,20 +34,46 @@
         }
     </style>
 </head>
-<body>
+<body id="body-element">
 
     <h2>What's new</h2>
 
     <div class="row">
-        <div class="column" style="background-color:#aaa;">
+        <div class="column">
             <h2>Tabular Editor 3</h2>
             <p>Some text..</p>
         </div>
-        <div class="column" style="background-color:#bbb;">
+        <div class="column">
             <h2>Community</h2>
             <p>Some text..</p>
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            const style = params.get('style');
+            const bodyElement = document.getElementById('body-element');
+
+            if (style === 'dark') {
+                bodyElement.classList.add('dark-mode');
+            } else {
+                bodyElement.classList.add('light-mode');
+            }
+        });
+
+        if (window.parent.resizeIframe) {
+            window.addEventListener("load", () => {
+                const body = document.body;
+                const computedStyle = window.getComputedStyle(body);
+                const marginTop = parseFloat(computedStyle.marginTop);
+                const marginBottom = parseFloat(computedStyle.marginBottom);
+
+                const frameHeight = body.scrollHeight + marginTop + marginBottom + 100;
+
+                window.parent.resizeIframe(frameHeight);
+            });
+        }
+    </script>
 </body>
 </html>
