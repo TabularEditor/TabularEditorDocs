@@ -57,8 +57,8 @@ Tabular Editor can work with several different dataset types. Bellow is an overv
 ## Unsupported datasets
 The following datasets types are unsupported, as they don't support XMLA write operations.
 
-- Datasets based on a live connection to an Azure Analysis Services or SQL Server Analysis Services model.
-- Datasets based on a live connection to a Power BI dataset in another workspace. Please refer to [Intro to datasets across workspaces](../connect-data/service-datasets-across-workspaces.md).
+- Reports based on a live connection to an Azure Analysis Services or SQL Server Analysis Services model.
+- Reports based on a live connection to a Power BI dataset.
 - Datasets with Push data.
 - Datasets stored in Power BI My Workspace.
 - Direct Lake Default Datasets
