@@ -6,7 +6,7 @@ updated: 2021-09-09
 ---
 # Tabular Editor
 
-Tabular Editor is a tool that lets you easily manipulate and manage measures, calculated columns, display folders, perspectives and translations in Analysis Services Tabular and Power BI Models.
+Tabular Editor is a tool that lets you easily manipulate and manage measures, calculated columns, display folders, perspectives and translations in Analysis Services Tabular and Power BI Sematic Models.
 
 The tool is available in two different versions:
 
@@ -27,16 +27,16 @@ Tabular Editor 3 is a more advanced application which offers a premium experienc
 
 **Tabular Editor 3 main features:**
 
-- A highly-customizable and familiar UI
+- A highly-customizable and intuitive UI
 - High-DPI, multi-monitor and theming support (yes, dark mode is available!)
-- World class DAX editor with syntax highlighting, semantic checking, auto-complete and much, much more
+- World class [DAX editor](xref:dax-editor) with syntax highlighting, semantic checking, auto-complete, context awareness and much, much more
 - Table browser, Pivot Grid browser and DAX Query editor
-- Import Table Wizard with support for Power Query data sources
-- Data Refresh view allows you to queue and execute refresh operations in the background
+- [Import Table Wizard](xref:importing-tables) with support for Power Query data sources
+- [Data Refresh view](xref:data-refresh-view) allows you to queue and execute refresh operations in the background
 - Diagram editor to easily visualize and edit table relationships
-- New DAX Scripting capability to edit DAX expressions for multiple objects in a single document
+- New [DAX Scripting](xref:dax-scripts) capability to edit DAX expressions for multiple objects in a single document
 - VertiPaq Analyzer integration
-- DAX debugger
+- [DAX debugger](xref:dax-debugger)
 
 ### [Tabular Editor 2.x](#tab/TE2) 
 
@@ -89,9 +89,12 @@ The table below lists all the main features of both tools.
 |Create diagrams for visualizing and editing table relationships||<span class="emoji">&#10004;</span>|
 |Execute data refresh operations in the background||<span class="emoji">&#10004;</span>*|
 |C# macro recorder||<span class="emoji">&#10004;</span>|
-|Edit multiple DAX expressions in a single document using DAX scripting||<span class="emoji">&#10004;</span>|
+|Edit multiple DAX expressions in a single document using [DAX scripting](xref:dax-scripts)||<span class="emoji">&#10004;</span>|
 |[VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) integration||<span class="emoji">&#10004;</span>|
 |[DAX debugger](xref:dax-debugger)||<span class="emoji">&#10004;</span>|
+|[Metadata Translation Editor](xref:metadata-translation-editor)||<span class="emoji">&#10004;</span>|
+|[Perspective Editor](xref:perspective-editor)||<span class="emoji">&#10004;</span>|
+|[Table Groups](xref:table-groups)||<span class="emoji">&#10004;</span>|
 
 \***Note:** Limitations apply depending on which [edition](xref:editions) of Tabular Editor 3 you are using.
 
