@@ -1,6 +1,11 @@
 {
     "routes": [
         {
+            "route": "/whats-new",
+            "redirect": "/whats-new.html",
+            "statusCode": 301
+        },
+        {
             "route": "/te3/other/release-notes",
             "redirect": "/te3/other/release-notes/3_11_0.html",
             "statusCode": 301

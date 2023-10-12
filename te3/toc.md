@@ -2,7 +2,7 @@
 ## @getting-started
 ## @whats-new
 ## @editions
-## @desktop-limitations
+## @desktop-limitations-te3
 ## @powerbi-xmla
 
 # Documentation
