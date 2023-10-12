@@ -3,9 +3,16 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        a { text-decoration: none; }
+        img { width: 100%; height: auto; }
         body { font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif; }
         .light-mode { }
+        .light-mode a { color: #337ab7; }
+        .light-mode a:hover { color: #23527c; }
         .dark-mode { background-color: #333; color: #fff; }
+        .dark-mode a { color: #87bdd8; }
+        .dark-mode a:hover { color: #a8d3e6; }
+
         * { box-sizing: border-box; }
         .column { float: left; width: 50%; padding: 10px; }
         .row:after { content: ""; display: table; clear: both; }
@@ -14,15 +21,45 @@
 <body id="body-element">
     <!--- CONTENT GOES BELOW THIS LINE -->
     <h2>What's new</h2>
-
     <div class="row">
         <div class="column">
             <h2>Tabular Editor 3</h2>
-            <p>Some text..</p>
+            <p>Latest public release: <a href="https://docs.tabulareditor.com/te3/other/release-notes">September 2023 (v. 3.11.0)</a></p>
+            <ul>
+                <li><a href="https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/">Create DirectLake datasets from scratch</a></li>
+                <li>DAX function updates:
+                    <ul>
+                        <li><a href="https://dax.guide/MINX"><code>MINX</code></a> / <a href="https://dax.guide/MAXX"><code>MAXX</code></a></li>
+                        <li><a href="https://dax.guide/MATCHBY"><code>MATCHBY</code></a></li>
+                    </ul>
+                </li>
+                <li>New support for native queries on Databricks</li>
+                <li>Latest TMDL preview</li>
+                <li>DAX debugger improvements</li>
+            </ul>
+            <h2>Community</h2>
+            <p>News from our <a href="https://github.com/TabularEditor/TabularEditor3/discussions">community</a>:</p>
+            <ul>
+                <li><a href="https://blog.tabulareditor.com/2023/09/27/ci-cd-scripts-for-tabular-editor-2s-cli/">CI/CD scripts for Tabular Editor</a></li>
+                <li><a href="https://github.com/PowerBI-tips/TabularEditor-Scripts">Tabular Editor scripts</a> by <a href="https://powerbi.tips">PowerBI.tips</a></li>
+            </ul>
+            <h2>Other resources</h2>
+            <ul>
+                <li><a href="https://github.com/TabularEditor/TabularEditor3/discussions">GitHub issue tracker (TE3)</a></li>
+                <li><a href="https://github.com/TabularEditor/TabularEditor/discussions">GitHub issue tracker (TE2.x)</a></li>
+            </ul>
         </div>
         <div class="column">
-            <h2>Community</h2>
-            <p>Some text..</p>
+            <h2>Tabular Editor Learn</h2>
+            <p>Explore our <a href="https://tabulareditor.com/learn">interactive learning platform</a>:</p>
+            <ul>
+                <li>25+ hours of free content</li>
+                <li>Create better data models, faster</li>
+                <li>Master every aspect of Tabular Editor</li>
+                <li>Help Borp, Zip, Tropphus at Space Parts Inc.</li>
+            </ul>
+            <p><a href="https://tabulareditor.com/learn">tabulareditor.com/learn</a></p>
+            <img src="images/SpacePartsCo_CharacterLineUp.png" />
         </div>
     </div>
 
