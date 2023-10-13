@@ -6,7 +6,7 @@
         a { text-decoration: none; }
         img { width: 100%; height: auto; }
         body { font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif; }
-        .light-mode { }
+        .light-mode { background-color: #fdfdfd; color: #555 }
         .light-mode a { color: #337ab7; }
         .light-mode a:hover { color: #23527c; }
         .dark-mode { background-color: #333; color: #fff; }
@@ -83,10 +83,18 @@
             const style = params.get('style');
             const bodyElement = document.getElementById('body-element');
 
-            if (style === 'dark') {
-                bodyElement.classList.add('dark-mode');
-            } else {
-                bodyElement.classList.add('light-mode');
+            if (style) {
+                const links = document.querySelectorAll('a');
+
+                links.forEach(link => {
+                    link.setAttribute('target', '_blank');
+                });
+
+                if (style === 'dark') {
+                    bodyElement.classList.add('dark-mode');
+                } else if (style === 'light') {
+                    bodyElement.classList.add('light-mode');
+                }
             }
         });
 
