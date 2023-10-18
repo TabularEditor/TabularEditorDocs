@@ -27,14 +27,14 @@ Tabular Editor supports four file types for semantic models: .bim, Power BI file
 ### [Tabular Model Files (.bim)](#tab/BIM)
 A .bim file is a single file consisting of nested JSON that is known as TMSL. 
 
-#### .bim file in a folder
 It's the original format for a semantic model that Microsoft supports. 
 
 However, it has a large drawback: as it's a single large file, it's difficult to track changes and use good team development practices such as git source control.
 
+#### .bim file in a folder
 ![Supported File Types BIM](~/images/file-types/te3-supported-file-bim.png)
 
-![Download example .bim file ](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/bim-file-example.bim)
+[Download example .bim file ](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/bim-file-example.bim)
 
 
 ### [Power BI](#tab/PowerBI)
@@ -52,6 +52,8 @@ It lets you store both a model (.bim) file and a report file structure in one pl
 > Power BI Project file is the recommended format using Power BI with Tabular Editor.
 
 #### Power BI Template file (.pbit)
+Power BI Template files contain a semantic model and can as such be opened and edited in Tabular Editor.
+
 > [!WARNING]
 > Even though it's technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. 
 > As such, there is always a risk of making changes to the .pbit file which would cause the file to become unloadable in Power BI Desktop, or cause stability issues once loaded. In this case, Microsoft support will be unable to assist you.
