@@ -15,17 +15,22 @@ Tabular Editor 3 uses a number of different file formats and document types, som
 
 ![Supported File Types](~/images/file-types/te3-supported-file-types.png)
 
+Example files are available for each several file type, based on the [learn.tabulareditor.com](https://tabulareditor.com/learn) course 2 Business Case.
+
 ## Dataset file types
 
-Tabular Editor supports four file types for semantic models, 
+Tabular Editor supports four file types for semantic models: .bim, Power BI files (.pbit and.pbip), .json and .tmdl. Each file type has different features and limitations, which are explained below.
 
 > [!NOTE]
-> Since **Tabular Editor 3 Desktop Edition** is only intended to be used as an External Tool for Power BI Desktop, this edition does not allow loading and saving files. You may however still use Tabular Editor 2.x for this purpose. See <xref:editions> to learn more about the difference between the Tabular Editor 3 editions.
+> Since **Tabular Editor 3 Desktop Edition** is only intended to be used as an External Tool for Power BI Desktop, this edition does not allow loading and saving semantic model files. You may however still use Tabular Editor 2.x for this purpose. See <xref:editions> to learn more about the difference between the Tabular Editor 3 editions.
 
 ### [Tabular Model Files (.bim)](#tab/BIM)
-A .bim file is a single file consisting of nested JSON. It is the original format for a semantic model that Microsoft supports. However, it has a large drawback: as it is a single large file, it is difficult to track changes and use good team development practices such as git source control.
+A .bim file is a single file consisting of nested JSON that is known as TMSL. It's the original format for a semantic model that Microsoft supports. However, it has a large drawback: as it's a single large file, it's difficult to track changes and use good team development practices such as git source control.
 
 ![Supported File Types BIM](~/images/file-types/te3-supported-file-bim.png)
+
+![Download example .bim file ](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/bim-file-example.bim)
+
 
 ### [Power BI](#tab/PowerBI)
 
@@ -36,16 +41,19 @@ The main difference between the two, is that the **.pbip file contains model dat
 #### Power BI Project file (.pbip ) *in Preview*
 A Power BI Project file (.pbip) is a new kind of Power BI file that is currently in preview mode. It lets you store both a model (.bim) file and a report file structure in one place. You can open and save .pbip files from Tabular Editor, as well as from Power BI Desktop.
 
+> [!TIP]
+> Power BI Project file is the recommended format using Power BI with Tabular Editor.
+
 #### Power BI Template file (.pbit)
 > [!WARNING]
-> Even though it is technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. As such, there is always a risk of making changes to the .pbit file which would cause the file to become unloadable in Power BI Desktop, or cause stability issues once loaded. In this case, Microsoft support will be unable to assist you.
+> Even though it's technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. As such, there is always a risk of making changes to the .pbit file which would cause the file to become unloadable in Power BI Desktop, or cause stability issues once loaded. In this case, Microsoft support will be unable to assist you.
 
 ### [Tabular Model Folder (.json)](#tab/JSON)
 
 Tabular Editor allows you to save your dataset objects as separate JSON files, which is a custom serialization format. This format preserves the structure and properties of your objects, such as tables, columns, measures, and relationships.This has been supported in Tabular Editor from the early days and is a proven, though by Microsoft unsupported, method for storing your dataset objects as individual files. Thereby enabling developers to track changes in source control and collaborate on building semantic models.
 There is full compatibility between Tabular Editor 2 and 3 with regards to the the JSON file structure.
 
-In order to save a semantic model to JSON you must use the 'Save to Folder' option when saving the first time. Subsequent saves to a model loaded from a JSON structured model maintains the setting. It is always possible to convert a model that is in JSON to a .bim file using 'File > Save As'
+In order to save a semantic model to JSON you must use the 'Save to Folder' option when saving the first time. Subsequent saves to a model loaded from a JSON structured model maintains the setting. it's always possible to convert a model that is in JSON to a .bim file using 'File > Save As'
 
 
 ![Supported File Types JSON](~/images/file-types/te3-supported-file-json.png)
@@ -56,17 +64,33 @@ In order to save a semantic model to JSON you must use the 'Save to Folder' opti
 4. The measures on the table each have their own json file.
 
 The depth of which json objects that will be created are handled by the serialization settings. 
+
+A single JSON file for a measure contains all the properties of that measure:
+ 
+![Supported File Types JSON File](~/images/file-types/te3-supported-file-json-measure.png)
+
+
 For more information on Save to Folder and serialization settings please refer to: [Save to Folder](xref:save-to-folder)
 
+[Download example JSON Folder Structure](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/json-model-example.zip)
 
 ### [TMDL](#tab/TMDL)
 
-TMDL stands for Tabular Model Definition Language and it is a new format for defining and managing datasets in a human readable format using YAML like syntax. Microsoft introduced TMDL as a preview feature in April 2023, aiming to provide a unified and consistent way of working with datasets across different platforms and tools. TMDL is designed to support dataset source control, enabling users to track changes, collaborate, and automate workflows with semantic models. TMDL is still in preview mode, which means that it is not fully stable or supported and may have some limitations or issues. 
-For further reading please see: [TMDL](@tmdl)
+TMDL stands for Tabular Model Definition Language and it's a new format for defining and managing datasets in a human readable format using YAML like syntax. Microsoft introduced TMDL as a preview feature in April 2023, aiming to provide a unified and consistent way of working with datasets across different platforms and tools. TMDL is designed to support dataset source control, enabling users to track changes, collaborate, and automate workflows with semantic models. TMDL is still in preview mode, which means that it's not fully stable or supported and may have some limitations or issues. 
 
+![Supported File Types TMDL](~/images/file-types/te3-supported-file-tmdl.png)
+
+1. The overall serialization is on the top object level from the TOM
+2. Each table is a single file
+3. The TMDL file consist of a YAML like indentation with each column and measure inside the file.
+
+For further reading please see: [TMDL](xref:tmdl)
+
+[Download example TMDL Folder Structure](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/tmdl-model-example.zip)
 
 ***
-## Supporting files
+
+## Tabular Editor Supporting files
 
 Supporting files are files which are not used by Analysis Services or Power BI. Instead, these files all support different kinds of development workflow in Tabular Editor 3 and other tools.
 
@@ -78,10 +102,17 @@ A .te3diag file is a file format that stores the diagram of a model created with
 
 These file can be useful for documenting the model structure and logic for other developers who work on the same project. A .te3diag file can be saved in the same folder as the model file for easy access and reference.
 
+Diagram files are actually JSON that is stored in a Tabular Editor 3 extension.
+
+[Download example Diagram File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/te3-diagram.te3diag)
+
 
 ### DAX files (.dax)
 
-DAX queries are expressions that can be used to manipulate and analyze data in tabular models. A DAX file is a text file that contains one or more DAX queries. You can save a DAX file in Tabular Editor 3 and use it later to run the queries again. You can also open a DAX file in other tools that support DAX, such as [DAX Studio](https://daxstudio.org).
+DAX queries are expressions that can be used to manipulate and analyze data in semantic models. A DAX file is a text file that contains one or more DAX queries. You can save a DAX file in Tabular Editor 3 and use it later to run the queries again. You can also open a DAX file in other tools that support DAX, such as [DAX Studio](https://daxstudio.org).
+
+[Download example DAX File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/dax-query-example.dax)
+
 
 ### C# Scripts (.csx)
 
@@ -90,6 +121,9 @@ Creating and editing C# Scripts is one of Tabular Editor's biggest productivity 
 These scripts can be saved as files with the .csc extension and loaded into Tabular Editor as well as saved as Macros. 
 
 This way, scripts can be reused without having to write them from scratch every time. The [script library](xref:csharp-script-library) is a good place investigate and reuse various examples of scripts as they demonstrate different features and functionalities of C#. 
+
+[Download example C# Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/create-sum-measures-csharp.csx)
+
 
 ### DAX Scripts (.te3daxs)
 
@@ -100,9 +134,50 @@ With Tabular Editor, you can export and import .vpax files using the Vertipaq An
 
 You can use this file to analyze and optimize your model performance, without exposing sensitive data. For example, you can use the [DAX optimizer](https://www.daxoptimizer.com/) tool to get suggestions on how to improve your DAX formulas based on the .vpax file.
 
+[Download example DAX Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/dax-script-example.te3daxs)
+
+> [!WARNING]
+> If your model metadata is confidential the .vpax file should also be considered confidential and only shared with that in mind
+
+
 Unlike other supporting file types creating a .vpax file is done within Vertipaq Analyzer window using the 'Import' and 'Export' buttons. 
 
 ![VPAX](~/images/file-types/te3-supported-file-vpax.png)
 
+[Download example DAX Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/vpaq-example.vpax)
+
 
 For more documentation on Vertipaq Analyzer please see: [sqlbi Vertipaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer) and [sqlbi Docs: Vertipaq Analyzer](https://docs.sqlbi.com/vertipaq-analyzer/)
+
+## Local Setting Files
+
+Tabular Editor maintains several local files in the "%localappdata%\TabularEditor3" folder. These files are functionally relevant for Tabular Editor 3 and are useful to know.
+
+It can be helpful to share these files across a team so that all developers have the same Macros and BPA rules.
+
+> [!TIP]
+> A windows native way of syncing a version controlled file into the "%localappdata%\TabularEditor3" folder is to use [SymLink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/).
+>
+> Store the required files in Git or OneDrive and create a Symlink to the "%localappdata%\TabularEditor3" folder, but be aware that this could end up with synchronization issues, if multiple users update the same file version.
+
+
+### MacroActions.json:
+This file stores all the macros that you have created or imported. It can be useful to share this file with your colleagues or backup it in a version control system and can also be configured to sync with a remote repository that contains macros (See tip above).
+
+This file contains the index of each macro that is used in the software. If you need to change the order or the name of any macro, you can edit this file manually with a text editor. However, be careful not to introduce any errors or inconsistencies in the file thereby corrupting so make sure to create a backup.
+
+[Download example MacroActions File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/MacroActions.json)
+
+
+### BPARules.json: 
+The file contains the [Best Practice Analyzer rules](xref:using-bpa) and fix expressions. The only place to add and edit  fix expressions is inside this JSON file.
+It is recommended to store the PBA rule file in version control, which also enables the possibility of running the BPA rules against the semantic model before deployment. 
+
+You can download the official Microsoft BPA rules here: [PBA Rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json)
+
+### RecentServers.json:
+Contains all the servers a user has been connected to. It can be advisable to edit it manually to 'forget' past servers no longer relevant.
+
+### Layouts.json
+The Layouts file is automatically generated by Tabular Editor when starting the application. 
+If the Tabular Editor layout does not behave as expected a good first step is to backup this file somewhere else, delete the original and restart Tabular Editor 3.

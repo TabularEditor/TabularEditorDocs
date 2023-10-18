@@ -1,0 +1,63 @@
+--------------------------
+-- Measure: [Net Orders $]
+--------------------------
+MEASURE Orders[Net Orders $] = 
+    CALCULATE (
+        [Total Net Order Value],
+        'order doc type'[Group]
+            <> "Cancellation"
+    )
+    Description = "Net orders exclude cancellation document types"
+    DisplayFolder = "measures"
+    FormatString = "#,##0"
+
+----------------------------
+-- Measure: [Net Orders Qty]
+----------------------------
+MEASURE Orders[Net Orders Qty] = 
+    CALCULATE (
+        [Total Net Order Quantity],
+        'order doc type'[Group]
+            <> "Cancellation"
+    )
+    Description = "Net orders exclude cancellation document types"
+    DisplayFolder = "measures"
+    FormatString = "#,##0"
+
+------------------------------
+-- Measure: [Net Orders $ 1YP]
+------------------------------
+MEASURE Orders[Net Orders $ 1YP] = CALCULATE ( [Net Orders $], DATEADD('Date'[Date], -1, YEAR ))
+    Description = "Net orders exclude cancellation document types"
+    DisplayFolder = "measures"
+    FormatString = "#,##0"
+
+------------------------------
+-- Measure: [Net Orders $ 2YP]
+------------------------------
+MEASURE Orders[Net Orders $ 2YP] = CALCULATE ( [Net Orders $], DATEADD('Date'[Date], -2, YEAR ))
+    Description = "Net orders exclude cancellation document types"
+    DisplayFolder = "measures"
+    FormatString = "#,##0"
+
+-----------------------------------
+-- Measure: [Total Net Order Value]
+-----------------------------------
+MEASURE Orders[Total Net Order Value] = sum('orders'[net order value (eur)])
+    Description = "The net order value is the sum of all order intake including cancellations (also known as Gross Orders)"
+    DisplayFolder = "measures"
+    FormatString = "#,##0"
+
+-------------------------
+-- Measure: [Order Lines]
+-------------------------
+MEASURE Orders[Order Lines] = distinctcount([orderlines])
+    DisplayFolder = "measures"
+    FormatString = "#,##0"
+
+--------------------------------------
+-- Measure: [Total Net Order Quantity]
+--------------------------------------
+MEASURE Orders[Total Net Order Quantity] = sum('Orders'[Net Order qty])
+    DisplayFolder = "measures"
+    FormatString = "#,##0"
