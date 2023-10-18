@@ -31,6 +31,7 @@ When connecting to a dataset through the XMLA endpoint, all data modeling operat
 
 > [!WARNING]
 > Once a change is made to a Power BI dataset through the XMLA endpoint, it will not be possible to download the dataset as a .pbix file. [More information](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets).
+> Please see [Creating PBIX File from XMLA Endoint](powerbi-xmla-pbix-workaround) for a workaround
 
 ## Workflow
 

@@ -4,6 +4,7 @@
 ## @editions
 ## @desktop-limitations-te3
 ## @powerbi-xmla
+### @powerbi-xmla-pbix-workaround
 
 # Documentation
 ## @user-interface
