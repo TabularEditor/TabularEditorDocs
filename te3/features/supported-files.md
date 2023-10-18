@@ -25,7 +25,12 @@ Tabular Editor supports four file types for semantic models: .bim, Power BI file
 > Since **Tabular Editor 3 Desktop Edition** is only intended to be used as an External Tool for Power BI Desktop, this edition does not allow loading and saving semantic model files. You may however still use Tabular Editor 2.x for this purpose. See <xref:editions> to learn more about the difference between the Tabular Editor 3 editions.
 
 ### [Tabular Model Files (.bim)](#tab/BIM)
-A .bim file is a single file consisting of nested JSON that is known as TMSL. It's the original format for a semantic model that Microsoft supports. However, it has a large drawback: as it's a single large file, it's difficult to track changes and use good team development practices such as git source control.
+A .bim file is a single file consisting of nested JSON that is known as TMSL. 
+
+#### .bim file in a folder
+It's the original format for a semantic model that Microsoft supports. 
+
+However, it has a large drawback: as it's a single large file, it's difficult to track changes and use good team development practices such as git source control.
 
 ![Supported File Types BIM](~/images/file-types/te3-supported-file-bim.png)
 
@@ -39,18 +44,26 @@ Tabular Editor can handle two types of Power BI files the Power BI Template file
 The main difference between the two, is that the **.pbip file contains model data**, where as the **.pbit file contains no data**. Both file types contain model **metadata** in the JSON-based [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) format, which can be loaded by Tabular Editor.
 
 #### Power BI Project file (.pbip ) *in Preview*
-A Power BI Project file (.pbip) is a new kind of Power BI file that is currently in preview mode. It lets you store both a model (.bim) file and a report file structure in one place. You can open and save .pbip files from Tabular Editor, as well as from Power BI Desktop.
+A Power BI Project file (.pbip) is a new kind of Power BI file that is currently in preview mode. 
+
+It lets you store both a model (.bim) file and a report file structure in one place. You can open and save .pbip files from Tabular Editor, as well as from Power BI Desktop.
 
 > [!TIP]
 > Power BI Project file is the recommended format using Power BI with Tabular Editor.
 
 #### Power BI Template file (.pbit)
 > [!WARNING]
-> Even though it's technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. As such, there is always a risk of making changes to the .pbit file which would cause the file to become unloadable in Power BI Desktop, or cause stability issues once loaded. In this case, Microsoft support will be unable to assist you.
+> Even though it's technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. 
+> As such, there is always a risk of making changes to the .pbit file which would cause the file to become unloadable in Power BI Desktop, or cause stability issues once loaded. In this case, Microsoft support will be unable to assist you.
 
 ### [Tabular Model Folder (.json)](#tab/JSON)
 
-Tabular Editor allows you to save your dataset objects as separate JSON files, which is a custom serialization format. This format preserves the structure and properties of your objects, such as tables, columns, measures, and relationships.This has been supported in Tabular Editor from the early days and is a proven, though by Microsoft unsupported, method for storing your dataset objects as individual files. Thereby enabling developers to track changes in source control and collaborate on building semantic models.
+Tabular Editor allows you to save your dataset objects as separate JSON files, which is a custom serialization format. 
+
+This format preserves the structure and properties of your objects, such as tables, columns, measures, and relationships.
+
+This format has been supported in Tabular Editor from the early days and is a proven, though by Microsoft unsupported, method for storing your dataset objects as individual files. Thereby enabling developers to track changes in source control and collaborate on building semantic models.
+
 There is full compatibility between Tabular Editor 2 and 3 with regards to the the JSON file structure.
 
 In order to save a semantic model to JSON you must use the 'Save to Folder' option when saving the first time. Subsequent saves to a model loaded from a JSON structured model maintains the setting. it's always possible to convert a model that is in JSON to a .bim file using 'File > Save As'
@@ -76,7 +89,13 @@ For more information on Save to Folder and serialization settings please refer t
 
 ### [TMDL](#tab/TMDL)
 
-TMDL stands for Tabular Model Definition Language and it's a new format for defining and managing datasets in a human readable format using YAML like syntax. Microsoft introduced TMDL as a preview feature in April 2023, aiming to provide a unified and consistent way of working with datasets across different platforms and tools. TMDL is designed to support dataset source control, enabling users to track changes, collaborate, and automate workflows with semantic models. TMDL is still in preview mode, which means that it's not fully stable or supported and may have some limitations or issues. 
+TMDL stands for Tabular Model Definition Language and it's a new format for defining and managing datasets in a human readable format using YAML like syntax. 
+
+Microsoft introduced TMDL as a preview feature in April 2023, aiming to provide a unified and consistent way of working with datasets across different platforms and tools. 
+
+TMDL is designed to support dataset source control, enabling users to track changes, collaborate, and automate workflows with semantic models. 
+> [!Note]
+> TMDL is in preview, which means that it's not fully stable and may have some limitations or issues. 
 
 ![Supported File Types TMDL](~/images/file-types/te3-supported-file-tmdl.png)
 
@@ -109,7 +128,9 @@ Diagram files are actually JSON that is stored in a Tabular Editor 3 extension.
 
 ### DAX files (.dax)
 
-DAX queries are expressions that can be used to manipulate and analyze data in semantic models. A DAX file is a text file that contains one or more DAX queries. You can save a DAX file in Tabular Editor 3 and use it later to run the queries again. You can also open a DAX file in other tools that support DAX, such as [DAX Studio](https://daxstudio.org).
+DAX queries are expressions that can be used to manipulate and analyze data in semantic models. A DAX file is a text file that contains one or more DAX queries. 
+
+You can save a DAX file in Tabular Editor 3 and use it later to run the queries again. You can also open a DAX file in other tools that support DAX, such as [DAX Studio](https://daxstudio.org).
 
 [Download example DAX File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/dax-query-example.dax)
 
