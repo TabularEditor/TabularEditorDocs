@@ -13,39 +13,42 @@ applies_to:
 ---
 # Editing a Power BI dataset through the XMLA endpoint
 
-Once a change is made to a Power BI dataset through the XMLA endpoint, it is not be possible to download the dataset as a .pbix file from the Power BI service. 
+Once a change is made to a Power BI semantic model through the XMLA endpoint, it's not possible to download the dataset as a .pbix file from the Power BI service. 
 
-However with the Power BI Project file it is possible to create a pbix file from the remote model in the following manner. 
+However, with the Power BI Project file, it's possible to create a pbix file from the remote model by following the three-step process, which is described as follows. 
 
 ![XLMA to PBIX Overview](~/images/power-bi/create-pbix-from-xmla-overview.png)
 
 > [!NOTE]
-> The described workaround is not officially supported by Microsoft and as such there is no guarantee that it will work for every model
+> The described workaround isn't officially supported by Microsoft. There's no guarantee that it works for every model.
 
-## Create empty Power BI Project
 
-The first step is to create a new Power BI report and save it as an empty Power BI Project (.pbip) file:
+## Step 1: Create and save an empty Power BI projects (.pbip) file
+
+The first step is to create a new Power BI report and save it as an empty Power BI Project (.pbip) file, as depicted in the following diagram.
 
 ![Save PBIP file](~/images/power-bi/save-pbip-file.png)
 
-This will create a folder structure containing an empty model file that will be overwritten later to move the XMLA endpoint semantic model to Power BI
+This creates a folder structure that contains an empty _model_ file. This _model_ file contains the model metadata. You'll overwrite this metadata in the next step with the metadata of the published model that you want to save to .pbix.
 
 ![PBIP with Model file](~/images/power-bi/pbip-file-bim-model.png)
 
-Close Power BI desktop afterwards.
+Close Power BI desktop, and proceed with the next step in Tabular Editor.
 
-## Open and Save Model into Power BI Project
 
-With Tabular Editor open the XMLA endpoint and load the semantic model into the tool. 
+## Step 2: Open and save the model as .pbip
 
-Using "File > Save As" navigate to the Power BI Project folder and overwrite the model file shown above. 
+With Tabular Editor open, connect to the Fabric workspace via the XMLA endpoint. Load the Power BI semantic model you want to convert to a .pbix. 
+
+Using _File > Save as..._, navigate to the Power BI Project folder. Overwrite the _model_ file shown in the previous diagram. 
 
 This will save the remote model into the Power BI Project that will now contain the model metadata.
 
+
+## Step 3: Save to .pbix and open this file in Power BI Desktop
+
 ![PBIP with Tables](~/images/power-bi/pbip-includes-tables.png)
 
-## Save to pbix
+Open the .pbip and save it to a .pbix using _File > Save As..._ in Power BI Desktop.
 
-The next step is to save the Power BI project to a .pbix using File > Save As in Power BI Desktop.
-
-Once the file is saved, the data inside the newly created .pbix file can be refreshed accordingly.
+You know have the .pbix that contains the model that was published to the Fabric workspace. When you open the .pbix, you can _re-hydrate_ the file, meaning that you load the data based on the connections specified in the model.
