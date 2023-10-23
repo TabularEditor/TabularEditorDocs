@@ -41,12 +41,13 @@ However, it has a large drawback: as it's a single large file, it's difficult to
 
 Tabular Editor can handle two types of Power BI files the Power BI Template file (.pbit) and the Power BI Project file (.pbip).
 
-The main difference between the two, is that the **.pbip file contains model data**, where as the **.pbit file contains no data**. Both file types contain model **metadata** in the JSON-based [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) format, which can be loaded by Tabular Editor.
+The main difference between the two, is that the **.pbip file contains model data**, where as the **.pbit file contains no data**. Power BI template files contain model **metadata** in the JSON-based [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) format whereas the Power BI Project file reference a model.bim file in the Dataset folder of the project. [More info here](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-power-bi-desktop-developer-mode-preview/)
+
 
 #### Power BI Project file (.pbip ) *in Preview*
 A Power BI Project file (.pbip) is a new kind of Power BI file that is currently in preview mode. 
 
-It lets you store both a model (.bim) file and a report file structure in one place. You can open and save .pbip files from Tabular Editor, as well as from Power BI Desktop.
+It lets you store both a model (.bim) file and a report file structure in folders. You can open and save .pbip folders from Tabular Editor, as well as from Power BI Desktop.
 
 > [!TIP]
 > Power BI Project file is the recommended format using Power BI with Tabular Editor.
