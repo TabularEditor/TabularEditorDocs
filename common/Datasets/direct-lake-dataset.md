@@ -28,7 +28,7 @@ Tabular Editor 2 can connect to Direct Lake semantic models, but does not have a
 
 > [!NOTE]
 > DirectLake models currently use a collation that is different from regular Power BI import semantic models. This may lead to different results when querying the model, or when referencing object names in DAX code.
-For more information please see this blog post by Kurt Buhler: [Case-sensitive models in Power BI: consequences & considerations](https://data-goblins.com/power-bi/case-specific)
+> For more information please see this blog post by Kurt Buhler: [Case-sensitive models in Power BI: consequences & considerations](https://data-goblins.com/power-bi/case-specific)
 
 
 <div class="NOTE">
