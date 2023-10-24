@@ -1,77 +1,159 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        a { text-decoration: none; }
-        img { width: 100%; height: auto; }
-        body { font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif; }
-        .light-mode { background-color: #fdfdfd; color: #555 }
-        .light-mode a { color: #337ab7; }
-        .light-mode a:hover { color: #23527c; }
-        .dark-mode { background-color: #333; color: #fff; }
-        .dark-mode a { color: #87bdd8; }
-        .dark-mode a:hover { color: #a8d3e6; }
+        a {
+            text-decoration: none;
+        }
 
-        * { box-sizing: border-box; }
-        .column { float: left; width: 50%; padding: 10px; }
-        .row:after { content: ""; display: table; clear: both; }
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
+        }
+
+        #content-wrapper {
+            height: 100vh;
+            overflow-y: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+        .light-mode {
+            background-color: #fdfdfd;
+            color: #555
+        }
+
+        .light-mode a {
+            color: #337ab7;
+        }
+
+        .light-mode a:hover {
+            color: #23527c;
+        }
+
+        .dark-mode {
+            background-color: #232323;
+            color: #fff;
+        }
+
+        #content-wrapper.dark-mode {
+            scrollbar-face-color: #323232;
+            scrollbar-shadow-color: #222222;
+            scrollbar-highlight-color: #444444;
+            scrollbar-3dlight-color: #222222;
+            scrollbar-darkshadow-color: #222222;
+            scrollbar-track-color: #2a2a2a;
+            scrollbar-arrow-color: #666666;
+        }
+
+        #content-wrapper.dark-mode::-webkit-scrollbar {
+            width: 16px;
+        }
+
+        #content-wrapper.dark-mode::-webkit-scrollbar-track {
+            background: #323232;
+        }
+
+        #content-wrapper.dark-mode::-webkit-scrollbar-thumb {
+            background: #232323;
+            border: 1px solid #4B4B4B;
+        }
+
+        #content-wrapper.dark-mode::-webkit-scrollbar-thumb:hover {
+            border-color: #d0d0d0;
+        }
+
+        .dark-mode a {
+            color: #87bdd8;
+        }
+
+        .dark-mode a:hover {
+            color: #a8d3e6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+            padding: 10px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
     </style>
 </head>
-<body id="body-element">
-    <!--- CONTENT GOES BELOW THIS LINE -->
-    <h2>What's new</h2>
-    <div class="row">
-        <div class="column">
-            <h2>Tabular Editor 3</h2>
-            <p>Latest release: <a href="https://blog.tabulareditor.com/2023/09/25/september-release-tabular-editor-3-11-0/">September 2023</a> <a href="https://docs.tabulareditor.com/te3/other/release-notes"> (v. 3.11.0)</a></p>
-            <ul>
-                <li><a href="https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/">Create DirectLake datasets from scratch</a></li>
-                <li>DAX function updates:
-                    <ul>
-                        <li><a href="https://dax.guide/MINX"><code>MINX</code></a> / <a href="https://dax.guide/MAXX"><code>MAXX</code></a></li>
-                        <li><a href="https://dax.guide/MATCHBY"><code>MATCHBY</code></a></li>
-                    </ul>
-                </li>
-                <li>New support for native queries on Databricks</li>
-                <li>Latest TMDL preview</li>
-                <li>DAX debugger improvements</li>
-            </ul>
-            <h2>Community</h2>
-            <p>Ask questions, suggest enhancements and help other TE fans get their answers at our <a href="https://github.com/TabularEditor/TabularEditor3/discussions"> GitHub community</a>:</p>
-            <h3>Blogs</h3>
-            <ul>
-                <li><a href="https://blog.tabulareditor.com/2023/09/27/ci-cd-scripts-for-tabular-editor-2s-cli/">CI/CD scripts for Tabular Editor</a></li>
-                <li><a href="https://www.oliviervs.be/analysis-services/sortbycolumn-property-set-to-an-invalid-column-id/">SortByColumn property set to an invalid column ID</a> by Oliver Van Steenlandt</li>
-                <li><a href="https://github.com/PowerBI-tips/TabularEditor-Scripts">Tabular Editor scripts</a> by <a href="https://powerbi.tips">PowerBI.tips</a></li>
-                <li><a href="https://blog.tabulareditor.com/2023/07/13/using-tabular-editor-in-microsoft-fabric/">Using Tabular Editor in Microsoft Fabric</a> </li>
-                <li><a href="https://data-goblins.com/power-bi/format-power-query-automatically">Format Power Query in Power BI</a> by <a href="https://data-goblins.com/">Kurt Buhler</a></li>
-            </ul>
-            <p>Share your favorite blog or SoMe post <a href="https://github.com/TabularEditor/TabularEditor3/discussions/categories/ressources"> with the community</a></p>
-            <h2>Other resources</h2>
-            <ul>
-                <li><a href="https://github.com/TabularEditor/TabularEditor3/issues">GitHub issue tracker (TE3)</a></li>
-                <li><a href="https://docs.tabulareditor.com/common/CSharpScripts/csharp-script-library.html?tabs=TE3Preferences">Tabular Editor Script Library</a></li>
-                <li><a href="https://github.com/TabularEditor/TabularEditor/issues">GitHub issue tracker (TE2.x)</a></li>
-            </ul>
-        </div>
-        <div class="column">
-            <h2>Tabular Editor Learn</h2>
-            <p>Build better data models, faster! Explore our free <a href="https://tabulareditor.com/learn">interactive learning platform</a>:</p>
-            <ul>
-                <li>25+ hours of content</li>
-                <li>Master every aspect of Tabular Editor</li>
-                <li>Enhance your data modeling skills </li>
-                <li>Help Borp, Zip, Tropphus at Spaceparts Co.</li>
-            </ul>
-            <p><a href="https://tabulareditor.com/learn">tabulareditor.com/learn</a></p>
-            <img src="images/SpacePartsCo_CharacterLineUp.png" />
-            <h2>Meet the team</h2>
-            <p>The Tabular Editor Team will be at the following conferences:</p>
-            <ul>
-                <li><a href=https://sqlusergroupaustria.wordpress.com/2023/09/19/data-community-austria-day-2024>Data Community Austria Day 2024</a> January 26th, 2024</li>
-                <li><a href=https://www.fabricfebruary.com>Fabric February 2024</a> February 8th, 2024</li>
-              </ul>
+<body>
+    <div id="content-wrapper">
+        <!--- CONTENT GOES BELOW THIS LINE -->
+        <h2>What's new</h2>
+        <div class="row">
+            <div class="column">
+                <h2>Tabular Editor 3</h2>
+                <p>Latest release: <a href="https://blog.tabulareditor.com/2023/09/25/september-release-tabular-editor-3-11-0/">September 2023</a> <a href="https://docs.tabulareditor.com/te3/other/release-notes"> (v. 3.11.0)</a></p>
+                <ul>
+                    <li><a href="https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/">Create DirectLake datasets from scratch</a></li>
+                    <li>
+                        DAX function updates:
+                        <ul>
+                            <li><a href="https://dax.guide/MINX"><code>MINX</code></a> / <a href="https://dax.guide/MAXX"><code>MAXX</code></a></li>
+                            <li><a href="https://dax.guide/MATCHBY"><code>MATCHBY</code></a></li>
+                        </ul>
+                    </li>
+                    <li>New support for native queries on Databricks</li>
+                    <li>Latest TMDL preview</li>
+                    <li>DAX debugger improvements</li>
+                </ul>
+                <h2>Community</h2>
+                <p>Ask questions, suggest enhancements and help other TE fans get their answers at our <a href="https://github.com/TabularEditor/TabularEditor3/discussions"> GitHub community</a>:</p>
+                <h3>Blogs</h3>
+                <ul>
+                    <li><a href="https://blog.tabulareditor.com/2023/09/27/ci-cd-scripts-for-tabular-editor-2s-cli/">CI/CD scripts for Tabular Editor</a></li>
+                    <li><a href="https://www.oliviervs.be/analysis-services/sortbycolumn-property-set-to-an-invalid-column-id/">SortByColumn property set to an invalid column ID</a> by Oliver Van Steenlandt</li>
+                    <li><a href="https://github.com/PowerBI-tips/TabularEditor-Scripts">Tabular Editor scripts</a> by <a href="https://powerbi.tips">PowerBI.tips</a></li>
+                    <li><a href="https://blog.tabulareditor.com/2023/07/13/using-tabular-editor-in-microsoft-fabric/">Using Tabular Editor in Microsoft Fabric</a> </li>
+                    <li><a href="https://data-goblins.com/power-bi/format-power-query-automatically">Format Power Query in Power BI</a> by <a href="https://data-goblins.com/">Kurt Buhler</a></li>
+                </ul>
+                <p>Share your favorite blog or SoMe post <a href="https://github.com/TabularEditor/TabularEditor3/discussions/categories/ressources"> with the community</a></p>
+                <h2>Other resources</h2>
+                <ul>
+                    <li><a href="https://github.com/TabularEditor/TabularEditor3/issues">GitHub issue tracker (TE3)</a></li>
+                    <li><a href="https://docs.tabulareditor.com/common/CSharpScripts/csharp-script-library.html?tabs=TE3Preferences">Tabular Editor Script Library</a></li>
+                    <li><a href="https://github.com/TabularEditor/TabularEditor/issues">GitHub issue tracker (TE2.x)</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <h2>Tabular Editor Learn</h2>
+                <p>Build better data models, faster! Explore our free <a href="https://tabulareditor.com/learn">interactive learning platform</a>:</p>
+                <ul>
+                    <li>25+ hours of content</li>
+                    <li>Master every aspect of Tabular Editor</li>
+                    <li>Enhance your data modeling skills </li>
+                    <li>Help Borp, Zip, Tropphus at Spaceparts Co.</li>
+                </ul>
+                <p><a href="https://tabulareditor.com/learn">tabulareditor.com/learn</a></p>
+                <img src="images/SpacePartsCo_CharacterLineUp.png" />
+                <h2>Meet the team</h2>
+                <p>The Tabular Editor Team will be at the following conferences:</p>
+                <ul>
+                    <li><a href=https://sqlusergroupaustria.wordpress.com/2023/09/19/data-community-austria-day-2024>Data Community Austria Day 2024</a> January 26th, 2024</li>
+                    <li><a href=https://www.fabricfebruary.com>Fabric February 2024</a> February 8th, 2024</li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -84,30 +166,32 @@
                 results = regex.exec(window.location.search);
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
-        
+
         function applyStyle() {
             var style = getParameterByName('style');
-            var bodyElement = document.getElementById('body-element');
+            var bodyElement = document.getElementById('content-wrapper');
 
             if (style) {
-		var links = document.querySelectorAll('a');
+                var links = document.getElementsByTagName('a');
 
                 for (var i = 0; i < links.length; i++) {
                     links[i].setAttribute('target', '_blank');
                 }
 
                 if (style === 'dark') {
-                    bodyElement.classList.add('dark-mode');
+                    if(bodyElement.className) bodyElement.className += ' dark-mode';
+                    else bodyElement.className = 'dark-mode';
                 } else if (style === 'light') {
-                    bodyElement.classList.add('light-mode');
+                    if (bodyElement.className) bodyElement.className += ' light-mode';
+                    else bodyElement.className = 'light-mode';
                 }
             }
         }
-        
+
         if (document.addEventListener) {
-	    document.addEventListener('DOMContentLoaded', applyStyle);
-        } else if (document.attachEvent) {  
-            document.attachEvent('onreadystatechange', function() {
+            document.addEventListener('DOMContentLoaded', applyStyle);
+        } else if (document.attachEvent) {
+            document.attachEvent('onreadystatechange', function () {
                 if (document.readyState === 'complete') {
                     applyStyle();
                 }
@@ -115,7 +199,7 @@
         }
 
         if (window.parent.resizeIframe) {
-            window.addEventListener("load", function() {
+            window.addEventListener("load", function () {
                 var body = document.body;
                 var computedStyle = window.getComputedStyle(body);
                 var marginTop = parseFloat(computedStyle.marginTop);
