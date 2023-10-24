@@ -92,9 +92,9 @@
             if (style) {
                 var links = document.querySelectorAll('a');
 
-                links.forEach(link => {
-                    link.setAttribute('target', '_blank');
-                });
+                for (var i = 0; i < links.length; i++) {
+                    links[i].setAttribute('target', '_blank');
+                }
 
                 if (style === 'dark') {
                     bodyElement.classList.add('dark-mode');
