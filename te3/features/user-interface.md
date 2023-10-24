@@ -62,7 +62,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
 
 ![File Menu](~/images/file-menu.png)
 
-- **New**: Opens a submenu that allows you to create a new blank data model (Ctrl+N), or create various [supporting files](supported-files.md#supporting-files) such as a new DAX Query or DAX Script (text files) or a data model diagram (JSON file). Supporting files (with the exception of C# scripts), can be created only when a model is already loaded in Tabular Editor.
+- **New**: Opens a submenu that allows you to create a new blank data model (Ctrl+N), or create various [supporting files](supported-files.md#tabular-editor-supporting-files) such as a new DAX Query or DAX Script (text files) or a data model diagram (JSON file). Supporting files (with the exception of C# scripts), can be created only when a model is already loaded in Tabular Editor.
   
   ![File Menu New](~/images/file-menu-new.png)
 
@@ -81,7 +81,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
     ![Supported File Types](~/images/supported-file-types.png)
 
 > [!IMPORTANT]
-> In Tabular Editor 3 Desktop Edition the **Open > Model from file...** and **Open > Model from folder...** options are not available and the **Open > File...** dialog only allows opening [supporting files](supported-files.md#supporting-files), not files containing metadata.
+> In Tabular Editor 3 Desktop Edition the **Open > Model from file...** and **Open > Model from folder...** options are not available and the **Open > File...** dialog only allows opening [supporting files](supported-files.md#tabular-editor-supporting-files), not files containing metadata.
 
 - **Revert**: This option lets you reload the model metadata from the source, discarding any changes that are made in Tabular Editor, which have not yet been saved. This option is useful when Tabular Editor 3 is used as an External Tool for Power BI Desktop, and a change is made in Power BI Desktop while Tabular Editor 3 is connected. By choosing **Revert**, Tabular Editor 3 can reload the model metadata from Power BI Desktop without having to reconnect.
 - **Close**: This closes the active document (for example a DAX Query, a C# script or a data model diagram). If the document has unsaved changes, Tabular Editor will prompt you to save the changes before closing.
@@ -94,7 +94,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
 - **Recent tabular models**: Displays a list of recently used model metadata files or folders, allowing you to quickly reload model metadata from one of these.
 
 > [!IMPORTANT]
-> In Tabular Editor 3 Desktop Edition the **Save to folder** and **Recent tabular models** options are disabled. In addition, the **Save as** option is only enabled for [supporting files](supported-files.md#supporting-files).
+> In Tabular Editor 3 Desktop Edition the **Save to folder** and **Recent tabular models** options are disabled. In addition, the **Save as** option is only enabled for [supporting files](supported-files.md#tabular-editor-supporting-files).
 
 - **Exit**: Shuts down the Tabular Editor 3 application. You are prompted to save any unsaved files or model metadata before the application is shut down.
 
@@ -168,7 +168,7 @@ The **Window** menu provides shortcuts for managing and navigating between the v
 
 ![View Menu](~/images/window-menu.png)
 
-- **New...** this submenu provides a shortcut for creating new [supporting files](supported-files.md#supporting-files). The options here are identical to those under **File > New**.
+- **New...** this submenu provides a shortcut for creating new [supporting files](supported-files.md#tabular-editor-supporting-files). The options here are identical to those under **File > New**.
 - **Float** undocks the current view or document into a floating window.
 - **Pin tab** pins a tab. When a tab is pinned, it is shown at the left-most side of the document tabs, and when right-clicking on the tabs, shortcuts are available for closing only unpinned tabs.
   

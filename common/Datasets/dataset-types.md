@@ -61,5 +61,5 @@ The following datasets types are unsupported, as they don't support XMLA write o
 - Reports based on a live connection to a Power BI dataset.
 - Datasets with Push data.
 - Datasets stored in Power BI My Workspace.
-- Direct Lake Default Datasets
+- Direct Lake Default Datasets. (It is possible to connect to a default dataset, but it is not possible to change it through the XMLA endpoint)
 - Excel workbook datasets.
