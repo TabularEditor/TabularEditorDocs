@@ -90,11 +90,11 @@
             var bodyElement = document.getElementById('body-element');
 
             if (style) {
-                const links = document.querySelectorAll('a');
+		var links = document.querySelectorAll('a');
 
-                links.forEach(link => {
-                    link.setAttribute('target', '_blank');
-                });
+                for (var i = 0; i < links.length; i++) {
+                    links[i].setAttribute('target', '_blank');
+                }
 
                 if (style === 'dark') {
                     bodyElement.classList.add('dark-mode');
@@ -104,15 +104,15 @@
             }
         }
         
-		if (document.addEventListener) {
-			document.addEventListener('DOMContentLoaded', applyStyle);
-		} else if (document.attachEvent) {  
-			document.attachEvent('onreadystatechange', function() {
-				if (document.readyState === 'complete') {
-					applyStyle();
-				}
-			});
-		}
+        if (document.addEventListener) {
+	    document.addEventListener('DOMContentLoaded', applyStyle);
+        } else if (document.attachEvent) {  
+            document.attachEvent('onreadystatechange', function() {
+                if (document.readyState === 'complete') {
+                    applyStyle();
+                }
+            });
+        }
 
         if (window.parent.resizeIframe) {
             window.addEventListener("load", function() {
