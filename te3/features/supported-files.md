@@ -39,25 +39,31 @@ However, it has a large drawback: as it's a single large file, it's difficult to
 
 ### [Power BI](#tab/PowerBI)
 
-Tabular Editor can handle two types of Power BI files the Power BI Template file (.pbit) and the Power BI Project file (.pbip).
+Tabular Editor can handle two types of Power BI storage formats:
 
-The main difference between the two, is that the **.pbip file contains model data**, where as the **.pbit file contains no data**. Power BI template files contain model **metadata** in the JSON-based [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) format whereas the Power BI Project file reference a model.bim file in the Dataset folder of the project. [More info here](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-power-bi-desktop-developer-mode-preview/)
+- Power BI Template files (.pbit)
+- Power BI Project folders (.pbip)
 
 
-#### Power BI Project file (.pbip ) *in Preview*
-A Power BI Project file (.pbip) is a new kind of Power BI file that is currently in preview mode. 
 
-It lets you store both a model (.bim) file and a report file structure in folders. You can open and save .pbip folders from Tabular Editor, as well as from Power BI Desktop.
-
-> [!TIP]
-> Power BI Project file is the recommended format using Power BI with Tabular Editor.
-
-#### Power BI Template file (.pbit)
-Power BI Template files contain a semantic model and can as such be opened and edited in Tabular Editor.
+#### Power BI Project folders (.pbip ) *(Preview)*
+Power BI Project folders were introduced in June 2023 and is available in Power BI Desktop as a preview feature (also known as "Developer Mode"). The storage format is an alternative way to store the contents of a .pbix file, in a format that is more friendly to version control and 3rd party reading/editing of the content.
 
 > [!WARNING]
-> Even though it's technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. 
-> As such, there is always a risk of making changes to the .pbit file which would cause the file to become unloadable in Power BI Desktop, or cause stability issues once loaded. In this case, Microsoft support will be unable to assist you.
+> Just like a .pbix file, a Power BI Project folder may contain model **data** in addition to **metadata**, so the folder should be treated as sensitive in the same way as a .pbix file should be.
+
+At the root of the Power BI Project folders sits a .pbip file. The file is essentially a pointer to a Power BI report definition file, which may then in turn point to a Power BI dataset, either locally in the same folder structure (stored as a model.bim file), or a dataset published to the Power BI service (in this case, the report is said to be in *Live connect* mode). If a dataset (model.bim file) is present in the Power BI Project folder, Tabular Editor will be able to load this model metadata when opening the .pbip file.
+
+To learn more about Power BI Project folders, please read [this official blog post from Microsoft](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-power-bi-desktop-developer-mode-preview/).
+
+> [!IMPORTANT]
+> Power BI Project file is the recommended format when using Power BI with Tabular Editor, as it supports the [widest range of modeling operations](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring). Making other types of changes to the model metadata than those listed, may cause your model to become unloadable in Power BI Desktop, and in this case, Microsoft Support will not be able to help you.
+
+#### Power BI Template file (.pbit)
+Power BI Template files are similar to .pbix files, with the exception that they do not contain any model **data** - only model **metadata**. As such, this model metadata can be opened and edited in Tabular Editor.
+
+> [!WARNING]
+> Even though it's technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. Tabular Editor will show a warning and block changes by default. Use Power BI Project folders instead, if you intend to make changes to your Power BI model through Tabular Editor.
 
 ### [Tabular Model Folder (.json)](#tab/JSON)
 
