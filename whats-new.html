@@ -105,7 +105,7 @@
         });
 
         if (window.parent.resizeIframe) {
-            window.addEventListener("load", () => {
+            window.addEventListener("load", function() {
                 var body = document.body;
                 var computedStyle = window.getComputedStyle(body);
                 var marginTop = parseFloat(computedStyle.marginTop);
