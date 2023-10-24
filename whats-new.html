@@ -86,8 +86,8 @@
         }
         
         document.addEventListener('DOMContentLoaded', function () {
-            const style = getParameterByName('style');
-            const bodyElement = document.getElementById('body-element');
+            var style = getParameterByName('style');
+            var bodyElement = document.getElementById('body-element');
 
             if (style) {
                 const links = document.querySelectorAll('a');
@@ -106,12 +106,12 @@
 
         if (window.parent.resizeIframe) {
             window.addEventListener("load", () => {
-                const body = document.body;
-                const computedStyle = window.getComputedStyle(body);
-                const marginTop = parseFloat(computedStyle.marginTop);
-                const marginBottom = parseFloat(computedStyle.marginBottom);
+                var body = document.body;
+                var computedStyle = window.getComputedStyle(body);
+                var marginTop = parseFloat(computedStyle.marginTop);
+                var marginBottom = parseFloat(computedStyle.marginBottom);
 
-                const frameHeight = body.scrollHeight + marginTop + marginBottom + 100;
+                var frameHeight = body.scrollHeight + marginTop + marginBottom + 100;
 
                 window.parent.resizeIframe(frameHeight);
             });
