@@ -142,7 +142,7 @@ You can save a DAX file in Tabular Editor 3 and use it later to run the queries 
 
 Creating and editing C# Scripts is one of Tabular Editor's biggest productivity features.
 
-These scripts can be saved as files with the .csc extension and loaded into Tabular Editor as well as saved as Macros. 
+These scripts can be saved as files with the .csc extension and loaded into Tabular Editor as well as saved as Macros. A [MacroActions.json local setting file](xref:supported-files#macroactionsjson) is maintained by Tabular Editor.
 
 This way, scripts can be reused without having to write them from scratch every time. The [script library](xref:csharp-script-library) is a good place investigate and reuse various examples of scripts as they demonstrate different features and functionalities of C#. 
 
@@ -161,7 +161,7 @@ You can use this file to analyze and optimize your model performance, without ex
 [Download example DAX Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/dax-script-example.te3daxs)
 
 > [!WARNING]
-> If your model metadata is confidential the .vpax file should also be considered confidential and only shared with that in mind
+> If your model metadata is confidential the .vpax file should also be considered confidential and only shared with that in mind.
 
 
 Unlike other supporting file types creating a .vpax file is done within Vertipaq Analyzer window using the 'Import' and 'Export' buttons. 
@@ -185,7 +185,7 @@ It can be helpful to share these files across a team so that all developers have
 > Store the required files in Git or OneDrive and create a Symlink to the "%localappdata%\TabularEditor3" folder, but be aware that this could end up with synchronization issues, if multiple users update the same file version.
 
 
-### MacroActions.json:
+### MacroActions.json
 This file stores all the macros that you have created or imported. It can be useful to share this file with your colleagues or backup it in a version control system and can also be configured to sync with a remote repository that contains macros (See tip above).
 
 This file contains the index of each macro that is used in the software. If you need to change the order or the name of any macro, you can edit this file manually with a text editor. However, be careful not to introduce any errors or inconsistencies in the file thereby corrupting so make sure to create a backup.
@@ -193,13 +193,13 @@ This file contains the index of each macro that is used in the software. If you 
 [Download example MacroActions File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/MacroActions.json)
 
 
-### BPARules.json: 
+### BPARules.json
 The file contains the [Best Practice Analyzer rules](xref:using-bpa) and fix expressions. The only place to add and edit  fix expressions is inside this JSON file.
 It is recommended to store the PBA rule file in version control, which also enables the possibility of running the BPA rules against the semantic model before deployment. 
 
 You can download the official Microsoft BPA rules here: [PBA Rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json)
 
-### RecentServers.json:
+### RecentServers.json
 Contains all the servers a user has been connected to. It can be advisable to edit it manually to 'forget' past servers no longer relevant.
 
 ### Layouts.json
