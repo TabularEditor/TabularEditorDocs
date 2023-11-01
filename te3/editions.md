@@ -13,7 +13,7 @@ This document provides an overview and comparison of the different editions of T
 The main difference between the various editions of Tabular Editor 3, is which types of tabular data modeling scenarios they support. To understand this difference, consider that Analysis Services (Tabular) exists in a number of different "flavors":
 
 - Power BI Desktop (make sure you you understand the [limitations](xref:desktop-limitations))
-- Power BI Premium through the XMLA Endpoint (Premium Per User or **Premium Capacity [A, EM or P SKUs]**)
+- Power BI Premium through the XMLA Endpoint (Premium Per User, **Premium Capacity [A, EM or P SKUs]**, **Fabric Capacity [F SKUs]**)
 - SQL Server (2016+) Analysis Services (Editions: Developer, Standard, **Enterprise**)
 - Azure Analysis Services (Tiers: Developer, Basic, **Standard**)
 
@@ -38,10 +38,11 @@ Please refer to the matrix below for the full overview of supported scenarios:
 |Azure AS Standard Tier|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 |Power BI Premium Capacity (P SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 |Power BI Embedded Capacity (A/EM SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|Fabric Capacity (F SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 
 \***Note:** Enterprise Edition is required if the Analysis Services data model contains perspectives or tables with multiple partitions (does not apply to Power BI Desktop or Power BI Premium Per User models).
 
-\*\***Note:** Supported file formats are: **.pbit** (Power BI Template), **.bim** (Analysis Services model metadata), **.vpax** (VertiPaq Analyzer) and **database.json** (Tabular Editor folder structure).
+\*\***Note:** Supported file formats are: **.pbip** (Power BI Project) **.pbit** (Power BI Template), **.bim** (Analysis Services model metadata), **.vpax** (VertiPaq Analyzer) and **database.json** (Tabular Editor folder structure).
 
 \*\*\***Note:** Workspace Mode allows Tabular Editor 3 to simultaneously save model metadata to disk and synchronize a database on any of the editions of Analysis Services or Power BI supported by the Tabular Editor 3 edition purchased.
 
@@ -64,7 +65,7 @@ There are no feature differences across the Tabular Editor 3 editions for Power 
 > Please keep in mind that Power BI Desktop [currently does not support all Data modeling operations](xref:desktop-limitations). For this reason, Tabular Editor 3 by default blocks operations that are not supported by Power BI Desktop. However, this restriction can be removed under Tools > Preferences > Power BI.
 
 > [!IMPORTANT]
-> Tabular Editor can only be used as an external tool for Power BI Desktop when the Power BI report (.pbix or .pbit) file contains a data model (Import, DirectQuery or Composite). **Reports using Live connection are not supported** since these reports do not contain a data model. [More information](xref:desktop-limitations).
+> Tabular Editor can only be used as an external tool for Power BI Desktop when the Power BI report (.pbix, .pbip or .pbit) file contains a data model (Import, DirectQuery or Composite). **Reports using Live connection are not supported** since these reports do not contain a data model. [More information](xref:desktop-limitations).
 
 ## Personal vs. Transferable licenses
 
