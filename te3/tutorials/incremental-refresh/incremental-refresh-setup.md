@@ -135,7 +135,6 @@ let
    #"Incremental Refresh" = 
      Table.SelectRows(
        #"Remove Unnecessary Columns",
-       each
          each [OrderDateKey] >= ConvertDatetimeToInt(#"RangeStart")
          and  [OrderDateKey] < ConvertDatetimeToInt(#"RangeEnd")
      )
@@ -194,7 +193,7 @@ let
            [OrderDate], 
            [Format="yyyy-MM-dd"]
          )
-       ) < IntToDateTime(#"RangeEnd")      
+       ) < #"RangeEnd"      
      )
 in
    #"Incremental Refresh" 
