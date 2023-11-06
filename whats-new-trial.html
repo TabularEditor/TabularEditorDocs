@@ -195,7 +195,7 @@
                 var marginTop = parseFloat(computedStyle.marginTop);
                 var marginBottom = parseFloat(computedStyle.marginBottom);
 
-                var frameHeight = body.scrollHeight + marginTop + marginBottom + 100;
+                var frameHeight = document.getElementById("content-wrapper").scrollHeight + marginTop + marginBottom + 100;
 
                 window.parent.resizeIframe(frameHeight);
             });
