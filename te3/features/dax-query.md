@@ -15,15 +15,15 @@ Tabular Editor has a built in DAX query window to write and execute DAX queries 
 
 A very common use case for DAX queries is the DAX query produced by the [Power BI Performance Analyzer](https://www.sqlbi.com/articles/introducing-the-power-bi-performance-analyzer/), where it is possible to copy the query of each visual for troubleshooting, debugging or detailed performance analysis. 
 
-The window can be opened while connected to a sematic model by using either the File > New > DAX Query folder or the toolbar shortcut.
+The window can be opened while connected to a sematic model by using either the **File > New > DAX Query** folder or the toolbar shortcut.
 
 ![Dax Query New](~/images/features/dax_query_window/create_new_dax_query.png)
 
-The built in context aware intellisense ensure that only the two valid DAX keywords are available when starting a new query: DEFINE or EVALUATE (Press Ctrl+Space to verify for yourself)
+The built in context aware intellisense ensures that only the two valid DAX keywords are available when starting a new query: DEFINE or EVALUATE (Press Ctrl+Space to verify for yourself)
 
-## DAX Query Toolbar
+## DAX Query Options
 
-The DAX query window has four different toolbar options.
+The DAX query window has four different query options.
 
 ![Dax Query New](~/images/features/dax_query_window/dax_query_toolbar.png)
 
@@ -45,7 +45,7 @@ Products
 ```
 ![Dax Query New](~/images/features/dax_query_window/evaluate_table.png)
 
-It is also possible to return the value of a measure but a table constructor {} is required around it measure name 
+It is also possible to return the value of a measure but a table constructor {} is required around the measure name, to turn the scalar value into a 1x1 table.
 
 
 ```DAX
@@ -55,9 +55,9 @@ EVALUATE
 ![Dax Query New](~/images/features/dax_query_window/evaluate_measusre.png)
 
 ### Multiple EVALUATE statements
-It is perfectly possible to have multiple EVALUATE statements inside the same DAX query. This type of query is most often encountered with with Power BI Performance Analyzer queries.
+It is perfectly possible to have multiple EVALUATE statements inside the same DAX query. This type of query is most often encountered with Power BI Performance Analyzer queries.
 
-Both tables are returned in the bellow statement, but as separate row tabs in the result pane as indicated in the example bellow. 
+Both tables are returned in the below statement, but as separate row tabs in the result pane.
 
 ```DAX
 EVALUATE
