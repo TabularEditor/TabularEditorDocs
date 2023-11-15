@@ -134,7 +134,7 @@
                     <li>Help Borp, Zip, Tropphus at Spaceparts Co.</li>
                 </ul>
                 <p><a href="https://tabulareditor.com/learn">tabulareditor.com/learn</a></p>
-                <img src="../images/SpacePartsCo_CharacterLineUp.png" />
+                <img src="/images/SpacePartsCo_CharacterLineUp.png" />
                 <h2>Meet the team</h2>
                 <p>The Tabular Editor Team will be at the following conferences:</p>
                 <ul>
@@ -161,7 +161,7 @@
         {
             var version = getParameterByName("version");
             if(!version) version = "generic";
-            loadDivContent(version.replaceAll(".", "-") + ".html", "version-specific-content");
+            loadDivContent("/whats-new/" + version.replaceAll(".", "-") + ".html", "version-specific-content");
             applyStyle();
         }
 
