@@ -157,11 +157,15 @@
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
 
+        function urlify(str) {
+            return str.split('.').join('-');
+        }
+
         function init()
         {
             var version = getParameterByName("version");
             if(!version) version = "generic";
-            loadDivContent("/whats-new/" + version.replaceAll(".", "-") + ".html", "version-specific-content");
+            loadDivContent("/whats-new/" + urlify(version) + ".html", "version-specific-content");
             applyStyle();
         }
 
@@ -198,12 +202,6 @@
             var bodyElement = document.getElementById('content-wrapper');
 
             if (style) {
-                var links = document.getElementsByTagName('a');
-
-                for (var i = 0; i < links.length; i++) {
-                    links[i].setAttribute('target', '_blank');
-                }
-
                 if (style === 'dark') {
                     if(bodyElement.className) bodyElement.className += ' dark-mode';
                     else bodyElement.className = 'dark-mode';
