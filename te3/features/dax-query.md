@@ -35,6 +35,33 @@ The DAX query window has four different query options.
 
 The Auto Execute Query allows for keeping track of the connected semantic model and update the query results whenever something changes in the model. This can be useful for understanding e.g. how the result of a measure changes if modified. 
 
+### Adding or Updating Measures with DAX Queries
+
+Tabular Editor (3.12.0 and higher) has the ability to add or change measures directly through the DAX Query window.
+
+In addition to the above mentioned options four other have been introduced.
+
+![Dax Query New](~/images/features/dax_query_window/dax_query_apply_measure.png)
+
+The "Apply" option sync the DAX expression for all measures explicitly defined in the query, to the definition of the measures. Any measures that do not already exist, are created.
+
+"Apply Measures & Sync" applies the DAX expression to the definition of the measures and saves the model.
+
+The "Apply Selection" and "Apply Selection & Sync" will only apply the measures within the current selection of the query editor.
+
+Unlike the [DAX Script feature](xrefid:dax-scripts), only the expression property of a measure can be updated this way, as the DAX query syntax does not support specifying other properties, such as Description, Display Folder, etc.
+
+The "Apply" option has also been added to the right-click context menu.
+
+![Dax Query New](~/images/features/dax_query_window/dax_query_apply_measure_right_click.png.png)
+
+The shortcuts for these commands are:
+
+- Apply (F7)
+- Apply Measures & Sync (Shift+F7)
+- Apply Selection (F8)
+- Apply Selection and Synch (Shift F7)
+
 ## DAX Query Example
 
 A DAX query always return a table of results, and the simplest form of DAX query to create is one that evaluates a table within the model.

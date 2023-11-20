@@ -50,7 +50,7 @@ For the vector based themes (Basic and Bezier), use the **Window > Palette** men
 
 # Menus
 
-The following section describes the menus in Tabular Editor 3 in more details (WIP).
+The following section describes the menus in Tabular Editor 3 in more details.
 
 We use the term **Active document** in the following section, to mean that the cursor is placed within a document such as the Expression Editor or the "DAX Script 1" tab in the screenshot below. Some keyboard shortcuts and menu items behave differently depending on whether there is an active document or not, and what type of document is active.
 
