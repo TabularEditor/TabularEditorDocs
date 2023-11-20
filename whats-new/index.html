@@ -103,25 +103,25 @@
         <h2>What's new</h2>
         <div class="row">
             <div class="column">
-                <h2>Get started with Tabular Editor 3</h2>
-                <p>Check out how to boost your productivity through our <a href="https://docs.tabulareditor.com/onboarding/boosting-productivity-te3.html">onboarding guide</a>.</p>
-                <ul>
-                    <li><a href="https://docs.tabulareditor.com/onboarding/importing-tables-data-modeling.html">Import tables and data modeling</a></li>
-                    <li><a href="https://docs.tabulareditor.com/onboarding/refresh-preview-query.html">Refresh, previewing and querying data</a></li>
-                    <li><a href="https://docs.tabulareditor.com/onboarding/dax-script-introduction.html">DAX Scripting</a></li>
-                    <li><a href="https://docs.tabulareditor.com/onboarding/personalizing-te3.html">Personalize Tabular Editor 3</a></li>
-                </ul>
+                <div id="version-specific-content">
+                    <!-- This content will be fetched from the version-specific html file, based on the URL query parameter provided. -->
+                </div>
                 <h2>Community</h2>
-                <p>Ask questions, suggest enhancements and help other TE fans get their answers at our <a href="https://github.com/TabularEditor/TabularEditor3/discussions"> GitHub community</a></p>
-                <h2>Features and Editions</h2>
-                <p>Tabular Editor has three different editions, and the primary difference between them is the types of Analysis Services/Power BI instances supported.</p>
-                <p>Explore the <a href="https://docs.tabulareditor.com/te3/editions.html">Edition differences</a> and view the <a href="https://tabulareditor.com/pricing">pricing</a>. Contact our <a href="mailto:sales@tabulareditor.com">sales team</a> if you have any questions.</p>
-
-                <h2>Other resources</h2>
+                <p>Ask questions, suggest enhancements and help other TE fans get their answers at our <a href="https://github.com/TabularEditor/TabularEditor3/discussions"> GitHub community</a>:</p>
+                <h3>Articles</h3>
                 <ul>
-                    <li>Explore the <a href="https://docs.tabulareditor.com/te3/features/dax-debugger.html">DAX Debugger</a></li>
+                    <li><a href="https://blog.tabulareditor.com/2023/09/27/ci-cd-scripts-for-tabular-editor-2s-cli/">CI/CD scripts for Tabular Editor</a></li>
+                    <li><a href="https://www.oliviervs.be/analysis-services/sortbycolumn-property-set-to-an-invalid-column-id/">SortByColumn property set to an invalid column ID</a> by Oliver Van Steenlandt</li>
+                    <li><a href="https://github.com/PowerBI-tips/TabularEditor-Scripts">Tabular Editor scripts</a> by <a href="https://powerbi.tips">PowerBI.tips</a></li>
+                    <li><a href="https://blog.tabulareditor.com/2023/07/13/using-tabular-editor-in-microsoft-fabric/">Using Tabular Editor in Microsoft Fabric</a> </li>
+                    <li><a href="https://data-goblins.com/power-bi/format-power-query-automatically">Format Power Query in Power BI</a> by <a href="https://data-goblins.com/">Kurt Buhler</a></li>
+                </ul>
+                <p>Share your favorite blog or SoMe post <a href="https://github.com/TabularEditor/TabularEditor3/discussions/categories/ressources"> with the community</a></p>
+                <h3>Other resources</h3>
+                <ul>
+                    <li><a href="https://github.com/TabularEditor/TabularEditor3/issues">GitHub issue tracker (TE3)</a></li>
                     <li><a href="https://docs.tabulareditor.com/common/CSharpScripts/csharp-script-library.html?tabs=TE3Preferences">Tabular Editor Script Library</a></li>
-                    <li>Set up <a href="https://docs.tabulareditor.com/te3/tutorials/incremental-refresh/incremental-refresh-about.html">incremental refresh</a></li>
+                    <li><a href="https://github.com/TabularEditor/TabularEditor/issues">GitHub issue tracker (TE2.x)</a></li>
                 </ul>
             </div>
             <div class="column">
@@ -134,14 +134,14 @@
                     <li>Help Borp, Zip, Tropphus at Spaceparts Co.</li>
                 </ul>
                 <p><a href="https://tabulareditor.com/learn">tabulareditor.com/learn</a></p>
-                <img src="images/SpacePartsCo_CharacterLineUp.png" />
+                <img src="/images/SpacePartsCo_CharacterLineUp.png" />
                 <h2>Meet the team</h2>
                 <p>The Tabular Editor Team will be at the following conferences:</p>
                 <ul>
-                    <li><a href=https://sqlusergroupaustria.wordpress.com/2023/09/19/data-community-austria-day-2024>Data Community Austria Day 2024</a> January 26th, 2024</li>
-                    <li><a href=https://www.fabricfebruary.com>Fabric February 2024</a> February 8th, 2024</li>
-                    <li><a href=https://sqlbits.com/>SQLBits 2024</a> March 19th to March 23rd 2024</li>
-                    <li><a href=https://msdataaiconf.com/>Microsoft Data &amp; AI Conference</a> March 26th to March 28th 2024</li>
+                    <li><a href="https://sqlusergroupaustria.wordpress.com/2023/09/19/data-community-austria-day-2024">Data Community Austria Day 2024</a> January 26th, 2024</li>
+                    <li><a href="https://www.fabricfebruary.com">Fabric February 2024</a> February 8th, 2024</li>
+                    <li><a href="https://sqlbits.com">SQLBits 2024</a> March 19th to March 23rd 2024</li>
+                    <li><a href="https://msdataaiconf.com/">Microsoft Data &amp; AI Conference</a> March 26th to March 28th 2024</li>
                 </ul>
             </div>
         </div>
@@ -157,17 +157,51 @@
             return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
 
+        function urlify(str) {
+            return str.split('.').join('-');
+        }
+
+        function init()
+        {
+            var version = getParameterByName("version");
+            if(!version) version = "generic";
+            loadDivContent("/whats-new/" + urlify(version) + ".html", "version-specific-content");
+            applyStyle();
+        }
+
+        function loadDivContent(url, divId) {
+            // Create a new XMLHttpRequest object
+            var xhr = new XMLHttpRequest();
+
+            // Define what happens on successful data submission
+            xhr.onload = function () {
+                // Check if the request is successful
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // Get the response and update the div's content
+                    document.getElementById(divId).innerHTML = xhr.responseText;
+                } else {
+                    // Handle errors here
+                    console.log('The request failed!');
+                }
+            };
+
+            // Define what happens in case of error
+            xhr.onerror = function () {
+                console.log('There was an error!');
+            };
+
+            // Setup our request
+            xhr.open('GET', url, true);
+
+            // Send the request
+            xhr.send();
+        }
+
         function applyStyle() {
             var style = getParameterByName('style');
             var bodyElement = document.getElementById('content-wrapper');
 
             if (style) {
-                var links = document.getElementsByTagName('a');
-
-                for (var i = 0; i < links.length; i++) {
-                    links[i].setAttribute('target', '_blank');
-                }
-
                 if (style === 'dark') {
                     if(bodyElement.className) bodyElement.className += ' dark-mode';
                     else bodyElement.className = 'dark-mode';
@@ -179,11 +213,11 @@
         }
 
         if (document.addEventListener) {
-            document.addEventListener('DOMContentLoaded', applyStyle);
+            document.addEventListener('DOMContentLoaded', init);
         } else if (document.attachEvent) {
             document.attachEvent('onreadystatechange', function () {
                 if (document.readyState === 'complete') {
-                    applyStyle();
+                    init();
                 }
             });
         }
