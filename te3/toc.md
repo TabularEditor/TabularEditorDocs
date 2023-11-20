@@ -23,6 +23,7 @@
 ### @perspective-editor
 ### @metadata-translation-editor
 ### @dax-debugger
+### @dax-query
 ## @supported-files
 ### @tmdl
 ## @preferences
