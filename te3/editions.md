@@ -46,20 +46,26 @@ Please refer to the matrix below for the full overview of supported scenarios:
 
 \*\*\***Note:** Workspace Mode allows Tabular Editor 3 to simultaneously save model metadata to disk and synchronize a database on any of the editions of Analysis Services or Power BI supported by the Tabular Editor 3 edition purchased.
 
-## Modeling Restrictions for non-Power BI models
+## Modeling Restrictions
 
-Specifically for Analysis Services (not Power BI) data models, we restrict a few data modeling operations inside Tabular Editor 3 as well, corresponding to the restrictions on Azure Analysis Services Basic Tier and SQL Server Analysis Services Standard Edition:
+We restrict a few data modeling operations inside Tabular Editor 3 as well, corresponding to the restrictions on certain Microsoft service tiers (Azure Analysis Services *Basic Tier*, SQL Server Analysis Services *Standard Edition*, and Power BI *Premium-Per-User*).
 
-|modeling Feature / Edition|Business|Enterprise
-|---|---|---|
-|Perspectives|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
-|Multiple partitions|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+Specifically, [Azure AS Basic Tier and SQL Server Standard Edition does not support perspectives, multiple partitions or DirectQuery](https://azure.microsoft.com/en-us/pricing/details/analysis-services/), and as such, SSAS/Azure AS models using these features require TE3 Enterprise Edition.
+
+Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake datasets](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#prerequisites), which is why Power BI models using this feature also requires TE3 Enterprise Edition.
+
+|Model type|Feature|Business|Enterprise
+|---|---|---|---|
+|Azure AS / SSAS|Perspectives|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|Azure AS / SSAS|Multiple partitions|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|Azure AS / SSAS|DirectQuery|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|Azure AS / SSAS|Direct Lake|N/A|N/A|
+|Power BI|Perspectives|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Power BI|Multiple partitions|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Power BI|DirectQuery|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Power BI|Direct Lake|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 
 There are no other feature differences between the Tabular Editor 3 editions, than the ones listed above. 
-
-## Modeling Restrictions for Power BI models
-
-There are no feature differences across the Tabular Editor 3 editions for Power BI data models.
 
 > [!NOTE]
 > Please keep in mind that Power BI Desktop [currently does not support all Data modeling operations](xref:desktop-limitations). For this reason, Tabular Editor 3 by default blocks operations that are not supported by Power BI Desktop. However, this restriction can be removed under Tools > Preferences > Power BI.
