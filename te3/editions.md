@@ -2,7 +2,7 @@
 uid: editions
 title: Compare editions
 author: Søren Toft Joensen
-updated: 2021-09-09
+updated: 2023-11-22
 ---
 # Tabular Editor 3 Editions
 
@@ -58,12 +58,14 @@ Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake data
 |---|---|---|---|
 |Azure AS / SSAS|Perspectives|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 |Azure AS / SSAS|Multiple partitions|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
-|Azure AS / SSAS|DirectQuery|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|Azure AS / SSAS|DirectQuery*|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Azure AS / SSAS|Direct Lake|N/A|N/A|
 |Power BI|Perspectives|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Power BI|Multiple partitions|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Power BI|DirectQuery|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Power BI|Direct Lake|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+
+\***Note:** Analysis Services on SQL Server Standard Edition pre-2019 does not support DirectQuery. Nor does Azure AS Basic Tier. [Learn more](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models).
 
 If you attemp to open a model that uses one or more of the features listed above, while on a TE3 Business Edition license, you will see the error message below:
 
