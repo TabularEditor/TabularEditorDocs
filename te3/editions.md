@@ -67,7 +67,7 @@ Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake data
 
 \***Note:** Analysis Services on SQL Server Standard Edition pre-2019 does not support DirectQuery. Nor does Azure AS Basic Tier. [Learn more](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models).
 
-If you attemp to open a model that uses one or more of the features listed above, while on a TE3 Business Edition license, you will see the error message below:
+If you attemp to open a model that uses one or more of the restricted features listed above, while on a TE3 Business Edition license, you will see the error message below:
 
 ![This edition of Tabular Editor 3 does not support Enterprise-tier semantic models](https://github.com/TabularEditor/TabularEditorDocs/assets/8976200/7ef69593-ea4b-4a16-a8df-543f5c31ac65)
 
