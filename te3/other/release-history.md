@@ -1,6 +1,6 @@
 # Full release history
 
-- 2023-12-20 **Tabular Editor 3.12.0** (*[Release notes](release-notes/3_12_0.md)*)
+- 2023-12-27 **Tabular Editor 3.12.0** (*[Release notes](release-notes/3_12_0.md)*)
   - [TabularEditor.3.12.0.Installer.x64.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.12.0.Installer.x64.exe)
   - [TabularEditor.3.12.0.Installer.x86.exe](https://cdn.tabulareditor.com/files/TabularEditor.3.12.0.Installer.x86.exe)
   - [TabularEditor.3.12.0.x64.zip](https://cdn.tabulareditor.com/files/TabularEditor.3.12.0.x64.zip)
