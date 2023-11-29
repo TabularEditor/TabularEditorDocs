@@ -35,14 +35,10 @@ Below is an example of a C# script, that loops through all tables of a model, or
 // Loop through all tables:
 foreach(var table in Model.Tables)
 {
+
     if (table is CalculationGroupTable)
     {
         table.TableGroup = "Calculation Groups";
-    }
-    else if (!table.UsedInRelationships.Any())
-    {
-        // Tables without any relationships:
-        table.TableGroup = "Parameter Tables";
     }
     else if (table.IsHidden && table.Measures.Any(m => m.IsVisible))
     {
@@ -58,6 +54,12 @@ foreach(var table in Model.Tables)
     {
         // Tables on the "one" side of relationships:
         table.TableGroup = "Dimensions";
+    }
+    else if (!table.UsedInRelationships.Any())
+    {
+        // Tables without any relationships:
+
+        table.TableGroup = "Parameter Tables";
     }
     else
     {
