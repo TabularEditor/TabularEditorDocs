@@ -22,7 +22,10 @@
 #### @script-edit-hidden-partitions
 #### @script-create-m-parameter
 #### @create-sum-measures-from-columns
-#### @script-find-replace
+#### @create-measure-table
+#### @format-numeric-measures
+#### @create-table-groups
+
 
 ### @script-library-advanced
 #### @script-create-date-table
@@ -30,5 +33,6 @@
 #### @script-format-power-query
 #### @script-implement-incremental-refresh
 #### @script-remove-measures-with-error
+#### @script-find-replace
 
 ## @script-helper-methods
