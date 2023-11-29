@@ -189,6 +189,7 @@ It can be helpful to share these files across a team so that all developers have
 > A windows native way of syncing a version controlled file into the "%localappdata%\TabularEditor3" folder is to use [SymLink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/).
 >
 > Store the required files in Git or OneDrive and create a Symlink to the "%localappdata%\TabularEditor3" folder, but be aware that this could end up with synchronization issues, if multiple users update the same file version.
+> So do this at your own discretion.
 
 
 ### MacroActions.json
