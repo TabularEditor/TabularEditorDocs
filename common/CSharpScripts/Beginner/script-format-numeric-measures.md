@@ -1,5 +1,5 @@
 ---
-uid: format-numeric-measures
+uid: script-format-numeric-measures
 title: Format Numeric Measures
 author: Morten Lønskov
 updated: 2023-11-29

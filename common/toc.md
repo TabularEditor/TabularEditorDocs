@@ -18,16 +18,16 @@
 
 ### @script-library-beginner
 #### @script-count-rows
-#### @script-count-things
 #### @script-edit-hidden-partitions
 #### @script-create-m-parameter
-#### @create-sum-measures-from-columns
-#### @create-measure-table
-#### @format-numeric-measures
-#### @create-table-groups
+#### @script-create-sum-measures-from-columns
+#### @script-create-measure-table
+#### @script-format-numeric-measures
+#### @script-create-table-groups
 
 
 ### @script-library-advanced
+#### @script-count-things
 #### @script-create-date-table
 #### @script-create-and-replace-parameter
 #### @script-format-power-query
