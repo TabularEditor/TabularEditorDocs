@@ -18,14 +18,16 @@ If you want to see all the measures that have errors and have the option to dele
 ```csharp
 // This script scans the model and shows all measures with errors, giving the option to remove them.
 //
-// .GetSemantics(...) method is only available in TE3
+// .GetCachedSemantics(...) method is only available in TE3
 using System.Windows.Forms;
 
 // Hide the 'Running Macro' spinbox
 ScriptHelper.WaitFormVisible = false;
 
 // Get all the measures that have errors
-var measuresWithError = Model.AllMeasures.Where(m => m.GetSemantics(ExpressionProperty.Expression).HasError).ToList();
+var measuresWithError = Model.AllMeasures.Where(m => m.GetCachedSemantics(ExpressionProperty.Expression).HasError).ToList();
+//Prior to Tabular Editor 3.12.0 the GetSemantics method must be used.
+//var measuresWithError = Model.AllMeasures.Where(m => m.GetSemantics(ExpressionProperty.Expression).HasError).ToList();
 
 // If no measures with errors, end script with error.
 if ( measuresWithError.Count == 0 )
@@ -95,6 +97,7 @@ var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Select meas
     Info ( "No measure selected." );
     }
 }
+
 ```
 ### Explanation
 This snippet gets all the measures that have errors according to the Tabular Editor Semantic Analysis. It then will display them in an output box where you can manually browse them or make changes. Thereafter, measures can be selected for removal. The removed measures can be saved as a back-up .tsv file in case you want to import them, later.

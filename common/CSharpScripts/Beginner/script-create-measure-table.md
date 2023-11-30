@@ -8,7 +8,7 @@ applies_to:
     - version: 2.x
     - version: 3.x
 ---
-# Title
+# Create Measure Table
 
 ## Script Purpose
 The scripts creates a hidden measure table containing one hidden column
@@ -16,7 +16,7 @@ The scripts creates a hidden measure table containing one hidden column
 
 ## Script
 
-### Script Title
+### Create Measure Table
 ```csharp
 // Create a calculated table with a single column which is hidden:
 var table = Model.AddCalculatedTable("Model Measures", "{0}");
