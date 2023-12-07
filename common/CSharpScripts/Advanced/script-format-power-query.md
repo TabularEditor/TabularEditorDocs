@@ -7,7 +7,7 @@ applies_to:
   versions:
     - version: 3.x
 ---
-# Create New M Parameter and Add it to Existing M Partitions
+# Format Power Query
 
 ## Script Purpose
 If you want to format complex Power Query to make it more readable and easy to change.
@@ -19,7 +19,7 @@ If you want to format complex Power Query to make it more readable and easy to c
 
 ## Script
 
-### Create New M Parameter and Add it to Existing M Partitions
+### Format Power Query
 ```csharp
 // This script formats the Power Query (M Code) of any selected M Partition (not Shared Expression or Source Expression).
 // It will send an HTTPS POST request of the expression to the Power Query Formatter API and replace the code with the result.

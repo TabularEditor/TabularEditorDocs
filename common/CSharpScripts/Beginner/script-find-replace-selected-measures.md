@@ -8,10 +8,10 @@ applies_to:
     - version: 2.x
     - version: 3.x
 ---
-# Edit Hidden Partitions
+# Find & Replace Substring in Measures
 
 ## Script Purpose
-Will find & replace a substring in the selected measures' DAX expression. I.e. if you want to replace `'Customers'[Key Account]` with `'Products'[Type]` in many measures. 
+Will find & replace a substring in the model's measures DAX expression. I.e. if you want to replace `'Customers'[Key Account]` with `'Products'[Type]` in many measures. 
 An input box lets the user enter the text to find and a subsequent input lets the user define the replacement text.
 
 ## Script
