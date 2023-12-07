@@ -1,5 +1,5 @@
 ---
-uid: create-sum-measures-from-columns
+uid: script-create-sum-measures-from-columns
 title: Create SUM Measure from Column
 author: Morten Lønskov
 updated: 2023-02-22

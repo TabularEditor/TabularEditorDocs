@@ -189,7 +189,7 @@ Info ( "In the model, we see the below objects:\n\n"
 ```
 ### Explanation
 This snippet goes through the model and counts the different object types, displaying them in a hierarchical "node and tree" format that is manually constructed. 
-You can comment out 
+You can comment out the parts that you do not need for your purposes. 
 
 ## Example Output
 
