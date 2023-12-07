@@ -15,7 +15,7 @@ The script outputs the tables that reference the selected explicit (legacy) data
 
 ## Script
 
-### Count the rows in the selected table
+### Show Data Source Dependencies
 ```csharp
 //The script outputs the tables that reference the selected explicit (legacy) data source.
 if (Model.DataSources.Count == 0)
