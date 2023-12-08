@@ -4,6 +4,42 @@
         <name>TabularEditor3.Shared</name>
     </assembly>
     <members>
+        <member name="T:TabularEditor.Shared.StaTaskScheduler">
+            <summary>Provides a scheduler that uses STA threads.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.StaTaskScheduler._tasks">
+            <summary>Stores the queued tasks to be executed by our pool of STA threads.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.StaTaskScheduler._threads">
+            <summary>The STA threads used by the scheduler.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.StaTaskScheduler.#ctor(System.Int32)">
+            <summary>Initializes a new instance of the StaTaskScheduler class with the specified concurrency level.</summary>
+            <param name="numberOfThreads">The number of threads that should be created and used by this scheduler.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.StaTaskScheduler.QueueTask(System.Threading.Tasks.Task)">
+            <summary>Queues a Task to be executed by this scheduler.</summary>
+            <param name="task">The task to be executed.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.StaTaskScheduler.GetScheduledTasks">
+            <summary>Provides a list of the scheduled tasks for the debugger to consume.</summary>
+            <returns>An enumerable of all tasks currently scheduled.</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.StaTaskScheduler.TryExecuteTaskInline(System.Threading.Tasks.Task,System.Boolean)">
+            <summary>Determines whether a Task may be inlined.</summary>
+            <param name="task">The task to be executed.</param>
+            <param name="taskWasPreviouslyQueued">Whether the task was previously queued.</param>
+            <returns>true if the task was successfully inlined; otherwise, false.</returns>
+        </member>
+        <member name="P:TabularEditor.Shared.StaTaskScheduler.MaximumConcurrencyLevel">
+            <summary>Gets the maximum concurrency level supported by this scheduler.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.StaTaskScheduler.Dispose">
+            <summary>
+            Cleans up the scheduler by indicating that no more tasks will be queued.
+            This method blocks until all threads successfully shutdown.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.BPA.AnalyzerResult.Ignored">
             <summary>
             Indicates whether this rule should be ignored on this particular object
@@ -21,12 +57,15 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:TabularEditor.Shared.Infrastructure.MsalHelper.InitMain(System.IntPtr)">
+        <member name="M:TabularEditor.Shared.Infrastructure.AzureAdAuthenticationService.#ctor">
             <summary>
-            Call this method from the main thread, to set up a pointer to the main window handle
-            and to store the synchronization context for later use
+            This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext.
             </summary>
-            <param name="mainWindowHandle"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Infrastructure.MsalHelper.#ctor">
+            <summary>
+            This object must be created on the UI thread, as it captures the synchronization context for use when the custom web UI is invoked.
+            </summary>
         </member>
         <member name="T:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1">
             <summary>
@@ -163,6 +202,18 @@
             <param name="includeNameTranslations">Set to true if the replacement should be performed in the metadata name translations as well</param>
             <param name="matchCase">Set to true to perform a case-sensitive search</param>
             <param name="wholeWordsOnly">Set to true to search for whole words only</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Rename(System.String,System.String,System.Collections.Generic.List{`0},System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Specify a search pattern and a replacement value, that will be applied to the Names of the objects in the collection.
+            </summary>
+            <param name="pattern">Search pattern (i.e. what to find)</param>
+            <param name="replacement">Replacement (the text to replace)</param>
+            <param name="regex">Set to true if the search pattern and replacement strings use regular expressions</param>
+            <param name="includeNameTranslations">Set to true if the replacement should be performed in the metadata name translations as well</param>
+            <param name="matchCase">Set to true to perform a case-sensitive search</param>
+            <param name="wholeWordsOnly">Set to true to search for whole words only</param>
+            <param name="objects"></param>
         </member>
         <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ReplaceExpression(System.String,System.String,System.Boolean)">
             <summary>
@@ -406,6 +457,11 @@
         <member name="P:TabularEditor.Shared.Interaction.Selection.Context">
             <summary>
             Indicates where in the Explorer Tree the current selection has been made.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.TableGroup">
+            <summary>
+            The name of the current table group (if exactly one table group is selected, or if one or more tables within a single table group is selected)
             </summary>
         </member>
         <member name="M:TabularEditor.Shared.Interaction.Selection.GetNodeContexts(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject})">
@@ -1293,6 +1349,77 @@
             TODO: Handle DirectQuery / user-delegated credentials
             </summary>
         </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Databricks.DatabricksInfoProvider.#ctor">
+            <summary>
+            This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Dataflows.DataflowsInfoProvider.#ctor">
+            <summary>
+            This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Odbc.OdbcConnectionExtension.GetTables(System.Data.Odbc.OdbcConnection,System.String,System.String,System.String,System.String)">
+            <summary>
+            Extension for calling the ODBC low-level GetTablesW method directly.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Odbc.OdbcConnectionExtension.GetColumns(System.Data.Odbc.OdbcConnection,System.String,System.String,System.String,System.String)">
+            <summary>
+            Extension for calling the ODBC low-level GetColumnsW method directly.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Odbc.OdbcConnectionExtension.GetTablesAsync(System.Data.Odbc.OdbcConnection,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Extension for calling the ODBC low-level GetColumnsW method directly.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Odbc.OdbcConnectionExtension.GetColumnsAsync(System.Data.Odbc.OdbcConnection,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Extension for calling the ODBC low-level GetColumnsW method directly.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Odbc.OdbcHelper.GetOdbcDriverNames">
+            <summary>
+            Gets the ODBC driver names from the SQLGetInstalledDrivers function.
+            </summary>
+            <returns>a string array containing the ODBC driver names, if the call to SQLGetInstalledDrivers was successfull; null, otherwise.</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Odbc.OdbcHelper.GetDSN(Microsoft.Win32.RegistryKey,System.String,TabularEditor.Shared.Services.Connectivity.Odbc.DsnVisibility)">
+            <summary>
+            Method that gives one ODBC DSN object
+            </summary>
+            <param name="baseKey"></param>
+            <param name="dsnName"></param>
+            <param name="visibility"></param>
+            <returns>ODBC DSN object</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Odbc.RegistryHelper.OpenComplexSubKey(Microsoft.Win32.RegistryKey,System.String,System.Boolean)">
+            <summary>
+            Method that returns the registry key for a complex string that
+            represents the key that is to be returned. The 'baseKey' parameter
+            passed to this method is the root registry key on which the
+            complex sub key has to be created. The 'complexKeyStr' is the 
+            stirng representation of the key to be created over the 'baseKey'.
+            The syntax of the 'complexKeyStr' is "KEY1//KEY2//KEY3//...//".
+            The "..." in the above syntax represents the repetetion. This
+            method parses the 'compleKeyStr' parameter value and keep building
+            the keys following the path of the keys listed in the string. Each
+            key is built upon its previous key. First Key (KEY1) is built based
+            on the 'basKey' parameter. Second key (KEY2) is based on the first
+            key (Key creatd for KEY1) and so on... . The writable parameter 
+            represents whether final key has to be writable or not.
+            </summary>
+            <param name="baseKey"></param>
+            <param name="complexKeyStr"></param>
+            <param name="writable"></param>
+            <returns>RegistryKey For the complex Subkey. </returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Sql.SqlSourceInfoProvider.#ctor">
+            <summary>
+            This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext.
+            </summary>
+        </member>
         <member name="M:TabularEditor.Shared.Services.FileSystemHelper.DirectoryFromPath(System.String)">
             <summary>
             Returns the directory of the provided filePath.
@@ -1359,6 +1486,31 @@
             Any other extension
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.DaxDebugging">
+            <summary>
+            True to allow DAX debugging.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.XmlaMetadata">
+            <summary>
+            True to allow XMLA connectivity.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.XmlaEnterpriseTier">
+            <summary>
+            True to allow Enterprise features, such as DirectLake in Power BI, or Perspectives/Multi-partitions in SSAS/Azure AS
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.PbiDesktopMetadata">
+            <summary>
+            True to allow PBI Desktop connectivity.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.FileMetadata">
+            <summary>
+            True to allow opening/saving semantic models from/to files.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.GitIntegrationPreview">
             <summary>
             When this feature switch is enabled, end users may enable the Git Integration Preview feature (through the preferences dialog)
@@ -1390,6 +1542,11 @@
             Indicates that the model is loaded from a PBIT (Power BI Template) file
             </summary>
         </member>
+        <member name="F:TabularEditor.Shared.Services.ModelDiskMode.Tmdl">
+            <summary>
+            Indicates that the model is loaded from a TMDL folder structure
+            </summary>
+        </member>
         <member name="F:TabularEditor.Shared.Services.ModelDiskMode.Unsaved">
             <summary>
             Indicates that the model has been created in Tabular Editor and not yet saved to disk
@@ -1413,6 +1570,11 @@
         <member name="F:TabularEditor.Shared.Services.WorkspaceMode.Folder">
             <summary>
             Model is saved to a Tabular Editor folder structure
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.WorkspaceMode.TMDL">
+            <summary>
+            Model is saved to a TMDL folder structure
             </summary>
         </member>
         <member name="F:TabularEditor.Shared.Services.WorkspaceMode.Unsaved">
@@ -1466,6 +1628,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:TabularEditor.Shared.Services.ExternalQueryResolver.Resolve(System.String)">
+            <summary>
+            This method handles M object references to other M objects - for example, an M expression may refer to a shared expression or an explicit data source.
+            </summary>
+            <param name="externalQuery"></param>
+            <returns></returns>
+        </member>
         <member name="P:TabularEditor.Shared.Services.Preferences.ProxyUseDefaultCredentials">
             <summary>
             Indicate whether the system credentials of the application are sent with requests.
@@ -1500,16 +1669,6 @@
             <param name="emptyResult"></param>
             <param name="settings"></param>
             <returns></returns>
-        </member>
-        <member name="M:TabularEditor.Shared.Services.OdbcConnectionExtension.GetTables(System.Data.Odbc.OdbcConnection,System.String,System.String,System.String,System.String)">
-            <summary>
-            Extension for calling the ODBC low-level GetTablesW method directly.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.Shared.Services.OdbcConnectionExtension.GetColumns(System.Data.Odbc.OdbcConnection,System.String,System.String,System.String,System.String)">
-            <summary>
-            Extension for calling the ODBC low-level GetColumnsW method directly.
-            </summary>
         </member>
         <member name="F:TabularEditor.Shared.Services.IdentifierQuoting.Backtick">
             <summary>
