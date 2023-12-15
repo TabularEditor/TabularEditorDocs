@@ -3,6 +3,9 @@ apiRules:
     uidRegex: ^TabularEditor\.Shared\.Services
     type: Namespace
 - exclude:
+    uidRegex: ^TabularEditor\.TOMWrapper\.Utils\.DaxDependencyHelper\.GetCachedSemantics
+    type: Method
+- exclude:
     hasAttribute:
       uid: System.ComponentModel.EditorBrowsableAttribute
       ctorArguments:
