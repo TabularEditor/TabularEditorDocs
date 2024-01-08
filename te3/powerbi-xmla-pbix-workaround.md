@@ -11,7 +11,7 @@ applies_to:
       partial: Tabular Editor 3 Business Edition only allows connecting to the XMLA endpoint of Premium-Per-User (PPU) workspaces.
     - edition: Enterprise
 ---
-# Editing a Power BI dataset through the XMLA endpoint
+# Downloading a Power BI dataset to a .pbix using the XMLA endpoint
 
 Once a change is made to a Power BI semantic model through the XMLA endpoint, it's not possible to download the dataset as a .pbix file from the Power BI service. 
 
