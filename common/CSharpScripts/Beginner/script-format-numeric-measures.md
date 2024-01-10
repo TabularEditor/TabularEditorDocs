@@ -5,7 +5,6 @@ author: Morten Lønskov
 updated: 2023-11-29
 applies_to:
   versions:
-    - version: 2.x
     - version: 3.x
 ---
 # Format Numeric Measures
