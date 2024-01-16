@@ -37,6 +37,4 @@ Tabular Editor 2 can connect to Direct Lake semantic models, but does not have a
 </div>
 
 ## Identifying a Direct Lake model
-The top title bar of Tabular Editor shows which type of model is open in that instance of Tabular Editor.
-
-A model is considered a Direct Lake model when all partitions are in Direct Lake mode. Additoinally The TOM Explorer informs what object type your tables are. Additionally, a Direct Lake model's tables will have the object type 'Table (DirectLake)'.
+The top title bar of Tabular Editor shows which type of model is open in that instance of Tabular Editor. Additionally, the TOM Explorer displays the type and mode of every table (Import, DirectQuery, Dual or Direct Lake). If a model contains a mix of table modes, the title bar will show "Hybrid". Currenctly, it is not possible for a DirectLake model to contain tables in Import, DirectQuery or Dual mode.
