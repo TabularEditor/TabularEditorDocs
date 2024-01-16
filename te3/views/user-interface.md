@@ -1,6 +1,6 @@
 ﻿---
 uid: user-interface
-title: User interface
+title: Basic user interface
 author: Daniel Otykier
 updated: 2021-09-08
 ---
@@ -62,7 +62,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
 
 ![File Menu](~/images/file-menu.png)
 
-- **New**: Opens a submenu that allows you to create a new blank data model (Ctrl+N), or create various [supporting files](supported-files.md#tabular-editor-supporting-files) such as a new DAX Query or DAX Script (text files) or a data model diagram (JSON file). Supporting files (with the exception of C# scripts), can be created only when a model is already loaded in Tabular Editor.
+- **New**: Opens a submenu that allows you to create a new blank data model (Ctrl+N), or create various [supporting files](xref:supported-files.#supported-file-types) such as a new DAX Query or DAX Script (text files) or a data model diagram (JSON file). Supporting files (with the exception of C# scripts), can be created only when a model is already loaded in Tabular Editor.
   
   ![File Menu New](~/images/file-menu-new.png)
 
@@ -81,7 +81,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
     ![Supported File Types](~/images/supported-file-types.png)
 
 > [!IMPORTANT]
-> In Tabular Editor 3 Desktop Edition the **Open > Model from file...** and **Open > Model from folder...** options are not available and the **Open > File...** dialog only allows opening [supporting files](supported-files.md#tabular-editor-supporting-files), not files containing metadata.
+> In Tabular Editor 3 Desktop Edition the **Open > Model from file...** and **Open > Model from folder...** options are not available and the **Open > File...** dialog only allows opening [supporting files](xref:supported-files#supported-file-types), not files containing metadata.
 
 - **Revert**: This option lets you reload the model metadata from the source, discarding any changes that are made in Tabular Editor, which have not yet been saved. This option is useful when Tabular Editor 3 is used as an External Tool for Power BI Desktop, and a change is made in Power BI Desktop while Tabular Editor 3 is connected. By choosing **Revert**, Tabular Editor 3 can reload the model metadata from Power BI Desktop without having to reconnect.
 - **Close**: This closes the active document (for example a DAX Query, a C# script or a data model diagram). If the document has unsaved changes, Tabular Editor will prompt you to save the changes before closing.
@@ -94,7 +94,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
 - **Recent tabular models**: Displays a list of recently used model metadata files or folders, allowing you to quickly reload model metadata from one of these.
 
 > [!IMPORTANT]
-> In Tabular Editor 3 Desktop Edition the **Save to folder** and **Recent tabular models** options are disabled. In addition, the **Save as** option is only enabled for [supporting files](supported-files.md#tabular-editor-supporting-files).
+> In Tabular Editor 3 Desktop Edition the **Save to folder** and **Recent tabular models** options are disabled. In addition, the **Save as** option is only enabled for [supporting files](xref:supported-files#supported-file-types).
 
 - **Exit**: Shuts down the Tabular Editor 3 application. You are prompted to save any unsaved files or model metadata before the application is shut down.
 
@@ -116,8 +116,8 @@ The **Edit** menu contains standard Windows application menu items for editing a
 > [!NOTE]
 > Tabular Editor generally only prompts for object deletion when multiple objects are selected, or when there are dependencies to the object(s) being deleted. Object deletion can be undone by using the **Undo** option (CTRL+Z).
 
-- **Select all**: Selects all text in the currently active document, or all objects belonging to the same parent within the TOM Exporer.
-- **Code assist**: This option is available when editing DAX code. It provides a shortcut to various code assist features relevant for editing DAX code. See [DAX editor](dax-editor.md#code-assist-features) for more information.
+- **Select all**: Selects all text in the currently active document, or all objects belonging to the same parent within the TOM Explorer.
+- **Code assist**: This option is available when editing DAX code. It provides a shortcut to various code assist features relevant for editing DAX code. See [DAX editor](xref:dax-editor#code-assist-features) for more information.
 
 ## View
 
@@ -125,7 +125,7 @@ The **View** menu lets you navigate between the different views of the Tabular E
 
 ![View Menu](~/images/view-menu.png)
 
-- **TOM Explorer**: The TOM Explorer presents a hierarchichal view of the entire [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) of the currently loaded model metadata. See @tom-explorer-view for more information.
+- **TOM Explorer**: The TOM Explorer presents a hierarchical view of the entire [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) of the currently loaded model metadata. See @tom-explorer-view for more information.
 - **Best Practice Analyzer**: The Best Practice Analyzer helps improve the quality of your model by letting you specify rules for best practice validation. See @bpa-view for more information.
 - **Messages**: The Messages view displays errors, warnings and informational messages from various sources, such as the Tabular Editor 3 Semantic Analyzer. See @messages-view for more information.
 - **Data Refresh**: The Data Refresh view allows you to track data refresh operations that are running in the background. See @data-refresh-view for more information.
@@ -168,7 +168,7 @@ The **Window** menu provides shortcuts for managing and navigating between the v
 
 ![View Menu](~/images/window-menu.png)
 
-- **New...** this submenu provides a shortcut for creating new [supporting files](supported-files.md#tabular-editor-supporting-files). The options here are identical to those under **File > New**.
+- **New...** this submenu provides a shortcut for creating new [supporting files](xref:supported-files#supported-file-types). The options here are identical to those under **File > New**.
 - **Float** undocks the current view or document into a floating window.
 - **Pin tab** pins a tab. When a tab is pinned, it is shown at the left-most side of the document tabs, and when right-clicking on the tabs, shortcuts are available for closing only unpinned tabs.
   

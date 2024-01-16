@@ -13,14 +13,14 @@ applies_to:
 ---
 # Downloading a Power BI dataset to a .pbix using the XMLA endpoint
 
-Once a change is made to a Power BI semantic model through the XMLA endpoint, it's not possible to download the dataset as a .pbix file from the Power BI service. 
+Once a change is made to a Power BI semantic model through the XMLA endpoint, it's not possible to download the model as a .pbix file from the Power BI service. 
 
 However, with the Power BI Project file, it's possible to create a .pbix file from the remote model by following the three-step process, which is described as follows. 
 
 ![XLMA to PBIX Overview](~/images/power-bi/create-pbix-from-xmla-overview.png)
 
 > [!NOTE]
-> The described workaround isn't officially supported by Microsoft. There's no guarantee that it works for every model. Specifically, if you've added custom partitions or other objects [not listed here](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations), Power BI Desktop may not be able to correctly open the file following this approach.
+> The described workaround isn't officially supported by Microsoft. There's no guarantee that it works for every model. Specifically, if you've added custom partitions or other objects [listed here](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations), Power BI Desktop may not be able to correctly open the file following this approach.
 
 ## Step 1: Create and save an empty Power BI projects (.pbip) file
 
