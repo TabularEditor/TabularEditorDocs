@@ -26,6 +26,7 @@
 ### @metadata-translation-editor
 ### @dax-debugger
 ### @dax-query
+### @pivot-grid
 ## Files formats
 ### @supported-files
 ### @tmdl
