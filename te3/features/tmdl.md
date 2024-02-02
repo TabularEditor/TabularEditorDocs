@@ -17,6 +17,10 @@ applies_to:
 > [!IMPORTANT]
 > As of May 2023, TMDL is still a preview feature. It is currently only supported by community tools such as Tabular Editor and [pbi-tools](https://pbi.tools/). However, the format is fully documented and available through [Microsoft-provided nuget packages](https://www.nuget.org/packages/Microsoft.AnalysisServices.Tabular.Tmdl.retail.amd64/19.64.0-TmdlPreview).
 
+> [!IMPORTANT]
+> TMDL is still a preview feature, meaning breaking changes could be introduced between new releases. If you face any issues deserializing a model after upgrading Tabular Editor, rollback to the latest version of Tabular Editor, then temporarily save the model as a regular .bim file, before serializing it to TMDL again using the latest version of Tabular Editor.
+
+
 ## Enabling TMDL (Preview) in Tabular Editor 3
 
 Once TMDL is fully supported by the entire Microsoft ecosystem, we plan to deprecate Tabular Editor's legacy "save-to-folder" functionality, in order to fully embrace TMDL as the de-facto standard for storing model metadata. However, until then, TMDL is only available as a preview feature in Tabular Editor 3. To enable TMDL (Preview) in Tabular Editor 3, go to **Tools > Preferences > File Formats > Save-to-folder**, and select "TMDL (preview)" in the **Serialization mode** dropdown.
