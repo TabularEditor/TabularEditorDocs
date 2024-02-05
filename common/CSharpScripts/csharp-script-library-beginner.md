@@ -27,5 +27,6 @@ These are more basic scripts that are easy to understand or modify. They have a 
 | [Create Table Groups](Beginner/script-create-table-groups.md) | Organize the model into Table Groups | When you want to have an automatic organization of your tables using the table group feature of Tabular Editor 3 |
 | [Format Numeric Measures](Beginner/script-format-numeric-measures.md) | Formats the chosen measures | When you want to quickly apply a format string to the currently selected measures |
 | [Show Data Source Dependencies](Beginner/script-show-data-source-dependencies.md) | Shows dependencies for data sources | For explicit (legacy) data sources it can be hard to know exactly where they are used. This script shows you which partition reference the chosen data source |
+| [Create Field Parameters](Beginner/script-create-field-parameter.md) | Quickly create a field parameter table | Choose the objects that should be in the field parameter and the script will take care of the rest |
 
 

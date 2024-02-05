@@ -1,6 +1,6 @@
 ---
 uid: powerbi-xmla-pbix-workaround
-title: Creating PBIX File from XMLA Endoint.
+title: Creating PBIX File from XMLA Endpoint.
 author: Morten Lønskov
 updated: 2023-10-18
 applies_to:
