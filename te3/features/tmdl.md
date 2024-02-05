@@ -15,10 +15,10 @@ applies_to:
 **TMDL** is a model metadata file format [announced by Microsoft in April 2023](https://powerbi.microsoft.com/en-ie/blog/announcing-public-preview-of-the-tabular-model-definition-language-tmdl/). It aims to provide a human-readable, text-based alternative to the JSON-based model.bim file format. TMDL is inspired by YAML, and as such, is easy to read and write, with minimal use of string quotes and escape characters. It also serializes a model as several smaller files in a folder structure, and is therefore also better suited for version control integration.
 
 > [!IMPORTANT]
-> As of May 2023, TMDL is still a preview feature. It is currently only supported by community tools such as Tabular Editor and [pbi-tools](https://pbi.tools/). However, the format is fully documented and available through [Microsoft-provided nuget packages](https://www.nuget.org/packages/Microsoft.AnalysisServices.Tabular.Tmdl.retail.amd64/19.64.0-TmdlPreview).
+> As of February 2024, TMDL is still a preview feature. It is currently only supported by community tools such as Tabular Editor and [pbi-tools](https://pbi.tools/). However, the format is fully documented and available through [Microsoft-provided nuget packages](https://www.nuget.org/packages/Microsoft.AnalysisServices.Tabular.Tmdl.retail.amd64/19.64.0-TmdlPreview).
 
-> [!IMPORTANT]
-> TMDL is still a preview feature, meaning breaking changes could be introduced between new releases. If you face any issues deserializing a model after upgrading Tabular Editor, rollback to the latest version of Tabular Editor, then temporarily save the model as a regular .bim file, before serializing it to TMDL again using the latest version of Tabular Editor.
+> [!TIP]
+> Since TMDL is a preview feature, breaking changes could be introduced between new releases of Tabular Editor. If you face any issues deserializing a model after upgrading Tabular Editor, rollback to the latest version of Tabular Editor, then temporarily save the model as a regular .bim file, before serializing it to TMDL again using the latest version of Tabular Editor.
 
 
 ## Enabling TMDL (Preview) in Tabular Editor 3
