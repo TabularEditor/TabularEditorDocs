@@ -19,7 +19,7 @@ jobs:
         with:
           submodules: true
       - name: Build Documentation
-        uses: nikeee/docfx-action@v1.0.0
+        uses: nunit/docfx-action@v3.0.0
         with:
           args: docfx.json
       - name: Build And Deploy

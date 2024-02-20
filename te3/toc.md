@@ -3,11 +3,13 @@
 ## @whats-new
 ## @editions
 ## @desktop-limitations-te3
-## @powerbi-xmla
+## Power BI XMLA Endpoint
+### @powerbi-xmla
 ### @powerbi-xmla-pbix-workaround
 
 # Documentation
-## @user-interface
+## User interface
+### @user-interface
 ### @tom-explorer-view
 ### @bpa-view
 ### @messages-view
@@ -24,7 +26,9 @@
 ### @metadata-translation-editor
 ### @dax-debugger
 ### @dax-query
-## @supported-files
+### @pivot-grid
+## Files formats
+### @supported-files
 ### @tmdl
 ## @preferences
 ## @shortcuts

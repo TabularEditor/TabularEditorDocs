@@ -1,6 +1,6 @@
 ---
 uid: powerbi-xmla
-title: Power BI XMLA endpoint
+title: Editing through XMLA endpoint
 author: Daniel Otykier
 updated: 2021-10-01
 applies_to:

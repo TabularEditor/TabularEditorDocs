@@ -18,10 +18,6 @@ applies_to:
 # Direct Lake Semantic Models
 Direct Lake semantic models connect directly to data sources stored in [Fabric One Lake](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview). 
 
-> [!IMPORTANT]
-> Changing a Direct Lake dataset through the XMLA endpoint will block your ability to change the Direct Lake dataset inside the Fabric Service. Only XMLA endpoint can then edit the Direct Lake This is one of the current limitations of this preview 
-feature.
-
 Tabular Editor 3 can create and connect to this type of dataset. For a tutorial on this please refer to our blog article: [Direct Lake semantic models: How to use them with Tabular Editor](https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/). 
 Tabular Editor 3 can create direct lake semantic models with both the Lakehouse and Datawarehouse SQL Endpoint. 
 
@@ -38,4 +34,4 @@ Tabular Editor 2 can connect to Direct Lake semantic models, but does not have a
 </div>
 
 ## Identifying a Direct Lake model
-The TOM Explorer informs what object type your tables are. A Direct Lake model's tables will have the object type 'Table (DirectLake)' to make clear that the open model is a Direct Lake model. 
+The top title bar of Tabular Editor shows which type of model is open in that instance of Tabular Editor. Additionally, the TOM Explorer displays the type and mode of every table (Import, DirectQuery, Dual or Direct Lake). If a model contains a mix of table modes, the title bar will show "Hybrid". Currenctly, it is not possible for a DirectLake model to contain tables in Import, DirectQuery or Dual mode.

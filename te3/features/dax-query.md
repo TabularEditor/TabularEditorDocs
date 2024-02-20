@@ -53,7 +53,7 @@ Unlike the [DAX Script feature](xrefid:dax-scripts), only the expression propert
 
 The "Apply" option has also been added to the right-click context menu.
 
-![Dax Query New](~/images/features/dax_query_window/dax_query_apply_measure_right_click.png.png)
+![Dax Query New](~/images/features/dax_query_window/dax_query_apply_measure_right_click.png)
 
 The shortcuts for these commands are:
 
@@ -79,7 +79,7 @@ It is also possible to return the value of a measure but a table constructor {} 
 EVALUATE
 { [Invoice Lines] }
 ```
-![Dax Query New](~/images/features/dax_query_window/evaluate_measusre.png)
+![Dax Query New](~/images/features/dax_query_window/evaluate_measure.png)
 
 ### Multiple EVALUATE statements
 It is perfectly possible to have multiple EVALUATE statements inside the same DAX query. This type of query is most often encountered with Power BI Performance Analyzer queries.
