@@ -83,6 +83,10 @@ If you are on a network with limited Internet connectivity, you can specify the 
 - DAX Formatting
 - Download of Best Practice Rules from external URLs
 
+> [!TIP]
+> The proxy settings can at times interfere with authentication dialog boxes or other external prompts.
+> Try to switch the proxy setting between "System" and "None", close and reopen Tabular Editor 3 to verify.
+
 ### Other preferences
 
 In addition to the settings mentioned above, Tabular Editor 3 contains many other settings for controlling various application behavior, allowing you to closely tailor the tool to your needs. To learn more about other these settings, see @preferences.
