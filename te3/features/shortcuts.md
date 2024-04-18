@@ -11,8 +11,6 @@ applies_to:
 ---
 # Keyboard shortcuts
 
-The following shortcuts are available as of Tabular Editor v. 3.2.2.
-
 ## General
 
 |Command|Shortcut|
@@ -103,6 +101,13 @@ The following shortcuts are available as of Tabular Editor v. 3.2.2.
 |Comment lines|Ctrl+K|
 |Uncomment lines|Ctrl+U|
 |Toggle comments|Ctrl+/|
+|Collapse all foldable regions|Ctrl+Alt+[|
+|Expand all foldable regions|Ctrl+Alt+]|
+|Toggle all foldable regions state|Ctrl+Alt+;|
+|Collapse foldable region|Ctrl+Shift+[|
+|Expand  foldable region|Ctrl+Shift+]|
+|Toggle foldable region state|Ctrl+Shift+;|
+|Delete reference or words|Ctrl+Backspace or Ctrl+Delete|
 
 ## DAX Query
 
