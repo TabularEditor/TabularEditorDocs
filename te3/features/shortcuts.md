@@ -141,3 +141,16 @@ applies_to:
 |Command|Shortcut|
 |---|---|
 |Run script|F5|
+
+# Customizing Shortcuts
+
+Tabular Editor 3 allows for the customization of shortcuts by rebinding existing or adding new shortcuts.
+
+Setting shortcuts can be done through **Tools -> Preferences -> Keyboard** and locating the command that should have a shortcut binding and setting the binding in the menu. 
+Shortcuts can be set for many different parts of Tabular Editor 3 including [Macros](xref:creating-macros) to have C# scripts available at the fingertips. 
+
+![Dax Script](~/images/SetShortcuts.png)
+
+1. Keyboard Menu in Preferences
+2. Find command that should have a shortcut
+3. Set shortcut by holding desired shortcuts key and use "Assign Shortcut"
