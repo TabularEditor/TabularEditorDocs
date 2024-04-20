@@ -14,7 +14,7 @@ applies_to:
 > [!NOTE]
 > This feature is currently **in preview**. Information in this article is subject to change, as we refine the feature based on user feedback.
 
-Tabular Editor 3.15.0 introduces **DAX Optimizer (Preview)** as an integrated experience. [DAX Optimizer](https://daxoptimizer.com) is a service that helps you optimize your SSAS/Azure AS tabular models and Power BI/Fabric semantic models. The tool combines [VertiPaq Analyzer statistics](https://www.sqlbi.com/tools/vertipaq-analyzer/) with a static analysis of your DAX code, thus providing a prioritized list of recommmendations, to help you quickly identify potential performance bottlenecks.
+Tabular Editor 3.15.0 introduces **DAX Optimizer (Preview)** as an integrated experience. [DAX Optimizer](https://daxoptimizer.com) is a service that helps you optimize your SSAS/Azure AS tabular models and Power BI/Fabric semantic models. The tool combines [VertiPaq Analyzer statistics](https://www.sqlbi.com/tools/vertipaq-analyzer/) with a static analysis of your DAX code, thus providing a prioritized list of recommendations, to help you quickly identify potential performance bottlenecks.
 
 > [!IMPORTANT]
 > DAX Optimizer is a paid third-party service. In order to use the **DAX Optimizer (Preview)** feature in Tabular Editor 3, you will need an [account for DAX Optimizer](https://www.daxoptimizer.com/free-tour/).
