@@ -26,7 +26,7 @@
         ],
         "resource": [
             {
-                "files": [ "images/**", "te3/images/**", "whats-new/**" ]
+                "files": [ "images/**", "te3/images/**", "whats-new/**", "404.html" ]
             }
         ],
         "globalMetadata": {
