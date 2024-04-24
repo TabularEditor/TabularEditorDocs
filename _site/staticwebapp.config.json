@@ -1,124 +1,129 @@
 {
-    "routes": [
-        {
-            "route": "/te3/other/release-notes",
-            "redirect": "/te3/other/release-notes/3_14_0.html",
-            "statusCode": 302
-        },
-        {
-            "route": "/privacy-policy.html",
-            "redirect": "/te3/other/privacy-policy.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/Advanced-Scripting.html",
-            "redirect": "/te3/features/csharp-scripts.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/Best-Practice-Analyzer.html",
-            "redirect": "/te2/Best-Practice-Analyzer.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/Importing-Tables.html",
-            "redirect": "/te2/Importing-Tables.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/tmdl",
-            "redirect": "/te3/features/tmdl.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/roslyn",
-            "redirect": "/te3/features/roslyn.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/eula",
-            "redirect": "/te3/other/te3-eula.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/tmuo",
-            "redirect": "/te3/features/user-options.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/user-options.html",
-            "redirect": "/te3/features/user-options.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/workspace",
-            "redirect": "/te3/tutorials/workspace-mode.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/Workspace-Database.html",
-            "redirect": "/te3/tutorials/workspace-mode.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/projects/te3/en/latest/editions.html",
-            "redirect": "/te3/editions.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/projects/te3/en/latest/security-privacy.html",
-            "redirect": "/te3/features/security-privacy.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/projects/te3/en/latest/downloads.html",
-            "redirect": "/te3/other/downloads.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/other/downloads.html",
-            "redirect": "/te3/other/downloads.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/te3/downloads.html",
-            "redirect": "/te3/other/downloads.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/Useful-script-snippets.html",
-            "redirect": "/te2/Useful-script-snippets.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/Command-line-Options.html",
-            "redirect": "/te2/Command-line-Options.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/Power-BI-Desktop-Integration.html",
-            "redirect": "/te2/Power-BI-Desktop-Integration.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/projects/te3/en/latest",
-            "redirect": "/te3",
-            "statusCode": 301
-        },
-        {
-            "route": "/projects/te3",
-            "redirect": "/te3",
-            "statusCode": 301
-        },
-        {
-            "route": "/projects/te3/en/latest/getting-started.html",
-            "redirect": "/te3/getting-started.html",
-            "statusCode": 301
-        },
-        {
-            "route": "/Custom-Actions.html",
-            "redirect": "/te3/tutorials/creating-macros.html",
-            "statusCode": 301
-        }
-    ]
+  "routes": [
+    {
+      "route": "/te3/other/release-notes",
+      "redirect": "/te3/other/release-notes/3_14_0.html",
+      "statusCode": 302
+    },
+    {
+      "route": "/privacy-policy.html",
+      "redirect": "/te3/other/privacy-policy.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/Advanced-Scripting.html",
+      "redirect": "/te3/features/csharp-scripts.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/Best-Practice-Analyzer.html",
+      "redirect": "/te2/Best-Practice-Analyzer.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/Importing-Tables.html",
+      "redirect": "/te2/Importing-Tables.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/tmdl",
+      "redirect": "/te3/features/tmdl.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/roslyn",
+      "redirect": "/te3/features/roslyn.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/eula",
+      "redirect": "/te3/other/te3-eula.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/tmuo",
+      "redirect": "/te3/features/user-options.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/user-options.html",
+      "redirect": "/te3/features/user-options.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/workspace",
+      "redirect": "/te3/tutorials/workspace-mode.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/Workspace-Database.html",
+      "redirect": "/te3/tutorials/workspace-mode.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/projects/te3/en/latest/editions.html",
+      "redirect": "/te3/editions.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/projects/te3/en/latest/security-privacy.html",
+      "redirect": "/te3/features/security-privacy.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/projects/te3/en/latest/downloads.html",
+      "redirect": "/te3/other/downloads.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/other/downloads.html",
+      "redirect": "/te3/other/downloads.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/downloads.html",
+      "redirect": "/te3/other/downloads.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/Useful-script-snippets.html",
+      "redirect": "/te2/Useful-script-snippets.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/Command-line-Options.html",
+      "redirect": "/te2/Command-line-Options.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/Power-BI-Desktop-Integration.html",
+      "redirect": "/te2/Power-BI-Desktop-Integration.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/projects/te3/en/latest",
+      "redirect": "/te3",
+      "statusCode": 301
+    },
+    {
+      "route": "/projects/te3",
+      "redirect": "/te3",
+      "statusCode": 301
+    },
+    {
+      "route": "/projects/te3/en/latest/getting-started.html",
+      "redirect": "/te3/getting-started.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/Custom-Actions.html",
+      "redirect": "/te3/tutorials/creating-macros.html",
+      "statusCode": 301
+    }
+  ],
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html"
+    }
+  }
 }

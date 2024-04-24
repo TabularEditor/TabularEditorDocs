@@ -11,8 +11,6 @@ applies_to:
 ---
 # Keyboard shortcuts
 
-The following shortcuts are available as of Tabular Editor v. 3.2.2.
-
 ## General
 
 |Command|Shortcut|
@@ -103,6 +101,13 @@ The following shortcuts are available as of Tabular Editor v. 3.2.2.
 |Comment lines|Ctrl+K|
 |Uncomment lines|Ctrl+U|
 |Toggle comments|Ctrl+/|
+|Collapse all foldable regions|Ctrl+Alt+[|
+|Expand all foldable regions|Ctrl+Alt+]|
+|Toggle all foldable regions state|Ctrl+Alt+;|
+|Collapse foldable region|Ctrl+Shift+[|
+|Expand  foldable region|Ctrl+Shift+]|
+|Toggle foldable region state|Ctrl+Shift+;|
+|Delete reference or words|Ctrl+Backspace or Ctrl+Delete|
 
 ## DAX Query
 
@@ -136,3 +141,16 @@ The following shortcuts are available as of Tabular Editor v. 3.2.2.
 |Command|Shortcut|
 |---|---|
 |Run script|F5|
+
+# Customizing Shortcuts
+
+Tabular Editor 3 allows for the customization of shortcuts by rebinding existing or adding new shortcuts.
+
+Setting shortcuts can be done through **Tools -> Preferences -> Keyboard** and locating the command that should have a shortcut binding and setting the binding in the menu. 
+Shortcuts can be set for many different parts of Tabular Editor 3 including [Macros](xref:creating-macros) to have C# scripts available at the fingertips. 
+
+![Dax Script](~/images/SetShortcuts.png)
+
+1. Keyboard Menu in Preferences
+2. Find command that should have a shortcut
+3. Set shortcut by holding desired shortcuts key and use "Assign Shortcut"

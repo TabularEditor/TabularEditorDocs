@@ -27,6 +27,7 @@
 ### @dax-debugger
 ### @dax-query
 ### @pivot-grid
+### @dax-optimizer-integration
 ## Files formats
 ### @supported-files
 ### @tmdl

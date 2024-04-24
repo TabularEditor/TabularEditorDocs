@@ -39,7 +39,7 @@ Currently, the following data sources are natively supported by Tabular Editor 3
 - Snowflake*
 - Power BI Dataflow*
 - Databricks*
-- Fabric OneLake (DirectLake)*
+- Fabric OneLake (Direct Lake)*
 
 *=These data sources are only supported as implicit data sources in Power BI data models. They are not available in SSAS / Azure AS.
 

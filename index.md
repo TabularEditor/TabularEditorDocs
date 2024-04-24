@@ -95,6 +95,7 @@ The table below lists all the main features of both tools.
 |[Metadata Translation Editor](xref:metadata-translation-editor)||<span class="emoji">&#10004;</span>|
 |[Perspective Editor](xref:perspective-editor)||<span class="emoji">&#10004;</span>|
 |[Table Groups](xref:table-groups)||<span class="emoji">&#10004;</span>|
+|[DAX Optimizer Integration](xref:dax-optimizer-integration)||<span class="emoji">&#10004;</span>|
 
 \***Note:** Limitations apply depending on which [edition](xref:editions) of Tabular Editor 3 you are using.
 
