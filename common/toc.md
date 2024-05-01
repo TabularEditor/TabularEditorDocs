@@ -1,5 +1,6 @@
 ﻿# [Common functionality](common-features.md)
 ## [Power BI Desktop limitations](desktop-limitations.md)
+## [XMLA / AS connectivity](xmla-as-connectivity.md)
 ## [Policies](policies.md)
 ## [Save to folder](save-to-folder.md)
 ### @tmdl-common
