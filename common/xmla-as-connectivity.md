@@ -43,7 +43,7 @@ A typical OLAP connection string looks like this:
 Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated Security=SSPI;
 ```
 
-> [!Note]
+> [!NOTE]
 > If the `Initial Catalog` property is specified in the connection string, the **Select Database** dialog will not be shown, and Tabular Editor will connect directly to the specified database.
 
 OLAP connection strings support many properties in addition to the ones shown above. For a full list of properties, see the [Microsoft documentation](https://learn.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions).
@@ -59,3 +59,5 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 ```
 
 This is useful if you want error messages and other server messages to be in a specific language. If the `Locale Identifier` property is not specified, the language of the client operating system is used.
+
+Most Analysis Services instances supports several languages. See [this page for a full list of locale identifiers (LCID)](https://learn.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-fulltext-languages-transact-sql?view=sql-server-ver16).
