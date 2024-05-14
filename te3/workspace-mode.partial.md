@@ -4,8 +4,8 @@ Using workspace mode, Tabular Editor will synchronize your model metadata change
 
 Ideally, each model developer should use their own workspace database to avoid conflicts while developing.
 
-> [!NOTE]
-> For Fabric workspace we recommend not enabling GIT integration, as this might lead to significant GIT conflicts. Instead use a local GIT repo where the model is source controlled and have a developer Fabric workspace that is not GIT enabled. 
+> [!WARNING]
+> Do not enable Git integration on the Fabric workspace that you use to host your Tabular Editor workspace databases. This is to avoid Git conflicts as you develop the model, since Tabular Editor makes changes to the workspace database through the XMLA endpoint, and these changes will not be in sync with any underlying Git branch. 
 
 > [!NOTE]
 > For models at compatibility level 1200, 1400 or 1500, we recommend using a local instance of Analysis Services to host the workspace database, such as the one included with [SQL Server Developer Edition 2019](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
