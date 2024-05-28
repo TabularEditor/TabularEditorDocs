@@ -22,7 +22,7 @@ The screenshot above shows a Pivot Grid containing two measures, `[Total Net Ord
 
 By default, the Pivot Grid refreshes automatically every time you save changes to the model (Ctrl+S). Moreover, changing DAX expressions of measures does not require the model to be refreshed. Thus, you can quickly iterate on your DAX expressions and see the results in the Pivot Grid without having to wait for the model to refresh. It is quite common to have the Pivot Grid open in a separate window while working on DAX expressions in the **Expression Editor** or using a [**DAX Script**](xref:dax-scripts).
 
-> [!HINT]
+> [!TIP]
 > There is a little bit of confusing terminology in this article. So for clarification purposes:
 > - **Fields** refers to model measures, KPIs, columns and hierarchies. In other words, anything that can be dragged into the Pivot Grid.
 > - **KPIs** are a special type of measure that can be created in Tabular Editor. They are displayed in the Pivot Grid just like measures, but with a special icon to indicate that they are KPIs. Each KPI can have up to 3 different values (target, trend, and status), which are displayed separately in the Pivot Grid.
@@ -116,7 +116,7 @@ After fields have been added to the Pivot Grid, you can adjust the width of colu
 
 ![Best Fit Columns 2](images/best-fit-columns-2.png)
 
-To apply a "Best Fit" or a pixel width to all columns in the Pivot Grid at once, right-click on the "Values" header and choose the desired option from the context menu.
+To apply a "Best Fit" or set a specific pixel width for all columns in the Pivot Grid simultaneously, right-click on the "Values" header and select the desired option from the context menu.
 
 To change the order of fields in the Pivot Grid, you can drag fields between the different areas of the Pivot Grid. You can also drag fields within the same area to change their order. To remove a field from the Pivot Grid, drag it back to the Field List or right-click on the field and choose **Remove from Pivot Grid** from the context menu.
 
@@ -132,7 +132,7 @@ You can add visualization rules to cells in the Pivot Grids, which is useful for
 
 When you close a Pivot Grid, Tabular Editor will prompt you to save the layout of the Pivot Grid. If you choose to save the layout, the next time you open the Pivot Grid, it will be restored to the same layout as when you closed it. You can also save the layout of a Pivot Grid manually by hitting (Ctrl+S) or using the **File > Save** option, while the Pivot Grid is the active window.
 
-Pivot Grids are saved using the `.te3pivot` file extension. This is a simple json file that specifies which model objects are shown in the Pivot Grid, and in which areas they are placed. Objects are referenced by name and lineage tag (if present), so the Pivot Grid layout can generally be restored even if the model has been modified since the layout was saved.
+The file extension used for saving Pivot Grid layouts is `.te3pivot`. This is a simple json file that specifies which model objects are shown in the Pivot Grid, and in which areas they are placed. Objects are referenced by name and lineage tag (if present), so the Pivot Grid layout can generally be restored even if the model has been modified since the layout was saved.
 
 > [!NOTE]
 > It is possible to open a Pivot Grid layout that was created in a different model, but be aware that the fields in the layout may not exist in the model you are currently connected to. In such cases, the Pivot Grid will show a warning message, and any fields that do not exist in the model will be removed from the layout. The warning message may be toggled off under **Tools > Preferences > Data Browsing > Pivot Grid > Show warning if Pivot Grid doesn't match model**.
@@ -142,4 +142,4 @@ Pivot Grids are saved using the `.te3pivot` file extension. This is a simple jso
 The Pivot Grid has a few more features that are useful to know about:
 
 - If you right-click on a field, you will have the option to **Go to** that field. This brings the TOM Explorer into focus, with the equivalent model object selected. For measures and calculated columns, the **Expression Editor** will be brought into focus, with the DAX expression of the measure displayed.
-- If you right-click on a cell in the Pivot Grid, you will also have the option to **Debug this value**. This will launch the [**DAX Debugger**](xref:dax-debugger) starting from the specific measure and filter context that produced the value in the cell.
+- If you right-click on a cell in the Pivot Grid, you can select the option to **Debug this value**. This will launch the [**DAX Debugger**](xref:dax-debugger) starting from the specific measure and filter context that produced the value in the cell.
