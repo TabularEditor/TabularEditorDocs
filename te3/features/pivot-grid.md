@@ -14,7 +14,7 @@ applies_to:
 > [!NOTE]
 > Information in this article relates to Tabular Editor 3.16.0 or newer. Please make sure you are using the latest version of Tabular Editor 3 to take advantage of the new features and improvements.
 
-While developing semantic models, you may often want to test that your DAX expressions return the expected values. Traditionally, this was done using client tools such as Excel or Power BI. With Tabular Editor 3, you can use **Pivot Grids** which behave much like the widely known PivotTables of Excel. The Pivot Grid lets you quickly create summarized views of the data in your model, allowing you to test the behavior of your DAX measures when filtering and slicing by various columns and hierarchies.
+While developing semantic models, you may often want to test that your DAX expressions return the expected values. Traditionally, this was done using client tools such as Excel or Power BI. With Tabular Editor 3, you can use **Pivot Grids** which behave much like the widely known PivotTables in Excel. The Pivot Grid lets you quickly create summarized views of the data in your model, allowing you to test the behavior of your DAX measures when filtering and slicing by various columns and hierarchies.
 
 ![Pivot Grid Example](images/pivot-grid-example.png)
 
@@ -83,6 +83,9 @@ You can change the default layout of the Field List under **Tools > Preferences 
 By default, any field you add to the Pivot Grid remains visible in the Field List. If you would like to hide fields that are added to the Pivot Grid, you can uncheck the **Keep fields visible** option under **Tools > Preferences > Data Browsing > Pivot Grid > Field List** (this behavior is similar to how Pivot Grid worked prior to Tabular Editor v. 3.16.0).
 
 If you are working on a large, complex model, and you are expecting measures used in the Pivot Grid to be relatively slow, you can check the **Defer Layout Update** option at the bottom of the Field List. This will prevent the Pivot Grid from updating the layout every time you add or remove a field, which can be useful, if you intend to make multiple changes to the Pivot Grid layout before updating it. Hit the **Update** button to apply the changes to the Pivot Grid.
+
+> [!IMPORTANT]
+> Columns without an attribute hierarchy (IsAvailableIn MDX = false) cannot be used in the Pivot Grid and are not shown in the Field list.
 
 ## Customizing Pivot Grids
 
