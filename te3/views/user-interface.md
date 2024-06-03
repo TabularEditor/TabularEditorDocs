@@ -10,7 +10,7 @@ This article describes the user interface of Tabular Editor 3.
 
 ## Basic user interface elements
 
-The first time you launch Tabular Editor 3 and load a data model, you will be presented with an interface as shown on the screenshot below.
+The first time you launch Tabular Editor 3 and load a Semantic Model, you will be presented with an interface, as shown in the screenshot below.
 
 ![Basic user interface](~/images/basic-ui.png)
 
@@ -53,6 +53,9 @@ For the vector based themes (Basic and Bezier), use the **Window > Palette** men
 The following section describes the menus in Tabular Editor 3 in more details.
 
 We use the term **Active document** in the following section, to mean that the cursor is placed within a document such as the Expression Editor or the "DAX Script 1" tab in the screenshot below. Some keyboard shortcuts and menu items behave differently depending on whether there is an active document or not, and what type of document is active.
+
+> [!NOTE]
+> Menus and toolbars are locked in place by default, preventing accidental repositioning. To unlock them, go to **Tools > Customize... > Options** and uncheck the **Lock menus and toolbars** option
 
 ![Active Document](~/images/active-document.png)
 
