@@ -128,7 +128,7 @@ CALCULATIONGROUP 'Table name'[Column name]
     FormatString = [<DAX expression>]
 ```
 
-> [!HINT]
+> [!TIP]
 > Users of TMDL will undoubtedly have noticed that some similarities exist between the syntax of DAX scripts and the syntax of TMDL. In fact, TMDL was inspired by DAX scripts. However, to keep things simple, DAX scripts intentionally supports only objects that have one or more DAX expressions associated with them. Moreover, the DAX script syntax is designed to be compatible with the `DEFINE` section of a DAX query (provided the DAX script does not specify any object properties). TMDL, on the other hand, is used to define the entire model metadata, and is not limited to DAX objects. However, blocks of TMDL code cannot be readily used in a DAX query as the syntax for defining object names in TMDL, is not valid in DAX.
 
 ## Example 1: Measure
