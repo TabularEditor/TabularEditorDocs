@@ -145,7 +145,8 @@ The DAX debugger currently has the following limitations:
 - Queries that contain implicit measures or query-scoped calculations are currently not supported.
 - When browsing the first 1000 rows of an iterator that arises out of a filtered table expression, the selected row in the browse window may not always correspond to the current row context in the evaluation context stack (type `CALCULATETABLE('<table name>')` in the **Watch** window to inspect the current row context).
 - The debugger currently only allows debugging DAX expressions on measures. If a measure is modified by a calculation item in the filter context, this will be correctly reflected in the results produced by the debugger. However, it is not currently possible to step into the DAX expression of the calculation item.
-- [Visual calculations](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-visual-calculations-overview)) cannot be debugged as they are defined using query-scoped columns. The debugger does not currently support query-scoped objects.
+- [Visual calculations](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-visual-calculations-overview) cannot be debugged as they are defined using query-scoped columns. The debugger does not currently support query-scoped objects.
+
 If you encounter an issue with the debugger, other than those listed above, please post it to our [issue tracker](https://github.com/TabularEditor/TabularEditor3/issues) on the TE3 Community Support GitHub site.
 
 # Roadmap
