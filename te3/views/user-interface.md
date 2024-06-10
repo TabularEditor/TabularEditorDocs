@@ -65,7 +65,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
 
 ![File Menu](~/images/file-menu.png)
 
-- **New**: Opens a submenu that allows you to create a new blank data model (Ctrl+N), or create various [supporting files](xref:supported-files.#supported-file-types) such as a new DAX Query or DAX Script (text files) or a data model diagram (JSON file). Supporting files (with the exception of C# scripts), can be created only when a model is already loaded in Tabular Editor.
+- **New**: Opens a submenu that allows you to create a new blank data model (Ctrl+N), or create various [supporting files](xref:supported-files#supported-file-types) such as a new DAX Query or DAX Script (text files) or a data model diagram (JSON file). Supporting files (with the exception of C# scripts), can be created only when a model is already loaded in Tabular Editor.
   
   ![File Menu New](~/images/file-menu-new.png)
 
