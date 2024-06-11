@@ -110,4 +110,7 @@ The DAX debugger unlocks the ability to understand how the DAX works inside a si
 
 Tabular Editor 3, beginning from version 3.16.0, introduces the new capability of exporting the results of a DAX Query to either CSV or Excel. After running the DAX Query, a button activates in the toolbar, enabling users to save the results locally in CSV or Excel format.
 
+> [!TIP]
+> To Export more than 1001 rows choose "click to get all rows" after running the DAX Query
+
 ![Dax Query Export Data](~/images/features/dax_query_window/dax_query_export_data.png)
