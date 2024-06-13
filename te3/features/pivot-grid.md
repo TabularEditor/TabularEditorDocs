@@ -121,6 +121,8 @@ After fields have been added to the Pivot Grid, you can adjust the width of colu
 
 To apply a "Best Fit" or set a specific pixel width for all columns in the Pivot Grid simultaneously, right-click on the "Values" header and select the desired option from the context menu.
 
+By default, field headers will expand vertically to fit the content of the field name. If you would like to limit the height of field headers to one row, you can disable the **Word wrap field headers**-option under **Tools > Preferences > Pivot Grid > Field Headers**.
+
 To change the order of fields in the Pivot Grid, you can drag fields between the different areas of the Pivot Grid. You can also drag fields within the same area to change their order. To remove a field from the Pivot Grid, drag it back to the Field List or right-click on the field and choose **Remove from Pivot Grid** from the context menu.
 
 If you want measures to be displayed on rows rather than on columns, drag the "Values" field from the Column Area to the Row Area.
@@ -149,4 +151,8 @@ The Pivot Grid has a few more features that are useful to know about:
 
 ## Limitations and known issues
 
-- Format rules (such as icon sets, data bars, etc.) are not properly persisted when saving a Pivot Grid layout as a `.te3pivot` file. This will be addressed in a future update.
+Below is a list of known limitations and issues with Pivot Grids in Tabular Editor 3.16.0, which we are working to address in future releases:
+
+- Format rules (such as icon sets, data bars, etc.) are not properly persisted when saving a Pivot Grid layout as a `.te3pivot` file.
+- The .te3pivot file does not currently store the state of the "Show empty values on columns" and "Show empty values on rows" options.
+- If you open a .te3pivot file on a model different from the one the layout was saved from, fields that do not exist in the current model will be removed from the layout. Hitting Save (Ctrl+S) will save the layout with the removed fields removed. We may change this behavior in a future release so that the .te3pivot file is not overwritten without explicit confirmation.
