@@ -18,17 +18,19 @@ While developing semantic models, you may often want to test that your DAX expre
 
 ![Pivot Grid Example](images/pivot-grid-example.png)
 
-The screenshot above shows a Pivot Grid containing two measures, `[Total Net Order Value]` and `[Net Orders]`, which is sliced horizontally by Year, filtered to 2021 and 2022, and vertically by the Product Hierarchy. Tabular Editor 3 users can use this feature to ensure that DAX expressions behind the measures are working as expected, and to quickly validate the data in the model.
+The screenshot above shows a Pivot Grid containing two measures, `[Total Net Order Value]` and `[Net Orders]`, which is sliced horizontally by Year, filtered to 2021 and 2022, and vertically by the Product Hierarchy. Tabular Editor 3 users can use this feature to ensure that DAX expressions behind the measures are working as expected and to quickly validate the data in the model.
 
-By default, the Pivot Grid refreshes automatically every time you save changes to the model (Ctrl+S). Moreover, changing DAX expressions of measures does not require the model to be refreshed. Thus, you can quickly iterate on your DAX expressions and see the results in the Pivot Grid without having to wait for the model to refresh. It is quite common to have the Pivot Grid open in a separate window while working on DAX expressions in the **Expression Editor** or using a [**DAX Script**](xref:dax-scripts).
+By default, the Pivot Grid auto-updates every time you save changes to the semantic model (Ctrl+S). Thus, you can quickly iterate on your DAX expressions and see the results in the Pivot Grid without having to wait for the model to refresh by changing your measures, saving the model, and directly seeing the new measure definition reflected in the Pivot Grid. A good workflow is to open the Pivot Grid in a separate window while working on DAX expressions in the **Expression Editor** or using a **DAX Script**.
 
 > [!TIP]
-> There is a little bit of confusing terminology in this article. So for clarification purposes:
+> Some clarifications on terminology:
 > - **Fields** refers to model measures, KPIs, columns and hierarchies. In other words, anything that can be dragged into the Pivot Grid.
 > - **KPIs** are a special type of measure that can be created in Tabular Editor. They are displayed in the Pivot Grid just like measures, but with a special icon to indicate that they are KPIs. Each KPI can have up to 3 different values (target, trend, and status), which are displayed separately in the Pivot Grid.
 > - **Columns** in the Pivot Grid (such as in the term "Column Area") should not be confused with columns in the model. In the Pivot Grid, columns are used to slice the data horizontally, while rows are used to slice the data vertically.
-> - Developers with a multidimensional background may be more familiar with the terms **Dimensions** and **Attributes**. In semantic models, **Dimensions** are represented by model **tables**, and **Attributes** are represented by model **columns**. **Hierarchies** in a semantic model, is just a way to group columns together, such as in a calendar hierarchy: Year > Quarter > Month > Day. Such hierarchies used to be called **Attribute Hierarchies** or **User-Defined Hierarchies** in multidimensional models.
-> - **Cells** in the Pivot Grid are the individual data points where a row and a column intersect. Each cell contains a single value, which is the result of the DAX expression of the specific measure, evaluated under the filter context produced by values in the **Row Area** and **Column Area**, in combination with any filters applied to fields in the **Filter Area**.
+> - **Cells** in the Pivot Grid are the individual data points where a row and a column intersect. Each cell contains a single value, which is the result of the DAX expression of the specific measure, evaluated under the filter context produced by values in the *Row Area* and *Column Area*, in combination with any filters applied to fields in the *Filter Area*.
+
+> [!NOTE]
+> Developers with a multidimensional background may be more familiar with the terms *Dimensions* and *Attributes*. In semantic models, *Dimensions* are represented by model *tables*, and *Attributes* are represented by model *columns*. *Hierarchies* in a semantic model, is just a way to group columns together, such as in a calendar hierarchy: Year > Quarter > Month > Day. Such hierarchies used to be called *Attribute Hierarchies* or *User-Defined Hierarchies* in multidimensional models.
 
 ## Creating a Pivot Grid
 
