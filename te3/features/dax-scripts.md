@@ -72,61 +72,64 @@ The syntax for DAX scripts is the following:
 
 ```dax
 <DAX script>:
-MEASURE 'Table name'[Measure name] = <DAX expression>
+MEASURE 'Table name'[Measure name] [= [<DAX expression>]]
     [<Measure properties>]
 
-COLUMN 'Table name'[Column name] = <DAX expression>
+COLUMN 'Table name'[Column name] [= [<DAX expression>]]
     [<Column properties>]
 
-TABLE 'Table name' = <DAX expression>
+TABLE 'Table name' [= [<DAX expression>]]
     [<Table properties>]
 
 CALCULATIONGROUP 'Table name'[Column name]
     [<Calculation Group properties>]
-    CALCULATIONITEM "Item 1" = <DAX expression>
+    CALCULATIONITEM "Item 1" [= [<DAX expression>]]
         [<Calculation Item properties>]
-    CALCULATIONITEM "Item 2" = <DAX expression>
+    CALCULATIONITEM "Item 2" [= [<DAX expression>]]
         [<Calculation Item properties>]
     ...
 
 <Measure properties>:
-    DetailRows = <DAX expression>
-    DisplayFolder = "string"
-    FormatString = "string"
-    Description = "string"
+    DetailRows = [<DAX expression>]
+    DisplayFolder = ["string"]
+    FormatString = ["string" / <DAX expression>]
+    Description = ["string"]
     Visible = TRUE/FALSE
-    KpiStatusExpression = <DAX expression>
-    KpiStatusDescription = "string"
-    KpiStatusGraphic = "string"
-    KpiTrendExpression = <DAX expression>
-    KpiTrendDescription = "string"
-    KpiTrendGraphic = "string"
-    KpiTargetExpression = <DAX expression>
-    KpiTargetDescription = "string"
-    KpiTargetFormatString = "string"
+    KpiStatusExpression = [<DAX expression>]
+    KpiStatusDescription = ["string"]
+    KpiStatusGraphic = ["string"]
+    KpiTrendExpression = [<DAX expression>]
+    KpiTrendDescription = ["string"]
+    KpiTrendGraphic = ["string"]
+    KpiTargetExpression = [<DAX expression>]
+    KpiTargetDescription = ["string"]
+    KpiTargetFormatString = ["string"]
 
 <Column properties>:
-    DisplayFolder = "string"
-    FormatString = "string"
-    Description = "string"
+    DisplayFolder = ["string"]
+    FormatString = ["string"]
+    Description = ["string"]
     Visible = TRUE / FALSE
     Datatype = BOOLEAN / DOUBLE / INTEGER / DATETIME / CURRENCY / STRING
 
 <Table properties>:
-    Description = "string"
+    Description = ["string"]
     Visible = TRUE / FALSE
-    DetailRows = <DAX expression>
+    DetailRows = [<DAX expression>]
 
 <Calculation Group properties>:
-    Description = "string"
+    Description = ["string"]
     Visible = TRUE / FALSE
     Precedence = <integer value>
 
 <Calculation Item properties>
-    Description = "string"
+    Description = ["string"]
     Ordinal = <integer value>
-    FormatString = <DAX expression> 
+    FormatString = [<DAX expression>]
 ```
+
+> [!TIP]
+> Users of TMDL will undoubtedly have noticed that some similarities exist between the syntax of DAX scripts and the syntax of TMDL. In fact, TMDL was inspired by DAX scripts. However, to keep things simple, DAX scripts intentionally supports only objects that have one or more DAX expressions associated with them. Moreover, the DAX script syntax is designed to be compatible with the `DEFINE` section of a DAX query (provided the DAX script does not specify any object properties). TMDL, on the other hand, is used to define the entire model metadata, and is not limited to DAX objects. However, blocks of TMDL code cannot be readily used in a DAX query as the syntax for defining object names in TMDL, is not valid in DAX.
 
 ## Example 1: Measure
 
@@ -205,3 +208,29 @@ CALCULATIONGROUP 'Time Intelligence'[Period]
         FormatString = "Percent"
         Ordinal = 5
 ```
+
+# Unspecified or empty expressions / properties
+
+As of Tabular Editor 3.16.0, it is possible to specify empty expressions and property values in DAX scripts, or omit object expressions entirely.
+
+For example, the following script will create a measure with an empty DAX expression, an empty format string and no Display Folder. If the measure already exists, it will be updated to have an empty DAX expression, an empty format string and no Display Folder.
+
+```dax
+MEASURE 'Internet Sales'[Internet Total Sales] =
+    , Description = "TODO: Ask business how this should be implemented and formatted."
+    , FormatString =
+    , DisplayFolder =
+```
+
+Note that the `,` (comma) before properties following an empty expression is mandatory. Commas are optional when the preceding expression is non-empty.
+
+If you want to keep the existing DAX expression on a measure, you can omit the `=` sign after the object name:
+
+```dax
+MEASURE 'Internet Sales'[Internet Total Sales]
+    DisplayFolder = "Totals"
+```
+
+The example above will update the `[Internet Total Sales]` measure to have the specified `DisplayFolder`, but will keep the existing DAX expression. All other properties on the object, such as `Description` and `FormatString`, will remain unchanged.
+
+These new features make it easier to write scripts that only update specific properties of an object, without having to specify the entire object definition. This way, scripts can more easily be reused across different models.

@@ -18,16 +18,17 @@
 ### @find-replace
 
 ## Features
-### @dax-editor
-### @dax-scripts
-### @table-groups
 ### @csharp-scripts
-### @perspective-editor
-### @metadata-translation-editor
 ### @dax-debugger
-### @dax-query
-### @pivot-grid
+### @dax-editor
 ### @dax-optimizer-integration
+### @dax-scripts
+### @dax-query
+### @metadata-translation-editor
+### @perspective-editor
+### @pivot-grid
+### @table-groups
+
 ## Files formats
 ### @supported-files
 ### @tmdl

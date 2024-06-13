@@ -122,7 +122,7 @@ For further reading please see: [TMDL](xref:tmdl)
 
 Supporting files are files which are not used by Analysis Services or Power BI. Instead, these files all support different kinds of development workflow in Tabular Editor 3 and other tools.
 
-All supporting files can be saved individually using either Ctrl+S or 'File > Save' while having the specific dialog box open and selected. 
+All supporting files can be saved individually using either Ctrl+S or 'File > Save' while having the corresponding document or window open and focused. 
 
 ### Diagram file (.te3diag)
 
@@ -134,8 +134,7 @@ Diagram files are actually JSON that is stored in a Tabular Editor 3 extension.
 
 [Download example Diagram File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/te3-diagram.te3diag)
 
-
-### DAX files (.dax)
+### DAX query files (.dax or .msdax)
 
 DAX queries are expressions that can be used to manipulate and analyze data in semantic models. A DAX file is a text file that contains one or more DAX queries. 
 
@@ -143,6 +142,17 @@ You can save a DAX file in Tabular Editor 3 and use it later to run the queries 
 
 [Download example DAX File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/dax-query-example.dax)
 
+These files can only be opened while Tabular Editor 3 is connected to an instance of Analysis Services or the Power BI / Fabric XMLA endpoint.
+
+### Pivot Grid layouts (.te3pivot)
+
+These files contain the layout of a Pivot Grid in Tabular Editor 3. They are simple JSON files specifying which fields (measures, columns, hierarchies) are displayed in the Pivot Grid, and how they are arranged.
+
+These files can only be opened while Tabular Editor 3 is connected to an instance of Analysis Services or the Power BI / Fabric XMLA endpoint.
+
+### DAX Scripts (.te3daxs)
+
+These files are saved DAX scripts (not queries) which are used in Tabular Editor to manipulate many DAX objects at once. For example, modifying multiple measures in a semantic model.
 
 ### C# Scripts (.csx)
 
@@ -154,30 +164,34 @@ This way, scripts can be reused without having to write them from scratch every 
 
 [Download example C# Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/create-sum-measures-csharp.csx)
 
-
-### DAX Scripts (.te3daxs)
-
-These files are saved DAX scripts (not queries) which are used in Tabular Editor to manipulate many DAX objects at once. For example, modifying multiple measures in a semantic model.
-
 ### Vertipaq Analyzer Files (.vpax)
+
 With Tabular Editor, you can export and import .vpax files using the Vertipaq Analyzer feature. A .vpax file is a compressed file that contains information about the size and structure of your semantic model, but not the actual data. 
 
 You can use this file to analyze and optimize your model performance, without exposing sensitive data. For example, you can use the [DAX optimizer](https://www.daxoptimizer.com/) tool to get suggestions on how to improve your DAX formulas based on the .vpax file.
 
 [Download example DAX Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/dax-script-example.te3daxs)
 
-> [!WARNING]
-> If your model metadata is confidential the .vpax file should also be considered confidential and only shared with that in mind.
-
-
-Unlike other supporting file types creating a .vpax file is done within Vertipaq Analyzer window using the 'Import' and 'Export' buttons. 
+Unlike other supporting file types creating a .vpax file is done within the Vertipaq Analyzer window using the 'Import' and 'Export' buttons. 
 
 ![VPAX](~/images/file-types/te3-supported-file-vpax.png)
 
-[Download example DAX Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/vpaq-example.vpax)
+[Download example VPAX file](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/vpaq-example.vpax)
 
+> [!WARNING]
+> If your model metadata is confidential, a .vpax file should also be considered confidential and only shared with that in mind. If you are concerned about protecting IP, Tabular Editor 3 has an option to obfuscate VPAX files.
+
+#### Obfuscation
+
+If you need to hand off the VPAX file to a 3rd party, such as a consultant or a tool vendor, you can obfuscate the file to hide the model metadata. This is done by selecting the 'Obfuscated Export...' option under the drop-down button next to the 'Export' button in the Vertipaq Analyzer window.
+
+An obfuscated VPAX file uses the .ovpax file extension.
+
+![Export obfuscated VPAX](~/images/obfuscated-vpax.png)
 
 For more documentation on Vertipaq Analyzer please see: [sqlbi Vertipaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer) and [sqlbi Docs: Vertipaq Analyzer](https://docs.sqlbi.com/vertipaq-analyzer/)
+
+For more information about obfuscation of VPAX files, please see: [VPAX Obfuscator](https://www.sqlbi.com/blog/marco/2024/03/15/vpax-obfuscator-a-library-to-obfuscate-vpax-files/)
 
 ## Local Setting Files
 

@@ -90,7 +90,7 @@ As mentioned above, integrating a Power BI report (.pbix) or Power BI template (
 
 These limitations are:
 
-- When using Tabular Editor as an external tool for Power BI Desktop, [not all modeling operations are supported](@xref:desktop-limitations).
+- When using Tabular Editor as an external tool for Power BI Desktop, [not all modeling operations are supported](xref:desktop-limitations).
 - Tabular Editor can extract model metadata from a .pbix file loaded in Power BI Desktop, or directly from a .pbit file on disk, but there is **no supported way to update model metadata in a .pbix or .pbit file outside of Power BI Desktop**.
 - Once any changes are made to a Power BI dataset through the XMLA endpoint, [that dataset can no longer be downloaded as a .pbix file](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets).
 
