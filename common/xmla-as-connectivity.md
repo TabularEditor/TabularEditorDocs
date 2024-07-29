@@ -106,6 +106,8 @@ The following semantic models aren't accessible by using the XMLA endpoint. Thes
 - Semantic models in My Workspace.
 - Excel workbook semantic models
 
+In Fabric, the default semantic model of a lakehouse or warehouse can be opened/connected to in Tabular Editor, but [not edited](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#considerations-and-limitations)
+
 ## Troubleshooting XMLA connections
 
 ### Testing a simple connection
