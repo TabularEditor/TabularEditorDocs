@@ -70,8 +70,9 @@ try
                 // Exclude Calculated Tables
                 t.Columns[0].Type != ColumnType.CalculatedTableColumn && 
 
-                // Exclude tables that have columns on the 'From' end of a Relationship
-                t.Columns.Any(c => Model.Relationships.Any(r => r.FromColumn == c) ) && 
+                // Only include tables that have a column on the "From" side of the relationship
+                (Model.Relationships.Count() > 0 ?
+                t.Columns.Any(c =>  Model.Relationships.Any(r => r.FromColumn == c) ) : true) && 
 
                 // Exclude tables that don't have a DateTime or Integer column
                 (
