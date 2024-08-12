@@ -81,9 +81,32 @@ _Rules_ are applied for each role to one or more objects, depending on the secur
 
 #### 3. __Assign Users to Roles:__ 
 Once configured in the dataset, users must be added to their respective roles.
-- _Power BI:_ Roles are assigned via the __Power BI service__, [in the dataset settings from the Workspace](https://learn.microsoft.com/en-us/power-bi/enterprise-service-admin-rls#manage-security-on-your-model).
+- _Power BI:_ Roles are assigned either via Tabular Editor or the __Power BI/Fabric service__, [in the dataset settings from the Workspace](https://learn.microsoft.com/en-us/fabric/security/service-admin-row-level-security#manage-security-on-your-model).
 - _SSAS / AAS:_ Roles are assigned via the Role object, by right-clicking and selecting "Edit Members..."
 - _Power BI Embedded:_ You must [generate an embed token](https://learn.microsoft.com/en-us/power-bi/developer/embedded/cloud-rls#generate-an-embed-token).
+
+You can assign and remove users/groups from roles through Tabular Editor the following way:
+
+  1. Right-Click the __Role__, select __Edit members__...
+  
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/images/data-security/data-security-edit-members.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 7:</strong>Users can be assigned to roles by right-clicking a Role and selecting <i>'Edit members...'.</i></figcaption>
+</figure>
+
+  2. Click the __dropdown button__ on the 'Add Windows AD Member' button and choose __Azure AD Member__:
+
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/images/data-security/data-security-edit-members-dialog.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 8:</strong> For AAS/SSAS models, users can be added via the <i>'Edit members...'</i> dialog box.</figcaption>
+</figure>
+
+  3. Specify the Azure AD user identity (typically, the user e-mail address) as the __Member Name__ property.
+  4. Click __OK__.
+  5. __Save__ the model.
+
+> [!IMPORTANT]
+> If your organisation is using on-premises Active Directory with SQL Server Analysis Services, you will need to use the __Windows AD Member__ option instead of __Azure AD Member__.
 
 > [!NOTE]
 > It is [recommended](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-security-tenant-level-planning#strategy-for-using-groups) to manage Data Security and Access with [Azure Active Directory Groups](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/how-to-manage-groups). 

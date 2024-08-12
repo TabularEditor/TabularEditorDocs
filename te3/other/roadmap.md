@@ -31,7 +31,8 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 ## Planned for 2024
 - DAX Debugger Enhancements
 - Diagram Improvements
-- Enhanced TMDL Support 
+- Enhanced TMDL Support
+- .Net 8 migration
 
 ## Non Planned Features
 - Standalone CLI application
