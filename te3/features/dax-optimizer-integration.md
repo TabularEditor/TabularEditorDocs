@@ -52,7 +52,7 @@ Go to the **Issues** or **Measures** tab to view detailed results. Use the colum
 
 ## Navigating issues and measures
 
-When you double-click on an issue or measure in the detailed view shown above, you will be taken to the **DAX Optimizer Results** view, where the original DAX expression of the measure is shown, along with highlights of the problematic areas. The list on the left side of the screen lets you toggle which issues to highlight.
+When you double-click on an issue or measure in the detailed view shown above, you will be taken to the **DAX Optimizer Results** view, where the original DAX expression of the measure is shown, along with highlights of the problematic areas. The list on the left side of the screen lets you toggle which issues to highlight. Moreover, you can mark issues as **Fixed** or **Ignored** using the checkboxes within the list.
 
 ![Dax Optimizer Results](~/images/dax-optimizer-results.png)
 
@@ -95,6 +95,5 @@ If no dictionary file is provided, you will only be able to browse the obfuscate
 
 The following are known issues and limitations with the **DAX Optimizer (Preview)** feature, which we expect to address in future releases:
 
-- Issues cannot be marked as "Fixed" or "Ignore" through Tabular Editor.
 - Obfuscated model results may be highlighted incorrectly in DAX expressions, when the obfuscated names of objects does not have the same length as the unobfuscated names.
 - The **DAX Optimizer (Preview)** view does not display how many "runs" are left on any given contract.
