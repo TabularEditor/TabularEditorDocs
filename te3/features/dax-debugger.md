@@ -77,6 +77,14 @@ This view lists the columns, measures and variables within the current scope of 
 
 ![Locals](../../images/locals.png)
 
+You can inspect a locals value by clicking on the magnifying glass button within the **Value** column. This will bring up a popup dialog showing the value in more details. This is especially useful if the inspected value is a table.
+
+![Inspect locals value](../../images/inspect-locals.png)
+
+If you prefer to inspect the locals value in a separate DAX query window, you can toggle off the **Use popup inspector** option under **Tools > Preferences > DAX Debugger > Locals**.
+
+![Dax Debugger Settings](../../images/dax-debugger-settings.png)
+
 ## Watch
 This view allows you to enter any DAX expression, which will be calculated within the current evaluation context. You can enter scalar as well as table expressions and you can use all DAX functions available and refer to variables within the current evaluation scope. Watch values are automatically updated when stepping to a different subexpression, or when the evaluation context is changed. **Watch values are always evaluated at the scope of the currently selected item in the evaluation context stack**.
 
@@ -90,10 +98,14 @@ To add, duplicate or delete Watch expressions, use the right-click context menu 
 
 ![Watch Context Menu](../../images/watch-context-menu.png)
 
-The **Generate query** option is identical to the Zoom button within the **Value** column, highlighted in the screenshot below. By clicking this, the debugger will open a new DAX query document, that defines the context of the calculation as well as the calculation itself, allowing you to inspect the results in more details. This is particularly useful when the watch expression is a table expression, as shown below:
+The **Generate query** option is identical to the magnifying glass button within the **Value** column, highlighted in the screenshot below. By clicking this, the debugger will open a new DAX query document, that defines the context of the calculation as well as the calculation itself, allowing you to inspect the results in more details. This is particularly useful when the watch expression is a table expression, as shown below:
 
 ![Inspect Watch](../../images/inspect-watch.png)
 
+> [!TIP]
+> What's the difference between the **Locals** view and the **Watch** view?
+> - **Locals** shows the values of columns, measures, variables and other relevant sub-expressions, within the current scope of execution, including the value of the currently selected subexpression in the call tree.
+> - **Watch** allows you to enter any DAX expression, which will be calculated within the current evaluation context.
 
 ## Evaluation Context
 This view provides information about the DAX evaluation context of the current subexpression. For example, a `CALCULATE` expression might perform a context transition or add a filter to the evaluation context, or a `SUMX` iterator might add a row context.
@@ -124,6 +136,45 @@ As you navigate between items in the call tree, the debug DAX script will highli
 Notice how the values in the **Locals** view are updated as the tree is navigated. You can also navigate to a subexpression by placing the cursor over the expression, right-click and choose the **Step into selection** option (Ctrl+B).
 
 ![Step into selection](../../images/debugger-step-into-selection.png)
+
+## Scalar predicates
+
+Scalar predicates used in filter arguments of the [`CALCULATE`](https://dax.guide/calculate) or [`CALCULATETABLE`](https://dax.guide/calculatetable) functions are handled in a special way, in the **Locals** view.
+
+For example, the following measure uses a scalar predicate, to display only the sales made in USA or Canada.
+
+```dax
+CALCULATE(
+    [Total Sales],
+    Geography[Country Region Code] = "US" || Geography[Country Region Code] = "CA"
+)
+```
+
+At first glance, the expression on line 3 looks like it would return a scalar value (true/false). However, in DAX, filters are tables. In reality, the scalar predicate is converted to a table expression using the [`FILTER`](https://dax.guide/filter) function, as shown below:
+
+```dax
+CALCULATE(
+    [Total Sales],
+    FILTER(
+        ALL(Geography[Country Region Code]),
+        Geography[Country Region Code] = "US" || Geography[Country Region Code] = "CA"
+    )
+)
+```
+
+The `FILTER` function is an iterator that iterates over the table `ALL(Geography[Country Region Code])`, that is - all the unique values of the "Country Region Code" column in the "Geography" table. Iterators generate a filter context for every row in the iteration. The scalar predicate is then evaluated in each such row context. In the case of the `FILTER` function, only the rows for which the predicate evaluates to `TRUE` are kept. In this example, the `FILTER` function would output a table with 1 column ("Country Region Code"), and 2 rows ("US" and "CA").
+
+When debugging a scalar predicate, the **Locals** view will show two special items, **(Current expression)** and **(Filter expression)**. These are described below:
+
+![Debug Scalar Predicates](../../images/debug-scalar-predicates.png)
+
+In the above screenshot:
+
+1. This is the scalar predicate currently being debugged. Even though this sub-expression looks like one that should return a scalar value (true/false), in reality, it returns a table.
+2. **(Current expression)**: This is the *scalar* value of the predicate, when evaluated within the current *row context* generated by the `FILTER` function as described above. In the screenshot, the scalar value evaluates to `False`, because the value of [Country Region Code] in the current row context is "AU", as can be seen in the **Watch** view, (4). We can use the **Evaluation Context** view (5), to scroll through the rows of the iteration one by one.
+3. **(Filter expression)**: This is the *table* expression generated by the `FILTER` function, as described above. In the screenshot, this is a 1x2 table containing the values "US" and "CA". Clicking the magnifying glass button will open a popup that displays the table values in a grid.
+4. We can use the **Watch** window to evaluate any DAX expression within the current evaluation context. In this case, since we have an active row context, we can directly refer to columns in the row context, such as `Geography[Country Region Code]`. We can see that the current value of this column is "AU", which is why the scalar predicate (2) evaluates to `False`.
+5. We can use the **Evaluation Context** view to scroll through the rows of the iteration, one by one. This will update the values in the **Locals** view, as well as the **Watch** view, to reflect the values in the current row context.
 
 ## Keyboard shortcuts
 
