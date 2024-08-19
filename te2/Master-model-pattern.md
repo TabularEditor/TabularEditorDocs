@@ -141,7 +141,7 @@ When adding new *user* perspectives to the model, remember to add the same annot
 ### Controlling object metadata
 There may also be situations where the same measure should have slightly different expressions or format strings across the different model versions. Again, we can use annotation to provide the metadata per developer perspective, and then apply the metadata when we script out the final model.
 
-The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](/Useful-script-snippets#export-object-properties-to-a-file) script function. However, thatâ€™s a little overkill for our use case, so letâ€™s just specify directly which properties we want to store as annotations. Create the following script:
+The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](/Useful-script-snippets#export-object-properties-to-a-file) script function. However, that's a little overkill for our use case, so let's just specify directly which properties we want to store as annotations. Create the following script:
 ```csharp
 foreach(var m in Selected.Measures) { 
     m.SetAnnotation(Selected.Perspective.Name + "_Expression", m.Expression);

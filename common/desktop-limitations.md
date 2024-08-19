@@ -114,7 +114,7 @@ All Tabular Object Model (TOM) metadata can be accessed for read-only. Write ope
 > The Analysis Services instance managed by Power BI Desktop does not enforce the allowed data modeling operations. It is up to the External Tool to ensure that no unsupported changes are made. Ignoring this may lead to unpredictable results, corrupt .pbix/.pbit report files or Power BI Desktop becoming unstable.
 
 > [!IMPORTANT]
-> Changes to the data model can break your Power BI report visuals. If, for example, a measure is moved from one table to another, any visual using that measure will need to be updated. Kurt Buhler has a blog on how to fix these errors in a less manual way here: [Fix Power BI “Something is wrong with one or more fields”](https://data-goblins.com/power-bi/something-is-wrong-with-one-or-more-fields)
+> Changes to the data model can break your Power BI report visuals. If, for example, a measure is moved from one table to another, any visual using that measure will need to be updated. Kurt Buhler has a blog on how to fix these errors in a less manual way here: [Fix Power BI "Something is wrong with one or more fields"](https://data-goblins.com/power-bi/something-is-wrong-with-one-or-more-fields)
 
 # Tabular Editor and Power BI Desktop
 
