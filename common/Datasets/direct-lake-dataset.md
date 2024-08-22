@@ -50,3 +50,84 @@ Additionally, on import of new tables Tabular Editor 3 (3.15.0 or higher) frames
 
 ## Identifying a Direct Lake model
 The top title bar of Tabular Editor shows which type of model is open in that instance of Tabular Editor. Additionally, the TOM Explorer displays the type and mode of every table (Import, DirectQuery, Dual or Direct Lake). If a model contains a mix of table modes, the title bar will show "Hybrid". Currently, it is not possible for a DirectLake model to contain tables in Import, DirectQuery or Dual mode.
+
+
+## Converting a Direct Lake model to Import Mode
+
+The below C# script converts and existing model into 'Import Mode'. This can be useful if the data latency requirements of your model does not require Direct Lake or you want to avoid the limitations of a Direct Lake model but have already started building one inside Fabric.
+
+Running the script is possible when Tabular Editor is connected to a semantic model through the XMLA endpoint. However, saving changes directly back to the Power BI/Fabric workspace is not supported by Microsoft. To circumvent this, the recommended approach is to use the "Model > Deploy..." option. This allows for the deployment of the newly converted model as a new entity in a workspace.
+
+> [!NOTE]
+> After deploying the newly converted Import-mode model, you will need to specify the credentials for accessing the Lakehouse to refresh data into the model.
+
+### Convert Direct Lake-mode model to Import-mode
+```csharp
+// **********************************************************************************
+// Convert Direct Lake-mode model to Import-mode
+// ---------------------------------------------
+//
+// When this script is executed on a semantic model, it will:
+//
+//   - Loop through all tables. Any table that contains exactly 1 partition, which
+//     is in Direct Lake mode, will have its partition replaced by an equivalent
+//     Import-mode partition.
+//   - Set the collation of the model to null (default)
+// 
+// Remarks:
+// 
+//   - The Import-mode partitions will use the SQL endpoint of the Lakehouse.
+//   - The script assumes that the Shared Expression which specifies the SQL endpoint
+//     is called "DatabaseQuery".
+//   - Because TE2 does not expose the "SchemaName" property on EntityPartition
+//     objects, we have to use reflection to access the underlying TOM objects.
+//
+// Compatibility:
+// TE2.x, TE3.x
+// **********************************************************************************
+
+using System.Reflection;
+
+const string mImportTemplate = 
+@"let
+    Source = DatabaseQuery,
+    Data = Source{{[Schema=""{0}"",Item=""{1}""]}}[Data]
+in
+    Data";
+
+foreach(var table in Model.Tables)
+{
+    // Direct Lake-mode tables only have 1 partition...
+    if(table.Partitions.Count != 1) continue;
+    
+    // ...which should be in "DirectLake" mode:
+    var partition = table.Partitions[0];
+    if(partition.Mode != ModeType.DirectLake) continue;
+
+    // Tabular Editor unfortunately doesn't expose the SchemaName property of EntityPartitionSources,
+    // so we'll have to use reflection to access the underlying TOM object.
+    var pMetadataObjct = typeof(Partition).GetProperty("MetadataObject", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+    var tomPartition = pMetadataObjct.GetValue(partition) as Microsoft.AnalysisServices.Tabular.Partition;
+    var tomPartitionSource = tomPartition.Source as Microsoft.AnalysisServices.Tabular.EntityPartitionSource;
+    
+    // Table does not have an EntityPartitionSource, meaning it is not a Direct Lake table
+    // (shouldn't happen, since we already checked for DirectLake mode above...)
+    if(tomPartitionSource == null) continue;
+    
+    var schemaName = tomPartitionSource.SchemaName;
+    var tableName = tomPartitionSource.EntityName;
+
+    // Rename the original (Direct Lake) partition (as we can't have two partitions with the same name):
+    var partitionName = partition.Name;
+    partition.Name += "_old";
+    
+    // Add the new (Import) partition:
+    table.AddMPartition(partitionName, string.Format(mImportTemplate, schemaName, tableName));
+    
+    // Delete the old (Direct Lake) partition):
+    partition.Delete();
+}
+
+// Update model collation:
+Model.Collation = null;
+```
