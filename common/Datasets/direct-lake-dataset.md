@@ -2,7 +2,7 @@
 uid: direct-lake-dataset
 title: Direct Lake Semantic Models
 author: Morten Lønskov
-updated: 2023-08-14
+updated: 2024-08-22
 applies_to:
   versions:
     - version: 2.x
