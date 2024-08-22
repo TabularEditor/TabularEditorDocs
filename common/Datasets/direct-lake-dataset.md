@@ -2,7 +2,7 @@
 uid: direct-lake-dataset
 title: Direct Lake Semantic Models
 author: Morten Lønskov
-updated: 2023-08-14
+updated: 2024-08-22
 applies_to:
   versions:
     - version: 2.x
@@ -50,3 +50,16 @@ Additionally, on import of new tables Tabular Editor 3 (3.15.0 or higher) frames
 
 ## Identifying a Direct Lake model
 The top title bar of Tabular Editor shows which type of model is open in that instance of Tabular Editor. Additionally, the TOM Explorer displays the type and mode of every table (Import, DirectQuery, Dual or Direct Lake). If a model contains a mix of table modes, the title bar will show "Hybrid". Currently, it is not possible for a DirectLake model to contain tables in Import, DirectQuery or Dual mode.
+
+
+## Converting a Direct Lake model to Import Mode
+
+The below C# script converts and existing model into 'Import Mode'. This can be useful if the data latency requirements of your model does not require Direct Lake or you want to avoid the limitations of a Direct Lake model but have already started building one inside Fabric.
+
+Running the script is possible when Tabular Editor is connected to a semantic model through the XMLA endpoint. However, saving changes directly back to the Power BI/Fabric workspace is not supported by Microsoft. To circumvent this, the recommended approach is to use the "Model > Deploy..." option. This allows for the deployment of the newly converted model as a new entity in a workspace.
+
+> [!NOTE]
+> After deploying the newly converted Import-mode model, you will need to specify the credentials for accessing the Lakehouse to refresh data into the model.
+
+### C# Script to convert Direct Lake model to Import Mode
+<script src="https://gist.github.com/otykier/ac53aac2a2f22838c5b2019fd45aaa98.js"></script>
