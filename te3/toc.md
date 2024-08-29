@@ -28,6 +28,7 @@
 ### @perspective-editor
 ### @pivot-grid
 ### @table-groups
+### @code-hints
 
 ## Files formats
 ### @supported-files
