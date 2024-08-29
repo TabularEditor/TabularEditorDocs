@@ -83,7 +83,8 @@ The code hints below will appear with orange dots under the first two characters
 | Avoid calculate shortcut syntax | Example:<br>`[Total Sales](Products[Color] = "Red")` -> `CALCULATE([Total Sales], Products[Color] = "Red")` |
 | Use MIN/MAX instead of IF | When a conditional expression is used to return the minimum or maximum of two values, it is more efficient and compact to use the [`MIN`](https://dax.guide/MIN) or [`MAX`](https://dax.guide/MAX) function. Example:<br>`IF(a > b, a, b)` -> `MAX(a, b)` |
 | Use ISEMPTY instead of COUNTROWS | When checking if a table is empty, it is more efficient to use the [`ISEMPTY`](https://dax.guide/ISEMPTY) function than to count the rows of the table. Examples:<br>`COUNTROWS(Products) = 0` -> `ISEMPTY(Products)` |
-
+| Use DIVIDE instead of division | When using an arbitrary expression in the denominator of a division, use [`DIVIDE`](https://dax.guide/DIVIDE) instead of the division operator, to avoid division by zero errors. Example:<br>`x / y` -> `DIVIDE(x, y)` |
+| Use division instead of DIVIDE | When the 2nd argument of [`DIVIDE`](https://dax.guide/DIVIDE) is a non-zero constant, it is more efficient to use the division operator. Example:<br>`DIVIDE(x, 2)` -> `x / 2` |
 
 ## Readability
 
@@ -95,6 +96,7 @@ The code hints below will appear with teal green dots under the first two charac
 | Use aggregator instead of iterator | Use an aggregator function instead of an iterator function when possible, to simplify the code. Example:<br>`SUMX(Products, Products[SalesAmount])` -> `SUM(Products[SalesAmount])` |
 | Use VALUES instead of SUMMARIZE | When [`SUMMARIZE`](https://dax.guide/SUMMARIZE) only specifies a single column, and that column belongs to the table specified in the first argument, the code can be more concisely written using [`VALUES`](https://dax.guide/VALUES). Example:<br>`SUMMARIZE(Products, Products[Color])` -> `VALUES(Products[Color])` |
 | Prefix variable | Variables should use a consistent naming convention. It is recommended to use a prefix, such as an underscore. You can configure which prefix to use, to match your preferred style. Example:<br>`VAR totalSales = SUM(Sales[SalesAmount])` -> `VAR _totalSales = SUM(Sales[SalesAmount])` |
+| Move constant aggregation to variable | When an aggregation function is used inside an iterator or a scalar predicate, the aggregation produces the same result for every row of the iteration, and therefore the aggregation could be moved to a DAX variable outside of the iteration. Example:<br>`CALCULATE(..., 'Date'[Date] = MAX('Date'[Date]))` -><br>`VAR _maxDate = MAX('Date'[Date]) RETURN CALCULATE(..., 'Date'[Date] = _maxDate)` |
 
 ## Rewrites
 
