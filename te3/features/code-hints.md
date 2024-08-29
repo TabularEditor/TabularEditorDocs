@@ -93,6 +93,7 @@ The code hints below will appear with teal green dots under the first two charac
 | --- | --- |
 | Convert to scalar predicate | A column filter can be written more concisely as a scalar predicate, without explicitly using the [`FILTER`](https://dax.guide/FILTER) function. Examples:<br>`FILTER(ALL(Products[Color]), Products[Color] = "Red")` -> `Products[Color] = "Red"`<br>`FILTER(VALUES(Products[Color]), Products[Color] = "Red")` -> `KEEPFILTERS(Products[Color] = "Red")` |
 | Use aggregator instead of iterator | Use an aggregator function instead of an iterator function when possible, to simplify the code. Example:<br>`SUMX(Products, Products[SalesAmount])` -> `SUM(Products[SalesAmount])` |
+| Use VALUES instead of SUMMARIZE | When [`SUMMARIZE`](https://dax.guide/SUMMARIZE) only specifies a single column, and that column belongs to the table specified in the first argument, the code can be more concisely written using [`VALUES`](https://dax.guide/VALUES). Example:<br>`SUMMARIZE(Products, Products[Color])` -> `VALUES(Products[Color])` |
 | Prefix variable | Variables should use a consistent naming convention. It is recommended to use a prefix, such as an underscore. You can configure which prefix to use, to match your preferred style. Example:<br>`VAR totalSales = SUM(Sales[SalesAmount])` -> `VAR _totalSales = SUM(Sales[SalesAmount])` |
 
 ## Rewrites
