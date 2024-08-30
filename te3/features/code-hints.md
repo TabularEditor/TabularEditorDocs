@@ -100,6 +100,7 @@ The code hints below will appear with teal green dots under the first two charac
 | Move constant aggregation to variable | When an aggregation function is used inside an iterator or a scalar predicate, the aggregation produces the same result for every row of the iteration, and therefore the aggregation could be moved to a DAX variable outside of the iteration. Example:<br>`CALCULATE(..., 'Date'[Date] = MAX('Date'[Date]))` -><br>`VAR _maxDate = MAX('Date'[Date]) RETURN CALCULATE(..., 'Date'[Date] = _maxDate)` |
 | Simplify 1-variable block | A variable block with only one variable can be simplified by moving the expression directly into the `RETURN` part of the block. This assumes the variable is only referenced once without any context modifiers. Example:<br>`VAR _result = [Sales] * 1.25 RETURN _result` -> `[Sales] * 1.25` |
 | Simplify multi-variable block | A variable block with multiple variables where each is a simple measure reference, which are only used once in the `RETURN` section without any context modifiers, should be simplified. Example:<br>`VAR _sales = [Sales] VAR _cost = [Cost] RETURN _sales - _cost` -> `[Sales] - [Cost]` |
+| Rewrite using COALESCE | Instead of using `IF` to return the first non-blank value from a list of expressions, use the [`COALESCE`](https://dax.guide/COALESCE) function. Example:<br>`IF(ISBLANK([Sales]), [Sales2], [Sales])` -> `COALESCE([Sales], [Sales2])` |
 
 ## Rewrites
 
