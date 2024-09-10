@@ -2,16 +2,44 @@
 uid: roadmap
 title: Roadmap
 author: Morten Lønskov
-updated: 2023-09-05
+updated: 2024-09-06
 ---
 # Tabular Editor 3 Roadmap
 
 Below is an overview of major new features to be shipped with Tabular Editor 3 updates in the short- to long term:
 
-# [Planned for 2023 Q4](#tab/PlannedQ4)
+# [Planned 2024](#tab/PlannedQ4)
 
-- Full Direct Lake Integration
-- DAX Optimizer Integration
+- More Daxscilla code refactoring options and automatic suggestions (for example, replace identical subexpressions with 
+a variable)
+- TMDL GA Support
+- Diagram Improvements
+- GA of DAX Optimizer Integration
+
+## Shipped in 2024
+✅ DAX Debugger Locals Enhancement
+✅ Full Direct Lake Integration
+✅ DAX Optimizer Integration (Preview)
+✅ .Net 8 migration
+✅ Pivot Grid Enhancement
+✅ DAX Query Enhancement
+
+
+# [Future Features](#tab/FutureFeatures)
+
+
+## Non Planned Features
+- Localization
+- Built in Macros and Best Practice Rules
+- Standalone CLI application
+- Git integration
+- DAX Debugger Filter Context visualizer
+- Configurable Daxscilla autocomplete code snippets
+- Configurable theming for code editors (syntax highlighting colors)
+- Incremental deployment (a la [ALM Toolkit](http://alm-toolkit.com/))
+
+
+# [Shipped](#tab/shipped)
 
 ## Shipped in 2023
 ✅ TMDL Support as standard Save to Folder file format. (Depending on release of TMDL by Microsoft)
@@ -26,26 +54,6 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 
 ✅ Import Table Wizard support for Power BI datamarts (Use Datamart SQL Endpoint)
 
-# [Future Features](#tab/FutureFeatures)
-
-## Planned for 2024
-- DAX Debugger Enhancements
-- Diagram Improvements
-- Enhanced TMDL Support
-- .Net 8 migration
-
-## Non Planned Features
-- Standalone CLI application
-- Git integration
-- DAX Debugger Filter Context visualizer
-- Configurable Daxscilla autocomplete code snippets
-- Configurable theming for code editors (syntax highlighting colors)
-- More Daxscilla code refactoring options and automatic suggestions (for example, replace identical subexpressions with 
-a variable)
-- Incremental deployment (a la [ALM Toolkit](http://alm-toolkit.com/))
-
-
-# [Shipped](#tab/shipped)
 ## Shipped in 2022
 
 ✅  DAX Debugger
