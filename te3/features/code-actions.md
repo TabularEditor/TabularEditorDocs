@@ -1,6 +1,6 @@
 ---
-uid: code-hints
-title: Code Hints
+uid: code-actions
+title: Code Actions
 author: Daniel Otykier
 updated: 2024-08-28
 applies_to:
@@ -10,13 +10,13 @@ applies_to:
     - edition: Enterprise
 ---
 
-# Code Hints
+# Code Actions
 
-Tabular Editor 3.18.0 introduces a new feature called **Code Hints**. This feature is enabled by default, but can be disabled in the **Tools > Preferences** dialog, under **Text Editors > DAX Editor > Code Hints**.
+Tabular Editor 3.18.0 introduces a new feature called **Code Actions**. This feature is enabled by default, but can be disabled in the **Tools > Preferences** dialog, under **Text Editors > DAX Editor > Code Actions**.
 
-Code Hints is a productivity feature that discretely provides suggestions for improving your DAX code, letting you apply the suggestions with a single click. Code Hints also provide easy access to common code refactoring operations.
+Code Actions is a productivity feature that discretely provides suggestions for improving your DAX code, letting you apply the suggestions with a single click. Code Actions also provide easy access to common code refactoring operations.
 
-Code Hints are separated into three different categories:
+Code Actions are separated into three different categories:
 
 1. **Improvements**: These are recommended suggestions for improving your DAX code, in terms of:
     - Following best practices
@@ -32,43 +32,43 @@ Code Hints are separated into three different categories:
     - Rename all occurrences of a variable or an extension column
     - Format code
 
-# How to use Code Hints
+## How to use Code Actions
 
-A new command and corresponding toolbar / menu buttons have been added, **Show Code Hints**, with a default keyboard shortcut of `Ctrl+.`. This command will show the applicable Code Hints at the current cursor position:
+A new command and corresponding toolbar / menu buttons have been added, **Show Code Actions**, with a default keyboard shortcut of `Ctrl+.`. This command will show the applicable Code Actions at the current cursor position:
 
-![Code Hint Invoke Menu](~/images/code-hint-invoke-menu.png)
+![Code Action Invoke Menu](~/images/code-action-invoke-menu.png)
 
-You can also find the applicable Code Hints through the **Refactor** submenu of the right-click context menu:
+You can also find the applicable Code Actions through the **Refactor** submenu of the right-click context menu:
 
-![Code Hint Refactor Submenu](~/images/code-hint-refactor-submenu.png)
+![Code Action Refactor Submenu](~/images/code-action-refactor-submenu.png)
 
-Lastly, a lightbulb or screwdriver icon is shown in the left margin of the editor, when the cursor is placed on a code segment that has applicable hints. Clicking on the icon will also bring up the Code Hints menu::
+Lastly, a lightbulb or screwdriver icon is shown in the left margin of the editor, when the cursor is placed on a code segment that has applicable actions. Clicking on the icon will also bring up the Code Actions menu::
 
-![Code Hints Margin](~/images/code-hints-margin.png)
+![Code Actions Margin](~/images/code-action-margin.png)
 
-## Code Hint indicators
+## Code Action indicators
 
-**Improvements** and **Readability** code hints will also be indicated visually in the code editor. This way, you can quickly determine which parts of your code can be improved or made more readable.
+**Improvements** and **Readability** Code Actions will also be indicated visually in the code editor. This way, you can quickly determine which parts of your code can be improved or made more readable.
 
 - **Improvements** are shown with orange dots under the first few characters of the code segment (unless that code segment already displays an orange warning squiggly). When the cursor is moved over the code segment, a *lightbulb* icon will appear in the left margin.
-- **Readability** hints are shown with teal green dots under the first few characters of the code segment. When the cursor is moved over the code segment, a *screwdriver* icon will appear in the left margin.
+- **Readability** actions are shown with teal green dots under the first few characters of the code segment. When the cursor is moved over the code segment, a *screwdriver* icon will appear in the left margin.
 - **Rewrites** are not visually indicated in the code itself, however, the *screwdriver* icon will appear in the left margin when the cursor is placed on a code segment that has applicable rewrites.
 
-# Apply to all occurrences
+## Apply to all occurrences
 
-Some Code Hints can be applied to all occurrences within the current DAX expression, DAX script or DAX query, rather than just the code segment under the cursor. When this is the case, the Code Hint will be shown in the Code Hints menu with " (All occurrences)" appended to the hint description. Clicking on the hint will apply the change to all occurrences in the document.
+Some Code Actions can be applied to all occurrences within the current DAX expression, DAX script or DAX query, rather than just the code segment under the cursor. When this is the case, the Code Action will be shown in the Code Actions menu with " (All occurrences)" appended to the action description. Clicking on the action will apply the change to all occurrences in the document.
 
-In the screenshot below, for example, the **Prefix variable with '_'** hint can be applied to all occurrences (i.e. all variables) in the document, not just the `totalSales` variable under the cursor:
+In the screenshot below, for example, the **Prefix variable with '_'** action can be applied to all occurrences (i.e. all variables) in the document, not just the `totalSales` variable under the cursor:
 
-![Code Hint All Occurrences](~/images/code-hint-all-occurrences.png)
+![Code Action All Occurrences](~/images/code-action-all-occurrences.png)
 
-# List of Code Hints
+## List of Code Actions
 
-The table below lists all currently available Code Hints. By default, all of those are enabled, but you can toggle off individual hints through the **Tools > Preferences** dialog, under **Text Editors > DAX Editor > Code Hints**. Some code hints also has additional configuration options, such as which prefix to use for variable names.
+The table below lists all currently available Code Actions. By default, all of those are enabled, but you can toggle off individual actions through the **Tools > Preferences** dialog, under **Text Editors > DAX Editor > Code Actions**. Some Code Actions also has additional configuration options, such as which prefix to use for variable names.
 
-## Improvements
+### Improvements
 
-The code hints below will appear with orange dots under the first two characters of the applicable code, and a lightbulb icon in the left margin when the cursor is placed on the code segment:
+The Code Actions below will appear with orange dots under the first two characters of the applicable code, and a lightbulb icon in the left margin when the cursor is placed on the code segment:
 
 | Name | Description |
 | --- | --- |
@@ -76,7 +76,7 @@ The code hints below will appear with orange dots under the first two characters
 | Remove all unused variables | Variables that are not being used (directly or indirectly through other variables) in the `RETURN` part of a variable block, should be removed. Example:<br>`VAR a = 1 VAR b = a RETURN 123` -> `123` |
 | Remove table name | Measure references should not include the table name, as the table name is unnecessary when referencing measures. Moreover, this practice makes measure references more easily distinguishable from column references. Example:<br>`Sales[Total Sales]` -> `[Total Sales]` 
 | Add table name | Column references should include the table name to avoid ambiguities, and to more easily distinguish column references from measure references. Example:<br>`SUM([SalesAmount])` -> `SUM(Sales[SalesAmount])` |
-| Rewrite table filter as scalar predicate | A common anti-pattern in DAX is to filter a table inside a [`CALCULATE`](https://dax.guide/CALCULATE) filter argument, when it is sufficient to filter one or more columns from that table. Example:<br>`CALCULATE([Total Sales], FILTER(Products, Products[Color] = "Red"))` -> `CALCULATE([Total Sales], KEEPFILTERS(Products[Color] = "Red"))`<br>This code hint supports various variations of the original expression. |
+| Rewrite table filter as scalar predicate | A common anti-pattern in DAX is to filter a table inside a [`CALCULATE`](https://dax.guide/CALCULATE) filter argument, when it is sufficient to filter one or more columns from that table. Example:<br>`CALCULATE([Total Sales], FILTER(Products, Products[Color] = "Red"))` -> `CALCULATE([Total Sales], KEEPFILTERS(Products[Color] = "Red"))`<br>This Code Action supports various variations of the original expression. |
 | Split multi-column filter into multiple filters | When filtering a table on multiple columns combined using `AND` (or the equivalent `&&` operator), better performance can often be achieved by specifying multiple filters, one for each column. Example:<br>`CALCULATE(..., Products[Color] = "Red" && Products[Size] = "Large")` -> `CALCULATE(..., Products[Color] = "Red", Products[Size] = "Large")` |
 | Simplify SWITCH statement | A [`SWITCH`](https://dax.guide/SWITCH) statement that specifies `TRUE()` for the **&lt;Expression&gt;** argument, and where all **&lt;Value&gt;** arguments are simple comparisons of the same variable/measure, can be simplified. Example:<br>`SWITCH(TRUE(), a = 1, ..., a = 2, ...)` -> `SWITCH(a, 1, ..., 2, ...)` |
 | Remove superfluous CALCULATE | A [`CALCULATE`](https://dax.guide/CALCULATE) function that is not necessary, because it does not modify the filter context, or because an implicit context transition would happen anyway, should be removed. Examples:<br>`CALCULATE([Total Sales])` -> `[Total Sales]`<br>`AVERAGEX(Product, CALCULATE([Total Sales]))` -> `AVERAGEX(Product, [Total Sales])`<br><br>Also applies when the first argument of `CALCULATE` / `CALCULATETABLE` is a DAX variable, e.g.:<br>`VAR x = [Total Sales] RETURN CALCULATE(x, Product[Color] = "Red")` -><br>`VAR x = [Total Sales] RETURN x` |
@@ -86,9 +86,9 @@ The code hints below will appear with orange dots under the first two characters
 | Use DIVIDE instead of division | When using an arbitrary expression in the denominator of a division, use [`DIVIDE`](https://dax.guide/DIVIDE) instead of the division operator, to avoid division by zero errors. Example:<br>`x / y` -> `DIVIDE(x, y)` |
 | Use division instead of DIVIDE | When the 2nd argument of [`DIVIDE`](https://dax.guide/DIVIDE) is a non-zero constant, it is more efficient to use the division operator. Example:<br>`DIVIDE(x, 2)` -> `x / 2` |
 
-## Readability
+### Readability
 
-The code hints below will appear with teal green dots under the first two characters of the applicable code, and a screwdriver icon in the left margin when the cursor is placed on the code segment
+The Code Actions below will appear with teal green dots under the first two characters of the applicable code, and a screwdriver icon in the left margin when the cursor is placed on the code segment
 
 | Name | Description |
 | --- | --- |
@@ -102,12 +102,12 @@ The code hints below will appear with teal green dots under the first two charac
 | Simplify multi-variable block | A variable block with multiple variables where each is a simple measure reference, which are only used once in the `RETURN` section without any context modifiers, should be simplified. Example:<br>`VAR _sales = [Sales] VAR _cost = [Cost] RETURN _sales - _cost` -> `[Sales] - [Cost]` |
 | Rewrite using COALESCE | Instead of using `IF` to return the first non-blank value from a list of expressions, use the [`COALESCE`](https://dax.guide/COALESCE) function. Example:<br>`IF(ISBLANK([Sales]), [Sales2], [Sales])` -> `COALESCE([Sales], [Sales2])` |
 
-## Rewrites
+### Rewrites
 
-The code hints below will appear with a screwdriver icon in the left margin when the cursor is placed on the code segment.
+The Code Actions below will appear with a screwdriver icon in the left margin when the cursor is placed on the code segment.
 
 | Name | Description |
 | --- | --- |
 | Rewrite TOTALxTD using CALCULATE | Functions such as [`TOTALMTD`](https://dax.guide/TOTALMTD), [`TOTALQTD`](https://dax.guide/TOTALQTD) and [`TOTALYTD`](https://dax.guide/TOTALYTD) can be rewritten using the [`CALCULATE`](https://dax.guide/CALCULATE) function, which is more expressive and provides greater flexibility. Example:<br>`TOTALYTD([Total Sales], 'Date'[Date])` -> `CALCULATE([Total Sales], DATESYTD('Date'[Date]))` |
 | Rewrite using FILTER | A scalar predicate in a filter argument to `CALCULATE` can be rewritten using `FILTER`. This is useful, for example when you need to add more complex filtering logic. Example:<br>`CALCULATE(..., Products[Color] = "Red")` -> `CALCULATE(..., FILTER(ALL(Products[Color]), Products[Color] = "Red"))` |
-| Invert IF | To improve readability, it is sometimse useful to invert `IF` statements. Example:<br>`IF(a < b, "B is greater", "A is greater")` -> `IF(a > b, "A is greater", "B is greater")` |
+| Invert IF | To improve readability, it is sometimes useful to invert `IF` statements. Example:<br>`IF(a < b, "B is greater", "A is greater")` -> `IF(a > b, "A is greater", "B is greater")` |
