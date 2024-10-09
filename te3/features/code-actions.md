@@ -103,6 +103,8 @@ The Code Actions below will appear with teal green dots under the first two char
 | Rewrite using DISTINCTCOUNT | Instead of using `COUNTROWS(DISTINCT(T[c])` to count the number of distinct values in a column, use the [`DISTINCTCOUNT`](https://dax.guide/DISTINCTCOUNT) function. |
 | Rewrite using COALESCE | Instead of using `IF` to return the first non-blank value from a list of expressions, use the [`COALESCE`](https://dax.guide/COALESCE) function. Example:<br>`IF(ISBLANK([Sales]), [Sales2], [Sales])` -> `COALESCE([Sales], [Sales2])` |
 | Rewrite using ISBLANK | Instead of comparing an expression with `BLANK()`, use the [`ISBLANK`](https://dax.guide/ISBLANK) function. Example:<br>`IF([Sales] = BLANK(), [Budget], [Sales])` -> `IF(ISBLANK([Sales], [Budget], [Sales])` |
+| Remove unnecessary BLANK | Some DAX functions, such as [`IF`](https://dax.guide/IF) and [`SWITCH`](https://dax.guide/SWITCH) already return `BLANK()` when the condition is false, so there is no need to explicitly specify `BLANK()`. Example:<br>`IF(a > b, a, BLANK())` -> `IF(a > b, a)` |
+| Simplify negated logic | When a logical expression is negated, it is often more readable to rewrite the expression using the negated operator. Example:<br>`NOT(a = b)` -> `a <> b` |
 
 ### Rewrites
 
