@@ -28,7 +28,7 @@
 ### @perspective-editor
 ### @pivot-grid
 ### @table-groups
-### @code-hints
+### @code-actions
 
 ## Files formats
 ### @supported-files
