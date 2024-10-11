@@ -60,7 +60,7 @@ To allow traffic to the above mentioned web requests, you'll have to whitelist:
 - Import Best Practice Rules / C# Scripts: Depends on the context
 
 > [!NOTE]
-> A system administrator may enforce certain [policies](https://docs.tabulareditor.com/common/policies.html), which can be used to disable some or all of the features shown on the list above.
+> A system administrator may enforce certain [policies](xref:policies), which can be used to disable some or all of the features shown on the list above.
 
 ## Application Security
 

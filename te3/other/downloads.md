@@ -33,7 +33,7 @@ Read the [latest release notes](release-notes/3_18_0_.md).
 
 1. Download the .exe installer file (use the x86 version if your operating system doesn't support 64-bit applications).
 2. Run the .exe installer. The installation wizard will guide you through the installation.
-3. For instructions on how to activate the product or change a license key, see our [getting started guide](https://docs.tabulareditor.com/te3/getting-started.html).
+3. For instructions on how to activate the product or change a license key, see our [getting started guide](xref:getting-started).
 
 It is not necessary to remove previous installations when upgrading to a newer version of Tabular Editor 3.
 
