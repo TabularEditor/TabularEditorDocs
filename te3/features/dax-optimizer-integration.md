@@ -12,18 +12,18 @@ applies_to:
 # DAX Optimizer Integration
 
 > [!NOTE]
-> This feature is currently **in preview**. Information in this article is subject to change, as we refine the feature based on user feedback.
+> Tabular Editor 3 **Enterprise Edition** users are eligible for free DAX Optimizer access. [Learn more](https://blog.tabulareditor.com)
 
-Tabular Editor 3.15.0 introduces **DAX Optimizer (Preview)** as an integrated experience. [DAX Optimizer](https://daxoptimizer.com) is a service that helps you optimize your SSAS/Azure AS tabular models and Power BI/Fabric semantic models. The tool combines [VertiPaq Analyzer statistics](https://www.sqlbi.com/tools/vertipaq-analyzer/) with a static analysis of your DAX code, thus providing a prioritized list of recommendations, to help you quickly identify potential performance bottlenecks.
+Tabular Editor 3.18.0 introduces **DAX Optimizer** as an integrated experience. [DAX Optimizer](https://daxoptimizer.com) is a service that helps you optimize your SSAS/Azure AS tabular models and Power BI/Fabric semantic models. The tool combines [VertiPaq Analyzer statistics](https://www.sqlbi.com/tools/vertipaq-analyzer/) with a static analysis of your DAX code, thus providing a prioritized list of recommendations, to help you quickly identify potential performance bottlenecks.
 
 > [!IMPORTANT]
-> DAX Optimizer is a paid third-party service. In order to use the **DAX Optimizer (Preview)** feature in Tabular Editor 3, you will need an [account for DAX Optimizer](https://www.daxoptimizer.com/free-tour/).
+> DAX Optimizer is a paid third-party service. In order to use the **DAX Optimizer** feature in Tabular Editor 3, you will need an [account for DAX Optimizer](https://www.daxoptimizer.com/free-tour/).
 
 ## Getting started
 
-To access this feature, go to the **View** menu and choose **DAX Optimizer (Preview)**.
+To access this feature, go to the **View** menu and choose **DAX Optimizer**.
 
-![Dax Optimizer Preview](~/images/dax-optimizer-preview.png)
+![Dax Optimizer](~/images/dax-optimizer-preview.png)
 
 You will be presented with a new view similar to the figure below:
 
@@ -64,7 +64,7 @@ When you click on a measure reference in the DAX code panel within the **DAX Opt
 
 ## Upload models and model versions
 
-To upload VPAX statistics to DAX Optimizer, make sure Tabular Editor is currently connected to an instance of Analysis Services (SSAS, Azure AS, Power BI Desktop or Power BI/Fabric XMLA endpoint). Then, select the workspace in the top-left dropdown on the **DAX Optimizer (Preview)** view. Click on **Upload...** within the **Options** menu.
+To upload VPAX statistics to DAX Optimizer, make sure Tabular Editor is currently connected to an instance of Analysis Services (SSAS, Azure AS, Power BI Desktop or Power BI/Fabric XMLA endpoint). Then, select the workspace in the top-left dropdown on the **DAX Optimizer** view. Click on **Upload...** within the **Options** menu.
 
 You will be presented with a dialog similar to the one shown below:
 
@@ -78,7 +78,7 @@ Once you click the **OK** button, the VPAX file will be uploaded to DAX Optimize
 
 As of Tabular Editor 3.15.0, it is possible to export obfuscated VPAX files using the **VertiPaq Analyzer** view. In this case, a dictionary file is generated and stored on your local machine, next to the generated .ovpax file. This dictionary file is used to deobfuscate the contents of the .ovpax file.
 
-When obfuscated VPAX data is uploaded to the DAX Optimizer service through the **DAX Optimizer (Preview)** view, Tabular Editor automatically keeps track of obfuscation dictionaries by storing them in the `%LocalAppData%\TabularEditor3\DaxOptimizer` folder on your local machine. As such, when browsing models using the **DAX Optimizer (Preview)** feature, models are automatically deobfuscated if a suitable dictionary is found in this folder.
+When obfuscated VPAX data is uploaded to the DAX Optimizer service through the **DAX Optimizer** view, Tabular Editor automatically keeps track of obfuscation dictionaries by storing them in the `%LocalAppData%\TabularEditor3\DaxOptimizer` folder on your local machine. As such, when browsing models using the **DAX Optimizer** feature, models are automatically deobfuscated if a suitable dictionary is found in this folder.
 
 If the dictionary is not found, you will have an option to manually specify a dictionary file.
 
@@ -93,7 +93,7 @@ If no dictionary file is provided, you will only be able to browse the obfuscate
 
 ## Known issues and limitations
 
-The following are known issues and limitations with the **DAX Optimizer (Preview)** feature, which we expect to address in future releases:
+The following are known issues and limitations with the **DAX Optimizer** feature, which we expect to address in future releases:
 
 - Obfuscated model results may be highlighted incorrectly in DAX expressions, when the obfuscated names of objects does not have the same length as the unobfuscated names.
-- The **DAX Optimizer (Preview)** view does not display how many "runs" are left on any given contract.
+- The **DAX Optimizer** view does not display how many "runs" are left on any given contract.
