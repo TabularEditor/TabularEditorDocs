@@ -64,7 +64,7 @@ By accepting this, the current license is removed, and you will have to re-enter
 
 Tabular Editor 3 uses the registry database for storing activation details. An alternative to using the "About Tabular Editor" dialog for changing the license key as shown above, is to enter the registry database and delete all values from within the `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` registry key.
 
-A system administrator may assign Tabular Editor 3 licenses by specifying the LicenseKey and User values under each user's `SOFTWARE\Kapacity\Tabular Editor 3` registry key.
+A system administrator may assign Tabular Editor 3 licenses by specifying the LicenseKey and User values in the corresponding users `HKEY_USERS\{Profile-ID}\SOFTWARE\Kapacity\Tabular Editor 3` registry key.
 
 ![Registry Editor](~/images/registry-editor.png)
 
