@@ -23,20 +23,24 @@ $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru -Arg
 ```
 
 Output:
-```
-Tabular Editor 2.16.0 (build 2.16.7781.40242)
+```cmd
+Tabular Editor 2.25.0 (build 2.25.8952.22276)
 --------------------------------
 Usage:
 
-TABULAREDITOR ( file | server database ) [-S script1 [script2] [...]]
-    [-SC] [-A [rules] | -AX rules] [(-B | -F) output [id]] [-V | -G] [-T resultsfile]
+TABULAREDITOR ( file | server database | -L [name] ) [-S script1 [script2] [...]]
+    [-SC] [-A [rules] | -AX rules] [(-B | -F | -TMDL) output [id]] [-V | -G] [-T resultsfile]
     [-D [server database [-L user pass] [-O [-C [plch1 value1 [plch2 value2 [...]]]]
         [-P [-Y]] [-R [-M]]]
         [-X xmla_script]] [-W] [-E]]
 
 file                Full path of the Model.bim file or database.json model folder to load.
 server              Server\instance name or connection string from which to load the model
-database            Database ID of the model to load
+database            Database ID of the model to load. If blank (") picks the first available
+                      database on the server.
+-L / -LOCAL         Connects to a Power BI Desktop (local) instance of Analysis Services. If no
+                      name is specified, this assumes that exactly 1 instance is running. Otherwise,
+                      name should match the name of the .pbix file loaded in Power BI Desktop.
 -S / -SCRIPT        Execute the specified script on the model after loading.
   scriptN             Full path of one or more files containing a C# script to execute or an inline
                       script.
@@ -54,6 +58,9 @@ database            Database ID of the model to load
   id                  Optional id/name to assign to the Database object when saving.
 -F / -FOLDER        Saves the model (after optional script execution) as a Folder structure.
   output              Full path of the folder to save to. Folder is created if it does not exist.
+  id                  Optional id/name to assign to the Database object when saving.
+-TMDL               Saves the model (after optional script execution) as a TMDL folder structure.
+  output              Full path of the TMDL folder to save to. Folder is created if it does not exist.
   id                  Optional id/name to assign to the Database object when saving.
 -V / -VSTS          Output Visual Studio Team Services logging commands.
 -G / -GITHUB        Output GitHub Actions workflow commands.
