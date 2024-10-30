@@ -2,7 +2,7 @@
 uid: security-privacy
 title: Security overview
 author: Daniel Otykier
-updated: 2021-06-15
+updated: 2024-10-30
 ---
 # Tabular Editor 3 Security and Privacy
 
@@ -47,6 +47,14 @@ Tabular Editor may perform requests to online resources (web URLs) only in the f
 - **Usage telemetry\*.** By default, Tabular Editor 3 collects and transmits anonymous usage data as users interact with the tool. This data includes information about which UI objects a user interacts with and the timing of each. It also contains high-level information about the Tabular data model being edited through the tool. This information only relates to high-level properties like compatibility level and mode, number of tables, type of server (Analysis Services vs. Power BI vs. Power BI Desktop), etc. **No personally identifyable data is collected this way**, neither do we collect any information about names of objects or DAX expressions in the Tabular Object Model itself. A user may opt out of sending telemetry data to us at any point.
 - **Error reports\*.** When an unexpected error occurs, we transmit the stack trace and (anonymized) error message, along with an optional description provided by the user. If a user opts out of sending telemetry data, error reports will also not be sent.
 - **Using the DAX formatter.** (Tabular Editor 2.x only) A DAX expression may be formatted by clicking a button in Tabular Editor. In this case, the DAX expression (and nothing else) is sent to the www.daxformatter.com webservice. The first time a user clicks this button, an explicit warning message is shown, asking them to confirm their intent. Tabular Editor 3 does not perform web requests when formatting DAX code.
+- **DAX Optimizer**. If a user has a [Tabular Tools account](https://tabulartools.com) with a [DAX Optimizer](https://daxoptimizer.com) subscription, they will be able to browse their DAX Optimizer workspace, view issues and suggestions, and upload new VPAX files directly from within Tabular Editor 3. VPAX files contains model metadata and statistics, but no actual model *data*. The DAX Optimizer Integration feature in Tabular Editor 3 causes various requests to one or more of the below endpoints (depending on authentication type and region specified when the Tabular Tools account was created).<br/>
+  For more information, please consult the [DAX Optimizer documentation](https://docs.daxoptimizer.com/legal/data-processing).<br/>
+  Endpoints used:
+  - https://account.tabulartools.com
+  - https://licensing.api.daxoptimizer.com/api
+  - https://australiaeast.api.daxoptimizer.com/api
+  - https://eastus.api.daxoptimizer.com/api
+  - https://westeurope.api.daxoptimizer.com/api
 - **Importing Best Practice Rules.** Tabular Editor has a feature that allows a user to specify an URL from which to retrieve a list of Best Practice rules in a JSON based format. This type of request only downloads the JSON data from the URL - no data is transmitted to the URL.
 - **Using C# scripts.** Tabular Editor allows users to write and execute code written in C#, for purposes of automation. Such a script may potentially connect to online resources, using C# language features and the .NET runtime. The user is always responsible for ensuring that executed code does not cause any unintended sharing of data. Tabular Editor ApS cannot be held liable for any damages, losses or leaks caused by the use of the C# scripting feature in general. Tabular Editor will never execute C# scripts without the explicit action of the user.
 
@@ -58,6 +66,7 @@ To allow traffic to the above mentioned web requests, you'll have to whitelist:
 - Usage telemetry / Error reports: **https://*.in.applicationinsights.azure.com**
 - DAX Formatter (Tabular Editor 2.x only): **https://www.daxformatter.com**
 - Import Best Practice Rules / C# Scripts: Depends on the context
+- DAX Optimizer: Endpoints listed above.
 
 > [!NOTE]
 > A system administrator may enforce certain [policies](xref:policies), which can be used to disable some or all of the features shown on the list above.

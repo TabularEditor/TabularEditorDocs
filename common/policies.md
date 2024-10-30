@@ -2,7 +2,7 @@
 uid: policies
 title: Policies
 author: Daniel Otykier
-updated: 2022-08-11
+updated: 2024-10-30
 ---
 
 # Policies

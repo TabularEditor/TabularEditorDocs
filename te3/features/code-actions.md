@@ -2,7 +2,7 @@
 uid: code-actions
 title: Code Actions
 author: Daniel Otykier
-updated: 2024-08-28
+updated: 2024-10-30
 applies_to:
   editions:
     - edition: Desktop
@@ -115,3 +115,12 @@ The Code Actions below will appear with a screwdriver icon in the left margin wh
 | Rewrite TOTALxTD using CALCULATE | Functions such as [`TOTALMTD`](https://dax.guide/TOTALMTD), [`TOTALQTD`](https://dax.guide/TOTALQTD) and [`TOTALYTD`](https://dax.guide/TOTALYTD) can be rewritten using the [`CALCULATE`](https://dax.guide/CALCULATE) function, which is more expressive and provides greater flexibility. Example:<br>`TOTALYTD([Total Sales], 'Date'[Date])` -> `CALCULATE([Total Sales], DATESYTD('Date'[Date]))` |
 | Rewrite using FILTER | A scalar predicate in a filter argument to `CALCULATE` can be rewritten using `FILTER`. This is useful, for example when you need to add more complex filtering logic. Example:<br>`CALCULATE(..., Products[Color] = "Red")` -> `CALCULATE(..., FILTER(ALL(Products[Color]), Products[Color] = "Red"))` |
 | Invert IF | To improve readability, it is sometimes useful to invert `IF` statements. Example:<br>`IF(a < b, "B is greater", "A is greater")` -> `IF(a > b, "A is greater", "B is greater")` |
+
+## Customizing Code Actions
+
+You can customize the behavior of Code Actions through the **Tools > Preferences** dialog, under **Text Editors > DAX Editor > Code Actions**. Here you can toggle the feature on and off, and configure additional options for some Code Actions, such as the prefix to use for variable names and extension columns.
+
+We are planning to add more configuration options to this screen in future versions, such as an option for toggling individual Code Actions on and off. Stay tuned!
+
+![Code Actions Preferences](~/images/code-actions-preferences.png)
+
