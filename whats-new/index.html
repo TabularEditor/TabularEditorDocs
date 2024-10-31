@@ -113,11 +113,11 @@
 <body>
     <div id="content-wrapper">
         <!--- CONTENT GOES BELOW THIS LINE -->
-        <section>
+        <section id="dax-optimizer-banner">
             <div style="width: 80%; border-radius: 0 0 1rem 1rem; border: 1px solid rgb(41, 170, 151); background-color: rgb(41, 170, 151); padding: 0.2rem; text-align: center; color: white; margin: 0 auto;height: 70px; overflow: hidden;">
                 <div class="announcement-header" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
-                    <h1 style="font-size: 1rem; margin: 0;">Coming soon: Free DAX Optimizer runs for Enterprise Edition customers</h1>
-                    <p style="font-size: 0.8rem; margin: 0;">Sign up for a <a style="text-decoration: underline; color: white;" href="https://www.daxoptimizer.com/free-tour/">DAX Optimizer Account</a> and check out <a style="text-decoration: underline; color: white;" href="https://youtu.be/Tr4copX0JO0">this video</a> for more information.</p>
+                    <h1 style="font-size: 1rem; margin: 0;">Important update: Free DAX Optimizer access for Enterprise Edition customers</h1>
+                    <p style="font-size: 0.8rem; margin: 0;">Download the <a style="text-decoration: underline; color: white;" href="https://docs.tabulareditor.com/te3/other/downloads.html">latest Tabular Editor 3</a> version, sign up for a <a style="text-decoration: underline; color: white;" href="https://www.daxoptimizer.com/free-tour/">DAX Optimizer Account</a>, and check out <a style="text-decoration: underline; color: white;" href="https://youtu.be/Tr4copX0JO0">this video</a> for more information.</p>
               </div>
             </div>
           </section>
@@ -195,9 +195,26 @@
         function init()
         {
             var version = getParameterByName("version");
-            if(!version) version = "generic";
+            if (!version) version = "generic";
+            else if (is_3_18_orGreater(version)) {
+                deleteElementById("dax-optimizer-banner");
+            }
             loadDivContent("/whats-new/" + urlify(version) + ".html", "version-specific-content");
             applyStyle();
+        }
+
+        function is_3_18_orGreater(version) {
+            // Split the version string into an array of parts
+            const parts = version.split('.');
+            // Check if the middle number meets or exceeds the threshold
+            return parseInt(parts[0], 10) >= 3 && parseInt(parts[1], 10) >= 18;
+        }
+
+        function deleteElementById(tagId) {
+            var element = document.getElementById(tagId);
+            if (element) {
+                element.parentNode.removeChild(element);
+            }
         }
 
         function loadDivContent(url, divId) {
