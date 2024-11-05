@@ -34,7 +34,7 @@ Below is a listing of the policies that can be controlled. To enforce one or mor
 
 ## Disabling web communications
 
-If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports` and `DisableTelemetry` policies.
+If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, ànd `DisableDaxOptimizer` policies.
 
 ## Disabling custom scripts
 
