@@ -6,6 +6,7 @@
 ## Power BI XMLA Endpoint
 ### @powerbi-xmla
 ### @powerbi-xmla-pbix-workaround
+## @proxy-settings
 
 # Documentation
 ## User interface
