@@ -44,7 +44,7 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 ## Non Planned Features
 
 - Standalone CLI application
-- GIT integration
+- Git integration
 - DAX Debugger Filter Context visualizer
 - Configurable Daxscilla autocomplete code snippets
 - Configurable theming for code editors (syntax highlighting colors)
