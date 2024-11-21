@@ -8,13 +8,13 @@ updated: 2024-09-06
 
 Below is an overview of major new features to be shipped with Tabular Editor 3 updates in the short- to long term:
 
+
+
 # [Planned 2024](#tab/PlannedQ4)
 
-- More Daxscilla code refactoring options and automatic suggestions (for example, replace identical subexpressions with 
-a variable)
-- TMDL GA Support
-- Diagram Improvements
-- GA of DAX Optimizer Integration
+- Data Refresh View Improvements
+- Power Query (M) Highlighting
+
 
 ## Shipped in 2024
 ✅ DAX Debugger Locals Enhancement
@@ -23,14 +23,26 @@ a variable)
 ✅ .Net 8 migration
 ✅ Pivot Grid Enhancement
 ✅ DAX Query Enhancement
+✅ TMDL GA Support
+✅ Code Actions
+✅ GA of DAX Optimizer Integration
 
+# [Planned 2025](#tab/Planned2025)
+
+- Adding more Macro Actions
+- Built in Best Practice Rules
+- Built in Macros
+- Power Query (M) Auto-Formatting
 
 # [Future Features](#tab/FutureFeatures)
 
+## Up Next
+- Localization
+- Power Query (M) Editing Enchantments
+- Macro Actions improvements such as automatic application across model and preferences for which to apply.
 
 ## Non Planned Features
-- Localization
-- Built in Macros and Best Practice Rules
+
 - Standalone CLI application
 - Git integration
 - DAX Debugger Filter Context visualizer
