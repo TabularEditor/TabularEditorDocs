@@ -16,7 +16,7 @@ applies_to:
 
 ## Enabling TMDL in Tabular Editor 3
 
-TMDL is only available as a preview feature in Tabular Editor 3. To enable TMDL (Preview) in Tabular Editor 3, go to **Tools > Preferences > File Formats > Save-to-folder**, and select "TMDL (preview)" in the **Serialization mode** dropdown. The legacy "save-to-folder" functionality will continue to exist side by side with TMDL, but is not a Microsoft supported format.
+To enable TMDL in Tabular Editor 3, go to **Tools > Preferences > File Formats > Save-to-folder**, and select "TMDL" in the **Serialization mode** dropdown. The legacy "save-to-folder" functionality will continue to exist side by side with TMDL, but is not a Microsoft supported format.
 
 After doing so, Tabular Editor 3 will use the TMDL format when saving a model as a folder (**File > Save to folder...**).
 
@@ -31,5 +31,5 @@ When saving a new model for the first time, Tabular Editor (since v. 3.7.0), wil
 
 # Next steps
 
-- [TMDL overview (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-overview?view=asallproducts-allversions).
-- [Get started with TMDL (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-how-to?view=asallproducts-allversions)
+- [TMDL overview (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-overview).
+- [Get started with TMDL (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-how-to)
