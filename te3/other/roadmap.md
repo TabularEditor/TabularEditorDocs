@@ -18,18 +18,26 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 
 ## Shipped in 2024
 ✅ DAX Debugger Locals Enhancement
+
 ✅ Full Direct Lake Integration
+
 ✅ DAX Optimizer Integration (Preview)
+
 ✅ .Net 8 migration
+
 ✅ Pivot Grid Enhancement
+
 ✅ DAX Query Enhancement
+
 ✅ TMDL GA Support
+
 ✅ Code Actions
+
 ✅ GA of DAX Optimizer Integration
 
 # [Planned 2025](#tab/Planned2025)
 
-- Adding more Macro Actions
+- Adding more Code Actions
 - Built in Best Practice Rules
 - Built in Macros
 - Power Query (M) Auto-Formatting
