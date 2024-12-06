@@ -37,7 +37,7 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 
 # [Planned 2025](#tab/Planned2025)
 
-- Adding more Macro Actions
+- Adding more Code Actions
 - Built in Best Practice Rules
 - Built in Macros
 - Power Query (M) Auto-Formatting
