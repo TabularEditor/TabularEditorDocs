@@ -19,6 +19,12 @@ Tabular Editor 3.18.0 introduces **DAX Optimizer** as an integrated experience. 
 > [!IMPORTANT]
 > DAX Optimizer is a paid third-party service. In order to use the **DAX Optimizer** feature in Tabular Editor 3, you will need an [account for DAX Optimizer](https://www.daxoptimizer.com/free-tour/).
 
+## Video introduction
+
+Watch Marco Russo from [SQLBI](https://www.sqlbi.com) introduce the DAX Optimizer integration in Tabular Editor 3:
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/Z5lZdI79tF8" title="Detect and Fix Issues with Tabular Editor 3 and DAX Optimizer Integration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Getting started
 
 To access this feature, go to the **View** menu and choose **DAX Optimizer**.
