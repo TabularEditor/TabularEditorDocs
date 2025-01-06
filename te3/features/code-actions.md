@@ -64,7 +64,7 @@ In the screenshot below, for example, the **Prefix variable with '_'** action ca
 
 ## List of Code Actions
 
-The table below lists all currently available Code Actions. You can toggle off Code ACtions in the **Tools > Preferences** dialog, under **Text Editors > DAX Editor > Code Actions** (a future update will let you toggle individual actions for a more customized experience). Some Code Actions also has additional configuration options, such as which prefix to use for variable names.
+The table below lists all currently available Code Actions. You can toggle off Code Actions in the **Tools > Preferences** dialog, under **Text Editors > DAX Editor > Code Actions** (a future update will let you toggle individual actions for a more customized experience). Some Code Actions also has additional configuration options, such as which prefix to use for variable names.
 
 ### Improvements
 
