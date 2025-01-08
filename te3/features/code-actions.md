@@ -85,6 +85,7 @@ The Code Actions below will appear with orange dots under the first two characte
 | DI011 | [Use ISEMPTY instead of COUNTROWS](xref:DI011) | When checking if a table is empty, it is more efficient to use the [`ISEMPTY`](https://dax.guide/ISEMPTY) function than to count the rows of the table. Examples:<br>`COUNTROWS(Products) = 0` -> `ISEMPTY(Products)` |
 | DI012 | [Use DIVIDE instead of division](xref:DI012) | When using an arbitrary expression in the denominator of a division, use [`DIVIDE`](https://dax.guide/DIVIDE) instead of the division operator, to avoid division by zero errors. Example:<br>`x / y` -> `DIVIDE(x, y)` |
 | DI013 | [Use division instead of DIVIDE](xref:DI013) | When the 2nd argument of [`DIVIDE`](https://dax.guide/DIVIDE) is a non-zero constant, it is more efficient to use the division operator. Example:<br>`DIVIDE(x, 2)` -> `x / 2` |
+| DI014 | [Replace IFERROR with DIVIDE](xref:DI014) | Use the [`DIVIDE`](https://dax.guide/DIVIDE) instead of [`IFERROR`](https://dax.guide/IFERROR) to provide an alternate result when a division has a zero demoninator. Example:<br>`IFERROR(x / y, 0)` -> `DIVIDE(x, y, 0)` |
 
 ### Readability
 
@@ -93,7 +94,7 @@ The Code Actions below will appear with teal green dots under the first two char
 | ID | Name | Description |
 | --- | --- | --- |
 | DR001 | [Convert to scalar predicate](xref:DR001) | A column filter can be written more concisely as a scalar predicate, without explicitly using the [`FILTER`](https://dax.guide/FILTER) function. Examples:<br>`FILTER(ALL(Products[Color]), Products[Color] = "Red")` -> `Products[Color] = "Red"`<br>`FILTER(VALUES(Products[Color]), Products[Color] = "Red")` -> `KEEPFILTERS(Products[Color] = "Red")` |
-| DR002 | [Use aggregator instead of iterator](xref:DR002) | Use an aggregator function instead of an iterator function when possible, to simplify the code. Example:<br>`SUMX(Products, Products[SalesAmount])` -> `SUM(Products[SalesAmount])` |
+| DR002 | [Use aggregator instead of iterator](xref:DR002) | d |
 | DR003 | Use VALUES instead of SUMMARIZE | When [`SUMMARIZE`](https://dax.guide/SUMMARIZE) only specifies a single column, and that column belongs to the table specified in the first argument, the code can be more concisely written using [`VALUES`](https://dax.guide/VALUES). Example:<br>`SUMMARIZE(Products, Products[Color])` -> `VALUES(Products[Color])` |
 | DR004 | Prefix variable | Variables should use a consistent naming convention. It is recommended to use a prefix, such as an underscore. You can configure which prefix to use, to match your preferred style. Example:<br>`VAR totalSales = SUM(Sales[SalesAmount])` -> `VAR _totalSales = SUM(Sales[SalesAmount])` |
 | DR005 | Prefix temporary column | It is recommended to use a consistent prefix for temporary columns, to more easily distinguish them from base columns or measures. You can configure which prefix to use, to match your preferred style. Example:<br>`ADDCOLUMNS(Product, "SalesByProd", [Sales])` -> `ADDCOLUMNS(Product, "@SalesByProd", [Sales])` |
