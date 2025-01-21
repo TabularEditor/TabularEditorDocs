@@ -1,6 +1,0 @@
-@use "../../theme_variables" as theme;
-
-:where(a:not(.btn-link)) {
-  font-size: (theme.$theme-typography-link-font-size + 'px');
-  --color: #{theme.$theme-typography-link-font-color};
-}
