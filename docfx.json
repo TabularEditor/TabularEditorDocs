@@ -20,7 +20,7 @@
         ],
         "template": [
             "default",
-            "templates/default",
+            "templates/tabulareditor",
             "templates/lightbox-featherlight",
             "templates/api"
         ],

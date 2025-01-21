@@ -1,0 +1,108 @@
+@use "../../theme_variables" as theme;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+  @if theme.$theme-typography-headings-font-color {
+    color: #{theme.$theme-typography-headings-font-color};
+  }
+  @if theme.$theme-typography-headings-font-font {
+    font-family: #{theme.$theme-typography-headings-font-font}, theme.$theme-typography-headings-font-fallback;
+    font-weight: theme.$theme-typography-headings-font-variant;
+  } else {
+    font-family: var(--system-fonts);
+  }
+}
+
+h1,
+.h1 {
+  @if theme.$theme-typography-heading-h1-font-size {
+    --font-size: #{theme.$theme-typography-heading-h1-font-size};
+  }
+}
+
+h2,
+.h2 {
+  @if theme.$theme-typography-heading-h2-font-size {
+    --font-size: #{theme.$theme-typography-heading-h2-font-size};
+  }
+}
+
+h3,
+.h3 {
+  @if theme.$theme-typography-heading-h3-font-size {
+    --font-size: #{theme.$theme-typography-heading-h3-font-size};
+  }
+}
+
+h4,
+.h4 {
+  @if theme.$theme-typography-heading-h4-font-size {
+    --font-size: #{theme.$theme-typography-heading-h4-font-size};
+  }
+}
+
+h5,
+.h5 {
+  @if theme.$theme-typography-heading-h5-font-size {
+    --font-size: #{theme.$theme-typography-heading-h5-font-size};
+  }
+}
+
+h6,
+.h6 {
+  @if theme.$theme-typography-heading-h6-font-size {
+    --font-size: #{theme.$theme-typography-heading-h6-font-size};
+  }
+}
+
+.display-1 {
+  @if theme.$theme-typography-heading-d1-font-size {
+    --font-size: #{theme.$theme-typography-heading-d1-font-size};
+  }
+}
+
+.display-2 {
+  @if theme.$theme-typography-heading-d2-font-size {
+    --font-size: #{theme.$theme-typography-heading-d2-font-size};
+  }
+}
+
+.display-3 {
+  @if theme.$theme-typography-heading-d3-font-size {
+    --font-size: #{theme.$theme-typography-heading-d3-font-size};
+  }
+}
+
+.display-4 {
+  @if theme.$theme-typography-heading-d4-font-size {
+  --font-size: #{theme.$theme-typography-heading-d4-font-size};
+}
+}
+
+.display-5 {
+  @if theme.$theme-typography-heading-d5-font-size {
+    --font-size: #{theme.$theme-typography-heading-d5-font-size};
+  }
+}
+
+.display-6 {
+  @if theme.$theme-typography-heading-d6-font-size {
+    --font-size: #{theme.$theme-typography-heading-d6-font-size};
+  }
+}

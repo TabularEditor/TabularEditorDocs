@@ -1,0 +1,138 @@
+@use "./theme_variables" as theme;
+
+/* global custom CSS */
+.btn-large {
+  line-height: 1.1875;
+}
+
+.btn-link {
+  clip-path: polygon(0 0, calc(100%) 0, 100% 0px, 100% 100%, 0px 100%, 0 calc(100% - 0px)) !important;
+  transition: all 0.2s linear;
+}
+
+.btn-secondary1,
+.btn-secondary3 {
+  position: relative;
+}
+
+.btn-secondary1:before,
+.btn-secondary1:after,
+.btn-secondary3:before,
+.btn-secondary3:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0;
+  transition: border-width 0.2s linear;
+}
+
+.btn-secondary1:before {
+  bottom: 0;
+  left: 0;
+  border-color: transparent transparent var(--primary-color) var(--primary-color);
+}
+
+.btn-secondary1:after {
+  top: 0;
+  right: 0;
+  border-color: var(--primary-color) var(--primary-color) transparent transparent;
+}
+
+.btn-secondary3:before {
+  bottom: 0;
+  left: 0;
+  border-color: transparent transparent var(--secondary2-color) var(--secondary2-color);
+}
+
+.btn-secondary3:after {
+  top: 0;
+  right: 0;
+  border-color: var(--secondary2-color) var(--secondary2-color) transparent transparent;
+}
+
+/* button hover effects */
+.btn-secondary1:hover,
+.btn-secondary3:hover {
+  -webkit-clip-path: polygon(0 0, calc(100% - 19px) 0, 100% 19px, 100% 100%, 19px 100%, 0 calc(100% - 19px)) !important;
+  clip-path: polygon(0 0, calc(100% - 19px) 0, 100% 19px, 100% 100%, 19px 100%, 0 calc(100% - 19px)) !important;
+}
+
+.btn-primary:hover,
+.btn-secondary2:hover {
+  -webkit-clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)) !important;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)) !important;
+}
+
+.btn-secondary1:hover:before,
+.btn-secondary3:hover:before,
+.btn-secondary1:hover:after,
+.btn-secondary3:hover:after {
+  border-width: 9px;
+}
+
+.btn-primary svg,
+.btn-secondary3 svg {
+  stroke: #fff;
+}
+
+.btn-secondary1 svg,
+.btn-secondary2 svg {
+  stroke: #171717;
+}
+
+.listitem {
+  align-items: baseline !important;
+}
+
+.blog-recent-module__article-tags a,
+.blog-listing-module__article-tags a,
+.blog-related-module__article-tags a,
+.blog-recent-by-tag-module__article-tags a,
+.blog-post__tag-link {
+  font-size: 14px !important;
+  font-weight: 500;
+  line-height: normal;
+  background: var(--secondary2-color);
+  padding: 3px 5px;
+}
+
+.blog-recent-by-tag-module__article-heading h3 {
+  margin-bottom: 5px;
+}
+
+.form-default .hs-form-field {
+  align-self: flex-start;
+}
+
+.form-default input,
+.form-default textarea,
+.form-default select {
+  @if theme.$theme-forms-placeholder-font-size {
+    font-size: (theme.$theme-forms-placeholder-font-size + 'px');
+  }
+}
+
+.form-default .hs-error-msg, .form-default .hs-error-msgs .hs-main-font-element {
+  @if theme.$theme-forms-input_label-font-size {
+    font-size: (theme.$theme-forms-input_label-font-size + 'px') !important;
+  }
+}
+
+.form-default input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="button"]):not([type="reset"]):not([type="submit"]),
+.form-default textarea,
+.form-default select {
+  border-radius: 0px;
+  border-top: 0px none;
+  border-right: 0px none;
+  border-bottom: 1px solid #000;
+  border-left: 0px none;
+}
+
+.form-default .hs_submit {
+  text-align: left !important;
+}
+
+.form-default :where(.form-columns-2,
+.form-columns-3) {
+  gap: normal 22px;
+}

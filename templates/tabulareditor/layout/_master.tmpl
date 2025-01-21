@@ -1,0 +1,337 @@
+{{!Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license.}}
+{{!include(/^public/.*/)}}
+{{!include(favicon.ico)}}
+{{!include(logo.svg)}}
+<!DOCTYPE html>
+<html {{#_lang}}lang="{{_lang}}"{{/_lang}}>
+  <head>
+    <meta charset="utf-8">
+    {{#redirect_url}}
+      <meta http-equiv="refresh" content="0;URL='{{redirect_url}}'">
+    {{/redirect_url}}
+    {{^redirect_url}}
+      <title>{{#title}}{{title}}{{/title}}{{^title}}{{>partials/title}}{{/title}} {{#_appTitle}}| {{_appTitle}} {{/_appTitle}}</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="{{#title}}{{title}}{{/title}}{{^title}}{{>partials/title}}{{/title}} {{#_appTitle}}| {{_appTitle}} {{/_appTitle}}">
+      {{#_description}}<meta name="description" content="{{_description}}">{{/_description}}
+      {{#description}}<meta name="description" content="{{description}}">{{/description}}
+      <link rel="icon" href="{{_rel}}{{{_appFaviconPath}}}{{^_appFaviconPath}}favicon.ico{{/_appFaviconPath}}">
+      <link rel="stylesheet" href="{{_rel}}public/docfx.min.css">
+      <link rel="stylesheet" href="{{_rel}}public/main.css">
+      <meta name="docfx:navrel" content="{{_navRel}}">
+      <meta name="docfx:tocrel" content="{{_tocRel}}">
+      {{#_noindex}}<meta name="searchOption" content="noindex">{{/_noindex}}
+      {{#_enableSearch}}<meta name="docfx:rel" content="{{_rel}}">{{/_enableSearch}}
+      {{#_disableNewTab}}<meta name="docfx:disablenewtab" content="true">{{/_disableNewTab}}
+      {{#_disableTocFilter}}<meta name="docfx:disabletocfilter" content="true">{{/_disableTocFilter}}
+      {{#docurl}}<meta name="docfx:docurl" content="{{docurl}}">{{/docurl}}
+      <meta name="loc:inThisArticle" content="{{__global.inThisArticle}}">
+      <meta name="loc:searchResultsCount" content="{{__global.searchResultsCount}}">
+      <meta name="loc:searchNoResults" content="{{__global.searchNoResults}}">
+      <meta name="loc:tocFilter" content="{{__global.tocFilter}}">
+      <meta name="loc:nextArticle" content="{{__global.nextArticle}}">
+      <meta name="loc:prevArticle" content="{{__global.prevArticle}}">
+      <meta name="loc:themeLight" content="{{__global.themeLight}}">
+      <meta name="loc:themeDark" content="{{__global.themeDark}}">
+      <meta name="loc:themeAuto" content="{{__global.themeAuto}}">
+      <meta name="loc:changeTheme" content="{{__global.changeTheme}}">
+      <meta name="loc:copy" content="{{__global.copy}}">
+      <meta name="loc:downloadPdf" content="{{__global.downloadPdf}}">
+
+      <script type="module" src="./{{_rel}}public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+      {{#_googleAnalyticsTagId}}
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{_googleAnalyticsTagId}}"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', '{{_googleAnalyticsTagId}}');
+      </script>
+      {{/_googleAnalyticsTagId}}
+      <style>
+        @font-face {
+          font-family: "Poppins";
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+          src: url("{{_rel}}public/googlefonts/regular.woff2") format("woff2"), url("{{_rel}}public/googlefonts/Poppins/regular.woff") format("woff");
+        }
+        @font-face {
+          font-family: "Poppins";
+          font-weight: 700;
+          font-style: normal;
+          font-display: swap;
+          src: url("{{_rel}}public/googlefonts/Poppins/700.woff2") format("woff2"), url("{{_rel}}public/googlefonts/Poppins/700.woff") format("woff");
+        }
+        @font-face {
+          font-family: "Albert Sans";
+          font-weight: 500;
+          font-style: normal;
+          font-display: swap;
+          src: url("{{_rel}}public/googlefonts/Albert_Sans/500.woff2") format("woff2"), url("{{_rel}}public/googlefonts/Albert_Sans/500.woff") format("woff");
+        }
+        @font-face {
+          font-family: "Albert Sans";
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+          src: url("{{_rel}}public/googlefonts/Albert_Sans/regular.woff2") format("woff2"), url("{{_rel}}public/googlefonts/Albert_Sans/regular.woff") format("woff");
+        }
+      </style>
+    {{/redirect_url}}
+  </head>
+
+  {{^redirect_url}}
+  <body class="tex2jax_ignore" data-layout="{{_layout}}{{layout}}" data-yaml-mime="{{yamlmime}}">
+    <header class="global-header_wrp">
+      <div id="hs_cos_wrapper_global-header-dndarea-module-2" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+        <div class="siteheader-module_wrp">
+          <nav class="siteheader-module navbar siteheader-module--194387751113 " id="main-navigation" aria-label="Primary">
+            <button class="siteheader-module__mobile-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+              <svg xmlns="http://www.w3.org/2000/svg" class="siteheader-module__mobile-toggler-img" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path>
+              </svg>
+            </button>
+            <div class="siteheader-module__logo">
+              <div class="header-logo">
+                <a class="header-logo__link" href="{{_appLogoUrl}}{{^_appLogoUrl}}{{_rel}}index.html{{/_appLogoUrl}}">
+                  <img class="header-logo__image" src="{{_rel}}{{{_appLogoPath}}}{{^_appLogoPath}}logo.svg{{/_appLogoPath}}" alt="{{_appName}}" height="50" width="263">
+                </a>
+              </div>
+            </div>
+            <div class="siteheader-module__navbar collapse navbar-collapse" id="mainNavigation">
+              <div class="siteheader-module__main-nav">
+                <ul role="list" class="main-nav__list main-nav__list--toplevel">
+                  {{#__header.mainMenu}}
+                    {{#subMenu}}
+                      <li class="main-nav__list-item main-nav__list-item--lvl1 lvl1 main-nav__list-item--dropdown">
+                        <a class="main-nav__list-item-link main-nav__list-item-link--lvl1 lvl1 main-nav__list-item-link--dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="false" role="button" data-bs-toggle="dropdown" target="_self"> {{text}} </a>
+                        <ul role="list" class="main-nav__list main-nav__list--sublevel main-nav__list--dropdown dropdown-menu main-nav__list--lvl2 lvl2">
+                          {{#items}}
+                          <li class="main-nav__list-item main-nav__list-item--lvl2 lvl2">
+                            <a class="main-nav__list-item-link main-nav__list-item-link--lvl2 lvl2" href="{{url}}"> {{text}} </a>
+                          </li>
+                          {{/items}}
+                        </ul>
+                    {{/subMenu}}
+                    {{^subMenu}}
+                      {{^items}}
+                        <li class="main-nav__list-item main-nav__list-item--lvl1 lvl1">
+                          <a class="main-nav__list-item-link main-nav__list-item-link--lvl1 lvl1" href="{{urk}}"> {{text}} </a>
+                        </li>
+                      {{/items}}
+                    {{/subMenu}}
+                  {{/__header.mainMenu}}
+                </ul>
+              </div>
+              <div class="siteheader-module__links"></div>
+              {{#_enableSearch}}
+              <div class="siteheader-module__search">
+                <div class="header-search_wrp">
+                  <div id="headerSearch" class="header-search header-search--narrow">
+                    <div class="header-search__form_wrp">
+                      <form id="search" class="header-search__form" role="search" tabindex="0">
+                        <div class="header-search__form_internal-wrp" role="combobox" aria-expanded="false" aria-owns="headerSearchSuggestions">
+                          <input class="header-search__form-input" id="search-query" type="search" disabled placeholder="{{__global.search}}" autocomplete="off" aria-label="Search">
+                            <label id="header-search__form-label" class="header-search__form-label visually-hidden" for="term">Search</label>
+                        </div>
+                        <button class="header-search__form-btn" type="submit" tabindex="-1" aria-label="submit search">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="header-search__form-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                          </svg>
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {{#_enableSearchX}}
+              <div class="siteheader-module__search">
+                <div class="header-search_wrp">
+                  <div id="headerSearch" class="header-search header-search--wide header-search--show">
+                    <div class="header-search__form_wrp">
+                      <form class="search header-search__form" role="search" id="search">
+                        {{!<i class="bi bi-search"></i>}}
+                        <input class="form-control header-search__form-input" id="search-query" type="search" disabled placeholder="{{__global.search}}" autocomplete="off" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="header-search__form-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                          </svg>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {{/_enableSearchX}}
+
+              {{/_enableSearch}}
+
+              <div class="siteheader-module__buttons">
+                {{#__header.button1}}
+                <div class="siteheader-module__button">
+                  <a href="{{url}}" class="g-module-macros-btn btn-style btn-link btn-primary btn-regular">
+                    {{text}}
+                    <span class="g-module-macros-icon icon icon-style--button">
+                      <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.8378 1L26 13M26 13L13.8378 25M26 13H1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </span>
+                  </a>
+                </div>
+                {{/__header.button1}}
+                {{#__header.button2}}
+                <div class="siteheader-module__secondary-button">
+                  <a href="{{url}}" class="g-module-macros-btn btn-style--secondary btn-link btn-secondary1 btn-regular">
+                    {{text}}
+                    <span class="g-module-macros-icon icon icon-style--button-secondary">
+                      <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.8378 1L26 13M26 13L13.8378 25M26 13H1" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </span>
+                  </a>
+                </div>
+                {{/__header.button2}}
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    {{^_disableNavbar}}
+    <div class="docnav container-xxl">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div id="navbar" class="button-group"></div>
+      </nav>
+    </div>
+    {{/_disableNavbar}}
+
+    <main class="container-xxl">
+      {{^_disableToc}}
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+      {{/_disableToc}}
+
+      <div class="content">
+        <div class="actionbar">
+          {{^_disableToc}}
+          <button class="btn btn-lg border-0 d-md-none"
+              type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas"
+              aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+          {{/_disableToc}}
+
+          {{^_disableBreadcrumb}}
+          <nav id="breadcrumb"></nav>
+          {{/_disableBreadcrumb}}
+        </div>
+
+        <article data-uid="{{uid}}">
+          {{!body}}
+        </article>
+
+        {{^_disableContribution}}
+        <div class="contribution d-print-none">
+          {{#sourceurl}}
+          <a href="{{sourceurl}}" class="edit-link">{{__global.improveThisDoc}}</a>
+          {{/sourceurl}}
+          {{^sourceurl}}{{#docurl}}
+          <a href="{{docurl}}" class="edit-link">{{__global.improveThisDoc}}</a>
+          {{/docurl}}{{/sourceurl}}
+        </div>
+        {{/_disableContribution}}
+
+        {{^_disableNextArticle}}
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+        {{/_disableNextArticle}}
+
+      </div>
+
+      {{^_disableAffix}}
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+      {{/_disableAffix}}
+    </main>
+
+    {{#_enableSearch}}
+    <div class="container-xxl search-results" id="search-results"></div>
+    {{/_enableSearch}}
+
+    <footer class="border-top text-secondary global-footer_wrp">
+      <div class="container global-footer global-partial">
+        <div class="row row-number-1">
+          <div class="col col-md-6">
+            <h2 class="display-1 heading">Ready to get started?</h2>
+          </div>
+          <div class="col col-md-6">
+            <div class="content-block-top">
+              <div class="button-group">
+                {{#__footer.buttons}}
+                  <a href="{{url}}" class="btn-link btn-secondary2 btn-large btn-full-width">
+                    <span>{{text}}</span>
+                    <svg width="39" height="38" viewBox="0 0 39 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1L38 19M38 19L20 37M38 19H1" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                  </a>
+                {{/__footer.buttons}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row row-number-2">
+          <div class="col col-md-6 hs-menu-flow-horizontal">
+            <ul role="menu">
+              {{#__footer.leftLinks}}
+                <li class="hs-menu-item hs-menu-depth-1" role="none">
+                  <a href="{{url}}" role="menuitem" {{#target}}target="{{target}}"{{/target}} {{#rel}}rel="{{rel}}"{{/rel}}>{{text}}</a>
+                </li>
+              {{/__footer.leftLinks}}
+            </ul>
+          </div>
+          <div class="col col-md-6 hs-menu-flow-horizontal">
+            <ul role="menu">
+              {{#__footer.rightLinks}}
+                <li class="hs-menu-item hs-menu-depth-1" role="none">
+                  <a href="{{url}}" role="menuitem" {{#target}}target="{{target}}"{{/target}} {{#rel}}rel="{{rel}}"{{/rel}}>{{text}}</a>
+                </li>
+              {{/__footer.rightLinks}}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider-module_wrp">
+        <hr class="divider-module__line">
+      </div>
+
+      <div class="container global-footer global-partial">
+        <div class="row row-number-3">
+          <div class="col col-md-12 hs-menu-flow-horizontal">
+            <ul role="menu">
+              {{#__footer.bottomLinks}}
+                <li class="hs-menu-item hs-menu-depth-1" role="none">
+                  <a href="{{url}}" role="menuitem" {{#target}}target="{{target}}"{{/target}} {{#rel}}rel="{{rel}}"{{/rel}}>{{text}}</a>
+                </li>
+              {{/__footer.bottomLinks}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  {{/redirect_url}}
+</html>

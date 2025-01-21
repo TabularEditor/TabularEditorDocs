@@ -1,0 +1,115 @@
+@use "./hubspot/theme_variables" as theme;
+
+footer {
+  background-color: theme.$theme-buttons-primary-background-color-color;
+  color: theme.$theme-buttons-primary-text-font-color;
+  padding-top: 110px;
+  padding-bottom: 55px;
+}
+
+footer .heading {
+  color: theme.$theme-buttons-primary-text-font-color;
+}
+
+footer hr.divider-module__line {
+  border-top-color: var(--secondary2-color);
+}
+
+footer .divider-module_wrp {
+  padding-top: 40px;
+  padding-bottom: 35px;
+}
+
+footer .button-group {
+  --scope-alignment: start;
+  --scope-border-radius: 0;
+  --scope-content-gap: 45px;
+  --scope-border: none;
+  --scope-border-width: 0px;
+  --scope-shadow: var(--shadow-);
+  --scope-padding-top: 0;
+  --scope-padding-bottom: 15px;
+}
+
+footer .row-number-1 {
+  padding-bottom: 265px !important;
+}
+
+.global-footer_wrp .btn-large.btn-full-width {
+  justify-content: start;
+}
+
+.global-footer_wrp .btn-large.btn-full-width svg {
+  font-size: 26px;
+}
+
+.global-footer_wrp ul[role="menu"] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.global-footer_wrp a[role="menuitem"] {
+  text-decoration: none;
+  font-size: 28px;
+  color: theme.$theme-buttons-primary-text-font-color;
+}
+
+.global-footer_wrp a[role="menuitem"]:hover,
+.global-footer_wrp a[role="menuitem"]:focus {
+  text-decoration: underline;
+}
+
+.global-footer_wrp .row-number-3 a[role="menuitem"] {
+  font-size: 18px;
+}
+
+.global-footer_wrp .hs-menu-flow-vertical a[role="menuitem"] {
+  padding: 6px 0;
+}
+
+.global-footer_wrp .hs-menu-flow-horizontal ul[role="menu"] {
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+article img {
+  -webkit-clip-path: polygon(0 0, calc(100% - 60px) 0, 100% 60px, 100% 100%, 60px 100%, 0 calc(100% - 60px)) !important;
+  clip-path: polygon(0 0, calc(100% - 60px) 0, 100% 60px, 100% 100%, 60px 100%, 0 calc(100% - 60px)) !important;
+}
+
+.affix h5 {
+  /* override fixed size and use hs theme --font-size variable */
+  font-size: var(--hub-font-size-to-rem);
+}
+
+/*
+.breadcrumb {
+  font-size: inherit;
+}
+*/
+
+@media (min-width: 992px) {
+  .global-footer_wrp
+  .row
+  .col:first-child
+  .hs-menu-flow-horizontal
+  ul[role="menu"] {
+    justify-content: flex-start;
+  }
+
+  .global-footer_wrp
+  .row-number-2
+  .col:last-child
+  ul[role="menu"] {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .global-footer_wrp .hs-menu-flow-horizontal ul[role="menu"] {
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+}

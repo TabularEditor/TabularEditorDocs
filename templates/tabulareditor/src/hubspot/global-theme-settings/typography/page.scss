@@ -1,0 +1,15 @@
+@use "../../theme_variables" as theme;
+
+body {
+  overflow-wrap: break-word;
+  color: theme.$theme-typography-text-font-color;
+  background-color: theme.$theme-typography-text-background-color;
+  line-height: 1.5;
+  font-size: (theme.$theme-typography-text-font-size + theme.$theme-typography-text-font-size_unit);
+
+  @if theme.$theme-typography-text-font-fallback {
+    font-family: theme.$theme-typography-text-font-font, theme.$theme-typography-text-font-fallback;
+  } else {
+    font-family: theme.$theme-typography-text-font-font;
+  }
+}

@@ -1,0 +1,134 @@
+/* ============================================ */
+/* Fluid Font Sizes */
+/* ============================================ */
+
+/* use it only if font-size bigger then 20px/1.25rem
+
+/* use this pattern:
+--font-size: 60; should be the only number with pixels in mind. Will be converted to rem. */
+
+/* h1 {
+  --font-size: 60;
+} */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6,
+.fluid-font-size {
+  --hub-fluid-font-size:
+    calc(
+      ((20 + ((var(--font-size) - 20) / 10)) / 16 * 1rem)
+      +
+      (((var(--font-size) - (20 + ((var(--font-size) - 20) / 10)) ) * 100 / 1200) * 1vw)
+    );
+  --hub-font-size-to-rem: calc(var(--font-size) / 16 * 1rem);
+
+  font-size: var(--hub-fluid-font-size);
+}
+
+h6,
+.h6 {
+  font-size: var(--hub-font-size-to-rem);
+}
+
+/* for 1200px screen and bigger */
+@media (min-width: 1200px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6,
+  .display-1,
+  .display-2,
+  .display-3,
+  .display-4,
+  .display-5,
+  .display-6,
+  .fluid-font-size {
+    font-size: var(--hub-font-size-to-rem);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+  line-height: 1.2;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-style: initial;
+}
+
+/* heading link */
+.heading-link {
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+.heading-link:hover {
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+}
+
+.margin-collapse :where(
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6) {
+  margin-top: 0;
+}

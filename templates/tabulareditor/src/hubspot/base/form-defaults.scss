@@ -1,0 +1,187 @@
+/* start normalize default HubSpot form styling */
+.form-default .hs-form fieldset {
+  margin: initial;
+  padding: initial;
+  border: initial;
+  max-width: initial;
+}
+
+.form-default :is(fieldset.form-columns-2, fieldset.form-columns-3) > div.hs-form-field {
+  float: none;
+  width: initial;
+}
+
+.form-default .hs-form-field .hs-field-desc {
+  width: 100%;
+}
+
+.form-default div.hs-form-field div.input {
+  margin-right: 0;
+}
+
+.form-default fieldset.form-columns-1 .input .hs-input {
+  width: 100%;
+}
+
+.form-default form fieldset.form-columns-2 .hs-form-field .input .hs-input {
+  width: 100%;
+}
+
+.form-default fieldset.form-columns-1 .input input[type="radio"],
+.form-default fieldset.form-columns-1 .input input[type="checkbox"] {
+  width: 1.2em;
+  float: none;
+}
+
+.form-default .inputs-list :is(.hs-form-checkbox-display,
+.hs-form-booleancheckbox-display,
+.hs-form-radio-display) > span {
+  margin: 0;
+}
+/* end normalize */
+
+.form-default {
+  --_form-label-color: var(--form-label-color, inherit);
+  --_form-help-text-color: var(--form-help-text-color, #394047);
+  --_form-placeholder-color: var(--form-placeholder-color, rgb(57 64 71 / 70%));
+  --_form-error-color: var(--form-error-color, #f2545b);
+}
+
+.form-default .hs-form-field {
+  margin-bottom: 1rem;
+}
+
+.form-default :where(.form-columns-2,
+.form-columns-3) {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.form-default :where(.form-columns-2, .form-columns-3) > .hs-form-field {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+@media (max-width: 991.98px) {
+  .form-default :is(fieldset.form-columns-2, fieldset.form-columns-3) > div.hs-form-field {
+    flex-basis: auto;
+  }
+}
+
+.form-default label,
+.form-default .fakelabel {
+  color: var(--_form-label-color);
+  margin-bottom: 0.4rem;
+  display: flex;
+}
+
+.form-default .hs-field-desc { /* stylelint-disable-line */
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.875em;
+  color: var(--_form-help-text-color);
+}
+
+.form-default .hs-form-required {
+  color: var(--_form-error-color);
+  margin-left: 2px;
+}
+
+.form-default input:not(
+[type="checkbox"],
+[type="radio"],
+[type="file"],
+[type="button"],
+[type="reset"],
+[type="submit"]),
+.form-default textarea,
+.form-default select {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.5rem;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-default input[type="file"] {
+  overflow: hidden;
+  padding: 0;
+}
+
+.form-default select {
+  padding: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-default input:not(
+  [type="checkbox"],
+  [type="radio"],
+  [type="file"],
+  [type="button"],
+  [type="reset"],
+  [type="submit"]),
+  .form-default textarea,
+  .form-default select {
+    transition: none;
+  }
+}
+
+.form-default input.error:not(
+[type="checkbox"],
+[type="radio"],
+[type="file"],
+[type="button"],
+[type="reset"],
+[type="submit"]),
+.form-default textarea.error,
+.form-default select.error {
+  border-color: var(--_form-error-color) !important;
+}
+
+.form-default .inputs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.form-default .hs-error-msg,
+.form-default .hs-error-msgs .hs-main-font-element {
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: var(--_form-error-color);
+}
+
+.form-default input::placeholder,
+.form-default textarea::placeholder {
+  color: var(--_form-placeholder-color);
+}
+
+.form-default :where(.hs-form-checkbox-display,
+.hs-form-booleancheckbox-display,
+.hs-form-radio-display,
+.fakelabel) {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.form-default input[type="radio"],
+/* stylelint-disable-next-line no-descending-specificity */
+.form-default input[type="checkbox"] {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.form-default input[type="file"]:not(:disabled) {
+  cursor: pointer;
+}

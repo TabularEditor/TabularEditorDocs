@@ -1,0 +1,13 @@
+:focus-visible {
+  outline-color: var(--focus-color);
+  outline-style: solid;
+  outline-width: 3px;
+}
+
+::marker {
+  color: var(--accent-color);
+}
+
+hr {
+  border-top-color: var(--primary-color)
+}
