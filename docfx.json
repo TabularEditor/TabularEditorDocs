@@ -21,7 +21,6 @@
         "template": [
             "default",
             "templates/tabulareditor",
-            "templates/lightbox-featherlight",
             "templates/api"
         ],
         "resource": [
