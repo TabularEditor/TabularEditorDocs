@@ -28,21 +28,17 @@ The DAX query window has five different query options.
 ![Dax Query Toolbar](~/images/features/dax_query_window/dax_query_toolbar.png)
 
 
-1. Execute (F5)
-2. Execute full query
-3. Execute Selection (Shift+F5)
-4. Stop 
-5. Auto Execute Query
-6. Keep sorting and filtering
+1. **Execute (F5)**: If there is a selection, it executes the selected DAX; otherwise, it executes the full query in the DAX Query editor.
+2. **Execute full query**: It executes the full query in the DAX Query editor
+3. **Execute Selection (Shift+F5)**: If there is a selection, it executes it. Otherwise, it executes the EVALUATE statement where the cursor is currently located.
+4. **Stop**: This button cancels the current query execution.
+5. **Auto Execute Query**: It allows for keeping track of the connected semantic model and updating the query results whenever something changes in the model. This can be useful for understanding e.g. how the result of a measure changes if modified.
+6. **Keep sorting and filtering**: It allows users to control how sorting and filtering are preserved in the result grid(s) when executing queries. There are three preferences available:
+   - Never: Sorting and filtering reset each time the query runs.
+   - When query is modified: Sorting and filtering reset only when the query structure changes.
+   - Always: Sorting and filtering persist as long as columns remain in the new query.
 
-The Auto Execute Query allows for keeping track of the connected semantic model and update the query results whenever something changes in the model. This can be useful for understanding e.g. how the result of a measure changes if modified.
-
-The Keep Sorting and Filtering allows users to control how sorting and filtering are preserved in the result grid(s) when executing queries. There are three preferences available:
-- Never: Sorting and filtering reset each time the query runs.
-- When query is modified: Sorting and filtering reset only when the query structure changes.
-- Always: Sorting and filtering persist as long as columns remain in the new query.
-
-The default values of both of the two preferences mentioned above can be set up in the Preferences dialog: **Tools > Preferences... > Data browsing > DAX Query** > Basic. 
+The default values of "Auto Execute Query" and "Keep Sorting and Filtering" preferences can be set up in the Preferences dialog: **Tools > Preferences... > Data browsing > DAX Query** > Basic. 
 
 ### Adding or Updating Measures with DAX Queries
 
