@@ -22,7 +22,7 @@ Say you want to change the Format String of your [Sales Amount] measure in the '
 Model.Tables["FactInternetSales"].Measures["Sales Amount"]
 ```
 
-Adding an extra dot (.) after the right-most bracket, should make the autocomplete menu pop up, showing you which properties and methods exist on this particular measure. Simply choose â€œFormatStringâ€ in the menu, or write the first few letters and hit Tab. Then, enter an equal sign followed by â€œ0.0%â€. Let us also change the Display Folder of this measure. Your final code should look like this:
+Adding an extra dot (.) after the right-most bracket, should make the autocomplete menu pop up, showing you which properties and methods exist on this particular measure. Simply choose "FormatString" in the menu, or write the first few letters and hit Tab. Then, enter an equal sign followed by "0.0%". Let us also change the Display Folder of this measure. Your final code should look like this:
 
 ```csharp
 Model.Tables["FactInternetSales"].Measures["Sales Amount"].FormatString = "0.0%";
@@ -31,7 +31,7 @@ Model.Tables["FactInternetSales"].Measures["Sales Amount"].DisplayFolder = "New 
 
 **Note:** Remember to put the semicolon (;) at the end of each line. This is a requirement of C#. If you forget it, you will get a syntax error message when trying to execute the script.
 
-Hit F5 or the â€Playâ€ button above the script editor to execute the script. Immediately, you should see the measure moving around in the explorer tree, reflecting the changed Display Folder. If you examine the measure in the Property Grid, you should also see that the Format String property has changed accordingly.
+Hit F5 or the "Play" button above the script editor to execute the script. Immediately, you should see the measure moving around in the explorer tree, reflecting the changed Display Folder. If you examine the measure in the Property Grid, you should also see that the Format String property has changed accordingly.
 
 ### Working with multiple objects at once
 Many objects in the object model, are actually collections of multiple objects. For example, each Table object has a Measures collection. The wrapper exposes a series of convenient properties and methods on these collections, to make it easy to set the same property on multiple objects at once. This is described in detail below. Additionally, you may use all the standard LINQ extension methods to filter and browse the objects of a collection.
@@ -82,20 +82,20 @@ refers to the currently selected hierarchy in the tree, provided that one and on
 
 `Selected.Hierarchies`
 
-All properties that exist on the singular object, also exist on its plural form, with a few exceptions. This means that you can set the value of these properties for multiple objects at once, with just one line of code and without using the LINQ extension methods mentioned above. For example, say you wanted to move all currently selected measures into a new Display Folder called â€œTestâ€:
+All properties that exist on the singular object, also exist on its plural form, with a few exceptions. This means that you can set the value of these properties for multiple objects at once, with just one line of code and without using the LINQ extension methods mentioned above. For example, say you wanted to move all currently selected measures into a new Display Folder called "Test":
 
 `Selected.Measures.DisplayFolder = "Test";`
 
 If no measures are currently selected in the tree, the above code does nothing, and no error is raised. Otherwise, the DisplayFolder property will be set to "Test" on all selected measures (even measures residing within folders, as the `Selected` object also includes objects in selected folders). If you use the singular form `Measure` instead of `Measures`, you will get an error unless the current selection contains exactly one measure.
 
-Although we cannot set the Name property of multiple objects at once, we still have some options available. If we just want to replace all occurrences of some character string with another, we can use the provided â€œRenameâ€ method, like so:
+Although we cannot set the Name property of multiple objects at once, we still have some options available. If we just want to replace all occurrences of some character string with another, we can use the provided "Rename" method, like so:
 
 ```csharp
 Selected.Measures
         .Rename("Amount", "Value");
 ```
 
-This would replace any occurence of the word â€Amountâ€ with the word â€Valueâ€ in the names of all currently selected measures.
+This would replace any occurence of the word "Amount" with the word "Value" in the names of all currently selected measures.
 Alternatively, we may use the LINQ ForEach()-method, as described above, to include more advanced logic:
 
 ```csharp

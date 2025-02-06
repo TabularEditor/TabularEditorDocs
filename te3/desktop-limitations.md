@@ -1,7 +1,7 @@
 ---
 uid: desktop-limitations-te3
 title: Power BI Desktop limitations
-author: Morten Lønskov
+author: Morten LÃ¸nskov
 updated: 2023-08-21
 applies_to:
   editions:

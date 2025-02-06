@@ -6,6 +6,7 @@
 ## Power BI XMLA Endpoint
 ### @powerbi-xmla
 ### @powerbi-xmla-pbix-workaround
+## @proxy-settings
 
 # Documentation
 ## User interface
@@ -28,6 +29,7 @@
 ### @perspective-editor
 ### @pivot-grid
 ### @table-groups
+### @code-actions
 
 ## Files formats
 ### @supported-files

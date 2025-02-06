@@ -108,6 +108,7 @@ applies_to:
 |Expand  foldable region|Ctrl+Shift+]|
 |Toggle foldable region state|Ctrl+Shift+;|
 |Delete reference or words|Ctrl+Backspace or Ctrl+Delete|
+|Expand Selection|Ctrl+Shift+E|
 
 ## DAX Query
 

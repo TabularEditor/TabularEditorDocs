@@ -19,18 +19,20 @@
 
 ### @script-library-beginner
 #### @script-count-rows
-#### @script-edit-hidden-partitions
-#### @script-create-m-parameter
 #### @script-create-sum-measures-from-columns
 #### @script-create-measure-table
-#### @script-format-numeric-measures
 #### @script-create-table-groups
+#### @script-create-m-parameter
+#### @script-edit-hidden-partitions
+#### @script-format-numeric-measures
+#### @script-show-data-source-dependencies
 #### @create-field-parameter
 #### @script-display-unique-column-values
 
 
 ### @script-library-advanced
 #### @script-count-things
+#### @script-output-things
 #### @script-create-date-table
 #### @script-create-and-replace-parameter
 #### @script-format-power-query

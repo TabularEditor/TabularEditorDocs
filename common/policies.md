@@ -2,7 +2,7 @@
 uid: policies
 title: Policies
 author: Daniel Otykier
-updated: 2022-08-11
+updated: 2024-10-30
 ---
 
 # Policies
@@ -28,10 +28,13 @@ Below is a listing of the policies that can be controlled. To enforce one or mor
 | DisableWebDaxFormatter | Tabular Editor will disable the DAX code formatter, which performs a webrequest to daxformatter.com. (TE3 will still allow formatting code through the built-in DAX formatter) |
 | DisableErrorReports | **(TE3 Only)** Tabular Editor will not allow users to send error/crash reports to the Tabular Editor 3 support team. |
 | DisableTelemetry | **(TE3 Only)** Tabular Editor will not collect and send anonymous usage data to the Tabular Editor 3 support team. |
+| DisableDaxOptimizer | **(TE3 Only)** The DAX Optimizer integration feature will not be available |
+| DisableDaxOptimizerUpload | **(TE3 Only)** Users will not be allowed to upload VPAX files through the DAX Optimizer integration feature. Implicitly enforced when `DisableDaxOptimizer` is enforced. |
+| RequireDaxOptimizerObfuscation | **(TE3 Only)** Users will not be allowed to upload un-obfuscated (clear text) VPAX files through the DAX Optimizer integration feature. Implicitly enforced when `DisableDaxOptimizer` or `DisableDaxOptimizerUpload` is enforced. |
 
 ## Disabling web communications
 
-If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports` and `DisableTelemetry` policies.
+If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, ànd `DisableDaxOptimizer` policies.
 
 ## Disabling custom scripts
 
