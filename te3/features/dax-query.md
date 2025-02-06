@@ -34,9 +34,9 @@ The DAX query window has five different query options.
 4. **Stop**: This button cancels the current query execution.
 5. **Auto Execute Query**: It allows for keeping track of the connected semantic model and updating the query results whenever something changes in the model. This can be useful for understanding e.g. how the result of a measure changes if modified.
 6. **Keep sorting and filtering**: It allows users to control how sorting and filtering are preserved in the result grid(s) when executing queries. There are three preferences available:
-   - Never: Sorting and filtering reset each time the query runs.
-   - When query is modified: Sorting and filtering reset only when the query structure changes.
-   - Always: Sorting and filtering persist as long as columns remain in the new query.
+   - **Never**: Sorting and filtering reset each time the query runs.
+   - **When query is modified**: Sorting and filtering reset only when the query structure changes.
+   - **Always**: Sorting and filtering persist as long as columns remain in the new query.
 
 The default values of "Auto Execute Query" and "Keep Sorting and Filtering" preferences can be set up in the Preferences dialog: **Tools > Preferences... > Data browsing > DAX Query** > Basic. 
 
