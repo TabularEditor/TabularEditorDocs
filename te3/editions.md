@@ -2,11 +2,14 @@
 uid: editions
 title: Compare editions
 author: Søren Toft Joensen
-updated: 2023-11-22
+updated: 2025-02-07
 ---
 # Tabular Editor 3 Editions
 
 This document provides an overview and comparison of the different editions of Tabular Editor 3.
+
+> [!NOTE]
+> Tabular Editor 3 licenses are **per developer**. In other words, only the persons who use the Tabular Editor 3 product will need a license.
 
 ## Supported Data Modeling Scenarios
 
@@ -83,7 +86,7 @@ There are no other feature differences between the Tabular Editor 3 editions, th
 
 Our Desktop Edition and Business Edition uses a personal licensing model. This means, that a user receives their own personal License Key, which can not be shared or transferred to other users. When a user no longer requires the product, their subscription should be cancelled to avoid recurring payments.
 
-Our Enterprise Edition uses a transferable licensing model. The license administrator receives a single License Key, which is then valid for a number of named users up to the quantity purchased. Users are identified by their e-mail address, which is entered the first time a user activates an installation of Tabular Editor 3. The license administrator may <a href="mailto:support@tabulareditor.com?subject=Transferable%20License%20Rotation">contact support</a> in case a user should be removed from the license, such as when an employee leaves the team.
+Our Enterprise Edition uses a transferable licensing model. The license administrator receives a single License Key, which is then valid for a number of named users up to the quantity purchased. Users are identified by their e-mail address, which is entered the first time a user activates an installation of Tabular Editor 3. The first time a user activates a Tabular Editor 3 installation using the license key, they are "locked-in" to that license for 30 days. After the 30 day lock-in period, a user can be removed from the license at any time, freeing up the license slot for another user. License administrators can view and manage users through our <a href="https://tabulareditor.com/my-account">self-service portal</a>. You may also <a href="mailto:support@tabulareditor.com?subject=Transferable%20License%20Rotation">contact support</a> for assistance.
 
 ## Multiple installations
 
