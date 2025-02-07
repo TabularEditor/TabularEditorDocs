@@ -68,6 +68,51 @@ You can update theme variables in this template using HubSpot developer informat
 
   The script will create `tabulareditor/src/hubspot/theme_variables.scss` containing the theme variables and their values.
 
+## Copy template to TabularEditorDocs
+
+Assuming we have this directory structure, both `TabularEditorDocs` and `tabular-editor-docfx-template` within same parent directory,
+we could exec followng command when standing in the root directory of `tabular-editor-docfx-template`.
+
+### Parts of directory structure
+```bash
+├── tabular-editor-docfx-template
+│   └── templates
+│      ├── common
+│      ├── ...
+│      └── tabulareditor
+│          ├── layout
+│          ├── partials
+│          ├── public
+│          ├── src
+│          └── tools
+└── TabularEditorDocs
+    ├── api
+    ├── assets
+    ├── bin
+    ├── common
+    ├── images
+    ├── onboarding
+    ├── te2
+    ├── te3
+    ├── templates
+    │   ├── api
+    │   ├── bootstrap-modal
+    │   └── tabulareditor
+    └── whats-new
+```
+
+### Sync command
+
+```bash
+rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocs/templates/tabulareditor
+```
+
+And temporary for the forked repository.
+
+```bash
+rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocsFork/templates/tabulareditor
+```
+
 ## Additional Files
 
 - **`tabulareditor/src/hubspot`**: Contains rewritten Sass and TypeScript files based on the HubSpot theme.

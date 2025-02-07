@@ -200,15 +200,14 @@
           </nav>
         </div>
       </div>
+      {{^_disableNavbar}}
+      <div class="docnav container-xxl">
+        <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+          <div id="navbar" class="button-group"></div>
+        </nav>
+      </div>
+      {{/_disableNavbar}}
     </header>
-
-    {{^_disableNavbar}}
-    <div class="docnav container-xxl">
-      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
-        <div id="navbar" class="button-group"></div>
-      </nav>
-    </div>
-    {{/_disableNavbar}}
 
     <main class="container-xxl">
       {{^_disableToc}}
@@ -241,7 +240,27 @@
         </div>
 
         <article data-uid="{{uid}}">
-          {{!body}}
+          {{{rawTitle}}}
+          {{#updated}}
+          <ul class="metadata"><li>{{updated}}</li><li>{{author}}</li></ul>
+          {{/updated}}
+          {{#applies_to}}
+          <div class="applies-to-div"><strong>Applies to: </strong><ul class="applies-to">
+            {{#editions}}
+              {{#none}}<li><span><span class="emoji">&#10060;</span> <del>{{edition}} Edition</del></span></li>{{/none}}
+              {{#partial}}<li><span title="{{partial}}"><span class="emoji">&#9888;</span> {{edition}} Edition</span></li>{{/partial}}
+              {{^partial}}{{^none}}<li><span><span class="emoji">&#10004;</span> {{edition}} Edition</span></li>{{/none}}{{/partial}}
+            {{/editions}}
+            {{#versions}}
+              {{#none}}<li><span><span class="emoji">&#10060;</span> <del>Tabular Editor {{version}}</del></span></li>{{/none}}
+              {{#partial}}<li><span title="{{partial}}"><span class="emoji">&#9888;</span>Tabular Editor {{version}}</span></li>{{/partial}}
+              {{^partial}}{{^none}}<li><span><span class="emoji">&#10004;</span>Tabular Editor {{version}}</span></li>{{/none}}{{/partial}}
+            {{/versions}}
+          </ul></div>
+          {{/applies_to}}
+          <div id="conceptual-content" class="conceptual-content">
+            {{{conceptual}}}
+          </div>
         </article>
 
         {{^_disableContribution}}
