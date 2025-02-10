@@ -113,11 +113,11 @@ The Code Actions below will appear with teal green dots under the first two char
 
 The Code Actions below will appear with a screwdriver icon in the left margin when the cursor is placed on the code segment.
 
-| Name | Description |
-| --- | --- |
-| Rewrite TOTALxTD using CALCULATE | Functions such as [`TOTALMTD`](https://dax.guide/TOTALMTD), [`TOTALQTD`](https://dax.guide/TOTALQTD) and [`TOTALYTD`](https://dax.guide/TOTALYTD) can be rewritten using the [`CALCULATE`](https://dax.guide/CALCULATE) function, which is more expressive and provides greater flexibility. Example:<br>`TOTALYTD([Total Sales], 'Date'[Date])` -> `CALCULATE([Total Sales], DATESYTD('Date'[Date]))` |
-| Rewrite using FILTER | A scalar predicate in a filter argument to `CALCULATE` can be rewritten using `FILTER`. This is useful, for example when you need to add more complex filtering logic. Example:<br>`CALCULATE(..., Products[Color] = "Red")` -> `CALCULATE(..., FILTER(ALL(Products[Color]), Products[Color] = "Red"))` |
-| Invert IF | To improve readability, it is sometimes useful to invert `IF` statements. Example:<br>`IF(a < b, "B is greater", "A is greater")` -> `IF(a > b, "A is greater", "B is greater")` |
+| ID | Name | Description |
+| --- | --- | --- |
+| RW001 | [Rewrite TOTALxTD using CALCULATE](xref:RW001) | Functions such as [`TOTALMTD`](https://dax.guide/TOTALMTD), [`TOTALQTD`](https://dax.guide/TOTALQTD) and [`TOTALYTD`](https://dax.guide/TOTALYTD) can be rewritten using the [`CALCULATE`](https://dax.guide/CALCULATE) function, which is more expressive and provides greater flexibility. Example:<br>`TOTALYTD([Total Sales], 'Date'[Date])` -> `CALCULATE([Total Sales], DATESYTD('Date'[Date]))` |
+| RW002 | [Rewrite using FILTER](xref:RW002) | A scalar predicate in a filter argument to `CALCULATE` can be rewritten using `FILTER`. This is useful, for example when you need to add more complex filtering logic. Example:<br>`CALCULATE(..., Products[Color] = "Red")` -> `CALCULATE(..., FILTER(ALL(Products[Color]), Products[Color] = "Red"))` |
+| RW003 | [Invert IF](xref:RW003) | To improve readability, it is sometimes useful to invert `IF` statements. Example:<br>`IF(a < b, "B is greater", "A is greater")` -> `IF(a > b, "A is greater", "B is greater")` |
 
 ## Customizing Code Actions
 
