@@ -27,60 +27,178 @@
   <pre><code class="lang-csharp hljs">{{syntax.content.0.value}}</code></pre>
 </div>
 
-{{#syntax.parameters.0}}
+{{#syntax.parametersFakeToStoreOriginalCode.0}}
 <h4 class="section">{{__global.parameters}}</h4>
 <dl class="parameters">
-{{/syntax.parameters.0}}
-{{#syntax.parameters}}
+{{/syntax.parametersFakeToStoreOriginalCode.0}}
+{{#syntax.parametersFakeToStoreOriginalCode}}
   <dt><code>{{{id}}}</code> {{{type.specName.0.value}}}</dt>
   <dd>{{{description}}}</dd>
+{{/syntax.parametersFakeToStoreOriginalCode}}
+{{#syntax.parametersFakeToStoreOriginalCode.0}}
+</dl>
+{{/syntax.parametersFakeToStoreOriginalCode.0}}
+
+{{#syntax.parameters.0}}
+<h4 class="section">{{__global.parameters}}</h4>
+<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th>{{__global.type}}</th>
+      <th>{{__global.name}}</th>
+      <th>{{__global.description}}</th>
+    </tr>
+  </thead>
+  <tbody>
+{{/syntax.parameters.0}}
+{{#syntax.parameters}}
+    <tr>
+      <td>{{{type.specName.0.value}}}</td>
+      <td><span class="parametername">{{{id}}}</span></td>
+      <td>{{{description}}}</td>
+    </tr>
 {{/syntax.parameters}}
 {{#syntax.parameters.0}}
-</dl>
+  </tbody>
+</table>
 {{/syntax.parameters.0}}
 
-{{#syntax.return}}
+{{#syntax.returnFakeToStoreOriginalCode}}
 <h4 class="section">{{__global.returns}}</h4>
 <dl class="parameters">
   <dt>{{{type.specName.0.value}}}</dt>
   <dd>{{{description}}}</dd>
 </dl>
+{{/syntax.returnFakeToStoreOriginalCode}}
+
+{{#syntax.return}}
+<h4 class="section">{{__global.returns}}</h4>
+<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th>{{__global.type}}</th>
+      <th>{{__global.description}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{{type.specName.0.value}}}</td>
+      <td>{{{description}}}</td>
+    </tr>
+  </tbody>
+</table>
 {{/syntax.return}}
+
+{{#syntax.typeParametersFakeToStoreOriginalCode.0}}
+<h4 class="section">{{__global.typeParameters}}</h4>
+<dl class="parameters">
+{{/syntax.typeParametersFakeToStoreOriginalCode.0}}
+{{#syntax.typeParametersFakeToStoreOriginalCode}}
+  <dt><code>{{{id}}}</code></dt>
+  <dd>{{{description}}}</dd>
+{{/syntax.typeParametersFakeToStoreOriginalCode}}
+{{#syntax.typeParametersFakeToStoreOriginalCode.0}}
+</dl>
+{{/syntax.typeParametersFakeToStoreOriginalCode.0}}
 
 {{#syntax.typeParameters.0}}
 <h4 class="section">{{__global.typeParameters}}</h4>
-<dl class="parameters">
+<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th>{{__global.name}}</th>
+      <th>{{__global.description}}</th>
+    </tr>
+  </thead>
+  <tbody>
 {{/syntax.typeParameters.0}}
 {{#syntax.typeParameters}}
-  <dt><code>{{{id}}}</code></dt>
-  <dd>{{{description}}}</dd>
+    <tr>
+      <td><span class="parametername">{{{id}}}</span></td>
+      <td>{{{description}}}</td>
+    </tr>
 {{/syntax.typeParameters}}
 {{#syntax.typeParameters.0}}
-</dl>
+  </tbody>
+</table>
 {{/syntax.typeParameters.0}}
 
-{{#fieldValue}}
+{{#fieldValueFakeToStoreOriginalCode}}
 <h4 class="section">{{__global.fieldValue}}</h4>
 <dl class="parameters">
   <dt>{{{type.specName.0.value}}}</dt>
   <dd>{{{description}}}</dd>
 </dl>
+{{/fieldValueFakeToStoreOriginalCode}}
+
+{{#fieldValue}}
+<h4 class="section">{{__global.fieldValue}}</h4>
+<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th>{{__global.type}}</th>
+      <th>{{__global.description}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{{type.specName.0.value}}}</td>
+      <td>{{{description}}}</td>
+    </tr>
+  </tbody>
+</table>
 {{/fieldValue}}
 
-{{#propertyValue}}
+{{#propertyValueFakeToStoreOriginalCode}}
 <h4 class="section">{{__global.propertyValue}}</h4>
 <dl class="parameters">
   <dt>{{{type.specName.0.value}}}</dt>
   <dd>{{{description}}}</dd>
 </dl>
+{{/propertyValueFakeToStoreOriginalCode}}
+
+{{#propertyValue}}
+<h4 class="section">{{__global.propertyValue}}</h4>
+<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th>{{__global.type}}</th>
+      <th>{{__global.description}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{{type.specName.0.value}}}</td>
+      <td>{{{description}}}</td>
+    </tr>
+  </tbody>
+</table>
 {{/propertyValue}}
 
-{{#eventType}}
+{{#eventTypeFakeToStoreOriginalCode}}
 <h4 class="section">{{__global.eventType}}</h4>
 <dl class="parameters">
   <dt>{{{type.specName.0.value}}}</dt>
   <dd>{{{description}}}</dd>
 </dl>
+{{/eventTypeFakeToStoreOriginalCode}}
+
+{{#eventType}}
+<h4 class="section">{{__global.eventType}}</h4>
+<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th>{{__global.type}}</th>
+      <th>{{__global.description}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{{type.specName.0.value}}}</td>
+      <td>{{{description}}}</td>
+    </tr>
+  </tbody>
+</table>
 {{/eventType}}
 
 {{/syntax}}

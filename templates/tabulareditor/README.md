@@ -104,13 +104,13 @@ we could exec followng command when standing in the root directory of `tabular-e
 ### Sync command
 
 ```bash
-rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocs/templates/tabulareditor
+rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocs/templates/
 ```
 
 And temporary for the forked repository.
 
 ```bash
-rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocsFork/templates/tabulareditor
+rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocsFork/templates/
 ```
 
 ## Additional Files

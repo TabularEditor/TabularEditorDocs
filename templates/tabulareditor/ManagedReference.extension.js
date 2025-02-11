@@ -1,5 +1,7 @@
-exports.transform = function (model) {
-  // model._appLogoPath = "images/tabular-editor-logo.svg"
+/**
+ * This method will be called at the start of exports.transform in ManagedReference.html.primary.js
+ */
+exports.preTransform = function (model) {
   model.__header = {
     mainMenu: [
       {
@@ -97,6 +99,6 @@ exports.transform = function (model) {
       }
     ]
   }
-  model.__test = 'conceptual.html.primary.js';
+  model.__test = 'preTransform ManagedReference.html.primary.js';
   return model;
 }

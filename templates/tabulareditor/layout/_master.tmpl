@@ -200,13 +200,6 @@
           </nav>
         </div>
       </div>
-      {{^_disableNavbar}}
-      <div class="docnav container-xxl">
-        <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
-          <div id="navbar" class="button-group"></div>
-        </nav>
-      </div>
-      {{/_disableNavbar}}
     </header>
 
     <main class="container-xxl">
@@ -240,6 +233,14 @@
         </div>
 
         <article data-uid="{{uid}}">
+          {{^_disableNavbar}}
+          <div class="docnav">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+              <div id="navbar" class="button-group"></div>
+            </nav>
+          </div>
+          {{/_disableNavbar}}
+
           {{{rawTitle}}}
           {{#updated}}
           <ul class="metadata"><li>{{updated}}</li><li>{{author}}</li></ul>
@@ -259,7 +260,12 @@
           </ul></div>
           {{/applies_to}}
           <div id="conceptual-content" class="conceptual-content">
-            {{{conceptual}}}
+            {{#conceptual}}
+              {{{conceptual}}}
+            {{/conceptual}}
+            {{^conceptual}}
+              {{!body}}
+            {{/conceptual}}
           </div>
         </article>
 
@@ -294,10 +300,10 @@
     <footer class="border-top text-secondary global-footer_wrp">
       <div class="container global-footer global-partial">
         <div class="row row-number-1">
-          <div class="col col-md-6">
+          <div class="col-12 col-md-6">
             <h2 class="display-1 heading">Ready to get started?</h2>
           </div>
-          <div class="col col-md-6">
+          <div class="col-12 col-md-6">
             <div class="content-block-top">
               <div class="button-group">
                 {{#__footer.buttons}}
@@ -312,7 +318,7 @@
         </div>
 
         <div class="row row-number-2">
-          <div class="col col-md-6 hs-menu-flow-horizontal">
+          <div class="col-12 col-md-6 hs-menu-flow-horizontal">
             <ul role="menu">
               {{#__footer.leftLinks}}
                 <li class="hs-menu-item hs-menu-depth-1" role="none">
@@ -321,7 +327,7 @@
               {{/__footer.leftLinks}}
             </ul>
           </div>
-          <div class="col col-md-6 hs-menu-flow-horizontal">
+          <div class="col-12 col-md-6 hs-menu-flow-horizontal">
             <ul role="menu">
               {{#__footer.rightLinks}}
                 <li class="hs-menu-item hs-menu-depth-1" role="none">
@@ -339,7 +345,7 @@
 
       <div class="container global-footer global-partial">
         <div class="row row-number-3">
-          <div class="col col-md-12 hs-menu-flow-horizontal">
+          <div class="col-12 hs-menu-flow-horizontal">
             <ul role="menu">
               {{#__footer.bottomLinks}}
                 <li class="hs-menu-item hs-menu-depth-1" role="none">
