@@ -254,3 +254,12 @@ If you just want the major version number (as an integer), use:
 var majorVersion = Selected.GetType().Assembly.GetName().Version.Major;
 majorVersion.Output(); // majorVersion is an integer (2 or 3)
 ```
+
+## Known issues and limitations
+
+- Certain script operations may cause the Tabular Editor 3 application to crash or become unresponsive, due to the way scripts are executed. For example, a script with an infinite loop (`while(true) {}`) will cause the application to hang. If this happens, you will have to end the Tabular Editor process through the Windows Task Manager.
+
+If you intend to save the script as a [macro](xref:creating-macros), please be aware of the following limitations:
+
+- If the script body contains local methods with access modifiers (`public`, `static`, etc.), the script cannot be saved as a macro. Remove the access modifiers, or move the method into a class instead.
+- Macros currently do not support the `await` keyword, if used in the script body. If your script body calls into asynchronous methods, you should use `MyAsyncMethod.Wait()` or `MyAsyncMethod.Result` instead of `await MyAsyncMethod()`. It is fine to use `await` in `async` methods that are defined elsewhere in the script.
