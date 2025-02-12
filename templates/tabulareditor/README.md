@@ -68,10 +68,56 @@ You can update theme variables in this template using HubSpot developer informat
 
   The script will create `tabulareditor/src/hubspot/theme_variables.scss` containing the theme variables and their values.
 
+## Copy template to TabularEditorDocs
+
+Assuming we have this directory structure, both `TabularEditorDocs` and `tabular-editor-docfx-template` within same parent directory,
+we could exec followng command when standing in the root directory of `tabular-editor-docfx-template`.
+
+### Parts of directory structure
+```bash
+├── tabular-editor-docfx-template
+│   └── templates
+│      ├── common
+│      ├── ...
+│      └── tabulareditor
+│          ├── layout
+│          ├── partials
+│          ├── public
+│          ├── src
+│          └── tools
+└── TabularEditorDocs
+    ├── api
+    ├── assets
+    ├── bin
+    ├── common
+    ├── images
+    ├── onboarding
+    ├── te2
+    ├── te3
+    ├── templates
+    │   ├── api
+    │   ├── bootstrap-modal
+    │   └── tabulareditor
+    └── whats-new
+```
+
+### Sync command
+
+```bash
+rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocs/templates/
+```
+
+And temporary for the forked repository.
+
+```bash
+rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocsFork/templates/
+```
+
 ## Additional Files
 
 - **`tabulareditor/src/hubspot`**: Contains rewritten Sass and TypeScript files based on the HubSpot theme.
 - **`tabulareditor/conceptual.html.primary.js`**: Contains variables used in the new header and footer.
+- **`tabulareditor/ManagedReference.extension.js`**: Contains variables used in the new header and footer in the "API" section.
 
 ### Variables
 
@@ -88,9 +134,13 @@ You can update theme variables in this template using HubSpot developer informat
 
 ## Changes in Original Files
 
+- **`tabulareditor/layout/_master.tmpl`**: Master template, added new header, restructured content, original menu moved, changed footer etc.
+- **`tabulareditor/partials/class.tmpl.partial`**: Changes in template to match previous version.
+- **`tabulareditor/partials/class.header.tmpl.partial`**: Changes in template to match previous version.
 - **`tabulareditor/src/docfx.scss`**: Includes theme variables and additional Sass files. Adds more variables for use with Bootstrap and additional Sass files.
 - **`tabulareditor/src/docfx.ts`**: Includes and initializes headerSearch, adds additional Sass files.
 - **`tabulareditor/src/layout.scss`**: Changes header and footer height variables. Comments out header and footer layout.
-- **`tabulareditor/src/local.scss`**: Adds additional footer HubSpot inline style.
+- **`tabulareditor/src/local.scss`**: Adds additional footer HubSpot inline style, adds and overrides additional styles.
 - **`tabulareditor/src/nav.scss`**: Small adjustments to `#navbar` style.
 - **`tabulareditor/src/nav.ts`**: Changes to render the original navbar as buttons and exclude any submenu.
+- **`tabulareditor/src/toc.ts`**: Small addition to exclude TOC on first page.
