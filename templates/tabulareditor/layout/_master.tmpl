@@ -202,14 +202,6 @@
       </div>
     </header>
 
-    {{^_disableNavbar}}
-    <div class="docnav container-xxl">
-      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
-        <div id="navbar" class="button-group"></div>
-      </nav>
-    </div>
-    {{/_disableNavbar}}
-
     <main class="container-xxl">
       {{^_disableToc}}
       <div class="toc-offcanvas">
@@ -241,7 +233,40 @@
         </div>
 
         <article data-uid="{{uid}}">
-          {{!body}}
+          {{^_disableNavbar}}
+          <div class="docnav">
+            <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+              <div id="navbar" class="button-group"></div>
+            </nav>
+          </div>
+          {{/_disableNavbar}}
+
+          {{{rawTitle}}}
+          {{#updated}}
+          <ul class="metadata"><li>{{updated}}</li><li>{{author}}</li></ul>
+          {{/updated}}
+          {{#applies_to}}
+          <div class="applies-to-div"><strong>Applies to: </strong><ul class="applies-to">
+            {{#editions}}
+              {{#none}}<li><span><span class="emoji">&#10060;</span> <del>{{edition}} Edition</del></span></li>{{/none}}
+              {{#partial}}<li><span title="{{partial}}"><span class="emoji">&#9888;</span> {{edition}} Edition</span></li>{{/partial}}
+              {{^partial}}{{^none}}<li><span><span class="emoji">&#10004;</span> {{edition}} Edition</span></li>{{/none}}{{/partial}}
+            {{/editions}}
+            {{#versions}}
+              {{#none}}<li><span><span class="emoji">&#10060;</span> <del>Tabular Editor {{version}}</del></span></li>{{/none}}
+              {{#partial}}<li><span title="{{partial}}"><span class="emoji">&#9888;</span>Tabular Editor {{version}}</span></li>{{/partial}}
+              {{^partial}}{{^none}}<li><span><span class="emoji">&#10004;</span>Tabular Editor {{version}}</span></li>{{/none}}{{/partial}}
+            {{/versions}}
+          </ul></div>
+          {{/applies_to}}
+          <div id="conceptual-content" class="conceptual-content">
+            {{#conceptual}}
+              {{{conceptual}}}
+            {{/conceptual}}
+            {{^conceptual}}
+              {{!body}}
+            {{/conceptual}}
+          </div>
         </article>
 
         {{^_disableContribution}}
@@ -275,10 +300,10 @@
     <footer class="border-top text-secondary global-footer_wrp">
       <div class="container global-footer global-partial">
         <div class="row row-number-1">
-          <div class="col col-md-6">
+          <div class="col-12 col-md-6">
             <h2 class="display-1 heading">Ready to get started?</h2>
           </div>
-          <div class="col col-md-6">
+          <div class="col-12 col-md-6">
             <div class="content-block-top">
               <div class="button-group">
                 {{#__footer.buttons}}
@@ -293,7 +318,7 @@
         </div>
 
         <div class="row row-number-2">
-          <div class="col col-md-6 hs-menu-flow-horizontal">
+          <div class="col-12 col-md-6 hs-menu-flow-horizontal">
             <ul role="menu">
               {{#__footer.leftLinks}}
                 <li class="hs-menu-item hs-menu-depth-1" role="none">
@@ -302,7 +327,7 @@
               {{/__footer.leftLinks}}
             </ul>
           </div>
-          <div class="col col-md-6 hs-menu-flow-horizontal">
+          <div class="col-12 col-md-6 hs-menu-flow-horizontal">
             <ul role="menu">
               {{#__footer.rightLinks}}
                 <li class="hs-menu-item hs-menu-depth-1" role="none">
@@ -320,7 +345,7 @@
 
       <div class="container global-footer global-partial">
         <div class="row row-number-3">
-          <div class="col col-md-12 hs-menu-flow-horizontal">
+          <div class="col-12 hs-menu-flow-horizontal">
             <ul role="menu">
               {{#__footer.bottomLinks}}
                 <li class="hs-menu-item hs-menu-depth-1" role="none">
