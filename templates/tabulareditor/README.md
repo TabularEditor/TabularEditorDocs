@@ -117,6 +117,7 @@ rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../Tabular
 
 - **`tabulareditor/src/hubspot`**: Contains rewritten Sass and TypeScript files based on the HubSpot theme.
 - **`tabulareditor/conceptual.html.primary.js`**: Contains variables used in the new header and footer.
+- **`tabulareditor/ManagedReference.extension.js`**: Contains variables used in the new header and footer in the "API" section.
 
 ### Variables
 
@@ -133,9 +134,13 @@ rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../Tabular
 
 ## Changes in Original Files
 
+- **`tabulareditor/layout/_master.tmpl`**: Master template, added new header, restructured content, original menu moved, changed footer etc.
+- **`tabulareditor/partials/class.tmpl.partial`**: Changes in template to match previous version.
+- **`tabulareditor/partials/class.header.tmpl.partial`**: Changes in template to match previous version.
 - **`tabulareditor/src/docfx.scss`**: Includes theme variables and additional Sass files. Adds more variables for use with Bootstrap and additional Sass files.
 - **`tabulareditor/src/docfx.ts`**: Includes and initializes headerSearch, adds additional Sass files.
 - **`tabulareditor/src/layout.scss`**: Changes header and footer height variables. Comments out header and footer layout.
-- **`tabulareditor/src/local.scss`**: Adds additional footer HubSpot inline style.
+- **`tabulareditor/src/local.scss`**: Adds additional footer HubSpot inline style, adds and overrides additional styles.
 - **`tabulareditor/src/nav.scss`**: Small adjustments to `#navbar` style.
 - **`tabulareditor/src/nav.ts`**: Changes to render the original navbar as buttons and exclude any submenu.
+- **`tabulareditor/src/toc.ts`**: Small addition to exclude TOC on first page.
