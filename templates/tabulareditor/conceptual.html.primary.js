@@ -16,7 +16,7 @@ exports.transform = function (model) {
       },
       {
         text: "Support" ,
-        url: "/support",
+        url: "/",
         subMenu: {
           items: [
             {
