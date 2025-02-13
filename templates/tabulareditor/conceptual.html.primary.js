@@ -16,7 +16,7 @@ exports.transform = function (model) {
       },
       {
         text: "Support" ,
-        url: "/support",
+        url: "/",
         subMenu: {
           items: [
             {
@@ -37,7 +37,7 @@ exports.transform = function (model) {
     ],
     button1: {
       text: "Start free trial",
-      url: "https://www.tabulareditor.com/downloads"
+      url: "https://www.tabulareditor.com"
     },
     button2: {
       text: "Sign in",
@@ -49,11 +49,11 @@ exports.transform = function (model) {
     buttons: [
       {
         text: "Try Tabular Editor 3 for free",
-        url: "https://www.tabulareditor.com/downloads"
+        url: "https://www.tabulareditor.com"
       },
       {
         text: "Buy Tabular Editor 3",
-        url: "https://www.tabulareditor.com/pricing"
+        url: "https://www.tabulareditor.com"
       }
     ],
     leftLinks: [
@@ -93,7 +93,7 @@ exports.transform = function (model) {
       },
       {
         text: "License terms",
-        url: "https://tabulareditor.com/license-terms"
+        url: "https://tabulareditor.com/assets/Tabular-Editor-Standard-License-Terms-version-2.0-November-2024-DutNQkZq.pdf"
       }
     ]
   }
