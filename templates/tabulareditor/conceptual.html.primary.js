@@ -97,6 +97,5 @@ exports.transform = function (model) {
       }
     ]
   }
-  model.__test = 'conceptual.html.primary.js';
   return model;
 }

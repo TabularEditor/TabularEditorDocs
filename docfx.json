@@ -31,7 +31,6 @@
         "globalMetadata": {
             "_appTitle": "Tabular Editor Documentation",
             "_enableSearch": true,
-            "_appLogoPath": "images/te3-logo-50.svg",
             "_appFaviconPath": "images/te3logo.png",
             "_enableNewTab": true
         },

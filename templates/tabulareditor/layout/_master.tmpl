@@ -88,7 +88,7 @@
   </head>
 
   {{^redirect_url}}
-  <body class="tex2jax_ignore" data-layout="{{_layout}}{{layout}}" data-yaml-mime="{{yamlmime}}">
+  <body class="tex2jax_ignore" data-layout="{{_layout}}{{layout}}" data-yaml-mime="{{yamlmime}}" data-bs-spy="scroll" data-bs-target="#affix" data-bs-smooth-scroll="true" data-offset="120" tabindex="0">
     <header class="global-header_wrp">
       <div id="hs_cos_wrapper_global-header-dndarea-module-2" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
         <div class="siteheader-module_wrp">
@@ -123,7 +123,7 @@
                     {{^subMenu}}
                       {{^items}}
                         <li class="main-nav__list-item main-nav__list-item--lvl1 lvl1">
-                          <a class="main-nav__list-item-link main-nav__list-item-link--lvl1 lvl1" href="{{urk}}"> {{text}} </a>
+                          <a class="main-nav__list-item-link main-nav__list-item-link--lvl1 lvl1" href="{{url}}"> {{text}} </a>
                         </li>
                       {{/items}}
                     {{/subMenu}}
@@ -152,26 +152,6 @@
                   </div>
                 </div>
               </div>
-
-              {{#_enableSearchX}}
-              <div class="siteheader-module__search">
-                <div class="header-search_wrp">
-                  <div id="headerSearch" class="header-search header-search--wide header-search--show">
-                    <div class="header-search__form_wrp">
-                      <form class="search header-search__form" role="search" id="search">
-                        {{!<i class="bi bi-search"></i>}}
-                        <input class="form-control header-search__form-input" id="search-query" type="search" disabled placeholder="{{__global.search}}" autocomplete="off" aria-label="Search">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="header-search__form-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                          </svg>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {{/_enableSearchX}}
-
               {{/_enableSearch}}
 
               <div class="siteheader-module__buttons">
@@ -227,12 +207,11 @@
           </button>
           {{/_disableToc}}
 
-          {{^_disableBreadcrumb}}
-          <nav id="breadcrumb"></nav>
-          {{/_disableBreadcrumb}}
         </div>
 
         <article data-uid="{{uid}}">
+
+          {{! docfx main navigation bar }}
           {{^_disableNavbar}}
           <div class="docnav">
             <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
@@ -241,10 +220,29 @@
           </div>
           {{/_disableNavbar}}
 
+          {{^_disableBreadcrumb}}
+          <nav id="breadcrumb"></nav>
+          {{/_disableBreadcrumb}}
+
           {{{rawTitle}}}
+
+          {{! START BEGIN DIV: Check if document has updated or applies_to metadata, add a begin div to be able to add spacing for the metadata}}
+          {{#updated}}
+            <div class="document-metadata">
+          {{/updated}}
+          {{^updated}}
+            {{#applies_to}}
+              <div class="document-metadata">
+            {{/applies_to}}
+          {{/updated}}
+          {{! END BEGIN DIV: Check if document has updated or applies_to metadata, add a begin div to be able to add spacing for the metadata}}
+
+          {{! meta updated }}
           {{#updated}}
           <ul class="metadata"><li>{{updated}}</li><li>{{author}}</li></ul>
           {{/updated}}
+
+          {{! meta applies to }}
           {{#applies_to}}
           <div class="applies-to-div"><strong>Applies to: </strong><ul class="applies-to">
             {{#editions}}
@@ -259,6 +257,18 @@
             {{/versions}}
           </ul></div>
           {{/applies_to}}
+
+          {{! START CLOSE DIV: Check if document has updated or applies_to metadata, add a begin div to be able to add spacing for the metadata}}
+          {{#updated}}
+            </div>
+          {{/updated}}
+          {{^updated}}
+            {{#applies_to}}
+              </div>
+            {{/applies_to}}
+          {{/updated}}
+          {{! END CLOSE DIV: Check if document has updated or applies_to metadata, add a begin div to be able to add spacing for the metadata}}
+
           <div id="conceptual-content" class="conceptual-content">
             {{#conceptual}}
               {{{conceptual}}}
