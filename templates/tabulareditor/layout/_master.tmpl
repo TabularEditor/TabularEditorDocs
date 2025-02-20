@@ -89,7 +89,7 @@
 
   {{^redirect_url}}
   <body class="tex2jax_ignore" data-layout="{{_layout}}{{layout}}" data-yaml-mime="{{yamlmime}}" data-bs-spy="scroll" data-bs-target="#affix" data-bs-smooth-scroll="true" data-offset="120" tabindex="0">
-    <header class="global-header_wrp">
+    <header class="global-header_wrp container-xxl">
       <div id="hs_cos_wrapper_global-header-dndarea-module-2" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
         <div class="siteheader-module_wrp">
           <nav class="siteheader-module navbar siteheader-module--194387751113 " id="main-navigation" aria-label="Primary">
@@ -138,8 +138,8 @@
                     <div class="header-search__form_wrp">
                       <form id="search" class="header-search__form" role="search" tabindex="0">
                         <div class="header-search__form_internal-wrp" role="combobox" aria-expanded="false" aria-owns="headerSearchSuggestions">
-                          <input class="header-search__form-input" id="search-query" type="search" disabled placeholder="{{__global.search}}" autocomplete="off" aria-label="Search">
-                            <label id="header-search__form-label" class="header-search__form-label visually-hidden" for="term">Search</label>
+                          <input class="header-search__form-input" id="search-query" type="search" disabled placeholder="{{__global.search}}" autocomplete="off" aria-label="{{__global.search}}">
+                          <label id="header-search__form-label" class="header-search__form-label visually-hidden" for="term">{{__global.search}}</label>
                         </div>
                         <button class="header-search__form-btn" type="submit" tabindex="-1" aria-label="submit search">
                           <svg xmlns="http://www.w3.org/2000/svg" class="header-search__form-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -198,7 +198,7 @@
       {{/_disableToc}}
 
       <div class="content">
-        <div class="actionbar">
+        <div class="actionbar" id="toc-actionbar">
           {{^_disableToc}}
           <button class="btn btn-lg border-0 d-md-none"
               type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas"
@@ -206,7 +206,6 @@
             <i class="bi bi-list"></i>
           </button>
           {{/_disableToc}}
-
         </div>
 
         <article data-uid="{{uid}}">
@@ -311,13 +310,13 @@
       <div class="container global-footer global-partial">
         <div class="row row-number-1">
           <div class="col-12 col-md-6">
-            <h2 class="display-1 heading">Ready to get started?</h2>
+            <h2 class="display-6 heading">Ready to get started?</h2>
           </div>
           <div class="col-12 col-md-6">
             <div class="content-block-top">
               <div class="button-group">
                 {{#__footer.buttons}}
-                  <a href="{{url}}" class="btn-link btn-secondary2 btn-large btn-full-width">
+                  <a href="{{url}}" class="btn-link btn-secondary2 btn-regular">
                     <span>{{text}}</span>
                     <svg width="39" height="38" viewBox="0 0 39 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 1L38 19M38 19L20 37M38 19H1" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                   </a>
@@ -328,7 +327,7 @@
         </div>
 
         <div class="row row-number-2">
-          <div class="col-12 col-md-6 hs-menu-flow-horizontal">
+          <div class="col-12 col-md-8 hs-menu-flow-horizontal">
             <ul role="menu">
               {{#__footer.leftLinks}}
                 <li class="hs-menu-item hs-menu-depth-1" role="none">
@@ -337,14 +336,26 @@
               {{/__footer.leftLinks}}
             </ul>
           </div>
-          <div class="col-12 col-md-6 hs-menu-flow-horizontal">
-            <ul role="menu">
-              {{#__footer.rightLinks}}
-                <li class="hs-menu-item hs-menu-depth-1" role="none">
-                  <a href="{{url}}" role="menuitem" {{#target}}target="{{target}}"{{/target}} {{#rel}}rel="{{rel}}"{{/rel}}>{{text}}</a>
-                </li>
-              {{/__footer.rightLinks}}
-            </ul>
+          <div class="col-12 col-md-4 hs-menu-flow-horizontal">
+            <div class="social-links-module_wrp">
+              <div class="social-links-module social-links-module--194387751116 ">
+                {{#__footer.rightLinks}}
+                  <a href="{{url}}" role="menuitem" {{#target}}target="{{target}}"{{/target}} {{#rel}}rel="{{rel}}"{{/rel}}>
+                    {{#svg}}
+                      <div class="social-links-module__icon">
+                        <span class="g-module-macros-icon icon icon-style icon--regular icon--primary icon--circle  editor-tooltip editor-hs-tooltip" name="{{text}}">
+                          {{{svg}}}
+                        </span>
+                        <span class="visually-hidden">LinkedIn</span>
+                      </div>
+                    {{/svg}}
+                    {{^svg}}
+                      {{text}}
+                    {{/svg}}
+                  </a>
+                {{/__footer.rightLinks}}
+              </div>
+            </div>
           </div>
         </div>
       </div>
