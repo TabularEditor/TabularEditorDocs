@@ -46,6 +46,10 @@ Lastly, a lightbulb or screwdriver icon is shown in the editor's left margin whe
 
 ![Code Actions Margin](~/images/code-action-margin.png)
 
+When you hover the mouse cursor over an action in the Code Actions menu, a tooltip will show more information about the action. Click the "Learn more" link, to view the knowledge-base (KB) article for the action.
+
+![Code Action Tooltip](~/images/code-action-tooltip.png)]
+
 ## Code Action indicators
 
 **Improvements** and **Readability** Code Actions will also be indicated visually in the code editor. This lets you quickly determine which parts of your code can be improved or made more readable.
