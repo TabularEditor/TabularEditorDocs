@@ -23,18 +23,18 @@ Editing objects through a DAX script is slightly different than editing through 
 
 You can undo/redo changes made by a DAX script using the usual keyboard shortcuts (Ctrl+Z / Ctrl+Y).
 
-### Multiple DAX scripts
+## Multiple DAX scripts
 
 You can create as many DAX scripts as you want, if you prefer to have multiple document windows open instead of a single one. This way, you can use the usual IDE features to place the documents side by side, on different monitors, etc. Be aware, that the code within DAX script windows is not updated automatically when changes are made to the object expression/properties in the TOM. So in other words, if you have two or more DAX scripts containing the definition of the same object(s), then the last script to be applied (F5), will always override any changes made through other DAX scripts, or directly through the **Properties View**.
 
-### Working with DAX script files
+## Working with DAX script files
 
 DAX scripts can be saved as text files, using the `.te3daxs` file extension. To save a DAX script as a file, simply use the **File > Save** (Ctrl+S) option. To open a DAX script from a text file, use the **File > Open > File...** (Ctrl+O) option.
 
 > [!NOTE]
 > DAX scripts are not model specific, but since DAX expressions may point to measures, columns and tables defined in the model, there are no guarantees that any DAX script can be applied to any model. DAX scripts are mostly useful for working with several DAX objects within a single document, in the context of a specific data model.
 
-### DAX script editor
+## DAX script editor
 
 The DAX script editor has all the capabilities of the DAX editor used elsewhere in Tabular Editor 3. Specifically, auto-complete, auto-formatting, calltips, etc.
 
@@ -42,13 +42,13 @@ In addition, to easily manage large DAX scripts, two dropdowns are displayed at 
 
 ![Dax Script Navigation](~/images/dax-script-navigation.png)
 
-### Define measures
+## Define measures
 
 If you want to include the definition of a measure that is referenced in the script, but not already defined in the script, you can do so by right-clicking on a measure reference, and choose the "Define Measure" or "Define Measure with dependencies" option.
 
 ![Define Measure With Deps](~/images/define-measure-with-deps.png)
 
-### Shortcuts
+## Shortcuts
 
 To apply the script to the model, use the following shortcuts:
 
@@ -57,7 +57,7 @@ To apply the script to the model, use the following shortcuts:
 - **F8**: Apply the currently selected part of the script to the local model metadata
 - **Shift+F8**: Apply the currently selected part of the script to the local model metadata, then save the model metadata back to the source
 
-### DAX objects supported
+## DAX objects supported
 
 Tabular Editor 3 supports editing the following types of objects using a DAX script:
 
@@ -66,7 +66,7 @@ Tabular Editor 3 supports editing the following types of objects using a DAX scr
 - Calculated tables
 - Calculation groups (including calculation items)
 
-## DAX script syntax
+# DAX script syntax
 
 The syntax for DAX scripts is the following:
 
@@ -131,7 +131,7 @@ CALCULATIONGROUP 'Table name'[Column name]
 > [!TIP]
 > Users of TMDL will undoubtedly have noticed that some similarities exist between the syntax of DAX scripts and the syntax of TMDL. In fact, TMDL was inspired by DAX scripts. However, to keep things simple, DAX scripts intentionally supports only objects that have one or more DAX expressions associated with them. Moreover, the DAX script syntax is designed to be compatible with the `DEFINE` section of a DAX query (provided the DAX script does not specify any object properties). TMDL, on the other hand, is used to define the entire model metadata, and is not limited to DAX objects. However, blocks of TMDL code cannot be readily used in a DAX query as the syntax for defining object names in TMDL, is not valid in DAX.
 
-### Example 1: Measure
+## Example 1: Measure
 
 As an example, the script below defines the `[Internet Total Sales]` measure on the `'Internet Sales'` table. In addition to the DAX expression of the measure, the script also includes the measure description and format string.
 
@@ -144,7 +144,7 @@ MEASURE 'Internet Sales'[Internet Total Sales] = SUM('Internet Sales'[Sales Amou
     FormatString = "\$#,0.00;(\$#,0.00);\$#,0.00"
 ```
 
-### Example 2: Measure with status and target KPI
+## Example 2: Measure with status and target KPI
 
 The DAX script below defines the `[Internet Current Quarter Sales Performance]` measure, which includes a KPI that has a status and a target expression. The status KPI uses the "Shapes" graphic.
 
@@ -169,7 +169,7 @@ MEASURE 'Internet Sales'[Internet Current Quarter Sales Performance] =
     , KpiTargetExpression = 1.1
 ```
 
-### Example 3: Calculation group
+## Example 3: Calculation group
 
 The DAX script below defines the `'Time Intelligence'` calculation group with the `[Period]` column. The calculation group contains 6 calculation items that performs various time calculations. Notice how the `"YoY %"` item applies a different format string.
 
@@ -209,7 +209,7 @@ CALCULATIONGROUP 'Time Intelligence'[Period]
         Ordinal = 5
 ```
 
-## Unspecified or empty expressions / properties
+# Unspecified or empty expressions / properties
 
 As of Tabular Editor 3.16.0, it is possible to specify empty expressions and property values in DAX scripts, or omit object expressions entirely.
 
