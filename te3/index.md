@@ -55,9 +55,17 @@ In the dialog, select "Change license key". Note that this option is only availa
 
 #### Registry details
 
-Tabular Editor 3 uses the registry database for storing activation details. An alternative to using the "About Tabular Editor" dialog for changing the license key as shown above, is to enter the registry database and delete all values from within the `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` registry key.
+Tabular Editor 3 uses the registry database for storing activation details. 
 
-A system administrator may assign Tabular Editor 3 licenses by specifying the LicenseKey and User values under each user's `SOFTWARE\Kapacity\Tabular Editor 3` registry key.
+To view the current license key assigned on the machine, run the following command in the Windows Command Prompt (Start > Run > cmd.exe):
+
+```cmd
+REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
+```
+
+You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`, to view and modify the LicenseKey and User values.
+
+A system administrator may also assign Tabular Editor 3 licenses proactively on a machine, by specifying the LicenseKey and User values under each user's `SOFTWARE\Kapacity\Tabular Editor 3` registry key.
 
 ![Registry Editor](~/images/registry-editor.png)
 
@@ -71,7 +79,13 @@ If for some reason you are unable to change the license key using the procedure 
 4. Delete all values within this key
 5. Close the Registry Editor and restart Tabular Editor 3
 
-Tabular Editor 3 should now prompt you for a license key, similar to when the tool was first installed on the machine.
+Alternatively, run the following command in a Windows Command Prompt (Start > Run > cmd.exe)::
+
+```cmd
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
+```
+
+The next time you launch Tabular Editor 3, you will then be prompted for a license key, similar to when the tool was first installed on the machine.
 
 ## Next steps
 
