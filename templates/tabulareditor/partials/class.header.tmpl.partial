@@ -198,7 +198,7 @@
 </dl>
 {{/extensionMethods.0}}
 
-{{#isEnum}}
+{{#isEnumFakeToStoreOriginalCode}}
 {{#children}}
 <h2 id="{{id}}">{{>partials/classSubtitle}}</h2>
 <dl class="parameters">
@@ -208,6 +208,29 @@
   {{^remarks}}<dd>{{{summary}}}</dd>{{/remarks}}
 {{/children}}
 </dl>
+{{/children}}
+{{/isEnumFakeToStoreOriginalCode}}
+
+{{#isEnum}}
+{{#children}}
+<h2 id="{{id}}">{{>partials/classSubtitle}}</h2>
+<table class="table table-bordered table-condensed">
+  <thead>
+    <tr>
+      <th>{{__global.name}}</th>
+      <th>{{__global.description}}</th>
+    </tr>
+  <thead>
+  <tbody>
+  {{#children}}
+    <tr>
+      <td id="{{id}}">{{name.0.value}}</td>
+      {{#remarks}}<td>{{{summary}}}{{{remarks}}}</td>{{/remarks}}
+      {{^remarks}}<td>{{{summary}}}</td>{{/remarks}}
+    </tr>
+  {{/children}}
+  </tbody>
+</table>
 {{/children}}
 {{/isEnum}}
 

@@ -32,7 +32,8 @@
             "_appTitle": "Tabular Editor Documentation",
             "_enableSearch": true,
             "_appFaviconPath": "images/te3logo.png",
-            "_enableNewTab": true
+            "_enableNewTab": true,
+            "_disableNavbar": true
         },
         "markdownEngineName": "markdig",
         "dest": "_site",

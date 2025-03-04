@@ -143,4 +143,6 @@ rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../Tabular
 - **`tabulareditor/src/local.scss`**: Adds additional footer HubSpot inline style, adds and overrides additional styles.
 - **`tabulareditor/src/nav.scss`**: Small adjustments to `#navbar` style.
 - **`tabulareditor/src/nav.ts`**: Changes to render the original navbar as buttons and exclude any submenu.
+  - If article contains multiple H1 tags: H1 and H2 tags are included to "In this article" menu and H1 as "root" level,
+    otherwise default behaviour is used, H2 and H3 tags are included to "In this article" menu and H2 as "root" level.
 - **`tabulareditor/src/toc.ts`**: Small addition to exclude TOC on first page.
