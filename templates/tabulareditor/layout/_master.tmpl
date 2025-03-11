@@ -83,16 +83,13 @@
           font-display: swap;
           src: url("{{_rel}}public/googlefonts/Albert_Sans/regular.woff2") format("woff2"), url("{{_rel}}public/googlefonts/Albert_Sans/regular.woff") format("woff");
         }
-        html {
-          overflow-y: scroll !important; 
-        }
       </style>
     {{/redirect_url}}
   </head>
 
   {{^redirect_url}}
-  <body class="tex2jax_ignore" data-layout="{{_layout}}{{layout}}" data-yaml-mime="{{yamlmime}}" data-bs-spy="scroll" data-bs-target="#affix" data-bs-smooth-scroll="true" data-offset="120" tabindex="0">
-    <header class="global-header_wrp">
+  <body id="main-body" class="tex2jax_ignore" data-layout="{{_layout}}{{layout}}" data-yaml-mime="{{yamlmime}}" tabindex="0">
+    <header class="global-header_wrp sticky-top">
       <div id="hs_cos_wrapper_global-header-dndarea-module-2" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
         <div class="siteheader-module_wrp">
           <nav class="siteheader-module navbar siteheader-module--194387751113 " id="main-navigation" aria-label="Primary">
@@ -211,7 +208,7 @@
           {{/_disableToc}}
         </div>
 
-        <article data-uid="{{uid}}">
+        <article id="article" data-uid="{{uid}}">
 
           {{! docfx main navigation bar }}
           {{^_disableNavbar}}
