@@ -14,7 +14,7 @@ Ideally, each model developer should use their own workspace database to avoid c
 
 When you create a new model in Tabular Editor, the "Use workspace database" option is checked by default:
 
-![New Model](~/assets/images/new-model.png)
+![New Model](~/content/assets/images/new-model.png)
 
 Leaving this checked, you will be prompted to connect to an instance of Analysis Services after hitting "OK". This is the instance of Analysis Services to which your workspace database will be deployed.
 
@@ -23,13 +23,13 @@ Leaving this checked, you will be prompted to connect to an instance of Analysis
 
 After entering the Analysis Services server details and (optional) credentials, you are shown a list of all databases currently reciding on the server (or for a Power BI workspace, the list of datasets deployed to the workspace):
 
-![Select Workspace Database](~/assets/images/select-workspace-database.png)
+![Select Workspace Database](~/content/assets/images/select-workspace-database.png)
 
 Tabular Editor suggests a new unique name for your workspace database, based on your Windows user name and the current date and time, but you are free to change this to a more meaningful name.
 
 After hitting OK, your new model is created and the workspace database is deployed and connected. At this point, hit save (Ctrl+S) to save your model as a Model.bim file. You may also choose the File > Save to Folder... menu item if you intend to store the model metadata in a version control system such as Git.
 
-![Save New To Folder](~/assets/images/save-new-to-folder.png)
+![Save New To Folder](~/content/assets/images/save-new-to-folder.png)
 
 At this point, you are ready to define data sources and add new tables to your model. Every time you subsequently hit Save (Ctrl+S), the workspace database is updated with the changes, and the file/folder you chose previously will be updated as well.
 
@@ -39,7 +39,7 @@ Information about the workspace database tied to this model is stored in a Tabul
 
 If you open an existing Model.bim or Database.json file, Tabular Editor 3 will prompt you whether you want to initiate a workspace database for that file.
 
-![Connect To Workspace database](~/assets/images/connect-to-wsdb.png)
+![Connect To Workspace database](~/content/assets/images/connect-to-wsdb.png)
 
 Your options are:
 

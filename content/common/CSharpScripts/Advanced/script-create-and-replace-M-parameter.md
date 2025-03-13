@@ -188,11 +188,11 @@ It will then search all M partitions for the default value, replacing them with 
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/Cscripts/script-create-m-parameter.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-m-parameter.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> The pop-up dialog that appears when running the script, prompting for the parameter name and value.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Confirmation dialog illustrating that the parameter has been created, and the corresponding value substring has been replaced in all M Partition expressions. For parameters of other types, adjust the C# code, appropriately.</figcaption>
 </figure>

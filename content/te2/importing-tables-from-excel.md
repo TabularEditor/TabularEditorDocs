@@ -20,7 +20,7 @@ Tabular Editor 2.x is a 32 bit application, and most people usually have the 64 
   ```
 
 4. Confirm the installation by looking in the ODBC Data Sources (32-bit) configuration (Windows start button, search for "ODBC", platform should say "32/64 bit", as in the screenshot below):
-  ![Excel Odbc 32 64](../../assets/images/excel-odbc-32-64.png)
+  ![Excel Odbc 32 64](~/content/assets/images/excel-odbc-32-64.png)
 
 # Setting up an ODBC data source
 
@@ -29,18 +29,18 @@ After making sure you have the 32-bit ODBC Excel driver installed, as described 
 1. In Tabular Editor, right-click on the model, choose "Import tables…", click "Next"
 2. In the Connection Properties dialog, click "Change…". Select the "Microsoft ODBC Data Source" option and click "OK".
 3. Select "Use connection string" and hit "Build…". Choose "Excel Files" and hit "OK".
-  ![Odbc Connection Properties Excel](../../assets/images/odbc-connection-properties-excel.png)
+  ![Odbc Connection Properties Excel](~/content/assets/images/odbc-connection-properties-excel.png)
 4. Locate the Excel file you want to load tables from and hit "OK". That should generate a connection string that looks something like this:
   ```connectionstring
   Dsn=Excel Files;dbq=C:\Users\DanielOtykier\Documents\A Beer Dataset Calculation.xlsx;defaultdir=C:\Users\DanielOtykier\Documents;driverid=1046;maxbuffersize=2048;pagetimeout=5
   ```
 5. After hitting "OK", Tabular Editor should display the list of worksheets and data areas in the Excel file. Unfortunately, the Import Table Wizard can’t preview the data currently, because it generates an invalid SQL statement:
-  ![Import Tables Excel](../../assets/images/import-tables-excel.png)
+  ![Import Tables Excel](~/content/assets/images/import-tables-excel.png)
 6. You can, however, still put a checkmark on the table you want to import. Hit "Import" when done, ignore the error message.
 7. On the newly added table, locate the partition and modify the SQL to remove the empty bracket and the dot in front of the worksheet name. Apply the change (Hit F5).
-  ![Fix Partition Expressions Excel](../../assets/images/fix-partition-expressions-excel.png)
+  ![Fix Partition Expressions Excel](~/content/assets/images/fix-partition-expressions-excel.png)
 8. Then, right-click on the partition and choose "Refresh Table Metadata…". Tabular Editor now reads the column metadata from the Excel file through the ODBC driver:
-  ![Refresh Metadata Excel](../../assets/images/refresh-metadata-excel.png)
+  ![Refresh Metadata Excel](~/content/assets/images/refresh-metadata-excel.png)
 9. (Optional) If you don’t want to use ODBC for refreshing data into the table, you need to swap out the partition to use an M-based expression that loads the same worksheet data. To do this, add a new Power Query partition to the table (right-click on "Partitions" then choose "New Partition (Power Query")). Delete the legacy partition. Then, set the M expression of the new partition to the following:
   ```M
   let

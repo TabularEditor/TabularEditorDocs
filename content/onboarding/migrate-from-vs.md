@@ -47,13 +47,13 @@ tabulareditor.exe database.json -B model.bim
 
 When starting a new Analysis Services (Tabular) project in Visual Studio, you are prompted to choose if you want to use Visual Studio's Integrated workspace server or provide your own instance of Analysis Services. In addition, you must decide the compatibility level of the tabular model (see screenshot below).
 
-![VS New Project](~/assets/images/vs-new-project.png)
+![VS New Project](~/content/assets/images/vs-new-project.png)
 
 In contrast, when creating a new model in Tabular Editor, using a workspace server is completely optional (but recommended - see [workspace mode](xref:workspace-mode)).
 
 Below is the dialog box shown when creating a new model in Tabular Editor 3:
 
-![New model dialog](~/assets/images/new-model.png)
+![New model dialog](~/content/assets/images/new-model.png)
 
 If you enable the **Use workspace database** option, Tabular Editor will prompt you for an Analysis Services instance and database name that will be used as as workspace database while working on the model. If you do not enable this option, you will be able to create and work on your model in "offline" mode, which still allows you to add tables, relationships, author DAX expressions, etc. However, you will have to deploy your offline model to an instance of Analysis Services before you can refresh, preview and query the data in the model.
 
@@ -77,17 +77,17 @@ In addition, Tabular Editor lets you choose compatibility levels suitable for Po
 
 When creating an Analysis Services (Tabular) project in Visual Studio, a number of files are created in the project folder next to the Model.bim file. These files contain project- and user-specific information which is not related to the Tabular Object Model (TOM). The screenshot below shows the files resulting from creating a new tabular project in Visual Studio.
 
-![VS Project File Structure](~/assets/images/vs-file-structure.png)
+![VS Project File Structure](~/content/assets/images/vs-file-structure.png)
 
 When migrating to Tabular Editor, you only need to bring the Model.bim file, as the concept of "project" does not exist here. Instead, Tabular Editor simply loads the model metadata directly from the Model.bim file. In some cases, a file called the [Tabular Model User Options (tmuo) file](xref:user-options) is created next to the Model.bim file. This file is used by Tabular Editor to store user- and model specific settings, such as whether or not to use a workspace database, (encrypted) user credentials for data sources, etc.
 
 To keep the "project" directory clean, we therefore recommend to copy the Model.bim file created by Visual Studio into a new directory, before loading the file in Tabular Editor.
 
-![Te File Structure](~/assets/images/te-file-structure.png)
+![Te File Structure](~/content/assets/images/te-file-structure.png)
 
 If you want to use the [Save-to-folder](xref:parallel-development#what-is-save-to-folder) feature, which is recommended for parallel development and integration with version control systems, now is the time to save the model as a folder from within Tabular Editor (**File > Save To Folder...**).
 
-![Te Folder Structure](~/assets/images/te-folder-structure.png)
+![Te Folder Structure](~/content/assets/images/te-folder-structure.png)
 
 ## Version control
 
@@ -116,11 +116,11 @@ This section lists the most important differences between the user interfaces of
 
 In Visual Studio, a hierarchical overview of the model metadata can be found in the **Tabular Model Explorer**. 
 
-![Vs Tom Explorer](~/assets/images/vs-tom-explorer.png)
+![Vs Tom Explorer](~/content/assets/images/vs-tom-explorer.png)
 
 In Tabular Editor, this is called the **TOM Explorer** view. In Tabular Editor, all data modeling generally revolves around locating the relevant objects in the TOM Explorer and then performing certain actions by invoking the right-click context menu, by navigating to the main menu, or by editing object properties in the **Properties** view. In Tabular Editor, you can use intuitive operations such as multi-select, drag-drop, copy-paste and undo-redo for all data modeling operations.
 
-![Vs Tom Explorer](~/assets/images/tom-explorer.png)
+![Vs Tom Explorer](~/content/assets/images/tom-explorer.png)
 
 The TOM Explorer in Tabular Editor also has shortcut options for showing/hiding certain types of objects, hidden objects, display folders, and for quickly searching and filtering the metadata hierarchy.
 
@@ -130,7 +130,7 @@ See @tom-explorer-view for more information.
 
 Both Visual Studio and Tabular Editor include a property grid that allows you to edit most object properties of whatever object is currently selected. Below is a comparison between the Visual Studio property grid (left) and the Tabular Editor property grid (right) for the same measure:
 
-![Property grid in Visual Studio and Tabular Editor](~/assets/images/property-grid-vs-te.png)
+![Property grid in Visual Studio and Tabular Editor](~/content/assets/images/property-grid-vs-te.png)
 
 The two generally work the same way, except that Tabular Editor uses property names that are closely aligned with the TOM object properties. Tabular Editor also adds a number of properties that are not found in the TOM, to make certain modeling operations easier. For example, by expanding the **Translated Names** property, you can compare and edit object name translations across all model cultures.
 
@@ -146,11 +146,11 @@ The DAX code editor in Tabular Editor 3 is one of the main reasons for using the
 
 In Visual Studio, DAX syntax errors are shown as warnings within the **Error List** (see screenshot below). In addition, measures that have errors are indicated with a warning triangle in the measures grid.
 
-![Vs Error List](~/assets/images/vs-error-list.png)
+![Vs Error List](~/content/assets/images/vs-error-list.png)
 
 In Tabular Editor, we use the Messages View to consolidate all error, warning and informational messages posted by different sources during model development. Specifically for DAX syntax errors, these are shown as errors in the Messages View, and any measures that have an error are indicated with a red dot in the TOM Explorer (see screenshot below).
 
-![Te Messages](~/assets/images/te-messages.png)
+![Te Messages](~/content/assets/images/te-messages.png)
 
 In the screenshot above, notice how there are three different message-posting sources:
 
@@ -164,7 +164,7 @@ In Visual Studio, tables and their content are displayed in a tabbed view once y
 
 Also, you can freely rearrange the documents, to view the content of several tables at once (see screenshot below).
 
-![Te3 Table Preview](~/assets/images/te3-table-preview.png)
+![Te3 Table Preview](~/content/assets/images/te3-table-preview.png)
 
 ### Importing tables
 
@@ -191,7 +191,7 @@ Tabular Editor 3 also includes a diagram tool, that can be accessed using **File
 
 Once tables have been added to the diagram, you can create relationship between columns simply by dragging from one column to another.
 
-![Te3 Diagram View](../../assets/images/te3-diagram-view.png)
+![Te3 Diagram View](~/content/assets/images/te3-diagram-view.png)
 
 > [!NOTE]
 > For performance reasons, the diagram tool does not inspect the data of the model, nor does it validate the uniqueness or directionality of any relationships you create. It is up to you to ensure that relationships are created correctly. If a relationship has been incorrectly defined, Analysis Services will return an error state which is shown in the **Messages View**.

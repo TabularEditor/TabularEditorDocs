@@ -59,6 +59,6 @@ The columns displayed are:
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/script-output-things-example.png" alt="Example of the dialog pop-up that displays the grid." style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/script-output-things-example.png" alt="Example of the dialog pop-up that displays the grid." style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Example of the dialog pop-up that displays the grid. Both Tabular Editor 2 and Tabular Editor 3 will let you sort the grid columns as well as copy the output to the clipboard. However, Tabular Editor 3 also has additional features for grouping, filtering, and searching within the grid.</figcaption>
 </figure>

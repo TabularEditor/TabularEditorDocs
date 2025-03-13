@@ -36,19 +36,19 @@ Code Actions are separated into three different categories:
 
 A new command and corresponding toolbar/menu buttons have been added, **Show Code Actions**, with a default keyboard shortcut of `Ctrl+.`. This command will show the applicable Code Actions at the current cursor position:
 
-![Code Action Invoke Menu](~/assets/images/code-action-invoke-menu.png)
+![Code Action Invoke Menu](~/content/assets/images/code-action-invoke-menu.png)
 
 You can also find the applicable Code Actions through the **Refactor** submenu of the right-click context menu:
 
-![Code Action Refactor Submenu](~/assets/images/code-action-refactor-submenu.png)
+![Code Action Refactor Submenu](~/content/assets/images/code-action-refactor-submenu.png)
 
 Lastly, a lightbulb or screwdriver icon is shown in the editor's left margin when the cursor is placed on a code segment with applicable actions. Clicking on the icon will also bring up the Code Actions menu:
 
-![Code Actions Margin](~/assets/images/code-action-margin.png)
+![Code Actions Margin](~/content/assets/images/code-action-margin.png)
 
 When you hover the mouse cursor over an action in the Code Actions menu, a tooltip will show more information about the action. Click the "Learn more" link, to view the knowledge-base (KB) article for the action.
 
-![Code Action Tooltip](~/assets/images/code-action-tooltip.png)]
+![Code Action Tooltip](~/content/assets/images/code-action-tooltip.png)]
 
 ## Code Action indicators
 
@@ -64,7 +64,7 @@ Some Code Actions can be applied to all occurrences within the current DAX expre
 
 In the screenshot below, for example, the **Prefix variable with '_'** action can be applied to all occurrences (i.e., all variables) in the document, not just the `totalSales` variable under the cursor:
 
-![Code Action All Occurrences](~/assets/images/code-action-all-occurrences.png)
+![Code Action All Occurrences](~/content/assets/images/code-action-all-occurrences.png)
 
 ## List of Code Actions
 
@@ -129,5 +129,5 @@ You can customize the behavior of Code Actions through the **Tools > Preferences
 
 We plan to add more configuration options to this screen in future versions, such as an option to toggle individual Code Actions on and off. Stay tuned!
 
-![Code Actions Preferences](~/assets/images/code-actions-preferences.png)
+![Code Actions Preferences](~/content/assets/images/code-actions-preferences.png)
 

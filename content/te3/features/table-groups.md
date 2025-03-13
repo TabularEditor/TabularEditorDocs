@@ -14,7 +14,7 @@ applies_to:
 
 Table Groups is a new feature, available in Tabular Editor 3 starting from [version 3.5.0](xref:release-3-5-0). The feature lets you quickly organise tables into folders, making it easier than ever to manage and navigate large, complex models, in Tabular Editor 3's [TOM Explorer](xref:tom-explorer-view).
 
-![Table groups](~/assets/images/user-interface/table-groups.png)
+![Table groups](~/content/assets/images/user-interface/table-groups.png)
 
 You can set up Table Groups either by right-clicking on a table and choosing the **Create > Table group** menu option, or by specifying a name for the Table Group in the **Properties View**, while selecting one or more tables.
 
@@ -71,7 +71,7 @@ foreach(var table in Model.Tables)
 
 If you prefer to always see the full, ungrouped list of tables in the TOM Explorer, but you're collaborating with others on a model containing table group annotations, you can still disable table groups altogether, for your Tabular Editor 3 installation. This is done through the **Tools > Preferences** dialog. Navigate to the **TOM Explorer** page, then uncheck **Use table groups** under **Display and filtering**:
 
-![Table Groups Disable](../../../assets/images/table-groups-disable.png)
+![Table Groups Disable](~/content/assets/images/table-groups-disable.png)
 
 > [!NOTE]
 > Even though you have disabled table groups as described above, tables in your model may still have the `TabularEditor_TableGroup` annotation assigned. If you wish to clear all such annotations from the model, you can use the following C# script:

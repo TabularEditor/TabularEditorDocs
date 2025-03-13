@@ -25,7 +25,7 @@ The Best Practice Analyzer has access to the full metadata of the model, and can
 
 In order to add, remove or modify rules applying to your model, use the "Tools > Manage BPA Rules..." menu option.
 
-![Bpa Manager](~/assets/images/bpa-manager.png)
+![Bpa Manager](~/content/assets/images/bpa-manager.png)
 
 This UI contains two lists: The top list represents the **collections** of rules that are currently loaded. Selecting a collection in this list, will display all the rules that are defined within this collection in the bottom list. When a model is loaded, you will see the following three rule collections:
 
@@ -37,14 +37,14 @@ If the same rule (by ID) is located in more than one collection, the order of pr
 
 At the top of the list, you'll see a special collection called **(Effective rules)**. Selecting this collection will show you the list of rules that actually apply to the currently loaded model, respecting the precedence of rules with identical ID's, as mentioned above. The lower list will indicate which collection a rule belongs to. Also, you will notice that a rule will have its name striked out, if a rule with a similar ID exists in a collection of higher precedence:
 
-![Rule Overrides](~/assets/images/rule-overrides.png)
+![Rule Overrides](~/content/assets/images/rule-overrides.png)
 
 ## Adding additional collections
 Rule collections can be added to a specific model. If you have a rules file located on a network share, you can include that file as a rule collection in the current model. If you have write access to the location of the file, you'll also be able to add/modify/remove rules from the file. Rule collections that are added this way take precedence over rules that are defined within the model. If you add multiple such collections, you can shift them up and down to control their mutual precedence.
 
 Click the "Add..." button to add a new rule collection to the model. This provides the following options:
 
-![Add Best Practice rule collection](~/assets/images/add-rule-file.png)
+![Add Best Practice rule collection](~/content/assets/images/add-rule-file.png)
 
 * **Create new Rule File**: This will create a new, empty, .json file at a specified location, which you can subsequently add rules to. When choosing the file, notice that there is an option for using relative file paths. This is useful when you want to store the rule file in the same code repository as the current model. However, please be aware that a relative rule file reference only works, when the model has been loaded from disk (since there is no working directory when loading a model from an instance of Analysis Services).
 * **Include local Rule File**: Use this option if you already have a .json file containing rules, that you want to include in your model. Again, you have the option of using relative file paths, which may be beneficial if the file is located close to the model metadata. If the file is located on a network share (or generally, on a drive different than where the currently loaded model metadata resides), you can only include it using an absolute path.
@@ -57,7 +57,7 @@ The lower part of the screen will let you add, edit, clone and delete rules with
 
 To add a new rule to a collection, click on the **New rule...** button. This brings up the Best Practice Rule editor (see screenshot below).
 
-![Bpa Rule Editor](~/assets/images/bpa-rule-editor.png)
+![Bpa Rule Editor](~/content/assets/images/bpa-rule-editor.png)
 
 When creating a new rule, you must specify the following details:
 
@@ -82,11 +82,11 @@ When a rule is saved to a rule collection on disk, all of the above properties a
 
 Tabular Editor displays the best practice rule violations within the **Best Practice Analyzer view**. You can also see the number of rule violations in the status bar at the bottom of the main window. To bring the view into focus, use the **View > Best Practice Analyzer** menu option or blick on the "# BP issues" button in the status bar.
 
-![Best Practice Analyzer View](~/assets/images/best-practice-analyzer-view.png)
+![Best Practice Analyzer View](~/content/assets/images/best-practice-analyzer-view.png)
 
 The **Best Practice Analyzer view** shows a list of all rules that have objects in violation. Below each rule is a list of the violating objects. You can double-click on an object in the list, to navigate to that object in the **TOM Explorer**.
 
-![Item options](~/assets/images/bpa-options.png)
+![Item options](~/content/assets/images/bpa-options.png)
 
 When right-clicking on an object, you are presented with a number of options as shown above. These are:
 

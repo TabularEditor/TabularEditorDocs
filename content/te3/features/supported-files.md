@@ -13,7 +13,7 @@ applies_to:
 
 Tabular Editor 3 uses a number of different file formats and document types, some of which are not used by Analysis Services or Power BI. This article provides an overview and a description of each of these file types.
 
-![Supported File Types](~/assets/images/file-types/te3-supported-file-types.png)
+![Supported File Types](~/content/assets/images/file-types/te3-supported-file-types.png)
 
 Example files are available for each several file type, based on the [learn.tabulareditor.com](https://tabulareditor.com/learn) course 2 Business Case.
 
@@ -32,7 +32,7 @@ It's the original format for a semantic model that Microsoft supports.
 However, it has a large drawback: as it's a single large file, it's difficult to track changes and use good team development practices such as git source control.
 
 #### .bim file in a folder
-![Supported File Types BIM](~/assets/images/file-types/te3-supported-file-bim.png)
+![Supported File Types BIM](~/content/assets/images/file-types/te3-supported-file-bim.png)
 
 [Download example .bim file ](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/bim-file-example.bim)
 
@@ -78,7 +78,7 @@ There is full compatibility between Tabular Editor 2 and 3 with regards to the t
 In order to save a semantic model to JSON you must use the 'Save to Folder' option when saving the first time. Subsequent saves to a model loaded from a JSON structured model maintains the setting. it's always possible to convert a model that is in JSON to a .bim file using 'File > Save As'
 
 
-![Supported File Types JSON](~/assets/images/file-types/te3-supported-file-json.png)
+![Supported File Types JSON](~/content/assets/images/file-types/te3-supported-file-json.png)
 
 1. The overall model has a database json and each TOM headline has its own folder
 2. In tables, each table exist in its own folder
@@ -89,7 +89,7 @@ The depth of which json objects that will be created are handled by the serializ
 
 A single JSON file for a measure contains all the properties of that measure:
  
-![Supported File Types JSON File](~/assets/images/file-types/te3-supported-file-json-measure.png)
+![Supported File Types JSON File](~/content/assets/images/file-types/te3-supported-file-json-measure.png)
 
 
 For more information on Save to Folder and serialization settings please refer to: [Save to Folder](xref:save-to-folder)
@@ -106,7 +106,7 @@ TMDL is designed to support dataset source control, enabling users to track chan
 > [!Note]
 > TMDL is in preview, which means that it's not fully stable and may have some limitations or issues. 
 
-![Supported File Types TMDL](~/assets/images/file-types/te3-supported-file-tmdl.png)
+![Supported File Types TMDL](~/content/assets/images/file-types/te3-supported-file-tmdl.png)
 
 1. The overall serialization is on the top object level from the TOM
 2. Each table is a single file
@@ -174,7 +174,7 @@ You can use this file to analyze and optimize your model performance, without ex
 
 Unlike other supporting file types creating a .vpax file is done within the Vertipaq Analyzer window using the 'Import' and 'Export' buttons. 
 
-![VPAX](~/assets/images/file-types/te3-supported-file-vpax.png)
+![VPAX](~/content/assets/images/file-types/te3-supported-file-vpax.png)
 
 [Download example VPAX file](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/vpaq-example.vpax)
 
@@ -187,7 +187,7 @@ If you need to hand off the VPAX file to a 3rd party, such as a consultant or a 
 
 An obfuscated VPAX file uses the .ovpax file extension.
 
-![Export obfuscated VPAX](~/assets/images/obfuscated-vpax.png)
+![Export obfuscated VPAX](~/content/assets/images/obfuscated-vpax.png)
 
 For more documentation on Vertipaq Analyzer please see: [sqlbi Vertipaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer) and [sqlbi Docs: Vertipaq Analyzer](https://docs.sqlbi.com/vertipaq-analyzer/)
 

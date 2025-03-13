@@ -17,7 +17,7 @@ The Messages view in Tabular Editor 3 is a tool window that displays various typ
 > You can double-click on a message to jump to the source of the error in the model tree or script editor.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/user-interface/messages-view.png" alt="Message View" style="width: 500px;"/>
+  <img class="noscale" src="~/content/assets/images/user-interface/messages-view.png" alt="Message View" style="width: 500px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Messages window in Tabular Editor. Provides an overview of all warnings and errors in your dataset </figcaption>
 </figure>
 

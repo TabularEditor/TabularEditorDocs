@@ -31,7 +31,7 @@ Info("Hello world!");
 
 Hit F5 to run the code.
 
-![Your very first script](~/assets/images/first-script.png)
+![Your very first script](~/content/assets/images/first-script.png)
 
 If you made a mistake while typing the code, any syntax errors will be shown in the **Messages view**.
 
@@ -42,7 +42,7 @@ If you made a mistake while typing the code, any syntax errors will be shown in 
 
 While a C# script is in focus, you can start the script recorder in Tabular Editor by using the **C# Script > Record script** menu option. While the script is recording, any change you make to your model metadata will cause additional lines of code to be added to the script. Note that you cannot edit the script manually until you stop the recording.
 
-![Csharp Script Recorder](~/assets/images/csharp-script-recorder.png)
+![Csharp Script Recorder](~/content/assets/images/csharp-script-recorder.png)
 
 # Accessing model metadata
 
@@ -72,7 +72,7 @@ Line 2 in the script sets the description of the measure, based on a hardcoded s
 
 Tabular Editor can auto-generate the code that references a specific object, by dragging and dropping the object from the TOM Explorer into the C# script view.
 
-![Generate an object reference by dragging](~/assets/images/generate-csharp-code.gif)
+![Generate an object reference by dragging](~/content/assets/images/generate-csharp-code.gif)
 
 Most TOM objects (tables, columns, measures, etc.) in Tabular Editor, exposes the same set of properties that are available when using the AMO/TOM client libraries directly. For this reason, you can refer to [Microsoft's AMO/TOM documentation](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet), to learn which properties are available. For example, [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) is the documentation for available measure properties.
 
@@ -114,7 +114,7 @@ Scripts that you use often can be saved as reusabe macros, which are always avai
 
 To save a script as a macro, use the **C# Script > Save as Macro...** option.
 
-![Save New Macro](~/assets/images/save-new-macro.png)
+![Save New Macro](~/content/assets/images/save-new-macro.png)
 
 Provide a name for your macro. You can use backslashes to organize macros into folders, i.e. a name such as "My Macros\Test" will create a "My Macros" submenu in the context menu of the TOM Explorer, and within this submenu there will be a "Test" menu option that invokes the script.
 

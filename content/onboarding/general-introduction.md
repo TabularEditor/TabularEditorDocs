@@ -21,7 +21,7 @@ A data model is made up by a number of tables. Each table has one or more column
 
 Using a client library called [AMO/TOM](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), Tabular Editor is able to load and save metadata to and from this JSON based format. In addition, the client library allows Tabular Editor to connect directly to any instance of Analysis Services, in order to obtain the model metadata from an existing database. This is illustrated in the figure below.
 
-![Architecture](~/assets/images/architecture.png)
+![Architecture](~/content/assets/images/architecture.png)
 
 > [!NOTE]
 > In the paragraph above, we used the term **database** to represent a model that has been deployed to Analysis Services. Within the Power BI Service the term **dataset** is used to represent the same thing, namely a tabular model.
@@ -72,17 +72,17 @@ Most properties are simple values (text, true/false, one-of-selections aka. enum
 
 Tabular Editor generally uses the same name for objects and properties as those defind in the [Microsoft.AnalysisServices.Tabular namespace](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet). If you want to learn more about specific TOM objects or properties, always consult the namespace documentation. For example, to learn what the "Summarize By" column property does, first locate the "Column" class in Microsoft's documentation, then expand "Properties" and scroll to "SummarizeBy". You should then get to [this article](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet).
 
-![SummarizeBy on Microsoft's docs](~/assets/images/asdocs-summarizyby.png)
+![SummarizeBy on Microsoft's docs](~/content/assets/images/asdocs-summarizyby.png)
 
 ### Editing property values
 
 Both versions of Tabular Editor display the object model metadata in a hierarchical view known as the **TOM Explorer** view, which roughly corresponds to the hierarchical structure of the JSON metadata:
 
-![TOM Explorer](~/assets/images/tom-explorer.png)
+![TOM Explorer](~/content/assets/images/tom-explorer.png)
 
 In general, Tabular Editor lets you modify object properties by first selecting an object in the TOM Explorer (you can select multiple objects at once by holding down SHIFT or CTRL), and then simply editing the property value within the **Properties view** (see screenshot below).
 
-![Properties View](~/assets/images/properties-view.png)
+![Properties View](~/content/assets/images/properties-view.png)
 
 Tabular Editor does not perform explicit validation of modified property values, except for some basic rules (for example, object names cannot be empty, measure names have to be unique, etc.). It is your responsibility as a tabular model developer to know which properties to set and what values to use.
 

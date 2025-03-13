@@ -48,11 +48,11 @@ Notably, adding, modifying or removing measures from a model does not require an
 
 To initiate a refresh using Tabular Editor, simply right click on the Table or Partition you wish to refresh, navigate to **Refresh table** or **Refresh partition**, and then choose the type of refresh you want to perform.
 
-![Refresh Table](~/assets/images/refresh-table.png)
+![Refresh Table](~/content/assets/images/refresh-table.png)
 
 You may also initiate a refresh at the model level through the **Model > Refresh model** menu. Once the refresh operation starts, you will see the text "Data refresh started... <ins>View refresh queue</ins>". Click on the link or locate the **Data refresh** view through the **View > Data refresh** menu option. This will display a list of all refresh operations (both present and current), displaying the status message returned from Analysis Services including progress counters and duration, and allowing you to cancel an unintended refresh.
 
-![Data Refresh View2](~/assets/images/data-refresh-view2.png)
+![Data Refresh View2](~/content/assets/images/data-refresh-view2.png)
 
 While a refresh is in progress you can continue work on your data model, querying and previewing data or queueing new data refresh operations according to this article. However, you will not be able to save model changes to Analysis Services until the all data refresh operations complete.
 
@@ -75,13 +75,13 @@ See [Refresh Types](https://docs.microsoft.com/en-us/analysis-services/tmsl/refr
 
 At certain points during DAX authoring and data model development, you may need to inspect the contents of your tables on a row-by-row basis. Of course, you could write a DAX query to achieve this, but Tabular Editor 3 makes that even easier by allowing you to preview table data directly. To do this, right-click on a table and choose the **Preview data** option.
 
-![Preview Data](~/assets/images/preview-data-big.png)
+![Preview Data](~/content/assets/images/preview-data-big.png)
 
 You can open multiple such table previews and arrange them anyway you like in the user interface. In addition, you can sort or filter individual columns. There is no practical limit to the number of rows that can be previewed. Tabular Editor simply executes a [`TOPNSKIP`](https://dax.guide/topnskip) DAX query against the model, to return just a small number of records suitable to fill the current view.
 
 If one or more calculated columns are in an invalid state, those columns contain the text *(Calculation needed)*. You can recalculate the table by right-clicking on the column and choosing the **Recalculate table...** option.
 
-![Recalculate Table](~/assets/images/recalculate-table.png)
+![Recalculate Table](~/content/assets/images/recalculate-table.png)
 
 # Pivot Grids
 
@@ -89,11 +89,11 @@ After adding or editing DAX measures in a model, it is common for model develope
 
 To create a new Pivot Grid, use the **File > New > Pivot Grid** option. From here, you can either drag measures, columns and hierarchies from the TOM Explorer into the grid, or you can use the **Pivot Grid > Show fields** menu option to display a popup list of all fields that can be dragged into the Pivot Grid (see screenshot below).
 
-![Show Fields Pivot](~/assets/images/show-fields-pivot.png)
+![Show Fields Pivot](~/content/assets/images/show-fields-pivot.png)
 
 As fields are dragged into the Pivot Grid, Tabular Editor generates MDX queries that are sent to Analysis Services, to display the resulting data. In this regard, the behavior is very similar to Pivot Tables in Excel. You can rearrange fields in the Pivot Grid by dragging and dropping, and there are various right-click menu options available for customizing how the data is displayed.
 
-![Customizing Pivot Grids](../../assets/images/customizing-pivot-grids.png)
+![Customizing Pivot Grids](~/content/assets/images/customizing-pivot-grids.png)
 
 The Pivot Grid is automatically refreshed when a change is made to the model or a refresh operation finishes. You can toggle this auto-refresh capability within the **Pivot Grid** menu.
 
@@ -105,7 +105,7 @@ DAX queries can be saved and loaded to and from standalone files using the `.dax
 
 Type your DAX `EVALUATE` query into the editor and hit **Query > Execute** (F5) to send the query to Analysis Services and see the result. By default, Tabular Editor 3 limits the number of rows returned from Analysis Services to 1000, but this can be changed under **Tools > Preferences > Data Browsing > DAX Query**. If a query exceeds this limit, Tabular Editor 3 displays a shortcut that lets you retrieve all records (see screenshot below).
 
-![Query Rowset Limit](~/assets/images/query-rowset-limit.png)
+![Query Rowset Limit](~/content/assets/images/query-rowset-limit.png)
 
 > [!WARNING]
 > Displaying a large number of records in the query result window could take a while and drastically increase the memory consumed by Tabular Editor 3.
@@ -114,7 +114,7 @@ Tabular Editor 3 uses the same DAX code editor for query editing as for defining
 
 For example, if you right-click on a measure reference, there is an option to **Define measure** as seen on the screenshot below. This option will add a `DEFINE MEASURE` statement at the top of your DAX query, allowing you to easily modify the DAX expression of that measure within the scope of the query.
 
-![Dax Query Features](~/assets/images/dax-query-features.png)
+![Dax Query Features](~/content/assets/images/dax-query-features.png)
 
 In addition, a DAX query can contain multiple `EVALUATE` statements. When that is the case, Tabular Editor 3 displays the result from each such statement on a separate, numbered tab. If you only want to execute a single `EVALUATE` statement, even though your document contains multiple, you can place the cursor somewhere within the statement you want to execute, and then use the **Query > Execute selection** (SHIFT+F5) option.
 
@@ -129,11 +129,11 @@ When querying the data in the model, it is sometimes useful to be able to impers
 
 When clicking on the **Impersonation..** button (which can also be found through the **Query**, **Pivot Grid** or **Table Preview** menu, depending on which type of data view is active), a popup allows you to specify either a user, or select one or more roles.
 
-![Select Impersonation](~/assets/images/select-impersonation.png)
+![Select Impersonation](~/content/assets/images/select-impersonation.png)
 
 Once the impersonation is enabled, the **Impersonation..** button is checked, and the impersonation will be applied to the current data view. By clicking on the small arrow next to the **Impersonation..** button, you can view and quickly switch between the 10 most recent impersonations used.
 
-![Impersonation Dropdown](~/assets/images/impersonation-dropdown.png)
+![Impersonation Dropdown](~/content/assets/images/impersonation-dropdown.png)
 
 When auto-refresh is enabled on a data view, changing the impersonation will immediately refresh the view. 
 
@@ -145,17 +145,17 @@ With Tabular Editor 3, you can collect VertiPaq Analyzer statistics while you ar
 
 To collect statistics, simply hit the **Collect stats** button in the **VertiPaq Analyzer** view.
 
-![Vertipaq Analyzer Collect Stats](~/assets/images/vertipaq-analyzer-collect-stats.png)
+![Vertipaq Analyzer Collect Stats](~/content/assets/images/vertipaq-analyzer-collect-stats.png)
 
 Once statistics are collected, VertiPaq Analyzer displays a summary of the model size, number of tables, etc. You can find more detailed statistics on the **Tables**, **Columns**, **Relationships** and **Partitions** tabs.
 
 Additionally, whenever statistics have been loaded, Tabular Editor 3 will display cardinality and size information as a tooltip when hovering the mouse cursor over objects in the TOM Explorer:
 
-![Vertipaq Analyzer Stats in TOM Explorer](~/assets/images/vertipaq-analyzer-stats.png)
+![Vertipaq Analyzer Stats in TOM Explorer](~/content/assets/images/vertipaq-analyzer-stats.png)
 
 ...or when hovering the mouse cursor over object references in DAX expressions:
 
-![Vertipaq Analyzer Stats in a DAX expression](../../assets/images/vertipaq-analyzer-stats-dax.png)
+![Vertipaq Analyzer Stats in a DAX expression](~/content/assets/images/vertipaq-analyzer-stats-dax.png)
 
 # Next steps
 

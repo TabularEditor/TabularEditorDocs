@@ -27,7 +27,7 @@ After doing so, Tabular Editor 3 will use the TMDL format when saving a model as
 
 When saving a new model for the first time, Tabular Editor (since v. 3.7.0), will now provide an option for saving the model as TMDL, even when the default serialization mode is not set to TMDL, as described in the previous section.
 
-![New Model Tmdl](../../../assets/images/new-model-tmdl.png)
+![New Model Tmdl](~/content/assets/images/new-model-tmdl.png)
 
 # Next steps
 

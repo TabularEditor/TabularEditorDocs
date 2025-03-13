@@ -16,7 +16,7 @@ You access the properties view by selecting an object in the TOM Explorer. You w
 You can also access advanced properties that are not available in other tools like Visual Studio or Power BI Desktop.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/user-interface/properties-view.png" alt="Properties View" style="width: 500px;"/>
+  <img class="noscale" src="~/content/assets/images/user-interface/properties-view.png" alt="Properties View" style="width: 500px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Example of Properties for a table. Each object has different properties depending on its type </figcaption>
 </figure>
 

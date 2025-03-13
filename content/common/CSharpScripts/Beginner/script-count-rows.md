@@ -45,6 +45,6 @@ You can comment out
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/Cscripts/script-count-rows-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-count-rows-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the Info box that appears to inform the user of how many rows are in the selected table, upon running this script.</figcaption>
 </figure>

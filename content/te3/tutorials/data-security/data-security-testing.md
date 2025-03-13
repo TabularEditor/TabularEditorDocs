@@ -13,7 +13,7 @@ applies_to:
 # Testing Data Security with Impersonation
 
 
-![Data Security Visual Abstract](~/assets/images/data-security/data-security-testing-visual-abstract.png)
+![Data Security Visual Abstract](~/content/assets/images/data-security/data-security-testing-visual-abstract.png)
 
 
 ---
@@ -48,7 +48,7 @@ __Data Security can be easily tested using _Impersonation_ in Tabular Editor 3._
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> A demonstration of RLS testing in Tabular Editor using impersonation. Shown is testing with (A) Data Preview, (B) DAX Queries and (C) Pivot Grid.</figcaption>
 </figure>
 

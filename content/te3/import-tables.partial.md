@@ -1,6 +1,6 @@
 Tabular Editor 3 includes a **Table Import Wizard** that helps you create a data source in your model, and import tables/views from relational data sources such as a SQL Server database.
 
-![Import Tables Wizard](~/assets/images/import-tables-wizard.png)
+![Import Tables Wizard](~/content/assets/images/import-tables-wizard.png)
 
 ## Types of TOM Data Sources
 
@@ -24,7 +24,7 @@ When importing tables (Model menu > Import tables...), Tabular Editor presents y
 
 If you need to create a new data source, Tabular Editor provides you with a list of supported data sources:
 
-![Create New Source](~/assets/images/create-new-source.png)
+![Create New Source](~/content/assets/images/create-new-source.png)
 
 Note that Analysis Services and Power BI in particular supports a much wider range of data sources, however the sources listed in the screenshot above are the ones that Tabular Editor is able to connect for the purpose of automatically importing table metadata (that is, column names and data types). For data sources not on this list, Tabular Editor 3 can still [update table schema by utilising Analysis Services](#updating-table-schema-through-analysis-services).
 
@@ -45,7 +45,7 @@ Currently, the following data sources are natively supported by Tabular Editor 3
 
 After choosing one of the data sources on the list, Tabular Editor displays a connection details dialog, allowing you to specify server addresses, credentials, etc. specific to the data source you want to create. The settings that you specify should be those that Tabular Editor should use for establishing a local connection to the source. These settings are saved in your @user-options.
 
-![Sql Auth](~/assets/images/sql-auth.png)
+![Sql Auth](~/content/assets/images/sql-auth.png)
 
 If you want Analysis Services to use different credentials when connecting, you can specify that by editing the data source properties of the Tabular Object Model after importing the tables.
 
@@ -53,11 +53,11 @@ If you want Analysis Services to use different credentials when connecting, you 
 
 Once your data source has been defined, you get the option of choosing tables/views from a list, or specifying a native query to be executed against the source.
 
-![Source Options](~/assets/images/source-options.png)
+![Source Options](~/content/assets/images/source-options.png)
 
 If you select the first option, Tabular Editor will connect to the source and display a list of tables and views that you can preview on the next page:
 
-![Choose Source Objects](~/assets/images/choose-source-objects.png)
+![Choose Source Objects](~/content/assets/images/choose-source-objects.png)
 
 You can import multiple tables/views at once by checking them on the left side. For each table/view, you may deselect/select columns to import.
 
@@ -66,23 +66,23 @@ You can import multiple tables/views at once by checking them on the left side. 
 >
 > Then, in the model, import all columns from this view (basically generating a `SELECT * FROM ...` statement). This makes maintenance easier, as only need to run a Schema Update in Tabular Editor to determine if anything was changed in the source.
 
-![Advanced Import](~/assets/images/advanced-import.png)
+![Advanced Import](~/content/assets/images/advanced-import.png)
 
 If you change the preview mode to "Schema only" using the dropdown in the top left corner, it is possible to change the imported data type and column name for every source column. This may be useful for example if your source using floating-point values, but you want the data to be imported as fixed-decimal.
 
-![Confirm Selection](~/assets/images/confirm-selection.png)
+![Confirm Selection](~/content/assets/images/confirm-selection.png)
 
 On the last page, confirm your selection and choose which type of partitions to create. For provider data sources, the default type of partition to be created is `SQL`, where as for structured data sources, it is `M`. 
 
 At this point, you should see your tables imported with all columns, data types and source column mappings applied:
 
-![Import Complete](~/assets/images/import-complete.png)
+![Import Complete](~/content/assets/images/import-complete.png)
 
 # Updating table schema
 
 If columns are added/changed in the source, or if you recently modified a partition expression or query, you can use Tabular Editor's **Update table schema** feature to update the column metadata in your model.
 
-![Update Table Schema](~/assets/images/update-table-schema.png)
+![Update Table Schema](~/content/assets/images/update-table-schema.png)
 
 This menu item can be invoked at the model level, as well as on a collection of tables or even individual table partitions.
 
@@ -91,23 +91,23 @@ When using this option, Tabular Editor will connect to all the relevant data sou
 > [!IMPORTANT]
 > If a column that was previously imported to your tabular model has been removed or renamed in the source, you must update the table schema in your tabular model. Otherwise data refresh operations may fail.
 
-![Schema Compare Dialog](~/assets/images/schema-compare-dialog.png)
+![Schema Compare Dialog](~/content/assets/images/schema-compare-dialog.png)
 
 In the screenshot above, Tabular Editor detected a few new columns, a single data type change, and two columns that were renamed in the source. Note that detection of a column rename only works for simple changes. In other cases, a name change usually results in Tabular Editor detecting a column removal and a column addition, which is the case for the `Tax Amount` column below, which seems to have been renamed to `TaxAmt` in the source.
 
 To avoid breaking existing DAX formulas that rely on the `[Tax Amount]` column, you can hold down the Ctrl-button and click on the two rows in the Schema Change dialog, then right-click in order to combine the column removal and column addition into a single SourceColumn update operation:
 
-![Combine Sourcecolumn Update](~/assets/images/combine-sourcecolumn-update.png)
+![Combine Sourcecolumn Update](~/content/assets/images/combine-sourcecolumn-update.png)
 
 If you do not want the name change to be propagated to the imported column (but only want to update the SourceColumn property to reflect the changed name in the data source), you can deselect the `Name` update operation in the dropdown:
 
-![Deselect Name](~/assets/images/deselect-name.png)
+![Deselect Name](~/content/assets/images/deselect-name.png)
 
 ## Updating table schema through Analysis Services
 
 By default, Tabular Editor 3 attempts to connect directly to the data source, for purposes of updating the imported table schema. Naturally, this only works when the data source is one that is supported by Tabular Editor 3. If you need to update the schema of a table imported from a data source that is not supported by Tabular Editor 3, you can enable the **Use Analysis Services for change detection** option under **Tools > Preferences > Schema Compare**.
 
-![Update Table Schema Through As](~/assets/images/update-table-schema-through-as.png)
+![Update Table Schema Through As](~/content/assets/images/update-table-schema-through-as.png)
 
 When this option is enabled and Tabular Editor 3 is connected to Analysis Services or the Power BI XMLA endpoint, you can update the schema of tables imported from **any** data source supported by Analysis Services or Power BI.
 

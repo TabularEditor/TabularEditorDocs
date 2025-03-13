@@ -483,11 +483,11 @@ This snippet will configure incremental refresh in the selected table based on a
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> When running the script, you are prompted to select the Table you want to configure, and the DateTime or Int column the policy will be configured for. Then, the dialog in this image will appear to let you enter the Refresh Policy parameters.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/Cscripts/script-configure-incremental-refresh-success.png" alt="A confirmation dialog that acknowledges you have configured the refresh policy" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh-success.png" alt="A confirmation dialog that acknowledges you have configured the refresh policy" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> A confirmation dialog will inform you about the success of the Refresh Policy configuration, explaining it back to you in plain words.</figcaption>
 </figure>

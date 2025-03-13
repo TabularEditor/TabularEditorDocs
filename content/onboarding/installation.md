@@ -11,19 +11,19 @@ In order to install Tabular Editor 3, download the latest version from our [down
 
 We recommend downloading the MSI 64-bit installer, which is suitable in most scenarios. Once downloaded, doubleclick the MSI file and go through the installation pages.
 
-![Install](~/assets/images/install.png)
+![Install](~/content/assets/images/install.png)
 
 ## Activating your installation
 
 The first time you launch Tabular Editor 3 on a new machine, you are prompted to activate the product.
 
-![Product activation](~/assets/images/product-activation.png)
+![Product activation](~/content/assets/images/product-activation.png)
 
 ### Activating using an existing license key
 
 Once you purchase a license for Tabular Editor 3, you should receive an e-mail with a 25-character string which is your license key. When prompted, enter the license key and hit "Next >" to activate the product.
 
-![Enter License Key](~/assets/images/enter-license-key.png)
+![Enter License Key](~/content/assets/images/enter-license-key.png)
 
 > [!NOTE]
 > For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
@@ -31,19 +31,19 @@ Once you purchase a license for Tabular Editor 3, you should receive an e-mail w
 #### Manual Activation (No Internet)
 If you do not have access to the internet e.g., due to a proxy Tabular Editor will prompt you to do a manual activation. 
 
-![Manual Activation Prompt](~/assets/images/Activation_manual_firstprompt.png)
+![Manual Activation Prompt](~/content/assets/images/Activation_manual_firstprompt.png)
 
 After entering your email, a dialog box appears with a link to an activation key.
 Copy the URL and open it in a web-browser that is connected to the internet. 
 
 The URL returns a JSON object:
 
-![Manual Activation JSON Object](~/assets/images/activation_manual_jsonobject.png)
+![Manual Activation JSON Object](~/content/assets/images/activation_manual_jsonobject.png)
 
 Copy the full JSON object and paste the full JSON object given into the dialog box.
 Your manual activation dialog should end up looking like below. 
 
-![Manual Activation Filled In](~/assets/images/activation_manual_dialogbox_filled.png)
+![Manual Activation Filled In](~/content/assets/images/activation_manual_dialogbox_filled.png)
 
 Your Tabular Editor 3 license will thereby be verified.
 
@@ -51,7 +51,7 @@ Your Tabular Editor 3 license will thereby be verified.
 
 When Tabular Editor 3 is activated, you may change your license key in the Help menu by choosing "About Tabular Editor".
 
-![About Te3](~/assets/images/about-te3.png)
+![About Te3](~/content/assets/images/about-te3.png)
 
 In the dialog, select "Change license key". Note that this option is only available if no model is loaded in Tabular Editor. IF you already loaded a model you can close it under File > Close model.
 
@@ -72,7 +72,7 @@ By default, whenever Tabular Editor 3 is launched, the tool will check online to
 
 Tabular Editor 3 collects anonymous usage data and telemetry, which helps us improve the product. You can opt out at any time by launching Tabular Editor 3 and navigating to **Tools > Preferences > Updates and Feedback**. Uncheck the **Help improve Tabular Editor by collecting anonymous usage data** checkbox to opt out.
 
-![Collect Telemetry](~/assets/images/collect-telemetry.png)
+![Collect Telemetry](~/content/assets/images/collect-telemetry.png)
 
 ### Proxy settings
 

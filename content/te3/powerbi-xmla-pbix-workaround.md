@@ -17,7 +17,7 @@ Once a change is made to a Power BI semantic model through the XMLA endpoint, it
 
 However, with the Power BI Project file, it's possible to create a .pbix file from the remote model by following the three-step process, which is described as follows. 
 
-![XLMA to PBIX Overview](~/assets/images/power-bi/create-pbix-from-xmla-overview.png)
+![XLMA to PBIX Overview](~/content/assets/images/power-bi/create-pbix-from-xmla-overview.png)
 
 > [!NOTE]
 > The described workaround isn't officially supported by Microsoft. There's no guarantee that it works for every model. Specifically, if you've added custom partitions or other objects [listed here](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations), Power BI Desktop may not be able to correctly open the file following this approach. See below for a script to handle incremental refresh partitions.
@@ -26,11 +26,11 @@ However, with the Power BI Project file, it's possible to create a .pbix file fr
 
 The first step is to create a new Power BI report and save it as an empty Power BI Project (.pbip) file, as depicted in the following diagram.
 
-![Save PBIP file](~/assets/images/power-bi/save-pbip-file.png)
+![Save PBIP file](~/content/assets/images/power-bi/save-pbip-file.png)
 
 This creates a folder structure that contains an empty _model_ file. This _model_ file contains the model metadata. You'll overwrite this metadata in the next step with the metadata of the published model that you want to save to .pbix.
 
-![PBIP with Model file](~/assets/images/power-bi/pbip-file-bim-model.png)
+![PBIP with Model file](~/content/assets/images/power-bi/pbip-file-bim-model.png)
 
 Close Power BI desktop, and proceed with the next step in Tabular Editor.
 
@@ -54,7 +54,7 @@ Use the Convert Incremental Refresh script below to delete incremental refresh p
 
 ## Step 4: Save to .pbix and open this file in Power BI Desktop
 
-![PBIP with Tables](~/assets/images/power-bi/pbip-includes-tables.png)
+![PBIP with Tables](~/content/assets/images/power-bi/pbip-includes-tables.png)
 
 Open the .pbip and the Power BI report will now contain the XMLA endpoint semantic model.
 

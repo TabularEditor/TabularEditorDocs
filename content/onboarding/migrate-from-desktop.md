@@ -86,13 +86,13 @@ What follows is a quick walkthrough of how to achieve common tasks in Tabular Ed
 
 To add a new measure to your model, right-click on the table in the **TOM Explorer** on which you want the new measure to reside, then choose **Create > Measure** (shortcut ALT+1). After the measure is added, you can immediately type the name of the measure.
 
-![Add Measure](~/assets/images/add-measure.png)
+![Add Measure](~/content/assets/images/add-measure.png)
 
 ### How to rename a measure
 
 If you need to edit the name of the measure (or any other object), simply select the measure and hit F2 (or double-click the measure name). If multiple objects are selected, you will see the Batch rename dialog, that makes it easy to rename multiple objects in one go.
 
-![Batch Rename](~/assets/images/batch-rename.png)
+![Batch Rename](~/content/assets/images/batch-rename.png)
 
 > [!WARNING]
 > Changing object names in the data model may cause report visuals to stop working, if the visuals relies on one or more of the objects being renamed. External tools cannot access information about Power BI visuals, so Tabular Editor is not able to warn you before an object that is used in a visual is renamed or deleted.
@@ -107,7 +107,7 @@ Locate the measure you want to modify in the **TOM Explorer** and select it. You
 
 Once the measure is selected, you should see the DAX expression of the measure in the **Expression Editor** and various properties such as `Description`, `Format String`, `Hidden`, etc. in the **Properties** grid.
 
-![Modify Measure](~/assets/images/modify-measure.png)
+![Modify Measure](~/content/assets/images/modify-measure.png)
 
 To modify the DAX expression, simply place the cursor in the **Expression Editor** and update the DAX code. Hit F6 to automatically format the code. If you select a different object in the TOM Explorer or click the green checkmark button **Expression > Accept** (F5), the expression change is stored locally in Tabular Editor. You can also cancel the modification you made by hitting the red "X", **Expression > Cancel**. If you accidentally hit **Accept**, you can always undo the change by using the **Edit > Undo** (CTRL+Z) option.
 
@@ -119,7 +119,7 @@ To learn more about the capabilities of the Expression Editor, when writing DAX 
 
 While a measure is selected in the **TOM Explorer** use the **Measure > Show dependencies** (SHIFT+F12) option. This causes a new window to pop up, visualizing the dependency tree of the DAX expression for that measure. You can switch between viewing both upstream and downstream dependencies.
 
-![Show Dependencies](~/assets/images/show-dependencies.png)
+![Show Dependencies](~/content/assets/images/show-dependencies.png)
 
 Double-clicking on an item in the dependencies view navigate to that object in the **TOM Explorer**.
 
@@ -129,7 +129,7 @@ Locate the measure you want to modify in the **TOM Explorer** and select it. You
 
 Once the measure is selected, locate the `Format String` property in the **Properties** grid, expand it, and set the format string properties according to your preferences. Note the dropdown button at the right of the `Format` property. You may also freely enter a format string in the `Format String` property itself.
 
-![Format String](~/assets/images/format-string.png)
+![Format String](~/content/assets/images/format-string.png)
 
 ### How to modify the DAX expression of multiple measures
 
@@ -137,7 +137,7 @@ Tabular Editor 3 allows you to select multiple measures in order to create a **D
 
 To create a DAX script based on existing measures, simply select the measures in the **TOM Explorer** (hold down the CTLR key to select multiple objects or hold down the SHIFT key to select a range of objects). Then, right click and hit **Script DAX**.
 
-![Script Dax](~/assets/images/script-dax.png)
+![Script Dax](~/content/assets/images/script-dax.png)
 
 You can add or modify properties such as `Description`, `FormatString`, `Visible`, `DetailRows` and more directly in the script.
 
@@ -149,7 +149,7 @@ See @dax-script-introduction for more information.
 
 To view the contents of a table (similar to the Data Tab in Power BI Desktop), simply right-click on a table and choose "Preview data". This will open a new tab containing a preview of the table content. You can scroll through all rows of the table, as well as apply sorting or filtering to columns. Unlike Power BI Desktop, you can open as many of these preview tabs as you like and arrange them next to each other in the user interface. The preview also works for tables in [DirectQuery mode](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery) (although the preview will be limited to the first 100 records).
 
-![Preview Data](~/assets/images/preview-data.png)
+![Preview Data](~/content/assets/images/preview-data.png)
 
 > [!NOTE]
 > The **Preview data** feature is only available when Tabular Editor is connected to Power BI Desktop or a dataset in the Power BI XMLA endpoint.
@@ -160,11 +160,11 @@ See @refresh-preview-query for more information.
 
 [Calculation Groups](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) are useful for defining and reusing a modified DAX filter context or other type of business logic across all model measures. To add a calculation group using Tabular Editor, simply use the **Model > New Calculation Group** (ALT+7) option.
 
-![Add Calculation Group](~/assets/images/add-calc-group.png)
+![Add Calculation Group](~/content/assets/images/add-calc-group.png)
 
 Give the calculation group a name, then, while the Calculation Group is selected in the **TOM Explorer**, add new Calculation Items by using the **Calculation Group Table > Create > Calculation Item** option. You can copy (CTRL+C) and paste (CTRL+V) calculation items to speed up this process for additional items.
 
-![Add Calc Item](../../assets/images/add-calc-item.png)
+![Add Calc Item](~/content/assets/images/add-calc-item.png)
 
 ### How to add a new table
 
@@ -182,7 +182,7 @@ See @importing-tables-data-modeling for more information.
 
 Power Query (M) expressions that define what is loaded into each table reside in the corresponding table's **Partition**. The partitions can be located in the **TOM Explorer**. When selecting a partition, Tabular Editor displays the M expression for that partition in the **Expression Editor**, allowing you to edit it. After editing and accepting the expression change, you can right-click on the partition in the **TOM Explorer** and choose the **Update table schema...** option in order to detect if the columns imported on the table should be changed, based on the updated Power Query expression.
 
-![Power Query Update Schema](~/assets/images/power-query-update-schema.png)
+![Power Query Update Schema](~/content/assets/images/power-query-update-schema.png)
 
 > [!NOTE]
 > Currently, Tabular Editor 3 does not perform any validation of the partition expression. For Power Query (M) expressions, this is planned for a later update of Tabular Editor 3.
@@ -192,13 +192,13 @@ Power Query (M) expressions that define what is loaded into each table reside in
 
 If the Power Query expression changes gives rise to any changes on the imported table columns, a dialog that lets you review these changes will show:
 
-![Apply schema changes](~/assets/images/combine-sourcecolumn-update.png)
+![Apply schema changes](~/content/assets/images/combine-sourcecolumn-update.png)
 
 ### How to modify a shared Power Query expression
 
 Shared Expressions are M queries that are not directly used to load data into a table. For example, when you create a Power Query parameter in Power BI Desktop, the M expression for this parameter is stored as a Shared Expression. In Tabular Editor, These can be accessed through the Shared Expressions folder of the **TOM Explorer** and edited just like M queries on partitions.
 
-![Shared Expression](~/assets/images/shared-expression.png)
+![Shared Expression](~/content/assets/images/shared-expression.png)
 
 > [!IMPORTANT]
 > Shared expressions are read-only by default when using Tabular Editor as an external tool, since editing partitions through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).
@@ -212,7 +212,7 @@ The easiest way to add relationships between two tables is to create a new diagr
 3. Once the tables are added, locate the column on the (many-side) fact table, and drag it over to the corresponding column on the (one-side) dimension table.
 4. Confirm the relationship settings and hit "OK".
 
-![Shared Expression](~/assets/images/create-relationship-through-diagram.gif)
+![Shared Expression](~/content/assets/images/create-relationship-through-diagram.gif)
 
 See [Working with diagrams](xref:importing-tables-data-modeling#working-with-diagrams) for more information.
 

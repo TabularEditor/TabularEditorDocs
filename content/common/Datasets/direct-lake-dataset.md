@@ -32,7 +32,7 @@ Tabular Editor 2 can connect to Direct Lake semantic models, but does not have a
 
 Creating a Direct Lake model in Tabular Editor 3 (3.15.0 or higher) has to be specified when the model is created in the _New Model_ dialog box, by using the Direct Lake checkbox. 
 
-![Direct Lake New Model](~/assets/images/common/DirectLakeNewModelDialog.png)
+![Direct Lake New Model](~/content/assets/images/common/DirectLakeNewModelDialog.png)
 
 Using the checkbox ensures that Direct Lake specific properties and annotations are set, as well as limits the import of tables to Direct Lake supported sources. 
 

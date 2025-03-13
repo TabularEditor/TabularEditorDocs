@@ -14,14 +14,14 @@ The TOM Explorer is your main window for interacting with the objects of your da
 
 The TOM Explorer consists of two main areas, firstly the data model objects and secondly the menu bar that allows for filtering and changing what is presented in the main window. 
 
-![Tom Explorer](../../../assets/images/user-interface/TOMExplorer.png)
+![Tom Explorer](~/content/assets/images/user-interface/TOMExplorer.png)
 
 <br></br>
 
 ## Data Model Objects
 You can fold out objects in the TOM Explorer to see their children and follow the hierarchy of objects downwards. And if you right click on any object you will be given a list of options to interact with that specific object. As you can see bellow there are several options that you can use with a table. It is with this menu that you for example can easily refresh your tables and see the status of that refresh in the @data-refresh-view
 
-![Tom Explorer Interaction](../../../assets/images/user-interface/TomExplorerRightClick.png)
+![Tom Explorer Interaction](~/content/assets/images/user-interface/TomExplorerRightClick.png)
 
 > [!IMPORTANT]
 > In Tabular Editor 3 Desktop Edition some options are disabled and greyed-out. This is due to the limitations of using Tabular Editor has an external tool. For more information see @desktop-limitations 
@@ -29,11 +29,11 @@ You can fold out objects in the TOM Explorer to see their children and follow th
 ### Show Info Columns
 The TOM Explorer allows for toggling on additional info columns about the data model objects. This can be done with the short cut `CTRL+7`
 These extra info also exists in the property window, but allow for a quick view of the Object Type, Format String, Data Type, Expression and Description.
-![Tom Explorer Show Hide Coloumns](../../../assets/images/user-interface/TOMExplorerInfoColumns.png)
+![Tom Explorer Show Hide Coloumns](~/content/assets/images/user-interface/TOMExplorerInfoColumns.png)
 
 ## TOM Explorer Toolbar
 The toolbar allow you to show and hide different types of objects, toggling perspectives and languages ans well as searching for specific objects in the data model.
-![Tom Explorer Toolbar](../../../assets/images/user-interface/TOMExplorerToolbar.png)
+![Tom Explorer Toolbar](~/content/assets/images/user-interface/TOMExplorerToolbar.png)
 
 <br></br>
 

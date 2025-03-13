@@ -19,7 +19,7 @@ This is exactly the purpose of the new **DAX script** feature introduced in Tabu
 
 To use this feature, locate the objects for which you would like to generate a single document, in the TOM Explorer. Multi-select the objects, then right-click and choose **Script DAX**. A new document is created, containing the DAX expressions and basic properties of all the selected objects. You can also generate a DAX script for all objects within a table or all objects within the model, by choosing the table or model object respectively.
 
-![Dax Script](~/assets/images/dax-script.png)
+![Dax Script](~/content/assets/images/dax-script.png)
 
 Editing objects through a DAX script is slightly different than editing through the **Expression Editor**. With the latter, changes are applied immediately when you navigate to a different object. In a DAX script, however, changes are not applied until you explicitly do so by using the **Script > Apply** (F5) option. If you are connected to an instance of Analysis Services, you can use the **Script > Apply & Sync** (SHIFT+F5) option to simultaneously apply the changes and save the updated model metadata to Analysis Services.
 
@@ -36,13 +36,13 @@ The DAX script editor has all the capabilities of the DAX editor used elsewhere 
 
 In addition, to easily manage large DAX scripts, two dropdowns are displayed at the top of the DAX script view. The dropdown on the left allows you to jump between objects defined in the script, where as the dropdown on the right allows you to jump between properties on the current object.
 
-![Dax Script Navigation](~/assets/images/dax-script-navigation.png)
+![Dax Script Navigation](~/content/assets/images/dax-script-navigation.png)
 
 ## Define measures
 
 If you want to include the definition of a measure that is referenced in the script, but not already defined in the script, you can do so by right-clicking on a measure reference, and choose the "Define Measure" or "Define Measure with dependencies" option.
 
-![Define Measure With Deps](~/assets/images/define-measure-with-deps.png)
+![Define Measure With Deps](~/content/assets/images/define-measure-with-deps.png)
 
 ## Shortcuts
 

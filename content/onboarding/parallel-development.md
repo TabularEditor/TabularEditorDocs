@@ -45,7 +45,7 @@ Tabular Editor aims to simplify this process by providing an easy way to extract
 
 As mentioned above, the model metadata for a tabular model is traditionally stored in a single, monolithic JSON file, typically named **Model.bim**, which is not well suited for version control integration. Since the JSON in this file represents the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), it turns out that there is a straight forward way to break the file down into smaller pieces: The TOM contains arrays of objects at almost all levels, such as the list of tables within a model, the list of measures within a table, the list of annotations within a measure, etc. When using Tabular Editor's **Save to Folder** feature, these arrays are simply removed from the JSON, and instead, a subfolder is generated containing one file for each object in the original array. This process can be nested. The result is a folder structure, where each folder contains a set of smaller JSON files and subfolders, which semantically contains exactly the same information as the original Model.bim file:
 
-![Save To Folder](~/assets/images/save-to-folder.png)
+![Save To Folder](~/content/assets/images/save-to-folder.png)
 
 The names of each of the files representing individual TOM objects are simply based on the `Name` property of the object itself. The name of the "root" file is **Database.json**, which is why we sometimes refer to the folder-based storage format as simply **Database.json**.
 
@@ -65,7 +65,7 @@ As it stands, the only disadvantage of storing the tabular model metadata in the
 
 One size rarely fits all. Tabular Editor has a few configuration options that affect how a model is serialized into the folder structure. In Tabular Editor 3, you can find the general settings under **Tools > Preferences > Save-to-folder**. Once a model is loaded in Tabular Editor, you can find the specific settings that apply to that model under **Model > Serialization options...**. The settings that apply to a specific model are stored as an annotation within the model itself, to ensure that the same settings are used regardless of which user loads and saves the model.
 
-![Configuring Save To Folder](~/assets/images/configuring-save-to-folder.png)
+![Configuring Save To Folder](~/content/assets/images/configuring-save-to-folder.png)
 
 ### Serialization settings
 
@@ -123,7 +123,7 @@ In the agile terminology, a **User Story** is a deliverable, testable piece of w
 
 Determining a suitable branching strategy depends on many different factors. In general, Microsoft recommends the [Trunk-based Development](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops) ([video](https://youtu.be/t_4lLR6F_yk?t=232)) strategy, for agile and continuous delivery of small increments. The main idea is to create branches off the "Main" branch for every new feature or bugfix (see image below). Code review processes are enforced through pull requests from feature branches into Main, and using the Branch Policy feature of Azure DevOps, we can set up rules that require code to build cleanly before a pull request can be completed.
 
-![Trunk Based Development](~/assets/images/trunk-based-development.png)
+![Trunk Based Development](~/content/assets/images/trunk-based-development.png)
 
 ### Trunk-based Development
 
@@ -142,7 +142,7 @@ There is no easy answer to the questions above - especially when considering all
 
 The strategy described below is based on [GitFlow by Vincent Driessen](https://nvie.com/posts/a-successful-git-branching-model/).
 
-![Gitflow](~/assets/images/gitflow.png)
+![Gitflow](~/content/assets/images/gitflow.png)
 
 Implementing a branching strategy similar to this, can help solve some of the DevOps problems typically encountered by BI teams, provided you put some thought into how the branches correlate to your deployment environments. In an ideal world, you would need at least 4 different environments to fully support GitFlow:
 

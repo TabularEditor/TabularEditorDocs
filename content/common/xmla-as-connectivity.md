@@ -27,7 +27,7 @@ This will open the **Load Semantic Model from Database** dialog, where you can s
 > [!NOTE]
 > In Tabular Editor 2.x, the **Advanced Options** (for specifying read/write mode and a custom status bar color) are not available.
 
-![Connect Dialog](~/assets/images/connect-dialog.png)
+![Connect Dialog](~/content/assets/images/connect-dialog.png)
 
 ## Select database
 
@@ -72,13 +72,13 @@ In the Fabric/Power BI admin portal, the integration setting "Allow XMLA endpoin
 
 At the tenant level, the setting may be restricted to only certain users. If the setting is restricted in your organization, ensure all required users are allowed to use the XMLA endpoint at the tenant level.
 
-![Tennant Admin Setting](~/assets/images/common/XMLASettings/TennantAdminSetting.png)
+![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
 
 ### Enable XMLA Read Write on Capacity
 
 To use the XMLA endpoint, the workspace that hosts a semantic model must be assigned to a capacity (FSku or Power BI Premium Per User), and the capacity must have XMLA ["Read Write" enabled in the capacity settings.](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#enable-xmla-read-write)
 
-![Tennant Admin Setting](~/assets/images/common/XMLASettings/CapacityAdminSetting.png)
+![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
 Read Write is enabled in the Admin Portal by navigating to 
 1. Capacity Settings
@@ -92,7 +92,7 @@ Read Write is enabled in the Admin Portal by navigating to
 
 If another user, other than the semantic model's owner, needs to edit the model through the XMLA endpoint, the security admin setting in Fabric/Power BI called "Block republish and disable package refresh" must be disabled.
 
-![Tennant Admin Setting](~/assets/images/common/XMLASettings/DisablePackageRefresh.png)
+![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
 
 
 ## Unsupported model types
@@ -118,17 +118,17 @@ These steps show how to most reliably connect to a Fabric/Power BI semantic mode
 
 2. You'll be presented with a dialogue (see below), and you need to put the Power BI connection string into the text box labeled 'Server'. Leave the rest of the options as configured in the screenshot (these are defaults). The connection string is in the form shown below. You can find this connection string in the Service (more details here in this [Microsoft doc in the sections 'Connecting to a Premium Workspace' and 'To get the workspace connection URL'](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#connecting-to-a-premium-workspace)
 
-![Tennant Admin Setting](~/assets/images/common/XMLASettings/LoadModelFromDatabase.png)
+![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/LoadModelFromDatabase.png)
 
 Please copy and paste the connection string directly from the workspace rather than copying from somewhere/someone else or modifying it in any way.
 
 3. Depending on your machine (if your Windows login is linked to Entra ID or your identity provider) you may be prompted to log in. It's important that the account you use is the one with permission to the workspace. If your organization has multiple tenants or if you have multiple logins, this might not match your Windows login. You should use the exact credential that is shown in the Fabric web UI for your user.
 
-![Tennant Admin Setting](~/assets/images/common/XMLASettings/AuthenticateToFabricPowerBI.png)
+![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/AuthenticateToFabricPowerBI.png)
 
 4. After successful authentication, you'll be presented with a 'Choose database' dialog. Select one and click 'Ok'.
 
-![Tennant Admin Setting](~/assets/images/common/XMLASettings/ChooseDatabase.png)
+![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/ChooseDatabase.png)
 
 ### Multiple tenants
 If you've double-checked the user name and connection string as above and are still having issues, the next thing to check is whether adding the tenant GUID to the connection string helps. This might be an issue if you belong to multiple tenants.

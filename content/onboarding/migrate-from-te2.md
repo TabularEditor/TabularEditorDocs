@@ -109,7 +109,7 @@ The new connected features are:
 
 One highly requested feature of Tabular Editor 2.x, was the ability to better visualize relationships between tables. With Tabular Editor 3, you can now create model diagrams. Each diagram is a simple JSON file that holds the names and coordinates of tables to be included in the diagram. Tabular Editor 3 then renders the tables and relationships and provides features for easily editing relationships, adding additional tables to the diagram based on existing relationships, etc.
 
-![Easily add related tables](~/assets/images/diagram-menu.png)
+![Easily add related tables](~/content/assets/images/diagram-menu.png)
 
 See [Working with diagrams](xref:importing-tables-data-modeling#working-with-diagrams) for more information.
 
@@ -129,7 +129,7 @@ This is very convenient when authoring complex business logic across several obj
 
 When working in **connected** or **workspace** mode, DAX scripting is an incredibly powerful tool to quickly modify and test updated business logic, for example when using it in conjunction with a Pivot Grid as shown in the screenshot below. Simply hitting SHIFT+F5 causes the database to be updated based on the DAX expressions in the script, after which the Pivot Grid will immediately update.
 
-![Dax Scripting And Pivot](../../assets/images/dax-scripting-and-pivot.png)
+![Dax Scripting And Pivot](~/content/assets/images/dax-scripting-and-pivot.png)
 
 To learn more, see @dax-script-introduction.
 

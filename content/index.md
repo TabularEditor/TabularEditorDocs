@@ -23,7 +23,7 @@ Tabular Editor 3 is the evolution of Tabular Editor 2. It has been designed for 
 ### [Tabular Editor 3](#tab/TE3) 
 Tabular Editor 3 is a more advanced application which offers a premium experience with many convenient features to combine all your data modeling and development needs in one single tool.
 
-![Tabular Editor 3](~/assets/images/te3.png)
+![Tabular Editor 3](~/content/assets/images/te3.png)
 
 **Tabular Editor 3 main features:**
 
@@ -42,7 +42,7 @@ Tabular Editor 3 is a more advanced application which offers a premium experienc
 
 Tabular Editor 2.x is a lightweight application for quickly modifying the TOM (Tabular Object Model) of an Analysis Services or Power BI data model. The tool was originally released in 2016 and receives regular updates and bugfixes.
 
-![Tabular Editor 2.x](~/assets/images/te2.png)
+![Tabular Editor 2.x](~/content/assets/images/te2.png)
 
 **Tabular Editor 2.x main features:**
 

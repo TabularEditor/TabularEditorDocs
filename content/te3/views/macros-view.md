@@ -18,7 +18,7 @@ You can create, edit, run and manage macros from the Macros menu in Tabular Edit
 > You can nest your macros in folders by prefixing your macro name in the following pattern `FolderName\MacroName`
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/user-interface/macros-view.png" alt="Macro Window" style="width: 500px;"/>
+  <img class="noscale" src="~/content/assets/images/user-interface/macros-view.png" alt="Macro Window" style="width: 500px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Macro window in Tabular Editor. Provides an overview of all your saved Macros </figcaption>
 </figure>
 
@@ -31,7 +31,7 @@ You can create, edit, run and manage macros from the Macros menu in Tabular Edit
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/user-interface/edit-macro.png" alt="Edit Macro Button" style="width: 500px;"/>
+  <img class="noscale" src="~/content/assets/images/user-interface/edit-macro.png" alt="Edit Macro Button" style="width: 500px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> When you have a Macro open you can save it back by choosing "Edit Macro..." </figcaption>
 </figure>
 

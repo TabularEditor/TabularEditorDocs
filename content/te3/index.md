@@ -27,13 +27,13 @@ Tabular Editor 3 is commercial software. Visit our [home page](https://tabulared
 
 The first time you launch Tabular Editor 3 on a new machine, you are prompted to activate the product.
 
-![Product activation](~/assets/images/product-activation.png)
+![Product activation](~/content/assets/images/product-activation.png)
 
 ### Activating using an existing license key
 
 Once you purchase a license for Tabular Editor 3, you should receive an e-mail with a 25-character string which is your license key. When prompted, enter the license key and hit "Next >" to activate the product.
 
-![Enter License Key](~/assets/images/enter-license-key.png)
+![Enter License Key](~/content/assets/images/enter-license-key.png)
 
 > [!NOTE]
 > For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
@@ -49,7 +49,7 @@ If you haven't used Tabular Editor 3 before, you are eligible to a free 30-day t
 
 When Tabular Editor 3 is activated, you may change your license key in the Help menu by choosing "About Tabular Editor".
 
-![About Te3](~/assets/images/about-te3.png)
+![About Te3](~/content/assets/images/about-te3.png)
 
 In the dialog, select "Change license key". Note that this option is only available if no model is loaded in Tabular Editor. IF you already loaded a model you can close it under File > Close model.
 
@@ -67,7 +67,7 @@ You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_C
 
 A system administrator may also proactively assign Tabular Editor 3 licenses to a machine by specifying the **LicenseKey** and **User** values under each user’s `SOFTWARE\Kapacity\Tabular Editor 3` registry key.
 
-![Registry Editor](~/assets/images/registry-editor.png)
+![Registry Editor](~/content/assets/images/registry-editor.png)
 
 ### Changing a license key through the registry
 

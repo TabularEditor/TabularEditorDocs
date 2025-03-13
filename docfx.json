@@ -24,13 +24,13 @@
         ],
         "resource": [
             {
-                "files": [ "assets/images/**", "content/te3/images/**", "content/whats-new/**", "content/404.html", "content/te3/features/images/**" ]
+                "files": [ "content/assets/images/**", "content/te3/images/**", "content/whats-new/**", "content/404.html", "content/te3/features/images/**" ]
             }
         ],
         "globalMetadata": {
             "_appTitle": "Tabular Editor Documentation",
             "_enableSearch": true,
-            "_appFaviconPath": "assets/images/te3logo.png",
+            "_appFaviconPath": "content/assets/images/te3logo.png",
             "_enableNewTab": true,
             "_disableNavbar": true
         },

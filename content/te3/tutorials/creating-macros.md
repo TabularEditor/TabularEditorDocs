@@ -26,14 +26,14 @@ The first step in creating a Macro is to create and test a C# script.
 
 Once the script works according requirements the script can be saved using the toolbar button "Save as Macro" which will open the "Save Macro" window.
 
-![Macro Create infobox](~/assets/images/features/macros/macro_tutorial_create_infobox.png)
+![Macro Create infobox](~/content/assets/images/features/macros/macro_tutorial_create_infobox.png)
 
 The "Save Macro" window allows three options:
 1. Macro Name: Give the Macro a name and use backslash "\" to create folder path for the macro (See bellow)
 2. Provide a tooltip for the Macro to remember what it does in detail
 3. Select a context where the Macro should be available. 
 
-![Macro Save infobox](~/assets/images/features/macros/macro_tutorial_save_window.png)
+![Macro Save infobox](~/content/assets/images/features/macros/macro_tutorial_save_window.png)
 
 In the above example the Macro will be saved in a folder called Formatting\Beginner and the script is called "Format Numeric Measures". It will be saved in the context of measures.
 
@@ -44,13 +44,13 @@ This Macro can then be used when Right Clicking on a measure in the TOM Explorer
 
 Tabular Editor will suggest a context based on the script that is being saved. 
 
-![Macro Menu Shortcut](~/assets/images/features/macros/macro_tutorial_menu_shortcut.png)
+![Macro Menu Shortcut](~/content/assets/images/features/macros/macro_tutorial_menu_shortcut.png)
 
 ## Edit a Macro
 
 A macro can be opened by double clicking it in the Macro pane and after editing the C# script saved using _Ctrl + S_ or the Edit Macro button. 
 
-![Macro Edit Infobox](~/assets/images/features/macros/macro_tutorial_edit_infobox.png)
+![Macro Edit Infobox](~/content/assets/images/features/macros/macro_tutorial_edit_infobox.png)
 
 
 ## Macro JSON file

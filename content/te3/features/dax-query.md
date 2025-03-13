@@ -17,7 +17,7 @@ A widespread use case for DAX queries is the DAX query produced by the [Power BI
 
 The window can be opened while connected to a semantic model using either the **File > New > DAX Query** menu or the toolbar shortcut.
 
-![Dax Query New](~/assets/images/features/dax_query_window/create_new_dax_query.png)
+![Dax Query New](~/content/assets/images/features/dax_query_window/create_new_dax_query.png)
 
 The built-in context-aware DAX Editor ensures that only the two valid DAX keywords are available when starting a new query: DEFINE or EVALUATE (Press Ctrl+Space to verify for yourself)
 
@@ -25,7 +25,7 @@ The built-in context-aware DAX Editor ensures that only the two valid DAX keywor
 
 The DAX query window has five different query options.
 
-![Dax Query Toolbar](~/assets/images/features/dax_query_window/dax_query_toolbar.png)
+![Dax Query Toolbar](~/content/assets/images/features/dax_query_window/dax_query_toolbar.png)
 
 
 1. **Execute (F5)**: If there is a selection, it executes the selected DAX; otherwise, it executes the full query in the DAX Query editor.
@@ -46,7 +46,7 @@ Tabular Editor (3.12.0 and higher) has the ability to add or change measures dir
 
 In addition to the above mentioned options four other have been introduced.
 
-![Dax Query Apply Measure](~/assets/images/features/dax_query_window/dax_query_apply_measure.png)
+![Dax Query Apply Measure](~/content/assets/images/features/dax_query_window/dax_query_apply_measure.png)
 
 The "Apply" option syncs the DAX expression for all measures explicitly defined in the query to the definition of the measures. Any measures that do not already exist are created.
 
@@ -58,7 +58,7 @@ Unlike the [DAX Script feature](xrefid:dax-scripts), only the expression propert
 
 The "Apply" option has also been added to the right-click context menu.
 
-![Dax Query Apple Right Click](~/assets/images/features/dax_query_window/dax_query_apply_measure_right_click.png)
+![Dax Query Apple Right Click](~/content/assets/images/features/dax_query_window/dax_query_apply_measure_right_click.png)
 
 The shortcuts for these commands are:
 
@@ -76,7 +76,7 @@ EVALUATE
 Products
 ```
 
-![Dax Query Evaluate Table](~/assets/images/features/dax_query_window/evaluate_table.png)
+![Dax Query Evaluate Table](~/content/assets/images/features/dax_query_window/evaluate_table.png)
 
 It is also possible to return the value of a measure, but a table constructor {} is required around the measure name to turn the scalar value into a 1x1 table.
 
@@ -85,7 +85,7 @@ EVALUATE
 { [Invoice Lines] }
 ```
 
-![Dax Query Evaluate Measure](~/assets/images/features/dax_query_window/evaluate_measure.png)
+![Dax Query Evaluate Measure](~/content/assets/images/features/dax_query_window/evaluate_measure.png)
 
 ### Multiple EVALUATE statements
 
@@ -101,7 +101,7 @@ EVALUATE
 Customers
 ```
 
-![Dax Query Evaluate Multiple Tables](~/assets/images/features/dax_query_window/multiple_evaluate_table.png)
+![Dax Query Evaluate Multiple Tables](~/content/assets/images/features/dax_query_window/multiple_evaluate_table.png)
 
 ## Debugging DAX Query
 
@@ -109,7 +109,7 @@ DAX queries are one of the two places where it is possible to run the [DAX Debug
 
 The DAX debugger unlocks the ability to understand how the DAX works inside a single cell. To start the debugger simply right click on the desired cell and choose 'Debug cell', which will start the debugger in the context of the chosen cell.
 
-![Dax Query Debugger](~/assets/images/features/dax_query_window/dax_query_open_dax_debugger.gif)
+![Dax Query Debugger](~/content/assets/images/features/dax_query_window/dax_query_open_dax_debugger.gif)
 
 ## Export DAX Query results
 
@@ -118,4 +118,4 @@ Tabular Editor 3, beginning from version 3.16.0, introduces the new capability o
 > [!TIP]
 > To Export more than 1001 rows choose "click to get all rows" after running the DAX Query
 
-![Dax Query Export Data](~/assets/images/features/dax_query_window/dax_query_export_data.png)
+![Dax Query Export Data](~/content/assets/images/features/dax_query_window/dax_query_export_data.png)

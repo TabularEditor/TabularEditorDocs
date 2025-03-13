@@ -29,11 +29,11 @@ Watch Marco Russo from [SQLBI](https://www.sqlbi.com) introduce the DAX Optimize
 
 To access this feature, go to the **View** menu and choose **DAX Optimizer**.
 
-![Dax Optimizer](~/assets/images/dax-optimizer-view-menu.png)
+![Dax Optimizer](~/content/assets/images/dax-optimizer-view-menu.png)
 
 You will be presented with a new view similar to the figure below:
 
-![Dax Optimizer View](~/assets/images/dax-optimizer-view.png)
+![Dax Optimizer View](~/content/assets/images/dax-optimizer-view.png)
 
 To connect Tabular Editor 3 to the DAX Optimizer service, click **Connect...** through the **Options** menu. You will be prompted to enter your Tabular Tools (DAX Optimizer) credentials.
 
@@ -47,7 +47,7 @@ Lastly, the **Options** menu also lets you switch to a different account in [gro
 
 Once connected, the dropdowns at the top of the view will be populated with your existing workspaces, models and model versions. Make your selections from left to right (i.e. choose the **Workspace** first, then the **Model**, then the **Version**). The view will display a summary of the currently selected model version, with information such as model size, number of tables, number of measures, etc.
 
-![Model Overview](~/assets/images/model-overview.png)
+![Model Overview](~/content/assets/images/model-overview.png)
 
 > [!NOTE]
 > Tabular Editor 3 lets you upload VPAX files in order to create new models or model versions in the DAX Optimizer service. If, however, you need to create or manage workspaces, move or share models, etc. you will need to do this through the [DAX Optimizer web interface](https://app.daxoptimizer.com).
@@ -58,13 +58,13 @@ Once the analysis is complete, you will be presented with a summary showing the 
 
 Go to the **Issues** or **Measures** tab to view detailed results. Use the column headers to sort and filter the results.
 
-![Dax Optimizer Issues](~/assets/images/dax-optimizer-issues.png)
+![Dax Optimizer Issues](~/content/assets/images/dax-optimizer-issues.png)
 
 ## Navigating issues and measures
 
 When you double-click on an issue or measure in the detailed view shown above, you will be taken to the **DAX Optimizer Results** view, where the original DAX expression of the measure is shown, along with highlights of the problematic areas. The list on the left side of the screen lets you toggle which issues to highlight. Moreover, you can mark issues as **Fixed** or **Ignored** using the checkboxes within the list.
 
-![Dax Optimizer Results](~/assets/images/dax-optimizer-results.png)
+![Dax Optimizer Results](~/content/assets/images/dax-optimizer-results.png)
 
 Click on the **Find in TOM Explorer...** button in the top-right area of the view, to navigate to the corresponding measure in the currently loaded model.
 
@@ -78,7 +78,7 @@ To upload VPAX statistics to DAX Optimizer, make sure Tabular Editor is currentl
 
 You will be presented with a dialog similar to the one shown below:
 
-![Upload Vpax](~/assets/images/upload-vpax.png)
+![Upload Vpax](~/content/assets/images/upload-vpax.png)
 
 Here, you can choose whether the VPAX should be uploaded as a new model within the workspace, or whether the VPAX contains updated statistics for an existing model.
 
@@ -98,7 +98,7 @@ When obfuscated VPAX data is uploaded to the DAX Optimizer service through the *
 
 If the dictionary is not found, you will have an option to manually specify a dictionary file.
 
-![Obfuscated Model](~/assets/images/obfuscated-model.png)
+![Obfuscated Model](~/content/assets/images/obfuscated-model.png)
 
 If no dictionary file is provided, you will only be able to browse the obfuscated model and DAX Optimizer results, meaning you will not be able to view the original DAX expressions or navigate to the corresponding measures in the TOM Explorer.
 
@@ -111,7 +111,7 @@ If no dictionary file is provided, you will only be able to browse the obfuscate
 
 Once a VPAX file has been uploaded, please allow a few seconds for the file to be "verified" by the DAX Optimizer service. Once verified, you can perform a DAX Optimizer "run" by checking the "You agree to **consume 1 run** to analyze this model." checkbox, and then clicking the **Analyze** button in the **DAX Optimizer** view:
 
-![Dax Optimizer Analyze](~/assets/images/dax-optimizer-analyze.png)
+![Dax Optimizer Analyze](~/content/assets/images/dax-optimizer-analyze.png)
 
 The analysis will take a few minutes to complete, depending on the size of the model and the number of measures. Once the analysis is complete, you will be presented with a summary of the issues detected.
 

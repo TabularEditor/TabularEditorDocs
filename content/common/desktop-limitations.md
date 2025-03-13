@@ -54,7 +54,7 @@ When a Power BI Desktop report (.pbix or .pbit file) contains a data model (that
 
 External tools may connect to the instance of Analysis Services managed by Power BI Desktop through a specific port number assigned by Power BI Desktop. When a tool is launched directly from the "External Tools" ribbon in Power BI Desktop, this port number is passed to the external tool as a command line argument. In Tabular Editor's case, this causes the data model to be loaded in Tabular Editor.
 
-<img class="noscale" src="~/assets/images/external-tool-architecture.png" />
+<img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
 Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). In this regard, the Analysis Services instance managed by Power BI Desktop is no different from any other type of Analysis Services instance.
 
@@ -127,7 +127,7 @@ Though unsupported, it turns out that a number of operations can still be applie
 
 Once this feature is enabled, Tabular Editor will no longer block any modeling operation, but instead provide you full read/write access to all TOM objects and properties. While the feature is enabled, you will see a warning prompt whenever you open a Power BI Desktop model in Tabular Editor:
 
-![Warning shown when unsupported modeling is enabled](~/assets/images/pbi-desktop-warning.png)
+![Warning shown when unsupported modeling is enabled](~/content/assets/images/pbi-desktop-warning.png)
 
 > [!WARNING]
 > If your .pbix or .pbit file becomes corrupt or causes Power BI Desktop instability due to unsupported changes made through an External Tool, Microsoft Support will not be able to assist you. For this reason, **always** keep a backup of your .pbix or .pbit file before launching any External Tool that allows making changes to your data model.

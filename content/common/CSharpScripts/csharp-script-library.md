@@ -7,7 +7,7 @@ updated: 2023-02-23
 ---
 # C# Script Library
 
-![C# Script Library](~/assets/images/Cscripts/script-library-header.png)
+![C# Script Library](~/content/assets/images/Cscripts/script-library-header.png)
 
 ---
 
@@ -27,10 +27,10 @@ The top of each article denotes script compatability in TE2.x (Tabular Editor 2)
 
 ### [Tabular Editor 2 Preferences](#tab/TE2Preferences)
 "File > Preferences" 
-![Edit Hidden Partitions](~/assets/images/te2-file-menu.png)
+![Edit Hidden Partitions](~/content/assets/images/te2-file-menu.png)
 ### [Tabular Editor 3 Preferences](#tab/TE3Preferences)
 "Tools > Preferences" 
-![Edit Hidden Partitions](~/assets/images/tools-menu.png)
+![Edit Hidden Partitions](~/content/assets/images/tools-menu.png)
 
 
 

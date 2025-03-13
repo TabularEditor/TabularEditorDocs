@@ -16,7 +16,7 @@ A new active refresh will appear when a new refresh is triggered through the TOM
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-refresh-view.png" alt="Data Refresh View" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-refresh-view.png" alt="Data Refresh View" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Data Refresh View in Tabular Editor. New refresh can be started by right-clicking a table and selecting refresh </figcaption>
 </figure>
 

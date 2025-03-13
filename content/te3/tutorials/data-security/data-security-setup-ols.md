@@ -12,7 +12,7 @@ applies_to:
 # Setup or Modify Object-Level Security (OLS)
 
 
-![Data Security Visual Abstract](~/assets/images/data-security/data-security-configure-ols-visual-abstract.png)
+![Data Security Visual Abstract](~/content/assets/images/data-security/data-security-configure-ols-visual-abstract.png)
 
 
 ---
@@ -37,7 +37,7 @@ _Below is an overview of common changes one might make to existing OLS. Addition
 To remove a Role from the model, you can simply delete the Role object with `Del` or by right-clicking and selecting 'Delete'. 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-delete-role.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-delete-role.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Deleting a Role in the model.</figcaption>
 </figure>
 
@@ -53,7 +53,7 @@ To add a Role to the model:
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Creating a new Role in the model.</figcaption>
 </figure>
 
@@ -62,7 +62,7 @@ To add a Role to the model:
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> Setting the Model Permission property is necessary for Power BI.</figcaption>
 </figure>
 
@@ -76,7 +76,7 @@ To remove OLS from the model, all Columns and Tables must have their `Object Lev
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-ols-default.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-default.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> The Object-Level Security property can be found in the <i>Properties</i> pane when selecting a Column or Table. The property does not exist for Measures, Relationships and other Object Types.</figcaption>
 </figure>
 
@@ -91,7 +91,7 @@ Setup or Modification of OLS is trivial for Columns and Table. You just have to 
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-ols-change.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-change.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> The Object-Level Security property can be changed with an adjacent drop-down, allowing selection of <i>Default</i>, <i>None</i> or <i>Read</i>.</figcaption>
 </figure>
 

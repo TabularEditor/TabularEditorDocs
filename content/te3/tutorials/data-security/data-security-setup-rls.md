@@ -12,7 +12,7 @@ applies_to:
 # Configure Row-Level Security (RLS)
 
 
-![Data Security Visual Abstract](~/assets/images/data-security/data-security-configure-rls-visual-abstract.png)
+![Data Security Visual Abstract](~/content/assets/images/data-security/data-security-configure-rls-visual-abstract.png)
 
 
 ---
@@ -37,7 +37,7 @@ _Below is an overview of common changes one might make to existing RLS:_
 To remove a Role from the model, you can simply delete the Role object with `Del` or by right-clicking and selecting 'Delete'. 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-delete-role.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-delete-role.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Deleting a Role in the model.</figcaption>
 </figure>
 
@@ -53,7 +53,7 @@ To add a Role to the model:
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Creating a new Role in the model.</figcaption>
 </figure>
 
@@ -62,7 +62,7 @@ To add a Role to the model:
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-model-permission-read.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-model-permission-read.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> Setting the Model Permission property is necessary.</figcaption>
 </figure>
 
@@ -89,7 +89,7 @@ To modify an existing Table Permission for a specific role:
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-table-permissions-dax.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-table-permissions-dax.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> The DAX Filter Expression is visible in the Expression Editor when selecting a Table Permission.</figcaption>
 </figure>
 
@@ -102,7 +102,7 @@ To modify an existing Table Permission for a specific role:
 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-rls-validation.png" alt="Data Security Validation" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-rls-validation.png" alt="Data Security Validation" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 5:</strong> An example of how RLS can be validated from the DAX query window by using the Filter Expression inside of an Iterator over the Table (or part of the table, like the user alias). In this example, the original RLS Filter Expression in the Table Permission has been modified (Yellow) where an explicit User Principal Name in the dataset is added instead, to test (Green). The RLS code is executed inside of the ADDCOLUMNS iterator over a relevant part of the table. The checkmark indicates any row that evaluates to TRUE. The test demonstrates that the RLS is - for this UPN - working as expected, since <i>Gal Aehad</i> is the only user returning TRUE when their UPN is given.</figcaption>
 </figure>
 
@@ -145,7 +145,7 @@ To add a new table permission:
 1. __Right-Click the Role:__ Select 'Add table permission...'
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-table-permissions.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-table-permissions.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 6:</strong> In Tabular Editor, Table Permissions for RLS are visible under the role. New table permissions can be created by right-clicking a Role and selecting <i>'Add Table Partition...'</i></figcaption>
 </figure>
 
@@ -165,14 +165,14 @@ You can assign and remove users/groups from roles through Tabular Editor.
   1. Right-Click the __Role__, select __Edit members__...
   
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-edit-members.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-edit-members.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 7:</strong>Users can be assigned to roles by right-clicking a Role and selecting <i>'Edit members...'.</i></figcaption>
 </figure>
 
   2. Click the __dropdown button__ on the 'Add Windows AD Member' button and choose __Azure AD Member__:
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-edit-members-dialog.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-edit-members-dialog.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 8:</strong> For AAS/SSAS models, users can be added via the <i>'Edit members...'</i> dialog box.</figcaption>
 </figure>
 

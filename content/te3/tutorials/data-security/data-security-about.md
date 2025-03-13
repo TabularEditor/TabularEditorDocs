@@ -11,7 +11,7 @@ applies_to:
 ---
 # What is Data Security?
 
-![Data Security Visual Abstract](~/assets/images/data-security/data-security-visual-abstract.png)
+![Data Security Visual Abstract](~/content/assets/images/data-security/data-security-visual-abstract.png)
 
 ---
 
@@ -48,7 +48,7 @@ _Roles_ are groups of users who have the same permission / data security logic. 
   - Groups defined by other business logic or arbitrary rules (_Externals_, _Build Users_). 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> In Tabular Editor, Roles are one of the top-level object types (like Tables, Relationships, etc).</figcaption>
 </figure>
 
@@ -60,12 +60,12 @@ _Rules_ are applied for each role to one or more objects, depending on the secur
 - _<span style="color:#01a99d">RLS Table Permissions:</span>_ DAX table expressions -- return each row evaluating `True`. These permissions traverse relationships; __the design of the model is imperative to good RLS rules.__
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-table-permissions.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-table-permissions.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> In Tabular Editor, Table Permissions for RLS are visible under the role. New table permissions can be created by right-clicking a Role and selecting <i>'Add Table Partition...'</i></figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-table-permissions-dax.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-table-permissions-dax.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> Table Permission DAX is visible in the Expression Editor when selecting a Table Permission.</figcaption>
 </figure>
 
@@ -75,7 +75,7 @@ _Rules_ are applied for each role to one or more objects, depending on the secur
     - `Default` (No policy configured; equivalent to `Read`)
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-table-permissions-dax.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-table-permissions-dax.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> In Tabular Editor, object permissions are accessible in the 'Properties' window, under the 'Translations, Perspectives, Security' heading.</figcaption>
 </figure>
 
@@ -90,14 +90,14 @@ You can assign and remove users/groups from roles through Tabular Editor the fol
   1. Right-Click the __Role__, select __Edit members__...
   
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-edit-members.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-edit-members.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 7:</strong>Users can be assigned to roles by right-clicking a Role and selecting <i>'Edit members...'.</i></figcaption>
 </figure>
 
   2. Click the __dropdown button__ on the 'Add Windows AD Member' button and choose __Azure AD Member__:
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-edit-members-dialog.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-edit-members-dialog.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 8:</strong> For AAS/SSAS models, users can be added via the <i>'Edit members...'</i> dialog box.</figcaption>
 </figure>
 
@@ -131,7 +131,7 @@ RLS and OLS can only be tested with impersonation once user groups have been add
 - _Power BI Service:_ In the [Dataset Security settings](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#validating-the-role-within-the-power-bi-service).
     
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-impersonation.png" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation.png" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 5:</strong> The easiest way to test Data Security is via Impersonation with Tabular Editor. The 'Impersonation' option is possible from any data querying feature (DAX Queries, Pivot Grid, Preview Data).</figcaption>
 </figure>
 
@@ -142,7 +142,7 @@ RLS and OLS can only be tested with impersonation once user groups have been add
 > - The user must have __build permissions__ to the dataset. 
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 6:</strong> A demonstration of RLS testing in Tabular Editor using impersonation. Shown is testing with (A) Data Preview, (B) DAX Queries and (C) Pivot Grid.</figcaption>
 </figure>
 
@@ -165,7 +165,7 @@ __Without security, everyone with access to the dataset can see all the data.__
 The only restriction is whether they have access to the reports / datasets.
 
 
-![No security](~/assets/images/data-security/data-security-no-security.png)
+![No security](~/content/assets/images/data-security/data-security-no-security.png)
 
 _In the example, both Jack & Janet can see all of the data._
 
@@ -179,7 +179,7 @@ The most simple Table Permissions are _Static_:
 'Regions'[Territory] = "Central Transit Gate"
 ```
 
-![Configuration of static RLS](~/assets/images/data-security/data-security-static-rls.png)
+![Configuration of static RLS](~/content/assets/images/data-security/data-security-static-rls.png)
 
 
 _In the example:_
@@ -226,7 +226,7 @@ The result for any user added to this role is that they will only see data where
 2. Their alias in 'Employees'[Employee Name] matches one in 'Regions'[Territory Directors]
 
 
-![Dynamic RLS Configuration](~/assets/images/data-security/data-security-dynamic-rls.png)
+![Dynamic RLS Configuration](~/content/assets/images/data-security/data-security-dynamic-rls.png)
 
 _In the example, each Territory Director only sees the Territories for which they are responsible:_
 1. _Jack sees "Central Transit Gate" and "Io"._
@@ -241,7 +241,7 @@ __When a user is assigned to multiple roles, each of which have different Table 
 
 This is dangerous if it's not expected; some developers may anticipate the intersection to be taken; to only show rows where __both__ Table Permissions return `True`. This will only happen if Table Permissions are configured for multiple tables in the model; __within a Role__, the intersection is taken for all Table Permissions in the model.
 
-![RLS Roles combine table permissions using a logical OR](~/assets/images/data-security/data-security-combining-rls-roles.png)
+![RLS Roles combine table permissions using a logical OR](~/content/assets/images/data-security/data-security-combining-rls-roles.png)
 
 _In the example:_
 1. _Jack is assigned to the roles 'CTG' and 'FTL'. They will see any rows where 'Products'[Type] = "FTL" __OR__ where 'Regions'[Territory] = "Central Transit Gate". This is likely not the expected behavior; the developer likely intends to produce the result of the 'CTG/FTL' role, which returns only rows where both are true._
@@ -253,7 +253,7 @@ _Situations like this illustrate the importance of designing clear Data Security
 # [OLS](#tab/ols)
 __With OLS configured as `None`, queries are prevented from being evaluated; they return an error.__ This is an important distinction from RLS; RLS filters data, but OLS prevents evaluation. If the OLS permission is set to `Read`, there is no effect. This is done according to the OLS Permission Level of the Column or Table, and __affects all downstream dependents__ like Relationships and Measures. 
 
-![OLS configured for the Cost column](~/assets/images/data-security/data-security-ols.png)
+![OLS configured for the Cost column](~/content/assets/images/data-security/data-security-ols.png)
 
 _In the example, the column 'Territory Sales'[Cost] has an OLS Permission of `None` for the role 'Sales'. The reason is because of the below requirement:_
 
@@ -286,7 +286,7 @@ Because of #2, if you expect to use both RLS & OLS, this must be carefully consi
 
 An example of #1 is below:
 
-![Combining OLS and RLS in the same role produces the expected outcome](~/assets/images/data-security/data-security-ols-and-rls-functional.png)
+![Combining OLS and RLS in the same role produces the expected outcome](~/content/assets/images/data-security/data-security-ols-and-rls-functional.png)
 
 _In the example:_
 1. _Jack, who has been assigned the 'CTG' Role:_
@@ -312,7 +312,7 @@ Because of #2, if you expect to use both RLS & OLS, this must be carefully consi
 
 An example of #2 is below:
 
-![❌ Combining OLS and RLS across roles will produce an error](~/assets/images/data-security/data-security-ols-and-rls-dysfunctional.png)
+![❌ Combining OLS and RLS across roles will produce an error](~/content/assets/images/data-security/data-security-ols-and-rls-dysfunctional.png)
 
 _In the above example:_
 1. _Jack, who has been assigned the 'Read Users' Role:_
@@ -334,7 +334,7 @@ _Users granted Build Permissions to the dataset are added to the Build Azure AD 
 # [❌ No Roles](#tab/role)
 __No user will be able to read any data until they are added to the role__, so long as Data Security is configured in the dataset. 
 
-![No Access or No Role](~/assets/images/data-security/data-security-no-role.png)
+![No Access or No Role](~/content/assets/images/data-security/data-security-no-role.png)
 
 > [!NOTE]
 > Don't forget to give users access to the dataset AND add them to the security role.
@@ -343,7 +343,7 @@ __No user will be able to read any data until they are added to the role__, so l
 # [❌ No Access](#tab/access)
 __If a user is added to a security role, this will not automatically grant them read access to the dataset.__ They will still not be able to access any dataset or reports. 
 
-![No Access or No Role](~/assets/images/data-security/data-security-no-access.png)
+![No Access or No Role](~/content/assets/images/data-security/data-security-no-access.png)
 
 > [!NOTE]
 > Don't forget to give users access to the dataset AND add them to the security role.
@@ -356,7 +356,7 @@ __If a user is added to a security role, this will not automatically grant them 
 # [❌ Access Via Workspace Roles](#tab/workspace)
 __If a user is given access to a dataset via the Admin, Member or Contributor roles, they will be able to view all data, irrespective of the data security configuration and their assigned roles.__ This is a common mistake in scaling or self-service Power BI ecosystems, resulting in data leaks and non-compliance. 
 
-![Problems with ](~/assets/images/data-security/data-security-workspace-roles.png)
+![Problems with ](~/content/assets/images/data-security/data-security-workspace-roles.png)
 
 > [!WARNING]
 > __It is a best practice to avoid distribution via Workspace Roles, where feasible.__

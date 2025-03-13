@@ -13,7 +13,7 @@ applies_to:
 
 If you prefer to compile your scripts using the new Roslyn compiler introduced with Visual Studio 2017, you can set this up under **Tools > Preferences > Tabular Editor > C# SCripts and Maros**. This allows you to use newer C# language features such as string interpolation. Simply specify the path to the directory that holds the compiler executable (`csc.exe`) and specify the language version as an option for the compiler:
 
-![Custom Compiler Te3](~/assets/images/custom-compiler-te3.png)
+![Custom Compiler Te3](~/content/assets/images/custom-compiler-te3.png)
 
 ### Visual Studio 2017
 

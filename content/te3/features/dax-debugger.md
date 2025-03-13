@@ -49,7 +49,7 @@ Once the debugger is started, you are presented with a number of new views that 
 3. (Optional) Add one or more columns to the Pivot Grid in the Filter area, Columns area or Row area.
 4. Right-click on the value cell within the Pivot Grid and choose **Debug this value**.
 
-![Debug From Pivot](../../../assets/images/debug-from-pivot.png)
+![Debug From Pivot](~/content/assets/images/debug-from-pivot.png)
 
 # Debugging through a DAX Query
 
@@ -61,7 +61,7 @@ Once the debugger is started, you are presented with a number of new views that 
 
 3. Hit F5 to execute the query within Tabular Editor 3. Locate the value you want to debug, right-click the cell and choose **Debug**.
 
-![Debug From Query](../../../assets/images/debug-from-query.png)
+![Debug From Query](~/content/assets/images/debug-from-query.png)
 
 # Debug views
 
@@ -75,32 +75,32 @@ The debugger provides the following views (if they are hidden, they can be acces
 ## Locals
 This view lists the columns, measures and variables within the current scope of execution and displays their values. It also displays the value of the current subexpression being debugged. Values in this list are updated automatically when stepping to a different subexpression, or when the evaluation context is changed. **Local values are always evaluated at the currently selected item of the call tree**.
 
-![Locals](../../../assets/images/locals.png)
+![Locals](~/content/assets/images/locals.png)
 
 You can inspect a locals value by clicking on the magnifying glass button within the **Value** column. This will bring up a popup dialog showing the value in more details. This is especially useful if the inspected value is a table.
 
-![Inspect locals value](../../../assets/images/inspect-locals.png)
+![Inspect locals value](~/content/assets/images/inspect-locals.png)
 
 If you prefer to inspect the locals value in a separate DAX query window, you can toggle off the **Use popup inspector** option under **Tools > Preferences > DAX Debugger > Locals**.
 
-![Dax Debugger Settings](../../../assets/images/dax-debugger-settings.png)
+![Dax Debugger Settings](~/content/assets/images/dax-debugger-settings.png)
 
 ## Watch
 This view allows you to enter any DAX expression, which will be calculated within the current evaluation context. You can enter scalar as well as table expressions and you can use all DAX functions available and refer to variables within the current evaluation scope. Watch values are automatically updated when stepping to a different subexpression, or when the evaluation context is changed. **Watch values are always evaluated at the scope of the currently selected item in the evaluation context stack**.
 
-![Watch](../../../assets/images/watch.png)
+![Watch](~/content/assets/images/watch.png)
 
 To quickly add a variable, measure or subexpression to the Watch view, simply highlight a portion of code and drag it into the Watch view. You can also place the cursor over the expression you want to add, then right-click and choose **Watch this expression**:
 
-![Quick Add To Watch](../../../assets/images/quick-add-to-watch.png)
+![Quick Add To Watch](~/content/assets/images/quick-add-to-watch.png)
 
 To add, duplicate or delete Watch expressions, use the right-click context menu of the Watch view:
 
-![Watch Context Menu](../../../assets/images/watch-context-menu.png)
+![Watch Context Menu](~/content/assets/images/watch-context-menu.png)
 
 The **Generate query** option is identical to the magnifying glass button within the **Value** column, highlighted in the screenshot below. By clicking this, the debugger will open a new DAX query document, that defines the context of the calculation as well as the calculation itself, allowing you to inspect the results in more details. This is particularly useful when the watch expression is a table expression, as shown below:
 
-![Inspect Watch](../../../assets/images/inspect-watch.png)
+![Inspect Watch](~/content/assets/images/inspect-watch.png)
 
 > [!TIP]
 > What's the difference between the **Locals** view and the **Watch** view?
@@ -110,32 +110,32 @@ The **Generate query** option is identical to the magnifying glass button within
 ## Evaluation Context
 This view provides information about the DAX evaluation context of the current subexpression. For example, a `CALCULATE` expression might perform a context transition or add a filter to the evaluation context, or a `SUMX` iterator might add a row context.
 
-![Evaluation Context](../../../assets/images/evaluation-context.png)
+![Evaluation Context](~/content/assets/images/evaluation-context.png)
 
 You can double-click on an item in the Evaluation Context stack, to bring the focus to that item. This will cause all **Watch** expressions to be reevaluated in the new context (that is, all contexts from the bottom of the stack up to and including the currently focused item). This is illustrated in the animation below. Notice also how you can inspect the value of individual columns in the active row context by paging through rows within any active iterations:
 
-![Call Tree](../../../assets/images/navigating-evaluation-context.gif)
+![Call Tree](~/content/assets/images/navigating-evaluation-context.gif)
 
 You can also toggle individual filters from the outer filter context (for example, grouping columns on the [`SUMMARIZECOLUMNS`](https://dax.guide/summarizecolumns) call that generated the query or filters specified in a Pivot Grid). This is illustrated in the animation below. Filters toggled this way will apply to both Watch and Locals.
 
-![Call Tree](../../../assets/images/toggle-filters.gif)
+![Call Tree](~/content/assets/images/toggle-filters.gif)
 
 Lastly, you can browse the first 1000 rows of any iterator, setting the current row context to a specific row within those first 1000, by clicking on the Zoom button within the **Row** column.
 
-![Browse Row Contexts](../../../assets/images/browse-row-contexts.png)
+![Browse Row Contexts](~/content/assets/images/browse-row-contexts.png)
 
 ## Call Tree
 This view provides an outline of the entire calculation and lets you easily navigate between subexpressions by double-clicking (you can also use shortcut keys for navigation). The tree also provides information about context transitions, iterations and row contexts. Branches of code that will not be executed (for example in an `IF` or `SWITCH` call, or when an iterator is empty) are striked out.
 
-![Call Tree](../../../assets/images/call-tree.png)
+![Call Tree](~/content/assets/images/call-tree.png)
 
 As you navigate between items in the call tree, the debug DAX script will highlight the code corresponding to the call tree item, while also indicating (with a gray background) the path taken to reach the highlighted code, as shown below:
 
-![Call Tree](../../../assets/images/navigating-call-tree.gif)
+![Call Tree](~/content/assets/images/navigating-call-tree.gif)
 
 Notice how the values in the **Locals** view are updated as the tree is navigated. You can also navigate to a subexpression by placing the cursor over the expression, right-click and choose the **Step into selection** option (Ctrl+B).
 
-![Step into selection](../../../assets/images/debugger-step-into-selection.png)
+![Step into selection](~/content/assets/images/debugger-step-into-selection.png)
 
 ## Scalar predicates
 
@@ -166,7 +166,7 @@ The `FILTER` function is an iterator that iterates over the table `ALL(Geography
 
 When debugging a scalar predicate, the **Locals** view will show two special items, **(Current expression)** and **(Filter expression)**. These are described below:
 
-![Debug Scalar Predicates](../../../assets/images/debug-scalar-predicates.png)
+![Debug Scalar Predicates](~/content/assets/images/debug-scalar-predicates.png)
 
 In the above screenshot:
 

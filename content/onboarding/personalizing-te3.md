@@ -17,7 +17,7 @@ Most of the settings covered in this article are accessed through the **Tools > 
 
 The first page you will encounter within the **Preferences** dialog is the **Tabular Editor > Features** page (see screenshot below). Below is a short description of the features on this page, and what they are commonly used for:
 
-![Pref General Features](../../assets/images/pref-general-features.png)
+![Pref General Features](~/content/assets/images/pref-general-features.png)
 
 ## Power BI
 
@@ -62,7 +62,7 @@ Normally, Tabular Editor 3 should automatically stop and remove any AS traces st
 
 The settings below control various aspects of the TOM Explorer. You can find these settings under **Tabular Editor > TOM Explorer**:
 
-![Tom Explorer Settings](../../assets/images/tom-explorer-settings.png)
+![Tom Explorer Settings](~/content/assets/images/tom-explorer-settings.png)
 
 ##### *Show full branch* (disabled)
 
@@ -79,13 +79,13 @@ If you prefer Tabular Editor 3 to prompt you to confirm all object deletions, en
 
 Tabular Editor 3's DAX editor is highly configurable, and it is easy to get overwhelmed by the many settings available. This section highlights the most common and important settings. Locate the general settings under **Text Editors > DAX Editor > General**:
 
-![Dax Editor General](../../assets/images/dax-editor-general.png)
+![Dax Editor General](~/content/assets/images/dax-editor-general.png)
 
 ## General
 
 The *Line numbers*, *Code folding*, *Visible whitespace* and *Indentation guides* settings can be used to toggle various visual feature of the editor. In the screenshot below, all four options have been enabled:
 
-![Visible Whitespace](../../assets/images/visible-whitespace.png)
+![Visible Whitespace](~/content/assets/images/visible-whitespace.png)
 
 ##### *Use tabs* (disabled)
 
@@ -103,7 +103,7 @@ These settings determine certain behavior of the DAX code analyzer. The *Locale*
 
 On the **Text Editors > DAX Editor > Auto Formatting** page, you can find a wide range of settings for controlling how your DAX code is formatted.
 
-![Auto Formatting Settings](../../assets/images/auto-formatting-settings.png)
+![Auto Formatting Settings](~/content/assets/images/auto-formatting-settings.png)
 
 ##### *Auto format code as you type* (enabled)
 

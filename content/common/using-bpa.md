@@ -12,11 +12,11 @@ The Best Practice Analyzer (BPA) lets you define rules on the metadata of your m
 ## PBA Overview
 The BPA overview shows you all the rules defined in your model that are currently being broken:
 
-![BPA Overview](~/assets/images/common/BPAOverview.png)
+![BPA Overview](~/content/assets/images/common/BPAOverview.png)
 
 And you will always be able to see in the main UI how many rules you are currently being broken.
 
-![BPA Overview Line](~/assets/images/common/PBAOverviewMenuLine.png)
+![BPA Overview Line](~/content/assets/images/common/PBAOverviewMenuLine.png)
 
 Clicking the link (or pressing F10), brings up the full BPA window.
 
@@ -43,11 +43,11 @@ The Best Practice Analyzer window continuously lists all the **effective rules**
 ## Managing Best Practice Rules
 If you need to add, remove or modify the rules applying to your model, there's a specific UI for that. You can bring it up by clicking the top-left button on the Best Practice Analyzer window, or by using the "Tools > Manage BPA Rules..." menu item in the main window.
 
-![BPA Manage Rules](~/assets/images/common/BPAOverviewManageRules.png)
+![BPA Manage Rules](~/content/assets/images/common/BPAOverviewManageRules.png)
 
 The Manage BPA rules window contains two lists: The top list represents the **collections** of rules that are currently loaded. Selecting a collection in this list, will display all the rules that are defined within this collection in the bottom list.
 
-![BPA Manage Rules UI](~/assets/images/common/PBAOverviewManageRulesPopUp.png)
+![BPA Manage Rules UI](~/content/assets/images/common/PBAOverviewManageRulesPopUp.png)
 
 ### Rule Collections
  By default, three rule collections will show up:
@@ -69,14 +69,14 @@ If the same rule (by ID) is located in more than one collection, the order of pr
 ##### Effective Rules
 At the top of the list, you'll see a special collection called **(Effective rules)**. Selecting this collection will show you the list of rules that actually apply to the currently loaded model, respecting the precedence of rules with identical ID's, as mentioned above. The lower list will indicate which collection a rule belongs to. Also, you will notice that a rule will have its name striked out, if a rule with a similar ID exists in a collection of higher precedence:
 
-![BPA Manage Rules UI](~/assets/images/common/PBAOverviewManageRulesPopUpHigherPrecedence.png)
+![BPA Manage Rules UI](~/content/assets/images/common/PBAOverviewManageRulesPopUpHigherPrecedence.png)
 
 #### Adding additional collections
 Tabular Editor provides the possibility of including rules from other sources on a model. If, for example, you have a rules file located on a network share, you can now include that file as a rule collection in the current model. If you have write access to the location of the file, you'll also be able to add/modify/remove rules from the file. Rule collections that are added this way take precedence over rules that are defined within the model. If you add multiple such collections, you can shift them up and down to control their mutual precedence.
 
 Click the "Add..." button to add a new rule collection to the model. This provides the following options:
 
-![BPA Manage Rules UI](~/assets/images/common/PBAOverviewManageRulesPopUpCreateNewRuleFile.png)
+![BPA Manage Rules UI](~/content/assets/images/common/PBAOverviewManageRulesPopUpCreateNewRuleFile.png)
 
 * **Create new Rule File**: This will create a new, empty, .json file at the specified location, which you can subsequently add rules to. When choosing the file, notice that there is an option for using relative file paths. This is useful when you want to store the rule file in the same code repository as the current model. However, please be aware that a relative rule file reference only works, when the model has been loaded from disk (since there is no working directory when loading a model from an instance of Analysis Services).
 * **Include local Rule File**: Use this option if you already have a .json file containing rules, that you want to include in your model. Again, you have the option of using relative file paths, which may be beneficial if the file is located close to the model metadata. If the file is located on a network share (or generally, on a drive different than where the currently loaded model metadata resides), you can only include it using an absolute path.
@@ -92,4 +92,4 @@ You can use placeholder values within the Best Practice Rule's description. This
 * `%objectname%` returns only the name of the current object
 * `%objecttype%` returns the type of the current object
 
-![BPA Manage Rules UI](~/assets/images/common/BPAOverviewRuleDescriptionPlaceHolders.png)
+![BPA Manage Rules UI](~/content/assets/images/common/BPAOverviewRuleDescriptionPlaceHolders.png)

@@ -30,7 +30,7 @@ applies_to:
 
 ## Example Output
 <br>
-<img src="~/assets/images/Cscripts/script-count-things-output.png" alt="Image description" id="count-things-output">
+<img src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Image description" id="count-things-output">
 <script>
     var img = document.getElementById("count-things-output");
     img.style.width = "400px";

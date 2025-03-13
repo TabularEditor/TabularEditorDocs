@@ -43,7 +43,7 @@ To access the preferences dialog, go to **Tools > Preferences**.
 
 ## Tabular Editor > Keyboard
 
-![image](~/assets/images/keyboard-mappings.png)
+![image](~/content/assets/images/keyboard-mappings.png)
 
 ## Data Browsing > Pivot Grid / DAX Query
 

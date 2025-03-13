@@ -519,21 +519,21 @@ This snippet takes the selected columns and creates a measure to highlight the m
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/Cscripts/script-create-date-table-select-earliest-date.png" alt="Select Earliest date dialog" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-earliest-date.png" alt="Select Earliest date dialog" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> When running the script, a dialog will appear which prompts you to select a DateTime column from the model that contains the earliest date for which you want to configure your Date table.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/Cscripts/script-create-date-table-select-latest-date.png" alt="Select Latest date dialog" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-latest-date.png" alt="Select Latest date dialog" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong>  Once selecting the earliest date, a dialog will appear which prompts you to select a DateTime column from the model that contains the latest date for which you want to configure your Date table.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/Cscripts/script-create-date-table-confirmation.png" alt="Confirmation of the date table being created" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-confirmation.png" alt="Confirmation of the date table being created" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> A confirmation dialog will inform you that the Date table was configured successfully based on the two selected dates.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/assets/images/Cscripts/script-create-date-table.png" alt="Resulting Date Table Template" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table.png" alt="Resulting Date Table Template" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> An example of an organized, configured date table created with a single click using this script.</figcaption>
 </figure>

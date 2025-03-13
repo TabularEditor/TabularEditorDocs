@@ -18,7 +18,7 @@ The only complaint in this regard, by users of Tabular Editor 2.x, was the lack 
 
 This has all been addressed with the new DAX code editor used by Tabular Editor 3.
 
-![Editing a complex DAX expression](~/assets/images/dax-editor-screenshot.png)
+![Editing a complex DAX expression](~/content/assets/images/dax-editor-screenshot.png)
 
 The remainder of this article describes how to create measures and other calculated objects, and how to modify the DAX expressions on these objects. To learn more about the many features of the DAX code editor, see <xref:dax-editor>.
 
@@ -31,17 +31,17 @@ Once you have [imported some tables](xref:importing-tables-data-modeling#importi
 
 To add a new measure using Tabular Editor, right-click on the table in which you want to add the measure, then choose **Create > Measure** (ALT+1).
 
-![Adding New Measure](~/assets/images/adding-new-measure.png)
+![Adding New Measure](~/content/assets/images/adding-new-measure.png)
 
 When a new measure is added, the name of that measure will be editable. Hit ENTER when you have provided a name for the measure. You can always edit the name later in the **Properties** view or by pressing F2 while the measure is selected in the **TOM Explorer**.
 
 The **Expression Editor** view is used to provide the DAX expression for the measure. As you enter the code, notice how the DAX editor provides code suggestions and even underlines syntax or semantic errors.
 
-![Add Measure Edit Dax](~/assets/images/add-measure-edit-dax.png)
+![Add Measure Edit Dax](~/content/assets/images/add-measure-edit-dax.png)
 
 The dropdown box at the top left corner of the **Expression Editor** is used to switch between different DAX properties of the currently selected object. For example, in newer versions of Analysis Services, measures have an `Expression` property as well as a [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/). Other types of objects can have different properties that contain DAX code. For example, [KPIs](https://docs.microsoft.com/en-us/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) have three different DAX properties. To add a KPI in Tabular Editor, right-click on a measure and choose **Create > KPI**.
 
-![Editing Kpis](~/assets/images/editing-kpis.png)
+![Editing Kpis](~/content/assets/images/editing-kpis.png)
 
 If you want your measure to be hidden, simply right-click and choose the **Make invisible** (CTRL+I) option. Likewise, you can unhide a measure by choosing the **Make visible** (CTRL+U) option.
 
@@ -116,7 +116,7 @@ You can use the arrow buttons in the top right corner of the **Expression Editor
 
 To view DAX dependencies between objects, select an object in the **TOM Explorer**, then right-click and choose **Show dependencies** (SHIFT+F12). This will open a window that displays the dependencies (in both directions) of the selected object. Double-click on an object in this window to quickly navigate to that object.
 
-![Dax Dependencies And Tom Explorer](~/assets/images/dax-dependencies-and-tom-explorer.png)
+![Dax Dependencies And Tom Explorer](~/content/assets/images/dax-dependencies-and-tom-explorer.png)
 
 # Display folders
 
