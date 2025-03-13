@@ -4,37 +4,35 @@
             "src": [
                 {
                     "files": [
-                        "bin/release/*.dll"
+                        "content/_apiSource/*.dll"
                     ]
                 }
             ],
-            "dest": "api",
-            "filter": "filterConfig.yml"
+            "dest": "content/api",
+            "filter": "configuration/filterConfig.yml"
         }
     ],
     "build": {
         "content": [
             {
-                "files": [ "te3/**/*.md", "te2/**/*.md", "onboarding/**/*.md", "common/**/*.md", "*.md", "toc.yml", "api/*", "kb/**/*.md" ]
+                "files": [ "content/te3/**/*.md", "content/te2/**/*.md", "content/onboarding/**/*.md", "content/common/**/*.md", "content/*.md", "content/toc.yml", "content/api/*", "content/kb/**/*.md" ]
             }
         ],
         "template": [
             "default",
-            "templates/default",
-            "templates/lightbox-featherlight",
-            "templates/api"
+            "templates/tabulareditor"
         ],
         "resource": [
             {
-                "files": [ "images/**", "te3/images/**", "whats-new/**", "404.html", "te3/features/images/**" ]
+                "files": [ "assets/images/**", "content/te3/images/**", "content/whats-new/**", "content/404.html", "content/te3/features/images/**" ]
             }
         ],
         "globalMetadata": {
             "_appTitle": "Tabular Editor Documentation",
             "_enableSearch": true,
-            "_appLogoPath": "images/te3-logo-50.svg",
-            "_appFaviconPath": "images/te3logo.png",
-            "_enableNewTab": true
+            "_appFaviconPath": "assets/images/te3logo.png",
+            "_enableNewTab": true,
+            "_disableNavbar": true
         },
         "markdownEngineName": "markdig",
         "dest": "_site",

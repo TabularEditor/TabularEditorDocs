@@ -44,3 +44,5 @@ project.lock.json
 /_exported_templates/default
 /api/*.yml
 /api/.manifest
+/content/api/*.yml
+/content/api/.manifest
