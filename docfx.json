@@ -8,31 +8,39 @@
                     ]
                 }
             ],
-            "dest": "content/api",
+            "dest": "/content/api",
             "filter": "configuration/filterConfig.yml"
         }
     ],
     "build": {
         "content": [
-            {
-                "files": [ "content/te3/**/*.md", "content/te2/**/*.md", "content/onboarding/**/*.md", "content/common/**/*.md", "content/*.md", "content/toc.yml", "content/api/*", "content/kb/**/*.md" ]
-            }
+            { "files": "**/*.md", "src": "content/te3", "dest": "te3" },
+            { "files": "**/*.md", "src": "content/te2", "dest": "te2" },
+            { "files": "**/*.md", "src": "content/onboarding", "dest": "onboarding" },
+            { "files": "**/*.md", "src": "content/common", "dest": "common" },
+            { "files": "**/*.md", "src": "content/kb", "dest": "kb" },
+            { "files": "*.md", "src": "content" },
+            { "files": "toc.yml", "src": "content" },
+            { "files": "*", "src": "content/api", "dest": "api" }
         ],
         "template": [
             "default",
             "templates/tabulareditor"
         ],
         "resource": [
-            {
-                "files": [ "content/assets/images/**", "content/te3/images/**", "content/whats-new/**", "content/404.html", "content/te3/features/images/**" ]
-            }
+            { "files": "**", "src": "content/assets/images", "dest": "images" },
+            { "files": "features/images/**", "src": "content/te3", "dest": "te3" },
+            { "files": "**", "src": "content/whats-new", "dest": "whats-new" },
+            { "files": "*.html", "src": "content" },
+            { "files": "images/**", "src": "content/te3", "dest": "te3" }
         ],
         "globalMetadata": {
             "_appTitle": "Tabular Editor Documentation",
             "_enableSearch": true,
-            "_appFaviconPath": "content/assets/images/te3logo.png",
+            "_appFaviconPath": "assets/images/te3logo.png",
             "_enableNewTab": true,
-            "_disableNavbar": true
+            "_disableNavbar": true,
+            "_disableContribution": true
         },
         "markdownEngineName": "markdig",
         "dest": "_site",
