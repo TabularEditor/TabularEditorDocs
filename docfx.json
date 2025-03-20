@@ -8,7 +8,7 @@
                     ]
                 }
             ],
-            "dest": "/content/api",
+            "dest": "content/api",
             "filter": "configuration/filterConfig.yml"
         }
     ],
