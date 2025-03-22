@@ -17,7 +17,7 @@ exports.preTransform = function (model) {
         url: "https://tabulareditor.com/learn"
       },
       {
-        text: "Support" ,
+        text: "Resources" ,
         url: "/",
         subMenu: {
           items: [
