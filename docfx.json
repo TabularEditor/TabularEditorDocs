@@ -4,37 +4,43 @@
             "src": [
                 {
                     "files": [
-                        "bin/release/*.dll"
+                        "content/_apiSource/*.dll"
                     ]
                 }
             ],
-            "dest": "api",
-            "filter": "filterConfig.yml"
+            "dest": "content/api",
+            "filter": "configuration/filterConfig.yml"
         }
     ],
     "build": {
         "content": [
-            {
-                "files": [ "te3/**/*.md", "te2/**/*.md", "onboarding/**/*.md", "common/**/*.md", "*.md", "toc.yml", "api/*", "kb/**/*.md" ]
-            }
+            { "files": "**/*.md", "src": "content/te3", "dest": "te3" },
+            { "files": "**/*.md", "src": "content/te2", "dest": "te2" },
+            { "files": "**/*.md", "src": "content/onboarding", "dest": "onboarding" },
+            { "files": "**/*.md", "src": "content/common", "dest": "common" },
+            { "files": "**/*.md", "src": "content/kb", "dest": "kb" },
+            { "files": "*.md", "src": "content" },
+            { "files": "toc.yml", "src": "content" },
+            { "files": "*", "src": "content/api", "dest": "api" }
         ],
         "template": [
             "default",
-            "templates/default",
-            "templates/lightbox-featherlight",
-            "templates/api"
+            "templates/tabulareditor"
         ],
         "resource": [
-            {
-                "files": [ "images/**", "te3/images/**", "whats-new/**", "404.html", "te3/features/images/**" ]
-            }
+            { "files": "**", "src": "content/assets/images", "dest": "images" },
+            { "files": "features/images/**", "src": "content/te3", "dest": "te3" },
+            { "files": "**", "src": "content/whats-new", "dest": "whats-new" },
+            { "files": "*.html", "src": "content" },
+            { "files": "images/**", "src": "content/te3", "dest": "te3" }
         ],
         "globalMetadata": {
             "_appTitle": "Tabular Editor Documentation",
             "_enableSearch": true,
-            "_appLogoPath": "images/te3-logo-50.svg",
             "_appFaviconPath": "images/te3logo.png",
-            "_enableNewTab": true
+            "_enableNewTab": true,
+            "_disableNavbar": true,
+            "_disableContribution": true
         },
         "markdownEngineName": "markdig",
         "dest": "_site",
