@@ -31,8 +31,7 @@
             { "files": "**", "src": "content/assets/images", "dest": "images" },
             { "files": "features/images/**", "src": "content/te3", "dest": "te3" },
             { "files": "**", "src": "content/whats-new", "dest": "whats-new" },
-            { "files": "*.html", "src": "content" },
-            { "files": "images/**", "src": "content/te3", "dest": "te3" }
+            { "files": "*.html", "src": "content" }
         ],
         "globalMetadata": {
             "_appTitle": "Tabular Editor Documentation",

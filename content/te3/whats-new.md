@@ -10,4 +10,4 @@ updated: 2023-10-11
       iframe.style.height = height + 'px';
     }
 </script>
-<iframe id="content-iframe" src="../whats-new/index.html" title="What's new" style="border:none;width:100%;"></iframe>
+<iframe id="content-iframe" src="../whats-new/index.html?version=3.19.0" title="What's new" style="border:none;width:100%;"></iframe>
