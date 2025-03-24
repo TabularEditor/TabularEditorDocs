@@ -24,12 +24,20 @@ exports.transform = function (model) {
               url: "https://tabulareditor.com/contact"
             },
             {
+              text: "Blog",
+              url: "https://tabulareditor.com/blog"
+            },
+            {
               text: "Newsletter",
               url: "https://tabulareditor.com/newsletter"
             },
             {
               text: "Documentation",
               url: "https://docs.tabulareditor.com/?tabs=TE3"
+            },
+            {
+              text: "Support community",
+              url: "https://github.com/TabularEditor/TabularEditor3"
             }
           ]
         }
