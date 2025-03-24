@@ -20,10 +20,6 @@ exports.transform = function (model) {
         subMenu: {
           items: [
             {
-              text: "Contact",
-              url: "https://tabulareditor.com/contact"
-            },
-            {
               text: "Blog",
               url: "https://tabulareditor.com/blog"
             },
@@ -41,6 +37,10 @@ exports.transform = function (model) {
             }
           ]
         }
+      },
+      {
+        text: "Contact Us",
+        url: "https://tabulareditor.com/contact"
       }
     ],
     button1: {

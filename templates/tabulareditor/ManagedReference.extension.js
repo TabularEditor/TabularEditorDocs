@@ -22,10 +22,6 @@ exports.preTransform = function (model) {
         subMenu: {
           items: [
             {
-              text: "Contact",
-              url: "https://tabulareditor.com/contact"
-            },
-            {
               text: "Blog",
               url: "https://tabulareditor.com/blog"
             },
@@ -43,6 +39,10 @@ exports.preTransform = function (model) {
             }
           ]
         }
+      },
+      {
+        text: "Contact",
+        url: "https://tabulareditor.com/contact"
       }
     ],
     button1: {
