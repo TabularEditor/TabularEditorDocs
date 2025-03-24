@@ -41,7 +41,7 @@ exports.preTransform = function (model) {
         }
       },
       {
-        text: "Contact",
+        text: "Contact Us",
         url: "https://tabulareditor.com/contact"
       }
     ],
