@@ -317,12 +317,6 @@
             Returns all objects used by the current object (directly or indirectly through other objects).
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Utils.ReferencedByList.Deep">
-            <summary>
-            Returns all objects that reference the current object (directly or indirectly through other objects).
-            </summary>
-            <returns></returns>
-        </member>
         <member name="P:TabularEditor.TOMWrapper.Utils.ReferencedByList.AnyVisible">
             <summary>
             Iterates the entire dependency tree and determines if any objects referencing the current object
@@ -330,6 +324,12 @@
             create a Best Practice Rule that allows you to detect objects that can safely be removed since
             they do not have any references.
             </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Utils.ReferencedByList.Deep">
+            <summary>
+            Returns all objects that reference the current object (directly or indirectly through other objects).
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:TabularEditor.TOMWrapper.Utils.Scripter">
             <summary>
@@ -444,78 +444,9 @@
             June 2021 release of Power BI Desktop introduces shortcut expressions for CALCULATE/CALCULATETABLE that allows the use of Measures or aggregate functions in boolean expressions
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.ApplyChanges">
+        <member name="F:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionTableNamedVariables">
             <summary>
-            Call this when the UpdateLocks reach 0 to apply all cached changes
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeColumnNameChange(TabularEditor.TOMWrapper.Column,System.String)">
-            <summary>
-            When the name of a column is changed, DAX formulas referencing the column has to be updated.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeTableNameChange(TabularEditor.TOMWrapper.Table,System.String)">
-            <summary>
-            When the name of a table is changed, DAX formulas referencing the ´table has to be updated.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeMeasureNameChange(TabularEditor.TOMWrapper.Measure,System.String)">
-            <summary>
-            When the name of a measure is changed, DAX formulas referencing the measure has to be updated.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeAddMeasure(TabularEditor.TOMWrapper.Measure)">
-            <summary>
-            When a measure is added, previously invalid expressions might become valid.
-            </summary>
-            <param name="measure"></param>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeRemoveMeasure(TabularEditor.TOMWrapper.Measure)">
-            <summary>
-            When a measure is deleted, expressions referencing that measure will become invalid
-            </summary>
-            <param name="measure"></param>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeColumnDataTypeChange(TabularEditor.TOMWrapper.Column,TabularEditor.TOMWrapper.DataType)">
-            <summary>
-            Changing the data type of a column (DataColumn or CalculatedColumn / CalculatedTableColumn with InferDataType = false), can cause cascades.
-            </summary>
-            <param name="column"></param>
-            <param name="newDataType"></param>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeMeasureExpressionChange(TabularEditor.TOMWrapper.Measure)">
-            <summary>
-            When the expression of a measure is changed, the resulting data type of the measure might change, potentially causing cascasdes.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeRlsFilterExpressionChange(TabularEditor.TOMWrapper.TablePermission)">
-            <summary>
-            When the expression of a measure is changed, the resulting data type of the measure might change, potentially causing cascasdes.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeKpiExpressionChange(TabularEditor.TOMWrapper.KPI,Dax.Analyzer.KpiProperty)">
-            <summary>
-            When the expression of a KPI is changed, the resulting data type of the KPI might change, potentially causing cascasdes.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeCalculatedColumnExpressionChange(TabularEditor.TOMWrapper.CalculatedColumn)">
-            <summary>
-            When the expression of a Calculated Column is changed, the resulting data type of the column might change, potentially causing cascasdes.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeCalculatedTableExpressionChange(TabularEditor.TOMWrapper.CalculatedTable)">
-            <summary>
-            When the expression of a Calculated Table is changed, the resulting columns and data types might change, potentially causing cascades.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeAddColumn(TabularEditor.TOMWrapper.Column,TabularEditor.TOMWrapper.Table)">
-            <summary>
-            Adding a column to a table can cause cascades
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Semantics.SemanticAnalysisCascader.CascadeRemoveColumn(TabularEditor.TOMWrapper.Column,TabularEditor.TOMWrapper.Table)">
-            <summary>
-            Removing a column from a table can cause cascades
+            
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.AlternateOf">
@@ -586,7 +517,7 @@
             CTOR - only called from static factory methods on the class
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.AnnotationHelper.ClearTabularEditorAnnotations(TabularEditor.TOMWrapper.IInternalAnnotationObject,System.Boolean)">
+        <member name="M:TabularEditor.TOMWrapper.AnnotationHelper.ClearTabularEditorAnnotations(TabularEditor.TOMWrapper.IAnnotationObject,System.Boolean)">
             <summary>
             Removes all annotations from the model, that are used by Tabular Editor to serialize metadata in a way different from the TOM. For example,
             to store object translations as annotations on the object instead of elsewhere in the TOM tree. All these annotations can be recreated from
@@ -595,7 +526,7 @@
             <param name="obj"></param>
             <param name="includeChildren"></param>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.AnnotationHelper.SavePerspectives(TabularEditor.TOMWrapper.IInternalTabularPerspectiveObject,System.Boolean)">
+        <member name="M:TabularEditor.TOMWrapper.AnnotationHelper.SavePerspectives(TabularEditor.TOMWrapper.ITabularPerspectiveObject,System.Boolean)">
             <summary>
             Stores all perspective membership information on the current instance of an ITabularPerspectiveObject
             as annotations on the object. Perspective membership can later be retrieved using the LoadPerspectives() extension method.
@@ -603,7 +534,7 @@
             <param name="obj"></param>
             <param name="includeChildren"></param>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.AnnotationHelper.LoadPerspectives(TabularEditor.TOMWrapper.IInternalTabularPerspectiveObject,System.Boolean)">
+        <member name="M:TabularEditor.TOMWrapper.AnnotationHelper.LoadPerspectives(TabularEditor.TOMWrapper.ITabularPerspectiveObject,System.Boolean)">
             <summary>
             Reads any perspective membership information stored in the annotations of the current instance of an ITabularPerspectiveObject
             and applies them to the model perspectives.
@@ -630,6 +561,136 @@
             </summary>
             <param name="obj"></param>
         </member>
+        <member name="T:TabularEditor.TOMWrapper.AggregateFunction">
+            <summary>
+            Specifies the aggregate function to be used by reporting tools to summarize column values.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Default">
+            <summary>
+            The default aggregation is Sum for numeric columns. Otherwise the default is None.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.None">
+            <summary>
+            Leaves the aggregate function unspecified.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Sum">
+            <summary>
+            Calculates the sum of values contained in the column. This is the default aggregation function.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Min">
+            <summary>
+            Returns the lowest value for all child members.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Max">
+            <summary>
+            Returns the highest value for all child members.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Count">
+            <summary>
+            Returns the rows count in the table.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Average">
+            <summary>
+            Calculates the average of values for all non-empty child members.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.DistinctCount">
+            <summary>
+            Returns the count of all unique child members.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.Alignment">
+            <summary>
+            An enumeration of possible values for aligning data in a cell.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.Alignment.Default">
+            <summary>
+            Aligns string or numerical values based on the culture.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.Alignment.Left">
+            <summary>
+            Aligns string or numerical values to the left.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.Alignment.Right">
+            <summary>
+            Aligns string or numerical values to the right.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.Alignment.Center">
+            <summary>
+            Centers string or numerical values within a cell.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.BindingInfoType">
+            <summary>
+            The type of a BindingInfo metadata element.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1608 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.BindingInfoType.Unknown">
+            <summary>
+            The type of the binding information is unknown.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.BindingInfoType.DataBindingHint">
+            <summary>
+            The binding information is used as a hint for binding a data-source to a data-connection in Power BI service.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.CalculationGroupSelectionMode">
+            <summary>
+            Options for selections on calculation groups which do not invoke a calculation item.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1605 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.CalculationGroupSelectionMode.Unknown">
+            <summary>
+            Invalid selection value for CalculationGroupSelectionMode
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.CalculationGroupSelectionMode.MultipleOrEmptySelection">
+            <summary>
+            Multiple calculation items were referenced in the calculation group.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.CalculationGroupSelectionMode.NoSelection">
+            <summary>
+            No calculation items nor the calculation group were referenced in the calculation group.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.ColumnType">
+            <summary>
+            An enumeration of possible values for a column type.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ColumnType.Data">
+            <summary>
+            The contents of this column come from a DataSource.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ColumnType.Calculated">
+            <summary>
+            The contents of this column are computed by using an expression after the Data columns have been populated.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ColumnType.RowNumber">
+            <summary>
+            This column is automatically added by the Server to every table.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ColumnType.CalculatedTableColumn">
+            <summary>
+            The column exists in a calculated table, where the table and its columns are based on a calculated expression.
+            </summary>
+        </member>
         <member name="T:TabularEditor.TOMWrapper.ContentType">
             <summary>
             The type of the content of a string. E.g. XML or JSON.
@@ -645,14 +706,39 @@
             JSON content.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.ExpressionKind">
+        <member name="T:TabularEditor.TOMWrapper.CrossFilteringBehavior">
             <summary>
-            Indicates the dialect of the query expression.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1400 or above.</remarks>
+            Indicates how relationships influence filtering of data. The enumeration defines the possible behaviors.
+            </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.ExpressionKind.M">
+        <member name="F:TabularEditor.TOMWrapper.CrossFilteringBehavior.OneDirection">
             <summary>
-            The expression is based on the M dialect.
+            The rows selected in the 'To' end of the relationship will automatically filter scans of the table in the 'From' end of the relationship.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.CrossFilteringBehavior.BothDirections">
+            <summary>
+            Filters on either end of the relationship will automatically filter the other table.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.CrossFilteringBehavior.Automatic">
+            <summary>
+            The engine will analyze the relationships and choose one of the behaviors by using heuristics.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.DatasourceIsolation">
+            <summary>
+            Controls the locking behavior of the SQL statements when executing commands against the data source.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DatasourceIsolation.ReadCommitted">
+            <summary>
+            Specifies that statements cannot read data that has been modified, but not committed, by other transactions. This prevents dirty reads.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DatasourceIsolation.Snapshot">
+            <summary>
+            Specifies that the data read by any statement in a transaction is transactionally consistent, as if the statements in a transaction receive a snapshot of the committed data as it existed at the start of the transaction.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.DataSourceType">
@@ -670,55 +756,20 @@
             For internal use only.
             </summary><remarks>This value is only supported when the compatibility level of the database is at 1400 or above.</remarks>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.PartitionSourceType">
+        <member name="T:TabularEditor.TOMWrapper.DataSourceVariablesOverrideBehaviorType">
             <summary>
-            An enumeration of possible values for a partition source.
+            Data source edit varaibles override behaviour type. E.g. Disallow or Allow.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1475 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DataSourceVariablesOverrideBehaviorType.Disallow">
+            <summary>
+            Queries won't allow data source variables override.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.Query">
+        <member name="F:TabularEditor.TOMWrapper.DataSourceVariablesOverrideBehaviorType.Allow">
             <summary>
-            The data in this partition is retrieved by executing a query against a DataSource.
+            Queries allow data source variables override.
             </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.Calculated">
-            <summary>
-            The data in this partition is populated by executing a calculated expression.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.None">
-            <summary>
-            The source is undefined. Data can come from pushed data or from out of line bindings that pull in data from an explicitly specified data source.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.M">
-            <summary>
-            The partition uses an M expression to retrieve the data.
-            </summary><remarks>This value is only supported when the compatibility level of the database is at 1400 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.Entity">
-            <summary>
-            The data in this partition is obtained by querying the named entity from the underlying DataSource/Provider.
-            </summary><remarks>This value is only supported when the compatibility level of the database is at 1400 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.PolicyRange">
-            <summary>
-            The partition uses an M expression to retrieve the data. The partition ranges are auto created based on RefreshPolicy.
-            </summary><remarks>This value is only supported when the compatibility level of the database is at 1450 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.CalculationGroup">
-            <summary>
-            The partition uses CalculationGroup as a source.
-            </summary><remarks>This value is only supported when the compatibility level of the database is at 1470 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.Inferred">
-            <summary>
-            The data in this partition is populated by executing a query generated by the system.
-            </summary><remarks>This value is only supported when the compatibility level of the database is at 1563 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.Parquet">
-            <summary>
-            The data in this partition is populated from parquet file.
-            </summary><remarks>This value is only supported when the compatibility level of the database is at Internal or above.</remarks>
         </member>
         <member name="T:TabularEditor.TOMWrapper.DataType">
             <summary>
@@ -775,6 +826,261 @@
             A measure with varying data type.
             </summary>
         </member>
+        <member name="T:TabularEditor.TOMWrapper.DataViewType">
+            <summary>
+            Determines which partitions are to be selected to run queries against the model.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DataViewType.Full">
+            <summary>
+            Partitions with DataView set to Default or Full are selected.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DataViewType.Sample">
+            <summary>
+            Partitions with DataView set to Default or Sample are selected.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DataViewType.Default">
+            <summary>
+            Only Partitions can use this value. When set, the partition will inherit the DataView from the Model.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.DateTimeRelationshipBehavior">
+            <summary>
+            When joining two date time columns, indicates whether to join on date and time parts or on date part only.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DateTimeRelationshipBehavior.DateAndTime">
+            <summary>
+            When joining two date time columns, join on both the date and time parts.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DateTimeRelationshipBehavior.DatePartOnly">
+            <summary>
+            When joining two date time columns, join on date part only.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.DirectLakeBehavior">
+            <summary>
+            Fallback behavior for Direct Lake models.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1604 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DirectLakeBehavior.Automatic">
+            <summary>
+            Adaptive fallback, shipped in public preview.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DirectLakeBehavior.DirectLakeOnly">
+            <summary>
+            Disables fallback. Uses Direct Lake unconditionally.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DirectLakeBehavior.DirectQueryOnly">
+            <summary>
+            Enforces fallback. Uses DirectQuery unconditionally.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.EncodingHintType">
+            <summary>
+            Encoding hint to suggest whether a column should use hash encoding.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1400 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.EncodingHintType.Default">
+            <summary>
+            Default behavior - the server will automatically decide which encoding to use
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.EncodingHintType.Hash">
+            <summary>
+            Hash encoding
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.EncodingHintType.Value">
+            <summary>
+            Value encoding
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.EvaluationBehavior">
+            <summary>
+            Evaluation behavior for calculated column.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at Preview or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Automatic">
+            <summary>
+            Default value, used for backward compatibility.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Static">
+            <summary>
+            Evaluation is performed during processing and the result is materialized. Applies only for Import mode.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Dynamic">
+            <summary>
+            Evaluation is performed dynamically and the result is not materialized.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.ExpressionKind">
+            <summary>
+            Indicates the dialect of the query expression.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1400 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ExpressionKind.M">
+            <summary>
+            The expression is based on the M dialect.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.ExtendedPropertyType">
+            <summary>
+            An enumeration of possible values for the type of value stored in extended property.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1400 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ExtendedPropertyType.String">
+            <summary>
+            The value in this extended property is a raw string with no specific formatting
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ExtendedPropertyType.Json">
+            <summary>
+            The value in this extended property is a Json.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.HierarchyHideMembersType">
+            <summary>
+            Ragged/unbalanced hierarchies can be enabled by hiding members.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1400 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.HierarchyHideMembersType.Default">
+            <summary>
+            Regular (balanced) hierarchy
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.HierarchyHideMembersType.HideBlankMembers">
+            <summary>
+            Hide the member if it has a blank value
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.ImpersonationMode">
+            <summary>
+            Determines how credentials are obtained for an impersonated connection to a data source during data import or refresh.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.Default">
+            <summary>
+            Uses the inherited value from the ImpersonationMode on the DataSourceImpersonationInfo object in the database.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAccount">
+            <summary>
+            A Windows user account having read permissions on the external data source.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAnonymous">
+            <summary>
+            Not supported.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateCurrentUser">
+            <summary>
+            Not supported for tabular model databases attached to an Analysis Services instance.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateServiceAccount">
+            <summary>
+            Startup account of the Analysis Services instance. This account must have read permissions on a data source to enable data refresh.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateUnattendedAccount">
+            <summary>
+            Do not reference this member directly in your code. It supports the Analysis Services infrastructure.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.MetadataPermission">
+            <summary>
+            Access control to a data defined by a metadata object.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1400 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.MetadataPermission.Default">
+            <summary>
+            Default behavior - no access control is enforced
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.MetadataPermission.None">
+            <summary>
+            Access to the data is restricted
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.MetadataPermission.Read">
+            <summary>
+            Access to the data is unrestricted
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.ModelPermission">
+            <summary>
+            An enumeration of possible model permissions that can be used in a Role object.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModelPermission.None">
+            <summary>
+            The role has no access to the model.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModelPermission.Read">
+            <summary>
+            The role can read metadata and data of the model.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModelPermission.ReadRefresh">
+            <summary>
+            The role has read and refresh permission.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModelPermission.Refresh">
+            <summary>
+            The role can refresh the data and calculations in the model.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModelPermission.Administrator">
+            <summary>
+            Provides full access to the model.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.ModeType">
+            <summary>
+            Defines the method for making data available in the partition.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModeType.Import">
+            <summary>
+            Data will be imported from a data source.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModeType.DirectQuery">
+            <summary>
+            Data will be queried dynamically from a data source.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModeType.Default">
+            <summary>
+            Only partitions can use this value. When set, the partition will inherit the DefaultMode of the Model.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModeType.Push">
+            <summary>
+            Do not reference this member directly in your code. It supports the Analysis Services infrastructure.
+            </summary><remarks>This value is only supported for Pbi server.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModeType.Dual">
+            <summary>
+            Uses both Import and DirectQuery storage modes to support queries in composite models with high performance.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at 1455 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ModeType.DirectLake">
+            <summary>
+            Data will be loaded into memory from the data lake or queried dynamically if DirectLake fallback is enabled.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at 1604 or above.</remarks>
+        </member>
         <member name="T:TabularEditor.TOMWrapper.ObjectState">
             <summary>
             An enumeration of possible values for object state.
@@ -820,374 +1126,144 @@
             The data is possibly outdated, but is in a queryable state. Applies only for CalculatedTable.
             </summary><remarks>This value is only supported at database compatibility level of 1400 or above for Pbi server.</remarks>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.Alignment">
+        <member name="T:TabularEditor.TOMWrapper.PartitionSourceType">
             <summary>
-            An enumeration of possible values for aligning data in a cell.
+            An enumeration of possible values for a partition source.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.Alignment.Default">
+        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.Query">
             <summary>
-            Aligns string or numerical values based on the culture.
+            The data in this partition is retrieved by executing a query against a DataSource.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.Alignment.Left">
+        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.Calculated">
             <summary>
-            Aligns string or numerical values to the left.
+            The data in this partition is populated by executing a calculated expression.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.Alignment.Right">
+        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.None">
             <summary>
-            Aligns string or numerical values to the right.
+            The source is undefined. Data can come from pushed data or from out of line bindings that pull in data from an explicitly specified data source.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.Alignment.Center">
+        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.M">
             <summary>
-            Centers string or numerical values within a cell.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.AggregateFunction">
-            <summary>
-            Specifies the aggregate function to be used by reporting tools to summarize column values.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Default">
-            <summary>
-            The default aggregation is Sum for numeric columns. Otherwise the default is None.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.None">
-            <summary>
-            Leaves the aggregate function unspecified.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Sum">
-            <summary>
-            Calculates the sum of values contained in the column. This is the default aggregation function.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Min">
-            <summary>
-            Returns the lowest value for all child members.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Max">
-            <summary>
-            Returns the highest value for all child members.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Count">
-            <summary>
-            Returns the rows count in the table.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.Average">
-            <summary>
-            Calculates the average of values for all non-empty child members.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.AggregateFunction.DistinctCount">
-            <summary>
-            Returns the count of all unique child members.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.ColumnType">
-            <summary>
-            An enumeration of possible values for a column type.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ColumnType.Data">
-            <summary>
-            The contents of this column come from a DataSource.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ColumnType.Calculated">
-            <summary>
-            The contents of this column are computed by using an expression after the Data columns have been populated.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ColumnType.RowNumber">
-            <summary>
-            This column is automatically added by the Server to every table.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ColumnType.CalculatedTableColumn">
-            <summary>
-            The column exists in a calculated table, where the table and its columns are based on a calculated expression.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.RoleMemberType">
-            <summary>
-            Indicates whether the particular member of a security role is an individual user or a group of users, or if the member is automatically detected.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.RoleMemberType.Auto">
-            <summary>
-            Member of security role is automatically detected.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.RoleMemberType.User">
-            <summary>
-            Member of security role is an individual user.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.RoleMemberType.Group">
-            <summary>
-            Member of security role is a group of users.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.ModeType">
-            <summary>
-            Defines the method for making data available in the partition.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ModeType.Import">
-            <summary>
-            Data will be imported from a data source.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ModeType.DirectQuery">
-            <summary>
-            Data will be queried dynamically from a data source.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ModeType.Default">
-            <summary>
-            Only partitions can use this value. When set, the partition will inherit the DefaultMode of the Model.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ModeType.Push">
-            <summary>
-            Do not reference this member directly in your code. It supports the Analysis Services infrastructure.
-            </summary><remarks>This value is only supported for Pbi server.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ModeType.Dual">
-            <summary>
-            Uses both Import and DirectQuery storage modes to support queries in composite models with high performance.
-            </summary><remarks>This value is only supported when the compatibility level of the database is at 1455 or above.</remarks>
+            The partition uses an M expression to retrieve the data.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at 1400 or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.ModeType.DirectLake">
+        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.Entity">
             <summary>
-            Data will be loaded into memory from the data lake or queried dynamically if DirectLake fallback is enabled.
-            </summary><remarks>This value is only supported when the compatibility level of the database is at 1604 or above.</remarks>
+            The data in this partition is obtained by querying the named entity from the underlying DataSource/Provider.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at 1400 or above.</remarks>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.DataViewType">
+        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.PolicyRange">
             <summary>
-            Determines which partitions are to be selected to run queries against the model.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.DataViewType.Full">
-            <summary>
-            Partitions with DataView set to Default or Full are selected.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.DataViewType.Sample">
-            <summary>
-            Partitions with DataView set to Default or Sample are selected.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.DataViewType.Default">
-            <summary>
-            Only Partitions can use this value. When set, the partition will inherit the DataView from the Model.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.ModelPermission">
-            <summary>
-            An enumeration of possible model permissions that can be used in a Role object.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ModelPermission.None">
-            <summary>
-            The role has no access to the model.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ModelPermission.Read">
-            <summary>
-            The role can read metadata and data of the model.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ModelPermission.ReadRefresh">
-            <summary>
-            The role has read and refresh permission.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ModelPermission.Refresh">
-            <summary>
-            The role can refresh the data and calculations in the model.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ModelPermission.Administrator">
-            <summary>
-            Provides full access to the model.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.ImpersonationMode">
-            <summary>
-            Determines how credentials are obtained for an impersonated connection to a data source during data import or refresh.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.Default">
-            <summary>
-            Uses the inherited value from the ImpersonationMode on the DataSourceImpersonationInfo object in the database.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAccount">
-            <summary>
-            A Windows user account having read permissions on the external data source.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAnonymous">
-            <summary>
-            Not supported.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateCurrentUser">
-            <summary>
-            Not supported for tabular model databases attached to an Analysis Services instance.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateServiceAccount">
-            <summary>
-            Startup account of the Analysis Services instance. This account must have read permissions on a data source to enable data refresh.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateUnattendedAccount">
-            <summary>
-            Do not reference this member directly in your code. It supports the Analysis Services infrastructure.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.DatasourceIsolation">
-            <summary>
-            Controls the locking behavior of the SQL statements when executing commands against the data source.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.DatasourceIsolation.ReadCommitted">
-            <summary>
-            Specifies that statements cannot read data that has been modified, but not committed, by other transactions. This prevents dirty reads.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.DatasourceIsolation.Snapshot">
-            <summary>
-            Specifies that the data read by any statement in a transaction is transactionally consistent, as if the statements in a transaction receive a snapshot of the committed data as it existed at the start of the transaction.
-            </summary>
+            The partition uses an M expression to retrieve the data. The partition ranges are auto created based on RefreshPolicy.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at 1450 or above.</remarks>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.RelationshipType">
+        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.CalculationGroup">
             <summary>
-            The type of relationship. Currently, the only possible value is SingleColumn.
-            </summary>
+            The partition uses CalculationGroup as a source.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at 1470 or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.RelationshipType.SingleColumn">
+        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.Inferred">
             <summary>
-            Relationships are constructed using a column-to-column mapping.
-            </summary>
+            The data in this partition is populated by executing a query generated by the system.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at 1563 or above.</remarks>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.CrossFilteringBehavior">
+        <member name="F:TabularEditor.TOMWrapper.PartitionSourceType.Parquet">
             <summary>
-            Indicates how relationships influence filtering of data. The enumeration defines the possible behaviors.
-            </summary>
+            The data in this partition is populated from parquet file.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at Internal or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.CrossFilteringBehavior.OneDirection">
+        <member name="T:TabularEditor.TOMWrapper.PowerBIDataSourceVersion">
             <summary>
-            The rows selected in the 'To' end of the relationship will automatically filter scans of the table in the 'From' end of the relationship.
-            </summary>
+            DataSource format version in Power BI Service.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1450 or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.CrossFilteringBehavior.BothDirections">
+        <member name="F:TabularEditor.TOMWrapper.PowerBIDataSourceVersion.PowerBI_V1">
             <summary>
-            Filters on either end of the relationship will automatically filter the other table.
+            Power BI V1 Data Sources store the M expressions directly inside the connection strings.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.CrossFilteringBehavior.Automatic">
+        <member name="F:TabularEditor.TOMWrapper.PowerBIDataSourceVersion.PowerBI_V2">
             <summary>
-            The engine will analyze the relationships and choose one of the behaviors by using heuristics.
+            Power BI V2 Data Sources use shared M Expressions.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.SecurityFilteringBehavior">
+        <member name="F:TabularEditor.TOMWrapper.PowerBIDataSourceVersion.PowerBI_V3">
             <summary>
-            Indicates how relationships influence filtering of data when evaluating row-level security expressions. The enumeration defines the possible behaviors.
-            </summary>
+            Power BI V3 Data Sources support basic partition management operations.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at 1465 or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.SecurityFilteringBehavior.OneDirection">
+        <member name="T:TabularEditor.TOMWrapper.RefreshGranularityType">
             <summary>
-            The rows selected in the 'To' end of the relationship will automatically filter scans of the table in the 'From' end of the relationship.
-            </summary>
+            Specifies the granularity of the refresh policy for auto partitioning
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1450 or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.SecurityFilteringBehavior.BothDirections">
+        <member name="F:TabularEditor.TOMWrapper.RefreshGranularityType.Day">
             <summary>
-            Filters on either end of the relationship will automatically filter the other table.
+            Granularity of a day
             </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.SecurityFilteringBehavior.None">
-            <summary>
-            No filtering will occur from either end of the relationship.
-            </summary><remarks>This value is only supported when the compatibility level of the database is at 1561 or above.</remarks>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.DateTimeRelationshipBehavior">
+        <member name="F:TabularEditor.TOMWrapper.RefreshGranularityType.Month">
             <summary>
-            When joining two date time columns, indicates whether to join on date and time parts or on date part only.
+            Granularity of a month
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.DateTimeRelationshipBehavior.DateAndTime">
+        <member name="F:TabularEditor.TOMWrapper.RefreshGranularityType.Quarter">
             <summary>
-            When joining two date time columns, join on both the date and time parts.
+            Granularity of a quarter
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.DateTimeRelationshipBehavior.DatePartOnly">
+        <member name="F:TabularEditor.TOMWrapper.RefreshGranularityType.Year">
             <summary>
-            When joining two date time columns, join on date part only.
+            Granularity of a year
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.RelationshipEndCardinality">
+        <member name="F:TabularEditor.TOMWrapper.RefreshGranularityType.Invalid">
             <summary>
-            An enumeration of possible values for defining cardinality on either side of a table relationship.
+            Invalid Granularity
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.RelationshipEndCardinality.None">
+        <member name="T:TabularEditor.TOMWrapper.RefreshPolicyBehavior">
             <summary>
-            The relationship is unspecified.
+            The behavior regarding refresh-policy governed objects in the refresh.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.RelationshipEndCardinality.One">
+        <member name="F:TabularEditor.TOMWrapper.RefreshPolicyBehavior.Default">
             <summary>
-            Specifies the 'one' side of a one-to-one or one-to-many relationship.
+            Applying the default behavior.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.RelationshipEndCardinality.Many">
+        <member name="F:TabularEditor.TOMWrapper.RefreshPolicyBehavior.Ignore">
             <summary>
-            Specifies the 'many' side of a one-to-many relationship.
+            Ignoring the refresh-policy, even if exists.
             </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.HierarchyHideMembersType">
-            <summary>
-            Ragged/unbalanced hierarchies can be enabled by hiding members.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1400 or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.HierarchyHideMembersType.Default">
+        <member name="T:TabularEditor.TOMWrapper.RefreshPolicyMode">
             <summary>
-            Regular (balanced) hierarchy
-            </summary>
+            Mode of a refresh policy.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1565 or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.HierarchyHideMembersType.HideBlankMembers">
+        <member name="F:TabularEditor.TOMWrapper.RefreshPolicyMode.Import">
             <summary>
-            Hide the member if it has a blank value
+            Creates import partitions during incremental refresh.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.EncodingHintType">
+        <member name="F:TabularEditor.TOMWrapper.RefreshPolicyMode.Hybrid">
             <summary>
-            Encoding hint to suggest whether a column should use hash encoding.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1400 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.EncodingHintType.Default">
-            <summary>
-            Default behavior - the server will automatically decide which encoding to use
+            Creates import and DirectQuery partitions during incremental refresh.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.EncodingHintType.Hash">
+        <member name="T:TabularEditor.TOMWrapper.RefreshPolicyType">
             <summary>
-            Hash encoding
-            </summary>
+            Specifies the refresh policy type of a table
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1450 or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.EncodingHintType.Value">
+        <member name="F:TabularEditor.TOMWrapper.RefreshPolicyType.Basic">
             <summary>
-            Value encoding
+            Basic refresh policy
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.RefreshType">
@@ -1230,60 +1306,115 @@
             Defragment the data in the specified table. As data is added to or removed from a table, the dictionaries of each column can become polluted with values that no longer exist in the actual column values. The defragment option will clean up the values in the dictionaries that are no longer used.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.ExtendedPropertyType">
+        <member name="T:TabularEditor.TOMWrapper.RelationshipEndCardinality">
             <summary>
-            An enumeration of possible values for the type of value stored in extended property.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1400 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.ExtendedPropertyType.String">
-            <summary>
-            The value in this extended property is a raw string with no specific formatting
+            An enumeration of possible values for defining cardinality on either side of a table relationship.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.ExtendedPropertyType.Json">
+        <member name="F:TabularEditor.TOMWrapper.RelationshipEndCardinality.None">
             <summary>
-            The value in this extended property is a Json.
+            The relationship is unspecified.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.MetadataPermission">
+        <member name="F:TabularEditor.TOMWrapper.RelationshipEndCardinality.One">
             <summary>
-            Access control to a data defined by a metadata object.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1400 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.MetadataPermission.Default">
-            <summary>
-            Default behavior - no access control is enforced
+            Specifies the 'one' side of a one-to-one or one-to-many relationship.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.MetadataPermission.None">
+        <member name="F:TabularEditor.TOMWrapper.RelationshipEndCardinality.Many">
             <summary>
-            Access to the data is restricted
+            Specifies the 'many' side of a one-to-many relationship.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.MetadataPermission.Read">
+        <member name="T:TabularEditor.TOMWrapper.RelationshipType">
             <summary>
-            Access to the data is unrestricted
+            The type of relationship. Currently, the only possible value is SingleColumn.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.PowerBIDataSourceVersion">
+        <member name="F:TabularEditor.TOMWrapper.RelationshipType.SingleColumn">
             <summary>
-            DataSource format version in Power BI Service.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1450 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.PowerBIDataSourceVersion.PowerBI_V1">
-            <summary>
-            Power BI V1 Data Sources store the M expressions directly inside the connection strings.
+            Relationships are constructed using a column-to-column mapping.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.PowerBIDataSourceVersion.PowerBI_V2">
+        <member name="T:TabularEditor.TOMWrapper.RoleMemberType">
             <summary>
-            Power BI V2 Data Sources use shared M Expressions.
+            Indicates whether the particular member of a security role is an individual user or a group of users, or if the member is automatically detected.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.PowerBIDataSourceVersion.PowerBI_V3">
+        <member name="F:TabularEditor.TOMWrapper.RoleMemberType.Auto">
             <summary>
-            Power BI V3 Data Sources support basic partition management operations.
-            </summary><remarks>This value is only supported when the compatibility level of the database is at 1465 or above.</remarks>
+            Member of security role is automatically detected.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.RoleMemberType.User">
+            <summary>
+            Member of security role is an individual user.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.RoleMemberType.Group">
+            <summary>
+            Member of security role is a group of users.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.SaveFlags">
+            <summary>
+            Advanced options that can be used to control the behavior of a SaveChanges operation.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.SaveFlags.Default">
+            <summary>
+            Default SaveChanges behavior.
+            </summary><remarks>All the pending model changes are packed in a batch containing Create/Alter/Delete/Rename/Process commands together with a SequencePoint command, that trigger immediate validation on the Server if used inside transaction, and sent to the Server.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.SaveFlags.DelayValidation">
+            <summary>
+            Delay the validation in the SaveChanges.
+            </summary><remarks><para>All the pending model changes are packed in a batch containing Create/Alter/Delete/Rename/Process commands and sent to the Server, but no SequencePoint command is sent, which will delay the validation of changes on the Server.</para><para>This flag can only be used inside a transaction, as any operation outside a transaction will cause implicit transaction to be created and committed on Server, which will trigger the validation anyway.</para></remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.SaveFlags.ForceValidation">
+            <summary>
+            Force the validation in the SaveChanges.
+            </summary><remarks><para>Forcing a validation of any changes that were already saved to the server, but are still pending to be commited, by sending SequencePoint command. If the model has any pending local changes, they will be also sent along with SequencePoint command.</para><para>This flag can only be used inside a transaction, as any operation outside a transaction will cause implicit transaction to be created and committed on Server, which will trigger the validation anyway.</para></remarks>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.SecurityFilteringBehavior">
+            <summary>
+            Indicates how relationships influence filtering of data when evaluating row-level security expressions. The enumeration defines the possible behaviors.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.SecurityFilteringBehavior.OneDirection">
+            <summary>
+            The rows selected in the 'To' end of the relationship will automatically filter scans of the table in the 'From' end of the relationship.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.SecurityFilteringBehavior.BothDirections">
+            <summary>
+            Filters on either end of the relationship will automatically filter the other table.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.SecurityFilteringBehavior.None">
+            <summary>
+            No filtering will occur from either end of the relationship.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at 1561 or above.</remarks>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.SelectionExpressionBehaviorType">
+            <summary>
+            Determines Selection Expression behavior for Calculation groups
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1609 or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.Automatic">
+            <summary>
+            Automatically determines Selection Expression behavior based on database compability level.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.Visual">
+            <summary>
+            Subtotals are determined by Selection Expressions when grouping by Calculation Groups. Multi-selection yields BLANK() when the MultipleOrEmptySelectionExpression is undefined.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.NonVisual">
+            <summary>
+            Subtotals are hidden when grouping by Calculation Groups. Multi-selection yields SELECTEDMEASURE() when the MultipleOrEmptySelectionExpression is undefined.
+            </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.SummarizationType">
             <summary>
@@ -1315,99 +1446,119 @@
             Max type aggregation.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.RefreshGranularityType">
+        <member name="T:TabularEditor.TOMWrapper.TimeUnit">
             <summary>
-            Specifies the granularity of the refresh policy for auto partitioning
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1450 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.RefreshGranularityType.Day">
-            <summary>
-            Granularity of a day
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.RefreshGranularityType.Month">
-            <summary>
-            Granularity of a month
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.RefreshGranularityType.Quarter">
-            <summary>
-            Granularity of a quarter
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.RefreshGranularityType.Year">
-            <summary>
-            Granularity of a year
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.RefreshGranularityType.Invalid">
-            <summary>
-            Invalid Granularity
-            </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.EvaluationBehavior">
-            <summary>
-            Evaluation behavior for calculated column.
+            Various options for units that describe time information.
             </summary><remarks>This enum is only supported when the compatibility level of the database is at Preview or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Automatic">
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.Unknown">
             <summary>
-            Default value, used for backward compatibility.
+            Unknown unit of time.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Static">
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.Year">
             <summary>
-            Evaluation is performed during processing and the result is materialized. Applies only for Import mode.
+            The information about the year; e.g. '2022'.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Dynamic">
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.Semester">
             <summary>
-            Evaluation is performed dynamically and the result is not materialized.
+            The information about the semester; e.g. 'S1 2022'.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.RefreshPolicyMode">
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.SemesterOfYear">
             <summary>
-            Mode of a refresh policy.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1565 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.RefreshPolicyMode.Import">
-            <summary>
-            Creates import partitions during incremental refresh.
+            The information of the semester within the year; e.g. '2'.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.RefreshPolicyMode.Hybrid">
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.Quarter">
             <summary>
-            Creates import and DirectQuery partitions during incremental refresh.
+            The information about the quarter; e.g. 'Q3 2022'.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.RefreshPolicyType">
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.QuarterOfYear">
             <summary>
-            Specifies the refresh policy type of a table
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1450 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.RefreshPolicyType.Basic">
-            <summary>
-            Basic refresh policy
+            The information of the quarter within the year; e.g. '4'.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.DirectLakeBehavior">
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.QuarterOfSemester">
             <summary>
-            Fallback behavior for Direct Lake models.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1604 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.DirectLakeBehavior.Automatic">
-            <summary>
-            Adaptive fallback, shipped in public preview.
+            The information of the quarter within the semester; e.g. '1'.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.DirectLakeBehavior.DirectLakeOnly">
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.Month">
             <summary>
-            Disables fallback. Uses Direct Lake unconditionally.
+            The information about the month; e.g. 'January 2022'.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.DirectLakeBehavior.DirectQueryOnly">
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.MonthOfYear">
             <summary>
-            Enforces fallback. Uses DirectQuery unconditionally.
+            The information of the month within the year; e.g. 'January'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.MonthOfSemester">
+            <summary>
+            The information of the quarter within the semester; e.g. '5'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.MonthOfQuarter">
+            <summary>
+            The information of the quarter within the quarter; e.g. '2'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.Week">
+            <summary>
+            The information about the week; e.g. 'Week 49 2022'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.WeekOfYear">
+            <summary>
+            The information of the week within the year; e.g. 'Week 49'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.WeekOfSemester">
+            <summary>
+            The information of the week within the semester; e.g. '15'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.WeekOfQuarter">
+            <summary>
+            The information of the week within the quarter; e.g. '11'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.WeekOfMonth">
+            <summary>
+            The information of the week within the month; e.g. '3'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.Date">
+            <summary>
+            The information about the exact date; e.g. 'January 1st 2022'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.DayOfYear">
+            <summary>
+            The information of the day within the year; e.g. '241'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.DayOfSemester">
+            <summary>
+            The information of the day within the semester; e.g. '115'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.DayOfQuarter">
+            <summary>
+            The information of the day within the quarter; e.g. '71'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.DayOfMonth">
+            <summary>
+            The information of the day within the month; e.g. '23'.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.TimeUnit.DayOfWeek">
+            <summary>
+            The information of the day within the week; e.g. '4'.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.ValueFilterBehaviorType">
@@ -1428,21 +1579,6 @@
         <member name="F:TabularEditor.TOMWrapper.ValueFilterBehaviorType.Coalesced">
             <summary>
             Value filters in SummarizeColumns are applied to table first, then to measure.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.TOMWrapper.DataSourceVariablesOverrideBehaviorType">
-            <summary>
-            Data source edit varaibles override behaviour type. E.g. Disallow or Allow.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1475 or above.</remarks>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.DataSourceVariablesOverrideBehaviorType.Disallow">
-            <summary>
-            Queries won't allow data source variables override.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.DataSourceVariablesOverrideBehaviorType.Allow">
-            <summary>
-            Queries allow data source variables override.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.Variation">
@@ -1929,6 +2065,15 @@
         <member name="M:TabularEditor.TOMWrapper.Column.GetExtendedProperties">
             <summary>Gets a collection of all ExtendedProperty names on the current object.</summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Column.ChangedPropertiesCollection">
+            <summary>The ChangedProperties collection</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Column.ClearChangedProperties">
+            <summary>Clears the list of names of changed properties.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Column.ChangedProperties">
+            <summary>Gets or sets a comma-separated list of names of properties that should no longer be synchronized from the source.</summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Column.DataCategory">
             <summary>
             Specifies the type of data contained in the column so that you can add custom behaviors based on column type. There are 248 possible values. The first ten are Invalid (-1), All (1), Regular (2), Image (3), ImageBMP (4), ImageGIF (5), ImageJPG (6), ImagePNG (7), ImageTIFF (8), ImageURL (9), Id (10). For the rest, please refer to the MS-SSAS-T SQL Server Analysis Services Tabular Protocol documentation on MSDN.
@@ -2042,7 +2187,7 @@
         <member name="P:TabularEditor.TOMWrapper.Column.LineageTag">
             <summary>
             A tag that represents the lineage of the object.
-            </summary><remarks>This property is only supported when the compatibility level of the database is at 1540 or above.</remarks>
+            </summary><remarks><para>Lineage tags enable stable identification of objects across different semantic models. Using lineage tags enables Power BI features such as composite models to maintain their binding to referenced tables or columns, even if the source semantic model object is renamed.</para><para>This property is only supported when the compatibility level of the database is at 1540 or above.</para></remarks>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Column.SourceLineageTag">
             <summary>
@@ -2097,6 +2242,65 @@
             CTOR - only called from static factory methods on the class
             </summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Column.ObjectLevelSecurity">
+            <summary>
+            Gets the OLS settings applied to this column
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Column.AlternateOf">
+            <summary>
+            Gets or sets the Alternate Of configuration used to specify aggregations.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Column.GroupByColumns">
+            <summary>
+            A collection of columns that should be grouped together with this column when used in visuals (RelatedColumnDetails).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Column.ReferencedBy">
+            <summary>
+            Gets the list of objects that reference this column.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Column.DaxObjectFullName">
+            <summary>
+            Gets a fully qualified DAX reference to this column
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Column.DaxObjectName">
+            <summary>
+            Gets an unqualified DAX reference to this column
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Column.DaxTableName">
+            <summary>
+            Gets a DAX reference to the table on which this column resides
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Column.IsVisible">
+            <summary>
+            Gets the visibility of the Column. Takes into consideration that a column is not visible if its parent table is hidden. 
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Column.AddAlternateOf(TabularEditor.TOMWrapper.Column,TabularEditor.TOMWrapper.SummarizationType)">
+            <summary>
+            Marks this column as an alternate of a column in another table, for aggregation purposes. See <see cref="T:TabularEditor.TOMWrapper.AlternateOf"/>.
+            </summary>
+            <param name="column"></param>
+            <param name="summarization"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Column.RemoveAlternateOf">
+            <summary>
+            Removes the <see cref="T:TabularEditor.TOMWrapper.AlternateOf"/> configuration for this column.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Column.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Column.OnPropertyChanged(System.String,System.Object,System.Object)">
+            <inheritdoc/>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.Column.RelateTo(System.String,System.String)">
             <summary>
             Creates a relationship from the current column to another column.
@@ -2113,16 +2317,6 @@
             <param name="column"></param>
             <returns></returns>
             <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Column.IsVisible">
-            <summary>
-            Gets the visibility of the Column. Takes into consideration that a column is not visible if its parent table is hidden. 
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Column.ReferencedBy">
-            <summary>
-            Gets the list of objects that reference this column.
-            </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Column.UsedInHierarchies">
             <summary>
@@ -2152,55 +2346,6 @@
         <member name="P:TabularEditor.TOMWrapper.Column.UsedInRelationships">
             <summary>
             Enumerates all relationships in which this column participates (either as <see cref="P:TabularEditor.TOMWrapper.SingleColumnRelationship.FromColumn">FromColumn</see> or <see cref="P:TabularEditor.TOMWrapper.SingleColumnRelationship.ToColumn">ToColumn</see>).
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Column.ObjectLevelSecurity">
-            <summary>
-            Gets the OLS settings applied to this column
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Column.AddAlternateOf(TabularEditor.TOMWrapper.Column,TabularEditor.TOMWrapper.SummarizationType)">
-            <summary>
-            Marks this column as an alternate of a column in another table, for aggregation purposes. See <see cref="T:TabularEditor.TOMWrapper.AlternateOf"/>.
-            </summary>
-            <param name="column"></param>
-            <param name="summarization"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Column.RemoveAlternateOf">
-            <summary>
-            Removes the <see cref="T:TabularEditor.TOMWrapper.AlternateOf"/> configuration for this column.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Column.AlternateOf">
-            <summary>
-            Gets or sets the Alternate Of configuration used to specify aggregations.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Column.GroupByColumns">
-            <summary>
-            A collection of columns that should be grouped together with this column when used in visuals (RelatedColumnDetails).
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Column.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Column.OnPropertyChanged(System.String,System.Object,System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Column.DaxObjectFullName">
-            <summary>
-            Gets a fully qualified DAX reference to this column
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Column.DaxObjectName">
-            <summary>
-            Gets an unqualified DAX reference to this column
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Column.DaxTableName">
-            <summary>
-            Gets a DAX reference to the table on which this column resides
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.ColumnCollection">
@@ -2733,6 +2878,15 @@
         <member name="M:TabularEditor.TOMWrapper.Hierarchy.GetExtendedProperties">
             <summary>Gets a collection of all ExtendedProperty names on the current object.</summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Hierarchy.ChangedPropertiesCollection">
+            <summary>The ChangedProperties collection</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Hierarchy.ClearChangedProperties">
+            <summary>Clears the list of names of changed properties.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Hierarchy.ChangedProperties">
+            <summary>Gets or sets a comma-separated list of names of properties that should no longer be synchronized from the source.</summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Hierarchy.Description">
             <summary>
             The description of the hierarchy, visible to developers at design time and to administrators in management tools, such as SQL Server Management Studio.
@@ -2766,7 +2920,7 @@
         <member name="P:TabularEditor.TOMWrapper.Hierarchy.LineageTag">
             <summary>
             A tag that represents the lineage of the object.
-            </summary><remarks>This property is only supported when the compatibility level of the database is at 1540 or above.</remarks>
+            </summary><remarks><para>Lineage tags enable stable identification of objects across different semantic models. Using lineage tags enables Power BI features such as composite models to maintain their binding to referenced tables or columns, even if the source semantic model object is renamed.</para><para>This property is only supported when the compatibility level of the database is at 1540 or above.</para></remarks>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Hierarchy.SourceLineageTag">
             <summary>
@@ -2820,11 +2974,6 @@
             CTOR - only called from static factory methods on the class
             </summary>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.Hierarchy.IsVisible">
-            <summary>
-            Gets the visibility of the Hierarchy. Takes into consideration that a hierarchy is not visible if its parent table is hidden. 
-            </summary>
-        </member>
         <member name="P:TabularEditor.TOMWrapper.Hierarchy.UsedInVariations">
             <summary>
             Enumerates the <see cref="T:TabularEditor.TOMWrapper.Variation"/> objects in which this hierarchy is used
@@ -2833,6 +2982,16 @@
         <member name="P:TabularEditor.TOMWrapper.Hierarchy.DaxObjectFullName">
             <summary>
             Gets a fully qualified reference to this hirearchy
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Hierarchy.Reordering">
+            <summary>
+            Set to true, when multiple levels are going to be re-ordered as one action.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Hierarchy.IsVisible">
+            <summary>
+            Gets the visibility of the Hierarchy. Takes into consideration that a hierarchy is not visible if its parent table is hidden. 
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Hierarchy.AddLevels(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Column},System.Int32)">
@@ -2848,11 +3007,6 @@
         <member name="M:TabularEditor.TOMWrapper.Hierarchy.AddLevel(System.String,System.String,System.Int32)">
             <summary>
             Adds a level to the current hirearchy.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Hierarchy.Reordering">
-            <summary>
-            Set to true, when multiple levels are going to be re-ordered as one action.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.HierarchyCollection">
@@ -3268,6 +3422,15 @@
         <member name="M:TabularEditor.TOMWrapper.Level.GetExtendedProperties">
             <summary>Gets a collection of all ExtendedProperty names on the current object.</summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Level.ChangedPropertiesCollection">
+            <summary>The ChangedProperties collection</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Level.ClearChangedProperties">
+            <summary>Clears the list of names of changed properties.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Level.ChangedProperties">
+            <summary>Gets or sets a comma-separated list of names of properties that should no longer be synchronized from the source.</summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Level.Ordinal">
             <summary>
             The position of the level within the hierarchy. The levels in the hierarchy must be properly ordered, starting with 1 and increasing monotonically.
@@ -3281,7 +3444,7 @@
         <member name="P:TabularEditor.TOMWrapper.Level.LineageTag">
             <summary>
             A tag that represents the lineage of the object.
-            </summary><remarks>This property is only supported when the compatibility level of the database is at 1540 or above.</remarks>
+            </summary><remarks><para>Lineage tags enable stable identification of objects across different semantic models. Using lineage tags enables Power BI features such as composite models to maintain their binding to referenced tables or columns, even if the source semantic model object is renamed.</para><para>This property is only supported when the compatibility level of the database is at 1540 or above.</para></remarks>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Level.SourceLineageTag">
             <summary>
@@ -3435,6 +3598,15 @@
         <member name="M:TabularEditor.TOMWrapper.Measure.GetExtendedProperties">
             <summary>Gets a collection of all ExtendedProperty names on the current object.</summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Measure.ChangedPropertiesCollection">
+            <summary>The ChangedProperties collection</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Measure.ClearChangedProperties">
+            <summary>Clears the list of names of changed properties.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Measure.ChangedProperties">
+            <summary>Gets or sets a comma-separated list of names of properties that should no longer be synchronized from the source.</summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Measure.Description">
             <summary>
             The description of the measure, visible to developers at design time and to administrators in management tools, such as SQL Server Management Studio.
@@ -3447,7 +3619,7 @@
         </member>
         <member name="P:TabularEditor.TOMWrapper.Measure.FormatString">
             <summary>
-            A string that specifies the format of the measure contents. For
+            A string that specifies the format of the measure contents.
             </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Measure.IsHidden">
@@ -3483,7 +3655,7 @@
         <member name="P:TabularEditor.TOMWrapper.Measure.LineageTag">
             <summary>
             A tag that represents the lineage of the object.
-            </summary><remarks>This property is only supported when the compatibility level of the database is at 1540 or above.</remarks>
+            </summary><remarks><para>Lineage tags enable stable identification of objects across different semantic models. Using lineage tags enables Power BI features such as composite models to maintain their binding to referenced tables or columns, even if the source semantic model object is renamed.</para><para>This property is only supported when the compatibility level of the database is at 1540 or above.</para></remarks>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Measure.SourceLineageTag">
             <summary>
@@ -3532,55 +3704,6 @@
             CTOR - only called from static factory methods on the class
             </summary>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.Measure.IsVisible">
-            <summary>
-            Gets the visibility of the Measure. Takes into consideration that a measure is visible regardless of its parent table being visible.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Measure.MoveTo(TabularEditor.TOMWrapper.Table)">
-            <summary>
-            Delete the measure from its current table and create a deep clone (including all translations, if any) in the destination table.
-            </summary>
-            <param name="destinationTable"></param>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Measure.DataType">
-            <summary>
-            Describes the type of data contained in the column. Possible values are as follows. String (2). Int64 (6). Double (8). DateTime (9). Decimal (10). Boolean (11). Binary (17). Unknown (19) A measure in an error state. Variant (20) A measure with varying data type.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Measure.MoveTo(System.String)">
-            <summary>
-            Delete the measure from its current table and create a deep clone (including all translations, if any) in the destination table.
-            </summary>
-            <param name="destinationTable"></param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Measure.ErrorMessage">
-            <summary>
-            A string that explains the error state associated with the current object. It is set by the engine only when the state of the object is one of these three values: SemanticError, DependencyError, or EvaluationError. It is applicable only to columns of the type Calculated or CalculatedTableColumn. It will be empty for other column objects.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Measure.DependsOn">
-            <summary>
-            Gets the list of objects that this measure depends on.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Measure.ReferencedBy">
-            <summary>
-            Gets the list of objects that reference this measure.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Measure.AddKPI">
-            <summary>
-            Adds a <see cref="T:TabularEditor.TOMWrapper.KPI"/> to this measure.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Measure.RemoveKPI">
-            <summary>
-            Removes the <see cref="T:TabularEditor.TOMWrapper.KPI"/> from this measure.
-            </summary>
-        </member>
         <member name="P:TabularEditor.TOMWrapper.Measure.KPI">
             <summary>
             Gets or sets the KPI of the Measure.
@@ -3596,6 +3719,16 @@
             DAX expression that specifies the format of the cell content.
             </summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Measure.DependsOn">
+            <summary>
+            Gets the list of objects that this measure depends on.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Measure.ReferencedBy">
+            <summary>
+            Gets the list of objects that reference this measure.
+            </summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Measure.DaxObjectName">
             <summary>
             Gets a valid DAX reference to this measure
@@ -3609,6 +3742,45 @@
         <member name="P:TabularEditor.TOMWrapper.Measure.DaxTableName">
             <summary>
             Gets a valid DAX reference to the table on which this measure resides
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Measure.DataType">
+            <summary>
+            Describes the type of data contained in the column. Possible values are as follows. String (2). Int64 (6). Double (8). DateTime (9). Decimal (10). Boolean (11). Binary (17). Unknown (19) A measure in an error state. Variant (20) A measure with varying data type.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Measure.IsVisible">
+            <summary>
+            Gets the visibility of the Measure. Takes into consideration that a measure is visible regardless of its parent table being visible.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Measure.ErrorMessage">
+            <summary>
+            A string that explains the error state associated with the current object. It is set by the engine only when the state of the object is one of these three values: SemanticError, DependencyError, or EvaluationError. It is applicable only to columns of the type Calculated or CalculatedTableColumn. It will be empty for other column objects.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Measure.MoveTo(TabularEditor.TOMWrapper.Table)">
+            <summary>
+            Delete the measure from its current table and create a deep clone (including all translations, if any) in the destination table.
+            </summary>
+            <param name="destinationTable"></param>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Measure.MoveTo(System.String)">
+            <summary>
+            Delete the measure from its current table and create a deep clone (including all translations, if any) in the destination table.
+            </summary>
+            <param name="destinationTable"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Measure.AddKPI">
+            <summary>
+            Adds a <see cref="T:TabularEditor.TOMWrapper.KPI"/> to this measure.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Measure.RemoveKPI">
+            <summary>
+            Removes the <see cref="T:TabularEditor.TOMWrapper.KPI"/> from this measure.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.MeasureCollection">
@@ -3829,11 +4001,6 @@
             Maximum degree of parallelism for query in formula engine
             </summary><remarks>This property is only supported when the compatibility level of the database is at 1569 or above.</remarks>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.Model.DisableSystemDefaultExpression">
-            <summary>
-            Disable system defined default expression behavior for calculation groups.
-            </summary><remarks>This property is only supported when the compatibility level of the database is at Preview or above.</remarks>
-        </member>
         <member name="P:TabularEditor.TOMWrapper.Model.DirectLakeBehavior">
             <summary>
             Define the fallback behavior of Direct Lake tables.
@@ -3843,6 +4010,11 @@
             <summary>
             Determines value filter behavior for SummarizeColumns
             </summary><remarks>This property is only supported when the compatibility level of the database is at 1606 or above.</remarks>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.SelectionExpressionBehavior">
+            <summary>
+            Determines Selection Expression behavior for Calculation Groups
+            </summary><remarks>This property is only supported when the compatibility level of the database is at 1609 or above.</remarks>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Model.DefaultMeasure">
             <summary>
@@ -3904,6 +4076,11 @@
             The collection of QueryGroup objects on this Model.
             </summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.BindingInfoCollection">
+            <summary>
+            The collection of BindingInfo objects on this Model.
+            </summary>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.Model.#ctor(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.TabularModelHandler)">
             <summary>
             CTOR - only called from static factory methods on the class
@@ -3912,6 +4089,51 @@
         <member name="P:TabularEditor.TOMWrapper.Model.AutomaticAggregationOptions">
             <summary>
             Protocol-specific options used to connect the data source
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.MetadataSource">
+            <summary>
+            Provides additional information about the current model, such as where the model metadata was loaded from, the metadata format, etc.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.DeploymentMetadata">
+            <summary>
+            Metadata related to the latest deployment performed on this model using Tabular Editor.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.Database">
+            <summary>
+            The database object of the model.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.FastCombine">
+            <summary>
+            Gets or sets whether privacy settings on individual data sources should be ignored.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.LegacyRedirects">
+            <summary>
+            Gets or sets whether unsafe legacy redirects from HTTPS to HTTP should be enabled
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.ReturnErrorValuesAsNull">
+            <summary>
+            Gets or sets whether individual query errors should be returned as nulls in the query result instead of failing the query
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.CalculationGroups">
+            <summary>
+            Enumerate all <see cref="T:TabularEditor.TOMWrapper.CalculationGroupTable">calculation group tables</see> on this model.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Model.RemoveDeploymentMetadata">
+            <summary>
+            Removes deployment metadata.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Model.UpdateDeploymentMetadata">
+            <summary>
+            Update deployment metadata.
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Model.AddPerspective(System.String)">
@@ -4064,46 +4286,6 @@
         <member name="P:TabularEditor.TOMWrapper.Model.AllLevels">
             <summary>
             Iterates all levels on all hierarchies on all tables of the model.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Model.DeploymentMetadata">
-            <summary>
-            Metadata related to the latest deployment performed on this model using Tabular Editor.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Model.RemoveDeploymentMetadata">
-            <summary>
-            Removes deployment metadata.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Model.UpdateDeploymentMetadata">
-            <summary>
-            Update deployment metadata.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Model.Database">
-            <summary>
-            The database object of the model.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Model.FastCombine">
-            <summary>
-            Gets or sets whether privacy settings on individual data sources should be ignored.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Model.LegacyRedirects">
-            <summary>
-            Gets or sets whether unsafe legacy redirects from HTTPS to HTTP should be enabled
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Model.ReturnErrorValuesAsNull">
-            <summary>
-            Gets or sets whether individual query errors should be returned as nulls in the query result instead of failing the query
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Model.CalculationGroups">
-            <summary>
-            Enumerate all <see cref="T:TabularEditor.TOMWrapper.CalculationGroupTable">calculation group tables</see> on this model.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.ModelRole">
@@ -4543,11 +4725,6 @@
             The query which is executed on the Data Source to populate this partition with data. This is an alias for <see cref="P:TabularEditor.TOMWrapper.Partition.Expression"/>
             </summary>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.Partition.Expression">
-            <summary>
-            The expression which is used to populate this partition with data.
-            </summary>
-        </member>
         <member name="P:TabularEditor.TOMWrapper.Partition.DataCoverageDefinition">
             <summary>
             A reference to an optional DataCoverageDefinition that provides the hint regarding the data that is covered by the partition.
@@ -4556,6 +4733,11 @@
         <member name="P:TabularEditor.TOMWrapper.Partition.DataSource">
             <summary>
             The Data Source used by this partition.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Partition.Expression">
+            <summary>
+            The expression which is used to populate this partition with data.
             </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Partition.DependsOn">
@@ -4599,6 +4781,13 @@
             Sets the QueryGroup property of all objects in the collection at once.
             </summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.PartitionCollection.PropertyGridPartitions">
+            <summary>
+            This property points to the PartitionCollection itself. It is used only to display a clickable
+            "Partitions" property in the Property Grid, which will open the PartitionCollectionEditor when
+            clicked.
+            </summary>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.PartitionCollection.ConvertToLegacy(TabularEditor.TOMWrapper.ProviderDataSource)">
             <summary>
             Converts all M partitions in this collection to regular partitions. The M query is left as-is and needs to be converted to SQL before the partition can be processed.
@@ -4608,13 +4797,6 @@
         <member name="M:TabularEditor.TOMWrapper.PartitionCollection.ConvertToPowerQuery">
             <summary>
             Converts all provider source partitions in this collection to M partitions. The provider query is left as-is and needs to be converted to an M query before the partition can be processed.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.PartitionCollection.PropertyGridPartitions">
-            <summary>
-            This property points to the PartitionCollection itself. It is used only to display a clickable
-            "Partitions" property in the Property Grid, which will open the PartitionCollectionEditor when
-            clicked.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.Set">
@@ -5071,6 +5253,15 @@
         <member name="M:TabularEditor.TOMWrapper.Relationship.GetExtendedProperties">
             <summary>Gets a collection of all ExtendedProperty names on the current object.</summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Relationship.ChangedPropertiesCollection">
+            <summary>The ChangedProperties collection</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Relationship.ClearChangedProperties">
+            <summary>Clears the list of names of changed properties.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Relationship.ChangedProperties">
+            <summary>Gets or sets a comma-separated list of names of properties that should no longer be synchronized from the source.</summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Relationship.IsActive">
             <summary>
             A boolean value that indicates whether the relationship is marked as Active or Inactive. An Active relationship is automatically used for filtering across tables. An Inactive relationship can be used explicitly by DAX calculations with the USERELATIONSHIP function.
@@ -5296,6 +5487,15 @@
         <member name="M:TabularEditor.TOMWrapper.Table.GetExtendedProperties">
             <summary>Gets a collection of all ExtendedProperty names on the current object.</summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.ChangedPropertiesCollection">
+            <summary>The ChangedProperties collection</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Table.ClearChangedProperties">
+            <summary>Clears the list of names of changed properties.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.ChangedProperties">
+            <summary>Gets or sets a comma-separated list of names of properties that should no longer be synchronized from the source.</summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Table.DataCategory">
             <summary>
             Specifies the type of Table so that you can customize application behavior based on the type of data in the table. Allowed values are identical to those of dimension type properties for Multidimensional models. Regular is the default. Other values include Time (2), Geography (3), Organization (4), BillOfMaterials (5), Accounts (6), Customers (7), Products (8), Scenario (9), Quantitativ1e (10), Utility (11), Currency (12), Rates (13), Channel (14) - channel dimension, Promotion (15).
@@ -5334,7 +5534,7 @@
         <member name="P:TabularEditor.TOMWrapper.Table.LineageTag">
             <summary>
             A tag that represents the lineage of the object.
-            </summary><remarks>This property is only supported when the compatibility level of the database is at 1540 or above.</remarks>
+            </summary><remarks><para>Lineage tags enable stable identification of objects across different semantic models. Using lineage tags enables Power BI features such as composite models to maintain their binding to referenced tables or columns, even if the source semantic model object is renamed.</para><para>This property is only supported when the compatibility level of the database is at 1540 or above.</para></remarks>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Table.SourceLineageTag">
             <summary>
@@ -5415,14 +5615,44 @@
             CTOR - only called from static factory methods on the class
             </summary>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.IsVisible">
-            <summary>
-            Gets whether the table is visible to end users. This is the case if the table contains visible measures.
-            </summary>
-        </member>
         <member name="P:TabularEditor.TOMWrapper.Table.TableGroup">
             <summary>
             Gets or sets the name of the Table Group in which this table is displayed (Tabular Editor only)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.Source">
+            <summary>
+            Gets the name of the data source used by the table.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.SourceType">
+            <summary>
+            Gets the type of the data source used by the table.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.RowLevelSecurity">
+            <summary>
+            Provides a convenient way to access the Row Level Filters assigned to this table across different roles.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.ObjectLevelSecurity">
+            <summary>
+            Provides a convenient way to get or set the Object-Level permissions assigned to this table across different roles.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.DefaultDetailRowsExpression">
+            <summary>
+            A DAX expression specifying default detail rows for this table (drill-through in client tools).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.RefreshPolicy">
+            <summary>
+            Gets or sets the Refresh Policy of the Table.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.EnableRefreshPolicy">
+            <summary>
+            Enable or disable incremental refresh policy for this table
             </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Table.DependsOn">
@@ -5433,6 +5663,59 @@
         <member name="P:TabularEditor.TOMWrapper.Table.ReferencedBy">
             <summary>
             Gets the list of objects that reference this table based on their DAX expressions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.DaxObjectName">
+            <summary>
+            Gets a string that may be used for referencing the table in a DAX expression.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.DaxObjectFullName">
+            <summary>
+            Gets a string that may be used for referencing the table in a DAX expression.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.DaxTableName">
+            <summary>
+            Gets a string that may be used for referencing the table in a DAX expression.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Table.GetChildren">
+            <summary>
+            Returns all columns, measures, and hierarchies inside this table.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.IsVisible">
+            <summary>
+            Gets whether the table is visible to end users. This is the case if the table contains visible measures.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.ErrorMessage">
+            <summary>
+            Gets the error message currently reported on this table.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Table.AddRefreshPolicy">
+            <summary>
+            Adds a <see cref="T:TabularEditor.TOMWrapper.RefreshPolicy"/> to this measure.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Table.RemoveRefreshPolicy">
+            <summary>
+            Removes the <see cref="T:TabularEditor.TOMWrapper.RefreshPolicy"/> from this measure.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Table.ApplyRefreshPolicy(System.DateTime)">
+            <summary>
+            Update partition definitions based on the current refresh policy using the specified Effective Date
+            </summary>
+            <param name="effectiveDate">Effective Date of the refresh policy.</param>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Table.ApplyRefreshPolicy">
+            <summary>
+            Update partition definitions based on the current refresh policy with Now() as Effective Date
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Table.AddMeasure(System.String,System.String,System.String,TabularEditor.TOMWrapper.IInsertOptions)">
@@ -5560,73 +5843,6 @@
             Enumerates all tables related to or from this table.
             </summary>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.Source">
-            <summary>
-            Gets the name of the data source used by the table.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.SourceType">
-            <summary>
-            Gets the type of the data source used by the table.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.RowLevelSecurity">
-            <summary>
-            Provides a convenient way to access the Row Level Filters assigned to this table across different roles.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.DaxObjectName">
-            <summary>
-            Gets a string that may be used for referencing the table in a DAX expression.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.DaxObjectFullName">
-            <summary>
-            Gets a string that may be used for referencing the table in a DAX expression.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.DaxTableName">
-            <summary>
-            Gets a string that may be used for referencing the table in a DAX expression.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Table.GetChildren">
-            <summary>
-            Returns all columns, measures, and hierarchies inside this table.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.ObjectLevelSecurity">
-            <summary>
-            Provides a convenient way to get or set the Object-Level permissions assigned to this table across different roles.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.ErrorMessage">
-            <summary>
-            Gets the error message currently reported on this table.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.DefaultDetailRowsExpression">
-            <summary>
-            A DAX expression specifying default detail rows for this table (drill-through in client tools).
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.RefreshPolicy">
-            <summary>
-            Gets or sets the Refresh Policy of the Table.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Table.AddRefreshPolicy">
-            <summary>
-            Adds a <see cref="T:TabularEditor.TOMWrapper.RefreshPolicy"/> to this measure.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Table.RemoveRefreshPolicy">
-            <summary>
-            Removes the <see cref="T:TabularEditor.TOMWrapper.RefreshPolicy"/> from this measure.
-            </summary>
-        </member>
         <member name="P:TabularEditor.TOMWrapper.Table.Mode">
             <summary>
             Defines the mode of a refresh policy applied during incremental refresh.
@@ -5670,22 +5886,6 @@
         <member name="P:TabularEditor.TOMWrapper.Table.SourceExpression">
             <summary>
             M expression that is used as the source M expression for new partitions. It includes the date filter by referring to 2 M parameters named [RangeStart] and [RangeEnd], which can be dates or integers depending on IntegerDateKey below
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.Table.EnableRefreshPolicy">
-            <summary>
-            Enable or disable incremental refresh policy for this table
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Table.ApplyRefreshPolicy(System.DateTime)">
-            <summary>
-            Update partition definitions based on the current refresh policy using the specified Effective Date
-            </summary>
-            <param name="effectiveDate">Effective Date of the refresh policy.</param>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Table.ApplyRefreshPolicy">
-            <summary>
-            Update partition definitions based on the current refresh policy with Now() as Effective Date
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.TableCollection">
@@ -5878,7 +6078,7 @@
         <member name="P:TabularEditor.TOMWrapper.NamedExpression.LineageTag">
             <summary>
             A tag that represents the lineage of the object.
-            </summary><remarks>This property is only supported when the compatibility level of the database is at 1540 or above.</remarks>
+            </summary><remarks><para>Lineage tags enable stable identification of objects across different semantic models. Using lineage tags enables Power BI features such as composite models to maintain their binding to referenced tables or columns, even if the source semantic model object is renamed.</para><para>This property is only supported when the compatibility level of the database is at 1540 or above.</para></remarks>
         </member>
         <member name="P:TabularEditor.TOMWrapper.NamedExpression.SourceLineageTag">
             <summary>
@@ -6034,11 +6234,6 @@
             The <see cref="P:TabularEditor.TOMWrapper.CalculationItem.CalculationGroupTable"/> to which this calculation item belongs.
             </summary>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.CalculationItem.ErrorMessage">
-            <summary>
-            A string that explains the error state associated with the current object. It is set by the engine only when the state of the object is one of these three values: SemanticError, DependencyError, or EvaluationError. It is applicable only to columns of the type Calculated or CalculatedTableColumn. It will be empty for other column objects.
-            </summary>
-        </member>
         <member name="P:TabularEditor.TOMWrapper.CalculationItem.FormatStringExpression">
             <summary>
             A DAX expression that returns a Format String for this calculation item.
@@ -6047,6 +6242,11 @@
         <member name="P:TabularEditor.TOMWrapper.CalculationItem.DependsOn">
             <summary>
             Gets the list of objects that this calculation item depends on.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.CalculationItem.ErrorMessage">
+            <summary>
+            A string that explains the error state associated with the current object. It is set by the engine only when the state of the object is one of these three values: SemanticError, DependencyError, or EvaluationError. It is applicable only to columns of the type Calculated or CalculatedTableColumn. It will be empty for other column objects.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.CalculationItemCollection">
@@ -6398,6 +6598,161 @@
             CTOR - only called from static factory methods on the class
             </summary>
         </member>
+        <member name="T:TabularEditor.TOMWrapper.BindingInfo">
+            <summary>
+            Provides information that facilitates the binding of model elements to external resources, such as a data source reference in the model to a data connection in Fabric.
+            </summary><remarks>This metadata object is only supported when the compatibility level of the database is at 1608 or above.</remarks>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.ClearAnnotations">
+            <summary>Removes all annotations from this object.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.BindingInfo.Annotations">
+            <summary>The collection of Annotations on the current Binding Info.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetAnnotation(System.Int32)">
+            <summary>Gets the value of the annotation with the given index, assuming it exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.HasAnnotation(System.String)">
+            <summary>Returns true if an annotation with the given name exists. Otherwise false.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetAnnotation(System.String)">
+            <summary>Gets the value of the annotation with the given name. Returns null if no such annotation exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.SetAnnotation(System.Int32,System.String)">
+            <summary>Sets the value of the annotation with the given index, assuming it exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetNewAnnotationName">
+            <summary>Returns a unique name for a new annotation.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.SetAnnotation(System.String,System.String)">
+            <summary>Sets the value of the annotation having the given name. If no such annotation exists, it will be created. If value is set to null, the annotation will be removed.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.RemoveAnnotation(System.String)">
+            <summary>Remove an annotation by the given name.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetAnnotationsCount">
+            <summary>Gets the number of annotations on the current Binding Info.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetAnnotations">
+            <summary>Gets a collection of all annotation names on the current Binding Info.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.ClearExtendedProperties">
+            <summary>Removes all Extended Properties from this object.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.BindingInfo.ExtendedProperties">
+            <summary>The collection of Extended Properties on the current Binding Info.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.HasExtendedProperty(System.String)">
+            <summary>Returns true if an ExtendedProperty with the given name exists. Otherwise false.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetExtendedPropertyType(System.Int32)">
+            <summary>Gets the type of the ExtendedProperty with the given index, assuming it exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetExtendedPropertyType(System.String)">
+            <summary>Gets the type of the ExtendedProperty with the given name, assuming it exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetExtendedProperty(System.Int32)">
+            <summary>Gets the value of the ExtendedProperty with the given index, assuming it exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetExtendedProperty(System.String)">
+            <summary>Gets the value of the ExtendedProperty with the given name. Returns null if no such ExtendedProperty exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)">
+            <summary>Sets the value of the ExtendedProperty with the given index, optionally specifiying the type (string or JSON) of the ExtendedProperty.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetNewExtendedPropertyName">
+            <summary>Returns a unique name for a new ExtendedProperty.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)">
+            <summary>Sets the value of the ExtendedProperty having the given name. If no such ExtendedProperty exists, it will be created. If value is set to null, the ExtendedProperty will be removed.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.RemoveExtendedProperty(System.String)">
+            <summary>Remove an ExtendedProperty by the given name.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetExtendedPropertyCount">
+            <summary>Gets the number of ExtendedProperties on the current object.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.GetExtendedProperties">
+            <summary>Gets a collection of all ExtendedProperty names on the current object.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.BindingInfo.Description">
+            <summary>
+            The description of the object, visible to developers at design time and to administrators in management tools, such as SQL Server Management Studio.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.BindingInfo.Type">
+            <summary>
+            The type of object. The default type is Unknown. Currently, the only valid type is DataBindingHint, which means that the binding info is an unenforceable instruction (a hint) to bind a data source reference in the model to a data connection in Fabric.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.BindingInfo.Parent">
+            <summary>The parent Model of the current Binding Info.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfo.#ctor(Microsoft.AnalysisServices.Tabular.BindingInfo,TabularEditor.TOMWrapper.TabularModelHandler)">
+            <summary>
+            CTOR - only called from static factory methods on the class
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.BindingInfoCollection">
+            <summary>
+            Collection class for BindingInfo. Provides convenient properties for setting a property on multiple objects at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.BindingInfoCollection.Count">
+            <summary>The number of items in this collection.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfoCollection.GetEnumerator">
+            <summary>Returns an enumerator that iterates through the collection.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.BindingInfoCollection.CreateChildrenFromMetadata">
+            <summary>
+            Calling this method will populate the BindingInfoCollection with objects based on the MetadataObjects in the corresponding MetadataObjectCollection.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.BindingInfoCollection.Description">
+            <summary>
+            Sets the Description property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.BindingInfoCollection.Type">
+            <summary>
+            Sets the Type property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.DataBindingHint">
+            <summary>
+            Represent as an unenforceable instruction (a hint) to bind a data source reference in the model to a data connection in Fabric. The hint is ignored if the data source is already bound or if the data connection does not exist in Fabric.
+            </summary><remarks>This metadata object is only supported when the compatibility level of the database is at 1608 or above.</remarks>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.DataBindingHint.ConnectionId">
+            <summary>
+            The connection id of the data connection in Fabric that should be used to bind the referenced data source.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.DataBindingHint.CreateNew(TabularEditor.TOMWrapper.Model,System.String)">
+            <summary>
+            Creates a new DataBindingHint and adds it to the parent Model.
+            Also creates the underlying metadataobject and adds it to the TOM tree.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.DataBindingHint.Clone(System.String)">
+            <summary>
+            Creates an exact copy of this DataBindingHint object.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.DataBindingHint.Parent">
+            <summary>The parent Model of the current Data Binding Hint.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.DataBindingHint.#ctor(Microsoft.AnalysisServices.Tabular.DataBindingHint,TabularEditor.TOMWrapper.TabularModelHandler)">
+            <summary>
+            CTOR - only called from static factory methods on the class
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.CalculatedTable.Expression">
+            <summary>
+            The Expression of this Calculated Table.
+            </summary>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.CalculatedTable.AddCalculatedTableColumn(System.String,System.String,System.String,TabularEditor.TOMWrapper.DataType)">
             <summary>
             Adds a new Calculated Table column to the table.
@@ -6415,23 +6770,10 @@
             Also creates the underlying metadataobject and adds it to the TOM tree.
             </summary>		
         </member>
-        <member name="P:TabularEditor.TOMWrapper.CalculatedTable.Expression">
-            <summary>
-            The Expression of this Calculated Table.
-            </summary>
-        </member>
         <member name="T:TabularEditor.TOMWrapper.CalculationGroupTable">
             <summary>
             Calculation Group Tables are special tables that only contain a single column
             </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.CalculationGroupTable.AddCalculationItem(System.String,System.String)">
-            <summary>
-            Adds a calculation item with the given name and expression to the calculation group table.
-            </summary>
-            <param name="name"></param>
-            <param name="expression"></param>
-            <returns></returns>
         </member>
         <member name="P:TabularEditor.TOMWrapper.CalculationGroupTable.ErrorMessage">
             <summary>
@@ -6498,14 +6840,22 @@
             The description of the CalculationGroupExpression, visible to developers at design time and to administrators in management tools, such as SQL Server Management Studio.
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Database.ExecuteCommand(System.String,System.Boolean)">
+        <member name="M:TabularEditor.TOMWrapper.CalculationGroupTable.AddCalculationItem(System.String,System.String)">
             <summary>
-            Executes the specified TMSL script against the connected instance of Analysis Services.
+            Adds a calculation item with the given name and expression to the calculation group table.
             </summary>
+            <param name="name"></param>
+            <param name="expression"></param>
+            <returns></returns>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Database.ExecuteReader(System.String)">
             <summary>
             Executes the specified DAX query against the connected database and returns an AmoDataReader object that enumerates the result
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Database.ExecuteCommand(System.String,System.Boolean)">
+            <summary>
+            Executes the specified TMSL script against the connected instance of Analysis Services.
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Database.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)">
@@ -6734,6 +7084,16 @@
             Objects that have an expression (measure, calculated column, partition, etc.)
             </summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.IExpressionObject.DefaultExpressionProperty">
+            <summary>
+            Gets the default expression property on the current object.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.IExpressionObject.Expression">
+            <summary>
+            Gets the expression of the current object (which is the value of its default expression property).
+            </summary>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.IExpressionObject.GetExpressionProperties">
             <summary>
             Gets all supported expression properties on the current object.
@@ -6753,16 +7113,6 @@
             <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">Thrown when the current object does not support the specified <see cref="T:TabularEditor.TOMWrapper.ExpressionProperty"/></exception>
             <param name="expressionProperty"></param>
             <param name="expression"></param>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.IExpressionObject.DefaultExpressionProperty">
-            <summary>
-            Gets the default expression property on the current object.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.IExpressionObject.Expression">
-            <summary>
-            Gets the expression of the current object (which is the value of its default expression property).
-            </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.IDaxDependantObject">
             <summary>
@@ -6788,14 +7138,56 @@
              - Folders
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.MPartition.Clone(System.String,TabularEditor.TOMWrapper.Table)">
+        <member name="T:TabularEditor.TOMWrapper.ModelMetadataSourceInfo">
             <summary>
-            Creates a copy of this parittion
+            Provides additional metadata about a model, including its source and type.
             </summary>
-            <param name="newName"></param>
-            <param name="newParent"></param>
-            <returns></returns>
-            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.ModelMetadataSourceInfo.Source">
+            <summary>
+            A string representing the file path of the model metadata source (if loaded from disk), or the connection string (if loaded through the XMLA endpoint)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.ModelMetadataSourceInfo.SourceType">
+            <summary>
+            Specifies which format the model metadata source is using (TMSL, TMDL, etc.) or if the model metadata was loaded through an XMLA endpoint
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.ModelMetadataSourceInfo.Pbip">
+            <summary>
+            If the model metadata is loaded from a PBIP folder structure, this object will hold additional information parsed from the .platform file in that folder
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.ModelMetadataSourceInfo.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.PbipInfo">
+            <summary>
+            Provides additional metadata about a PBIP folder structure, parsed from the .platform file in that folder.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.PbipInfo.Name">
+            <summary>
+            This is the name of the folder in which the model metadata source resides
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.PbipInfo.DisplayName">
+            <summary>
+            The DisplayName property as specified in the .platform file
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.PbipInfo.LogicalId">
+            <summary>
+            The LogicalId property as specified in the .platform file
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.PbipInfo.RootFolder">
+            <summary>
+            The root folder of the PBIP folder structure, corresponding to the Power BI / Fabric workspace root folder
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.PbipInfo.ToString">
+            <inheritdoc />
         </member>
         <member name="P:TabularEditor.TOMWrapper.MPartition.MExpression">
             <summary>
@@ -6806,6 +7198,15 @@
             <summary>
             Gets or sets the M attributes.
             </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.MPartition.Clone(System.String,TabularEditor.TOMWrapper.Table)">
+            <summary>
+            Creates a copy of this parittion
+            </summary>
+            <param name="newName"></param>
+            <param name="newParent"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="P:TabularEditor.TOMWrapper.PolicyRangePartition.Start">
             <summary>
@@ -6827,23 +7228,19 @@
             Gets the refresh bookmark of the refresh policy for this partition
             </summary>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.Serialization.SerializeOptionTags.GetTagsLocalizedName(System.String)">
+            <summary>
+            Gets the localized name of a tag using resource strings.
+            </summary>
+            <param name="tag">The tag to localize.</param>
+            <returns>The localized string or the original tag if no resource is found.</returns>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.Serialization.Serializer.ParseObjectJsonContainer(System.String)">
             <summary>
             An ObjectJsonContainer is a special JSON structure used to serialize several different types of
             TabularObjects at once. The structure simply consists of a JSON object that holds one or more
             arrays of the various types of objects. The key of each array is the lowercase pluralized name
             of the type held by the array.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Serialization.SplitModelSerializer.FileWriter.SaveToFolder(TabularEditor.TOMWrapper.Model,System.String,TabularEditor.TOMWrapper.Serialization.SerializeOptions,System.Collections.Generic.Dictionary{System.String,TabularEditor.TOMWrapper.Serialization.DataSourceProperties})">
-            <summary>
-            Saves the model to the specified folder using the specified serialize options.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Serialization.SplitModelSerializer.FileWriter.WriteIfChanged(System.String,System.String)">
-            <summary>
-            Writes textual data to a file, but only if the file does not already contain the exact same text.
-            Automatically creates a directory for the file, if it doesn't already exist.
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Serialization.SplitModelSerializer.ConvertCulturesJson(System.String)">
@@ -6874,12 +7271,23 @@
             <param name="arrayProperty"></param>
             <returns></returns>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.Serialization.SplitModelSerializer.FileWriter.SaveToFolder(TabularEditor.TOMWrapper.Model,System.String,TabularEditor.TOMWrapper.Serialization.SerializeOptions,System.Collections.Generic.Dictionary{System.String,TabularEditor.TOMWrapper.Serialization.DataSourceProperties})">
+            <summary>
+            Saves the model to the specified folder using the specified serialize options.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Serialization.SplitModelSerializer.FileWriter.WriteIfChanged(System.String,System.String)">
+            <summary>
+            Writes textual data to a file, but only if the file does not already contain the exact same text.
+            Automatically creates a directory for the file, if it doesn't already exist.
+            </summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Serialization.TmdlSerializeOptions.SpacesIndentation">
             <summary>
             A positive value indicates that the TMDL serializer should use this number of spaces for indentation levels. A negative value or zero indicate that the TMDL serializer should use tabs for indentation.
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Serialization.TranslationAnnotationSerializer.SaveTranslations(TabularEditor.TOMWrapper.IInternalTranslatableObject,System.Boolean)">
+        <member name="M:TabularEditor.TOMWrapper.Serialization.TranslationAnnotationSerializer.SaveTranslations(TabularEditor.TOMWrapper.ITranslatableObject,System.Boolean)">
             <summary>
             Stores all translations on the current instance of an ITranslatableObject as annotations on the object.
             Translations can later be retrieved using the LoadTranslations() extension method.
@@ -6887,7 +7295,7 @@
             <param name="obj">The object on which to save translations</param>
             <param name="includeChildren">Indicates whether translations on child objects are recursively saved</param>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.Serialization.TranslationAnnotationSerializer.LoadTranslations(TabularEditor.TOMWrapper.IInternalTranslatableObject,System.Boolean)">
+        <member name="M:TabularEditor.TOMWrapper.Serialization.TranslationAnnotationSerializer.LoadTranslations(TabularEditor.TOMWrapper.ITranslatableObject,System.Boolean)">
             <summary>
             Reads any translations stored in the annotations of the current instance of an ITranslatableObject,
             and applies them to the model culture.
@@ -7037,6 +7445,12 @@
             <param name="insertOptions"></param>
             <param name="questionCallback"></param>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.TabularConnection.ForceAccountSelector(System.String)">
+            <summary>
+            We can trigger the Entra ID account selector popup by setting UserID=" " in the connection string. Subsequent connections
+            should use the actual user id returned from <see cref="M:TabularEditor.TOMWrapper.DatabaseExtensions.GetAuthHandlePrincipal(Microsoft.AnalysisServices.ConnectionInfo)"/>
+            </summary>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.TabularCultureHelper.ImportCulture(Newtonsoft.Json.Linq.JObject,TabularEditor.TOMWrapper.Model,System.Boolean,System.Boolean)">
             <summary>
             Method returns 'false' if an error was encountered and <paramref name="haltOnError"/> is set to true.
@@ -7048,15 +7462,15 @@
             
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.TabularModelHandler.#ctor(System.Int32,TabularEditor.TOMWrapper.TabularModelHandlerSettings,System.Boolean)">
-            <summary>
-            Creates a new blank Tabular Model
-            </summary>
-        </member>
         <member name="F:TabularEditor.TOMWrapper.TabularModelHandler._semanticChanges">
             <summary>
             Indicates whether any structural changes have been made, that may cause DAX expressions against the deployed model
             to return different results or fail, compared to the loaded model.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TabularModelHandler.#ctor(System.Int32,TabularEditor.TOMWrapper.TabularModelHandlerSettings,System.Boolean)">
+            <summary>
+            Creates a new blank Tabular Model
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.TabularModelHandler.#ctor(System.String,System.String,TabularEditor.TOMWrapper.TabularModelHandlerSettings)">
@@ -7134,6 +7548,25 @@
             Indicates if this model handler is connected to an instance of Analysis Services
             </summary>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.TabularModelHandlerExtension.IsEnterpriseWorkspace(TabularEditor.TOMWrapper.ITabularModelHandler)">
+            <summary>
+            Logic for determining if the model is hosted in an Enterprise-Tier workspace/server, i.e. if any of the following are true,
+            see <see cref="M:TabularEditor.TOMWrapper.TabularObjectHelper.IsEnterpriseTier(Microsoft.AnalysisServices.Tabular.Server)"/>:
+            </summary>
+            <param name="handler"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TabularModelHandlerExtension.IsEnterpriseTier(TabularEditor.TOMWrapper.ITabularModelHandler)">
+             <summary>
+             Logic for determining if the currently loaded model is classified as Enterprise-Tier, i.e. if any of the following are true:
+            
+              - The model has Direct Lake tables
+              - The model is an SSAS/AzureAS model containing perspectives or multi-partition tables
+             
+             </summary>
+             <param name="handler"></param>
+             <returns></returns>
+        </member>
         <member name="F:TabularEditor.TOMWrapper.SaveFormat.ModelSchemaOnly">
             <summary>
             Saves only the Model Schema as a Model.bim file
@@ -7156,12 +7589,12 @@
         </member>
         <member name="F:TabularEditor.TOMWrapper.ModelSourceType.Database">
             <summary>
-            SSAS Tabular database Compatibility Level 1200 or 1400
+            Model metadata loaded from the XMLA endpoint of Power BI or Analysis Services
             </summary>
         </member>
         <member name="F:TabularEditor.TOMWrapper.ModelSourceType.File">
             <summary>
-            Model.bim Compatibility Level 1200 or 1400 JSON file
+            Model.bim aka. TMSL file
             </summary>
         </member>
         <member name="F:TabularEditor.TOMWrapper.ModelSourceType.Folder">
@@ -7228,17 +7661,6 @@
             method for editing the (localized) name and description.
             </summary>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.TabularNamedObject.AllowDelete(System.String@)">
-            <summary>
-            Derived classes should override this method to prevent an object from being deleted.
-            If left un-overridden, always returns TRUE and sets message to null.
-            </summary>
-            <param name="message">If an object CANNOT be deleted, this string should provide
-            a reason why. If an object CAN be deleted, this string may optionally provide a
-            suitable warning message that applies if the object is deleted immediately after
-            the call to CanDelete.</param>
-            <returns>True if an object can be deleted. False otherwise.</returns>
-        </member>
         <member name="M:TabularEditor.TOMWrapper.TabularNamedObject.CanDelete">
             <summary>
             Indicates whether an object can be deleted or not.
@@ -7258,6 +7680,27 @@
             <summary>
             Deletes the object.
             </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TabularNamedObject.MetadataIndex">
+            <summary>
+            Returns the index of this item in the parent metadata collection
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TabularNamedObject.Name">
+            <summary>
+            The name of this object. Warning: Changing the name can break formula logic, if Automatic Formula Fix-up is disabled.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TabularNamedObject.AllowDelete(System.String@)">
+            <summary>
+            Derived classes should override this method to prevent an object from being deleted.
+            If left un-overridden, always returns TRUE and sets message to null.
+            </summary>
+            <param name="message">If an object CANNOT be deleted, this string should provide
+            a reason why. If an object CAN be deleted, this string may optionally provide a
+            suitable warning message that applies if the object is deleted immediately after
+            the call to CanDelete.</param>
+            <returns>True if an object can be deleted. False otherwise.</returns>
         </member>
         <member name="M:TabularEditor.TOMWrapper.TabularNamedObject.Undelete(TabularEditor.TOMWrapper.ITabularObjectCollection,System.Type,System.String)">
             <summary>
@@ -7295,16 +7738,6 @@
             </summary>
             <param name="collection"></param>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.TabularNamedObject.MetadataIndex">
-            <summary>
-            Returns the index of this item in the parent metadata collection
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.TabularNamedObject.Name">
-            <summary>
-            The name of this object. Warning: Changing the name can break formula logic, if Automatic Formula Fix-up is disabled.
-            </summary>
-        </member>
         <member name="T:TabularEditor.TOMWrapper.ICustomErrorObject">
             <summary>
             Classes that can have an error state, in addition to the error message provided by the TOM, should implement this interface,
@@ -7325,6 +7758,28 @@
             Protected constructor that takes a TOM MetadataObject as argument.
             </summary>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.TabularObject.#ctor(Microsoft.AnalysisServices.Tabular.MetadataObject,TabularEditor.TOMWrapper.TabularModelHandler)">
+            <summary>
+            Creates a TabularObject representing the provided TOM MetadataObject.
+            </summary>
+            <param name="metadataObject"></param>
+            <param name="handler"></param>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TabularObject.ObjectTypeName">
+            <summary>
+            The type name of this object (\"Folder\", \"Measure\", \"Table\", etc.).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TabularObject.Model">
+            <summary>
+            The model this object belongs to.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TabularObject.ObjectType">
+            <summary>
+            The type of this object (Folder, Measure, Table, etc.).
+            </summary>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(System.String,System.Object,System.Object)">
             <summary>
             Fired after a property is changed
@@ -7342,28 +7797,6 @@
             <param name="newValue">New value assigned to the property.</param>
             <param name="undoable">Return false if automatic undo of the property change is not needed.</param>
             <param name="cancel">Return true if the property change should not apply.</param>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.TabularObject.Model">
-            <summary>
-            The model this object belongs to.
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.TabularObject.ObjectType">
-            <summary>
-            The type of this object (Folder, Measure, Table, etc.).
-            </summary>
-        </member>
-        <member name="P:TabularEditor.TOMWrapper.TabularObject.ObjectTypeName">
-            <summary>
-            The type name of this object (\"Folder\", \"Measure\", \"Table\", etc.).
-            </summary>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.TabularObject.#ctor(Microsoft.AnalysisServices.Tabular.MetadataObject,TabularEditor.TOMWrapper.TabularModelHandler)">
-            <summary>
-            Creates a TabularObject representing the provided TOM MetadataObject.
-            </summary>
-            <param name="metadataObject"></param>
-            <param name="handler"></param>
         </member>
         <member name="M:TabularEditor.TOMWrapper.TabularObject.Init">
             <summary>
@@ -7451,7 +7884,7 @@
             </summary>
             <param name="nodeItem"></param>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.TabularTree.OnNodeNameChanged(TabularEditor.TOMWrapper.IInternalTabularObject)">
+        <member name="M:TabularEditor.TOMWrapper.TabularTree.OnNodeNameChanged(TabularEditor.TOMWrapper.ITabularObject)">
             <summary>
             Call this method to signal to the TreeView that a nodes name was changed. When
             using the OrderByName option, this typically requires a call to OnStructureChanged
@@ -7482,9 +7915,26 @@
             in a single batch.
             </summary>
         </member>
+        <member name="F:TabularEditor.TOMWrapper.Undo.UndoManager.GroupSeparationDelay">
+            <summary>
+            If two batch actions with the same <see cref="P:TabularEditor.TOMWrapper.Undo.UndoBatchAction.Group"/> are performed sequentially and less
+            than the number of milliseconds specified here, they will be grouped together when performing undo/redo.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Undo.UndoManager.#ctor(TabularEditor.TOMWrapper.TabularModelHandler)">
+            <summary>
+            Creates the UndoManager. Remember to set 'Enabled' to true after creation.
+            </summary>
+            <param name="handler"></param>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Undo.UndoManager.Enabled">
             <summary>
             Whether or not the undo manager is collecting operations.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Undo.UndoManager.AtCheckpoint">
+            <summary>
+            Returns true if no changes have been done relative to the last checkpoint set.
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Undo.UndoManager.Rollback(System.Boolean)">
@@ -7504,29 +7954,12 @@
             if the undo stack is currently at the checkpoint (meaning no changes have been done).
             </summary>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.Undo.UndoManager.AtCheckpoint">
-            <summary>
-            Returns true if no changes have been done relative to the last checkpoint set.
-            </summary>
-        </member>
         <member name="M:TabularEditor.TOMWrapper.Undo.UndoManager.GetHistory">
             <summary>
             Returns a string containing the entire history of changes applied to the model
             in a human-readable way.
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.Undo.UndoManager.#ctor(TabularEditor.TOMWrapper.TabularModelHandler)">
-            <summary>
-            Creates the UndoManager. Remember to set 'Enabled' to true after creation.
-            </summary>
-            <param name="handler"></param>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.Undo.UndoManager.GroupSeparationDelay">
-            <summary>
-            If two batch actions with the same <see cref="P:TabularEditor.TOMWrapper.Undo.UndoBatchAction.Group"/> are performed sequentially and less
-            than the number of milliseconds specified here, they will be grouped together when performing undo/redo.
-            </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Undo.UndoManager.BeginBatch(System.String,System.Boolean,TabularEditor.TOMWrapper.Undo.UndoGroup)">
             <summary>
@@ -7574,113 +8007,198 @@
             <param name="formattedValue"></param>
             <returns></returns>
         </member>
-        <member name="T:TabularEditor.Messages">
+        <member name="T:TabularEditor.LocalizableStrings">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.ResourceManager">
+        <member name="P:TabularEditor.LocalizableStrings.ResourceManager">
             <summary>
               Returns the cached ResourceManager instance used by this class.
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.Culture">
+        <member name="P:TabularEditor.LocalizableStrings.Culture">
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.CannotCreatePowerBIObject">
+        <member name="P:TabularEditor.LocalizableStrings.AllMembersOfCollectionMustHaveXValueSpecified">
+            <summary>
+              Looks up a localized string similar to All members of the collection must have the &apos;{0}&apos; value specified..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.CalculationItems">
+            <summary>
+              Looks up a localized string similar to Calculation Items.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.CannotCreatePowerBIObject">
             <summary>
               Looks up a localized string similar to Adding a {0} to a Power BI semantic model is not allowed..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.CannotDeleteCalculatedTableColumn">
+        <member name="P:TabularEditor.LocalizableStrings.CannotDeleteCalculatedTableColumn">
             <summary>
               Looks up a localized string similar to Calculated Table Columns cannot be deleted. Hide the column or revisit the Calculated Table expression instead..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.CannotDeleteObject">
+        <member name="P:TabularEditor.LocalizableStrings.CannotDeleteObject">
             <summary>
               Looks up a localized string similar to This object cannot be deleted..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.CannotDeletePowerBIObject">
+        <member name="P:TabularEditor.LocalizableStrings.CannotDeletePowerBIObject">
             <summary>
               Looks up a localized string similar to Deleting a {0} from a Power BI semantic ,odel is not allowed..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.ColumnUsedInHierarchy">
+        <member name="P:TabularEditor.LocalizableStrings.Clone">
+            <summary>
+              Looks up a localized string similar to Clone.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.Columns">
+            <summary>
+              Looks up a localized string similar to Columns.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.ColumnUsedInHierarchy">
             <summary>
               Looks up a localized string similar to This column is used in one or more hierarchies. The corresponding levels will also be deleted..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.ColumnUsedInRelationship">
+        <member name="P:TabularEditor.LocalizableStrings.ColumnUsedInRelationship">
             <summary>
               Looks up a localized string similar to This column is used in one or more relationships. Deleting it will also remove the relationship from the model..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.CompatibilityError_ObjectLevelSecurity">
+        <member name="P:TabularEditor.LocalizableStrings.CompatibilityError_ObjectLevelSecurity">
             <summary>
               Looks up a localized string similar to Object Level Security requires Compatibility Level 1400 or higher..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.CompatibilityError_StructuredDataSource">
+        <member name="P:TabularEditor.LocalizableStrings.CompatibilityError_StructuredDataSource">
             <summary>
               Looks up a localized string similar to Structured Data Sources can only be added to Compatibility Level 1400 or higher models..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.DataSourceInUse">
+        <member name="P:TabularEditor.LocalizableStrings.CultureSpecifiedMoreThanOnce">
+            <summary>
+              Looks up a localized string similar to Culture for &apos;{0}&apos; is specified more than once..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.DataSourceInUse">
             <summary>
               Looks up a localized string similar to A data source which is used by one or more partitions cannot be deleted..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.DuplicateColumnName">
+        <member name="P:TabularEditor.LocalizableStrings.DataSources">
+            <summary>
+              Looks up a localized string similar to Data Sources.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.DuplicateColumnName">
             <summary>
               Looks up a localized string similar to A column with the name &quot;{0}&quot; already exists in the table. Choose a different name for this column..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.DuplicateMeasureName">
+        <member name="P:TabularEditor.LocalizableStrings.DuplicateMeasureName">
             <summary>
               Looks up a localized string similar to A measure with the name &quot;{0}&quot; already exists in the model. Choose a different name for this measure..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.InvalidExpressionProperty">
+        <member name="P:TabularEditor.LocalizableStrings.Hierarchies">
+            <summary>
+              Looks up a localized string similar to Hierarchies.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.InvalidCultureSpecifier">
+            <summary>
+              Looks up a localized string similar to &apos;{0}&apos; is an invalid culture specifier. Please set the &apos;Language&apos; property to a valid value (e.g. &apos;en-US&apos;)..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.InvalidExpressionProperty">
             <summary>
               Looks up a localized string similar to A {0} object does not have a DAX {1} property..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.ObjectAlreadyDeleted">
+        <member name="P:TabularEditor.LocalizableStrings.Measures">
+            <summary>
+              Looks up a localized string similar to Measures.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.ObjectAlreadyDeleted">
             <summary>
               Looks up a localized string similar to Can&apos;t remove this object from the TOM since it has already been deleted..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.OperationDelete">
+        <member name="P:TabularEditor.LocalizableStrings.OperationDelete">
             <summary>
               Looks up a localized string similar to Delete {0}.
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.ParameterBlankNotAllowed">
+        <member name="P:TabularEditor.LocalizableStrings.ParameterBlankNotAllowed">
             <summary>
               Looks up a localized string similar to {0} cannot be blank..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.ReferencedByDAX">
+        <member name="P:TabularEditor.LocalizableStrings.Partitions">
+            <summary>
+              Looks up a localized string similar to Partitions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.Perspectives">
+            <summary>
+              Looks up a localized string similar to Perspectives.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.ReferencedByDAX">
             <summary>
               Looks up a localized string similar to This object is referenced by one or more other objects through DAX expressions. Deleting it will cause dependent objects to stop functioning correctly..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.TableMustHaveAtLeastOnePartition">
+        <member name="P:TabularEditor.LocalizableStrings.Relationships">
+            <summary>
+              Looks up a localized string similar to Relationships.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.Roles">
+            <summary>
+              Looks up a localized string similar to Roles.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.SharedExpressions">
+            <summary>
+              Looks up a localized string similar to Shared Expressions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.TableMustHaveAtLeastOnePartition">
             <summary>
               Looks up a localized string similar to A table must have at least one partition..
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.UnableToPerformInsert">
+        <member name="P:TabularEditor.LocalizableStrings.Tables">
+            <summary>
+              Looks up a localized string similar to Tables.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.TableWithNoRefreshPolicyMinimumPartitionCount">
+            <summary>
+              Looks up a localized string similar to A table with no refresh policy must always have at least 1 partition..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.Translations">
+            <summary>
+              Looks up a localized string similar to Translations.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.UnableToPerformInsert">
             <summary>
               Looks up a localized string similar to Unable to perform insert.
             </summary>
         </member>
-        <member name="P:TabularEditor.Messages.UnableToPerformInsertCompatLevelConflict">
+        <member name="P:TabularEditor.LocalizableStrings.UnableToPerformInsertCompatLevelConflict">
              <summary>
                Looks up a localized string similar to There was en error inserting objects from the clipboard. Most likely, the copied objects originate from a model that has a different CompatibilityLevel and/or CompatibilityMode, than the current model. Consider upgrading the current model to match the CompatibilityLevel of the source.
             
@@ -7689,41 +8207,93 @@
             {0}.
              </summary>
         </member>
-        <member name="P:TabularEditor.Messages.UnableToPerformInsertGeneric">
+        <member name="P:TabularEditor.LocalizableStrings.UnableToPerformInsertGeneric">
              <summary>
                Looks up a localized string similar to There was an error inserting objects from the clipboard:
             
             {0}.
              </summary>
         </member>
-        <member name="T:TabularEditor.PropertyGridUI.CultureCollectionEditor">
+        <member name="T:TabularEditor.NonLocalizableStrings">
             <summary>
-            This Collection Editor for Cultures takes care of removing unassigned cultures
-            when the Collection Editor is closed.
+              A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
         </member>
-        <member name="T:TabularEditor.PropertyGridUI.TabularObjectCollectionEditor`1">
+        <member name="P:TabularEditor.NonLocalizableStrings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.NonLocalizableStrings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.NonLocalizableStrings.AfterNumber">
+            <summary>
+              Looks up a localized string similar to After number.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.NonLocalizableStrings.BeforeNumber">
+            <summary>
+              Looks up a localized string similar to Before number.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.NonLocalizableStrings.CannotCloneToAnotherParent">
+            <summary>
+              Looks up a localized string similar to This object can not be cloned to another parent. Argument &apos;{0}&apos; should be left as null..
+            </summary>
+        </member>
+        <member name="T:TabularEditor.PropertyGridUI.CollectionEditors.CultureCollectionEditor">
+            <summary>
+            This Collection Editor for Cultures doesn't allow new cultures to be defined without setting the 'Language' property
+            </summary>
+        </member>
+        <member name="T:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1">
             <summary>
             A CollectionEditor that automatically refreshes the parent PropertyGrid when the CollectionEditor form is closed.
-            This ensures that no expanded items (using the DictionaryProperty) still show old (deleted) members after the
-            form is closed.
+            Moreover, it will automatically call BeginUpdate and EndUpdate on the TabularModelHandler.
             </summary>
         </member>
-        <member name="T:TabularEditor.PropertyGridUI.GenericCollectionEditor`1">
+        <member name="M:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1.#ctor">
             <summary>
             A CollectionEditor that automatically refreshes the parent PropertyGrid when the CollectionEditor form is closed.
-            This ensures that no expanded items (using the DictionaryProperty) still show old (deleted) members after the
-            form is closed.
+            Moreover, it will automatically call BeginUpdate and EndUpdate on the TabularModelHandler.
             </summary>
         </member>
-        <member name="T:TabularEditor.PropertyGridUI.Currency">
+        <member name="M:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1.GetEditableCollection(System.Object)">
+            <summary>
+            Provide the initial collection of items to be shown in the CollectionEditor form.
+            Note: items are not added/removed from this collection while the user is interacting
+            with the CollectionEditor form. Instead, the SetEditableCollection method is called
+            when the user hits the "OK" button. If you need to perform special actions when items
+            are added/removed, override the CreateInstance and DestroyInstance methods.
+            </summary>
+            <param name="editValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1.SetEditableCollection(System.Collections.Generic.IList{`0})">
+            <summary>
+            Override this method to update the collection property of the object being edited
+            This is only called when the user hits the "OK" button in the CollectionEditor form.
+            You may also throw an exception here to prevent the user from closing the form.</summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TabularEditor.PropertyGridUI.CollectionEditors.TabularObjectCollectionEditor`1">
+            <summary>
+            A CollectionEditor that works natively with TabularObjectCollections, and automatically refreshes the parent PropertyGrid when the CollectionEditor form is closed.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.PropertyGridUI.Converters.Currency">
             <summary>
             Provide a structured way to talk about currencies, capturing the symbol,
             a friendly name, and positioning of the symbol, for use in integrating
             with existing number formating schemes.
             </summary>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.Currency.#ctor(System.String,System.String,TabularEditor.PropertyGridUI.Currency.SymbolPosition)">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.Currency.#ctor(System.String,System.String,TabularEditor.PropertyGridUI.Converters.Currency.SymbolPosition)">
             <summary>
             Create a new Currency
             </summary>
@@ -7731,31 +8301,31 @@
             <param name="symbol">The currency symbol only (no spaces)</param>
             <param name="position">Enum capturing position before or after the number and whether there is a space</param>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.Currency.#ctor(System.String,System.String,System.Boolean)">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.Currency.#ctor(System.String,TabularEditor.PropertyGridUI.Converters.CurrencySymbolPosition,System.Boolean)">
             <summary>
             Create a currency from TomExplorerPreferences settings
             </summary>
             <param name="symbol">A string with a currency symbol</param>
-            <param name="position">A string indicating the symbol comes *"before"* or *"after"* the number</param>
+            <param name="symbolPosition">A flag indicating the symbol comes *"after"* the number rather than *"before"* the number</param>
             <param name="space">Whether to include a space between the number and the symbol</param>
             <remarks>Position is determined with a string match and falls through to coming before the number</remarks>
         </member>
-        <member name="P:TabularEditor.PropertyGridUI.Currency.Label">
+        <member name="P:TabularEditor.PropertyGridUI.Converters.Currency.Label">
             <summary>
             Friendly label for currency (for UI display), e.g. "US Dollar"
             </summary>
         </member>
-        <member name="P:TabularEditor.PropertyGridUI.Currency.Symbol">
+        <member name="P:TabularEditor.PropertyGridUI.Converters.Currency.Symbol">
             <summary>
             Symbol of the currency only (no spaces or anything else)
             </summary>
         </member>
-        <member name="P:TabularEditor.PropertyGridUI.Currency.Position">
+        <member name="P:TabularEditor.PropertyGridUI.Converters.Currency.Position">
             <summary>
             Position and spacing information for the currency symbol
             </summary>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.Currency.Quote(System.String)">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.Currency.Quote(System.String)">
             <summary>
             Wrap a string in double quotes to avoid conflicts with control characters in
             format strings
@@ -7763,95 +8333,95 @@
             <param name="s"></param>
             <returns></returns>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.Currency.FormatStringSnippet">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.Currency.FormatStringSnippet">
             <summary>
             Generate the appropriate string to append to a number format
             </summary>
             <returns>A quoted string with appropriate spacing, suitable for use in a number format.</returns>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.Currency.Ending">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.Currency.Ending">
             <summary>
             True when the symbol goes at the end of the string
             </summary>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.Currency.Starting">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.Currency.Starting">
             <summary>
             True when the symbol goes at the start of the string
             </summary>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.Currency.InFormatString(System.String)">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.Currency.InFormatString(System.String)">
             <summary>
             Test if the format string snippet of the currency is in the format string
             </summary>
             <param name="format">A format string that may hold the currency snippet</param>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.Currency.AddToFormat(System.String)">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.Currency.AddToFormat(System.String)">
             <summary>
             Put the currency symbol in the correct place relative to an existing number format string
             </summary>
             <param name="numberFormat">A number format string that already handles thousands and decimals</param>
             <returns>numberFormat with a currency symbol before or after it.</returns>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.Currency.StripFromFormat(System.String)">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.Currency.StripFromFormat(System.String)">
             <summary>
             Remove the currency format from the string, if it is there
             </summary>
             <param name="currencyFormat">a format string that may contain the symbol snippet</param>
             <returns>a format string that definitely does not contain the symbol snippet</returns>
         </member>
-        <member name="T:TabularEditor.PropertyGridUI.Currency.SymbolPosition">
+        <member name="T:TabularEditor.PropertyGridUI.Converters.Currency.SymbolPosition">
             <summary>
             Position and spacing definition for a currency symbol.
             </summary>
         </member>
-        <member name="F:TabularEditor.PropertyGridUI.Currency.SymbolPosition.EndNoSpace">
+        <member name="F:TabularEditor.PropertyGridUI.Converters.Currency.SymbolPosition.EndNoSpace">
             <summary>
             Put the symbol after the number, with no space, e.g. "#,#.00$"
             </summary>
         </member>
-        <member name="F:TabularEditor.PropertyGridUI.Currency.SymbolPosition.EndWithSpace">
+        <member name="F:TabularEditor.PropertyGridUI.Converters.Currency.SymbolPosition.EndWithSpace">
             <summary>
             Put the symbol after the number, with a space, e.g., "#,#.00 $"
             </summary>
         </member>
-        <member name="F:TabularEditor.PropertyGridUI.Currency.SymbolPosition.StartNoSpace">
+        <member name="F:TabularEditor.PropertyGridUI.Converters.Currency.SymbolPosition.StartNoSpace">
             <summary>
             Put the symbol before the number with no space, e.g., "$#,#.00"
             </summary>
         </member>
-        <member name="F:TabularEditor.PropertyGridUI.Currency.SymbolPosition.StartWithSpace">
+        <member name="F:TabularEditor.PropertyGridUI.Converters.Currency.SymbolPosition.StartWithSpace">
             <summary>
             Put the symbol before the number with a space, e.g., "$ #,#.00"
             </summary>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.Currency.PositionFromPositivePattern(System.Int32)">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.Currency.PositionFromPositivePattern(System.Int32)">
             <summary>
             Map CurrencyPositivePattern values to our enum for positions
             </summary>
             <param name="numberFormatInfo">int 1-4 (inclusive)</param>
             <remarks>based on https://learn.microsoft.com/en-us/dotnet/api/system.globalization.numberformatinfo.currencypositivepattern?view=net-8.0</remarks>
         </member>
-        <member name="T:TabularEditor.PropertyGridUI.CurrencyFormats">
+        <member name="T:TabularEditor.PropertyGridUI.Converters.CurrencyFormats">
             <summary>
             Provide an interface to list and look up known currencies.
             </summary>
         </member>
-        <member name="F:TabularEditor.PropertyGridUI.CurrencyFormats.currencies">
+        <member name="F:TabularEditor.PropertyGridUI.Converters.CurrencyFormats.currencies">
             <summary>
             Default list of currencies to populate the UI combo box
             </summary>
         </member>
-        <member name="F:TabularEditor.PropertyGridUI.CurrencyFormats.nameToCurrency">
+        <member name="F:TabularEditor.PropertyGridUI.Converters.CurrencyFormats.nameToCurrency">
             <summary>
             Map currency names to currencies
             </summary>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.CurrencyFormats.AvailableFormats">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.CurrencyFormats.AvailableFormats">
             <summary>
             List default currency names
             </summary>
         </member>
-        <member name="M:TabularEditor.PropertyGridUI.CurrencyFormats.FromName(System.String)">
+        <member name="M:TabularEditor.PropertyGridUI.Converters.CurrencyFormats.FromName(System.String)">
             <summary>
             Look up a currency by its friendly label
             </summary>
@@ -7950,6 +8520,85 @@
             To set up a PropertyGrid to use this host, use the following code:
             
                 MyPropertyGrid.Site = new DesignerHost();
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.ApplyChanges">
+            <summary>
+            Call this when the UpdateLocks reach 0 to apply all cached changes
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeColumnNameChange(TabularEditor.TOMWrapper.Column,System.String)">
+            <summary>
+            When the name of a column is changed, DAX formulas referencing the column has to be updated.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeTableNameChange(TabularEditor.TOMWrapper.Table,System.String)">
+            <summary>
+            When the name of a table is changed, DAX formulas referencing the ´table has to be updated.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeMeasureNameChange(TabularEditor.TOMWrapper.Measure,System.String)">
+            <summary>
+            When the name of a measure is changed, DAX formulas referencing the measure has to be updated.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeColumnDataTypeChange(TabularEditor.TOMWrapper.Column,TabularEditor.TOMWrapper.DataType)">
+            <summary>
+            Changing the data type of a column (DataColumn or CalculatedColumn / CalculatedTableColumn with InferDataType = false), can cause cascades.
+            </summary>
+            <param name="column"></param>
+            <param name="newDataType"></param>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeMeasureExpressionChange(TabularEditor.TOMWrapper.Measure)">
+            <summary>
+            When the expression of a measure is changed, the resulting data type of the measure might change, potentially causing cascasdes.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeKpiExpressionChange(TabularEditor.TOMWrapper.KPI,Dax.Analyzer.KpiProperty)">
+            <summary>
+            When the expression of a KPI is changed, the resulting data type of the KPI might change, potentially causing cascasdes.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeCalculatedColumnExpressionChange(TabularEditor.TOMWrapper.CalculatedColumn)">
+            <summary>
+            When the expression of a Calculated Column is changed, the resulting data type of the column might change, potentially causing cascasdes.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeCalculatedTableExpressionChange(TabularEditor.TOMWrapper.CalculatedTable)">
+            <summary>
+            When the expression of a Calculated Table is changed, the resulting columns and data types might change, potentially causing cascades.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeAddColumn(TabularEditor.TOMWrapper.Column,TabularEditor.TOMWrapper.Table)">
+            <summary>
+            Adding a column to a table can cause cascades
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeRemoveColumn(TabularEditor.TOMWrapper.Column,TabularEditor.TOMWrapper.Table)">
+            <summary>
+            Removing a column from a table can cause cascades
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeAddMeasure(TabularEditor.TOMWrapper.Measure)">
+            <summary>
+            When a measure is added, previously invalid expressions might become valid.
+            </summary>
+            <param name="measure"></param>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeRemoveMeasure(TabularEditor.TOMWrapper.Measure)">
+            <summary>
+            When a measure is deleted, expressions referencing that measure will become invalid
+            </summary>
+            <param name="measure"></param>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeRlsFilterExpressionChange(TabularEditor.TOMWrapper.TablePermission)">
+            <summary>
+            When the expression of a measure is changed, the resulting data type of the measure might change, potentially causing cascasdes.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeFormatStringExpressionChange(TabularEditor.TOMWrapper.Measure)">
+            <summary>
+            When the Format String expression of a measure is changed, the resulting data type or validity of the Format String expression might change, potentially causing cascasdes.
             </summary>
         </member>
         <member name="T:TabularEditor.StringHelper">
