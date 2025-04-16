@@ -41,7 +41,7 @@ In most cases, changing the **Proxy Type** from `None` to `System` will resolve 
 
 If the suggestion above does not solve the problem, starting with version 3.21.0 of Tabular Editor, you can try the following alternative solution:
 
-Create a file called [**AnalysisServices.AppSettings.json**](~/content/assets/config-files/AnalysisServices.AppSettings.json) and put it in the installation folder for Tabular Editor 3 (i.e. the same folder that TabularEditor3.exe resides in). Add the following content to the file:
+Create a file called <a href="https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/AnalysisServices.AppSettings.json" download="AnalysisServices.AppSettings.json">**AnalysisServices.AppSettings.json**</a> and put it in the installation folder for Tabular Editor 3 (i.e. the same folder that TabularEditor3.exe resides in). Add the following content to the file:
 
 ```json
 {
