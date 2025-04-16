@@ -59,6 +59,6 @@ Macros are stored in the %LocalAppFolder%/TabularEditor3 as a JSON file called M
 
 ## Macro file example
 
-An example of a MacroActions.JSON file can be found here. It contains several of the C# scripts from our script library: [Download example MacroActions File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/MacroActions.json)
+An example of a MacroActions.JSON file can be found here. It contains several of the C# scripts from our script library: [Download example MacroActions File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
 
 

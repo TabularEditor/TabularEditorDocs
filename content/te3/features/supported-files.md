@@ -34,7 +34,7 @@ However, it has a large drawback: as it's a single large file, it's difficult to
 #### .bim file in a folder
 ![Supported File Types BIM](~/content/assets/images/file-types/te3-supported-file-bim.png)
 
-[Download example .bim file ](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/bim-file-example.bim)
+[Download example .bim file ](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/bim-file-example.bim)
 
 
 ### [Power BI](#tab/PowerBI)
@@ -94,7 +94,7 @@ A single JSON file for a measure contains all the properties of that measure:
 
 For more information on Save to Folder and serialization settings please refer to: [Save to Folder](xref:save-to-folder)
 
-[Download example JSON Folder Structure](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/json-model-example.zip)
+[Download example JSON Folder Structure](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/json-model-example.zip)
 
 ### [TMDL](#tab/TMDL)
 
@@ -114,7 +114,7 @@ TMDL is designed to support dataset source control, enabling users to track chan
 
 For further reading please see: [TMDL](xref:tmdl)
 
-[Download example TMDL Folder Structure](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/tmdl-model-example.zip)
+[Download example TMDL Folder Structure](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/tmdl-model-example.zip)
 
 ***
 
@@ -132,7 +132,7 @@ These file can be useful for documenting the model structure and logic for other
 
 Diagram files are actually JSON that is stored in a Tabular Editor 3 extension.
 
-[Download example Diagram File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/te3-diagram.te3diag)
+[Download example Diagram File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/te3-diagram.te3diag)
 
 ### DAX query files (.dax or .msdax)
 
@@ -140,7 +140,7 @@ DAX queries are expressions that can be used to manipulate and analyze data in s
 
 You can save a DAX file in Tabular Editor 3 and use it later to run the queries again. You can also open a DAX file in other tools that support DAX, such as [DAX Studio](https://daxstudio.org).
 
-[Download example DAX File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/dax-query-example.dax)
+[Download example DAX File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/dax-query-example.dax)
 
 These files can only be opened while Tabular Editor 3 is connected to an instance of Analysis Services or the Power BI / Fabric XMLA endpoint.
 
@@ -162,7 +162,7 @@ These scripts can be saved as files with the .csc extension and loaded into Tabu
 
 This way, scripts can be reused without having to write them from scratch every time. The [script library](xref:csharp-script-library) is a good place investigate and reuse various examples of scripts as they demonstrate different features and functionalities of C#. 
 
-[Download example C# Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/create-sum-measures-csharp.csx)
+[Download example C# Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/create-sum-measures-csharp.csx)
 
 ### Vertipaq Analyzer Files (.vpax)
 
@@ -170,13 +170,13 @@ With Tabular Editor, you can export and import .vpax files using the Vertipaq An
 
 You can use this file to analyze and optimize your model performance, without exposing sensitive data. For example, you can use the [DAX optimizer](https://www.daxoptimizer.com/) tool to get suggestions on how to improve your DAX formulas based on the .vpax file.
 
-[Download example DAX Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/dax-script-example.te3daxs)
+[Download example DAX Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/dax-script-example.te3daxs)
 
 Unlike other supporting file types creating a .vpax file is done within the Vertipaq Analyzer window using the 'Import' and 'Export' buttons. 
 
 ![VPAX](~/content/assets/images/file-types/te3-supported-file-vpax.png)
 
-[Download example VPAX file](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/vpaq-example.vpax)
+[Download example VPAX file](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/vpaq-example.vpax)
 
 > [!WARNING]
 > If your model metadata is confidential, a .vpax file should also be considered confidential and only shared with that in mind. If you are concerned about protecting IP, Tabular Editor 3 has an option to obfuscate VPAX files.
@@ -211,7 +211,7 @@ This file stores all the macros that you have created or imported. It can be use
 
 This file contains the index of each macro that is used in the software. If you need to change the order or the name of any macro, you can edit this file manually with a text editor. However, be careful not to introduce any errors or inconsistencies in the file thereby corrupting so make sure to create a backup.
 
-[Download example MacroActions File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/assets/file-types/MacroActions.json)
+[Download example MacroActions File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
 
 
 ### BPARules.json
