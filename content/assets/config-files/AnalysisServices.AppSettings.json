@@ -1,0 +1,7 @@
+{
+  "asConfiguration": {
+    "authentication": {
+      "msalConnectivityMode": "external"
+    }
+  }
+}

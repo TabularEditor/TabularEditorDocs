@@ -150,3 +150,7 @@ Then, attempt connecting precisely as the instructions in the [Testing a simple 
 There can be issues connecting to a model if the workspace name is a duplicate of another workspace or if the model name is a duplicate name of another model.
  
 If there are duplicate names, please refer to Microsoft's documentation in the sections ["Duplicate workspace names" and "Duplicate semantic model name"](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#duplicate-workspace-names) to learn how to modify the connection string to address these issues
+
+### Proxy handling
+
+Another common cause of connectivity issues is proxies. For more information about this, please review [this article](xref:proxy-settings).
