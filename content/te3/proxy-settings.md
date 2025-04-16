@@ -41,6 +41,9 @@ In most cases, changing the **Proxy Type** from `None` to `System` will resolve 
 
 If the suggestion above does not solve the problem, starting with version 3.21.0 of Tabular Editor, you can try the following alternative solution:
 
+> [!NOTE]
+> The solutions outlined below require Tabular Editor 3.21.0 or newer, because the AS configuration options are only available in the AMO/TOM client library v. [19.94.1.1](https://www.nuget.org/packages/Microsoft.AnalysisServices/19.94.1.1). Previous versions of Tabular Editor 3 use an older version of this client library, which ignores these configuration options.
+
 Create a file called <a href="https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/AnalysisServices.AppSettings.json" download="AnalysisServices.AppSettings.json">**AnalysisServices.AppSettings.json**</a> and put it in the installation folder for Tabular Editor 3 (i.e. the same folder that TabularEditor3.exe resides in). Add the following content to the file:
 
 ```json
