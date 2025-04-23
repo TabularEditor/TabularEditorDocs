@@ -1,8 +1,8 @@
 ﻿---
-uid: dataset-types
+uid: semantic-model-types
 title: Power BI Dataset Types
 author: Morten Lønskov
-updated: 2023-08-21
+updated: 2025-04-23
 applies_to:
   versions:
     - version: 2.x
@@ -19,10 +19,10 @@ applies_to:
 Tabular Editor can work with several different dataset types. Bellow is an overview of which dataset types work with Tabular Editor and the capabilities that can be used with each dataset type. 
 
 
-|Dataset Type|Import|Direct Lake (Standalone) |.pbix|.pbip|
+|Dataset Type|Import|Direct Lake on SQL|.pbix|.pbip|
 |---|---|---|---|---|
 |Connect in Tabular Editor|✔️|✔️|✔️|✔️|
-|Create new dataset|✔️|❌|✔️|✔️|
+|Create new model|✔️|✔️|✔️|✔️|
 |Write Measures|✔️|✔️|✔️|✔️|
 |Create & Edit Tables|✔️|✔️<sup>[1](#DirectLake)</sup>|❌|✔️|
 |Create & Edit Partitions|✔️|✔️<sup>[1](#DirectLake)</sup>|❌|✔️|
@@ -54,12 +54,12 @@ Tabular Editor can work with several different dataset types. Bellow is an overv
 
 <a name="TE3Prem">2</a> - Tabular Editor 3 features only. Operations performed through the XMLA endpoint requires a Business or Enterprise license. [More information](xref:editions).
 
-## Unsupported datasets
-The following datasets types are unsupported, as they don't support XMLA write operations.
+## Unsupported Semantic Model types
+The following semantic model types are unsupported, as they don't support XMLA write operations.
 
 - Reports based on a live connection to an Azure Analysis Services or SQL Server Analysis Services model.
 - Reports based on a live connection to a Power BI dataset.
-- Datasets with Push data.
-- Datasets stored in Power BI My Workspace.
-- Direct Lake Default Datasets. (It is possible to connect to a default dataset, but it is not possible to change it through the XMLA endpoint)
-- Excel workbook datasets.
+- Models with Push data.
+- Models stored in Power BI My Workspace.
+- Direct Lake Default Semantic Models. (It is possible to connect to a default dataset, but it is not possible to change it through the XMLA endpoint)
+- Excel workbook Semantic Models.
