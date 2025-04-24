@@ -21,7 +21,7 @@ The TOM Explorer consists of two main areas, firstly the data model objects and 
 ## Data Model Objects
 You can fold out objects in the TOM Explorer to see their children and follow the hierarchy of objects downwards. And if you right click on any object you will be given a list of options to interact with that specific object. As you can see bellow there are several options that you can use with a table. It is with this menu that you for example can easily refresh your tables and see the status of that refresh in the @data-refresh-view
 
-![Tom Explorer Interaction](~/content/assets/images/user-interface/TomExplorerRightClick.png)
+![Tom Explorer Interaction](~/content/assets/images/user-interface/TomExplorerRightClick.png) 
 
 The right click menu has the following items some of which can be expanded for more actions. The menu depends on the object type chosen (Table, partition, measure, column etc.) and the list below is not exhaustive for all types of objects but contains those most used. 
 
@@ -88,15 +88,39 @@ These extra info also exists in the property window, but allow for a quick view 
 The toolbar allow you to show and hide different types of objects, toggling perspectives and languages ans well as searching for specific objects in the data model.
 ![Tom Explorer Toolbar](~/content/assets/images/user-interface/TOMExplorerToolbar.png)
 
-<br></br>
+1. **Show/Hide Measures**  
+   Toggle the visibility of measures within tables.  
+   **Shortcut:** `Ctrl+1`
 
-1. Show/Hide Measures `CTRL+1`
-2. Show/Hide Columns `CTRL+2`
-3. Show/Hide Hierarchies `CTRL+3`
-4. Show/Hide Partitions `CTRL+4`
-5. Show/Hide Display Folders `CTRL+5`
-6. Show/Hide Hidden Objects `CTRL+6`
-7. Show/Hide Info Columns `CTRL+7`
-8. Fold out to choose a perspective of objects to see
-9. Fold out see in a different language
-10. Search within the TOM Explorer
+2. **Show/Hide Columns**  
+   Toggle the visibility of columns within tables.  
+   **Shortcut:** `Ctrl+2`
+
+3. **Show/Hide Hierarchies**  
+   Toggle whether hierarchies are shown in the TOM Explorer.  
+   **Shortcut:** `Ctrl+3`
+
+4. **Show/Hide Partitions**  
+   Controls whether partitions are visible for tables.  
+   **Shortcut:** `Ctrl+4`
+
+5. **Show/Hide Display Folders**  
+   Enables or disables the display of folder organization within tables.  
+   **Shortcut:** `Ctrl+5`
+
+6. **Show/Hide Hidden Objects**  
+   Toggles whether hidden objects are shown.  
+   **Shortcut:** `Ctrl+6`
+
+7. **Show/Hide Info Columns**  
+   Shows or hides metadata columns, such as data types or object status.  
+   **Shortcut:** `Ctrl+7`
+
+8. **Perspective Selector**  
+   Drop-down to choose a specific perspective. Only objects in the selected perspective will be shown in the TOM Explorer.
+
+9. **Language Selector**  
+   Allows switching between different languages for model metadata localization.
+
+10. **Search Bar**  
+   Provides real-time filtering and navigation within the TOM Explorer. Type to search across all visible model objects.
