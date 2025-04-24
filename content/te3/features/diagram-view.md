@@ -97,10 +97,13 @@ The toggle helps reduce clutter, especially in complex models with many columns,
 
 Each column in the diagram is accompanied by an icon representing its data type:
 
-- `abc` for text
-- `123` for integers
-- `1.2`for decimals
-- `x✔️` for booleans
-- Calendar for date/time
+- <img src="~/content/assets/images/icons/string.svg" alt="Text Icon" width="16" height="16"> for text
+- <img src="~/content/assets/images/icons/integer.svg" alt="Integer Icon" width="16" height="16"> for integers
+- <img src="~/content/assets/images/icons/Double.svg" alt="Double Icon" width="16" height="16"> for double
+- <img src="~/content/assets/images/icons/Currency.svg" alt="Currency Icon" width="16" height="16"> for currency
+- <img src="~/content/assets/images/icons/binary.svg" alt="Boolean Icon" width="16" height="16"> for binary
+- <img src="~/content/assets/images/icons/TrueFalse.svg" alt="TrueFalse Icon" width="16" height="16"> for true/false
+- <img src="~/content/assets/images/icons/Calendar.svg" alt="Date Icon" width="16" height="16"> for date/time
 
-This quick visual reference supports quick data validation and 
+
+This quick visual reference supports quick data validation and helps understand the data structures. 
