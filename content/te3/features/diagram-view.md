@@ -97,13 +97,13 @@ The toggle helps reduce clutter, especially in complex models with many columns,
 
 Each column in the diagram is accompanied by an icon representing its data type:
 
-- <img src="~/content/assets/images/icons/string.svg" alt="Text Icon" width="16" height="16"> for text
-- <img src="~/content/assets/images/icons/integer.svg" alt="Integer Icon" width="16" height="16"> for integers
-- <img src="~/content/assets/images/icons/Double.svg" alt="Double Icon" width="16" height="16"> for double
-- <img src="~/content/assets/images/icons/Currency.svg" alt="Currency Icon" width="16" height="16"> for currency
-- <img src="~/content/assets/images/icons/binary.svg" alt="Boolean Icon" width="16" height="16"> for binary
-- <img src="~/content/assets/images/icons/TrueFalse.svg" alt="TrueFalse Icon" width="16" height="16"> for true/false
-- <img src="~/content/assets/images/icons/Calendar.svg" alt="Date Icon" width="16" height="16"> for date/time
+- <img src="~/content/assets/images/icons/String.svg" alt="Text Icon" width="16" height="16"> for string/text values
+- <img src="~/content/assets/images/icons/Integer.svg" alt="Integer Icon" width="16" height="16"> for integer numbers
+- <img src="~/content/assets/images/icons/Double.svg" alt="Double Icon" width="16" height="16"> for double / floating-point decimal numbers
+- <img src="~/content/assets/images/icons/Currency.svg" alt="Currency Icon" width="16" height="16"> for currency / fixed-point decimal numbers
+- <img src="~/content/assets/images/icons/Binary.svg" alt="Binary Icon" width="16" height="16"> for binary values
+- <img src="~/content/assets/images/icons/TrueFalse.svg" alt="Boolean Icon" width="16" height="16"> for boolean (true/false) values
+- <img src="~/content/assets/images/icons/Calendar.svg" alt="Date Icon" width="16" height="16"> for date/time values
 
 
 This quick visual reference supports quick data validation and helps understand the data structures. 
