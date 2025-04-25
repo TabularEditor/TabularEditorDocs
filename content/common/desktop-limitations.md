@@ -23,7 +23,7 @@ The limitations mentioned in this article apply to Tabular Editor 2.x as well.
 > The June 2023 Power BI Desktop update has relaxed most of the limitations that previously existed and almost all operations against a Power BI Desktop dataset is now possible. With a few notable exceptions. We have preserved the pre June 2023 limitations inside this article. 
 
 ## Unsupported Operations
-The limitations can be summarized to be the following, but please see bellow for further details. 
+The limitations can be summarized to be the following, but please see below for further details. 
 
 The only objects in a dataset that cannot be changed are tables and columns. 
 

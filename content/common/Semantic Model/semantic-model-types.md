@@ -16,7 +16,7 @@ applies_to:
 
 # Dataset Types
 
-Tabular Editor can work with several different dataset types. Bellow is an overview of which dataset types work with Tabular Editor and the capabilities that can be used with each dataset type. 
+Tabular Editor can work with several different dataset types. below is an overview of which dataset types work with Tabular Editor and the capabilities that can be used with each dataset type. 
 
 
 |Dataset Type|Import|Direct Lake on SQL|.pbix|.pbip|
