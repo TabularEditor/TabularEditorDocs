@@ -6,8 +6,8 @@
 ### @tmdl-common
 ## [Best Practice Analyzer](xref:using-bpa)
 ### [BPA Sample Rules Expression](xref:using-bpa-sample-rules-expressions)
-## [Dataset Types](Datasets/dataset-types.md)
-### [Direct Lake Datasets](Datasets/direct-lake-dataset.md)
+## [Semantic Model Types](Semantic Model/semantic-model-types.md)
+### [Direct Lake on SQL](Semantic Model/direct-lake-sql-model.md)
 
 
 

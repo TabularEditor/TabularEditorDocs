@@ -2,19 +2,48 @@
 uid: roadmap
 title: Roadmap
 author: Morten Lønskov
-updated: 2024-09-06
+updated: 2024-04-23
 ---
 # Tabular Editor 3 Roadmap
 
 Below is an overview of major new features to be shipped with Tabular Editor 3 updates in the short- to long term:
 
 
+# [Planned 2025](#tab/Planned2025)
 
-# [Planned 2024](#tab/PlannedQ4)
+- Direct Lake on One Lake support
+- Day zero support for DAX User Defined Functions
+- Support for Calendars
+- Adding more Code Actions
+- Built in Best Practice Rules
+- Built in Macros
+- Power Query (M) Auto-Formatting
 
-- Data Refresh View Improvements
-- Power Query (M) Highlighting
+ 
+## Shipped in 2025
+✅ New Code Actions + Knowledge Base for all Code Actions
+✅ C# Editor Improvements
+✅ Copy TMDL Scripts from TOM Explorer
 
+# [Future Features](#tab/FutureFeatures)
+
+## Up Next
+- Localization
+- Power Query (M) Editing Enchantments
+- Macro Actions improvements such as automatic application across model and preferences for which to apply.
+- TOM Properties shown as TMDL and TMSL Scripts. 
+
+## Non Planned Features
+
+- Standalone CLI application
+- Git integration
+- DAX Debugger Filter Context visualizer
+- Configurable Daxscilla autocomplete code snippets
+- Configurable theming for code editors (syntax highlighting colors)
+- Incremental deployment (a la [ALM Toolkit](http://alm-toolkit.com/))
+
+
+# [Shipped](#tab/shipped)
 
 ## Shipped in 2024
 ✅ DAX Debugger Locals Enhancement
@@ -35,31 +64,9 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 
 ✅ GA of DAX Optimizer Integration
 
-# [Planned 2025](#tab/Planned2025)
+✅ Data Refresh View Improvements
 
-- Adding more Code Actions
-- Built in Best Practice Rules
-- Built in Macros
-- Power Query (M) Auto-Formatting
-
-# [Future Features](#tab/FutureFeatures)
-
-## Up Next
-- Localization
-- Power Query (M) Editing Enchantments
-- Macro Actions improvements such as automatic application across model and preferences for which to apply.
-
-## Non Planned Features
-
-- Standalone CLI application
-- Git integration
-- DAX Debugger Filter Context visualizer
-- Configurable Daxscilla autocomplete code snippets
-- Configurable theming for code editors (syntax highlighting colors)
-- Incremental deployment (a la [ALM Toolkit](http://alm-toolkit.com/))
-
-
-# [Shipped](#tab/shipped)
+✅ Power Query (M) Highlighting
 
 ## Shipped in 2023
 ✅ TMDL Support as standard Save to Folder file format. (Depending on release of TMDL by Microsoft)

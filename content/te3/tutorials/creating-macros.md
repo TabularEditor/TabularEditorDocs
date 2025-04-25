@@ -29,7 +29,7 @@ Once the script works according requirements the script can be saved using the t
 ![Macro Create infobox](~/content/assets/images/features/macros/macro_tutorial_create_infobox.png)
 
 The "Save Macro" window allows three options:
-1. Macro Name: Give the Macro a name and use backslash "\" to create folder path for the macro (See bellow)
+1. Macro Name: Give the Macro a name and use backslash "\" to create folder path for the macro (See below)
 2. Provide a tooltip for the Macro to remember what it does in detail
 3. Select a context where the Macro should be available. 
 

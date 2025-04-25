@@ -25,6 +25,7 @@
 ### @dax-optimizer-integration
 ### @dax-scripts
 ### @dax-query
+### @diagram-view
 ### @metadata-translation-editor
 ### @perspective-editor
 ### @pivot-grid
