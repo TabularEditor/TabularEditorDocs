@@ -32,7 +32,7 @@
     },
     {
       "route": "/roslyn",
-      "redirect": "/te3/features/roslyn.html",
+      "redirect": "/te2/Advanced-Scripting.html#compiling-with-roslyn",
       "statusCode": 301
     },
     {

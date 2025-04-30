@@ -235,3 +235,23 @@ The compiler that ships with VS2019 supports C# 8.0 language features, which can
 ```
 -langversion:8.0
 ```
+
+### Visual Studio 2022
+
+For a typical Visual Studio 2022 **Community Edition**, the Roslyn compiler is located here:
+
+```
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\Roslyn\csc.exe
+```
+
+If you use another edition of Visual Studio 2022, the path might be slightly different. For example, for the **Enterprise Edition**, it is located here:
+
+```
+C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\Roslyn
+```
+
+The compiler that ships with the most recent update of VS2022 supports [C# 12.0 language features](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12), which can be enabled by specifying the following as compiler options:
+
+```
+-langversion:12.0
+```
