@@ -12,7 +12,7 @@
     },
     {
       "route": "/Advanced-Scripting.html",
-      "redirect": "/te3/features/csharp-scripts.html",
+      "redirect": "/te2/Advanced-Scripting.html",
       "statusCode": 301
     },
     {
@@ -32,7 +32,7 @@
     },
     {
       "route": "/roslyn",
-      "redirect": "/te3/features/roslyn.html",
+      "redirect": "/te2/Advanced-Scripting.html#compiling-with-roslyn",
       "statusCode": 301
     },
     {
