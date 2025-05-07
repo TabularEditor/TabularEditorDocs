@@ -1,4 +1,4 @@
-Tabular Editor 3 includes a **Table Import Wizard** that helps you create a data source in your model, and import tables/views from relational data sources such as a SQL Server database.
+Tabular Editor 3 includes a **Table Import Wizard** that helps you create a data source in your model and import tables/views from relational data sources such as a SQL Server database.
 
 ![Import Tables Wizard](~/content/assets/images/import-tables-wizard.png)
 
@@ -6,19 +6,19 @@ Tabular Editor 3 includes a **Table Import Wizard** that helps you create a data
 
 Depending on your version of Analysis Services, there are different ways of defining data sources within the model metadata:
 
-- **Provider (aka. Legacy)**: Available in every version of Analysis Services and every compatibility level. Supports a limited range of sources, mostly relational through OLE DB/ODBC drivers. Partitions are usually defined using a SQL statement which is executed natively against the source. Credentials are managed in the Provider Data Source object in the Tabular Object Model and stored and encrypted server-side.
-- **Structured (aka. Power Query)**: Available since SQL Server 2017 (compatibility level 1400+). Supports a wider range of data sources than Legacy providers. Partitions are usually defined using M (Power Query) expressions. Credentials are managed in the Structured Data Source object in the Tabular Object Model and needs to be specified upon every deployment to Analysis Services.
-- **Implicit data sources**: Exclusively used by Power BI datasets. No explicit Data Source object is created in the model. Instead, the M (Power Query) expression implicitly defines the data source. Credentials are not stored in the Tabular Object Model, but managed by Power BI Desktop or the Power BI Service.
+- **Provider (aka. Legacy)**: Available in every version of Analysis Services and every compatibility level. Supports a limited range of sources, primarily relational through OLE DB/ODBC drivers. Partitions are usually defined using a SQL statement, which is executed natively against the source. Credentials are managed in the Provider Data Source object in the Tabular Object Model and stored and encrypted server-side.
+- **Structured (aka. Power Query)**: Available since SQL Server 2017 (compatibility level 1400+). Supports a wider range of data sources than Legacy providers. Partitions are usually defined using M (Power Query) expressions. Credentials are managed in the Structured Data Source object in the Tabular Object Model and need to be specified upon every deployment to Analysis Services.
+- **Implicit data sources**: Exclusively used by Power BI semantic models. No explicit Data Source object is created in the model. Instead, the M (Power Query) expression implicitly defines the data source. Credentials are not stored in the Tabular Object Model, but are managed by Power BI Desktop or the Power BI Service.
 
 > [!NOTE]
-> The Table Import Wizard and Update Table Schema feature of Tabular Editor 2.x only supports Legacy data sources with SQL partitions. In other words, there are no support for Power Query partitions. For this reason, Legacy data sources are usually recommended, as they provide the highest level of interoperability between the developer tools.
+> The Table Import Wizard and Update Table Schema feature of Tabular Editor 2.x only supports Legacy data sources with SQL partitions. In other words, there is no support for Power Query partitions. For this reason, Legacy data sources are usually recommended, as they provide the highest level of interoperability between the developer tools.
 
 ## Importing new tables
 
 When importing tables (Model menu > Import tables...), Tabular Editor presents you with the options mentioned above (for creating a new data source), as well as a list of data sources already present in the model. Avoid creating new data sources if the tables you want to import are available in one of the data sources already specified in the model.
 
 > [!TIP]
-> A tabular model is generally regarded as an in-memory optimized semantic cache of a relational data warehouse. For this reason, a model should ideally only contain a single data source which would point to a SQL-based data warehouse or data mart.
+> A Semantic Model is generally regarded as an in-memory optimized semantic cache of a relational data warehouse. For this reason, a model should ideally only contain a single data source, which would point to a SQL-based data warehouse or data mart.
 
 ## Creating a new data source
 
@@ -43,7 +43,7 @@ Currently, the following data sources are natively supported by Tabular Editor 3
 
 *=These data sources are only supported as implicit data sources in Power BI data models. They are not available in SSAS / Azure AS.
 
-After choosing one of the data sources on the list, Tabular Editor displays a connection details dialog, allowing you to specify server addresses, credentials, etc. specific to the data source you want to create. The settings that you specify should be those that Tabular Editor should use for establishing a local connection to the source. These settings are saved in your @user-options.
+After choosing one of the data sources on the list, Tabular Editor displays a connection details dialog, allowing you to specify server addresses, credentials, etc., specific to the data source you want to create. The settings that you specify should be those that Tabular Editor should use for establishing a local connection to the source. These settings are saved in your @user-options.
 
 ![Sql Auth](~/content/assets/images/sql-auth.png)
 
@@ -62,9 +62,9 @@ If you select the first option, Tabular Editor will connect to the source and di
 You can import multiple tables/views at once by checking them on the left side. For each table/view, you may deselect/select columns to import.
 
 > [!TIP]
-> If you are in control of the source, we recommend to always create a view on top of the tables you wish to import. In the view, make sure to correct any names, spellings, etc. to be used in the tabular model, and get rid of any columns not needed by the tabular model (system columns, timestamps, etc.).
+> If you are in control of the source, we recommend always creating a view on top of the tables you wish to import. In the view, make sure to correct any names, spellings, etc., to be used in the Semantic Model, and get rid of any columns not needed by the Semantic Model (system columns, timestamps, etc.).
 >
-> Then, in the model, import all columns from this view (basically generating a `SELECT * FROM ...` statement). This makes maintenance easier, as only need to run a Schema Update in Tabular Editor to determine if anything was changed in the source.
+> Then, in the model, import all columns from this view (basically generating a `SELECT * FROM ...` statement). This makes maintenance easier, as you only need to run a Schema Update in Tabular Editor to determine if anything was changed in the source.
 
 ![Advanced Import](~/content/assets/images/advanced-import.png)
 
@@ -72,9 +72,9 @@ If you change the preview mode to "Schema only" using the dropdown in the top le
 
 ![Confirm Selection](~/content/assets/images/confirm-selection.png)
 
-On the last page, confirm your selection and choose which type of partitions to create. For provider data sources, the default type of partition to be created is `SQL`, where as for structured data sources, it is `M`. 
+On the last page, confirm your selection and choose which type of partitions to create. For provider data sources, the default type of partition to be created is `SQL`, whereas for structured data sources, it is `M`. 
 
-At this point, you should see your tables imported with all columns, data types and source column mappings applied:
+At this point, you should see your tables imported with all columns, data types, and source column mappings applied:
 
 ![Import Complete](~/content/assets/images/import-complete.png)
 
@@ -89,13 +89,13 @@ This menu item can be invoked at the model level, as well as on a collection of 
 When using this option, Tabular Editor will connect to all the relevant data sources (prompting for credentials as needed), in order to determine if new columns need to be added or existing column modified or removed.
 
 > [!IMPORTANT]
-> If a column that was previously imported to your tabular model has been removed or renamed in the source, you must update the table schema in your tabular model. Otherwise data refresh operations may fail.
+> If a column that was previously imported to your Semantic Model has been removed or renamed in the source, you must update the table schema in your Semantic Model. Otherwise, data refresh operations may fail.
 
 ![Schema Compare Dialog](~/content/assets/images/schema-compare-dialog.png)
 
 In the screenshot above, Tabular Editor detected a few new columns, a single data type change, and two columns that were renamed in the source. Note that detection of a column rename only works for simple changes. In other cases, a name change usually results in Tabular Editor detecting a column removal and a column addition, which is the case for the `Tax Amount` column below, which seems to have been renamed to `TaxAmt` in the source.
 
-To avoid breaking existing DAX formulas that rely on the `[Tax Amount]` column, you can hold down the Ctrl-button and click on the two rows in the Schema Change dialog, then right-click in order to combine the column removal and column addition into a single SourceColumn update operation:
+To avoid breaking existing DAX formulas that rely on the `[Tax Amount]` column, you can hold down the Ctrl button and click on the two rows in the Schema Change dialog, then right-click in order to combine the column removal and column addition into a single SourceColumn update operation:
 
 ![Combine Sourcecolumn Update](~/content/assets/images/combine-sourcecolumn-update.png)
 
@@ -105,7 +105,7 @@ If you do not want the name change to be propagated to the imported column (but 
 
 ## Updating table schema through Analysis Services
 
-By default, Tabular Editor 3 attempts to connect directly to the data source, for purposes of updating the imported table schema. Naturally, this only works when the data source is one that is supported by Tabular Editor 3. If you need to update the schema of a table imported from a data source that is not supported by Tabular Editor 3, you can enable the **Use Analysis Services for change detection** option under **Tools > Preferences > Schema Compare**.
+By default, Tabular Editor 3 attempts to connect directly to the data source for the purposes of updating the imported table schema. Naturally, this only works when the data source is supported by Tabular Editor 3. If you need to update the schema of a table imported from a data source that is not supported by Tabular Editor 3, you can enable the **Use Analysis Services for change detection** option under **Tools > Preferences > Schema Compare**. This also applies when the M expression of a partition or shared expression is too complex for Tabular Editor 3's built-in schema detection feature. For example, the built-in schema detection does not support certain M functions.
 
 ![Update Table Schema Through As](~/content/assets/images/update-table-schema-through-as.png)
 
@@ -117,13 +117,16 @@ When this option is enabled and Tabular Editor 3 is connected to Analysis Servic
 When the **Use Analysis Services for change detection** option is enabled, Tabular Editor 3 will use the following technique when a schema update is requested:
 
 1. A new transaction is created against the connected Analysis Services instance
-2. A new temporary table is added to the model. This table uses a Power Query partition expression that returns the schema of the original expression, of which a schema update was requested. This is done using the [`Table.Schema` M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema).
+2. A new temporary table is added to the model. This table uses a Power Query partition expression that returns the schema of the original expression, for which a schema update was requested. This is done using the [`Table.Schema` M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema).
 3. The temporary table is refreshed by Analysis Services. Analysis Services takes care of connecting to the data source in order to retrieve the updated schema.
 4. Tabular Editor 3 queries the content of the temporary table to obtain the schema metadata.
-5. The transaction is rolled back, leaving the Analysis Services database or Power BI dataset in the original state it was in before step 1.
+5. The transaction is rolled back, leaving the Analysis Services database or Power BI Semantic Model in the original state it was in before step 1.
 6. Tabular Editor 3 displays the "Apply Schema Changes" dialog as shown above, in case there are any schema changes.
 
-Using this technique, Tabular Editor 3 makes it possible to import and update tables from data sources otherwise not supported.
+Using this technique, Tabular Editor 3 makes it possible to import and update tables from data sources that are otherwise not supported, regardless of the complexity and function usage of the M queries behind the tables.
+
+> [!NOTE]
+> If your M expressions combine data from multiple sources, such as through the M [`Table.NestedJoin`](https://learn.microsoft.com/en-us/powerquery-m/table-nestedjoin) function, you may need to change the [**Privacy Level**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/) from "Private" to "Organizational" on the Semantic Model in the Power BI service. Otherwise, you may see an error indicating that `<Query> references other queries or steps, so it may not directly access a data source. Please rebuild this data combination.`. This error may also occur even if **Use Analysis Services for change detection** is not enabled, as Tabular Editor 3 will automatically fall back to this detection mechanism when the M expression is too complex for Tabular Editor 3's built-in schema detection.
 
 ### Importing new tables through Analysis Services
 
