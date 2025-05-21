@@ -87,7 +87,7 @@ Read Write is enabled in the Admin Portal by navigating to
 4. Navigating to Power BI Workloads and scrolling down to find the XMLA Endpoint setting choosing "Read Write"
 
 ### Workspace Level User Rights
-To edit models using the XMLA endpoint the user's account needs to have access to the workspace as either **Contributer**, **Member** or **Admin**. In the workspace choose 'Manage Access' and add the user account or a Entra ID group that the user belongs to with the required role. For more information on roles in workspaces please see Microsoft's Documentation: [Roles in Workspaces](https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces)
+To edit models using the XMLA endpoint the user's account needs to have access to the workspace as either **Contributor**, **Member** or **Admin**. In the workspace choose 'Manage Access' and add the user account or a Entra ID group that the user belongs to with the required role. For more information on roles in workspaces please see Microsoft's Documentation: [Roles in Workspaces](https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces)
 
 ### Read/Write on Semantic Model
 Ensure that the user's account has Write permission to the semantic model. This can be required even if the user is an admin on the workspace as mentioned above.
