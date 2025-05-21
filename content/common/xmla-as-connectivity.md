@@ -151,7 +151,7 @@ Please copy and paste the connection string directly from the workspace rather t
 ![Choose Database](~/content/assets/images/common/XMLASettings/ChooseDatabase.png)
 
 ### Set Authentication Type to Microsoft Entra ID
-In some cases the 'Integrated' security option could be different that the user account that should be used for authenticating against the Fabric/Power BI service. The next step to take is to choose the **Microsoft Entra MFA** option in the open model dialog box.
+In some cases the 'Integrated' security option could be different from the user account that should be used for authenticating against the Fabric/Power BI service. The next step to take is to choose the **Microsoft Entra MFA** option in the open model dialog box.
 
 ![Microsoft Entra MFA](~/content/assets/images/common/XMLASettings/LoadModelFromDatabaseMicrosoftEntraID.png)
 
