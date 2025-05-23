@@ -28,6 +28,10 @@ exports.transform = function (model) {
               url: "https://tabulareditor.com/newsletter"
             },
             {
+              text: "Publications",
+              url: "https://tabulareditor.com/publications"
+            },
+            {
               text: "Documentation",
               url: "https://docs.tabulareditor.com/?tabs=TE3"
             },
