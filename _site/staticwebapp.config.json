@@ -61,6 +61,11 @@
       "statusCode": 301
     },
     {
+      "route": "/common/Datasets/direct-lake-dataset.html",
+      "redirect": "/common/Semantic%20Model/direct-lake-sql-model.html",
+      "statusCode": 301
+    },
+    {
       "route": "/projects/te3/en/latest/editions.html",
       "redirect": "/te3/editions.html",
       "statusCode": 301
