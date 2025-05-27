@@ -22,7 +22,7 @@ In the following article, we will use the term "semantic model server" to mean t
 
 To connect to the semantic model server, go to **File** > **Open** > **Model from DB...**, or press **Ctrl+Shift+O**.
 
-This will open the **Load Semantic Model from Database** dialog, where you can specify the server name or pick a local SSAS instance from a dropdown. Moreover, you can specify the type of authentication to use.
+This will open the **Load Semantic Model from Database** dialog, where you can specify the server name, an XMLA connection string or pick a local SSAS instance from a dropdown. Moreover, you can specify the type of authentication to use.
 
 > [!NOTE]
 > In Tabular Editor 2.x, the **Advanced Options** (for specifying read/write mode and a custom status bar color) are not available.
@@ -86,6 +86,26 @@ Read Write is enabled in the Admin Portal by navigating to
 3. Selecting the relevant Capacity
 4. Navigating to Power BI Workloads and scrolling down to find the XMLA Endpoint setting choosing "Read Write"
 
+### Workspace Level User Rights
+To edit models using the XMLA endpoint the user's account needs to have access to the workspace as either **Contributor**, **Member** or **Admin**. In the workspace choose 'Manage Access' and add the user account or a Entra ID group that the user belongs to with the required role. For more information on roles in workspaces please see Microsoft's Documentation: [Roles in Workspaces](https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces)
+
+### Read/Write on Semantic Model
+Ensure that the user's account has Write permission to the semantic model. This can be required even if the user is an admin on the workspace as mentioned above.
+
+To check that your account has the necessary permissions start by locating the model in the Fabric/Power BI workspace and first click on the hamburger symbol (3 vertical dots) and go to the "Manage permissions" page.
+
+![Manage Permissions on Semantic Model](~/content/assets/images/common/XMLASettings/ManagePermissionsonSemanticModel.png)
+
+Validate or give the user's account or the Entra ID group that they belong to either **Workspace Admin**, **Workspace Contributor**, or **Write permission** on the semantic model. For example, in the screenshot below, only the 3 users highlighted in Blue would be able to access the model through Tabular Editor:
+
+![User Permissions on Semantic Model](~/content/assets/images/common/XMLASettings/UserPermissionsonSemanticModel.png)
+
+### Set workspace to large semantic models
+To ensure the best experience while editing models using the XMLA endpoint the workspace should have its semantic storage format set to **Large Semantic model storage format**. Go to 'Workspace Settings' in the top right corner of the Fabric/Power BI workspace. First navigate to the 'License info', secondly validate if the storage format is set to large and if not choose 'Edit' to change the storage format. 
+
+![Large Semantic Model Storage Format](~/content/assets/images/common/XMLASettings/LargeSemanticModelStorageFormat.png)
+
+
 ## Additional Fabric/Power BI settings.
 
 ### Disable Package Refresh
@@ -118,22 +138,29 @@ These steps show how to most reliably connect to a Fabric/Power BI semantic mode
 
 2. You'll be presented with a dialogue (see below), and you need to put the Power BI connection string into the text box labeled 'Server'. Leave the rest of the options as configured in the screenshot (these are defaults). The connection string is in the form shown below. You can find this connection string in the Service (more details here in this [Microsoft doc in the sections 'Connecting to a Premium Workspace' and 'To get the workspace connection URL'](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#connecting-to-a-premium-workspace)
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/LoadModelFromDatabase.png)
+![Load Model From Database](~/content/assets/images/common/XMLASettings/LoadModelFromDatabase.png)
 
 Please copy and paste the connection string directly from the workspace rather than copying from somewhere/someone else or modifying it in any way.
 
 3. Depending on your machine (if your Windows login is linked to Entra ID or your identity provider) you may be prompted to log in. It's important that the account you use is the one with permission to the workspace. If your organization has multiple tenants or if you have multiple logins, this might not match your Windows login. You should use the exact credential that is shown in the Fabric web UI for your user.
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/AuthenticateToFabricPowerBI.png)
+![Authenticate to FabricPowerBI](~/content/assets/images/common/XMLASettings/AuthenticateToFabricPowerBI.png)
 
 4. After successful authentication, you'll be presented with a 'Choose database' dialog. Select one and click 'Ok'.
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/ChooseDatabase.png)
+![Choose Database](~/content/assets/images/common/XMLASettings/ChooseDatabase.png)
+
+### Set Authentication Type to Microsoft Entra ID
+In some cases the 'Integrated' security option could be different from the user account that should be used for authenticating against the Fabric/Power BI service. The next step to take is to choose the **Microsoft Entra MFA** option in the open model dialog box.
+
+![Microsoft Entra MFA](~/content/assets/images/common/XMLASettings/LoadModelFromDatabaseMicrosoftEntraID.png)
+
+Choosing the 'Microsoft Entra MFA' option forces the multifactor authentication and allows for choosing the specific account that is needed to connect to the workspace. 
 
 ### Multiple tenants
 If you've double-checked the user name and connection string as above and are still having issues, the next thing to check is whether adding the tenant GUID to the connection string helps. This might be an issue if you belong to multiple tenants.
  
-You can find the tenant ID directly in Power BI by clicking the top-right question mark and selecting 'About Power BI'. The tenant ID is shown as part of the 'Tenant URL'. Be careful, as the text box is typically too small to display the whole thing in the window in Power BI. Double-click on the URL shown, which will highlight the entire thing, that you can copy and paste.
+The tenant ID can be found directly in Power BI by clicking the top-right question mark and selecting 'About Power BI'. The tenant ID is shown as part of the 'Tenant URL'. Be careful, as the text box is typically too small to display the whole thing in the window in Power BI. Double-click on the URL shown, which will highlight the entire thing, that you can copy and paste.
  
 The whole URL is not the tenant ID. The tenant ID is the GUID at the end of the string, after "ctid=". So in the screenshot below, my tenant ID starts with "ddec", but yours will be different. Once you have the tenant ID, you can change the connection string that you used above: replace the part of the path that says "myorg" with your tenant ID. 
 
@@ -143,7 +170,6 @@ Old: powerbi://api.powerbi.com/v1.0/myorg/WorkspaceName
 New: powerbi://api.powerbi.com/v1.0/eeds65sv-kl25-4d12-990a-770ca3eb6226/WorkspaceName
  
 Then, attempt connecting precisely as the instructions in the [Testing a simple connection section](#testing-a-simple-connection)
-
 
 ### Duplicate names
 
