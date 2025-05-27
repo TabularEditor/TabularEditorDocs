@@ -124,6 +124,11 @@
       "route": "/Custom-Actions.html",
       "redirect": "/te3/tutorials/creating-macros.html",
       "statusCode": 301
+    },
+    {
+      "route": "/FormatDax.html",
+      "redirect": "/te2/FormatDax.html",
+      "statusCode": 301
     }
   ],
   "responseOverrides": {
