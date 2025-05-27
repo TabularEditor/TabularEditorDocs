@@ -62,7 +62,7 @@ The main advantage of workspace mode, is that it allows Tabular Editor to stay c
 
 # Disable Workspace Mode for a Model
 
-If you prefer to *turn this feature off* and edit a model file entirely offline, choose one of the methods below.
+If you prefer to *disable workspace mode* and edit a model file entirely offline, choose one of the methods below.
 
 ## Permanently disable Workspace Mode
 
