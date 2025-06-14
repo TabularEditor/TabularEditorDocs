@@ -59,3 +59,32 @@ The main advantage of workspace mode, is that it allows Tabular Editor to stay c
 
 > [!NOTE]
 > When a refresh operation is in progress, Tabular Editor cannot synchronize the Analysis Services instance (refresh operations block other write operations). However, hitting Save (CTRL+S) while such an operation is under way will still save the model metadata to disk, while using workspace mode.
+
+# Disable Workspace Mode for a Model
+
+If you prefer to *disable workspace mode* and edit a model file entirely offline, choose one of the methods below.
+
+## Permanently disable Workspace Mode
+
+1. Locate the model’s `.tmuo` workspace file (it sits next to your `.bim`, `.tmdl`, or `.json` file) in your File Explorer.  
+2. Do **either** of the following:  
+   - **Delete** the `.tmuo` file, **or**  
+   - Open it in a text editor and set:
+
+     ```json
+     {
+       "UseWorkspaceDatabase": false
+     }
+     ```
+
+3. Open the model from the `.bim`, `.tmdl`, or `.json` file as usual.  
+
+Tabular Editor will now stay offline every time you load this model.
+
+## Disable Workspace Mode for the current session only
+
+1. In the **Open Semantic Model** dialog, check **Load without workspace database**.  
+
+![Load without Workspace database](~/content/assets/images/load-without-wsdb.png)
+
+The model loads offline for this session; next time you open it, Workspace Mode is re-enabled unless you repeat these steps.
