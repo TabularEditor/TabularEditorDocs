@@ -103,7 +103,7 @@ To manually set up a table for **Direct Lake on OneLake** mode, you need to do t
 
 ![Create Shared Expression](../../assets/images/create-shared-expression.png)
 
-2. **Configure Shared Expression**: Set the **Kind** property of the expression you created in step 1 to "M", and set the *Expression** property to the following M query, replacing the URL with the :
+2. **Configure Shared Expression**: Set the **Kind** property of the expression you created in step 1 to "M", and set the *Expression** property to the following M query, replacing the IDs in the URL for your Fabric workspace and Lakehouse/Warehouse:
 
 ```m
 let
@@ -112,3 +112,35 @@ in
     Source
 ```
 
+3. **Create Table and Entity Partition**: Create a new table in the model (Alt+5), then expand the table partitions in the TOM Explorer, and create new *Entity Partition*:
+  
+  ![Create Entity Partition](../../assets/images/create-entity-partition.png)
+
+  Delete the regular import partition that was automatically created when you created the table.
+
+4. **Configure Entity Partition**: Set the following properties on the Entity Partition:
+
+| Property | Value |
+| ----------|-------|
+| Name | (Recommended) Set to the same name as the table |
+| Entity Name | (Required) Set to the name of the table in the Lakehouse/Warehouse |
+| Expression Source | (Required) Set to the Shared Expression you created in step 1, typically `DatabaseQuery` |
+| Mode | (Required) `DirectLake` |
+| Schema Name | (Optional) Set to the schema name in the Lakehouse/Warehouse, if applicable. If not set, the default schema will be used. |
+
+  The final result should look like this:
+
+![Configure Entity Partition](../../assets/images/configure-entity-partition.png)
+
+5. **Update column metadata**: At this stage, you should be able to use Tabular Editor's **Update Table Schema** feature to update the column metadata for the table. This will automatically retrieve the column names and data types from the Lakehouse/Warehouse:
+
+![Update Table Schema Entity](../../assets/images/update-table-schema-entity.png)
+
+  Alternatively, manually add Data Columns to the table (Alt+4) and specify the `Name`, `Data Type`, `Source Column` and any other relevant properties for each column.
+  
+
+### Direct Lake on SQL
+
+
+
+### Import from Lakehouse / Warehouse
