@@ -92,4 +92,4 @@ foreach (var t in Model.Tables)
 };
 ```
 
-Thank you to (Micah Dail)[https://twitter.com/MicahDail] for creating the script and suggesting it to be included in this document. 
+Thank you to [Micah Dail](https://twitter.com/MicahDail) for creating the script and suggesting it to be included in this document. 
