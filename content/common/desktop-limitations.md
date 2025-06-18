@@ -63,7 +63,7 @@ Once connected to the instance of Analysis Services, an external tool can obtain
 However, due to the way Power BI Desktop interoperates with Analysis Services, there are a few important limitations to the type of changes external tools may apply to the model metadata. These are listed [in the official documentation for External Tools](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) and repeated here for convenience:
 
 ### [Supported write operations](#tab/postjune2023)
-#### June 2023 Power BI Desktop and later
+#### JPre June 2025 Power BI Desktop
 
 | Object                        | Connect to AS instance    |
 |-------------------------------|---------------------------|
