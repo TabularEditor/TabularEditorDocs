@@ -93,5 +93,22 @@ The choices are:
 
 ## Power Query (M) expressions
 
-What follows is a more technical discussion on how the TOM objects and properties need to be configured, in case you want to manually set up tables for Direct Lake mode, without using the Table Import Wizard.
+This section contains a more technical description on how the TOM objects and properties need to be configured, in case you want to manually set up tables for Direct Lake mode without using the Table Import Wizard.
+
+### Direct Lake on OneLake
+
+To manually set up a table for **Direct Lake on OneLake** mode, you need to do the following:
+
+1. **Create Shared Expression**: Direct Lake tables use "Entity" partitions, which much reference a Shared Expression in the model. Start out by creating this shared expression, if you don't have it already. Name it `DatabaseQuery`:
+
+![Create Shared Expression](../../assets/images/create-shared-expression.png)
+
+2. **Configure Shared Expression**: Set the **Kind** property of the expression you created in step 1 to "M", and set the *Expression** property to the following M query, replacing the URL with the :
+
+```m
+let
+    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/<workspace-id>/<resource-id>", [HierarchicalNavigation=true])
+in
+    Source
+```
 
