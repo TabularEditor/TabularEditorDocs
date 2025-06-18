@@ -48,6 +48,7 @@
 ## Create a New Model
 ### @new-as-model
 ### @new-pbi-model
+### @direct-lake-guidance
 
 ## Adding Tables & Data Sources
 ### @importing-tables

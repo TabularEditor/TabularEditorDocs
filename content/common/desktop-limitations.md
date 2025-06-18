@@ -19,8 +19,8 @@ When using Tabular Editor (any edition) as an [external tool for Power BI Deskto
 
 The limitations mentioned in this article apply to Tabular Editor 2.x as well.
 
-> [!NOTE]
-> The June 2023 Power BI Desktop update has relaxed most of the limitations that previously existed and almost all operations against a Power BI Desktop dataset is now possible. With a few notable exceptions. We have preserved the pre June 2023 limitations inside this article. 
+> [!IMPORTANT]
+> As of the June 2025 Power BI Desktop update, the **Unsupported write operations** mentioned in this article, are no longer applicable. Now, **external tools can be used for any write operation on the semantic model running in Power BI Desktop**. More information in [the official blog post](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).
 
 ## Unsupported Operations
 The limitations can be summarized to be the following, but please see below for further details. 

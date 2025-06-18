@@ -18,6 +18,9 @@ applies_to:
 # Direct Lake Semantic Models
 Direct Lake on SQL semantic models connect directly to data sources stored in [OneLake in Fabric](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview) through the SQL Endpoint. 
 
+> [!IMPORTANT]
+> As of [Tabular Editor 3.22.0](~/content/te3/other/release-notes/3_22_0.md), Tabular Editor 3 supports Direct Lake on OneLake, which is recommended in most scenarios. See our [Direct Lake guidance](xref:direct-lake-guidance) article for more information.
+
 Tabular Editor 3 can create and connect to this type of model. For a tutorial on this please refer to our blog article: [Direct Lake semantic models: How to use them with Tabular Editor](https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/). 
 Tabular Editor 3 can create direct lake semantic models with both the Lakehouse and Datawarehouse SQL Endpoint. 
 
@@ -39,6 +42,9 @@ Using the checkbox ensures that Direct Lake specific properties and annotations 
 > [!NOTE]
 > Direct Lake on SQL models currently use a collation that is different from regular Power BI import semantic models. This may lead to different results when querying the model, or when referencing object names in DAX code.
  For more information please see this blog post by Kurt Buhler: [Case-sensitive models in Power BI: consequences & considerations](https://data-goblins.com/power-bi/case-specific)
+
+> [!IMPORTANT]
+> As of [Tabular Editor 3.22.0](~/content/te3/other/release-notes/3_22_0.md), the Direct Lake checkbox has been removed from the New Model dialog. You must [manually set the collation on your model to match that of your Fabric Warehouse](xref:direct-lake-guidance#collation) if using Direct Lake on SQL.
 
 ## Framing New Models and Table Imports
 
