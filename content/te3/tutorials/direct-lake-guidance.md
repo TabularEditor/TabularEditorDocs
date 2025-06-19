@@ -137,10 +137,41 @@ in
 ![Update Table Schema Entity](../../assets/images/update-table-schema-entity.png)
 
   Alternatively, manually add Data Columns to the table (Alt+4) and specify the `Name`, `Data Type`, `Source Column` and any other relevant properties for each column.
-  
+
+> [!NOTE]
+> When a Direct Lake table is added to the model, it needs to be manually "refreshed" after the first metadata deployment. Otherwise, the table will not contain any data when queried. This refresh only needs to be performed once. Tabular Editor 3 will automatically refresh the table when the model metadata is saved, if the **Auto-refresh when saving new tables** under **Tools > Preferences > Model Deployment > Data Refresh**.
 
 ### Direct Lake on SQL
 
+To manually set up a table for **Direct Lake on SQL** mode, follow the steps in the section above for Direct Lake on OneLake, but use the following M query in the Shared Expression instead:
 
+```m
+let
+    database = Sql.Database("<sql-endpoint>", "<warehouse/lakehouse name>")
+in
+    database
+```
+
+Replace `<sql-endpoint>` with the connection string of the [SQL Analytics Endpoint of the Fabric Warehouse](https://learn.microsoft.com/en-us/fabric/data-warehouse/query-warehouse) or [Lakehouse](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint), and `<warehouse/lakehouse name>` with the name of the Warehouse or Lakehouse.
 
 ### Import from Lakehouse / Warehouse
+
+If you want to configure a table for **Import** mode while sourcing data from a Fabric Lakehouse or Warehouse, the steps are as follows:
+
+1. **Create table**: Create a new table in the model (Alt+5), then expand the table partitions in the TOM Explorer. By default, you should see a single partition of type "Import" created automatically:
+
+![M Import Partition](../../assets/images/m-import-partition.png)
+
+2. **Configure Import Partition**: Set the following M query on the Import Partition:
+
+```m
+let
+    Source = Sql.Database("<sql-endpoint>","<warehouse/lakehouse name>"),
+    Data = Source{[Schema="raw_chargebee",Item="comments"]}[Data]
+in
+    Data
+```
+
+Replace `<sql-endpoint>` with the connection string of the [SQL Analytics Endpoint of the Fabric Warehouse](https://learn.microsoft.com/en-us/fabric/data-warehouse/query-warehouse) or [Lakehouse](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint), and `<warehouse/lakehouse name>` with the name of the Warehouse or Lakehouse.
+
+3. **Update column metadata**: Use Tabular Editor's **Update Table Schema** feature to update the column metadata for the table. This will automatically retrieve the column names and data types from the Lakehouse/Warehouse. Alternatively, create Data Columns manually (Alt+4) and specify the `Name`, `Data Type`, `Source Column` and any other relevant properties for each column.
