@@ -25,9 +25,9 @@ This page walks you through the process of creating a new Power BI semantic mode
 
 1. From the File menu, choose New > Model... or hit `CTRL+N`
 
-![New model](https://user-images.githubusercontent.com/8976200/116813604-c83d5f80-ab54-11eb-8a6f-4347f26aa626.png)
+![New model](~/content/assets/images/new-pbi-model.png)
 
-- Provide a name for your model or use the default value. Then, set the compatibility level to "1560 (Power BI Semantic Model)".
+- Provide a name for your model or use the default value. Then, set the compatibility level to "1609 (Power BI / Fabric)".
 - For the best development experience, check the "Use workspace database" option. This requires that you have a development workspace available in Power BI, with XMLA read/write enabled. When you click OK, you will be prompted to enter the connection string for the Power BI workspace in which you want the workspace database created.
 
 > [!NOTE]

@@ -19,7 +19,7 @@ When you create a new model in Tabular Editor, the "Use workspace database" opti
 Leaving this checked, you will be prompted to connect to an instance of Analysis Services after hitting "OK". This is the instance of Analysis Services to which your workspace database will be deployed.
 
 > [!IMPORTANT]
-> If you plan to deploy your workspace database to the Power BI Service XMLA endpoint, make sure you choose Compatibility Level 1560 (Power BI Dataset) in the dialog above.
+> If you plan to deploy your workspace database to the Power BI Service XMLA endpoint, make sure you choose Compatibility Level 1609 (Power BI / Fabric) in the dialog above.
 
 After entering the Analysis Services server details and (optional) credentials, you are shown a list of all databases currently reciding on the server (or for a Power BI workspace, the list of datasets deployed to the workspace):
 
