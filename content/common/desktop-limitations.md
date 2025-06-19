@@ -19,14 +19,11 @@ When using Tabular Editor (any edition) as an [external tool for Power BI Deskto
 
 The limitations mentioned in this article apply to Tabular Editor 2.x as well.
 
-> [!IMPORTANT]
-> As of the June 2025 Power BI Desktop update, the **Unsupported write operations** mentioned in this article, are no longer applicable. Now, **external tools can be used for any write operation on the semantic model running in Power BI Desktop**. More information in [the official blog post](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).
-
 ## Unsupported Operations
-The limitations can be summarized to be the following, but please see below for further details. 
 
-The only objects in a dataset that cannot be changed are tables and columns. 
+As of the June 2025 Power BI Desktop update, there are no longer any unsupported write operations. In other words, third party tools can now freely modify any aspect of the semantic model hosted in Power BI Desktop, including adding and removing tables and columns, changing data types, etc. As such, most of the information in this article is no longer relevant. However, if you're using a version of Power BI Desktop prior to the June 2025 update, please view the limitations in the [Data modeling operations](#data-modeling-operations) section below.
 
+More information in [the official blog post](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).
 
 ## Power BI file types
 
@@ -62,8 +59,9 @@ Once connected to the instance of Analysis Services, an external tool can obtain
 
 However, due to the way Power BI Desktop interoperates with Analysis Services, there are a few important limitations to the type of changes external tools may apply to the model metadata. These are listed [in the official documentation for External Tools](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) and repeated here for convenience:
 
-### [Supported write operations](#tab/postjune2023)
-#### JPre June 2025 Power BI Desktop
+### [Pre June 2025](#tab/postjune2023)
+
+**Pre June 2025 Power BI Desktop limitations when connecting through third party tools:**
 
 | Object                        | Connect to AS instance    |
 |-------------------------------|---------------------------|
@@ -87,8 +85,9 @@ However, due to the way Power BI Desktop interoperates with Analysis Services, t
 Power BI Desktop *project files* offer a broader scope of supported write operations. Those objects and operations that are not supported through using Tabular Editor as an External Tool may be supported by editing Power BI Desktop project files. Please refer to Microsoft documentation to learn more: [Power BI Desktop projects - Model authoring](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring).
 
 
-### [Pre June 2023 Supported write operations](#tab/prejune2023)
-#### Pre June 2023 Power BI Desktop
+### [Pre June 2023](#tab/prejune2023)
+
+**Pre June 2023 Power BI Desktop limitations when connecting through third party tools:**
 
 - Define and edit measures for calculations, including format string, KPI, and detail rows settings.
 - Add calculation groups for calculation reusability in complex models.
@@ -102,7 +101,7 @@ Though unsupported, it turns out that a number of operations can still be applie
 ---
 
 ## Data modeling limitations
-All Tabular Object Model (TOM) metadata can be accessed for read-only. Write operations are limited because Power BI Desktop must remain in-sync with the external modifications, therefore the following operations are not supported:
+All Tabular Object Model (TOM) metadata can be accessed for read-only. Write operations are limited because Power BI Desktop must remain in-sync with the external modifications, therefore the following operations are not supported, in addition to those mentioned in the tabs above:
 
 - Any TOM object types not covered in Supported write operations, such as tables and columns.
 - Editing a Power BI Desktop template (PBIT) file.
