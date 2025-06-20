@@ -40,5 +40,6 @@
 #### @script-remove-measures-with-error
 #### @script-find-replace
 #### @script-convert-dlsql-to-dlol
+#### @script-convert-import-to-dlol
 
 ## @script-helper-methods

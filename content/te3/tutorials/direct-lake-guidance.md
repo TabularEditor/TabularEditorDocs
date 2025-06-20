@@ -187,4 +187,4 @@ If you want to convert from Import to Direct Lake it's slightly more complicated
 To make things easier, we have prepared a set of C# scripts that can help you convert between different storage modes:
 
 - [Convert Direct Lake on SQL to Direct Lake on OneLake](xref:script-convert-dlsql-to-dlol)
-- [Convert Import to Direct Lake on OneLake](xref:script-convert-import-to-dlol)]
+- [Convert Import to Direct Lake on OneLake](xref:script-convert-import-to-dlol)
