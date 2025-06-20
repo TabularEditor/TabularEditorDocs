@@ -177,3 +177,14 @@ Replace `<sql-endpoint>` with the connection string of the [SQL Analytics Endpoi
 Replace `<schema-name>` with the schema name in the Warehouse/Lakehouse, and `<table/view-name>` with the name of the table or view you want to import. Note that tables in Import Mode can use non-materialized views as the data source, since the data is queried through the SQL endpoint during refresh operations.
 
 3. **Update column metadata**: Use Tabular Editor's **Update Table Schema** feature to update the column metadata for the table. This will automatically retrieve the column names and data types from the Lakehouse/Warehouse. Alternatively, create Data Columns manually (Alt+4) and specify the `Name`, `Data Type`, `Source Column` and any other relevant properties for each column.
+
+## Converting between storage modes
+
+It is straightforward to convert between Direct Lake on SQL and Direct Lake on OneLake using the information in this article, because you only need to modify the M query of the Shared Expression referenced by the Direct Lake partitions.
+
+If you want to convert from Import to Direct Lake it's slightly more complicated because of the different partition types involved.
+
+To make things easier, we have prepared a set of C# scripts that can help you convert between different storage modes:
+
+- [Convert Direct Lake on SQL to Direct Lake on OneLake](xref:script-convert-dlsql-to-dlol)
+- [Convert Import to Direct Lake on OneLake](xref:script-convert-import-to-dlol)
