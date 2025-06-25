@@ -41,5 +41,6 @@
 #### @script-find-replace
 #### @script-convert-dlsql-to-dlol
 #### @script-convert-import-to-dlol
+#### @script-convert-dlol-to-import
 
 ## @script-helper-methods
