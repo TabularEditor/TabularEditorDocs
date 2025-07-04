@@ -14,6 +14,9 @@ Microsoft supports the use of community third-party tools as communicated here: 
 
 Microsoft's Power BI implementation planning documentation specifically includes Tabular Editor in advanced data modeling scenarios and enterprise development: [Power BI usage scenarios: Advanced data model management](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
 
+## Trust Center
+At Tabular Editor, we are committed to transparency and strong security practices. Visit our [Trust Center](https://trust.tabulareditor.com/) to find details about our SOC 2 audit report, key policy documents, license terms, and our approach to infrastructure and organizational security. You’ll also find information about our sub-processors and how we work to keep your data safe.
+
 ## Metadata and Data Privacy
 
 Tabular Editor is primarily an offline tool, meaning that all data and metadata reside locally in the client machine on which Tabular Editor is installed, and all user interactions are performed locally as well. An Internet connection is not required to run and use Tabular Editor.
