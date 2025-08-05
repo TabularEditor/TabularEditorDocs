@@ -31,7 +31,7 @@ This is the recommended approach for connecting to Azure Databricks when your or
 
 #### About the Tabular Editor Enterprise Application
 
-When you connect to Azure Databricks using Microsoft Entra ID authentication, Tabular Editor uses a registered enterprise application named "Tabular Editor 3 - User Delegated Access to Azure Databricks" with the Application (client) ID: `ea7fad17-a4d8-4bfe-9e2f-8bb09dc6daad`.
+When you connect to Azure Databricks using Microsoft Entra ID authentication, Tabular Editor uses a registered enterprise application named "Tabular Editor 3 - User Delegated Access to Azure Databricks" with the Application (client) ID: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`.
 
 This enterprise application requires the following API permissions:
 
@@ -68,7 +68,7 @@ If your organization restricts user consent (common in enterprise environments):
 2. You'll need to contact your IT department or Microsoft Entra ID administrator
 3. Provide them with:
    - Application Name: "Tabular Editor 3 - User Delegated Access to Azure Databricks"
-   - Application ID: `ea7fad17-a4d8-4bfe-9e2f-8bb09dc6daad`
+   - Application ID: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`
    - Required Permissions: Microsoft Graph (offline_access, openid, profile, User.Read) and Azure Databricks API (user_impersonation)
 
 Your administrator can grant organization-wide consent in one of two ways:
@@ -169,7 +169,7 @@ This error occurs when the required permissions haven't been granted:
 
 2. If you don't have sufficient privileges:
    - Contact your IT administrator
-   - Provide them with the application ID: `ea7fad17-a4d8-4bfe-9e2f-8bb09dc6daad`
+   - Provide them with the application ID: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`
    - Request they grant organizational consent for the Tabular Editor enterprise application
 
 #### "AADSTS700016: Application with identifier was not found in the directory"
@@ -177,7 +177,7 @@ This error occurs when the required permissions haven't been granted:
 This may occur if your organization uses a restricted application policy:
 
 1. Contact your Microsoft Entra ID administrator
-2. Request that they add the Tabular Editor enterprise application (ID: `ea7fad17-a4d8-4bfe-9e2f-8bb09dc6daad`) to your organization's allowed application list
+2. Request that they add the Tabular Editor enterprise application (ID: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`) to your organization's allowed application list
 
 > [!TIP]
 > In some organizations, IT departments may require a formal request or security review before approving new enterprise applications. Be prepared to explain that this application is used by Tabular Editor 3 to securely connect to Azure Databricks resources using the organization's existing Microsoft Entra ID authentication infrastructure.
