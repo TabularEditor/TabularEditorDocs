@@ -8,6 +8,8 @@
 ### [BPA Sample Rules Expression](xref:using-bpa-sample-rules-expressions)
 ## [Semantic Model Types](Semantic Model/semantic-model-types.md)
 ### [Direct Lake on SQL](Semantic Model/direct-lake-sql-model.md)
+### [Direct Query over Analysis Services](Semantic Model/direct-query-over-as.md)
+
 
 
 
