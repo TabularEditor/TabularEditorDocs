@@ -52,6 +52,7 @@
 
 ## Adding Tables & Data Sources
 ### @importing-tables
+### @connecting-to-azure-databricks
 
 ## Configuring Data Security
 ### @data-security-about
