@@ -24,6 +24,7 @@ jobs:
           args: docfx.json
       - name: Replace Shared Xref in API HTML
         run: |
+          chmod -R u+w _site/api
           find _site/api -type f -name "*.html" -exec sed -i 's|<a class="xref" href="TabularEditor.Shared.html">Shared</a>|Shared|g' {} +
         shell: bash
       - name: Build And Deploy
