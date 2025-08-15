@@ -3,6 +3,12 @@ apiRules:
     uidRegex: ^TabularEditor\.Shared\.Services
     type: Namespace
 - exclude:
+    uidRegex: ^Microsoft\.AnalysisServices\.Tabular\.Serialization
+    type: Namespace
+- exclude:
+    uidRegex: ^TabularEditor\.PropertyGridUI\.Converters
+    type: Namespace
+- exclude:
     uidRegex: ^TabularEditor\.TOMWrapper\.Utils\.DaxDependencyHelper\.GetCachedSemantics
     type: Method
 - exclude:

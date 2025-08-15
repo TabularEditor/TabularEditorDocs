@@ -336,6 +336,21 @@
             Various methods for scripting TOM objects into TMSL
             </summary>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.Utils.Scripter.ScriptTmdl(TabularEditor.TOMWrapper.TabularNamedObject)">
+            <summary>
+            Scripts the specified object as TMDL
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Utils.Scripter.ScriptTmdl(TabularEditor.TOMWrapper.TabularNamedObject,System.Boolean)">
+            <summary>
+            Scripts the specified object as TMDL, with an option to use spaces or tabs for indentation.
+            </summary>
+            <param name="obj"></param>
+            <param name="useSpaces">True to use spaces for indentation, otherwise tabs</param>
+            <returns></returns>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.Utils.Scripter.ScriptCreateOrReplace(TabularEditor.TOMWrapper.Database)">
             <summary>
             Scripts the entire database as a CreateOrReplace
@@ -561,6 +576,23 @@
             </summary>
             <param name="obj"></param>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.AssociatedColumnCollection.Add(TabularEditor.TOMWrapper.Column)">
+            <summary>
+            Adds the specified column as a related column
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.AssociatedColumnCollection.Remove(TabularEditor.TOMWrapper.Column)">
+            <summary>
+            Removes the specified column from the collection of related columns
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.AssociatedColumnCollection.Clear">
+            <summary>
+            Removes all columns from the collection of related columns
+            </summary>
+        </member>
         <member name="T:TabularEditor.TOMWrapper.AggregateFunction">
             <summary>
             Specifies the aggregate function to be used by reporting tools to summarize column values.
@@ -724,6 +756,31 @@
         <member name="F:TabularEditor.TOMWrapper.CrossFilteringBehavior.Automatic">
             <summary>
             The engine will analyze the relationships and choose one of the behaviors by using heuristics.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.CultureResetMode">
+            <summary>
+            Specifies the mode for resetting culture and\or collation.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.CultureResetMode.Unknown">
+            <summary>
+            Unknown. User should not use this value.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.CultureResetMode.CultureOnly">
+            <summary>
+            Resets only the culture.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.CultureResetMode.CollationOnly">
+            <summary>
+            Resets only the collation.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.CultureResetMode.CultureAndCollation">
+            <summary>
+            Resets both culture and collation.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.DatasourceIsolation">
@@ -908,12 +965,12 @@
         </member>
         <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Automatic">
             <summary>
-            Default value, used for backward compatibility.
+            Default value, used for backward compatibility. Maps to Static or Dynamic depending on the table properties.
             </summary>
         </member>
         <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Static">
             <summary>
-            Evaluation is performed during processing and the result is materialized. Applies only for Import mode.
+            Evaluation is performed during processing and the result is materialized.
             </summary>
         </member>
         <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Dynamic">
@@ -1449,7 +1506,7 @@
         <member name="T:TabularEditor.TOMWrapper.TimeUnit">
             <summary>
             Various options for units that describe time information.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at Preview or above.</remarks>
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1701 or above.</remarks>
         </member>
         <member name="F:TabularEditor.TOMWrapper.TimeUnit.Unknown">
             <summary>
@@ -2760,6 +2817,158 @@
             Replaces any occurence of the specified "keyword" with the specified "replaceWith", in the
             ConnectionString property of all Provider Data Sources in the collection.
             </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.CalendarColumnGroup">
+            <summary>
+            Defines a group of columns within a logical calendar as part of the DAX Time-Intelligence support.
+            </summary><remarks>This metadata object is only supported when the compatibility level of the database is at 1701 or above.</remarks>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.CalendarColumnGroup.Calendar">
+            <summary>
+            A reference to a Calendar object that owns this CalendarColumnGroup.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.CalendarColumnGroup.Parent">
+            <summary>The parent Calendar of the current Calendar Column Group.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.CalendarColumnGroup.#ctor(Microsoft.AnalysisServices.Tabular.CalendarColumnGroup,TabularEditor.TOMWrapper.TabularModelHandler)">
+            <summary>
+            CTOR - only called from static factory methods on the class
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.CalendarColumnGroup.Delete">
+            <summary>
+            Deletes this column mapping from the calendar.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.CalendarColumnGroupCollection">
+            <summary>
+            Collection class for CalendarColumnGroup. Provides convenient properties for setting a property on multiple objects at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.CalendarColumnGroupCollection.Count">
+            <summary>The number of items in this collection.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.CalendarColumnGroupCollection.GetEnumerator">
+            <summary>Returns an enumerator that iterates through the collection.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.CalendarColumnGroupCollection.CreateChildrenFromMetadata">
+            <summary>
+            Calling this method will populate the CalendarColumnGroupCollection with objects based on the MetadataObjects in the corresponding MetadataObjectCollection.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.CalendarColumnGroupCollection.Item(TabularEditor.TOMWrapper.TimeUnit)">
+            <summary>
+            Gets the TimeUnitColumnAssociation for the specified TimeUnit. Throws KeyNotFoundException if no association is found.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException"></exception>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.CalendarColumnGroupCollection.Find(TabularEditor.TOMWrapper.TimeUnit)">
+            <summary>
+            Finds the first TimeUnitColumnAssociation in the collection that matches the specified TimeUnit. Returns null if no match is found.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.CalendarColumnGroupCollection.ToString">
+            <summary>
+            Gets a string representation of the column group, showing the names of the primary columns mapped to each time unit.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.TimeUnitColumnAssociation">
+            <summary>
+            Represents a group of columns that are associated with a specific time-unit.
+            </summary><remarks>This metadata object is only supported when the compatibility level of the database is at 1701 or above.</remarks>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TimeUnitColumnAssociation.TimeUnit">
+            <summary>
+            The TimeUnit used in the association.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TimeUnitColumnAssociation.PrimaryColumn">
+            <summary>
+            Gets or sets the reference to the primary column in the association.
+            </summary><value>The <see cref="T:TabularEditor.TOMWrapper.Column" /> instance that is the primary column, or a null reference (Nothing in Visual Basic) if such column is not set.</value>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TimeUnitColumnAssociation.Parent">
+            <summary>The parent Calendar of the current Time Unit Column Association.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TimeUnitColumnAssociation.#ctor(Microsoft.AnalysisServices.Tabular.TimeUnitColumnAssociation,TabularEditor.TOMWrapper.TabularModelHandler)">
+            <summary>
+            CTOR - only called from static factory methods on the class
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TimeUnitColumnAssociation.CreateNew(TabularEditor.TOMWrapper.Calendar,TabularEditor.TOMWrapper.TimeUnit)">
+            <summary>
+            Creates a new instance of the <see cref="T:TabularEditor.TOMWrapper.TimeUnitColumnAssociation"/> class and associates it with the
+            specified calendar.
+            </summary>
+            <remarks>This method creates a new <see cref="T:TabularEditor.TOMWrapper.TimeUnitColumnAssociation"/> object, initializes
+            it, and adds it to the <see cref="P:TabularEditor.TOMWrapper.Calendar.CalendarColumnGroups"/> collection of the specified <paramref
+            name="parent"/>.</remarks>
+            <param name="parent">The <see cref="T:TabularEditor.TOMWrapper.Calendar"/> to which the new <see cref="T:TabularEditor.TOMWrapper.TimeUnitColumnAssociation"/> will be added. Cannot be
+            null.</param>
+            <param name="timeUnit">The time unit to associate with the new column.</param>
+            <returns>A new <see cref="T:TabularEditor.TOMWrapper.TimeUnitColumnAssociation"/> instance associated with the specified calendar.</returns>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TimeUnitColumnAssociation.AssociatedColumns">
+            <summary>
+            A collection of columns that should be grouped together with this column when used in visuals (RelatedColumnDetails).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TimeUnitColumnAssociation.ToString">
+            <summary>
+            Returns a string representation of the object, including the primary column name and time unit.
+            </summary>
+            <remarks>If the <see cref="P:TabularEditor.TOMWrapper.TimeUnitColumnAssociation.PrimaryColumn"/> is null, the method returns "(Unassigned)".
+            Otherwise, it returns the <see cref="P:TabularEditor.TOMWrapper.IDaxObject.DaxObjectName"/> followed by the time unit, formatted
+            with camel case splitting.</remarks>
+            <returns>A string that represents the object. The format is either "(Unassigned)" if the primary column is null, or
+            "<c>PrimaryColumn.DaxObjectName</c> (<c>TimeUnit</c>)" with the time unit formatted.</returns>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.TimeRelatedColumnGroup">
+            <summary>
+            Represents a group of columns that are related to time information.
+            </summary><remarks>This metadata object is only supported when the compatibility level of the database is at 1701 or above.</remarks>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Parent">
+            <summary>The parent Calendar of the current Time Related Column Group.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.#ctor(Microsoft.AnalysisServices.Tabular.TimeRelatedColumnGroup,TabularEditor.TOMWrapper.TabularModelHandler)">
+            <summary>
+            CTOR - only called from static factory methods on the class
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.CreateNew(TabularEditor.TOMWrapper.Calendar)">
+            <summary>
+            Creates a new instance of the <see cref="T:TabularEditor.TOMWrapper.TimeRelatedColumnGroup"/> class and adds it to the specified
+            calendar's column groups.
+            </summary>
+            <param name="parent">The <see cref="T:TabularEditor.TOMWrapper.Calendar"/> to which the new <see cref="T:TabularEditor.TOMWrapper.TimeRelatedColumnGroup"/> will be added. Cannot be
+            null.</param>
+            <returns>A new instance of <see cref="T:TabularEditor.TOMWrapper.TimeRelatedColumnGroup"/> associated with the specified calendar.</returns>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Columns">
+            <summary>
+            A collection of columns that should be grouped together with this column when used in visuals (RelatedColumnDetails).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Mutable">
+            <summary>
+            Not used
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.ToString">
+            <summary>
+            Returns a string representation of the object, listing the names of its columns.
+            </summary>
+            <remarks>If the object contains no columns, the method returns the string "(Empty)".
+            Otherwise, it returns a comma-separated list of column names, sorted alphabetically.</remarks>
+            <returns>A string representing the object. Returns "(Empty)" if no columns are present, or a sorted, comma-separated
+            list of column names if columns exist.</returns>
         </member>
         <member name="T:TabularEditor.TOMWrapper.ExternalModelRoleMember">
             <summary>
@@ -4081,6 +4290,11 @@
             The collection of BindingInfo objects on this Model.
             </summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.Functions">
+            <summary>
+            The collection of Function objects on this Model.
+            </summary>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.Model.#ctor(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.TabularModelHandler)">
             <summary>
             CTOR - only called from static factory methods on the class
@@ -4142,6 +4356,15 @@
             </summary>
             <param name="name">The name of the new perspective to add</param>
             <returns>The newly added perspective.</returns>
+            <exception cref="T:TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException"></exception>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Model.AddFunction(System.String,System.String)">
+            <summary>
+            Adds a new <see cref="T:TabularEditor.TOMWrapper.Function">User-Defined Function</see> to the <see cref="T:TabularEditor.TOMWrapper.Model"/>.
+            </summary>
+            <param name="name">The name of the new User-Defined Function to add</param>
+            <param name="expression">The expression body of the new User-Defined Function (which uses lambda notation)</param>
+            <returns>The newly added User-Defined Function</returns>
             <exception cref="T:TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException"></exception>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Model.AddExpression(System.String,System.String)">
@@ -4244,6 +4467,14 @@
             <returns>A reference to the newly created data source</returns>
             <exception cref="T:TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException"></exception>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.Model.AddQueryGroup(System.String)">
+            <summary>
+            Adds a new <see cref="T:TabularEditor.TOMWrapper.QueryGroup"/> (display folder for Power Query expressions) to the <see cref="T:TabularEditor.TOMWrapper.Model"/>.
+            </summary>
+            <param name="name">The name of the new Query Group to add</param>
+            <returns>A reference to the newly created query group</returns>
+            <exception cref="T:TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException"></exception>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.Model.AddStructuredDataSource(System.String)">
             <summary>
             Adds a new <see cref="T:TabularEditor.TOMWrapper.StructuredDataSource"/> to the <see cref="T:TabularEditor.TOMWrapper.Model"/>.
@@ -4286,6 +4517,11 @@
         <member name="P:TabularEditor.TOMWrapper.Model.AllLevels">
             <summary>
             Iterates all levels on all hierarchies on all tables of the model.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.AllCalendars">
+            <summary>
+            Iterates all calendars on all tables of the model.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.ModelRole">
@@ -5610,6 +5846,11 @@
             The collection of Measure objects on this Table.
             </summary>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.Calendars">
+            <summary>
+            The collection of Calendar objects on this Table.
+            </summary>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.Table.#ctor(Microsoft.AnalysisServices.Tabular.Table,TabularEditor.TOMWrapper.TabularModelHandler)">
             <summary>
             CTOR - only called from static factory methods on the class
@@ -5768,6 +6009,13 @@
             <param name="displayFolder">Display Folder to assign to the column</param>
             <param name="insertOptions"></param>
             <returns>A reference to the newly added column</returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Table.AddCalendar(System.String)">
+            <summary>
+            Adds a new custom calendar to the table and returns a reference to the calendar.
+            </summary>
+            <param name="name">The name of the calendar, which can be used as a table reference in DAX time intelligence functions</param>
+            <returns>A reference to the newly added calendar</returns>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Table.AddDataColumn(System.String,System.String,System.String,TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.IInsertOptions)">
             <summary>
@@ -6748,6 +6996,314 @@
             CTOR - only called from static factory methods on the class
             </summary>
         </member>
+        <member name="T:TabularEditor.TOMWrapper.Function">
+            <summary>
+            Represents a user-defined function.
+            </summary><remarks>This metadata object is only supported when the compatibility level of the database is at 1702 or above.</remarks>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.ClearAnnotations">
+            <summary>Removes all annotations from this object.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.Annotations">
+            <summary>The collection of Annotations on the current Function.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetAnnotation(System.Int32)">
+            <summary>Gets the value of the annotation with the given index, assuming it exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.HasAnnotation(System.String)">
+            <summary>Returns true if an annotation with the given name exists. Otherwise false.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetAnnotation(System.String)">
+            <summary>Gets the value of the annotation with the given name. Returns null if no such annotation exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.SetAnnotation(System.Int32,System.String)">
+            <summary>Sets the value of the annotation with the given index, assuming it exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetNewAnnotationName">
+            <summary>Returns a unique name for a new annotation.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.SetAnnotation(System.String,System.String)">
+            <summary>Sets the value of the annotation having the given name. If no such annotation exists, it will be created. If value is set to null, the annotation will be removed.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.RemoveAnnotation(System.String)">
+            <summary>Remove an annotation by the given name.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetAnnotationsCount">
+            <summary>Gets the number of annotations on the current Function.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetAnnotations">
+            <summary>Gets a collection of all annotation names on the current Function.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.ClearExtendedProperties">
+            <summary>Removes all Extended Properties from this object.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.ExtendedProperties">
+            <summary>The collection of Extended Properties on the current Function.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.HasExtendedProperty(System.String)">
+            <summary>Returns true if an ExtendedProperty with the given name exists. Otherwise false.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetExtendedPropertyType(System.Int32)">
+            <summary>Gets the type of the ExtendedProperty with the given index, assuming it exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetExtendedPropertyType(System.String)">
+            <summary>Gets the type of the ExtendedProperty with the given name, assuming it exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetExtendedProperty(System.Int32)">
+            <summary>Gets the value of the ExtendedProperty with the given index, assuming it exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetExtendedProperty(System.String)">
+            <summary>Gets the value of the ExtendedProperty with the given name. Returns null if no such ExtendedProperty exists.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)">
+            <summary>Sets the value of the ExtendedProperty with the given index, optionally specifiying the type (string or JSON) of the ExtendedProperty.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetNewExtendedPropertyName">
+            <summary>Returns a unique name for a new ExtendedProperty.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)">
+            <summary>Sets the value of the ExtendedProperty having the given name. If no such ExtendedProperty exists, it will be created. If value is set to null, the ExtendedProperty will be removed.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.RemoveExtendedProperty(System.String)">
+            <summary>Remove an ExtendedProperty by the given name.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetExtendedPropertyCount">
+            <summary>Gets the number of ExtendedProperties on the current object.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.GetExtendedProperties">
+            <summary>Gets a collection of all ExtendedProperty names on the current object.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.ChangedPropertiesCollection">
+            <summary>The ChangedProperties collection</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.ClearChangedProperties">
+            <summary>Clears the list of names of changed properties.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.ChangedProperties">
+            <summary>Gets or sets a comma-separated list of names of properties that should no longer be synchronized from the source.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.Description">
+            <summary>
+            The description of the user-defined function, visible to developers at design time and to administrators in management tools, such as SQL Server Management Studio.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.Expression">
+            <summary>
+            The DAX function parameters and expression.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.IsHidden">
+            <summary>
+            A boolean value that indicates whether the function is treated as hidden by client visualization tools. True if the function is treated as hidden by client visualization tools; otherwise false.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.State">
+            <summary>
+            Provides information on the state of the function. Possible values and their interpretation are as follows. Ready (1) The Function is usable. SemanticError (5) The function expression has a semantic error. SyntaxError (9) The function has a syntax error in its expression. All other values are not applicable to Function.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.ErrorMessage">
+            <summary>
+            A string that explains the error state associated with the current object. It is set by the engine only when the state of the object is one of these three values: SemanticError, DependencyError, or SyntaxError.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.LineageTag">
+            <summary>
+            A tag that represents the lineage of the object.
+            </summary><remarks><para>Lineage tags enable stable identification of objects across different semantic models. Using lineage tags enables Power BI features such as composite models to maintain their binding to referenced tables or columns, even if the source semantic model object is renamed.</para></remarks>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.SourceLineageTag">
+            <summary>
+            A tag that represents the lineage of the source for the object.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.CreateNew(TabularEditor.TOMWrapper.Model,System.String)">
+            <summary>
+            Creates a new Function and adds it to the parent Model.
+            Also creates the underlying metadataobject and adds it to the TOM tree.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.Clone(System.String)">
+            <summary>
+            Creates an exact copy of this Function object.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.Parent">
+            <summary>The parent Model of the current Function.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Function.#ctor(Microsoft.AnalysisServices.Tabular.Function,TabularEditor.TOMWrapper.TabularModelHandler)">
+            <summary>
+            CTOR - only called from static factory methods on the class
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.IsVisible">
+            <summary>
+            Gets the visibility of the User-Defined Function.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.DependsOn">
+            <summary>
+            Gets the list of objects that this measure depends on.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.DaxObjectName">
+            <summary>
+            Gets a valid DAX reference to this function
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.DaxObjectFullName">
+            <summary>
+            Gets a valid DAX reference to this function
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.DaxTableName">
+            <summary>
+            Always returns null, as UDFs do not reside in tables.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Function.ReferencedBy">
+            <summary>
+            Gets the list of objects that reference this measure.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.FunctionCollection">
+            <summary>
+            Collection class for Function. Provides convenient properties for setting a property on multiple objects at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.FunctionCollection.Count">
+            <summary>The number of items in this collection.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.FunctionCollection.GetEnumerator">
+            <summary>Returns an enumerator that iterates through the collection.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.FunctionCollection.CreateChildrenFromMetadata">
+            <summary>
+            Calling this method will populate the FunctionCollection with objects based on the MetadataObjects in the corresponding MetadataObjectCollection.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.FunctionCollection.Description">
+            <summary>
+            Sets the Description property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.FunctionCollection.Expression">
+            <summary>
+            Sets the Expression property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.FunctionCollection.IsHidden">
+            <summary>
+            Sets the IsHidden property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.FunctionCollection.SourceLineageTag">
+            <summary>
+            Sets the SourceLineageTag property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.Calendar">
+            <summary>
+            Defines a logical calendar as part of the DAX Time-Intelligence support.
+            </summary><remarks>This metadata object is only supported when the compatibility level of the database is at 1701 or above.</remarks>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Calendar.Description">
+            <summary>
+            The description of the Calendar, visible to developers at design time and to administrators in management tools, such as SQL Server Management Studio.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Calendar.LineageTag">
+            <summary>
+            A tag that represents the lineage of the object.
+            </summary><remarks><para>Lineage tags enable stable identification of objects across different semantic models. Using lineage tags enables Power BI features such as composite models to maintain their binding to referenced tables or columns, even if the source semantic model object is renamed.</para></remarks>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Calendar.SourceLineageTag">
+            <summary>
+            A tag that represents the lineage of the source for the object.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Calendar.Table">
+            <summary>The parent table of the current Calendar.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Calendar.CreateNew(TabularEditor.TOMWrapper.Table,System.String)">
+            <summary>
+            Creates a new Calendar and adds it to the parent Table.
+            Also creates the underlying metadataobject and adds it to the TOM tree.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Calendar.Clone(System.String,TabularEditor.TOMWrapper.Table)">
+            <summary>
+            Creates an exact copy of this Calendar object.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Calendar.Parent">
+            <summary>The parent Table of the current Calendar.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Calendar.CalendarColumnGroups">
+            <summary>
+            The collection of CalendarColumnGroup objects on this Calendar.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Calendar.#ctor(Microsoft.AnalysisServices.Tabular.Calendar,TabularEditor.TOMWrapper.TabularModelHandler)">
+            <summary>
+            CTOR - only called from static factory methods on the class
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Calendar.ColumnMappings">
+            <summary>
+            The collection of column mappings that define the calendar's time unit associations. This is an alias for <see cref="P:TabularEditor.TOMWrapper.Calendar.CalendarColumnGroups"/>.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Calendar.AddTimeUnit(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.Column,TabularEditor.TOMWrapper.Column[])">
+            <summary>
+            Adds a new time unit association to the calendar.
+            </summary>
+            <param name="timeUnit">The unit of time</param>
+            <param name="primaryColumn">The primary column to associate with this time unit</param>
+            <param name="associatedColumns">Additional associated columns (i.e. columns representing the same time unit as the primary column in other formats, languages, etc.)</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Calendar.GetTimeUnits">
+            <summary>
+            Returns all time unit associations in the calendar.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Calendar.DeleteTimeUnit(TabularEditor.TOMWrapper.TimeUnit)">
+            <summary>
+            Removes the specified time unit association from the calendar.
+            </summary>
+            <param name="timeUnit"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.CalendarCollection">
+            <summary>
+            Collection class for Calendar. Provides convenient properties for setting a property on multiple objects at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.CalendarCollection.Count">
+            <summary>The number of items in this collection.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.CalendarCollection.GetEnumerator">
+            <summary>Returns an enumerator that iterates through the collection.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.CalendarCollection.CreateChildrenFromMetadata">
+            <summary>
+            Calling this method will populate the CalendarCollection with objects based on the MetadataObjects in the corresponding MetadataObjectCollection.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.CalendarCollection.Description">
+            <summary>
+            Sets the Description property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.CalendarCollection.SourceLineageTag">
+            <summary>
+            Sets the SourceLineageTag property of all objects in the collection at once.
+            </summary>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.CalculatedTable.Expression">
             <summary>
             The Expression of this Calculated Table.
@@ -6907,6 +7463,23 @@
             <summary>
             Build number of Tabular Editor used for deployment.
             </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.DirectLakeHelper.IsDirectLakeAllowed(TabularEditor.TOMWrapper.ITabularModelHandler)">
+            <summary>
+            Determines whether Direct Lake is allowed for the current model handler. Some editions of Tabular Editor does not allow Direct Lake,
+            which is reflected by this method. Even if Direct Lake is allowed, the current model may not support it, e.g. if the model is not
+            using the PowerBI Compatibility Mode. To check that, use <see cref="M:TabularEditor.TOMWrapper.DirectLakeHelper.GetDirectLakeSupport(TabularEditor.TOMWrapper.ITabularModelHandler)"/> instead.
+            </summary>
+            <param name="handler"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.DirectLakeHelper.GetDirectLakeSupport(TabularEditor.TOMWrapper.ITabularModelHandler)">
+            <summary>
+            Determines if the current model supports Direct Lake, and if so, which flavors of Direct Lake are supported, and also if
+            a compatibility level upgrade is needed (see <see cref="F:TabularEditor.RequiredCompatibilityLevels.DirectLake"/>).
+            </summary>
+            <param name="handler"></param>
+            <returns></returns>
         </member>
         <member name="P:TabularEditor.TOMWrapper.EntityPartition.ExpressionSource">
             <summary>
@@ -7330,6 +7903,13 @@
             <param name="partition"></param>
             <returns></returns>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.PartitionExtensions.GetMode(Microsoft.AnalysisServices.Tabular.Partition)">
+            <summary>
+            Gets the <see cref="T:Microsoft.AnalysisServices.Tabular.ModeType"/> of a partition, considering also the <see cref="P:Microsoft.AnalysisServices.Tabular.Model.DefaultMode"/> of the <see cref="T:Microsoft.AnalysisServices.Tabular.Model"/>.
+            </summary>
+            <param name="partition"></param>
+            <returns></returns>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.PartitionExtensions.CanRefresh(TabularEditor.TOMWrapper.Partition,TabularEditor.TOMWrapper.RefreshType)">
             <summary>
             Determines whether a partition can be refreshed using the specified refresh type.
@@ -7445,12 +8025,6 @@
             <param name="insertOptions"></param>
             <param name="questionCallback"></param>
         </member>
-        <member name="M:TabularEditor.TOMWrapper.TabularConnection.ForceAccountSelector(System.String)">
-            <summary>
-            We can trigger the Entra ID account selector popup by setting UserID=" " in the connection string. Subsequent connections
-            should use the actual user id returned from <see cref="M:TabularEditor.TOMWrapper.DatabaseExtensions.GetAuthHandlePrincipal(Microsoft.AnalysisServices.ConnectionInfo)"/>
-            </summary>
-        </member>
         <member name="M:TabularEditor.TOMWrapper.TabularCultureHelper.ImportCulture(Newtonsoft.Json.Linq.JObject,TabularEditor.TOMWrapper.Model,System.Boolean,System.Boolean)">
             <summary>
             Method returns 'false' if an error was encountered and <paramref name="haltOnError"/> is set to true.
@@ -7511,6 +8085,13 @@
             Ends all batch updates in progress.
             </summary>
             <param name="rollback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TabularModelHandler.GetStorageMode">
+            <summary>
+            Gets an overall storage mode for the model, based on the storage modes used by the partitions in the model
+            (assuming the model contains at least one non-calculated table - otherwise it returns <see cref="F:TabularEditor.TOMWrapper.ModeType.Default"/>).
+            </summary>
             <returns></returns>
         </member>
         <member name="M:TabularEditor.TOMWrapper.TabularModelHandler.SaveDB(System.Boolean)">
@@ -7809,13 +8390,6 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.TabularObjectCollection`1.Item(System.String)">
-            <summary>
-            Gets the item with the specified name.
-            </summary>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
         <member name="P:TabularEditor.TOMWrapper.TabularObjectCollection`1.Item(System.Int32)">
             <summary>
             Gets the item on the specified index.
@@ -7828,13 +8402,6 @@
             Returns true if this collection contains the specified item.
             </summary>
             <param name="item"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TabularEditor.TOMWrapper.TabularObjectCollection`1.Contains(System.String)">
-            <summary>
-            Returns true if this collection contains an item with the specified name.
-            </summary>
-            <param name="name"></param>
             <returns></returns>
         </member>
         <member name="P:TabularEditor.TOMWrapper.TabularObjectCollection`1.CollectionName">
@@ -7851,6 +8418,20 @@
             <summary>
             The number of items in this collection.
             </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Item(System.String)">
+            <summary>
+            Gets the item with the specified name.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Contains(System.String)">
+            <summary>
+            Returns true if this collection contains an item with the specified name.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
         </member>
         <member name="T:TabularEditor.TOMWrapper.TabularObjectContainerHelper">
             <summary>
@@ -8098,6 +8679,16 @@
               Looks up a localized string similar to Data Sources.
             </summary>
         </member>
+        <member name="P:TabularEditor.LocalizableStrings.DuplicateCalendarName">
+            <summary>
+              Looks up a localized string similar to A calendar with the name &apos;{0}&apos; already exists in the model..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.DuplicateCalendarTableName">
+            <summary>
+              Looks up a localized string similar to A table with the name &apos;{0}&apos; already exists in the model. Calendars and tables must have unique names..
+            </summary>
+        </member>
         <member name="P:TabularEditor.LocalizableStrings.DuplicateColumnName">
             <summary>
               Looks up a localized string similar to A column with the name &quot;{0}&quot; already exists in the table. Choose a different name for this column..
@@ -8193,6 +8784,16 @@
               Looks up a localized string similar to Translations.
             </summary>
         </member>
+        <member name="P:TabularEditor.LocalizableStrings.UdfEmptyName">
+            <summary>
+              Looks up a localized string similar to User-Defined Function names cannot be empty.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.LocalizableStrings.UdfInvalidChar">
+            <summary>
+              Looks up a localized string similar to User-Defined Functions cannot contain the character &apos;{0}&apos; in their name..
+            </summary>
+        </member>
         <member name="P:TabularEditor.LocalizableStrings.UnableToPerformInsert">
             <summary>
               Looks up a localized string similar to Unable to perform insert.
@@ -8243,6 +8844,11 @@
         <member name="P:TabularEditor.NonLocalizableStrings.CannotCloneToAnotherParent">
             <summary>
               Looks up a localized string similar to This object can not be cloned to another parent. Argument &apos;{0}&apos; should be left as null..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.NonLocalizableStrings.ErrorWhileRemovingUnusedFilesTmdl">
+            <summary>
+              Looks up a localized string similar to Error while removing unused files from TMDL folder structure: {0}.
             </summary>
         </member>
         <member name="T:TabularEditor.PropertyGridUI.CollectionEditors.CultureCollectionEditor">
@@ -8542,6 +9148,11 @@
             When the name of a measure is changed, DAX formulas referencing the measure has to be updated.
             </summary>
         </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeUdfNameChange(TabularEditor.TOMWrapper.Function,System.String)">
+            <summary>
+            When the name of a measure is changed, DAX formulas referencing the measure has to be updated.
+            </summary>
+        </member>
         <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeColumnDataTypeChange(TabularEditor.TOMWrapper.Column,TabularEditor.TOMWrapper.DataType)">
             <summary>
             Changing the data type of a column (DataColumn or CalculatedColumn / CalculatedTableColumn with InferDataType = false), can cause cascades.
@@ -8550,6 +9161,11 @@
             <param name="newDataType"></param>
         </member>
         <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeMeasureExpressionChange(TabularEditor.TOMWrapper.Measure)">
+            <summary>
+            When the expression of a measure is changed, the resulting data type of the measure might change, potentially causing cascasdes.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeUdfExpressionChange(TabularEditor.TOMWrapper.Function)">
             <summary>
             When the expression of a measure is changed, the resulting data type of the measure might change, potentially causing cascasdes.
             </summary>
@@ -8591,6 +9207,18 @@
             </summary>
             <param name="measure"></param>
         </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeAddFunction(TabularEditor.TOMWrapper.Function)">
+            <summary>
+            When a function is added, previously invalid expressions might become valid.
+            </summary>
+            <param name="function"></param>
+        </member>
+        <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeRemoveFunction(TabularEditor.TOMWrapper.Function)">
+            <summary>
+            When a UDF is deleted, expressions referencing that UDF will become invalid
+            </summary>
+            <param name="function"></param>
+        </member>
         <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.CascadeRlsFilterExpressionChange(TabularEditor.TOMWrapper.TablePermission)">
             <summary>
             When the expression of a measure is changed, the resulting data type of the measure might change, potentially causing cascasdes.
@@ -8605,6 +9233,35 @@
             <summary>
             Various string extension methods
             </summary>
+        </member>
+        <member name="M:TabularEditor.StringHelper.AsBulletList(System.Collections.Generic.IEnumerable{System.String},System.String,System.Int32)">
+            <summary>
+            Returns a list of strings formatted as a bulleted (unordered) list.
+            
+              - Item 1
+              - Item 2
+              - Item 3
+            </summary>
+            <param name="items"></param>
+            <param name="bulletSymbol"></param>
+            <param name="indent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TabularEditor.StringHelper.AsBulletList(System.Collections.Generic.IEnumerable{System.String},System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            Returns a list of strings formatted as a bulleted (unordered) list with a maximum on the number of items displayed.
+            
+              - Item 1
+              - Item 2
+              - Item 3
+              (+ 7 more)
+            </summary>
+            <param name="items"></param>
+            <param name="maxItemCount"></param>
+            <param name="maxItemTemplate"></param>
+            <param name="bulletSymbol"></param>
+            <param name="indent"></param>
+            <returns></returns>
         </member>
         <member name="M:TabularEditor.StringHelper.FirstNLines(System.String,System.Int32,System.Boolean)">
             <summary>
@@ -8728,6 +9385,60 @@
             </summary>
             <param name="xmlaResults"></param>
             <returns></returns>
+        </member>
+        <member name="T:Microsoft.AnalysisServices.IdentityMode">
+            <summary>
+            Controls the resolution of user identity when not explicitly specified in the connection string.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AnalysisServices.IdentityMode.Default">
+            <summary>
+            Use the default behavior which is the current-user; in the connection-string means use the global configuration on the client
+            </summary>
+        </member>
+        <member name="F:Microsoft.AnalysisServices.IdentityMode.CurrentUser">
+            <summary>
+            Identity is resolved to the current user of the OS session
+            </summary>
+        </member>
+        <member name="F:Microsoft.AnalysisServices.IdentityMode.Connection">
+            <summary>
+            Identity is managed based on the target data-source; in the first time a connection is opened to a particular data-source, 
+            we launch the login window, so the user can select the identity, any additional connection to a data-source that has the
+            associated identity already resolved, we use the first one (that was obtained interactively).
+            </summary>
+        </member>
+        <member name="F:Microsoft.AnalysisServices.IdentityMode.Process">
+            <summary>
+            Identity is managed for the lifetime of the process; the first connection will trigger an interactive login window,
+            so the user can select the identity, any additional connection will use the first identity.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AnalysisServices.InteractiveLogin">
+            <summary>
+            Controls how interactive authentication is performed
+            </summary>
+        </member>
+        <member name="F:Microsoft.AnalysisServices.InteractiveLogin.Default">
+            <summary>
+            Behavior is controlled based on the system's default behavior and other properties in the connection-string;
+            usually that means using SSO first and only launching the login window if the silent authentication fails.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AnalysisServices.InteractiveLogin.Enabled">
+            <summary>
+            Using SSO first and only launching the login window if the silent authentication fails.
+            </summary>
+        </member>
+        <member name="F:Microsoft.AnalysisServices.InteractiveLogin.Disabled">
+            <summary>
+            Using silent authentication only, the connection establishment fails if need a user interaction [like MFA]
+            </summary>
+        </member>
+        <member name="F:Microsoft.AnalysisServices.InteractiveLogin.Always">
+            <summary>
+            Always launching the login window.
+            </summary>
         </member>
         <member name="T:Microsoft.AnalysisServices.Tabular.Helper.MetadataObjectHelper">
             <summary>
