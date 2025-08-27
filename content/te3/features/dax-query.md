@@ -2,7 +2,7 @@
 uid: dax-query
 title: DAX Queries
 author: Morten Lønskov
-updated: 2024-06-03
+updated: 2025-08-27
 applies_to:
   editions:
     - edition: Desktop
@@ -40,19 +40,21 @@ The DAX query window has five different query options.
 
 The default values of "Auto Execute Query" and "Keep Sorting and Filtering" preferences can be set up in the Preferences dialog: **Tools > Preferences... > Data browsing > DAX Query** > Basic. 
 
-### Adding or Updating Measures with DAX Queries
+### Adding or Updating Measures, Columns and Tables with DAX Queries
 
 Tabular Editor (3.12.0 and higher) has the ability to add or change measures directly through the DAX Query window.
 
-In addition to the above mentioned options four other have been introduced.
+From Tabular Editor 3.23.0, Apply and Apply selection also process DEFINE COLUMN and DEFINE TABLE statements. Tabular Editor will create the corresponding calculated columns/tables in your model, or update their expressions if they already exist.
+
+There are four options for applying DAX Query defined measures, columns and tables to the model: 
 
 ![Dax Query Apply Measure](~/content/assets/images/features/dax_query_window/dax_query_apply_measure.png)
 
-The "Apply" option syncs the DAX expression for all measures explicitly defined in the query to the definition of the measures. Any measures that do not already exist are created.
+The "Apply" option syncs the DAX expression for all measures, columns or tables explicitly defined in the query to the definition of the object. Any measures, columns or tables that do not already exist are created.
 
-"Apply Measures & Sync" applies the DAX expression to the definition of the measures and saves the model.
+"Apply Measures & Sync" applies the DAX expression to the definition of the measures, columns or tables and saves the model.
 
-The "Apply Selection" and "Apply Selection & Sync" will only apply the measures within the current selection of the query editor.
+The "Apply Selection" and "Apply Selection & Sync" will only apply the measures, columns or tables within the current selection of the query editor.
 
 Unlike the [DAX Script feature](xrefid:dax-scripts), only the expression property of a measure can be updated this way, as the DAX query syntax does not support specifying other properties, such as Description, Display Folder, etc.
 

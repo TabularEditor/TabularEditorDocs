@@ -39,7 +39,10 @@ Currently, the following data sources are natively supported by Tabular Editor 3
 - Snowflake*
 - Power BI Dataflow*
 - Databricks*
-- Fabric OneLake (Direct Lake)*
+- Fabric Lakehouse*
+- Fabric Warehouse*
+- Fabric SQL Database*
+- Fabric Mirrored Database*
 
 *=These data sources are only supported as implicit data sources in Power BI data models. They are not available in SSAS / Azure AS.
 
@@ -76,6 +79,10 @@ If you change the preview mode to "Schema only" using the dropdown in the top le
 ![Confirm Selection](~/content/assets/images/confirm-selection.png)
 
 On the last page, confirm your selection and choose which type of partitions to create. For provider data sources, the default type of partition to be created is `SQL`, whereas for structured data sources, it is `M`. 
+
+![Confirm Selection Direct Lake](~/content/assets/images/confirm-selection-direct-lake.png)
+
+For Fabric data sources the last page has a drop-down which lets you choose if you want your selection to be created as Direct Lake or Import mode.
 
 At this point, you should see your tables imported with all columns, data types, and source column mappings applied:
 

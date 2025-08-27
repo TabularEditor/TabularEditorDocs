@@ -17,7 +17,8 @@ None.
 ## System requirements
 
 - **Operating system:** Windows 7, Windows 8, Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 or newer
-- **.NET Runtime:** [.NET Desktop Runtime 6.0.8](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- **.NET Runtime:** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- **Architecture:** x64,  ARM64 (native from 3.23.0)
 
 ## Activating your installation
 

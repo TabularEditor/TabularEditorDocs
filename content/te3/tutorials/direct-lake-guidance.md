@@ -62,7 +62,7 @@ For a **Direct Lake on SQL** model, the collation is case-insensitive for querie
 
 ## Table Import Wizard
 
-To add Direct Lake tables using Tabular Editor 3's Table Import Wizard, choose **Microsoft Fabric Lakehouse** or **Microsoft Fabric Warehouse** as the source:
+To add Direct Lake tables using Tabular Editor 3's Table Import Wizard, choose **Microsoft Fabric Lakehouse**, **Microsoft Fabric Warehouse**, **Microsoft Fabric SQL Database** or **Microsoft Fabric Mirrored Database** as the source:
 
 ![Import Table Wizard Fabric](../../assets/images/import-table-wizard-fabric.png)
 
