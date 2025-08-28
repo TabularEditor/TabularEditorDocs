@@ -20,7 +20,7 @@ Tabular Editor 3.23.0 **.NET 8** downloads:
 Read the [latest release notes](release-notes/3_23_0.md).
 
 > [!NOTE]
-> As of Tabular Editor 3.23.0, we now provide native [ARM64](https://learn.microsoft.com/en-us/windows/arm/overview) builds. 32-bit (x86) Windows builds have been discontinued.
+> As of Tabular Editor 3.23.0, we now provide native [ARM64](https://learn.microsoft.com/en-us/windows/arm/overview) builds. 32-bit (x86) builds have been discontinued.
 
 ## Installation Instructions
 
