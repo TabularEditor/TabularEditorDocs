@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2023-08-09
+updated: 2025-08-27
 applies_to:
   editions:
     - edition: Desktop
@@ -18,8 +18,9 @@ The goal of the UI of Tabular Editor is to make it easy to perform most tasks co
 
 There may be many other common workflow tasks, which are not as easily performed through the UI however. For this reason, Tabular Editor offers C# scripting, which lets advanced users write a script using C# syntax, to more directly manipulate the objects in the loaded Tabular Model.
 
-> [!NOTE]
-> The C# script editor in Tabular Editor 3 does not yet have IntelliSense(TM)-like capabilities enabled. This feature will be available in a later release. View @roadmap for more information.
+## Code Assist
+The C# script editor supports Roslyn-powered completion and call tips and from Tabular Editor 3.23.0, completion supports substring and capital-letters acronym matching.
+
 
 ## Objects
 The [scripting API](xref:api-index) provides access to two top-level objects, `Model` and `Selected`. The former contains methods and properties that allow you to manipulate all objects in the Tabular Model, whereas the latter exposes only objects that are currently selected in the explorer tree.
