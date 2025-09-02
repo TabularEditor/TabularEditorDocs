@@ -71,6 +71,9 @@
 ### @creating-macros
 ### @csharp-script-library
 
+# Troubleshooting
+## @locale-not-supported
+
 # Other resources
 ## @downloads
 ## @roadmap
