@@ -15,7 +15,7 @@ applies_to:
 
 ## Overview
 
-Tabular Editor 3 can **connect** to composite models that leverage **DirectQuery over Analysis Services (DQ‑over‑AS)**, but full modelling support is **not yet available**.  Most authoring tasks work as expected; however, operations that rely on synchronising metadata with the remote semantic model—such as *Update table schema*—are currently limited.
+Tabular Editor 3 can **connect** to composite models that leverage **DirectQuery over Analysis Services (DQ‑over‑AS)**, but full modeling support is **not yet available**.  Most authoring tasks work as expected; however, operations that rely on synchronising metadata with the remote semantic model—such as *Update table schema*—are currently limited.
 
 >[!IMPORTANT]
 > Until full DQ‑over‑AS support ships, model metadata edited in Tabular Editor 3 **is not automatically kept in sync** with the source dataset. You must apply one of the work‑arounds listed below whenever columns or measures are added to the underlying Analysis Services model.
