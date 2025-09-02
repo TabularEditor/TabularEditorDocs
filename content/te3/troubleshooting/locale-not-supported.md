@@ -18,6 +18,8 @@ The XXXX locale is not supported
 
 in the Tabular Editor 3 Message view.
 
+![Locale not supported message](~/content/assets/images/troubleshooting/locale-not-supported-message-view.png)
+
 This issue usually occurs when your local machine uses a **regional configuration not supported by the Analysis Services (SSAS) engine**.  
 In most cases, the error is triggered by another underlying issue or warning, but this message is shown as a result.
 
