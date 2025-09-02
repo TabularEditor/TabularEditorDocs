@@ -1,6 +1,6 @@
 ---
 uid: dq-over-as-limitations
-title: Power BI Semantic model Types
+title: Direct Query over Analysis Services
 author: Morten Lønskov
 updated: 2025-07-14
 applies_to:
