@@ -1,7 +1,7 @@
 ---
 uid: script-library-advanced
 title: Advanced C# Scripts
-updated: 2023-02-27
+updated: 2025-09-04
 applies_to:
   versions:
     - version: 2.x
@@ -24,4 +24,7 @@ These are more advanced scripts with sophisticated functionalities requiring a m
 | [Format Power Query](xref:script-format-power-query) | Formats the Power Query of a selected M Partition by using the powerqueryformatter.com API. | When you have complex Power Query and need to make it more readable for reading or making changes. |
 | [Implement Incremental Refresh](xref:script-implement-incremental-refresh) | Configures Incremental Refresh automatically using parameters from a UI dialogue box. | When you need to implement incremental refresh but aren't comfortable with the configuration in the table settings. |
 | [Remove Measures with Errors](xref:script-remove-measures-with-error) | Creates a new M Parameter and automatically adds it to M Partitions. | When you want to replace strings in multiple partitions (i.e. connection strings) with a dynamic M Parameter. |
-| [Find & Replace in Selected Measures](xref:script-find-replace) | Searches for a substring in the DAX of selected measures, replacing with another substring. | When you need to quickly find/replace values in multiple DAX measures (i.e. `CALCULATE` filter or broken object references). | 
+| [Find & Replace in Selected Measures](xref:script-find-replace) | Searches for a substring in the DAX of selected measures, replacing with another substring. | When you need to quickly find/replace values in multiple DAX measures (i.e. `CALCULATE` filter or broken object references). |
+| [Databricks Semantic Model Set-up](xref:script-databricks-semantic-model-set-up) | Friendly name tables and columns and set column best practices | When you Dartabricks object names need making more user friendly. |
+| [Create Databricks Relationships](xref:script-create-databricks-relationships) | Create relationships based on primary and foreign key definitions in Databricks Unity Catalog | When you want to re-use Databricks relationship definitions that have already been defined in Unity Catalog. |
+| [Add Databricks Metadata Descriptions](xref:script-add-databricks-metadata-descriptions) | Update table and column descriptions based on Databricks Unity Catalog | When you want to re-use Databricks table and column comments that have already been defined in Unity Catalog. |
