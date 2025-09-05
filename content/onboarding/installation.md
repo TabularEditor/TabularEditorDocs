@@ -5,6 +5,8 @@ author: Daniel Otykier
 updated: 2021-09-30
 ---
 
+# Installation, activation and basic configuration
+
 ## Installation
 
 In order to install Tabular Editor 3, download the latest version from our [downloads page](xref:downloads).
