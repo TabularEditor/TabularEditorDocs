@@ -565,7 +565,7 @@ The script uses WinForms to prompt for a Databricks personal access token, used 
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-add-databricks-metadata-descriptions-done.png" alt="The number of desriptions updated" style="width: 550px;"/>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-add-databricks-metadata-descriptions-done.png" alt="The number of descriptions updated" style="width: 550px;"/>
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> After the script has run for each selected table, the number of descriptions updated is displayed.</figcaption>
 </figure>
 
