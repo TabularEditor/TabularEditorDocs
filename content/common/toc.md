@@ -43,5 +43,8 @@
 #### @script-find-replace
 #### @script-convert-dlsql-to-dlol
 #### @script-convert-import-to-dlol
+#### @script-databricks-semantic-model-set-up
+#### @script-create-databricks-relationships
+#### @script-add-databricks-metadata-descriptions
 
 ## @script-helper-methods
