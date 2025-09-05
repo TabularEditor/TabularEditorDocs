@@ -122,7 +122,7 @@ For measures, we do the same thing, but simplified to only remove measures that 
 * The measure is hidden (or the table in which the measure resides is hidden)
 * The measure is not directly or indirectly referenced in any DAX expressions on other visible objects in the perspective
 
-If you're a team of developers working on the model, you should already be using Tabular Editors ["Save to Folder" functionality](/Advanced-features#folder-serialization) together with a source control environment such as Git. Make sure to check the "Serialize perspectives per-object" option under "File" > "Preferences" > "Save to Folder", to avoid getting heaps of merge conflicts on your perspective definitions.
+If you're a team of developers working on the model, you should already be using Tabular Editors ["Save to Folder" functionality](/te2/Advanced-features#folder-serialization) together with a source control environment such as Git. Make sure to check the "Serialize perspectives per-object" option under "File" > "Preferences" > "Save to Folder", to avoid getting heaps of merge conflicts on your perspective definitions.
 
 ![image](https://user-images.githubusercontent.com/8976200/44029969-935e0efe-9eff-11e8-93de-c1223f7ebe7f.png)
 
@@ -273,7 +273,7 @@ start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.b
 This assumes that you are executing the command line within the directory of your Model.bim file (or Database.json file if using the "Save to Folder"-functionality). The -S switch instructs Tabular Editor to apply the supplied script to the model, and the -D switch performs the deployment. The -O switch allows overwriting an existing database with the same name, and the -R switch indicates that we also want to overwrite roles of the target database.
 
 ## Master model processing
-If you have a dedicated processing server and large amounts of data overlap between the individual models, it may make sense for you to process the data into the master model first, before splitting it up. This way, you can avoid processing the same data several times, into individual models. **This assumes, however, that you are not processing any tables where the partition query has been changed between versions, as shown in [this section](/Master-model-pattern#altering-partition-queries).** The recipe for this is outlined below:
+If you have a dedicated processing server and large amounts of data overlap between the individual models, it may make sense for you to process the data into the master model first, before splitting it up. This way, you can avoid processing the same data several times, into individual models. **This assumes, however, that you are not processing any tables where the partition query has been changed between versions, as shown in [this section](/te2/Master-model-pattern#altering-partition-queries).** The recipe for this is outlined below:
 
 1. (Optional - in case there were metadata changes) Deploy your master model to your processing server
 2. Perform the processing you need on your master model (do not process tables that have version-specific partition queries).

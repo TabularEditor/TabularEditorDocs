@@ -43,7 +43,7 @@ Once you purchase a license for Tabular Editor 3, you should receive an e-mail w
 If you haven't used Tabular Editor 3 before, you are eligible to a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
 
 > [!NOTE]
-> Tabular Editor ApS will not sent unsolicited e-mails or forward your e-mail address to third parties, when signing up for a 30-day trial license. View our @privacy-policy for more information.
+> Tabular Editor ApS will not sent unsolicited e-mails or forward your e-mail address to third parties, when signing up for a 30-day trial license. View our [privacy policy](/te3/other/privacy-policy) for more information.
 
 ### Changing a license key
 
@@ -89,6 +89,6 @@ The next time you launch Tabular Editor 3, you will be prompted for a license ke
 
 ## Next steps
 
-- [Overview of Tabular Editor 3's user interface](xref:user-interface)
-- [What's new in Tabular Editor 3](whats-new.md)
+- [Overview of Tabular Editor 3's user interface](/te3/views/user-interface)
+- [What's new in Tabular Editor 3](/te3/whats-new)
 - [Tabular Editor 3 Onboarding Guide](xref:onboarding-te3)
