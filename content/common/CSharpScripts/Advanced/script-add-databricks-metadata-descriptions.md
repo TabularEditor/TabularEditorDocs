@@ -420,7 +420,7 @@ Please check the following prequisites:
                 + serverHostname
                 + @" is correct
 
-- check that the Datacricks SQL endpoint / HTTP Path "
+- check that the Databricks SQL endpoint / HTTP Path "
                 + httpPath
                 + @" is correct
 
