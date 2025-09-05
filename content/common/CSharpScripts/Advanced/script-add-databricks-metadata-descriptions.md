@@ -206,7 +206,7 @@ public static class MaskedInputHelper
     }
 }
 
-//Code to retrive Databrickc Connection information from the M Query in a table partition
+//Code to retrieve Databricks Connection information from the M Query in a table partition
 public class DatabricksConnectionInfo
 {
     public string ServerHostname { get; set; }
