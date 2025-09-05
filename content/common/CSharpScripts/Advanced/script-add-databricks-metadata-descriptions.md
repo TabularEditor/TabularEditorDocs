@@ -555,7 +555,7 @@ Either:
 }
 ```
 ### Explanation
-The script uses WinForms to prompt for a Databricks personal access token, used to authenticate to Databricks. For each selected table, the script retrieves the Databricks connection string information and schema and table name from the M query in the selected table's partition. Using the Spark ODBC driver it then sends a SQL query to Databricks that queries the information_schema tables to return the table description that is defined in Unity Catalog. This is then updated on the table description in the semantic model. A second SQL Query using the DESCRIBE command is also sent to the selected table to get column descriptions. The results of this are looped through, with descriptions added in the model. Once the script has run on eahc selected table, a dialogue box is displayed to show the number of descriptions updated.
+The script uses WinForms to prompt for a Databricks personal access token, used to authenticate to Databricks. For each selected table, the script retrieves the Databricks connection string information and schema and table name from the M query in the selected table's partition. Using the Spark ODBC driver it then sends a SQL query to Databricks that queries the information_schema tables to return the table description that is defined in Unity Catalog. This is then updated on the table description in the semantic model. A second SQL Query using the DESCRIBE command is also sent to the selected table to get column descriptions. The results of this are looped through, with descriptions added in the model. Once the script has run on each selected table, a dialogue box is displayed to show the number of descriptions updated.
 
 ## Example Output
 
