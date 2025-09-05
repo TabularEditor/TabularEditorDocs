@@ -73,7 +73,7 @@ class p {
                 newName.Append(oldName[i]);
             }
         }
-        //apply Proper Case where this has not already been taken car of above
+        //apply Proper Case where this has not already been taken care of above
         obj.Name = textInfo.ToTitleCase(newName.ToString());
     }
 }
