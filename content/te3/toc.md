@@ -67,6 +67,10 @@
 ### @incremental-refresh-schema
 ### @incremental-refresh-workspace-mode
 
+## Advanced Modelling
+### @udfs
+### @calendars
+
 ## Automation with C# Scripting
 ### @creating-macros
 ### @csharp-script-library
