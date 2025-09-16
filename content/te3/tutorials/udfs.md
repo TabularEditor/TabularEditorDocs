@@ -277,6 +277,7 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 - Not all Power BI environments support UDFs (requires specific builds)
 - UDFs cannot be recursive (call themselves)
 - UDFs do not support optional parameters, parameters with default values, or parameter overloading
+- While Power BI supports visual calculation expressions in UDFs, our DAX parser currently does not, which may cause Tabular Editor 3 to show false error messages, when using visual calculation-specific functions (such as [`RUNNINGSUM`](https://dax.guide/runningsum)) in UDFs.
 
 ---
 
