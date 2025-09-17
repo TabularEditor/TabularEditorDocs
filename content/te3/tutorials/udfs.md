@@ -17,18 +17,19 @@ The feature lets you create reusable DAX functions that you can invoke from with
 
 Tabular Editor 3 supports UDFs starting from version 3.23.0, although we recommend using [3.23.1](xref:release-3-23-1) (or newer) to benefit from various bug fixes and improvements.
 
+For a more detailed introduction to UDFs in Tabular Editor 3, check out [this blog post](https://tabulareditor.com/blog/how-to-get-started-using-udfs-in-tabular-editor-3).
+
 ## Understanding UDFs
 
 UDFs can be thought of as custom DAX functions that you define once and can use throughout your model. You define which parameters the function accepts, which can be both scalar- or table-valued, or even references to objects, and then you provide the DAX expression that uses those parameters to compute a result, which can also be scalar- or table-valued.
+
+To learn more about how DAX UDFs work, we recommend [this article by SQLBI](https://www.sqlbi.com/articles/introducing-user-defined-functions-in-dax/).
 
 ## Prerequisites
 
 Before you can create and use UDFs in Tabular Editor 3, ensure that:
 
 - Your model compatibility level is **1702 or higher**
-
-> [!WARNING]
-> UDFs are available in **Public Preview** as of the **September 2025 version of Power BI Desktop**. As of this writing, the feature is not yet available in the Power BI Service, so even though you can still deploy models containing UDFs to Power BI, any measures or columns using UDFs will not work until the feature is made available in the service.
 
 ## Creating Your First UDF
 
@@ -123,7 +124,7 @@ In addition to specifying the evaluation mode, you can also constrain the parame
 
 These type specifications are optional, but if specified they will perform an implicit type conversion on arguments passed to the function, and will also affect the autocomplete suggestions in Tabular Editor 3 when writing DAX code that calls the function.
 
-Check the [Microsoft specification for UDFs](https://docs.microsoft.com/en-us/dax/user-defined-functions) for the complete list of available constraints.
+Check the [Microsoft specification for UDFs](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) for the complete list of available constraints.
 
 ## Using UDFs in Your Model
 
