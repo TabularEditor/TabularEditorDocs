@@ -24,14 +24,12 @@ $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru -Arg
 
 Output:
 ```cmd
-Tabular Editor 2.25.0 (build 2.25.8952.22276)
---------------------------------
 Usage:
 
 TABULAREDITOR ( file | server database | -L [name] ) [-S script1 [script2] [...]]
     [-SC] [-A [rules] | -AX rules] [(-B | -F | -TMDL) output [id]] [-V | -G] [-T resultsfile]
-    [-D [server database [-L user pass] [-O [-C [plch1 value1 [plch2 value2 [...]]]]
-        [-P [-Y]] [-R [-M]]]
+    [-D [server database [-L user pass] [-F | -O [-C [plch1 value1 [plch2 value2 [...]]]]
+        [-P [-Y]] [-S] [-R [-M]]]
         [-X xmla_script]] [-W] [-E]]
 
 file                Full path of the Model.bim file or database.json model folder to load.
@@ -74,6 +72,7 @@ database            Database ID of the model to load. If blank (") picks the fir
   -L / -LOGIN         Disables integrated security when connecting to the server. Specify:
     user                Username (must be a user with admin rights on the server)
     pass                Password
+  -F / -FULL          Deploy the full model metadata, allowing overwrite of an existing database.
   -O / -OVERWRITE     Allow deploy (overwrite) of an existing database.
     -C / -CONNECTIONS   Deploy (overwrite) existing data sources in the model. After the -C switch, you
                         can (optionally) specify any number of placeholder-value pairs. Doing so, will
@@ -82,6 +81,7 @@ database            Database ID of the model to load. If blank (") picks the fir
                         (value1, value2, ...).
     -P / -PARTITIONS    Deploy (overwrite) existing table partitions in the model.
       -Y / -SKIPPOLICY    Do not overwrite partitions that have Incremental Refresh Policies defined.
+    -S / -SHARED        Deploy (overwrite) shared expressions.
     -R / -ROLES         Deploy roles.
       -M / -MEMBERS       Deploy role members.
   -X / -XMLA        No deployment. Generate XMLA/TMSL script for later deployment instead.
@@ -90,6 +90,12 @@ database            Database ID of the model to load. If blank (") picks the fir
   -E / -ERR         Returns a non-zero exit code if Analysis Services returns any error messages after
                       the metadata was deployed / updated.
 ```
+
+> [!WARNING]
+> The addition of the `-S` / `-SHARED` deployment option flag in [Tabular Editor 2.27.0](https://github.com/TabularEditor/TabularEditor/releases/tag/2.27.0) is a **breaking change**. If you're using the Tabular Editor CLI to perform deployments and you are upgrading from an earlier version of Tabular Editor, make sure to include that flag in your CLI commands, as **shared expressions will otherwise not be deployed**.
+
+> [!IMPORTANT]
+> The `-F` flag was introduced in [Tabular Editor 2.27.0](https://github.com/TabularEditor/TabularEditor/releases). It is used to perform a "full" deployment and is equivalent to specifying `-O -C -P -S -R -M`.
 
 ## Connecting to Azure Analysis Services
 You can use any valid SSAS connection string in place of a server name in the command. The following command loads a model from Azure Analysis Services and saves it locally as a Model.bim file:
