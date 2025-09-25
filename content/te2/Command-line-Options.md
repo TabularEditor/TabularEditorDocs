@@ -181,14 +181,14 @@ When performing deployment through the command-line, information about unprocess
 `start /wait` is not necessary when executing TabularEditor.exe within a Command Line Task in an Azure DevOps pipeline. This is because the Command Line Task will not complete, until all threads spawned by the task have terminated. In other words, you need only use `start /wait` if you have additional commands following the call to TabularEditor.exe, and in this case, make sure to use `start /B /wait`. The `/B` switch is required in order for the output from TabularEditor.exe to be correctly piped back to the pipeline log.
 
 ```shell
-TabularEditor.exe "C:\Projects\My Model\Model.bim" -D ssasserver databasename -O -C -P -V -E -W
+TabularEditor.exe "C:\Projects\My Model\Model.bim" -D ssasserver databasename -O -C -P -S -V -E -W
 ```
 
 Or with multiple commands:
 
 ```shell
-start /B /wait TabularEditor.exe "C:\Projects\Finance\Model.bim" -D ssasserver Finance -O -C -P -V -E -W
-start /B /wait TabularEditor.exe "C:\Projects\Sales\Model.bim" -D ssasserver Sales -O -C -P -V -E -W
+start /B /wait TabularEditor.exe "C:\Projects\Finance\Model.bim" -D ssasserver Finance -O -C -P -S -V -E -W
+start /B /wait TabularEditor.exe "C:\Projects\Sales\Model.bim" -D ssasserver Sales -O -C -P -S -V -E -W
 ```
 
 The figure below shows what such a build looks like in Azure DevOps:
@@ -204,7 +204,7 @@ If you prefer to use a PowerShell task instead of a command line task, you must 
 
 ```powershell
 $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
-       -argumentList "`"C:\Projects\My Model\Model.bim`" -D ssasserver databasename -O -C -P -V -E -W"
+       -argumentList "`"C:\Projects\My Model\Model.bim`" -D ssasserver databasename -O -C -P -S -V -E -W"
 exit $p.ExitCode
 ```
 
