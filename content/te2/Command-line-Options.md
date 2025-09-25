@@ -94,7 +94,7 @@ database            Database ID of the model to load. If blank (") picks the fir
 > [!WARNING]
 > The addition of the `-S` / `-SHARED` deployment option flag in [Tabular Editor 2.27.0](https://github.com/TabularEditor/TabularEditor/releases/tag/2.27.0) is a **breaking change**. If you're using the Tabular Editor CLI to perform deployments and you are upgrading from an earlier version of Tabular Editor, make sure to include that flag in your CLI commands, as **shared expressions will otherwise not be deployed**.
 
-> [!IMPORTANT]
+> [!TIP]
 > The `-F` flag was introduced in [Tabular Editor 2.27.0](https://github.com/TabularEditor/TabularEditor/releases). It is used to perform a "full" deployment and is equivalent to specifying `-O -C -P -S -R -M`.
 
 ## Connecting to Azure Analysis Services
