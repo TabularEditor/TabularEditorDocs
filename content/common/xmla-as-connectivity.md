@@ -166,8 +166,10 @@ The whole URL is not the tenant ID. The tenant ID is the GUID at the end of the 
 
 An example is below. Your tenant ID and your workspace name will be different than those shown.
  
-Old: powerbi://api.powerbi.com/v1.0/myorg/WorkspaceName
-New: powerbi://api.powerbi.com/v1.0/eeds65sv-kl25-4d12-990a-770ca3eb6226/WorkspaceName
+- Old: `powerbi://api.powerbi.com/v1.0/myorg/WorkspaceName`
+- New: `powerbi://api.powerbi.com/v1.0/eeds65sv-kl25-4d12-990a-770ca3eb6226/WorkspaceName`
+
+You can also use the tenant name (e.g. `fabrikam.com`) as shown in [this article](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#connecting-to-a-premium-workspace).
  
 Then, attempt connecting precisely as the instructions in the [Testing a simple connection section](#testing-a-simple-connection)
 
