@@ -116,7 +116,7 @@ foreach (var row in rows)
             continue;
 
         updated++;
-        Output($"Updated '{row.TableName}': Entity='{row.CurrentEntity}', SourceLineageTag='{row.CurrentEntity}'.");
+        Output($"Updated '{row.TableName}': Entity='{row.CurrentEntity}', Partition='{row.Partition.Name}', SourceLineageTag='{row.CurrentEntity}'.");
     }
     catch (Exception ex)
     {
@@ -159,6 +159,29 @@ public class EntityEditRow
         }
 
         Partition.EntityName = target;
+
+        if (!string.Equals(Partition.Name, target, StringComparison.Ordinal))
+        {
+            var nameConflict = Table.Partitions
+                .Where(p => !ReferenceEquals(p, Partition))
+                .Any(p => string.Equals(p.Name, target, StringComparison.Ordinal));
+
+            if (nameConflict)
+            {
+                warn?.Invoke($"Partition rename skipped for '{TableName}': another partition already named '{target}'.");
+            }
+            else
+            {
+                try
+                {
+                    Partition.Name = target;
+                }
+                catch (Exception ex)
+                {
+                    warn?.Invoke($"Partition rename failed for '{TableName}': {ex.Message}");
+                }
+            }
+        }
 
         try
         {
@@ -286,7 +309,6 @@ public class BatchEntityEditor : Form
         };
     }
 }
-
 ```
 > [!NOTE] The script was generated using an LLM for code assistance, but have been tested by the Tabular Editor team. 
 
