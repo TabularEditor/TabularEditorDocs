@@ -63,32 +63,30 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using TW = TabularEditor.TOMWrapper;
-using TOM = Microsoft.AnalysisServices.Tabular;
 
 // -------- Guard: need tables selected --------
-if (!Selected.Tables.Any())
+var tables = Selected.Tables.ToList();
+if (tables.Count == 0)
 {
     Warning("Select one or more tables first.");
     return;
 }
 
 // -------- Build editable rows from selected tables --------
-var rows = new BindingList<EntityEditRow>();
-foreach (var table in Selected.Tables.ToList())
+var candidates = tables
+    .Select(table => new { Table = table, Partition = table.Partitions.OfType<TW.EntityPartition>().FirstOrDefault() })
+    .ToList();
+
+foreach (var skipped in candidates.Where(c => c.Partition == null))
 {
-    var epart = table.Partitions.OfType<TW.EntityPartition>().FirstOrDefault();
-    if (epart == null)
-    {
-        Warning($"Skipping '{table.Name}': no Entity partition.");
-        continue;
-    }
-    rows.Add(new EntityEditRow
-    {
-        Table = table,
-        CurrentEntity = epart.EntityName ?? string.Empty,
-        NewEntity = epart.EntityName ?? string.Empty
-    });
+    Warning($"Skipping '{skipped.Table.Name}': no Entity partition.");
 }
+
+var rows = new BindingList<EntityEditRow>(
+    candidates
+        .Where(c => c.Partition != null)
+        .Select(c => new EntityEditRow(c.Table, c.Partition))
+        .ToList());
 
 if (rows.Count == 0)
 {
@@ -96,44 +94,33 @@ if (rows.Count == 0)
     return;
 }
 
-// -------- Show batch dialog (improved layout/DPI handling) --------
-var dlg = new BatchEntityEditor(rows);
-var dr = dlg.ShowDialog();
-if (dr != DialogResult.OK)
+// -------- Show batch dialog --------
+using (var dialog = new BatchEntityEditor(rows))
 {
-    Info("Cancelled. No changes applied.");
-    return;
+    if (dialog.ShowDialog() != DialogResult.OK)
+    {
+        Info("Cancelled. No changes applied.");
+        return;
+    }
 }
 
 // -------- Apply changes --------
-int updated = 0;
-foreach (var r in rows)
+const string ExtendedPropertyName = "Changed Property Name";
+var updated = 0;
+
+foreach (var row in rows)
 {
     try
     {
-        if (r.Table == null) continue;
-        var epart = r.Table.Partitions.OfType<TW.EntityPartition>().FirstOrDefault();
-        if (epart == null) continue;
-
-        if (string.IsNullOrWhiteSpace(r.NewEntity) ||
-            string.Equals(r.NewEntity, r.CurrentEntity, StringComparison.Ordinal))
+        if (!row.ApplyChanges(ExtendedPropertyName, Warning))
             continue;
 
-        epart.EntityName = r.NewEntity;
-
-        try { r.Table.SourceLineageTag = r.NewEntity; }
-        catch (Exception exTag)
-        {
-            Warning($"SourceLineageTag not set on '{r.Table.Name}': {exTag.Message}");
-        }
-
-        r.Table.SetExtendedProperty("Changed Property Name", "true", TW.ExtendedPropertyType.String);
         updated++;
-        Output($"Updated '{r.Table.Name}': Entity='{r.NewEntity}', SourceLineageTag='{r.NewEntity}'.");
+        Output($"Updated '{row.TableName}': Entity='{row.CurrentEntity}', SourceLineageTag='{row.CurrentEntity}'.");
     }
     catch (Exception ex)
     {
-        Error($"Failed on '{r.Table?.Name ?? "(unknown)"}': {ex.Message}");
+        Error($"Failed on '{row.TableName}': {ex.Message}");
     }
 }
 
@@ -143,41 +130,75 @@ Info($"Done. {updated} table(s) updated.");
 // ====================== Support types / UI ======================
 public class EntityEditRow
 {
+    public EntityEditRow(TW.Table table, TW.EntityPartition partition)
+    {
+        Table = table ?? throw new ArgumentNullException(nameof(table));
+        Partition = partition ?? throw new ArgumentNullException(nameof(partition));
+
+        CurrentEntity = partition.EntityName ?? string.Empty;
+        NewEntity = CurrentEntity;
+    }
+
     [Browsable(false)]
-    public TW.Table Table { get; set; }
-    public string TableName => Table?.Name ?? "";
-    public string CurrentEntity { get; set; }
+    public TW.Table Table { get; }
+
+    [Browsable(false)]
+    public TW.EntityPartition Partition { get; }
+
+    public string TableName => Table.Name;
+    public string CurrentEntity { get; private set; }
     public string NewEntity { get; set; }
+
+    public bool ApplyChanges(string extendedPropertyName, Action<string> warn)
+    {
+        var target = NewEntity ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(target) ||
+            string.Equals(target, CurrentEntity, StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        Partition.EntityName = target;
+
+        try
+        {
+            Table.SourceLineageTag = target;
+        }
+        catch (Exception ex)
+        {
+            warn?.Invoke($"SourceLineageTag not set on '{TableName}': {ex.Message}");
+        }
+
+        Table.SetExtendedProperty(extendedPropertyName, "true", TW.ExtendedPropertyType.String);
+        CurrentEntity = target;
+        return true;
+    }
 }
 
 public class BatchEntityEditor : Form
 {
-    private DataGridView _grid;
-    private Button _ok;
-    private Button _cancel;
-    private BindingList<EntityEditRow> _rows;
+    private readonly BindingList<EntityEditRow> rows;
+    private DataGridView grid;
 
     public BatchEntityEditor(BindingList<EntityEditRow> rows)
     {
-        _rows = rows;
-        BuildUI();
+        this.rows = rows ?? throw new ArgumentNullException(nameof(rows));
+        BuildUi();
     }
 
-    private void BuildUI()
+    private void BuildUi()
     {
-        // Form
         Text = "Edit Entity names for selected tables";
         TopMost = true;
         ShowInTaskbar = false;
         StartPosition = FormStartPosition.CenterScreen;
-        AutoScaleMode = AutoScaleMode.Dpi;     // DPI-aware
-        Font = new System.Drawing.Font("Segoe UI", 9F); // readable default
+        AutoScaleMode = AutoScaleMode.Dpi;
+        Font = new System.Drawing.Font("Segoe UI", 9F);
         Width = 900;
         Height = 600;
         MinimumSize = new System.Drawing.Size(820, 500);
         FormBorderStyle = FormBorderStyle.Sizable;
 
-        // Root layout = table with 3 rows: label, grid, buttons
         var root = new TableLayoutPanel
         {
             Dock = DockStyle.Fill,
@@ -185,24 +206,20 @@ public class BatchEntityEditor : Form
             RowCount = 3,
             Padding = new Padding(10)
         };
-        // Row heights: label (auto), grid (*), buttons (absolute)
         root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         root.RowStyles.Add(new RowStyle(SizeType.Percent, 100f));
         root.RowStyles.Add(new RowStyle(SizeType.Absolute, 56f));
         Controls.Add(root);
 
-        // Intro label
-        var lbl = new Label
+        root.Controls.Add(new Label
         {
             Text = "Edit the Entity name for each table. Leave 'New Entity' unchanged to skip.",
             AutoSize = true,
             Dock = DockStyle.Fill,
             Padding = new Padding(0, 0, 0, 6)
-        };
-        root.Controls.Add(lbl, 0, 0);
+        }, 0, 0);
 
-        // Grid
-        _grid = new DataGridView
+        grid = new DataGridView
         {
             Dock = DockStyle.Fill,
             AutoGenerateColumns = false,
@@ -211,86 +228,65 @@ public class BatchEntityEditor : Form
             ReadOnly = false,
             RowHeadersVisible = false,
             SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-
-            // Header/column sizing to avoid clipping
-            ColumnHeadersVisible = true,
             ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize,
-            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-            AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None,
-            EnableHeadersVisualStyles = true
+            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         };
 
-        var colTable = new DataGridViewTextBoxColumn
-        {
-            DataPropertyName = "TableName",
-            HeaderText = "Table",
-            ReadOnly = true,
-            AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-            FillWeight = 28
-        };
-        var colCurrent = new DataGridViewTextBoxColumn
-        {
-            DataPropertyName = "CurrentEntity",
-            HeaderText = "Current Entity",
-            ReadOnly = true,
-            AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-            FillWeight = 36
-        };
-        var colNew = new DataGridViewTextBoxColumn
-        {
-            DataPropertyName = "NewEntity",
-            HeaderText = "New Entity",
-            ReadOnly = false,
-            AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-            FillWeight = 36
-        };
-
-        _grid.Columns.AddRange(colTable, colCurrent, colNew);
-        _grid.DataSource = _rows;
-
-        // Ensure first cell visible and columns fitted
-        _grid.DataBindingComplete += (s, e) =>
-        {
-            _grid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
-            if (_grid.Rows.Count > 0)
+        grid.Columns.AddRange(
+            new DataGridViewTextBoxColumn
             {
-                _grid.ClearSelection();
-                _grid.CurrentCell = _grid.Rows[0].Cells[2]; // focus New Entity
-                _grid.BeginEdit(true);
-            }
-        };
+                DataPropertyName = nameof(EntityEditRow.TableName),
+                HeaderText = "Table",
+                ReadOnly = true,
+                FillWeight = 28
+            },
+            new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = nameof(EntityEditRow.CurrentEntity),
+                HeaderText = "Current Entity",
+                ReadOnly = true,
+                FillWeight = 36
+            },
+            new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = nameof(EntityEditRow.NewEntity),
+                HeaderText = "New Entity",
+                FillWeight = 36
+            });
 
-        root.Controls.Add(_grid, 0, 1);
+        grid.DataSource = rows;
+        root.Controls.Add(grid, 0, 1);
 
-        // Buttons panel
-        var pnl = new FlowLayoutPanel
+        var buttons = new FlowLayoutPanel
         {
             Dock = DockStyle.Fill,
             FlowDirection = FlowDirection.RightToLeft,
-            Padding = new Padding(0),
-            WrapContents = false
+            WrapContents = false,
+            Padding = new Padding(0)
         };
 
-        _ok = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 0, 8) };
-        _cancel = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 8, 8) };
+        var ok = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 0, 8) };
+        var cancel = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 8, 8) };
 
-        pnl.Controls.Add(_ok);
-        pnl.Controls.Add(_cancel);
+        buttons.Controls.Add(ok);
+        buttons.Controls.Add(cancel);
 
-        AcceptButton = _ok;
-        CancelButton = _cancel;
+        AcceptButton = ok;
+        CancelButton = cancel;
+        root.Controls.Add(buttons, 0, 2);
 
-        root.Controls.Add(pnl, 0, 2);
-
-        // Bring to front when shown
-        Load += (s, e) =>
+        Shown += (_, _) =>
         {
-            Activate();
-            BringToFront();
-            _grid.Focus();
+            grid.ClearSelection();
+            if (grid.Rows.Count > 0)
+            {
+                grid.CurrentCell = grid.Rows[0].Cells[2];
+                grid.BeginEdit(true);
+            }
         };
     }
 }
+
 ```
 > [!NOTE] The script was generated using an LLM for code assistance, but have been tested by the Tabular Editor team. 
 
