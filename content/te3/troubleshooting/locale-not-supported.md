@@ -9,7 +9,7 @@ applies_to:
     - edition: Business
     - edition: Enterprise
 ---
-
+# Locale Not Supported
 You may encounter the warning message:
 
 ```plaintext
