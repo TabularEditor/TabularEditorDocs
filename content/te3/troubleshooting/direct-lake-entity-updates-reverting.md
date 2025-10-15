@@ -37,8 +37,8 @@ Power BI binds Direct Lake tables to their origin through the `SourceLineageTag`
 2. **Synchronize partition details.**
    - Set the table's `SourceLineageTag` to exactly match the new `EntityName`.
    - Set the `Name` property to true for table's `ChangedProperties` collection so Power BI treats the rename as intentional.
-4. **Save the model in TE3.**
-5. **Refresh the affected table (or the entire model) in Power BI.** 
+3. **Save the model in TE3.**
+4. **Refresh the affected table (or the entire model) in Power BI.** 
 The names should now persist.
 
 ---
