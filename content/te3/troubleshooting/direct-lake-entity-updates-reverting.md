@@ -2,7 +2,7 @@
 uid: direct-lake-entity-updates-reverting
 title: Entity Name Changes Revert in Direct Lake Models
 author: Morten Lønskov
-updated: 2025-14-10
+updated: 2025-10-14
 applies_to:
   editions:
     - edition: Desktop
