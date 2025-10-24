@@ -1,0 +1,34 @@
+---
+uid: DI011
+category: Code actions
+sub-category: Improvements
+title: Use ISEMPTY instead of COUNTROWS
+author: Daniel Otykier
+updated: 2025-01-03
+---
+
+Code action `DI011` (Improvement) **Use ISEMPTY instead of COUNTROWS**
+
+## Description
+
+When checking if a table is empty, it is more efficient to use the [`ISEMPTY`](https://dax.guide/ISEMPTY) function than to count the rows of the table.
+
+### Example
+
+Change:
+
+```dax
+IF(COUNTROWS(Products) = 0, "No products", "Products exist")
+```
+
+To:
+
+```dax
+IF(ISEMPTY(Products), "No products", "Products exist")
+```
+
+## Why is Tabular Editor suggesting this?
+
+When checking if a table is empty, a common anti-pattern in DAX is to use the `COUNTROWS` function to count the rows of the table, and then compare the result to zero. However, this pattern is inefficient, as it requires the engine to count all rows of the table, even if the only thing we are interested in is whether the table is empty or not.
+
+By using the `ISEMPTY` function, the engine can stop counting rows as soon as it finds the first row, which is much more efficient. The `ISEMPTY` function returns `TRUE` if the table is empty, and `FALSE` otherwise, which makes it a more efficient and readable way to check if a table is empty.
