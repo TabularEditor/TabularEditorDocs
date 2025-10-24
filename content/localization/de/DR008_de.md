@@ -1,0 +1,43 @@
+---
+uid: DR008
+category: Code actions
+sub-category: Readability
+title: Simplify multi-variable block
+author: Daniel Otykier
+updated: 2025-01-09
+---
+
+Code action `DR008` (Readability) **Simplify multi-variable block**
+
+## Description
+
+A variable block with multiple variables where each is a simple measure reference, which are only used once in the `RETURN` section without any context modifiers, should be simplified.
+
+### Example
+
+Change:
+
+```dax
+VAR _sales = [Total Sales]
+VAR _cost = [Total Cost]
+RETURN
+    _sales - _cost
+```
+
+To:
+
+```dax
+[Total Sales] - [Total Cost]
+```
+
+## Why is Tabular Editor suggesting this?
+
+A common pattern in DAX is to declare a variable for each measure that is used in a calculation. This is a good practice when the value of a measure is needed in multiple places in the calculation (for performance reasons). However, when each such variable is used exactly once in the `RETURN` part of the code, in an evaluation context that would not change the result of the measure, there is no need to declare the variables at all. Instead, referencing the measures directly in the calculation should be preferred to make the code more concise and easier to read.
+
+## Remarks:
+
+The [DAX Debugger in Tabular Editor 3](xref:dax-debugger) will show the values of measures used in the calculation within the **Locals** view. This makes it easy to inspect the values of the measures during debugging, even when their values are not stored in variables.
+
+## Related to:
+
+- [DR007 - Simplify 1-variable block](xref:DR007)
