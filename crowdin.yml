@@ -1,0 +1,6 @@
+files:
+  - source: /content/**/*.md
+    ignore:
+      - /**/TOC.md
+      - /content/localization/*.*
+    translation: /content/localization/%two_letters_code%/%file_name%_%two_letters_code%.%file_extension%
