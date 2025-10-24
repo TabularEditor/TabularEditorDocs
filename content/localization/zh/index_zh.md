@@ -1,46 +1,95 @@
 ---
-uid: onboarding-te3
-title: Welcome
+title: Tabular Editor 3
 author: Daniel Otykier
 ---
 
-# Welcome
+# Tabular Editor 3
 
-<div style="padding:56.25% 0 0 0;position:relative;"><iframe src=https://player.vimeo.com/video/664699927?h=57bde801c7&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479 frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Introduction to Tabular Editor 3"></iframe></div><script src=https://player.vimeo.com/api/player.js></script>
+This is the documentation site for Tabular Editor 3 - the ultimate productivity tool for Analysis Services and Power BI data models.
 
-**Thank you for choosing Tabular Editor 3!**
+Use the menu on the left side to navigate between topics.
 
-To help you get the most out of the tool, we have collected all of our onboarding material in this onboarding guide, that we hope you will enjoy. We recommend all new users of Tabular Editor 3 to read through this guide, skipping any topics that they are already familiar with.
+## Installation
+
+Download the latest version of Tabular Editor 3 from our [downloads page](xref:downloads).
+
+## Prerequisites
+
+None.
+
+## System requirements
+
+- **Operating system:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 or newer
+- **.NET Framework:** [4.7.2](https://dotnet.microsoft.com/download/dotnet-framework)
+
+## Activating your installation
+
+Tabular Editor 3 is commercial software. Visit our [home page](https://tabulareditor.com) for pricing details and purchase options. If you haven't previously used Tabular Editor 3 you are eligible to a free 30-day trial.
+
+The first time you launch Tabular Editor 3 on a new machine, you are prompted to activate the product.
+
+![Product activation](~/content/assets/images/product-activation.png)
+
+### Activating using an existing license key
+
+Once you purchase a license for Tabular Editor 3, you should receive an e-mail with a 25-character string which is your license key. When prompted, enter the license key and hit "Next >" to activate the product.
+
+![Enter License Key](~/content/assets/images/enter-license-key.png)
 
 > [!NOTE]
-> Some articles in this guide reference Tabular Editor 2, specifically the Command-Line Interface (CLI), for purposes of automated deployment and testing. A standalone CLI application to accompany Tabular Editor 3 is planned for release at a later time.
+> For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
 
-As this training material is focused on the Tabular Editor product, we assume that you already have a basic understanding of tabular data modeling (using either Power BI Desktop, Visual Studio or Tabular Editor 2.x). If you are new to tabular data modeling, we highly recommend looking into some of the training material and courses offered by third parties such as [sqlbi.com](https://sqlbi.com).
+### Requesting a trial license
 
-**Topics covered in this guide:**
+If you haven't used Tabular Editor 3 before, you are eligible to a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
 
-- @general-introduction
-  - @installation-activation-basic
-  - @migrate-from-vs
-  - @migrate-from-desktop
-  - @migrate-from-te2
-- @parallel-development
-  - @optimizing-workflow-workspace-mode
-  - @powerbi-cicd
-  - @as-cicd
-- @boosting-productivity-te3
-  - @importing-tables-data-modeling
-  - @refresh-preview-query
-  - @creating-and-testing-dax
-  - @dax-script-introduction
-  - @bpa
-  - @cs-scripts-and-macros
-  - @personalizing-te3
+> [!NOTE]
+> Tabular Editor ApS will not sent unsolicited e-mails or forward your e-mail address to third parties, when signing up for a 30-day trial license. View our @privacy-policy for more information.
 
-**Additional resources:**
+### Changing a license key
 
-- [TE3 reference docs](xref:getting-started)
-- @downloads
-- [Dedicated support (Enterprise Edition customers only)](mailto:support@tabulareditor.com)
-- [Community support](https://github.com/TabularEditor/TabularEditor3/issues)
-- [Community discussions](https://github.com/TabularEditor/TabularEditor3/discussions)
+When Tabular Editor 3 is activated, you may change your license key in the Help menu by choosing "About Tabular Editor".
+
+![About Te3](~/content/assets/images/about-te3.png)
+
+In the dialog, select "Change license key". Note that this option is only available if no model is loaded in Tabular Editor. IF you already loaded a model you can close it under File > Close model.
+
+#### Registry details
+
+Tabular Editor 3 uses the Windows Registry to store activation details.
+
+To view the current license key assigned to the machine, run the following command in the Windows Command Prompt (Start > Run > cmd.exe):
+
+```cmd
+REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
+```
+
+You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` to view and modify the **LicenseKey** and **User** values.
+
+A system administrator may also proactively assign Tabular Editor 3 licenses to a machine by specifying the **LicenseKey** and **User** values under each user’s `SOFTWARE\Kapacity\Tabular Editor 3` registry key.
+
+![Registry Editor](~/content/assets/images/registry-editor.png)
+
+### Changing a license key through the registry
+
+If, for any reason, you are unable to change the license key using the procedure outlined above, you can always reset the license assigned to Tabular Editor 3 by using the Registry Editor:
+
+1. Close all instances of Tabular Editor 3.
+2. Open the Registry Editor in Windows (Start > Run > regedit.msc).
+3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above).
+4. Delete all values within this key.
+5. Close the Registry Editor and restart Tabular Editor 3.
+
+Alternatively, run the following command in a Windows Command Prompt (Start > Run > cmd.exe):
+
+```cmd
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
+```
+
+The next time you launch Tabular Editor 3, you will be prompted for a license key, just as when the tool was first installed on the machine.
+
+## Next steps
+
+- [Overview of Tabular Editor 3's user interface](xref:user-interface)
+- [What's new in Tabular Editor 3](whats-new.md)
+- [Tabular Editor 3 Onboarding Guide](xref:onboarding-te3)
