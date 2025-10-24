@@ -1,0 +1,48 @@
+---
+uid: DR006
+category: Code actions
+sub-category: Readability
+title: Move constant aggregation to variable
+author: Daniel Otykier
+updated: 2025-01-09
+---
+
+Code action `DR006` (Readability) **Move constant aggregation to variable**
+
+## Description
+
+When an aggregation function is used inside an iterator or a scalar predicate, the aggregation produces the same result for every row of the iteration, and therefore the aggregation could be moved to a DAX variable outside of the iteration.
+
+### Example
+
+Change:
+
+```dax
+CALCULATE(
+    [Total Sales],
+    'Date'[Date] = MAX('Date'[Date])
+)
+```
+
+To:
+
+```dax
+VAR _maxDate = MAX('Date'[Date]) 
+RETURN
+    CALCULATE(
+        [Total Sales], 
+        'Date'[Date] = _maxDate
+    )
+```
+
+## Why is Tabular Editor suggesting this?
+
+A common point of confusion for new DAX developers is the concept of row context and filter context. When an aggregation is used inside an iterator or a scalar predicate, the aggregation produces the same result for every row of the iteration. This is what enables syntax such as `'Date'[Date] = MAX('Date'[Date])`. While this syntax works and is efficient, it can be confusing to new developers - especially those with a SQL background, where this kind of syntax would be considered an error.
+
+Historically, variables were not supported in DAX, so the only way to achieve this kind syntax was to use the aggregation directly in the iterator. However, with the introduction of variables in DAX, it is now possible to move the aggregation to a variable outside of the iteration. This makes the code more readable and easier to understand for new developers. It also makes it easier to debug the code, as you can inspect the value of the variable outside of the iteration.
+
+## Remarks
+
+By default, Tabular Editor uses `_` as a prefix for variables. You can change the prefix under **Tools > Preferences > DAX Editor > Code Actions**.
+
+The name assigned to the variable is the concatenation of the aggregation function and the column name. If the variable name is not unique within the scope, a number is appended to make it unique.
