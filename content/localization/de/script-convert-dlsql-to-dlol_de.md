@@ -1,6 +1,6 @@
 ---
 uid: script-convert-dlsql-to-dlol
-title: Convert Direct Lake on SQL to OneLake
+title: Direct Lake auf SQL zu OneLake konvertieren
 author: Daniel Otykier
 updated: 2025-06-20
 applies_to:
@@ -9,37 +9,38 @@ applies_to:
     - version: 3.x
 ---
 
-# Convert Direct Lake on SQL to OneLake
+# Direct Lake auf SQL zu OneLake konvertieren
 
-## Script Purpose
+## Skriptzweck
 
-This script converts a model that uses Direct Lake on SQL (DL/SQL) to Direct Lake on OneLake (DL/OL). As laid out in the [Direct Lake guidance article](xref:direct-lake-guidance), this is a simple matter of updating the M query on the Shared Expression used by the Direct Lake partitions on the model, to use the [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) connector instead of the [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database) connector.
+Dieses Skript konvertiert ein Modell, das Direct Lake auf SQL (DL/SQL) verwendet, zu Direct Lake auf OneLake (DL/OL). Wie im [Artikel zur Direct Lake-Anleitung](xref:direct-lake-guidance) dargelegt, geht es einfach darum, die M-Abfrage für den freigegebenen Ausdruck, der von den Direct Lake-Partitionen im Modell verwendet wird, zu aktualisieren, um den Connector [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) statt des Connectors [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database) zu verwenden.
 
-## Prerequisites
+## Voraussetzungen
 
-You will need the **Workspace ID** as well as the **Resource ID** of your Fabric Warehouse or Lakehouse. Both are GUIDs that are part of the URL when navigating to the Warehouse or Lakehouse in the Fabric portal:
+Sie benötigen die **Workspace-ID** sowie die **Ressourcen-ID** Ihres Fabric Warehouse oder Lakehouse. Beide sind GUIDs, die Teil der URL sind, wenn Sie im Fabric-Portal zum Warehouse oder Lakehouse navigieren:
 
 ![Lakehouse Warehouse URL](~/content/assets/images/lakehouse-warehouse-url.png)
 
-In the screenshot above, the **Workspace ID** of the lakehouse is highlighted in blue, while the **Resource ID** is highlighted in green.
+Im obigen Screenshot ist die **Workspace-ID** des Lakehouse blau hervorgehoben, während die **Ressourcen-ID** grün hervorgehoben ist.
 
-## Script
+## Skript
 
-### Convert Direct Lake on SQL to OneLake
+### Direct Lake auf SQL zu OneLake konvertieren
 
 ```csharp
 // ==================================================================
-// Convert Direct Lake on SQL to OneLake
+// Direct Lake auf SQL zu OneLake konvertieren
 // -------------------------------------
 // 
-// This script detects if the current model uses Direct Lake on SQL
-// and suggests to upgrade the model to Direct Lake on OneLake.
+// Dieses Skript erkennt, ob das aktuelle Modell Direct Lake auf SQL
+// verwendet, und empfiehlt ein Upgrade des Modells auf Direct Lake
+// auf OneLake.
 //
-// You will need the Workspace ID and the ID of your Fabric Warehouse
-// or Lakehouse (both are GUIDs).
+// Sie benötigen die Workspace-ID und die ID Ihres Fabric Warehouse
+// oder Lakehouse (beide sind GUIDs).
 // ==================================================================
 
-// Find the Shared Expression that is being used by EntityPartitions on the model:
+// Finden Sie den freigegebenen Ausdruck, der von EntityPartitions im Modell verwendet wird:
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -49,13 +50,13 @@ var expressionSource = partition == null ? null : partition.ExpressionSource;
 
 if (expressionSource == null)
 {
-    Warning("Your model does not seem to contain any tables in Direct Lake mode.");
+    Warning("Ihr Modell scheint keine Tabellen im Direct Lake-Modus zu enthalten.");
     return;
 }
 
 if (!expressionSource.Expression.Contains("Sql.Database"))
 {
-    Warning("This model is not configured for Direct Lake over SQL.");
+    Warning("Dieses Modell ist nicht für Direct Lake über SQL konfiguriert.");
     return;
 }
 
@@ -74,12 +75,12 @@ expressionSource.Expression = mTemplate.Replace("%workspaceId%", promptDialog.Wo
 if(!string.IsNullOrEmpty(Model.Collation))
 {
     Model.Collation = null;
-    Info("Model successfully converted to Direct Lake on OneLake. You may need to deploy it as a new semantic model, since the model collation was modified.");
+    Info("Modell erfolgreich zu Direct Lake auf OneLake konvertiert. Sie müssen es möglicherweise als neues semantisches Modell bereitstellen, da die Modellsortierung geändert wurde.");
 }
 else
-    Info("Model successfully converted to Direct Lake on OneLake.");
+    Info("Modell erfolgreich zu Direct Lake auf OneLake konvertiert.");
 
-// UI code below this line:
+// UI-Code unter dieser Zeile:
 public class UrlNameDialog : Form
 {
     public TextBox WorkspaceId { get; private set; }
@@ -88,7 +89,7 @@ public class UrlNameDialog : Form
 
     public UrlNameDialog()
     {
-        Text = "Convert Direct Lake on SQL to OneLake";
+        Text = "Direct Lake auf SQL zu OneLake konvertieren";
         AutoSize = true;
         AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterParent;
@@ -105,12 +106,12 @@ public class UrlNameDialog : Form
         Controls.Add(mainLayout);
 
         // Workspace ID
-        mainLayout.Controls.Add(new Label { Text = "Workspace ID (GUID):", AutoSize = true });
+        mainLayout.Controls.Add(new Label { Text = "Workspace-ID (GUID):", AutoSize = true });
         WorkspaceId = new TextBox { Width = 1000 };
         mainLayout.Controls.Add(WorkspaceId);
 
         // Resource ID
-        mainLayout.Controls.Add(new Label { Text = "Fabric Warehouse / Lakehouse ID (GUID):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
+        mainLayout.Controls.Add(new Label { Text = "Fabric Warehouse / Lakehouse-ID (GUID):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
         ResourceId = new TextBox { Width = 1000 };
         mainLayout.Controls.Add(ResourceId);
 
@@ -124,7 +125,7 @@ public class UrlNameDialog : Form
         };
 
         okButton = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Enabled = false };
-        var cancelButton = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true };
+        var cancelButton = new Button { Text = "Abbrechen", DialogResult = DialogResult.Cancel, AutoSize = true };
         buttonPanel.Controls.Add(okButton);
         buttonPanel.Controls.Add(cancelButton);
 
@@ -144,10 +145,10 @@ public class UrlNameDialog : Form
 }
 ```
 
-### Explanation
+### Erklärung
 
-The script first attempts to locate an EntityPartition that is configured for Direct Lake mode and has an Expression Source (a reference to a Shared Expression). If no such partition is found, it displays a warning message and exits. Moreover, the referenced Shared Expression must specify the `Sql.Database` connector, which indicates that the model is currently using Direct Lake on SQL.
+Das Skript versucht zunächst, eine EntityPartition zu finden, die für den Direct Lake-Modus konfiguriert ist und eine Expression Source (einen Verweis auf einen freigegebenen Ausdruck) aufweist. Wenn keine solche Partition gefunden wird, zeigt es eine Warnmeldung an und wird beendet. Darüber hinaus muss der referenzierte freigegebene Ausdruck den Connector `Sql.Database` angeben, was darauf hinweist, dass das Modell derzeit Direct Lake auf SQL verwendet.
 
-Once the script confirms that the model is using Direct Lake on SQL, it prompts the user to input the **Workspace ID** and **Resource ID** of the Fabric Warehouse or Lakehouse. The script then replaces the `Sql.Database` connector in the Shared Expression with the `AzureStorage.DataLake` connector, using the provided IDs.
+Sobald das Skript bestätigt, dass das Modell Direct Lake auf SQL verwendet, fordert es den Benutzer auf, die **Workspace-ID** und **Ressourcen-ID** des Fabric Warehouse oder Lakehouse einzugeben. Das Skript ersetzt dann den Connector `Sql.Database` im freigegebenen Ausdruck durch den Connector `AzureStorage.DataLake` unter Verwendung der bereitgestellten IDs.
 
-Finally, if the model has a collation set, it clears it, as this change requires a new collation. The script then informs the user that the model has been successfully converted to Direct Lake on OneLake.
+Abschließend löscht das Skript die Sortierung des Modells, falls diese gesetzt ist, da diese Änderung eine neue Sortierung erfordert. Das Skript informiert den Benutzer dann, dass das Modell erfolgreich zu Direct Lake auf OneLake konvertiert wurde.
