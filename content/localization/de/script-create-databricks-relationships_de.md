@@ -1,6 +1,6 @@
 ---
 uid: script-create-databricks-relationships
-title: Create Databricks Relationships
+title: Databricks-Beziehungen erstellen
 author: Johnny Winter
 updated: 2025-09-04
 applies_to:
@@ -9,20 +9,20 @@ applies_to:
     - version: 3.x
 ---
 
-# Create Databricks Relationships
+# Databricks-Beziehungen erstellen
 
-## Script Purpose
+## Zweck des Skripts
 
-This script was created as part of the Tabular Editor x Databricks series. In Unity Catalog it is possible to define primary and foreign key relationships between tables. This script can re-use this information to automatically detect and create relationships in Tabular Editor. Whilst importing the relationships, the script will also hide primary and foreign keys and set IsAvailableInMDX to false (with the exception of DateTime type primary keys). Primary keys are also marked as IsKey = TRUE in the semantic model. <br></br>
+Dieses Skript wurde als Teil der Tabular Editor x Databricks Serie erstellt. In Unity Catalog ist es möglich, Primär- und Fremdschlüsselbeziehungen zwischen Tabellen zu definieren. Dieses Skript kann diese Informationen wiederverwenden, um Beziehungen in Tabular Editor automatisch zu erkennen und zu erstellen. Beim Importieren der Beziehungen blendet das Skript auch Primär- und Fremdschlüssel aus und setzt IsAvailableInMDX auf false (mit Ausnahme von Primärschlüsseln vom Typ DateTime). Primärschlüssel werden im semantischen Modell auch als IsKey = TRUE gekennzeichnet. <br></br>
 
 > [!NOTE]
-> This script requires the Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
-> Each run of the script will prompt the user for a Databricks Personal Access Token. This is required to authenticate to Databricks.
-> The script utilises the information_schema tables in Unity Catalog to retrieve relationship information, so you may need to double check with your Databricks administrator to make sure you have permission to query these tables. <br></br>
+> Dieses Skript erfordert die Installation des Simba Spark ODBC Treibers (Download von https://www.databricks.com/spark/odbc-drivers-download)
+> Jede Ausführung des Skripts fordert den Benutzer auf, ein Databricks Personal Access Token einzugeben. Dies ist erforderlich, um sich bei Databricks zu authentifizieren.
+> Das Skript nutzt die information_schema Tabellen in Unity Catalog, um Beziehungsinformationen abzurufen. Möglicherweise müssen Sie sich mit Ihrem Databricks Administrator absprechen, um sicherzustellen, dass Sie die Berechtigung zum Abfragen dieser Tabellen haben. <br></br>
 
-## Script
+## Skript
 
-### Create Databricks Relationships
+### Databricks-Beziehungen erstellen
 
 ```csharp
 /*
@@ -586,25 +586,25 @@ Please check the following prequisites:
 }
 ```
 
-### Explanation
+### Erklärung
 
-The script uses WinForms to prompt for a Databricks personal access token, used to authenticate to Databricks. For each selected table, the script retrieves the Databricks connection string information and schema and table name from the M query in the selected table's partition. Using the Spark ODBC driver it then sends a SQL query to Databricks that queries the information_schema tables to find any foreign key relationships for the table that are defined in Unity Catalog. For each row returned in the SQL query, the script looks for matching table and column names in the model and where a relationship does not already exist, a new one is created. For role playing dimensions, where the same table might have multiple foreign keys relating to a single table, the first relationship detected will be the active one, and all other subsequent relationships are created as inactive. The script will also hide primary and foreign keys and set IsAvailableInMDX to false (with the exception of DateTime type primary keys). Primary keys are also marked as IsKey = TRUE in the semantic model. After the script has run for each selected table, a dialogue box will appear showing how many new relationships were created.
+Das Skript verwendet WinForms, um einen persönlichen Databricks-Zugriffstoken zur Authentifizierung bei Databricks anzufordern. Für jede ausgewählte Tabelle ruft das Skript die Databricks-Verbindungszeichenfolgeninformationen sowie den Schema- und Tabellennamen aus der M-Abfrage in der Partition der ausgewählten Tabelle ab. Mit dem Spark ODBC-Treiber sendet es dann eine SQL-Abfrage an Databricks, die die information_schema-Tabellen abfragt, um alle in Unity Catalog definierten Fremdschlüsselbeziehungen für die Tabelle zu finden. Für jede in der SQL-Abfrage zurückgegebene Zeile sucht das Skript nach übereinstimmenden Tabellen- und Spaltennamen im Modell und erstellt ggf. eine neue Beziehung, falls noch keine vorhanden ist. Bei Rollenabspiel-Dimensionen, bei denen dieselbe Tabelle mehrere Fremdschlüssel mit Bezug zu einer einzelnen Tabelle haben könnte, wird die erste erkannte Beziehung die aktive sein, und alle nachfolgenden Beziehungen werden als inaktiv erstellt. Das Skript blendet auch Primär- und Fremdschlüssel aus und setzt IsAvailableInMDX auf false (mit Ausnahme von DateTime-Primärschlüsseln). Primärschlüssel werden auch als IsKey = TRUE im semantischen Modell gekennzeichnet. Nach der Ausführung des Skripts für jede ausgewählte Tabelle wird ein Dialogfeld angezeigt, in dem die Anzahl der neu erstellten Beziehungen angegeben ist.
 
-## Example Output
+## Beispielausgabe
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-before.png" alt="Table relationships before running the script" style="width: 1000px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Before running the script, no relationships are defined.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-before.png" alt="Table relationships before running the script" style="width: 1000px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Abbildung 1:</strong> Vor der Ausführung des Skripts sind keine Beziehungen definiert.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-pat.png" alt="Prompt for Databricks personal access token" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> The script will prompt you for a Databricks personal access token so it can authenticate to Databricks.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-pat.png" alt="Prompt for Databricks personal access token" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Abbildung 2:</strong> Das Skript fordert Sie auf, einen persönlichen Databricks-Zugriffstoken einzugeben, damit es sich bei Databricks authentifizieren kann.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-done.png" alt="The number of new relationships created" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> After the script has run for each selected table, the number of new relationships created is displayed.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-done.png" alt="The number of new relationships created" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Abbildung 3:</strong> Nach der Ausführung des Skripts für jede ausgewählte Tabelle wird die Anzahl der neu erstellten Beziehungen angezeigt.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-after.png" alt="Table relationships after running the script" style="width: 750px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> Table relationships after running the script.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-after.png" alt="Table relationships after running the script" style="width: 750px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Abbildung 4:</strong> Tabellenbeziehungen nach Ausführung des Skripts.</figcaption>
 </figure>
 
