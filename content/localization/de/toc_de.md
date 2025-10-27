@@ -1,147 +1,77 @@
-# Introduction
+# [Common functionality](common-features.md)
 
-## @getting-started
+## [Power BI Desktop limitations](desktop-limitations.md)
 
-## @whats-new
+## [XMLA / AS connectivity](xmla-as-connectivity.md)
 
-## @editions
+## [Policies](policies.md)
 
-## @desktop-limitations-te3
+## [Save to folder](save-to-folder.md)
 
-## Power BI XMLA Endpoint
+### @tmdl-common
 
-### @powerbi-xmla
+## [Best Practice Analyzer](xref:using-bpa)
 
-### @powerbi-xmla-pbix-workaround
+### [BPA Sample Rules Expression](xref:using-bpa-sample-rules-expressions)
 
-## @proxy-settings
+## [Semantic Model Types](Semantic Model/semantic-model-types.md)
 
-# Documentation
+### [Direct Lake on SQL](Semantic Model/direct-lake-sql-model.md)
 
-## User interface
+### [Direct Query over Analysis Services](Semantic Model/direct-query-over-as.md)
 
-### @user-interface
+# C#/Advanced Scripting
 
-### @tom-explorer-view
+## @csharp-script-library
 
-### @bpa-view
+### @script-library-beginner
 
-### @messages-view
+#### @script-count-rows
 
-### @data-refresh-view
+#### @script-create-sum-measures-from-columns
 
-### @macros-view
+#### @script-create-measure-table
 
-### @find-replace
+#### @script-create-table-groups
 
-## Features
+#### @script-create-m-parameter
 
-### @csharp-scripts
+#### @script-edit-hidden-partitions
 
-### @dax-debugger
+#### @script-format-numeric-measures
 
-### @dax-editor
+#### @script-show-data-source-dependencies
 
-### @dax-optimizer-integration
+#### @create-field-parameter
 
-### @dax-scripts
+#### @script-display-unique-column-values
 
-### @dax-query
+### @script-library-advanced
 
-### @diagram-view
+#### @script-count-things
 
-### @metadata-translation-editor
+#### @script-output-things
 
-### @perspective-editor
+#### @script-create-date-table
 
-### @pivot-grid
+#### @script-create-and-replace-parameter
 
-### @table-groups
+#### @script-format-power-query
 
-### @code-actions
+#### @script-implement-incremental-refresh
 
-## Files formats
+#### @script-remove-measures-with-error
 
-### @supported-files
+#### @script-find-replace
 
-### @tmdl
+#### @script-convert-dlsql-to-dlol
 
-## @preferences
+#### @script-convert-import-to-dlol
 
-## @shortcuts
+#### @script-databricks-semantic-model-set-up
 
-## @user-options
+#### @script-create-databricks-relationships
 
-## @security-privacy
+#### @script-add-databricks-metadata-descriptions
 
-# Tutorials and walkthroughs
-
-## Connect to a Model
-
-### @workspace-mode
-
-## Create a New Model
-
-### @new-as-model
-
-### @new-pbi-model
-
-### @direct-lake-guidance
-
-## Adding Tables & Data Sources
-
-### @importing-tables
-
-### @connecting-to-azure-databricks
-
-## Configuring Data Security
-
-### @data-security-about
-
-### @data-security-setup-rls
-
-### @data-security-setup-ols
-
-### @data-security-testing
-
-## Incremental Refresh
-
-### @incremental-refresh-about
-
-### @incremental-refresh-modify
-
-### @incremental-refresh-setup
-
-### @incremental-refresh-schema
-
-### @incremental-refresh-workspace-mode
-
-## Advanced Modelling
-
-### @udfs
-
-### @calendars
-
-## Automation with C# Scripting
-
-### @creating-macros
-
-### @csharp-script-library
-
-# Troubleshooting
-
-## @locale-not-supported
-
-# Other resources
-
-## @downloads
-
-## @roadmap
-
-# Legal
-
-## @te3-eula
-
-## @third-party-notices
-
-## @privacy-policy
+## @script-helper-methods
