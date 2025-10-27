@@ -18,7 +18,7 @@ The feature lets you create reusable DAX functions that you can invoke from with
 
 Tabular Editor 3 supports UDFs starting from version 3.23.0, although we recommend using [3.23.1](xref:release-3-23-1) (or newer) to benefit from various bug fixes and improvements.
 
-For a more detailed introduction to UDFs in Tabular Editor 3, check out [this blog post](https://tabulareditor.com/blog/how-to-get-started-using-udfs-in-tabular-editor-3).
+Für eine ausführlichere Einführung in UDFs in Tabular Editor 3 lesen Sie [diesen Blogbeitrag](https://tabulareditor.com/blog/how-to-get-started-using-udfs-in-tabular-editor-3).
 
 ## Understanding UDFs
 
