@@ -1,6 +1,6 @@
 ---
 uid: script-convert-dlsql-to-dlol
-title: Convert Direct Lake on SQL to OneLake
+title: 将 Direct Lake on SQL 转换为 OneLake
 author: Daniel Otykier
 updated: 2025-06-20
 applies_to:
@@ -9,37 +9,37 @@ applies_to:
     - version: 3.x
 ---
 
-# Convert Direct Lake on SQL to OneLake
+# 将 Direct Lake on SQL 转换为 OneLake
 
-## Script Purpose
+## 脚本用途
 
-This script converts a model that uses Direct Lake on SQL (DL/SQL) to Direct Lake on OneLake (DL/OL). As laid out in the [Direct Lake guidance article](xref:direct-lake-guidance), this is a simple matter of updating the M query on the Shared Expression used by the Direct Lake partitions on the model, to use the [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) connector instead of the [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database) connector.
+此脚本将使用 Direct Lake on SQL (DL/SQL) 的模型转换为 Direct Lake on OneLake (DL/OL)。 如 [Direct Lake 指南文章](xref:direct-lake-guidance)中所述，这只需更新模型上 Direct Lake 分区使用的共享表达式上的 M 查询，以使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) 连接器替代 [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database) 连接器。
 
-## Prerequisites
+## 先决条件
 
-You will need the **Workspace ID** as well as the **Resource ID** of your Fabric Warehouse or Lakehouse. Both are GUIDs that are part of the URL when navigating to the Warehouse or Lakehouse in the Fabric portal:
+您需要 **工作区 ID** 以及 Fabric 仓库或湖屋的**资源 ID**。 两者都是 GUID，是在 Fabric 门户中导航到仓库或湖屋时 URL 的一部分：
 
 ![Lakehouse Warehouse URL](~/content/assets/images/lakehouse-warehouse-url.png)
 
-In the screenshot above, the **Workspace ID** of the lakehouse is highlighted in blue, while the **Resource ID** is highlighted in green.
+在上面的屏幕截图中，湖屋的**工作区 ID** 用蓝色突出显示，而**资源 ID** 用绿色突出显示。
 
-## Script
+## 脚本
 
-### Convert Direct Lake on SQL to OneLake
+### 将 Direct Lake on SQL 转换为 OneLake
 
 ```csharp
 // ==================================================================
-// Convert Direct Lake on SQL to OneLake
+// 将 Direct Lake on SQL 转换为 OneLake
 // -------------------------------------
 // 
-// This script detects if the current model uses Direct Lake on SQL
-// and suggests to upgrade the model to Direct Lake on OneLake.
+// 此脚本检测当前模型是否使用 Direct Lake on SQL
+// 并建议将模型升级到 Direct Lake on OneLake。
 //
-// You will need the Workspace ID and the ID of your Fabric Warehouse
-// or Lakehouse (both are GUIDs).
+// 您需要工作区 ID 和 Fabric 仓库
+// 或湖屋的 ID（两者都是 GUID）。
 // ==================================================================
 
-// Find the Shared Expression that is being used by EntityPartitions on the model:
+// 查找模型上 EntityPartitions 使用的共享表达式：
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -49,13 +49,13 @@ var expressionSource = partition == null ? null : partition.ExpressionSource;
 
 if (expressionSource == null)
 {
-    Warning("Your model does not seem to contain any tables in Direct Lake mode.");
+    Warning("您的模型似乎不包含任何 Direct Lake 模式的表。");
     return;
 }
 
 if (!expressionSource.Expression.Contains("Sql.Database"))
 {
-    Warning("This model is not configured for Direct Lake over SQL.");
+    Warning("此模型未配置为通过 SQL 的 Direct Lake。");
     return;
 }
 
@@ -74,12 +74,12 @@ expressionSource.Expression = mTemplate.Replace("%workspaceId%", promptDialog.Wo
 if(!string.IsNullOrEmpty(Model.Collation))
 {
     Model.Collation = null;
-    Info("Model successfully converted to Direct Lake on OneLake. You may need to deploy it as a new semantic model, since the model collation was modified.");
+    Info("模型已成功转换为 Direct Lake on OneLake。由于修改了模型排序规则，您可能需要将其部署为新的语义模型。");
 }
 else
-    Info("Model successfully converted to Direct Lake on OneLake.");
+    Info("模型已成功转换为 Direct Lake on OneLake。");
 
-// UI code below this line:
+// UI 代码在下面：
 public class UrlNameDialog : Form
 {
     public TextBox WorkspaceId { get; private set; }
@@ -88,7 +88,7 @@ public class UrlNameDialog : Form
 
     public UrlNameDialog()
     {
-        Text = "Convert Direct Lake on SQL to OneLake";
+        Text = "将 Direct Lake on SQL 转换为 OneLake";
         AutoSize = true;
         AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterParent;
@@ -104,17 +104,17 @@ public class UrlNameDialog : Form
         };
         Controls.Add(mainLayout);
 
-        // Workspace ID
-        mainLayout.Controls.Add(new Label { Text = "Workspace ID (GUID):", AutoSize = true });
+        // 工作区 ID
+        mainLayout.Controls.Add(new Label { Text = "工作区 ID (GUID)：", AutoSize = true });
         WorkspaceId = new TextBox { Width = 1000 };
         mainLayout.Controls.Add(WorkspaceId);
 
-        // Resource ID
-        mainLayout.Controls.Add(new Label { Text = "Fabric Warehouse / Lakehouse ID (GUID):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
+        // 资源 ID
+        mainLayout.Controls.Add(new Label { Text = "Fabric 仓库/湖屋 ID (GUID)：", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
         ResourceId = new TextBox { Width = 1000 };
         mainLayout.Controls.Add(ResourceId);
 
-        // Buttons
+        // 按钮
         var buttonPanel = new FlowLayoutPanel
         {
             Padding = new Padding(0, 20, 0, 0),
@@ -123,8 +123,8 @@ public class UrlNameDialog : Form
             AutoSize = true
         };
 
-        okButton = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Enabled = false };
-        var cancelButton = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true };
+        okButton = new Button { Text = "确定", DialogResult = DialogResult.OK, AutoSize = true, Enabled = false };
+        var cancelButton = new Button { Text = "取消", DialogResult = DialogResult.Cancel, AutoSize = true };
         buttonPanel.Controls.Add(okButton);
         buttonPanel.Controls.Add(cancelButton);
 
@@ -144,10 +144,10 @@ public class UrlNameDialog : Form
 }
 ```
 
-### Explanation
+### 说明
 
-The script first attempts to locate an EntityPartition that is configured for Direct Lake mode and has an Expression Source (a reference to a Shared Expression). If no such partition is found, it displays a warning message and exits. Moreover, the referenced Shared Expression must specify the `Sql.Database` connector, which indicates that the model is currently using Direct Lake on SQL.
+脚本首先尝试查找配置为 Direct Lake 模式且具有表达式源（对共享表达式的引用）的 EntityPartition。 如果未找到这样的分区，它会显示警告消息并退出。 此外，引用的共享表达式必须指定 `Sql.Database` 连接器，这表明模型当前使用的是 Direct Lake on SQL。
 
-Once the script confirms that the model is using Direct Lake on SQL, it prompts the user to input the **Workspace ID** and **Resource ID** of the Fabric Warehouse or Lakehouse. The script then replaces the `Sql.Database` connector in the Shared Expression with the `AzureStorage.DataLake` connector, using the provided IDs.
+脚本确认模型使用 Direct Lake on SQL 后，它会提示用户输入 Fabric 仓库或湖屋的**工作区 ID** 和**资源 ID**。 然后脚本用 `AzureStorage.DataLake` 连接器替换共享表达式中的 `Sql.Database` 连接器，并使用提供的 ID。
 
-Finally, if the model has a collation set, it clears it, as this change requires a new collation. The script then informs the user that the model has been successfully converted to Direct Lake on OneLake.
+最后，如果模型设置了排序规则，脚本会清除它，因为此更改需要新的排序规则。 脚本然后通知用户模型已成功转换为 Direct Lake on OneLake。
