@@ -1,0 +1,44 @@
+---
+uid: DI003
+category: Code actions
+sub-category: Improvements
+title: Remove table name
+author: Daniel Otykier
+updated: 2024-12-19
+---
+
+Code action `DI003` (Improvement) **Remove table name from measure references**
+
+## Description
+
+Measure references should not include the table name, as the table name is unnecessary when referencing measures.
+
+## Example
+
+Change:
+
+```dax
+'Internet Sales'[Internet Total Sales] * 1.25
+```
+
+To:
+
+```dax
+[Internet Total Sales] * 1.25
+```
+
+## Why is Tabular Editor suggesting this?
+
+In most situations, _column references_ **must** be qualified by the table name. However, for _measure references_, the table name is always optional (since measure names are always unique within a model).
+
+Thus, a best practice is to always reference measures _without_ the table name, and always reference columns _with_ the table name.
+
+By applying this practice consistently, you make your code more concise and easier to read, and you make it easier to distinguish between measure references and column references.
+
+## Remarks
+
+This code action has an **(All occurrences)** variant, which will appear when multiple sections of code can be improved. This variant will apply the code action to all relevant sections of the document at once.
+
+## Related to:
+
+- [DI004 - Add table name to column references](xref:DI004)

@@ -1,0 +1,32 @@
+---
+uid: DI013
+category: Code actions
+sub-category: Improvements
+title: Use division instead of DIVIDE
+author: Daniel Otykier
+updated: 2025-01-06
+---
+
+Code action `DI013` (Improvement) **Use division instead of DIVIDE**
+
+## Description
+
+When the 2nd argument of [`DIVIDE`](https://dax.guide/DIVIDE) is a non-zero constant, it is more efficient to use the division operator.
+
+### Example
+
+Change:
+
+```dax
+DIVIDE([Total Sales], 1.25)
+```
+
+To:
+
+```dax
+[Total Cost] / 1.25
+```
+
+## Why is Tabular Editor suggesting this?
+
+The `DIVIDE` function is a robust way to handle division by zero errors, as it returns a specific value or (Blank) if the denominator is zero. However, when the denominator is guaranteed to be non-zero, such as when dividing by a (non-zero) constant, the division operator `/` is more efficient and easier to read. By using the division operator, the code becomes more concise and easier to understand.
