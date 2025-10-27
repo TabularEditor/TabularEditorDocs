@@ -1,6 +1,6 @@
 ---
 uid: script-count-things
-title: Count Model Objects
+title: Modellobjekte zählen
 author: Kurt Buhler
 updated: 2023-02-27
 applies_to:
@@ -9,51 +9,51 @@ applies_to:
     - version: 3.x
 ---
 
-# Count Things in the Model
+# Objekte im Modell zählen
 
-## Script Purpose
+## Skriptzweck
 
-If you want to get an overview of what's in a model and how many objects there are:
+Wenn Sie einen Überblick über den Inhalt eines Modells und die Anzahl der Objekte erhalten möchten:
 
-- How many measures are in a model.
-- How many columns & calculated columns are in a model.
-- How many tables & calculated tables are in a model.
-- How many relationships, inactive relationships, etc.
+- Wie viele Maße sind in einem Modell.
+- Wie viele Spalten und berechnete Spalten sind in einem Modell.
+- Wie viele Tabellen und berechnete Tabellen sind in einem Modell.
+- Wie viele Beziehungen, inaktive Beziehungen usw.
 
-## Script
+## Skript
 
-### Count the number of model objects by Type
+### Die Anzahl der Modellobjekte nach Typ zählen
 
 ```csharp
-// This script counts objects in your model and displays them in a pop-up info box.
-// It does not write any changes to this model.
+// Dieses Skript zählt Objekte in Ihrem Modell und zeigt sie in einem Pop-up-Informationsfeld an.
+// Es nimmt keine Änderungen an diesem Modell vor.
 //
-// Use this script when you open a new model and need a 'helicopter view' on the contents.
+// Verwenden Sie dieses Skript, wenn Sie ein neues Modell öffnen und einen "Hubschrauberperspektive" auf den Inhalt benötigen.
 //
-// Count calculation groups & calculation items
+// Berechnungsgruppen und Berechnungselemente zählen
 int _calcgroups = 0;
 int _calcitems = 0;
 foreach (  var _calcgroup  in Model.CalculationGroups )
 {
     _calcgroups = _calcgroups + 1;
-    foreach (  var _item  in _calcgroup.CalculationItems )
-    {
-        _calcitems = _calcitems + 1;
-    }
+    foreach (  var _item  in _calcgroup.CalculationItems )
+    {
+        _calcitems = _calcitems + 1;
+    }
 }
 
-// Count partitions and DAX parameters
+// Partitionen und DAX-Parameter zählen
 int _partitions = 0;
 int _whatifparameters = 0;
 int _fieldparameters = 0;
 foreach (  var _table  in Model.Tables )
 {
-    foreach (  var _partition  in _table.Partitions )
-    {
+    foreach (  var _partition  in _table.Partitions )
+    {
         string _type = Convert.ToString(_partition.SourceType);
         string _exp = Convert.ToString(_partition.Expression);
         if ( _type == "M" )
-        {
+        {
             _partitions = _partitions + 1;
         }
         else if ( _type == "Calculated" && _exp.Contains("NAMEOF") )
@@ -65,10 +65,10 @@ foreach (  var _table  in Model.Tables )
             _whatifparameters = _whatifparameters + 1;
         }
             
-    }
+    }
 }
 
-// Average measure length
+// Durchschnittliche Messlänge
 decimal _numLines = 0;
 decimal _numChars = 0;
 int _measures = Model.AllMeasures.Count();
@@ -81,16 +81,16 @@ _numLines = Math.Round(_numLines / _measures, 1);
 _numChars = Math.Round(_numChars / _measures, 1);
 
 
-// Return the pop-up
-Info ( "In the model, we see the below objects:\n\n"
+// Pop-up zurückgeben
+Info ( "Im Modell sehen wir die folgenden Objekte:\n\n"
 
         + "-----------------------------------------\n"
-        + "Data Objects\n"
+        + "Datenobjekte\n"
         + "-----------------------------------------\n"
-        + " ├─ PQ Expressions: " + Convert.ToString(Model.Expressions.Count()) + "\n"
+        + " ├─ PQ-Ausdrücke: " + Convert.ToString(Model.Expressions.Count()) + "\n"
         + " │\n"
-        + " └─ Tables: " + Convert.ToString(Model.Tables.Count()) + "\n"
-        + "       ├─ Incremental Refresh Tables: " + 
+        + " └─ Tabellen: " + Convert.ToString(Model.Tables.Count()) + "\n"
+        + "       ├─ Tabellen mit inkrementeller Aktualisierung: " + 
             Convert.ToString(Model.Tables.Where(
                 _ir => 
                 Convert.ToString(_ir.EnableRefreshPolicy) 
@@ -98,7 +98,7 @@ Info ( "In the model, we see the below objects:\n\n"
                 "True").Count()) + "\n"
                 
         + "       │\n"
-        + "       ├─ Calculated Tables: " + 
+        + "       ├─ Berechnete Tabellen: " + 
             Convert.ToString(
                 Model.Tables.Where(
                     _tables => 
@@ -106,30 +106,30 @@ Info ( "In the model, we see the below objects:\n\n"
                     == 
                     "CalculatedTableColumn").Count()) + "\n"
 
-        + "       │   ├─ What if parameters: " + 
+        + "       │   ├─ What-if-Parameter: " + 
             Convert.ToString(_whatifparameters) + "\n"
-        + "       │   └─ Field parameters: " + 
+        + "       │   └─ Feldparameter: " + 
             Convert.ToString(_fieldparameters) + "\n"
         + "       │\n"
-        + "       ├─ M Partitions: " + 
+        + "       ├─ M-Partitionen: " + 
             Convert.ToString(_partitions) + "\n"
         + "       │\n"
-        + "       └─ Total Table Columns: " + 
+        + "       └─ Gesamttabellenspalten: " + 
             Convert.ToString(Model.AllColumns.Count()) + "\n\n"
 
         + "-----------------------------------------\n"
-        + "DAX Objects\n"
+        + "DAX-Objekte\n"
         + "-----------------------------------------\n"
-        + " ├─ Relationships: " + 
+        + " ├─ Beziehungen: " + 
             Convert.ToString(Model.Relationships.Count()) + "\n"
-        + " │   ├─ Bi-directional: " + 
+        + " │   ├─ Bidirektional: " + 
             Convert.ToString(Model.Relationships.Where(
                 _relationships => 
                 Convert.ToString(_relationships.CrossFilteringBehavior) 
                 == 
                 "BothDirections").Count()) + "\n"
 
-        + " │   ├─ Many-to-Many: " + 
+        + " │   ├─ Viele-zu-Viele: " + 
             Convert.ToString(Model.Relationships.Where(
                 _relationships => 
                 Convert.ToString(_relationships.FromCardinality) 
@@ -140,7 +140,7 @@ Info ( "In the model, we see the below objects:\n\n"
                 == 
                 "Many").Count()) + "\n"
 
-        + " │   ├─ One-to-One: " + 
+        + " │   ├─ Eins-zu-Eins: " + 
             Convert.ToString(Model.Relationships.Where(
                 _relationships => 
                 Convert.ToString(_relationships.FromCardinality) 
@@ -151,7 +151,7 @@ Info ( "In the model, we see the below objects:\n\n"
                 == 
                 "One").Count()) + "\n"
 
-        + " │   └─ Inactive: " + 
+        + " │   └─ Inaktiv: " + 
             Convert.ToString(Model.Relationships.Where(
                 _relationships => 
                 Convert.ToString(_relationships.IsActive) 
@@ -159,12 +159,12 @@ Info ( "In the model, we see the below objects:\n\n"
                 "False").Count()) + "\n"
 
         + " │\n"
-        + " ├─ Calculation Groups: " + 
+        + " ├─ Berechnungsgruppen: " + 
             Convert.ToString(_calcgroups) + "\n"
-        + " │   └─ Calculation Items: " + 
+        + " │   └─ Berechnungselemente: " + 
             Convert.ToString(_calcitems) + "\n" 
         + " │\n"
-        + " ├─ Calculated Columns: " + 
+        + " ├─ Berechnete Spalten: " + 
             Convert.ToString(Model.AllColumns.Where(
                 _columns => 
                 Convert.ToString(_columns.Type) 
@@ -174,31 +174,31 @@ Info ( "In the model, we see the below objects:\n\n"
         + " │\n"
         + " └─ Measures: " + 
             Convert.ToString(_measures) + "\n" 
-        + "     └─ Avg. Lines of DAX: " + 
-            Convert.ToString(_numLines) + " Lines \n" 
-        + "     └─ Avg. Chars of DAX: " + 
-            Convert.ToString(_numChars) + " Characters \n\n" 
+        + "     └─ Durchschn. DAX-Zeilen: " + 
+            Convert.ToString(_numLines) + " Zeilen \n" 
+        + "     └─ Durchschn. DAX-Zeichen: " + 
+            Convert.ToString(_numChars) + " Zeichen \n\n" 
        
         + "-----------------------------------------\n"
-        + "Other Objects\n"
+        + "Sonstige Objekte\n"
         + "-----------------------------------------\n"
-        + " ├─ Data Security Roles: " + 
+        + " ├─ Datensicherheitsrollen: " + 
             Convert.ToString(Model.Roles.Count()) + "\n"
-        + " ├─ Explicit Data Sources: " + 
+        + " ├─ Explizite Datenquellen: " + 
             Convert.ToString(Model.DataSources.Count()) + "\n"
-        + " ├─ Perspectives: " + 
+        + " ├─ Perspektiven: " + 
             Convert.ToString(Model.Perspectives.Count()) + "\n"
-        + " └─ Translations: " + 
+        + " └─ Übersetzungen: " + 
             Convert.ToString(Model.Cultures.Count()));
 ```
 
-### Explanation
+### Erklärung
 
-This snippet goes through the model and counts the different object types, displaying them in a hierarchical "node and tree" format that is manually constructed.
-You can comment out the parts that you do not need for your purposes.
+Dieses Snippet durchläuft das Modell und zählt die verschiedenen Objekttypen und zeigt sie in einem hierarchischen "Knoten- und Baum"-Format an, das manuell konstruiert ist.
+Sie können die Teile auskommentieren, die Sie nicht benötigen.
 
-## Example Output
+## Beispielausgabe
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the Info box output, that informs the user about the number of objects in the model upon script execution. If particular objects are not of interest, the user can comment them out or remove them from the script, and re-run it.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Abbildung 1:</strong> Ein Beispiel der Info-Box-Ausgabe, die den Benutzer über die Anzahl der Objekte im Modell bei der Skriptausführung informiert. Wenn bestimmte Objekte nicht relevant sind, können sie vom Benutzer auskommentiert oder aus dem Skript entfernt werden, und das Skript kann erneut ausgeführt werden.</figcaption>
 </figure>
