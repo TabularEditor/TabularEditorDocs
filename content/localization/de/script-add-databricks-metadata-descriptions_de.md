@@ -1,6 +1,6 @@
 ---
 uid: script-add-databricks-metadata-descriptions
-title: Add Databricks Metadata Descriptions
+title: Databricks-Metadatenbeschreibungen hinzufügen
 author: Johnny Winter
 updated: 2025-09-04
 applies_to:
@@ -9,20 +9,20 @@ applies_to:
     - version: 3.x
 ---
 
-# Add Databricks Metadata Descriptions
+# Databricks-Metadatenbeschreibungen hinzufügen
 
-## Script Purpose
+## Skriptzweck
 
-This script was created as part of the Tabular Editor x Databricks series. In Unity Catalog it is possible provide descriptive comments for tables and columns. This script can re-use this information to automatically populate table and column descriptions in your semantic model. <br></br>
+Dieses Skript wurde als Teil der Tabular Editor x Databricks-Serie erstellt. In Unity Catalog ist es möglich, beschreibende Kommentare für Tabellen und Spalten bereitzustellen. Dieses Skript kann diese Informationen wiederverwenden, um Tabellen- und Spaltenbeschreibungen in Ihrem semantischen Modell automatisch auszufüllen. <br></br>
 
 > [!NOTE]
-> This script requires the Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
-> Each run of the script will prompt the user for a Databricks Personal Access Token. This is required to authenticate to Databricks.
-> The script utilises the information_schema tables in Unity Catalog to retrieve relationship information, so you may need to double check with your Databricks administrator to make sure you have permission to query these tables. <br></br>
+> Dieses Skript erfordert die Installation des Simba Spark ODBC-Treibers (Download von https://www.databricks.com/spark/odbc-drivers-download)
+> Bei jeder Ausführung des Skripts werden Sie aufgefordert, ein Databricks Personal Access Token einzugeben. Dies ist erforderlich, um sich bei Databricks zu authentifizieren.
+> Das Skript nutzt die information_schema-Tabellen in Unity Catalog, um Beziehungsinformationen abzurufen. Daher müssen Sie möglicherweise mit Ihrem Databricks-Administrator überprüfen, ob Sie Berechtigung zum Abfragen dieser Tabellen haben. <br></br>
 
-## Script
+## Skript
 
-### Add Databricks Metadata Descriptions
+### Databricks-Metadatenbeschreibungen hinzufügen
 
 ```csharp
 /*
@@ -265,7 +265,7 @@ public class PowerQueryMParser
         // Source = DatabricksMultiCloud.Catalogs("hostname", "httppath", null),
         // Source = Databricks.Catalogs("hostname", "httppath", null),
         var sourcePattern =
-            @"Source\s*=\s*Databricks(?:MultiCloud)?\.Catalogs\s*\(\s*""([^""]+)""\s*,\s*""([^""]+)""\s*,\s*null\s*\)";
+            @"Source\s*=\s*Databricks(?:MultiCloud)?\.Catalogs\s*\(\s*\"([^\"]+)\"\s*,\s*\"([^\"]+)\"\s*,\s*null\s*\)"
         var sourceMatch = Regex.Match(
             mQuery,
             sourcePattern,
@@ -285,7 +285,7 @@ public class PowerQueryMParser
     {
         // Pattern to match: Database = Source{[Name="databasename",Kind="Database"]}[Data],
         var databasePattern =
-            @"Database\s*=\s*Source\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Database""\s*\]\s*}\s*\[\s*Data\s*\]";
+            @"Database\s*=\s*Source\s*{\s*\[\s*Name\s*=\s*\"([^\"]+)\"\s*,\s*Kind\s*=\s*\"Database\"\s*\]\s*}\s*\[\s*Data\s*\]"
         var databaseMatch = Regex.Match(
             mQuery,
             databasePattern,
@@ -302,7 +302,7 @@ public class PowerQueryMParser
     {
         // Pattern to match: Schema = Database{[Name="schemaname",Kind="Schema"]}[Data],
         var schemaPattern =
-            @"Schema\s*=\s*Database\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Schema""\s*\]\s*}\s*\[\s*Data\s*\]";
+            @"Schema\s*=\s*Database\s*{\s*\[\s*Name\s*=\s*\"([^\"]+)\"\s*,\s*Kind\s*=\s*\"Schema\"\s*\]\s*}\s*\[\s*Data\s*\]"
         var schemaMatch = Regex.Match(
             mQuery,
             schemaPattern,
@@ -319,7 +319,7 @@ public class PowerQueryMParser
     {
         // Pattern to match: Data = Schema{[Name="tablename",Kind="Table"]}[Data]
         var dataPattern =
-            @"Data\s*=\s*Schema\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Table""\s*\]\s*}\s*\[\s*Data\s*\]";
+            @"Data\s*=\s*Schema\s*{\s*\[\s*Name\s*=\s*\"([^\"]+)\"\s*,\s*Kind\s*=\s*\"Table\"\s*\]\s*}\s*\[\s*Data\s*\]"
         var dataMatch = Regex.Match(
             mQuery,
             dataPattern,
@@ -558,18 +558,18 @@ Either:
 }
 ```
 
-### Explanation
+### Erläuterung
 
-The script uses WinForms to prompt for a Databricks personal access token, used to authenticate to Databricks. For each selected table, the script retrieves the Databricks connection string information and schema and table name from the M query in the selected table's partition. Using the Spark ODBC driver it then sends a SQL query to Databricks that queries the information_schema tables to return the table description that is defined in Unity Catalog. This is then updated on the table description in the semantic model. A second SQL Query using the DESCRIBE command is also sent to the selected table to get column descriptions. The results of this are looped through, with descriptions added in the model. Once the script has run on each selected table, a dialogue box is displayed to show the number of descriptions updated.
+Das Skript verwendet WinForms, um ein Databricks Personal Access Token anzufordern, das zur Authentifizierung bei Databricks verwendet wird. Für jede ausgewählte Tabelle ruft das Skript die Databricks-Verbindungsinformationen und Schema- und Tabellennamen aus der M-Abfrage in der Partition der ausgewählten Tabelle ab. Mit Hilfe des Spark ODBC-Treibers sendet es dann eine SQL-Abfrage an Databricks, die die information_schema-Tabellen abfragt, um die in Unity Catalog definierte Tabellenbeschreibung zurückzugeben. Diese wird dann in der Tabellenbeschreibung des semantischen Modells aktualisiert. Eine zweite SQL-Abfrage mit dem DESCRIBE-Befehl wird auch an die ausgewählte Tabelle gesendet, um Spaltenbeschreibungen abzurufen. Die Ergebnisse werden durchlaufen, wobei Beschreibungen im Modell hinzugefügt werden. Nach der Ausführung des Skripts auf jeder ausgewählten Tabelle wird ein Dialogfeld angezeigt, das die Anzahl der aktualisierten Beschreibungen zeigt.
 
-## Example Output
+## Beispielausgabe
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-pat.png" alt="Prompt for Databricks personal access token" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> The script will prompt you for a Databricks personal access token so it can authenticate to Databricks.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-pat.png" alt="Prompt for Databricks personal access token" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Abbildung 1:</strong> Das Skript fordert Sie auf, ein Databricks Personal Access Token einzugeben, damit es sich bei Databricks authentifizieren kann.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-add-databricks-metadata-descriptions-done.png" alt="The number of descriptions updated" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> After the script has run for each selected table, the number of descriptions updated is displayed.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-add-databricks-metadata-descriptions-done.png" alt="The number of descriptions updated" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Abbildung 2:</strong> Nach der Ausführung des Skripts für jede ausgewählte Tabelle wird die Anzahl der aktualisierten Beschreibungen angezeigt.</figcaption>
 </figure>
 
 
