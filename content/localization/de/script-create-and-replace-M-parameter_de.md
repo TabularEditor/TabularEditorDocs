@@ -1,6 +1,6 @@
 ---
 uid: script-create-and-replace-parameter
-title: Create M Parameter (Auto-Replace)
+title: M Parameter erstellen (Automatische Ersetzung)
 author: Kurt Buhler
 updated: 2023-02-28
 applies_to:
@@ -8,84 +8,84 @@ applies_to:
     - version: 3.x
 ---
 
-# Create New M Parameter and Add it to Existing M Partitions
+# Neuen M Parameter erstellen und zu vorhandenen M Partitionen hinzufügen
 
-## Script Purpose
+## Skriptzweck
 
-If you want to replace a string in model M Partitions (i.e. connection string, filter condition, column name, etc.) with a parameter value. <br></br>
+Wenn Sie eine Zeichenfolge in Model M Partitionen ersetzen möchten (z. B. Verbindungszeichenfolge, Filterbedingung, Spaltenname usw.) mit einem Parameterwert. <br></br>
 
 > [!NOTE]
-> This script only works with parameters of `string` data type.
-> For other data types, please modify the variable types & parameter value appropriately. <br></br>
+> Dieses Skript funktioniert nur mit Parametern vom Datentyp `string`.
+> Für andere Datentypen ändern Sie bitte die Variablentypen und den Parameterwert entsprechend. <br></br>
 
-## Script
+## Skript
 
-### Create New M Parameter and Add it to Existing M Partitions
+### Neuen M Parameter erstellen und zu vorhandenen M Partitionen hinzufügen
 
 ```csharp
-// This script creates a new M Parameter as a 'Shared Expression'.
-// It will also find the default value in all M partitions and replace them with the parameter object name.
+// Dieses Skript erstellt einen neuen M Parameter als 'Shared Expression'.
+// Es findet auch den Standardwert in allen M Partitionen und ersetzt ihn durch den Namen des Parameterobjekts.
 //#r "System.Drawing"
 
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-// Hide the 'Running Macro' spinbox
+// Spinfeld 'Makro wird ausgeführt' ausblenden
 ScriptHelper.WaitFormVisible = false;
 
-// Initialize variables
+// Variablen initialisieren
 string _ParameterName = "New Parameter";
 string _ParameterValue = "ParameterValue";
 
-// WinForms prompt to get Parameter Name / Value input
+// WinForms-Eingabeaufforderung zum Eingeben von Parameternamen / Wert
 using (Form prompt = new Form())
 {
     Font formFont = new Font("Segoe UI", 11); 
 
-    // Prompt config
+    // Eingabeaufforderung konfigurieren
     prompt.AutoSize = true;
     prompt.MinimumSize = new Size(380, 120);
-    prompt.Text = "Create New M Parameter";
+    prompt.Text = "Neuen M Parameter erstellen";
     prompt.StartPosition = FormStartPosition.CenterScreen;
 
-    // Find: label
-    Label parameterNameLabel = new Label() { Text = "Enter Name:" };
+    // Suchen: Bezeichnung
+    Label parameterNameLabel = new Label() { Text = "Namen eingeben:" };
     parameterNameLabel.Location = new Point(20, 20);
     parameterNameLabel.AutoSize = true;
     parameterNameLabel.Font = formFont;
 
-    // Textbox for inputing the substring text
+    // Textfeld zur Eingabe des Substring-Texts
     TextBox parameterNameBox = new TextBox();
     parameterNameBox.Width = 200;
     parameterNameBox.Location = new Point(parameterNameLabel.Location.X + parameterNameLabel.Width + 20, parameterNameLabel.Location.Y - 4);
-    parameterNameBox.SelectedText = "New Parameter";
+    parameterNameBox.SelectedText = "Neuer Parameter";
     parameterNameBox.Font = formFont;
 
-    // Replace: label
-    Label parameterValueLabel = new Label() { Text = "Enter Value:" };
+    // Ersetzen: Bezeichnung
+    Label parameterValueLabel = new Label() { Text = "Wert eingeben:" };
     parameterValueLabel.Location = new Point(parameterNameLabel.Location.X, parameterNameLabel.Location.Y + parameterNameLabel.Height + 20);
     parameterValueLabel.AutoSize = true;
     parameterValueLabel.Font = formFont;
 
-    // Textbox for inputting the substring text
+    // Textfeld zur Eingabe des Substring-Texts
     TextBox parameterValueBox = new TextBox() { Left = parameterValueLabel.Right + 20, Top = parameterValueLabel.Location.Y - 4, Width = parameterNameBox.Width };
-    parameterValueBox.SelectedText = "Parameter Value";
+    parameterValueBox.SelectedText = "Parameterwert";
     parameterValueBox.Font = formFont;
 
-    // OK Button
-    Button okButton = new Button() { Text = "Create", Left = 20, Width = 75, Top = parameterValueBox.Location.Y + parameterValueBox.Height + 20 };
+    // Schaltfläche OK
+    Button okButton = new Button() { Text = "Erstellen", Left = 20, Width = 75, Top = parameterValueBox.Location.Y + parameterValueBox.Height + 20 };
     okButton.MinimumSize = new Size(75, 25);
     okButton.AutoSize = true;
     okButton.Font = formFont;
 
-    // Cancel Button
-    Button cancelButton = new Button() { Text = "Cancel", Left = okButton.Location.X + okButton.Width + 10, Top = okButton.Location.Y };
+    // Schaltfläche Abbrechen
+    Button cancelButton = new Button() { Text = "Abbrechen", Left = okButton.Location.X + okButton.Width + 10, Top = okButton.Location.Y };
     cancelButton.MinimumSize = new Size(75, 25);
     cancelButton.AutoSize = true;
     cancelButton.Font = formFont;
 
-    // Button actions
+    // Schaltflächenaktionen
     okButton.Click += (sender, e) => { _ParameterName = parameterNameBox.Text; _ParameterValue = parameterValueBox.Text; prompt.DialogResult = DialogResult.OK; };
     cancelButton.Click += (sender, e) => { prompt.DialogResult = DialogResult.Cancel; };
 
@@ -99,11 +99,11 @@ using (Form prompt = new Form())
     prompt.Controls.Add(okButton);
     prompt.Controls.Add(cancelButton);
 
-    // The user clicked OK, so perform the find-and-replace logic
+    // Der Benutzer hat auf OK geklickt, daher wird die Such- und Ersetzungslogik ausgeführt
     if (prompt.ShowDialog() == DialogResult.OK)
     {
 
-        // Creates the parameter
+        // Erstellt den Parameter
         Model.AddExpression( 
             _ParameterName, 
             @"
@@ -117,15 +117,15 @@ using (Form prompt = new Form())
         );
         
         
-        // Informs the user that the parameter was successfully created
+        // Informiert den Benutzer, dass der Parameter erfolgreich erstellt wurde
         Info ( 
-            "Successfully created a new parameter: " + @"""" +
+            "Parameter erfolgreich erstellt: " + @"""" +
             _ParameterName + @"""" +
-            "\nDefault value: " + @"""" +
+            "\nStandardwert: " + @"""" +
             _ParameterValue + @"""");
         
         
-        // Finds the parameter default value in M Partitions & replaces with the parameter name
+        // Findet den Standardwert des Parameters in M Partitionen und ersetzt ihn durch den Parameternamen
         string _Find = @"""" + _ParameterValue + @"""";
         string _Replace = @"#""" + _ParameterName + @"""";
         
@@ -143,58 +143,58 @@ using (Form prompt = new Form())
                     {
                         _p.Expression = _p.Expression.Replace( _Find, _Replace );
         
-                        // Tracks which M partitions were replaced (and how many)
+                        // Verfolgt, welche M Partitionen ersetzt wurden (und wie viele)
                         _NrReplacements = _NrReplacements + 1;
                         _ReplacementsList.Add( _p.Name );
                     }
         
-                // Counts the total # M Partitions
+                // Zählt die Gesamtzahl der M Partitionen
                 _NrMPartitions = _NrMPartitions + 1;
                 }
             }
         }
         
         
-        // Makes a bulleted list of all the M partitions that were replaced
+        // Erstellt eine Aufzählungsliste aller M Partitionen, die ersetzt wurden
         string _ReplacedPartitions = " • " + String.Join("\n • ", _ReplacementsList );
         
         
-        // Informs 
-        //      - Whether the Find & Replace was successful
-        //      - How many M partitions were replaced
-        //      - Which M partitions had the Find & Replace done
+        // Informiert 
+        //      - Ob die Such- und Ersetzung erfolgreich war
+        //      - Wie viele M Partitionen ersetzt wurden
+        //      - Welche M Partitionen mit der Such- und Ersetzung durchgeführt wurden
         Info (
-            "Successfully replaced\n\n " +
+            "Erfolgreich ersetzt\n\n " +
             _Find + 
-            "\n\n with: \n\n" + 
+            "\n\n mit: \n\n" + 
             _Replace + 
             "\n\n in " + 
             Convert.ToString(_NrReplacements) +
-            " of " +
+            " von " +
             Convert.ToString(_NrMPartitions) +  
-            " M Partitions:\n" +
+            " M Partitionen:\n" +
             _ReplacedPartitions
         );
 
     }
     else
     {
-    Error ( "Cancelled input! Ended script without changes.");
+    Error ( "Eingabe abgebrochen! Skript ohne Änderungen beendet.");
     }
 }
 ```
 
-### Explanation
+### Erklärung
 
-This snippet opens a dialogue box for the user to enter the parameter name and value, then creates the parameter as a 'Shared Expression' in the model.
-It will then search all M partitions for the default value, replacing them with the `#"ParameterName"`.
+Dieser Codeausschnitt öffnet ein Dialogfeld, in dem der Benutzer den Parameternamen und den Wert eingeben kann, und erstellt dann den Parameter als 'Shared Expression' im Modell.
+Anschließend werden alle M Partitionen nach dem Standardwert durchsucht und durch `#"ParameterName"` ersetzt.
 
-## Example Output
+## Beispielausgabe
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-m-parameter.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> The pop-up dialog that appears when running the script, prompting for the parameter name and value.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-m-parameter.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Abbildung 1:</strong> Das Popup-Dialogfeld, das beim Ausführen des Skripts angezeigt wird und zur Eingabe des Parameternamens und Werts auffordert.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Confirmation dialog illustrating that the parameter has been created, and the corresponding value substring has been replaced in all M Partition expressions. For parameters of other types, adjust the C# code, appropriately.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Abbildung 2:</strong> Bestätigungsdialog, der zeigt, dass der Parameter erstellt wurde und die entsprechende Wertteilzeichenfolge in allen M Partitionsausdrücken ersetzt wurde.</figcaption> Passen Sie für Parameter anderer Typen den C#-Code entsprechend an.</figcaption>
 </figure>
