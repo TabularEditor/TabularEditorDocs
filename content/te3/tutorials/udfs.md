@@ -182,6 +182,10 @@ UDFs appear in the **DAX Dependencies** (Shift+F12) view, showing both:
 - **Objects that depend on the function**: Which measures, columns, etc. use the UDF
 - **Objects the function depends on**: Which measures, columns, etc. the UDF references
 
+### Batch Rename
+
+When you select multiple UDFs in the TOM Explorer, you can use the **Batch Rename** (F2) option from the right-click context menu to rename them all at once, using search-and-replace patterns, and optionally regular expressions.
+
 ### Namespaces
 
 The concept of "namespace" doesn't exist in DAX, yet the recommendation is to name UDFs in such a way that ambiguities are avoided and that the origin of the UDF is clear. For example `DaxLib.Convert.CelsiusToFahrenheit` (using '.' as namespace separators). When a UDF is named this way, the TOM Explorer will display the UDF in a hierarchy based on the names. You can toggle the display of UDFs by namespace using the **Group User-Defined Functions by namespace** tuggle button in the toolbar above the TOM Explorer (note, this button is only visible when working with a model using Compatibility Level 1702 or higher).
