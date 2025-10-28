@@ -56,8 +56,6 @@ You may also initiate a refresh at the model level through the **Model > Refresh
 
 While a refresh is in progress you can continue work on your data model, querying and previewing data or queueing new data refresh operations according to this article. However, you will not be able to save model changes to Analysis Services until the all data refresh operations complete.
 
-> [!NOTE]
-> Currently, [Power BI Desktop does not support refresh operations triggered from external tools](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). For this reason, Tabular Editor 3 hides these options when connected to an instance of Power BI Desktop. You can override this behavior by enabling **Tools > Preferences > Allow unsupported modeling operations**.
 
 ## Supported refresh operations
 
