@@ -188,6 +188,9 @@ The concept of "namespace" doesn't exist in DAX, yet the recommendation is to na
 
 In Tabular Editor, UDFs also have a "Namespace" *property*, allowing you to customize the namespace of each UDF individually, without changing the actual UDF object name. This is very similar to Display Folders for measures. Setting a different value for the "Namespace" property, than would could be inferred from the UDF name, is useful for example if you want to batch rename (F2) multiple UDFs to get rid of the namespaces in their names, but you still want to keep them nicely organized in the TOM Explorer.
 
+> [!NOTE]
+> This organizational feature in Tabular Editor doesn't affect DAX code. You still need to type out the full UDF name when calling a UDF, including any namespace parts.
+
 ## Best Practices
 
 ### Naming Conventions
