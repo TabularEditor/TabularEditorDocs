@@ -65,7 +65,7 @@ Marks the table as a date table, enabling time intelligence features. Requires t
 Visualizes dependencies between the selected table and other model objects. Can also be accessed via shortcut `Shift+F12`.
 
 - **Export script**:  
-Exports the selected object as a TMSL or TMDL script for use in deployment or source control.
+Exports the selected objects as a TMSL or TMDL script for use in deployment or source control.
 
 - **Macro Menus**:  
 Macros can be placed into folders and run against the selected object. In the example above the user has a Modelling and Analysis folder for Macro scripts on table objects.
@@ -75,9 +75,6 @@ Standard clipboard operations. Use these to move, duplicate, or remove model obj
 
 - **Properties**:  
 Opens the Properties pane for the selected object. Shortcut: `Alt+Enter`. Used to inspect and edit metadata, expressions, formatting, and visibility settings.
-
-> [!IMPORTANT]
-> In Tabular Editor 3 Desktop Edition some options are disabled and greyed-out. This is due to the limitations of using Tabular Editor has an external tool. For more information see @desktop-limitations 
 
 ### Show Info Columns
 The TOM Explorer allows for toggling on additional info columns about the data model objects. This can be done with the short cut `CTRL+7`
@@ -104,23 +101,33 @@ The toolbar allow you to show and hide different types of objects, toggling pers
    Controls whether partitions are visible for tables.  
    **Shortcut:** `Ctrl+4`
 
-5. **Show/Hide Display Folders**  
+5. **Show/Hide Calendars**  
+   Controls whether calendars are visible.  
+   **Shortcut:** `Ctrl+4`
+
+6. **Show/Hide Display Folders**  
    Enables or disables the display of folder organization within tables.  
    **Shortcut:** `Ctrl+5`
 
-6. **Show/Hide Hidden Objects**  
+7. **Group User-Defined Functions by Namespace
+   When enabled, DAX User-Defined Functions are grouped hierarchically by [namespace](xref:udfs#namespaces), rather than being shown as a flat list.
+
+8. **Show/Hide Hidden Objects**  
    Toggles whether hidden objects are shown.  
    **Shortcut:** `Ctrl+6`
 
-7. **Show/Hide Info Columns**  
+9. **Show/Hide Info Columns**  
    Shows or hides metadata columns, such as data types or object status.  
    **Shortcut:** `Ctrl+7`
 
-8. **Perspective Selector**  
+10. **Perspective Selector**  
    Drop-down to choose a specific perspective. Only objects in the selected perspective will be shown in the TOM Explorer.
 
-9. **Language Selector**  
+11. **Language Selector**  
    Allows switching between different languages for model metadata localization.
 
-10. **Search Bar**  
+12. **Colapse All**  
+   Collaps all nodes in the TOM Explorer tree view. 
+
+13. **Search Bar**  
    Provides real-time filtering and navigation within the TOM Explorer. Type to search across all visible model objects.

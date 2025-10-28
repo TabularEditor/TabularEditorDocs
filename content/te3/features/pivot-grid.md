@@ -68,7 +68,7 @@ These actions are:
 - **Clear**: Removes all fields from the Pivot Grid.
 - **Show empty values on columns**: Toggles whether empty values should be shown in the Pivot Grid, for fields that are added to the Pivot Grids Column Area.
 - **Show empty values on rows**: Toggles whether empty values should be shown in the Pivot Grid, for fields that are added to the Pivot Grids Row Area.
-- **Show fields**: Display and move focus to the Field List.
+- **Field List**: Toggle Field list on/off.
 
 ## Field List
 
@@ -150,11 +150,11 @@ The Pivot Grid has a few more features that are useful to know about:
 
 - If you right-click on a field, you will have the option to **Go to** that field. This brings the TOM Explorer into focus, with the equivalent model object selected. For measures and calculated columns, the **Expression Editor** will be brought into focus, with the DAX expression of the measure displayed.
 - If you right-click on a cell in the Pivot Grid, you can select the option to **Debug this value**. This will launch the [**DAX Debugger**](xref:dax-debugger) starting from the specific measure and filter context that produced the value in the cell.
+- While a Pivot Grid is **refreshing**, certain toolbar items are disabled and context menu actions are temporarily unavailable.
 
 ## Limitations and known issues
 
 Below is a list of known limitations and issues with Pivot Grids in Tabular Editor 3.16.0, which we are working to address in future releases:
 
 - Format rules (such as icon sets, data bars, etc.) are not properly persisted when saving a Pivot Grid layout as a `.te3pivot` file.
-- The .te3pivot file does not currently store the state of the "Show empty values on columns" and "Show empty values on rows" options.
 - If you open a .te3pivot file on a model different from the one the layout was saved from, fields that do not exist in the current model will be removed from the layout. Hitting Save (Ctrl+S) will save the layout with the removed fields removed. We may change this behavior in a future release so that the .te3pivot file is not overwritten without explicit confirmation.
