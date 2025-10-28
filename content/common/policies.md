@@ -31,6 +31,7 @@ Below is a listing of the policies that can be controlled. To enforce one or mor
 | DisableDaxOptimizer | **(TE3 Only)** The DAX Optimizer integration feature will not be available |
 | DisableDaxOptimizerUpload | **(TE3 Only)** Users will not be allowed to upload VPAX files through the DAX Optimizer integration feature. Implicitly enforced when `DisableDaxOptimizer` is enforced. |
 | RequireDaxOptimizerObfuscation | **(TE3 Only)** Users will not be allowed to upload un-obfuscated (clear text) VPAX files through the DAX Optimizer integration feature. Implicitly enforced when `DisableDaxOptimizer` or `DisableDaxOptimizerUpload` is enforced. |
+| DisableDaxPackageManager | **(TE3 Only)** The DAX Package Manager feature will not be available. |
 
 ## Disabling web communications
 
