@@ -109,9 +109,8 @@ The toolbar allow you to show and hide different types of objects, toggling pers
    Enables or disables the display of folder organization within tables.  
    **Shortcut:** `Ctrl+5`
 
-7. **Show/Hide User Defined Functions**  
-   Enables or disables the display of DAX user defined functions in the TOM Explorer.  
-   **Shortcut:** `Ctrl+5`
+7. **Group User-Defined Functions by Namespace
+   When enabled, DAX User-Defined Functions are grouped hierarchically by [namespace](xref:udfs#namespaces), rather than being shown as a flat list.
 
 8. **Show/Hide Hidden Objects**  
    Toggles whether hidden objects are shown.  
