@@ -182,6 +182,12 @@ UDFs appear in the **DAX Dependencies** (Shift+F12) view, showing both:
 - **Objects that depend on the function**: Which measures, columns, etc. use the UDF
 - **Objects the function depends on**: Which measures, columns, etc. the UDF references
 
+### Namespaces
+
+The concept of "namespace" doesn't exist in DAX, yet the recommendation is to name UDFs in such a way that ambiguities are avoided and that the origin of the UDF is clear. For example `DaxLib.Convert.CelsiusToFahrenheit` (using '.' as namespace separators). When a UDF is named this way, the TOM Explorer will display the UDF in a hierarchy based on the names. You can toggle the display of UDFs by namespace using the **Group User-Defined Functions by namespace** tuggle button in the toolbar above the TOM Explorer (note, this button is only visible when working with a model using Compatibility Level 1702 or higher).
+
+In Tabular Editor, UDFs also have a "Namespace" *property*, allowing you to customize the namespace of each UDF individually, without changing the actual UDF object name. This is very similar to Display Folders for measures. Setting a different value for the "Namespace" property, than would could be inferred from the UDF name, is useful for example if you want to batch rename (F2) multiple UDFs to get rid of the namespaces in their names, but you still want to keep them nicely organized in the TOM Explorer.
+
 ## Best Practices
 
 ### Naming Conventions
@@ -278,7 +284,6 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 - Not all Power BI environments support UDFs (requires specific builds)
 - UDFs cannot be recursive (call themselves)
 - UDFs do not support optional parameters, parameters with default values, or parameter overloading
-- While Power BI supports visual calculation expressions in UDFs, our DAX parser currently does not, which may cause Tabular Editor 3 to show false error messages, when using visual calculation-specific functions (such as [`RUNNINGSUM`](https://dax.guide/runningsum)) in UDFs.
 
 ---
 
