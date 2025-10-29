@@ -17,6 +17,7 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 - Power Query (M) Auto-Formatting
 - Semantic Bridge
 - Graphical Model Comparision
+- .Net10 Support
 
  
 ## Shipped in 2025
