@@ -7,15 +7,24 @@
         <member name="T:TabularEditor.Shared.StaTaskScheduler">
             <summary>Provides a scheduler that uses STA threads.</summary>
         </member>
-        <member name="F:TabularEditor.Shared.StaTaskScheduler._tasks">
-            <summary>Stores the queued tasks to be executed by our pool of STA threads.</summary>
-        </member>
         <member name="F:TabularEditor.Shared.StaTaskScheduler._threads">
             <summary>The STA threads used by the scheduler.</summary>
+        </member>
+        <member name="F:TabularEditor.Shared.StaTaskScheduler._tasks">
+            <summary>Stores the queued tasks to be executed by our pool of STA threads.</summary>
         </member>
         <member name="M:TabularEditor.Shared.StaTaskScheduler.#ctor(System.Int32)">
             <summary>Initializes a new instance of the StaTaskScheduler class with the specified concurrency level.</summary>
             <param name="numberOfThreads">The number of threads that should be created and used by this scheduler.</param>
+        </member>
+        <member name="P:TabularEditor.Shared.StaTaskScheduler.MaximumConcurrencyLevel">
+            <summary>Gets the maximum concurrency level supported by this scheduler.</summary>
+        </member>
+        <member name="M:TabularEditor.Shared.StaTaskScheduler.Dispose">
+            <summary>
+            Cleans up the scheduler by indicating that no more tasks will be queued.
+            This method blocks until all threads successfully shutdown.
+            </summary>
         </member>
         <member name="M:TabularEditor.Shared.StaTaskScheduler.QueueTask(System.Threading.Tasks.Task)">
             <summary>Queues a Task to be executed by this scheduler.</summary>
@@ -31,15 +40,6 @@
             <param name="taskWasPreviouslyQueued">Whether the task was previously queued.</param>
             <returns>true if the task was successfully inlined; otherwise, false.</returns>
         </member>
-        <member name="P:TabularEditor.Shared.StaTaskScheduler.MaximumConcurrencyLevel">
-            <summary>Gets the maximum concurrency level supported by this scheduler.</summary>
-        </member>
-        <member name="M:TabularEditor.Shared.StaTaskScheduler.Dispose">
-            <summary>
-            Cleans up the scheduler by indicating that no more tasks will be queued.
-            This method blocks until all threads successfully shutdown.
-            </summary>
-        </member>
         <member name="P:TabularEditor.Shared.BPA.AnalyzerResult.Ignored">
             <summary>
             Indicates whether this rule should be ignored on this particular object
@@ -50,6 +50,19 @@
             Base path when the analyzer searches for rule files (typically the same path as the Model.bim or database.json file is stored in)
             </summary>
         </member>
+        <member name="M:TabularEditor.Shared.BPA.BestPracticeAnalyzerScriptHelper.ReplaceRuleDescriptionPlaceholders(System.String,TabularEditor.Shared.BPA.AnalyzerResult)">
+            <summary>
+            Replaces object, object name and object type tokens in the given description
+            using values from the provided AnalyzerResult.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.BPA.BestPracticeAnalyzerScriptHelper.ApplyFixExpression(TabularEditor.TOMWrapper.TabularObject,System.String)">
+            <summary>
+            Given a TabularObject and a fixExpression that uses "it." as a LINQ placeholder,
+            rewrites every occurrence of "=it." → "={itRef}." and every " it." → " {itRef}.",
+            then prefixes the entire string by "{itRef}." and appends a semicolon.
+            </summary>
+        </member>
         <member name="M:TabularEditor.Shared.BPA.RuleScopeHelper.Enumerate(TabularEditor.Shared.BPA.RuleScope)">
             <summary>
             Enumerates the currently set flags on this Enum as individual Enum values.
@@ -57,10 +70,30 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:TabularEditor.Shared.FormHelper.GetActiveForm">
+            <summary>
+            Form.ActiveForm is null when Tabular Editor does not have focus (this can happen for example when debugging,
+            as Visual Studio would then be the focused app). This method provides a more robust way to get the Active
+            Form of the app, even when it doesn't have focus.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:TabularEditor.Shared.Infrastructure.AzureAdAuthenticationService.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
             <summary>
             This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext.
             </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Infrastructure.FabricClientHelper.GetClientAsync(TabularEditor.Shared.Services.IPreferencesProvider,System.String,System.Boolean,System.IntPtr,System.Threading.CancellationToken)">
+            <summary>
+            Gets an ExtendedFabricClient object - either from the cache (i.e. the most recently used one) or by creating a new one if the cache is empty.
+            User will be prompted for credentials if no cached client is available.
+            </summary>
+            <param name="preferences"></param>
+            <param name="loginHint"></param>
+            <param name="forceReauthenticate">Set to true to indicate that authentication should happen anew</param>
+            <param name="windowHandle"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
         </member>
         <member name="M:TabularEditor.Shared.Infrastructure.MsalHelper.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
             <summary>
@@ -73,36 +106,6 @@
             as accessing specific items by name.
             </summary>
             <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ForEach(System.Action{`0})">
-            <summary>
-            Provide a lambda statement that is executed once for each object in the collection.
-            </summary>
-            <example>
-            .ForEach(obj => obj.Name += " OLD");
-            </example>
-            <param name="action">The action to perform on each object in the collection</param>
-        </member>
-        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Count">
-            <summary>
-            Gets the number of objects in this collection
-            </summary>
-        </member>
-        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Where(System.Func{`0,System.Boolean})">
-            <summary>
-            Filters the collection using a lambda expression which should return true.
-            </summary>
-            <example>
-            .Where(Measure => Measure.Description == "")
-            </example>
-            <param name="predicate">The filter predicate.</param>
-            <returns>The filtered list of objects that satisfy the predicate.</returns>
-        </member>
-        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.GetEnumerator">
-            <summary>
-            Returns an enumerator that iterates through the collection
-            </summary>
-            <returns></returns>
         </member>
         <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Item(System.String)">
             <summary>
@@ -117,21 +120,6 @@
             <summary>
             Sets the DisplayFolder property of all objects in the collection at once.
             </summary>
-        </member>
-        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ReplaceFolder(System.String,System.String,TabularEditor.TOMWrapper.Culture)">
-            <summary>
-            Move objects in this collection from one root display folder to another, for a specific translation
-            </summary>
-            <param name="before"></param>
-            <param name="after"></param>
-            <param name="culture"></param>
-        </member>
-        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ReplaceFolder(System.String,System.String)">
-            <summary>
-            Move objects in this collection from one root display folder to another
-            </summary>
-            <param name="before"></param>
-            <param name="after"></param>
         </member>
         <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.IsHidden">
             <summary>
@@ -157,6 +145,26 @@
             <summary>
             Sets the Description property of all objects in the collection at once.
             </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Name">
+            <summary>
+            Sets the name of the object (provided the collection only contains a single object).
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ReplaceFolder(System.String,System.String,TabularEditor.TOMWrapper.Culture)">
+            <summary>
+            Move objects in this collection from one root display folder to another, for a specific translation
+            </summary>
+            <param name="before"></param>
+            <param name="after"></param>
+            <param name="culture"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ReplaceFolder(System.String,System.String)">
+            <summary>
+            Move objects in this collection from one root display folder to another
+            </summary>
+            <param name="before"></param>
+            <param name="after"></param>
         </member>
         <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ShowInPerspective(System.String)">
             <summary>
@@ -232,15 +240,40 @@
             <param name="replacement">The replacement value</param>
             <param name="regex">Set to true to perform search and replace using regular expressions</param>
         </member>
-        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Name">
-            <summary>
-            Sets the name of the object (provided the collection only contains a single object).
-            </summary>
-        </member>
         <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Delete">
             <summary>
             Deletes all objects in the collection.
             </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.ForEach(System.Action{`0})">
+            <summary>
+            Provide a lambda statement that is executed once for each object in the collection.
+            </summary>
+            <example>
+            .ForEach(obj => obj.Name += " OLD");
+            </example>
+            <param name="action">The action to perform on each object in the collection</param>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Count">
+            <summary>
+            Gets the number of objects in this collection
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.Where(System.Func{`0,System.Boolean})">
+            <summary>
+            Filters the collection using a lambda expression which should return true.
+            </summary>
+            <example>
+            .Where(Measure => Measure.Description == "")
+            </example>
+            <param name="predicate">The filter predicate.</param>
+            <returns>The filtered list of objects that satisfy the predicate.</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:TabularEditor.Shared.Interaction.SelectionHelper.Summary(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.Boolean,System.Boolean)">
             <summary>
@@ -354,6 +387,11 @@
             Context menu opened on a Table Permission
             </summary>
         </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Functions">
+            <summary>
+            Context menu opened on the "Functions" group node
+            </summary>
+        </member>
         <member name="F:TabularEditor.Shared.Interaction.Context.Table">
             <summary>
             Context menu opened on one or more tables
@@ -434,6 +472,11 @@
             Context menu for a calculation item collection
             </summary>
         </member>
+        <member name="F:TabularEditor.Shared.Interaction.Context.Function">
+            <summary>
+            Context menu opened on a "Function" object
+            </summary>
+        </member>
         <member name="F:TabularEditor.Shared.Interaction.Context.Tool">
             <summary>
             Special context for actions that can be executed regardless of the current selection,
@@ -464,6 +507,11 @@
             The name of the current table group (if exactly one table group is selected, or if one or more tables within a single table group is selected)
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.DirectCount">
+            <summary>
+            The number of objects directly selected in the Explorer Tree (not counting any child objects).
+            </summary>
+        </member>
         <member name="M:TabularEditor.Shared.Interaction.Selection.GetNodeContexts(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject})">
             <summary>
             Iterates through the passed list of nodes, to return the combined context of the items represented by the nodes.
@@ -476,11 +524,6 @@
             Returns the "context" commonly associated with the given object
             </summary>
             <returns></returns>
-        </member>
-        <member name="P:TabularEditor.Shared.Interaction.Selection.DirectCount">
-            <summary>
-            The number of objects directly selected in the Explorer Tree (not counting any child objects).
-            </summary>
         </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.Measure">
             <summary>
@@ -547,9 +590,19 @@
             All currently selected data sources.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Functions">
+            <summary>
+            All currently selected user-defined functions.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.DataSource">
             <summary>
             The currently selected data source.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Function">
+            <summary>
+            The currently selected user-defined function
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.Roles">
@@ -694,10 +747,228 @@
             when no tables, or more than one table, have been selected in the TOM Explorer.
             </summary>
         </member>
+        <member name="T:TabularEditor.Shared.Localization.Strings">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AuthenticationModeIntegrated">
+            <summary>
+              Looks up a localized string similar to Integrated.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AuthenticationModeMicrosoftEntraMFA">
+            <summary>
+              Looks up a localized string similar to Microsoft Entra MFA.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.AuthenticationModeUsernameAndPassword">
+            <summary>
+              Looks up a localized string similar to Username and password.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ColumnValues">
+            <summary>
+              Looks up a localized string similar to Column values.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.Datamart">
+            <summary>
+              Looks up a localized string similar to Datamart.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxOptimizerAccountRegistrationIncomplete">
+            <summary>
+              Looks up a localized string similar to DAX Optimizer account registration incomplete. Please visit &lt;href=&quot;{0}&quot;&gt;{1}&lt;/href&gt; to finalize..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxOptimizerFileUploadDisabled">
+            <summary>
+              Looks up a localized string similar to File upload to the DAX Optimizer service is disabled by a local policy..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DefaultSemanticModel">
+            <summary>
+              Looks up a localized string similar to Semantic Model (Default).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ErrorLoadingUserOptionsDetails">
+             <summary>
+               Looks up a localized string similar to An error occurred while trying to deserialize the User Options (.tmuo) file:
+                
+            {0}.
+             </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ErrorLoadingUserOptionsTitle">
+            <summary>
+              Looks up a localized string similar to Error loading User Options file (.tmuo).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ExternalBrowserAuthentication">
+            <summary>
+              Looks up a localized string similar to External browser.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.KeepSortingAndFilteringAlways">
+            <summary>
+              Looks up a localized string similar to Always.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.KeepSortingAndFilteringAlwaysTooltip">
+            <summary>
+              Looks up a localized string similar to Sorting and filtering is never reset - i.e., columns that were previously sorted/filtered and are still present in the new query will remain sorted/filtered..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.KeepSortingAndFilteringNever">
+            <summary>
+              Looks up a localized string similar to Never.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.KeepSortingAndFilteringNeverTooltip">
+            <summary>
+              Looks up a localized string similar to Sorting and filtering is reset each time the query is manually executed..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.KeepSortingAndFilteringWhenQueryUnchanged">
+            <summary>
+              Looks up a localized string similar to When query is unchanged.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.KeepSortingAndFilteringWhenQueryUnchangedTooltip">
+            <summary>
+              Looks up a localized string similar to Sorting and filtering is reset when the query is modified, ignoring whitespace/comment modifications..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.Lakehouse">
+            <summary>
+              Looks up a localized string similar to Lakehouse.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.MirroredDatabase">
+            <summary>
+              Looks up a localized string similar to Mirrored Database.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.MyWorkspace">
+            <summary>
+              Looks up a localized string similar to My Workspace.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.NotValidPowerBIRestAPIEndpoint">
+            <summary>
+              Looks up a localized string similar to Not a valid Power BI API Rest endpoint.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.OAuthAuthentication">
+            <summary>
+              Looks up a localized string similar to OAuth.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ProxyTypeCustom">
+            <summary>
+              Looks up a localized string similar to Custom.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ProxyTypeNone">
+            <summary>
+              Looks up a localized string similar to None.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ProxyTypeSystem">
+            <summary>
+              Looks up a localized string similar to System.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ScalarExpression">
+            <summary>
+              Looks up a localized string similar to Scalar expression.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SemanticModel">
+            <summary>
+              Looks up a localized string similar to Semantic Model.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SnowflakeAuthentication">
+            <summary>
+              Looks up a localized string similar to Snowflake.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SQLAnalyticsEndpoint">
+            <summary>
+              Looks up a localized string similar to SQL Analytics Endpoint.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SQLDatabase">
+            <summary>
+              Looks up a localized string similar to SQL Database.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.TableExpression">
+            <summary>
+              Looks up a localized string similar to Table expression.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.UnableToFindFabricArtifact">
+            <summary>
+              Looks up a localized string similar to Unable to find a warehouse, lakehouse, SQL database, or Mirrored Database with the specified workspaceId {0} and objectId {1}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.UnknownFabricArtifactType">
+            <summary>
+              Looks up a localized string similar to (Unknown).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.Warehouse">
+            <summary>
+              Looks up a localized string similar to Warehouse.
+            </summary>
+        </member>
         <member name="T:TabularEditor.Shared.Scripting.ScriptHelper">
             <summary>
             Contains various extension methods which are commonly used in scripts
             </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptHelper.WaitFormVisible">
+            <summary>
+            Toggle the "Please wait" spinner on/off. Useful if you want to display custom dialogs / UI to the end user.
+            </summary>
+            <remarks>Built-in script UI such as the <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Info(System.String,System.Int32)"/> and <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.SelectMeasure(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure},TabularEditor.TOMWrapper.Measure,System.String)"/> functionality will automatically
+            hide the "Please wait" spinner.</remarks>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.SuspendWaitForm(System.Action)">
+            <summary>
+            Hides the "Please wait" spinner while performing the specified action. Useful if the action displays custom dialogs / UI to the end user.
+            </summary>
+            <remarks>Built-in script UI such as the <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Info(System.String,System.Int32)"/> and <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.SelectMeasure(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure},TabularEditor.TOMWrapper.Measure,System.String)"/> functionality will automatically
+            hide the "Please wait" spinner.</remarks>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.SuspendWaitForm``1(System.Func{``0})">
+            <summary>
+            Hides the "Please wait" spinner while performing the specified action. Useful if the action displays custom dialogs / UI to the end user.
+            </summary>
+            <remarks>Built-in script UI such as the <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Info(System.String,System.Int32)"/> and <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.SelectMeasure(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure},TabularEditor.TOMWrapper.Measure,System.String)"/> functionality will automatically
+            hide the "Please wait" spinner.</remarks>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.ExportProperties(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)">
+            <summary>
+            Export properties of the specified set of objects to a TSV (tab-separated) string.
+            Use <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.ImportProperties(System.String)"/> to import properties from a TSV string.
+            </summary>
+            <param name="objects">Set of objects whose properties should be serialized</param>
+            <param name="properties">(Optional) Comma-separated list of properties to export. If omitted, a default set of properties are exported.</param>
+            <returns></returns>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.SelectColumn(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Column},TabularEditor.TOMWrapper.Column,System.String)">
             <summary>
@@ -781,27 +1052,6 @@
             <param name="preselect">(Optional) A list of objects which are preselected when the dialog is shown</param>
             <param name="label">(Optional) A label to be shown within the dialog</param>
             <returns>The selected object(s) or null if the user cancels out of the dialog</returns>
-        </member>
-        <member name="P:TabularEditor.Shared.Scripting.ScriptHelper.WaitFormVisible">
-            <summary>
-            Toggle the "Please wait" spinner on/off. Useful if you want to display custom dialogs / UI to the end user.
-            </summary>
-            <remarks>Built-in script UI such as the <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Info(System.String,System.Int32)"/> and <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.SelectMeasure(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure},TabularEditor.TOMWrapper.Measure,System.String)"/> functionality will automatically
-            hide the "Please wait" spinner.</remarks>
-        </member>
-        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.SuspendWaitForm(System.Action)">
-            <summary>
-            Hides the "Please wait" spinner while performing the specified action. Useful if the action displays custom dialogs / UI to the end user.
-            </summary>
-            <remarks>Built-in script UI such as the <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Info(System.String,System.Int32)"/> and <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.SelectMeasure(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure},TabularEditor.TOMWrapper.Measure,System.String)"/> functionality will automatically
-            hide the "Please wait" spinner.</remarks>
-        </member>
-        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.SuspendWaitForm``1(System.Func{``0})">
-            <summary>
-            Hides the "Please wait" spinner while performing the specified action. Useful if the action displays custom dialogs / UI to the end user.
-            </summary>
-            <remarks>Built-in script UI such as the <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.Info(System.String,System.Int32)"/> and <see cref="M:TabularEditor.Shared.Scripting.ScriptHelper.SelectMeasure(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure},TabularEditor.TOMWrapper.Measure,System.String)"/> functionality will automatically
-            hide the "Please wait" spinner.</remarks>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.FormatDax(TabularEditor.TOMWrapper.IDaxDependantObject)">
             <summary>
@@ -911,15 +1161,6 @@
             <param name="selection">The object on which the macro should be run.</param>
             <param name="macroId">Id of the macro</param>
         </member>
-        <member name="M:TabularEditor.Shared.Scripting.ScriptHelper.ExportProperties(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ITabularNamedObject},System.String)">
-            <summary>
-            Export properties of the specified set of objects to a TSV (tab-separated) string.
-            Use <see cref="M:TabularEditor.Shared.Scripting.ScriptHost.ImportProperties(System.String)"/> to import properties from a TSV string.
-            </summary>
-            <param name="objects">Set of objects whose properties should be serialized</param>
-            <param name="properties">(Optional) Comma-separated list of properties to export. If omitted, a default set of properties are exported.</param>
-            <returns></returns>
-        </member>
         <member name="T:TabularEditor.Shared.Scripting.ScriptHost">
             <summary>
             This is the host class in which a C# script is executed
@@ -942,6 +1183,11 @@
         <member name="P:TabularEditor.Shared.Scripting.ScriptHost.Selected">
             <summary>
             An object that represents the current selection in the TOM Explorer.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CollectVertiPaqAnalyzerStats">
+            <summary>
+            Collects VertiPaq Analyzer statistics for the currently loaded model.
             </summary>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.Output(System.Object)">
@@ -1275,11 +1521,6 @@
             <param name="skipSpaceAfterFunctionName"></param>
             <returns></returns>
         </member>
-        <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CollectVertiPaqAnalyzerStats">
-            <summary>
-            Collects VertiPaq Analyzer statistics for the currently loaded model.
-            </summary>
-        </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.ReadFile(System.String)">
             <summary>
             Read the specified file as text
@@ -1330,6 +1571,11 @@
             A message that has been stripped of sensitive information.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Services.AppCache.Ppu">
+            <summary>
+            A dictionary indicating whether a given WorkspaceID is a PPU workspace or not
+            </summary>
+        </member>
         <member name="T:TabularEditor.Shared.Services.AutomaticPowerQuerySchemaDetector">
             <summary>
             This schema detector utilises the mashup engine on Analysis Service to detect a schema for any table that uses
@@ -1357,6 +1603,17 @@
         <member name="M:TabularEditor.Shared.Services.Connectivity.Dataflows.DataflowsInfoProvider.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
             <summary>
             This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.Connectivity.Fabric.FabricInfoProvider.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
+            <summary>
+            This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.Connectivity.Fabric.FabricInfoProvider.DataCatalogCache">
+            <summary>
+            Maps the workspaceId and objectId of a Lakehouse or Warehouse to its SQL endpoint, so we don't need to call the Fabric REST API
+            multiple times to get this information, if we already have it.
             </summary>
         </member>
         <member name="M:TabularEditor.Shared.Services.Connectivity.Odbc.OdbcConnectionExtension.GetTables(System.Data.Odbc.OdbcConnection,System.String,System.String,System.String,System.String)">
@@ -1504,6 +1761,12 @@
         <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.XmlaEnterpriseTier">
             <summary>
             True to allow Enterprise features, such as DirectLake in Power BI, or Perspectives/Multi-partitions in SSAS/Azure AS
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.AnyXmlaEndpoint">
+            <summary>
+            True to allow the client to connect to any XMLA endpoint, skipping the check for <see cref="P:TabularEditor.Shared.Services.IFeatureSwitchService.XmlaEnterpriseTier"/> and the type of
+            Power BI workspace (Premium Capacity vs. Premium-per-user).
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.PbiDesktopMetadata">
@@ -1659,6 +1922,26 @@
         <member name="P:TabularEditor.Shared.Services.Preferences.ProxyPasswordEncrypted">
             <summary>
             Stores an encrypted version of the user password. Use the string Decrypt() extension method to decrypt.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.KeepSortingAndFilteringOption">
+            <summary>
+            Specifies the options for retaining sorting and filtering settings in grid views.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.KeepSortingAndFilteringOption.Never">
+            <summary>
+            Never: Sorting and filtering are always reset from the result grid when a query is executed. Only the layout is restored.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.KeepSortingAndFilteringOption.WhenQueryUnchanged">
+            <summary>
+            WhenQueryUnchanged: Sorting and filtering are reset only when the query is modified (ignoring whitespace/comments).
+            </summary>
+        </member>
+        <member name="F:TabularEditor.Shared.Services.KeepSortingAndFilteringOption.Always">
+            <summary>
+            Always: Sorting and filtering are never reset if the columns still exist.
             </summary>
         </member>
         <member name="M:TabularEditor.Shared.Services.SafeDataOperationsHandler.RunAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.Func{``0},TabularEditor.Shared.Services.TableImportSettings)">

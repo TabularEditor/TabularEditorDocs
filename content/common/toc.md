@@ -8,6 +8,8 @@
 ### [BPA Sample Rules Expression](xref:using-bpa-sample-rules-expressions)
 ## [Semantic Model Types](Semantic Model/semantic-model-types.md)
 ### [Direct Lake on SQL](Semantic Model/direct-lake-sql-model.md)
+### [Direct Query over Analysis Services](Semantic Model/direct-query-over-as.md)
+
 
 
 
@@ -42,5 +44,8 @@
 #### @script-convert-dlsql-to-dlol
 #### @script-convert-import-to-dlol
 #### @script-convert-dlol-to-import
+#### @script-databricks-semantic-model-set-up
+#### @script-create-databricks-relationships
+#### @script-add-databricks-metadata-descriptions
 
 ## @script-helper-methods

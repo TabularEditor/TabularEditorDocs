@@ -22,5 +22,8 @@ A new active refresh will appear when a new refresh is triggered through the TOM
 
 A new refresh will run in the background so that you can continue to build your dataset, and Tabular Editor will let you know if the refresh fails with a pop up. 
 
-> [!WARNING]
-> If you are using TE as an External Tool to Power BI and have activated _Allow Unsupported modeling operations_ do *NOT* start a refresh as this is prone to corrupt your .pbix file. 
+> [!NOTE]
+> All the messages and durations shown in the Data Refresh window are estimates only. Tabular Editor listens to [trace events from SSAS](https://learn.microsoft.com/en-us/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions) during processing. SSAS is not guaranteed to send all trace messages to the client (for example it may throttle the trace event notifications during times of peak CPU/memory consumption). 
+
+> [!TIP]
+> If you need accurate and reliable information about refresh progress and durations, you should connect [SQL Server Profiler](https://learn.microsoft.com/en-us/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) to your SSAS instance, and collect the information manually during processing.

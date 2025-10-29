@@ -1,285 +1,141 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        a {
-            text-decoration: none;
-        }
-
-        img {
-            width: 100%;
-            height: auto;
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
-        }
-
-        #content-wrapper {
-            height: 100vh;
-            overflow-y: auto;
-            margin: 0;
-            padding: 0;
-        }
-
-        .light-mode {
-            background-color: #fdfdfd;
-            color: #555
-        }
-
-        .light-mode a {
-            color: #337ab7;
-        }
-
-        .light-mode a:hover {
-            color: #23527c;
-        }
-
-        .dark-mode {
-            background-color: #232323;
-            color: #fff;
-        }
-
-        #content-wrapper.dark-mode {
-            scrollbar-face-color: #323232;
-            scrollbar-shadow-color: #222222;
-            scrollbar-highlight-color: #444444;
-            scrollbar-3dlight-color: #222222;
-            scrollbar-darkshadow-color: #222222;
-            scrollbar-track-color: #2a2a2a;
-            scrollbar-arrow-color: #666666;
-        }
-
-        #content-wrapper.dark-mode::-webkit-scrollbar {
-            width: 16px;
-        }
-
-        #content-wrapper.dark-mode::-webkit-scrollbar-track {
-            background: #323232;
-        }
-
-        #content-wrapper.dark-mode::-webkit-scrollbar-thumb {
-            background: #232323;
-            border: 1px solid #4B4B4B;
-        }
-
-        #content-wrapper.dark-mode::-webkit-scrollbar-thumb:hover {
-            border-color: #d0d0d0;
-        }
-
-        .dark-mode a {
-            color: #87bdd8;
-        }
-
-        .dark-mode a:hover {
-            color: #a8d3e6;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        .column {
-            float: left;
-            width: 50%;
-            padding: 10px;
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-        
-        .dark-mode .warning {
-            color: black;
-        }
-
-        .warning {
-            background-color: #FFF484;
-            border: 2px solid #DCC600;
-            border-color: #DCC600;
-            margin: 0 auto 15px;
-            padding: 5px;
-            text-align: center;
-        }
+      a { text-decoration: none; }
+      img { width: 100%; height: auto; }
+      body, html { margin: 0; padding: 0; overflow: hidden; font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif; }
+      #content-wrapper { height: 100vh; overflow-y: auto; margin: 0; padding: 0; }
+      .light-mode { background-color: #fdfdfd; color: #555; }
+      .light-mode a { color: #337ab7; }
+      .light-mode a:hover { color: #23527c; }
+      .dark-mode { background-color: #232323; color: #fff; }
+      #content-wrapper.dark-mode { scrollbar-face-color: #323232; scrollbar-shadow-color: #222222; scrollbar-highlight-color: #444444; scrollbar-3dlight-color: #222222; scrollbar-darkshadow-color: #222222; scrollbar-track-color: #2a2a2a; scrollbar-arrow-color: #666666; }
+      #content-wrapper.dark-mode::-webkit-scrollbar { width: 16px; }
+      #content-wrapper.dark-mode::-webkit-scrollbar-track { background: #323232; }
+      #content-wrapper.dark-mode::-webkit-scrollbar-thumb { background: #232323; border: 1px solid #4B4B4B; }
+      #content-wrapper.dark-mode::-webkit-scrollbar-thumb:hover { border-color: #d0d0d0; }
+      .dark-mode a { color: #87bdd8; }
+      .dark-mode a:hover { color: #a8d3e6; }
+      * { box-sizing: border-box; }
+      .column { float: left; width: 50%; padding: 10px; }
+      .row:after { content: ""; display: table; clear: both; }
+      .dark-mode .warning { color: black; }
+      .warning { background-color: #FFF484; border: 2px solid #DCC600; border-color: #DCC600; margin: 0 auto 15px; padding: 5px; text-align: center; }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="content-wrapper">
-        <!--- CONTENT GOES BELOW THIS LINE -->
-        <section id="dax-optimizer-banner">
-            <div style="width: 80%; border-radius: 0 0 1rem 1rem; border: 1px solid rgb(41, 170, 151); background-color: rgb(41, 170, 151); padding: 0.2rem; text-align: center; color: white; margin: 0 auto;height: 70px; overflow: hidden;">
-                <div class="announcement-header" style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
-                    <h1 style="font-size: 1rem; margin: 0;">Important update: Free DAX Optimizer access for Enterprise Edition customers</h1>
-                    <p style="font-size: 0.8rem; margin: 0;">Download the <a style="text-decoration: underline; color: white;" href="https://docs.tabulareditor.com/te3/other/downloads.html">latest Tabular Editor 3</a> version, sign up for a <a style="text-decoration: underline; color: white;" href="https://www.daxoptimizer.com/free-tour/">DAX Optimizer Account</a>, and check out <a style="text-decoration: underline; color: white;" href="https://youtu.be/Tr4copX0JO0">this video</a> for more information.</p>
-              </div>
-            </div>
-          </section>
-        <div class="row">
-            <div class="column">
-                <div id="version-specific-content">
-                    <!-- This content will be fetched from the version-specific html file, based on the URL query parameter provided. -->
-                </div>
-                <h2>Community</h2>
-                <p>Ask questions, suggest enhancements and help other TE fans get their answers at our <a href="https://github.com/TabularEditor/TabularEditor3/discussions"> GitHub community</a>:</p>
-                <h3>Articles</h3>
-                <ul>
-                    <li><a href="https://blog.tabulareditor.com/2024/09/19/using-tabular-editor-c-scripts-to-add-custom-visuals-to-power-bi-reports/"> Using Tabular Editor C# Scripts to add custom visuals to Power BI reports </li>
-                    <li><a href="https://owenaugerbi.com/field-parameters-in-analysis-services-models/">Field parameters in Analysis Services models </a> by Owen Auger which includes a C# script</li>
-                    <li><a href="https://blog.tabulareditor.com/2024/01/23/connect-to-and-transform-data-for-a-semantic-model/"> Connect to and transform data for a semantic model</a> on the Tabular Editor blog </li>
-                    <li><a href="https://blog.tabulareditor.com/category/power-bi/semantic-model/"> The Semantic Models blog series</a> on the Tabular Editor blog</li>
-                    <li><a href="https://greyskullanalytics.com/why-i-love-tabular-editor/">Why I Love Tabular Editor</a> by Greyskull Analytics aka Johnny Winter</li>
-                    <li><a href="https://blog.tabulareditor.com/2023/09/27/ci-cd-scripts-for-tabular-editor-2s-cli/">CI/CD scripts for Tabular Editor</a> on the Tabular Editor blog</li>
-                    <li><a href="https://blog.tabulareditor.com/2023/07/13/using-tabular-editor-in-microsoft-fabric/">Using Tabular Editor in Microsoft Fabric</a> </li>
-                    <li><a href="https://data-goblins.com/power-bi/format-power-query-automatically">Format Power Query in Power BI</a> by <a href="https://data-goblins.com/">Kurt Buhler</a></li>
-                </ul>
-                <p>Share your favorite blog or SoMe post <a href="https://github.com/TabularEditor/TabularEditor3/discussions/categories/ressources"> with the community</a></p>
-                <h3> Video</h3>
-                <ul>
-                    <li><a href="https://www.youtube.com/watch?v=Cg6zRhwF-Ro"> The 25 min tour of Tabular Editor</a> Join Kurt Buhler as he takes you on a quick tour of Tabular Editor 3 </li>
-                    <li><a href="https://youtu.be/FiUR3WpAHOg"> Power BI Templates: Add SVG visuals using Tabular Editor C# Scripts</a> Traditionally, Tabular Editor wasn’t known for enhancing visuals, but Kurt Buhler is here to change that narrative.</li>
-                    <li><a href="https://www.youtube.com/watch?v=Cg6zRhwF-Ro"> Can you use Field Parameters with Direct Lake in Power BI?</a> Guy in a Cube shows how to use Tabular Editor to create field parameters in Direct Lake models</li>
-                    <li><a href="https://www.youtube.com/watch?v=Fs1A7M3rLHE&t=60s"> Wireframe your Model with Tabular Editor</a> Morten shows you how to create a mockup of your model that you can continue to develop on</li>
-                </ul>
-                <h3>Other resources</h3>
-                <ul>
-                    <li><a href="https://github.com/TabularEditor/TabularEditor3/issues">GitHub issue tracker (TE3)</a></li>
-                    <li><a href="https://docs.tabulareditor.com/common/CSharpScripts/csharp-script-library.html?tabs=TE3Preferences">Tabular Editor Script Library</a></li>
-                    <li><a href="https://github.com/TabularEditor/TabularEditor/issues">GitHub issue tracker (TE2.x)</a></li>
-                </ul>
-            </div>
-            <div class="column">
-                <h2>Tabular Editor Learn</h2>
-                <p>Build better data models, faster! Explore our free <a href="https://tabulareditor.com/learn">interactive learning platform</a>:</p>
-                <ul>
-                    <li>25+ hours of content</li>
-                    <li>Master every aspect of Tabular Editor 3</li>
-                    <li>Enhance your data modeling skills </li>
-                    <li>Help Borp, Zip, Tropphus at Spaceparts Co.</li>
-                    <li>Test your knowledge and get a free certification!</li>
-                </ul>
-                <p><a href="https://tabulareditor.com/learn">tabulareditor.com/learn</a></p>
-                <img src="/images/SpacePartsCo_CharacterLineUp.png" />
-               <!-- <h2>Meet the team</h2>
-                <h3>The Tabular Editor Team will be at the following conferences:</h3>
-                <ul>
-                    <li><a href="https://datamindsconnect.be/">dataMinds Connect 2024</a> 7th to 9th of October 2024</li>
-                    <li><a href="https://passdatacommunitysummit.com/">Pass Data Community Summit 2024</a> 5th to 8th of November 2024</li>
-                </ul> -->
-            </div>
+      <!--- CONTENT GOES BELOW THIS LINE -->
+      <section id="dax-optimizer-banner">
+        <div style="width: 80%; border-radius: 0 0 1rem 1rem; border: 1px solid rgb(41, 170, 151); background-color: rgb(41, 170, 151); padding: 0.2rem; text-align: center; color: white; margin: 0 auto; height: 70px; overflow: hidden;">
+          <div class="announcement-header" style="display:flex; flex-direction:column; justify-content:center; height:100%;">
+            <h1 style="font-size: 1rem; margin: 0;">New: Free one-hour DAX UDF course is live! &#x1F973;</h1>
+            <p style="font-size: 0.8rem; margin: 0;">Learn what DAX User-Defined Functions are, how to build & reuse them, and earn a certificate. <a style="text-decoration: underline; color: white;" href="https://learn.tabulareditor.com/udfcourse" target="_blank">Start the course</a></p>
+          </div>
         </div>
+      </section>
+      <div class="row">
+        <div class="column">
+          <div id="version-specific-content">
+            <!-- This content will be fetched from the version-specific html file, based on the URL query parameter provided. -->
+          </div>
+          <h2>Community</h2>
+          <p>Ask questions, suggest enhancements and help other TE fans get their answers at our <a href="https://github.com/TabularEditor/TabularEditor3/discussions"> GitHub community</a>:</p>
+          <h3>Articles</h3>
+          <ul>
+            <li><a href="https://tabulareditor.com/blog/reports-or-conversational-bi-how-to-make-the-choice-part-2" target="_blank"> Reports or conversational BI? How to make the choice Part 2</a></li>
+            <li><a href="https://actionablereporting.com/2025/08/21/9640/" target="_blank">Tabular Editor MacroActions.json to Full Repository and Vise Versa </a> by Alexander Korn</li>
+            <li><a href="https://tabulareditor.com/blog/what-is-an-ai-agent-for-semantic-models" target="_blank">AI agents for semantic models</a> by <a href="https://data-goblins.com/" target="_blank">Kurt Buhler</a></li>
+            <li><a href="https://tabulareditor.com/blog/tabular-editor-x-databricks-part-4" target="_blank"> Borp is using Tabular Editor on Databricks</a> on the Tabular Editor blog </li>
+            <li><a href="https://blog.tabulareditor.com/category/power-bi/semantic-model/" target="_blank"> The Semantic Models blog series</a> on the Tabular Editor blog</li>
+            <li><a href="https://greyskullanalytics.com/why-i-love-tabular-editor/" target="_blank">Why I Love Tabular Editor</a> by Greyskull Analytics aka Johnny Winter</li>
+            <li><a href="https://tabulareditor.com/blog/querying-semantic-models-with-llms" target="_blank">Querying semantic models with LLMs</a> on the Tabular Editor blog</li>
+            <li><a href="https://blog.tabulareditor.com/2023/07/13/using-tabular-editor-in-microsoft-fabric/" target="_blank">Using Tabular Editor in Microsoft Fabric</a></li>
+          </ul>
+          <p>Share your favorite blog or SoMe post <a href="https://github.com/TabularEditor/TabularEditor3/discussions/categories/ressources" target="_blank"> with the community</a></p>
+          <h3> Video</h3>
+          <ul>
+            <li><a href="https://www.youtube.com/watch?v=O4ATwdzCvWc" target="_blank"> The 25 min tour of Tabular Editor</a> Join Kurt Buhler as he takes you on a quick tour of Tabular Editor 3 </li>
+            <li><a href="https://www.youtube.com/watch?v=qQ08xLW7SvY" target="_blank"> Make a semantic model in Power BI desktop | Tabular Editor for beginners</a> An extract from our new beginner course on Tabular Editor Learn</li>
+            <li><a href="https://www.youtube.com/watch?v=Cg6zRhwF-Ro" target="_blank"> Can you use Field Parameters with Direct Lake in Power BI?</a> Guy in a Cube shows how to use Tabular Editor to create field parameters in Direct Lake models</li>
+            <li><a href="https://www.youtube.com/watch?v=ppL-Ke-C1-I" target="_blank"> What is a Notebook?</a> Extract from Learn course on Notebooks in Fabric</li>
+          </ul>
+          <h3>Other resources</h3>
+          <ul>
+            <li><a href="https://github.com/TabularEditor/TabularEditor3/issues" target="_blank">GitHub issue tracker (TE3)</a></li>
+            <li><a href="https://docs.tabulareditor.com/common/CSharpScripts/csharp-script-library.html?tabs=TE3Preferences" target="_blank">Tabular Editor Script Library</a></li>
+            <li><a href="https://github.com/TabularEditor/TabularEditor/issues" target="_blank">GitHub issue tracker (TE2.x)</a></li>
+          </ul>
+        </div>
+        <div class="column">
+          <h2>Tabular Editor Learn</h2>
+          <p>Build better data models, faster! Explore our free <a href="https://tabulareditor.com/learn" target="_blank">interactive learning platform</a>:</p>
+          <ul>
+            <li>40+ hours of content</li>
+            <li>Master every aspect of Tabular Editor 3</li>
+            <li>Discover Pro Developer Courses for <a href="https://learn.tabulareditor.com/notebookcourse" target="_blank">Fabric Notebooks</a>, <a href="https://learn.tabulareditor.com/tmdlcourse" target="_blank">TMDL</a> and <a href="https://learn.tabulareditor.com/udfcourse" target="_blank">DAX UDFs</a></li>
+            <li>Help Borp, Zip, Tropphus at Spaceparts Co.</li>
+            <li>Test your knowledge and get a free certification!</li>
+          </ul>
+            <p><a href="https://tabulareditor.com/learn" target="_blank">tabulareditor.com/learn</a></p>
+            <img src="/images/SpacePartsCo_CharacterLineUp.png" />
+            <h2>Meet the team</h2>
+            <h3>The Tabular Editor Team will be at the following conferences:</h3>
+            <ul>
+              <li><a href="https://datamindsconnect.be/" target="_blank">DataMinds Connect in Mechelen, October 6-8</a></li>
+              <li><a href="https://tconf.ch/en/" target="_blank">Ticino Data Conference in Lugano, October 31</a></li>
+              <li><a href="https://passdatacommunitysummit.com/" target="_blank">PASS Data Community Summit in Seattle, November 17-21</a></li>
+              <li><a href="https://techbayanihan.org/techbayanihan-2025" target="_blank">Techbayanihan in Manila, December 1-3</a></li>
+            </ul>
+        </div>
+      </div>
     </div>
-
     <!--- CONTENT GOES ABOVE THIS LINE -->
-
     <script>
-        function getParameterByName(name) {
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                results = regex.exec(window.location.search);
-            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+      function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(window.location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+      function urlify(str) { return str.split('.').join('-'); }
+      function init() {
+        var version = getParameterByName("version");
+        if (!version) version = "generic"; else if (is_3_18_orGreater(version)) { deleteElementById("dax-optimizer-banner"); }
+        loadDivContent("/whats-new/" + urlify(version) + ".html", "version-specific-content");
+        applyStyle();
+      }
+      function is_3_18_orGreater(version) { const parts = version.split('.'); return parseInt(parts[0], 10) >= 3 && parseInt(parts[1], 10) >= 18; }
+      function deleteElementById(tagId) { var element = document.getElementById(tagId); if (element) { element.parentNode.removeChild(element); } }
+      function loadDivContent(url, divId) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () { if (xhr.status >= 200 && xhr.status < 300) { document.getElementById(divId).innerHTML = xhr.responseText; } else { console.log('The request failed!'); } };
+        xhr.onerror = function () { console.log('There was an error!'); };
+        xhr.open('GET', url, true);
+        xhr.send();
+      }
+      function applyStyle() {
+        var style = getParameterByName('style');
+        var bodyElement = document.getElementById('content-wrapper');
+        if (style) {
+          if (style === 'dark') { if (bodyElement.className) bodyElement.className += ' dark-mode'; else bodyElement.className = 'dark-mode'; }
+          else if (style === 'light') { if (bodyElement.className) bodyElement.className += ' light-mode'; else bodyElement.className = 'light-mode'; }
         }
-
-        function urlify(str) {
-            return str.split('.').join('-');
-        }
-
-        function init()
-        {
-            var version = getParameterByName("version");
-            if (!version) version = "generic";
-            else if (is_3_18_orGreater(version)) {
-                deleteElementById("dax-optimizer-banner");
-            }
-            loadDivContent("/whats-new/" + urlify(version) + ".html", "version-specific-content");
-            applyStyle();
-        }
-
-        function is_3_18_orGreater(version) {
-            // Split the version string into an array of parts
-            const parts = version.split('.');
-            // Check if the middle number meets or exceeds the threshold
-            return parseInt(parts[0], 10) >= 3 && parseInt(parts[1], 10) >= 18;
-        }
-
-        function deleteElementById(tagId) {
-            var element = document.getElementById(tagId);
-            if (element) {
-                element.parentNode.removeChild(element);
-            }
-        }
-
-        function loadDivContent(url, divId) {
-            // Create a new XMLHttpRequest object
-            var xhr = new XMLHttpRequest();
-
-            // Define what happens on successful data submission
-            xhr.onload = function () {
-                // Check if the request is successful
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    // Get the response and update the div's content
-                    document.getElementById(divId).innerHTML = xhr.responseText;
-                } else {
-                    // Handle errors here
-                    console.log('The request failed!');
-                }
-            };
-
-            // Define what happens in case of error
-            xhr.onerror = function () {
-                console.log('There was an error!');
-            };
-
-            // Setup our request
-            xhr.open('GET', url, true);
-
-            // Send the request
-            xhr.send();
-        }
-
-        function applyStyle() {
-            var style = getParameterByName('style');
-            var bodyElement = document.getElementById('content-wrapper');
-
-            if (style) {
-                if (style === 'dark') {
-                    if(bodyElement.className) bodyElement.className += ' dark-mode';
-                    else bodyElement.className = 'dark-mode';
-                } else if (style === 'light') {
-                    if (bodyElement.className) bodyElement.className += ' light-mode';
-                    else bodyElement.className = 'light-mode';
-                }
-            }
-        }
-
-        if (document.addEventListener) {
-            document.addEventListener('DOMContentLoaded', init);
-        } else if (document.attachEvent) {
-            document.attachEvent('onreadystatechange', function () {
-                if (document.readyState === 'complete') {
-                    init();
-                }
-            });
-        }
-
-        if (window.parent.resizeIframe) {
-            window.addEventListener("load", function () {
-                var body = document.body;
-                var computedStyle = window.getComputedStyle(body);
-                var marginTop = parseFloat(computedStyle.marginTop);
-                var marginBottom = parseFloat(computedStyle.marginBottom);
-
-                var frameHeight = document.getElementById("content-wrapper").scrollHeight + marginTop + marginBottom + 100;
-
-                window.parent.resizeIframe(frameHeight);
-            });
-        }
+      }
+      if (document.addEventListener) { document.addEventListener('DOMContentLoaded', init); }
+      else if (document.attachEvent) { document.attachEvent('onreadystatechange', function () { if (document.readyState === 'complete') { init(); } }); }
+      if (window.parent.resizeIframe) {
+        window.addEventListener("load", function () {
+          var body = document.body;
+          var computedStyle = window.getComputedStyle(body);
+          var marginTop = parseFloat(computedStyle.marginTop);
+          var marginBottom = parseFloat(computedStyle.marginBottom);
+          var frameHeight = document.getElementById("content-wrapper").scrollHeight + marginTop + marginBottom + 100;
+          window.parent.resizeIframe(frameHeight);
+        });
+      }
     </script>
-</body>
+  </body>
 </html>

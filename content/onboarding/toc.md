@@ -6,8 +6,8 @@
 ## @migrate-from-te2
 # @parallel-development
 ## @optimizing-workflow-workspace-mode
-## @powerbi-cicd
-## @as-cicd
+<!--## @powerbi-cicd
+## @as-cicd-->
 # @boosting-productivity-te3
 ## @importing-tables-data-modeling
 ## @refresh-preview-query

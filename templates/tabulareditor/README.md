@@ -129,20 +129,27 @@ rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../Tabular
 - **model.__footer**: Contains the buttons and links for the footer section.
   - **buttons**: An array of button objects, each with `text` and `url` properties.
   - **leftLinks**: An array of link objects for the left side of the footer, each with `text`, `url`, and optionally `rel` and `target` properties.
-  - **rightLinks**: An array of link objects for the right side of the footer, each with `text` and `url` properties.
+  - **rightLinks**: An array of link objects for the right side of the footer, each with `text`, `url` and `svg` properties.
   - **bottomLinks**: An array of link objects for the bottom of the footer, each with `text` and `url` properties.
 
 ## Changes in Original Files
 
+- **`../templates/build.js`**: Changes in
+  - Changed path to use as sample product from `../samples/seed` to `../samples/TabularEditorDocs`
+  - Add `buildTabularEditorTemplate` function to include tabulareditor template in build. Basically a copy of `buildModernTemplate` function but with different paths.
+  - Alter `copyToDist` function to add `tabulareditor` to `cpSync` commands.
+  - Alter `serve` function to use `tabulareditor` theme instead of `modern`.
 - **`tabulareditor/layout/_master.tmpl`**: Master template, added new header, restructured content, original menu moved, changed footer etc.
 - **`tabulareditor/partials/class.tmpl.partial`**: Changes in template to match previous version.
 - **`tabulareditor/partials/class.header.tmpl.partial`**: Changes in template to match previous version.
 - **`tabulareditor/src/docfx.scss`**: Includes theme variables and additional Sass files. Adds more variables for use with Bootstrap and additional Sass files.
 - **`tabulareditor/src/docfx.ts`**: Includes and initializes headerSearch, adds additional Sass files.
+- **`tabulareditor/src/highlight.scss`**: Highlight js style changes.
+- **`tabulareditor/src/highlight.ts`**: Register DAX language, adds copy to clipboard function.
 - **`tabulareditor/src/layout.scss`**: Changes header and footer height variables. Comments out header and footer layout.
 - **`tabulareditor/src/local.scss`**: Adds additional footer HubSpot inline style, adds and overrides additional styles.
 - **`tabulareditor/src/nav.scss`**: Small adjustments to `#navbar` style.
 - **`tabulareditor/src/nav.ts`**: Changes to render the original navbar as buttons and exclude any submenu.
   - If article contains multiple H1 tags: H1 and H2 tags are included to "In this article" menu and H1 as "root" level,
     otherwise default behaviour is used, H2 and H3 tags are included to "In this article" menu and H2 as "root" level.
-- **`tabulareditor/src/toc.ts`**: Small addition to exclude TOC on first page.
+- **`tabulareditor/src/toc.ts`**: Major changes to load multiple TOCs at the same time to always include root and subfolder TOC.

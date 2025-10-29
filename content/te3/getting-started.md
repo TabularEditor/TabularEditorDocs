@@ -1,8 +1,8 @@
 ﻿---
 uid: getting-started
 title: Getting Started
-author: Daniel Otykier
-updated: 2021-09-08
+author: Morten Lønskov
+updated: 2025-09-23
 ---
 # Getting Started
 
@@ -16,8 +16,11 @@ None.
 
 ## System requirements
 
-- **Operating system:** Windows 7, Windows 8, Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 or newer
-- **.NET Runtime:** [.NET Desktop Runtime 6.0.8](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- **Operating system:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 or newer
+- **Architecture:** x64,  ARM64 (native from 3.23.0)
+- **.NET Runtime:** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+
+See the .NET supported OS policy for current Windows versions supported by each runtime.
 
 ## Activating your installation
 
@@ -93,6 +96,36 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 ```
 
 The next time you launch Tabular Editor 3, you will be prompted for a license key, just as when the tool was first installed on the machine.
+
+### Silent installation and license pre-provisioning
+
+You can deploy Tabular Editor silently and pre-provision the license through the Windows Registry.
+
+1. **Install silently** (no UI, no reboot):
+   ```powershell
+   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
+   ```
+
+You may also use `/package` instead of `/i`. Replace `<version>` with the actual version string. Use the ARM64 MSI if applicable.
+
+For details on available MSI command-line options, please refer to the official Microsoft documentation:  
+[Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
+
+2. **Write the license to the Registry** **before the first launch** of the application:
+   ```bat
+   REM Per-user license key (HKCU)
+   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
+   ```
+
+   If you are using an **Enterprise Edition** license key, also set the licensed user’s e‑mail:
+   ```bat
+   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
+   ```
+
+**Notes**
+- The installer does **not** accept a license parameter; licensing is handled via the Registry entries above.
+- Keys are stored under **HKCU** (per-user). Ensure the commands run in the context of the target user (e.g., via logon script or similar) so the values are written to the correct profile.
+- For additional keys and values, see the [Registry details](#registry-details).
 
 ## Next steps
 

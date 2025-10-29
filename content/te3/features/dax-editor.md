@@ -26,6 +26,8 @@ The main enabler of productivity in Tabular Editor 3's DAX Editor, is its **Para
 
 These features can also be invoked through the context menu of the editor.
 
+DAX calltips update as you cycle syntax alternatives using the Up/Down arrows.
+
 ![Dax Code Assist](~/content/assets/images/dax-code-assist.png)
 
 Most aspects of code assist can be configured under [**Tools > Preferences > Text Editors > DAX Editor > Code Assist**](xref:preferences#dax-editor--code-assist).
@@ -35,6 +37,8 @@ Most aspects of code assist can be configured under [**Tools > Preferences > Tex
 While the cursor is over an object reference such as a variable or a measure reference, hit [Alt+F12] to display an inline editor with the definition of that object, below the cursor. This is useful when you want to see the DAX code of a referenced object without leaving the current position in the document.
 
 ![Peek Definition](~/content/assets/images/peek-definition.png)
+
+Use the Esc key to close the Peek Definition panel again.
 
 ## Go To Definition
 

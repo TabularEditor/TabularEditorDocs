@@ -27,3 +27,15 @@ The Messages view will tell you the Source and the object from which the message
 There are two types of messages displayed Errors and Warnings
 - Errors: This tab shows any errors that prevent your model from being deployed or saved. For example, if you have an invalid expression in a calculation item or a circular dependency in a relationship. 
 - Warnings: This tab shows any warnings that does not concur with standards but does not prevent your model from being usable. This is for example having fully qualified measure references.
+- 
+## Copying Messages
+The message view allows for copying out the error message using Ctrl+C.
+ 
+From Tabular Editor 3.23.0 Ctrl+C copies the selected cell by default. Use Ctrl+Shift+C (or Copy Row in right-click menu) for row-level copy.
+
+> [!TIP]
+> Right-click a cell to choose Copy Cell / Copy Row.
+
+
+![Message View Copy](~/content/assets/images/messages-view-copy.png)
+
