@@ -35,7 +35,7 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 ## Up Next
 
 - Git integration
-- Power Query (M) Editing Enchantments
+- Power Query (M) Editing Enhancements
 - TOM Properties shown as TMDL and TMSL Scripts. 
 - Standalone CLI application
 - Built in Macros
