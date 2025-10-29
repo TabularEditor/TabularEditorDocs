@@ -76,6 +76,7 @@
 ### @csharp-script-library
 
 # Troubleshooting
+## @direct-lake-entity-updates-reverting
 ## @locale-not-supported
 
 # Other resources
