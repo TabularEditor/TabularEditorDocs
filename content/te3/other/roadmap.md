@@ -16,7 +16,7 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 - Built in Best Practice Rules
 - Power Query (M) Auto-Formatting
 - Semantic Bridge
-- Graphical Model Comparision
+- Graphical Model Comparison
 - .Net10 Support
 
  
