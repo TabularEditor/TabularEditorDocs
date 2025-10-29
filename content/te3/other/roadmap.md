@@ -2,45 +2,51 @@
 uid: roadmap
 title: Roadmap
 author: Morten Lønskov
-updated: 2024-04-23
+updated: 2025-10-29
 ---
 # Tabular Editor 3 Roadmap
 
 Below is an overview of major new features to be shipped with Tabular Editor 3 updates in the short- to long term:
 
 
-# [Planned 2025](#tab/Planned2025)
+# [Planned 2026](#tab/Planned2026)
 
-- Direct Lake on One Lake support
-- Day zero support for DAX User Defined Functions
-- Support for Calendars
-- Adding more Code Actions
+- AI Assistant in Tabular Editor
+- Localization
 - Built in Best Practice Rules
-- Built in Macros
 - Power Query (M) Auto-Formatting
+- Semantic Bridge
+- Graphical Model Comparison
+- .Net10 Support
 
  
 ## Shipped in 2025
 ✅ New Code Actions + Knowledge Base for all Code Actions
 ✅ C# Editor Improvements
 ✅ Copy TMDL Scripts from TOM Explorer
+✅ Direct Lake on One Lake support
+✅ Day zero support for DAX User Defined Functions
+✅ Support for Calendars
+✅ DAX Package Manager
+✅ Native ARM64 builds
 
 # [Future Features](#tab/FutureFeatures)
 
 ## Up Next
-- Localization
-- Power Query (M) Editing Enchantments
-- Macro Actions improvements such as automatic application across model and preferences for which to apply.
+
+- Git integration
+- Power Query (M) Editing Enhancements
 - TOM Properties shown as TMDL and TMSL Scripts. 
+- Standalone CLI application
+- Built in Macros
 
 ## Non Planned Features
 
-- Standalone CLI application
-- Git integration
 - DAX Debugger Filter Context visualizer
 - Configurable Daxscilla autocomplete code snippets
 - Configurable theming for code editors (syntax highlighting colors)
 - Incremental deployment (a la [ALM Toolkit](http://alm-toolkit.com/))
+- Macro Actions improvements such as automatic application across model and preferences for which to apply.
 
 
 # [Shipped](#tab/shipped)
