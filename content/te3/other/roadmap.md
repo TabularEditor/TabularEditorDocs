@@ -2,7 +2,7 @@
 uid: roadmap
 title: Roadmap
 author: Morten Lønskov
-updated: 2024-04-23
+updated: 2025-10-29
 ---
 # Tabular Editor 3 Roadmap
 
