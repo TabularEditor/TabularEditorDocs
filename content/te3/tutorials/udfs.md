@@ -164,6 +164,12 @@ As can be seen from the screen above, the following options are available when r
 - **Define Function** (DAX scripts or DAX queries only): Generates the function definition in the **DEFINE** section of your query, if it doesn't already exist there
 - **Define Function with dependencies** (DAX scripts or DAX queries only): Similar to the above, but also generates definitions for any other UDFs that the function depends on
 
+## DAX Package Manager
+
+Tabular Editor 3.24.0 introduces a new feature called the **DAX Package Manager**, which allows you to easily discover, install, and manage DAX UDF libraries from within Tabular Editor. At launch, the package manager supports the popular [DaxLib](https://daxlib.org) feed, which contains a wide range of useful UDFs for various scenarios.
+
+System administrators can disable access to the DAX Package Manager by specifying a [group policy](xref:policies).
+
 ## Advanced Features
 
 ### Formula Fixup
