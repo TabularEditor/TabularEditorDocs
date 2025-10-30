@@ -100,7 +100,7 @@
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(window.location.search);
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
-      function urlify(str) { return str.split('.').join('-'); }
+      function urlify(str) { return str.split('.').slice(0, 3).join('-'); }
       function init() {
         var version = getParameterByName("version");
         if (!version) version = "generic"; else if (is_3_18_orGreater(version)) { deleteElementById("dax-optimizer-banner"); }
