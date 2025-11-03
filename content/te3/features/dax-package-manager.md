@@ -154,6 +154,35 @@ Moreover, each UDFs imported through the DAX Package Manager will have the follo
 > [!CAUTION]
 > Modifying or deleting these extended properties manually may lead to unexpected behavior in the DAX Package Manager.
 
+## Handling conflicts
+
+### Modifying UDFs from packages
+
+If you modify the DAX expression of a UDF imported from a DAX package, you will see the following prompt upon upgrading or removing the package:
+
+![Update modified UDF](~/content/assets/images/dax-package-manager-update-modified.png)
+
+You have the following options:
+
+- **Yes**: The update will proceed, overwriting the changes you made to the UDF with its definition from the DAX Package Manager source.
+- **No**: The update will proceed, but the modified UDF(s) will remain untouched, which may potentially cause issues if the package update included breaking changes.
+- **Cancel**: Cancels the update.
+
+> [!TIP]
+> If you wish to "unlink" existing UDFs from the DAX Package Manager, remove the extended properties `TabularEditor_ObjDaxPkgHandle` and `TabularEditor_ObjDaxPkgContentHash` from the UDF objects. This way, the DAX Package Manager will no longer track these UDFs, and they will not be affected by future package updates or removals. However, you still need to be aware of name conflicts.
+
+### Installing a package with name conflicts
+
+If you attempt to install a package containing a UDF that has the same name as an existing UDF in the model (regardless of whether it was imported from another package or created manually), you will see the following prompt:
+
+![Install package name conflict](~/content/assets/images/dax-package-manager-install-conflict.png)
+
+You have the following options:
+
+- **Yes**: The installation will proceed, and the UDF from the package will overwrite the existing UDF in the model.
+- **No**: The installation will proceed, but the conflicting UDF(s) from the package will be skipped.
+- **Cancel**: Cancels the installation.
+
 ---
 
 ## Additional Resources
