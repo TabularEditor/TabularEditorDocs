@@ -20,9 +20,11 @@
 
 ## Features
 ### @csharp-scripts
+### @deployment
 ### @dax-debugger
 ### @dax-editor
 ### @dax-optimizer-integration
+### @dax-package-manager
 ### @dax-scripts
 ### @dax-query
 ### @diagram-view
