@@ -1,4 +1,4 @@
-﻿---
+﻿﻿---
 uid: deployment
 title: Model deployment
 author: Daniel Otykier
@@ -16,14 +16,14 @@ Tabular Editor 3 (Business and Enterprise Edition) can take a copy of the curren
 
 To perform a deployment, launch the **Deployment Wizard** through the **Model > Deploy...** menu option.
 
-> [NOTE]
+> [!NOTE]
 > Tabular Editor 3 Business Edition has certain [limitations](xref:editions) regarding what type of Analysis Services instance, or Power BI / Fabric workspace is supported for XMLA connectivity. This applies to deployment as well.
 
 ## Deployment options
 
 After selecting the destination server and database to deploy, you are presented with a list of **Deployment options**, as shown in the screenshot below.
 
-![Deployment Options](../assets/images/deployment-options.png)
+![Deployment Options](images/deployment-options.png)
 
 These are:
 
@@ -44,7 +44,7 @@ The last page of the deployment wizard lets you export the generated script, so 
 
 ## Deployment impact
 
-> [WARNING]
+> [!WARNING]
 > This type of deployment is a **metadata-only deployment**. Depending on the types of changes made to the model, imported data could be lost during deployment. In this case, you may need to execute a refresh operation once the deployment is complete.
 
 As a rule of thumb, the following changes can be made to the model without requiring a subsequent data refresh:
@@ -64,5 +64,5 @@ The following changes may require a **Full refresh**:
 
 - Adding/editing partitions, tables and columns
 
-> [WARNING]
+> [!WARNING]
 > Because of the potential impact of deploying a semantic model this way, we recommend not using this option to perform a deployment against a production environment. It is better to set up a [CI/CD pipeline for deploying models to production environments](https://blog.tabulareditor.com/category/ci-cd/).

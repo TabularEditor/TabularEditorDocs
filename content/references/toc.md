@@ -7,7 +7,6 @@
 ## @faq
 ## @preferences
 ## @policies
-## [API](../api/index.md) 
 ## @shortcuts3
 ## @shortcuts2
 ## @user-options

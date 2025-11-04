@@ -49,7 +49,7 @@ Once the debugger is started, you are presented with a number of new views that 
 3. (Optional) Add one or more columns to the Pivot Grid in the Filter area, Columns area or Row area.
 4. Right-click on the value cell within the Pivot Grid and choose **Debug this value**.
 
-![Debug From Pivot](~/content/assets/images/debug-from-pivot.png)
+![Debug From Pivot](~/content/assets/images/features/debug-from-pivot.png)
 
 # Debugging through a DAX Query
 
@@ -61,7 +61,7 @@ Once the debugger is started, you are presented with a number of new views that 
 
 3. Hit F5 to execute the query within Tabular Editor 3. Locate the value you want to debug, right-click the cell and choose **Debug**.
 
-![Debug From Query](~/content/assets/images/debug-from-query.png)
+![Debug From Query](~/content/assets/images/features/debug-from-query.png)
 
 # Debug views
 
@@ -83,7 +83,7 @@ You can inspect a locals value by clicking on the magnifying glass button within
 
 If you prefer to inspect the locals value in a separate DAX query window, you can toggle off the **Use popup inspector** option under **Tools > Preferences > DAX Debugger > Locals**.
 
-![Dax Debugger Settings](~/content/assets/images/dax-debugger-settings.png)
+![Dax Debugger Settings](~/content/assets/images/features/dax-debugger-settings.png)
 
 ## Watch
 This view allows you to enter any DAX expression, which will be calculated within the current evaluation context. You can enter scalar as well as table expressions and you can use all DAX functions available and refer to variables within the current evaluation scope. Watch values are automatically updated when stepping to a different subexpression, or when the evaluation context is changed. **Watch values are always evaluated at the scope of the currently selected item in the evaluation context stack**.
@@ -166,7 +166,7 @@ The `FILTER` function is an iterator that iterates over the table `ALL(Geography
 
 When debugging a scalar predicate, the **Locals** view will show two special items, **(Current expression)** and **(Filter expression)**. These are described below:
 
-![Debug Scalar Predicates](~/content/assets/images/debug-scalar-predicates.png)
+![Debug Scalar Predicates](~/content/assets/images/features/debug-scalar-predicates.png)
 
 In the above screenshot:
 

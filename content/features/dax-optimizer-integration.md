@@ -29,11 +29,11 @@ Watch Marco Russo from [SQLBI](https://www.sqlbi.com) introduce the DAX Optimize
 
 To access this feature, go to the **View** menu and choose **DAX Optimizer**.
 
-![Dax Optimizer](~/content/assets/images/dax-optimizer-view-menu.png)
+![Dax Optimizer](~/content/assets/images/features/dax-optimizer-view-menu.png)
 
 You will be presented with a new view similar to the figure below:
 
-![Dax Optimizer View](~/content/assets/images/dax-optimizer-view.png)
+![Dax Optimizer View](~/content/assets/images/features/dax-optimizer-view.png)
 
 To connect Tabular Editor 3 to the DAX Optimizer service, click **Connect...** through the **Options** menu. You will be prompted to enter your Tabular Tools (DAX Optimizer) credentials.
 
@@ -58,13 +58,13 @@ Once the analysis is complete, you will be presented with a summary showing the 
 
 Go to the **Issues** or **Measures** tab to view detailed results. Use the column headers to sort and filter the results.
 
-![Dax Optimizer Issues](~/content/assets/images/dax-optimizer-issues.png)
+![Dax Optimizer Issues](~/content/assets/images/features/dax-optimizer-issues.png)
 
 ## Navigating issues and measures
 
 When you double-click on an issue or measure in the detailed view shown above, you will be taken to the **DAX Optimizer Results** view, where the original DAX expression of the measure is shown, along with highlights of the problematic areas. The list on the left side of the screen lets you toggle which issues to highlight. Moreover, you can mark issues as **Fixed** or **Ignored** using the checkboxes within the list.
 
-![Dax Optimizer Results](~/content/assets/images/dax-optimizer-results.png)
+![Dax Optimizer Results](~/content/assets/images/features/dax-optimizer-results.png)
 
 Click on the **Find in TOM Explorer...** button in the top-right area of the view, to navigate to the corresponding measure in the currently loaded model.
 
@@ -111,7 +111,7 @@ If no dictionary file is provided, you will only be able to browse the obfuscate
 
 Once a VPAX file has been uploaded, please allow a few seconds for the file to be "verified" by the DAX Optimizer service. Once verified, you can perform a DAX Optimizer "run" by checking the "You agree to **consume 1 run** to analyze this model." checkbox, and then clicking the **Analyze** button in the **DAX Optimizer** view:
 
-![Dax Optimizer Analyze](~/content/assets/images/dax-optimizer-analyze.png)
+![Dax Optimizer Analyze](~/content/assets/images/features/dax-optimizer-analyze.png)
 
 The analysis will take a few minutes to complete, depending on the size of the model and the number of measures. Once the analysis is complete, you will be presented with a summary of the issues detected.
 

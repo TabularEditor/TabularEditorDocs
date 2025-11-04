@@ -12,7 +12,7 @@ applies_to:
 ---
 # What is a Refresh Policy?
 
-![Incremental Refresh Visual Abstract](~/content/assets/images/incremental-refresh-header.png)
+![Incremental Refresh Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-header.png)
 
 ---
 
@@ -120,7 +120,7 @@ A _Refresh Policy_ determines how the data is partitioned, and which of these Po
 
 ### Refresh Policy properties
 
-<img src="~/content/assets/images/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
+<img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
 
 Four different kinds of properties make up a basic Refresh Policy:
 1. <span style="color:#455C86">__Incremental window__</span> __properties__: The period window wherein data is <span style="color:#455C86">_kept up-to-date_</span>.
@@ -128,7 +128,7 @@ Four different kinds of properties make up a basic Refresh Policy:
 3. __Source expressions__: Define table schema and Power Query transformations of the table.
 4. __Mode__: Whether `Import` or `Hybrid` tables are used.
 
-![Incremental Refresh Policy Windows](~/content/assets/images/incremental-refresh-policy-windows.png)
+![Incremental Refresh Policy Windows](~/content/assets/images/tutorials/incremental-refresh-policy-windows.png)
 
 ---
 
@@ -136,7 +136,7 @@ Four different kinds of properties make up a basic Refresh Policy:
 
 In Power BI Desktop, these properties are named differently. Below is an overview of how the properties match the Power BI Desktop user interface.
 
-![Incremental Refresh Policy Windows Properties](~/content/assets/images/incremental-refresh-window-properties.png)
+![Incremental Refresh Policy Windows Properties](~/content/assets/images/tutorials/incremental-refresh-window-properties.png)
 
 ---
 
@@ -152,7 +152,7 @@ In the <span style="color:#01a99d">__*[hybrid](https://learn.microsoft.com/en-us
 
 This is configured with the <em>Mode</em> property when set to <code>Hybrid</code>. 
 
-![Incremental Refresh Policy Windows](~/content/assets/images/incremental-refresh-mode-pbi-match.png)
+![Incremental Refresh Policy Windows](~/content/assets/images/tutorials/incremental-refresh-mode-pbi-match.png)
 
 # [Only Refresh Complete Periods](#tab/completeperiods)
 In this configuration, the policy range will not include the current period in the <span style="color:#BC4A47">rolling window</span>. 
@@ -161,7 +161,7 @@ In the standard configuration of Incremental Refresh, the current period is alwa
 
 This is configured with the <em>IncrementalPeriodsOffset</em> property. In the above example, a value of <code>-1</code> for an <em>IncrementalGranularity</em> of <code>Day</code> will exclude the current date from the <span style="color:#455C86">incremental window</span> and thus the data scope; only complete days will be refreshed.
 
-![Incremental Refresh Policy Windows](~/content/assets/images/incremental-refresh-period-offset-pbi-match.png)
+![Incremental Refresh Policy Windows](~/content/assets/images/tutorials/incremental-refresh-period-offset-pbi-match.png)
 
 # [Detect Data Changes](#tab/datachanges)
 In this configuration, not all records are refreshed in the <span style="color:#455C86">incremental window</span>. Instead, records are only refreshed if they change. Detect data changes can further optimize refresh performance when using incremental refresh. To identify data changes you use a _Polling Expression_. A Polling Expression is a separate property that expects a valid M Expression to identify a maximum date from a list of dates.
@@ -189,7 +189,7 @@ in
     accountForNu11
 ```
 
-![Incremental Refresh Policy Windows](~/content/assets/images/incremental-refresh-detect-changes-pbi-match.png)
+![Incremental Refresh Policy Windows](~/content/assets/images/tutorials/incremental-refresh-detect-changes-pbi-match.png)
 
 ***
 

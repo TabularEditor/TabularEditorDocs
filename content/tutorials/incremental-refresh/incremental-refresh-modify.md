@@ -13,7 +13,7 @@ applies_to:
 # Modifying Incremental Refresh
 
 
-![Incremental Refresh Visual Abstract](~/content/assets/images/incremental-refresh-modify-a-refresh-policy.png)
+![Incremental Refresh Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-modify-a-refresh-policy.png)
 
 
 ---
@@ -35,17 +35,17 @@ Below is a general description of how you modify an existing Refresh Policy:
 2. __Select the Table:__ Select the table already configured for Incremental Refresh.
 3. __Find 'Refresh Policy' properties:__ In the _Properties_ window, go to the _Refresh Policy_ section.
 
-    <img src="~/content/assets/images/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
+    <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
 
 4. __Change the property:__ Change the __Property__ specified in the below sections, depending on what you want to change. For an overview of all Refresh Policy properties and what they do, see [here](xref:incremental-refresh-about#overview-of-all-properties).
 5. __Apply Changes:__ Deploy the model changes.
 4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
 
-    <img src="~/content/assets/images/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
+    <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
 7. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
-    <img src="~/content/assets/images/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
+    <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
 
 ---
 

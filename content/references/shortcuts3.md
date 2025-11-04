@@ -1,6 +1,6 @@
 ﻿---
 uid: shortcuts3
-title: Keyboard shortcuts
+title: Keyboard shortcuts Tabular Editor 3
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:

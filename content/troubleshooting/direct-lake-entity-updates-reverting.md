@@ -310,7 +310,8 @@ public class BatchEntityEditor : Form
     }
 }
 ```
-> [!NOTE] The script was generated using an LLM for code assistance, but has been tested by the Tabular Editor team. 
+> [!NOTE] 
+> The script was generated using an LLM for code assistance, but has been tested by the Tabular Editor team. 
 
 Running the script updates only the tables that receive a new entity name. After the script finishes, review the changes, save the model, and refresh in Power BI to confirm the metadata persists.
 

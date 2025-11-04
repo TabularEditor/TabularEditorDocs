@@ -120,7 +120,7 @@ If you are new to tabular modeling in general, we recommend that you use the sta
 
 ## Next steps
 
-- [Get Started with Tabular Editor 2](xref:getting-started-te2.md)
-- [Get Started with Tabular Editor 3](xref:getting-started.md)
+- [Get Started with Tabular Editor 2](xref:getting-started-te2)
+- [Get Started with Tabular Editor 3](xref:getting-started)
 - [Tabular Editor 3 roadmap](xref:roadmap)
 

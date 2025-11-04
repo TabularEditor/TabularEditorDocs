@@ -60,7 +60,7 @@ The typical workflow in this scenario, is the following:
 4. If using workspace mode, changes should be immediately visible in the Power BI service every time you hit Save (CTRL+S) in Tabular Editor.
 5. If not using workspace mode or when done making changes, use Tabular Editor's **Model > Deploy...** option to publish the changes to the Power BI service.
 
-As the model metadata "source of truth" in this scenario, is the file or folder structure stored on disk, this scenario not only enables parallel development with version control integration, but also continuous integration/continuous deployment (CI/CD) using an automated build server such as Azure DevOps. See <xref:powerbi-cicd> for more information.
+As the model metadata "source of truth" in this scenario, is the file or folder structure stored on disk, this scenario not only enables parallel development with version control integration, but also continuous integration/continuous deployment (CI/CD) using an automated build server such as Azure DevOps. 
 
 > [!WARNING]
 > As soon as you apply changes to a Power BI dataset through the Power BI service XMLA endpoint, that dataset can no longer be downloaded as a .pbix file. See [Dataset connectivity with the XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets) for more information.

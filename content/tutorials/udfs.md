@@ -51,13 +51,13 @@ First, verify your model's compatibility level is appropriate for UDFs:
 3. Select **Create > User-Defined Function**
 4. Give your function a descriptive name (spaces and special characters are not allowed; underscores and periods are permitted)
 
-![Creating a UDF](~/content/assets/images/new-udf.png)
+![Creating a UDF](~/content/assets/images/tutorials/new-udf.png)
 
 You can also add a UDFs through the **Model > Add User-Defined Function** menu option.
 
 Alternatively, you can create UDFs directly from the **DEFINE** section of a DAX query, by hitting F7 (Apply) or using the **Query > Apply** menu option. If your query contains multiple query-scoped definitions, you can also select just a subset of them and hit F8 (Apply Selection).
 
-![Creating a UDF from DAX Query](~/content/assets/images/udf-from-query.png)
+![Creating a UDF from DAX Query](~/content/assets/images/tutorials/udf-from-query.png)
 
 ### Step 3: Define Your Function
 
@@ -118,7 +118,7 @@ ROW(
 
 Calling the above function with a measure reference for each parameter, e.g. `MyFunction([Some Measure], [Some Measure])`, will yield different results for the `y` parameter depending on the current filter context, as shown in the screenshot below:
 
-![Pass-by-value vs Pass-by-reference](~/content/assets/images/udf-pass-by-ref.png)
+![Pass-by-value vs Pass-by-reference](~/content/assets/images/tutorials/udf-pass-by-ref.png)
 
 In addition to specifying the evaluation mode, you can also constrain the parameter type by specifying a data type before the evaluation mode, e.g. `x: INT64 VAL` or `y: TABLE EXPR`.
 
@@ -154,7 +154,7 @@ MEASURE 'Date'[New Measure] = MyFuncRenamed(1,2)
 
 Tabular Editor 3 adds powerful new features for working with UDFs in DAX queries. We already mentioned above how you can "apply" a UDF from the **DEFINE** section of a DAX query, to have it become a permanent part of your model. In addition, if using a UDF inside a DAX query, you can right-click on the function invocation and choose **Define Function** to automatically generate the function definition in the **DEFINE** section of your query:
 
-![Define Function from Query](~/content/assets/images/udf-define.png)
+![Define Function from Query](~/content/assets/images/tutorials/udf-define.png)
 
 As can be seen from the screen above, the following options are available when right-clicking on a UDF invocation:
 
@@ -180,7 +180,7 @@ When you rename a UDF, Tabular Editor 3 automatically updates all references thr
 
 The **Peek Definition** feature works with UDFs, allowing you to quickly view the function's implementation without navigating away from your current context.
 
-![Peek Definition for UDFs](~/content/assets/images/udf-peek-definition.png)
+![Peek Definition for UDFs](~/content/assets/images/tutorials/udf-peek-definition.png)
 
 ### Dependencies View
 
@@ -227,7 +227,7 @@ In Tabular Editor, UDFs also have a "Namespace" *property*, allowing you to cust
 
 Tabular Editor 3 automatically picks up any comments and displays them appropriately in autocomplete suggestions and tooltips.
 
-![UDF Autocomplete with Comments](~/content/assets/images/udf-comment-tooltips.png)
+![UDF Autocomplete with Comments](~/content/assets/images/tutorials/udf-comment-tooltips.png)
 
 ## Common Use Cases
 

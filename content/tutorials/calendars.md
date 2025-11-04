@@ -28,7 +28,7 @@ Once calendars are added to a table, they will be shown in the TOM Explorer unde
 
 Before you can use a calendar in your DAX calculations, you need to configure it by specifying which columns in the table represent the different calendar attributes. You can do this by right-clicking on the calendar in the TOM Explorer, then choosing the **Edit Column Mappings...** option:
 
-![Editing calendar column mappings](~/content/assets/images/tutorials/edit-calendar-mappings.png)
+![Editing calendar column mappings](~/content/assets/images/edit-calendar-mappings.png)
 
 For each calendar, you can add one or more so-called **Column Associations**. Each such association maps a column from the table, to a specific **Time Unit** (e.g. Year, Month, Week, etc.). You can also add additional associated columns for each mapping, which are typically used for columns that represent the same time unit, but in a different format. For example, you might have a "Month" column that contains the month number (1-12), and a "Month Name" column that contains the month name ("January", "February", etc.). Both of these columns can be associated with the "MonthOfYear" time unit.
 

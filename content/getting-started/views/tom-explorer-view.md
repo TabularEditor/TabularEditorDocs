@@ -1,4 +1,4 @@
-﻿﻿---
+﻿---
 uid: tom-explorer-view
 title: TOM Explorer view
 author: Morten Lønskov
