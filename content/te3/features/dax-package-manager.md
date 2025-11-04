@@ -104,9 +104,9 @@ Click on the update notification or open the DAX Package Manager view, to view a
 ## Installing Packages
 
 1. Open **DAX Package Manager**.
-1. In the **Browse** tab, select a package (e.g., `DaxLib.SVG`). Use the search bar to refine the search as needed.
-2. Click **Install**.
-3. Once installed, the package and its functions will appear in the TOM Explorer.
+2. In the **Browse** tab, select a package (e.g., `DaxLib.SVG`). Use the search bar to refine the search as needed.
+3. Click **Install**.
+4. Once installed, the package and its functions will appear in the TOM Explorer.
 
 You can also select specific **versions** before installing — useful for regression testing or ensuring compatibility with older models.
 
@@ -114,17 +114,17 @@ You can also select specific **versions** before installing — useful for regre
 
 ## Updating Packages
 
-- Navigate to the **Updates** tab or select a package with a newer version available.
-- Click **Update All** to update all installed packages, or **Update** on a specific one.
-- DPM fetches the latest definitions and replaces existing functions automatically.
+1. Navigate to the **Updates** tab or select a package with a newer version available.
+2. Click **Update All** to update all installed packages, or **Update** on a specific one.
+3. DPM fetches the latest definitions and replaces existing functions automatically.
 
 ---
 
 ## Removing Packages
 
-- Go to the **Installed** tab.
-- Select the package you wish to remove.
-- Click **Remove**.
+1. Go to the **Installed** tab.
+2. Select the package you wish to remove.
+3. Click **Remove**.
 
 All associated UDFs will be removed from the model.
 
