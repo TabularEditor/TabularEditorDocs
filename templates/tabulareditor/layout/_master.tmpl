@@ -249,18 +249,48 @@
 
           {{! meta applies to }}
           {{#applies_to}}
-          <div class="applies-to-div"><strong>Applies to: </strong><ul class="applies-to">
-            {{#editions}}
-              {{#none}}<li><span><span class="emoji">&#10060;</span> <del>{{edition}} Edition</del></span></li>{{/none}}
-              {{#partial}}<li><span title="{{partial}}"><span class="emoji">&#9888;</span> {{edition}} Edition</span></li>{{/partial}}
-              {{^partial}}{{^none}}<li><span><span class="emoji">&#10004;</span> {{edition}} Edition</span></li>{{/none}}{{/partial}}
-            {{/editions}}
-            {{#versions}}
-              {{#none}}<li><span><span class="emoji">&#10060;</span> <del>Tabular Editor {{version}}</del></span></li>{{/none}}
-              {{#partial}}<li><span title="{{partial}}"><span class="emoji">&#9888;</span>Tabular Editor {{version}}</span></li>{{/partial}}
-              {{^partial}}{{^none}}<li><span><span class="emoji">&#10004;</span>Tabular Editor {{version}}</span></li>{{/none}}{{/partial}}
-            {{/versions}}
-          </ul></div>
+          <div class="applies-to-div"><strong>Applies to: </strong>
+            <ul class="applies-to">
+            {{#products}}
+              <li class="applies-to-product">
+                {{^editions}}
+                  {{#full}}<span class="emoji">&#10004;</span>{{/full}}
+                  {{#partial}}<span class="emoji" title="{{note}}">&#9888;</span>{{/partial}}
+                  {{#none}}<span class="emoji">&#10060;</span>{{/none}}
+                {{/editions}}
+                {{#none}}<del>{{product}}</del>{{/none}}
+                {{^none}}<strong>{{product}}</strong>{{/none}}
+                {{^editions}}
+                  {{#full}} All Editions{{/full}}
+                  {{#partial}} Partially supported{{/partial}}
+                {{/editions}}
+                {{#since}}
+                  <span class="version-info">
+                    ({{#until}}Available in {{since}}–{{until}}{{/until}}{{^until}}Available since {{since}}{{/until}})
+                  </span>
+                {{/since}}
+                {{^editions}}
+                  {{#note}}<span class="support-note"> - {{note}}</span>{{/note}}
+                {{/editions}}
+                {{#editions}}
+                  <div class="applies-to-edition">
+                    {{#none}}
+                      <span class="emoji">&#10060;</span> <del>{{edition}} Edition</del>
+                    {{/none}}
+                    {{^none}}
+                      {{#partial}}
+                        <span class="emoji" title="{{note}}">&#9888;</span> {{edition}} Edition{{#note}} ({{note}}){{/note}}
+                      {{/partial}}
+                      {{^partial}}
+                        <span class="emoji">&#10004;</span> {{edition}} Edition
+                      {{/partial}}
+                    {{/none}}
+                  </div>
+                {{/editions}}
+              </li>
+            {{/products}}
+            </ul>
+          </div>
           {{/applies_to}}
 
           {{! START CLOSE DIV: Check if document has updated or applies_to metadata, add a begin div to be able to add spacing for the metadata}}

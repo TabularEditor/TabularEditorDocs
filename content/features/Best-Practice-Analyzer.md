@@ -1,9 +1,20 @@
 ﻿---
 uid: best-practice-analyzer
 title: Best Practice Analyzer
-versions:
-- version: "2.x"
-- version: "3.x"
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      since: 3.15.0
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          partial: true
+          note: "Limited to 10 objects"
+        - edition: Enterprise
+          full: true
 ---
 # Best Practice Analyzer
 

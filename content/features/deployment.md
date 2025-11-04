@@ -16,6 +16,7 @@ Tabular Editor 3 (Business and Enterprise Edition) can take a copy of the curren
 
 To perform a deployment, launch the **Deployment Wizard** through the **Model > Deploy...** menu option.
 
+
 > [!NOTE]
 > Tabular Editor 3 Business Edition has certain [limitations](xref:editions) regarding what type of Analysis Services instance, or Power BI / Fabric workspace is supported for XMLA connectivity. This applies to deployment as well.
 
@@ -23,7 +24,7 @@ To perform a deployment, launch the **Deployment Wizard** through the **Model > 
 
 After selecting the destination server and database to deploy, you are presented with a list of **Deployment options**, as shown in the screenshot below.
 
-![Deployment Options](images/deployment-options.png)
+![Deployment Options](~/content/assets/images/deployment-options.png)
 
 These are:
 
@@ -43,6 +44,7 @@ If any of the options on the **Deployment options** page were deselected, Tabula
 The last page of the deployment wizard lets you export the generated script, so you can review the changes before executing them.
 
 ## Deployment impact
+
 
 > [!WARNING]
 > This type of deployment is a **metadata-only deployment**. Depending on the types of changes made to the model, imported data could be lost during deployment. In this case, you may need to execute a refresh operation once the deployment is complete.

@@ -39,10 +39,10 @@ First, verify your model's compatibility level is appropriate for UDFs:
 
 1. Open your model in Tabular Editor 3
 2. Select the root node ("Model") in the **TOM Explorer**
-2. In the **Properties** panel, expand the **Database** property, then check that the **Compatibility Level** is set to **1702** or higher
-3. If needed, update the compatibility level and save your model
+3. In the **Properties** panel, expand the **Database** property, then check that the **Compatibility Level** is set to **1702** or higher
+4. If needed, update the compatibility level and save your model
 
-![Setting Compatibility Level](~/content/assets/images/udfs-cl1702.png)
+![Setting Compatibility Level](~/content/assets/images/tutorials/udfs-cl1702.png)
 
 ### Step 2: Add a New Function
 
