@@ -13,7 +13,7 @@ applies_to:
 # Modifying Incremental Refresh Table Schemas
 
 
-![Incremental Refresh Workspace Mode Visual Abstract](~/content/assets/images/incremental-refresh-update-schema-header.png)
+![Incremental Refresh Workspace Mode Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-update-schema-header.png)
 
 
 ---
@@ -27,17 +27,17 @@ __When adding or removing columns from a table configured with Incremental Refre
 
 1. __Detect schema changes:__ Right-click the table and select _'Update table schema...'_.
 
-  <img src="~/content/assets/images/incremental-refresh-update-table-schema.png" class="noscale" alt="Update Table Schema" style="width:450px !important"/>
+  <img src="~/content/assets/images/tutorials/incremental-refresh-update-table-schema.png" class="noscale" alt="Update Table Schema" style="width:450px !important"/>
 
 2. __Apply detected schema changes:__ In the _'Apply Schema Changes'_ dialogue, confirm the desired schema changes.
 3. __Apply changes:__ Deploy the model changes.
 4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
 
-  <img src="~/content/assets/images/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
+  <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
 5. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
-  <img src="~/content/assets/images/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
+  <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
 
 ---
 

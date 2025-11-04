@@ -10,6 +10,7 @@ This section contains documentation about Tabular Editor features.
 - @dax-query - Query execution and testing
 - @dax-scripts - Batch DAX operations and automation
 - @code-actions - Automated code improvements and refactoring
+- @dax-package-manager - DAX package Manager
 
 ### Scripting and Automation
 - @csharp-scripts - Custom scripting capabilities overview

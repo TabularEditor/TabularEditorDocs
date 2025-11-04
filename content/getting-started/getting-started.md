@@ -130,5 +130,3 @@ For details on available MSI command-line options, please refer to the official 
 ## Next steps
 
 - [Overview of Tabular Editor 3's user interface](xref:user-interface)
-- [What's new in Tabular Editor 3](whats-new.md)
-- [Tabular Editor 3 Onboarding Guide](xref:onboarding-te3)

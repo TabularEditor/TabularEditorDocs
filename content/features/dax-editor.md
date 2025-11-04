@@ -14,7 +14,7 @@ It comes in three different *flavours*:
 - **DAX Query** (Connected feature) Used for writing DAX queries in order to retrieve data from the connected instance of Analysis Services / Power BI.
 - **DAX Script** Used for viewing and editing DAX expressions and basic properties across multiple objects in a single document.
 
-All three flavours support the same operations in terms of [keyboard shortcuts](xref:shortcuts#dax-code), syntax highlighting, code assist, etc.
+All three flavours support the same operations in terms of [keyboard shortcuts](xref:shortcuts3#dax-code), syntax highlighting, code assist, etc.
 
 ## Code Assist features
 

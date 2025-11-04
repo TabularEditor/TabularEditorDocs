@@ -4,6 +4,7 @@
 ## @dax-query 
 ## @dax-scripts 
 ## @code-actions 
+## @dax-package-manager
 
 # Scripting and Automation
 ## @csharp-scripts 

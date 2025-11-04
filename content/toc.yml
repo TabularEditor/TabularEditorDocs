@@ -21,3 +21,6 @@
 - name: Security
   href: security/
   homepage: security/index.md
+- name: API
+  href: api/
+  homepage: api/index.md

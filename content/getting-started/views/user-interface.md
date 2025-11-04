@@ -217,6 +217,6 @@ You can change the behavior of these dynamic menus under **Tools > Preferences >
 
 # Next steps
 
-- [Using the TOM Explorer in Tabular Editor 3](xref:tom-explorer-view)
+- @tom-explorer-view
 - @supported-files
 - @preferences

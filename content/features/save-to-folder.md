@@ -13,7 +13,7 @@ applies_to:
 Save to Folder allows you to store your model metadata as individual files, which can be easily managed by version control systems. Instead of having a single file (.bim or .pbix) that contains all the objects of your data model, such as tables, measures, relationships, etc., you can split them into separate files and store them in a folder. This way, you can use source control tools to track the changes, compare versions, and collaborate with other developers on your data model.
 
 > [!NOTE]
->You can save your data model to a folder using two different formats: JSON or [TMDL](tmdl-common.md).
+>You can save your data model to a folder using two different formats: JSON or [TMDL](tmdl.md).
 
 To save your model to folder, follow these steps:
 

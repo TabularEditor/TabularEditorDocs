@@ -1,4 +1,4 @@
-﻿---
+﻿﻿---
 uid: deployment
 title: Model deployment
 author: Daniel Otykier
@@ -23,7 +23,7 @@ To perform a deployment, launch the **Deployment Wizard** through the **Model > 
 
 After selecting the destination server and database to deploy, you are presented with a list of **Deployment options**, as shown in the screenshot below.
 
-![Deployment Options](../assets/images/deployment-options.png)
+![Deployment Options](images/deployment-options.png)
 
 These are:
 

@@ -22,7 +22,7 @@ applies_to:
 
 ---
 
-![Incremental Refresh Workspace Mode Visual Abstract](~/content/assets/images/incremental-refresh-workspace-mode.png)
+![Incremental Refresh Workspace Mode Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-workspace-mode.png)
 
 ---
 
@@ -37,13 +37,13 @@ Incremental Refresh creates new partitions upon the first scheduled refresh in a
 ### Workspace Mode is not Recommended
 The reason is because _Workspace Mode_ will overwrite the remote model metadata with local metadata files; any out-of-sync changes (like to Policy Range partitions) will be lost. When working with _Workspace Mode_ on these models, you would need to _Apply refresh policy_ for tables using incremental refresh before saving changes every day.
 
-  ![Workspace mode can get out of sync with local metadata.](~/content/assets/images/incremental-refresh-workspace-mode-out-of-sync.png)
+  ![Workspace mode can get out of sync with local metadata.](~/content/assets/images/tutorials/incremental-refresh-workspace-mode-out-of-sync.png)
 
 ### Recommendation: Develop & Deploy from Local Metadata
 __Instead, it is recommended to develop the model from the local metadata files.__ Changes can be deployed excluding partitions governed by a Refresh Policy, so there is no risk of overwriting the policies created by Power BI. A second read/refresh instance of Tabular Editor can be connected to the remote model for testing purposes.
 
 To deploy the model, go _Model > Deploy..._ which opens the Deployment Wizard. Here you can select whether you want to include partitions governed by Incremental Refresh policies:
 
-  ![Deploy partitions, avoiding partitions with refresh policies.](~/content/assets/images/incremental-refresh-deploy-partitions.png)
+  ![Deploy partitions, avoiding partitions with refresh policies.](~/content/assets/images/tutorials/incremental-refresh-workspace-mode.pngincremental-refresh-deploy-partitions.png)
 
 By deploying the model without these Policy Range partitions, you are mitigating any potential impact due to out-of-sync incremental refresh partitions between the metadata and remote model.

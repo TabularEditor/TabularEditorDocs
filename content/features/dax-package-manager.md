@@ -1,4 +1,4 @@
-﻿---
+---
 uid: dax-package-manager
 title: DAX Package Manager
 author: Daniel Otykier

@@ -129,5 +129,5 @@ You can customize the behavior of Code Actions through the **Tools > Preferences
 
 We plan to add more configuration options to this screen in future versions, such as an option to toggle individual Code Actions on and off. Stay tuned!
 
-![Code Actions Preferences](~/content/assets/images/features/code-actions-preferences.png)
+![Code Actions Preferences](~/content/assets/images/code-actions-preferences.png)
 

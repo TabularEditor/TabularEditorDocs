@@ -91,5 +91,3 @@ The next time you launch Tabular Editor 3, you will be prompted for a license ke
 ## Next steps
 
 - [Overview of Tabular Editor 3's user interface](xref:user-interface)
-- [What's new in Tabular Editor 3](whats-new.md)
-- [Tabular Editor 3 Onboarding Guide](xref:onboarding-te3)

@@ -12,7 +12,7 @@ applies_to:
 ---
 # Setting up Incremental Refresh
 
-![Incremental Refresh Setup Visual Abstract](~/content/assets/images/incremental-refresh-setup-refresh-policy.png)
+![Incremental Refresh Setup Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-setup-refresh-policy.png)
 
 ---
 
@@ -47,7 +47,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 
 5. __Enable the Table Refresh Policy:__ In the _'Properties'_ window, set the `EnableRefreshPolicy` property on the table to `True`:
 
-<img src="~/content/assets/images/incremental-refresh-enable-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-enable-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 
 6. __Configure the Table Refresh:__ Next, select the table for which you want to configure incremental refresh. In the **Expression Editor** window, Select __'Source Expression'__ from the dropdown, insert your Power Query M Expression from step 4 and alter the Power Query M Expression such that there is a filter step on the date column for which you will enable incremental refresh. 
 
@@ -81,7 +81,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 8. __Apply Model Changes:__ Save your model (Ctrl+S).
 9. __Apply Refresh Policy:__ Right-click on the table and choose "Apply Refresh Policy".
   
-<img src="~/content/assets/images/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 
    __That's it!__ At this point, you should see that the Power BI service has automatically generated the partitions on your table, based on the policy you specified. All that's left is to refresh all the partitions.
 
@@ -89,7 +89,7 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 
 10. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
-   <img src="~/content/assets/images/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:400px !important"/>
+   <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:400px !important"/>
 
 Finally, you can configure the scheduled refresh in Power BI Service. Power BI will automatically handle the partitioning of your table. You can always connect to the remote model to view and validate the partitions, i.e. using the VertiPaq Analyzer. 
 
@@ -209,15 +209,15 @@ If you have configured a native query, it may still be possible to configure and
 
 1. __Author and Save the Native Query:__ Write your native query in SQL Server Management Studio or Azure Data Studio. Include a placeholder `WHERE` clause which filters >= a DateTime parameter, and < another DateTime parameter.
 
-   <img src="~/content/assets/images/incremental-refresh-native-query-sql.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>
+   <img src="~/content/assets/images/tutorials/incremental-refresh-native-query-sql.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>incremental-refresh-native-query-formatted.png
 
 2. __Replace the Native Query String in the Source Expression:__ Copy the query and replace the existing query, which will be full of characters like (lf) (line feed), (cr) (carraige return) and (n) (new line). Doing this makes the query actually readable and editable without resorting to the Native Query user interface of Power BI Desktop.
 
-<img src="~/content/assets/images/incremental-refresh-native-query-unformatted.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-native-query-unformatted.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>
 
    Replace the above text in the `Query` parameter to the below, for example:
 
-<img src="~/content/assets/images/incremental-refresh-native-query-formatted.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>
+<img src="~/content/assets/images/tutorials/incremental-refresh-native-query-formatted.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>
 
 3. __Add `RangeStart` and `RangeEnd`:__ Concatenate "RangeStart" and "RangeEnd" inside of the `WHERE` clause, replacing the placeholder fields and converting the parameters to date with `Date.From` and to string data types using `Date.ToText` with the `Format` option set to `"yyyy-MM-dd`. Don't forget to include single quotes `'` on either side of the concatenation. Below is an example of what the final query would look like:
 
