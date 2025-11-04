@@ -66,6 +66,7 @@ Visualizes dependencies between the selected table and other model objects. Can 
 
 - **Export script**:  
 Exports the selected objects as a TMSL or TMDL script for use in deployment or source control.
+Exports the selected objects as a TMSL or TMDL script for use in deployment or source control.
 
 - **Macro Menus**:  
 Macros can be placed into folders and run against the selected object. In the example above the user has a Modelling and Analysis folder for Macro scripts on table objects.
@@ -106,9 +107,18 @@ The toolbar allow you to show and hide different types of objects, toggling pers
    **Shortcut:** `Ctrl+4`
 
 6. **Show/Hide Display Folders**  
+5. **Show/Hide Calendars**  
+   Controls whether calendars are visible.  
+   **Shortcut:** `Ctrl+4`
+
+6. **Show/Hide Display Folders**  
    Enables or disables the display of folder organization within tables.  
    **Shortcut:** `Ctrl+5`
 
+7. **Group User-Defined Functions by Namespace
+   When enabled, DAX User-Defined Functions are grouped hierarchically by [namespace](xref:udfs#namespaces), rather than being shown as a flat list.
+
+8. **Show/Hide Hidden Objects**  
 7. **Group User-Defined Functions by Namespace
    When enabled, DAX User-Defined Functions are grouped hierarchically by [namespace](xref:udfs#namespaces), rather than being shown as a flat list.
 
@@ -117,15 +127,22 @@ The toolbar allow you to show and hide different types of objects, toggling pers
    **Shortcut:** `Ctrl+6`
 
 9. **Show/Hide Info Columns**  
+9. **Show/Hide Info Columns**  
    Shows or hides metadata columns, such as data types or object status.  
    **Shortcut:** `Ctrl+7`
 
 10. **Perspective Selector**  
+10. **Perspective Selector**  
    Drop-down to choose a specific perspective. Only objects in the selected perspective will be shown in the TOM Explorer.
 
 11. **Language Selector**  
+11. **Language Selector**  
    Allows switching between different languages for model metadata localization.
 
+12. **Colapse All**  
+   Collaps all nodes in the TOM Explorer tree view. 
+
+13. **Search Bar**  
 12. **Colapse All**  
    Collaps all nodes in the TOM Explorer tree view. 
 

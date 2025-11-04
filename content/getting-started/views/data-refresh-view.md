@@ -27,3 +27,6 @@ A new refresh will run in the background so that you can continue to build your 
 
 > [!TIP]
 > If you need accurate and reliable information about refresh progress and durations, you should connect [SQL Server Profiler](https://learn.microsoft.com/en-us/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) to your SSAS instance, and collect the information manually during processing.
+
+> [!TIP]
+> If you need accurate and reliable information about refresh progress and durations, you should connect [SQL Server Profiler](https://learn.microsoft.com/en-us/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) to your SSAS instance, and collect the information manually during processing.

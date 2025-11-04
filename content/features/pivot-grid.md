@@ -157,4 +157,4 @@ The Pivot Grid has a few more features that are useful to know about:
 Below is a list of known limitations and issues with Pivot Grids in Tabular Editor 3.16.0, which we are working to address in future releases:
 
 - Format rules (such as icon sets, data bars, etc.) are not properly persisted when saving a Pivot Grid layout as a `.te3pivot` file.
-- If you open a .te3pivot file on a model different from the one the layout was saved from, fields that do not exist in the current model will be removed from the layou
+- If you open a .te3pivot file on a model different from the one the layout was saved from, fields that do not exist in the current model will be removed from the layout. Hitting Save (Ctrl+S) will save the layout with the removed fields removed. We may change this behavior in a future release so that the .te3pivot file is not overwritten without explicit confirmation.
