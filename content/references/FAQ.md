@@ -7,7 +7,7 @@ title: Frequently Asked Questions
 ## What is Tabular Editor?
 Essentially, Tabular Editor provides a UI for editing the metadata making up an Analysis Services Tabular Model. The main difference between using Tabular Editor for editing a model versus using Visual Studio, is that Tabular Editor does not load any _data_ - only _metadata_. This means that no validations or calculations are performed when you create and modify measures, display folders, etc. Validations and calculations are performed only when the user chooses to persist the changes to the database. This provides a better developer experience for medium to large sized models, which tend to be slow to work with in Visual Studio.
 
-Additionally, Tabular Editor has a lot of [features](@boosting-productivity-te3) that will generally boost your productivity and make certain tasks easier.
+Additionally, Tabular Editor has a lot of [features](../getting-started/boosting-productivity-te3.md) that will generally boost your productivity and make certain tasks easier.
 
 ## Why do we need yet another tool for SSAS Tabular?
 Working with Analysis Services Tabular, you may already be familiar with SQL Server Data Tools (Visual Studio), [DAX Editor](https://www.sqlbi.com/tools/dax-editor/), [DAX Studio](https://www.sqlbi.com/tools/dax-studio/), [BISM Normalizer](http://bism-normalizer.com/) and [BIDSHelper](https://bidshelper.codeplex.com/). These are all excellent tools, each with their own purposes. Tabular Editor is not intended to replace any of these tools, but should rather be seen as a supplement to them. Please view the [Why Tabular Editor](https://tabulareditor.com/why-tabular-editor) article, to see why Tabular Editor is justified.

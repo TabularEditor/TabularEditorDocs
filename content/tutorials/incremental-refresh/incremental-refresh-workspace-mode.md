@@ -44,6 +44,7 @@ __Instead, it is recommended to develop the model from the local metadata files.
 
 To deploy the model, go _Model > Deploy..._ which opens the Deployment Wizard. Here you can select whether you want to include partitions governed by Incremental Refresh policies:
 
-  ![Deploy partitions, avoiding partitions with refresh policies.](~/content/assets/images/tutorials/incremental-refresh-workspace-mode.pngincremental-refresh-deploy-partitions.png)
+  ![Deploy partitions, avoiding partitions with refresh policies.](~/content/assets/images/tutorials/incremental-refresh-deploy-partitions.png)
+  
 
 By deploying the model without these Policy Range partitions, you are mitigating any potential impact due to out-of-sync incremental refresh partitions between the metadata and remote model.
