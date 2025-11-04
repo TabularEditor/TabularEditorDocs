@@ -105,8 +105,8 @@ Click on the update notification or open the DAX Package Manager view, to view a
 
 1. Open **DAX Package Manager**.
 1. In the **Browse** tab, select a package (e.g., `DaxLib.SVG`). Use the search bar to refine the search as needed.
-3. Click **Install**.
-4. Once installed, the package and its functions will appear in the TOM Explorer.
+2. Click **Install**.
+3. Once installed, the package and its functions will appear in the TOM Explorer.
 
 You can also select specific **versions** before installing — useful for regression testing or ensuring compatibility with older models.
 
