@@ -1,6 +1,9 @@
 ﻿---
 uid: best-practice-analyzer
 title: Best Practice Analyzer
+versions:
+- version: "2.x"
+- version: "3.x"
 ---
 # Best Practice Analyzer
 
