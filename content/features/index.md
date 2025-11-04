@@ -30,7 +30,7 @@ This section contains documentation about Tabular Editor features.
 
 ### Data Exploration and Connectivity
 - @import-tables - Table import functionality
-- @pivot-grid.md - Data analysis and visualization
+- @pivot-grid - Data analysis and visualization
 - @semantic-model-types
   - @direct-lake-sql-model
   - @dq-over-as-limitations
@@ -41,8 +41,8 @@ This section contains documentation about Tabular Editor features.
 
 
 ### Model Organization
-- @hierarchical-display.md - Object tree navigation and organization
-- @table-groups.md - Organizing tables in logical groups
+- @hierarchical-display - Object tree navigation and organization
+- @table-groups - Organizing tables in logical groups
 
 ### Model Deployment and Management
 - @supported-files - File format support

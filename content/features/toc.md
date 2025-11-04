@@ -23,20 +23,20 @@
 ## @dax-optimizer-integration 
 
 # Data Exploration and Connectivity
-## @import-tables 
-## @pivot-grid.md 
+## @import-tables
+## @pivot-grid
 ## @semantic-model-types
 ### @direct-lake-sql-model
 ### @dq-over-as-limitations
 
 # Advanced Modelling Features
-## @metadata-translation-editor 
-## @perspective-editor 
+## @metadata-translation-editor
+## @perspective-editor
 
 
 # Model Organization
-## @hierarchical-display.md 
-## @table-groups.md 
+## @hierarchical-display
+## @table-groups
 
 # Model Deployment and Management
 ## @supported-files 
