@@ -4,17 +4,9 @@ title: Best Practice Analyzer
 applies_to:
   products:
     - product: Tabular Editor 2
-      none: true
+      full: true
     - product: Tabular Editor 3
-      since: 3.15.0
-      editions:
-        - edition: Desktop
-          none: true
-        - edition: Business
-          partial: true
-          note: "Limited to 10 objects"
-        - edition: Enterprise
-          full: true
+      full: true
 ---
 # Best Practice Analyzer
 
