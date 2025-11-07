@@ -4,14 +4,6 @@ title: Using Workspace Mode on a Model with Incremental Refresh
 author: Kurt Buhler
 updated: 2023-01-09
 applies_to:
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-    - edition: Enterprise
-  versions:
-    - version: 2.X
-    - version: 3.4.2 and earlier
   products:
     - product: Tabular Editor 2
       none: true
@@ -21,8 +13,7 @@ applies_to:
         - edition: Desktop
           none: true
         - edition: Business
-          partial: true
-          note: "Limited to SQL Server Standard Edition"
+          full: true
         - edition: Enterprise
           full: true
 ---
