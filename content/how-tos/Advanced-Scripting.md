@@ -1,4 +1,15 @@
-﻿# Advanced Scripting
+﻿---
+uid: advanced-scripting
+title: Advanced Scripting
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      full: true
+---
+
+# Advanced Scripting
 
 This is an introduction to the Advanced Scripting capabilities of Tabular Editor. Information in this document is subject to change. Also, make sure to check out our script library @csharp-script-library, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor. 
 ## What is Advanced Scripting?

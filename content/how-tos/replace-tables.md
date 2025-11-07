@@ -1,5 +1,15 @@
+---
+uid: replace-tables
+title: Replace tables
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      full: true
+---
 ## Replace tables
-As of version 2.7, you can now replace a table simply by copying (CTRL+C) one table - even from another instance of Tabular Editor - and then selecting the table you want to replace, before hitting paste (CTRL+V). A prompt will ask you to confirm whether you really want to replace the table ("Yes"), insert as a new table ("No") or cancel the operation entirely:
+You can replace a table simply by copying (CTRL+C) one table - even from another instance of Tabular Editor - and then selecting the table you want to replace, before hitting paste (CTRL+V). A prompt will ask you to confirm whether you really want to replace the table ("Yes"), insert as a new table ("No") or cancel the operation entirely:
 
 ![image](https://user-images.githubusercontent.com/8976200/36545892-40983114-17ea-11e8-8825-e8de6fd4e284.png)
 

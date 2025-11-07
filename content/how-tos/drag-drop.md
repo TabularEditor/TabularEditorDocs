@@ -1,3 +1,14 @@
+---
+uid: drag-drop
+title: Drag and drop objects
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      full: true
+---
+
 ## Drag and drop objects
 By far the most useful feature of Tabular Editor, when working on models with many measures/columns organised in display folders. Check out the animation below:
 

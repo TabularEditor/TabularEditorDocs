@@ -4,12 +4,19 @@ title: Creating PBIX File from XMLA Endpoint.
 author: Morten Lønskov
 updated: 2023-10-18
 applies_to:
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-      partial: Tabular Editor 3 Business Edition only allows connecting to the XMLA endpoint of Premium-Per-User (PPU) workspaces.
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      since: 3.15.0
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          partial: true
+          note: "Only Premium Per User XMLA Endpoints"
+        - edition: Enterprise
+          full: true
 ---
 # Downloading a Power BI dataset to a .pbix using the XMLA endpoint
 

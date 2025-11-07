@@ -1,4 +1,15 @@
-﻿# Advanced Object Filtering
+﻿---
+uid: advanced-filtering-explorer-tree
+title: Advanced Object Filtering
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      partial: true
+---
+
+# Advanced Object Filtering
 
 This article describes how to use the "Filter" textbox within Tabular Editor - an incredibly useful feature when navigating complex models.
 

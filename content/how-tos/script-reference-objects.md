@@ -1,3 +1,14 @@
+---
+uid: scripting-referencing-objects
+title: Scripting/referencing objects
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      full: true
+---
+
 ## Scripting/referencing objects
 You can use drag-and-drop functionality, to script out objects in the following ways:
 

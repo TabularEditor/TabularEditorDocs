@@ -3,6 +3,12 @@ uid: roadmap
 title: Roadmap
 author: Morten Lønskov
 updated: 2025-10-29
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      full: true
 ---
 # Tabular Editor 3 Roadmap
 

@@ -39,7 +39,6 @@
 ## @table-groups
 
 # Model Deployment and Management
-## @supported-files 
 ## @deployment 
 ## @workspace-databases 
 ## @workspace-mode 

@@ -4,10 +4,18 @@ title: Keyboard shortcuts Tabular Editor 3
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Keyboard shortcuts
 

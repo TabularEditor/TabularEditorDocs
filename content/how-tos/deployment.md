@@ -1,3 +1,14 @@
+---
+uid: deployment-how-to
+title: Deployment
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      full: true
+---
+
 ## Deployment
 If you want to deploy the currently loaded model to a new database, or overwrite an existing database with the model changes (for example when loading from a Model.bim file), use the Deployment Wizard under "Model" > "Deploy...". 
 
