@@ -4,10 +4,17 @@ title: Setup or Modify RLS
 author: Kurt Buhler
 updated: 2023-03-14
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Configure Row-Level Security (RLS)
 

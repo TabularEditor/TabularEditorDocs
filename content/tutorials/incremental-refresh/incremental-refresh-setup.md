@@ -4,11 +4,17 @@ title: Set Up a New Refresh Policy
 author: Kurt Buhler
 updated: 2023-01-09
 applies_to:
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Setting up Incremental Refresh
 
