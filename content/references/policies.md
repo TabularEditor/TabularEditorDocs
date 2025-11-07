@@ -3,6 +3,18 @@ uid: policies
 title: Policies
 author: Daniel Otykier
 updated: 2024-10-30
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
 # Policies

@@ -1,6 +1,12 @@
 ﻿---
 uid: FormatDax
 title: FormatDax deprecation
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      true: true
+    - product: Tabular Editor 3
+      none: true
 ---
 # FormatDax deprecation
 
