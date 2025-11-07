@@ -1,6 +1,17 @@
-## User Settings Files
+---
+uid: user-setting-files-te2
+title: User Settings Files Tabular Editor 2
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      none: true
+---
 
-When Tabular Editor is executed, it writes some additional files to the disk at various locations. What follows is a description of these files and their content:
+## User Settings Files Tabular Editor 2
+
+When Tabular Editor 2 is started, it writes some additional files to the disk at various locations. What follows is a description of these files and their content:
 
 ### In %ProgramData%\TabularEditor
 

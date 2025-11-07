@@ -21,7 +21,7 @@ This section contains reference materials for Tabular Editor.
 - @roadmap - Product roadmap and future plans
 
 ### Deprecated Features
-- @roadmap - Information about deprecated DAX formatting functionality
+- @formatdax - Information about deprecated DAX formatting functionality
 
 ---
 

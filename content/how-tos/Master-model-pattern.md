@@ -1,4 +1,6 @@
-﻿# Master Model Pattern
+﻿
+
+# Master Model Pattern
 
 It is not uncommon to have several Tabular models in an organisation, with a substantial amount of functional overlap. For the development team, keeping these models up to date with shared features can be a pain point. In this article, we'll see an alternate approach that may be suitable in situations where it makes sense to combine all these models into a single "Master" model, that is then deployed partially into several different subset models. Tabular Editor enables this approach by utilising perspectives in a special way (while still allowing perspectives to work the usual way).
 

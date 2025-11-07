@@ -1,3 +1,14 @@
+---
+uid: editing-properties
+title: Editing properties
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      full: true
+---
+
 ## Editing properties
 The Property Grid on the lower right side of the screen, shows most of the properties for the object(s) selected in the Explorer Tree. If you select multiple objects at once, the Property Grid lets you simultaneously edit properties for the selected objects. This is useful for example when setting the Format String property. Examples of properties you can set through the Property Grid:
 

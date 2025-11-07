@@ -4,10 +4,17 @@ title: Calendar function blank date error
 author: Morten Lønskov
 updated: 2025-10-20
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
 # Calendar function blank date error

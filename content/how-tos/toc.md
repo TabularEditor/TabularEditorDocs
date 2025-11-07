@@ -35,4 +35,3 @@
 ## [Formula Fixup Dependencies](formula-fixup-dependencies.md) 
 ## [Metadata Backup](metadata-backup.md) 
 ## [Undo and Redo](undo-redo.md) 
-## [User Settings Files](user-settings-files.md)

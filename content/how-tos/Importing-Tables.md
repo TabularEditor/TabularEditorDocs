@@ -3,8 +3,14 @@ uid: importing-tables-te2
 title: Importing Tables
 author: Daniel Otykier
 updated: 2020-05-03
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      partial: true
 ---
-# Importing Tables
+# Importing Tables in Tabular Editor 2
 
 If you already have a Legacy Data Source in your model, you can right click it, and choose "Import Tables...". Tabular Editor will attempt to connect using the data provider and credentials specified in the Data Source. If successful, you should get a list of all the databases, tables and views accessible through the Data Source:
 

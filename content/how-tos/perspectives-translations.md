@@ -1,3 +1,15 @@
+---
+uid: load-save-model
+title: Load/save Model.bim files
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      full: true
+      note: Includes dedicated Perspective and Translation Editors
+---
+
 ## Working with Perspectives and Translations
 You can add/edit existing perspectives and translations (cultures), by clicking the Model node in the Explorer Tree, and locating the relevant properties at the bottom of the property grid. Alternatively, when your Explorer Tree is [showing all object types](../features/hierarchical-display.md), you can view and edit perspectives, cultures and roles directly in the tree.
 

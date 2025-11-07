@@ -3,6 +3,19 @@ uid: incremental-refresh-policy
 title: Incremental Refresh
 author: Daniel Otykier
 updated: 2021-02-15
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          partial: true
+          note: "Limited to SQL Server Standard Edition"
+        - edition: Enterprise
+          full: true
 ---
 # Incremental Refresh
 
