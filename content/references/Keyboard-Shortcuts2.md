@@ -1,6 +1,12 @@
 ﻿---
 uid: shortcuts2
 title: Keyboard shortcuts Tabular Editor 2
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      none: true
 ---
 # Keyboard Shortcuts 
 
