@@ -4,10 +4,18 @@ title: Code Actions
 author: Daniel Otykier
 updated: 2024-10-30
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      since: 3.18.0
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
 # Code Actions

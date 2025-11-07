@@ -4,12 +4,18 @@ title: Direct Lake Guidance
 author: Daniel Otykier
 updated: 2024-06-18
 applies_to:
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-      none: x
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      partial: true
+    - product: Tabular Editor 3
+      since: 3.22.0
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          none: true
+        - edition: Enterprise
+          full: true
 ---
 # Direct Lake Guidance
 

@@ -4,16 +4,22 @@ title: Calendars (Enhanced Time Intelligence)
 author: Daniel Otykier
 updated: 2025-09-15
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      since: 3.23.0
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Calendars (Enhanced Time Intelligence)
 
 The September 2025 release of Power BI Desktop introduced a new Public Preview feature called "Enhanced Time Intelligence". This feature lets you define custom calendars in your semantic model, and it also introduces 8 new DAX functions that work with these calendars, enabling week-based time intelligence calculations that were difficult to perform previously.
-
-Tabular Editor 3 has support for Calendars and the new DAX functions since version 3.23.0.
 
 ## Defining a Calendar
 

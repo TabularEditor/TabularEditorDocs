@@ -5,8 +5,8 @@ This section contains comprehensive tutorials for learning Tabular Editor.
 ## In this section
 
 - @calendars - Creating and managing calendar tables
-- @connecting-to-azure-databricks.md - Database connectivity
-- @creating-macros.md - Automation with macros
+- @connecting-to-azure-databricks - Database connectivity
+- @creating-macros - Automation with macros
 - @direct-lake-guidance - Working with Direct Lake models
 - @powerbi-xmla - Editing through XMLA endpoint
 - @importing-tables - Data import workflows

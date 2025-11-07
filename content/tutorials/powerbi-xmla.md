@@ -4,12 +4,18 @@ title: Editing through XMLA endpoint
 author: Daniel Otykier
 updated: 2021-10-01
 applies_to:
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-      partial: Tabular Editor 3 Business Edition only allows connecting to the XMLA endpoint of Premium-Per-User (PPU) workspaces.
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          partial: true
+          note: Premium Per User XMLA Endpoints Only
+        - edition: Enterprise
+          full: true
 ---
 # Editing a Power BI dataset through the XMLA endpoint
 
@@ -29,9 +35,6 @@ Tabular Editor requires the XMLA endpoint to allow both read/write access. This 
 
 When connecting to a dataset through the XMLA endpoint, all data modeling operations supported by the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) are available for editing. In other words, the [Power BI Desktop Limitations](xref:desktop-limitations) do not apply when editing a dataset through the XMLA endpoint of the Power BI Service.
 
-> [!WARNING]
-> Once a change is made to a Power BI dataset through the XMLA endpoint, it will not be possible to download the dataset as a .pbix file. [More information](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets).
-> Please see [Creating PBIX File from XMLA Endoint](xref:powerbi-xmla-pbix-workaround) for a workaround
 
 ## Workflow
 

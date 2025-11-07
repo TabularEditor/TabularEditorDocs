@@ -6,7 +6,13 @@ applies_to:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
-      full: true
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Best Practice Analyzer
 

@@ -4,10 +4,18 @@ title: Connecting to Azure Databricks
 author: David Bojsen
 updated: 2025-08-05
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      since: 3.15.0
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # (Tutorial) Connecting to Azure Databricks
 

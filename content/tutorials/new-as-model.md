@@ -4,11 +4,19 @@ title: Create an Analysis Services Model
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      since: 3.15.0
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          partial: true
+          note: "Limited to SQL Server Standard Edition"
+        - edition: Enterprise
+          full: true
 ---
 # (Tutorial) Creating your first Analysis Services Model
 

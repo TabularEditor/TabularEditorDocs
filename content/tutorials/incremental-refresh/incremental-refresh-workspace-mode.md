@@ -12,6 +12,19 @@ applies_to:
   versions:
     - version: 2.X
     - version: 3.4.2 and earlier
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      since: 3.4.2 and earlier
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          partial: true
+          note: "Limited to SQL Server Standard Edition"
+        - edition: Enterprise
+          full: true
 ---
 # Workspace mode and incremental refresh
 
