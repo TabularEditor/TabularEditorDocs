@@ -4,10 +4,18 @@ title: DAX User-Defined Functions
 author: Daniel Otykier
 updated: 2025-09-15
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      partial: true
+    - product: Tabular Editor 3
+      since: 3.23.0
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # DAX User-Defined Functions
 

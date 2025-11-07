@@ -4,10 +4,18 @@ title: Creating macros
 author: Morten Lønskov
 updated: 2023-12-07
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      full: true
+      note: "Called Custom Actions"
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # (Tutorial) Creating macros
 
