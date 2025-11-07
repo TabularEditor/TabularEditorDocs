@@ -4,12 +4,17 @@ title: Entity Name Changes Revert in Direct Lake Models
 author: Morten Lønskov
 updated: 2025-10-14
 applies_to:
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-      none: x
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          none: true
+        - edition: Enterprise
+          full: true
 ---
 # Entity Name Changes Revert in Direct Lake Models
 

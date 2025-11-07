@@ -2,12 +2,20 @@
 uid: licensing-activation
 title: Install and Activate Tabular Editor 3
 author: Daniel Otykier
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Tabular Editor 3
-
-This is the documentation site for Tabular Editor 3 - the ultimate productivity tool for Analysis Services and Power BI data models.
-
-Use the menu on the left side to navigate between topics.
 
 ## Installation
 
@@ -87,7 +95,3 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 ```
 
 The next time you launch Tabular Editor 3, you will be prompted for a license key, just as when the tool was first installed on the machine.
-
-## Next steps
-
-- [Overview of Tabular Editor 3's user interface](xref:user-interface)
