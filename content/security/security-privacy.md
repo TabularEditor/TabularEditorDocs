@@ -3,6 +3,18 @@ uid: security-privacy
 title: Security overview
 author: Daniel Otykier
 updated: 2024-10-30
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Tabular Editor 3 Security and Privacy
 
