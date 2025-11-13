@@ -1,45 +1,147 @@
 # Introduction
 
-## [Getting Started](Getting-Started.md)
+## @getting-started
 
-## [Power BI Desktop Integration](Power-BI-Desktop-Integration.md)
+## @whats-new
 
-## [Importing Tables](Importing-Tables.md)
+## @editions
 
-## [Video Tutorials](Training-Webinar-for-Tabular-Editor.md)
+## @desktop-limitations-te3
 
-## [Frequently Asked Questions](FAQ.md)
+## Power BI XMLA Endpoint
 
-## [Keyboard Shortcuts](Keyboard-Shortcuts.md)
+### @powerbi-xmla
 
-# Feature Overview
+### @powerbi-xmla-pbix-workaround
 
-## [Basic](Features-at-a-glance.md)
+## @proxy-settings
 
-## [Advanced](Advanced-features.md)
+# Documentation
 
-# Advanced Topics
+## User interface
 
-## [Advanced Scripting](Advanced-Scripting.md)
+### @user-interface
+
+### @tom-explorer-view
+
+### @bpa-view
+
+### @messages-view
+
+### @data-refresh-view
+
+### @macros-view
+
+### @find-replace
+
+## Features
+
+### @csharp-scripts
+
+### @dax-debugger
+
+### @dax-editor
+
+### @dax-optimizer-integration
+
+### @dax-scripts
+
+### @dax-query
+
+### @diagram-view
+
+### @metadata-translation-editor
+
+### @perspective-editor
+
+### @pivot-grid
+
+### @table-groups
+
+### @code-actions
+
+## Files formats
+
+### @supported-files
+
+### @tmdl
+
+## @preferences
+
+## @shortcuts
+
+## @user-options
+
+## @security-privacy
+
+# Tutorials and walkthroughs
+
+## Connect to a Model
+
+### @workspace-mode
+
+## Create a New Model
+
+### @new-as-model
+
+### @new-pbi-model
+
+### @direct-lake-guidance
+
+## Adding Tables & Data Sources
+
+### @importing-tables
+
+### @connecting-to-azure-databricks
+
+## Configuring Data Security
+
+### @data-security-about
+
+### @data-security-setup-rls
+
+### @data-security-setup-ols
+
+### @data-security-testing
+
+## Incremental Refresh
+
+### @incremental-refresh-about
+
+### @incremental-refresh-modify
+
+### @incremental-refresh-setup
+
+### @incremental-refresh-schema
+
+### @incremental-refresh-workspace-mode
+
+## Advanced Modelling
+
+### @udfs
+
+### @calendars
+
+## Automation with C# Scripting
+
+### @creating-macros
 
 ### @csharp-script-library
 
-## [FormatDax deprecation](FormatDax.md)
+# Troubleshooting
 
-## [Useful Script Snippets](Useful-script-snippets.md)
+## @locale-not-supported
 
-## [Custom Actions](Custom-Actions.md)
+# Other resources
 
-## [Command Line](Command-line-Options.md)
+## @downloads
 
-## [Best Practice Analyzer](Best-Practice-Analyzer.md)
+## @roadmap
 
-## [Best Practice Analyzer 2.0](Best-Practice-Analyzer-Improvements.md)
+# Legal
 
-## [Advanced Filtering](Advanced-Filtering-of-the-Explorer-Tree.md)
+## @te3-eula
 
-## [Master Model Pattern](Master-model-pattern.md)
+## @third-party-notices
 
-## [Incremental Refresh](incremental-refresh.md)
-
-## [Importing Tables from Excel](importing-tables-from-excel.md)
+## @privacy-policy
