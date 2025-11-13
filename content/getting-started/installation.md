@@ -3,6 +3,18 @@ uid: installation-activation-basic
 title: Installation, activation and basic configuration
 author: Daniel Otykier
 updated: 2021-09-30
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
 ## Installation

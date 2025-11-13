@@ -3,6 +3,12 @@ uid: editions
 title: Compare editions
 author: Søren Toft Joensen
 updated: 2025-02-07
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      full: true
 ---
 # Tabular Editor 3 Editions
 

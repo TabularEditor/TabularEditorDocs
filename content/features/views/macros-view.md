@@ -4,10 +4,17 @@ title: Macros view
 author: Morten Lønskov
 updated: 2023-03-22
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Macros view
 Macros are a powerful feature of Tabular Editor that allow you to automate repetitive tasks or create custom actions for your models. A macro is a script written in C# that can access and manipulate the Tabular Object Model (TOM). 

@@ -3,6 +3,12 @@ uid: general-introduction
 title: General introduction and architecture
 author: Daniel Otykier
 updated: 2021-09-30
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      full: true
 ---
 
 # General introduction and architecture

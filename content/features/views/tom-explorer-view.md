@@ -4,10 +4,19 @@ title: TOM Explorer view
 author: Morten Lønskov
 updated: 2023-02-21
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      partial: true
+      note: "Works differently than showed in this article"
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Using the TOM Explorer in Tabular Editor 3
 The TOM Explorer is your main window for interacting with the objects of your data mode. Objects such has tables, columns, measures, security groups etc. are all displayed in a hierarchical structure. A Tabular data model is represented by the so called [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) and it is the metadata of your TOM that is displayed in the TOM Explorer. 
@@ -21,9 +30,9 @@ The TOM Explorer consists of two main areas, firstly the data model objects and 
 ## Data Model Objects
 You can fold out objects in the TOM Explorer to see their children and follow the hierarchy of objects downwards. And if you right click on any object you will be given a list of options to interact with that specific object. As you can see below there are several options that you can use with a table. It is with this menu that you for example can easily refresh your tables and see the status of that refresh in the @data-refresh-view
 
-![Tom Explorer Interaction](~/content/assets/images/user-interface/TomExplorerRightClick.png) 
+![Tom Explorer Interaction](~/content/assets/images/user-interface/TomExplorerRightClick.png)
 
-The right click menu has the following items some of which can be expanded for more actions. The menu depends on the object type chosen (Table, partition, measure, column etc.) and the list below is not exhaustive for all types of objects but contains those most used. 
+The right click menu has the following items some of which can be expanded for more actions. The menu depends on the object type chosen (Table, partition, measure, column etc.) and the list below is not exhaustive for all types of objects but contains those most used.
 
 ### Options in Right-click menu
 - **Update table schema...**:  

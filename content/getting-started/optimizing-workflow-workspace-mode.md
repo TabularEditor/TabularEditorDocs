@@ -4,11 +4,17 @@ title: Optimizing development workflow using Workspace Mode
 author: Daniel Otykier
 updated: 2021-10-05
 applies_to:
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
 # Optimizing development workflow using Workspace Mode
