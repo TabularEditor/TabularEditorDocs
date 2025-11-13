@@ -4,10 +4,17 @@ title: Perspective Editor
 author: Šarūnas Jučius
 updated: 2022-03-16
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Perspective Editor
 

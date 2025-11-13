@@ -4,15 +4,17 @@ title: Direct Lake on SQL Semantic Models
 author: Morten Lønskov
 updated: 2024-08-22
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-      none: x
-    - edition: Enterprise
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          none: true
+        - edition: Enterprise
+          full: true
 ---
 
 # Direct Lake Semantic Models

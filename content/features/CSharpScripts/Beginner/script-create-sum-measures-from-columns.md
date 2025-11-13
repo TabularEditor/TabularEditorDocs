@@ -4,9 +4,11 @@ title: Create SUM Measure from Column
 author: Morten Lønskov
 updated: 2023-02-22
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Create SUM Measure from Column
 

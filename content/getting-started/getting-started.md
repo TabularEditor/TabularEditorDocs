@@ -1,6 +1,6 @@
 ﻿---
 uid: getting-started
-title: Getting Started with Tabular Editor 3
+title: Installation and Activation
 author: Morten Lønskov
 updated: 2025-09-23
 applies_to:

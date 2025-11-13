@@ -3,6 +3,18 @@ uid: using-bpa
 title: Using the Best Practice Analyzer
 author: Morten Lønskov
 updated: 2023-02-09
+applies_to:
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
 # Best Practice Analyzer

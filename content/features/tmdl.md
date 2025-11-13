@@ -4,11 +4,18 @@ title: Tabular Model Definition Language (TMDL)
 author: Daniel Otykier
 updated: 2023-05-22
 applies_to:
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-    - edition: Enterprise
+applies_to:
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Tabular Model Definition Language (TMDL)
 

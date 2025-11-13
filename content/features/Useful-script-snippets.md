@@ -2,6 +2,18 @@
 uid: useful-script-snippets
 title: Useful script snippets
 author: Daniel Otykier
+applies_to:
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Useful Script Snippets
 

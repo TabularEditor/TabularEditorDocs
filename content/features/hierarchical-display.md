@@ -1,9 +1,21 @@
 ---
 uid: hierarchical-display
 title: Hierarchical display
+applies_to:
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 ## Hierarchical display
-Objects of the loaded model are shown in the Explorer Tree, on the left side of the screen. By default, all object types (visible tables, roles, relationships, etc.) are shown. If you only want to see tables, measures, columns and hierarchies, go to the "View" menu and toggle off "Show all object types".
+Objects of the loaded model are shown in the TOM Explorer Tree. By default, all object types (visible tables, roles, relationships, etc.) are shown. If you only want to see tables, measures, columns and hierarchies, go to the "View" menu and toggle off "Show all object types".
 
 ![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AllObjectTypes.png)
 

@@ -4,9 +4,11 @@ title: Edit Hidden Partitions
 author: Morten Lønskov
 updated: 2023-02-21
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Edit Hidden Partitions
 

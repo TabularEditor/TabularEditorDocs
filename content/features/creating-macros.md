@@ -4,18 +4,22 @@ title: Creating macros
 author: Morten Lønskov
 updated: 2023-12-07
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # (Tutorial) Creating macros
 
 Macros are C# scripts that have been saved in Tabular Editor to be easily reused across semantic models.
 Saving a script as a  Macro will allow that macro to be used when right clicking on the objects in the TOM Explorer making it simple to apply the script to your model.
-
-> [!NOTE] 
-> In Tabular Editor 2, the feature to reuse C# Script is called @custom-actions.
 
 ## Creating a Macro
 

@@ -4,9 +4,11 @@ title: Convert Import to Direct Lake on OneLake
 author: Daniel Otykier
 updated: 2025-06-20
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Convert Import to Direct Lake on OneLake
 

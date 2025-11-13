@@ -3,6 +3,18 @@ uid: dax-editor
 title: DAX Editor
 author: Daniel Otykier
 updated: 2023-02-03
+applies_to:
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # DAX Editor
 

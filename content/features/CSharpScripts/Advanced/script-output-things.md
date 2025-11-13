@@ -4,9 +4,11 @@ title: Output Object Details in a Grid
 author: Daniel Otykier
 updated: 2024-12-13
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Output Object Details in a Grid
 

@@ -4,8 +4,11 @@ title: Create M Parameter (Auto-Replace)
 author: Kurt Buhler
 updated: 2023-02-28
 applies_to:
-  versions:
-    - version: 3.x
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      full: true
 ---
 # Create New M Parameter and Add it to Existing M Partitions
 

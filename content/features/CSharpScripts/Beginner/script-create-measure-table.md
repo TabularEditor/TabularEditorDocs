@@ -4,9 +4,11 @@ title: Create Measure Table
 author: Morten Lønskov
 updated: 2023-11-29
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Create Measure Table
 

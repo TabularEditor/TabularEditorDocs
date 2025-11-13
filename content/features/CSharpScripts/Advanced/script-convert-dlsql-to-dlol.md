@@ -4,9 +4,11 @@ title: Convert Direct Lake on SQL to OneLake
 author: Daniel Otykier
 updated: 2025-06-20
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Convert Direct Lake on SQL to OneLake
 

@@ -4,9 +4,11 @@ title: Create Field Parameter
 author: Daniel Otykier
 updated: 2024-01-27
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Create Field Parameters in
 

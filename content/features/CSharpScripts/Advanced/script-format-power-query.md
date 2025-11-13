@@ -4,8 +4,11 @@ title: Format Power Query
 author: Kurt Buhler
 updated: 2023-02-28
 applies_to:
-  versions:
-    - version: 3.x
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      full: true
 ---
 # Format Power Query
 
