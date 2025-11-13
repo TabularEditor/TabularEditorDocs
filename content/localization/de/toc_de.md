@@ -1,34 +1,45 @@
-# [Welcome](index.md)
+# Introduction
 
-# @general-introduction
+## [Getting Started](Getting-Started.md)
 
-## @installation-activation-basic
+## [Power BI Desktop Integration](Power-BI-Desktop-Integration.md)
 
-## @migrate-from-vs
+## [Importing Tables](Importing-Tables.md)
 
-## @migrate-from-desktop
+## [Video Tutorials](Training-Webinar-for-Tabular-Editor.md)
 
-## @migrate-from-te2
+## [Frequently Asked Questions](FAQ.md)
 
-# @parallel-development
+## [Keyboard Shortcuts](Keyboard-Shortcuts.md)
 
-## @optimizing-workflow-workspace-mode
+# Feature Overview
 
-<!--## @powerbi-cicd
-## @as-cicd-->
+## [Basic](Features-at-a-glance.md)
 
-# @boosting-productivity-te3
+## [Advanced](Advanced-features.md)
 
-## @importing-tables-data-modeling
+# Advanced Topics
 
-## @refresh-preview-query
+## [Advanced Scripting](Advanced-Scripting.md)
 
-## @creating-and-testing-dax
+### @csharp-script-library
 
-## @dax-script-introduction
+## [FormatDax deprecation](FormatDax.md)
 
-## @bpa
+## [Useful Script Snippets](Useful-script-snippets.md)
 
-## @cs-scripts-and-macros
+## [Custom Actions](Custom-Actions.md)
 
-## @personalizing-te3
+## [Command Line](Command-line-Options.md)
+
+## [Best Practice Analyzer](Best-Practice-Analyzer.md)
+
+## [Best Practice Analyzer 2.0](Best-Practice-Analyzer-Improvements.md)
+
+## [Advanced Filtering](Advanced-Filtering-of-the-Explorer-Tree.md)
+
+## [Master Model Pattern](Master-model-pattern.md)
+
+## [Incremental Refresh](incremental-refresh.md)
+
+## [Importing Tables from Excel](importing-tables-from-excel.md)
