@@ -1,0 +1,32 @@
+---
+uid: RW003
+category: Code actions
+sub-category: Rewrites
+title: Invert IF
+author: Daniel Otykier
+updated: 2025-02-10
+---
+
+Code action `RW003` (Rewrites) **Invert IF**
+
+## Description
+
+To improve readability, it is sometimes useful to invert `IF` statements.
+
+### Example
+
+Change:
+
+```dax
+IF(a < b, "B is greater", "A is greater")
+```
+
+To:
+
+```dax
+IF(a > b, "A is greater", "B is greater")
+```
+
+## Why is Tabular Editor suggesting this?
+
+This code action provides a quick way to invert the logic of an `IF` statement, which can make the code easier to read. The readability of the code is subjective and depends on the context, which is why this code action is in the **Rewrites** category rather than the **Readability** category.

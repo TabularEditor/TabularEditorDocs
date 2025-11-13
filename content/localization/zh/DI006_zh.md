@@ -1,0 +1,46 @@
+---
+uid: DI006
+category: Code actions
+sub-category: Improvements
+title: Split multi-column filter into multiple filters
+author: Daniel Otykier
+updated: 2024-12-19
+---
+
+Code action `DI006` (Improvement) **Split multi-column filter into multiple filters**
+
+## Description
+
+When using a single filter expression that combines multiple columns using `AND` (or the equivalent `&&` operator), better performance can often be achieved by specifying multiple filters, one for each column.
+
+## Example
+
+Change:
+
+```dax
+CALCULATE([Total Sales], Products[Color] = "Red" && Products[Class] = "High-end")
+```
+
+To:
+
+```dax
+CALCULATE([Total Sales], Products[Color] = "Red", Products[Class] = "High-end")
+```
+
+## Why is Tabular Editor suggesting this?
+
+Behind the scenes, a scalar predicate gets converted to a table expression that uses the `FILTER` function along with the specified condition. The table resulting from this expression has one column for each column in the filter expression. I.e.:
+
+```dax
+Products[Color] = "Red" && Products[Class] = "High-end"
+```
+
+becomes:
+
+```dax
+FILTER(ALL(Products[Color], Products[Class]), Products[Color] = "Red" && Products[Class] = "High-end")
+```
+
+The `ALL` function, when used with multiple column parameters, returns a table with all the unique combinations of the specified columns. This table is then filtered by the specified condition, and the resulting table then applies to the filter context of the `CALCULATE` or `CALCULATETABLE` function.
+
+However, when all operands in the filter condition are combined using `AND`, it is more efficient to separate these as individual filters. That way, instead of creating a table with all unique combinations of the columns, several smaller tables are created, each with a single column containing only the unique values of that column, that satisfy the filter criteria. This can result in a significant performance improvement, especially when the columns have a high cardinality and low correlation.

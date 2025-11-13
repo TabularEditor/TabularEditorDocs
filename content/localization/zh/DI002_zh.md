@@ -1,0 +1,48 @@
+---
+uid: DI002
+category: Code actions
+sub-category: Improvements
+title: Remove unused variable
+author: Daniel Otykier
+updated: 2024-12-19
+---
+
+Code action `DI002` (Improvement) **Remove all unused variables**
+
+## Description
+
+Variables that are not being used (directly or indirectly through other variables) in the `RETURN` part of a variable block, should be removed.
+
+## Example
+
+Change:
+
+```dax
+VAR _internetSalesTaxed = [Internet Sales] * 1.25
+VAR _cogs = [Cost of Sales]
+VAR _cogsTaxed = _cogs * 1.25
+RETURN _internetSalesTaxed
+```
+
+To:
+
+```dax
+VAR _internetSalesTaxed = [Internet Sales] * 1.25
+RETURN _internetSalesTaxed
+```
+
+## Why is Tabular Editor suggesting this?
+
+Unused variables can make your code harder to read and understand. By removing them, you make your code more concise and easier to maintain.
+
+An unused variable is also an indication that the code may contain a mistake, or that the variable was intended to be used for something that was later removed. By removing the variable, you avoid potential confusion for other developers who may be reading your code.
+
+If a variable is referenced by other variables, but none of the variables are used in the `RETURN` part of the variable block, it is safe to remove all of them.
+
+## Remarks
+
+This code action has an **(All occurrences)** variant, which will appear when multiple sections of code can be improved. This variant will apply the code action to all relevant sections of the document at once.
+
+## Related to:
+
+- [DI001 - Remove unused variable](xref:DI001)
