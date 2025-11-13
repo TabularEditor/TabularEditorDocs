@@ -4,13 +4,17 @@ title: Direct Query over Analysis Services
 author: Morten Lønskov
 updated: 2025-07-14
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
 ## Overview

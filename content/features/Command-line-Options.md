@@ -3,6 +3,12 @@ uid: command-line-options
 title: Command Line
 author: Daniel Otykier
 updated: 2021-08-26
+applies_to:
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      none: true
 ---
 # Command Line
 

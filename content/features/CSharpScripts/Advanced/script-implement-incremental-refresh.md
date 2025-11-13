@@ -4,9 +4,11 @@ title: Setup Incremental Refresh
 author: Kurt Buhler
 updated: 2023-03-01
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Configure Incremental Refresh
 

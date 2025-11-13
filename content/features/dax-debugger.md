@@ -4,10 +4,17 @@ title: DAX debugger
 author: Daniel Otykier
 updated: 2022-01-19
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # DAX debugger
 

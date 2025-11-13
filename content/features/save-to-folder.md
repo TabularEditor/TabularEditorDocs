@@ -4,9 +4,17 @@ title: Save to folder
 author: Morten Lønskov
 updated: 2023-08-08
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Save to folder
 

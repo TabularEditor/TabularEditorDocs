@@ -4,10 +4,17 @@ title: Table Groups
 author: Daniel Otykier
 updated: 2023-03-08
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
 # Table Groups

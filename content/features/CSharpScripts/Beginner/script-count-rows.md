@@ -4,9 +4,11 @@ title: Count Table Rows
 author: Kurt Buhler
 updated: 2023-02-27
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Count Rows in a Table
 

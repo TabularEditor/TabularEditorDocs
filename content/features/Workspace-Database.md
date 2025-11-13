@@ -1,6 +1,18 @@
 ﻿---
 uid: workspace-databases
 title: Introducing Workspace Databases
+applies_to:
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 ## Introducing Workspace Databases
 Tabular Editor 3.0 supports editing model metadata loaded from disk with a simultaneous connection to a database deployed to an instance of Analysis Services. We call this database the _workspace database_. Going forward, this is the recommended approach to tabular modeling within Tabular Editor.

@@ -1,6 +1,18 @@
 ﻿---
 uid: workspace-mode
 title: Workspace Mode
+applies_to:
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 ## Workspace Mode
 Tabular Editor 3 introduces the concept of **workspace mode** when creating a new model inside the tool, or when loading a Model.bim or Database.json file of an existing model.

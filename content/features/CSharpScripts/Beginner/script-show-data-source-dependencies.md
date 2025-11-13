@@ -4,9 +4,11 @@ title: Show Data Source Dependencies
 author: David Bojsen
 updated: 2023-09-12
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Show Data Source Dependencies
 

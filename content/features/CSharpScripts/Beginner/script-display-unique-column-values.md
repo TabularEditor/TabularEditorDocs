@@ -4,9 +4,11 @@ title: Distinct Column Values
 author: Morten Lønskov
 updated: 2024-05-27
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      full: true
 ---
 # Distinct Column Values
 

@@ -1,6 +1,18 @@
 ---
 uid: import-tables
 title: Import Tables
+applies_to:
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 Tabular Editor 3 includes a **Table Import Wizard** that helps you create a data source in your model and import tables/views from relational data sources such as a SQL Server database.
 

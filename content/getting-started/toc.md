@@ -1,17 +1,21 @@
 ﻿# [Welcome](index.md)
 
-# @general-introduction
+# Introduction to Tabular Editor
+## @general-introduction
 ## @installation-activation-basic
 ## @migrate-from-vs
 ## @migrate-from-desktop
 ## @migrate-from-te2
 
-# @getting-started
+# Getting Started with Tabular Editor 3
+## @getting-started
 ## @editions
 ## @training-telearn
 
 # @getting-started-te2
-# @desktop-integration
+
+# Power BI Desktop & Tabular Editor
+## @desktop-integration
 ## @desktop-limitations  
 
 # User Interface
@@ -25,10 +29,12 @@
 ## @tom-explorer-view-reference
 ## @diagram-view-reference
 
-# @parallel-development
+# Parallel development
+## @parallel-development
 ## @optimizing-workflow-workspace-mode
 
-# @boosting-productivity-te3
+# Built models faster with Tabular Editor
+## @boosting-productivity-te3
 ## @importing-tables-data-modeling
 ## @refresh-preview-query
 ## @creating-and-testing-dax

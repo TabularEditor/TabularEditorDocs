@@ -4,8 +4,11 @@ title: Create Table Groups
 author: Morten Lønskov
 updated: 2023-11-29
 applies_to:
-  versions:
-    - version: 3.x
+  products:
+    - product: TE2
+      none: true
+    - product: TE3
+      full: true
 ---
 # Create Table Groups
 

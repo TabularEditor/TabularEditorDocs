@@ -4,18 +4,23 @@ title: Model deployment
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
-  editions:
-    - edition: Desktop
-      none: x
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: TE2
+      full: true
+    - product: TE3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Model deployment
 
 Tabular Editor 3 (Business and Enterprise Edition) can take a copy of the currently loaded semantic model metadata, and deploy it to an Analysis Services instance, or the Power BI / Fabric XMLA endpoint.
 
 To perform a deployment, launch the **Deployment Wizard** through the **Model > Deploy...** menu option.
-
 
 > [!NOTE]
 > Tabular Editor 3 Business Edition has certain [limitations](xref:editions) regarding what type of Analysis Services instance, or Power BI / Fabric workspace is supported for XMLA connectivity. This applies to deployment as well.
@@ -44,7 +49,6 @@ If any of the options on the **Deployment options** page were deselected, Tabula
 The last page of the deployment wizard lets you export the generated script, so you can review the changes before executing them.
 
 ## Deployment impact
-
 
 > [!WARNING]
 > This type of deployment is a **metadata-only deployment**. Depending on the types of changes made to the model, imported data could be lost during deployment. In this case, you may need to execute a refresh operation once the deployment is complete.
