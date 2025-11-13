@@ -1,77 +1,34 @@
-# [Common functionality](common-features.md)
+# [Welcome](index.md)
 
-## [Power BI Desktop limitations](desktop-limitations.md)
+# @general-introduction
 
-## [XMLA / AS connectivity](xmla-as-connectivity.md)
+## @installation-activation-basic
 
-## [Policies](policies.md)
+## @migrate-from-vs
 
-## [Save to folder](save-to-folder.md)
+## @migrate-from-desktop
 
-### @tmdl-common
+## @migrate-from-te2
 
-## [Best Practice Analyzer](xref:using-bpa)
+# @parallel-development
 
-### [BPA Sample Rules Expression](xref:using-bpa-sample-rules-expressions)
+## @optimizing-workflow-workspace-mode
 
-## [Semantic Model Types](Semantic Model/semantic-model-types.md)
+<!--## @powerbi-cicd
+## @as-cicd-->
 
-### [Direct Lake on SQL](Semantic Model/direct-lake-sql-model.md)
+# @boosting-productivity-te3
 
-### [Direct Query over Analysis Services](Semantic Model/direct-query-over-as.md)
+## @importing-tables-data-modeling
 
-# C#/Advanced Scripting
+## @refresh-preview-query
 
-## @csharp-script-library
+## @creating-and-testing-dax
 
-### @script-library-beginner
+## @dax-script-introduction
 
-#### @script-count-rows
+## @bpa
 
-#### @script-create-sum-measures-from-columns
+## @cs-scripts-and-macros
 
-#### @script-create-measure-table
-
-#### @script-create-table-groups
-
-#### @script-create-m-parameter
-
-#### @script-edit-hidden-partitions
-
-#### @script-format-numeric-measures
-
-#### @script-show-data-source-dependencies
-
-#### @create-field-parameter
-
-#### @script-display-unique-column-values
-
-### @script-library-advanced
-
-#### @script-count-things
-
-#### @script-output-things
-
-#### @script-create-date-table
-
-#### @script-create-and-replace-parameter
-
-#### @script-format-power-query
-
-#### @script-implement-incremental-refresh
-
-#### @script-remove-measures-with-error
-
-#### @script-find-replace
-
-#### @script-convert-dlsql-to-dlol
-
-#### @script-convert-import-to-dlol
-
-#### @script-databricks-semantic-model-set-up
-
-#### @script-create-databricks-relationships
-
-#### @script-add-databricks-metadata-descriptions
-
-## @script-helper-methods
+## @personalizing-te3
