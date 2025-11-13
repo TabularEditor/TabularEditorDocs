@@ -4,14 +4,21 @@ title: Properties view
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
-# Using the Properties grid in Tabular Editor 3
+# Using the Properties grid in Tabular Editor
 
-The Properties view in Tabular Editor 3 allows you to inspect and modify the properties of any object in your tabular model. 
+The Properties view in Tabular Editor allows you to inspect and modify the properties of any object in your tabular model. 
 You access the properties view by selecting an object in the TOM Explorer. You will then see a list of properties that are relevant for the selected object type, such as name, description, data type, format string, etc.
 You can also access advanced properties that are not available in other tools like Visual Studio or Power BI Desktop.
 

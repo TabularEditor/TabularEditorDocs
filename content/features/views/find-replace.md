@@ -4,10 +4,18 @@ title: Find/Replace
 author: Morten Lønskov
 updated: 2023-03-22
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      partial: true
+      note: "Works differently than showed in this article"
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Find
 In Tabular Editor, you can use the advanced Find functionality to search for specific expressions throughout your open documents and dataset. The Find dialog box is accessible through the keyboard shortcut Ctrl+F.

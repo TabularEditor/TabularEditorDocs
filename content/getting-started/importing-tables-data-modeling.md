@@ -4,11 +4,17 @@ title: Importing tables and data modeling
 author: Daniel Otykier
 updated: 2021-10-08
 applies_to:
-  editions:
-    - edition: Desktop
-      partial: TE3 Desktop Edition includes this feature. External tools adding/editing tables, columns and relationships against a Power BI Desktop model is not supported by Microsoft, however.
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Importing tables and data modeling
 

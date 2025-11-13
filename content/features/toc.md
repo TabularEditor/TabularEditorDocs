@@ -1,3 +1,13 @@
+# User Interface
+## @user-interface
+## @tom-explorer-view
+## @properties-view
+## @bpa-view
+## @data-refresh-view
+## @find-replace
+## @messages-view
+## @diagram-view
+
 # DAX Features
 ## @dax-debugger 
 ## @dax-editor 

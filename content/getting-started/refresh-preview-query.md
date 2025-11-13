@@ -4,11 +4,17 @@ title: Refreshing, previewing and querying data
 author: Daniel Otykier
 updated: 2021-09-30
 applies_to:
-  editions:
-    - edition: Desktop
-      partial: Refreshing tables through external tools is currently not supported by Power BI Desktop, even though Tabular Editor 3 Desktop Edition allows this operation. Querying data is fully supported.
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Refreshing, previewing and querying data
 

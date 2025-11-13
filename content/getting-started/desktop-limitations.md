@@ -1,20 +1,24 @@
 ---
 uid: desktop-limitations
-title: Power BI Desktop Limitations
+title: Power BI Desktop Limitations (Outdated)
 author: Morten Lønskov
 updated: 2023-08-21
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
-
 # Power BI Desktop limitations
+
 When using Tabular Editor (any edition) as an [external tool for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools), there are a few limitations to be aware about.
 
 The limitations mentioned in this article apply to Tabular Editor 2.x as well.
@@ -27,14 +31,15 @@ More information in [the official blog post](https://powerbi.microsoft.com/en-us
 
 ## Power BI file types
 
-When using Power BI, you will encounter two different file types commonly used:
+When using Power BI, you will encounter three different file types commonly used:
 
 - **.pbix** (Power BI Report)
 - **.pbit** (Power BI Template)
+- **.pbip** (Power BI Project)
 
 Both these files can be opened in Power BI Desktop and essentially defines everything related to a Power BI report: Data sources, Power Query transformations, the tabular data model, report pages, visuals, bookmarks, etc.
 
-The main difference between the two, is that the **.pbix file contains model data**, where as the **.pbit file contains no data**. In addition, it turns out that the latter of the two contains model **metadata** in the JSON-based [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) format, which can be loaded by Tabular Editor. A .pbix file on the other hand, does not contain the model metadata in this format, and therefore, **a .pbix file cannot be loaded directly in Tabular Editor** in any way. Instead, you will have to rely on the External Tools integration, which requires you to load the .pbix file in Power BI Desktop, as described below.
+The main difference between, is that the **.pbix and .pbip file contains model data**, where as the **.pbit file contains no data**. In addition, a **.pbix** file does not contain the model metadata in this format, and therefore, **a .pbix file cannot be loaded directly in Tabular Editor** in any way. Instead, you will have to rely on the External Tools integration, which requires you to load the .pbix file in Power BI Desktop, as described below.
 
 > [!WARNING]
 > Even though it is technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. As such, there is always a risk of making changes to the .pbit file which would cause the file to become unloadable in Power BI Desktop, or cause stability issues once loaded. In this case, Microsoft support will be unable to assist you.

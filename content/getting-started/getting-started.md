@@ -3,6 +3,18 @@ uid: getting-started
 title: Getting Started with Tabular Editor 3
 author: Morten Lønskov
 updated: 2025-09-23
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Getting Started
 

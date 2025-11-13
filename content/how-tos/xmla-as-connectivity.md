@@ -4,12 +4,18 @@ title: XMLA / Analysis Services connectivity
 author: Daniel Otykier
 updated: 2024-05-01
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
-  editions:
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          none: true
+        - edition: Business
+          partial: true
+          note: "Only Premium Per User XMLA Endpoints"
+        - edition: Enterprise
+          full: true
 ---
 
 # XMLA / Analysis Services connectivity

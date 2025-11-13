@@ -1,26 +1,33 @@
 ﻿# [Welcome](index.md)
+
 # @general-introduction
 ## @installation-activation-basic
 ## @migrate-from-vs
 ## @migrate-from-desktop
 ## @migrate-from-te2
+
 # @getting-started
 ## @editions
-## @training-webinar
+## @training-telearn
+
 # @getting-started-te2
 # @desktop-integration
 ## @desktop-limitations  
-# @user-interface
-## @bpa-view
-## @data-refresh-view
-## @find-replace
-## @macros-view
-## @messages-view  
-## @properties-view
-## @tom-explorer-view
-## @diagram-view
+
+# User Interface
+## @user-interface-reference
+## @bpa-view-reference
+## @data-refresh-view-reference
+## @find-replace-reference
+## @macros-view-reference
+## @messages-view-reference
+## @properties-view-reference
+## @tom-explorer-view-reference
+## @diagram-view-reference
+
 # @parallel-development
 ## @optimizing-workflow-workspace-mode
+
 # @boosting-productivity-te3
 ## @importing-tables-data-modeling
 ## @refresh-preview-query
@@ -29,4 +36,3 @@
 ## @bpa
 ## @cs-scripts-and-macros
 ## @personalizing-te3
-

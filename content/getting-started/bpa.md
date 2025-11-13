@@ -3,6 +3,18 @@ uid: bpa
 title: Improve code quality with the Best Practice Analyzer
 author: Daniel Otykier
 updated: 2021-11-02
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          full: true
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 
 # Improve code quality with the Best Practice Analyzer

@@ -3,6 +3,12 @@ uid: getting-started-te2
 title: Getting Started with Tabular Editor 2
 author: Daniel Otykier
 updated: 2021-09-21
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      none: true
 ---
 # Getting Started
 
