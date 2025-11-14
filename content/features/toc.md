@@ -24,7 +24,7 @@
 ### @script-library-advanced
 ## @script-helper-methods 
 ## @useful-script-snippets 
-## @macros - Create Macros
+## @macros
 
 # Model Analysis and Quality
 ## @best-practice-analyzer 
