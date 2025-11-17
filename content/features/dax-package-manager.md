@@ -30,7 +30,6 @@ You can use the DAX Package Manager with any model that supports DAX User-Define
 
 > [!WARNING]
 > DAX User-Defined Functions is currently (as of November 2025) a preview feature of Power BI. Consider their [limitations](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions#considerations-and-limitations) before use.
-
 ---
 
 ![DAX Package Manager](~/content/assets/images/dax-package-manager-overview.png)
@@ -71,7 +70,6 @@ Enter your search keywords or the (partial) name of the package, to filter the l
 
 > [!NOTE]
 > We currently only show the top 20 packages matching the search criteria. There is no pagination feature yet - this will come in a future update. If you need to browse all available packages, go to the source, e.g. https://daxlib.org.
-
 ---
 
 ### 4. Package Detail Pane
@@ -97,7 +95,6 @@ Packages for which newer versions are available, will show an **“Update”** b
 
 > [!WARNING]
 > If you remove or update a package in which you have made modifications to the DAX expression of one or more UDFs, you will see a warning message indicating that your changes will be lost.
-
 ---
 
 ### 5. Update notifications
@@ -137,7 +134,6 @@ All associated UDFs will be removed from the model.
 
 > [!CAUTION]
 > Removing UDFs may cause DAX expressions in other areas of the model (measures, calculation columns, etc.) to become invalid. If this happens, you can always hit **Undo** (Ctrl+Z) to undo the package removal. Use the **Show dependencies** (Shift+F12) feature to identify where the UDFs are used before removing a package.
-
 ---
 
 ## Technical considerations
@@ -160,7 +156,6 @@ Moreover, each UDFs imported through the DAX Package Manager will have the follo
 
 > [!CAUTION]
 > Modifying or deleting these extended properties manually may lead to unexpected behavior in the DAX Package Manager.
-
 ## Handling conflicts
 
 ### Modifying UDFs from packages
@@ -177,7 +172,6 @@ You have the following options:
 
 > [!TIP]
 > If you wish to "unlink" existing UDFs from the DAX Package Manager, remove the extended properties `TabularEditor_ObjDaxPkgHandle` and `TabularEditor_ObjDaxPkgContentHash` from the UDF objects. This way, the DAX Package Manager will no longer track these UDFs, and they will not be affected by future package updates or removals. However, you still need to be aware of name conflicts.
-
 ### Installing a package with name conflicts
 
 If you attempt to install a package containing a UDF that has the same name as an existing UDF in the model (regardless of whether it was imported from another package or created manually), you will see the following prompt:
