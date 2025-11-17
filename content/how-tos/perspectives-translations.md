@@ -1,6 +1,6 @@
 ---
-uid: load-save-model
-title: Load/save Model.bim files
+uid: perspectives-translations
+title: Perspectives and Translations
 applies_to:
   products:
     - product: Tabular Editor 2
