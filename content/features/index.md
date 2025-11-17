@@ -56,5 +56,3 @@ This section contains documentation about Tabular Editor features.
 - @command-line-options - CLI usage and automation
 
 ---
-
-*Navigate using the table of contents to explore specific features.*

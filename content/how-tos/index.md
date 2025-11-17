@@ -41,7 +41,6 @@ This section contains step-by-step guides for accomplishing specific tasks with 
 - [Formula Fixup Dependencies](formula-fixup-dependencies.md) - Automatically fix formula references
 - [Metadata Backup](metadata-backup.md) - Backup and restore model metadata
 - [Undo and Redo](undo-redo.md) - Using undo/redo functionality
-- [User Settings Files](user-settings-files.md) - Manage user configuration files
 
 ---
 
