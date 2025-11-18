@@ -1,7 +1,7 @@
 ﻿# Tabular Editor 3 BETA-18.5
 
 > [!IMPORTANT]
-> A newer version of Tabular Editor is available. You can find the latest version [here](~/te3/other/release-notes).
+> A newer version of Tabular Editor is available. You can find the latest version [here](~/references/release-notes).
 
 
 - Download [Tabular Editor 3 BETA-18.5](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.5.x86.msi)
