@@ -4,56 +4,22 @@
 exports.preTransform = function (model) {
   model.__header = {
     mainMenu: [
-      {
-        text: "Pricing",
-        url: "https://tabulareditor.com/pricing"
-      },
-      {
-        text: "Download",
-        url: "https://tabulareditor.com/downloads"
-      },
-      {
-        text: "Learn",
-        url: "https://tabulareditor.com/learn"
-      },
-      {
-        text: "Resources" ,
-        url: "/",
-        subMenu: {
-          items: [
-            {
-              text: "Blog",
-              url: "https://tabulareditor.com/blog"
-            },
-            {
-              text: "Newsletter",
-              url: "https://tabulareditor.com/newsletter"
-            },
-            {
-              text: "Publications",
-              url: "https://tabulareditor.com/publications"
-            },
-            {
-              text: "Documentation",
-              url: "https://docs.tabulareditor.com/?tabs=TE3"
-            },
-            {
-              text: "Support community",
-              url: "https://github.com/TabularEditor/TabularEditor3"
-            }
-          ]
-        }
-      },
-      {
-        text: "Contact Us",
-        url: "https://tabulareditor.com/contact"
+         {
+        text: "Support",
+        subMenu: true,
+        items: [
+          {
+            text: "Community",
+            url: "https://github.com/TabularEditor/TabularEditor3/discussions"
+          },
+          {
+            text: "Enterprise",
+            url: "mailto:support@tabulareditor.com"
+          }
+        ]
       }
     ],
     button1: {
-      text: "Free trial",
-      url: "https://www.tabulareditor.com/downloads"
-    },
-    button2: {
       text: "Sign in",
       url: "https://www.tabulareditor.com"
     },
