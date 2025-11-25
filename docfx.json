@@ -22,6 +22,7 @@
             { "files": "**/*.md", "src": "content/security", "dest": "security" },
             { "files": "**/*.md", "src": "content/troubleshooting", "dest": "troubleshooting" },
             { "files": "**/*.md", "src": "content/tutorials", "dest": "tutorials" },
+            { "files": "**/*.md", "src": "content/redirects", "dest": "" },
             { "files": "*.md", "src": "content" },
             { "files": "toc.yml", "src": "content" },
             { "files": "*", "src": "content/api", "dest": "api" }
