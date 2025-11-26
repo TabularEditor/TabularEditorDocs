@@ -141,6 +141,23 @@ Once the impersonation is enabled, the **Impersonation..** button is checked, an
 
 When auto-refresh is enabled on a data view, changing the impersonation will immediately refresh the view. 
 
+## CustomData
+
+The CustomData feature allows you to pass a custom string value that can be used in DAX expressions, typically for implementing dynamic row-level security scenarios. This feature can be combined with any of the impersonation options described above, including **No Impersonation**.
+
+![Select Impersonation](~/content/assets/images/impersonation-customdata.png)
+
+When you enter a value in the **CustomData** input field, Tabular Editor 3 adds the [`CustomData` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) to the connection string. This value can then be retrieved within your DAX expressions using the [`CUSTOMDATA()` function](https://dax.guide/customdata/).
+
+CustomData is commonly used in implementing dynamic row-level security when an application uses custom authentication. The value you provide can be leveraged in role filter expressions to control which rows users can see based on the custom data passed through the connection string.
+
+This feature is particularly useful in **Power BI Embedded** scenarios, where you can natively utilize CustomData to add row filters that pass free text (strings) to leverage dynamic row-level security in embedded reports, dashboards, and tiles.
+
+**Example use case:** You might pass a user's department or region as CustomData, and then use that value in a role's filter expression like:
+```dax
+'Department'[DepartmentCode] = CUSTOMDATA()
+```
+
 # VertiPaq Analyzer
 
 Tabular Editor 3 includes a version of the open-source [VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) tool, created by [SQLBI](https://sqlbi.com). VertiPaq Analyzer is useful to analyze VertiPaq storage structures for your Power BI or Tabular data model.
