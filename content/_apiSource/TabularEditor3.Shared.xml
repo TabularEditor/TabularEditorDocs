@@ -570,6 +570,16 @@
             The currently selected column (if exactly one column is selected in the explorer tree).
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Calendars">
+            <summary>
+            The currently selected calendars.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Calendar">
+            <summary>
+            The currently selected calendar (if exactly one calendar is selected in the explorer tree).
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.Object">
             <summary>
             The currently selected object (if exactly one object is selected in the explorer tree).
@@ -778,6 +788,21 @@
               Looks up a localized string similar to Username and password.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BillionsFormat">
+            <summary>
+              Looks up a localized string similar to {0} B.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BytesFormat">
+            <summary>
+              Looks up a localized string similar to {0} Bytes.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.CannotPerformProcessingDisconnected">
+            <summary>
+              Looks up a localized string similar to Cannot perform processing on a disconnected model..
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.ColumnValues">
             <summary>
               Looks up a localized string similar to Column values.
@@ -786,6 +811,21 @@
         <member name="P:TabularEditor.Shared.Localization.Strings.Datamart">
             <summary>
               Looks up a localized string similar to Datamart.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DataRefreshComplete">
+            <summary>
+              Looks up a localized string similar to Data refresh complete..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DataRefreshFailed">
+            <summary>
+              Looks up a localized string similar to Data refresh failed..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DataRefreshStarted">
+            <summary>
+              Looks up a localized string similar to Data refresh started....
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.DaxOptimizerAccountRegistrationIncomplete">
@@ -798,9 +838,19 @@
               Looks up a localized string similar to File upload to the DAX Optimizer service is disabled by a local policy..
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_DisabledDueToLowModelCompatibilityLevel">
+            <summary>
+              Looks up a localized string similar to Disabled due to low model compatibility level ({0} &lt; {1}).
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.DefaultSemanticModel">
             <summary>
               Looks up a localized string similar to Semantic Model (Default).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.Error">
+            <summary>
+              Looks up a localized string similar to Error.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.ErrorLoadingUserOptionsDetails">
@@ -818,6 +868,11 @@
         <member name="P:TabularEditor.Shared.Localization.Strings.ExternalBrowserAuthentication">
             <summary>
               Looks up a localized string similar to External browser.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.GigabytesFormat">
+            <summary>
+              Looks up a localized string similar to {0} GB.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.KeepSortingAndFilteringAlways">
@@ -850,14 +905,39 @@
               Looks up a localized string similar to Sorting and filtering is reset when the query is modified, ignoring whitespace/comment modifications..
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.KilobytesFormat">
+            <summary>
+              Looks up a localized string similar to {0} KB.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.Lakehouse">
             <summary>
               Looks up a localized string similar to Lakehouse.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.MegabytesFormat">
+            <summary>
+              Looks up a localized string similar to {0} MB.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.MillionsFormat">
+            <summary>
+              Looks up a localized string similar to {0} M.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.MirroredAzureDatabricksCatalog">
+            <summary>
+              Looks up a localized string similar to Mirrored Azure Databricks catalog.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.MirroredDatabase">
             <summary>
               Looks up a localized string similar to Mirrored Database.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ModelRefreshDescription">
+            <summary>
+              Looks up a localized string similar to {0} model refresh.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.MyWorkspace">
@@ -875,6 +955,11 @@
               Looks up a localized string similar to OAuth.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.PartitionRefreshDescription">
+            <summary>
+              Looks up a localized string similar to {0} refresh of {1:partition {2}|{} partitions}.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.ProxyTypeCustom">
             <summary>
               Looks up a localized string similar to Custom.
@@ -888,6 +973,21 @@
         <member name="P:TabularEditor.Shared.Localization.Strings.ProxyTypeSystem">
             <summary>
               Looks up a localized string similar to System.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.RelationshipsWithParentheses">
+            <summary>
+              Looks up a localized string similar to (Relationships).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SaveBeforeProcessing">
+            <summary>
+              Looks up a localized string similar to Save changes before processing?.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SaveBeforeProcessingDescription">
+            <summary>
+              Looks up a localized string similar to You have made changes to the model metadata which has not yet been saved. Do you want to save these changes before starting the refresh job?.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.ScalarExpression">
@@ -915,9 +1015,29 @@
               Looks up a localized string similar to SQL Database.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.StartProcessingOutOfSync">
+            <summary>
+              Looks up a localized string similar to Start processing when metadata are out-of-sync?.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.StartProcessingOutOfSyncDescription">
+            <summary>
+              Looks up a localized string similar to You have made changes to the model metadata which has not yet been saved, and a refresh job is currently in progress. Would you like to queue a new refresh job anyway?.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.TableExpression">
             <summary>
               Looks up a localized string similar to Table expression.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.TableRefreshDescription">
+            <summary>
+              Looks up a localized string similar to {0} refresh of {1:table {2}|{} tables}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ThousandsFormat">
+            <summary>
+              Looks up a localized string similar to {0} K.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.UnableToFindFabricArtifact">
@@ -925,14 +1045,34 @@
               Looks up a localized string similar to Unable to find a warehouse, lakehouse, SQL database, or Mirrored Database with the specified workspaceId {0} and objectId {1}.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.UnableToProcessPartition">
+            <summary>
+              Looks up a localized string similar to Unable to process partition &apos;{0}&apos;. The partition is not available on the deployed database..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.UnableToProcessTable">
+            <summary>
+              Looks up a localized string similar to Unable to process table &apos;{0}&apos;. The table is not available on the deployed database..
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.UnknownFabricArtifactType">
             <summary>
               Looks up a localized string similar to (Unknown).
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ViewRefreshQueue">
+            <summary>
+              Looks up a localized string similar to View refresh queue.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.Warehouse">
             <summary>
               Looks up a localized string similar to Warehouse.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.Warning">
+            <summary>
+              Looks up a localized string similar to Warning.
             </summary>
         </member>
         <member name="T:TabularEditor.Shared.Scripting.ScriptHelper">
@@ -1782,6 +1922,11 @@
         <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.GitIntegrationPreview">
             <summary>
             When this feature switch is enabled, end users may enable the Git Integration Preview feature (through the preferences dialog)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.DaxOptimizerDev">
+            <summary>
+            When this feature switch is enabled, the DAX Optimizer integration feature will connect to DAX Optimizer's DEV environment.
             </summary>
         </member>
         <member name="M:TabularEditor.Shared.Services.IModelManagerService.UnsavedModelCheck">
