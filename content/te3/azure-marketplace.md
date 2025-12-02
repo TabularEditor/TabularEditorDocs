@@ -96,30 +96,22 @@ Please read @installation-activation-basic for more details on how to install, a
 
 ## Changing Azure Marketplace subscriptions
 
-All modifications to Tabular Editor 3 subscriptions purchased through the Azure Marketplace must be made in the Azure Portal. The Tabular Editor self-service portal does not currently support these operations.
-
-You can manage the following subscription changes through the Azure Portal:
-
-- **Change plan**: Upgrade or downgrade between different Tabular Editor 3 editions
-- **Adjust number of seats**: Add or remove user licenses
-- **Modify renewal preferences**: Enable or disable auto-renewal
-- **Change Azure subscription**: Change Azure subscription or resource group managing the Tabular Editor subscription resource.
-- **Cancel subscription**: Terminate your subscription at the end of the billing period
+All modifications to Tabular Editor 3 subscriptions purchased through the Azure Marketplace must be made in the Azure Portal. 
 
 ### How to modify your subscription
 
 1. Sign in to the [Azure Portal](https://portal.azure.com/)
 2. Navigate to **Home** > **SaaS** or search for "SaaS" in the search box
 3. Locate and select your Tabular Editor 3 subscription from the list
-4. On the subscription overview page, you can:
-   - Click **Change plan** to switch between editions
-   - Click **Change No. of users** to adjust the number of seats/licenses
-   - Click **Edit Auto-renew** to adjust the auto-renewal settings
-   - Click **Cancel subscription** to terminate the subscription
-   - Click **Change Azure subscription** to change the Azure subscription used for billing
-   - Click **Change resource group** to move the subscription resource to a different resource group
+4. On the subscription overview page, you can perform the following actions:
+   - **Change plan**: Upgrade or downgrade between different Tabular Editor 3 editions
+   - **Change No. of users**: Add or remove user licenses
+   - **Edit Auto-renew**: Enable or disable automatic renewal
+   - **Cancel subscription**: Terminate your subscription
+   - **Change Azure subscription**: Modify the Azure subscription used for billing
+   - **Change resource group**: Move the subscription resource to a different resource group
 
 > [!IMPORTANT]
-> Canceling a subscription immediately revokes access to all licenses under that subscription and cannot be undone. To maintain access until the end of your current billing period, click **Edit Auto-renew** and turn off automatic renewal instead.
+> Canceling a subscription immediately revokes access to all licenses under that subscription and cannot be undone. To maintain access until the end of your current billing period, click **Edit Auto-renew** and turn off automatic renewal instead. Refunds are processed according to the refund policy. For more information, see [Refund policies](https://learn.microsoft.com/en-us/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) for Microsoft Marketplace.
 
 For more information about managing SaaS subscriptions in Azure, see: [SaaS subscription lifecycle management](https://learn.microsoft.com/en-us/marketplace/saas-subscription-lifecycle-management)
