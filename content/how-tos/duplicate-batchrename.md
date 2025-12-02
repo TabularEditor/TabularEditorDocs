@@ -1,6 +1,6 @@
 ---
 uid: duplicate-and-batch
-title: Advanced Scripting
+title: Duplicating Objects and Batch Rename
 applies_to:
   products:
     - product: Tabular Editor 2

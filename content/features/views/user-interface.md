@@ -154,7 +154,7 @@ The **Model** menu displays actions that can be performed at the level of the Mo
 
 ![View Menu](~/content/assets/images/model-menu.png)
 
-- **Deploy...**: Launches the Tabular Editor Deployment wizard. For more information, see @deployment.
+- **Deploy...**: Launches the Tabular Editor Deployment wizard. For more information, see [Model deployment](../deployment.md).
 
 > [!IMPORTANT]
 > The **Deploy** option is not available in Tabular Editor 3 Desktop Edition. For more information see @editions.

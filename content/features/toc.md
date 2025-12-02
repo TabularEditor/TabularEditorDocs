@@ -49,7 +49,7 @@
 ## @table-groups
 
 # Model Deployment and Management
-## @deployment 
+## [Model deployment](deployment.md)
 ## @workspace-databases 
 ## @workspace-mode 
 ## @tmdl 

@@ -9,7 +9,7 @@ This section contains step-by-step guides for accomplishing specific tasks with 
 - [Script Reference Objects](script-reference-objects.md) - Working with object references in scripts
 
 ### Model Management and Deployment
-- [Deployment](deployment.md) - Deploy models to Analysis Services databases
+- [Deployment](../features/deployment.md) - Deploy models to Analysis Services databases
 - [Connect to SSAS](connect-ssas.md) - Connect to and work with SSAS Tabular databases
 - [Load and Save](load-save.md) - Loading and saving model files
 - [Folder Serialization](folder-serialization.md) - Save models as folder structures for version control

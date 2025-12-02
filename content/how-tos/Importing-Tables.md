@@ -1,6 +1,6 @@
 ﻿---
 uid: importing-tables-te2
-title: Importing Tables
+title: Importing Tables in TE2
 author: Daniel Otykier
 updated: 2020-05-03
 applies_to:
@@ -122,7 +122,7 @@ Provider=MSOLEDBSQL;Data Source=<sql server name>.database.windows.net;User ID=d
 ```
 
 3. To import tables from this source, right-click on the data source and choose "Import Tables...", the Import Table Wizard UI should appear showing a list of tables/views from the source. Note, that for Synapse SQL pools, you may have to specify "TOP (without NOLOCK)" as a row clause, in order for the data preview to work.
-4. When deploying your model to Analysis Services, you will most likely need to specify other credentials, such as a Service Principal application ID and secret or a SQL account, in order for Analysis Services to authenticate itself against the source when refreshing table data. This can be specified using TMSL or SSMS post-deployment, or you can set this up as [part of your CI/CD deployment pipeline](https://tabulareditor.com/2020/06/20/DevOps5.html#creating-your-first-release-pipeline).
+4. When deploying your model to Analysis Services, you will most likely need to specify other credentials, such as a Service Principal application ID and secret or a SQL account, in order for Analysis Services to authenticate itself against the source when refreshing table data. This can be specified using TMSL or SSMS post-deployment, or you can set this up as [part of your CI/CD deployment pipeline](https://tabulareditor.com/blog/youre-deploying-it-wrong-as-edition-part-5#creating-your-first-release-pipeline).
 
 ## Manually importing schema/metadata
 

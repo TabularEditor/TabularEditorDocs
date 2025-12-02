@@ -3,7 +3,7 @@
 ## [Script Reference Objects](script-reference-objects.md) 
 
 # Model Management and Deployment
-## [Deployment](deployment.md) 
+## [Deploy Current Model](deploy-current-model.md) 
 ## [Connect to SSAS](connect-ssas.md) 
 ## [Load and Save](load-save.md) 
 ## [Folder Serialization](folder-serialization.md) 

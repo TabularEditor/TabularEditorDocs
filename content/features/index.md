@@ -46,7 +46,7 @@ This section contains documentation about Tabular Editor features.
 
 ### Model Deployment and Management
 - @supported-files - File format support
-- @deployment - Model deployment options and strategies
+- [Model deployment](deployment.md) - Deployment options and strategies
 - @workspace-databases - Working with workspace databases
 - @workspace-mode - Collaborative development mode
 - @tmdl - Tabular Model Definition Language support

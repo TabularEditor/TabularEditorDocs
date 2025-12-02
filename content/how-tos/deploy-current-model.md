@@ -1,6 +1,6 @@
 ---
-uid: deployment-how-to
-title: Deployment
+uid: deploy-current-model
+title: Deploy Current Loaded Model
 applies_to:
   products:
     - product: Tabular Editor 2

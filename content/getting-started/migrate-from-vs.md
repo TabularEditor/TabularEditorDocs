@@ -212,7 +212,7 @@ Once tables have been added to the diagram, you can create relationship between 
 
 Tabular Editor lets you easily deploy the model metadata to any instance of Analysis Services. You can invoke Tabular Editor's Deployment Wizard under **Model > Deploy...** or by hitting CTRL+SHIFT+D.
 
-For more information, see <xref:deployment>.
+For more information, see [Model deployment](../features/deployment.md).
 
 ## Next steps
 
