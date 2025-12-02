@@ -11,6 +11,7 @@
 ## @getting-started
 ## @editions
 ## @training-telearn
+## @azure-marketplace
 
 # @getting-started-te2
 

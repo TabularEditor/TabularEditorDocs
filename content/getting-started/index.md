@@ -21,6 +21,7 @@ As this training material is focused on the Tabular Editor product, we assume th
 
 - @general-introduction
   - @installation-activation-basic
+  - @azure-marketplace
   - @migrate-from-vs
   - @migrate-from-desktop
   - @migrate-from-te2
