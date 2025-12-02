@@ -3,6 +3,7 @@
 ## @whats-new
 ## @editions
 ## @desktop-limitations-te3
+## @azure-marketplace
 ## Power BI XMLA Endpoint
 ### @powerbi-xmla
 ### @powerbi-xmla-pbix-workaround
