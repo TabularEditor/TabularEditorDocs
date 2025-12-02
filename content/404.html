@@ -3,6 +3,28 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        (function () {
+            // Redirect legacy TE3 paths to their new locations before rendering the fallback view.
+            var path = window.location.pathname.replace(/\/+/g, '/').replace(/\.html$/, '');
+            var search = window.location.search;
+            var hash = window.location.hash;
+            var redirects = [
+                { pattern: /^\/te3\/tutorials(\/.*)?$/, target: '/tutorials$1' },
+                { pattern: /^\/te3\/other\/release-notes(\/.*)?$/, target: '/references/release-notes$1' }
+            ];
+
+            for (var i = 0; i < redirects.length; i++) {
+                var match = redirects[i].pattern.exec(path);
+                if (match) {
+                    var tail = match[1] || '';
+                    var locationTarget = redirects[i].target.replace('$1', tail);
+                    window.location.replace(locationTarget + search + hash);
+                    return;
+                }
+            }
+        })();
+    </script>
     <style>
         body, html {
             font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
