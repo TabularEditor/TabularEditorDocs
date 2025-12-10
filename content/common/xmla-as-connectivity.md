@@ -195,15 +195,19 @@ To use the script:
 4. In notepad, adjust the XMLA URL in the script below to match the endpoint you're trying to connect to. Then, copy the modified script into the PowerShell window and hit [Enter] to run it.
 
 ```powershell
-# Config (TODO: Update workspace name below)
+# Run this script from the Tabular Editor 3 installation folder, since this folder
+# contains all of the DLLs required.
+
+# Config
+# TODO: Update the XMLA URL below and modify connection string properties as needed
 $xmla = "powerbi://api.powerbi.com/v1.0/myorg/workspace-name"
+$connectionString = "Provider=MSOLAP;Data Source=$xmla;Interactive Login=Always;Identity Mode=Connection"
 
 # Load DLLs
 Add-Type -Path "Microsoft.AnalysisServices.Tabular.dll"
 
 # Create Microsoft.AnalysisServices.Tabular.Server object:
 $server = New-Object Microsoft.AnalysisServices.Tabular.Server
-$connectionString = "Provider=MSOLAP;Data Source=$xmla;Interactive Login=Always;Identity Mode=Connection"
 
 try {
 	# Connect
