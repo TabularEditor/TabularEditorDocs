@@ -18,4 +18,4 @@ While a better user experience for working with Tabular Models inside Visual Stu
 Also worth mentioning: Tabular Editor can be downloaded as a [standalone .zip file](https://github.com/TabularEditor/TabularEditor/releases/latest/download/TabularEditor.Portable.zip), meaning you do not need to install anything. In other words, you can run Tabular Editor without having admin rights on your Windows machine. Simply download the zip file, extract it, and run TabularEditor.exe.
 
 ## What features are planned for upcoming releases?
-You can view the current roadmap [here](Roadmap.md).
+You can view the current roadmap [here](roadmap.md).
