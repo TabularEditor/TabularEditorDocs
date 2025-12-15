@@ -107,12 +107,15 @@ All modifications to Tabular Editor 3 subscriptions purchased through the Azure 
 2. Navigate to **Home** > **SaaS** or search for "SaaS" in the search box
 3. Locate and select your Tabular Editor 3 subscription from the list
 4. On the subscription overview page, you can perform the following actions:
-   - **Change plan**: Upgrade or downgrade between different Tabular Editor 3 editions
-   - **Change No. of users**: Add or remove user licenses
+   - **Change plan**: Upgrade to a higher Tabular Editor 3 edition
+   - **Change No. of users**: Add additional user licenses
    - **Edit Auto-renew**: Enable or disable automatic renewal
    - **Cancel subscription**: Terminate your subscription
    - **Change Azure subscription**: Modify the Azure subscription used for billing
    - **Change resource group**: Move the subscription resource to a different resource group
+
+> [!NOTE]
+> **Downgrades not supported**: You cannot downgrade to a lower edition or reduce the number of users during an active subscription period. To move to a lower-tier plan or reduce seats, turn off **Auto-renew** for your current subscription and purchase a new subscription with your desired configuration before the current term ends.
 
 > [!IMPORTANT]
 > Canceling a subscription immediately revokes access to all licenses under that subscription and cannot be undone. To maintain access until the end of your current billing period, click **Edit Auto-renew** and turn off automatic renewal instead. Refunds are processed according to the refund policy. For more information, see [Refund policies](https://learn.microsoft.com/en-us/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) for Microsoft Marketplace.
