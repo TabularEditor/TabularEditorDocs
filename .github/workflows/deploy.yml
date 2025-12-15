@@ -21,7 +21,7 @@ jobs:
       - name: Build Documentation
         uses: nunit/docfx-action@v3.0.0
         with:
-          args: docfx.json
+          args: docfx.json --warningsAsErrors
       - name: Replace Shared Xref in API HTML
         run: |
           sudo chmod -R u+w _site/api

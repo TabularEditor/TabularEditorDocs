@@ -1,6 +1,7 @@
 {
     "rules": {
-        "InvalidAssemblyReference": "Suggestion"
+        "InvalidAssemblyReference": "Suggestion",
+        "EmptyTocItemName": "Suggestion"
     },
     "metadata": [
         {
