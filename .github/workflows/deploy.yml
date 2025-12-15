@@ -19,7 +19,7 @@ jobs:
         with:
           submodules: true
       - name: Build Documentation
-        uses: nunit/docfx-action@v3.0.0
+        uses: nunit/docfx-action@v4.1.0
         with:
           args: docfx.json --warningsAsErrors
       - name: Replace Shared Xref in API HTML
