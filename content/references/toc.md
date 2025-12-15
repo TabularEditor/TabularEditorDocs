@@ -11,7 +11,7 @@
 ## @shortcuts2
 ## @user-options
 ## @supported-files
-## user-setting-files-te2
+## @user-setting-files-te2
 
 # Development and Planning
 ## @roadmap
