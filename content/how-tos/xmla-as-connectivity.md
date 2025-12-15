@@ -188,3 +188,48 @@ If there are duplicate names, please refer to Microsoft's documentation in the s
 ### Proxy handling
 
 Another common cause of connectivity issues is proxies. For more information about this, please review [this article](xref:proxy-settings).
+
+### Testing connectivity using PowerShell
+
+If connectivity issues persist even after attempting the troubleshooting steps mentioned above, it is also possible to connect directly to the XMLA endpoint using the [Microsoft-provided Analysis Services client libraries](https://www.nuget.org/packages/Microsoft.AnalysisServices/), *without* using Tabular Editor. We can do this using a simple PowerShell script as shown below. If this connection also fails, it is a clear indication that the issue is unrelated to Tabular Editor; in this case, you should consider raising a support ticket with Microsoft. When contacting Microsoft, inform them of which version of the **Microsoft.AnalysisServices.Tabular.dll** and **Microsoft.Identity.Client.dll** you're using, and also include the PowerShell script. Also, inform them whether you're using the .NET Core (Tabular Editor 3) or .NET Framework (Tabular Editor 2) versions of the DLLs. Avoid mentioning Tabular Editor directly in your support request, as this may confuse their 1st-level support. After creating the support ticket, please also notify us via support@tabulareditor.com, as we are interested in tracking the frequency of these issues.
+
+To use the script:
+
+1. Navigate to the Tabular Editor 3 installation folder through Windows Explorer
+2. Right-click somewhere in the folder and choose "Open in Terminal". This should open a PowerShell window. You can also open a regular command window and type `pwsh` to launch PowerShell.
+3. Check that the PowerShell version is at least 6.2.0. If the constrained language mode is restricted, try to open the terminal as an administrator or request assistance from your IT admin team to run the script.
+4. In notepad, adjust the XMLA URL in the script below to match the endpoint you're trying to connect to. Then, copy the modified script into the PowerShell window and hit [Enter] to run it.
+
+```powershell
+# Run this script from the Tabular Editor 3 installation folder, since this folder
+# contains all of the DLLs required.
+
+# Config
+# TODO: Update the XMLA URL below and modify connection string properties as needed
+$xmla = "powerbi://api.powerbi.com/v1.0/myorg/workspace-name"
+$connectionString = "Provider=MSOLAP;Data Source=$xmla;Interactive Login=Always;Identity Mode=Connection"
+
+# Load DLLs
+Add-Type -Path "Microsoft.AnalysisServices.Tabular.dll"
+
+# Create Microsoft.AnalysisServices.Tabular.Server object:
+$server = New-Object Microsoft.AnalysisServices.Tabular.Server
+
+try {
+	# Connect
+	$server.Connect($connectionString)
+
+	Write-Host "Connection succeeded." -ForegroundColor Green
+	Write-Host "Connected to: $($server.Name)"
+}
+catch {
+	Write-Host "Connection failed:" -ForegroundColor Red
+	Write-Host $_.Exception.Message -ForegroundColor Red
+}
+```
+
+If the script **succeeds**, it means that your machine is able to connect to the XMLA endpoint using the Microsoft client libraries. If, simultaneously, you're **not** able to connect using Tabular Editor, please post a ticket on our [Tabular Editor 2](https://github.com/TabularEditor/TabularEditor/issues) or [Tabular Editor 3](https://github.com/TabularEditor/TabularEditor3/issues) support page, or send an email to support@tabulareditor.com (**Tabular Editor 3 Enterprise Edition customers only**).
+
+If the script **fails**, something on your environment is blocking XMLA endpoint connectivity, and so Tabular Editor will also not be able to connect. In this case, please reach out to your IT department for troubleshooting firewalls/proxies, before contacting Microsoft support.
+
+If the script **succeeds** using Tabular Editor 2 DLLs, but **fails** using Tabular Editor 3 DLLs (or vice versa), please reach out to Microsoft support, since the issue in this case would be a discrepancy between the .NET Framework version of the DLLs (used by Tabular Editor 2) and the .NET Core version of the DLLs (used by Tabular Editor 3).
