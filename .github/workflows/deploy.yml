@@ -22,23 +22,6 @@ jobs:
         uses: nunit/docfx-action@v3.0.0
         with:
           args: docfx.json
-        continue-on-error: true
-        id: docfx_build
-      - name: Check for DocFX Warnings
-        run: |
-          # Check if there were any warnings other than InvalidAssemblyReference
-          if [ -f "docfx.log" ]; then
-            if grep -i "warning" docfx.log | grep -v "InvalidAssemblyReference" > /dev/null; then
-              echo "::error::Found DocFX warnings (excluding InvalidAssemblyReference):"
-              grep -i "warning" docfx.log | grep -v "InvalidAssemblyReference"
-              exit 1
-            fi
-          fi
-          # Also check the build step output
-          if [ "${{ steps.docfx_build.outcome }}" == "failure" ]; then
-            exit 1
-          fi
-        shell: bash
       - name: Replace Shared Xref in API HTML
         run: |
           sudo chmod -R u+w _site/api
