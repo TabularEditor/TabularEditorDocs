@@ -5,9 +5,9 @@ author: David Bojsen
 updated: 2025-08-05
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       none: true
-    - product: TE3
+    - product: Tabular Editor 3
       since: 3.15.0
       editions:
         - edition: Desktop

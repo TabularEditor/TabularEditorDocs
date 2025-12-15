@@ -5,9 +5,9 @@ author: Daniel Otykier
 updated: 2024-12-13
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       full: true
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
 ---
 # Output Object Details in a Grid

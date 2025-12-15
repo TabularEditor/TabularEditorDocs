@@ -5,9 +5,9 @@ author: David Bojsen
 updated: 2023-09-12
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       full: true
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
 ---
 # Show Data Source Dependencies

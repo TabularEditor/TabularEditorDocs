@@ -5,9 +5,9 @@ author: Daniel Otykier
 updated: 2025-11-03
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       none: true
-    - product: TE3
+    - product: Tabular Editor 3
       editions:
         - edition: Desktop
           full: true

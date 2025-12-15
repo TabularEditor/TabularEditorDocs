@@ -1,12 +1,13 @@
 ---
 uid: script-helper-methods
 title: C# Script Helper Methods
+author: Daniel Otykier
 updated: 2023-02-27
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       true: true
-    - product: TE3
+    - product: Tabular Editor 3
       editions:
         - edition: Desktop
           full: true

@@ -12,10 +12,10 @@ author: Your Name
 updated: 2025-11-04
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       none: true
       note: "Not available in TE2. Use TE3 for this feature."
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
       since: 3.18.0
 ---
@@ -37,9 +37,9 @@ author: Your Name
 updated: 2025-11-04
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       none: true
-    - product: TE3
+    - product: Tabular Editor 3
       since: 3.15.0
       editions:
         - edition: Desktop
@@ -73,9 +73,9 @@ author: Your Name
 updated: 2025-11-04
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       full: true
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
 ---
 ```
@@ -96,9 +96,9 @@ author: Your Name
 updated: 2025-11-04
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       full: true
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
       since: 3.0.0
       until: 3.22.0
@@ -122,10 +122,10 @@ author: Your Name
 updated: 2025-11-04
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       none: true
       note: "Upgrade to TE3 for this feature"
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
       since: 3.0.0
 ---
@@ -147,10 +147,10 @@ author: Your Name
 updated: 2025-11-04
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       partial: true
       note: "Requires manual scripting workaround"
-    - product: TE3
+    - product: Tabular Editor 3
       since: 3.12.0
       editions:
         - edition: Desktop
@@ -190,9 +190,9 @@ applies_to:
 ```yaml
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       none: true
-    - product: TE3
+    - product: Tabular Editor 3
       since: 3.15.0
       editions:
         - edition: Desktop

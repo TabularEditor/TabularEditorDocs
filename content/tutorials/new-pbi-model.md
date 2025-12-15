@@ -8,7 +8,6 @@ applies_to:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
-      since: 3.15.0
       editions:
         - edition: Desktop
           none: true

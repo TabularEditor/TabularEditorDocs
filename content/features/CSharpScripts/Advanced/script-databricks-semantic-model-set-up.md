@@ -5,9 +5,9 @@ author: Johnny Winter
 updated: 2025-09-04
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       full: true
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
 ---
 # Databricks Semantic Model Set-Up

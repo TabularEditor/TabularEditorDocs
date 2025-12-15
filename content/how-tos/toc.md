@@ -10,8 +10,8 @@
 ## [Master Model Pattern](Master-model-pattern.md) 
 
 # Data Import and Tables
-## [Importing Tables](Importing-Tables.md) 
-## [Importing Tables from Excel](importing-tables-from-excel.md) 
+## [Importing Tables (TE2)](Importing-Tables.md) 
+## [Importing Tables from Excel (TE2)](importing-tables-from-excel.md) 
 ## [Replace Tables](replace-tables.md) 
 
 # Model Organization and Structure

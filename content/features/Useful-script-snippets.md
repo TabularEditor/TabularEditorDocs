@@ -4,9 +4,9 @@ title: Useful script snippets
 author: Daniel Otykier
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       full: true
-    - product: TE3
+    - product: Tabular Editor 3
       editions:
         - edition: Desktop
           full: true

@@ -1,12 +1,13 @@
 ---
 uid: script-library-beginner
 title: Beginner C# Scripts
+author: Morten Lønskov
 updated: 2023-02-27
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       full: true
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
 ---
 

@@ -5,9 +5,9 @@ author: Morten Lønskov
 updated: 2023-11-29
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       none: true
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
 ---
 # Format Numeric Measures

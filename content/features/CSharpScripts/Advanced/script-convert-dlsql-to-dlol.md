@@ -5,9 +5,9 @@ author: Daniel Otykier
 updated: 2025-06-20
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       full: true
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
 ---
 # Convert Direct Lake on SQL to OneLake

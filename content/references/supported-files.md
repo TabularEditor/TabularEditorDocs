@@ -4,10 +4,18 @@ title: Supported file types
 author: Morten Lønskov
 updated: 2023-10-17
 applies_to:
-  editions:
-    - edition: Desktop
-    - edition: Business
-    - edition: Enterprise
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      editions:
+        - edition: Desktop
+          partial: true
+          note: "Desktop Edition does not support model metadata files"
+        - edition: Business
+          full: true
+        - edition: Enterprise
+          full: true
 ---
 # Supported file types
 

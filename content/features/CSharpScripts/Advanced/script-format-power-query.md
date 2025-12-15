@@ -5,9 +5,9 @@ author: Kurt Buhler
 updated: 2023-02-28
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       none: true
-    - product: TE3
+    - product: Tabular Editor 3
       full: true
 ---
 # Format Power Query

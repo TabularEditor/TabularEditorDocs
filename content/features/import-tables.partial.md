@@ -3,9 +3,9 @@ uid: import-tables
 title: Import Tables
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       none: true
-    - product: TE3
+    - product: Tabular Editor 3
       editions:
         - edition: Desktop
           full: true

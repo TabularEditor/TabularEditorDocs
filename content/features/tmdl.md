@@ -6,9 +6,9 @@ updated: 2023-05-22
 applies_to:
 applies_to:
   products:
-    - product: TE2
+    - product: Tabular Editor 2
       full: true
-    - product: TE3
+    - product: Tabular Editor 3
       editions:
         - edition: Desktop
           none: true
