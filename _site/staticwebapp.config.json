@@ -140,13 +140,163 @@
       "statusCode": 301
     },
     {
+      "route": "/common/CSharpScripts/Advanced/script-add-databricks-metadata-descriptions.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-add-databricks-metadata-descriptions.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-convert-dlsql-to-dlol.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-convert-dlsql-to-dlol.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-convert-import-to-dlol.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-convert-import-to-dlol.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-count-things.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-count-things.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-create-and-replace-M-parameter.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-create-and-replace-M-parameter.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-create-databricks-relationships.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-create-databricks-relationships.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-create-date-table.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-create-date-table.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-databricks-semantic-model-set-up.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-databricks-semantic-model-set-up.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-find-replace-selected-measures.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-find-replace-selected-measures.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-format-power-query.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-format-power-query.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-implement-incremental-refresh.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-implement-incremental-refresh.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-output-things.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-output-things.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Advanced/script-remove-measures-with-error.html",
+      "redirect": "/features/CSharpScripts/Advanced/script-remove-measures-with-error.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Beginner/script-count-rows.html",
+      "redirect": "/features/CSharpScripts/Beginner/script-count-rows.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Beginner/script-create-field-parameter.html",
+      "redirect": "/features/CSharpScripts/Beginner/script-create-field-parameter.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Beginner/script-create-m-parameter.html",
+      "redirect": "/features/CSharpScripts/Beginner/script-create-m-parameter.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Beginner/script-create-measure-table.html",
+      "redirect": "/features/CSharpScripts/Beginner/script-create-measure-table.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Beginner/script-create-sum-measures-from-columns.html",
+      "redirect": "/features/CSharpScripts/Beginner/script-create-sum-measures-from-columns.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Beginner/script-create-table-groups.html",
+      "redirect": "/features/CSharpScripts/Beginner/script-create-table-groups.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Beginner/script-display-unique-column-values.html",
+      "redirect": "/features/CSharpScripts/Beginner/script-display-unique-column-values.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Beginner/script-edit-hidden-partitions.html",
+      "redirect": "/features/CSharpScripts/Beginner/script-edit-hidden-partitions.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Beginner/script-format-numeric-measures.html",
+      "redirect": "/features/CSharpScripts/Beginner/script-format-numeric-measures.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Beginner/script-show-data-source-dependencies.html",
+      "redirect": "/features/CSharpScripts/Beginner/script-show-data-source-dependencies.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/Template/csharp-script-Template.html",
+      "redirect": "/features/CSharpScripts/Template/csharp-script-Template.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/csharp-script-library-advanced.html",
+      "redirect": "/features/CSharpScripts/csharp-script-library-advanced.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/csharp-script-library-beginner.html",
+      "redirect": "/features/CSharpScripts/csharp-script-library-beginner.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/CSharpScripts/csharp-script-library.html",
+      "redirect": "/features/CSharpScripts/csharp-script-library.html",
+      "statusCode": 301
+    },
+    {
       "route": "/te2/Command-line-Options.html",
       "redirect": "/features/Command-line-Options.html",
       "statusCode": 301
     },
     {
       "route": "/te2/Custom-Actions.html",
-      "redirect": "/features/Custom-Actions.html",
+      "redirect": "/features/Custom-Actions-hidden.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/Semantic%20Model/direct-lake-sql-model.html",
+      "redirect": "/features/Semantic%20Model/direct-lake-sql-model.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/Semantic%20Model/direct-query-over-as.html",
+      "redirect": "/features/Semantic%20Model/direct-query-over-as.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/Semantic%20Model/semantic-model-types.html",
+      "redirect": "/features/Semantic%20Model/semantic-model-types.html",
       "statusCode": 301
     },
     {
@@ -162,6 +312,11 @@
     {
       "route": "/te3/features/code-actions.html",
       "redirect": "/features/code-actions.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/creating-macros.html",
+      "redirect": "/features/creating-macros.html",
       "statusCode": 301
     },
     {
@@ -185,6 +340,11 @@
       "statusCode": 301
     },
     {
+      "route": "/te3/features/dax-package-manager.html",
+      "redirect": "/features/dax-package-manager.html",
+      "statusCode": 301
+    },
+    {
       "route": "/te3/features/dax-query.html",
       "redirect": "/features/dax-query.html",
       "statusCode": 301
@@ -197,6 +357,11 @@
     {
       "route": "/te3/features/deployment.html",
       "redirect": "/features/deployment.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/import-tables.partial.html",
+      "redirect": "/features/import-tables.partial.html",
       "statusCode": 301
     },
     {
@@ -215,13 +380,18 @@
       "statusCode": 301
     },
     {
-      "route": "/te3/features/supported-files.html",
-      "redirect": "/references/supported-files.html",
+      "route": "/common/save-to-folder.html",
+      "redirect": "/features/save-to-folder.html",
       "statusCode": 301
     },
     {
-      "route": "/features/supported-files.html",
-      "redirect": "/references/supported-files.html",
+      "route": "/common/script-helper-methods.html",
+      "redirect": "/features/script-helper-methods.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/common/script-helper-methods.tt",
+      "redirect": "/features/script-helper-methods.tt",
       "statusCode": 301
     },
     {
@@ -235,83 +405,63 @@
       "statusCode": 301
     },
     {
-      "route": "/te3/features/diagram-view.html",
-      "redirect": "/getting-started/views/diagram-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/features/preferences.html",
-      "redirect": "/references/preferences.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/features/shortcuts.html",
-      "redirect": "/references/shortcuts3.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/features/user-options.html",
-      "redirect": "/references/user-options.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/features/security-privacy.html",
-      "redirect": "/security/security-privacy.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/common/Semantic%20Model/direct-lake-sql-model.html",
-      "redirect": "/features/Semantic%20Model/direct-lake-sql-model.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/common/Semantic%20Model/direct-query-over-as.html",
-      "redirect": "/features/Semantic%20Model/direct-query-over-as.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/common/Semantic%20Model/semantic-model-types.html",
-      "redirect": "/features/Semantic%20Model/semantic-model-types.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/common/save-to-folder.html",
-      "redirect": "/features/save-to-folder.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/common/script-helper-methods.html",
-      "redirect": "/features/script-helper-methods.html",
-      "statusCode": 301
-    },
-    {
       "route": "/common/using-bpa-sample-rules-expressions.html",
       "redirect": "/features/using-bpa-sample-rules-expressions.html",
       "statusCode": 301
     },
     {
-      "route": "/common/CSharpScripts/csharp-script-library.html",
-      "redirect": "/features/CSharpScripts/csharp-script-library.html",
+      "route": "/te3/views/data-refresh-view.html",
+      "redirect": "/features/views/data-refresh-view.html",
       "statusCode": 301
     },
     {
-      "route": "/common/CSharpScripts/csharp-script-library-beginner.html",
-      "redirect": "/features/CSharpScripts/csharp-script-library-beginner.html",
+      "route": "/te3/features/diagram-view.html",
+      "redirect": "/features/views/diagram-view.html",
       "statusCode": 301
     },
     {
-      "route": "/common/CSharpScripts/csharp-script-library-advanced.html",
-      "redirect": "/features/CSharpScripts/csharp-script-library-advanced.html",
+      "route": "/te3/views/find-replace.html",
+      "redirect": "/features/views/find-replace.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/views/macros-view.html",
+      "redirect": "/features/views/macros-view.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/views/messages-view.html",
+      "redirect": "/features/views/messages-view.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/views/properties-view.html",
+      "redirect": "/features/views/properties-view.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/views/tom-explorer-view.html",
+      "redirect": "/features/views/tom-explorer-view.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/views/user-interface.html",
+      "redirect": "/features/views/user-interface.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/workspace-mode.partial.html",
+      "redirect": "/features/workspace-mode.partial.html",
       "statusCode": 301
     },
     {
       "route": "/te2/Getting-Started.html",
-      "redirect": "/getting-started/Getting-Started2.html",
+      "redirect": "/getting-started/Getting-Started-te2.html",
       "statusCode": 301
     },
     {
-      "route": "/te2/Training-Webinar-for-Tabular-Editor.html",
-      "redirect": "/getting-started/Training-Webinar-for-Tabular-Editor.html",
+      "route": "/te3/azure-marketplace.html",
+      "redirect": "/getting-started/azure-marketplace.html",
       "statusCode": 301
     },
     {
@@ -390,11 +540,6 @@
       "statusCode": 301
     },
     {
-      "route": "/onboarding/optimizing-workflow-workspace-mode.html",
-      "redirect": "/getting-started/optimizing-workflow-workspace-mode.html",
-      "statusCode": 301
-    },
-    {
       "route": "/onboarding/parallel-development.html",
       "redirect": "/getting-started/parallel-development.html",
       "statusCode": 301
@@ -410,93 +555,13 @@
       "statusCode": 301
     },
     {
-      "route": "/te3/views/bpa-view.html",
-      "redirect": "/getting-started/views/bpa-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/views/data-refresh-view.html",
-      "redirect": "/getting-started/views/data-refresh-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/getting-started/views/data-refresh-view.html",
-      "redirect": "/features/views/data-refresh-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/getting-started/views/diagram-view.html",
-      "redirect": "/features/views/diagram-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/views/find-replace.html",
-      "redirect": "/getting-started/views/find-replace.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/getting-started/views/find-replace.html",
-      "redirect": "/features/views/find-replace.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/views/macros-view.html",
-      "redirect": "/getting-started/views/macros-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/getting-started/views/macros-view.html",
-      "redirect": "/features/views/macros-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/views/messages-view.html",
-      "redirect": "/getting-started/views/messages-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/getting-started/views/messages-view.html",
-      "redirect": "/features/views/messages-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/views/properties-view.html",
-      "redirect": "/getting-started/views/properties-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/getting-started/views/properties-view.html",
-      "redirect": "/features/views/properties-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/views/tom-explorer-view.html",
-      "redirect": "/getting-started/views/tom-explorer-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/getting-started/views/tom-explorer-view.html",
-      "redirect": "/features/views/tom-explorer-view.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/te3/views/user-interface.html",
-      "redirect": "/getting-started/views/user-interface.html",
-      "statusCode": 301
-    },
-    {
-      "route": "/getting-started/views/user-interface.html",
-      "redirect": "/features/views/user-interface.html",
-      "statusCode": 301
-    },
-    {
       "route": "/te2/Advanced-Filtering-of-the-Explorer-Tree.html",
       "redirect": "/how-tos/Advanced-Filtering-of-the-Explorer-Tree.html",
       "statusCode": 301
     },
     {
-      "route": "/te2/Advanced-Scripting-and-Dynamic-LINQ-quiz.md",
-      "redirect": "/how-tos/Advanced-Scripting-and-Dynamic-LINQ-quiz-h.html",
+      "route": "/te2/Advanced-Scripting.html",
+      "redirect": "/how-tos/Advanced-Scripting.html",
       "statusCode": 301
     },
     {
@@ -530,13 +595,13 @@
       "statusCode": 301
     },
     {
-      "route": "/how-tos/user-settings-files.html",
-      "redirect": "/references/user-settings-files-te2.html",
+      "route": "/te2/FAQ.html",
+      "redirect": "/references/FAQ.html",
       "statusCode": 301
     },
     {
-      "route": "/te2/FAQ.html",
-      "redirect": "/references/FAQ.html",
+      "route": "/te2/FormatDax.html",
+      "redirect": "/references/FormatDax.html",
       "statusCode": 301
     },
     {
@@ -570,13 +635,398 @@
       "statusCode": 301
     },
     {
+      "route": "/te3/features/preferences.html",
+      "redirect": "/references/preferences.html",
+      "statusCode": 301
+    },
+    {
       "route": "/te3/other/release-history.html",
       "redirect": "/references/release-history.html",
       "statusCode": 301
     },
     {
+      "route": "/te3/other/release-notes/3_0_1.html",
+      "redirect": "/references/release-notes/3_0_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_0_10.html",
+      "redirect": "/references/release-notes/3_0_10.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_0_2.html",
+      "redirect": "/references/release-notes/3_0_2.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_0_3.html",
+      "redirect": "/references/release-notes/3_0_3.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_0_4.html",
+      "redirect": "/references/release-notes/3_0_4.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_0_5.html",
+      "redirect": "/references/release-notes/3_0_5.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_0_6.html",
+      "redirect": "/references/release-notes/3_0_6.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_0_7.html",
+      "redirect": "/references/release-notes/3_0_7.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_0_8.html",
+      "redirect": "/references/release-notes/3_0_8.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_0_9.html",
+      "redirect": "/references/release-notes/3_0_9.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_10_0.html",
+      "redirect": "/references/release-notes/3_10_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_10_1.html",
+      "redirect": "/references/release-notes/3_10_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_11_0.html",
+      "redirect": "/references/release-notes/3_11_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_12_0.html",
+      "redirect": "/references/release-notes/3_12_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_12_1.html",
+      "redirect": "/references/release-notes/3_12_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_13_0.html",
+      "redirect": "/references/release-notes/3_13_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_14_0.html",
+      "redirect": "/references/release-notes/3_14_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_15_0.html",
+      "redirect": "/references/release-notes/3_15_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_16_0.html",
+      "redirect": "/references/release-notes/3_16_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_16_1.html",
+      "redirect": "/references/release-notes/3_16_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_16_2.html",
+      "redirect": "/references/release-notes/3_16_2.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_17_0.html",
+      "redirect": "/references/release-notes/3_17_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_17_1.html",
+      "redirect": "/references/release-notes/3_17_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_18_0.html",
+      "redirect": "/references/release-notes/3_18_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_18_1.html",
+      "redirect": "/references/release-notes/3_18_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_18_2.html",
+      "redirect": "/references/release-notes/3_18_2.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_19_0.html",
+      "redirect": "/references/release-notes/3_19_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_1_0.html",
+      "redirect": "/references/release-notes/3_1_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_1_1.html",
+      "redirect": "/references/release-notes/3_1_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_1_2.html",
+      "redirect": "/references/release-notes/3_1_2.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_1_3.html",
+      "redirect": "/references/release-notes/3_1_3.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_1_4.html",
+      "redirect": "/references/release-notes/3_1_4.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_1_5.html",
+      "redirect": "/references/release-notes/3_1_5.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_1_6.html",
+      "redirect": "/references/release-notes/3_1_6.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_1_7.html",
+      "redirect": "/references/release-notes/3_1_7.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_20_0.html",
+      "redirect": "/references/release-notes/3_20_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_20_1.html",
+      "redirect": "/references/release-notes/3_20_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_21_0.html",
+      "redirect": "/references/release-notes/3_21_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_22_0.html",
+      "redirect": "/references/release-notes/3_22_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_22_1.html",
+      "redirect": "/references/release-notes/3_22_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_23_0.html",
+      "redirect": "/references/release-notes/3_23_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_23_1.html",
+      "redirect": "/references/release-notes/3_23_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_24_0.html",
+      "redirect": "/references/release-notes/3_24_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_24_1.html",
+      "redirect": "/references/release-notes/3_24_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_24_2.html",
+      "redirect": "/references/release-notes/3_24_2.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_2_0.html",
+      "redirect": "/references/release-notes/3_2_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_2_1.html",
+      "redirect": "/references/release-notes/3_2_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_2_2.html",
+      "redirect": "/references/release-notes/3_2_2.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_2_3.html",
+      "redirect": "/references/release-notes/3_2_3.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_3_0.html",
+      "redirect": "/references/release-notes/3_3_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_3_1.html",
+      "redirect": "/references/release-notes/3_3_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_3_2.html",
+      "redirect": "/references/release-notes/3_3_2.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_3_3.html",
+      "redirect": "/references/release-notes/3_3_3.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_3_4.html",
+      "redirect": "/references/release-notes/3_3_4.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_3_5.html",
+      "redirect": "/references/release-notes/3_3_5.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_3_6.html",
+      "redirect": "/references/release-notes/3_3_6.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_4_0.html",
+      "redirect": "/references/release-notes/3_4_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_4_1.html",
+      "redirect": "/references/release-notes/3_4_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_4_2.html",
+      "redirect": "/references/release-notes/3_4_2.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_5_0.html",
+      "redirect": "/references/release-notes/3_5_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_5_1.html",
+      "redirect": "/references/release-notes/3_5_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_6_0.html",
+      "redirect": "/references/release-notes/3_6_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_7_0.html",
+      "redirect": "/references/release-notes/3_7_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_7_1.html",
+      "redirect": "/references/release-notes/3_7_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_8_0.html",
+      "redirect": "/references/release-notes/3_8_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/3_9_0.html",
+      "redirect": "/references/release-notes/3_9_0.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/beta-16_6.html",
+      "redirect": "/references/release-notes/beta-16_6.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/beta-17_4.html",
+      "redirect": "/references/release-notes/beta-17_4.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/beta-18_1.html",
+      "redirect": "/references/release-notes/beta-18_1.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/beta-18_2.html",
+      "redirect": "/references/release-notes/beta-18_2.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/beta-18_3.html",
+      "redirect": "/references/release-notes/beta-18_3.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/beta-18_4.html",
+      "redirect": "/references/release-notes/beta-18_4.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/other/release-notes/beta-18_5.html",
+      "redirect": "/references/release-notes/beta-18_5.html",
+      "statusCode": 301
+    },
+    {
       "route": "/te3/other/roadmap.html",
       "redirect": "/references/roadmap.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/features/shortcuts.html",
+      "redirect": "/references/shortcuts3.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/features/supported-files.html",
+      "redirect": "/references/supported-files.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/features/user-options.html",
+      "redirect": "/references/user-options.html",
       "statusCode": 301
     },
     {
@@ -595,13 +1045,38 @@
       "statusCode": 301
     },
     {
-      "route": "/te3/other/te3-eula.html",
-      "redirect": "/security/te3-eula.html",
+      "route": "/te3/features/security-privacy.html",
+      "redirect": "/security/security-privacy.html",
       "statusCode": 301
     },
     {
       "route": "/te3/other/third-party-notices.html",
       "redirect": "/security/third-party-notices.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te2/Maintaining-Calculations-using-Scripting.html",
+      "redirect": "/todo/Maintaining-Calculations-using-Scripting.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/onboarding/as-cicd.html",
+      "redirect": "/todo/as-cicd.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/onboarding/powerbi-cicd.html",
+      "redirect": "/todo/powerbi-cicd.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/troubleshooting/calendar-blank-value.html",
+      "redirect": "/troubleshooting/calendar-blank-value.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/troubleshooting/direct-lake-entity-updates-reverting.html",
+      "redirect": "/troubleshooting/direct-lake-entity-updates-reverting.html",
       "statusCode": 301
     },
     {
@@ -620,8 +1095,83 @@
       "statusCode": 301
     },
     {
+      "route": "/te3/tutorials/calendars.html",
+      "redirect": "/tutorials/calendars.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/connecting-to-azure-databricks.html",
+      "redirect": "/tutorials/connecting-to-azure-databricks.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/data-security/data-security-about.html",
+      "redirect": "/tutorials/data-security/data-security-about.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/data-security/data-security-setup-ols.html",
+      "redirect": "/tutorials/data-security/data-security-setup-ols.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/data-security/data-security-setup-rls.html",
+      "redirect": "/tutorials/data-security/data-security-setup-rls.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/data-security/data-security-testing.html",
+      "redirect": "/tutorials/data-security/data-security-testing.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/direct-lake-guidance.html",
+      "redirect": "/tutorials/direct-lake-guidance.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/incremental-refresh/incremental-refresh-about.html",
+      "redirect": "/tutorials/incremental-refresh/incremental-refresh-about.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/incremental-refresh/incremental-refresh-modify.html",
+      "redirect": "/tutorials/incremental-refresh/incremental-refresh-modify.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/incremental-refresh/incremental-refresh-schema.html",
+      "redirect": "/tutorials/incremental-refresh/incremental-refresh-schema.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/incremental-refresh/incremental-refresh-setup.html",
+      "redirect": "/tutorials/incremental-refresh/incremental-refresh-setup.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/incremental-refresh/incremental-refresh-workspace-mode.html",
+      "redirect": "/tutorials/incremental-refresh/incremental-refresh-workspace-mode.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/new-as-model.html",
+      "redirect": "/tutorials/new-as-model.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/new-pbi-model.html",
+      "redirect": "/tutorials/new-pbi-model.html",
+      "statusCode": 301
+    },
+    {
       "route": "/te3/powerbi-xmla.html",
       "redirect": "/tutorials/powerbi-xmla.html",
+      "statusCode": 301
+    },
+    {
+      "route": "/te3/tutorials/udfs.html",
+      "redirect": "/tutorials/udfs.html",
       "statusCode": 301
     }
   ],
