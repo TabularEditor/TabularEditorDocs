@@ -6,6 +6,7 @@
 ## @migrate-from-vs
 ## @migrate-from-desktop
 ## @migrate-from-te2
+## @azure-marketplace
 
 # Getting Started with Tabular Editor 3
 ## @getting-started

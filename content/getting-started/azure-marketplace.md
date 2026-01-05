@@ -2,14 +2,13 @@
 uid: azure-marketplace
 title: Purchase via Azure Marketplace
 author: Peer Grønnerup
-updated: 2025-12-02
+updated: 2026-01-05
 ---
 # Purchase Tabular Editor 3 through the Azure Marketplace
 
-> [!NOTE]
-> **Preview Feature**: Azure Marketplace purchasing for Tabular Editor 3 is currently in preview and will be available soon. This documentation is provided for review purposes and will be published when the feature becomes generally available.
-
 Tabular Editor 3 is available on the Azure Marketplace as a public offer. This document provides an overview of how to streamline your purchase by acquiring Tabular Editor 3 directly through the Azure Marketplace.
+
+Visit the [Tabular Editor 3 offering on Azure Marketplace](https://marketplace.microsoft.com/en-us/marketplace/apps?search=tabular%20editor%203) to get started.
 
 ## Requirements
 To purchase Tabular Editor via the Azure Marketplace, you need:
