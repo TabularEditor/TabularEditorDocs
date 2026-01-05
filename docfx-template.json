@@ -1,0 +1,53 @@
+{
+    "rules": {
+        "InvalidAssemblyReference": "Suggestion",
+        "EmptyTocItemName": "Suggestion"
+    },
+    "metadata": [
+        {
+            "src": [
+                {
+                    "files": [
+                        "content/_apiSource/*.dll"
+                    ]
+                }
+            ],
+            "dest": "content/api",
+            "filter": "configuration/filterConfig.yml"
+        }
+    ],
+    "build": {
+        "content": [
+            { "files": "**/*.md", "src": "content/features", "dest": "features" },
+            { "files": "**/*.md", "src": "content/getting-started", "dest": "getting-started" },
+            { "files": "**/*.md", "src": "content/how-tos", "dest": "how-tos" },
+            { "files": "**/*.md", "src": "content/references", "dest": "references" },
+            { "files": "**/*.md", "src": "content/kb", "dest": "kb" },
+            { "files": "**/*.md", "src": "content/security", "dest": "security" },
+            { "files": "**/*.md", "src": "content/troubleshooting", "dest": "troubleshooting" },
+            { "files": "**/*.md", "src": "content/tutorials", "dest": "tutorials" },
+            { "files": "*.md", "src": "content" },
+            { "files": "toc.yml", "src": "content" },
+            { "files": "*", "src": "content/api", "dest": "api" }
+        ],
+        "template": [
+            "default",
+            "templates/tabulareditor"
+        ],
+        "resource": [
+            { "files": "**", "src": "content/assets/images", "dest": "images" },
+            { "files": "**", "src": "content/whats-new", "dest": "whats-new" },
+            { "files": "*.html", "src": "content" } 
+        ],
+        "globalMetadata": {
+            "_appTitle": "Tabular Editor Documentation",
+            "_enableSearch": true,
+            "_enableNewTab": true,
+            "_disableNavbar": true,
+            "_disableContribution": true
+        },
+        "markdownEngineName": "markdig",
+        "dest": "_site",
+        "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ]
+    }
+}

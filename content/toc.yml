@@ -1,17 +1,26 @@
 ﻿- name: Home
   href: index.md
-- name: TE2 Docs
-  href: te2/
-  homepage: te2/Getting-Started.md
-- name: TE3 Docs
-  href: te3/
-  homepage: te3/getting-started.md
-- name: Common features
-  href: common/
-  homepage: common/common-features.md
-- name: TE3 Onboarding Guide
-  href: onboarding/
-  homepage: onboarding/index.md
+- name: Getting started
+  href: getting-started/
+  homepage: getting-started/index.md
+- name: Features
+  href: features/
+  homepage: features/index.md
+- name: How-tos
+  href: how-tos/
+  homepage: how-tos/index.md
+- name: Tutorials
+  href: tutorials/
+  homepage: tutorials/index.md
+- name: References
+  href: references/
+  homepage: references/index.md 
+- name: Troubleshooting
+  href: troubleshooting/
+  homepage: troubleshooting/index.md
+- name: Security
+  href: security/
+  homepage: security/index.md
 - name: API
   href: api/
   homepage: api/index.md

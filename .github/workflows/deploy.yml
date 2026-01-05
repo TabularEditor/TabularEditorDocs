@@ -18,10 +18,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: Generate redirects
+        run: |
+          chmod +x gen_redirects.py
+          ./gen_redirects.py
       - name: Build Documentation
-        uses: nunit/docfx-action@v3.0.0
+        uses: nunit/docfx-action@v4.1.0
         with:
-          args: docfx.json
+          args: docfx.json --warningsAsErrors
       - name: Replace Shared Xref in API HTML
         run: |
           sudo chmod -R u+w _site/api
