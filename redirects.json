@@ -206,5 +206,5 @@
   "content/te3/views/user-interface.md": "/features/views/user-interface.html",
   "content/te3/whats-new.md": "/references/whats-new.html",
   "content/te3/workspace-mode.partial.md": "/features/workspace-mode.partial.html",
-  "content/te3/tutorials/workspace-mode.html": "/features/workspace-mode.partial.html"
+  "content/te3/tutorials/workspace-mode.md": "/features/workspace-mode.partial.html"
 }
