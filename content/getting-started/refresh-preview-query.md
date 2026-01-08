@@ -156,8 +156,8 @@ This feature is particularly useful in **Power BI Embedded** scenarios, where yo
 **Example use case:** You might pass a user's department or region as CustomData, and then use that value in a role's filter expression like:
 ```dax
 'Department'[DepartmentCode] = CUSTOMDATA()
-```
-
+```  
+         
 # VertiPaq Analyzer
 
 Tabular Editor 3 includes a version of the open-source [VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) tool, created by [SQLBI](https://sqlbi.com). VertiPaq Analyzer is useful to analyze VertiPaq storage structures for your Power BI or Tabular data model.
