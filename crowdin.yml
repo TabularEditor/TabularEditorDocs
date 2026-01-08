@@ -6,7 +6,7 @@
       "/**/TOC.md"
     ],
     "translation_replace": {
-      "\/content\/": "/"
+      "content/": ""
     }
   }
 ]
