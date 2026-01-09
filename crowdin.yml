@@ -8,5 +8,13 @@
     "translation_replace": {
       "content": ""
     }
+  },
+  {
+    "source": "/content/404.html",
+    "translation": "/localizedContent/%two_letters_code%/404.html"
+  },
+  {
+    "source": "/content/toc.yml",
+    "translation": "/localizedContent/%two_letters_code%/toc.yml"
   }
 ]
