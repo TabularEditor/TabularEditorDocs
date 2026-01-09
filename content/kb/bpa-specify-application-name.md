@@ -12,7 +12,11 @@ description: Best practice rule for including application name in SQL Server con
 
 This rule identifies SQL Server provider data sources that lack an Application Name parameter in their connection strings. Including the application name enables better monitoring and troubleshooting.
 
+<<<<<<< HEAD
 - Category: Performance
+=======
+- Category: **Performance**
+>>>>>>> Added Knowledge base for built in BPA rules
 - Severity: Low (1)
 
 ## Applies To

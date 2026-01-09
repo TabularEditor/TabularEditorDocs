@@ -12,7 +12,11 @@ description: Best practice rule preventing deployment errors by identifying cont
 
 This best practice rule identifies objects whose names contain invalid control characters (non-printable characters excluding standard whitespace). These characters can cause deployment failures, rendering issues, and data corruption.
 
+<<<<<<< HEAD
 - Category: Error Prevention
+=======
+- Category: **Error Prevention**
+>>>>>>> Added Knowledge base for built in BPA rules
 - Severity: High (3)
 
 ## Applies To

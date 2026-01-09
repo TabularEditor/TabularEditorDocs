@@ -12,7 +12,11 @@ description: Best practice rule ensuring visible numeric and date columns have a
 
 This best practice rule identifies visible columns with numeric or date data types that lack format strings. Format strings ensure consistent, professional data display across all client tools.
 
+<<<<<<< HEAD
 - Category: Formatting
+=======
+- Category: **Formatting**
+>>>>>>> Added Knowledge base for built in BPA rules
 
 - Severity: Medium (2)
 

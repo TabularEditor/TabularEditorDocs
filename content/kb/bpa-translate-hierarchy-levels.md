@@ -12,7 +12,11 @@ description: Best practice rule ensuring hierarchy level names are translated fo
 
 This rule identifies hierarchy levels in visible hierarchies that lack name translations for one or more cultures.
 
+<<<<<<< HEAD
 - Category: Model Layout
+=======
+- Category: **Model Layout**
+>>>>>>> Added Knowledge base for built in BPA rules
 - Severity: Low (1)
 
 ## Applies To

@@ -12,7 +12,11 @@ description: Best practice rule preventing query errors by ensuring columns used
 
 This best practice rule identifies columns that have `IsAvailableInMDX` set to `false` but are actually used in scenarios requiring MDX access. These columns must have MDX availability enabled to function correctly in hierarchies, relationships, and sort operations.
 
+<<<<<<< HEAD
 - Category: Error Prevention
+=======
+- Category: **Error Prevention**
+>>>>>>> Added Knowledge base for built in BPA rules
 - Severity: High (3)
 
 ## Applies To

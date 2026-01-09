@@ -12,8 +12,14 @@ description: Best practice rule for removing orphaned data sources to reduce mod
 
 This best practice rule identifies data sources that are not referenced by any partitions or table expressions. Removing unused data sources reduces model complexity, improves maintainability, and prevents confusion.
 
+<<<<<<< HEAD
 - Category: Maintenance
 - Severity: Low (1)
+=======
+Category: **Maintenance**
+
+Severity: Low (1)
+>>>>>>> Added Knowledge base for built in BPA rules
 
 ## Applies To
 
@@ -105,6 +111,11 @@ Data Sources:
 
 ## False Positives
 
+<<<<<<< HEAD
+=======
+### Dynamic References
+
+>>>>>>> Added Knowledge base for built in BPA rules
 The rule may flag data sources that are:
 - Referenced through dynamic M expressions using variables
 - Used in commented-out partition queries

@@ -12,7 +12,11 @@ description: Best practice rule ensuring visible measures have appropriate forma
 
 This best practice rule identifies visible measures with numeric or date data types that lack format strings. All measures should have explicit format strings for professional, consistent display.
 
+<<<<<<< HEAD
 - Category: Formatting
+=======
+- Category: **Formatting**
+>>>>>>> Added Knowledge base for built in BPA rules
 
 - Severity: Medium (2)
 

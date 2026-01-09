@@ -12,7 +12,11 @@ description: Best practice rule identifying calculation groups without calculati
 
 This best practice rule identifies calculation groups that contain no calculation items. Empty calculation groups serve no purpose and should be populated or removed.
 
+<<<<<<< HEAD
 - Category: Maintenance
+=======
+- Category: **Maintenance**
+>>>>>>> Added Knowledge base for built in BPA rules
 - Severity: Medium (2)
 
 ## Applies To

@@ -12,7 +12,12 @@ description: Best practice rule preventing display and deployment issues by iden
 
 This best practice rule identifies objects whose descriptions contain invalid control characters (non-printable characters excluding standard whitespace). These characters can cause display problems, metadata corruption, and deployment failures.
 
+<<<<<<< HEAD
 - Category: Error Prevention
+=======
+- Category: **Error Prevention**
+
+>>>>>>> Added Knowledge base for built in BPA rules
 - Severity: High (3)
 
 ## Applies To

@@ -12,7 +12,11 @@ description: Best practice rule ensuring relationships connect columns with matc
 
 This best practice rule identifies relationships where the connected columns have mismatched data types. Both columns in a relationship must share the same data type to ensure proper filtering, prevent errors, and maintain optimal query performance.
 
+<<<<<<< HEAD
 - Category: Error Prevention
+=======
+- Category: **Error Prevention**
+>>>>>>> Added Knowledge base for built in BPA rules
 
 - Severity: High (3)
 

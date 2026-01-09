@@ -12,7 +12,11 @@ description: Best practice rule ensuring your model includes a dedicated date ta
 
 This best practice rule verifies that your tabular model contains at least one properly configured date table. Date tables are essential for time intelligence calculations and ensuring consistent date-based filtering across your model.
 
+<<<<<<< HEAD
 - Category: Performance
+=======
+- Category: **Performance**
+>>>>>>> Added Knowledge base for built in BPA rules
 
 - Severity: Medium (2)
 

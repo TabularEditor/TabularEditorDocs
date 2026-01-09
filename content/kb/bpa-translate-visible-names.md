@@ -12,7 +12,11 @@ description: Best practice rule ensuring visible object names are translated for
 
 This rule identifies visible objects whose names lack translations for one or more cultures defined in the model.
 
+<<<<<<< HEAD
 - Category: Model Layout
+=======
+- Category: **Model Layout**
+>>>>>>> Added Knowledge base for built in BPA rules
 - Severity: Low (1)
 
 ## Applies To

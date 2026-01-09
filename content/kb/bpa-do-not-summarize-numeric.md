@@ -12,7 +12,11 @@ description: Best practice rule preventing incorrect default aggregations on num
 
 This best practice rule identifies visible numeric columns (Int64, Decimal, Double) that have a default aggregation behavior (`SummarizeBy`) other than `None`. Most numeric columns should not be automatically aggregated, as summing values like IDs, quantities in non-additive contexts, or codes produces meaningless results.
 
+<<<<<<< HEAD
 - Category: Formatting
+=======
+- Category: **Formatting**
+>>>>>>> Added Knowledge base for built in BPA rules
 
 - Severity: High (3)
 

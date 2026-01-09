@@ -12,7 +12,11 @@ description: Best practice rule ensuring perspective names are translated for al
 
 This rule identifies model perspectives that lack name translations for one or more cultures.
 
+<<<<<<< HEAD
 - Category: Model Layout
+=======
+- Category: **Model Layout**
+>>>>>>> Added Knowledge base for built in BPA rules
 - Severity: Low (1)
 
 ## Applies To

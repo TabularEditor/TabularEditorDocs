@@ -12,7 +12,11 @@ description: Best practice rule to optimize performance by disabling MDX access 
 
 This best practice rule identifies hidden columns that have the `IsAvailableInMDX` property set to `true` but don't need to be accessible through MDX queries. Setting this property to `false` for unused hidden columns can improve query performance and reduce memory overhead.
 
+<<<<<<< HEAD
 - Category: Performance
+=======
+- Category: **Performance**
+>>>>>>> Added Knowledge base for built in BPA rules
 - Severity: Medium (2)
 
 ## Applies To

@@ -12,7 +12,11 @@ description: Best practice rule to avoid performance issues by using single-dire
 
 This best practice rule identifies many-to-many relationships that use bidirectional cross-filtering. Many-to-many relationships with both-directions filtering cause significant performance degradation.
 
+<<<<<<< HEAD
 - Category: Performance
+=======
+- Category: **Performance**
+>>>>>>> Added Knowledge base for built in BPA rules
 - Severity: Medium (2)
 
 ## Applies To
