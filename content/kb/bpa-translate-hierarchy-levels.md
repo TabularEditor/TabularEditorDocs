@@ -12,7 +12,7 @@ description: Best practice rule ensuring hierarchy level names are translated fo
 
 This rule identifies hierarchy levels in visible hierarchies that lack name translations for one or more cultures.
 
-- Category: **Model Layout**
+- Category: Model Layout
 - Severity: Low (1)
 
 ## Applies To

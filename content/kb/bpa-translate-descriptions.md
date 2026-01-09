@@ -12,7 +12,7 @@ description: Best practice rule ensuring object descriptions are translated for 
 
 This rule identifies objects with descriptions that lack translations for one or more cultures.
 
-- Category: **Model Layout**
+- Category: Model Layout
 - Severity: Low (1)
 
 ## Applies To

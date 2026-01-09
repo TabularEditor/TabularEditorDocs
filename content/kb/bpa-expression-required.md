@@ -12,7 +12,7 @@ description: Best practice rule ensuring measures, calculated columns, and calcu
 
 This best practice rule identifies measures, calculated columns, and calculation items that lack a DAX expression. All calculated objects must have a valid, non-empty expression to function correctly and prevent errors during model deployment and query execution.
 
-- Category: **Error Prevention**
+- Category: Error Prevention
 
 - Severity: High (3)
 

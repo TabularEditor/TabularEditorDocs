@@ -12,7 +12,7 @@ description: Best practice rule ensuring display folders are translated for all 
 
 This rule identifies visible objects with display folders that lack translations for one or more cultures.
 
-- Category: **Model Layout**
+- Category: Model Layout
 - Severity: Low (1)
 
 ## Applies To

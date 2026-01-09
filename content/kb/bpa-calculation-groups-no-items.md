@@ -12,7 +12,7 @@ description: Best practice rule identifying calculation groups without calculati
 
 This best practice rule identifies calculation groups that contain no calculation items. Empty calculation groups serve no purpose and should be populated or removed.
 
-- Category: **Maintenance**
+- Category: Maintenance
 - Severity: Medium (2)
 
 ## Applies To
