@@ -12,7 +12,7 @@ description: Best practice rule to identify and remove automatically generated d
 
 This best practice rule identifies automatically generated date tables created by Power BI Desktop. These auto-generated tables (`DateTableTemplate_` and `LocalDateTable_`) should be removed in favor of a single, explicit date table to optimize model size and performance.
 
-- Category: **Performance**
+- Category: Performance
 
 - Severity: Medium (2)
 

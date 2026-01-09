@@ -12,7 +12,7 @@ description: Best practice rule for removing empty perspectives that contain no 
 
 This best practice rule identifies perspectives that don't contain any visible tables. Empty perspectives serve no purpose and should be removed.
 
-- Category: **Maintenance**
+- Category: Maintenance
 - Severity: Low (1)
 
 ## Applies To

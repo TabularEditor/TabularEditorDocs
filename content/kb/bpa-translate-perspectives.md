@@ -12,7 +12,7 @@ description: Best practice rule ensuring perspective names are translated for al
 
 This rule identifies model perspectives that lack name translations for one or more cultures.
 
-- Category: **Model Layout**
+- Category: Model Layout
 - Severity: Low (1)
 
 ## Applies To

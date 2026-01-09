@@ -12,7 +12,7 @@ description: Best practice rule preventing deployment errors by identifying lega
 
 This best practice rule identifies partitions that use legacy provider-based queries (SourceType = Query) with structured data sources in Power BI models. This combination is not supported in Power BI Service and will cause deployment failures.
 
-- Category: **Error Prevention**
+- Category: Error Prevention
 
 - Severity: Medium (2)
 
