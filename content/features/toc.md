@@ -28,6 +28,7 @@
 
 # Model Analysis and Quality
 ## @best-practice-analyzer 
+### @built-in-bpa-rules
 ### @using-bpa 
 ### @using-bpa-sample-rules-expressions 
 ## @dax-optimizer-integration 
