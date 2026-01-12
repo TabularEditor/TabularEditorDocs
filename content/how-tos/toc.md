@@ -7,7 +7,8 @@
 ## [Connect to SSAS](connect-ssas.md) 
 ## [Load and Save](load-save.md) 
 ## [Folder Serialization](folder-serialization.md) 
-## [Master Model Pattern](Master-model-pattern.md) 
+## [Master Model Pattern](Master-model-pattern.md)
+## [Update compatibility level](update-compatibility-level.md)
 
 # Data Import and Tables
 ## [Importing Tables (TE2)](Importing-Tables.md) 
