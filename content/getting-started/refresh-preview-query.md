@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: Refreshing, previewing and querying data
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-01-08
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -140,6 +140,23 @@ Once the impersonation is enabled, the **Impersonation..** button is checked, an
 ![Impersonation Dropdown](~/content/assets/images/impersonation-dropdown.png)
 
 When auto-refresh is enabled on a data view, changing the impersonation will immediately refresh the view. 
+
+## CustomData
+
+The CustomData feature allows you to pass a custom string value that can be used in DAX expressions, typically for implementing dynamic row-level security scenarios. This feature can be combined with any of the impersonation options described above, including **No Impersonation**.
+
+![Select Impersonation](~/content/assets/images/impersonation-customdata.png)
+
+When you enter a value in the **CustomData** input field, Tabular Editor 3 adds the [`CustomData` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) to the connection string. This value can then be retrieved within your DAX expressions using the [`CUSTOMDATA()` function](https://dax.guide/customdata/).
+
+CustomData is commonly used in implementing dynamic row-level security when an application uses custom authentication. The value you provide can be leveraged in role filter expressions to control which rows users can see based on the custom data passed through the connection string.
+
+This feature is particularly useful in **Power BI Embedded** scenarios, where you can natively utilize CustomData to add row filters that pass free text (strings) to leverage dynamic row-level security in embedded reports, dashboards, and tiles.
+
+**Example use case:** You might pass a user's department or region as CustomData, and then use that value in a role's filter expression like:
+```dax
+'Department'[DepartmentCode] = CUSTOMDATA()
+```   
 
 # VertiPaq Analyzer
 
