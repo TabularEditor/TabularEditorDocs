@@ -34,8 +34,6 @@ To save your model to folder, follow these steps:
 
 ## Serialization settings
 The serialization settings defines how the model objects are split into separate files. In these settings you can also define if you wish to use JSON or TMDL formats.
-> [!NOTE]
->JSON is the default format as TMDL is currently in preview. 
 
 
 ### [Tabular Editor 2 Preferences](#tab/TE2Preferences)
