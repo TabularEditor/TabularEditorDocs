@@ -55,6 +55,7 @@
 ## @workspace-mode 
 ## @tmdl 
 ## @save-to-folder 
+## @save-with-supporting-files
 
 # Command Line and Integration
 ## @command-line-options 
