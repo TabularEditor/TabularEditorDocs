@@ -47,6 +47,8 @@ Compatibility level support differs by platform (SSAS, Azure Analysis Services, 
 
 ## Update the compatibility level
 
+![Update Compatability Level](~/content/assets/images/how-to/updatecompatabilitylevel.gif)
+
 ### Open your model
 
 Open your model in Tabular Editor using one of these approaches:
