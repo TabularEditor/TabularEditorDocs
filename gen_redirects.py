@@ -21,21 +21,38 @@ def main(args: list[str]) -> int:
 	dirs = dict[str, list[str]]()
 	for key, value in data.items():
 		dir = posixpath.dirname(key)
+		ext = posixpath.splitext(key)[1]
 		if dir in dirs:
 			dirs[dir].append(key)
 		else:
 			dirs[dir] = [key]
-		content: list[Any] = config["build"]["content"]
-		content.append({"files": posixpath.relpath(key, "content"), "src": "content"})
 		os.makedirs(dir, exist_ok=True)
-		with open(key, mode="w", encoding="utf-8") as f:
-			f.write(f"""---
+		if ext == ".md":
+			content: list[Any] = config["build"]["content"]
+			content.append({"files": posixpath.relpath(key, "content"), "src": "content"})
+			with open(key, mode="w", encoding="utf-8") as f:
+				f.write(f"""---
 redirect_url: {value}
 ---
 """)
+		elif ext == ".html":
+			resource: list[Any] = config["build"]["resource"]
+			resource.append({"files": posixpath.relpath(key, "content"), "src": "content"})
+			with open(key, mode="w", encoding="utf-8") as f:
+				f.write(f"""<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0;URL='{value}'">
+  </head>
+</html>
+""")
+		else:
+			print("Unknown file type:", key, file=sys.stderr)
 	
 	for dir, files in dirs.items():
-		with open(posixpath.join(dir, ".gitignore"), "w") as f:
+		with open(posixpath.join(dir, ".gitignore"), "a") as f:
+			f.write("\n")
 			f.writelines("/" + posixpath.basename(file) + "\n" for file in files)
 			f.write("/.gitignore\n")
 	
