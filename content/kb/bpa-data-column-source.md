@@ -12,7 +12,7 @@ description: Best practice rule ensuring data columns have a valid source column
 
 This best practice rule identifies data columns that lack a valid `SourceColumn` property. Every data column must reference a source column from the underlying data source to function correctly during refresh.
 
-- Category: Error Prevention
+- Category: **Error Prevention**
 - Severity: High (3)
 
 ## Applies To

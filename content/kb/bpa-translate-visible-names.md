@@ -12,7 +12,7 @@ description: Best practice rule ensuring visible object names are translated for
 
 This rule identifies visible objects whose names lack translations for one or more cultures defined in the model.
 
-- Category: Model Layout
+- Category: **Model Layout**
 - Severity: Low (1)
 
 ## Applies To

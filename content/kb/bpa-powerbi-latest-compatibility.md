@@ -12,7 +12,7 @@ description: Best practice rule ensuring Power BI models use the latest compatib
 
 This rule identifies Power BI models not using the latest available compatibility level. Using the latest level ensures access to newest features, performance optimizations, and bug fixes.
 
-- Category: Governance
+- Category: **Governance**
 - Severity: High (3)
 
 ## Applies To

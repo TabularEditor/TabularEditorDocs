@@ -12,7 +12,7 @@ description: Best practice rule for hiding foreign key columns to simplify the m
 
 This best practice rule identifies foreign key columns (many-side of relationships) that are visible to end users. Foreign keys should be hidden because they serve only as relationship connectors and provide no analytical value when displayed.
 
-- Category: Formatting
+- Category: **Formatting**
 
 - Severity: Medium (2)
 

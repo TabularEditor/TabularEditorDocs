@@ -12,7 +12,7 @@ description: Best practice rule to avoid performance issues by using single-dire
 
 This best practice rule identifies many-to-many relationships that use bidirectional cross-filtering. Many-to-many relationships with both-directions filtering cause significant performance degradation.
 
-- Category: Performance
+- Category: **Performance**
 - Severity: Medium (2)
 
 ## Applies To

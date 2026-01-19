@@ -12,7 +12,7 @@ description: Best practice rule ensuring visible measures have appropriate forma
 
 This best practice rule identifies visible measures with numeric or date data types that lack format strings. All measures should have explicit format strings for professional, consistent display.
 
-- Category: Formatting
+- Category: **Formatting**
 
 - Severity: Medium (2)
 
