@@ -56,6 +56,7 @@
 ## @tmdl 
 ## @save-to-folder 
 ## @save-with-supporting-files
+## @advanced-refresh
 
 # Command Line and Integration
 ## @command-line-options 
