@@ -91,6 +91,9 @@ The TMSL definition follows the [TMSL refresh command specification](https://lea
 - Partitions
 - Data columns
 
+> [!TIP]
+> See [Refresh Override Profiles](xref:refresh-overrides) for detailed examples and TMSL code snippets you can use as starting points for your own override profiles.
+
 ### Profile storage
 
 Override profiles are stored per-model in the `UserOptions.tmuo` file. When working with model metadata saved on disk, the `.tmuo` file is stored alongside the model files. When connected directly to a model through the XMLA endpoint, the `.tmuo` files are stored under `%LocalAppData%\TabularEditor3\UserOptions`.
