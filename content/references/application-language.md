@@ -97,5 +97,5 @@ If you find incorrect translations or missing text:
 
 ## See Also
 
-- [Preferences](xref:preferences-index)
-- [User Interface Overview](xref:ui-overview)
+- [Preferences](xref:preferences)
+- [User Interface Overview](xref:user-interface)
