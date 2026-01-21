@@ -33,40 +33,53 @@ Once calendars are added to a table, they will be shown in the TOM Explorer unde
 
 ![Calendar in TOM Explorer](~/content/assets/images/tutorials/calendar-tom-explorer.png)
 
-Before you can use a calendar in your DAX calculations, you need to configure it by specifying which columns in the table represent the different calendar attributes.
+Before you can use a calendar in your DAX calculations, you need to configure it by specifying which columns in the table represent the different calendar attributes. You can do this using the **Calendar Editor** (recommended) or the **Edit Column Mappings...** dialog.
+
+## Configuring Calendars with the Column Mappings Dialog
+
+You can configure a calendar by right-clicking on it in the TOM Explorer and choosing the **Edit Column Mappings...** option:
+
+![Editing calendar column mappings](~/content/assets/images/edit-calendar-mappings.png)
+
+For each calendar, you can add one or more **Column Associations**. Each association maps a column from the table to a specific **Time Unit** (e.g. Year, Month, Week, etc.). You can also add additional associated columns for each mapping, which are typically used for columns that represent the same time unit but in a different format. For example, you might have a "Month" column that contains the month number (1-12), and a "Month Name" column that contains the month name ("January", "February", etc.). Both of these columns can be associated with the "MonthOfYear" time unit.
 
 ## The Calendar Editor (Multi-Calendar Manager)
 
-The January 2026 release of Tabular Editor 3 introduced a dedicated **Calendar Editor** – a multi-calendar manager view that lets you create and maintain all calendars in one place.
+The January 2026 release of Tabular Editor 3 introduced a dedicated **Calendar Editor** â€” a multi-calendar manager view that lets you create and maintain all calendars in one place.
 
 ### Opening the Calendar Editor
 
 You can open the Calendar Editor in any of the following ways:
 
-- Double click an existing calendar under a table in the TOM Explorer
+- Double-click an existing calendar under a table in the TOM Explorer.
 - Right-click an existing calendar under a table in the TOM Explorer and choose **Edit Calendar...**.
+- Select a calendar in the TOM Explorer, then open the **Calendar** menu and choose **Edit Calendar...**.
 - Open the **View** menu and choose **Calendar Editor**.
 
-The Calendar Editor opens as a new window and focuses on the currently selected calendar.
+The Calendar Editor opens as a new window displaying all calendars in the model. The first calendar in the list is selected by default.
+
+![Calendar Editor](~/content/assets/images/tutorials/calendar-editor.png)
 
 ### Layout of the Calendar Editor
 
 The Calendar Editor is split into two main areas:
 
-1. **Calendars grid (top section)**  
-   A grid that lists all calendars defined in the model. In this grid it is possible to:
+1. **Calendars grid (left panel)**
+   A vertical grid where each calendar is displayed as a column and time units are displayed as rows. In this grid you can:
 
-   - Create new calendars.
-   - Rename existing calendars.
-   - Delete calendars.
-   - Edit the column mappings for the time units in the calendars.
-   - See the real-time validations performed on the calendars.
+   - Create new calendars using the **+ Add Calendar** column.
+   - Rename existing calendars by editing the calendar name directly.
+   - Delete calendars by right-clicking on a calendar column.
+   - Map columns to time units by selecting from the dropdown in each cell.
+   - See real-time validation feedback via icons and tooltips.
 
-2. **Time-Related columns section (right-side section)**  
-   A detail panel that lets you configure which columns are associated with each time unit for the selected calendar.
+2. **Context panel (right panel)**
+   A detail panel that changes based on your selection in the calendars grid:
 
-3. **Time-Related columns section (right-side section)**  
-   A detail panel that lets you configure which columns are time-related to the selected calendar.
+   - **Associated Columns**: When you select a time unit row, this panel shows the primary column for that time unit and lets you select additional associated columns (columns that represent the same time unit in a different format).
+   - **Time-related Columns**: When you select the "Time-related columns" row at the bottom of the grid, this panel lets you mark columns as time-related to the calendar without assigning them to a specific time unit.
+
+![Calendar Editor layout showing the calendars grid and Associated Columns panel](~/content/assets/images/tutorials/calendar-editor-parts.png)
 
 ### Managing Calendars
 
@@ -79,7 +92,7 @@ In the **Calendars** grid you can:
   Edit the name directly in the grid.
 
 - **Delete a calendar**  
-  Righ-click on a calendar calendar name in the grid to delete it from the model. This also removes all its column associations.
+  Right-click on a calendar in the grid to delete it from the model. This also removes all its column associations.
 
 The changes done in the Calendar Editor are only applied to the semantic model when you click the **Accept** button in the toolbar. The changes can also be canceled by clicking on the **Cancel** button, similarly to the expression editor.
 
@@ -87,14 +100,43 @@ All operations in this grid operate against the semantic model, so external tool
 
 ### Configuring Associated Columns
 
-The **Associated Columns** section lets you define how table columns map to calendar time units for the currently selected calendar.
+The **Associated Columns** panel lets you define how table columns map to calendar time units for the currently selected calendar. For more background on how associated columns work in Enhanced Time Intelligence, see the [SQLBI article on Enhanced Time Intelligence](https://www.sqlbi.com/articles/enhanced-time-intelligence-in-power-bi/).
 
-For each row (time unit/category) you can:
+The calendars grid displays rows for each time unit category, organized hierarchically. Time units are divided into **complete** units (which uniquely identify a period on their own) and **partial** units (which require a parent time unit).
+
+**Complete Time Units:**
+
+| Time Unit | Description | Examples |
+|-----------|-------------|----------|
+| Year | The year | 2024, 2025 |
+| Quarter | The quarter including the year | Q1 2024, Q2 2025 |
+| Month | The month including the year | January 2023, 2024 Feb |
+| Week | The week including the year | Week 50 2023, W50-2023 |
+| Date | The date | 12/31/2025, 4/3/2023 |
+
+**Partial Time Units** (require a parent time unit to be mapped):
+
+| Time Unit | Description | Examples | Requires |
+|-----------|-------------|----------|----------|
+| Quarter of Year | The quarter of the year | Q1, Quarter 2, YQ1 | Year |
+| Month of Year | The month of the year | January, M11, 11 | Year |
+| Month of Quarter | The month within a quarter | 1, QM2 | Quarter |
+| Week of Year | The week of the year | Week 50, W50, 50 | Year |
+| Week of Quarter | The week within a quarter | QW10, 10 | Quarter |
+| Week of Month | The week within a month | MW2, 2 | Month |
+| Day of Year | The day of the year | 365, D1 | Year |
+| Day of Quarter | The day within a quarter | QD2, 50 | Quarter |
+| Day of Month | The day of the month | MD10, 30 | Month |
+| Day of Week | The day of the week | WD5, 5 | Week |
+
+For each time unit you can:
 
 - Select the **primary column** that represents that time unit (e.g. `Date`, `Year`, `Month`, `Week`, etc.).
 - Optionally select **additional associated columns** that represent the same time unit in a different format (for example, numeric month vs. month name, or alternative labels).
 
-This replaces the older *Edit Column Mappings...* dialog and provides a unified, multi-calendar experience directly within the editor.
+Hover over each time unit row to see a tooltip with more details about the expected column format and usage.
+
+The Calendar Editor provides a unified, multi-calendar experience compared to the *Edit Column Mappings...* dialog, which only allows editing one calendar at a time.
 
 ![Calendar column associations](~/content/assets/images/tutorials/calendar-example.png)
 
@@ -104,17 +146,14 @@ The Calendar Editor performs real-time validation while you edit calendars and c
 
 The following rules are enforced:
 
-1. **Unique calendar name**  
-   Each calendar must have a unique name in the semantic model. Duplicate names are not allowed across calendars on the same table or across the model (depending on your engine rules). The editor highlights any duplicate names and prevents saving invalid configurations.
+1. **Unique calendar name**
+   Each calendar must have a unique name in the semantic model. The editor highlights duplicate names and prevents saving invalid configurations.
 
-2. **Single association per calendar**  
-   A column cannot belong to more than one **category** (time unit) in the same calendar. If you attempt to associate the same column to multiple categories within one calendar, the editor flags this as an error.
+2. **Time unit dependency validation**
+   Partial time units require their parent time units to be mapped. For example, if you map a column to "Day of Month", you must also map a column to "Month" (or to "Month of Year" + "Year", etc.). The editor shows which parent time units are required and prevents saving until the dependency is satisfied.
 
-3. **Period uniqueness**  
-   The assigned categories for a calendar must uniquely identify each period. Practically, this means that the combination of columns chosen for a given time grain (for example, Year + Week or Year + Month + Day) must uniquely identify each period and avoid ambiguities. The editor validates that your configuration satisfies this rule.
-
-4. **Consistent categorization across calendars**  
-   Columns must be associated with the same category across calendars. This prevents inconsistent use of the same column (for example, mapping a `FiscalYear` column as `Year` in one calendar and as `WeekYear` in another). When a column is categorized differently in different calendars, the editor reports a consistency violation.
+3. **Cross-calendar category consistency**
+   A column must be associated with the same time unit category across all calendars. For example, if you map a `FiscalYear` column as "Year" in one calendar, you cannot map the same column as "Week of Year" in another calendar. When a column is categorized differently across calendars, the editor reports a consistency violation.
 
 Validation is performed as you type or edit selections, and errors must be resolved before changes can be safely applied.
 
