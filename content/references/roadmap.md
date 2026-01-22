@@ -14,48 +14,80 @@ applies_to:
 
 Below is an overview of major new features to be shipped with Tabular Editor 3 updates in the short- to long term:
 
+# [Upcoming](#tab/upcoming)
 
-# [Planned 2026](#tab/Planned2026)
+## In Development
 
-- AI Assistant in Tabular Editor
-- Localization
-- Built in Best Practice Rules
-- Power Query (M) Auto-Formatting
-- Semantic Bridge
-- Graphical Model Comparison
-- .Net10 Support
-
- 
-## Shipped in 2025
-✅ New Code Actions + Knowledge Base for all Code Actions
-✅ C# Editor Improvements
-✅ Copy TMDL Scripts from TOM Explorer
-✅ Direct Lake on One Lake support
-✅ Day zero support for DAX User Defined Functions
-✅ Support for Calendars
-✅ DAX Package Manager
-✅ Native ARM64 builds
-
-# [Future Features](#tab/FutureFeatures)
+- **Semantic Bridge enhancements**: Support for v1.1 properties and enhanced import UI
+- **Localization improvements**: Expanding language support and refining existing translations
+- **Power Query (M) Auto-Formatting**: Advanced formatting capabilities for M expressions
+- **Graphical Model Comparison**: See the changes that are applied to 
 
 ## Up Next
 
+- AI Assistant in Tabular Editor
+- .NET 10 Support
 - Git integration
 - Power Query (M) Editing Enhancements
-- TOM Properties shown as TMDL and TMSL Scripts. 
+- TOM Properties shown as TMDL and TMSL Scripts
 - Standalone CLI application
-- Built in Macros
+- Built-in Macros
 
-## Non Planned Features
+## Future
 
 - DAX Debugger Filter Context visualizer
 - Configurable Daxscilla autocomplete code snippets
 - Configurable theming for code editors (syntax highlighting colors)
 - Incremental deployment (a la [ALM Toolkit](http://alm-toolkit.com/))
-- Macro Actions improvements such as automatic application across model and preferences for which to apply.
-
+- Macro Actions improvements such as automatic application across model and preferences for which to apply
 
 # [Shipped](#tab/shipped)
+
+For detailed information about each release, see the [full release history](xref:release-notes).
+
+## Shipped in 2026
+
+✅ [**Localization**](xref:references-application-language) - Chinese, Spanish (Preview), Japanese, German, and French (Experimental) language support (v3.25.0)
+
+✅ [**Built-in Best Practice Analyzer rules**](xref:built-in-bpa-rules) - Comprehensive set of BPA rules covering formatting, metadata, model layout, DAX expressions, and translations (v3.25.0)
+
+✅ [**Semantic Bridge**](xref:semantic-bridge) - Create semantic models from Databricks Metric Views (Enterprise Edition, v3.25.0)
+
+✅ [**Save with supporting files for Fabric**](xref:save-with-supporting-files) - Support for .platform and definition.pbism files to match Fabric repository structure (v3.25.0)
+
+✅ **Calendar Editor** - Enhanced UI for managing calendar objects for time intelligence (v3.25.0)
+
+✅ [**Advanced Refresh dialog**](xref:advanced-refresh) - Configure parallelism, effective date for incremental refresh, and [refresh override profiles](xref:refresh-overrides) (Business/Enterprise Edition, v3.25.0)
+
+## Shipped in 2025
+
+✅ [**DAX Package Manager**](xref:dax-package-manager) - Find and install DAX packages from daxlib.org with a single click (v3.24.0)
+
+✅ **UDF Namespaces** - Hierarchical organization of User-Defined Functions with customizable namespace properties (v3.24.0)
+
+✅ **Visual Calculations improvements** - Enhanced DAX editor support for Visual Calculation functions and visual column references (v3.24.0)
+
+✅ [**DAX User-Defined Functions (UDFs)**](xref:udfs) - Create and manage reusable DAX functions (v3.23.0)
+
+✅ [**Calendars**](xref:calendars) - Calendar-based time intelligence features with enhanced UI (v3.23.0)
+
+✅ **Fabric SQL Databases and Mirrored Databases support** - Import wizard support for new Fabric data sources in Import and Direct Lake modes (v3.23.0)
+
+✅ [**Direct Lake on OneLake and SQL**](xref:direct-lake-guidance) - Full support for Direct Lake modes including mixed mode/hybrid models (Enterprise Edition, v3.22.0)
+
+✅ **Word-based autocomplete** - DAX editor now supports multi-word search in autocomplete (v3.22.0)
+
+✅ **Diagram view enhancements** - Column data type icons, bi-directional relationship indicators, and improved table display options (v3.21.0)
+
+✅ **Copy TMDL scripts from TOM Explorer** - Export individual objects as TMDL to clipboard or file (v3.21.0)
+
+✅ **DAX Optimizer RLS support** - View DAX Optimizer results for RLS and Calculation Item expressions (v3.21.0)
+
+✅ **MetadataSource property** - New Model object property for C# scripts to access model metadata location (v3.21.0)
+
+✅ **C# Editor improvements** - Enhanced code editing experience with better IntelliSense and flexible search
+
+✅ **Native ARM64 builds** - Optimized performance on ARM64 processors (v3.23.0)
 
 ## Shipped in 2024
 ✅ DAX Debugger Locals Enhancement
