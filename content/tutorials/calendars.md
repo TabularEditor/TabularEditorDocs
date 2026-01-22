@@ -2,7 +2,7 @@
 uid: calendars
 title: Calendars (Enhanced Time Intelligence)
 author: Daniel Otykier
-updated: 2026-01-20
+updated: 2026-01-22
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,7 +20,13 @@ applies_to:
 
 # Calendars (Enhanced Time Intelligence)
 
-The September 2025 release of Power BI Desktop introduced a new Public Preview feature called **Enhanced Time Intelligence**. This feature lets you define custom calendars in your semantic model, and it also introduces 8 new DAX functions that work with these calendars, enabling week-based time intelligence calculations that were difficult to perform previously.
+The September 2025 release of Power BI Desktop introduced a new Public Preview feature called **Enhanced Time Intelligence** (also known as **Calendar-based Time Intelligence**). This feature lets you define custom calendars in your semantic model, enabling time intelligence calculations across diverse calendar systems such as fiscal, retail (4-4-5, 4-5-4, 5-4-4), ISO, and other non-Gregorian calendars.
+
+Unlike classic time intelligence functions that assume a standard Gregorian calendar, the new calendar-based functions derive their behavior from explicit column mappings you define in your Date table. This approach also introduces week-level time intelligence calculations that were difficult to perform previously.
+
+For more information about how calendar-based time intelligence works, see:
+- [Introducing Calendar-based Time Intelligence in DAX](https://www.sqlbi.com/articles/introducing-calendar-based-time-intelligence-in-dax/) (SQLBI)
+- [Calendar-based Time Intelligence Preview](https://powerbi.microsoft.com/en-us/blog/calendar-based-time-intelligence-time-intelligence-tailored-preview/) (Microsoft)
 
 ## Defining a Calendar
 
@@ -33,19 +39,11 @@ Once calendars are added to a table, they will be shown in the TOM Explorer unde
 
 ![Calendar in TOM Explorer](~/content/assets/images/tutorials/calendar-tom-explorer.png)
 
-Before you can use a calendar in your DAX calculations, you need to configure it by specifying which columns in the table represent the different calendar attributes. You can do this using the **Calendar Editor** (recommended) or the **Edit Column Mappings...** dialog.
+Before you can use a calendar in your DAX calculations, you need to configure it by mapping columns in the table to the appropriate time unit categories.
 
-## Configuring Calendars with the Column Mappings Dialog
+## The Calendar Editor
 
-You can configure a calendar by right-clicking on it in the TOM Explorer and choosing the **Edit Column Mappings...** option:
-
-![Editing calendar column mappings](~/content/assets/images/edit-calendar-mappings.png)
-
-For each calendar, you can add one or more **Column Associations**. Each association maps a column from the table to a specific **Time Unit** (e.g. Year, Month, Week, etc.). You can also add additional associated columns for each mapping, which are typically used for columns that represent the same time unit but in a different format. For example, you might have a "Month" column that contains the month number (1-12), and a "Month Name" column that contains the month name ("January", "February", etc.). Both of these columns can be associated with the "MonthOfYear" time unit.
-
-## The Calendar Editor (Multi-Calendar Manager)
-
-The January 2026 release of Tabular Editor 3 introduced a dedicated **Calendar Editor** — a multi-calendar manager view that lets you create and maintain all calendars in one place.
+The January 2026 release of Tabular Editor 3 introduced a dedicated **Calendar Editor** that provides a comprehensive interface for configuring calendars. The editor displays all time unit categories in a structured grid with helpful tooltips, and performs real-time validation to help you avoid configuration errors.
 
 ### Opening the Calendar Editor
 
@@ -56,8 +54,6 @@ You can open the Calendar Editor in any of the following ways:
 - Select a calendar in the TOM Explorer, then open the **Calendar** menu and choose **Edit Calendar...**.
 - Open the **View** menu and choose **Calendar Editor**.
 
-The Calendar Editor opens as a new window displaying all calendars in the model. The first calendar in the list is selected by default.
-
 ![Calendar Editor](~/content/assets/images/tutorials/calendar-editor.png)
 
 ### Layout of the Calendar Editor
@@ -65,44 +61,27 @@ The Calendar Editor opens as a new window displaying all calendars in the model.
 The Calendar Editor is split into two main areas:
 
 1. **Calendars grid (left panel)**
-   A vertical grid where each calendar is displayed as a column and time units are displayed as rows. In this grid you can:
+   A vertical grid where each calendar is displayed as a column and time unit categories are displayed as rows. The rows are organized hierarchically by Year, Quarter, Month, Week, and Day. In this grid you can:
 
-   - Create new calendars using the **+ Add Calendar** column.
-   - Rename existing calendars by editing the calendar name directly.
-   - Delete calendars by right-clicking on a calendar column.
-   - Map columns to time units by selecting from the dropdown in each cell.
+   - Map columns to time unit categories by selecting from the dropdown in each cell.
    - See real-time validation feedback via icons and tooltips.
+   - Create additional calendars using the **+ Add Calendar** column (if your model requires multiple calendar definitions).
+   - Rename calendars by editing the name directly in the grid.
+   - Delete calendars by right-clicking on a calendar column.
 
 2. **Context panel (right panel)**
    A detail panel that changes based on your selection in the calendars grid:
 
-   - **Associated Columns**: When you select a time unit row, this panel shows the primary column for that time unit and lets you select additional associated columns (columns that represent the same time unit in a different format).
-   - **Time-related Columns**: When you select the "Time-related columns" row at the bottom of the grid, this panel lets you mark columns as time-related to the calendar without assigning them to a specific time unit.
+   - **Associated Columns**: When you select a time unit row that has a column mapped, this panel lets you select additional associated columns.
+   - **Time-Related Columns**: When you select the "Time-related columns" row at the bottom of the grid, this panel lets you mark columns as time-related.
 
-![Calendar Editor layout showing the calendars grid and Associated Columns panel](~/content/assets/images/tutorials/calendar-editor-parts.png)
+![Calendar Editor layout showing the calendars grid and context panel](~/content/assets/images/tutorials/calendar-editor-parts.png)
 
-### Managing Calendars
+### Mapping Columns to Time Units
 
-In the **Calendars** grid you can:
+The calendars grid displays all available time unit categories. To configure your calendar, select a column from the dropdown for each time unit that applies to your calendar structure.
 
-- **Add a calendar**  
-  Use the *Add Calendar* action in the grid to create a new calendar. You will be prompted for a name, which must be unique within the semantic model (see validations below).
-
-- **Rename a calendar**  
-  Edit the name directly in the grid.
-
-- **Delete a calendar**  
-  Right-click on a calendar in the grid to delete it from the model. This also removes all its column associations.
-
-The changes done in the Calendar Editor are only applied to the semantic model when you click the **Accept** button in the toolbar. The changes can also be canceled by clicking on the **Cancel** button, similarly to the expression editor.
-
-All operations in this grid operate against the semantic model, so external tools (such as Power BI Desktop or SSMS) will see the updated set of calendars after a save.
-
-### Configuring Associated Columns
-
-The **Associated Columns** panel lets you define how table columns map to calendar time units for the currently selected calendar. For more background on how associated columns work in Enhanced Time Intelligence, see the [SQLBI article on Enhanced Time Intelligence](https://www.sqlbi.com/articles/enhanced-time-intelligence-in-power-bi/).
-
-The calendars grid displays rows for each time unit category, organized hierarchically. Time units are divided into **complete** units (which uniquely identify a period on their own) and **partial** units (which require a parent time unit).
+Time units are divided into **complete** categories (which uniquely identify a period on their own) and **partial** categories (which require a parent time unit to be mapped first). Hover over any time unit row to see a tooltip describing the expected data format.
 
 **Complete Time Units:**
 
@@ -116,33 +95,69 @@ The calendars grid displays rows for each time unit category, organized hierarch
 
 **Partial Time Units** (require a parent time unit to be mapped):
 
-| Time Unit | Description | Examples | Requires |
-|-----------|-------------|----------|----------|
-| Quarter of Year | The quarter of the year | Q1, Quarter 2, YQ1 | Year |
-| Month of Year | The month of the year | January, M11, 11 | Year |
-| Month of Quarter | The month within a quarter | 1, QM2 | Quarter |
-| Week of Year | The week of the year | Week 50, W50, 50 | Year |
-| Week of Quarter | The week within a quarter | QW10, 10 | Quarter |
-| Week of Month | The week within a month | MW2, 2 | Month |
-| Day of Year | The day of the year | 365, D1 | Year |
-| Day of Quarter | The day within a quarter | QD2, 50 | Quarter |
-| Day of Month | The day of the month | MD10, 30 | Month |
-| Day of Week | The day of the week | WD5, 5 | Week |
+| Time Unit | Description | Examples | Requires | Alternatives |
+|-----------|-------------|----------|----------|--------------|
+| Quarter of Year | The quarter of the year | Q1, Quarter 2, YQ1 | Year | |
+| Month of Year | The month of the year | January, M11, 11 | Year | |
+| Month of Quarter | The month within a quarter | 1, QM2 | Quarter | Quarter of Year + Year |
+| Week of Year | The week of the year | Week 50, W50, 50 | Year | |
+| Week of Quarter | The week within a quarter | QW10, 10 | Quarter | Quarter of Year + Year |
+| Week of Month | The week within a month | MW2, 2 | Month | Month of Year + Year<br>Month of Quarter + Quarter<br>Month of Quarter + Quarter of Year + Year |
+| Day of Year | The day of the year | 365, D1 | Year | |
+| Day of Quarter | The day within a quarter | QD2, 50 | Quarter | Quarter of Year + Year |
+| Day of Month | The day of the month | MD10, 30 | Month | Month of Year + Year<br>Month of Quarter + Quarter<br>Month of Quarter + Quarter of Year + Year |
+| Day of Week | The day of the week | WD5, 5 | Week | Week of Year + Year<br>Week of Quarter + Quarter<br>Week of Quarter + Quarter of Year + Year<br>Week of Month + Month<br>Week of Month + Month of Year + Year<br>Week of Month + Month of Quarter + Quarter<br>Week of Month + Month of Quarter + Quarter of Year + Year |
 
-For each time unit you can:
+### Associated Columns
 
-- Select the **primary column** that represents that time unit (e.g. `Date`, `Year`, `Month`, `Week`, etc.).
-- Optionally select **additional associated columns** that represent the same time unit in a different format (for example, numeric month vs. month name, or alternative labels).
+When you map a column to a time unit, that column becomes the **primary column** for that time unit. You can optionally add **associated columns** that represent the same time unit in a different format.
 
-Hover over each time unit row to see a tooltip with more details about the expected column format and usage.
+For example, if you map a numeric `MonthNumber` column (containing values 1-12) to "Month of Year", you might also want to associate a `MonthName` column (containing "January", "February", etc.) with the same time unit. Both columns represent the same concept, but in different formats.
 
-The Calendar Editor provides a unified, multi-calendar experience compared to the *Edit Column Mappings...* dialog, which only allows editing one calendar at a time.
+To add associated columns:
 
-![Calendar column associations](~/content/assets/images/tutorials/calendar-example.png)
+1. Select a time unit row in the grid that has a column mapped.
+2. In the **Associated Columns** panel on the right, check the columns you want to associate with that time unit.
 
-## Real-Time Validation in the Calendar Editor
+Associated columns receive the same filter behavior as the primary column during time intelligence calculations.
 
-The Calendar Editor performs real-time validation while you edit calendars and column associations. Validation feedback is surfaced directly in the view (for example, via icons, tooltips, or messages), so you can resolve issues before committing changes.
+![Associated Columns panel in the Calendar Editor](~/content/assets/images/tutorials/calendar-associated-columns.png)
+
+### Time-Related Columns
+
+In addition to mapping columns to specific time unit categories, you can mark columns as **time-related**. Time-related columns are columns in your Date table that don't fit into a specific time unit category but should still receive special treatment during time intelligence calculations.
+
+Examples of time-related columns include:
+- `IsHoliday` - A flag indicating whether the date is a holiday
+- `IsWeekday` - A flag indicating whether the date is a weekday
+- `FiscalPeriodName` - A descriptive label for the fiscal period
+
+**How time-related columns behave:**
+
+- During **lateral shifts** (such as `DATEADD` or `SAMEPERIODLASTYEAR`), filters on time-related columns are preserved, maintaining the same granularity.
+- During **hierarchical shifts** (such as `DATESYTD` or `NEXTMONTH`), filters on time-related columns are cleared.
+
+To configure time-related columns:
+
+1. Select the **Time-related columns** row at the bottom of the calendars grid.
+2. In the **Time-Related Columns** panel on the right, check the columns you want to mark as time-related.
+
+![Time-Related Columns panel](~/content/assets/images/tutorials/calendar-time-related-columns.png)
+
+### Applying Changes
+
+Changes made in the Calendar Editor are applied to the local model (but not saved to disk) in two ways:
+
+- Click the **Accept** button in the toolbar to apply changes to the local model.
+- Changes are also automatically applied when you navigate away from the Calendar Editor (losing focus from the view).
+
+You can discard pending changes by clicking the **Cancel** button before navigating away.
+
+To persist the changes, save the model.
+
+## Real-Time Validation
+
+The Calendar Editor performs real-time validation as you configure your calendars. Validation feedback is displayed via icons and tooltips directly in the grid, helping you identify and resolve issues before saving.
 
 The following rules are enforced:
 
@@ -153,15 +168,31 @@ The following rules are enforced:
    Partial time units require their parent time units to be mapped. For example, if you map a column to "Day of Month", you must also map a column to "Month" (or to "Month of Year" + "Year", etc.). The editor shows which parent time units are required and prevents saving until the dependency is satisfied.
 
 3. **Cross-calendar category consistency**
-   A column must be associated with the same time unit category across all calendars. For example, if you map a `FiscalYear` column as "Year" in one calendar, you cannot map the same column as "Week of Year" in another calendar. When a column is categorized differently across calendars, the editor reports a consistency violation.
+   If your model contains multiple calendars, a column must be associated with the same time unit category across all calendars. For example, if you map a `FiscalYear` column as "Year" in one calendar, you cannot map the same column as "Week of Year" in another calendar.
 
-Validation is performed as you type or edit selections, and errors must be resolved before changes can be safely applied.
+## Configuring Calendars with the Column Mappings Dialog
+
+As an alternative to the Calendar Editor, you can configure a calendar by right-clicking on it in the TOM Explorer and choosing the **Edit Column Mappings...** option:
+
+![Editing calendar column mappings](~/content/assets/images/edit-calendar-mappings.png)
+
+This dialog allows you to add column associations one at a time. Click **Add Column Association** and choose **Column Association** to add a new mapping. For each association, you select a column and assign it to a time unit category. You can also add additional associated columns for each mapping by expanding the **Columns** property.
+
+![Column associations in the Collection Editor](~/content/assets/images/tutorials/calendar-example.png)
+
+#### Adding Time-Related Columns in the Column Mappings Dialog
+
+To add time-related columns through this dialog, click **Add Column Association** and choose **Column Group**. This creates a Time Related Column Group where you can add columns that should be treated as time-related (see [Time-Related Columns](#time-related-columns) for more information about how these columns behave).
+
+![Adding a Column Group for time-related columns](~/content/assets/images/tutorials/calendar-collection-editor-column-group.png)
+
+The Calendar Editor is recommended for most scenarios as it provides a more comprehensive view of all time units, helpful tooltips, and real-time validation feedback.
 
 ## Using Calendars in DAX
 
-Once you've defined a calendar and mapped its columns, you can start using it in your DAX calculations. Calendars work with all DAX functions that accept a date column as input (such as [`TOTALYTD`](https://dax.guide/totalytd), [`CLOSINGBALANCEMONTH`](https://dax.guide/closingbalancemonth) and [`DATEADD`](https://dax.guide/dateadd)).
+Once you've defined a calendar and mapped its columns, you can use it in your DAX calculations. Calendars work with existing DAX time intelligence functions that accept a date column as input (such as [`TOTALYTD`](https://dax.guide/totalytd), [`CLOSINGBALANCEMONTH`](https://dax.guide/closingbalancemonth) and [`DATEADD`](https://dax.guide/dateadd)).
 
-Moreover, 8 new DAX functions for week-based time intelligence have been introduced. These exclusively work with calendars:
+Additionally, 8 new DAX functions for week-based time intelligence have been introduced. These functions exclusively work with calendars:
 
 - [`CLOSINGBALANCEWEEK`](https://dax.guide/closingbalanceweek)
 - [`OPENINGBALANCEWEEK`](https://dax.guide/openingbalanceweek)
