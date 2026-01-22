@@ -28,6 +28,7 @@
 
 # Model Analysis and Quality
 ## @best-practice-analyzer 
+### @built-in-bpa-rules
 ### @using-bpa 
 ### @using-bpa-sample-rules-expressions 
 ## @dax-optimizer-integration 
@@ -54,6 +55,9 @@
 ## @workspace-mode 
 ## @tmdl 
 ## @save-to-folder 
+## @save-with-supporting-files
+## @advanced-refresh
+## @refresh-overrides
 
 # Command Line and Integration
 ## @command-line-options 

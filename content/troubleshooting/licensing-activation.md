@@ -47,6 +47,11 @@ Once you purchase a license for Tabular Editor 3, you should receive an e-mail w
 > [!NOTE]
 > For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
 
+#### Changing seats on Enterprise Edition
+To change an Enterprise seat the existing user will have to be deregistered from the seat through the [Tabular Editor Self-Service portal](https://tabulareditor.com/my-account/). The subscription owner or license administrator can create an account or login with an existing to administrate the license seats. 
+
+> [!NOTE]
+> Changing a user is only possible on the Enterprise Edition. 
 ### Requesting a trial license
 
 If you haven't used Tabular Editor 3 before, you are eligible to a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
