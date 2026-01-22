@@ -34,7 +34,7 @@ The Data Refresh view displays the following information for each refresh operat
 
 - **Object**: The name of the model object being refreshed (table, partition, or model)
 - **Description**: Additional details about the refresh operation and its current state
-- **Progress**: Shows the number of rows that has been imported so far.
+- **Progress**: Shows the number of rows that have been imported so far.
 - **Start Time**: The date and time when the refresh operation began. This is useful for tracking when operations were initiated, especially when multiple refreshes are queued
 - **Duration**: The elapsed time since the refresh operation started, updated in real-time for active operations
 
