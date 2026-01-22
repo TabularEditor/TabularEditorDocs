@@ -1,7 +1,7 @@
 ---
 uid: calendars
 title: Calendars (Enhanced Time Intelligence)
-author: Daniel Otykier
+author: Daniel Otykier and Maria José Ferreira
 updated: 2026-01-22
 applies_to:
   products:
@@ -63,6 +63,7 @@ The Calendar Editor is split into two main areas:
 1. **Calendars grid (left panel)**
    A vertical grid where each calendar is displayed as a column and time unit categories are displayed as rows. The rows are organized hierarchically by Year, Quarter, Month, Week, and Day. In this grid you can:
 
+   - Select the table that the calendar should get its columns from (typically a Date table) in the **Table** row.
    - Map columns to time unit categories by selecting from the dropdown in each cell.
    - See real-time validation feedback via icons and tooltips.
    - Create additional calendars using the **+ Add Calendar** column (if your model requires multiple calendar definitions).
@@ -79,9 +80,42 @@ The Calendar Editor is split into two main areas:
 
 ### Mapping Columns to Time Units
 
-The calendars grid displays all available time unit categories. To configure your calendar, select a column from the dropdown for each time unit that applies to your calendar structure.
+The calendars grid displays all available time unit categories. To map a column to a time unit, click on a time-unit cell under a calendar column in the grid. This opens a dropdown where you can select the **primary column** for that time unit.
 
-Time units are divided into **complete** categories (which uniquely identify a period on their own) and **partial** categories (which require a parent time unit to be mapped first). Hover over any time unit row to see a tooltip describing the expected data format.
+![Selecting a column from the dropdown](~/content/assets/images/tutorials/calendar-dropdown-column-selection.png)
+
+You don't need to map every time unit—only the ones that apply to your calendar structure and for which your table has appropriate columns.
+
+Time units are divided into **complete** categories (which uniquely identify a period on their own) and **partial** categories (which require a parent time unit to be mapped first). Hover over any time unit row to see a tooltip describing the expected data format and examples.
+
+![Tooltip for a complete time unit showing description and examples](~/content/assets/images/tutorials/calendar-complete-time-unit-tooltip.png)
+
+For partial time units, the tooltip also shows which parent time units must be mapped:
+
+![Tooltip for a partial time unit showing dependencies](~/content/assets/images/tutorials/calendar-partial-time-unit-tooltip.png)
+
+#### Example: Using Partial Time Units
+
+In some cases, your Date table may not have columns that uniquely identify complete time units like Quarter or Month (e.g., "Q1 2024" or "January 2024"). Instead, you might have columns like `QuarterOfYear` (1-4) and `MonthOfYear` (1-12) that only make sense when combined with a Year column.
+
+In this scenario, you can map the partial time units (`Quarter of Year`, `Month of Year`) along with the `Year` complete time unit. This is a valid configuration because the partial time units can derive their full context from the Year mapping.
+
+![A calendar configuration using partial time units](~/content/assets/images/tutorials/calendar-simple-example.png)
+
+> [!TIP]
+> To see the available columns and their values while configuring your calendar, right-click on your Date table in the TOM Explorer and choose **Preview Data**.
+>
+> ![Preview Data option in context menu](~/content/assets/images/tutorials/calendar-preview-data-button.png)
+>
+> You can then dock the Data Preview window next to the Calendar Editor for easy reference.
+>
+> ![Docking the Data Preview window](~/content/assets/images/tutorials/calendar-dock-example.png)
+>
+> Alternatively, you can use the **DAX Query** window to query your Date table and keep it visible alongside the Calendar Editor.
+
+With the Date table preview docked, you can see the column values as you configure your calendar:
+
+![Calendar Editor with Date table preview](~/content/assets/images/tutorials/calendar-configured-example.png)
 
 **Complete Time Units:**
 
@@ -95,18 +129,18 @@ Time units are divided into **complete** categories (which uniquely identify a p
 
 **Partial Time Units** (require a parent time unit to be mapped):
 
-| Time Unit | Description | Examples | Requires | Alternatives |
-|-----------|-------------|----------|----------|--------------|
+| Time Unit | Description | Examples | Requires | Or requires one of |
+|-----------|-------------|----------|----------|-------------------|
 | Quarter of Year | The quarter of the year | Q1, Quarter 2, YQ1 | Year | |
 | Month of Year | The month of the year | January, M11, 11 | Year | |
-| Month of Quarter | The month within a quarter | 1, QM2 | Quarter | Quarter of Year + Year |
+| Month of Quarter | The month within a quarter | 1, QM2 | Quarter | <ul><li>Quarter of Year + Year</li></ul> |
 | Week of Year | The week of the year | Week 50, W50, 50 | Year | |
-| Week of Quarter | The week within a quarter | QW10, 10 | Quarter | Quarter of Year + Year |
-| Week of Month | The week within a month | MW2, 2 | Month | Month of Year + Year<br>Month of Quarter + Quarter<br>Month of Quarter + Quarter of Year + Year |
+| Week of Quarter | The week within a quarter | QW10, 10 | Quarter | <ul><li>Quarter of Year + Year</li></ul> |
+| Week of Month | The week within a month | MW2, 2 | Month | <ul><li>Month of Year + Year</li><li>Month of Quarter + Quarter</li><li>Month of Quarter + Quarter of Year + Year</li></ul> |
 | Day of Year | The day of the year | 365, D1 | Year | |
-| Day of Quarter | The day within a quarter | QD2, 50 | Quarter | Quarter of Year + Year |
-| Day of Month | The day of the month | MD10, 30 | Month | Month of Year + Year<br>Month of Quarter + Quarter<br>Month of Quarter + Quarter of Year + Year |
-| Day of Week | The day of the week | WD5, 5 | Week | Week of Year + Year<br>Week of Quarter + Quarter<br>Week of Quarter + Quarter of Year + Year<br>Week of Month + Month<br>Week of Month + Month of Year + Year<br>Week of Month + Month of Quarter + Quarter<br>Week of Month + Month of Quarter + Quarter of Year + Year |
+| Day of Quarter | The day within a quarter | QD2, 50 | Quarter | <ul><li>Quarter of Year + Year</li></ul> |
+| Day of Month | The day of the month | MD10, 30 | Month | <ul><li>Month of Year + Year</li><li>Month of Quarter + Quarter</li><li>Month of Quarter + Quarter of Year + Year</li></ul> |
+| Day of Week | The day of the week | WD5, 5 | Week | <ul><li>Week of Year + Year</li><li>Week of Quarter + Quarter</li><li>Week of Quarter + Quarter of Year + Year</li><li>Week of Month + Month</li><li>Week of Month + Month of Year + Year</li><li>Week of Month + Month of Quarter + Quarter</li><li>Week of Month + Month of Quarter + Quarter of Year + Year</li></ul> |
 
 ### Associated Columns
 
@@ -162,13 +196,17 @@ The Calendar Editor performs real-time validation as you configure your calendar
 The following rules are enforced:
 
 1. **Unique calendar name**
-   Each calendar must have a unique name in the semantic model. The editor highlights duplicate names and prevents saving invalid configurations.
+   Each calendar must have a unique name in the semantic model. If you create a calendar with a duplicate name, the editor automatically appends a suffix (e.g., "(1)") to ensure uniqueness.
 
 2. **Time unit dependency validation**
-   Partial time units require their parent time units to be mapped. For example, if you map a column to "Day of Month", you must also map a column to "Month" (or to "Month of Year" + "Year", etc.). The editor shows which parent time units are required and prevents saving until the dependency is satisfied.
+   Partial time units require their parent time units to be mapped. For example, if you map a column to "Day of Month", you must also map a column to "Month" (or to "Month of Year" + "Year", etc.). The editor highlights cells with missing dependencies and displays a tooltip explaining which parent time units are required.
+
+   ![Dependency error showing missing parent time unit](~/content/assets/images/tutorials/calendar-dependency-error.png)
 
 3. **Cross-calendar category consistency**
    If your model contains multiple calendars, a column must be associated with the same time unit category across all calendars. For example, if you map a `FiscalYear` column as "Year" in one calendar, you cannot map the same column as "Week of Year" in another calendar.
+
+   ![Cross-calendar category conflict showing Time Unit Conflict error](~/content/assets/images/tutorials/calendar-cross-category-validation.png)
 
 ## Configuring Calendars with the Column Mappings Dialog
 
