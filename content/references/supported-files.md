@@ -27,7 +27,7 @@ Example files are available for each several file type, based on the [learn.tabu
 
 ## Dataset file types
 
-Tabular Editor supports four file types for semantic models: .bim, Power BI files (.pbit and.pbip), .json and .tmdl. Each file type has different features and limitations, which are explained below.
+Tabular Editor supports four file types for semantic models: .bim, Power BI files (.pbit and .pbip), .json and .tmdl. Each file type has different features and limitations, which are explained below.
 
 Additionally, Tabular Editor 3 Business and Enterprise editions support **saving with supporting files** for Microsoft Fabric Git integration. This creates a folder structure containing .platform and definition.pbism metadata files alongside your model files, enabling seamless synchronization with Fabric workspaces. See [Save with supporting files](xref:save-with-supporting-files) for details.
 
