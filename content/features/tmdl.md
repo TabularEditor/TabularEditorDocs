@@ -36,6 +36,19 @@ When saving a new model for the first time, Tabular Editor (since v. 3.7.0), wil
 
 ![New Model Tmdl](~/content/assets/images/new-model-tmdl.png)
 
+## TMDL and Microsoft Fabric Git Integration
+
+TMDL is fully compatible with Microsoft Fabric's Git integration feature. When you use the **Save with supporting files** option in Tabular Editor 3, the TMDL serialization format creates a folder structure that includes all necessary metadata files required by Fabric's Git integration.
+
+The resulting folder structure includes:
+- **.platform** file with metadata (display name, description, logical ID)
+- **definition.pbism** file with semantic model settings
+- **definition/** folder containing your TMDL model files
+
+This combination allows you to commit your semantic models to Git repositories and synchronize them with Microsoft Fabric workspaces using Fabric's built-in Git integration capabilities. The human-readable nature of TMDL makes it particularly well-suited for code reviews and tracking changes in version control systems.
+
+For detailed information on using this feature, see [Save with supporting files](xref:save-with-supporting-files).
+
 # Next steps
 
 - [TMDL overview (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-overview).
