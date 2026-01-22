@@ -21,6 +21,9 @@ applies_to:
 
 The Best Practice Analyzer (BPA) lets you define rules on the metadata of your model, to encourage certain conventions and best practices while developing your Power BI or Analysis Services Model.
 
+> [!NOTE]
+> Tabular Editor 3 includes a comprehensive set of [built-in Best Practice Analyzer rules](xref:built-in-bpa-rules) that are enabled by default for new users.
+
 ## BPA Overview
 The BPA overview shows you all the rules defined in your model that are currently being broken:
 
@@ -39,7 +42,7 @@ Clicking the link (or pressing F10), brings up the full BPA window.
 
 ### Functionality
 
-Whenever a change is made to the model, the Best Practice Analyzer scans your model for issues in the background. You can disable this feature under File > Preferences.
+Whenever a change is made to the model, the Best Practice Analyzer scans your model for issues in the background. You can disable this feature under **Tools > Preferences > Best Practice Analyzer**.
 
 The BPA Window in both TE2 and TE3 allows you to dock the window on one side of your desktop, while keeping the main window in the other side, allowing you to work with your model while you can see BPA issues.
 
