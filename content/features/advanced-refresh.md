@@ -23,6 +23,9 @@ The **Advanced Refresh** dialog provides fine-grained control over data refresh 
 
 To open the Advanced Refresh dialog, go to **Model > Refresh model > Advanced...** or use the keyboard shortcut **Ctrl+Shift+F5**.
 
+> [!Note]
+> The Advanced Refresh dialog is available on the Business and Enterprise Edition.
+
 ![Advanced Refresh Menu](~/content/assets/images/advanced-refresh-menu.png)
 
 ## Refresh scope

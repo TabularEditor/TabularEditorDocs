@@ -11,9 +11,9 @@ applies_to:
       since: 3.24.0
       editions:
         - edition: Desktop
-          none: true
+          full: true
         - edition: Business
-          none: true
+          full: true
         - edition: Enterprise
           full: true
 description: Enterprise Edition feature providing 27 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
@@ -53,10 +53,6 @@ To manage built-in rules:
 2. Find the **Built-in Rules** section
 3. Toggle **Enable Built-in Rules** to turn the entire collection on or off
 4. Use the BPA Manager to enable or disable individual rules
-
-### Enterprise-Only Access
-
-Built-in BPA Rules require Enterprise Edition. If you're using Desktop or Business Edition, you can still use custom BPA rules but won't see the built-in rules.
 
 ### First-Run Notification
 <!--<!--
