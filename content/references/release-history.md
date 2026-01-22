@@ -4,10 +4,10 @@ title: Full release history
 ---
 # Full release history
 
-- 2026-01-22 **Tabular Editor 3.25.0** (*[Release notes](release-notes/3_25_0.md)*)
-  - .NET 8 installer (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.0.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.0.Installer.ARM64.Net8.exe)
-  - .NET 8 portable (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.0.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.0.ARM64.Net8.zip)
-  - .NET 8 installer (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.0.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.0.ARM64.Net8.msi)
+- 2026-01-22 **Tabular Editor 3.25.1** (*[Release notes](release-notes/3_25_1.md)*)
+  - .NET 8 installer (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.1.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.1.Installer.ARM64.Net8.exe)
+  - .NET 8 portable (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.1.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.1.ARM64.Net8.zip)
+  - .NET 8 installer (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.1.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.1.ARM64.Net8.msi)
 - 2025-11-11 **Tabular Editor 3.24.2** (*[Release notes](release-notes/3_24_2.md)*)
   - .NET 8 installer (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.24.2.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.24.2.Installer.ARM64.Net8.exe)
   - .NET 8 portable (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.24.2.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.24.2.ARM64.Net8.zip)
