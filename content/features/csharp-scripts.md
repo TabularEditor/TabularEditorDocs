@@ -226,6 +226,86 @@ In addition, the following .NET Framework assemblies are loaded by default:
 - TabularEditor.Exe
 - Microsoft.AnalysisServices.Tabular.Dll
 
+## Accessing Environment Variables
+
+When running C# scripts via the Tabular Editor CLI (especially in CI/CD pipelines), you can pass parameters to your scripts using environment variables. This is the recommended approach, as C# scripts executed by Tabular Editor CLI don't support traditional command-line arguments.
+
+### Reading Environment Variables
+
+Use the `Environment.GetEnvironmentVariable()` method to read environment variables in your script:
+
+```csharp
+// Read environment variables
+var serverName = Environment.GetEnvironmentVariable("SERVER_NAME");
+var environment = Environment.GetEnvironmentVariable("ENVIRONMENT");
+
+// Use them in your script
+foreach(var dataSource in Model.DataSources.OfType<ProviderDataSource>())
+{
+    if(dataSource.Name == "SQLDW")
+    {
+        dataSource.ConnectionString = dataSource.ConnectionString
+            .Replace("{SERVER}", serverName)
+            .Replace("{ENV}", environment);
+    }
+}
+
+Info($"Updated connection strings for {environment} environment");
+```
+
+### Azure DevOps Integration
+
+Environment variables integrate seamlessly with Azure DevOps pipelines, as all pipeline variables are automatically available as environment variables by default.
+
+**Example Azure DevOps YAML Pipeline:**
+
+```yaml
+variables:
+  targetServer: 'Production'
+  targetDatabase: 'AdventureWorks'
+
+steps:
+- task: PowerShell@2
+  displayName: 'Deploy Model with Parameters'
+  env:
+    SERVER_NAME: $(targetServer)
+    DATABASE_NAME: $(targetDatabase)
+  inputs:
+    targetType: 'inline'
+    script: |
+      TabularEditor.exe "Model.bim" -S "DeploymentScript.csx" -D "$(targetServer)" "$(targetDatabase)" -O -V -E -W
+```
+
+In this example, the script `DeploymentScript.csx` can access `SERVER_NAME` and `DATABASE_NAME` using `Environment.GetEnvironmentVariable()`.
+
+### Common Use Cases
+
+Environment variables are particularly useful for:
+
+- **Dynamic connection strings**: Update data source connections based on deployment environment (Dev, UAT, Production)
+- **Conditional logic**: Apply different transformations based on target environment
+- **Deployment configuration**: Control which objects to deploy or modify based on parameters
+- **Multi-environment support**: Use the same script across different environments with different values
+
+**Example - Environment-specific modifications:**
+
+```csharp
+var environment = Environment.GetEnvironmentVariable("DEPLOY_ENV") ?? "Development";
+var refreshPolicy = Environment.GetEnvironmentVariable("ENABLE_REFRESH_POLICY") == "true";
+
+// Apply environment-specific settings
+foreach(var table in Model.Tables)
+{
+    if(environment == "Production" && !refreshPolicy)
+    {
+        // Disable incremental refresh policies in production if specified
+        table.EnableRefreshPolicy = false;
+    }
+}
+
+Info($"Configured model for {environment} environment");
+```
+
 ## Compatibility
 
 The scripting APIs for Tabular Editor 2 and Tabular Editor 3 are mostly compatible, however, there are cases where you want to conditionally compile code depending on which version you're using. For this, you can use preprocessor directives, which were introduced in Tabular Editor 3.10.0.

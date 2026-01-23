@@ -31,7 +31,7 @@ Things you can check with the Best Practice Analyzer:
 The Best Practice Analyzer has access to the full metadata of the model, and can also access VertiPaq Analyzer statistics for more advanced scenarios.
 
 > [!NOTE]
-> Tabular Editor does not ship with any rules out-of-the-box. You will have to define your own rules initially, or use a set of standard rules such as [those recommended by the Power BI CAT Team](https://powerbi.microsoft.com/en-ca/blog/best-practice-rules-to-improve-your-models-performance/).
+> Tabular Editor 3 includes a comprehensive set of [built-in Best Practice Analyzer rules](xref:built-in-bpa-rules) that are enabled by default.
 
 # Managing Best Practice Rules
 
@@ -98,6 +98,9 @@ Tabular Editor displays the best practice rule violations within the **Best Prac
 
 The **Best Practice Analyzer view** shows a list of all rules that have objects in violation. Below each rule is a list of the violating objects. You can double-click on an object in the list, to navigate to that object in the **TOM Explorer**.
 
+> [!TIP]
+> **Enterprise Edition users**: Built-in BPA rules are displayed alongside any custom rules you define. These rules are enabled by default and provide comprehensive best practice guidance. You can manage built-in rules through **Tools > Manage BPA Rules...** where they appear in the **(Built-in rules)** collection. For more information, see [Built-in BPA rules](xref:built-in-bpa-rules).
+
 ![Item options](~/content/assets/images/bpa-options.png)
 
 When right-clicking on an object, you are presented with a number of options as shown above. These are:
@@ -116,7 +119,7 @@ The options shown above are also available as toolbar buttons at the top of the 
 
 In some cases, you may want to disable the Best Practice Analyzer background scan. For example, when you have rules that take a relatively long time to evaluate, or when you are working with very large models.
 
-The background scan can be disabled under **Tools > Preferences > Features > Best Practice Analyzer** by unchecking the **Scan for Best Practice violations in the background**.
+The background scan can be disabled under **Tools > Preferences > Best Practice Analyzer** by unchecking the **Scan for Best Practice violations in the background**.
 
 Note that you can still manually perform a scan using the **Refresh** button of the **Best Practice Analyzer view**, as mentioned above, even when background scans are disabled.
 

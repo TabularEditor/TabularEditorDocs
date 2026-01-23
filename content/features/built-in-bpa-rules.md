@@ -43,9 +43,7 @@ The 27 built-in rules cover four areas:
 - **Maintenance**: Descriptions, calculation groups, unused objects
 
 ### Global and Per-Rule Control
-<!--
-![Placeholder: Screenshot showing BPA preferences with global enable/disable toggle and per-rule checkboxes](~/content/assets/images/features/bpa-built-in-rules-preferences.png)
--->
+![Screenshot showing BPA preferences with global enable/disable toggle and per-rule checkboxes](~/content/assets/images/features/bpa-built-in-rules-preferences.png)
 You can enable or disable built-in rules globally or individually. Settings persist across sessions and work independently from your custom rules.
 
 To manage built-in rules:
@@ -55,28 +53,25 @@ To manage built-in rules:
 4. Use the BPA Manager to enable or disable individual rules
 
 ### First-Run Notification
-<!--<!--
-![Placeholder: Screenshot of first-run notification dialog introducing built-in BPA rules](~/content/assets/images/features/bpa-built-in-rules-notification.png)
--->
+![Screenshot of first-run notification dialog introducing built-in BPA rules](~/content/assets/images/features/bpa-built-in-rules-notification.png)
+
 The first time you open a model after upgrading to a version with built-in rules, you'll see a notification explaining the feature with a link to preferences. This notification only appears once.
 
 ### Knowledge Base Integration
 
-<!--
-![Placeholder: Screenshot showing BPA window with rule selected and "View Documentation" button highlighted](~/content/assets/images/features/bpa-built-in-rules-kb-link.png)
--->
+
+![Screenshot showing BPA window with rule selected and "View Documentation" button highlighted](~/content/assets/images/features/bpa-built-in-rules-kb-link.png)
+
 Every built-in rule links to a knowledge base article through the `KnowledgeBaseArticle` property. Each article explains what the rule checks, why it matters, and how to fix violations.
 
 To view documentation, select a rule in the Best Practice Analyzer window.
-
 
 ### Read-Only Protection
 
 Built-in rules can't be edited, cloned, or deleted. This ensures all users have the same rule definitions. You can disable individual rules, but the rule definitions themselves remain unchanged.
 
-<!--
-![Placeholder: Screenshot showing built-in rule with read-only badge/icon in BPA window](~/content/assets/images/features/bpa-built-in-rules-readonly.png)
--->
+![Screenshot showing built-in rule with read-only badge/icon in BPA window](~/content/assets/images/features/bpa-built-in-rules-readonly.png)
+
 ### ID Collision Prevention
 
 Built-in rules use reserved ID prefixes. When you create a custom rule, Tabular Editor validates that your ID doesn't conflict with built-in rules and shows an error if it does.
@@ -85,7 +80,7 @@ Built-in rules use reserved ID prefixes. When you create a custom rule, Tabular 
 
 The initial release includes the following rules:
 
-<!--
+
 ### Error Prevention Rules
 - [Avoid Invalid Characters in Object Names](xref:kb.bpa-avoid-invalid-characters-names)
 - [Avoid Invalid Characters in Descriptions](xref:kb.bpa-avoid-invalid-characters-descriptions)
@@ -112,7 +107,7 @@ The initial release includes the following rules:
 - [Calculation Groups Should Contain Items](xref:kb.bpa-calculation-groups-no-items)
 - [Perspectives Should Contain Objects](xref:kb.bpa-perspectives-no-objects)
 - [Use Latest Power BI Compatibility Level](xref:kb.bpa-powerbi-latest-compatibility)
--->
+
 
 ## Working with Built-in and Custom Rules
 

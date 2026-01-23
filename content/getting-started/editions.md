@@ -48,10 +48,13 @@ Please refer to the matrix below for the full overview of supported scenarios:
 |Power BI Premium Capacity (P SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 |Power BI Embedded Capacity (A/EM SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 |Fabric Capacity (F SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|Semantic Bridge (Databricks)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+|[Advanced Refresh dialog](xref:advanced-refresh)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|[Free DAX Optimizer license](xref:dax-optimizer-integration)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 
 \***Note:** Enterprise Edition is required if the Analysis Services data model contains perspectives or tables with multiple partitions (does not apply to Power BI Desktop or Power BI Premium Per User models).
 
-\*\***Note:** Supported file formats are: **.pbip** (Power BI Project) **.pbit** (Power BI Template), **.bim** (Analysis Services model metadata), **.vpax** (VertiPaq Analyzer) and **database.json** (Tabular Editor folder structure).
+\*\***Note:** Supported file formats are: **.pbip** (Power BI Project) **.pbit** (Power BI Template), **.bim** (Analysis Services model metadata), **.vpax** (VertiPaq Analyzer) and **database.json** (Tabular Editor folder structure), **TMDL** (Tabular Model Definition Language).
 
 \*\*\***Note:** Workspace Mode allows Tabular Editor 3 to simultaneously save model metadata to disk and synchronize a database on any of the editions of Analysis Services or Power BI supported by the Tabular Editor 3 edition purchased.
 
@@ -76,11 +79,11 @@ Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake data
 
 \***Note:** Analysis Services on SQL Server Standard Edition pre-2019 does not support DirectQuery. Nor does Azure AS Basic Tier. [Learn more](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models).
 
-If you attemp to open a model that uses one or more of the restricted features listed above, while on a TE3 Business Edition license, you will see the error message below:
+If you attempt to open a model that uses one or more of the modeling restrictions listed above, while on a TE3 Business Edition license, you will see the error message below:
 
 ![This edition of Tabular Editor 3 does not support Enterprise-tier semantic models](https://github.com/TabularEditor/TabularEditorDocs/assets/8976200/7ef69593-ea4b-4a16-a8df-543f5c31ac65)
 
-There are no other feature differences between the Tabular Editor 3 editions, than the ones listed above. 
+There are no other feature differences between the Tabular Editor 3 editions, than the ones listed above.
 
 > [!NOTE]
 > Please keep in mind that Power BI Desktop [currently does not support all Data modeling operations](xref:desktop-limitations). For this reason, Tabular Editor 3 by default blocks operations that are not supported by Power BI Desktop. However, this restriction can be removed under Tools > Preferences > Power BI.

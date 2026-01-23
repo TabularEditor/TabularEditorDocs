@@ -25,6 +25,9 @@ Most of the settings covered in this article are accessed through the **Tools > 
 
 ***Name of setting* (default value)**<br/>Description of setting.
 
+> [!TIP]
+> Use the **search box** at the top of the Preferences dialog to quickly locate settings by name or keyword. The search filters the preferences tree in real-time, helping you navigate directly to the setting you need.
+
 # General features
 
 The first page you will encounter within the **Preferences** dialog is the **Tabular Editor > Features** page (see screenshot below). Below is a short description of the features on this page, and what they are commonly used for:

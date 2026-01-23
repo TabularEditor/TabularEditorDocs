@@ -60,6 +60,9 @@ You may also initiate a refresh at the model level through the **Model > Refresh
 
 ![Data Refresh View2](~/content/assets/images/data-refresh-view2.png)
 
+> [!TIP]
+> The Data Refresh view includes a **Start Time** column that shows when each refresh operation began. Click the column header to sort operations chronologically, making it easy to see your most recent refreshes first. You can sort by any column to organize refresh operations according to your needs. See [Data Refresh view](xref:data-refresh-view) for more details.
+
 While a refresh is in progress you can continue work on your data model, querying and previewing data or queueing new data refresh operations according to this article. However, you will not be able to save model changes to Analysis Services until the all data refresh operations complete.
 
 

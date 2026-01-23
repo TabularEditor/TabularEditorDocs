@@ -28,6 +28,7 @@ applies_to:
 |Load model from a database|Ctrl+Shift+O|
 |Save current item|Ctrl+S|
 |Save all|Ctrl+Shift+S|
+|Close Document|Ctrl+W|
 |Exit|Alt+F4|
 |Deployment wizard|Ctrl+Shift+D|
 

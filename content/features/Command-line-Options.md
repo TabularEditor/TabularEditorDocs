@@ -214,6 +214,58 @@ $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
 exit $p.ExitCode
 ```
 
+### Passing Parameters to Scripts via Environment Variables
+
+When executing C# scripts with the `-S` switch in Azure DevOps pipelines, the recommended way to pass parameters is through environment variables rather than command-line arguments. C# scripts can read environment variables using `Environment.GetEnvironmentVariable()`, and Azure DevOps automatically makes all pipeline variables available as environment variables.
+
+**Example - Setting environment variables in YAML:**
+
+```yaml
+variables:
+  deployEnv: 'Production'
+  serverName: 'prod-sql-server'
+
+steps:
+- script: TabularEditor.exe "Model.bim" -S "UpdateModel.csx" -D "$(serverName)" "MyDatabase" -O -V -E -W
+  displayName: 'Deploy with Script Parameters'
+  env:
+    DEPLOY_ENV: $(deployEnv)
+    SERVER_NAME: $(serverName)
+```
+
+**Example - PowerShell Task with environment variables:**
+
+```yaml
+- task: PowerShell@2
+  displayName: 'Run Tabular Editor Script'
+  env:
+    DEPLOY_ENV: 'UAT'
+    CONNECTION_STRING: $(sqldwConnectionString)
+  inputs:
+    targetType: 'inline'
+    script: |
+      $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
+             -ArgumentList "`"Model.bim`" -S `"ConfigureModel.csx`" -B `"output/Model.bim`" -V"
+      exit $p.ExitCode
+```
+
+**In your C# script (e.g., UpdateModel.csx):**
+
+```csharp
+var deployEnv = Environment.GetEnvironmentVariable("DEPLOY_ENV");
+var serverName = Environment.GetEnvironmentVariable("SERVER_NAME");
+
+Info($"Configuring model for {deployEnv} environment on {serverName}");
+
+// Apply environment-specific changes
+foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
+{
+    ds.ConnectionString = ds.ConnectionString.Replace("{SERVER}", serverName);
+}
+```
+
+This approach is cleaner and more maintainable than hardcoding values in scripts or using complex string replacement techniques. For more information on using environment variables in C# scripts, see [C# Scripts - Accessing Environment Variables](xref:csharp-scripts#accessing-environment-variables).
+
 ## Running the Best Practice Analyzer
 
 You can use the "-A" switch to have Tabular Editor scan your model for all objects that are in violation of any Best Practice Rules defined on the local machine (in the %AppData%\..\Local\TabularEditor\BPARules.json file), or as annotations within the model itself. Alternatively, you can specify a path of a .json file containing Best Practice Rules after the "-A" switch, to scan the model using the rules defined in the file. Objects that are in violation will be outputted to the console.

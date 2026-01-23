@@ -1,5 +1,8 @@
 ﻿# Roadmap
 
+> [!IMPORTANT] 
+>Tabular Editor 2 is no longer under active development and will not receive any major feature additions or improvements from our side. We are, however, committed to keeping it up-to-date, ensuring support for new semantic modelling features as they are released from Microsoft, and also fixing any critical or blocking issues. As the project is open-source under MIT, anyone is welcome to submit pull requests, which will be reviewed and approved by our team. The following list should therefore be considered deprecated.
+
 * Scripting objects into TMSL or DAX (compatible with DAX Editor)
 * IntelliSense in DAX expression editor
 * Create plug-in for Visual Studio, to launch Tabular Editor

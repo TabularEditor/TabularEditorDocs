@@ -32,11 +32,19 @@ Tabular Editor 3 is a more advanced application which offers a premium experienc
 - World class [DAX editor](xref:dax-editor) with syntax highlighting, semantic checking, auto-complete, context awareness and much, much more
 - Table browser, Pivot Grid browser and DAX Query editor
 - [Import Table Wizard](xref:importing-tables) with support for Power Query data sources
-- [Data Refresh view](xref:data-refresh-view) allows you to queue and execute refresh operations in the background
+- [Data Refresh view](xref:data-refresh-view) with [Advanced Refresh dialog](xref:advanced-refresh) for queuing and executing refresh operations in the background
 - Diagram editor to easily visualize and edit table relationships
-- New [DAX Scripting](xref:dax-scripts) capability to edit DAX expressions for multiple objects in a single document
-- VertiPaq Analyzer integration
+- [DAX Scripting](xref:dax-scripts) capability to edit DAX expressions for multiple objects in a single document
+- [DAX User-Defined Functions (UDFs)](xref:udfs) with assistance, code actions and namespaces
+- [Calendar Editor](xref:calendars) for creating and managing date tables with enhanced time intelligence
+- [DAX Package Manager](xref:dax-package-manager) for installing and managing DAX packages
+- [Built-in Best Practice Analyzer rules](xref:built-in-bpa-rules)
+- VertiPaq Analyzer integration with [DAX Optimizer](xref:dax-optimizer-integration)
 - [DAX debugger](xref:dax-debugger)
+- [Code Actions](xref:code-actions) for quick fixes and refactoring
+- [Metadata Translation Editor](xref:metadata-translation-editor) and [Perspective Editor](xref:perspective-editor)
+- [Save with supporting files](xref:save-with-supporting-files) for Fabric Git integration
+- [Localization support](xref:references-application-language) (Chinese, Spanish, Japanese, German, French)
 
 ### [Tabular Editor 2.x](#tab/TE2) 
 
@@ -97,10 +105,16 @@ The table below lists all the main features of both tools.
 |[Table Groups](xref:table-groups)||<span class="emoji">&#10004;</span>|
 |[DAX Optimizer Integration](xref:dax-optimizer-integration)||<span class="emoji">&#10004;</span>|
 |[Code Actions](xref:code-actions)||<span class="emoji">&#10004;</span>|
+|[DAX User-Defined Functions (UDFs)](xref:udfs) Assistance, Code Action and Namespaces||<span class="emoji">&#10004;</span>|
+|[Calendar Editor](xref:calendars) for enhanced time intelligence||<span class="emoji">&#10004;</span>|
+|[DAX Package Manager](xref:dax-package-manager)||<span class="emoji">&#10004;</span>|
+|[Built-in Best Practice Analyzer rules](xref:built-in-bpa-rules) ||<span class="emoji">&#10004;</span>|
+|[Advanced Refresh dialog](xref:advanced-refresh) with [refresh override profiles](xref:refresh-overrides) (Business/Enterprise Edition)||<span class="emoji">&#10004;</span>*|
+|[Save with supporting files for Fabric](xref:save-with-supporting-files)||<span class="emoji">&#10004;</span>|
+|Semantic Bridge for Databricks Metric Views (Enterprise Edition)||<span class="emoji">&#10004;</span>*|
+|[Localization support](xref:references-application-language) (Chinese, Spanish, Japanese, German, French)||<span class="emoji">&#10004;</span>|
 
 \***Note:** Limitations apply depending on which [edition](xref:editions) of Tabular Editor 3 you are using.
-
-Below is a more detailed description of some of the features listed above.
 
 ### Common features
 
