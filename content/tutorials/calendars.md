@@ -171,6 +171,8 @@ Examples of time-related columns include:
 - During **lateral shifts** (such as `DATEADD` or `SAMEPERIODLASTYEAR`), filters on time-related columns are preserved, maintaining the same granularity.
 - During **hierarchical shifts** (such as `DATESYTD` or `NEXTMONTH`), filters on time-related columns are cleared.
 
+For more details on lateral and hierarchical shifts, see [Understanding lateral shift and hierarchical shift](https://www.sqlbi.com/articles/introducing-calendar-based-time-intelligence-in-dax/#:~:text=Understanding%20lateral%20shift%20and%20hierarchical%20shift) (SQLBI).
+
 To configure time-related columns:
 
 1. Select the **Time-related columns** row at the bottom of the calendars grid.
