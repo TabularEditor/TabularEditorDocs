@@ -170,7 +170,7 @@ In general, once you have a rule that catches a specific issue, it is better to 
 If you find that the rule is missing some condition you'd like to catch, just add a new small, simple rule to catch that new condition.
 
 You can save many different rules in a C# script for re-use with different Metric Views.
-Because [a loaded Metric View is accessible in multiple scripts](xref:semantic-bridge-metric-view-object-model) you can save C# scripts that only define rules and then call `SemanticBridge.MetricView.Validate`, and re-use those validation scripts easily.
+Because [a loaded Metric View is accessible in multiple scripts](xref:semantic-bridge-metric-view-object-model#loading-and-accessing-the-metric-view) you can save C# scripts that only define rules and then call `SemanticBridge.MetricView.Validate`, and re-use those validation scripts easily.
 See the image below, where the script on the left, "load-mv.csx" has already been run, to load a Metric View to Tabular Editor.
 Then, the second script, on the right, "run-rules.csx", is run second to validate.
 This second script could be one that you keep around for all of your Metric Views.
@@ -223,3 +223,7 @@ var contextualRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Dim
 // run validation with the rules defined above and output the diagnostic messages
 Output(SemanticBridge.MetricView.Validate([simpleRule, contextualRule]));
 ```
+
+## References
+
+- @semantic-bridge-how-tos

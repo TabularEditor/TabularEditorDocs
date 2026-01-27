@@ -215,3 +215,4 @@ We refer to the names of Metric View objects based on their representation in YA
 
 - [Databricks Metric View documentation](https://learn.microsoft.com/en-us/azure/databricks/metric-views/)
 - [Databricks Metric View YAML reference](https://learn.microsoft.com/en-us/azure/databricks/metric-views/data-modeling/syntax)
+- @semantic-bridge-how-tos
