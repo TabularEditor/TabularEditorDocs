@@ -55,13 +55,15 @@ Rather than dig into that interface, it is easier to understand and work with va
 - [`MakeValidationRuleForView`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRuleForMeasure_System_String_System_String_System_String_System_Func_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_System_Boolean__)
 - [`MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___)
 
-The first are all special purpose to make a rule for the object type in their name.
+The first four are all special purpose to make a rule for the object type in their name.
 They offer a simplified interface where you provide:
 
 - `name`: a short, unique name to identify the rule
 - `category`: useful for grouping similar rules together, but ultimately completely optional
 - `message`: the message that will be shown in the diagnostic message when this rule is violated
 - `isInvalid`: a function that will take the Metric View object as an argument, and will return `true` if that object is invalid
+
+The name and category are intended to make it easier to deal with collections of rules, as you will do in C# scripts that utilize custom rules.
 
 This is easier to understand with an example:
 
@@ -79,7 +81,7 @@ This makes a rule that will apply to all [Metric View `Dimension`s](/api/Tabular
 The rule is named (ironically) "no_underscores".
 It has a category of "naming", to indicate that it has to do with how we name things.
 The message you will see when the rule is violated is, "Do not include underscores in dimension names. Use user-friendly names with spaces."
-The last argument defines a function that will be called for each dimension in the model; its body is a boolean expression that returns `true` for a dimension with an underscore in its `Name` property.
+The last argument defines a function that will be called for each Metric View dimension in the model; its body is a boolean expression that returns `true` for a Metric View dimension with an underscore in its `Name` property.
 
 Here's a full script that defines a Metric View inline, and then deserializes and validates it, showing how this rule is used.
 
@@ -114,7 +116,7 @@ You can see the details that are provided in the diagnostic message:
 - Code, Context: not used when you use one of these helper methods to make your rule
 - Message: the message you defined in the rule
 - Path: a representation of where you find that object in the Metric View
-- Severity: set to Error by default with these simplified helpers
+- Severity: set to Error by default with these helpers
 
 ![output from one field violating the validation rule](/images/features/semantic-bridge/semantic-bridge-metric-view-validation.png)
 
@@ -163,11 +165,11 @@ You can see in this example that we include the duplicated Metric View dimension
 
 It is a good idea to make many simple rules, rather than fewer, more complex rules.
 The validation process is very light-weight, so there are not performance concerns from a proliferation of rules.
-For example, if you want to make sure that dimension names are not `camelCased`, not `kebab-cased` and not `snake_cased`, it is better to make three separate rules, rather than trying to check for each of those conditions in a single rule.
+For example, if you want to make sure that Metric View dimension names are not `camelCased`, not `kebab-cased` and not `snake_cased`, it is better to make three separate rules, rather than trying to check for each of those conditions in a single rule.
 This allows each rule to be simple, and for the messages to be very specific, and therefore more easily actionable.
 
 In general, once you have a rule that catches a specific issue, it is better to leave that alone, rather than editing it.
-If you find that the rule is missing some condition you'd like to catch, just add a new small, simple rule to catch that new condition.
+If you find that the rule is missing some condition you'd like to catch, just add a new, small, simple rule to catch that new condition.
 
 You can save many different rules in a C# script for re-use with different Metric Views.
 Because [a loaded Metric View is accessible in multiple scripts](xref:semantic-bridge-metric-view-object-model#loading-and-accessing-the-metric-view) you can save C# scripts that only define rules and then call `SemanticBridge.MetricView.Validate`, and re-use those validation scripts easily.

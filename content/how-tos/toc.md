@@ -39,3 +39,11 @@
 
 # [Semantic Bridge](semantic-bridge-how-tos.md)
 ## @semantic-bridge-load-inspect
+## @semantic-bridge-import
+## @semantic-bridge-validate-default
+## @semantic-bridge-validate-simple-rules
+## @semantic-bridge-validate-contextual-rules
+## @semantic-bridge-add-object
+## @semantic-bridge-remove-object
+## @semantic-bridge-rename-objects
+## @semantic-bridge-serialize

@@ -10,13 +10,13 @@ SemanticBridge.MetricView.Deserialize("""
     joins:
       - name: product
         source: sales.dim.product
-        on: product_id = product.product_id
+        on: source.product_id = product.product_id
       - name: customer
         source: sales.dim.customer
-        on: customer_id = customer.customer_id
+        on: source.customer_id = customer.customer_id
       - name: date
         source: sales.dim.date
-        on: order_date = date.date_key
+        on: source.order_date = date.date_key
     dimensions:
       - name: product_name
         expr: product.product_name

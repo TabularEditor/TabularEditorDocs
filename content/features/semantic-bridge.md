@@ -36,7 +36,8 @@ It also allows for migrations from one platform to another.
 
 The Semantic Bridge is available through **File > Open > Import from Metric View YAML**.
 This will launch a dialogue to guide you through importing a Metric View into the current Tabular model, adding tables, columns, measures, and relationships based on the structure of the Metric View.
-You must have a Tabular model open in Tabular Editor. This can be a new, empty model or an existing model you want to enhance with the objects from the Metric View.
+You must have a Tabular model open in Tabular Editor.
+This can be a new, empty model or an existing model you want to enhance with the objects from the Metric View.
 The menu button will not be enabled until you open or create a new Tabular model.
 
 ![Import a Metric View from the file menu with **File > Open > Import from Metric View YAML**](/images/features/semantic-bridge/semantic-bridge-file-menu-import.png)
@@ -66,6 +67,8 @@ There are three possible results:
 1. Success: everything in the Metric View was translated to Tabular and you have a Tabular model ready to use.
 2. Success, but with some issues: the Semantic Bridge was not able to translate every object in the Metric View; there are diagnostic messages you can view to understand what needs your attention.
 3. Failure: the Semantic Bridge could not translate the Metric View
+
+After either success type, you can use undo/redo functionality like normal in Tabular Editor to undo or instantly replay the import.
 
 **Success**
 
@@ -99,7 +102,7 @@ Translating a Metric View to a Tabular model happens in several steps:
 2. Deserialize the YAML
 3. Validate that the deserialized YAML represents a valid Metric View
 4. If it is a valid Metric View, store it as a the currently loaded Metric View, similar to how there is a loaded Tabular model that you interact with.
-   If it is not a valid Metric View, the process stops here and diagnostic messages are available.
+   If it is not a valid Metric View, the process stops here and messages are available.
 4. Analyze the Metric View and attempt to transform it to an intermediate representation
 5. Attempt to transform the intermediate representation to a Tabular model
 

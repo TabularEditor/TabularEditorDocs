@@ -43,7 +43,7 @@ Output($"Loaded Metric View version: {SemanticBridge.MetricView.Model.Version}")
 ## Access the loaded Metric View
 
 After loading, the Metric View is available in any script as `SemanticBridge.MetricView.Model`.
-This returns a [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) object, the root of the [Metric View object graph](xref:semantic-bridge-metric-view-object-model).
+This returns a Metric View [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) object, the root of the [Metric View object graph](xref:semantic-bridge-metric-view-object-model).
 
 ```csharp
 var sb = new System.Text.StringBuilder();
@@ -54,9 +54,9 @@ sb.AppendLine($"Source (fact table): {view.Source}");
 Output(sb.ToString());
 ```
 
-## Inspect joins (dimension tables)
+## Inspect Metric View joins (dimension tables)
 
-The `Joins` property contains the dimension tables joined to the fact.
+The Metric View `Joins` property contains the dimension tables joined to the fact.
 
 ```csharp
 var sb = new System.Text.StringBuilder();
@@ -94,9 +94,9 @@ Join: date
   On: order_date = date.date_key
 ```
 
-## Inspect dimensions (fields)
+## Inspect Metric View dimensions (fields)
 
-The `Dimensions` property contains all field definitions.
+The Metric View `Dimensions` property contains all field definitions.
 
 ```csharp
 var sb = new System.Text.StringBuilder();
@@ -126,9 +126,9 @@ order_year           <- date.year
 order_month          <- date.month_name
 ```
 
-## Inspect measures
+## Inspect Metric View measures
 
-The `Measures` property contains all measure definitions with their aggregation expressions.
+The Metric View `Measures` property contains all Metric View measure definitions with their aggregation expressions.
 
 ```csharp
 var sb = new System.Text.StringBuilder();
