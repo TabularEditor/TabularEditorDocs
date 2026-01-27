@@ -1,4 +1,5 @@
 apiRules:
+# TabularEditor.Shared exclusions
 - exclude:
     uidRegex: ^TabularEditor\.Shared\.Services
     type: Namespace
@@ -11,6 +12,40 @@ apiRules:
 - exclude:
     uidRegex: ^TabularEditor\.TOMWrapper\.Utils\.DaxDependencyHelper\.GetCachedSemantics
     type: Method
+
+# SemanticBridge exclusions - only expose SemanticBridgeService, DatabricksMetricViewService, and their dependencies
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.ServiceInitializationResult
+    type: Type
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.AbstractModel
+    type: Namespace
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.Exceptions
+    type: Namespace
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.Util
+    type: Namespace
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.Platforms\.Databricks\.Exceptions
+    type: Namespace
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.Platforms\.Databricks\.Mapping
+    type: Namespace
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.Platforms\.Databricks\.MetricView\.Extensions
+    type: Namespace
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.Platforms\.Databricks\.MetricView\.Serialization
+    type: Namespace
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.Platforms\.Tabular
+    type: Namespace
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.Orchestration\.(?!DiagnosticMessage|DiagnosticSeverity)
+    type: Type
+
+# Global exclusion for EditorBrowsable(Never)
 - exclude:
     hasAttribute:
       uid: System.ComponentModel.EditorBrowsableAttribute
