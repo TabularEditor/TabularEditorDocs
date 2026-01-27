@@ -42,6 +42,9 @@ This section contains step-by-step guides for accomplishing specific tasks with 
 - [Metadata Backup](metadata-backup.md) - Backup and restore model metadata
 - [Undo and Redo](undo-redo.md) - Using undo/redo functionality
 
+### Semantic Bridge
+- @semantic-bridge-load-inspect
+
 ---
 
 *Navigate using the table of contents to find guides for specific tasks.*
