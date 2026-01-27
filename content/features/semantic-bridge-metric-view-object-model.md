@@ -168,7 +168,7 @@ Output(sb.ToString());
 Each `Dimension` becomes a column in the Tabular model.
 If the `Expr` is an unqualified field reference, it is added to the fact table.
 If the `Expr` is a qualified reference (e.g., `table.field`), then it is added to the table created for the `Join` with the same name as the table-part of the qualified reference; if the table-part is `source`, it is added to the fact table.
-In both the qualified and unqualified field reference cases, the field is added as a [`TOMWrapper.DataColumn`](xref:TabularEditor.TOMWrapper.DataColumn].
+In both the qualified and unqualified field reference cases, the field is added as a [`TOMWrapper.DataColumn`](xref:TabularEditor.TOMWrapper.DataColumn).
 If the `Expr` is a SQL expression, then it is added as [`TOMWrapper.CalculatedColumn`](xref:TabularEditor.TOMWrapper.CalculatedColumn).
 When the `Expr` is a SQL expression, we attempt to extract all field references; if all field references share the same table-part, then we add it to the table created for that `Join`, otherwise we add it to the fact table.
 We do not translate SQL expressions for `Dimension.Expr` properties; the SQL expression is included as a comment in the DAX expression for the `CalculatedColumn`.

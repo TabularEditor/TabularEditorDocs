@@ -52,7 +52,7 @@ Rather than dig into that interface, it is easier to understand and work with va
 - [`MakeValidationRuleForDimension`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRuleForDimension_System_String_System_String_System_String_System_Func_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Dimension_System_Boolean__)
 - [`MakeValidationRuleForJoin`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRuleForJoin_System_String_System_String_System_String_System_Func_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Join_System_Boolean__)
 - [`MakeValidationRuleForMeasure`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRuleForMeasure_System_String_System_String_System_String_System_Func_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_System_Boolean__)
-- [`MakeValidationRuleForView`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRuleForMeasure_System_String_System_String_System_String_System_Func_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_System_Boolean__)
+- [`MakeValidationRuleForView`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRuleForView_System_String_System_String_System_String_System_Func_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_View_System_Boolean__)
 - [`MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___)
 
 The first four are all special purpose to make a rule for the object type in their name.
@@ -72,7 +72,7 @@ This is easier to understand with an example:
 var myRule = SemanticBridge.MetricView.MakeValidationRuleForDimension(
 	"no_underscores",
 	"naming",
-	"Do not include undercores in dimension names. Use user-friendly names with spaces.",
+	"Do not include underscores in dimension names. Use user-friendly names with spaces.",
 	(dimension) => dimension.Name.Contains('_')
 	);
 ```
@@ -101,7 +101,7 @@ SemanticBridge.MetricView.Deserialize("""
 var myRule = SemanticBridge.MetricView.MakeValidationRuleForDimension(
     "no_underscores",
     "naming",
-    "Do not include undercores in dimension names. Use user-friendly names with spaces.",
+    "Do not include underscores in dimension names. Use user-friendly names with spaces.",
     (dimension) => dimension.Name.Contains('_')
     );
 
@@ -208,7 +208,7 @@ using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 var simpleRule = SemanticBridge.MetricView.MakeValidationRuleForDimension(
     "no_underscores",
     "naming",
-    "Do not include undercores in dimension names. Use user-friendly names with spaces.",
+    "Do not include underscores in dimension names. Use user-friendly names with spaces.",
     (dimension) => dimension.Name.Contains('_')
     );
 

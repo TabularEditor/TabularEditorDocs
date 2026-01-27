@@ -50,7 +50,7 @@ This section contains step-by-step guides for accomplishing specific tasks with 
 - @semantic-bridge-validate-contextual-rules - Create rules with cross-object checks
 - @semantic-bridge-add-object - Add a new object to a Metric View
 - @semantic-bridge-remove-object - Remove objects from a Metric View
-- @semantic-bridge-rename-object - Rename objects using copy-modify pattern
+- @semantic-bridge-rename-objects - Rename objects using copy-modify pattern
 - @semantic-bridge-serialize - Serialize a Metric View back to YAML
 
 ---

@@ -100,7 +100,7 @@ Output(sb.ToString());
 **Output:**
 
 ```
-Dimensions before: 3
+Dimensions before: 6
 Dimensions after: 3
 
 Remaining dimensions:
