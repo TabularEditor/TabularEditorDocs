@@ -9,29 +9,29 @@
 ## @diagram-view
 
 # DAX Features
-## @dax-debugger 
-## @dax-editor 
-## @dax-query 
-## @dax-scripts 
-## @code-actions 
+## @dax-debugger
+## @dax-editor
+## @dax-query
+## @dax-scripts
+## @code-actions
 ## @dax-package-manager
 
 # Scripting and Automation
-## @csharp-scripts 
+## @csharp-scripts
 ## C# Script Library
 ### @csharp-script-library
 ### @script-library-beginner
 ### @script-library-advanced
-## @script-helper-methods 
-## @useful-script-snippets 
+## @script-helper-methods
+## @useful-script-snippets
 ## @macros
 
 # Model Analysis and Quality
-## @best-practice-analyzer 
+## @best-practice-analyzer
 ### @built-in-bpa-rules
-### @using-bpa 
-### @using-bpa-sample-rules-expressions 
-## @dax-optimizer-integration 
+### @using-bpa
+### @using-bpa-sample-rules-expressions
+## @dax-optimizer-integration
 
 # Data Exploration and Connectivity
 ## @import-tables
@@ -51,13 +51,18 @@
 
 # Model Deployment and Management
 ## [Model deployment](deployment.md)
-## @workspace-databases 
-## @workspace-mode 
-## @tmdl 
-## @save-to-folder 
+## @workspace-databases
+## @workspace-mode
+## @tmdl
+## @save-to-folder
 ## @save-with-supporting-files
 ## @advanced-refresh
 ## @refresh-overrides
 
 # Command Line and Integration
-## @command-line-options 
+## @command-line-options
+
+# Semantic Bridge for cross-platform translations
+## @semantic-bridge
+## @semantic-bridge-metric-view-object-model
+## @semantic-bridge-metric-view-validation

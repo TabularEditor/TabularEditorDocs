@@ -2,14 +2,14 @@
 uid: api-index
 title: Scripting API
 author: Daniel Otykier
-updated: 2022-06-16
+updated: 2026-01-27
 ---
 
 # Tabular Editor API
 
 This is the API documentation for Tabular Editor's C# scripting capabilities.
 
-Specifically, the objects available for scripting are those found in the **TOMWrapper.dll** and **TabularEditor3.Shared.dll** libraries.
+Specifically, the objects available for scripting are those found in the **TOMWrapper.dll**, **TabularEditor3.Shared.dll**, and **SemanticBridge.dll** libraries.
 
 ## Getting started
 

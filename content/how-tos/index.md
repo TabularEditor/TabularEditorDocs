@@ -42,6 +42,17 @@ This section contains step-by-step guides for accomplishing specific tasks with 
 - [Metadata Backup](metadata-backup.md) - Backup and restore model metadata
 - [Undo and Redo](undo-redo.md) - Using undo/redo functionality
 
+### Semantic Bridge
+- @semantic-bridge-load-inspect - Load a Metric View and explore its structure
+- @semantic-bridge-import - Import a Metric View to Tabular and view diagnostics
+- @semantic-bridge-validate-default - Validate with built-in rules
+- @semantic-bridge-validate-simple-rules - Create predicate-based validation rules
+- @semantic-bridge-validate-contextual-rules - Create rules with cross-object checks
+- @semantic-bridge-add-object - Add a new object to a Metric View
+- @semantic-bridge-remove-object - Remove objects from a Metric View
+- @semantic-bridge-rename-objects - Rename objects using copy-modify pattern
+- @semantic-bridge-serialize - Serialize a Metric View back to YAML
+
 ---
 
 *Navigate using the table of contents to find guides for specific tasks.*
