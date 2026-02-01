@@ -22,7 +22,7 @@ To view perspectives and/or translations "in action", use the two dropdown lists
 ## Perspectives/Translations within object context
 When one or more objects are selected in the tree, you will find 4 special property collections within the Property Grid:
 
-* **Captions**, **Descriptions** and **Display Folders** shows a list of all cultures in the model, with the translated names, descripions and display folders respectively of the selected objects for each culture.
+* **Captions**, **Descriptions** and **Display Folders** shows a list of all cultures in the model, with the translated names, descriptions and display folders respectively of the selected objects for each culture.
 * **Perspectives** shows a list of all perspectives in the model, with an indication of whether or nor the selected objects belong to each perspective.
 
-You can use these collections in the Property Grid to change the translations and perspective inclusions for one or more objects at at time.
+You can use these collections in the Property Grid to change the translations and perspective inclusions for one or more objects at a time.

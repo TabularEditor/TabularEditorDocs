@@ -41,7 +41,7 @@ DAX scripts can be saved as text files, using the `.te3daxs` file extension. To 
 
 The DAX script editor has all the capabilities of the DAX editor used elsewhere in Tabular Editor 3. Specifically, auto-complete, auto-formatting, calltips, etc.
 
-In addition, to easily manage large DAX scripts, two dropdowns are displayed at the top of the DAX script view. The dropdown on the left allows you to jump between objects defined in the script, where as the dropdown on the right allows you to jump between properties on the current object.
+In addition, to easily manage large DAX scripts, two dropdowns are displayed at the top of the DAX script view. The dropdown on the left allows you to jump between objects defined in the script, whereas the dropdown on the right allows you to jump between properties on the current object.
 
 ![Dax Script Navigation](~/content/assets/images/dax-script-navigation.png)
 

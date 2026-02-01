@@ -39,7 +39,7 @@ When using Power BI, you will encounter three different file types commonly used
 
 Both these files can be opened in Power BI Desktop and essentially defines everything related to a Power BI report: Data sources, Power Query transformations, the tabular data model, report pages, visuals, bookmarks, etc.
 
-The main difference between, is that the **.pbix and .pbip file contains model data**, where as the **.pbit file contains no data**. In addition, a **.pbix** file does not contain the model metadata in this format, and therefore, **a .pbix file cannot be loaded directly in Tabular Editor** in any way. Instead, you will have to rely on the External Tools integration, which requires you to load the .pbix file in Power BI Desktop, as described below.
+The main difference between, is that the **.pbix and .pbip file contains model data**, whereas the **.pbit file contains no data**. In addition, a **.pbix** file does not contain the model metadata in this format, and therefore, **a .pbix file cannot be loaded directly in Tabular Editor** in any way. Instead, you will have to rely on the External Tools integration, which requires you to load the .pbix file in Power BI Desktop, as described below.
 
 > [!WARNING]
 > Even though it is technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. As such, there is always a risk of making changes to the .pbit file which would cause the file to become unloadable in Power BI Desktop, or cause stability issues once loaded. In this case, Microsoft support will be unable to assist you.
@@ -52,7 +52,7 @@ The main difference between, is that the **.pbix and .pbip file contains model d
 When a Power BI Desktop report (.pbix or .pbit file) contains a data model (that is, one or more tables have been added in Import or DirectQuery mode), that data model is hosted inside an instance of Analysis Services managed by Power BI Desktop. External Tools may connect to this instance of Analysis Services for different purposes.
 
 > [!IMPORTANT]
-> Power BI Desktop reports that use a **Live Connection** to SSAS, Azure AS or a dataset in a Power BI workspace do not contain a data model. As such, these reports **can not** be used with external tools such as Tabular Editor.
+> Power BI Desktop reports that use a **Live Connection** to SSAS, Azure AS or a dataset in a Power BI workspace do not contain a data model. As such, these reports **cannot** be used with external tools such as Tabular Editor.
 
 External tools may connect to the instance of Analysis Services managed by Power BI Desktop through a specific port number assigned by Power BI Desktop. When a tool is launched directly from the "External Tools" ribbon in Power BI Desktop, this port number is passed to the external tool as a command line argument. In Tabular Editor's case, this causes the data model to be loaded in Tabular Editor.
 

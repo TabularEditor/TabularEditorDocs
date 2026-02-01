@@ -107,7 +107,7 @@ If you need to edit the name of the measure (or any other object), simply select
 ![Batch Rename](~/content/assets/images/batch-rename.png)
 
 > [!WARNING]
-> Changing object names in the data model may cause report visuals to stop working, if the visuals relies on one or more of the objects being renamed. External tools cannot access information about Power BI visuals, so Tabular Editor is not able to warn you before an object that is used in a visual is renamed or deleted.
+> Changing object names in the data model may cause report visuals to stop working, if the visuals rely on one or more of the objects being renamed. External tools cannot access information about Power BI visuals, so Tabular Editor is not able to warn you before an object that is used in a visual is renamed or deleted.
 
 ### How to create a copy of a measure
 

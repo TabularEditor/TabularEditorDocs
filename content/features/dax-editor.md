@@ -64,7 +64,7 @@ For DAX scripts and DAX queries, it is sometimes useful to include the definitio
 
 # Inline Measure
 
-If you want to bring the definition of a measure into the current document, the **Inline Measure** feature lets you do just that. When a row context is surronding the original measure reference, Tabular Editor automatically surrounds the measure expression with [`CALCULATE`](https://dax.guide/calculate) (which is implicit in measure references).
+If you want to bring the definition of a measure into the current document, the **Inline Measure** feature lets you do just that. When a row context is surrounding the original measure reference, Tabular Editor automatically surrounds the measure expression with [`CALCULATE`](https://dax.guide/calculate) (which is implicit in measure references).
 
 # Format DAX
 

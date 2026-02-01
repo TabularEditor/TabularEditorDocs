@@ -32,7 +32,7 @@ Also, it is highly recommended that [automatic date/time](https://docs.microsoft
 When a Power BI Desktop report contains a data model (that is, one or more tables have been added in Import or DirectQuery mode), that data model is hosted inside an instance of Analysis Services managed by Power BI Desktop. External Tools may connect to this instance of Analysis Services for different purposes.
 
 > [!IMPORTANT]
-> Power BI Desktop reports that use a **Live Connection** to SSAS, Azure AS or a dataset in a Power BI workspace do not contain a data model. As such, these reports **can not** be used with external tools such as Tabular Editor.
+> Power BI Desktop reports that use a **Live Connection** to SSAS, Azure AS or a dataset in a Power BI workspace do not contain a data model. As such, these reports **cannot** be used with external tools such as Tabular Editor.
 
 > [!IMPORTANT]
 > Power BI Desktop reports that directly edits a **Direct Lake** or other model Fabric do not contain a data model. Instead, Tabular Editor will open the model directly from the service which is essentially what Power BI Desktop also does.

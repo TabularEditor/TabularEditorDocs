@@ -26,7 +26,7 @@ This article describes how to use the [Table Import Wizard](#table-import-wizard
 
 # Working with diagrams
 
-In Tabular Editor 3, **diagrams** are documents that can be used to visualize and edit the relationships between tables in the model. You can create as many diagrams as you want to visualize certain areas of your model. A diagram can be saved as a stand alone file. See <xref:supported-files#diagram-file-te3diag> for more information.
+In Tabular Editor 3, **diagrams** are documents that can be used to visualize and edit the relationships between tables in the model. You can create as many diagrams as you want to visualize certain areas of your model. A diagram can be saved as a standalone file. See <xref:supported-files#diagram-file-te3diag> for more information.
 
 > [!NOTE]
 > We recommend creating multiple smaller diagrams over few large diagrams. When a diagram contains more than 20 or so tables, it quickly becomes overwhelming and difficult to understand.

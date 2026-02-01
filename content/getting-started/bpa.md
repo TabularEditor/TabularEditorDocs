@@ -92,7 +92,7 @@ When a rule is saved to a rule collection on disk, all of the above properties a
 
 # Using the Best Practice Analyzer view
 
-Tabular Editor displays the best practice rule violations within the **Best Practice Analyzer view**. You can also see the number of rule violations in the status bar at the bottom of the main window. To bring the view into focus, use the **View > Best Practice Analyzer** menu option or blick on the "# BP issues" button in the status bar.
+Tabular Editor displays the best practice rule violations within the **Best Practice Analyzer view**. You can also see the number of rule violations in the status bar at the bottom of the main window. To bring the view into focus, use the **View > Best Practice Analyzer** menu option or click on the "# BP issues" button in the status bar.
 
 ![Best Practice Analyzer View](~/content/assets/images/best-practice-analyzer-view.png)
 

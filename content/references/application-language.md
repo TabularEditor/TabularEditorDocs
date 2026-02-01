@@ -44,7 +44,7 @@ Tabular Editor 3 is still not fully localized. Specifically we have so far not l
 The languages under Beta support means that they have been verified by an human translator, but that Tabular Editor 3 may still not be fully localized. Specifically we have so far not localized the individual TOM properties.
 
 ### Beta Languages
-Beta languages are have been translated exclusively through AI and as not been verified by human translators. We plan to bring beta languages into Preview in Q2 2026. 
+Beta languages have been translated exclusively through AI and have not been verified by human translators. We plan to bring beta languages into Preview in Q2 2026. 
 
 ## Changing the Language
 

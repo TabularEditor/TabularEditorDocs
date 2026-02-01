@@ -21,7 +21,7 @@ This document provides an overview and comparison of the different editions of T
 
 The main difference between the various editions of Tabular Editor 3, is which types of tabular data modeling scenarios they support. To understand this difference, consider that Analysis Services (Tabular) exists in a number of different "flavors":
 
-- Power BI Desktop (make sure you you understand the [limitations](xref:desktop-limitations))
+- Power BI Desktop (make sure you understand the [limitations](xref:desktop-limitations))
 - Power BI Premium through the XMLA Endpoint (Premium Per User, **Premium Capacity [A, EM or P SKUs]**, **Fabric Capacity [F SKUs]**)
 - SQL Server (2016+) Analysis Services (Editions: Developer, Standard, **Enterprise**)
 - Azure Analysis Services (Tiers: Developer, Basic, **Standard**)
@@ -124,7 +124,7 @@ Our Enterprise Edition is priced in tiers, according to the following table (sim
 |Next 21-50 seats|$800.00 USD|
 |Seats 51 and above|$750.00 USD|
 
-As an example, if you need 12 seats, the price breaks down as follow:
+As an example, if you need 12 seats, the price breaks down as follows:
 
 ```text
 Seats 1-5:    5 x 950.00 = $  4,750.00

@@ -47,7 +47,7 @@ DevOps using VSTS and general clean-up of Tabular Editor source code.
 
 ## Formula fix-up
 
-When any model object is renamed, all DAX expressions refering that object should be updated to reflect the changed name.
+When any model object is renamed, all DAX expressions referring to that object should be updated to reflect the changed name.
 
 **Update**: As of 2.2, this feature can now be toggled on under "File" > "Preferences".
 
@@ -69,7 +69,7 @@ Tabular Editor currently only lets end-users read and edit a subset of the objec
 
 **Update**: As of 2.1, many new object types are now visible directly in the Tree Explorer. Using the right-click menu, you can create, duplicate and delete many of these objects (roles, perspectives, translations). We're still lacking support for creating/deleting relationships and data sources, but this will come in a future release.
 
-**Update**: As of 2.2, we can now create and delete relationships. More object types comming later.
+**Update**: As of 2.2, we can now create and delete relationships. More object types coming later.
 
 **Update**: As of 2.3, tables, partitions and data columns can now be edited. Visual Studio is now only needed to create the blank model itself - everything else can be done in Tabular Editor.
 

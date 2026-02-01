@@ -74,7 +74,7 @@ In general, though, interface elements that exist in Tabular Editor 2.x have the
 - The **Advanced Scripting** tab in Tabular Editor 2.x is gone. In Tabular Editor 3, you instead create *C# Scripts** using the **File > New** menu. You are not limited to working on a single script at a time. In addition, **Custom actions** have been renamed to **Macros**.
 - **Dynamic LINQ filtering** is not currently available within the TOM Explorer. Instead, if you want to find objects using [Dynamic LINQ](https://dynamic-linq.net/expression-language) you have to bring up the **Find and replace** dialog by pressing CTRL+F.
 - If you close the **Expression Editor** you can bring it back by doubleclicking on the icon of an object in the **TOM Explorer**, or by choosing the **View > Expression Editor** menu option.
-- When using the default layout in Tabular Editor 3, the **Best Practice Analyzer** will be located as a tab next to the **TOM Explorer**. Here, you will also find the new **Data Refresh** view (which lets you view the queue of background refresh operations) and the **Macros** view (which lets you manage any macros that was previously saved from C# scripts).
+- When using the default layout in Tabular Editor 3, the **Best Practice Analyzer** will be located as a tab next to the **TOM Explorer**. Here, you will also find the new **Data Refresh** view (which lets you view the queue of background refresh operations) and the **Macros** view (which lets you manage any macros that were previously saved from C# scripts).
 - Tabular Editor 3 displays all DAX syntax and semantic errors in the new **Messages View**. In the default layout, this is located at the bottom left of the interface.
 - In addition, Tabular Editor 3 includes **VertiPaq Analyzer** (which you may be familiar with from [DAX Studio](https://daxstudio.org/)).
 - As a final note, Tabular Editor 3 introduces the concept of **documents**, which is just a generic term for C# scripts, DAX scripts, DAX Queries, Diagrams, Data Previews and Pivot Grids.
@@ -83,7 +83,7 @@ For more information, see <xref:user-interface>.
 
 ### New DAX editor and semantic capabilities
 
-Tabular Editor 3 features its very own DAX parsing engine (aka. the "semantic analyzer"), which means that the tool now understands the semantics of any DAX code in your model. This engine is also used to power our DAX editor (codename "Daxscilla"), to enable features such as syntax highligting, automatic formatting, code completion, calltips, refactoring and much more. Of course the editor is highly configurable, allowing you to tweak it to match your preferred DAX coding style.
+Tabular Editor 3 features its very own DAX parsing engine (aka. the "semantic analyzer"), which means that the tool now understands the semantics of any DAX code in your model. This engine is also used to power our DAX editor (codename "Daxscilla"), to enable features such as syntax highlighting, automatic formatting, code completion, calltips, refactoring and much more. Of course the editor is highly configurable, allowing you to tweak it to match your preferred DAX coding style.
 
 To learn more about the new DAX editor, see <xref:dax-editor>.
 

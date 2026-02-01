@@ -84,7 +84,7 @@ To make scripts reusable, it is rarely enough to be able to reference objects in
 Info("You have currently selected: " + Selected.Measures.Count + " measure(s).");
 ```
 
-The `Selected` object by itself is a collection of all objects currently selected, including objects within selected display folders. In addition, the `Selected` object contains multiple properties that makes it easy to refer to specific object types, such as the `.Measures` property shown in the example above. In general, these properties exist in both a plural (`.Measures`) and a singular (`.Measure`) form. The former is a collection that you can iterate through, and which will be empty if the current selection does not contain any objects of that type, where as the latter is a reference to the currently selected object, if and only if exactly one of that type of object is selected.
+The `Selected` object by itself is a collection of all objects currently selected, including objects within selected display folders. In addition, the `Selected` object contains multiple properties that makes it easy to refer to specific object types, such as the `.Measures` property shown in the example above. In general, these properties exist in both a plural (`.Measures`) and a singular (`.Measure`) form. The former is a collection that you can iterate through, and which will be empty if the current selection does not contain any objects of that type, whereas the latter is a reference to the currently selected object, if and only if exactly one of that type of object is selected.
 
 The @useful-script-snippets article contains many examples of scripts that use the `Selected` object to perform various tasks.
 
