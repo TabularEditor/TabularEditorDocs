@@ -67,7 +67,7 @@ Unlike the [DAX Script feature](xrefid:dax-scripts), only the expression propert
 
 The "Apply" option has also been added to the right-click context menu.
 
-![Dax Query Apple Right Click](~/content/assets/images/features/dax_query_window/dax_query_apply_measure_right_click.png)
+![Dax Query Apply Right Click](~/content/assets/images/features/dax_query_window/dax_query_apply_measure_right_click.png)
 
 The shortcuts for these commands are:
 

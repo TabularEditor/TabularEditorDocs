@@ -217,7 +217,7 @@ If you have configured a native query, it may still be possible to configure and
 
    <img src="~/content/assets/images/tutorials/incremental-refresh-native-query-sql.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>incremental-refresh-native-query-formatted.png
 
-2. __Replace the Native Query String in the Source Expression:__ Copy the query and replace the existing query, which will be full of characters like (lf) (line feed), (cr) (carraige return) and (n) (new line). Doing this makes the query actually readable and editable without resorting to the Native Query user interface of Power BI Desktop.
+2. __Replace the Native Query String in the Source Expression:__ Copy the query and replace the existing query, which will be full of characters like (lf) (line feed), (cr) (carriage return) and (n) (new line). Doing this makes the query actually readable and editable without resorting to the Native Query user interface of Power BI Desktop.
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-native-query-unformatted.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>
 

@@ -69,9 +69,9 @@ Accidental spacebar presses during naming.
 
 Copy/paste from documents with formatting.
 
-### Cause 3: Dublicating objects
+### Cause 3: Duplicating objects
 
-When dublicating objects the name with have an added " copy" post-fixed. It is easy to miss deleting the space before "copy" 
+When duplicating objects the name will have an added " copy" post-fixed. It is easy to miss deleting the space before "copy" 
 
 ## Example
 

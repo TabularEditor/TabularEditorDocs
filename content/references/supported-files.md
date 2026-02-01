@@ -96,7 +96,7 @@ This format preserves the structure and properties of your objects, such as tabl
 
 This format has been supported in Tabular Editor from the early days and is a proven, though by Microsoft unsupported, method for storing your dataset objects as individual files. Thereby enabling developers to track changes in source control and collaborate on building semantic models.
 
-There is full compatibility between Tabular Editor 2 and 3 with regards to the the JSON file structure.
+There is full compatibility between Tabular Editor 2 and 3 with regards to the JSON file structure.
 
 In order to save a semantic model to JSON you must use the 'Save to Folder' option when saving the first time. Subsequent saves to a model loaded from a JSON structured model maintains the setting. it's always possible to convert a model that is in JSON to a .bim file using 'File > Save As'
 
@@ -104,7 +104,7 @@ In order to save a semantic model to JSON you must use the 'Save to Folder' opti
 ![Supported File Types JSON](~/content/assets/images/file-types/te3-supported-file-json.png)
 
 1. The overall model has a database json and each TOM headline has its own folder
-2. In tables, each table exist in its own folder
+2. In tables, each table exists in its own folder
 3. An individual table as a TableName json file with folders for measures, columns and partitions
 4. The measures on the table each have their own json file.
 
@@ -189,7 +189,7 @@ All supporting files can be saved individually using either Ctrl+S or 'File > Sa
 
 A .te3diag file is a file format that stores the diagram of a model created with TE3. 
 
-These file can be useful for documenting the model structure and logic for other developers who work on the same project. A .te3diag file can be saved in the same folder as the model file for easy access and reference.
+These files can be useful for documenting the model structure and logic for other developers who work on the same project. A .te3diag file can be saved in the same folder as the model file for easy access and reference.
 
 Diagram files are actually JSON that is stored in a Tabular Editor 3 extension.
 

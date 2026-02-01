@@ -82,7 +82,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
   ![File Menu New](~/content/assets/images/file-menu-new.png)
 
 > [!IMPORTANT]
-> The **New > Model...** option is not available in Tabular Editor 3 Desktop Edition, as this edition may only be used as an External Tool for Poewr BI Desktop. [More information](xref:editions).
+> The **New > Model...** option is not available in Tabular Editor 3 Desktop Edition, as this edition may only be used as an External Tool for Power BI Desktop. [More information](xref:editions).
 
 - **Open**: Opens a submenu with options for loading a data model from various sources, as well as on option for loading any other type of file. The submenu items are:
 

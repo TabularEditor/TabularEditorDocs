@@ -37,7 +37,7 @@ and Model.Database.CompatibilityLevel<>[CurrentMaxLevel]
 
 ### Automatic Fix
 
-The best practice rule includes an automatic fix that sets the Compatability Level to the highest avaliable that exist on the current installation of Tabular Editor 3. If you have an older version of Tabular Editor 3 installed you should update your installation. 
+The best practice rule includes an automatic fix that sets the Compatibility Level to the highest available that exists on the current installation of Tabular Editor 3. If you have an older version of Tabular Editor 3 installed you should update your installation. 
 
 ```csharp
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
@@ -54,7 +54,7 @@ Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 
 ### Cause 1: Model Created in Power BI Desktop
 
-Model created with in Power BI Desktop does not necesarily have the latest Compatability Level. 
+Model created with in Power BI Desktop does not necessarily have the latest Compatibility Level. 
 
 ### Cause 2: Model Created at Lower Level
 

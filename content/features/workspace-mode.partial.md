@@ -38,7 +38,7 @@ Leaving this checked, you will be prompted to connect to an instance of Analysis
 > [!IMPORTANT]
 > If you plan to deploy your workspace database to the Power BI Service XMLA endpoint, make sure you choose Compatibility Level 1609 (Power BI / Fabric) in the dialog above.
 
-After entering the Analysis Services server details and (optional) credentials, you are shown a list of all databases currently reciding on the server (or for a Power BI workspace, the list of datasets deployed to the workspace):
+After entering the Analysis Services server details and (optional) credentials, you are shown a list of all databases currently residing on the server (or for a Power BI workspace, the list of datasets deployed to the workspace):
 
 ![Select Workspace Database](~/content/assets/images/select-workspace-database.png)
 
