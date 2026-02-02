@@ -107,13 +107,19 @@ def compile_false_positive_patterns(false_positives: list[str]) -> list[re.Patte
     ]
 
 
-def strip_code_blocks(content: str) -> list[tuple[int, str]]:
+def strip_code_blocks(content: str, strip_inline: bool = True) -> list[tuple[int, str]]:
     """
     Return lines with code blocks removed.
 
     Returns list of (original_line_num, line_text) tuples,
     skipping lines inside fenced code blocks, indented code blocks,
     and YAML frontmatter.
+
+    Args:
+        content: The markdown content to process.
+        strip_inline: If True, also strip inline code (`code`). Set to False
+                      for repeated word detection to avoid false positives
+                      like "as `code` as" being detected as "as as".
     """
     # Strip UTF-8 BOM if present (appears at start of some files)
     if content.startswith("\ufeff"):
@@ -162,11 +168,14 @@ def strip_code_blocks(content: str) -> list[tuple[int, str]]:
         prev_blank = len(stripped) == 0
 
         if stripped:  # Non-empty, non-code line
-            # Strip inline code: handle both `code` and ``code with `backticks` inside``
-            # First handle double-backtick spans, then single-backtick spans
-            line_no_inline = re.sub(r"``[^`]+``", "", line)
-            line_no_inline = re.sub(r"`[^`]+`", "", line_no_inline)
-            result.append((line_num, line_no_inline))
+            if strip_inline:
+                # Strip inline code: handle both `code` and ``code with `backticks` inside``
+                # First handle double-backtick spans, then single-backtick spans
+                line_no_inline = re.sub(r"``[^`]+``", "", line)
+                line_no_inline = re.sub(r"`[^`]+`", "", line_no_inline)
+                result.append((line_num, line_no_inline))
+            else:
+                result.append((line_num, line))
 
     return result
 
@@ -201,6 +210,7 @@ def find_typos_in_lines(
 def find_repeated_words(
     file_path: Path,
     lines: list[tuple[int, str]],
+    fp_patterns: list[re.Pattern[str]],
 ) -> list[TypoMatch]:
     """Find repeated words like 'the the' or 'is is'."""
     matches: list[TypoMatch] = []
@@ -209,6 +219,10 @@ def find_repeated_words(
     repeated_pattern = re.compile(r"\b(\w{2,})\s+\1\b", re.IGNORECASE)
 
     for line_num, line in lines:
+        # Skip lines that match false positive patterns
+        if any(fp_pat.search(line) for fp_pat in fp_patterns):
+            continue
+
         # Use finditer to catch ALL repeated words on a line
         for match in repeated_pattern.finditer(line):
             matches.append(TypoMatch(
@@ -324,15 +338,17 @@ def main() -> int:
             print(f"Warning: Could not read {md_file}: {e}", file=sys.stderr)
             continue
 
-        # Strip code blocks and inline code
-        lines = strip_code_blocks(content)
+        # Strip code blocks and inline code for typo detection
+        lines_stripped = strip_code_blocks(content, strip_inline=True)
 
-        # Find typos (pass preprocessed lines)
-        matches = find_typos_in_lines(md_file, lines, compiled_typos, fp_patterns)
+        # Find typos (pass preprocessed lines with inline code stripped)
+        matches = find_typos_in_lines(md_file, lines_stripped, compiled_typos, fp_patterns)
         all_matches.extend(matches)
 
-        # Find repeated words (pass same preprocessed lines)
-        repeated = find_repeated_words(md_file, lines)
+        # For repeated words, keep inline code to avoid false positives
+        # like "as `code` as" being detected as "as as"
+        lines_with_inline = strip_code_blocks(content, strip_inline=False)
+        repeated = find_repeated_words(md_file, lines_with_inline, fp_patterns)
         all_matches.extend(repeated)
 
     # Report results

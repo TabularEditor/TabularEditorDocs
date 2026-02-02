@@ -47,7 +47,7 @@ Compatibility level support differs by platform (SSAS, Azure Analysis Services, 
 
 ## Update the compatibility level
 
-![Update Compatability Level](~/content/assets/images/how-to/updatecompatabilitylevel.gif)
+![Update Compatibility Level](~/content/assets/images/how-to/updatecompatabilitylevel.gif)
 
 ### Open your model
 

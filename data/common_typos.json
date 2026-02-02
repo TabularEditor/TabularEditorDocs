@@ -39,6 +39,9 @@
   "false_positives": [
     "table-bordered",
     "table-striped",
-    "table-condensed"
+    "table-condensed",
+    "Power Query query",
+    "Column column",
+    "Table table"
   ]
 }
