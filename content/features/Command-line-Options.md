@@ -304,8 +304,8 @@ The command line provides various details, depending on the switches used and an
 |Warning|-ANALYZE|... violates rule ...|Best Practice Analyzer results for rules of severity level 2.|
 |Error|-ANALYZE|... violates rule ...|Best Practice Analyzer results for rules of severity level 3 or higher.|
 |Error|-DEPLOY|Deployment failed! ...|Failure reason returned directly from Analysis Service instance (for example: Database not found, Database override not allowed, etc.)|
-|Information|-DEPLOY|Unprocessed object: ...|Objects that are in state "NoData" or "CalculationNeeded" after succesful deployment. Use the -W switch to treat these as Level=Warning.|
-|Warning|-DEPLOY|Object not in "Ready" state: ...|Objects that are in state "DependencyError", "EvaluationError" or "SemanticError" after succesful deployment. If using the -W switch, also includes objects in state "NoData" or "CalculationNeeded".|
-|Warning|-DEPLOY|Error on X:...|Objects containing invalid DAX after succesful deployment (measures, calculated columns, calculated tables, roles). Use the -E switch to treat these as Level=Error.|
+|Information|-DEPLOY|Unprocessed object: ...|Objects that are in state "NoData" or "CalculationNeeded" after successful deployment. Use the -W switch to treat these as Level=Warning.|
+|Warning|-DEPLOY|Object not in "Ready" state: ...|Objects that are in state "DependencyError", "EvaluationError" or "SemanticError" after successful deployment. If using the -W switch, also includes objects in state "NoData" or "CalculationNeeded".|
+|Warning|-DEPLOY|Error on X:...|Objects containing invalid DAX after successful deployment (measures, calculated columns, calculated tables, roles). Use the -E switch to treat these as Level=Error.|
 
 If any of the "Error" level outputs are encountered, Tabular Editor will return Exit Code = 1. Otherwise 0.

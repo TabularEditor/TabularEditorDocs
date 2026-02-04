@@ -39,7 +39,7 @@ If you want to use and existing database as your workspace database, simply sele
 
 To track the workspace settings for each model in your file system, Tabular Editor 3.0 introduces a new file of type .tmuo (short for Tabular Model User Options), which will be placed next to the Model.bim or Database.json file.
 
-The .tmuo file is just a simple json document with the following content:
+The .tmuo file is just a simple JSON document with the following content:
 
 ```json
 {

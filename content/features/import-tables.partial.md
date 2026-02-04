@@ -156,4 +156,4 @@ Using this technique, Tabular Editor 3 makes it possible to import and update ta
 
 ### Importing new tables through Analysis Services
 
-In order to import a table from a data source otherwise not suported, you can simply copy an existing table from that data source, modify the M expression on the partition query of the copied table, then save your changes to the workspace database and update the table schema as described above.
+In order to import a table from a data source otherwise not supported, you can simply copy an existing table from that data source, modify the M expression on the partition query of the copied table, then save your changes to the workspace database and update the table schema as described above.

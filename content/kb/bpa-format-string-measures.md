@@ -70,7 +70,7 @@ COUNTROWS('Orders')
 
 ### Cause 1: Missing Format Definition
 
-When creating a new measure the defualt state is to not have any format string set.
+When creating a new measure the default state is to not have any format string set.
 
 ### Cause 2: Copy/Paste from Calculated Columns
 

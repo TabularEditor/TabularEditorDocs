@@ -17,7 +17,7 @@ There are also other resources online with C# Scripts that are maintained by the
 
 
 ## Tabular Editor Versions
-The top of each article denotes script compatability in TE2.x (Tabular Editor 2) and/or TE3.x (Tabular Editor 3)
+The top of each article denotes script compatibility in TE2.x (Tabular Editor 2) and/or TE3.x (Tabular Editor 3)
 
 ### Scripting with Tabular Editor as a Power BI External Tool
 <br></br>

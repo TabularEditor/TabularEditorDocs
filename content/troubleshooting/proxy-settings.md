@@ -100,7 +100,7 @@ or if using Environment Variables, by setting the following:
 
 `<path to trace file>` must point to a file in a directory that exists. I.e. if you want the file to be written to `c:\temp\logs\as-auth.log`, you must ensure that the directory `c:\temp\logs` exists.
 
-The contents of this trace file is useful when contacting Microsoft support.
+The contents of this trace file are useful when contacting Microsoft support.
 
 > [!IMPORTANT]
 > You must restart Tabular Editor 3 after making changes to the **AnalysisServices.AppSettings.json** file, or after modifying environment variables.

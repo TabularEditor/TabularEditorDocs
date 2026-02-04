@@ -147,12 +147,12 @@ The toolbar allow you to show and hide different types of objects, toggling pers
 11. **Language Selector**  
    Allows switching between different languages for model metadata localization.
 
-12. **Colapse All**  
-   Collaps all nodes in the TOM Explorer tree view. 
+12. **Collapse All**  
+   Collapses all nodes in the TOM Explorer tree view. 
 
 13. **Search Bar**  
-12. **Colapse All**  
-   Collaps all nodes in the TOM Explorer tree view. 
+12. **Collapse All**  
+   Collapses all nodes in the TOM Explorer tree view. 
 
 13. **Search Bar**  
    Provides real-time filtering and navigation within the TOM Explorer. Type to search across all visible model objects.

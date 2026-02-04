@@ -106,7 +106,7 @@ Selected.Measures
         .Rename("Amount", "Value");
 ```
 
-This would replace any occurence of the word "Amount" with the word "Value" in the names of all currently selected measures.
+This would replace any occurrence of the word "Amount" with the word "Value" in the names of all currently selected measures.
 Alternatively, we may use the LINQ ForEach()-method, as described above, to include more advanced logic:
 
 ```csharp

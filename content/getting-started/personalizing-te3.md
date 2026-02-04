@@ -64,7 +64,7 @@ This option is only relevant for local instances of Analysis Services (i.e. msmd
 
 ##### *Refresh local Tabular Object Model metadata automatically* (enabled)
 
-When the tracing mechanism as described above is enabled, this option allows Tabular Editor to automatically refresh the model metadata when an external change is detected. This is useful if you often switch back and forth between Power BI Desktop and Tabular Editor 3, as this ensures that changes made in Power BI Desktop are automatically sync'ed to Tabular Editor.
+When the tracing mechanism as described above is enabled, this option allows Tabular Editor to automatically refresh the model metadata when an external change is detected. This is useful if you often switch back and forth between Power BI Desktop and Tabular Editor 3, as this ensures that changes made in Power BI Desktop are automatically synced to Tabular Editor.
 
 ##### *Cleanup orphaned Tabular Editor traces*
 
@@ -244,7 +244,7 @@ This setting allows you to change the casing used for keywords, such as `ORDER B
 
 ##### *Preferred function casing* (default = UPPER)
 
-This setting allows oyu to change the casing used for functions, such as `CALCULATE(...)`, `SUM(...)`, etc. This also applies when a function is inserted through the auto-complete feature.
+This setting allows you to change the casing used for functions, such as `CALCULATE(...)`, `SUM(...)`, etc. This also applies when a function is inserted through the auto-complete feature.
 
 ##### *Fix keyword/function casing* (enabled)
 
