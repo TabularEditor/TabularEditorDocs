@@ -134,6 +134,11 @@
       "redirect": "/references/FormatDax.html",
       "statusCode": 301
     },
+    {
+      "route": "/te3/logo.svg",
+      "redirect": "/logo.svg",
+      "statusCode": 301
+    }
   ],
   "responseOverrides": {
     "404": {

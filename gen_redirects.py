@@ -44,6 +44,7 @@ redirect_url: {value}
   <head>
     <meta charset="utf-8">
     <meta http-equiv="refresh" content="0;URL='{value}'">
+    <link rel="canonical" href="{value}">
   </head>
 </html>
 """)
