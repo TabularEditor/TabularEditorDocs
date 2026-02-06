@@ -157,24 +157,20 @@ Associated columns receive the same filter behavior as the primary column during
 
 ![Associated Columns panel in the Calendar Editor](~/content/assets/images/tutorials/calendar-associated-columns.png)
 
-> [!WARNING]
-> **Known limitation: Sort By columns and Associated columns**
->
-> &nbsp;
->
-> When a column is used as a **Sort By** column for a Primary time unit column, Analysis Services implicitly treats it as an Associated column. You should **not** explicitly add that Sort By column as an Associated column in the Calendar Editor, as this will cause an error from Analysis Services (duplicate mapping).
->
-> &nbsp;
->
-> For example, if you set `MonthName` as the Primary column for "Month of Year" and `MonthName` has `MonthNumber` configured as its Sort By column, then `MonthNumber` is implicitly associated. In this case, you do not need to (and should not) add `MonthNumber` as an explicit Associated column. The Sort By column will still provide the expected enhanced calendar behavior (including proper `REMOVEFILTERS()` handling) since the association is inferred.
->
-> &nbsp;
->
-> Note that this behavior is asymmetric: if you instead set the Sort By column (e.g., `MonthNumber`) as the Primary time unit column, then the display column (e.g., `MonthName`) is **not** automatically treated as Associated. In that scenario, you can explicitly add the display column as an Associated column if desired.
->
-> &nbsp;
->
-> A future version of Tabular Editor will add validation to prevent this configuration error.
+## Known limitations of the Calendar Editor
+- **Sort By columns and Associated columns**
+
+When a column is used as a **Sort By** column for a Primary time unit column, Analysis Services implicitly treats it as an Associated column. You should **not** explicitly add that Sort By column as an Associated column in the Calendar Editor, as this will cause an error from Analysis Services (duplicate mapping).
+
+For example, if you set `MonthName` as the Primary column for "Month of Year" and `MonthName` has `MonthNumber` configured as its Sort By column, then `MonthNumber` is implicitly associated. In this case, you do not need to (and should not) add `MonthNumber` as an explicit Associated column. The Sort By column will still provide the expected enhanced calendar behavior (including proper `REMOVEFILTERS()` handling) since the association is inferred.
+
+Note that this behavior is asymmetric: if you instead set the Sort By column (e.g., `MonthNumber`) as the Primary time unit column, then the display column (e.g., `MonthName`) is **not** automatically treated as Associated. In that scenario, you can explicitly add the display column as an Associated column if desired.
+
+- **Hidden columns are not displayed**
+
+Columns with their **Hidden** property set to `True` do not appear in the Calendar Editor's column dropdowns or in the Associated Columns and Time-Related Columns panels. This is unintended behavior, as hidden columns may still need to be used for calendar configuration (for example, numeric key columns used for sorting are often hidden from end users).
+
+A future version of Tabular Editor will address these limitations.
 
 ### Time-Related Columns
 
