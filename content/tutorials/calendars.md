@@ -176,6 +176,17 @@ Associated columns receive the same filter behavior as the primary column during
 >
 > A future version of Tabular Editor will add validation to prevent this configuration error.
 
+> [!WARNING]
+> **Known limitation: Hidden columns are not displayed**
+>
+> &nbsp;
+>
+> Columns with their **Hidden** property set to `True` do not appear in the Calendar Editor's column dropdowns or in the Associated Columns and Time-Related Columns panels. This is unintended behavior, as hidden columns may still need to be used for calendar configuration (for example, numeric key columns used for sorting are often hidden from end users).
+>
+> &nbsp;
+>
+> A future version of Tabular Editor will address this limitation.
+
 ### Time-Related Columns
 
 In addition to mapping columns to specific time unit categories, you can mark columns as **time-related**. Time-related columns are columns in your Date table that don't fit into a specific time unit category but should still receive special treatment during time intelligence calculations.
