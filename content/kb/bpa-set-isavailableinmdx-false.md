@@ -31,6 +31,9 @@ When a column has `IsAvailableInMDX` set to `true`, the Analysis Services engine
 
 By explicitly setting `IsAvailableInMDX` to `false` for these columns, you optimize the model for DAX-only scenarios, which is the primary query language for Power BI and modern Analysis Services models.
 
+> [!WARNING]
+> **Excel PivotTable Compatibility**: Setting `IsAvailableInMDX` to `false` prevents columns from being dragged to the rows or columns area of Excel PivotTables. Excel PivotTables generate MDX queries when connecting to Analysis Services Tabular models, and they require attribute hierarchies (which are only built when `IsAvailableInMDX = true`) to function properly. If your users need to analyze data using Excel PivotTables or other MDX-based tools, **do not** apply this rule to columns they need to access. For more details, see [Chris Webb's article on IsAvailableInMDX](https://blog.crossjoin.co.uk/2018/07/02/isavailableinmdx-ssas-tabular/).
+
 ## When This Rule Triggers
 
 The rule triggers when all of the following conditions are met:
