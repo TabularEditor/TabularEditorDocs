@@ -2,11 +2,11 @@
   "routes": [
     {
       "route": "/references/release-notes",
-      "redirect": "/references/release-notes/3_25_1.html",
+      "redirect": "/references/release-notes/3_25_3.html",
       "statusCode": 302
     },    {
       "route": "/te3/other/release-notes",
-      "redirect": "/references/release-notes/3_25_1.html",
+      "redirect": "/references/release-notes/3_25_3.html",
       "statusCode": 302
     },
     {
