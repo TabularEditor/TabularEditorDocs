@@ -101,7 +101,7 @@ applies_to:
 |Command|Shortcut|
 |---|---|
 |Go to definition|F12|
-|Peek definition|Alt+F12]
+|Peek definition|Alt+F12|
 |Refactor|Ctrl+R|
 |Show auto-complete|Ctrl+Space|
 |Show calltip|Ctrl+Shift+Space|

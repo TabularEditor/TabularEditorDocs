@@ -33,7 +33,7 @@ We consider the **highlighted** flavors of Analysis Services to be Enterprise-Ti
 
 Please refer to the matrix below for the full overview of supported scenarios:
 
-|Scenario / Edition|Desktop|Business|Enterprise
+|Scenario / Edition|Desktop|Business|Enterprise|
 |---|---|---|---|
 |External Tool for Power BI Desktop|<span class="emoji"><span class="emoji">&#10004;</span></span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Load/save model metadata to disk**|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
@@ -66,7 +66,7 @@ Specifically, [Azure AS Basic Tier and SQL Server Standard Edition does not supp
 
 Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake datasets](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#prerequisites), which is why Power BI models using this feature also requires TE3 Enterprise Edition.
 
-|Model type|Feature|Business|Enterprise
+|Model type|Feature|Business|Enterprise|
 |---|---|---|---|
 |Azure AS / SSAS|Perspectives|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 |Azure AS / SSAS|Multiple partitions|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
