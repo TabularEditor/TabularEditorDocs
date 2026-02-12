@@ -292,7 +292,7 @@ The command line provides various details, depending on the switches used and an
 |Error|(Any)|Error loading file: ...|The file is corrupt or does not contain valid TOM metadata in a JSON format|
 |Error|(Any)|Error loading model: ...|Not able to connect to the provided Analysis Services instance, database not found, database metadata corrupt or database not of a supported compatibility level|
 |Error|-SCRIPT|Specified script file not found||
-|Error|-SCRIPT|Script compilation errors:|Script contained invalid C# syntax. Details will be outputted on the following lines.
+|Error|-SCRIPT|Script compilation errors:|Script contained invalid C# syntax. Details will be outputted on the following lines.|
 |Error|-SCRIPT|Script execution error: ...|Unhandled exception when executing the script.|
 |Information|-SCRIPT|Script line #: ...|Use of the `Info(string)` or `Output(string)` methods within the script.|
 |Warning|-SCRIPT|Script warning: ...|Use of the `Warning(string)` method within the script.|
