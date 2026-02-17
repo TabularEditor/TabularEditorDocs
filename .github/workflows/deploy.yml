@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+      - releases/release_3_26_0
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+      - releases/release_3_26_0
 
 jobs:
   build_and_deploy_job:
