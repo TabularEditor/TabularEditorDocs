@@ -72,6 +72,7 @@ Tabular Editor may perform requests to online resources (web URLs) only in the f
   - https://westeurope.api.daxoptimizer.com/api
 - **Importing Best Practice Rules.** Tabular Editor has a feature that allows a user to specify an URL from which to retrieve a list of Best Practice rules in a JSON based format. This type of request only downloads the JSON data from the URL - no data is transmitted to the URL.
 - **Using C# scripts.** Tabular Editor allows users to write and execute code written in C#, for purposes of automation. Such a script may potentially connect to online resources, using C# language features and the .NET runtime. The user is always responsible for ensuring that executed code does not cause any unintended sharing of data. Tabular Editor ApS cannot be held liable for any damages, losses or leaks caused by the use of the C# scripting feature in general. Tabular Editor will never execute C# scripts without the explicit action of the user.
+- **What's New window.** When a user opens the What's New window in Tabular Editor, the tool retrieves the latest release notes from our documentation website at https://docs.tabulareditor.com. This request does not transmit any data.
 
 \***Any information we obtain through the license activation service, the usage telemetry or the error reports, is kept confidential. We will not share, publish or distribute the data collected in any way, shape or form.**
 
