@@ -83,6 +83,7 @@ To allow traffic to the above mentioned web requests, you'll have to whitelist:
 - DAX Formatter (Tabular Editor 2.x only): **https://www.daxformatter.com**
 - Import Best Practice Rules / C# Scripts: Depends on the context
 - DAX Optimizer: Endpoints listed above.
+- What's New: **https://docs.tabulareditor.com**
 
 > [!NOTE]
 > A system administrator may enforce certain [policies](xref:policies), which can be used to disable some or all of the features shown on the list above.
