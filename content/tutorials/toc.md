@@ -27,6 +27,7 @@
 # Advanced Modelling
 ## @udfs
 ## @calendars
+## @detail-rows-expression
 
 # Automation with C# Scripting
 ## @creating-macros
