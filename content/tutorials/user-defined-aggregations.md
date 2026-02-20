@@ -32,7 +32,7 @@ In this tutorial, you configure a user-defined aggregation for the `Orders` fact
 Before you begin, you should have:
 
 - Tabular Editor 2 or Tabular Editor 3
-- A Power BI or Analysis Services semantic model with at least one DirectQuery fact table
+- A Power BI or Analysis Services semantic model with at least one Import fact table
 - Basic familiarity with storage modes (Import, DirectQuery, Dual)
 
 ## How Aggregations Work
