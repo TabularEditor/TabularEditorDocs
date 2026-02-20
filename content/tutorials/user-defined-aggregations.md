@@ -71,7 +71,7 @@ The detail table is a copy of the original fact table, configured to query the s
 
 ### Duplicate the fact table
 
-Create a copy of the **Orders** table and name it **Order details**. In Tabular Editor, you can do this by selecting the **Orders** table and use the right-click context menu and select **Duplicate 1 table**.
+Create a copy of the **Orders** table and name it **Order details**. In Tabular Editor, you can do this by selecting the **Orders** table and using the right-click context menu to select **Duplicate 1 table**.
 
 ### Set the partition to DirectQuery
 
