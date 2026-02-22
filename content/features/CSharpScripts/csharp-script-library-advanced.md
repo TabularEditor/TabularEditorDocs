@@ -2,7 +2,7 @@
 uid: script-library-advanced
 title: Advanced C# Scripts
 author: Morten Lønskov
-updated: 2025-09-04
+updated: 2026-02-20
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -34,3 +34,4 @@ These are more advanced scripts with sophisticated functionalities requiring a m
 | [Add Databricks Metadata Descriptions](xref:script-add-databricks-metadata-descriptions) | Update table and column descriptions based on Databricks Unity Catalog | When you want to re-use Databricks table and column comments that have already been defined in Unity Catalog. |
 | [Convert DL/SQL to DL/OL](xref:script-convert-dlsql-to-dlol) | Changes the partitions of a Direct Lake over SQL model to Direct Lake over OneLake | Useful for easily migrating to Direct Lake over OneLake |
 | [Convert Import to DL/OL](xref:script-convert-dlsql-to-dlol) | Changes the partitions of a Import model to Direct Lake over OneLake | Useful for easily migrating to Direct Lake over OneLake |
+| [Implement User-defined Aggregations](xref:script-implement-user-defined-aggregations) | Automates the configuration of user-defined aggregations for a selected fact table. | When you want to implement the user-defined aggregations pattern without manually performing each configuration step. |
