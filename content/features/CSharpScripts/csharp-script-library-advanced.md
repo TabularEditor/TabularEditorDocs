@@ -24,7 +24,6 @@ These are more advanced scripts with sophisticated functionalities requiring a m
 | [Output Object Details in a Grid](xref:script-output-things) | Outputs object details in a grid view. | When you need to output object details in a grid view for inspection. |
 | [Create Date Table](xref:script-create-date-table) | Creates a formatted Date table based on selected Date columns in the model. | When you need to create a new date table based on a template. |
 | [Create M Parameter (Auto-Replace)](xref:script-create-and-replace-parameter) | Creates a new M Parameter and automatically adds it to M Partitions. | When you want to replace strings in multiple partitions (i.e. connection strings) with a dynamic M Parameter. |
-
 | [Format Power Query](xref:script-format-power-query) | Formats the Power Query of a selected M Partition by using the powerqueryformatter.com API. | When you have complex Power Query and need to make it more readable for reading or making changes. |
 | [Implement Incremental Refresh](xref:script-implement-incremental-refresh) | Configures Incremental Refresh automatically using parameters from a UI dialogue box. | When you need to implement incremental refresh but aren't comfortable with the configuration in the table settings. |
 | [Remove Measures with Errors](xref:script-remove-measures-with-error) | Creates a new M Parameter and automatically adds it to M Partitions. | When you want to replace strings in multiple partitions (i.e. connection strings) with a dynamic M Parameter. |
