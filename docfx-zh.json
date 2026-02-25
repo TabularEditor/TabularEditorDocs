@@ -1,0 +1,121 @@
+{
+    "rules": {
+        "InvalidAssemblyReference": "Suggestion",
+        "EmptyTocItemName": "Suggestion"
+    },
+    "build": {
+        "content": [
+            {
+                "files": "**/*.md",
+                "src": "localizedContent/zh/features",
+                "dest": "features"
+            },
+            {
+                "files": "**/*.md",
+                "src": "localizedContent/zh/getting-started",
+                "dest": "getting-started"
+            },
+            {
+                "files": "**/*.md",
+                "src": "localizedContent/zh/how-tos",
+                "dest": "how-tos"
+            },
+            {
+                "files": "**/*.md",
+                "src": "localizedContent/zh/references",
+                "dest": "references"
+            },
+            {
+                "files": "**/*.md",
+                "src": "localizedContent/zh/kb",
+                "dest": "kb"
+            },
+            {
+                "files": "**/*.md",
+                "src": "localizedContent/zh/security",
+                "dest": "security"
+            },
+            {
+                "files": "**/*.md",
+                "src": "localizedContent/zh/troubleshooting",
+                "dest": "troubleshooting"
+            },
+            {
+                "files": "**/*.md",
+                "src": "localizedContent/zh/tutorials",
+                "dest": "tutorials"
+            },
+            {
+                "files": "*.md",
+                "src": "localizedContent/zh"
+            },
+            {
+                "files": "toc.yml",
+                "src": "localizedContent/zh"
+            },
+            {
+                "files": "*",
+                "src": "localizedContent/zh/api",
+                "dest": "api"
+            }
+        ],
+        "template": [
+            "default",
+            "templates/tabulareditor"
+        ],
+        "resource": [
+            {
+                "files": "**",
+                "src": "content/assets/images",
+                "dest": "images"
+            },
+            {
+                "files": "**",
+                "src": "localizedContent/zh/assets/images",
+                "dest": "localizedContent/zh/assets/images"
+            },
+            {
+                "files": "**",
+                "src": "content/whats-new",
+                "dest": "whats-new"
+            },
+            {
+                "files": "**",
+                "src": "localizedContent/zh/whats-new",
+                "dest": "localizedContent/zh/whats-new"
+            },
+            {
+                "files": "*.html",
+                "src": "localizedContent/zh"
+            },
+            {
+                "files": "common/**/*.html",
+                "src": "content"
+            },
+            {
+                "files": "onboarding/**/*.html",
+                "src": "content"
+            },
+            {
+                "files": "te2/**/*.html",
+                "src": "content"
+            },
+            {
+                "files": "te3/**/*.html",
+                "src": "content"
+            }
+        ],
+        "globalMetadata": {
+            "_appTitle": "Tabular Editor Documentation",
+            "_enableSearch": true,
+            "_enableNewTab": true,
+            "_disableNavbar": true,
+            "_disableContribution": true
+        },
+        "markdownEngineName": "markdig",
+        "dest": "_site/zh",
+        "xrefService": [
+            "https://xref.docs.microsoft.com/query?uid={uid}"
+        ]
+    }
+}
