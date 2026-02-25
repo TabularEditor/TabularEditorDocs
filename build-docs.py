@@ -67,17 +67,10 @@ def get_available_languages() -> list[str]:
 
 def prepare_localized_content(lang: str) -> int:
     """Run prepare-localized-content.py for a language."""
+    description = f"Preparing {lang} content" + ("" if lang == "en" else " (English fallback)")
     return run_command(
         [sys.executable, "prepare-localized-content.py", lang],
-        f"Preparing {lang} content (English fallback)"
-    )
-
-
-def build_english() -> int:
-    """Build English documentation."""
-    return run_command(
-        ["docfx", "docfx.json", "--warningsAsErrors"],
-        "Building English documentation"
+        description
     )
 
 
@@ -90,7 +83,7 @@ def build_language(lang: str) -> int:
         print("Run 'python gen_redirects.py' first to generate configs.")
         return 1
     
-    # Prepare localized content (copy English fallbacks)
+    # Prepare content (copy from source for en, or fallbacks for other langs)
     result = prepare_localized_content(lang)
     if result != 0:
         return result
@@ -169,9 +162,9 @@ def main() -> int:
     if args.list:
         langs = get_available_languages()
         print("Available languages:")
-        print("  en (English) - default")
         for lang in langs:
-            print(f"  {lang}")
+            suffix = " (default)" if lang == "en" else ""
+            print(f"  {lang}{suffix}")
         return 0
     
     # Run gen_redirects.py first (unless skipped)
@@ -188,7 +181,7 @@ def main() -> int:
     
     if args.serve:
         # Build English only and serve
-        result = build_english()
+        result = build_language("en")
         if result != 0:
             return result
         
@@ -201,47 +194,42 @@ def main() -> int:
     
     if args.lang:
         # Build specific languages
-        build_en = "en" in args.lang
-        build_langs = [l for l in args.lang if l != "en"]
+        build_langs = args.lang
         
         # Validate languages
         for lang in build_langs:
             if lang not in available_langs:
-                print(f"Error: Language '{lang}' not found in localizedContent/")
+                print(f"Error: Language '{lang}' not found")
                 print(f"Available: {', '.join(available_langs)}")
                 return 1
     elif args.all or not args.lang:
         # Build all languages (default behavior)
-        build_en = True
         build_langs = available_langs
     else:
-        build_en = True
-        build_langs = []
+        build_langs = ["en"]
     
-    # Build English first (needed for API docs)
-    if build_en:
-        result = build_english()
-        if result != 0:
-            return result
-        
-        fix_xref_in_api()
+    # Ensure English is built first (needed for API docs)
+    if "en" in build_langs:
+        build_langs = ["en"] + [l for l in build_langs if l != "en"]
     
-    # Build localized languages
+    # Build all requested languages
     for lang in build_langs:
         result = build_language(lang)
         if result != 0:
             return result
+        
+        if lang == "en":
+            fix_xref_in_api()
     
-    # Copy API docs to localized sites
-    if build_langs and not args.no_api_copy:
-        copy_api_docs(build_langs)
+    # Copy API docs to localized sites (non-English)
+    non_en_langs = [l for l in build_langs if l != "en"]
+    if non_en_langs and not args.no_api_copy and "en" in build_langs:
+        copy_api_docs(non_en_langs)
     
     print(f"\n{'='*60}")
     print("  Build complete!")
     print(f"{'='*60}")
     print(f"Output: _site/")
-    if build_en:
-        print(f"  - en/ (English)")
     for lang in build_langs:
         print(f"  - {lang}/")
     

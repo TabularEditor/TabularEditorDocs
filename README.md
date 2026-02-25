@@ -35,13 +35,14 @@ python build-docs.py --serve
 ```
 
 ### Project Structure
-- `content/` - English source content
-- `localizedContent/{lang}/` - Localized builds for each language:
-  - `content/` - Translated content (markdown files, toc.yml, etc.)
-  - `docfx.json` - Generated config (gitignored)
+- `content/` - English source content (tracked in git)
+- `localizedContent/` - Build directories for all languages:
+  - `en/` - English build (fully generated, gitignored)
+  - `{lang}/` - Translated content for other languages:
+    - `content/` - Translated markdown files (tracked)
+    - `docfx.json` - Generated config (gitignored)
 - `docfx-template.json` - Base DocFX configuration template
-- `docfx.json` - Generated English config (do not edit)
-- `docfxTranslations/languages.json` - Language manifest
+- `docfxTranslations/languages.json` - Language manifest (generated)
 - `_site/` - Generated output (`en/`, `es/`, `zh/`, etc.)
 
 ### Adding a New Language
@@ -49,5 +50,5 @@ python build-docs.py --serve
 2. Add translated `.md` files to the content subdirectory
 3. Run `python build-docs.py --all` to generate configs and build
 
-> **Note:** English content is automatically used as fallback for missing translations. The `docfx.json` files inside `localizedContent/{lang}/` are auto-generated and gitignored.
+> **Note:** English content from `content/` is automatically copied to `localizedContent/en/content/` during build. For other languages, English content is used as fallback for missing translations.
 

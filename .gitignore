@@ -1,4 +1,3 @@
-/docfx.json
 /docfxTranslations/
 
 ###############
@@ -21,7 +20,10 @@ target/
 /_site/*
 !/_site/staticwebapp.config.json
 
-# Localized content - only ignore generated docfx.json files
+# Localized content
+# - /localizedContent/en/ is fully generated (content + config)
+# - Other languages only have docfx.json generated (translations are tracked)
+/localizedContent/en/
 /localizedContent/*/docfx.json
 
 .vscode/

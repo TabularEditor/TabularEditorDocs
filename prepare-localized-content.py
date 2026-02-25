@@ -39,6 +39,35 @@ ROOT_FILES = [
 ]
 
 
+def copy_all_files(src_dir: str, dest_dir: str) -> int:
+    """
+    Copy all files from src_dir to dest_dir, overwriting existing files.
+    Used for English where everything is source of truth.
+    Returns the number of files copied.
+    """
+    copied_count = 0
+    
+    if not os.path.exists(src_dir):
+        print(f"  Warning: Source directory '{src_dir}' does not exist, skipping.")
+        return 0
+    
+    os.makedirs(dest_dir, exist_ok=True)
+    
+    for root, dirs, files in os.walk(src_dir):
+        rel_path = os.path.relpath(root, src_dir)
+        target_root = os.path.join(dest_dir, rel_path) if rel_path != "." else dest_dir
+        
+        os.makedirs(target_root, exist_ok=True)
+        
+        for file in files:
+            src_file = os.path.join(root, file)
+            dest_file = os.path.join(target_root, file)
+            shutil.copy2(src_file, dest_file)
+            copied_count += 1
+    
+    return copied_count
+
+
 def copy_missing_files(src_dir: str, dest_dir: str) -> int:
     """
     Copy files from src_dir to dest_dir if they don't already exist in dest_dir.
@@ -86,14 +115,21 @@ def main(args: list[str]) -> int:
     localized_base = os.path.join("localizedContent", lang_code)
     localized_dir = os.path.join(localized_base, "content")
     
-    if not os.path.exists(localized_dir):
-        print(f"Creating localized content directory: {localized_dir}")
-        os.makedirs(localized_dir, exist_ok=True)
+    # For English, the entire localizedContent/en/content/ is generated
+    # We need to copy everything from content/ (overwriting any existing)
+    is_english = lang_code == "en"
     
-    print(f"Preparing '{lang_code}' localized content with English fallbacks...")
+    if is_english:
+        print(f"Preparing '{lang_code}' content (copying all from source)...")
+    else:
+        print(f"Preparing '{lang_code}' localized content with English fallbacks...")
+    
     print(f"Source: {content_dir}")
     print(f"Destination: {localized_dir}")
     print()
+    
+    # Ensure destination exists
+    os.makedirs(localized_dir, exist_ok=True)
     
     total_copied = 0
     
@@ -102,10 +138,22 @@ def main(args: list[str]) -> int:
         src = os.path.join(content_dir, dir_name)
         dest = os.path.join(localized_dir, dir_name)
         print(f"Processing {dir_name}/...")
-        copied = copy_missing_files(src, dest)
-        total_copied += copied
-        if copied == 0:
-            print("  All files already present (translations or previous fallback)")
+        
+        if is_english:
+            # For English: overwrite everything
+            if os.path.exists(dest):
+                shutil.rmtree(dest)
+            if os.path.exists(src):
+                shutil.copytree(src, dest)
+                copied = sum(len(files) for _, _, files in os.walk(dest))
+                total_copied += copied
+                print(f"  Copied {copied} files")
+        else:
+            # For other languages: preserve translations
+            copied = copy_missing_files(src, dest)
+            total_copied += copied
+            if copied == 0:
+                print("  All files already present (translations or previous fallback)")
     
     # Copy shared directories (assets, whats-new, api) - always overwrite to stay in sync
     for dir_name in SHARED_DIRS:
@@ -124,13 +172,14 @@ def main(args: list[str]) -> int:
         src_file = os.path.join(content_dir, file_name)
         dest_file = os.path.join(localized_dir, file_name)
         
-        if os.path.exists(src_file) and not os.path.exists(dest_file):
-            shutil.copy2(src_file, dest_file)
-            total_copied += 1
-            print(f"  Copied: {file_name}")
+        if os.path.exists(src_file):
+            if is_english or not os.path.exists(dest_file):
+                shutil.copy2(src_file, dest_file)
+                total_copied += 1
+                print(f"  Copied: {file_name}")
     
     print()
-    print(f"Done! Copied {total_copied} fallback files for '{lang_code}'.")
+    print(f"Done! Copied {total_copied} files for '{lang_code}'.")
     
     return 0
 

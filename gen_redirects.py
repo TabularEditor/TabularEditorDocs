@@ -4,9 +4,9 @@
 Generate docfx configuration files and redirects.
 
 This script:
-1. Generates docfx.json for English with redirects
+1. Generates localizedContent/en/docfx.json for English with redirects
 2. Scans localizedContent/ for language folders
-3. Generates docfxTranslations/docfx-{lang}.json for each language
+3. Generates localizedContent/{lang}/docfx.json for each language
 4. Creates docfxTranslations/languages.json manifest
 
 Usage: python gen_redirects.py
@@ -38,7 +38,7 @@ SHARED_DIRS = ["assets", "whats-new", "api"]
 
 
 def get_available_languages() -> list[str]:
-    """Scan localizedContent/ folder and return list of language codes."""
+    """Scan localizedContent/ folder and return list of language codes (excluding 'en')."""
     localized_dir = "localizedContent"
     if not os.path.exists(localized_dir):
         return []
@@ -46,7 +46,8 @@ def get_available_languages() -> list[str]:
     languages = []
     for item in os.listdir(localized_dir):
         item_path = os.path.join(localized_dir, item)
-        if os.path.isdir(item_path) and len(item) <= 5:  # Language codes are short (e.g., es, zh, pt-br)
+        # Exclude 'en' since it's generated, not stored
+        if os.path.isdir(item_path) and len(item) <= 5 and item != "en":
             languages.append(item)
     
     return sorted(languages)
@@ -100,27 +101,65 @@ def generate_localized_config(template: dict, lang: str) -> dict:
     return config
 
 
-def generate_redirects_config(template: dict, redirects_data: dict[str, str]) -> dict:
-    """Generate English docfx.json with redirects added."""
+def generate_redirects_config(template: dict, redirects_data: dict[str, str], en_content_dir: str) -> dict:
+    """Generate English docfx.json with redirects added.
+    
+    Args:
+        template: Base docfx config template
+        redirects_data: Dict of redirect paths to target URLs
+        en_content_dir: Directory for English content (localizedContent/en/content/)
+    """
     config = copy.deepcopy(template)
+    
+    # Fix metadata paths (API generation) - need to go up two levels to reach project root
+    # DocFX doesn't support ../ in file globs, so we use src to set the base directory
+    if "metadata" in config:
+        for meta in config["metadata"]:
+            # Fix src paths - move ../ to src, keep files as relative globs
+            if "src" in meta:
+                new_src = []
+                for src in meta["src"]:
+                    if "files" in src:
+                        # Transform files like "content/_apiSource/*.dll" to use src
+                        new_files = []
+                        for f in src["files"]:
+                            # Extract directory and file pattern
+                            # e.g., "content/_apiSource/*.dll" -> src="../..", files="content/_apiSource/*.dll"
+                            new_files.append(f)
+                        new_src.append({
+                            "src": "../..",
+                            "files": new_files
+                        })
+                    else:
+                        new_src.append(src)
+                meta["src"] = new_src
+            # Fix dest path
+            if "dest" in meta:
+                meta["dest"] = f"../../{meta['dest']}"
+            # Fix filter path
+            if "filter" in meta:
+                meta["filter"] = f"../../{meta['filter']}"
     
     dirs = dict[str, list[str]]()
     
     for key, value in redirects_data.items():
-        dir_path = posixpath.dirname(key)
+        # Redirect paths are relative to content/, convert to en_content_dir
+        # e.g., content/old-page.md -> localizedContent/en/content/old-page.md
+        dest_path = key.replace("content/", f"{en_content_dir}/", 1)
+        dir_path = posixpath.dirname(dest_path)
         ext = posixpath.splitext(key)[1]
         
         if dir_path in dirs:
-            dirs[dir_path].append(key)
+            dirs[dir_path].append(dest_path)
         else:
-            dirs[dir_path] = [key]
+            dirs[dir_path] = [dest_path]
         
         os.makedirs(dir_path, exist_ok=True)
         
         if ext == ".md":
-            content: list[Any] = config["build"]["content"]
-            content.append({"files": posixpath.relpath(key, "content"), "src": "content"})
-            with open(key, mode="w", encoding="utf-8") as f:
+            content_list: list[Any] = config["build"]["content"]
+            content_list.append({"files": posixpath.relpath(key, "content"), "src": "content"})
+            with open(dest_path, mode="w", encoding="utf-8") as f:
                 f.write(f"""---
 redirect_url: {value}
 ---
@@ -128,7 +167,7 @@ redirect_url: {value}
         elif ext == ".html":
             resource: list[Any] = config["build"]["resource"]
             resource.append({"files": posixpath.relpath(key, "content"), "src": "content"})
-            with open(key, mode="w", encoding="utf-8") as f:
+            with open(dest_path, mode="w", encoding="utf-8") as f:
                 f.write(f"""<!DOCTYPE html>
 <html>
   <head>
@@ -141,23 +180,24 @@ redirect_url: {value}
         else:
             print("Unknown file type:", key, file=sys.stderr)
     
-    # Update .gitignore files for redirect files
-    for dir_path, files in dirs.items():
-        gitignore_path = posixpath.join(dir_path, ".gitignore")
-        with open(gitignore_path, "a") as f:
-            f.write("\n")
-            f.writelines("/" + posixpath.basename(file) + "\n" for file in files)
-            f.write("/.gitignore\n")
+    # Set English output destination (relative to localizedContent/en/)
+    config["build"]["dest"] = "../../_site/en"
     
-    # Set English output destination
-    config["build"]["dest"] = "_site/en"
+    # Update template paths - need to go up two levels to reach project root
+    if "template" in config["build"]:
+        new_templates = []
+        for t in config["build"]["template"]:
+            if t == "default":
+                new_templates.append(t)
+            else:
+                new_templates.append(f"../../{t}")
+        config["build"]["template"] = new_templates
     
     return config
 
 
 def main(args: list[str]) -> int:
     config_input_path = "docfx-template.json"
-    config_output_path = "docfx.json"
     redirects_path = "redirects.json"
     translations_dir = "docfxTranslations"
     localized_content_dir = "localizedContent"
@@ -170,42 +210,48 @@ def main(args: list[str]) -> int:
     with open(redirects_path) as f:
         redirects_data: dict[str, str] = json.load(f)
     
-    # Generate English config with redirects
-    print("Generating docfx.json (English)...")
-    english_config = generate_redirects_config(template, redirects_data)
-    with open(config_output_path, "w") as f:
+    # Create English directory
+    en_dir = os.path.join(localized_content_dir, "en")
+    en_content_dir = os.path.join(en_dir, "content")
+    os.makedirs(en_content_dir, exist_ok=True)
+    
+    # Generate English config with redirects in localizedContent/en/
+    en_config_path = os.path.join(en_dir, "docfx.json")
+    print(f"Generating {en_config_path} (English)...")
+    english_config = generate_redirects_config(template, redirects_data, en_content_dir)
+    with open(en_config_path, "w") as f:
         json.dump(english_config, f, indent=4)
     
-    # Get available languages from localizedContent/
+    # Get available languages from localizedContent/ (excludes 'en')
     languages = get_available_languages()
-    print(f"Found {len(languages)} language(s) in localizedContent/: {', '.join(languages) if languages else 'none'}")
+    all_languages = ["en"] + languages
+    print(f"Found {len(all_languages)} language(s): {', '.join(all_languages)}")
     
-    if languages:
-        # Create docfxTranslations directory for manifest (keeps backward compat)
-        os.makedirs(translations_dir, exist_ok=True)
+    # Create docfxTranslations directory for manifest
+    os.makedirs(translations_dir, exist_ok=True)
+    
+    # Generate config for each non-English language
+    for lang in languages:
+        lang_dir = os.path.join(localized_content_dir, lang)
+        os.makedirs(lang_dir, exist_ok=True)
         
-        # Generate config for each language - placed inside localizedContent/{lang}/
-        for lang in languages:
-            lang_dir = os.path.join(localized_content_dir, lang)
-            os.makedirs(lang_dir, exist_ok=True)
-            
-            config_path = os.path.join(lang_dir, "docfx.json")
-            print(f"Generating {config_path}...")
-            
-            localized_config = generate_localized_config(template, lang)
-            with open(config_path, "w") as f:
-                json.dump(localized_config, f, indent=4)
+        config_path = os.path.join(lang_dir, "docfx.json")
+        print(f"Generating {config_path}...")
         
-        # Generate languages.json manifest
-        manifest = {
-            "languages": languages,
-            "default": "en",
-            "generated": True
-        }
-        manifest_path = os.path.join(translations_dir, "languages.json")
-        with open(manifest_path, "w") as f:
-            json.dump(manifest, f, indent=4)
-        print(f"Generated {manifest_path}")
+        localized_config = generate_localized_config(template, lang)
+        with open(config_path, "w") as f:
+            json.dump(localized_config, f, indent=4)
+    
+    # Generate languages.json manifest (includes 'en')
+    manifest = {
+        "languages": all_languages,
+        "default": "en",
+        "generated": True
+    }
+    manifest_path = os.path.join(translations_dir, "languages.json")
+    with open(manifest_path, "w") as f:
+        json.dump(manifest, f, indent=4)
+    print(f"Generated {manifest_path}")
     
     print("Done!")
     return 0
