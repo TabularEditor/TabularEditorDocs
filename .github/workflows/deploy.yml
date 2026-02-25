@@ -18,38 +18,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Generate redirects
-        run: |
-          chmod +x gen_redirects.py
-          ./gen_redirects.py
-      - name: Build English Documentation
-        uses: nunit/docfx-action@v4.1.0
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          args: docfx.json --warningsAsErrors
-      - name: Replace Shared Xref in API HTML
-        run: |
-          sudo chmod -R u+w _site/en/api
-          sudo find _site/en/api -type f -name "*.html" -exec sed -i 's|<a class="xref" href="TabularEditor.Shared.html">Shared</a>|Shared|g' {} +
-        shell: bash
-      - name: Prepare Spanish Content (English fallback)
-        run: |
-          chmod +x prepare-localized-content.py
-          python3 prepare-localized-content.py es
-      - name: Build Spanish Documentation
-        uses: nunit/docfx-action@v4.1.0
-        with:
-          args: docfx-es.json
-      - name: Prepare Chinese Content (English fallback)
-        run: python3 prepare-localized-content.py zh
-      - name: Build Chinese Documentation
-        uses: nunit/docfx-action@v4.1.0
-        with:
-          args: docfx-zh.json
-      - name: Copy API docs to localized sites
-        run: |
-          cp -r _site/en/api _site/es/api
-          cp -r _site/en/api _site/zh/api
-        shell: bash
+          python-version: '3.11'
+      - name: Install DocFX
+        run: dotnet tool install -g docfx
+      - name: Build all documentation
+        run: python build-docs.py --all
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1

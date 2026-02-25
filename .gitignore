@@ -1,4 +1,5 @@
 /docfx.json
+/docfxTranslations/
 
 ###############
 #    folder   #
@@ -19,6 +20,10 @@ artifacts/
 target/
 /_site/*
 !/_site/staticwebapp.config.json
+
+# Localized content - only ignore generated docfx.json files
+/localizedContent/*/docfx.json
+
 .vscode/
 .vs/
 

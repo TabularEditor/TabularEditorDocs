@@ -81,7 +81,10 @@ def main(args: list[str]) -> int:
     
     lang_code = args[1]
     content_dir = "content"
-    localized_dir = os.path.join("localizedContent", lang_code)
+    # Structure: localizedContent/{lang}/content/
+    # This allows docfx.json in localizedContent/{lang}/ to resolve ~/content/... paths
+    localized_base = os.path.join("localizedContent", lang_code)
+    localized_dir = os.path.join(localized_base, "content")
     
     if not os.path.exists(localized_dir):
         print(f"Creating localized content directory: {localized_dir}")
@@ -115,7 +118,7 @@ def main(args: list[str]) -> int:
             shutil.copytree(src, dest)
             print(f"  Copied {dir_name}/ (shared resources)")
 
-    # Copy root-level files
+    # Copy root-level files to content/ directory
     print("Processing root files...")
     for file_name in ROOT_FILES:
         src_file = os.path.join(content_dir, file_name)
