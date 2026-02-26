@@ -52,7 +52,11 @@ def get_available_languages() -> list[str]:
     if manifest_path.exists():
         with open(manifest_path) as f:
             data = json.load(f)
-            return data.get("languages", [])
+            # Handle both simple array and rich metadata formats
+            languages = data.get("languages", [])
+            if languages and isinstance(languages[0], dict):
+                return [lang["code"] for lang in languages]
+            return languages
     
     # Fallback: scan localizedContent/ directly
     localized_dir = Path("localizedContent")
@@ -93,6 +97,37 @@ def build_language(lang: str) -> int:
         ["docfx", config_path],
         f"Building {lang} documentation"
     )
+
+
+def copy_languages_manifest() -> int:
+    """Copy languages.json to _site/ root for runtime access."""
+    manifest_src = Path("docfxTranslations/languages.json")
+    manifest_dest = Path("_site/languages.json")
+    
+    if not manifest_src.exists():
+        print("Warning: languages.json not found, skipping copy")
+        return 0
+    
+    # Ensure _site directory exists
+    manifest_dest.parent.mkdir(parents=True, exist_ok=True)
+    
+    shutil.copy(manifest_src, manifest_dest)
+    print(f"Copied languages.json to _site/")
+    return 0
+
+
+def copy_404_to_root() -> int:
+    """Copy 404.html from English site to _site/ root for SWA fallback."""
+    src_404 = Path("_site/en/404.html")
+    dest_404 = Path("_site/404.html")
+    
+    if not src_404.exists():
+        print("Warning: _site/en/404.html not found, skipping 404 copy")
+        return 0
+    
+    shutil.copy(src_404, dest_404)
+    print(f"Copied 404.html to _site/ root")
+    return 0
 
 
 def copy_api_docs(languages: list[str]) -> int:
@@ -175,6 +210,14 @@ def main() -> int:
         )
         if result != 0:
             return result
+        
+        # Generate languages manifest
+        result = run_command(
+            [sys.executable, "gen_languages.py"],
+            "Generating languages manifest"
+        )
+        if result != 0:
+            return result
     
     # Determine which languages to build
     available_langs = get_available_languages()
@@ -186,6 +229,7 @@ def main() -> int:
             return result
         
         fix_xref_in_api()
+        copy_languages_manifest()
         
         return run_command(
             ["docfx", "serve", "_site/en"],
@@ -225,6 +269,18 @@ def main() -> int:
     non_en_langs = [l for l in build_langs if l != "en"]
     if non_en_langs and not args.no_api_copy and "en" in build_langs:
         copy_api_docs(non_en_langs)
+    
+    # Copy languages manifest to _site root
+    copy_languages_manifest()
+    
+    # Copy 404.html to site root for SWA fallback
+    copy_404_to_root()
+    
+    # Generate staticwebapp.config.json for Azure SWA routing
+    run_command(
+        [sys.executable, "gen_staticwebapp_config.py"],
+        "Generating staticwebapp.config.json"
+    )
     
     print(f"\n{'='*60}")
     print("  Build complete!")
