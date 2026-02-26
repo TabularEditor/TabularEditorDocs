@@ -11,32 +11,13 @@ import os
 import shutil
 import sys
 
+from config_loader import get_content_directories, get_shared_directories, get_root_files
 
-# Content directories that should be localized
-CONTENT_DIRS = [
-    "features",
-    "getting-started",
-    "how-tos",
-    "references",
-    "kb",
-    "security",
-    "troubleshooting",
-    "tutorials",
-    "whats-new",
-]
 
-# Shared directories that should be copied (not translated, just needed for relative paths)
-SHARED_DIRS = [
-    "assets",
-    "api",
-]
-
-# Root-level files that should be localized
-ROOT_FILES = [
-    "index.md",
-    "toc.yml",
-    "404.html",
-]
+# Load directories from centralized config
+CONTENT_DIRS = get_content_directories()
+SHARED_DIRS = get_shared_directories()
+ROOT_FILES = get_root_files()
 
 
 def copy_all_files(src_dir: str, dest_dir: str) -> int:

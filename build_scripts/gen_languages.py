@@ -6,11 +6,11 @@ Language manifest generator for multi-language documentation.
 Scans localizedContent/ directory and generates languages.json manifest
 with rich metadata for each available language.
 
-Language metadata is loaded from docfxTranslations/language-metadata.json.
+Language metadata is loaded from metadata/language-metadata.json.
 Unknown languages fall back to using the code as the display name.
 
 Usage:
-    python gen_languages.py              # Generate to docfxTranslations/
+    python gen_languages.py              # Generate to metadata/
     python gen_languages.py --output .   # Generate to current directory
 """
 
@@ -20,10 +20,12 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 
+from config_loader import get_default_language
+
 
 # Default paths
-METADATA_FILE = "docfxTranslations/language-metadata.json"
-DEFAULT_LANGUAGE = "en"
+METADATA_FILE = "metadata/language-metadata.json"
+DEFAULT_LANGUAGE = get_default_language()
 
 # Cached metadata (loaded on first use)
 _language_metadata: dict | None = None
@@ -125,8 +127,8 @@ def main():
     )
     parser.add_argument(
         "--output", "-o",
-        default="docfxTranslations",
-        help="Output directory for languages.json (default: docfxTranslations)"
+        default="metadata",
+        help="Output directory for languages.json (default: metadata)"
     )
     parser.add_argument(
         "--localized-dir", "-l",

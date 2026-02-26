@@ -145,10 +145,28 @@
                 const languages = manifest.languages || [];
                 const langCodes = languages.map(l => typeof l === 'string' ? l : l.code);
                 
-                // Determine home language
-                const homeLink = document.getElementById('home-link');
+                // Check if the first path segment looks like a language code
                 const isValidLangFormat = requestedLang.length <= 5 && /^[a-z-]+$/i.test(requestedLang);
                 const isSupported = isValidLangFormat && langCodes.includes(requestedLang.toLowerCase());
+                
+                // If path doesn't start with any known or plausible language code, redirect to /en/...
+                // This handles legacy URLs like /features/x.html → /en/features/x.html
+                if (!isValidLangFormat || !langCodes.includes(requestedLang.toLowerCase())) {
+                    const englishUrl = '/en' + window.location.pathname + window.location.search + window.location.hash;
+                    // Check if the English path might exist before redirecting
+                    try {
+                        const check = await fetch(englishUrl, { method: 'HEAD' });
+                        if (check.ok) {
+                            window.location.replace(englishUrl);
+                            return;
+                        }
+                    } catch (e) {
+                        // Continue to show 404 page
+                    }
+                }
+                
+                // Determine home language
+                const homeLink = document.getElementById('home-link');
                 
                 // Set home link: supported language → that language, otherwise → English
                 homeLink.href = isSupported ? `/${requestedLang.toLowerCase()}/` : '/en/';

@@ -22,20 +22,12 @@ import sys
 import traceback
 from typing import Any
 
-# Content directories that need path replacement for localized builds
-CONTENT_DIRS = [
-    "features",
-    "getting-started",
-    "how-tos",
-    "references",
-    "kb",
-    "security",
-    "troubleshooting",
-    "tutorials",
-]
+from config_loader import get_content_directories, get_shared_directories, get_client_redirects
 
-# Shared directories (assets, whats-new, api)
-SHARED_DIRS = ["assets", "whats-new", "api"]
+
+# Load directories from centralized config
+CONTENT_DIRS = get_content_directories()
+SHARED_DIRS = get_shared_directories()
 
 
 def get_available_languages() -> list[str]:
@@ -199,16 +191,22 @@ redirect_url: {value}
 
 def main(args: list[str]) -> int:
     config_input_path = "docfx-template.json"
-    redirects_path = "redirects.json"
     localized_content_dir = "localizedContent"
     
     # Load template
     with open(config_input_path) as f:
         template = json.load(f)
     
-    # Load redirects
-    with open(redirects_path) as f:
-        redirects_data: dict[str, str] = json.load(f)
+    # Load redirects from metadata/redirects.json
+    # Keys are in format '/path.html', need to convert to 'content/path.html'
+    client_redirects = get_client_redirects()
+    redirects_data: dict[str, str] = {}
+    for src, target in client_redirects.items():
+        # Convert '/path.html' to 'content/path.html'
+        content_key = 'content' + src if src.startswith('/') else 'content/' + src
+        redirects_data[content_key] = target
+    
+    print(f"Loaded {len(redirects_data)} client redirects from metadata/redirects.json")
     
     # Create English directory
     en_dir = os.path.join(localized_content_dir, "en")

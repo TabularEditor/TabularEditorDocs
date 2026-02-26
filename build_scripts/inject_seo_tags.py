@@ -21,12 +21,14 @@ import re
 from pathlib import Path
 from typing import Optional
 
+from config_loader import get_default_language
+
 
 # Default base URL for the documentation site
 DEFAULT_BASE_URL = "https://docs.tabulareditor.com"
 
-# Default language (used for x-default hreflang)
-DEFAULT_LANGUAGE = "en"
+# Default language (used for x-default hreflang) - loaded from config
+DEFAULT_LANGUAGE = get_default_language()
 
 
 def load_languages(site_dir: Path) -> list[dict]:

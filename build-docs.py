@@ -46,8 +46,8 @@ def run_command(cmd: list[str], description: str, check: bool = True) -> int:
 
 
 def get_available_languages() -> list[str]:
-    """Get list of available languages from docfxTranslations/languages.json or scan localizedContent/."""
-    manifest_path = Path("docfxTranslations/languages.json")
+    """Get list of available languages from metadata/languages.json or scan localizedContent/."""
+    manifest_path = Path("metadata/languages.json")
     
     if manifest_path.exists():
         with open(manifest_path) as f:
@@ -101,7 +101,7 @@ def build_language(lang: str) -> int:
 
 def copy_languages_manifest() -> int:
     """Copy languages.json to _site/ root for runtime access."""
-    manifest_src = Path("docfxTranslations/languages.json")
+    manifest_src = Path("metadata/languages.json")
     manifest_dest = Path("_site/languages.json")
     
     if not manifest_src.exists():

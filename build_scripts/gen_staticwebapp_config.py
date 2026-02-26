@@ -20,57 +20,19 @@ import os
 from pathlib import Path
 from typing import Any
 
-
-# Content directories that need wildcard migration redirects
-CONTENT_DIRECTORIES = [
-    "features",
-    "getting-started", 
-    "how-tos",
-    "references",
-    "tutorials",
-    "api",
-    "kb",
-    "security",
-    "troubleshooting",
-    "images",
-    "whats-new",
-]
-
-# Legacy shortcut redirects (manually maintained)
-# These are short URLs that redirect to full paths
-LEGACY_SHORTCUTS = {
-    "/tmdl": "/en/features/tmdl.html",
-    "/roslyn": "/en/how-tos/Advanced-Scripting.html#compiling-with-roslyn",
-    "/eula": "/en/security/te3-eula.html",
-    "/tmuo": "/en/references/user-options.html",
-    "/workspace": "/en/tutorials/workspace-mode.html",
-    "/privacy-policy.html": "/en/security/privacy-policy.html",
-    "/user-options.html": "/en/references/user-options.html",
-    "/Advanced-Scripting.html": "/en/how-tos/Advanced-Scripting.html",
-    "/Best-Practice-Analyzer.html": "/en/features/Best-Practice-Analyzer.html",
-    "/Importing-Tables.html": "/en/how-tos/Importing-Tables.html",
-    "/Workspace-Database.html": "/en/tutorials/workspace-mode.html",
-    "/Useful-script-snippets.html": "/en/features/Useful-script-snippets.html",
-    "/Command-line-Options.html": "/en/features/Command-line-Options.html",
-    "/Power-BI-Desktop-Integration.html": "/en/getting-started/Power-BI-Desktop-Integration.html",
-    "/Custom-Actions.html": "/en/tutorials/creating-macros.html",
-    "/FormatDax.html": "/en/references/FormatDax.html",
-    "/common/Datasets/direct-lake-dataset.html": "/en/features/Semantic-Model/direct-lake-sql-model.html",
-    "/other/downloads.html": "/en/references/downloads.html",
-    "/te3/downloads.html": "/en/references/downloads.html",
-    "/te3/logo.svg": "/en/logo.svg",
-    # Old ReadTheDocs-style paths
-    "/projects/te3/en/latest": "/en/",
-    "/projects/te3": "/en/",
-    "/projects/te3/en/latest/editions.html": "/en/getting-started/editions.html",
-    "/projects/te3/en/latest/security-privacy.html": "/en/security/security-privacy.html",
-    "/projects/te3/en/latest/downloads.html": "/en/references/downloads.html",
-    "/projects/te3/en/latest/getting-started.html": "/en/getting-started/getting-started.html",
-}
+from config_loader import get_redirect_directories, get_legacy_shortcuts, get_default_language
 
 
-def generate_config(languages: list[str], default_lang: str = "en") -> dict[str, Any]:
+# Load from centralized config
+CONTENT_DIRECTORIES = get_redirect_directories()
+LEGACY_SHORTCUTS = get_legacy_shortcuts()
+DEFAULT_LANGUAGE = get_default_language()
+
+
+def generate_config(languages: list[str], default_lang: str | None = None) -> dict[str, Any]:
     """Generate the staticwebapp.config.json content."""
+    if default_lang is None:
+        default_lang = DEFAULT_LANGUAGE
     routes: list[dict[str, Any]] = []
     
     # 1. Root redirects (301 for SEO)
@@ -87,23 +49,21 @@ def generate_config(languages: list[str], default_lang: str = "en") -> dict[str,
     
     # 2. Release notes special handling (302 - dynamic target)
     # These point to the latest release notes which changes over time
-    routes.append({
-        "route": "/*/references/release-notes",
-        "redirect": "/:1/references/release-history.html",
-        "statusCode": 302
-    })
+    # Generate explicit routes per language since Azure SWA doesn't support segment capture
+    for lang in languages:
+        routes.append({
+            "route": f"/{lang}/references/release-notes",
+            "redirect": f"/{lang}/references/release-history.html",
+            "statusCode": 302
+        })
+        routes.append({
+            "route": f"/{lang}/te3/other/release-notes",
+            "redirect": f"/{lang}/references/release-history.html",
+            "statusCode": 302
+        })
+    # Also handle non-prefixed paths
     routes.append({
         "route": "/references/release-notes",
-        "redirect": f"/{default_lang}/references/release-history.html",
-        "statusCode": 302
-    })
-    routes.append({
-        "route": "/*/te3/other/release-notes",
-        "redirect": "/:1/references/release-history.html",
-        "statusCode": 302
-    })
-    routes.append({
-        "route": "/te3/other/release-notes",
         "redirect": f"/{default_lang}/references/release-history.html",
         "statusCode": 302
     })
@@ -116,14 +76,14 @@ def generate_config(languages: list[str], default_lang: str = "en") -> dict[str,
             "statusCode": 301
         })
     
-    # 4. Directory wildcard migration redirects (301)
-    # These redirect old non-language-prefixed URLs to /en/
-    for directory in CONTENT_DIRECTORIES:
-        routes.append({
-            "route": f"/{directory}/*",
-            "redirect": f"/{default_lang}/{directory}/:splat",
-            "statusCode": 301
-        })
+    # 4. Directory wildcard migration (fallback to 404.html)
+    # Note: Azure SWA doesn't support wildcard capture in redirect targets.
+    # Non-prefixed URLs like /features/x.html will fall through to 404.html,
+    # which uses redirects.json to perform meta-refresh redirects.
+    # This is SEO-acceptable as a 302 + client redirect for legacy URLs.
+    #
+    # For high-traffic legacy pages, add explicit routes to legacyShortcuts
+    # in build-config.json for proper 301 server-side redirects.
     
     # Build final config
     # Note: 404.html is copied to site root during build for language-aware fallback
@@ -142,7 +102,7 @@ def generate_config(languages: list[str], default_lang: str = "en") -> dict[str,
 def load_languages() -> list[str]:
     """Load supported languages from languages.json manifest."""
     manifest_paths = [
-        Path("docfxTranslations/languages.json"),
+        Path("metadata/languages.json"),
         Path("_site/languages.json"),
     ]
     
@@ -177,8 +137,8 @@ def main():
     )
     parser.add_argument(
         "--default-lang", "-d",
-        default="en",
-        help="Default language for fallback (default: en)"
+        default=DEFAULT_LANGUAGE,
+        help=f"Default language for fallback (default: {DEFAULT_LANGUAGE})"
     )
     
     args = parser.parse_args()
