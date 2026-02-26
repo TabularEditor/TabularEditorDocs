@@ -17,6 +17,7 @@ This section contains comprehensive tutorials for learning Tabular Editor.
 - @data-security-about - Row-level and object-level security
 - @incremental-refresh-about - Large dataset management
 - @detail-rows-expression - Configuring drillthrough details
+- @user-defined-aggregations - Optimizing query performance with aggregations
 
 ---
 
