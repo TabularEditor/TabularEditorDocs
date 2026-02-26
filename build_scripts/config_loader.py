@@ -7,6 +7,7 @@ Loads build-config.json, redirects.json, and language-metadata.json from metadat
 Provides consistent access to directories, files, and settings across all scripts.
 """
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -157,3 +158,40 @@ def get_default_language(config: dict | None = None) -> str:
     if config is None:
         config = load_build_config()
     return config.get("defaultLanguage", "en")
+
+
+def compute_file_hash(file_path: Path | str) -> str:
+    """Compute SHA256 hash of a file's contents.
+    
+    Returns a hex string prefixed with 'sha256:' for clarity.
+    Returns empty string if file doesn't exist.
+    """
+    file_path = Path(file_path)
+    
+    if not file_path.exists():
+        return ""
+    
+    sha256_hash = hashlib.sha256()
+    with open(file_path, "rb") as f:
+        # Read in chunks for large files
+        for chunk in iter(lambda: f.read(8192), b""):
+            sha256_hash.update(chunk)
+    
+    return f"sha256:{sha256_hash.hexdigest()}"
+
+
+def get_all_content_files(content_dir: Path | str) -> list[Path]:
+    """Get all content files (markdown, yaml) from a content directory.
+    
+    Returns list of paths relative to the content directory.
+    """
+    content_dir = Path(content_dir)
+    
+    if not content_dir.exists():
+        return []
+    
+    files = []
+    for pattern in ["**/*.md", "**/*.yml", "**/*.yaml"]:
+        files.extend(content_dir.glob(pattern))
+    
+    return sorted(files)

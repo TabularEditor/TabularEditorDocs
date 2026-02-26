@@ -70,10 +70,19 @@ def get_available_languages() -> list[str]:
 
 
 def prepare_localized_content(lang: str) -> int:
-    """Run prepare-localized-content.py for a language."""
-    description = f"Preparing {lang} content" + ("" if lang == "en" else " (English fallback)")
+    """Run sync-localized-content.py for a language.
+    
+    For English: copies all source content
+    For other languages: syncs with translation tracking, 
+                         falls back to English for outdated/missing files
+    """
+    if lang == "en":
+        description = "Syncing English content from source"
+    else:
+        description = f"Syncing {lang} content (fallback to English for outdated)"
+    
     return run_command(
-        [sys.executable, "build_scripts/prepare-localized-content.py", lang],
+        [sys.executable, "build_scripts/sync-localized-content.py", "--sync", lang],
         description
     )
 
