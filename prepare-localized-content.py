@@ -22,12 +22,12 @@ CONTENT_DIRS = [
     "security",
     "troubleshooting",
     "tutorials",
+    "whats-new",
 ]
 
 # Shared directories that should be copied (not translated, just needed for relative paths)
 SHARED_DIRS = [
     "assets",
-    "whats-new",
     "api",
 ]
 
