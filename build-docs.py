@@ -73,7 +73,7 @@ def prepare_localized_content(lang: str) -> int:
     """Run prepare-localized-content.py for a language."""
     description = f"Preparing {lang} content" + ("" if lang == "en" else " (English fallback)")
     return run_command(
-        [sys.executable, "prepare-localized-content.py", lang],
+        [sys.executable, "build_scripts/prepare-localized-content.py", lang],
         description
     )
 
@@ -205,7 +205,7 @@ def main() -> int:
     # Run gen_redirects.py first (unless skipped)
     if not args.skip_gen:
         result = run_command(
-            [sys.executable, "gen_redirects.py"],
+            [sys.executable, "build_scripts/gen_redirects.py"],
             "Generating docfx configurations"
         )
         if result != 0:
@@ -213,7 +213,7 @@ def main() -> int:
         
         # Generate languages manifest
         result = run_command(
-            [sys.executable, "gen_languages.py"],
+            [sys.executable, "build_scripts/gen_languages.py"],
             "Generating languages manifest"
         )
         if result != 0:
@@ -276,9 +276,16 @@ def main() -> int:
     # Copy 404.html to site root for SWA fallback
     copy_404_to_root()
     
+    # Inject SEO tags (hreflang, canonical) into HTML files for built languages
+    for lang in build_langs:
+        run_command(
+            [sys.executable, "build_scripts/inject_seo_tags.py", "--lang", lang],
+            f"Injecting SEO tags for {lang}"
+        )
+    
     # Generate staticwebapp.config.json for Azure SWA routing
     run_command(
-        [sys.executable, "gen_staticwebapp_config.py"],
+        [sys.executable, "build_scripts/gen_staticwebapp_config.py"],
         "Generating staticwebapp.config.json"
     )
     

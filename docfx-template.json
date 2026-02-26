@@ -41,6 +41,7 @@
         ],
         "globalMetadata": {
             "_appTitle": "Tabular Editor Documentation",
+            "_baseUrl": "https://docs.tabulareditor.com",
             "_enableSearch": true,
             "_enableNewTab": true,
             "_disableNavbar": true,
