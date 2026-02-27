@@ -28,8 +28,22 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Install DocFX
         run: dotnet tool install -g docfx
+      - name: Generate configs
+        run: |
+          python build_scripts/gen_redirects.py
+          python build_scripts/gen_languages.py
+      - name: Generate API metadata
+        run: docfx metadata localizedContent/en/docfx.json --logLevel verbose
+      - name: Verify API files generated
+        run: |
+          if (!(Test-Path "content/api/toc.yml")) {
+            Write-Error "API metadata generation failed - toc.yml not found"
+            exit 1
+          }
+          Write-Host "API files generated: $((Get-ChildItem content/api/*.yml).Count) YAML files"
+        shell: pwsh
       - name: Build all documentation
-        run: python build-docs.py --all
+        run: python build-docs.py --all --skip-gen
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
