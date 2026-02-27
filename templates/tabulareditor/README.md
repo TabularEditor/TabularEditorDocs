@@ -113,6 +113,14 @@ And temporary for the forked repository.
 rsync -av --exclude='src' --exclude='tools' ./templates/tabulareditor ../TabularEditorDocsFork/templates/
 ```
 
+For windows
+
+```bash
+npm run build
+
+robocopy "<yourpath>\templates\tabulareditor" "<yourpath>\TabularEditorDocs\templates\tabulareditor" /E /XD src tools /MIR
+```
+
 ## Additional Files
 
 - **`tabulareditor/src/hubspot`**: Contains rewritten Sass and TypeScript files based on the HubSpot theme.

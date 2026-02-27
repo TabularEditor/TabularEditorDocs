@@ -21,9 +21,6 @@ target/
 /_site/
 
 # Localized content
-# - /localizedContent/en/ is fully generated (content + config)
-# - Other languages only have docfx.json generated (translations are tracked)
-# - .translation-status.json tracks translation state and should be committed
 /localizedContent/en/
 /localizedContent/*/docfx.json
 !/localizedContent/*/.translation-status.json
