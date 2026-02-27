@@ -139,6 +139,20 @@ def copy_404_to_root() -> int:
     return 0
 
 
+def copy_index_to_root() -> int:
+    """Copy index.html redirect from content to _site/ root for SWA validation."""
+    src_index = Path("content/index.html")
+    dest_index = Path("_site/index.html")
+    
+    if not src_index.exists():
+        print("Warning: content/index.html not found, skipping index copy")
+        return 0
+    
+    shutil.copy(src_index, dest_index)
+    print(f"Copied index.html to _site/ root")
+    return 0
+
+
 def copy_api_docs(languages: list[str]) -> int:
     """Copy API docs from English to localized sites."""
     en_api = Path("_site/en/api")
@@ -291,6 +305,9 @@ def main() -> int:
     
     # Copy 404.html to site root for SWA fallback
     copy_404_to_root()
+    
+    # Copy index.html to site root for SWA validation
+    copy_index_to_root()
     
     # Inject SEO tags (hreflang, canonical) into HTML files for built languages
     for lang in build_langs:
