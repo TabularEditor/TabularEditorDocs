@@ -16,5 +16,9 @@
   {
     "source": "/content/toc.yml",
     "translation": "/localizedContent/%two_letters_code%/content/toc.yml"
+  },
+  {
+    "source": "/content/_ui-strings.json",
+    "translation": "/localizedContent/%two_letters_code%/content/_ui-strings.json"
   }
 ]

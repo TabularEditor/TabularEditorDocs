@@ -37,7 +37,8 @@
         "resource": [
             { "files": "**", "src": "content/assets/images", "dest": "images" },
             { "files": "**", "src": "content/whats-new", "dest": "whats-new" },
-            { "files": "*.html", "src": "content" } 
+            { "files": "*.html", "src": "content" },
+            { "files": "_ui-strings.json", "src": "content" }
         ],
         "globalMetadata": {
             "_appTitle": "Tabular Editor Documentation",

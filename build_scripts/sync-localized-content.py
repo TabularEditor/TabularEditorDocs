@@ -111,7 +111,7 @@ def get_source_files() -> dict[str, str]:
         dir_path = CONTENT_DIR / dir_name
         if dir_path.exists():
             for file_path in dir_path.rglob("*"):
-                if file_path.is_file() and file_path.suffix in [".md", ".yml", ".yaml"]:
+                if file_path.is_file() and file_path.suffix in [".md", ".yml", ".yaml", ".json"]:
                     rel_path = str(file_path.relative_to(CONTENT_DIR)).replace("\\", "/")
                     files[rel_path] = compute_file_hash(file_path)
     

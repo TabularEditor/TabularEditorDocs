@@ -28,7 +28,8 @@
     "files": [
       "index.md",
       "toc.yml",
-      "404.html"
+      "404.html",
+      "_ui-strings.json"
     ]
   },
   "redirectDirectories": {
