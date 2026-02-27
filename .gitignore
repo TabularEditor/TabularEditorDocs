@@ -18,8 +18,7 @@
 .NuGet/
 artifacts/
 target/
-/_site/*
-!/_site/staticwebapp.config.json
+/_site/
 
 # Localized content
 # - /localizedContent/en/ is fully generated (content + config)

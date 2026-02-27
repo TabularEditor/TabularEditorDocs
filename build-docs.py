@@ -240,6 +240,13 @@ def main() -> int:
         fix_xref_in_api()
         copy_languages_manifest()
         
+        # Also copy to _site/en/ for local serving (docfx serve serves from en/)
+        manifest_src = Path("metadata/languages.json")
+        manifest_dest = Path("_site/en/languages.json")
+        if manifest_src.exists():
+            shutil.copy(manifest_src, manifest_dest)
+            print("Copied languages.json to _site/en/")
+        
         return run_command(
             ["docfx", "serve", "_site/en"],
             "Serving documentation locally"

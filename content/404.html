@@ -149,20 +149,13 @@
                 const isValidLangFormat = requestedLang.length <= 5 && /^[a-z-]+$/i.test(requestedLang);
                 const isSupported = isValidLangFormat && langCodes.includes(requestedLang.toLowerCase());
                 
-                // If path doesn't start with any known or plausible language code, redirect to /en/...
+                // If path doesn't start with any known language code, redirect to /en/...
                 // This handles legacy URLs like /features/x.html → /en/features/x.html
-                if (!isValidLangFormat || !langCodes.includes(requestedLang.toLowerCase())) {
+                if (!isValidLangFormat || !isSupported) {
                     const englishUrl = '/en' + window.location.pathname + window.location.search + window.location.hash;
-                    // Check if the English path might exist before redirecting
-                    try {
-                        const check = await fetch(englishUrl, { method: 'HEAD' });
-                        if (check.ok) {
-                            window.location.replace(englishUrl);
-                            return;
-                        }
-                    } catch (e) {
-                        // Continue to show 404 page
-                    }
+                    // Redirect immediately - don't check if path exists (avoids CORS/HEAD issues)
+                    window.location.replace(englishUrl);
+                    return;
                 }
                 
                 // Determine home language
