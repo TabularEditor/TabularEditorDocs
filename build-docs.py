@@ -175,6 +175,29 @@ def copy_api_docs(languages: list[str]) -> int:
     return 0
 
 
+def copy_api_content_for_build(lang: str) -> int:
+    """Copy API source content from English to localized content folder before build.
+    
+    This ensures non-English builds have the API YAML files needed to generate toc.json.
+    """
+    en_api_content = Path("localizedContent/en/content/api")
+    dest_api_content = Path(f"localizedContent/{lang}/content/api")
+    
+    if not en_api_content.exists():
+        print(f"Warning: English API content not found at {en_api_content}")
+        return 0
+    
+    # Remove existing api folder if it exists
+    if dest_api_content.exists():
+        shutil.rmtree(dest_api_content)
+    
+    # Copy API content from English
+    shutil.copytree(en_api_content, dest_api_content)
+    print(f"  Copied API content to {dest_api_content}")
+    
+    return 0
+
+
 def fix_xref_in_api() -> int:
     """Fix shared xref links in API HTML files."""
     api_dir = Path("_site/en/api")
@@ -288,6 +311,10 @@ def main() -> int:
     
     # Build all requested languages
     for lang in build_langs:
+        # For non-English languages, copy API content from English before building
+        if lang != "en" and "en" in build_langs:
+            copy_api_content_for_build(lang)
+        
         result = build_language(lang)
         if result != 0:
             return result
