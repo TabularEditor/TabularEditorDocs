@@ -30,7 +30,6 @@ def load_build_config(config_path: Path | str | None = None) -> dict[str, Any]:
     - contentDirectories: directories with translatable content
     - sharedDirectories: assets/api that aren't translated
     - rootFiles: root-level files (index.md, toc.yml, etc.)
-    - redirectDirectories: directories needing wildcard redirects
     """
     global _build_config
     
@@ -102,13 +101,6 @@ def get_root_files(config: dict | None = None) -> list[str]:
     if config is None:
         config = load_build_config()
     return config.get("rootFiles", {}).get("files", [])
-
-
-def get_redirect_directories(config: dict | None = None) -> list[str]:
-    """Get list of directories needing wildcard redirects."""
-    if config is None:
-        config = load_build_config()
-    return config.get("redirectDirectories", {}).get("directories", [])
 
 
 def get_legacy_shortcuts(config: dict | None = None) -> dict[str, str]:

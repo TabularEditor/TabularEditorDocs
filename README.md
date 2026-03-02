@@ -74,10 +74,12 @@ TEDoc/
 │   ├── inject_seo_tags.py
 │   └── sync-localized-content.py
 ├── content/                   # English source content (tracked in git)
+│   └── _ui-strings.json       # English UI strings (header, footer, banners)
 ├── localizedContent/          # Build directories for all languages
 │   ├── en/                    # English build (generated, gitignored)
 │   └── {lang}/                # Translated content
-│       ├── content/           # Translated markdown files (tracked)
+│       ├── content/           # Translated markdown and UI strings (tracked)
+│       │   └── _ui-strings.json  # Translated UI strings for this language
 │       └── docfx.json         # Generated config (gitignored)
 ├── metadata/
 │   ├── languages.json         # Language manifest (generated)
@@ -96,7 +98,43 @@ TEDoc/
 1. Create `localizedContent/{lang}/content/` folder (e.g., `fr/content/`)
 2. Add the language entry to `metadata/language-metadata.json` with name and nativeName
 3. Add translated `.md` files to the content subdirectory
-4. Run `python build-docs.py --all` to generate configs and build. Language will be added dynamically to language picker. 
+4. Add a translated `_ui-strings.json` to the content subdirectory (see [Translating UI Strings](#translating-ui-strings) below). If no translation is provided, an automatic fallback will be generated.
+5. Run `python build-docs.py --all` to generate configs and build. Language will be added dynamically to language picker.
 
-> **Note:** English content from `content/` is automatically copied to `localizedContent/en/content/` during build. For other languages, English content is used as fallback for missing translations.
+> **Note:** English content from `content/` is automatically copied to `localizedContent/en/content/` during build. For other languages, English content is used as fallback for missing translations. This includes `_ui-strings.json` — if no translated version exists, English UI strings are used.
+
+# Translating UI Strings
+
+The `_ui-strings.json` file controls the text of site-wide UI elements that are not part of the documentation content itself: the header navigation, header buttons, footer text, and the AI translation warning banner. These strings are applied at runtime by the JavaScript bundle for non-English pages.
+
+The English source is at `content/_ui-strings.json`. To provide translations for a language, create `localizedContent/{lang}/content/_ui-strings.json` with the same keys and translated values.
+
+If a key is missing from a language's file, or no `_ui-strings.json` exists at all, the English value is used as fallback.
+
+## Available Keys
+
+| Key | English value | Element |
+|-----|--------------|---------|
+| `aiTranslationWarning` | `This content has been translated by AI...` | Warning banner shown on translated pages |
+| `header.nav.pricing` | `Pricing` | Header nav link |
+| `header.nav.download` | `Download` | Header nav link |
+| `header.nav.learn` | `Learn` | Header nav link |
+| `header.nav.resources` | `Resources` | Header nav dropdown toggle |
+| `header.nav.blog` | `Blog` | Resources dropdown item |
+| `header.nav.newsletter` | `Newsletter` | Resources dropdown item |
+| `header.nav.publications` | `Publications` | Resources dropdown item |
+| `header.nav.documentation` | `Documentation` | Resources dropdown item |
+| `header.nav.supportCommunity` | `Support community` | Resources dropdown item |
+| `header.nav.contactUs` | `Contact Us` | Header nav link |
+| `header.button1` | `Free trial` | Primary header CTA button |
+| `header.button2` | `Main page` | Secondary header button |
+| `footer.heading` | `Ready to get started?` | Footer section heading |
+| `footer.button1` | `Try Tabular Editor 3 for free` | Footer CTA button |
+| `footer.button2` | `Buy Tabular Editor 3` | Footer CTA button |
+| `footer.aboutUs` | `About us` | Footer left link |
+| `footer.contactUs` | `Contact us` | Footer left link |
+| `footer.technicalSupport` | `Technical Support` | Footer left link |
+| `footer.privacyPolicy` | `Privacy & Cookie policy` | Footer bottom link |
+| `footer.termsConditions` | `Terms & Conditions` | Footer bottom link |
+| `footer.licenseTerms` | `License terms` | Footer bottom link |
 

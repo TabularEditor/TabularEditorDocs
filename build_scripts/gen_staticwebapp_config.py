@@ -3,10 +3,13 @@
 """
 Generate staticwebapp.config.json for Azure Static Web Apps.
 
-This script creates server-side 301 redirects for:
-1. Root URLs (/, /index.html) → /en/
-2. Legacy shortcut URLs (/tmdl, /roslyn, etc.) → /en/...
-3. Migration wildcards (/features/* → /en/features/*)
+This script creates server-side redirects for:
+1. Root URLs (/, /index.html) → /en/ (301)
+2. Release notes aliases → /en/references/release-history.html (302)
+3. Legacy shortcut URLs (/tmdl, /roslyn, etc.) → /en/... (301)
+
+Note: Legacy directory wildcards (/features/*, etc.) are NOT handled here.
+They fall through to 404.html which performs client-side meta-refresh redirects.
 
 Usage:
     python gen_staticwebapp_config.py                    # Generate config
@@ -16,15 +19,13 @@ Usage:
 
 import argparse
 import json
-import os
 from pathlib import Path
 from typing import Any
 
-from config_loader import get_redirect_directories, get_legacy_shortcuts, get_default_language
+from config_loader import get_legacy_shortcuts, get_default_language
 
 
 # Load from centralized config
-CONTENT_DIRECTORIES = get_redirect_directories()
 LEGACY_SHORTCUTS = get_legacy_shortcuts()
 DEFAULT_LANGUAGE = get_default_language()
 
@@ -151,11 +152,11 @@ def main():
     # Generate config
     config = generate_config(languages, args.default_lang)
     
+    release_notes_count = len(languages) * 2 + 1
     print(f"\nGenerated {len(config['routes'])} routes:")
     print(f"  - Root redirects: 2")
-    print(f"  - Release notes: 4")
+    print(f"  - Release notes: {release_notes_count}")
     print(f"  - Legacy shortcuts: {len(LEGACY_SHORTCUTS)}")
-    print(f"  - Directory wildcards: {len(CONTENT_DIRECTORIES)}")
     
     if args.dry_run:
         print("\n--- DRY RUN: Config preview ---")

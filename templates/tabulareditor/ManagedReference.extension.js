@@ -6,56 +6,68 @@ exports.preTransform = function (model) {
     mainMenu: [
       {
         text: "Pricing",
-        url: "https://tabulareditor.com/pricing"
+        url: "https://tabulareditor.com/pricing",
+        uiStringKey: "header.nav.pricing"
       },
       {
         text: "Download",
-        url: "https://tabulareditor.com/downloads"
+        url: "https://tabulareditor.com/downloads",
+        uiStringKey: "header.nav.download"
       },
       {
         text: "Learn",
-        url: "https://tabulareditor.com/learn"
+        url: "https://tabulareditor.com/learn",
+        uiStringKey: "header.nav.learn"
       },
       {
         text: "Resources" ,
         url: "/",
+        uiStringKey: "header.nav.resources",
         subMenu: {
           items: [
             {
               text: "Blog",
-              url: "https://tabulareditor.com/blog"
+              url: "https://tabulareditor.com/blog",
+              uiStringKey: "header.nav.blog"
             },
             {
               text: "Newsletter",
-              url: "https://tabulareditor.com/newsletter"
+              url: "https://tabulareditor.com/newsletter",
+              uiStringKey: "header.nav.newsletter"
             },
             {
               text: "Publications",
-              url: "https://tabulareditor.com/publications"
+              url: "https://tabulareditor.com/publications",
+              uiStringKey: "header.nav.publications"
             },
             {
               text: "Documentation",
-              url: "https://docs.tabulareditor.com/?tabs=TE3"
+              url: "https://docs.tabulareditor.com/?tabs=TE3",
+              uiStringKey: "header.nav.documentation"
             },
             {
               text: "Support community",
-              url: "https://github.com/TabularEditor/TabularEditor3"
+              url: "https://github.com/TabularEditor/TabularEditor3",
+              uiStringKey: "header.nav.supportCommunity"
             }
           ]
         }
       },
       {
         text: "Contact Us",
-        url: "https://tabulareditor.com/contact"
+        url: "https://tabulareditor.com/contact",
+        uiStringKey: "header.nav.contactUs"
       }
     ],
     button1: {
       text: "Free trial",
-      url: "https://www.tabulareditor.com/downloads"
+      url: "https://www.tabulareditor.com/downloads",
+      uiStringKey: "header.button1"
     },
     button2: {
       text: "Sign in",
-      url: "https://www.tabulareditor.com"
+      url: "https://www.tabulareditor.com",
+      uiStringKey: "header.button2"
     },
   }
 
@@ -63,27 +75,32 @@ exports.preTransform = function (model) {
     buttons: [
       {
         text: "Try Tabular Editor 3 for free",
-        url: "https://www.tabulareditor.com/downloads"
+        url: "https://www.tabulareditor.com/downloads",
+        uiStringKey: "footer.button1"
       },
       {
         text: "Buy Tabular Editor 3",
-        url: "https://www.tabulareditor.com/pricing"
+        url: "https://www.tabulareditor.com/pricing",
+        uiStringKey: "footer.button2"
       }
     ],
     leftLinks: [
       {
         text: "About us",
-        url: "https://tabulareditor.com/about-us"
+        url: "https://tabulareditor.com/about-us",
+        uiStringKey: "footer.aboutUs"
       },
       {
         text: "Contact us",
-        url: "https://tabulareditor.com/contact"
+        url: "https://tabulareditor.com/contact",
+        uiStringKey: "footer.contactUs"
       },
       {
         text: "Technical Support",
         url: "mailto:support@tabulareditor.com",
         rel: "noopener noreferrer",
-        target: "_blank"
+        target: "_blank",
+        uiStringKey: "footer.technicalSupport"
       }
     ],
     rightLinks: [
@@ -101,15 +118,18 @@ exports.preTransform = function (model) {
     bottomLinks: [
       {
         text: "Privacy & Cookie policy",
-        url: "https://tabulareditor.com/privacy-policy"
+        url: "https://tabulareditor.com/privacy-policy",
+        uiStringKey: "footer.privacyPolicy"
       },
       {
         text: "Terms & Conditions",
-        url: "https://tabulareditor.com/terms"
+        url: "https://tabulareditor.com/terms",
+        uiStringKey: "footer.termsConditions"
       },
       {
         text: "License terms",
-        url: "https://tabulareditor.com/license-terms"
+        url: "https://tabulareditor.com/license-terms",
+        uiStringKey: "footer.licenseTerms"
       }
     ]
   }

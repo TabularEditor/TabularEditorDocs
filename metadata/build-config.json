@@ -1,9 +1,8 @@
 {
-  "$schema": "./build-config.schema.json",
   "_comment": "Shared build configuration for all build scripts. Edit this file to add/remove content directories.",
   "defaultLanguage": "en",
   "contentDirectories": {
-    "_comment": "Directories that contain translatable content (markdown files)",
+    "_comment": "Directories that contain translatable content (markdown and HTML files)",
     "directories": [
       "features",
       "getting-started",
@@ -30,26 +29,6 @@
       "toc.yml",
       "404.html",
       "_ui-strings.json"
-    ]
-  },
-  "redirectDirectories": {
-    "_comment": "Directories that need wildcard redirects from old URLs (e.g., /features/* \u00e2\u2020\u2019 /en/features/*)",
-    "directories": [
-      "features",
-      "getting-started",
-      "how-tos",
-      "references",
-      "tutorials",
-      "api",
-      "kb",
-      "security",
-      "troubleshooting",
-      "images",
-      "whats-new",
-      "te2",
-      "te3",
-      "common",
-      "onboarding"
     ]
   }
 }

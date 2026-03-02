@@ -1,5 +1,4 @@
 {
-  "$schema": "./language-metadata.schema.json",
   "_comment": "Language display names and metadata. Add entries here for new languages.",
   "defaultLanguage": "en",
   "languages": {

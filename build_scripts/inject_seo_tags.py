@@ -16,10 +16,8 @@ Usage:
 
 import argparse
 import json
-import os
 import re
 from pathlib import Path
-from typing import Optional
 
 from config_loader import get_default_language
 
@@ -34,9 +32,13 @@ DEFAULT_LANGUAGE = get_default_language()
 def load_languages(site_dir: Path) -> list[dict]:
     """Load languages from the manifest file."""
     manifest_path = site_dir / "languages.json"
-    
+
     if not manifest_path.exists():
-        print(f"Warning: {manifest_path} not found, using default [en]")
+        # Fallback: try metadata/languages.json (generated before docfx build)
+        manifest_path = Path("metadata/languages.json")
+
+    if not manifest_path.exists():
+        print(f"Warning: languages.json not found in {site_dir} or metadata/, using default [en]")
         return [{"code": "en", "name": "English", "nativeName": "English", "default": True}]
     
     with open(manifest_path, encoding="utf-8") as f:

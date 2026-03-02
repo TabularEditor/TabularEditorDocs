@@ -111,7 +111,7 @@ def get_source_files() -> dict[str, str]:
         dir_path = CONTENT_DIR / dir_name
         if dir_path.exists():
             for file_path in dir_path.rglob("*"):
-                if file_path.is_file() and file_path.suffix in [".md", ".yml", ".yaml", ".json"]:
+                if file_path.is_file() and file_path.suffix in [".md", ".yml", ".yaml", ".json", ".html"]:
                     rel_path = str(file_path.relative_to(CONTENT_DIR)).replace("\\", "/")
                     files[rel_path] = compute_file_hash(file_path)
     
@@ -276,7 +276,8 @@ def sync_english(dry_run: bool = False) -> dict[str, int]:
             if dest.exists():
                 shutil.rmtree(dest)
             shutil.copytree(src, dest)
-    
+            print(f"  Synced shared: {dir_name}/")
+
     # Copy root files (overwrite)
     for file_name in get_root_files():
         src = CONTENT_DIR / file_name

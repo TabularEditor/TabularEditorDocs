@@ -22,12 +22,7 @@ import sys
 import traceback
 from typing import Any
 
-from config_loader import get_content_directories, get_shared_directories, get_client_redirects
-
-
-# Load directories from centralized config
-CONTENT_DIRS = get_content_directories()
-SHARED_DIRS = get_shared_directories()
+from config_loader import get_client_redirects
 
 
 def get_available_languages() -> list[str]:
