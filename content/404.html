@@ -134,6 +134,7 @@
         (async function() {
             // Detect requested language from URL
             const pathParts = window.location.pathname.split('/').filter(Boolean);
+            const trailingSlash = window.location.pathname.endsWith('/') ? '/' : '';
             const requestedLang = pathParts[0] || 'en';
             
             // Try to load languages manifest
@@ -174,7 +175,7 @@
                     
                     // Build English equivalent URL
                     pathParts[0] = 'en';
-                    const englishUrl = '/' + pathParts.join('/') + window.location.search + window.location.hash;
+                    const englishUrl = '/' + pathParts.join('/') + trailingSlash + window.location.search + window.location.hash;
                     document.getElementById('try-english').href = englishUrl;
                     
                     // Show available languages only for language mismatch
@@ -193,7 +194,7 @@
                             } else {
                                 newParts.unshift(code);
                             }
-                            const langUrl = '/' + newParts.join('/') + window.location.search + window.location.hash;
+                            const langUrl = '/' + newParts.join('/') + trailingSlash + window.location.search + window.location.hash;
                             
                             const btn = document.createElement('a');
                             btn.href = langUrl;

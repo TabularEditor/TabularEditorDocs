@@ -19,21 +19,26 @@ jobs:
         with:
           submodules: true
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Set up .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+      - name: Cache DocFX
+        uses: actions/cache@v4
+        with:
+          path: ~/.dotnet/tools
+          key: docfx-${{ runner.os }}
       - name: Install DocFX
-        run: dotnet tool install -g docfx
+        run: dotnet tool install -g docfx --ignore-failed-sources
       - name: Generate configs
         run: |
           python build_scripts/gen_redirects.py
           python build_scripts/gen_languages.py
       - name: Generate API metadata
-        run: docfx metadata localizedContent/en/docfx.json --logLevel verbose
+        run: docfx metadata localizedContent/en/docfx.json
       - name: Verify API files generated
         run: |
           if (!(Test-Path "content/api/toc.yml")) {
