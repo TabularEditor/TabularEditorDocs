@@ -16,11 +16,11 @@ Usage:
 
 import argparse
 import json
-import os
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-from config_loader import get_default_language
+from config_loader import get_default_language, get_content_directories, get_shared_directories
 
 
 # Default paths
@@ -101,22 +101,38 @@ def scan_localized_content(localized_dir: Path) -> list[str]:
     return sorted(languages)
 
 
+_LANG_FORMAT_RE = re.compile(r'^[a-z-]+$', re.IGNORECASE)
+
+
+def get_legacy_content_prefixes() -> list[str]:
+    """Get directory names that match language-code format (2-5 alpha chars).
+
+    Short directory names like 'api' and 'kb' can be confused with language
+    codes in URLs. The 404 page uses this list to redirect legacy content URLs
+    (e.g. /api/index.html → /en/api/index.html) instead of treating them as
+    unsupported language codes.
+    """
+    all_dirs = get_content_directories() + get_shared_directories()
+    return sorted(d for d in all_dirs if 2 <= len(d) <= 5 and _LANG_FORMAT_RE.match(d))
+
+
 def generate_manifest(languages: list[str], metadata: dict, default_lang: str) -> dict:
     """Generate the languages manifest with rich metadata."""
     lang_list = []
-    
+
     for code in languages:
         lang_meta = get_language_metadata(code, metadata)
         if code == default_lang:
             lang_meta["default"] = True
         lang_list.append(lang_meta)
-    
+
     # Ensure default language is first in the list
     lang_list.sort(key=lambda x: (not x.get("default", False), x["code"]))
-    
+
     return {
         "languages": lang_list,
         "defaultLanguage": default_lang,
+        "legacyPrefixes": get_legacy_content_prefixes(),
         "generated": datetime.now(timezone.utc).isoformat()
     }
 

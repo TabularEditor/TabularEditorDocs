@@ -144,16 +144,18 @@
                 const manifest = await response.json();
                 const languages = manifest.languages || [];
                 const langCodes = languages.map(l => typeof l === 'string' ? l : l.code);
-                
+                const legacyPrefixes = manifest.legacyPrefixes || [];
+
                 // Check if the first path segment looks like a language code
                 const isValidLangFormat = requestedLang.length <= 5 && /^[a-z-]+$/i.test(requestedLang);
                 const isSupported = isValidLangFormat && langCodes.includes(requestedLang.toLowerCase());
-                
-                // If path doesn't start with any known language code, redirect to /en/...
-                // This handles legacy URLs like /features/x.html → /en/features/x.html
-                if (!isValidLangFormat || !isSupported) {
+                const isLegacyContentDir = legacyPrefixes.includes(requestedLang.toLowerCase());
+
+                // Redirect to /en/... for:
+                // - Non-language-format paths (e.g. /features/x.html, /how-tos/...)
+                // - Known content dir prefixes that look like language codes (e.g. /api/..., /kb/...)
+                if (!isValidLangFormat || isLegacyContentDir) {
                     const englishUrl = '/en' + window.location.pathname + window.location.search + window.location.hash;
-                    // Redirect immediately - don't check if path exists (avoids CORS/HEAD issues)
                     window.location.replace(englishUrl);
                     return;
                 }
