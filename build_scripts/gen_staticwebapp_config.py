@@ -5,7 +5,7 @@ Generate staticwebapp.config.json for Azure Static Web Apps.
 
 This script creates server-side redirects for:
 1. Root URLs (/, /index.html) → /en/ (301)
-2. Release notes aliases → /en/references/release-history.html (302)
+2. Release notes aliases → /en/references/release-notes/{latest}.html (302, auto-detected)
 3. Legacy shortcut URLs (/tmdl, /roslyn, etc.) → /en/... (301)
 
 Note: Legacy directory wildcards (/features/*, etc.) are NOT handled here.
@@ -19,6 +19,7 @@ Usage:
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -30,12 +31,48 @@ LEGACY_SHORTCUTS = get_legacy_shortcuts()
 DEFAULT_LANGUAGE = get_default_language()
 
 
-def generate_config(languages: list[str], default_lang: str | None = None) -> dict[str, Any]:
+def find_latest_release_notes(site_dir: str = "_site", default_lang: str = "en") -> str | None:
+    """Find the filename of the latest versioned release notes in the built site.
+
+    Scans {site_dir}/{default_lang}/references/release-notes/ for files matching
+    the pattern {major}_{minor}_{patch}.html, sorts them by semantic version,
+    and returns the filename of the newest one (e.g. '3_25_5.html').
+    Returns None if the directory doesn't exist or contains no versioned files.
+    """
+    release_notes_dir = Path(site_dir) / default_lang / "references" / "release-notes"
+
+    if not release_notes_dir.exists():
+        return None
+
+    version_pattern = re.compile(r"^(\d+)_(\d+)_(\d+)\.html$")
+    versioned: list[tuple[tuple[int, int, int], str]] = []
+
+    for html_file in release_notes_dir.glob("*.html"):
+        m = version_pattern.match(html_file.name)
+        if m:
+            version = (int(m.group(1)), int(m.group(2)), int(m.group(3)))
+            versioned.append((version, html_file.name))
+
+    if not versioned:
+        return None
+
+    versioned.sort(key=lambda x: x[0], reverse=True)
+    return versioned[0][1]
+
+
+def generate_config(languages: list[str], default_lang: str | None = None, site_dir: str = "_site") -> dict[str, Any]:
     """Generate the staticwebapp.config.json content."""
     if default_lang is None:
         default_lang = DEFAULT_LANGUAGE
     routes: list[dict[str, Any]] = []
-    
+
+    # Resolve the latest release notes file, fall back to release-history.html
+    latest_rn = find_latest_release_notes(site_dir, default_lang)
+    if latest_rn:
+        rn_rel_path = f"references/release-notes/{latest_rn}"
+    else:
+        rn_rel_path = "references/release-history.html"
+
     # 1. Root redirects (301 for SEO)
     routes.append({
         "route": "/",
@@ -43,29 +80,29 @@ def generate_config(languages: list[str], default_lang: str | None = None) -> di
         "statusCode": 301
     })
     routes.append({
-        "route": "/index.html", 
+        "route": "/index.html",
         "redirect": f"/{default_lang}/",
         "statusCode": 301
     })
-    
+
     # 2. Release notes special handling (302 - dynamic target)
     # These point to the latest release notes which changes over time
     # Generate explicit routes per language since Azure SWA doesn't support segment capture
     for lang in languages:
         routes.append({
             "route": f"/{lang}/references/release-notes",
-            "redirect": f"/{lang}/references/release-history.html",
+            "redirect": f"/{lang}/{rn_rel_path}",
             "statusCode": 302
         })
         routes.append({
             "route": f"/{lang}/te3/other/release-notes",
-            "redirect": f"/{lang}/references/release-history.html",
+            "redirect": f"/{lang}/{rn_rel_path}",
             "statusCode": 302
         })
     # Also handle non-prefixed paths
     routes.append({
         "route": "/references/release-notes",
-        "redirect": f"/{default_lang}/references/release-history.html",
+        "redirect": f"/{default_lang}/{rn_rel_path}",
         "statusCode": 302
     })
     
@@ -150,12 +187,14 @@ def main():
     print(f"Default: {args.default_lang}")
     
     # Generate config
-    config = generate_config(languages, args.default_lang)
-    
+    config = generate_config(languages, args.default_lang, args.output)
+
+    latest_rn = find_latest_release_notes(args.output, args.default_lang)
+    rn_target = f"references/release-notes/{latest_rn}" if latest_rn else "references/release-history.html (fallback)"
     release_notes_count = len(languages) * 2 + 1
     print(f"\nGenerated {len(config['routes'])} routes:")
     print(f"  - Root redirects: 2")
-    print(f"  - Release notes: {release_notes_count}")
+    print(f"  - Release notes: {release_notes_count} → {rn_target}")
     print(f"  - Legacy shortcuts: {len(LEGACY_SHORTCUTS)}")
     
     if args.dry_run:
@@ -169,7 +208,7 @@ def main():
     
     output_file = output_dir / "staticwebapp.config.json"
     with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(config, f, indent=2)
+        json.dump(config, f, separators=(",", ":"))
     
     print(f"\nGenerated: {output_file}")
     return 0
