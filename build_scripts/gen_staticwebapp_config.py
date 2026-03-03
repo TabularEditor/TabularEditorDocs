@@ -194,7 +194,7 @@ def main():
     release_notes_count = len(languages) * 2 + 1
     print(f"\nGenerated {len(config['routes'])} routes:")
     print(f"  - Root redirects: 2")
-    print(f"  - Release notes: {release_notes_count} → {rn_target}")
+    print(f"  - Release notes: {release_notes_count} -> {rn_target}")
     print(f"  - Legacy shortcuts: {len(LEGACY_SHORTCUTS)}")
     
     if args.dry_run:
