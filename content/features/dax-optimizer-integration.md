@@ -30,7 +30,7 @@ Tabular Editor 3.18.0 introduces **DAX Optimizer** as an integrated experience. 
 
 Watch Marco Russo from [SQLBI](https://www.sqlbi.com) introduce the DAX Optimizer integration in Tabular Editor 3:
 
-<iframe width="640" height="360" src="https://www.youtube.com/embed/Z5lZdI79tF8" title="Detect and Fix Issues with Tabular Editor 3 and DAX Optimizer Integration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="640" height="360" src="https://www.youtube-nocookie.com/embed/Z5lZdI79tF8" title="Detect and Fix Issues with Tabular Editor 3 and DAX Optimizer Integration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Getting started
 
