@@ -37,8 +37,8 @@ Clicking the link (or pressing F10), brings up the full BPA window.
 
 > [!NOTE]
 > If you are more into a video walk through then PowerBI.tips has a video with our own Daniel Otykier showing the Best Practice Analyzer in detail here: 
-> [!Video https://www.youtube.com/embed/5WnN0NG2nBk]
 
+<iframe width="640" height="360" src="https://www.youtube-nocookie.com/embed/5WnN0NG2nBk" title="PowerBI.Tips - Tutorial - Best Practice Analyzer in Tabular Editor" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Functionality
 
