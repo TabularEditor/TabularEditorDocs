@@ -16,13 +16,8 @@ Usage: python gen_redirects.py
 import copy
 import json
 import os
-import posixpath
-import shutil
 import sys
 import traceback
-from typing import Any
-
-from config_loader import get_client_redirects
 
 
 def get_available_languages() -> list[str]:
@@ -89,88 +84,35 @@ def generate_localized_config(template: dict, lang: str) -> dict:
     return config
 
 
-def generate_redirects_config(template: dict, redirects_data: dict[str, str], en_content_dir: str) -> dict:
-    """Generate English docfx.json with redirects added.
-    
-    Args:
-        template: Base docfx config template
-        redirects_data: Dict of redirect paths to target URLs
-        en_content_dir: Directory for English content (localizedContent/en/content/)
+def generate_redirects_config(template: dict) -> dict:
+    """Generate English docfx.json with corrected paths for the build layout.
+
+    Fixes metadata, dest, and template paths which need to go up two levels
+    relative to localizedContent/en/ to reach the project root.
+    Client redirect HTML pages are generated separately by gen_staticwebapp_config.py.
     """
     config = copy.deepcopy(template)
-    
+
     # Fix metadata paths (API generation) - need to go up two levels to reach project root
     # DocFX doesn't support ../ in file globs, so we use src to set the base directory
     if "metadata" in config:
         for meta in config["metadata"]:
-            # Fix src paths - move ../ to src, keep files as relative globs
             if "src" in meta:
                 new_src = []
                 for src in meta["src"]:
                     if "files" in src:
-                        # Transform files like "content/_apiSource/*.dll" to use src
-                        new_files = []
-                        for f in src["files"]:
-                            # Extract directory and file pattern
-                            # e.g., "content/_apiSource/*.dll" -> src="../..", files="content/_apiSource/*.dll"
-                            new_files.append(f)
-                        new_src.append({
-                            "src": "../..",
-                            "files": new_files
-                        })
+                        new_src.append({"src": "../..", "files": src["files"]})
                     else:
                         new_src.append(src)
                 meta["src"] = new_src
-            # Fix dest path
             if "dest" in meta:
                 meta["dest"] = f"../../{meta['dest']}"
-            # Fix filter path
             if "filter" in meta:
                 meta["filter"] = f"../../{meta['filter']}"
-    
-    dirs = dict[str, list[str]]()
-    
-    for key, value in redirects_data.items():
-        # Redirect paths are relative to content/, convert to en_content_dir
-        # e.g., content/old-page.md -> localizedContent/en/content/old-page.md
-        dest_path = key.replace("content/", f"{en_content_dir}/", 1)
-        dir_path = posixpath.dirname(dest_path)
-        ext = posixpath.splitext(key)[1]
-        
-        if dir_path in dirs:
-            dirs[dir_path].append(dest_path)
-        else:
-            dirs[dir_path] = [dest_path]
-        
-        os.makedirs(dir_path, exist_ok=True)
-        
-        if ext == ".md":
-            content_list: list[Any] = config["build"]["content"]
-            content_list.append({"files": posixpath.relpath(key, "content"), "src": "content"})
-            with open(dest_path, mode="w", encoding="utf-8") as f:
-                f.write(f"""---
-redirect_url: {value}
----
-""")
-        elif ext == ".html":
-            resource: list[Any] = config["build"]["resource"]
-            resource.append({"files": posixpath.relpath(key, "content"), "src": "content"})
-            with open(dest_path, mode="w", encoding="utf-8") as f:
-                f.write(f"""<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0;URL='{value}'">
-    <link rel="canonical" href="{value}">
-  </head>
-</html>
-""")
-        else:
-            print("Unknown file type:", key, file=sys.stderr)
-    
+
     # Set English output destination (relative to localizedContent/en/)
     config["build"]["dest"] = "../../_site/en"
-    
+
     # Update template paths - need to go up two levels to reach project root
     if "template" in config["build"]:
         new_templates = []
@@ -180,7 +122,7 @@ redirect_url: {value}
             else:
                 new_templates.append(f"../../{t}")
         config["build"]["template"] = new_templates
-    
+
     return config
 
 
@@ -192,26 +134,16 @@ def main(args: list[str]) -> int:
     with open(config_input_path) as f:
         template = json.load(f)
     
-    # Load redirects from metadata/redirects.json
-    # Keys are in format '/path.html', need to convert to 'content/path.html'
-    client_redirects = get_client_redirects()
-    redirects_data: dict[str, str] = {}
-    for src, target in client_redirects.items():
-        # Convert '/path.html' to 'content/path.html'
-        content_key = 'content' + src if src.startswith('/') else 'content/' + src
-        redirects_data[content_key] = target
-    
-    print(f"Loaded {len(redirects_data)} client redirects from metadata/redirects.json")
-    
     # Create English directory
     en_dir = os.path.join(localized_content_dir, "en")
     en_content_dir = os.path.join(en_dir, "content")
     os.makedirs(en_content_dir, exist_ok=True)
-    
-    # Generate English config with redirects in localizedContent/en/
+
+    # Generate English config in localizedContent/en/
+    # Note: client redirect HTML pages are generated by gen_staticwebapp_config.py
     en_config_path = os.path.join(en_dir, "docfx.json")
     print(f"Generating {en_config_path} (English)...")
-    english_config = generate_redirects_config(template, redirects_data, en_content_dir)
+    english_config = generate_redirects_config(template)
     with open(en_config_path, "w") as f:
         json.dump(english_config, f, indent=4)
     

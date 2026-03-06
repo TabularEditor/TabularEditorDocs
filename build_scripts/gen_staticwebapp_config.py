@@ -23,12 +23,91 @@ import re
 from pathlib import Path
 from typing import Any
 
-from config_loader import get_legacy_shortcuts, get_default_language
+from config_loader import get_legacy_shortcuts, get_default_language, get_client_redirects
 
 
 # Load from centralized config
 LEGACY_SHORTCUTS = get_legacy_shortcuts()
 DEFAULT_LANGUAGE = get_default_language()
+
+
+def generate_client_redirect_pages(site_dir: str = "_site") -> int:
+    """Write client-side redirect HTML files to root of _site/.
+
+    Each file gets a meta-refresh and a canonical tag so search engines
+    understand the preferred URL even before JS executes.
+    Returns the number of files written.
+    """
+    client_redirects = get_client_redirects()
+    site_path = Path(site_dir)
+    count = 0
+
+    for src_path, target_url in client_redirects.items():
+        rel_path = src_path.lstrip("/")
+        dest_file = site_path / rel_path
+        dest_file.parent.mkdir(parents=True, exist_ok=True)
+        dest_file.write_text(
+            f"""<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0;URL='{target_url}'">
+    <link rel="canonical" href="{target_url}">
+  </head>
+</html>
+""",
+            encoding="utf-8",
+        )
+        count += 1
+
+    return count
+
+
+def generate_lang_prefix_redirect_pages(site_dir: str = "_site", default_lang: str = "en") -> int:
+    """Write root-level redirect stubs for every page in _site/{default_lang}/.
+
+    The old site served pages at /getting-started/x.html (no language prefix),
+    so Google has those URLs indexed. This generates stubs at _site/getting-started/x.html
+    that redirect to /en/getting-started/x.html with a canonical tag.
+
+    Skips files that already exist (e.g. client redirect pages which may point to
+    a different canonical than simply prepending the language prefix).
+    Returns the number of files written.
+    """
+    site_path = Path(site_dir)
+    lang_dir = site_path / default_lang
+    if not lang_dir.exists():
+        return 0
+
+    # Root-level files that must not be overwritten
+    protected = {"404.html", "index.html", "languages.json", "staticwebapp.config.json"}
+
+    count = 0
+    for src_file in lang_dir.rglob("*.html"):
+        rel_path = src_file.relative_to(lang_dir)
+        if rel_path.name in protected and rel_path.parent == Path("."):
+            continue
+        dest_file = site_path / rel_path
+        if dest_file.exists():
+            # Already handled (e.g. a client redirect pointing to a different canonical)
+            continue
+        target_url = f"/{default_lang}/{rel_path.as_posix()}"
+        dest_file.parent.mkdir(parents=True, exist_ok=True)
+        dest_file.write_text(
+            f"""<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="0;URL='{target_url}'">
+    <link rel="canonical" href="{target_url}">
+  </head>
+</html>
+""",
+            encoding="utf-8",
+        )
+        count += 1
+
+    return count
 
 
 def find_latest_release_notes(site_dir: str = "_site", default_lang: str = "en") -> str | None:
@@ -211,6 +290,12 @@ def main():
         json.dump(config, f, separators=(",", ":"))
     
     print(f"\nGenerated: {output_file}")
+
+    redirect_count = generate_client_redirect_pages(args.output)
+    print(f"Generated {redirect_count} client redirect pages in {args.output}/")
+
+    lang_redirect_count = generate_lang_prefix_redirect_pages(args.output, args.default_lang)
+    print(f"Generated {lang_redirect_count} language-prefix redirect stubs in {args.output}/")
     return 0
 
 
