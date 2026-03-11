@@ -1,4 +1,4 @@
-﻿---
+---
 uid: properties-view
 title: Properties view
 author: Daniel Otykier
@@ -16,17 +16,16 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Using the Properties grid in Tabular Editor
 
-The Properties view in Tabular Editor allows you to inspect and modify the properties of any object in your tabular model. 
+The Properties view in Tabular Editor allows you to inspect and modify the properties of any object in your tabular model.
 You access the properties view by selecting an object in the TOM Explorer. You will then see a list of properties that are relevant for the selected object type, such as name, description, data type, format string, etc.
 You can also access advanced properties that are not available in other tools like Visual Studio or Power BI Desktop.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/properties-view.png" alt="Properties View" style="width: 500px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Example of Properties for a table. Each object has different properties depending on its type </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/properties-view.png" alt="Properties View" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Example of Properties for a table. Each object has different properties depending on its type </figcaption>
 </figure>
-
 
 The Properties view helps you to:
 
@@ -38,6 +37,5 @@ The Properties view helps you to:
 
 > [!TIP]
 > You can multi-select objects to see the properties they have in common and edit them in bulk. This can be useful for setting Format Strings, for example.
-
 
 The Properties view is by default in the bottom right corner, but you can also open it by pressing F4 on your keyboard. You can also dock it to any side of the main window or undock it as a separate window.
