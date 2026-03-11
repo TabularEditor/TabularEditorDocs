@@ -18,6 +18,7 @@ applies_to:
 ---
 
 # Optimizing development workflow using Workspace Mode
+
 [!include[workspace-mode](~/content/features/workspace-mode.partial.md)]
 
 # Next steps
