@@ -10,23 +10,26 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Databricks Semantic Model Set-Up
 
 ## Script Purpose
-This script was created as part of the Tabular Editor x Databricks series. In Databricks Unity Catalog it is not possible to use capital letters in table names. A common way to make tables names more readable without using capital letters is to adopt snake_case. Also, whilst column names can contain spaces, it is often advised against as these can be cumbersome to work with, meaning data engineers most often use snake_case, camelCase or PascalCase.  
 
-However, we want users of our Semantic Model to see business friendly names in our model.  
+This script was created as part of the Tabular Editor x Databricks series. In Databricks Unity Catalog it is not possible to use capital letters in table names. A common way to make tables names more readable without using capital letters is to adopt snake_case. Also, whilst column names can contain spaces, it is often advised against as these can be cumbersome to work with, meaning data engineers most often use snake_case, camelCase or PascalCase.
 
-The following script will loop through all tables in the model and make sure friendly, Proper Case formatting is applied. 
+However, we want users of our Semantic Model to see business friendly names in our model.
 
-Whilst doing this, it will also apply some best practice recommendations, setting default summarisation for all columns to none and also setting format strings for DateTime type fields (this script is set up to use format ‘yyyy-mm-dd' but you can alter the script at line 61 if you prefer) 
-<br></br>
-> [!NOTE] 
-> This script is not strictly for use with only Databricks – use it with any model you like, regardless of data source, but it has been built with some of the limitations of Databricks in mind. 
-<br></br>
+The following script will loop through all tables in the model and make sure friendly, Proper Case formatting is applied.
+
+Whilst doing this, it will also apply some best practice recommendations, setting default summarisation for all columns to none and also setting format strings for DateTime type fields (this script is set up to use format ‘yyyy-mm-dd' but you can alter the script at line 61 if you prefer) <br></br>
+
+> [!NOTE]
+> This script is not strictly for use with only Databricks – use it with any model you like, regardless of data source, but it has been built with some of the limitations of Databricks in mind. <br></br>
+
 ## Script
 
 ### Databricks Semantic Model Set-Up
+
 ```csharp
 /*
  * Title: Databricks Semantic Model Set-Up
@@ -92,6 +95,8 @@ foreach(var t in Model.Tables) {
     }
 }
 ```
+
 ### Explanation
+
 This script, when executed, will loop through all tables and columns in the model and rename with friendly names. Names in snake_case, camelCase or PascalCase will all be converted to Proper Case. No table selections are required as all tables in the model will be processed, simply run the script. Whilst looping though columns it also sets default summarization to none and sets a format string for all DateTime type fields.
 
