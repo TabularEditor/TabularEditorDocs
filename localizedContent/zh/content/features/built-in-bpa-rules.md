@@ -26,6 +26,7 @@ description: Enterprise Edition feature providing 27 curated best practice rules
 Tabular Editor 3 Enterprise Edition includes 27 built-in best practice rules. These rules cover common issues in semantic model development and are updated automatically with each release.
 
 Unlike custom rules stored in JSON files, built-in rules:
+
 - Are integrated directly into the application
 - Update automatically with new releases
 - Link to knowledge base documentation
@@ -37,28 +38,31 @@ Unlike custom rules stored in JSON files, built-in rules:
 ### Rule Categories
 
 The 27 built-in rules cover four areas:
+
 - **Error Prevention**: Invalid characters, missing expressions, data type mismatches
 - **Performance**: Relationships, partitions, aggregations
 - **Formatting**: Format strings, visibility, naming conventions
 - **Maintenance**: Descriptions, calculation groups, unused objects
 
 ### Global and Per-Rule Control
+
 ![Screenshot showing BPA preferences with global enable/disable toggle and per-rule checkboxes](~/content/assets/images/features/bpa-built-in-rules-preferences.png)
 You can enable or disable built-in rules globally or individually. Settings persist across sessions and work independently from your custom rules.
 
 To manage built-in rules:
+
 1. Go to **Tools** > **Preferences** > **Best Practice Analyzer**
 2. Find the **Built-in Rules** section
 3. Toggle **Enable Built-in Rules** to turn the entire collection on or off
 4. Use the BPA Manager to enable or disable individual rules
 
 ### First-Run Notification
+
 ![Screenshot of first-run notification dialog introducing built-in BPA rules](~/content/assets/images/features/bpa-built-in-rules-notification.png)
 
 The first time you open a model after upgrading to a version with built-in rules, you'll see a notification explaining the feature with a link to preferences. This notification only appears once.
 
 ### Knowledge Base Integration
-
 
 ![Screenshot showing BPA window with rule selected and "View Documentation" button highlighted](~/content/assets/images/features/bpa-built-in-rules-kb-link.png)
 
@@ -80,8 +84,8 @@ Built-in rules use reserved ID prefixes. When you create a custom rule, Tabular 
 
 The initial release includes the following rules:
 
-
 ### Error Prevention Rules
+
 - [Avoid Invalid Characters in Object Names](xref:kb.bpa-avoid-invalid-characters-names)
 - [Avoid Invalid Characters in Descriptions](xref:kb.bpa-avoid-invalid-characters-descriptions)
 - [Expression Required for Calculated Objects](xref:kb.bpa-expression-required)
@@ -90,6 +94,7 @@ The initial release includes the following rules:
 - [Avoid Provider Partitions with Structured Data Sources](xref:kb.bpa-avoid-provider-partitions-structured)
 
 ### Performance Rules
+
 - [Many-to-Many Relationships Should Use Single Direction](xref:kb.bpa-many-to-many-single-direction)
 - [Hide Foreign Key Columns](xref:kb.bpa-hide-foreign-keys)
 - [Set SummarizeBy to None for Numeric Columns](xref:kb.bpa-do-not-summarize-numeric)
@@ -97,6 +102,7 @@ The initial release includes the following rules:
 - [Remove Unused Data Sources](xref:kb.bpa-remove-unused-data-sources)
 
 ### Formatting Rules
+
 - [Provide Format String for Measures](xref:kb.bpa-format-string-measures)
 - [Provide Format String for Numeric and Date Columns](xref:kb.bpa-format-string-columns)
 - [Visible Objects Should Have Descriptions](xref:kb.bpa-visible-objects-no-description)
@@ -104,23 +110,23 @@ The initial release includes the following rules:
 - [Date Table Should Exist](xref:kb.bpa-date-table-exists)
 
 ### Maintenance Rules
+
 - [Calculation Groups Should Contain Items](xref:kb.bpa-calculation-groups-no-items)
 - [Perspectives Should Contain Objects](xref:kb.bpa-perspectives-no-objects)
 - [Use Latest Power BI Compatibility Level](xref:kb.bpa-powerbi-latest-compatibility)
-
 
 ## Working with Built-in and Custom Rules
 
 Built-in and custom rules work side by side:
 
-| Feature | Built-in Rules | Custom Rules |
-|---------|---------------|--------------|
-| **Storage** | Hardcoded in application | JSON files or model annotations |
-| **Updates** | Automatic with releases | Manual editing required |
-| **Modification** | Read-only | Fully editable |
-| **Documentation** | Integrated KB articles | User-provided descriptions |
-| **Availability** | Enterprise Edition only | All editions |
-| **Sharing** | Consistent across teams | Requires manual distribution |
+| Feature           | Built-in Rules           | Custom Rules                    |
+| ----------------- | ------------------------ | ------------------------------- |
+| **Storage**       | Hardcoded in application | JSON files or model annotations |
+| **Updates**       | Automatic with releases  | Manual editing required         |
+| **Modification**  | Read-only                | Fully editable                  |
+| **Documentation** | Integrated KB articles   | User-provided descriptions      |
+| **Availability**  | Enterprise Edition only  | All editions                    |
+| **Sharing**       | Consistent across teams  | Requires manual distribution    |
 
 ### Recommended Workflow
 
@@ -135,6 +141,7 @@ Built-in and custom rules work side by side:
 ### Onboarding Teams
 
 When rolling out built-in rules to your team:
+
 - Start with all rules enabled to establish a baseline
 - Review violations together and agree on which rules apply
 - Document why specific rules are disabled
@@ -159,6 +166,7 @@ When rolling out built-in rules to your team:
 ### Built-in Rules Not Appearing
 
 If built-in rules don't show in the BPA window:
+
 1. Check that you're using Tabular Editor 3 Enterprise Edition
 2. Verify that built-in rules are enabled in **Tools** > **Preferences** > **Best Practice Analyzer**
 3. Restart Tabular Editor if you just changed preferences
