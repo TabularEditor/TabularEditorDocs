@@ -118,7 +118,7 @@ You can see the details that are provided in the diagnostic message:
 - Path: a representation of where you find that object in the Metric View
 - Severity: set to Error by default with these helpers
 
-![output from one field violating the validation rule](/images/features/semantic-bridge/semantic-bridge-metric-view-validation.png)
+![output from one field violating the validation rule](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation.png)
 
 If you want more control over the diagnostic message and more flexibility in the function for your validation, you can use `MakeValidationRule` mentioned above to make a contextual validation rule.
 
@@ -159,7 +159,7 @@ This context object holds collections with the names of already-checked objects;
 The context object also has a helper method to make a new diagnostic message; the benefit here is that your message doesn't have to be a hard-coded string, but can include properties of the object you are checking.
 You can see in this example that we include the duplicated Metric View dimension name in the message.
 
-![output from one field violating the more complex validation rule](/images/features/semantic-bridge/semantic-bridge-metric-view-validation2.png)
+![output from one field violating the more complex validation rule](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation2.png)
 
 ## Validation rule best practices
 
@@ -178,7 +178,7 @@ Then, the second script, on the right, "run-rules.csx", is run second to validat
 This second script could be one that you keep around for all of your Metric Views.
 
 
-![output from one field violating the more complex validation rule](/images/features/semantic-bridge/semantic-bridge-metric-view-validation3.png)
+![output from one field violating the more complex validation rule](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation3.png)
 
 The scripts are copied below for convenience, but are just rearrangements of scripts we saw above.
 

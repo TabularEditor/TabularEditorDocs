@@ -40,7 +40,7 @@ You must have a Tabular model open in Tabular Editor.
 This can be a new, empty model or an existing model you want to enhance with the objects from the Metric View.
 The menu button will not be enabled until you open or create a new Tabular model.
 
-![Import a Metric View from the file menu with **File > Open > Import from Metric View YAML**](/images/features/semantic-bridge/semantic-bridge-file-menu-import.png)
+![Import a Metric View from the file menu with **File > Open > Import from Metric View YAML**](~/content/assets/images/features/semantic-bridge/semantic-bridge-file-menu-import.png)
 
 ### Enter Databricks connection details
 
@@ -58,7 +58,7 @@ If you are just testing the translation feature, you can provide placeholder val
 After filling out the details, click **OK**.
 The Semantic Bridge will translate your Metric View to Tabular and create all the TOM objects for you.
 
-![Databricks details in import dialog](/images/features/semantic-bridge/semantic-bridge-metric-view-details.png)
+![Databricks details in import dialog](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-details.png)
 
 ### Result
 
@@ -72,11 +72,11 @@ After either success type, you can use undo/redo functionality like normal in Ta
 
 **Success**
 
-![Import success notification](/images/features/semantic-bridge/semantic-bridge-import-success.png)
+![Import success notification](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success.png)
 
 **Success with issues**
 
-![Import success notification with issues](/images/features/semantic-bridge/semantic-bridge-import-success-with-issues.png)
+![Import success notification with issues](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success-with-issues.png)
 
 If you click on **View Diagnostics**, you can see a list of messages describing the issues in translation.
 These diagnostics are available for review later by outputting them from a C# script:
@@ -86,11 +86,11 @@ These diagnostics are available for review later by outputting them from a C# sc
 SemanticBridge.MetricView.ImportDiagnostics.Output();
 ```
 
-![Import diagnostics](/images/features/semantic-bridge/semantic-bridge-import-diagnostics.png)
+![Import diagnostics](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-diagnostics.png)
 
 **Failure**
 
-![Import failure](/images/features/semantic-bridge/semantic-bridge-import-failed.png)
+![Import failure](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-failed.png)
 
 Viewing diagnostics for a failure is the same as for success with issues.
 
