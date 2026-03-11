@@ -65,9 +65,9 @@ Create a file called <a href="https://raw.githubusercontent.com/TabularEditor/Ta
 
 To turn on external MSAL proxy support for all .NET core applications on your machine, you can also set the following environment variable rather than using the AppSettings file as described above:
 
-| Environment variable name | Environment variable value |
-| --- | --- |
-| MS_AS_MsalConnectivityMode | 1 |
+| Environment variable name                                            | Environment variable value |
+| -------------------------------------------------------------------- | -------------------------- |
+| MS_AS_MsalConnectivityMode | 1                          |
 
 # Enabling diagnostics
 
@@ -92,11 +92,11 @@ If you're still not able to connect after attempting the solutions outlined abov
 
 or if using Environment Variables, by setting the following:
 
-| Environment variable name | Environment variable value |
-| --- | --- |
-| MS_AS_AADAUTHENTICATOR_LOG | 1 |
-| MS_AS_AADAUTHENTICATOR_LOGLEVEL | 4 |
-| MS_AS_AADAUTHENTICATOR_LOGFILE | \<path to trace file\> |
+| Environment variable name                                                                      | Environment variable value                        |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| MS_AS_AADAUTHENTICATOR_LOG      | 1                                                 |
+| MS_AS_AADAUTHENTICATOR_LOGLEVEL | 4                                                 |
+| MS_AS_AADAUTHENTICATOR_LOGFILE  | \<path to trace file\> |
 
 `<path to trace file>` must point to a file in a directory that exists. I.e. if you want the file to be written to `c:\temp\logs\as-auth.log`, you must ensure that the directory `c:\temp\logs` exists.
 
