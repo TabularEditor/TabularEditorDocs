@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Importing tables and data modeling
 
 This article describes how to use the [Table Import Wizard](#table-import-wizard) of Tabular Editor 3, to add new tables to the model. There is also a section on how to [update the table schema](#updating-table-schema) of an existing table. Lastly, we cover how to use the [diagram tool](#working-with-diagrams) to define and edit relationships between tables.
@@ -43,6 +44,7 @@ Add initial tables to the diagram in any of the following ways:
   ![Diagram Add Tables](~/content/assets/images/diagram-add-tables.png)
 
 To add additional tables to the diagram, use the technique above again, or right-click on an existing table in the diagram and choose one of the following options:
+
 - **Add tables that filter this table**: Adds all tables to the diagram which may, directly or indirectly through other tables, filter the currently selected table. Useful when starting from a fact table.
 - **Add all related tables**: Adds all tables to the diagram which are directly related to the currently selected table. Useful when starting from a dimension table.
   ![Add Related Tables](~/content/assets/images/add-related-tables.png)
