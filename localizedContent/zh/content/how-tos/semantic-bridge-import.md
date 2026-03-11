@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Import a Metric View and View Diagnostics
 
 This how-to demonstrates how to import a Metric View into a Tabular model using C# scripts, and how to view diagnostic messages from the import process.
@@ -33,7 +34,7 @@ You must have a Tabular model open in Tabular Editor before importing. This can 
 There are two import methods:
 
 | Method                    | Description                                    |
-|---------------------------|------------------------------------------------|
+| ------------------------- | ---------------------------------------------- |
 | `ImportToTabularFromFile` | Loads from a file path and imports in one step |
 | `ImportToTabular`         | Imports the currently loaded Metric View       |
 
