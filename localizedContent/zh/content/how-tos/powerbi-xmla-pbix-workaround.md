@@ -17,11 +17,12 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Downloading a Power BI dataset to a .pbix using the XMLA endpoint
 
-Once a change is made to a Power BI semantic model through the XMLA endpoint, it's not possible to download the model as a .pbix file from the Power BI service. 
+Once a change is made to a Power BI semantic model through the XMLA endpoint, it's not possible to download the model as a .pbix file from the Power BI service.
 
-However, with the Power BI Project file, it's possible to create a .pbix file from the remote model by following the three-step process, which is described as follows. 
+However, with the Power BI Project file, it's possible to create a .pbix file from the remote model by following the three-step process, which is described as follows.
 
 ![XLMA to PBIX Overview](~/content/assets/images/power-bi/create-pbix-from-xmla-overview.png)
 
@@ -42,11 +43,11 @@ Close Power BI desktop, and proceed with the next step in Tabular Editor.
 
 ## Step 2: Open XMLA model with Tabular Editor
 
-With Tabular Editor open, connect to the Fabric workspace via the XMLA endpoint. Load the Power BI semantic model you want to convert to a .pbix. 
+With Tabular Editor open, connect to the Fabric workspace via the XMLA endpoint. Load the Power BI semantic model you want to convert to a .pbix.
 
 ## Step 3: Save XMLA model into .pbip
 
-In Tabular Editor using _File > Save as..._, navigate to the Power BI Project folder. Overwrite the _model.bim_ file shown in the previous diagram. 
+In Tabular Editor using _File > Save as..._, navigate to the Power BI Project folder. Overwrite the _model.bim_ file shown in the previous diagram.
 
 This will save the remote model into the Power BI Project that will now contain the model metadata.
 
@@ -56,6 +57,7 @@ If the .pbip folder is configured to store the model as [TMDL](xref:tmdl) files,
 > To enable TMDL go to **Tools > Preferences > File Formats > Save-to-folder**, and select "TMDL" in the **Serialization mode** dropdown. See [TMDL documentation for more information](xref:tmdl)
 
 ## Step 3.1: Remove incremental refresh partitions and create new (Optional)
+
 Use the Convert Incremental Refresh script below to delete incremental refresh partitions and create a single partition for each table containing the expression used in the incremental refresh expression.
 
 ## Step 4: Save to .pbix and open this file in Power BI Desktop
@@ -67,12 +69,13 @@ Open the .pbip and the Power BI report will now contain the XMLA endpoint semant
 Save it to a .pbix using _File > Save As..._ in Power BI Desktop.
 
 ## Re-hydrate .pbix
+
 The .pbix now contains the model that was published to the Fabric workspace. When you open the .pbix, you can _re-hydrate_ the file, meaning that you load the data based on the connections specified in the model.
 
 ## Convert Incremental Refresh partitions
+
 The above step 4 will fail if the semantic model has incremental refresh enabled as a Power BI desktop model cannot contain multiple partitions.
 In this case the following script should be run against the model to convert incremental refresh partitions into single partitions
-
 
 ```csharp
 foreach (var t in Model.Tables)
@@ -98,4 +101,4 @@ foreach (var t in Model.Tables)
 };
 ```
 
-Thank you to [Micah Dail](https://twitter.com/MicahDail) for creating the script and suggesting it to be included in this document. 
+Thank you to [Micah Dail](https://twitter.com/MicahDail) for creating the script and suggesting it to be included in this document.
