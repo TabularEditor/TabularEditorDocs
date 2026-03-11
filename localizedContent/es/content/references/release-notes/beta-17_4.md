@@ -1,4 +1,4 @@
-﻿# Tabular Editor 3 BETA-17.4
+# Tabular Editor 3 BETA-17.4
 
 > [!IMPORTANT]
 > A newer version of Tabular Editor is available. You can find the latest version [here](https://docs.tabulareditor.com/references/release-notes).
