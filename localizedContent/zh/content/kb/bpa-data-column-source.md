@@ -44,6 +44,7 @@ string.IsNullOrWhitespace(SourceColumn)
 4. Verify the mapping matches the partition query
 
 The source column name must exactly match:
+
 - For Power Query: Column name in M expression output
 - For SQL: Column name or alias in SELECT statement
 - For Direct Lake: Column name in Delta Lake table
