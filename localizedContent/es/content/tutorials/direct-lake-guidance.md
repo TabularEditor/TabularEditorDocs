@@ -1,4 +1,4 @@
-﻿---
+---
 uid: direct-lake-guidance
 title: Direct Lake Guidance
 author: Daniel Otykier
@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Direct Lake Guidance
 
 With the release of Tabular Editor 3.22.0, we have added support for Direct Lake on OneLake in addition to Direct Lake on SQL. This article provides a short overview of the differences between these two modes, and how they compare to other storage modes available in Power BI semantic models.
@@ -25,13 +26,13 @@ With the release of Tabular Editor 3.22.0, we have added support for Direct Lake
 
 The following table summarizes the storage modes available in Power BI semantic models:
 
-| Storage Mode | Description | Recommended Use Cases |
-|--------------|-------------|-----------------------|
-| Import       | Data is imported into the semantic model and stored in the model's in-memory cache (VertiPaq). | When you need fast query performance and can afford to refresh the data periodically. |
-| DirectQuery  | Data is queried directly from the source at query time, without being imported into the model. Supports various sources, such as SQL, KQL and even other semantic models. | When you need real-time data access or when the data volume is too large to fit in memory. |
-| Dual         | A hybrid mode where the engine can choose between returning the imported data or delegating to DirectQuery, depending on the query context. | When your model contains a mix of DirectQuery and Import tables (for example when using aggregations), and you have tables that are related to both. |
-| Direct Lake on OneLake | Utilizes the Delta Parquet story format to quickly swap the data into semantic model memory when needed. | When your data is already available as tables or materialized views in a Fabric Warehouse or Lakehouse. |
-| Direct Lake on SQL | Older version of Direct Lake which utilizes the SQL Analytics Endpoint of Fabric Warehouses or Lakehouses. | Not recommended for new development (use Direct Lake on OneLake instead). |
+| Storage Mode           | Description                                                                                                                                                                                               | Recommended Use Cases                                                                                                                                                                   |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Import                 | Data is imported into the semantic model and stored in the model's in-memory cache (VertiPaq).                                                                         | When you need fast query performance and can afford to refresh the data periodically.                                                                                   |
+| DirectQuery            | Data is queried directly from the source at query time, without being imported into the model. Supports various sources, such as SQL, KQL and even other semantic models. | When you need real-time data access or when the data volume is too large to fit in memory.                                                                              |
+| Dual                   | A hybrid mode where the engine can choose between returning the imported data or delegating to DirectQuery, depending on the query context.                                               | When your model contains a mix of DirectQuery and Import tables (for example when using aggregations), and you have tables that are related to both. |
+| Direct Lake on OneLake | Utilizes the Delta Parquet story format to quickly swap the data into semantic model memory when needed.                                                                                  | When your data is already available as tables or materialized views in a Fabric Warehouse or Lakehouse.                                                                 |
+| Direct Lake on SQL     | Older version of Direct Lake which utilizes the SQL Analytics Endpoint of Fabric Warehouses or Lakehouses.                                                                                | Not recommended for new development (use Direct Lake on OneLake instead).                                                                            |
 
 > [!NOTE]
 > It is also possible to create tables that contain a mix of partitions in **Import** and **DirectQuery** mode (also known as "hybrid tables"). This is commonly done on large fact tables that require incremental refresh while some data is queried directly from the source. See [this article](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla) for more information.
@@ -40,7 +41,7 @@ The following table summarizes the storage modes available in Power BI semantic 
 
 [Direct Lake on OneLake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#key-concepts-and-terminology) was introduced in March 2025 as an alternative to Direct Lake on SQL. With Direct Lake on OneLake, there is no dependency on the SQL endpoint and no fallback to DirectQuery mode. This also means that the [usual restrictions that apply to DirectQuery models](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about#modeling-limitations) do not apply to Direct Lake on OneLake models.
 
-However, as with Direct Lake on SQL, there are still some [limitations that *do* apply](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). The most important limitations are listed below. See the link for a full list of limitations:
+However, as with Direct Lake on SQL, there are still some [limitations that _do_ apply](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). The most important limitations are listed below. See the link for a full list of limitations:
 
 - Calculated columns on Direct Lake tables cannot reference columns that are sourced from OneLake.
 - Calculated tables on Direct Lake models cannot refer columns on Direct Lake tables that are sourced from OneLake.
@@ -109,7 +110,7 @@ To manually set up a table for **Direct Lake on OneLake** mode, you need to do t
 
 ![Create Shared Expression](../assets/images/create-shared-expression.png)
 
-2. **Configure Shared Expression**: Set the **Kind** property of the expression you created in step 1 to "M", and set the *Expression** property to the following M query, replacing the IDs in the URL for your Fabric workspace and Lakehouse/Warehouse:
+2. **Configure Shared Expression**: Set the **Kind** property of the expression you created in step 1 to "M", and set the _Expression_\* property to the following M query, replacing the IDs in the URL for your Fabric workspace and Lakehouse/Warehouse:
 
 ```m
 let
@@ -118,23 +119,23 @@ in
     Source
 ```
 
-3. **Create Table and Entity Partition**: Create a new table in the model (Alt+5), then expand the table partitions in the TOM Explorer, and create new *Entity Partition*:
-  
-  ![Create Entity Partition](../assets/images/create-entity-partition.png)
+3. **Create Table and Entity Partition**: Create a new table in the model (Alt+5), then expand the table partitions in the TOM Explorer, and create new _Entity Partition_:
 
-  Delete the regular import partition that was automatically created when you created the table.
+![Create Entity Partition](../assets/images/create-entity-partition.png)
+
+Delete the regular import partition that was automatically created when you created the table.
 
 4. **Configure Entity Partition**: Set the following properties on the Entity Partition:
 
-| Property | Value |
-| ----------|-------|
-| Name | (Recommended) Set to the same name as the table |
-| Entity Name | (Required) Set to the name of the table in the Lakehouse/Warehouse |
-| Expression Source | (Required) Set to the Shared Expression you created in step 1, typically `DatabaseQuery` |
-| Mode | (Required) `DirectLake` |
-| Schema Name | (Optional) Set to the schema name in the Lakehouse/Warehouse, if applicable. If not set, the default schema will be used. |
+| Property          | Value                                                                                                                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name              | (Recommended) Set to the same name as the table                                                                                                           |
+| Entity Name       | (Required) Set to the name of the table in the Lakehouse/Warehouse                                                                                        |
+| Expression Source | (Required) Set to the Shared Expression you created in step 1, typically `DatabaseQuery`                                                                  |
+| Mode              | (Required) `DirectLake`                                                                                                                                   |
+| Schema Name       | (Optional) Set to the schema name in the Lakehouse/Warehouse, if applicable. If not set, the default schema will be used. |
 
-  The final result should look like this:
+The final result should look like this:
 
 ![Configure Entity Partition](../assets/images/configure-entity-partition.png)
 
@@ -142,7 +143,7 @@ in
 
 ![Update Table Schema Entity](../assets/images/update-table-schema-entity.png)
 
-  Alternatively, manually add Data Columns to the table (Alt+4) and specify the `Name`, `Data Type`, `Source Column` and any other relevant properties for each column.
+Alternatively, manually add Data Columns to the table (Alt+4) and specify the `Name`, `Data Type`, `Source Column` and any other relevant properties for each column.
 
 > [!NOTE]
 > When a Direct Lake table is added to the model, it needs to be manually "refreshed" after the first metadata deployment. Otherwise, the table will not contain any data when queried. This refresh only needs to be performed once. Tabular Editor 3 will automatically refresh the table when the model metadata is saved, if the **Auto-refresh when saving new tables** under **Tools > Preferences > Model Deployment > Data Refresh**.
