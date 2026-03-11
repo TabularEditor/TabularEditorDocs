@@ -1,0 +1,438 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.IQueryableObject
+  commentId: T:TabularEditor.TOMWrapper.IQueryableObject
+  id: IQueryableObject
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.IQueryableObject.ExecuteReader(System.String)
+  langs:
+  - csharp
+  - vb
+  name: IQueryableObject
+  nameWithType: IQueryableObject
+  fullName: TabularEditor.TOMWrapper.IQueryableObject
+  type: Interface
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public interface IQueryableObject
+    content.vb: Public Interface IQueryableObject
+  derivedClasses:
+  - TabularEditor.TOMWrapper.Database
+  - TabularEditor.TOMWrapper.ServerSession
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  - TabularEditor.TOMWrapper.IQueryableObject.TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(System.String)
+  - TabularEditor.TOMWrapper.IQueryableObject.TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(System.String)
+- uid: TabularEditor.TOMWrapper.IQueryableObject.ExecuteReader(System.String)
+  commentId: M:TabularEditor.TOMWrapper.IQueryableObject.ExecuteReader(System.String)
+  id: ExecuteReader(System.String)
+  parent: TabularEditor.TOMWrapper.IQueryableObject
+  langs:
+  - csharp
+  - vb
+  name: ExecuteReader(string)
+  nameWithType: IQueryableObject.ExecuteReader(string)
+  fullName: TabularEditor.TOMWrapper.IQueryableObject.ExecuteReader(string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: IDataReader ExecuteReader(string statement)
+    parameters:
+    - id: statement
+      type: System.String
+    return:
+      type: System.Data.IDataReader
+    content.vb: Function ExecuteReader(statement As String) As IDataReader
+  overload: TabularEditor.TOMWrapper.IQueryableObject.ExecuteReader*
+  nameWithType.vb: IQueryableObject.ExecuteReader(String)
+  fullName.vb: TabularEditor.TOMWrapper.IQueryableObject.ExecuteReader(String)
+  name.vb: ExecuteReader(String)
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.TOMWrapper.IQueryableObject.TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(System.String)
+  commentId: M:TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+  parent: TabularEditor.TOMWrapper.QueryableObjectExtension
+  definition: TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+  href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_EvaluateDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  name: EvaluateDax(IQueryableObject, string)
+  nameWithType: QueryableObjectExtension.EvaluateDax(IQueryableObject, string)
+  fullName: TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject, string)
+  nameWithType.vb: QueryableObjectExtension.EvaluateDax(IQueryableObject, String)
+  fullName.vb: TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject, String)
+  name.vb: EvaluateDax(IQueryableObject, String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+    name: EvaluateDax
+    isExternal: true
+    href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_EvaluateDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IQueryableObject
+    name: IQueryableObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IQueryableObject.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+    name: EvaluateDax
+    isExternal: true
+    href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_EvaluateDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IQueryableObject
+    name: IQueryableObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IQueryableObject.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.IQueryableObject.TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(System.String)
+  commentId: M:TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+  parent: TabularEditor.TOMWrapper.QueryableObjectExtension
+  definition: TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+  href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_ExecuteDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  name: ExecuteDax(IQueryableObject, string)
+  nameWithType: QueryableObjectExtension.ExecuteDax(IQueryableObject, string)
+  fullName: TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject, string)
+  nameWithType.vb: QueryableObjectExtension.ExecuteDax(IQueryableObject, String)
+  fullName.vb: TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject, String)
+  name.vb: ExecuteDax(IQueryableObject, String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+    name: ExecuteDax
+    isExternal: true
+    href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_ExecuteDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IQueryableObject
+    name: IQueryableObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IQueryableObject.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+    name: ExecuteDax
+    isExternal: true
+    href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_ExecuteDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IQueryableObject
+    name: IQueryableObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IQueryableObject.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+  commentId: M:TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_EvaluateDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  name: EvaluateDax(IQueryableObject, string)
+  nameWithType: QueryableObjectExtension.EvaluateDax(IQueryableObject, string)
+  fullName: TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject, string)
+  nameWithType.vb: QueryableObjectExtension.EvaluateDax(IQueryableObject, String)
+  fullName.vb: TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject, String)
+  name.vb: EvaluateDax(IQueryableObject, String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+    name: EvaluateDax
+    isExternal: true
+    href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_EvaluateDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IQueryableObject
+    name: IQueryableObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IQueryableObject.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.QueryableObjectExtension.EvaluateDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+    name: EvaluateDax
+    isExternal: true
+    href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_EvaluateDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IQueryableObject
+    name: IQueryableObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IQueryableObject.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.QueryableObjectExtension
+  commentId: T:TabularEditor.TOMWrapper.QueryableObjectExtension
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.QueryableObjectExtension.html
+  name: QueryableObjectExtension
+  nameWithType: QueryableObjectExtension
+  fullName: TabularEditor.TOMWrapper.QueryableObjectExtension
+- uid: TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+  commentId: M:TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_ExecuteDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  name: ExecuteDax(IQueryableObject, string)
+  nameWithType: QueryableObjectExtension.ExecuteDax(IQueryableObject, string)
+  fullName: TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject, string)
+  nameWithType.vb: QueryableObjectExtension.ExecuteDax(IQueryableObject, String)
+  fullName.vb: TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject, String)
+  name.vb: ExecuteDax(IQueryableObject, String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+    name: ExecuteDax
+    isExternal: true
+    href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_ExecuteDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IQueryableObject
+    name: IQueryableObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IQueryableObject.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.QueryableObjectExtension.ExecuteDax(TabularEditor.TOMWrapper.IQueryableObject,System.String)
+    name: ExecuteDax
+    isExternal: true
+    href: TabularEditor.TOMWrapper.QueryableObjectExtension.html#TabularEditor_TOMWrapper_QueryableObjectExtension_ExecuteDax_TabularEditor_TOMWrapper_IQueryableObject_System_String_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IQueryableObject
+    name: IQueryableObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IQueryableObject.html
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.IQueryableObject.ExecuteReader*
+  commentId: Overload:TabularEditor.TOMWrapper.IQueryableObject.ExecuteReader
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IQueryableObject.html#TabularEditor_TOMWrapper_IQueryableObject_ExecuteReader_System_String_
+  name: ExecuteReader
+  nameWithType: IQueryableObject.ExecuteReader
+  fullName: TabularEditor.TOMWrapper.IQueryableObject.ExecuteReader
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Data.IDataReader
+  commentId: T:System.Data.IDataReader
+  parent: System.Data
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.data.idatareader
+  name: IDataReader
+  nameWithType: IDataReader
+  fullName: System.Data.IDataReader
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Data
+  commentId: N:System.Data
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Data
+  nameWithType: System.Data
+  fullName: System.Data
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Data
+    name: Data
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.data
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Data
+    name: Data
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.data

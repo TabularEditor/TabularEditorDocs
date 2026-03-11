@@ -1,0 +1,3265 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList
+  commentId: T:TabularEditor.TOMWrapper.Utils.DependsOnList
+  id: DependsOnList
+  parent: TabularEditor.TOMWrapper.Utils
+  children:
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.Columns
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.Count
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.Deep
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.Functions
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.GetEnumerator
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.Item(TabularEditor.TOMWrapper.IDaxObject)
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.Keys
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.Measures
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.Tables
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.TryGetValue(TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}@)
+  - TabularEditor.TOMWrapper.Utils.DependsOnList.Values
+  langs:
+  - csharp
+  - vb
+  name: DependsOnList
+  nameWithType: DependsOnList
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  summary: >-
+    A DependsOnList holds a dictionary of all objects that a specific opject depends on. Each entry contains
+
+    a list of ObjectReferences specifying the details of how the object is referenced.
+  example: []
+  syntax:
+    content: 'public class DependsOnList : IReadOnlyDictionary<IDaxObject, IImmutableList<ObjectReference>>, IReadOnlyCollection<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>, IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>, IEnumerable'
+    content.vb: Public Class DependsOnList Implements IReadOnlyDictionary(Of IDaxObject, IImmutableList(Of ObjectReference)), IReadOnlyCollection(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))), IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))), IEnumerable
+  inheritance:
+  - System.Object
+  implements:
+  - System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+  - System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+  - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+  - System.Collections.IEnumerable
+  inheritedMembers:
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  extensionMethods:
+  - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.TabularEditor.EnumExtensions.ContainsDuplicates``1
+  - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}},{U}},System.Collections.Generic.IEqualityComparer{{U}})
+  - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}},{U}},System.Collections.Generic.IEqualityComparer{{U}},System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}@)
+  - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.TabularEditor.EnumExtensions.IndexOf``1(System.Predicate{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}})
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Deep
+  commentId: M:TabularEditor.TOMWrapper.Utils.DependsOnList.Deep
+  id: Deep
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: Deep()
+  nameWithType: DependsOnList.Deep()
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Deep()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  summary: Returns all objects used by the current object (directly or indirectly through other objects).
+  example: []
+  syntax:
+    content: public HashSet<IDaxObject> Deep()
+    return:
+      type: System.Collections.Generic.HashSet{TabularEditor.TOMWrapper.IDaxObject}
+    content.vb: Public Function Deep() As HashSet(Of IDaxObject)
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.Deep*
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+  commentId: M:TabularEditor.TOMWrapper.Utils.DependsOnList.ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+  id: ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: ContainsKey(IDaxObject)
+  nameWithType: DependsOnList.ContainsKey(IDaxObject)
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  example: []
+  syntax:
+    content: public bool ContainsKey(IDaxObject key)
+    parameters:
+    - id: key
+      type: TabularEditor.TOMWrapper.IDaxObject
+    return:
+      type: System.Boolean
+    content.vb: Public Function ContainsKey(key As IDaxObject) As Boolean
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.ContainsKey*
+  implements:
+  - System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.TryGetValue(TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}@)
+  commentId: M:TabularEditor.TOMWrapper.Utils.DependsOnList.TryGetValue(TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}@)
+  id: TryGetValue(TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}@)
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: TryGetValue(IDaxObject, out IImmutableList<ObjectReference>)
+  nameWithType: DependsOnList.TryGetValue(IDaxObject, out IImmutableList<ObjectReference>)
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.TryGetValue(TabularEditor.TOMWrapper.IDaxObject, out System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  example: []
+  syntax:
+    content: public bool TryGetValue(IDaxObject key, out IImmutableList<ObjectReference> value)
+    parameters:
+    - id: key
+      type: TabularEditor.TOMWrapper.IDaxObject
+    - id: value
+      type: System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}
+    return:
+      type: System.Boolean
+    content.vb: Public Function TryGetValue(key As IDaxObject, value As IImmutableList(Of ObjectReference)) As Boolean
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.TryGetValue*
+  implements:
+  - System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.TryGetValue(TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}@)
+  nameWithType.vb: DependsOnList.TryGetValue(IDaxObject, IImmutableList(Of ObjectReference))
+  fullName.vb: TabularEditor.TOMWrapper.Utils.DependsOnList.TryGetValue(TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))
+  name.vb: TryGetValue(IDaxObject, IImmutableList(Of ObjectReference))
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.GetEnumerator
+  commentId: M:TabularEditor.TOMWrapper.Utils.DependsOnList.GetEnumerator
+  id: GetEnumerator
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: DependsOnList.GetEnumerator()
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.GetEnumerator()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  example: []
+  syntax:
+    content: public IEnumerator<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>> GetEnumerator()
+    return:
+      type: System.Collections.Generic.IEnumerator{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+    content.vb: Public Function GetEnumerator() As IEnumerator(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.GetEnumerator*
+  implements:
+  - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.GetEnumerator
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Functions
+  commentId: P:TabularEditor.TOMWrapper.Utils.DependsOnList.Functions
+  id: Functions
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: Functions
+  nameWithType: DependsOnList.Functions
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Functions
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  syntax:
+    content: public IEnumerable<Function> Functions { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Function}
+    content.vb: Public ReadOnly Property Functions As IEnumerable(Of [Function])
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.Functions*
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Measures
+  commentId: P:TabularEditor.TOMWrapper.Utils.DependsOnList.Measures
+  id: Measures
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: Measures
+  nameWithType: DependsOnList.Measures
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Measures
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  syntax:
+    content: public IEnumerable<Measure> Measures { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure}
+    content.vb: Public ReadOnly Property Measures As IEnumerable(Of Measure)
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.Measures*
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Columns
+  commentId: P:TabularEditor.TOMWrapper.Utils.DependsOnList.Columns
+  id: Columns
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: Columns
+  nameWithType: DependsOnList.Columns
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Columns
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  syntax:
+    content: public IEnumerable<Column> Columns { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Column}
+    content.vb: Public ReadOnly Property Columns As IEnumerable(Of Column)
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.Columns*
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Tables
+  commentId: P:TabularEditor.TOMWrapper.Utils.DependsOnList.Tables
+  id: Tables
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: Tables
+  nameWithType: DependsOnList.Tables
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Tables
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  syntax:
+    content: public IEnumerable<Table> Tables { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Table}
+    content.vb: Public ReadOnly Property Tables As IEnumerable(Of Table)
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.Tables*
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Item(TabularEditor.TOMWrapper.IDaxObject)
+  commentId: P:TabularEditor.TOMWrapper.Utils.DependsOnList.Item(TabularEditor.TOMWrapper.IDaxObject)
+  id: Item(TabularEditor.TOMWrapper.IDaxObject)
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: this[IDaxObject]
+  nameWithType: DependsOnList.this[IDaxObject]
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.this[TabularEditor.TOMWrapper.IDaxObject]
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  example: []
+  syntax:
+    content: public IImmutableList<ObjectReference> this[IDaxObject key] { get; }
+    parameters:
+    - id: key
+      type: TabularEditor.TOMWrapper.IDaxObject
+    return:
+      type: System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}
+    content.vb: Public ReadOnly Default Property this[](key As IDaxObject) As IImmutableList(Of ObjectReference)
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.Item*
+  implements:
+  - System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.Item(TabularEditor.TOMWrapper.IDaxObject)
+  nameWithType.vb: DependsOnList.this[](IDaxObject)
+  fullName.vb: TabularEditor.TOMWrapper.Utils.DependsOnList.this[](TabularEditor.TOMWrapper.IDaxObject)
+  name.vb: this[](IDaxObject)
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Count
+  commentId: P:TabularEditor.TOMWrapper.Utils.DependsOnList.Count
+  id: Count
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: DependsOnList.Count
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Count
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.Count*
+  implements:
+  - System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.Count
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Keys
+  commentId: P:TabularEditor.TOMWrapper.Utils.DependsOnList.Keys
+  id: Keys
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: Keys
+  nameWithType: DependsOnList.Keys
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Keys
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  example: []
+  syntax:
+    content: public IEnumerable<IDaxObject> Keys { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.IDaxObject}
+    content.vb: Public ReadOnly Property Keys As IEnumerable(Of IDaxObject)
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.Keys*
+  implements:
+  - System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.Keys
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Values
+  commentId: P:TabularEditor.TOMWrapper.Utils.DependsOnList.Values
+  id: Values
+  parent: TabularEditor.TOMWrapper.Utils.DependsOnList
+  langs:
+  - csharp
+  - vb
+  name: Values
+  nameWithType: DependsOnList.Values
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Values
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper.Utils
+  example: []
+  syntax:
+    content: public IEnumerable<IImmutableList<ObjectReference>> Values { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+    content.vb: Public ReadOnly Property Values As IEnumerable(Of IImmutableList(Of ObjectReference))
+  overload: TabularEditor.TOMWrapper.Utils.DependsOnList.Values*
+  implements:
+  - System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.Values
+references:
+- uid: TabularEditor.TOMWrapper.Utils
+  commentId: N:TabularEditor.TOMWrapper.Utils
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper.Utils
+  nameWithType: TabularEditor.TOMWrapper.Utils
+  fullName: TabularEditor.TOMWrapper.Utils
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper.Utils
+    name: Utils
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper.Utils
+    name: Utils
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+  commentId: T:System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyDictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+  name: IReadOnlyDictionary<IDaxObject, IImmutableList<ObjectReference>>
+  nameWithType: IReadOnlyDictionary<IDaxObject, IImmutableList<ObjectReference>>
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>
+  nameWithType.vb: IReadOnlyDictionary(Of IDaxObject, IImmutableList(Of ObjectReference))
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))
+  name.vb: IReadOnlyDictionary(Of IDaxObject, IImmutableList(Of ObjectReference))
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyDictionary`2
+    name: IReadOnlyDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyDictionary`2
+    name: IReadOnlyDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+  commentId: T:System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyCollection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  name: IReadOnlyCollection<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>
+  nameWithType: IReadOnlyCollection<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>
+  fullName: System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>
+  nameWithType.vb: IReadOnlyCollection(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)))
+  name.vb: IReadOnlyCollection(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+  commentId: T:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>
+  nameWithType: IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>
+  fullName: System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>
+  nameWithType.vb: IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)))
+  name.vb: IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.TabularEditor.EnumExtensions.ContainsDuplicates``1
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  name: ContainsDuplicates<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>(IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>)
+  nameWithType: EnumExtensions.ContainsDuplicates<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>(IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))(IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)))(System.Collections.Generic.IEnumerable(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))))
+  name.vb: ContainsDuplicates(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))(IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}},{U}},System.Collections.Generic.IEqualityComparer{{U}})
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  name: ContainsDuplicates<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>, U>(IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>, Func<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>, U>, IEqualityComparer<U>)
+  nameWithType: EnumExtensions.ContainsDuplicates<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>, U>(IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>, Func<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>, U>, IEqualityComparer<U>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>, U>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>, System.Func<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>, U>, System.Collections.Generic.IEqualityComparer<U>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)), U)(IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))), Func(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)), U), IEqualityComparer(Of U))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)), U)(System.Collections.Generic.IEnumerable(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))), System.Func(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)), U), System.Collections.Generic.IEqualityComparer(Of U))
+  name.vb: ContainsDuplicates(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)), U)(IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))), Func(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)), U), IEqualityComparer(Of U))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}},System.Func{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}},``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}},System.Func{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}},``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}},{U}},System.Collections.Generic.IEqualityComparer{{U}},System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}@)
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  name: ContainsDuplicates<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>, U>(IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>, Func<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>, U>, IEqualityComparer<U>, out KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>)
+  nameWithType: EnumExtensions.ContainsDuplicates<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>, U>(IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>, Func<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>, U>, IEqualityComparer<U>, out KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>, U>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>, System.Func<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>, U>, System.Collections.Generic.IEqualityComparer<U>, out System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)), U)(IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))), Func(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)), U), IEqualityComparer(Of U), KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)), U)(System.Collections.Generic.IEnumerable(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))), System.Func(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)), U), System.Collections.Generic.IEqualityComparer(Of U), System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)))
+  name.vb: ContainsDuplicates(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)), U)(IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))), Func(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)), U), IEqualityComparer(Of U), KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}},System.Func{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}},``1},System.Collections.Generic.IEqualityComparer{``1},System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: out
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}},System.Func{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}},``1},System.Collections.Generic.IEqualityComparer{``1},System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.TabularEditor.EnumExtensions.IndexOf``1(System.Predicate{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}})
+  commentId: M:TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  name: IndexOf<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>(IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>, Predicate<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>)
+  nameWithType: EnumExtensions.IndexOf<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>(IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>, Predicate<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>)
+  fullName: TabularEditor.EnumExtensions.IndexOf<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>, System.Predicate<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>)
+  nameWithType.vb: EnumExtensions.IndexOf(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))(IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))), Predicate(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))))
+  fullName.vb: TabularEditor.EnumExtensions.IndexOf(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)))(System.Collections.Generic.IEnumerable(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))), System.Predicate(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))))
+  name.vb: IndexOf(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))(IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))), Predicate(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}},System.Predicate{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}},System.Predicate{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+  - name: )
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.Generic.IReadOnlyDictionary`2
+  commentId: T:System.Collections.Generic.IReadOnlyDictionary`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+  name: IReadOnlyDictionary<TKey, TValue>
+  nameWithType: IReadOnlyDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>
+  nameWithType.vb: IReadOnlyDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TKey, TValue)
+  name.vb: IReadOnlyDictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyDictionary`2
+    name: IReadOnlyDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyDictionary`2
+    name: IReadOnlyDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections.Generic.IReadOnlyCollection`1
+  commentId: T:System.Collections.Generic.IReadOnlyCollection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  name: IReadOnlyCollection<T>
+  nameWithType: IReadOnlyCollection<T>
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>
+  nameWithType.vb: IReadOnlyCollection(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
+  name.vb: IReadOnlyCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+- uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  name: ContainsDuplicates<T>(IEnumerable<T>)
+  nameWithType: EnumExtensions.ContainsDuplicates<T>(IEnumerable<T>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<T>(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of T)(IEnumerable(Of T))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of T)(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: ContainsDuplicates(Of T)(IEnumerable(Of T))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  name: ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>)
+  nameWithType: EnumExtensions.ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<T, U>(System.Collections.Generic.IEnumerable<T>, System.Func<T, U>, System.Collections.Generic.IEqualityComparer<U>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of T, U)(System.Collections.Generic.IEnumerable(Of T), System.Func(Of T, U), System.Collections.Generic.IEqualityComparer(Of U))
+  name.vb: ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: )
+- uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  name: ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>, out T)
+  nameWithType: EnumExtensions.ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>, out T)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<T, U>(System.Collections.Generic.IEnumerable<T>, System.Func<T, U>, System.Collections.Generic.IEqualityComparer<U>, out T)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U), T)
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of T, U)(System.Collections.Generic.IEnumerable(Of T), System.Func(Of T, U), System.Collections.Generic.IEqualityComparer(Of U), T)
+  name.vb: ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U), T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: out
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  commentId: M:TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  name: IndexOf<T>(IEnumerable<T>, Predicate<T>)
+  nameWithType: EnumExtensions.IndexOf<T>(IEnumerable<T>, Predicate<T>)
+  fullName: TabularEditor.EnumExtensions.IndexOf<T>(System.Collections.Generic.IEnumerable<T>, System.Predicate<T>)
+  nameWithType.vb: EnumExtensions.IndexOf(Of T)(IEnumerable(Of T), Predicate(Of T))
+  fullName.vb: TabularEditor.EnumExtensions.IndexOf(Of T)(System.Collections.Generic.IEnumerable(Of T), System.Predicate(Of T))
+  name.vb: IndexOf(Of T)(IEnumerable(Of T), Predicate(Of T))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Deep*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.Deep
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_Deep
+  name: Deep
+  nameWithType: DependsOnList.Deep
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Deep
+- uid: System.Collections.Generic.HashSet{TabularEditor.TOMWrapper.IDaxObject}
+  commentId: T:System.Collections.Generic.HashSet{TabularEditor.TOMWrapper.IDaxObject}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.HashSet`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1
+  name: HashSet<IDaxObject>
+  nameWithType: HashSet<IDaxObject>
+  fullName: System.Collections.Generic.HashSet<TabularEditor.TOMWrapper.IDaxObject>
+  nameWithType.vb: HashSet(Of IDaxObject)
+  fullName.vb: System.Collections.Generic.HashSet(Of TabularEditor.TOMWrapper.IDaxObject)
+  name.vb: HashSet(Of IDaxObject)
+  spec.csharp:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: )
+- uid: System.Collections.Generic.HashSet`1
+  commentId: T:System.Collections.Generic.HashSet`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1
+  name: HashSet<T>
+  nameWithType: HashSet<T>
+  fullName: System.Collections.Generic.HashSet<T>
+  nameWithType.vb: HashSet(Of T)
+  fullName.vb: System.Collections.Generic.HashSet(Of T)
+  name.vb: HashSet(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.HashSet`1
+    name: HashSet
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.hashset-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.ContainsKey*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.ContainsKey
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_ContainsKey_TabularEditor_TOMWrapper_IDaxObject_
+  name: ContainsKey
+  nameWithType: DependsOnList.ContainsKey
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.ContainsKey
+- uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+  commentId: M:System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+  parent: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+  definition: System.Collections.Generic.IReadOnlyDictionary`2.ContainsKey(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.containskey
+  name: ContainsKey(IDaxObject)
+  nameWithType: IReadOnlyDictionary<IDaxObject, IImmutableList<ObjectReference>>.ContainsKey(IDaxObject)
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>.ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+  nameWithType.vb: IReadOnlyDictionary(Of IDaxObject, IImmutableList(Of ObjectReference)).ContainsKey(IDaxObject)
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)).ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+    name: ContainsKey
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.containskey
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.ContainsKey(TabularEditor.TOMWrapper.IDaxObject)
+    name: ContainsKey
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.containskey
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.IDaxObject
+  commentId: T:TabularEditor.TOMWrapper.IDaxObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IDaxObject.html
+  name: IDaxObject
+  nameWithType: IDaxObject
+  fullName: TabularEditor.TOMWrapper.IDaxObject
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Collections.Generic.IReadOnlyDictionary`2.ContainsKey(`0)
+  commentId: M:System.Collections.Generic.IReadOnlyDictionary`2.ContainsKey(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.containskey
+  name: ContainsKey(TKey)
+  nameWithType: IReadOnlyDictionary<TKey, TValue>.ContainsKey(TKey)
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>.ContainsKey(TKey)
+  nameWithType.vb: IReadOnlyDictionary(Of TKey, TValue).ContainsKey(TKey)
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TKey, TValue).ContainsKey(TKey)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyDictionary`2.ContainsKey(`0)
+    name: ContainsKey
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.containskey
+  - name: (
+  - name: TKey
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyDictionary`2.ContainsKey(`0)
+    name: ContainsKey
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.containskey
+  - name: (
+  - name: TKey
+  - name: )
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.TryGetValue*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.TryGetValue
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_TryGetValue_TabularEditor_TOMWrapper_IDaxObject_System_Collections_Immutable_IImmutableList_TabularEditor_TOMWrapper_Utils_ObjectReference___
+  name: TryGetValue
+  nameWithType: DependsOnList.TryGetValue
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.TryGetValue
+- uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.TryGetValue(TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}@)
+  commentId: M:System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.TryGetValue(TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}@)
+  parent: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+  definition: System.Collections.Generic.IReadOnlyDictionary`2.TryGetValue(`0,`1@)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.trygetvalue
+  name: TryGetValue(IDaxObject, out IImmutableList<ObjectReference>)
+  nameWithType: IReadOnlyDictionary<IDaxObject, IImmutableList<ObjectReference>>.TryGetValue(IDaxObject, out IImmutableList<ObjectReference>)
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>.TryGetValue(TabularEditor.TOMWrapper.IDaxObject, out System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>)
+  nameWithType.vb: IReadOnlyDictionary(Of IDaxObject, IImmutableList(Of ObjectReference)).TryGetValue(IDaxObject, IImmutableList(Of ObjectReference))
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)).TryGetValue(TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))
+  name.vb: TryGetValue(IDaxObject, IImmutableList(Of ObjectReference))
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.TryGetValue(TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}@)
+    name: TryGetValue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.trygetvalue
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - name: out
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.TryGetValue(TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}@)
+    name: TryGetValue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.trygetvalue
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+- uid: System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}
+  commentId: T:System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}
+  parent: System.Collections.Immutable
+  definition: System.Collections.Immutable.IImmutableList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  name: IImmutableList<ObjectReference>
+  nameWithType: IImmutableList<ObjectReference>
+  fullName: System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>
+  nameWithType.vb: IImmutableList(Of ObjectReference)
+  fullName.vb: System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)
+  name.vb: IImmutableList(Of ObjectReference)
+  spec.csharp:
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyDictionary`2.TryGetValue(`0,`1@)
+  commentId: M:System.Collections.Generic.IReadOnlyDictionary`2.TryGetValue(`0,`1@)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.trygetvalue
+  name: TryGetValue(TKey, out TValue)
+  nameWithType: IReadOnlyDictionary<TKey, TValue>.TryGetValue(TKey, out TValue)
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>.TryGetValue(TKey, out TValue)
+  nameWithType.vb: IReadOnlyDictionary(Of TKey, TValue).TryGetValue(TKey, TValue)
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TKey, TValue).TryGetValue(TKey, TValue)
+  name.vb: TryGetValue(TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyDictionary`2.TryGetValue(`0,`1@)
+    name: TryGetValue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.trygetvalue
+  - name: (
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: out
+  - name: " "
+  - name: TValue
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyDictionary`2.TryGetValue(`0,`1@)
+    name: TryGetValue
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.trygetvalue
+  - name: (
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Immutable.IImmutableList`1
+  commentId: T:System.Collections.Immutable.IImmutableList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  name: IImmutableList<T>
+  nameWithType: IImmutableList<T>
+  fullName: System.Collections.Immutable.IImmutableList<T>
+  nameWithType.vb: IImmutableList(Of T)
+  fullName.vb: System.Collections.Immutable.IImmutableList(Of T)
+  name.vb: IImmutableList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Immutable
+  commentId: N:System.Collections.Immutable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Immutable
+  nameWithType: System.Collections.Immutable
+  fullName: System.Collections.Immutable
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Immutable
+    name: Immutable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Immutable
+    name: Immutable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.GetEnumerator*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.GetEnumerator
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_GetEnumerator
+  name: GetEnumerator
+  nameWithType: DependsOnList.GetEnumerator
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.GetEnumerator
+- uid: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.GetEnumerator
+  parent: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+  definition: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+  commentId: T:System.Collections.Generic.IEnumerator{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerator`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>
+  nameWithType: IEnumerator<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>
+  fullName: System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>
+  nameWithType.vb: IEnumerator(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))
+  fullName.vb: System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)))
+  name.vb: IEnumerator(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference)))
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable`1.GetEnumerator
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<T>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of T).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator`1
+  commentId: T:System.Collections.Generic.IEnumerator`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<T>
+  nameWithType: IEnumerator<T>
+  fullName: System.Collections.Generic.IEnumerator<T>
+  nameWithType.vb: IEnumerator(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of T)
+  name.vb: IEnumerator(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Functions*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.Functions
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_Functions
+  name: Functions
+  nameWithType: DependsOnList.Functions
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Functions
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Function}
+  commentId: T:System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Function}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<Function>
+  nameWithType: IEnumerable<Function>
+  fullName: System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.Function>
+  nameWithType.vb: IEnumerable(Of Function)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.Function)
+  name.vb: IEnumerable(Of Function)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Function
+    name: Function
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Function.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Function
+    name: Function
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Function.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Measures*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.Measures
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_Measures
+  name: Measures
+  nameWithType: DependsOnList.Measures
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Measures
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure}
+  commentId: T:System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Measure}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<Measure>
+  nameWithType: IEnumerable<Measure>
+  fullName: System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.Measure>
+  nameWithType.vb: IEnumerable(Of Measure)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.Measure)
+  name.vb: IEnumerable(Of Measure)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Measure
+    name: Measure
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Measure.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Measure
+    name: Measure
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Measure.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Columns*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.Columns
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_Columns
+  name: Columns
+  nameWithType: DependsOnList.Columns
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Columns
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Column}
+  commentId: T:System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Column}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<Column>
+  nameWithType: IEnumerable<Column>
+  fullName: System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.Column>
+  nameWithType.vb: IEnumerable(Of Column)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.Column)
+  name.vb: IEnumerable(Of Column)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Column
+    name: Column
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Column.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Column
+    name: Column
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Column.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Tables*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.Tables
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_Tables
+  name: Tables
+  nameWithType: DependsOnList.Tables
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Tables
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Table}
+  commentId: T:System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.Table}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<Table>
+  nameWithType: IEnumerable<Table>
+  fullName: System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.Table>
+  nameWithType.vb: IEnumerable(Of Table)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.Table)
+  name.vb: IEnumerable(Of Table)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Item*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.Item
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_Item_TabularEditor_TOMWrapper_IDaxObject_
+  name: this
+  nameWithType: DependsOnList.this
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.this
+  nameWithType.vb: DependsOnList.this[]
+  fullName.vb: TabularEditor.TOMWrapper.Utils.DependsOnList.this[]
+  name.vb: this[]
+- uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.Item(TabularEditor.TOMWrapper.IDaxObject)
+  commentId: P:System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.Item(TabularEditor.TOMWrapper.IDaxObject)
+  parent: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+  definition: System.Collections.Generic.IReadOnlyDictionary`2.Item(`0)
+  href: TabularEditor.TOMWrapper.IDaxObject.html
+  name: this[IDaxObject]
+  nameWithType: IReadOnlyDictionary<IDaxObject, IImmutableList<ObjectReference>>.this[IDaxObject]
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>.this[TabularEditor.TOMWrapper.IDaxObject]
+  nameWithType.vb: IReadOnlyDictionary(Of IDaxObject, IImmutableList(Of ObjectReference)).this[](IDaxObject)
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)).this[](TabularEditor.TOMWrapper.IDaxObject)
+  name.vb: this[](IDaxObject)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: ']'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.Item(TabularEditor.TOMWrapper.IDaxObject)
+    name: this[]
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.item
+  - name: (
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyDictionary`2.Item(`0)
+  commentId: P:System.Collections.Generic.IReadOnlyDictionary`2.Item(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.item
+  name: this[TKey]
+  nameWithType: IReadOnlyDictionary<TKey, TValue>.this[TKey]
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>.this[TKey]
+  nameWithType.vb: IReadOnlyDictionary(Of TKey, TValue).this[](TKey)
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TKey, TValue).this[](TKey)
+  name.vb: this[](TKey)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - name: TKey
+  - name: ']'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyDictionary`2.Item(`0)
+    name: this[]
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.item
+  - name: (
+  - name: TKey
+  - name: )
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Count*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.Count
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_Count
+  name: Count
+  nameWithType: DependsOnList.Count
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Count
+- uid: System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.Count
+  commentId: P:System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}.Count
+  parent: System.Collections.Generic.IReadOnlyCollection{System.Collections.Generic.KeyValuePair{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}}
+  definition: System.Collections.Generic.IReadOnlyCollection`1.Count
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1.count
+  name: Count
+  nameWithType: IReadOnlyCollection<KeyValuePair<IDaxObject, IImmutableList<ObjectReference>>>.Count
+  fullName: System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>>.Count
+  nameWithType.vb: IReadOnlyCollection(Of KeyValuePair(Of IDaxObject, IImmutableList(Of ObjectReference))).Count
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of System.Collections.Generic.KeyValuePair(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))).Count
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Collections.Generic.IReadOnlyCollection`1.Count
+  commentId: P:System.Collections.Generic.IReadOnlyCollection`1.Count
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1.count
+  name: Count
+  nameWithType: IReadOnlyCollection<T>.Count
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>.Count
+  nameWithType.vb: IReadOnlyCollection(Of T).Count
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T).Count
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Keys*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.Keys
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_Keys
+  name: Keys
+  nameWithType: DependsOnList.Keys
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Keys
+- uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.Keys
+  commentId: P:System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.Keys
+  parent: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+  definition: System.Collections.Generic.IReadOnlyDictionary`2.Keys
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.keys
+  name: Keys
+  nameWithType: IReadOnlyDictionary<IDaxObject, IImmutableList<ObjectReference>>.Keys
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>.Keys
+  nameWithType.vb: IReadOnlyDictionary(Of IDaxObject, IImmutableList(Of ObjectReference)).Keys
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)).Keys
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.IDaxObject}
+  commentId: T:System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.IDaxObject}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<IDaxObject>
+  nameWithType: IEnumerable<IDaxObject>
+  fullName: System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.IDaxObject>
+  nameWithType.vb: IEnumerable(Of IDaxObject)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.IDaxObject)
+  name.vb: IEnumerable(Of IDaxObject)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IDaxObject.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyDictionary`2.Keys
+  commentId: P:System.Collections.Generic.IReadOnlyDictionary`2.Keys
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.keys
+  name: Keys
+  nameWithType: IReadOnlyDictionary<TKey, TValue>.Keys
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>.Keys
+  nameWithType.vb: IReadOnlyDictionary(Of TKey, TValue).Keys
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TKey, TValue).Keys
+- uid: TabularEditor.TOMWrapper.Utils.DependsOnList.Values*
+  commentId: Overload:TabularEditor.TOMWrapper.Utils.DependsOnList.Values
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Utils.DependsOnList.html#TabularEditor_TOMWrapper_Utils_DependsOnList_Values
+  name: Values
+  nameWithType: DependsOnList.Values
+  fullName: TabularEditor.TOMWrapper.Utils.DependsOnList.Values
+- uid: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.Values
+  commentId: P:System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}.Values
+  parent: System.Collections.Generic.IReadOnlyDictionary{TabularEditor.TOMWrapper.IDaxObject,System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+  definition: System.Collections.Generic.IReadOnlyDictionary`2.Values
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.values
+  name: Values
+  nameWithType: IReadOnlyDictionary<IDaxObject, IImmutableList<ObjectReference>>.Values
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>.Values
+  nameWithType.vb: IReadOnlyDictionary(Of IDaxObject, IImmutableList(Of ObjectReference)).Values
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TabularEditor.TOMWrapper.IDaxObject, System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference)).Values
+- uid: System.Collections.Generic.IEnumerable{System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+  commentId: T:System.Collections.Generic.IEnumerable{System.Collections.Immutable.IImmutableList{TabularEditor.TOMWrapper.Utils.ObjectReference}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<IImmutableList<ObjectReference>>
+  nameWithType: IEnumerable<IImmutableList<ObjectReference>>
+  fullName: System.Collections.Generic.IEnumerable<System.Collections.Immutable.IImmutableList<TabularEditor.TOMWrapper.Utils.ObjectReference>>
+  nameWithType.vb: IEnumerable(Of IImmutableList(Of ObjectReference))
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.Collections.Immutable.IImmutableList(Of TabularEditor.TOMWrapper.Utils.ObjectReference))
+  name.vb: IEnumerable(Of IImmutableList(Of ObjectReference))
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Immutable.IImmutableList`1
+    name: IImmutableList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.immutable.iimmutablelist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Utils.ObjectReference.html
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyDictionary`2.Values
+  commentId: P:System.Collections.Generic.IReadOnlyDictionary`2.Values
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2.values
+  name: Values
+  nameWithType: IReadOnlyDictionary<TKey, TValue>.Values
+  fullName: System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>.Values
+  nameWithType.vb: IReadOnlyDictionary(Of TKey, TValue).Values
+  fullName.vb: System.Collections.Generic.IReadOnlyDictionary(Of TKey, TValue).Values

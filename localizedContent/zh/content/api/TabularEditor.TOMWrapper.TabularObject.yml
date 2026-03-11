@@ -1,0 +1,1268 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.TabularObject
+  commentId: T:TabularEditor.TOMWrapper.TabularObject
+  id: TabularObject
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  - TabularEditor.TOMWrapper.TabularObject.CustomReinit
+  - TabularEditor.TOMWrapper.TabularObject.Delete
+  - TabularEditor.TOMWrapper.TabularObject.Init
+  - TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  - TabularEditor.TOMWrapper.TabularObject.MetadataObject
+  - TabularEditor.TOMWrapper.TabularObject.Model
+  - TabularEditor.TOMWrapper.TabularObject.ObjectType
+  - TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  - TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(System.String,System.Object,System.Object)
+  - TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)
+  - TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+  - TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+  - TabularEditor.TOMWrapper.TabularObject.SetValue(System.Object,System.Object,System.Action{System.Object},System.String)
+  - TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+  langs:
+  - csharp
+  - vb
+  name: TabularObject
+  nameWithType: TabularObject
+  fullName: TabularEditor.TOMWrapper.TabularObject
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: >-
+    Base class for all TOM objects that are wrapped in the TOMWrapper. Supports INotifyPropertyChanged and INotifyPropertyChanging
+
+    and undo/redo functionality via the TabularModelHandler. Every TabularObject holds a reference to the corresponding TOM MetadataObject.
+
+    A TabularObject cannot exist without a corresponding TOM MetadataObject.
+
+
+    Protected constructor that takes a TOM MetadataObject as argument.
+  example: []
+  syntax:
+    content: 'public abstract class TabularObject : DynamicPropertyObject, ICustomTypeDescriptor, ITabularObject, INotifyPropertyChanged, IHandlerObject, INotifyPropertyChanging'
+    content.vb: Public MustInherit Class TabularObject Inherits DynamicPropertyObject Implements ICustomTypeDescriptor, ITabularObject, INotifyPropertyChanged, IHandlerObject, INotifyPropertyChanging
+  inheritance:
+  - System.Object
+  - TabularEditor.TOMWrapper.DynamicPropertyObject
+  derivedClasses:
+  - TabularEditor.TOMWrapper.AlternateOf
+  - TabularEditor.TOMWrapper.CalculationGroup
+  - TabularEditor.TOMWrapper.CalendarColumnGroup
+  - TabularEditor.TOMWrapper.DataCoverageDefinition
+  - TabularEditor.TOMWrapper.KPI
+  - TabularEditor.TOMWrapper.RefreshPolicy
+  - TabularEditor.TOMWrapper.TabularNamedObject
+  implements:
+  - System.ComponentModel.ICustomTypeDescriptor
+  - TabularEditor.TOMWrapper.ITabularObject
+  - System.ComponentModel.INotifyPropertyChanged
+  - TabularEditor.TOMWrapper.IHandlerObject
+  - System.ComponentModel.INotifyPropertyChanging
+  inheritedMembers:
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.TabularObject.SetValue(System.Object,System.Object,System.Action{System.Object},System.String)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.SetValue(System.Object,System.Object,System.Action{System.Object},System.String)
+  id: SetValue(System.Object,System.Object,System.Action{System.Object},System.String)
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: SetValue(object, object, Action<object>, string)
+  nameWithType: TabularObject.SetValue(object, object, Action<object>, string)
+  fullName: TabularEditor.TOMWrapper.TabularObject.SetValue(object, object, System.Action<object>, string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: protected void SetValue(object org, object value, Action<object> setter, string propertyName = null)
+    parameters:
+    - id: org
+      type: System.Object
+    - id: value
+      type: System.Object
+    - id: setter
+      type: System.Action{System.Object}
+    - id: propertyName
+      type: System.String
+    content.vb: Protected Sub SetValue(org As Object, value As Object, setter As Action(Of Object), propertyName As String = Nothing)
+  overload: TabularEditor.TOMWrapper.TabularObject.SetValue*
+  nameWithType.vb: TabularObject.SetValue(Object, Object, Action(Of Object), String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.SetValue(Object, Object, System.Action(Of Object), String)
+  name.vb: SetValue(Object, Object, Action(Of Object), String)
+- uid: TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+  id: SetValue``1(``0,``0,System.Action{``0},System.String)
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: SetValue<T>(T, T, Action<T>, string)
+  nameWithType: TabularObject.SetValue<T>(T, T, Action<T>, string)
+  fullName: TabularEditor.TOMWrapper.TabularObject.SetValue<T>(T, T, System.Action<T>, string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: protected bool SetValue<T>(T org, T value, Action<T> setter, string propertyName = null)
+    parameters:
+    - id: org
+      type: '{T}'
+    - id: value
+      type: '{T}'
+    - id: setter
+      type: System.Action{{T}}
+    - id: propertyName
+      type: System.String
+    typeParameters:
+    - id: T
+    return:
+      type: System.Boolean
+    content.vb: Protected Function SetValue(Of T)(org As T, value As T, setter As Action(Of T), propertyName As String = Nothing) As Boolean
+  overload: TabularEditor.TOMWrapper.TabularObject.SetValue*
+  nameWithType.vb: TabularObject.SetValue(Of T)(T, T, Action(Of T), String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.SetValue(Of T)(T, T, System.Action(Of T), String)
+  name.vb: SetValue(Of T)(T, T, Action(Of T), String)
+- uid: TabularEditor.TOMWrapper.TabularObject.CustomReinit
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.CustomReinit
+  id: CustomReinit
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: CustomReinit()
+  nameWithType: TabularObject.CustomReinit()
+  fullName: TabularEditor.TOMWrapper.TabularObject.CustomReinit()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: protected virtual void CustomReinit()
+    content.vb: Protected Overridable Sub CustomReinit()
+  overload: TabularEditor.TOMWrapper.TabularObject.CustomReinit*
+- uid: TabularEditor.TOMWrapper.TabularObject.Delete
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.Delete
+  id: Delete
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: Delete()
+  nameWithType: TabularObject.Delete()
+  fullName: TabularEditor.TOMWrapper.TabularObject.Delete()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public virtual void Delete()
+    content.vb: Public Overridable Sub Delete()
+  overload: TabularEditor.TOMWrapper.TabularObject.Delete*
+- uid: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  id: Children_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: Children_CollectionChanged(object, NotifyCollectionChangedEventArgs)
+  nameWithType: TabularObject.Children_CollectionChanged(object, NotifyCollectionChangedEventArgs)
+  fullName: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(object, System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: protected virtual void Children_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    parameters:
+    - id: sender
+      type: System.Object
+    - id: e
+      type: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    content.vb: Protected Overridable Sub Children_CollectionChanged(sender As Object, e As NotifyCollectionChangedEventArgs)
+  overload: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged*
+  nameWithType.vb: TabularObject.Children_CollectionChanged(Object, NotifyCollectionChangedEventArgs)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(Object, System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  name.vb: Children_CollectionChanged(Object, NotifyCollectionChangedEventArgs)
+- uid: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(System.String,System.Object,System.Object)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(System.String,System.Object,System.Object)
+  id: OnPropertyChanged(System.String,System.Object,System.Object)
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: OnPropertyChanged(string, object, object)
+  nameWithType: TabularObject.OnPropertyChanged(string, object, object)
+  fullName: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(string, object, object)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Fired after a property is changed
+  example: []
+  syntax:
+    content: protected virtual void OnPropertyChanged(string propertyName, object oldValue, object newValue)
+    parameters:
+    - id: propertyName
+      type: System.String
+      description: ''
+    - id: oldValue
+      type: System.Object
+      description: ''
+    - id: newValue
+      type: System.Object
+      description: ''
+    content.vb: Protected Overridable Sub OnPropertyChanged(propertyName As String, oldValue As Object, newValue As Object)
+  overload: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged*
+  nameWithType.vb: TabularObject.OnPropertyChanged(String, Object, Object)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(String, Object, Object)
+  name.vb: OnPropertyChanged(String, Object, Object)
+- uid: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)
+  id: OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: OnPropertyChanging(string, object, ref bool, ref bool)
+  nameWithType: TabularObject.OnPropertyChanging(string, object, ref bool, ref bool)
+  fullName: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(string, object, ref bool, ref bool)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: >-
+    Called before a property is changed on an object. Derived classes can control how the change is handled.
+
+    Throw ArgumentException within this method, to display an error message in the UI.
+  example: []
+  syntax:
+    content: protected virtual void OnPropertyChanging(string propertyName, object newValue, ref bool undoable, ref bool cancel)
+    parameters:
+    - id: propertyName
+      type: System.String
+      description: Name of the changed property.
+    - id: newValue
+      type: System.Object
+      description: New value assigned to the property.
+    - id: undoable
+      type: System.Boolean
+      description: Return false if automatic undo of the property change is not needed.
+    - id: cancel
+      type: System.Boolean
+      description: Return true if the property change should not apply.
+    content.vb: Protected Overridable Sub OnPropertyChanging(propertyName As String, newValue As Object, undoable As Boolean, cancel As Boolean)
+  overload: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging*
+  nameWithType.vb: TabularObject.OnPropertyChanging(String, Object, Boolean, Boolean)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(String, Object, Boolean, Boolean)
+  name.vb: OnPropertyChanging(String, Object, Boolean, Boolean)
+- uid: TabularEditor.TOMWrapper.TabularObject.Init
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.Init
+  id: Init
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: Init()
+  nameWithType: TabularObject.Init()
+  fullName: TabularEditor.TOMWrapper.TabularObject.Init()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Derived members should override this method to instantiate child objects
+  example: []
+  syntax:
+    content: protected virtual void Init()
+    content.vb: Protected Overridable Sub Init()
+  overload: TabularEditor.TOMWrapper.TabularObject.Init*
+- uid: TabularEditor.TOMWrapper.TabularObject.MetadataObject
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.MetadataObject
+  id: MetadataObject
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: MetadataObject
+  nameWithType: TabularObject.MetadataObject
+  fullName: TabularEditor.TOMWrapper.TabularObject.MetadataObject
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: protected MetadataObject MetadataObject { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.AnalysisServices.Tabular.MetadataObject
+    content.vb: Protected Property MetadataObject As MetadataObject
+  overload: TabularEditor.TOMWrapper.TabularObject.MetadataObject*
+- uid: TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  id: ObjectTypeName
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: ObjectTypeName
+  nameWithType: TabularObject.ObjectTypeName
+  fullName: TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The type name of this object (\"Folder\", \"Measure\", \"Table\", etc.).
+  example: []
+  syntax:
+    content: public virtual string ObjectTypeName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Overridable ReadOnly Property ObjectTypeName As String
+  overload: TabularEditor.TOMWrapper.TabularObject.ObjectTypeName*
+- uid: TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  id: IsRemoved
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: IsRemoved
+  nameWithType: TabularObject.IsRemoved
+  fullName: TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: >-
+      [Browsable(false)]
+
+      public bool IsRemoved { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <Browsable(False)>
+
+      Public ReadOnly Property IsRemoved As Boolean
+  overload: TabularEditor.TOMWrapper.TabularObject.IsRemoved*
+  implements:
+  - TabularEditor.TOMWrapper.ITabularObject.IsRemoved
+  attributes:
+  - type: System.ComponentModel.BrowsableAttribute
+    ctor: System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: false
+- uid: TabularEditor.TOMWrapper.TabularObject.Model
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.Model
+  id: Model
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: Model
+  nameWithType: TabularObject.Model
+  fullName: TabularEditor.TOMWrapper.TabularObject.Model
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The model this object belongs to.
+  example: []
+  syntax:
+    content: >-
+      [Browsable(false)]
+
+      public Model Model { get; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.Model
+    content.vb: >-
+      <Browsable(False)>
+
+      Public ReadOnly Property Model As Model
+  overload: TabularEditor.TOMWrapper.TabularObject.Model*
+  implements:
+  - TabularEditor.TOMWrapper.ITabularObject.Model
+  attributes:
+  - type: System.ComponentModel.BrowsableAttribute
+    ctor: System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: false
+- uid: TabularEditor.TOMWrapper.TabularObject.ObjectType
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.ObjectType
+  id: ObjectType
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: ObjectType
+  nameWithType: TabularObject.ObjectType
+  fullName: TabularEditor.TOMWrapper.TabularObject.ObjectType
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The type of this object (Folder, Measure, Table, etc.).
+  example: []
+  syntax:
+    content: >-
+      [Browsable(false)]
+
+      public virtual ObjectType ObjectType { get; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+    content.vb: >-
+      <Browsable(False)>
+
+      Public Overridable ReadOnly Property ObjectType As ObjectType
+  overload: TabularEditor.TOMWrapper.TabularObject.ObjectType*
+  implements:
+  - TabularEditor.TOMWrapper.ITabularObject.ObjectType
+  attributes:
+  - type: System.ComponentModel.BrowsableAttribute
+    ctor: System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: false
+- uid: TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+  commentId: E:TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+  id: PropertyChanging
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: PropertyChanging
+  nameWithType: TabularObject.PropertyChanging
+  fullName: TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+  type: Event
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public event PropertyChangingEventHandler PropertyChanging
+    return:
+      type: System.ComponentModel.PropertyChangingEventHandler
+    content.vb: Public Event PropertyChanging As PropertyChangingEventHandler
+  implements:
+  - System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+- uid: TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+  commentId: E:TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+  id: PropertyChanged
+  parent: TabularEditor.TOMWrapper.TabularObject
+  langs:
+  - csharp
+  - vb
+  name: PropertyChanged
+  nameWithType: TabularObject.PropertyChanged
+  fullName: TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+  type: Event
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public event PropertyChangedEventHandler PropertyChanged
+    return:
+      type: System.ComponentModel.PropertyChangedEventHandler
+    content.vb: Public Event PropertyChanged As PropertyChangedEventHandler
+  implements:
+  - System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: TabularEditor.TOMWrapper.DynamicPropertyObject
+  commentId: T:TabularEditor.TOMWrapper.DynamicPropertyObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.DynamicPropertyObject.html
+  name: DynamicPropertyObject
+  nameWithType: DynamicPropertyObject
+  fullName: TabularEditor.TOMWrapper.DynamicPropertyObject
+- uid: System.ComponentModel.ICustomTypeDescriptor
+  commentId: T:System.ComponentModel.ICustomTypeDescriptor
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.icustomtypedescriptor
+  name: ICustomTypeDescriptor
+  nameWithType: ICustomTypeDescriptor
+  fullName: System.ComponentModel.ICustomTypeDescriptor
+- uid: TabularEditor.TOMWrapper.ITabularObject
+  commentId: T:TabularEditor.TOMWrapper.ITabularObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularObject.html
+  name: ITabularObject
+  nameWithType: ITabularObject
+  fullName: TabularEditor.TOMWrapper.ITabularObject
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: TabularEditor.TOMWrapper.IHandlerObject
+  commentId: T:TabularEditor.TOMWrapper.IHandlerObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IHandlerObject.html
+  name: IHandlerObject
+  nameWithType: IHandlerObject
+  fullName: TabularEditor.TOMWrapper.IHandlerObject
+- uid: System.ComponentModel.INotifyPropertyChanging
+  commentId: T:System.ComponentModel.INotifyPropertyChanging
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanging
+  name: INotifyPropertyChanging
+  nameWithType: INotifyPropertyChanging
+  fullName: System.ComponentModel.INotifyPropertyChanging
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.TabularObject.SetValue*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.SetValue
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_SetValue_System_Object_System_Object_System_Action_System_Object__System_String_
+  name: SetValue
+  nameWithType: TabularObject.SetValue
+  fullName: TabularEditor.TOMWrapper.TabularObject.SetValue
+- uid: System.Action{System.Object}
+  commentId: T:System.Action{System.Object}
+  parent: System
+  definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<object>
+  nameWithType: Action<object>
+  fullName: System.Action<object>
+  nameWithType.vb: Action(Of Object)
+  fullName.vb: System.Action(Of Object)
+  name.vb: Action(Of Object)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: System.Action{{T}}
+  commentId: T:System.Action{`0}
+  parent: System
+  definition: System.Action`1
+  href: https://learn.microsoft.com/dotnet/api/system.action-1
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: TabularEditor.TOMWrapper.TabularObject.CustomReinit*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.CustomReinit
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_CustomReinit
+  name: CustomReinit
+  nameWithType: TabularObject.CustomReinit
+  fullName: TabularEditor.TOMWrapper.TabularObject.CustomReinit
+- uid: TabularEditor.TOMWrapper.TabularObject.Delete*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.Delete
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Delete
+  name: Delete
+  nameWithType: TabularObject.Delete
+  fullName: TabularEditor.TOMWrapper.TabularObject.Delete
+- uid: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Children_CollectionChanged_System_Object_System_Collections_Specialized_NotifyCollectionChangedEventArgs_
+  name: Children_CollectionChanged
+  nameWithType: TabularObject.Children_CollectionChanged
+  fullName: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged
+- uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+  commentId: T:System.Collections.Specialized.NotifyCollectionChangedEventArgs
+  parent: System.Collections.Specialized
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.specialized.notifycollectionchangedeventargs
+  name: NotifyCollectionChangedEventArgs
+  nameWithType: NotifyCollectionChangedEventArgs
+  fullName: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+- uid: System.Collections.Specialized
+  commentId: N:System.Collections.Specialized
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Specialized
+  nameWithType: System.Collections.Specialized
+  fullName: System.Collections.Specialized
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Specialized
+    name: Specialized
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Specialized
+    name: Specialized
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized
+- uid: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_OnPropertyChanged_System_String_System_Object_System_Object_
+  name: OnPropertyChanged
+  nameWithType: TabularObject.OnPropertyChanged
+  fullName: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged
+- uid: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_OnPropertyChanging_System_String_System_Object_System_Boolean__System_Boolean__
+  name: OnPropertyChanging
+  nameWithType: TabularObject.OnPropertyChanging
+  fullName: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging
+- uid: TabularEditor.TOMWrapper.TabularObject.Init*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.Init
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Init
+  name: Init
+  nameWithType: TabularObject.Init
+  fullName: TabularEditor.TOMWrapper.TabularObject.Init
+- uid: TabularEditor.TOMWrapper.TabularObject.MetadataObject*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.MetadataObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_MetadataObject
+  name: MetadataObject
+  nameWithType: TabularObject.MetadataObject
+  fullName: TabularEditor.TOMWrapper.TabularObject.MetadataObject
+- uid: Microsoft.AnalysisServices.Tabular.MetadataObject
+  isExternal: true
+  name: MetadataObject
+  nameWithType: MetadataObject
+  fullName: Microsoft.AnalysisServices.Tabular.MetadataObject
+- uid: TabularEditor.TOMWrapper.TabularObject.ObjectTypeName*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_ObjectTypeName
+  name: ObjectTypeName
+  nameWithType: TabularObject.ObjectTypeName
+  fullName: TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+- uid: TabularEditor.TOMWrapper.TabularObject.IsRemoved*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_IsRemoved
+  name: IsRemoved
+  nameWithType: TabularObject.IsRemoved
+  fullName: TabularEditor.TOMWrapper.TabularObject.IsRemoved
+- uid: TabularEditor.TOMWrapper.ITabularObject.IsRemoved
+  commentId: P:TabularEditor.TOMWrapper.ITabularObject.IsRemoved
+  parent: TabularEditor.TOMWrapper.ITabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularObject.html#TabularEditor_TOMWrapper_ITabularObject_IsRemoved
+  name: IsRemoved
+  nameWithType: ITabularObject.IsRemoved
+  fullName: TabularEditor.TOMWrapper.ITabularObject.IsRemoved
+- uid: TabularEditor.TOMWrapper.TabularObject.Model*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.Model
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Model
+  name: Model
+  nameWithType: TabularObject.Model
+  fullName: TabularEditor.TOMWrapper.TabularObject.Model
+- uid: TabularEditor.TOMWrapper.ITabularObject.Model
+  commentId: P:TabularEditor.TOMWrapper.ITabularObject.Model
+  parent: TabularEditor.TOMWrapper.ITabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularObject.html#TabularEditor_TOMWrapper_ITabularObject_Model
+  name: Model
+  nameWithType: ITabularObject.Model
+  fullName: TabularEditor.TOMWrapper.ITabularObject.Model
+- uid: TabularEditor.TOMWrapper.Model
+  commentId: T:TabularEditor.TOMWrapper.Model
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Model.html
+  name: Model
+  nameWithType: Model
+  fullName: TabularEditor.TOMWrapper.Model
+- uid: TabularEditor.TOMWrapper.TabularObject.ObjectType*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularObject.ObjectType
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_ObjectType
+  name: ObjectType
+  nameWithType: TabularObject.ObjectType
+  fullName: TabularEditor.TOMWrapper.TabularObject.ObjectType
+- uid: TabularEditor.TOMWrapper.ITabularObject.ObjectType
+  commentId: P:TabularEditor.TOMWrapper.ITabularObject.ObjectType
+  parent: TabularEditor.TOMWrapper.ITabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularObject.html#TabularEditor_TOMWrapper_ITabularObject_ObjectType
+  name: ObjectType
+  nameWithType: ITabularObject.ObjectType
+  fullName: TabularEditor.TOMWrapper.ITabularObject.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType
+  commentId: T:TabularEditor.TOMWrapper.ObjectType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ObjectType.html
+  name: ObjectType
+  nameWithType: ObjectType
+  fullName: TabularEditor.TOMWrapper.ObjectType
+- uid: System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+  commentId: E:System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+  parent: System.ComponentModel.INotifyPropertyChanging
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanging.propertychanging
+  name: PropertyChanging
+  nameWithType: INotifyPropertyChanging.PropertyChanging
+  fullName: System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+- uid: System.ComponentModel.PropertyChangingEventHandler
+  commentId: T:System.ComponentModel.PropertyChangingEventHandler
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangingeventhandler
+  name: PropertyChangingEventHandler
+  nameWithType: PropertyChangingEventHandler
+  fullName: System.ComponentModel.PropertyChangingEventHandler
+- uid: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  commentId: E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  parent: System.ComponentModel.INotifyPropertyChanged
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged.propertychanged
+  name: PropertyChanged
+  nameWithType: INotifyPropertyChanged.PropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: System.ComponentModel.PropertyChangedEventHandler
+  commentId: T:System.ComponentModel.PropertyChangedEventHandler
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler
+  name: PropertyChangedEventHandler
+  nameWithType: PropertyChangedEventHandler
+  fullName: System.ComponentModel.PropertyChangedEventHandler

@@ -1,0 +1,91 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  commentId: N:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  id: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  children:
+  - TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  - TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+  langs:
+  - csharp
+  - vb
+  name: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  nameWithType: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  type: Namespace
+  assemblies:
+  - SemanticBridge
+references:
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  commentId: T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject.html
+  name: IMetricViewObject
+  nameWithType: IMetricViewObject
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+  commentId: T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.html
+  name: IMetricViewValidationRule
+  nameWithType: IMetricViewValidationRule
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  commentId: N:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  nameWithType: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+    name: Interfaces
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+    name: Interfaces
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.html

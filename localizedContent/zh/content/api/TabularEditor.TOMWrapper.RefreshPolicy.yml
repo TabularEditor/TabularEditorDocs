@@ -1,0 +1,2877 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.RefreshPolicy
+  commentId: T:TabularEditor.TOMWrapper.RefreshPolicy
+  id: RefreshPolicy
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.RefreshPolicy.Annotations
+  - TabularEditor.TOMWrapper.RefreshPolicy.ClearAnnotations
+  - TabularEditor.TOMWrapper.RefreshPolicy.ClearExtendedProperties
+  - TabularEditor.TOMWrapper.RefreshPolicy.ExtendedProperties
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation(System.Int32)
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation(System.String)
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotations
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotationsCount
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperties
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty(System.Int32)
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty(System.String)
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyCount
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType(System.Int32)
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType(System.String)
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetNewAnnotationName
+  - TabularEditor.TOMWrapper.RefreshPolicy.GetNewExtendedPropertyName
+  - TabularEditor.TOMWrapper.RefreshPolicy.HasAnnotation(System.String)
+  - TabularEditor.TOMWrapper.RefreshPolicy.HasExtendedProperty(System.String)
+  - TabularEditor.TOMWrapper.RefreshPolicy.Mode
+  - TabularEditor.TOMWrapper.RefreshPolicy.PolicyType
+  - TabularEditor.TOMWrapper.RefreshPolicy.RemoveAnnotation(System.String)
+  - TabularEditor.TOMWrapper.RefreshPolicy.RemoveExtendedProperty(System.String)
+  - TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation(System.Int32,System.String)
+  - TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation(System.String,System.String)
+  - TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  - TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  - TabularEditor.TOMWrapper.RefreshPolicy.Table
+  langs:
+  - csharp
+  - vb
+  name: RefreshPolicy
+  nameWithType: RefreshPolicy
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Represents an abstract RefreshPolicy object. It is a child of a Table object.
+  remarks: This metadata object is only supported when the compatibility level of the database is at 1450 or above.
+  example: []
+  syntax:
+    content: 'public abstract class RefreshPolicy : TabularObject, ICustomTypeDescriptor, INotifyPropertyChanging, IAnnotationObject, IExtendedPropertyObject, ITabularObject, INotifyPropertyChanged, IHandlerObject'
+    content.vb: Public MustInherit Class RefreshPolicy Inherits TabularObject Implements ICustomTypeDescriptor, INotifyPropertyChanging, IAnnotationObject, IExtendedPropertyObject, ITabularObject, INotifyPropertyChanged, IHandlerObject
+  inheritance:
+  - System.Object
+  - TabularEditor.TOMWrapper.DynamicPropertyObject
+  - TabularEditor.TOMWrapper.TabularObject
+  derivedClasses:
+  - TabularEditor.TOMWrapper.BasicRefreshPolicy
+  implements:
+  - System.ComponentModel.ICustomTypeDescriptor
+  - System.ComponentModel.INotifyPropertyChanging
+  - TabularEditor.TOMWrapper.IAnnotationObject
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject
+  - TabularEditor.TOMWrapper.ITabularObject
+  - System.ComponentModel.INotifyPropertyChanged
+  - TabularEditor.TOMWrapper.IHandlerObject
+  inheritedMembers:
+  - TabularEditor.TOMWrapper.TabularObject.SetValue(System.Object,System.Object,System.Action{System.Object},System.String)
+  - TabularEditor.TOMWrapper.TabularObject.SetValue``1({T},{T},System.Action{{T}},System.String)
+  - TabularEditor.TOMWrapper.TabularObject.CustomReinit
+  - TabularEditor.TOMWrapper.TabularObject.Delete
+  - TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  - TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(System.String,System.Object,System.Object)
+  - TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)
+  - TabularEditor.TOMWrapper.TabularObject.Init
+  - TabularEditor.TOMWrapper.TabularObject.MetadataObject
+  - TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  - TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  - TabularEditor.TOMWrapper.TabularObject.Model
+  - TabularEditor.TOMWrapper.TabularObject.ObjectType
+  - TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+  - TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.ClearAnnotations
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.ClearAnnotations
+  id: ClearAnnotations
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: ClearAnnotations()
+  nameWithType: RefreshPolicy.ClearAnnotations()
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.ClearAnnotations()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Removes all annotations from this object.
+  example: []
+  syntax:
+    content: public void ClearAnnotations()
+    content.vb: Public Sub ClearAnnotations()
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.ClearAnnotations*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.ClearAnnotations
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation(System.Int32)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation(System.Int32)
+  id: GetAnnotation(System.Int32)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetAnnotation(int)
+  nameWithType: RefreshPolicy.GetAnnotation(int)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation(int)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the value of the annotation with the given index, assuming it exists.
+  example: []
+  syntax:
+    content: public string GetAnnotation(int index)
+    parameters:
+    - id: index
+      type: System.Int32
+    return:
+      type: System.String
+    content.vb: Public Function GetAnnotation(index As Integer) As String
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(System.Int32)
+  nameWithType.vb: RefreshPolicy.GetAnnotation(Integer)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation(Integer)
+  name.vb: GetAnnotation(Integer)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.HasAnnotation(System.String)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.HasAnnotation(System.String)
+  id: HasAnnotation(System.String)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: HasAnnotation(string)
+  nameWithType: RefreshPolicy.HasAnnotation(string)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.HasAnnotation(string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Returns true if an annotation with the given name exists. Otherwise false.
+  example: []
+  syntax:
+    content: public bool HasAnnotation(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Function HasAnnotation(name As String) As Boolean
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.HasAnnotation*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.HasAnnotation(System.String)
+  nameWithType.vb: RefreshPolicy.HasAnnotation(String)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.HasAnnotation(String)
+  name.vb: HasAnnotation(String)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation(System.String)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation(System.String)
+  id: GetAnnotation(System.String)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetAnnotation(string)
+  nameWithType: RefreshPolicy.GetAnnotation(string)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation(string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the value of the annotation with the given name. Returns null if no such annotation exists.
+  example: []
+  syntax:
+    content: public string GetAnnotation(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: System.String
+    content.vb: Public Function GetAnnotation(name As String) As String
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(System.String)
+  nameWithType.vb: RefreshPolicy.GetAnnotation(String)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation(String)
+  name.vb: GetAnnotation(String)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation(System.Int32,System.String)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation(System.Int32,System.String)
+  id: SetAnnotation(System.Int32,System.String)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: SetAnnotation(int, string)
+  nameWithType: RefreshPolicy.SetAnnotation(int, string)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation(int, string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the value of the annotation with the given index, assuming it exists.
+  example: []
+  syntax:
+    content: public void SetAnnotation(int index, string value)
+    parameters:
+    - id: index
+      type: System.Int32
+    - id: value
+      type: System.String
+    content.vb: Public Sub SetAnnotation(index As Integer, value As String)
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(System.Int32,System.String)
+  nameWithType.vb: RefreshPolicy.SetAnnotation(Integer, String)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation(Integer, String)
+  name.vb: SetAnnotation(Integer, String)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetNewAnnotationName
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetNewAnnotationName
+  id: GetNewAnnotationName
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetNewAnnotationName()
+  nameWithType: RefreshPolicy.GetNewAnnotationName()
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetNewAnnotationName()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Returns a unique name for a new annotation.
+  example: []
+  syntax:
+    content: public string GetNewAnnotationName()
+    return:
+      type: System.String
+    content.vb: Public Function GetNewAnnotationName() As String
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetNewAnnotationName*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.GetNewAnnotationName
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation(System.String,System.String)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation(System.String,System.String)
+  id: SetAnnotation(System.String,System.String)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: SetAnnotation(string, string)
+  nameWithType: RefreshPolicy.SetAnnotation(string, string)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation(string, string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the value of the annotation having the given name. If no such annotation exists, it will be created. If value is set to null, the annotation will be removed.
+  example: []
+  syntax:
+    content: public void SetAnnotation(string name, string value)
+    parameters:
+    - id: name
+      type: System.String
+    - id: value
+      type: System.String
+    content.vb: Public Sub SetAnnotation(name As String, value As String)
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(System.String,System.String)
+  nameWithType.vb: RefreshPolicy.SetAnnotation(String, String)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation(String, String)
+  name.vb: SetAnnotation(String, String)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.RemoveAnnotation(System.String)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.RemoveAnnotation(System.String)
+  id: RemoveAnnotation(System.String)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: RemoveAnnotation(string)
+  nameWithType: RefreshPolicy.RemoveAnnotation(string)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.RemoveAnnotation(string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Remove an annotation by the given name.
+  example: []
+  syntax:
+    content: public void RemoveAnnotation(string name)
+    parameters:
+    - id: name
+      type: System.String
+    content.vb: Public Sub RemoveAnnotation(name As String)
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.RemoveAnnotation*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.RemoveAnnotation(System.String)
+  nameWithType.vb: RefreshPolicy.RemoveAnnotation(String)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.RemoveAnnotation(String)
+  name.vb: RemoveAnnotation(String)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotationsCount
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotationsCount
+  id: GetAnnotationsCount
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetAnnotationsCount()
+  nameWithType: RefreshPolicy.GetAnnotationsCount()
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotationsCount()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the number of annotations on the current Refresh Policy.
+  example: []
+  syntax:
+    content: public int GetAnnotationsCount()
+    return:
+      type: System.Int32
+    content.vb: Public Function GetAnnotationsCount() As Integer
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotationsCount*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotationsCount
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotations
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotations
+  id: GetAnnotations
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetAnnotations()
+  nameWithType: RefreshPolicy.GetAnnotations()
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotations()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets a collection of all annotation names on the current Refresh Policy.
+  example: []
+  syntax:
+    content: public IEnumerable<string> GetAnnotations()
+    return:
+      type: System.Collections.Generic.IEnumerable{System.String}
+    content.vb: Public Function GetAnnotations() As IEnumerable(Of String)
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotations*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotations
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.ClearExtendedProperties
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.ClearExtendedProperties
+  id: ClearExtendedProperties
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: ClearExtendedProperties()
+  nameWithType: RefreshPolicy.ClearExtendedProperties()
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.ClearExtendedProperties()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Removes all Extended Properties from this object.
+  example: []
+  syntax:
+    content: public void ClearExtendedProperties()
+    content.vb: Public Sub ClearExtendedProperties()
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.ClearExtendedProperties*
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.HasExtendedProperty(System.String)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.HasExtendedProperty(System.String)
+  id: HasExtendedProperty(System.String)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: HasExtendedProperty(string)
+  nameWithType: RefreshPolicy.HasExtendedProperty(string)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.HasExtendedProperty(string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Returns true if an ExtendedProperty with the given name exists. Otherwise false.
+  example: []
+  syntax:
+    content: public bool HasExtendedProperty(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Function HasExtendedProperty(name As String) As Boolean
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.HasExtendedProperty*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.HasExtendedProperty(System.String)
+  nameWithType.vb: RefreshPolicy.HasExtendedProperty(String)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.HasExtendedProperty(String)
+  name.vb: HasExtendedProperty(String)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType(System.Int32)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType(System.Int32)
+  id: GetExtendedPropertyType(System.Int32)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetExtendedPropertyType(int)
+  nameWithType: RefreshPolicy.GetExtendedPropertyType(int)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType(int)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the type of the ExtendedProperty with the given index, assuming it exists.
+  example: []
+  syntax:
+    content: public ExtendedPropertyType GetExtendedPropertyType(int index)
+    parameters:
+    - id: index
+      type: System.Int32
+    return:
+      type: TabularEditor.TOMWrapper.ExtendedPropertyType
+    content.vb: Public Function GetExtendedPropertyType(index As Integer) As ExtendedPropertyType
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(System.Int32)
+  nameWithType.vb: RefreshPolicy.GetExtendedPropertyType(Integer)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType(Integer)
+  name.vb: GetExtendedPropertyType(Integer)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType(System.String)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType(System.String)
+  id: GetExtendedPropertyType(System.String)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetExtendedPropertyType(string)
+  nameWithType: RefreshPolicy.GetExtendedPropertyType(string)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType(string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the type of the ExtendedProperty with the given name, assuming it exists.
+  example: []
+  syntax:
+    content: public ExtendedPropertyType GetExtendedPropertyType(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: TabularEditor.TOMWrapper.ExtendedPropertyType
+    content.vb: Public Function GetExtendedPropertyType(name As String) As ExtendedPropertyType
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(System.String)
+  nameWithType.vb: RefreshPolicy.GetExtendedPropertyType(String)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType(String)
+  name.vb: GetExtendedPropertyType(String)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty(System.Int32)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty(System.Int32)
+  id: GetExtendedProperty(System.Int32)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetExtendedProperty(int)
+  nameWithType: RefreshPolicy.GetExtendedProperty(int)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty(int)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the value of the ExtendedProperty with the given index, assuming it exists.
+  example: []
+  syntax:
+    content: public string GetExtendedProperty(int index)
+    parameters:
+    - id: index
+      type: System.Int32
+    return:
+      type: System.String
+    content.vb: Public Function GetExtendedProperty(index As Integer) As String
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(System.Int32)
+  nameWithType.vb: RefreshPolicy.GetExtendedProperty(Integer)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty(Integer)
+  name.vb: GetExtendedProperty(Integer)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty(System.String)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty(System.String)
+  id: GetExtendedProperty(System.String)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetExtendedProperty(string)
+  nameWithType: RefreshPolicy.GetExtendedProperty(string)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty(string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the value of the ExtendedProperty with the given name. Returns null if no such ExtendedProperty exists.
+  example: []
+  syntax:
+    content: public string GetExtendedProperty(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: System.String
+    content.vb: Public Function GetExtendedProperty(name As String) As String
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(System.String)
+  nameWithType.vb: RefreshPolicy.GetExtendedProperty(String)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty(String)
+  name.vb: GetExtendedProperty(String)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  id: SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: SetExtendedProperty(int, string, ExtendedPropertyType)
+  nameWithType: RefreshPolicy.SetExtendedProperty(int, string, ExtendedPropertyType)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty(int, string, TabularEditor.TOMWrapper.ExtendedPropertyType)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the value of the ExtendedProperty with the given index, optionally specifiying the type (string or JSON) of the ExtendedProperty.
+  example: []
+  syntax:
+    content: public void SetExtendedProperty(int index, string value, ExtendedPropertyType type)
+    parameters:
+    - id: index
+      type: System.Int32
+    - id: value
+      type: System.String
+    - id: type
+      type: TabularEditor.TOMWrapper.ExtendedPropertyType
+    content.vb: Public Sub SetExtendedProperty(index As Integer, value As String, type As ExtendedPropertyType)
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  nameWithType.vb: RefreshPolicy.SetExtendedProperty(Integer, String, ExtendedPropertyType)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty(Integer, String, TabularEditor.TOMWrapper.ExtendedPropertyType)
+  name.vb: SetExtendedProperty(Integer, String, ExtendedPropertyType)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetNewExtendedPropertyName
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetNewExtendedPropertyName
+  id: GetNewExtendedPropertyName
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetNewExtendedPropertyName()
+  nameWithType: RefreshPolicy.GetNewExtendedPropertyName()
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetNewExtendedPropertyName()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Returns a unique name for a new ExtendedProperty.
+  example: []
+  syntax:
+    content: public string GetNewExtendedPropertyName()
+    return:
+      type: System.String
+    content.vb: Public Function GetNewExtendedPropertyName() As String
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetNewExtendedPropertyName*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.GetNewExtendedPropertyName
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  id: SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: SetExtendedProperty(string, string, ExtendedPropertyType)
+  nameWithType: RefreshPolicy.SetExtendedProperty(string, string, ExtendedPropertyType)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty(string, string, TabularEditor.TOMWrapper.ExtendedPropertyType)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the value of the ExtendedProperty having the given name. If no such ExtendedProperty exists, it will be created. If value is set to null, the ExtendedProperty will be removed.
+  example: []
+  syntax:
+    content: public void SetExtendedProperty(string name, string value, ExtendedPropertyType type)
+    parameters:
+    - id: name
+      type: System.String
+    - id: value
+      type: System.String
+    - id: type
+      type: TabularEditor.TOMWrapper.ExtendedPropertyType
+    content.vb: Public Sub SetExtendedProperty(name As String, value As String, type As ExtendedPropertyType)
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  nameWithType.vb: RefreshPolicy.SetExtendedProperty(String, String, ExtendedPropertyType)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty(String, String, TabularEditor.TOMWrapper.ExtendedPropertyType)
+  name.vb: SetExtendedProperty(String, String, ExtendedPropertyType)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.RemoveExtendedProperty(System.String)
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.RemoveExtendedProperty(System.String)
+  id: RemoveExtendedProperty(System.String)
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: RemoveExtendedProperty(string)
+  nameWithType: RefreshPolicy.RemoveExtendedProperty(string)
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.RemoveExtendedProperty(string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Remove an ExtendedProperty by the given name.
+  example: []
+  syntax:
+    content: public void RemoveExtendedProperty(string name)
+    parameters:
+    - id: name
+      type: System.String
+    content.vb: Public Sub RemoveExtendedProperty(name As String)
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.RemoveExtendedProperty*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.RemoveExtendedProperty(System.String)
+  nameWithType.vb: RefreshPolicy.RemoveExtendedProperty(String)
+  fullName.vb: TabularEditor.TOMWrapper.RefreshPolicy.RemoveExtendedProperty(String)
+  name.vb: RemoveExtendedProperty(String)
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyCount
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyCount
+  id: GetExtendedPropertyCount
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetExtendedPropertyCount()
+  nameWithType: RefreshPolicy.GetExtendedPropertyCount()
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyCount()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the number of ExtendedProperties on the current object.
+  example: []
+  syntax:
+    content: public int GetExtendedPropertyCount()
+    return:
+      type: System.Int32
+    content.vb: Public Function GetExtendedPropertyCount() As Integer
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyCount*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyCount
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperties
+  commentId: M:TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperties
+  id: GetExtendedProperties
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: GetExtendedProperties()
+  nameWithType: RefreshPolicy.GetExtendedProperties()
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperties()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets a collection of all ExtendedProperty names on the current object.
+  example: []
+  syntax:
+    content: public IEnumerable<string> GetExtendedProperties()
+    return:
+      type: System.Collections.Generic.IEnumerable{System.String}
+    content.vb: Public Function GetExtendedProperties() As IEnumerable(Of String)
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperties*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperties
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.Annotations
+  commentId: P:TabularEditor.TOMWrapper.RefreshPolicy.Annotations
+  id: Annotations
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: Annotations
+  nameWithType: RefreshPolicy.Annotations
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.Annotations
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The collection of Annotations on the current Refresh Policy.
+  example: []
+  syntax:
+    content: >-
+      [Browsable(true)]
+
+      public AnnotationCollection Annotations { get; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.AnnotationCollection
+    content.vb: >-
+      <Browsable(True)>
+
+      Public ReadOnly Property Annotations As AnnotationCollection
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.Annotations*
+  implements:
+  - TabularEditor.TOMWrapper.IAnnotationObject.Annotations
+  attributes:
+  - type: System.ComponentModel.BrowsableAttribute
+    ctor: System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: true
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.ExtendedProperties
+  commentId: P:TabularEditor.TOMWrapper.RefreshPolicy.ExtendedProperties
+  id: ExtendedProperties
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: ExtendedProperties
+  nameWithType: RefreshPolicy.ExtendedProperties
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.ExtendedProperties
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The collection of Extended Properties on the current Refresh Policy.
+  example: []
+  syntax:
+    content: public ExtendedPropertyCollection ExtendedProperties { get; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.ExtendedPropertyCollection
+    content.vb: Public ReadOnly Property ExtendedProperties As ExtendedPropertyCollection
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.ExtendedProperties*
+  implements:
+  - TabularEditor.TOMWrapper.IExtendedPropertyObject.ExtendedProperties
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.PolicyType
+  commentId: P:TabularEditor.TOMWrapper.RefreshPolicy.PolicyType
+  id: PolicyType
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: PolicyType
+  nameWithType: RefreshPolicy.PolicyType
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.PolicyType
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Specifies the type of the refresh policy
+  example: []
+  syntax:
+    content: public RefreshPolicyType PolicyType { get; set; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.RefreshPolicyType
+    content.vb: Public Property PolicyType As RefreshPolicyType
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.PolicyType*
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.Mode
+  commentId: P:TabularEditor.TOMWrapper.RefreshPolicy.Mode
+  id: Mode
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: Mode
+  nameWithType: RefreshPolicy.Mode
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.Mode
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Defines the mode of a refresh policy applied during incremental refresh.
+  remarks: This property is only supported when the compatibility level of the database is at 1565 or above.
+  example: []
+  syntax:
+    content: public RefreshPolicyMode Mode { get; set; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.RefreshPolicyMode
+    content.vb: Public Property Mode As RefreshPolicyMode
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.Mode*
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.Table
+  commentId: P:TabularEditor.TOMWrapper.RefreshPolicy.Table
+  id: Table
+  parent: TabularEditor.TOMWrapper.RefreshPolicy
+  langs:
+  - csharp
+  - vb
+  name: Table
+  nameWithType: RefreshPolicy.Table
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.Table
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The parent table of the current Refresh Policy.
+  example: []
+  syntax:
+    content: >-
+      [Browsable(false)]
+
+      public Table Table { get; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.Table
+    content.vb: >-
+      <Browsable(False)>
+
+      Public ReadOnly Property Table As Table
+  overload: TabularEditor.TOMWrapper.RefreshPolicy.Table*
+  attributes:
+  - type: System.ComponentModel.BrowsableAttribute
+    ctor: System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: false
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: TabularEditor.TOMWrapper.DynamicPropertyObject
+  commentId: T:TabularEditor.TOMWrapper.DynamicPropertyObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.DynamicPropertyObject.html
+  name: DynamicPropertyObject
+  nameWithType: DynamicPropertyObject
+  fullName: TabularEditor.TOMWrapper.DynamicPropertyObject
+- uid: TabularEditor.TOMWrapper.TabularObject
+  commentId: T:TabularEditor.TOMWrapper.TabularObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html
+  name: TabularObject
+  nameWithType: TabularObject
+  fullName: TabularEditor.TOMWrapper.TabularObject
+- uid: System.ComponentModel.ICustomTypeDescriptor
+  commentId: T:System.ComponentModel.ICustomTypeDescriptor
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.icustomtypedescriptor
+  name: ICustomTypeDescriptor
+  nameWithType: ICustomTypeDescriptor
+  fullName: System.ComponentModel.ICustomTypeDescriptor
+- uid: System.ComponentModel.INotifyPropertyChanging
+  commentId: T:System.ComponentModel.INotifyPropertyChanging
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanging
+  name: INotifyPropertyChanging
+  nameWithType: INotifyPropertyChanging
+  fullName: System.ComponentModel.INotifyPropertyChanging
+- uid: TabularEditor.TOMWrapper.IAnnotationObject
+  commentId: T:TabularEditor.TOMWrapper.IAnnotationObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html
+  name: IAnnotationObject
+  nameWithType: IAnnotationObject
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  commentId: T:TabularEditor.TOMWrapper.IExtendedPropertyObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html
+  name: IExtendedPropertyObject
+  nameWithType: IExtendedPropertyObject
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject
+- uid: TabularEditor.TOMWrapper.ITabularObject
+  commentId: T:TabularEditor.TOMWrapper.ITabularObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularObject.html
+  name: ITabularObject
+  nameWithType: ITabularObject
+  fullName: TabularEditor.TOMWrapper.ITabularObject
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: TabularEditor.TOMWrapper.IHandlerObject
+  commentId: T:TabularEditor.TOMWrapper.IHandlerObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IHandlerObject.html
+  name: IHandlerObject
+  nameWithType: IHandlerObject
+  fullName: TabularEditor.TOMWrapper.IHandlerObject
+- uid: TabularEditor.TOMWrapper.TabularObject.SetValue(System.Object,System.Object,System.Action{System.Object},System.String)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.SetValue(System.Object,System.Object,System.Action{System.Object},System.String)
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_SetValue_System_Object_System_Object_System_Action_System_Object__System_String_
+  name: SetValue(object, object, Action<object>, string)
+  nameWithType: TabularObject.SetValue(object, object, Action<object>, string)
+  fullName: TabularEditor.TOMWrapper.TabularObject.SetValue(object, object, System.Action<object>, string)
+  nameWithType.vb: TabularObject.SetValue(Object, Object, Action(Of Object), String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.SetValue(Object, Object, System.Action(Of Object), String)
+  name.vb: SetValue(Object, Object, Action(Of Object), String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObject.SetValue(System.Object,System.Object,System.Action{System.Object},System.String)
+    name: SetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_SetValue_System_Object_System_Object_System_Action_System_Object__System_String_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObject.SetValue(System.Object,System.Object,System.Action{System.Object},System.String)
+    name: SetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_SetValue_System_Object_System_Object_System_Action_System_Object__System_String_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObject.SetValue``1({T},{T},System.Action{{T}},System.String)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+  parent: TabularEditor.TOMWrapper.TabularObject
+  definition: TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_SetValue__1___0___0_System_Action___0__System_String_
+  name: SetValue<T>(T, T, Action<T>, string)
+  nameWithType: TabularObject.SetValue<T>(T, T, Action<T>, string)
+  fullName: TabularEditor.TOMWrapper.TabularObject.SetValue<T>(T, T, System.Action<T>, string)
+  nameWithType.vb: TabularObject.SetValue(Of T)(T, T, Action(Of T), String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.SetValue(Of T)(T, T, System.Action(Of T), String)
+  name.vb: SetValue(Of T)(T, T, Action(Of T), String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+    name: SetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_SetValue__1___0___0_System_Action___0__System_String_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+    name: SetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_SetValue__1___0___0_System_Action___0__System_String_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObject.CustomReinit
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.CustomReinit
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_CustomReinit
+  name: CustomReinit()
+  nameWithType: TabularObject.CustomReinit()
+  fullName: TabularEditor.TOMWrapper.TabularObject.CustomReinit()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObject.CustomReinit
+    name: CustomReinit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_CustomReinit
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObject.CustomReinit
+    name: CustomReinit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_CustomReinit
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObject.Delete
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.Delete
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Delete
+  name: Delete()
+  nameWithType: TabularObject.Delete()
+  fullName: TabularEditor.TOMWrapper.TabularObject.Delete()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObject.Delete
+    name: Delete
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Delete
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObject.Delete
+    name: Delete
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Delete
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Children_CollectionChanged_System_Object_System_Collections_Specialized_NotifyCollectionChangedEventArgs_
+  name: Children_CollectionChanged(object, NotifyCollectionChangedEventArgs)
+  nameWithType: TabularObject.Children_CollectionChanged(object, NotifyCollectionChangedEventArgs)
+  fullName: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(object, System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  nameWithType.vb: TabularObject.Children_CollectionChanged(Object, NotifyCollectionChangedEventArgs)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(Object, System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  name.vb: Children_CollectionChanged(Object, NotifyCollectionChangedEventArgs)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+    name: Children_CollectionChanged
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Children_CollectionChanged_System_Object_System_Collections_Specialized_NotifyCollectionChangedEventArgs_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    name: NotifyCollectionChangedEventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized.notifycollectionchangedeventargs
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObject.Children_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+    name: Children_CollectionChanged
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Children_CollectionChanged_System_Object_System_Collections_Specialized_NotifyCollectionChangedEventArgs_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    name: NotifyCollectionChangedEventArgs
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized.notifycollectionchangedeventargs
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(System.String,System.Object,System.Object)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(System.String,System.Object,System.Object)
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_OnPropertyChanged_System_String_System_Object_System_Object_
+  name: OnPropertyChanged(string, object, object)
+  nameWithType: TabularObject.OnPropertyChanged(string, object, object)
+  fullName: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(string, object, object)
+  nameWithType.vb: TabularObject.OnPropertyChanged(String, Object, Object)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(String, Object, Object)
+  name.vb: OnPropertyChanged(String, Object, Object)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(System.String,System.Object,System.Object)
+    name: OnPropertyChanged
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_OnPropertyChanged_System_String_System_Object_System_Object_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanged(System.String,System.Object,System.Object)
+    name: OnPropertyChanged
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_OnPropertyChanged_System_String_System_Object_System_Object_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_OnPropertyChanging_System_String_System_Object_System_Boolean__System_Boolean__
+  name: OnPropertyChanging(string, object, ref bool, ref bool)
+  nameWithType: TabularObject.OnPropertyChanging(string, object, ref bool, ref bool)
+  fullName: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(string, object, ref bool, ref bool)
+  nameWithType.vb: TabularObject.OnPropertyChanging(String, Object, Boolean, Boolean)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(String, Object, Boolean, Boolean)
+  name.vb: OnPropertyChanging(String, Object, Boolean, Boolean)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)
+    name: OnPropertyChanging
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_OnPropertyChanging_System_String_System_Object_System_Boolean__System_Boolean__
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - name: ref
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
+  - name: ref
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObject.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)
+    name: OnPropertyChanging
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_OnPropertyChanging_System_String_System_Object_System_Boolean__System_Boolean__
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObject.Init
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.Init
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Init
+  name: Init()
+  nameWithType: TabularObject.Init()
+  fullName: TabularEditor.TOMWrapper.TabularObject.Init()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObject.Init
+    name: Init
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Init
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObject.Init
+    name: Init
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Init
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObject.MetadataObject
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.MetadataObject
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_MetadataObject
+  name: MetadataObject
+  nameWithType: TabularObject.MetadataObject
+  fullName: TabularEditor.TOMWrapper.TabularObject.MetadataObject
+- uid: TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_ObjectTypeName
+  name: ObjectTypeName
+  nameWithType: TabularObject.ObjectTypeName
+  fullName: TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+- uid: TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_IsRemoved
+  name: IsRemoved
+  nameWithType: TabularObject.IsRemoved
+  fullName: TabularEditor.TOMWrapper.TabularObject.IsRemoved
+- uid: TabularEditor.TOMWrapper.TabularObject.Model
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.Model
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Model
+  name: Model
+  nameWithType: TabularObject.Model
+  fullName: TabularEditor.TOMWrapper.TabularObject.Model
+- uid: TabularEditor.TOMWrapper.TabularObject.ObjectType
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.ObjectType
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_ObjectType
+  name: ObjectType
+  nameWithType: TabularObject.ObjectType
+  fullName: TabularEditor.TOMWrapper.TabularObject.ObjectType
+- uid: TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+  commentId: E:TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_PropertyChanging
+  name: PropertyChanging
+  nameWithType: TabularObject.PropertyChanging
+  fullName: TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+- uid: TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+  commentId: E:TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_PropertyChanged
+  name: PropertyChanged
+  nameWithType: TabularObject.PropertyChanged
+  fullName: TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+  commentId: M:TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_SetValue__1___0___0_System_Action___0__System_String_
+  name: SetValue<T>(T, T, Action<T>, string)
+  nameWithType: TabularObject.SetValue<T>(T, T, Action<T>, string)
+  fullName: TabularEditor.TOMWrapper.TabularObject.SetValue<T>(T, T, System.Action<T>, string)
+  nameWithType.vb: TabularObject.SetValue(Of T)(T, T, Action(Of T), String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObject.SetValue(Of T)(T, T, System.Action(Of T), String)
+  name.vb: SetValue(Of T)(T, T, Action(Of T), String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+    name: SetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_SetValue__1___0___0_System_Action___0__System_String_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObject.SetValue``1(``0,``0,System.Action{``0},System.String)
+    name: SetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_SetValue__1___0___0_System_Action___0__System_String_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.ClearAnnotations*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.ClearAnnotations
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_ClearAnnotations
+  name: ClearAnnotations
+  nameWithType: RefreshPolicy.ClearAnnotations
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.ClearAnnotations
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.ClearAnnotations
+  commentId: M:TabularEditor.TOMWrapper.IAnnotationObject.ClearAnnotations
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_ClearAnnotations
+  name: ClearAnnotations()
+  nameWithType: IAnnotationObject.ClearAnnotations()
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.ClearAnnotations()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.ClearAnnotations
+    name: ClearAnnotations
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_ClearAnnotations
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.ClearAnnotations
+    name: ClearAnnotations
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_ClearAnnotations
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_GetAnnotation_System_Int32_
+  name: GetAnnotation
+  nameWithType: RefreshPolicy.GetAnnotation
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotation
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(System.Int32)
+  commentId: M:TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(System.Int32)
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotation_System_Int32_
+  name: GetAnnotation(int)
+  nameWithType: IAnnotationObject.GetAnnotation(int)
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(int)
+  nameWithType.vb: IAnnotationObject.GetAnnotation(Integer)
+  fullName.vb: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(Integer)
+  name.vb: GetAnnotation(Integer)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(System.Int32)
+    name: GetAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotation_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(System.Int32)
+    name: GetAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotation_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.HasAnnotation*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.HasAnnotation
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_HasAnnotation_System_String_
+  name: HasAnnotation
+  nameWithType: RefreshPolicy.HasAnnotation
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.HasAnnotation
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.HasAnnotation(System.String)
+  commentId: M:TabularEditor.TOMWrapper.IAnnotationObject.HasAnnotation(System.String)
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_HasAnnotation_System_String_
+  name: HasAnnotation(string)
+  nameWithType: IAnnotationObject.HasAnnotation(string)
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.HasAnnotation(string)
+  nameWithType.vb: IAnnotationObject.HasAnnotation(String)
+  fullName.vb: TabularEditor.TOMWrapper.IAnnotationObject.HasAnnotation(String)
+  name.vb: HasAnnotation(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.HasAnnotation(System.String)
+    name: HasAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_HasAnnotation_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.HasAnnotation(System.String)
+    name: HasAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_HasAnnotation_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(System.String)
+  commentId: M:TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(System.String)
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotation_System_String_
+  name: GetAnnotation(string)
+  nameWithType: IAnnotationObject.GetAnnotation(string)
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(string)
+  nameWithType.vb: IAnnotationObject.GetAnnotation(String)
+  fullName.vb: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(String)
+  name.vb: GetAnnotation(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(System.String)
+    name: GetAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotation_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotation(System.String)
+    name: GetAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotation_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_SetAnnotation_System_Int32_System_String_
+  name: SetAnnotation
+  nameWithType: RefreshPolicy.SetAnnotation
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.SetAnnotation
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(System.Int32,System.String)
+  commentId: M:TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(System.Int32,System.String)
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_SetAnnotation_System_Int32_System_String_
+  name: SetAnnotation(int, string)
+  nameWithType: IAnnotationObject.SetAnnotation(int, string)
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(int, string)
+  nameWithType.vb: IAnnotationObject.SetAnnotation(Integer, String)
+  fullName.vb: TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(Integer, String)
+  name.vb: SetAnnotation(Integer, String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(System.Int32,System.String)
+    name: SetAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_SetAnnotation_System_Int32_System_String_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(System.Int32,System.String)
+    name: SetAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_SetAnnotation_System_Int32_System_String_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetNewAnnotationName*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.GetNewAnnotationName
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_GetNewAnnotationName
+  name: GetNewAnnotationName
+  nameWithType: RefreshPolicy.GetNewAnnotationName
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetNewAnnotationName
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.GetNewAnnotationName
+  commentId: M:TabularEditor.TOMWrapper.IAnnotationObject.GetNewAnnotationName
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetNewAnnotationName
+  name: GetNewAnnotationName()
+  nameWithType: IAnnotationObject.GetNewAnnotationName()
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.GetNewAnnotationName()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.GetNewAnnotationName
+    name: GetNewAnnotationName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetNewAnnotationName
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.GetNewAnnotationName
+    name: GetNewAnnotationName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetNewAnnotationName
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(System.String,System.String)
+  commentId: M:TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(System.String,System.String)
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_SetAnnotation_System_String_System_String_
+  name: SetAnnotation(string, string)
+  nameWithType: IAnnotationObject.SetAnnotation(string, string)
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(string, string)
+  nameWithType.vb: IAnnotationObject.SetAnnotation(String, String)
+  fullName.vb: TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(String, String)
+  name.vb: SetAnnotation(String, String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(System.String,System.String)
+    name: SetAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_SetAnnotation_System_String_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.SetAnnotation(System.String,System.String)
+    name: SetAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_SetAnnotation_System_String_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.RemoveAnnotation*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.RemoveAnnotation
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_RemoveAnnotation_System_String_
+  name: RemoveAnnotation
+  nameWithType: RefreshPolicy.RemoveAnnotation
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.RemoveAnnotation
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.RemoveAnnotation(System.String)
+  commentId: M:TabularEditor.TOMWrapper.IAnnotationObject.RemoveAnnotation(System.String)
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_RemoveAnnotation_System_String_
+  name: RemoveAnnotation(string)
+  nameWithType: IAnnotationObject.RemoveAnnotation(string)
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.RemoveAnnotation(string)
+  nameWithType.vb: IAnnotationObject.RemoveAnnotation(String)
+  fullName.vb: TabularEditor.TOMWrapper.IAnnotationObject.RemoveAnnotation(String)
+  name.vb: RemoveAnnotation(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.RemoveAnnotation(System.String)
+    name: RemoveAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_RemoveAnnotation_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.RemoveAnnotation(System.String)
+    name: RemoveAnnotation
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_RemoveAnnotation_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotationsCount*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotationsCount
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_GetAnnotationsCount
+  name: GetAnnotationsCount
+  nameWithType: RefreshPolicy.GetAnnotationsCount
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotationsCount
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotationsCount
+  commentId: M:TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotationsCount
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotationsCount
+  name: GetAnnotationsCount()
+  nameWithType: IAnnotationObject.GetAnnotationsCount()
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotationsCount()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotationsCount
+    name: GetAnnotationsCount
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotationsCount
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotationsCount
+    name: GetAnnotationsCount
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotationsCount
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotations*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotations
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_GetAnnotations
+  name: GetAnnotations
+  nameWithType: RefreshPolicy.GetAnnotations
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetAnnotations
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotations
+  commentId: M:TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotations
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotations
+  name: GetAnnotations()
+  nameWithType: IAnnotationObject.GetAnnotations()
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotations()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotations
+    name: GetAnnotations
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotations
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject.GetAnnotations
+    name: GetAnnotations
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_GetAnnotations
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{System.String}
+  commentId: T:System.Collections.Generic.IEnumerable{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<string>
+  nameWithType: IEnumerable<string>
+  fullName: System.Collections.Generic.IEnumerable<string>
+  nameWithType.vb: IEnumerable(Of String)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of String)
+  name.vb: IEnumerable(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.ClearExtendedProperties*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.ClearExtendedProperties
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_ClearExtendedProperties
+  name: ClearExtendedProperties
+  nameWithType: RefreshPolicy.ClearExtendedProperties
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.ClearExtendedProperties
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.HasExtendedProperty*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.HasExtendedProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_HasExtendedProperty_System_String_
+  name: HasExtendedProperty
+  nameWithType: RefreshPolicy.HasExtendedProperty
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.HasExtendedProperty
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.HasExtendedProperty(System.String)
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.HasExtendedProperty(System.String)
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_HasExtendedProperty_System_String_
+  name: HasExtendedProperty(string)
+  nameWithType: IExtendedPropertyObject.HasExtendedProperty(string)
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.HasExtendedProperty(string)
+  nameWithType.vb: IExtendedPropertyObject.HasExtendedProperty(String)
+  fullName.vb: TabularEditor.TOMWrapper.IExtendedPropertyObject.HasExtendedProperty(String)
+  name.vb: HasExtendedProperty(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.HasExtendedProperty(System.String)
+    name: HasExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_HasExtendedProperty_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.HasExtendedProperty(System.String)
+    name: HasExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_HasExtendedProperty_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_GetExtendedPropertyType_System_Int32_
+  name: GetExtendedPropertyType
+  nameWithType: RefreshPolicy.GetExtendedPropertyType
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyType
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(System.Int32)
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(System.Int32)
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedPropertyType_System_Int32_
+  name: GetExtendedPropertyType(int)
+  nameWithType: IExtendedPropertyObject.GetExtendedPropertyType(int)
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(int)
+  nameWithType.vb: IExtendedPropertyObject.GetExtendedPropertyType(Integer)
+  fullName.vb: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(Integer)
+  name.vb: GetExtendedPropertyType(Integer)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(System.Int32)
+    name: GetExtendedPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedPropertyType_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(System.Int32)
+    name: GetExtendedPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedPropertyType_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: TabularEditor.TOMWrapper.ExtendedPropertyType
+  commentId: T:TabularEditor.TOMWrapper.ExtendedPropertyType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExtendedPropertyType.html
+  name: ExtendedPropertyType
+  nameWithType: ExtendedPropertyType
+  fullName: TabularEditor.TOMWrapper.ExtendedPropertyType
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(System.String)
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(System.String)
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedPropertyType_System_String_
+  name: GetExtendedPropertyType(string)
+  nameWithType: IExtendedPropertyObject.GetExtendedPropertyType(string)
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(string)
+  nameWithType.vb: IExtendedPropertyObject.GetExtendedPropertyType(String)
+  fullName.vb: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(String)
+  name.vb: GetExtendedPropertyType(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(System.String)
+    name: GetExtendedPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedPropertyType_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyType(System.String)
+    name: GetExtendedPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedPropertyType_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_GetExtendedProperty_System_Int32_
+  name: GetExtendedProperty
+  nameWithType: RefreshPolicy.GetExtendedProperty
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperty
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(System.Int32)
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(System.Int32)
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedProperty_System_Int32_
+  name: GetExtendedProperty(int)
+  nameWithType: IExtendedPropertyObject.GetExtendedProperty(int)
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(int)
+  nameWithType.vb: IExtendedPropertyObject.GetExtendedProperty(Integer)
+  fullName.vb: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(Integer)
+  name.vb: GetExtendedProperty(Integer)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(System.Int32)
+    name: GetExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedProperty_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(System.Int32)
+    name: GetExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedProperty_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(System.String)
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(System.String)
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedProperty_System_String_
+  name: GetExtendedProperty(string)
+  nameWithType: IExtendedPropertyObject.GetExtendedProperty(string)
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(string)
+  nameWithType.vb: IExtendedPropertyObject.GetExtendedProperty(String)
+  fullName.vb: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(String)
+  name.vb: GetExtendedProperty(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(System.String)
+    name: GetExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedProperty_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperty(System.String)
+    name: GetExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedProperty_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_SetExtendedProperty_System_Int32_System_String_TabularEditor_TOMWrapper_ExtendedPropertyType_
+  name: SetExtendedProperty
+  nameWithType: RefreshPolicy.SetExtendedProperty
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.SetExtendedProperty
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_SetExtendedProperty_System_Int32_System_String_TabularEditor_TOMWrapper_ExtendedPropertyType_
+  name: SetExtendedProperty(int, string, ExtendedPropertyType)
+  nameWithType: IExtendedPropertyObject.SetExtendedProperty(int, string, ExtendedPropertyType)
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(int, string, TabularEditor.TOMWrapper.ExtendedPropertyType)
+  nameWithType.vb: IExtendedPropertyObject.SetExtendedProperty(Integer, String, ExtendedPropertyType)
+  fullName.vb: TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(Integer, String, TabularEditor.TOMWrapper.ExtendedPropertyType)
+  name.vb: SetExtendedProperty(Integer, String, ExtendedPropertyType)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+    name: SetExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_SetExtendedProperty_System_Int32_System_String_TabularEditor_TOMWrapper_ExtendedPropertyType_
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExtendedPropertyType
+    name: ExtendedPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedPropertyType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(System.Int32,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+    name: SetExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_SetExtendedProperty_System_Int32_System_String_TabularEditor_TOMWrapper_ExtendedPropertyType_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExtendedPropertyType
+    name: ExtendedPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedPropertyType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetNewExtendedPropertyName*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.GetNewExtendedPropertyName
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_GetNewExtendedPropertyName
+  name: GetNewExtendedPropertyName
+  nameWithType: RefreshPolicy.GetNewExtendedPropertyName
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetNewExtendedPropertyName
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetNewExtendedPropertyName
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.GetNewExtendedPropertyName
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetNewExtendedPropertyName
+  name: GetNewExtendedPropertyName()
+  nameWithType: IExtendedPropertyObject.GetNewExtendedPropertyName()
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetNewExtendedPropertyName()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetNewExtendedPropertyName
+    name: GetNewExtendedPropertyName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetNewExtendedPropertyName
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetNewExtendedPropertyName
+    name: GetNewExtendedPropertyName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetNewExtendedPropertyName
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_SetExtendedProperty_System_String_System_String_TabularEditor_TOMWrapper_ExtendedPropertyType_
+  name: SetExtendedProperty(string, string, ExtendedPropertyType)
+  nameWithType: IExtendedPropertyObject.SetExtendedProperty(string, string, ExtendedPropertyType)
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(string, string, TabularEditor.TOMWrapper.ExtendedPropertyType)
+  nameWithType.vb: IExtendedPropertyObject.SetExtendedProperty(String, String, ExtendedPropertyType)
+  fullName.vb: TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(String, String, TabularEditor.TOMWrapper.ExtendedPropertyType)
+  name.vb: SetExtendedProperty(String, String, ExtendedPropertyType)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+    name: SetExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_SetExtendedProperty_System_String_System_String_TabularEditor_TOMWrapper_ExtendedPropertyType_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExtendedPropertyType
+    name: ExtendedPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedPropertyType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.SetExtendedProperty(System.String,System.String,TabularEditor.TOMWrapper.ExtendedPropertyType)
+    name: SetExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_SetExtendedProperty_System_String_System_String_TabularEditor_TOMWrapper_ExtendedPropertyType_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExtendedPropertyType
+    name: ExtendedPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedPropertyType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.RemoveExtendedProperty*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.RemoveExtendedProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_RemoveExtendedProperty_System_String_
+  name: RemoveExtendedProperty
+  nameWithType: RefreshPolicy.RemoveExtendedProperty
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.RemoveExtendedProperty
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.RemoveExtendedProperty(System.String)
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.RemoveExtendedProperty(System.String)
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_RemoveExtendedProperty_System_String_
+  name: RemoveExtendedProperty(string)
+  nameWithType: IExtendedPropertyObject.RemoveExtendedProperty(string)
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.RemoveExtendedProperty(string)
+  nameWithType.vb: IExtendedPropertyObject.RemoveExtendedProperty(String)
+  fullName.vb: TabularEditor.TOMWrapper.IExtendedPropertyObject.RemoveExtendedProperty(String)
+  name.vb: RemoveExtendedProperty(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.RemoveExtendedProperty(System.String)
+    name: RemoveExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_RemoveExtendedProperty_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.RemoveExtendedProperty(System.String)
+    name: RemoveExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_RemoveExtendedProperty_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyCount*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyCount
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_GetExtendedPropertyCount
+  name: GetExtendedPropertyCount
+  nameWithType: RefreshPolicy.GetExtendedPropertyCount
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedPropertyCount
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyCount
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyCount
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedPropertyCount
+  name: GetExtendedPropertyCount()
+  nameWithType: IExtendedPropertyObject.GetExtendedPropertyCount()
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyCount()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyCount
+    name: GetExtendedPropertyCount
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedPropertyCount
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedPropertyCount
+    name: GetExtendedPropertyCount
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedPropertyCount
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperties*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperties
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_GetExtendedProperties
+  name: GetExtendedProperties
+  nameWithType: RefreshPolicy.GetExtendedProperties
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.GetExtendedProperties
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperties
+  commentId: M:TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperties
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedProperties
+  name: GetExtendedProperties()
+  nameWithType: IExtendedPropertyObject.GetExtendedProperties()
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperties()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperties
+    name: GetExtendedProperties
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedProperties
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.GetExtendedProperties
+    name: GetExtendedProperties
+    isExternal: true
+    href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_GetExtendedProperties
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.Annotations*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.Annotations
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_Annotations
+  name: Annotations
+  nameWithType: RefreshPolicy.Annotations
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.Annotations
+- uid: TabularEditor.TOMWrapper.IAnnotationObject.Annotations
+  commentId: P:TabularEditor.TOMWrapper.IAnnotationObject.Annotations
+  parent: TabularEditor.TOMWrapper.IAnnotationObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IAnnotationObject.html#TabularEditor_TOMWrapper_IAnnotationObject_Annotations
+  name: Annotations
+  nameWithType: IAnnotationObject.Annotations
+  fullName: TabularEditor.TOMWrapper.IAnnotationObject.Annotations
+- uid: TabularEditor.TOMWrapper.AnnotationCollection
+  commentId: T:TabularEditor.TOMWrapper.AnnotationCollection
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.AnnotationCollection.html
+  name: AnnotationCollection
+  nameWithType: AnnotationCollection
+  fullName: TabularEditor.TOMWrapper.AnnotationCollection
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.ExtendedProperties*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.ExtendedProperties
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_ExtendedProperties
+  name: ExtendedProperties
+  nameWithType: RefreshPolicy.ExtendedProperties
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.ExtendedProperties
+- uid: TabularEditor.TOMWrapper.IExtendedPropertyObject.ExtendedProperties
+  commentId: P:TabularEditor.TOMWrapper.IExtendedPropertyObject.ExtendedProperties
+  parent: TabularEditor.TOMWrapper.IExtendedPropertyObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExtendedPropertyObject.html#TabularEditor_TOMWrapper_IExtendedPropertyObject_ExtendedProperties
+  name: ExtendedProperties
+  nameWithType: IExtendedPropertyObject.ExtendedProperties
+  fullName: TabularEditor.TOMWrapper.IExtendedPropertyObject.ExtendedProperties
+- uid: TabularEditor.TOMWrapper.ExtendedPropertyCollection
+  commentId: T:TabularEditor.TOMWrapper.ExtendedPropertyCollection
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExtendedPropertyCollection.html
+  name: ExtendedPropertyCollection
+  nameWithType: ExtendedPropertyCollection
+  fullName: TabularEditor.TOMWrapper.ExtendedPropertyCollection
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.PolicyType*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.PolicyType
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_PolicyType
+  name: PolicyType
+  nameWithType: RefreshPolicy.PolicyType
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.PolicyType
+- uid: TabularEditor.TOMWrapper.RefreshPolicyType
+  commentId: T:TabularEditor.TOMWrapper.RefreshPolicyType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicyType.html
+  name: RefreshPolicyType
+  nameWithType: RefreshPolicyType
+  fullName: TabularEditor.TOMWrapper.RefreshPolicyType
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.Mode*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.Mode
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_Mode
+  name: Mode
+  nameWithType: RefreshPolicy.Mode
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.Mode
+- uid: TabularEditor.TOMWrapper.RefreshPolicyMode
+  commentId: T:TabularEditor.TOMWrapper.RefreshPolicyMode
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicyMode.html
+  name: RefreshPolicyMode
+  nameWithType: RefreshPolicyMode
+  fullName: TabularEditor.TOMWrapper.RefreshPolicyMode
+- uid: TabularEditor.TOMWrapper.RefreshPolicy.Table*
+  commentId: Overload:TabularEditor.TOMWrapper.RefreshPolicy.Table
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshPolicy.html#TabularEditor_TOMWrapper_RefreshPolicy_Table
+  name: Table
+  nameWithType: RefreshPolicy.Table
+  fullName: TabularEditor.TOMWrapper.RefreshPolicy.Table
+- uid: TabularEditor.TOMWrapper.Table
+  commentId: T:TabularEditor.TOMWrapper.Table
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Table.html
+  name: Table
+  nameWithType: Table
+  fullName: TabularEditor.TOMWrapper.Table

@@ -1,0 +1,473 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.RoleMemberType
+  commentId: T:TabularEditor.TOMWrapper.RoleMemberType
+  id: RoleMemberType
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.RoleMemberType.Auto
+  - TabularEditor.TOMWrapper.RoleMemberType.Group
+  - TabularEditor.TOMWrapper.RoleMemberType.User
+  langs:
+  - csharp
+  - vb
+  name: RoleMemberType
+  nameWithType: RoleMemberType
+  fullName: TabularEditor.TOMWrapper.RoleMemberType
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Indicates whether the particular member of a security role is an individual user or a group of users, or if the member is automatically detected.
+  example: []
+  syntax:
+    content: public enum RoleMemberType
+    content.vb: Public Enum RoleMemberType
+  extensionMethods:
+  - TabularEditor.TOMWrapper.RoleMemberType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType)
+  - TabularEditor.TOMWrapper.RoleMemberType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType)
+  - TabularEditor.TOMWrapper.RoleMemberType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RoleMemberType)
+- uid: TabularEditor.TOMWrapper.RoleMemberType.Auto
+  commentId: F:TabularEditor.TOMWrapper.RoleMemberType.Auto
+  id: Auto
+  parent: TabularEditor.TOMWrapper.RoleMemberType
+  langs:
+  - csharp
+  - vb
+  name: Auto
+  nameWithType: RoleMemberType.Auto
+  fullName: TabularEditor.TOMWrapper.RoleMemberType.Auto
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Member of security role is automatically detected.
+  example: []
+  syntax:
+    content: Auto = 1
+    return:
+      type: TabularEditor.TOMWrapper.RoleMemberType
+- uid: TabularEditor.TOMWrapper.RoleMemberType.User
+  commentId: F:TabularEditor.TOMWrapper.RoleMemberType.User
+  id: User
+  parent: TabularEditor.TOMWrapper.RoleMemberType
+  langs:
+  - csharp
+  - vb
+  name: User
+  nameWithType: RoleMemberType.User
+  fullName: TabularEditor.TOMWrapper.RoleMemberType.User
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Member of security role is an individual user.
+  example: []
+  syntax:
+    content: User = 2
+    return:
+      type: TabularEditor.TOMWrapper.RoleMemberType
+- uid: TabularEditor.TOMWrapper.RoleMemberType.Group
+  commentId: F:TabularEditor.TOMWrapper.RoleMemberType.Group
+  id: Group
+  parent: TabularEditor.TOMWrapper.RoleMemberType
+  langs:
+  - csharp
+  - vb
+  name: Group
+  nameWithType: RoleMemberType.Group
+  fullName: TabularEditor.TOMWrapper.RoleMemberType.Group
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Member of security role is a group of users.
+  example: []
+  syntax:
+    content: Group = 3
+    return:
+      type: TabularEditor.TOMWrapper.RoleMemberType
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.RoleMemberType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<RoleMemberType>(RoleMemberType, RoleMemberType, RoleMemberType)
+  nameWithType: EnumExtensions.AllFlagsChanged<RoleMemberType>(RoleMemberType, RoleMemberType, RoleMemberType)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.RoleMemberType>(TabularEditor.TOMWrapper.RoleMemberType, TabularEditor.TOMWrapper.RoleMemberType, TabularEditor.TOMWrapper.RoleMemberType)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of RoleMemberType)(RoleMemberType, RoleMemberType, RoleMemberType)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.RoleMemberType)(TabularEditor.TOMWrapper.RoleMemberType, TabularEditor.TOMWrapper.RoleMemberType, TabularEditor.TOMWrapper.RoleMemberType)
+  name.vb: AllFlagsChanged(Of RoleMemberType)(RoleMemberType, RoleMemberType, RoleMemberType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.RoleMemberType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<RoleMemberType>(RoleMemberType, RoleMemberType, RoleMemberType)
+  nameWithType: EnumExtensions.AnyFlagsChanged<RoleMemberType>(RoleMemberType, RoleMemberType, RoleMemberType)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.RoleMemberType>(TabularEditor.TOMWrapper.RoleMemberType, TabularEditor.TOMWrapper.RoleMemberType, TabularEditor.TOMWrapper.RoleMemberType)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of RoleMemberType)(RoleMemberType, RoleMemberType, RoleMemberType)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.RoleMemberType)(TabularEditor.TOMWrapper.RoleMemberType, TabularEditor.TOMWrapper.RoleMemberType, TabularEditor.TOMWrapper.RoleMemberType)
+  name.vb: AnyFlagsChanged(Of RoleMemberType)(RoleMemberType, RoleMemberType, RoleMemberType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.RoleMemberType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RoleMemberType)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<RoleMemberType>(RoleMemberType, RoleMemberType)
+  nameWithType: EnumExtensions.HasAnyFlags<RoleMemberType>(RoleMemberType, RoleMemberType)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.RoleMemberType>(TabularEditor.TOMWrapper.RoleMemberType, TabularEditor.TOMWrapper.RoleMemberType)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of RoleMemberType)(RoleMemberType, RoleMemberType)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.RoleMemberType)(TabularEditor.TOMWrapper.RoleMemberType, TabularEditor.TOMWrapper.RoleMemberType)
+  name.vb: HasAnyFlags(Of RoleMemberType)(RoleMemberType, RoleMemberType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RoleMemberType,TabularEditor.TOMWrapper.RoleMemberType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RoleMemberType.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.RoleMemberType
+  commentId: T:TabularEditor.TOMWrapper.RoleMemberType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RoleMemberType.html
+  name: RoleMemberType
+  nameWithType: RoleMemberType
+  fullName: TabularEditor.TOMWrapper.RoleMemberType

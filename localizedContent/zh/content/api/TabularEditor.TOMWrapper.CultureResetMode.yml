@@ -1,0 +1,494 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.CultureResetMode
+  commentId: T:TabularEditor.TOMWrapper.CultureResetMode
+  id: CultureResetMode
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.CultureResetMode.CollationOnly
+  - TabularEditor.TOMWrapper.CultureResetMode.CultureAndCollation
+  - TabularEditor.TOMWrapper.CultureResetMode.CultureOnly
+  - TabularEditor.TOMWrapper.CultureResetMode.Unknown
+  langs:
+  - csharp
+  - vb
+  name: CultureResetMode
+  nameWithType: CultureResetMode
+  fullName: TabularEditor.TOMWrapper.CultureResetMode
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Specifies the mode for resetting culture and\or collation.
+  example: []
+  syntax:
+    content: public enum CultureResetMode
+    content.vb: Public Enum CultureResetMode
+  extensionMethods:
+  - TabularEditor.TOMWrapper.CultureResetMode.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode)
+  - TabularEditor.TOMWrapper.CultureResetMode.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode)
+  - TabularEditor.TOMWrapper.CultureResetMode.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CultureResetMode)
+- uid: TabularEditor.TOMWrapper.CultureResetMode.Unknown
+  commentId: F:TabularEditor.TOMWrapper.CultureResetMode.Unknown
+  id: Unknown
+  parent: TabularEditor.TOMWrapper.CultureResetMode
+  langs:
+  - csharp
+  - vb
+  name: Unknown
+  nameWithType: CultureResetMode.Unknown
+  fullName: TabularEditor.TOMWrapper.CultureResetMode.Unknown
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Unknown. User should not use this value.
+  example: []
+  syntax:
+    content: Unknown = 0
+    return:
+      type: TabularEditor.TOMWrapper.CultureResetMode
+- uid: TabularEditor.TOMWrapper.CultureResetMode.CultureOnly
+  commentId: F:TabularEditor.TOMWrapper.CultureResetMode.CultureOnly
+  id: CultureOnly
+  parent: TabularEditor.TOMWrapper.CultureResetMode
+  langs:
+  - csharp
+  - vb
+  name: CultureOnly
+  nameWithType: CultureResetMode.CultureOnly
+  fullName: TabularEditor.TOMWrapper.CultureResetMode.CultureOnly
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Resets only the culture.
+  example: []
+  syntax:
+    content: CultureOnly = 1
+    return:
+      type: TabularEditor.TOMWrapper.CultureResetMode
+- uid: TabularEditor.TOMWrapper.CultureResetMode.CollationOnly
+  commentId: F:TabularEditor.TOMWrapper.CultureResetMode.CollationOnly
+  id: CollationOnly
+  parent: TabularEditor.TOMWrapper.CultureResetMode
+  langs:
+  - csharp
+  - vb
+  name: CollationOnly
+  nameWithType: CultureResetMode.CollationOnly
+  fullName: TabularEditor.TOMWrapper.CultureResetMode.CollationOnly
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Resets only the collation.
+  example: []
+  syntax:
+    content: CollationOnly = 2
+    return:
+      type: TabularEditor.TOMWrapper.CultureResetMode
+- uid: TabularEditor.TOMWrapper.CultureResetMode.CultureAndCollation
+  commentId: F:TabularEditor.TOMWrapper.CultureResetMode.CultureAndCollation
+  id: CultureAndCollation
+  parent: TabularEditor.TOMWrapper.CultureResetMode
+  langs:
+  - csharp
+  - vb
+  name: CultureAndCollation
+  nameWithType: CultureResetMode.CultureAndCollation
+  fullName: TabularEditor.TOMWrapper.CultureResetMode.CultureAndCollation
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Resets both culture and collation.
+  example: []
+  syntax:
+    content: CultureAndCollation = 3
+    return:
+      type: TabularEditor.TOMWrapper.CultureResetMode
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.CultureResetMode.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<CultureResetMode>(CultureResetMode, CultureResetMode, CultureResetMode)
+  nameWithType: EnumExtensions.AllFlagsChanged<CultureResetMode>(CultureResetMode, CultureResetMode, CultureResetMode)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.CultureResetMode>(TabularEditor.TOMWrapper.CultureResetMode, TabularEditor.TOMWrapper.CultureResetMode, TabularEditor.TOMWrapper.CultureResetMode)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of CultureResetMode)(CultureResetMode, CultureResetMode, CultureResetMode)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.CultureResetMode)(TabularEditor.TOMWrapper.CultureResetMode, TabularEditor.TOMWrapper.CultureResetMode, TabularEditor.TOMWrapper.CultureResetMode)
+  name.vb: AllFlagsChanged(Of CultureResetMode)(CultureResetMode, CultureResetMode, CultureResetMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.CultureResetMode.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<CultureResetMode>(CultureResetMode, CultureResetMode, CultureResetMode)
+  nameWithType: EnumExtensions.AnyFlagsChanged<CultureResetMode>(CultureResetMode, CultureResetMode, CultureResetMode)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.CultureResetMode>(TabularEditor.TOMWrapper.CultureResetMode, TabularEditor.TOMWrapper.CultureResetMode, TabularEditor.TOMWrapper.CultureResetMode)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of CultureResetMode)(CultureResetMode, CultureResetMode, CultureResetMode)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.CultureResetMode)(TabularEditor.TOMWrapper.CultureResetMode, TabularEditor.TOMWrapper.CultureResetMode, TabularEditor.TOMWrapper.CultureResetMode)
+  name.vb: AnyFlagsChanged(Of CultureResetMode)(CultureResetMode, CultureResetMode, CultureResetMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.CultureResetMode.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CultureResetMode)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<CultureResetMode>(CultureResetMode, CultureResetMode)
+  nameWithType: EnumExtensions.HasAnyFlags<CultureResetMode>(CultureResetMode, CultureResetMode)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.CultureResetMode>(TabularEditor.TOMWrapper.CultureResetMode, TabularEditor.TOMWrapper.CultureResetMode)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of CultureResetMode)(CultureResetMode, CultureResetMode)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.CultureResetMode)(TabularEditor.TOMWrapper.CultureResetMode, TabularEditor.TOMWrapper.CultureResetMode)
+  name.vb: HasAnyFlags(Of CultureResetMode)(CultureResetMode, CultureResetMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CultureResetMode,TabularEditor.TOMWrapper.CultureResetMode)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CultureResetMode.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.CultureResetMode
+  commentId: T:TabularEditor.TOMWrapper.CultureResetMode
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.CultureResetMode.html
+  name: CultureResetMode
+  nameWithType: CultureResetMode
+  fullName: TabularEditor.TOMWrapper.CultureResetMode

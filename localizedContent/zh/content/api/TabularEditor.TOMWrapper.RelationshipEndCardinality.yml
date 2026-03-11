@@ -1,0 +1,473 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+  commentId: T:TabularEditor.TOMWrapper.RelationshipEndCardinality
+  id: RelationshipEndCardinality
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.RelationshipEndCardinality.Many
+  - TabularEditor.TOMWrapper.RelationshipEndCardinality.None
+  - TabularEditor.TOMWrapper.RelationshipEndCardinality.One
+  langs:
+  - csharp
+  - vb
+  name: RelationshipEndCardinality
+  nameWithType: RelationshipEndCardinality
+  fullName: TabularEditor.TOMWrapper.RelationshipEndCardinality
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: An enumeration of possible values for defining cardinality on either side of a table relationship.
+  example: []
+  syntax:
+    content: public enum RelationshipEndCardinality
+    content.vb: Public Enum RelationshipEndCardinality
+  extensionMethods:
+  - TabularEditor.TOMWrapper.RelationshipEndCardinality.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  - TabularEditor.TOMWrapper.RelationshipEndCardinality.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  - TabularEditor.TOMWrapper.RelationshipEndCardinality.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RelationshipEndCardinality)
+- uid: TabularEditor.TOMWrapper.RelationshipEndCardinality.None
+  commentId: F:TabularEditor.TOMWrapper.RelationshipEndCardinality.None
+  id: None
+  parent: TabularEditor.TOMWrapper.RelationshipEndCardinality
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: RelationshipEndCardinality.None
+  fullName: TabularEditor.TOMWrapper.RelationshipEndCardinality.None
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The relationship is unspecified.
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: TabularEditor.TOMWrapper.RelationshipEndCardinality
+- uid: TabularEditor.TOMWrapper.RelationshipEndCardinality.One
+  commentId: F:TabularEditor.TOMWrapper.RelationshipEndCardinality.One
+  id: One
+  parent: TabularEditor.TOMWrapper.RelationshipEndCardinality
+  langs:
+  - csharp
+  - vb
+  name: One
+  nameWithType: RelationshipEndCardinality.One
+  fullName: TabularEditor.TOMWrapper.RelationshipEndCardinality.One
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Specifies the 'one' side of a one-to-one or one-to-many relationship.
+  example: []
+  syntax:
+    content: One = 1
+    return:
+      type: TabularEditor.TOMWrapper.RelationshipEndCardinality
+- uid: TabularEditor.TOMWrapper.RelationshipEndCardinality.Many
+  commentId: F:TabularEditor.TOMWrapper.RelationshipEndCardinality.Many
+  id: Many
+  parent: TabularEditor.TOMWrapper.RelationshipEndCardinality
+  langs:
+  - csharp
+  - vb
+  name: Many
+  nameWithType: RelationshipEndCardinality.Many
+  fullName: TabularEditor.TOMWrapper.RelationshipEndCardinality.Many
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Specifies the 'many' side of a one-to-many relationship.
+  example: []
+  syntax:
+    content: Many = 2
+    return:
+      type: TabularEditor.TOMWrapper.RelationshipEndCardinality
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.RelationshipEndCardinality.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<RelationshipEndCardinality>(RelationshipEndCardinality, RelationshipEndCardinality, RelationshipEndCardinality)
+  nameWithType: EnumExtensions.AllFlagsChanged<RelationshipEndCardinality>(RelationshipEndCardinality, RelationshipEndCardinality, RelationshipEndCardinality)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.RelationshipEndCardinality>(TabularEditor.TOMWrapper.RelationshipEndCardinality, TabularEditor.TOMWrapper.RelationshipEndCardinality, TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of RelationshipEndCardinality)(RelationshipEndCardinality, RelationshipEndCardinality, RelationshipEndCardinality)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.RelationshipEndCardinality)(TabularEditor.TOMWrapper.RelationshipEndCardinality, TabularEditor.TOMWrapper.RelationshipEndCardinality, TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  name.vb: AllFlagsChanged(Of RelationshipEndCardinality)(RelationshipEndCardinality, RelationshipEndCardinality, RelationshipEndCardinality)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.RelationshipEndCardinality.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<RelationshipEndCardinality>(RelationshipEndCardinality, RelationshipEndCardinality, RelationshipEndCardinality)
+  nameWithType: EnumExtensions.AnyFlagsChanged<RelationshipEndCardinality>(RelationshipEndCardinality, RelationshipEndCardinality, RelationshipEndCardinality)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.RelationshipEndCardinality>(TabularEditor.TOMWrapper.RelationshipEndCardinality, TabularEditor.TOMWrapper.RelationshipEndCardinality, TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of RelationshipEndCardinality)(RelationshipEndCardinality, RelationshipEndCardinality, RelationshipEndCardinality)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.RelationshipEndCardinality)(TabularEditor.TOMWrapper.RelationshipEndCardinality, TabularEditor.TOMWrapper.RelationshipEndCardinality, TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  name.vb: AnyFlagsChanged(Of RelationshipEndCardinality)(RelationshipEndCardinality, RelationshipEndCardinality, RelationshipEndCardinality)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.RelationshipEndCardinality.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<RelationshipEndCardinality>(RelationshipEndCardinality, RelationshipEndCardinality)
+  nameWithType: EnumExtensions.HasAnyFlags<RelationshipEndCardinality>(RelationshipEndCardinality, RelationshipEndCardinality)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.RelationshipEndCardinality>(TabularEditor.TOMWrapper.RelationshipEndCardinality, TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of RelationshipEndCardinality)(RelationshipEndCardinality, RelationshipEndCardinality)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.RelationshipEndCardinality)(TabularEditor.TOMWrapper.RelationshipEndCardinality, TabularEditor.TOMWrapper.RelationshipEndCardinality)
+  name.vb: HasAnyFlags(Of RelationshipEndCardinality)(RelationshipEndCardinality, RelationshipEndCardinality)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RelationshipEndCardinality,TabularEditor.TOMWrapper.RelationshipEndCardinality)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+  commentId: T:TabularEditor.TOMWrapper.RelationshipEndCardinality
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RelationshipEndCardinality.html
+  name: RelationshipEndCardinality
+  nameWithType: RelationshipEndCardinality
+  fullName: TabularEditor.TOMWrapper.RelationshipEndCardinality

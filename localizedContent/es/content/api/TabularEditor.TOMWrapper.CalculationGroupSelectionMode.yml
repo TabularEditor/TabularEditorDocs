@@ -1,0 +1,474 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+  commentId: T:TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+  id: CalculationGroupSelectionMode
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.CalculationGroupSelectionMode.MultipleOrEmptySelection
+  - TabularEditor.TOMWrapper.CalculationGroupSelectionMode.NoSelection
+  - TabularEditor.TOMWrapper.CalculationGroupSelectionMode.Unknown
+  langs:
+  - csharp
+  - vb
+  name: CalculationGroupSelectionMode
+  nameWithType: CalculationGroupSelectionMode
+  fullName: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Options for selections on calculation groups which do not invoke a calculation item.
+  remarks: This enum is only supported when the compatibility level of the database is at 1605 or above.
+  example: []
+  syntax:
+    content: public enum CalculationGroupSelectionMode
+    content.vb: Public Enum CalculationGroupSelectionMode
+  extensionMethods:
+  - TabularEditor.TOMWrapper.CalculationGroupSelectionMode.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  - TabularEditor.TOMWrapper.CalculationGroupSelectionMode.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  - TabularEditor.TOMWrapper.CalculationGroupSelectionMode.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+- uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.Unknown
+  commentId: F:TabularEditor.TOMWrapper.CalculationGroupSelectionMode.Unknown
+  id: Unknown
+  parent: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+  langs:
+  - csharp
+  - vb
+  name: Unknown
+  nameWithType: CalculationGroupSelectionMode.Unknown
+  fullName: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.Unknown
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Invalid selection value for CalculationGroupSelectionMode
+  example: []
+  syntax:
+    content: Unknown = 0
+    return:
+      type: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+- uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.MultipleOrEmptySelection
+  commentId: F:TabularEditor.TOMWrapper.CalculationGroupSelectionMode.MultipleOrEmptySelection
+  id: MultipleOrEmptySelection
+  parent: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+  langs:
+  - csharp
+  - vb
+  name: MultipleOrEmptySelection
+  nameWithType: CalculationGroupSelectionMode.MultipleOrEmptySelection
+  fullName: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.MultipleOrEmptySelection
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Multiple calculation items were referenced in the calculation group.
+  example: []
+  syntax:
+    content: MultipleOrEmptySelection = 1
+    return:
+      type: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+- uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.NoSelection
+  commentId: F:TabularEditor.TOMWrapper.CalculationGroupSelectionMode.NoSelection
+  id: NoSelection
+  parent: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+  langs:
+  - csharp
+  - vb
+  name: NoSelection
+  nameWithType: CalculationGroupSelectionMode.NoSelection
+  fullName: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.NoSelection
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: No calculation items nor the calculation group were referenced in the calculation group.
+  example: []
+  syntax:
+    content: NoSelection = 2
+    return:
+      type: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<CalculationGroupSelectionMode>(CalculationGroupSelectionMode, CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  nameWithType: EnumExtensions.AllFlagsChanged<CalculationGroupSelectionMode>(CalculationGroupSelectionMode, CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.CalculationGroupSelectionMode>(TabularEditor.TOMWrapper.CalculationGroupSelectionMode, TabularEditor.TOMWrapper.CalculationGroupSelectionMode, TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of CalculationGroupSelectionMode)(CalculationGroupSelectionMode, CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.CalculationGroupSelectionMode)(TabularEditor.TOMWrapper.CalculationGroupSelectionMode, TabularEditor.TOMWrapper.CalculationGroupSelectionMode, TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  name.vb: AllFlagsChanged(Of CalculationGroupSelectionMode)(CalculationGroupSelectionMode, CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<CalculationGroupSelectionMode>(CalculationGroupSelectionMode, CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  nameWithType: EnumExtensions.AnyFlagsChanged<CalculationGroupSelectionMode>(CalculationGroupSelectionMode, CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.CalculationGroupSelectionMode>(TabularEditor.TOMWrapper.CalculationGroupSelectionMode, TabularEditor.TOMWrapper.CalculationGroupSelectionMode, TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of CalculationGroupSelectionMode)(CalculationGroupSelectionMode, CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.CalculationGroupSelectionMode)(TabularEditor.TOMWrapper.CalculationGroupSelectionMode, TabularEditor.TOMWrapper.CalculationGroupSelectionMode, TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  name.vb: AnyFlagsChanged(Of CalculationGroupSelectionMode)(CalculationGroupSelectionMode, CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<CalculationGroupSelectionMode>(CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  nameWithType: EnumExtensions.HasAnyFlags<CalculationGroupSelectionMode>(CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.CalculationGroupSelectionMode>(TabularEditor.TOMWrapper.CalculationGroupSelectionMode, TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of CalculationGroupSelectionMode)(CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.CalculationGroupSelectionMode)(TabularEditor.TOMWrapper.CalculationGroupSelectionMode, TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+  name.vb: HasAnyFlags(Of CalculationGroupSelectionMode)(CalculationGroupSelectionMode, CalculationGroupSelectionMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CalculationGroupSelectionMode,TabularEditor.TOMWrapper.CalculationGroupSelectionMode)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+  commentId: T:TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.CalculationGroupSelectionMode.html
+  name: CalculationGroupSelectionMode
+  nameWithType: CalculationGroupSelectionMode
+  fullName: TabularEditor.TOMWrapper.CalculationGroupSelectionMode

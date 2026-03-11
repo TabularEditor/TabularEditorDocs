@@ -1,0 +1,726 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.TimeUnit
+  commentId: T:TabularEditor.TOMWrapper.TimeUnit
+  id: TimeUnit
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.TimeUnit.Date
+  - TabularEditor.TOMWrapper.TimeUnit.DayOfMonth
+  - TabularEditor.TOMWrapper.TimeUnit.DayOfQuarter
+  - TabularEditor.TOMWrapper.TimeUnit.DayOfWeek
+  - TabularEditor.TOMWrapper.TimeUnit.DayOfYear
+  - TabularEditor.TOMWrapper.TimeUnit.Month
+  - TabularEditor.TOMWrapper.TimeUnit.MonthOfQuarter
+  - TabularEditor.TOMWrapper.TimeUnit.MonthOfYear
+  - TabularEditor.TOMWrapper.TimeUnit.Quarter
+  - TabularEditor.TOMWrapper.TimeUnit.QuarterOfYear
+  - TabularEditor.TOMWrapper.TimeUnit.Week
+  - TabularEditor.TOMWrapper.TimeUnit.WeekOfMonth
+  - TabularEditor.TOMWrapper.TimeUnit.WeekOfQuarter
+  - TabularEditor.TOMWrapper.TimeUnit.WeekOfYear
+  - TabularEditor.TOMWrapper.TimeUnit.Year
+  langs:
+  - csharp
+  - vb
+  name: TimeUnit
+  nameWithType: TimeUnit
+  fullName: TabularEditor.TOMWrapper.TimeUnit
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Various options for units that describe time information.
+  remarks: This enum is only supported when the compatibility level of the database is at 1701 or above.
+  example: []
+  syntax:
+    content: public enum TimeUnit
+    content.vb: Public Enum TimeUnit
+  extensionMethods:
+  - TabularEditor.TOMWrapper.TimeUnit.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit)
+  - TabularEditor.TOMWrapper.TimeUnit.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit)
+  - TabularEditor.TOMWrapper.TimeUnit.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.TimeUnit)
+- uid: TabularEditor.TOMWrapper.TimeUnit.Year
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.Year
+  id: Year
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: Year
+  nameWithType: TimeUnit.Year
+  fullName: TabularEditor.TOMWrapper.TimeUnit.Year
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information about the year; e.g. '2022'.
+  example: []
+  syntax:
+    content: Year = 1
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.Quarter
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.Quarter
+  id: Quarter
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: Quarter
+  nameWithType: TimeUnit.Quarter
+  fullName: TabularEditor.TOMWrapper.TimeUnit.Quarter
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information about the quarter; e.g. 'Q3 2022'.
+  example: []
+  syntax:
+    content: Quarter = 4
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.QuarterOfYear
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.QuarterOfYear
+  id: QuarterOfYear
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: QuarterOfYear
+  nameWithType: TimeUnit.QuarterOfYear
+  fullName: TabularEditor.TOMWrapper.TimeUnit.QuarterOfYear
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information of the quarter within the year; e.g. '4'.
+  example: []
+  syntax:
+    content: QuarterOfYear = 5
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.Month
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.Month
+  id: Month
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: Month
+  nameWithType: TimeUnit.Month
+  fullName: TabularEditor.TOMWrapper.TimeUnit.Month
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information about the month; e.g. 'January 2022'.
+  example: []
+  syntax:
+    content: Month = 7
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.MonthOfYear
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.MonthOfYear
+  id: MonthOfYear
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: MonthOfYear
+  nameWithType: TimeUnit.MonthOfYear
+  fullName: TabularEditor.TOMWrapper.TimeUnit.MonthOfYear
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information of the month within the year; e.g. 'January'.
+  example: []
+  syntax:
+    content: MonthOfYear = 8
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.MonthOfQuarter
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.MonthOfQuarter
+  id: MonthOfQuarter
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: MonthOfQuarter
+  nameWithType: TimeUnit.MonthOfQuarter
+  fullName: TabularEditor.TOMWrapper.TimeUnit.MonthOfQuarter
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information of the quarter within the quarter; e.g. '2'.
+  example: []
+  syntax:
+    content: MonthOfQuarter = 10
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.Week
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.Week
+  id: Week
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: Week
+  nameWithType: TimeUnit.Week
+  fullName: TabularEditor.TOMWrapper.TimeUnit.Week
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information about the week; e.g. 'Week 49 2022'.
+  example: []
+  syntax:
+    content: Week = 11
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.WeekOfYear
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.WeekOfYear
+  id: WeekOfYear
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: WeekOfYear
+  nameWithType: TimeUnit.WeekOfYear
+  fullName: TabularEditor.TOMWrapper.TimeUnit.WeekOfYear
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information of the week within the year; e.g. 'Week 49'.
+  example: []
+  syntax:
+    content: WeekOfYear = 12
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.WeekOfQuarter
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.WeekOfQuarter
+  id: WeekOfQuarter
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: WeekOfQuarter
+  nameWithType: TimeUnit.WeekOfQuarter
+  fullName: TabularEditor.TOMWrapper.TimeUnit.WeekOfQuarter
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information of the week within the quarter; e.g. '11'.
+  example: []
+  syntax:
+    content: WeekOfQuarter = 14
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.WeekOfMonth
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.WeekOfMonth
+  id: WeekOfMonth
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: WeekOfMonth
+  nameWithType: TimeUnit.WeekOfMonth
+  fullName: TabularEditor.TOMWrapper.TimeUnit.WeekOfMonth
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information of the week within the month; e.g. '3'.
+  example: []
+  syntax:
+    content: WeekOfMonth = 15
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.Date
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.Date
+  id: Date
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: Date
+  nameWithType: TimeUnit.Date
+  fullName: TabularEditor.TOMWrapper.TimeUnit.Date
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information about the exact date; e.g. 'January 1st 2022'.
+  example: []
+  syntax:
+    content: Date = 16
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.DayOfYear
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.DayOfYear
+  id: DayOfYear
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: DayOfYear
+  nameWithType: TimeUnit.DayOfYear
+  fullName: TabularEditor.TOMWrapper.TimeUnit.DayOfYear
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information of the day within the year; e.g. '241'.
+  example: []
+  syntax:
+    content: DayOfYear = 17
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.DayOfQuarter
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.DayOfQuarter
+  id: DayOfQuarter
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: DayOfQuarter
+  nameWithType: TimeUnit.DayOfQuarter
+  fullName: TabularEditor.TOMWrapper.TimeUnit.DayOfQuarter
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information of the day within the quarter; e.g. '71'.
+  example: []
+  syntax:
+    content: DayOfQuarter = 19
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.DayOfMonth
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.DayOfMonth
+  id: DayOfMonth
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: DayOfMonth
+  nameWithType: TimeUnit.DayOfMonth
+  fullName: TabularEditor.TOMWrapper.TimeUnit.DayOfMonth
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information of the day within the month; e.g. '23'.
+  example: []
+  syntax:
+    content: DayOfMonth = 20
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+- uid: TabularEditor.TOMWrapper.TimeUnit.DayOfWeek
+  commentId: F:TabularEditor.TOMWrapper.TimeUnit.DayOfWeek
+  id: DayOfWeek
+  parent: TabularEditor.TOMWrapper.TimeUnit
+  langs:
+  - csharp
+  - vb
+  name: DayOfWeek
+  nameWithType: TimeUnit.DayOfWeek
+  fullName: TabularEditor.TOMWrapper.TimeUnit.DayOfWeek
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The information of the day within the week; e.g. '4'.
+  example: []
+  syntax:
+    content: DayOfWeek = 21
+    return:
+      type: TabularEditor.TOMWrapper.TimeUnit
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.TimeUnit.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<TimeUnit>(TimeUnit, TimeUnit, TimeUnit)
+  nameWithType: EnumExtensions.AllFlagsChanged<TimeUnit>(TimeUnit, TimeUnit, TimeUnit)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.TimeUnit>(TabularEditor.TOMWrapper.TimeUnit, TabularEditor.TOMWrapper.TimeUnit, TabularEditor.TOMWrapper.TimeUnit)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of TimeUnit)(TimeUnit, TimeUnit, TimeUnit)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.TimeUnit)(TabularEditor.TOMWrapper.TimeUnit, TabularEditor.TOMWrapper.TimeUnit, TabularEditor.TOMWrapper.TimeUnit)
+  name.vb: AllFlagsChanged(Of TimeUnit)(TimeUnit, TimeUnit, TimeUnit)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.TimeUnit.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<TimeUnit>(TimeUnit, TimeUnit, TimeUnit)
+  nameWithType: EnumExtensions.AnyFlagsChanged<TimeUnit>(TimeUnit, TimeUnit, TimeUnit)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.TimeUnit>(TabularEditor.TOMWrapper.TimeUnit, TabularEditor.TOMWrapper.TimeUnit, TabularEditor.TOMWrapper.TimeUnit)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of TimeUnit)(TimeUnit, TimeUnit, TimeUnit)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.TimeUnit)(TabularEditor.TOMWrapper.TimeUnit, TabularEditor.TOMWrapper.TimeUnit, TabularEditor.TOMWrapper.TimeUnit)
+  name.vb: AnyFlagsChanged(Of TimeUnit)(TimeUnit, TimeUnit, TimeUnit)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.TimeUnit.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.TimeUnit)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<TimeUnit>(TimeUnit, TimeUnit)
+  nameWithType: EnumExtensions.HasAnyFlags<TimeUnit>(TimeUnit, TimeUnit)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.TimeUnit>(TabularEditor.TOMWrapper.TimeUnit, TabularEditor.TOMWrapper.TimeUnit)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of TimeUnit)(TimeUnit, TimeUnit)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.TimeUnit)(TabularEditor.TOMWrapper.TimeUnit, TabularEditor.TOMWrapper.TimeUnit)
+  name.vb: HasAnyFlags(Of TimeUnit)(TimeUnit, TimeUnit)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.TimeUnit,TabularEditor.TOMWrapper.TimeUnit)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TimeUnit.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.TimeUnit
+  commentId: T:TabularEditor.TOMWrapper.TimeUnit
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TimeUnit.html
+  name: TimeUnit
+  nameWithType: TimeUnit
+  fullName: TabularEditor.TOMWrapper.TimeUnit

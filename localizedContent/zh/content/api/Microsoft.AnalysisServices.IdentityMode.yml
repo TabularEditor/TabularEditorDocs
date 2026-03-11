@@ -1,0 +1,502 @@
+### YamlMime:ManagedReference
+items:
+- uid: Microsoft.AnalysisServices.IdentityMode
+  commentId: T:Microsoft.AnalysisServices.IdentityMode
+  id: IdentityMode
+  parent: Microsoft.AnalysisServices
+  children:
+  - Microsoft.AnalysisServices.IdentityMode.Connection
+  - Microsoft.AnalysisServices.IdentityMode.CurrentUser
+  - Microsoft.AnalysisServices.IdentityMode.Default
+  - Microsoft.AnalysisServices.IdentityMode.Process
+  langs:
+  - csharp
+  - vb
+  name: IdentityMode
+  nameWithType: IdentityMode
+  fullName: Microsoft.AnalysisServices.IdentityMode
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: Microsoft.AnalysisServices
+  summary: Controls the resolution of user identity when not explicitly specified in the connection string.
+  example: []
+  syntax:
+    content: public enum IdentityMode
+    content.vb: Public Enum IdentityMode
+  extensionMethods:
+  - Microsoft.AnalysisServices.IdentityMode.TabularEditor.EnumExtensions.AllFlagsChanged``1(Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode)
+  - Microsoft.AnalysisServices.IdentityMode.TabularEditor.EnumExtensions.AnyFlagsChanged``1(Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode)
+  - Microsoft.AnalysisServices.IdentityMode.TabularEditor.EnumExtensions.HasAnyFlags``1(Microsoft.AnalysisServices.IdentityMode)
+- uid: Microsoft.AnalysisServices.IdentityMode.Default
+  commentId: F:Microsoft.AnalysisServices.IdentityMode.Default
+  id: Default
+  parent: Microsoft.AnalysisServices.IdentityMode
+  langs:
+  - csharp
+  - vb
+  name: Default
+  nameWithType: IdentityMode.Default
+  fullName: Microsoft.AnalysisServices.IdentityMode.Default
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: Microsoft.AnalysisServices
+  summary: Use the default behavior which is the current-user; in the connection-string means use the global configuration on the client
+  example: []
+  syntax:
+    content: Default = 0
+    return:
+      type: Microsoft.AnalysisServices.IdentityMode
+- uid: Microsoft.AnalysisServices.IdentityMode.CurrentUser
+  commentId: F:Microsoft.AnalysisServices.IdentityMode.CurrentUser
+  id: CurrentUser
+  parent: Microsoft.AnalysisServices.IdentityMode
+  langs:
+  - csharp
+  - vb
+  name: CurrentUser
+  nameWithType: IdentityMode.CurrentUser
+  fullName: Microsoft.AnalysisServices.IdentityMode.CurrentUser
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: Microsoft.AnalysisServices
+  summary: Identity is resolved to the current user of the OS session
+  example: []
+  syntax:
+    content: CurrentUser = 1
+    return:
+      type: Microsoft.AnalysisServices.IdentityMode
+- uid: Microsoft.AnalysisServices.IdentityMode.Connection
+  commentId: F:Microsoft.AnalysisServices.IdentityMode.Connection
+  id: Connection
+  parent: Microsoft.AnalysisServices.IdentityMode
+  langs:
+  - csharp
+  - vb
+  name: Connection
+  nameWithType: IdentityMode.Connection
+  fullName: Microsoft.AnalysisServices.IdentityMode.Connection
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: Microsoft.AnalysisServices
+  summary: >-
+    Identity is managed based on the target data-source; in the first time a connection is opened to a particular data-source, 
+
+    we launch the login window, so the user can select the identity, any additional connection to a data-source that has the
+
+    associated identity already resolved, we use the first one (that was obtained interactively).
+  example: []
+  syntax:
+    content: Connection = 2
+    return:
+      type: Microsoft.AnalysisServices.IdentityMode
+- uid: Microsoft.AnalysisServices.IdentityMode.Process
+  commentId: F:Microsoft.AnalysisServices.IdentityMode.Process
+  id: Process
+  parent: Microsoft.AnalysisServices.IdentityMode
+  langs:
+  - csharp
+  - vb
+  name: Process
+  nameWithType: IdentityMode.Process
+  fullName: Microsoft.AnalysisServices.IdentityMode.Process
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: Microsoft.AnalysisServices
+  summary: >-
+    Identity is managed for the lifetime of the process; the first connection will trigger an interactive login window,
+
+    so the user can select the identity, any additional connection will use the first identity.
+  example: []
+  syntax:
+    content: Process = 3
+    return:
+      type: Microsoft.AnalysisServices.IdentityMode
+references:
+- uid: Microsoft.AnalysisServices
+  commentId: N:Microsoft.AnalysisServices
+  isExternal: true
+  href: Microsoft.html
+  name: Microsoft.AnalysisServices
+  nameWithType: Microsoft.AnalysisServices
+  fullName: Microsoft.AnalysisServices
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: Microsoft.html
+  - name: .
+  - uid: Microsoft.AnalysisServices
+    name: AnalysisServices
+    isExternal: true
+    href: Microsoft.AnalysisServices.html
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: Microsoft.html
+  - name: .
+  - uid: Microsoft.AnalysisServices
+    name: AnalysisServices
+    isExternal: true
+    href: Microsoft.AnalysisServices.html
+- uid: Microsoft.AnalysisServices.IdentityMode.TabularEditor.EnumExtensions.AllFlagsChanged``1(Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<IdentityMode>(IdentityMode, IdentityMode, IdentityMode)
+  nameWithType: EnumExtensions.AllFlagsChanged<IdentityMode>(IdentityMode, IdentityMode, IdentityMode)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<Microsoft.AnalysisServices.IdentityMode>(Microsoft.AnalysisServices.IdentityMode, Microsoft.AnalysisServices.IdentityMode, Microsoft.AnalysisServices.IdentityMode)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of IdentityMode)(IdentityMode, IdentityMode, IdentityMode)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of Microsoft.AnalysisServices.IdentityMode)(Microsoft.AnalysisServices.IdentityMode, Microsoft.AnalysisServices.IdentityMode, Microsoft.AnalysisServices.IdentityMode)
+  name.vb: AllFlagsChanged(Of IdentityMode)(IdentityMode, IdentityMode, IdentityMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: '>'
+  - name: (
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: )
+  - name: (
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: )
+- uid: Microsoft.AnalysisServices.IdentityMode.TabularEditor.EnumExtensions.AnyFlagsChanged``1(Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<IdentityMode>(IdentityMode, IdentityMode, IdentityMode)
+  nameWithType: EnumExtensions.AnyFlagsChanged<IdentityMode>(IdentityMode, IdentityMode, IdentityMode)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<Microsoft.AnalysisServices.IdentityMode>(Microsoft.AnalysisServices.IdentityMode, Microsoft.AnalysisServices.IdentityMode, Microsoft.AnalysisServices.IdentityMode)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of IdentityMode)(IdentityMode, IdentityMode, IdentityMode)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of Microsoft.AnalysisServices.IdentityMode)(Microsoft.AnalysisServices.IdentityMode, Microsoft.AnalysisServices.IdentityMode, Microsoft.AnalysisServices.IdentityMode)
+  name.vb: AnyFlagsChanged(Of IdentityMode)(IdentityMode, IdentityMode, IdentityMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: '>'
+  - name: (
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: )
+  - name: (
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: )
+- uid: Microsoft.AnalysisServices.IdentityMode.TabularEditor.EnumExtensions.HasAnyFlags``1(Microsoft.AnalysisServices.IdentityMode)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<IdentityMode>(IdentityMode, IdentityMode)
+  nameWithType: EnumExtensions.HasAnyFlags<IdentityMode>(IdentityMode, IdentityMode)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<Microsoft.AnalysisServices.IdentityMode>(Microsoft.AnalysisServices.IdentityMode, Microsoft.AnalysisServices.IdentityMode)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of IdentityMode)(IdentityMode, IdentityMode)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of Microsoft.AnalysisServices.IdentityMode)(Microsoft.AnalysisServices.IdentityMode, Microsoft.AnalysisServices.IdentityMode)
+  name.vb: HasAnyFlags(Of IdentityMode)(IdentityMode, IdentityMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: '>'
+  - name: (
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(Microsoft.AnalysisServices.IdentityMode,Microsoft.AnalysisServices.IdentityMode)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: )
+  - name: (
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    isExternal: true
+    href: Microsoft.AnalysisServices.IdentityMode.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: Microsoft.AnalysisServices.IdentityMode
+  commentId: T:Microsoft.AnalysisServices.IdentityMode
+  parent: Microsoft.AnalysisServices
+  isExternal: true
+  href: Microsoft.AnalysisServices.IdentityMode.html
+  name: IdentityMode
+  nameWithType: IdentityMode
+  fullName: Microsoft.AnalysisServices.IdentityMode

@@ -1,0 +1,2851 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer
+  commentId: T:TabularEditor.TOMWrapper.RoleOLSIndexer
+  id: RoleOLSIndexer
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.RoleOLSIndexer.GetCollection
+  - TabularEditor.TOMWrapper.RoleOLSIndexer.GetValue(TabularEditor.TOMWrapper.Table)
+  - TabularEditor.TOMWrapper.RoleOLSIndexer.Keys
+  - TabularEditor.TOMWrapper.RoleOLSIndexer.Role
+  - TabularEditor.TOMWrapper.RoleOLSIndexer.SetValue(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission)
+  - TabularEditor.TOMWrapper.RoleOLSIndexer.Summary
+  langs:
+  - csharp
+  - vb
+  name: RoleOLSIndexer
+  nameWithType: RoleOLSIndexer
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: >-
+    The RolePermissionIndexer is used to browse all metadata permissions across all
+
+    tables in the model, for one specific role.
+  example: []
+  syntax:
+    content: >-
+      [TypeConverter(typeof(IndexerConverter))]
+
+      public class RoleOLSIndexer : GenericIndexer<Table, MetadataPermission>, IEnumerable<MetadataPermission>, IEnumerable
+    content.vb: >-
+      <TypeConverter(GetType(IndexerConverter))>
+
+      Public Class RoleOLSIndexer Inherits GenericIndexer(Of Table, MetadataPermission) Implements IEnumerable(Of MetadataPermission), IEnumerable
+  inheritance:
+  - System.Object
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  implements:
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}
+  - System.Collections.IEnumerable
+  inheritedMembers:
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetEnumerator
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetDisplayName(System.String)
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetValue(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission)
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetValue(TabularEditor.TOMWrapper.Table)
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetCollection
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetObjectFromName(System.String)
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.IsEmptyValue(TabularEditor.TOMWrapper.MetadataPermission)
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.ToJson
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Copy
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission},System.Func{TabularEditor.TOMWrapper.MetadataPermission,TabularEditor.TOMWrapper.MetadataPermission})
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.CopyFrom(System.Collections.Generic.IDictionary{System.String,TabularEditor.TOMWrapper.MetadataPermission})
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Clear
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetAll(TabularEditor.TOMWrapper.MetadataPermission)
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Model
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.EnableMultiLine
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.EmptyValue
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Collection
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.IsEmpty
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Item(System.String)
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Item(TabularEditor.TOMWrapper.Table)
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Keys
+  - TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Summary
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  extensionMethods:
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}.TabularEditor.EnumExtensions.ContainsDuplicates``1
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{TabularEditor.TOMWrapper.MetadataPermission,{U}},System.Collections.Generic.IEqualityComparer{{U}})
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{TabularEditor.TOMWrapper.MetadataPermission,{U}},System.Collections.Generic.IEqualityComparer{{U}},TabularEditor.TOMWrapper.MetadataPermission@)
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}.TabularEditor.EnumExtensions.IndexOf``1(System.Predicate{TabularEditor.TOMWrapper.MetadataPermission})
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.Role
+  commentId: F:TabularEditor.TOMWrapper.RoleOLSIndexer.Role
+  id: Role
+  parent: TabularEditor.TOMWrapper.RoleOLSIndexer
+  langs:
+  - csharp
+  - vb
+  name: Role
+  nameWithType: RoleOLSIndexer.Role
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.Role
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public readonly ModelRole Role
+    return:
+      type: TabularEditor.TOMWrapper.ModelRole
+    content.vb: Public ReadOnly Role As ModelRole
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.GetCollection
+  commentId: M:TabularEditor.TOMWrapper.RoleOLSIndexer.GetCollection
+  id: GetCollection
+  parent: TabularEditor.TOMWrapper.RoleOLSIndexer
+  langs:
+  - csharp
+  - vb
+  name: GetCollection()
+  nameWithType: RoleOLSIndexer.GetCollection()
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.GetCollection()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: protected override TabularNamedObjectCollection<Table> GetCollection()
+    return:
+      type: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.Table}
+    content.vb: Protected Overrides Function GetCollection() As TabularNamedObjectCollection(Of Table)
+  overridden: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetCollection
+  overload: TabularEditor.TOMWrapper.RoleOLSIndexer.GetCollection*
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.GetValue(TabularEditor.TOMWrapper.Table)
+  commentId: M:TabularEditor.TOMWrapper.RoleOLSIndexer.GetValue(TabularEditor.TOMWrapper.Table)
+  id: GetValue(TabularEditor.TOMWrapper.Table)
+  parent: TabularEditor.TOMWrapper.RoleOLSIndexer
+  langs:
+  - csharp
+  - vb
+  name: GetValue(Table)
+  nameWithType: RoleOLSIndexer.GetValue(Table)
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.GetValue(TabularEditor.TOMWrapper.Table)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: protected override MetadataPermission GetValue(Table table)
+    parameters:
+    - id: table
+      type: TabularEditor.TOMWrapper.Table
+    return:
+      type: TabularEditor.TOMWrapper.MetadataPermission
+    content.vb: Protected Overrides Function GetValue(table As Table) As MetadataPermission
+  overridden: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetValue(TabularEditor.TOMWrapper.Table)
+  overload: TabularEditor.TOMWrapper.RoleOLSIndexer.GetValue*
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.SetValue(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission)
+  commentId: M:TabularEditor.TOMWrapper.RoleOLSIndexer.SetValue(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission)
+  id: SetValue(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission)
+  parent: TabularEditor.TOMWrapper.RoleOLSIndexer
+  langs:
+  - csharp
+  - vb
+  name: SetValue(Table, MetadataPermission)
+  nameWithType: RoleOLSIndexer.SetValue(Table, MetadataPermission)
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.SetValue(TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: protected override void SetValue(Table table, MetadataPermission permission)
+    parameters:
+    - id: table
+      type: TabularEditor.TOMWrapper.Table
+    - id: permission
+      type: TabularEditor.TOMWrapper.MetadataPermission
+    content.vb: Protected Overrides Sub SetValue(table As Table, permission As MetadataPermission)
+  overridden: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetValue(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission)
+  overload: TabularEditor.TOMWrapper.RoleOLSIndexer.SetValue*
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.Keys
+  commentId: P:TabularEditor.TOMWrapper.RoleOLSIndexer.Keys
+  id: Keys
+  parent: TabularEditor.TOMWrapper.RoleOLSIndexer
+  langs:
+  - csharp
+  - vb
+  name: Keys
+  nameWithType: RoleOLSIndexer.Keys
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.Keys
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public override IEnumerable<string> Keys { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IEnumerable{System.String}
+    content.vb: Public Overrides ReadOnly Property Keys As IEnumerable(Of String)
+  overridden: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Keys
+  overload: TabularEditor.TOMWrapper.RoleOLSIndexer.Keys*
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.Summary
+  commentId: P:TabularEditor.TOMWrapper.RoleOLSIndexer.Summary
+  id: Summary
+  parent: TabularEditor.TOMWrapper.RoleOLSIndexer
+  langs:
+  - csharp
+  - vb
+  name: Summary
+  nameWithType: RoleOLSIndexer.Summary
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.Summary
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public override string Summary { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Overrides ReadOnly Property Summary As String
+  overridden: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Summary
+  overload: TabularEditor.TOMWrapper.RoleOLSIndexer.Summary*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  commentId: T:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  parent: TabularEditor.TOMWrapper
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html
+  name: GenericIndexer<Table, MetadataPermission>
+  nameWithType: GenericIndexer<Table, MetadataPermission>
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission)
+  name.vb: GenericIndexer(Of Table, MetadataPermission)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2
+    name: GenericIndexer
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2
+    name: GenericIndexer
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}
+  commentId: T:System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<MetadataPermission>
+  nameWithType: IEnumerable<MetadataPermission>
+  fullName: System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.MetadataPermission>
+  nameWithType.vb: IEnumerable(Of MetadataPermission)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.MetadataPermission)
+  name.vb: IEnumerable(Of MetadataPermission)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetEnumerator
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetEnumerator
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.GetEnumerator
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetEnumerator
+  name: GetEnumerator()
+  nameWithType: GenericIndexer<Table, MetadataPermission>.GetEnumerator()
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.GetEnumerator()
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).GetEnumerator()
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).GetEnumerator()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetEnumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetEnumerator
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetDisplayName(System.String)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetDisplayName(System.String)
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.GetDisplayName(System.String)
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetDisplayName_System_String_
+  name: GetDisplayName(string)
+  nameWithType: GenericIndexer<Table, MetadataPermission>.GetDisplayName(string)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.GetDisplayName(string)
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).GetDisplayName(String)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).GetDisplayName(String)
+  name.vb: GetDisplayName(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetDisplayName(System.String)
+    name: GetDisplayName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetDisplayName_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetDisplayName(System.String)
+    name: GetDisplayName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetDisplayName_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetValue(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetValue(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission)
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.SetValue(`0,`1)
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetValue__0__1_
+  name: SetValue(Table, MetadataPermission)
+  nameWithType: GenericIndexer<Table, MetadataPermission>.SetValue(Table, MetadataPermission)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.SetValue(TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission)
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).SetValue(Table, MetadataPermission)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).SetValue(TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetValue(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission)
+    name: SetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetValue__0__1_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetValue(TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission)
+    name: SetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetValue__0__1_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetValue(TabularEditor.TOMWrapper.Table)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetValue(TabularEditor.TOMWrapper.Table)
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.GetValue(`0)
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetValue__0_
+  name: GetValue(Table)
+  nameWithType: GenericIndexer<Table, MetadataPermission>.GetValue(Table)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.GetValue(TabularEditor.TOMWrapper.Table)
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).GetValue(Table)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).GetValue(TabularEditor.TOMWrapper.Table)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetValue(TabularEditor.TOMWrapper.Table)
+    name: GetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetValue__0_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetValue(TabularEditor.TOMWrapper.Table)
+    name: GetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetValue__0_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetCollection
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetCollection
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.GetCollection
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetCollection
+  name: GetCollection()
+  nameWithType: GenericIndexer<Table, MetadataPermission>.GetCollection()
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.GetCollection()
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).GetCollection()
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).GetCollection()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetCollection
+    name: GetCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetCollection
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetCollection
+    name: GetCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetCollection
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetObjectFromName(System.String)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetObjectFromName(System.String)
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.GetObjectFromName(System.String)
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetObjectFromName_System_String_
+  name: GetObjectFromName(string)
+  nameWithType: GenericIndexer<Table, MetadataPermission>.GetObjectFromName(string)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.GetObjectFromName(string)
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).GetObjectFromName(String)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).GetObjectFromName(String)
+  name.vb: GetObjectFromName(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetObjectFromName(System.String)
+    name: GetObjectFromName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetObjectFromName_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.GetObjectFromName(System.String)
+    name: GetObjectFromName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetObjectFromName_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.IsEmptyValue(TabularEditor.TOMWrapper.MetadataPermission)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.IsEmptyValue(TabularEditor.TOMWrapper.MetadataPermission)
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.IsEmptyValue(`1)
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_IsEmptyValue__1_
+  name: IsEmptyValue(MetadataPermission)
+  nameWithType: GenericIndexer<Table, MetadataPermission>.IsEmptyValue(MetadataPermission)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.IsEmptyValue(TabularEditor.TOMWrapper.MetadataPermission)
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).IsEmptyValue(MetadataPermission)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).IsEmptyValue(TabularEditor.TOMWrapper.MetadataPermission)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.IsEmptyValue(TabularEditor.TOMWrapper.MetadataPermission)
+    name: IsEmptyValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_IsEmptyValue__1_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.IsEmptyValue(TabularEditor.TOMWrapper.MetadataPermission)
+    name: IsEmptyValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_IsEmptyValue__1_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.ToJson
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.ToJson
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.ToJson
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_ToJson
+  name: ToJson()
+  nameWithType: GenericIndexer<Table, MetadataPermission>.ToJson()
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.ToJson()
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).ToJson()
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).ToJson()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.ToJson
+    name: ToJson
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_ToJson
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.ToJson
+    name: ToJson
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_ToJson
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Copy
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Copy
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.Copy
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Copy
+  name: Copy()
+  nameWithType: GenericIndexer<Table, MetadataPermission>.Copy()
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.Copy()
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).Copy()
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).Copy()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Copy
+    name: Copy
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Copy
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Copy
+    name: Copy
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Copy
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission},System.Func{TabularEditor.TOMWrapper.MetadataPermission,TabularEditor.TOMWrapper.MetadataPermission})
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission},System.Func{TabularEditor.TOMWrapper.MetadataPermission,TabularEditor.TOMWrapper.MetadataPermission})
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer{`0,`1},System.Func{`1,`1})
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_TabularEditor_TOMWrapper_GenericIndexer__0__1__System_Func__1__1__
+  name: CopyFrom(GenericIndexer<Table, MetadataPermission>, Func<MetadataPermission, MetadataPermission>)
+  nameWithType: GenericIndexer<Table, MetadataPermission>.CopyFrom(GenericIndexer<Table, MetadataPermission>, Func<MetadataPermission, MetadataPermission>)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>, System.Func<TabularEditor.TOMWrapper.MetadataPermission, TabularEditor.TOMWrapper.MetadataPermission>)
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).CopyFrom(GenericIndexer(Of Table, MetadataPermission), Func(Of MetadataPermission, MetadataPermission))
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).CopyFrom(TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission), System.Func(Of TabularEditor.TOMWrapper.MetadataPermission, TabularEditor.TOMWrapper.MetadataPermission))
+  name.vb: CopyFrom(GenericIndexer(Of Table, MetadataPermission), Func(Of MetadataPermission, MetadataPermission))
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission},System.Func{TabularEditor.TOMWrapper.MetadataPermission,TabularEditor.TOMWrapper.MetadataPermission})
+    name: CopyFrom
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_TabularEditor_TOMWrapper_GenericIndexer__0__1__System_Func__1__1__
+  - name: (
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2
+    name: GenericIndexer
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission},System.Func{TabularEditor.TOMWrapper.MetadataPermission,TabularEditor.TOMWrapper.MetadataPermission})
+    name: CopyFrom
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_TabularEditor_TOMWrapper_GenericIndexer__0__1__System_Func__1__1__
+  - name: (
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2
+    name: GenericIndexer
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.CopyFrom(System.Collections.Generic.IDictionary{System.String,TabularEditor.TOMWrapper.MetadataPermission})
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.CopyFrom(System.Collections.Generic.IDictionary{System.String,TabularEditor.TOMWrapper.MetadataPermission})
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.CopyFrom(System.Collections.Generic.IDictionary{System.String,`1})
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_System_Collections_Generic_IDictionary_System_String__1__
+  name: CopyFrom(IDictionary<string, MetadataPermission>)
+  nameWithType: GenericIndexer<Table, MetadataPermission>.CopyFrom(IDictionary<string, MetadataPermission>)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.CopyFrom(System.Collections.Generic.IDictionary<string, TabularEditor.TOMWrapper.MetadataPermission>)
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).CopyFrom(IDictionary(Of String, MetadataPermission))
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).CopyFrom(System.Collections.Generic.IDictionary(Of String, TabularEditor.TOMWrapper.MetadataPermission))
+  name.vb: CopyFrom(IDictionary(Of String, MetadataPermission))
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.CopyFrom(System.Collections.Generic.IDictionary{System.String,TabularEditor.TOMWrapper.MetadataPermission})
+    name: CopyFrom
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_System_Collections_Generic_IDictionary_System_String__1__
+  - name: (
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.CopyFrom(System.Collections.Generic.IDictionary{System.String,TabularEditor.TOMWrapper.MetadataPermission})
+    name: CopyFrom
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_System_Collections_Generic_IDictionary_System_String__1__
+  - name: (
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Clear
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Clear
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.Clear
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Clear
+  name: Clear()
+  nameWithType: GenericIndexer<Table, MetadataPermission>.Clear()
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.Clear()
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).Clear()
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).Clear()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Clear
+    name: Clear
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Clear
+    name: Clear
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Clear
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetAll(TabularEditor.TOMWrapper.MetadataPermission)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetAll(TabularEditor.TOMWrapper.MetadataPermission)
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.SetAll(`1)
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetAll__1_
+  name: SetAll(MetadataPermission)
+  nameWithType: GenericIndexer<Table, MetadataPermission>.SetAll(MetadataPermission)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.SetAll(TabularEditor.TOMWrapper.MetadataPermission)
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).SetAll(MetadataPermission)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).SetAll(TabularEditor.TOMWrapper.MetadataPermission)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetAll(TabularEditor.TOMWrapper.MetadataPermission)
+    name: SetAll
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetAll__1_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.SetAll(TabularEditor.TOMWrapper.MetadataPermission)
+    name: SetAll
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetAll__1_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Model
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Model
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.Model
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Model
+  name: Model
+  nameWithType: GenericIndexer<Table, MetadataPermission>.Model
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.Model
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).Model
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).Model
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.EnableMultiLine
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.EnableMultiLine
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.EnableMultiLine
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_EnableMultiLine
+  name: EnableMultiLine
+  nameWithType: GenericIndexer<Table, MetadataPermission>.EnableMultiLine
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.EnableMultiLine
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).EnableMultiLine
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).EnableMultiLine
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.EmptyValue
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.EmptyValue
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.EmptyValue
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_EmptyValue
+  name: EmptyValue
+  nameWithType: GenericIndexer<Table, MetadataPermission>.EmptyValue
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.EmptyValue
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).EmptyValue
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).EmptyValue
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Collection
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Collection
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.Collection
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Collection
+  name: Collection
+  nameWithType: GenericIndexer<Table, MetadataPermission>.Collection
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.Collection
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).Collection
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).Collection
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.IsEmpty
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.IsEmpty
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.IsEmpty
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_IsEmpty
+  name: IsEmpty
+  nameWithType: GenericIndexer<Table, MetadataPermission>.IsEmpty
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.IsEmpty
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).IsEmpty
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).IsEmpty
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Item(System.String)
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Item(System.String)
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.Item(System.String)
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: this[string]
+  nameWithType: GenericIndexer<Table, MetadataPermission>.this[string]
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.this[string]
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).this[](String)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).this[](String)
+  name.vb: this[](String)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ']'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Item(System.String)
+    name: this[]
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Item_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Item(TabularEditor.TOMWrapper.Table)
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Item(TabularEditor.TOMWrapper.Table)
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.Item(`0)
+  href: TabularEditor.TOMWrapper.Table.html
+  name: this[Table]
+  nameWithType: GenericIndexer<Table, MetadataPermission>.this[Table]
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.this[TabularEditor.TOMWrapper.Table]
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).this[](Table)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).this[](TabularEditor.TOMWrapper.Table)
+  name.vb: this[](Table)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: ']'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Item(TabularEditor.TOMWrapper.Table)
+    name: this[]
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Item__0_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Keys
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Keys
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.Keys
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Keys
+  name: Keys
+  nameWithType: GenericIndexer<Table, MetadataPermission>.Keys
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.Keys
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).Keys
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).Keys
+- uid: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Summary
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}.Summary
+  parent: TabularEditor.TOMWrapper.GenericIndexer{TabularEditor.TOMWrapper.Table,TabularEditor.TOMWrapper.MetadataPermission}
+  definition: TabularEditor.TOMWrapper.GenericIndexer`2.Summary
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Summary
+  name: Summary
+  nameWithType: GenericIndexer<Table, MetadataPermission>.Summary
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission>.Summary
+  nameWithType.vb: GenericIndexer(Of Table, MetadataPermission).Summary
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of TabularEditor.TOMWrapper.Table, TabularEditor.TOMWrapper.MetadataPermission).Summary
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}.TabularEditor.EnumExtensions.ContainsDuplicates``1
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  name: ContainsDuplicates<MetadataPermission>(IEnumerable<MetadataPermission>)
+  nameWithType: EnumExtensions.ContainsDuplicates<MetadataPermission>(IEnumerable<MetadataPermission>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<TabularEditor.TOMWrapper.MetadataPermission>(System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.MetadataPermission>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of MetadataPermission)(IEnumerable(Of MetadataPermission))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of TabularEditor.TOMWrapper.MetadataPermission)(System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.MetadataPermission))
+  name.vb: ContainsDuplicates(Of MetadataPermission)(IEnumerable(Of MetadataPermission))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{TabularEditor.TOMWrapper.MetadataPermission,{U}},System.Collections.Generic.IEqualityComparer{{U}})
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  name: ContainsDuplicates<MetadataPermission, U>(IEnumerable<MetadataPermission>, Func<MetadataPermission, U>, IEqualityComparer<U>)
+  nameWithType: EnumExtensions.ContainsDuplicates<MetadataPermission, U>(IEnumerable<MetadataPermission>, Func<MetadataPermission, U>, IEqualityComparer<U>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<TabularEditor.TOMWrapper.MetadataPermission, U>(System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.MetadataPermission>, System.Func<TabularEditor.TOMWrapper.MetadataPermission, U>, System.Collections.Generic.IEqualityComparer<U>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of MetadataPermission, U)(IEnumerable(Of MetadataPermission), Func(Of MetadataPermission, U), IEqualityComparer(Of U))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of TabularEditor.TOMWrapper.MetadataPermission, U)(System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.MetadataPermission), System.Func(Of TabularEditor.TOMWrapper.MetadataPermission, U), System.Collections.Generic.IEqualityComparer(Of U))
+  name.vb: ContainsDuplicates(Of MetadataPermission, U)(IEnumerable(Of MetadataPermission), Func(Of MetadataPermission, U), IEqualityComparer(Of U))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission},System.Func{TabularEditor.TOMWrapper.MetadataPermission,``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission},System.Func{TabularEditor.TOMWrapper.MetadataPermission,``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{TabularEditor.TOMWrapper.MetadataPermission,{U}},System.Collections.Generic.IEqualityComparer{{U}},TabularEditor.TOMWrapper.MetadataPermission@)
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  name: ContainsDuplicates<MetadataPermission, U>(IEnumerable<MetadataPermission>, Func<MetadataPermission, U>, IEqualityComparer<U>, out MetadataPermission)
+  nameWithType: EnumExtensions.ContainsDuplicates<MetadataPermission, U>(IEnumerable<MetadataPermission>, Func<MetadataPermission, U>, IEqualityComparer<U>, out MetadataPermission)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<TabularEditor.TOMWrapper.MetadataPermission, U>(System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.MetadataPermission>, System.Func<TabularEditor.TOMWrapper.MetadataPermission, U>, System.Collections.Generic.IEqualityComparer<U>, out TabularEditor.TOMWrapper.MetadataPermission)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of MetadataPermission, U)(IEnumerable(Of MetadataPermission), Func(Of MetadataPermission, U), IEqualityComparer(Of U), MetadataPermission)
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of TabularEditor.TOMWrapper.MetadataPermission, U)(System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.MetadataPermission), System.Func(Of TabularEditor.TOMWrapper.MetadataPermission, U), System.Collections.Generic.IEqualityComparer(Of U), TabularEditor.TOMWrapper.MetadataPermission)
+  name.vb: ContainsDuplicates(Of MetadataPermission, U)(IEnumerable(Of MetadataPermission), Func(Of MetadataPermission, U), IEqualityComparer(Of U), MetadataPermission)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission},System.Func{TabularEditor.TOMWrapper.MetadataPermission,``1},System.Collections.Generic.IEqualityComparer{``1},TabularEditor.TOMWrapper.MetadataPermission@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: out
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission},System.Func{TabularEditor.TOMWrapper.MetadataPermission,``1},System.Collections.Generic.IEqualityComparer{``1},TabularEditor.TOMWrapper.MetadataPermission@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission}.TabularEditor.EnumExtensions.IndexOf``1(System.Predicate{TabularEditor.TOMWrapper.MetadataPermission})
+  commentId: M:TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  name: IndexOf<MetadataPermission>(IEnumerable<MetadataPermission>, Predicate<MetadataPermission>)
+  nameWithType: EnumExtensions.IndexOf<MetadataPermission>(IEnumerable<MetadataPermission>, Predicate<MetadataPermission>)
+  fullName: TabularEditor.EnumExtensions.IndexOf<TabularEditor.TOMWrapper.MetadataPermission>(System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.MetadataPermission>, System.Predicate<TabularEditor.TOMWrapper.MetadataPermission>)
+  nameWithType.vb: EnumExtensions.IndexOf(Of MetadataPermission)(IEnumerable(Of MetadataPermission), Predicate(Of MetadataPermission))
+  fullName.vb: TabularEditor.EnumExtensions.IndexOf(Of TabularEditor.TOMWrapper.MetadataPermission)(System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.MetadataPermission), System.Predicate(Of TabularEditor.TOMWrapper.MetadataPermission))
+  name.vb: IndexOf(Of MetadataPermission)(IEnumerable(Of MetadataPermission), Predicate(Of MetadataPermission))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission},System.Predicate{TabularEditor.TOMWrapper.MetadataPermission})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.MetadataPermission},System.Predicate{TabularEditor.TOMWrapper.MetadataPermission})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataPermission.html
+  - name: )
+  - name: )
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2
+  commentId: T:TabularEditor.TOMWrapper.GenericIndexer`2
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html
+  name: GenericIndexer<T, T1>
+  nameWithType: GenericIndexer<T, T1>
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>
+  nameWithType.vb: GenericIndexer(Of T, T1)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1)
+  name.vb: GenericIndexer(Of T, T1)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2
+    name: GenericIndexer
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: '>'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2
+    name: GenericIndexer
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetEnumerator
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.GetEnumerator
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetEnumerator
+  name: GetEnumerator()
+  nameWithType: GenericIndexer<T, T1>.GetEnumerator()
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.GetEnumerator()
+  nameWithType.vb: GenericIndexer(Of T, T1).GetEnumerator()
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).GetEnumerator()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetEnumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetEnumerator
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetDisplayName(System.String)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.GetDisplayName(System.String)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetDisplayName_System_String_
+  name: GetDisplayName(string)
+  nameWithType: GenericIndexer<T, T1>.GetDisplayName(string)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.GetDisplayName(string)
+  nameWithType.vb: GenericIndexer(Of T, T1).GetDisplayName(String)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).GetDisplayName(String)
+  name.vb: GetDisplayName(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetDisplayName(System.String)
+    name: GetDisplayName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetDisplayName_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetDisplayName(System.String)
+    name: GetDisplayName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetDisplayName_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.SetValue(`0,`1)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.SetValue(`0,`1)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetValue__0__1_
+  name: SetValue(T, T1)
+  nameWithType: GenericIndexer<T, T1>.SetValue(T, T1)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.SetValue(T, T1)
+  nameWithType.vb: GenericIndexer(Of T, T1).SetValue(T, T1)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).SetValue(T, T1)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.SetValue(`0,`1)
+    name: SetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetValue__0__1_
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.SetValue(`0,`1)
+    name: SetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetValue__0__1_
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetValue(`0)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.GetValue(`0)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetValue__0_
+  name: GetValue(T)
+  nameWithType: GenericIndexer<T, T1>.GetValue(T)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.GetValue(T)
+  nameWithType.vb: GenericIndexer(Of T, T1).GetValue(T)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).GetValue(T)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetValue(`0)
+    name: GetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetValue__0_
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetValue(`0)
+    name: GetValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetValue__0_
+  - name: (
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetCollection
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.GetCollection
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetCollection
+  name: GetCollection()
+  nameWithType: GenericIndexer<T, T1>.GetCollection()
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.GetCollection()
+  nameWithType.vb: GenericIndexer(Of T, T1).GetCollection()
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).GetCollection()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetCollection
+    name: GetCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetCollection
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetCollection
+    name: GetCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetCollection
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetObjectFromName(System.String)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.GetObjectFromName(System.String)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetObjectFromName_System_String_
+  name: GetObjectFromName(string)
+  nameWithType: GenericIndexer<T, T1>.GetObjectFromName(string)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.GetObjectFromName(string)
+  nameWithType.vb: GenericIndexer(Of T, T1).GetObjectFromName(String)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).GetObjectFromName(String)
+  name.vb: GetObjectFromName(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetObjectFromName(System.String)
+    name: GetObjectFromName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetObjectFromName_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.GetObjectFromName(System.String)
+    name: GetObjectFromName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_GetObjectFromName_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.IsEmptyValue(`1)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.IsEmptyValue(`1)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_IsEmptyValue__1_
+  name: IsEmptyValue(T1)
+  nameWithType: GenericIndexer<T, T1>.IsEmptyValue(T1)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.IsEmptyValue(T1)
+  nameWithType.vb: GenericIndexer(Of T, T1).IsEmptyValue(T1)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).IsEmptyValue(T1)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.IsEmptyValue(`1)
+    name: IsEmptyValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_IsEmptyValue__1_
+  - name: (
+  - name: T1
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.IsEmptyValue(`1)
+    name: IsEmptyValue
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_IsEmptyValue__1_
+  - name: (
+  - name: T1
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.ToJson
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.ToJson
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_ToJson
+  name: ToJson()
+  nameWithType: GenericIndexer<T, T1>.ToJson()
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.ToJson()
+  nameWithType.vb: GenericIndexer(Of T, T1).ToJson()
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).ToJson()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.ToJson
+    name: ToJson
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_ToJson
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.ToJson
+    name: ToJson
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_ToJson
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.Copy
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.Copy
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Copy
+  name: Copy()
+  nameWithType: GenericIndexer<T, T1>.Copy()
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.Copy()
+  nameWithType.vb: GenericIndexer(Of T, T1).Copy()
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).Copy()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.Copy
+    name: Copy
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Copy
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.Copy
+    name: Copy
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Copy
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer{`0,`1},System.Func{`1,`1})
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer{`0,`1},System.Func{`1,`1})
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_TabularEditor_TOMWrapper_GenericIndexer__0__1__System_Func__1__1__
+  name: CopyFrom(GenericIndexer<T, T1>, Func<T1, T1>)
+  nameWithType: GenericIndexer<T, T1>.CopyFrom(GenericIndexer<T, T1>, Func<T1, T1>)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer<T, T1>, System.Func<T1, T1>)
+  nameWithType.vb: GenericIndexer(Of T, T1).CopyFrom(GenericIndexer(Of T, T1), Func(Of T1, T1))
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).CopyFrom(TabularEditor.TOMWrapper.GenericIndexer(Of T, T1), System.Func(Of T1, T1))
+  name.vb: CopyFrom(GenericIndexer(Of T, T1), Func(Of T1, T1))
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer{`0,`1},System.Func{`1,`1})
+    name: CopyFrom
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_TabularEditor_TOMWrapper_GenericIndexer__0__1__System_Func__1__1__
+  - name: (
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2
+    name: GenericIndexer
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.CopyFrom(TabularEditor.TOMWrapper.GenericIndexer{`0,`1},System.Func{`1,`1})
+    name: CopyFrom
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_TabularEditor_TOMWrapper_GenericIndexer__0__1__System_Func__1__1__
+  - name: (
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2
+    name: GenericIndexer
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: )
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.CopyFrom(System.Collections.Generic.IDictionary{System.String,`1})
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.CopyFrom(System.Collections.Generic.IDictionary{System.String,`1})
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_System_Collections_Generic_IDictionary_System_String__1__
+  name: CopyFrom(IDictionary<string, T1>)
+  nameWithType: GenericIndexer<T, T1>.CopyFrom(IDictionary<string, T1>)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.CopyFrom(System.Collections.Generic.IDictionary<string, T1>)
+  nameWithType.vb: GenericIndexer(Of T, T1).CopyFrom(IDictionary(Of String, T1))
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).CopyFrom(System.Collections.Generic.IDictionary(Of String, T1))
+  name.vb: CopyFrom(IDictionary(Of String, T1))
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.CopyFrom(System.Collections.Generic.IDictionary{System.String,`1})
+    name: CopyFrom
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_System_Collections_Generic_IDictionary_System_String__1__
+  - name: (
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.CopyFrom(System.Collections.Generic.IDictionary{System.String,`1})
+    name: CopyFrom
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_CopyFrom_System_Collections_Generic_IDictionary_System_String__1__
+  - name: (
+  - uid: System.Collections.Generic.IDictionary`2
+    name: IDictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: T1
+  - name: )
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.Clear
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.Clear
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Clear
+  name: Clear()
+  nameWithType: GenericIndexer<T, T1>.Clear()
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.Clear()
+  nameWithType.vb: GenericIndexer(Of T, T1).Clear()
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).Clear()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.Clear
+    name: Clear
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.Clear
+    name: Clear
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Clear
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.SetAll(`1)
+  commentId: M:TabularEditor.TOMWrapper.GenericIndexer`2.SetAll(`1)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetAll__1_
+  name: SetAll(T1)
+  nameWithType: GenericIndexer<T, T1>.SetAll(T1)
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.SetAll(T1)
+  nameWithType.vb: GenericIndexer(Of T, T1).SetAll(T1)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).SetAll(T1)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.SetAll(`1)
+    name: SetAll
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetAll__1_
+  - name: (
+  - name: T1
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.SetAll(`1)
+    name: SetAll
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_SetAll__1_
+  - name: (
+  - name: T1
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.Model
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer`2.Model
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Model
+  name: Model
+  nameWithType: GenericIndexer<T, T1>.Model
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.Model
+  nameWithType.vb: GenericIndexer(Of T, T1).Model
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).Model
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.EnableMultiLine
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer`2.EnableMultiLine
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_EnableMultiLine
+  name: EnableMultiLine
+  nameWithType: GenericIndexer<T, T1>.EnableMultiLine
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.EnableMultiLine
+  nameWithType.vb: GenericIndexer(Of T, T1).EnableMultiLine
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).EnableMultiLine
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.EmptyValue
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer`2.EmptyValue
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_EmptyValue
+  name: EmptyValue
+  nameWithType: GenericIndexer<T, T1>.EmptyValue
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.EmptyValue
+  nameWithType.vb: GenericIndexer(Of T, T1).EmptyValue
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).EmptyValue
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.Collection
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer`2.Collection
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Collection
+  name: Collection
+  nameWithType: GenericIndexer<T, T1>.Collection
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.Collection
+  nameWithType.vb: GenericIndexer(Of T, T1).Collection
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).Collection
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.IsEmpty
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer`2.IsEmpty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_IsEmpty
+  name: IsEmpty
+  nameWithType: GenericIndexer<T, T1>.IsEmpty
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.IsEmpty
+  nameWithType.vb: GenericIndexer(Of T, T1).IsEmpty
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).IsEmpty
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.Item(System.String)
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer`2.Item(System.String)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: this[string]
+  nameWithType: GenericIndexer<T, T1>.this[string]
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.this[string]
+  nameWithType.vb: GenericIndexer(Of T, T1).this[](String)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).this[](String)
+  name.vb: this[](String)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ']'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.Item(System.String)
+    name: this[]
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Item_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.Item(`0)
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer`2.Item(`0)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Item__0_
+  name: this[T]
+  nameWithType: GenericIndexer<T, T1>.this[T]
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.this[T]
+  nameWithType.vb: GenericIndexer(Of T, T1).this[](T)
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).this[](T)
+  name.vb: this[](T)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - name: T
+  - name: ']'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2.Item(`0)
+    name: this[]
+    isExternal: true
+    href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Item__0_
+  - name: (
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.Keys
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer`2.Keys
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Keys
+  name: Keys
+  nameWithType: GenericIndexer<T, T1>.Keys
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.Keys
+  nameWithType.vb: GenericIndexer(Of T, T1).Keys
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).Keys
+- uid: TabularEditor.TOMWrapper.GenericIndexer`2.Summary
+  commentId: P:TabularEditor.TOMWrapper.GenericIndexer`2.Summary
+  isExternal: true
+  href: TabularEditor.TOMWrapper.GenericIndexer-2.html#TabularEditor_TOMWrapper_GenericIndexer_2_Summary
+  name: Summary
+  nameWithType: GenericIndexer<T, T1>.Summary
+  fullName: TabularEditor.TOMWrapper.GenericIndexer<T, T1>.Summary
+  nameWithType.vb: GenericIndexer(Of T, T1).Summary
+  fullName.vb: TabularEditor.TOMWrapper.GenericIndexer(Of T, T1).Summary
+- uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  name: ContainsDuplicates<T>(IEnumerable<T>)
+  nameWithType: EnumExtensions.ContainsDuplicates<T>(IEnumerable<T>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<T>(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of T)(IEnumerable(Of T))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of T)(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: ContainsDuplicates(Of T)(IEnumerable(Of T))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  name: ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>)
+  nameWithType: EnumExtensions.ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<T, U>(System.Collections.Generic.IEnumerable<T>, System.Func<T, U>, System.Collections.Generic.IEqualityComparer<U>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of T, U)(System.Collections.Generic.IEnumerable(Of T), System.Func(Of T, U), System.Collections.Generic.IEqualityComparer(Of U))
+  name.vb: ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: )
+- uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  name: ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>, out T)
+  nameWithType: EnumExtensions.ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>, out T)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<T, U>(System.Collections.Generic.IEnumerable<T>, System.Func<T, U>, System.Collections.Generic.IEqualityComparer<U>, out T)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U), T)
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of T, U)(System.Collections.Generic.IEnumerable(Of T), System.Func(Of T, U), System.Collections.Generic.IEqualityComparer(Of U), T)
+  name.vb: ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U), T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: out
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  commentId: M:TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  name: IndexOf<T>(IEnumerable<T>, Predicate<T>)
+  nameWithType: EnumExtensions.IndexOf<T>(IEnumerable<T>, Predicate<T>)
+  fullName: TabularEditor.EnumExtensions.IndexOf<T>(System.Collections.Generic.IEnumerable<T>, System.Predicate<T>)
+  nameWithType.vb: EnumExtensions.IndexOf(Of T)(IEnumerable(Of T), Predicate(Of T))
+  fullName.vb: TabularEditor.EnumExtensions.IndexOf(Of T)(System.Collections.Generic.IEnumerable(Of T), System.Predicate(Of T))
+  name.vb: IndexOf(Of T)(IEnumerable(Of T), Predicate(Of T))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.ModelRole
+  commentId: T:TabularEditor.TOMWrapper.ModelRole
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ModelRole.html
+  name: ModelRole
+  nameWithType: ModelRole
+  fullName: TabularEditor.TOMWrapper.ModelRole
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.GetCollection*
+  commentId: Overload:TabularEditor.TOMWrapper.RoleOLSIndexer.GetCollection
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RoleOLSIndexer.html#TabularEditor_TOMWrapper_RoleOLSIndexer_GetCollection
+  name: GetCollection
+  nameWithType: RoleOLSIndexer.GetCollection
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.GetCollection
+- uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.Table}
+  commentId: T:TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.Table}
+  parent: TabularEditor.TOMWrapper
+  definition: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+  href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  name: TabularNamedObjectCollection<Table>
+  nameWithType: TabularNamedObjectCollection<Table>
+  fullName: TabularEditor.TOMWrapper.TabularNamedObjectCollection<TabularEditor.TOMWrapper.Table>
+  nameWithType.vb: TabularNamedObjectCollection(Of Table)
+  fullName.vb: TabularEditor.TOMWrapper.TabularNamedObjectCollection(Of TabularEditor.TOMWrapper.Table)
+  name.vb: TabularNamedObjectCollection(Of Table)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+    name: TabularNamedObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  - name: <
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: '>'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+    name: TabularNamedObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Table.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+  commentId: T:TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  name: TabularNamedObjectCollection<T>
+  nameWithType: TabularNamedObjectCollection<T>
+  fullName: TabularEditor.TOMWrapper.TabularNamedObjectCollection<T>
+  nameWithType.vb: TabularNamedObjectCollection(Of T)
+  fullName.vb: TabularEditor.TOMWrapper.TabularNamedObjectCollection(Of T)
+  name.vb: TabularNamedObjectCollection(Of T)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+    name: TabularNamedObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+    name: TabularNamedObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.GetValue*
+  commentId: Overload:TabularEditor.TOMWrapper.RoleOLSIndexer.GetValue
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RoleOLSIndexer.html#TabularEditor_TOMWrapper_RoleOLSIndexer_GetValue_TabularEditor_TOMWrapper_Table_
+  name: GetValue
+  nameWithType: RoleOLSIndexer.GetValue
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.GetValue
+- uid: TabularEditor.TOMWrapper.Table
+  commentId: T:TabularEditor.TOMWrapper.Table
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Table.html
+  name: Table
+  nameWithType: Table
+  fullName: TabularEditor.TOMWrapper.Table
+- uid: TabularEditor.TOMWrapper.MetadataPermission
+  commentId: T:TabularEditor.TOMWrapper.MetadataPermission
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.MetadataPermission.html
+  name: MetadataPermission
+  nameWithType: MetadataPermission
+  fullName: TabularEditor.TOMWrapper.MetadataPermission
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.SetValue*
+  commentId: Overload:TabularEditor.TOMWrapper.RoleOLSIndexer.SetValue
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RoleOLSIndexer.html#TabularEditor_TOMWrapper_RoleOLSIndexer_SetValue_TabularEditor_TOMWrapper_Table_TabularEditor_TOMWrapper_MetadataPermission_
+  name: SetValue
+  nameWithType: RoleOLSIndexer.SetValue
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.SetValue
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.Keys*
+  commentId: Overload:TabularEditor.TOMWrapper.RoleOLSIndexer.Keys
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RoleOLSIndexer.html#TabularEditor_TOMWrapper_RoleOLSIndexer_Keys
+  name: Keys
+  nameWithType: RoleOLSIndexer.Keys
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.Keys
+- uid: System.Collections.Generic.IEnumerable{System.String}
+  commentId: T:System.Collections.Generic.IEnumerable{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<string>
+  nameWithType: IEnumerable<string>
+  fullName: System.Collections.Generic.IEnumerable<string>
+  nameWithType.vb: IEnumerable(Of String)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of String)
+  name.vb: IEnumerable(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.RoleOLSIndexer.Summary*
+  commentId: Overload:TabularEditor.TOMWrapper.RoleOLSIndexer.Summary
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RoleOLSIndexer.html#TabularEditor_TOMWrapper_RoleOLSIndexer_Summary
+  name: Summary
+  nameWithType: RoleOLSIndexer.Summary
+  fullName: TabularEditor.TOMWrapper.RoleOLSIndexer.Summary
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String

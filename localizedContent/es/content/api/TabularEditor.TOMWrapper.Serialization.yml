@@ -1,0 +1,32 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.Serialization
+  commentId: N:TabularEditor.TOMWrapper.Serialization
+  id: TabularEditor.TOMWrapper.Serialization
+  children:
+  - TabularEditor.TOMWrapper.Serialization.OrderedStringSetJsonConverter
+  - TabularEditor.TOMWrapper.Serialization.SerializeOptionTags
+  langs:
+  - csharp
+  - vb
+  name: TabularEditor.TOMWrapper.Serialization
+  nameWithType: TabularEditor.TOMWrapper.Serialization
+  fullName: TabularEditor.TOMWrapper.Serialization
+  type: Namespace
+  assemblies:
+  - TOMWrapper
+references:
+- uid: TabularEditor.TOMWrapper.Serialization.OrderedStringSetJsonConverter
+  commentId: T:TabularEditor.TOMWrapper.Serialization.OrderedStringSetJsonConverter
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Serialization.OrderedStringSetJsonConverter.html
+  name: OrderedStringSetJsonConverter
+  nameWithType: OrderedStringSetJsonConverter
+  fullName: TabularEditor.TOMWrapper.Serialization.OrderedStringSetJsonConverter
+- uid: TabularEditor.TOMWrapper.Serialization.SerializeOptionTags
+  commentId: T:TabularEditor.TOMWrapper.Serialization.SerializeOptionTags
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Serialization.SerializeOptionTags.html
+  name: SerializeOptionTags
+  nameWithType: SerializeOptionTags
+  fullName: TabularEditor.TOMWrapper.Serialization.SerializeOptionTags

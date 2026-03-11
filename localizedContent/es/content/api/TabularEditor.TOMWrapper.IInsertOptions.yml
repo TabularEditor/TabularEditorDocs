@@ -1,0 +1,238 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.IInsertOptions
+  commentId: T:TabularEditor.TOMWrapper.IInsertOptions
+  id: IInsertOptions
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.IInsertOptions.AutoFixup
+  - TabularEditor.TOMWrapper.IInsertOptions.InheritPerspectiveMembership
+  langs:
+  - csharp
+  - vb
+  name: IInsertOptions
+  nameWithType: IInsertOptions
+  fullName: TabularEditor.TOMWrapper.IInsertOptions
+  type: Interface
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public interface IInsertOptions
+    content.vb: Public Interface IInsertOptions
+  derivedClasses:
+  - TabularEditor.TOMWrapper.InsertOptions
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.IInsertOptions.InheritPerspectiveMembership
+  commentId: P:TabularEditor.TOMWrapper.IInsertOptions.InheritPerspectiveMembership
+  id: InheritPerspectiveMembership
+  parent: TabularEditor.TOMWrapper.IInsertOptions
+  langs:
+  - csharp
+  - vb
+  name: InheritPerspectiveMembership
+  nameWithType: IInsertOptions.InheritPerspectiveMembership
+  fullName: TabularEditor.TOMWrapper.IInsertOptions.InheritPerspectiveMembership
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: bool InheritPerspectiveMembership { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly Property InheritPerspectiveMembership As Boolean
+  overload: TabularEditor.TOMWrapper.IInsertOptions.InheritPerspectiveMembership*
+- uid: TabularEditor.TOMWrapper.IInsertOptions.AutoFixup
+  commentId: P:TabularEditor.TOMWrapper.IInsertOptions.AutoFixup
+  id: AutoFixup
+  parent: TabularEditor.TOMWrapper.IInsertOptions
+  langs:
+  - csharp
+  - vb
+  name: AutoFixup
+  nameWithType: IInsertOptions.AutoFixup
+  fullName: TabularEditor.TOMWrapper.IInsertOptions.AutoFixup
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: bool AutoFixup { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly Property AutoFixup As Boolean
+  overload: TabularEditor.TOMWrapper.IInsertOptions.AutoFixup*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.IInsertOptions.InheritPerspectiveMembership*
+  commentId: Overload:TabularEditor.TOMWrapper.IInsertOptions.InheritPerspectiveMembership
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IInsertOptions.html#TabularEditor_TOMWrapper_IInsertOptions_InheritPerspectiveMembership
+  name: InheritPerspectiveMembership
+  nameWithType: IInsertOptions.InheritPerspectiveMembership
+  fullName: TabularEditor.TOMWrapper.IInsertOptions.InheritPerspectiveMembership
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.TOMWrapper.IInsertOptions.AutoFixup*
+  commentId: Overload:TabularEditor.TOMWrapper.IInsertOptions.AutoFixup
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IInsertOptions.html#TabularEditor_TOMWrapper_IInsertOptions_AutoFixup
+  name: AutoFixup
+  nameWithType: IInsertOptions.AutoFixup
+  fullName: TabularEditor.TOMWrapper.IInsertOptions.AutoFixup

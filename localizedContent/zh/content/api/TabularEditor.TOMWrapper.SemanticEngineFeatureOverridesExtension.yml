@@ -1,0 +1,916 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  commentId: T:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  id: SemanticEngineFeatureOverridesExtension
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalculateShortcutMeasuresAndAggFunctionsSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalendarRefSupport(Microsoft.AnalysisServices.Tabular.Model)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDateLiteralSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDirectionalCrossFilterSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualMultiColumnPredicateSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualTableNamedVariablesSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualUDFSupport(Microsoft.AnalysisServices.Tabular.Model)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualVersion(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.AsEngineVersionOverride)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessAsVersion(Microsoft.AnalysisServices.Tabular.Model)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsCalculateShortcutMeasuresAndAggFunctions(Microsoft.AnalysisServices.Tabular.Model)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDateLiterals(Microsoft.AnalysisServices.Tabular.Model)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDirectionalCrossfilter(Microsoft.AnalysisServices.Tabular.Model)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsMultiColumnPredicate(Microsoft.AnalysisServices.Tabular.Model)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsTableNamedVariables(Microsoft.AnalysisServices.Tabular.Model)
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionCalculateShortcutMeasuresAndAggFunctions
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionDateLiterals
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionDirectionalCrossfilter
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionMultiColumnPredicate
+  - TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionTableNamedVariables
+  langs:
+  - csharp
+  - vb
+  name: SemanticEngineFeatureOverridesExtension
+  nameWithType: SemanticEngineFeatureOverridesExtension
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static class SemanticEngineFeatureOverridesExtension
+    content.vb: Public Module SemanticEngineFeatureOverridesExtension
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionMultiColumnPredicate
+  commentId: F:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionMultiColumnPredicate
+  id: MinimumASVersionMultiColumnPredicate
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: MinimumASVersionMultiColumnPredicate
+  nameWithType: SemanticEngineFeatureOverridesExtension.MinimumASVersionMultiColumnPredicate
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionMultiColumnPredicate
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: April 2021 release of Power BI Desktop introduces multi-column search predicates in CALCULATE/CALCULATETABLE filter expressions
+  example: []
+  syntax:
+    content: public static Version MinimumASVersionMultiColumnPredicate
+    return:
+      type: System.Version
+    content.vb: Public Shared MinimumASVersionMultiColumnPredicate As Version
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionDirectionalCrossfilter
+  commentId: F:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionDirectionalCrossfilter
+  id: MinimumASVersionDirectionalCrossfilter
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: MinimumASVersionDirectionalCrossfilter
+  nameWithType: SemanticEngineFeatureOverridesExtension.MinimumASVersionDirectionalCrossfilter
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionDirectionalCrossfilter
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: April 2021 release of Power BI Desktop introduces directional cross filters
+  example: []
+  syntax:
+    content: public static Version MinimumASVersionDirectionalCrossfilter
+    return:
+      type: System.Version
+    content.vb: Public Shared MinimumASVersionDirectionalCrossfilter As Version
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionDateLiterals
+  commentId: F:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionDateLiterals
+  id: MinimumASVersionDateLiterals
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: MinimumASVersionDateLiterals
+  nameWithType: SemanticEngineFeatureOverridesExtension.MinimumASVersionDateLiterals
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionDateLiterals
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: June 2021 release of Power BI Desktop introduces date literals (dt"YYYY-MM-DD", etc.)
+  example: []
+  syntax:
+    content: public static Version MinimumASVersionDateLiterals
+    return:
+      type: System.Version
+    content.vb: Public Shared MinimumASVersionDateLiterals As Version
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionCalculateShortcutMeasuresAndAggFunctions
+  commentId: F:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionCalculateShortcutMeasuresAndAggFunctions
+  id: MinimumASVersionCalculateShortcutMeasuresAndAggFunctions
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: MinimumASVersionCalculateShortcutMeasuresAndAggFunctions
+  nameWithType: SemanticEngineFeatureOverridesExtension.MinimumASVersionCalculateShortcutMeasuresAndAggFunctions
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionCalculateShortcutMeasuresAndAggFunctions
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: June 2021 release of Power BI Desktop introduces shortcut expressions for CALCULATE/CALCULATETABLE that allows the use of Measures or aggregate functions in boolean expressions
+  example: []
+  syntax:
+    content: public static Version MinimumASVersionCalculateShortcutMeasuresAndAggFunctions
+    return:
+      type: System.Version
+    content.vb: Public Shared MinimumASVersionCalculateShortcutMeasuresAndAggFunctions As Version
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionTableNamedVariables
+  commentId: F:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionTableNamedVariables
+  id: MinimumASVersionTableNamedVariables
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: MinimumASVersionTableNamedVariables
+  nameWithType: SemanticEngineFeatureOverridesExtension.MinimumASVersionTableNamedVariables
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.MinimumASVersionTableNamedVariables
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: ''
+  example: []
+  syntax:
+    content: public static Version MinimumASVersionTableNamedVariables
+    return:
+      type: System.Version
+    content.vb: Public Shared MinimumASVersionTableNamedVariables As Version
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualVersion(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.AsEngineVersionOverride)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualVersion(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.AsEngineVersionOverride)
+  id: GetActualVersion(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.AsEngineVersionOverride)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GetActualVersion(Model, AsEngineVersionOverride)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualVersion(Model, AsEngineVersionOverride)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualVersion(Microsoft.AnalysisServices.Tabular.Model, TabularEditor.TOMWrapper.AsEngineVersionOverride)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static int GetActualVersion(this Model model, AsEngineVersionOverride asEngineVersion)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    - id: asEngineVersion
+      type: TabularEditor.TOMWrapper.AsEngineVersionOverride
+    return:
+      type: System.Int32
+    content.vb: Public Shared Function GetActualVersion(model As Model, asEngineVersion As AsEngineVersionOverride) As Integer
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualVersion*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalendarRefSupport(Microsoft.AnalysisServices.Tabular.Model)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalendarRefSupport(Microsoft.AnalysisServices.Tabular.Model)
+  id: GetActualCalendarRefSupport(Microsoft.AnalysisServices.Tabular.Model)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GetActualCalendarRefSupport(Model)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualCalendarRefSupport(Model)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalendarRefSupport(Microsoft.AnalysisServices.Tabular.Model)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GetActualCalendarRefSupport(this Model model)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GetActualCalendarRefSupport(model As Model) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalendarRefSupport*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualUDFSupport(Microsoft.AnalysisServices.Tabular.Model)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualUDFSupport(Microsoft.AnalysisServices.Tabular.Model)
+  id: GetActualUDFSupport(Microsoft.AnalysisServices.Tabular.Model)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GetActualUDFSupport(Model)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualUDFSupport(Model)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualUDFSupport(Microsoft.AnalysisServices.Tabular.Model)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GetActualUDFSupport(this Model model)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GetActualUDFSupport(model As Model) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualUDFSupport*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualMultiColumnPredicateSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualMultiColumnPredicateSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  id: GetActualMultiColumnPredicateSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GetActualMultiColumnPredicateSupport(Model, SemanticEngineFeatureOverride)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualMultiColumnPredicateSupport(Model, SemanticEngineFeatureOverride)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualMultiColumnPredicateSupport(Microsoft.AnalysisServices.Tabular.Model, TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GetActualMultiColumnPredicateSupport(this Model model, SemanticEngineFeatureOverride supportsMultiColumnPredicate)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    - id: supportsMultiColumnPredicate
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GetActualMultiColumnPredicateSupport(model As Model, supportsMultiColumnPredicate As SemanticEngineFeatureOverride) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualMultiColumnPredicateSupport*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDirectionalCrossFilterSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDirectionalCrossFilterSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  id: GetActualDirectionalCrossFilterSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GetActualDirectionalCrossFilterSupport(Model, SemanticEngineFeatureOverride)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualDirectionalCrossFilterSupport(Model, SemanticEngineFeatureOverride)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDirectionalCrossFilterSupport(Microsoft.AnalysisServices.Tabular.Model, TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GetActualDirectionalCrossFilterSupport(this Model model, SemanticEngineFeatureOverride supportsDirectionalCrossFilter)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    - id: supportsDirectionalCrossFilter
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GetActualDirectionalCrossFilterSupport(model As Model, supportsDirectionalCrossFilter As SemanticEngineFeatureOverride) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDirectionalCrossFilterSupport*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDateLiteralSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDateLiteralSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  id: GetActualDateLiteralSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GetActualDateLiteralSupport(Model, SemanticEngineFeatureOverride)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualDateLiteralSupport(Model, SemanticEngineFeatureOverride)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDateLiteralSupport(Microsoft.AnalysisServices.Tabular.Model, TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GetActualDateLiteralSupport(this Model model, SemanticEngineFeatureOverride supportsDateLiterals)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    - id: supportsDateLiterals
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GetActualDateLiteralSupport(model As Model, supportsDateLiterals As SemanticEngineFeatureOverride) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDateLiteralSupport*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalculateShortcutMeasuresAndAggFunctionsSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalculateShortcutMeasuresAndAggFunctionsSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  id: GetActualCalculateShortcutMeasuresAndAggFunctionsSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GetActualCalculateShortcutMeasuresAndAggFunctionsSupport(Model, SemanticEngineFeatureOverride)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualCalculateShortcutMeasuresAndAggFunctionsSupport(Model, SemanticEngineFeatureOverride)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalculateShortcutMeasuresAndAggFunctionsSupport(Microsoft.AnalysisServices.Tabular.Model, TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GetActualCalculateShortcutMeasuresAndAggFunctionsSupport(this Model model, SemanticEngineFeatureOverride supportsCalculateShortcutMeasuresAndAggFunctions)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    - id: supportsCalculateShortcutMeasuresAndAggFunctions
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GetActualCalculateShortcutMeasuresAndAggFunctionsSupport(model As Model, supportsCalculateShortcutMeasuresAndAggFunctions As SemanticEngineFeatureOverride) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalculateShortcutMeasuresAndAggFunctionsSupport*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualTableNamedVariablesSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualTableNamedVariablesSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  id: GetActualTableNamedVariablesSupport(Microsoft.AnalysisServices.Tabular.Model,TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GetActualTableNamedVariablesSupport(Model, SemanticEngineFeatureOverride)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualTableNamedVariablesSupport(Model, SemanticEngineFeatureOverride)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualTableNamedVariablesSupport(Microsoft.AnalysisServices.Tabular.Model, TabularEditor.TOMWrapper.SemanticEngineFeatureOverride)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GetActualTableNamedVariablesSupport(this Model model, SemanticEngineFeatureOverride supportsTableNamedVariables)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    - id: supportsTableNamedVariables
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GetActualTableNamedVariablesSupport(model As Model, supportsTableNamedVariables As SemanticEngineFeatureOverride) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualTableNamedVariablesSupport*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessAsVersion(Microsoft.AnalysisServices.Tabular.Model)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessAsVersion(Microsoft.AnalysisServices.Tabular.Model)
+  id: GuessAsVersion(Microsoft.AnalysisServices.Tabular.Model)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GuessAsVersion(Model)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessAsVersion(Model)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessAsVersion(Microsoft.AnalysisServices.Tabular.Model)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static int GuessAsVersion(this Model model)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    return:
+      type: System.Int32
+    content.vb: Public Shared Function GuessAsVersion(model As Model) As Integer
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessAsVersion*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsMultiColumnPredicate(Microsoft.AnalysisServices.Tabular.Model)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsMultiColumnPredicate(Microsoft.AnalysisServices.Tabular.Model)
+  id: GuessSupportsMultiColumnPredicate(Microsoft.AnalysisServices.Tabular.Model)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GuessSupportsMultiColumnPredicate(Model)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessSupportsMultiColumnPredicate(Model)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsMultiColumnPredicate(Microsoft.AnalysisServices.Tabular.Model)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GuessSupportsMultiColumnPredicate(this Model model)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GuessSupportsMultiColumnPredicate(model As Model) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsMultiColumnPredicate*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDirectionalCrossfilter(Microsoft.AnalysisServices.Tabular.Model)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDirectionalCrossfilter(Microsoft.AnalysisServices.Tabular.Model)
+  id: GuessSupportsDirectionalCrossfilter(Microsoft.AnalysisServices.Tabular.Model)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GuessSupportsDirectionalCrossfilter(Model)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessSupportsDirectionalCrossfilter(Model)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDirectionalCrossfilter(Microsoft.AnalysisServices.Tabular.Model)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GuessSupportsDirectionalCrossfilter(this Model model)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GuessSupportsDirectionalCrossfilter(model As Model) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDirectionalCrossfilter*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDateLiterals(Microsoft.AnalysisServices.Tabular.Model)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDateLiterals(Microsoft.AnalysisServices.Tabular.Model)
+  id: GuessSupportsDateLiterals(Microsoft.AnalysisServices.Tabular.Model)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GuessSupportsDateLiterals(Model)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessSupportsDateLiterals(Model)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDateLiterals(Microsoft.AnalysisServices.Tabular.Model)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GuessSupportsDateLiterals(this Model model)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GuessSupportsDateLiterals(model As Model) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDateLiterals*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsCalculateShortcutMeasuresAndAggFunctions(Microsoft.AnalysisServices.Tabular.Model)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsCalculateShortcutMeasuresAndAggFunctions(Microsoft.AnalysisServices.Tabular.Model)
+  id: GuessSupportsCalculateShortcutMeasuresAndAggFunctions(Microsoft.AnalysisServices.Tabular.Model)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GuessSupportsCalculateShortcutMeasuresAndAggFunctions(Model)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessSupportsCalculateShortcutMeasuresAndAggFunctions(Model)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsCalculateShortcutMeasuresAndAggFunctions(Microsoft.AnalysisServices.Tabular.Model)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GuessSupportsCalculateShortcutMeasuresAndAggFunctions(this Model model)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GuessSupportsCalculateShortcutMeasuresAndAggFunctions(model As Model) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsCalculateShortcutMeasuresAndAggFunctions*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsTableNamedVariables(Microsoft.AnalysisServices.Tabular.Model)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsTableNamedVariables(Microsoft.AnalysisServices.Tabular.Model)
+  id: GuessSupportsTableNamedVariables(Microsoft.AnalysisServices.Tabular.Model)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+  langs:
+  - csharp
+  - vb
+  name: GuessSupportsTableNamedVariables(Model)
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessSupportsTableNamedVariables(Model)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsTableNamedVariables(Microsoft.AnalysisServices.Tabular.Model)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool GuessSupportsTableNamedVariables(this Model model)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function GuessSupportsTableNamedVariables(model As Model) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsTableNamedVariables*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Version
+  commentId: T:System.Version
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.version
+  name: Version
+  nameWithType: Version
+  fullName: System.Version
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualVersion*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualVersion
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GetActualVersion_Microsoft_AnalysisServices_Tabular_Model_TabularEditor_TOMWrapper_AsEngineVersionOverride_
+  name: GetActualVersion
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualVersion
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualVersion
+- uid: Microsoft.AnalysisServices.Tabular.Model
+  isExternal: true
+  name: Model
+  nameWithType: Model
+  fullName: Microsoft.AnalysisServices.Tabular.Model
+- uid: TabularEditor.TOMWrapper.AsEngineVersionOverride
+  commentId: T:TabularEditor.TOMWrapper.AsEngineVersionOverride
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.AsEngineVersionOverride.html
+  name: AsEngineVersionOverride
+  nameWithType: AsEngineVersionOverride
+  fullName: TabularEditor.TOMWrapper.AsEngineVersionOverride
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalendarRefSupport*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalendarRefSupport
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GetActualCalendarRefSupport_Microsoft_AnalysisServices_Tabular_Model_
+  name: GetActualCalendarRefSupport
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualCalendarRefSupport
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalendarRefSupport
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualUDFSupport*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualUDFSupport
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GetActualUDFSupport_Microsoft_AnalysisServices_Tabular_Model_
+  name: GetActualUDFSupport
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualUDFSupport
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualUDFSupport
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualMultiColumnPredicateSupport*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualMultiColumnPredicateSupport
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GetActualMultiColumnPredicateSupport_Microsoft_AnalysisServices_Tabular_Model_TabularEditor_TOMWrapper_SemanticEngineFeatureOverride_
+  name: GetActualMultiColumnPredicateSupport
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualMultiColumnPredicateSupport
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualMultiColumnPredicateSupport
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+  commentId: T:TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride.html
+  name: SemanticEngineFeatureOverride
+  nameWithType: SemanticEngineFeatureOverride
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDirectionalCrossFilterSupport*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDirectionalCrossFilterSupport
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GetActualDirectionalCrossFilterSupport_Microsoft_AnalysisServices_Tabular_Model_TabularEditor_TOMWrapper_SemanticEngineFeatureOverride_
+  name: GetActualDirectionalCrossFilterSupport
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualDirectionalCrossFilterSupport
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDirectionalCrossFilterSupport
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDateLiteralSupport*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDateLiteralSupport
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GetActualDateLiteralSupport_Microsoft_AnalysisServices_Tabular_Model_TabularEditor_TOMWrapper_SemanticEngineFeatureOverride_
+  name: GetActualDateLiteralSupport
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualDateLiteralSupport
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualDateLiteralSupport
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalculateShortcutMeasuresAndAggFunctionsSupport*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalculateShortcutMeasuresAndAggFunctionsSupport
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GetActualCalculateShortcutMeasuresAndAggFunctionsSupport_Microsoft_AnalysisServices_Tabular_Model_TabularEditor_TOMWrapper_SemanticEngineFeatureOverride_
+  name: GetActualCalculateShortcutMeasuresAndAggFunctionsSupport
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualCalculateShortcutMeasuresAndAggFunctionsSupport
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualCalculateShortcutMeasuresAndAggFunctionsSupport
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualTableNamedVariablesSupport*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualTableNamedVariablesSupport
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GetActualTableNamedVariablesSupport_Microsoft_AnalysisServices_Tabular_Model_TabularEditor_TOMWrapper_SemanticEngineFeatureOverride_
+  name: GetActualTableNamedVariablesSupport
+  nameWithType: SemanticEngineFeatureOverridesExtension.GetActualTableNamedVariablesSupport
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GetActualTableNamedVariablesSupport
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessAsVersion*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessAsVersion
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GuessAsVersion_Microsoft_AnalysisServices_Tabular_Model_
+  name: GuessAsVersion
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessAsVersion
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessAsVersion
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsMultiColumnPredicate*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsMultiColumnPredicate
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GuessSupportsMultiColumnPredicate_Microsoft_AnalysisServices_Tabular_Model_
+  name: GuessSupportsMultiColumnPredicate
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessSupportsMultiColumnPredicate
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsMultiColumnPredicate
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDirectionalCrossfilter*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDirectionalCrossfilter
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GuessSupportsDirectionalCrossfilter_Microsoft_AnalysisServices_Tabular_Model_
+  name: GuessSupportsDirectionalCrossfilter
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessSupportsDirectionalCrossfilter
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDirectionalCrossfilter
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDateLiterals*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDateLiterals
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GuessSupportsDateLiterals_Microsoft_AnalysisServices_Tabular_Model_
+  name: GuessSupportsDateLiterals
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessSupportsDateLiterals
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsDateLiterals
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsCalculateShortcutMeasuresAndAggFunctions*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsCalculateShortcutMeasuresAndAggFunctions
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GuessSupportsCalculateShortcutMeasuresAndAggFunctions_Microsoft_AnalysisServices_Tabular_Model_
+  name: GuessSupportsCalculateShortcutMeasuresAndAggFunctions
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessSupportsCalculateShortcutMeasuresAndAggFunctions
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsCalculateShortcutMeasuresAndAggFunctions
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsTableNamedVariables*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsTableNamedVariables
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeatureOverridesExtension_GuessSupportsTableNamedVariables_Microsoft_AnalysisServices_Tabular_Model_
+  name: GuessSupportsTableNamedVariables
+  nameWithType: SemanticEngineFeatureOverridesExtension.GuessSupportsTableNamedVariables
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension.GuessSupportsTableNamedVariables

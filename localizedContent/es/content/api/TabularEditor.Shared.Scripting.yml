@@ -1,0 +1,94 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  id: TabularEditor.Shared.Scripting
+  children:
+  - TabularEditor.Shared.Scripting.IMacroActionCreator
+  - TabularEditor.Shared.Scripting.ScriptException
+  - TabularEditor.Shared.Scripting.ScriptHelper
+  - TabularEditor.Shared.Scripting.ScriptHost
+  - TabularEditor.Shared.Scripting.ScriptMethodAttribute
+  langs:
+  - csharp
+  - vb
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  type: Namespace
+  assemblies:
+  - TabularEditor3.Shared
+references:
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting.ScriptHost
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHost
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHost.html
+  name: ScriptHost
+  nameWithType: ScriptHost
+  fullName: TabularEditor.Shared.Scripting.ScriptHost
+- uid: TabularEditor.Shared.Scripting.ScriptException
+  commentId: T:TabularEditor.Shared.Scripting.ScriptException
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptException.html
+  name: ScriptException
+  nameWithType: ScriptException
+  fullName: TabularEditor.Shared.Scripting.ScriptException
+- uid: TabularEditor.Shared.Scripting.ScriptMethodAttribute
+  commentId: T:TabularEditor.Shared.Scripting.ScriptMethodAttribute
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptMethodAttribute.html
+  name: ScriptMethodAttribute
+  nameWithType: ScriptMethodAttribute
+  fullName: TabularEditor.Shared.Scripting.ScriptMethodAttribute
+- uid: TabularEditor.Shared.Scripting.IMacroActionCreator
+  commentId: T:TabularEditor.Shared.Scripting.IMacroActionCreator
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.IMacroActionCreator.html
+  name: IMacroActionCreator
+  nameWithType: IMacroActionCreator
+  fullName: TabularEditor.Shared.Scripting.IMacroActionCreator
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html

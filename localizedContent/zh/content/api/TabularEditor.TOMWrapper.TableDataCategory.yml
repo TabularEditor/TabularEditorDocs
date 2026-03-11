@@ -1,0 +1,712 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.TableDataCategory
+  commentId: T:TabularEditor.TOMWrapper.TableDataCategory
+  id: TableDataCategory
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.TableDataCategory.Accounts
+  - TabularEditor.TOMWrapper.TableDataCategory.BillOfMaterials
+  - TabularEditor.TOMWrapper.TableDataCategory.Channel
+  - TabularEditor.TOMWrapper.TableDataCategory.Currency
+  - TabularEditor.TOMWrapper.TableDataCategory.Customers
+  - TabularEditor.TOMWrapper.TableDataCategory.Geography
+  - TabularEditor.TOMWrapper.TableDataCategory.Organization
+  - TabularEditor.TOMWrapper.TableDataCategory.Products
+  - TabularEditor.TOMWrapper.TableDataCategory.Promotion
+  - TabularEditor.TOMWrapper.TableDataCategory.Quantitative
+  - TabularEditor.TOMWrapper.TableDataCategory.Rates
+  - TabularEditor.TOMWrapper.TableDataCategory.Regular
+  - TabularEditor.TOMWrapper.TableDataCategory.Scenario
+  - TabularEditor.TOMWrapper.TableDataCategory.Time
+  - TabularEditor.TOMWrapper.TableDataCategory.Unknown
+  - TabularEditor.TOMWrapper.TableDataCategory.Utility
+  langs:
+  - csharp
+  - vb
+  name: TableDataCategory
+  nameWithType: TableDataCategory
+  fullName: TabularEditor.TOMWrapper.TableDataCategory
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public enum TableDataCategory
+    content.vb: Public Enum TableDataCategory
+  extensionMethods:
+  - TabularEditor.TOMWrapper.TableDataCategory.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory)
+  - TabularEditor.TOMWrapper.TableDataCategory.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory)
+  - TabularEditor.TOMWrapper.TableDataCategory.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.TableDataCategory)
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Unknown
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Unknown
+  id: Unknown
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Unknown
+  nameWithType: TableDataCategory.Unknown
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Unknown
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Unknown = 0
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Regular
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Regular
+  id: Regular
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Regular
+  nameWithType: TableDataCategory.Regular
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Regular
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Regular = 1
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Time
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Time
+  id: Time
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Time
+  nameWithType: TableDataCategory.Time
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Time
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Time = 2
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Geography
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Geography
+  id: Geography
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Geography
+  nameWithType: TableDataCategory.Geography
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Geography
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Geography = 3
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Organization
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Organization
+  id: Organization
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Organization
+  nameWithType: TableDataCategory.Organization
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Organization
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Organization = 4
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.BillOfMaterials
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.BillOfMaterials
+  id: BillOfMaterials
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: BillOfMaterials
+  nameWithType: TableDataCategory.BillOfMaterials
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.BillOfMaterials
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: BillOfMaterials = 5
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Accounts
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Accounts
+  id: Accounts
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Accounts
+  nameWithType: TableDataCategory.Accounts
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Accounts
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Accounts = 6
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Customers
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Customers
+  id: Customers
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Customers
+  nameWithType: TableDataCategory.Customers
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Customers
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Customers = 7
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Products
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Products
+  id: Products
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Products
+  nameWithType: TableDataCategory.Products
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Products
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Products = 8
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Scenario
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Scenario
+  id: Scenario
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Scenario
+  nameWithType: TableDataCategory.Scenario
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Scenario
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Scenario = 9
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Quantitative
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Quantitative
+  id: Quantitative
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Quantitative
+  nameWithType: TableDataCategory.Quantitative
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Quantitative
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Quantitative = 10
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Utility
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Utility
+  id: Utility
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Utility
+  nameWithType: TableDataCategory.Utility
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Utility
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Utility = 11
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Currency
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Currency
+  id: Currency
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Currency
+  nameWithType: TableDataCategory.Currency
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Currency
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Currency = 12
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Rates
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Rates
+  id: Rates
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Rates
+  nameWithType: TableDataCategory.Rates
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Rates
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Rates = 13
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Channel
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Channel
+  id: Channel
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Channel
+  nameWithType: TableDataCategory.Channel
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Channel
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Channel = 14
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+- uid: TabularEditor.TOMWrapper.TableDataCategory.Promotion
+  commentId: F:TabularEditor.TOMWrapper.TableDataCategory.Promotion
+  id: Promotion
+  parent: TabularEditor.TOMWrapper.TableDataCategory
+  langs:
+  - csharp
+  - vb
+  name: Promotion
+  nameWithType: TableDataCategory.Promotion
+  fullName: TabularEditor.TOMWrapper.TableDataCategory.Promotion
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Promotion = 15
+    return:
+      type: TabularEditor.TOMWrapper.TableDataCategory
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.TableDataCategory.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<TableDataCategory>(TableDataCategory, TableDataCategory, TableDataCategory)
+  nameWithType: EnumExtensions.AllFlagsChanged<TableDataCategory>(TableDataCategory, TableDataCategory, TableDataCategory)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.TableDataCategory>(TabularEditor.TOMWrapper.TableDataCategory, TabularEditor.TOMWrapper.TableDataCategory, TabularEditor.TOMWrapper.TableDataCategory)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of TableDataCategory)(TableDataCategory, TableDataCategory, TableDataCategory)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.TableDataCategory)(TabularEditor.TOMWrapper.TableDataCategory, TabularEditor.TOMWrapper.TableDataCategory, TabularEditor.TOMWrapper.TableDataCategory)
+  name.vb: AllFlagsChanged(Of TableDataCategory)(TableDataCategory, TableDataCategory, TableDataCategory)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.TableDataCategory.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<TableDataCategory>(TableDataCategory, TableDataCategory, TableDataCategory)
+  nameWithType: EnumExtensions.AnyFlagsChanged<TableDataCategory>(TableDataCategory, TableDataCategory, TableDataCategory)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.TableDataCategory>(TabularEditor.TOMWrapper.TableDataCategory, TabularEditor.TOMWrapper.TableDataCategory, TabularEditor.TOMWrapper.TableDataCategory)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of TableDataCategory)(TableDataCategory, TableDataCategory, TableDataCategory)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.TableDataCategory)(TabularEditor.TOMWrapper.TableDataCategory, TabularEditor.TOMWrapper.TableDataCategory, TabularEditor.TOMWrapper.TableDataCategory)
+  name.vb: AnyFlagsChanged(Of TableDataCategory)(TableDataCategory, TableDataCategory, TableDataCategory)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.TableDataCategory.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.TableDataCategory)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<TableDataCategory>(TableDataCategory, TableDataCategory)
+  nameWithType: EnumExtensions.HasAnyFlags<TableDataCategory>(TableDataCategory, TableDataCategory)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.TableDataCategory>(TabularEditor.TOMWrapper.TableDataCategory, TabularEditor.TOMWrapper.TableDataCategory)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of TableDataCategory)(TableDataCategory, TableDataCategory)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.TableDataCategory)(TabularEditor.TOMWrapper.TableDataCategory, TabularEditor.TOMWrapper.TableDataCategory)
+  name.vb: HasAnyFlags(Of TableDataCategory)(TableDataCategory, TableDataCategory)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.TableDataCategory,TabularEditor.TOMWrapper.TableDataCategory)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TableDataCategory.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.TableDataCategory
+  commentId: T:TabularEditor.TOMWrapper.TableDataCategory
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TableDataCategory.html
+  name: TableDataCategory
+  nameWithType: TableDataCategory
+  fullName: TabularEditor.TOMWrapper.TableDataCategory

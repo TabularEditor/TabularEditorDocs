@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Not Found - Tabular Editor Documentation</title>
+    <style>
+        body, html {
+            font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .page_404 {
+            padding: 40px 20px;
+            background: #fff;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .four_zero_four_bg {
+            background-image: url(/en/images/Scenario001_Borp_Small.png);
+            height: 300px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .four_zero_four_bg h1 {
+            font-size: 80px;
+            margin: 0;
+            color: #333;
+        }
+
+        .link_404 {
+            color: #fff !important;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: #39ac31;
+            margin: 10px 5px;
+            display: inline-block;
+            border-radius: 4px;
+        }
+
+        .link_404:hover {
+            background: #2d8a27;
+        }
+
+        .link_404.secondary {
+            background: #666;
+        }
+
+        .link_404.secondary:hover {
+            background: #555;
+        }
+
+        .contant_box_404 {
+            margin-top: 20px;
+        }
+
+        .contant_box_404 h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .contant_box_404 p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #language-message {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 4px;
+            margin: 20px auto;
+            max-width: 500px;
+            display: none;
+        }
+
+        #language-message.show {
+            display: block;
+        }
+
+        .language-list {
+            margin-top: 20px;
+        }
+
+        .language-list h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section class="page_404">
+        <div class="container">
+            <div class="text-center">
+                <div class="four_zero_four_bg">
+                    <h1 class="text-center">404</h1>
+                </div>
+
+                <div class="contant_box_404">
+                    <h3>Borp has no idea what this is!</h3>
+                    <p>The page you are looking for could not be found.</p>
+
+                    <div id="language-message">
+                        <strong>Language not available:</strong> 
+                        <span id="requested-lang"></span> is not currently supported.
+                        <br><br>
+                        <a id="try-english" href="#" class="link_404">View in English</a>
+                    </div>
+
+                    <div class="language-list" id="language-list" style="display:none;">
+                        <h4>Available languages:</h4>
+                        <div id="language-buttons"></div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <a id="home-link" href="/en/" class="link_404">Home</a>
+                        <a href="javascript:history.back()" class="link_404 secondary">Go Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        (async function() {
+            // Detect requested language from URL
+            const pathParts = window.location.pathname.split('/').filter(Boolean);
+            const trailingSlash = window.location.pathname.endsWith('/') ? '/' : '';
+            const requestedLang = pathParts[0] || 'en';
+            
+            // Try to load languages manifest
+            try {
+                const response = await fetch('/languages.json');
+                if (!response.ok) return;
+                
+                const manifest = await response.json();
+                const languages = manifest.languages || [];
+                const langCodes = languages.map(l => typeof l === 'string' ? l : l.code);
+                const legacyPrefixes = manifest.legacyPrefixes || [];
+
+                // Check if the first path segment looks like a language code
+                const isValidLangFormat = requestedLang.length <= 5 && /^[a-z-]+$/i.test(requestedLang);
+                const isSupported = isValidLangFormat && langCodes.includes(requestedLang.toLowerCase());
+                const isLegacyContentDir = legacyPrefixes.includes(requestedLang.toLowerCase());
+
+                // Redirect to /en/... for:
+                // - Non-language-format paths (e.g. /features/x.html, /how-tos/...)
+                // - Known content dir prefixes that look like language codes (e.g. /api/..., /kb/...)
+                if (!isValidLangFormat || isLegacyContentDir) {
+                    const englishUrl = '/en' + window.location.pathname + window.location.search + window.location.hash;
+                    window.location.replace(englishUrl);
+                    return;
+                }
+                
+                // Determine home language
+                const homeLink = document.getElementById('home-link');
+                
+                // Set home link: supported language → that language, otherwise → English
+                homeLink.href = isSupported ? `/${requestedLang.toLowerCase()}/` : '/en/';
+                
+                // Check if requested language is NOT supported - show message and language options
+                if (isValidLangFormat && !isSupported) {
+                    // Language not supported - show message
+                    document.getElementById('language-message').classList.add('show');
+                    document.getElementById('requested-lang').textContent = requestedLang.toUpperCase();
+                    
+                    // Build English equivalent URL
+                    pathParts[0] = 'en';
+                    const englishUrl = '/' + pathParts.join('/') + trailingSlash + window.location.search + window.location.hash;
+                    document.getElementById('try-english').href = englishUrl;
+                    
+                    // Show available languages only for language mismatch
+                    if (languages.length > 1) {
+                        const container = document.getElementById('language-buttons');
+                        const listDiv = document.getElementById('language-list');
+                        
+                        languages.forEach(lang => {
+                            const code = typeof lang === 'string' ? lang : lang.code;
+                            const name = typeof lang === 'string' ? lang.toUpperCase() : (lang.nativeName || lang.name);
+                            
+                            // Build URL for this language
+                            const newParts = [...pathParts];
+                            if (newParts.length > 0 && newParts[0].length <= 5 && /^[a-z-]+$/i.test(newParts[0])) {
+                                newParts[0] = code;
+                            } else {
+                                newParts.unshift(code);
+                            }
+                            const langUrl = '/' + newParts.join('/') + trailingSlash + window.location.search + window.location.hash;
+                            
+                            const btn = document.createElement('a');
+                            btn.href = langUrl;
+                            btn.className = 'link_404 secondary';
+                            btn.textContent = name;
+                            btn.style.fontSize = '14px';
+                            container.appendChild(btn);
+                        });
+                        
+                        listDiv.style.display = 'block';
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not load languages:', e);
+            }
+        })();
+    </script>
+</body>
+</html>

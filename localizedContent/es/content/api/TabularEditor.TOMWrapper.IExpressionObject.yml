@@ -1,0 +1,751 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.IExpressionObject
+  commentId: T:TabularEditor.TOMWrapper.IExpressionObject
+  id: IExpressionObject
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.IExpressionObject.DefaultExpressionProperty
+  - TabularEditor.TOMWrapper.IExpressionObject.Expression
+  - TabularEditor.TOMWrapper.IExpressionObject.GetExpression(TabularEditor.TOMWrapper.ExpressionProperty)
+  - TabularEditor.TOMWrapper.IExpressionObject.GetExpressionProperties
+  - TabularEditor.TOMWrapper.IExpressionObject.SetExpression(TabularEditor.TOMWrapper.ExpressionProperty,System.String)
+  langs:
+  - csharp
+  - vb
+  name: IExpressionObject
+  nameWithType: IExpressionObject
+  fullName: TabularEditor.TOMWrapper.IExpressionObject
+  type: Interface
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Objects that have an expression (measure, calculated column, partition, etc.)
+  example: []
+  syntax:
+    content: 'public interface IExpressionObject : ITabularNamedObject, ITabularObject, INotifyPropertyChanged, IHandlerObject, INamedObject'
+    content.vb: Public Interface IExpressionObject Inherits ITabularNamedObject, ITabularObject, INotifyPropertyChanged, IHandlerObject, INamedObject
+  derivedClasses:
+  - TabularEditor.TOMWrapper.CalculatedColumn
+  - TabularEditor.TOMWrapper.CalculatedTable
+  - TabularEditor.TOMWrapper.CalculationGroupTable
+  - TabularEditor.TOMWrapper.CalculationItem
+  - TabularEditor.TOMWrapper.DataCoverageDefinition
+  - TabularEditor.TOMWrapper.EntityPartition
+  - TabularEditor.TOMWrapper.Function
+  - TabularEditor.TOMWrapper.KPI
+  - TabularEditor.TOMWrapper.MPartition
+  - TabularEditor.TOMWrapper.Measure
+  - TabularEditor.TOMWrapper.NamedExpression
+  - TabularEditor.TOMWrapper.Partition
+  - TabularEditor.TOMWrapper.PolicyRangePartition
+  - TabularEditor.TOMWrapper.Set
+  - TabularEditor.TOMWrapper.Table
+  - TabularEditor.TOMWrapper.TablePermission
+  inheritedMembers:
+  - TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete
+  - TabularEditor.TOMWrapper.ITabularNamedObject.CanEditName
+  - TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete(System.String@)
+  - TabularEditor.TOMWrapper.ITabularNamedObject.Delete
+  - TabularEditor.TOMWrapper.ITabularNamedObject.MetadataIndex
+  - TabularEditor.TOMWrapper.ITabularObject.ObjectType
+  - TabularEditor.TOMWrapper.ITabularObject.Model
+  - TabularEditor.TOMWrapper.ITabularObject.IsRemoved
+  - System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  - TabularEditor.TOMWrapper.INamedObject.Name
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.IExpressionObject.GetExpressionProperties
+  commentId: M:TabularEditor.TOMWrapper.IExpressionObject.GetExpressionProperties
+  id: GetExpressionProperties
+  parent: TabularEditor.TOMWrapper.IExpressionObject
+  langs:
+  - csharp
+  - vb
+  name: GetExpressionProperties()
+  nameWithType: IExpressionObject.GetExpressionProperties()
+  fullName: TabularEditor.TOMWrapper.IExpressionObject.GetExpressionProperties()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets all supported expression properties on the current object.
+  example: []
+  syntax:
+    content: IEnumerable<ExpressionProperty> GetExpressionProperties()
+    return:
+      type: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ExpressionProperty}
+    content.vb: Function GetExpressionProperties() As IEnumerable(Of ExpressionProperty)
+  overload: TabularEditor.TOMWrapper.IExpressionObject.GetExpressionProperties*
+- uid: TabularEditor.TOMWrapper.IExpressionObject.GetExpression(TabularEditor.TOMWrapper.ExpressionProperty)
+  commentId: M:TabularEditor.TOMWrapper.IExpressionObject.GetExpression(TabularEditor.TOMWrapper.ExpressionProperty)
+  id: GetExpression(TabularEditor.TOMWrapper.ExpressionProperty)
+  parent: TabularEditor.TOMWrapper.IExpressionObject
+  langs:
+  - csharp
+  - vb
+  name: GetExpression(ExpressionProperty)
+  nameWithType: IExpressionObject.GetExpression(ExpressionProperty)
+  fullName: TabularEditor.TOMWrapper.IExpressionObject.GetExpression(TabularEditor.TOMWrapper.ExpressionProperty)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the specified expression from the current object.
+  example: []
+  syntax:
+    content: string GetExpression(ExpressionProperty expressionProperty)
+    parameters:
+    - id: expressionProperty
+      type: TabularEditor.TOMWrapper.ExpressionProperty
+      description: ''
+    return:
+      type: System.String
+    content.vb: Function GetExpression(expressionProperty As ExpressionProperty) As String
+  overload: TabularEditor.TOMWrapper.IExpressionObject.GetExpression*
+  exceptions:
+  - type: System.ComponentModel.InvalidEnumArgumentException
+    commentId: T:System.ComponentModel.InvalidEnumArgumentException
+    description: Thrown when the current object does not support the specified <xref href="TabularEditor.TOMWrapper.ExpressionProperty" data-throw-if-not-resolved="false"></xref>
+- uid: TabularEditor.TOMWrapper.IExpressionObject.SetExpression(TabularEditor.TOMWrapper.ExpressionProperty,System.String)
+  commentId: M:TabularEditor.TOMWrapper.IExpressionObject.SetExpression(TabularEditor.TOMWrapper.ExpressionProperty,System.String)
+  id: SetExpression(TabularEditor.TOMWrapper.ExpressionProperty,System.String)
+  parent: TabularEditor.TOMWrapper.IExpressionObject
+  langs:
+  - csharp
+  - vb
+  name: SetExpression(ExpressionProperty, string)
+  nameWithType: IExpressionObject.SetExpression(ExpressionProperty, string)
+  fullName: TabularEditor.TOMWrapper.IExpressionObject.SetExpression(TabularEditor.TOMWrapper.ExpressionProperty, string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the specified expression on the current object.
+  example: []
+  syntax:
+    content: void SetExpression(ExpressionProperty expressionProperty, string expression)
+    parameters:
+    - id: expressionProperty
+      type: TabularEditor.TOMWrapper.ExpressionProperty
+      description: ''
+    - id: expression
+      type: System.String
+      description: ''
+    content.vb: Sub SetExpression(expressionProperty As ExpressionProperty, expression As String)
+  overload: TabularEditor.TOMWrapper.IExpressionObject.SetExpression*
+  exceptions:
+  - type: System.ComponentModel.InvalidEnumArgumentException
+    commentId: T:System.ComponentModel.InvalidEnumArgumentException
+    description: Thrown when the current object does not support the specified <xref href="TabularEditor.TOMWrapper.ExpressionProperty" data-throw-if-not-resolved="false"></xref>
+  nameWithType.vb: IExpressionObject.SetExpression(ExpressionProperty, String)
+  fullName.vb: TabularEditor.TOMWrapper.IExpressionObject.SetExpression(TabularEditor.TOMWrapper.ExpressionProperty, String)
+  name.vb: SetExpression(ExpressionProperty, String)
+- uid: TabularEditor.TOMWrapper.IExpressionObject.DefaultExpressionProperty
+  commentId: P:TabularEditor.TOMWrapper.IExpressionObject.DefaultExpressionProperty
+  id: DefaultExpressionProperty
+  parent: TabularEditor.TOMWrapper.IExpressionObject
+  langs:
+  - csharp
+  - vb
+  name: DefaultExpressionProperty
+  nameWithType: IExpressionObject.DefaultExpressionProperty
+  fullName: TabularEditor.TOMWrapper.IExpressionObject.DefaultExpressionProperty
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the default expression property on the current object.
+  example: []
+  syntax:
+    content: ExpressionProperty? DefaultExpressionProperty { get; }
+    parameters: []
+    return:
+      type: System.Nullable{TabularEditor.TOMWrapper.ExpressionProperty}
+    content.vb: ReadOnly Property DefaultExpressionProperty As ExpressionProperty?
+  overload: TabularEditor.TOMWrapper.IExpressionObject.DefaultExpressionProperty*
+- uid: TabularEditor.TOMWrapper.IExpressionObject.Expression
+  commentId: P:TabularEditor.TOMWrapper.IExpressionObject.Expression
+  id: Expression
+  parent: TabularEditor.TOMWrapper.IExpressionObject
+  langs:
+  - csharp
+  - vb
+  name: Expression
+  nameWithType: IExpressionObject.Expression
+  fullName: TabularEditor.TOMWrapper.IExpressionObject.Expression
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Gets the expression of the current object (which is the value of its default expression property).
+  example: []
+  syntax:
+    content: string Expression { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: ReadOnly Property Expression As String
+  overload: TabularEditor.TOMWrapper.IExpressionObject.Expression*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete
+  commentId: M:TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete
+  parent: TabularEditor.TOMWrapper.ITabularNamedObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_CanDelete
+  name: CanDelete()
+  nameWithType: ITabularNamedObject.CanDelete()
+  fullName: TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete
+    name: CanDelete
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_CanDelete
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete
+    name: CanDelete
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_CanDelete
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.ITabularNamedObject.CanEditName
+  commentId: M:TabularEditor.TOMWrapper.ITabularNamedObject.CanEditName
+  parent: TabularEditor.TOMWrapper.ITabularNamedObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_CanEditName
+  name: CanEditName()
+  nameWithType: ITabularNamedObject.CanEditName()
+  fullName: TabularEditor.TOMWrapper.ITabularNamedObject.CanEditName()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.ITabularNamedObject.CanEditName
+    name: CanEditName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_CanEditName
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.ITabularNamedObject.CanEditName
+    name: CanEditName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_CanEditName
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete(System.String@)
+  commentId: M:TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete(System.String@)
+  parent: TabularEditor.TOMWrapper.ITabularNamedObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_CanDelete_System_String__
+  name: CanDelete(out string)
+  nameWithType: ITabularNamedObject.CanDelete(out string)
+  fullName: TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete(out string)
+  nameWithType.vb: ITabularNamedObject.CanDelete(String)
+  fullName.vb: TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete(String)
+  name.vb: CanDelete(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete(System.String@)
+    name: CanDelete
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_CanDelete_System_String__
+  - name: (
+  - name: out
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.ITabularNamedObject.CanDelete(System.String@)
+    name: CanDelete
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_CanDelete_System_String__
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.ITabularNamedObject.Delete
+  commentId: M:TabularEditor.TOMWrapper.ITabularNamedObject.Delete
+  parent: TabularEditor.TOMWrapper.ITabularNamedObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_Delete
+  name: Delete()
+  nameWithType: ITabularNamedObject.Delete()
+  fullName: TabularEditor.TOMWrapper.ITabularNamedObject.Delete()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.ITabularNamedObject.Delete
+    name: Delete
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_Delete
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.ITabularNamedObject.Delete
+    name: Delete
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_Delete
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.ITabularNamedObject.MetadataIndex
+  commentId: P:TabularEditor.TOMWrapper.ITabularNamedObject.MetadataIndex
+  parent: TabularEditor.TOMWrapper.ITabularNamedObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularNamedObject.html#TabularEditor_TOMWrapper_ITabularNamedObject_MetadataIndex
+  name: MetadataIndex
+  nameWithType: ITabularNamedObject.MetadataIndex
+  fullName: TabularEditor.TOMWrapper.ITabularNamedObject.MetadataIndex
+- uid: TabularEditor.TOMWrapper.ITabularObject.ObjectType
+  commentId: P:TabularEditor.TOMWrapper.ITabularObject.ObjectType
+  parent: TabularEditor.TOMWrapper.ITabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularObject.html#TabularEditor_TOMWrapper_ITabularObject_ObjectType
+  name: ObjectType
+  nameWithType: ITabularObject.ObjectType
+  fullName: TabularEditor.TOMWrapper.ITabularObject.ObjectType
+- uid: TabularEditor.TOMWrapper.ITabularObject.Model
+  commentId: P:TabularEditor.TOMWrapper.ITabularObject.Model
+  parent: TabularEditor.TOMWrapper.ITabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularObject.html#TabularEditor_TOMWrapper_ITabularObject_Model
+  name: Model
+  nameWithType: ITabularObject.Model
+  fullName: TabularEditor.TOMWrapper.ITabularObject.Model
+- uid: TabularEditor.TOMWrapper.ITabularObject.IsRemoved
+  commentId: P:TabularEditor.TOMWrapper.ITabularObject.IsRemoved
+  parent: TabularEditor.TOMWrapper.ITabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularObject.html#TabularEditor_TOMWrapper_ITabularObject_IsRemoved
+  name: IsRemoved
+  nameWithType: ITabularObject.IsRemoved
+  fullName: TabularEditor.TOMWrapper.ITabularObject.IsRemoved
+- uid: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  commentId: E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  parent: System.ComponentModel.INotifyPropertyChanged
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged.propertychanged
+  name: PropertyChanged
+  nameWithType: INotifyPropertyChanged.PropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: TabularEditor.TOMWrapper.INamedObject.Name
+  commentId: P:TabularEditor.TOMWrapper.INamedObject.Name
+  parent: TabularEditor.TOMWrapper.INamedObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.INamedObject.html#TabularEditor_TOMWrapper_INamedObject_Name
+  name: Name
+  nameWithType: INamedObject.Name
+  fullName: TabularEditor.TOMWrapper.INamedObject.Name
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.TOMWrapper.ITabularNamedObject
+  commentId: T:TabularEditor.TOMWrapper.ITabularNamedObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularNamedObject.html
+  name: ITabularNamedObject
+  nameWithType: ITabularNamedObject
+  fullName: TabularEditor.TOMWrapper.ITabularNamedObject
+- uid: TabularEditor.TOMWrapper.ITabularObject
+  commentId: T:TabularEditor.TOMWrapper.ITabularObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularObject.html
+  name: ITabularObject
+  nameWithType: ITabularObject
+  fullName: TabularEditor.TOMWrapper.ITabularObject
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: TabularEditor.TOMWrapper.INamedObject
+  commentId: T:TabularEditor.TOMWrapper.INamedObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.INamedObject.html
+  name: INamedObject
+  nameWithType: INamedObject
+  fullName: TabularEditor.TOMWrapper.INamedObject
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.IExpressionObject.GetExpressionProperties*
+  commentId: Overload:TabularEditor.TOMWrapper.IExpressionObject.GetExpressionProperties
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExpressionObject.html#TabularEditor_TOMWrapper_IExpressionObject_GetExpressionProperties
+  name: GetExpressionProperties
+  nameWithType: IExpressionObject.GetExpressionProperties
+  fullName: TabularEditor.TOMWrapper.IExpressionObject.GetExpressionProperties
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ExpressionProperty}
+  commentId: T:System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.ExpressionProperty}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<ExpressionProperty>
+  nameWithType: IEnumerable<ExpressionProperty>
+  fullName: System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.ExpressionProperty>
+  nameWithType.vb: IEnumerable(Of ExpressionProperty)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.ExpressionProperty)
+  name.vb: IEnumerable(Of ExpressionProperty)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ExpressionProperty
+    name: ExpressionProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionProperty.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionProperty
+    name: ExpressionProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionProperty.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: TabularEditor.TOMWrapper.ExpressionProperty
+  commentId: T:TabularEditor.TOMWrapper.ExpressionProperty
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExpressionProperty.html
+  name: ExpressionProperty
+  nameWithType: ExpressionProperty
+  fullName: TabularEditor.TOMWrapper.ExpressionProperty
+- uid: System.ComponentModel.InvalidEnumArgumentException
+  commentId: T:System.ComponentModel.InvalidEnumArgumentException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.invalidenumargumentexception
+  name: InvalidEnumArgumentException
+  nameWithType: InvalidEnumArgumentException
+  fullName: System.ComponentModel.InvalidEnumArgumentException
+- uid: TabularEditor.TOMWrapper.IExpressionObject.GetExpression*
+  commentId: Overload:TabularEditor.TOMWrapper.IExpressionObject.GetExpression
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExpressionObject.html#TabularEditor_TOMWrapper_IExpressionObject_GetExpression_TabularEditor_TOMWrapper_ExpressionProperty_
+  name: GetExpression
+  nameWithType: IExpressionObject.GetExpression
+  fullName: TabularEditor.TOMWrapper.IExpressionObject.GetExpression
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.TOMWrapper.IExpressionObject.SetExpression*
+  commentId: Overload:TabularEditor.TOMWrapper.IExpressionObject.SetExpression
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExpressionObject.html#TabularEditor_TOMWrapper_IExpressionObject_SetExpression_TabularEditor_TOMWrapper_ExpressionProperty_System_String_
+  name: SetExpression
+  nameWithType: IExpressionObject.SetExpression
+  fullName: TabularEditor.TOMWrapper.IExpressionObject.SetExpression
+- uid: TabularEditor.TOMWrapper.IExpressionObject.DefaultExpressionProperty*
+  commentId: Overload:TabularEditor.TOMWrapper.IExpressionObject.DefaultExpressionProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExpressionObject.html#TabularEditor_TOMWrapper_IExpressionObject_DefaultExpressionProperty
+  name: DefaultExpressionProperty
+  nameWithType: IExpressionObject.DefaultExpressionProperty
+  fullName: TabularEditor.TOMWrapper.IExpressionObject.DefaultExpressionProperty
+- uid: System.Nullable{TabularEditor.TOMWrapper.ExpressionProperty}
+  commentId: T:System.Nullable{TabularEditor.TOMWrapper.ExpressionProperty}
+  parent: System
+  definition: System.Nullable`1
+  href: TabularEditor.TOMWrapper.ExpressionProperty.html
+  name: ExpressionProperty?
+  nameWithType: ExpressionProperty?
+  fullName: TabularEditor.TOMWrapper.ExpressionProperty?
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.ExpressionProperty
+    name: ExpressionProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionProperty.html
+  - name: '?'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.ExpressionProperty
+    name: ExpressionProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionProperty.html
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.IExpressionObject.Expression*
+  commentId: Overload:TabularEditor.TOMWrapper.IExpressionObject.Expression
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IExpressionObject.html#TabularEditor_TOMWrapper_IExpressionObject_Expression
+  name: Expression
+  nameWithType: IExpressionObject.Expression
+  fullName: TabularEditor.TOMWrapper.IExpressionObject.Expression

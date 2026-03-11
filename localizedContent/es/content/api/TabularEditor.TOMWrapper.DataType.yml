@@ -1,0 +1,620 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.DataType
+  commentId: T:TabularEditor.TOMWrapper.DataType
+  id: DataType
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.DataType.Automatic
+  - TabularEditor.TOMWrapper.DataType.Binary
+  - TabularEditor.TOMWrapper.DataType.Boolean
+  - TabularEditor.TOMWrapper.DataType.DateTime
+  - TabularEditor.TOMWrapper.DataType.Decimal
+  - TabularEditor.TOMWrapper.DataType.Double
+  - TabularEditor.TOMWrapper.DataType.Int64
+  - TabularEditor.TOMWrapper.DataType.String
+  - TabularEditor.TOMWrapper.DataType.Unknown
+  - TabularEditor.TOMWrapper.DataType.Variant
+  langs:
+  - csharp
+  - vb
+  name: DataType
+  nameWithType: DataType
+  fullName: TabularEditor.TOMWrapper.DataType
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Describes the type of data contained in the column.
+  example: []
+  syntax:
+    content: public enum DataType
+    content.vb: Public Enum DataType
+  extensionMethods:
+  - TabularEditor.TOMWrapper.DataType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType)
+  - TabularEditor.TOMWrapper.DataType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType)
+  - TabularEditor.TOMWrapper.DataType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.DataType)
+- uid: TabularEditor.TOMWrapper.DataType.Automatic
+  commentId: F:TabularEditor.TOMWrapper.DataType.Automatic
+  id: Automatic
+  parent: TabularEditor.TOMWrapper.DataType
+  langs:
+  - csharp
+  - vb
+  name: Automatic
+  nameWithType: DataType.Automatic
+  fullName: TabularEditor.TOMWrapper.DataType.Automatic
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Internal only.
+  example: []
+  syntax:
+    content: Automatic = 1
+    return:
+      type: TabularEditor.TOMWrapper.DataType
+- uid: TabularEditor.TOMWrapper.DataType.String
+  commentId: F:TabularEditor.TOMWrapper.DataType.String
+  id: String
+  parent: TabularEditor.TOMWrapper.DataType
+  langs:
+  - csharp
+  - vb
+  name: String
+  nameWithType: DataType.String
+  fullName: TabularEditor.TOMWrapper.DataType.String
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Column or measure contains string data values.
+  example: []
+  syntax:
+    content: String = 2
+    return:
+      type: TabularEditor.TOMWrapper.DataType
+- uid: TabularEditor.TOMWrapper.DataType.Int64
+  commentId: F:TabularEditor.TOMWrapper.DataType.Int64
+  id: Int64
+  parent: TabularEditor.TOMWrapper.DataType
+  langs:
+  - csharp
+  - vb
+  name: Int64
+  nameWithType: DataType.Int64
+  fullName: TabularEditor.TOMWrapper.DataType.Int64
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Column or measure contains integers.
+  example: []
+  syntax:
+    content: Int64 = 6
+    return:
+      type: TabularEditor.TOMWrapper.DataType
+- uid: TabularEditor.TOMWrapper.DataType.Double
+  commentId: F:TabularEditor.TOMWrapper.DataType.Double
+  id: Double
+  parent: TabularEditor.TOMWrapper.DataType
+  langs:
+  - csharp
+  - vb
+  name: Double
+  nameWithType: DataType.Double
+  fullName: TabularEditor.TOMWrapper.DataType.Double
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Column or measure contains double-precision floating-point numbers.
+  example: []
+  syntax:
+    content: Double = 8
+    return:
+      type: TabularEditor.TOMWrapper.DataType
+- uid: TabularEditor.TOMWrapper.DataType.DateTime
+  commentId: F:TabularEditor.TOMWrapper.DataType.DateTime
+  id: DateTime
+  parent: TabularEditor.TOMWrapper.DataType
+  langs:
+  - csharp
+  - vb
+  name: DateTime
+  nameWithType: DataType.DateTime
+  fullName: TabularEditor.TOMWrapper.DataType.DateTime
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Column or measure contains date and time data
+  example: []
+  syntax:
+    content: DateTime = 9
+    return:
+      type: TabularEditor.TOMWrapper.DataType
+- uid: TabularEditor.TOMWrapper.DataType.Decimal
+  commentId: F:TabularEditor.TOMWrapper.DataType.Decimal
+  id: Decimal
+  parent: TabularEditor.TOMWrapper.DataType
+  langs:
+  - csharp
+  - vb
+  name: Decimal
+  nameWithType: DataType.Decimal
+  fullName: TabularEditor.TOMWrapper.DataType.Decimal
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Column or measure contains decimal data values.
+  example: []
+  syntax:
+    content: Decimal = 10
+    return:
+      type: TabularEditor.TOMWrapper.DataType
+- uid: TabularEditor.TOMWrapper.DataType.Boolean
+  commentId: F:TabularEditor.TOMWrapper.DataType.Boolean
+  id: Boolean
+  parent: TabularEditor.TOMWrapper.DataType
+  langs:
+  - csharp
+  - vb
+  name: Boolean
+  nameWithType: DataType.Boolean
+  fullName: TabularEditor.TOMWrapper.DataType.Boolean
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Column or measure contains boolean data values.
+  example: []
+  syntax:
+    content: Boolean = 11
+    return:
+      type: TabularEditor.TOMWrapper.DataType
+- uid: TabularEditor.TOMWrapper.DataType.Binary
+  commentId: F:TabularEditor.TOMWrapper.DataType.Binary
+  id: Binary
+  parent: TabularEditor.TOMWrapper.DataType
+  langs:
+  - csharp
+  - vb
+  name: Binary
+  nameWithType: DataType.Binary
+  fullName: TabularEditor.TOMWrapper.DataType.Binary
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Column or measure contains binary data.
+  example: []
+  syntax:
+    content: Binary = 17
+    return:
+      type: TabularEditor.TOMWrapper.DataType
+- uid: TabularEditor.TOMWrapper.DataType.Unknown
+  commentId: F:TabularEditor.TOMWrapper.DataType.Unknown
+  id: Unknown
+  parent: TabularEditor.TOMWrapper.DataType
+  langs:
+  - csharp
+  - vb
+  name: Unknown
+  nameWithType: DataType.Unknown
+  fullName: TabularEditor.TOMWrapper.DataType.Unknown
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Initial value of a newly created column, replaced with an actual value after saving a Column to the Server.
+  example: []
+  syntax:
+    content: Unknown = 19
+    return:
+      type: TabularEditor.TOMWrapper.DataType
+- uid: TabularEditor.TOMWrapper.DataType.Variant
+  commentId: F:TabularEditor.TOMWrapper.DataType.Variant
+  id: Variant
+  parent: TabularEditor.TOMWrapper.DataType
+  langs:
+  - csharp
+  - vb
+  name: Variant
+  nameWithType: DataType.Variant
+  fullName: TabularEditor.TOMWrapper.DataType.Variant
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: A measure with varying data type.
+  example: []
+  syntax:
+    content: Variant = 20
+    return:
+      type: TabularEditor.TOMWrapper.DataType
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.DataType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<DataType>(DataType, DataType, DataType)
+  nameWithType: EnumExtensions.AllFlagsChanged<DataType>(DataType, DataType, DataType)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.DataType>(TabularEditor.TOMWrapper.DataType, TabularEditor.TOMWrapper.DataType, TabularEditor.TOMWrapper.DataType)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of DataType)(DataType, DataType, DataType)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.DataType)(TabularEditor.TOMWrapper.DataType, TabularEditor.TOMWrapper.DataType, TabularEditor.TOMWrapper.DataType)
+  name.vb: AllFlagsChanged(Of DataType)(DataType, DataType, DataType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.DataType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<DataType>(DataType, DataType, DataType)
+  nameWithType: EnumExtensions.AnyFlagsChanged<DataType>(DataType, DataType, DataType)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.DataType>(TabularEditor.TOMWrapper.DataType, TabularEditor.TOMWrapper.DataType, TabularEditor.TOMWrapper.DataType)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of DataType)(DataType, DataType, DataType)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.DataType)(TabularEditor.TOMWrapper.DataType, TabularEditor.TOMWrapper.DataType, TabularEditor.TOMWrapper.DataType)
+  name.vb: AnyFlagsChanged(Of DataType)(DataType, DataType, DataType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.DataType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.DataType)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<DataType>(DataType, DataType)
+  nameWithType: EnumExtensions.HasAnyFlags<DataType>(DataType, DataType)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.DataType>(TabularEditor.TOMWrapper.DataType, TabularEditor.TOMWrapper.DataType)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of DataType)(DataType, DataType)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.DataType)(TabularEditor.TOMWrapper.DataType, TabularEditor.TOMWrapper.DataType)
+  name.vb: HasAnyFlags(Of DataType)(DataType, DataType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.DataType,TabularEditor.TOMWrapper.DataType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.DataType.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.DataType
+  commentId: T:TabularEditor.TOMWrapper.DataType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.DataType.html
+  name: DataType
+  nameWithType: DataType
+  fullName: TabularEditor.TOMWrapper.DataType

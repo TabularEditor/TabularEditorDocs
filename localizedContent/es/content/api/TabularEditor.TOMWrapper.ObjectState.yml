@@ -1,0 +1,579 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.ObjectState
+  commentId: T:TabularEditor.TOMWrapper.ObjectState
+  id: ObjectState
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.ObjectState.CalculationNeeded
+  - TabularEditor.TOMWrapper.ObjectState.DependencyError
+  - TabularEditor.TOMWrapper.ObjectState.EvaluationError
+  - TabularEditor.TOMWrapper.ObjectState.ForceCalculationNeeded
+  - TabularEditor.TOMWrapper.ObjectState.Incomplete
+  - TabularEditor.TOMWrapper.ObjectState.NoData
+  - TabularEditor.TOMWrapper.ObjectState.Ready
+  - TabularEditor.TOMWrapper.ObjectState.SemanticError
+  langs:
+  - csharp
+  - vb
+  name: ObjectState
+  nameWithType: ObjectState
+  fullName: TabularEditor.TOMWrapper.ObjectState
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: An enumeration of possible values for object state.
+  example: []
+  syntax:
+    content: public enum ObjectState
+    content.vb: Public Enum ObjectState
+  extensionMethods:
+  - TabularEditor.TOMWrapper.ObjectState.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState)
+  - TabularEditor.TOMWrapper.ObjectState.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState)
+  - TabularEditor.TOMWrapper.ObjectState.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ObjectState)
+- uid: TabularEditor.TOMWrapper.ObjectState.Ready
+  commentId: F:TabularEditor.TOMWrapper.ObjectState.Ready
+  id: Ready
+  parent: TabularEditor.TOMWrapper.ObjectState
+  langs:
+  - csharp
+  - vb
+  name: Ready
+  nameWithType: ObjectState.Ready
+  fullName: TabularEditor.TOMWrapper.ObjectState.Ready
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Object is refreshed, contains up-to-date data, and is queryable.
+  example: []
+  syntax:
+    content: Ready = 1
+    return:
+      type: TabularEditor.TOMWrapper.ObjectState
+- uid: TabularEditor.TOMWrapper.ObjectState.NoData
+  commentId: F:TabularEditor.TOMWrapper.ObjectState.NoData
+  id: NoData
+  parent: TabularEditor.TOMWrapper.ObjectState
+  langs:
+  - csharp
+  - vb
+  name: NoData
+  nameWithType: ObjectState.NoData
+  fullName: TabularEditor.TOMWrapper.ObjectState.NoData
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Object is queryable but contains no data. Refresh it to bring in data. Applies to non-calculated objects, such as DataColumns, partitions, and Tables.
+  example: []
+  syntax:
+    content: NoData = 3
+    return:
+      type: TabularEditor.TOMWrapper.ObjectState
+- uid: TabularEditor.TOMWrapper.ObjectState.CalculationNeeded
+  commentId: F:TabularEditor.TOMWrapper.ObjectState.CalculationNeeded
+  id: CalculationNeeded
+  parent: TabularEditor.TOMWrapper.ObjectState
+  langs:
+  - csharp
+  - vb
+  name: CalculationNeeded
+  nameWithType: ObjectState.CalculationNeeded
+  fullName: TabularEditor.TOMWrapper.ObjectState.CalculationNeeded
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Object is not queryable and contains no data. It needs to be refreshed to become functional. Applies only to calculated objects, such as calculated columns, hierarchies, and calculated tables.
+  example: []
+  syntax:
+    content: CalculationNeeded = 4
+    return:
+      type: TabularEditor.TOMWrapper.ObjectState
+- uid: TabularEditor.TOMWrapper.ObjectState.SemanticError
+  commentId: F:TabularEditor.TOMWrapper.ObjectState.SemanticError
+  id: SemanticError
+  parent: TabularEditor.TOMWrapper.ObjectState
+  langs:
+  - csharp
+  - vb
+  name: SemanticError
+  nameWithType: ObjectState.SemanticError
+  fullName: TabularEditor.TOMWrapper.ObjectState.SemanticError
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Object is in an error state because of an invalid expression. It is not queryable.
+  example: []
+  syntax:
+    content: SemanticError = 5
+    return:
+      type: TabularEditor.TOMWrapper.ObjectState
+- uid: TabularEditor.TOMWrapper.ObjectState.EvaluationError
+  commentId: F:TabularEditor.TOMWrapper.ObjectState.EvaluationError
+  id: EvaluationError
+  parent: TabularEditor.TOMWrapper.ObjectState
+  langs:
+  - csharp
+  - vb
+  name: EvaluationError
+  nameWithType: ObjectState.EvaluationError
+  fullName: TabularEditor.TOMWrapper.ObjectState.EvaluationError
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Object is in an error state because an error occurred during expression evaluation. It is not queryable.
+  example: []
+  syntax:
+    content: EvaluationError = 6
+    return:
+      type: TabularEditor.TOMWrapper.ObjectState
+- uid: TabularEditor.TOMWrapper.ObjectState.DependencyError
+  commentId: F:TabularEditor.TOMWrapper.ObjectState.DependencyError
+  id: DependencyError
+  parent: TabularEditor.TOMWrapper.ObjectState
+  langs:
+  - csharp
+  - vb
+  name: DependencyError
+  nameWithType: ObjectState.DependencyError
+  fullName: TabularEditor.TOMWrapper.ObjectState.DependencyError
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Object is in an error state because some of its calculation dependencies are in an error state. It is not queryable.
+  example: []
+  syntax:
+    content: DependencyError = 7
+    return:
+      type: TabularEditor.TOMWrapper.ObjectState
+- uid: TabularEditor.TOMWrapper.ObjectState.Incomplete
+  commentId: F:TabularEditor.TOMWrapper.ObjectState.Incomplete
+  id: Incomplete
+  parent: TabularEditor.TOMWrapper.ObjectState
+  langs:
+  - csharp
+  - vb
+  name: Incomplete
+  nameWithType: ObjectState.Incomplete
+  fullName: TabularEditor.TOMWrapper.ObjectState.Incomplete
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Some parts of the object have no data. Refresh the object to add the rest of the data. The object is queryable. Applies to non-calculated objects, such as DataColumns, partitions, and tables.
+  example: []
+  syntax:
+    content: Incomplete = 8
+    return:
+      type: TabularEditor.TOMWrapper.ObjectState
+- uid: TabularEditor.TOMWrapper.ObjectState.ForceCalculationNeeded
+  commentId: F:TabularEditor.TOMWrapper.ObjectState.ForceCalculationNeeded
+  id: ForceCalculationNeeded
+  parent: TabularEditor.TOMWrapper.ObjectState
+  langs:
+  - csharp
+  - vb
+  name: ForceCalculationNeeded
+  nameWithType: ObjectState.ForceCalculationNeeded
+  fullName: TabularEditor.TOMWrapper.ObjectState.ForceCalculationNeeded
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The data is possibly outdated, but is in a queryable state. Applies only for CalculatedTable.
+  remarks: This value is only supported at database compatibility level of 1400 or above for Pbi server.
+  example: []
+  syntax:
+    content: ForceCalculationNeeded = 10
+    return:
+      type: TabularEditor.TOMWrapper.ObjectState
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.ObjectState.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<ObjectState>(ObjectState, ObjectState, ObjectState)
+  nameWithType: EnumExtensions.AllFlagsChanged<ObjectState>(ObjectState, ObjectState, ObjectState)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.ObjectState>(TabularEditor.TOMWrapper.ObjectState, TabularEditor.TOMWrapper.ObjectState, TabularEditor.TOMWrapper.ObjectState)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of ObjectState)(ObjectState, ObjectState, ObjectState)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.ObjectState)(TabularEditor.TOMWrapper.ObjectState, TabularEditor.TOMWrapper.ObjectState, TabularEditor.TOMWrapper.ObjectState)
+  name.vb: AllFlagsChanged(Of ObjectState)(ObjectState, ObjectState, ObjectState)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.ObjectState.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<ObjectState>(ObjectState, ObjectState, ObjectState)
+  nameWithType: EnumExtensions.AnyFlagsChanged<ObjectState>(ObjectState, ObjectState, ObjectState)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.ObjectState>(TabularEditor.TOMWrapper.ObjectState, TabularEditor.TOMWrapper.ObjectState, TabularEditor.TOMWrapper.ObjectState)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of ObjectState)(ObjectState, ObjectState, ObjectState)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.ObjectState)(TabularEditor.TOMWrapper.ObjectState, TabularEditor.TOMWrapper.ObjectState, TabularEditor.TOMWrapper.ObjectState)
+  name.vb: AnyFlagsChanged(Of ObjectState)(ObjectState, ObjectState, ObjectState)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.ObjectState.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ObjectState)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<ObjectState>(ObjectState, ObjectState)
+  nameWithType: EnumExtensions.HasAnyFlags<ObjectState>(ObjectState, ObjectState)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.ObjectState>(TabularEditor.TOMWrapper.ObjectState, TabularEditor.TOMWrapper.ObjectState)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of ObjectState)(ObjectState, ObjectState)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.ObjectState)(TabularEditor.TOMWrapper.ObjectState, TabularEditor.TOMWrapper.ObjectState)
+  name.vb: HasAnyFlags(Of ObjectState)(ObjectState, ObjectState)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ObjectState,TabularEditor.TOMWrapper.ObjectState)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectState.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.ObjectState
+  commentId: T:TabularEditor.TOMWrapper.ObjectState
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ObjectState.html
+  name: ObjectState
+  nameWithType: ObjectState
+  fullName: TabularEditor.TOMWrapper.ObjectState
