@@ -1,4 +1,4 @@
-﻿---
+---
 uid: bpa-view-reference
 title: Best Practice Analyzer view
 author: Daniel Otykier
@@ -16,4 +16,5 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 [!include[using-bpa](../../features/using-bpa.md)]
