@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Advanced Refresh Dialog
 
 The **Advanced Refresh** dialog provides fine-grained control over data refresh operations, allowing you to configure refresh type, parallelism, incremental refresh settings, and override profiles. This is useful when you need more control than the standard refresh menu options provide.
@@ -44,15 +45,15 @@ The refresh scope indicates which objects will be refreshed. The scope depends o
 
 The **Refresh Type** dropdown lets you choose the type of refresh operation to perform. Available options depend on the refresh scope:
 
-| Refresh Type | Description | Availability |
-|--------------|-------------|--------------|
-| **Automatic** | Lets Analysis Services determine the optimal refresh type based on the current state of objects | All scopes |
-| **Full** | Drops all data and reloads from the data source, then recalculates all dependent objects | All scopes |
-| **Clear** | Drops all data from the selected objects without reloading | All scopes |
-| **DataOnly** | Loads data from the data source without recalculating dependent objects | All scopes |
-| **Calculate** | Recalculates the selected objects and all their dependents without reloading data | All scopes |
-| **Defrag** | Defragments the dictionaries for all columns in the scope | Model and table scope only |
-| **Add** | Adds new data to partitions without processing existing data | Partition scope only |
+| Refresh Type  | Description                                                                                     | Availability               |
+| ------------- | ----------------------------------------------------------------------------------------------- | -------------------------- |
+| **Automatic** | Lets Analysis Services determine the optimal refresh type based on the current state of objects | All scopes                 |
+| **Full**      | Drops all data and reloads from the data source, then recalculates all dependent objects        | All scopes                 |
+| **Clear**     | Drops all data from the selected objects without reloading                                      | All scopes                 |
+| **DataOnly**  | Loads data from the data source without recalculating dependent objects                         | All scopes                 |
+| **Calculate** | Recalculates the selected objects and all their dependents without reloading data               | All scopes                 |
+| **Defrag**    | Defragments the dictionaries for all columns in the scope                                       | Model and table scope only |
+| **Add**       | Adds new data to partitions without processing existing data                                    | Partition scope only       |
 
 ### Max Parallelism
 
