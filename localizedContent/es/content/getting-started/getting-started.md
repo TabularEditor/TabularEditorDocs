@@ -1,4 +1,4 @@
-﻿---
+---
 uid: getting-started
 title: Installation and Activation
 author: Morten Lønskov
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Getting Started
 
 ## Installation
@@ -95,10 +96,10 @@ A system administrator may also proactively assign Tabular Editor 3 licenses to 
 
 If, for any reason, you are unable to change the license key using the procedure outlined above, you can always reset the license assigned to Tabular Editor 3 by using the Registry Editor:
 
-1. Close all instances of Tabular Editor 3.  
-2. Open the Registry Editor in Windows (Start > Run > regedit.msc).  
-3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above).  
-4. Delete all values within this key.  
+1. Close all instances of Tabular Editor 3.
+2. Open the Registry Editor in Windows (Start > Run > regedit.msc).
+3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above).
+4. Delete all values within this key.
 5. Close the Registry Editor and restart Tabular Editor 3.
 
 Alternatively, run the following command in a Windows Command Prompt (Start > Run > cmd.exe):
@@ -124,17 +125,20 @@ For details on available MSI command-line options, please refer to the official 
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
 2. **Write the license to the Registry** **before the first launch** of the application:
+
    ```bat
    REM Per-user license key (HKCU)
    REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
    ```
 
    If you are using an **Enterprise Edition** license key, also set the licensed user’s e‑mail:
+
    ```bat
    REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
    ```
 
 **Notes**
+
 - The installer does **not** accept a license parameter; licensing is handled via the Registry entries above.
 - Keys are stored under **HKCU** (per-user). Ensure the commands run in the context of the target user (e.g., via logon script or similar) so the values are written to the correct profile.
 - For additional keys and values, see the [Registry details](#registry-details).
