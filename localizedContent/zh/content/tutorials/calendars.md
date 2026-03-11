@@ -25,6 +25,7 @@ The September 2025 release of Power BI Desktop introduced a new Public Preview f
 Unlike classic time intelligence functions that assume a standard Gregorian calendar, the new calendar-based functions derive their behavior from explicit column mappings you define in your Date table. This approach also introduces week-level time intelligence calculations that were difficult to perform previously.
 
 For more information about how calendar-based time intelligence works, see:
+
 - [Introducing Calendar-based Time Intelligence in DAX](https://www.sqlbi.com/articles/introducing-calendar-based-time-intelligence-in-dax/) (SQLBI)
 - [Calendar-based Time Intelligence Preview](https://powerbi.microsoft.com/en-us/blog/calendar-based-time-intelligence-time-intelligence-tailored-preview/) (Microsoft)
 
@@ -119,28 +120,28 @@ With the Date table preview docked, you can see the column values as you configu
 
 **Complete Time Units:**
 
-| Time Unit | Description | Examples |
-|-----------|-------------|----------|
-| Year | The year | 2024, 2025 |
-| Quarter | The quarter including the year | Q1 2024, Q2 2025 |
-| Month | The month including the year | January 2023, 2024 Feb |
-| Week | The week including the year | Week 50 2023, W50-2023 |
-| Date | The date | 12/31/2025, 4/3/2023 |
+| Time Unit | Description                    | Examples               |
+| --------- | ------------------------------ | ---------------------- |
+| Year      | The year                       | 2024, 2025             |
+| Quarter   | The quarter including the year | Q1 2024, Q2 2025       |
+| Month     | The month including the year   | January 2023, 2024 Feb |
+| Week      | The week including the year    | Week 50 2023, W50-2023 |
+| Date      | The date                       | 12/31/2025, 4/3/2023   |
 
 **Partial Time Units** (require a parent time unit to be mapped):
 
-| Time Unit | Description | Examples | Requires | Or requires one of |
-|-----------|-------------|----------|----------|-------------------|
-| Quarter of Year | The quarter of the year | Q1, Quarter 2, YQ1 | Year | |
-| Month of Year | The month of the year | January, M11, 11 | Year | |
-| Month of Quarter | The month within a quarter | 1, QM2 | Quarter | <ul><li>Quarter of Year + Year</li></ul> |
-| Week of Year | The week of the year | Week 50, W50, 50 | Year | |
-| Week of Quarter | The week within a quarter | QW10, 10 | Quarter | <ul><li>Quarter of Year + Year</li></ul> |
-| Week of Month | The week within a month | MW2, 2 | Month | <ul><li>Month of Year + Year</li><li>Month of Quarter + Quarter</li><li>Month of Quarter + Quarter of Year + Year</li></ul> |
-| Day of Year | The day of the year | 365, D1 | Year | |
-| Day of Quarter | The day within a quarter | QD2, 50 | Quarter | <ul><li>Quarter of Year + Year</li></ul> |
-| Day of Month | The day of the month | MD10, 30 | Month | <ul><li>Month of Year + Year</li><li>Month of Quarter + Quarter</li><li>Month of Quarter + Quarter of Year + Year</li></ul> |
-| Day of Week | The day of the week | WD5, 5 | Week | <ul><li>Week of Year + Year</li><li>Week of Quarter + Quarter</li><li>Week of Quarter + Quarter of Year + Year</li><li>Week of Month + Month</li><li>Week of Month + Month of Year + Year</li><li>Week of Month + Month of Quarter + Quarter</li><li>Week of Month + Month of Quarter + Quarter of Year + Year</li></ul> |
+| Time Unit        | Description                | Examples           | Requires | Or requires one of                                                                                                                                                                                                                                                                                                       |
+| ---------------- | -------------------------- | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Quarter of Year  | The quarter of the year    | Q1, Quarter 2, YQ1 | Year     |                                                                                                                                                                                                                                                                                                                          |
+| Month of Year    | The month of the year      | January, M11, 11   | Year     |                                                                                                                                                                                                                                                                                                                          |
+| Month of Quarter | The month within a quarter | 1, QM2             | Quarter  | <ul><li>Quarter of Year + Year</li></ul>                                                                                                                                                                                                                                                                                 |
+| Week of Year     | The week of the year       | Week 50, W50, 50   | Year     |                                                                                                                                                                                                                                                                                                                          |
+| Week of Quarter  | The week within a quarter  | QW10, 10           | Quarter  | <ul><li>Quarter of Year + Year</li></ul>                                                                                                                                                                                                                                                                                 |
+| Week of Month    | The week within a month    | MW2, 2             | Month    | <ul><li>Month of Year + Year</li><li>Month of Quarter + Quarter</li><li>Month of Quarter + Quarter of Year + Year</li></ul>                                                                                                                                                                                              |
+| Day of Year      | The day of the year        | 365, D1            | Year     |                                                                                                                                                                                                                                                                                                                          |
+| Day of Quarter   | The day within a quarter   | QD2, 50            | Quarter  | <ul><li>Quarter of Year + Year</li></ul>                                                                                                                                                                                                                                                                                 |
+| Day of Month     | The day of the month       | MD10, 30           | Month    | <ul><li>Month of Year + Year</li><li>Month of Quarter + Quarter</li><li>Month of Quarter + Quarter of Year + Year</li></ul>                                                                                                                                                                                              |
+| Day of Week      | The day of the week        | WD5, 5             | Week     | <ul><li>Week of Year + Year</li><li>Week of Quarter + Quarter</li><li>Week of Quarter + Quarter of Year + Year</li><li>Week of Month + Month</li><li>Week of Month + Month of Year + Year</li><li>Week of Month + Month of Quarter + Quarter</li><li>Week of Month + Month of Quarter + Quarter of Year + Year</li></ul> |
 
 ### Associated Columns
 
@@ -158,6 +159,7 @@ Associated columns receive the same filter behavior as the primary column during
 ![Associated Columns panel in the Calendar Editor](~/content/assets/images/tutorials/calendar-associated-columns.png)
 
 ## Known limitations of the Calendar Editor
+
 - **Sort By columns and Associated columns**
 
 When a column is used as a **Sort By** column for a Primary time unit column, Analysis Services implicitly treats it as an Associated column. You should **not** explicitly add that Sort By column as an Associated column in the Calendar Editor, as this will cause an error from Analysis Services (duplicate mapping).
@@ -177,6 +179,7 @@ A future version of Tabular Editor will address these limitations.
 In addition to mapping columns to specific time unit categories, you can mark columns as **time-related**. Time-related columns are columns in your Date table that don't fit into a specific time unit category but should still receive special treatment during time intelligence calculations.
 
 Examples of time-related columns include:
+
 - `IsHoliday` - A flag indicating whether the date is a holiday
 - `IsWeekday` - A flag indicating whether the date is a weekday
 - `FiscalPeriodName` - A descriptive label for the fiscal period
