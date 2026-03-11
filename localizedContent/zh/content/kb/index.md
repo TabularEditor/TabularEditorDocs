@@ -37,6 +37,7 @@ Comprehensive guidelines for building high-quality, maintainable Power BI and An
 - @kb.bpa-powerbi-latest-compatibility - Maintain compatibility with latest Power BI features
 
 ## Code Actions
+
 ### DAX Code Analysis (DI)
 
 Improvement suggestions for DAX code structure and efficiency. These rules identify opportunities to simplify and optimize your expressions.
