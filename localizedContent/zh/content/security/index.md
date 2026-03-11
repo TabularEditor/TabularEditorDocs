@@ -12,4 +12,4 @@ This section contains information about security, privacy, and licensing.
 
 ---
 
-*Important information about security, privacy, and legal matters.*
+_Important information about security, privacy, and legal matters._
