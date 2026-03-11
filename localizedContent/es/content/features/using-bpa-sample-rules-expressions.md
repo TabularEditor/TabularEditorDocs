@@ -1,4 +1,4 @@
-﻿---
+---
 uid: using-bpa-sample-rules-expressions
 title: BPA Sample Rules Expression
 author: Morten Lønskov
@@ -16,7 +16,9 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-#  Rule Expression Samples
+
+# Rule Expression Samples
+
 In this section, you'll see some examples of Dynamic LINQ expressions that can be used to define rules. The expression that is entered in the Rule Expression Editor, will be evaluated whenever focus leaves the textbox, and any syntax errors will be shown on top of the screen:
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25380170/9f01634e-29af-11e7-952e-e10a1f28df32.png)
@@ -68,6 +70,7 @@ To compare against enumeration properties, simply pass the enumerated value as a
 ```
 
 ## Finding unused objects
+
 When building Tabular Models it is important to avoid high-cardinality columns at all costs. Typical culprits are system timestamps, technical keys, etc. that have been imported to the model by mistake. In general, we should make sure that the model only contains columns that are actually needed. Wouldn't it be nice if the Best Practice Analyzer could tell us which columns are likely not needed at all?
 
 The following rule will report columns that:
@@ -86,7 +89,7 @@ and ReferencedBy.Count = 0
 and (not UsedInRelationships.Any())
 and (not UsedInSortBy.Any())
 and (not UsedInHierarchies.Any())
-``` 
+```
 
 The same technique can be used to find unused measures. It's a little simpler, since measures can't participate in relationships, etc. So instead, let's spice things up a bit, by also considering whether any downstream objects that reference a given measure, are visible or not. That is, if measure [A] is referenced by measure [B], and both measure [A] and [B] are hidden, and no other DAX expressions refer to these two measures, we should let the developer know that it is safe to remove both of them:
 
@@ -99,6 +102,7 @@ and not ReferencedBy.Roles.Any()
 ```
 
 ## Fixing objects
+
 In some cases, it is possible to automatically fix the issues on objects satisfying the criteria of a rule. For example when it's just a matter of setting a simple property on the object. Take a closer look at the JSON behind the following rule:
 
 ```json
