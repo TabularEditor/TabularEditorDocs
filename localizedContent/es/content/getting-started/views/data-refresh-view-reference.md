@@ -1,4 +1,4 @@
-﻿---
+---
 uid: data-refresh-view-reference
 title: Data Refresh view
 author: Daniel Otykier
@@ -16,4 +16,5 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 [!include[using-bpa](../../features/views/data-refresh-view.md)]
