@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Add an object to a Metric View
 
 This how-to demonstrates how to add a new Metric View dimension (field) to a loaded Metric View.
