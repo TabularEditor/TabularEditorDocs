@@ -1,4 +1,4 @@
-﻿---
+---
 uid: licensing-activation
 title: Install and Activate Tabular Editor 3
 author: Daniel Otykier
@@ -15,6 +15,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Tabular Editor 3
 
 ## Installation
@@ -48,10 +49,12 @@ Once you purchase a license for Tabular Editor 3, you should receive an e-mail w
 > For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
 
 #### Changing seats on Enterprise Edition
-To change an Enterprise seat the existing user will have to be deregistered from the seat through the [Tabular Editor Self-Service portal](https://tabulareditor.com/my-account/). The subscription owner or license administrator can create an account or login with an existing to administrate the license seats. 
+
+To change an Enterprise seat the existing user will have to be deregistered from the seat through the [Tabular Editor Self-Service portal](https://tabulareditor.com/my-account/). The subscription owner or license administrator can create an account or login with an existing to administrate the license seats.
 
 > [!NOTE]
-> Changing a user is only possible on the Enterprise Edition. 
+> Changing a user is only possible on the Enterprise Edition.
+
 ### Requesting a trial license
 
 If you haven't used Tabular Editor 3 before, you are eligible to a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
@@ -87,10 +90,10 @@ A system administrator may also proactively assign Tabular Editor 3 licenses to 
 
 If, for any reason, you are unable to change the license key using the procedure outlined above, you can always reset the license assigned to Tabular Editor 3 by using the Registry Editor:
 
-1. Close all instances of Tabular Editor 3.  
-2. Open the Registry Editor in Windows (Start > Run > regedit.msc).  
-3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above).  
-4. Delete all values within this key.  
+1. Close all instances of Tabular Editor 3.
+2. Open the Registry Editor in Windows (Start > Run > regedit.msc).
+3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above).
+4. Delete all values within this key.
 5. Close the Registry Editor and restart Tabular Editor 3.
 
 Alternatively, run the following command in a Windows Command Prompt (Start > Run > cmd.exe):
