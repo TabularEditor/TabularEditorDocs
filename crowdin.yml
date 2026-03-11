@@ -1,15 +1,5 @@
 "files": [
   {
-    "source": "/content/**/*.md",
-    "translation": "/localizedContent/%two_letters_code%/content/%original_path%/%original_file_name%",
-    "ignore": [
-      "/**/TOC.md"
-    ],
-    "translation_replace": {
-      "content": ""
-    }
-  },
-  {
     "source": "/content/404.html",
     "translation": "/localizedContent/%two_letters_code%/content/404.html"
   },
