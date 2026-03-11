@@ -1,4 +1,4 @@
-﻿---
+---
 uid: user-interface-reference
 title: Basic user interface
 author: Daniel Otykier
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 [!include[using-bpa](../../features/views/user-interface.md)]
 
 # Next steps
