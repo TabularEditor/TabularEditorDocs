@@ -1,4 +1,4 @@
-﻿---
+---
 uid: formatdax
 title: FormatDax deprecation
 applies_to:
@@ -8,6 +8,7 @@ applies_to:
     - product: Tabular Editor 3
       none: true
 ---
+
 # FormatDax deprecation
 
 The `FormatDax` method (which is one of the available [helper methods](xref:advanced-scripting#helper-methods) in Tabular Editor) has been deprecated with the release of Tabular Editor 2.13.0.
@@ -15,6 +16,7 @@ The `FormatDax` method (which is one of the available [helper methods](xref:adva
 The reason for the deprecation is that the web service at https://www.daxformatter.com/ was starting to experience a heavy load of multiple request in quick succession, which were causing issues at their end. This is because the `FormatDax` method performs a web request each time it is called in a script, and many people have been using scripts such as the following:
 
 **Don't do this!**
+
 ```csharp
 foreach(var m in Model.AllMeasures)
 {
@@ -63,8 +65,8 @@ FormatDax(Model.AllMeasures);
 
 Technically, `FormatDax` has now been implemented as two overloaded extension methods:
 
-1) `void FormatDax(this IDaxDependantObject obj)`
-2) `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat = false, bool? skipSpaceAfterFunctionName = null)`
+1. `void FormatDax(this IDaxDependantObject obj)`
+2. `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat = false, bool? skipSpaceAfterFunctionName = null)`
 
 Overload #1 above will queue the provided object for formatting when script execution completes, or when a call is made to the new `void CallDaxFormatter()` method. Overload #2 will immediately call www.daxformatter.com with a single web request that will format all DAX expressions for all the objects provided in the enumerable. You may use either of these methods as you see fit.
 
