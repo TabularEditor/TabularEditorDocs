@@ -59,6 +59,7 @@ IsHidden = true
 ```
 
 To apply:
+
 1. In the **Best Practice Analyzer** select flagged foreign key columns
 2. Click **Apply Fix**
 
