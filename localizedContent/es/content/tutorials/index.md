@@ -21,4 +21,4 @@ This section contains comprehensive tutorials for learning Tabular Editor.
 
 ---
 
-*Navigate using the table of contents to find tutorials for your skill level.*
+_Navigate using the table of contents to find tutorials for your skill level._
