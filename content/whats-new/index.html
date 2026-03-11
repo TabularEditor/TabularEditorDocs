@@ -106,7 +106,7 @@
       function init() {
         var version = getParameterByName("version");
         if (!version) version = "generic"; else if (is_3_18_orGreater(version)) { deleteElementById("dax-optimizer-banner"); }
-        loadDivContent("/whats-new/" + urlify(version) + ".html", "version-specific-content");
+        loadDivContent(urlify(version) + ".html", "version-specific-content");
         applyStyle();
       }
       function is_3_18_orGreater(version) { const parts = version.split('.'); return parseInt(parts[0], 10) >= 3 && parseInt(parts[1], 10) >= 18; }
