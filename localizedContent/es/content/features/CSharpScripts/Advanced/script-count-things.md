@@ -10,10 +10,13 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Count Things in the Model
 
 ## Script Purpose
+
 If you want to get an overview of what's in a model and how many objects there are:
+
 - How many measures are in a model.
 - How many columns & calculated columns are in a model.
 - How many tables & calculated tables are in a model.
@@ -22,6 +25,7 @@ If you want to get an overview of what's in a model and how many objects there a
 ## Script
 
 ### Count the number of model objects by Type
+
 ```csharp
 // This script counts objects in your model and displays them in a pop-up info box.
 // It does not write any changes to this model.
@@ -189,13 +193,14 @@ Info ( "In the model, we see the below objects:\n\n"
         + " └─ Translations: " + 
             Convert.ToString(Model.Cultures.Count()));
 ```
+
 ### Explanation
-This snippet goes through the model and counts the different object types, displaying them in a hierarchical "node and tree" format that is manually constructed. 
-You can comment out the parts that you do not need for your purposes. 
+
+This snippet goes through the model and counts the different object types, displaying them in a hierarchical "node and tree" format that is manually constructed.
+You can comment out the parts that you do not need for your purposes.
 
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the Info box output, that informs the user about the number of objects in the model upon script execution. If particular objects are not of interest, the user can comment them out or remove them from the script, and re-run it.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the Info box output, that informs the user about the number of objects in the model upon script execution. If particular objects are not of interest, the user can comment them out or remove them from the script, and re-run it.</figcaption>
 </figure>
