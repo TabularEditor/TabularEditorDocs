@@ -1,4 +1,4 @@
-﻿---
+---
 uid: useful-script-snippets
 title: Useful script snippets
 author: Daniel Otykier
@@ -15,6 +15,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Useful Script Snippets
 
 Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](/Advanced-Scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](/Custom-Actions), so that you can easily reuse them from the context menu.'
@@ -24,6 +25,7 @@ Also, make sure to check out our script library @csharp-script-library, for some
 ***
 
 ## Create measures from columns
+
 ```csharp
 // Creates a SUM measure for every currently selected column and hide the column.
 foreach(var c in Selected.Columns)
@@ -44,12 +46,15 @@ foreach(var c in Selected.Columns)
     c.IsHidden = true;
 }
 ```
+
 This snippet uses the `<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` function to create a new measure on the table. We use the `DaxObjectFullName` property to get the fully qualified name of the column for use in the DAX expression: `'TableName'[ColumnName]`.
 
 ***
 
 ## Generate Time Intelligence measures
+
 First, create custom actions for individual Time Intelligence aggregations. For example:
+
 ```csharp
 // Creates a TOTALYTD measure for every selected measure.
 foreach(var m in Selected.Measures) {
@@ -60,6 +65,7 @@ foreach(var m in Selected.Measures) {
     );
 }
 ```
+
 Here, we use the `DaxObjectName` property, to generate an unqualified reference for use in the DAX expression, as this is a measure: `[MeasureName]`. Save this as a Custom Action called "Time Intelligence\Create YTD measure" that applies to measures. Create similar actions for MTD, LY, and whatever else you need. Then, create the following as a new action:
 
 ```csharp
@@ -68,6 +74,7 @@ CustomAction(@"Time Intelligence\Create YTD measure");
 CustomAction(@"Time Intelligence\Create MTD measure");
 CustomAction(@"Time Intelligence\Create LY measure");
 ```
+
 This illustrates how you can execute one (or more) Custom Actions from within another action (beware of circular references - that will cause Tabular Editor to crash). Save this as a new Custom Action "Time Intelligence\All of the above", and you will have an easy way to generate all your Time Intelligence measures with a single click:
 
 ![image](https://user-images.githubusercontent.com/8976200/36632257-5565c8ca-197c-11e8-8498-82667b6e1049.png)
@@ -200,6 +207,7 @@ void ApplyDefaultTranslation(ITranslatableObject obj, Culture culture)
 ***
 
 ## Handling perspectives
+
 Measures, columns, hierarchies and tables all expose the `InPerspective` property, which holds a True/False value for every perspective in the model, that indicates if the given object is a member of that perspective or not. So for example:
 
 ```csharp
@@ -214,10 +222,10 @@ The script above ensures that all selected measures are visible in the "Inventor
 
 In addition to getting/setting the membership in an individual perspective, the `InPerspective` property also supports the following methods:
 
-* `<<object>>.InPerspective.None()` - removes the object from all perspectives.
-* `<<object>>.InPerspective.All()` - includes the object in all perspectives.
-* `<<object>>.CopyFrom(string[] perspectives)` - includes the object in all specified perspectives (array of string containing names of the perspectives).
-* `<<object>>.CopyFrom(perspectiveIndexer perspectives)` - copies perspective inclusions from another `InPerspective` property.
+- `<<object>>.InPerspective.None()` - removes the object from all perspectives.
+- `<<object>>.InPerspective.All()` - includes the object in all perspectives.
+- `<<object>>.CopyFrom(string[] perspectives)` - includes the object in all specified perspectives (array of string containing names of the perspectives).
+- `<<object>>.CopyFrom(perspectiveIndexer perspectives)` - copies perspective inclusions from another `InPerspective` property.
 
 The latter may be used to copy perspective memberships from one object to another. For example, say have a base measure [Reseller Total Sales], and you want to make sure that all currently selected measures are visible in the same perspectives as this base measure. The following script does the trick:
 
@@ -289,34 +297,40 @@ while(currentPartition <= lastPartition)
 ***
 
 ## Export object properties to a file
+
 For some workflows, it may be useful to edit multiple object properties in bulk using Excel. Use the following snippet to export a standard set of properties to a .TSV file, which can then be subsequently imported (see below).
+
 ```csharp
 // Export properties for the currently selected objects:
 var tsv = ExportProperties(Selected);
 SaveFile("Exported Properties 1.tsv", tsv);
 ```
+
 The resulting .TSV file looks like this, when opened in Excel:
 ![image](https://user-images.githubusercontent.com/8976200/36632472-e8e96ef6-197e-11e8-8285-6816b09ad036.png)
 The contents of the first column (Object) is a reference to the object. If the contents of this column is changed, subsequent import of the properties might not work correctly. To change the name of an object, only change the value in the second column (Name).
 
 By default, the file is saved to the same folder as TabularEditor.exe is located. By default, only the following properties are exported (where applicable, depending on the type of object exported):
 
-* Name
-* Description
-* SourceColumn
-* Expression
-* FormatString
-* DataType
+- Name
+- Description
+- SourceColumn
+- Expression
+- FormatString
+- DataType
 
 To export different properties, supply a comma-separated list of property names to be exported as the 2nd argument to `ExportProperties`:
+
 ```csharp
 // Export the names and Detail Rows Expressions for all measures on the currently selected table:
 var tsv = ExportProperties(Selected.Table.Measures, "Name,DetailRowsExpression");
 SaveFile("Exported Properties 2.tsv", tsv);
 ```
+
 The available property names can be found in the [TOM API documentation](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.aspx). These are mostly identical to the names shown in the Tabular Editor property grid in CamelCase and with spaces removed (with a few exceptions, for example, the "Hidden" property is called `IsHidden` in the TOM API).
 
 To import properties, use the following snippet:
+
 ```csharp
 // Imports and applies the properties in the specified file:
 var tsv = ReadFile("Exported Properties 1.tsv");
@@ -367,6 +381,7 @@ SaveFile(@"c:\Project\ObjectTranslations.tsv", tsv);
 ***
 
 ## Generating documentation
+
 The `ExportProperties` method shown above, can also be used if you want to document all or parts of your model. The following snippet will extract a set of properties from all visible measures or columns in a Tabular Model, and save it as a TSV file:
 
 ```csharp
@@ -383,11 +398,12 @@ var tsv = ExportProperties(objects,"Name,ObjectType,Parent,Description,FormatStr
 // ...or save the TSV to a file:
 SaveFile("documentation.tsv", tsv);
 ```
+
 ***
 
 ## Generating measures from a file
 
-The above techniques of exporting/importing properties, is useful if you want to edit object properties in bulk of *existing* objects in your model. What if you want to import a list of measures that do not already exist?
+The above techniques of exporting/importing properties, is useful if you want to edit object properties in bulk of _existing_ objects in your model. What if you want to import a list of measures that do not already exist?
 
 Let's say you have a TSV (tab-separated values) file that contains Names, Descriptions and DAX Expressions of measures you'd like to import into an existing Tabular Model. You can use the following script to read in the file, split it out into rows and columns, and generate the measures. The script also assigns a special annotation to each measure, so that it can delete measures that were previously created using the same script.
 
@@ -441,15 +457,19 @@ start /wait TabularEditor.exe "localhost" "AdventureWorks" -S "c:\Projects\Autog
 ***
 
 ## Creating Data Columns from Partition Source metadata
+
 **Note:** If you're using version 2.7.2 or newer, make sure to try the new "Import Table..." feature.
 
 If a table uses a Query partition based on an OLE DB provider data source, we can automatically refresh the column metadata of that table by executing the following snippet:
+
 ```csharp
 Model.Tables["Reseller Sales"].RefreshDataColumns();
 ```
+
 This is useful when adding new tables to a model, to avoid having to create every Data Column on the table manually. The snippet above assumes that the partition source can be accessed locally, using the existing connection string of the Partition Source for the 'Reseller Sales' table. The snippet above will extract the schema from the partition query, and add a Data Column to the table for every column in the source query.
 
 If you need to supply a different connection string for this operation, you can do that in the snippet as well:
+
 ```csharp
 var source = Model.DataSources["DWH"] as ProviderDataSource;
 var oldConnectionString = source.ConnectionString;
@@ -457,11 +477,13 @@ source.ConnectionString = "...";   // Enter the connection string you want to us
 Model.Tables["Reseller Sales"].RefreshDataColumns();
 source.ConnectionString = oldConnectionString;
 ```
+
 This assumes that the partitions of the 'Reseller Sales' table is using a Provider Data Source with the name "DWH".
 
 ***
 
 ## Format DAX expressions
+
 Please see [FormatDax](/FormatDax) for more information.
 
 ```csharp
@@ -480,6 +502,7 @@ foreach(var m in Selected.Measures)
 ***
 
 ## Generate list of source columns for a table
+
 The following script outputs a nicely formatted list of source columns for the currently selected table. This may be useful if you want to replace partition queries that use `SELECT *` with explicit columns.
 
 ```csharp
@@ -493,6 +516,7 @@ string.Join(",\r\n",
 ***
 
 ## Auto-creating relationships
+
 If you're consistently using a certain set of naming conventions within your team, you'll quickly find that scripts can be even more powerful.
 
 The following script, when executed on one or more fact tables, will automatically create relationships to all relevant dimension tables, based on column names. The script will search for fact table columns having the name pattern `xxxyyyKey` where the xxx is an optional qualifier for role-playing use, and the yyy is the dimension table name. On the dimension table, a column named `yyyKey` must exist and have the same data type as the column on the fact table. For example, a column named "ProductKey" will be related to the "ProductKey" column on the Product table. You can specify a different column name suffix to use in place of "Key".
@@ -538,6 +562,7 @@ foreach(var fact in Selected.Tables)
 ***
 
 ## Create DumpFilters measure
+
 Inspired by [this article](https://www.sqlbi.com/articles/displaying-filter-context-in-power-bi-tooltips/), here's a script that will create a [DumpFilters] measure on the currently selected table:
 
 ```csharp
@@ -572,9 +597,9 @@ Selected.Table.AddMeasure("DumpFilters", dax);
 
 A common naming scheme for columns and tables on a relation database, is CamelCase. That is, names do not contain any spaces and individual words start with a capital letter. In a Tabular model, tables and columns that are not hidden, will be visible to business users, and so it would often be preferable to use a "prettier" naming scheme. The following script will convert CamelCased names to Proper Case. Sequences of uppercase letters are kept as-is (acronyms). For example, the script will convert the following:
 
-* `CustomerWorkZipcode` to `Customer Work Zipcode`
-* `CustomerAccountID` to `Customer Account ID`
-* `NSASecurityID` to `NSA Security ID`
+- `CustomerWorkZipcode` to `Customer Work Zipcode`
+- `CustomerAccountID` to `Customer Account ID`
+- `NSASecurityID` to `NSA Security ID`
 
 I highly recommend saving this script as a Custom Action that applies to all object types (except Relationships, KPIs, Table Permissions and Translations, as these do not have an editable "Name" property):
 
@@ -640,9 +665,11 @@ foreach(var m in Model.AllMeasures) {
 tsv.Output();   
 // SaveFile("c:\\MyProjects\\SSAS\\MeasureTableDependencies.tsv", tsv); // Uncomment this line to save output to a file
 ```
+
 ***
 
 ## Setting up Aggregations (Power BI Dataset only)
+
 As of [Tabular Editor 2.11.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.11.3), you can now set the `AlternateOf` property on a column, enabling you to define aggregation tables on your model. This feature is enabled for Power BI Datasets (Compatibility Level 1460 or higher) through the Power BI Service XMLA endpoint.
 
 Select a range of columns and run the following script to initiate the `AlternateOf` property on them:
@@ -683,12 +710,12 @@ As of version [2.12.1](https://github.com/TabularEditor/TabularEditor/releases/t
 
 The following methods are available:
 
-| Method | Description |
-| ------ | ----------- |
-| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | This methods passes the specified TMSL or XMLA script to the connected instance of Analysis Services. This is useful when you want to refresh data in a table on the AS instance. Note that if you use this method to perform metadata changes to your model, your local model metadata will become out-of-sync with the metadata on the AS instance, and you may receive a version conflict warning the next time you try to save the model metadata. Set the `isXmla` parameter to `true` if  sending an XMLA script. |
-| `IDataReader ExecuteReader(string dax)` | Executes the specified DAX *query* against the connected AS database and returns the resulting [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) object. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. Note that you can not have multiple open data readers at once. Tabular Editor will automatically close them in case you forget to explicitly close or dispose the reader. |
-| `DataSet ExecuteDax(string dax)` | Executes the specified DAX *query* against the connected AS database and returns a [DataSet](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) object containing the data returned from the query. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. The resulting DataSet object contains one DataTable for each `EVALUATE` statement. Returning very large data tables is not recommended as they may cause out-of-memory or other stability errors. |
-| `object EvaluateDax(string dax)` | Executes the specified DAX *expression* against the connected AS database and returns an object representing the result. If the DAX expression is scalar, an object of the relevant type is returned (string, long, decimal, double, DateTime). If the DAX expression is table-valued, a [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6) is returned. |
+| Method                                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | This methods passes the specified TMSL or XMLA script to the connected instance of Analysis Services. This is useful when you want to refresh data in a table on the AS instance. Note that if you use this method to perform metadata changes to your model, your local model metadata will become out-of-sync with the metadata on the AS instance, and you may receive a version conflict warning the next time you try to save the model metadata. Set the `isXmla` parameter to `true` if  sending an XMLA script.         |
+| `IDataReader ExecuteReader(string dax)`                       | Executes the specified DAX _query_ against the connected AS database and returns the resulting [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) object. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. Note that you can not have multiple open data readers at once. Tabular Editor will automatically close them in case you forget to explicitly close or dispose the reader.                       |
+| `DataSet ExecuteDax(string dax)`                              | Executes the specified DAX _query_ against the connected AS database and returns a [DataSet](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) object containing the data returned from the query. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. The resulting DataSet object contains one DataTable for each `EVALUATE` statement. Returning very large data tables is not recommended as they may cause out-of-memory or other stability errors. |
+| `object EvaluateDax(string dax)`                              | Executes the specified DAX _expression_ against the connected AS database and returns an object representing the result. If the DAX expression is scalar, an object of the relevant type is returned (string, long, decimal, double, DateTime). If the DAX expression is table-valued, a [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6) is returned.                                                                                                                   |
 
 The methods are scoped to the `Model.Database` object, but they can also be executed directly without any prefix.
 
@@ -748,6 +775,7 @@ And here's a more advanced example that allows you to select and evaluate multip
 var dax = "ROW(" + string.Join(",", Selected.Measures.Select(m => "\"" + m.Name + "\", " + m.DaxObjectFullName).ToArray()) + ")";
 EvaluateDax(dax).Output();
 ```
+
 ![image](https://user-images.githubusercontent.com/8976200/91638356-546c1580-ea0f-11ea-8302-3e40829e00dd.png)
 
 If you're really advanced, you could use SUMMARIZECOLUMNS or some other DAX function to visualize the selected measure sliced by some column:
@@ -847,7 +875,6 @@ foreach(var p in Model.AllPartitions.OfType<MPartition>())
 }
 ```
 
-
 ***
 
 ## Replace Power Query data sources and partitions with Legacy
@@ -859,6 +886,7 @@ To solve this issue, you can run the following script on your model, to replace 
 There are two versions of the script: The first one uses the MSOLEDBSQL provider for the created legacy data source, and hardcoded credentials. This is useful for local development. The second one uses the SQLNCLI provider, which is available on Microsoft-hosted build agents on Azure DevOps, and reads credentials and server/database names from environment variables, making the script useful for integration in Azure Pipelines.
 
 MSOLEDBSQL version, which reads connection information from M partitions and prompts for user name and password through Azure AD:
+
 ```csharp
 #r "Microsoft.VisualBasic"
 
@@ -918,6 +946,7 @@ foreach(var t in Model.Tables.Where(t => t.Partitions.OfType<MPartition>().Any()
 ```
 
 SQLNCLI version reading connection info from environment variables:
+
 ```csharp
 // This script replaces all Power Query partitions on this model with a
 // legacy partition, reading the SQL server name, database name, user name
