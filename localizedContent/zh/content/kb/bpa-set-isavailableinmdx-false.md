@@ -55,9 +55,11 @@ This rule includes an automatic fix expression. When you apply the fix in the Be
 ```csharp
 IsAvailableInMDX = false
 ```
+
 To apply:
+
 1. In the **Best Practice Analyzer** select flagged objects
-3. Click **Apply Fix**
+2. Click **Apply Fix**
 
 ### Manual Fix
 
@@ -79,6 +81,7 @@ CALCULATE(
 ```
 
 If this column is:
+
 - Hidden from client tools
 - Not used in any hierarchies or relationships
 - Not referenced by sort operations
