@@ -13,6 +13,7 @@
 /**/xdocoutput/
 /**/node_modules/
 /**/*.sln.ide/
+**/__pycache__/
 /TestResults/
 /.vs/
 .NuGet/
@@ -24,6 +25,9 @@ target/
 /localizedContent/en/
 /localizedContent/*/docfx.json
 !/localizedContent/*/.translation-status.json
+# Shared directories copied during build (not translated, always overwritten)
+/localizedContent/*/content/api/
+/localizedContent/*/content/assets/
 
 .vscode/
 .vs/
