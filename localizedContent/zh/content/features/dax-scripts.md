@@ -1,4 +1,4 @@
-﻿---
+---
 uid: dax-scripts
 title: DAX Scripts
 author: Daniel Otykier
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # DAX Scripts
 
 **DAX Script** allow you to view and edit DAX expressions and basic properties for multiple objects, in a single document. This is useful, for example, when complex business logic is spread out across multiple measures.
