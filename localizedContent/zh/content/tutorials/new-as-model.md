@@ -1,4 +1,4 @@
-﻿---
+---
 uid: new-as-model
 title: Create an Analysis Services Model
 author: Daniel Otykier
@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # (Tutorial) Creating your first Analysis Services Model
 
 This page walks you through the process of creating a new Analysis Services tabular model from scratch using Tabular Editor 3.
@@ -26,7 +27,7 @@ This page walks you through the process of creating a new Analysis Services tabu
 
 ##### Creating a new model
 
-- From the File menu, choose New > Model... or hit `CTRL+N` 
+- From the File menu, choose New > Model... or hit `CTRL+N`
 
 ![New model](https://user-images.githubusercontent.com/8976200/116813646-02a6fc80-ab55-11eb-89b0-8909b768ce7e.png)
 
@@ -58,13 +59,13 @@ In this example, we will create a Power Query data source, which we will use to 
 
 In our example, we set the following properties:
 
-| Property | Value |
-|---|---|
-| Name | `AdventureWorks` |
-| Protocol | `tds` |
-| Database | `AdventureWorksDW2017` |
-| Server | `localhost` |
-| AuthenticationKind | `ServiceAccount` |
+| Property           | Value                  |
+| ------------------ | ---------------------- |
+| Name               | `AdventureWorks`       |
+| Protocol           | `tds`                  |
+| Database           | `AdventureWorksDW2017` |
+| Server             | `localhost`            |
+| AuthenticationKind | `ServiceAccount`       |
 
 Hit Save (Ctrl+S). You will be prompted to provide a path and file name for the Model.bim file which will hold the model metadata that you have created so far. You may also save the model as a folder structure instead (File > Save to folder...), which is recommended if you plan to integrate your model metadata into a version controlled environment. If you are using a Workspace Database, Tabular Editor 3 will also synchronize the metadata to the connected instance of Analysis Services.
 
