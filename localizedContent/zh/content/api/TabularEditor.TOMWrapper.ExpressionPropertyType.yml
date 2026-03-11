@@ -1,0 +1,465 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+  commentId: T:TabularEditor.TOMWrapper.ExpressionPropertyType
+  id: ExpressionPropertyType
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.ExpressionPropertyType.Dax
+  - TabularEditor.TOMWrapper.ExpressionPropertyType.M
+  - TabularEditor.TOMWrapper.ExpressionPropertyType.Sql
+  langs:
+  - csharp
+  - vb
+  name: ExpressionPropertyType
+  nameWithType: ExpressionPropertyType
+  fullName: TabularEditor.TOMWrapper.ExpressionPropertyType
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public enum ExpressionPropertyType
+    content.vb: Public Enum ExpressionPropertyType
+  extensionMethods:
+  - TabularEditor.TOMWrapper.ExpressionPropertyType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType)
+  - TabularEditor.TOMWrapper.ExpressionPropertyType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType)
+  - TabularEditor.TOMWrapper.ExpressionPropertyType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ExpressionPropertyType)
+- uid: TabularEditor.TOMWrapper.ExpressionPropertyType.Dax
+  commentId: F:TabularEditor.TOMWrapper.ExpressionPropertyType.Dax
+  id: Dax
+  parent: TabularEditor.TOMWrapper.ExpressionPropertyType
+  langs:
+  - csharp
+  - vb
+  name: Dax
+  nameWithType: ExpressionPropertyType.Dax
+  fullName: TabularEditor.TOMWrapper.ExpressionPropertyType.Dax
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Dax = 0
+    return:
+      type: TabularEditor.TOMWrapper.ExpressionPropertyType
+- uid: TabularEditor.TOMWrapper.ExpressionPropertyType.M
+  commentId: F:TabularEditor.TOMWrapper.ExpressionPropertyType.M
+  id: M
+  parent: TabularEditor.TOMWrapper.ExpressionPropertyType
+  langs:
+  - csharp
+  - vb
+  name: M
+  nameWithType: ExpressionPropertyType.M
+  fullName: TabularEditor.TOMWrapper.ExpressionPropertyType.M
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: M = 1
+    return:
+      type: TabularEditor.TOMWrapper.ExpressionPropertyType
+- uid: TabularEditor.TOMWrapper.ExpressionPropertyType.Sql
+  commentId: F:TabularEditor.TOMWrapper.ExpressionPropertyType.Sql
+  id: Sql
+  parent: TabularEditor.TOMWrapper.ExpressionPropertyType
+  langs:
+  - csharp
+  - vb
+  name: Sql
+  nameWithType: ExpressionPropertyType.Sql
+  fullName: TabularEditor.TOMWrapper.ExpressionPropertyType.Sql
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Sql = 2
+    return:
+      type: TabularEditor.TOMWrapper.ExpressionPropertyType
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.ExpressionPropertyType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<ExpressionPropertyType>(ExpressionPropertyType, ExpressionPropertyType, ExpressionPropertyType)
+  nameWithType: EnumExtensions.AllFlagsChanged<ExpressionPropertyType>(ExpressionPropertyType, ExpressionPropertyType, ExpressionPropertyType)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.ExpressionPropertyType>(TabularEditor.TOMWrapper.ExpressionPropertyType, TabularEditor.TOMWrapper.ExpressionPropertyType, TabularEditor.TOMWrapper.ExpressionPropertyType)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of ExpressionPropertyType)(ExpressionPropertyType, ExpressionPropertyType, ExpressionPropertyType)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.ExpressionPropertyType)(TabularEditor.TOMWrapper.ExpressionPropertyType, TabularEditor.TOMWrapper.ExpressionPropertyType, TabularEditor.TOMWrapper.ExpressionPropertyType)
+  name.vb: AllFlagsChanged(Of ExpressionPropertyType)(ExpressionPropertyType, ExpressionPropertyType, ExpressionPropertyType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.ExpressionPropertyType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<ExpressionPropertyType>(ExpressionPropertyType, ExpressionPropertyType, ExpressionPropertyType)
+  nameWithType: EnumExtensions.AnyFlagsChanged<ExpressionPropertyType>(ExpressionPropertyType, ExpressionPropertyType, ExpressionPropertyType)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.ExpressionPropertyType>(TabularEditor.TOMWrapper.ExpressionPropertyType, TabularEditor.TOMWrapper.ExpressionPropertyType, TabularEditor.TOMWrapper.ExpressionPropertyType)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of ExpressionPropertyType)(ExpressionPropertyType, ExpressionPropertyType, ExpressionPropertyType)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.ExpressionPropertyType)(TabularEditor.TOMWrapper.ExpressionPropertyType, TabularEditor.TOMWrapper.ExpressionPropertyType, TabularEditor.TOMWrapper.ExpressionPropertyType)
+  name.vb: AnyFlagsChanged(Of ExpressionPropertyType)(ExpressionPropertyType, ExpressionPropertyType, ExpressionPropertyType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.ExpressionPropertyType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ExpressionPropertyType)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<ExpressionPropertyType>(ExpressionPropertyType, ExpressionPropertyType)
+  nameWithType: EnumExtensions.HasAnyFlags<ExpressionPropertyType>(ExpressionPropertyType, ExpressionPropertyType)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.ExpressionPropertyType>(TabularEditor.TOMWrapper.ExpressionPropertyType, TabularEditor.TOMWrapper.ExpressionPropertyType)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of ExpressionPropertyType)(ExpressionPropertyType, ExpressionPropertyType)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.ExpressionPropertyType)(TabularEditor.TOMWrapper.ExpressionPropertyType, TabularEditor.TOMWrapper.ExpressionPropertyType)
+  name.vb: HasAnyFlags(Of ExpressionPropertyType)(ExpressionPropertyType, ExpressionPropertyType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ExpressionPropertyType,TabularEditor.TOMWrapper.ExpressionPropertyType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+  commentId: T:TabularEditor.TOMWrapper.ExpressionPropertyType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExpressionPropertyType.html
+  name: ExpressionPropertyType
+  nameWithType: ExpressionPropertyType
+  fullName: TabularEditor.TOMWrapper.ExpressionPropertyType

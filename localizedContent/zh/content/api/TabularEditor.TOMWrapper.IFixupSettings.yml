@@ -1,0 +1,267 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.IFixupSettings
+  commentId: T:TabularEditor.TOMWrapper.IFixupSettings
+  id: IFixupSettings
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier
+  - TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes
+  - TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier
+  langs:
+  - csharp
+  - vb
+  name: IFixupSettings
+  nameWithType: IFixupSettings
+  fullName: TabularEditor.TOMWrapper.IFixupSettings
+  type: Interface
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public interface IFixupSettings
+    content.vb: Public Interface IFixupSettings
+  derivedClasses:
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes
+  commentId: P:TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes
+  id: AlwaysAddQuotes
+  parent: TabularEditor.TOMWrapper.IFixupSettings
+  langs:
+  - csharp
+  - vb
+  name: AlwaysAddQuotes
+  nameWithType: IFixupSettings.AlwaysAddQuotes
+  fullName: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: bool AlwaysAddQuotes { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly Property AlwaysAddQuotes As Boolean
+  overload: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes*
+- uid: TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier
+  commentId: P:TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier
+  id: AlwaysRemoveMeasureQualifier
+  parent: TabularEditor.TOMWrapper.IFixupSettings
+  langs:
+  - csharp
+  - vb
+  name: AlwaysRemoveMeasureQualifier
+  nameWithType: IFixupSettings.AlwaysRemoveMeasureQualifier
+  fullName: TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: bool AlwaysRemoveMeasureQualifier { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly Property AlwaysRemoveMeasureQualifier As Boolean
+  overload: TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier*
+- uid: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier
+  commentId: P:TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier
+  id: AlwaysAddColumnQualifier
+  parent: TabularEditor.TOMWrapper.IFixupSettings
+  langs:
+  - csharp
+  - vb
+  name: AlwaysAddColumnQualifier
+  nameWithType: IFixupSettings.AlwaysAddColumnQualifier
+  fullName: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: bool AlwaysAddColumnQualifier { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly Property AlwaysAddColumnQualifier As Boolean
+  overload: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes*
+  commentId: Overload:TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IFixupSettings.html#TabularEditor_TOMWrapper_IFixupSettings_AlwaysAddQuotes
+  name: AlwaysAddQuotes
+  nameWithType: IFixupSettings.AlwaysAddQuotes
+  fullName: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier*
+  commentId: Overload:TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IFixupSettings.html#TabularEditor_TOMWrapper_IFixupSettings_AlwaysRemoveMeasureQualifier
+  name: AlwaysRemoveMeasureQualifier
+  nameWithType: IFixupSettings.AlwaysRemoveMeasureQualifier
+  fullName: TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier
+- uid: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier*
+  commentId: Overload:TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IFixupSettings.html#TabularEditor_TOMWrapper_IFixupSettings_AlwaysAddColumnQualifier
+  name: AlwaysAddColumnQualifier
+  nameWithType: IFixupSettings.AlwaysAddColumnQualifier
+  fullName: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier

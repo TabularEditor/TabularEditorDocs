@@ -1,0 +1,123 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  commentId: T:TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  id: DiagnosticSeverity
+  parent: TabularEditor.SemanticBridge.Orchestration
+  children:
+  - TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Error
+  - TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Information
+  - TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Warning
+  langs:
+  - csharp
+  - vb
+  name: DiagnosticSeverity
+  nameWithType: DiagnosticSeverity
+  fullName: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  type: Enum
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Orchestration
+  syntax:
+    content: public enum DiagnosticSeverity
+    content.vb: Public Enum DiagnosticSeverity
+- uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Error
+  commentId: F:TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Error
+  id: Error
+  parent: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  langs:
+  - csharp
+  - vb
+  name: Error
+  nameWithType: DiagnosticSeverity.Error
+  fullName: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Error
+  type: Field
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Orchestration
+  syntax:
+    content: Error = 0
+    return:
+      type: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+- uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Warning
+  commentId: F:TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Warning
+  id: Warning
+  parent: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  langs:
+  - csharp
+  - vb
+  name: Warning
+  nameWithType: DiagnosticSeverity.Warning
+  fullName: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Warning
+  type: Field
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Orchestration
+  syntax:
+    content: Warning = 1
+    return:
+      type: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+- uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Information
+  commentId: F:TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Information
+  id: Information
+  parent: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  langs:
+  - csharp
+  - vb
+  name: Information
+  nameWithType: DiagnosticSeverity.Information
+  fullName: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.Information
+  type: Field
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Orchestration
+  syntax:
+    content: Information = 2
+    return:
+      type: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+references:
+- uid: TabularEditor.SemanticBridge.Orchestration
+  commentId: N:TabularEditor.SemanticBridge.Orchestration
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.SemanticBridge.Orchestration
+  nameWithType: TabularEditor.SemanticBridge.Orchestration
+  fullName: TabularEditor.SemanticBridge.Orchestration
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Orchestration
+    name: Orchestration
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Orchestration.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Orchestration
+    name: Orchestration
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Orchestration.html
+- uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  commentId: T:TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  parent: TabularEditor.SemanticBridge.Orchestration
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.html
+  name: DiagnosticSeverity
+  nameWithType: DiagnosticSeverity
+  fullName: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity

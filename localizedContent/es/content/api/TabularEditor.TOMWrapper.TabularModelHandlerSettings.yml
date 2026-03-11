@@ -1,0 +1,1642 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  commentId: T:TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  id: TabularModelHandlerSettings
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.#ctor
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.#ctor(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowCalculateShortcutMeasuresAndAggFunctions
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDateLiterals
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDirectionalCrossFilter
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowMultiColumnPredicates
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowTableNamedVariables
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddColumnQualifier
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddQuotes
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysRemoveMeasureQualifier
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AsEngineVersion
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixup
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixupDataTypes
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoRefreshDirectLake
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.ChangeDetectionLocalServers
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.Default
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.DisallowDirectLake
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.EqualityContract
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals(System.Object)
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.GetHashCode
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.NoSemanticAnalysis
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.PBIFeaturesOnly
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.PrintMembers(System.Text.StringBuilder)
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.ReadOnly
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.SemanticAnalysisEnabled
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.ShowWarningUnusedVariable
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.ToString
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.UsePowerQueryPartitionsByDefault
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Equality(TabularEditor.TOMWrapper.TabularModelHandlerSettings,TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  - TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Inequality(TabularEditor.TOMWrapper.TabularModelHandlerSettings,TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  langs:
+  - csharp
+  - vb
+  name: TabularModelHandlerSettings
+  nameWithType: TabularModelHandlerSettings
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: 'public record TabularModelHandlerSettings : IFixupSettings, IEquatable<TabularModelHandlerSettings>'
+    content.vb: Public Class TabularModelHandlerSettings Implements IFixupSettings, IEquatable(Of TabularModelHandlerSettings)
+  inheritance:
+  - System.Object
+  implements:
+  - TabularEditor.TOMWrapper.IFixupSettings
+  - System.IEquatable{TabularEditor.TOMWrapper.TabularModelHandlerSettings}
+  inheritedMembers:
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ToString
+  commentId: M:TabularEditor.TOMWrapper.TabularModelHandlerSettings.ToString
+  id: ToString
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: TabularModelHandlerSettings.ToString()
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ToString()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.Object.ToString
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ToString*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.PrintMembers(System.Text.StringBuilder)
+  commentId: M:TabularEditor.TOMWrapper.TabularModelHandlerSettings.PrintMembers(System.Text.StringBuilder)
+  id: PrintMembers(System.Text.StringBuilder)
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: PrintMembers(StringBuilder)
+  nameWithType: TabularModelHandlerSettings.PrintMembers(StringBuilder)
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.PrintMembers(System.Text.StringBuilder)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: protected virtual bool PrintMembers(StringBuilder builder)
+    parameters:
+    - id: builder
+      type: System.Text.StringBuilder
+    return:
+      type: System.Boolean
+    content.vb: Protected Overridable Function PrintMembers(builder As StringBuilder) As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.PrintMembers*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Inequality(TabularEditor.TOMWrapper.TabularModelHandlerSettings,TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  commentId: M:TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Inequality(TabularEditor.TOMWrapper.TabularModelHandlerSettings,TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  id: op_Inequality(TabularEditor.TOMWrapper.TabularModelHandlerSettings,TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: operator !=(TabularModelHandlerSettings?, TabularModelHandlerSettings?)
+  nameWithType: TabularModelHandlerSettings.operator !=(TabularModelHandlerSettings?, TabularModelHandlerSettings?)
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.operator !=(TabularEditor.TOMWrapper.TabularModelHandlerSettings?, TabularEditor.TOMWrapper.TabularModelHandlerSettings?)
+  type: Operator
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool operator !=(TabularModelHandlerSettings? left, TabularModelHandlerSettings? right)
+    parameters:
+    - id: left
+      type: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    - id: right
+      type: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(left As TabularModelHandlerSettings, right As TabularModelHandlerSettings) As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Inequality*
+  nameWithType.vb: TabularModelHandlerSettings.<>(TabularModelHandlerSettings, TabularModelHandlerSettings)
+  fullName.vb: TabularEditor.TOMWrapper.TabularModelHandlerSettings.<>(TabularEditor.TOMWrapper.TabularModelHandlerSettings, TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  name.vb: <>(TabularModelHandlerSettings, TabularModelHandlerSettings)
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Equality(TabularEditor.TOMWrapper.TabularModelHandlerSettings,TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  commentId: M:TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Equality(TabularEditor.TOMWrapper.TabularModelHandlerSettings,TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  id: op_Equality(TabularEditor.TOMWrapper.TabularModelHandlerSettings,TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: operator ==(TabularModelHandlerSettings?, TabularModelHandlerSettings?)
+  nameWithType: TabularModelHandlerSettings.operator ==(TabularModelHandlerSettings?, TabularModelHandlerSettings?)
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.operator ==(TabularEditor.TOMWrapper.TabularModelHandlerSettings?, TabularEditor.TOMWrapper.TabularModelHandlerSettings?)
+  type: Operator
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool operator ==(TabularModelHandlerSettings? left, TabularModelHandlerSettings? right)
+    parameters:
+    - id: left
+      type: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    - id: right
+      type: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(left As TabularModelHandlerSettings, right As TabularModelHandlerSettings) As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Equality*
+  nameWithType.vb: TabularModelHandlerSettings.=(TabularModelHandlerSettings, TabularModelHandlerSettings)
+  fullName.vb: TabularEditor.TOMWrapper.TabularModelHandlerSettings.=(TabularEditor.TOMWrapper.TabularModelHandlerSettings, TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  name.vb: =(TabularModelHandlerSettings, TabularModelHandlerSettings)
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.GetHashCode
+  commentId: M:TabularEditor.TOMWrapper.TabularModelHandlerSettings.GetHashCode
+  id: GetHashCode
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: TabularModelHandlerSettings.GetHashCode()
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.GetHashCode()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.Object.GetHashCode
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.GetHashCode*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals(System.Object)
+  commentId: M:TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: TabularModelHandlerSettings.Equals(object?)
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals(object?)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+    return:
+      type: System.Boolean
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals*
+  nameWithType.vb: TabularModelHandlerSettings.Equals(Object)
+  fullName.vb: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals(Object)
+  name.vb: Equals(Object)
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  commentId: M:TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  id: Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: Equals(TabularModelHandlerSettings?)
+  nameWithType: TabularModelHandlerSettings.Equals(TabularModelHandlerSettings?)
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings?)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public virtual bool Equals(TabularModelHandlerSettings? other)
+    parameters:
+    - id: other
+      type: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    return:
+      type: System.Boolean
+    content.vb: Public Overridable Function Equals(other As TabularModelHandlerSettings) As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals*
+  implements:
+  - System.IEquatable{TabularEditor.TOMWrapper.TabularModelHandlerSettings}.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  nameWithType.vb: TabularModelHandlerSettings.Equals(TabularModelHandlerSettings)
+  fullName.vb: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  name.vb: Equals(TabularModelHandlerSettings)
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.#ctor(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  commentId: M:TabularEditor.TOMWrapper.TabularModelHandlerSettings.#ctor(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  id: '#ctor(TabularEditor.TOMWrapper.TabularModelHandlerSettings)'
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: TabularModelHandlerSettings(TabularModelHandlerSettings)
+  nameWithType: TabularModelHandlerSettings.TabularModelHandlerSettings(TabularModelHandlerSettings)
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.TabularModelHandlerSettings(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  type: Constructor
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: protected TabularModelHandlerSettings(TabularModelHandlerSettings original)
+    parameters:
+    - id: original
+      type: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    content.vb: Protected Sub New(original As TabularModelHandlerSettings)
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.#ctor*
+  nameWithType.vb: TabularModelHandlerSettings.New(TabularModelHandlerSettings)
+  fullName.vb: TabularEditor.TOMWrapper.TabularModelHandlerSettings.New(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  name.vb: New(TabularModelHandlerSettings)
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.#ctor
+  commentId: M:TabularEditor.TOMWrapper.TabularModelHandlerSettings.#ctor
+  id: '#ctor'
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: TabularModelHandlerSettings()
+  nameWithType: TabularModelHandlerSettings.TabularModelHandlerSettings()
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.TabularModelHandlerSettings()
+  type: Constructor
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public TabularModelHandlerSettings()
+    content.vb: Public Sub New()
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.#ctor*
+  nameWithType.vb: TabularModelHandlerSettings.New()
+  fullName.vb: TabularEditor.TOMWrapper.TabularModelHandlerSettings.New()
+  name.vb: New()
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.EqualityContract
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.EqualityContract
+  id: EqualityContract
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: EqualityContract
+  nameWithType: TabularModelHandlerSettings.EqualityContract
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.EqualityContract
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: protected virtual Type EqualityContract { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: Protected Overridable ReadOnly Property EqualityContract As Type
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.EqualityContract*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.SemanticAnalysisEnabled
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.SemanticAnalysisEnabled
+  id: SemanticAnalysisEnabled
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: SemanticAnalysisEnabled
+  nameWithType: TabularModelHandlerSettings.SemanticAnalysisEnabled
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.SemanticAnalysisEnabled
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: When enabled, Tabular Editor uses the DAX Semantic Analyzer to infer static information (syntax errors, data types, calculated table columns).
+  example: []
+  syntax:
+    content: public bool SemanticAnalysisEnabled { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property SemanticAnalysisEnabled As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.SemanticAnalysisEnabled*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AsEngineVersion
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AsEngineVersion
+  id: AsEngineVersion
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AsEngineVersion
+  nameWithType: TabularModelHandlerSettings.AsEngineVersion
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AsEngineVersion
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public AsEngineVersionOverride AsEngineVersion { get; init; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.AsEngineVersionOverride
+    content.vb: Public Property AsEngineVersion As AsEngineVersionOverride
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AsEngineVersion*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowMultiColumnPredicates
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowMultiColumnPredicates
+  id: AllowMultiColumnPredicates
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AllowMultiColumnPredicates
+  nameWithType: TabularModelHandlerSettings.AllowMultiColumnPredicates
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowMultiColumnPredicates
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public SemanticEngineFeatureOverride AllowMultiColumnPredicates { get; init; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    content.vb: Public Property AllowMultiColumnPredicates As SemanticEngineFeatureOverride
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowMultiColumnPredicates*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDirectionalCrossFilter
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDirectionalCrossFilter
+  id: AllowDirectionalCrossFilter
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AllowDirectionalCrossFilter
+  nameWithType: TabularModelHandlerSettings.AllowDirectionalCrossFilter
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDirectionalCrossFilter
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public SemanticEngineFeatureOverride AllowDirectionalCrossFilter { get; init; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    content.vb: Public Property AllowDirectionalCrossFilter As SemanticEngineFeatureOverride
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDirectionalCrossFilter*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDateLiterals
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDateLiterals
+  id: AllowDateLiterals
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AllowDateLiterals
+  nameWithType: TabularModelHandlerSettings.AllowDateLiterals
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDateLiterals
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public SemanticEngineFeatureOverride AllowDateLiterals { get; init; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    content.vb: Public Property AllowDateLiterals As SemanticEngineFeatureOverride
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDateLiterals*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowCalculateShortcutMeasuresAndAggFunctions
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowCalculateShortcutMeasuresAndAggFunctions
+  id: AllowCalculateShortcutMeasuresAndAggFunctions
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AllowCalculateShortcutMeasuresAndAggFunctions
+  nameWithType: TabularModelHandlerSettings.AllowCalculateShortcutMeasuresAndAggFunctions
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowCalculateShortcutMeasuresAndAggFunctions
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public SemanticEngineFeatureOverride AllowCalculateShortcutMeasuresAndAggFunctions { get; init; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    content.vb: Public Property AllowCalculateShortcutMeasuresAndAggFunctions As SemanticEngineFeatureOverride
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowCalculateShortcutMeasuresAndAggFunctions*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowTableNamedVariables
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowTableNamedVariables
+  id: AllowTableNamedVariables
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AllowTableNamedVariables
+  nameWithType: TabularModelHandlerSettings.AllowTableNamedVariables
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowTableNamedVariables
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public SemanticEngineFeatureOverride AllowTableNamedVariables { get; init; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    content.vb: Public Property AllowTableNamedVariables As SemanticEngineFeatureOverride
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowTableNamedVariables*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ShowWarningUnusedVariable
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.ShowWarningUnusedVariable
+  id: ShowWarningUnusedVariable
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: ShowWarningUnusedVariable
+  nameWithType: TabularModelHandlerSettings.ShowWarningUnusedVariable
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ShowWarningUnusedVariable
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public bool ShowWarningUnusedVariable { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property ShowWarningUnusedVariable As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ShowWarningUnusedVariable*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.UsePowerQueryPartitionsByDefault
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.UsePowerQueryPartitionsByDefault
+  id: UsePowerQueryPartitionsByDefault
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: UsePowerQueryPartitionsByDefault
+  nameWithType: TabularModelHandlerSettings.UsePowerQueryPartitionsByDefault
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.UsePowerQueryPartitionsByDefault
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Set to true to always add a PowerQuery (M) partition by default to newly created tables
+  example: []
+  syntax:
+    content: public bool UsePowerQueryPartitionsByDefault { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property UsePowerQueryPartitionsByDefault As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.UsePowerQueryPartitionsByDefault*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ChangeDetectionLocalServers
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.ChangeDetectionLocalServers
+  id: ChangeDetectionLocalServers
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: ChangeDetectionLocalServers
+  nameWithType: TabularModelHandlerSettings.ChangeDetectionLocalServers
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ChangeDetectionLocalServers
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: >-
+    Specifies whether an AS trace should be started to monitor the server for changes
+
+    made by other applications.
+  example: []
+  syntax:
+    content: public bool ChangeDetectionLocalServers { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property ChangeDetectionLocalServers As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ChangeDetectionLocalServers*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixup
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixup
+  id: AutoFixup
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AutoFixup
+  nameWithType: TabularModelHandlerSettings.AutoFixup
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixup
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: >-
+    Specifies whether object name changes (tables, column, measures) should result in 
+
+    automatic DAX expression updates to reflect the changed names. When set to true,
+
+    all expressions in the model are parsed, to build a dependency tree.
+  example: []
+  syntax:
+    content: public bool AutoFixup { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property AutoFixup As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixup*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoRefreshDirectLake
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoRefreshDirectLake
+  id: AutoRefreshDirectLake
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AutoRefreshDirectLake
+  nameWithType: TabularModelHandlerSettings.AutoRefreshDirectLake
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoRefreshDirectLake
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: >-
+    When tables are added to a DirectLake model, they will need to be explicitly
+
+    refreshed once. Otherwise, all queries will fall back to DirectQuery mode.
+  example: []
+  syntax:
+    content: public bool AutoRefreshDirectLake { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property AutoRefreshDirectLake As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoRefreshDirectLake*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixupDataTypes
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixupDataTypes
+  id: AutoFixupDataTypes
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AutoFixupDataTypes
+  nameWithType: TabularModelHandlerSettings.AutoFixupDataTypes
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixupDataTypes
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public bool AutoFixupDataTypes { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property AutoFixupDataTypes As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixupDataTypes*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.PBIFeaturesOnly
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.PBIFeaturesOnly
+  id: PBIFeaturesOnly
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: PBIFeaturesOnly
+  nameWithType: TabularModelHandlerSettings.PBIFeaturesOnly
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.PBIFeaturesOnly
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: >-
+    If this is set to TRUE, only features supported by Power BI may be browsed/edited
+
+    through the TOMWrapper. This is useful for example when a .pbit file has been loaded,
+
+    or when connected to a Power BI Desktop instance.
+  example: []
+  syntax:
+    content: public bool PBIFeaturesOnly { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property PBIFeaturesOnly As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.PBIFeaturesOnly*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.DisallowDirectLake
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.DisallowDirectLake
+  id: DisallowDirectLake
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: DisallowDirectLake
+  nameWithType: TabularModelHandlerSettings.DisallowDirectLake
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.DisallowDirectLake
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: When this is set to true, the TOMWrapper will not allow you to create DirectLake partitions.
+  example: []
+  syntax:
+    content: public bool DisallowDirectLake { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property DisallowDirectLake As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.DisallowDirectLake*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ReadOnly
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.ReadOnly
+  id: ReadOnly
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: ReadOnly
+  nameWithType: TabularModelHandlerSettings.ReadOnly
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ReadOnly
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public bool ReadOnly { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property [ReadOnly] As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ReadOnly*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Default
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.Default
+  id: Default
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: Default
+  nameWithType: TabularModelHandlerSettings.Default
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Default
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static TabularModelHandlerSettings Default { get; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    content.vb: Public Shared ReadOnly Property [Default] As TabularModelHandlerSettings
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Default*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.NoSemanticAnalysis
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.NoSemanticAnalysis
+  id: NoSemanticAnalysis
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: NoSemanticAnalysis
+  nameWithType: TabularModelHandlerSettings.NoSemanticAnalysis
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.NoSemanticAnalysis
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static TabularModelHandlerSettings NoSemanticAnalysis { get; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    content.vb: Public Shared ReadOnly Property NoSemanticAnalysis As TabularModelHandlerSettings
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.NoSemanticAnalysis*
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddQuotes
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddQuotes
+  id: AlwaysAddQuotes
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AlwaysAddQuotes
+  nameWithType: TabularModelHandlerSettings.AlwaysAddQuotes
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddQuotes
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public bool AlwaysAddQuotes { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property AlwaysAddQuotes As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddQuotes*
+  implements:
+  - TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysRemoveMeasureQualifier
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysRemoveMeasureQualifier
+  id: AlwaysRemoveMeasureQualifier
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AlwaysRemoveMeasureQualifier
+  nameWithType: TabularModelHandlerSettings.AlwaysRemoveMeasureQualifier
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysRemoveMeasureQualifier
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public bool AlwaysRemoveMeasureQualifier { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property AlwaysRemoveMeasureQualifier As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysRemoveMeasureQualifier*
+  implements:
+  - TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddColumnQualifier
+  commentId: P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddColumnQualifier
+  id: AlwaysAddColumnQualifier
+  parent: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  langs:
+  - csharp
+  - vb
+  name: AlwaysAddColumnQualifier
+  nameWithType: TabularModelHandlerSettings.AlwaysAddColumnQualifier
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddColumnQualifier
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public bool AlwaysAddColumnQualifier { get; init; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property AlwaysAddColumnQualifier As Boolean
+  overload: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddColumnQualifier*
+  implements:
+  - TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: TabularEditor.TOMWrapper.IFixupSettings
+  commentId: T:TabularEditor.TOMWrapper.IFixupSettings
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IFixupSettings.html
+  name: IFixupSettings
+  nameWithType: IFixupSettings
+  fullName: TabularEditor.TOMWrapper.IFixupSettings
+- uid: System.IEquatable{TabularEditor.TOMWrapper.TabularModelHandlerSettings}
+  commentId: T:System.IEquatable{TabularEditor.TOMWrapper.TabularModelHandlerSettings}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<TabularModelHandlerSettings>
+  nameWithType: IEquatable<TabularModelHandlerSettings>
+  fullName: System.IEquatable<TabularEditor.TOMWrapper.TabularModelHandlerSettings>
+  nameWithType.vb: IEquatable(Of TabularModelHandlerSettings)
+  fullName.vb: System.IEquatable(Of TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  name.vb: IEquatable(Of TabularModelHandlerSettings)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    name: TabularModelHandlerSettings
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    name: TabularModelHandlerSettings
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ToString*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.ToString
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_ToString
+  name: ToString
+  nameWithType: TabularModelHandlerSettings.ToString
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.PrintMembers*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.PrintMembers
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_PrintMembers_System_Text_StringBuilder_
+  name: PrintMembers
+  nameWithType: TabularModelHandlerSettings.PrintMembers
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.PrintMembers
+- uid: System.Text.StringBuilder
+  commentId: T:System.Text.StringBuilder
+  parent: System.Text
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.stringbuilder
+  name: StringBuilder
+  nameWithType: StringBuilder
+  fullName: System.Text.StringBuilder
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Text
+  commentId: N:System.Text
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Text
+  nameWithType: System.Text
+  fullName: System.Text
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Inequality*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Inequality
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_op_Inequality_TabularEditor_TOMWrapper_TabularModelHandlerSettings_TabularEditor_TOMWrapper_TabularModelHandlerSettings_
+  name: operator !=
+  nameWithType: TabularModelHandlerSettings.operator !=
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.operator !=
+  nameWithType.vb: TabularModelHandlerSettings.<>
+  fullName.vb: TabularEditor.TOMWrapper.TabularModelHandlerSettings.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Inequality*
+    name: '!='
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_op_Inequality_TabularEditor_TOMWrapper_TabularModelHandlerSettings_TabularEditor_TOMWrapper_TabularModelHandlerSettings_
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  commentId: T:TabularEditor.TOMWrapper.TabularModelHandlerSettings
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html
+  name: TabularModelHandlerSettings
+  nameWithType: TabularModelHandlerSettings
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Equality*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Equality
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_op_Equality_TabularEditor_TOMWrapper_TabularModelHandlerSettings_TabularEditor_TOMWrapper_TabularModelHandlerSettings_
+  name: operator ==
+  nameWithType: TabularModelHandlerSettings.operator ==
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.operator ==
+  nameWithType.vb: TabularModelHandlerSettings.=
+  fullName.vb: TabularEditor.TOMWrapper.TabularModelHandlerSettings.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.op_Equality*
+    name: ==
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_op_Equality_TabularEditor_TOMWrapper_TabularModelHandlerSettings_TabularEditor_TOMWrapper_TabularModelHandlerSettings_
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.GetHashCode*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.GetHashCode
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_GetHashCode
+  name: GetHashCode
+  nameWithType: TabularModelHandlerSettings.GetHashCode
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_Equals_System_Object_
+  name: Equals
+  nameWithType: TabularModelHandlerSettings.Equals
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Equals
+- uid: System.IEquatable{TabularEditor.TOMWrapper.TabularModelHandlerSettings}.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  commentId: M:System.IEquatable{TabularEditor.TOMWrapper.TabularModelHandlerSettings}.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  parent: System.IEquatable{TabularEditor.TOMWrapper.TabularModelHandlerSettings}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(TabularModelHandlerSettings)
+  nameWithType: IEquatable<TabularModelHandlerSettings>.Equals(TabularModelHandlerSettings)
+  fullName: System.IEquatable<TabularEditor.TOMWrapper.TabularModelHandlerSettings>.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  nameWithType.vb: IEquatable(Of TabularModelHandlerSettings).Equals(TabularModelHandlerSettings)
+  fullName.vb: System.IEquatable(Of TabularEditor.TOMWrapper.TabularModelHandlerSettings).Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+  spec.csharp:
+  - uid: System.IEquatable{TabularEditor.TOMWrapper.TabularModelHandlerSettings}.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    name: TabularModelHandlerSettings
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{TabularEditor.TOMWrapper.TabularModelHandlerSettings}.Equals(TabularEditor.TOMWrapper.TabularModelHandlerSettings)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    name: TabularModelHandlerSettings
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.#ctor*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.#ctor
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings__ctor_TabularEditor_TOMWrapper_TabularModelHandlerSettings_
+  name: TabularModelHandlerSettings
+  nameWithType: TabularModelHandlerSettings.TabularModelHandlerSettings
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.TabularModelHandlerSettings
+  nameWithType.vb: TabularModelHandlerSettings.New
+  fullName.vb: TabularEditor.TOMWrapper.TabularModelHandlerSettings.New
+  name.vb: New
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.EqualityContract*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.EqualityContract
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_EqualityContract
+  name: EqualityContract
+  nameWithType: TabularModelHandlerSettings.EqualityContract
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.EqualityContract
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.SemanticAnalysisEnabled*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.SemanticAnalysisEnabled
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_SemanticAnalysisEnabled
+  name: SemanticAnalysisEnabled
+  nameWithType: TabularModelHandlerSettings.SemanticAnalysisEnabled
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.SemanticAnalysisEnabled
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AsEngineVersion*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AsEngineVersion
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AsEngineVersion
+  name: AsEngineVersion
+  nameWithType: TabularModelHandlerSettings.AsEngineVersion
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AsEngineVersion
+- uid: TabularEditor.TOMWrapper.AsEngineVersionOverride
+  commentId: T:TabularEditor.TOMWrapper.AsEngineVersionOverride
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.AsEngineVersionOverride.html
+  name: AsEngineVersionOverride
+  nameWithType: AsEngineVersionOverride
+  fullName: TabularEditor.TOMWrapper.AsEngineVersionOverride
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowMultiColumnPredicates*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowMultiColumnPredicates
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AllowMultiColumnPredicates
+  name: AllowMultiColumnPredicates
+  nameWithType: TabularModelHandlerSettings.AllowMultiColumnPredicates
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowMultiColumnPredicates
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+  commentId: T:TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride.html
+  name: SemanticEngineFeatureOverride
+  nameWithType: SemanticEngineFeatureOverride
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDirectionalCrossFilter*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDirectionalCrossFilter
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AllowDirectionalCrossFilter
+  name: AllowDirectionalCrossFilter
+  nameWithType: TabularModelHandlerSettings.AllowDirectionalCrossFilter
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDirectionalCrossFilter
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDateLiterals*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDateLiterals
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AllowDateLiterals
+  name: AllowDateLiterals
+  nameWithType: TabularModelHandlerSettings.AllowDateLiterals
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowDateLiterals
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowCalculateShortcutMeasuresAndAggFunctions*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowCalculateShortcutMeasuresAndAggFunctions
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AllowCalculateShortcutMeasuresAndAggFunctions
+  name: AllowCalculateShortcutMeasuresAndAggFunctions
+  nameWithType: TabularModelHandlerSettings.AllowCalculateShortcutMeasuresAndAggFunctions
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowCalculateShortcutMeasuresAndAggFunctions
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowTableNamedVariables*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowTableNamedVariables
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AllowTableNamedVariables
+  name: AllowTableNamedVariables
+  nameWithType: TabularModelHandlerSettings.AllowTableNamedVariables
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AllowTableNamedVariables
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ShowWarningUnusedVariable*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.ShowWarningUnusedVariable
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_ShowWarningUnusedVariable
+  name: ShowWarningUnusedVariable
+  nameWithType: TabularModelHandlerSettings.ShowWarningUnusedVariable
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ShowWarningUnusedVariable
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.UsePowerQueryPartitionsByDefault*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.UsePowerQueryPartitionsByDefault
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_UsePowerQueryPartitionsByDefault
+  name: UsePowerQueryPartitionsByDefault
+  nameWithType: TabularModelHandlerSettings.UsePowerQueryPartitionsByDefault
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.UsePowerQueryPartitionsByDefault
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ChangeDetectionLocalServers*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.ChangeDetectionLocalServers
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_ChangeDetectionLocalServers
+  name: ChangeDetectionLocalServers
+  nameWithType: TabularModelHandlerSettings.ChangeDetectionLocalServers
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ChangeDetectionLocalServers
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixup*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixup
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AutoFixup
+  name: AutoFixup
+  nameWithType: TabularModelHandlerSettings.AutoFixup
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixup
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoRefreshDirectLake*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoRefreshDirectLake
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AutoRefreshDirectLake
+  name: AutoRefreshDirectLake
+  nameWithType: TabularModelHandlerSettings.AutoRefreshDirectLake
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoRefreshDirectLake
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixupDataTypes*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixupDataTypes
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AutoFixupDataTypes
+  name: AutoFixupDataTypes
+  nameWithType: TabularModelHandlerSettings.AutoFixupDataTypes
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AutoFixupDataTypes
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.PBIFeaturesOnly*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.PBIFeaturesOnly
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_PBIFeaturesOnly
+  name: PBIFeaturesOnly
+  nameWithType: TabularModelHandlerSettings.PBIFeaturesOnly
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.PBIFeaturesOnly
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.DisallowDirectLake*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.DisallowDirectLake
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_DisallowDirectLake
+  name: DisallowDirectLake
+  nameWithType: TabularModelHandlerSettings.DisallowDirectLake
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.DisallowDirectLake
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ReadOnly*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.ReadOnly
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_ReadOnly
+  name: ReadOnly
+  nameWithType: TabularModelHandlerSettings.ReadOnly
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.ReadOnly
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Default*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.Default
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_Default
+  name: Default
+  nameWithType: TabularModelHandlerSettings.Default
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.Default
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.NoSemanticAnalysis*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.NoSemanticAnalysis
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_NoSemanticAnalysis
+  name: NoSemanticAnalysis
+  nameWithType: TabularModelHandlerSettings.NoSemanticAnalysis
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.NoSemanticAnalysis
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddQuotes*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddQuotes
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AlwaysAddQuotes
+  name: AlwaysAddQuotes
+  nameWithType: TabularModelHandlerSettings.AlwaysAddQuotes
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddQuotes
+- uid: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes
+  commentId: P:TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes
+  parent: TabularEditor.TOMWrapper.IFixupSettings
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IFixupSettings.html#TabularEditor_TOMWrapper_IFixupSettings_AlwaysAddQuotes
+  name: AlwaysAddQuotes
+  nameWithType: IFixupSettings.AlwaysAddQuotes
+  fullName: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddQuotes
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysRemoveMeasureQualifier*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysRemoveMeasureQualifier
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AlwaysRemoveMeasureQualifier
+  name: AlwaysRemoveMeasureQualifier
+  nameWithType: TabularModelHandlerSettings.AlwaysRemoveMeasureQualifier
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysRemoveMeasureQualifier
+- uid: TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier
+  commentId: P:TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier
+  parent: TabularEditor.TOMWrapper.IFixupSettings
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IFixupSettings.html#TabularEditor_TOMWrapper_IFixupSettings_AlwaysRemoveMeasureQualifier
+  name: AlwaysRemoveMeasureQualifier
+  nameWithType: IFixupSettings.AlwaysRemoveMeasureQualifier
+  fullName: TabularEditor.TOMWrapper.IFixupSettings.AlwaysRemoveMeasureQualifier
+- uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddColumnQualifier*
+  commentId: Overload:TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddColumnQualifier
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularModelHandlerSettings.html#TabularEditor_TOMWrapper_TabularModelHandlerSettings_AlwaysAddColumnQualifier
+  name: AlwaysAddColumnQualifier
+  nameWithType: TabularModelHandlerSettings.AlwaysAddColumnQualifier
+  fullName: TabularEditor.TOMWrapper.TabularModelHandlerSettings.AlwaysAddColumnQualifier
+- uid: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier
+  commentId: P:TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier
+  parent: TabularEditor.TOMWrapper.IFixupSettings
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IFixupSettings.html#TabularEditor_TOMWrapper_IFixupSettings_AlwaysAddColumnQualifier
+  name: AlwaysAddColumnQualifier
+  nameWithType: IFixupSettings.AlwaysAddColumnQualifier
+  fullName: TabularEditor.TOMWrapper.IFixupSettings.AlwaysAddColumnQualifier

@@ -1,0 +1,914 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.StringHelper
+  commentId: T:TabularEditor.StringHelper
+  id: StringHelper
+  parent: TabularEditor
+  children:
+  - TabularEditor.StringHelper.EqualsI(System.String,System.String)
+  - TabularEditor.StringHelper.EqualsTI(System.String,System.String)
+  - TabularEditor.StringHelper.FirstNLines(System.String,System.Int32,System.Boolean)
+  - TabularEditor.StringHelper.FormatInvariant(System.String,System.Object[])
+  - TabularEditor.StringHelper.IsNumeric(System.String,System.Boolean)
+  - TabularEditor.StringHelper.Left(System.String,System.Int32,System.Boolean)
+  - TabularEditor.StringHelper.Replace(System.String,System.Char[],System.Char)
+  - TabularEditor.StringHelper.Replace(System.String,System.Char[],System.Char[])
+  - TabularEditor.StringHelper.Replace(System.String,System.Char[],System.String[])
+  - TabularEditor.StringHelper.Replace(System.String,System.String,System.String,System.StringComparison)
+  - TabularEditor.StringHelper.Right(System.String,System.Int32)
+  - TabularEditor.StringHelper.SplitCamelCase(System.String)
+  langs:
+  - csharp
+  - vb
+  name: StringHelper
+  nameWithType: StringHelper
+  fullName: TabularEditor.StringHelper
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Various string extension methods
+  example: []
+  syntax:
+    content: public static class StringHelper
+    content.vb: Public Module StringHelper
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+- uid: TabularEditor.StringHelper.FirstNLines(System.String,System.Int32,System.Boolean)
+  commentId: M:TabularEditor.StringHelper.FirstNLines(System.String,System.Int32,System.Boolean)
+  id: FirstNLines(System.String,System.Int32,System.Boolean)
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: FirstNLines(string, int, bool)
+  nameWithType: StringHelper.FirstNLines(string, int, bool)
+  fullName: TabularEditor.StringHelper.FirstNLines(string, int, bool)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Returns the first N lines of a string, optionally adding an ellipsis if there are more lines.
+  example: []
+  syntax:
+    content: public static string FirstNLines(this string value, int n, bool addEllipsis)
+    parameters:
+    - id: value
+      type: System.String
+      description: ''
+    - id: n
+      type: System.Int32
+      description: ''
+    - id: addEllipsis
+      type: System.Boolean
+      description: ''
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Shared Function FirstNLines(value As String, n As Integer, addEllipsis As Boolean) As String
+  overload: TabularEditor.StringHelper.FirstNLines*
+  nameWithType.vb: StringHelper.FirstNLines(String, Integer, Boolean)
+  fullName.vb: TabularEditor.StringHelper.FirstNLines(String, Integer, Boolean)
+  name.vb: FirstNLines(String, Integer, Boolean)
+- uid: TabularEditor.StringHelper.Left(System.String,System.Int32,System.Boolean)
+  commentId: M:TabularEditor.StringHelper.Left(System.String,System.Int32,System.Boolean)
+  id: Left(System.String,System.Int32,System.Boolean)
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: Left(string, int, bool)
+  nameWithType: StringHelper.Left(string, int, bool)
+  fullName: TabularEditor.StringHelper.Left(string, int, bool)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Shortens a string from the left to the specified number of characters, optionally adding an ellipsis if the string contains more characters than that
+  example: []
+  syntax:
+    content: public static string Left(this string value, int chars, bool addEllipsis = false)
+    parameters:
+    - id: value
+      type: System.String
+      description: ''
+    - id: chars
+      type: System.Int32
+      description: ''
+    - id: addEllipsis
+      type: System.Boolean
+      description: ''
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Shared Function Left(value As String, chars As Integer, addEllipsis As Boolean = False) As String
+  overload: TabularEditor.StringHelper.Left*
+  nameWithType.vb: StringHelper.Left(String, Integer, Boolean)
+  fullName.vb: TabularEditor.StringHelper.Left(String, Integer, Boolean)
+  name.vb: Left(String, Integer, Boolean)
+- uid: TabularEditor.StringHelper.SplitCamelCase(System.String)
+  commentId: M:TabularEditor.StringHelper.SplitCamelCase(System.String)
+  id: SplitCamelCase(System.String)
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: SplitCamelCase(string)
+  nameWithType: StringHelper.SplitCamelCase(string)
+  fullName: TabularEditor.StringHelper.SplitCamelCase(string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Splits a string typed as CamelCase (aka. PascalCase) into separate words.
+  example: []
+  syntax:
+    content: public static string SplitCamelCase(this string str)
+    parameters:
+    - id: str
+      type: System.String
+      description: ''
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Shared Function SplitCamelCase(str As String) As String
+  overload: TabularEditor.StringHelper.SplitCamelCase*
+  nameWithType.vb: StringHelper.SplitCamelCase(String)
+  fullName.vb: TabularEditor.StringHelper.SplitCamelCase(String)
+  name.vb: SplitCamelCase(String)
+- uid: TabularEditor.StringHelper.Right(System.String,System.Int32)
+  commentId: M:TabularEditor.StringHelper.Right(System.String,System.Int32)
+  id: Right(System.String,System.Int32)
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: Right(string, int)
+  nameWithType: StringHelper.Right(string, int)
+  fullName: TabularEditor.StringHelper.Right(string, int)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Shortens a string from the right to the specified number of characters
+  example: []
+  syntax:
+    content: public static string Right(this string value, int chars)
+    parameters:
+    - id: value
+      type: System.String
+      description: ''
+    - id: chars
+      type: System.Int32
+      description: ''
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Shared Function Right(value As String, chars As Integer) As String
+  overload: TabularEditor.StringHelper.Right*
+  nameWithType.vb: StringHelper.Right(String, Integer)
+  fullName.vb: TabularEditor.StringHelper.Right(String, Integer)
+  name.vb: Right(String, Integer)
+- uid: TabularEditor.StringHelper.IsNumeric(System.String,System.Boolean)
+  commentId: M:TabularEditor.StringHelper.IsNumeric(System.String,System.Boolean)
+  id: IsNumeric(System.String,System.Boolean)
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: IsNumeric(string, bool)
+  nameWithType: StringHelper.IsNumeric(string, bool)
+  fullName: TabularEditor.StringHelper.IsNumeric(string, bool)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Determines if a string represents a numeric value
+  example: []
+  syntax:
+    content: public static bool IsNumeric(this string value, bool allowDecimals = false)
+    parameters:
+    - id: value
+      type: System.String
+      description: ''
+    - id: allowDecimals
+      type: System.Boolean
+      description: ''
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Public Shared Function IsNumeric(value As String, allowDecimals As Boolean = False) As Boolean
+  overload: TabularEditor.StringHelper.IsNumeric*
+  nameWithType.vb: StringHelper.IsNumeric(String, Boolean)
+  fullName.vb: TabularEditor.StringHelper.IsNumeric(String, Boolean)
+  name.vb: IsNumeric(String, Boolean)
+- uid: TabularEditor.StringHelper.Replace(System.String,System.String,System.String,System.StringComparison)
+  commentId: M:TabularEditor.StringHelper.Replace(System.String,System.String,System.String,System.StringComparison)
+  id: Replace(System.String,System.String,System.String,System.StringComparison)
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: Replace(string, string, string, StringComparison)
+  nameWithType: StringHelper.Replace(string, string, string, StringComparison)
+  fullName: TabularEditor.StringHelper.Replace(string, string, string, System.StringComparison)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Returns a new string in which all occurrences of a specified string in the current instance are replaced with another specified string.
+  example: []
+  syntax:
+    content: public static string Replace(this string str, string oldValue, string newValue, StringComparison comparison)
+    parameters:
+    - id: str
+      type: System.String
+      description: Current instance
+    - id: oldValue
+      type: System.String
+      description: The string to be replaced
+    - id: newValue
+      type: System.String
+      description: The string to replace all occurrences of oldValue
+    - id: comparison
+      type: System.StringComparison
+      description: One of the enumeration values that specifies the rules for the search
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Shared Function Replace(str As String, oldValue As String, newValue As String, comparison As StringComparison) As String
+  overload: TabularEditor.StringHelper.Replace*
+  nameWithType.vb: StringHelper.Replace(String, String, String, StringComparison)
+  fullName.vb: TabularEditor.StringHelper.Replace(String, String, String, System.StringComparison)
+  name.vb: Replace(String, String, String, StringComparison)
+- uid: TabularEditor.StringHelper.EqualsI(System.String,System.String)
+  commentId: M:TabularEditor.StringHelper.EqualsI(System.String,System.String)
+  id: EqualsI(System.String,System.String)
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: EqualsI(string, string)
+  nameWithType: StringHelper.EqualsI(string, string)
+  fullName: TabularEditor.StringHelper.EqualsI(string, string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Invariant Culture Ignore Case comparison between two strings.
+  example: []
+  syntax:
+    content: public static bool EqualsI(this string str, string other)
+    parameters:
+    - id: str
+      type: System.String
+      description: ''
+    - id: other
+      type: System.String
+      description: ''
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Public Shared Function EqualsI(str As String, other As String) As Boolean
+  overload: TabularEditor.StringHelper.EqualsI*
+  nameWithType.vb: StringHelper.EqualsI(String, String)
+  fullName.vb: TabularEditor.StringHelper.EqualsI(String, String)
+  name.vb: EqualsI(String, String)
+- uid: TabularEditor.StringHelper.EqualsTI(System.String,System.String)
+  commentId: M:TabularEditor.StringHelper.EqualsTI(System.String,System.String)
+  id: EqualsTI(System.String,System.String)
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: EqualsTI(string, string)
+  nameWithType: StringHelper.EqualsTI(string, string)
+  fullName: TabularEditor.StringHelper.EqualsTI(string, string)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Invariant Culture Ignore Case and trailing/leading whitespace comparison of two strings.
+  example: []
+  syntax:
+    content: public static bool EqualsTI(this string current, string value)
+    parameters:
+    - id: current
+      type: System.String
+      description: ''
+    - id: value
+      type: System.String
+      description: ''
+    return:
+      type: System.Boolean
+      description: ''
+    content.vb: Public Shared Function EqualsTI(current As String, value As String) As Boolean
+  overload: TabularEditor.StringHelper.EqualsTI*
+  nameWithType.vb: StringHelper.EqualsTI(String, String)
+  fullName.vb: TabularEditor.StringHelper.EqualsTI(String, String)
+  name.vb: EqualsTI(String, String)
+- uid: TabularEditor.StringHelper.FormatInvariant(System.String,System.Object[])
+  commentId: M:TabularEditor.StringHelper.FormatInvariant(System.String,System.Object[])
+  id: FormatInvariant(System.String,System.Object[])
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: FormatInvariant(string, params object[])
+  nameWithType: StringHelper.FormatInvariant(string, params object[])
+  fullName: TabularEditor.StringHelper.FormatInvariant(string, params object[])
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Similar to string.Format but using invariant culture
+  example: []
+  syntax:
+    content: public static string FormatInvariant(this string format, params object[] args)
+    parameters:
+    - id: format
+      type: System.String
+      description: ''
+    - id: args
+      type: System.Object[]
+      description: ''
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Shared Function FormatInvariant(format As String, ParamArray args As Object()) As String
+  overload: TabularEditor.StringHelper.FormatInvariant*
+  nameWithType.vb: StringHelper.FormatInvariant(String, ParamArray Object())
+  fullName.vb: TabularEditor.StringHelper.FormatInvariant(String, ParamArray Object())
+  name.vb: FormatInvariant(String, ParamArray Object())
+- uid: TabularEditor.StringHelper.Replace(System.String,System.Char[],System.Char)
+  commentId: M:TabularEditor.StringHelper.Replace(System.String,System.Char[],System.Char)
+  id: Replace(System.String,System.Char[],System.Char)
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: Replace(string, char[], char)
+  nameWithType: StringHelper.Replace(string, char[], char)
+  fullName: TabularEditor.StringHelper.Replace(string, char[], char)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Replace any occurrence of characters with a specific chracter
+  example: []
+  syntax:
+    content: public static string Replace(this string value, char[] find, char replace)
+    parameters:
+    - id: value
+      type: System.String
+      description: ''
+    - id: find
+      type: System.Char[]
+      description: ''
+    - id: replace
+      type: System.Char
+      description: ''
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Shared Function Replace(value As String, find As Char(), replace As Char) As String
+  overload: TabularEditor.StringHelper.Replace*
+  nameWithType.vb: StringHelper.Replace(String, Char(), Char)
+  fullName.vb: TabularEditor.StringHelper.Replace(String, Char(), Char)
+  name.vb: Replace(String, Char(), Char)
+- uid: TabularEditor.StringHelper.Replace(System.String,System.Char[],System.Char[])
+  commentId: M:TabularEditor.StringHelper.Replace(System.String,System.Char[],System.Char[])
+  id: Replace(System.String,System.Char[],System.Char[])
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: Replace(string, char[], char[])
+  nameWithType: StringHelper.Replace(string, char[], char[])
+  fullName: TabularEditor.StringHelper.Replace(string, char[], char[])
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Replaces any occurrence of various chracters with a different character
+  example: []
+  syntax:
+    content: public static string Replace(this string value, char[] find, char[] replace)
+    parameters:
+    - id: value
+      type: System.String
+      description: ''
+    - id: find
+      type: System.Char[]
+      description: ''
+    - id: replace
+      type: System.Char[]
+      description: ''
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Shared Function Replace(value As String, find As Char(), replace As Char()) As String
+  overload: TabularEditor.StringHelper.Replace*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: ''
+  nameWithType.vb: StringHelper.Replace(String, Char(), Char())
+  fullName.vb: TabularEditor.StringHelper.Replace(String, Char(), Char())
+  name.vb: Replace(String, Char(), Char())
+- uid: TabularEditor.StringHelper.Replace(System.String,System.Char[],System.String[])
+  commentId: M:TabularEditor.StringHelper.Replace(System.String,System.Char[],System.String[])
+  id: Replace(System.String,System.Char[],System.String[])
+  isExtensionMethod: true
+  parent: TabularEditor.StringHelper
+  langs:
+  - csharp
+  - vb
+  name: Replace(string, char[], string[])
+  nameWithType: StringHelper.Replace(string, char[], string[])
+  fullName: TabularEditor.StringHelper.Replace(string, char[], string[])
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor
+  summary: Replaces any occurrence of various chracters with a different string
+  example: []
+  syntax:
+    content: public static string Replace(this string value, char[] find, string[] replace)
+    parameters:
+    - id: value
+      type: System.String
+      description: ''
+    - id: find
+      type: System.Char[]
+      description: ''
+    - id: replace
+      type: System.String[]
+      description: ''
+    return:
+      type: System.String
+      description: ''
+    content.vb: Public Shared Function Replace(value As String, find As Char(), replace As String()) As String
+  overload: TabularEditor.StringHelper.Replace*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: ''
+  nameWithType.vb: StringHelper.Replace(String, Char(), String())
+  fullName.vb: TabularEditor.StringHelper.Replace(String, Char(), String())
+  name.vb: Replace(String, Char(), String())
+references:
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.StringHelper.FirstNLines*
+  commentId: Overload:TabularEditor.StringHelper.FirstNLines
+  isExternal: true
+  href: TabularEditor.StringHelper.html#TabularEditor_StringHelper_FirstNLines_System_String_System_Int32_System_Boolean_
+  name: FirstNLines
+  nameWithType: StringHelper.FirstNLines
+  fullName: TabularEditor.StringHelper.FirstNLines
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: TabularEditor.StringHelper.Left*
+  commentId: Overload:TabularEditor.StringHelper.Left
+  isExternal: true
+  href: TabularEditor.StringHelper.html#TabularEditor_StringHelper_Left_System_String_System_Int32_System_Boolean_
+  name: Left
+  nameWithType: StringHelper.Left
+  fullName: TabularEditor.StringHelper.Left
+- uid: TabularEditor.StringHelper.SplitCamelCase*
+  commentId: Overload:TabularEditor.StringHelper.SplitCamelCase
+  isExternal: true
+  href: TabularEditor.StringHelper.html#TabularEditor_StringHelper_SplitCamelCase_System_String_
+  name: SplitCamelCase
+  nameWithType: StringHelper.SplitCamelCase
+  fullName: TabularEditor.StringHelper.SplitCamelCase
+- uid: TabularEditor.StringHelper.Right*
+  commentId: Overload:TabularEditor.StringHelper.Right
+  isExternal: true
+  href: TabularEditor.StringHelper.html#TabularEditor_StringHelper_Right_System_String_System_Int32_
+  name: Right
+  nameWithType: StringHelper.Right
+  fullName: TabularEditor.StringHelper.Right
+- uid: TabularEditor.StringHelper.IsNumeric*
+  commentId: Overload:TabularEditor.StringHelper.IsNumeric
+  isExternal: true
+  href: TabularEditor.StringHelper.html#TabularEditor_StringHelper_IsNumeric_System_String_System_Boolean_
+  name: IsNumeric
+  nameWithType: StringHelper.IsNumeric
+  fullName: TabularEditor.StringHelper.IsNumeric
+- uid: TabularEditor.StringHelper.Replace*
+  commentId: Overload:TabularEditor.StringHelper.Replace
+  isExternal: true
+  href: TabularEditor.StringHelper.html#TabularEditor_StringHelper_Replace_System_String_System_String_System_String_System_StringComparison_
+  name: Replace
+  nameWithType: StringHelper.Replace
+  fullName: TabularEditor.StringHelper.Replace
+- uid: System.StringComparison
+  commentId: T:System.StringComparison
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.stringcomparison
+  name: StringComparison
+  nameWithType: StringComparison
+  fullName: System.StringComparison
+- uid: TabularEditor.StringHelper.EqualsI*
+  commentId: Overload:TabularEditor.StringHelper.EqualsI
+  isExternal: true
+  href: TabularEditor.StringHelper.html#TabularEditor_StringHelper_EqualsI_System_String_System_String_
+  name: EqualsI
+  nameWithType: StringHelper.EqualsI
+  fullName: TabularEditor.StringHelper.EqualsI
+- uid: TabularEditor.StringHelper.EqualsTI*
+  commentId: Overload:TabularEditor.StringHelper.EqualsTI
+  isExternal: true
+  href: TabularEditor.StringHelper.html#TabularEditor_StringHelper_EqualsTI_System_String_System_String_
+  name: EqualsTI
+  nameWithType: StringHelper.EqualsTI
+  fullName: TabularEditor.StringHelper.EqualsTI
+- uid: TabularEditor.StringHelper.FormatInvariant*
+  commentId: Overload:TabularEditor.StringHelper.FormatInvariant
+  isExternal: true
+  href: TabularEditor.StringHelper.html#TabularEditor_StringHelper_FormatInvariant_System_String_System_Object___
+  name: FormatInvariant
+  nameWithType: StringHelper.FormatInvariant
+  fullName: TabularEditor.StringHelper.FormatInvariant
+- uid: System.Object[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object[]
+  nameWithType: object[]
+  fullName: object[]
+  nameWithType.vb: Object()
+  fullName.vb: Object()
+  name.vb: Object()
+  spec.csharp:
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: (
+  - name: )
+- uid: System.Char[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.char
+  name: char[]
+  nameWithType: char[]
+  fullName: char[]
+  nameWithType.vb: Char()
+  fullName.vb: Char()
+  name.vb: Char()
+  spec.csharp:
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: (
+  - name: )
+- uid: System.Char
+  commentId: T:System.Char
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.char
+  name: char
+  nameWithType: char
+  fullName: char
+  nameWithType.vb: Char
+  fullName.vb: Char
+  name.vb: Char
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentexception
+  name: ArgumentException
+  nameWithType: ArgumentException
+  fullName: System.ArgumentException
+- uid: System.String[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )

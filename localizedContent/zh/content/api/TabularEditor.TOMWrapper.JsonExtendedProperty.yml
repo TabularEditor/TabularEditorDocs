@@ -1,0 +1,717 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.JsonExtendedProperty
+  commentId: T:TabularEditor.TOMWrapper.JsonExtendedProperty
+  id: JsonExtendedProperty
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.JsonExtendedProperty.#ctor(System.Collections.Generic.IList{TabularEditor.TOMWrapper.ExtendedProperty})
+  - TabularEditor.TOMWrapper.JsonExtendedProperty.Type
+  langs:
+  - csharp
+  - vb
+  name: JsonExtendedProperty
+  nameWithType: JsonExtendedProperty
+  fullName: TabularEditor.TOMWrapper.JsonExtendedProperty
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: 'public sealed class JsonExtendedProperty : ExtendedProperty, INamedObject'
+    content.vb: Public NotInheritable Class JsonExtendedProperty Inherits ExtendedProperty Implements INamedObject
+  inheritance:
+  - System.Object
+  - TabularEditor.TOMWrapper.ExtendedProperty
+  implements:
+  - TabularEditor.TOMWrapper.INamedObject
+  inheritedMembers:
+  - TabularEditor.TOMWrapper.ExtendedProperty.ThrowIfInvalidJson(System.String)
+  - TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(System.String,System.Exception@)
+  - TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(System.String)
+  - TabularEditor.TOMWrapper.ExtendedProperty.Value
+  - TabularEditor.TOMWrapper.ExtendedProperty.Name
+  - System.Object.GetType
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.JsonExtendedProperty.#ctor(System.Collections.Generic.IList{TabularEditor.TOMWrapper.ExtendedProperty})
+  commentId: M:TabularEditor.TOMWrapper.JsonExtendedProperty.#ctor(System.Collections.Generic.IList{TabularEditor.TOMWrapper.ExtendedProperty})
+  id: '#ctor(System.Collections.Generic.IList{TabularEditor.TOMWrapper.ExtendedProperty})'
+  parent: TabularEditor.TOMWrapper.JsonExtendedProperty
+  langs:
+  - csharp
+  - vb
+  name: JsonExtendedProperty(IList<ExtendedProperty>)
+  nameWithType: JsonExtendedProperty.JsonExtendedProperty(IList<ExtendedProperty>)
+  fullName: TabularEditor.TOMWrapper.JsonExtendedProperty.JsonExtendedProperty(System.Collections.Generic.IList<TabularEditor.TOMWrapper.ExtendedProperty>)
+  type: Constructor
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public JsonExtendedProperty(IList<ExtendedProperty> parentCollection)
+    parameters:
+    - id: parentCollection
+      type: System.Collections.Generic.IList{TabularEditor.TOMWrapper.ExtendedProperty}
+    content.vb: Public Sub New(parentCollection As IList(Of ExtendedProperty))
+  overload: TabularEditor.TOMWrapper.JsonExtendedProperty.#ctor*
+  nameWithType.vb: JsonExtendedProperty.New(IList(Of ExtendedProperty))
+  fullName.vb: TabularEditor.TOMWrapper.JsonExtendedProperty.New(System.Collections.Generic.IList(Of TabularEditor.TOMWrapper.ExtendedProperty))
+  name.vb: New(IList(Of ExtendedProperty))
+- uid: TabularEditor.TOMWrapper.JsonExtendedProperty.Type
+  commentId: P:TabularEditor.TOMWrapper.JsonExtendedProperty.Type
+  id: Type
+  parent: TabularEditor.TOMWrapper.JsonExtendedProperty
+  langs:
+  - csharp
+  - vb
+  name: Type
+  nameWithType: JsonExtendedProperty.Type
+  fullName: TabularEditor.TOMWrapper.JsonExtendedProperty.Type
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  example: []
+  syntax:
+    content: public override ExtendedPropertyType Type { get; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.ExtendedPropertyType
+    content.vb: Public Overrides ReadOnly Property Type As ExtendedPropertyType
+  overridden: TabularEditor.TOMWrapper.ExtendedProperty.Type
+  overload: TabularEditor.TOMWrapper.JsonExtendedProperty.Type*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: TabularEditor.TOMWrapper.ExtendedProperty
+  commentId: T:TabularEditor.TOMWrapper.ExtendedProperty
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExtendedProperty.html
+  name: ExtendedProperty
+  nameWithType: ExtendedProperty
+  fullName: TabularEditor.TOMWrapper.ExtendedProperty
+- uid: TabularEditor.TOMWrapper.INamedObject
+  commentId: T:TabularEditor.TOMWrapper.INamedObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.INamedObject.html
+  name: INamedObject
+  nameWithType: INamedObject
+  fullName: TabularEditor.TOMWrapper.INamedObject
+- uid: TabularEditor.TOMWrapper.ExtendedProperty.ThrowIfInvalidJson(System.String)
+  commentId: M:TabularEditor.TOMWrapper.ExtendedProperty.ThrowIfInvalidJson(System.String)
+  parent: TabularEditor.TOMWrapper.ExtendedProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_ThrowIfInvalidJson_System_String_
+  name: ThrowIfInvalidJson(string)
+  nameWithType: ExtendedProperty.ThrowIfInvalidJson(string)
+  fullName: TabularEditor.TOMWrapper.ExtendedProperty.ThrowIfInvalidJson(string)
+  nameWithType.vb: ExtendedProperty.ThrowIfInvalidJson(String)
+  fullName.vb: TabularEditor.TOMWrapper.ExtendedProperty.ThrowIfInvalidJson(String)
+  name.vb: ThrowIfInvalidJson(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.ExtendedProperty.ThrowIfInvalidJson(System.String)
+    name: ThrowIfInvalidJson
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_ThrowIfInvalidJson_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.ExtendedProperty.ThrowIfInvalidJson(System.String)
+    name: ThrowIfInvalidJson
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_ThrowIfInvalidJson_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(System.String,System.Exception@)
+  commentId: M:TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(System.String,System.Exception@)
+  parent: TabularEditor.TOMWrapper.ExtendedProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_IsValidJson_System_String_System_Exception__
+  name: IsValidJson(string, out Exception)
+  nameWithType: ExtendedProperty.IsValidJson(string, out Exception)
+  fullName: TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(string, out System.Exception)
+  nameWithType.vb: ExtendedProperty.IsValidJson(String, Exception)
+  fullName.vb: TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(String, System.Exception)
+  name.vb: IsValidJson(String, Exception)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(System.String,System.Exception@)
+    name: IsValidJson
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_IsValidJson_System_String_System_Exception__
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: out
+  - name: " "
+  - uid: System.Exception
+    name: Exception
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(System.String,System.Exception@)
+    name: IsValidJson
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_IsValidJson_System_String_System_Exception__
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.Exception
+    name: Exception
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception
+  - name: )
+- uid: TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(System.String)
+  commentId: M:TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(System.String)
+  parent: TabularEditor.TOMWrapper.ExtendedProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_IsValidJson_System_String_
+  name: IsValidJson(string)
+  nameWithType: ExtendedProperty.IsValidJson(string)
+  fullName: TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(string)
+  nameWithType.vb: ExtendedProperty.IsValidJson(String)
+  fullName.vb: TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(String)
+  name.vb: IsValidJson(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(System.String)
+    name: IsValidJson
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_IsValidJson_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.ExtendedProperty.IsValidJson(System.String)
+    name: IsValidJson
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_IsValidJson_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.ExtendedProperty.Value
+  commentId: P:TabularEditor.TOMWrapper.ExtendedProperty.Value
+  parent: TabularEditor.TOMWrapper.ExtendedProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_Value
+  name: Value
+  nameWithType: ExtendedProperty.Value
+  fullName: TabularEditor.TOMWrapper.ExtendedProperty.Value
+- uid: TabularEditor.TOMWrapper.ExtendedProperty.Name
+  commentId: P:TabularEditor.TOMWrapper.ExtendedProperty.Name
+  parent: TabularEditor.TOMWrapper.ExtendedProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_Name
+  name: Name
+  nameWithType: ExtendedProperty.Name
+  fullName: TabularEditor.TOMWrapper.ExtendedProperty.Name
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.JsonExtendedProperty.#ctor*
+  commentId: Overload:TabularEditor.TOMWrapper.JsonExtendedProperty.#ctor
+  isExternal: true
+  href: TabularEditor.TOMWrapper.JsonExtendedProperty.html#TabularEditor_TOMWrapper_JsonExtendedProperty__ctor_System_Collections_Generic_IList_TabularEditor_TOMWrapper_ExtendedProperty__
+  name: JsonExtendedProperty
+  nameWithType: JsonExtendedProperty.JsonExtendedProperty
+  fullName: TabularEditor.TOMWrapper.JsonExtendedProperty.JsonExtendedProperty
+  nameWithType.vb: JsonExtendedProperty.New
+  fullName.vb: TabularEditor.TOMWrapper.JsonExtendedProperty.New
+  name.vb: New
+- uid: System.Collections.Generic.IList{TabularEditor.TOMWrapper.ExtendedProperty}
+  commentId: T:System.Collections.Generic.IList{TabularEditor.TOMWrapper.ExtendedProperty}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<ExtendedProperty>
+  nameWithType: IList<ExtendedProperty>
+  fullName: System.Collections.Generic.IList<TabularEditor.TOMWrapper.ExtendedProperty>
+  nameWithType.vb: IList(Of ExtendedProperty)
+  fullName.vb: System.Collections.Generic.IList(Of TabularEditor.TOMWrapper.ExtendedProperty)
+  name.vb: IList(Of ExtendedProperty)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ExtendedProperty
+    name: ExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedProperty.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ExtendedProperty
+    name: ExtendedProperty
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ExtendedProperty.html
+  - name: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ilist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: TabularEditor.TOMWrapper.ExtendedProperty.Type
+  commentId: P:TabularEditor.TOMWrapper.ExtendedProperty.Type
+  parent: TabularEditor.TOMWrapper.ExtendedProperty
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExtendedProperty.html#TabularEditor_TOMWrapper_ExtendedProperty_Type
+  name: Type
+  nameWithType: ExtendedProperty.Type
+  fullName: TabularEditor.TOMWrapper.ExtendedProperty.Type
+- uid: TabularEditor.TOMWrapper.JsonExtendedProperty.Type*
+  commentId: Overload:TabularEditor.TOMWrapper.JsonExtendedProperty.Type
+  isExternal: true
+  href: TabularEditor.TOMWrapper.JsonExtendedProperty.html#TabularEditor_TOMWrapper_JsonExtendedProperty_Type
+  name: Type
+  nameWithType: JsonExtendedProperty.Type
+  fullName: TabularEditor.TOMWrapper.JsonExtendedProperty.Type
+- uid: TabularEditor.TOMWrapper.ExtendedPropertyType
+  commentId: T:TabularEditor.TOMWrapper.ExtendedPropertyType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExtendedPropertyType.html
+  name: ExtendedPropertyType
+  nameWithType: ExtendedPropertyType
+  fullName: TabularEditor.TOMWrapper.ExtendedPropertyType

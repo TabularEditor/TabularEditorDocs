@@ -1,0 +1,744 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+  commentId: T:TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+  id: TimeRelatedColumnGroup
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Columns
+  - TabularEditor.TOMWrapper.TimeRelatedColumnGroup.CreateNew(TabularEditor.TOMWrapper.Calendar)
+  - TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Parent
+  - TabularEditor.TOMWrapper.TimeRelatedColumnGroup.ToString
+  langs:
+  - csharp
+  - vb
+  name: TimeRelatedColumnGroup
+  nameWithType: TimeRelatedColumnGroup
+  fullName: TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Represents a group of columns that are related to time information.
+  remarks: This metadata object is only supported when the compatibility level of the database is at 1701 or above.
+  example: []
+  syntax:
+    content: 'public sealed class TimeRelatedColumnGroup : CalendarColumnGroup, ICustomTypeDescriptor, ITabularObject, INotifyPropertyChanged, IHandlerObject, INotifyPropertyChanging'
+    content.vb: Public NotInheritable Class TimeRelatedColumnGroup Inherits CalendarColumnGroup Implements ICustomTypeDescriptor, ITabularObject, INotifyPropertyChanged, IHandlerObject, INotifyPropertyChanging
+  inheritance:
+  - System.Object
+  - TabularEditor.TOMWrapper.DynamicPropertyObject
+  - TabularEditor.TOMWrapper.TabularObject
+  - TabularEditor.TOMWrapper.CalendarColumnGroup
+  implements:
+  - System.ComponentModel.ICustomTypeDescriptor
+  - TabularEditor.TOMWrapper.ITabularObject
+  - System.ComponentModel.INotifyPropertyChanged
+  - TabularEditor.TOMWrapper.IHandlerObject
+  - System.ComponentModel.INotifyPropertyChanging
+  inheritedMembers:
+  - TabularEditor.TOMWrapper.CalendarColumnGroup.Delete
+  - TabularEditor.TOMWrapper.CalendarColumnGroup.Calendar
+  - TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  - TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  - TabularEditor.TOMWrapper.TabularObject.Model
+  - TabularEditor.TOMWrapper.TabularObject.ObjectType
+  - TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+  - TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+  - System.Object.GetType
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.CreateNew(TabularEditor.TOMWrapper.Calendar)
+  commentId: M:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.CreateNew(TabularEditor.TOMWrapper.Calendar)
+  id: CreateNew(TabularEditor.TOMWrapper.Calendar)
+  parent: TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+  langs:
+  - csharp
+  - vb
+  name: CreateNew(Calendar)
+  nameWithType: TimeRelatedColumnGroup.CreateNew(Calendar)
+  fullName: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.CreateNew(TabularEditor.TOMWrapper.Calendar)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: >-
+    Creates a new instance of the <xref href="TabularEditor.TOMWrapper.TimeRelatedColumnGroup" data-throw-if-not-resolved="false"></xref> class and adds it to the specified
+
+    calendar's column groups.
+  example: []
+  syntax:
+    content: public static TimeRelatedColumnGroup CreateNew(Calendar parent)
+    parameters:
+    - id: parent
+      type: TabularEditor.TOMWrapper.Calendar
+      description: >-
+        The <xref href="TabularEditor.TOMWrapper.Calendar" data-throw-if-not-resolved="false"></xref> to which the new <xref href="TabularEditor.TOMWrapper.TimeRelatedColumnGroup" data-throw-if-not-resolved="false"></xref> will be added. Cannot be
+                    null.
+    return:
+      type: TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+      description: A new instance of <xref href="TabularEditor.TOMWrapper.TimeRelatedColumnGroup" data-throw-if-not-resolved="false"></xref> associated with the specified calendar.
+    content.vb: Public Shared Function CreateNew(parent As Calendar) As TimeRelatedColumnGroup
+  overload: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.CreateNew*
+- uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.ToString
+  commentId: M:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.ToString
+  id: ToString
+  parent: TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: TimeRelatedColumnGroup.ToString()
+  fullName: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.ToString()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Returns a string representation of the object, listing the names of its columns.
+  remarks: >-
+    If the object contains no columns, the method returns the string "(Empty)".
+                Otherwise, it returns a comma-separated list of column names, sorted alphabetically.
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: >-
+        A string representing the object. Returns "(Empty)" if no columns are present, or a sorted, comma-separated
+                    list of column names if columns exist.
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.Object.ToString
+  overload: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.ToString*
+- uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Parent
+  commentId: P:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Parent
+  id: Parent
+  parent: TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+  langs:
+  - csharp
+  - vb
+  name: Parent
+  nameWithType: TimeRelatedColumnGroup.Parent
+  fullName: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Parent
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The parent Calendar of the current Time Related Column Group.
+  example: []
+  syntax:
+    content: public Calendar Parent { get; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.Calendar
+    content.vb: Public ReadOnly Property Parent As Calendar
+  overload: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Parent*
+- uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Columns
+  commentId: P:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Columns
+  id: Columns
+  parent: TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+  langs:
+  - csharp
+  - vb
+  name: Columns
+  nameWithType: TimeRelatedColumnGroup.Columns
+  fullName: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Columns
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: A collection of columns that should be grouped together with this column when used in visuals (RelatedColumnDetails).
+  example: []
+  syntax:
+    content: public AssociatedColumnCollection Columns { get; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.AssociatedColumnCollection
+    content.vb: Public ReadOnly Property Columns As AssociatedColumnCollection
+  overload: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Columns*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: TabularEditor.TOMWrapper.DynamicPropertyObject
+  commentId: T:TabularEditor.TOMWrapper.DynamicPropertyObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.DynamicPropertyObject.html
+  name: DynamicPropertyObject
+  nameWithType: DynamicPropertyObject
+  fullName: TabularEditor.TOMWrapper.DynamicPropertyObject
+- uid: TabularEditor.TOMWrapper.TabularObject
+  commentId: T:TabularEditor.TOMWrapper.TabularObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html
+  name: TabularObject
+  nameWithType: TabularObject
+  fullName: TabularEditor.TOMWrapper.TabularObject
+- uid: TabularEditor.TOMWrapper.CalendarColumnGroup
+  commentId: T:TabularEditor.TOMWrapper.CalendarColumnGroup
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.CalendarColumnGroup.html
+  name: CalendarColumnGroup
+  nameWithType: CalendarColumnGroup
+  fullName: TabularEditor.TOMWrapper.CalendarColumnGroup
+- uid: System.ComponentModel.ICustomTypeDescriptor
+  commentId: T:System.ComponentModel.ICustomTypeDescriptor
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.icustomtypedescriptor
+  name: ICustomTypeDescriptor
+  nameWithType: ICustomTypeDescriptor
+  fullName: System.ComponentModel.ICustomTypeDescriptor
+- uid: TabularEditor.TOMWrapper.ITabularObject
+  commentId: T:TabularEditor.TOMWrapper.ITabularObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularObject.html
+  name: ITabularObject
+  nameWithType: ITabularObject
+  fullName: TabularEditor.TOMWrapper.ITabularObject
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: TabularEditor.TOMWrapper.IHandlerObject
+  commentId: T:TabularEditor.TOMWrapper.IHandlerObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IHandlerObject.html
+  name: IHandlerObject
+  nameWithType: IHandlerObject
+  fullName: TabularEditor.TOMWrapper.IHandlerObject
+- uid: System.ComponentModel.INotifyPropertyChanging
+  commentId: T:System.ComponentModel.INotifyPropertyChanging
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanging
+  name: INotifyPropertyChanging
+  nameWithType: INotifyPropertyChanging
+  fullName: System.ComponentModel.INotifyPropertyChanging
+- uid: TabularEditor.TOMWrapper.CalendarColumnGroup.Delete
+  commentId: M:TabularEditor.TOMWrapper.CalendarColumnGroup.Delete
+  parent: TabularEditor.TOMWrapper.CalendarColumnGroup
+  isExternal: true
+  href: TabularEditor.TOMWrapper.CalendarColumnGroup.html#TabularEditor_TOMWrapper_CalendarColumnGroup_Delete
+  name: Delete()
+  nameWithType: CalendarColumnGroup.Delete()
+  fullName: TabularEditor.TOMWrapper.CalendarColumnGroup.Delete()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.CalendarColumnGroup.Delete
+    name: Delete
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalendarColumnGroup.html#TabularEditor_TOMWrapper_CalendarColumnGroup_Delete
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.CalendarColumnGroup.Delete
+    name: Delete
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CalendarColumnGroup.html#TabularEditor_TOMWrapper_CalendarColumnGroup_Delete
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.CalendarColumnGroup.Calendar
+  commentId: P:TabularEditor.TOMWrapper.CalendarColumnGroup.Calendar
+  parent: TabularEditor.TOMWrapper.CalendarColumnGroup
+  isExternal: true
+  href: TabularEditor.TOMWrapper.CalendarColumnGroup.html#TabularEditor_TOMWrapper_CalendarColumnGroup_Calendar
+  name: Calendar
+  nameWithType: CalendarColumnGroup.Calendar
+  fullName: TabularEditor.TOMWrapper.CalendarColumnGroup.Calendar
+- uid: TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_ObjectTypeName
+  name: ObjectTypeName
+  nameWithType: TabularObject.ObjectTypeName
+  fullName: TabularEditor.TOMWrapper.TabularObject.ObjectTypeName
+- uid: TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.IsRemoved
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_IsRemoved
+  name: IsRemoved
+  nameWithType: TabularObject.IsRemoved
+  fullName: TabularEditor.TOMWrapper.TabularObject.IsRemoved
+- uid: TabularEditor.TOMWrapper.TabularObject.Model
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.Model
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_Model
+  name: Model
+  nameWithType: TabularObject.Model
+  fullName: TabularEditor.TOMWrapper.TabularObject.Model
+- uid: TabularEditor.TOMWrapper.TabularObject.ObjectType
+  commentId: P:TabularEditor.TOMWrapper.TabularObject.ObjectType
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_ObjectType
+  name: ObjectType
+  nameWithType: TabularObject.ObjectType
+  fullName: TabularEditor.TOMWrapper.TabularObject.ObjectType
+- uid: TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+  commentId: E:TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_PropertyChanging
+  name: PropertyChanging
+  nameWithType: TabularObject.PropertyChanging
+  fullName: TabularEditor.TOMWrapper.TabularObject.PropertyChanging
+- uid: TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+  commentId: E:TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+  parent: TabularEditor.TOMWrapper.TabularObject
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObject.html#TabularEditor_TOMWrapper_TabularObject_PropertyChanged
+  name: PropertyChanged
+  nameWithType: TabularObject.PropertyChanged
+  fullName: TabularEditor.TOMWrapper.TabularObject.PropertyChanged
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+  commentId: T:TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.html
+  name: TimeRelatedColumnGroup
+  nameWithType: TimeRelatedColumnGroup
+  fullName: TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+- uid: TabularEditor.TOMWrapper.Calendar
+  commentId: T:TabularEditor.TOMWrapper.Calendar
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Calendar.html
+  name: Calendar
+  nameWithType: Calendar
+  fullName: TabularEditor.TOMWrapper.Calendar
+- uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.CreateNew*
+  commentId: Overload:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.CreateNew
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.html#TabularEditor_TOMWrapper_TimeRelatedColumnGroup_CreateNew_TabularEditor_TOMWrapper_Calendar_
+  name: CreateNew
+  nameWithType: TimeRelatedColumnGroup.CreateNew
+  fullName: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.CreateNew
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.ToString*
+  commentId: Overload:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.ToString
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.html#TabularEditor_TOMWrapper_TimeRelatedColumnGroup_ToString
+  name: ToString
+  nameWithType: TimeRelatedColumnGroup.ToString
+  fullName: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Parent*
+  commentId: Overload:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Parent
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.html#TabularEditor_TOMWrapper_TimeRelatedColumnGroup_Parent
+  name: Parent
+  nameWithType: TimeRelatedColumnGroup.Parent
+  fullName: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Parent
+- uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Columns*
+  commentId: Overload:TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Columns
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.html#TabularEditor_TOMWrapper_TimeRelatedColumnGroup_Columns
+  name: Columns
+  nameWithType: TimeRelatedColumnGroup.Columns
+  fullName: TabularEditor.TOMWrapper.TimeRelatedColumnGroup.Columns
+- uid: TabularEditor.TOMWrapper.AssociatedColumnCollection
+  commentId: T:TabularEditor.TOMWrapper.AssociatedColumnCollection
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.AssociatedColumnCollection.html
+  name: AssociatedColumnCollection
+  nameWithType: AssociatedColumnCollection
+  fullName: TabularEditor.TOMWrapper.AssociatedColumnCollection

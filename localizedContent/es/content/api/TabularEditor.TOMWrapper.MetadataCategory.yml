@@ -1,0 +1,474 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.MetadataCategory
+  commentId: T:TabularEditor.TOMWrapper.MetadataCategory
+  id: MetadataCategory
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.MetadataCategory.Basic
+  - TabularEditor.TOMWrapper.MetadataCategory.CalculationDefinitions
+  - TabularEditor.TOMWrapper.MetadataCategory.Inherited
+  langs:
+  - csharp
+  - vb
+  name: MetadataCategory
+  nameWithType: MetadataCategory
+  fullName: TabularEditor.TOMWrapper.MetadataCategory
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Defines categories of metadata elements.
+  remarks: This enum is only supported when the compatibility level of the database is at 1703 or above.
+  example: []
+  syntax:
+    content: public enum MetadataCategory
+    content.vb: Public Enum MetadataCategory
+  extensionMethods:
+  - TabularEditor.TOMWrapper.MetadataCategory.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory)
+  - TabularEditor.TOMWrapper.MetadataCategory.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory)
+  - TabularEditor.TOMWrapper.MetadataCategory.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.MetadataCategory)
+- uid: TabularEditor.TOMWrapper.MetadataCategory.Inherited
+  commentId: F:TabularEditor.TOMWrapper.MetadataCategory.Inherited
+  id: Inherited
+  parent: TabularEditor.TOMWrapper.MetadataCategory
+  langs:
+  - csharp
+  - vb
+  name: Inherited
+  nameWithType: MetadataCategory.Inherited
+  fullName: TabularEditor.TOMWrapper.MetadataCategory.Inherited
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Inherit the value from the system defined behavior.
+  example: []
+  syntax:
+    content: Inherited = 0
+    return:
+      type: TabularEditor.TOMWrapper.MetadataCategory
+- uid: TabularEditor.TOMWrapper.MetadataCategory.Basic
+  commentId: F:TabularEditor.TOMWrapper.MetadataCategory.Basic
+  id: Basic
+  parent: TabularEditor.TOMWrapper.MetadataCategory
+  langs:
+  - csharp
+  - vb
+  name: Basic
+  nameWithType: MetadataCategory.Basic
+  fullName: TabularEditor.TOMWrapper.MetadataCategory.Basic
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Read-only users cannot access sensitive metadata in the model, such as measure definitions or other calculation expressions.
+  example: []
+  syntax:
+    content: Basic = 1
+    return:
+      type: TabularEditor.TOMWrapper.MetadataCategory
+- uid: TabularEditor.TOMWrapper.MetadataCategory.CalculationDefinitions
+  commentId: F:TabularEditor.TOMWrapper.MetadataCategory.CalculationDefinitions
+  id: CalculationDefinitions
+  parent: TabularEditor.TOMWrapper.MetadataCategory
+  langs:
+  - csharp
+  - vb
+  name: CalculationDefinitions
+  nameWithType: MetadataCategory.CalculationDefinitions
+  fullName: TabularEditor.TOMWrapper.MetadataCategory.CalculationDefinitions
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Allow read of metadata elements related to definitions of calculations.
+  example: []
+  syntax:
+    content: CalculationDefinitions = 2
+    return:
+      type: TabularEditor.TOMWrapper.MetadataCategory
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.MetadataCategory.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<MetadataCategory>(MetadataCategory, MetadataCategory, MetadataCategory)
+  nameWithType: EnumExtensions.AllFlagsChanged<MetadataCategory>(MetadataCategory, MetadataCategory, MetadataCategory)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.MetadataCategory>(TabularEditor.TOMWrapper.MetadataCategory, TabularEditor.TOMWrapper.MetadataCategory, TabularEditor.TOMWrapper.MetadataCategory)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of MetadataCategory)(MetadataCategory, MetadataCategory, MetadataCategory)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.MetadataCategory)(TabularEditor.TOMWrapper.MetadataCategory, TabularEditor.TOMWrapper.MetadataCategory, TabularEditor.TOMWrapper.MetadataCategory)
+  name.vb: AllFlagsChanged(Of MetadataCategory)(MetadataCategory, MetadataCategory, MetadataCategory)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.MetadataCategory.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<MetadataCategory>(MetadataCategory, MetadataCategory, MetadataCategory)
+  nameWithType: EnumExtensions.AnyFlagsChanged<MetadataCategory>(MetadataCategory, MetadataCategory, MetadataCategory)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.MetadataCategory>(TabularEditor.TOMWrapper.MetadataCategory, TabularEditor.TOMWrapper.MetadataCategory, TabularEditor.TOMWrapper.MetadataCategory)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of MetadataCategory)(MetadataCategory, MetadataCategory, MetadataCategory)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.MetadataCategory)(TabularEditor.TOMWrapper.MetadataCategory, TabularEditor.TOMWrapper.MetadataCategory, TabularEditor.TOMWrapper.MetadataCategory)
+  name.vb: AnyFlagsChanged(Of MetadataCategory)(MetadataCategory, MetadataCategory, MetadataCategory)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.MetadataCategory.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.MetadataCategory)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<MetadataCategory>(MetadataCategory, MetadataCategory)
+  nameWithType: EnumExtensions.HasAnyFlags<MetadataCategory>(MetadataCategory, MetadataCategory)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.MetadataCategory>(TabularEditor.TOMWrapper.MetadataCategory, TabularEditor.TOMWrapper.MetadataCategory)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of MetadataCategory)(MetadataCategory, MetadataCategory)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.MetadataCategory)(TabularEditor.TOMWrapper.MetadataCategory, TabularEditor.TOMWrapper.MetadataCategory)
+  name.vb: HasAnyFlags(Of MetadataCategory)(MetadataCategory, MetadataCategory)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.MetadataCategory,TabularEditor.TOMWrapper.MetadataCategory)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    isExternal: true
+    href: TabularEditor.TOMWrapper.MetadataCategory.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.MetadataCategory
+  commentId: T:TabularEditor.TOMWrapper.MetadataCategory
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.MetadataCategory.html
+  name: MetadataCategory
+  nameWithType: MetadataCategory
+  fullName: TabularEditor.TOMWrapper.MetadataCategory

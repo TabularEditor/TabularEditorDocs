@@ -1,0 +1,24 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.PowerBI
+  commentId: N:TabularEditor.TOMWrapper.PowerBI
+  id: TabularEditor.TOMWrapper.PowerBI
+  children:
+  - TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException
+  langs:
+  - csharp
+  - vb
+  name: TabularEditor.TOMWrapper.PowerBI
+  nameWithType: TabularEditor.TOMWrapper.PowerBI
+  fullName: TabularEditor.TOMWrapper.PowerBI
+  type: Namespace
+  assemblies:
+  - TOMWrapper
+references:
+- uid: TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException
+  commentId: T:TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException
+  isExternal: true
+  href: TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException.html
+  name: PowerBIGovernanceException
+  nameWithType: PowerBIGovernanceException
+  fullName: TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException

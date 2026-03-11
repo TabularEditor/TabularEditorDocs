@@ -1,0 +1,358 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.ObjectDeletingEventHandler
+  commentId: T:TabularEditor.TOMWrapper.ObjectDeletingEventHandler
+  id: ObjectDeletingEventHandler
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.ObjectDeletingEventHandler.#ctor(System.Object,System.IntPtr)
+  - TabularEditor.TOMWrapper.ObjectDeletingEventHandler.BeginInvoke(System.Object,TabularEditor.TOMWrapper.ObjectDeletingEventArgs,System.AsyncCallback,System.Object)
+  - TabularEditor.TOMWrapper.ObjectDeletingEventHandler.EndInvoke(System.IAsyncResult)
+  - TabularEditor.TOMWrapper.ObjectDeletingEventHandler.Invoke(System.Object,TabularEditor.TOMWrapper.ObjectDeletingEventArgs)
+  langs:
+  - csharp
+  - vb
+  name: ObjectDeletingEventHandler
+  nameWithType: ObjectDeletingEventHandler
+  fullName: TabularEditor.TOMWrapper.ObjectDeletingEventHandler
+  type: Delegate
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public delegate void ObjectDeletingEventHandler(object sender, ObjectDeletingEventArgs e)
+    parameters:
+    - id: sender
+      type: System.Object
+    - id: e
+      type: TabularEditor.TOMWrapper.ObjectDeletingEventArgs
+    content.vb: Public Delegate Sub ObjectDeletingEventHandler(sender As Object, e As ObjectDeletingEventArgs)
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.#ctor(System.Object,System.IntPtr)
+  commentId: M:TabularEditor.TOMWrapper.ObjectDeletingEventHandler.#ctor(System.Object,System.IntPtr)
+  id: '#ctor(System.Object,System.IntPtr)'
+  parent: TabularEditor.TOMWrapper.ObjectDeletingEventHandler
+  langs:
+  - csharp
+  - vb
+  name: ObjectDeletingEventHandler(object, nint)
+  nameWithType: ObjectDeletingEventHandler.ObjectDeletingEventHandler(object, nint)
+  fullName: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.ObjectDeletingEventHandler(object, nint)
+  type: Constructor
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public ObjectDeletingEventHandler(object @object, nint method)
+    parameters:
+    - id: object
+      type: System.Object
+    - id: method
+      type: System.IntPtr
+    content.vb: Public Sub New([object] As Object, method As IntPtr)
+  overload: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.#ctor*
+  nameWithType.vb: ObjectDeletingEventHandler.New(Object, IntPtr)
+  fullName.vb: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.New(Object, System.IntPtr)
+  name.vb: New(Object, IntPtr)
+- uid: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.Invoke(System.Object,TabularEditor.TOMWrapper.ObjectDeletingEventArgs)
+  commentId: M:TabularEditor.TOMWrapper.ObjectDeletingEventHandler.Invoke(System.Object,TabularEditor.TOMWrapper.ObjectDeletingEventArgs)
+  id: Invoke(System.Object,TabularEditor.TOMWrapper.ObjectDeletingEventArgs)
+  parent: TabularEditor.TOMWrapper.ObjectDeletingEventHandler
+  langs:
+  - csharp
+  - vb
+  name: Invoke(object, ObjectDeletingEventArgs)
+  nameWithType: ObjectDeletingEventHandler.Invoke(object, ObjectDeletingEventArgs)
+  fullName: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.Invoke(object, TabularEditor.TOMWrapper.ObjectDeletingEventArgs)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public virtual void Invoke(object sender, ObjectDeletingEventArgs e)
+    parameters:
+    - id: sender
+      type: System.Object
+    - id: e
+      type: TabularEditor.TOMWrapper.ObjectDeletingEventArgs
+    content.vb: Public Overridable Sub Invoke(sender As Object, e As ObjectDeletingEventArgs)
+  overload: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.Invoke*
+  nameWithType.vb: ObjectDeletingEventHandler.Invoke(Object, ObjectDeletingEventArgs)
+  fullName.vb: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.Invoke(Object, TabularEditor.TOMWrapper.ObjectDeletingEventArgs)
+  name.vb: Invoke(Object, ObjectDeletingEventArgs)
+- uid: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.BeginInvoke(System.Object,TabularEditor.TOMWrapper.ObjectDeletingEventArgs,System.AsyncCallback,System.Object)
+  commentId: M:TabularEditor.TOMWrapper.ObjectDeletingEventHandler.BeginInvoke(System.Object,TabularEditor.TOMWrapper.ObjectDeletingEventArgs,System.AsyncCallback,System.Object)
+  id: BeginInvoke(System.Object,TabularEditor.TOMWrapper.ObjectDeletingEventArgs,System.AsyncCallback,System.Object)
+  parent: TabularEditor.TOMWrapper.ObjectDeletingEventHandler
+  langs:
+  - csharp
+  - vb
+  name: BeginInvoke(object, ObjectDeletingEventArgs, AsyncCallback, object)
+  nameWithType: ObjectDeletingEventHandler.BeginInvoke(object, ObjectDeletingEventArgs, AsyncCallback, object)
+  fullName: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.BeginInvoke(object, TabularEditor.TOMWrapper.ObjectDeletingEventArgs, System.AsyncCallback, object)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public virtual IAsyncResult BeginInvoke(object sender, ObjectDeletingEventArgs e, AsyncCallback callback, object @object)
+    parameters:
+    - id: sender
+      type: System.Object
+    - id: e
+      type: TabularEditor.TOMWrapper.ObjectDeletingEventArgs
+    - id: callback
+      type: System.AsyncCallback
+    - id: object
+      type: System.Object
+    return:
+      type: System.IAsyncResult
+    content.vb: Public Overridable Function BeginInvoke(sender As Object, e As ObjectDeletingEventArgs, callback As AsyncCallback, [object] As Object) As IAsyncResult
+  overload: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.BeginInvoke*
+  nameWithType.vb: ObjectDeletingEventHandler.BeginInvoke(Object, ObjectDeletingEventArgs, AsyncCallback, Object)
+  fullName.vb: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.BeginInvoke(Object, TabularEditor.TOMWrapper.ObjectDeletingEventArgs, System.AsyncCallback, Object)
+  name.vb: BeginInvoke(Object, ObjectDeletingEventArgs, AsyncCallback, Object)
+- uid: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.EndInvoke(System.IAsyncResult)
+  commentId: M:TabularEditor.TOMWrapper.ObjectDeletingEventHandler.EndInvoke(System.IAsyncResult)
+  id: EndInvoke(System.IAsyncResult)
+  parent: TabularEditor.TOMWrapper.ObjectDeletingEventHandler
+  langs:
+  - csharp
+  - vb
+  name: EndInvoke(IAsyncResult)
+  nameWithType: ObjectDeletingEventHandler.EndInvoke(IAsyncResult)
+  fullName: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.EndInvoke(System.IAsyncResult)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public virtual void EndInvoke(IAsyncResult result)
+    parameters:
+    - id: result
+      type: System.IAsyncResult
+    content.vb: Public Overridable Sub EndInvoke(result As IAsyncResult)
+  overload: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.EndInvoke*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: TabularEditor.TOMWrapper.ObjectDeletingEventArgs
+  commentId: T:TabularEditor.TOMWrapper.ObjectDeletingEventArgs
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ObjectDeletingEventArgs.html
+  name: ObjectDeletingEventArgs
+  nameWithType: ObjectDeletingEventArgs
+  fullName: TabularEditor.TOMWrapper.ObjectDeletingEventArgs
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.#ctor*
+  commentId: Overload:TabularEditor.TOMWrapper.ObjectDeletingEventHandler.#ctor
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.html#TabularEditor_TOMWrapper_ObjectDeletingEventHandler__ctor_System_Object_System_IntPtr_
+  name: ObjectDeletingEventHandler
+  nameWithType: ObjectDeletingEventHandler.ObjectDeletingEventHandler
+  fullName: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.ObjectDeletingEventHandler
+  nameWithType.vb: ObjectDeletingEventHandler.New
+  fullName.vb: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.New
+  name.vb: New
+- uid: System.IntPtr
+  commentId: T:System.IntPtr
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.intptr
+  name: nint
+  nameWithType: nint
+  fullName: nint
+  nameWithType.vb: IntPtr
+  fullName.vb: System.IntPtr
+  name.vb: IntPtr
+- uid: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.Invoke*
+  commentId: Overload:TabularEditor.TOMWrapper.ObjectDeletingEventHandler.Invoke
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.html#TabularEditor_TOMWrapper_ObjectDeletingEventHandler_Invoke_System_Object_TabularEditor_TOMWrapper_ObjectDeletingEventArgs_
+  name: Invoke
+  nameWithType: ObjectDeletingEventHandler.Invoke
+  fullName: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.Invoke
+- uid: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.BeginInvoke*
+  commentId: Overload:TabularEditor.TOMWrapper.ObjectDeletingEventHandler.BeginInvoke
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.html#TabularEditor_TOMWrapper_ObjectDeletingEventHandler_BeginInvoke_System_Object_TabularEditor_TOMWrapper_ObjectDeletingEventArgs_System_AsyncCallback_System_Object_
+  name: BeginInvoke
+  nameWithType: ObjectDeletingEventHandler.BeginInvoke
+  fullName: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.BeginInvoke
+- uid: System.AsyncCallback
+  commentId: T:System.AsyncCallback
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.asynccallback
+  name: AsyncCallback
+  nameWithType: AsyncCallback
+  fullName: System.AsyncCallback
+- uid: System.IAsyncResult
+  commentId: T:System.IAsyncResult
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iasyncresult
+  name: IAsyncResult
+  nameWithType: IAsyncResult
+  fullName: System.IAsyncResult
+- uid: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.EndInvoke*
+  commentId: Overload:TabularEditor.TOMWrapper.ObjectDeletingEventHandler.EndInvoke
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.html#TabularEditor_TOMWrapper_ObjectDeletingEventHandler_EndInvoke_System_IAsyncResult_
+  name: EndInvoke
+  nameWithType: ObjectDeletingEventHandler.EndInvoke
+  fullName: TabularEditor.TOMWrapper.ObjectDeletingEventHandler.EndInvoke

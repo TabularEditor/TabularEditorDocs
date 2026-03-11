@@ -1,0 +1,96 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.Shared.BPA
+  commentId: N:TabularEditor.Shared.BPA
+  id: TabularEditor.Shared.BPA
+  children:
+  - TabularEditor.Shared.BPA.AnalyzerResult
+  - TabularEditor.Shared.BPA.BestPracticeCollection
+  - TabularEditor.Shared.BPA.BestPracticeRule
+  - TabularEditor.Shared.BPA.RuleScope
+  - TabularEditor.Shared.BPA.RuleScopeConverter
+  langs:
+  - csharp
+  - vb
+  name: TabularEditor.Shared.BPA
+  nameWithType: TabularEditor.Shared.BPA
+  fullName: TabularEditor.Shared.BPA
+  type: Namespace
+  assemblies:
+  - TabularEditor3.Shared
+references:
+- uid: TabularEditor.Shared.BPA.AnalyzerResult
+  commentId: T:TabularEditor.Shared.BPA.AnalyzerResult
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html
+  name: AnalyzerResult
+  nameWithType: AnalyzerResult
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult
+- uid: TabularEditor.Shared.BPA.RuleScope
+  commentId: T:TabularEditor.Shared.BPA.RuleScope
+  parent: TabularEditor.Shared.BPA
+  isExternal: true
+  href: TabularEditor.Shared.BPA.RuleScope.html
+  name: RuleScope
+  nameWithType: RuleScope
+  fullName: TabularEditor.Shared.BPA.RuleScope
+- uid: TabularEditor.Shared.BPA.BestPracticeRule
+  commentId: T:TabularEditor.Shared.BPA.BestPracticeRule
+  parent: TabularEditor.Shared.BPA
+  isExternal: true
+  href: TabularEditor.Shared.BPA.BestPracticeRule.html
+  name: BestPracticeRule
+  nameWithType: BestPracticeRule
+  fullName: TabularEditor.Shared.BPA.BestPracticeRule
+- uid: TabularEditor.Shared.BPA.RuleScopeConverter
+  commentId: T:TabularEditor.Shared.BPA.RuleScopeConverter
+  isExternal: true
+  href: TabularEditor.Shared.BPA.RuleScopeConverter.html
+  name: RuleScopeConverter
+  nameWithType: RuleScopeConverter
+  fullName: TabularEditor.Shared.BPA.RuleScopeConverter
+- uid: TabularEditor.Shared.BPA.BestPracticeCollection
+  commentId: T:TabularEditor.Shared.BPA.BestPracticeCollection
+  parent: TabularEditor.Shared.BPA
+  isExternal: true
+  href: TabularEditor.Shared.BPA.BestPracticeCollection.html
+  name: BestPracticeCollection
+  nameWithType: BestPracticeCollection
+  fullName: TabularEditor.Shared.BPA.BestPracticeCollection
+- uid: TabularEditor.Shared.BPA
+  commentId: N:TabularEditor.Shared.BPA
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.BPA
+  nameWithType: TabularEditor.Shared.BPA
+  fullName: TabularEditor.Shared.BPA
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.BPA
+    name: BPA
+    isExternal: true
+    href: TabularEditor.Shared.BPA.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.BPA
+    name: BPA
+    isExternal: true
+    href: TabularEditor.Shared.BPA.html

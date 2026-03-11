@@ -1,0 +1,898 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.Shared.BPA.AnalyzerResult
+  commentId: T:TabularEditor.Shared.BPA.AnalyzerResult
+  id: AnalyzerResult
+  parent: TabularEditor.Shared.BPA
+  children:
+  - TabularEditor.Shared.BPA.AnalyzerResult.#ctor
+  - TabularEditor.Shared.BPA.AnalyzerResult.CanFix
+  - TabularEditor.Shared.BPA.AnalyzerResult.Fix
+  - TabularEditor.Shared.BPA.AnalyzerResult.Ignored
+  - TabularEditor.Shared.BPA.AnalyzerResult.InvalidCompatibilityLevel
+  - TabularEditor.Shared.BPA.AnalyzerResult.Object
+  - TabularEditor.Shared.BPA.AnalyzerResult.ObjectName
+  - TabularEditor.Shared.BPA.AnalyzerResult.ObjectType
+  - TabularEditor.Shared.BPA.AnalyzerResult.Rule
+  - TabularEditor.Shared.BPA.AnalyzerResult.RuleEnabled
+  - TabularEditor.Shared.BPA.AnalyzerResult.RuleError
+  - TabularEditor.Shared.BPA.AnalyzerResult.RuleErrorScope
+  - TabularEditor.Shared.BPA.AnalyzerResult.RuleHasError
+  - TabularEditor.Shared.BPA.AnalyzerResult.RuleName
+  langs:
+  - csharp
+  - vb
+  name: AnalyzerResult
+  nameWithType: AnalyzerResult
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult
+  type: Class
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public class AnalyzerResult
+    content.vb: Public Class AnalyzerResult
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.Fix
+  commentId: M:TabularEditor.Shared.BPA.AnalyzerResult.Fix
+  id: Fix
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: Fix()
+  nameWithType: AnalyzerResult.Fix()
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.Fix()
+  type: Method
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public void Fix()
+    content.vb: Public Sub Fix()
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.Fix*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.#ctor
+  commentId: M:TabularEditor.Shared.BPA.AnalyzerResult.#ctor
+  id: '#ctor'
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: AnalyzerResult()
+  nameWithType: AnalyzerResult.AnalyzerResult()
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.AnalyzerResult()
+  type: Constructor
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public AnalyzerResult()
+    content.vb: Public Sub New()
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.#ctor*
+  nameWithType.vb: AnalyzerResult.New()
+  fullName.vb: TabularEditor.Shared.BPA.AnalyzerResult.New()
+  name.vb: New()
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.RuleEnabled
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.RuleEnabled
+  id: RuleEnabled
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: RuleEnabled
+  nameWithType: AnalyzerResult.RuleEnabled
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.RuleEnabled
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public bool RuleEnabled { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property RuleEnabled As Boolean
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.RuleEnabled*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.RuleHasError
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.RuleHasError
+  id: RuleHasError
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: RuleHasError
+  nameWithType: AnalyzerResult.RuleHasError
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.RuleHasError
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public bool RuleHasError { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property RuleHasError As Boolean
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.RuleHasError*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.InvalidCompatibilityLevel
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.InvalidCompatibilityLevel
+  id: InvalidCompatibilityLevel
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: InvalidCompatibilityLevel
+  nameWithType: AnalyzerResult.InvalidCompatibilityLevel
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.InvalidCompatibilityLevel
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public bool InvalidCompatibilityLevel { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property InvalidCompatibilityLevel As Boolean
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.InvalidCompatibilityLevel*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.RuleError
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.RuleError
+  id: RuleError
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: RuleError
+  nameWithType: AnalyzerResult.RuleError
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.RuleError
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public string RuleError { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RuleError As String
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.RuleError*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.RuleErrorScope
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.RuleErrorScope
+  id: RuleErrorScope
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: RuleErrorScope
+  nameWithType: AnalyzerResult.RuleErrorScope
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.RuleErrorScope
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public RuleScope RuleErrorScope { get; set; }
+    parameters: []
+    return:
+      type: TabularEditor.Shared.BPA.RuleScope
+    content.vb: Public Property RuleErrorScope As RuleScope
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.RuleErrorScope*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.ObjectType
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.ObjectType
+  id: ObjectType
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: ObjectType
+  nameWithType: AnalyzerResult.ObjectType
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.ObjectType
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public string ObjectType { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property ObjectType As String
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.ObjectType*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.ObjectName
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.ObjectName
+  id: ObjectName
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: ObjectName
+  nameWithType: AnalyzerResult.ObjectName
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.ObjectName
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public string ObjectName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property ObjectName As String
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.ObjectName*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.RuleName
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.RuleName
+  id: RuleName
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: RuleName
+  nameWithType: AnalyzerResult.RuleName
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.RuleName
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public string RuleName { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property RuleName As String
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.RuleName*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.Object
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.Object
+  id: Object
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: Object
+  nameWithType: AnalyzerResult.Object
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.Object
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public ITabularNamedObject Object { get; set; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.ITabularNamedObject
+    content.vb: Public Property [Object] As ITabularNamedObject
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.Object*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.Rule
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.Rule
+  id: Rule
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: Rule
+  nameWithType: AnalyzerResult.Rule
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.Rule
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public BestPracticeRule Rule { get; set; }
+    parameters: []
+    return:
+      type: TabularEditor.Shared.BPA.BestPracticeRule
+    content.vb: Public Property Rule As BestPracticeRule
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.Rule*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.CanFix
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.CanFix
+  id: CanFix
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: CanFix
+  nameWithType: AnalyzerResult.CanFix
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.CanFix
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public bool CanFix { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property CanFix As Boolean
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.CanFix*
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.Ignored
+  commentId: P:TabularEditor.Shared.BPA.AnalyzerResult.Ignored
+  id: Ignored
+  parent: TabularEditor.Shared.BPA.AnalyzerResult
+  langs:
+  - csharp
+  - vb
+  name: Ignored
+  nameWithType: AnalyzerResult.Ignored
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.Ignored
+  type: Property
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  summary: Indicates whether this rule should be ignored on this particular object
+  example: []
+  syntax:
+    content: public bool Ignored { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property Ignored As Boolean
+  overload: TabularEditor.Shared.BPA.AnalyzerResult.Ignored*
+references:
+- uid: TabularEditor.Shared.BPA
+  commentId: N:TabularEditor.Shared.BPA
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.BPA
+  nameWithType: TabularEditor.Shared.BPA
+  fullName: TabularEditor.Shared.BPA
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.BPA
+    name: BPA
+    isExternal: true
+    href: TabularEditor.Shared.BPA.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.BPA
+    name: BPA
+    isExternal: true
+    href: TabularEditor.Shared.BPA.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.Fix*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.Fix
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_Fix
+  name: Fix
+  nameWithType: AnalyzerResult.Fix
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.Fix
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.#ctor*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.#ctor
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult__ctor
+  name: AnalyzerResult
+  nameWithType: AnalyzerResult.AnalyzerResult
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.AnalyzerResult
+  nameWithType.vb: AnalyzerResult.New
+  fullName.vb: TabularEditor.Shared.BPA.AnalyzerResult.New
+  name.vb: New
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.RuleEnabled*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.RuleEnabled
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_RuleEnabled
+  name: RuleEnabled
+  nameWithType: AnalyzerResult.RuleEnabled
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.RuleEnabled
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.RuleHasError*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.RuleHasError
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_RuleHasError
+  name: RuleHasError
+  nameWithType: AnalyzerResult.RuleHasError
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.RuleHasError
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.InvalidCompatibilityLevel*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.InvalidCompatibilityLevel
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_InvalidCompatibilityLevel
+  name: InvalidCompatibilityLevel
+  nameWithType: AnalyzerResult.InvalidCompatibilityLevel
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.InvalidCompatibilityLevel
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.RuleError*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.RuleError
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_RuleError
+  name: RuleError
+  nameWithType: AnalyzerResult.RuleError
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.RuleError
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.RuleErrorScope*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.RuleErrorScope
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_RuleErrorScope
+  name: RuleErrorScope
+  nameWithType: AnalyzerResult.RuleErrorScope
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.RuleErrorScope
+- uid: TabularEditor.Shared.BPA.RuleScope
+  commentId: T:TabularEditor.Shared.BPA.RuleScope
+  parent: TabularEditor.Shared.BPA
+  isExternal: true
+  href: TabularEditor.Shared.BPA.RuleScope.html
+  name: RuleScope
+  nameWithType: RuleScope
+  fullName: TabularEditor.Shared.BPA.RuleScope
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.ObjectType*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.ObjectType
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_ObjectType
+  name: ObjectType
+  nameWithType: AnalyzerResult.ObjectType
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.ObjectType
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.ObjectName*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.ObjectName
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_ObjectName
+  name: ObjectName
+  nameWithType: AnalyzerResult.ObjectName
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.ObjectName
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.RuleName*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.RuleName
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_RuleName
+  name: RuleName
+  nameWithType: AnalyzerResult.RuleName
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.RuleName
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.Object*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.Object
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_Object
+  name: Object
+  nameWithType: AnalyzerResult.Object
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.Object
+- uid: TabularEditor.TOMWrapper.ITabularNamedObject
+  commentId: T:TabularEditor.TOMWrapper.ITabularNamedObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ITabularNamedObject.html
+  name: ITabularNamedObject
+  nameWithType: ITabularNamedObject
+  fullName: TabularEditor.TOMWrapper.ITabularNamedObject
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.Rule*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.Rule
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_Rule
+  name: Rule
+  nameWithType: AnalyzerResult.Rule
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.Rule
+- uid: TabularEditor.Shared.BPA.BestPracticeRule
+  commentId: T:TabularEditor.Shared.BPA.BestPracticeRule
+  parent: TabularEditor.Shared.BPA
+  isExternal: true
+  href: TabularEditor.Shared.BPA.BestPracticeRule.html
+  name: BestPracticeRule
+  nameWithType: BestPracticeRule
+  fullName: TabularEditor.Shared.BPA.BestPracticeRule
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.CanFix*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.CanFix
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_CanFix
+  name: CanFix
+  nameWithType: AnalyzerResult.CanFix
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.CanFix
+- uid: TabularEditor.Shared.BPA.AnalyzerResult.Ignored*
+  commentId: Overload:TabularEditor.Shared.BPA.AnalyzerResult.Ignored
+  isExternal: true
+  href: TabularEditor.Shared.BPA.AnalyzerResult.html#TabularEditor_Shared_BPA_AnalyzerResult_Ignored
+  name: Ignored
+  nameWithType: AnalyzerResult.Ignored
+  fullName: TabularEditor.Shared.BPA.AnalyzerResult.Ignored

@@ -1,0 +1,323 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.Shared.BPA.RuleScopeConverter
+  commentId: T:TabularEditor.Shared.BPA.RuleScopeConverter
+  id: RuleScopeConverter
+  parent: TabularEditor.Shared.BPA
+  children:
+  - TabularEditor.Shared.BPA.RuleScopeConverter.#ctor
+  - TabularEditor.Shared.BPA.RuleScopeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)
+  - TabularEditor.Shared.BPA.RuleScopeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)
+  langs:
+  - csharp
+  - vb
+  name: RuleScopeConverter
+  nameWithType: RuleScopeConverter
+  fullName: TabularEditor.Shared.BPA.RuleScopeConverter
+  type: Class
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: 'public class RuleScopeConverter : StringEnumConverter'
+    content.vb: Public Class RuleScopeConverter Inherits StringEnumConverter
+  inheritance:
+  - System.Object
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.Shared.BPA.RuleScopeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)
+  commentId: M:TabularEditor.Shared.BPA.RuleScopeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)
+  id: ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)
+  parent: TabularEditor.Shared.BPA.RuleScopeConverter
+  langs:
+  - csharp
+  - vb
+  name: ReadJson(JsonReader, Type, object, JsonSerializer)
+  nameWithType: RuleScopeConverter.ReadJson(JsonReader, Type, object, JsonSerializer)
+  fullName: TabularEditor.Shared.BPA.RuleScopeConverter.ReadJson(Newtonsoft.Json.JsonReader, System.Type, object, Newtonsoft.Json.JsonSerializer)
+  type: Method
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  example: []
+  syntax:
+    content: public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    parameters:
+    - id: reader
+      type: Newtonsoft.Json.JsonReader
+    - id: objectType
+      type: System.Type
+    - id: existingValue
+      type: System.Object
+    - id: serializer
+      type: Newtonsoft.Json.JsonSerializer
+    return:
+      type: System.Object
+    content.vb: Public Overrides Function ReadJson(reader As JsonReader, objectType As Type, existingValue As Object, serializer As JsonSerializer) As Object
+  overload: TabularEditor.Shared.BPA.RuleScopeConverter.ReadJson*
+  nameWithType.vb: RuleScopeConverter.ReadJson(JsonReader, Type, Object, JsonSerializer)
+  fullName.vb: TabularEditor.Shared.BPA.RuleScopeConverter.ReadJson(Newtonsoft.Json.JsonReader, System.Type, Object, Newtonsoft.Json.JsonSerializer)
+  name.vb: ReadJson(JsonReader, Type, Object, JsonSerializer)
+- uid: TabularEditor.Shared.BPA.RuleScopeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)
+  commentId: M:TabularEditor.Shared.BPA.RuleScopeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)
+  id: WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)
+  parent: TabularEditor.Shared.BPA.RuleScopeConverter
+  langs:
+  - csharp
+  - vb
+  name: WriteJson(JsonWriter, object, JsonSerializer)
+  nameWithType: RuleScopeConverter.WriteJson(JsonWriter, object, JsonSerializer)
+  fullName: TabularEditor.Shared.BPA.RuleScopeConverter.WriteJson(Newtonsoft.Json.JsonWriter, object, Newtonsoft.Json.JsonSerializer)
+  type: Method
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  example: []
+  syntax:
+    content: public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    parameters:
+    - id: writer
+      type: Newtonsoft.Json.JsonWriter
+    - id: value
+      type: System.Object
+    - id: serializer
+      type: Newtonsoft.Json.JsonSerializer
+    content.vb: Public Overrides Sub WriteJson(writer As JsonWriter, value As Object, serializer As JsonSerializer)
+  overload: TabularEditor.Shared.BPA.RuleScopeConverter.WriteJson*
+  nameWithType.vb: RuleScopeConverter.WriteJson(JsonWriter, Object, JsonSerializer)
+  fullName.vb: TabularEditor.Shared.BPA.RuleScopeConverter.WriteJson(Newtonsoft.Json.JsonWriter, Object, Newtonsoft.Json.JsonSerializer)
+  name.vb: WriteJson(JsonWriter, Object, JsonSerializer)
+- uid: TabularEditor.Shared.BPA.RuleScopeConverter.#ctor
+  commentId: M:TabularEditor.Shared.BPA.RuleScopeConverter.#ctor
+  id: '#ctor'
+  parent: TabularEditor.Shared.BPA.RuleScopeConverter
+  langs:
+  - csharp
+  - vb
+  name: RuleScopeConverter()
+  nameWithType: RuleScopeConverter.RuleScopeConverter()
+  fullName: TabularEditor.Shared.BPA.RuleScopeConverter.RuleScopeConverter()
+  type: Constructor
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.BPA
+  syntax:
+    content: public RuleScopeConverter()
+    content.vb: Public Sub New()
+  overload: TabularEditor.Shared.BPA.RuleScopeConverter.#ctor*
+  nameWithType.vb: RuleScopeConverter.New()
+  fullName.vb: TabularEditor.Shared.BPA.RuleScopeConverter.New()
+  name.vb: New()
+references:
+- uid: TabularEditor.Shared.BPA
+  commentId: N:TabularEditor.Shared.BPA
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.BPA
+  nameWithType: TabularEditor.Shared.BPA
+  fullName: TabularEditor.Shared.BPA
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.BPA
+    name: BPA
+    isExternal: true
+    href: TabularEditor.Shared.BPA.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.BPA
+    name: BPA
+    isExternal: true
+    href: TabularEditor.Shared.BPA.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.Shared.BPA.RuleScopeConverter.ReadJson*
+  commentId: Overload:TabularEditor.Shared.BPA.RuleScopeConverter.ReadJson
+  isExternal: true
+  href: TabularEditor.Shared.BPA.RuleScopeConverter.html#TabularEditor_Shared_BPA_RuleScopeConverter_ReadJson_Newtonsoft_Json_JsonReader_System_Type_System_Object_Newtonsoft_Json_JsonSerializer_
+  name: ReadJson
+  nameWithType: RuleScopeConverter.ReadJson
+  fullName: TabularEditor.Shared.BPA.RuleScopeConverter.ReadJson
+- uid: Newtonsoft.Json.JsonReader
+  isExternal: true
+  name: JsonReader
+  nameWithType: JsonReader
+  fullName: Newtonsoft.Json.JsonReader
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: Newtonsoft.Json.JsonSerializer
+  isExternal: true
+  name: JsonSerializer
+  nameWithType: JsonSerializer
+  fullName: Newtonsoft.Json.JsonSerializer
+- uid: TabularEditor.Shared.BPA.RuleScopeConverter.WriteJson*
+  commentId: Overload:TabularEditor.Shared.BPA.RuleScopeConverter.WriteJson
+  isExternal: true
+  href: TabularEditor.Shared.BPA.RuleScopeConverter.html#TabularEditor_Shared_BPA_RuleScopeConverter_WriteJson_Newtonsoft_Json_JsonWriter_System_Object_Newtonsoft_Json_JsonSerializer_
+  name: WriteJson
+  nameWithType: RuleScopeConverter.WriteJson
+  fullName: TabularEditor.Shared.BPA.RuleScopeConverter.WriteJson
+- uid: Newtonsoft.Json.JsonWriter
+  isExternal: true
+  name: JsonWriter
+  nameWithType: JsonWriter
+  fullName: Newtonsoft.Json.JsonWriter
+- uid: TabularEditor.Shared.BPA.RuleScopeConverter.#ctor*
+  commentId: Overload:TabularEditor.Shared.BPA.RuleScopeConverter.#ctor
+  isExternal: true
+  href: TabularEditor.Shared.BPA.RuleScopeConverter.html#TabularEditor_Shared_BPA_RuleScopeConverter__ctor
+  name: RuleScopeConverter
+  nameWithType: RuleScopeConverter.RuleScopeConverter
+  fullName: TabularEditor.Shared.BPA.RuleScopeConverter.RuleScopeConverter
+  nameWithType.vb: RuleScopeConverter.New
+  fullName.vb: TabularEditor.Shared.BPA.RuleScopeConverter.New
+  name.vb: New

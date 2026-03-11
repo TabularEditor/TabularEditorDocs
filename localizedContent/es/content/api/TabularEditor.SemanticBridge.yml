@@ -1,0 +1,52 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.SemanticBridge
+  commentId: N:TabularEditor.SemanticBridge
+  id: TabularEditor.SemanticBridge
+  children:
+  - TabularEditor.SemanticBridge.SemanticBridgeService
+  langs:
+  - csharp
+  - vb
+  name: TabularEditor.SemanticBridge
+  nameWithType: TabularEditor.SemanticBridge
+  fullName: TabularEditor.SemanticBridge
+  type: Namespace
+  assemblies:
+  - SemanticBridge
+references:
+- uid: TabularEditor.SemanticBridge.SemanticBridgeService
+  commentId: T:TabularEditor.SemanticBridge.SemanticBridgeService
+  parent: TabularEditor.SemanticBridge
+  isExternal: true
+  href: TabularEditor.SemanticBridge.SemanticBridgeService.html
+  name: SemanticBridgeService
+  nameWithType: SemanticBridgeService
+  fullName: TabularEditor.SemanticBridge.SemanticBridgeService
+- uid: TabularEditor.SemanticBridge
+  commentId: N:TabularEditor.SemanticBridge
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.SemanticBridge
+  nameWithType: TabularEditor.SemanticBridge
+  fullName: TabularEditor.SemanticBridge
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html

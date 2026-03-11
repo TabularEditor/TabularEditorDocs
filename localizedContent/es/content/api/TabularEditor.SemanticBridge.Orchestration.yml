@@ -1,0 +1,71 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.SemanticBridge.Orchestration
+  commentId: N:TabularEditor.SemanticBridge.Orchestration
+  id: TabularEditor.SemanticBridge.Orchestration
+  children:
+  - TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage
+  - TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  langs:
+  - csharp
+  - vb
+  name: TabularEditor.SemanticBridge.Orchestration
+  nameWithType: TabularEditor.SemanticBridge.Orchestration
+  fullName: TabularEditor.SemanticBridge.Orchestration
+  type: Namespace
+  assemblies:
+  - SemanticBridge
+references:
+- uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage
+  commentId: T:TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage
+  parent: TabularEditor.SemanticBridge.Orchestration
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage.html
+  name: DiagnosticMessage
+  nameWithType: DiagnosticMessage
+  fullName: TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage
+- uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  commentId: T:TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+  parent: TabularEditor.SemanticBridge.Orchestration
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity.html
+  name: DiagnosticSeverity
+  nameWithType: DiagnosticSeverity
+  fullName: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+- uid: TabularEditor.SemanticBridge.Orchestration
+  commentId: N:TabularEditor.SemanticBridge.Orchestration
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.SemanticBridge.Orchestration
+  nameWithType: TabularEditor.SemanticBridge.Orchestration
+  fullName: TabularEditor.SemanticBridge.Orchestration
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Orchestration
+    name: Orchestration
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Orchestration.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Orchestration
+    name: Orchestration
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Orchestration.html

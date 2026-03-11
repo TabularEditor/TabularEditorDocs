@@ -1,0 +1,96 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.Linguistics
+  commentId: N:TabularEditor.TOMWrapper.Linguistics
+  id: TabularEditor.TOMWrapper.Linguistics
+  children:
+  - TabularEditor.TOMWrapper.Linguistics.State
+  - TabularEditor.TOMWrapper.Linguistics.SynonymHelper
+  - TabularEditor.TOMWrapper.Linguistics.Term
+  - TabularEditor.TOMWrapper.Linguistics.TermProperties
+  - TabularEditor.TOMWrapper.Linguistics.TermPropertiesType
+  langs:
+  - csharp
+  - vb
+  name: TabularEditor.TOMWrapper.Linguistics
+  nameWithType: TabularEditor.TOMWrapper.Linguistics
+  fullName: TabularEditor.TOMWrapper.Linguistics
+  type: Namespace
+  assemblies:
+  - TOMWrapper
+references:
+- uid: TabularEditor.TOMWrapper.Linguistics.SynonymHelper
+  commentId: T:TabularEditor.TOMWrapper.Linguistics.SynonymHelper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Linguistics.SynonymHelper.html
+  name: SynonymHelper
+  nameWithType: SynonymHelper
+  fullName: TabularEditor.TOMWrapper.Linguistics.SynonymHelper
+- uid: TabularEditor.TOMWrapper.Linguistics.Term
+  commentId: T:TabularEditor.TOMWrapper.Linguistics.Term
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Linguistics.Term.html
+  name: Term
+  nameWithType: Term
+  fullName: TabularEditor.TOMWrapper.Linguistics.Term
+- uid: TabularEditor.TOMWrapper.Linguistics.TermProperties
+  commentId: T:TabularEditor.TOMWrapper.Linguistics.TermProperties
+  parent: TabularEditor.TOMWrapper.Linguistics
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Linguistics.TermProperties.html
+  name: TermProperties
+  nameWithType: TermProperties
+  fullName: TabularEditor.TOMWrapper.Linguistics.TermProperties
+- uid: TabularEditor.TOMWrapper.Linguistics.State
+  commentId: T:TabularEditor.TOMWrapper.Linguistics.State
+  parent: TabularEditor.TOMWrapper.Linguistics
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Linguistics.State.html
+  name: State
+  nameWithType: State
+  fullName: TabularEditor.TOMWrapper.Linguistics.State
+- uid: TabularEditor.TOMWrapper.Linguistics.TermPropertiesType
+  commentId: T:TabularEditor.TOMWrapper.Linguistics.TermPropertiesType
+  parent: TabularEditor.TOMWrapper.Linguistics
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Linguistics.TermPropertiesType.html
+  name: TermPropertiesType
+  nameWithType: TermPropertiesType
+  fullName: TabularEditor.TOMWrapper.Linguistics.TermPropertiesType
+- uid: TabularEditor.TOMWrapper.Linguistics
+  commentId: N:TabularEditor.TOMWrapper.Linguistics
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper.Linguistics
+  nameWithType: TabularEditor.TOMWrapper.Linguistics
+  fullName: TabularEditor.TOMWrapper.Linguistics
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper.Linguistics
+    name: Linguistics
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Linguistics.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper.Linguistics
+    name: Linguistics
+    isExternal: true
+    href: TabularEditor.TOMWrapper.Linguistics.html

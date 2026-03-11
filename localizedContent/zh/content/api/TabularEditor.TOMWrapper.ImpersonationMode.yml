@@ -1,0 +1,536 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.ImpersonationMode
+  commentId: T:TabularEditor.TOMWrapper.ImpersonationMode
+  id: ImpersonationMode
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.ImpersonationMode.Default
+  - TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAccount
+  - TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAnonymous
+  - TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateCurrentUser
+  - TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateServiceAccount
+  - TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateUnattendedAccount
+  langs:
+  - csharp
+  - vb
+  name: ImpersonationMode
+  nameWithType: ImpersonationMode
+  fullName: TabularEditor.TOMWrapper.ImpersonationMode
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Determines how credentials are obtained for an impersonated connection to a data source during data import or refresh.
+  example: []
+  syntax:
+    content: public enum ImpersonationMode
+    content.vb: Public Enum ImpersonationMode
+  extensionMethods:
+  - TabularEditor.TOMWrapper.ImpersonationMode.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode)
+  - TabularEditor.TOMWrapper.ImpersonationMode.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode)
+  - TabularEditor.TOMWrapper.ImpersonationMode.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ImpersonationMode)
+- uid: TabularEditor.TOMWrapper.ImpersonationMode.Default
+  commentId: F:TabularEditor.TOMWrapper.ImpersonationMode.Default
+  id: Default
+  parent: TabularEditor.TOMWrapper.ImpersonationMode
+  langs:
+  - csharp
+  - vb
+  name: Default
+  nameWithType: ImpersonationMode.Default
+  fullName: TabularEditor.TOMWrapper.ImpersonationMode.Default
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Uses the inherited value from the ImpersonationMode on the DataSourceImpersonationInfo object in the database.
+  example: []
+  syntax:
+    content: Default = 1
+    return:
+      type: TabularEditor.TOMWrapper.ImpersonationMode
+- uid: TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAccount
+  commentId: F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAccount
+  id: ImpersonateAccount
+  parent: TabularEditor.TOMWrapper.ImpersonationMode
+  langs:
+  - csharp
+  - vb
+  name: ImpersonateAccount
+  nameWithType: ImpersonationMode.ImpersonateAccount
+  fullName: TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAccount
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: A Windows user account having read permissions on the external data source.
+  example: []
+  syntax:
+    content: ImpersonateAccount = 2
+    return:
+      type: TabularEditor.TOMWrapper.ImpersonationMode
+- uid: TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAnonymous
+  commentId: F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAnonymous
+  id: ImpersonateAnonymous
+  parent: TabularEditor.TOMWrapper.ImpersonationMode
+  langs:
+  - csharp
+  - vb
+  name: ImpersonateAnonymous
+  nameWithType: ImpersonationMode.ImpersonateAnonymous
+  fullName: TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateAnonymous
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Not supported.
+  example: []
+  syntax:
+    content: ImpersonateAnonymous = 3
+    return:
+      type: TabularEditor.TOMWrapper.ImpersonationMode
+- uid: TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateCurrentUser
+  commentId: F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateCurrentUser
+  id: ImpersonateCurrentUser
+  parent: TabularEditor.TOMWrapper.ImpersonationMode
+  langs:
+  - csharp
+  - vb
+  name: ImpersonateCurrentUser
+  nameWithType: ImpersonationMode.ImpersonateCurrentUser
+  fullName: TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateCurrentUser
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Not supported for tabular model databases attached to an Analysis Services instance.
+  example: []
+  syntax:
+    content: ImpersonateCurrentUser = 4
+    return:
+      type: TabularEditor.TOMWrapper.ImpersonationMode
+- uid: TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateServiceAccount
+  commentId: F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateServiceAccount
+  id: ImpersonateServiceAccount
+  parent: TabularEditor.TOMWrapper.ImpersonationMode
+  langs:
+  - csharp
+  - vb
+  name: ImpersonateServiceAccount
+  nameWithType: ImpersonationMode.ImpersonateServiceAccount
+  fullName: TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateServiceAccount
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Startup account of the Analysis Services instance. This account must have read permissions on a data source to enable data refresh.
+  example: []
+  syntax:
+    content: ImpersonateServiceAccount = 5
+    return:
+      type: TabularEditor.TOMWrapper.ImpersonationMode
+- uid: TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateUnattendedAccount
+  commentId: F:TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateUnattendedAccount
+  id: ImpersonateUnattendedAccount
+  parent: TabularEditor.TOMWrapper.ImpersonationMode
+  langs:
+  - csharp
+  - vb
+  name: ImpersonateUnattendedAccount
+  nameWithType: ImpersonationMode.ImpersonateUnattendedAccount
+  fullName: TabularEditor.TOMWrapper.ImpersonationMode.ImpersonateUnattendedAccount
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Do not reference this member directly in your code. It supports the Analysis Services infrastructure.
+  example: []
+  syntax:
+    content: ImpersonateUnattendedAccount = 6
+    return:
+      type: TabularEditor.TOMWrapper.ImpersonationMode
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.ImpersonationMode.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<ImpersonationMode>(ImpersonationMode, ImpersonationMode, ImpersonationMode)
+  nameWithType: EnumExtensions.AllFlagsChanged<ImpersonationMode>(ImpersonationMode, ImpersonationMode, ImpersonationMode)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.ImpersonationMode>(TabularEditor.TOMWrapper.ImpersonationMode, TabularEditor.TOMWrapper.ImpersonationMode, TabularEditor.TOMWrapper.ImpersonationMode)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of ImpersonationMode)(ImpersonationMode, ImpersonationMode, ImpersonationMode)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.ImpersonationMode)(TabularEditor.TOMWrapper.ImpersonationMode, TabularEditor.TOMWrapper.ImpersonationMode, TabularEditor.TOMWrapper.ImpersonationMode)
+  name.vb: AllFlagsChanged(Of ImpersonationMode)(ImpersonationMode, ImpersonationMode, ImpersonationMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.ImpersonationMode.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<ImpersonationMode>(ImpersonationMode, ImpersonationMode, ImpersonationMode)
+  nameWithType: EnumExtensions.AnyFlagsChanged<ImpersonationMode>(ImpersonationMode, ImpersonationMode, ImpersonationMode)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.ImpersonationMode>(TabularEditor.TOMWrapper.ImpersonationMode, TabularEditor.TOMWrapper.ImpersonationMode, TabularEditor.TOMWrapper.ImpersonationMode)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of ImpersonationMode)(ImpersonationMode, ImpersonationMode, ImpersonationMode)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.ImpersonationMode)(TabularEditor.TOMWrapper.ImpersonationMode, TabularEditor.TOMWrapper.ImpersonationMode, TabularEditor.TOMWrapper.ImpersonationMode)
+  name.vb: AnyFlagsChanged(Of ImpersonationMode)(ImpersonationMode, ImpersonationMode, ImpersonationMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.ImpersonationMode.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ImpersonationMode)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<ImpersonationMode>(ImpersonationMode, ImpersonationMode)
+  nameWithType: EnumExtensions.HasAnyFlags<ImpersonationMode>(ImpersonationMode, ImpersonationMode)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.ImpersonationMode>(TabularEditor.TOMWrapper.ImpersonationMode, TabularEditor.TOMWrapper.ImpersonationMode)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of ImpersonationMode)(ImpersonationMode, ImpersonationMode)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.ImpersonationMode)(TabularEditor.TOMWrapper.ImpersonationMode, TabularEditor.TOMWrapper.ImpersonationMode)
+  name.vb: HasAnyFlags(Of ImpersonationMode)(ImpersonationMode, ImpersonationMode)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ImpersonationMode,TabularEditor.TOMWrapper.ImpersonationMode)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.ImpersonationMode
+  commentId: T:TabularEditor.TOMWrapper.ImpersonationMode
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ImpersonationMode.html
+  name: ImpersonationMode
+  nameWithType: ImpersonationMode
+  fullName: TabularEditor.TOMWrapper.ImpersonationMode

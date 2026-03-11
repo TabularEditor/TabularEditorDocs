@@ -1,0 +1,547 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+  commentId: T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+  id: IMetricViewValidationRule
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  children:
+  - TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Category
+  - TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Name
+  - TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.TargetType
+  - TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Validate(TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext)
+  langs:
+  - csharp
+  - vb
+  name: IMetricViewValidationRule
+  nameWithType: IMetricViewValidationRule
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+  type: Interface
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  summary: >-
+    Interface for validation rules that can be applied to metric view objects.
+
+    ValidMetricViewRules encapsulate a specific validation check that produces
+
+    diagnostic messages when validation fails.
+  example: []
+  syntax:
+    content: public interface IMetricViewValidationRule
+    content.vb: Public Interface IMetricViewValidationRule
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Validate(TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Validate(TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext)
+  id: Validate(TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject,TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext)
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+  langs:
+  - csharp
+  - vb
+  name: Validate(IMetricViewObject, IReadOnlyValidationContext)
+  nameWithType: IMetricViewValidationRule.Validate(IMetricViewObject, IReadOnlyValidationContext)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Validate(TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject, TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext)
+  type: Method
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  summary: >-
+    Validates the target object using the provided read-only context.
+
+    ValidMetricViewRules receive a read-only view to prevent accidental
+
+    mutation of validation state.
+  example: []
+  syntax:
+    content: IEnumerable<DiagnosticMessage> Validate(IMetricViewObject target, IReadOnlyValidationContext context)
+    parameters:
+    - id: target
+      type: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+      description: The object to validate
+    - id: context
+      type: TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext
+      description: >-
+        Read-only validation context with state information including path tracking
+
+        and uniqueness collections
+    return:
+      type: System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}
+      description: >-
+        Collection of diagnostic messages for any validation failures, or an empty
+
+        collection if validation passes
+    content.vb: Function Validate(target As IMetricViewObject, context As IReadOnlyValidationContext) As IEnumerable(Of DiagnosticMessage)
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Validate*
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Name
+  commentId: P:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Name
+  id: Name
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: IMetricViewValidationRule.Name
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Name
+  type: Property
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  summary: >-
+    Gets the unique name of the validation rule.
+
+    Names should be descriptive and indicate what the rule validates.
+  example: []
+  syntax:
+    content: string Name { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: ReadOnly Property Name As String
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Name*
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Category
+  commentId: P:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Category
+  id: Category
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+  langs:
+  - csharp
+  - vb
+  name: Category
+  nameWithType: IMetricViewValidationRule.Category
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Category
+  type: Property
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  summary: >-
+    Gets the category of the validation rule for organizational purposes.
+
+    Categories help group related rules (e.g., "Names", "Structure", "Expressions").
+  example: []
+  syntax:
+    content: string Category { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: ReadOnly Property Category As String
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Category*
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.TargetType
+  commentId: P:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.TargetType
+  id: TargetType
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+  langs:
+  - csharp
+  - vb
+  name: TargetType
+  nameWithType: IMetricViewValidationRule.TargetType
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.TargetType
+  type: Property
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  summary: >-
+    Gets the type of object this rule is designed to validate.
+
+    This allows for efficient filtering and application of rules.
+  example: []
+  syntax:
+    content: Type TargetType { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: ReadOnly Property TargetType As Type
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.TargetType*
+references:
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  commentId: N:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  nameWithType: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+    name: Interfaces
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+    name: Interfaces
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.html
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Validate*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Validate
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.html#TabularEditor_SemanticBridge_Platforms_Databricks_Interfaces_IMetricViewValidationRule_Validate_TabularEditor_SemanticBridge_Platforms_Databricks_Interfaces_IMetricViewObject_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_
+  name: Validate
+  nameWithType: IMetricViewValidationRule.Validate
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Validate
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  commentId: T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject.html
+  name: IMetricViewObject
+  nameWithType: IMetricViewObject
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext
+  commentId: T:TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Validation
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext.html
+  name: IReadOnlyValidationContext
+  nameWithType: IReadOnlyValidationContext
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}
+  commentId: T:System.Collections.Generic.IEnumerable{TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<DiagnosticMessage>
+  nameWithType: IEnumerable<DiagnosticMessage>
+  fullName: System.Collections.Generic.IEnumerable<TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage>
+  nameWithType.vb: IEnumerable(Of DiagnosticMessage)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage)
+  name.vb: IEnumerable(Of DiagnosticMessage)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage
+    name: DiagnosticMessage
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage
+    name: DiagnosticMessage
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage.html
+  - name: )
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Validation
+  commentId: N:TabularEditor.SemanticBridge.Platforms.Databricks.Validation
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.SemanticBridge.Platforms.Databricks.Validation
+  nameWithType: TabularEditor.SemanticBridge.Platforms.Databricks.Validation
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Validation
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Validation
+    name: Validation
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.Validation.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Validation
+    name: Validation
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.Validation.html
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Name*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Name
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.html#TabularEditor_SemanticBridge_Platforms_Databricks_Interfaces_IMetricViewValidationRule_Name
+  name: Name
+  nameWithType: IMetricViewValidationRule.Name
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Category*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Category
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.html#TabularEditor_SemanticBridge_Platforms_Databricks_Interfaces_IMetricViewValidationRule_Category
+  name: Category
+  nameWithType: IMetricViewValidationRule.Category
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.Category
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.TargetType*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.TargetType
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.html#TabularEditor_SemanticBridge_Platforms_Databricks_Interfaces_IMetricViewValidationRule_TargetType
+  name: TargetType
+  nameWithType: IMetricViewValidationRule.TargetType
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.TargetType
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type

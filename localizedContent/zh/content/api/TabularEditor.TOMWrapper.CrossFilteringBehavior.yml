@@ -1,0 +1,473 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+  commentId: T:TabularEditor.TOMWrapper.CrossFilteringBehavior
+  id: CrossFilteringBehavior
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.CrossFilteringBehavior.Automatic
+  - TabularEditor.TOMWrapper.CrossFilteringBehavior.BothDirections
+  - TabularEditor.TOMWrapper.CrossFilteringBehavior.OneDirection
+  langs:
+  - csharp
+  - vb
+  name: CrossFilteringBehavior
+  nameWithType: CrossFilteringBehavior
+  fullName: TabularEditor.TOMWrapper.CrossFilteringBehavior
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Indicates how relationships influence filtering of data. The enumeration defines the possible behaviors.
+  example: []
+  syntax:
+    content: public enum CrossFilteringBehavior
+    content.vb: Public Enum CrossFilteringBehavior
+  extensionMethods:
+  - TabularEditor.TOMWrapper.CrossFilteringBehavior.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  - TabularEditor.TOMWrapper.CrossFilteringBehavior.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  - TabularEditor.TOMWrapper.CrossFilteringBehavior.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CrossFilteringBehavior)
+- uid: TabularEditor.TOMWrapper.CrossFilteringBehavior.OneDirection
+  commentId: F:TabularEditor.TOMWrapper.CrossFilteringBehavior.OneDirection
+  id: OneDirection
+  parent: TabularEditor.TOMWrapper.CrossFilteringBehavior
+  langs:
+  - csharp
+  - vb
+  name: OneDirection
+  nameWithType: CrossFilteringBehavior.OneDirection
+  fullName: TabularEditor.TOMWrapper.CrossFilteringBehavior.OneDirection
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The rows selected in the 'To' end of the relationship will automatically filter scans of the table in the 'From' end of the relationship.
+  example: []
+  syntax:
+    content: OneDirection = 1
+    return:
+      type: TabularEditor.TOMWrapper.CrossFilteringBehavior
+- uid: TabularEditor.TOMWrapper.CrossFilteringBehavior.BothDirections
+  commentId: F:TabularEditor.TOMWrapper.CrossFilteringBehavior.BothDirections
+  id: BothDirections
+  parent: TabularEditor.TOMWrapper.CrossFilteringBehavior
+  langs:
+  - csharp
+  - vb
+  name: BothDirections
+  nameWithType: CrossFilteringBehavior.BothDirections
+  fullName: TabularEditor.TOMWrapper.CrossFilteringBehavior.BothDirections
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Filters on either end of the relationship will automatically filter the other table.
+  example: []
+  syntax:
+    content: BothDirections = 2
+    return:
+      type: TabularEditor.TOMWrapper.CrossFilteringBehavior
+- uid: TabularEditor.TOMWrapper.CrossFilteringBehavior.Automatic
+  commentId: F:TabularEditor.TOMWrapper.CrossFilteringBehavior.Automatic
+  id: Automatic
+  parent: TabularEditor.TOMWrapper.CrossFilteringBehavior
+  langs:
+  - csharp
+  - vb
+  name: Automatic
+  nameWithType: CrossFilteringBehavior.Automatic
+  fullName: TabularEditor.TOMWrapper.CrossFilteringBehavior.Automatic
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The engine will analyze the relationships and choose one of the behaviors by using heuristics.
+  example: []
+  syntax:
+    content: Automatic = 3
+    return:
+      type: TabularEditor.TOMWrapper.CrossFilteringBehavior
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.CrossFilteringBehavior.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<CrossFilteringBehavior>(CrossFilteringBehavior, CrossFilteringBehavior, CrossFilteringBehavior)
+  nameWithType: EnumExtensions.AllFlagsChanged<CrossFilteringBehavior>(CrossFilteringBehavior, CrossFilteringBehavior, CrossFilteringBehavior)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.CrossFilteringBehavior>(TabularEditor.TOMWrapper.CrossFilteringBehavior, TabularEditor.TOMWrapper.CrossFilteringBehavior, TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of CrossFilteringBehavior)(CrossFilteringBehavior, CrossFilteringBehavior, CrossFilteringBehavior)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.CrossFilteringBehavior)(TabularEditor.TOMWrapper.CrossFilteringBehavior, TabularEditor.TOMWrapper.CrossFilteringBehavior, TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  name.vb: AllFlagsChanged(Of CrossFilteringBehavior)(CrossFilteringBehavior, CrossFilteringBehavior, CrossFilteringBehavior)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.CrossFilteringBehavior.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<CrossFilteringBehavior>(CrossFilteringBehavior, CrossFilteringBehavior, CrossFilteringBehavior)
+  nameWithType: EnumExtensions.AnyFlagsChanged<CrossFilteringBehavior>(CrossFilteringBehavior, CrossFilteringBehavior, CrossFilteringBehavior)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.CrossFilteringBehavior>(TabularEditor.TOMWrapper.CrossFilteringBehavior, TabularEditor.TOMWrapper.CrossFilteringBehavior, TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of CrossFilteringBehavior)(CrossFilteringBehavior, CrossFilteringBehavior, CrossFilteringBehavior)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.CrossFilteringBehavior)(TabularEditor.TOMWrapper.CrossFilteringBehavior, TabularEditor.TOMWrapper.CrossFilteringBehavior, TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  name.vb: AnyFlagsChanged(Of CrossFilteringBehavior)(CrossFilteringBehavior, CrossFilteringBehavior, CrossFilteringBehavior)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.CrossFilteringBehavior.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<CrossFilteringBehavior>(CrossFilteringBehavior, CrossFilteringBehavior)
+  nameWithType: EnumExtensions.HasAnyFlags<CrossFilteringBehavior>(CrossFilteringBehavior, CrossFilteringBehavior)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.CrossFilteringBehavior>(TabularEditor.TOMWrapper.CrossFilteringBehavior, TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of CrossFilteringBehavior)(CrossFilteringBehavior, CrossFilteringBehavior)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.CrossFilteringBehavior)(TabularEditor.TOMWrapper.CrossFilteringBehavior, TabularEditor.TOMWrapper.CrossFilteringBehavior)
+  name.vb: HasAnyFlags(Of CrossFilteringBehavior)(CrossFilteringBehavior, CrossFilteringBehavior)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.CrossFilteringBehavior,TabularEditor.TOMWrapper.CrossFilteringBehavior)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    isExternal: true
+    href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+  commentId: T:TabularEditor.TOMWrapper.CrossFilteringBehavior
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.CrossFilteringBehavior.html
+  name: CrossFilteringBehavior
+  nameWithType: CrossFilteringBehavior
+  fullName: TabularEditor.TOMWrapper.CrossFilteringBehavior

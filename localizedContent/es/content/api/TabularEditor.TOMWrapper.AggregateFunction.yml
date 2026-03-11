@@ -1,0 +1,578 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.AggregateFunction
+  commentId: T:TabularEditor.TOMWrapper.AggregateFunction
+  id: AggregateFunction
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.AggregateFunction.Average
+  - TabularEditor.TOMWrapper.AggregateFunction.Count
+  - TabularEditor.TOMWrapper.AggregateFunction.Default
+  - TabularEditor.TOMWrapper.AggregateFunction.DistinctCount
+  - TabularEditor.TOMWrapper.AggregateFunction.Max
+  - TabularEditor.TOMWrapper.AggregateFunction.Min
+  - TabularEditor.TOMWrapper.AggregateFunction.None
+  - TabularEditor.TOMWrapper.AggregateFunction.Sum
+  langs:
+  - csharp
+  - vb
+  name: AggregateFunction
+  nameWithType: AggregateFunction
+  fullName: TabularEditor.TOMWrapper.AggregateFunction
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Specifies the aggregate function to be used by reporting tools to summarize column values.
+  example: []
+  syntax:
+    content: public enum AggregateFunction
+    content.vb: Public Enum AggregateFunction
+  extensionMethods:
+  - TabularEditor.TOMWrapper.AggregateFunction.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction)
+  - TabularEditor.TOMWrapper.AggregateFunction.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction)
+  - TabularEditor.TOMWrapper.AggregateFunction.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.AggregateFunction)
+- uid: TabularEditor.TOMWrapper.AggregateFunction.Default
+  commentId: F:TabularEditor.TOMWrapper.AggregateFunction.Default
+  id: Default
+  parent: TabularEditor.TOMWrapper.AggregateFunction
+  langs:
+  - csharp
+  - vb
+  name: Default
+  nameWithType: AggregateFunction.Default
+  fullName: TabularEditor.TOMWrapper.AggregateFunction.Default
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The default aggregation is Sum for numeric columns. Otherwise the default is None.
+  example: []
+  syntax:
+    content: Default = 1
+    return:
+      type: TabularEditor.TOMWrapper.AggregateFunction
+- uid: TabularEditor.TOMWrapper.AggregateFunction.None
+  commentId: F:TabularEditor.TOMWrapper.AggregateFunction.None
+  id: None
+  parent: TabularEditor.TOMWrapper.AggregateFunction
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: AggregateFunction.None
+  fullName: TabularEditor.TOMWrapper.AggregateFunction.None
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Leaves the aggregate function unspecified.
+  example: []
+  syntax:
+    content: None = 2
+    return:
+      type: TabularEditor.TOMWrapper.AggregateFunction
+- uid: TabularEditor.TOMWrapper.AggregateFunction.Sum
+  commentId: F:TabularEditor.TOMWrapper.AggregateFunction.Sum
+  id: Sum
+  parent: TabularEditor.TOMWrapper.AggregateFunction
+  langs:
+  - csharp
+  - vb
+  name: Sum
+  nameWithType: AggregateFunction.Sum
+  fullName: TabularEditor.TOMWrapper.AggregateFunction.Sum
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Calculates the sum of values contained in the column. This is the default aggregation function.
+  example: []
+  syntax:
+    content: Sum = 3
+    return:
+      type: TabularEditor.TOMWrapper.AggregateFunction
+- uid: TabularEditor.TOMWrapper.AggregateFunction.Min
+  commentId: F:TabularEditor.TOMWrapper.AggregateFunction.Min
+  id: Min
+  parent: TabularEditor.TOMWrapper.AggregateFunction
+  langs:
+  - csharp
+  - vb
+  name: Min
+  nameWithType: AggregateFunction.Min
+  fullName: TabularEditor.TOMWrapper.AggregateFunction.Min
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Returns the lowest value for all child members.
+  example: []
+  syntax:
+    content: Min = 4
+    return:
+      type: TabularEditor.TOMWrapper.AggregateFunction
+- uid: TabularEditor.TOMWrapper.AggregateFunction.Max
+  commentId: F:TabularEditor.TOMWrapper.AggregateFunction.Max
+  id: Max
+  parent: TabularEditor.TOMWrapper.AggregateFunction
+  langs:
+  - csharp
+  - vb
+  name: Max
+  nameWithType: AggregateFunction.Max
+  fullName: TabularEditor.TOMWrapper.AggregateFunction.Max
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Returns the highest value for all child members.
+  example: []
+  syntax:
+    content: Max = 5
+    return:
+      type: TabularEditor.TOMWrapper.AggregateFunction
+- uid: TabularEditor.TOMWrapper.AggregateFunction.Count
+  commentId: F:TabularEditor.TOMWrapper.AggregateFunction.Count
+  id: Count
+  parent: TabularEditor.TOMWrapper.AggregateFunction
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: AggregateFunction.Count
+  fullName: TabularEditor.TOMWrapper.AggregateFunction.Count
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Returns the rows count in the table.
+  example: []
+  syntax:
+    content: Count = 6
+    return:
+      type: TabularEditor.TOMWrapper.AggregateFunction
+- uid: TabularEditor.TOMWrapper.AggregateFunction.Average
+  commentId: F:TabularEditor.TOMWrapper.AggregateFunction.Average
+  id: Average
+  parent: TabularEditor.TOMWrapper.AggregateFunction
+  langs:
+  - csharp
+  - vb
+  name: Average
+  nameWithType: AggregateFunction.Average
+  fullName: TabularEditor.TOMWrapper.AggregateFunction.Average
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Calculates the average of values for all non-empty child members.
+  example: []
+  syntax:
+    content: Average = 7
+    return:
+      type: TabularEditor.TOMWrapper.AggregateFunction
+- uid: TabularEditor.TOMWrapper.AggregateFunction.DistinctCount
+  commentId: F:TabularEditor.TOMWrapper.AggregateFunction.DistinctCount
+  id: DistinctCount
+  parent: TabularEditor.TOMWrapper.AggregateFunction
+  langs:
+  - csharp
+  - vb
+  name: DistinctCount
+  nameWithType: AggregateFunction.DistinctCount
+  fullName: TabularEditor.TOMWrapper.AggregateFunction.DistinctCount
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Returns the count of all unique child members.
+  example: []
+  syntax:
+    content: DistinctCount = 8
+    return:
+      type: TabularEditor.TOMWrapper.AggregateFunction
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.AggregateFunction.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<AggregateFunction>(AggregateFunction, AggregateFunction, AggregateFunction)
+  nameWithType: EnumExtensions.AllFlagsChanged<AggregateFunction>(AggregateFunction, AggregateFunction, AggregateFunction)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.AggregateFunction>(TabularEditor.TOMWrapper.AggregateFunction, TabularEditor.TOMWrapper.AggregateFunction, TabularEditor.TOMWrapper.AggregateFunction)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of AggregateFunction)(AggregateFunction, AggregateFunction, AggregateFunction)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.AggregateFunction)(TabularEditor.TOMWrapper.AggregateFunction, TabularEditor.TOMWrapper.AggregateFunction, TabularEditor.TOMWrapper.AggregateFunction)
+  name.vb: AllFlagsChanged(Of AggregateFunction)(AggregateFunction, AggregateFunction, AggregateFunction)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.AggregateFunction.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<AggregateFunction>(AggregateFunction, AggregateFunction, AggregateFunction)
+  nameWithType: EnumExtensions.AnyFlagsChanged<AggregateFunction>(AggregateFunction, AggregateFunction, AggregateFunction)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.AggregateFunction>(TabularEditor.TOMWrapper.AggregateFunction, TabularEditor.TOMWrapper.AggregateFunction, TabularEditor.TOMWrapper.AggregateFunction)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of AggregateFunction)(AggregateFunction, AggregateFunction, AggregateFunction)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.AggregateFunction)(TabularEditor.TOMWrapper.AggregateFunction, TabularEditor.TOMWrapper.AggregateFunction, TabularEditor.TOMWrapper.AggregateFunction)
+  name.vb: AnyFlagsChanged(Of AggregateFunction)(AggregateFunction, AggregateFunction, AggregateFunction)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.AggregateFunction.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.AggregateFunction)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<AggregateFunction>(AggregateFunction, AggregateFunction)
+  nameWithType: EnumExtensions.HasAnyFlags<AggregateFunction>(AggregateFunction, AggregateFunction)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.AggregateFunction>(TabularEditor.TOMWrapper.AggregateFunction, TabularEditor.TOMWrapper.AggregateFunction)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of AggregateFunction)(AggregateFunction, AggregateFunction)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.AggregateFunction)(TabularEditor.TOMWrapper.AggregateFunction, TabularEditor.TOMWrapper.AggregateFunction)
+  name.vb: HasAnyFlags(Of AggregateFunction)(AggregateFunction, AggregateFunction)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.AggregateFunction,TabularEditor.TOMWrapper.AggregateFunction)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    isExternal: true
+    href: TabularEditor.TOMWrapper.AggregateFunction.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.AggregateFunction
+  commentId: T:TabularEditor.TOMWrapper.AggregateFunction
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.AggregateFunction.html
+  name: AggregateFunction
+  nameWithType: AggregateFunction
+  fullName: TabularEditor.TOMWrapper.AggregateFunction

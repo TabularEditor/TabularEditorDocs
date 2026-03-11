@@ -1,0 +1,474 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+  commentId: T:TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+  id: SelectionExpressionBehaviorType
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.Automatic
+  - TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.NonVisual
+  - TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.Visual
+  langs:
+  - csharp
+  - vb
+  name: SelectionExpressionBehaviorType
+  nameWithType: SelectionExpressionBehaviorType
+  fullName: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Determines Selection Expression behavior for Calculation groups
+  remarks: This enum is only supported when the compatibility level of the database is at 1609 or above.
+  example: []
+  syntax:
+    content: public enum SelectionExpressionBehaviorType
+    content.vb: Public Enum SelectionExpressionBehaviorType
+  extensionMethods:
+  - TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  - TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  - TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+- uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.Automatic
+  commentId: F:TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.Automatic
+  id: Automatic
+  parent: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+  langs:
+  - csharp
+  - vb
+  name: Automatic
+  nameWithType: SelectionExpressionBehaviorType.Automatic
+  fullName: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.Automatic
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Automatically determines Selection Expression behavior based on database compability level.
+  example: []
+  syntax:
+    content: Automatic = 0
+    return:
+      type: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+- uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.Visual
+  commentId: F:TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.Visual
+  id: Visual
+  parent: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+  langs:
+  - csharp
+  - vb
+  name: Visual
+  nameWithType: SelectionExpressionBehaviorType.Visual
+  fullName: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.Visual
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Subtotals are determined by Selection Expressions when grouping by Calculation Groups. Multi-selection yields BLANK() when the MultipleOrEmptySelectionExpression is undefined.
+  example: []
+  syntax:
+    content: Visual = 1
+    return:
+      type: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+- uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.NonVisual
+  commentId: F:TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.NonVisual
+  id: NonVisual
+  parent: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+  langs:
+  - csharp
+  - vb
+  name: NonVisual
+  nameWithType: SelectionExpressionBehaviorType.NonVisual
+  fullName: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.NonVisual
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Subtotals are hidden when grouping by Calculation Groups. Multi-selection yields SELECTEDMEASURE() when the MultipleOrEmptySelectionExpression is undefined.
+  example: []
+  syntax:
+    content: NonVisual = 2
+    return:
+      type: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<SelectionExpressionBehaviorType>(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  nameWithType: EnumExtensions.AllFlagsChanged<SelectionExpressionBehaviorType>(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.SelectionExpressionBehaviorType>(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType, TabularEditor.TOMWrapper.SelectionExpressionBehaviorType, TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of SelectionExpressionBehaviorType)(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType, TabularEditor.TOMWrapper.SelectionExpressionBehaviorType, TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  name.vb: AllFlagsChanged(Of SelectionExpressionBehaviorType)(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<SelectionExpressionBehaviorType>(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  nameWithType: EnumExtensions.AnyFlagsChanged<SelectionExpressionBehaviorType>(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.SelectionExpressionBehaviorType>(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType, TabularEditor.TOMWrapper.SelectionExpressionBehaviorType, TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of SelectionExpressionBehaviorType)(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType, TabularEditor.TOMWrapper.SelectionExpressionBehaviorType, TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  name.vb: AnyFlagsChanged(Of SelectionExpressionBehaviorType)(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<SelectionExpressionBehaviorType>(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  nameWithType: EnumExtensions.HasAnyFlags<SelectionExpressionBehaviorType>(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.SelectionExpressionBehaviorType>(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType, TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of SelectionExpressionBehaviorType)(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType, TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+  name.vb: HasAnyFlags(Of SelectionExpressionBehaviorType)(SelectionExpressionBehaviorType, SelectionExpressionBehaviorType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.SelectionExpressionBehaviorType,TabularEditor.TOMWrapper.SelectionExpressionBehaviorType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+  commentId: T:TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType.html
+  name: SelectionExpressionBehaviorType
+  nameWithType: SelectionExpressionBehaviorType
+  fullName: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType

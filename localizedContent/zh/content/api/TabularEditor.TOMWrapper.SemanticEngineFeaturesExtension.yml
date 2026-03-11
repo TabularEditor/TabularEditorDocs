@@ -1,0 +1,430 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension
+  commentId: T:TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension
+  id: SemanticEngineFeaturesExtension
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.AssignFromModel(Dax.Analyzer.Ast.SemanticEngineFeatures,TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides,Microsoft.AnalysisServices.Tabular.Model)
+  - TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.GetEngineFeatures(Microsoft.AnalysisServices.Tabular.Model)
+  - TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.SupportsFunction(Dax.Analyzer.Ast.SemanticEngineFeatures,Dax.Analyzer.DaxFunction)
+  langs:
+  - csharp
+  - vb
+  name: SemanticEngineFeaturesExtension
+  nameWithType: SemanticEngineFeaturesExtension
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static class SemanticEngineFeaturesExtension
+    content.vb: Public Module SemanticEngineFeaturesExtension
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.AssignFromModel(Dax.Analyzer.Ast.SemanticEngineFeatures,TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides,Microsoft.AnalysisServices.Tabular.Model)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.AssignFromModel(Dax.Analyzer.Ast.SemanticEngineFeatures,TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides,Microsoft.AnalysisServices.Tabular.Model)
+  id: AssignFromModel(Dax.Analyzer.Ast.SemanticEngineFeatures,TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides,Microsoft.AnalysisServices.Tabular.Model)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension
+  langs:
+  - csharp
+  - vb
+  name: AssignFromModel(SemanticEngineFeatures, SemanticEngineFeatureOverrides, Model)
+  nameWithType: SemanticEngineFeaturesExtension.AssignFromModel(SemanticEngineFeatures, SemanticEngineFeatureOverrides, Model)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.AssignFromModel(Dax.Analyzer.Ast.SemanticEngineFeatures, TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides, Microsoft.AnalysisServices.Tabular.Model)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static void AssignFromModel(this SemanticEngineFeatures engineFeatures, SemanticEngineFeatureOverrides overrides, Model model)
+    parameters:
+    - id: engineFeatures
+      type: Dax.Analyzer.Ast.SemanticEngineFeatures
+    - id: overrides
+      type: TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    content.vb: Public Shared Sub AssignFromModel(engineFeatures As SemanticEngineFeatures, [overrides] As SemanticEngineFeatureOverrides, model As Model)
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.AssignFromModel*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.GetEngineFeatures(Microsoft.AnalysisServices.Tabular.Model)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.GetEngineFeatures(Microsoft.AnalysisServices.Tabular.Model)
+  id: GetEngineFeatures(Microsoft.AnalysisServices.Tabular.Model)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension
+  langs:
+  - csharp
+  - vb
+  name: GetEngineFeatures(Model)
+  nameWithType: SemanticEngineFeaturesExtension.GetEngineFeatures(Model)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.GetEngineFeatures(Microsoft.AnalysisServices.Tabular.Model)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static SemanticEngineFeatures GetEngineFeatures(this Model model)
+    parameters:
+    - id: model
+      type: Microsoft.AnalysisServices.Tabular.Model
+    return:
+      type: Dax.Analyzer.Ast.SemanticEngineFeatures
+    content.vb: Public Shared Function GetEngineFeatures(model As Model) As SemanticEngineFeatures
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.GetEngineFeatures*
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.SupportsFunction(Dax.Analyzer.Ast.SemanticEngineFeatures,Dax.Analyzer.DaxFunction)
+  commentId: M:TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.SupportsFunction(Dax.Analyzer.Ast.SemanticEngineFeatures,Dax.Analyzer.DaxFunction)
+  id: SupportsFunction(Dax.Analyzer.Ast.SemanticEngineFeatures,Dax.Analyzer.DaxFunction)
+  isExtensionMethod: true
+  parent: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension
+  langs:
+  - csharp
+  - vb
+  name: SupportsFunction(SemanticEngineFeatures, DaxFunction)
+  nameWithType: SemanticEngineFeaturesExtension.SupportsFunction(SemanticEngineFeatures, DaxFunction)
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.SupportsFunction(Dax.Analyzer.Ast.SemanticEngineFeatures, Dax.Analyzer.DaxFunction)
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public static bool SupportsFunction(this SemanticEngineFeatures engineFeatures, DaxFunction functionToken)
+    parameters:
+    - id: engineFeatures
+      type: Dax.Analyzer.Ast.SemanticEngineFeatures
+    - id: functionToken
+      type: Dax.Analyzer.DaxFunction
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Function SupportsFunction(engineFeatures As SemanticEngineFeatures, functionToken As DaxFunction) As Boolean
+  overload: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.SupportsFunction*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.AssignFromModel*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.AssignFromModel
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeaturesExtension_AssignFromModel_Dax_Analyzer_Ast_SemanticEngineFeatures_TabularEditor_TOMWrapper_SemanticEngineFeatureOverrides_Microsoft_AnalysisServices_Tabular_Model_
+  name: AssignFromModel
+  nameWithType: SemanticEngineFeaturesExtension.AssignFromModel
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.AssignFromModel
+- uid: Dax.Analyzer.Ast.SemanticEngineFeatures
+  isExternal: true
+  name: SemanticEngineFeatures
+  nameWithType: SemanticEngineFeatures
+  fullName: Dax.Analyzer.Ast.SemanticEngineFeatures
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides
+  commentId: T:TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides.html
+  name: SemanticEngineFeatureOverrides
+  nameWithType: SemanticEngineFeatureOverrides
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides
+- uid: Microsoft.AnalysisServices.Tabular.Model
+  isExternal: true
+  name: Model
+  nameWithType: Model
+  fullName: Microsoft.AnalysisServices.Tabular.Model
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.GetEngineFeatures*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.GetEngineFeatures
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeaturesExtension_GetEngineFeatures_Microsoft_AnalysisServices_Tabular_Model_
+  name: GetEngineFeatures
+  nameWithType: SemanticEngineFeaturesExtension.GetEngineFeatures
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.GetEngineFeatures
+- uid: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.SupportsFunction*
+  commentId: Overload:TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.SupportsFunction
+  isExternal: true
+  href: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.html#TabularEditor_TOMWrapper_SemanticEngineFeaturesExtension_SupportsFunction_Dax_Analyzer_Ast_SemanticEngineFeatures_Dax_Analyzer_DaxFunction_
+  name: SupportsFunction
+  nameWithType: SemanticEngineFeaturesExtension.SupportsFunction
+  fullName: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension.SupportsFunction
+- uid: Dax.Analyzer.DaxFunction
+  commentId: '!:Dax.Analyzer.DaxFunction'
+  isExternal: true
+  name: DaxFunction
+  nameWithType: DaxFunction
+  fullName: Dax.Analyzer.DaxFunction
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean

@@ -1,0 +1,201 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  commentId: T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  id: IMetricViewObject
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: IMetricViewObject
+  nameWithType: IMetricViewObject
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  type: Interface
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  summary: >-
+    Marker interface for all MetricView domain objects.
+
+    Used for type safety and identification in public API
+  example: []
+  syntax:
+    content: public interface IMetricViewObject
+    content.vb: Public Interface IMetricViewObject
+  derivedClasses:
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+references:
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  commentId: N:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  nameWithType: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+    name: Interfaces
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+    name: Interfaces
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.html
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html

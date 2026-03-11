@@ -1,0 +1,2716 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection
+  commentId: T:TabularEditor.TOMWrapper.NamedExpressionCollection
+  id: NamedExpressionCollection
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.Count
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.Description
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.Expression
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.ExpressionSource
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.GetEnumerator
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.Kind
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.MAttributes
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.ParameterValuesColumn
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.QueryGroup
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.RemoteParameterName
+  - TabularEditor.TOMWrapper.NamedExpressionCollection.SourceLineageTag
+  langs:
+  - csharp
+  - vb
+  name: NamedExpressionCollection
+  nameWithType: NamedExpressionCollection
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection
+  type: Class
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Collection class for NamedExpression. Provides convenient properties for setting a property on multiple objects at once.
+  example: []
+  syntax:
+    content: 'public sealed class NamedExpressionCollection : TabularNamedObjectCollection<NamedExpression>, INotifyCollectionChanged, IHandlerObject, IReadOnlyList<NamedExpression>, IReadOnlyCollection<NamedExpression>, IEnumerable<NamedExpression>, IEnumerable'
+    content.vb: Public NotInheritable Class NamedExpressionCollection Inherits TabularNamedObjectCollection(Of NamedExpression) Implements INotifyCollectionChanged, IHandlerObject, IReadOnlyList(Of NamedExpression), IReadOnlyCollection(Of NamedExpression), IEnumerable(Of NamedExpression), IEnumerable
+  inheritance:
+  - System.Object
+  - TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  - TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  implements:
+  - System.Collections.Specialized.INotifyCollectionChanged
+  - TabularEditor.TOMWrapper.IHandlerObject
+  - System.Collections.Generic.IReadOnlyList{TabularEditor.TOMWrapper.NamedExpression}
+  - System.Collections.Generic.IReadOnlyCollection{TabularEditor.TOMWrapper.NamedExpression}
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}
+  - System.Collections.IEnumerable
+  inheritedMembers:
+  - TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.FindByName(System.String)
+  - TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Contains(System.String)
+  - TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Item(System.String)
+  - TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Contains(TabularEditor.TOMWrapper.NamedExpression)
+  - TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.IndexOf(TabularEditor.TOMWrapper.NamedExpression)
+  - TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.ToString
+  - TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Parent
+  - TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Item(System.Int32)
+  - TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.CollectionName
+  - TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.CollectionChanged
+  - System.Object.GetType
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  extensionMethods:
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}.TabularEditor.EnumExtensions.ContainsDuplicates``1
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{TabularEditor.TOMWrapper.NamedExpression,{U}},System.Collections.Generic.IEqualityComparer{{U}})
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{TabularEditor.TOMWrapper.NamedExpression,{U}},System.Collections.Generic.IEqualityComparer{{U}},TabularEditor.TOMWrapper.NamedExpression@)
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}.TabularEditor.EnumExtensions.IndexOf``1(System.Predicate{TabularEditor.TOMWrapper.NamedExpression})
+  - System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}.TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach``1(System.Action{TabularEditor.TOMWrapper.NamedExpression})
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.GetEnumerator
+  commentId: M:TabularEditor.TOMWrapper.NamedExpressionCollection.GetEnumerator
+  id: GetEnumerator
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: NamedExpressionCollection.GetEnumerator()
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.GetEnumerator()
+  type: Method
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Returns an enumerator that iterates through the collection.
+  example: []
+  syntax:
+    content: public override IEnumerator<NamedExpression> GetEnumerator()
+    return:
+      type: System.Collections.Generic.IEnumerator{TabularEditor.TOMWrapper.NamedExpression}
+    content.vb: Public Overrides Function GetEnumerator() As IEnumerator(Of NamedExpression)
+  overridden: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.GetEnumerator
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.GetEnumerator*
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.Count
+  commentId: P:TabularEditor.TOMWrapper.NamedExpressionCollection.Count
+  id: Count
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: NamedExpressionCollection.Count
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.Count
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The number of items in this collection.
+  example: []
+  syntax:
+    content: public override int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Overrides ReadOnly Property Count As Integer
+  overridden: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Count
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.Count*
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.Description
+  commentId: P:TabularEditor.TOMWrapper.NamedExpressionCollection.Description
+  id: Description
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: NamedExpressionCollection.Description
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.Description
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the Description property of all objects in the collection at once.
+  example: []
+  syntax:
+    content: public string Description { set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public WriteOnly Property Description As String
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.Description*
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.Kind
+  commentId: P:TabularEditor.TOMWrapper.NamedExpressionCollection.Kind
+  id: Kind
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: Kind
+  nameWithType: NamedExpressionCollection.Kind
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.Kind
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the Kind property of all objects in the collection at once.
+  example: []
+  syntax:
+    content: public ExpressionKind Kind { set; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.ExpressionKind
+    content.vb: Public WriteOnly Property Kind As ExpressionKind
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.Kind*
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.Expression
+  commentId: P:TabularEditor.TOMWrapper.NamedExpressionCollection.Expression
+  id: Expression
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: Expression
+  nameWithType: NamedExpressionCollection.Expression
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.Expression
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the Expression property of all objects in the collection at once.
+  example: []
+  syntax:
+    content: public string Expression { set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public WriteOnly Property Expression As String
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.Expression*
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.MAttributes
+  commentId: P:TabularEditor.TOMWrapper.NamedExpressionCollection.MAttributes
+  id: MAttributes
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: MAttributes
+  nameWithType: NamedExpressionCollection.MAttributes
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.MAttributes
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the MAttributes property of all objects in the collection at once.
+  example: []
+  syntax:
+    content: public string MAttributes { set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public WriteOnly Property MAttributes As String
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.MAttributes*
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.SourceLineageTag
+  commentId: P:TabularEditor.TOMWrapper.NamedExpressionCollection.SourceLineageTag
+  id: SourceLineageTag
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: SourceLineageTag
+  nameWithType: NamedExpressionCollection.SourceLineageTag
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.SourceLineageTag
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the SourceLineageTag property of all objects in the collection at once.
+  example: []
+  syntax:
+    content: public string SourceLineageTag { set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public WriteOnly Property SourceLineageTag As String
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.SourceLineageTag*
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.RemoteParameterName
+  commentId: P:TabularEditor.TOMWrapper.NamedExpressionCollection.RemoteParameterName
+  id: RemoteParameterName
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: RemoteParameterName
+  nameWithType: NamedExpressionCollection.RemoteParameterName
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.RemoteParameterName
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the RemoteParameterName property of all objects in the collection at once.
+  example: []
+  syntax:
+    content: public string RemoteParameterName { set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public WriteOnly Property RemoteParameterName As String
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.RemoteParameterName*
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.QueryGroup
+  commentId: P:TabularEditor.TOMWrapper.NamedExpressionCollection.QueryGroup
+  id: QueryGroup
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: QueryGroup
+  nameWithType: NamedExpressionCollection.QueryGroup
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.QueryGroup
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the QueryGroup property of all objects in the collection at once.
+  example: []
+  syntax:
+    content: public QueryGroup QueryGroup { set; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.QueryGroup
+    content.vb: Public WriteOnly Property QueryGroup As QueryGroup
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.QueryGroup*
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.ParameterValuesColumn
+  commentId: P:TabularEditor.TOMWrapper.NamedExpressionCollection.ParameterValuesColumn
+  id: ParameterValuesColumn
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: ParameterValuesColumn
+  nameWithType: NamedExpressionCollection.ParameterValuesColumn
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.ParameterValuesColumn
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the ParameterValuesColumn property of all objects in the collection at once.
+  example: []
+  syntax:
+    content: public Column ParameterValuesColumn { set; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.Column
+    content.vb: Public WriteOnly Property ParameterValuesColumn As Column
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.ParameterValuesColumn*
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.ExpressionSource
+  commentId: P:TabularEditor.TOMWrapper.NamedExpressionCollection.ExpressionSource
+  id: ExpressionSource
+  parent: TabularEditor.TOMWrapper.NamedExpressionCollection
+  langs:
+  - csharp
+  - vb
+  name: ExpressionSource
+  nameWithType: NamedExpressionCollection.ExpressionSource
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.ExpressionSource
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Sets the ExpressionSource property of all objects in the collection at once.
+  example: []
+  syntax:
+    content: public NamedExpression ExpressionSource { set; }
+    parameters: []
+    return:
+      type: TabularEditor.TOMWrapper.NamedExpression
+    content.vb: Public WriteOnly Property ExpressionSource As NamedExpression
+  overload: TabularEditor.TOMWrapper.NamedExpressionCollection.ExpressionSource*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  commentId: T:TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  parent: TabularEditor.TOMWrapper
+  definition: TabularEditor.TOMWrapper.TabularObjectCollection`1
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html
+  name: TabularObjectCollection<NamedExpression>
+  nameWithType: TabularObjectCollection<NamedExpression>
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<TabularEditor.TOMWrapper.NamedExpression>
+  nameWithType.vb: TabularObjectCollection(Of NamedExpression)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression)
+  name.vb: TabularObjectCollection(Of NamedExpression)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1
+    name: TabularObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1
+    name: TabularObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  commentId: T:TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  parent: TabularEditor.TOMWrapper
+  definition: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+  href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  name: TabularNamedObjectCollection<NamedExpression>
+  nameWithType: TabularNamedObjectCollection<NamedExpression>
+  fullName: TabularEditor.TOMWrapper.TabularNamedObjectCollection<TabularEditor.TOMWrapper.NamedExpression>
+  nameWithType.vb: TabularNamedObjectCollection(Of NamedExpression)
+  fullName.vb: TabularEditor.TOMWrapper.TabularNamedObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression)
+  name.vb: TabularNamedObjectCollection(Of NamedExpression)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+    name: TabularNamedObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+    name: TabularNamedObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+- uid: System.Collections.Specialized.INotifyCollectionChanged
+  commentId: T:System.Collections.Specialized.INotifyCollectionChanged
+  parent: System.Collections.Specialized
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.specialized.inotifycollectionchanged
+  name: INotifyCollectionChanged
+  nameWithType: INotifyCollectionChanged
+  fullName: System.Collections.Specialized.INotifyCollectionChanged
+- uid: TabularEditor.TOMWrapper.IHandlerObject
+  commentId: T:TabularEditor.TOMWrapper.IHandlerObject
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IHandlerObject.html
+  name: IHandlerObject
+  nameWithType: IHandlerObject
+  fullName: TabularEditor.TOMWrapper.IHandlerObject
+- uid: System.Collections.Generic.IReadOnlyList{TabularEditor.TOMWrapper.NamedExpression}
+  commentId: T:System.Collections.Generic.IReadOnlyList{TabularEditor.TOMWrapper.NamedExpression}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<NamedExpression>
+  nameWithType: IReadOnlyList<NamedExpression>
+  fullName: System.Collections.Generic.IReadOnlyList<TabularEditor.TOMWrapper.NamedExpression>
+  nameWithType.vb: IReadOnlyList(Of NamedExpression)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of TabularEditor.TOMWrapper.NamedExpression)
+  name.vb: IReadOnlyList(Of NamedExpression)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyCollection{TabularEditor.TOMWrapper.NamedExpression}
+  commentId: T:System.Collections.Generic.IReadOnlyCollection{TabularEditor.TOMWrapper.NamedExpression}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyCollection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  name: IReadOnlyCollection<NamedExpression>
+  nameWithType: IReadOnlyCollection<NamedExpression>
+  fullName: System.Collections.Generic.IReadOnlyCollection<TabularEditor.TOMWrapper.NamedExpression>
+  nameWithType.vb: IReadOnlyCollection(Of NamedExpression)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of TabularEditor.TOMWrapper.NamedExpression)
+  name.vb: IReadOnlyCollection(Of NamedExpression)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}
+  commentId: T:System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<NamedExpression>
+  nameWithType: IEnumerable<NamedExpression>
+  fullName: System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.NamedExpression>
+  nameWithType.vb: IEnumerable(Of NamedExpression)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.NamedExpression)
+  name.vb: IEnumerable(Of NamedExpression)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.FindByName(System.String)
+  commentId: M:TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.FindByName(System.String)
+  parent: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.FindByName(System.String)
+  href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_FindByName_System_String_
+  name: FindByName(string)
+  nameWithType: TabularNamedObjectCollection<NamedExpression>.FindByName(string)
+  fullName: TabularEditor.TOMWrapper.TabularNamedObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.FindByName(string)
+  nameWithType.vb: TabularNamedObjectCollection(Of NamedExpression).FindByName(String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularNamedObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).FindByName(String)
+  name.vb: FindByName(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.FindByName(System.String)
+    name: FindByName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_FindByName_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.FindByName(System.String)
+    name: FindByName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_FindByName_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Contains(System.String)
+  commentId: M:TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Contains(System.String)
+  parent: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Contains(System.String)
+  href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_Contains_System_String_
+  name: Contains(string)
+  nameWithType: TabularNamedObjectCollection<NamedExpression>.Contains(string)
+  fullName: TabularEditor.TOMWrapper.TabularNamedObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.Contains(string)
+  nameWithType.vb: TabularNamedObjectCollection(Of NamedExpression).Contains(String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularNamedObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).Contains(String)
+  name.vb: Contains(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Contains(System.String)
+    name: Contains
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_Contains_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Contains(System.String)
+    name: Contains
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_Contains_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Item(System.String)
+  commentId: P:TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Item(System.String)
+  parent: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Item(System.String)
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: this[string]
+  nameWithType: TabularNamedObjectCollection<NamedExpression>.this[string]
+  fullName: TabularEditor.TOMWrapper.TabularNamedObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.this[string]
+  nameWithType.vb: TabularNamedObjectCollection(Of NamedExpression).this[](String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularNamedObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).this[](String)
+  name.vb: this[](String)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ']'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Item(System.String)
+    name: this[]
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_Item_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Contains(TabularEditor.TOMWrapper.NamedExpression)
+  commentId: M:TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Contains(TabularEditor.TOMWrapper.NamedExpression)
+  parent: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularObjectCollection`1.Contains(`0)
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Contains__0_
+  name: Contains(NamedExpression)
+  nameWithType: TabularObjectCollection<NamedExpression>.Contains(NamedExpression)
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.Contains(TabularEditor.TOMWrapper.NamedExpression)
+  nameWithType.vb: TabularObjectCollection(Of NamedExpression).Contains(NamedExpression)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).Contains(TabularEditor.TOMWrapper.NamedExpression)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Contains(TabularEditor.TOMWrapper.NamedExpression)
+    name: Contains
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Contains__0_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Contains(TabularEditor.TOMWrapper.NamedExpression)
+    name: Contains
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Contains__0_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.IndexOf(TabularEditor.TOMWrapper.NamedExpression)
+  commentId: M:TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.IndexOf(TabularEditor.TOMWrapper.NamedExpression)
+  parent: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularObjectCollection`1.IndexOf(`0)
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_IndexOf__0_
+  name: IndexOf(NamedExpression)
+  nameWithType: TabularObjectCollection<NamedExpression>.IndexOf(NamedExpression)
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.IndexOf(TabularEditor.TOMWrapper.NamedExpression)
+  nameWithType.vb: TabularObjectCollection(Of NamedExpression).IndexOf(NamedExpression)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).IndexOf(TabularEditor.TOMWrapper.NamedExpression)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.IndexOf(TabularEditor.TOMWrapper.NamedExpression)
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_IndexOf__0_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.IndexOf(TabularEditor.TOMWrapper.NamedExpression)
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_IndexOf__0_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.ToString
+  commentId: M:TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.ToString
+  parent: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularObjectCollection`1.ToString
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_ToString
+  name: ToString()
+  nameWithType: TabularObjectCollection<NamedExpression>.ToString()
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.ToString()
+  nameWithType.vb: TabularObjectCollection(Of NamedExpression).ToString()
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).ToString()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.ToString
+    name: ToString
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_ToString
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.ToString
+    name: ToString
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_ToString
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Parent
+  commentId: P:TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Parent
+  parent: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularObjectCollection`1.Parent
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Parent
+  name: Parent
+  nameWithType: TabularObjectCollection<NamedExpression>.Parent
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.Parent
+  nameWithType.vb: TabularObjectCollection(Of NamedExpression).Parent
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).Parent
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Item(System.Int32)
+  commentId: P:TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Item(System.Int32)
+  parent: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularObjectCollection`1.Item(System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: this[int]
+  nameWithType: TabularObjectCollection<NamedExpression>.this[int]
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.this[int]
+  nameWithType.vb: TabularObjectCollection(Of NamedExpression).this[](Integer)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).this[](Integer)
+  name.vb: this[](Integer)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ']'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Item(System.Int32)
+    name: this[]
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Item_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.CollectionName
+  commentId: P:TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.CollectionName
+  parent: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularObjectCollection`1.CollectionName
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_CollectionName
+  name: CollectionName
+  nameWithType: TabularObjectCollection<NamedExpression>.CollectionName
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.CollectionName
+  nameWithType.vb: TabularObjectCollection(Of NamedExpression).CollectionName
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).CollectionName
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.CollectionChanged
+  commentId: E:TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.CollectionChanged
+  parent: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularObjectCollection`1.CollectionChanged
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_CollectionChanged
+  name: CollectionChanged
+  nameWithType: TabularObjectCollection<NamedExpression>.CollectionChanged
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.CollectionChanged
+  nameWithType.vb: TabularObjectCollection(Of NamedExpression).CollectionChanged
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).CollectionChanged
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}.TabularEditor.EnumExtensions.ContainsDuplicates``1
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  name: ContainsDuplicates<NamedExpression>(IEnumerable<NamedExpression>)
+  nameWithType: EnumExtensions.ContainsDuplicates<NamedExpression>(IEnumerable<NamedExpression>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<TabularEditor.TOMWrapper.NamedExpression>(System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.NamedExpression>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of NamedExpression)(IEnumerable(Of NamedExpression))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of TabularEditor.TOMWrapper.NamedExpression)(System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.NamedExpression))
+  name.vb: ContainsDuplicates(Of NamedExpression)(IEnumerable(Of NamedExpression))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{TabularEditor.TOMWrapper.NamedExpression,{U}},System.Collections.Generic.IEqualityComparer{{U}})
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  name: ContainsDuplicates<NamedExpression, U>(IEnumerable<NamedExpression>, Func<NamedExpression, U>, IEqualityComparer<U>)
+  nameWithType: EnumExtensions.ContainsDuplicates<NamedExpression, U>(IEnumerable<NamedExpression>, Func<NamedExpression, U>, IEqualityComparer<U>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<TabularEditor.TOMWrapper.NamedExpression, U>(System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.NamedExpression>, System.Func<TabularEditor.TOMWrapper.NamedExpression, U>, System.Collections.Generic.IEqualityComparer<U>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of NamedExpression, U)(IEnumerable(Of NamedExpression), Func(Of NamedExpression, U), IEqualityComparer(Of U))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of TabularEditor.TOMWrapper.NamedExpression, U)(System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.NamedExpression), System.Func(Of TabularEditor.TOMWrapper.NamedExpression, U), System.Collections.Generic.IEqualityComparer(Of U))
+  name.vb: ContainsDuplicates(Of NamedExpression, U)(IEnumerable(Of NamedExpression), Func(Of NamedExpression, U), IEqualityComparer(Of U))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression},System.Func{TabularEditor.TOMWrapper.NamedExpression,``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression},System.Func{TabularEditor.TOMWrapper.NamedExpression,``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}.TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Func{TabularEditor.TOMWrapper.NamedExpression,{U}},System.Collections.Generic.IEqualityComparer{{U}},TabularEditor.TOMWrapper.NamedExpression@)
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  name: ContainsDuplicates<NamedExpression, U>(IEnumerable<NamedExpression>, Func<NamedExpression, U>, IEqualityComparer<U>, out NamedExpression)
+  nameWithType: EnumExtensions.ContainsDuplicates<NamedExpression, U>(IEnumerable<NamedExpression>, Func<NamedExpression, U>, IEqualityComparer<U>, out NamedExpression)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<TabularEditor.TOMWrapper.NamedExpression, U>(System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.NamedExpression>, System.Func<TabularEditor.TOMWrapper.NamedExpression, U>, System.Collections.Generic.IEqualityComparer<U>, out TabularEditor.TOMWrapper.NamedExpression)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of NamedExpression, U)(IEnumerable(Of NamedExpression), Func(Of NamedExpression, U), IEqualityComparer(Of U), NamedExpression)
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of TabularEditor.TOMWrapper.NamedExpression, U)(System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.NamedExpression), System.Func(Of TabularEditor.TOMWrapper.NamedExpression, U), System.Collections.Generic.IEqualityComparer(Of U), TabularEditor.TOMWrapper.NamedExpression)
+  name.vb: ContainsDuplicates(Of NamedExpression, U)(IEnumerable(Of NamedExpression), Func(Of NamedExpression, U), IEqualityComparer(Of U), NamedExpression)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression},System.Func{TabularEditor.TOMWrapper.NamedExpression,``1},System.Collections.Generic.IEqualityComparer{``1},TabularEditor.TOMWrapper.NamedExpression@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: out
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression},System.Func{TabularEditor.TOMWrapper.NamedExpression,``1},System.Collections.Generic.IEqualityComparer{``1},TabularEditor.TOMWrapper.NamedExpression@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}.TabularEditor.EnumExtensions.IndexOf``1(System.Predicate{TabularEditor.TOMWrapper.NamedExpression})
+  commentId: M:TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  name: IndexOf<NamedExpression>(IEnumerable<NamedExpression>, Predicate<NamedExpression>)
+  nameWithType: EnumExtensions.IndexOf<NamedExpression>(IEnumerable<NamedExpression>, Predicate<NamedExpression>)
+  fullName: TabularEditor.EnumExtensions.IndexOf<TabularEditor.TOMWrapper.NamedExpression>(System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.NamedExpression>, System.Predicate<TabularEditor.TOMWrapper.NamedExpression>)
+  nameWithType.vb: EnumExtensions.IndexOf(Of NamedExpression)(IEnumerable(Of NamedExpression), Predicate(Of NamedExpression))
+  fullName.vb: TabularEditor.EnumExtensions.IndexOf(Of TabularEditor.TOMWrapper.NamedExpression)(System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.NamedExpression), System.Predicate(Of TabularEditor.TOMWrapper.NamedExpression))
+  name.vb: IndexOf(Of NamedExpression)(IEnumerable(Of NamedExpression), Predicate(Of NamedExpression))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression},System.Predicate{TabularEditor.TOMWrapper.NamedExpression})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression},System.Predicate{TabularEditor.TOMWrapper.NamedExpression})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression}.TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach``1(System.Action{TabularEditor.TOMWrapper.NamedExpression})
+  commentId: M:TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})
+  parent: TabularEditor.TOMWrapper.TabularCollectionHelper
+  definition: TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})
+  href: TabularEditor.TOMWrapper.TabularCollectionHelper.html#TabularEditor_TOMWrapper_TabularCollectionHelper_ForEach__1_System_Collections_Generic_IEnumerable___0__System_Action___0__
+  name: ForEach<NamedExpression>(IEnumerable<NamedExpression>, Action<NamedExpression>)
+  nameWithType: TabularCollectionHelper.ForEach<NamedExpression>(IEnumerable<NamedExpression>, Action<NamedExpression>)
+  fullName: TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach<TabularEditor.TOMWrapper.NamedExpression>(System.Collections.Generic.IEnumerable<TabularEditor.TOMWrapper.NamedExpression>, System.Action<TabularEditor.TOMWrapper.NamedExpression>)
+  nameWithType.vb: TabularCollectionHelper.ForEach(Of NamedExpression)(IEnumerable(Of NamedExpression), Action(Of NamedExpression))
+  fullName.vb: TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach(Of TabularEditor.TOMWrapper.NamedExpression)(System.Collections.Generic.IEnumerable(Of TabularEditor.TOMWrapper.NamedExpression), System.Action(Of TabularEditor.TOMWrapper.NamedExpression))
+  name.vb: ForEach(Of NamedExpression)(IEnumerable(Of NamedExpression), Action(Of NamedExpression))
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach``1(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression},System.Action{TabularEditor.TOMWrapper.NamedExpression})
+    name: ForEach
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularCollectionHelper.html#TabularEditor_TOMWrapper_TabularCollectionHelper_ForEach__1_System_Collections_Generic_IEnumerable___0__System_Action___0__
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach``1(System.Collections.Generic.IEnumerable{TabularEditor.TOMWrapper.NamedExpression},System.Action{TabularEditor.TOMWrapper.NamedExpression})
+    name: ForEach
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularCollectionHelper.html#TabularEditor_TOMWrapper_TabularCollectionHelper_ForEach__1_System_Collections_Generic_IEnumerable___0__System_Action___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+  - name: )
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection`1
+  commentId: T:TabularEditor.TOMWrapper.TabularObjectCollection`1
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html
+  name: TabularObjectCollection<T>
+  nameWithType: TabularObjectCollection<T>
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<T>
+  nameWithType.vb: TabularObjectCollection(Of T)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of T)
+  name.vb: TabularObjectCollection(Of T)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1
+    name: TabularObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1
+    name: TabularObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+  commentId: T:TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  name: TabularNamedObjectCollection<T>
+  nameWithType: TabularNamedObjectCollection<T>
+  fullName: TabularEditor.TOMWrapper.TabularNamedObjectCollection<T>
+  nameWithType.vb: TabularNamedObjectCollection(Of T)
+  fullName.vb: TabularEditor.TOMWrapper.TabularNamedObjectCollection(Of T)
+  name.vb: TabularNamedObjectCollection(Of T)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+    name: TabularNamedObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+    name: TabularNamedObjectCollection
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Specialized
+  commentId: N:System.Collections.Specialized
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Specialized
+  nameWithType: System.Collections.Specialized
+  fullName: System.Collections.Specialized
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Specialized
+    name: Specialized
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Specialized
+    name: Specialized
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.specialized
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections.Generic.IReadOnlyCollection`1
+  commentId: T:System.Collections.Generic.IReadOnlyCollection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  name: IReadOnlyCollection<T>
+  nameWithType: IReadOnlyCollection<T>
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>
+  nameWithType.vb: IReadOnlyCollection(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
+  name.vb: IReadOnlyCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+- uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.FindByName(System.String)
+  commentId: M:TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.FindByName(System.String)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_FindByName_System_String_
+  name: FindByName(string)
+  nameWithType: TabularNamedObjectCollection<T>.FindByName(string)
+  fullName: TabularEditor.TOMWrapper.TabularNamedObjectCollection<T>.FindByName(string)
+  nameWithType.vb: TabularNamedObjectCollection(Of T).FindByName(String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularNamedObjectCollection(Of T).FindByName(String)
+  name.vb: FindByName(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.FindByName(System.String)
+    name: FindByName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_FindByName_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.FindByName(System.String)
+    name: FindByName
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_FindByName_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Contains(System.String)
+  commentId: M:TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Contains(System.String)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_Contains_System_String_
+  name: Contains(string)
+  nameWithType: TabularNamedObjectCollection<T>.Contains(string)
+  fullName: TabularEditor.TOMWrapper.TabularNamedObjectCollection<T>.Contains(string)
+  nameWithType.vb: TabularNamedObjectCollection(Of T).Contains(String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularNamedObjectCollection(Of T).Contains(String)
+  name.vb: Contains(String)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Contains(System.String)
+    name: Contains
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_Contains_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Contains(System.String)
+    name: Contains
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_Contains_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Item(System.String)
+  commentId: P:TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Item(System.String)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: this[string]
+  nameWithType: TabularNamedObjectCollection<T>.this[string]
+  fullName: TabularEditor.TOMWrapper.TabularNamedObjectCollection<T>.this[string]
+  nameWithType.vb: TabularNamedObjectCollection(Of T).this[](String)
+  fullName.vb: TabularEditor.TOMWrapper.TabularNamedObjectCollection(Of T).this[](String)
+  name.vb: this[](String)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ']'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1.Item(System.String)
+    name: this[]
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularNamedObjectCollection-1.html#TabularEditor_TOMWrapper_TabularNamedObjectCollection_1_Item_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.Contains(`0)
+  commentId: M:TabularEditor.TOMWrapper.TabularObjectCollection`1.Contains(`0)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Contains__0_
+  name: Contains(T)
+  nameWithType: TabularObjectCollection<T>.Contains(T)
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<T>.Contains(T)
+  nameWithType.vb: TabularObjectCollection(Of T).Contains(T)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of T).Contains(T)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Contains__0_
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Contains__0_
+  - name: (
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.IndexOf(`0)
+  commentId: M:TabularEditor.TOMWrapper.TabularObjectCollection`1.IndexOf(`0)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_IndexOf__0_
+  name: IndexOf(T)
+  nameWithType: TabularObjectCollection<T>.IndexOf(T)
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<T>.IndexOf(T)
+  nameWithType.vb: TabularObjectCollection(Of T).IndexOf(T)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of T).IndexOf(T)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.IndexOf(`0)
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_IndexOf__0_
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.IndexOf(`0)
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_IndexOf__0_
+  - name: (
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.ToString
+  commentId: M:TabularEditor.TOMWrapper.TabularObjectCollection`1.ToString
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_ToString
+  name: ToString()
+  nameWithType: TabularObjectCollection<T>.ToString()
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<T>.ToString()
+  nameWithType.vb: TabularObjectCollection(Of T).ToString()
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of T).ToString()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.ToString
+    name: ToString
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_ToString
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.ToString
+    name: ToString
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_ToString
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.Parent
+  commentId: P:TabularEditor.TOMWrapper.TabularObjectCollection`1.Parent
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Parent
+  name: Parent
+  nameWithType: TabularObjectCollection<T>.Parent
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<T>.Parent
+  nameWithType.vb: TabularObjectCollection(Of T).Parent
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of T).Parent
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.Item(System.Int32)
+  commentId: P:TabularEditor.TOMWrapper.TabularObjectCollection`1.Item(System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: this[int]
+  nameWithType: TabularObjectCollection<T>.this[int]
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<T>.this[int]
+  nameWithType.vb: TabularObjectCollection(Of T).this[](Integer)
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of T).this[](Integer)
+  name.vb: this[](Integer)
+  spec.csharp:
+  - name: this
+  - name: '['
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ']'
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.Item(System.Int32)
+    name: this[]
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Item_System_Int32_
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.CollectionName
+  commentId: P:TabularEditor.TOMWrapper.TabularObjectCollection`1.CollectionName
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_CollectionName
+  name: CollectionName
+  nameWithType: TabularObjectCollection<T>.CollectionName
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<T>.CollectionName
+  nameWithType.vb: TabularObjectCollection(Of T).CollectionName
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of T).CollectionName
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.CollectionChanged
+  commentId: E:TabularEditor.TOMWrapper.TabularObjectCollection`1.CollectionChanged
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_CollectionChanged
+  name: CollectionChanged
+  nameWithType: TabularObjectCollection<T>.CollectionChanged
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<T>.CollectionChanged
+  nameWithType.vb: TabularObjectCollection(Of T).CollectionChanged
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of T).CollectionChanged
+- uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  name: ContainsDuplicates<T>(IEnumerable<T>)
+  nameWithType: EnumExtensions.ContainsDuplicates<T>(IEnumerable<T>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<T>(System.Collections.Generic.IEnumerable<T>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of T)(IEnumerable(Of T))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of T)(System.Collections.Generic.IEnumerable(Of T))
+  name.vb: ContainsDuplicates(Of T)(IEnumerable(Of T))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``1(System.Collections.Generic.IEnumerable{``0})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__1_System_Collections_Generic_IEnumerable___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  name: ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>)
+  nameWithType: EnumExtensions.ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<T, U>(System.Collections.Generic.IEnumerable<T>, System.Func<T, U>, System.Collections.Generic.IEqualityComparer<U>)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U))
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of T, U)(System.Collections.Generic.IEnumerable(Of T), System.Func(Of T, U), System.Collections.Generic.IEqualityComparer(Of U))
+  name.vb: ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: )
+- uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  commentId: M:TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  name: ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>, out T)
+  nameWithType: EnumExtensions.ContainsDuplicates<T, U>(IEnumerable<T>, Func<T, U>, IEqualityComparer<U>, out T)
+  fullName: TabularEditor.EnumExtensions.ContainsDuplicates<T, U>(System.Collections.Generic.IEnumerable<T>, System.Func<T, U>, System.Collections.Generic.IEqualityComparer<U>, out T)
+  nameWithType.vb: EnumExtensions.ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U), T)
+  fullName.vb: TabularEditor.EnumExtensions.ContainsDuplicates(Of T, U)(System.Collections.Generic.IEnumerable(Of T), System.Func(Of T, U), System.Collections.Generic.IEqualityComparer(Of U), T)
+  name.vb: ContainsDuplicates(Of T, U)(IEnumerable(Of T), Func(Of T, U), IEqualityComparer(Of U), T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: <
+  - name: U
+  - name: '>'
+  - name: ','
+  - name: " "
+  - name: out
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.ContainsDuplicates``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},``0@)
+    name: ContainsDuplicates
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_ContainsDuplicates__2_System_Collections_Generic_IEnumerable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1____0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IEqualityComparer`1
+    name: IEqualityComparer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: U
+  - name: )
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  commentId: M:TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  name: IndexOf<T>(IEnumerable<T>, Predicate<T>)
+  nameWithType: EnumExtensions.IndexOf<T>(IEnumerable<T>, Predicate<T>)
+  fullName: TabularEditor.EnumExtensions.IndexOf<T>(System.Collections.Generic.IEnumerable<T>, System.Predicate<T>)
+  nameWithType.vb: EnumExtensions.IndexOf(Of T)(IEnumerable(Of T), Predicate(Of T))
+  fullName.vb: TabularEditor.EnumExtensions.IndexOf(Of T)(System.Collections.Generic.IEnumerable(Of T), System.Predicate(Of T))
+  name.vb: IndexOf(Of T)(IEnumerable(Of T), Predicate(Of T))
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Predicate{``0})
+    name: IndexOf
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_IndexOf__1_System_Collections_Generic_IEnumerable___0__System_Predicate___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Predicate`1
+    name: Predicate
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.predicate-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})
+  commentId: M:TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularCollectionHelper.html#TabularEditor_TOMWrapper_TabularCollectionHelper_ForEach__1_System_Collections_Generic_IEnumerable___0__System_Action___0__
+  name: ForEach<T>(IEnumerable<T>, Action<T>)
+  nameWithType: TabularCollectionHelper.ForEach<T>(IEnumerable<T>, Action<T>)
+  fullName: TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach<T>(System.Collections.Generic.IEnumerable<T>, System.Action<T>)
+  nameWithType.vb: TabularCollectionHelper.ForEach(Of T)(IEnumerable(Of T), Action(Of T))
+  fullName.vb: TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach(Of T)(System.Collections.Generic.IEnumerable(Of T), System.Action(Of T))
+  name.vb: ForEach(Of T)(IEnumerable(Of T), Action(Of T))
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})
+    name: ForEach
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularCollectionHelper.html#TabularEditor_TOMWrapper_TabularCollectionHelper_ForEach__1_System_Collections_Generic_IEnumerable___0__System_Action___0__
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: <
+  - name: T
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularCollectionHelper.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})
+    name: ForEach
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularCollectionHelper.html#TabularEditor_TOMWrapper_TabularCollectionHelper_ForEach__1_System_Collections_Generic_IEnumerable___0__System_Action___0__
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Action`1
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularCollectionHelper
+  commentId: T:TabularEditor.TOMWrapper.TabularCollectionHelper
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularCollectionHelper.html
+  name: TabularCollectionHelper
+  nameWithType: TabularCollectionHelper
+  fullName: TabularEditor.TOMWrapper.TabularCollectionHelper
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.GetEnumerator
+  commentId: M:TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.GetEnumerator
+  parent: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularObjectCollection`1.GetEnumerator
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_GetEnumerator
+  name: GetEnumerator()
+  nameWithType: TabularObjectCollection<NamedExpression>.GetEnumerator()
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.GetEnumerator()
+  nameWithType.vb: TabularObjectCollection(Of NamedExpression).GetEnumerator()
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).GetEnumerator()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_GetEnumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_GetEnumerator
+  - name: (
+  - name: )
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.GetEnumerator*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.GetEnumerator
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_GetEnumerator
+  name: GetEnumerator
+  nameWithType: NamedExpressionCollection.GetEnumerator
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.GetEnumerator
+- uid: System.Collections.Generic.IEnumerator{TabularEditor.TOMWrapper.NamedExpression}
+  commentId: T:System.Collections.Generic.IEnumerator{TabularEditor.TOMWrapper.NamedExpression}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerator`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<NamedExpression>
+  nameWithType: IEnumerator<NamedExpression>
+  fullName: System.Collections.Generic.IEnumerator<TabularEditor.TOMWrapper.NamedExpression>
+  nameWithType.vb: IEnumerator(Of NamedExpression)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of TabularEditor.TOMWrapper.NamedExpression)
+  name.vb: IEnumerator(Of NamedExpression)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    isExternal: true
+    href: TabularEditor.TOMWrapper.NamedExpression.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.GetEnumerator
+  commentId: M:TabularEditor.TOMWrapper.TabularObjectCollection`1.GetEnumerator
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_GetEnumerator
+  name: GetEnumerator()
+  nameWithType: TabularObjectCollection<T>.GetEnumerator()
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<T>.GetEnumerator()
+  nameWithType.vb: TabularObjectCollection(Of T).GetEnumerator()
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_GetEnumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_GetEnumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator`1
+  commentId: T:System.Collections.Generic.IEnumerator`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<T>
+  nameWithType: IEnumerator<T>
+  fullName: System.Collections.Generic.IEnumerator<T>
+  nameWithType.vb: IEnumerator(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of T)
+  name.vb: IEnumerator(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Count
+  commentId: P:TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}.Count
+  parent: TabularEditor.TOMWrapper.TabularObjectCollection{TabularEditor.TOMWrapper.NamedExpression}
+  definition: TabularEditor.TOMWrapper.TabularObjectCollection`1.Count
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Count
+  name: Count
+  nameWithType: TabularObjectCollection<NamedExpression>.Count
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<TabularEditor.TOMWrapper.NamedExpression>.Count
+  nameWithType.vb: TabularObjectCollection(Of NamedExpression).Count
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of TabularEditor.TOMWrapper.NamedExpression).Count
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.Count*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.Count
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_Count
+  name: Count
+  nameWithType: NamedExpressionCollection.Count
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.Count
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: TabularEditor.TOMWrapper.TabularObjectCollection`1.Count
+  commentId: P:TabularEditor.TOMWrapper.TabularObjectCollection`1.Count
+  isExternal: true
+  href: TabularEditor.TOMWrapper.TabularObjectCollection-1.html#TabularEditor_TOMWrapper_TabularObjectCollection_1_Count
+  name: Count
+  nameWithType: TabularObjectCollection<T>.Count
+  fullName: TabularEditor.TOMWrapper.TabularObjectCollection<T>.Count
+  nameWithType.vb: TabularObjectCollection(Of T).Count
+  fullName.vb: TabularEditor.TOMWrapper.TabularObjectCollection(Of T).Count
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.Description*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.Description
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_Description
+  name: Description
+  nameWithType: NamedExpressionCollection.Description
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.Description
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.Kind*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.Kind
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_Kind
+  name: Kind
+  nameWithType: NamedExpressionCollection.Kind
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.Kind
+- uid: TabularEditor.TOMWrapper.ExpressionKind
+  commentId: T:TabularEditor.TOMWrapper.ExpressionKind
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ExpressionKind.html
+  name: ExpressionKind
+  nameWithType: ExpressionKind
+  fullName: TabularEditor.TOMWrapper.ExpressionKind
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.Expression*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.Expression
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_Expression
+  name: Expression
+  nameWithType: NamedExpressionCollection.Expression
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.Expression
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.MAttributes*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.MAttributes
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_MAttributes
+  name: MAttributes
+  nameWithType: NamedExpressionCollection.MAttributes
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.MAttributes
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.SourceLineageTag*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.SourceLineageTag
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_SourceLineageTag
+  name: SourceLineageTag
+  nameWithType: NamedExpressionCollection.SourceLineageTag
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.SourceLineageTag
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.RemoteParameterName*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.RemoteParameterName
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_RemoteParameterName
+  name: RemoteParameterName
+  nameWithType: NamedExpressionCollection.RemoteParameterName
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.RemoteParameterName
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.QueryGroup*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.QueryGroup
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_QueryGroup
+  name: QueryGroup
+  nameWithType: NamedExpressionCollection.QueryGroup
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.QueryGroup
+- uid: TabularEditor.TOMWrapper.QueryGroup
+  commentId: T:TabularEditor.TOMWrapper.QueryGroup
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.QueryGroup.html
+  name: QueryGroup
+  nameWithType: QueryGroup
+  fullName: TabularEditor.TOMWrapper.QueryGroup
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.ParameterValuesColumn*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.ParameterValuesColumn
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_ParameterValuesColumn
+  name: ParameterValuesColumn
+  nameWithType: NamedExpressionCollection.ParameterValuesColumn
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.ParameterValuesColumn
+- uid: TabularEditor.TOMWrapper.Column
+  commentId: T:TabularEditor.TOMWrapper.Column
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.Column.html
+  name: Column
+  nameWithType: Column
+  fullName: TabularEditor.TOMWrapper.Column
+- uid: TabularEditor.TOMWrapper.NamedExpressionCollection.ExpressionSource*
+  commentId: Overload:TabularEditor.TOMWrapper.NamedExpressionCollection.ExpressionSource
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpressionCollection.html#TabularEditor_TOMWrapper_NamedExpressionCollection_ExpressionSource
+  name: ExpressionSource
+  nameWithType: NamedExpressionCollection.ExpressionSource
+  fullName: TabularEditor.TOMWrapper.NamedExpressionCollection.ExpressionSource
+- uid: TabularEditor.TOMWrapper.NamedExpression
+  commentId: T:TabularEditor.TOMWrapper.NamedExpression
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.NamedExpression.html
+  name: NamedExpression
+  nameWithType: NamedExpression
+  fullName: TabularEditor.TOMWrapper.NamedExpression
