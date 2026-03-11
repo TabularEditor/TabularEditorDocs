@@ -1,4 +1,4 @@
-﻿# Tabular Editor 3 BETA-18.3
+# Tabular Editor 3 BETA-18.3
 
 > [!IMPORTANT]
 > A newer version of Tabular Editor is available. You can find the latest version [here](https://docs.tabulareditor.com/references/release-notes).
@@ -30,7 +30,7 @@
 
 ## Update Table Schema from Power Query sources
 
-A new release of the Tabular Editor 3 beta is here. And I'm really excited about this one, for one particular reason: 
+A new release of the Tabular Editor 3 beta is here. And I'm really excited about this one, for one particular reason:
 
 For the first time ever, Tabular Editor can now detect schema changes on Power Query data sources and partitions. And not just for relational data sources, but for ANY Power Query expression that can be evaluated by your Analysis Services engine. "How on earth is that even possible?!?", you might be thinking. Well, pay close attention to that last sentence: "ANY Power Query expression that can be evaluated by your Analysis Services engine".
 
