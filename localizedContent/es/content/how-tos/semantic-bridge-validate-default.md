@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Validate a Metric View with Default Rules
 
 This how-to demonstrates how to validate a loaded Metric View using the built-in validation rules and interpret the diagnostic messages.
@@ -25,21 +26,21 @@ This how-to demonstrates how to validate a loaded Metric View using the built-in
 
 The Semantic Bridge includes these built-in validation rules:
 
-| Rule                     | Description                                                                   |
-|--------------------------|-------------------------------------------------------------------------------|
-| JoinNameRequired         | Metric View Join must have a name                                             |
-| UniqueJoinName           | Metric View Join names must be unique                                         |
-| JoinSourceRequired       | Metric View Join must have a source                                           |
-| JoinOnOrUsingRequired    | Metric View Join must specify either `on` or `using`                          |
-| JoinOnOrUsingExclusivity | Metric View Join cannot specify both `on` and `using`                         |
-| JoinOnFormat             | Metric View Join `on` clause must be a valid equijoin expression              |
+| Rule                     | Description                                                                                      |
+| ------------------------ | ------------------------------------------------------------------------------------------------ |
+| JoinNameRequired         | Metric View Join must have a name                                                                |
+| UniqueJoinName           | Metric View Join names must be unique                                                            |
+| JoinSourceRequired       | Metric View Join must have a source                                                              |
+| JoinOnOrUsingRequired    | Metric View Join must specify either `on` or `using`                                             |
+| JoinOnOrUsingExclusivity | Metric View Join cannot specify both `on` and `using`                                            |
+| JoinOnFormat             | Metric View Join `on` clause must be a valid equijoin expression                                 |
 | JoinUsingColumnCount     | Metric View Join `using` clause must have exactly one column (MVP limitation) |
-| DimensionNameRequired    | Metric View Dimension must have a name                                        |
-| UniqueDimensionName      | Metric View Dimension names must be unique                                    |
-| DimensionExprRequired    | Metric View Dimension must have an expression                                 |
-| MeasureNameRequired      | Metric View Measure must have a name                                          |
-| UniqueMeasureName        | Metric View Measure names must be unique                                      |
-| MeasureExprRequired      | Metric View Measure must have an expression                                   |
+| DimensionNameRequired    | Metric View Dimension must have a name                                                           |
+| UniqueDimensionName      | Metric View Dimension names must be unique                                                       |
+| DimensionExprRequired    | Metric View Dimension must have an expression                                                    |
+| MeasureNameRequired      | Metric View Measure must have a name                                                             |
+| UniqueMeasureName        | Metric View Measure names must be unique                                                         |
+| MeasureExprRequired      | Metric View Measure must have an expression                                                      |
 
 ## Run validation with default rules
 
