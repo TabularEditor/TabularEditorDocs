@@ -10,14 +10,17 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Create Table Groups
 
 ## Script Purpose
+
 This script creates default table groups within Tabular Editor 3.
 
 ## Script
 
 ### Script Title
+
 ```csharp
 // Loop through all tables:
 foreach(var table in Model.Tables)
@@ -53,6 +56,8 @@ foreach(var table in Model.Tables)
     }
 }
 ```
+
 ### Explanation
-The scripts loops through all tables in the model assigning a table group according to specific properties. 
+
+The scripts loops through all tables in the model assigning a table group according to specific properties.
 
