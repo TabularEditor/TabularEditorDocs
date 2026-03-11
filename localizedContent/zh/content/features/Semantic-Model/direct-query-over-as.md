@@ -19,15 +19,15 @@ applies_to:
 
 ## Overview
 
-Tabular Editor 3 can **connect** to composite models that leverage **DirectQuery over Analysis Services (DQ‑over‑AS)**, but full modeling support is **not yet available**.  Most authoring tasks work as expected; however, operations that rely on synchronising metadata with the remote semantic model—such as *Update table schema*—are currently limited.
+Tabular Editor 3 can **connect** to composite models that leverage **DirectQuery over Analysis Services (DQ‑over‑AS)**, but full modeling support is **not yet available**.  Most authoring tasks work as expected; however, operations that rely on synchronising metadata with the remote semantic model—such as _Update table schema_—are currently limited.
 
->[!IMPORTANT]
+> [!IMPORTANT]
 > Until full DQ‑over‑AS support ships, model metadata edited in Tabular Editor 3 **is not automatically kept in sync** with the source dataset. You must apply one of the work‑arounds listed below whenever columns or measures are added to the underlying Analysis Services model.
 
 ## Current limitations
 
-| Feature                     | Status in TE3   | Notes                                                                                      |
-| --------------------------- | --------------- | ------------------------------------------------------------------------------------------ |
+| Feature                     | Status in TE3   | Notes                                                                                                      |
+| --------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------- |
 | **Update table schema**     | ❌ Not supported | Attempting to run **Model > Update table schema** on a DQ‑over‑AS table has no effect.     |
 | **Measure synchronisation** | ❌ Not supported | Measures created in the source dataset do not appear automatically in the composite model. |
 
@@ -37,14 +37,14 @@ Tabular Editor 3 can **connect** to composite models that leverage **DirectQuery
 
 1. In **TOM Explorer**, select the table that requires the new column.
 2. Choose **Add > Data Column**.
-3. In the *Properties* window, set:
+3. In the _Properties_ window, set:
 
-   * **SourceColumnName** – *exactly* match the **Name** of the column in the remote table.
-   * **SourceLineageTag** – copy the **LineageTag** value from the source column.
+   - **SourceColumnName** – _exactly_ match the **Name** of the column in the remote table.
+   - **SourceLineageTag** – copy the **LineageTag** value from the source column.
 4. Save and deploy the model.
 
->[!NOTE]
-> Column names and lineage tags must match *character‑for‑character*.  Any mismatch will cause deployment errors.
+> [!NOTE]
+> Column names and lineage tags must match _character‑for‑character_.  Any mismatch will cause deployment errors.
 
 ### 2. Use the “Import tables from remote model” C# script
 
