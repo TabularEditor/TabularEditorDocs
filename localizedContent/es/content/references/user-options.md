@@ -1,4 +1,4 @@
-﻿---
+---
 uid: user-options
 title: User options (.tmuo) file
 author: Daniel Otykier
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Tabular Model User Options (.tmuo) File
 
 Tabular Editor 3 introduces a new JSON based file, to store developer- and model-specific preferences. This file is called the **Tabular Model User Options** file and uses the **.tmuo** file extension.
