@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Using the DAX Scripting feature
 
 In the [previous article](xref:creating-and-testing-dax), you learned how to add and edit calculated objects such as measures, calculated columns, etc. in your model.
