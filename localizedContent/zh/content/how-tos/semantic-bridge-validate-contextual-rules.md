@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Create Contextual Validation Rules
 
 This how-to demonstrates how to create validation rules that check conditions across multiple objects using the validation context.
