@@ -10,15 +10,17 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Create Measure Table
 
 ## Script Purpose
-The scripts creates a hidden measure table containing one hidden column
 
+The scripts creates a hidden measure table containing one hidden column
 
 ## Script
 
 ### Create Measure Table
+
 ```csharp
 // Create a calculated table with a single column which is hidden:
 var table = Model.AddCalculatedTable("Model Measures", "{0}");
