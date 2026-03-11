@@ -13,6 +13,7 @@
 /**/xdocoutput/
 /**/node_modules/
 /**/*.sln.ide/
+**/__pycache__/
 /TestResults/
 /.vs/
 .NuGet/
