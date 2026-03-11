@@ -1,4 +1,4 @@
-﻿---
+---
 uid: macros-view-reference
 title: Macros view
 author: Morten Lønskov
