@@ -1,4 +1,4 @@
-﻿---
+---
 uid: diagram-view-reference
 title: Diagram View
 author: Morten Lønskov
@@ -16,4 +16,5 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 [!include[using-bpa](../../features/views/data-refresh-view.md)]
