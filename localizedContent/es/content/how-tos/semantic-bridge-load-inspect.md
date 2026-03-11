@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Load and Inspect a Metric View
 
 This how-to demonstrates how to load a Databricks Metric View into Tabular Editor and explore its structure using C# scripts.
