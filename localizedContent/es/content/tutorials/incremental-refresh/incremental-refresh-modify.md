@@ -16,17 +16,14 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Modifying Incremental Refresh
 
+# Modifying Incremental Refresh
 
 ![Incremental Refresh Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-modify-a-refresh-policy.png)
 
-
 ---
 
-
-__Incremental Refresh is changed by adjusting the Refresh Policy properties.__ Depending on what you want to change, you will adjust a different property. A full overview of these properties is [here](xref:incremental-refresh-about#overview-of-all-properties). 
-
+**Incremental Refresh is changed by adjusting the Refresh Policy properties.** Depending on what you want to change, you will adjust a different property. A full overview of these properties is [here](xref:incremental-refresh-about#overview-of-all-properties).
 
 > [!IMPORTANT]
 > Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
@@ -37,19 +34,23 @@ __Incremental Refresh is changed by adjusting the Refresh Policy properties.__ D
 
 Below is a general description of how you modify an existing Refresh Policy:
 
-1. __Connect:__ Connect to the model.
-2. __Select the Table:__ Select the table already configured for Incremental Refresh.
-3. __Find 'Refresh Policy' properties:__ In the _Properties_ window, go to the _Refresh Policy_ section.
+1. **Connect:** Connect to the model.
+
+2. **Select the Table:** Select the table already configured for Incremental Refresh.
+
+3. **Find 'Refresh Policy' properties:** In the _Properties_ window, go to the _Refresh Policy_ section.
 
     <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
 
-4. __Change the property:__ Change the __Property__ specified in the below sections, depending on what you want to change. For an overview of all Refresh Policy properties and what they do, see [here](xref:incremental-refresh-about#overview-of-all-properties).
-5. __Apply Changes:__ Deploy the model changes.
-4. __Apply Refresh Policy:__ Right-click the table and select _Apply Refresh Policy_.
+4. **Change the property:** Change the **Property** specified in the below sections, depending on what you want to change. For an overview of all Refresh Policy properties and what they do, see [here](xref:incremental-refresh-about#overview-of-all-properties).
+
+5. **Apply Changes:** Deploy the model changes.
+
+6. **Apply Refresh Policy:** Right-click the table and select _Apply Refresh Policy_.
 
     <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
-7. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
+7. **Refresh all partitions:** Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
 
     <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
 
@@ -59,11 +60,11 @@ Below is an overview of common changes one might make to an existing Refresh Pol
 
 ### Extend or Reduce the Window for Archived Data
 
-__Purpose:__ Add or reduce the amount of data in the model.
+**Purpose:** Add or reduce the amount of data in the model.
 
-__Property:__ <span style="color:#BC4A47">_RollingWindowPeriods_</span>. Increase to extend the window (more data); decrease to reduce the window (less data).
+**Property:** <span style="color:#BC4A47">_RollingWindowPeriods_</span>. Increase to extend the window (more data); decrease to reduce the window (less data).
 
-__Note:__ You can also change the <span style="color:#BC4A47">_RollingWindowGranularity_</span> to make a more fine-grain selection, i.e. from 3 Years to 36 Months.
+**Note:** You can also change the <span style="color:#BC4A47">_RollingWindowGranularity_</span> to make a more fine-grain selection, i.e. from 3 Years to 36 Months.
 
 <br></br>
 
@@ -73,11 +74,11 @@ __Note:__ You can also change the <span style="color:#BC4A47">_RollingWindowGran
 
 ### Extend or Reduce the Window for Refreshed Data
 
-__Purpose:__ Add or reduce the amount of data being refreshed in a scheduled refresh operation.
+**Purpose:** Add or reduce the amount of data being refreshed in a scheduled refresh operation.
 
-__Property:__ <span style="color:#455C86">_IncrementalWindowPeriods_</span>. Increase to extend the window (more data); decrease to reduce the window (less data).
+**Property:** <span style="color:#455C86">_IncrementalWindowPeriods_</span>. Increase to extend the window (more data); decrease to reduce the window (less data).
 
-__Note:__ You can also change the <span style="color:#455C86">_IncrementalWindowGranularity_</span> to make a more fine-grain selection, i.e. from 3 Years to 36 Months.
+**Note:** You can also change the <span style="color:#455C86">_IncrementalWindowGranularity_</span> to make a more fine-grain selection, i.e. from 3 Years to 36 Months.
 
 <br></br>
 
@@ -87,11 +88,11 @@ __Note:__ You can also change the <span style="color:#455C86">_IncrementalWindow
 
 ### Only Refresh Complete Periods
 
-__Purpose:__ Exclude partial (incomplete) periods from the <span style="color:#BC4A47">Rolling Window</span>
+**Purpose:** Exclude partial (incomplete) periods from the <span style="color:#BC4A47">Rolling Window</span>
 
-__Property:__ <span style="color:#455C86">_IncrementalWindowPeriodsOffset_</span>. Set the value to `-1` to offset the period by 1, excluding the current period.
+**Property:** <span style="color:#455C86">_IncrementalWindowPeriodsOffset_</span>. Set the value to `-1` to offset the period by 1, excluding the current period.
 
-__Note:__ You can further offset this window to refresh i.e. only the periods behind the most recent complete period. 
+**Note:** You can further offset this window to refresh i.e. only the periods behind the most recent complete period.
 
 <br></br>
 
@@ -101,11 +102,11 @@ __Note:__ You can further offset this window to refresh i.e. only the periods be
 
 ### Change Incremental Refresh Mode
 
-__Purpose:__ To change from `Import` to `Hybrid` tables, or vice-versa.
+**Purpose:** To change from `Import` to `Hybrid` tables, or vice-versa.
 
-__Property:__ _Mode_
+**Property:** _Mode_
 
-__Note:__ Follow the below process to change Incremental Refresh Mode:
+**Note:** Follow the below process to change Incremental Refresh Mode:
 
 1. Change _Mode_ to the desired value `Import` or `Hybrid`
 2. Right-click the table and select _Apply Refresh Policy_
@@ -123,11 +124,11 @@ __Note:__ Follow the below process to change Incremental Refresh Mode:
 
 ### Configure 'Detect Data Changes'
 
-__Purpose:__ To configure that archived data will refresh if the value of a date column (i.e. _LastUpdate_) changes.
+**Purpose:** To configure that archived data will refresh if the value of a date column (i.e. _LastUpdate_) changes.
 
-__Property:__ _PollingExpression_. Add a valid M Expression which returns a maximum date value for a column. All records containing that date will be refreshed, irrespective of their partition.
+**Property:** _PollingExpression_. Add a valid M Expression which returns a maximum date value for a column. All records containing that date will be refreshed, irrespective of their partition.
 
-__Note:__ Follow the below process to configure 'Detect Data Changes':
+**Note:** Follow the below process to configure 'Detect Data Changes':
 
 1. When the table is selected, in the _Expression Editor_ window, select _Polling Expression_ from the top-left dropdown
 2. Copy in the below M Expression, replacing _LastUpdate_ with your desired column name.
@@ -176,6 +177,7 @@ With the incremental refresh table selected, run the following script in Tabular
 var effectiveDate = new DateTime(2020, 1, 1);  
 Selected.Table.ApplyRefreshPolicy(effectiveDate);
 ```
+
 <br></br>
 
 <img src="~/content/assets/images/effective-date-te3.png" class="noscale" alt="Effective Date" style="width:700px !important"/>
@@ -188,16 +190,16 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 
 ### Disabling Incremental Refresh
 
-__Purpose:__ To disable a refresh policy because it is not needed or the use-case no longer fits.
+**Purpose:** To disable a refresh policy because it is not needed or the use-case no longer fits.
 
-__Property:__ _EnableRefreshPolicy_
+**Property:** _EnableRefreshPolicy_
 
-__Note:__ To disable Incremental Refresh, follow the below steps:
+**Note:** To disable Incremental Refresh, follow the below steps:
 
-1. __Copy the _Source Expression_:__ With the table selected, in the _Expression Editor_ window, select _Source Expression_ from the top-left dropdown. Copy the _Source Expression_ to a separate text editor window.
-2. __Disable the Refresh Policy:__ Change _EnableRefreshPolicy_ to `False`
-3. __Remove all Policy Range partitions:__ Select and delete all of the Policy Range partitions
-4. __Create a new M Partition:__ Right-click the table and select _Create > New Partition_. Set the partition _kind_ property to `M`.
-5. __Paste the _Source Expression_:__ Copy the _Source Expression_ from __Step 6__ into the _Expression Editor_ as the _M Expression_ when selecting the new partition. 
-6. __Apply Changes:__ Deploy the model changes.
-7. __Refresh the Table:__ Select and right-click the table. Select _Refresh > Full refresh (table)_. You can right-click the table and select _'Preview data'_ to see the result.
+1. **Copy the _Source Expression_:** With the table selected, in the _Expression Editor_ window, select _Source Expression_ from the top-left dropdown. Copy the _Source Expression_ to a separate text editor window.
+2. **Disable the Refresh Policy:** Change _EnableRefreshPolicy_ to `False`
+3. **Remove all Policy Range partitions:** Select and delete all of the Policy Range partitions
+4. **Create a new M Partition:** Right-click the table and select _Create > New Partition_. Set the partition _kind_ property to `M`.
+5. **Paste the _Source Expression_:** Copy the _Source Expression_ from **Step 6** into the _Expression Editor_ as the _M Expression_ when selecting the new partition.
+6. **Apply Changes:** Deploy the model changes.
+7. **Refresh the Table:** Select and right-click the table. Select _Refresh > Full refresh (table)_. You can right-click the table and select _'Preview data'_ to see the result.
