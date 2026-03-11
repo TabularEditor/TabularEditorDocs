@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Metric View Object Model
 
 <!--
@@ -60,12 +61,12 @@ This behavior is similar to the Tabular model in C# scripts, which is always ava
 The object model consists of four main types that correspond to the structure of a Metric View YAML file:
 We do not repeat the entire specification here, so we encourage you to reference the [Databricks Metric View documentation](https://learn.microsoft.com/en-us/azure/databricks/metric-views/).
 
-| API Reference                                                                              | Description                                                |
-|--------------------------------------------------------------------------------------------|------------------------------------------------------------|
-| [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View)           | The root object representing the entire Metric View        |
-| [`Join`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join)           | A join definition connecting a dimension table to the fact |
-| [`Dimension`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension) | A field definition (column) in the Metric View             |
-| [`Measure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)     | An aggregation definition representing business logic      |
+| API Reference                                                                              | Description                                                       |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View)           | The root object representing the entire Metric View               |
+| [`Join`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join)           | A join definition connecting a dimension table to the fact        |
+| [`Dimension`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension) | A field definition (column) in the Metric View |
+| [`Measure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)     | An aggregation definition representing business logic             |
 
 > [!NOTE]
 > In the object model, we follow C# naming conventions, and so use `PascalCase` for all type and property names in the object model.
@@ -178,7 +179,7 @@ We attempt to identify all field references in the SQL expression and add those 
 Some examples:
 
 | `Expr`                                                | Translated as type | Added to table  | Note                                                                         |
-|-------------------------------------------------------|--------------------|-----------------|------------------------------------------------------------------------------|
+| ----------------------------------------------------- | ------------------ | --------------- | ---------------------------------------------------------------------------- |
 | `field1`                                              | `DataColumn`       | `'Fact'`        | unqualified field references are equivalent to those qualified with `source` |
 | `source.field2`                                       | `DataColumn`       | `'Fact'`        | `source` is a reference to the `View.Source` property, aka the fact table    |
 | `dimCustomer.key`                                     | `DataColumn`       | `'dimCustomer'` | there must be a `Join` whose `Name` property is `dimCustomer`                |
