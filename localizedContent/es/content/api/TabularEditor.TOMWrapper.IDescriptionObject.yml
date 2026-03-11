@@ -1,0 +1,242 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.IDescriptionObject
+  commentId: T:TabularEditor.TOMWrapper.IDescriptionObject
+  id: IDescriptionObject
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.IDescriptionObject.Description
+  langs:
+  - csharp
+  - vb
+  name: IDescriptionObject
+  nameWithType: IDescriptionObject
+  fullName: TabularEditor.TOMWrapper.IDescriptionObject
+  type: Interface
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Objects that can have descriptions
+  example: []
+  syntax:
+    content: public interface IDescriptionObject
+    content.vb: Public Interface IDescriptionObject
+  derivedClasses:
+  - TabularEditor.TOMWrapper.BindingInfo
+  - TabularEditor.TOMWrapper.CalculatedColumn
+  - TabularEditor.TOMWrapper.CalculatedTable
+  - TabularEditor.TOMWrapper.CalculatedTableColumn
+  - TabularEditor.TOMWrapper.CalculationGroup
+  - TabularEditor.TOMWrapper.CalculationGroupTable
+  - TabularEditor.TOMWrapper.CalculationItem
+  - TabularEditor.TOMWrapper.Calendar
+  - TabularEditor.TOMWrapper.Column
+  - TabularEditor.TOMWrapper.DataBindingHint
+  - TabularEditor.TOMWrapper.DataColumn
+  - TabularEditor.TOMWrapper.DataCoverageDefinition
+  - TabularEditor.TOMWrapper.DataSource
+  - TabularEditor.TOMWrapper.EntityPartition
+  - TabularEditor.TOMWrapper.Function
+  - TabularEditor.TOMWrapper.Hierarchy
+  - TabularEditor.TOMWrapper.KPI
+  - TabularEditor.TOMWrapper.Level
+  - TabularEditor.TOMWrapper.MPartition
+  - TabularEditor.TOMWrapper.Measure
+  - TabularEditor.TOMWrapper.Model
+  - TabularEditor.TOMWrapper.ModelRole
+  - TabularEditor.TOMWrapper.NamedExpression
+  - TabularEditor.TOMWrapper.Partition
+  - TabularEditor.TOMWrapper.Perspective
+  - TabularEditor.TOMWrapper.PolicyRangePartition
+  - TabularEditor.TOMWrapper.ProviderDataSource
+  - TabularEditor.TOMWrapper.QueryGroup
+  - TabularEditor.TOMWrapper.Set
+  - TabularEditor.TOMWrapper.StructuredDataSource
+  - TabularEditor.TOMWrapper.Table
+  - TabularEditor.TOMWrapper.Variation
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.TOMWrapper.IDescriptionObject.Description
+  commentId: P:TabularEditor.TOMWrapper.IDescriptionObject.Description
+  id: Description
+  parent: TabularEditor.TOMWrapper.IDescriptionObject
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: IDescriptionObject.Description
+  fullName: TabularEditor.TOMWrapper.IDescriptionObject.Description
+  type: Property
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: string Description { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Property Description As String
+  overload: TabularEditor.TOMWrapper.IDescriptionObject.Description*
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.TOMWrapper.IDescriptionObject.Description*
+  commentId: Overload:TabularEditor.TOMWrapper.IDescriptionObject.Description
+  isExternal: true
+  href: TabularEditor.TOMWrapper.IDescriptionObject.html#TabularEditor_TOMWrapper_IDescriptionObject_Description
+  name: Description
+  nameWithType: IDescriptionObject.Description
+  fullName: TabularEditor.TOMWrapper.IDescriptionObject.Description
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System

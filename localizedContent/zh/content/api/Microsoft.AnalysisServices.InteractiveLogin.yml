@@ -1,0 +1,497 @@
+### YamlMime:ManagedReference
+items:
+- uid: Microsoft.AnalysisServices.InteractiveLogin
+  commentId: T:Microsoft.AnalysisServices.InteractiveLogin
+  id: InteractiveLogin
+  parent: Microsoft.AnalysisServices
+  children:
+  - Microsoft.AnalysisServices.InteractiveLogin.Always
+  - Microsoft.AnalysisServices.InteractiveLogin.Default
+  - Microsoft.AnalysisServices.InteractiveLogin.Disabled
+  - Microsoft.AnalysisServices.InteractiveLogin.Enabled
+  langs:
+  - csharp
+  - vb
+  name: InteractiveLogin
+  nameWithType: InteractiveLogin
+  fullName: Microsoft.AnalysisServices.InteractiveLogin
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: Microsoft.AnalysisServices
+  summary: Controls how interactive authentication is performed
+  example: []
+  syntax:
+    content: public enum InteractiveLogin
+    content.vb: Public Enum InteractiveLogin
+  extensionMethods:
+  - Microsoft.AnalysisServices.InteractiveLogin.TabularEditor.EnumExtensions.AllFlagsChanged``1(Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin)
+  - Microsoft.AnalysisServices.InteractiveLogin.TabularEditor.EnumExtensions.AnyFlagsChanged``1(Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin)
+  - Microsoft.AnalysisServices.InteractiveLogin.TabularEditor.EnumExtensions.HasAnyFlags``1(Microsoft.AnalysisServices.InteractiveLogin)
+- uid: Microsoft.AnalysisServices.InteractiveLogin.Default
+  commentId: F:Microsoft.AnalysisServices.InteractiveLogin.Default
+  id: Default
+  parent: Microsoft.AnalysisServices.InteractiveLogin
+  langs:
+  - csharp
+  - vb
+  name: Default
+  nameWithType: InteractiveLogin.Default
+  fullName: Microsoft.AnalysisServices.InteractiveLogin.Default
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: Microsoft.AnalysisServices
+  summary: >-
+    Behavior is controlled based on the system's default behavior and other properties in the connection-string;
+
+    usually that means using SSO first and only launching the login window if the silent authentication fails.
+  example: []
+  syntax:
+    content: Default = 0
+    return:
+      type: Microsoft.AnalysisServices.InteractiveLogin
+- uid: Microsoft.AnalysisServices.InteractiveLogin.Enabled
+  commentId: F:Microsoft.AnalysisServices.InteractiveLogin.Enabled
+  id: Enabled
+  parent: Microsoft.AnalysisServices.InteractiveLogin
+  langs:
+  - csharp
+  - vb
+  name: Enabled
+  nameWithType: InteractiveLogin.Enabled
+  fullName: Microsoft.AnalysisServices.InteractiveLogin.Enabled
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: Microsoft.AnalysisServices
+  summary: Using SSO first and only launching the login window if the silent authentication fails.
+  example: []
+  syntax:
+    content: Enabled = 1
+    return:
+      type: Microsoft.AnalysisServices.InteractiveLogin
+- uid: Microsoft.AnalysisServices.InteractiveLogin.Disabled
+  commentId: F:Microsoft.AnalysisServices.InteractiveLogin.Disabled
+  id: Disabled
+  parent: Microsoft.AnalysisServices.InteractiveLogin
+  langs:
+  - csharp
+  - vb
+  name: Disabled
+  nameWithType: InteractiveLogin.Disabled
+  fullName: Microsoft.AnalysisServices.InteractiveLogin.Disabled
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: Microsoft.AnalysisServices
+  summary: Using silent authentication only, the connection establishment fails if need a user interaction [like MFA]
+  example: []
+  syntax:
+    content: Disabled = 2
+    return:
+      type: Microsoft.AnalysisServices.InteractiveLogin
+- uid: Microsoft.AnalysisServices.InteractiveLogin.Always
+  commentId: F:Microsoft.AnalysisServices.InteractiveLogin.Always
+  id: Always
+  parent: Microsoft.AnalysisServices.InteractiveLogin
+  langs:
+  - csharp
+  - vb
+  name: Always
+  nameWithType: InteractiveLogin.Always
+  fullName: Microsoft.AnalysisServices.InteractiveLogin.Always
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: Microsoft.AnalysisServices
+  summary: Always launching the login window.
+  example: []
+  syntax:
+    content: Always = 3
+    return:
+      type: Microsoft.AnalysisServices.InteractiveLogin
+references:
+- uid: Microsoft.AnalysisServices
+  commentId: N:Microsoft.AnalysisServices
+  isExternal: true
+  href: Microsoft.html
+  name: Microsoft.AnalysisServices
+  nameWithType: Microsoft.AnalysisServices
+  fullName: Microsoft.AnalysisServices
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: Microsoft.html
+  - name: .
+  - uid: Microsoft.AnalysisServices
+    name: AnalysisServices
+    isExternal: true
+    href: Microsoft.AnalysisServices.html
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: Microsoft.html
+  - name: .
+  - uid: Microsoft.AnalysisServices
+    name: AnalysisServices
+    isExternal: true
+    href: Microsoft.AnalysisServices.html
+- uid: Microsoft.AnalysisServices.InteractiveLogin.TabularEditor.EnumExtensions.AllFlagsChanged``1(Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<InteractiveLogin>(InteractiveLogin, InteractiveLogin, InteractiveLogin)
+  nameWithType: EnumExtensions.AllFlagsChanged<InteractiveLogin>(InteractiveLogin, InteractiveLogin, InteractiveLogin)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<Microsoft.AnalysisServices.InteractiveLogin>(Microsoft.AnalysisServices.InteractiveLogin, Microsoft.AnalysisServices.InteractiveLogin, Microsoft.AnalysisServices.InteractiveLogin)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of InteractiveLogin)(InteractiveLogin, InteractiveLogin, InteractiveLogin)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of Microsoft.AnalysisServices.InteractiveLogin)(Microsoft.AnalysisServices.InteractiveLogin, Microsoft.AnalysisServices.InteractiveLogin, Microsoft.AnalysisServices.InteractiveLogin)
+  name.vb: AllFlagsChanged(Of InteractiveLogin)(InteractiveLogin, InteractiveLogin, InteractiveLogin)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: '>'
+  - name: (
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: )
+  - name: (
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: )
+- uid: Microsoft.AnalysisServices.InteractiveLogin.TabularEditor.EnumExtensions.AnyFlagsChanged``1(Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<InteractiveLogin>(InteractiveLogin, InteractiveLogin, InteractiveLogin)
+  nameWithType: EnumExtensions.AnyFlagsChanged<InteractiveLogin>(InteractiveLogin, InteractiveLogin, InteractiveLogin)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<Microsoft.AnalysisServices.InteractiveLogin>(Microsoft.AnalysisServices.InteractiveLogin, Microsoft.AnalysisServices.InteractiveLogin, Microsoft.AnalysisServices.InteractiveLogin)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of InteractiveLogin)(InteractiveLogin, InteractiveLogin, InteractiveLogin)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of Microsoft.AnalysisServices.InteractiveLogin)(Microsoft.AnalysisServices.InteractiveLogin, Microsoft.AnalysisServices.InteractiveLogin, Microsoft.AnalysisServices.InteractiveLogin)
+  name.vb: AnyFlagsChanged(Of InteractiveLogin)(InteractiveLogin, InteractiveLogin, InteractiveLogin)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: '>'
+  - name: (
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: )
+  - name: (
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: )
+- uid: Microsoft.AnalysisServices.InteractiveLogin.TabularEditor.EnumExtensions.HasAnyFlags``1(Microsoft.AnalysisServices.InteractiveLogin)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<InteractiveLogin>(InteractiveLogin, InteractiveLogin)
+  nameWithType: EnumExtensions.HasAnyFlags<InteractiveLogin>(InteractiveLogin, InteractiveLogin)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<Microsoft.AnalysisServices.InteractiveLogin>(Microsoft.AnalysisServices.InteractiveLogin, Microsoft.AnalysisServices.InteractiveLogin)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of InteractiveLogin)(InteractiveLogin, InteractiveLogin)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of Microsoft.AnalysisServices.InteractiveLogin)(Microsoft.AnalysisServices.InteractiveLogin, Microsoft.AnalysisServices.InteractiveLogin)
+  name.vb: HasAnyFlags(Of InteractiveLogin)(InteractiveLogin, InteractiveLogin)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: '>'
+  - name: (
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(Microsoft.AnalysisServices.InteractiveLogin,Microsoft.AnalysisServices.InteractiveLogin)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: )
+  - name: (
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    isExternal: true
+    href: Microsoft.AnalysisServices.InteractiveLogin.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: Microsoft.AnalysisServices.InteractiveLogin
+  commentId: T:Microsoft.AnalysisServices.InteractiveLogin
+  parent: Microsoft.AnalysisServices
+  isExternal: true
+  href: Microsoft.AnalysisServices.InteractiveLogin.html
+  name: InteractiveLogin
+  nameWithType: InteractiveLogin
+  fullName: Microsoft.AnalysisServices.InteractiveLogin

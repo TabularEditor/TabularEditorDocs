@@ -1,0 +1,516 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.RefreshGranularityType
+  commentId: T:TabularEditor.TOMWrapper.RefreshGranularityType
+  id: RefreshGranularityType
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.RefreshGranularityType.Day
+  - TabularEditor.TOMWrapper.RefreshGranularityType.Invalid
+  - TabularEditor.TOMWrapper.RefreshGranularityType.Month
+  - TabularEditor.TOMWrapper.RefreshGranularityType.Quarter
+  - TabularEditor.TOMWrapper.RefreshGranularityType.Year
+  langs:
+  - csharp
+  - vb
+  name: RefreshGranularityType
+  nameWithType: RefreshGranularityType
+  fullName: TabularEditor.TOMWrapper.RefreshGranularityType
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Specifies the granularity of the refresh policy for auto partitioning
+  remarks: This enum is only supported when the compatibility level of the database is at 1450 or above.
+  example: []
+  syntax:
+    content: public enum RefreshGranularityType
+    content.vb: Public Enum RefreshGranularityType
+  extensionMethods:
+  - TabularEditor.TOMWrapper.RefreshGranularityType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType)
+  - TabularEditor.TOMWrapper.RefreshGranularityType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType)
+  - TabularEditor.TOMWrapper.RefreshGranularityType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RefreshGranularityType)
+- uid: TabularEditor.TOMWrapper.RefreshGranularityType.Day
+  commentId: F:TabularEditor.TOMWrapper.RefreshGranularityType.Day
+  id: Day
+  parent: TabularEditor.TOMWrapper.RefreshGranularityType
+  langs:
+  - csharp
+  - vb
+  name: Day
+  nameWithType: RefreshGranularityType.Day
+  fullName: TabularEditor.TOMWrapper.RefreshGranularityType.Day
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Granularity of a day
+  example: []
+  syntax:
+    content: Day = 0
+    return:
+      type: TabularEditor.TOMWrapper.RefreshGranularityType
+- uid: TabularEditor.TOMWrapper.RefreshGranularityType.Month
+  commentId: F:TabularEditor.TOMWrapper.RefreshGranularityType.Month
+  id: Month
+  parent: TabularEditor.TOMWrapper.RefreshGranularityType
+  langs:
+  - csharp
+  - vb
+  name: Month
+  nameWithType: RefreshGranularityType.Month
+  fullName: TabularEditor.TOMWrapper.RefreshGranularityType.Month
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Granularity of a month
+  example: []
+  syntax:
+    content: Month = 1
+    return:
+      type: TabularEditor.TOMWrapper.RefreshGranularityType
+- uid: TabularEditor.TOMWrapper.RefreshGranularityType.Quarter
+  commentId: F:TabularEditor.TOMWrapper.RefreshGranularityType.Quarter
+  id: Quarter
+  parent: TabularEditor.TOMWrapper.RefreshGranularityType
+  langs:
+  - csharp
+  - vb
+  name: Quarter
+  nameWithType: RefreshGranularityType.Quarter
+  fullName: TabularEditor.TOMWrapper.RefreshGranularityType.Quarter
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Granularity of a quarter
+  example: []
+  syntax:
+    content: Quarter = 2
+    return:
+      type: TabularEditor.TOMWrapper.RefreshGranularityType
+- uid: TabularEditor.TOMWrapper.RefreshGranularityType.Year
+  commentId: F:TabularEditor.TOMWrapper.RefreshGranularityType.Year
+  id: Year
+  parent: TabularEditor.TOMWrapper.RefreshGranularityType
+  langs:
+  - csharp
+  - vb
+  name: Year
+  nameWithType: RefreshGranularityType.Year
+  fullName: TabularEditor.TOMWrapper.RefreshGranularityType.Year
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Granularity of a year
+  example: []
+  syntax:
+    content: Year = 3
+    return:
+      type: TabularEditor.TOMWrapper.RefreshGranularityType
+- uid: TabularEditor.TOMWrapper.RefreshGranularityType.Invalid
+  commentId: F:TabularEditor.TOMWrapper.RefreshGranularityType.Invalid
+  id: Invalid
+  parent: TabularEditor.TOMWrapper.RefreshGranularityType
+  langs:
+  - csharp
+  - vb
+  name: Invalid
+  nameWithType: RefreshGranularityType.Invalid
+  fullName: TabularEditor.TOMWrapper.RefreshGranularityType.Invalid
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: Invalid Granularity
+  example: []
+  syntax:
+    content: Invalid = -1
+    return:
+      type: TabularEditor.TOMWrapper.RefreshGranularityType
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.RefreshGranularityType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<RefreshGranularityType>(RefreshGranularityType, RefreshGranularityType, RefreshGranularityType)
+  nameWithType: EnumExtensions.AllFlagsChanged<RefreshGranularityType>(RefreshGranularityType, RefreshGranularityType, RefreshGranularityType)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.RefreshGranularityType>(TabularEditor.TOMWrapper.RefreshGranularityType, TabularEditor.TOMWrapper.RefreshGranularityType, TabularEditor.TOMWrapper.RefreshGranularityType)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of RefreshGranularityType)(RefreshGranularityType, RefreshGranularityType, RefreshGranularityType)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.RefreshGranularityType)(TabularEditor.TOMWrapper.RefreshGranularityType, TabularEditor.TOMWrapper.RefreshGranularityType, TabularEditor.TOMWrapper.RefreshGranularityType)
+  name.vb: AllFlagsChanged(Of RefreshGranularityType)(RefreshGranularityType, RefreshGranularityType, RefreshGranularityType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshGranularityType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<RefreshGranularityType>(RefreshGranularityType, RefreshGranularityType, RefreshGranularityType)
+  nameWithType: EnumExtensions.AnyFlagsChanged<RefreshGranularityType>(RefreshGranularityType, RefreshGranularityType, RefreshGranularityType)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.RefreshGranularityType>(TabularEditor.TOMWrapper.RefreshGranularityType, TabularEditor.TOMWrapper.RefreshGranularityType, TabularEditor.TOMWrapper.RefreshGranularityType)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of RefreshGranularityType)(RefreshGranularityType, RefreshGranularityType, RefreshGranularityType)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.RefreshGranularityType)(TabularEditor.TOMWrapper.RefreshGranularityType, TabularEditor.TOMWrapper.RefreshGranularityType, TabularEditor.TOMWrapper.RefreshGranularityType)
+  name.vb: AnyFlagsChanged(Of RefreshGranularityType)(RefreshGranularityType, RefreshGranularityType, RefreshGranularityType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.RefreshGranularityType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RefreshGranularityType)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<RefreshGranularityType>(RefreshGranularityType, RefreshGranularityType)
+  nameWithType: EnumExtensions.HasAnyFlags<RefreshGranularityType>(RefreshGranularityType, RefreshGranularityType)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.RefreshGranularityType>(TabularEditor.TOMWrapper.RefreshGranularityType, TabularEditor.TOMWrapper.RefreshGranularityType)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of RefreshGranularityType)(RefreshGranularityType, RefreshGranularityType)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.RefreshGranularityType)(TabularEditor.TOMWrapper.RefreshGranularityType, TabularEditor.TOMWrapper.RefreshGranularityType)
+  name.vb: HasAnyFlags(Of RefreshGranularityType)(RefreshGranularityType, RefreshGranularityType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.RefreshGranularityType,TabularEditor.TOMWrapper.RefreshGranularityType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.RefreshGranularityType
+  commentId: T:TabularEditor.TOMWrapper.RefreshGranularityType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.RefreshGranularityType.html
+  name: RefreshGranularityType
+  nameWithType: RefreshGranularityType
+  fullName: TabularEditor.TOMWrapper.RefreshGranularityType

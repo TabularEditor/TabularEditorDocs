@@ -1,0 +1,517 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.Shared.Scripting.IMacroActionCreator
+  commentId: T:TabularEditor.Shared.Scripting.IMacroActionCreator
+  id: IMacroActionCreator
+  parent: TabularEditor.Shared.Scripting
+  children:
+  - TabularEditor.Shared.Scripting.IMacroActionCreator.CreateMacroItem(System.Int32,System.String,System.Func{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model,System.Boolean},System.Action{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model},TabularEditor.Shared.Interaction.Context,System.String)
+  - TabularEditor.Shared.Scripting.IMacroActionCreator.DeleteMacroItem(System.Int32)
+  - TabularEditor.Shared.Scripting.IMacroActionCreator.RemoveUnassignedMacroItems
+  - TabularEditor.Shared.Scripting.IMacroActionCreator.UpdateMacroItemName(System.Int32,System.String)
+  langs:
+  - csharp
+  - vb
+  name: IMacroActionCreator
+  nameWithType: IMacroActionCreator
+  fullName: TabularEditor.Shared.Scripting.IMacroActionCreator
+  type: Interface
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.Scripting
+  syntax:
+    content: public interface IMacroActionCreator
+    content.vb: Public Interface IMacroActionCreator
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.Shared.Scripting.IMacroActionCreator.CreateMacroItem(System.Int32,System.String,System.Func{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model,System.Boolean},System.Action{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model},TabularEditor.Shared.Interaction.Context,System.String)
+  commentId: M:TabularEditor.Shared.Scripting.IMacroActionCreator.CreateMacroItem(System.Int32,System.String,System.Func{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model,System.Boolean},System.Action{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model},TabularEditor.Shared.Interaction.Context,System.String)
+  id: CreateMacroItem(System.Int32,System.String,System.Func{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model,System.Boolean},System.Action{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model},TabularEditor.Shared.Interaction.Context,System.String)
+  parent: TabularEditor.Shared.Scripting.IMacroActionCreator
+  langs:
+  - csharp
+  - vb
+  name: CreateMacroItem(int, string, Func<Selection, Model, bool>, Action<Selection, Model>, Context, string)
+  nameWithType: IMacroActionCreator.CreateMacroItem(int, string, Func<Selection, Model, bool>, Action<Selection, Model>, Context, string)
+  fullName: TabularEditor.Shared.Scripting.IMacroActionCreator.CreateMacroItem(int, string, System.Func<TabularEditor.Shared.Interaction.Selection, TabularEditor.TOMWrapper.Model, bool>, System.Action<TabularEditor.Shared.Interaction.Selection, TabularEditor.TOMWrapper.Model>, TabularEditor.Shared.Interaction.Context, string)
+  type: Method
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.Scripting
+  syntax:
+    content: void CreateMacroItem(int id, string name, Func<Selection, Model, bool> enabled, Action<Selection, Model> execute, Context validContexts, string toolTip = null)
+    parameters:
+    - id: id
+      type: System.Int32
+    - id: name
+      type: System.String
+    - id: enabled
+      type: System.Func{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model,System.Boolean}
+    - id: execute
+      type: System.Action{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model}
+    - id: validContexts
+      type: TabularEditor.Shared.Interaction.Context
+    - id: toolTip
+      type: System.String
+    content.vb: Sub CreateMacroItem(id As Integer, name As String, enabled As Func(Of Selection, Model, Boolean), execute As Action(Of Selection, Model), validContexts As Context, toolTip As String = Nothing)
+  overload: TabularEditor.Shared.Scripting.IMacroActionCreator.CreateMacroItem*
+  nameWithType.vb: IMacroActionCreator.CreateMacroItem(Integer, String, Func(Of Selection, Model, Boolean), Action(Of Selection, Model), Context, String)
+  fullName.vb: TabularEditor.Shared.Scripting.IMacroActionCreator.CreateMacroItem(Integer, String, System.Func(Of TabularEditor.Shared.Interaction.Selection, TabularEditor.TOMWrapper.Model, Boolean), System.Action(Of TabularEditor.Shared.Interaction.Selection, TabularEditor.TOMWrapper.Model), TabularEditor.Shared.Interaction.Context, String)
+  name.vb: CreateMacroItem(Integer, String, Func(Of Selection, Model, Boolean), Action(Of Selection, Model), Context, String)
+- uid: TabularEditor.Shared.Scripting.IMacroActionCreator.UpdateMacroItemName(System.Int32,System.String)
+  commentId: M:TabularEditor.Shared.Scripting.IMacroActionCreator.UpdateMacroItemName(System.Int32,System.String)
+  id: UpdateMacroItemName(System.Int32,System.String)
+  parent: TabularEditor.Shared.Scripting.IMacroActionCreator
+  langs:
+  - csharp
+  - vb
+  name: UpdateMacroItemName(int, string)
+  nameWithType: IMacroActionCreator.UpdateMacroItemName(int, string)
+  fullName: TabularEditor.Shared.Scripting.IMacroActionCreator.UpdateMacroItemName(int, string)
+  type: Method
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.Scripting
+  syntax:
+    content: void UpdateMacroItemName(int id, string newName)
+    parameters:
+    - id: id
+      type: System.Int32
+    - id: newName
+      type: System.String
+    content.vb: Sub UpdateMacroItemName(id As Integer, newName As String)
+  overload: TabularEditor.Shared.Scripting.IMacroActionCreator.UpdateMacroItemName*
+  nameWithType.vb: IMacroActionCreator.UpdateMacroItemName(Integer, String)
+  fullName.vb: TabularEditor.Shared.Scripting.IMacroActionCreator.UpdateMacroItemName(Integer, String)
+  name.vb: UpdateMacroItemName(Integer, String)
+- uid: TabularEditor.Shared.Scripting.IMacroActionCreator.DeleteMacroItem(System.Int32)
+  commentId: M:TabularEditor.Shared.Scripting.IMacroActionCreator.DeleteMacroItem(System.Int32)
+  id: DeleteMacroItem(System.Int32)
+  parent: TabularEditor.Shared.Scripting.IMacroActionCreator
+  langs:
+  - csharp
+  - vb
+  name: DeleteMacroItem(int)
+  nameWithType: IMacroActionCreator.DeleteMacroItem(int)
+  fullName: TabularEditor.Shared.Scripting.IMacroActionCreator.DeleteMacroItem(int)
+  type: Method
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.Scripting
+  syntax:
+    content: void DeleteMacroItem(int id)
+    parameters:
+    - id: id
+      type: System.Int32
+    content.vb: Sub DeleteMacroItem(id As Integer)
+  overload: TabularEditor.Shared.Scripting.IMacroActionCreator.DeleteMacroItem*
+  nameWithType.vb: IMacroActionCreator.DeleteMacroItem(Integer)
+  fullName.vb: TabularEditor.Shared.Scripting.IMacroActionCreator.DeleteMacroItem(Integer)
+  name.vb: DeleteMacroItem(Integer)
+- uid: TabularEditor.Shared.Scripting.IMacroActionCreator.RemoveUnassignedMacroItems
+  commentId: M:TabularEditor.Shared.Scripting.IMacroActionCreator.RemoveUnassignedMacroItems
+  id: RemoveUnassignedMacroItems
+  parent: TabularEditor.Shared.Scripting.IMacroActionCreator
+  langs:
+  - csharp
+  - vb
+  name: RemoveUnassignedMacroItems()
+  nameWithType: IMacroActionCreator.RemoveUnassignedMacroItems()
+  fullName: TabularEditor.Shared.Scripting.IMacroActionCreator.RemoveUnassignedMacroItems()
+  type: Method
+  assemblies:
+  - TabularEditor3.Shared
+  namespace: TabularEditor.Shared.Scripting
+  syntax:
+    content: void RemoveUnassignedMacroItems()
+    content.vb: Sub RemoveUnassignedMacroItems()
+  overload: TabularEditor.Shared.Scripting.IMacroActionCreator.RemoveUnassignedMacroItems*
+references:
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting.IMacroActionCreator.CreateMacroItem*
+  commentId: Overload:TabularEditor.Shared.Scripting.IMacroActionCreator.CreateMacroItem
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.IMacroActionCreator.html#TabularEditor_Shared_Scripting_IMacroActionCreator_CreateMacroItem_System_Int32_System_String_System_Func_TabularEditor_Shared_Interaction_Selection_TabularEditor_TOMWrapper_Model_System_Boolean__System_Action_TabularEditor_Shared_Interaction_Selection_TabularEditor_TOMWrapper_Model__TabularEditor_Shared_Interaction_Context_System_String_
+  name: CreateMacroItem
+  nameWithType: IMacroActionCreator.CreateMacroItem
+  fullName: TabularEditor.Shared.Scripting.IMacroActionCreator.CreateMacroItem
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Func{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model,System.Boolean}
+  commentId: T:System.Func{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model,System.Boolean}
+  parent: System
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<Selection, Model, bool>
+  nameWithType: Func<Selection, Model, bool>
+  fullName: System.Func<TabularEditor.Shared.Interaction.Selection, TabularEditor.TOMWrapper.Model, bool>
+  nameWithType.vb: Func(Of Selection, Model, Boolean)
+  fullName.vb: System.Func(Of TabularEditor.Shared.Interaction.Selection, TabularEditor.TOMWrapper.Model, Boolean)
+  name.vb: Func(Of Selection, Model, Boolean)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - uid: TabularEditor.Shared.Interaction.Selection
+    name: Selection
+    isExternal: true
+    href: TabularEditor.Shared.Interaction.Selection.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Model
+    name: Model
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.Shared.Interaction.Selection
+    name: Selection
+    isExternal: true
+    href: TabularEditor.Shared.Interaction.Selection.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Model
+    name: Model
+    isExternal: true
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Action{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model}
+  commentId: T:System.Action{TabularEditor.Shared.Interaction.Selection,TabularEditor.TOMWrapper.Model}
+  parent: System
+  definition: System.Action`2
+  href: https://learn.microsoft.com/dotnet/api/system.action-2
+  name: Action<Selection, Model>
+  nameWithType: Action<Selection, Model>
+  fullName: System.Action<TabularEditor.Shared.Interaction.Selection, TabularEditor.TOMWrapper.Model>
+  nameWithType.vb: Action(Of Selection, Model)
+  fullName.vb: System.Action(Of TabularEditor.Shared.Interaction.Selection, TabularEditor.TOMWrapper.Model)
+  name.vb: Action(Of Selection, Model)
+  spec.csharp:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: <
+  - uid: TabularEditor.Shared.Interaction.Selection
+    name: Selection
+    isExternal: true
+    href: TabularEditor.Shared.Interaction.Selection.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Model
+    name: Model
+    isExternal: true
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.Shared.Interaction.Selection
+    name: Selection
+    isExternal: true
+    href: TabularEditor.Shared.Interaction.Selection.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.Model
+    name: Model
+    isExternal: true
+  - name: )
+- uid: TabularEditor.Shared.Interaction.Context
+  commentId: T:TabularEditor.Shared.Interaction.Context
+  parent: TabularEditor.Shared.Interaction
+  isExternal: true
+  href: TabularEditor.Shared.Interaction.Context.html
+  name: Context
+  nameWithType: Context
+  fullName: TabularEditor.Shared.Interaction.Context
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Action`2
+  commentId: T:System.Action`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.action-2
+  name: Action<T1, T2>
+  nameWithType: Action<T1, T2>
+  fullName: System.Action<T1, T2>
+  nameWithType.vb: Action(Of T1, T2)
+  fullName.vb: System.Action(Of T1, T2)
+  name.vb: Action(Of T1, T2)
+  spec.csharp:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: '>'
+  spec.vb:
+  - uid: System.Action`2
+    name: Action
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.action-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+- uid: TabularEditor.Shared.Interaction
+  commentId: N:TabularEditor.Shared.Interaction
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Interaction
+  nameWithType: TabularEditor.Shared.Interaction
+  fullName: TabularEditor.Shared.Interaction
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Interaction
+    name: Interaction
+    isExternal: true
+    href: TabularEditor.Shared.Interaction.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Interaction
+    name: Interaction
+    isExternal: true
+    href: TabularEditor.Shared.Interaction.html
+- uid: TabularEditor.Shared.Scripting.IMacroActionCreator.UpdateMacroItemName*
+  commentId: Overload:TabularEditor.Shared.Scripting.IMacroActionCreator.UpdateMacroItemName
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.IMacroActionCreator.html#TabularEditor_Shared_Scripting_IMacroActionCreator_UpdateMacroItemName_System_Int32_System_String_
+  name: UpdateMacroItemName
+  nameWithType: IMacroActionCreator.UpdateMacroItemName
+  fullName: TabularEditor.Shared.Scripting.IMacroActionCreator.UpdateMacroItemName
+- uid: TabularEditor.Shared.Scripting.IMacroActionCreator.DeleteMacroItem*
+  commentId: Overload:TabularEditor.Shared.Scripting.IMacroActionCreator.DeleteMacroItem
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.IMacroActionCreator.html#TabularEditor_Shared_Scripting_IMacroActionCreator_DeleteMacroItem_System_Int32_
+  name: DeleteMacroItem
+  nameWithType: IMacroActionCreator.DeleteMacroItem
+  fullName: TabularEditor.Shared.Scripting.IMacroActionCreator.DeleteMacroItem
+- uid: TabularEditor.Shared.Scripting.IMacroActionCreator.RemoveUnassignedMacroItems*
+  commentId: Overload:TabularEditor.Shared.Scripting.IMacroActionCreator.RemoveUnassignedMacroItems
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.IMacroActionCreator.html#TabularEditor_Shared_Scripting_IMacroActionCreator_RemoveUnassignedMacroItems
+  name: RemoveUnassignedMacroItems
+  nameWithType: IMacroActionCreator.RemoveUnassignedMacroItems
+  fullName: TabularEditor.Shared.Scripting.IMacroActionCreator.RemoveUnassignedMacroItems

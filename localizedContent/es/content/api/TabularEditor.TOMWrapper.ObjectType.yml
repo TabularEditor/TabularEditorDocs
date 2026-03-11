@@ -1,0 +1,1559 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.ObjectType
+  commentId: T:TabularEditor.TOMWrapper.ObjectType
+  id: ObjectType
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.ObjectType.AlternateOf
+  - TabularEditor.TOMWrapper.ObjectType.AnalyticsAIMetadata
+  - TabularEditor.TOMWrapper.ObjectType.Annotation
+  - TabularEditor.TOMWrapper.ObjectType.AttributeHierarchy
+  - TabularEditor.TOMWrapper.ObjectType.BindingInfo
+  - TabularEditor.TOMWrapper.ObjectType.CalculationGroup
+  - TabularEditor.TOMWrapper.ObjectType.CalculationGroupTable
+  - TabularEditor.TOMWrapper.ObjectType.CalculationItem
+  - TabularEditor.TOMWrapper.ObjectType.CalculationItemCollection
+  - TabularEditor.TOMWrapper.ObjectType.Calendar
+  - TabularEditor.TOMWrapper.ObjectType.CalendarCollection
+  - TabularEditor.TOMWrapper.ObjectType.CalendarColumnGroup
+  - TabularEditor.TOMWrapper.ObjectType.CalendarColumnReference
+  - TabularEditor.TOMWrapper.ObjectType.ChangedProperty
+  - TabularEditor.TOMWrapper.ObjectType.Column
+  - TabularEditor.TOMWrapper.ObjectType.ColumnPermission
+  - TabularEditor.TOMWrapper.ObjectType.Culture
+  - TabularEditor.TOMWrapper.ObjectType.DataCoverageDefinition
+  - TabularEditor.TOMWrapper.ObjectType.DataSource
+  - TabularEditor.TOMWrapper.ObjectType.Database
+  - TabularEditor.TOMWrapper.ObjectType.DetailRowsDefinition
+  - TabularEditor.TOMWrapper.ObjectType.ExcludedArtifact
+  - TabularEditor.TOMWrapper.ObjectType.Expression
+  - TabularEditor.TOMWrapper.ObjectType.ExtendedProperty
+  - TabularEditor.TOMWrapper.ObjectType.Folder
+  - TabularEditor.TOMWrapper.ObjectType.FormatStringDefinition
+  - TabularEditor.TOMWrapper.ObjectType.Function
+  - TabularEditor.TOMWrapper.ObjectType.Group
+  - TabularEditor.TOMWrapper.ObjectType.GroupByColumn
+  - TabularEditor.TOMWrapper.ObjectType.Hierarchy
+  - TabularEditor.TOMWrapper.ObjectType.KPI
+  - TabularEditor.TOMWrapper.ObjectType.KPIMeasure
+  - TabularEditor.TOMWrapper.ObjectType.Level
+  - TabularEditor.TOMWrapper.ObjectType.LinguisticMetadata
+  - TabularEditor.TOMWrapper.ObjectType.Measure
+  - TabularEditor.TOMWrapper.ObjectType.Model
+  - TabularEditor.TOMWrapper.ObjectType.Namespace
+  - TabularEditor.TOMWrapper.ObjectType.Null
+  - TabularEditor.TOMWrapper.ObjectType.ObjectTranslation
+  - TabularEditor.TOMWrapper.ObjectType.Partition
+  - TabularEditor.TOMWrapper.ObjectType.PartitionCollection
+  - TabularEditor.TOMWrapper.ObjectType.Perspective
+  - TabularEditor.TOMWrapper.ObjectType.PerspectiveColumn
+  - TabularEditor.TOMWrapper.ObjectType.PerspectiveHierarchy
+  - TabularEditor.TOMWrapper.ObjectType.PerspectiveMeasure
+  - TabularEditor.TOMWrapper.ObjectType.PerspectiveSet
+  - TabularEditor.TOMWrapper.ObjectType.PerspectiveTable
+  - TabularEditor.TOMWrapper.ObjectType.QueryGroup
+  - TabularEditor.TOMWrapper.ObjectType.RefreshPolicy
+  - TabularEditor.TOMWrapper.ObjectType.RelatedColumnDetails
+  - TabularEditor.TOMWrapper.ObjectType.Relationship
+  - TabularEditor.TOMWrapper.ObjectType.Role
+  - TabularEditor.TOMWrapper.ObjectType.RoleMembership
+  - TabularEditor.TOMWrapper.ObjectType.Set
+  - TabularEditor.TOMWrapper.ObjectType.Table
+  - TabularEditor.TOMWrapper.ObjectType.TablePermission
+  - TabularEditor.TOMWrapper.ObjectType.Variation
+  langs:
+  - csharp
+  - vb
+  name: ObjectType
+  nameWithType: ObjectType
+  fullName: TabularEditor.TOMWrapper.ObjectType
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: public enum ObjectType
+    content.vb: Public Enum ObjectType
+  extensionMethods:
+  - TabularEditor.TOMWrapper.ObjectType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType)
+  - TabularEditor.TOMWrapper.ObjectType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType)
+  - TabularEditor.TOMWrapper.ObjectType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ObjectType)
+  - TabularEditor.TOMWrapper.ObjectType.TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable
+- uid: TabularEditor.TOMWrapper.ObjectType.Namespace
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Namespace
+  id: Namespace
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Namespace
+  nameWithType: ObjectType.Namespace
+  fullName: TabularEditor.TOMWrapper.ObjectType.Namespace
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Namespace = -8
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.CalculationGroupTable
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.CalculationGroupTable
+  id: CalculationGroupTable
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: CalculationGroupTable
+  nameWithType: ObjectType.CalculationGroupTable
+  fullName: TabularEditor.TOMWrapper.ObjectType.CalculationGroupTable
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: CalculationGroupTable = -7
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.CalculationItemCollection
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.CalculationItemCollection
+  id: CalculationItemCollection
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: CalculationItemCollection
+  nameWithType: ObjectType.CalculationItemCollection
+  fullName: TabularEditor.TOMWrapper.ObjectType.CalculationItemCollection
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: CalculationItemCollection = -6
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.CalendarCollection
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.CalendarCollection
+  id: CalendarCollection
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: CalendarCollection
+  nameWithType: ObjectType.CalendarCollection
+  fullName: TabularEditor.TOMWrapper.ObjectType.CalendarCollection
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: CalendarCollection = -5
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.PartitionCollection
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.PartitionCollection
+  id: PartitionCollection
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: PartitionCollection
+  nameWithType: ObjectType.PartitionCollection
+  fullName: TabularEditor.TOMWrapper.ObjectType.PartitionCollection
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: PartitionCollection = -4
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.KPIMeasure
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.KPIMeasure
+  id: KPIMeasure
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: KPIMeasure
+  nameWithType: ObjectType.KPIMeasure
+  fullName: TabularEditor.TOMWrapper.ObjectType.KPIMeasure
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: KPIMeasure = -3
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Group
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Group
+  id: Group
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Group
+  nameWithType: ObjectType.Group
+  fullName: TabularEditor.TOMWrapper.ObjectType.Group
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Group = -2
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Folder
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Folder
+  id: Folder
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Folder
+  nameWithType: ObjectType.Folder
+  fullName: TabularEditor.TOMWrapper.ObjectType.Folder
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Folder = -1
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Null
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Null
+  id: "Null"
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: "Null"
+  nameWithType: ObjectType.Null
+  fullName: TabularEditor.TOMWrapper.ObjectType.Null
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Null = 0
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Model
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Model
+  id: Model
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Model
+  nameWithType: ObjectType.Model
+  fullName: TabularEditor.TOMWrapper.ObjectType.Model
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Model = 1
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.DataSource
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.DataSource
+  id: DataSource
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: DataSource
+  nameWithType: ObjectType.DataSource
+  fullName: TabularEditor.TOMWrapper.ObjectType.DataSource
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: DataSource = 2
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Table
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Table
+  id: Table
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Table
+  nameWithType: ObjectType.Table
+  fullName: TabularEditor.TOMWrapper.ObjectType.Table
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Table = 3
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Column
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Column
+  id: Column
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Column
+  nameWithType: ObjectType.Column
+  fullName: TabularEditor.TOMWrapper.ObjectType.Column
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Column = 4
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.AttributeHierarchy
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.AttributeHierarchy
+  id: AttributeHierarchy
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: AttributeHierarchy
+  nameWithType: ObjectType.AttributeHierarchy
+  fullName: TabularEditor.TOMWrapper.ObjectType.AttributeHierarchy
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: AttributeHierarchy = 5
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Partition
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Partition
+  id: Partition
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Partition
+  nameWithType: ObjectType.Partition
+  fullName: TabularEditor.TOMWrapper.ObjectType.Partition
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Partition = 6
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Relationship
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Relationship
+  id: Relationship
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Relationship
+  nameWithType: ObjectType.Relationship
+  fullName: TabularEditor.TOMWrapper.ObjectType.Relationship
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Relationship = 7
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Measure
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Measure
+  id: Measure
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Measure
+  nameWithType: ObjectType.Measure
+  fullName: TabularEditor.TOMWrapper.ObjectType.Measure
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Measure = 8
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Hierarchy
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Hierarchy
+  id: Hierarchy
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Hierarchy
+  nameWithType: ObjectType.Hierarchy
+  fullName: TabularEditor.TOMWrapper.ObjectType.Hierarchy
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Hierarchy = 9
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Level
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Level
+  id: Level
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Level
+  nameWithType: ObjectType.Level
+  fullName: TabularEditor.TOMWrapper.ObjectType.Level
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Level = 10
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Annotation
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Annotation
+  id: Annotation
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Annotation
+  nameWithType: ObjectType.Annotation
+  fullName: TabularEditor.TOMWrapper.ObjectType.Annotation
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Annotation = 11
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.KPI
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.KPI
+  id: KPI
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: KPI
+  nameWithType: ObjectType.KPI
+  fullName: TabularEditor.TOMWrapper.ObjectType.KPI
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: KPI = 12
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Culture
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Culture
+  id: Culture
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Culture
+  nameWithType: ObjectType.Culture
+  fullName: TabularEditor.TOMWrapper.ObjectType.Culture
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Culture = 13
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.ObjectTranslation
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.ObjectTranslation
+  id: ObjectTranslation
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: ObjectTranslation
+  nameWithType: ObjectType.ObjectTranslation
+  fullName: TabularEditor.TOMWrapper.ObjectType.ObjectTranslation
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: ObjectTranslation = 14
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.LinguisticMetadata
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.LinguisticMetadata
+  id: LinguisticMetadata
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: LinguisticMetadata
+  nameWithType: ObjectType.LinguisticMetadata
+  fullName: TabularEditor.TOMWrapper.ObjectType.LinguisticMetadata
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: LinguisticMetadata = 15
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Perspective
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Perspective
+  id: Perspective
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Perspective
+  nameWithType: ObjectType.Perspective
+  fullName: TabularEditor.TOMWrapper.ObjectType.Perspective
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Perspective = 29
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.PerspectiveTable
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.PerspectiveTable
+  id: PerspectiveTable
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: PerspectiveTable
+  nameWithType: ObjectType.PerspectiveTable
+  fullName: TabularEditor.TOMWrapper.ObjectType.PerspectiveTable
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: PerspectiveTable = 30
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.PerspectiveColumn
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.PerspectiveColumn
+  id: PerspectiveColumn
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: PerspectiveColumn
+  nameWithType: ObjectType.PerspectiveColumn
+  fullName: TabularEditor.TOMWrapper.ObjectType.PerspectiveColumn
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: PerspectiveColumn = 31
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.PerspectiveHierarchy
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.PerspectiveHierarchy
+  id: PerspectiveHierarchy
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: PerspectiveHierarchy
+  nameWithType: ObjectType.PerspectiveHierarchy
+  fullName: TabularEditor.TOMWrapper.ObjectType.PerspectiveHierarchy
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: PerspectiveHierarchy = 32
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.PerspectiveMeasure
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.PerspectiveMeasure
+  id: PerspectiveMeasure
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: PerspectiveMeasure
+  nameWithType: ObjectType.PerspectiveMeasure
+  fullName: TabularEditor.TOMWrapper.ObjectType.PerspectiveMeasure
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: PerspectiveMeasure = 33
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Role
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Role
+  id: Role
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Role
+  nameWithType: ObjectType.Role
+  fullName: TabularEditor.TOMWrapper.ObjectType.Role
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Role = 34
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.RoleMembership
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.RoleMembership
+  id: RoleMembership
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: RoleMembership
+  nameWithType: ObjectType.RoleMembership
+  fullName: TabularEditor.TOMWrapper.ObjectType.RoleMembership
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: RoleMembership = 35
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.TablePermission
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.TablePermission
+  id: TablePermission
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: TablePermission
+  nameWithType: ObjectType.TablePermission
+  fullName: TabularEditor.TOMWrapper.ObjectType.TablePermission
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: TablePermission = 36
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Variation
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Variation
+  id: Variation
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Variation
+  nameWithType: ObjectType.Variation
+  fullName: TabularEditor.TOMWrapper.ObjectType.Variation
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Variation = 37
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Set
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Set
+  id: Set
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Set
+  nameWithType: ObjectType.Set
+  fullName: TabularEditor.TOMWrapper.ObjectType.Set
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Set = 38
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.PerspectiveSet
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.PerspectiveSet
+  id: PerspectiveSet
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: PerspectiveSet
+  nameWithType: ObjectType.PerspectiveSet
+  fullName: TabularEditor.TOMWrapper.ObjectType.PerspectiveSet
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: PerspectiveSet = 39
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.ExtendedProperty
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.ExtendedProperty
+  id: ExtendedProperty
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: ExtendedProperty
+  nameWithType: ObjectType.ExtendedProperty
+  fullName: TabularEditor.TOMWrapper.ObjectType.ExtendedProperty
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: ExtendedProperty = 40
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Expression
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Expression
+  id: Expression
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Expression
+  nameWithType: ObjectType.Expression
+  fullName: TabularEditor.TOMWrapper.ObjectType.Expression
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Expression = 41
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.ColumnPermission
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.ColumnPermission
+  id: ColumnPermission
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: ColumnPermission
+  nameWithType: ObjectType.ColumnPermission
+  fullName: TabularEditor.TOMWrapper.ObjectType.ColumnPermission
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: ColumnPermission = 42
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.DetailRowsDefinition
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.DetailRowsDefinition
+  id: DetailRowsDefinition
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: DetailRowsDefinition
+  nameWithType: ObjectType.DetailRowsDefinition
+  fullName: TabularEditor.TOMWrapper.ObjectType.DetailRowsDefinition
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: DetailRowsDefinition = 43
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.RelatedColumnDetails
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.RelatedColumnDetails
+  id: RelatedColumnDetails
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: RelatedColumnDetails
+  nameWithType: ObjectType.RelatedColumnDetails
+  fullName: TabularEditor.TOMWrapper.ObjectType.RelatedColumnDetails
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: RelatedColumnDetails = 44
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.GroupByColumn
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.GroupByColumn
+  id: GroupByColumn
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: GroupByColumn
+  nameWithType: ObjectType.GroupByColumn
+  fullName: TabularEditor.TOMWrapper.ObjectType.GroupByColumn
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: GroupByColumn = 45
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.CalculationGroup
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.CalculationGroup
+  id: CalculationGroup
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: CalculationGroup
+  nameWithType: ObjectType.CalculationGroup
+  fullName: TabularEditor.TOMWrapper.ObjectType.CalculationGroup
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: CalculationGroup = 46
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.CalculationItem
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.CalculationItem
+  id: CalculationItem
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: CalculationItem
+  nameWithType: ObjectType.CalculationItem
+  fullName: TabularEditor.TOMWrapper.ObjectType.CalculationItem
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: CalculationItem = 47
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.AlternateOf
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.AlternateOf
+  id: AlternateOf
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: AlternateOf
+  nameWithType: ObjectType.AlternateOf
+  fullName: TabularEditor.TOMWrapper.ObjectType.AlternateOf
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: AlternateOf = 48
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.RefreshPolicy
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.RefreshPolicy
+  id: RefreshPolicy
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: RefreshPolicy
+  nameWithType: ObjectType.RefreshPolicy
+  fullName: TabularEditor.TOMWrapper.ObjectType.RefreshPolicy
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: RefreshPolicy = 49
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.FormatStringDefinition
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.FormatStringDefinition
+  id: FormatStringDefinition
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: FormatStringDefinition
+  nameWithType: ObjectType.FormatStringDefinition
+  fullName: TabularEditor.TOMWrapper.ObjectType.FormatStringDefinition
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: FormatStringDefinition = 50
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.QueryGroup
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.QueryGroup
+  id: QueryGroup
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: QueryGroup
+  nameWithType: ObjectType.QueryGroup
+  fullName: TabularEditor.TOMWrapper.ObjectType.QueryGroup
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: QueryGroup = 51
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.AnalyticsAIMetadata
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.AnalyticsAIMetadata
+  id: AnalyticsAIMetadata
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: AnalyticsAIMetadata
+  nameWithType: ObjectType.AnalyticsAIMetadata
+  fullName: TabularEditor.TOMWrapper.ObjectType.AnalyticsAIMetadata
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: AnalyticsAIMetadata = 52
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.ChangedProperty
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.ChangedProperty
+  id: ChangedProperty
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: ChangedProperty
+  nameWithType: ObjectType.ChangedProperty
+  fullName: TabularEditor.TOMWrapper.ObjectType.ChangedProperty
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: ChangedProperty = 53
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.ExcludedArtifact
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.ExcludedArtifact
+  id: ExcludedArtifact
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: ExcludedArtifact
+  nameWithType: ObjectType.ExcludedArtifact
+  fullName: TabularEditor.TOMWrapper.ObjectType.ExcludedArtifact
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: ExcludedArtifact = 54
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.DataCoverageDefinition
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.DataCoverageDefinition
+  id: DataCoverageDefinition
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: DataCoverageDefinition
+  nameWithType: ObjectType.DataCoverageDefinition
+  fullName: TabularEditor.TOMWrapper.ObjectType.DataCoverageDefinition
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: DataCoverageDefinition = 58
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Calendar
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Calendar
+  id: Calendar
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Calendar
+  nameWithType: ObjectType.Calendar
+  fullName: TabularEditor.TOMWrapper.ObjectType.Calendar
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Calendar = 60
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.CalendarColumnGroup
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.CalendarColumnGroup
+  id: CalendarColumnGroup
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: CalendarColumnGroup
+  nameWithType: ObjectType.CalendarColumnGroup
+  fullName: TabularEditor.TOMWrapper.ObjectType.CalendarColumnGroup
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: CalendarColumnGroup = 61
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.CalendarColumnReference
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.CalendarColumnReference
+  id: CalendarColumnReference
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: CalendarColumnReference
+  nameWithType: ObjectType.CalendarColumnReference
+  fullName: TabularEditor.TOMWrapper.ObjectType.CalendarColumnReference
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: CalendarColumnReference = 62
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Function
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Function
+  id: Function
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Function
+  nameWithType: ObjectType.Function
+  fullName: TabularEditor.TOMWrapper.ObjectType.Function
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Function = 63
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.BindingInfo
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.BindingInfo
+  id: BindingInfo
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: BindingInfo
+  nameWithType: ObjectType.BindingInfo
+  fullName: TabularEditor.TOMWrapper.ObjectType.BindingInfo
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: BindingInfo = 64
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+- uid: TabularEditor.TOMWrapper.ObjectType.Database
+  commentId: F:TabularEditor.TOMWrapper.ObjectType.Database
+  id: Database
+  parent: TabularEditor.TOMWrapper.ObjectType
+  langs:
+  - csharp
+  - vb
+  name: Database
+  nameWithType: ObjectType.Database
+  fullName: TabularEditor.TOMWrapper.ObjectType.Database
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  syntax:
+    content: Database = 1000
+    return:
+      type: TabularEditor.TOMWrapper.ObjectType
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.ObjectType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<ObjectType>(ObjectType, ObjectType, ObjectType)
+  nameWithType: EnumExtensions.AllFlagsChanged<ObjectType>(ObjectType, ObjectType, ObjectType)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.ObjectType>(TabularEditor.TOMWrapper.ObjectType, TabularEditor.TOMWrapper.ObjectType, TabularEditor.TOMWrapper.ObjectType)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of ObjectType)(ObjectType, ObjectType, ObjectType)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.ObjectType)(TabularEditor.TOMWrapper.ObjectType, TabularEditor.TOMWrapper.ObjectType, TabularEditor.TOMWrapper.ObjectType)
+  name.vb: AllFlagsChanged(Of ObjectType)(ObjectType, ObjectType, ObjectType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.ObjectType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<ObjectType>(ObjectType, ObjectType, ObjectType)
+  nameWithType: EnumExtensions.AnyFlagsChanged<ObjectType>(ObjectType, ObjectType, ObjectType)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.ObjectType>(TabularEditor.TOMWrapper.ObjectType, TabularEditor.TOMWrapper.ObjectType, TabularEditor.TOMWrapper.ObjectType)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of ObjectType)(ObjectType, ObjectType, ObjectType)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.ObjectType)(TabularEditor.TOMWrapper.ObjectType, TabularEditor.TOMWrapper.ObjectType, TabularEditor.TOMWrapper.ObjectType)
+  name.vb: AnyFlagsChanged(Of ObjectType)(ObjectType, ObjectType, ObjectType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.ObjectType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ObjectType)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<ObjectType>(ObjectType, ObjectType)
+  nameWithType: EnumExtensions.HasAnyFlags<ObjectType>(ObjectType, ObjectType)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.ObjectType>(TabularEditor.TOMWrapper.ObjectType, TabularEditor.TOMWrapper.ObjectType)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of ObjectType)(ObjectType, ObjectType)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.ObjectType)(TabularEditor.TOMWrapper.ObjectType, TabularEditor.TOMWrapper.ObjectType)
+  name.vb: HasAnyFlags(Of ObjectType)(ObjectType, ObjectType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.ObjectType,TabularEditor.TOMWrapper.ObjectType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.ObjectType.TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable
+  commentId: M:TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable(TabularEditor.TOMWrapper.ObjectType)
+  parent: TabularEditor.TOMWrapper.ObjectTypeExtension
+  definition: TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable(TabularEditor.TOMWrapper.ObjectType)
+  href: TabularEditor.TOMWrapper.ObjectTypeExtension.html#TabularEditor_TOMWrapper_ObjectTypeExtension_IsTable_TabularEditor_TOMWrapper_ObjectType_
+  name: IsTable(ObjectType)
+  nameWithType: ObjectTypeExtension.IsTable(ObjectType)
+  fullName: TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable(TabularEditor.TOMWrapper.ObjectType)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable(TabularEditor.TOMWrapper.ObjectType)
+    name: IsTable
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectTypeExtension.html#TabularEditor_TOMWrapper_ObjectTypeExtension_IsTable_TabularEditor_TOMWrapper_ObjectType_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable(TabularEditor.TOMWrapper.ObjectType)
+    name: IsTable
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectTypeExtension.html#TabularEditor_TOMWrapper_ObjectTypeExtension_IsTable_TabularEditor_TOMWrapper_ObjectType_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable(TabularEditor.TOMWrapper.ObjectType)
+  commentId: M:TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable(TabularEditor.TOMWrapper.ObjectType)
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ObjectTypeExtension.html#TabularEditor_TOMWrapper_ObjectTypeExtension_IsTable_TabularEditor_TOMWrapper_ObjectType_
+  name: IsTable(ObjectType)
+  nameWithType: ObjectTypeExtension.IsTable(ObjectType)
+  fullName: TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable(TabularEditor.TOMWrapper.ObjectType)
+  spec.csharp:
+  - uid: TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable(TabularEditor.TOMWrapper.ObjectType)
+    name: IsTable
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectTypeExtension.html#TabularEditor_TOMWrapper_ObjectTypeExtension_IsTable_TabularEditor_TOMWrapper_ObjectType_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.TOMWrapper.ObjectTypeExtension.IsTable(TabularEditor.TOMWrapper.ObjectType)
+    name: IsTable
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectTypeExtension.html#TabularEditor_TOMWrapper_ObjectTypeExtension_IsTable_TabularEditor_TOMWrapper_ObjectType_
+  - name: (
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.ObjectType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.ObjectTypeExtension
+  commentId: T:TabularEditor.TOMWrapper.ObjectTypeExtension
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ObjectTypeExtension.html
+  name: ObjectTypeExtension
+  nameWithType: ObjectTypeExtension
+  fullName: TabularEditor.TOMWrapper.ObjectTypeExtension
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.ObjectType
+  commentId: T:TabularEditor.TOMWrapper.ObjectType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.ObjectType.html
+  name: ObjectType
+  nameWithType: ObjectType
+  fullName: TabularEditor.TOMWrapper.ObjectType

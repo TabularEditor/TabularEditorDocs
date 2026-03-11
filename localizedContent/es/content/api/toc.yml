@@ -1,0 +1,884 @@
+### YamlMime:TableOfContent
+items:
+- uid: Microsoft.AnalysisServices
+  name: Microsoft.AnalysisServices
+  type: Namespace
+  items:
+  - uid: Microsoft.AnalysisServices.IdentityMode
+    name: IdentityMode
+    type: Enum
+  - uid: Microsoft.AnalysisServices.InteractiveLogin
+    name: InteractiveLogin
+    type: Enum
+- uid: TabularEditor
+  name: TabularEditor
+  type: Namespace
+  items:
+  - uid: TabularEditor.EnumExtensions
+    name: EnumExtensions
+    type: Class
+  - uid: TabularEditor.StringHelper
+    name: StringHelper
+    type: Class
+  - uid: TabularEditor.XmlaResultExtension
+    name: XmlaResultExtension
+    type: Class
+- uid: TabularEditor.SemanticBridge
+  name: TabularEditor.SemanticBridge
+  type: Namespace
+  items:
+  - uid: TabularEditor.SemanticBridge.SemanticBridgeService
+    name: SemanticBridgeService
+    type: Class
+- uid: TabularEditor.SemanticBridge.Orchestration
+  name: TabularEditor.SemanticBridge.Orchestration
+  type: Namespace
+  items:
+  - uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticMessage
+    name: DiagnosticMessage
+    type: Class
+  - uid: TabularEditor.SemanticBridge.Orchestration.DiagnosticSeverity
+    name: DiagnosticSeverity
+    type: Enum
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks
+  name: TabularEditor.SemanticBridge.Platforms.Databricks
+  type: Namespace
+  items:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService
+    name: DatabricksMetricViewService
+    type: Class
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  name: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  type: Namespace
+  items:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+    name: IMetricViewObject
+    type: Interface
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule
+    name: IMetricViewValidationRule
+    type: Interface
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  name: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  type: Namespace
+  items:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension
+    name: Dimension
+    type: Class
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Join
+    name: Join
+    type: Class
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    name: Measure
+    type: Class
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewJoinKind
+    name: MetricViewJoinKind
+    type: Enum
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+    name: MetricViewObjectBase
+    type: Class
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View
+    name: View
+    type: Class
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Validation
+  name: TabularEditor.SemanticBridge.Platforms.Databricks.Validation
+  type: Namespace
+  items:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Validation.DefaultValidationRules
+    name: DefaultValidationRules
+    type: Class
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext
+    name: IReadOnlyValidationContext
+    type: Interface
+- uid: TabularEditor.Shared.BPA
+  name: TabularEditor.Shared.BPA
+  type: Namespace
+  items:
+  - uid: TabularEditor.Shared.BPA.AnalyzerResult
+    name: AnalyzerResult
+    type: Class
+  - uid: TabularEditor.Shared.BPA.BestPracticeCollection
+    name: BestPracticeCollection
+    type: Class
+  - uid: TabularEditor.Shared.BPA.BestPracticeRule
+    name: BestPracticeRule
+    type: Class
+  - uid: TabularEditor.Shared.BPA.RuleScope
+    name: RuleScope
+    type: Enum
+  - uid: TabularEditor.Shared.BPA.RuleScopeConverter
+    name: RuleScopeConverter
+    type: Class
+- uid: TabularEditor.Shared.Interaction
+  name: TabularEditor.Shared.Interaction
+  type: Namespace
+  items:
+  - uid: TabularEditor.Shared.Interaction.Context
+    name: Context
+    type: Enum
+  - uid: TabularEditor.Shared.Interaction.ContextExtensions
+    name: ContextExtensions
+    type: Class
+  - uid: TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1
+    name: NamedObjectEditableCollection<T>
+    type: Class
+  - uid: TabularEditor.Shared.Interaction.Selection
+    name: Selection
+    type: Class
+  - uid: TabularEditor.Shared.Interaction.SelectionException
+    name: SelectionException
+    type: Class
+  - uid: TabularEditor.Shared.Interaction.SelectionHelper
+    name: SelectionHelper
+    type: Class
+- uid: TabularEditor.Shared.Localization
+  name: TabularEditor.Shared.Localization
+  type: Namespace
+  items:
+  - uid: TabularEditor.Shared.Localization.Strings
+    name: Strings
+    type: Class
+- uid: TabularEditor.Shared.Scripting
+  name: TabularEditor.Shared.Scripting
+  type: Namespace
+  items:
+  - uid: TabularEditor.Shared.Scripting.IMacroActionCreator
+    name: IMacroActionCreator
+    type: Interface
+  - uid: TabularEditor.Shared.Scripting.ScriptException
+    name: ScriptException
+    type: Class
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper
+    name: ScriptHelper
+    type: Class
+  - uid: TabularEditor.Shared.Scripting.ScriptHost
+    name: ScriptHost
+    type: Class
+  - uid: TabularEditor.Shared.Scripting.ScriptMethodAttribute
+    name: ScriptMethodAttribute
+    type: Class
+- uid: TabularEditor.TOMWrapper
+  name: TabularEditor.TOMWrapper
+  type: Namespace
+  items:
+  - uid: TabularEditor.TOMWrapper.AggregateFunction
+    name: AggregateFunction
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.Alignment
+    name: Alignment
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.AlternateOf
+    name: AlternateOf
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Annotation
+    name: Annotation
+    type: Class
+  - uid: TabularEditor.TOMWrapper.AnnotationCollection
+    name: AnnotationCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.AsEngineVersionOverride
+    name: AsEngineVersionOverride
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.AsServerType
+    name: AsServerType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.AssociatedColumnCollection
+    name: AssociatedColumnCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.BasicRefreshPolicy
+    name: BasicRefreshPolicy
+    type: Class
+  - uid: TabularEditor.TOMWrapper.BindingInfo
+    name: BindingInfo
+    type: Class
+  - uid: TabularEditor.TOMWrapper.BindingInfoCollection
+    name: BindingInfoCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.BindingInfoType
+    name: BindingInfoType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.CalculatedColumn
+    name: CalculatedColumn
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CalculatedTable
+    name: CalculatedTable
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CalculatedTableColumn
+    name: CalculatedTableColumn
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CalculationGroup
+    name: CalculationGroup
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CalculationGroupSelectionMode
+    name: CalculationGroupSelectionMode
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.CalculationGroupTable
+    name: CalculationGroupTable
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CalculationItem
+    name: CalculationItem
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CalculationItemCollection
+    name: CalculationItemCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Calendar
+    name: Calendar
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CalendarCollection
+    name: CalendarCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CalendarColumnGroup
+    name: CalendarColumnGroup
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CalendarColumnGroupCollection
+    name: CalendarColumnGroupCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CascadingChangesMode
+    name: CascadingChangesMode
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ChangedPropertiesCollection
+    name: ChangedPropertiesCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ChildNodesChangedEventArgs
+    name: ChildNodesChangedEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Column
+    name: Column
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ColumnCollection
+    name: ColumnCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ColumnDataCategory
+    name: ColumnDataCategory
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ColumnOLSIndexer
+    name: ColumnOLSIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ColumnType
+    name: ColumnType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.CompatibilityLevelChangedEventArgs
+    name: CompatibilityLevelChangedEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CompatibilityMode
+    name: CompatibilityMode
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ContentType
+    name: ContentType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.CrossFilteringBehavior
+    name: CrossFilteringBehavior
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.Culture
+    name: Culture
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CultureCollection
+    name: CultureCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.CultureResetMode
+    name: CultureResetMode
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.DataBindingHint
+    name: DataBindingHint
+    type: Class
+  - uid: TabularEditor.TOMWrapper.DataColumn
+    name: DataColumn
+    type: Class
+  - uid: TabularEditor.TOMWrapper.DataCoverageDefinition
+    name: DataCoverageDefinition
+    type: Class
+  - uid: TabularEditor.TOMWrapper.DataSource
+    name: DataSource
+    type: Class
+  - uid: TabularEditor.TOMWrapper.DataSourceCollection
+    name: DataSourceCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.DataSourceType
+    name: DataSourceType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.DataSourceVariablesOverrideBehaviorType
+    name: DataSourceVariablesOverrideBehaviorType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.DataType
+    name: DataType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.DataViewType
+    name: DataViewType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.Database
+    name: Database
+    type: Class
+  - uid: TabularEditor.TOMWrapper.DatabaseNotFoundException
+    name: DatabaseNotFoundException
+    type: Class
+  - uid: TabularEditor.TOMWrapper.DatasourceIsolation
+    name: DatasourceIsolation
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.DateTimeRelationshipBehavior
+    name: DateTimeRelationshipBehavior
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.DaxQueryException
+    name: DaxQueryException
+    type: Class
+  - uid: TabularEditor.TOMWrapper.DeploymentMetadata
+    name: DeploymentMetadata
+    type: Class
+  - uid: TabularEditor.TOMWrapper.DeploymentModeMetadata
+    name: DeploymentModeMetadata
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.DirectLakeBehavior
+    name: DirectLakeBehavior
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.DynamicPropertyObject
+    name: DynamicPropertyObject
+    type: Class
+  - uid: TabularEditor.TOMWrapper.EditObjectExpressionEventArgs
+    name: EditObjectExpressionEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.EncodingHintType
+    name: EncodingHintType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.EntityPartition
+    name: EntityPartition
+    type: Class
+  - uid: TabularEditor.TOMWrapper.EvaluationBehavior
+    name: EvaluationBehavior
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ExpressionKind
+    name: ExpressionKind
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ExpressionProperty
+    name: ExpressionProperty
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ExpressionPropertyType
+    name: ExpressionPropertyType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ExtendedProperty
+    name: ExtendedProperty
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ExtendedPropertyCollection
+    name: ExtendedPropertyCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ExtendedPropertyType
+    name: ExtendedPropertyType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ExternalChangeEventArgs
+    name: ExternalChangeEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ExternalModelRoleMember
+    name: ExternalModelRoleMember
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Folder
+    name: Folder
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Function
+    name: Function
+    type: Class
+  - uid: TabularEditor.TOMWrapper.FunctionCollection
+    name: FunctionCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.GenericIndexer`2
+    name: GenericIndexer<T, T1>
+    type: Class
+  - uid: TabularEditor.TOMWrapper.GroupingColumnCollection
+    name: GroupingColumnCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Hierarchy
+    name: Hierarchy
+    type: Class
+  - uid: TabularEditor.TOMWrapper.HierarchyCollection
+    name: HierarchyCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.HierarchyHideMembersType
+    name: HierarchyHideMembersType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.IAnnotationObject
+    name: IAnnotationObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IChangedPropertiesObject
+    name: IChangedPropertiesObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IClonableObject
+    name: IClonableObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IDaxDependantObject
+    name: IDaxDependantObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IDaxObject
+    name: IDaxObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IDescriptionObject
+    name: IDescriptionObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IExpressionObject
+    name: IExpressionObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IExtendedPropertyObject
+    name: IExtendedPropertyObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IFixupSettings
+    name: IFixupSettings
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IFolderObject
+    name: IFolderObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IFormattableObject
+    name: IFormattableObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IHandlerObject
+    name: IHandlerObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IHideableObject
+    name: IHideableObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IInsertOptions
+    name: IInsertOptions
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ILineageTagObject
+    name: ILineageTagObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.INamedObject
+    name: INamedObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IQueryableObject
+    name: IQueryableObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.IServerSession
+    name: IServerSession
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ISynonymObject
+    name: ISynonymObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ITabularNamedObject
+    name: ITabularNamedObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ITabularObject
+    name: ITabularObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ITabularObjectContainer
+    name: ITabularObjectContainer
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ITabularObjectContainerObject
+    name: ITabularObjectContainerObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ITabularPerspectiveObject
+    name: ITabularPerspectiveObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ITabularTableObject
+    name: ITabularTableObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ITomErrorMessageObject
+    name: ITomErrorMessageObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ITranslatableObject
+    name: ITranslatableObject
+    type: Interface
+  - uid: TabularEditor.TOMWrapper.ImpersonationKind
+    name: ImpersonationKind
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ImpersonationMode
+    name: ImpersonationMode
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ImpersonationSettings
+    name: ImpersonationSettings
+    type: Class
+  - uid: TabularEditor.TOMWrapper.IndexBuildingMode
+    name: IndexBuildingMode
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.InsertOptions
+    name: InsertOptions
+    type: Class
+  - uid: TabularEditor.TOMWrapper.IntelliSenseAttribute
+    name: IntelliSenseAttribute
+    type: Class
+  - uid: TabularEditor.TOMWrapper.JsonExtendedProperty
+    name: JsonExtendedProperty
+    type: Class
+  - uid: TabularEditor.TOMWrapper.KPI
+    name: KPI
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Level
+    name: Level
+    type: Class
+  - uid: TabularEditor.TOMWrapper.LevelCollection
+    name: LevelCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.LogicalGroup
+    name: LogicalGroup
+    type: Class
+  - uid: TabularEditor.TOMWrapper.LogicalGroups
+    name: LogicalGroups
+    type: Class
+  - uid: TabularEditor.TOMWrapper.LogicalTreeOptions
+    name: LogicalTreeOptions
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.MPartition
+    name: MPartition
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Measure
+    name: Measure
+    type: Class
+  - uid: TabularEditor.TOMWrapper.MeasureCollection
+    name: MeasureCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.MetadataCategory
+    name: MetadataCategory
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.MetadataPermission
+    name: MetadataPermission
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ModeType
+    name: ModeType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.Model
+    name: Model
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Model.AutomaticAggregationOptionsImpl
+    name: Model.AutomaticAggregationOptionsImpl
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ModelMetadataSourceInfo
+    name: ModelMetadataSourceInfo
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ModelPermission
+    name: ModelPermission
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ModelRole
+    name: ModelRole
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ModelRoleCollection
+    name: ModelRoleCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ModelRoleMember
+    name: ModelRoleMember
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ModelRoleMemberCollection
+    name: ModelRoleMemberCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ModelSourceType
+    name: ModelSourceType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.NamedExpression
+    name: NamedExpression
+    type: Class
+  - uid: TabularEditor.TOMWrapper.NamedExpressionCollection
+    name: NamedExpressionCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ObjectAddedEventArgs
+    name: ObjectAddedEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ObjectChangedEventArgs
+    name: ObjectChangedEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ObjectChangingEventArgs
+    name: ObjectChangingEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ObjectChangingEventHandler
+    name: ObjectChangingEventHandler
+    type: Delegate
+  - uid: TabularEditor.TOMWrapper.ObjectDeletedEventArgs
+    name: ObjectDeletedEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ObjectDeletingEventArgs
+    name: ObjectDeletingEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ObjectDeletingEventHandler
+    name: ObjectDeletingEventHandler
+    type: Delegate
+  - uid: TabularEditor.TOMWrapper.ObjectState
+    name: ObjectState
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ObjectType
+    name: ObjectType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ObjectTypeExtension
+    name: ObjectTypeExtension
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Partition
+    name: Partition
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PartitionCollection
+    name: PartitionCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.PbipInfo
+    name: PbipInfo
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Perspective
+    name: Perspective
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PerspectiveCollection
+    name: PerspectiveCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PerspectiveColumnIndexer
+    name: PerspectiveColumnIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PerspectiveHierarchyIndexer
+    name: PerspectiveHierarchyIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PerspectiveIndexer
+    name: PerspectiveIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PerspectiveMeasureIndexer
+    name: PerspectiveMeasureIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PerspectiveTableIndexer
+    name: PerspectiveTableIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PerspectiveValueChangedEventArgs
+    name: PerspectiveValueChangedEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PolicyRangePartition
+    name: PolicyRangePartition
+    type: Class
+  - uid: TabularEditor.TOMWrapper.PowerBIDataSourceVersion
+    name: PowerBIDataSourceVersion
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ProgressEventType
+    name: ProgressEventType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.ProgressReportEventArgs
+    name: ProgressReportEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ProviderDataSource
+    name: ProviderDataSource
+    type: Class
+  - uid: TabularEditor.TOMWrapper.QueryGroup
+    name: QueryGroup
+    type: Class
+  - uid: TabularEditor.TOMWrapper.QueryGroupCollection
+    name: QueryGroupCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.QueryableObjectExtension
+    name: QueryableObjectExtension
+    type: Class
+  - uid: TabularEditor.TOMWrapper.RefreshGranularityType
+    name: RefreshGranularityType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.RefreshPolicy
+    name: RefreshPolicy
+    type: Class
+  - uid: TabularEditor.TOMWrapper.RefreshPolicyBehavior
+    name: RefreshPolicyBehavior
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.RefreshPolicyMode
+    name: RefreshPolicyMode
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.RefreshPolicyType
+    name: RefreshPolicyType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.RefreshType
+    name: RefreshType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.Relationship
+    name: Relationship
+    type: Class
+  - uid: TabularEditor.TOMWrapper.RelationshipCollection
+    name: RelationshipCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.RelationshipEndCardinality
+    name: RelationshipEndCardinality
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.RelationshipType
+    name: RelationshipType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.RoleColumnOLSIndexer
+    name: RoleColumnOLSIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.RoleMemberType
+    name: RoleMemberType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.RoleOLSIndexer
+    name: RoleOLSIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.RoleRLSIndexer
+    name: RoleRLSIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.SaveDatabaseException
+    name: SaveDatabaseException
+    type: Class
+  - uid: TabularEditor.TOMWrapper.SaveFlags
+    name: SaveFlags
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.SaveFormat
+    name: SaveFormat
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.SecurityFilteringBehavior
+    name: SecurityFilteringBehavior
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.SelectionExpressionBehaviorType
+    name: SelectionExpressionBehaviorType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.SemanticAnalysisCompletedEventArgs
+    name: SemanticAnalysisCompletedEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverride
+    name: SemanticEngineFeatureOverride
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverrides
+    name: SemanticEngineFeatureOverrides
+    type: Class
+  - uid: TabularEditor.TOMWrapper.SemanticEngineFeatureOverridesExtension
+    name: SemanticEngineFeatureOverridesExtension
+    type: Class
+  - uid: TabularEditor.TOMWrapper.SemanticEngineFeaturesExtension
+    name: SemanticEngineFeaturesExtension
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ServerSession
+    name: ServerSession
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Set
+    name: Set
+    type: Class
+  - uid: TabularEditor.TOMWrapper.SetCollection
+    name: SetCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.SingleColumnRelationship
+    name: SingleColumnRelationship
+    type: Class
+  - uid: TabularEditor.TOMWrapper.StringExtendedProperty
+    name: StringExtendedProperty
+    type: Class
+  - uid: TabularEditor.TOMWrapper.StructuredDataSource
+    name: StructuredDataSource
+    type: Class
+  - uid: TabularEditor.TOMWrapper.StructuredDataSource.AddressImpl
+    name: StructuredDataSource.AddressImpl
+    type: Class
+  - uid: TabularEditor.TOMWrapper.StructuredDataSource.CredentialImpl
+    name: StructuredDataSource.CredentialImpl
+    type: Class
+  - uid: TabularEditor.TOMWrapper.StructuredDataSource.DataSourceOptionsImpl
+    name: StructuredDataSource.DataSourceOptionsImpl
+    type: Class
+  - uid: TabularEditor.TOMWrapper.SummarizationType
+    name: SummarizationType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.SynonymIndexer
+    name: SynonymIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Table
+    name: Table
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TableCollection
+    name: TableCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TableDataCategory
+    name: TableDataCategory
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.TableOLSIndexer
+    name: TableOLSIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TablePermission
+    name: TablePermission
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TablePermissionCollection
+    name: TablePermissionCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TableRLSIndexer
+    name: TableRLSIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TabularCollectionHelper
+    name: TabularCollectionHelper
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TabularModelHandlerSettings
+    name: TabularModelHandlerSettings
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TabularNamedObject
+    name: TabularNamedObject
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TabularNamedObjectCollection`1
+    name: TabularNamedObjectCollection<T>
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TabularObject
+    name: TabularObject
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TabularObjectCollection`1
+    name: TabularObjectCollection<T>
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TabularObjectContainerHelper
+    name: TabularObjectContainerHelper
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TimeRelatedColumnGroup
+    name: TimeRelatedColumnGroup
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TimeUnit
+    name: TimeUnit
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.TimeUnitColumnAssociation
+    name: TimeUnitColumnAssociation
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TranslationIndexer
+    name: TranslationIndexer
+    type: Class
+  - uid: TabularEditor.TOMWrapper.TranslationValueChangedEventArgs
+    name: TranslationValueChangedEventArgs
+    type: Class
+  - uid: TabularEditor.TOMWrapper.ValueFilterBehaviorType
+    name: ValueFilterBehaviorType
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.Variation
+    name: Variation
+    type: Class
+  - uid: TabularEditor.TOMWrapper.VariationCollection
+    name: VariationCollection
+    type: Class
+  - uid: TabularEditor.TOMWrapper.WindowsModelRoleMember
+    name: WindowsModelRoleMember
+    type: Class
+- uid: TabularEditor.TOMWrapper.Linguistics
+  name: TabularEditor.TOMWrapper.Linguistics
+  type: Namespace
+  items:
+  - uid: TabularEditor.TOMWrapper.Linguistics.State
+    name: State
+    type: Enum
+  - uid: TabularEditor.TOMWrapper.Linguistics.SynonymHelper
+    name: SynonymHelper
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Linguistics.Term
+    name: Term
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Linguistics.TermProperties
+    name: TermProperties
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Linguistics.TermPropertiesType
+    name: TermPropertiesType
+    type: Enum
+- uid: TabularEditor.TOMWrapper.PowerBI
+  name: TabularEditor.TOMWrapper.PowerBI
+  type: Namespace
+  items:
+  - uid: TabularEditor.TOMWrapper.PowerBI.PowerBIGovernanceException
+    name: PowerBIGovernanceException
+    type: Class
+- uid: TabularEditor.TOMWrapper.Serialization
+  name: TabularEditor.TOMWrapper.Serialization
+  type: Namespace
+  items:
+  - uid: TabularEditor.TOMWrapper.Serialization.OrderedStringSetJsonConverter
+    name: OrderedStringSetJsonConverter
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Serialization.SerializeOptionTags
+    name: SerializeOptionTags
+    type: Class
+- uid: TabularEditor.TOMWrapper.Utils
+  name: TabularEditor.TOMWrapper.Utils
+  type: Namespace
+  items:
+  - uid: TabularEditor.TOMWrapper.Utils.DaxDependencyHelper
+    name: DaxDependencyHelper
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Utils.DependsOnList
+    name: DependsOnList
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Utils.ObjectReference
+    name: ObjectReference
+    type: Struct
+  - uid: TabularEditor.TOMWrapper.Utils.ReferencedByList
+    name: ReferencedByList
+    type: Class
+  - uid: TabularEditor.TOMWrapper.Utils.Scripter
+    name: Scripter
+    type: Class
+memberLayout: SamePage

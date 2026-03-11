@@ -1,0 +1,1255 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  commentId: T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  id: Measure
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  children:
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.#ctor
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.#ctor(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.EqualityContract
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(System.Object)
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Expr
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.GetHashCode
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Name
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.PrintMembers(System.Text.StringBuilder)
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.ToString
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Equality(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Inequality(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  langs:
+  - csharp
+  - vb
+  name: Measure
+  nameWithType: Measure
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  type: Class
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  summary: Represents a measure definition in a Databricks Metric View
+  example: []
+  syntax:
+    content: 'public record Measure : MetricViewObjectBase, IMetricViewObject, IEquatable<MetricViewObjectBase>, IEquatable<Measure>'
+    content.vb: Public Class Measure Inherits MetricViewObjectBase Implements IMetricViewObject, IEquatable(Of MetricViewObjectBase), IEquatable(Of Measure)
+  inheritance:
+  - System.Object
+  - TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+  implements:
+  - TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  - System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase}
+  - System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure}
+  inheritedMembers:
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  extensionMethods:
+  - System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.ToString
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.ToString
+  id: ToString
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: Measure.ToString()
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.ToString()
+  type: Method
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.ToString
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.ToString*
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.PrintMembers(System.Text.StringBuilder)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.PrintMembers(System.Text.StringBuilder)
+  id: PrintMembers(System.Text.StringBuilder)
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: PrintMembers(StringBuilder)
+  nameWithType: Measure.PrintMembers(StringBuilder)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.PrintMembers(System.Text.StringBuilder)
+  type: Method
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  example: []
+  syntax:
+    content: protected override bool PrintMembers(StringBuilder builder)
+    parameters:
+    - id: builder
+      type: System.Text.StringBuilder
+    return:
+      type: System.Boolean
+    content.vb: Protected Overrides Function PrintMembers(builder As StringBuilder) As Boolean
+  overridden: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.PrintMembers(System.Text.StringBuilder)
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.PrintMembers*
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Inequality(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Inequality(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  id: op_Inequality(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: operator !=(Measure?, Measure?)
+  nameWithType: Measure.operator !=(Measure?, Measure?)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.operator !=(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure?, TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure?)
+  type: Operator
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  syntax:
+    content: public static bool operator !=(Measure? left, Measure? right)
+    parameters:
+    - id: left
+      type: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    - id: right
+      type: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <>(left As Measure, right As Measure) As Boolean
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Inequality*
+  nameWithType.vb: Measure.<>(Measure, Measure)
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.<>(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure, TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  name.vb: <>(Measure, Measure)
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Equality(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Equality(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  id: op_Equality(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure,TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: operator ==(Measure?, Measure?)
+  nameWithType: Measure.operator ==(Measure?, Measure?)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.operator ==(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure?, TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure?)
+  type: Operator
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  syntax:
+    content: public static bool operator ==(Measure? left, Measure? right)
+    parameters:
+    - id: left
+      type: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    - id: right
+      type: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator =(left As Measure, right As Measure) As Boolean
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Equality*
+  nameWithType.vb: Measure.=(Measure, Measure)
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.=(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure, TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  name.vb: =(Measure, Measure)
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.GetHashCode
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.GetHashCode
+  id: GetHashCode
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: Measure.GetHashCode()
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.GetHashCode()
+  type: Method
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.GetHashCode
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.GetHashCode*
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(System.Object)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: Measure.Equals(object?)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(object?)
+  type: Method
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+    return:
+      type: System.Boolean
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(System.Object)
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals*
+  nameWithType.vb: Measure.Equals(Object)
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(Object)
+  name.vb: Equals(Object)
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+  id: Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: Equals(MetricViewObjectBase?)
+  nameWithType: Measure.Equals(MetricViewObjectBase?)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase?)
+  type: Method
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  example: []
+  syntax:
+    content: public override sealed bool Equals(MetricViewObjectBase? other)
+    parameters:
+    - id: other
+      type: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+    return:
+      type: System.Boolean
+    content.vb: Public NotOverridable Overrides Function Equals(other As MetricViewObjectBase) As Boolean
+  overridden: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals*
+  nameWithType.vb: Measure.Equals(MetricViewObjectBase)
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+  name.vb: Equals(MetricViewObjectBase)
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  id: Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: Equals(Measure?)
+  nameWithType: Measure.Equals(Measure?)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure?)
+  type: Method
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  example: []
+  syntax:
+    content: public virtual bool Equals(Measure? other)
+    parameters:
+    - id: other
+      type: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    return:
+      type: System.Boolean
+    content.vb: Public Overridable Function Equals(other As Measure) As Boolean
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals*
+  implements:
+  - System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure}.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  nameWithType.vb: Measure.Equals(Measure)
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  name.vb: Equals(Measure)
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.#ctor(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.#ctor(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  id: '#ctor(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)'
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: Measure(Measure)
+  nameWithType: Measure.Measure(Measure)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Measure(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  type: Constructor
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  syntax:
+    content: >-
+      [SetsRequiredMembers]
+
+      protected Measure(Measure original)
+    parameters:
+    - id: original
+      type: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    content.vb: >-
+      <SetsRequiredMembers>
+
+      Protected Sub New(original As Measure)
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.#ctor*
+  attributes:
+  - type: System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute
+    ctor: System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute.#ctor
+    arguments: []
+  nameWithType.vb: Measure.New(Measure)
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.New(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  name.vb: New(Measure)
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.#ctor
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.#ctor
+  id: '#ctor'
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: Measure()
+  nameWithType: Measure.Measure()
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Measure()
+  type: Constructor
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  syntax:
+    content: public Measure()
+    content.vb: Public Sub New()
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.#ctor*
+  nameWithType.vb: Measure.New()
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.New()
+  name.vb: New()
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.EqualityContract
+  commentId: P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.EqualityContract
+  id: EqualityContract
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: EqualityContract
+  nameWithType: Measure.EqualityContract
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.EqualityContract
+  type: Property
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  example: []
+  syntax:
+    content: protected override Type EqualityContract { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: Protected Overrides ReadOnly Property EqualityContract As Type
+  overridden: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.EqualityContract
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.EqualityContract*
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Name
+  commentId: P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Name
+  id: Name
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: Measure.Name
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Name
+  type: Property
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  syntax:
+    content: public required string Name { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Name As String
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Name*
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Expr
+  commentId: P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Expr
+  id: Expr
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  langs:
+  - csharp
+  - vb
+  name: Expr
+  nameWithType: Measure.Expr
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Expr
+  type: Property
+  assemblies:
+  - SemanticBridge
+  namespace: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  summary: Aggregate SQL expression that defines the measure
+  example: []
+  syntax:
+    content: public required string Expr { get; init; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Expr As String
+  overload: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Expr*
+references:
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  commentId: N:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  nameWithType: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+    name: MetricView
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+    name: MetricView
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+  commentId: T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html
+  name: MetricViewObjectBase
+  nameWithType: MetricViewObjectBase
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  commentId: T:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject.html
+  name: IMetricViewObject
+  nameWithType: IMetricViewObject
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewObject
+- uid: System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase}
+  commentId: T:System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<MetricViewObjectBase>
+  nameWithType: IEquatable<MetricViewObjectBase>
+  fullName: System.IEquatable<TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase>
+  nameWithType.vb: IEquatable(Of MetricViewObjectBase)
+  fullName.vb: System.IEquatable(Of TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+  name.vb: IEquatable(Of MetricViewObjectBase)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+    name: MetricViewObjectBase
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+    name: MetricViewObjectBase
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html
+  - name: )
+- uid: System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure}
+  commentId: T:System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<Measure>
+  nameWithType: IEquatable<Measure>
+  fullName: System.IEquatable<TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure>
+  nameWithType.vb: IEquatable(Of Measure)
+  fullName.vb: System.IEquatable(Of TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  name.vb: IEquatable(Of Measure)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    name: Measure
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    name: Measure
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.TabularEditor.Shared.Scripting.ScriptHelper.Output
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  parent: TabularEditor.Shared.Scripting.ScriptHelper
+  definition: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  commentId: N:TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  nameWithType: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+    name: Interfaces
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge
+    name: SemanticBridge
+    isExternal: true
+    href: TabularEditor.SemanticBridge.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms
+    name: Platforms
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks
+    name: Databricks
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.html
+  - name: .
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces
+    name: Interfaces
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.html
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  commentId: M:TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  name: Output(object)
+  nameWithType: ScriptHelper.Output(object)
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper.Output(object)
+  nameWithType.vb: ScriptHelper.Output(Object)
+  fullName.vb: TabularEditor.Shared.Scripting.ScriptHelper.Output(Object)
+  name.vb: Output(Object)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.Shared.Scripting.ScriptHelper.Output(System.Object)
+    name: Output
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.ScriptHelper.html#TabularEditor_Shared_Scripting_ScriptHelper_Output_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.Shared.Scripting.ScriptHelper
+  commentId: T:TabularEditor.Shared.Scripting.ScriptHelper
+  parent: TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.Shared.Scripting.ScriptHelper.html
+  name: ScriptHelper
+  nameWithType: ScriptHelper
+  fullName: TabularEditor.Shared.Scripting.ScriptHelper
+- uid: TabularEditor.Shared.Scripting
+  commentId: N:TabularEditor.Shared.Scripting
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Scripting
+  nameWithType: TabularEditor.Shared.Scripting
+  fullName: TabularEditor.Shared.Scripting
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Scripting
+    name: Scripting
+    isExternal: true
+    href: TabularEditor.Shared.Scripting.html
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.ToString
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.ToString
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_ToString
+  name: ToString()
+  nameWithType: MetricViewObjectBase.ToString()
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.ToString()
+  spec.csharp:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.ToString
+    name: ToString
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_ToString
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.ToString
+    name: ToString
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_ToString
+  - name: (
+  - name: )
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.ToString*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.ToString
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_ToString
+  name: ToString
+  nameWithType: Measure.ToString
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.PrintMembers(System.Text.StringBuilder)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.PrintMembers(System.Text.StringBuilder)
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_PrintMembers_System_Text_StringBuilder_
+  name: PrintMembers(StringBuilder)
+  nameWithType: MetricViewObjectBase.PrintMembers(StringBuilder)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.PrintMembers(System.Text.StringBuilder)
+  spec.csharp:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.PrintMembers(System.Text.StringBuilder)
+    name: PrintMembers
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_PrintMembers_System_Text_StringBuilder_
+  - name: (
+  - uid: System.Text.StringBuilder
+    name: StringBuilder
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.stringbuilder
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.PrintMembers(System.Text.StringBuilder)
+    name: PrintMembers
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_PrintMembers_System_Text_StringBuilder_
+  - name: (
+  - uid: System.Text.StringBuilder
+    name: StringBuilder
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text.stringbuilder
+  - name: )
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.PrintMembers*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.PrintMembers
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_PrintMembers_System_Text_StringBuilder_
+  name: PrintMembers
+  nameWithType: Measure.PrintMembers
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.PrintMembers
+- uid: System.Text.StringBuilder
+  commentId: T:System.Text.StringBuilder
+  parent: System.Text
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.stringbuilder
+  name: StringBuilder
+  nameWithType: StringBuilder
+  fullName: System.Text.StringBuilder
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Text
+  commentId: N:System.Text
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Text
+  nameWithType: System.Text
+  fullName: System.Text
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Inequality*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Inequality
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_op_Inequality_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_
+  name: operator !=
+  nameWithType: Measure.operator !=
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.operator !=
+  nameWithType.vb: Measure.<>
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Inequality*
+    name: '!='
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_op_Inequality_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  commentId: T:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html
+  name: Measure
+  nameWithType: Measure
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Equality*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Equality
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_op_Equality_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_
+  name: operator ==
+  nameWithType: Measure.operator ==
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.operator ==
+  nameWithType.vb: Measure.=
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.op_Equality*
+    name: ==
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_op_Equality_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.GetHashCode
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.GetHashCode
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_GetHashCode
+  name: GetHashCode()
+  nameWithType: MetricViewObjectBase.GetHashCode()
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.GetHashCode()
+  spec.csharp:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_GetHashCode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_GetHashCode
+  - name: (
+  - name: )
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.GetHashCode*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.GetHashCode
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_GetHashCode
+  name: GetHashCode
+  nameWithType: Measure.GetHashCode
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(System.Object)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(System.Object)
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_Equals_System_Object_
+  name: Equals(object)
+  nameWithType: MetricViewObjectBase.Equals(object)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(object)
+  nameWithType.vb: MetricViewObjectBase.Equals(Object)
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_Equals_System_Object_
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_Equals_System_Object_
+  name: Equals
+  nameWithType: Measure.Equals
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Equals
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+  commentId: M:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_Equals_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_
+  name: Equals(MetricViewObjectBase)
+  nameWithType: MetricViewObjectBase.Equals(MetricViewObjectBase)
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+  spec.csharp:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+    name: Equals
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_Equals_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_
+  - name: (
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+    name: MetricViewObjectBase
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase)
+    name: Equals
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_Equals_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_
+  - name: (
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+    name: MetricViewObjectBase
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html
+  - name: )
+- uid: System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure}.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  commentId: M:System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure}.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  parent: System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(Measure)
+  nameWithType: IEquatable<Measure>.Equals(Measure)
+  fullName: System.IEquatable<TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure>.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  nameWithType.vb: IEquatable(Of Measure).Equals(Measure)
+  fullName.vb: System.IEquatable(Of TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure).Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+  spec.csharp:
+  - uid: System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure}.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    name: Measure
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure}.Equals(TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure
+    name: Measure
+    isExternal: true
+    href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.#ctor*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.#ctor
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure__ctor_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_
+  name: Measure
+  nameWithType: Measure.Measure
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Measure
+  nameWithType.vb: Measure.New
+  fullName.vb: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.New
+  name.vb: New
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.EqualityContract
+  commentId: P:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.EqualityContract
+  parent: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_MetricViewObjectBase_EqualityContract
+  name: EqualityContract
+  nameWithType: MetricViewObjectBase.EqualityContract
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase.EqualityContract
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.EqualityContract*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.EqualityContract
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_EqualityContract
+  name: EqualityContract
+  nameWithType: Measure.EqualityContract
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.EqualityContract
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Name*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Name
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_Name
+  name: Name
+  nameWithType: Measure.Name
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Name
+- uid: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Expr*
+  commentId: Overload:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Expr
+  isExternal: true
+  href: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.html#TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Measure_Expr
+  name: Expr
+  nameWithType: Measure.Expr
+  fullName: TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure.Expr

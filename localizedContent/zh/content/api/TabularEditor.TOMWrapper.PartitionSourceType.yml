@@ -1,0 +1,605 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.TOMWrapper.PartitionSourceType
+  commentId: T:TabularEditor.TOMWrapper.PartitionSourceType
+  id: PartitionSourceType
+  parent: TabularEditor.TOMWrapper
+  children:
+  - TabularEditor.TOMWrapper.PartitionSourceType.Calculated
+  - TabularEditor.TOMWrapper.PartitionSourceType.CalculationGroup
+  - TabularEditor.TOMWrapper.PartitionSourceType.Entity
+  - TabularEditor.TOMWrapper.PartitionSourceType.Inferred
+  - TabularEditor.TOMWrapper.PartitionSourceType.M
+  - TabularEditor.TOMWrapper.PartitionSourceType.None
+  - TabularEditor.TOMWrapper.PartitionSourceType.Parquet
+  - TabularEditor.TOMWrapper.PartitionSourceType.PolicyRange
+  - TabularEditor.TOMWrapper.PartitionSourceType.Query
+  langs:
+  - csharp
+  - vb
+  name: PartitionSourceType
+  nameWithType: PartitionSourceType
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType
+  type: Enum
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: An enumeration of possible values for a partition source.
+  example: []
+  syntax:
+    content: public enum PartitionSourceType
+    content.vb: Public Enum PartitionSourceType
+  extensionMethods:
+  - TabularEditor.TOMWrapper.PartitionSourceType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType)
+  - TabularEditor.TOMWrapper.PartitionSourceType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType)
+  - TabularEditor.TOMWrapper.PartitionSourceType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.PartitionSourceType)
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.Query
+  commentId: F:TabularEditor.TOMWrapper.PartitionSourceType.Query
+  id: Query
+  parent: TabularEditor.TOMWrapper.PartitionSourceType
+  langs:
+  - csharp
+  - vb
+  name: Query
+  nameWithType: PartitionSourceType.Query
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType.Query
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The data in this partition is retrieved by executing a query against a DataSource.
+  example: []
+  syntax:
+    content: Query = 1
+    return:
+      type: TabularEditor.TOMWrapper.PartitionSourceType
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.Calculated
+  commentId: F:TabularEditor.TOMWrapper.PartitionSourceType.Calculated
+  id: Calculated
+  parent: TabularEditor.TOMWrapper.PartitionSourceType
+  langs:
+  - csharp
+  - vb
+  name: Calculated
+  nameWithType: PartitionSourceType.Calculated
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType.Calculated
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The data in this partition is populated by executing a calculated expression.
+  example: []
+  syntax:
+    content: Calculated = 2
+    return:
+      type: TabularEditor.TOMWrapper.PartitionSourceType
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.None
+  commentId: F:TabularEditor.TOMWrapper.PartitionSourceType.None
+  id: None
+  parent: TabularEditor.TOMWrapper.PartitionSourceType
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: PartitionSourceType.None
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType.None
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The source is undefined. Data can come from pushed data or from out of line bindings that pull in data from an explicitly specified data source.
+  example: []
+  syntax:
+    content: None = 3
+    return:
+      type: TabularEditor.TOMWrapper.PartitionSourceType
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.M
+  commentId: F:TabularEditor.TOMWrapper.PartitionSourceType.M
+  id: M
+  parent: TabularEditor.TOMWrapper.PartitionSourceType
+  langs:
+  - csharp
+  - vb
+  name: M
+  nameWithType: PartitionSourceType.M
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType.M
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The partition uses an M expression to retrieve the data.
+  remarks: This value is only supported when the compatibility level of the database is at 1400 or above.
+  example: []
+  syntax:
+    content: M = 4
+    return:
+      type: TabularEditor.TOMWrapper.PartitionSourceType
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.Entity
+  commentId: F:TabularEditor.TOMWrapper.PartitionSourceType.Entity
+  id: Entity
+  parent: TabularEditor.TOMWrapper.PartitionSourceType
+  langs:
+  - csharp
+  - vb
+  name: Entity
+  nameWithType: PartitionSourceType.Entity
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType.Entity
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The data in this partition is obtained by querying the named entity from the underlying DataSource/Provider.
+  remarks: This value is only supported when the compatibility level of the database is at 1400 or above.
+  example: []
+  syntax:
+    content: Entity = 5
+    return:
+      type: TabularEditor.TOMWrapper.PartitionSourceType
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.PolicyRange
+  commentId: F:TabularEditor.TOMWrapper.PartitionSourceType.PolicyRange
+  id: PolicyRange
+  parent: TabularEditor.TOMWrapper.PartitionSourceType
+  langs:
+  - csharp
+  - vb
+  name: PolicyRange
+  nameWithType: PartitionSourceType.PolicyRange
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType.PolicyRange
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The partition uses an M expression to retrieve the data. The partition ranges are auto created based on RefreshPolicy.
+  remarks: This value is only supported when the compatibility level of the database is at 1450 or above.
+  example: []
+  syntax:
+    content: PolicyRange = 6
+    return:
+      type: TabularEditor.TOMWrapper.PartitionSourceType
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.CalculationGroup
+  commentId: F:TabularEditor.TOMWrapper.PartitionSourceType.CalculationGroup
+  id: CalculationGroup
+  parent: TabularEditor.TOMWrapper.PartitionSourceType
+  langs:
+  - csharp
+  - vb
+  name: CalculationGroup
+  nameWithType: PartitionSourceType.CalculationGroup
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType.CalculationGroup
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The partition uses CalculationGroup as a source.
+  remarks: This value is only supported when the compatibility level of the database is at 1470 or above.
+  example: []
+  syntax:
+    content: CalculationGroup = 7
+    return:
+      type: TabularEditor.TOMWrapper.PartitionSourceType
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.Inferred
+  commentId: F:TabularEditor.TOMWrapper.PartitionSourceType.Inferred
+  id: Inferred
+  parent: TabularEditor.TOMWrapper.PartitionSourceType
+  langs:
+  - csharp
+  - vb
+  name: Inferred
+  nameWithType: PartitionSourceType.Inferred
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType.Inferred
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The data in this partition is populated by executing a query generated by the system.
+  remarks: This value is only supported when the compatibility level of the database is at 1563 or above.
+  example: []
+  syntax:
+    content: Inferred = 8
+    return:
+      type: TabularEditor.TOMWrapper.PartitionSourceType
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.Parquet
+  commentId: F:TabularEditor.TOMWrapper.PartitionSourceType.Parquet
+  id: Parquet
+  parent: TabularEditor.TOMWrapper.PartitionSourceType
+  langs:
+  - csharp
+  - vb
+  name: Parquet
+  nameWithType: PartitionSourceType.Parquet
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType.Parquet
+  type: Field
+  assemblies:
+  - TOMWrapper
+  namespace: TabularEditor.TOMWrapper
+  summary: The data in this partition is populated from parquet file.
+  remarks: This value is only supported when the compatibility level of the database is at Internal or above.
+  example: []
+  syntax:
+    content: Parquet = 9
+    return:
+      type: TabularEditor.TOMWrapper.PartitionSourceType
+references:
+- uid: TabularEditor.TOMWrapper
+  commentId: N:TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.TOMWrapper
+  nameWithType: TabularEditor.TOMWrapper
+  fullName: TabularEditor.TOMWrapper
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.TOMWrapper
+    name: TOMWrapper
+    isExternal: true
+    href: TabularEditor.TOMWrapper.html
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<PartitionSourceType>(PartitionSourceType, PartitionSourceType, PartitionSourceType)
+  nameWithType: EnumExtensions.AllFlagsChanged<PartitionSourceType>(PartitionSourceType, PartitionSourceType, PartitionSourceType)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<TabularEditor.TOMWrapper.PartitionSourceType>(TabularEditor.TOMWrapper.PartitionSourceType, TabularEditor.TOMWrapper.PartitionSourceType, TabularEditor.TOMWrapper.PartitionSourceType)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of PartitionSourceType)(PartitionSourceType, PartitionSourceType, PartitionSourceType)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of TabularEditor.TOMWrapper.PartitionSourceType)(TabularEditor.TOMWrapper.PartitionSourceType, TabularEditor.TOMWrapper.PartitionSourceType, TabularEditor.TOMWrapper.PartitionSourceType)
+  name.vb: AllFlagsChanged(Of PartitionSourceType)(PartitionSourceType, PartitionSourceType, PartitionSourceType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<PartitionSourceType>(PartitionSourceType, PartitionSourceType, PartitionSourceType)
+  nameWithType: EnumExtensions.AnyFlagsChanged<PartitionSourceType>(PartitionSourceType, PartitionSourceType, PartitionSourceType)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<TabularEditor.TOMWrapper.PartitionSourceType>(TabularEditor.TOMWrapper.PartitionSourceType, TabularEditor.TOMWrapper.PartitionSourceType, TabularEditor.TOMWrapper.PartitionSourceType)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of PartitionSourceType)(PartitionSourceType, PartitionSourceType, PartitionSourceType)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of TabularEditor.TOMWrapper.PartitionSourceType)(TabularEditor.TOMWrapper.PartitionSourceType, TabularEditor.TOMWrapper.PartitionSourceType, TabularEditor.TOMWrapper.PartitionSourceType)
+  name.vb: AnyFlagsChanged(Of PartitionSourceType)(PartitionSourceType, PartitionSourceType, PartitionSourceType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: )
+- uid: TabularEditor.TOMWrapper.PartitionSourceType.TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.PartitionSourceType)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  parent: TabularEditor.EnumExtensions
+  definition: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<PartitionSourceType>(PartitionSourceType, PartitionSourceType)
+  nameWithType: EnumExtensions.HasAnyFlags<PartitionSourceType>(PartitionSourceType, PartitionSourceType)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<TabularEditor.TOMWrapper.PartitionSourceType>(TabularEditor.TOMWrapper.PartitionSourceType, TabularEditor.TOMWrapper.PartitionSourceType)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of PartitionSourceType)(PartitionSourceType, PartitionSourceType)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of TabularEditor.TOMWrapper.PartitionSourceType)(TabularEditor.TOMWrapper.PartitionSourceType, TabularEditor.TOMWrapper.PartitionSourceType)
+  name.vb: HasAnyFlags(Of PartitionSourceType)(PartitionSourceType, PartitionSourceType)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: '>'
+  - name: (
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(TabularEditor.TOMWrapper.PartitionSourceType,TabularEditor.TOMWrapper.PartitionSourceType)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: )
+  - name: (
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: ','
+  - name: " "
+  - uid: TabularEditor.TOMWrapper.PartitionSourceType
+    name: PartitionSourceType
+    isExternal: true
+    href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  - name: )
+- uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  name: AllFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AllFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AllFlagsChanged(Of T)(T, T, T)
+  name.vb: AllFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AllFlagsChanged``1(``0,``0,``0)
+    name: AllFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AllFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions
+  commentId: T:TabularEditor.EnumExtensions
+  parent: TabularEditor
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html
+  name: EnumExtensions
+  nameWithType: EnumExtensions
+  fullName: TabularEditor.EnumExtensions
+- uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  name: AnyFlagsChanged<T>(T, T, T)
+  nameWithType: EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  fullName: TabularEditor.EnumExtensions.AnyFlagsChanged<T>(T, T, T)
+  nameWithType.vb: EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  fullName.vb: TabularEditor.EnumExtensions.AnyFlagsChanged(Of T)(T, T, T)
+  name.vb: AnyFlagsChanged(Of T)(T, T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.AnyFlagsChanged``1(``0,``0,``0)
+    name: AnyFlagsChanged
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_AnyFlagsChanged__1___0___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  commentId: M:TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+  isExternal: true
+  href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  name: HasAnyFlags<T>(T, T)
+  nameWithType: EnumExtensions.HasAnyFlags<T>(T, T)
+  fullName: TabularEditor.EnumExtensions.HasAnyFlags<T>(T, T)
+  nameWithType.vb: EnumExtensions.HasAnyFlags(Of T)(T, T)
+  fullName.vb: TabularEditor.EnumExtensions.HasAnyFlags(Of T)(T, T)
+  name.vb: HasAnyFlags(Of T)(T, T)
+  spec.csharp:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: <
+  - name: T
+  - name: '>'
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: TabularEditor.EnumExtensions.HasAnyFlags``1(``0,``0)
+    name: HasAnyFlags
+    isExternal: true
+    href: TabularEditor.EnumExtensions.html#TabularEditor_EnumExtensions_HasAnyFlags__1___0___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+  - name: (
+  - name: T
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor
+  commentId: N:TabularEditor
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor
+  nameWithType: TabularEditor
+  fullName: TabularEditor
+- uid: TabularEditor.TOMWrapper.PartitionSourceType
+  commentId: T:TabularEditor.TOMWrapper.PartitionSourceType
+  parent: TabularEditor.TOMWrapper
+  isExternal: true
+  href: TabularEditor.TOMWrapper.PartitionSourceType.html
+  name: PartitionSourceType
+  nameWithType: PartitionSourceType
+  fullName: TabularEditor.TOMWrapper.PartitionSourceType

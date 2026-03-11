@@ -1,0 +1,127 @@
+### YamlMime:ManagedReference
+items:
+- uid: TabularEditor.Shared.Interaction
+  commentId: N:TabularEditor.Shared.Interaction
+  id: TabularEditor.Shared.Interaction
+  children:
+  - TabularEditor.Shared.Interaction.Context
+  - TabularEditor.Shared.Interaction.ContextExtensions
+  - TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1
+  - TabularEditor.Shared.Interaction.Selection
+  - TabularEditor.Shared.Interaction.SelectionException
+  - TabularEditor.Shared.Interaction.SelectionHelper
+  langs:
+  - csharp
+  - vb
+  name: TabularEditor.Shared.Interaction
+  nameWithType: TabularEditor.Shared.Interaction
+  fullName: TabularEditor.Shared.Interaction
+  type: Namespace
+  assemblies:
+  - TabularEditor3.Shared
+references:
+- uid: TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1
+  commentId: T:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1
+  parent: TabularEditor.Shared.Interaction
+  isExternal: true
+  href: TabularEditor.Shared.Interaction.NamedObjectEditableCollection-1.html
+  name: NamedObjectEditableCollection<T>
+  nameWithType: NamedObjectEditableCollection<T>
+  fullName: TabularEditor.Shared.Interaction.NamedObjectEditableCollection<T>
+  nameWithType.vb: NamedObjectEditableCollection(Of T)
+  fullName.vb: TabularEditor.Shared.Interaction.NamedObjectEditableCollection(Of T)
+  name.vb: NamedObjectEditableCollection(Of T)
+  spec.csharp:
+  - uid: TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1
+    name: NamedObjectEditableCollection
+    isExternal: true
+    href: TabularEditor.Shared.Interaction.NamedObjectEditableCollection-1.html
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1
+    name: NamedObjectEditableCollection
+    isExternal: true
+    href: TabularEditor.Shared.Interaction.NamedObjectEditableCollection-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: TabularEditor.Shared.Interaction.SelectionHelper
+  commentId: T:TabularEditor.Shared.Interaction.SelectionHelper
+  parent: TabularEditor.Shared.Interaction
+  isExternal: true
+  href: TabularEditor.Shared.Interaction.SelectionHelper.html
+  name: SelectionHelper
+  nameWithType: SelectionHelper
+  fullName: TabularEditor.Shared.Interaction.SelectionHelper
+- uid: TabularEditor.Shared.Interaction.Context
+  commentId: T:TabularEditor.Shared.Interaction.Context
+  parent: TabularEditor.Shared.Interaction
+  isExternal: true
+  href: TabularEditor.Shared.Interaction.Context.html
+  name: Context
+  nameWithType: Context
+  fullName: TabularEditor.Shared.Interaction.Context
+- uid: TabularEditor.Shared.Interaction.Selection
+  commentId: T:TabularEditor.Shared.Interaction.Selection
+  parent: TabularEditor.Shared.Interaction
+  isExternal: true
+  href: TabularEditor.Shared.Interaction.Selection.html
+  name: Selection
+  nameWithType: Selection
+  fullName: TabularEditor.Shared.Interaction.Selection
+- uid: TabularEditor.Shared.Interaction.SelectionException
+  commentId: T:TabularEditor.Shared.Interaction.SelectionException
+  isExternal: true
+  href: TabularEditor.Shared.Interaction.SelectionException.html
+  name: SelectionException
+  nameWithType: SelectionException
+  fullName: TabularEditor.Shared.Interaction.SelectionException
+- uid: TabularEditor.Shared.Interaction.ContextExtensions
+  commentId: T:TabularEditor.Shared.Interaction.ContextExtensions
+  parent: TabularEditor.Shared.Interaction
+  isExternal: true
+  href: TabularEditor.Shared.Interaction.ContextExtensions.html
+  name: ContextExtensions
+  nameWithType: ContextExtensions
+  fullName: TabularEditor.Shared.Interaction.ContextExtensions
+- uid: TabularEditor.Shared.Interaction
+  commentId: N:TabularEditor.Shared.Interaction
+  isExternal: true
+  href: TabularEditor.html
+  name: TabularEditor.Shared.Interaction
+  nameWithType: TabularEditor.Shared.Interaction
+  fullName: TabularEditor.Shared.Interaction
+  spec.csharp:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Interaction
+    name: Interaction
+    isExternal: true
+    href: TabularEditor.Shared.Interaction.html
+  spec.vb:
+  - uid: TabularEditor
+    name: TabularEditor
+    isExternal: true
+    href: TabularEditor.html
+  - name: .
+  - uid: TabularEditor.Shared
+    name: Shared
+    isExternal: true
+    href: TabularEditor.Shared.html
+  - name: .
+  - uid: TabularEditor.Shared.Interaction
+    name: Interaction
+    isExternal: true
+    href: TabularEditor.Shared.Interaction.html
