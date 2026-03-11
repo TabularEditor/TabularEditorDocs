@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Rename objects in a Metric View
 
 This how-to demonstrates how to rename Metric View dimensions using a copy-modify pattern for bulk transformations.
