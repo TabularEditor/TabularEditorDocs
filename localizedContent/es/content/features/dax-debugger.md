@@ -1,4 +1,4 @@
-﻿---
+---
 uid: dax-debugger
 title: DAX debugger
 author: Daniel Otykier
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # DAX debugger
 
 > [!NOTE]
@@ -30,6 +31,7 @@ Until now, this "breakdown" of the code was a tedious and time consuming task, w
 Tabular Editor 3 introduces the concept of the **DAX debugger**, which is a tool that makes the process of stepping into the DAX code of your model, much, much easier. At a conceptual level, the debugger is similar to traditional IDE debuggers, such as the one found in Visual Studio when developing C# applications.
 
 ## Prerequisites
+
 The DAX debugger analyses the DAX code in your model and generates suitable DAX queries for evaluating sub expressions, row contexts, etc., allowing you to step through the code in an interactive fashion.
 
 In order for this to work, Tabular Editor 3 must operate in **connected** or **workspace mode**, such as when loading model metadata directly from Power BI Desktop or any other instance of Analysis Services.
@@ -50,9 +52,11 @@ Once the debugger is started, you are presented with a number of new views that 
 
 1. Create a new Pivot Grid (**File > New > Pivot Grid**)
 2. Add the measure you wish to debug to the Pivot Grid. You can either:
-  - Drag a measure from the TOM Explorer, or
-  - Right-click on a measure in the TOM Explorer and choose **Add to pivot grid**, or
-  - Select the measure from the Pivot Grid field list (**Pivot Grid > Show fields**)
+
+- Drag a measure from the TOM Explorer, or
+- Right-click on a measure in the TOM Explorer and choose **Add to pivot grid**, or
+- Select the measure from the Pivot Grid field list (**Pivot Grid > Show fields**)
+
 3. (Optional) Add one or more columns to the Pivot Grid in the Filter area, Columns area or Row area.
 4. Right-click on the value cell within the Pivot Grid and choose **Debug this value**.
 
@@ -80,6 +84,7 @@ The debugger provides the following views (if they are hidden, they can be acces
 - Call Tree
 
 ## Locals
+
 This view lists the columns, measures and variables within the current scope of execution and displays their values. It also displays the value of the current subexpression being debugged. Values in this list are updated automatically when stepping to a different subexpression, or when the evaluation context is changed. **Local values are always evaluated at the currently selected item of the call tree**.
 
 ![Locals](~/content/assets/images/locals.png)
@@ -93,6 +98,7 @@ If you prefer to inspect the locals value in a separate DAX query window, you ca
 ![Dax Debugger Settings](~/content/assets/images/features/dax-debugger-settings.png)
 
 ## Watch
+
 This view allows you to enter any DAX expression, which will be calculated within the current evaluation context. You can enter scalar as well as table expressions and you can use all DAX functions available and refer to variables within the current evaluation scope. Watch values are automatically updated when stepping to a different subexpression, or when the evaluation context is changed. **Watch values are always evaluated at the scope of the currently selected item in the evaluation context stack**.
 
 ![Watch](~/content/assets/images/watch.png)
@@ -111,10 +117,12 @@ The **Generate query** option is identical to the magnifying glass button within
 
 > [!TIP]
 > What's the difference between the **Locals** view and the **Watch** view?
+>
 > - **Locals** shows the values of columns, measures, variables and other relevant sub-expressions, within the current scope of execution, including the value of the currently selected subexpression in the call tree.
 > - **Watch** allows you to enter any DAX expression, which will be calculated within the current evaluation context.
 
 ## Evaluation Context
+
 This view provides information about the DAX evaluation context of the current subexpression. For example, a `CALCULATE` expression might perform a context transition or add a filter to the evaluation context, or a `SUMX` iterator might add a row context.
 
 ![Evaluation Context](~/content/assets/images/evaluation-context.png)
@@ -132,6 +140,7 @@ Lastly, you can browse the first 1000 rows of any iterator, setting the current 
 ![Browse Row Contexts](~/content/assets/images/browse-row-contexts.png)
 
 ## Call Tree
+
 This view provides an outline of the entire calculation and lets you easily navigate between subexpressions by double-clicking (you can also use shortcut keys for navigation). The tree also provides information about context transitions, iterations and row contexts. Branches of code that will not be executed (for example in an `IF` or `SWITCH` call, or when an iterator is empty) are striked out.
 
 ![Call Tree](~/content/assets/images/call-tree.png)
@@ -178,8 +187,8 @@ When debugging a scalar predicate, the **Locals** view will show two special ite
 In the above screenshot:
 
 1. This is the scalar predicate currently being debugged. Even though this sub-expression looks like one that should return a scalar value (true/false), in reality, it returns a table.
-2. **(Current expression)**: This is the *scalar* value of the predicate, when evaluated within the current *row context* generated by the `FILTER` function as described above. In the screenshot, the scalar value evaluates to `False`, because the value of [Country Region Code] in the current row context is "AU", as can be seen in the **Watch** view, (4). We can use the **Evaluation Context** view (5), to scroll through the rows of the iteration one by one.
-3. **(Filter expression)**: This is the *table* expression generated by the `FILTER` function, as described above. In the screenshot, this is a 1x2 table containing the values "US" and "CA". Clicking the magnifying glass button will open a popup that displays the table values in a grid.
+2. **(Current expression)**: This is the _scalar_ value of the predicate, when evaluated within the current _row context_ generated by the `FILTER` function as described above. In the screenshot, the scalar value evaluates to `False`, because the value of [Country Region Code] in the current row context is "AU", as can be seen in the **Watch** view, (4). We can use the **Evaluation Context** view (5), to scroll through the rows of the iteration one by one.
+3. **(Filter expression)**: This is the _table_ expression generated by the `FILTER` function, as described above. In the screenshot, this is a 1x2 table containing the values "US" and "CA". Clicking the magnifying glass button will open a popup that displays the table values in a grid.
 4. We can use the **Watch** window to evaluate any DAX expression within the current evaluation context. In this case, since we have an active row context, we can directly refer to columns in the row context, such as `Geography[Country Region Code]`. We can see that the current value of this column is "AU", which is why the scalar predicate (2) evaluates to `False`.
 5. We can use the **Evaluation Context** view to scroll through the rows of the iteration, one by one. This will update the values in the **Locals** view, as well as the **Watch** view, to reflect the values in the current row context.
 
