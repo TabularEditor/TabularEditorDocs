@@ -10,19 +10,21 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Create New M Parameter and Add it to Existing M Partitions
 
 ## Script Purpose
-If you want to replace a string in model M Partitions (i.e. connection string, filter condition, column name, etc.) with a parameter value.
-<br></br>
-> [!NOTE] 
-> This script only works with parameters of `string` data type. 
-> For other data types, please modify the variable types & parameter value appropriately.
-<br></br>
+
+If you want to replace a string in model M Partitions (i.e. connection string, filter condition, column name, etc.) with a parameter value. <br></br>
+
+> [!NOTE]
+> This script only works with parameters of `string` data type.
+> For other data types, please modify the variable types & parameter value appropriately. <br></br>
 
 ## Script
 
 ### Create New M Parameter and Add it to Existing M Partitions
+
 ```csharp
 // This script creates a new M Parameter as a 'Shared Expression'.
 // It will also find the default value in all M partitions and replace them with the parameter object name.
@@ -184,18 +186,18 @@ using (Form prompt = new Form())
     }
 }
 ```
+
 ### Explanation
+
 This snippet opens a dialogue box for the user to enter the parameter name and value, then creates the parameter as a 'Shared Expression' in the model.
-It will then search all M partitions for the default value, replacing them with the `#"ParameterName"`. 
+It will then search all M partitions for the default value, replacing them with the `#"ParameterName"`.
 
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-m-parameter.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> The pop-up dialog that appears when running the script, prompting for the parameter name and value.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-m-parameter.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> The pop-up dialog that appears when running the script, prompting for the parameter name and value.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Confirmation dialog illustrating that the parameter has been created, and the corresponding value substring has been replaced in all M Partition expressions. For parameters of other types, adjust the C# code, appropriately.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Confirmation dialog illustrating that the parameter has been created, and the corresponding value substring has been replaced in all M Partition expressions. For parameters of other types, adjust the C# code, appropriately.</figcaption>
 </figure>
