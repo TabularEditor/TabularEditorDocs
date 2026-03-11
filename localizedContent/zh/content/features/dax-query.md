@@ -1,4 +1,4 @@
-﻿---
+---
 uid: dax-query
 title: DAX Queries
 author: Morten Lønskov
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # DAX Queries
 
 Tabular Editor has a built-in DAX query window to write and execute DAX queries against the semantic model.
@@ -34,7 +35,6 @@ The DAX query window has five different query options.
 
 ![Dax Query Toolbar](~/content/assets/images/features/dax_query_window/dax_query_toolbar.png)
 
-
 1. **Execute (F5)**: If there is a selection, it executes the selected DAX; otherwise, it executes the full query in the DAX Query editor.
 2. **Execute full query**: It executes the full query in the DAX Query editor
 3. **Execute Selection (Shift+F5)**: If there is a selection, it executes it. Otherwise, it executes the EVALUATE statement where the cursor is currently located.
@@ -45,7 +45,7 @@ The DAX query window has five different query options.
    - **When query is modified**: Sorting and filtering reset only when the query structure changes.
    - **Always**: Sorting and filtering persist as long as columns remain in the new query.
 
-The default values of "Auto Execute Query" and "Keep Sorting and Filtering" preferences can be set up in the Preferences dialog: **Tools > Preferences... > Data browsing > DAX Query** > Basic. 
+The default values of "Auto Execute Query" and "Keep Sorting and Filtering" preferences can be set up in the Preferences dialog: **Tools > Preferences... > Data browsing > DAX Query** > Basic.
 
 ### Adding or Updating Measures, Columns and Tables with DAX Queries
 
@@ -53,7 +53,7 @@ Tabular Editor (3.12.0 and higher) has the ability to add or change measures dir
 
 From Tabular Editor 3.23.0, Apply and Apply selection also process DEFINE COLUMN and DEFINE TABLE statements. Tabular Editor will create the corresponding calculated columns/tables in your model, or update their expressions if they already exist.
 
-There are four options for applying DAX Query defined measures, columns and tables to the model: 
+There are four options for applying DAX Query defined measures, columns and tables to the model:
 
 ![Dax Query Apply Measure](~/content/assets/images/features/dax_query_window/dax_query_apply_measure.png)
 
