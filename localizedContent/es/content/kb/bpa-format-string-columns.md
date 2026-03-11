@@ -53,7 +53,7 @@ and (DataType = "Int64" or DataType = "DateTime" or DataType = "Double" or DataT
 
 ### Cause 1: Missing Format Definition
 
-Columns do not have a format string when imported. 
+Columns do not have a format string when imported.
 
 ## Example
 
