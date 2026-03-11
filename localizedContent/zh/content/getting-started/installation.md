@@ -41,19 +41,20 @@ Once you purchase a license for Tabular Editor 3, you should receive an e-mail w
 > For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
 
 #### Manual Activation (No Internet)
-If you do not have access to the internet e.g., due to a proxy Tabular Editor will prompt you to do a manual activation. 
+
+If you do not have access to the internet e.g., due to a proxy Tabular Editor will prompt you to do a manual activation.
 
 ![Manual Activation Prompt](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
 
 After entering your email, a dialog box appears with a link to an activation key.
-Copy the URL and open it in a web-browser that is connected to the internet. 
+Copy the URL and open it in a web-browser that is connected to the internet.
 
 The URL returns a JSON object:
 
 ![Manual Activation JSON Object](~/content/assets/images/getting-started/activation_manual_jsonobject.png)
 
 Copy the full JSON object and paste the full JSON object given into the dialog box.
-Your manual activation dialog should end up looking like below. 
+Your manual activation dialog should end up looking like below.
 
 ![Manual Activation Filled In](~/content/assets/images/getting-started/activation_manual_dialogbox_filled.png)
 
