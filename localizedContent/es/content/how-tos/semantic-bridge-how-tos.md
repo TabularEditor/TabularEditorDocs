@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Semantic Bridge How-Tos
 
 These how-tos are focused on interacting with the [Databricks Metric View object model](xref:semantic-bridge-metric-view-object-model) and supporting import workflows to bring these Metric Views into a Tabular semantic model.
