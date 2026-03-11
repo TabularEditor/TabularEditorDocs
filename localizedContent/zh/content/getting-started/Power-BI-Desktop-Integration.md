@@ -1,4 +1,4 @@
-﻿---
+---
 uid: desktop-integration
 title: Power BI Desktop Integration
 applies_to:
@@ -14,6 +14,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Power BI Desktop Integration
 
 [Power BI Desktop supports External Tools](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-external-tools) which allows Tabular Editor to perform  modeling operations when working with Imported or DirectQuery data in Desktop.
