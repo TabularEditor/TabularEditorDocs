@@ -69,8 +69,9 @@ Description = string.Concat(
 ```
 
 To apply:
+
 1. In the **Best Practice Analyzer** select flagged objects
-3. Click **Apply Fix**
+2. Click **Apply Fix**
 
 ### Manual Fix
 
