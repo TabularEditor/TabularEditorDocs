@@ -1,4 +1,4 @@
-﻿---
+---
 uid: importing-tables
 title: Importing Tables
 author: Daniel Otykier
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # (Tutorial) Importing Tables
 
 [!include[importing-tables](~/content/features/import-tables.partial.md)]
