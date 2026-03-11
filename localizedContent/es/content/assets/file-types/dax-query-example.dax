@@ -1,6 +1,0 @@
-EVALUATE
-SUMMARIZECOLUMNS (
-    Customers[Account Name],
-    Customers[Account Type],
-    "Number Customers", [# Customers]
-)
