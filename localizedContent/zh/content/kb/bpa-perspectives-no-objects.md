@@ -42,6 +42,7 @@ Delete()
 ```
 
 To apply:
+
 1. Run the **Best Practice Analyzer**
 2. Select the empty perspectives
 3. Click **Apply Fix**
