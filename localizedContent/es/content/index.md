@@ -1,9 +1,10 @@
-﻿---
+---
 uid: index
 title: Tabular Editor
 author: Daniel Otykier
 updated: 2021-09-09
 ---
+
 # Tabular Editor
 
 Tabular Editor is a tool that lets you easily manipulate and manage measures, calculated columns, display folders, perspectives and translations in Analysis Services Tabular and Power BI Semantic Models.
@@ -14,13 +15,15 @@ The tool is available in two different versions:
 - Tabular Editor 3.x (commercial) - [Home page](https://tabulareditor.com)
 
 ## Documentation
+
 This site contains the documentation for both versions. Select your version in the navigation bar at the top of the screen for product specific documentation.
 
 ## Choosing between TE3 and TE2
 
 Tabular Editor 3 is the evolution of Tabular Editor 2. It has been designed for those who seek a "one-tool-to-rule-them-all" solution for Tabular data modeling and development.
 
-### [Tabular Editor 3](#tab/TE3) 
+### [Tabular Editor 3](#tab/TE3)
+
 Tabular Editor 3 is a more advanced application which offers a premium experience with many convenient features to combine all your data modeling and development needs in one single tool.
 
 ![Tabular Editor 3](assets/images/te3.png)
@@ -46,7 +49,7 @@ Tabular Editor 3 is a more advanced application which offers a premium experienc
 - [Save with supporting files](xref:save-with-supporting-files) for Fabric Git integration
 - [Localization support](xref:references-application-language) (Chinese, Spanish, Japanese, German, French)
 
-### [Tabular Editor 2.x](#tab/TE2) 
+### [Tabular Editor 2.x](#tab/TE2)
 
 Tabular Editor 2.x is a lightweight application for quickly modifying the TOM (Tabular Object Model) of an Analysis Services or Power BI data model. The tool was originally released in 2016 and receives regular updates and bugfixes.
 
@@ -63,56 +66,56 @@ Tabular Editor 2.x is a lightweight application for quickly modifying the TOM (T
 - Best Practice Analyzer
 - Advanced Scripting using C#-style scripts for automating repeated tasks
 - Command line interface (can be used to integrate Tabular Editor and DevOps pipelines)
-***
 
+***
 
 ### Feature overview
 
 The table below lists all the main features of both tools.
 
-||TE2 (Free)|TE3 (Commercial)|
-|---|---|---|
-|Edit all TOM objects and properties|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Batch editing and renaming|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Copy/paste and drag/drop support|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Undo/redo data modeling operations|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Load/save model metadata to disk|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|Save-to-folder|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|[daxformatter.com](https://daxformatter.com) integration|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Advanced data modeling (OLS, Perspectives, Calculation Groups, Metadata Translations, etc.)|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|Syntax highlighting and automatic formula fixup|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|View DAX dependencies between objects|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Import Table Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Deployment Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|Best Practice Analyzer|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|C# scripting and automation|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Use as External Tool for Power BI Desktop|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Connect to SSAS/Azure AS/Power BI Premium|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|Command-line interface|<span class="emoji">&#10004;</span>||
-|Premium, customizable user-interface with high-DPI, multi-monitor and theming support||<span class="emoji">&#10004;</span>|
-|World-class DAX editor with IntelliSense<sup>TM</sup>-like features, offline formatting, and more||<span class="emoji">&#10004;</span>|
-|Offline DAX syntax checking and column/data type inference||<span class="emoji">&#10004;</span>|
-|Improved Table Import Wizard and Table Schema Update check with Power Query support||<span class="emoji">&#10004;</span>|
-|DAX querying, table preview and Pivot Grids||<span class="emoji">&#10004;</span>|
-|Create diagrams for visualizing and editing table relationships||<span class="emoji">&#10004;</span>|
-|Execute data refresh operations in the background||<span class="emoji">&#10004;</span>*|
-|C# macro recorder||<span class="emoji">&#10004;</span>|
-|Edit multiple DAX expressions in a single document using [DAX scripting](xref:dax-scripts)||<span class="emoji">&#10004;</span>|
-|[VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) integration||<span class="emoji">&#10004;</span>|
-|[DAX debugger](xref:dax-debugger)||<span class="emoji">&#10004;</span>|
-|[Metadata Translation Editor](xref:metadata-translation-editor)||<span class="emoji">&#10004;</span>|
-|[Perspective Editor](xref:perspective-editor)||<span class="emoji">&#10004;</span>|
-|[Table Groups](xref:table-groups)||<span class="emoji">&#10004;</span>|
-|[DAX Optimizer Integration](xref:dax-optimizer-integration)||<span class="emoji">&#10004;</span>|
-|[Code Actions](xref:code-actions)||<span class="emoji">&#10004;</span>|
-|[DAX User-Defined Functions (UDFs)](xref:udfs) Assistance, Code Action and Namespaces||<span class="emoji">&#10004;</span>|
-|[Calendar Editor](xref:calendars) for enhanced time intelligence||<span class="emoji">&#10004;</span>|
-|[DAX Package Manager](xref:dax-package-manager)||<span class="emoji">&#10004;</span>|
-|[Built-in Best Practice Analyzer rules](xref:built-in-bpa-rules) ||<span class="emoji">&#10004;</span>|
-|[Advanced Refresh dialog](xref:advanced-refresh) with [refresh override profiles](xref:refresh-overrides) (Business/Enterprise Edition)||<span class="emoji">&#10004;</span>*|
-|[Save with supporting files for Fabric](xref:save-with-supporting-files)||<span class="emoji">&#10004;</span>|
-|Semantic Bridge for Databricks Metric Views (Enterprise Edition)||<span class="emoji">&#10004;</span>*|
-|[Localization support](xref:references-application-language) (Chinese, Spanish, Japanese, German, French)||<span class="emoji">&#10004;</span>|
+|                                                                                                                                                            | TE2 (Free)                           | TE3 (Commercial)                       |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- |
+| Edit all TOM objects and properties                                                                                                                        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Batch editing and renaming                                                                                                                                 | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Copy/paste and drag/drop support                                                                                                                           | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Undo/redo data modeling operations                                                                                                                         | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Load/save model metadata to disk                                                                                                                           | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
+| Save-to-folder                                                                                                                                             | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
+| [daxformatter.com](https://daxformatter.com) integration                                                                                   | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Advanced data modeling (OLS, Perspectives, Calculation Groups, Metadata Translations, etc.)                             | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
+| Syntax highlighting and automatic formula fixup                                                                                                            | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| View DAX dependencies between objects                                                                                                                      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Import Table Wizard                                                                                                                                        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Deployment Wizard                                                                                                                                          | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
+| Best Practice Analyzer                                                                                                                                     | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| C# scripting and automation                                                                                                                                | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Use as External Tool for Power BI Desktop                                                                                                                  | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Connect to SSAS/Azure AS/Power BI Premium                                                                                                                  | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
+| Command-line interface                                                                                                                                     | <span class="emoji">&#10004;</span> |                                                           |
+| Premium, customizable user-interface with high-DPI, multi-monitor and theming support                                                                      |                                                         | <span class="emoji">&#10004;</span>   |
+| World-class DAX editor with IntelliSense<sup>TM</sup>-like features, offline formatting, and more                                                          |                                                         | <span class="emoji">&#10004;</span>   |
+| Offline DAX syntax checking and column/data type inference                                                                                                 |                                                         | <span class="emoji">&#10004;</span>   |
+| Improved Table Import Wizard and Table Schema Update check with Power Query support                                                                        |                                                         | <span class="emoji">&#10004;</span>   |
+| DAX querying, table preview and Pivot Grids                                                                                                                |                                                         | <span class="emoji">&#10004;</span>   |
+| Create diagrams for visualizing and editing table relationships                                                                                            |                                                         | <span class="emoji">&#10004;</span>   |
+| Execute data refresh operations in the background                                                                                                          |                                                         | <span class="emoji">&#10004;</span>\* |
+| C# macro recorder                                                                                                                                          |                                                         | <span class="emoji">&#10004;</span>   |
+| Edit multiple DAX expressions in a single document using [DAX scripting](xref:dax-scripts)                                                                 |                                                         | <span class="emoji">&#10004;</span>   |
+| [VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) integration                                                                            |                                                         | <span class="emoji">&#10004;</span>   |
+| [DAX debugger](xref:dax-debugger)                                                                                                                          |                                                         | <span class="emoji">&#10004;</span>   |
+| [Metadata Translation Editor](xref:metadata-translation-editor)                                                                                            |                                                         | <span class="emoji">&#10004;</span>   |
+| [Perspective Editor](xref:perspective-editor)                                                                                                              |                                                         | <span class="emoji">&#10004;</span>   |
+| [Table Groups](xref:table-groups)                                                                                                                          |                                                         | <span class="emoji">&#10004;</span>   |
+| [DAX Optimizer Integration](xref:dax-optimizer-integration)                                                                                                |                                                         | <span class="emoji">&#10004;</span>   |
+| [Code Actions](xref:code-actions)                                                                                                                          |                                                         | <span class="emoji">&#10004;</span>   |
+| [DAX User-Defined Functions (UDFs)](xref:udfs) Assistance, Code Action and Namespaces                                                   |                                                         | <span class="emoji">&#10004;</span>   |
+| [Calendar Editor](xref:calendars) for enhanced time intelligence                                                                                           |                                                         | <span class="emoji">&#10004;</span>   |
+| [DAX Package Manager](xref:dax-package-manager)                                                                                                            |                                                         | <span class="emoji">&#10004;</span>   |
+| [Built-in Best Practice Analyzer rules](xref:built-in-bpa-rules)                                                                                           |                                                         | <span class="emoji">&#10004;</span>   |
+| [Advanced Refresh dialog](xref:advanced-refresh) with [refresh override profiles](xref:refresh-overrides) (Business/Enterprise Edition) |                                                         | <span class="emoji">&#10004;</span>\* |
+| [Save with supporting files for Fabric](xref:save-with-supporting-files)                                                                                   |                                                         | <span class="emoji">&#10004;</span>   |
+| Semantic Bridge for Databricks Metric Views (Enterprise Edition)                                                                        |                                                         | <span class="emoji">&#10004;</span>\* |
+| [Localization support](xref:references-application-language) (Chinese, Spanish, Japanese, German, French)                               |                                                         | <span class="emoji">&#10004;</span>   |
 
 \***Note:** Limitations apply depending on which [edition](xref:editions) of Tabular Editor 3 you are using.
 
@@ -126,7 +129,7 @@ Both tools feature the Best Practice Analyzer, which continuously scans the mode
 
 You can also write and execute C#-style scripts in both tools, for automating repetitive tasks such as generating time-intelligence measures and auto-detecting relationships based on column names.
 
-Lastly, thanks to the "Save-to-folder" functionality, a new file format where every object in the model is saved as an individual file, enables parallel development and version control integration, which is something that is not easy to achieve using only the standard tools. 
+Lastly, thanks to the "Save-to-folder" functionality, a new file format where every object in the model is saved as an individual file, enables parallel development and version control integration, which is something that is not easy to achieve using only the standard tools.
 
 ## Conclusion
 
