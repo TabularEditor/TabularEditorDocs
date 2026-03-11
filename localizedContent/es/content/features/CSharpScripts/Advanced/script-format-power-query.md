@@ -10,19 +10,21 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Format Power Query
 
 ## Script Purpose
-If you want to format complex Power Query to make it more readable and easy to change.
-<br></br>
-> [!NOTE] 
-> This script will send your Power Query M Code to the Power Query Formatter API. 
-> Please ensure responsible use and compliance when using this script to format your Power Query code.
-<br></br>
+
+If you want to format complex Power Query to make it more readable and easy to change. <br></br>
+
+> [!NOTE]
+> This script will send your Power Query M Code to the Power Query Formatter API.
+> Please ensure responsible use and compliance when using this script to format your Power Query code. <br></br>
 
 ## Script
 
 ### Format Power Query
+
 ```csharp
 // This script formats the Power Query (M Code) of any selected M Partition (not Shared Expression or Source Expression).
 // It will send an HTTPS POST request of the expression to the Power Query Formatter API and replace the code with the result.
@@ -112,13 +114,14 @@ Info(
     );
 }
 ```
+
 ### Explanation
+
 This snippet creates an HTTP POST request of the Power Query in the M Partition and sends it to the [Power Query Formatter](https://www.powerqueryformatter.com/).
-Some manual formatting is done to make the code further readable. 
+Some manual formatting is done to make the code further readable.
 
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-format-power-query.png" alt="Format Power Query example" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An illustration of the script formatting Power Query code.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-format-power-query.png" alt="Format Power Query example" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An illustration of the script formatting Power Query code.</figcaption>
 </figure>
