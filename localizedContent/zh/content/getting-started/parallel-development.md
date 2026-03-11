@@ -18,9 +18,11 @@ applies_to:
 ---
 
 # Enabling parallel development using Git and Save to Folder
+
 <!--
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src=https://player.vimeo.com/video/664699623?h=57bde801c7&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479 frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Boosting productivity"></iframe></div><script src=https://player.vimeo.com/api/player.js></script>
 -->
+
 This article describes the principles of parallel model development (that is, the ability for multiple developers to work in parallel on the same data model) and the role of Tabular Editor in this regard.
 
 ## Prerequisites
@@ -37,7 +39,7 @@ Parallel development has traditionally been difficult to implement on Analysis S
 
 The use of a text-based file format makes it possible to handle conflicting changes in a graceful way, by using various diff tools that are often included with the version control system. This type of change conflict resolution is very common in traditional software development, where all of the source code resides in a large number of small text files. For this reason, most popular version control systems are optimized for these types of files, for purposes of change detection and (automatic) conflict resolution.
 
-For tabular model development, the "source code" is our JSON-based TOM metadata. When developing tabular models with earlier versions of Visual Studio, the Model.bim JSON file was augmented with information about who modified what and when. This information was simply stored as additional properties on the JSON objects throughout the file. This was problematic, because not only was the information redundant (since the file itself also has metadata that describes who the last person to edit it was, and when the last edit happened), but from a version control perspective, this metadata does not hold any *semantic meaning*. In other words, if you were to remove all of the modification metadata from the file, you would still end up with a perfectly valid TOM JSON-file, that you could deploy to Analysis Services or publish to Power BI, without affecting the functionality and business logic of the model.
+For tabular model development, the "source code" is our JSON-based TOM metadata. When developing tabular models with earlier versions of Visual Studio, the Model.bim JSON file was augmented with information about who modified what and when. This information was simply stored as additional properties on the JSON objects throughout the file. This was problematic, because not only was the information redundant (since the file itself also has metadata that describes who the last person to edit it was, and when the last edit happened), but from a version control perspective, this metadata does not hold any _semantic meaning_. In other words, if you were to remove all of the modification metadata from the file, you would still end up with a perfectly valid TOM JSON-file, that you could deploy to Analysis Services or publish to Power BI, without affecting the functionality and business logic of the model.
 
 Just like source code for traditional software development, we do not want this kind of information to "contaminate" our model metadata. Indeed, a version control system gives a much more detailed view of the changes that were made, who made them, when and why, so there is no reason to include it as part of the files being versioned.
 
@@ -181,8 +183,8 @@ The exact workflow depends on your branching strategy and how your git repositor
    git push
    ```
 4. If you are not using a workspace database, use Tabular Editor's **Model > Deploy...** option to deploy to a sandbox/development environment, in order to test the changes made to the model metadata.
-6. When done, and all code has been committed and pushed to the remote repository, you submit a pull request in order to get your code integrated with the main branch. If a merge conflict is encountered, you will have to resolve it locally, using for example the Visual Studio Team Explorer or by simply opening the .json files in a text editor to resolve the conflicts (git inserts conflict markers to indicate which part of the code has conflicts).
-7. Once all conflicts are resolved, there may be a process of code review, automated build/test execution based on branch policies, etc. to get the pull request completed. This, however, depends on your branching strategy and overall setup.
+5. When done, and all code has been committed and pushed to the remote repository, you submit a pull request in order to get your code integrated with the main branch. If a merge conflict is encountered, you will have to resolve it locally, using for example the Visual Studio Team Explorer or by simply opening the .json files in a text editor to resolve the conflicts (git inserts conflict markers to indicate which part of the code has conflicts).
+6. Once all conflicts are resolved, there may be a process of code review, automated build/test execution based on branch policies, etc. to get the pull request completed. This, however, depends on your branching strategy and overall setup.
 
 We present more details about how to configure git branch policies, set up automated build and deployment pipelines, etc. using Azure DevOps in the following articles. Similar techniques can be used in other automated build and git hosting environments, such as TeamCity, GitHub, etc.
 
