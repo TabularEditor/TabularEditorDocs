@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # DAX Optimizer Integration
 
 > [!NOTE]
@@ -89,7 +90,7 @@ You will be presented with a dialog similar to the one shown below:
 
 Here, you can choose whether the VPAX should be uploaded as a new model within the workspace, or whether the VPAX contains updated statistics for an existing model.
 
-- For a **new model**, you must supply a name and choose whether or not the VPAX should be [obfuscated](https://www.sqlbi.com/blog/marco/2024/03/15/vpax-obfuscator-a-library-to-obfuscate-vpax-files/) (see below for more details on obfuscation). You must also choose which [contract](https://docs.daxoptimizer.com/glossary/contract) the model should be uploaded under. This impacts the number and frequency of DAX Optimizer [*runs*](https://docs.daxoptimizer.com/glossary/run) you can subsequently perform on the model.
+- For a **new model**, you must supply a name and choose whether or not the VPAX should be [obfuscated](https://www.sqlbi.com/blog/marco/2024/03/15/vpax-obfuscator-a-library-to-obfuscate-vpax-files/) (see below for more details on obfuscation). You must also choose which [contract](https://docs.daxoptimizer.com/glossary/contract) the model should be uploaded under. This impacts the number and frequency of DAX Optimizer [_runs_](https://docs.daxoptimizer.com/glossary/run) you can subsequently perform on the model.
 - For a **new model version**, you must select the existing model to update.
 
 Once you click the **OK** button, the VPAX file will be uploaded to DAX Optimizer, and you will be able to start analyzing the model.
