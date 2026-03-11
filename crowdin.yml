@@ -1,7 +1,7 @@
 "files": [
   {
     "source": "/content/**/*.md",
-    "translation": "/localizedContent/%two_letters_code%/%original_path%/%original_file_name%",
+    "translation": "/localizedContent/%two_letters_code%/content/%original_path%/%original_file_name%",
     "ignore": [
       "/**/TOC.md"
     ],
@@ -11,10 +11,14 @@
   },
   {
     "source": "/content/404.html",
-    "translation": "/localizedContent/%two_letters_code%/404.html"
+    "translation": "/localizedContent/%two_letters_code%/content/404.html"
   },
   {
     "source": "/content/toc.yml",
-    "translation": "/localizedContent/%two_letters_code%/toc.yml"
+    "translation": "/localizedContent/%two_letters_code%/content/toc.yml"
+  },
+  {
+    "source": "/content/_ui-strings.json",
+    "translation": "/localizedContent/%two_letters_code%/content/_ui-strings.json"
   }
 ]

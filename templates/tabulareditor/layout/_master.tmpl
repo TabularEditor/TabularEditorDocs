@@ -117,11 +117,11 @@
                   {{#__header.mainMenu}}
                     {{#subMenu}}
                       <li class="main-nav__list-item main-nav__list-item--lvl1 lvl1 main-nav__list-item--dropdown">
-                        <a class="main-nav__list-item-link main-nav__list-item-link--lvl1 lvl1 main-nav__list-item-link--dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="false" role="button" data-bs-toggle="dropdown" target="_self"> {{text}} </a>
+                        <a class="main-nav__list-item-link main-nav__list-item-link--lvl1 lvl1 main-nav__list-item-link--dropdown-toggle" href="#" aria-haspopup="true" aria-expanded="false" role="button" data-bs-toggle="dropdown" target="_self"{{#uiStringKey}} data-ui-string="{{uiStringKey}}"{{/uiStringKey}}> {{text}} </a>
                         <ul role="list" class="main-nav__list main-nav__list--sublevel main-nav__list--dropdown dropdown-menu main-nav__list--lvl2 lvl2">
                           {{#items}}
                           <li class="main-nav__list-item main-nav__list-item--lvl2 lvl2">
-                            <a class="main-nav__list-item-link main-nav__list-item-link--lvl2 lvl2" href="{{url}}"> {{text}} </a>
+                            <a class="main-nav__list-item-link main-nav__list-item-link--lvl2 lvl2" href="{{url}}"{{#uiStringKey}} data-ui-string="{{uiStringKey}}"{{/uiStringKey}}> {{text}} </a>
                           </li>
                           {{/items}}
                         </ul>
@@ -129,7 +129,7 @@
                     {{^subMenu}}
                       {{^items}}
                         <li class="main-nav__list-item main-nav__list-item--lvl1 lvl1">
-                          <a class="main-nav__list-item-link main-nav__list-item-link--lvl1 lvl1" href="{{url}}"> {{text}} </a>
+                          <a class="main-nav__list-item-link main-nav__list-item-link--lvl1 lvl1" href="{{url}}"{{#uiStringKey}} data-ui-string="{{uiStringKey}}"{{/uiStringKey}}> {{text}} </a>
                         </li>
                       {{/items}}
                     {{/subMenu}}
@@ -160,11 +160,15 @@
               </div>
               {{/_enableSearch}}
 
+              <div class="siteheader-module__language" id="language-picker">
+                <!-- Language picker rendered by language.ts -->
+              </div>
+
               <div class="siteheader-module__buttons">
                 {{#__header.button1}}
                 <div class="siteheader-module__button">
                   <a href="{{url}}" class="g-module-macros-btn btn-style btn-link btn-primary btn-regular">
-                    {{text}}
+                    <span{{#uiStringKey}} data-ui-string="{{uiStringKey}}"{{/uiStringKey}}>{{text}}</span>
                     <span class="g-module-macros-icon icon icon-style--button">
                       <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.8378 1L26 13M26 13L13.8378 25M26 13H1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     </span>
@@ -174,7 +178,7 @@
                 {{#__header.button2}}
                 <div class="siteheader-module__secondary-button">
                   <a href="{{url}}" class="g-module-macros-btn btn-style--secondary btn-link btn-secondary1 btn-regular">
-                    {{text}}
+                    <span{{#uiStringKey}} data-ui-string="{{uiStringKey}}"{{/uiStringKey}}>{{text}}</span>
                     <span class="g-module-macros-icon icon icon-style--button-secondary">
                       <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.8378 1L26 13M26 13L13.8378 25M26 13H1" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     </span>
@@ -249,48 +253,18 @@
 
           {{! meta applies to }}
           {{#applies_to}}
-          <div class="applies-to-div"><strong>Applies to: </strong>
-            <ul class="applies-to">
-            {{#products}}
-              <li class="applies-to-product{{#note}} applies-to-tooltip{{/note}}">
-                {{^editions}}
-                  {{#full}}<span class="emoji">&#10004;</span>{{/full}}
-                  {{#partial}}<span class="emoji" title="{{note}}">&#9888;</span>{{/partial}}
-                  {{#none}}<span class="emoji">&#10060;</span>{{/none}}
-                {{/editions}}
-                {{#none}}<del>{{product}}</del>{{/none}}
-                {{^none}}<strong>{{product}}</strong>{{/none}}
-                {{^editions}}
-                  {{#full}}{{/full}}
-                  {{#partial}}{{/partial}}
-                {{/editions}}
-                {{#since}}
-                  <span class="version-info">
-                    ({{#until}}Available in {{since}}–{{until}}{{/until}}{{^until}}Available since {{since}}{{/until}})
-                  </span>
-                {{/since}}
-                {{^editions}}
-                  {{#note}}<span class="applies-to-tooltiptext">{{note}}</span>{{/note}}
-                {{/editions}}
-                {{#editions}}
-                  <div class="applies-to-edition{{#note}} applies-to-tooltip{{/note}}">
-                    {{#none}}
-                      <span class="emoji">&#10060;</span> <del>{{edition}}</del>
-                    {{/none}}
-                    {{^none}}
-                      {{#partial}}
-                        <span class="emoji" title="{{note}}">&#9888;</span> {{edition}}{{#note}}<span class="applies-to-tooltiptext">{{note}}</span>{{/note}}
-                      {{/partial}}
-                      {{^partial}}
-                        <span class="emoji">&#10004;</span> {{edition}}
-                      {{/partial}}
-                    {{/none}}
-                  </div>
-                {{/editions}}
-              </li>
-            {{/products}}
-            </ul>
-          </div>
+          <div class="applies-to-div"><strong>Applies to: </strong><ul class="applies-to">
+            {{#editions}}
+              {{#none}}<li><span><span class="emoji">&#10060;</span> <del>{{edition}} Edition</del></span></li>{{/none}}
+              {{#partial}}<li><span title="{{partial}}"><span class="emoji">&#9888;</span> {{edition}} Edition</span></li>{{/partial}}
+              {{^partial}}{{^none}}<li><span><span class="emoji">&#10004;</span> {{edition}} Edition</span></li>{{/none}}{{/partial}}
+            {{/editions}}
+            {{#versions}}
+              {{#none}}<li><span><span class="emoji">&#10060;</span> <del>Tabular Editor {{version}}</del></span></li>{{/none}}
+              {{#partial}}<li><span title="{{partial}}"><span class="emoji">&#9888;</span>Tabular Editor {{version}}</span></li>{{/partial}}
+              {{^partial}}{{^none}}<li><span><span class="emoji">&#10004;</span>Tabular Editor {{version}}</span></li>{{/none}}{{/partial}}
+            {{/versions}}
+          </ul></div>
           {{/applies_to}}
 
           {{! START CLOSE DIV: Check if document has updated or applies_to metadata, add a begin div to be able to add spacing for the metadata}}
@@ -346,14 +320,14 @@
       <div class="container global-footer global-partial">
         <div class="row row-number-1">
           <div class="col-12 col-md-6">
-            <h2 class="display-6 heading">Ready to get started?</h2>
+            <h2 class="display-6 heading" data-ui-string="footer.heading">Ready to get started?</h2>
           </div>
           <div class="col-12 col-md-6">
             <div class="content-block-top">
               <div class="button-group">
                 {{#__footer.buttons}}
                   <a href="{{url}}" class="btn-link btn-secondary2 btn-regular">
-                    <span>{{text}}</span>
+                    <span{{#uiStringKey}} data-ui-string="{{uiStringKey}}"{{/uiStringKey}}>{{text}}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="27" height="26" viewBox="0 0 27 26" fill="none">  <path d="M13.8378 1L26 13M26 13L13.8378 25M26 13H1" stroke="171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                   </a>
                 {{/__footer.buttons}}
@@ -367,7 +341,7 @@
             <ul role="menu">
               {{#__footer.leftLinks}}
                 <li class="hs-menu-item hs-menu-depth-1" role="none">
-                  <a href="{{url}}" role="menuitem" {{#target}}target="{{target}}"{{/target}} {{#rel}}rel="{{rel}}"{{/rel}}>{{text}}</a>
+                  <a href="{{url}}" role="menuitem" {{#target}}target="{{target}}"{{/target}} {{#rel}}rel="{{rel}}"{{/rel}}{{#uiStringKey}} data-ui-string="{{uiStringKey}}"{{/uiStringKey}}>{{text}}</a>
                 </li>
               {{/__footer.leftLinks}}
             </ul>
@@ -406,7 +380,7 @@
             <ul role="menu">
               {{#__footer.bottomLinks}}
                 <li class="hs-menu-item hs-menu-depth-1" role="none">
-                  <a href="{{url}}" role="menuitem" {{#target}}target="{{target}}"{{/target}} {{#rel}}rel="{{rel}}"{{/rel}}>{{text}}</a>
+                  <a href="{{url}}" role="menuitem" {{#target}}target="{{target}}"{{/target}} {{#rel}}rel="{{rel}}"{{/rel}}{{#uiStringKey}} data-ui-string="{{uiStringKey}}"{{/uiStringKey}}>{{text}}</a>
                 </li>
               {{/__footer.bottomLinks}}
             </ul>

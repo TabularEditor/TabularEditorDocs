@@ -1,4 +1,5 @@
-/docfx.json
+/metadata/languages.json
+
 
 ###############
 #    folder   #
@@ -17,8 +18,13 @@
 .NuGet/
 artifacts/
 target/
-/_site/*
-!/_site/staticwebapp.config.json
+/_site/
+
+# Localized content
+/localizedContent/en/
+/localizedContent/*/docfx.json
+!/localizedContent/*/.translation-status.json
+
 .vscode/
 .vs/
 
