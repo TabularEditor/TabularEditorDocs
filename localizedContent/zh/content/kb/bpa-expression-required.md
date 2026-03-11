@@ -43,6 +43,7 @@ string.IsNullOrWhiteSpace(Expression)
 ```
 
 This applies to:
+
 - **Measures**: Should contain a DAX aggregation or calculation
 - **Calculated Columns**: Should contain a row-context DAX expression
 - **Calculation Items**: Should contain a DAX expression modifying the base measure
