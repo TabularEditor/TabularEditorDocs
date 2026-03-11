@@ -20,6 +20,7 @@ Usage:
 import argparse
 import json
 import re
+import shutil
 from pathlib import Path
 from typing import Any
 
@@ -82,6 +83,11 @@ def generate_lang_prefix_redirect_pages(site_dir: str = "_site", default_lang: s
     # Root-level files that must not be overwritten
     protected = {"404.html", "index.html", "languages.json", "staticwebapp.config.json"}
 
+    # Directories whose files should be copied as-is (not redirected).
+    # Old clients load /whats-new/index.html directly inside an embedded browser;
+    # a meta-refresh redirect would open the system browser instead.
+    copy_as_is_dirs = {"whats-new"}
+
     count = 0
     for src_file in lang_dir.rglob("*.html"):
         rel_path = src_file.relative_to(lang_dir)
@@ -91,10 +97,15 @@ def generate_lang_prefix_redirect_pages(site_dir: str = "_site", default_lang: s
         if dest_file.exists():
             # Already handled (e.g. a client redirect pointing to a different canonical)
             continue
-        target_url = f"/{default_lang}/{rel_path.as_posix()}"
         dest_file.parent.mkdir(parents=True, exist_ok=True)
-        dest_file.write_text(
-            f"""<!DOCTYPE html>
+
+        # Copy actual files for directories that must not redirect
+        if rel_path.parts[0] in copy_as_is_dirs:
+            shutil.copy2(src_file, dest_file)
+        else:
+            target_url = f"/{default_lang}/{rel_path.as_posix()}"
+            dest_file.write_text(
+                f"""<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -103,8 +114,8 @@ def generate_lang_prefix_redirect_pages(site_dir: str = "_site", default_lang: s
   </head>
 </html>
 """,
-            encoding="utf-8",
-        )
+                encoding="utf-8",
+            )
         count += 1
 
     return count
