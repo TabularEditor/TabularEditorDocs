@@ -1,4 +1,4 @@
-﻿---
+---
 uid: connecting-to-azure-databricks
 title: Connecting to Azure Databricks
 author: David Bojsen
@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # (Tutorial) Connecting to Azure Databricks
 
 Tabular Editor 3 supports connecting to Azure Databricks as a data source for your semantic models. This tutorial will guide you through the process of setting up a connection to Azure Databricks and importing data from it.
@@ -62,7 +63,9 @@ For more information about Microsoft Entra ID permissions, please refer to the [
 When you first attempt to connect to Azure Databricks using Microsoft Entra ID authentication, you may be prompted to consent to the required permissions. The consent process depends on your organization's Microsoft Entra ID policies:
 
 ##### User Consent
+
 If your organization allows user consent for applications:
+
 1. You will see a consent prompt from Microsoft asking for permission to allow Tabular Editor to access Azure Databricks on your behalf
 2. Review the permissions being requested
 3. Click **Accept** to grant consent
@@ -71,7 +74,9 @@ If your organization allows user consent for applications:
 > Whether admin consent is required depends on your organization's Microsoft Entra ID policies, not necessarily the specific API permissions being requested. Many organizations allow users to consent to delegated permissions themselves, while others require administrator approval for all third-party applications regardless of permission level.
 
 ##### Admin Consent Required
+
 If your organization restricts user consent (common in enterprise environments):
+
 1. You will receive an error message indicating that admin consent is required
 2. You'll need to contact your IT department or Microsoft Entra ID administrator
 3. Provide them with:
@@ -82,6 +87,7 @@ If your organization restricts user consent (common in enterprise environments):
 Your administrator can grant organization-wide consent in one of two ways:
 
 **Option 1: Through the Microsoft Entra ID Admin Portal**
+
 1. Navigate to Microsoft Entra ID > Enterprise Applications
 2. Search for "Tabular Editor 3 - User Delegated Access to Azure Databricks"
 3. Select the application and go to Permissions
@@ -89,6 +95,7 @@ Your administrator can grant organization-wide consent in one of two ways:
 
 **Option 2: Using the Direct Admin Consent URL**
 Administrators can use the following direct link to grant consent:
+
 ```
 https://login.microsoftonline.com/organizations/v2.0/adminconsent?client_id=ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c&scope=https://graph.microsoft.com/offline_access%20https://graph.microsoft.com/openid%20https://graph.microsoft.com/profile%20https://graph.microsoft.com/User.Read%202ff814a6-3304-4ab8-85cb-cd0e6f879c1d/user_impersonation&redirect_uri=https://tabulareditor.com
 ```
@@ -123,7 +130,9 @@ If Microsoft Entra ID integration is not available or if you prefer token-based 
    - Click **Generate** and copy the token value
 
 2. In Tabular Editor 3, go to **Model** > **Import tables...**
+
 3. Select **New Source** > **Databricks**
+
 4. In the connection dialog:
    - Enter your Databricks workspace URL
    - Select **Personal Access Token** as the authentication method
