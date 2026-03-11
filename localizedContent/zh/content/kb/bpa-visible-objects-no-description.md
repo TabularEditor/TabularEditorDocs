@@ -37,8 +37,8 @@ Descriptions provide critical context for model users:
 - **Enhanced tooltips**: Power BI and Excel show descriptions in hover tooltips
 - **Documentation foundation**: Descriptions form the basis for automated documentation
 - **Governance and compliance**: Descriptions can include data lineage and business definitions
-- **Usage by AI**: AI Agents can better infer the purpose of an object if it has a description. 
-Without descriptions, users guess at field meanings, leading to incorrect analysis and increased support requests.
+- **Usage by AI**: AI Agents can better infer the purpose of an object if it has a description.
+  Without descriptions, users guess at field meanings, leading to incorrect analysis and increased support requests.
 
 ## When This Rule Triggers
 
