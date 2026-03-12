@@ -25,7 +25,6 @@ import json
 import os
 import shutil
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -56,7 +55,6 @@ def load_translation_status(lang: str) -> dict[str, Any]:
     if not status_path.exists():
         return {
             "language": lang,
-            "lastSync": None,
             "sourceBaseline": str(CONTENT_DIR),
             "files": {},
             "summary": {
@@ -76,9 +74,6 @@ def save_translation_status(lang: str, status: dict[str, Any]) -> None:
     """Save the translation status file for a language."""
     status_path = LOCALIZED_DIR / lang / STATUS_FILENAME
     status_path.parent.mkdir(parents=True, exist_ok=True)
-    
-    # Update timestamp
-    status["lastSync"] = datetime.now(timezone.utc).isoformat()
     
     # Recalculate summary
     files = status.get("files", {})
@@ -156,27 +151,21 @@ def check_translation_status(lang: str, source_files: dict[str, str]) -> dict[st
             new_files[rel_path] = {
                 "sourceHash": source_hash,
                 "status": STATUS_UNTRANSLATED,
-                "lastChecked": datetime.now(timezone.utc).isoformat()
             }
         else:
             stored_hash = file_info.get("sourceHash", "")
-            
+
             if stored_hash == source_hash:
                 # Source hasn't changed, translation is current
                 new_files[rel_path] = {
                     "sourceHash": source_hash,
                     "status": STATUS_TRANSLATED,
-                    "lastChecked": datetime.now(timezone.utc).isoformat(),
-                    "translatedAt": file_info.get("translatedAt", datetime.now(timezone.utc).isoformat())
                 }
             else:
                 # Source changed since translation was made
                 new_files[rel_path] = {
                     "sourceHash": source_hash,
                     "status": STATUS_OUTDATED,
-                    "previousHash": stored_hash,
-                    "lastChecked": datetime.now(timezone.utc).isoformat(),
-                    "translatedAt": file_info.get("translatedAt")
                 }
     
     status["files"] = new_files
@@ -208,7 +197,6 @@ def sync_language(lang: str, source_files: dict[str, str], dry_run: bool = False
                 shutil.copy2(source_file, dest_file)
                 # Update status to untranslated (since we replaced with English)
                 file_info["status"] = STATUS_UNTRANSLATED
-                file_info["replacedAt"] = datetime.now(timezone.utc).isoformat()
             counts["replaced"] += 1
             print(f"  Replaced (outdated): {rel_path}")
         elif file_status == STATUS_UNTRANSLATED:
@@ -302,7 +290,6 @@ def init_language(lang: str, source_files: dict[str, str]) -> None:
     
     status = {
         "language": lang,
-        "lastSync": datetime.now(timezone.utc).isoformat(),
         "sourceBaseline": str(CONTENT_DIR),
         "files": {}
     }
@@ -315,15 +302,12 @@ def init_language(lang: str, source_files: dict[str, str]) -> None:
             status["files"][rel_path] = {
                 "sourceHash": source_hash,
                 "status": STATUS_TRANSLATED,
-                "lastChecked": datetime.now(timezone.utc).isoformat(),
-                "translatedAt": datetime.now(timezone.utc).isoformat()
             }
         else:
             # File missing - mark as untranslated
             status["files"][rel_path] = {
                 "sourceHash": source_hash,
                 "status": STATUS_UNTRANSLATED,
-                "lastChecked": datetime.now(timezone.utc).isoformat()
             }
     
     save_translation_status(lang, status)
@@ -340,20 +324,17 @@ def mark_translated(lang: str, file_paths: list[str] | None, source_files: dict[
     If file_paths is None, marks all files in the language.
     """
     status = load_translation_status(lang)
-    now = datetime.now(timezone.utc).isoformat()
-    
+
     if file_paths is None:
         # Mark all files
         file_paths = list(source_files.keys())
-    
+
     updated = 0
     for rel_path in file_paths:
         if rel_path in source_files:
             status["files"][rel_path] = {
                 "sourceHash": source_files[rel_path],
                 "status": STATUS_TRANSLATED,
-                "lastChecked": now,
-                "translatedAt": now
             }
             updated += 1
     
