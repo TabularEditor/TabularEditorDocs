@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Create Simple Validation Rules
 
 This how-to demonstrates how to create simple predicate-based validation rules to enforce naming conventions and structural requirements.

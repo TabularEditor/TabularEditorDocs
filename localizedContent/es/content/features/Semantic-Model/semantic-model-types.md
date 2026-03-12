@@ -1,4 +1,4 @@
-﻿---
+---
 uid: semantic-model-types
 title: Power BI Semantic model Types
 author: Morten Lønskov
@@ -17,14 +17,12 @@ applies_to:
           full: true
 ---
 
-
 # Semantic Model Types
 
-Tabular Editor can work with several different model types. Below is an overview of which model types work with Tabular Editor and the capabilities that can be used with each model type. 
-
+Tabular Editor can work with several different model types. Below is an overview of which model types work with Tabular Editor and the capabilities that can be used with each model type.
 
 |Model Type|Import|Direct Query|Direct Lake on OneLake|Direct Lake on SQL|.pbix|.pbip|
-|---|---|---|---|---|
+\|---|---|---|---|---|
 |Connect in Tabular Editor|✔️|✔️|✔️|✔️|✔️|
 |Create new model|✔️|✔️|✔️|✔️|✔️|✔️|
 |Write Measures|✔️|✔️|✔️|✔️|✔️|✔️|
@@ -50,22 +48,22 @@ Tabular Editor can work with several different model types. Below is an overview
 |Delete Objects|✔️|✔️|✔️|✔️|
 
 **Legend:**
-- ✔️: Supported 
+
+- ✔️: Supported
 - ❌: Unsupported
 
-
-<a name="DirectLake">1</a> - The table partition must be an Entity Partition to work correctly and Direct Lake models can only have one partition.
-<a name="DirectLakeCalculated">2</a> - Calculated Tables and Columns cannot refer to Direct Lake on OneLake tables or columns.
+<a name="DirectLake">1</a> - The table partition must be an Entity Partition to work correctly and Direct Lake models can only have one partition. <a name="DirectLakeCalculated">2</a> - Calculated Tables and Columns cannot refer to Direct Lake on OneLake tables or columns.
 
 <a name="TE3Prem">3</a> - Tabular Editor 3 features only. Operations performed through the XMLA endpoint requires a Business or Enterprise license. [More information](xref:editions).
 
->[!NOTE]
+> [!NOTE]
 > The June 2025 Release of Power BI Desktop all modeling limitations for third party tools where lifted. Prior to that various modeling operations where not supported. See [Power BI Desktop Limitations](xref:desktop-limitations)
 
->[!TIP]
+> [!TIP]
 > For further details on restrictions on Direct Lake models refer to Microsoft's [Direct Lake documentation](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)
 
 ## Unsupported Semantic Model types
+
 The following semantic model types are unsupported, as they don't support XMLA write operations.
 
 - Reports based on a live connection to an Azure Analysis Services or SQL Server Analysis Services model.

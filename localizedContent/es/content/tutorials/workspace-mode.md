@@ -1,4 +1,4 @@
-﻿---
+---
 uid: workspace-mode-wt
 title: Workspace Mode
 author: Daniel Otykier
@@ -17,5 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # (Walkthrough) Workspace Mode
+
 [!include[workspace-mode](../features/workspace-mode.partial.md)]

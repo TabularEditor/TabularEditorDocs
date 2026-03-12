@@ -4,6 +4,7 @@ title: Introduction to C# scripts and macros
 author: Daniel Otykier
 updated: 2021-11-03
 ---
+
 # Introduction to C# scripts and macros
 
 Any software that claims to improve your productivity should provide some means of **automating user interactions**. In Tabular Editor, you can write C# scripts for exactly this purpose. With C# scripts in Tabular Editor, you can, for example:
@@ -92,21 +93,21 @@ The @useful-script-snippets article contains many examples of scripts that use t
 
 In the examples above, we used the `Info(...)` and `Warning(...)` global methods to show a message to the user in various flavors. Tabular Editor provides a number of these global methods as well as extension methods for showing and collecting information, and for various other common tasks. The most commonly used are listed below:
 
-* `void Output(object value)` - halts script execution and displays detailed information about the provided object. When the provided object is a TOM object or a collection of TOM objects, a detailed view of all properties are shown.
-* `void SaveFile(string filePath, string content)` - convenient way to save text data to a file.
-* `string ReadFile(string filePath)` - convenient way to load text data from a file.
-* `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties = "...")` - convenient way to export a set of properties from multiple objects as a TSV string.
-* `void ImportProperties(string tsvData)` - convenient way to load properties into multiple objects from a TSV string.
-* `string ConvertDax(dax, useSemicolons)` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
-* `void FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
-* `void FormatDax(IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
-* `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
-* `void Info(string message)` - Displays an informational message.
-* `void Warning(string message)` - Displays a warning message.
-* `void Error(string message)` - Displays an error message.
-* `measure SelectMeasure(Measure preselect = null, string label = "...")` - Displays a list of all measures and �prompts the user to select one.
-* `T SelectObject<T>(this IEnumerable<T> objects, T preselect = null, string label = "...") where T: TabularNamedObject` - Displays a list of the provided objects, prompting the user to select one, and returns that object (or null if the cancel button was pressed).
-* `IList<T> SelectObjects<T>(this IEnumerable<T> objects, IEnumerable<T> preselect = null, string label = "...") where T: TabularNamedObject` - Displays a list of the provided objects, prompting the user to select any number of objects and returns the list of objects selected (or null if the cancel button was pressed).
+- `void Output(object value)` - halts script execution and displays detailed information about the provided object. When the provided object is a TOM object or a collection of TOM objects, a detailed view of all properties are shown.
+- `void SaveFile(string filePath, string content)` - convenient way to save text data to a file.
+- `string ReadFile(string filePath)` - convenient way to load text data from a file.
+- `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties = "...")` - convenient way to export a set of properties from multiple objects as a TSV string.
+- `void ImportProperties(string tsvData)` - convenient way to load properties into multiple objects from a TSV string.
+- `string ConvertDax(dax, useSemicolons)` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
+- `void FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
+- `void FormatDax(IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
+- `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
+- `void Info(string message)` - Displays an informational message.
+- `void Warning(string message)` - Displays a warning message.
+- `void Error(string message)` - Displays an error message.
+- `measure SelectMeasure(Measure preselect = null, string label = "...")` - Displays a list of all measures and �prompts the user to select one.
+- `T SelectObject<T>(this IEnumerable<T> objects, T preselect = null, string label = "...") where T: TabularNamedObject` - Displays a list of the provided objects, prompting the user to select one, and returns that object (or null if the cancel button was pressed).
+- `IList<T> SelectObjects<T>(this IEnumerable<T> objects, IEnumerable<T> preselect = null, string label = "...") where T: TabularNamedObject` - Displays a list of the provided objects, prompting the user to select any number of objects and returns the list of objects selected (or null if the cancel button was pressed).
 
 # Saving a script as a macro
 

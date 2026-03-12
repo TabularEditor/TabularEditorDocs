@@ -1,4 +1,4 @@
-﻿---
+---
 uid: command-line-options
 title: Command Line
 author: Daniel Otykier
@@ -10,6 +10,7 @@ applies_to:
     - product: Tabular Editor 3
       none: true
 ---
+
 # Command Line
 
 Tabular Editor can be executed from the command-line to perform various tasks, which may be useful in Automated Build and Deployment scenarios, etc.
@@ -19,16 +20,19 @@ Tabular Editor can be executed from the command-line to perform various tasks, w
 To view the command-line options available in Tabular Editor, run the following command:
 
 **Windows Command line:**
+
 ```shell
 start /wait TabularEditor.exe /?
 ```
 
 **PowerShell:**
+
 ```powershell
 $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru -ArgumentList "/?"
 ```
 
 Output:
+
 ```cmd
 Usage:
 
@@ -104,14 +108,17 @@ database            Database ID of the model to load. If blank (") picks the fir
 > The `-F` flag was introduced in [Tabular Editor 2.27.0](https://github.com/TabularEditor/TabularEditor/releases). It is used to perform a "full" deployment and is equivalent to specifying `-O -C -P -S -R -M`.
 
 ## Connecting to Azure Analysis Services
+
 You can use any valid SSAS connection string in place of a server name in the command. The following command loads a model from Azure Analysis Services and saves it locally as a Model.bim file:
 
 **Windows Command Line:**
+
 ```shell
 start /wait TabularEditor.exe "Provider=MSOLAP;Data Source=asazure://northeurope.asazure.windows.net/MyAASServer;User ID=xxxx;Password=xxxx;Persist Security Info=True;Impersonation Level=Impersonate" MyModelDB -B "C:\Projects\FromAzure\Model.bim"
 ```
 
 **PowerShell:**
+
 ```powershell
 $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
        -ArgumentList "`"Provider=MSOLAP;Data Source=asazure://northeurope.asazure.windows.net/MyAASServer;User ID=xxxx;Password=xxxx;Persist Security Info=True;Impersonation Level=Impersonate`" MyModelDB -B C:\Projects\FromAzure\Model.bim"
@@ -124,14 +131,17 @@ Provider=MSOLAP;Data Source=asazure://northeurope.asazure.windows.net/MyAASServe
 ```
 
 ## Automating script changes
+
 If you have created a script inside Tabular Editor, and you want to apply this script to a Model.bim file prior to deployment, you can use the command-line option "-S" (Script):
 
 **Windows Command Line:**
+
 ```shell
 start /wait TabularEditor.exe "C:\Projects\MyModel\Model.bim" -S "C:\Projects\MyModel\MyScript.cs" -D localhost\tabular MyModel
 ```
 
 **PowerShell:**
+
 ```powershell
 $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
        -ArgumentList "`"C:\Projects\MyModel\Model.bim`" -S `"C:\Projects\MyModel\MyScript.cs`" -D `"localhost\tabular`" `"MyModel`""
@@ -165,11 +175,13 @@ foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
 We can instruct Tabular Editor to execute the script, and then perform placeholder swapping using the following command:
 
 **Windows Command Line:**
+
 ```shell
 start /wait TabularEditor.exe "Model.bim" -S "ClearConnectionStrings.cs" -D localhost\tabular MyModel -C "SQLDW" "Provider=SQLOLEDB.1;Data Source=sqldwprod;Persist Security Info=False;Integrated Security=SSPI;Initial Catalog=DW"
 ```
 
 **PowerShell:**
+
 ```powershell
 $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
        -ArgumentList "Model.bim -S ClearConnectionStrings.cs -D localhost\tabular MyModel -C SQLDW `"Provider=SQLOLEDB.1;Data Source=sqldwprod;Persist Security Info=False;Integrated Security=SSPI;Initial Catalog=DW`""
@@ -180,6 +192,7 @@ The command above, will deploy the Model.bim file as a new SSAS database "MyMode
 This technique is useful for scenarios, where you want to deploy the same model to multiple environments that should process data from different (identical) sources - for example, a production, pre-prod or UAT database. If using Azure DevOps (see below), consider using a variable to store the actual connection string to be used, instead of hardcoding it in the command.
 
 ## Integration with Azure DevOps
+
 If you want to use the Tabular Editor CLI inside an Azure DevOps pipeline, you should use the "-V" switch on any TabularEditor.exe command executed by your script. This switch will cause Tabular Editor to output logging commands in a [format readable by Azure DevOps](https://github.com/Microsoft/vsts-tasks/blob/master/docs/authoring/commands.md). These allow Azure DevOps to react properly to errors, etc.
 
 When performing deployment through the command-line, information about unprocessed objects will be outputted to the prompt. In automated deployment scenarios, you may want your build agent to react to situations where objects become unprocessed, for example when adding new columns, changing the DAX expression of a calculated table, etc. In this case, you can use the "-W" switch in addition to the "-V" switch mentioned above, to output this information as warnings. Doing so, will cause the deployment to return the "SucceededWithIssues" status to Azure DevOps, after deployment is completed. You may also use the "-E" switch if you want the deployment to return status "Failed" in case the server reports any DAX errors back after successful deployment.
@@ -206,6 +219,7 @@ If the deployment fails for any reason, Tabular Editor returns the "Failed" stat
 For more information on Azure DevOps and Tabular Editor, [take a look at this blog series](https://tabulareditor.github.io/2019/02/20/DevOps1.html) (especially [chapter 3](https://tabulareditor.github.io/2019/10/08/DevOps3.html) and onward).
 
 ### Azure DevOps PowerShell Task
+
 If you prefer to use a PowerShell task instead of a command line task, you must execute TabularEditor.exe using the `Start-Process` cmdlet, as demonstrated above. In addition, make sure to pass the process exit code as the exit parameter in your PowerShell script, so that errors occurring in Tabular Editor will cause the PowerShell task to fail:
 
 ```powershell
@@ -272,9 +286,9 @@ You can use the "-A" switch to have Tabular Editor scan your model for all objec
 
 If you're also using the "-V" switch, the severity level of each rule will determine how the rule violation is reported to the build pipeline:
 
-* Severity = 1 will be informational only
-* Severity = 2 will cause a WARNING
-* Severity >= 3 will cause an ERROR
+- Severity = 1 will be informational only
+- Severity = 2 will cause a WARNING
+- Severity >= 3 will cause an ERROR
 
 ## Performing a data source schema check
 
@@ -283,29 +297,30 @@ As of [version 2.8](https://github.com/TabularEditor/TabularEditor/releases/tag/
 You can also annotate tables and columns if you want the schema check to treat them in a specific way. [More information here](xref:importing-tables-te2#ignoring-objects).
 
 ## Command Line output and Exit Codes
+
 The command line provides various details, depending on the switches used and any events encountered during execution. Exit Codes were introduced in [version 2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4).
 
-|Level|Command|Message|Clarification|
-|---|---|---|---|
-|Error|(Any)|Invalid argument syntax|Invalid arguments were provided to the Tabular Editor CLI|
-|Error|(Any)|File not found: ...||
-|Error|(Any)|Error loading file: ...|The file is corrupt or does not contain valid TOM metadata in a JSON format|
-|Error|(Any)|Error loading model: ...|Not able to connect to the provided Analysis Services instance, database not found, database metadata corrupt or database not of a supported compatibility level|
-|Error|-SCRIPT|Specified script file not found||
-|Error|-SCRIPT|Script compilation errors:|Script contained invalid C# syntax. Details will be outputted on the following lines.|
-|Error|-SCRIPT|Script execution error: ...|Unhandled exception when executing the script.|
-|Information|-SCRIPT|Script line #: ...|Use of the `Info(string)` or `Output(string)` methods within the script.|
-|Warning|-SCRIPT|Script warning: ...|Use of the `Warning(string)` method within the script.|
-|Error|-SCRIPT|Script error: ...|Use of the `Error(string)` method within the script.|
-|Error|-FOLDER, -BIM|-FOLDER and -BIM arguments are mutually exclusive.|Tabular Editor can not save the currently loaded model to a folder structure and a .bim file in a single execution.|
-|Error|-ANALYZE|Rulefile not found: ...||
-|Error|-ANALYZE|Invalid rulefile: ...|The specified BPA rulefile is corrupt or does not contain valid JSON.|
-|Information|-ANALYZE|... violates rule ...|Best Practice Analyzer results for rules of severity level 1 or lower.|
-|Warning|-ANALYZE|... violates rule ...|Best Practice Analyzer results for rules of severity level 2.|
-|Error|-ANALYZE|... violates rule ...|Best Practice Analyzer results for rules of severity level 3 or higher.|
-|Error|-DEPLOY|Deployment failed! ...|Failure reason returned directly from Analysis Service instance (for example: Database not found, Database override not allowed, etc.)|
-|Information|-DEPLOY|Unprocessed object: ...|Objects that are in state "NoData" or "CalculationNeeded" after successful deployment. Use the -W switch to treat these as Level=Warning.|
-|Warning|-DEPLOY|Object not in "Ready" state: ...|Objects that are in state "DependencyError", "EvaluationError" or "SemanticError" after successful deployment. If using the -W switch, also includes objects in state "NoData" or "CalculationNeeded".|
-|Warning|-DEPLOY|Error on X:...|Objects containing invalid DAX after successful deployment (measures, calculated columns, calculated tables, roles). Use the -E switch to treat these as Level=Error.|
+| Level       | Command                  | Message                                                                                                               | Clarification                                                                                                                                                                                                                          |
+| ----------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Error       | (Any) | Invalid argument syntax                                                                                               | Invalid arguments were provided to the Tabular Editor CLI                                                                                                                                                                              |
+| Error       | (Any) | File not found: ...                                   |                                                                                                                                                                                                                                        |
+| Error       | (Any) | Error loading file: ...                               | The file is corrupt or does not contain valid TOM metadata in a JSON format                                                                                                                                                            |
+| Error       | (Any) | Error loading model: ...                              | Not able to connect to the provided Analysis Services instance, database not found, database metadata corrupt or database not of a supported compatibility level                                                                       |
+| Error       | -SCRIPT                  | Specified script file not found                                                                                       |                                                                                                                                                                                                                                        |
+| Error       | -SCRIPT                  | Script compilation errors:                                                                            | Script contained invalid C# syntax. Details will be outputted on the following lines.                                                                                                                  |
+| Error       | -SCRIPT                  | Script execution error: ...                           | Unhandled exception when executing the script.                                                                                                                                                                         |
+| Information | -SCRIPT                  | Script line #: ...                                    | Use of the `Info(string)` or `Output(string)` methods within the script.                                                                                                                                               |
+| Warning     | -SCRIPT                  | Script warning: ...                                   | Use of the `Warning(string)` method within the script.                                                                                                                                                                 |
+| Error       | -SCRIPT                  | Script error: ...                                     | Use of the `Error(string)` method within the script.                                                                                                                                                                   |
+| Error       | -FOLDER, -BIM            | -FOLDER and -BIM arguments are mutually exclusive.                                                    | Tabular Editor can not save the currently loaded model to a folder structure and a .bim file in a single execution.                                                                                    |
+| Error       | -ANALYZE                 | Rulefile not found: ...                               |                                                                                                                                                                                                                                        |
+| Error       | -ANALYZE                 | Invalid rulefile: ...                                 | The specified BPA rulefile is corrupt or does not contain valid JSON.                                                                                                                                                  |
+| Information | -ANALYZE                 | ... violates rule ... | Best Practice Analyzer results for rules of severity level 1 or lower.                                                                                                                                                 |
+| Warning     | -ANALYZE                 | ... violates rule ... | Best Practice Analyzer results for rules of severity level 2.                                                                                                                                                          |
+| Error       | -ANALYZE                 | ... violates rule ... | Best Practice Analyzer results for rules of severity level 3 or higher.                                                                                                                                                |
+| Error       | -DEPLOY                  | Deployment failed! ...                                                | Failure reason returned directly from Analysis Service instance (for example: Database not found, Database override not allowed, etc.)                                              |
+| Information | -DEPLOY                  | Unprocessed object: ...                               | Objects that are in state "NoData" or "CalculationNeeded" after successful deployment. Use the -W switch to treat these as Level=Warning.                                                              |
+| Warning     | -DEPLOY                  | Object not in "Ready" state: ...                      | Objects that are in state "DependencyError", "EvaluationError" or "SemanticError" after successful deployment. If using the -W switch, also includes objects in state "NoData" or "CalculationNeeded". |
+| Warning     | -DEPLOY                  | Error on X:...                                        | Objects containing invalid DAX after successful deployment (measures, calculated columns, calculated tables, roles). Use the -E switch to treat these as Level=Error.               |
 
 If any of the "Error" level outputs are encountered, Tabular Editor will return Exit Code = 1. Otherwise 0.

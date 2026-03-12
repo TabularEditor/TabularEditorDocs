@@ -32,6 +32,7 @@ When a column is used in certain model structures, the Analysis Services engine 
 - **Unpredictable behavior**: Some queries work while others fail depending on client tool
 
 Columns need `IsAvailableInMDX = true` when they are:
+
 - Used in hierarchies as levels
 - Referenced as sort-by columns
 - Used in variations (alternate hierarchies)
@@ -60,13 +61,13 @@ and
 
 The rule checks these dependency collections:
 
-| Property | Description | Example Usage |
-|----------|-------------|---------------|
-| `UsedInHierarchies` | Hierarchies where column is a level | Product hierarchy levels |
-| `UsedInSortBy` | Columns using this as sort key | Month names sorted by month number |
-| `UsedInVariations` | Alternate hierarchies using column | Product variations |
-| `UsedInCalendars` | Calendar metadata references | Date table calendar definitions |
-| `SortByColumn` | Column sorts by another column | This column has a sort-by reference |
+| Property            | Description                         | Example Usage                       |
+| ------------------- | ----------------------------------- | ----------------------------------- |
+| `UsedInHierarchies` | Hierarchies where column is a level | Product hierarchy levels            |
+| `UsedInSortBy`      | Columns using this as sort key      | Month names sorted by month number  |
+| `UsedInVariations`  | Alternate hierarchies using column  | Product variations                  |
+| `UsedInCalendars`   | Calendar metadata references        | Date table calendar definitions     |
+| `SortByColumn`      | Column sorts by another column      | This column has a sort-by reference |
 
 ## How to Fix
 
@@ -79,8 +80,9 @@ IsAvailableInMDX = true
 ```
 
 To apply:
+
 1. In the **Best Practice Analyzer** select flagged objects
-3. Click **Apply Fix**
+2. Click **Apply Fix**
 
 ### Manual Fix
 

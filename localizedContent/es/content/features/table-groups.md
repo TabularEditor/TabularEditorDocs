@@ -82,6 +82,7 @@ If you prefer to always see the full, ungrouped list of tables in the TOM Explor
 
 > [!NOTE]
 > Even though you have disabled table groups as described above, tables in your model may still have the `TabularEditor_TableGroup` annotation assigned. If you wish to clear all such annotations from the model, you can use the following C# script:
+>
 > ```csharp
 > foreach(var table in Model.Tables) table.TableGroup = null;
 > ```

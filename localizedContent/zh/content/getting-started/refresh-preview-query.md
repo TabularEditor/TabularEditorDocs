@@ -16,13 +16,14 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Refreshing, previewing and querying data
 
 When Tabular Editor 3 is connected to an instance of Analysis Services, a number of additional **connected features** are available, allowing you to use Tabular Editor 3 as a client tool for Analysis Services.
 
 > [!NOTE]
 > The phrase "connected to an instance of Analysis Services" means any one of the following:
-> 
+>
 > - Loading a model in [**workspace mode**](xref:workspace-mode)
 > - Loading a model directly from SQL Server Analysis Services, Azure Analysis Services or the Power BI XMLA endpoint
 > - Using Tabular Editor 3 as an external tool for Power BI Desktop
@@ -65,7 +66,6 @@ You may also initiate a refresh at the model level through the **Model > Refresh
 
 While a refresh is in progress you can continue work on your data model, querying and previewing data or queueing new data refresh operations according to this article. However, you will not be able to save model changes to Analysis Services until the all data refresh operations complete.
 
-
 ## Supported refresh operations
 
 Tabular Editor 3 supports refresh operations on different object types. The supported refresh types are shown below:
@@ -86,7 +86,7 @@ At certain points during DAX authoring and data model development, you may need 
 
 You can open multiple such table previews and arrange them anyway you like in the user interface. In addition, you can sort or filter individual columns. There is no practical limit to the number of rows that can be previewed. Tabular Editor simply executes a [`TOPNSKIP`](https://dax.guide/topnskip) DAX query against the model, to return just a small number of records suitable to fill the current view.
 
-If one or more calculated columns are in an invalid state, those columns contain the text *(Calculation needed)*. You can recalculate the table by right-clicking on the column and choosing the **Recalculate table...** option.
+If one or more calculated columns are in an invalid state, those columns contain the text _(Calculation needed)_. You can recalculate the table by right-clicking on the column and choosing the **Recalculate table...** option.
 
 ![Recalculate Table](~/content/assets/images/recalculate-table.png)
 
@@ -129,7 +129,7 @@ A DAX query in Tabular Editor 3 is automatically refreshed when a change is made
 
 # Impersonation
 
-When querying the data in the model, it is sometimes useful to be able to impersonate a specific user or a combination of roles, to see what the behavior of the model from an end user perspective would be. Tabular Editor 3 allows you to impersonate a specific user or one or more roles, by clicking on the **Impersonate...** button. This applies to [Table previews](#previewing-table-data), [Pivot Grids](#pivot-grids) and [DAX queries](#dax-queries). 
+When querying the data in the model, it is sometimes useful to be able to impersonate a specific user or a combination of roles, to see what the behavior of the model from an end user perspective would be. Tabular Editor 3 allows you to impersonate a specific user or one or more roles, by clicking on the **Impersonate...** button. This applies to [Table previews](#previewing-table-data), [Pivot Grids](#pivot-grids) and [DAX queries](#dax-queries).
 
 > [!NOTE]
 > To impersonate a user, Tabular Editor adds the [`EffectiveUserName` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) to the connection string, when connecting to Analysis Services. To impersonate a role, Tabular Editor adds the [`Roles` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) to the connection string. This only applies to the data view (i.e. the DAX query, the Pivot Grid or the Table Preview) where the impersonation is specified.
@@ -142,7 +142,7 @@ Once the impersonation is enabled, the **Impersonation..** button is checked, an
 
 ![Impersonation Dropdown](~/content/assets/images/impersonation-dropdown.png)
 
-When auto-refresh is enabled on a data view, changing the impersonation will immediately refresh the view. 
+When auto-refresh is enabled on a data view, changing the impersonation will immediately refresh the view.
 
 ## CustomData
 
@@ -157,9 +157,10 @@ CustomData is commonly used in implementing dynamic row-level security when an a
 This feature is particularly useful in **Power BI Embedded** scenarios, where you can natively utilize CustomData to add row filters that pass free text (strings) to leverage dynamic row-level security in embedded reports, dashboards, and tiles.
 
 **Example use case:** You might pass a user's department or region as CustomData, and then use that value in a role's filter expression like:
+
 ```dax
 'Department'[DepartmentCode] = CUSTOMDATA()
-```   
+```
 
 # VertiPaq Analyzer
 

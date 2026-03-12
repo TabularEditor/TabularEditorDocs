@@ -1,4 +1,4 @@
-﻿---
+---
 uid: perspective-editor
 title: Perspective Editor
 author: Šarūnas Jučius
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Perspective Editor
 
 > [!NOTE]

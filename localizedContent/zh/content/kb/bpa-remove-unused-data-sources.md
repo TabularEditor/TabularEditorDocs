@@ -32,6 +32,7 @@ Unused data sources create unnecessary overhead:
 - **Documentation overhead**: Extra objects require explanation in model documentation
 
 Unused data sources typically result from:
+
 - Refactoring partitions to use different sources
 - Consolidating multiple sources into one
 - Removing tables without cleaning up their data sources
@@ -48,6 +49,7 @@ and not Model.AllPartitions.Any(Query.Contains(OuterIt.Name))
 ```
 
 In other words:
+
 1. No partitions directly reference the data source
 2. No table source expressions (M queries) reference the data source by name
 3. No partition queries contain the data source name
@@ -63,8 +65,9 @@ Delete()
 ```
 
 To apply:
+
 1. In the **Best Practice Analyzer** select flagged objects
-3. Click **Apply Fix**
+2. Click **Apply Fix**
 
 ### Manual Fix
 
@@ -76,6 +79,7 @@ To apply:
 ### Before Deleting
 
 Verify the data source is truly unused:
+
 - Check all partitions in all tables
 - Search M expressions for references to the data source name
 - Review custom expressions and calculated tables
@@ -106,6 +110,7 @@ Data Sources:
 ## False Positives
 
 The rule may flag data sources that are:
+
 - Referenced through dynamic M expressions using variables
 - Used in commented-out partition queries
 - Referenced by name in annotations or descriptions

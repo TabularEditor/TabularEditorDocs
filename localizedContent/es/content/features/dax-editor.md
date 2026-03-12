@@ -1,4 +1,4 @@
-﻿---
+---
 uid: dax-editor
 title: DAX Editor
 author: Daniel Otykier
@@ -16,11 +16,12 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # DAX Editor
 
 The **DAX Editor** is the centerpiece of Tabular Editor 3.
 
-It comes in three different *flavours*:
+It comes in three different _flavours_:
 
 - **Expression Editor** Used for making quick changes to singular DAX expressions on objects in the TOM Explorer.
 - **DAX Query** (Connected feature) Used for writing DAX queries in order to retrieve data from the connected instance of Analysis Services / Power BI.
@@ -70,7 +71,7 @@ If you want to bring the definition of a measure into the current document, the 
 
 The DAX Editor in Tabular Editor 3 automatically formats your code as you type, i.e. fixing casing of functions and object references, adding proper indentation and spaces between parentheses, etc. All of this can be configured under [**Tools > Preferences > Text Editors > DAX Editor > Auto Formatting**](xref:preferences#dax-editor--auto-formatting).
 
-However, sometimes it is necessary to format the entire document. This can be done by hitting [F6] or [Shift+F6] if you prefer more frequent line breaks. For DAX Queries, you may also use [Alt+F6] to reformat the code to always add commas at the front of a line, which is useful when debugging. 
+However, sometimes it is necessary to format the entire document. This can be done by hitting [F6] or [Shift+F6] if you prefer more frequent line breaks. For DAX Queries, you may also use [Alt+F6] to reformat the code to always add commas at the front of a line, which is useful when debugging.
 
 # Refactoring
 

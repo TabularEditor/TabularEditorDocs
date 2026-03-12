@@ -10,6 +10,7 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Implement User-defined Aggregations
 
 ## Script Purpose

@@ -1,4 +1,4 @@
-﻿---
+---
 uid: workspace-databases
 title: Introducing Workspace Databases
 applies_to:
@@ -14,7 +14,9 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 ## Introducing Workspace Databases
+
 Tabular Editor 3.0 supports editing model metadata loaded from disk with a simultaneous connection to a database deployed to an instance of Analysis Services. We call this database the _workspace database_. Going forward, this is the recommended approach to tabular modeling within Tabular Editor.
 
 This makes the development workflow a lot simpler, since you only need to hit Save (Ctrl+S) once, to simultaneously save your changes to the disk **and** update the metadata in the workspace database. This also has the advantage, that any error messages returned from Analysis Services, are immediately visible in Tabular Editor upon hitting Save. In a sense, this is similar to the way SSDT / Visual Studio or Power BI Desktop does, except that you are in control of when the workspace database is updated.
@@ -23,9 +25,9 @@ When you load a model from a Model.bim file or folder structure, you will see th
 
 ![image](https://user-images.githubusercontent.com/8976200/58166683-a65db180-7c8a-11e9-9df3-be9a716b3ad1.png)
 
-* **Yes**: Model metadata is loaded from disk and then immediately deployed to an instance of Analysis Services. Tabular Editor will then connect to the newly deployed database. The next time the same model is loaded from disk, Tabular Editor will redeploy and connect to the database automatically.
-* **No**: Model metadata is loaded from disk into Tabular Editor as usual, without connecting to an instance of Analysis Services.
-* **No, don't ask again**: Same as the option above, but Tabular Editor will not ask again the next time the same model is loaded.
+- **Yes**: Model metadata is loaded from disk and then immediately deployed to an instance of Analysis Services. Tabular Editor will then connect to the newly deployed database. The next time the same model is loaded from disk, Tabular Editor will redeploy and connect to the database automatically.
+- **No**: Model metadata is loaded from disk into Tabular Editor as usual, without connecting to an instance of Analysis Services.
+- **No, don't ask again**: Same as the option above, but Tabular Editor will not ask again the next time the same model is loaded.
 
 ### Setting up a Workspace Database
 

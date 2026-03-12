@@ -10,6 +10,7 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Convert Direct Lake on SQL to OneLake
 
 ## Script Purpose

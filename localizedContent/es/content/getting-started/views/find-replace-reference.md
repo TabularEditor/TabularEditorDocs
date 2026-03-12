@@ -1,4 +1,4 @@
-﻿---
+---
 uid: find-replace-reference
 title: Find/Replace
 author: Morten Lønskov
@@ -17,4 +17,5 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 [!include[using-bpa](../../features/views/find-replace.md)]

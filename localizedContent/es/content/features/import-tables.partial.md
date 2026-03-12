@@ -14,6 +14,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 Tabular Editor 3 includes a **Table Import Wizard** that helps you create a data source in your model and import tables/views from relational data sources such as a SQL Server database.
 
 ![Import Tables Wizard](~/content/assets/images/import-tables-wizard.png)
@@ -52,15 +53,15 @@ Currently, the following data sources are natively supported by Tabular Editor 3
 - Oracle
 - ODBC
 - OLE DB
-- Snowflake*
-- Power BI Dataflow*
-- Databricks*
-- Fabric Lakehouse*
-- Fabric Warehouse*
-- Fabric SQL Database*
-- Fabric Mirrored Database*
+- Snowflake\*
+- Power BI Dataflow\*
+- Databricks\*
+- Fabric Lakehouse\*
+- Fabric Warehouse\*
+- Fabric SQL Database\*
+- Fabric Mirrored Database\*
 
-*=These data sources are only supported as implicit data sources in Power BI data models. They are not available in SSAS / Azure AS.
+\*=These data sources are only supported as implicit data sources in Power BI data models. They are not available in SSAS / Azure AS.
 
 > [!TIP]
 > For more info about connecting to Azure Databricks, please see [Connecting to Azure Databricks](xref:connecting-to-azure-databricks).
@@ -94,7 +95,7 @@ If you change the preview mode to "Schema only" using the dropdown in the top le
 
 ![Confirm Selection](~/content/assets/images/confirm-selection.png)
 
-On the last page, confirm your selection and choose which type of partitions to create. For provider data sources, the default type of partition to be created is `SQL`, whereas for structured data sources, it is `M`. 
+On the last page, confirm your selection and choose which type of partitions to create. For provider data sources, the default type of partition to be created is `SQL`, whereas for structured data sources, it is `M`.
 
 ![Confirm Selection Direct Lake](~/content/assets/images/confirm-selection-direct-lake.png)
 

@@ -1,4 +1,4 @@
-﻿---
+---
 uid: direct-lake-sql-model
 title: Direct Lake on SQL Semantic Models
 author: Morten Lønskov
@@ -18,15 +18,16 @@ applies_to:
 ---
 
 # Direct Lake Semantic Models
-Direct Lake on SQL semantic models connect directly to data sources stored in [OneLake in Fabric](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview) through the SQL Endpoint. 
+
+Direct Lake on SQL semantic models connect directly to data sources stored in [OneLake in Fabric](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview) through the SQL Endpoint.
 
 > [!IMPORTANT]
 > As of [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md), Tabular Editor 3 supports Direct Lake on OneLake, which is recommended in most scenarios. See our [Direct Lake guidance](xref:direct-lake-guidance) article for more information.
 
-Tabular Editor 3 can create and connect to this type of model. For a tutorial on this please refer to our blog article: [Direct Lake semantic models: How to use them with Tabular Editor](https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/). 
-Tabular Editor 3 can create direct lake semantic models with both the Lakehouse and Datawarehouse SQL Endpoint. 
+Tabular Editor 3 can create and connect to this type of model. For a tutorial on this please refer to our blog article: [Direct Lake semantic models: How to use them with Tabular Editor](https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/).
+Tabular Editor 3 can create direct lake semantic models with both the Lakehouse and Datawarehouse SQL Endpoint.
 
-Tabular Editor 2 can connect to Direct Lake semantic models, but does not have any built in functionality to create new tables or direct lake semantic models. This needs to be done manually or with a C# script. 
+Tabular Editor 2 can connect to Direct Lake semantic models, but does not have any built in functionality to create new tables or direct lake semantic models. This needs to be done manually or with a C# script.
 
 <div class="NOTE">
   <h5>Direct Lake limitations</h5>
@@ -35,15 +36,15 @@ Tabular Editor 2 can connect to Direct Lake semantic models, but does not have a
 
 ## Creating a Direct Lake on SQL model in Tabular Editor 3
 
-Creating a Direct Lake on SQL model in Tabular Editor 3 (3.15.0 or higher) has to be specified when the model is created in the _New Model_ dialog box, by using the Direct Lake checkbox. 
+Creating a Direct Lake on SQL model in Tabular Editor 3 (3.15.0 or higher) has to be specified when the model is created in the _New Model_ dialog box, by using the Direct Lake checkbox.
 
 ![Direct Lake New Model](~/content/assets/images/common/DirectLakeNewModelDialog.png)
 
-Using the checkbox ensures that Direct Lake specific properties and annotations are set, as well as limits the import of tables to Direct Lake supported sources. 
+Using the checkbox ensures that Direct Lake specific properties and annotations are set, as well as limits the import of tables to Direct Lake supported sources.
 
 > [!NOTE]
 > Direct Lake on SQL models currently use a collation that is different from regular Power BI import semantic models. This may lead to different results when querying the model, or when referencing object names in DAX code.
- For more information please see this blog post by Kurt Buhler: [Case-sensitive models in Power BI: consequences & considerations](https://data-goblins.com/power-bi/case-specific)
+> For more information please see this blog post by Kurt Buhler: [Case-sensitive models in Power BI: consequences & considerations](https://data-goblins.com/power-bi/case-specific)
 
 > [!IMPORTANT]
 > As of [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md), the Direct Lake checkbox has been removed from the New Model dialog. You must [manually set the collation on your model to match that of your Fabric Warehouse](xref:direct-lake-guidance#collation) if using Direct Lake on SQL.
@@ -54,11 +55,9 @@ Tabular Editor 3 (3.15.0 or higher) automatically frames (refreshes) the model o
 
 Additionally, on import of new tables Tabular Editor 3 (3.15.0 or higher) frames (refreshes) the model when it is saved the next time. This preference is located under **Tools > Preferences > Model Deployment > Data Refresh**.
 
-
-
 ## Identifying a Direct Lake model
-The top title bar of Tabular Editor shows which type of model is open in that instance of Tabular Editor. Additionally, the TOM Explorer displays the type and mode of every table (Import, DirectQuery, Dual or Direct Lake). If a model contains a mix of table modes, the title bar will show "Hybrid". Currently, it is not possible for a Direct Lake on SQL model to contain tables in Import, DirectQuery or Dual mode.
 
+The top title bar of Tabular Editor shows which type of model is open in that instance of Tabular Editor. Additionally, the TOM Explorer displays the type and mode of every table (Import, DirectQuery, Dual or Direct Lake). If a model contains a mix of table modes, the title bar will show "Hybrid". Currently, it is not possible for a Direct Lake on SQL model to contain tables in Import, DirectQuery or Dual mode.
 
 ## Converting a Direct Lake model to Import Mode
 

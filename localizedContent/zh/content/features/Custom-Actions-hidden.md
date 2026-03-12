@@ -1,8 +1,10 @@
-﻿---
+---
 uid: custom-actions
 title: Custom Actions
 ---
+
 # Custom Actions
+
 > [!NOTE]
 > Please note that this functionality is unrelated to the Custom Actions feature available for Multidimensional models.
 
@@ -35,6 +37,7 @@ As you can see, `Name` and `Tooltip` gets their values from whatever was specifi
 The `ValidContexts` property holds a list of object types for which the Action will be available. When selecting objects in the tree, a selection containing any objects different from the types listed in the `ValidContexts` property will hide the action from the context menu.
 
 ## Controlling Action Availability
+
 If you need even more control on when an action can be invoked from the context menu, you can set the `Enabled` property to a custom expression that must return a boolean value, indicating whether the action will be available for the given selection. By default, the `Enabled` property has the value "true", which means that the action will always be enabled within the valid context. Keep this in mind, when using the singular object references on the `Selected` object, such as `Selected.Measure` or `Selected.Table`, as these will throw an error if the current selection does not contain exactly one of that type of object. In such a case, it is recommended to use the `Enabled` property to check that one and only one object of the required type, has been selected:
 
 ```json
@@ -53,6 +56,7 @@ If you need even more control on when an action can be invoked from the context 
 This will disable the context menu item, unless exactly one measure has been selected in the tree.
 
 ## Reusing custom actions
+
 Release 2.7 introduces a new script method `CustomAction(...)`, which may be called to invoke previously saved Custom Actions. You can use this method as a stand-alone method (similar to `Output(...)`), or you can use it as an extension method on any set of objects:
 
 ```csharp

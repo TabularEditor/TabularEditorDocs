@@ -1,4 +1,4 @@
-﻿---
+---
 uid: advanced-scripting
 title: Advanced Scripting
 applies_to:
@@ -11,13 +11,16 @@ applies_to:
 
 # Advanced Scripting
 
-This is an introduction to the Advanced Scripting capabilities of Tabular Editor. Information in this document is subject to change. Also, make sure to check out our script library @csharp-script-library, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor. 
+This is an introduction to the Advanced Scripting capabilities of Tabular Editor. Information in this document is subject to change. Also, make sure to check out our script library @csharp-script-library, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor.
+
 ## What is Advanced Scripting?
+
 The goal of the UI of Tabular Editor is to make it easy to perform most tasks commonly needed when building Tabular Models. For example, changing the Display Folder of multiple measures at once is just a matter of selecting the objects in the explorer tree and then dragging and dropping them around. The right-click context menu of the explorer tree provides a convenient way to perform many of these tasks, such as adding/removing objects from perspectives, renaming multiple objects, etc.
 
 There may be many other common workflow tasks, which are not as easily performed through the UI however. For this reason, Tabular Editor introduces Advanced Scripting, which lets advanced users write a script using C# syntax, to more directly manipulate the objects in the loaded Tabular Model.
 
 ## Objects
+
 The [scripting API](xref:api-index) provides access to two top-level objects, `Model` and `Selected`. The former contains methods and properties that allow you to manipulate all objects in the Tabular Model, whereas the latter exposes only objects that are currently selected in the explorer tree.
 
 The `Model` object is a wrapper of the [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) class, exposing a subset of its properties, with some additional methods and properties for easier operations on translations, perspectives and object collections. The same applies to any descendant objects, such as Table, Measure, Column, etc. which all have corresponding wrapper objects. Please see <xref:api-index> for a complete listing of objects, properties and methods in the Tabular Editor wrapper library.
@@ -25,6 +28,7 @@ The `Model` object is a wrapper of the [Microsoft.AnalysisServices.Tabular.Model
 The main advantage of working through this wrapper is, that all changes will be undoable from the Tabular Editor UI. Simply press CTRL+Z after executing a script, and you will see that all changes made by the script are immediately undone. Furthermore, the wrapper provides convenient methods that turn many common tasks into simple one-liners. We will provide some examples below. It is assumed that the reader is already somewhat familiar with C# and LINQ, as these aspects of Tabular Editors scripting capabilities will not be covered here. Users unfamiliar with C# and LINQ should still be able to follow the examples given below.
 
 ## Setting object properties
+
 If you want to change a property of one object in particular, obviously the easiest way to do so would be directly through the UI. But as an example, let us see how we could achieve the same thing through scripting.
 
 Say you want to change the Format String of your [Sales Amount] measure in the 'FactInternetSales' table. If you locate the measure in the explorer tree, you can simply drag it onto the script editor. Tabular Editor will then generate the following code, which represents this particular measure in the Tabular Object Model:
@@ -45,15 +49,16 @@ Model.Tables["FactInternetSales"].Measures["Sales Amount"].DisplayFolder = "New 
 Hit F5 or the "Play" button above the script editor to execute the script. Immediately, you should see the measure moving around in the explorer tree, reflecting the changed Display Folder. If you examine the measure in the Property Grid, you should also see that the Format String property has changed accordingly.
 
 ### Working with multiple objects at once
+
 Many objects in the object model, are actually collections of multiple objects. For example, each Table object has a Measures collection. The wrapper exposes a series of convenient properties and methods on these collections, to make it easy to set the same property on multiple objects at once. This is described in detail below. Additionally, you may use all the standard LINQ extension methods to filter and browse the objects of a collection.
 
 Below is a few examples of the most commonly used LINQ extension methods:
 
-* `Collection.First([predicate])` Returns the first object in the collection satisfying the optional [predicate] condition.
-* `Collection.Any([predicate])` Returns true if the collection contains any objects (optionally satisfying the [predicate] condition).
-* `Collection.Where(predicate)` Returns a collection that is the original collection filtered by the predicate condition.
-* `Collection.Select(map)` Projects each object in the collection into another object according to the specified map.
-* `Collection.ForEach(action)` Performs the specified action on each element in the collection.
+- `Collection.First([predicate])` Returns the first object in the collection satisfying the optional [predicate] condition.
+- `Collection.Any([predicate])` Returns true if the collection contains any objects (optionally satisfying the [predicate] condition).
+- `Collection.Where(predicate)` Returns a collection that is the original collection filtered by the predicate condition.
+- `Collection.Select(map)` Projects each object in the collection into another object according to the specified map.
+- `Collection.ForEach(action)` Performs the specified action on each element in the collection.
 
 In the above examples, `predicate` is a lambda expression that takes a single object as input, and returns a boolean value as output. For example, if `Collection` is a collection of measures, a typical `predicate` could look like:
 
@@ -75,6 +80,7 @@ Going back to the examples above, `map` is a lambda expression that takes a sing
 Use the IntelliSense functionality of the Advanced Script editor to see what other LINQ methods exist, or refer to the [LINQ-to-Objects documentation](https://msdn.microsoft.com/en-us/library/9eekhta0.aspx).
 
 ## Working with the **Model** object
+
 To quickly reference any object in the currently loaded Tabular Model, you can drag and drop the object from the explorer tree and into the Advanced Scripting editor:
 
 ![Dragging and dropping an object into the Advanced Scripting editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/DragDropTOM.gif)
@@ -82,6 +88,7 @@ To quickly reference any object in the currently loaded Tabular Model, you can d
 Please refer to the [TOM documentation](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) for an overview of which properties exist on the Model and its descendant objects. Additionally, refer to <xref:api-index> for a complete listing of the properties and methods exposed by the wrapper object.
 
 ## Working with the **Selected** object
+
 Being able to explicitly refer to any object in the Tabular Model is great for some workflows, but sometimes you want to cherry pick objects from the explorer tree, and then execute a script against only the selected objects. This is where the `Selected` object comes in handy.
 
 The `Selected` object provides a range of properties that make it easy to identify what is currently selected, as well as limiting the selection to objects of a particular type. When browsing with Display Folders, and one or more folders are selected in the explorer tree, all their child items are considered to be selected as well.
@@ -123,28 +130,30 @@ Selected.Measures
 ```
 
 ## Helper methods
+
 To make debugging scripts easier, Tabular Editor provides a set of special helper methods. Internally, these are static methods decorated with the `[ScriptMethod]`-attribute. This attribute allows scripts to call the methods directly, without the need to specify a namespace or class name. Plugins may also use the `[ScriptMethod]` attribute to expose public static methods for scripting in a similar way.
 
 As of 2.7.4, Tabular Editor provides the following script methods. Note that some of these may be invoked as extension methods. For example, `object.Output();` and `Output(object);` are equivalent.
 
-* `Output(object);` - displays detailed information about the specified object or collection of objects in a popup dialog. When executed through the UI, the user has an option to ignore additional popups. When executed through the CLI, the information is outputted to the console.
-* `SaveFile(filePath, content);` - convenient way to save text data to a file.
-* `ReadFile(filePath);` - convenient way to load text data from a file.
-* `ExportProperties(objects, properties);` - convenient way to export a set of properties from multiple objects as a TSV string.
-* `ImportProperties(tsvData);` - convenient way to load properties into multiple objects from a TSV string.
-* `CustomAction(name);` - invoke a Custom Action by name.
-* `CustomAction(objects, name);` - invoke a Custom Action on the specified objects.
-* `ConvertDax(dax, useSemicolons);` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
-* `FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
-* `FormatDax(IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
-* `CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
-* `Info(string);` - Displays an informational message in a popup dialog. When the script is running in the CLI, an information message is written to the console.
-* `Warning(string);` - Displays a warning message in a popup dialog. When the script is running in the CLI, a warning message is written to the console.
-* `Error(string);` - Displays an error message in a popup dialog. When the script is running in the CLI, an error message is written to the console.
+- `Output(object);` - displays detailed information about the specified object or collection of objects in a popup dialog. When executed through the UI, the user has an option to ignore additional popups. When executed through the CLI, the information is outputted to the console.
+- `SaveFile(filePath, content);` - convenient way to save text data to a file.
+- `ReadFile(filePath);` - convenient way to load text data from a file.
+- `ExportProperties(objects, properties);` - convenient way to export a set of properties from multiple objects as a TSV string.
+- `ImportProperties(tsvData);` - convenient way to load properties into multiple objects from a TSV string.
+- `CustomAction(name);` - invoke a Custom Action by name.
+- `CustomAction(objects, name);` - invoke a Custom Action on the specified objects.
+- `ConvertDax(dax, useSemicolons);` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
+- `FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
+- `FormatDax(IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
+- `CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
+- `Info(string);` - Displays an informational message in a popup dialog. When the script is running in the CLI, an information message is written to the console.
+- `Warning(string);` - Displays a warning message in a popup dialog. When the script is running in the CLI, a warning message is written to the console.
+- `Error(string);` - Displays an error message in a popup dialog. When the script is running in the CLI, an error message is written to the console.
 
 You can find an updated list of all helper methods [here](xref:script-helper-methods).
 
 ### Debugging scripts
+
 As mentioned above, you can use the `Output(object);` method to pause script execution, and open a dialog box with information about the passed object. You can also use this method as an extension method, invoking it as `object.Output();`. The script is resumed when the dialog is closed.
 
 The dialog will appear in one of four different ways, depending on the kind of object being output:

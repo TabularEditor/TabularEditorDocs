@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Semantic Bridge Validation
 
 <!--
@@ -176,7 +177,6 @@ Because [a loaded Metric View is accessible in multiple scripts](xref:semantic-b
 See the image below, where the script on the left, "load-mv.csx" has already been run, to load a Metric View to Tabular Editor.
 Then, the second script, on the right, "run-rules.csx", is run second to validate.
 This second script could be one that you keep around for all of your Metric Views.
-
 
 ![output from one field violating the more complex validation rule](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation3.png)
 

@@ -14,7 +14,9 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 ## Hierarchical display
+
 Objects of the loaded model are shown in the TOM Explorer Tree. By default, all object types (visible tables, roles, relationships, etc.) are shown. If you only want to see tables, measures, columns and hierarchies, go to the "View" menu and toggle off "Show all object types".
 
 ![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AllObjectTypes.png)

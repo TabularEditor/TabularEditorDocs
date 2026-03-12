@@ -1,4 +1,4 @@
-﻿---
+---
 uid: preferences
 title: Controlling preferences
 author: Daniel Otykier
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Tabular Editor 3 Preferences
 
 Tabular data model development processes and workflows differ greatly from organization to organization. To ensure that the tool can fit into as many of these workflows as possible, Tabular Editor 3 is highly customizable - not just in terms of the user interface's look and feel, but also on more advanced topics such as web proxies, updates and feedback, row limits, timeouts, schema compare preferences, etc.
@@ -36,19 +37,19 @@ To access the preferences dialog, go to **Tools > Preferences**.
 
 ### Power BI
 
-##### *Allow unsupported editing* (disabled)
+##### _Allow unsupported editing_ (disabled)
 
 This option is only relevant when Tabular Editor 3 is used as an external tool for Power BI Desktop. When checked, all TOM data modeling properties are available for editing when connected to an instance of Power BI Desktop. It's generally recommended to leave this unchecked, to make sure that you do not accidentally make changes to your Power BI file, [that are not supported by Power BI Desktop](xref:desktop-limitations).
 
-##### *Hide auto date/time warnings* (disabled)
+##### _Hide auto date/time warnings_ (disabled)
 
 When checked, warnings about Power BI auto date/time tables will be suppressed. These warnings appear when the "Auto date/time" setting in Power BI Desktop is enabled, which creates calculated tables that trigger warnings in Tabular Editor 3's built-in DAX analyzer.
 
-##### *Line break on first line of DAX* (disabled)
+##### _Line break on first line of DAX_ (disabled)
 
 In Power BI Desktop it is common to insert a line break on the first line of a DAX expression, due to the way the formula bar displays the DAX code. If you often switch back and forth between Tabular Editor and Power BI Desktop, consider enabling this option to have Tabular Editor 3 insert the line break automatically.
 
-##### *Default Power BI authentication mode* (Integrated)
+##### _Default Power BI authentication mode_ (Integrated)
 
 Select the default authentication method (Integrated, ServicePrincipal, or MasterUser) to use when connecting to Power BI datasets.
 
@@ -56,19 +57,19 @@ Select the default authentication method (Integrated, ServicePrincipal, or Maste
 
 These settings control the behavior of Tabular Editor 3 when model metadata is loaded from a database on an instance of Analysis Services. The settings specify how Tabular Editor 3 should deal with metadata changes applied to the database from outside the application.
 
-##### *Warn when local metadata is out-of-sync with deployed model* (enabled)
+##### _Warn when local metadata is out-of-sync with deployed model_ (enabled)
 
 When checked, an information bar is displayed inside Tabular Editor, whenever you have made local changes to the model that have not yet been saved to Analysis Services. For example, if you're wondering why a DAX query or a Pivot Grid does not produce the expected result, this could be due to a measure expression being changed in Tabular Editor without saving the change to Analysis Services. The bar disappears when you hit save (Ctrl+S).
 
-##### *Track external model changes* (enabled)
+##### _Track external model changes_ (enabled)
 
 Just like Power BI Desktop can detect when an external tool makes a change to the data model, so too can Tabular Editor. This option is only relevant for local instances of Analysis Services (i.e. msmdsrv.exe processes running on the same machine as Tabular Editor). When checked, Tabular Editor starts a trace on Analysis Services and notifies you if external changes are made.
 
-##### *Refresh local Tabular Object Model metadata automatically* (enabled)
+##### _Refresh local Tabular Object Model metadata automatically_ (enabled)
 
 When the tracing mechanism as described above is enabled, this option allows Tabular Editor to automatically refresh the model metadata when an external change is detected. This is useful if you often switch back and forth between Power BI Desktop and Tabular Editor 3.
 
-##### *Cleanup orphaned Tabular Editor traces*
+##### _Cleanup orphaned Tabular Editor traces_
 
 Normally, Tabular Editor 3 should automatically stop and remove any AS traces started due to the settings above. However, if the application was shut down prematurely, the traces may never be stopped. By clicking this button, all AS traces started by any instance of Tabular Editor will be removed.
 
@@ -77,27 +78,27 @@ Normally, Tabular Editor 3 should automatically stop and remove any AS traces st
 
 ### Best Practice Analyzer
 
-##### *Scan for Best Practice violations in the background* (enabled)
+##### _Scan for Best Practice violations in the background_ (enabled)
 
 If unchecked, you will have to explicitly run a Best Practice Analysis from inside the Best Practice Analyzer tool window, to view if there are any violations. If checked, the scan happens continuously on a background thread whenever changes are made. For very large models, or models with very complex Best Practice rules, this may cause issues.
 
-##### *Built-in BPA rules* (enabled for new users)
+##### _Built-in BPA rules_ (enabled for new users)
 
 Choose whether to enable, disable, or be prompted about using Tabular Editor's built-in Best Practice Analyzer rules. The built-in rules cover key best practices across formatting, metadata, model layout, DAX expressions, and translations. New installations will have built-in rules enabled by default.
 
 ### DAX Formula Fix-up
 
-##### *Enable formula fix-up* (enabled)
+##### _Enable formula fix-up_ (enabled)
 
 Automatically adjusts references in DAX expressions when objects are renamed or moved. This feature ensures that your DAX code remains valid when you reorganize your model.
 
-##### *Enable formula fix-up on paste* (enabled)
+##### _Enable formula fix-up on paste_ (enabled)
 
 Automatically adjusts references in DAX expressions when pasting objects. This is useful when copying measures or calculated columns between tables or models.
 
 ### Direct Lake
 
-##### *Auto-refresh on save* (enabled)
+##### _Auto-refresh on save_ (enabled)
 
 Automatically refresh Direct Lake tables when saving changes to ensure data is current. This ensures that your Direct Lake model stays in sync with the underlying data source.
 
@@ -105,19 +106,19 @@ Automatically refresh Direct Lake tables when saving changes to ensure data is c
 
 ![Placeholder: Screenshot of Updates and Feedback preferences page]
 
-##### *Check for updates on start-up* (enabled)
+##### _Check for updates on start-up_ (enabled)
 
 When checked, Tabular Editor will check for new versions when the application starts. This ensures you stay up to date with the latest features and bug fixes.
 
-##### *Check for major updates only* (disabled)
+##### _Check for major updates only_ (disabled)
 
 When checked, only major version updates will trigger notifications. Minor and patch updates will be ignored.
 
-##### *Help improve Tabular Editor by collecting anonymous usage data* (enabled)
+##### _Help improve Tabular Editor by collecting anonymous usage data_ (enabled)
 
 Data does not contain any personally identifiable information, nor any information about the structure or content of your data models. If you would still like to opt out of telemetry, uncheck this.
 
-##### *Send error reports* (enabled)
+##### _Send error reports_ (enabled)
 
 In cases of crashes, Tabular Editor displays an option for sending a crash report when this is checked. Crash reports are very helpful when debugging, so please leave this checked if you don't mind!
 
@@ -127,51 +128,51 @@ In cases of crashes, Tabular Editor displays an option for sending a crash repor
 
 Configure which types of objects are deployed by default when using the deployment wizard:
 
-##### *Deploy data sources* (disabled)
+##### _Deploy data sources_ (disabled)
 
 Include data source definitions when deploying. Enable this if you want data source connection strings and settings to be deployed along with your model changes.
 
-##### *Deploy partitions* (disabled)
+##### _Deploy partitions_ (disabled)
 
 Include partition definitions when deploying. Enable this if you want partition configurations to be deployed along with your model changes.
 
-##### *Deploy refresh policy partitions* (disabled)
+##### _Deploy refresh policy partitions_ (disabled)
 
 Include incremental refresh policy partitions when deploying. This controls whether partitions created by incremental refresh policies are deployed.
 
-##### *Deploy model roles* (disabled)
+##### _Deploy model roles_ (disabled)
 
 Include role definitions when deploying. Enable this if you want Row-Level Security (RLS) and Object-Level Security (OLS) roles to be deployed.
 
-##### *Deploy model role members* (disabled)
+##### _Deploy model role members_ (disabled)
 
 Include role member assignments when deploying. Enable this if you want user and group assignments to security roles to be deployed.
 
-##### *Deploy shared expressions* (disabled)
+##### _Deploy shared expressions_ (disabled)
 
 Include shared expressions (M expressions) when deploying. Enable this if you want Power Query shared expressions to be deployed.
 
 ### Deployment Metadata
 
-##### *Annotate deployment metadata* (disabled)
+##### _Annotate deployment metadata_ (disabled)
 
 Add deployment timestamp and user information as annotations on deployed objects. This can be useful for tracking when and by whom model changes were deployed.
 
 ### Backup Settings
 
-##### *Backup on save* (enabled)
+##### _Backup on save_ (enabled)
 
 Create a backup of the model when saving changes locally. This provides a safety net in case you need to revert changes.
 
-##### *Save backup location*
+##### _Save backup location_
 
 Specify the folder where save backups are stored. By default, backups are not created unless a location is specified.
 
-##### *Backup on deploy* (enabled)
+##### _Backup on deploy_ (enabled)
 
 Create a backup of the target model before deploying changes. This allows you to restore the previous version if needed.
 
-##### *Backup location*
+##### _Backup location_
 
 Specify the folder where deployment backups are stored. By default, backups are not created unless a location is specified.
 
@@ -179,27 +180,27 @@ Specify the folder where deployment backups are stored. By default, backups are 
 
 ![Placeholder: Screenshot of Defaults preferences page]
 
-##### *New model compatibility level* (1600)
+##### _New model compatibility level_ (1600)
 
 Set the default compatibility level for newly created models. Compatibility level 1600 corresponds to SQL Server 2022 and Power BI.
 
-##### *Use latest compatibility level as default* (enabled)
+##### _Use latest compatibility level as default_ (enabled)
 
 Automatically use the latest available compatibility level for new models. When enabled, this overrides the specific compatibility level setting above.
 
-##### *New models use workspace database* (enabled)
+##### _New models use workspace database_ (enabled)
 
 When creating a new model, automatically create a workspace database on Analysis Services. This allows you to immediately test and query your model during development.
 
-##### *Default save mode* (AlwaysAsk)
+##### _Default save mode_ (AlwaysAsk)
 
 Choose whether to always save as a file (.bim), folder (multiple JSON files), TMDL (Tabular Model Definition Language), or always ask when saving. Options: AlwaysAsk, File, Folder, TMDL.
 
-##### *Use PBIX file name when saving to disk* (enabled)
+##### _Use PBIX file name when saving to disk_ (enabled)
 
 When saving a model loaded from a PBIX file, use the PBIX filename as the default. This maintains naming consistency between Power BI files and saved model metadata.
 
-##### *Create user options for new models* (enabled)
+##### _Create user options for new models_ (enabled)
 
 Automatically create .tmuo (Tabular Model User Options) files for new models. These files store user-specific settings like diagram layouts and window positions.
 
@@ -215,47 +216,47 @@ Configure keyboard shortcuts for all Tabular Editor commands. Use the search fun
 
 Control which objects and properties are visible in the TOM (Tabular Object Model) Explorer:
 
-##### *Display folders* (enabled)
+##### _Display folders_ (enabled)
 
 Show or hide display folder groupings. When enabled, objects are organized into their display folder hierarchy.
 
-##### *Hidden objects* (disabled)
+##### _Hidden objects_ (disabled)
 
 Show or hide objects marked as hidden in the model. Enable this if you need to work with hidden tables, columns, or measures.
 
-##### *All object types* (enabled)
+##### _All object types_ (enabled)
 
 Show all object types in the explorer tree. When disabled, only the most common object types are shown.
 
-##### *Sort alphabetically* (enabled)
+##### _Sort alphabetically_ (enabled)
 
 Sort objects alphabetically instead of by creation order. This makes it easier to find specific objects in large models.
 
-##### *Show measures* (enabled)
+##### _Show measures_ (enabled)
 
 Display measures in the explorer tree.
 
-##### *Show columns* (enabled)
+##### _Show columns_ (enabled)
 
 Display columns in the explorer tree.
 
-##### *Show hierarchies* (enabled)
+##### _Show hierarchies_ (enabled)
 
 Display hierarchies in the explorer tree.
 
-##### *Show partitions* (enabled)
+##### _Show partitions_ (enabled)
 
 Display partitions in the explorer tree.
 
-##### *Show metadata information* (disabled)
+##### _Show metadata information_ (disabled)
 
 Display additional metadata properties in tooltips and property grid. This includes information like lineage tags, creation timestamps, and other technical metadata.
 
-##### *Show full branch* (disabled)
+##### _Show full branch_ (disabled)
 
 When filtering the TOM Explorer, by default Tabular Editor 3 shows all items in the hierarchy that matches the filter string, including their parents. If you want to see all child items as well (even though these might not match the filter string), enable this option.
 
-##### *Always show delete warnings* (disabled)
+##### _Always show delete warnings_ (disabled)
 
 If you prefer Tabular Editor 3 to prompt you to confirm all object deletions, enable this setting. Otherwise, Tabular Editor 3 will only prompt you to confirm multi-object deletions, or deletions of objects that are referenced by other objects.
 
@@ -272,19 +273,19 @@ Configure which columns are visible in multi-column views and their display orde
 
 Control what metadata is included when copying objects:
 
-##### *Include translations* (enabled)
+##### _Include translations_ (enabled)
 
 Copy translation metadata with objects. When enabled, any translations defined for the copied object will also be copied.
 
-##### *Include perspectives* (enabled)
+##### _Include perspectives_ (enabled)
 
 Copy perspective membership with objects. When enabled, the copied object will belong to the same perspectives as the original.
 
-##### *Include RLS* (enabled)
+##### _Include RLS_ (enabled)
 
 Copy Row-Level Security expressions with objects. This applies when copying tables that have RLS rules defined.
 
-##### *Include OLS* (enabled)
+##### _Include OLS_ (enabled)
 
 Copy Object-Level Security settings with objects. This applies when copying objects that have OLS restrictions.
 
@@ -294,19 +295,19 @@ Copy Object-Level Security settings with objects. This applies when copying obje
 
 Control how perspective membership is handled:
 
-##### *Inherit perspective membership for new objects* (disabled)
+##### _Inherit perspective membership for new objects_ (disabled)
 
 Newly created objects automatically inherit perspective membership from their parent. For example, a new measure would automatically be added to the same perspectives as its parent table.
 
-##### *Inherit perspective membership for relocated objects* (disabled)
+##### _Inherit perspective membership for relocated objects_ (disabled)
 
 Objects that are moved inherit perspective membership from their new parent. This is useful when reorganizing your model structure.
 
-##### *Inherit when adding table to perspective* (enabled)
+##### _Inherit when adding table to perspective_ (enabled)
 
 Automatically add all table objects (columns, measures, hierarchies) when a table is added to a perspective.
 
-##### *Inherit when removing table from perspective* (enabled)
+##### _Inherit when removing table from perspective_ (enabled)
 
 Automatically remove all table objects when a table is removed from a perspective.
 
@@ -316,23 +317,23 @@ Automatically remove all table objects when a table is removed from a perspectiv
 
 Configure which changes are ignored during schema comparison when updating table schemas:
 
-##### *Ignore Import mode changes* (disabled)
+##### _Ignore Import mode changes_ (disabled)
 
 Don't flag changes to Import mode properties. Enable this if you want to ignore changes between Import, DirectQuery, and Dual modes during schema comparison.
 
-##### *Ignore data type changes* (disabled)
+##### _Ignore data type changes_ (disabled)
 
 Don't flag column data type changes. Enable this if you want to ignore data type changes during schema comparison.
 
-##### *Ignore description changes* (disabled)
+##### _Ignore description changes_ (disabled)
 
 Don't flag changes to object descriptions. Enable this if you don't want to see description changes in the schema comparison.
 
-##### *Ignore decimal to double changes* (disabled)
+##### _Ignore decimal to double changes_ (disabled)
 
 Don't flag changes between decimal and double data types. This is useful when working with data sources that don't distinguish between these types.
 
-##### *Prioritize Analysis Services schema detector* (disabled)
+##### _Prioritize Analysis Services schema detector_ (disabled)
 
 Use Analysis Services metadata as the source of truth for schema detection. When enabled, Tabular Editor will query the Analysis Services instance directly instead of using the data source provider's schema information.
 
@@ -342,79 +343,79 @@ Use Analysis Services metadata as the source of truth for schema detection. When
 
 ### Serialization Mode
 
-##### *Use TMDL format* (disabled)
+##### _Use TMDL format_ (disabled)
 
 Save model metadata using the Tabular Model Definition Language (TMDL) format instead of JSON. TMDL is the modern format recommended for version control and collaboration.
 
-##### *Use recommended serialization settings* (enabled)
+##### _Use recommended serialization settings_ (enabled)
 
 Apply recommended settings for folder-based serialization (overrides custom settings). When enabled, Tabular Editor uses best practices for saving models to folders, optimized for version control.
 
 ### Legacy (JSON) Serialization Settings
 
-##### *Prefix filenames* (disabled)
+##### _Prefix filenames_ (disabled)
 
 Add numeric prefixes to filenames for ordering. This can help maintain a consistent file order in file explorers.
 
-##### *Local relationships* (enabled)
+##### _Local relationships_ (enabled)
 
 Store relationship definitions with individual tables instead of in a central location. This makes it easier to see which relationships belong to each table when using version control.
 
-##### *Local perspectives* (enabled)
+##### _Local perspectives_ (enabled)
 
 Store perspective membership with individual objects instead of in a central location. This reduces merge conflicts in version control.
 
-##### *Local translations* (enabled)
+##### _Local translations_ (enabled)
 
 Store translations with individual objects instead of in a central location. This reduces merge conflicts in version control.
 
-##### *Levels*
+##### _Levels_
 
 Select which object types to serialize at different folder levels. This allows you to organize your model files into a hierarchical structure.
 
-##### *Ignore inferred objects* (enabled)
+##### _Ignore inferred objects_ (enabled)
 
 Don't serialize objects that are automatically inferred by the engine. This reduces clutter in saved metadata.
 
-##### *Ignore inferred properties* (enabled)
+##### _Ignore inferred properties_ (enabled)
 
 Don't serialize properties that are automatically inferred by the engine. This keeps saved metadata clean and focused on explicitly set values.
 
-##### *Ignore timestamps* (enabled)
+##### _Ignore timestamps_ (enabled)
 
 Don't serialize timestamp metadata. This is highly recommended for version control as it prevents unnecessary changes in every commit.
 
-##### *Ignore lineage tags* (disabled)
+##### _Ignore lineage tags_ (disabled)
 
 Don't serialize Power BI lineage tag metadata. Enable this if you don't want lineage information in your saved metadata.
 
-##### *Ignore privacy settings* (disabled)
+##### _Ignore privacy settings_ (disabled)
 
 Don't serialize data source privacy settings. Enable this if you manage privacy settings separately.
 
-##### *Include sensitive data* (disabled)
+##### _Include sensitive data_ (disabled)
 
 Include sensitive information like passwords in serialized metadata. This is not recommended for security reasons.
 
-##### *Ignore incremental refresh partitions* (disabled)
+##### _Ignore incremental refresh partitions_ (disabled)
 
 Don't serialize partitions created by incremental refresh policies. Enable this if you want incremental refresh to be managed separately from your saved metadata.
 
-##### *Split multiline strings* (enabled)
+##### _Split multiline strings_ (enabled)
 
 Split long string values across multiple lines for better readability in version control. This makes it easier to see changes in DAX expressions and other long text properties.
 
-##### *Sort arrays* (disabled)
+##### _Sort arrays_ (disabled)
 
 Sort array elements alphabetically for consistent serialization. This can reduce meaningless differences in version control, but may change the logical order of some elements.
 
 ### TMDL Serialization Settings
 
-##### *Indentation mode* (tabs)
+##### _Indentation mode_ (tabs)
 
 Choose between tabs or spaces for indentation in TMDL files. Tabs are the default and recommended option.
 
-##### *Indentation spaces* (4)
+##### _Indentation spaces_ (4)
 
 When using spaces, specify the number of spaces per indentation level.
 
@@ -422,30 +423,31 @@ When using spaces, specify the number of spaces per indentation level.
 
 ![Placeholder: Screenshot of Data Browsing General preferences page]
 
-##### *Auto-refresh data preview* (enabled)
+##### _Auto-refresh data preview_ (enabled)
 
 Automatically refresh table preview windows when model changes are saved. This feature is super-useful when debugging - update an expression in one window while having a data preview open in another. Whenever you hit CTRL+S, the preview is automatically refreshed.
 
-##### *Auto-execute DAX queries* (enabled)
+##### _Auto-execute DAX queries_ (enabled)
 
 Automatically execute DAX queries when model changes are saved. Similar to auto-refresh data preview, this allows you to see the immediate impact of changes to measures or calculated columns.
 
-##### *DAX query smart selection* (enabled)
+##### _DAX query smart selection_ (enabled)
 
 When executing a partial selection in a DAX query, intelligently determine the query context. This allows you to execute just a portion of your query for testing.
 
-##### *Keep filtering and sorting in DAX query results* (WhenQueryUnchanged)
+##### _Keep filtering and sorting in DAX query results_ (WhenQueryUnchanged)
 
 Control whether to preserve grid filters and sorting when re-executing queries:
+
 - **Never**: Sorting and filtering are always reset when a query is executed
 - **WhenQueryUnchanged**: Sorting and filtering are reset only when the query is modified
 - **Always**: Sorting and filtering are never reset if the columns still exist
 
-##### *Direct query max rows* (100)
+##### _Direct query max rows_ (100)
 
 Maximum number of rows to retrieve in Direct Query mode. Adjust this if you need to preview more data, but be mindful of performance.
 
-##### *DAX query max rows* (1000)
+##### _DAX query max rows_ (1000)
 
 Maximum number of rows to retrieve for DAX queries. Increase this if you need to analyze larger result sets.
 
@@ -453,32 +455,33 @@ Maximum number of rows to retrieve for DAX queries. Increase this if you need to
 
 ![Placeholder: Screenshot of Pivot Grid preferences page]
 
-##### *Auto-refresh pivot grid* (enabled)
+##### _Auto-refresh pivot grid_ (enabled)
 
 Automatically refresh pivot grids when model changes are saved. Just like with DAX queries, this allows you to immediately see the impact of changes to measures.
 
-##### *Pivot grid customization default layout* (StackedDefault)
+##### _Pivot grid customization default layout_ (StackedDefault)
 
 Choose the default layout for the pivot grid field list. Options include:
+
 - **StackedDefault**: Fields and areas in a single stacked panel
 - **StackedSideBySide**: Fields and areas in side-by-side panels
 - **TopPanelOnly**: Field list at the top only
 - **BottomPanelOnly2by2**: Field list in a 2x2 grid at the bottom
 - **BottomPanelOnly1by4**: Field list in a 1x4 layout at the bottom
 
-##### *Show all fields in pivot customization* (enabled)
+##### _Show all fields in pivot customization_ (enabled)
 
 Display all available fields in the pivot grid field list by default, including hidden fields.
 
-##### *Pivot header word wrap* (enabled)
+##### _Pivot header word wrap_ (enabled)
 
 Enable word wrapping in pivot grid headers. This makes long field names more readable.
 
-##### *Warn if pivot grid fields mismatch* (enabled)
+##### _Warn if pivot grid fields mismatch_ (enabled)
 
 Show a warning when pivot grid field definitions don't match the current model. This can happen if you've deleted or renamed fields used in a saved pivot grid.
 
-##### *Always show pivot grid field list* (enabled)
+##### _Always show pivot grid field list_ (enabled)
 
 Keep the pivot grid field list visible by default. Disable this if you prefer more screen space for the pivot grid itself.
 
@@ -488,41 +491,41 @@ Keep the pivot grid field list visible by default. Disable this if you prefer mo
 
 Tabular Editor 3's DAX editor is highly configurable. This page provides settings for general configuration of the DAX editor:
 
-##### *Line numbers* (enabled)
+##### _Line numbers_ (enabled)
 
 Display line numbers in the left margin of the editor.
 
-##### *Code folding* (enabled)
+##### _Code folding_ (enabled)
 
 Enable collapsible regions in DAX code for better readability. Make sure you try out this feature!
 
-##### *Visible whitespace* (disabled)
+##### _Visible whitespace_ (disabled)
 
 Show dots for spaces and arrows for tabs. This can be helpful when diagnosing indentation issues.
 
-##### *Indentation guides* (enabled)
+##### _Indentation guides_ (enabled)
 
 Display vertical lines to show indentation levels.
 
-##### *Use tabs* (disabled)
+##### _Use tabs_ (disabled)
 
-When checked, a tab character (`\t`) is inserted whenever the TAB button is hit. Otherwise, a number of spaces corresponding to the *Indent width* setting is inserted.
+When checked, a tab character (`\t`) is inserted whenever the TAB button is hit. Otherwise, a number of spaces corresponding to the _Indent width_ setting is inserted.
 
-##### *Comment style* (slashes)
+##### _Comment style_ (slashes)
 
 DAX supports line comments that use slashes (`//`) or hyphens (`--`). This setting determines which style of comment is used when Tabular Editor 3 generates DAX code.
 
-##### *DAX function documentation*
+##### _DAX function documentation_
 
 Use this setting to specify which URL to launch in the default web browser, whenever you hit F12 while the cursor is on a DAX function. Options include https://dax.guide (recommended) and Microsoft's official documentation.
 
 ### DAX Settings
 
-##### *Locale*
+##### _Locale_
 
 Specify the locale for DAX functions and formatting.
 
-##### *Analysis Services version settings*
+##### _Analysis Services version settings_
 
 These settings are relevant only when Tabular Editor 3 cannot determine the version of Analysis Services used, as is the case when a Model.bim file is loaded directly. In this case, Tabular Editor tries to guess which version the model will be deployed to, based on the compatibility level. If Tabular Editor reports incorrect semantic/syntax errors, you may need to tweak these settings.
 
@@ -532,23 +535,23 @@ These settings are relevant only when Tabular Editor 3 cannot determine the vers
 
 The DAX Editor is **very** powerful and helps you produce beautiful, readable DAX code as you type.
 
-##### *Auto format code as you type* (enabled)
+##### _Auto format code as you type_ (enabled)
 
 This option will automatically apply certain formatting rules whenever certain keystrokes occur. For example, when a parenthesis is closed, this feature will ensure that everything within the parentheses is formatted according to the other settings on this page.
 
-##### *Auto-format function calls* (enabled)
+##### _Auto-format function calls_ (enabled)
 
 This option specifically controls whether automatic formatting of function calls (spacing between arguments and parentheses) should happen when a parenthesis is closed.
 
-##### *Auto-indent* (enabled)
+##### _Auto-indent_ (enabled)
 
 This option automatically indents function arguments when a line break is inserted within a function call.
 
-##### *Auto-brace* (enabled)
+##### _Auto-brace_ (enabled)
 
 This option automatically inserts the closing brace or quote whenever an opening brace or quote is entered.
 
-##### *Wrap selection* (enabled)
+##### _Wrap selection_ (enabled)
 
 When enabled, this option automatically wraps the current selection with the closing brace, when an opening brace is entered.
 
@@ -556,7 +559,7 @@ When enabled, this option automatically wraps the current selection with the clo
 
 These settings control how DAX code whitespace is formatted, both when auto-formatting occurs and when code is manually formatted.
 
-##### *Space after functions* (disabled)
+##### _Space after functions_ (disabled)
 
 # [Enabled](#tab/space-after-function-on)
 
@@ -572,7 +575,7 @@ SUM( 'Sales'[Amount] )
 
 ***
 
-##### *Newline after functions* (disabled)
+##### _Newline after functions_ (disabled)
 
 Applies only when a function call needs to be broken across multiple lines.
 
@@ -595,7 +598,7 @@ SUM(
 
 ***
 
-##### *Pad parentheses* (enabled)
+##### _Pad parentheses_ (enabled)
 
 # [Enabled](#tab/pad-parentheses-on)
 
@@ -611,11 +614,11 @@ SUM(Sales[Amount])
 
 ***
 
-##### *Long format line limit* (120)
+##### _Long format line limit_ (120)
 
 The maximal number of characters to keep on a single line before an expression is broken across multiple lines, when using the **Format DAX (long lines)** option.
 
-##### *Short format line limit* (60)
+##### _Short format line limit_ (60)
 
 The maximal number of characters to keep on a single line before an expression is broken across multiple lines, when using the **Format DAX (short lines)** option.
 
@@ -623,31 +626,31 @@ The maximal number of characters to keep on a single line before an expression i
 
 In addition to formatting the DAX code whitespace, Tabular Editor 3 can also fix object references and function/keyword casings.
 
-##### *Fix measure/column qualifiers* (enabled)
+##### _Fix measure/column qualifiers_ (enabled)
 
 When checked, table prefixes are automatically removed from measure references, and automatically inserted on column references.
 
-##### *Preferred keyword casing* (UPPER)
+##### _Preferred keyword casing_ (UPPER)
 
 This setting allows you to change the casing used for keywords, such as `ORDER BY`, `VAR`, `EVALUATE`, etc.
 
-##### *Preferred function casing* (UPPER)
+##### _Preferred function casing_ (UPPER)
 
 This setting allows you to change the casing used for functions, such as `CALCULATE(...)`, `SUM(...)`, etc.
 
-##### *Fix keyword/function casing* (enabled)
+##### _Fix keyword/function casing_ (enabled)
 
 When checked, casing of keywords and functions is automatically corrected whenever code is auto-formatted or manually formatted.
 
-##### *Fix object reference casing* (enabled)
+##### _Fix object reference casing_ (enabled)
 
 DAX is a case-insensitive language. When this is enabled, references to tables, columns and measures are automatically corrected such that the casing matches the physical name of the referenced objects.
 
-##### *Always quote tables* (disabled)
+##### _Always quote tables_ (disabled)
 
 Referencing certain table names do not require surrounding single quotes in DAX. However, if you prefer table references to always be quoted, you can check this option.
 
-##### *Always prefix extension columns* (disabled)
+##### _Always prefix extension columns_ (disabled)
 
 Extension columns can be defined without a table name. When checked, the DAX editor will always add the table prefix to an extension column.
 
@@ -657,27 +660,27 @@ Extension columns can be defined without a table name. When checked, the DAX edi
 
 On this page, you can configure the two most important Code Assist features, namely calltips (aka. "parameter info") and auto-complete.
 
-##### *Auto-complete trigger*
+##### _Auto-complete trigger_
 
 Control when the auto-complete list appears. Options include automatic triggering after typing a certain number of characters, or manual triggering with CTRL+Space.
 
-##### *Calltip trigger*
+##### _Calltip trigger_
 
 Control when parameter information appears. Options include automatic triggering when opening a function parenthesis, or manual triggering.
 
-##### *Incremental search* (enabled)
+##### _Incremental search_ (enabled)
 
 Enable fuzzy/incremental searching in auto-complete. This allows you to find items by typing parts of their name, not just the beginning.
 
-##### *Suggest table names* (enabled)
+##### _Suggest table names_ (enabled)
 
 Include table names in auto-complete suggestions.
 
-##### *Always quote table names* (disabled)
+##### _Always quote table names_ (disabled)
 
 Automatically quote table names in suggestions, even when not required.
 
-##### *Show first letter only* (disabled)
+##### _Show first letter only_ (disabled)
 
 Only show items starting with the typed letter. Disable this to use incremental search instead.
 
@@ -687,11 +690,11 @@ Only show items starting with the typed letter. Disable this to use incremental 
 
 Configure automatic code improvement suggestions:
 
-##### *Variable prefixes*
+##### _Variable prefixes_
 
 Define acceptable prefixes for variable names (e.g., `_`, `__`, `$`, `var_`, `var`, `v_`, `v`, `VAR_`). Code actions will suggest adding these prefixes to variable names that don't follow the convention.
 
-##### *Column prefixes*
+##### _Column prefixes_
 
 Define acceptable prefixes for temporary column names (e.g., `@`, `$`, `_`, `x`, `x_`). Code actions will suggest adding these prefixes to temporary column names that don't follow the convention.
 
@@ -700,6 +703,7 @@ Define acceptable prefixes for temporary column names (e.g., `@`, `$`, `_`, `x`,
 ![Placeholder: Screenshot of SQL/M/C# Editor preferences pages]
 
 Similar configuration options are available for SQL, M (Power Query), and C# script editors, including:
+
 - Syntax highlighting and color schemes
 - Auto-formatting options
 - Code assist and auto-complete features
@@ -711,11 +715,11 @@ Each editor can be customized independently to match your preferred coding style
 
 ![Placeholder: Screenshot of DAX Formatter preferences page]
 
-##### *DAX formatter consent* (disabled)
+##### _DAX formatter consent_ (disabled)
 
 Agree to send DAX code to the external DAX formatting service (www.daxformatter.com). When enabled, you can use this service to format DAX code according to community standards.
 
-##### *DAX formatter request timeout* (5000)
+##### _DAX formatter request timeout_ (5000)
 
 Timeout in milliseconds for DAX formatter requests. Increase this if you frequently get timeout errors when using the DAX formatter.
 
@@ -725,15 +729,15 @@ Timeout in milliseconds for DAX formatter requests. Increase this if you frequen
 
 Configure integration with DAX Optimizer (Enterprise Edition only):
 
-##### *Connect automatically* (null/prompt)
+##### _Connect automatically_ (null/prompt)
 
 Automatically connect to DAX Optimizer when available. When not set, you will be prompted the first time.
 
-##### *Obfuscate VPAX files* (enabled)
+##### _Obfuscate VPAX files_ (enabled)
 
 Anonymize model metadata when sending to DAX Optimizer. This protects sensitive information like table and column names while still allowing analysis.
 
-##### *Obfuscation dictionary directory* (`%LocalAppData%\TabularEditor3\DaxOptimizer`)
+##### _Obfuscation dictionary directory_ (`%LocalAppData%\TabularEditor3\DaxOptimizer`)
 
 Specify where obfuscation dictionaries are stored. The dictionary maintains consistent obfuscation across multiple analyses.
 
@@ -741,29 +745,30 @@ Specify where obfuscation dictionaries are stored. The dictionary maintains cons
 
 ![Placeholder: Screenshot of VertiPaq Analyzer preferences page]
 
-##### *Include TOM metadata* (enabled)
+##### _Include TOM metadata_ (enabled)
 
 Include Tabular Object Model metadata in VertiPaq Analyzer statistics. This provides richer information about your model structure.
 
-##### *Read stats from data* (enabled)
+##### _Read stats from data_ (enabled)
 
 Read statistics by scanning actual data (more accurate but slower). When disabled, only metadata is used.
 
-##### *Direct Lake extraction mode* (ResidentOnly)
+##### _Direct Lake extraction mode_ (ResidentOnly)
 
 How to extract statistics from Direct Lake models:
+
 - **ResidentOnly**: Only analyze data currently loaded in memory
 - **All**: Include non-resident data (slower, may trigger data loading)
 
-##### *Read stats from Dynamic Management Views* (disabled)
+##### _Read stats from Dynamic Management Views_ (disabled)
 
 Use DMVs to gather statistics (faster but less accurate). This is an alternative to reading from data.
 
-##### *Relationship sample rows* (3)
+##### _Relationship sample rows_ (3)
 
 Number of rows to sample when analyzing relationships. Higher values provide more accuracy but take longer.
 
-##### *Column batch size* (50)
+##### _Column batch size_ (50)
 
 Number of columns to analyze in each batch. Adjust this based on your model size and performance requirements.
 
@@ -771,15 +776,15 @@ Number of columns to analyze in each batch. Adjust this based on your model size
 
 ![Placeholder: Screenshot of Power BI Integration preferences page]
 
-##### *Power BI endpoint base URL* (`https://api.powerbi.com`)
+##### _Power BI endpoint base URL_ (`https://api.powerbi.com`)
 
 The base URL for Power BI API calls. Change this if you're working with a sovereign cloud or custom environment.
 
-##### *Fabric endpoint base URL* (`https://api.fabric.microsoft.com`)
+##### _Fabric endpoint base URL_ (`https://api.fabric.microsoft.com`)
 
 The base URL for Microsoft Fabric API calls. Change this if you're working with a sovereign cloud or custom environment.
 
-##### *Use embedded browser for authentication* (enabled)
+##### _Use embedded browser for authentication_ (enabled)
 
 Use the embedded browser for OAuth authentication instead of the system browser. This provides a more integrated experience.
 
@@ -787,34 +792,35 @@ Use the embedded browser for OAuth authentication instead of the system browser.
 
 ![Placeholder: Screenshot of Proxy Settings preferences page]
 
-##### *Proxy type* (None)
+##### _Proxy type_ (None)
 
 Choose between:
+
 - **None**: No proxy configuration
 - **System**: Use system proxy settings
 - **Custom**: Specify custom proxy configuration
 
-##### *Proxy address*
+##### _Proxy address_
 
 The address of the proxy server (e.g., `http://proxy.company.com:8080`).
 
-##### *Proxy user*
+##### _Proxy user_
 
 Username for proxy authentication if required.
 
-##### *Proxy password*
+##### _Proxy password_
 
 Password for proxy authentication (stored encrypted).
 
-##### *Use default credentials* (enabled)
+##### _Use default credentials_ (enabled)
 
 Use the current Windows credentials for proxy authentication. This implements the [same behavior as Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy).
 
-##### *Bypass proxy on local* (enabled)
+##### _Bypass proxy on local_ (enabled)
 
 Bypass the proxy for local addresses. This is recommended for performance.
 
-##### *Proxy bypass list*
+##### _Proxy bypass list_
 
 List of addresses that should bypass the proxy (e.g., `localhost;*.company.local`).
 

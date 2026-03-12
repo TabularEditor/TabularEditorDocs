@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Implementing Detail Rows Expressions
 
 When a user double-clicks a value in an Excel PivotTable connected to a Power BI or Analysis Services model, they trigger a **drillthrough** — a sheet opens showing the underlying rows behind that aggregated value. By default, the model returns all columns from the measure's host table, which is rarely useful for end users.
@@ -52,10 +53,10 @@ The result is technically correct, but not useful: internal column names are exp
 
 A Detail Rows Expression can be defined at two levels:
 
-| Level | Property name | Scope |
-|---|---|---|
-| **Table** | Default Detail Rows Expression | Applies to all measures on the table |
-| **Measure** | Detail Rows Expression | Applies to that measure only; overrides the table-level expression |
+| Level       | Property name                  | Scope                                                              |
+| ----------- | ------------------------------ | ------------------------------------------------------------------ |
+| **Table**   | Default Detail Rows Expression | Applies to all measures on the table                               |
+| **Measure** | Detail Rows Expression         | Applies to that measure only; overrides the table-level expression |
 
 Starting with a table-level expression is the most practical approach — one expression covers every measure on the table. If a specific measure requires different detail columns, you can override it with a measure-level expression, which takes precedence.
 

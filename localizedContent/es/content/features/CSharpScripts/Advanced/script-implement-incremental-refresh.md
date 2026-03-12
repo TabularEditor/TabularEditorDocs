@@ -10,31 +10,31 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Configure Incremental Refresh
 
 ## Script Purpose
+
 If you want to configure Incremental Refresh for an import table based on a specific date field.
 This script will work for `datetime`, `date`, or `integer` date columns for which you want to configure incremental refresh.
 
 To use the script, select the date column in the table for which you want to configure incremental refresh, then run the script. The script will only run if you don't already have a #"RangeStart" and #"RangeEnd" parameter, and the selected table doesn't already have a Refresh Policy configured.
 
-
-> [!NOTE] 
+> [!NOTE]
 > This script will automatically modify the M partition of the table to add the filter step.
-> Be sure to check that this was done correctly. 
+> Be sure to check that this was done correctly.
 >
-> If you have many steps you must be sure to move this step to a point when it will fold to the data source. 
-> Make sure you adjust all the `#"Step References" in Power Query
+> If you have many steps you must be sure to move this step to a point when it will fold to the data source.
+> Make sure you adjust all the \`#"Step References" in Power Query
 
-
-> [!NOTE] 
-> This script uses user input to generate the refresh policy. 
+> [!NOTE]
+> This script uses user input to generate the refresh policy.
 > Make sure you enter the correct values in the user input dialogue box.
-
 
 ## Script
 
 ### Implement Incremental Refresh for Selected Column
+
 ```csharp
 // This script will automatically generate an Incremental Refresh policy for a selected table
 // It is generated based on the selected column
@@ -479,17 +479,17 @@ catch
     Error( "No valid table selected! Ending script without changes." );
 }
 ```
+
 ### Explanation
+
 This snippet will configure incremental refresh in the selected table based on a selected date column.
 
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> When running the script, you are prompted to select the Table you want to configure, and the DateTime or Int column the policy will be configured for. Then, the dialog in this image will appear to let you enter the Refresh Policy parameters.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> When running the script, you are prompted to select the Table you want to configure, and the DateTime or Int column the policy will be configured for. Then, the dialog in this image will appear to let you enter the Refresh Policy parameters.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh-success.png" alt="A confirmation dialog that acknowledges you have configured the refresh policy" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> A confirmation dialog will inform you about the success of the Refresh Policy configuration, explaining it back to you in plain words.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh-success.png" alt="A confirmation dialog that acknowledges you have configured the refresh policy" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> A confirmation dialog will inform you about the success of the Refresh Policy configuration, explaining it back to you in plain words.</figcaption>
 </figure>

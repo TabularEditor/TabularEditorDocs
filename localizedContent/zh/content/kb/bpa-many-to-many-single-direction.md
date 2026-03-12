@@ -44,6 +44,7 @@ The rule triggers when a relationship meets all conditions:
 3. Change from **Both** to **Single**
 
 Choose direction based on typical filter flow:
+
 - From dimension to fact
 - From lookup to data table
 

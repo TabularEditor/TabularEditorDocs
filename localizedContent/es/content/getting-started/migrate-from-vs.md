@@ -39,6 +39,7 @@ If you often face the need to convert back and forth between Tabular Editor's (d
 # [Model.bim to folder](#tab/frombim)
 
 To convert from model.bim to database.json (folder-based format):
+
 ```cmd
 tabulareditor.exe model.bim -F database.json
 ```
@@ -46,6 +47,7 @@ tabulareditor.exe model.bim -F database.json
 # [Folder to model.bim](#tab/fromfolder)
 
 To convert from database.json (folder-based format) to model.bim:
+
 ```cmd
 tabulareditor.exe database.json -B model.bim
 ```
@@ -126,7 +128,7 @@ This section lists the most important differences between the user interfaces of
 
 ### Tabular Model Explorer vs. TOM Explorer
 
-In Visual Studio, a hierarchical overview of the model metadata can be found in the **Tabular Model Explorer**. 
+In Visual Studio, a hierarchical overview of the model metadata can be found in the **Tabular Model Explorer**.
 
 ![Vs Tom Explorer](~/content/assets/images/vs-tom-explorer.png)
 

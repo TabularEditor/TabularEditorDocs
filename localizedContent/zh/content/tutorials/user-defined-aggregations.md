@@ -1,4 +1,4 @@
-﻿---
+---
 uid: user-defined-aggregations
 title: User-defined Aggregations
 author: Just Blindbæk
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Implementing User-defined Aggregations
 
 A fully imported fact table caches every row in memory — including high-cardinality columns like individual order lines, transaction IDs, and row-level attributes that most report consumers never need. User-defined aggregations address this by splitting the fact table in two: a small, pre-aggregated **Import** table that handles the vast majority of report queries from the in-memory cache, and a **DirectQuery** detail table that holds all the row-level data without consuming memory. Power BI and Analysis Services automatically route each query to whichever table can answer it.
@@ -39,10 +40,10 @@ Before you begin, you should have:
 
 The aggregation pattern uses two versions of the same fact table:
 
-| Table | Storage mode | Purpose |
-|---|---|---|
-| **Aggregation table** (`Orders`) | Import | Pre-aggregated data cached in memory. Answers summary queries. |
-| **Detail table** (`Order details`) | DirectQuery | Full row-level data queried at source. Used when the aggregation cannot answer the query. |
+| Table                                                 | Storage mode | Purpose                                                                                                                   |
+| ----------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| **Aggregation table** (`Orders`)   | Import       | Pre-aggregated data cached in memory. Answers summary queries.                            |
+| **Detail table** (`Order details`) | DirectQuery  | Full row-level data queried at source. Used when the aggregation cannot answer the query. |
 
 Dimension tables are set to **Dual** storage mode so they can participate in both Import and DirectQuery query paths.
 

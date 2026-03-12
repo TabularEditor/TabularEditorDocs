@@ -1,4 +1,4 @@
-﻿---
+---
 uid: editions
 title: Compare editions
 author: Søren Toft Joensen
@@ -10,6 +10,7 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Tabular Editor 3 Editions
 
 This document provides an overview and comparison of the different editions of Tabular Editor 3.
@@ -33,24 +34,24 @@ We consider the **highlighted** flavors of Analysis Services to be Enterprise-Ti
 
 Please refer to the matrix below for the full overview of supported scenarios:
 
-|Scenario / Edition|Desktop|Business|Enterprise|
-|---|---|---|---|
-|External Tool for Power BI Desktop|<span class="emoji"><span class="emoji">&#10004;</span></span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Load/save model metadata to disk**|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
-|Workspace Mode***|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
-|Power BI Premium Per User|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|SQL Server Developer Edition|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
-|SQL Server Standard Edition|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|SQL Server Enterprise Edition|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
-|Azure AS Developer Tier|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
-|Azure AS Basic Tier|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Azure AS Standard Tier|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
-|Power BI Premium Capacity (P SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
-|Power BI Embedded Capacity (A/EM SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
-|Fabric Capacity (F SKUs)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
-|Semantic Bridge (Databricks)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
-|[Advanced Refresh dialog](xref:advanced-refresh)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|[Free DAX Optimizer license](xref:dax-optimizer-integration)|<span class="emoji">&#10060;</span>|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+| Scenario / Edition                                           | Desktop                                                                            | Business                                                  | Enterprise                                              |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
+| External Tool for Power BI Desktop                           | <span class="emoji"><span class="emoji">&#10004;</span></span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| Load/save model metadata to disk\*\*                         | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| Workspace Mode\*\*\*                                         | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| Power BI Premium Per User                                    | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| SQL Server Developer Edition                                 | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| SQL Server Standard Edition                                  | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| SQL Server Enterprise Edition                                | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Azure AS Developer Tier                                      | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| Azure AS Basic Tier                                          | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| Azure AS Standard Tier                                       | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Power BI Premium Capacity (P SKUs)        | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Power BI Embedded Capacity (A/EM SKUs)    | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Fabric Capacity (F SKUs)                  | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Semantic Bridge (Databricks)              | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| [Advanced Refresh dialog](xref:advanced-refresh)             | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| [Free DAX Optimizer license](xref:dax-optimizer-integration) | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
 
 \***Note:** Enterprise Edition is required if the Analysis Services data model contains perspectives or tables with multiple partitions (does not apply to Power BI Desktop or Power BI Premium Per User models).
 
@@ -60,22 +61,22 @@ Please refer to the matrix below for the full overview of supported scenarios:
 
 ## Modeling Restrictions
 
-We restrict a few data modeling operations inside Tabular Editor 3 as well, corresponding to the restrictions on certain Microsoft service tiers (Azure Analysis Services *Basic Tier*, SQL Server Analysis Services *Standard Edition*, and Power BI *Premium-Per-User*).
+We restrict a few data modeling operations inside Tabular Editor 3 as well, corresponding to the restrictions on certain Microsoft service tiers (Azure Analysis Services _Basic Tier_, SQL Server Analysis Services _Standard Edition_, and Power BI _Premium-Per-User_).
 
 Specifically, [Azure AS Basic Tier and SQL Server Standard Edition does not support perspectives, multiple partitions or DirectQuery](https://azure.microsoft.com/en-us/pricing/details/analysis-services/), and as such, SSAS/Azure AS models using these features require TE3 Enterprise Edition.
 
 Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake datasets](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#prerequisites), which is why Power BI models using this feature also requires TE3 Enterprise Edition.
 
-|Model type|Feature|Business|Enterprise|
-|---|---|---|---|
-|Azure AS / SSAS|Perspectives|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
-|Azure AS / SSAS|Multiple partitions|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
-|Azure AS / SSAS|DirectQuery*|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Azure AS / SSAS|Direct Lake|N/A|N/A|
-|Power BI|Perspectives|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Power BI|Multiple partitions|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Power BI|DirectQuery|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Power BI|Direct Lake|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
+| Model type      | Feature             | Business                                                | Enterprise                                              |
+| --------------- | ------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Azure AS / SSAS | Perspectives        | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | Multiple partitions | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | DirectQuery\*       | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | Direct Lake         | N/A                                                     | N/A                                                     |
+| Power BI        | Perspectives        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | Multiple partitions | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | DirectQuery         | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | Direct Lake         | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
 \***Note:** Analysis Services on SQL Server Standard Edition pre-2019 does not support DirectQuery. Nor does Azure AS Basic Tier. [Learn more](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models).
 
@@ -101,9 +102,9 @@ Our Enterprise Edition uses a **transferable** licensing model. The license admi
 
 Each Tabular Editor 3 user is allowed to install the tool on multiple machines depending on the type of license held:
 
-| |Desktop|Business|Enterprise|
-|---|---|---|---|
-|Simultaneous installations|1|2|3|
+|                            | Desktop | Business | Enterprise |
+| -------------------------- | ------- | -------- | ---------- |
+| Simultaneous installations | 1       | 2        | 3          |
 
 > [!NOTE]
 > Sharing a single license among multiple users is against our [licensing terms](https://tabulareditor.com/license-terms).
@@ -116,13 +117,13 @@ If you need more simultaneous installations of Tabular Editor 3 than listed abov
 
 Our Enterprise Edition is priced in tiers, according to the following table (similar discount rates apply to monthly commitment):
 
-|Tier|Yearly price per seat|
-|---|---|
-|First 5 seats|$950.00 USD|
-|Next 6-10 seats|$900.00 USD|
-|Next 11-20 seats|$850.00 USD|
-|Next 21-50 seats|$800.00 USD|
-|Seats 51 and above|$750.00 USD|
+| Tier               | Yearly price per seat       |
+| ------------------ | --------------------------- |
+| First 5 seats      | $950.00 USD |
+| Next 6-10 seats    | $900.00 USD |
+| Next 11-20 seats   | $850.00 USD |
+| Next 21-50 seats   | $800.00 USD |
+| Seats 51 and above | $750.00 USD |
 
 As an example, if you need 12 seats, the price breaks down as follows:
 

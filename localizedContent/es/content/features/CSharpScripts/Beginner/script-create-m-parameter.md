@@ -10,14 +10,17 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Create M Partition
 
 ## Script Purpose
+
 If you want to create a new dynamic M Parameter to use in Power Query queries (M Partitions or Shared Expressions).
 
 ## Script
 
 ### Create a new M Partition
+
 ```csharp
 // This script creates a new M parameter in the 'Shared Expressions' of a model.
 //
@@ -43,12 +46,13 @@ Info (
     "2. Set the data type appropriately\n    " +
     "3. Replace any values found in the M partitions with the parameter reference." );
 ```
+
 ### Explanation
+
 This snippet creates a new M parameter in 'Shared Expressions' which you can refer to from within your M Partitions Power Query.
 
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-new-m-parameter.png" alt="An example of the Info box that appears to inform the user that the M Parameter was successfully created, and recommending next steps to configure / use it in the M Partitions." style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the Info box that appears to inform the user that the M Parameter was successfully created, and recommending next steps to configure / use it in the M Partitions.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-new-m-parameter.png" alt="An example of the Info box that appears to inform the user that the M Parameter was successfully created, and recommending next steps to configure / use it in the M Partitions." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the Info box that appears to inform the user that the M Parameter was successfully created, and recommending next steps to configure / use it in the M Partitions.</figcaption>
 </figure>

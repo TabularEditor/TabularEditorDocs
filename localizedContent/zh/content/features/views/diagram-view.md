@@ -1,4 +1,4 @@
-﻿---
+---
 uid: diagram-view
 title: Diagram View
 author: Morten Lønskov
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Diagram View
 
 The **Diagram View** in Tabular Editor 3 is a visual representation of the semantic model. It provides an intuitive layout for viewing tables, their columns, and the relationships between them. It is particularly helpful for understanding the schema at a glance, creating relationships, and presenting models to stakeholders. A diagram can be saved as a stand alone file. See <xref:supported-files#diagram-file-te3diag> for more information.
@@ -37,10 +38,11 @@ Add initial tables to the diagram in any of the following ways:
   ![Diagram Add Tables](~/content/assets/images/diagram-add-tables.png)
 
   To add additional tables to the diagram, use the technique above again, or right-click on an existing table in the diagram and choose one of the following options:
+
   - **Add tables that filter this table**: Adds all tables to the diagram which may, directly or indirectly through other tables, filter the currently selected table. Useful when starting from a fact table.
   - **Add all related tables**: Adds all tables to the diagram which are directly related to the currently selected table. Useful when starting from a dimension table.
     ![Add Related Tables](~/content/assets/images/add-related-tables.png)
-  
+
   Before proceeding, rearrange and resize the tables in the diagram to suit your preferences, or use the **Diagram > Auto-arrange** feature to have Tabular Editor 3 lay out the tables automatically.
 
 ## Modifying relationships using the diagram
@@ -98,7 +100,6 @@ A **chevron toggle** is available in the top-right corner of each table, by clic
 
 ![Diagram Chevron Toggle](~/content/assets/images/diagram-chevron-toggle.png)
 
-
 - **All Columns**: Displays all columns.
 - **Key Columns Only**: Displays only primary and foreign keys.
 - **No Columns**: Hides all columns, showing only the table header.
@@ -117,5 +118,4 @@ Each column in the diagram is accompanied by an icon representing its data type:
 - <img src="~/content/assets/images/icons/TrueFalse.svg" alt="Boolean Icon" width="16" height="16"> for boolean (true/false) values
 - <img src="~/content/assets/images/icons/Calendar.svg" alt="Date Icon" width="16" height="16"> for date/time values
 
-
-This quick visual reference supports quick data validation and helps understand the data structures. 
+This quick visual reference supports quick data validation and helps understand the data structures.

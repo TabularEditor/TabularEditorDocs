@@ -1,4 +1,4 @@
-﻿# SQL Server 2017 Support
+# SQL Server 2017 Support
 
 Starting from version 2.3, Tabular Editor now also supports SQL Server 2017 (Compatibility Level 1400). This means that the Tabular Editor UI exposes some of the new functionality described [here](https://blogs.msdn.microsoft.com/analysisservices/2017/04/19/whats-new-in-sql-server-2017-ctp-2-0-for-analysis-services/).
 
@@ -9,11 +9,13 @@ If you don't need Compatibility Level 1400 features, you can still use the SQL S
 Here is a quick rundown of how the new features are used in Tabular Editor:
 
 ## Date Relationships
+
 All relationships now expose the "Join on Date Behavior" property in the property grid:
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25297821/9dd46be0-26f0-11e7-92bf-10a921ed20dc.png)
 
 ## Variations (column/hierarchy reuse)
+
 You can set up variations on a column, by expanding the "Variations" property in the property grid:
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25297845/c69ecc5a-26f0-11e7-93af-b7a2a0cc9310.png)

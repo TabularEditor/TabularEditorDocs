@@ -1,13 +1,15 @@
-﻿---
+---
 uid: onboarding-te3
 title: Welcome
 author: Daniel Otykier
 ---
+
 # Welcome
 
 <!--
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src=https://player.vimeo.com/video/664699927?h=57bde801c7&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479 frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Introduction to Tabular Editor 3"></iframe></div><script src=https://player.vimeo.com/api/player.js></script>
 -->
+
 **Thank you for choosing Tabular Editor 3!**
 
 To help you get the most out of the tool, we have collected all of our onboarding material in this getting started section, that we hope you will enjoy. We recommend all new users of Tabular Editor 3 to read through this guide, skipping any topics that they are already familiar with.
@@ -30,6 +32,7 @@ As this training material is focused on the Tabular Editor product, we assume th
   - @training-telearn
 
 - @getting-started-te2
+
 - @desktop-integration
   - @desktop-limitations
 
@@ -38,7 +41,7 @@ As this training material is focused on the Tabular Editor product, we assume th
   - @data-refresh-view
   - @find-replace
   - @macros-view
-  - @messages-view  
+  - @messages-view
   - @properties-view
   - @tom-explorer-view
   - @diagram-view

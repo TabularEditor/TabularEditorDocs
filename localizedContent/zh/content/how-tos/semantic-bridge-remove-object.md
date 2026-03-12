@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Remove an object from a Metric View
 
 This how-to demonstrates how to remove Metric View dimensions from a loaded Metric View.

@@ -1,4 +1,4 @@
-﻿# Tabular Editor 3 BETA-16.6
+# Tabular Editor 3 BETA-16.6
 
 > [!IMPORTANT]
 > A newer version of Tabular Editor is available. You can find the latest version [here](https://docs.tabulareditor.com/references/release-notes).
@@ -25,6 +25,7 @@
 A rather big list of bug fixes and minor improvements incoming:
 
 ### General improvements:
+
 - Name of .pbix file is now used as the database name when saving a .pbix model as a .bim/folder structure.
 - Added x64 support (both x64 and x86 builds are targeting "Any CPU", but the latter has the "Prefer32Bits" flag set)
 - Installer has been updated. It's now using WiX, which ensures that the registry and local app data folder are neatly cleaned when the product is uninstalled. In addition, it looks better :-)
@@ -33,12 +34,14 @@ A rather big list of bug fixes and minor improvements incoming:
 - Updated TOM to version 19.18.0.
 
 ### Usability improvements:
+
 - Increased the "hitbox" of the expand/collapse arrow in TOM Explorer increased (see [this comment](https://github.com/TabularEditor3/PublicPreview/issues/81#issuecomment-789637586))
 - Double-clicking the icon next to an object in the TOM Explorer now brings the DAX Expression Editor into view.
 
 ### Bug fixes:
+
 - Fixed DAX semantic analyzer issue, which would cause "ghost" error messages in certain expressions
-- Fixed issue #75 
+- Fixed issue #75
 - Fixed issue #77
 - Fixed issue #84
 - Fixed a number of crashes based on telemetry. @**Everyone**: Keep sending those error reports when an exception occurs, and please provide descriptions - they are invaluable when trying to figure out what went wrong! Thanks!
@@ -55,7 +58,6 @@ A rather big list of bug fixes and minor improvements incoming:
 - Fixed a DAX parser bug that caused `GENERATESERIES` to provide a table with a wrongly-named column, possibly related to #61
 - Fix for issue #74 (EndBatch() called before BeginBatch() crash)
 - Added warning and refresh of local TOM tree upon save to DB, if changes were made to the deployed model metadata outside of Tabular Editor
-
 
 ## Updates in BETA-16.2:
 
@@ -79,8 +81,8 @@ A rather big list of bug fixes and minor improvements incoming:
 - Key columns are now shown in **bold**
 - Added "Define Measure" and "Inline Measure" refactoring options
 - Improved auto-complete behaviour around DEFINE / EVALUATE statements of DAX queries. For example, autocomplete can now also suggest measures, columns and tables defined inside the query.
-- Auto-complete now also suggests measures for the Name parameter of functions such as SUMMARIZECOLUMNS, ADDCOLUMNS, etc., completing both the Name and the Expression parameter at once: 
-![autocomplete names](https://user-images.githubusercontent.com/8976200/107629428-66aada80-6c62-11eb-91e4-d5528947840a.gif)
+- Auto-complete now also suggests measures for the Name parameter of functions such as SUMMARIZECOLUMNS, ADDCOLUMNS, etc., completing both the Name and the Expression parameter at once:
+  ![autocomplete names](https://user-images.githubusercontent.com/8976200/107629428-66aada80-6c62-11eb-91e4-d5528947840a.gif)
 - Revisited #42.
 - Deployment Wizard now stores deployment preferences (destination + options) to the .tmuo file sitting next to the Model.bim or Database.json file on disk. This makes it easier to perform deployments when switching between different models, if each model is always deployed to the same destination.
 - Updated TOM to 19.16.3. Should fix issue #63.
@@ -92,5 +94,5 @@ A rather big list of bug fixes and minor improvements incoming:
 - Deployment Wizard updated. Also fixes issue #42 and #43.
 - Support for DEFINE COLUMN and TABLE syntax in DAX queries
 - The File menu now has a "Recent Files" and a "Recent Tabular Models" submenu. The former holds references to the 10 most recent DAX scripts, model diagrams, DAX queries and C# scripts that were saved/opened. The latter holds references to the 10 most recent model files (bim / pbit / folder).
-- Fixed #67 
-- Fixed #66 
+- Fixed #67
+- Fixed #66

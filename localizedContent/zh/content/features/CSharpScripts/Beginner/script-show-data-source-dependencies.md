@@ -10,14 +10,17 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Show Data Source Dependencies
 
 ## Script Purpose
-The script outputs the tables that reference the selected explicit (legacy) data source. This will make it easier to determine where a selected data source is used. 
+
+The script outputs the tables that reference the selected explicit (legacy) data source. This will make it easier to determine where a selected data source is used.
 
 ## Script
 
 ### Show Data Source Dependencies
+
 ```csharp
 //The script outputs the tables that reference the selected explicit (legacy) data source.
 if (Model.DataSources.Count == 0)
@@ -46,12 +49,13 @@ var allTables = legacyTables.Union(mTables).OrderBy(t => t.Name);
 var tableString = string.Join("\r\n", allTables.Select(t => t.Name));
 Info($"Datasource {selectedDatasource.Name} is referenced from the following tables:\r\n" + tableString);
 ```
+
 ### Explanation
-This snippet takes the selected data source and goes through the model to collect the partitions where that data source is used. 
+
+This snippet takes the selected data source and goes through the model to collect the partitions where that data source is used.
 
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-show-data-source-dependencies-output.png" alt="Example of the dialog pop-up that informs the user which tables use the selected data source" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Example of the dialog pop-up that informs the user which tables use the selected data source.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-show-data-source-dependencies-output.png" alt="Example of the dialog pop-up that informs the user which tables use the selected data source" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Example of the dialog pop-up that informs the user which tables use the selected data source.</figcaption>
 </figure>

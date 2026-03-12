@@ -10,13 +10,16 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Create a Date Table
 
 ## Script Purpose
+
 You can use this script to create a new, organized and configured date table based on 1-2 selected date columns in the model.
 The first selected column should be the earliest date and the second selected column should be the latest date. Both should be selected before running the script / macro.
 
 This script will create the below objects in the model:
+
 1. A measure `[RefDate]`, which will have the latest date in the model scope; i.e. last day of sales. You can adjust this measure manually and re-process the date table to re-generate it based on a different reference date (i.e. if you want to change it to TODAY() or add a filter)
 2. The `'Date'` table - The table can be configured in a separate DAX Query window and copied back into the script if you have other requirements.
    - All columns will be organized in display folders
@@ -27,6 +30,7 @@ This script does not yet create model relationships between the created date tab
 ## Script
 
 ### Create Date Table
+
 ```csharp
 // To use this C# Script:
 //
@@ -515,27 +519,25 @@ catch
 }
 
 ```
+
 ### Explanation
+
 This snippet takes the selected columns and creates a measure to highlight the maximum date for reporting. It then creates a formatted Date table with common columns used for reporting. The date table only contains calendar dates and not fiscal periods.
 
 ## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-earliest-date.png" alt="Select Earliest date dialog" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> When running the script, a dialog will appear which prompts you to select a DateTime column from the model that contains the earliest date for which you want to configure your Date table.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-earliest-date.png" alt="Select Earliest date dialog" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> When running the script, a dialog will appear which prompts you to select a DateTime column from the model that contains the earliest date for which you want to configure your Date table.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-latest-date.png" alt="Select Latest date dialog" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong>  Once selecting the earliest date, a dialog will appear which prompts you to select a DateTime column from the model that contains the latest date for which you want to configure your Date table.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-latest-date.png" alt="Select Latest date dialog" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong>  Once selecting the earliest date, a dialog will appear which prompts you to select a DateTime column from the model that contains the latest date for which you want to configure your Date table.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-confirmation.png" alt="Confirmation of the date table being created" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> A confirmation dialog will inform you that the Date table was configured successfully based on the two selected dates.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-confirmation.png" alt="Confirmation of the date table being created" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> A confirmation dialog will inform you that the Date table was configured successfully based on the two selected dates.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table.png" alt="Resulting Date Table Template" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> An example of an organized, configured date table created with a single click using this script.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table.png" alt="Resulting Date Table Template" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> An example of an organized, configured date table created with a single click using this script.</figcaption>
 </figure>

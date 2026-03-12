@@ -1,4 +1,4 @@
-﻿---
+---
 uid: metadata-translation-editor
 title: Metadata Translation Editor
 author: Šarūnas Jučius
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Metadata Translation Editor
 
 The **Metadata Translation Editor** provides an overview of the translated names, descriptions and display folders of translatable objects in the model. You can launch the Metadata Translation Editor through the **View** menu. Alternatively, if you only need to edit certain translations, select them in the **TOM Explorer** (hold down CTRL or SHIFT to multi-select), then right-click and choose **Show in metadata translation editor**.

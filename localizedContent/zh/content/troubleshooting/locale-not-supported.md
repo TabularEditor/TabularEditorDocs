@@ -16,7 +16,9 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Locale Not Supported
+
 You may encounter the warning message:
 
 ```plaintext
@@ -61,6 +63,6 @@ Data Source=asazure://westeurope.asazure.windows.net/instance-name;LocaleIdentif
 
 Adjust your local system’s regional and language settings to match a supported locale.
 
-- **Recommended settings:**  
-  - **Regional format:** English (United States)  
+- **Recommended settings:**
+  - **Regional format:** English (United States)
   - **Windows Display Language:** English (United States)

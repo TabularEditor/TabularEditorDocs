@@ -1,4 +1,4 @@
-﻿---
+---
 uid: user-interface
 title: Basic user interface
 author: Daniel Otykier
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Getting to know Tabular Editor 3's User Interface
 
 This article describes the user interface of Tabular Editor 3.
@@ -45,7 +46,7 @@ All UI elements may be resized and/or rearranged to fit your needs. You can even
 
 To reset the application to the default layout, choose the **Window > Default layout** option. Users of Tabular Editor 2.x may prefer the **Window > Classic layout** option which places the TOM Explorer on the left side of the screen, and the Properties view below the Expression Editor.
 
-Use the **Window > Capture current layout..." option to save a customized layout such that it will become available as a new layout option within the Window menu, allowing you to quickly switch back and forth between different layouts. Use the **Window > Manage layouts...** option to bring up a list of all available layouts, allowing you to rename, save, delete layouts, etc. When saving a layout to disk, the result is an .xml file which you can share with other users of Tabular Editor 3.
+Use the \*\*Window > Capture current layout..." option to save a customized layout such that it will become available as a new layout option within the Window menu, allowing you to quickly switch back and forth between different layouts. Use the **Window > Manage layouts...** option to bring up a list of all available layouts, allowing you to rename, save, delete layouts, etc. When saving a layout to disk, the result is an .xml file which you can share with other users of Tabular Editor 3.
 
 ![Manage Layouts](~/content/assets/images/manage-layouts.png)
 
@@ -78,7 +79,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
 ![File Menu](~/content/assets/images/file-menu.png)
 
 - **New**: Opens a submenu that allows you to create a new blank data model (Ctrl+N), or create various [supporting files](xref:supported-files#supported-file-types) such as a new DAX Query or DAX Script (text files) or a data model diagram (JSON file). Supporting files (with the exception of C# scripts), can be created only when a model is already loaded in Tabular Editor.
-  
+
   ![File Menu New](~/content/assets/images/file-menu-new.png)
 
 > [!IMPORTANT]
@@ -179,19 +180,24 @@ The **Tools** menu contains options for controlling Tabular Editor 3 preferences
 
 ## Window
 
-The **Window** menu provides shortcuts for managing and navigating between the various views and documents (collectively known as *windows*) of the application. It also has menu items for controlling the theming and color palettes as described [above](#changing-themes-and-palettes).
+The **Window** menu provides shortcuts for managing and navigating between the various views and documents (collectively known as _windows_) of the application. It also has menu items for controlling the theming and color palettes as described [above](#changing-themes-and-palettes).
 
 ![View Menu](~/content/assets/images/window-menu.png)
 
 - **New...** this submenu provides a shortcut for creating new [supporting files](xref:supported-files#supported-file-types). The options here are identical to those under **File > New**.
+
 - **Float** undocks the current view or document into a floating window.
+
 - **Pin tab** pins a tab. When a tab is pinned, it is shown at the left-most side of the document tabs, and when right-clicking on the tabs, shortcuts are available for closing only unpinned tabs.
-  
+
   ![View Menu](~/content/assets/images/tab-context-menu.png)
 
 - **New Horizontal/Vertical Tab Group**: This option lets you divide the main document area into multiple sections (aka. "tab groups), in order to have multiple documents displayed simultaneously side-by-side or top-by-bottom.
+
 - **Close All Documents**: Closes all document tabs. You are prompted to save unsaved changes, if any.
+
 - **Reset Window Layout**: Resets all customization applied to the main document area.
+
 - **1..N [document]**: The first 10 open documents are listed here, allowing you to navigate between them. You can also use the CTLR+Tab shortcut to quickly switch between open documents and views, such as shown in the screenshot below:
 
   ![View Menu](~/content/assets/images/ctrl-tab.png)
@@ -201,6 +207,7 @@ The **Window** menu provides shortcuts for managing and navigating between the v
   ![View Menu](~/content/assets/images/windows-manager.png)
 
 - **Capture current layout** / **Manage layouts...** / **Default layout** / **Classic layout**: These menu items were discussed [earlier in this article](#choosing-a-different-layout).
+
 - **Theme** / **Default palette**: These menu items were discussed [earlier in this article](#changing-themes-and-palettes).
 
 ## Help
@@ -218,7 +225,7 @@ The **Help** menu provides shortcuts for online resources and more.
 > Dedicated support is reserved for Tabular Editor 3 Enterprise Edition customers. All other customers should reach out on the [public community support site](https://github.com/TabularEditor/TabularEditor3) for any technical issues, questions or other product-specific questions.
 
 - **About Tabular Editor**: Launches a dialog that shows detailed information about the version of Tabular Editor being used as well installation and licensing details. The dialog also lets you change your license key.
- 
+
 ## Dynamic menus (context dependent)
 
 In addition to the menus mentioned above, other menus may appear at certain times, depending on which UI element currently has focus and which object is currently selected in the TOM Explorer. For example, if you select a Table-object, a **Table** menu will appear, holding the same context-specific shortcut items as when you right-click on that object in the TOM Explorer.

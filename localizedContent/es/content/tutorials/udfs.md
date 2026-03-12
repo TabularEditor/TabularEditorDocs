@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # DAX User-Defined Functions
 
 DAX User-Defined Functions (UDFs) is a new capability of semantic models introduced in Power BI Desktop with the September 2025 update.
@@ -106,7 +107,7 @@ FUNCTION FunctionName =
 
 A key aspect of UDFs is that parameters can be defined in one of two modes, **pass-by-value** and **pass-by-reference**. By default, and unless you specify otherwise, a parameter will by **pass-by-value**. This essentially means that the parameter behaves just like a DAX variable (i.e. one that is defined using the `VAR` keyword) inside the UDF expression. In other words, when the UDF is called, the parameter values are "copied" into the function and any reference to that parameter inside the function will always return the same value.
 
-In contrast, **pass-by-reference** parameters behave more like measures. That is, the result of evaluating the parameter *inside the function* may differ depending on the evaluation context.
+In contrast, **pass-by-reference** parameters behave more like measures. That is, the result of evaluating the parameter _inside the function_ may differ depending on the evaluation context.
 
 To specify the evaluation mode, include a parameter specification after the parameter name, separated by a colon (`:`). The specification can be either `VAL` or `EXPR` for "pass-by-value" and "pass-by-reference", respectively. As mentioned above, "pass-by-value" is the default, so `VAL` is implicit if not specified. For example:
 
@@ -193,6 +194,7 @@ The **Peek Definition** feature works with UDFs, allowing you to quickly view th
 ### Dependencies View
 
 UDFs appear in the **DAX Dependencies** (Shift+F12) view, showing both:
+
 - **Objects that depend on the function**: Which measures, columns, etc. use the UDF
 - **Objects the function depends on**: Which measures, columns, etc. the UDF references
 
@@ -206,7 +208,7 @@ The concept of "namespace" doesn't exist in DAX, yet the recommendation is to na
 
 ![DAX UDFs grouped by namespace](~/content/assets/images/udf-namespaces-tom-explorer.png)
 
-In Tabular Editor, UDFs also have a "Namespace" *property*, allowing you to customize the namespace of each UDF individually, without changing the actual UDF object name. This is very similar to Display Folders for measures. Setting a different value for the "Namespace" property, than would could be inferred from the UDF name, is useful for example if you want to batch rename (F2) multiple UDFs to get rid of the namespaces in their names, but you still want to keep them nicely organized in the TOM Explorer.
+In Tabular Editor, UDFs also have a "Namespace" _property_, allowing you to customize the namespace of each UDF individually, without changing the actual UDF object name. This is very similar to Display Folders for measures. Setting a different value for the "Namespace" property, than would could be inferred from the UDF name, is useful for example if you want to batch rename (F2) multiple UDFs to get rid of the namespaces in their names, but you still want to keep them nicely organized in the TOM Explorer.
 
 > [!NOTE]
 > This organizational feature in Tabular Editor doesn't affect DAX code. You still need to type out the full UDF name when calling a UDF, including any namespace parts.
@@ -214,11 +216,13 @@ In Tabular Editor, UDFs also have a "Namespace" *property*, allowing you to cust
 ## Best Practices
 
 ### Naming Conventions
+
 - Use descriptive names that clearly indicate the function's purpose
 - Consider prefixing UDFs with your organization's initials (e.g., `ACME.CalculateDiscount`)
 - Avoid generic names that might conflict with future DAX functions
 
 ### Documentation
+
 - Always include comments describing what the function does
 - Document each parameter's purpose and expected data type
 - Include usage examples in your comments
@@ -240,6 +244,7 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 ## Common Use Cases
 
 ### Mathematical Operations
+
 ```dax
 // Calculate compound interest
 (
@@ -251,6 +256,7 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 ```
 
 ### String Manipulation
+
 ```dax
 // Format a full name from first and last name components
 (
@@ -261,6 +267,7 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 ```
 
 ### Date Calculations
+
 ```dax
 // Get the fiscal year based on a date (fiscal year starts July 1)
 (
@@ -270,6 +277,7 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 ```
 
 ### Business Logic
+
 ```dax
 // Apply tiered discount based on quantity
 (
@@ -289,16 +297,19 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 ### Common Issues
 
 **Function not appearing in autocomplete**
+
 - Verify the function was saved successfully
 - Check that there are no syntax errors in the function definition
 - Ensure you're using the function in a compatible context
 
 **Parameter constraint errors**
+
 - Review the parameter types you've specified
 - Make sure you're passing compatible values to the function
 - Check the Microsoft documentation for supported constraint types
 
 **Function not working after deployment**
+
 - Verify your target environment supports UDFs (compatibility level 1702+). As of September 16th, 2025, the Power BI Service does not yet support UDFs, nor does Azure Analysis Services or SQL Server Analysis Services.
 
 ## Limitations

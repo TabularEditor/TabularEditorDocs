@@ -10,19 +10,22 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Format Numeric Measures
 
 ## Script Purpose
-Allows you to quickly set default format strings on the measures selected. 
+
+Allows you to quickly set default format strings on the measures selected.
 
 <br></br>
-> [!NOTE] 
-> The script uses certain naming standards so you might wish to adjust it to suit yours. 
-<br></br>
+
+> [!NOTE]
+> The script uses certain naming standards so you might wish to adjust it to suit yours. <br></br>
 
 ## Script
 
 ### Script Title
+
 ```csharp
 // This script is meant to format all measures with a default formatstring
 foreach (var ms in Selected.Measures) {
@@ -42,5 +45,7 @@ foreach (var ms in Selected.Measures) {
 	}
 }
 ```
+
 ### Explanation
-The script takes each of the selected measures and loops through them to set a default format string according to various conditions. 
+
+The script takes each of the selected measures and loops through them to set a default format string according to various conditions.

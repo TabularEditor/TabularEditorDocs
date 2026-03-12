@@ -24,27 +24,29 @@ description: Change the display language for Tabular Editor 3's user interface.
 Tabular Editor 3 supports multiple UI languages. You can switch between them at any time.
 
 > [!NOTE]
-Tabular Editor 3 is still not fully localized. Specifically we have so far not localized the individual TOM properties. 
+> Tabular Editor 3 is still not fully localized. Specifically we have so far not localized the individual TOM properties.
 
 ## Supported Languages
 
-| Language | Status |
-|----------|--------|
-| English | Fully supported |
-| Spanish | Preview |
-| Chinese | Preview |
-| French | Beta |
-| German | Beta |
-| Japanese | Beta |
+| Language | Status          |
+| -------- | --------------- |
+| English  | Fully supported |
+| Spanish  | Preview         |
+| Chinese  | Preview         |
+| French   | Beta            |
+| German   | Beta            |
+| Japanese | Beta            |
 
 > [!NOTE]
 > **Preview** languages have core UI elements translated but may have incomplete coverage. **Beta** languages are experimental and may have significant gaps or inconsistencies. Report issues on [GitHub](https://github.com/TabularEditor/TabularEditor3/issues).
 
 ### Preview Languages
+
 The languages under Beta support means that they have been verified by an human translator, but that Tabular Editor 3 may still not be fully localized. Specifically we have so far not localized the individual TOM properties.
 
 ### Beta Languages
-Beta languages have been translated exclusively through AI and have not been verified by human translators. We plan to bring beta languages into Preview in Q2 2026. 
+
+Beta languages have been translated exclusively through AI and have not been verified by human translators. We plan to bring beta languages into Preview in Q2 2026.
 
 ## Changing the Language
 

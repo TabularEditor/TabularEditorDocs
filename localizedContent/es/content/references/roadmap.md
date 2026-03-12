@@ -1,4 +1,4 @@
-﻿---
+---
 uid: roadmap
 title: Roadmap
 author: Morten Lønskov
@@ -10,6 +10,7 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Tabular Editor 3 Roadmap
 
 Below is an overview of major new features to be shipped with Tabular Editor 3 updates in the short- to long term:
@@ -21,7 +22,7 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 - **Semantic Bridge enhancements**: Support for v1.1 properties and enhanced import UI
 - **Localization improvements**: Expanding language support and refining existing translations
 - **Power Query (M) Auto-Formatting**: Advanced formatting capabilities for M expressions
-- **Graphical Model Comparison**: See the changes that are applied to 
+- **Graphical Model Comparison**: See the changes that are applied to
 
 ## Up Next
 
@@ -90,6 +91,7 @@ For detailed information about each release, see the [full release history](xref
 ✅ **Native ARM64 builds** - Optimized performance on ARM64 processors (v3.23.0)
 
 ## Shipped in 2024
+
 ✅ DAX Debugger Locals Enhancement
 
 ✅ Full Direct Lake Integration
@@ -113,6 +115,7 @@ For detailed information about each release, see the [full release history](xref
 ✅ Power Query (M) Highlighting
 
 ## Shipped in 2023
+
 ✅ TMDL Support as standard Save to Folder file format. (Depending on release of TMDL by Microsoft)
 
 ✅ Import Table Wizard support for Databricks (pending availability of REST endpoint for fetching metadata/schema)
@@ -144,6 +147,7 @@ For detailed information about each release, see the [full release history](xref
 ✅  Git integration (private preview)
 
 ## Shipped in 2021
+
 ✅  Import Table Wizard
 
 ✅  Portable Version
@@ -157,5 +161,6 @@ For detailed information about each release, see the [full release history](xref
 ***
 
 # Tabular Editor 2 Roadmap
-> [!NOTE] 
->Tabular Editor 2 is no longer under active development and will not receive any major feature additions or improvements from our side. We are, however, committed to keeping it up-to-date, ensuring support for new semantic modelling features as they are released from Microsoft, and also fixing any critical or blocking issues. As the project is open-source under MIT, anyone is welcome to submit pull requests, which will be reviewed and approved by our team.
+
+> [!NOTE]
+> abular Editor 2 is no longer under active development and will not receive any major feature additions or improvements from our side. We are, however, committed to keeping it up-to-date, ensuring support for new semantic modelling features as they are released from Microsoft, and also fixing any critical or blocking issues. As the project is open-source under MIT, anyone is welcome to submit pull requests, which will be reviewed and approved by our team.

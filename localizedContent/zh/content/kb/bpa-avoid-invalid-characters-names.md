@@ -69,6 +69,7 @@ Name = string.Concat(
 ```
 
 To apply:
+
 1. In the **Best Practice Analyzer** select flagged objects
 2. Click **Apply Fix**
 

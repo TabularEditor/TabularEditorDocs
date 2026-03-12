@@ -8,6 +8,7 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 ## Roles and Row-Level Security
 
 Roles are visible in the Explorer Tree. You can right-click the tree to create new roles, delete or duplicate existing roles. You can view and edit the members of each role, by locating the role in the Explorer Tree, and navigating to the "Role Members" property in the Property Grid. Note that when deploying, the [Deployment Wizard](../features/deployment.md) does not deploy role members by default.

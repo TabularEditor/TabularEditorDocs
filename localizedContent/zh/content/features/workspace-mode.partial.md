@@ -1,4 +1,4 @@
-﻿---
+---
 uid: workspace-mode
 title: Workspace Mode
 applies_to:
@@ -14,7 +14,9 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 ## Workspace Mode
+
 Tabular Editor 3 introduces the concept of **workspace mode** when creating a new model inside the tool, or when loading a Model.bim or Database.json file of an existing model.
 
 Using workspace mode, Tabular Editor will synchronize your model metadata changes to a **workspace database**, whenever you hit Save (Ctrl+S), while also saving the metadata changes to the file(s) on disk.
@@ -22,7 +24,7 @@ Using workspace mode, Tabular Editor will synchronize your model metadata change
 Ideally, each model developer should use their own workspace database to avoid conflicts while developing.
 
 > [!WARNING]
-> Do not enable Git integration on the Fabric workspace that you use to host your Tabular Editor workspace databases. This is to avoid Git conflicts as you develop the model, since Tabular Editor makes changes to the workspace database through the XMLA endpoint, and these changes will not be in sync with any underlying Git branch. 
+> Do not enable Git integration on the Fabric workspace that you use to host your Tabular Editor workspace databases. This is to avoid Git conflicts as you develop the model, since Tabular Editor makes changes to the workspace database through the XMLA endpoint, and these changes will not be in sync with any underlying Git branch.
 
 > [!NOTE]
 > For models at compatibility level 1200, 1400 or 1500, we recommend using a local instance of Analysis Services to host the workspace database, such as the one included with [SQL Server Developer Edition 2019](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
@@ -68,7 +70,7 @@ Your options are:
 Information about whether to connect to a workspace database for a given model, and which workspace server and database to use is stored in the [Tabular Model User Options (.tmuo) file](xref:user-options).
 
 > [!WARNING]
-> When choosing a workspace database, Tabular Editor 3 will deploy the loaded model metadata onto that workspace database. For this reason, you should never use a production database as your workspace database. Moreover, we recommend using a separate Analysis Services instance/Power BI workspace for your workspace databases. 
+> When choosing a workspace database, Tabular Editor 3 will deploy the loaded model metadata onto that workspace database. For this reason, you should never use a production database as your workspace database. Moreover, we recommend using a separate Analysis Services instance/Power BI workspace for your workspace databases.
 
 # Advantages of workspace mode
 
@@ -79,13 +81,14 @@ The main advantage of workspace mode, is that it allows Tabular Editor to stay c
 
 # Disable Workspace Mode for a Model
 
-If you prefer to *disable workspace mode* and edit a model file entirely offline, choose one of the methods below.
+If you prefer to _disable workspace mode_ and edit a model file entirely offline, choose one of the methods below.
 
 ## Permanently disable Workspace Mode
 
-1. Locate the model’s `.tmuo` workspace file (it sits next to your `.bim`, `.tmdl`, or `.json` file) in your File Explorer.  
-2. Do **either** of the following:  
-   - **Delete** the `.tmuo` file, **or**  
+1. Locate the model’s `.tmuo` workspace file (it sits next to your `.bim`, `.tmdl`, or `.json` file) in your File Explorer.
+
+2. Do **either** of the following:
+   - **Delete** the `.tmuo` file, **or**
    - Open it in a text editor and set:
 
      ```json
@@ -94,13 +97,13 @@ If you prefer to *disable workspace mode* and edit a model file entirely offline
      }
      ```
 
-3. Open the model from the `.bim`, `.tmdl`, or `.json` file as usual.  
+3. Open the model from the `.bim`, `.tmdl`, or `.json` file as usual.
 
 Tabular Editor will now stay offline every time you load this model.
 
 ## Disable Workspace Mode for the current session only
 
-1. In the **Open Semantic Model** dialog, check **Load without workspace database**.  
+1. In the **Open Semantic Model** dialog, check **Load without workspace database**.
 
 ![Load without Workspace database](~/content/assets/images/load-without-wsdb.png)
 

@@ -10,18 +10,20 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
+
 # Create Field Parameters in
 
 ## Script Purpose
+
 If you want to create field parameters in a Power BI model using Tabular Editor or in a Direct Lake model.
 
 > [!TIP]
 > Want to see the script in action, check out this [Guy in a Cube video](https://www.youtube.com/watch?v=Cg6zRhwF-Ro) where Patrick LeBlanc explains how to use it step by step.
 
-
 ## Script
 
 ### Select Columns or Measures to create a field parameter table
+
 ```csharp
 // Before running the script, select the measures or columns that you
 // would like to use as field parameters (hold down CTRL to select multiple
@@ -64,7 +66,9 @@ fieldColumn.SetExtendedProperty("ParameterMetadata", "{\"version\":3,\"kind\":2}
 fieldColumn.IsHidden = true;
 orderColumn.IsHidden = true;
 ```
+
 ### Explanation
-Before running the script the user has to select the measures or columns in the TOM Explorer they wish to have in their field parameter table. 
-The selected objects are then inserted into a calculated table which is then configured as a field parameter table automatically. 
+
+Before running the script the user has to select the measures or columns in the TOM Explorer they wish to have in their field parameter table.
+The selected objects are then inserted into a calculated table which is then configured as a field parameter table automatically.
 

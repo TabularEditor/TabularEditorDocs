@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Refresh Override Profiles
 
 Refresh override profiles allow you to temporarily modify certain model properties during a refresh operation without changing the actual model metadata. This is configured through the [Advanced Refresh dialog](xref:advanced-refresh).
@@ -50,6 +51,7 @@ Each override within `dataSources`, `expressions`, `partitions`, or `columns` mu
 By default, overrides apply globally to the refresh operation. However, you can use the `scope` property to limit an override to only affect a specific table or partition. This is useful when you want to refresh the entire model but need specific tables to source data differently than what's configured in the model metadata.
 
 The `scope` object can contain:
+
 - `database` - The database name
 - `table` - The table name (applies override only when refreshing this table)
 - `partition` - The partition name (applies override only when refreshing this partition)

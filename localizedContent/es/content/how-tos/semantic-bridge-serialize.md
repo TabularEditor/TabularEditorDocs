@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Serialize a Metric View to YAML
 
 This how-to demonstrates how to serialize a Metric View back to YAML format, either as a string or saved to a file.
@@ -24,7 +25,6 @@ This how-to demonstrates how to serialize a Metric View back to YAML format, eit
 > [!WARNING]
 > The MVP only supports v0.1 Metric View properties. Any v1.1 metadata present in a loaded Metric View is silently ignored and will be lost when you serialize.
 > Do not overwrite a source YAML file that contains v1.1 metadata.
-
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 

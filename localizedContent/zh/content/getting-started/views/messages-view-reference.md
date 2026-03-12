@@ -1,4 +1,4 @@
-﻿---
+---
 uid: messages-view-reference
 title: Messages view
 author: Daniel Otykier
@@ -16,4 +16,5 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 [!include[using-bpa](../../features/views/messages-view.md)]

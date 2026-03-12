@@ -1,4 +1,4 @@
-﻿---
+---
 uid: pivot-grid
 title: Pivot Grids
 author: Daniel Otykier
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Pivot Grids
 
 > [!NOTE]
@@ -31,13 +32,14 @@ By default, the Pivot Grid auto-updates every time you save changes to the seman
 
 > [!TIP]
 > Some clarifications on terminology:
+>
 > - **Fields** refers to model measures, KPIs, columns and hierarchies. In other words, anything that can be dragged into the Pivot Grid.
 > - **KPIs** are a special type of measure that can be created in Tabular Editor. They are displayed in the Pivot Grid just like measures, but with a special icon to indicate that they are KPIs. Each KPI can have up to 3 different values (target, trend, and status), which are displayed separately in the Pivot Grid.
 > - **Columns** in the Pivot Grid (such as in the term "Column Area") should not be confused with columns in the model. In the Pivot Grid, columns are used to slice the data horizontally, while rows are used to slice the data vertically.
-> - **Cells** in the Pivot Grid are the individual data points where a row and a column intersect. Each cell contains a single value, which is the result of the DAX expression of the specific measure, evaluated under the filter context produced by values in the *Row Area* and *Column Area*, in combination with any filters applied to fields in the *Filter Area*.
+> - **Cells** in the Pivot Grid are the individual data points where a row and a column intersect. Each cell contains a single value, which is the result of the DAX expression of the specific measure, evaluated under the filter context produced by values in the _Row Area_ and _Column Area_, in combination with any filters applied to fields in the _Filter Area_.
 
 > [!NOTE]
-> Developers with a multidimensional background may be more familiar with the terms *Dimensions* and *Attributes*. In semantic models, *Dimensions* are represented by model *tables*, and *Attributes* are represented by model *columns*. *Hierarchies* in a semantic model, is just a way to group columns together, such as in a calendar hierarchy: Year > Quarter > Month > Day. Such hierarchies used to be called *Attribute Hierarchies* or *User-Defined Hierarchies* in multidimensional models.
+> Developers with a multidimensional background may be more familiar with the terms _Dimensions_ and _Attributes_. In semantic models, _Dimensions_ are represented by model _tables_, and _Attributes_ are represented by model _columns_. _Hierarchies_ in a semantic model, is just a way to group columns together, such as in a calendar hierarchy: Year > Quarter > Month > Day. Such hierarchies used to be called _Attribute Hierarchies_ or _User-Defined Hierarchies_ in multidimensional models.
 
 ## Creating a Pivot Grid
 
@@ -104,8 +106,8 @@ There are several ways to add a field to a Pivot Grid:
 
 **From the TOM Explorer:**
 
-- Right-click on one or more *measures* and choose **Add to Pivot Grid**.
-- Right-click on a *column* or *hierarchy* and choose any of the **Add to pivot**-options (choose between rows, columns, or filters).
+- Right-click on one or more _measures_ and choose **Add to Pivot Grid**.
+- Right-click on a _column_ or _hierarchy_ and choose any of the **Add to pivot**-options (choose between rows, columns, or filters).
 - If a measure, column or hierarchy is already shown in the Pivot Grid, the right-click options will allow you to **Remove from Pivot Grid**. in addition, you will see options to move columns or hierarchies between the different areas of the Pivot Grid.
 - All of the options above are also available through the **Measure**, **Column**, and **Hierarchy** menus (respectively), when one or more such objects are selected in the TOM Explorer.
 - In addition to the above, you can also drag one or more measures, columns, or hierarchies from the TOM Explorer into the Pivot Grid areas.

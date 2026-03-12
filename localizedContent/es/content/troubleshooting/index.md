@@ -12,4 +12,4 @@ This section contains troubleshooting guides and solutions for common issues.
 
 ---
 
-*Find solutions to common problems and get help when needed.*
+_Find solutions to common problems and get help when needed._

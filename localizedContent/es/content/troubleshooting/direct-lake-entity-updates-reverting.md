@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 # Entity Name Changes Revert in Direct Lake Models
 
 After editing `EntityName` in Tabular Editor 3 for a Direct Lake table partition, the model may reload in Power BI  with the original names. This behavior often looks like TE3 did not persist the change, but it is caused by how Power BI interprets Direct Lake metadata during refresh.
@@ -43,8 +44,8 @@ Power BI binds Direct Lake tables to their origin through the `SourceLineageTag`
    - Set the table's `SourceLineageTag` to exactly match the new `EntityName`.
    - Set the `Name` property to true for table's `ChangedProperties` collection so Power BI treats the rename as intentional.
 3. **Save the model in TE3.**
-4. **Refresh the affected table (or the entire model) in Power BI.** 
-The names should now persist.
+4. **Refresh the affected table (or the entire model) in Power BI.**
+   The names should now persist.
 
 ---
 
@@ -54,7 +55,7 @@ The names should now persist.
 - The `ChangedProperties` flag is required only for Direct Lake (and other composite) tables; legacy import models do not need it.
 - These behaviors originate from Power BI’s metadata synchronization rules, not from TE3 storage.
 
-## Automate bulk updates with C#
+## Automate bulk updates with C\#
 
 When you have many Direct Lake tables to adjust, you can run the following TE3 script. It prompts for new entity names, updates each selected table, syncs the `SourceLineageTag`, and flags the changed metadata.
 
@@ -315,8 +316,9 @@ public class BatchEntityEditor : Form
     }
 }
 ```
-> [!NOTE] 
-> The script was generated using an LLM for code assistance, but has been tested by the Tabular Editor team. 
+
+> [!NOTE]
+> The script was generated using an LLM for code assistance, but has been tested by the Tabular Editor team.
 
 Running the script updates only the tables that receive a new entity name. After the script finishes, review the changes, save the model, and refresh in Power BI to confirm the metadata persists.
 

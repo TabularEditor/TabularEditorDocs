@@ -41,13 +41,13 @@ This rule identifies objects with descriptions that lack translations for one or
 not string.IsNullOrEmpty(Description) 
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedDescriptions[it]))
 ```
+
 This rule triggers when an object meets both of these conditions:
 
 1. The object has a description (not empty)
 2. At least one culture in the model is missing a translation for that description
 
 In other words, if you have descriptions and multiple cultures defined, all descriptions should be translated for all cultures.
-
 
 ## How to Fix
 
