@@ -1,31 +1,31 @@
 ---
 uid: api-index
-title: Scripting API
+title: API de scripting
 author: Daniel Otykier
 updated: 2026-01-27
 ---
 
-# Tabular Editor API
+# API de Tabular Editor
 
-This is the API documentation for Tabular Editor's C# scripting capabilities.
+Esta es la documentación de la API de Tabular Editor para las capacidades de scripting en C#.
 
-Specifically, the objects available for scripting are those found in the **TOMWrapper.dll**, **TabularEditor3.Shared.dll**, and **SemanticBridge.dll** libraries.
+En concreto, los objetos disponibles para scripting son los que se encuentran en las bibliotecas **TOMWrapper.dll**, **TabularEditor3.Shared.dll** y **SemanticBridge.dll**.
 
-## Getting started
+## Primeros pasos
 
-When writing a script in Tabular Editor, the two most common objects used are [`Selected`](xref:TabularEditor.Shared.Interaction.Selection), which lets you access objects currently selected in the TOM Explorer, and [`Model`](xref:TabularEditor.TOMWrapper.Model), which lets you access any object within the currently loaded data model. Both these objects are available as member properties on the global [`ScriptHost`](xref:TabularEditor.Shared.Scripting.ScriptHost) object.
+Al escribir un script en Tabular Editor, los dos objetos que se usan con más frecuencia son [`Selected`](xref:TabularEditor.Shared.Interaction.Selection), que le permite acceder a los objetos seleccionados actualmente en el Explorador TOM, y [`Model`](xref:TabularEditor.TOMWrapper.Model), que le permite acceder a cualquier objeto dentro del modelo de datos cargado actualmente. Ambos objetos están disponibles como propiedades miembro en el objeto global [`ScriptHost`](xref:TabularEditor.Shared.Scripting.ScriptHost).
 
-In addition, the `ScriptHost` object holds static methods which are exposed to the script as global methods (i.e. methods you can call without the `ScriptHost` prefix). These methods are also known as @script-helper-methods.
+Además, el objeto `ScriptHost` contiene métodos estáticos que se exponen al script como métodos globales (es decir, métodos que puede llamar sin el prefijo `ScriptHost`). Estos métodos también se conocen como los @script-helper-methods.
 
-## Example
+## Ejemplo
 
 ```csharp
-// Displays a dialog to the user prompting them to select a measure:
+// Muestra un cuadro de diálogo para que el usuario seleccione una medida:
 var myMeasure = SelectMeasure();
 
-// Creates a new measure on the first table of the model, with the same name and expression
-// as the previously selected measure:
+// Crea una nueva medida en la primera tabla del modelo, con el mismo nombre y expresión
+// que la medida seleccionada previamente:
 Model.Tables.First().AddMeasure(myMeasure.Name + " copy", myMeasure.Expression);
 ```
 
-For more examples, see <xref:useful-script-snippets>.
+Para ver más ejemplos, consulte <xref:useful-script-snippets>.
