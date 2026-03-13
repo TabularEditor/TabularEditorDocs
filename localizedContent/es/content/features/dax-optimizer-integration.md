@@ -1,6 +1,6 @@
 ---
 uid: dax-optimizer-integration
-title: DAX Optimizer Integration
+title: Integración con el Optimizador de DAX
 author: Daniel Otykier
 updated: 2024-10-30
 applies_to:
@@ -9,122 +9,122 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           full: true
-        - edition: Business
+        - edition: Empresarial
           full: true
-        - edition: Enterprise
+        - edition: Corporativo
           full: true
 ---
 
-# DAX Optimizer Integration
+# Integración con el Optimizador de DAX
 
 > [!NOTE]
-> Tabular Editor 3 **Enterprise Edition** users are eligible for free DAX Optimizer access. [Learn more](https://blog.tabulareditor.com/2024/10/31/free-dax-optimizer-access-in-tabular-editor-3/)
+> Los usuarios de Tabular Editor 3 **Edición Enterprise** pueden obtener acceso gratuito al Optimizador de DAX. [Más información](https://blog.tabulareditor.com/2024/10/31/free-dax-optimizer-access-in-tabular-editor-3/)
 
-Tabular Editor 3.18.0 introduces **DAX Optimizer** as an integrated experience. [DAX Optimizer](https://daxoptimizer.com) is a service that helps you optimize your SSAS/Azure AS tabular models and Power BI/Fabric semantic models. The tool combines [VertiPaq Analyzer statistics](https://www.sqlbi.com/tools/vertipaq-analyzer/) with a static analysis of your DAX code, thus providing a prioritized list of recommendations, to help you quickly identify potential performance bottlenecks.
+Tabular Editor 3.18.0 presenta **Optimizador de DAX** como una experiencia integrada. [Optimizador de DAX](https://daxoptimizer.com) es un servicio que le ayuda a optimizar sus modelos tabulares de SSAS/Azure AS y sus modelos semánticos de Power BI/Fabric. La herramienta combina estadísticas del [Analizador VertiPaq](https://www.sqlbi.com/tools/vertipaq-analyzer/) con un análisis estático de su código DAX y proporciona una lista priorizada de recomendaciones para ayudarle a identificar rápidamente posibles cuellos de botella de rendimiento.
 
 > [!IMPORTANT]
-> DAX Optimizer is a paid third-party service. In order to use the **DAX Optimizer** feature in Tabular Editor 3, you will need an [account for DAX Optimizer](https://www.daxoptimizer.com/free-tour/).
+> El Optimizador de DAX es un servicio de terceros de pago. Para usar la funcionalidad **Optimizador de DAX** en Tabular Editor 3, necesitará una [cuenta para el Optimizador de DAX](https://www.daxoptimizer.com/free-tour/).
 
-## Video introduction
+## Introducción en vídeo
 
-Watch Marco Russo from [SQLBI](https://www.sqlbi.com) introduce the DAX Optimizer integration in Tabular Editor 3:
+Mira cómo Marco Russo, de [SQLBI](https://www.sqlbi.com), presenta la integración del Optimizador de DAX en Tabular Editor 3:
 
 <iframe width="640" height="360" src="https://www.youtube-nocookie.com/embed/Z5lZdI79tF8" title="Detect and Fix Issues with Tabular Editor 3 and DAX Optimizer Integration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## Getting started
+## Primeros pasos
 
-To access this feature, go to the **View** menu and choose **DAX Optimizer**.
+Para acceder a esta funcionalidad, vaya al menú **Ver** y elija **Optimizador de DAX**.
 
-![Dax Optimizer](~/content/assets/images/features/dax-optimizer-view-menu.png)
+![Optimizador de DAX](~/content/assets/images/features/dax-optimizer-view-menu.png)
 
-You will be presented with a new view similar to the figure below:
+Aparecerá una nueva vista similar a la de la figura siguiente:
 
-![Dax Optimizer View](~/content/assets/images/features/dax-optimizer-view.png)
+![Vista del Optimizador de DAX](~/content/assets/images/features/dax-optimizer-view.png)
 
-To connect Tabular Editor 3 to the DAX Optimizer service, click **Connect...** through the **Options** menu. You will be prompted to enter your Tabular Tools (DAX Optimizer) credentials.
+Para conectar Tabular Editor 3 al servicio de Optimizador de DAX, haga clic en **Conectar...** desde el menú **Opciones**. Se te pedirá que introduzcas tus credenciales de Tabular Tools (Optimizador de DAX).
 
-If you wish to **disconnect** or **connect using a different account**, go to the **Options** menu again, and choose the **Reconnect...** option. Cancelling the dialog will disconnect the current session.
+Si quieres **desconectarte** o **conectarte con una cuenta diferente**, vuelve a abrir el menú **Opciones** y selecciona la opción **Reconectar...**. Al cancelar el cuadro de diálogo, se desconectará la sesión actual.
 
-If you want Tabular Editor 3 to automatically connect the next time the application is launched, you can check the **Connect automatically** option within the **Options** menu. If you have a DAX Optimizer account with workspaces in multiple regions, you can also choose which region to connect to through the **Options** menu.
+Si quieres que Tabular Editor 3 se conecte automáticamente la próxima vez que se inicie la aplicación, puedes marcar la opción **Conectar automáticamente** dentro del menú **Opciones**. Si tienes una cuenta del Optimizador de DAX con varios Workspace en distintas regiones, también puedes elegir a qué región conectarte desde el menú **Opciones**.
 
-Lastly, the **Options** menu also lets you switch to a different account in [group scenarios](https://docs.daxoptimizer.com/how-to-guides/managing-groups).
+Por último, el menú **Opciones** también te permite cambiar a una cuenta diferente en [escenarios de grupo](https://docs.daxoptimizer.com/how-to-guides/managing-groups).
 
-## Browsing workspaces and models
+## Explorar Workspaces y modelos
 
-Once connected, the dropdowns at the top of the view will be populated with your existing workspaces, models and model versions. Make your selections from left to right (i.e. choose the **Workspace** first, then the **Model**, then the **Version**). The view will display a summary of the currently selected model version, with information such as model size, number of tables, number of measures, etc.
+Una vez conectado, las listas desplegables de la parte superior de la vista se rellenarán con los Workspace existentes, los modelos y las versiones de modelo. Haz tus selecciones de izquierda a derecha (es decir, elige primero el **Workspace**, luego el **Modelo** y después la **Versión**). La vista mostrará un resumen de la versión del modelo seleccionada actualmente, con información como el tamaño del modelo, el número de tablas, el número de medidas, etc.
 
-![Model Overview](~/content/assets/images/model-overview.png)
+![Resumen del modelo](~/content/assets/images/model-overview.png)
 
 > [!NOTE]
-> Tabular Editor 3 lets you upload VPAX files in order to create new models or model versions in the DAX Optimizer service. If, however, you need to create or manage workspaces, move or share models, etc. you will need to do this through the [DAX Optimizer web interface](https://app.daxoptimizer.com).
+> Tabular Editor 3 te permite cargar archivos VPAX para crear nuevos modelos o versiones de modelo en el servicio del Optimizador de DAX. Sin embargo, si necesitas crear o administrar Workspaces, mover o compartir modelos, etc., tendrás que hacerlo a través de la [interfaz web del Optimizador de DAX](https://app.daxoptimizer.com).
 
-If a model version has not yet been analyzed, you will have an option to start the analysis. Note that, depending on your account plan, you may have a limited number of "runs" available.
+Si una versión de modelo aún no se ha analizado, tendrás la opción de iniciar el análisis. Ten en cuenta que, según el plan de tu cuenta, es posible que tengas un número limitado de "ejecuciones" disponibles.
 
-Once the analysis is complete, you will be presented with a summary showing the number of issues detected. The information shown is similar to what you would see in the DAX Optimizer web interface.
+Una vez que el análisis haya finalizado, se te mostrará un resumen con el número de incidencias detectadas. La información que se muestra es similar a la que verías en la interfaz web del Optimizador de DAX.
 
-Go to the **Issues** or **Measures** tab to view detailed results. Use the column headers to sort and filter the results.
+Ve a la pestaña **Problemas** o **Medidas** para ver los resultados detallados. Usa los encabezados de las columnas para ordenar y filtrar los resultados.
 
 ![Dax Optimizer Issues](~/content/assets/images/features/dax-optimizer-issues.png)
 
-## Navigating issues and measures
+## Navegar por problemas y medidas
 
-When you double-click on an issue or measure in the detailed view shown above, you will be taken to the **DAX Optimizer Results** view, where the original DAX expression of the measure is shown, along with highlights of the problematic areas. The list on the left side of the screen lets you toggle which issues to highlight. Moreover, you can mark issues as **Fixed** or **Ignored** using the checkboxes within the list.
+Cuando haces doble clic en un problema o una medida en la vista detallada mostrada arriba, se abrirá la vista **Resultados del Optimizador de DAX**, donde se muestra la expresión DAX original de la medida, junto con resaltados de las zonas problemáticas. La lista del lado izquierdo de la pantalla te permite activar o desactivar los problemas que se resaltan. Además, puedes marcar los problemas como **Corregido** o **Ignorado** usando las casillas de verificación de la lista.
 
 ![Dax Optimizer Results](~/content/assets/images/features/dax-optimizer-results.png)
 
-Click on the **Find in TOM Explorer...** button in the top-right area of the view, to navigate to the corresponding measure in the currently loaded model.
+Haz clic en el botón **Buscar en el Explorador TOM...** situado en la esquina superior derecha de la vista para ir a la medida correspondiente del modelo cargado actualmente.
 
-Tick the **Track TOM Explorer** checkbox to keep the TOM Explorer in sync with the currently selected measure in the DAX Optimizer Results view.
+Marca la casilla **Seguir el Explorador TOM** para mantener el Explorador TOM sincronizado con la medida seleccionada actualmente en la vista **Resultados del Optimizador de DAX**.
 
-When you click on a measure reference in the DAX code panel within the **DAX Optimizer Results** view, the view will navigate to that measure. You can then use the **Back** (Alt+Left) and **Forward** (Alt+Right) buttons to navigate back and forth between the measures you have visited.
+Cuando haces clic en una referencia a una medida en el panel de código DAX dentro de la vista **Resultados del Optimizador de DAX**, la vista irá a esa medida. Luego puedes usar los botones **Atrás** (Alt+Left) y **Adelante** (Alt+Right) para navegar atrás y adelante entre las medidas que has visitado.
 
-## Upload models and model versions
+## Subir modelos y versiones de modelo
 
-To upload VPAX statistics to DAX Optimizer, make sure Tabular Editor is currently connected to an instance of Analysis Services (SSAS, Azure AS, Power BI Desktop or Power BI/Fabric XMLA endpoint). Then, select the workspace in the top-left dropdown on the **DAX Optimizer** view. Click on **Upload...** within the **Options** menu.
+Para subir estadísticas de VPAX al Optimizador de DAX, asegúrate de que Tabular Editor esté conectado actualmente a una instancia de Analysis Services (SSAS, Azure AS, Power BI Desktop o un punto de conexión XMLA de Power BI/Fabric). Luego, en el menú desplegable de la esquina superior izquierda de la vista **Optimizador de DAX**, selecciona el Workspace. Haz clic en **Subir...** dentro del menú **Opciones**.
 
-You will be presented with a dialog similar to the one shown below:
+Se mostrará un cuadro de diálogo similar al que se muestra a continuación:
 
-![Upload Vpax](~/content/assets/images/upload-vpax.png)
+![Subir Vpax](~/content/assets/images/upload-vpax.png)
 
-Here, you can choose whether the VPAX should be uploaded as a new model within the workspace, or whether the VPAX contains updated statistics for an existing model.
+Aquí puedes elegir si el VPAX debe cargarse como un modelo nuevo dentro del Workspace o si el VPAX contiene estadísticas actualizadas para un modelo existente.
 
-- For a **new model**, you must supply a name and choose whether or not the VPAX should be [obfuscated](https://www.sqlbi.com/blog/marco/2024/03/15/vpax-obfuscator-a-library-to-obfuscate-vpax-files/) (see below for more details on obfuscation). You must also choose which [contract](https://docs.daxoptimizer.com/glossary/contract) the model should be uploaded under. This impacts the number and frequency of DAX Optimizer [_runs_](https://docs.daxoptimizer.com/glossary/run) you can subsequently perform on the model.
-- For a **new model version**, you must select the existing model to update.
+- Para un **modelo nuevo**, debes proporcionar un nombre y elegir si el VPAX debe estar [ofuscado](https://www.sqlbi.com/blog/marco/2024/03/15/vpax-obfuscator-a-library-to-obfuscate-vpax-files/) o no (consulta más abajo para obtener más detalles sobre la ofuscación). También debes elegir bajo qué [contrato](https://docs.daxoptimizer.com/glossary/contract) se debe subir el modelo. Esto afecta al número y la frecuencia de [_ejecuciones_](https://docs.daxoptimizer.com/glossary/run) del Optimizador de DAX que podrás realizar posteriormente sobre el modelo.
+- Para una **nueva versión del modelo**, debes seleccionar el modelo existente que quieres actualizar.
 
-Once you click the **OK** button, the VPAX file will be uploaded to DAX Optimizer, and you will be able to start analyzing the model.
+Cuando hagas clic en el botón **Aceptar**, el archivo VPAX se subirá al Optimizador de DAX y podrás empezar a analizar el modelo.
 
 > [!NOTE]
-> If no VertiPaq Analyzer statistics are available in Tabular Editor 3, these statistics will be collected for the current model before the VPAX file is uploaded. We will also automatically re-collect statistics if the last statistics collection is older than or equal to the statistics of the last VPAX file upload, for the specific model.
+> Si Tabular Editor 3 no tiene estadísticas del Analizador VertiPaq disponibles, esas estadísticas se recopilarán para el modelo actual antes de subir el archivo VPAX. También volveremos a recopilar automáticamente las estadísticas si la última recopilación es anterior o coincide con la de la última subida del archivo VPAX, para ese modelo en concreto.
 
-### Obfuscation
+### Ofuscación
 
-By default, VPAX files uploaded using Tabular Editor 3 will be obfuscated. In the **Upload Model** you may toggle obfuscation on/off for new model uploads. Subsequent model version uploads will be obfuscated or not depending on the first version upload. You can also export an obfuscated VPAX file locally without uploading to DAX Optimizer through the **VertiPaq Analyzer** view. In this case, a dictionary file is generated and stored on your local machine, next to the exported .ovpax file. This dictionary file is used to deobfuscate the contents of the .ovpax file.
+De forma predeterminada, los archivos VPAX subidos con Tabular Editor 3 se ofuscarán. En **Subir modelo** puedes activar o desactivar la ofuscación para las subidas de modelos nuevos. Las subidas posteriores de versiones del modelo se ofuscarán o no en función de cómo se haya subido la primera versión. También puedes exportar localmente un archivo VPAX ofuscado sin subirlo al Optimizador de DAX desde la vista **Analizador VertiPaq**. En este caso, se genera un archivo de diccionario y se guarda en tu equipo local, junto al archivo .ovpax exportado. Este archivo de diccionario se usa para desofuscar el contenido del archivo .ovpax.
 
-When obfuscated VPAX data is uploaded to the DAX Optimizer service through the **DAX Optimizer** view, Tabular Editor automatically keeps track of obfuscation dictionaries by storing them in the `%LocalAppData%\TabularEditor3\DaxOptimizer` folder on your local machine. As such, when browsing models using the **DAX Optimizer** feature in Tabular Editor 3, models are automatically deobfuscated if a suitable dictionary is found in this folder, providing a more seamless experience when using obfuscation.
+Cuando se suben datos VPAX ofuscados al servicio del Optimizador de DAX a través de la vista **Optimizador de DAX**, Tabular Editor realiza automáticamente el seguimiento de los diccionarios de ofuscación y los guarda en la carpeta `%LocalAppData%\\TabularEditor3\\DaxOptimizer` de tu equipo local. Por ello, al explorar modelos con la característica **Optimizador de DAX** en Tabular Editor 3, los modelos se desofuscan automáticamente si se encuentra un diccionario adecuado en esta carpeta, lo que ofrece una experiencia más fluida al usar la ofuscación.
 
-If the dictionary is not found, you will have an option to manually specify a dictionary file.
+Si no se encuentra el diccionario, tendrás la opción de especificar manualmente un archivo de diccionario.
 
-![Obfuscated Model](~/content/assets/images/obfuscated-model.png)
+![Modelo ofuscado](~/content/assets/images/obfuscated-model.png)
 
-If no dictionary file is provided, you will only be able to browse the obfuscated model and DAX Optimizer results, meaning you will not be able to view the original DAX expressions or navigate to the corresponding measures in the TOM Explorer.
+Si no se proporciona ningún archivo de diccionario, solo podrás explorar el modelo ofuscado y los resultados del Optimizador de DAX, lo que significa que no podrás ver las expresiones DAX originales ni navegar hasta las medidas correspondientes en el Explorador TOM.
 
-[Learn more about DAX Optimizer obfuscation](https://docs.daxoptimizer.com/how-to-guides/obfuscating-files).
+[Más información sobre la ofuscación del Optimizador de DAX](https://docs.daxoptimizer.com/how-to-guides/obfuscating-files).
 
 > [!TIP]
-> If you want to browse an obfuscated model through the DAX Optimizer web interface, you can specify a dictionary from the `%LocalAppData%\TabularEditor3\DaxOptimizer` location. The DAX Optimizer web interface performs the deobfuscation on the client side, so your dictionary is never uploaded to the DAX Optimizer service.
+> Si quieres explorar un modelo ofuscado a través de la interfaz web del Optimizador de DAX, puedes especificar un diccionario desde la ubicación `%LocalAppData%\\TabularEditor3\\DaxOptimizer`. La interfaz web del Optimizador de DAX realiza la desofuscación en el lado del cliente, por lo que tu diccionario nunca se carga en el servicio del Optimizador de DAX.
 
-### Analyze a model
+### Analizar un modelo
 
-Once a VPAX file has been uploaded, please allow a few seconds for the file to be "verified" by the DAX Optimizer service. Once verified, you can perform a DAX Optimizer "run" by checking the "You agree to **consume 1 run** to analyze this model." checkbox, and then clicking the **Analyze** button in the **DAX Optimizer** view:
+Una vez que se haya cargado un archivo VPAX, espera unos segundos a que el servicio del Optimizador de DAX "verifique" el archivo. Una vez verificado, puedes realizar un "run" del Optimizador de DAX marcando la casilla "Aceptas **consumir 1 run** para analizar este modelo.", y luego haciendo clic en el botón **Analizar** en la vista de **DAX Optimizer**:
 
-![Dax Optimizer Analyze](~/content/assets/images/features/dax-optimizer-analyze.png)
+![Análisis del Optimizador de Dax](~/content/assets/images/features/dax-optimizer-analyze.png)
 
-The analysis will take a few minutes to complete, depending on the size of the model and the number of measures. Once the analysis is complete, you will be presented with a summary of the issues detected.
+El análisis tardará unos minutos en completarse, en función del tamaño del modelo y del número de medidas. Cuando el análisis se complete, verás un resumen de los problemas detectados.
 
-## Known issues and limitations
+## Problemas conocidos y limitaciones
 
-The following are known issues and limitations with the **DAX Optimizer** feature, which we expect to address in future releases:
+A continuación se indican los problemas conocidos y las limitaciones de la funcionalidad **Optimizador de DAX**, que esperamos solucionar en versiones futuras:
 
-- The **DAX Optimizer** view does not display how many "runs" are left on any given contract. As a workaround, sign in to https://app.daxoptimizer.com and click the "lightning" icon in the top-right corner, to view how many "runs" you have left per contract.
+- La vista de **Optimizador de DAX** no muestra cuántos "runs" quedan en un contrato determinado. Como solución alternativa, inicie sesión en https://app.daxoptimizer.com y haga clic en el icono de "relámpago" en la esquina superior derecha para ver cuántos "runs" le quedan por cada contrato.
