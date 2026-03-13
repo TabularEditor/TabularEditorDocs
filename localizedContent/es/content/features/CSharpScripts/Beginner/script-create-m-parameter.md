@@ -1,6 +1,6 @@
 ---
 uid: script-create-m-parameter
-title: Create M Parameter
+title: Crear parámetro M
 author: Kurt Buhler
 updated: 2023-02-28
 applies_to:
@@ -11,20 +11,20 @@ applies_to:
       full: true
 ---
 
-# Create M Partition
+# Crear partición M
 
-## Script Purpose
+## Propósito del script
 
-If you want to create a new dynamic M Parameter to use in Power Query queries (M Partitions or Shared Expressions).
+Si quieres crear un nuevo parámetro M dinámico para usarlo en consultas de Power Query (particiones M o expresiones compartidas).
 
-## Script
+## Secuencia de comandos
 
-### Create a new M Partition
+### Crear una nueva partición M
 
 ```csharp
-// This script creates a new M parameter in the 'Shared Expressions' of a model.
+// Este script crea un nuevo parámetro M en las 'Expresiones compartidas' de un modelo.
 //
-// Create a new shared expression called "New Parameter"
+// Crea una nueva expresión compartida llamada "New Parameter"
 Model.AddExpression( 
     "New Parameter", 
     @"
@@ -36,23 +36,23 @@ Model.AddExpression(
 ]"
 );
 
-// Provides an output informing how to configure and use the parameter
+// Muestra un mensaje con instrucciones sobre cómo configurar y usar el parámetro
 Info ( 
-    "Created a new Shared Expression called 'New Parameter', which is an M Parameter template." + 
+    "Se ha creado una nueva expresión compartida llamada 'New Parameter', que es una plantilla de parámetro M." + 
     "\n------------------------------------------------------\n" + 
-    "To configure:" +
+    "Para configurarlo:" +
     "\n------------------------------------------------------\n    " + 
-    "1. Replace the text 'New Parameter' with the desired parameter value\n    " +
-    "2. Set the data type appropriately\n    " +
-    "3. Replace any values found in the M partitions with the parameter reference." );
+    "1. Reemplaza el texto 'New Parameter' por el valor de parámetro deseado\n    " +
+    "2. Establece el tipo de datos correctamente\n    " +
+    "3. Reemplaza cualquier valor encontrado en las particiones M por la referencia al parámetro." );
 ```
 
-### Explanation
+### Explicación
 
-This snippet creates a new M parameter in 'Shared Expressions' which you can refer to from within your M Partitions Power Query.
+Este fragmento crea un nuevo parámetro M en 'Expresiones compartidas', al que puedes hacer referencia desde las consultas de Power Query de tus particiones M.
 
-## Example Output
+## Salida de ejemplo
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-new-m-parameter.png" alt="An example of the Info box that appears to inform the user that the M Parameter was successfully created, and recommending next steps to configure / use it in the M Partitions." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the Info box that appears to inform the user that the M Parameter was successfully created, and recommending next steps to configure / use it in the M Partitions.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-new-m-parameter.png" alt="An example of the Info box that appears to inform the user that the M Parameter was successfully created, and recommending next steps to configure / use it in the M Partitions." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Un ejemplo del cuadro informativo que aparece para informar al usuario de que el parámetro M se creó correctamente y recomendar los siguientes pasos para configurarlo / usarlo en las particiones M.</figcaption>
 </figure>
