@@ -9,28 +9,28 @@ applies_to:
     - version: 3.x
 ---
 
-# Title
+# 标题
 
-## Script Purpose
+## 脚本用途
 
 <br></br>
 
 > [!NOTE]
-> This script does not work when connected to a Power BI Desktop model, due to the limitations of Power BI Desktop External tools: [External Tool Limitations](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). You can still experiment with the script by enabling unsupported modeling operations under "File > Preferences" (TE2) or "Tools > Preferences" (TE3)
+> 由于 Power BI Desktop 外部工具的限制，当连接到 Power BI Desktop 模型时，此脚本无法运行。详见：[外部工具限制](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)。 你仍然可以通过在“文件 > 偏好”(TE2) 或“工具 > 偏好”(TE3) 下启用不受支持的建模操作来试验该脚本。
 
 <br></br>
 
-## Script
+## 脚本
 
-### Script Title
+### 脚本标题
 
 ```csharp
-// Scripts Goes here
+// 脚本在这里
 ```
 
-### Explanation
+### 说明
 
-## Example Output
+## 示例输出
 
 <br>
 <img src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Image description" id="count-things-output">
