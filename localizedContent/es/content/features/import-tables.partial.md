@@ -1,160 +1,160 @@
 ---
 uid: import-tables
-title: Import Tables
+title: Importar tablas
 applies_to:
   products:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           full: true
-        - edition: Business
+        - edition: Negocio
           full: true
-        - edition: Enterprise
+        - edition: Empresarial
           full: true
 ---
 
-Tabular Editor 3 includes a **Table Import Wizard** that helps you create a data source in your model and import tables/views from relational data sources such as a SQL Server database.
+Tabular Editor 3 incluye un **Asistente de importación de tablas** que le ayuda a crear un origen de datos en su modelo e importar tablas o vistas desde orígenes de datos relacionales, como una base de datos de SQL Server.
 
-![Import Tables Wizard](~/content/assets/images/import-tables-wizard.png)
+![Asistente para importar tablas](~/content/assets/images/import-tables-wizard.png)
 
-## Types of TOM Data Sources
+## Tipos de orígenes de datos de TOM
 
-Depending on your version of Analysis Services, there are different ways of defining data sources within the model metadata:
+Según su versión de Analysis Services, existen diferentes formas de definir orígenes de datos dentro de los metadatos del modelo:
 
-- **Provider (aka. Legacy)**: Available in every version of Analysis Services and every compatibility level. Supports a limited range of sources, primarily relational through OLE DB/ODBC drivers. Partitions are usually defined using a SQL statement, which is executed natively against the source. Credentials are managed in the Provider Data Source object in the Tabular Object Model and stored and encrypted server-side.
-- **Structured (aka. Power Query)**: Available since SQL Server 2017 (compatibility level 1400+). Supports a wider range of data sources than Legacy providers. Partitions are usually defined using M (Power Query) expressions. Credentials are managed in the Structured Data Source object in the Tabular Object Model and need to be specified upon every deployment to Analysis Services.
-- **Implicit data sources**: Exclusively used by Power BI semantic models. No explicit Data Source object is created in the model. Instead, the M (Power Query) expression implicitly defines the data source. Credentials are not stored in the Tabular Object Model, but are managed by Power BI Desktop or the Power BI Service.
+- **Proveedor (también llamado "Legacy")**: Disponible en todas las versiones de Analysis Services y en cualquier nivel de compatibilidad. Admite un conjunto limitado de orígenes, principalmente relacionales, a través de controladores OLE DB/ODBC. Las particiones suelen definirse mediante una instrucción SQL, que se ejecuta de forma nativa contra el origen. Las credenciales se administran en el objeto origen de datos del proveedor en el Tabular Object Model y se almacenan y cifran del lado del servidor.
+- **Estructurado (también conocido como Power Query)**: Disponible desde SQL Server 2017 (nivel de compatibilidad 1400+). Admite una gama más amplia de orígenes de datos que los proveedores Legacy. Las particiones suelen definirse mediante expresiones M (Power Query). Las credenciales se administran en el objeto origen de datos estructurado en el Tabular Object Model y deben especificarse en cada despliegue en Analysis Services.
+- **Orígenes de datos implícitos**: Se usan exclusivamente en los modelos semánticos de Power BI. No se crea ningún objeto de origen de datos explícito en el modelo. En su lugar, la expresión M (Power Query) define implícitamente el origen de datos. Las credenciales no se almacenan en el Tabular Object Model, sino que las gestiona Power BI Desktop o el servicio Power BI.
 
 > [!NOTE]
-> The Table Import Wizard and Update Table Schema feature of Tabular Editor 2.x only supports Legacy data sources with SQL partitions. In other words, there is no support for Power Query partitions. For this reason, Legacy data sources are usually recommended, as they provide the highest level of interoperability between the developer tools.
+> El Asistente para importar tablas y la función Actualizar esquema de tabla de Tabular Editor 2.x solo admiten orígenes de datos Legacy con particiones SQL. En otras palabras, no hay compatibilidad con particiones de Power Query. Por este motivo, suelen recomendarse los orígenes de datos heredados, ya que proporcionan el mayor nivel de interoperabilidad entre las herramientas de desarrollo.
 
-## Importing new tables
+## Importación de nuevas tablas
 
-When importing tables (Model menu > Import tables...), Tabular Editor presents you with the options mentioned above (for creating a new data source), as well as a list of data sources already present in the model. Avoid creating new data sources if the tables you want to import are available in one of the data sources already specified in the model.
+Al importar tablas (menú Modelo > Importar tablas...), Tabular Editor te muestra las opciones mencionadas anteriormente (para crear un nuevo origen de datos), además de una lista de los orígenes de datos ya presentes en el modelo. Evita crear nuevos orígenes de datos si las tablas que quieres importar ya están disponibles en alguno de los orígenes de datos especificados en el modelo.
 
 > [!TIP]
-> A Semantic Model is generally regarded as an in-memory optimized semantic cache of a relational data warehouse. For this reason, a model should ideally only contain a single data source, which would point to a SQL-based data warehouse or data mart.
+> Por lo general, un modelo semántico se considera una caché semántica optimizada en memoria de un almacén de datos relacional. Por este motivo, lo ideal es que un modelo solo contenga un único origen de datos, que apunte a un almacén de datos basado en SQL o a un data mart.
 
-## Creating a new data source
+## Crear un nuevo origen de datos
 
-If you need to create a new data source, Tabular Editor provides you with a list of supported data sources:
+Si necesitas crear un nuevo origen de datos, Tabular Editor te ofrece una lista de orígenes de datos compatibles:
 
-![Create New Source](~/content/assets/images/create-new-source.png)
+![Crear nuevo origen](~/content/assets/images/create-new-source.png)
 
-Note that Analysis Services and Power BI in particular supports a much wider range of data sources, however the sources listed in the screenshot above are the ones that Tabular Editor is able to connect for the purpose of automatically importing table metadata (that is, column names and data types). For data sources not on this list, Tabular Editor 3 can still [update table schema by utilising Analysis Services](#updating-table-schema-through-analysis-services).
+Ten en cuenta que, en particular, Analysis Services y Power BI admiten una gama mucho más amplia de orígenes de datos. Sin embargo, los que aparecen en la captura de pantalla anterior son aquellos a los que Tabular Editor puede conectarse para importar automáticamente los metadatos de la tabla (es decir, los nombres de las columnas y los tipos de datos). Para los orígenes de datos que no figuran en esta lista, Tabular Editor 3 aún puede [actualizar el esquema de la tabla mediante Analysis Services](#updating-table-schema-through-analysis-services).
 
-Currently, the following data sources are natively supported by Tabular Editor 3:
+Actualmente, Tabular Editor 3 admite de forma nativa los siguientes orígenes de datos:
 
-- SQL Server databases
-- Azure SQL databases
-- Azure Synapse Analytics (SQL pool and Serverless SQL pool)
+- Bases de datos de SQL Server
+- Bases de datos de Azure SQL
+- Azure Synapse Analytics (SQL pool y SQL pool sin servidor)
 - Oracle
 - ODBC
 - OLE DB
 - Snowflake\*
-- Power BI Dataflow\*
+- Dataflow de Power BI\*
 - Databricks\*
-- Fabric Lakehouse\*
-- Fabric Warehouse\*
-- Fabric SQL Database\*
-- Fabric Mirrored Database\*
+- Lakehouse de Fabric\*
+- Warehouse de Fabric\*
+- Base de datos SQL de Fabric\*
+- Base de datos reflejada de Fabric\*
 
-\*=These data sources are only supported as implicit data sources in Power BI data models. They are not available in SSAS / Azure AS.
-
-> [!TIP]
-> For more info about connecting to Azure Databricks, please see [Connecting to Azure Databricks](xref:connecting-to-azure-databricks).
-
-After choosing one of the data sources on the list, Tabular Editor displays a connection details dialog, allowing you to specify server addresses, credentials, etc., specific to the data source you want to create. The settings that you specify should be those that Tabular Editor should use for establishing a local connection to the source. These settings are saved in your @user-options.
-
-![Sql Auth](~/content/assets/images/sql-auth.png)
-
-If you want Analysis Services to use different credentials when connecting, you can specify that by editing the data source properties of the Tabular Object Model after importing the tables.
-
-## Choosing objects to import
-
-Once your data source has been defined, you get the option of choosing tables/views from a list, or specifying a native query to be executed against the source.
-
-![Source Options](~/content/assets/images/source-options.png)
-
-If you select the first option, Tabular Editor will connect to the source and display a list of tables and views that you can preview on the next page:
-
-![Choose Source Objects](~/content/assets/images/choose-source-objects.png)
-
-You can import multiple tables/views at once by checking them on the left side. For each table/view, you may deselect/select columns to import.
+\*=Estos orígenes de datos solo se admiten como orígenes de datos implícitos en los modelos de datos de Power BI. No están disponibles en SSAS / Azure AS.
 
 > [!TIP]
-> If you are in control of the source, we recommend always creating a view on top of the tables you wish to import. In the view, make sure to correct any names, spellings, etc., to be used in the Semantic Model, and get rid of any columns not needed by the Semantic Model (system columns, timestamps, etc.).
+> Para obtener más información sobre cómo conectarse a Azure Databricks, consulte [Conectarse a Azure Databricks](xref:connecting-to-azure-databricks).
+
+Después de elegir uno de los orígenes de datos de la lista, Tabular Editor muestra un cuadro de diálogo con los detalles de conexión, que le permite especificar direcciones de servidor, credenciales, etc., específicos del origen de datos que desea crear. La configuración que especifique debe ser la que Tabular Editor use para establecer una conexión local con el origen. Estos ajustes se guardan en tus @user-options.
+
+![Autenticación SQL](~/content/assets/images/sql-auth.png)
+
+Si desea que Analysis Services use credenciales diferentes al conectarse, puede especificarlo editando las propiedades del origen de datos en el Tabular Object Model después de importar las tablas.
+
+## Seleccionar objetos para importar
+
+Una vez definido su origen de datos, tiene la opción de elegir tablas/vistas de una lista o especificar una consulta nativa que se ejecutará en el origen.
+
+![Opciones de origen](~/content/assets/images/source-options.png)
+
+Si selecciona la primera opción, Tabular Editor se conectará al origen y mostrará una lista de tablas y vistas que podrá previsualizar en la página siguiente:
+
+![Elegir objetos de origen](~/content/assets/images/choose-source-objects.png)
+
+Puede importar varias tablas/vistas a la vez marcándolas en el lado izquierdo. Para cada tabla/vista, puede deseleccionar o seleccionar las columnas que desea importar.
+
+> [!TIP]
+> Si tiene el control del origen, recomendamos crear siempre una vista sobre las tablas que desee importar. En la vista, asegúrese de corregir cualquier nombre, ortografía, etc., que se vaya a usar en el modelo semántico, y elimine las columnas que el modelo semántico no necesite (columnas del sistema, marcas de tiempo, etc.).
 >
-> Then, in the model, import all columns from this view (basically generating a `SELECT * FROM ...` statement). This makes maintenance easier, as you only need to run a Schema Update in Tabular Editor to determine if anything was changed in the source.
+> Luego, en el modelo, importe todas las columnas de esta vista (básicamente generando una instrucción `SELECT * FROM ...`). Esto facilita el mantenimiento, ya que solo necesita ejecutar una actualización de esquema en Tabular Editor para comprobar si se ha cambiado algo en el origen.
 
-![Advanced Import](~/content/assets/images/advanced-import.png)
+![Importación avanzada](~/content/assets/images/advanced-import.png)
 
-If you change the preview mode to "Schema only" using the dropdown in the top left corner, it is possible to change the imported data type and column name for every source column. This may be useful for example if your source using floating-point values, but you want the data to be imported as fixed-decimal.
+Si cambia el modo de vista previa a "Solo esquema" usando el menú desplegable de la esquina superior izquierda, puede cambiar el tipo de datos importado y el nombre de la columna de cada columna de origen. Esto puede ser útil, por ejemplo, si el origen usa valores de coma flotante, pero desea que los datos se importen como decimal fijo.
 
-![Confirm Selection](~/content/assets/images/confirm-selection.png)
+![Confirmar selección](~/content/assets/images/confirm-selection.png)
 
-On the last page, confirm your selection and choose which type of partitions to create. For provider data sources, the default type of partition to be created is `SQL`, whereas for structured data sources, it is `M`.
+En la última página, confirme su selección y elija qué tipo de particiones desea crear. Para los orígenes de datos del proveedor, el tipo de partición que se crea de forma predeterminada es `SQL`, mientras que para los orígenes de datos estructurados, es `M`.
 
 ![Confirm Selection Direct Lake](~/content/assets/images/confirm-selection-direct-lake.png)
 
-For Fabric data sources the last page has a drop-down which lets you choose if you want your selection to be created as Direct Lake or Import mode.
+Para los orígenes de datos de Fabric, en la última página hay una lista desplegable que le permite elegir si desea que su selección se cree como Direct Lake o modo de importación.
 
-At this point, you should see your tables imported with all columns, data types, and source column mappings applied:
+En este punto, debería ver sus tablas importadas con todas las columnas, los tipos de datos y las asignaciones de columnas de origen aplicadas:
 
 ![Import Complete](~/content/assets/images/import-complete.png)
 
-# Updating table schema
+# Actualización del esquema de tabla
 
-If columns are added/changed in the source, or if you recently modified a partition expression or query, you can use Tabular Editor's **Update table schema** feature to update the column metadata in your model.
+Si se agregan o cambian columnas en el origen, o si ha modificado recientemente una expresión de partición o una consulta, puede usar la característica **Actualizar esquema de tabla** de Tabular Editor para actualizar los metadatos de las columnas en su modelo.
 
 ![Update Table Schema](~/content/assets/images/update-table-schema.png)
 
-This menu item can be invoked at the model level, as well as on a collection of tables or even individual table partitions.
+Esta opción del menú se puede invocar a nivel de modelo, así como en una colección de tablas o incluso en particiones individuales de una tabla.
 
-When using this option, Tabular Editor will connect to all the relevant data sources (prompting for credentials as needed), in order to determine if new columns need to be added or existing column modified or removed.
+Al usar esta opción, Tabular Editor se conectará a todos los orígenes de datos pertinentes (solicitando credenciales cuando sea necesario) para determinar si es necesario agregar nuevas columnas o si alguna columna existente debe modificarse o eliminarse.
 
 > [!IMPORTANT]
-> If a column that was previously imported to your Semantic Model has been removed or renamed in the source, you must update the table schema in your Semantic Model. Otherwise, data refresh operations may fail.
+> Si una columna que se importó anteriormente en su modelo semántico se ha quitado o se ha cambiado de nombre en el origen, debe actualizar el esquema de la tabla en su modelo semántico. De lo contrario, las operaciones de actualización de datos pueden fallar.
 
-![Schema Compare Dialog](~/content/assets/images/schema-compare-dialog.png)
+![Diálogo de comparación de esquema](~/content/assets/images/schema-compare-dialog.png)
 
-In the screenshot above, Tabular Editor detected a few new columns, a single data type change, and two columns that were renamed in the source. Note that detection of a column rename only works for simple changes. In other cases, a name change usually results in Tabular Editor detecting a column removal and a column addition, which is the case for the `Tax Amount` column below, which seems to have been renamed to `TaxAmt` in the source.
+En la captura de pantalla anterior, Tabular Editor detectó algunas columnas nuevas, un cambio de tipo de datos y dos columnas cuyo nombre se cambió en el origen. Ten en cuenta que la detección de un cambio de nombre de columna solo funciona para cambios simples. En otros casos, un cambio de nombre suele hacer que Tabular Editor detecte la eliminación de una columna y la adición de otra; es lo que ocurre con la columna `Tax Amount` que aparece a continuación, que parece haberse renombrado a `TaxAmt` en el origen.
 
-To avoid breaking existing DAX formulas that rely on the `[Tax Amount]` column, you can hold down the Ctrl button and click on the two rows in the Schema Change dialog, then right-click in order to combine the column removal and column addition into a single SourceColumn update operation:
+Para evitar que se rompan las fórmulas DAX existentes que dependen de la columna `[Tax Amount]`, puedes mantener pulsada la tecla Ctrl y hacer clic en las dos filas del cuadro de diálogo Cambios de esquema y, a continuación, hacer clic con el botón derecho para combinar la eliminación y la adición de la columna en una única operación de actualización de SourceColumn:
 
-![Combine Sourcecolumn Update](~/content/assets/images/combine-sourcecolumn-update.png)
+![Combinar actualización de SourceColumn](~/content/assets/images/combine-sourcecolumn-update.png)
 
-If you do not want the name change to be propagated to the imported column (but only want to update the SourceColumn property to reflect the changed name in the data source), you can deselect the `Name` update operation in the dropdown:
+Si no quieres que el cambio de nombre se propague a la columna importada (y solo quieres actualizar la propiedad SourceColumn para reflejar el nombre cambiado en el origen de datos), puedes desmarcar la operación de actualización `Name` en el menú desplegable:
 
 ![Deselect Name](~/content/assets/images/deselect-name.png)
 
-## Updating table schema through Analysis Services
+## Actualizar el esquema de la tabla mediante Analysis Services
 
-By default, Tabular Editor 3 attempts to connect directly to the data source for the purposes of updating the imported table schema. Naturally, this only works when the data source is supported by Tabular Editor 3. If you need to update the schema of a table imported from a data source that is not supported by Tabular Editor 3, you can enable the **Use Analysis Services for change detection** option under **Tools > Preferences > Schema Compare**. This also applies when the M expression of a partition or shared expression is too complex for Tabular Editor 3's built-in schema detection feature. For example, the built-in schema detection does not support certain M functions.
+De forma predeterminada, Tabular Editor 3 intenta conectarse directamente al origen de datos para actualizar el esquema de la tabla importada. Naturalmente, esto solo funciona cuando el origen de datos es compatible con Tabular Editor 3. Si necesitas actualizar el esquema de una tabla importada desde un origen de datos que no es compatible con Tabular Editor 3, puedes habilitar la opción **Usar Analysis Services para la detección de cambios** en **Herramientas > Preferencias > Comparación de esquema**. Esto también se aplica cuando la expresión M de una partición o una expresión compartida es demasiado compleja para la función integrada de detección de esquema de Tabular Editor 3. Por ejemplo, la detección de esquema integrada no admite determinadas funciones M.
 
-![Update Table Schema Through As](~/content/assets/images/update-table-schema-through-as.png)
+![Actualizar el esquema de la tabla mediante As](~/content/assets/images/update-table-schema-through-as.png)
 
-When this option is enabled and Tabular Editor 3 is connected to Analysis Services or the Power BI XMLA endpoint, you can update the schema of tables imported from **any** data source supported by Analysis Services or Power BI.
-
-> [!NOTE]
-> The **Use Analysis Services for change detection** option only works while Tabular Editor 3 is connected to Analysis Services or the Power BI XMLA endpoint. For this reason, we recommend that developers always use the [Workspace Mode](xref:workspace-mode) when developing models.
-
-When the **Use Analysis Services for change detection** option is enabled, Tabular Editor 3 will use the following technique when a schema update is requested:
-
-1. A new transaction is created against the connected Analysis Services instance
-2. A new temporary table is added to the model. This table uses a Power Query partition expression that returns the schema of the original expression, for which a schema update was requested. This is done using the [`Table.Schema` M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema).
-3. The temporary table is refreshed by Analysis Services. Analysis Services takes care of connecting to the data source in order to retrieve the updated schema.
-4. Tabular Editor 3 queries the content of the temporary table to obtain the schema metadata.
-5. The transaction is rolled back, leaving the Analysis Services database or Power BI Semantic Model in the original state it was in before step 1.
-6. Tabular Editor 3 displays the "Apply Schema Changes" dialog as shown above, in case there are any schema changes.
-
-Using this technique, Tabular Editor 3 makes it possible to import and update tables from data sources that are otherwise not supported, regardless of the complexity and function usage of the M queries behind the tables.
+Cuando esta opción está habilitada y Tabular Editor 3 está conectado a Analysis Services o al punto de conexión XMLA de Power BI, puedes actualizar el esquema de tablas importadas desde **cualquier** origen de datos compatible con Analysis Services o Power BI.
 
 > [!NOTE]
-> If your M expressions combine data from multiple sources, such as through the M [`Table.NestedJoin`](https://learn.microsoft.com/en-us/powerquery-m/table-nestedjoin) function, you may need to change the [**Privacy Level**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/) from "Private" to "Organizational" on the Semantic Model in the Power BI service. Otherwise, you may see an error indicating that `<Query> references other queries or steps, so it may not directly access a data source. Please rebuild this data combination.`. This error may also occur even if **Use Analysis Services for change detection** is not enabled, as Tabular Editor 3 will automatically fall back to this detection mechanism when the M expression is too complex for Tabular Editor 3's built-in schema detection.
+> La opción **Usar Analysis Services para la detección de cambios** solo funciona mientras Tabular Editor 3 está conectado a Analysis Services o al punto de conexión XMLA de Power BI. Por este motivo, recomendamos que los desarrolladores usen siempre el [modo del área de trabajo](xref:workspace-mode) al desarrollar modelos.
 
-### Importing new tables through Analysis Services
+Cuando la opción **Usar Analysis Services para la detección de cambios** está habilitada, Tabular Editor 3 utilizará la siguiente técnica cuando se solicite una actualización del esquema:
 
-In order to import a table from a data source otherwise not supported, you can simply copy an existing table from that data source, modify the M expression on the partition query of the copied table, then save your changes to the workspace database and update the table schema as described above.
+1. Se crea una nueva transacción en la instancia de Analysis Services a la que se está conectado
+2. Se agrega una nueva tabla temporal al modelo. Esta tabla usa una expresión de partición de Power Query que devuelve el esquema de la expresión original, para la que se solicitó una actualización del esquema. Esto se hace mediante la [función M `Table.Schema`](https://docs.microsoft.com/en-us/powerquery-m/table-schema).
+3. La tabla temporal se actualiza mediante Analysis Services. Analysis Services se encarga de conectarse al origen de datos para obtener el esquema actualizado.
+4. Tabular Editor 3 consulta el contenido de la tabla temporal para obtener los metadatos del esquema.
+5. La transacción se revierte, dejando la base de datos de Analysis Services o el modelo semántico de Power BI en el estado original en el que se encontraba antes del paso 1.
+6. Tabular Editor 3 muestra el cuadro de diálogo "Aplicar cambios de esquema" como se muestra arriba, por si hubiera cambios en el esquema.
+
+Con esta técnica, Tabular Editor 3 permite importar y actualizar tablas desde orígenes de datos que, de otro modo, no son compatibles, independientemente de la complejidad y del uso de funciones en las consultas M que hay detrás de las tablas.
+
+> [!NOTE]
+> Si sus expresiones M combinan datos de varios orígenes, por ejemplo, mediante la función M [`Table.NestedJoin`](https://learn.microsoft.com/en-us/powerquery-m/table-nestedjoin), es posible que tenga que cambiar el [**Nivel de privacidad**](https://powerbi.microsoft.com/en-us/blog/privacy-levels-for-cloud-data-sources/) de "Privado" a "Organizacional" en el modelo semántico del servicio de Power BI. De lo contrario, es posible que vea un error que indique que `<Query> hace referencia a otras consultas o pasos, por lo que es posible que no pueda acceder directamente a un origen de datos. Por favor, vuelva a crear esta combinación de datos`. Este error también puede producirse aunque **Usar Analysis Services para la detección de cambios** no esté habilitado, ya que Tabular Editor 3 volverá automáticamente a este mecanismo de detección cuando la expresión M sea demasiado compleja para la detección de esquema integrada de Tabular Editor 3.
+
+### Importación de nuevas tablas a través de Analysis Services
+
+Para importar una tabla desde un origen de datos que, de otro modo, no es compatible, puede copiar una tabla existente de ese origen de datos, modificar la expresión M en la consulta de la partición de la tabla copiada y, a continuación, guardar los cambios en la base de datos del espacio de trabajo y actualizar el esquema de la tabla, como se ha descrito anteriormente.
