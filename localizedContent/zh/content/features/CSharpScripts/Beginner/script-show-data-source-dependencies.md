@@ -1,6 +1,6 @@
 ---
 uid: script-show-data-source-dependencies
-title: Show Data Source Dependencies
+title: 显示数据源依赖项
 author: David Bojsen
 updated: 2023-09-12
 applies_to:
@@ -11,51 +11,51 @@ applies_to:
       full: true
 ---
 
-# Show Data Source Dependencies
+# 显示数据源依赖项
 
-## Script Purpose
+## 脚本用途
 
-The script outputs the tables that reference the selected explicit (legacy) data source. This will make it easier to determine where a selected data source is used.
+此脚本会输出引用所选显式（旧版）数据源的表。 这将更容易确定所选数据源的使用位置。
 
-## Script
+## 脚本
 
-### Show Data Source Dependencies
+### 显示数据源依赖项
 
 ```csharp
-//The script outputs the tables that reference the selected explicit (legacy) data source.
+//此脚本会输出引用所选显式（旧版）数据源的表。
 if (Model.DataSources.Count == 0)
 {
-    Info("This model doesn't contain any data sources, it is either empty or using implicit datasources");
+    Info("此模型不包含任何数据源；它可能是空模型，或使用的是隐式数据源");
     return;
 }
-// Checks that a data source is selected
+// 检查是否已选择数据源
 DataSource selectedDatasource = null;
 
 if (Selected.DataSources.Count == 1)
     selectedDatasource = Selected.DataSource;
 else
-    selectedDatasource = SelectObject<DataSource>(Model.DataSources, null, "Select which datasource to see dependencies for");
+    selectedDatasource = SelectObject<DataSource>(Model.DataSources, null, "选择要查看其依赖关系的数据源");
 
-// Legacy sources
+// 旧版数据源
 var legacyTables = Model.Tables.Where(t => t.Source == selectedDatasource.Name).ToList();
 
-// M sources
+// M 数据源
 var mTables = Model.Tables.Where(t => t.Partitions.Any(p => p.Expression.Contains($"= #\"{selectedDatasource.Name}\","))).ToList();
 
-// join arrays
+// 合并列表
 var allTables = legacyTables.Union(mTables).OrderBy(t => t.Name);
 
-// Present result
+// 展示结果
 var tableString = string.Join("\r\n", allTables.Select(t => t.Name));
-Info($"Datasource {selectedDatasource.Name} is referenced from the following tables:\r\n" + tableString);
+Info($"数据源 {selectedDatasource.Name} 被以下表引用：\r\n" + tableString);
 ```
 
-### Explanation
+### 说明
 
-This snippet takes the selected data source and goes through the model to collect the partitions where that data source is used.
+此代码片段会获取所选数据源，并遍历模型，找出使用该数据源的分区。
 
-## Example Output
+## 示例输出
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-show-data-source-dependencies-output.png" alt="Example of the dialog pop-up that informs the user which tables use the selected data source" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Example of the dialog pop-up that informs the user which tables use the selected data source.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-show-data-source-dependencies-output.png" alt="Example of the dialog pop-up that informs the user which tables use the selected data source" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>弹出对话框示例，用于告知用户哪些表使用了所选数据源。</figcaption>
 </figure>
