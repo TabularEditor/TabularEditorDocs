@@ -1,6 +1,6 @@
 ---
 uid: dax-debugger
-title: DAX debugger
+title: Depurador de DAX
 author: Daniel Otykier
 updated: 2022-01-19
 applies_to:
@@ -9,155 +9,155 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           full: true
-        - edition: Business
+        - edition: Negocios
           full: true
-        - edition: Enterprise
+        - edition: Empresarial
           full: true
 ---
 
-# DAX debugger
+# Depurador de DAX
 
 > [!NOTE]
-> The DAX debugger was introduced in version 3.2.0. Information in this article is subject to change as we add more capabilities to the debugger.
+> El Depurador de DAX se introdujo en la versión 3.2.0. La información de este artículo está sujeta a cambios a medida que añadimos más capacidades al depurador.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/m4g9BxcUf4U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-It is no secret that DAX is a relatively complex language which is difficult to master. Most data model developers have probably experienced a situation, where the DAX code did not return the expected result. In this situation, it is helpful to break down the code, variable by variable and function call by function call, to better understand what is going on.
+No es ningún secreto que DAX es un lenguaje relativamente complejo y difícil de dominar. La mayoría de los desarrolladores de modelos de datos probablemente han experimentado una situación en la que el código DAX no devolvió el resultado esperado. En este caso, ayuda desglosar el código, variable por variable y llamada a función por llamada a función, para entender mejor qué está pasando.
 
-Until now, this "breakdown" of the code was a tedious and time consuming task, which often involved capturing DAX queries executed by client tools, in order to break them down and execute smaller pieces of the queries in [DAX Studio](https://daxstudio.org/) or [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15).
+Hasta ahora, este “desglose” del código era una tarea tediosa y que consumía mucho tiempo, y a menudo implicaba capturar consultas DAX ejecutadas por herramientas cliente, para poder desglosarlas y ejecutar partes más pequeñas de las consultas en [DAX Studio](https://daxstudio.org/) o [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15).
 
-Tabular Editor 3 introduces the concept of the **DAX debugger**, which is a tool that makes the process of stepping into the DAX code of your model, much, much easier. At a conceptual level, the debugger is similar to traditional IDE debuggers, such as the one found in Visual Studio when developing C# applications.
+Tabular Editor 3 introduce el **Depurador de DAX**, una herramienta que hace que el proceso de depurar paso a paso el código DAX de tu modelo sea mucho, mucho más sencillo. A nivel conceptual, el depurador es similar a los depuradores tradicionales de los IDE, como el que se encuentra en Visual Studio al desarrollar aplicaciones C#.
 
-## Prerequisites
+## Requisitos previos
 
-The DAX debugger analyses the DAX code in your model and generates suitable DAX queries for evaluating sub expressions, row contexts, etc., allowing you to step through the code in an interactive fashion.
+El Depurador de DAX analiza el código DAX de tu modelo y genera consultas DAX adecuadas para evaluar subexpresiones, contextos de fila, etc., lo que te permite recorrer el código de forma interactiva.
 
-In order for this to work, Tabular Editor 3 must operate in **connected** or **workspace mode**, such as when loading model metadata directly from Power BI Desktop or any other instance of Analysis Services.
+Para que esto funcione, Tabular Editor 3 debe operar en modo **conectado** o en **modo del área de trabajo**, como cuando se cargan los metadatos del modelo directamente desde Power BI Desktop o desde cualquier otra instancia de Analysis Services.
 
-# Getting started
+# Primeros pasos
 
-While Tabular Editor 3 is connected to an instance of Analysis Services, the debugger can be started in one of two different ways:
+Mientras Tabular Editor 3 está conectado a una instancia de Analysis Services, el depurador se puede iniciar de una de estas dos maneras:
 
-- Through a Pivot Grid
-- Through a DAX query
+- Mediante una Pivot Grid
+- A través de una consulta DAX
 
-Once the debugger is started, you are presented with a number of new views that provide contextual information about the code being debugged, as well as a DAX script view that highlights the portion of code currently debugged.
+Una vez iniciado el depurador, se muestran varias vistas nuevas que proporcionan información contextual sobre el código que estás depurando, además de una vista de script DAX que resalta la parte que se está depurando en ese momento.
 
 > [!TIP]
-> Before starting a debugging session, consider formatting your DAX code to make the code easier to read.
+> Antes de iniciar una sesión de depuración, considera dar formato a tu código DAX para que sea más fácil de leer.
 
-# Debugging through a Pivot Grid
+# Depuración mediante un Pivot Grid
 
-1. Create a new Pivot Grid (**File > New > Pivot Grid**)
-2. Add the measure you wish to debug to the Pivot Grid. You can either:
+1. Crea un nuevo Pivot Grid (**Archivo > Nuevo > Pivot Grid**)
+2. Agrega la medida que quieras depurar al Pivot Grid. Puedes elegir entre lo siguiente:
 
-- Drag a measure from the TOM Explorer, or
-- Right-click on a measure in the TOM Explorer and choose **Add to pivot grid**, or
-- Select the measure from the Pivot Grid field list (**Pivot Grid > Show fields**)
+- Arrastrar una medida desde el Explorador TOM, o
+- Hacer clic con el botón derecho en una medida en el Explorador TOM y elegir **Agregar a Pivot Grid**, o
+- Seleccionar la medida desde la lista de campos del Pivot Grid (**Pivot Grid > Mostrar campos**)
 
-3. (Optional) Add one or more columns to the Pivot Grid in the Filter area, Columns area or Row area.
-4. Right-click on the value cell within the Pivot Grid and choose **Debug this value**.
+3. (Opcional) Agrega una o varias columnas al Pivot Grid en el área de Filtro, el área de Columnas o el área de Filas.
+4. Haz clic con el botón derecho en la celda de valor dentro del Pivot Grid y elige **Depurar este valor**.
 
 ![Debug From Pivot](~/content/assets/images/features/debug-from-pivot.png)
 
-# Debugging through a DAX Query
+# Depuración mediante una Consulta DAX
 
-1. Create a new DAX query (**File > New > DAX Query**).
-2. Type in or paste the DAX query. This should typically be a query made up of a `SUMMARIZECOLUMNS` call with one or more (explicit) measures, such as the one generated by visuals in Power BI.
+1. Crea una nueva consulta DAX (**Archivo > Nuevo > Consulta DAX**).
+2. Escribe o pega la consulta DAX. Normalmente, se trata de una consulta compuesta por una llamada a `SUMMARIZECOLUMNS` con una o varias medidas (explícitas), como la que generan los objetos Visual en Power BI.
 
 > [!TIP]
-> You can use the [Performance Analyzer](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-performance-analyzer) in Power BI Desktop to capture the query generated by visuals.
+> Puedes usar el [Performance Analyzer](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-performance-analyzer) en Power BI Desktop para capturar la consulta generada por los objetos Visual.
 
-3. Hit F5 to execute the query within Tabular Editor 3. Locate the value you want to debug, right-click the cell and choose **Debug**.
+3. Pulsa F5 para ejecutar la consulta en Tabular Editor 3. Localiza el valor que quieras depurar, haz clic con el botón derecho en la celda y elige **Depurar**.
 
 ![Debug From Query](~/content/assets/images/features/debug-from-query.png)
 
-# Debug views
+# Vistas de depuración
 
-The debugger provides the following views (if they are hidden, they can be accessed through the **Debug > Windows** menu).
+El depurador proporciona las siguientes vistas (si están ocultas, puedes acceder a ellas mediante el menú **Depurar > Ventanas**).
 
-- Locals
-- Watch
-- Evaluation Context
-- Call Tree
+- Variables locales
+- Inspección
+- Contexto de evaluación
+- Árbol de llamadas
 
-## Locals
+## Variables locales
 
-This view lists the columns, measures and variables within the current scope of execution and displays their values. It also displays the value of the current subexpression being debugged. Values in this list are updated automatically when stepping to a different subexpression, or when the evaluation context is changed. **Local values are always evaluated at the currently selected item of the call tree**.
+Esta vista enumera las columnas, las medidas y las variables dentro del ámbito de ejecución actual y muestra sus valores. También muestra el valor de la subexpresión actual que se está depurando. Los valores de esta lista se actualizan automáticamente al avanzar a otra subexpresión o cuando se cambia el contexto de evaluación. **Los valores locales siempre se evalúan en el elemento actualmente seleccionado del árbol de llamadas**.
 
-![Locals](~/content/assets/images/locals.png)
+![Variables locales](~/content/assets/images/locals.png)
 
-You can inspect a locals value by clicking on the magnifying glass button within the **Value** column. This will bring up a popup dialog showing the value in more details. This is especially useful if the inspected value is a table.
+Puede inspeccionar un valor de variables locales haciendo clic en el botón de la lupa dentro de la columna **Valor**. Se abrirá un cuadro de diálogo emergente que muestra el valor con más detalle. Esto es especialmente útil si el valor inspeccionado es una tabla.
 
-![Inspect locals value](~/content/assets/images/inspect-locals.png)
+![Inspeccionar valor de variables locales](~/content/assets/images/inspect-locals.png)
 
-If you prefer to inspect the locals value in a separate DAX query window, you can toggle off the **Use popup inspector** option under **Tools > Preferences > DAX Debugger > Locals**.
+Si prefiere inspeccionar el valor de variables locales en una ventana de Consulta DAX independiente, puede desactivar la opción **Usar inspector emergente** en **Herramientas > Preferencias > Depurador de DAX > Variables locales**.
 
-![Dax Debugger Settings](~/content/assets/images/features/dax-debugger-settings.png)
+![Configuración del depurador de Dax](~/content/assets/images/features/dax-debugger-settings.png)
 
-## Watch
+## Inspección
 
-This view allows you to enter any DAX expression, which will be calculated within the current evaluation context. You can enter scalar as well as table expressions and you can use all DAX functions available and refer to variables within the current evaluation scope. Watch values are automatically updated when stepping to a different subexpression, or when the evaluation context is changed. **Watch values are always evaluated at the scope of the currently selected item in the evaluation context stack**.
+Esta vista le permite introducir cualquier expresión DAX, que se calculará dentro del contexto de evaluación actual. Puede introducir expresiones escalares y de tabla, puede usar todas las funciones DAX disponibles y hacer referencia a variables dentro del ámbito de evaluación actual. Los valores de seguimiento se actualizan automáticamente al avanzar a otra subexpresión o cuando se cambia el contexto de evaluación. **Los valores de seguimiento siempre se evalúan en el ámbito del elemento actualmente seleccionado en la pila del contexto de evaluación**.
 
-![Watch](~/content/assets/images/watch.png)
+![Inspección](~/content/assets/images/watch.png)
 
-To quickly add a variable, measure or subexpression to the Watch view, simply highlight a portion of code and drag it into the Watch view. You can also place the cursor over the expression you want to add, then right-click and choose **Watch this expression**:
+Para añadir rápidamente una variable, una medida o una subexpresión a la vista Inspección, simplemente resalte una parte del código y arrástrela a la vista Inspección. También puede colocar el cursor sobre la expresión que quiera añadir; luego haga clic con el botón derecho y elija **Inspeccionar esta expresión**:
 
-![Quick Add To Watch](~/content/assets/images/quick-add-to-watch.png)
+![Añadir rápidamente a Inspección](~/content/assets/images/quick-add-to-watch.png)
 
-To add, duplicate or delete Watch expressions, use the right-click context menu of the Watch view:
+Para añadir, duplicar o eliminar expresiones de Inspección, utilice el menú contextual con clic derecho de la vista Inspección:
 
-![Watch Context Menu](~/content/assets/images/watch-context-menu.png)
+![Menú contextual de Inspección](~/content/assets/images/watch-context-menu.png)
 
-The **Generate query** option is identical to the magnifying glass button within the **Value** column, highlighted in the screenshot below. By clicking this, the debugger will open a new DAX query document, that defines the context of the calculation as well as the calculation itself, allowing you to inspect the results in more details. This is particularly useful when the watch expression is a table expression, as shown below:
+La opción **Generar consulta** es idéntica al botón de la lupa de la columna **Valor**, como se resalta en la captura de pantalla siguiente. Al hacer clic en esto, el depurador abrirá un nuevo documento de Consulta DAX, que define tanto el contexto del cálculo como el propio cálculo, lo que te permitirá inspeccionar los resultados con más detalle. Esto resulta especialmente útil cuando la expresión de seguimiento es una expresión de tabla, como se muestra a continuación:
 
 ![Inspect Watch](~/content/assets/images/inspect-watch.png)
 
 > [!TIP]
-> What's the difference between the **Locals** view and the **Watch** view?
+> ¿Cuál es la diferencia entre la vista **Locals** y la vista **Watch**?
 >
-> - **Locals** shows the values of columns, measures, variables and other relevant sub-expressions, within the current scope of execution, including the value of the currently selected subexpression in the call tree.
-> - **Watch** allows you to enter any DAX expression, which will be calculated within the current evaluation context.
+> - **Locals** muestra los valores de las columnas, medidas, variables y otras subexpresiones relevantes dentro del ámbito de ejecución actual, incluido el valor de la subexpresión seleccionada actualmente en el árbol de llamadas.
+> - **Watch** le permite introducir cualquier expresión DAX, que se calculará dentro del contexto de evaluación actual.
 
-## Evaluation Context
+## Contexto de evaluación
 
-This view provides information about the DAX evaluation context of the current subexpression. For example, a `CALCULATE` expression might perform a context transition or add a filter to the evaluation context, or a `SUMX` iterator might add a row context.
+Esta vista proporciona información sobre el contexto de evaluación de DAX de la subexpresión actual. Por ejemplo, una expresión `CALCULATE` puede realizar una transición de contexto o agregar un filtro al contexto de evaluación, o un iterador `SUMX` puede agregar un contexto de fila.
 
 ![Evaluation Context](~/content/assets/images/evaluation-context.png)
 
-You can double-click on an item in the Evaluation Context stack, to bring the focus to that item. This will cause all **Watch** expressions to be reevaluated in the new context (that is, all contexts from the bottom of the stack up to and including the currently focused item). This is illustrated in the animation below. Notice also how you can inspect the value of individual columns in the active row context by paging through rows within any active iterations:
+Puede hacer doble clic en un elemento de la pila de contexto de evaluación, para llevar el foco a ese elemento. Esto hará que todas las expresiones de **Watch** se vuelvan a evaluar en el nuevo contexto (es decir, todos los contextos desde la parte inferior de la pila hasta e incluyendo el elemento actualmente enfocado). Esto se ilustra en la animación siguiente. Fíjese también en cómo puede inspeccionar el valor de columnas individuales en el contexto de fila activo desplazándose por las filas dentro de cualquier iteración activa:
 
 ![Call Tree](~/content/assets/images/navigating-evaluation-context.gif)
 
-You can also toggle individual filters from the outer filter context (for example, grouping columns on the [`SUMMARIZECOLUMNS`](https://dax.guide/summarizecolumns) call that generated the query or filters specified in a Pivot Grid). This is illustrated in the animation below. Filters toggled this way will apply to both Watch and Locals.
+También puedes activar o desactivar filtros individuales del contexto de filtro externo (por ejemplo, las columnas de agrupación en la llamada a [`SUMMARIZECOLUMNS`](https://dax.guide/summarizecolumns) que generó la consulta o los filtros especificados en un Pivot Grid). Esto se ilustra en la animación siguiente. Los filtros activados o desactivados de esta manera se aplicarán tanto a Watch como a Locals.
 
 ![Call Tree](~/content/assets/images/toggle-filters.gif)
 
-Lastly, you can browse the first 1000 rows of any iterator, setting the current row context to a specific row within those first 1000, by clicking on the Zoom button within the **Row** column.
+Por último, puede examinar las primeras 1000 filas de cualquier iterador y establecer el contexto de fila actual en una fila específica dentro de esas primeras 1000 haciendo clic en el botón Zoom de la columna **Fila**.
 
 ![Browse Row Contexts](~/content/assets/images/browse-row-contexts.png)
 
-## Call Tree
+## Árbol de llamadas
 
-This view provides an outline of the entire calculation and lets you easily navigate between subexpressions by double-clicking (you can also use shortcut keys for navigation). The tree also provides information about context transitions, iterations and row contexts. Branches of code that will not be executed (for example in an `IF` or `SWITCH` call, or when an iterator is empty) are striked out.
+Esta vista ofrece un esquema de todo el cálculo y le permite navegar fácilmente entre subexpresiones haciendo doble clic (también puede usar teclas de acceso directo para la navegación). El árbol también proporciona información sobre transiciones de contexto, iteraciones y contextos de fila. Las ramas de código que no se ejecutarán (por ejemplo, en una llamada a `IF` o `SWITCH`, o cuando un iterador está vacío) se muestran tachadas.
 
-![Call Tree](~/content/assets/images/call-tree.png)
+![Árbol de llamadas](~/content/assets/images/call-tree.png)
 
-As you navigate between items in the call tree, the debug DAX script will highlight the code corresponding to the call tree item, while also indicating (with a gray background) the path taken to reach the highlighted code, as shown below:
+A medida que navegas entre los elementos del árbol de llamadas, el script de depuración de DAX resaltará el código correspondiente al elemento del árbol de llamadas y, además, indicará (con un fondo gris) la ruta seguida para llegar al código resaltado, como se muestra a continuación:
 
-![Call Tree](~/content/assets/images/navigating-call-tree.gif)
+![Árbol de llamadas](~/content/assets/images/navigating-call-tree.gif)
 
-Notice how the values in the **Locals** view are updated as the tree is navigated. You can also navigate to a subexpression by placing the cursor over the expression, right-click and choose the **Step into selection** option (Ctrl+B).
+Fíjate en cómo se actualizan los valores de la vista **Locals** a medida que navegas por el árbol. También puedes ir a una subexpresión colocando el cursor sobre la expresión, haciendo clic con el botón derecho y seleccionando la opción **Entrar en la selección** (Ctrl+B).
 
-![Step into selection](~/content/assets/images/debugger-step-into-selection.png)
+![Entrar en la selección](~/content/assets/images/debugger-step-into-selection.png)
 
-## Scalar predicates
+## Predicados escalares
 
-Scalar predicates used in filter arguments of the [`CALCULATE`](https://dax.guide/calculate) or [`CALCULATETABLE`](https://dax.guide/calculatetable) functions are handled in a special way, in the **Locals** view.
+Los predicados escalares usados en los argumentos de filtro de las funciones [`CALCULATE`](https://dax.guide/calculate) o [`CALCULATETABLE`](https://dax.guide/calculatetable) se tratan de forma especial en la vista **Locals**.
 
-For example, the following measure uses a scalar predicate, to display only the sales made in USA or Canada.
+Por ejemplo, la siguiente medida usa un predicado escalar para mostrar solo las ventas realizadas en EE. UU. o Canadá.
 
 ```dax
 CALCULATE(
@@ -166,7 +166,7 @@ CALCULATE(
 )
 ```
 
-At first glance, the expression on line 3 looks like it would return a scalar value (true/false). However, in DAX, filters are tables. In reality, the scalar predicate is converted to a table expression using the [`FILTER`](https://dax.guide/filter) function, as shown below:
+A primera vista, la expresión de la línea 3 parece que devolverá un valor escalar (verdadero/falso). Sin embargo, en DAX, los filtros son tablas. En realidad, el predicado escalar se convierte en una expresión de tabla mediante la función [`FILTER`](https://dax.guide/filter), como se muestra a continuación:
 
 ```dax
 CALCULATE(
@@ -178,48 +178,48 @@ CALCULATE(
 )
 ```
 
-The `FILTER` function is an iterator that iterates over the table `ALL(Geography[Country Region Code])`, that is - all the unique values of the "Country Region Code" column in the "Geography" table. Iterators generate a filter context for every row in the iteration. The scalar predicate is then evaluated in each such row context. In the case of the `FILTER` function, only the rows for which the predicate evaluates to `TRUE` are kept. In this example, the `FILTER` function would output a table with 1 column ("Country Region Code"), and 2 rows ("US" and "CA").
+La función `FILTER` es un iterador que recorre la tabla `ALL(Geography[Country Region Code])`, es decir, todos los valores únicos de la columna "Country Region Code" de la tabla "Geography". Los iteradores generan un contexto de filtro para cada fila de la iteración. A continuación, el predicado escalar se evalúa en cada uno de esos contextos de fila. En el caso de la función `FILTER`, solo se conservan las filas en las que el predicado se evalúa como `TRUE`. En este ejemplo, la función `FILTER` devolvería una tabla con 1 columna ("Country Region Code") y 2 filas ("US" y "CA").
 
-When debugging a scalar predicate, the **Locals** view will show two special items, **(Current expression)** and **(Filter expression)**. These are described below:
+Al depurar un predicado escalar, la vista **Locals** mostrará dos elementos especiales: **(Expresión actual)** y **(Expresión de filtro)**. Se describen a continuación:
 
-![Debug Scalar Predicates](~/content/assets/images/features/debug-scalar-predicates.png)
+![Depurar predicados escalares](~/content/assets/images/features/debug-scalar-predicates.png)
 
-In the above screenshot:
+En la captura anterior:
 
-1. This is the scalar predicate currently being debugged. Even though this sub-expression looks like one that should return a scalar value (true/false), in reality, it returns a table.
-2. **(Current expression)**: This is the _scalar_ value of the predicate, when evaluated within the current _row context_ generated by the `FILTER` function as described above. In the screenshot, the scalar value evaluates to `False`, because the value of [Country Region Code] in the current row context is "AU", as can be seen in the **Watch** view, (4). We can use the **Evaluation Context** view (5), to scroll through the rows of the iteration one by one.
-3. **(Filter expression)**: This is the _table_ expression generated by the `FILTER` function, as described above. In the screenshot, this is a 1x2 table containing the values "US" and "CA". Clicking the magnifying glass button will open a popup that displays the table values in a grid.
-4. We can use the **Watch** window to evaluate any DAX expression within the current evaluation context. In this case, since we have an active row context, we can directly refer to columns in the row context, such as `Geography[Country Region Code]`. We can see that the current value of this column is "AU", which is why the scalar predicate (2) evaluates to `False`.
-5. We can use the **Evaluation Context** view to scroll through the rows of the iteration, one by one. This will update the values in the **Locals** view, as well as the **Watch** view, to reflect the values in the current row context.
+1. Este es el predicado escalar que se está depurando en este momento. Aunque esta subexpresión parece que debería devolver un valor escalar (verdadero/falso), en realidad devuelve una tabla.
+2. **(Expresión actual)**: Este es el valor _escalar_ del predicado cuando se evalúa dentro del _contexto de fila_ actual generado por la función `FILTER`, tal y como se describió anteriormente. En la captura de pantalla, el valor escalar se evalúa como `False`, porque el valor de [Country Region Code] en el contexto de fila actual es "AU", como se puede ver en la vista **Watch** (4). Podemos usar la vista **Contexto de evaluación** (5) para desplazarnos por las filas de la iteración, una por una.
+3. **(Expresión de filtro)**: Esta es la expresión de _tabla_ generada por la función `FILTER`, tal y como se describió anteriormente. En la captura de pantalla, se trata de una tabla 1x2 que contiene los valores "US" y "CA". Al hacer clic en el botón de la lupa, se abrirá una ventana emergente que muestra los valores de la tabla en una cuadrícula.
+4. Podemos usar la ventana **Watch** para evaluar cualquier expresión DAX dentro del contexto de evaluación actual. En este caso, como tenemos un contexto de fila activo, podemos hacer referencia directamente a columnas del contexto de fila, como `Geography[Country Region Code]`. Podemos ver que el valor actual de esta columna es "AU", por lo que el predicado escalar (2) se evalúa como `False`.
+5. Podemos usar la vista **Contexto de evaluación** para desplazarnos por las filas de la iteración, una por una. Esto actualizará los valores de las vistas **Locals** y **Watch** para que reflejen los valores del contexto de fila actual.
 
-## Keyboard shortcuts
+## Atajos de teclado
 
-Use the following keyboard shortcuts to quickly navigate the call tree:
+Usa los siguientes atajos de teclado para navegar rápidamente por el árbol de llamadas:
 
-- **Step in (F11)** - steps into the first child of the current item in the call tree. If there are no more children, jumps to the next sibling.
-- **Step out (Shift-F11)** - steps out to the parent of the current item in the call tree.
-- **Step over (F10)** - jumps to the next function parameter, the next subexpression of an arithmetic operation, or steps into the current function call (if it is a non-trivial function).
-- **Step back (Shift-F10)** - jumps to the previous function parameter, the previous subexpression of an arithmetic operation, or steps out to the parent of the current item if there are no parameters or subexpressions before the current item.
-- **Step into selection (Ctrl-B)** - jumps to the expression under the cursor. If multiple paths lead to the same expression (for example, when a measure is referenced by multiple measures and these measures), a dialog will prompt you to choose the path.
-- **Next row (F9)** - shifts the row context of the innermost iteration to the next row of the iterator.
-- **Previous row (Shift-F9)** - shifts the row context of the innermost iteration to the previous row of the iterator.
+- **Step in (F11)**: entra en el primer elemento secundario del elemento actual en el árbol de llamadas. Si no hay más elementos secundarios, salta al siguiente elemento del mismo nivel.
+- **Step out (Mayús-F11)**: vuelve al elemento padre del elemento actual en el árbol de llamadas.
+- **Step over (F10)**: salta al siguiente parámetro de la función, a la siguiente subexpresión de una operación aritmética, o entra en la llamada a la función actual (si es una función no trivial).
+- **Step back (Mayús-F10)**: salta al parámetro anterior de la función, a la subexpresión anterior de una operación aritmética o vuelve al elemento padre del elemento actual si no hay parámetros ni subexpresiones antes del elemento actual.
+- **Step into selection (Ctrl-B)**: salta a la expresión situada bajo el cursor. Si varias rutas conducen a la misma expresión (por ejemplo, cuando una medida está referenciada por varias medidas y dichas medidas), un cuadro de diálogo le pedirá que elija la ruta.
+- **Next row (F9)**: cambia el contexto de fila de la iteración más interna a la siguiente fila del iterador.
+- **Previous row (Mayús-F9)**: cambia el contexto de fila de la iteración más interna a la fila anterior del iterador.
 
-# Limitations and known issues
+# Limitaciones y problemas conocidos
 
-The DAX debugger currently has the following limitations:
+Actualmente, el Depurador de DAX tiene las siguientes limitaciones:
 
-- **UDFs:** User-defined functions (UDFs) are not currently supported. If a UDF is encountered in the code being debugged, the debugger may behave unexpectedly.
-- Only a subset of DAX table expressions are supported when debugging a DAX query (for example, queries that rely on [SUMMARIZECOLUMNS](https://dax.guide/summarizecolumns) can be debugged, while other table functions are currently not supported). Queries that have been generated by Power BI (which can be captured through the Power BI Desktop Performance Analyzer) are generally supported.
-- Queries that contain implicit measures or query-scoped calculations are currently not supported.
-- When browsing the first 1000 rows of an iterator that arises out of a filtered table expression, the selected row in the browse window may not always correspond to the current row context in the evaluation context stack (type `CALCULATETABLE('<table name>')` in the **Watch** window to inspect the current row context).
-- The debugger currently only allows debugging DAX expressions on measures.
-- [Visual calculations](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-visual-calculations-overview) cannot be debugged as they are defined using query-scoped columns. The debugger does not currently support query-scoped objects.
-- If a measure is modified by a calculation item in the filter context, partial results shown in the Watch / Locals view of the debugger may be incorrect.
+- **UDFs:** Actualmente no se admiten las funciones definidas por el usuario (UDF). Si se encuentra una UDF en el código que se está depurando, el depurador puede comportarse de forma inesperada.
+- Al depurar una Consulta DAX, solo se admite un subconjunto de expresiones de tabla DAX (por ejemplo, se pueden depurar consultas que dependan de [SUMMARIZECOLUMNS](https://dax.guide/summarizecolumns), mientras que actualmente no se admiten otras funciones de tabla). En general, se admiten las consultas generadas por Power BI (que se pueden capturar mediante el Analizador de rendimiento de Power BI Desktop).
+- Actualmente no se admiten las consultas que contengan medidas implícitas o cálculos con ámbito de consulta.
+- Al examinar las primeras 1000 filas de un iterador que proviene de una expresión de tabla filtrada, la fila seleccionada en la ventana de exploración puede no corresponder siempre al contexto de fila actual en la pila de contexto de evaluación (escribe `CALCULATETABLE('<table name>')` en la ventana **Watch** para inspeccionar el contexto de fila actual).
+- Actualmente, el depurador solo permite depurar expresiones DAX en medidas.
+- Los [cálculos visuales](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-visual-calculations-overview) no se pueden depurar, ya que se definen mediante columnas con alcance de consulta. Actualmente, el depurador no admite objetos con ámbito de consulta.
+- Si una medida se modifica mediante un elemento de cálculo en el contexto de filtro, los resultados parciales mostrados en la vista Watch / Locals del depurador pueden ser incorrectos.
 
-If you encounter an issue with the debugger, other than those listed above, please post it to our [issue tracker](https://github.com/TabularEditor/TabularEditor3/issues) on the TE3 Community Support GitHub site.
+Si encuentras un problema con el depurador, distinto de los indicados anteriormente, publícalo en nuestro [seguimiento de incidencias](https://github.com/TabularEditor/TabularEditor3/issues) en el sitio de soporte de la comunidad de TE3 en GitHub.
 
-# Roadmap
+# Hoja de ruta
 
-We plan to add many additional features to the DAX debugger over time, to address the issues above, and to make the tool even more capable. As always, feedback is more than welcome. Please use the [Discussions area](https://github.com/TabularEditor/TabularEditor3/discussion) for feature requests and general discussions.
+Tenemos previsto añadir muchas más funciones al Depurador de DAX a lo largo del tiempo, para abordar los problemas anteriores y hacer que la herramienta sea aún más completa. Como siempre, los comentarios son más que bienvenidos. Por favor, utilice la [sección de Discusiones](https://github.com/TabularEditor/TabularEditor3/discussion) para solicitar nuevas funciones y para debates generales.
 
-**Happy debugging!**
+**¡Feliz depuración!**
