@@ -1,6 +1,6 @@
 ---
 uid: script-implement-incremental-refresh
-title: Setup Incremental Refresh
+title: 设置增量刷新
 author: Kurt Buhler
 updated: 2023-03-01
 applies_to:
@@ -11,29 +11,29 @@ applies_to:
       full: true
 ---
 
-# Configure Incremental Refresh
+# 配置增量刷新
 
-## Script Purpose
+## 脚本用途
 
-If you want to configure Incremental Refresh for an import table based on a specific date field.
-This script will work for `datetime`, `date`, or `integer` date columns for which you want to configure incremental refresh.
+如果你想基于某个特定的日期字段为导入表配置增量刷新。
+此脚本适用于你希望配置增量刷新的 `datetime`、`date` 或 `integer` 日期列。
 
-To use the script, select the date column in the table for which you want to configure incremental refresh, then run the script. The script will only run if you don't already have a #"RangeStart" and #"RangeEnd" parameter, and the selected table doesn't already have a Refresh Policy configured.
+要使用此脚本，请在要配置增量刷新的表中选中日期列，然后运行脚本。 仅当你尚未创建 #"RangeStart" 和 #"RangeEnd" 参数，并且所选表尚未配置刷新策略时，脚本才会运行。
 
 > [!NOTE]
-> This script will automatically modify the M partition of the table to add the filter step.
-> Be sure to check that this was done correctly.
+> 此脚本会自动修改该表的 M 分区，以添加筛选步骤。
+> 请务必检查是否已正确完成。
 >
-> If you have many steps you must be sure to move this step to a point when it will fold to the data source.
-> Make sure you adjust all the \`#"Step References" in Power Query
+> 如果你有很多步骤，务必将此步骤移动到可以折叠到数据源的位置。
+> 请确保在 Power Query 中调整所有 \`#"Step References"
 
 > [!NOTE]
-> This script uses user input to generate the refresh policy.
-> Make sure you enter the correct values in the user input dialogue box.
+> 此脚本会使用用户输入来生成刷新策略。
+> 请确保在用户输入对话框中输入正确的值。
 
-## Script
+## 脚本
 
-### Implement Incremental Refresh for Selected Column
+### 为所选列实现增量刷新
 
 ```csharp
 // This script will automatically generate an Incremental Refresh policy for a selected table
@@ -480,16 +480,16 @@ catch
 }
 ```
 
-### Explanation
+### 说明
 
-This snippet will configure incremental refresh in the selected table based on a selected date column.
+此代码片段会基于所选日期列，在所选表中配置增量刷新。
 
-## Example Output
+## 示例输出
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> When running the script, you are prompted to select the Table you want to configure, and the DateTime or Int column the policy will be configured for. Then, the dialog in this image will appear to let you enter the Refresh Policy parameters.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>运行脚本时，系统会提示你选择要配置的表，以及要为其配置策略的 DateTime 或 Int 列。 然后，将出现此图所示的对话框，让你输入刷新策略参数。</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh-success.png" alt="A confirmation dialog that acknowledges you have configured the refresh policy" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> A confirmation dialog will inform you about the success of the Refresh Policy configuration, explaining it back to you in plain words.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh-success.png" alt="A confirmation dialog that acknowledges you have configured the refresh policy" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2：</strong>确认对话框会告知你刷新策略配置已成功，并用通俗易懂的文字再次说明你所设置的内容。</figcaption>
 </figure>
