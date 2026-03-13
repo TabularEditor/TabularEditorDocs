@@ -1,6 +1,6 @@
 ---
 uid: save-to-folder
-title: Save to folder
+title: Guardar en carpeta
 author: Morten Lønskov
 updated: 2023-08-08
 applies_to:
@@ -9,56 +9,56 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           none: true
         - edition: Business
           full: true
-        - edition: Enterprise
+        - edition: Empresarial
           full: true
 ---
 
-# Save to folder
+# Guardar en carpeta
 
-Save to Folder allows you to store your model metadata as individual files, which can be easily managed by version control systems. Instead of having a single file (.bim or .pbix) that contains all the objects of your data model, such as tables, measures, relationships, etc., you can split them into separate files and store them in a folder. This way, you can use source control tools to track the changes, compare versions, and collaborate with other developers on your data model.
+La opción Guardar en carpeta le permite almacenar los metadatos de su modelo como archivos individuales, que pueden gestionarse fácilmente con sistemas de control de versiones. En lugar de tener un único archivo (.bim o .pbix) que contenga todos los objetos de su modelo de datos, como tablas, medidas, relaciones, etc., puede dividirlos en archivos independientes y guardarlos en una carpeta. De este modo, puede usar herramientas de control de código fuente para realizar un seguimiento de los cambios, comparar versiones y colaborar con otros desarrolladores en su modelo de datos.
 
 > [!NOTE]
-> ou can save your data model to a folder using two different formats: JSON or [TMDL](tmdl.md).
+> Puede guardar su modelo de datos en una carpeta usando dos formatos diferentes: JSON o [TMDL](tmdl.md).
 
-To save your model to folder, follow these steps:
+Para guardar el modelo en una carpeta, siga estos pasos:
 
-1. Click on File > Save To Folder
-2. Choose a folder where you want to save your model files.
-3. Click on Save. Tabular Editor will create or update the files in the selected folder, using the JSON or TMDL format as specified in the serialization settings.
-4. You can now use the files in the folder for version control, deployment, or backup purposes.
+1. Haga clic en Archivo > Guardar en carpeta
+2. Elija una carpeta donde desee guardar los archivos del modelo.
+3. Haga clic en Guardar. Tabular Editor creará o actualizará los archivos en la carpeta seleccionada, usando el formato JSON o TMDL según se especifique en la configuración de serialización.
+4. Ahora puede usar los archivos de la carpeta para control de versiones, despliegue o copia de seguridad.
 
-## Serialization settings
+## Configuración de serialización
 
-The serialization settings defines how the model objects are split into separate files. In these settings you can also define if you wish to use JSON or TMDL formats.
+La configuración de serialización determina cómo se dividen los objetos del modelo en archivos independientes. En esta configuración también puede definir si desea usar los formatos JSON o TMDL.
 
-### [Tabular Editor 2 Preferences](#tab/TE2Preferences)
+### [Preferencias de Tabular Editor 2](#tab/TE2Preferences)
 
-Serialization settings are found under File > Preferences > Serialization <br></br>
-![TE2 Preferences](~/content/assets/images/common/TE2SaveToFolderSerializationSettings.png)
+La configuración de serialización se encuentra en Archivo > Preferencias > Serialización. <br></br>
+![Preferencias de TE2](~/content/assets/images/common/TE2SaveToFolderSerializationSettings.png)
 
-The settings shown above are those set as default when using Tabular Editor 3, but are not those that are set per default by Tabular Editor 2.X
+La configuración mostrada arriba es la establecida como predeterminada al usar Tabular Editor 3, pero no es la que Tabular Editor 2.X establece de forma predeterminada
 
-### [Tabular Editor 3 Preferences](#tab/TE3Preferences)
+### [Preferencias de Tabular Editor 3](#tab/TE3Preferences)
 
-Serialization settings are found under Tools > Preferences > File Formats
-The tabs General and Save-to-folder contains settings regarding the serialization of the model. <br></br>
-![TE3 Preferences](~/content/assets/images/common/TE3SaveToFolderSerializationSettings.png)
+La configuración de serialización se encuentra en Herramientas > Preferencia > Formatos de archivo
+Las pestañas General y Guardar en carpeta contienen ajustes relacionados con la serialización del modelo. <br></br>
+![Preferencias de TE3](~/content/assets/images/common/TE3SaveToFolderSerializationSettings.png)
 
-Tabular Editor 3 has a default setting for JSON serialization and you must actively choose a different setting in serialization mode, which is also where you change to the TMDL format.
+Tabular Editor 3 tiene una configuración predeterminada para la serialización JSON y debes seleccionar explícitamente otra opción en el modo de serialización, donde también puedes cambiar al formato TMDL.
 
 ***
 
-### Serialization Model Annotation
+### Anotación de serialización del modelo
 
-Tabular Editor saves the serialization settings on your model so that they will always stay the same no matter who is working on the model. This ensures that a developer's local preferences do not overwrite model's setting and lead to an unmanageable merge in your source control. You can find these annotations in the TOM Explorer properties of the Model > Annotations > TabularEditor_SerializeOptions <br></br>
-![TE3 Preferences](~/content/assets/images/common/SaveToFolderModelAnnotation.png)
+Tabular Editor guarda la configuración de serialización en tu modelo para que siempre se mantenga igual, independientemente de quién esté trabajando en el modelo. Esto garantiza que las preferencias locales de un desarrollador no sobrescriban la configuración del modelo ni provoquen una fusión inmanejable en tu control de código fuente. Puede encontrar estas anotaciones en las propiedades del Explorador TOM de Model > Annotations > TabularEditor_SerializeOptions <br></br>
+![Anotación del modelo](~/content/assets/images/common/SaveToFolderModelAnnotation.png)
 
-#### Overwriting Model Serialization
+#### Sobrescritura de la serialización del modelo
 
-The model's annotation can be overwritten if so desired. First set up the serialization preferences inside Tabular Editor and go to File > Save to Folder.
-This open up Windows Explorer and here the ticket button needs to be unselected. <br></br>
-![TE3 Preferences](~/content/assets/images/common/SaveToFolderOverwriteModelAnnotation.png)
+Si lo deseas, se puede sobrescribir la anotación del modelo. Primero, configura las preferencias de serialización en Tabular Editor y ve a Archivo > Guardar en carpeta.
+Esto abrirá el Explorador de Windows y, una vez allí, debe desmarcarse la casilla. <br></br>
+![Preferencias de TE3](~/content/assets/images/common/SaveToFolderOverwriteModelAnnotation.png)
