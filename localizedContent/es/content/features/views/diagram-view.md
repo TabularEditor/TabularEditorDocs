@@ -1,6 +1,6 @@
 ---
 uid: diagram-view
-title: Diagram View
+title: Vista de diagrama
 author: Morten Lønskov
 updated: 2025-04-24
 applies_to:
@@ -9,113 +9,113 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           full: true
-        - edition: Business
+        - edition: Negocios
           full: true
-        - edition: Enterprise
+        - edition: Empresarial
           full: true
 ---
 
-# Diagram View
+# Vista de diagrama
 
-The **Diagram View** in Tabular Editor 3 is a visual representation of the semantic model. It provides an intuitive layout for viewing tables, their columns, and the relationships between them. It is particularly helpful for understanding the schema at a glance, creating relationships, and presenting models to stakeholders. A diagram can be saved as a stand alone file. See <xref:supported-files#diagram-file-te3diag> for more information.
-
-> [!NOTE]
-> We recommend creating multiple smaller diagrams over few large diagrams. When a diagram contains more than 20 or so tables, it quickly becomes overwhelming and difficult to understand.
-
-After loading a model in Tabular Editor 3, choose the **File > New > Diagram** menu option to create a new diagram or open a new diagram in the main toolbar and drag and drop a table from the TOM Explorer to the diagram window.
-
-## Using the diagram view
-
-## Adding tables
-
-Add initial tables to the diagram in any of the following ways:
-
-- (Multi-)select tables in the TOM Explorer, then right-click and choose **Add to diagram**.
-- (Multi-)select tables in the TOM Explorer, then drag the tables over to the diagram
-- Use the **Diagram > Add tables...** menu option, and (multi-)select the tables you want to add through the dialog box.
-  ![Diagram Add Tables](~/content/assets/images/diagram-add-tables.png)
-
-  To add additional tables to the diagram, use the technique above again, or right-click on an existing table in the diagram and choose one of the following options:
-
-  - **Add tables that filter this table**: Adds all tables to the diagram which may, directly or indirectly through other tables, filter the currently selected table. Useful when starting from a fact table.
-  - **Add all related tables**: Adds all tables to the diagram which are directly related to the currently selected table. Useful when starting from a dimension table.
-    ![Add Related Tables](~/content/assets/images/add-related-tables.png)
-
-  Before proceeding, rearrange and resize the tables in the diagram to suit your preferences, or use the **Diagram > Auto-arrange** feature to have Tabular Editor 3 lay out the tables automatically.
-
-## Modifying relationships using the diagram
-
-To add a new relationship between two tables, locate the column on the fact table (many-side) of the relationship, and drag that column over to the corresponding column on the dimension table (one-side). Confirm the settings for the relationship and hit **OK**.
-
-![Create Relationship](~/content/assets/images/create-relationship.png)
-
-To edit an existing relationship, right-click on it and choose **Edit relationship**. The right-click menu also contains shortcuts for reversing or deleting a relationship, as shown on the screenshot below.
-
-![Edit Relationship Diagram](~/content/assets/images/edit-relationship-diagram.png)
+La **Vista de diagrama** en Tabular Editor 3 es una representación visual del modelo semántico. Ofrece una disposición intuitiva para ver las tablas, sus columnas y las relaciones entre ellas. Es especialmente útil para entender el esquema de un vistazo, crear relaciones y presentar modelos a las partes interesadas. Un diagrama puede guardarse como un archivo independiente. Consulta <xref:supported-files#diagram-file-te3diag> para obtener más información.
 
 > [!NOTE]
-> You can also create relationships without using a diagram, through the TOM Explorer. Locate the column from which the relationship should start (many-side / fact-table side), right-click and choose **Create > Relationship from**. Specify the destination column in the Create Relationship dialog that appears on the screen.
+> Recomendamos crear varios diagramas más pequeños en lugar de unos pocos diagramas grandes. Cuando un diagrama contiene más de unas 20 tablas, se vuelve rápidamente abrumador y difícil de comprender.
 
-## Saving a diagram
+Después de cargar un modelo en Tabular Editor 3, selecciona la opción de menú **Archivo > Nuevo > Diagrama** para crear un diagrama nuevo, o bien abre un diagrama nuevo desde la barra de herramientas principal y arrastra y suelta una tabla desde el Explorador TOM hasta la ventana del diagrama.
 
-To save a diagram, simply use the **File > Save** (CTRL+S) option. Tabular Editor 3 will prompt you to save the diagram if you close the document or the application while the diagram has unsaved changes.
+## Uso de la Vista de diagrama
+
+## Agregar tablas
+
+Agrega las tablas iniciales al diagrama de cualquiera de estas formas:
+
+- (Multi-)seleccione tablas en el Explorador TOM, luego haga clic con el botón derecho y elija **Agregar al diagrama**.
+- (Multi-)seleccione tablas en el Explorador TOM y, después, arrástrelas al diagrama
+- Use la opción de menú **Diagrama > Agregar tablas...** y, en el cuadro de diálogo, (multi-)seleccione las tablas que desea agregar.
+  ![Diagrama: Agregar tablas](~/content/assets/images/diagram-add-tables.png)
+
+  Para agregar tablas adicionales al diagrama, utilice de nuevo la técnica anterior o haga clic con el botón derecho en una tabla existente del diagrama y elija una de las siguientes opciones:
+
+  - **Agregar tablas que filtran esta tabla**: Agrega al diagrama todas las tablas que pueden filtrar, directa o indirectamente a través de otras tablas, la tabla seleccionada actualmente. Útil cuando empieza desde una tabla de hechos.
+  - **Agregar todas las tablas relacionadas**: Agrega al diagrama todas las tablas que están directamente relacionadas con la tabla seleccionada actualmente. Útil cuando empieza desde una tabla de dimensión.
+    ![Agregar tablas relacionadas](~/content/assets/images/add-related-tables.png)
+
+  Antes de continuar, reorganice y cambie el tamaño de las tablas del diagrama según sus preferencias, o use la función **Diagrama > Organizar automáticamente** para que Tabular Editor 3 disponga las tablas automáticamente.
+
+## Modificar relaciones utilizando el diagrama
+
+Para agregar una nueva relación entre dos tablas, localice la columna en la tabla de hechos (lado de muchos) de la relación y arrástrela hasta la columna correspondiente de la tabla de dimensión (lado de uno). Confirma la configuración de la relación y haz clic en **Aceptar**.
+
+![Crear relación](~/content/assets/images/create-relationship.png)
+
+Para editar una relación existente, haga clic con el botón derecho sobre ella y seleccione **Editar relación**. El menú contextual también incluye accesos directos para invertir o eliminar una relación, como se muestra en la captura de pantalla siguiente.
+
+![Editar diagrama de relaciones](~/content/assets/images/edit-relationship-diagram.png)
+
+> [!NOTE]
+> También puede crear relaciones sin usar un diagrama, mediante el Explorador TOM. Localiza la columna desde la que debe comenzar la relación (lado “muchos” / lado de la tabla de hechos), haz clic con el botón derecho y elige **Crear > Relación desde**. Especifique la columna de destino en el cuadro de diálogo Crear relación que aparece en la pantalla.
+
+## Guardar un diagrama
+
+Para guardar un diagrama, simplemente utilice la opción **Archivo > Guardar** (CTRL+S). Tabular Editor 3 le pedirá que guarde el diagrama si cierra el documento o la aplicación mientras el diagrama tenga cambios sin guardar.
 
 > [!TIP]
-> The same diagram file can be loaded for different data models. Diagrams reference tables by their names. Any tables not present in the model upon diagram load are simply removed from the diagram.
+> El mismo archivo de diagrama se puede cargar para diferentes modelos de datos. Los diagramas hacen referencia a las tablas por sus nombres. Las tablas que no estén presentes en el modelo al cargar el diagrama simplemente se eliminan del diagrama.
 
 > [!NOTE]
-> Every time you add or modify a relationship, you will have to run a "calculate" refresh on the data model, before the relationships can be used when querying the model.
+> Cada vez que agregue o modifique una relación, deberá ejecutar una actualización de "cálculo" en el modelo de datos antes de que se puedan usar las relaciones al consultar el modelo.
 
-## Diagram Features
+## Características del diagrama
 
-### Context Menu for Table Actions
+### Menú contextual para acciones en tablas
 
-Right-clicking anywhere in the Diagram View opens a context menu that provides quick access to several options:
+Al hacer clic con el botón derecho en cualquier parte de la Vista de diagrama, se abre un menú contextual que ofrece acceso rápido a varias opciones:
 
-![Diagram Context Menu](~/content/assets/images/diagram-context-menu.png)
+![Menú contextual del diagrama](~/content/assets/images/diagram-context-menu.png)
 
-- **Add tables...**: Opens a dialog to manually add additional tables to the diagram.
-- **Add tables that filter this table**: Automatically brings in related tables that filter the current one.
-- **Add all related tables**: Loads all tables that share relationships with the selected table.
-- **Fit to page**: Adjusts the diagram zoom to fit all visible tables.
-- **Auto-Arrange**: Automatically arrange tables into a star schema
-- **Remove from diagram**: Hides the selected table from the current view.
+- **Agregar tablas...**: Abre un cuadro de diálogo para agregar manualmente tablas adicionales al diagrama.
+- **Agregar tablas que filtran esta tabla**: Incorpora automáticamente las tablas relacionadas que filtran la tabla actual.
+- **Agregar todas las tablas relacionadas**: Carga todas las tablas que comparten una relación con la tabla seleccionada.
+- **Ajustar a la página**: Ajusta el zoom del diagrama para que quepan todas las tablas visibles.
+- **Organizar automáticamente**: Organiza automáticamente las tablas en un esquema en estrella
+- **Quitar del diagrama**: Oculta la tabla seleccionada de la vista actual.
 
-### Relationship Indicators
+### Indicadores de relación
 
-Relationships between tables are illustrated using directional arrows:
+Las relaciones entre tablas se muestran mediante flechas direccionales:
 
-- `1 - *`: Indicates a one-to-many relationship.
-- `* - *`: Indicates a many-to-many relationship.
-- `➝`: Indicates a single direction relationship, with the arrow defining the filter direction of the relationship.
-- `⟷`: Indicates a bi-directional cross-filtering relationship.
+- `1 - *`: Indica una relación de uno a muchos.
+- `* - *`: Indica una relación de muchos a muchos.
+- `➝`: Indica una relación unidireccional, donde la flecha define la dirección del filtro de la relación.
+- `⟷`: Indica una relación de filtrado cruzado bidireccional.
 
-These visual markers allow for quick assessment of filter directionality and cardinality.
+Estos marcadores visuales permiten evaluar rápidamente la direccionalidad del filtro y la cardinalidad.
 
-### Column Display Toggle
+### Alternador de visualización de columnas
 
-A **chevron toggle** is available in the top-right corner of each table, by clicking it you will toggle between the following options:
+Hay un **conmutador de chevrón** en la esquina superior derecha de cada tabla. Al hacer clic en él, podrás alternar entre las siguientes opciones:
 
-![Diagram Chevron Toggle](~/content/assets/images/diagram-chevron-toggle.png)
+![Conmutador de chevrón del diagrama](~/content/assets/images/diagram-chevron-toggle.png)
 
-- **All Columns**: Displays all columns.
-- **Key Columns Only**: Displays only primary and foreign keys.
-- **No Columns**: Hides all columns, showing only the table header.
+- **Todas las columnas**: Muestra todas las columnas.
+- **Solo columnas clave**: Muestra solo las claves primarias y foráneas.
+- **Sin columnas**: Oculta todas las columnas y muestra solo el encabezado de la tabla.
 
-The toggle helps reduce clutter, especially in complex models with many columns, making it easier to focus on relationships.
+El conmutador ayuda a reducir el desorden, especialmente en modelos complejos con muchas columnas, y facilita centrarse en las relaciones.
 
-### Column Data Type Icons
+### Iconos de tipo de datos de columna
 
-Each column in the diagram is accompanied by an icon representing its data type:
+Cada columna del diagrama va acompañada de un icono que representa su tipo de datos:
 
-- <img src="~/content/assets/images/icons/String.svg" alt="Text Icon" width="16" height="16"> for string/text values
-- <img src="~/content/assets/images/icons/Integer.svg" alt="Integer Icon" width="16" height="16"> for integer numbers
-- <img src="~/content/assets/images/icons/Double.svg" alt="Double Icon" width="16" height="16"> for double / floating-point decimal numbers
-- <img src="~/content/assets/images/icons/Currency.svg" alt="Currency Icon" width="16" height="16"> for currency / fixed-point decimal numbers
-- <img src="~/content/assets/images/icons/Binary.svg" alt="Binary Icon" width="16" height="16"> for binary values
-- <img src="~/content/assets/images/icons/TrueFalse.svg" alt="Boolean Icon" width="16" height="16"> for boolean (true/false) values
-- <img src="~/content/assets/images/icons/Calendar.svg" alt="Date Icon" width="16" height="16"> for date/time values
+- <img src="~/content/assets/images/icons/String.svg" alt="Text Icon" width="16" height="16"> para valores de cadena o texto
+- <img src="~/content/assets/images/icons/Integer.svg" alt="Integer Icon" width="16" height="16"> para números enteros
+- <img src="~/content/assets/images/icons/Double.svg" alt="Double Icon" width="16" height="16"> para números decimales de doble precisión / de coma flotante
+- <img src="~/content/assets/images/icons/Currency.svg" alt="Currency Icon" width="16" height="16"> para valores de moneda / números decimales de punto fijo
+- <img src="~/content/assets/images/icons/Binary.svg" alt="Binary Icon" width="16" height="16"> para valores binarios
+- <img src="~/content/assets/images/icons/TrueFalse.svg" alt="Boolean Icon" width="16" height="16"> para valores booleanos (verdadero/falso)
+- <img src="~/content/assets/images/icons/Calendar.svg" alt="Date Icon" width="16" height="16"> para valores de fecha y hora
 
-This quick visual reference supports quick data validation and helps understand the data structures.
+Esta referencia visual rápida respalda la validación rápida de datos y ayuda a comprender las estructuras de datos.
