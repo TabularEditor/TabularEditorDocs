@@ -1,6 +1,6 @@
 ---
-uid: semantic-bridge
-title: Semantic Bridge
+uid: puente semántico
+title: Puente semántico
 author: Greg Baldini
 updated: 2025-01-23
 applies_to:
@@ -10,212 +10,212 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.25.0
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           none: true
-        - edition: Business
+        - edition: Negocios
           none: true
-        - edition: Enterprise
+        - edition: Empresarial
           full: true
 ---
 
-# Semantic Bridge
+# Puente semántico
 
 <!--
 SUMMARY: Overview of the Semantic Bridge feature - a multi-platform semantic model compiler that enables translation between different semantic model platforms (e.g., Databricks Metric Views to Microsoft's Tabular model in Analysis Services and Power BI / Fabric).
 -->
 
 > [!NOTE]
-> The Semantic Bridge as released in 3.25.0 is an MVP feature. It has limitations as documented below, and the API and feature surface area are subject to change.
+> El Puente semántico, tal como se lanzó en 3.25.0, es una característica MVP. Tiene limitaciones, como se documenta a continuación, y tanto la API como el alcance de la funcionalidad pueden cambiar.
 
-The Semantic Bridge is a semantic model compiler, with the capability to translate the structure and expressions of a semantic model from one platform to another.
-This allows you to reuse business logic on multiple data platforms, supporting end users and meeting them where they consume the data.
-It also allows for migrations from one platform to another.
+El Puente semántico es un compilador de modelos semánticos capaz de traducir la estructura y las expresiones de un modelo semántico de una plataforma a otra.
+Esto permite reutilizar la lógica de negocio en varias plataformas de datos, dar soporte a los usuarios finales y llegar hasta donde consumen los datos.
+También permite migraciones de una plataforma a otra.
 
-## Interface
+## Interfaz
 
-### Import Metric View YAML
+### Importar YAML de Metric View
 
-The Semantic Bridge is available through **File > Open > Import from Metric View YAML**.
-This will launch a dialogue to guide you through importing a Metric View into the current Tabular model, adding tables, columns, measures, and relationships based on the structure of the Metric View.
-You must have a Tabular model open in Tabular Editor.
-This can be a new, empty model or an existing model you want to enhance with the objects from the Metric View.
-The menu button will not be enabled until you open or create a new Tabular model.
+El Puente semántico está disponible a través de **Archivo > Abrir > Importar desde Metric View YAML**.
+Se abrirá un cuadro de diálogo que le guiará a través de la importación de una Metric View en el modelo tabular actual y añadirá tablas, columnas, medidas y relaciones según la estructura de la Metric View.
+Debe tener un modelo tabular abierto en Tabular Editor.
+Puede ser un modelo nuevo y vacío, o un modelo existente que desee mejorar con los objetos de la Metric View.
+El botón del menú no se habilitará hasta que abra o cree un nuevo modelo tabular.
 
-![Import a Metric View from the file menu with File > Open > Import from Metric View YAML](~/content/assets/images/features/semantic-bridge/semantic-bridge-file-menu-import.png)
+![Importar una Metric View desde el menú Archivo con Archivo > Abrir > Importar desde Metric View YAML](~/content/assets/images/features/semantic-bridge/semantic-bridge-file-menu-import.png)
 
-### Enter Databricks connection details
+### Introducir los detalles de conexión de Databricks
 
-You need to provide three details in this dialogue:
+Debe proporcionar tres datos en este cuadro de diálogo:
 
-1. The path to the Metric View YAML file.
-   You can paste the path to the file or use the **Browse** button to find it.
-2. The Databricks hostname.
-   This is to provide the correct argument in the M partition generated for the Databricks source system.
-3. The HTTP path for Databricks.
-   This is to provide the correct argument in the M partition generated for the Databricks source system.
+1. La ruta del archivo YAML de Metric View.
+   Puedes pegar la ruta del archivo o usar el botón **Examinar** para localizarlo.
+2. El nombre de host de Databricks.
+   Esto sirve para proporcionar el argumento correcto en la partición M que se genera para el sistema de origen de Databricks.
+3. La ruta HTTP de Databricks.
+   Esto sirve para proporcionar el argumento correcto en la partición M que se genera para el sistema de origen de Databricks.
 
-If you are just testing the translation feature, you can provide placeholder values for the last two items, but you will need to fix the M partition definitions before you can refresh data into your Tabular model.
+Si solo estás probando la función de traducción, puedes indicar valores de marcador de posición para los dos últimos elementos, pero tendrás que corregir las definiciones de las particiones M antes de poder actualizar los datos en tu modelo tabular.
 
-After filling out the details, click **OK**.
-The Semantic Bridge will translate your Metric View to Tabular and create all the TOM objects for you.
+Después de completar los detalles, haz clic en **Aceptar**.
+Semantic Bridge traducirá tu Metric View a Tabular y creará todos los objetos TOM por ti.
 
-![Databricks details in import dialog](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-details.png)
+![Detalles de Databricks en el cuadro de diálogo de importación](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-details.png)
 
-### Result
+### Resultado
 
-There are three possible results:
+Hay tres resultados posibles:
 
-1. Success: everything in the Metric View was translated to Tabular and you have a Tabular model ready to use.
-2. Success, but with some issues: the Semantic Bridge was not able to translate every object in the Metric View; there are diagnostic messages you can view to understand what needs your attention.
-3. Failure: the Semantic Bridge could not translate the Metric View
+1. Éxito: todo lo que había en Metric View se tradujo a Tabular y tienes un modelo tabular listo para usar.
+2. Éxito, pero con algunos problemas: Semantic Bridge no pudo traducir todos los objetos de Metric View; hay mensajes de diagnóstico que puedes revisar para entender qué requiere tu atención.
+3. Fallo: Semantic Bridge no pudo traducir Metric View
 
-After either success type, you can use undo/redo functionality like normal in Tabular Editor to undo or instantly replay the import.
+Después de cualquiera de los dos tipos de éxito, puedes usar las funciones de deshacer/rehacer con normalidad en Tabular Editor para deshacer o repetir al instante la importación.
 
-**Success**
+**Éxito**
 
-![Import success notification](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success.png)
+![Notificación de importación exitosa](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success.png)
 
-**Success with issues**
+**Éxito con problemas**
 
-![Import success notification with issues](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success-with-issues.png)
+![Notificación de importación exitosa con incidencias](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success-with-issues.png)
 
-If you click on **View Diagnostics**, you can see a list of messages describing the issues in translation.
-These diagnostics are available for review later by outputting them from a C# script:
+Si haces clic en **Ver diagnósticos**, puedes ver una lista de mensajes que describen los problemas en la traducción.
+Estos diagnósticos están disponibles para revisarlos más adelante al emitirlos desde un C# Script:
 
 ```csharp
-// Show all diagnostic messages from the last attempted import of a Metric View
+// Mostrar todos los mensajes de diagnóstico del último intento de importación de una Metric View
 SemanticBridge.MetricView.ImportDiagnostics.Output();
 ```
 
-![Import diagnostics](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-diagnostics.png)
+![Diagnóstico de importación](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-diagnostics.png)
 
-**Failure**
+**Fallo**
 
-![Import failure](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-failed.png)
+![Importación fallida](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-failed.png)
 
-Viewing diagnostics for a failure is the same as for success with issues.
+Ver los diagnósticos de un fallo es lo mismo que para un éxito con problemas.
 
-## Translation process
+## Proceso de traducción
 
-Translating a Metric View to a Tabular model happens in several steps:
+La traducción de una Metric View a un modelo tabular se realiza en varios pasos:
 
-1. Read the YAML from disk
-2. Deserialize the YAML
-3. Validate that the deserialized YAML represents a valid Metric View
-4. If it is a valid Metric View, store it as a the currently loaded Metric View, similar to how there is a loaded Tabular model that you interact with.
-   If it is not a valid Metric View, the process stops here and messages are available.
-5. Analyze the Metric View and attempt to transform it to an intermediate representation
-6. Attempt to transform the intermediate representation to a Tabular model
+1. Leer el YAML del disco
+2. Deserializar el YAML
+3. Validar que el YAML deserializado represente una Metric View válida
+4. Si es una Metric View válida, almacenarla como la Metric View cargada actualmente, de forma similar a como se interactúa con un modelo tabular cargado.
+   Si no es una Metric View válida, el proceso se detiene aquí y se mostrarán mensajes.
+5. Analizar la Metric View e intentar transformarla en una representación intermedia
+6. Intentar transformar la representación intermedia en un modelo tabular
 
-The import GUI described above handles all of this for you, but you can also use C# scripts to customize different steps of the process and operate on the Metric View programatically, similarly to how you are used to doing with a Tabular model.
-Specifically, you can
+La GUI de importación descrita anteriormente se encarga de todo por ti, pero también puedes usar scripts C# para personalizar distintos pasos del proceso y operar sobre Metric View mediante programación, de forma similar a como lo haces con un modelo tabular.
+En concreto, puedes
 
-- load a Metric View from disk with [`SemanticBridge.MetricView.Load`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Load_System_String_): loading makes it available in C# scripts as [`SemanticBridge.MetricView.Model`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Model), but does not import the structure into the Tabular model
-- deserialize a Metric view from a string with [`SemanticBridge.MetricView.Deserialize`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Deserialize_System_String_): similar to loading, the model is available as [`SemanticBridge.MetricView.Model`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Model), but is not imported
-- save a Metric View to disk with [`SemanticBridge.MetricView.Save`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Save_System_String_)
-- serialize a Metric View to a string with [`SemanticBridge.MetricView.Serialize`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Serialize).
-- validate a Metric View using a system that is similar to the [Best Practice Analyzer](xref:best-practice-analyzer) with [`SemanticBridge.MetricView.Validate`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Validate)
-  - you can create your own custom validation rules with [`SemanticBridge.MetricView.MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___) and its simpler versions
-- import a Metric View to Tabular with [`SemanticBridge.MetricView.ImportToTabularFromFile`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabularFromFile_System_String_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), which does the exact same as the GUI shown above, or [`SemanticBridge.MetricView.ImportToTabular`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabular_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), which is similar, but operates on the currently loaded Metric View, rather than reading one from disk.
+- cargar una Metric View desde el disco con [`SemanticBridge.MetricView.Load`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Load_System_String_): la carga la pone a disposición en scripts de C# como [`SemanticBridge.MetricView.Model`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Model), pero no importa la estructura en el modelo tabular
+- deserializar una Metric View desde una cadena con [`SemanticBridge.MetricView.Deserialize`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Deserialize_System_String_): al igual que al cargarla, el modelo queda disponible como [`SemanticBridge.MetricView.Model`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Model), pero no se importa
+- guardar una Metric View en el disco con [`SemanticBridge.MetricView.Save`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Save_System_String_)
+- serializar una Metric View en una cadena con [`SemanticBridge.MetricView.Serialize`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Serialize).
+- validar una Metric View usando un sistema similar al [Best Practice Analyzer](xref:best-practice-analyzer) con [`SemanticBridge.MetricView.Validate`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Validate)
+  - puedes crear tus propias reglas de validación personalizadas con [`SemanticBridge.MetricView.MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___) y sus versiones más simples
+- importar una Metric View a un modelo tabular con [`SemanticBridge.MetricView.ImportToTabularFromFile`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabularFromFile_System_String_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), que hace exactamente lo mismo que la GUI mostrada arriba, o [`SemanticBridge.MetricView.ImportToTabular`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabular_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), que es similar, pero opera sobre la Metric View cargada actualmente, en lugar de leer una desde el disco.
 
-## MVP Limitations
+## Limitaciones del MVP
 
-### Supported platforms
+### Plataformas compatibles
 
-In the MVP release, we support translations from a Databricks Metric View to a Tabular model.
-Specifically we support the following surface area of a Databricks Metric View:
+En la versión MVP, admitimos traducciones desde una Databricks Metric View a un modelo tabular.
+En concreto, admitimos las siguientes partes de una Databricks Metric View:
 
-- v0.1 Metric View properties:
-  - supported:
-    - `source`: the source of the fact table
-    - `joins`: collection of tables left-joined to the fact
-    - `dimensions`: flat collection of fields from any table, either the single fact or any of the many joins
-    - `measures`: flat collection of named aggregations representing business logic
-  - unsupported:
-    - `filter`: a SQL filter expression for the Metric View
+- v0.1 Propiedades de Metric View:
+  - compatibles:
+    - `source`: el origen de la tabla de hechos
+    - `joins`: colección de tablas unidas por la izquierda a la tabla de hechos
+    - `dimensions`: colección plana de campos de cualquier tabla, ya sea la única tabla de hechos o cualquiera de las muchas uniones
+    - `measures`: colección plana de medidas con nombre que representan la lógica de negocio
+  - no compatibles:
+    - `filter`: una expresión de filtro SQL para la Metric View
 
-All v1.1 metadata is not supported in the MVP.
-Any v1.1 metadata is silently ignored upon deserialization of a Metric View, so it will not be visible in a C# script and it will not affect the translation to Tabular in any way.
-
-> [!WARNING]
-> Because the v1.1 metadata is silently ignored, a Metric View that you deserialize and then serialize will be missing this metadata.
-> Be careful not to overwrite a v1.1 source YAML file from a C# script, as that will remove all v1.1 metadata.
-
-### Limitations on translation from SQL
-
-Metric Views provide a structured layer on top of SQL expressions, and so part of translating a Metric View is translating SQL to DAX and M in the Tabular model.
-
-- Metric View `joins` with nested `joins` are not supported.
-  In other words, only strict star schemas are supported for translation; snowflake models are not supported
-- Metric View `joins` with `using` join criteria are not supported; only equijoins on a single key field using the `on` property are supported.
-- Metric View `dimensions` with SQL expressions are not translated to M or DAX; they are presented as Tabular model calculated columns with their SQL expression commented out
-- Metric View `measures` with non-basic aggregations are not translated to DAX; they are presented as a Tabular model measure with their SQL expression commented out
-  - The only aggregations supported are sum, max, min, average, count, and distinct count.
-  - SQL comments in a basic aggregation are not preserved in DAX
+En el MVP no se admite ningún metadato v1.1.
+Cualquier metadato v1.1 se ignora silenciosamente al deserializar una Metric View, por lo que no será visible en un C# Script y no afectará en modo alguno a la traducción a Tabular.
 
 > [!WARNING]
-> Note that SQL and DAX are different languages with different semantics.
-> We can make no guarantee that a translated measure will behave identically between the Metric View SQL and the Tabular DAX we generate.
-> Basic aggregates defined on fact table fields should behave the same, whereas aggregates defined on fields in dimension tables are more likely to produce undesired results.
+> Como los metadatos v1.1 se ignoran silenciosamente, a una Metric View que deserialices y luego serialices le faltarán estos metadatos.
+> Tenga cuidado de no sobrescribir un archivo YAML fuente v1.1 mediante un C# Script, ya que eso eliminará todos los metadatos v1.1.
 
-### Connectivity
+### Limitaciones de la traducción desde SQL
 
-The MVP does not connect to any platforms besides Tabular, but works entirely with local files.
-You must create your Metric View YAML on your own and then put it where Tabular Editor can see it.
+Las Metric Views proporcionan una capa estructurada sobre expresiones SQL, por lo que parte de traducir una Metric View consiste en traducir SQL a DAX y M en el modelo tabular.
 
-### C# API
+- No se admiten `joins` de Metric View con `joins` anidados.
+  En otras palabras, para la traducción solo se admiten esquemas en estrella estrictos; no se admiten los modelos en copo de nieve
+- No se admiten `joins` de Metric View con criterios de unión `using`; solo se admiten equijoins sobre un único campo clave mediante la propiedad `on`.
+- Las `dimensions` de Metric View con expresiones SQL no se traducen a M ni a DAX; se presentan como columnas calculadas del modelo tabular, con su expresión SQL comentada
+- Las `measures` de Metric View con agregaciones no básicas no se traducen a DAX; se presentan como una medida del modelo tabular, con su expresión SQL comentada
+  - Las únicas agregaciones admitidas son `sum`, `max`, `min`, `average`, `count` y `distinct count`.
+  - Los comentarios SQL en una agregación básica no se conservan en DAX
 
-The C# interface has been built to optimize for the automatic translation workflow.
-As such, there are limited affordances for interacting with the currently loaded Metric View, and certain types of operations are clunky.
+> [!WARNING]
+> Tenga en cuenta que SQL y DAX son lenguajes diferentes con semánticas distintas.
+> No podemos garantizar que una medida traducida se comporte de forma idéntica entre el SQL de Metric View y el DAX tabular que generamos.
+> Las agregaciones básicas definidas sobre campos de la tabla de hechos deberían comportarse igual, mientras que las agregaciones definidas sobre campos de las tablas de dimensiones tienen más probabilidades de producir resultados no deseados.
 
-## Appendix on nomenclature
+### Conectividad
 
-It can be confusing to discuss things when talking about the Semantic Bridge, as there are many words that have both generic and specific meanings, depending what level of abstraction we are talking about and which platform we are discussing.
-For example, the term "semantic model" is both generic, referring to the concept of a collection of data and business logic in some form suitable for supporting business reporting and analytical needs, and also the name Microsoft has adopted for referring to their specific implementation of this generic concept in Power BI and Fabric.
-Thus, a semantic model might generically refer to a Databricks Metric View, an OLAP / Multidimensional Cube, a Power BI semantic model, or a model hosted in another platform's semantic layer.
-Similarly, "dimension" refers to a concept in dimensional modeling, but it is also the name of a specific type of object in a Metric View.
-Because of this, we have adopted the following definitions and standards in our documentation to maintain clarity and sanity.
+El MVP no se conecta a ninguna plataforma aparte de Tabular, sino que funciona completamente con archivos locales.
+Debe crear su YAML de Metric View por su cuenta y luego colocarlo donde Tabular Editor pueda verlo.
+
+### API de C\#
+
+La interfaz de C# se ha diseñado para optimizar el flujo de trabajo de traducción automática.
+Por ello, hay pocas opciones para interactuar con la Metric View cargada actualmente, y ciertos tipos de operaciones resultan torpes.
+
+## Apéndice sobre nomenclatura
+
+Puede resultar confuso hablar del Semantic Bridge, ya que hay muchas palabras que tienen significados tanto genéricos como específicos, según el nivel de abstracción del que estemos hablando y la plataforma que estemos tratando.
+Por ejemplo, el término "modelo semántico" es a la vez genérico, ya que se refiere al concepto de una colección de datos y lógica de negocio en una forma adecuada para dar soporte a las necesidades de informes y análisis, y también es el nombre que Microsoft ha adoptado para referirse a su implementación específica de este concepto genérico en Power BI y Fabric.
+Así, un modelo semántico puede referirse de forma genérica a una Metric View de Databricks, a un cubo OLAP/multidimensional, a un modelo semántico de Power BI o a un modelo hospedado en la capa semántica de otra plataforma.
+Del mismo modo, "dimension" hace referencia a un concepto del modelado dimensional, pero también es el nombre de un tipo específico de objeto en una Metric View.
+Por ello, hemos adoptado las siguientes definiciones y estándares en nuestra documentación para mantener la claridad y la coherencia.
 
 > [!NOTE]
-> These conventions are only intended for documentation about the Semantic Bridge feature.
+> Estas convenciones solo están pensadas para la documentación sobre la funcionalidad Semantic Bridge.
 
-### Definitions
+### Definiciones
 
-- _Semantic model_: when used on its own always refers to the generic concept of a collection of data, metadata, and business logic to support reporting and analytics.
-  If and only if it is immediately preceded by "Fabric" or "Power BI", then it is referring to that artifact type in that platform, specifically a Tabular model that is saved as TMDL or BIM and using M and DAX; we tend to prefer to use the term Tabular model to refer to the Power BI / Fabric semantic model to avoid this confusion where possible, because the Tabular model is shared across Power BI / Fabric as well as Analysis Serviced Tabular.
-- _Platform_: a technology solution that has a semantic layer, on which a generic semantic model is hosted.
-  Databricks Metric Views represent a platform; Fabric / Power BI represent a platform; Analysis Services Tabular is a platform; Analysis Services Multidimensional is a platform which we have no support for in the Semantic Bridge today.
-- _Serialization format_: a way to represent a semantic model on disk in a textual format.
-  TMDL and TMSL (.bim) are two serialization formats for a Power BI semantic model; YAML is the serialization format for a Databricks Metric View.
-- _Object model_: an in-memory representation of a semantic model that we operate on in Tabular Editor via the Semantic Bridge either through GUI actions or C# scripts.
-  The TOM or Tabular Object Model should be familiar to existing users of Tabular Editor.
-  We have also created an object model for Databricks Metric Views, to allow manipulation of these in our tool.
+- _modelo semántico_: cuando se usa por sí solo, siempre se refiere al concepto genérico de una colección de datos, metadatos y lógica de negocio para respaldar la elaboración de informes y el análisis.
+  Si y solo si va inmediatamente precedido de "Fabric" o "Power BI", entonces se refiere a ese tipo de artefacto en esa plataforma, concretamente a un modelo tabular que se guarda como TMDL o BIM y utiliza M y DAX; solemos preferir usar el término modelo tabular para referirnos al modelo semántico de Power BI / Fabric y evitar esta confusión siempre que sea posible, porque el modelo tabular se comparte en Power BI / Fabric, así como en Analysis Services Tabular.
+- _Plataforma_: una solución tecnológica que tiene una capa semántica, en la que se aloja un modelo semántico genérico.
+  Databricks Metric Views representan una plataforma; Fabric / Power BI representan una plataforma; Analysis Services Tabular es una plataforma; Analysis Services Multidimensional es una plataforma para la que hoy no tenemos compatibilidad en Semantic Bridge.
+- _Formato de serialización_: una forma de representar un modelo semántico en disco en un formato textual.
+  TMDL y TMSL (.bim) son dos formatos de serialización para un modelo semántico de Power BI; YAML es el formato de serialización de un Databricks Metric View.
+- _Modelo de objetos_: una representación en memoria de un modelo semántico con la que trabajamos en Tabular Editor mediante Semantic Bridge, ya sea a través de acciones en la GUI o mediante C# Scripts.
+  El TOM, o Tabular Object Model, debería resultar familiar a los usuarios actuales de Tabular Editor.
+  También hemos creado un modelo de objetos para Databricks Metric Views, para permitir su manipulación en nuestra herramienta.
 
-### General dimensional modeling terminology
+### Terminología general de modelado dimensional
 
-There are many terms that exist generally in discussion of a dimensional model or semantic model and also in a specific platform's object model and serialization formats.
-For example, the term "measure" refers generically to a quantitative value that is aggregated in a dimensional model to represent a business metric of interest, but it also refers to a specific kind of object in both Databricks Metric Views and Tabular models; in a Metric View, a measure is a named SQL expression that defines an aggregation in the Metric View, and in a Tabular model a measure is a named DAX expression that defines an aggregation in the Tabular model.
-It is impossible to discuss the work of the Semantic Bridge without talking about multiple meanings of such words at once.
-For example, we talk about translating a Metric View measure to a Tabular measure.
-As such, **we always refer to an object in a specific platform's model by saying the platform and the object, e.g. "Metric View measure" or "Tabular measure"**.
-If the term is ever used without being accompanied by a platform's name, then we are discussing the idea generically.
+Hay muchos términos que se usan de forma general al hablar de un modelo dimensional o de un modelo semántico, y también dentro del modelo de objetos y los formatos de serialización de una plataforma específica.
+Por ejemplo, el término "medida" se refiere de forma genérica a un valor cuantitativo que se agrega en un modelo dimensional para representar una métrica de negocio de interés, pero también se refiere a un tipo específico de objeto tanto en Databricks Metric Views como en los modelos tabulares. En una Metric View, una medida es una expresión SQL con nombre que define una agregación en la Metric View, y en un modelo tabular, una medida es una expresión DAX con nombre que define una agregación en el modelo tabular.
+Es imposible hablar del trabajo de Semantic Bridge sin hablar a la vez de los múltiples significados de estas palabras.
+Por ejemplo, hablamos de traducir una medida de Metric View a una medida tabular.
+Por eso, **siempre nos referimos a un objeto del modelo de una plataforma específica indicando la plataforma y el objeto, por ejemplo "medida de Metric View" o "medida tabular"**.
+Si alguna vez se usa el término sin ir acompañado del nombre de una plataforma, entonces estamos hablando de la idea de forma genérica.
 
-### Common terms across Metric Views and Tabular models
+### Términos comunes en Metric Views y modelos tabulares
 
-For those of our users who may be unfamiliar with either Metric Views or Tabular models, we provide an incomplete rosetta stone below.
-We refer to the names of Metric View objects based on their representation in YAML, and Tabular based on the name of the type of object in TMDL/TMSL.
+Para los usuarios que quizá no estén familiarizados ni con Metric Views ni con modelos tabulares, a continuación ofrecemos una piedra de Rosetta incompleta.
+Nos referimos a los nombres de los objetos de Metric View en función de su representación en YAML, y a los de Tabular en función del nombre del tipo de objeto en TMDL/TMSL.
 
-| General term         | Name in Tabular | Name in Metric View                                   | Description                                                                                          | Note                                                                                                                                                                                                                                                       |
-| -------------------- | --------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| fact                 | table           | source                                                | A table holding foreign keys to dimensions and quantitative values to be aggregated                  | a Metric View has a single fact which is unnamed and captured as the root-level `source` attribute in YAML. Tabular models do not differentiate between types of tables: whether a table is a fact can only be inferred    |
-| dimension            | table           | join                                                  | A table holding descriptive attributes and one primary key to which the fact is related              | Tabular models do not differentiate, so the role of "dimension" is inferred only, as with a fact.                                                                                                                                          |
-| partition            | partition       | source (join only)                 | An object for data management, holding a subset of data in a table                                   | Tabular model tables can have many partitions and must have at least one. The Metric View fact, as mentioned above is defined purely as a source, but Metric View joins also have a `source` property, which acts roughly like a partition |
-| field                | column          | dimension                                             | A column in a table                                                                                  |                                                                                                                                                                                                                                                            |
-| measure              | measure         | measure                                               | A quantitative value that is aggregated according to business logic in the model                     | Measures in a Tabular model are written in DAX, and in a Metric View in SQL                                                                                                                                                                                |
-| join or relationship | relationship    | join.on or join.using | A correspondence between key fields in two tables, a foreign key in one and primary key in the other | Relationships are explicit objects in a Tabular model, and implicitly defined as a property of the `join` object in Metric View YAML                                                                                                                       |
+| Término general | Nombre en Tabular | Nombre en Metric View                                | Descripción                                                                                                                         | Nota                                                                                                                                                                                                                                                                                                                                   |
+| --------------- | ----------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| hecho           | tabla             | fuente                                               | Una tabla que contiene claves foráneas hacia las dimensiones y valores cuantitativos que se van a agregar                           | una Metric View tiene un único hecho, sin nombre, que se registra como el atributo `source` en el nivel raíz del YAML. Los modelos tabulares no diferencian entre tipos de tablas: si una tabla es una tabla de hechos solo puede inferirse                                                            |
+| dimensión       | tabla             | unión                                                | Una tabla que contiene atributos descriptivos y una clave principal con la que se relaciona el hecho                                | Los modelos tabulares no diferencian, por lo que el rol de "dimensión" solo se infiere, igual que con un hecho.                                                                                                                                                                                                        |
+| partición       | partición         | fuente (solo para joins)          | Un objeto para la administración de datos que contiene un subconjunto de datos en una tabla                                         | Las tablas de un modelo tabular pueden tener muchas particiones y deben tener al menos una. El hecho de Metric View, como se mencionó anteriormente, se define únicamente como una fuente, pero las uniones de Metric View también tienen una propiedad `source`, que actúa, en términos generales, como una partición |
+| campo           | columna           | dimensión                                            | Una columna en una tabla                                                                                                            |                                                                                                                                                                                                                                                                                                                                        |
+| medida          | medida            | medida                                               | Un valor cuantitativo que se agrega conforme a la lógica de negocio del modelo                                                      | Las medidas en un modelo tabular se escriben en DAX y, en una Metric View, en SQL                                                                                                                                                                                                                                                      |
+| join o relación | relación          | join.on o join.using | Una correspondencia entre los campos clave de dos tablas: una clave externa en una y una clave principal en la otra | Las relaciones son objetos explícitos en un modelo tabular y se definen implícitamente como una propiedad del objeto `join` en el YAML de Metric View                                                                                                                                                                                  |
 
-## Additional Resources
+## Recursos adicionales
 
-- [Databricks Metric View documentation](https://learn.microsoft.com/en-us/azure/databricks/metric-views/)
-- [Databricks Metric View YAML reference](https://learn.microsoft.com/en-us/azure/databricks/metric-views/data-modeling/syntax)
+- [Documentación de Metric View de Databricks](https://learn.microsoft.com/en-us/azure/databricks/metric-views/)
+- [Referencia de YAML de Metric View de Databricks](https://learn.microsoft.com/en-us/azure/databricks/metric-views/data-modeling/syntax)
 - @semantic-bridge-how-tos
