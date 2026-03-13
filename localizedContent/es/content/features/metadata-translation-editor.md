@@ -1,6 +1,6 @@
 ---
 uid: metadata-translation-editor
-title: Metadata Translation Editor
+title: Editor de traducción de metadatos
 author: Šarūnas Jučius
 updated: 2023-04-18
 applies_to:
@@ -9,34 +9,34 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           full: true
-        - edition: Business
+        - edition: Negocios
           full: true
-        - edition: Enterprise
+        - edition: Corporativo
           full: true
 ---
 
-# Metadata Translation Editor
+# Editor de traducción de metadatos
 
-The **Metadata Translation Editor** provides an overview of the translated names, descriptions and display folders of translatable objects in the model. You can launch the Metadata Translation Editor through the **View** menu. Alternatively, if you only need to edit certain translations, select them in the **TOM Explorer** (hold down CTRL or SHIFT to multi-select), then right-click and choose **Show in metadata translation editor**.
+El **Editor de traducción de metadatos** ofrece una visión general de los nombres, las descripciones y las carpetas de visualización traducidos de los objetos del modelo que admiten traducción. Puedes iniciar el Editor de traducción de metadatos desde el menú **Ver**. Como alternativa, si solo necesita editar determinadas traducciones, selecciónelas en el **Explorador TOM** (mantenga pulsadas CTRL o SHIFT para seleccionar varias) y, después, haga clic con el botón derecho y elija **Mostrar en el Editor de traducción de metadatos**.
 
-![Metadata Translation Editor](~/content/assets/images/metadata-translation-editor.png)
+![Editor de traducción de metadatos](~/content/assets/images/metadata-translation-editor.png)
 
-Use the input fields in the metadata translation editor to quickly add/remove or edit translations of object names, descriptions and display folder names for the corresponding language. The first three columns in the editor allow you to change the default names, descriptions and display folder names of objects. You can use Undo (Ctrl+Z) and Redo (Ctrl+Y) the usual way.
+Use los campos de entrada del Editor de traducción de metadatos para añadir, quitar o editar rápidamente las traducciones de los nombres de los objetos, las descripciones y los nombres de las carpetas de visualización en el idioma correspondiente. Las tres primeras columnas del editor le permiten cambiar los nombres predeterminados, las descripciones y los nombres de carpetas de visualización de los objetos. Puedes usar Deshacer (Ctrl+Z) y Rehacer (Ctrl+Y) de la forma habitual.
 
-## Metadata Translation Editor toolbar
+## Barra de herramientas del Editor de traducción de metadatos
 
-While the Metadata Translation Editor is active, the accompanying toolbar provides the following options:
+Mientras el Editor de traducción de metadatos está activo, la barra de herramientas asociada ofrece las siguientes opciones:
 
-- ![Metadata Translation Editor New Translation](~/content/assets/images/metadata-translation-editor-add-translation.png) **New translation**: This button adds a new translation to the model. The translation will be displayed in the Metadata Translation Editor.
-- ![Metadata Translation Editor Hide Members](~/content/assets/images/perspective-editor-hide-members.png) **Show/Hide hidden objects**: Enable this option if you want to see all objects in the Metadata Translation Editor, including hidden objects.
-- ![Metadata Translation Editor Hide Names](~/content/assets/images/metadata-translation-editor-name.png) **Show/Hide names**: Disable this option if you don't want to see the name translation columns in Metadata Translation Editor.
-- ![Metadata Translation Editor Hide Descriptions](~/content/assets/images/metadata-translation-editor-description.png) **Show/Hide descriptions**: Disable this option if you don't want to see the description translation columns in Metadata Translation Editor
-- ![Metadata Translation Editor Hide Display Folders](~/content/assets/images/perspective-editor-folder.png) **Show/Hide display folders**: Disable this option if you don't want to see the display folder translation columns in Metadata Translation Editor
+- ![Editor de traducción de metadatos Nueva traducción](~/content/assets/images/metadata-translation-editor-add-translation.png) **Nueva traducción**: Este botón agrega una nueva traducción al modelo. La traducción se mostrará en el Editor de traducción de metadatos.
+- ![Editor de traducción de metadatos Ocultar miembros](~/content/assets/images/perspective-editor-hide-members.png) **Mostrar u ocultar objetos ocultos**: Habilite esta opción si quiere ver todos los objetos en el Editor de traducción de metadatos, incluidos los objetos ocultos.
+- ![Editor de traducción de metadatos Ocultar nombres](~/content/assets/images/metadata-translation-editor-name.png) **Mostrar/ocultar nombres**: Desactive esta opción si no quiere ver las columnas de traducción de nombres en el Editor de traducción de metadatos.
+- ![Editor de traducción de metadatos Ocultar descripciones](~/content/assets/images/metadata-translation-editor-description.png) **Mostrar/ocultar descripciones**: Desactive esta opción si no quiere ver las columnas de traducción de descripciones en el Editor de traducción de metadatos
+- ![Editor de traducción de metadatos Ocultar carpetas de visualización](~/content/assets/images/perspective-editor-folder.png) **Mostrar/ocultar carpetas de visualización**: Desactive esta opción si no quiere ver las columnas de traducción de carpetas de visualización en el Editor de traducción de metadatos
 
-## Working with many translations
+## Trabajar con muchas traducciones
 
-If you're working on a model with many translations, it may be impractical to display all of them at once. You can rearrange the display order of translations in the Metadata Translation Editor, by dragging the column headers around, making it easier to compare translations side-by-side. Moreover, you can add/remove translations from the editor at any time, through the right-click context menu:
+Si estás trabajando en un modelo con muchas traducciones, puede que no sea práctico mostrarlas todas a la vez. Puedes reorganizar el orden en que se muestran las traducciones en el Editor de traducción de metadatos arrastrando los encabezados de las columnas, lo que facilita comparar traducciones en paralelo. Además, puedes agregar o quitar traducciones desde el editor en cualquier momento mediante el menú contextual al hacer clic con el botón derecho:
 
-![Metadata Translation Editor Columns](~/content/assets/images/metadata-translation-editor-columns-bands.png)
+![Columnas del Editor de traducción de metadatos](~/content/assets/images/metadata-translation-editor-columns-bands.png)
