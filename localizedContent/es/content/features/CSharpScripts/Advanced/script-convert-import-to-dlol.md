@@ -1,6 +1,6 @@
 ---
 uid: script-convert-import-to-dlol
-title: Convert Import to Direct Lake on OneLake
+title: Convertir de modo Import a Direct Lake en OneLake
 author: Daniel Otykier
 updated: 2025-06-20
 applies_to:
@@ -11,49 +11,50 @@ applies_to:
       full: true
 ---
 
-# Convert Import to Direct Lake on OneLake
+# Convertir de modo Import a Direct Lake en OneLake
 
-## Script Purpose
+## Propósito del script
 
-This script converts Import mode tables to Direct Lake on OneLake (DL/OL). As laid out in the [Direct Lake guidance article](xref:direct-lake-guidance), we need to replace the partition(s) on such tables with a single [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet), which specifies the name and schema of the table/materialized view in the Fabric Lakehouse or Warehouse, while referencing a Shared Expression that uses the [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) (OneLake) connector.
+Este script convierte tablas en modo Import a Direct Lake en OneLake (DL/OL). Tal y como se indica en el [artículo de guía de Direct Lake](xref:direct-lake-guidance), debemos reemplazar la partición (o particiones) de estas tablas por una única [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet), que especifica el nombre y el esquema de la tabla/vista materializada en el Lakehouse o Warehouse de Fabric, a la vez que hace referencia a una expresión compartida que usa el conector [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) (OneLake).
 
-## Prerequisites
+## Requisitos previos
 
-You will need the **Workspace ID** as well as the **Resource ID** of your Fabric Warehouse or Lakehouse. Both are GUIDs that are part of the URL when navigating to the Warehouse or Lakehouse in the Fabric portal:
+Necesitará el **Workspace ID**, así como el **Resource ID** de su Warehouse o Lakehouse de Fabric. Ambos son GUID que forman parte de la URL al navegar al Warehouse o Lakehouse en el portal de Fabric:
 
-![Lakehouse Warehouse URL](~/content/assets/images/lakehouse-warehouse-url.png)
+![URL de Lakehouse/Warehouse](~/content/assets/images/lakehouse-warehouse-url.png)
 
-In the screenshot above, the **Workspace ID** of the lakehouse is highlighted in blue, while the **Resource ID** is highlighted in green.
+En la captura de pantalla anterior, el **Workspace ID** del Lakehouse se resalta en azul, mientras que el **Resource ID** se resalta en verde.
 
-If you are connecting to a Fabric Warehouse or a Lakehouse that supports schemas, you will also need to know the **Schema** of the table/materialized view you wish to connect to.
+Si se conecta a un Warehouse de Fabric o a un Lakehouse que admita esquemas, también deberá conocer el **Schema** de la tabla/vista materializada a la que desea conectarse.
 
 > [!WARNING]
-> Tables in Import mode can define transformations inside their partitions (expressed using SQL or M). These transformations will be lost when converting to Direct Lake on OneLake mode, as the Direct Lake partitions must contain a 1:1 mapping of the columns in the source table/materialized view. Therefore, ensure that the source table/materialized view has the same name in the Fabric Warehouse or Lakehouse as it does in the semantic model, and that column mappings are correct before running this script.
+> Las tablas en modo Import pueden definir transformaciones dentro de sus particiones (expresadas mediante SQL o M). Estas transformaciones se perderán al convertir a Direct Lake en OneLake, ya que las particiones de Direct Lake deben contener una asignación 1:1 de las columnas de la tabla/vista materializada de origen. Por lo tanto, asegúrese de que la tabla/vista materializada de origen tenga el mismo nombre en el Warehouse o Lakehouse de Fabric que en el modelo semántico, y de que las asignaciones de columnas sean correctas antes de ejecutar este script.
 
 ## Script
 
-### Convert Import mode tables to Direct Lake on OneLake
+### Convertir tablas en modo Import a Direct Lake en OneLake
 
 ```csharp
 // ==================================================================
-// Convert Import to Direct Lake on OneLake
+// Convertir Import a Direct Lake en OneLake
 // ----------------------------------------
 // 
-// This script converts the selected (import) tables, or all tables
-// in the model, if nothing is selected, to Direct Lake on OneLake
-// tables.
+// Este script convierte las tablas seleccionadas (Import) o, si no hay
+// ninguna seleccionada, todas las tablas del modelo, a tablas
+// Direct Lake en OneLake.
 //
-// WARNING: The script assumes that tables have the same name in the
-// Fabric Warehouse or Lakehouse, as they do in the semantic model.
-// Moreover, any transformations (M or SQL based) in the import
-// partitions, will be lost, as Direct Lake mode tables must contain
-// 1:1 the same columns as the source table/materialized view.
+// ADVERTENCIA: El script asume que las tablas tienen el mismo nombre
+// en el Warehouse o Lakehouse de Fabric que en el modelo semántico.
+// Además, cualquier transformación (basada en M o SQL) en las
+// particiones en modo Import se perderá, ya que las tablas en modo Direct Lake
+// deben contener 1:1 las mismas columnas que la tabla/vista
+// materializada de origen.
 //
-// You will need the Workspace ID and the ID of your Fabric Warehouse
-// or Lakehouse (both are GUIDs).
+// Necesitará el Workspace ID y el ID de su Warehouse o Lakehouse de
+// Fabric (ambos son GUID).
 // ==================================================================
 
-// Find the Shared Expression that is being used by EntityPartitions on the model:
+// Buscar la expresión compartida que usan las EntityPartitions en el modelo:
 using System.Windows.Forms;
 using System.Drawing;
 using System.Data;
@@ -69,14 +70,14 @@ Application.UseWaitCursor = false;
 
 if(importTables.Count == 0)
 {
-    Warning("Model or selection does not contain any tables in import mode");
+    Warning("El modelo o la selección no contiene ninguna tabla en modo Import");
     return;
 }
 else
 {
-    var result = MessageBox.Show("The following tables will be converted:\r\n\r\n" + string.Join("\r\n", importTables.Select(t => "  - " + t.Name)) +
-        "\r\n\r\nProceed?",
-        "Confirm conversion?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+    var result = MessageBox.Show("Se convertirán las siguientes tablas:\r\n\r\n" + string.Join("\r\n", importTables.Select(t => "  - " + t.Name)) +
+        "\r\n\r\n¿Continuar?",
+        "¿Confirmar conversión?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
     if (result == DialogResult.Cancel) return;
 }
 
@@ -85,7 +86,7 @@ string resourceId = string.Empty;
 var sharedExpression = Model.Expressions.FirstOrDefault(e => e.Expression.Contains("AzureStorage.DataLake"));
 if(sharedExpression != null)
 {
-    // Extract existing workspace ID and resource ID
+    // Extraer el Workspace ID y el Resource ID existentes
     var ix = sharedExpression.Expression.IndexOf("onelake.dfs.fabric.microsoft.com");
     var url = sharedExpression.Expression.Substring(ix + 33, 73);
     var guids = url.Split('/');
@@ -122,7 +123,7 @@ foreach(var table in importTables)
     ep.Name = table.Name;
 }
 
-Info("Tables converted to Direct Lake on OneLake mode.");
+Info("Tablas convertidas a Direct Lake en OneLake.");
 
 public class UrlNameDialog : Form
 {
@@ -133,7 +134,7 @@ public class UrlNameDialog : Form
 
     public UrlNameDialog(string workspaceId, string resourceId)
     {
-        Text = "Convert Direct Lake on SQL to OneLake";
+        Text = "Convertir Direct Lake sobre SQL a OneLake";
         AutoSize = true;
         AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterParent;
@@ -155,12 +156,12 @@ public class UrlNameDialog : Form
         mainLayout.Controls.Add(WorkspaceId);
 
         // Resource ID
-        mainLayout.Controls.Add(new Label { Text = "Fabric Warehouse / Lakehouse ID (GUID):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
+        mainLayout.Controls.Add(new Label { Text = "ID de Fabric Warehouse / Lakehouse (GUID):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
         ResourceId = new TextBox { Width = 1000, Text = resourceId };
         mainLayout.Controls.Add(ResourceId);
 
         // Schema
-        mainLayout.Controls.Add(new Label { Text = "Schema (optional):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
+        mainLayout.Controls.Add(new Label { Text = "Esquema (opcional):", AutoSize = true, Padding = new Padding(0, 20, 0, 0) });
         Schema = new TextBox { Width = 1000 };
         mainLayout.Controls.Add(Schema);
 
@@ -174,8 +175,8 @@ public class UrlNameDialog : Form
             AutoSize = true
         };
 
-        okButton = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Enabled = false };
-        var cancelButton = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true };
+        okButton = new Button { Text = "Aceptar", DialogResult = DialogResult.OK, AutoSize = true, Enabled = false };
+        var cancelButton = new Button { Text = "Cancelar", DialogResult = DialogResult.Cancel, AutoSize = true };
         buttonPanel.Controls.Add(okButton);
         buttonPanel.Controls.Add(cancelButton);
 
@@ -196,12 +197,12 @@ public class UrlNameDialog : Form
 }
 ```
 
-### Explanation
+### Explicación
 
-The script first determines whether to convert all Import mode tables in the model or only those selected by the user. It then checks if any such tables exist and prompts the user for confirmation before proceeding.
+El script determina primero si debe convertir todas las tablas en modo Import del modelo o solo las que el usuario haya seleccionado. A continuación, comprueba si existe alguna tabla de este tipo y solicita confirmación al usuario antes de continuar.
 
-The script then attempts to locate a Shared Expression that uses the `AzureStorage.DataLake` connector. If such an expression exists, it extracts the Workspace ID and Resource ID from its expression. If no such expression is found, it creates a new one.
+A continuación, el script intenta localizar una expresión compartida que use el conector `AzureStorage.DataLake`. Si existe una expresión de este tipo, extrae el ID del Workspace y el ID del recurso de su expresión. Si no se encuentra ninguna expresión de ese tipo, crea una nueva.
 
-The user is then prompted to input the Workspace ID and Resource ID of the Fabric Warehouse or Lakehouse, as well as an optional Schema name. The script replaces the existing Shared Expression with a new one that uses the provided IDs, if they were changed.
+A continuación, se pide al usuario que introduzca el ID del Workspace y el ID del recurso del Warehouse o Lakehouse de Fabric, así como un nombre de esquema opcional. El script reemplaza la expresión compartida existente por una nueva que use los ID proporcionados, si se han modificado.
 
-Finally, for each Import mode table, the script creates a new EntityPartition with the specified name and schema, referencing the Shared Expression. It then deletes any existing partitions on the table that are not the newly created EntityPartition.
+Por último, para cada tabla de Import mode, el script crea una nueva EntityPartition con el nombre y el esquema especificados, haciendo referencia a la Shared Expression. Luego elimina cualquier partición existente en la tabla que no sea la EntityPartition recién creada.
