@@ -1,75 +1,75 @@
 ---
 uid: custom-actions
-title: Custom Actions
+title: Acciones personalizadas
 ---
 
-# Custom Actions
+# Acciones personalizadas
 
 > [!NOTE]
-> Please note that this functionality is unrelated to the Custom Actions feature available for Multidimensional models.
+> Ten en cuenta que esta funcionalidad no está relacionada con la característica de Acciones personalizadas disponible para modelos multidimensionales.
 
-Say you have created a useful script using the `Selected` object, and you want to be able to execute the script several times on different objects in the explorer tree. Instead of hitting the "Play" button whenever you want to execute the script, Tabular Editor lets you save it as a Custom Action:
+Supón que has creado un script útil usando el objeto `Selected` y quieres poder ejecutarlo varias veces sobre distintos objetos del árbol del explorador. En lugar de pulsar el botón "Reproducir" cada vez que quieras ejecutar el script, Tabular Editor te permite guardarlo como una Acción personalizada:
 
 ![image](https://user-images.githubusercontent.com/8976200/33581673-0db35ed0-d952-11e7-90cd-e3164e198865.png)
 
-After saving the custom action, you will see that it is now available directly from the right-click context menu of the explorer tree, making it very easy to invoke the script on any objects selected in the tree. You can create as many custom actions as you want. Use backslashes (\\) in the names to create a submenu structure within the context menu.
+Después de guardar la acción personalizada, verás que ya está disponible directamente en el menú contextual de clic derecho del árbol del explorador, lo que facilita mucho ejecutar el script sobre cualquier objeto seleccionado en el árbol. Puedes crear tantas acciones personalizadas como quieras. Usa barras invertidas (\\) en los nombres para crear una estructura de submenús dentro del menú contextual.
 
-![Custom Actions show up directly in the context menu](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/InvokeCustomAction.png)
+![Las acciones personalizadas aparecen directamente en el menú contextual](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/InvokeCustomAction.png)
 
-Custom Actions are stored in the CustomActions.json file within %AppData%\Local\TabularEditor. In the above example, the contents of this file will look like this:
+Las acciones personalizadas se almacenan en el archivo CustomActions.json en %AppData%\Local\TabularEditor. En el ejemplo anterior, el contenido de este archivo se verá así:
 
 ```json
 {
   "Actions": [
     {
-      "Name": "Custom Formatting\\Number with 1 decimal",
+      "Name": "Formato personalizado\\Número con 1 decimal",
       "Enabled": "true",
       "Execute": "Selected.Measures.ForEach(m => m.FormatString = \"0.0\";",
-      "Tooltip": "Sets the FormatString property to \"0.0\"",
+      "Tooltip": "Establece la propiedad FormatString en \"0.0\"",
       "ValidContexts": "Measure, Column"
     }
   ]
 }
 ```
 
-As you can see, `Name` and `Tooltip` gets their values from whatever was specified when the action was saved. `Execute` is the actual script to be executed when the action is invoked. Note that any syntax errors in the CustomActions.json file will cause Tabular Editor to skip loading all Custom Actions entirely, so make sure you can successfully execute a script inside the Advanced Scripting editor, before saving it as a Custom Action.
+Como puedes ver, `Name` y `Tooltip` obtienen sus valores de lo que se haya especificado al guardar la acción. `Execute` es el script real que se ejecutará cuando se invoque la acción. Ten en cuenta que cualquier error de sintaxis en el archivo CustomActions.json hará que Tabular Editor omita por completo la carga de todas las acciones personalizadas; por tanto, asegúrate de que puedes ejecutar correctamente un script dentro del editor de scripts avanzado antes de guardarlo como acción personalizada.
 
-The `ValidContexts` property holds a list of object types for which the Action will be available. When selecting objects in the tree, a selection containing any objects different from the types listed in the `ValidContexts` property will hide the action from the context menu.
+La propiedad `ValidContexts` contiene una lista de tipos de objeto para los que la acción estará disponible. Al seleccionar objetos en el árbol, una selección que contenga cualquier objeto distinto de los tipos indicados en la propiedad `ValidContexts` ocultará la acción del menú contextual.
 
-## Controlling Action Availability
+## Control de la disponibilidad de la acción
 
-If you need even more control on when an action can be invoked from the context menu, you can set the `Enabled` property to a custom expression that must return a boolean value, indicating whether the action will be available for the given selection. By default, the `Enabled` property has the value "true", which means that the action will always be enabled within the valid context. Keep this in mind, when using the singular object references on the `Selected` object, such as `Selected.Measure` or `Selected.Table`, as these will throw an error if the current selection does not contain exactly one of that type of object. In such a case, it is recommended to use the `Enabled` property to check that one and only one object of the required type, has been selected:
+Si necesitas aún más control sobre cuándo se puede invocar una acción desde el menú contextual, puedes establecer la propiedad `Enabled` en una expresión personalizada que debe devolver un valor booleano, indicando si la acción estará disponible para la selección dada. De forma predeterminada, la propiedad `Enabled` tiene el valor "true", lo que significa que la acción siempre estará habilitada dentro del contexto válido. Ten esto en cuenta cuando uses las referencias de objeto en singular del objeto `Selected`, como `Selected.Measure` o `Selected.Table`, ya que estas generarán un error si la selección actual no contiene exactamente uno de ese tipo de objeto. En ese caso, se recomienda usar la propiedad `Enabled` para comprobar que se ha seleccionado uno y solo uno de los objetos del tipo requerido:
 
 ```json
 {
   "Actions": [
     {
-      "Name": "Reset measure name",
+      "Name": "Restablecer nombre de la medida",
       "Enabled": "Selected.Measures.Count == 1",
       "Execute": "Selected.Measure.Name == \"New Measure\"",
-      "ValidContexts": "Measure"
+      "ValidContexts": "medida"
     }
   ]
 }
 ```
 
-This will disable the context menu item, unless exactly one measure has been selected in the tree.
+Esto deshabilitará la opción del menú contextual, a menos que se haya seleccionado exactamente una medida en el árbol.
 
-## Reusing custom actions
+## Reutilizando acciones personalizadas
 
-Release 2.7 introduces a new script method `CustomAction(...)`, which may be called to invoke previously saved Custom Actions. You can use this method as a stand-alone method (similar to `Output(...)`), or you can use it as an extension method on any set of objects:
+La versión 2,7 introduce un nuevo método de script `CustomAction(...)`, que puede llamarse para invocar acciones personalizadas guardadas previamente. Puede usar este método como un método independiente (similar a `Output(...)`), o puede usarlo como un método de extensión en cualquier conjunto de objetos:
 
 ```csharp
-// Executes "My custom action" against the current selection:
+// Ejecuta "My custom action" sobre la selección actual:
 CustomAction("My custom action");                
 
-// Executes "My custom action" against all tables in the model:
+// Ejecuta "My custom action" sobre todas las tablas del modelo:
 CustomAction(Model.Tables, "My custom action");
 
-// Executes "My custom action" against every measure in the current selection whose name starts with "Sum":
+// Ejecuta "My custom action" sobre cada medida en la selección actual cuyo nombre empieza por "Sum":
 Selected.Measures.Where(m => m.Name.StartsWith("Sum")).CustomAction("My custom action");
 ```
 
-Note that you must specify the full name of the Custom Action, including any context menu folder names.
+Tenga en cuenta que debe especificar el nombre completo de la acción personalizada, incluidos los nombres de las carpetas del menú contextual.
 
-If no action with the given name is found, an error is raised when the script is executed.
+Si no se encuentra ninguna acción con el nombre indicado, se genera un error al ejecutar el script.
