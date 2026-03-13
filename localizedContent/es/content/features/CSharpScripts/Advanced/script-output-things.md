@@ -1,6 +1,6 @@
 ---
 uid: script-output-things
-title: Output Object Details in a Grid
+title: Mostrar los detalles de los objetos en una cuadrícula
 author: Daniel Otykier
 updated: 2024-12-13
 applies_to:
@@ -11,18 +11,18 @@ applies_to:
       full: true
 ---
 
-# Output Object Details in a Grid
+# Mostrar los detalles de los objetos en una cuadrícula
 
-## Script Purpose
+## Propósito del script
 
-Another way to get an overview of objects in the model, and how they are configured, is to output them in a grid using the C# [`DataTable`](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable?view=net-8.0) class. This is a very flexible technique, as you can add only the information you are interested in, as columns of the `DataTable`. Moreover, when passing a `DataTable` to the `Output()` method, Tabular Editor will automatically display it in a grid view, which is very convenient for inspecting the data.
+Otra forma de obtener una visión general de los objetos del modelo y de cómo están configurados es volcarlos en una cuadrícula mediante la clase C# [`DataTable`](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable?view=net-8.0). Es una técnica muy flexible, porque puedes añadir solo la información que te interese como columnas del `DataTable`. Además, al pasar un `DataTable` al método `Output()`, Tabular Editor lo mostrará automáticamente en una vista de cuadrícula, lo que resulta muy cómodo para inspeccionar los datos.
 
 ## Script
 
-### Show measure complexity details
+### Mostrar detalles de la complejidad de las medidas
 
 ```csharp
-// This script displays a grid with details about each measure in the model.
+// Este script muestra una cuadrícula con detalles sobre cada medida en el modelo.
 using System.Data;
 
 var result = new DataTable();
@@ -37,9 +37,9 @@ foreach(var m in Model.AllMeasures)
 {
     var row = new object[]
     {
-        m.DaxObjectName,    // Name
-        m.Table.Name,       // Table
-        m.Tokenize().Count, // Token count
+        m.DaxObjectName,    // Nombre
+        m.Table.Name,       // Tabla
+        m.Tokenize().Count, // Recuento de tokens
         m.Expression.Split(new []{'\n'}, StringSplitOptions.RemoveEmptyEntries).Length,
         m.Description.Split(new []{'\n'}, StringSplitOptions.RemoveEmptyEntries).Length,
         m.FormatStringExpression ?? m.FormatString
@@ -50,21 +50,21 @@ foreach(var m in Model.AllMeasures)
 Output(result);
 ```
 
-### Explanation
+### Explicación
 
-This snippet first configures a `DataTable` object with the columns we want to display in the grid. We explicitly specify the `typeof(int)` for some of the columns, to ensure that sorting works correctly. We then iterate over all measures in the model, and for each measure, we create a new row in the `DataTable` with the desired information. Finally, we pass the `DataTable` to the `Output()` method, which will display the grid.
+En primer lugar, este fragmento configura un objeto `DataTable` con las columnas que queremos mostrar en la cuadrícula. En algunas columnas especificamos explícitamente `typeof(int)` para asegurarnos de que la ordenación funcione correctamente. A continuación, iteramos por todas las medidas del modelo y, para cada medida, creamos una nueva fila en el `DataTable` con la información deseada. Por último, pasamos el `DataTable` al método `Output()`, que mostrará la cuadrícula.
 
-The columns displayed are:
+Las columnas mostradas son:
 
-- **Name**: The name of the measure.
-- **Table**: The name of the table the measure belongs to.
-- **Expression token count**: The number of tokens in the measure expression. This is a rough measure of DAX complexity.
-- **Expression line count**: The number of lines in the measure expression, not counting empty lines.
-- **Description line count**: The number of lines in the measure description, not counting empty lines.
-- **Format String**: The measure's format string expresssion or format string, if any.
+- **Name**: El nombre de la medida.
+- **Table**: El nombre de la tabla a la que pertenece la medida.
+- **Expression token count**: El número de tokens en la expresión de la medida. Es una medida aproximada de la complejidad de DAX.
+- **Expression line count**: El número de líneas de la expresión de la medida, sin contar las líneas vacías.
+- **Número de líneas de la descripción**: El número de líneas de la descripción de la medida, sin contar las líneas en blanco.
+- **Cadena de formato**: La expresión de la cadena de formato de la medida, o la propia cadena de formato, si existe.
 
-## Example Output
+## Salida de ejemplo
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/script-output-things-example.png" alt="Example of the dialog pop-up that displays the grid." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Example of the dialog pop-up that displays the grid. Both Tabular Editor 2 and Tabular Editor 3 will let you sort the grid columns as well as copy the output to the clipboard. However, Tabular Editor 3 also has additional features for grouping, filtering, and searching within the grid.</figcaption>
+  <img class="noscale" src="~/content/assets/images/script-output-things-example.png" alt="Example of the dialog pop-up that displays the grid." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Ejemplo del cuadro de diálogo emergente que muestra la cuadrícula. Tanto Tabular Editor 2 como Tabular Editor 3 permiten ordenar las columnas de la cuadrícula y copiar la salida al portapapeles. Sin embargo, Tabular Editor 3 también incluye funciones adicionales para agrupar, filtrar y buscar en la cuadrícula.</figcaption>
 </figure>
