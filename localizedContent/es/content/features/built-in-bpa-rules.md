@@ -1,6 +1,6 @@
 ---
 uid: built-in-bpa-rules
-title: Built-in BPA Rules
+title: Reglas BPA integradas
 author: Morten Lønskov
 updated: 2026-01-09
 applies_to:
@@ -16,178 +16,178 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Enterprise Edition feature providing 27 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
+description: Función de la Edición Enterprise que ofrece 27 reglas de prácticas recomendadas seleccionadas e incorporadas de forma nativa en Tabular Editor 3, con integración en la base de conocimiento.
 ---
 
-# Built-in BPA Rules
+# Reglas BPA integradas
 
-## Overview
+## Información general
 
-Tabular Editor 3 Enterprise Edition includes 27 built-in best practice rules. These rules cover common issues in semantic model development and are updated automatically with each release.
+La Edición Enterprise de Tabular Editor 3 incluye 27 reglas de prácticas recomendadas integradas. Estas reglas cubren problemas habituales en el desarrollo de un modelo semántico y se actualizan automáticamente con cada versión.
 
-Unlike custom rules stored in JSON files, built-in rules:
+A diferencia de las reglas personalizadas almacenadas en archivos JSON, las reglas integradas:
 
-- Are integrated directly into the application
-- Update automatically with new releases
-- Link to knowledge base documentation
-- Are read-only to ensure consistency across teams
-- Work immediately without configuration
+- Están integradas directamente en la aplicación
+- Se actualizan automáticamente con las nuevas versiones
+- Vinculan a la documentación de la base de conocimiento
+- Son de solo lectura para garantizar la coherencia entre equipos
+- Funcionan al instante sin configuración
 
-## Key Features
+## Características principales
 
-### Rule Categories
+### Categorías de reglas
 
-The 27 built-in rules cover four areas:
+Las 27 reglas integradas cubren cuatro áreas:
 
-- **Error Prevention**: Invalid characters, missing expressions, data type mismatches
-- **Performance**: Relationships, partitions, aggregations
-- **Formatting**: Format strings, visibility, naming conventions
-- **Maintenance**: Descriptions, calculation groups, unused objects
+- **Prevención de errores**: caracteres no válidos, expresiones ausentes, incompatibilidades de tipo de datos
+- **Rendimiento**: relaciones, particiones, agregaciones
+- **Formato**: cadenas de formato, visibilidad, convenciones de nomenclatura
+- **Mantenimiento**: descripciones, grupos de cálculo, objetos sin usar
 
-### Global and Per-Rule Control
+### Control global y por regla
 
-![Screenshot showing BPA preferences with global enable/disable toggle and per-rule checkboxes](~/content/assets/images/features/bpa-built-in-rules-preferences.png)
-You can enable or disable built-in rules globally or individually. Settings persist across sessions and work independently from your custom rules.
+![Captura de pantalla que muestra las preferencias de BPA con el conmutador global de habilitación/deshabilitación y casillas de verificación por regla](~/content/assets/images/features/bpa-built-in-rules-preferences.png)
+Puede habilitar o deshabilitar las reglas integradas de forma global o individual. La configuración se mantiene entre sesiones y funciona de forma independiente de sus reglas personalizadas.
 
-To manage built-in rules:
+Para administrar las reglas integradas:
 
-1. Go to **Tools** > **Preferences** > **Best Practice Analyzer**
-2. Find the **Built-in Rules** section
-3. Toggle **Enable Built-in Rules** to turn the entire collection on or off
-4. Use the BPA Manager to enable or disable individual rules
+1. Vaya a **Herramientas** > **Preferencias** > **Best Practice Analyzer**
+2. Busque la sección **Reglas integradas**
+3. Active o desactive **Habilitar reglas integradas** para activar o desactivar toda la colección
+4. Use el BPA Manager para habilitar o deshabilitar reglas individuales
 
-### First-Run Notification
+### Notificación al iniciar por primera vez
 
-![Screenshot of first-run notification dialog introducing built-in BPA rules](~/content/assets/images/features/bpa-built-in-rules-notification.png)
+![Captura de pantalla del cuadro de diálogo de notificación al iniciar por primera vez, que presenta las reglas BPA integradas](~/content/assets/images/features/bpa-built-in-rules-notification.png)
 
-The first time you open a model after upgrading to a version with built-in rules, you'll see a notification explaining the feature with a link to preferences. This notification only appears once.
+La primera vez que abras un modelo después de actualizar a una versión con reglas integradas, verás una notificación que explica la característica e incluye un enlace a las preferencias. Esta notificación solo aparece una vez.
 
-### Knowledge Base Integration
+### Integración con la base de conocimientos
 
-![Screenshot showing BPA window with rule selected and "View Documentation" button highlighted](~/content/assets/images/features/bpa-built-in-rules-kb-link.png)
+![Captura de pantalla que muestra la ventana de BPA con una regla seleccionada y el botón "Ver documentación" resaltado](~/content/assets/images/features/bpa-built-in-rules-kb-link.png)
 
-Every built-in rule links to a knowledge base article through the `KnowledgeBaseArticle` property. Each article explains what the rule checks, why it matters, and how to fix violations.
+Cada regla integrada enlaza a un artículo de la base de conocimientos mediante la propiedad `KnowledgeBaseArticle`. Cada artículo explica qué comprueba la regla, por qué es importante y cómo corregir las infracciones.
 
-To view documentation, select a rule in the Best Practice Analyzer window.
+Para ver la documentación, selecciona una regla en la ventana de Best Practice Analyzer.
 
-### Read-Only Protection
+### Protección de solo lectura
 
-Built-in rules can't be edited, cloned, or deleted. This ensures all users have the same rule definitions. You can disable individual rules, but the rule definitions themselves remain unchanged.
+Las reglas integradas no se pueden editar, clonar ni eliminar. Esto garantiza que todos los usuarios tengan las mismas definiciones de reglas. Puedes desactivar reglas individuales, pero las definiciones de las reglas en sí permanecen sin cambios.
 
-![Screenshot showing built-in rule with read-only badge/icon in BPA window](~/content/assets/images/features/bpa-built-in-rules-readonly.png)
+![Captura de pantalla que muestra una regla integrada con una insignia o un icono de solo lectura en la ventana de BPA](~/content/assets/images/features/bpa-built-in-rules-readonly.png)
 
-### ID Collision Prevention
+### Prevención de colisiones de ID
 
-Built-in rules use reserved ID prefixes. When you create a custom rule, Tabular Editor validates that your ID doesn't conflict with built-in rules and shows an error if it does.
+Las reglas integradas usan prefijos de ID reservados. Cuando creas una regla personalizada, Tabular Editor valida que tu ID no entre en conflicto con las reglas integradas y muestra un error si lo hace.
 
-## Built-in Rules Catalog
+## Catálogo de reglas integradas
 
-The initial release includes the following rules:
+La versión inicial incluye las siguientes reglas:
 
-### Error Prevention Rules
+### Reglas de prevención de errores
 
-- [Avoid Invalid Characters in Object Names](xref:kb.bpa-avoid-invalid-characters-names)
-- [Avoid Invalid Characters in Descriptions](xref:kb.bpa-avoid-invalid-characters-descriptions)
-- [Expression Required for Calculated Objects](xref:kb.bpa-expression-required)
-- [Data Column Must Have Source](xref:kb.bpa-data-column-source)
-- [Relationship Columns Must Have Same Data Type](xref:kb.bpa-relationship-same-datatype)
-- [Avoid Provider Partitions with Structured Data Sources](xref:kb.bpa-avoid-provider-partitions-structured)
+- [Evitar caracteres no válidos en los nombres de los objetos](xref:kb.bpa-avoid-invalid-characters-names)
+- [Evita caracteres no válidos en las descripciones](xref:kb.bpa-avoid-invalid-characters-descriptions)
+- [Se requiere una expresión para los objetos calculados](xref:kb.bpa-expression-required)
+- [La columna de datos debe tener un origen](xref:kb.bpa-data-column-source)
+- [Las columnas de relación deben tener el mismo tipo de datos](xref:kb.bpa-relationship-same-datatype)
+- [Evita las particiones del proveedor con orígenes de datos estructurados](xref:kb.bpa-avoid-provider-partitions-structured)
 
-### Performance Rules
+### Reglas de rendimiento
 
-- [Many-to-Many Relationships Should Use Single Direction](xref:kb.bpa-many-to-many-single-direction)
-- [Hide Foreign Key Columns](xref:kb.bpa-hide-foreign-keys)
-- [Set SummarizeBy to None for Numeric Columns](xref:kb.bpa-do-not-summarize-numeric)
-- [Remove Auto Date Tables](xref:kb.bpa-remove-auto-date-table)
-- [Remove Unused Data Sources](xref:kb.bpa-remove-unused-data-sources)
+- [Las relaciones de muchos a muchos deben usar una sola dirección](xref:kb.bpa-many-to-many-single-direction)
+- [Oculta las columnas de clave externa](xref:kb.bpa-hide-foreign-keys)
+- [Establece SummarizeBy en None para las columnas numéricas](xref:kb.bpa-do-not-summarize-numeric)
+- [Elimina las tablas automáticas de fechas](xref:kb.bpa-remove-auto-date-table)
+- [Elimina las fuentes de datos no utilizadas](xref:kb.bpa-remove-unused-data-sources)
 
-### Formatting Rules
+### Reglas de formato
 
-- [Provide Format String for Measures](xref:kb.bpa-format-string-measures)
-- [Provide Format String for Numeric and Date Columns](xref:kb.bpa-format-string-columns)
-- [Visible Objects Should Have Descriptions](xref:kb.bpa-visible-objects-no-description)
-- [Trim Object Names](xref:kb.bpa-trim-object-names)
-- [Date Table Should Exist](xref:kb.bpa-date-table-exists)
+- [Proporciona una cadena de formato para las medidas](xref:kb.bpa-format-string-measures)
+- [Proporciona una cadena de formato para columnas numéricas y de fecha](xref:kb.bpa-format-string-columns)
+- [Los objetos visibles deben tener descripciones](xref:kb.bpa-visible-objects-no-description)
+- [Recorta los nombres de los objetos](xref:kb.bpa-trim-object-names)
+- [Debe existir una tabla de fechas](xref:kb.bpa-date-table-exists)
 
-### Maintenance Rules
+### Reglas de mantenimiento
 
-- [Calculation Groups Should Contain Items](xref:kb.bpa-calculation-groups-no-items)
-- [Perspectives Should Contain Objects](xref:kb.bpa-perspectives-no-objects)
-- [Use Latest Power BI Compatibility Level](xref:kb.bpa-powerbi-latest-compatibility)
+- [Los grupos de cálculo deben contener elementos](xref:kb.bpa-calculation-groups-no-items)
+- [Las perspectivas deben contener objetos](xref:kb.bpa-perspectives-no-objects)
+- [Usa el nivel de compatibilidad más reciente de Power BI](xref:kb.bpa-powerbi-latest-compatibility)
 
-## Working with Built-in and Custom Rules
+## Trabajar con reglas integradas y personalizadas
 
-Built-in and custom rules work side by side:
+Las reglas integradas y las personalizadas conviven:
 
-| Feature           | Built-in Rules           | Custom Rules                    |
-| ----------------- | ------------------------ | ------------------------------- |
-| **Storage**       | Hardcoded in application | JSON files or model annotations |
-| **Updates**       | Automatic with releases  | Manual editing required         |
-| **Modification**  | Read-only                | Fully editable                  |
-| **Documentation** | Integrated KB articles   | User-provided descriptions      |
-| **Availability**  | Enterprise Edition only  | All editions                    |
-| **Sharing**       | Consistent across teams  | Requires manual distribution    |
+| Característica      | Reglas integradas                        | Reglas personalizadas                       |
+| ------------------- | ---------------------------------------- | ------------------------------------------- |
+| **Almacenamiento**  | Integrado en el código de la aplicación  | Archivos JSON o anotaciones del modelo      |
+| **Actualizaciones** | Automático con cada versión              | Requiere edición manual                     |
+| **Modificación**    | Solo lectura                             | Totalmente editable                         |
+| **Documentación**   | Artículos de KB integrados               | Descripciones proporcionadas por el usuario |
+| **Disponibilidad**  | Solo disponible en la Edición Enterprise | Todas las ediciones                         |
+| **Compartir**       | Consistente entre equipos                | Requiere distribución manual                |
 
-### Recommended Workflow
+### Flujo de trabajo recomendado
 
-1. Enable built-in rules for immediate coverage
-2. Review violations and apply fixes
-3. Disable rules that don't apply to your conventions
-4. Add custom rules for organization-specific requirements
-5. Use the "Ignore" feature for intentional violations
+1. Habilita las reglas integradas para obtener cobertura inmediata
+2. Revisa las infracciones y aplica correcciones
+3. Deshabilita las reglas que no se ajusten a tus convenciones
+4. Añade reglas personalizadas para requisitos específicos de la organización
+5. Usa la función "Ignorar" para infracciones deliberadas
 
-## Best Practices
+## Prácticas recomendadas
 
-### Onboarding Teams
+### Incorporación de equipos
 
-When rolling out built-in rules to your team:
+Al implementar las reglas integradas en tu equipo:
 
-- Start with all rules enabled to establish a baseline
-- Review violations together and agree on which rules apply
-- Document why specific rules are disabled
-- Add custom rules for organization-specific requirements
+- Empieza con todas las reglas habilitadas para establecer una línea de referencia
+- Revisen las infracciones en conjunto y acuerden qué reglas se aplican
+- Documenta por qué se deshabilitan reglas específicas
+- Añade reglas personalizadas para requisitos específicos de la organización
 
-### Model Maintenance
+### Mantenimiento del modelo
 
-- Run BPA before committing changes to version control
-- Fix high-severity violations immediately
-- Review medium and low-severity issues regularly
-- Use automatic fixes where available
+- Ejecuta el BPA antes de confirmar los cambios en el control de versiones
+- Corrige las infracciones de alta gravedad de inmediato
+- Revisa periódicamente los problemas de gravedad media y baja
+- Usa correcciones automáticas cuando estén disponibles
 
-### Custom Rules
+### Reglas personalizadas
 
-- Don't duplicate built-in rule functionality
-- Use different ID prefixes to avoid conflicts
-- Document your custom rules
-- Share rule collections within your team
+- No dupliques la funcionalidad de las reglas integradas
+- Usa prefijos de ID distintos para evitar conflictos
+- Documenta tus reglas personalizadas
+- Comparte colecciones de reglas con tu equipo
 
-## Troubleshooting
+## Solución de problemas
 
-### Built-in Rules Not Appearing
+### Las reglas integradas no aparecen
 
-If built-in rules don't show in the BPA window:
+Si las reglas integradas no se muestran en la ventana del BPA:
 
-1. Check that you're using Tabular Editor 3 Enterprise Edition
-2. Verify that built-in rules are enabled in **Tools** > **Preferences** > **Best Practice Analyzer**
-3. Restart Tabular Editor if you just changed preferences
-4. Confirm your license is active
+1. Comprueba que estás usando Tabular Editor 3 Edición Enterprise
+2. Verifica que las reglas integradas estén habilitadas en **Tools** > **Preferences** > **Best Practice Analyzer**
+3. Reinicia Tabular Editor si acabas de cambiar las preferencias
+4. Confirma que tu licencia está activa
 
-### Cannot Modify Built-in Rule
+### No se puede modificar una regla integrada
 
-This is expected. Built-in rules are read-only. If you need different logic, create a custom rule with your expression and disable the corresponding built-in rule.
+Es lo esperado. Las reglas integradas son de solo lectura. Si necesitas una lógica distinta, crea una regla personalizada con tu expresión y desactiva la regla integrada correspondiente.
 
-### ID Collision Error
+### Error de colisión de ID
 
-Built-in rules reserve certain ID prefixes. Choose a different ID that doesn't start with `TE3_BUILT_IN`.
+Las reglas integradas reservan ciertos prefijos de ID. Elige un ID diferente que no empiece por `TE3_BUILT_IN`.
 
-## Compatibility
+## Compatibilidad
 
-- Requires Tabular Editor 3.24.0 or later
-- Enterprise Edition only
-- Works with all compatibility levels (1200+)
+- Requiere Tabular Editor 3.24.0 o una versión posterior
+- Solo para la Edición Enterprise
+- Funciona con todos los niveles de compatibilidad (1200+)
 
-## Next Steps
+## Siguientes pasos
 
-- [Using the Best Practice Analyzer](xref:using-bpa)
-- [BPA sample rules and expressions](xref:using-bpa-sample-rules-expressions)
-- [Custom BPA rules](xref:best-practice-analyzer)
+- [Uso del Best Practice Analyzer](xref:using-bpa)
+- [Reglas y expresiones de ejemplo de BPA](xref:using-bpa-sample-rules-expressions)
+- [Reglas BPA personalizadas](xref:best-practice-analyzer)
