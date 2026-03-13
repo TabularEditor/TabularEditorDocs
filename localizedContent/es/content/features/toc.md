@@ -1,58 +1,58 @@
-# User Interface
+# Interfaz de usuario
 
-## @user-interface
+## @interfaz-de-usuario
 
 ## @tom-explorer-view
 
-## @properties-view
+## @vista-de-propiedades
 
-## @bpa-view
+## @vista-de-bpa
 
-## @data-refresh-view
+## @vista-de-actualizacion-de-datos
 
-## @find-replace
+## @buscar-y-reemplazar
 
-## @messages-view
+## @vista-de-mensajes
 
-## @diagram-view
+## @vista de diagrama
 
-# DAX Features
+# Características de DAX
 
-## @dax-debugger
+## @depurador-de-dax
 
-## @dax-editor
+## @editor-de-dax
 
-## @dax-query
+## @consulta-dax
 
-## @dax-scripts
+## @scripts-de-dax
 
 ## @code-actions
 
-## @dax-package-manager
+## @administrador-de-paquetes-dax
 
-# Scripting and Automation
+# Secuencias de comandos y automatización
 
-## @csharp-scripts
+## @scripts-de-csharp
 
-## C# Script Library
+## Biblioteca de C# Script
 
-### @csharp-script-library
+### @biblioteca-de-csharp-script
 
-### @script-library-beginner
+### @biblioteca-de-scripts-para-principiantes
 
 ### @script-library-advanced
 
-## @script-helper-methods
+## @metodos-de-ayuda-para-scripts
 
-## @useful-script-snippets
+## @fragmentos-de-script-utiles
 
 ## @macros
 
-# Model Analysis and Quality
+# Análisis y calidad del modelo
 
 ## @best-practice-analyzer
 
-### @built-in-bpa-rules
+### @reglas-de-bpa-integradas
 
 ### @using-bpa
 
@@ -60,7 +60,7 @@
 
 ## @dax-optimizer-integration
 
-# Data Exploration and Connectivity
+# Exploración de datos y conectividad
 
 ## @import-tables
 
@@ -72,21 +72,21 @@
 
 ### @dq-over-as-limitations
 
-# Advanced Modelling Features
+# Funciones avanzadas de modelado
 
 ## @metadata-translation-editor
 
 ## @perspective-editor
 
-# Model Organization
+# Organización del modelo
 
 ## @hierarchical-display
 
 ## @table-groups
 
-# Model Deployment and Management
+# Implementación y administración del modelo
 
-## [Model deployment](deployment.md)
+## [Implementación del modelo](deployment.md)
 
 ## @workspace-databases
 
@@ -96,20 +96,20 @@
 
 ## @save-to-folder
 
-## @save-with-supporting-files
+## @guardar-con-archivos-de-apoyo
 
-## @advanced-refresh
+## @actualización-avanzada
 
-## @refresh-overrides
+## @sobrescrituras-de-actualización
 
-# Command Line and Integration
+# Línea de comandos e integración
 
 ## @command-line-options
 
-# Semantic Bridge for cross-platform translations
+# Puente semántico para traducciones multiplataforma
 
-## @semantic-bridge
+## @puente-semántico
 
-## @semantic-bridge-metric-view-object-model
+## @puente-semántico-vista-de-métricas-modelo-de-objetos
 
-## @semantic-bridge-metric-view-validation
+## @puente-semántico-vista-de-métricas-validación
