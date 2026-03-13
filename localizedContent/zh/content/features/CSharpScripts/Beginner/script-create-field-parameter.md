@@ -1,6 +1,6 @@
 ---
 uid: create-field-parameter
-title: Create Field Parameter
+title: 创建字段参数
 author: Daniel Otykier
 updated: 2024-01-27
 applies_to:
@@ -11,45 +11,43 @@ applies_to:
       full: true
 ---
 
-# Create Field Parameters in
+# 在中创建字段参数
 
-## Script Purpose
+## 脚本用途
 
-If you want to create field parameters in a Power BI model using Tabular Editor or in a Direct Lake model.
+如果你想使用 Tabular Editor 在 Power BI 模型中创建字段参数，或在 Direct Lake 模型中创建字段参数。
 
 > [!TIP]
-> Want to see the script in action, check out this [Guy in a Cube video](https://www.youtube.com/watch?v=Cg6zRhwF-Ro) where Patrick LeBlanc explains how to use it step by step.
+> 想看看脚本的实际效果？可以观看这个 [Guy in a Cube 视频](https://www.youtube.com/watch?v=Cg6zRhwF-Ro)，Patrick LeBlanc 会一步步讲解如何使用它。
 
-## Script
+## 脚本
 
-### Select Columns or Measures to create a field parameter table
+### 选择列或度量值以创建字段参数表
 
 ```csharp
-// Before running the script, select the measures or columns that you
-// would like to use as field parameters (hold down CTRL to select multiple
-// objects). Also, you may change the name of the field parameter table
-// below. NOTE: If used against Power BI Desktop, you must enable unsupported
-// features under File > Preferences (TE2) or Tools > Preferences (TE3).
+// 运行脚本前，请先选择要用作字段参数的度量值或列（按住 CTRL 可多选对象）。
+// 此外，你也可以在下方修改字段参数表的名称。注意：如果用于 Power BI Desktop，
+// 你必须在“文件 > 偏好”(TE2) 或“工具 > 偏好”(TE3) 下启用“不受支持的功能”。
 var name = "Parameter";
 
-if(Selected.Columns.Count == 0 && Selected.Measures.Count == 0) throw new Exception("No columns or measures selected!");
+if(Selected.Columns.Count == 0 && Selected.Measures.Count == 0) throw new Exception("未选择任何列或度量值！");
 
-// Construct the DAX for the calculated table based on the current selection:
+// 基于当前选择构建计算表格的 DAX：
 var objects = Selected.Columns.Any() ? Selected.Columns.Cast<ITabularTableObject>() : Selected.Measures;
 var dax = "{\n    " + string.Join(",\n    ", objects.Select((c,i) => string.Format("(\"{0}\", NAMEOF('{1}'[{0}]), {2})", c.Name, c.Table.Name, i))) + "\n}";
 
-// Add the calculated table to the model:
+// 将计算表格添加到模型：
 var table = Model.AddCalculatedTable(name, dax);
 
-// In TE2 columns are not created automatically from a DAX expression, so 
-// we will have to add them manually:
+// 在 TE2 中，不会根据 DAX 表达式自动创建列，因此
+// 需要手动添加：
 var te2 = table.Columns.Count == 0;
 var nameColumn = te2 ? table.AddCalculatedTableColumn(name, "[Value1]") : table.Columns["Value1"] as CalculatedTableColumn;
 var fieldColumn = te2 ? table.AddCalculatedTableColumn(name + " Fields", "[Value2]") : table.Columns["Value2"] as CalculatedTableColumn;
 var orderColumn = te2 ? table.AddCalculatedTableColumn(name + " Order", "[Value3]") : table.Columns["Value3"] as CalculatedTableColumn;
 
 if(!te2) {
-    // Rename the columns that were added automatically in TE3:
+    // 重命名在 TE3 中自动添加的列：
     nameColumn.IsNameInferred = false;
     nameColumn.Name = name;
     fieldColumn.IsNameInferred = false;
@@ -57,8 +55,8 @@ if(!te2) {
     orderColumn.IsNameInferred = false;
     orderColumn.Name = name + " Order";
 }
-// Set remaining properties for field parameters to work
-// See: https://twitter.com/markbdi/status/1526558841172893696
+// 设置其余属性，以便字段参数正常工作
+// 参考：https://twitter.com/markbdi/status/1526558841172893696
 nameColumn.SortByColumn = orderColumn;
 nameColumn.GroupByColumns.Add(fieldColumn);
 fieldColumn.SortByColumn = orderColumn;
@@ -67,8 +65,8 @@ fieldColumn.IsHidden = true;
 orderColumn.IsHidden = true;
 ```
 
-### Explanation
+### 说明
 
-Before running the script the user has to select the measures or columns in the TOM Explorer they wish to have in their field parameter table.
-The selected objects are then inserted into a calculated table which is then configured as a field parameter table automatically.
+在运行脚本之前，用户需要在 TOM Explorer 中选择他们希望包含在字段参数表中的度量值或列。
+随后，这些所选对象会被插入到一个计算表格中，并自动配置为字段参数表。
 
