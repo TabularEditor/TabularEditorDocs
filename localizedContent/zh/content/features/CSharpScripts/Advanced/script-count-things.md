@@ -1,6 +1,6 @@
 ---
 uid: script-count-things
-title: Count Model Objects
+title: 统计模型对象数量
 author: Kurt Buhler
 updated: 2023-02-27
 applies_to:
@@ -11,28 +11,28 @@ applies_to:
       full: true
 ---
 
-# Count Things in the Model
+# 统计模型中的各类对象
 
-## Script Purpose
+## 脚本用途
 
-If you want to get an overview of what's in a model and how many objects there are:
+如果你想快速了解模型里有哪些内容，以及各类对象有多少：
 
-- How many measures are in a model.
-- How many columns & calculated columns are in a model.
-- How many tables & calculated tables are in a model.
-- How many relationships, inactive relationships, etc.
+- 模型中有多少个度量值。
+- 模型中有多少列和计算列。
+- 模型中有多少个表和计算表格。
+- 模型中有多少个关系、非活动关系等。
 
-## Script
+## 脚本
 
-### Count the number of model objects by Type
+### 按类型统计模型对象数量
 
 ```csharp
-// This script counts objects in your model and displays them in a pop-up info box.
-// It does not write any changes to this model.
+// 此脚本会统计模型中的对象，并在弹出信息框中显示。
+// 它不会对该模型写入任何更改。
 //
-// Use this script when you open a new model and need a 'helicopter view' on the contents.
+// 当你打开一个新模型，需要对其内容进行“鸟瞰”时，就用这个脚本。
 //
-// Count calculation groups & calculation items
+// 统计计算组和计算项
 int _calcgroups = 0;
 int _calcitems = 0;
 foreach (  var _calcgroup  in Model.CalculationGroups )
@@ -44,7 +44,7 @@ foreach (  var _calcgroup  in Model.CalculationGroups )
     }
 }
 
-// Count partitions and DAX parameters
+// 统计分区和 DAX 参数
 int _partitions = 0;
 int _whatifparameters = 0;
 int _fieldparameters = 0;
@@ -70,7 +70,7 @@ foreach (  var _table  in Model.Tables )
     }
 }
 
-// Average measure length
+// 度量值平均长度
 decimal _numLines = 0;
 decimal _numChars = 0;
 int _measures = Model.AllMeasures.Count();
@@ -83,16 +83,16 @@ _numLines = Math.Round(_numLines / _measures, 1);
 _numChars = Math.Round(_numChars / _measures, 1);
 
 
-// Return the pop-up
-Info ( "In the model, we see the below objects:\n\n"
+// 返回弹窗
+Info ( "在该模型中，我们看到以下对象：\n\n"
 
         + "-----------------------------------------\n"
-        + "Data Objects\n"
+        + "数据对象\n"
         + "-----------------------------------------\n"
-        + " ├─ PQ Expressions: " + Convert.ToString(Model.Expressions.Count()) + "\n"
+        + " ├─ PQ 表达式：" + Convert.ToString(Model.Expressions.Count()) + "\n"
         + " │\n"
-        + " └─ Tables: " + Convert.ToString(Model.Tables.Count()) + "\n"
-        + "       ├─ Incremental Refresh Tables: " + 
+        + " └─ 表：" + Convert.ToString(Model.Tables.Count()) + "\n"
+        + "       ├─ 增量刷新表：" + 
             Convert.ToString(Model.Tables.Where(
                 _ir => 
                 Convert.ToString(_ir.EnableRefreshPolicy) 
@@ -100,7 +100,7 @@ Info ( "In the model, we see the below objects:\n\n"
                 "True").Count()) + "\n"
                 
         + "       │\n"
-        + "       ├─ Calculated Tables: " + 
+        + "       ├─ 计算表格：" + 
             Convert.ToString(
                 Model.Tables.Where(
                     _tables => 
@@ -108,30 +108,30 @@ Info ( "In the model, we see the below objects:\n\n"
                     == 
                     "CalculatedTableColumn").Count()) + "\n"
 
-        + "       │   ├─ What if parameters: " + 
+        + "       │   ├─ 假设参数：" + 
             Convert.ToString(_whatifparameters) + "\n"
-        + "       │   └─ Field parameters: " + 
+        + "       │   └─ 字段参数：" + 
             Convert.ToString(_fieldparameters) + "\n"
         + "       │\n"
-        + "       ├─ M Partitions: " + 
+        + "       ├─ M 分区：" + 
             Convert.ToString(_partitions) + "\n"
         + "       │\n"
-        + "       └─ Total Table Columns: " + 
+        + "       └─ 表列总数：" + 
             Convert.ToString(Model.AllColumns.Count()) + "\n\n"
 
         + "-----------------------------------------\n"
-        + "DAX Objects\n"
+        + "DAX 对象\n"
         + "-----------------------------------------\n"
-        + " ├─ Relationships: " + 
+        + " ├─ 关系：" + 
             Convert.ToString(Model.Relationships.Count()) + "\n"
-        + " │   ├─ Bi-directional: " + 
+        + " │   ├─ 双向：" + 
             Convert.ToString(Model.Relationships.Where(
                 _relationships => 
                 Convert.ToString(_relationships.CrossFilteringBehavior) 
                 == 
                 "BothDirections").Count()) + "\n"
 
-        + " │   ├─ Many-to-Many: " + 
+        + " │   ├─ 多对多：" + 
             Convert.ToString(Model.Relationships.Where(
                 _relationships => 
                 Convert.ToString(_relationships.FromCardinality) 
@@ -142,7 +142,7 @@ Info ( "In the model, we see the below objects:\n\n"
                 == 
                 "Many").Count()) + "\n"
 
-        + " │   ├─ One-to-One: " + 
+        + " │   ├─ 一对一：" + 
             Convert.ToString(Model.Relationships.Where(
                 _relationships => 
                 Convert.ToString(_relationships.FromCardinality) 
@@ -153,7 +153,7 @@ Info ( "In the model, we see the below objects:\n\n"
                 == 
                 "One").Count()) + "\n"
 
-        + " │   └─ Inactive: " + 
+        + " │   └─ 非活动：" + 
             Convert.ToString(Model.Relationships.Where(
                 _relationships => 
                 Convert.ToString(_relationships.IsActive) 
@@ -161,12 +161,12 @@ Info ( "In the model, we see the below objects:\n\n"
                 "False").Count()) + "\n"
 
         + " │\n"
-        + " ├─ Calculation Groups: " + 
+        + " ├─ 计算组：" + 
             Convert.ToString(_calcgroups) + "\n"
-        + " │   └─ Calculation Items: " + 
+        + " │   └─ 计算项：" + 
             Convert.ToString(_calcitems) + "\n" 
         + " │\n"
-        + " ├─ Calculated Columns: " + 
+        + " ├─ 计算列：" + 
             Convert.ToString(Model.AllColumns.Where(
                 _columns => 
                 Convert.ToString(_columns.Type) 
@@ -174,33 +174,33 @@ Info ( "In the model, we see the below objects:\n\n"
                 "Calculated").Count()) + "\n"
 
         + " │\n"
-        + " └─ Measures: " + 
+        + " └─ 度量值：" + 
             Convert.ToString(_measures) + "\n" 
-        + "     └─ Avg. Lines of DAX: " + 
-            Convert.ToString(_numLines) + " Lines \n" 
-        + "     └─ Avg. Chars of DAX: " + 
-            Convert.ToString(_numChars) + " Characters \n\n" 
+        + "     └─ DAX 平均行数：" + 
+            Convert.ToString(_numLines) + " 行 \n" 
+        + "     └─ DAX 平均字符数：" + 
+            Convert.ToString(_numChars) + " 个字符 \n\n" 
        
         + "-----------------------------------------\n"
-        + "Other Objects\n"
+        + "其他对象\n"
         + "-----------------------------------------\n"
-        + " ├─ Data Security Roles: " + 
+        + " ├─ 数据安全角色：" + 
             Convert.ToString(Model.Roles.Count()) + "\n"
-        + " ├─ Explicit Data Sources: " + 
+        + " ├─ 显式数据源：" + 
             Convert.ToString(Model.DataSources.Count()) + "\n"
-        + " ├─ Perspectives: " + 
+        + " ├─ 透视图：" + 
             Convert.ToString(Model.Perspectives.Count()) + "\n"
-        + " └─ Translations: " + 
+        + " └─ 翻译：" + 
             Convert.ToString(Model.Cultures.Count()));
 ```
 
-### Explanation
+### 说明
 
-This snippet goes through the model and counts the different object types, displaying them in a hierarchical "node and tree" format that is manually constructed.
-You can comment out the parts that you do not need for your purposes.
+这段代码会遍历模型并统计不同类型对象的数量，然后以手动构造的分层“节点树”格式展示出来。
+你可以把不需要的部分注释掉。
 
-## Example Output
+## 示例输出
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the Info box output, that informs the user about the number of objects in the model upon script execution. If particular objects are not of interest, the user can comment them out or remove them from the script, and re-run it.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>Info 信息框输出示例。脚本执行后，会向用户显示模型中各类对象的数量。 如果对某些对象不感兴趣，用户可以在脚本中将其注释掉或删除，然后重新运行。</figcaption>
 </figure>
