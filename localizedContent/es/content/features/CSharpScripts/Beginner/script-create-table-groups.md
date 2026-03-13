@@ -1,6 +1,6 @@
 ---
 uid: script-create-table-groups
-title: Create Table Groups
+title: Crear grupos de tablas
 author: Morten Lønskov
 updated: 2023-11-29
 applies_to:
@@ -11,18 +11,18 @@ applies_to:
       full: true
 ---
 
-# Create Table Groups
+# Crear grupos de tablas
 
-## Script Purpose
+## Propósito del script
 
-This script creates default table groups within Tabular Editor 3.
+Este script crea grupos de tablas predeterminados en Tabular Editor 3.
 
-## Script
+## Secuencia de comandos
 
-### Script Title
+### Título del script
 
 ```csharp
-// Loop through all tables:
+// Recorrer todas las tablas:
 foreach(var table in Model.Tables)
 {
     if (table is CalculationGroupTable)
@@ -31,33 +31,33 @@ foreach(var table in Model.Tables)
     }
     else if (!table.UsedInRelationships.Any() && table.Measures.Any(m => m.IsVisible))
     {
-        // Tables containing visible measures, but no relationships to other tables
+        // Tablas que contienen medidas visibles, pero sin relaciones con otras tablas
         table.TableGroup = "Measure Groups";
     }
     else if (table.UsedInRelationships.All(r => r.FromTable == table) && table.UsedInRelationships.Any())
     {
-        // Tables exclusively on the "many" side of relationships:
+        // Tablas exclusivamente en el lado "muchos" de las relaciones:
         table.TableGroup = "Facts";
     }
     else if (!table.UsedInRelationships.Any() && table is CalculatedTable && !table.Measures.Any())
     {
-        // Tables without any relationships, that are Calculated Tables and do not have measures:
+        // Tablas sin ninguna relación, que son tablas calculadas y no tienen medidas:
         table.TableGroup = "Parameter Tables";
     }
     else if (table.UsedInRelationships.Any(r => r.ToTable == table))
     {
-        // Tables on the "one" side of relationships:
+        // Tablas en el lado "uno" de las relaciones:
         table.TableGroup = "Dimensions";
     }
     else
     {
-        // All other tables:
+        // Todas las demás tablas:
         table.TableGroup = "Misc";
     }
 }
 ```
 
-### Explanation
+### Explicación
 
-The scripts loops through all tables in the model assigning a table group according to specific properties.
+El script recorre todas las tablas del modelo y asigna un grupo de tablas en función de determinadas propiedades.
 
