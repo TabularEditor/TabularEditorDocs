@@ -1,6 +1,6 @@
 ---
 uid: script-create-measure-table
-title: Create Measure Table
+title: 创建度量值表
 author: Morten Lønskov
 updated: 2023-11-29
 applies_to:
@@ -11,18 +11,18 @@ applies_to:
       full: true
 ---
 
-# Create Measure Table
+# 创建度量值表
 
-## Script Purpose
+## 脚本用途
 
-The scripts creates a hidden measure table containing one hidden column
+该脚本会创建一个隐藏的度量值表，其中包含一个隐藏列
 
-## Script
+## 脚本
 
-### Create Measure Table
+### 创建度量值表
 
 ```csharp
-// Create a calculated table with a single column which is hidden:
+// 创建一个仅包含一列且该列被隐藏的计算表格：
 var table = Model.AddCalculatedTable("Model Measures", "{0}");
 table.Columns[0].IsHidden = true;
 ```
