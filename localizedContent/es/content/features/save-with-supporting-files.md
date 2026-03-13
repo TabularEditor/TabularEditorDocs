@@ -1,6 +1,6 @@
 ---
 uid: save-with-supporting-files
-title: Save with supporting files
+title: Guardar con archivos de apoyo
 author: Peer Grønnerup
 updated: 2026-01-19
 applies_to:
@@ -9,134 +9,134 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           none: true
-        - edition: Business
+        - edition: Empresarial
           full: true
-        - edition: Enterprise
+        - edition: Corporativo
           full: true
 ---
 
-# Save with supporting files
+# Guardar con archivos de apoyo
 
-Save with supporting files is a feature that enables saving of semantic models with additional supporting files that follow the source code format required for Git Integration in Microsoft Fabric. This feature ensures that your Tabular Editor models are fully compatible with Fabric's Git integration capabilities, allowing seamless version control and deployment workflows.
+Guardar con archivos de apoyo es una característica que permite guardar modelos semánticos con archivos de apoyo adicionales, siguiendo el formato de código fuente requerido para la integración con Git en Microsoft Fabric. Esta característica garantiza que sus modelos de Tabular Editor sean totalmente compatibles con las capacidades de integración con Git de Fabric, lo que permite flujos de trabajo de control de versiones e implementación sin fricciones.
 
-When you save a semantic model with supporting files, Tabular Editor creates a folder structure that includes all necessary metadata files required by Microsoft Fabric's Git integration. This allows you to use Fabric Git integration to synchronize your semantic models between Fabric workspaces and Git repositories.
+Cuando guarda un modelo semántico con archivos de apoyo, Tabular Editor crea una estructura de carpetas que incluye todos los archivos de metadatos necesarios para la integración con Git de Microsoft Fabric. Esto le permite usar la integración con Git de Fabric para sincronizar sus modelos semánticos entre los espacios de trabajo de Fabric y los repositorios de Git.
 
 > [!NOTE]
-> Saving with supporting files is only available when saving to .bim (TMSL) or when Save to Folder is set to TMDL as serialization mode.
+> Guardar con archivos de apoyo solo está disponible al guardar en .bim (TMSL) o cuando Guardar en carpeta se configura con TMDL como modo de serialización.
 
-## File structure and model properties
+## Estructura de archivos y propiedades del modelo
 
-When you save with supporting files, Tabular Editor creates a new folder in the save path using the following naming convention: **Database Name.SemanticModel**. The folder name is derived from the `Name` property of the Database object in the TOM Explorer, with the **.SemanticModel** suffix appended. This suffix is required by Microsoft Fabric to recognize the folder as a semantic model item.
+Cuando guarda con archivos de apoyo, Tabular Editor crea una nueva carpeta en la ruta de guardado siguiendo la siguiente convención de nombres: **Database Name.SemanticModel**. El nombre de la carpeta se deriva de la propiedad `Name` del objeto Database en el Explorador TOM, a la que se añade el sufijo **.SemanticModel**. Microsoft Fabric necesita este sufijo para reconocer la carpeta como un elemento de modelo semántico.
 
-The Database `Name` property is also synchronized to the `displayName` property in the .platform metadata file, which is used by Microsoft Fabric.
+La propiedad `Name` de Database también se sincroniza con la propiedad `displayName` en el archivo de metadatos .platform, que utiliza Microsoft Fabric.
 
 > [!TIP]
-> The `Name` property of the Database object in the TOM Explorer serves two purposes:
+> La propiedad `Name` del objeto Database en el Explorador TOM cumple dos objetivos:
 >
-> 1. Determines the folder name (with .SemanticModel suffix added)
-> 2. Sets the displayName in the .platform metadata file
+> 1. Determina el nombre de la carpeta (con el sufijo .SemanticModel añadido)
+> 2. Establece el valor de displayName en el archivo de metadatos .platform
 >
-> The property `Description` is also synchronized to the .platform metadata file.
+> La propiedad `Description` también se sincroniza con el archivo de metadatos .platform.
 
-### Files included
+### Archivos incluidos
 
-Every saved model includes these core files:
+Todos los modelos guardados incluyen estos archivos principales:
 
-- **.platform** - Metadata about the item including its type, display name, and description. Also contains a logicalId property, an automatically generated cross-workspace identifier.
-- **definition.pbism** - Overall definition and core settings of the semantic model.
+- **.platform**: metadatos sobre el elemento, incluidos su tipo, nombre para mostrar y descripción. También contiene la propiedad logicalId, un identificador entre áreas de trabajo generado automáticamente.
+- **definition.pbism**: definición general y configuración principal del modelo semántico.
 
-The model file structure within the created folder depends on your serialization format:
+La estructura de archivos del modelo dentro de la carpeta creada depende de su formato de serialización:
 
-| Format                                             | Model storage                                                                   |
-| -------------------------------------------------- | ------------------------------------------------------------------------------- |
-| **TMDL**                                           | `definition` folder containing TMDL files with the model metadata               |
-| **TMSL (.bim)** | `model.bim` file (automatically saved with a fixed filename) |
+| Formato                                            | Almacenamiento del modelo                                                                        |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **TMDL**                                           | Carpeta `definition` que contiene archivos TMDL con los metadatos del modelo                     |
+| **TMSL (.bim)** | Archivo `model.bim` (se guarda automáticamente con un nombre de archivo fijo) |
 
-Example folder structure for a database named "Sales":
+Ejemplo de estructura de carpetas para una base de datos llamada "Sales":
 
 ```
 Sales.SemanticModel/
 ├── .platform
 ├── definition.pbism
-├── model.bim                    (if saved as TMSL)
-└── definition/                  (if saved as TMDL)
+├── model.bim                    (si se guarda como TMSL)
+└── definition/                  (si se guarda como TMDL)
     ├── database.tmdl
     ├── tables.tmdl
     └── ...
 ```
 
-## How to save with supporting files
+## Cómo guardar con archivos auxiliares
 
-To save your model with supporting files:
+Para guardar su modelo con archivos de apoyo:
 
-1. Create a new or open an existing semantic model in Tabular Editor 3
-2. **Configure the model name** - Set the `Name` property of the Database object in the TOM Explorer
-   - This sets the folder name (with .SemanticModel suffix) and displayName in the .platform file  
-     ![Set Database Name property](~/content/assets/images/common/SaveWithSupportingFilesSetName.png)
-3. Ensure your serialization mode is set to either TMDL or that you're saving as a .bim file
-   - Go to **Tools > Preferences > File Formats** to configure serialization settings
-4. Click on **File > Save As** or **File > Save to Folder**
-5. Choose a folder where you want to save your model
-   - Check the checkbox **Save with supporting files**
-     ![Save with supporting files dialog](~/content/assets/images/common/SaveWithSupportingFilesDialog.png)
-6. Click **Save**
+1. Cree un modelo semántico nuevo o abra uno existente en Tabular Editor 3
+2. **Configure el nombre del modelo** - Establezca la propiedad `Name` del objeto Database en el Explorador TOM
+   - Esto establece el nombre de la carpeta (con el sufijo .SemanticModel) y el displayName en el archivo .platform  
+     ![Establecer la propiedad Nombre de base de datos](~/content/assets/images/common/SaveWithSupportingFilesSetName.png)
+3. Asegúrese de configurar el modo de serialización en TMDL o de guardar como un archivo .bim
+   - Vaya a **Herramientas > Preferencias > Formatos de archivo** para configurar las opciones de serialización
+4. Haga clic en **Archivo > Guardar como** o **Archivo > Guardar en carpeta**
+5. Elija una carpeta donde quiera guardar su modelo
+   - Marque la casilla **Guardar con archivos de apoyo**
+     ![Cuadro de diálogo Guardar con archivos de apoyo](~/content/assets/images/common/SaveWithSupportingFilesDialog.png)
+6. Haga clic en **Guardar**
 
-Tabular Editor will create a new folder using the Database name with a **.SemanticModel** suffix (e.g., `Sales.SemanticModel`) in the save location and populate it with all necessary files in the format compatible with Microsoft Fabric Git integration.
+Tabular Editor creará una nueva carpeta usando el nombre de la base de datos con el sufijo **.SemanticModel** (por ejemplo, `Sales.SemanticModel`) en la ubicación de guardado y la rellenará con todos los archivos necesarios en un formato compatible con la integración de Git de Microsoft Fabric.
 
-## Git Integration in Microsoft Fabric
+## Integración de Git en Microsoft Fabric
 
-The **Save with supporting files** feature is designed to work seamlessly with Microsoft Fabric's Git integration capabilities. Git Integration is available on workspaces assigned to Microsoft Fabric F-SKU capacity, Power BI Premium capacity, or Power BI Premium Per User (PPU).
+La característica **Guardar con archivos auxiliares** está diseñada para funcionar de forma fluida con las capacidades de integración de Git de Microsoft Fabric. La integración de Git está disponible en los Workspaces asignados a la capacidad Microsoft Fabric F-SKU, a la capacidad Power BI Premium o a Power BI Premium Per User (PPU).
 
 > [!WARNING]
-> Git Integration for the Semantic Model item is currently in preview. For the latest information on supported items for Fabric Git Integration, see [Supported items in Fabric Git Integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration#supported-items).
+> La integración de Git para el elemento de modelo semántico se encuentra actualmente en versión preliminar. Para obtener la información más reciente sobre los elementos compatibles con la integración de Git de Fabric, consulte [Elementos compatibles en la integración de Git de Fabric](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration#supported-items).
 
 > [!CAUTION]
-> Do **not** enable Git integration on the Fabric workspace that you use to host your Tabular Editor workspace databases.
-> Maintaining semantic models in both the hosted workspace and in repository files simultaneously while Git integration is enabled creates risks of uncommitted changes and conflicts. When a model is synchronized between Tabular Editor and the workspace, changes may not align properly with the Git repository state, resulting in out-of-sync uncommitted changes and potential Git conflicts.
+> **No** habilite la integración de Git en el Workspace de Fabric que utiliza para hospedar las bases de datos del Workspace de Tabular Editor.
+> Mantener modelos semánticos tanto en el Workspace hospedado como en los archivos del repositorio a la vez, con la integración de Git habilitada, crea riesgos de cambios sin confirmar y conflictos. Cuando un modelo se sincroniza entre Tabular Editor y el Workspace, es posible que los cambios no se alineen correctamente con el estado del repositorio de Git, lo que puede dejar cambios sin confirmar fuera de sincronización y provocar posibles conflictos de Git.
 >
-> Instead, use deployment workflows to deploy semantic models to workspaces via Tabular Editor, the Fabric REST APIs, Fabric CLI, or the fabric-cicd Python library. This ensures clean separation between your Git repository and workspace.
+> En su lugar, utilice flujos de trabajo de implementación para desplegar modelos semánticos en Workspaces mediante Tabular Editor, las API REST de Fabric, Fabric CLI o la biblioteca de Python fabric-cicd. Esto garantiza una separación clara entre su repositorio de Git y el Workspace.
 
-### Using Git integration with Tabular Editor
+### Uso de la integración de Git con Tabular Editor
 
-When your semantic model is saved with supporting files and synchronized to your Git repository, you can then sync it to Microsoft Fabric using the following workflow:
+Cuando su modelo semántico se guarda con archivos auxiliares y se sincroniza con su repositorio de Git, puede sincronizarlo con Microsoft Fabric mediante el siguiente flujo de trabajo:
 
-1. **Save your model** in Tabular Editor using the Save with supporting files option
-2. **Commit the changes** to your Git repository
-3. **Connect your Fabric workspace** to the Git repository
-4. **Synchronize** your model between Fabric and Git using the **Update all** button in the workspace source control pane
-   ![Synchronize workspace with Git](~/content/assets/images/common/WorkspaceGitSync.png)
+1. **Guarda tu modelo** en Tabular Editor con la opción Guardar con archivos de soporte
+2. **Haz commit de los cambios** en tu repositorio de Git
+3. **Conecta tu Workspace de Fabric** al repositorio de Git
+4. **Sincroniza** tu modelo entre Fabric y Git con el botón **Actualizar todo** en el panel de control de código fuente del Workspace
+   ![Sincronizar Workspace con Git](~/content/assets/images/common/WorkspaceGitSync.png)
 
-When your model is synchronized to Microsoft Fabric/Power BI, the semantic model name displayed in the workspace is based on the `displayName` property in the .platform file, which is automatically set from the Database `Name` property in Tabular Editor. This means the name you configure in Tabular Editor will be the name displayed in Fabric/Power BI.
+Cuando tu modelo se sincroniza con Microsoft Fabric/Power BI, el nombre del modelo semántico que se muestra en el Workspace se basa en la propiedad `displayName` del archivo .platform, que se establece automáticamente a partir de la propiedad `Name` de la base de datos en Tabular Editor. Esto significa que el nombre que configures en Tabular Editor será el que se muestre en Fabric/Power BI.
 
-Tabular Editor automatically sets the model culture to **en-US** when saving with supporting files. This ensures the model culture is present when synchronizing with Fabric, preventing uncommitted changes that can occur if the culture is not set during the initial synchronization.
+Tabular Editor establece automáticamente la configuración regional del modelo en **en-US** al guardar con archivos de soporte. Esto garantiza que la configuración regional del modelo esté presente al sincronizar con Fabric, evitando cambios sin confirmar que pueden producirse si la configuración regional no se establece durante la sincronización inicial.
 
-For more information, see:
+Para obtener más información, consulta:
 
-- [Microsoft Fabric Git integration documentation](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)
-- [Tabular Editor and Fabric Git Integration blog post](https://tabulareditor.com/blog/tabular-editor-and-fabric-git-integration)
+- [Documentación de la integración de Git en Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)
+- [Entrada del blog sobre la integración de Git entre Tabular Editor y Fabric](https://tabulareditor.com/blog/tabular-editor-and-fabric-git-integration)
 
-## Comparing serialization formats
+## Comparación de formatos de serialización
 
-When using Save with supporting files, you can choose between two serialization formats:
+Al usar Guardar con archivos de soporte, puedes elegir entre dos formatos de serialización:
 
 ### TMDL (Tabular Model Definition Language)
 
-- Human-readable text format
-- Easier to review changes in Git diffs
-- Better for code reviews and collaboration
-- Learn more: [TMDL documentation](tmdl.md)
+- Formato de texto legible
+- Más fácil revisar los cambios en los diffs de Git
+- Mejor para revisiones de código y colaboración
+- Más información: [Documentación de TMDL](tmdl.md)
 
 ### TMSL/JSON (.bim)
 
-- JSON-based format
-- Single file representation
-- Compatible with older tools and workflows
+- Formato basado en JSON
+- Representación en un único archivo
+- Compatible con herramientas y flujos de trabajo más antiguos
 
-Both formats are supported by Microsoft Fabric Git integration, and the choice depends on your team's preferences and workflow requirements.
+Ambos formatos son compatibles con la integración de Git de Microsoft Fabric, y la elección depende de las preferencias de tu equipo y de los requisitos del flujo de trabajo.
 
-## See also
+## Ver también
 
-- [Save to folder](save-to-folder.md)
-- [TMDL - Tabular Model Definition Language](tmdl.md)
+- [Guardar en carpeta](save-to-folder.md)
+- [TMDL - lenguaje de definición de modelos tabulares](tmdl.md)
