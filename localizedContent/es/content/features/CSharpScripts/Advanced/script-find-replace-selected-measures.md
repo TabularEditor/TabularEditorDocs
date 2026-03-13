@@ -1,6 +1,6 @@
 ---
 uid: script-find-replace
-title: Find/Replace Measure DAX
+title: Buscar/Reemplazar medida DAX
 author: Kurt Buhler
 updated: 2023-03-01
 applies_to:
@@ -11,12 +11,12 @@ applies_to:
       full: true
 ---
 
-# Find & Replace Substring in Measures
+# Buscar y reemplazar una subcadena en las medidas
 
-## Script Purpose
+## Propósito del script
 
-Will find & replace a substring in the model's measures DAX expression. I.e. if you want to replace `'Customers'[Key Account]` with `'Products'[Type]` in many measures.
-An input box lets the user enter the text to find and a subsequent input lets the user define the replacement text.
+Buscará y reemplazará una subcadena en la expresión DAX de las medidas del modelo. es decir. si quieres reemplazar `'Customers'[Key Account]` por `'Products'[Type]` en muchas medidas.
+Un cuadro de entrada permite al usuario introducir el texto que se va a buscar, y un segundo cuadro permite definir el texto de reemplazo.
 
 ## Script
 
@@ -154,16 +154,16 @@ using (Form prompt = new Form())
 
 ```
 
-### Explanation
+### Explicación
 
-This snippet will create a pop-up dialogue with WinForms that will let you input a substring to search the selected measures and replace with a different substring. A success box dialogue will inform you that the find/replace was successful.
+Este fragmento creará un cuadro de diálogo emergente con WinForms que le permitirá introducir una subcadena para buscar en las medidas seleccionadas y reemplazarla por una subcadena diferente. Un cuadro de diálogo de éxito le informará de que la operación Buscar/Reemplazar se realizó correctamente.
 
-### Example Output
+### Salida de ejemplo
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-dialogue.png" alt="An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-dialogue.png" alt="An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Un ejemplo del cuadro de diálogo emergente de Buscar/Reemplazar que permite al usuario introducir las subcadenas que se buscarán o reemplazarán.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-success.png" alt="An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-success.png" alt="An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Un ejemplo del cuadro de diálogo informativo que indica al usuario que el Buscar/Reemplazar se completó correctamente, y cuántas medidas y cuáles se vieron afectadas por el script.</figcaption>
 </figure>
