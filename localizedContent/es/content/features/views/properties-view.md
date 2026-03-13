@@ -1,6 +1,6 @@
 ---
 uid: properties-view
-title: Properties view
+title: Vista de propiedades
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -9,33 +9,33 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           full: true
-        - edition: Business
+        - edition: Negocios
           full: true
-        - edition: Enterprise
+        - edition: Empresarial
           full: true
 ---
 
-# Using the Properties grid in Tabular Editor
+# Uso de la cuadrícula de propiedades en Tabular Editor
 
-The Properties view in Tabular Editor allows you to inspect and modify the properties of any object in your tabular model.
-You access the properties view by selecting an object in the TOM Explorer. You will then see a list of properties that are relevant for the selected object type, such as name, description, data type, format string, etc.
-You can also access advanced properties that are not available in other tools like Visual Studio or Power BI Desktop.
+La vista de propiedades en Tabular Editor te permite inspeccionar y modificar las propiedades de cualquier objeto en tu modelo tabular.
+Accedes a la vista de propiedades seleccionando un objeto en el Explorador TOM. A continuación, verás una lista de propiedades relevantes para el tipo de objeto seleccionado, como nombre, descripción, tipo de datos, cadena de formato, etc.
+También puedes acceder a propiedades avanzadas que no están disponibles en otras herramientas como Visual Studio o Power BI Desktop.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/properties-view.png" alt="Properties View" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Example of Properties for a table. Each object has different properties depending on its type </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/properties-view.png" alt="Properties View" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Ejemplo de propiedades de una tabla. Cada objeto tiene propiedades diferentes según su tipo </figcaption>
 </figure>
 
-The Properties view helps you to:
+La vista de propiedades te ayuda a:
 
-- View and modify the properties of any object in the model, such as tables, columns, measures, hierarchies, relationships, partitions, roles and perspectives.
-- Filter and sort the properties by name or category using the search box and the buttons at the top of the view.
-- Copy and paste property values between different objects using Ctrl+C and Ctrl+V shortcuts.
-- Undo and redo property changes using Ctrl+Z and Ctrl+Y shortcuts.
-- You can use keyboard shortcuts to quickly navigate and edit your properties. For example, you can press Ctrl+Up or Ctrl+Down to move between different properties; press Enter or F2 to edit a property value; press Esc to cancel editing; press Ctrl+S to save changes;
+- Ver y modificar las propiedades de cualquier objeto del modelo, como tablas, columnas, medidas, jerarquías, relaciones, particiones, roles y perspectivas.
+- Filtrar y ordenar las propiedades por nombre o categoría mediante el cuadro de búsqueda y los botones en la parte superior de la vista.
+- Copiar y pegar valores de propiedades entre distintos objetos con los atajos Ctrl+C y Ctrl+V.
+- Deshacer y rehacer cambios de propiedades con los atajos Ctrl+Z y Ctrl+Y.
+- Puedes usar atajos de teclado para navegar y editar rápidamente las propiedades. Por ejemplo, puedes presionar Ctrl+Arriba o Ctrl+Abajo para moverte entre propiedades; presionar Enter o F2 para editar el valor de una propiedad; presionar Esc para cancelar la edición; presionar Ctrl+S para guardar los cambios;
 
 > [!TIP]
-> You can multi-select objects to see the properties they have in common and edit them in bulk. This can be useful for setting Format Strings, for example.
+> Puedes seleccionar varios objetos para ver las propiedades que tienen en común y editarlas en bloque. Esto puede ser útil para establecer cadenas de formato, por ejemplo.
 
-The Properties view is by default in the bottom right corner, but you can also open it by pressing F4 on your keyboard. You can also dock it to any side of the main window or undock it as a separate window.
+De forma predeterminada, la vista de propiedades se encuentra en la esquina inferior derecha, pero también puedes abrirla pulsando F4 en tu teclado. También puedes acoplarla a cualquiera de los lados de la ventana principal o desacoplarla para que aparezca en una ventana independiente.
