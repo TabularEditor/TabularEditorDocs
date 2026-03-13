@@ -19,64 +19,64 @@ applies_to:
 
 # C# Scripts
 
-This is an introduction to the C# Scripting capabilities of Tabular Editor 3. Information in this document is subject to change. Also, make sure to check out our script library @csharp-script-library, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor.
+Esta es una introducción a las capacidades de C# Scripts de Tabular Editor 3. La información de este documento está sujeta a cambios. Además, no dejes de consultar nuestra biblioteca de scripts @csharp-script-library para ver más ejemplos reales de lo que puedes hacer con las capacidades de scripting de Tabular Editor.
 
-## Why C# scripting?
+## ¿Por qué scripting en C#?
 
-The goal of the UI of Tabular Editor is to make it easy to perform most tasks commonly needed when building Tabular Models. For example, changing the Display Folder of multiple measures at once is just a matter of selecting the objects in the explorer tree and then dragging and dropping them around. The right-click context menu of the explorer tree provides a convenient way to perform many of these tasks, such as adding/removing objects from perspectives, renaming multiple objects, etc.
+El objetivo de la interfaz de usuario de Tabular Editor es facilitar la realización de la mayoría de las tareas habituales al crear modelos tabulares. Por ejemplo, cambiar la carpeta de visualización de varias medidas a la vez es tan simple como seleccionar los objetos en el árbol del explorador y arrastrar y soltar. El menú contextual del árbol del explorador, al hacer clic con el botón derecho, ofrece una forma práctica de realizar muchas de estas tareas, como agregar o quitar objetos de perspectivas, cambiar el nombre de varios objetos, etc.
 
-There may be many other common workflow tasks, which are not as easily performed through the UI however. For this reason, Tabular Editor offers C# scripting, which lets advanced users write a script using C# syntax, to more directly manipulate the objects in the loaded Tabular Model.
+Sin embargo, puede haber muchas otras tareas habituales del flujo de trabajo que no se realizan tan fácilmente desde la interfaz de usuario. Por este motivo, Tabular Editor ofrece scripting en C#, que permite a los usuarios avanzados escribir un script con sintaxis de C# para manipular de forma más directa los objetos del modelo tabular cargado.
 
 ## Code Assist
 
-The C# script editor supports Roslyn-powered completion and call tips and from Tabular Editor 3.23.0, completion supports substring and capital-letters acronym matching.
+El editor de C# Scripts admite autocompletado y sugerencias de llamada basados en Roslyn y, desde Tabular Editor 3.23.0, el autocompletado admite la coincidencia por subcadenas y por acrónimos de letras mayúsculas.
 
-## Objects
+## Objetos
 
-The [scripting API](xref:api-index) provides access to two top-level objects, `Model` and `Selected`. The former contains methods and properties that allow you to manipulate all objects in the Tabular Model, whereas the latter exposes only objects that are currently selected in the explorer tree.
+La [API de scripting](xref:api-index) proporciona acceso a dos objetos de nivel superior, `Model` y `Selected`. El primero contiene métodos y propiedades que te permiten manipular todos los objetos del Modelo tabular, mientras que el segundo expone únicamente los objetos que están seleccionados actualmente en el árbol del explorador.
 
-The `Model` object is a wrapper of the [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) class, exposing a subset of it’s properties, with some additional methods and properties for easier operations on translations, perspectives and object collections. The same applies to any descendant objects, such as Table, Measure, Column, etc. which all have corresponding wrapper objects. Please see <xref:api-index> for a complete listing of objects, properties and methods in the Tabular Editor wrapper library.
+El objeto `Model` es un contenedor de la clase [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) y expone un subconjunto de sus propiedades, con algunos métodos y propiedades adicionales para facilitar las operaciones con traducciones, perspectivas y colecciones de objetos. Lo mismo se aplica a cualquier objeto descendiente, como Tabla, medida, Columna, etc., ya que todos tienen su correspondiente objeto envoltorio. Consulta <xref:api-index> para ver un listado completo de objetos, propiedades y métodos de la biblioteca de envoltorios de Tabular Editor.
 
-The main advantage of working through this wrapper is, that all changes will be undoable from the Tabular Editor UI. Simply press CTRL+Z after executing a script, and you will see that all changes made by the script are immediately undone. Furthermore, the wrapper provides convenient methods that turn many common tasks into simple one-liners. We will provide some examples below. It is assumed that the reader is already somewhat familiar with C# and LINQ, as these aspects of Tabular Editors scripting capabilities will not be covered here. Users unfamiliar with C# and LINQ should still be able to follow the examples given below.
+La principal ventaja de trabajar a través de este envoltorio es que todos los cambios se podrán deshacer desde la interfaz de usuario de Tabular Editor. Simplemente pulsa CTRL+Z después de ejecutar un script y verás que todos los cambios realizados por el script se deshacen inmediatamente. Además, el envoltorio proporciona métodos prácticos que convierten muchas tareas habituales en simples líneas de código. A continuación, mostraremos algunos ejemplos. Se da por hecho que el lector ya está algo familiarizado con C# y LINQ, ya que aquí no se tratarán estos aspectos de las capacidades de scripting de Tabular Editor. Los usuarios que no estén familiarizados con C# y LINQ aún deberían poder seguir los ejemplos que se muestran a continuación.
 
-## Setting object properties
+## Establecer propiedades de objetos
 
-If you want to change a property of one object in particular, obviously the easiest way to do so would be directly through the UI. But as an example, let us see how we could achieve the same thing through scripting.
+Si quieres cambiar una propiedad de un objeto en concreto, obviamente la forma más sencilla de hacerlo es directamente desde la interfaz de usuario. Pero, a modo de ejemplo, veamos cómo podríamos lograr lo mismo mediante un script.
 
-Say you want to change the Format String of your [Sales Amount] measure in the 'FactInternetSales' table. If you locate the measure in the explorer tree, you can simply drag it onto the script editor. Tabular Editor will then generate the following code, which represents this particular measure in the Tabular Object Model:
+Supongamos que quieres cambiar la cadena de formato de tu medida [Sales Amount] en la tabla 'FactInternetSales'. Si localizas la medida en el árbol del explorador, puedes simplemente arrastrarla al editor de scripts. A continuación, Tabular Editor generará el siguiente código, que representa esa medida concreta en el Tabular Object Model:
 
 ```csharp
 Model.Tables["FactInternetSales"].Measures["Sales Amount"]
 ```
 
-Adding an extra dot (.) after the right-most bracket, should make the autocomplete menu pop up, showing you which properties and methods exist on this particular measure. Simply choose "FormatString" in the menu, or write the first few letters and hit Tab. Then, enter an equal sign followed by "0.0%". Let us also change the Display Folder of this measure. Your final code should look like this:
+Añadir un punto (.) adicional después del corchete situado más a la derecha, debería hacer que aparezca el menú de autocompletado, mostrándote qué propiedades y métodos existen en esa medida en concreto. Solo tienes que elegir "FormatString" en el menú, o escribir las primeras letras y pulsar Tab. Luego, escribe un signo igual seguido de "0.0%" (0,0%). Cambiemos también la carpeta de visualización de esta medida. El código final debería verse así:
 
 ```csharp
 Model.Tables["FactInternetSales"].Measures["Sales Amount"].FormatString = "0.0%";
 Model.Tables["FactInternetSales"].Measures["Sales Amount"].DisplayFolder = "New Folder";
 ```
 
-**Note:** Remember to put the semicolon (;) at the end of each line. This is a requirement of C#. If you forget it, you will get a syntax error message when trying to execute the script.
+**Nota:** Recuerda poner el punto y coma (;) al final de cada línea. Esto es un requisito de C#. Si lo olvidas, recibirás un mensaje de error de sintaxis al intentar ejecutar el script.
 
-Hit F5 or the "Play" button above the script editor to execute the script. Immediately, you should see the measure moving around in the explorer tree, reflecting the changed Display Folder. If you examine the measure in the Property Grid, you should also see that the Format String property has changed accordingly.
+Pulsa F5 o el botón "Play" en la parte superior del editor de scripts para ejecutar el script. Inmediatamente deberías ver que la medida se desplaza por el árbol del explorador, reflejando el cambio en la carpeta de visualización. Si examinas la medida en la cuadrícula de propiedades, también verás que la propiedad Format String ha cambiado en consecuencia.
 
-### Working with multiple objects at once
+### Trabajar con varios objetos a la vez
 
-Many objects in the object model, are actually collections of multiple objects. For example, each Table object has a Measures collection. The wrapper exposes a series of convenient properties and methods on these collections, to make it easy to set the same property on multiple objects at once. This is described in detail below. Additionally, you may use all the standard LINQ extension methods to filter and browse the objects of a collection.
+Muchos objetos del modelo de objetos son, en realidad, colecciones de varios objetos. Por ejemplo, cada objeto Table tiene una colección de medidas. El wrapper expone una serie de propiedades y métodos prácticos en estas colecciones, lo que facilita establecer la misma propiedad en varios objetos a la vez. Esto se describe en detalle a continuación. Además, puedes usar todos los métodos de extensión estándar de LINQ para filtrar y explorar los objetos de una colección.
 
-Below is a few examples of the most commonly used LINQ extension methods:
+A continuación hay unos pocos ejemplos de los métodos de extensión LINQ más utilizados:
 
-- `Collection.First([predicate])` Returns the first object in the collection satisfying the optional [predicate] condition.
-- `Collection.Any([predicate])` Returns true if the collection contains any objects (optionally satisfying the [predicate] condition).
-- `Collection.Where(predicate)` Returns a collection that is the original collection filtered by the predicate condition.
-- `Collection.Select(map)` Projects each object in the collection into another object according to the specified map.
-- `Collection.ForEach(action)` Performs the specified action on each element in the collection.
+- `Collection.First([predicate])` Devuelve el primer objeto de la colección que cumple la condición opcional [predicate].
+- `Collection.Any([predicate])` Devuelve `true` si la colección contiene algún objeto (opcionalmente, que cumpla la condición [predicate]).
+- `Collection.Where(predicate)` Devuelve una colección que corresponde a la colección original filtrada según la condición del predicado.
+- `Collection.Select(map)` Proyecta cada objeto de la colección en otro objeto según el mapeo especificado.
+- `Collection.ForEach(action)` Ejecuta la acción especificada en cada elemento de la colección.
 
-In the above examples, `predicate` is a lambda expression that takes a single object as input, and returns a boolean value as output. For example, if `Collection` is a collection of measures, a typical `predicate` could look like:
+En los ejemplos anteriores, `predicate` es una expresión lambda que toma un único objeto como entrada y devuelve un valor booleano como salida. Por ejemplo, si `Collection` es una colección de medidas, un `predicate` típico podría ser:
 
 `m => m.Name.Contains("Reseller")`
 
-This predicate would return true only if the Name of the measure contains the character string "Reseller". Wrap the expression in curly braces and use the `return` keyword, if you need more advanced logic:
+Este predicado devolvería true solo si el Nombre de la medida contiene la cadena de caracteres "Reseller". Envuelve la expresión entre llaves y usa la palabra clave `return` si necesitas una lógica más avanzada:
 
 ```csharp
 .Where(obj => {
@@ -87,51 +87,51 @@ This predicate would return true only if the Name of the measure contains the ch
 })
 ```
 
-Going back to the examples above, `map` is a lambda expression that takes a single object as input, and returns any single object as output. `action` is a lambda expression that takes a single object as input, but does not return any value.
+Volviendo a los ejemplos anteriores, `map` es una expresión lambda que toma un único objeto como entrada y devuelve un único objeto como salida. `action` es una expresión lambda que toma un único objeto como entrada, pero no devuelve ningún valor.
 
-## Working with the **Model** object
+## Trabajar con el objeto **Model**
 
-To quickly reference any object in the currently loaded Tabular Model, you can drag and drop the object from the explorer tree and into the C# script editor:
+Para hacer referencia rápidamente a cualquier objeto en el modelo tabular cargado actualmente, se puede arrastrar y soltar el objeto desde el árbol del explorador al editor de C# Script:
 
-![Dragging and dropping an object into the C# script editor](~/content/assets/images/drag-object-to-script.gif)
+![Arrastrando y soltando un objeto en el editor de scripts de C#](~/content/assets/images/drag-object-to-script.gif)
 
-Please refer to the [TOM documentation](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) for an overview of which properties exist on the Model and its descendant objects. Additionally, refer to <xref:api-index> for a complete listing of the properties and methods exposed by the wrapper object.
+Consulta la [documentación de TOM](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) para obtener una visión general de las propiedades disponibles en el Modelo y en sus objetos descendientes. Además, consulta <xref:api-index> para obtener un listado completo de las propiedades y los métodos expuestos por el objeto envoltorio.
 
-## Working with the **Selected** object
+## Trabajando con el objeto **Selected**
 
-Being able to explicitly refer to any object in the Tabular Model is great for some workflows, but sometimes you want to cherry pick objects from the explorer tree, and then execute a script against only the selected objects. This is where the `Selected` object comes in handy.
+Poder hacer referencia de forma explícita a cualquier objeto del Modelo tabular viene muy bien para algunos flujos de trabajo, pero a veces quieres elegir objetos concretos del árbol del explorador y luego ejecutar un script solo sobre los objetos seleccionados. Aquí es donde el objeto `Selected` resulta útil.
 
-The `Selected` object provides a range of properties that make it easy to identify what is currently selected, as well as limiting the selection to objects of a particular type. When browsing with Display Folders, and one or more folders are selected in the explorer tree, all their child items are considered to be selected as well.
-For single selections, use the singular name for the type of object you want to access. For example,
+El objeto `Selected` ofrece una serie de propiedades que facilitan identificar qué hay seleccionado en este momento, además de limitar la selección a objetos de un tipo concreto. Al explorar con carpetas de visualización, si se seleccionan una o varias carpetas en el árbol del explorador, todos sus elementos secundarios también se consideran seleccionados.
+Para selecciones únicas, usa el nombre en singular del tipo de objeto al que quieres acceder. Por ejemplo,
 
 `Selected.Hierarchy`
 
-refers to the currently selected hierarchy in the tree, provided that one and only one hierarchy is selected. Use the plural type name, in case you want to work with multiselections:
+hace referencia a la jerarquía seleccionada actualmente en el árbol, siempre que se haya seleccionado una y solo una jerarquía. Usa el nombre del tipo en plural si quieres trabajar con selecciones múltiples:
 
 `Selected.Hierarchies`
 
-All properties that exist on the singular object, also exist on its plural form, with a few exceptions. This means that you can set the value of these properties for multiple objects at once, with just one line of code and without using the LINQ extension methods mentioned above. For example, say you wanted to move all currently selected measures into a new Display Folder called "Test":
+Todas las propiedades que existen en el objeto en singular también existen en su forma plural, con algunas excepciones. Esto significa que puedes establecer el valor de estas propiedades para varios objetos a la vez, con una sola línea de código y sin usar los métodos de extensión LINQ mencionados anteriormente. Por ejemplo, imagina que quieres mover todas las medidas seleccionadas actualmente a una nueva carpeta de visualización llamada "Test":
 
 `Selected.Measures.DisplayFolder = "Test";`
 
-If no measures are currently selected in the tree, the above code does nothing, and no error is raised. Otherwise, the DisplayFolder property will be set to "Test" on all selected measures (even measures residing within folders, as the `Selected` object also includes objects in selected folders). If you use the singular form `Measure` instead of `Measures`, you will get an error unless the current selection contains exactly one measure.
+Si no hay medidas seleccionadas actualmente en el árbol, el código anterior no hace nada y no se genera ningún error. De lo contrario, la propiedad DisplayFolder se establecerá en "Test" en todas las medidas seleccionadas (incluso en las medidas que se encuentren dentro de carpetas, ya que el objeto `Selected` también incluye los objetos de las carpetas seleccionadas). Si usas la forma singular `Measure` en lugar de `Measures`, obtendrás un error a menos que la selección actual contenga exactamente una medida.
 
-Although we cannot set the Name property of multiple objects at once, we still have some options available. If we just want to replace all occurrences of some character string with another, we can use the provided "Rename" method, like so:
+Aunque no podemos establecer la propiedad `Name` de varios objetos a la vez, seguimos teniendo algunas opciones disponibles. Si solo queremos reemplazar todas las apariciones de una cadena de caracteres por otra, podemos usar el método "Rename" incluido, así:
 
 ```csharp
 Selected.Measures
         .Rename("Amount", "Value");
 ```
 
-This would replace any occurrence of the word "Amount" with the word "Value" in the names of all currently selected measures.
-Alternatively, we may use the LINQ ForEach()-method, as described above, to include more advanced logic:
+Esto reemplazaría cualquier aparición de la palabra "Amount" por la palabra "Value" en los nombres de todas las medidas seleccionadas actualmente.
+Como alternativa, podemos usar el método LINQ ForEach(), tal como se describió antes, para incluir lógica más avanzada:
 
 ```csharp
 Selected.Measures
         .ForEach(m => if(m.Name.Contains("Reseller")) m.Name += " DEPRECATED");
 ```
 
-This example will append the text " DEPRECATED" to the names of all selected measures where the names contain the word "Reseller". Alternatively, we could use the LINQ extension method `Where()` to filter the collection before applying the `ForEach()` operation, which would yield exactly the same result:
+Este ejemplo añadirá el texto " DEPRECATED" al final de los nombres de todas las medidas seleccionadas que contengan la palabra "Reseller". Como alternativa, podríamos usar el método de extensión LINQ `Where()` para filtrar la colección antes de aplicar la operación `ForEach()`, lo que daría exactamente el mismo resultado:
 
 ```csharp
 Selected.Measures
@@ -139,71 +139,71 @@ Selected.Measures
         .ForEach(m => m.Name += " DEPRECATED");
 ```
 
-## Helper methods
+## Métodos auxiliares
 
-Tabular Editor provides a set of special helper methods to make certain script tasks easier to achieve. Note that some of these may be invoked as extension methods. For example, `object.Output();` and `Output(object);` are equivalent.
+Tabular Editor proporciona un conjunto de métodos auxiliares especiales para facilitar la realización de determinadas tareas de scripting. Ten en cuenta que algunos de ellos pueden invocarse como métodos de extensión. Por ejemplo, `object.Output();` y `Output(object);` son equivalentes.
 
-- `void Output(object value)` - halts script execution and displays information about the provided object. When the script is running as part of a command line execution, this will write a string representation of the object to the console.
-- `void SaveFile(string filePath, string content)` - convenient way to save text data to a file.
-- `string ReadFile(string filePath)` - convenient way to load text data from a file.
-- `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties)` - convenient way to export a set of properties from multiple objects as a TSV string.
-- `void ImportProperties(string tsvData)` - convenient way to load properties into multiple objects from a TSV string.
-- `void CustomAction(string name)` - invoke a macro by name.
-- `void CustomAction(this IEnumerable<ITabularNamedObject> objects, string name)` - invoke a macro on the specified objects.
-- `string ConvertDax(string dax, bool useSemicolons)` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
-- `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
-- `void FormatDax(this IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
-- `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
-- `void Info(string)` - Writes an informational message to the console (only when the script is executed as part of a command line execution).
-- `void Warning(string)` - Writes a warning message to the console (only when the script is executed as part of a command line execution).
-- `void Error(string)` - Writes an error message to the console (only when the script is executed as part of a command line execution).
-- `T SelectObject(this IEnumerable<T> objects, T preselect = null, string label = "Select object") where T: TabularNamedObject` - Displays a dialog to the user prompting to select one of the objects specified. If the user cancels the dialog, this method returns null.
-- `void CollectVertiPaqAnalyzerStats()` - If Tabular Editor is connected to an instance of Analysis Services, this runs the VertiPaq Analyzer statistics collector.
-- `long GetCardinality(this Column column)` - If VertiPaq Analyzer statistics are available for the current model, this method returns the cardinality of the specified column.
+- `void Output(object value)` - detiene la ejecución del script y muestra información sobre el objeto proporcionado. Cuando el script se ejecuta como parte de una ejecución desde la línea de comandos, se escribirá en la consola una representación en cadena del objeto.
+- `void SaveFile(string filePath, string content)` - forma práctica de guardar datos de texto en un archivo.
+- `string ReadFile(string filePath)` - forma práctica de cargar datos de texto desde un archivo.
+- `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties)` - forma práctica de exportar un conjunto de propiedades de varios objetos como una cadena TSV.
+- `void ImportProperties(string tsvData)` - forma práctica de cargar propiedades en varios objetos desde una cadena TSV.
+- `void CustomAction(string name)` - invoca una macro por su nombre.
+- `void CustomAction(this IEnumerable<ITabularNamedObject> objects, string name)` - invoca una macro en los objetos especificados.
+- `string ConvertDax(string dax, bool useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y configuraciones regionales distintas de EE. UU./Reino Unido. Si `useSemicolons` es true (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido al formato no EE. UU./Reino Unido. Es decir, las comas (separadores de lista) se convertirán en punto y coma, y los puntos (separadores decimales) se convertirán en comas. Y viceversa si `useSemicolons` se establece en false.
+- `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - da formato a las expresiones DAX en todos los objetos de la colección proporcionada
+- `void FormatDax(this IDaxDependantObject obj)` - pone un objeto en cola para dar formato a la expresión DAX cuando finalice la ejecución del script, o cuando se llame al método `CallDaxFormatter`.
+- `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - da formato a todas las expresiones DAX de los objetos puestos en cola hasta el momento
+- `void Info(string)` - Escribe un mensaje informativo en la consola (solo cuando el script se ejecuta como parte de una ejecución en la línea de comandos).
+- `void Warning(string)` - Escribe un mensaje de advertencia en la consola (solo cuando el script se ejecuta como parte de una ejecución en la línea de comandos).
+- `void Error(string)` - Escribe un mensaje de error en la consola (solo cuando el script se ejecuta como parte de una ejecución en la línea de comandos).
+- `T SelectObject(this IEnumerable<T> objects, T preselect = null, string label = "Select object") where T: TabularNamedObject` - Muestra un cuadro de diálogo para que el usuario seleccione uno de los objetos especificados. Si el usuario cancela el cuadro de diálogo, este método devuelve `null`.
+- `void CollectVertiPaqAnalyzerStats()` - Si Tabular Editor está conectado a una instancia de Analysis Services, ejecuta el recopilador de estadísticas del Analizador VertiPaq.
+- `long GetCardinality(this Column column)` - Si las estadísticas del Analizador VertiPaq están disponibles para el modelo actual, este método devuelve la cardinalidad de la columna especificada.
 
-For a full list of available helper methods and their syntax, view @script-helper-methods.
+Para ver la lista completa de métodos auxiliares disponibles y su sintaxis, consulte @script-helper-methods.
 
-### Debugging scripts
+### Depuración de scripts
 
-As mentioned above, you can use the `Output(object);` method to pause script execution, and open a dialog box with information about the passed object. You can also use this method as an extension method, invoking it as `object.Output();`. The script is resumed when the dialog is closed.
+Como se mencionó anteriormente, puede usar el método `Output(object);` para pausar la ejecución del script y abrir un cuadro de diálogo con información sobre el objeto que se ha pasado. También puede usar este método como método de extensión, invocándolo como `object.Output();`. El script se reanuda cuando se cierra el cuadro de diálogo.
 
-The dialog will appear in one of four different ways, depending on the kind of object being output:
+El cuadro de diálogo aparecerá de una de estas cuatro maneras, según el tipo de objeto que se esté enviando a la salida:
 
-- Singular objects (such as strings, ints and DateTimes, except any object that derives from TabularNamedObject) will be displayed as a simple message dialog, by invoking the `.ToString()` method on the object:
+- Los objetos singulares (como strings, ints y DateTimes, excepto cualquier objeto que derive de TabularNamedObject) se mostrarán como un cuadro de diálogo de mensaje simple, invocando el método `.ToString()` sobre el objeto:
 
 ![C-sharp Output](~/content/assets/images/c-sharp-script-output-function.png)
 
-- Singular TabularNamedObjects (such as Tables, Measures or any other TOM NamedMetadataObject available in Tabular Editor) will be shown in a Property Grid, similar to when an object has been selected in the Tree Explorer. Properties on the object may be edited in the grid, but note that if an error is encountered at a later point in the script execution, the edit will be automatically undone, if "Auto-Rollback" is enabled:
+- Los TabularNamedObjects singulares (como Tablas, Medidas o cualquier otro TOM NamedMetadataObject disponible en Tabular Editor) se mostrarán en una cuadrícula de propiedades, de forma similar a cuando se ha seleccionado un objeto en el Explorador de árboles. Las propiedades del objeto se pueden editar en la cuadrícula, pero tenga en cuenta que, si se encuentra un error más adelante durante la ejecución del script, la edición se deshará automáticamente si "Auto-Rollback" está habilitado:
 
 ![C-sharp Output](~/content/assets/images/c-sharp-script-auto-rollback.png)
 
-- Any IEnumerable of objects (except TabularNamedObjects) will be displayed in a list, where each list item shows the `.ToString()` value and type of the object in the IEnumerable:
+- Cualquier IEnumerable de objetos (excepto TabularNamedObjects) se mostrará en una lista, donde cada elemento de la lista muestra el valor `.ToString()` y el tipo del objeto dentro del IEnumerable:
 
 ![C-sharp Output](~/content/assets/images/c-sharp-script-output-to-string-function.png)
 
-- Any IEnumerable of TabularNamedObjects will cause the dialog to display a list of the objects on the left, and a Property Grid on the right. The Property Grid will be populated from whatever object is selected in the list, and properties may be edited just as when a single TabularNamedObject is being output:
+- Cualquier IEnumerable de TabularNamedObjects hará que el cuadro de diálogo muestre una lista de objetos a la izquierda y una cuadrícula de propiedades a la derecha. La cuadrícula de propiedades se rellenará a partir del objeto seleccionado en la lista, y las propiedades se podrán editar igual que cuando se envía a la salida un único TabularNamedObject:
 
 ![C-sharp Output](~/content/assets/images/c-sharp-script-output-function-enumerated.png)
 
-You can tick the "Don't show more outputs" checkbox at the lower left-hand corner, to prevent the script from halting on any further `.Output()` invocations.
+Puede marcar la casilla "No mostrar más salidas" en la esquina inferior izquierda para evitar que el script se detenga en futuras invocaciones de `.Output()`.
 
-## .NET references
+## Referencias de .NET
 
-You can use the `using` keyword to shorten class names, etc. just like in regular C# source code. In addition, you can include external assemblies by using the syntax `#r "<assembly name or DLL path>"` similar to .csx scripts used in Azure Functions.
+Puede usar la palabra clave `using` para acortar nombres de clases, etc., igual que en el código fuente normal de C#. Además, puede incluir ensamblados externos utilizando la sintaxis `#r "<assembly name or DLL path>"`, similar a los scripts .csx usados en Azure Functions.
 
-For example, the following script will now work as expected:
+Por ejemplo, el siguiente script ahora funcionará como se espera:
 
 ```csharp
-// Assembly references must be at the very top of the file:
+// Las referencias de ensamblados deben estar al principio del archivo:
 #r "System.IO.Compression"
 
-// Using keywords must come before any other statements:
+// Las palabras clave using deben ir antes que cualquier otra instrucción:
 using System.IO.Compression;
 using System.IO;
 
 var xyz = 123;
 
-// Using statements still work the way they're supposed to:
+// Las instrucciones using siguen funcionando como deben:
 using(var data = new MemoryStream())
 using(var zip = new ZipArchive(data, ZipArchiveMode.Create)) 
 {
@@ -211,7 +211,7 @@ using(var zip = new ZipArchive(data, ZipArchiveMode.Create))
 }
 ```
 
-By default, Tabular Editor applies the following `using` keyword (even though they are not specified in the script), to make common tasks easier:
+De forma predeterminada, Tabular Editor aplica las siguientes directivas `using` (aunque no se especifiquen en el script) para facilitar las tareas habituales:
 
 ```csharp
 using System;
@@ -223,7 +223,7 @@ using TabularEditor.TOMWrapper.Utils;
 using TabularEditor.UI;
 ```
 
-In addition, the following .NET Framework assemblies are loaded by default:
+Además, los siguientes ensamblados de .NET Framework se cargan de forma predeterminada:
 
 - System.Dll
 - System.Core.Dll
@@ -235,13 +235,13 @@ In addition, the following .NET Framework assemblies are loaded by default:
 - TabularEditor.Exe
 - Microsoft.AnalysisServices.Tabular.Dll
 
-## Accessing Environment Variables
+## Acceso a variables de entorno
 
-When running C# scripts via the Tabular Editor CLI (especially in CI/CD pipelines), you can pass parameters to your scripts using environment variables. This is the recommended approach, as C# scripts executed by Tabular Editor CLI don't support traditional command-line arguments.
+Al ejecutar scripts de C# mediante la CLI de Tabular Editor (especialmente en canalizaciones de CI/CD), puedes pasar parámetros a tus scripts usando variables de entorno. Este es el enfoque recomendado, ya que los C# Scripts ejecutados por Tabular Editor CLI no admiten argumentos tradicionales de línea de comandos.
 
-### Reading Environment Variables
+### Lectura de variables de entorno
 
-Use the `Environment.GetEnvironmentVariable()` method to read environment variables in your script:
+Usa el método `Environment.GetEnvironmentVariable()` para leer variables de entorno en tu script:
 
 ```csharp
 // Read environment variables
@@ -262,11 +262,11 @@ foreach(var dataSource in Model.DataSources.OfType<ProviderDataSource>())
 Info($"Updated connection strings for {environment} environment");
 ```
 
-### Azure DevOps Integration
+### Integración con Azure DevOps
 
-Environment variables integrate seamlessly with Azure DevOps pipelines, as all pipeline variables are automatically available as environment variables by default.
+Las variables de entorno se integran sin problemas con las canalizaciones de Azure DevOps, ya que todas las variables de canalización están disponibles automáticamente como variables de entorno de forma predeterminada.
 
-**Example Azure DevOps YAML Pipeline:**
+**Ejemplo de canalización YAML de Azure DevOps:**
 
 ```yaml
 variables:
@@ -285,39 +285,39 @@ steps:
       TabularEditor.exe "Model.bim" -S "DeploymentScript.csx" -D "$(targetServer)" "$(targetDatabase)" -O -V -E -W
 ```
 
-In this example, the script `DeploymentScript.csx` can access `SERVER_NAME` and `DATABASE_NAME` using `Environment.GetEnvironmentVariable()`.
+En este ejemplo, el script `DeploymentScript.csx` puede acceder a `SERVER_NAME` y `DATABASE_NAME` mediante `Environment.GetEnvironmentVariable()`.
 
-### Common Use Cases
+### Casos de uso comunes
 
-Environment variables are particularly useful for:
+Las variables de entorno son especialmente útiles para:
 
-- **Dynamic connection strings**: Update data source connections based on deployment environment (Dev, UAT, Production)
-- **Conditional logic**: Apply different transformations based on target environment
-- **Deployment configuration**: Control which objects to deploy or modify based on parameters
-- **Multi-environment support**: Use the same script across different environments with different values
+- **Cadenas de conexión dinámicas**: Actualiza las conexiones a los orígenes de datos según el entorno de implementación (Dev, UAT, Producción)
+- **Lógica condicional**: Aplica transformaciones distintas según el entorno de destino
+- **Configuración de implementación**: Controla qué objetos se implementan o se modifican según los parámetros
+- **Compatibilidad con varios entornos**: Usa el mismo script en distintos entornos con valores diferentes
 
-**Example - Environment-specific modifications:**
+**Ejemplo: modificaciones específicas por entorno:**
 
 ```csharp
 var environment = Environment.GetEnvironmentVariable("DEPLOY_ENV") ?? "Development";
 var refreshPolicy = Environment.GetEnvironmentVariable("ENABLE_REFRESH_POLICY") == "true";
 
-// Apply environment-specific settings
+// Aplica configuración específica por entorno
 foreach(var table in Model.Tables)
 {
     if(environment == "Production" && !refreshPolicy)
     {
-        // Disable incremental refresh policies in production if specified
+        // Deshabilita las políticas de actualización incremental en producción si se especifica
         table.EnableRefreshPolicy = false;
     }
 }
 
-Info($"Configured model for {environment} environment");
+Info($"Modelo configurado para el entorno {environment}");
 ```
 
-## Compatibility
+## Compatibilidad
 
-The scripting APIs for Tabular Editor 2 and Tabular Editor 3 are mostly compatible, however, there are cases where you want to conditionally compile code depending on which version you're using. For this, you can use preprocessor directives, which were introduced in Tabular Editor 3.10.0.
+Las API de scripting de Tabular Editor 2 y Tabular Editor 3 son en gran medida compatibles. Sin embargo, en algunos casos conviene compilar el código condicionalmente en función de la versión que estés usando. Para ello, puedes usar directivas de preprocesador, que se introdujeron en Tabular Editor 3.10.0.
 
 ```csharp
 #if TE3
@@ -329,14 +329,14 @@ The scripting APIs for Tabular Editor 2 and Tabular Editor 3 are mostly compatib
 #endif
 ```
 
-If you need to know the exact version of Tabular Editor at script runtime, you can inspect the assembly version:
+Si necesitas conocer la versión exacta de Tabular Editor en tiempo de ejecución del script, puedes inspeccionar la versión del ensamblado:
 
 ```csharp
 var currentVersion = typeof(Model).Assembly.GetName().Version;
 Info(currentVersion.ToString());
 ```
 
-The public product version (for example, "2.20.2" or "3.10.1") can be found using this code:
+La versión pública del producto (por ejemplo, "2.20.2" o "3.10.1") se puede obtener con este código:
 
 ```csharp
 using System.Diagnostics;
@@ -345,18 +345,18 @@ var productVersion = FileVersionInfo.GetVersionInfo(Selected.GetType().Assembly.
 productVersion.Output(); // productVersion is a string ("2.20.2" or "3.10.1", for example)
 ```
 
-If you just want the major version number (as an integer), use:
+Si solo quieres el número de versión principal (como entero), usa:
 
 ```csharp
 var majorVersion = Selected.GetType().Assembly.GetName().Version.Major;
 majorVersion.Output(); // majorVersion is an integer (2 or 3)
 ```
 
-## Known issues and limitations
+## Problemas y limitaciones conocidos
 
-- Certain script operations may cause the Tabular Editor 3 application to crash or become unresponsive, due to the way scripts are executed. For example, a script with an infinite loop (`while(true) {}`) will cause the application to hang. If this happens, you will have to end the Tabular Editor process through the Windows Task Manager.
+- Algunas operaciones en los scripts pueden hacer que la aplicación Tabular Editor 3 se bloquee o deje de responder, debido a la forma en que se ejecutan los scripts. Por ejemplo, un script con un bucle infinito (`while(true) {}`) hará que la aplicación se quede colgada. Si esto ocurre, tendrás que finalizar el proceso de Tabular Editor desde el Administrador de tareas de Windows.
 
-If you intend to save the script as a [macro](xref:creating-macros), please be aware of the following limitations:
+Si tienes pensado guardar el script como una [macro](xref:creating-macros), ten en cuenta las siguientes limitaciones:
 
-- If the script body contains local methods with access modifiers (`public`, `static`, etc.), the script cannot be saved as a macro. Remove the access modifiers, or move the method into a class instead.
-- Macros currently do not support the `await` keyword, if used in the script body. If your script body calls into asynchronous methods, you should use `MyAsyncMethod.Wait()` or `MyAsyncMethod.Result` instead of `await MyAsyncMethod()`. It is fine to use `await` in `async` methods that are defined elsewhere in the script.
+- Si el cuerpo del script contiene métodos locales con modificadores de acceso (`public`, `static`, etc.), el script no se puede guardar como una macro. Elimina los modificadores de acceso o, en su lugar, mueve el método a una clase.
+- Actualmente, las macros no admiten la palabra clave `await` si se usa en el cuerpo del script. Si el cuerpo del script llama a métodos asíncronos, debes usar `MyAsyncMethod.Wait()` o `MyAsyncMethod.Result` en lugar de `await MyAsyncMethod()`. No hay problema en usar `await` en métodos `async` definidos en otra parte del script.
