@@ -1,6 +1,6 @@
 ---
-uid: table-groups
-title: Table Groups
+uid: grupos-de-tablas
+title: Grupos de tablas
 author: Daniel Otykier
 updated: 2023-03-08
 applies_to:
@@ -9,79 +9,79 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           full: true
-        - edition: Business
+        - edition: Negocios
           full: true
-        - edition: Enterprise
+        - edition: Empresarial
           full: true
 ---
 
-# Table Groups
+# Grupos de tablas
 
-Table Groups is a new feature, available in Tabular Editor 3 starting from [version 3.5.0](xref:release-3-5-0). The feature lets you quickly organise tables into folders, making it easier than ever to manage and navigate large, complex models, in Tabular Editor 3's [TOM Explorer](xref:tom-explorer-view).
+Los grupos de tablas son una nueva funcionalidad disponible en Tabular Editor 3 a partir de la [versión 3.5.0](xref:release-3-5-0). Esta funcionalidad permite organizar rápidamente las tablas en carpetas, lo que facilita más que nunca administrar y navegar por modelos grandes y complejos en el [Explorador TOM](xref:tom-explorer-view) de Tabular Editor 3.
 
-![Table groups](~/content/assets/images/user-interface/table-groups.png)
+![Grupos de tablas](~/content/assets/images/user-interface/table-groups.png)
 
-You can set up Table Groups either by right-clicking on a table and choosing the **Create > Table group** menu option, or by specifying a name for the Table Group in the **Properties View**, while selecting one or more tables.
+Puedes configurar los grupos de tablas haciendo clic con el botón derecho en una tabla y eligiendo la opción de menú **Crear > Grupo de tablas**, o bien especificando un nombre para el grupo de tablas en la **vista de propiedades** mientras seleccionas una o varias tablas.
 
-Tables can be moved around between Table Groups by dragging and dropping in the TOM Explorer. Note that, unlike Display Folders for measures, columns and hierarchies, Table Groups cannot be nested.
+Las tablas se pueden mover entre grupos de tablas arrastrando y soltando en el Explorador TOM. Ten en cuenta que, a diferencia de las carpetas de visualización para medidas, columnas y jerarquías, los grupos de tablas no se pueden anidar.
 
-Right-clicking on a Table Group in the TOM Explorer, gives you the same context menu options, as if you had selected the table(s) within that Table Group.
+Al hacer clic con el botón derecho en un grupo de tablas en el Explorador TOM, obtienes las mismas opciones del menú contextual que si hubieras seleccionado la tabla o las tablas dentro de ese grupo de tablas.
 
 > [!NOTE]
-> Table Groups is a Tabular Editor-exclusive feature. Client tools (such as Excel, Power BI Desktop, etc.) will not observe Table Groups, as the [CSDL format](https://learn.microsoft.com/en-us/ef/ef6/modeling/designer/advanced/edmx/csdl-spec), which specifies the conceptual schema of the data model, does not support Table Groups.
+> Los grupos de tablas son una característica exclusiva de Tabular Editor. Las herramientas cliente (como Excel, Power BI Desktop, etc.) no contemplarán los grupos de tablas, ya que el [formato CSDL](https://learn.microsoft.com/en-us/ef/ef6/modeling/designer/advanced/edmx/csdl-spec), que especifica el esquema conceptual del modelo de datos, no admite los grupos de tablas.
 
-## Metadata and scripting
+## Metadatos y scripts
 
-Tabular Editor uses an annotation on each table, to specify which Table Group that table belongs to. The name of the annotation is `TabularEditor_TableGroup`. However, when scripting changes to the model using C# scripts, you can modify the Table Group directly through the new `Table.TableGroup` (string) property.
+Tabular Editor usa una anotación en cada tabla para especificar a qué grupo de tablas pertenece esa tabla. El nombre de la anotación es `TabularEditor_TableGroup`. Sin embargo, al aplicar cambios al modelo mediante scripts de C#, puedes modificar el grupo de tablas directamente a través de la nueva propiedad `Table.TableGroup` (string).
 
-Below is an example of a C# script, that loops through all tables of a model, organizing them into Table Groups based on their type and usage:
+A continuación se muestra un ejemplo de C# Script que recorre todas las tablas de un modelo y las organiza en grupos de tablas en función de su tipo y uso:
 
 ```csharp
-// Loop through all tables:
+// Recorrer todas las tablas:
 foreach(var table in Model.Tables)
 {
     if (table is CalculationGroupTable)
     {
-        table.TableGroup = "Calculation Groups";
+        table.TableGroup = "Grupos de cálculo";
     }
     else if (!table.UsedInRelationships.Any() && table.Measures.Any(m => m.IsVisible))
     {
-        // Tables containing visible measures, but no relationships to other tables
-        table.TableGroup = "Measure Groups";
+        // Tablas que contienen medidas visibles, pero sin relaciones con otras tablas
+        table.TableGroup = "Grupos de medidas";
     }
     else if (table.UsedInRelationships.All(r => r.FromTable == table) && table.UsedInRelationships.Any())
     {
-        // Tables exclusively on the "many" side of relationships:
-        table.TableGroup = "Facts";
+        // Tablas que están exclusivamente en el lado "muchos" de las relaciones:
+        table.TableGroup = "Hechos";
     }
     else if (!table.UsedInRelationships.Any() && table is CalculatedTable && !table.Measures.Any())
     {
-        // Tables without any relationships, that are Calculated Tables and do not have measures:
-        table.TableGroup = "Parameter Tables";
+        // Tablas sin ninguna relación, que son tablas calculadas y no tienen medidas:
+        table.TableGroup = "Tablas de parámetros";
     }
     else if (table.UsedInRelationships.Any(r => r.ToTable == table))
     {
-        // Tables on the "one" side of relationships:
-        table.TableGroup = "Dimensions";
+        // Tablas en el lado "uno" de las relaciones:
+        table.TableGroup = "Dimensiones";
     }
     else
     {
-        // All other tables:
-        table.TableGroup = "Misc";
+        // Todas las demás tablas:
+        table.TableGroup = "Varios";
     }
 }
 ```
 
-## Hiding Table Groups
+## Ocultar grupos de tablas
 
-If you prefer to always see the full, ungrouped list of tables in the TOM Explorer, but you're collaborating with others on a model containing table group annotations, you can still disable table groups altogether, for your Tabular Editor 3 installation. This is done through the **Tools > Preferences** dialog. Navigate to the **TOM Explorer** page, then uncheck **Use table groups** under **Display and filtering**:
+Si prefieres ver siempre la lista completa de tablas sin agrupar en el Explorador TOM, pero colaboras con otras personas en un modelo que incluye anotaciones de grupos de tablas, aun así puedes desactivar los grupos de tablas por completo en tu instalación de Tabular Editor 3. Esto se hace desde el cuadro de diálogo **Herramientas > Preferencias**. Ve a la página **Explorador TOM** y, en **Visualización y filtrado**, desmarca **Usar grupos de tablas**:
 
-![Table Groups Disable](~/content/assets/images/table-groups-disable.png)
+![Desactivar grupos de tablas](~/content/assets/images/table-groups-disable.png)
 
 > [!NOTE]
-> Even though you have disabled table groups as described above, tables in your model may still have the `TabularEditor_TableGroup` annotation assigned. If you wish to clear all such annotations from the model, you can use the following C# script:
+> Aunque hayas desactivado los grupos de tablas como se describe arriba, las tablas de tu modelo pueden seguir teniendo asignada la anotación `TabularEditor_TableGroup`. Si deseas borrar todas esas anotaciones del modelo, puedes usar el siguiente C# Script:
 >
 > ```csharp
 > foreach(var table in Model.Tables) table.TableGroup = null;
