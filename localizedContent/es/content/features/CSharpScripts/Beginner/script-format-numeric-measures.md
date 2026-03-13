@@ -1,6 +1,6 @@
 ---
-uid: script-format-numeric-measures
-title: Format Numeric Measures
+uid: script-formato-medidas-numericas
+title: Formatear medidas numéricas
 author: Morten Lønskov
 updated: 2023-11-29
 applies_to:
@@ -11,41 +11,41 @@ applies_to:
       full: true
 ---
 
-# Format Numeric Measures
+# Formatear medidas numéricas
 
-## Script Purpose
+## Propósito del script
 
-Allows you to quickly set default format strings on the measures selected.
+Te permite establecer rápidamente cadenas de formato predeterminadas para las medidas seleccionadas.
 
 <br></br>
 
 > [!NOTE]
-> The script uses certain naming standards so you might wish to adjust it to suit yours. <br></br>
+> El script usa ciertos estándares de nomenclatura, así que quizá quieras ajustarlo para que encaje con los tuyos. <br></br>
 
 ## Script
 
-### Script Title
+### Título del script
 
 ```csharp
-// This script is meant to format all measures with a default formatstring
+// Este script está pensado para dar formato a todas las medidas con una cadena de formato predeterminada
 foreach (var ms in Selected.Measures) {
-//Don't set format string on hidden measures
+//No establecer la cadena de formato en medidas ocultas
 	if (ms.IsHidden) continue;
-// If the format string is empty continue. 
+// Si la cadena de formato está vacía, continuar. 
 	if (!string.IsNullOrWhiteSpace(ms.FormatString)) continue;
-//If the data type is int set a whole number format string
+//Si el tipo de datos es int, establecer una cadena de formato de número entero
 	if (ms.DataType == DataType.Int64) ms.FormatString = "#,##0";
-//If the datatype is double or decimal 
+//Si el tipo de datos es double o decimal 
 	if (ms.DataType == DataType.Double || ms.DataType == DataType.Decimal) {
-    //and the name contains # or QTY then set the format string to a whole number
+    //y el nombre contiene # o QTY, entonces establecer la cadena de formato como un número entero
 		if (ms.Name.Contains("#")
 			|| ms.Name.IndexOf("QTY", StringComparison.OrdinalIgnoreCase) >= 0) ms.FormatString = "#,##0";
-		//otherwise set it a decimal format string. 
+		//si no, establecer una cadena de formato decimal. 
     else ms.FormatString = "#,##0.00";
 	}
 }
 ```
 
-### Explanation
+### Explicación
 
-The script takes each of the selected measures and loops through them to set a default format string according to various conditions.
+El script toma cada una de las medidas seleccionadas y recorre cada una de ellas para establecer una cadena de formato predeterminada según diversas condiciones.
