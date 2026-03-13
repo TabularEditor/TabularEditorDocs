@@ -1,6 +1,6 @@
 ---
 uid: script-create-table-groups
-title: Create Table Groups
+title: 创建表格组
 author: Morten Lønskov
 updated: 2023-11-29
 applies_to:
@@ -11,53 +11,53 @@ applies_to:
       full: true
 ---
 
-# Create Table Groups
+# 创建表格组
 
-## Script Purpose
+## 脚本用途
 
-This script creates default table groups within Tabular Editor 3.
+该脚本会在 Tabular Editor 3 中创建默认表格组。
 
-## Script
+## 脚本
 
-### Script Title
+### 脚本标题
 
 ```csharp
-// Loop through all tables:
+// 遍历所有表：
 foreach(var table in Model.Tables)
 {
     if (table is CalculationGroupTable)
     {
-        table.TableGroup = "Calculation Groups";
+        table.TableGroup = "计算组";
     }
     else if (!table.UsedInRelationships.Any() && table.Measures.Any(m => m.IsVisible))
     {
-        // Tables containing visible measures, but no relationships to other tables
-        table.TableGroup = "Measure Groups";
+        // 包含可见度量值但与其他表没有关系的表
+        table.TableGroup = "度量值组";
     }
     else if (table.UsedInRelationships.All(r => r.FromTable == table) && table.UsedInRelationships.Any())
     {
-        // Tables exclusively on the "many" side of relationships:
-        table.TableGroup = "Facts";
+        // 仅位于关系“多”端的表：
+        table.TableGroup = "事实";
     }
     else if (!table.UsedInRelationships.Any() && table is CalculatedTable && !table.Measures.Any())
     {
-        // Tables without any relationships, that are Calculated Tables and do not have measures:
-        table.TableGroup = "Parameter Tables";
+        // 没有任何关系的表，属于计算表格且不包含度量值：
+        table.TableGroup = "参数表";
     }
     else if (table.UsedInRelationships.Any(r => r.ToTable == table))
     {
-        // Tables on the "one" side of relationships:
-        table.TableGroup = "Dimensions";
+        // 位于关系“一”端的表：
+        table.TableGroup = "维度";
     }
     else
     {
-        // All other tables:
-        table.TableGroup = "Misc";
+        // 其他所有表：
+        table.TableGroup = "杂项";
     }
 }
 ```
 
-### Explanation
+### 说明
 
-The scripts loops through all tables in the model assigning a table group according to specific properties.
+该脚本遍历模型中的所有表，并根据特定属性为其分配表格组。
 
