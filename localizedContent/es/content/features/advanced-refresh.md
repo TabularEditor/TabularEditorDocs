@@ -1,6 +1,6 @@
 ---
 uid: advanced-refresh
-title: Advanced Refresh Dialog
+title: Cuadro de diálogo de actualización avanzada
 author: Daniel Otykier
 updated: 2026-01-15
 applies_to:
@@ -10,102 +10,102 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.25.0
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           none: true
-        - edition: Business
+        - edition: Empresarial
           full: true
         - edition: Enterprise
           full: true
 ---
 
-# Advanced Refresh Dialog
+# Cuadro de diálogo de actualización avanzada
 
-The **Advanced Refresh** dialog provides fine-grained control over data refresh operations, allowing you to configure refresh type, parallelism, incremental refresh settings, and override profiles. This is useful when you need more control than the standard refresh menu options provide.
+El cuadro de diálogo **Actualización avanzada** ofrece un control detallado sobre las operaciones de actualización de datos, lo que te permite configurar el tipo de actualización, el grado de paralelismo, la configuración de actualización incremental y los perfiles de sobrescritura. Esto resulta útil cuando necesitas más control del que ofrecen las opciones estándar del menú de actualización.
 
-To open the Advanced Refresh dialog, go to **Model > Refresh model > Advanced...** or use the keyboard shortcut **Ctrl+Shift+F5**.
+Para abrir el cuadro de diálogo **Actualización avanzada**, ve a **Modelo > Actualizar modelo > Avanzado...** o usa el atajo de teclado **Ctrl+Shift+F5**.
 
 > [!Note]
-> The Advanced Refresh dialog is available on the Business and Enterprise Edition.
+> El cuadro de diálogo de Actualización avanzada está disponible en la Edición Business y en la Edición Enterprise.
 
-![Advanced Refresh Menu](~/content/assets/images/advanced-refresh-menu.png)
+![Menú de actualización avanzada](~/content/assets/images/advanced-refresh-menu.png)
 
-## Refresh scope
+## Ámbito de actualización
 
-The refresh scope indicates which objects will be refreshed. The scope depends on what is selected in the TOM Explorer when you open the dialog:
+El ámbito de actualización indica qué objetos se actualizarán. El ámbito depende de lo que esté seleccionado en el Explorador TOM cuando abres el cuadro de diálogo:
 
-- **Entire model**: When no specific tables or partitions are selected
-- **Selected tables**: When one or more tables are selected
-- **Selected partitions**: When one or more partitions are selected
+- **Modelo completo**: Cuando no hay ninguna tabla o partición específica seleccionada
+- **Tablas seleccionadas**: Cuando se seleccionan una o varias tablas
+- **Particiones seleccionadas**: Cuando se seleccionan una o varias particiones
 
-## General Settings
+## Configuración general
 
-![Advanced Refresh Dialog](~/content/assets/images/advanced-refresh.png)
+![Cuadro de diálogo de actualización avanzada](~/content/assets/images/advanced-refresh.png)
 
-### Refresh Type
+### Tipo de actualización
 
-The **Refresh Type** dropdown lets you choose the type of refresh operation to perform. Available options depend on the refresh scope:
+El menú desplegable **Tipo de actualización** permite elegir el tipo de operación de actualización que se va a realizar. Las opciones disponibles dependen del ámbito de actualización:
 
-| Refresh Type  | Description                                                                                     | Availability               |
-| ------------- | ----------------------------------------------------------------------------------------------- | -------------------------- |
-| **Automatic** | Lets Analysis Services determine the optimal refresh type based on the current state of objects | All scopes                 |
-| **Full**      | Drops all data and reloads from the data source, then recalculates all dependent objects        | All scopes                 |
-| **Clear**     | Drops all data from the selected objects without reloading                                      | All scopes                 |
-| **DataOnly**  | Loads data from the data source without recalculating dependent objects                         | All scopes                 |
-| **Calculate** | Recalculates the selected objects and all their dependents without reloading data               | All scopes                 |
-| **Defrag**    | Defragments the dictionaries for all columns in the scope                                       | Model and table scope only |
-| **Add**       | Adds new data to partitions without processing existing data                                    | Partition scope only       |
+| Tipo de actualización | Descripción                                                                                                                  | Disponibilidad                        |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| **Automático**        | Permite que Analysis Services determine el tipo de actualización óptimo en función del estado actual de los objetos          | Todos los ámbitos                     |
+| **Completo**          | Descarta todos los datos y los vuelve a cargar desde el origen de datos y, después, recalcula todos los objetos dependientes | Todos los ámbitos                     |
+| **Limpiar**           | Descarta todos los datos de los objetos seleccionados sin recargar                                                           | Todos los ámbitos                     |
+| **DataOnly**          | Carga datos desde el origen de datos sin recalcular los objetos dependientes                                                 | Todos los ámbitos                     |
+| **Calcular**          | Recalcula los objetos seleccionados y todos sus dependientes sin recargar los datos                                          | Todos los ámbitos                     |
+| **Defrag**            | Desfragmenta los diccionarios de todas las columnas del ámbito                                                               | Solo en los ámbitos de modelo y tabla |
+| **Agregar**           | Añade nuevos datos a las particiones sin procesar los datos existentes                                                       | Ámbito de partición solamente         |
 
-### Max Parallelism
+### Paralelismo máximo
 
-The **Max Parallelism** setting controls how many objects can be processed simultaneously during the refresh operation. A value of **0** means unlimited parallelism, allowing Analysis Services to process as many objects in parallel as resources permit. Set a specific value to limit parallel operations, which can be useful when you want to reduce resource consumption on the server.
+La configuración de **Paralelismo máximo** controla cuántos objetos se pueden procesar simultáneamente durante la operación de actualización. Un valor de **0** significa paralelismo ilimitado, lo que permite a Analysis Services procesar en paralelo tantos objetos como permitan los recursos. Establezca un valor específico para limitar las operaciones en paralelo, lo que puede ser útil cuando se quiere reducir el consumo de recursos en el servidor.
 
-## Incremental Refresh Settings
+## Configuración de actualización incremental
 
-![Incremental Refresh Settings](~/content/assets/images/advanced-refresh-incremental-effective-date.png)
+![Configuración de actualización incremental](~/content/assets/images/advanced-refresh-incremental-effective-date.png)
 
-The **Incremental Refresh Settings** section appears when the refresh scope includes at least one table with an [incremental refresh policy](xref:incremental-refresh-about) configured. This section is not available at partition scope.
+La sección **Configuración de actualización incremental** aparece cuando el ámbito de actualización incluye al menos una tabla con una [política de actualización incremental](xref:incremental-refresh-about) configurada. Esta sección no está disponible en el ámbito de partición.
 
-- **Apply Refresh Policy**: When checked, the refresh operation will honor the incremental refresh policy defined on the table(s), creating and managing partitions according to the policy's rolling window settings.
-- **Effective Date**: Specifies the date to use when evaluating the incremental refresh policy. By default, this is the current date, but you can select a different date to simulate how the refresh would behave at a different point in time. This is useful for testing incremental refresh configurations.
+- **Aplicar política de actualización**: Si está activado, la operación de actualización respetará la política de actualización incremental definida en la tabla(s), creando y administrando particiones según la configuración de la ventana deslizante de la política.
+- **Fecha efectiva**: Especifica la fecha que se usará al evaluar la política de actualización incremental. De forma predeterminada, es la fecha actual, pero se puede seleccionar una fecha diferente para simular cómo se comportaría la actualización en otro momento. Esto es útil para probar configuraciones de actualización incremental.
 
-## Refresh Override Settings
+## Configuración de anulaciones de actualización
 
-Refresh overrides allow you to temporarily modify certain properties for the duration of a refresh operation without changing the actual model metadata. This eliminates the risk of accidentally leaving temporary modifications in your model.
+Las anulaciones de actualización permiten modificar temporalmente determinadas propiedades durante una operación de actualización sin cambiar los metadatos reales del modelo. Esto elimina el riesgo de dejar accidentalmente modificaciones temporales en el modelo.
 
-### Use cases for refresh overrides
+### Casos de uso de las anulaciones de actualización
 
-- **Limiting data during development**: Override partition queries to load only a subset of rows (e.g., using TOP or WHERE clauses), speeding up refresh operations while developing and testing
-- **Refreshing from alternative sources**: Load data from a test or development database instead of the production source configured in the model
-- **Testing with modified expressions**: Override shared expressions (M parameters) to test different configurations
+- **Limitar datos durante el desarrollo**: Anular las consultas de partición para cargar solo un subconjunto de filas (p. ej., usando cláusulas TOP o WHERE), lo que acelera las operaciones de actualización durante el desarrollo y las pruebas
+- **Actualizar desde orígenes alternativos**: Cargar datos desde una base de datos de prueba o de desarrollo en lugar del origen de producción configurado en el modelo
+- **Probar con expresiones modificadas**: Anular expresiones compartidas (parámetros M) para probar distintas configuraciones
 
-### Override profiles
+### Perfiles de anulación
 
-Override profiles store named configurations of TMSL overrides that you can reuse across refresh operations.
+Los perfiles de anulación almacenan configuraciones con nombre de anulaciones de TMSL que se pueden reutilizar en distintas operaciones de actualización.
 
-![Override Profile Editor](~/content/assets/images/advanced-refresh-edit-profile.png)
+![Editor de perfiles de anulación](~/content/assets/images/advanced-refresh-edit-profile.png)
 
-- **New...**: Creates a new override profile. You provide a profile name and the TMSL definition specifying the overrides.
-- **Edit...**: Modifies the selected override profile.
-- **Delete**: Removes the selected override profile.
+- **Nuevo...**: Crea un nuevo perfil de anulación. Proporciona un nombre de perfil y la definición de TMSL que especifica las anulaciones.
+- **Editar...**: Modifica el perfil de sustitución seleccionado.
+- **Eliminar**: Elimina el perfil de sustitución seleccionado.
 
-The TMSL definition follows the [TMSL refresh command specification](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions), allowing you to override properties on:
+La definición de TMSL sigue la [especificación del comando de actualización de TMSL](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions), lo que permite sobrescribir propiedades en:
 
-- Data sources
-- Shared expressions
-- Partitions
-- Data columns
+- Fuentes de datos
+- Expresiones compartidas
+- Particiones
+- Columnas de datos
 
 > [!TIP]
-> See [Refresh Override Profiles](xref:refresh-overrides) for detailed examples and TMSL code snippets you can use as starting points for your own override profiles.
+> Consulte [Perfiles de sustitución de actualización](xref:refresh-overrides) para ver ejemplos detallados y fragmentos de código TMSL que puede usar como punto de partida para sus propios perfiles de sustitución.
 
-### Profile storage
+### Almacenamiento de perfiles
 
-Override profiles are stored per-model in the `UserOptions.tmuo` file. When working with model metadata saved on disk, the `.tmuo` file is stored alongside the model files. When connected directly to a model through the XMLA endpoint, the `.tmuo` files are stored under `%LocalAppData%\TabularEditor3\UserOptions`.
+Los perfiles de anulación se almacenan por modelo en el archivo `UserOptions.tmuo`. Al trabajar con metadatos del modelo guardados en disco, el archivo `.tmuo` se guarda junto con los archivos del modelo. Cuando se conecta directamente a un modelo mediante el punto de conexión XMLA, los archivos `.tmuo` se almacenan en `%LocalAppData%\TabularEditor3\UserOptions`.
 
-## Export TMSL script
+## Exportar script TMSL
 
-The **Export TMSL script...** button opens a dialog where you can view and copy the generated TMSL refresh command. This is useful when you want to:
+El botón **Exportar script TMSL...** abre un cuadro de diálogo en el que puede ver y copiar el comando de actualización TMSL generado. Esto resulta útil cuando desea:
 
-- Execute the refresh command through other tools (such as SQL Server Management Studio)
-- Include the refresh command in automation scripts or CI/CD pipelines
-- Review the exact TMSL that will be sent to Analysis Services
+- Ejecutar el comando de actualización con otras herramientas (como SQL Server Management Studio)
+- Incluir el comando de actualización en scripts de automatización o canalizaciones de CI/CD
+- Revisar el TMSL exacto que se enviará a Analysis Services
