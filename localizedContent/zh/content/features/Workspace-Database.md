@@ -1,47 +1,47 @@
 ---
 uid: workspace-databases
-title: Introducing Workspace Databases
+title: Workspace 数据库简介
 applies_to:
   products:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-## Introducing Workspace Databases
+## Workspace 数据库简介
 
-Tabular Editor 3.0 supports editing model metadata loaded from disk with a simultaneous connection to a database deployed to an instance of Analysis Services. We call this database the _workspace database_. Going forward, this is the recommended approach to tabular modeling within Tabular Editor.
+Tabular Editor 3.0 支持在同时连接到部署在 Analysis Services 实例上的数据库的情况下，编辑从磁盘加载的模型元数据。 我们将该数据库称为 _工作区数据库_。 今后，这是在 Tabular Editor 中进行表格建模的推荐方式。
 
-This makes the development workflow a lot simpler, since you only need to hit Save (Ctrl+S) once, to simultaneously save your changes to the disk **and** update the metadata in the workspace database. This also has the advantage, that any error messages returned from Analysis Services, are immediately visible in Tabular Editor upon hitting Save. In a sense, this is similar to the way SSDT / Visual Studio or Power BI Desktop does, except that you are in control of when the workspace database is updated.
+这会让开发流程简单得多，因为你只需按一次“保存” (Ctrl+S)，就能同时将更改保存到磁盘 **并** 更新工作区数据库中的元数据。 这也有一个优势：按下“保存”时，Analysis Services 返回的任何错误信息都会立即在 Tabular Editor 中可见。 在某种程度上，这与 SSDT/Visual Studio 或 Power BI Desktop 的工作方式类似，只是你可以决定何时更新工作区数据库。
 
-When you load a model from a Model.bim file or folder structure, you will see the following prompt:
+当你从 Model.bim 文件或文件夹结构加载模型时，会看到如下提示：
 
 ![image](https://user-images.githubusercontent.com/8976200/58166683-a65db180-7c8a-11e9-9df3-be9a716b3ad1.png)
 
-- **Yes**: Model metadata is loaded from disk and then immediately deployed to an instance of Analysis Services. Tabular Editor will then connect to the newly deployed database. The next time the same model is loaded from disk, Tabular Editor will redeploy and connect to the database automatically.
-- **No**: Model metadata is loaded from disk into Tabular Editor as usual, without connecting to an instance of Analysis Services.
-- **No, don't ask again**: Same as the option above, but Tabular Editor will not ask again the next time the same model is loaded.
+- **是**：从磁盘加载模型元数据，然后立即部署到某个 Analysis Services 实例。 随后，Tabular Editor 将连接到新部署的数据库。 下次从磁盘加载同一模型时，Tabular Editor 会自动重新部署并连接到该数据库。
+- **否**：照常从磁盘将模型元数据加载到 Tabular Editor，但不连接到任何 Analysis Services 实例。
+- **否，不再询问**：与上面的选项相同，但下次加载同一模型时 Tabular Editor 不会再询问。
 
-### Setting up a Workspace Database
+### 设置工作区数据库
 
-When you select the "Yes" option in the prompt shown above, you will be asked for a servername and (optional) credentials to an instance of Analysis Services. Hitting "OK" will show you a list of databases already on the instance. Tabular Editor assumes that you want to deploy a new database and provides a default name for the new database, based on your Windows username and the current date and time:
+当在上面的提示中选择“是”选项时，系统将要求输入 Analysis Services 实例的服务器名称以及（可选的）凭据。 点击“确定”后，将显示该实例上已有的数据库列表。 Tabular Editor 会默认你要部署一个新数据库，并会根据你的 Windows 用户名以及当前日期和时间，为新数据库提供一个默认名称：
 
 ![image](https://user-images.githubusercontent.com/8976200/58179509-a10f5f80-7ca8-11e9-9764-4cb76b9d1a8b.png)
 
-If you want to use and existing database as your workspace database, simply select it on the list. **Warning: If you choose an existing database, it will be overwritten with the metadata of the model loaded from disk. For this reason it is not recommended to set up workspace databases on a production instance!**
+如果要将现有数据库用作 Workspace 数据库，只需在列表中选择该数据库即可。 **警告：如果选择现有数据库，该数据库将被从磁盘加载的模型的元数据覆盖。 因此，不建议在生产实例上设置 workspace 数据库!**
 
-### The User Options file (.tmuo)
+### 用户选项文件 (.tmuo)
 
-To track the workspace settings for each model in your file system, Tabular Editor 3.0 introduces a new file of type .tmuo (short for Tabular Model User Options), which will be placed next to the Model.bim or Database.json file.
+为便于在文件系统中跟踪每个模型的 Workspace 设置，Tabular Editor 3.0 引入了一种新的 .tmuo 文件类型（Tabular Model User Options 的简称），它会放在 Model.bim 或 Database.json 文件旁边。
 
-The .tmuo file is just a simple JSON document with the following content:
+.tmuo 文件只是一个简单的 JSON 文档，内容如下：
 
 ```json
 {
@@ -51,15 +51,15 @@ The .tmuo file is just a simple JSON document with the following content:
 }
 ```
 
-When loading model metadata from disk, Tabular Editor looks for the presence of a .tmuo file within the same directory as the loaded model file. The name of the .tmuo file must follow the pattern:
+从磁盘加载模型元数据时，Tabular Editor 会在已加载的模型文件所在的同一目录中查找是否存在 .tmuo 文件。 .tmuo 文件的名称必须遵循以下模式：
 
 ```
 <modelfilename>.<windowsusername>.tmuo
 ```
 
-The reason that the file contains a username, is to prevent multiple developers from inadvertently overwriting each others workspace databases in parallel development workflows. If the file is present and the "UseWorkspace" flag in the file is set to "true", Tabular Editor will perform the following steps when loading a model from disk:
+文件中包含用户名，是为了避免在并行开发工作流中，多位开发者无意间互相覆盖对方的 Workspace 数据库。 如果该文件存在，并且文件中的 "UseWorkspace" 标志设置为 "true"，Tabular Editor 在从磁盘加载模型时将执行以下步骤：
 
-1. Deploy the model metadata to the workspace database (overwriting existing metadata), using the server- and database name specified in the .tmuo file.
-2. Connect to the newly deployed database in "workspace mode".
+1. 使用 .tmuo 文件中指定的服务器名称和数据库名称，将模型元数据部署到 Workspace 数据库（覆盖现有元数据）。
+2. 以“工作区模式”连接到新部署的数据库。
 
-When in "workspace mode", Tabular Editor simultaneously saves your model to disk and updates the workspace database, whenever you hit Save (ctrl+s). This lets you rapidly test new code and see error messages provided by Analysis Services, without having to manually deploy the database or invoking File > Save As... or File > Save to Folder... whenever you want to persist model metadata to disk.
+在“工作区模式”下，每次你按下保存 (ctrl+s)，Tabular Editor 都会同时将模型保存到磁盘，并更新 Workspace 数据库。 这样，你就能快速测试新代码并查看 Analysis Services 提供的错误信息，而无需手动部署数据库或调用“文件 > 另存为……” 或“文件 > 保存到文件夹……” 当你想将模型元数据持久保存到磁盘时
