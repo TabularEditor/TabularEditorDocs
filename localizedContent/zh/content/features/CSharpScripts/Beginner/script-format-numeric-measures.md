@@ -1,6 +1,6 @@
 ---
 uid: script-format-numeric-measures
-title: Format Numeric Measures
+title: 格式化数值度量值
 author: Morten Lønskov
 updated: 2023-11-29
 applies_to:
@@ -11,20 +11,20 @@ applies_to:
       full: true
 ---
 
-# Format Numeric Measures
+# 格式化数值度量值
 
-## Script Purpose
+## 脚本用途
 
-Allows you to quickly set default format strings on the measures selected.
+可让你快速为所选度量值设置默认格式字符串。
 
 <br></br>
 
 > [!NOTE]
-> The script uses certain naming standards so you might wish to adjust it to suit yours. <br></br>
+> 该脚本采用了一些命名规范，因此你可能需要根据自己的规范进行调整。 <br></br>
 
-## Script
+## 脚本
 
-### Script Title
+### 脚本标题
 
 ```csharp
 // This script is meant to format all measures with a default formatstring
@@ -46,6 +46,6 @@ foreach (var ms in Selected.Measures) {
 }
 ```
 
-### Explanation
+### 说明
 
-The script takes each of the selected measures and loops through them to set a default format string according to various conditions.
+该脚本会遍历所选的每个度量值，并根据不同条件设置默认格式字符串。
