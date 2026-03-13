@@ -1,6 +1,6 @@
 ---
 uid: perspective-editor
-title: Perspective Editor
+title: Editor de perspectiva
 author: Šarūnas Jučius
 updated: 2022-03-16
 applies_to:
@@ -9,35 +9,35 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           full: true
-        - edition: Business
+        - edition: Empresa
           full: true
-        - edition: Enterprise
+        - edition: Corporativo
           full: true
 ---
 
-# Perspective Editor
+# Editor de perspectiva
 
 > [!NOTE]
-> In order to add perspectives to models running on SSAS or Azure AS, you will need a Tabular Editor 3 Enterprise Edition license.
+> Para poder agregar perspectivas a modelos que se ejecutan en SSAS o Azure AS, necesitarás una licencia de la edición Enterprise de Tabular Editor 3.
 
-The **Perspective Editor** provides a quick overview of the perspective assignment of objects in the model (tables, columns, hierarchies and measures). You can launch the Perspective Editor through the **View** menu. Alternatively, if you only need to edit certain perspectives, select them in the **TOM Explorer** (hold down CTRL or SHIFT to multi-select), then right-click and choose **Show in Perspective Editor**.
+El **Editor de perspectiva** ofrece una vista rápida de la asignación de perspectivas de los objetos del modelo (tablas, columnas, jerarquías y medidas). Puede abrir el Editor de perspectiva desde el menú **Ver**. Como alternativa, si solo necesita editar ciertas perspectivas, selecciónelas en el **Explorador TOM** (mantenga pulsadas las teclas CTRL o SHIFT para seleccionar varias) y, a continuación, haga clic con el botón derecho y elija **Mostrar en el Editor de perspectiva**.
 
-![Perspective Editor](~/content/assets/images/perspective-editor.png)
+![Editor de perspectiva](~/content/assets/images/perspective-editor.png)
 
-Use the checkboxes in the perspective editor to quickly add/remove multiple objects from a perspective. You can use Undo (Ctrl+Z) and Redo (Ctrl+Y) the usual way. Note that the changes made through the perspective editor are immediately applied to the TOM, although you will still have to save (Ctrl+S) or deploy your model for the changes to apply in Analysis Services / Power BI.
+Utilice las casillas de verificación del Editor de perspectiva para agregar o quitar rápidamente varios objetos de una perspectiva. Puede usar Deshacer (Ctrl+Z) y Rehacer (Ctrl+Y) de la forma habitual. Tenga en cuenta que los cambios realizados a través del Editor de perspectiva se aplican inmediatamente al TOM, aunque aún deberá guardar (Ctrl+S) o implementar su modelo para que los cambios se apliquen en Analysis Services / Power BI.
 
-## Perspective Editor toolbar
+## Barra de herramientas del Editor de perspectiva
 
-While the Perspective Editor is active, the accompanying toolbar provides the following options:
+Mientras el Editor de perspectiva está activo, la barra de herramientas que lo acompaña ofrece las siguientes opciones:
 
-- ![Perspective Editor Add Perspective](~/content/assets/images/perspective-editor-add-perspective.png) **New perspective**: This button adds a new perspective to the model. The perspective will be displayed in the Perspective Editor.
-- ![Perspective Editor Hide Members](~/content/assets/images/perspective-editor-hide-members.png) **Show/Hide hidden options**: Enable this option if you want to see all objects in the Perspective Editor, including hidden objects.
-- ![Perspective Editor Folder](~/content/assets/images/perspective-editor-folder.png) **Show/Hide display folders**: Enable this toggle button if you want the Perspective Editor to group table objects (measures, hierarchies, columns) by Display Folders.
+- ![Perspective Editor Add Perspective](~/content/assets/images/perspective-editor-add-perspective.png) **Nueva perspectiva**: Este botón agrega una nueva perspectiva al modelo. La perspectiva se mostrará en el Editor de perspectiva.
+- ![Perspective Editor Hide Members](~/content/assets/images/perspective-editor-hide-members.png) **Mostrar/ocultar opciones ocultas**: Active esta opción si desea ver todos los objetos en el Editor de perspectiva, incluidos los objetos ocultos.
+- ![Perspective Editor Folder](~/content/assets/images/perspective-editor-folder.png) **Mostrar/ocultar carpetas de visualización**: Active este botón de conmutación si desea que el Editor de perspectiva agrupe los objetos de las tablas (medidas, jerarquías, columnas) por carpetas de visualización.
 
-## Working with many perspectives
+## Trabajar con varias perspectivas
 
-If you're working on a model with many perspectives, it may be impractical to display all of them at once. You can rearrange the display order of perspectives in the Perspective Editor, by dragging the column headers around, making it easier to compare perspectives side-by-side. Moreover, you can add/remove perspectives from the editor at any time, through the right-click context menu:
+Si trabajas en un modelo con muchas perspectivas, puede que no sea práctico mostrarlas todas a la vez. Puedes reorganizar el orden de visualización de las perspectivas en el Editor de perspectivas arrastrando los encabezados de las columnas, lo que facilita comparar perspectivas una junto a otra. Además, puedes añadir o quitar perspectivas del editor en cualquier momento desde el menú contextual con clic derecho:
 
-![Perspective Editor Columns](~/content/assets/images/perspective-editor-columns.png)
+![Columnas del Editor de perspectivas](~/content/assets/images/perspective-editor-columns.png)
