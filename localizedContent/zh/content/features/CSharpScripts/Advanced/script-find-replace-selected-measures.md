@@ -1,6 +1,6 @@
 ---
 uid: script-find-replace
-title: Find/Replace Measure DAX
+title: 查找/替换度量值 DAX
 author: Kurt Buhler
 updated: 2023-03-01
 applies_to:
@@ -11,14 +11,14 @@ applies_to:
       full: true
 ---
 
-# Find & Replace Substring in Measures
+# 在度量值中查找并替换子字符串
 
-## Script Purpose
+## 脚本用途
 
-Will find & replace a substring in the model's measures DAX expression. I.e. if you want to replace `'Customers'[Key Account]` with `'Products'[Type]` in many measures.
-An input box lets the user enter the text to find and a subsequent input lets the user define the replacement text.
+在模型的度量值 DAX 表达式中查找并替换子字符串。 即 例如，你想在多个度量值中将 `'Customers'[Key Account]` 替换为 `'Products'[Type]`。
+一个输入框让用户输入要查找的文本，另一个输入框让用户定义替换文本。
 
-## Script
+## 脚本
 
 ```csharp
 #r "System.Drawing"
@@ -27,67 +27,67 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-// Hide the 'Running Macro' spinbox
+// 隐藏“正在运行宏”微调框
 ScriptHelper.WaitFormVisible = false;
 
-// Replace Selected.Measures with Model.AllMeasures to scan all measures
+// 将 Selected.Measures 替换为 Model.AllMeasures 以扫描所有度量值
 var _measures = Model.AllMeasures;
-    // Optional: Replace _m.Expression with _m.Name to find & replace in names.
+    // 可选：将 _m.Expression 替换为 _m.Name，以在名称中查找/替换。
 
-// Initialize _find and _replace string variables
-string _find = "Find";
-string _replace = "Replace";
+// 初始化 _find 和 _replace 字符串变量
+string _find = "查找";
+string _replace = "替换";
 
-// WinForms prompt to get Find & Replace input
+// WinForms 提示以获取查找/替换输入
 using (Form prompt = new Form())
 {
     Font formFont = new Font("Segoe UI", 11); 
 
-    // Prompt config
+    // 提示框配置
     prompt.AutoSize = true;
     prompt.MinimumSize = new Size(350, 120);
-    prompt.Text = "Find and Replace Dialog";
+    prompt.Text = "查找/替换对话框";
     prompt.StartPosition = FormStartPosition.CenterScreen;
 
-    // Set the AutoScaleMode property to Dpi
+    // 将 AutoScaleMode 属性设置为 Dpi
     prompt.AutoScaleMode = AutoScaleMode.Dpi;
 
-    // Find: label
-    Label findLabel = new Label() { Text = "Find:" };
+    // 查找：标签
+    Label findLabel = new Label() { Text = "查找:" };
     findLabel.Location = new Point(20, 20);
     findLabel.Width = 80;
     findLabel.Font = formFont;
 
-    // Textbox for inputing the substring text
+    // 用于输入子字符串文本的文本框
     TextBox findBox = new TextBox();
     findBox.Width = 200;
     findBox.Location = new Point(findLabel.Location.X + findLabel.Width + 20, findLabel.Location.Y - 4);
-    findBox.SelectedText = "Find this Text";
+    findBox.SelectedText = "查找此文本";
     findBox.Font = formFont;
 
-    // Replace: label
-    Label replaceLabel = new Label() { Left = 20, Top = 60, Text = "Replace:" };
+    // 替换：标签
+    Label replaceLabel = new Label() { Left = 20, Top = 60, Text = "替换:" };
     replaceLabel.Width = 80;
     replaceLabel.Font = formFont;
 
-    // Textbox for inputting the substring text
+    // 用于输入子字符串文本的文本框
     TextBox replaceBox = new TextBox() { Left = replaceLabel.Right + 20, Top = replaceLabel.Location.Y - 4, Width = findBox.Width };
-    replaceBox.SelectedText = "Replace with this Text";
+    replaceBox.SelectedText = "替换为此文本";
     replaceBox.Font = formFont;
 
-    // OK Button
-    Button okButton = new Button() { Text = "OK", Left = 20, Width = 75, Top = replaceBox.Location.Y + replaceBox.Height + 20 };
+    // 确定按钮
+    Button okButton = new Button() { Text = "确定", Left = 20, Width = 75, Top = replaceBox.Location.Y + replaceBox.Height + 20 };
     okButton.MinimumSize = new Size(75, 25);
     okButton.AutoSize = true;
     okButton.Font = formFont;
 
-    // Cancel Button
-    Button cancelButton = new Button() { Text = "Cancel", Left = okButton.Location.X + okButton.Width + 10, Top = okButton.Location.Y };
+    // 取消按钮
+    Button cancelButton = new Button() { Text = "取消", Left = okButton.Location.X + okButton.Width + 10, Top = okButton.Location.Y };
     cancelButton.MinimumSize = new Size(75, 25);
     cancelButton.AutoSize = true;
     cancelButton.Font = formFont;
 
-    // Button actions
+    // 按钮操作
     okButton.Click += (sender, e) => { _find = findBox.Text; _replace = replaceBox.Text; prompt.DialogResult = DialogResult.OK; };
     cancelButton.Click += (sender, e) => { prompt.DialogResult = DialogResult.Cancel; };
 
@@ -101,7 +101,7 @@ using (Form prompt = new Form())
     prompt.Controls.Add(okButton);
     prompt.Controls.Add(cancelButton);
 
-    // The user clicked OK, so perform the find-and-replace logic
+    // 用户点击“确定”后，执行查找/替换逻辑
     if (prompt.ShowDialog() == DialogResult.OK)
         {
             
@@ -114,56 +114,56 @@ using (Form prompt = new Form())
                         {
                             try
                                 {
-                                    // Count number of occurrences of _find substring in the string
+                                    // 统计字符串中 _find 子字符串出现的次数
                                     string _pattern = Regex.Escape(_find);
                                     _occurrences = Regex.Matches(_m.Expression, _pattern).Count;
                                 }
                             catch
                                 {
-                                    // If it's not found there are 0 occurrences
+                                    // 如果未找到，则出现次数为 0
                                     _occurrences = 0;
                                 }
             
-                            // Perform the Find/Replace
+                            // 执行查找/替换
                             _m.Expression = _m.Expression.Replace(_find, _replace);
                             _ReplacedList.Add(_m.DaxObjectName);
                         }
                 }
     
-            // Create a list of all the measures replaced
+            // 创建一个包含所有已替换度量值的列表
             string _Replaced = _ReplacedList.Count > 0
-                ? "\n\nMeasures with Replacements:\n • " + string.Join("\n • ", _ReplacedList)
+                ? "\\n\\n已替换的度量值:\\n • " + string.Join("\\n • ", _ReplacedList)
                 : "";
     
-            // Return a success Info box pop-up
+            // 返回成功信息弹窗
             Info(
-                "Replaced " + 
+                "已将 " + 
                 _occurrences + 
-                " occurrences of '" + 
+                " 处出现的 '" + 
                 _find + 
-                "' with '" + 
+                "' 替换为 '" + 
                 _replace + 
                 "'" + 
                 _Replaced);
         }
     else
         {
-            Error("Find/Replace cancelled!");
+            Error("查找/替换已取消！");
         }
 }
 
 ```
 
-### Explanation
+### 说明
 
-This snippet will create a pop-up dialogue with WinForms that will let you input a substring to search the selected measures and replace with a different substring. A success box dialogue will inform you that the find/replace was successful.
+此代码片段会使用 WinForms 创建一个弹出对话框，让你输入要在所选度量值中搜索的子字符串，并将其替换为另一个子字符串。 成功提示框会告知你查找/替换已成功完成。
 
-### Example Output
+### 示例输出
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-dialogue.png" alt="An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-dialogue.png" alt="An example of the pop-up Find/Replace dialog that allows the user to enter the sub-strings to be searched / replaced." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> 弹出的查找/替换对话框示例，允许用户输入要搜索/替换的子字符串。</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-success.png" alt="An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-find-replace-success.png" alt="An example of the info box dialog which informs the user that the Find/Replace was successful, and how many / which measures were affected by the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2：</strong> 信息提示框示例：用于告知用户查找/替换已成功，并显示脚本影响了多少/哪些度量值。</figcaption>
 </figure>
