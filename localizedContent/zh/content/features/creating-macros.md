@@ -1,6 +1,6 @@
 ---
-uid: macros
-title: Creating macros
+uid: 宏
+title: 创建宏
 author: Morten Lønskov
 updated: 2023-12-07
 applies_to:
@@ -9,65 +9,65 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# (Tutorial) Creating macros
+# （教程）创建宏
 
-Macros are C# scripts that have been saved in Tabular Editor to be easily reused across semantic models.
-Saving a script as a  Macro will allow that macro to be used when right clicking on the objects in the TOM Explorer making it simple to apply the script to your model.
+宏是在 Tabular Editor 中保存的 C# Script，可在不同语义模型间轻松复用。
+将脚本保存为宏后，你就可以在 TOM Explorer 中右键单击对象时使用该宏，从而轻松将脚本应用到你的模型中。
 
-## Creating a Macro
+## 创建宏
 
-The first step in creating a Macro is to create and test a C# script.
+创建宏的第一步是编写并测试一个 C# Script。
 
 > [!TIP]
-> ne easy way to get started with C# scripting is to use the built in record function that lets you record the actions you take in the TOM Explorer.
-> his way you can see how to interact with the different model objects and create reusable scripts.
-> nother way is to reuse existing scripts such as those in our [script library](xref:csharp-script-library).
-> n this tutorial we use the script [Format Numeric Measures](xref:script-format-numeric-measures) to showcase the Macro functionality.
+> 开始使用 C# 脚本编写的一个简单方法是使用内置的录制功能，它可以录制你在 TOM Explorer 中执行的操作。
+> 通过这种方式，你可以了解如何与不同的模型对象交互，并创建可复用的脚本。
+> 另一种方法是复用现有脚本，例如我们[脚本库](xref:csharp-script-library)中的脚本。
+> 在本教程中，我们使用脚本 [Format Numeric Measures](xref:script-format-numeric-measures) 来演示宏功能。
 
-Once the script works according requirements the script can be saved using the toolbar button "Save as Macro" which will open the "Save Macro" window.
+当脚本按要求运行后，可以使用工具栏按钮“保存为宏”保存脚本，这会打开“保存宏”窗口。
 
-![Macro Create infobox](~/content/assets/images/features/macros/macro_tutorial_create_infobox.png)
+![宏创建信息框](~/content/assets/images/features/macros/macro_tutorial_create_infobox.png)
 
-The "Save Macro" window allows three options:
+“保存宏”窗口提供三个选项：
 
-1. Macro Name: Give the Macro a name and use backslash "\" to create folder path for the macro (See below)
-2. Provide a tooltip for the Macro to remember what it does in detail
-3. Select a context where the Macro should be available.
+1. 宏名称：为宏命名，并使用反斜杠 "\" 为宏创建文件夹路径（见下文）
+2. 为宏添加工具提示，方便记住其具体用途
+3. 选择宏应可用的上下文。
 
-![Macro Save infobox](~/content/assets/images/features/macros/macro_tutorial_save_window.png)
+![宏保存提示框](~/content/assets/images/features/macros/macro_tutorial_save_window.png)
 
-In the above example the Macro will be saved in a folder called Formatting\Beginner and the script is called "Format Numeric Measures". It will be saved in the context of measures.
+在上面的示例中，宏将保存在名为 Formatting\Beginner 的文件夹中，脚本名为 "Format Numeric Measures"。 它将保存在“度量值”上下文中。
 
-### Macro Context
+### 宏上下文
 
-Macros are saved in a "valid context" that determines which objects in the model the script can be applied to.
+宏会保存在一个“有效上下文”中，该上下文决定脚本可以应用到模型中的哪些对象。
 
-This Macro can then be used when Right Clicking on a measure in the TOM Explorer. The context given while saving the Macro determines which objects will show the Macro when right clicking on that object.
+然后，您可以在 TOM Explorer 中右键单击度量值时使用此宏。 保存宏时指定的上下文决定了右键单击哪些对象时会显示该宏。
 
-Tabular Editor will suggest a context based on the script that is being saved.
+Tabular Editor 会根据正在保存的脚本建议一个上下文。
 
-![Macro Menu Shortcut](~/content/assets/images/features/macros/macro_tutorial_menu_shortcut.png)
+![宏菜单快捷方式](~/content/assets/images/features/macros/macro_tutorial_menu_shortcut.png)
 
-## Edit a Macro
+## 编辑宏
 
-A macro can be opened by double clicking it in the Macro pane and after editing the C# script saved using _Ctrl + S_ or the Edit Macro button.
+在“宏”窗格中双击该宏即可打开；编辑 C# Script 后，可使用 _Ctrl + S_ 或单击“编辑宏”按钮保存。
 
-![Macro Edit Infobox](~/content/assets/images/features/macros/macro_tutorial_edit_infobox.png)
+![宏编辑信息框](~/content/assets/images/features/macros/macro_tutorial_edit_infobox.png)
 
-## Macro JSON file
+## 宏 JSON 文件
 
-Macros are stored in the %LocalAppFolder%/TabularEditor3 as a JSON file called MacroActions.json. For more information on file types in Tabular Editor please see [Supported File Types](xref:supported-files#macroactionsjson)
+宏以名为 MacroActions.json 的 JSON 文件形式存储在 %LocalAppFolder%/TabularEditor3 中。 有关 Tabular Editor 中文件类型的更多信息，请参阅 [支持的文件类型](xref:supported-files#macroactionsjson)
 
-## Macro file example
+## 宏文件示例
 
-An example of a MacroActions.JSON file can be found here. It contains several of the C# scripts from our script library: [Download example MacroActions File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
+此处提供了一个 MacroActions.JSON 文件示例。 其中包含我们脚本库中的多个 C# Script：[下载示例 MacroActions 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
 
 
