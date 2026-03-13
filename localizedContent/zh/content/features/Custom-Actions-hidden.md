@@ -1,22 +1,22 @@
 ---
 uid: custom-actions
-title: Custom Actions
+title: 自定义操作
 ---
 
-# Custom Actions
+# 自定义操作
 
 > [!NOTE]
-> Please note that this functionality is unrelated to the Custom Actions feature available for Multidimensional models.
+> 请注意：此功能与多维模型中的“自定义操作”功能无关。
 
-Say you have created a useful script using the `Selected` object, and you want to be able to execute the script several times on different objects in the explorer tree. Instead of hitting the "Play" button whenever you want to execute the script, Tabular Editor lets you save it as a Custom Action:
+假设你使用 `Selected` 对象创建了一个很实用的脚本，并且希望能在资源管理器树中对不同对象重复执行该脚本。 无需每次执行脚本都点击“播放”按钮，Tabular Editor 允许你将其保存为自定义操作：
 
-![image](https://user-images.githubusercontent.com/8976200/33581673-0db35ed0-d952-11e7-90cd-e3164e198865.png)
+![图片](https://user-images.githubusercontent.com/8976200/33581673-0db35ed0-d952-11e7-90cd-e3164e198865.png)
 
-After saving the custom action, you will see that it is now available directly from the right-click context menu of the explorer tree, making it very easy to invoke the script on any objects selected in the tree. You can create as many custom actions as you want. Use backslashes (\\) in the names to create a submenu structure within the context menu.
+保存自定义操作后，你会发现它会直接出现在资源管理器树的右键上下文菜单中，这样就能非常方便地对树中选中的任意对象调用该脚本。 你可以按需创建任意数量的自定义操作。 在名称中使用反斜杠（\\）可在上下文菜单中创建子菜单结构。
 
-![Custom Actions show up directly in the context menu](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/InvokeCustomAction.png)
+![自定义操作会直接显示在上下文菜单中](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/InvokeCustomAction.png)
 
-Custom Actions are stored in the CustomActions.json file within %AppData%\Local\TabularEditor. In the above example, the contents of this file will look like this:
+自定义操作存储在 %AppData%\Local\TabularEditor 下的 CustomActions.json 文件中。 在上面的示例中，该文件的内容如下：
 
 ```json
 {
@@ -32,13 +32,13 @@ Custom Actions are stored in the CustomActions.json file within %AppData%\Local\
 }
 ```
 
-As you can see, `Name` and `Tooltip` gets their values from whatever was specified when the action was saved. `Execute` is the actual script to be executed when the action is invoked. Note that any syntax errors in the CustomActions.json file will cause Tabular Editor to skip loading all Custom Actions entirely, so make sure you can successfully execute a script inside the Advanced Scripting editor, before saving it as a Custom Action.
+如你所见，`Name` 和 `Tooltip` 的值来自保存该操作时所填写的内容。 `Execute` 是在调用该操作时实际要执行的脚本。 请注意：CustomActions.json 文件中的任何语法错误都会导致 Tabular Editor 完全跳过加载所有自定义操作。因此，在将脚本保存为自定义操作之前，请先确保该脚本能在高级脚本编辑器中成功执行。
 
-The `ValidContexts` property holds a list of object types for which the Action will be available. When selecting objects in the tree, a selection containing any objects different from the types listed in the `ValidContexts` property will hide the action from the context menu.
+`ValidContexts` 属性包含一个对象类型列表，操作仅会对这些类型的对象可用。 在树中选择对象时，如果当前选择中包含任何不在 `ValidContexts` 属性列表中的对象类型，该操作将不会显示在上下文菜单中。
 
-## Controlling Action Availability
+## 控制操作可用性
 
-If you need even more control on when an action can be invoked from the context menu, you can set the `Enabled` property to a custom expression that must return a boolean value, indicating whether the action will be available for the given selection. By default, the `Enabled` property has the value "true", which means that the action will always be enabled within the valid context. Keep this in mind, when using the singular object references on the `Selected` object, such as `Selected.Measure` or `Selected.Table`, as these will throw an error if the current selection does not contain exactly one of that type of object. In such a case, it is recommended to use the `Enabled` property to check that one and only one object of the required type, has been selected:
+如果你需要更精细地控制操作何时可从上下文菜单调用，可以将 `Enabled` 属性设置为一个自定义表达式。该表达式必须返回布尔值，用于指示在当前选择下该操作是否可用。 默认情况下，`Enabled` 属性的值为 "true"，表示在有效上下文中该操作始终可用。 请记住，在 `Selected` 对象上使用单数对象引用时要特别注意，例如 `Selected.Measure` 或 `Selected.Table`，因为如果当前选择未恰好包含一个该类型的对象，就会抛出错误。 在这种情况下，建议使用 `Enabled` 属性检查当前是否恰好选中了一个所需类型的对象：
 
 ```json
 {
@@ -53,23 +53,23 @@ If you need even more control on when an action can be invoked from the context 
 }
 ```
 
-This will disable the context menu item, unless exactly one measure has been selected in the tree.
+这将禁用该上下文菜单项，除非在树状视图中恰好选中了一个度量值。
 
-## Reusing custom actions
+## 重用自定义操作
 
-Release 2.7 introduces a new script method `CustomAction(...)`, which may be called to invoke previously saved Custom Actions. You can use this method as a stand-alone method (similar to `Output(...)`), or you can use it as an extension method on any set of objects:
+2.7 版本引入了新的脚本方法 `CustomAction(...)`，可用于调用之前保存的自定义操作。 你可以将此方法作为独立方法使用（类似于 `Output(...)`），也可以将其作为扩展方法用于任意对象集合：
 
 ```csharp
-// Executes "My custom action" against the current selection:
+// 对当前选择执行“我的自定义操作”：
 CustomAction("My custom action");                
 
-// Executes "My custom action" against all tables in the model:
+// 对模型中的所有表执行“我的自定义操作”：
 CustomAction(Model.Tables, "My custom action");
 
-// Executes "My custom action" against every measure in the current selection whose name starts with "Sum":
+// 对当前选择中名称以“Sum”开头的每个度量值执行“我的自定义操作”：
 Selected.Measures.Where(m => m.Name.StartsWith("Sum")).CustomAction("My custom action");
 ```
 
-Note that you must specify the full name of the Custom Action, including any context menu folder names.
+请注意，您必须指定自定义操作的完整名称，包括任何上下文菜单文件夹名称。
 
-If no action with the given name is found, an error is raised when the script is executed.
+如果找不到指定名称的操作，脚本执行时将引发错误。
