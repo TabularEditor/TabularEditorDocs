@@ -1,68 +1,68 @@
-# Features
+# Funciones
 
-This section contains documentation about Tabular Editor features.
+Esta sección contiene documentación sobre las características de Tabular Editor.
 
-## In this section
+## En esta sección
 
-### DAX Features
+### Características de DAX
 
-- @dax-debugger - Debug your DAX expressions step by step
-- @dax-editor - Advanced DAX editing capabilities
-- @dax-query - Query execution and testing
-- @dax-scripts - Batch DAX operations and automation
-- @code-actions - Automated code improvements and refactoring
-- @dax-package-manager - DAX package Manager
+- @dax-debugger - Depura tus expresiones DAX paso a paso
+- @dax-editor - Capacidades avanzadas de edición de DAX
+- @dax-query - Ejecución y pruebas de consultas
+- @dax-scripts - Operaciones de DAX por lotes y automatización
+- @code-actions - Mejoras automáticas del código y refactorización
+- @dax-package-manager - Administrador de paquetes de DAX
 
-### Scripting and Automation
+### Secuencias de comandos y automatización
 
-- @csharp-scripts - Custom scripting capabilities overview
-- C# Script Library
+- @csharp-scripts - Descripción general de las capacidades de creación de scripts personalizados
+- Biblioteca de C# Script
   - @csharp-script-library
   - @script-library-beginner
   - @script-library-advanced
-- @script-helper-methods - Built-in scripting utilities
-- @useful-script-snippets - Common script examples
-- @macros - Create Macros
+- @script-helper-methods - Utilidades de scripting incorporadas
+- @useful-script-snippets - Ejemplos de scripts habituales
+- @macros - Crear macros
 
-### Model Analysis and Quality
+### Análisis y calidad del modelo
 
-- @best-practice-analyzer - Model quality analysis and rules
-  - @using-bpa - How to use the Best Practice Analyzer
-  - @using-bpa-sample-rules-expressions - Example BPA rules
-- @dax-optimizer-integration - Performance optimization with DAX optimizer
+- @best-practice-analyzer - Análisis de calidad del modelo y reglas
+  - @using-bpa - Cómo usar el Best Practice Analyzer
+  - @using-bpa-sample-rules-expressions - Ejemplos de reglas de BPA
+- @dax-optimizer-integration - Optimización del rendimiento con el optimizador de DAX
 
-### Data Exploration and Connectivity
+### Exploración de datos y conectividad
 
-- @import-tables - Table import functionality
-- @pivot-grid - Data analysis and visualization
-- @semantic-model-types
-  - @direct-lake-sql-model
-  - @dq-over-as-limitations
+- @import-tables - Funcionalidad de importación de tablas
+- @pivot-grid - Análisis y visualización de datos
+- @tipos-de-modelo-semantico
+  - @modelo-sql-de-direct-lake
+  - @limitaciones-de-dq-over-as
 
-### Advanced Modelling Features
+### Funciones avanzadas de modelado
 
-- @metadata-translation-editor - Multi-language support
-- @perspective-editor - Managing model perspectives
+- @metadata-translation-editor - Compatibilidad multilingüe
+- @perspective-editor - Gestión de perspectivas del modelo
 
-### Model Organization
+### Organización del modelo
 
-- @hierarchical-display - Object tree navigation and organization
-- @table-groups - Organizing tables in logical groups
+- @hierarchical-display - Navegación y organización del árbol de objetos
+- @table-groups - Organización de las tablas en grupos lógicos
 
-### Model Deployment and Management
+### Despliegue y administración del modelo
 
-- @supported-files - File format support
-- [Model deployment](deployment.md) - Deployment options and strategies
-- @workspace-databases - Working with workspace databases
-- @workspace-mode - Collaborative development mode
-- @tmdl - Tabular Model Definition Language support
-- @save-to-folder - Serialize models to folder structures
+- @supported-files - Compatibilidad con formatos de archivo
+- [Despliegue del modelo](deployment.md) - Opciones y estrategias de despliegue
+- @workspace-databases - Trabajar con bases de datos de Workspace
+- @workspace-mode - Modo de desarrollo colaborativo
+- @tmdl - Compatibilidad con Tabular Model Definition Language
+- @save-to-folder - Serializar modelos en estructuras de carpetas
 
-### Command Line and Integration
+### Línea de comandos e integración
 
-- @command-line-options - CLI usage and automation
+- @command-line-options - Uso de la CLI y automatización
 
-### Semantic Bridge for cross-platform translations
+### Semantic Bridge para la traducción multiplataforma
 
-- @semantic-bridge - Semantic Bridge overview
-- @semantic-bridge-metric-view-validation - Validation rules system for Metric Views
+- @semantic-bridge - Descripción general de Semantic Bridge
+- @semantic-bridge-metric-view-validation - Sistema de reglas de validación para las Metric Views
