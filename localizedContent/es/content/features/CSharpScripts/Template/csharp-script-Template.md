@@ -9,28 +9,28 @@ applies_to:
     - version: 3.x
 ---
 
-# Title
+# Título
 
-## Script Purpose
+## Propósito del script
 
 <br></br>
 
 > [!NOTE]
-> This script does not work when connected to a Power BI Desktop model, due to the limitations of Power BI Desktop External tools: [External Tool Limitations](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). You can still experiment with the script by enabling unsupported modeling operations under "File > Preferences" (TE2) or "Tools > Preferences" (TE3)
+> Este script no funciona cuando se conecta a un modelo de Power BI Desktop, debido a las limitaciones de las herramientas externas de Power BI Desktop: [Limitaciones de herramientas externas](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). Aun así, puede experimentar con el script habilitando las operaciones de modelado no compatibles en "Archivo > Preferencias" (TE2) o "Herramientas > Preferencias" (TE3)
 
 <br></br>
 
 ## Script
 
-### Script Title
+### Título del script
 
 ```csharp
 // Scripts Goes here
 ```
 
-### Explanation
+### Explicación
 
-## Example Output
+## Salida de ejemplo
 
 <br>
 <img src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Image description" id="count-things-output">
