@@ -1,6 +1,6 @@
 ---
 uid: dax-editor
-title: DAX Editor
+title: DAX编辑器
 author: Daniel Otykier
 updated: 2023-02-03
 applies_to:
@@ -9,74 +9,74 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# DAX Editor
+# DAX编辑器
 
-The **DAX Editor** is the centerpiece of Tabular Editor 3.
+**DAX编辑器**是 Tabular Editor 3 的核心功能。
 
-It comes in three different _flavours_:
+它提供三种不同的_模式_：
 
-- **Expression Editor** Used for making quick changes to singular DAX expressions on objects in the TOM Explorer.
-- **DAX Query** (Connected feature) Used for writing DAX queries in order to retrieve data from the connected instance of Analysis Services / Power BI.
-- **DAX Script** Used for viewing and editing DAX expressions and basic properties across multiple objects in a single document.
+- **表达式编辑器** 用于在 TOM Explorer 中对对象上的单个 DAX 表达式进行快速修改。
+- **DAX 查询**（连接功能）用于编写 DAX 查询，从已连接的 Analysis Services / Power BI 实例中获取数据。
+- **DAX脚本**：用于在单个文档中查看并编辑多个对象的 DAX 表达式及其基本属性。
 
-All three flavours support the same operations in terms of [keyboard shortcuts](xref:shortcuts3#dax-code), syntax highlighting, code assist, etc.
+这三种模式在[键盘快捷键](xref:shortcuts3#dax-code)、语法高亮、Code Assist 等方面支持的操作完全一致。
 
-## Code Assist features
+## Code Assist 功能
 
-The main enabler of productivity in Tabular Editor 3's DAX Editor, is its **Parameter Info** and **Auto-Complete** features. Collectively, these are known as **Code Assist** features (other vendors use the term "IntelliSense").
+Tabular Editor 3 的 DAX编辑器提升效率的关键在于其**参数信息**和**自动补全**功能。 这些功能统称为 **Code Assist**（其他厂商通常称之为“IntelliSense”）。
 
-**Parameter Info** provides details about the DAX function and its parameter at the position of the cursor. The information is displayed in a tooltip above the cursor. Hit [Esc] to close the tooltip and [Ctrl+Shift+Space] to display it.
+**参数信息**会在光标所在位置显示该 DAX 函数及其参数的详细信息。 这些信息会以工具提示的形式显示在光标上方。 按 [Esc] 关闭工具提示，按 [Ctrl+Shift+Space] 显示工具提示。
 
-**Auto-Complete** provides context-sensitive suggestions as you type, in a dropdown box. You can use the keyboard to navigate the items in the dropdown and hitting [Enter] or [Tab] will insert the selected item into your code. You can hit [Esc] to close the dropdown and [Ctrl+Space] to open it.
+**自动补全**会在你输入时在下拉框中提供与上下文相关的建议。 你可以使用键盘在下拉列表中选择条目，按下 [Enter] 或 [Tab] 即可将所选条目插入代码中。 按 [Esc] 关闭下拉框，按 [Ctrl+Space] 打开下拉框。
 
-These features can also be invoked through the context menu of the editor.
+也可以通过编辑器的上下文菜单调用这些功能。
 
-DAX calltips update as you cycle syntax alternatives using the Up/Down arrows.
+使用上/下箭头在不同语法选项之间切换时，DAX 调用提示会随之更新。
 
 ![Dax Code Assist](~/content/assets/images/dax-code-assist.png)
 
-Most aspects of code assist can be configured under [**Tools > Preferences > Text Editors > DAX Editor > Code Assist**](xref:preferences#dax-editor--code-assist).
+Code Assist 的大多数选项可在 [**工具 > 偏好 > 文本编辑器 > DAX编辑器 > Code Assist**](xref:preferences#dax-editor--code-assist) 中进行配置。
 
-## Peek Definition
+## 窥视定义
 
-While the cursor is over an object reference such as a variable or a measure reference, hit [Alt+F12] to display an inline editor with the definition of that object, below the cursor. This is useful when you want to see the DAX code of a referenced object without leaving the current position in the document.
+当光标停留在变量或度量值引用等对象引用上时，按下 [Alt+F12]，即可在光标下方显示包含该对象定义的内联编辑器。 当你想查看被引用对象的 DAX 代码，同时又不想离开文档中的当前位置时，这会很有用。
 
-![Peek Definition](~/content/assets/images/peek-definition.png)
+![窥视定义](~/content/assets/images/peek-definition.png)
 
-Use the Esc key to close the Peek Definition panel again.
+按 Esc 键就能关闭“窥视定义”面板。
 
-## Go To Definition
+## 转到定义
 
-Instead of peeking, we can also jump straight to the location where the referenced object is defined. To do this, hit [F12]. If the referenced object is not defined within the current document, this operation will jump over to that object in the TOM Explorer. If needed, you can navigate back using [Alt+Left Arrow].
+除了用“窥视定义”，你也可以直接跳转到被引用对象的定义位置。 要这么做，按下 [F12]。 如果被引用对象不在当前文档中定义，此操作会跳转到 TOM Explorer 中的该对象。 如有需要，你可以按 [Alt+左箭头] 返回。
 
-# Define Measure
+# 定义度量值
 
-For DAX scripts and DAX queries, it is sometimes useful to include the definition of a measure that is referenced elsewhere in the code. The **Define Measure** feature lets you do that when the cursor is over a measure reference. You may also choose the **Define Measure with Dependencies** option if you want to include all downstream measure references as well.
+对于 DAX脚本和 DAX 查询，有时需要将代码中其他位置引用的度量值定义一并包含进来。 当光标位于度量值引用上时，**定义度量值** 功能可让你做到这一点。 如果你还想把所有下游的度量值引用也一并包含进来，也可以选择 **定义度量值及依赖项** 选项。
 
-![Define Measure With Deps](~/content/assets/images/define-measure-with-deps.png)
+![定义度量值及依赖项](~/content/assets/images/define-measure-with-deps.png)
 
-# Inline Measure
+# 内联度量值
 
-If you want to bring the definition of a measure into the current document, the **Inline Measure** feature lets you do just that. When a row context is surrounding the original measure reference, Tabular Editor automatically surrounds the measure expression with [`CALCULATE`](https://dax.guide/calculate) (which is implicit in measure references).
+如果你想将某个度量值的定义带入当前文档，**内联度量值** 功能正好可以做到这一点。 当原始度量值引用处于行语境中时，Tabular Editor 会自动在度量值表达式外包裹 [`CALCULATE`](https://dax.guide/calculate)（度量值引用本就隐式包含该函数）。
 
-# Format DAX
+# 格式化 DAX
 
-The DAX Editor in Tabular Editor 3 automatically formats your code as you type, i.e. fixing casing of functions and object references, adding proper indentation and spaces between parentheses, etc. All of this can be configured under [**Tools > Preferences > Text Editors > DAX Editor > Auto Formatting**](xref:preferences#dax-editor--auto-formatting).
+Tabular Editor 3 中的 DAX编辑器会在你输入时自动格式化代码，比如修正函数和对象引用的大小写、添加合适的缩进，以及在括号内外加上适当的空格等。 这些都可以在 [**工具 > 偏好 > 文本编辑器 > DAX编辑器 > 自动格式化**](xref:preferences#dax-editor--auto-formatting) 中进行配置。
 
-However, sometimes it is necessary to format the entire document. This can be done by hitting [F6] or [Shift+F6] if you prefer more frequent line breaks. For DAX Queries, you may also use [Alt+F6] to reformat the code to always add commas at the front of a line, which is useful when debugging.
+不过，有时也需要对整个文档进行格式化。 按 [F6] 即可；如果你希望换行更频繁，可按 [Shift+F6]。 对于 DAX 查询，你还可以使用 [Alt+F6] 重新格式化代码，让逗号始终放在行首，这在调试时很有用。
 
-# Refactoring
+# 重构
 
-If you want to change the name of a variable or extension column, you can use the **Refactor** option (Ctrl+R) while the cursor is located on the variable or extension column reference. This will select all instances of that object, allowing you to rename it everywhere at once.
+如果你想更改变量或扩展列的名称，可以在光标位于该变量或扩展列引用处时，使用 **重构** 选项 (Ctrl+R)。 这会选中该对象的所有引用，让你一次性在所有位置完成重命名。
 
-# Configurable keyboard shortcuts
+# 可配置的键盘快捷键
 
-The DAX Editor and code editors in general are highly configurable and support a lot of additional commands for quickly and productively editing code. You can view all of these commands, as well as modify and assign keyboard shortcuts under **Tools > Preferences > Tabular Editor > Keyboard**.
+DAX编辑器以及一般的代码编辑器都具有很强的可配置性，并支持许多额外命令，帮助你快速、高效地编辑代码。 你可以在 **工具 > 偏好 > Tabular Editor > 键盘** 中查看所有这些命令，并修改和分配键盘快捷键。
