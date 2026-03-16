@@ -1,20 +1,20 @@
 ---
 uid: find-replace-reference
-title: Find/Replace
+title: 查找/替换
 author: Morten Lønskov
 updated: 2023-03-22
 applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Works differently than showed in this article"
+      note: "其工作方式与本文所示不同"
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
