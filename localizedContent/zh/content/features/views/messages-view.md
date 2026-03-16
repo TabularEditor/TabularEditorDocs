@@ -1,6 +1,6 @@
 ---
 uid: messages-view
-title: Messages view
+title: 信息视图
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -9,41 +9,41 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Messages view
+# 信息视图
 
-The Messages view in Tabular Editor 3 is a tool window that displays various types of messages related to the current dataset.
+Tabular Editor 3 的信息视图是一个工具窗口，用于显示与当前数据集相关的各类信息。
 
 > [!TIP]
-> You can double-click on a message to jump to the source of the error in the model tree or script editor.
+> 你可以双击一条信息，直接跳转到模型树或脚本编辑器中对应的错误源。
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/messages-view.png" alt="Message View" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Messages window in Tabular Editor. Provides an overview of all warnings and errors in your dataset </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/messages-view.png" alt="Message View" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> Tabular Editor 中的信息窗口。 提供对您数据集中所有警告和错误的概览 </figcaption>
 </figure>
 
-The Messages view will tell you the Source and the object from which the message is being generated.
+信息视图会告诉你消息的来源以及生成该消息的对象。
 
-There are two types of messages displayed Errors and Warnings
+显示的信息分为两类：“错误”和“警告”
 
-- Errors: This tab shows any errors that prevent your model from being deployed or saved. For example, if you have an invalid expression in a calculation item or a circular dependency in a relationship.
-- Warnings: This tab shows any warnings that does not concur with standards but does not prevent your model from being usable. This is for example having fully qualified measure references.
+- 错误：这个选项卡会显示任何会导致你的模型无法部署或保存的错误。 例如，计算项中存在无效表达式，或关系中存在循环依赖。
+- 警告：此选项卡显示不符合规范、但不会影响模型正常使用的警告。 例如使用完全限定的度量值引用。
 -
 
-## Copying Messages
+## 复制信息
 
-The message view allows for copying out the error message using Ctrl+C.
+在信息视图中，你可以用 Ctrl+C 复制错误信息。
 
-From Tabular Editor 3.23.0 Ctrl+C copies the selected cell by default. Use Ctrl+Shift+C (or Copy Row in right-click menu) for row-level copy.
+从 Tabular Editor 3.23.0 起，Ctrl+C 默认复制所选单元格。 要按行复制，用 Ctrl+Shift+C（或在右键菜单中选择“复制行”）。
 
 > [!TIP]
-> Right-click a cell to choose Copy Cell / Copy Row.
+> 右键点击单元格以选择“复制单元格”/“复制行”。
 
-![Message View Copy](~/content/assets/images/messages-view-copy.png)
+![信息视图副本](~/content/assets/images/messages-view-copy.png)
 
