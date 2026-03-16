@@ -1,61 +1,61 @@
 ---
 uid: find-replace
-title: Find/Replace
+title: 查找/替换
 author: Morten Lønskov
 updated: 2023-03-22
 applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Works differently than shown in this article"
+      note: "其工作方式与本文所示不同"
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Find
+# 查找
 
-In Tabular Editor, you can use the advanced Find functionality to search for specific expressions throughout your open documents and dataset. The Find dialog box is accessible through the keyboard shortcut Ctrl+F.
-
-<figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog.png" alt="Find Dialog Box" style="width: 300px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Find window in Tabular Editor. Ctrl+F opens the dialog box </figcaption>
-</figure>
-
-To perform a search, define the expression you want to search for, and use the Options to determine if certain criteria should be met. For example, you can choose whether the case should match between your find expression and the found text or use regular expressions to search with.
-
-## Look in
-
-Additionally, you can specify where to Look in, different areas of your Tabular Editor instance, to limit or expand the scope of your search. The Look in options include:
+在 Tabular Editor 中，你可以使用高级“查找”功能，在打开的文档和数据集中查找特定表达式。 可以通过键盘快捷键 Ctrl+F 打开“查找”对话框。
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog-look-in.png" alt="Find and Replace Dialog Box" style="width: 200px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Find/Replace window in Tabular Editor. Ctrl+F opens the dialog box </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog.png" alt="Find Dialog Box" style="width: 300px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>Tabular Editor 中的“查找”窗口。 Ctrl+F 可打开该对话框 </figcaption>
 </figure>
 
-- _Selection_: Search within the selection in the current open document (Cannot search through your dataset)
-- _Current document_: Search through the entire document that you currently have open (Cannot search through your dataset)
-- _All open documents_: Searches all open documents (Cannot search through your dataset)
-- _Entire model_: Searches the TOM Explorer for matches in your dataset.
-  - Allows for searching within the individual parts of your dataset such as Names, Expressions, Annotations etc.
-  - You can also search using Dynamic LINQ in this mode to, for example, find all columns that do not have summarize set to none.
+要执行搜索，请先定义要查找的表达式，并使用“选项”来决定是否需要满足特定条件。 例如，你可以选择查找表达式与匹配文本是否区分大小写，或使用正则表达式进行搜索。
+
+## 查找范围
+
+此外，你还可以在“查找范围”中指定要查看的位置，即 Tabular Editor 实例的不同区域，以限制或扩展搜索范围。 “查找范围”选项包括：
+
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog-look-in.png" alt="Find and Replace Dialog Box" style="width: 200px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2：</strong>Tabular Editor 中的“查找/替换”窗口。 Ctrl+F 可打开该对话框 </figcaption>
+</figure>
+
+- _选区_: 在当前打开文档的选定内容中搜索（无法搜索数据集）
+- _当前文档_: 在你当前打开的整个文档中搜索（无法搜索数据集）
+- _所有打开的文档_: 在所有打开的文档中搜索（无法搜索数据集）
+- _整个模型_：在 TOM Explorer 中查找 Dataset 中的匹配项。
+  - 可在 Dataset 的各个部分中搜索，例如名称、表达式、注释等。
+  - 在此模式下，你还可以使用 Dynamic LINQ 进行搜索，例如查找所有 summarize 未设置为 none 的列。
 
 > [!TIP]
-> You can also use the search field in the TOM Explorer to search your dataset instead of the Find dialog
+> 你也可以直接使用 TOM Explorer 中的搜索框来搜索你的 Dataset，而不必使用“查找”对话框
 
-## Replace
+## 替换
 
-The Replace dialog allows you in the same way as Find to search for an expression and then replace it with a different expression.
+“替换”对话框与“查找”类似：先搜索一个表达式，然后将其替换为另一个表达式。
 
-The Replace dialog does not require anything in the _Replace with_ field, but leaving it empty will replace your searched for expression with an empty expression.
-You have the same options as in the Find dialog to determine search criteria, but the _Look in_ functionality is only for documents, i.e. you cannot search and replace within your dataset objects.
+“替换”对话框不要求在 _替换为_ 字段中填写任何内容，但如果留空，会将你搜索的表达式替换为空表达式。
+你可以使用与“查找”对话框相同的选项来确定搜索条件，但 _查找范围_ 功能仅适用于文档；也就是说，你无法在 Dataset 对象中进行搜索和替换。
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog.png" alt="Replace Dialog Box" style="width: 300px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> Replace window in Tabular Editor. Ctrl+F opens the dialog box </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog.png" alt="Replace Dialog Box" style="width: 300px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 3：</strong> Tabular Editor 中的“替换”窗口。 按 Ctrl+F 可打开该对话框 </figcaption>
 </figure>
 
 > [!TIP]
-> If you are trying to rename variables in a DAX statement (Expression or Script), Ctrl+R will let you refactor a selected variable
+> 如果你想在 DAX 语句（表达式或脚本）中重命名变量，Ctrl+R 可对所选变量执行重构
