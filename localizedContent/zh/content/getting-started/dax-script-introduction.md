@@ -1,6 +1,6 @@
 ---
 uid: dax-script-introduction
-title: Using the DAX Scripting feature
+title: 使用 DAX脚本功能
 author: Daniel Otykier
 updated: 2021-10-08
 applies_to:
@@ -9,74 +9,74 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Using the DAX Scripting feature
+# 使用 DAX脚本功能
 
-In the [previous article](xref:creating-and-testing-dax), you learned how to add and edit calculated objects such as measures, calculated columns, etc. in your model.
+在[上一篇文章](xref:creating-and-testing-dax)中，你学习了如何在模型中添加和编辑计算对象，例如度量值、计算列等。
 
-As your model grows in complexity, you may reach a point in which it starts to become cumbersome to navigate the TOM Explorer or jump back and forth between measures, when authoring and maintaining business logic. It is not uncommon to have long chains of dependencies between measures, and so for that reason, it is sometimes useful to collect all the DAX code making up the business logic, in a single document.
+随着模型越来越复杂，在编写和维护业务逻辑时，你可能会发现，在 TOM Explorer 中导航或在各个度量值之间来回切换变得十分繁琐。 度量值之间出现很长的依赖链并不少见。因此，有时把构成业务逻辑的所有 DAX 代码集中到一个文档中会更方便。
 
-This is exactly the purpose of the new **DAX script** feature introduced in Tabular Editor 3.
+这正是 Tabular Editor 3 新增 **DAX脚本** 功能的目的。
 
-To use this feature, locate the objects for which you would like to generate a single document, in the TOM Explorer. Multi-select the objects, then right-click and choose **Script DAX**. A new document is created, containing the DAX expressions and basic properties of all the selected objects. You can also generate a DAX script for all objects within a table or all objects within the model, by choosing the table or model object respectively.
+要使用此功能，请在 TOM Explorer 中找到你希望生成单一文档的对象。 多选这些对象，然后右键选择 **Script DAX**。 会创建一个新文档，其中包含所有选定对象的 DAX 表达式和基本属性。 你也可以分别选择某个表对象或模型对象，从而为表内的所有对象或整个模型内的所有对象生成 DAX脚本。
 
-![Dax Script](~/content/assets/images/dax-script.png)
+![Dax 脚本](~/content/assets/images/dax-script.png)
 
-Editing objects through a DAX script is slightly different than editing through the **Expression Editor**. With the latter, changes are applied immediately when you navigate to a different object. In a DAX script, however, changes are not applied until you explicitly do so by using the **Script > Apply** (F5) option. If you are connected to an instance of Analysis Services, you can use the **Script > Apply & Sync** (SHIFT+F5) option to simultaneously apply the changes and save the updated model metadata to Analysis Services.
+通过 DAX脚本编辑对象，与通过 **表达式编辑器** 编辑略有不同。 使用后者时，当你切换到另一个对象时，更改会立即生效。 而在 DAX脚本中，只有在你明确使用 **Script > Apply** (F5) 选项后，改动才会生效。 如果你已连接到 Analysis Services 实例，则可以使用 **Script > Apply & Sync** (SHIFT+F5) 选项，在应用更改的同时，将更新后的模型元数据保存到 Analysis Services。
 
-## Working with DAX script files
+## 使用 DAX脚本文件
 
-DAX scripts can be saved as text files, using the `.te3daxs` file extension. To save a DAX script as a file, simply use the **File > Save** (Ctrl+S) option. To open a DAX script from a text file, use the **File > Open > File...** (Ctrl+O) option.
+DAX脚本可以保存为文本文件，文件扩展名为 `.te3daxs`。 要将 DAX脚本保存为文件，只需选择 **文件 > 保存** (Ctrl+S)。 要从文本文件打开 DAX脚本，只需选择 **文件 > 打开 > 文件...** (Ctrl+O)。
 
 > [!NOTE]
-> DAX scripts are not model specific, but since DAX expressions may point to measures, columns and tables defined in the model, there are no guarantees that any DAX script can be applied to any model. DAX scripts are mostly useful for working with several DAX objects within a single document, in the context of a specific data model.
+> DAX脚本并不针对特定模型；但由于 DAX 表达式可能引用模型中定义的度量值、列和表，因此无法保证任何 DAX脚本都能应用于任意模型。 DAX脚本主要用于在特定 Data model 的上下文中，在单个文档中处理多个 DAX 对象。
 
-## DAX script editor
+## DAX脚本编辑器
 
-The DAX script editor has all the capabilities of the DAX editor used elsewhere in Tabular Editor 3. Specifically, auto-complete, auto-formatting, calltips, etc.
+DAX脚本编辑器具备 Tabular Editor 3 中其他位置使用的 DAX 编辑器的全部功能。 具体包括：自动补全、自动格式化、参数提示等。
 
-In addition, to easily manage large DAX scripts, two dropdowns are displayed at the top of the DAX script view. The dropdown on the left allows you to jump between objects defined in the script, whereas the dropdown on the right allows you to jump between properties on the current object.
+此外，为了更轻松地管理较大的 DAX脚本，DAX脚本视图顶部会显示两个下拉列表。 左侧下拉列表可让你在脚本中定义的对象之间快速跳转；右侧下拉列表可让你在当前对象的各个属性之间快速跳转。
 
-![Dax Script Navigation](~/content/assets/images/dax-script-navigation.png)
+![Dax脚本导航](~/content/assets/images/dax-script-navigation.png)
 
-## Define measures
+## 定义度量值
 
-If you want to include the definition of a measure that is referenced in the script, but not already defined in the script, you can do so by right-clicking on a measure reference, and choose the "Define Measure" or "Define Measure with dependencies" option.
+如果你想在脚本中包含某个被引用、但尚未在脚本中定义的度量值定义，可以在度量值引用上右键，然后选择“定义度量值”或“定义度量值及其依赖项”选项。
 
-![Define Measure With Deps](~/content/assets/images/define-measure-with-deps.png)
+![定义度量值及其依赖项](~/content/assets/images/define-measure-with-deps.png)
 
-## Shortcuts
+## 快捷键
 
-To apply the script to the model, use the following shortcuts:
+要将脚本应用到模型，可以使用以下快捷键：
 
-- **F5**: Apply the entire script to the local model metadata
-- **Shift+F5**: Apply the entire script to the local model metadata, then save the model metadata back to the source
-- **F8**: Apply the currently selected part of the script to the local model metadata
-- **Shift+F8**: Apply the currently selected part of the script to the local model metadata, then save the model metadata back to the source
+- **F5**：将整个脚本应用到本地模型元数据
+- **Shift+F5**：将整个脚本应用到本地模型元数据，然后将模型元数据保存回源
+- **F8**：将脚本中当前选中的部分应用到本地模型元数据
+- **Shift+F8**：将脚本中当前选中的部分应用到本地模型元数据，然后将模型元数据保存回源
 
-## DAX objects supported
+## 支持的 DAX 对象
 
-Tabular Editor 3 supports editing the following types of objects using a DAX script:
+Tabular Editor 3 支持使用 DAX脚本编辑以下类型的对象：
 
-- Measures (including KPIs)
-- Calculated columns
-- Calculated tables
-- Calculation groups (including calculation items)
+- 度量值（包括 KPI）
+- 计算列
+- 计算表格
+- 计算组（包括计算项）
 
-# DAX script syntax
+# DAX脚本语法
 
-The syntax for DAX scripts is the following:
+DAX脚本的语法如下：
 
 ```dax
 <DAX script>:
-MEASURE 'Table name'[Measure name] = <DAX expression>
+MEASURE 'Table name'[度量值名称] = <DAX expression>
     [<Measure properties>]
 
 COLUMN 'Table name'[Column name] = <DAX expression>
@@ -132,26 +132,26 @@ CALCULATIONGROUP 'Table name'[Column name]
     FormatString = <DAX expression> 
 ```
 
-## Example 1: Measure
+## 示例 1：度量值
 
-As an example, the script below defines the `[Internet Total Sales]` measure on the `'Internet Sales'` table. In addition to the DAX expression of the measure, the script also includes the measure description and format string.
+例如，下面的脚本在 `'Internet Sales'` 表上定义了 `[Internet Total Sales]` 度量值。 除了度量值的 DAX 表达式外，该脚本还包括度量值的说明和格式字符串。
 
 ```dax
 ----------------------------------
--- Measure: [Internet Total Sales]
+-- 度量值: [Internet Total Sales]
 ----------------------------------
 MEASURE 'Internet Sales'[Internet Total Sales] = SUM('Internet Sales'[Sales Amount])
     Description = "Returns the sum of all Internet Sales"
     FormatString = "\$#,0.00;(\$#,0.00);\$#,0.00"
 ```
 
-## Example 2: Measure with status and target KPI
+## 示例 2：带状态与目标 KPI 的度量值
 
-The DAX script below defines the `[Internet Current Quarter Sales Performance]` measure, which includes a KPI that has a status and a target expression. The status KPI uses the "Shapes" graphic.
+下面的 DAX 脚本定义了 `[Internet Current Quarter Sales Performance]` 度量值，其中包含一个带状态表达式和目标表达式的 KPI。 状态 KPI 使用“Shapes”图形。
 
 ```dax
 --------------------------------------------------------
--- Measure: [Internet Current Quarter Sales Performance]
+-- 度量值: [Internet Current Quarter Sales Performance]
 --------------------------------------------------------
 MEASURE 'Internet Sales'[Internet Current Quarter Sales Performance] =
     IFERROR(
@@ -170,13 +170,13 @@ MEASURE 'Internet Sales'[Internet Current Quarter Sales Performance] =
     , KpiTargetExpression = 1.1
 ```
 
-## Example 3: Calculation group
+## 示例 3：计算组
 
-The DAX script below defines the `'Time Intelligence'` calculation group with the `[Period]` column. The calculation group contains 6 calculation items that performs various time calculations. Notice how the `"YoY %"` item applies a different format string.
+下面的 DAX 脚本定义了包含 `[Period]` 列的 `'Time Intelligence'` 计算组。 该计算组包含 6 个计算项，用于执行不同的时间计算。 注意，`"YoY %"` 计算项使用了不同的格式字符串。
 
 ```dax
 -----------------------------------------
--- Calculation Group: 'Time Intelligence'
+-- 计算组: 'Time Intelligence'
 -----------------------------------------
 CALCULATIONGROUP 'Time Intelligence'[Period]
     Description = "Use this table to perform time calculations"
@@ -210,7 +210,7 @@ CALCULATIONGROUP 'Time Intelligence'[Period]
         Ordinal = 5
 ```
 
-# Next steps
+# 后续步骤
 
 - @bpa
 - @cs-scripts-and-macros
