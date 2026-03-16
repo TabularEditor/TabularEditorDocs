@@ -1,6 +1,6 @@
 ---
 uid: diagram-view-reference
-title: Diagram View
+title: 图表视图
 author: Morten Lønskov
 updated: 2025-04-24
 applies_to:
@@ -9,11 +9,11 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
