@@ -1,68 +1,68 @@
-# Features
+# 功能
 
-This section contains documentation about Tabular Editor features.
+本节包含有关 Tabular Editor 功能的文档。
 
-## In this section
+## 本节将介绍
 
-### DAX Features
+### DAX 功能
 
-- @dax-debugger - Debug your DAX expressions step by step
-- @dax-editor - Advanced DAX editing capabilities
-- @dax-query - Query execution and testing
-- @dax-scripts - Batch DAX operations and automation
-- @code-actions - Automated code improvements and refactoring
-- @dax-package-manager - DAX package Manager
+- @dax-debugger - 逐步调试 DAX 表达式
+- @dax-editor - 高级 DAX 编辑功能
+- @dax-query - 查询执行与测试
+- @dax-scripts - 批量 DAX 操作与自动化
+- @code-actions - 自动化代码改进与重构
+- @dax-package-manager - DAX 组件管理器
 
-### Scripting and Automation
+### 脚本和自动化
 
-- @csharp-scripts - Custom scripting capabilities overview
-- C# Script Library
+- @csharp-scripts - 自定义脚本功能概览
+- C# Script 库
   - @csharp-script-library
   - @script-library-beginner
   - @script-library-advanced
-- @script-helper-methods - Built-in scripting utilities
-- @useful-script-snippets - Common script examples
-- @macros - Create Macros
+- @script-helper-methods - 内置脚本工具
+- @useful-script-snippets - 常用脚本示例
+- @macros - 创建宏
 
-### Model Analysis and Quality
+### 模型分析与质量
 
-- @best-practice-analyzer - Model quality analysis and rules
-  - @using-bpa - How to use the Best Practice Analyzer
-  - @using-bpa-sample-rules-expressions - Example BPA rules
-- @dax-optimizer-integration - Performance optimization with DAX optimizer
+- @best-practice-analyzer - 模型质量分析与规则
+  - @using-bpa - 如何使用 Best Practice Analyzer
+  - @using-bpa-sample-rules-expressions - BPA 规则示例
+- @dax-optimizer-integration - 通过 DAX 优化器进行性能优化
 
-### Data Exploration and Connectivity
+### 数据探索与连接
 
-- @import-tables - Table import functionality
-- @pivot-grid - Data analysis and visualization
+- @import-tables - 表格导入功能
+- @pivot-grid - 数据分析与可视化
 - @semantic-model-types
   - @direct-lake-sql-model
   - @dq-over-as-limitations
 
-### Advanced Modelling Features
+### 高级建模功能
 
-- @metadata-translation-editor - Multi-language support
-- @perspective-editor - Managing model perspectives
+- @metadata-translation-editor - 多语言翻译支持
+- @perspective-editor - 管理模型透视
 
-### Model Organization
+### 模型组织
 
-- @hierarchical-display - Object tree navigation and organization
-- @table-groups - Organizing tables in logical groups
+- @hierarchical-display - 对象树导航与整理
+- @table-groups - 将表按逻辑分组
 
-### Model Deployment and Management
+### 模型部署与管理
 
-- @supported-files - File format support
-- [Model deployment](deployment.md) - Deployment options and strategies
-- @workspace-databases - Working with workspace databases
-- @workspace-mode - Collaborative development mode
-- @tmdl - Tabular Model Definition Language support
-- @save-to-folder - Serialize models to folder structures
+- @supported-files - 文件格式支持
+- [模型部署](deployment.md) - 部署选项与策略
+- @workspace-databases - 使用 Workspace 数据库
+- @workspace-mode - Workspace 协作开发模式
+- @tmdl - Tabular Model Definition Language 支持
+- @save-to-folder - 将模型序列化为文件夹结构
 
-### Command Line and Integration
+### 命令行与集成
 
-- @command-line-options - CLI usage and automation
+- @command-line-options - CLI 使用与自动化
 
-### Semantic Bridge for cross-platform translations
+### 用于跨平台翻译的 Semantic Bridge
 
-- @semantic-bridge - Semantic Bridge overview
-- @semantic-bridge-metric-view-validation - Validation rules system for Metric Views
+- @semantic-bridge - Semantic Bridge 概览
+- @semantic-bridge-metric-view-validation - Metric Views 的验证规则系统
