@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge
-title: Semantic Bridge
+title: 语义桥
 author: Greg Baldini
 updated: 2025-01-23
 applies_to:
@@ -10,212 +10,212 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.25.0
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           none: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Semantic Bridge
+# 语义桥
 
 <!--
 SUMMARY: Overview of the Semantic Bridge feature - a multi-platform semantic model compiler that enables translation between different semantic model platforms (e.g., Databricks Metric Views to Microsoft's Tabular model in Analysis Services and Power BI / Fabric).
 -->
 
 > [!NOTE]
-> The Semantic Bridge as released in 3.25.0 is an MVP feature. It has limitations as documented below, and the API and feature surface area are subject to change.
+> 3.25.0 中发布的语义桥为 MVP 功能。 它存在下文所述的限制，且 API 和功能范围可能会发生变化。
 
-The Semantic Bridge is a semantic model compiler, with the capability to translate the structure and expressions of a semantic model from one platform to another.
-This allows you to reuse business logic on multiple data platforms, supporting end users and meeting them where they consume the data.
-It also allows for migrations from one platform to another.
+语义桥是一个语义模型编译器，能够将语义模型的结构和表达式从一个平台转换到另一个平台。
+这样你就能在多个数据平台上复用业务逻辑，支持终端用户，并在他们使用数据的场景中为其提供支持。
+它还支持平台间迁移。
 
-## Interface
+## 界面
 
-### Import Metric View YAML
+### 导入 Metric View YAML
 
-The Semantic Bridge is available through **File > Open > Import from Metric View YAML**.
-This will launch a dialogue to guide you through importing a Metric View into the current Tabular model, adding tables, columns, measures, and relationships based on the structure of the Metric View.
-You must have a Tabular model open in Tabular Editor.
-This can be a new, empty model or an existing model you want to enhance with the objects from the Metric View.
-The menu button will not be enabled until you open or create a new Tabular model.
+可通过 **文件 > 打开 > 从 Metric View YAML 导入** 使用语义桥。
+这会打开一个对话框，引导你把 Metric View 导入当前 Tabular 模型，并根据 Metric View 的结构添加表、列、度量值和关系。
+你必须先在 Tabular Editor 里打开一个 Tabular 模型。
+这可以是一个新的空模型，也可以是你希望通过 Metric View 中的对象来增强的现有模型。
+在你打开或新建 Tabular 模型之前，这个菜单按钮不会启用。
 
-![Import a Metric View from the file menu with File > Open > Import from Metric View YAML](~/content/assets/images/features/semantic-bridge/semantic-bridge-file-menu-import.png)
+![从文件菜单导入 Metric View：文件 > 打开 > 从 Metric View YAML 导入](~/content/assets/images/features/semantic-bridge/semantic-bridge-file-menu-import.png)
 
-### Enter Databricks connection details
+### 输入 Databricks 连接信息
 
-You need to provide three details in this dialogue:
+你需要在此对话框中提供三项信息：
 
-1. The path to the Metric View YAML file.
-   You can paste the path to the file or use the **Browse** button to find it.
-2. The Databricks hostname.
-   This is to provide the correct argument in the M partition generated for the Databricks source system.
-3. The HTTP path for Databricks.
-   This is to provide the correct argument in the M partition generated for the Databricks source system.
+1. Metric View YAML 文件路径。
+   你可以粘贴该文件的路径，或使用 **浏览** 按钮来查找。
+2. Databricks 主机名。
+   用于在为 Databricks 源系统生成的 M 分区中提供正确的参数。
+3. Databricks 的 HTTP 路径。
+   用于在为 Databricks 源系统生成的 M 分区中提供正确的参数。
 
-If you are just testing the translation feature, you can provide placeholder values for the last two items, but you will need to fix the M partition definitions before you can refresh data into your Tabular model.
+如果你只是测试翻译功能，最后两项可以先用占位值填写，但在将数据刷新到你的 Tabular 模型之前，需要先修正 M 分区定义。
 
-After filling out the details, click **OK**.
-The Semantic Bridge will translate your Metric View to Tabular and create all the TOM objects for you.
+填写完详细信息后，点击 **确定**。
+Semantic Bridge 会将你的 Metric View 转换为 Tabular，并为你创建所有 TOM 对象。
 
-![Databricks details in import dialog](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-details.png)
+![导入对话框中的 Databricks 详细信息](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-details.png)
 
-### Result
+### 结果
 
-There are three possible results:
+可能有三种结果：
 
-1. Success: everything in the Metric View was translated to Tabular and you have a Tabular model ready to use.
-2. Success, but with some issues: the Semantic Bridge was not able to translate every object in the Metric View; there are diagnostic messages you can view to understand what needs your attention.
-3. Failure: the Semantic Bridge could not translate the Metric View
+1. 成功：Metric View 中的所有内容都已翻译为 Tabular，你将获得一个可直接使用的 Tabular 模型。
+2. 成功，但存在一些问题：Semantic Bridge 无法翻译 Metric View 中的每个对象；你可以查看诊断信息，了解哪些地方需要处理。
+3. 失败：Semantic Bridge 无法翻译 Metric View
 
-After either success type, you can use undo/redo functionality like normal in Tabular Editor to undo or instantly replay the import.
+无论是哪种成功结果，你都可以像在 Tabular Editor 中一样使用撤销/重做功能，来撤销或立即重新执行导入。
 
-**Success**
+**成功**
 
-![Import success notification](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success.png)
+![导入成功通知](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success.png)
 
-**Success with issues**
+**成功但存在问题**
 
-![Import success notification with issues](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success-with-issues.png)
+![包含问题的导入成功通知](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success-with-issues.png)
 
-If you click on **View Diagnostics**, you can see a list of messages describing the issues in translation.
-These diagnostics are available for review later by outputting them from a C# script:
+如果你点击 **查看诊断信息**，就能看到一份信息列表，说明翻译过程中出现的问题。
+这些诊断信息也可以在之后通过 C# Script 输出出来查看：
 
 ```csharp
-// Show all diagnostic messages from the last attempted import of a Metric View
+// 显示上一次尝试导入 Metric View 时的所有诊断信息
 SemanticBridge.MetricView.ImportDiagnostics.Output();
 ```
 
-![Import diagnostics](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-diagnostics.png)
+![导入诊断](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-diagnostics.png)
 
-**Failure**
+**失败**
 
-![Import failure](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-failed.png)
+![导入失败](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-failed.png)
 
-Viewing diagnostics for a failure is the same as for success with issues.
+查看失败的诊断信息与“成功但存在问题”时相同。
 
-## Translation process
+## 翻译过程
 
-Translating a Metric View to a Tabular model happens in several steps:
+将 Metric View 翻译为 Tabular 模型分为几个步骤：
 
-1. Read the YAML from disk
-2. Deserialize the YAML
-3. Validate that the deserialized YAML represents a valid Metric View
-4. If it is a valid Metric View, store it as a the currently loaded Metric View, similar to how there is a loaded Tabular model that you interact with.
-   If it is not a valid Metric View, the process stops here and messages are available.
-5. Analyze the Metric View and attempt to transform it to an intermediate representation
-6. Attempt to transform the intermediate representation to a Tabular model
+1. 从磁盘读取 YAML 文件
+2. 对 YAML 进行反序列化
+3. 验证反序列化后的 YAML 是否为有效的 Metric View
+4. 如果它是有效的 Metric View，就将其保存为当前已加载的 Metric View，就像你与已加载的 Tabular 模型交互那样。
+   如果它不是有效的 Metric View，流程将在此停止，并会提供信息。
+5. 分析 Metric View，并尝试将其转换为一种中间表示
+6. 尝试将中间表示转换为 Tabular 模型
 
-The import GUI described above handles all of this for you, but you can also use C# scripts to customize different steps of the process and operate on the Metric View programatically, similarly to how you are used to doing with a Tabular model.
-Specifically, you can
+上述导入 GUI 会为你处理这一切，但你也可以使用 C# Script 来自定义流程中的不同步骤，并以编程方式操作 Metric View，就像你平时操作 Tabular 模型一样。
+具体来说，你可以
 
-- load a Metric View from disk with [`SemanticBridge.MetricView.Load`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Load_System_String_): loading makes it available in C# scripts as [`SemanticBridge.MetricView.Model`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Model), but does not import the structure into the Tabular model
-- deserialize a Metric view from a string with [`SemanticBridge.MetricView.Deserialize`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Deserialize_System_String_): similar to loading, the model is available as [`SemanticBridge.MetricView.Model`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Model), but is not imported
-- save a Metric View to disk with [`SemanticBridge.MetricView.Save`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Save_System_String_)
-- serialize a Metric View to a string with [`SemanticBridge.MetricView.Serialize`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Serialize).
-- validate a Metric View using a system that is similar to the [Best Practice Analyzer](xref:best-practice-analyzer) with [`SemanticBridge.MetricView.Validate`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Validate)
-  - you can create your own custom validation rules with [`SemanticBridge.MetricView.MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___) and its simpler versions
-- import a Metric View to Tabular with [`SemanticBridge.MetricView.ImportToTabularFromFile`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabularFromFile_System_String_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), which does the exact same as the GUI shown above, or [`SemanticBridge.MetricView.ImportToTabular`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabular_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), which is similar, but operates on the currently loaded Metric View, rather than reading one from disk.
+- 使用 [`SemanticBridge.MetricView.Load`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Load_System_String_) 从磁盘加载 Metric View：加载后可在 C# Script 中通过 [`SemanticBridge.MetricView.Model`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Model) 访问，但不会将结构导入 Tabular 模型
+- 使用 [`SemanticBridge.MetricView.Deserialize`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Deserialize_System_String_) 从字符串反序列化 Metric View：与加载类似，模型可通过 [`SemanticBridge.MetricView.Model`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Model) 访问，但不会导入到 Tabular 模型中
+- 使用 [`SemanticBridge.MetricView.Save`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Save_System_String_) 将 Metric View 保存到磁盘
+- 使用 [`SemanticBridge.MetricView.Serialize`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Serialize) 将 Metric View 序列化为字符串。
+- 使用与 [Best Practice Analyzer](xref:best-practice-analyzer) 类似的系统，通过 [`SemanticBridge.MetricView.Validate`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Validate) 验证 Metric View
+  - 你可以使用 [`SemanticBridge.MetricView.MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___) 及其更简化的版本创建自定义验证规则
+- 使用 [`SemanticBridge.MetricView.ImportToTabularFromFile`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabularFromFile_System_String_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_) 将 Metric View 导入到 Tabular，其作用与上方所示 GUI 完全相同；或使用 [`SemanticBridge.MetricView.ImportToTabular`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabular_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_)，功能类似，但它操作的是当前已加载的 Metric View，而不是从磁盘读取。
 
-## MVP Limitations
+## MVP 限制
 
-### Supported platforms
+### 支持的平台
 
-In the MVP release, we support translations from a Databricks Metric View to a Tabular model.
-Specifically we support the following surface area of a Databricks Metric View:
+在 MVP 版本中，我们支持将 Databricks Metric View 中的翻译迁移到 Tabular 模型。
+具体来说，我们支持 Databricks Metric View 的以下内容：
 
-- v0.1 Metric View properties:
-  - supported:
-    - `source`: the source of the fact table
-    - `joins`: collection of tables left-joined to the fact
-    - `dimensions`: flat collection of fields from any table, either the single fact or any of the many joins
-    - `measures`: flat collection of named aggregations representing business logic
-  - unsupported:
-    - `filter`: a SQL filter expression for the Metric View
+- v0.1 Metric View 属性：
+  - 支持：
+    - `source`：事实表的来源
+    - `joins`：左连接到事实表的表集合
+    - `dimensions`：来自任意表的平铺字段集合，可来自单个事实表，也可来自多个连接表
+    - `measures`: 表示业务逻辑的已命名聚合，即度量值的扁平集合
+  - 不支持：
+    - `filter`：用于 Metric View 的 SQL 筛选表达式
 
-All v1.1 metadata is not supported in the MVP.
-Any v1.1 metadata is silently ignored upon deserialization of a Metric View, so it will not be visible in a C# script and it will not affect the translation to Tabular in any way.
-
-> [!WARNING]
-> Because the v1.1 metadata is silently ignored, a Metric View that you deserialize and then serialize will be missing this metadata.
-> Be careful not to overwrite a v1.1 source YAML file from a C# script, as that will remove all v1.1 metadata.
-
-### Limitations on translation from SQL
-
-Metric Views provide a structured layer on top of SQL expressions, and so part of translating a Metric View is translating SQL to DAX and M in the Tabular model.
-
-- Metric View `joins` with nested `joins` are not supported.
-  In other words, only strict star schemas are supported for translation; snowflake models are not supported
-- Metric View `joins` with `using` join criteria are not supported; only equijoins on a single key field using the `on` property are supported.
-- Metric View `dimensions` with SQL expressions are not translated to M or DAX; they are presented as Tabular model calculated columns with their SQL expression commented out
-- Metric View `measures` with non-basic aggregations are not translated to DAX; they are presented as a Tabular model measure with their SQL expression commented out
-  - The only aggregations supported are sum, max, min, average, count, and distinct count.
-  - SQL comments in a basic aggregation are not preserved in DAX
+MVP 不支持任何 v1.1 元数据。
+在反序列化 Metric View 时，任何 v1.1 元数据都会被静默忽略，因此在 C# Script 中不可见，也不会以任何方式影响翻译为 Tabular。
 
 > [!WARNING]
-> Note that SQL and DAX are different languages with different semantics.
-> We can make no guarantee that a translated measure will behave identically between the Metric View SQL and the Tabular DAX we generate.
-> Basic aggregates defined on fact table fields should behave the same, whereas aggregates defined on fields in dimension tables are more likely to produce undesired results.
+> 由于 v1.1 元数据会被静默忽略，将 Metric View 反序列化后再序列化会导致这些元数据丢失。
+> 注意不要在 C# Script 中覆盖 v1.1 源 YAML 文件，否则会移除所有 v1.1 元数据。
 
-### Connectivity
+### 从 SQL 翻译的限制
 
-The MVP does not connect to any platforms besides Tabular, but works entirely with local files.
-You must create your Metric View YAML on your own and then put it where Tabular Editor can see it.
+Metric View 在 SQL 表达式之上提供了一个结构化层，因此翻译 Metric View 的一部分工作是在 Tabular 模型中将 SQL 转换为 DAX 和 M。
+
+- 不支持在 Metric View 的 `joins` 中嵌套 `joins`。
+  换句话说，翻译仅支持严格的星型架构；不支持雪花模型
+- 不支持使用 `using` 作为联接条件的 Metric View `joins`；仅支持通过 `on` 属性在单个键字段上进行等值联接。
+- 包含 SQL 表达式的 Metric View `dimensions` 不会翻译为 M 或 DAX；它们会以 Tabular 模型计算列的形式呈现，并将其 SQL 表达式注释掉
+- 包含非基础聚合的 Metric View `measures` 不会翻译为 DAX；它们会以 Tabular 模型度量值的形式呈现，并将其 SQL 表达式注释掉
+  - 仅支持 sum、max、min、average、count 和 distinct count 这些聚合。
+  - 基础聚合中的 SQL 注释不会在 DAX 中保留
+
+> [!WARNING]
+> 注意，SQL 和 DAX 是不同的语言，语义也不同。
+> 我们无法保证翻译后的度量值在 Metric View SQL 与我们生成的 Tabular DAX 之间具有完全一致的行为。
+> 定义在事实表字段上的基础聚合通常表现一致；而定义在维度表字段上的聚合更可能产生非预期结果。
+
+### 连接
+
+MVP 不会连接除 Tabular 之外的任何平台，而是完全基于本地文件运行。
+你必须自行创建 Metric View YAML，然后将其放到 Tabular Editor 能够访问的位置。
 
 ### C# API
 
-The C# interface has been built to optimize for the automatic translation workflow.
-As such, there are limited affordances for interacting with the currently loaded Metric View, and certain types of operations are clunky.
+C# 接口的设计旨在优化自动翻译工作流。
+因此，与当前加载的 Metric View 交互的支持较为有限，某些类型的操作也比较繁琐。
 
-## Appendix on nomenclature
+## 命名法附录
 
-It can be confusing to discuss things when talking about the Semantic Bridge, as there are many words that have both generic and specific meanings, depending what level of abstraction we are talking about and which platform we are discussing.
-For example, the term "semantic model" is both generic, referring to the concept of a collection of data and business logic in some form suitable for supporting business reporting and analytical needs, and also the name Microsoft has adopted for referring to their specific implementation of this generic concept in Power BI and Fabric.
-Thus, a semantic model might generically refer to a Databricks Metric View, an OLAP / Multidimensional Cube, a Power BI semantic model, or a model hosted in another platform's semantic layer.
-Similarly, "dimension" refers to a concept in dimensional modeling, but it is also the name of a specific type of object in a Metric View.
-Because of this, we have adopted the following definitions and standards in our documentation to maintain clarity and sanity.
+在讨论 Semantic Bridge 时很容易产生困惑：许多词既有通用含义，也有特定含义，取决于我们所处的抽象层级以及正在讨论的平台。
+例如，“语义模型”这个术语既可以是通用概念——指以某种形式组织的数据集合及业务逻辑，用于支撑业务报表与分析需求；也同时是 Microsoft 在 Power BI 和 Fabric 中用来指代其对该通用概念的具体实现的名称。
+因此，从通用意义上说，语义模型可以泛指 Databricks Metric View、OLAP / 多维立方体 Multidimensional Cube、Power BI 语义模型，或托管在其他平台语义层中的模型。
+同样，“维度”既是维度建模中的一个概念，也是在 Metric View 中一种特定对象类型的名称。
+正因如此，我们在文档中采用了以下定义和规范，以保持表述清晰并避免混淆。
 
 > [!NOTE]
-> These conventions are only intended for documentation about the Semantic Bridge feature.
+> 这些约定只用于介绍 Semantic Bridge 功能的文档。
 
-### Definitions
+### 定义
 
-- _Semantic model_: when used on its own always refers to the generic concept of a collection of data, metadata, and business logic to support reporting and analytics.
-  If and only if it is immediately preceded by "Fabric" or "Power BI", then it is referring to that artifact type in that platform, specifically a Tabular model that is saved as TMDL or BIM and using M and DAX; we tend to prefer to use the term Tabular model to refer to the Power BI / Fabric semantic model to avoid this confusion where possible, because the Tabular model is shared across Power BI / Fabric as well as Analysis Serviced Tabular.
-- _Platform_: a technology solution that has a semantic layer, on which a generic semantic model is hosted.
-  Databricks Metric Views represent a platform; Fabric / Power BI represent a platform; Analysis Services Tabular is a platform; Analysis Services Multidimensional is a platform which we have no support for in the Semantic Bridge today.
-- _Serialization format_: a way to represent a semantic model on disk in a textual format.
-  TMDL and TMSL (.bim) are two serialization formats for a Power BI semantic model; YAML is the serialization format for a Databricks Metric View.
-- _Object model_: an in-memory representation of a semantic model that we operate on in Tabular Editor via the Semantic Bridge either through GUI actions or C# scripts.
-  The TOM or Tabular Object Model should be familiar to existing users of Tabular Editor.
-  We have also created an object model for Databricks Metric Views, to allow manipulation of these in our tool.
+- _语义模型_：单独使用时，始终指通用概念——用于支撑报表与分析的数据、元数据与业务逻辑的集合。
+  只有在其前面紧跟“Fabric”或“Power BI”时，它才指该平台中的那种工件类型：具体而言，是以 TMDL 或 BIM 保存、并使用 M 和 DAX 的 Tabular 模型；为尽可能避免这种混淆，我们通常更倾向于用“Tabular 模型”来指代 Power BI / Fabric 语义模型，因为 Tabular 模型不仅用于 Power BI / Fabric，也用于 Analysis Services Tabular。
+- _平台_：具有语义层、并承载通用语义模型的技术解决方案。
+  Databricks Metric Views 是一种平台；Fabric / Power BI 是一种平台；Analysis Services Tabular 是一种平台；Analysis Services Multidimensional 也是一种平台——但目前 Semantic Bridge 尚不支持它。
+- _序列化格式_：一种将语义模型以文本形式表示并存储到磁盘上的方式。
+  TMDL 和 TMSL (.bim) 是 Power BI 语义模型的两种序列化格式；YAML 是 Databricks Metric View 的序列化格式。
+- _对象模型_：语义模型在内存中的表示形式。我们通过 Semantic Bridge 在 Tabular Editor 中对它进行操作——既可以通过 GUI 操作，也可以通过 C# Script。
+  TOM 或 Tabular Object Model 对现有 Tabular Editor 用户来说应该并不陌生。
+  我们还为 Databricks Metric Views 创建了一个对象模型，以便在我们的工具中操作它们。
 
-### General dimensional modeling terminology
+### 通用维度建模术语
 
-There are many terms that exist generally in discussion of a dimensional model or semantic model and also in a specific platform's object model and serialization formats.
-For example, the term "measure" refers generically to a quantitative value that is aggregated in a dimensional model to represent a business metric of interest, but it also refers to a specific kind of object in both Databricks Metric Views and Tabular models; in a Metric View, a measure is a named SQL expression that defines an aggregation in the Metric View, and in a Tabular model a measure is a named DAX expression that defines an aggregation in the Tabular model.
-It is impossible to discuss the work of the Semantic Bridge without talking about multiple meanings of such words at once.
-For example, we talk about translating a Metric View measure to a Tabular measure.
-As such, **we always refer to an object in a specific platform's model by saying the platform and the object, e.g. "Metric View measure" or "Tabular measure"**.
-If the term is ever used without being accompanied by a platform's name, then we are discussing the idea generically.
+在讨论维度模型或语义模型时，有许多术语既是通用概念，同时也出现在特定平台的对象模型与序列化格式中。
+例如，“度量值”从通用意义上指维度模型中被聚合的定量数值，用来表示关注的业务指标；但它在 Databricks Metric Views 和 Tabular 模型中也都是一种特定对象：在 Metric View 中，度量值是一个已命名的 SQL 表达式，用于定义 Metric View 中的聚合；在 Tabular 模型中，度量值是一个已命名的 DAX 表达式，用于定义 Tabular 模型中的聚合。
+如果不同时谈这些词的多重含义，就无法讨论 Semantic Bridge 的工作。
+例如，我们会谈到将 Metric View 度量值翻译为 Tabular 度量值。
+因此，**我们在引用某个平台模型中的对象时，始终使用“平台 + 对象”的说法，例如 “Metric View 度量值” 或 “Tabular 度量值”**。
+如果某个术语在使用时没有搭配平台名称，那么我们讨论的就是它的通用概念。
 
-### Common terms across Metric Views and Tabular models
+### Metric Views 与 Tabular 模型中的常见通用术语
 
-For those of our users who may be unfamiliar with either Metric Views or Tabular models, we provide an incomplete rosetta stone below.
-We refer to the names of Metric View objects based on their representation in YAML, and Tabular based on the name of the type of object in TMDL/TMSL.
+对于可能不熟悉 Metric Views 或 Tabular 模型的用户，我们在下方提供了一份不完整的术语对照表。
+我们根据 YAML 中的呈现方式来引用 Metric View 对象的名称；而对 Tabular，我们则以 TMDL/TMSL 中的对象类型名称为准。
 
-| General term         | Name in Tabular | Name in Metric View                                   | Description                                                                                          | Note                                                                                                                                                                                                                                                       |
-| -------------------- | --------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| fact                 | table           | source                                                | A table holding foreign keys to dimensions and quantitative values to be aggregated                  | a Metric View has a single fact which is unnamed and captured as the root-level `source` attribute in YAML. Tabular models do not differentiate between types of tables: whether a table is a fact can only be inferred    |
-| dimension            | table           | join                                                  | A table holding descriptive attributes and one primary key to which the fact is related              | Tabular models do not differentiate, so the role of "dimension" is inferred only, as with a fact.                                                                                                                                          |
-| partition            | partition       | source (join only)                 | An object for data management, holding a subset of data in a table                                   | Tabular model tables can have many partitions and must have at least one. The Metric View fact, as mentioned above is defined purely as a source, but Metric View joins also have a `source` property, which acts roughly like a partition |
-| field                | column          | dimension                                             | A column in a table                                                                                  |                                                                                                                                                                                                                                                            |
-| measure              | measure         | measure                                               | A quantitative value that is aggregated according to business logic in the model                     | Measures in a Tabular model are written in DAX, and in a Metric View in SQL                                                                                                                                                                                |
-| join or relationship | relationship    | join.on or join.using | A correspondence between key fields in two tables, a foreign key in one and primary key in the other | Relationships are explicit objects in a Tabular model, and implicitly defined as a property of the `join` object in Metric View YAML                                                                                                                       |
+| 通用术语  | Tabular 中的名称 | Metric View 中的名称                                     | 描述                             | 备注                                                                                                                          |
+| ----- | ------------ | ---------------------------------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| 事实表   | 表            | `source`                                             | 用于存放维度外键以及可聚合的数值字段的表           | 一个 Metric View 只有一个事实表，它没有名称，并在 YAML 中作为根级 `source` 属性来表示。 Tabular 模型不会区分表的类型：某个表是否为事实表只能通过推断才能确定                           |
+| 维度    | 表            | `join`                                               | 用于存放描述性属性以及一个主键的表，事实表通过该主键与其关联 | Tabular 模型同样不会区分，因此“维度”的角色也只能像事实表一样通过推断得出。                                                                                  |
+| 分区    | 分区           | `source`（仅用于 `join`）                                 | 用于数据管理的对象，保存表中的一部分数据           | Tabular 模型中的表可以有多个分区，并且至少要有一个分区。 如上所述，Metric View 的事实表完全以 `source` 的形式定义；但 Metric View 的 `join` 也有一个 `source` 属性，其作用大致类似于分区 |
+| 字段    | 列            | 维度                                                   | 表格中的一列                         |                                                                                                                             |
+| 度量值   | 度量值          | 度量值                                                  | 在模型中按业务逻辑进行汇总的定量值              | 表格模型中的度量值使用 DAX 编写，而在 Metric View 中使用 SQL 编写                                                                                |
+| 联接或关系 | 关系           | join.on 或 join.using | 一个表中的外键与另一个表中的主键之间的对应关系        | 在表格模型中，关系是显式对象；而在 Metric View YAML 中，它被隐式定义为 `join` 对象的一个属性                                                                 |
 
-## Additional Resources
+## 更多资源
 
-- [Databricks Metric View documentation](https://learn.microsoft.com/en-us/azure/databricks/metric-views/)
-- [Databricks Metric View YAML reference](https://learn.microsoft.com/en-us/azure/databricks/metric-views/data-modeling/syntax)
+- [Databricks Metric View 文档](https://learn.microsoft.com/en-us/azure/databricks/metric-views/)
+- [Databricks Metric View YAML 参考](https://learn.microsoft.com/en-us/azure/databricks/metric-views/data-modeling/syntax)
 - @semantic-bridge-how-tos
