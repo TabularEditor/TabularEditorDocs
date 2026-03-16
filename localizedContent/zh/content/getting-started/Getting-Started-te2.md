@@ -1,6 +1,6 @@
 ---
 uid: getting-started-te2
-title: Getting Started with Tabular Editor 2
+title: Tabular Editor 2 快速入门
 author: Daniel Otykier
 updated: 2021-09-21
 applies_to:
@@ -11,105 +11,105 @@ applies_to:
       none: true
 ---
 
-# Getting Started
+# 快速入门
 
-## Installation
+## 安装
 
-Simply download the .msi file from the [Release page](https://github.com/TabularEditor/TabularEditor/releases/latest) and run the .msi installation.
+只需从[发布页面](https://github.com/TabularEditor/TabularEditor/releases/latest)下载 .msi 文件，然后运行该 .msi 安装程序即可。
 
-## Prerequisites
+## 先决条件
 
-None.
+无。
 
 > [!NOTE]
-> Tabular Editor uses the [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) to load and save metadata to and from Model.bim files or existing databases. This is included in the .msi installer. Visit the official Microsoft documentation for [Analysis Services Client Libraries](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-data-providers).
+> Tabular Editor 使用 [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 在 Model.bim 文件和现有数据库之间加载和保存元数据。 该组件已包含在 .msi 安装包中。 请参阅 Microsoft 官方文档：[Analysis Services Client Libraries](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-data-providers)。
 
-## System requirements
+## 系统要求
 
-- **Operating system:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 or newer
-- **.NET Framework:** [4.6](https://dotnet.microsoft.com/download/dotnet-framework)
+- **操作系统：** Windows 7、Windows 8、Windows 10、Windows Server 2016、Windows Server 2019 或更高版本
+- **.NET Framework：** [4.6](https://dotnet.microsoft.com/download/dotnet-framework)
 
-## Working with Tabular Editor
+## 使用 Tabular Editor
 
-The recommended workflow is to set up the tables and relationships using SSDT as normal, and then use Tabular Editor to do the rest. That is: Create calculated columns, measures, hierarchies, perspectives, translations, display folders, and every other kind of fine-tuning you can think of.
+推荐的工作流是：像平时一样使用 SSDT 设置表和关系，然后用 Tabular Editor 完成其余工作。 也就是说：创建计算列、度量值、层次结构、透视、翻译、显示文件夹，以及你能想到的其他各种细节调整。
 
-Load a Model.bim file by choosing the Open > From File... option in the File menu (CTRL+O), or open an existing database from an instance of Analysis Services by choosing the Open > From DB... option. In the latter case, you will be prompted for a server name and optional credentials:
+通过选择“打开 > 从文件...”加载 Model.bim 文件…… （位于“文件”菜单中，CTRL+O）；或通过选择“打开 > 从数据库...”从 Analysis Services 实例打开现有数据库…… 选项即可。 在后一种情况下，程序会提示你输入服务器名称以及可选的凭据：
 
-![Connecting to an already deployed Tabular Model](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
+![连接到已部署的表格模型](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
 
-This also works with the new Azure Analysis Services PaaS. The "Local Instance" dropdown, may be used to browse and connect to any running instances of Power BI Desktop or Visual Studio Integrated Workspaces. **Note that although Tabular Editor can make changes to a Power BI model through the TOM, not all modeling operations are supported by Microsoft. [More information](Power-BI-Desktop-Integration.md)**
+这也适用于新版 Azure Analysis Services PaaS。 可使用“本地实例”下拉列表浏览并连接到任何正在运行的 Power BI Desktop 实例或 Visual Studio 集成工作区。 **注意：尽管 Tabular Editor 可以通过 TOM 对 Power BI 模型进行更改，但并非所有建模操作都受 Microsoft 支持。 [更多信息](Power-BI-Desktop-Integration.md)**
 
-After clicking "OK", you will be presented with a list of databases on the server.
+单击“确定”后，你将看到服务器上的数据库列表。
 
-This is how the UI looks after a model has been loaded into Tabular Editor:
+模型加载到 Tabular Editor 后，界面如下所示：
 
-![The main UI of Tabular Editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Main%20UI.png)
+![Tabular Editor 的主 UI](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Main%20UI.png)
 
-The tree on the left side of the screen, displays all tables in the Tabular Model. Expanding a table will show all columns, measures and hierarchies within the table, grouped by their Display Folders. Use the buttons just above the tree, to toggle display folders, hidden objects, certain types of objects, or filter out objects by names. Right-clicking anywhere in the tree, will bring up a context menu with common actions, such as adding new measures, making an object hidden, duplicating objects, deleting objects, etc. Hit F2 to rename the currently selected object or multiselect and right-click to batch rename multiple objects.
+屏幕左侧的树状视图显示 Tabular 模型中的所有表。 展开某个表会显示该表中的所有列、度量值和层次结构，并按其显示文件夹进行分组。 使用树状视图上方的按钮，可切换显示文件夹、隐藏对象、特定类型的对象，或按名称筛选对象。 在树状视图中的任意位置右键单击，会弹出包含常用操作的上下文菜单，例如添加新度量值、将对象设为隐藏、复制对象、删除对象等。 按 F2 可重命名当前选中的对象；或多选后右键单击，以批量重命名多个对象。
 
-![Batch Renaming lets you rename multiple objects simultaneously](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/BatchRename.png)
+![批量重命名可让你同时重命名多个对象](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/BatchRename.png)
 
-On the top right side of the main UI, you see the DAX Editor, which may be used to edit the DAX expression of any measure or calculated column in the model. Click the "DAX Formatter" button to automatically format the code through www.daxformatter.com.
+在主 UI 的右上角，你会看到 DAX编辑器，可用于编辑模型中任意度量值或计算列的 DAX 表达式。 单击“DAX Formatter”按钮，通过 www.daxformatter.com 自动格式化代码。
 
-Use the property grid in the lower right corner, to examine and set properties of objects, such as Format String, Description along with translations and perspective memberships. You can also set the Display Folder property here, but it's easier to simply drag and drop objects within the tree to update their Display Folder (try selecting multiple objects using CTRL or SHIFT).
+使用右下角的属性网格，检查并设置对象的属性，例如格式字符串、说明及其翻译，以及透视成员资格。 你也可以在此设置显示文件夹属性，但更简单的做法是直接在树状视图中拖放对象来更新其显示文件夹（可尝试使用 CTRL 或 SHIFT 选择多个对象）。
 
-To edit perspectives or translations (cultures), select the "Model" object in the tree, and locate the "Model Perspectives" or "Model Cultures" properties, in the property grid. Click the small ellipsis button to open a collection editor for adding/removing/editing perspectives/cultures.
+要编辑透视或翻译（区域设置），请在树状视图中选择“Model”对象，然后在属性网格中找到“Model Perspectives”或“Model Cultures”属性。 点击小省略号按钮，打开集合编辑器，以添加、删除或编辑透视和区域设置。
 
-![Editing perspectives - click the ellipsis button to the right](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Edit%20Perspectives.png)
+![编辑透视——点击右侧的省略号按钮](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Edit%20Perspectives.png)
 
-To save your changes back to the Model.bim file, click the save button or hit CTRL+S. If you opened an existing Tabular Database, the changes are saved directly back to the database. You will be prompted if the database was changed since you loaded it into Tabular Editor. You can always undo your changes by pressing CTRL+Z.
+要将更改保存回 Model.bim 文件，单击保存按钮或按 CTRL+S。 如果你打开的是现有 Tabular 数据库，更改将直接保存回该数据库。 如果自你将数据库加载到 Tabular Editor 后该数据库发生过更改，系统会提示你。 你始终可以按 CTRL+Z 撤销更改。
 
-If you want to deploy your model to another location, go to the "Model" menu and choose "Deploy".
+如果要将模型部署到其他位置，请转到“Model”菜单并选择“Deploy”。
 
-## Deployment
+## 部署
 
-Tabular Editor comes with a deployment wizard that provides a few benefits compared to deploying from SSDT - especially when deploying to an existing database. After choosing a server and a database to deploy to, you have the following options for the deployment at hand:
+Tabular Editor 自带部署向导 Deployment Wizard，相比从 SSDT 部署有一些优势——尤其是在部署到现有数据库时。 在选择要部署到的服务器和数据库后，本次部署你可以选择以下选项：
 
 ![Deployment Wizard](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
 
-Leaving the "Deploy Connections" box unchecked, will make sure that all the data sources on the target database stay untouched. You will get an error if your model contains one or more tables with a data source, that does not already exist in the target database.
+不勾选“Deploy Connections”复选框，将确保目标数据库中的所有数据源保持不变。 如果你的模型中有一个或多个表所使用的数据源在目标数据库中不存在，则会报错。
 
-Similarly, leaving out "Deploy Table Partitions", will make sure that existing partitions on your tables are not changed, leaving the data in the partitions intact.
+同样，不勾选“Deploy Table Partitions”将确保表上的现有分区不会被更改，从而保持分区中的数据不受影响。
 
-When the "Deploy Roles" box is checked, the roles in the target database will be updated to reflect what you have in the loaded model, however if the "Deploy Role Members" is unchecked, the members of each role will be unchanged in the target database.
+勾选“Deploy Roles”后，目标数据库中的角色会更新为与已加载模型一致；但如果不勾选“Deploy Role Members”，则目标数据库中各角色的成员将保持不变。
 
-## Command Line usage
+## 命令行用法
 
-You can use the command line for automated deployment. All deployment options that are available through the GUI, are also available through the command line.
+你可以使用命令行进行自动化部署。 GUI 中提供的所有部署选项，命令行同样支持。
 
-### Deployment Examples
+### 部署示例
 
 `TabularEditor.exe c:\Projects\Model.bim`
 
-Opens the Tabular Editor GUI and loads the specified Model.bim file (without deploying anything).
+打开 Tabular Editor 的 GUI 并加载指定的 Model.bim 文件（不部署任何内容）。
 
 `TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
-Deploys the specified Model.bim file to the SSAS instance running on localhost, overwriting or creating the AdventureWorks database. The GUI will not be loaded.
+将指定的 Model.bim 文件部署到 localhost 上运行的 SSAS 实例，并覆盖现有或创建新的 AdventureWorks 数据库。 不会加载 GUI。
 
-By default, partitions, data sources and roles will not be overwritten in the target database. This behaviour can be changed by adding one or more of the following switches to the command above:
+默认情况下，目标数据库中的分区、数据源和角色不会被覆盖。 你可以在上述命令后添加以下一个或多个开关参数，以更改此行为：
 
-- `-P` Overwrite **p**artitions
-- `-C` Overwrite **c**onnections (data sources)
-- `-R` Overwrite **r**oles
-- `-M` Overwrite role **m**embers
+- `-P` 覆盖 **p**artitions：分区
+- `-C` 覆盖 **c**onnections（连接，即数据源）
+- `-R` 覆盖 **r**oles：角色
+- `-M` 覆盖角色 **m**embers：成员
 
-More information on command-line options can be found [here](../features/Command-line-Options.md).
+有关命令行选项的更多信息，请参见[这里](../features/Command-line-Options.md)。
 
 > [!NOTE]
-> Since TabularEditor.exe is a Windows Forms application, running it from the command line will execute the application in a different thread, returning control to the caller immediately. This may cause issues when running deployments as part of a batch job where you need to await successful deployment before proceeding with the job. If you experience these issues, use `start /wait` to let TabularEditor finish its job before returning control to the caller:
+> 由于 TabularEditor.exe 是一个 Windows Forms 应用程序，从命令行运行时会在不同的线程中执行，并会立即将控制权返回给调用方。 在批处理作业中运行部署时，这可能会引发问题，因为你需要等待部署成功完成后才能继续执行作业。 如果你遇到此类问题，请使用 `start /wait` 让 TabularEditor 先完成工作，再将控制权返回给调用方：
 >
 > `start /wait TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
-## Advanced Scripting
+## 高级脚本编写
 
-Tabular Editor lets you use C# to script changes to the loaded model. This is practical when you want to apply several changes to many objects at once. The Advanced Script editor has access to two objects:
+Tabular Editor 允许你使用 C# 通过脚本方式修改已加载的模型。 当你需要一次性对大量对象应用多项更改时，这很实用。 高级脚本编辑器可访问两个对象：
 
-- `Selected` which represents all objects that are currently selected in the explorer tree.
-- `Model` which represents the entire Tabular Object Model tree.
+- `Selected`，表示资源管理器树中当前选中的所有对象。
+- `Model`，表示整个 Tabular Object Model 树。
 
-The Advanced Script editor has some limited IntelliSense functionality to get you started:
+高级脚本编辑器提供有限的 IntelliSense 功能，帮助你快速上手：
 
-![IntelliSense helps you create scripts for Tabular Editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AdvancedEditor%20intellisense.png)
+![IntelliSense 帮助你为 Tabular Editor 创建脚本](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AdvancedEditor%20intellisense.png)
 
-More documentation and examples on Advanced Scripting, can be [found here](../how-tos/Advanced-Scripting.md).
+有关高级脚本编写的更多文档和示例，可在[此处](../how-tos/Advanced-Scripting.md)找到。
