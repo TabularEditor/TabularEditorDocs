@@ -1,6 +1,6 @@
 ---
-uid: diagram-view
-title: Diagram View
+uid: 图表视图
+title: 图表视图
 author: Morten Lønskov
 updated: 2025-04-24
 applies_to:
@@ -9,113 +9,113 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Diagram View
+# 图表视图
 
-The **Diagram View** in Tabular Editor 3 is a visual representation of the semantic model. It provides an intuitive layout for viewing tables, their columns, and the relationships between them. It is particularly helpful for understanding the schema at a glance, creating relationships, and presenting models to stakeholders. A diagram can be saved as a stand alone file. See <xref:supported-files#diagram-file-te3diag> for more information.
+Tabular Editor 3 中的**图表视图**是语义模型的可视化呈现。 它提供直观的布局，用于查看表、表中的列，以及它们之间的关系。 它特别适合快速把握架构、创建关系，并向利益相关者展示模型。 图表可以保存为独立文件。 更多信息请参阅 <xref:supported-files#diagram-file-te3diag>。
 
 > [!NOTE]
-> We recommend creating multiple smaller diagrams over few large diagrams. When a diagram contains more than 20 or so tables, it quickly becomes overwhelming and difficult to understand.
+> 我们建议创建多个较小的图表，而不是少数几个大型图表。 当图表包含 20 张左右甚至更多的表时，很快就会显得杂乱，难以理解。
 
-After loading a model in Tabular Editor 3, choose the **File > New > Diagram** menu option to create a new diagram or open a new diagram in the main toolbar and drag and drop a table from the TOM Explorer to the diagram window.
+在 Tabular Editor 3 中加载模型后，选择菜单 **文件 > 新建 > 图表** 创建新图表；或在主工具栏中新建图表，然后将 TOM Explorer 中的表拖放到图表窗口中。
 
-## Using the diagram view
+## 使用图表视图
 
-## Adding tables
+## 添加表
 
-Add initial tables to the diagram in any of the following ways:
+通过以下任一方式将初始表添加到图表中：
 
-- (Multi-)select tables in the TOM Explorer, then right-click and choose **Add to diagram**.
-- (Multi-)select tables in the TOM Explorer, then drag the tables over to the diagram
-- Use the **Diagram > Add tables...** menu option, and (multi-)select the tables you want to add through the dialog box.
-  ![Diagram Add Tables](~/content/assets/images/diagram-add-tables.png)
+- 在 TOM Explorer 中（多）选择表，然后右键单击并选择 **添加到图表**。
+- 在 TOM Explorer 中（多）选择表，然后将表拖到图表中
+- 使用 **图表 > 添加表...** 菜单选项，然后在对话框中(多选)选择要添加的表。
+  ![图表 添加表](~/content/assets/images/diagram-add-tables.png)
 
-  To add additional tables to the diagram, use the technique above again, or right-click on an existing table in the diagram and choose one of the following options:
+  要向图表添加更多表，请再次使用上述方法，或在图表中的现有表上右键单击，然后选择以下选项之一：
 
-  - **Add tables that filter this table**: Adds all tables to the diagram which may, directly or indirectly through other tables, filter the currently selected table. Useful when starting from a fact table.
-  - **Add all related tables**: Adds all tables to the diagram which are directly related to the currently selected table. Useful when starting from a dimension table.
+  - **添加可筛选此表的表**：将所有可能直接或通过其他表间接筛选当前所选表的表都添加到图表中。 从事实表开始时很有用。
+  - **添加所有相关表**：将与当前所选表直接相关的所有表添加到图表中。 从维度表开始时很有用。
     ![Add Related Tables](~/content/assets/images/add-related-tables.png)
 
-  Before proceeding, rearrange and resize the tables in the diagram to suit your preferences, or use the **Diagram > Auto-arrange** feature to have Tabular Editor 3 lay out the tables automatically.
+  继续之前，请根据你的偏好重新排列并调整图表中各表的大小，或使用 **图表 > 自动排列** 功能，让 Tabular Editor 3 自动布局这些表。
 
-## Modifying relationships using the diagram
+## 使用图表修改关系
 
-To add a new relationship between two tables, locate the column on the fact table (many-side) of the relationship, and drag that column over to the corresponding column on the dimension table (one-side). Confirm the settings for the relationship and hit **OK**.
+要在两张表之间添加新关系，请找到关系中事实表（多端）上的列，然后将该列拖到维度表（一端）上的对应列。 确认关系设置，然后点击 **确定**。
 
-![Create Relationship](~/content/assets/images/create-relationship.png)
+![创建关系](~/content/assets/images/create-relationship.png)
 
-To edit an existing relationship, right-click on it and choose **Edit relationship**. The right-click menu also contains shortcuts for reversing or deleting a relationship, as shown on the screenshot below.
+要编辑现有关系，请在其上右键单击，然后选择 **编辑关系**。 右键菜单还包含用于反转或删除关系的快捷方式，如下图所示。
 
-![Edit Relationship Diagram](~/content/assets/images/edit-relationship-diagram.png)
+![编辑关系图表](~/content/assets/images/edit-relationship-diagram.png)
 
 > [!NOTE]
-> You can also create relationships without using a diagram, through the TOM Explorer. Locate the column from which the relationship should start (many-side / fact-table side), right-click and choose **Create > Relationship from**. Specify the destination column in the Create Relationship dialog that appears on the screen.
+> 你也可以不使用图表，而是通过 TOM Explorer 创建关系。 定位关系应从其开始的列（多端/事实表端），在该列上右键单击，然后选择 **创建 > 从此处创建关系**。 在屏幕上出现的“创建关系”对话框中指定目标列。
 
-## Saving a diagram
+## 保存图表
 
-To save a diagram, simply use the **File > Save** (CTRL+S) option. Tabular Editor 3 will prompt you to save the diagram if you close the document or the application while the diagram has unsaved changes.
+要保存图表，只需使用 **文件 > 保存** (CTRL+S) 选项。 当图表有未保存的更改时，如果你关闭文档或应用程序，Tabular Editor 3 会提示你保存图表。
 
 > [!TIP]
-> The same diagram file can be loaded for different data models. Diagrams reference tables by their names. Any tables not present in the model upon diagram load are simply removed from the diagram.
+> 同一个图表文件也可以加载到不同的数据模型中。 图表通过表名来引用表。 加载图表时，模型中不存在的任何表都会从图表中移除。
 
 > [!NOTE]
-> Every time you add or modify a relationship, you will have to run a "calculate" refresh on the data model, before the relationships can be used when querying the model.
+> 每次添加或修改关系后，在这些关系可用于查询模型之前，你都需要对数据模型执行一次“计算”刷新。
 
-## Diagram Features
+## 图表功能
 
-### Context Menu for Table Actions
+### 用于表操作的上下文菜单
 
-Right-clicking anywhere in the Diagram View opens a context menu that provides quick access to several options:
+在图表视图中的任意位置右键单击，会打开一个上下文菜单，可快速访问多个选项：
 
-![Diagram Context Menu](~/content/assets/images/diagram-context-menu.png)
+![图表上下文菜单](~/content/assets/images/diagram-context-menu.png)
 
-- **Add tables...**: Opens a dialog to manually add additional tables to the diagram.
-- **Add tables that filter this table**: Automatically brings in related tables that filter the current one.
-- **Add all related tables**: Loads all tables that share relationships with the selected table.
-- **Fit to page**: Adjusts the diagram zoom to fit all visible tables.
-- **Auto-Arrange**: Automatically arrange tables into a star schema
-- **Remove from diagram**: Hides the selected table from the current view.
+- **添加表...**：打开对话框，手动向图表添加更多表。
+- **添加可筛选此表的表**：自动引入可筛选当前表的相关表。
+- **添加所有相关表**：加载与所选表存在关系的所有表。
+- **适合页面**：调整图表的缩放级别，使所有可见表都能完整显示。
+- **自动排列**：自动将表排列成星型架构
+- **从图中移除**：从当前视图中隐藏所选表。
 
-### Relationship Indicators
+### 关系指示器
 
-Relationships between tables are illustrated using directional arrows:
+表之间的关系使用带方向的箭头来表示：
 
-- `1 - *`: Indicates a one-to-many relationship.
-- `* - *`: Indicates a many-to-many relationship.
-- `➝`: Indicates a single direction relationship, with the arrow defining the filter direction of the relationship.
-- `⟷`: Indicates a bi-directional cross-filtering relationship.
+- `1 - *`：表示一对多关系。
+- `* - *`：表示多对多关系。
+- `➝`：表示单向关系，箭头定义了该关系的筛选方向。
+- `⟷`：表示双向交叉筛选关系。
 
-These visual markers allow for quick assessment of filter directionality and cardinality.
+这些视觉标记可帮助你快速判断筛选方向和基数。
 
-### Column Display Toggle
+### 列显示切换
 
-A **chevron toggle** is available in the top-right corner of each table, by clicking it you will toggle between the following options:
+每个表的右上角都有一个**人字形切换按钮**。点击后可在以下选项之间切换：
 
-![Diagram Chevron Toggle](~/content/assets/images/diagram-chevron-toggle.png)
+![图表人字形切换按钮](~/content/assets/images/diagram-chevron-toggle.png)
 
-- **All Columns**: Displays all columns.
-- **Key Columns Only**: Displays only primary and foreign keys.
-- **No Columns**: Hides all columns, showing only the table header.
+- **全部列**：显示所有列。
+- **仅键列**：仅显示主键和外键。
+- **不显示列**：隐藏所有列，仅显示表头。
 
-The toggle helps reduce clutter, especially in complex models with many columns, making it easier to focus on relationships.
+该开关有助于减少界面杂乱，尤其是在列很多的复杂模型中，让你更容易专注于关系。
 
-### Column Data Type Icons
+### 列数据类型图标
 
-Each column in the diagram is accompanied by an icon representing its data type:
+图表中的每一列旁都会显示一个代表其数据类型的图标：
 
-- <img src="~/content/assets/images/icons/String.svg" alt="Text Icon" width="16" height="16"> for string/text values
-- <img src="~/content/assets/images/icons/Integer.svg" alt="Integer Icon" width="16" height="16"> for integer numbers
-- <img src="~/content/assets/images/icons/Double.svg" alt="Double Icon" width="16" height="16"> for double / floating-point decimal numbers
-- <img src="~/content/assets/images/icons/Currency.svg" alt="Currency Icon" width="16" height="16"> for currency / fixed-point decimal numbers
-- <img src="~/content/assets/images/icons/Binary.svg" alt="Binary Icon" width="16" height="16"> for binary values
-- <img src="~/content/assets/images/icons/TrueFalse.svg" alt="Boolean Icon" width="16" height="16"> for boolean (true/false) values
-- <img src="~/content/assets/images/icons/Calendar.svg" alt="Date Icon" width="16" height="16"> for date/time values
+- <img src="~/content/assets/images/icons/String.svg" alt="Text Icon" width="16" height="16"> 表示字符串/文本值
+- <img src="~/content/assets/images/icons/Integer.svg" alt="Integer Icon" width="16" height="16"> 表示整数
+- <img src="~/content/assets/images/icons/Double.svg" alt="Double Icon" width="16" height="16"> 表示双精度/浮点小数
+- <img src="~/content/assets/images/icons/Currency.svg" alt="Currency Icon" width="16" height="16"> 表示货币/定点小数
+- <img src="~/content/assets/images/icons/Binary.svg" alt="Binary Icon" width="16" height="16"> 表示二进制值
+- <img src="~/content/assets/images/icons/TrueFalse.svg" alt="Boolean Icon" width="16" height="16"> 表示布尔值（true/false）
+- <img src="~/content/assets/images/icons/Calendar.svg" alt="Date Icon" width="16" height="16"> 用于表示日期/时间值
 
-This quick visual reference supports quick data validation and helps understand the data structures.
+这份快速可视化参考支持快速数据验证，并有助于理解数据结构。
