@@ -1,6 +1,6 @@
 ---
 uid: table-groups
-title: Table Groups
+title: 表格组
 author: Daniel Otykier
 updated: 2023-03-08
 applies_to:
@@ -9,79 +9,79 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Table Groups
+# 表格组
 
-Table Groups is a new feature, available in Tabular Editor 3 starting from [version 3.5.0](xref:release-3-5-0). The feature lets you quickly organise tables into folders, making it easier than ever to manage and navigate large, complex models, in Tabular Editor 3's [TOM Explorer](xref:tom-explorer-view).
+表格组是一项新功能，从 [3.5.0 版本](xref:release-3-5-0) 起可在 Tabular Editor 3 中使用。 此功能可让你快速将表格整理到文件夹中，使你在 Tabular Editor 3 的 [TOM Explorer](xref:tom-explorer-view) 中更轻松地管理和浏览大型复杂模型。
 
-![Table groups](~/content/assets/images/user-interface/table-groups.png)
+![表格组](~/content/assets/images/user-interface/table-groups.png)
 
-You can set up Table Groups either by right-clicking on a table and choosing the **Create > Table group** menu option, or by specifying a name for the Table Group in the **Properties View**, while selecting one or more tables.
+你可以通过两种方式创建表格组：在表格上右键并选择 **创建 > 表格组** 菜单选项；或者在选中一个或多个表格时，在 **属性视图** 中为表格组指定名称。
 
-Tables can be moved around between Table Groups by dragging and dropping in the TOM Explorer. Note that, unlike Display Folders for measures, columns and hierarchies, Table Groups cannot be nested.
+你可以在 TOM Explorer 中通过拖放，将表格在不同表格组之间移动。 注意：与度量值、列和层次结构的显示文件夹不同，表格组不能嵌套。
 
-Right-clicking on a Table Group in the TOM Explorer, gives you the same context menu options, as if you had selected the table(s) within that Table Group.
+在 TOM Explorer 中右键点击某个表格组，会显示与你选中该表格组内表格(s)时相同的上下文菜单选项。
 
 > [!NOTE]
-> Table Groups is a Tabular Editor-exclusive feature. Client tools (such as Excel, Power BI Desktop, etc.) will not observe Table Groups, as the [CSDL format](https://learn.microsoft.com/en-us/ef/ef6/modeling/designer/advanced/edmx/csdl-spec), which specifies the conceptual schema of the data model, does not support Table Groups.
+> 表格组是 Tabular Editor 的专有功能。 客户端工具（如 Excel、Power BI Desktop 等） 不会识别表格组，因为用于定义 Data model 概念架构的 [CSDL 格式](https://learn.microsoft.com/en-us/ef/ef6/modeling/designer/advanced/edmx/csdl-spec) 不支持表格组。
 
-## Metadata and scripting
+## 元数据和脚本
 
-Tabular Editor uses an annotation on each table, to specify which Table Group that table belongs to. The name of the annotation is `TabularEditor_TableGroup`. However, when scripting changes to the model using C# scripts, you can modify the Table Group directly through the new `Table.TableGroup` (string) property.
+Tabular Editor 会在每个表格上使用一个注释，用于指定该表格属于哪个表格组。 该注释的名称为 `TabularEditor_TableGroup`。 不过，当你使用 C# Script 对模型进行更改时，可以通过新的 `Table.TableGroup`（string）属性直接修改表格组。
 
-Below is an example of a C# script, that loops through all tables of a model, organizing them into Table Groups based on their type and usage:
+下面是一个 C# Script 示例：它会遍历模型中的所有表格，并根据表格的类型和用途将其整理到相应的表格组中：
 
 ```csharp
-// Loop through all tables:
+// 遍历所有表：
 foreach(var table in Model.Tables)
 {
     if (table is CalculationGroupTable)
     {
-        table.TableGroup = "Calculation Groups";
+        table.TableGroup = "计算组";
     }
     else if (!table.UsedInRelationships.Any() && table.Measures.Any(m => m.IsVisible))
     {
-        // Tables containing visible measures, but no relationships to other tables
+        // 包含可见度量值，但与其他表没有任何关系的表
         table.TableGroup = "Measure Groups";
     }
     else if (table.UsedInRelationships.All(r => r.FromTable == table) && table.UsedInRelationships.Any())
     {
-        // Tables exclusively on the "many" side of relationships:
+        // 仅位于关系“多”端的表：
         table.TableGroup = "Facts";
     }
     else if (!table.UsedInRelationships.Any() && table is CalculatedTable && !table.Measures.Any())
     {
-        // Tables without any relationships, that are Calculated Tables and do not have measures:
+        // 没有任何关系、属于计算表格且不包含度量值的表：
         table.TableGroup = "Parameter Tables";
     }
     else if (table.UsedInRelationships.Any(r => r.ToTable == table))
     {
-        // Tables on the "one" side of relationships:
+        // 位于关系“一”端的表：
         table.TableGroup = "Dimensions";
     }
     else
     {
-        // All other tables:
+        // 其他所有表：
         table.TableGroup = "Misc";
     }
 }
 ```
 
-## Hiding Table Groups
+## 隐藏表格组
 
-If you prefer to always see the full, ungrouped list of tables in the TOM Explorer, but you're collaborating with others on a model containing table group annotations, you can still disable table groups altogether, for your Tabular Editor 3 installation. This is done through the **Tools > Preferences** dialog. Navigate to the **TOM Explorer** page, then uncheck **Use table groups** under **Display and filtering**:
+如果你希望在 TOM Explorer 中始终看到完整的未分组表列表，但又需要与他人协作处理包含表格组注释的模型，你仍然可以在自己的 Tabular Editor 3 安装中完全禁用表格组。 可在 **工具 > 偏好设置** 对话框中进行设置。 转到 **TOM Explorer** 页面，然后在 **显示和筛选** 下取消选中 **使用表格组**：
 
-![Table Groups Disable](~/content/assets/images/table-groups-disable.png)
+![表格组禁用](~/content/assets/images/table-groups-disable.png)
 
 > [!NOTE]
-> Even though you have disabled table groups as described above, tables in your model may still have the `TabularEditor_TableGroup` annotation assigned. If you wish to clear all such annotations from the model, you can use the following C# script:
+> 即使你按上述方法禁用了表格组，模型中的表仍可能已分配 `TabularEditor_TableGroup` 注释。 如果你想从模型中清除所有此类注释，可以使用以下 C# Script：
 >
 > ```csharp
 > foreach(var table in Model.Tables) table.TableGroup = null;
