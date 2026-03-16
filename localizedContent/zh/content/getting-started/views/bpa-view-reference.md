@@ -1,6 +1,6 @@
 ---
 uid: bpa-view-reference
-title: Best Practice Analyzer view
+title: Best Practice Analyzer 视图
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -9,11 +9,11 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商务版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
