@@ -1,73 +1,73 @@
 ---
-uid: deployment
-title: Model deployment
+uid: 部署
+title: 模型部署
 applies_to:
   products:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-## Model deployment
+## 模型部署
 
-Tabular Editor 3 (Business and Enterprise Edition) can take a copy of the currently loaded semantic model metadata, and deploy it to an Analysis Services instance, or the Power BI / Fabric XMLA endpoint.
+Tabular Editor 3（商业版和企业版）可以复制当前加载的语义模型元数据，并将其部署到 Analysis Services 实例或 Power BI / Fabric 的 XMLA endpoint。
 
-To perform a deployment, launch the **Deployment Wizard** through the **Model > Deploy...** menu option.
+要执行部署，请通过 **Model > Deploy...** 菜单启动 **Deployment Wizard**。
 
 > [!NOTE]
-> Tabular Editor 3 Business Edition has certain [limitations](xref:editions) regarding what type of Analysis Services instance, or Power BI / Fabric workspace is supported for XMLA connectivity. This applies to deployment as well.
+> Tabular Editor 3 商业版在支持哪些 Analysis Services 实例类型或 Power BI / Fabric Workspace 进行 XMLA 连接方面存在一些[限制](xref:editions)。 这一点同样适用于部署。
 
-## Deployment options
+## 部署选项
 
-After selecting the destination server and database to deploy, you are presented with a list of **Deployment options**, as shown in the screenshot below.
+选择要部署到的目标服务器和数据库后，你会看到一组 **部署选项**，如下方截图所示。
 
-![Deployment Options](~/content/assets/images/deployment-options.png)
+![部署选项](~/content/assets/images/deployment-options.png)
 
-These are:
+包括：
 
-- **Deploy Model Structure**: This indicates that the model metadata will be deployed. Unchecking this prevents you from performing the deployment (the option exists for historic reasons).
-- **Deploy Data Sources**: For models that use _explicit_ data sources, this option indicates whether any such data sources will be included in the deployment. Unchecking this option may be useful, if one or more properties on a data source has been modified, and you do not intend to deploy these modifications. For example, if you are deploying model metadata from a Development environment to a Test environment, you may want to retain any connection strings, etc. on the destination environment as-is. Note that this option is typically not enabled for Power BI / Fabric semantic models, because such models use _implicit_ data sources, where credentials are managed by the Power BI service, and connection details are stored in the M queries on partitions or shared expressions in the model.
-- **Deploy Table Partitions**: This option indicates whether table partitions should be deployed. In some cases, the destination database may contain partitions that are not present in the model metadata. Unchecking this option will prevent the deployment from modifying any existing partitions on the destination server. If this option is checked, Tabular Editor will synchronize the partitions on the destination server with the model metadata. If any partitions are present on the destination server, but not in the model metadata, they will be removed (including the data contained in them).
-  - **Deploy partitions governed by Incremental Refresh Policies**: When the **Deploy Table Partitions** option is enabled, you will have an option to avoid deploying partitions that are governed by Incremental Refresh Policies. This is useful when you have a model with partitions that created automatically by the [Incremental Refresh Policy](xref:incremental-refresh-about), and you want to deploy all partitions except those governed by the policy.
-- **Deploy Model Roles**: This option indicates whether roles defined in the model should be deployed. Unchecking this option will retain existing roles on the model as-is. If you are deploying changes to tables or columns in the model, you may have to revisit [RLS or OLS settings](xref:data-security-about), to ensure that they are still valid.
-  - **Deploy Model Role Members**: This option indicates whether role members should be deployed. It is common to manage role members directly on the server, rather than in the model metadata. Unchecking this option will prevent the deployment from modifying any existing role members on the destination server.
+- **部署模型结构**：表示将部署模型元数据。 取消选中会导致无法执行部署（该选项出于历史原因保留）。
+- **部署数据源**：对于使用 _显式_ 数据源的模型，此选项用于指定部署时是否包含这些数据源。 如果你修改了一个或多个数据源属性，但不打算部署这些修改，取消选中此选项会很有用。 例如，将模型元数据从开发环境部署到测试环境时，你可能希望目标环境上的连接字符串等保持原样。 注意：对于 Power BI / Fabric 语义模型，此选项通常不会启用，因为此类模型使用 _隐式_ 数据源：凭据由 Power BI 服务管理，连接详细信息存储在分区的 M 查询中，或存储在模型的共享表达式中。
+- **部署表分区**：此选项表示是否应部署表分区。 在某些情况下，目标数据库可能包含模型元数据中不存在的分区。 取消选中此选项将阻止部署修改目标服务器上的任何现有分区。 如果勾选这个选项，Tabular Editor 将把目标服务器上的分区与模型元数据同步。 如果目标服务器上存在分区，但模型元数据中没有这些分区，它们将被删除（包括其中包含的数据）。
+  - **部署受增量刷新刷新策略管控的分区**：启用 **部署表分区** 选项后，你可以选择避免部署受增量刷新刷新策略管控的分区。 当模型中包含由 [增量刷新刷新策略](xref:incremental-refresh-about) 自动创建的分区，而你希望部署除该刷新策略管控的分区之外的所有分区时，这个选项就很有用。
+- **部署模型角色**：这个选项用来决定是否部署模型中定义的角色。 取消勾选这个选项将按原样保留模型中现有的角色。 如果你正在部署对模型中的表或列所做的更改，可能需要重新检查 [RLS 或 OLS 设置](xref:data-security-about)，以确保它们仍然有效。
+  - **部署模型角色成员**：这个选项用来决定是否部署角色成员。 通常会直接在服务器上管理角色成员，而不是在模型元数据中管理。 取消勾选这个选项将阻止部署修改目标服务器上的任何现有角色成员。
 
-## Deployment script
+## 部署脚本
 
-During deployment, Tabular Editor generates a [CreateOrReplace TMSL script](https://learn.microsoft.com/en-us/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions), which is then executed against the Analysis Services engine. The CreateOrReplace script contains all the metadata required to recreate the model, including tables, columns, measures, relationships, perspectives, translations, etc. If the model does not already exist on the target server, it will be created. If the model already exists, existing objects will be replaced with the new metadata specified in the script.
+在部署过程中，Tabular Editor 会生成一个 [CreateOrReplace TMSL 脚本](https://learn.microsoft.com/en-us/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions)，并在 Analysis Services 引擎上执行该脚本。 CreateOrReplace 脚本包含重新创建模型所需的全部元数据，包括表、列、度量值、关系、透视、翻译等。 如果目标服务器上尚不存在该模型，将创建该模型。 如果模型已存在，则现有对象将被脚本中指定的新元数据替换。
 
-If any of the options on the **Deployment options** page were deselected, Tabular Editor will use the original metadata definition of those objects in the generated TMSL script, thus retaining their definitions as-is on the server.
+如果在 **部署选项** 页面取消选择了某些选项，Tabular Editor 将在生成的 TMSL 脚本中使用这些对象的原始元数据定义，从而在服务器上按原样保留其定义。
 
-The last page of the deployment wizard lets you export the generated script, so you can review the changes before executing them.
+Deployment Wizard 的最后一页允许你导出生成的脚本，这样你就能在执行前先审查这些更改。
 
-## Deployment impact
-
-> [!WARNING]
-> This type of deployment is a **metadata-only deployment**. Depending on the types of changes made to the model, imported data could be lost during deployment. In this case, you may need to execute a refresh operation once the deployment is complete.
-
-As a rule of thumb, the following changes can be made to the model without requiring a subsequent data refresh:
-
-- Adding/editing/removing measures and KPIs, including their DAX expressions.
-- Editing properties such as FormatString, Description, DisplayFolder, etc.
-- Adding/editing/removing metadata translations, perspectives, OLS and RLS roles.
-
-The following changes may require a **Calculate refresh**, before the objects can be queried:
-
-- Adding/editing calculated column, calculated tables and calculation groups
-- Adding/editing relationships
-- Adding/editing hierarchies
-- Removing columns/tables
-
-The following changes may require a **Full refresh**:
-
-- Adding/editing partitions, tables and columns
+## 部署影响
 
 > [!WARNING]
-> Because of the potential impact of deploying a semantic model this way, we recommend not using this option to perform a deployment against a production environment. It is better to set up a [CI/CD pipeline for deploying models to production environments](https://blog.tabulareditor.com/category/ci-cd/).
+> 这种部署属于 **仅元数据部署**。 根据对模型所做更改的类型，部署期间可能会丢失已导入的数据。 在这种情况下，你可能需要在部署完成后执行一次刷新操作。
+
+一般来说，以下对模型的更改无需后续数据刷新：
+
+- 添加/编辑/删除度量值和 KPI，包括它们的 DAX 表达式。
+- 编辑 FormatString、Description、DisplayFolder 等属性。
+- 添加/编辑/删除元数据翻译、透视、OLS 和 RLS 角色。
+
+以下更改可能需要先执行一次 **Calculate refresh**，然后才能查询这些对象：
+
+- 添加/编辑计算列、计算表格和计算组
+- 添加/编辑关系
+- 添加/编辑层次结构
+- 删除列/表格
+
+以下更改可能需要执行一次 **Full refresh**：
+
+- 添加/编辑分区、表格和列
+
+> [!WARNING]
+> 鉴于以这种方式部署语义模型可能带来的影响，我们建议不要使用此选项将其部署到生产环境。 更好的做法是设置一条用于将模型部署到生产环境的 [CI/CD 流水线](https://blog.tabulareditor.com/category/ci-cd/)。
