@@ -1,58 +1,58 @@
-# User Interface
+# 用户界面
 
-## @user-interface
+## @用户界面
 
-## @tom-explorer-view
+## @tom-explorer-view 资源管理器视图
 
-## @properties-view
+## @属性视图
 
-## @bpa-view
+## @bpa-view 视图
 
-## @data-refresh-view
+## @数据刷新视图
 
-## @find-replace
+## @查找与替换
 
-## @messages-view
+## @消息视图
 
-## @diagram-view
+## @图表视图
 
-# DAX Features
+# DAX 功能
 
-## @dax-debugger
+## @dax-debugger 调试器
 
-## @dax-editor
+## @dax-editor 编辑器
 
-## @dax-query
+## @dax-query 查询
 
-## @dax-scripts
+## @dax-scripts 脚本
 
-## @code-actions
+## @代码操作
 
-## @dax-package-manager
+## @dax-package-manager 包管理器
 
-# Scripting and Automation
+# 脚本编写与自动化
 
-## @csharp-scripts
+## @C# 脚本
 
-## C# Script Library
+## C# Script 脚本库
 
-### @csharp-script-library
+### @C# Script 脚本库
 
-### @script-library-beginner
+### @脚本库：入门
 
-### @script-library-advanced
+### @脚本库：高级
 
-## @script-helper-methods
+## @脚本帮助方法
 
-## @useful-script-snippets
+## @实用脚本片段
 
-## @macros
+## @宏
 
-# Model Analysis and Quality
+# 模型分析与质量
 
 ## @best-practice-analyzer
 
-### @built-in-bpa-rules
+### @内置 bpa 规则
 
 ### @using-bpa
 
@@ -60,7 +60,7 @@
 
 ## @dax-optimizer-integration
 
-# Data Exploration and Connectivity
+# 数据探索与连接性
 
 ## @import-tables
 
@@ -72,21 +72,21 @@
 
 ### @dq-over-as-limitations
 
-# Advanced Modelling Features
+# 高级建模功能
 
-## @metadata-translation-editor
+## @元数据翻译编辑器
 
-## @perspective-editor
+## @透视-编辑器
 
-# Model Organization
+# 模型组织
 
 ## @hierarchical-display
 
 ## @table-groups
 
-# Model Deployment and Management
+# 模型部署与管理
 
-## [Model deployment](deployment.md)
+## [模型部署](deployment.md)
 
 ## @workspace-databases
 
@@ -96,20 +96,20 @@
 
 ## @save-to-folder
 
-## @save-with-supporting-files
+## @保存并附带支持文件
 
-## @advanced-refresh
+## @高级刷新
 
-## @refresh-overrides
+## @刷新覆盖设置项
 
-# Command Line and Integration
+# 命令行与集成
 
 ## @command-line-options
 
-# Semantic Bridge for cross-platform translations
+# 用于跨平台翻译的语义桥
 
-## @semantic-bridge
+## @语义桥
 
-## @semantic-bridge-metric-view-object-model
+## @语义桥度量视图对象模型
 
-## @semantic-bridge-metric-view-validation
+## @语义桥度量视图验证
