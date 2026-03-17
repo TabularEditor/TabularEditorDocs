@@ -1,4 +1,4 @@
-# Best Practice Rules (BPA)
+# 最佳实践规则 (BPA)
 
 ## @kb.bpa-avoid-invalid-characters-descriptions
 
@@ -54,9 +54,9 @@
 
 ## @kb.bpa-powerbi-latest-compatibility
 
-# Code Actions
+# 代码操作
 
-## DAX Code Analysis (DI)
+## DAX 代码分析（DI）
 
 ### @DI001
 
@@ -88,7 +88,7 @@
 
 ### @DI015
 
-## DAX Refactoring (DR)
+## DAX 重构（DR）
 
 ### @DR001
 
@@ -118,7 +118,7 @@
 
 ### @DR014
 
-## DAX Rewrites (RW)
+## DAX 重写（RW）
 
 ### @RW001
 
