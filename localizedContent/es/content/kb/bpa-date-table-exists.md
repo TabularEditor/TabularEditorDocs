@@ -1,51 +1,51 @@
 ---
 uid: kb.bpa-date-table-exists
-title: Date Table Should Exist
+title: Debe existir una tabla de fechas
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring your model includes a dedicated date table for proper time intelligence functionality.
+description: Regla de buenas prácticas que garantiza que tu modelo incluya una tabla de fechas dedicada para que la inteligencia temporal funcione correctamente.
 ---
 
-# Date Table Should Exist
+# Debe existir una tabla de fechas
 
-## Overview
+## Descripción general
 
-This best practice rule verifies that your tabular model contains at least one properly configured date table. Date tables are essential for time intelligence calculations and ensuring consistent date-based filtering across your model.
+Esta regla de buenas prácticas verifica que tu modelo tabular contenga al menos una tabla de fechas configurada correctamente. Las tablas de fechas son esenciales para los cálculos de inteligencia temporal y para garantizar un filtrado coherente basado en fechas en todo tu modelo.
 
-- Category: Performance
+- Categoría: Rendimiento
 
-- Severity: Medium (2)
+- Gravedad: Media (2)
 
-## Applies To
+## Se aplica a
 
-- Model
+- Modelo
 
-## Why This Matters
+## Por qué es importante
 
-A dedicated date table is essential because it:
+Una tabla de fechas dedicada es esencial porque:
 
-- **Enables time intelligence**: Functions like `DATESYTD`, `SAMEPERIODLASTYEAR`, and `TOTALYTD` require a date table
-- **Ensures consistent filtering**: Provides single source of truth for date attributes
-- **Improves performance**: Establishes proper calendar relationships
-- **Supports custom calendars**: Enables fiscal year calculations and custom hierarchies
+- **Habilita la inteligencia temporal**: Funciones como `DATESYTD`, `SAMEPERIODLASTYEAR` y `TOTALYTD` requieren una tabla de fechas
+- **Garantiza un filtrado coherente**: Proporciona una única fuente de verdad para los atributos de fecha
+- **Mejora el rendimiento**: establece las relaciones de calendario adecuadas
+- **Admite calendarios personalizados**: permite cálculos de año fiscal y jerarquías personalizadas
 
-Without a properly marked date table, many DAX time intelligence functions will fail or produce incorrect results.
+Sin una tabla de fechas correctamente marcada, muchas funciones DAX de inteligencia temporal fallarán o producirán resultados incorrectos.
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when **all** tables in your model meet the following conditions:
+La regla se activa cuando **todas** las tablas de tu modelo cumplen las siguientes condiciones:
 
-1. No table has any calendars defined (`Calendars.Count = 0`)
-2. No table contains a column marked as a key with `DataType = DateTime`
-3. No table has `DataCategory = "Time"`
+1. Ninguna tabla tiene calendarios definidos (`Calendars.Count = 0`)
+2. Ninguna tabla contiene una columna marcada como clave con `DataType = DateTime`
+3. Ninguna tabla tiene `DataCategory = "Time"`
 
-This indicates that the model lacks a proper date dimension.
+Esto indica que al modelo le falta una dimensión de fechas adecuada.
 
-## How to Fix
+## Cómo solucionarlo
 
-### Option 1: Create a Date Table Using DAX
+### Opción 1: Crear una tabla de fechas con DAX
 
-Add a calculated table with a complete date range:
+Agrega una tabla calculada con un rango de fechas completo:
 
 ```dax
 DateTable = 
@@ -60,54 +60,54 @@ ADDCOLUMNS (
 )
 ```
 
-### Option 2: Import from Data Source
+### Opción 2: Importar desde el Data source
 
-Create a date dimension table in your data warehouse or data source and import it into the model.
+Crea una tabla de dimensión de fechas en tu Warehouse o Data source, e impórtala al modelo.
 
-### Mark as Date Table
+### Marcar como tabla de fechas
 
-After creating the table:
+Después de crear la tabla:
 
-1. Select the date table in the **TOM Explorer**
-2. Right-click and choose **Mark as Date Table**
-3. Select the date column as the key column
-4. Create relationships between the date table and your fact tables
+1. Selecciona la tabla de fechas en el **Explorador TOM**
+2. Haz clic con el botón derecho y selecciona **Marcar como tabla de fechas**
+3. Selecciona la columna de fecha como columna clave
+4. Crea relaciones entre la tabla de fechas y tus tablas de hechos
 
-### Set Calendar Metadata
+### Configurar los metadatos del calendario
 
-Alternatively, configure the calendar metadata:
+Como alternativa, configura los metadatos del calendario:
 
-1. Select the date table
-2. In the **Properties** pane, expand **Calendars**
-3. Add a new calendar and configure the date column reference
+1. Selecciona la tabla de fechas
+2. En el panel de **Propiedades**, expande la sección **Calendarios**
+3. Agrega un calendario nuevo y configura la referencia de la columna de fecha
 
-## Example
+## Ejemplo
 
-A typical date table structure:
+Una estructura típica de tabla de fechas:
 
-| Date                                                | Year                                                | Quarter                                             | Month                                               | MonthNumber                                         | Day                                                 |
+| Fecha                                               | Año                                                 | Trimestre                                           | Mes                                                 | Número de mes                                       | Día                                                 |
 | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| 2025-01-01                                          | 2025                                                | Q1                                                  | January                                             | 1                                                   | 1                                                   |
-| 2025-01-02                                          | 2025                                                | Q1                                                  | January                                             | 1                                                   | 2                                                   |
+| 2025-01-01                                          | 2025                                                | Q1                                                  | Enero                                               | 1                                                   | 1                                                   |
+| 2025-01-02                                          | 2025                                                | Q1                                                  | Enero                                               | 1                                                   | 2                                                   |
 | ... | ... | ... | ... | ... | ... |
 
-Once created, establish relationships:
+Una vez creada, establezca las relaciones:
 
 ```
 'DateTable'[Date] (1) -> (*) 'Sales'[OrderDate]
 'DateTable'[Date] (1) -> (*) 'Orders'[ShipDate]
 ```
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Remove Auto Date Table](xref:kb.bpa-remove-auto-date-table) - Removing automatic date tables that duplicate functionality
+- [Quitar la tabla de fechas automática](xref:kb.bpa-remove-auto-date-table) - Eliminación de las tablas de fechas automáticas que duplican la funcionalidad
 
-## Learn More
+## Más información
 
-- [Create Date Tables in Power BI](https://learn.microsoft.com/power-bi/guidance/model-date-tables)
-- [Time Intelligence Functions in DAX](https://learn.microsoft.com/dax/time-intelligence-functions-dax)
-- [Mark as Date Table](https://learn.microsoft.com/power-bi/transform-model/desktop-date-tables)
+- [Crear tablas de fechas en Power BI](https://learn.microsoft.com/power-bi/guidance/model-date-tables)
+- [Funciones de inteligencia temporal en DAX](https://learn.microsoft.com/dax/time-intelligence-functions-dax)
+- [Marcar como tabla de fechas](https://learn.microsoft.com/power-bi/transform-model/desktop-date-tables)
