@@ -9,22 +9,22 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
 # Tabular Editor Learn
 
-[Tabular Editor Learn](https://tabulareditor.com/learn) is a free interactive learning environment designed to help you master Tabular Editor 3 and its features. Whether you're a beginner or an experienced user, it offers a variety of courses, tutorials, and hands-on exercises to enhance your skills.
+[Tabular Editor Learn](https://tabulareditor.com/learn) 是一个免费的交互式学习环境，旨在帮助你掌握 Tabular Editor 3 及其功能。 无论你是新手还是资深用户，这里都提供多种课程、教程和动手练习，帮助你提升技能。
 
-## Self-paced learning
+## 按自己的节奏学习
 
-The learn platform contains both starter courses and deep-dive courses into all aspects of Tabular Editor. Additionally, we also offer courses in Pro Development skills within Power BI such as TMDL, Notebooks and User-Defined Functions.
+Learn 学习平台既提供入门课程，也提供深入课程，涵盖 Tabular Editor 的各个方面。 此外，我们还提供 Power BI 的专业开发技能课程，例如 TMDL、Notebooks 和用户定义函数。
 
-## Tabular Editor Training Partners
+## Tabular Editor 培训合作伙伴
 
-In person training is also available through [certified training partners.](https://tabulareditor.com/certified-training-partners) Check out and contact them for your bespoke Tabular Editor training.
+你也可以通过[认证培训合作伙伴](https://tabulareditor.com/certified-training-partners)参加线下培训。欢迎查看并联系他们，为你量身定制 Tabular Editor 培训。
