@@ -1,88 +1,88 @@
-# Knowledge Base
+# Base de conocimientos
 
-This section contains articles about best practices, code analysis rules, and DAX optimization patterns for Tabular Editor and Power BI models.
+Esta sección contiene artículos sobre prácticas recomendadas, reglas de análisis de código y patrones de optimización de DAX para Tabular Editor y modelos de Power BI.
 
-## In this section
+## En esta sección
 
-### Best Practice Rules (BPA)
+### Reglas de prácticas recomendadas (BPA)
 
-Comprehensive guidelines for building high-quality, maintainable Power BI and Analysis Services models.
+Directrices completas para crear modelos de Power BI y Analysis Services de alta calidad y fáciles de mantener.
 
-- @kb.bpa-avoid-invalid-characters-descriptions - Prevent metadata corruption by removing control characters from descriptions
-- @kb.bpa-avoid-invalid-characters-names - Ensure object names contain only valid characters
-- @kb.bpa-data-column-source - Verify all data columns have proper source mappings
-- @kb.bpa-relationship-same-datatype - Enforce data type consistency in relationships
-- @kb.bpa-visible-objects-no-description - Ensure all visible objects have meaningful descriptions
-- @kb.bpa-trim-object-names - Remove leading and trailing spaces from names
-- @kb.bpa-expression-required - Validate that calculated objects have expressions
-- @kb.bpa-format-string-columns - Apply consistent formatting to numeric and date columns
-- @kb.bpa-format-string-measures - Provide format strings for all measures
-- @kb.bpa-do-not-summarize-numeric - Prevent inappropriate summarization of numeric columns
-- @kb.bpa-date-table-exists - Ensure proper date table configuration
-- @kb.bpa-hide-foreign-keys - Hide foreign key columns from end users
-- @kb.bpa-many-to-many-single-direction - Enforce single-direction filtering in many-to-many relationships
-- @kb.bpa-avoid-provider-partitions-structured - Use proper partition sources for structured data
-- @kb.bpa-translate-descriptions - Support multi-language descriptions
-- @kb.bpa-translate-display-folders - Localize display folder names
-- @kb.bpa-translate-hierarchy-levels - Translate hierarchy level captions
-- @kb.bpa-translate-perspectives - Localize perspective names
-- @kb.bpa-translate-visible-names - Translate visible object names for all cultures
-- @kb.bpa-perspectives-no-objects - Ensure perspectives contain relevant objects
-- @kb.bpa-calculation-groups-no-items - Validate calculation group definitions
-- @kb.bpa-set-isavailableinmdx-false - Control MDX availability of objects
-- @kb.bpa-set-isavailableinmdx-true-necessary - Enable MDX availability when required
-- @kb.bpa-remove-auto-date-table - Clean up auto-generated date tables
-- @kb.bpa-remove-unused-data-sources - Eliminate unused data source definitions
-- @kb.bpa-specify-application-name - Set application names in connection strings for monitoring
-- @kb.bpa-powerbi-latest-compatibility - Maintain compatibility with latest Power BI features
+- @kb.bpa-avoid-invalid-characters-descriptions - Evita la corrupción de metadatos eliminando caracteres de control de las descripciones
+- @kb.bpa-avoid-invalid-characters-names - Asegura que los nombres de los objetos contengan solo caracteres válidos
+- @kb.bpa-data-column-source - Verifica que todas las columnas de datos tengan asignaciones de origen correctas
+- @kb.bpa-relationship-same-datatype - Impone la coherencia de los tipos de datos en las relaciones
+- @kb.bpa-visible-objects-no-description - Asegura que todos los objetos visibles tengan descripciones significativas
+- @kb.bpa-trim-object-names - Elimina los espacios al principio y al final de los nombres
+- @kb.bpa-expression-required - Valida que los objetos calculados tengan expresiones
+- @kb.bpa-format-string-columns - Aplica un formato coherente a las columnas numéricas y de fecha
+- @kb.bpa-format-string-measures - Proporciona cadenas de formato para todas las medidas
+- @kb.bpa-do-not-summarize-numeric - Evita la agregación inadecuada de columnas numéricas
+- @kb.bpa-date-table-exists - Asegura una configuración correcta de la tabla de fechas
+- @kb.bpa-hide-foreign-keys - Oculta las columnas de clave externa a los usuarios finales
+- @kb.bpa-many-to-many-single-direction - Aplica el filtrado en una sola dirección en relaciones de muchos a muchos
+- @kb.bpa-avoid-provider-partitions-structured - Usa orígenes de partición adecuados para datos estructurados
+- @kb.bpa-translate-descriptions - Ofrece compatibilidad con descripciones en varios idiomas
+- @kb.bpa-translate-display-folders - Localiza los nombres de las carpetas de visualización
+- @kb.bpa-translate-hierarchy-levels - Traduce las etiquetas de los niveles de jerarquía
+- @kb.bpa-translate-perspectives - Localiza los nombres de las perspectivas
+- @kb.bpa-translate-visible-names - Traduce los nombres de los objetos visibles para todas las configuraciones regionales
+- @kb.bpa-perspectives-no-objects - Asegura que las perspectivas contengan objetos relevantes
+- @kb.bpa-calculation-groups-no-items - Validar las definiciones de los grupos de cálculo
+- @kb.bpa-set-isavailableinmdx-false - Controlar la disponibilidad de los objetos en MDX
+- @kb.bpa-set-isavailableinmdx-true-necessary - Habilitar la disponibilidad en MDX cuando sea necesario
+- @kb.bpa-remove-auto-date-table - Limpiar las tablas de fechas generadas automáticamente
+- @kb.bpa-remove-unused-data-sources - Eliminar definiciones de Data source no utilizadas
+- @kb.bpa-specify-application-name - Establecer nombres de aplicación en las cadenas de conexión para la supervisión
+- @kb.bpa-powerbi-latest-compatibility - Mantener la compatibilidad con las últimas funcionalidades de Power BI
 
-## Code Actions
+## Acciones de código
 
-### DAX Code Analysis (DI)
+### Análisis de código DAX (DI)
 
-Improvement suggestions for DAX code structure and efficiency. These rules identify opportunities to simplify and optimize your expressions.
+Sugerencias de mejora para la estructura y la eficiencia del código DAX. Estas reglas identifican oportunidades para simplificar y optimizar sus expresiones.
 
-- @DI001 - Remove unused variable
-- @DI002 - Remove unused variable
-- @DI003 - Remove table name
-- @DI004 - Add table name
-- @DI005 - Rewrite table filter as scalar predicate
-- @DI006 - Split multi-column filter into multiple filters
-- @DI007 - Simplify SWITCH statement
-- @DI008 - Remove superfluous CALCULATE
-- @DI009 - Avoid calculate shortcut syntax
-- @DI010 - Use MIN/MAX instead of IF
-- @DI011 - Use ISEMPTY instead of COUNTROWS
-- @DI012 - Use DIVIDE instead of division
-- @DI013 - Use division instead of DIVIDE
-- @DI014 - Replace IFERROR with DIVIDE
-- @DI015 - Replace IF with DIVIDE
+- @DI001 - Eliminar variable no utilizada
+- @DI002 - Eliminar variable no utilizada
+- @DI003 - Eliminar el nombre de la tabla
+- @DI004 - Agregar el nombre de la tabla
+- @DI005 - Reescribir el filtro de tabla FILTER como predicado escalar
+- @DI006 - Dividir el filtro FILTER de varias columnas en varios filtros
+- @DI007 - Simplificar la instrucción SWITCH
+- @DI008 - Eliminar CALCULATE superfluo
+- @DI009 - Evitar la sintaxis abreviada de CALCULATE
+- @DI010 - Usar MIN/MAX en lugar de IF
+- @DI011 - Usar ISEMPTY en lugar de COUNTROWS
+- @DI012 - Usar DIVIDE en lugar de la división
+- @DI013 - Usar la división en lugar de DIVIDE
+- @DI014 - Reemplazar IFERROR por DIVIDE
+- @DI015 - Sustituir IF por DIVIDE
 
-### DAX Refactoring (DR)
+### Refactorización de DAX (DR)
 
-Refactoring suggestions for complex or inefficient DAX patterns. These rules help modernize and improve readability of your DAX code.
+Sugerencias de refactorización para patrones de DAX complejos o ineficientes. Estas reglas ayudan a modernizar y mejorar la legibilidad de tu código DAX.
 
-- @DR001 - Convert to scalar predicate
-- @DR002 - Use aggregator instead of iterator
-- @DR003 - Use VALUES instead of SUMMARIZE
-- @DR004 - Prefix variable
-- @DR005 - Prefix temporary column
-- @DR006 - Move constant aggregation to variable
-- @DR007 - Simplify 1-variable block
-- @DR008 - Simplify multi-variable block
-- @DR009 - Rewrite using DISTINCTCOUNT
-- @DR010 - Rewrite using COALESCE
-- @DR011 - Rewrite using ISBLANK
-- @DR012 - Remove unnecessary BLANK
-- @DR013 - Simplify negated logic
-- @DR014 - Simplify using IN
+- @DR001 - Convertir en predicado escalar
+- @DR002 - Usar un agregador en lugar de un iterador
+- @DR003 - Usar VALUES en lugar de SUMMARIZE
+- @DR004 - Añadir un prefijo a la variable
+- @DR005 - Añadir un prefijo a la columna temporal
+- @DR006 - Mover la agregación constante a una variable
+- @DR007 - Simplificar un bloque de 1 variable
+- @DR008 - Simplificar un bloque de varias variables
+- @DR009 - Reescribir usando DISTINCTCOUNT
+- @DR010 - Reescribir usando COALESCE
+- @DR011 - Reescribir usando ISBLANK
+- @DR012 - Eliminar BLANK innecesario
+- @DR013 - Simplificar la lógica negada
+- @DR014 - Simplificar usando IN
 
-### DAX Rewrites (RW)
+### Reescrituras de DAX (RW)
 
-Suggested rewrites for specific DAX patterns that can be expressed more effectively using alternative syntax.
+Reescrituras sugeridas para patrones de DAX específicos que pueden expresarse de forma más eficaz con sintaxis alternativa.
 
-- @RW001 - Rewrite TOTALxTD using CALCULATE
-- @RW002 - Rewrite using FILTER
-- @RW003 - Invert IF
+- @RW001 - Reescribir TOTALxTD usando CALCULATE
+- @RW002 - Reescribir usando FILTER
+- @RW003 - Invertir la expresión IF
 
 ---
