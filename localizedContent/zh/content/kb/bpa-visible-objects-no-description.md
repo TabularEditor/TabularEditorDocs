@@ -1,48 +1,48 @@
 ---
 uid: kb.bpa-visible-objects-no-description
-title: Visible Objects Should Have Descriptions
+title: 可见对象应有描述
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring visible model objects have descriptions to improve discoverability and user experience.
+description: 一条最佳实践规则：确保可见的模型对象都有描述，以提升可发现性和用户体验。
 ---
 
-# Visible Objects Should Have Descriptions
+# 可见对象应有描述
 
-## Overview
+## 概述
 
-This best practice rule identifies visible tables, columns, measures, calculation groups, and user-defined functions that lack descriptions. Adding descriptions improves model usability, documentation quality, and user experience.
+此最佳实践规则会识别缺少描述的可见表、列、度量值、计算组以及用户定义函数。 添加描述可提升模型的易用性、文档质量和用户体验。
 
-- Category: **Maintenance**
+- 类别：**维护**
 
-- Severity: Low (1)
+- 严重性：低（1）
 
-## Applies To
+## 适用于
 
-- Tables
-- Calculated Tables
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
-- Measures
-- Calculation Groups
-- User-Defined Functions (Compatibility Level 1702+)
+- 表
+- 计算表格
+- 数据列
+- 计算列
+- 计算表格列
+- 度量值
+- 计算组
+- 用户定义函数（兼容级别 1702+）
 
-## Why This Matters
+## 为何重要
 
-Descriptions provide critical context for model users:
+描述可为模型用户提供关键背景信息：
 
-- **Improved discoverability**: Users understand field purpose before using them
-- **Better self-service BI**: Business users can work independently with clear guidance
-- **Reduced support burden**: Fewer questions about field definitions
-- **Enhanced tooltips**: Power BI and Excel show descriptions in hover tooltips
-- **Documentation foundation**: Descriptions form the basis for automated documentation
-- **Governance and compliance**: Descriptions can include data lineage and business definitions
-- **Usage by AI**: AI Agents can better infer the purpose of an object if it has a description.
-  Without descriptions, users guess at field meanings, leading to incorrect analysis and increased support requests.
+- **提升可发现性**：用户在使用字段之前就能了解其用途
+- **增强自助式 BI**：业务用户在清晰指引下即可独立开展分析
+- **降低支持负担**：关于字段定义的疑问更少
+- **增强的工具提示**：Power BI 和 Excel 会在悬停时的工具提示中显示描述
+- **文档基础**：描述是自动化文档的基础
+- **治理与合规**：描述可包含数据血缘和业务定义
+- **AI 使用**：如果对象包含说明，AI 代理能更准确地推断其用途。
+  如果没有描述，用户只能猜测字段含义，导致分析错误，并增加支持请求。
 
-## When This Rule Triggers
+## 此规则何时触发
 
-The rule triggers when an object is **visible** AND has an empty or whitespace-only description:
+当对象**可见**且描述为空或仅包含空白字符时，此规则将触发：
 
 ```csharp
 string.IsNullOrWhitespace(Description)
@@ -50,57 +50,57 @@ and
 IsHidden == false
 ```
 
-**Note**: Hidden objects are excluded because they are not meant for end-user consumption.
+**注意**：已隐藏的对象会被排除，因为它们并不面向最终用户使用。
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, select the object
-2. In **Properties** pane, locate the **Description** field
-3. Enter a clear, concise description
-4. Save changes
+1. 在 **TOM Explorer** 中，选择该对象
+2. 在 **属性** 窗格中，找到 **描述** 字段
+3. 输入清晰、简明的描述
+4. 保存更改
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Missing Documentation During Development
+### 原因 1：开发阶段缺少文档
 
-Objects created without adding descriptions.
+创建对象时未添加描述。
 
-### Cause 2: Rapid Prototyping
+### 原因 2：快速原型开发
 
-Models built quickly without proper documentation.
+为快速搭建模型而未进行适当的文档编写。
 
-### Cause 3: Legacy Models
+### 原因 3：遗留模型
 
-Older models created before description standards were established.
+在描述标准建立之前创建的旧模型。
 
-## Example
+## 示例
 
-### Before Fix
-
-```
-Measure: [Total Revenue]
-Description: (empty)
-```
-
-**User experience**: Tooltip shows no information, users must guess measure purpose.
-
-### After Fix
+### 修复前
 
 ```
-Measure: [Total Revenue]
-Description: "Total revenue excluding taxes and discounts. Calculated as SUM(Sales[UnitPrice] * Sales[Quantity]). Use for financial reporting."
+度量值：[Total Revenue]
+描述：（空）
 ```
 
-**User experience**: Clear tooltip helps users understand and correctly use the measure.
+**用户体验**：工具提示不显示任何内容，用户必须猜测该度量值的用途。
 
-## Compatibility Level
+### 修复后
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+度量值: [Total Revenue]
+说明: "不含税费和折扣的总收入。计算为 SUM(Sales[UnitPrice] * Sales[Quantity])。用于财务报告。"
+```
 
-User-Defined Function descriptions are validated at compatibility level **1702** and higher.
+**用户体验**：清晰的工具提示可帮助用户理解并正确使用该度量值。
 
-## Related Rules
+## 兼容级别
 
-- [Avoid Invalid Characters in Descriptions](xref:kb.bpa-avoid-invalid-characters-descriptions) - Ensuring description quality
+本规则适用于兼容级别为 **1200** 及以上的模型。
+
+兼容级别达到 **1702** 及以上时，会验证用户定义函数的说明。
+
+## 相关规则
+
+- [避免在说明中使用无效字符](xref:kb.bpa-avoid-invalid-characters-descriptions)——确保说明质量
