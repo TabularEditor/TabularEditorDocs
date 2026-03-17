@@ -1,99 +1,99 @@
 ---
 uid: kb.bpa-expression-required
-title: Expression Required for Calculated Objects
+title: Se requiere una expresión para los objetos calculados
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring measures, calculated columns, and calculation items have valid DAX expressions.
+description: Regla de mejores prácticas que garantiza que las medidas, las columnas calculadas y los elementos de cálculo tengan expresiones DAX válidas.
 ---
 
-# Expression Required for Calculated Objects
+# Se requiere una expresión para los objetos calculados
 
-## Overview
+## Resumen
 
-This best practice rule identifies measures, calculated columns, and calculation items that lack a DAX expression. All calculated objects must have a valid, non-empty expression to function correctly and prevent errors during model deployment and query execution.
+Esta regla de mejores prácticas identifica medidas, columnas calculadas y elementos de cálculo que no tienen una expresión DAX. Todos los objetos calculados deben tener una expresión válida y no vacía para funcionar correctamente y evitar errores durante la implementación del modelo y la ejecución de consultas.
 
-- Category: Error Prevention
+- Categoría: Prevención de errores
 
-- Severity: High (3)
+- Gravedad: Alta (3)
 
-## Applies To
+## Se aplica a
 
-- Measures
-- Calculated Columns
-- Calculation Items
+- Medidas
+- Columnas calculadas
+- Elementos de cálculo
 
-## Why This Matters
+## Por qué es importante
 
-Calculated objects without expressions will cause critical failures:
+Los objetos calculados sin una expresión provocarán fallos críticos:
 
-- **Model validation errors**: The model will fail validation when saved or deployed
-- **Query failures**: Attempts to use the object in queries will generate errors
-- **Broken dependencies**: Other measures or calculations referencing the object will fail
-- **Deployment blockers**: Power BI Service and Analysis Services will reject models with empty expressions
-- **Unexpected behavior**: The object may appear in field lists but produce no results
+- **Errores de validación del modelo**: el modelo no superará la validación al guardarse o implementarse
+- **Errores en las consultas**: los intentos de usar el objeto en consultas generarán errores
+- **Dependencias rotas**: otras medidas o cálculos que hagan referencia al objeto fallarán
+- **Bloqueos de implementación**: Power BI Service y Analysis Services rechazarán los modelos con expresiones vacías
+- **Comportamiento inesperado**: el objeto puede aparecer en las listas de campos, pero no devolver resultados
 
-Empty expressions typically result from incomplete object creation, copy/paste operations, or programmatic model generation errors.
+Las expresiones vacías suelen deberse a una creación incompleta del objeto, operaciones de copiar y pegar o errores en la generación programática del modelo.
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when any of the following objects have an empty or whitespace-only expression:
+La regla se activa cuando cualquiera de los siguientes objetos tenga una expresión vacía o compuesta solo por espacios en blanco:
 
 ```csharp
 string.IsNullOrWhiteSpace(Expression)
 ```
 
-This applies to:
+Esto se aplica a:
 
-- **Measures**: Should contain a DAX aggregation or calculation
-- **Calculated Columns**: Should contain a row-context DAX expression
-- **Calculation Items**: Should contain a DAX expression modifying the base measure
+- **Medidas**: deben contener una agregación o un cálculo DAX
+- **Columnas calculadas**: deben contener una expresión DAX con contexto de fila
+- **Elementos de cálculo**: deben contener una expresión DAX que modifique la medida base
 
-## How to Fix
+## Cómo corregirlo
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, locate the measure, calculated column, or calculation item
-2. Double-click to open the **DAX Editor**
-3. Enter a valid DAX expression
-4. Validate the syntax and save
+1. En el **Explorador TOM**, localiza la medida, la columna calculada o el elemento de cálculo
+2. Haz doble clic para abrir el **Editor de DAX**
+3. Introduce una expresión DAX válida
+4. Valida la sintaxis y guarda los cambios
 
-## Common Causes
+## Causas comunes
 
-### Cause 1: Incomplete Creation
+### Causa 1: Creación incompleta
 
-Object was created intending to define it later but was forgotten.
+El objeto se creó con la intención de definirlo más adelante, pero se olvidó hacerlo.
 
-### Cause 2: Template-Based Creation
+### Causa 2: Creación basada en plantillas
 
-Scripts or templates created objects without expressions.
+Los scripts o las plantillas crearon objetos sin expresiones.
 
-### Cause 3: Failed Copy Operation
+### Causa 3: Error en la operación de copia
 
-Copied an object but the expression didn't transfer.
+Copiaste un objeto, pero la expresión no se transfirió.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Measure: [Total Revenue]
-  Expression: [empty]
-  FormatString: $#,0.00
-```
-
-**Error when queried**: "The expression for measure '[Total Revenue]' is not valid."
-
-### After Fix
+### Antes de la corrección
 
 ```
-Measure: [Total Revenue]
-  Expression: SUM('Sales'[Revenue])
-  FormatString: $#,0.00
+Medida: [Total Revenue]
+  Expresión: [empty]
+  FormatString: $#.0,00
 ```
 
-**Result**: Measure functions correctly and returns aggregated revenue.
+**Error al consultar**: "La expresión de la medida '[Total Revenue]' no es válida."
 
-## Compatibility Level
+### Después de la corrección
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Medida: [Total Revenue]
+  Expresión: SUM('Sales'[Revenue])
+  FormatString: $#.0,00
+```
+
+**Resultado**: La medida funciona correctamente y devuelve los ingresos agregados.
+
+## Nivel de compatibilidad
+
+Esta regla se aplica a los modelos con un nivel de compatibilidad **1200** o superior.
 
