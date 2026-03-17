@@ -1,6 +1,6 @@
 ---
 uid: deploy-current-model
-title: Deploy Current Loaded Model
+title: 部署当前已加载的模型
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,16 +9,16 @@ applies_to:
       full: true
 ---
 
-## Deployment
+## 部署
 
-If you want to deploy the currently loaded model to a new database, or overwrite an existing database with the model changes (for example when loading from a Model.bim file), use the Deployment Wizard under "Model" > "Deploy...".
+如果您想将当前加载的模型部署到新数据库，或用模型更改覆盖现有数据库（例如从 Model.bim 文件加载时），请使用“模型”>“部署...”下的 Deployment Wizard。
 
-Tabular Editor comes with a deployment wizard that provides a few benefits compared to deploying from SSDT - especially when deploying to an existing database. After choosing a server and a database to deploy to, you have the following options for the deployment at hand:
+Tabular Editor 内置 Deployment Wizard，相比从 SSDT 部署有一些优势——尤其是在部署到现有数据库时。 选择要部署到的服务器和数据库后，您可以为本次部署选择以下选项：
 
 ![Deployment Wizard](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
 
-Leaving the "Deploy Connections" box unchecked, will make sure that all the data sources on the target database stay untouched. You will get an error if your model contains one or more tables with a data source, that does not already exist in the target database.
+不勾选“部署连接”复选框，就能确保目标数据库上的所有数据源保持不变。 如果模型中有一个或多个表使用了目标数据库中尚不存在的数据源，则会报错。
 
-Similarly, leaving out "Deploy Table Partitions", will make sure that existing partitions on your tables are not changed, leaving the data in the partitions intact.
+同样地，不勾选“部署表分区”，就能确保表上现有的分区不会被更改，从而保持分区中的数据不变。
 
-When the "Deploy Roles" box is checked, the roles in the target database will be updated to reflect what you have in the loaded model, however if the "Deploy Role Members" is unchecked, the members of each role will be unchanged in the target database.
+勾选“部署角色”后，目标数据库中的角色将更新为与当前加载的模型一致；但如果未勾选“部署角色成员”，则目标数据库中各角色的成员将保持不变。
