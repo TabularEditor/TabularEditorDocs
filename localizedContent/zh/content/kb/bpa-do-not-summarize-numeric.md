@@ -1,42 +1,42 @@
 ---
 uid: kb.bpa-do-not-summarize-numeric
-title: Set SummarizeBy to None for Numeric Columns
+title: 将数值列的 SummarizeBy 设置为 None
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule preventing incorrect default aggregations on numeric columns that should not be summed.
+description: 最佳实践规则：防止对不应求和的数值列进行错误的默认聚合。
 ---
 
-# Set SummarizeBy to None for Numeric Columns
+# 将数值列的 SummarizeBy 设置为 None
 
-## Overview
+## 概述
 
-This best practice rule identifies visible numeric columns (Int64, Decimal, Double) that have a default aggregation behavior (`SummarizeBy`) other than `None`. Most numeric columns should not be automatically aggregated, as summing values like IDs, quantities in non-additive contexts, or codes produces meaningless results.
+此最佳实践规则会识别可见的数值列（Int64、Decimal、Double），其默认聚合行为（`SummarizeBy`）不为 `None`。 大多数数值列不应被自动聚合，因为对 ID、非可加语境下的数量或代码等数值求和会产生毫无意义的结果。
 
-- Category: Formatting
+- 类别：格式设置
 
-- Severity: High (3)
+- 严重性：高（3）
 
-## Applies To
+## 适用于
 
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- 数据列
+- 计算列
+- 计算表格的列
 
-## Why This Matters
+## 为什么这很重要
 
-Default aggregation on inappropriate columns causes serious issues:
+对不合适的列进行默认聚合会带来严重问题：
 
-- **Incorrect analysis**: Users get meaningless totals (sum of CustomerIDs, etc.)
-- **Misleading dashboards**: Visualizations show wrong numbers by default
-- **User confusion**: Users must manually change aggregation for every visual
-- **Wrong decisions**: Business decisions based on incorrect automatic aggregations
-- **Data credibility**: Users lose trust in the model and data
+- **错误分析**：用户会得到毫无意义的汇总（例如 CustomerID 的求和等）
+- **误导性的 Dashboard**：Visual 默认会显示错误的数值
+- **用户困惑**：用户必须在每个 Visual 中手动更改聚合方式
+- **错误决策**：基于错误的自动聚合做出业务决策
+- **数据可信度**：用户会对模型和数据失去信任
 
-Common columns that should NOT be aggregated include IDs, keys, codes, ratios, percentages, and non-additive quantities.
+常见的“不应聚合”列包括 ID、键、代码、比率、百分比，以及不可加的数量。
 
-## When This Rule Triggers
+## 此规则何时触发
 
-The rule triggers when a column meets ALL these conditions:
+当某列同时满足以下 ALL 项条件时，此规则会触发：
 
 ```csharp
 (DataType = "Int64" or DataType="Decimal" or DataType="Double")
@@ -45,47 +45,47 @@ SummarizeBy <> "None"
 and not (IsHidden or Table.IsHidden)
 ```
 
-In other words: visible numeric columns that have a summarization behavior other than "None".
+换句话说：可见的数值列，且其汇总方式不是“None”。
 
-## How to Fix
+## 如何修复
 
-### Automatic Fix
+### 自动修复
 
-This rule includes an automatic fix:
+此规则提供自动修复：
 
 ```csharp
 SummarizeBy = AggregateFunction.None
 ```
 
-To apply:
+应用方法：
 
-1. In the **Best Practice Analyzer** select flagged objects
-2. Click **Apply Fix**
+1. 在 **Best Practice Analyzer** 中选择被标记的对象
+2. 单击 **Apply Fix**
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, locate the column
-2. In **Properties** pane, find **Summarize By**
-3. Change from **Sum**, **Average**, **Min**, **Max**, **Count**, or **DistinctCount** to **None**
-4. Save changes
+1. 在 **TOM Explorer** 中找到该列
+2. 在 **Properties** 窗格中，找到 **Summarize By**
+3. 将 **Sum**、**Average**、**Min**、**Max**、**Count** 或 **DistinctCount** 改为 **None**
+4. 保存更改
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Default Import Behavior
+### 原因 1：默认导入行为
 
-Numeric columns default to Sum aggregation during import.
+导入时，数值列默认使用 Sum 聚合。
 
-### Cause 2: Lack of Column Review
+### 原因 2：未审查列设置
 
-Models deployed without reviewing column aggregation settings.
+模型部署时未检查列的聚合设置。
 
-### Cause 3: ID Columns Not Hidden
+### 原因 3：ID 列未隐藏
 
-Numeric ID columns remain visible with default Sum aggregation.
+数值型 ID 列保持可见，并沿用默认的 Sum 聚合。
 
-## Example
+## 示例
 
-### Before Fix
+### 修复前
 
 ```
 Column: CustomerID
@@ -93,9 +93,9 @@ Column: CustomerID
   SummarizeBy: Sum
 ```
 
-**Result**: Visual shows "Sum of CustomerID: 12,456,789" (meaningless number)
+**结果**：Visual 显示“CustomerID 的总和：12,456,789”（毫无意义的数字）
 
-### After Fix
+### 修复后
 
 ```
 Column: CustomerID
@@ -103,18 +103,18 @@ Column: CustomerID
   SummarizeBy: None
 ```
 
-**Result**: Visual requires explicit aggregation or shows individual Customer IDs
+**结果**：Visual 需要显式聚合，否则会逐个显示 Customer ID
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1200** and higher.
+这个规则适用于兼容级别为 **1200** 及以上的模型。
 
-## Related Rules
+## 相关规则
 
-- [Hide Foreign Keys](xref:kb.bpa-hide-foreign-keys) - Related column hygiene rule
-- [Format String for Columns](xref:kb.bpa-format-string-columns) - Column formatting
+- [隐藏外键](xref:kb.bpa-hide-foreign-keys) - 相关的列清理规则
+- [列格式字符串](xref:kb.bpa-format-string-columns) - 列格式设置
 
-## Learn More
+## 了解更多
 
-- [Column Properties](https://learn.microsoft.com/analysis-services/tabular-models/column-properties-ssas-tabular)
-- [When to Use Measures vs. Calculated Columns](https://learn.microsoft.com/power-bi/transform-model/desktop-tutorial-create-measures)
+- [列属性](https://learn.microsoft.com/analysis-services/tabular-models/column-properties-ssas-tabular)
+- [何时使用度量值与计算列](https://learn.microsoft.com/power-bi/transform-model/desktop-tutorial-create-measures)
