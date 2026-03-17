@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-load-inspect
-title: Load and Inspect a Metric View
+title: 加载并检查指标视图
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -10,100 +10,100 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.25.0
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           none: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Load and Inspect a Metric View
+# 加载并检查指标视图
 
-This how-to demonstrates how to load a Databricks Metric View into Tabular Editor and explore its structure using C# scripts.
-This is the foundational skill for all other Metric View operations.
+本操作指南演示如何将 Databricks Metric View 加载到 Tabular Editor 中，并使用 C# Script 探索其结构。
+这是进行其他所有 Metric View 操作的基础。
 
-## Sample Metric View
+## 示例 Metric View
 
 [!INCLUDE [Sample Metric View](includes/sample-metricview.md)]
 
-## Load a Metric View from a file
+## 从文件加载 Metric View
 
-Use `SemanticBridge.MetricView.Load` to load a Metric View from a YAML file on disk.
+使用 `SemanticBridge.MetricView.Load` 从磁盘上的 YAML 文件加载 Metric View。
 
 ```csharp
-// Load from a file path
+// 从文件路径加载
 SemanticBridge.MetricView.Load("C:/MetricViews/sales-metrics.yaml");
 
-// Confirm it loaded
-Output($"Loaded Metric View version: {SemanticBridge.MetricView.Model.Version}");
+// 确认已加载
+Output($"已加载的 Metric View 版本：{SemanticBridge.MetricView.Model.Version}");
 ```
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
-## Access the loaded Metric View
+## 访问已加载的 Metric View
 
-After loading, the Metric View is available in any script as `SemanticBridge.MetricView.Model`.
-This returns a Metric View [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) object, the root of the [Metric View object graph](xref:semantic-bridge-metric-view-object-model).
+加载完成后，可在任何脚本中通过 `SemanticBridge.MetricView.Model` 访问该 Metric View。
+这会返回一个 Metric View 的 [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) 对象，它是 [Metric View 对象图](xref:semantic-bridge-metric-view-object-model) 的根节点。
 
 ```csharp
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Version: {view.Version}");
-sb.AppendLine($"Source (fact table): {view.Source}");
+sb.AppendLine($"版本：{view.Version}");
+sb.AppendLine($"来源（事实表）：{view.Source}");
 Output(sb.ToString());
 ```
 
-## Inspect Metric View joins (dimension tables)
+## 检查 Metric View 的连接（维度表）
 
-The Metric View `Joins` property contains the dimension tables joined to the fact.
+Metric View 的 `Joins` 属性包含与事实表连接的维度表。
 
 ```csharp
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Number of joins: {view.Joins?.Count ?? 0}");
+sb.AppendLine($"连接数量: {view.Joins?.Count ?? 0}");
 sb.AppendLine("");
 
 foreach (var join in view.Joins ?? [])
 {
-    sb.AppendLine($"Join: {join.Name}");
-    sb.AppendLine($"  Source: {join.Source}");
-    sb.AppendLine($"  On: {join.On}");
+    sb.AppendLine($"连接: {join.Name}");
+    sb.AppendLine($"  来源: {join.Source}");
+    sb.AppendLine($"  条件: {join.On}");
     sb.AppendLine("");
 }
 
 Output(sb.ToString());
 ```
 
-**Output:**
+**输出：**
 
 ```
-Number of joins: 3
+联接数量: 3
 
-Join: product
-  Source: sales.dim.product
+联接: product
+  来源: sales.dim.product
   On: product_id = product.product_id
 
-Join: customer
-  Source: sales.dim.customer
+联接: customer
+  来源: sales.dim.customer
   On: customer_id = customer.customer_id
 
-Join: date
-  Source: sales.dim.date
+联接: date
+  来源: sales.dim.date
   On: order_date = date.date_key
 ```
 
-## Inspect Metric View dimensions (fields)
+## 查看 Metric View 维度（字段）
 
-The Metric View `Dimensions` property contains all field definitions.
+Metric View 的 `Dimensions` 属性包含所有字段定义。
 
 ```csharp
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Number of dimensions: {view.Dimensions?.Count ?? 0}");
+sb.AppendLine($"维度数量: {view.Dimensions?.Count ?? 0}");
 sb.AppendLine("");
 
 foreach (var dim in view.Dimensions ?? [])
@@ -114,10 +114,10 @@ foreach (var dim in view.Dimensions ?? [])
 Output(sb.ToString());
 ```
 
-**Output:**
+**输出：**
 
 ```
-Number of dimensions: 6
+维度数量: 6
 
 product_name         <- product.product_name
 product_category     <- product.category
@@ -127,15 +127,15 @@ order_year           <- date.year
 order_month          <- date.month_name
 ```
 
-## Inspect Metric View measures
+## 查看 Metric View 度量值
 
-The Metric View `Measures` property contains all Metric View measure definitions with their aggregation expressions.
+Metric View 的 `Measures` 属性包含所有 Metric View 度量值定义及其聚合表达式。
 
 ```csharp
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Number of measures: {view.Measures?.Count ?? 0}");
+sb.AppendLine($"度量值数量: {view.Measures?.Count ?? 0}");
 sb.AppendLine("");
 
 foreach (var measure in view.Measures ?? [])
@@ -146,10 +146,10 @@ foreach (var measure in view.Measures ?? [])
 Output(sb.ToString());
 ```
 
-**Output:**
+**输出：**
 
 ```
-Number of measures: 4
+度量值数量: 4
 
 total_revenue        = SUM(revenue)
 order_count          = COUNT(order_id)
@@ -157,23 +157,23 @@ avg_order_value      = AVG(revenue)
 unique_customers     = COUNT(DISTINCT customer_id)
 ```
 
-## Generate a complete summary
+## 生成完整摘要
 
-Here is a complete script that outputs a formatted summary of the entire Metric View.
+下面是一段完整脚本，用于输出整个 Metric View 的格式化摘要。
 
 ```csharp
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine("METRIC VIEW SUMMARY");
+sb.AppendLine("METRIC VIEW 摘要");
 sb.AppendLine("===================");
 sb.AppendLine("");
-sb.AppendLine($"Version: {view.Version}");
-sb.AppendLine($"Fact Source: {view.Source}");
+sb.AppendLine($"版本: {view.Version}");
+sb.AppendLine($"事实数据源: {view.Source}");
 sb.AppendLine("");
 
 // Joins
-sb.AppendLine($"JOINS ({view.Joins?.Count ?? 0})");
+sb.AppendLine($"连接 ({view.Joins?.Count ?? 0})");
 sb.AppendLine("---------");
 foreach (var join in view.Joins ?? [])
 {
@@ -182,7 +182,7 @@ foreach (var join in view.Joins ?? [])
 sb.AppendLine("");
 
 // Dimensions
-sb.AppendLine($"DIMENSIONS ({view.Dimensions?.Count ?? 0})");
+sb.AppendLine($"维度 ({view.Dimensions?.Count ?? 0})");
 sb.AppendLine("--------------");
 foreach (var dim in view.Dimensions ?? [])
 {
@@ -191,7 +191,7 @@ foreach (var dim in view.Dimensions ?? [])
 sb.AppendLine("");
 
 // Measures
-sb.AppendLine($"MEASURES ({view.Measures?.Count ?? 0})");
+sb.AppendLine($"度量值 ({view.Measures?.Count ?? 0})");
 sb.AppendLine("------------");
 foreach (var measure in view.Measures ?? [])
 {
@@ -201,14 +201,14 @@ foreach (var measure in view.Measures ?? [])
 Output(sb.ToString());
 ```
 
-## Next steps
+## 后续步骤
 
-Now that you can load and inspect a Metric View, you can:
+现在你已经能够加载并检查 Metric View 了，你还可以：
 
-- [Validate the Metric View](xref:semantic-bridge-metric-view-validation) to check for issues
-- [Import the Metric View to Tabular](xref:semantic-bridge) to create tables, columns, and measures
+- [验证 Metric View](xref:semantic-bridge-metric-view-validation)，以检查是否存在问题
+- [将 Metric View 导入到 Tabular](xref:semantic-bridge)，以创建表、列和度量值
 
-## See also
+## 另见
 
-- [Metric View Object Model](xref:semantic-bridge-metric-view-object-model)
-- [Semantic Bridge Overview](xref:semantic-bridge)
+- [Metric View 对象模型](xref:semantic-bridge-metric-view-object-model)
+- [Semantic Bridge 概述](xref:semantic-bridge)
