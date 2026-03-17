@@ -1,46 +1,46 @@
 ---
 uid: kb.bpa-remove-unused-data-sources
-title: Remove Unused Data Sources
+title: 删除未使用的数据源
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule for removing orphaned data sources to reduce model complexity and improve maintainability.
+description: 用于删除孤立数据源的最佳实践规则，可降低模型复杂性并提升可维护性。
 ---
 
-# Remove Unused Data Sources
+# 删除未使用的数据源
 
-## Overview
+## 概述
 
-This best practice rule identifies data sources that are not referenced by any partitions or table expressions. Removing unused data sources reduces model complexity, improves maintainability, and prevents confusion.
+此最佳实践规则用于识别未被任何分区或表表达式引用的数据源。 删除未使用的数据源可以降低模型复杂性、提升可维护性，并避免混淆。
 
-- Category: Maintenance
-- Severity: Low (1)
+- 类别：维护
+- 严重性：低（1）
 
-## Applies To
+## 适用范围
 
-- Provider Data Sources
-- Structured Data Sources
+- Provider数据源
+- Structured数据源
 
-## Why This Matters
+## 为何重要
 
-Unused data sources create unnecessary overhead:
+未使用的数据源会带来不必要的开销：
 
-- **Maintenance burden**: Credentials and connection strings must be maintained for unused connections
-- **Security concerns**: Unnecessary connection strings may expose sensitive information
-- **Model complexity**: Extra objects clutter the data source list
-- **Confusion**: Developers may mistakenly use obsolete data sources
-- **Deployment issues**: Unused data sources may reference systems that no longer exist
-- **Documentation overhead**: Extra objects require explanation in model documentation
+- **维护负担**：需要为未使用的连接维护凭据和连接字符串
+- **安全隐患**：不必要的连接字符串可能暴露敏感信息
+- **模型复杂性**：额外对象会让数据源列表更加杂乱
+- **混淆**：开发者可能会误用已过时的数据源
+- **部署问题**：未使用的数据源可能引用了已不存在的系统
+- **文档负担**：额外对象需要在模型文档中加以说明
 
-Unused data sources typically result from:
+未使用的数据源通常由以下情况导致：
 
-- Refactoring partitions to use different sources
-- Consolidating multiple sources into one
-- Removing tables without cleaning up their data sources
-- Testing alternative connection methods
+- 重构分区以改用其他数据源
+- 将多个数据源合并为一个
+- 删除表但未清理其数据源
+- 测试其他连接方式
 
-## When This Rule Triggers
+## 此规则何时触发
 
-The rule triggers when a data source meets all these conditions:
+当数据源同时满足以下所有条件时，就会触发此规则：
 
 ```csharp
 UsedByPartitions.Count() == 0
@@ -48,75 +48,75 @@ and not Model.Tables.Any(SourceExpression.Contains(OuterIt.Name))
 and not Model.AllPartitions.Any(Query.Contains(OuterIt.Name))
 ```
 
-In other words:
+换句话说：
 
-1. No partitions directly reference the data source
-2. No table source expressions (M queries) reference the data source by name
-3. No partition queries contain the data source name
+1. 没有任何分区直接引用该数据源
+2. 没有任何表的源表达式（M 查询）按名称引用该数据源
+3. 任何分区查询中都不包含该数据源名称
 
-## How to Fix
+## 如何修复
 
-### Automatic Fix
+### 自动修复
 
-This rule includes an automatic fix that deletes the unused data source:
+此规则提供自动修复，可删除未使用的数据源：
 
 ```csharp
 Delete()
 ```
 
-To apply:
+应用步骤：
 
-1. In the **Best Practice Analyzer** select flagged objects
-2. Click **Apply Fix**
+1. 在 **Best Practice Analyzer** 中选择被标记的对象
+2. 点击 **Apply Fix**
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, expand the **Data Sources** node
-2. Right-click the unused data source
-3. Select **Delete**
-4. Confirm the deletion
+1. 在 **TOM Explorer** 中展开 **数据源** 节点
+2. 右键点击未使用的数据源
+3. 选择 **Delete**
+4. 确认删除
 
-### Before Deleting
+### 删除前
 
-Verify the data source is truly unused:
+确认该数据源确实未被使用：
 
-- Check all partitions in all tables
-- Search M expressions for references to the data source name
-- Review custom expressions and calculated tables
-- Ensure no documentation references the connection
+- 检查所有表中的所有分区
+- 在 M 表达式中搜索对该数据源名称的引用
+- 检查自定义表达式和计算表格
+- 确保文档中没有引用该连接
 
-## Example
+## 示例
 
-### Before Fix
-
-```
-Data Sources:
-  - SQLServer_Production (Provider, used by Sales partition)
-  - SQLServer_Staging (Provider, NOT USED)  ← Remove
-  - AzureSQL_Archive (Structured, NOT USED)  ← Remove
-  - PowerQuery_Web (Structured, used by Product partition)
-```
-
-### After Fix
+### 修复前
 
 ```
-Data Sources:
-  - SQLServer_Production (Provider, used by Sales partition)
-  - PowerQuery_Web (Structured, used by Product partition)
+数据源:
+  - SQLServer_Production (Provider, 供 Sales 分区使用)
+  - SQLServer_Staging (Provider, 未使用)  ← 删除
+  - AzureSQL_Archive (Structured, 未使用)  ← 删除
+  - PowerQuery_Web (Structured, 供 Product 分区使用)
 ```
 
-**Result**: Simpler model with only necessary data sources
+### 修复后
 
-## False Positives
+```
+数据源:
+  - SQLServer_Production (Provider, 供 Sales 分区使用)
+  - PowerQuery_Web (Structured, 供 Product 分区使用)
+```
 
-The rule may flag data sources that are:
+**结果**：模型更简洁，只保留必要的数据源
 
-- Referenced through dynamic M expressions using variables
-- Used in commented-out partition queries
-- Referenced by name in annotations or descriptions
+## 误报
 
-**Solution**: Manually verify before deleting; add comments or annotations if the data source should be kept for documentation purposes.
+该规则可能会标记以下类型的数据源：
 
-## Compatibility Level
+- 通过使用变量的动态 M 表达式引用
+- 在被注释掉的分区查询中使用
+- 在批注或描述中按名称引用
 
-This rule applies to models with compatibility level **1200** and higher.
+**解决方案**：删除前请先人工核实；如果出于文档记录需要保留该数据源，请添加注释或批注。
+
+## 兼容级别
+
+这个规则适用于兼容级别为 **1200** 及以上的模型。
