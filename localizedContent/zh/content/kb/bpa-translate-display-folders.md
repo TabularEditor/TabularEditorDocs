@@ -1,44 +1,44 @@
 ---
 uid: kb.bpa-translate-display-folders
-title: Translate Display Folders for All Cultures
+title: 为所有区域设置提供显示文件夹翻译
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring display folders are translated for all defined cultures.
+description: 最佳实践规则：确保为所有已定义的区域设置翻译显示文件夹。
 ---
 
-# Translate Display Folders for All Cultures
+# 为所有区域设置提供显示文件夹翻译
 
-## Overview
+## 概述
 
-This rule identifies visible objects with display folders that lack translations for one or more cultures.
+此规则用于识别已设置显示文件夹但在一个或多个区域设置中缺少翻译的可见对象。
 
-- Category: Model Layout
-- Severity: Low (1)
+- 类别：模型布局
+- 严重性：低（1）
 
-## Applies To
+## 适用于
 
-- Measures
-- Hierarchies
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- 度量值
+- 层次结构
+- 数据列
+- 计算列
+- 计算表格的列
 
-## Why This Matters
+## 为什么这很重要
 
-- **Incomplete localization**: Display folders show in default language only
-- **Inconsistent navigation**: Partially translated folder structure
-- **User confusion**: Organization appears incomplete
-- **Professional appearance**: Missing translations reduce model quality
+- **本地化不完整**：显示文件夹只会以默认语言显示
+- **导航不一致**：文件夹结构仅部分翻译
+- **用户困惑**：组织结构看起来不完整
+- **专业形象**：缺失翻译会降低模型质量
 
-## When This Rule Triggers
+## 此规则何时会触发
 
-This rule triggers when an object meets all three of these conditions:
+当某个对象同时满足以下三项条件时，此规则会触发：
 
-1. The object is **visible** to end users (not hidden)
-2. The object has a **display folder** assigned (organizing it into a folder structure)
-3. At least one culture in the model is **missing a translation** for that display folder
+1. 该对象对最终用户**可见**（未隐藏）
+2. 该对象已设置**显示文件夹**（用于将其组织到文件夹结构中）
+3. 模型中至少有一个区域设置未为该显示文件夹**提供翻译**
 
-In plain language: visible objects that are organized in display folders should have those folder names translated for all cultures in your model.
+通俗地说：如果可见对象是按显示文件夹来组织的，那么这些文件夹名称就应该为模型中的所有区域设置都提供翻译。
 
 ```csharp
 IsVisible
@@ -46,59 +46,59 @@ and not string.IsNullOrEmpty(DisplayFolder)
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedDisplayFolders[it]))
 ```
 
-## How to Fix
+## 如何修复
 
-### Automatic Fix
+### 自动修复
 
 ```csharp
 TranslatedDisplayFolders.Reset()
 ```
 
-Resets translations to use the default display folder.
+将翻译重置为使用默认的显示文件夹。
 
-### Manual Fix
+### 手动修复
 
-1. Select object in **TOM Explorer**
-2. Expand **Translated Display Folders** in properties
-3. Enter translation for each culture
+1. 在 **TOM Explorer** 中选择对象
+2. 在属性中展开 **已翻译的显示文件夹**
+3. 为每个区域设置输入翻译
 
-## Common Causes
+## 常见原因
 
-### Cause 1: New Display Folders Added
+### 原因 1：新增了显示文件夹
 
-Display folders created without translations.
+创建显示文件夹时未提供翻译。
 
-### Cause 2: Culture Added Later
+### 原因 2：后续才添加区域设置
 
-Culture added after display folders were defined.
+在定义显示文件夹之后才添加了区域设置。
 
-### Cause 3: Incomplete Translation
+### 原因 3：翻译不完整
 
-Translation workflow didn't cover display folders.
+翻译流程没有覆盖显示文件夹。
 
-## Example
+## 示例
 
-### Before Fix
-
-```
-Measure: [Total Sales]
-Display Folder (English): "Sales Metrics"
-Display Folder (French): (missing)
-```
-
-### After Fix
+### 修复前
 
 ```
-Measure: [Total Sales]
-Display Folder (English): "Sales Metrics"
-Display Folder (French): "Métriques de Vente"
+度量值：[Total Sales]
+显示文件夹（英语）：“Sales Metrics”
+显示文件夹（法语）：（缺失）
 ```
 
-## Compatibility Level
+### 修复后
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+度量值：[Total Sales]
+显示文件夹（英语）：“Sales Metrics”
+显示文件夹（法语）：“Métriques de Vente”
+```
 
-## Related Rules
+## 兼容级别
 
-- [Translate Visible Names](xref:kb.bpa-translate-visible-names) - Translating object names
-- [Translate Descriptions](xref:kb.bpa-translate-descriptions) - Translating descriptions
+这个规则适用于兼容级别为 **1200** 及以上的模型。
+
+## 相关规则
+
+- [翻译可见名称](xref:kb.bpa-translate-visible-names) — 翻译对象名称
+- [翻译描述](xref:kb.bpa-translate-descriptions) — 翻译描述
