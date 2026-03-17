@@ -1,64 +1,64 @@
 ---
 uid: kb.bpa-avoid-invalid-characters-descriptions
-title: Avoid Invalid Characters in Descriptions
+title: Evitar caracteres no válidos en las descripciones
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule preventing display and deployment issues by identifying control characters in object descriptions.
+description: Regla de prácticas recomendadas que evita problemas de visualización e implementación al identificar caracteres de control en las descripciones de los objetos.
 ---
 
-# Avoid Invalid Characters in Descriptions
+# Evitar caracteres no válidos en las descripciones
 
-## Overview
+## Información general
 
-This best practice rule identifies objects whose descriptions contain invalid control characters (non-printable characters excluding standard whitespace). These characters can cause display problems, metadata corruption, and deployment failures.
+Esta regla de buenas prácticas identifica objetos cuyas descripciones contienen caracteres de control no válidos (caracteres no imprimibles, excepto los espacios en blanco estándar). Estos caracteres pueden provocar problemas de visualización, corrupción de metadatos y fallos de implementación.
 
-- Category: Error Prevention
-- Severity: High (3)
+- Categoría: Prevención de errores
+- Gravedad: Alta (3)
 
-## Applies To
+## Se aplica a
 
-- Tables
-- Measures
-- Hierarchies
-- Levels
-- Perspectives
-- Partitions
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
-- KPIs
-- Model Roles
-- Calculation Groups
-- Calculation Items
+- Tablas
+- Medidas
+- Jerarquías
+- Niveles
+- Perspectivas
+- Particiones
+- Columnas de datos
+- Columnas calculadas
+- Columnas de tablas calculadas
+- KPI
+- Roles del modelo
+- Grupos de cálculo
+- Elementos de cálculo
 
-## Why This Matters
+## Por qué es importante
 
-Control characters in descriptions cause various issues:
+Los caracteres de control en las descripciones provocan varios problemas:
 
-- **Display corruption**: Tooltips and documentation panels may show garbled text
-- **Metadata problems**: TMSL/XMLA export may produce invalid XML
-- **Deployment failures**: Power BI Service or Analysis Services may reject the model
-- **Documentation issues**: Generated documentation may break formatting
-- **Encoding errors**: Cross-platform synchronization problems
-- **User confusion**: Invisible characters create confusing or corrupted descriptions
+- **Corrupción de la visualización**: Las descripciones emergentes y los paneles de documentación pueden mostrar texto ilegible
+- **Problemas de metadatos**: La exportación TMSL/XMLA puede generar XML no válido
+- **Fallos de despliegue**: Power BI Service o Analysis Services pueden rechazar el modelo
+- **Problemas de documentación**: La documentación generada puede romper el formato
+- **Errores de codificación**: Problemas de sincronización multiplataforma
+- **Confusión del usuario**: Los caracteres invisibles generan descripciones confusas o dañadas
 
-Standard whitespace (spaces, newlines, tabs) is acceptable, but non-printable control characters should be removed.
+El espacio en blanco estándar (espacios, saltos de línea, tabulaciones) es aceptable, pero deben eliminarse los caracteres de control no imprimibles.
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when an object's description contains control characters that are not standard whitespace:
+La regla se activa cuando la descripción de un objeto contiene caracteres de control que no sean espacios en blanco estándar:
 
 ```csharp
 Description.ToCharArray().Any(char.IsControl(it) and !char.IsWhiteSpace(it))
 ```
 
-This detects problematic characters while allowing legitimate whitespace formatting.
+Esto detecta caracteres problemáticos y, al mismo tiempo, permite el espaciado legítimo.
 
-## How to Fix
+## Cómo corregirlo
 
-### Automatic Fix
+### Corrección automática
 
-This rule includes an automatic fix that replaces invalid characters with spaces:
+Esta regla incluye una corrección automática que reemplaza los caracteres no válidos por espacios:
 
 ```csharp
 Description = string.Concat(
@@ -68,57 +68,57 @@ Description = string.Concat(
 )
 ```
 
-To apply:
+Para aplicarlo:
 
-1. In the **Best Practice Analyzer** select flagged objects
-2. Click **Apply Fix**
+1. En el **Best Practice Analyzer**, selecciona los objetos marcados
+2. Haz clic en **Aplicar corrección**
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, select the object
-2. In **Properties** pane, locate the **Description** field
-3. Edit the description to remove invalid characters
-4. Save changes
+1. En el **Explorador TOM**, selecciona el objeto
+2. En el panel **Propiedades**, localiza el campo **Descripción**
+3. Edita la descripción para eliminar los caracteres no válidos
+4. Guarda los cambios
 
-## Common Causes
+## Causas comunes
 
-### Cause 1: Copy/Paste from Rich Text
+### Causa 1: Copiar y pegar desde texto enriquecido
 
-Copying descriptions from Word documents, web pages, or emails can introduce hidden formatting characters.
+Copiar descripciones desde documentos de Word, páginas web o correos electrónicos puede introducir caracteres de formato ocultos.
 
-### Cause 2: Automated Documentation Generation
+### Causa 2: Generación automática de documentación
 
-Scripts generating descriptions may include control characters from source systems.
+Los scripts que generan descripciones pueden incluir caracteres de control procedentes de los sistemas de origen.
 
-### Cause 3: Data Import from External Sources
+### Causa 3: Importación de datos desde orígenes externos
 
-Importing metadata that contains encoding artifacts or control codes.
+La importación de metadatos que contienen artefactos de codificación o códigos de control.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Measure: [Total Revenue]
-Description: "Calculates\x00total\x0Brevenue"  (contains NULL and vertical tab)
-```
-
-Tooltip displays: "Calculates□total□revenue" (with visible corruption)
-
-### After Fix
+### Antes de la corrección
 
 ```
-Measure: [Total Revenue]
-Description: "Calculates total revenue"  (control characters replaced with spaces)
+Medida: [Total Revenue]
+Descripción: "Calcula\x00ingresos\x0Btotales"  (contiene NULL y tabulación vertical)
 ```
 
-Tooltip displays correctly: "Calculates total revenue"
+La información sobre herramientas muestra: "Calcula□los□ingresos totales" (con corrupción visible)
 
-## Compatibility Level
+### Después de la corrección
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Medida: [Total Revenue]
+Descripción: "Calcula los ingresos totales"  (los caracteres de control se sustituyen por espacios)
+```
 
-## Related Rules
+El tooltip se muestra correctamente: "Calcula los ingresos totales"
 
-- [Avoid Invalid Characters in Names](xref:kb.bpa-avoid-invalid-characters-names) - Similar validation for object names
-- [Visible Objects Should Have Descriptions](xref:kb.bpa-visible-objects-no-description) - Ensuring descriptions exist
+## Nivel de compatibilidad
+
+Esta regla se aplica a los modelos con nivel de compatibilidad **1200** y superior.
+
+## Reglas relacionadas
+
+- [Evitar caracteres no válidos en los nombres](xref:kb.bpa-avoid-invalid-characters-names) - Validación similar para los nombres de objetos
+- [Los objetos visibles deben tener descripciones](xref:kb.bpa-visible-objects-no-description) - Garantiza que existan descripciones
