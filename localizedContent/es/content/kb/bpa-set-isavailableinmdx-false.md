@@ -1,76 +1,76 @@
 ---
 uid: kb.bpa-set-isavailableinmdx-false
-title: Set IsAvailableInMDX to False
+title: Establecer IsAvailableInMDX en False
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule to optimize performance by disabling MDX access for hidden columns that are not used in relationships or hierarchies.
+description: Regla de práctica recomendada para optimizar el rendimiento deshabilitando el acceso a MDX para columnas ocultas que no se usan en relaciones ni jerarquías.
 ---
 
-# Set IsAvailableInMDX to False
+# Establecer IsAvailableInMDX en False
 
-## Overview
+## Información general
 
-This best practice rule identifies hidden columns that have the `IsAvailableInMDX` property set to `true` but don't need to be accessible through MDX queries. Setting this property to `false` for unused hidden columns can improve query performance and reduce memory overhead.
+Esta regla de prácticas recomendadas identifica columnas ocultas que tienen la propiedad `IsAvailableInMDX` establecida en `true`, pero que no necesitan estar accesibles mediante consultas MDX. Si estableces esta propiedad en `false` para columnas ocultas sin uso, puedes mejorar el rendimiento de las consultas y reducir la sobrecarga de memoria.
 
-- Category: Performance
-- Severity: Medium (2)
+- Categoría: Rendimiento
+- Gravedad: Media (2)
 
-## Applies To
+## Se aplica a
 
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- Columnas de datos
+- Columnas calculadas
+- Columnas de tablas calculadas
 
-## Why This Matters
+## Por qué es importante
 
-When a column has `IsAvailableInMDX` set to `true`, the Analysis Services engine maintains additional metadata and structures to support MDX queries against that column. For hidden columns that aren't used in relationships, hierarchies, variations, calendars, or as sort-by columns, this overhead is unnecessary and can:
+Cuando una columna tiene `IsAvailableInMDX` establecido en `true`, el motor de Analysis Services mantiene metadatos y estructuras adicionales para admitir consultas MDX sobre esa columna. En el caso de columnas ocultas que no se usan en relaciones, jerarquías, variaciones, calendarios o como columnas de ordenación, esta sobrecarga es innecesaria y puede:
 
-- Increase memory consumption
-- Slow down query processing
-- Add complexity to the model metadata
+- Aumentar el consumo de memoria
+- Ralentizar el procesamiento de consultas
+- Añadir complejidad a los metadatos del modelo
 
-By explicitly setting `IsAvailableInMDX` to `false` for these columns, you optimize the model for DAX-only scenarios, which is the primary query language for Power BI and modern Analysis Services models.
+Al establecer explícitamente `IsAvailableInMDX` en `false` para estas columnas, optimizas el modelo para escenarios solo con DAX, el principal lenguaje de consulta de Power BI y de los modelos modernos de Analysis Services.
 
 > [!WARNING]
-> **Excel PivotTable Compatibility**: Setting `IsAvailableInMDX` to `false` prevents columns from being dragged to the rows or columns area of Excel PivotTables. Excel PivotTables generate MDX queries when connecting to Analysis Services Tabular models, and they require attribute hierarchies (which are only built when `IsAvailableInMDX = true`) to function properly. If your users need to analyze data using Excel PivotTables or other MDX-based tools, **do not** apply this rule to columns they need to access. For more details, see [Chris Webb's article on IsAvailableInMDX](https://blog.crossjoin.co.uk/2018/07/02/isavailableinmdx-ssas-tabular/).
+> **Compatibilidad con tablas dinámicas de Excel**: Establecer `IsAvailableInMDX` en `false` impide que las columnas se puedan arrastrar al área de filas o columnas de las tablas dinámicas de Excel. Las tablas dinámicas de Excel generan consultas MDX al conectarse a modelos tabulares de Analysis Services, y necesitan jerarquías de atributos (que solo se crean cuando `IsAvailableInMDX = true`) para funcionar correctamente. Si sus usuarios necesitan analizar datos con tablas dinámicas de Excel u otras herramientas basadas en MDX, **no** aplique esta regla a las columnas a las que necesiten acceder. Para más detalles, consulta el [artículo de Chris Webb sobre IsAvailableInMDX](https://blog.crossjoin.co.uk/2018/07/02/isavailableinmdx-ssas-tabular/).
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when all of the following conditions are met:
+La regla se activa cuando se cumplen todas las condiciones siguientes:
 
-1. The column has `IsAvailableInMDX = true`
-2. The column is hidden (or its table is hidden)
-3. The column is NOT used in any `SortBy` relationships
-4. The column is NOT used in any hierarchies
-5. The column is NOT used in any variations
-6. The column is NOT used in any calendars
-7. The column is NOT serving as a `SortByColumn` for another column
+1. La columna tiene `IsAvailableInMDX = true`
+2. La columna está oculta (o lo está la tabla que la contiene)
+3. La columna NO se usa en ninguna relación de `SortBy`
+4. La columna NO se usa en ninguna jerarquía
+5. La columna NO se usa en ninguna variación
+6. La columna NO se usa en ningún calendario
+7. La columna NO actúa como `SortByColumn` de otra columna
 
-## How to Fix
+## Cómo solucionarlo
 
-### Automatic Fix
+### Corrección automática
 
-This rule includes an automatic fix expression. When you apply the fix in the Best Practice Analyzer:
+Esta regla incluye una expresión de corrección automática. Cuando apliques la corrección en el Best Practice Analyzer:
 
 ```csharp
 IsAvailableInMDX = false
 ```
 
-To apply:
+Para aplicarlo:
 
-1. In the **Best Practice Analyzer** select flagged objects
-2. Click **Apply Fix**
+1. En el **Best Practice Analyzer**, selecciona los objetos marcados
+2. Haz clic en **Aplicar corrección**
 
-### Manual Fix
+### Corrección manual
 
-1. In the **TOM Explorer**, locate the flagged column
-2. In the **Properties** pane, find the `IsAvailableInMDX` property
-3. Set the value to `false`
-4. Save your changes
+1. En el **Explorador TOM**, localiza la columna marcada
+2. En el panel de **Propiedades**, busca la propiedad `IsAvailableInMDX`
+3. Establece el valor a `false`
+4. Guarda los cambios
 
-## Example
+## Ejemplo
 
-Consider a hidden calculated column used only for intermediate calculations:
+Considera una columna calculada oculta que solo se usa para cálculos intermedios:
 
 ```dax
 _TempCalculation = 
@@ -80,18 +80,18 @@ CALCULATE(
 )
 ```
 
-If this column is:
+Si esta columna está:
 
-- Hidden from client tools
-- Not used in any hierarchies or relationships
-- Not referenced by sort operations
+- Oculta para las herramientas cliente
+- No se usa en jerarquías ni en relaciones
+- No se hace referencia en operaciones de ordenación
 
-Then setting `IsAvailableInMDX = false` is recommended for optimal performance.
+Se recomienda establecer `IsAvailableInMDX = false` para obtener un rendimiento óptimo.
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Set IsAvailableInMDX to True When Necessary](xref:kb.bpa-set-isavailableinmdx-true-necessary) - The complementary rule ensuring columns that need MDX access have it enabled
+- [Establecer IsAvailableInMDX en True cuando sea necesario](xref:kb.bpa-set-isavailableinmdx-true-necessary) - La regla complementaria que garantiza que las columnas que necesitan acceso a MDX lo tengan habilitado
