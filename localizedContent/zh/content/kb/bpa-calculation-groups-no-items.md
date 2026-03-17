@@ -1,102 +1,102 @@
 ---
 uid: kb.bpa-calculation-groups-no-items
-title: Calculation Groups Should Contain Items
+title: 计算组应包含计算项
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule identifying calculation groups without calculation items that should be populated or removed.
+description: 此最佳做法规则用于识别未包含任何计算项的计算组，这类计算组应补充内容或移除。
 ---
 
-# Calculation Groups Should Contain Items
+# 计算组应包含计算项
 
-## Overview
+## 概览
 
-This best practice rule identifies calculation groups that contain no calculation items. Empty calculation groups serve no purpose and should be populated or removed.
+此最佳做法规则会识别不包含任何计算项的计算组。 空的计算组没有实际作用，应补充计算项或直接移除。
 
-- Category: Maintenance
-- Severity: Medium (2)
+- 类别：维护
+- 严重性：中等（2）
 
-## Applies To
+## 适用对象
 
-- Calculation Groups
+- 计算组
 
-## Why This Matters
+## 为什么重要
 
-- **Deployment errors**: Empty groups may fail validation in Power BI Service
-- **Model errors**: Can cause unexpected behavior in DAX calculations
-- **Developer confusion**: Team members waste time investigating incomplete structures
-- **Performance overhead**: Engine processes unnecessary metadata
+- **部署错误**：空计算组可能无法通过 Power BI Service 的验证
+- **模型错误**：可能导致 DAX 计算出现非预期行为
+- **开发人员困惑**：团队成员会浪费时间排查不完整的结构
+- **性能开销**：引擎会处理不必要的元数据
 
-## When This Rule Triggers
+## 此规则何时触发
 
-The rule triggers when a calculation group has zero calculation items:
+当计算组中的计算项数量为零时，此规则会触发：
 
 ```csharp
 CalculationItems.Count == 0
 ```
 
-## How to Fix
+## 如何修复
 
-### Option 1: Add Calculation Items
+### 选项 1：添加计算项
 
-If the calculation group has a valid business purpose:
+如果该计算组确有业务用途：
 
-1. In **TOM Explorer**, expand the calculation group table
-2. Expand the **Calculation Group** column
-3. Right-click and select **Add Calculation Item**
-4. Define the calculation item expression
+1. 在 **TOM Explorer** 中展开计算组表
+2. 展开 **计算组** 列
+3. 右键单击并选择 **添加计算项**
+4. 定义计算项表达式
 
-### Option 2: Delete the Calculation Group
+### 选项 2：删除计算组
 
-If no longer needed:
+如果不再需要，请执行以下操作：
 
-1. In **TOM Explorer**, locate the calculation group table
-2. Right-click the table
-3. Select **Delete**
+1. 在 **TOM Explorer** 中，定位到计算组表
+2. 右键单击该表
+3. 选择 **删除**
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Incomplete Development
+### 原因 1：开发未完成
 
-Calculation group created during planning but not yet implemented.
+计算组在规划阶段创建，但尚未实现。
 
-### Cause 2: Migration from Other Models
+### 原因 2：从其他模型迁移
 
-Calculation group structure copied without items.
+仅复制了计算组结构，但未包含任何计算项。
 
-### Cause 3: Refactoring
+### 原因 3：重构
 
-All calculation items moved to a different calculation group.
+所有计算项已移动到另一个计算组。
 
-## Example
+## 示例
 
-### Before Fix
-
-```
-Calculation Group: Time Intelligence
-  Items: (none)  ← Problem
-```
-
-### After Fix
+### 修复前
 
 ```
-Calculation Group: Time Intelligence
-  Items:
-    - Current Period: SELECTEDMEASURE()
-    - Year-to-Date: CALCULATE(SELECTEDMEASURE(), DATESYTD('Date'[Date]))
-    - Prior Year: CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR('Date'[Date]))
+计算组：时间智能
+  计算项：(无)  ← 问题
 ```
 
-## Compatibility Level
+### 修复后
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+计算组：时间智能
+  计算项：
+    - 当前期间：SELECTEDMEASURE()
+    - 年初至今：CALCULATE(SELECTEDMEASURE(), DATESYTD('Date'[Date]))
+    - 去年同期：CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR('Date'[Date]))
+```
 
-## Related Rules
+## 兼容级别
 
-- [Perspectives Should Contain Objects](xref:kb.bpa-perspectives-no-objects) - Similar rule for empty perspectives
-- [Expression Required](xref:kb.bpa-expression-required) - Ensuring calculation items have expressions
+此规则适用于兼容级别为 **1200** 及以上的模型。
 
-## Learn More
+## 相关规则
 
-- [Calculation Groups in Tabular Models](https://learn.microsoft.com/analysis-services/tabular-models/calculation-groups)
-- [Creating Calculation Groups](https://www.sqlbi.com/articles/introducing-calculation-groups/)
-- [Calculation Group Patterns](https://www.sqlbi.com/calculation-groups/)
+- [透视应包含对象](xref:kb.bpa-perspectives-no-objects) —— 针对空透视的类似规则
+- [必须提供表达式](xref:kb.bpa-expression-required) —— 确保计算项包含表达式
+
+## 了解更多
+
+- [表格模型中的计算组](https://learn.microsoft.com/analysis-services/tabular-models/calculation-groups)
+- [创建计算组](https://www.sqlbi.com/articles/introducing-calculation-groups/)
+- [计算组模式](https://www.sqlbi.com/calculation-groups/)
