@@ -1,47 +1,47 @@
 ---
 uid: kb.bpa-set-isavailableinmdx-true-necessary
-title: Set IsAvailableInMDX to True When Necessary
+title: Establecer IsAvailableInMDX en True cuando sea necesario
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule preventing query errors by ensuring columns used in hierarchies and relationships have MDX availability enabled.
+description: Regla de práctica recomendada que evita errores de consulta al garantizar que las columnas usadas en jerarquías y relaciones tengan habilitada la disponibilidad de MDX.
 ---
 
-# Set IsAvailableInMDX to True When Necessary
+# Establecer IsAvailableInMDX en True cuando sea necesario
 
-## Overview
+## Descripción general
 
-This best practice rule identifies columns that have `IsAvailableInMDX` set to `false` but are actually used in scenarios requiring MDX access. These columns must have MDX availability enabled to function correctly in hierarchies, relationships, and sort operations.
+Esta regla de práctica recomendada identifica columnas que tienen `IsAvailableInMDX` establecido en `false`, pero que en realidad se usan en escenarios que requieren acceso a MDX. Estas columnas deben tener habilitada la disponibilidad de MDX para funcionar correctamente en jerarquías, relaciones y operaciones de ordenación.
 
-- Category: Error Prevention
-- Severity: High (3)
+- Categoría: Prevención de errores
+- Gravedad: Alta (3)
 
-## Applies To
+## Se aplica a
 
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- Columnas de datos
+- Columnas calculadas
+- Columnas de tablas calculadas
 
-## Why This Matters
+## Por qué es importante
 
-When a column is used in certain model structures, the Analysis Services engine requires MDX access to that column. Disabling MDX access for columns that need it causes:
+Cuando una columna se usa en determinadas estructuras del modelo, el motor de Analysis Services requiere acceso MDX a esa columna. Deshabilitar el acceso MDX para columnas que lo necesitan provoca:
 
-- **Query failures**: Hierarchies and sort operations fail with errors
-- **Broken visualizations**: Charts and tables using affected hierarchies display errors
-- **Relationship problems**: MDX queries against relationships may fail
-- **Calendar/variation errors**: Time intelligence features break
-- **Unpredictable behavior**: Some queries work while others fail depending on client tool
+- **Fallos de consulta**: Las jerarquías y las operaciones de ordenación fallan con errores
+- **Visualizaciones con errores**: Los gráficos y las tablas que usan las jerarquías afectadas presentan errores
+- **Problemas con las relaciones**: Las consultas MDX sobre las relaciones pueden fallar
+- **Errores de calendario/variación**: Las funciones de inteligencia temporal dejan de funcionar
+- **Comportamiento impredecible**: Algunas consultas funcionan y otras fallan según la herramienta cliente
 
-Columns need `IsAvailableInMDX = true` when they are:
+Las columnas necesitan `IsAvailableInMDX = true` cuando se usan para lo siguiente:
 
-- Used in hierarchies as levels
-- Referenced as sort-by columns
-- Used in variations (alternate hierarchies)
-- Part of calendar definitions
-- Serving as sort-by targets for other columns
+- Se usan como niveles en jerarquías
+- Referenciadas como columnas de "Ordenar por"
+- Usadas en variaciones (jerarquías alternativas)
+- Forman parte de las definiciones del calendario
+- Sirven como destino de "Ordenar por" para otras columnas
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when a column has `IsAvailableInMDX = false` AND any of these conditions are true:
+La regla se activa cuando una columna tiene `IsAvailableInMDX = false` y se cumple cualquiera de estas condiciones:
 
 ```csharp
 IsAvailableInMDX = false
@@ -59,88 +59,88 @@ and
 )
 ```
 
-The rule checks these dependency collections:
+La regla comprueba estas colecciones de dependencias:
 
-| Property            | Description                         | Example Usage                       |
-| ------------------- | ----------------------------------- | ----------------------------------- |
-| `UsedInHierarchies` | Hierarchies where column is a level | Product hierarchy levels            |
-| `UsedInSortBy`      | Columns using this as sort key      | Month names sorted by month number  |
-| `UsedInVariations`  | Alternate hierarchies using column  | Product variations                  |
-| `UsedInCalendars`   | Calendar metadata references        | Date table calendar definitions     |
-| `SortByColumn`      | Column sorts by another column      | This column has a sort-by reference |
+| Propiedad           | Descripción                                   | Ejemplo de uso                                      |
+| ------------------- | --------------------------------------------- | --------------------------------------------------- |
+| `UsedInHierarchies` | Jerarquías en las que la columna es un nivel  | Niveles de la jerarquía de productos                |
+| `UsedInSortBy`      | Columnas que la usan como clave de ordenación | Nombres de los meses ordenados por el número de mes |
+| `UsedInVariations`  | Jerarquías alternativas que usan la columna   | Variaciones de productos                            |
+| `UsedInCalendars`   | Referencias a metadatos del calendario        | Definiciones de calendario de la tabla de fechas    |
+| `SortByColumn`      | La columna se ordena por otra columna         | Esta columna tiene una referencia de «Ordenar por»  |
 
-## How to Fix
+## Cómo corregirlo
 
-### Automatic Fix
+### Corrección automática
 
-This rule includes an automatic fix:
+Esta regla incluye una corrección automática:
 
 ```csharp
 IsAvailableInMDX = true
 ```
 
-To apply:
+Para aplicar:
 
-1. In the **Best Practice Analyzer** select flagged objects
-2. Click **Apply Fix**
+1. En el **Best Practice Analyzer**, selecciona los objetos marcados
+2. Haz clic en **Aplicar corrección**
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, locate the flagged column
-2. In **Properties** pane, find `IsAvailableInMDX`
-3. Set the value to `true`
-4. Save and test affected hierarchies/sorts
+1. En el **Explorador TOM**, localiza la columna marcada
+2. En el panel de **Propiedades**, busca `IsAvailableInMDX`
+3. Establece el valor a `true`
+4. Guarda y prueba las jerarquías y ordenaciones afectadas
 
-## Common Scenarios
+## Escenarios habituales
 
-### Scenario 1: Hierarchy Level Column
+### Escenario 1: columna de nivel de la jerarquía
 
-**Problem**: A column used as a hierarchy level has MDX disabled
+**Problema**: una columna usada como nivel de jerarquía tiene MDX deshabilitado
 
 ```dax
-Hierarchy: Geography
-  Levels:
-    - Country
-    - State (IsAvailableInMDX = false)  ← Problem
-    - City
+Jerarquía: Geografía
+  Niveles:
+    - País
+    - Estado (IsAvailableInMDX = false)  ← Problema
+    - Ciudad
 ```
 
-**Error**: "The hierarchy 'Geography' cannot be used because one of its levels is not available in MDX."
+**Error**: "La jerarquía 'Geografía' no se puede usar porque uno de sus niveles no está disponible en MDX."
 
-**Solution**: Set `State[IsAvailableInMDX] = true`
+**Solución**: Establece `State[IsAvailableInMDX] = true`
 
-### Scenario 2: Sort-By Column
+### Escenario 2: columna de «Ordenar por»
 
-**Problem**: A column serving as a sort-by target has MDX disabled
+**Problema**: una columna que sirve como destino de «Ordenar por» tiene MDX deshabilitado
 
 ```
-Month Name column:
+Columna Nombre del mes:
   - SortByColumn = MonthNumber
-  - MonthNumber.IsAvailableInMDX = false  ← Problem
+  - MonthNumber.IsAvailableInMDX = false  ← Problema
 ```
 
-**Error**: Months display in alphabetical order instead of calendar order
+**Error**: los meses se muestran en orden alfabético en lugar de en orden de calendario
 
-**Solution**: Set `MonthNumber[IsAvailableInMDX] = true`
+**Solución**: Establece `MonthNumber[IsAvailableInMDX] = true`
 
-### Scenario 3: Calendar Definition
+### Escenario 3: definición del calendario
 
-**Problem**: A date column used in calendar metadata has MDX disabled
+**Problema**: Una columna de fecha utilizada en los metadatos del calendario tiene MDX desactivado
 
 ```
 DateTable:
-  - Calendar uses DateKey column
-  - DateKey.IsAvailableInMDX = false  ← Problem
+  - Calendar usa la columna DateKey
+  - DateKey.IsAvailableInMDX = false  ← Problema
 ```
 
-**Error**: Time intelligence functions fail
+**Error**: Las funciones de inteligencia temporal fallan
 
-**Solution**: Set `DateKey[IsAvailableInMDX] = true`
+**Solución**: Establecer `DateKey[IsAvailableInMDX] = true`
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Set IsAvailableInMDX to False](xref:kb.bpa-set-isavailableinmdx-false) - The complementary optimization rule
+- [Establecer IsAvailableInMDX en False](xref:kb.bpa-set-isavailableinmdx-false) - La regla de optimización complementaria
