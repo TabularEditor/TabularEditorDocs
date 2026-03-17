@@ -1,6 +1,6 @@
 ---
 uid: parallel-development
-title: Enabling parallel development using Git and Save to Folder
+title: 通过 Git 和“保存到文件夹”实现并行开发
 author: Daniel Otykier
 updated: 2021-09-30
 applies_to:
@@ -9,186 +9,186 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Enabling parallel development using Git and Save to Folder
+# 通过 Git 和“保存到文件夹”实现并行开发
 
 <!--
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src=https://player.vimeo.com/video/664699623?h=57bde801c7&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479 frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Boosting productivity"></iframe></div><script src=https://player.vimeo.com/api/player.js></script>
 -->
 
-This article describes the principles of parallel model development (that is, the ability for multiple developers to work in parallel on the same data model) and the role of Tabular Editor in this regard.
+本文介绍并行模型开发的原则（也就是让多个开发者同时在同一个 Data model 上工作），以及 Tabular Editor 在其中的角色。
 
-## Prerequisites
+## 先决条件
 
-- The destination of your data model must be one of the following:
-  - SQL Server 2016 (or newer) Analysis Services Tabular
+- 你的 Data model 的目标位置必须是以下之一：
+  - SQL Server 2016（或更高版本）的 Analysis Services Tabular
   - Azure Analysis Services
-  - Fabric/Power BI Premium Capacity/Power BI Premium-per-user with [XMLA read/write enabled](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write)
-- Git repository accessible by all team members (on-premises or hosted in Azure DevOps, GitHub, etc.)
+  - Fabric/Power BI Premium 容量/已启用 [XMLA 读/写](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write) 的 Power BI Premium-per-user
+- 所有团队成员都能访问的 Git repository（本地部署或托管在 Azure DevOps、GitHub 等）
 
-## TOM as source code
+## 将 TOM 视为源代码
 
-Parallel development has traditionally been difficult to implement on Analysis Services tabular models and Power BI datasets (in this article, we will call both types of models "tabular models" for brevity). With the introduction of the JSON-based model metadata used by the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), integrating model metadata in version control has certainly become easier.
+在 Analysis Services 表格模型和 Power BI Dataset 上实现并行开发，传统上一直很难（为简洁起见，本文将这两类模型统称为“表格模型”）。 随着 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 采用基于 JSON 的模型元数据，将模型元数据纳入版本控制确实变得更容易了。
 
-The use of a text-based file format makes it possible to handle conflicting changes in a graceful way, by using various diff tools that are often included with the version control system. This type of change conflict resolution is very common in traditional software development, where all of the source code resides in a large number of small text files. For this reason, most popular version control systems are optimized for these types of files, for purposes of change detection and (automatic) conflict resolution.
+使用基于文本的文件格式，可以借助版本控制系统中常见的各种差异对比工具，更优雅地处理冲突变更。 这种变更冲突解决方式在传统软件开发中非常常见，因为所有源代码都分散在大量的小型文本文件中。 因此，大多数主流版本控制系统都针对这类文件做了优化，用于变更检测和（自动）冲突解决。
 
-For tabular model development, the "source code" is our JSON-based TOM metadata. When developing tabular models with earlier versions of Visual Studio, the Model.bim JSON file was augmented with information about who modified what and when. This information was simply stored as additional properties on the JSON objects throughout the file. This was problematic, because not only was the information redundant (since the file itself also has metadata that describes who the last person to edit it was, and when the last edit happened), but from a version control perspective, this metadata does not hold any _semantic meaning_. In other words, if you were to remove all of the modification metadata from the file, you would still end up with a perfectly valid TOM JSON-file, that you could deploy to Analysis Services or publish to Power BI, without affecting the functionality and business logic of the model.
+对于表格模型开发而言，“源代码”就是我们基于 JSON 的 TOM 元数据。 在较早版本的 Visual Studio 中开发表格模型时，Model.bim 这个 JSON 文件中会额外包含关于谁在何时修改了哪些内容的信息。 这些信息只是作为附加属性，存储在文件中各处的 JSON 对象里。 这会带来问题：这些信息不仅是冗余的（因为文件本身也有元数据，用来描述最后一次编辑它的人是谁，以及最后一次编辑发生在什么时候），而且从版本控制的透视来看，这些元数据并没有任何_语义意义_。 换句话说，即使你把文件中的所有修改元数据都移除，得到的仍然是一个完全有效的 TOM JSON 文件；你可以将其部署到 Analysis Services 或发布到 Power BI，而不会影响模型的功能和业务逻辑。
 
-Just like source code for traditional software development, we do not want this kind of information to "contaminate" our model metadata. Indeed, a version control system gives a much more detailed view of the changes that were made, who made them, when and why, so there is no reason to include it as part of the files being versioned.
+就像传统软件开发的源代码一样，我们不希望这类信息“污染”我们的模型元数据。 事实上，版本控制系统能更细致地展示改了什么、谁改的、何时改的以及为何改，因此没有理由把这些信息作为被版本控制的文件内容之一。
 
-When Tabular Editor was first created, there was no option to get rid of this information from the Model.bim file created by Visual Studio, but that has luckily changed in more recent versions. However, we still need to deal with a single, monolithic file (the Model.bim file) containing all of the "source code" that defines the model.
+Tabular Editor 刚诞生时，还没法从 Visual Studio 生成的 Model.bim 文件中去除这些信息，不过在较新的版本里这点终于改了。 不过，我们仍然要面对一个单一的、庞大的文件（Model.bim），其中包含定义模型的全部“源代码”。
 
-Power BI dataset developers have it much worse, since they do not even have access to a text-based file containing the model metadata. The best they can do is export their Power BI report as a [Power BI Template (.pbit) file](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-templates#creating-report-templates) which is basically a zip file containing the report pages, the data model definitions and the query definitions. From the perspective of a version control system, a zip file is a binary file, and binary files cannot be diff'ed, compared and merged, the same way text files can. This forces Power BI developers to use 3rd party tools or come up with elaborate scripts or processes for properly versioning their data models - especially, if they want to be able to merge parallel tracks of development within the same file.
+Power BI Dataset 开发者的处境更糟，因为他们甚至无法访问包含模型元数据的文本文件。 他们能做的最好办法，是把 Power BI Report 导出为 [Power BI 模板（.pbit）文件](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-templates#creating-report-templates)；它本质上是一个 ZIP 文件，里面包含 Report 页面、Data model 定义以及查询定义。 从版本控制系统的透视来看，zip 文件是二进制文件，而二进制文件无法像文本文件那样进行 diff、比较和合并。 这就迫使 Power BI 开发者借助第三方工具，或编写复杂的脚本/流程，才能对 Data model 进行规范的版本管理——尤其是当你希望在同一个文件里合并并行的开发分支时。
 
-Tabular Editor aims to simplify this process by providing an easy way to extract only the semantically meaningful metadata from the Tabular Object Model, regardless of whether that model is an Analysis Services tabular model or a Power BI dataset. Moreover, Tabular Editor can split up this metadata into several smaller files using its Save to Folder feature.
+Tabular Editor 的目标是简化这一过程：无论模型是 Analysis Services 表格模型还是 Power BI Dataset，都能以一种简单的方式从 Tabular Object Model 中仅提取具有语义意义的元数据。 此外，Tabular Editor 还能通过“保存到文件夹”功能，把这些元数据拆分成多个更小的文件。
 
-## What is Save to Folder?
+## 什么是保存到文件夹？
 
-As mentioned above, the model metadata for a tabular model is traditionally stored in a single, monolithic JSON file, typically named **Model.bim**, which is not well suited for version control integration. Since the JSON in this file represents the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), it turns out that there is a straightforward way to break the file down into smaller pieces: The TOM contains arrays of objects at almost all levels, such as the list of tables within a model, the list of measures within a table, the list of annotations within a measure, etc. When using Tabular Editor's **Save to Folder** feature, these arrays are simply removed from the JSON, and instead, a subfolder is generated containing one file for each object in the original array. This process can be nested. The result is a folder structure, where each folder contains a set of smaller JSON files and subfolders, which semantically contains exactly the same information as the original Model.bim file:
+如上所述，表格模型的元数据传统上存放在一个单一的大型 JSON 文件中，通常名为 **Model.bim**，这并不适合与版本控制集成。 由于此文件中的 JSON 表示 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)，因此可以用一种简单直接的方法将该文件拆分成更小的部分：TOM 在几乎所有层级都包含对象数组，例如模型中的表列表、表中的度量值列表、度量值中的注释列表等。 使用 Tabular Editor 的 **保存到文件夹** 功能时，这些数组会从 JSON 中直接移除，取而代之的是生成一个子文件夹，其中为原数组中的每个对象创建一个文件。 这个过程可以进行嵌套。 最终会得到一个文件夹结构：每个文件夹都包含一组更小的 JSON 文件和子文件夹；从语义上看，它与原始的 Model.bim 文件包含完全相同的信息：
 
-![Save To Folder](~/content/assets/images/save-to-folder.png)
+![保存到文件夹](~/content/assets/images/save-to-folder.png)
 
-The names of each of the files representing individual TOM objects are simply based on the `Name` property of the object itself. The name of the "root" file is **Database.json**, which is why we sometimes refer to the folder-based storage format as simply **Database.json**.
+每个表示单个 TOM 对象的文件名，直接取自该对象的 `Name` 属性。 “根”文件名为 **Database.json**，因此我们有时也会把这种基于文件夹的存储格式简称为 **Database.json**。
 
-## Pros of using Save to Folder
+## 使用“保存到文件夹”的优点
 
-Below are some of the advantages of storing the tabular model metadata in this folder based format:
+以下是以这种基于文件夹的格式存储表格模型元数据的一些优势：
 
-- **Multiple smaller files work better with many version control systems than few large files.** For example, git stores snapshots of modified files. For this reason alone, it makes sense why representing the model as multiple smaller files is better than storing it as a single, large file.
-- **Avoid conflicts when arrays are reordered.** Lists of tables, measures, columns, etc., are represented as arrays in the Model.bim JSON. However, the order of objects within the array does not matter. It is not uncommon for objects to be reordered during model development, for example due to cut/paste operations, etc. With Save to Folder, array objects are stored as individual files, so the arrays are no longer change tracked, reducing the risk of merge conflicts.
-- **Different developers rarely change the same file.** As long as developers work on separate parts of the data model, they will rarely make changes to the same files, reducing the risk of merge conflicts.
+- **多个小文件通常比少数大文件更适合多数版本控制系统。** 例如，Git 会存储已修改文件的快照。 仅凭这一点，就足以说明把模型表示为多个小文件，比存成一个大型文件更合理。
+- **避免在数组重新排序时产生冲突。** 表、度量值、列等的列表在 Model.bim JSON 中以数组表示。 不过，数组中对象的顺序并不重要。 在模型开发过程中，对象被重新排序并不少见，例如剪切/粘贴等操作就可能导致这种情况。 使用“保存到文件夹”功能时，数组中的对象会以单独的文件存储，因此数组不再作为整体进行变更跟踪，从而降低合并冲突的风险。
+- **不同开发者很少会修改同一个文件。** 只要开发者分别负责 Data model 的不同部分，就很少会修改到同一份文件，从而降低合并冲突的风险。
 
-## Cons of using Save to Folder
+## 使用保存到文件夹的缺点
 
-As it stands, the only disadvantage of storing the tabular model metadata in the folder based format, is that this format is used exclusively by Tabular Editor. In other words, you can not directly load the model metadata into Visual Studio from the folder based format. Instead, you would have to temporarily convert the folder based format to the Model.bim format, which can of course be done using Tabular Editor.
+目前，将表格模型元数据以基于文件夹的格式存储，唯一的缺点是这种格式仅 Tabular Editor 支持。 换句话说，你没法直接把基于文件夹格式的模型元数据加载到 Visual Studio 里。 你得先临时把基于文件夹格式转换成 Model.bim 格式。当然，这可以用 Tabular Editor 来完成。
 
-## Configuring Save to Folder
+## 配置保存到文件夹
 
-One size rarely fits all. Tabular Editor has a few configuration options that affect how a model is serialized into the folder structure. In Tabular Editor 3, you can find the general settings under **Tools > Preferences > Save-to-folder**. Once a model is loaded in Tabular Editor, you can find the specific settings that apply to that model under **Model > Serialization options...**. The settings that apply to a specific model are stored as an annotation within the model itself, to ensure that the same settings are used regardless of which user loads and saves the model.
+通用方案很少能适配所有情况。 Tabular Editor 提供了一些配置选项，用于控制如何将模型序列化为文件夹结构。 在 Tabular Editor 3 中，你可以在 **工具 > 偏好 > 保存到文件夹** 下找到常规设置。 在 Tabular Editor 中加载模型后，你可以在 **模型 > 序列化选项...** 下找到适用于该模型的具体设置。 适用于特定模型的设置会作为注释存到模型本身里，以确保不管是谁加载并保存模型，都用同一套设置。
 
-![Configuring Save To Folder](~/content/assets/images/configuring-save-to-folder.png)
+![配置保存到文件夹](~/content/assets/images/configuring-save-to-folder.png)
 
-### Serialization settings
+### 序列化设置
 
-- **Use recommended settings**: (Default: checked) When this is checked, Tabular Editor uses the default settings when saving a model as a folder structure for the first time.
-- **Serialize relationships on from-tables**: (Default: unchecked) When this is checked, Tabular Editor stores relationships as an annotation on the table at the "from-side" (typically the fact table) of the relationship, instead of storing them at the model level. This is useful when in the early development phase of a model, where table names are still subject to change quite often.
-- **Serialize perspective membership info on objects**: (Default: unchecked) When this is checked, Tabular Editor stores information about which perspectives an object (table, column, hierarchy, measure) belongs to, as an annotation on that object, instead of storing the information at the perspective level. This is useful when object names are subject to change, but perspective names are finalised.
-- **Serialize translations on translated objects**: (Default: unchecked) When this is checked, Tabular Editor stores metadata translations as an annotation on each translatable object (table, column, hierarchy, level, measure, etc.), instead of storing the translations at the culture level. This is useful when object names are subject to change.
-- **Prefix file names sequentially**: (Default: unchecked) In cases where you want to retain the metadata ordering of array members (such as the order of columns in a table), you can check this to have Tabular Editor prefix the filenames with a sequential integer based on the object's index in the array. This is useful if you use the default drillthrough feature in Excel, and would like [columns to appear in a certain order in the drillthrough](https://github.com/TabularEditor/TabularEditor/issues/46#issuecomment-297932090).
+- **使用推荐设置**：（默认：选中）选中后，Tabular Editor 在首次将模型保存为文件夹结构时会使用默认设置。
+- **在“from”表上序列化关系**：（默认：未选中）选中后，Tabular Editor 会将关系作为注释存储在关系的“from 侧”（通常是事实表）的表上，而不是存储在模型级别。 这在模型开发早期阶段很有用，因为此时表名往往还会频繁变更。
+- **在对象上序列化透视归属信息**：（默认：未选中）选中后，Tabular Editor 会将对象（表、列、层次结构、度量值）属于哪些透视的信息作为注释存储在该对象上，而不是存储在透视级别。 当对象名称可能变更，但透视名称已最终确定时，这会很有用。
+- **在已翻译的对象上序列化翻译**：（默认：未选中）选中后，Tabular Editor 会将元数据的翻译作为注释存储在每个可翻译对象（表、列、层次结构、级别、度量值等）上，而不是存储在区域设置级别。 当对象名称可能变更时，这会很有用。
+- **按顺序为文件名添加前缀**：（默认：未选中）如果你希望保留数组成员的元数据顺序（例如表中列的顺序），可以选中此项，让 Tabular Editor 基于对象在数组中的索引，在文件名前加上按顺序递增的整数前缀。 如果你在 Excel 中使用默认的钻取功能，并希望[在钻取结果中让列按特定顺序显示](https://github.com/TabularEditor/TabularEditor/issues/46#issuecomment-297932090)，这会很有用。
 
 > [!NOTE]
-> The main purpose of the settings described above, is to reduce the number of merge conflicts encountered during model development, by adjusting how and where certain model metadata is stored. In the early phases of model development, it is not uncommon for objects to be renamed often. If a model already has metadata translations specified, every object rename would cause at least two changes: One change on the object being renamed, and one change for every culture that defines a translation on that object. When **Serialize translations on translated objects** is checked, there would only be a change on the object being renamed, as that object also includes the translated values (since this information would be stored as an annotation).
+> 上述设置的主要目的在于通过调整某些模型元数据的存储方式和位置，减少模型开发过程中出现的合并冲突。 在模型开发的早期阶段，对象频繁被重命名并不少见。 如果模型已经指定了元数据翻译，那么每次重命名对象至少会带来两处变更：一处发生在被重命名的对象上，另一处发生在为该对象定义了翻译的每个区域设置中。 选中 **Serialize translations on translated objects** 后，只会在被重命名的对象上产生变更，因为该对象也会包含翻译后的值（由于这些信息将作为注释存储）。
 
-### Serialization depth
+### 序列化深度
 
-The checklist allows you to specify which objects will be serialized as individual files. Note that some options (perspectives, translations, relationships) may not be available, depending on the settings specified above.
+该清单允许你指定哪些对象将被序列化为单独的文件。 请注意，某些选项（透视、翻译、关系）可能不可用，具体取决于上面指定的设置。
 
-In most cases, it is recommended to always serialize objects to the lowest level. However, there may be special cases where this level of detail is not needed.
+在大多数情况下，建议始终将对象序列化到最低层级。 不过，在某些特殊场景下，可能不需要这么细的粒度。
 
-## Power BI and version control
+## Power BI 与版本控制
 
-As mentioned above, integrating a Power BI report (.pbix) or Power BI template (.pbit) file in version control, does not enable parallel development or conflict resolution, due to these files using a binary file format. At the same time, we have to be aware of the current limitations of using Tabular Editor (or other third party tools) with Power BI Desktop or the Power BI XMLA endpoint respectively.
+如上所述，将 Power BI Report（.pbix）或 Power BI 模板（.pbit）文件纳入版本控制，并不能实现并行开发或冲突解决，因为这些文件采用二进制文件格式。 同时，我们也必须了解当前将 Tabular Editor（或其他第三方工具）与 Power BI Desktop 或 Power BI XMLA 端点分别配合使用时的限制。
 
-These limitations are:
+这些限制包括：
 
-- When using Tabular Editor as an external tool for Power BI Desktop, [not all modeling operations are supported](xref:desktop-limitations).
-- Tabular Editor can extract model metadata from a .pbix file loaded in Power BI Desktop, or directly from a .pbit file on disk, but there is **no supported way to update model metadata in a .pbix or .pbit file outside of Power BI Desktop**.
-- Once any changes are made to a Power BI dataset through the XMLA endpoint, [that dataset can no longer be downloaded as a .pbix file](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets).
+- 当将 Tabular Editor 作为 Power BI Desktop 的外部工具使用时，[并非所有建模操作都受支持](xref:desktop-limitations)。
+- Tabular Editor 可以从 Power BI Desktop 中已加载的 .pbix 文件提取模型元数据，或直接从磁盘上的 .pbit 文件提取，但**在 Power BI Desktop 之外，没有受支持的方法来更新 .pbix 或 .pbit 文件中的模型元数据**。
+- 一旦通过 XMLA endpoint 对某个 Power BI Dataset 做出任何更改，[该 Dataset 就无法再以 .pbix 文件形式下载](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets)。
 
-To enable parallel development, we must be able to store the model metadata in one of the text-based (JSON) formats mentioned above (Model.bim or Database.json). There is no way to "recreate" a .pbix or .pbit file from the text-based format, so **once we decide to go this route, we will no longer be able to use Power BI Desktop for editing the data model**. Instead, we will have to rely on tools that can use the JSON-based format, which is exactly the purpose of Tabular Editor.
+要实现并行开发，我们必须能够将模型元数据存储为上述某种基于文本的（JSON）格式（Model.bim 或 Database.json）。 无法从这种基于文本的格式“重建” .pbix 或 .pbit 文件，因此**一旦决定走这条路线，就无法再使用 Power BI Desktop 来编辑 Data model**。 取而代之的是，我们必须依赖能够使用基于 JSON 的格式的工具——这正是 Tabular Editor 的用途所在。
 
 > [!WARNING]
-> If you do not have access to a Power BI Premium workspace (either Premium capacity or Premium-Per-User), you will not be able to publish the model metadata stored in the JSON files, since this operation requires access to the [XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools).
+> 如果你无法访问 Power BI Premium Workspace（Premium 容量或 Premium-Per-User），就无法发布存储在 JSON 文件中的模型元数据，因为此操作需要访问 [XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools)。
 
 > [!NOTE]
-> Power BI Desktop is still needed for purpose of creating the visual part of the report. It is a [best practice to always separate reports from models](https://docs.microsoft.com/en-us/power-bi/guidance/report-separate-from-model). In case you have an existing Power BI file that contains both, [this blog post](https://powerbi.tips/2020/06/split-an-existing-power-bi-file-into-a-model-and-report/) ([video](https://www.youtube.com/watch?v=PlrtBm9YN_Q))  describes how to split it into a model file and a report file.
+> 创建 Report 的 Visual 部分仍然需要 Power BI Desktop。 始终将 Report 与模型分离是一项[最佳实践](https://docs.microsoft.com/en-us/power-bi/guidance/report-separate-from-model)。 如果你现有的 Power BI 文件同时包含两者，[这篇博客](https://powerbi.tips/2020/06/split-an-existing-power-bi-file-into-a-model-and-report/)（[视频](https://www.youtube.com/watch?v=PlrtBm9YN_Q)）介绍了如何将其拆分为一个模型文件和一个 Report 文件。
 
-## Tabular Editor and git
+## Tabular Editor 与 Git
 
-Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. It is the most popular version control system right now, and it is available through multiple hosted options, such as [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/repos/), [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/) and others.
+Git 是一个免费开源的分布式版本控制系统，旨在以高速高效的方式处理从小型到超大型的各类项目。 它目前是最受欢迎的版本控制系统，并且可通过多种托管服务使用，例如 [Azure DevOps](https://azure.microsoft.com/en-us/services/devops/repos/)、[GitHub](https://github.com/)、[GitLab](https://about.gitlab.com/) 等。
 
-A detailed description of git is outside the scope of this article. There are, however, many resources available online if you want to learn more. We recommend the [Pro Git](https://git-scm.com/book/en/v2) book for reference.
+本文不会详细介绍 Git。 不过，如果你想进一步了解，网上有大量资源可供参考。 我们推荐《[Pro Git](https://git-scm.com/book/en/v2)》一书作为参考。
 
 > [!NOTE]
-> Tabular Editor 3 does not currently have any integration with git or other version control systems. To manage your git repository, commit code changes, create branches, etc., you will have to use the git command line or another tool, such as the [Visual Studio Team Explorer](https://docs.microsoft.com/en-us/azure/devops/user-guide/work-team-explorer?view=azure-devops#git-version-control-and-repository) or [TortoiseGit](https://tortoisegit.org/).
+> Tabular Editor 3 目前尚未与 Git 或其他版本控制系统集成。 要管理你的 Git repository、提交代码更改、创建分支等，你需要使用 Git 命令行或其他工具，例如 [Visual Studio Team Explorer](https://docs.microsoft.com/en-us/azure/devops/user-guide/work-team-explorer?view=azure-devops#git-version-control-and-repository) 或 [TortoiseGit](https://tortoisegit.org/)。
 
-As mentioned earlier, we recommend using Tabular Editor's [Save to Folder](#what-is-save-to-folder) option when saving model metadata to a git code repository.
+如前所述，我们建议在将模型元数据保存到 Git repository 时，使用 Tabular Editor 的 [保存到文件夹](#what-is-save-to-folder) 选项。
 
-## Branching strategy
+## 分支策略
 
-What follows is a discussion of branching strategies to employ when developing tabular models.
+下文将讨论在开发表格模型时可采用的分支策略。
 
-The branching strategy will dictate what the daily development workflow will be like, and in many cases, branches will tie directly into the project methods used by your team. For example, using the [agile process within Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/boards/work-items/guidance/agile-process-workflow?view=azure-devops), your backlog would consist of **Epics**, **Features**, **User Stories**, **Tasks** and **Bugs**.
+分支策略会决定日常开发工作流的具体方式；很多时候，分支还会与团队采用的项目管理方法直接对应。 例如，在 Azure DevOps 中使用[敏捷过程](https://docs.microsoft.com/en-us/azure/devops/boards/work-items/guidance/agile-process-workflow?view=azure-devops)时，你的待办项通常由 **史诗**、**功能**、**用户故事**、**任务** 和 **缺陷** 组成。
 
-In the agile terminology, a **User Story** is a deliverable, testable piece of work. The User Story may consist of several **Tasks**, that are smaller pieces of work that need to be performed, typically by a developer, before the User Story may be delivered. In the ideal world, all User Stories have been broken down into manageable tasks, each taking only a couple of hours to complete, adding up to no more than a handful of days for the entire User Story. This would make a User Story an ideal candidate for a so-called Topic Branch, where the developer could make one or more commits for each of the tasks within the User Story. Once all tasks are done, you want to deliver the User Story to the client, at which time the topic branch is merged into a delivery branch (for example, a "Test" branch), and the code deployed to a testing environment.
+在敏捷术语中，**用户故事** 是一项可交付、可测试的工作成果。 一个用户故事可能由多个 **任务** 组成，这些是更小的工作单元，通常由开发人员在用户故事交付之前完成。 在理想情况下，所有用户故事都已拆分为易于管理的任务，每个任务只需几个小时即可完成，整个用户故事累计也不超过几天。 这样，用户故事就非常适合作为所谓的主题分支，开发人员可以针对用户故事中的每个任务进行一次或多次提交。 当所有任务完成后，你就可以把用户故事交付给客户。这时，你会把主题分支合并到交付分支（例如“Test”分支），并将代码部署到测试环境。
 
-Determining a suitable branching strategy depends on many different factors. In general, Microsoft recommends the [Trunk-based Development](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops) ([video](https://youtu.be/t_4lLR6F_yk?t=232)) strategy, for agile and continuous delivery of small increments. The main idea is to create branches off the "Main" branch for every new feature or bugfix (see image below). Code review processes are enforced through pull requests from feature branches into Main, and using the Branch Policy feature of Azure DevOps, we can set up rules that require code to build cleanly before a pull request can be completed.
+选择合适的分支策略取决于很多因素。 通常，Microsoft 推荐采用 [Trunk-based Development](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops)（[视频](https://youtu.be/t_4lLR6F_yk?t=232)）策略，以敏捷方式持续交付小步增量。 其核心思路是：每新增一个功能或修复一个缺陷，都从“Main”分支拉出一个分支（见下图）。 通过从功能分支向 Main 发起拉取请求来强制执行代码评审流程；并利用 Azure DevOps 的分支策略功能，我们可以配置规则，要求代码在拉取请求完成前必须成功通过构建且无错误。
 
-![Trunk Based Development](~/content/assets/images/trunk-based-development.png)
+![主干开发](~/content/assets/images/trunk-based-development.png)
 
-### Trunk-based Development
+### 主干开发
 
-However, such a strategy might not be feasible in a Business Intelligence development teams, for a number of reasons:
+不过，出于多种原因，这种策略在商业智能开发团队中可能并不现实：
 
-- New features often require prolonged testing and validation by business users, which may take several weeks to complete. As such, you will likely need a user-facing test environment.
-- BI solutions are multi-tiered, typically consisting of a Data Warehouse tier with ETL, a Master Data Management tier, a semantic layer and reports. Dependencies exist between these layers, that further complicate testing and deployment.
-- The BI team may be responsible for developing and maintaining several different semantic models, serving different areas of business (Sales, Inventory, Logistics, Finance, HR, etc.), at different maturity stages and at varying development pace.
-- The most important aspect of a BI solution is the data! As a BI developer, you do not have the luxury of simply checking out the code from source control, hitting F5 and having a full solution up and running in the few minutes it takes to compile the code. Your solution needs data, and that data has to be loaded, ETL'ed or processed across several layers to make it to the end user. Including data in your DevOps workflows could blow up build and deployment times from minutes to hours or even days. In some scenarios, it might not even be possible, due to resource or economy constraints.
+- 新功能往往需要业务用户进行较长时间的测试与验证，可能需要数周才能完成。 因此，你很可能需要一个面向用户的测试环境。
+- BI 解决方案通常采用多层架构，一般包括带 ETL 的 Data Warehouse 层、主数据管理层、语义层以及 Report。 这些层之间存在依赖关系，进一步增加了测试和部署的复杂度。
+- BI 团队可能需要负责开发和维护多个不同的语义模型，分别服务于不同的业务领域（销售、库存、物流、财务、人力资源等），其成熟度各不相同，开发节奏也不一致。
+- BI 解决方案最重要的部分是数据！ 作为 BI 开发人员，你无法像传统软件开发那样：从源代码管理中签出代码，按下 F5，然后在几分钟的编译时间内就让完整解决方案跑起来。 你的解决方案离不开数据，而这些数据必须经过多层的加载、ETL 或处理，才能交付给最终用户。 把数据纳入 DevOps 工作流，可能会把构建和部署时间从几分钟拉长到几小时，甚至几天。 在某些场景下，由于资源或成本限制，甚至可能根本做不到。
 
-There is no doubt that a BI team would benefit from a branching strategy that supports parallel development on any of the layers in the full BI solution, in a way that lets them mix and match features that are ready for testing. But especially due to the last bullet point above, we need to think carefully about how we are going to handle the data. If we add a new attribute to a dimension, for example, do we want to automatically load the dimension as part of our build and deployment pipelines? If it only takes a few minutes to load such a dimension, that would probably be fine, but what if we are adding a new column to a multi-billion row fact table? And if developers are working on new features in parallel, should each developer have their own development database, or how do we otherwise prevent them from stepping on each others toes in a shared database?
+毫无疑问，BI 团队会受益于一种分支策略：支持在完整 BI 解决方案的任意层上并行开发，并且可以把已准备好测试的功能自由组合起来。 但尤其是由于上面最后一个要点，我们需要认真考虑该如何处理数据。 例如，我们给某个维度新增一个属性时，是否希望在构建和部署流水线中自动加载该维度？ 如果加载这个维度只需要几分钟，那可能没问题；但如果我们是在一个数十亿行的事实表里新增一列呢？ 此外，如果开发人员在并行开发新功能，每位开发者是否都应该拥有自己的开发数据库？否则，如何避免他们在共享数据库中相互干扰？
 
-There is no easy answer to the questions above - especially when considering all the tiers of a BI solution, and the different constellations and preferred workflows of BI teams across the planet. Also, when we dive into actual build, deployment and test automation, we are going to focus mostly on Analysis Services. The ETL- and database tiers have their own challenges from a DevOps perspective, which are outside the scope of this article. But before we move on, let us take a look at another branching strategy, and how it could potentially be adopted to BI workflows.
+上述问题没有简单答案——尤其是当你要考虑 BI 解决方案的所有层级，以及全球各地 BI 团队不同的组织形态和偏好的工作流程时。 另外，当我们深入到实际的构建、部署和测试自动化时，会主要聚焦在 Analysis Services。 从 DevOps 的透视来看，ETL 和数据库层也有各自的挑战，但不在本文讨论范围内。 不过在继续之前，我们先看看另一种分支策略，以及它可能如何应用到 BI 工作流中。
 
-### GitFlow branching and deployment environments
+### GitFlow 分支与部署环境
 
-The strategy described below is based on [GitFlow by Vincent Driessen](https://nvie.com/posts/a-successful-git-branching-model/).
+下面介绍的策略基于 [Vincent Driessen 的 GitFlow](https://nvie.com/posts/a-successful-git-branching-model/)。
 
 ![Gitflow](~/content/assets/images/gitflow.png)
 
-Implementing a branching strategy similar to this, can help solve some of the DevOps problems typically encountered by BI teams, provided you put some thought into how the branches correlate to your deployment environments. In an ideal world, you would need at least 4 different environments to fully support GitFlow:
+采用类似的分支策略，只要你认真考虑分支与部署环境之间的对应关系，就能帮助解决 BI 团队在 DevOps 中常见的一些问题。 在理想情况下，要完整支持 GitFlow，你至少需要 4 套不同的环境：
 
-- The **production** environment, which should always contain the code at the HEAD of the master branch.
-- A **canary** environment, which should always contain the code at the HEAD of the develop branch. This is where you typically schedule nightly deployments and run your integration testing, to make sure that the features going into the next release to production play nicely together.
-- One or more **UAT** environments where you and your business users test and validate new features. Deployment happens directly from the feature branch containing the code that needs to be tested. You will need multiple test environments if you want to test multiple new features in parallel. With some coordination effort, a single test environment is usually enough, as long as you carefully consider the dependencies between your BI tiers.
-- One or more **sandbox** environments where you and your team can develop new features, without impacting any of the environments above. As with the test environment, it is usually enough to have a single, shared, sandbox environment.
+- **生产**环境，应始终包含 master 分支 HEAD 上的代码。
+- **金丝雀**环境，应始终包含 develop 分支 HEAD 上的代码。 你通常会在这里安排每晚部署并运行集成测试，确保将进入下一次生产发布的各项功能能够相互兼容、协同工作。
+- 一套或多套 **UAT** 环境，用于你和业务用户测试并验证新功能。 部署直接从包含待测代码的 feature 分支发起。 如果你希望并行测试多个新功能，就需要多个测试环境。 只要稍作协调，并仔细考虑各个 BI 层级之间的依赖关系，通常一个测试环境就足够了。
+- 一个或多个 **沙盒** 环境，你和团队可以在其中开发新功能，而不会影响上述任何环境。 和测试环境一样，通常只需要一个共享的沙盒环境就足够了。
 
-We must emphasize that there is really no "one-size-fits-all" solution to these considerations. Maybe you are not building your solution in the Cloud, and therefore do not have the scalability or flexibility to spin up new resources in seconds or minutes. Or maybe your data volumes are very large, making it impractical to replicate environments due to resource/economy/time constraints. Before moving on, also make sure to ask yourself the question of whether you truly need to support parallel development and testing. This is rarely the case for small teams with only a few stakeholders, in which case you can still benefit from CI/CD, but where GitFlow branching might be overkill.
+我们要强调：这些考量并不存在真正“放之四海皆准”的方案。 也许你并不是在云端构建解决方案，因此无法利用可扩展性或灵活性，在数秒或数分钟内快速创建新资源。 又或者你的数据量非常大，受限于资源/成本/时间，复制多套环境并不现实。 在继续之前，也请先问问自己：你是否真的需要支持并行开发与测试。 对于只有少数利益相关方的小团队，这种情况并不常见。在这种情况下，你依然可以从 CI/CD 中受益，但 GitFlow 分支策略可能有些“杀鸡用牛刀”。
 
-Even if you do need to support parallel development, you may find that multiple developers can easily share the same development or sandbox environment, without encountering too much trouble. Specifically for tabular models, though, we recommend that developers still use individual [workspace databases](xref:workspace-mode) to avoid "stepping over each others toes".
+即使你确实需要支持并行开发，你也可能会发现：多个开发者通常可以轻松共享同一个开发或沙盒环境，而不会遇到太多麻烦。 不过，针对表格模型，我们仍建议开发者使用各自独立的 [Workspace 数据库](xref:workspace-mode)，以免相互“踩脚”。
 
-## Common workflow
+## 常见工作流
 
-Assuming you already have a git repository set up and aligned to your branching strategy, adding your tabular model "source code" to the repository is simply a matter of using Tabular Editor to save the metadata to a new branch in a local repository. Then, you stage and commit the new files, push your branch to the remote repository and create a pull request to get your branch merged into the main branch.
+假设你已经建好了 Git repository，并且与分支策略对齐，把表格模型“源代码”加入该 repository 其实很简单：用 Tabular Editor 将元数据保存到本地 repository 的新分支上。 然后，将新文件暂存并提交，把分支推送到远程 repository，并发起拉取请求，以便将你的分支合并到主分支。
 
-The exact workflow depends on your branching strategy and how your git repositories have been set up. In general, the workflow would look something like this:
+具体工作流取决于你的分支策略，以及你的 Git repository 是怎么配置的。 一般来说，工作流大致如下：
 
-1. Before starting work on a new feature, create a new feature branch in git. In a trunk-based development scenario, you would need the following git commands to checkout the main branch, get the latest version of the code, and create the feature branch from there:
+1. 在开始开发新功能之前，在 Git 中创建一个新的功能分支。 在基于主干的开发场景中，你需要使用以下 Git 命令来检出主分支、拉取最新代码，并以此为基础创建功能分支：
    ```cmd
    git checkout main
    git pull
    git checkout -b "feature\AddTaxCalculation"
    ```
-2. Open your model metadata from the local git repository in Tabular Editor. Ideally, use a [workspace database](xref:workspace-mode), to make it easier to test and debug DAX code.
-3. Make the necessary changes to your model using Tabular Editor. Continuously save the changes (CTRL+S). Regularly commit code changes to git after you save, to avoid losing work and to keep a full history of all changes that were made:
+2. 在 Tabular Editor 中从本地 Git repository 打开你的模型元数据。 理想情况下，使用 [Workspace 数据库](xref:workspace-mode)，以便更轻松地测试和调试 DAX 代码。
+3. 使用 Tabular Editor 对模型进行必要的更改。 及时保存更改（CTRL+S）。 每次保存后就定期把代码更改提交到 Git，避免丢失工作，并保留所有更改的完整历史记录：
    ```cmd
    git add .
    git commit -m "Description of what was changed and why since last commit"
    git push
    ```
-4. If you are not using a workspace database, use Tabular Editor's **Model > Deploy...** option to deploy to a sandbox/development environment, in order to test the changes made to the model metadata.
-5. When done, and all code has been committed and pushed to the remote repository, you submit a pull request in order to get your code integrated with the main branch. If a merge conflict is encountered, you will have to resolve it locally, using for example the Visual Studio Team Explorer or by simply opening the .json files in a text editor to resolve the conflicts (git inserts conflict markers to indicate which part of the code has conflicts).
-6. Once all conflicts are resolved, there may be a process of code review, automated build/test execution based on branch policies, etc. to get the pull request completed. This, however, depends on your branching strategy and overall setup.
+4. 如果你没有使用 Workspace 数据库，请使用 Tabular Editor 的 **Model > Deploy...** 选项部署到沙盒/开发环境，以便测试对模型元数据所做的更改。
+5. 完成后，当所有代码都已提交并推送到远程 repository 时，你需要提交一个拉取请求，以便将你的代码集成到主分支。 如果遇到合并冲突，你得在本地解决。比如可以使用 Visual Studio Team Explorer，或者直接用文本编辑器打开 .json 文件来解决冲突（Git 会插入冲突标记，用于指示代码中哪些部分存在冲突）。
+6. 解决所有冲突后，可能还需要进行代码审查，并根据分支策略执行自动化构建/测试等流程，才能完成拉取请求。 不过，这取决于你的分支策略和整体设置。
 
-We present more details about how to configure git branch policies, set up automated build and deployment pipelines, etc. using Azure DevOps in the following articles. Similar techniques can be used in other automated build and git hosting environments, such as TeamCity, GitHub, etc.
+在接下来的文章中，我们会介绍如何使用 Azure DevOps 配置 Git 分支策略、搭建自动化构建与部署管道等更多细节。 在其他自动化构建和 Git 托管环境中也可以使用类似技术，例如 TeamCity、GitHub 等。
 
-## Next steps
+## 后续步骤
 
 - @powerbi-cicd
 - @as-cicd
