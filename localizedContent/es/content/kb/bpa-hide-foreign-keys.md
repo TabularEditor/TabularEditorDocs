@@ -1,46 +1,46 @@
 ---
 uid: kb.bpa-hide-foreign-keys
-title: Hide Foreign Key Columns
+title: Ocultar columnas de claves externas
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule for hiding foreign key columns to simplify the model for end users.
+description: Regla de mejores prácticas para ocultar columnas de claves externas y simplificar el modelo para los usuarios finales.
 ---
 
-# Hide Foreign Key Columns
+# Ocultar columnas de claves externas
 
-## Overview
+## Descripción general
 
-This best practice rule identifies foreign key columns (many-side of relationships) that are visible to end users. Foreign keys should be hidden because they serve only as relationship connectors and provide no analytical value when displayed.
+Esta regla de mejores prácticas identifica las columnas de claves externas (el lado "muchos" de las relaciones) que son visibles para los usuarios finales. Las claves externas deberían ocultarse porque solo sirven para establecer relaciones y no aportan valor analítico cuando se muestran.
 
-- Category: Formatting
+- Categoría: Formato
 
-- Severity: Medium (2)
+- Gravedad: Media (2)
 
-## Applies To
+## Se aplica a
 
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- Columnas de datos
+- Columnas calculadas
+- Columnas de tablas calculadas
 
-## Why This Matters
+## Por qué es importante
 
-Visible foreign key columns create unnecessary clutter:
+Las columnas de claves externas visibles crean desorden innecesario:
 
-- **User confusion**: Foreign keys look like useful data but duplicate dimension attributes
-- **Redundant fields**: Users see both the key and the related dimension attributes
-- **Larger field lists**: More objects to scroll through finding relevant fields
-- **Incorrect usage**: Users may group by keys instead of proper dimension attributes
-- **Poor visualizations**: Charts showing key values instead of descriptive names
+- **Confusión de los usuarios**: Las claves externas parecen datos útiles, pero duplican los atributos de la dimensión
+- **Campos redundantes**: Los usuarios ven tanto la clave como los atributos de la dimensión relacionada
+- **Listas de campos más largas**: Más elementos entre los que desplazarse para encontrar los campos relevantes
+- **Uso incorrecto**: Los usuarios pueden agrupar por claves en lugar de por los atributos de dimensión adecuados
+- **Visualizaciones deficientes**: Gráficos que muestran valores de la clave en lugar de nombres descriptivos
 
-Foreign keys exist only to create relationships between tables. Once relationships are established, users should work with dimension attributes, not the foreign keys themselves.
+Las claves externas existen solo para crear relaciones entre tablas. Una vez establecidas las relaciones, los usuarios deberían trabajar con los atributos de la dimensión, no con las claves externas en sí.
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when a column is:
+La regla se activa cuando una columna es:
 
-1. Used as the "from" column in a relationship (many-side)
-2. The relationship has many cardinality on the from-side
-3. The column is visible (`IsHidden = false`)
+1. Se usa como la columna "from" en una relación (lado de muchos)
+2. La relación tiene cardinalidad de muchos en el lado "from"
+3. La columna está visible (`IsHidden = false`)
 
 ```csharp
 UsedInRelationships.Any(FromColumn.Name == current.Name and FromCardinality == "Many")
@@ -48,72 +48,72 @@ and
 IsHidden == false
 ```
 
-## How to Fix
+## Cómo corregirlo
 
-### Automatic Fix
+### Corrección automática
 
-This rule includes an automatic fix:
+Esta regla incluye una corrección automática:
 
 ```csharp
 IsHidden = true
 ```
 
-To apply:
+Para aplicarlo:
 
-1. In the **Best Practice Analyzer** select flagged foreign key columns
-2. Click **Apply Fix**
+1. En el **Best Practice Analyzer**, selecciona las columnas de clave externa marcadas
+2. Haz clic en **Aplicar corrección**
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, locate the foreign key column
-2. In **Properties** pane, set **IsHidden** to **true**
-3. Save changes
+1. En el **Explorador TOM**, localiza la columna de clave externa
+2. En el panel **Propiedades**, configura **IsHidden** como **true**
+3. Guarda los cambios
 
-## Common Causes
+## Causas comunes
 
-### Cause 1: Incomplete Model Setup
+### Causa 1: Configuración incompleta del modelo
 
-Foreign keys remain visible after creating relationships.
+Las claves externas siguen siendo visibles después de crear relaciones.
 
-### Cause 2: Bulk Import
+### Causa 2: Importación masiva
 
-Tables imported without post-processing to hide foreign keys.
+Tablas importadas sin procesamiento posterior para ocultar las claves externas.
 
-### Cause 3: Legacy Models
+### Causa 3: Modelos heredados
 
-Older models where foreign key hiding wasn't enforced.
+Modelos antiguos en los que no se exigía ocultar las claves externas.
 
-## Example
+## Ejemplo
 
-### Before Fix
+### Antes de la corrección
 
 ```
-Sales Table Fields (visible):
+Campos de la tabla Sales (visibles):
   - OrderDate
-  - CustomerKey  ← Foreign key (should be hidden)
-  - ProductKey   ← Foreign key (should be hidden)
+  - CustomerKey  ← Clave foránea (debería ocultarse)
+  - ProductKey   ← Clave foránea (debería ocultarse)
   - SalesAmount
   - Quantity
 ```
 
-**User experience**: Field list is cluttered. Users might mistakenly use `Sales[CustomerKey]` instead of `Customer[CustomerName]`.
+**Experiencia de usuario**: La lista de campos está sobrecargada. Los usuarios podrían usar por error `Sales[CustomerKey]` en lugar de `Customer[CustomerName]`.
 
-### After Fix
+### Después de la corrección
 
 ```
-Sales Table Fields (visible):
+Campos de la tabla Sales (visibles):
   - OrderDate
   - SalesAmount
   - Quantity
 ```
 
-**User experience**: Clean field list. Users naturally use dimension attributes, relationship filtering works automatically.
+**Experiencia de usuario**: La lista de campos está limpia. Los usuarios usan de forma natural los atributos de dimensión; el filtrado por relación funciona automáticamente.
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher.
+Esta regla se aplica a los modelos con nivel de compatibilidad **1200** y superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Set SummarizeBy to None for Numeric Columns](xref:kb.bpa-do-not-summarize-numeric) - Related column configuration
-- [Format String for Columns](xref:kb.bpa-format-string-columns) - Column display settings
+- [Establecer SummarizeBy en None para columnas numéricas](xref:kb.bpa-do-not-summarize-numeric) - Configuración relacionada con la columna
+- [Cadena de formato para columnas](xref:kb.bpa-format-string-columns) - Configuración de visualización de columnas
