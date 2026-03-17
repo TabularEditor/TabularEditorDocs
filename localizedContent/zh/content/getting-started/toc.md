@@ -1,6 +1,6 @@
-# [Welcome](index.md)
+# [欢迎](index.md)
 
-# Introduction to Tabular Editor
+# Tabular Editor 简介
 
 ## @general-introduction
 
@@ -14,7 +14,7 @@
 
 ## @azure-marketplace
 
-# Getting Started with Tabular Editor 3
+# Tabular Editor 3 入门指南
 
 ## @getting-started
 
@@ -24,13 +24,13 @@
 
 # @getting-started-te2
 
-# Power BI Desktop & Tabular Editor
+# Power BI Desktop 和 Tabular Editor
 
 ## @desktop-integration
 
 ## @desktop-limitations
 
-# User Interface
+# 用户界面
 
 ## @user-interface-reference
 
@@ -48,28 +48,28 @@
 
 ## @tom-explorer-view-reference
 
-## @diagram-view-reference
+## @图表视图参考
 
-# Parallel development
+# 并行开发
 
-## @parallel-development
+## @并行开发
 
-## @optimizing-workflow-workspace-mode
+## @在工作区模式下优化工作流程
 
-# Built models faster with Tabular Editor
+# 使用 Tabular Editor 更快地构建模型
 
 ## @boosting-productivity-te3
 
-## @importing-tables-data-modeling
+## @导入表格进行数据建模
 
-## @refresh-preview-query
+## @刷新查询预览
 
 ## @creating-and-testing-dax
 
 ## @dax-script-introduction
 
-## @bpa
+## @最佳实践分析器
 
-## @cs-scripts-and-macros
+## @C# 脚本和宏
 
 ## @personalizing-te3
