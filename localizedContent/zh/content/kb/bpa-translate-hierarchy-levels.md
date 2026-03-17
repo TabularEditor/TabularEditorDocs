@@ -1,92 +1,92 @@
 ---
 uid: kb.bpa-translate-hierarchy-levels
-title: Translate Hierarchy Level Names for All Cultures
+title: 为所有区域设置翻译层次结构级别名称
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring hierarchy level names are translated for all defined cultures.
+description: 最佳做法规则：确保为所有已定义的区域设置翻译层次结构级别名称。
 ---
 
-# Translate Hierarchy Level Names for All Cultures
+# 为所有区域设置翻译层次结构级别名称
 
-## Overview
+## 概述
 
-This rule identifies hierarchy levels in visible hierarchies that lack name translations for one or more cultures.
+此规则用于识别可见层次结构中在一个或多个区域设置下缺少名称翻译的层级。
 
-- Category: Model Layout
-- Severity: Low (1)
+- 类别：模型布局
+- 严重性：低（1）
 
-## Applies To
+## 适用对象
 
-- Levels (within hierarchies)
+- 级别（层次结构内）
 
-## Why This Matters
+## 为什么这很重要
 
-- **Incomplete localization**: Level names display in default language only
-- **Inconsistent experience**: Partially translated hierarchies
-- **User confusion**: Navigation appears incomplete
-- **Professional appearance**: Missing translations reduce quality
+- **本地化不完整**：级别名称仅以默认语言显示
+- **体验不一致**：层次结构只做了部分翻译
+- **用户困惑**：导航看起来不完整
+- **专业形象**：缺少翻译会降低整体质量
 
-## When This Rule Triggers
+## 此规则何时触发
 
-This rule triggers when a hierarchy level meets both of these conditions:
+当某个层次结构级别同时满足以下两个条件时，此规则会触发：
 
-1. The hierarchy containing the level is **visible** to end users
-2. At least one culture in the model is **missing a translation** for the level name
+1. 包含该级别的层次结构对最终用户**可见**
+2. 模型中至少有一个区域设置**缺少该级别名称的翻译**
 
-That is if you have visible hierarchies with multiple cultures, all the level names within those hierarchies should be translated for each culture.
+也就是说，如果存在包含多个区域设置的可见层次结构，则这些层次结构中的所有层级名称都应针对每个区域设置提供翻译。
 
 ```csharp
 Hierarchy.IsVisible 
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ```
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, select the level
-2. In **Properties** pane, expand **Translated Names**
-3. Enter translation for each culture
+1. 在 **TOM Explorer** 中选择该级别
+2. 在 **属性** 窗格中，展开 **翻译名称**
+3. 为每个区域设置分别输入翻译
 
-## Common Causes
+## 常见原因
 
-### Cause 1: New Levels Added
+### 原因 1：新增了级别
 
-Levels created without translations.
+创建级别时未提供翻译。
 
-### Cause 2: Culture Added Later
+### 原因 2：后续添加了区域设置
 
-Culture added after hierarchy was created.
+层级创建后才添加区域设置。
 
-### Cause 3: Incomplete Translation
+### 原因 3：翻译不完整
 
-Translation process didn't cover all hierarchy levels.
+翻译流程未涵盖层级中的所有级别。
 
-## Example
+## 示例
 
-### Before Fix
-
-```
-Hierarchy: Geography
-  Level: Country
-    English: "Country"
-    Spanish: (missing)
-```
-
-### After Fix
+### 修复前
 
 ```
-Hierarchy: Geography
-  Level: Country
-    English: "Country"
-    Spanish: "País"
+层次结构：Geography
+  级别：Country
+    英语："Country"
+    西班牙语：（缺失）
 ```
 
-## Compatibility Level
+### 修复后
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+层次结构：Geography
+  级别：Country
+    英语："Country"
+    西班牙语："País"
+```
 
-## Related Rules
+## 兼容级别
 
-- [Translate Visible Names](xref:kb.bpa-translate-visible-names) - Translating object names
-- [Translate Perspectives](xref:kb.bpa-translate-perspectives) - Translating perspective names
+此规则适用于兼容级别为 **1200** 及以上的模型。
+
+## 相关规则
+
+- [翻译可见名称](xref:kb.bpa-translate-visible-names) - 翻译对象名称
+- [翻译透视](xref:kb.bpa-translate-perspectives) - 翻译透视名称
