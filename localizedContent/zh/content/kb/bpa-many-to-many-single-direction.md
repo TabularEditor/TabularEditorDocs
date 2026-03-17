@@ -1,54 +1,54 @@
 ---
 uid: kb.bpa-many-to-many-single-direction
-title: Many-to-Many Relationships Should Use Single Direction
+title: 多对多关系应采用单向交叉筛选
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule to avoid performance issues by using single-direction filtering on many-to-many relationships.
+description: 最佳实践规则：在多对多关系上使用单向筛选，以避免性能问题。
 ---
 
-# Many-to-Many Relationships Should Use Single Direction
+# 多对多关系应采用单向交叉筛选
 
-## Overview
+## 概述
 
-This best practice rule identifies many-to-many relationships that use bidirectional cross-filtering. Many-to-many relationships with both-directions filtering cause significant performance degradation.
+此最佳实践规则用于识别使用双向交叉筛选的多对多关系。 采用双向筛选的多对多关系会导致性能显著下降。
 
-- Category: Performance
-- Severity: Medium (2)
+- 类别：性能
+- 严重性：中等（2）
 
-## Applies To
+## 适用范围
 
-- Relationships
+- 关系
 
-## Why This Matters
+## 为什么这很重要
 
-- **Severe performance impact**: Engine must evaluate filters in both directions
-- **Memory consumption**: Additional filter contexts maintained
-- **Ambiguous filter paths**: Multiple routes produce unexpected results
-- **Complex DAX logic**: Debugging filter context becomes difficult
-- **Risk circular dependencies**: Can lead to infinite evaluation loops
+- **性能影响严重**：引擎必须在两个方向上评估筛选条件
+- **内存消耗**：需要维护额外的筛选语境
+- **筛选路径不明确**：多条路径可能产生意外结果
+- **DAX 逻辑更复杂**：调试 FILTER 的筛选语境变得困难
+- **循环依赖风险**：可能导致无限评估循环
 
-## When This Rule Triggers
+## 何时触发此规则
 
-The rule triggers when a relationship meets all conditions:
+当某个关系同时满足以下所有条件时，就会触发这个规则：
 
 1. `FromCardinality = "Many"`
 2. `ToCardinality = "Many"`
 3. `CrossFilteringBehavior = "BothDirections"`
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, locate the flagged relationship
-2. In **Properties** pane, find `Cross Filter Direction`
-3. Change from **Both** to **Single**
+1. 在 **TOM Explorer** 中，找到被标记的关系
+2. 在 **属性** 窗格中，找到 `Cross Filter Direction` 设置
+3. 将其从 **双向** 改为 **单向**
 
-Choose direction based on typical filter flow:
+根据典型的筛选流向选择方向：
 
-- From dimension to fact
-- From lookup to data table
+- 从维度表到事实表
+- 从查找表到数据表
 
-When opposite-direction filtering is needed, handle explicitly in measures:
+如果确实需要反向筛选，就在度量值里显式处理：
 
 ```dax
 SalesWithCrossFilter = 
@@ -58,37 +58,37 @@ CALCULATE(
 )
 ```
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Default Both-Direction Setting
+### 原因 1：默认双向设置
 
-Model designer applied bidirectional filtering by default.
+模型设计器默认启用了双向筛选。
 
-### Cause 2: Misunderstood Requirements
+### 原因 2：误解了需求
 
-Believed both-direction filtering was necessary for all scenarios.
+误以为所有场景都需要双向筛选。
 
-### Cause 3: Quick Fix Approach
+### 原因 3：快速修复做法
 
-Used both-direction filtering to solve a specific problem without considering performance.
+为解决某个具体问题而使用双向筛选，但没有考虑性能影响。
 
-## Example
+## 示例
 
-### Before Fix
+### 修复前
 
 ```
 'Sales' (Many) <--> (Many) 'ProductBridge'
-Cross Filter Direction: Both  ← Problem
+Cross Filter Direction: Both  ← 问题
 ```
 
-### After Fix
+### 修复后
 
 ```
 'Sales' (Many) --> (Many) 'ProductBridge'
 Cross Filter Direction: Single
 ```
 
-When Products need to filter Sales, use DAX:
+当需要让 Products 筛选 Sales 时，可使用 DAX：
 
 ```dax
 SalesForSelectedProducts = 
@@ -100,17 +100,17 @@ CALCULATE(
 )
 ```
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1200** and higher.
+这个规则适用于兼容级别为 **1200** 及以上的模型。
 
-## Related Rules
+## 相关规则
 
-- [Relationship Data Types Must Match](xref:kb.bpa-relationship-same-datatype) - Ensuring relationship integrity
+- [关系数据类型必须匹配](xref:kb.bpa-relationship-same-datatype)——确保关系完整性
 
-## Learn More
+## 了解更多
 
-- [Many-to-Many Relationships in Power BI](https://learn.microsoft.com/power-bi/transform-model/desktop-many-to-many-relationships)
-- [Relationship Cross-Filtering](https://learn.microsoft.com/power-bi/transform-model/desktop-relationships-understand)
-- [DAX CROSSFILTER Function](https://dax.guide/crossfilter/)
-- [DAX TREATAS Function](https://dax.guide/treatas)
+- [Power BI 中的多对多关系](https://learn.microsoft.com/power-bi/transform-model/desktop-many-to-many-relationships)
+- [关系交叉筛选](https://learn.microsoft.com/power-bi/transform-model/desktop-relationships-understand)
+- [DAX CROSSFILTER 函数](https://dax.guide/crossfilter/)
+- [DAX TREATAS 函数](https://dax.guide/treatas)
