@@ -1,44 +1,44 @@
 ---
 uid: kb.bpa-translate-display-folders
-title: Translate Display Folders for All Cultures
+title: Traducir las carpetas de visualización para todas las configuraciones regionales
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring display folders are translated for all defined cultures.
+description: Regla de buenas prácticas que garantiza que las carpetas de visualización estén traducidas para todas las configuraciones regionales definidas.
 ---
 
-# Translate Display Folders for All Cultures
+# Traducir las carpetas de visualización para todas las configuraciones regionales
 
-## Overview
+## Descripción general
 
-This rule identifies visible objects with display folders that lack translations for one or more cultures.
+Esta regla identifica objetos visibles con carpetas de visualización a las que les faltan traducciones en una o varias configuraciones regionales.
 
-- Category: Model Layout
-- Severity: Low (1)
+- Categoría: Diseño del modelo
+- Gravedad: Baja (1)
 
-## Applies To
+## Se aplica a
 
-- Measures
-- Hierarchies
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- Medidas
+- Jerarquías
+- Columnas de datos
+- Columnas calculadas
+- Columnas de tablas calculadas
 
-## Why This Matters
+## Por qué es importante
 
-- **Incomplete localization**: Display folders show in default language only
-- **Inconsistent navigation**: Partially translated folder structure
-- **User confusion**: Organization appears incomplete
-- **Professional appearance**: Missing translations reduce model quality
+- **Localización incompleta**: Las carpetas de visualización solo se muestran en el idioma predeterminado
+- **Navegación inconsistente**: Estructura de carpetas traducida solo en parte
+- **Confusión del usuario**: La organización parece incompleta
+- **Imagen profesional**: La falta de traducciones reduce la calidad del modelo
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-This rule triggers when an object meets all three of these conditions:
+Esta regla se activa cuando un objeto cumple las tres condiciones siguientes:
 
-1. The object is **visible** to end users (not hidden)
-2. The object has a **display folder** assigned (organizing it into a folder structure)
-3. At least one culture in the model is **missing a translation** for that display folder
+1. El objeto es **visible** para los usuarios finales (no está oculto)
+2. El objeto tiene asignada una **carpeta de visualización** (para organizarlo en una estructura de carpetas)
+3. Al menos a una configuración regional del modelo le **falta una traducción** para esa carpeta de visualización
 
-In plain language: visible objects that are organized in display folders should have those folder names translated for all cultures in your model.
+En pocas palabras: los objetos visibles organizados en carpetas de visualización deben tener esos nombres de carpeta traducidos para todas las configuraciones regionales de tu modelo.
 
 ```csharp
 IsVisible
@@ -46,59 +46,59 @@ and not string.IsNullOrEmpty(DisplayFolder)
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedDisplayFolders[it]))
 ```
 
-## How to Fix
+## Cómo solucionarlo
 
-### Automatic Fix
+### Solución automática
 
 ```csharp
 TranslatedDisplayFolders.Reset()
 ```
 
-Resets translations to use the default display folder.
+Restablece las traducciones para usar la carpeta de visualización predeterminada.
 
-### Manual Fix
+### Solución manual
 
-1. Select object in **TOM Explorer**
-2. Expand **Translated Display Folders** in properties
-3. Enter translation for each culture
+1. Selecciona el objeto en el **Explorador TOM**
+2. Expande **Carpetas de visualización traducidas** en las propiedades
+3. Introduce la traducción para cada configuración regional
 
-## Common Causes
+## Causas comunes
 
-### Cause 1: New Display Folders Added
+### Causa 1: Se añadieron nuevas carpetas de visualización
 
-Display folders created without translations.
+Carpetas de visualización creadas sin traducciones.
 
-### Cause 2: Culture Added Later
+### Causa 2: Se añadió una configuración regional más tarde
 
-Culture added after display folders were defined.
+Se añadió una configuración regional después de definir las carpetas de visualización.
 
-### Cause 3: Incomplete Translation
+### Causa 3: Traducción incompleta
 
-Translation workflow didn't cover display folders.
+El flujo de trabajo de traducción no incluía las carpetas de visualización.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Measure: [Total Sales]
-Display Folder (English): "Sales Metrics"
-Display Folder (French): (missing)
-```
-
-### After Fix
+### Antes de la corrección
 
 ```
-Measure: [Total Sales]
-Display Folder (English): "Sales Metrics"
-Display Folder (French): "Métriques de Vente"
+Medida: [Total Sales]
+Carpeta de visualización (inglés): "Sales Metrics"
+Carpeta de visualización (francés): (falta)
 ```
 
-## Compatibility Level
+### Después de la corrección
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Medida: [Total Sales]
+Carpeta de visualización (inglés): "Sales Metrics"
+Carpeta de visualización (francés): "Métriques de Vente"
+```
 
-## Related Rules
+## Nivel de compatibilidad
 
-- [Translate Visible Names](xref:kb.bpa-translate-visible-names) - Translating object names
-- [Translate Descriptions](xref:kb.bpa-translate-descriptions) - Translating descriptions
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
+
+## Reglas relacionadas
+
+- [Traducir nombres visibles](xref:kb.bpa-translate-visible-names) - Traducción de nombres de objetos
+- [Traducir descripciones](xref:kb.bpa-translate-descriptions) - Traducción de descripciones
