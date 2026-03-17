@@ -1,46 +1,46 @@
 ---
 uid: kb.bpa-hide-foreign-keys
-title: Hide Foreign Key Columns
+title: 隐藏外键列
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule for hiding foreign key columns to simplify the model for end users.
+description: 用于隐藏外键列的最佳实践规则，可为最终用户简化模型。
 ---
 
-# Hide Foreign Key Columns
+# 隐藏外键列
 
-## Overview
+## 概述
 
-This best practice rule identifies foreign key columns (many-side of relationships) that are visible to end users. Foreign keys should be hidden because they serve only as relationship connectors and provide no analytical value when displayed.
+此最佳实践规则会识别对最终用户可见的外键列（关系的多方）。 外键应隐藏，因为它们仅用于建立关系连接，展示出来没有分析价值。
 
-- Category: Formatting
+- 类别：格式设置
 
-- Severity: Medium (2)
+- 严重性：中（2）
 
-## Applies To
+## 适用于
 
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- 数据列
+- 计算列
+- 计算表格列
 
-## Why This Matters
+## 为何这很重要
 
-Visible foreign key columns create unnecessary clutter:
+可见的外键列会造成不必要的杂乱：
 
-- **User confusion**: Foreign keys look like useful data but duplicate dimension attributes
-- **Redundant fields**: Users see both the key and the related dimension attributes
-- **Larger field lists**: More objects to scroll through finding relevant fields
-- **Incorrect usage**: Users may group by keys instead of proper dimension attributes
-- **Poor visualizations**: Charts showing key values instead of descriptive names
+- **用户困惑**：外键看起来像有用的数据，但其实只是重复了维度属性
+- **字段冗余**：用户会同时看到键值以及相关的维度属性
+- **字段列表更长**：用户为了找到相关字段，需要滚动浏览更多对象
+- **误用风险**：用户可能按键值分组，而不是按正确的维度属性分组
+- **可视化效果差**：图表显示的是键值，而不是易读的名称
 
-Foreign keys exist only to create relationships between tables. Once relationships are established, users should work with dimension attributes, not the foreign keys themselves.
+外键的存在仅用于在表之间建立关系。 一旦关系建立完成，用户就应使用维度属性，而不是外键本身。
 
-## When This Rule Triggers
+## 何时触发此规则
 
-The rule triggers when a column is:
+当某列满足以下条件时，将触发该规则：
 
-1. Used as the "from" column in a relationship (many-side)
-2. The relationship has many cardinality on the from-side
-3. The column is visible (`IsHidden = false`)
+1. 在关系中用作“from”列（多端）使用
+2. 该关系的“from”端基数为多
+3. 该列可见（`IsHidden = false`）
 
 ```csharp
 UsedInRelationships.Any(FromColumn.Name == current.Name and FromCardinality == "Many")
@@ -48,72 +48,72 @@ and
 IsHidden == false
 ```
 
-## How to Fix
+## 如何修复
 
-### Automatic Fix
+### 自动修复
 
-This rule includes an automatic fix:
+这条规则包含一个自动修复：
 
 ```csharp
 IsHidden = true
 ```
 
-To apply:
+应用步骤：
 
-1. In the **Best Practice Analyzer** select flagged foreign key columns
-2. Click **Apply Fix**
+1. 在 **Best Practice Analyzer** 中选择被标记的外键列
+2. 点击 **Apply Fix**
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, locate the foreign key column
-2. In **Properties** pane, set **IsHidden** to **true**
-3. Save changes
+1. 在 **TOM Explorer** 中找到外键列
+2. 在 **属性** 窗格中，将 **IsHidden** 设置为 **true**
+3. 保存更改
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Incomplete Model Setup
+### 原因 1：模型设置不完整
 
-Foreign keys remain visible after creating relationships.
+创建关系后，外键仍然可见。
 
-### Cause 2: Bulk Import
+### 原因 2：批量导入
 
-Tables imported without post-processing to hide foreign keys.
+导入表后未进行隐藏外键的后处理。
 
-### Cause 3: Legacy Models
+### 原因 3：旧版模型
 
-Older models where foreign key hiding wasn't enforced.
+在较早的模型中，并未强制隐藏外键。
 
-## Example
+## 示例
 
-### Before Fix
+### 修复前
 
 ```
-Sales Table Fields (visible):
+Sales 表字段 (可见):
   - OrderDate
-  - CustomerKey  ← Foreign key (should be hidden)
-  - ProductKey   ← Foreign key (should be hidden)
+  - CustomerKey  ← 外键 (应隐藏)
+  - ProductKey   ← 外键 (应隐藏)
   - SalesAmount
   - Quantity
 ```
 
-**User experience**: Field list is cluttered. Users might mistakenly use `Sales[CustomerKey]` instead of `Customer[CustomerName]`.
+**用户体验**：字段列表显得很杂乱。 用户可能会误用 `Sales[CustomerKey]`，而不是 `Customer[CustomerName]`。
 
-### After Fix
+### 修复后
 
 ```
-Sales Table Fields (visible):
+Sales 表字段 (可见):
   - OrderDate
   - SalesAmount
   - Quantity
 ```
 
-**User experience**: Clean field list. Users naturally use dimension attributes, relationship filtering works automatically.
+**用户体验**：字段列表很清晰。 用户会自然使用维度属性，关系筛选会自动生效。
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1200** and higher.
+这个规则适用于兼容级别 **1200** 及以上的模型。
 
-## Related Rules
+## 相关规则
 
-- [Set SummarizeBy to None for Numeric Columns](xref:kb.bpa-do-not-summarize-numeric) - Related column configuration
-- [Format String for Columns](xref:kb.bpa-format-string-columns) - Column display settings
+- [将数值列的 SummarizeBy 设为 None](xref:kb.bpa-do-not-summarize-numeric)——相关列配置
+- [列的格式字符串](xref:kb.bpa-format-string-columns)——列显示设置
