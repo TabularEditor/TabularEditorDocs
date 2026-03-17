@@ -1,46 +1,46 @@
 ---
 uid: kb.bpa-remove-unused-data-sources
-title: Remove Unused Data Sources
+title: Eliminar Data sources sin usar
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule for removing orphaned data sources to reduce model complexity and improve maintainability.
+description: Regla de prácticas recomendadas para eliminar los Data sources huérfanos, reducir la complejidad del modelo y facilitar su mantenimiento.
 ---
 
-# Remove Unused Data Sources
+# Eliminar Data sources sin usar
 
-## Overview
+## Información general
 
-This best practice rule identifies data sources that are not referenced by any partitions or table expressions. Removing unused data sources reduces model complexity, improves maintainability, and prevents confusion.
+Esta regla de prácticas recomendadas identifica Data sources a los que no hace referencia ninguna partición ni ninguna expresión de tabla. Eliminar Data sources sin usar reduce la complejidad del modelo, mejora su mantenibilidad y evita confusiones.
 
-- Category: Maintenance
-- Severity: Low (1)
+- Categoría: Mantenimiento
+- Gravedad: Baja (1)
 
-## Applies To
+## Se aplica a
 
-- Provider Data Sources
-- Structured Data Sources
+- Orígenes de datos del proveedor
+- Orígenes de datos estructurados
 
-## Why This Matters
+## Por qué es importante
 
-Unused data sources create unnecessary overhead:
+Los Data sources sin usar generan una sobrecarga innecesaria:
 
-- **Maintenance burden**: Credentials and connection strings must be maintained for unused connections
-- **Security concerns**: Unnecessary connection strings may expose sensitive information
-- **Model complexity**: Extra objects clutter the data source list
-- **Confusion**: Developers may mistakenly use obsolete data sources
-- **Deployment issues**: Unused data sources may reference systems that no longer exist
-- **Documentation overhead**: Extra objects require explanation in model documentation
+- **Carga de mantenimiento**: Es necesario mantener las credenciales y las cadenas de conexión de las conexiones sin uso
+- **Riesgos de seguridad**: Las cadenas de conexión innecesarias pueden exponer información confidencial
+- **Complejidad del modelo**: Los objetos adicionales saturan la lista de Data sources
+- **Confusión**: Los desarrolladores pueden usar por error Data sources obsoletos
+- **Problemas de implementación**: Los Data sources sin usar pueden apuntar a sistemas que ya no existen
+- **Sobrecarga de documentación**: Los objetos adicionales requieren explicación en la documentación del modelo
 
-Unused data sources typically result from:
+Los Data sources sin usar suelen deberse a:
 
-- Refactoring partitions to use different sources
-- Consolidating multiple sources into one
-- Removing tables without cleaning up their data sources
-- Testing alternative connection methods
+- Refactorizar las particiones para usar otros orígenes de datos
+- Consolidar varios orígenes en uno solo
+- Eliminar tablas sin limpiar los Data sources asociados
+- Probar métodos de conexión alternativos
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when a data source meets all these conditions:
+La regla se activa cuando un Data source cumple todas estas condiciones:
 
 ```csharp
 UsedByPartitions.Count() == 0
@@ -48,75 +48,75 @@ and not Model.Tables.Any(SourceExpression.Contains(OuterIt.Name))
 and not Model.AllPartitions.Any(Query.Contains(OuterIt.Name))
 ```
 
-In other words:
+En otras palabras:
 
-1. No partitions directly reference the data source
-2. No table source expressions (M queries) reference the data source by name
-3. No partition queries contain the data source name
+1. Ninguna partición hace referencia directamente al Data source
+2. Ninguna expresión de origen de tabla (consultas M) hace referencia al Data source por su nombre
+3. Ninguna consulta de partición contiene el nombre del Data source
 
-## How to Fix
+## Cómo corregirlo
 
-### Automatic Fix
+### Corrección automática
 
-This rule includes an automatic fix that deletes the unused data source:
+Esta regla incluye una corrección automática que elimina el Data source no utilizado:
 
 ```csharp
 Delete()
 ```
 
-To apply:
+Para aplicarlo:
 
-1. In the **Best Practice Analyzer** select flagged objects
-2. Click **Apply Fix**
+1. En **Best Practice Analyzer**, selecciona los objetos marcados
+2. Haz clic en **Aplicar corrección**
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, expand the **Data Sources** node
-2. Right-click the unused data source
-3. Select **Delete**
-4. Confirm the deletion
+1. En **Explorador TOM**, expande el nodo **Data sources**
+2. Haz clic con el botón derecho en el Data source no utilizado
+3. Selecciona **Eliminar**
+4. Confirma la eliminación
 
-### Before Deleting
+### Antes de eliminar
 
-Verify the data source is truly unused:
+Comprueba que el Data source realmente no está en uso:
 
-- Check all partitions in all tables
-- Search M expressions for references to the data source name
-- Review custom expressions and calculated tables
-- Ensure no documentation references the connection
+- Revisa todas las particiones de todas las tablas
+- Busca referencias al nombre del Data source en las expresiones M
+- Revisa las expresiones personalizadas y las tablas calculadas
+- Asegúrate de que ninguna documentación haga referencia a la conexión
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Data Sources:
-  - SQLServer_Production (Provider, used by Sales partition)
-  - SQLServer_Staging (Provider, NOT USED)  ← Remove
-  - AzureSQL_Archive (Structured, NOT USED)  ← Remove
-  - PowerQuery_Web (Structured, used by Product partition)
-```
-
-### After Fix
+### Antes de la corrección
 
 ```
-Data Sources:
-  - SQLServer_Production (Provider, used by Sales partition)
-  - PowerQuery_Web (Structured, used by Product partition)
+Data sources:
+  - SQLServer_Production (Provider, usado por la partición Sales)
+  - SQLServer_Staging (Provider, NO SE UTILIZA)  ← Eliminar
+  - AzureSQL_Archive (Structured, NO SE UTILIZA)  ← Eliminar
+  - PowerQuery_Web (Structured, usado por la partición Product)
 ```
 
-**Result**: Simpler model with only necessary data sources
+### Después de la corrección
 
-## False Positives
+```
+Data sources:
+  - SQLServer_Production (Provider, usado por la partición Sales)
+  - PowerQuery_Web (Structured, usado por la partición Product)
+```
 
-The rule may flag data sources that are:
+**Resultado**: Un modelo más sencillo con solo los Data sources necesarios
 
-- Referenced through dynamic M expressions using variables
-- Used in commented-out partition queries
-- Referenced by name in annotations or descriptions
+## Falsos positivos
 
-**Solution**: Manually verify before deleting; add comments or annotations if the data source should be kept for documentation purposes.
+La regla puede señalar Data sources que:
 
-## Compatibility Level
+- Se referencian mediante expresiones M dinámicas usando variables
+- Se usan en consultas de partición comentadas
+- Se referencian por nombre en anotaciones o descripciones
 
-This rule applies to models with compatibility level **1200** and higher.
+**Solución**: Verifica manualmente antes de eliminarlo; añade comentarios o anotaciones si el Data source debe conservarse por motivos de documentación.
+
+## Nivel de compatibilidad
+
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
