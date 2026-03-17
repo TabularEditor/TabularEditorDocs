@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-how-tos
-title: Semantic Bridge How-Tos
+title: 语义桥操作指南
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -10,35 +10,35 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.25.0
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           none: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Semantic Bridge How-Tos
+# 语义桥操作指南
 
-These how-tos are focused on interacting with the [Databricks Metric View object model](xref:semantic-bridge-metric-view-object-model) and supporting import workflows to bring these Metric Views into a Tabular semantic model.
+这些操作指南重点介绍如何与 [Databricks Metric View 对象模型](xref:semantic-bridge-metric-view-object-model) 交互，并支持通过导入工作流将这些 Metric View 引入 Tabular 语义模型。
 
-## Getting Started
+## 入门
 
-- @semantic-bridge-load-inspect - Load a Metric View and explore its structure
-- @semantic-bridge-import - Import a Metric View to Tabular and view diagnostics
+- @semantic-bridge-load-inspect - 加载 Metric View 并查看其结构
+- @semantic-bridge-import - 将 Metric View 导入 Tabular，并查看诊断信息
 
-## Validation
+## 验证
 
-- @semantic-bridge-validate-default - Validate with built-in rules
-- @semantic-bridge-validate-simple-rules - Create predicate-based validation rules for naming conventions
-- @semantic-bridge-validate-contextual-rules - Create rules with cross-object checks like duplicate detection
+- @semantic-bridge-validate-default - 使用内置规则进行验证
+- @semantic-bridge-validate-simple-rules - 创建基于谓词的验证规则，用于命名约定
+- @semantic-bridge-validate-contextual-rules - 创建包含跨对象检查的规则，例如重复检测
 
-## Manipulating the Object Model
+## 操作对象模型
 
-- @semantic-bridge-add-object - Add a new object to a Metric View
-- @semantic-bridge-remove-object - Remove objects from a Metric View
-- @semantic-bridge-rename-objects - Rename objects using copy-modify pattern
+- @semantic-bridge-add-object - 向 Metric View 添加新对象
+- @semantic-bridge-remove-object - 从 Metric View 移除对象
+- @semantic-bridge-rename-objects - 使用“复制-修改”模式重命名对象
 
-## Serialization
+## 序列化
 
-- @semantic-bridge-serialize - Serialize a Metric View back to YAML
+- @semantic-bridge-serialize - 将 Metric View 序列化回 YAML
