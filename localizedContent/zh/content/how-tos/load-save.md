@@ -1,6 +1,6 @@
 ---
 uid: load-save-model
-title: Load/save Model.bim files
+title: 加载/保存 Model.bim 文件
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,6 +9,6 @@ applies_to:
       full: true
 ---
 
-## Load/save Model.bim files
+## 加载/保存 Model.bim 文件
 
-Hitting CTRL+O shows an Open File dialog, which lets you select a Model.bim file to load in Tabular Editor. The file must be of Compatibility Level 1200 or newer (JSON format). CTRL+S saves any changes you make in Tabular Editor back to the file (we recommend backing up your Model.bim files before using Tabular Editor). If you want to deploy the loaded model to an Analysis Services server instance, see [Deployment](../features/deployment.md).
+按下 CTRL+O 会打开“打开文件”对话框，你可以在其中选择要在 Tabular Editor 中加载的 Model.bim 文件。 该文件的兼容级别必须为 1200 或更高（JSON 格式）。 CTRL+S 会将你在 Tabular Editor 中所做的更改保存回文件（建议在使用 Tabular Editor 之前先备份 Model.bim 文件）。 如果要将已加载的模型部署到 Analysis Services 服务器实例，请参阅 [部署](../features/deployment.md)。
