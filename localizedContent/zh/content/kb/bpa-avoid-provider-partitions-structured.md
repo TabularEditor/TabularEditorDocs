@@ -1,80 +1,80 @@
 ---
 uid: kb.bpa-avoid-provider-partitions-structured
-title: Avoid Provider Partitions with Structured Data Sources
+title: 避免在 Structured数据源中使用提供程序分区
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule preventing deployment errors by identifying legacy provider partitions used with structured data sources in Power BI.
+description: 此最佳实践规则通过识别 Power BI 中与 Structured数据源一起使用的旧版提供程序分区，帮助避免部署错误。
 ---
 
-# Avoid Provider Partitions with Structured Data Sources
+# 避免在 Structured数据源中使用提供程序分区
 
-## Overview
+## 概述
 
-This best practice rule identifies partitions that use legacy provider-based queries (SourceType = Query) with structured data sources in Power BI models. This combination is not supported in Power BI Service and will cause deployment failures.
+此最佳实践规则用于识别 Power BI 模型中与 Structured数据源配合使用旧版基于提供程序的查询（SourceType = Query）的分区。 Power BI Service 不支持这种组合，因而会导致部署失败。
 
-- Category: Error Prevention
+- 类别：错误预防
 
-- Severity: Medium (2)
+- 严重性：中等（2）
 
-## Applies To
+## 适用范围
 
-- Partitions
+- 分区
 
-## Why This Matters
+## 为何重要
 
-Power BI Service requires structured data sources to use Power Query (M) partitions rather than legacy provider partitions. Using provider partitions with structured data sources causes:
+Power BI Service 要求 Structured数据源使用 Power Query（M）分区，而非旧版提供程序分区。 在 Structured数据源中使用提供程序分区会导致：
 
-- **Deployment failures**: Models fail to publish to Power BI Service
-- **Refresh errors**: Scheduled refresh operations fail in the service
-- **Compatibility issues**: The model cannot be shared or deployed properly
-- **Migration blockers**: Prevents moving from Analysis Services to Power BI
+- **部署失败**：模型无法发布到 Power BI Service
+- **刷新错误**：在服务中执行的计划刷新会失败
+- **兼容性问题**：模型无法正确共享或部署
+- **迁移障碍**：阻碍从 Analysis Services 迁移到 Power BI
 
-## When This Rule Triggers
+## 规则触发条件
 
-The rule triggers when a partition meets all these conditions:
+当某个分区同时满足以下所有条件时，规则会触发：
 
-1. `SourceType = "Query"` (legacy provider partition)
-2. `DataSource.Type = "Structured"` (Power Query/M data source)
-3. `Model.Database.CompatibilityMode != "AnalysisServices"` (Power BI or Azure AS)
+1. `SourceType = "Query"`（旧版提供程序分区）
+2. `DataSource.Type = "Structured"`（Power Query/M 数据源）
+3. `Model.Database.CompatibilityMode != "AnalysisServices"`（Power BI 或 Azure AS）
 
-This combination indicates a structural mismatch that Power BI cannot process.
+这种组合表示结构不匹配，Power BI 无法处理。
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, select the affected partition
-2. In **Properties** pane, note the existing query
-3. Create a new **Power Query** partition with M expression
-4. Delete the old provider partition after verifying the new one works
+1. 在 **TOM Explorer** 中，选择受影响的分区
+2. 在 **Properties** 窗格中，记录现有查询
+3. 使用 M 表达式新建一个 **Power Query** 分区
+4. 确认新分区可正常工作后，删除旧的提供程序分区
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Migration from Analysis Services
+### 原因 1：从 Analysis Services 迁移
 
-Models migrated from SQL Server Analysis Services retain legacy provider partitions.
+从 SQL Server Analysis Services 迁移的模型会保留旧版提供程序分区。
 
-### Cause 2: Mixed Partition Types
+### 原因 2：混用分区类型
 
-Mixing partition types during model development creates incompatible configurations.
+在模型开发过程中混用分区类型，会造成不兼容的配置。
 
-## Example
+## 示例
 
-### Before Fix
+### 修复前
 
 ```
-Partition: Sales_Partition
+分区: Sales_Partition
   SourceType: Query
   Query: SELECT * FROM Sales
   DataSource: PowerQuerySource (Type: Structured)
 ```
 
-**Error**: Deployment fails to Power BI Service
+**错误**：部署到 Power BI 服务时失败
 
-### After Fix
+### 修复后
 
 ```
-Partition: Sales_Partition
+分区: Sales_Partition
   SourceType: M
   Expression: 
     let
@@ -85,12 +85,12 @@ Partition: Sales_Partition
   DataSource: PowerQuerySource (Type: Structured)
 ```
 
-**Result**: Deploys successfully to Power BI Service
+**结果**：成功部署到 Power BI 服务
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1200** and higher when deployed to Power BI or Azure Analysis Services.
+此规则适用于兼容级别为 **1200** 及以上、并部署到 Power BI 或 Azure Analysis Services 的模型。
 
-## Related Rules
+## 相关规则
 
-- [Data Column Must Have Source](xref:kb.bpa-data-column-source) - Ensuring column source mappings
+- [数据列必须有源](xref:kb.bpa-data-column-source) - 确保列源映射
