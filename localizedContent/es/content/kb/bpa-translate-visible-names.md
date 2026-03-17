@@ -1,99 +1,99 @@
 ---
 uid: kb.bpa-translate-visible-names
-title: Translate Visible Object Names for All Cultures
+title: Traducir los nombres visibles de los objetos en todas las configuraciones regionales
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring visible object names are translated for all defined cultures.
+description: Regla de buenas prácticas que garantiza que los nombres visibles de los objetos estén traducidos en todas las configuraciones regionales definidas en el modelo.
 ---
 
-# Translate Visible Object Names for All Cultures
+# Traducir los nombres visibles de los objetos en todas las configuraciones regionales
 
-## Overview
+## Descripción general
 
-This rule identifies visible objects whose names lack translations for one or more cultures defined in the model.
+Esta regla identifica objetos visibles cuyos nombres no tienen traducción para una o más configuraciones regionales definidas en el modelo.
 
-- Category: Model Layout
-- Severity: Low (1)
+- Categoría: Diseño del modelo
+- Gravedad: Baja (1)
 
-## Applies To
+## Se aplica a
 
-- Tables
-- Measures
-- Hierarchies
-- Data Columns
-- Calculated Columns
-- Calculated Tables
-- Calculated Table Columns
+- Tablas
+- Medidas
+- Jerarquías
+- Columnas de datos
+- Columnas calculadas
+- Tablas calculadas
+- Columnas de tablas calculadas
 
-## Why This Matters
+## Por qué es importante
 
-- **Incomplete localization**: Users in different cultures see untranslated names
-- **Inconsistent experience**: Mix of translated and untranslated content
-- **User confusion**: Expected language support not provided
-- **Professional appearance**: Incomplete translations appear unpolished
+- **Localización incompleta**: Los usuarios de distintas configuraciones regionales ven nombres sin traducir
+- **Experiencia inconsistente**: Mezcla de contenido traducido y sin traducir
+- **Confusión para el usuario**: No se ofrece la compatibilidad de idioma esperada
+- **Apariencia profesional**: Una traducción incompleta da una imagen poco cuidada
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-This rule triggers when an object meets both of these conditions:
+Esta regla se activa cuando un objeto cumple estas dos condiciones:
 
-1. The object is **visible** to end users (not hidden)
-2. At least one culture in the model is **missing a translation** for the object name
+1. El objeto es **visible** para los usuarios finales (no está oculto)
+2. Al menos una configuración regional del modelo **no tiene traducción** del nombre del objeto
 
-In other words visible objects with multiple cultures defined should have their names translated for each culture.
+En otras palabras, los objetos visibles con varias configuraciones regionales definidas deberían tener su nombre traducido en cada configuración regional.
 
 ```csharp
 IsVisible 
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ```
 
-## How to Fix
+## Cómo corregirlo
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, select the object
-2. In **Properties** pane, expand **Translated Names**
-3. Enter translation for each culture
-4. Save changes
+1. En el **Explorador TOM**, selecciona el objeto
+2. En el panel de **Propiedades**, expande **Nombres traducidos**
+3. Introduce la traducción de cada configuración regional
+4. Guarda los cambios
 
-## Common Causes
+## Causas habituales
 
-### Cause 1: New Objects Added
+### Causa 1: Se agregaron objetos nuevos
 
-New objects created without translations.
+Se crearon objetos nuevos sin traducciones.
 
-### Cause 2: Culture Added Later
+### Causa 2: Configuración regional agregada más tarde
 
-Culture added to model after objects were created.
+Configuración regional agregada al modelo después de que se crearan los objetos.
 
-### Cause 3: Incomplete Translation Process
+### Causa 3: Proceso de traducción incompleto
 
-Translation workflow didn't cover all objects.
+El flujo de trabajo de traducción no cubrió todos los objetos.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Measure: [Total Sales]
-English: "Total Sales"
-Spanish: (missing)
-French: (missing)
-```
-
-### After Fix
+### Antes de la corrección
 
 ```
-Measure: [Total Sales]
-English: "Total Sales"
-Spanish: "Total de Ventas"
-French: "Total des Ventes"
+Medida: [Total Sales]
+Inglés: "Total Sales"
+Español: (falta)
+Francés: (falta)
 ```
 
-## Compatibility Level
+### Después de la corrección
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Medida: [Total Sales]
+Inglés: "Total Sales"
+Español: "Total de Ventas"
+Francés: "Total des Ventes"
+```
 
-## Related Rules
+## Nivel de compatibilidad
 
-- [Translate Perspectives](xref:kb.bpa-translate-perspectives) - Translating perspective names
-- [Translate Descriptions](xref:kb.bpa-translate-descriptions) - Translating descriptions
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
+
+## Reglas relacionadas
+
+- [Traducir perspectivas](xref:kb.bpa-translate-perspectives) - Traducción de los nombres de las perspectivas
+- [Traducir descripciones](xref:kb.bpa-translate-descriptions) - Traducción de descripciones
