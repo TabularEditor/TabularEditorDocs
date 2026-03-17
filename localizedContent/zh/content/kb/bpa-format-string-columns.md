@@ -1,38 +1,38 @@
 ---
 uid: kb.bpa-format-string-columns
-title: Provide Format String for Numeric and Date Columns
+title: 为数值列和日期列设置格式字符串
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring visible numeric and date columns have appropriate format strings for consistent display.
+description: 这条最佳实践规则会确保可见的数值列和日期列都设置了合适的格式字符串，让显示效果一致。
 ---
 
-# Provide Format String for Numeric and Date Columns
+# 为数值列和日期列设置格式字符串
 
-## Overview
+## 概述
 
-This best practice rule identifies visible columns with numeric or date data types that lack format strings. Format strings ensure consistent, professional data display across all client tools.
+这个最佳实践规则用于识别数据类型为数值或日期但未设置格式字符串的可见列。 格式字符串可确保在所有客户端工具中实现一致且专业的数据展示。
 
-- Category: Formatting
+- 类别：格式
 
-- Severity: Medium (2)
+- 严重性：中等（2）
 
-## Applies To
+## 适用于
 
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- 数据列
+- 计算列
+- 计算表格列
 
-## Why This Matters
+## 为什么这很重要
 
-Columns without format strings display inconsistently:
+未设置格式字符串的列会导致显示不一致：
 
-- **Unprofessional appearance**: Raw numbers like 1234567.89 instead of $1,234,567.89
-- **User confusion**: Users can't tell if values are currency, percentages, or plain numbers
-- **Inconsistent formatting**: Different visuals may show different formats
-- **Manual formatting burden**: Users must format every visual individually
-- **Date ambiguity**: Dates show timestamps when only dates are needed
+- **不够专业**：显示为 1234567.89 这样的原始数字，而不是 $1,234,567.89
+- **用户困惑**：用户无法判断数值是货币、百分比还是普通数字
+- **格式不一致**：不同的 Visual 可能会显示不同的格式
+- **手动格式化的负担**：用户必须为每个 Visual 单独设置格式
+- **日期含义不明确**：只需要日期时，却显示了时间戳
 
-## When This Rule Triggers
+## 该规则何时触发
 
 ```csharp
 IsVisible
@@ -40,45 +40,45 @@ and string.IsNullOrWhitespace(FormatString)
 and (DataType = "Int64" or DataType = "DateTime" or DataType = "Double" or DataType = "Decimal")
 ```
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, select the column
-2. In **Properties** pane, locate the **Format String** field
-3. Choose from standard formats or enter custom format
-4. Save changes
+1. 在 **TOM Explorer** 中，选择该列
+2. 在 **属性** 窗格中，找到 **格式字符串** 字段
+3. 从标准格式中选择，或输入自定义格式
+4. 保存更改
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Missing Format Definition
+### 原因 1：缺少格式定义
 
-Columns do not have a format string when imported.
+导入时，列不会包含格式字符串。
 
-## Example
+## 示例
 
-### Before Fix
+### 修复前
 
 ```
 Column: SalesAmount
 Format String: (empty)
 ```
 
-**Display**: 1234567.89 (hard to read, no currency symbol)
+**显示**：1234567.89（难以阅读，没有货币符号）
 
-### After Fix
+### 修复后
 
 ```
 Column: SalesAmount
 Format String: "$#,0.00"
 ```
 
-**Display**: $1,234,567.89 (clear, professional formatting)
+**显示**：$1,234,567.89（清晰、专业的格式）
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1200** and higher.
+此规则适用于兼容级别为 **1200** 或更高的模型。
 
-## Related Rules
+## 相关规则
 
-- [Provide Format String for Measures](xref:kb.bpa-format-string-measures) - Similar validation for measures
+- [为度量值提供格式字符串](xref:kb.bpa-format-string-measures)——对度量值进行的类似验证
