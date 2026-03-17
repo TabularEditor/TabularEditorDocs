@@ -1,35 +1,35 @@
 ---
 uid: kb.bpa-format-string-measures
-title: Provide Format String for Measures
+title: 为度量值提供格式字符串
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring visible measures have appropriate format strings for consistent display.
+description: 最佳实践规则：确保可见的度量值设置了合适的格式字符串，以实现一致的显示效果。
 ---
 
-# Provide Format String for Measures
+# 为度量值提供格式字符串
 
-## Overview
+## 概述
 
-This best practice rule identifies visible measures with numeric or date data types that lack format strings. All measures should have explicit format strings for professional, consistent display.
+此最佳实践规则用于识别数据类型为数值或日期、但缺少格式字符串的可见度量值。 所有度量值都应显式设置格式字符串，以实现专业且一致的显示效果。
 
-- Category: Formatting
+- 类别：格式化
 
-- Severity: Medium (2)
+- 严重级别：中等（2）
 
-## Applies To
+## 适用范围
 
-- Measures
+- 度量值
 
-## Why This Matters
+## 为何重要
 
-Measures without format strings display raw values, causing user confusion and inconsistent reporting. Format strings ensure:
+没有格式字符串的度量值会显示原始值，容易让用户困惑，并导致 Report 展示不一致。 格式字符串可确保：
 
-- **Professional appearance**: Values display with appropriate currency, percentage, or number formatting
-- **Consistency**: All reports show values in the same format
-- **User confidence**: Properly formatted numbers are easier to read and interpret
-- **Business alignment**: Formatting matches corporate standards
+- **专业呈现**：以恰当的货币、百分比或数字格式显示数值
+- **一致性**：所有 Report 都以相同格式显示数值
+- **用户信心**：格式正确的数字更易阅读和理解
+- **符合公司规范**：格式符合企业标准
 
-## When This Rule Triggers
+## 触发条件
 
 ```csharp
 IsVisible
@@ -37,69 +37,69 @@ and string.IsNullOrWhitespace(FormatString)
 and (DataType = "Int64" or DataType = "DateTime" or DataType = "Double" or DataType = "Decimal")
 ```
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, select the measure
-2. In **Properties** pane, locate the **Format String** field
-3. Enter an appropriate format string based on what the measure calculates
-4. Save changes
+1. 在 **TOM Explorer** 中选择该度量值
+2. 在 **属性** 窗格中，找到 **格式字符串** 字段
+3. 根据该度量值的计算内容，输入合适的格式字符串
+4. 保存更改
 
-### Common Format Patterns
+### 常见格式模式
 
 ```dax
-Total Revenue = 
+总收入 = 
 SUM('Sales'[Amount])
-// Format String: "$#,0"
+// 格式字符串: "$#,0"
 
-Average Price = 
+平均价格 = 
 AVERAGE('Sales'[UnitPrice])
-// Format String: "$#,0.00"
+// 格式字符串: "$#,0.00"
 
-YoY Growth = 
+同比增长 = 
 DIVIDE([This Year] - [Last Year], [Last Year], 0)
-// Format String: "0.0%"
+// 格式字符串: "0.0%"
 
-Order Count = 
+订单数量 = 
 COUNTROWS('Orders')
-// Format String: "#,0"
+// 格式字符串: "#,0"
 ```
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Missing Format Definition
+### 原因 1：缺少格式定义
 
-When creating a new measure the default state is to not have any format string set.
+创建新的度量值时，默认不会设置任何格式字符串。
 
-### Cause 2: Copy/Paste from Calculated Columns
+### 原因 2：从计算列复制/粘贴
 
-Copying measures from columns that don't require format strings.
+从不需要格式字符串的计算列中复制/粘贴度量值。
 
-## Example
+## 示例
 
-### Before Fix
+### 修复前
 
 ```dax
-Total Revenue = SUM('Sales'[Amount])
-// No Format String
+总收入 = SUM('Sales'[Amount])
+// 未设置格式字符串
 ```
 
-**Display**: 1234567.89 (hard to read, no currency symbol)
+**显示**：1234567.89（难以阅读，没有货币符号）
 
-### After Fix
+### 修复后
 
 ```dax
-Total Revenue = SUM('Sales'[Amount])
-// Format String: "$#,0"
+总收入 = SUM('Sales'[Amount])
+// 格式字符串: "$#,0"
 ```
 
-**Display**: $1,234,568 (clear, professional formatting)
+**显示**：$1,234,568（清晰、专业的格式）
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1200** and higher.
+这个规则适用于兼容级别为 **1200** 及以上的模型。
 
-## Related Rules
+## 相关规则
 
-- [Format String for Columns](xref:kb.bpa-format-string-columns) - Similar validation for columns
+- [列的格式字符串](xref:kb.bpa-format-string-columns)——针对列的类似验证
