@@ -1,80 +1,80 @@
 ---
 uid: kb.bpa-avoid-provider-partitions-structured
-title: Avoid Provider Partitions with Structured Data Sources
+title: Evitar particiones de proveedor con orígenes de datos estructurados
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule preventing deployment errors by identifying legacy provider partitions used with structured data sources in Power BI.
+description: Regla de mejores prácticas que evita errores de implementación al identificar particiones heredadas de proveedor que se usan con orígenes de datos estructurados en Power BI.
 ---
 
-# Avoid Provider Partitions with Structured Data Sources
+# Evitar particiones de proveedor con orígenes de datos estructurados
 
-## Overview
+## Resumen
 
-This best practice rule identifies partitions that use legacy provider-based queries (SourceType = Query) with structured data sources in Power BI models. This combination is not supported in Power BI Service and will cause deployment failures.
+Esta regla de mejores prácticas identifica particiones que usan consultas heredadas basadas en proveedor (SourceType = Query) con orígenes de datos estructurados en modelos de Power BI. Esta combinación no es compatible con el servicio Power BI y provocará fallos de despliegue.
 
-- Category: Error Prevention
+- Categoría: Prevención de errores
 
-- Severity: Medium (2)
+- Gravedad: Media (2)
 
-## Applies To
+## Se aplica a
 
-- Partitions
+- Particiones
 
-## Why This Matters
+## Por qué es importante
 
-Power BI Service requires structured data sources to use Power Query (M) partitions rather than legacy provider partitions. Using provider partitions with structured data sources causes:
+El servicio Power BI requiere que los orígenes de datos estructurados utilicen particiones de Power Query (M) en lugar de particiones de proveedor heredadas. El uso de particiones de proveedor con orígenes de datos estructurados provoca:
 
-- **Deployment failures**: Models fail to publish to Power BI Service
-- **Refresh errors**: Scheduled refresh operations fail in the service
-- **Compatibility issues**: The model cannot be shared or deployed properly
-- **Migration blockers**: Prevents moving from Analysis Services to Power BI
+- **Fallos de despliegue**: Los modelos no se pueden publicar en el servicio Power BI
+- **Errores de actualización**: Las operaciones de actualización programada fallan en el servicio
+- **Problemas de compatibilidad**: El modelo no se puede compartir ni desplegar correctamente
+- **Bloqueos de migración**: Impide pasar de Analysis Services a Power BI
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when a partition meets all these conditions:
+La regla se activa cuando una partición cumple todas estas condiciones:
 
-1. `SourceType = "Query"` (legacy provider partition)
-2. `DataSource.Type = "Structured"` (Power Query/M data source)
-3. `Model.Database.CompatibilityMode != "AnalysisServices"` (Power BI or Azure AS)
+1. `SourceType = "Query"` (partición de proveedor heredada)
+2. `DataSource.Type = "Structured"` (Data source de Power Query/M)
+3. `Model.Database.CompatibilityMode != "AnalysisServices"` (Power BI o Azure AS)
 
-This combination indicates a structural mismatch that Power BI cannot process.
+Esta combinación indica una incompatibilidad estructural que Power BI no puede procesar.
 
-## How to Fix
+## Cómo solucionarlo
 
-### Manual Fix
+### Solución manual
 
-1. In **TOM Explorer**, select the affected partition
-2. In **Properties** pane, note the existing query
-3. Create a new **Power Query** partition with M expression
-4. Delete the old provider partition after verifying the new one works
+1. En el **Explorador TOM**, selecciona la partición afectada
+2. En el panel **Propiedades**, toma nota de la consulta existente
+3. Crea una nueva partición de **Power Query** con una expresión M
+4. Después de verificar que la nueva partición funciona, elimina la partición del proveedor anterior
 
-## Common Causes
+## Causas habituales
 
-### Cause 1: Migration from Analysis Services
+### Causa 1: Migración desde Analysis Services
 
-Models migrated from SQL Server Analysis Services retain legacy provider partitions.
+Los modelos migrados desde SQL Server Analysis Services conservan particiones heredadas del proveedor.
 
-### Cause 2: Mixed Partition Types
+### Causa 2: Tipos de partición mezclados
 
-Mixing partition types during model development creates incompatible configurations.
+Mezclar tipos de partición durante el desarrollo del modelo crea configuraciones incompatibles.
 
-## Example
+## Ejemplo
 
-### Before Fix
+### Antes de la solución
 
 ```
-Partition: Sales_Partition
+Partición: Sales_Partition
   SourceType: Query
   Query: SELECT * FROM Sales
   DataSource: PowerQuerySource (Type: Structured)
 ```
 
-**Error**: Deployment fails to Power BI Service
+**Error**: La implementación en Power BI Service falla
 
-### After Fix
+### Después de la solución
 
 ```
-Partition: Sales_Partition
+Partición: Sales_Partition
   SourceType: M
   Expression: 
     let
@@ -85,12 +85,12 @@ Partition: Sales_Partition
   DataSource: PowerQuerySource (Type: Structured)
 ```
 
-**Result**: Deploys successfully to Power BI Service
+**Resultado**: Se implementa correctamente en Power BI Service
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher when deployed to Power BI or Azure Analysis Services.
+Esta regla se aplica a los modelos con nivel de compatibilidad **1200** o superior al implementarlos en Power BI o Azure Analysis Services.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Data Column Must Have Source](xref:kb.bpa-data-column-source) - Ensuring column source mappings
+- [La columna de datos debe tener un origen](xref:kb.bpa-data-column-source) - Para garantizar las asignaciones del origen de la columna
