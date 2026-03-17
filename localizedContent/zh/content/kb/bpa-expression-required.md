@@ -1,99 +1,99 @@
 ---
 uid: kb.bpa-expression-required
-title: Expression Required for Calculated Objects
+title: 计算对象需要表达式
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring measures, calculated columns, and calculation items have valid DAX expressions.
+description: 一条最佳做法规则，用于确保度量值、计算列和计算项包含有效的 DAX 表达式。
 ---
 
-# Expression Required for Calculated Objects
+# 计算对象需要表达式
 
-## Overview
+## 概览
 
-This best practice rule identifies measures, calculated columns, and calculation items that lack a DAX expression. All calculated objects must have a valid, non-empty expression to function correctly and prevent errors during model deployment and query execution.
+此最佳做法规则会识别缺少 DAX 表达式的度量值、计算列和计算项。 所有计算对象都必须包含有效且非空的表达式，才能正常运行，并避免在模型部署和查询执行期间发生错误。
 
-- Category: Error Prevention
+- 类别：错误预防
 
-- Severity: High (3)
+- 严重性：高（3）
 
-## Applies To
+## 适用范围
 
-- Measures
-- Calculated Columns
-- Calculation Items
+- 度量值
+- 计算列
+- 计算项
 
-## Why This Matters
+## 为何这很重要
 
-Calculated objects without expressions will cause critical failures:
+没有表达式的计算对象会导致严重故障：
 
-- **Model validation errors**: The model will fail validation when saved or deployed
-- **Query failures**: Attempts to use the object in queries will generate errors
-- **Broken dependencies**: Other measures or calculations referencing the object will fail
-- **Deployment blockers**: Power BI Service and Analysis Services will reject models with empty expressions
-- **Unexpected behavior**: The object may appear in field lists but produce no results
+- **模型验证错误**：模型在保存或部署时将无法通过验证
+- **查询失败**：在查询中尝试使用该对象将产生错误
+- **依赖关系中断**：引用该对象的其他度量值或计算将失败
+- **部署受阻**：Power BI Service 和 Analysis Services 会拒绝包含空表达式的模型
+- **意外行为**：该对象可能会出现在字段列表中，但不返回任何结果
 
-Empty expressions typically result from incomplete object creation, copy/paste operations, or programmatic model generation errors.
+空表达式通常源于对象创建未完成、复制/粘贴操作，或以编程方式生成模型时出现错误。
 
-## When This Rule Triggers
+## 该规则何时触发
 
-The rule triggers when any of the following objects have an empty or whitespace-only expression:
+当以下任一对象的表达式为空或仅包含空白字符时，将触发此规则：
 
 ```csharp
 string.IsNullOrWhiteSpace(Expression)
 ```
 
-This applies to:
+适用于：
 
-- **Measures**: Should contain a DAX aggregation or calculation
-- **Calculated Columns**: Should contain a row-context DAX expression
-- **Calculation Items**: Should contain a DAX expression modifying the base measure
+- **度量值**：应包含 DAX 聚合或计算
+- **计算列**：应包含行上下文的 DAX 表达式
+- **计算项**：应包含用于修改基础度量值的 DAX 表达式
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, locate the measure, calculated column, or calculation item
-2. Double-click to open the **DAX Editor**
-3. Enter a valid DAX expression
-4. Validate the syntax and save
+1. 在 **TOM Explorer** 中，找到相应的度量值、计算列或计算项
+2. 双击打开 **DAX编辑器**
+3. 输入有效的 DAX 表达式
+4. 验证语法并保存
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Incomplete Creation
+### 原因 1：创建未完成
 
-Object was created intending to define it later but was forgotten.
+对象已创建，原本打算稍后再定义，但最后忘了。
 
-### Cause 2: Template-Based Creation
+### 原因 2：基于模板创建
 
-Scripts or templates created objects without expressions.
+脚本或模板创建了对象，但未包含表达式。
 
-### Cause 3: Failed Copy Operation
+### 原因 3：复制操作失败
 
-Copied an object but the expression didn't transfer.
+复制了对象，但表达式没有一并复制过来。
 
-## Example
+## 示例
 
-### Before Fix
+### 修复前
 
 ```
-Measure: [Total Revenue]
+度量值: [Total Revenue]
   Expression: [empty]
   FormatString: $#,0.00
 ```
 
-**Error when queried**: "The expression for measure '[Total Revenue]' is not valid."
+**查询时出错**："度量值 '[Total Revenue]' 的表达式无效。"
 
-### After Fix
+### 修复后
 
 ```
-Measure: [Total Revenue]
+度量值: [Total Revenue]
   Expression: SUM('Sales'[Revenue])
   FormatString: $#,0.00
 ```
 
-**Result**: Measure functions correctly and returns aggregated revenue.
+**结果**：度量值可正常工作，并返回汇总后的收入。
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1200** and higher.
+本规则适用于兼容级别为 **1200** 及以上的模型。
 
