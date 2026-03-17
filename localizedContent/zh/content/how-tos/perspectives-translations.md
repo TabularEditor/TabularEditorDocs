@@ -1,30 +1,30 @@
 ---
 uid: perspectives-translations
-title: Perspectives and Translations
+title: 透视与翻译
 applies_to:
   products:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
       full: true
-      note: Includes dedicated Perspective and Translation Editors
+      note: 包含专用的透视编辑器和翻译编辑器
 ---
 
-## Working with Perspectives and Translations
+## 使用透视与翻译
 
-You can add/edit existing perspectives and translations (cultures), by clicking the Model node in the Explorer Tree, and locating the relevant properties at the bottom of the property grid. Alternatively, when your Explorer Tree is [showing all object types](../features/hierarchical-display.md), you can view and edit perspectives, cultures and roles directly in the tree.
+你可以在资源管理器树中单击“模型”节点，然后在属性网格底部找到相关属性，以添加/编辑现有的透视和翻译（区域设置）。 另外，当你的资源管理器树设置为[显示所有对象类型](../features/hierarchical-display.md)时，你可以直接在树中查看和编辑透视、区域设置和角色。
 
 ![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/RolesPerspectivesTranslations.png)
 
-You can duplicate an existing perspective, role or translation by opening the right-click menu and choose "Duplicate". This will create an exact copy of the object, which you can then modify to your needs.
+你可以通过右键菜单选择“Duplicate”来复制现有的透视、角色或翻译。 这会创建该对象的完全副本，然后你可以按需进行修改。
 
-To view perspectives and/or translations "in action", use the two dropdown lists in the toolbar near the top of the screen. Choosing a perspective will hide all objects that are not included in that perspective, while choosing a translation will show all objects in the tree using the translated names and display folders. When hitting F2 to change the names of objects/display folders or when dragging objects around in the tree, the changes will only apply to the selected translation.
+要查看透视和/或翻译的实际效果，请使用屏幕顶部附近工具栏上的两个下拉列表。 选择透视会隐藏所有未包含在该透视中的对象；选择翻译则会在树中以翻译后的名称和显示文件夹来显示所有对象。 按下 F2 更改对象/显示文件夹名称，或在树中拖动对象时，这些更改只会应用于所选翻译。
 
-## Perspectives/Translations within object context
+## 对象上下文中的透视/翻译
 
-When one or more objects are selected in the tree, you will find 4 special property collections within the Property Grid:
+在树中选中一个或多个对象时，你会在属性网格中看到 4 个特殊的属性集合：
 
-- **Captions**, **Descriptions** and **Display Folders** shows a list of all cultures in the model, with the translated names, descriptions and display folders respectively of the selected objects for each culture.
-- **Perspectives** shows a list of all perspectives in the model, with an indication of whether or nor the selected objects belong to each perspective.
+- **标题**、**描述**和**显示文件夹**会列出模型中的所有区域设置，并分别显示所选对象在各个区域设置下翻译后的名称、描述和显示文件夹。
+- **透视** 会显示模型中所有透视的列表，并指示所选对象是否属于每个透视。
 
-You can use these collections in the Property Grid to change the translations and perspective inclusions for one or more objects at a time.
+你可以在属性网格中使用这些集合，一次性更改一个或多个对象的翻译以及透视包含关系。
