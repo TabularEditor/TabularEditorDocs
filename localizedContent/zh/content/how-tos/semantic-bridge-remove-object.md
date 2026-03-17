@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-remove-object
-title: Remove an Object from a Metric View
+title: 从 Metric View 中移除对象
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -10,28 +10,28 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.25.0
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           none: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Remove an object from a Metric View
+# 从 Metric View 中移除对象
 
-This how-to demonstrates how to remove Metric View dimensions from a loaded Metric View.
-Similar approaches apply to all collections in a Metric View.
+本文演示如何从已加载的 Metric View 中移除其维度。
+类似的方法适用于 Metric View 中的所有集合。
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
 > [!NOTE]
-> Each removal script here affects the currently loaded Metric View.
-> If you want to run all of these, make sure to run the `Deserialize` above before each removal.
+> 这里的每个移除脚本都会影响当前已加载的 Metric View。
+> 如果你想把这些脚本都运行一遍，请确保在每次移除操作前都先运行上面的 `Deserialize`。
 
-## Remove by name
+## 按名称移除
 
-Find the Metric View dimension and remove it from the collection:
+找到要移除的 Metric View 维度，并将其从集合中移除：
 
 ```csharp
 var view = SemanticBridge.MetricView.Model;
@@ -50,7 +50,7 @@ sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
 Output(sb.ToString());
 ```
 
-**Output:**
+**输出：**
 
 ```
 Dimensions before: 6
@@ -58,11 +58,11 @@ Removed: order_month
 Dimensions after: 5
 ```
 
-Observe that if you run the script above twice in a row, there is no additional removal; the before and after counts are both 5.
+注意：如果你连续运行两次上述脚本，不会再移除任何内容；移除前后计数都会是 5。
 
-## Remove multiple Metric View dimensions
+## 移除多个 Metric View 维度
 
-Use LINQ to filter and rebuild the collection:
+使用 LINQ 进行筛选并重建集合：
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -98,27 +98,27 @@ foreach (var dim in view.Dimensions)
 Output(sb.ToString());
 ```
 
-**Output:**
+**输出：**
 
 ```
-Dimensions before: 6
-Dimensions after: 3
+移除前维度数：6
+移除后维度数：3
 
-Remaining dimensions:
+剩余维度：
 ---------------------
   product_name
   product_category
   customer_segment
 ```
 
-## Remove Metric View dimensions from a specific table
+## 从指定表中移除 Metric View 维度
 
-Remove all Metric View dimensions that reference the date table.
+移除所有引用日期表的 Metric View 维度。
 
 > [!WARNING]
-> This example is not guaranteed to remove all and exclusively Metric View dimensions which reference a given Metric View Join.
-> Metric View Dimensions may include near-arbitrary SQL expressions, and may also reference previously defined Metric View Dimensions.
-> This example is for illustrative purposes only.
+> 此示例不保证能够移除所有且仅移除引用给定 Metric View Join 的 Metric View 维度。
+> Metric View 维度可能包含近乎任意的 SQL 表达式，也可能引用先前定义的 Metric View 维度。
+> 此示例仅用于说明。
 
 ```csharp
 var view = SemanticBridge.MetricView.Model;
@@ -140,17 +140,17 @@ sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
 Output(sb.ToString());
 ```
 
-**Output:**
+**输出：**
 
 ```
-Dimensions before: 6
-Removed: order_date (date.full_date)
-Removed: order_year (date.year)
-Removed: order_month (date.month_name)
-Dimensions after: 3
+移除前维度数：6
+已移除：order_date (date.full_date)
+已移除：order_year (date.year)
+已移除：order_month (date.month_name)
+移除后维度数：3
 ```
 
-## See also
+## 另请参阅
 
 - @semantic-bridge-add-object
 - @semantic-bridge-rename-objects
