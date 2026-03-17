@@ -1,42 +1,42 @@
 ---
 uid: kb.bpa-do-not-summarize-numeric
-title: Set SummarizeBy to None for Numeric Columns
+title: Establece SummarizeBy en None para columnas numéricas
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule preventing incorrect default aggregations on numeric columns that should not be summed.
+description: Regla de mejores prácticas que evita agregaciones predeterminadas incorrectas en columnas numéricas que no deben sumarse.
 ---
 
-# Set SummarizeBy to None for Numeric Columns
+# Establece SummarizeBy en None para columnas numéricas
 
-## Overview
+## Descripción general
 
-This best practice rule identifies visible numeric columns (Int64, Decimal, Double) that have a default aggregation behavior (`SummarizeBy`) other than `None`. Most numeric columns should not be automatically aggregated, as summing values like IDs, quantities in non-additive contexts, or codes produces meaningless results.
+Esta regla de mejores prácticas identifica las columnas numéricas visibles (Int64, Decimal, Double) cuyo comportamiento de agregación predeterminado (`SummarizeBy`) es distinto de `None`. La mayoría de las columnas numéricas no deberían agregarse automáticamente, ya que sumar valores como IDs, cantidades en contextos no aditivos o códigos produce resultados sin sentido.
 
-- Category: Formatting
+- Categoría: Formato
 
-- Severity: High (3)
+- Gravedad: Alta (3)
 
-## Applies To
+## Se aplica a
 
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- Columnas de datos
+- Columnas calculadas
+- Columnas de tablas calculadas
 
-## Why This Matters
+## Por qué es importante
 
-Default aggregation on inappropriate columns causes serious issues:
+La agregación predeterminada en columnas inadecuadas provoca problemas graves:
 
-- **Incorrect analysis**: Users get meaningless totals (sum of CustomerIDs, etc.)
-- **Misleading dashboards**: Visualizations show wrong numbers by default
-- **User confusion**: Users must manually change aggregation for every visual
-- **Wrong decisions**: Business decisions based on incorrect automatic aggregations
-- **Data credibility**: Users lose trust in the model and data
+- **Análisis incorrecto**: Los usuarios obtienen totales sin sentido (suma de CustomerIDs, etc.)
+- **Dashboards engañosos**: Los Visuales muestran números incorrectos de forma predeterminada
+- **Confusión del usuario**: Los usuarios deben cambiar manualmente la agregación en cada Visual
+- **Decisiones equivocadas**: Decisiones empresariales basadas en agregaciones automáticas incorrectas
+- **Credibilidad de los datos**: Los usuarios pierden la confianza en el modelo y en los datos
 
-Common columns that should NOT be aggregated include IDs, keys, codes, ratios, percentages, and non-additive quantities.
+Entre las columnas habituales que NO deberían agregarse se incluyen los IDs, las claves, los códigos, los ratios, los porcentajes y las cantidades no aditivas.
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when a column meets ALL these conditions:
+La regla se activa cuando una columna cumple ALL estas condiciones:
 
 ```csharp
 (DataType = "Int64" or DataType="Decimal" or DataType="Double")
@@ -45,47 +45,47 @@ SummarizeBy <> "None"
 and not (IsHidden or Table.IsHidden)
 ```
 
-In other words: visible numeric columns that have a summarization behavior other than "None".
+En otras palabras: columnas numéricas visibles cuyo comportamiento de resumen no es "None".
 
-## How to Fix
+## Cómo corregir
 
-### Automatic Fix
+### Corrección automática
 
-This rule includes an automatic fix:
+Esta regla incluye una corrección automática:
 
 ```csharp
 SummarizeBy = AggregateFunction.None
 ```
 
-To apply:
+Para aplicarla:
 
-1. In the **Best Practice Analyzer** select flagged objects
-2. Click **Apply Fix**
+1. En **Best Practice Analyzer**, selecciona los objetos marcados
+2. Haz clic en **Aplicar corrección**
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, locate the column
-2. In **Properties** pane, find **Summarize By**
-3. Change from **Sum**, **Average**, **Min**, **Max**, **Count**, or **DistinctCount** to **None**
-4. Save changes
+1. En **Explorador TOM**, localiza la columna
+2. En el panel **Propiedades**, busca **Resumir por**
+3. Cambia de **Sum**, **Average**, **Min**, **Max**, **Count** o **DistinctCount** a **None**
+4. Guarda los cambios
 
-## Common Causes
+## Causas habituales
 
-### Cause 1: Default Import Behavior
+### Causa 1: Comportamiento predeterminado de importación
 
-Numeric columns default to Sum aggregation during import.
+De forma predeterminada, las columnas numéricas usan la agregación Suma durante la importación.
 
-### Cause 2: Lack of Column Review
+### Causa 2: Falta de revisión de columnas
 
-Models deployed without reviewing column aggregation settings.
+Modelos implementados sin revisar la configuración de agregación de las columnas.
 
-### Cause 3: ID Columns Not Hidden
+### Causa 3: Columnas de ID no ocultas
 
-Numeric ID columns remain visible with default Sum aggregation.
+Las columnas numéricas de ID siguen visibles con la agregación Suma predeterminada.
 
-## Example
+## Ejemplo
 
-### Before Fix
+### Antes de la corrección
 
 ```
 Column: CustomerID
@@ -93,9 +93,9 @@ Column: CustomerID
   SummarizeBy: Sum
 ```
 
-**Result**: Visual shows "Sum of CustomerID: 12,456,789" (meaningless number)
+**Resultado**: El Visual muestra "Sum of CustomerID: 12.456.789" (un número sin sentido)
 
-### After Fix
+### Después de la corrección
 
 ```
 Column: CustomerID
@@ -103,18 +103,18 @@ Column: CustomerID
   SummarizeBy: None
 ```
 
-**Result**: Visual requires explicit aggregation or shows individual Customer IDs
+**Resultado**: El Visual requiere una agregación explícita o muestra los identificadores de cliente de forma individual
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Hide Foreign Keys](xref:kb.bpa-hide-foreign-keys) - Related column hygiene rule
-- [Format String for Columns](xref:kb.bpa-format-string-columns) - Column formatting
+- [Ocultar claves externas](xref:kb.bpa-hide-foreign-keys) - Regla relacionada de limpieza de columnas
+- [Cadena de formato de columnas](xref:kb.bpa-format-string-columns) - Formato de columnas
 
-## Learn More
+## Más información
 
-- [Column Properties](https://learn.microsoft.com/analysis-services/tabular-models/column-properties-ssas-tabular)
-- [When to Use Measures vs. Calculated Columns](https://learn.microsoft.com/power-bi/transform-model/desktop-tutorial-create-measures)
+- [Propiedades de las columnas](https://learn.microsoft.com/analysis-services/tabular-models/column-properties-ssas-tabular)
+- [Cuándo usar medidas frente a columnas calculadas](https://learn.microsoft.com/power-bi/transform-model/desktop-tutorial-create-measures)
