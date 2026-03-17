@@ -1,6 +1,6 @@
 ---
 uid: replace-tables
-title: Replace tables
+title: 替换表格
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,10 +9,10 @@ applies_to:
       full: true
 ---
 
-## Replace tables
+## 替换表格
 
-You can replace a table simply by copying (CTRL+C) one table - even from another instance of Tabular Editor - and then selecting the table you want to replace, before hitting paste (CTRL+V). A prompt will ask you to confirm whether you really want to replace the table ("Yes"), insert as a new table ("No") or cancel the operation entirely:
+你只需复制(CTRL+C)一张表——甚至可以从 Tabular Editor 的另一个实例中复制——然后选中要替换的表，再按下粘贴(CTRL+V)即可。 系统会提示你确认：是否确实要替换该表（“Yes”）、作为新表插入（“No”），还是完全取消此操作：
 
 ![image](https://user-images.githubusercontent.com/8976200/36545892-40983114-17ea-11e8-8825-e8de6fd4e284.png)
 
-If you choose "Yes", the selected table will be replaced with the table in the clipboard. Furthermore, all relationships pointing to or from that table will be updated to use the new table. For this to work, columns participating in relationships must have the same name and data type in both the original table, and the inserted table.
+如果你选择“Yes”，所选表将被剪贴板中的表替换。 此外，指向该表或从该表指向其他表的所有关系都会更新为使用新表。 要让它生效，参与关系的列在原表和插入表中必须具有相同的名称和数据类型。
