@@ -1,6 +1,6 @@
 ---
 uid: duplicate-and-batch
-title: Duplicating Objects and Batch Rename
+title: 复制对象和批量重命名
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,10 +9,10 @@ applies_to:
       full: true
 ---
 
-## Duplicate objects and batch renamings
+## 复制对象和批量重命名
 
-The right-click context menu in the Explorer Tree lets you duplicate measures and columns. The duplicated objects will have their names suffixed by "copy". Furthermore, you can perform batch renames by selecting multiple objects and right-clicking in the Explorer Tree.
+在资源管理器树中右键点击即可打开上下文菜单，用于复制度量值和列。 复制后的对象名称会自动追加“copy”后缀。 此外，你也可以选中多个对象，然后在资源管理器树中右键点击以进行批量重命名。
 
 ![](https://github.com/TabularEditor/TabularEditor/blob/master/Documentation/BatchRename.png)
 
-You may use RegEx for your renamings, and optionally choose whether translations should be renamed as well.
+你可以在重命名时使用正则表达式 RegEx，并可选择是否也要重命名翻译内容。
