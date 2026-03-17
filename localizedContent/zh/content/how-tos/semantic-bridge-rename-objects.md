@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-rename-objects
-title: Rename Objects in a Metric View
+title: 在指标视图中重命名对象
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -10,34 +10,34 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.25.0
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           none: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Rename objects in a Metric View
+# 在指标视图中重命名对象
 
-This how-to demonstrates how to rename Metric View dimensions using a copy-modify pattern for bulk transformations.
-The same patterns apply to all collections in a Metric View.
+本操作指南演示如何使用“复制-修改”模式，对指标视图的维度进行批量重命名。
+同样的模式也适用于指标视图中的所有集合。
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
-## The copy-modify pattern
+## 复制-修改模式
 
-Since Metric View dimension names are properties on objects in a collection, the cleanest approach is to:
+由于指标视图的维度名称是集合中对象的属性，最简单的做法是：
 
-1. Create new Metric View `Dimension` objects with the modified names
-2. Clear the original collection
-3. Add the new objects
+1. 创建新的指标视图 `Dimension` 对象，并使用修改后的名称
+2. 清空原始集合
+3. 将新对象添加回集合
 
-This avoids issues with modifying objects while iterating.
+这样可以避免在迭代时修改对象所带来的问题。
 
-## Convert snake_case to Title Case
+## 将 snake_case 转换为 Title Case
 
-Transform Metric View dimension names from `product_name` to `Product Name`:
+将指标视图维度名称从 `product_name` 转换为 `Product Name`：
 
 ```csharp
 using System.Globalization;
@@ -79,7 +79,7 @@ foreach (var dim in view.Dimensions)
 Output(sb.ToString());
 ```
 
-**Output:**
+**输出：**
 
 ```
 BEFORE
@@ -93,24 +93,24 @@ BEFORE
 
 AFTER
 -----
-  Product Name
-  Product Category
-  Customer Segment
-  Order Date
-  Order Year
-  Order Month
+  产品名称
+  产品类别
+  客户分段
+  订单日期
+  订单年份
+  订单月份
 ```
 
-## Rename using a mapping dictionary
+## 使用映射字典进行重命名
 
-Apply specific renames using a lookup:
+使用查找表应用特定重命名：
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 var view = SemanticBridge.MetricView.Model;
 
-// Define rename mappings
+// 定义重命名映射
 var renames = new Dictionary<string, string>
 {
     { "product_name", "Product" },
@@ -123,7 +123,7 @@ var renames = new Dictionary<string, string>
 
 var sb = new System.Text.StringBuilder();
 
-// Create renamed dimensions
+// 创建已重命名的维度
 var renamed = view.Dimensions
     .Select(
         dim => new MetricView.Dimension
@@ -133,14 +133,14 @@ var renamed = view.Dimensions
         })
     .ToList();
 
-// Replace the collection
+// 替换集合
 view.Dimensions.Clear();
 foreach (var dim in renamed)
 {
     view.Dimensions.Add(dim);
 }
 
-sb.AppendLine("Renamed dimensions:");
+sb.AppendLine("重命名后的维度：");
 sb.AppendLine("-------------------");
 foreach (var dim in view.Dimensions)
 {
@@ -150,20 +150,20 @@ foreach (var dim in view.Dimensions)
 Output(sb.ToString());
 ```
 
-**Output:**
+**输出：**
 
 ```
-Renamed dimensions:
+重命名后的维度：
 -------------------
   Product              <- product.product_name
   Category             <- product.category
-  Segment              <- customer.segment
+  分段                  <- customer.segment
   Date                 <- date.full_date
   Year                 <- date.year
   Month                <- date.month_name
 ```
 
-## See also
+## 另见
 
 - @semantic-bridge-add-object
 - @semantic-bridge-remove-object
