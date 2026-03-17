@@ -1,102 +1,102 @@
 ---
 uid: kb.bpa-calculation-groups-no-items
-title: Calculation Groups Should Contain Items
+title: Los grupos de cálculo deben contener elementos
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule identifying calculation groups without calculation items that should be populated or removed.
+description: Regla de prácticas recomendadas que identifica grupos de cálculo sin elementos de cálculo que deben completarse o eliminarse.
 ---
 
-# Calculation Groups Should Contain Items
+# Los grupos de cálculo deben contener elementos
 
-## Overview
+## Información general
 
-This best practice rule identifies calculation groups that contain no calculation items. Empty calculation groups serve no purpose and should be populated or removed.
+Esta regla de prácticas recomendadas identifica grupos de cálculo que no contienen elementos de cálculo. Los grupos de cálculo vacíos no tienen ninguna utilidad y deben completarse o eliminarse.
 
-- Category: Maintenance
-- Severity: Medium (2)
+- Categoría: Mantenimiento
+- Gravedad: Media (2)
 
-## Applies To
+## Se aplica a
 
-- Calculation Groups
+- Grupos de cálculo
 
-## Why This Matters
+## Por qué es importante
 
-- **Deployment errors**: Empty groups may fail validation in Power BI Service
-- **Model errors**: Can cause unexpected behavior in DAX calculations
-- **Developer confusion**: Team members waste time investigating incomplete structures
-- **Performance overhead**: Engine processes unnecessary metadata
+- **Errores de implementación**: Los grupos vacíos pueden no superar la validación en Power BI Service
+- **Errores del modelo**: Pueden provocar comportamientos inesperados en los cálculos DAX
+- **Confusión entre los desarrolladores**: Los miembros del equipo pierden tiempo investigando estructuras incompletas
+- **Sobrecarga de rendimiento**: El motor procesa metadatos innecesarios
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when a calculation group has zero calculation items:
+La regla se activa cuando un grupo de cálculo no tiene ningún elemento de cálculo:
 
 ```csharp
 CalculationItems.Count == 0
 ```
 
-## How to Fix
+## Cómo solucionarlo
 
-### Option 1: Add Calculation Items
+### Opción 1: Agregar elementos de cálculo
 
-If the calculation group has a valid business purpose:
+Si el grupo de cálculo tiene un propósito empresarial válido:
 
-1. In **TOM Explorer**, expand the calculation group table
-2. Expand the **Calculation Group** column
-3. Right-click and select **Add Calculation Item**
-4. Define the calculation item expression
+1. En el **Explorador TOM**, expanda la tabla del grupo de cálculo
+2. Expande la columna **grupo de cálculo**
+3. Haz clic con el botón derecho y selecciona **Agregar elemento de cálculo**
+4. Define la expresión del elemento de cálculo
 
-### Option 2: Delete the Calculation Group
+### Opción 2: Eliminar el grupo de cálculo
 
-If no longer needed:
+Si ya no lo necesitas:
 
-1. In **TOM Explorer**, locate the calculation group table
-2. Right-click the table
-3. Select **Delete**
+1. En el **Explorador TOM**, localiza la tabla del grupo de cálculo
+2. Haz clic con el botón derecho en la tabla
+3. Selecciona **Eliminar**
 
-## Common Causes
+## Causas comunes
 
-### Cause 1: Incomplete Development
+### Causa 1: Desarrollo incompleto
 
-Calculation group created during planning but not yet implemented.
+Se creó un grupo de cálculo durante la planificación, pero aún no se ha implementado.
 
-### Cause 2: Migration from Other Models
+### Causa 2: Migración desde otros modelos
 
-Calculation group structure copied without items.
+Se copió la estructura del grupo de cálculo sin elementos.
 
-### Cause 3: Refactoring
+### Causa 3: Refactorización
 
-All calculation items moved to a different calculation group.
+Se movieron todos los elementos de cálculo a un grupo de cálculo diferente.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Calculation Group: Time Intelligence
-  Items: (none)  ← Problem
-```
-
-### After Fix
+### Antes de corregir
 
 ```
-Calculation Group: Time Intelligence
-  Items:
-    - Current Period: SELECTEDMEASURE()
-    - Year-to-Date: CALCULATE(SELECTEDMEASURE(), DATESYTD('Date'[Date]))
-    - Prior Year: CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR('Date'[Date]))
+Grupo de cálculo: Inteligencia temporal
+  Elementos: (ninguno)  ← Problema
 ```
 
-## Compatibility Level
+### Después de corregir
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Grupo de cálculo: Inteligencia temporal
+  Elementos:
+    - Período actual: SELECTEDMEASURE()
+    - Acumulado del año: CALCULATE(SELECTEDMEASURE(), DATESYTD('Date'[Date]))
+    - Año anterior: CALCULATE(SELECTEDMEASURE(), SAMEPERIODLASTYEAR('Date'[Date]))
+```
 
-## Related Rules
+## Nivel de compatibilidad
 
-- [Perspectives Should Contain Objects](xref:kb.bpa-perspectives-no-objects) - Similar rule for empty perspectives
-- [Expression Required](xref:kb.bpa-expression-required) - Ensuring calculation items have expressions
+Esta regla se aplica a los modelos con nivel de compatibilidad **1200** y superior.
 
-## Learn More
+## Reglas relacionadas
 
-- [Calculation Groups in Tabular Models](https://learn.microsoft.com/analysis-services/tabular-models/calculation-groups)
-- [Creating Calculation Groups](https://www.sqlbi.com/articles/introducing-calculation-groups/)
-- [Calculation Group Patterns](https://www.sqlbi.com/calculation-groups/)
+- [Las perspectivas deben contener objetos](xref:kb.bpa-perspectives-no-objects) - Regla similar para las perspectivas vacías
+- [Expresión obligatoria](xref:kb.bpa-expression-required) - Asegura que los elementos de cálculo tengan expresiones
+
+## Más información
+
+- [Grupos de cálculo en modelos tabulares](https://learn.microsoft.com/analysis-services/tabular-models/calculation-groups)
+- [Creación de grupos de cálculo](https://www.sqlbi.com/articles/introducing-calculation-groups/)
+- [Patrones para grupos de cálculo](https://www.sqlbi.com/calculation-groups/)
