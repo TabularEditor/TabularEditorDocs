@@ -1,103 +1,103 @@
 ---
 uid: kb.bpa-trim-object-names
-title: Trim Leading and Trailing Spaces from Object Names
+title: Recortar espacios iniciales y finales de los nombres de los objetos
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule for removing leading and trailing spaces from object names to prevent confusion and referencing issues.
+description: Regla de buenas prácticas para eliminar los espacios iniciales y finales de los nombres de los objetos, a fin de evitar confusiones y problemas de referencia.
 ---
 
-# Trim Leading and Trailing Spaces from Object Names
+# Recortar espacios iniciales y finales de los nombres de los objetos
 
-## Overview
+## Descripción general
 
-This best practice rule identifies objects whose names contain leading or trailing spaces. These unnecessary spaces cause DAX referencing issues, display problems, and general confusion.
+Esta regla de buenas prácticas identifica los objetos cuyos nombres contienen espacios al principio o al final. Estos espacios innecesarios provocan problemas de referencia en DAX, problemas de visualización y confusión en general.
 
-- Category: **Naming Conventions**
-- Severity: Low (1)
+- Categoría: **Convenciones de nomenclatura**
+- Gravedad: baja (1)
 
-## Applies To
+## Se aplica a
 
-- Model
-- Tables
-- Measures
-- Hierarchies
-- Levels
-- Perspectives
-- Partitions
-- Provider Data Sources
-- Data Columns
-- Calculated Columns
-- Calculated Tables
-- Calculated Table Columns
-- Structured Data Sources
-- Named Expressions
-- Model Roles
-- Calculation Groups
-- Calculation Items
+- Modelo
+- Tablas
+- Medidas
+- Jerarquías
+- Niveles
+- Perspectivas
+- Particiones
+- Orígenes de datos del proveedor
+- Columnas de datos
+- Columnas calculadas
+- Tablas calculadas
+- Columnas de tablas calculadas
+- Orígenes de datos estructurados
+- Named Expression
+- Roles del modelo
+- Grupos de cálculo
+- Elementos de cálculo
 
-## Why This Matters
+## Por qué es importante
 
-- **DAX syntax problems**: Extra spaces require careful bracket notation
-- **Display inconsistency**: Objects appear misaligned in field lists
-- **Search difficulties**: Users may not find objects when searching
-- **Maintenance confusion**: Developers may create duplicates not noticing spaces
+- **Problemas de sintaxis DAX**: Los espacios de más obligan a usar con cuidado la notación entre corchetes
+- **Incoherencia en la visualización**: Los objetos aparecen desalineados en las listas de campos
+- **Dificultades de búsqueda**: Es posible que los usuarios no encuentren objetos al buscar
+- **Confusión en el mantenimiento**: Los desarrolladores pueden crear duplicados sin darse cuenta de que hay espacios
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when an object name starts or ends with a space:
+La regla se activa cuando el nombre de un objeto empieza o termina con un espacio:
 
 ```csharp
 Name.StartsWith(" ") or Name.EndsWith(" ")
 ```
 
-## How to Fix
+## Cómo corregirlo
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, locate the object
-2. Right-click and select **Rename** (or press F2)
-3. Remove leading/trailing spaces
-4. Press Enter to confirm
+1. En el **Explorador TOM**, localiza el objeto
+2. Haz clic con el botón derecho y selecciona **Cambiar nombre** (o pulsa F2)
+3. Quita los espacios iniciales/finales
+4. Pulsa Enter para confirmar
 
-## Common Causes
+## Causas habituales
 
-### Cause 1: Accidental Spacebar Presses
+### Causa 1: Pulsaciones accidentales de la barra espaciadora
 
-Accidental spacebar presses during naming.
+Pulsaciones accidentales de la barra espaciadora al asignar nombres.
 
-### Cause 2: Copy/Paste from External Sources
+### Causa 2: Copiar/pegar desde fuentes externas
 
-Copy/paste from documents with formatting.
+Copiar/pegar desde documentos con formato.
 
-### Cause 3: Duplicating objects
+### Causa 3: Duplicación de objetos
 
-When duplicating objects the name will have an added " copy" post-fixed. It is easy to miss deleting the space before "copy"
+Al duplicar objetos, el nombre llevará añadido el sufijo " copy". Es fácil pasar por alto el espacio antes de "copy"
 
-## Example
+## Ejemplo
 
-### Before Fix
+### Antes de la corrección
 
 ```
-Measures:
+Medidas:
   - Total Sales
-  -  Total Sales  (with spaces - appears different!)
+  -  Total Sales  (con espacios: ¡parece diferente!)
 ```
 
-DAX: `[ Total Sales]` - Which one?
+DAX: `[ Total Sales]` - ¿Cuál de los dos?
 
-### After Fix
+### Después de la corrección
 
 ```
-Measures:
-  - Total Sales (single consistent measure)
+Medidas:
+  - Total Sales (una única medida coherente)
 ```
 
-DAX: `[Total Sales]` - Unambiguous
+DAX: `[Total Sales]` - Sin ambigüedades
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Avoid Invalid Characters in Names](xref:kb.bpa-avoid-invalid-characters-names) - Related naming hygiene rule
+- [Evitar caracteres no válidos en los nombres](xref:kb.bpa-avoid-invalid-characters-names) - Regla relacionada de higiene de nomenclatura
