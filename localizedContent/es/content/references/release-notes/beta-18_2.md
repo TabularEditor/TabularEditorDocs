@@ -1,45 +1,45 @@
-# Tabular Editor 3 BETA-18.2 Release Notes
+# Notas de la versión de Tabular Editor 3 BETA-18.2
 
 > [!IMPORTANT]
-> A newer version of Tabular Editor is available. You can find the latest version [here](https://docs.tabulareditor.com/references/release-notes).
+> Hay disponible una versión más reciente de Tabular Editor. Puedes encontrar la versión más reciente [aquí](https://docs.tabulareditor.com/references/release-notes).
 
-- Download [Tabular Editor 3 BETA-18.2](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.2.x86.msi)
-- Download [Tabular Editor 3 BETA-18.2 (64 bit)](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.2.x64.msi)
+- Descarga [Tabular Editor 3 BETA-18.2](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.2.x86.msi)
+- Descarga [Tabular Editor 3 BETA-18.2 (64 bits)](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.2.x64.msi)
 
-## Bugfixes in BETA-18.2:
+## Correcciones de errores en BETA-18.2:
 
-- The DAX parser now correctly recognizes object names containing double quotes (see issue #22).
+- El analizador de DAX ahora reconoce correctamente los nombres de objetos que contienen comillas dobles (consulte el problema #22).
 
-## New features in BETA-18.1:
+## Novedades en BETA-18.1:
 
-- Update Table Schema from Power Query sources (see below)
+- Actualizar el esquema de la tabla desde orígenes de Power Query (ver más abajo)
 
-## Bugfixes in BETA-18.1:
+## Correcciones de errores en BETA-18.1:
 
-- Tabular Editor will now remember skin settings between upgrades
-- Fixed a bug with lineage tags causing crashes when copying Calculated Tables or Calculation Group Tables
-- Fixed a false error on the COALESCE and COMBINEVALUES DAX functions
-- Included Microsoft.AnalysisServices.dll in the distribution, which should ensure that Tabular Editor can properly import/export VPAX files
-- Tabular Editor will now automatically reestablish connection to AS for data refresh purposes
+- Tabular Editor ahora recordará la configuración del tema entre actualizaciones
+- Se corrigió un error con las etiquetas de linaje que provocaba bloqueos al copiar tablas calculadas o tablas de grupo de cálculo
+- Se corrigió una falsa alerta de error en las funciones DAX COALESCE y COMBINEVALUES
+- Se incluyó Microsoft.AnalysisServices.dll en la distribución, lo que debería garantizar que Tabular Editor pueda importar/exportar archivos VPAX correctamente
+- Tabular Editor ahora restablecerá automáticamente la conexión con AS para actualizar los datos
 
-## Update Table Schema from Power Query sources
+## Actualizar el esquema de la tabla desde orígenes de Power Query
 
-A new release of the Tabular Editor 3 beta is here. And I'm really excited about this one, for one particular reason:
+Ya está aquí una nueva versión beta de Tabular Editor 3. Y esta me entusiasma especialmente por un motivo en particular:
 
-For the first time ever, Tabular Editor can now detect schema changes on Power Query data sources and partitions. And not just for relational data sources, but for ANY Power Query expression that can be evaluated by your Analysis Services engine. "How on earth is that even possible?!?", you might be thinking. Well, pay close attention to that last sentence: "ANY Power Query expression that can be evaluated by your Analysis Services engine".
+Por primera vez, Tabular Editor ya puede detectar cambios de esquema en los Data sources y las particiones de Power Query. Y no solo para Data sources relacionales, sino para CUALQUIER expresión de Power Query que pueda evaluar tu motor de Analysis Services. «¿Cómo demonios es posible?!?», podrías estar pensando. Pues fíjate bien en esa última frase: «CUALQUIER expresión de Power Query que pueda evaluar tu motor de Analysis Services».
 
-A little known fact about the Analysis Services engine is that it is actually a transactional system. This means that we can start a transaction against a database that is already deployed on Analysis Services, make some metadata changes, refresh some data, query some data and then finally roll back the transaction, leaving the database in the original state as if we didn't even touch it at all.
+Un dato poco conocido del motor de Analysis Services es que en realidad es un sistema transaccional. Esto significa que podemos iniciar una transacción contra una base de datos que ya está implementada en Analysis Services, hacer algunos cambios de metadatos, actualizar algunos datos, consultar algunos datos y, finalmente, revertir la transacción, dejando la base de datos en su estado original, como si ni la hubiéramos tocado.
 
-So, in order to detect schema changes for Power Query partitions, Tabular Editor 3 will now add a hidden, temporary table to the model, populate that table using the M-function [`Table.Schema`](https://docs.microsoft.com/en-us/powerquery-m/table-schema) on the source query that we want to detect the schema for. Then, that temporary table is refreshed on the server (using the credentials that are already present on the server to access the data source) - this refresh only takes a split second, thanks to query folding happening inside the M engine. Finally, Tabular Editor will query the table to read the schema, before rolling back the entire transaction. The result:
+Así que, para detectar cambios de esquema en las particiones de Power Query, Tabular Editor 3 ahora agregará al modelo una tabla temporal oculta y la rellenará usando la función M [`Table.Schema`](https://docs.microsoft.com/en-us/powerquery-m/table-schema) en la consulta de origen de la que queremos detectar el esquema. Después, esa tabla temporal se actualiza en el servidor (usando las credenciales que ya están presentes en el servidor para acceder al Data source). Esta actualización solo lleva una fracción de segundo, gracias al plegado de consultas que se realiza dentro del motor M. Por último, Tabular Editor consultará la tabla para leer el esquema, antes de revertir toda la transacción. El resultado:
 
 ![image](https://github.com/TabularEditor3/PublicPreview/blob/master/update%20schema.gif?raw=true)
 
-The only caveat is of course that Tabular Editor 3 has to be connected to an instance of Analysis Services, but it doesn't matter whether or not the model you're working with holds any data - as long as the credentials to the data sources are stored in AS (and AS can actually access the data source). This technique is particularly useful if you use Tabular Editor 3's [workspace mode](https://docs.tabulareditor.com/Workspace-Database.html).
+La única salvedad es, por supuesto, que Tabular Editor 3 debe estar conectado a una instancia de Analysis Services, pero no importa si el modelo con el que trabajas contiene datos o no, siempre que las credenciales de los Data source estén almacenadas en AS (y que AS pueda acceder realmente al Data source). Esta técnica es especialmente útil si usas el [modo del área de trabajo](https://docs.tabulareditor.com/Workspace-Database.html) de Tabular Editor 3.
 
-In addition to detecting column names and data types, Tabular Editor 3 will also let you update the Description property from the source (if present). On SQL Server sources, this would be the MS_Description extended property. If a column is renamed in the source, it will show up in the Apply Schema Changes dialog as a column import and a column remove. However, as shown in the GIF above, if you Ctrl+Right Click on these two schema changes, you can combine them as a single "rename source column" schema change. The advantage of this approach, is that Tabular Editor 3 will automatically fix up any DAX expressions that reference the renamed column.
+Además de detectar los nombres de las columnas y los tipos de datos, Tabular Editor 3 también te permitirá actualizar la propiedad Description desde el origen (si existe). En orígenes de SQL Server, sería la propiedad extendida MS_Description. Si se cambia el nombre de una columna en el origen, aparecerá en el cuadro de diálogo Aplicar cambios de esquema como una importación de columna y una eliminación de columna. Sin embargo, como se muestra en el GIF anterior, si haces Ctrl + clic derecho sobre estos dos cambios de esquema, puedes combinarlos en un único cambio de esquema: "renombrar columna de origen". La ventaja de este enfoque es que Tabular Editor 3 corregirá automáticamente cualquier expresión DAX que haga referencia a la columna cuyo nombre se ha cambiado.
 
-### Limitations in this release:
+### Limitaciones de esta versión:
 
-- The schema compare option is only available for Power Query partitions while Tabular Editor is connected to an instance of Analysis Services
-- Schema compare while offline will only be available for Legacy (Provider) partitions, similar to Tabular Editor 2.X. However, this functionality is not included in BETA-18.1, as I am initially looking for feedback on schema compare for Power Query partitions. Both this feature and the Import Tables Wizard will be available in the next beta release.
-- This feature can be used on a Power BI Desktop model as well, but keep in mind that adding/modifying/deleting columns on a table is not among the [supported modeling operations for External Tools](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). Also, be aware that Power BI Desktop may be caching metadata for certain types of data sources, so you may have to run a refresh within Power BI Desktop before Tabular Editor can pick up the schema changes.
+- La opción de comparación de esquema solo está disponible para particiones de Power Query cuando Tabular Editor está conectado a una instancia de Analysis Services
+- La comparación de esquema sin conexión solo estará disponible para particiones Legacy (Provider), de forma similar a Tabular Editor 2.X. Sin embargo, esta funcionalidad no está incluida en BETA-18.1, ya que de momento busco comentarios sobre la comparación de esquema para particiones de Power Query. Tanto esta función como el Asistente para importar tablas estarán disponibles en la próxima versión beta.
+- Esta característica también se puede usar en un modelo de Power BI Desktop, pero ten en cuenta que agregar/modificar/eliminar columnas en una tabla no está entre las [operaciones de modelado compatibles para Herramientas externas](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). Además, ten en cuenta que Power BI Desktop puede estar almacenando en caché los metadatos de ciertos tipos de Data source, por lo que puede que tengas que realizar una actualización dentro de Power BI Desktop antes de que Tabular Editor pueda detectar los cambios de esquema.
