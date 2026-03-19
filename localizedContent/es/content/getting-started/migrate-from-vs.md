@@ -1,6 +1,6 @@
 ---
 uid: migrate-from-vs
-title: Migrating from Visual Studio
+title: Migración desde Visual Studio
 author: Daniel Otykier
 updated: 2021-09-30
 applies_to:
@@ -17,206 +17,206 @@ applies_to:
           full: true
 ---
 
-# Migrating from Visual Studio / SQL Server Data Tools
+# Migración desde Visual Studio / SQL Server Data Tools
 
-This article assumes that you are familiar with Tabular model development using [Analysis Services Projects for Visual Studio](https://marketplace.visualstudio.com/items?itemName=ProBITools.MicrosoftAnalysisServicesModelingProjects) (formerly known as SQL Server Data Tools). This is common among developers using SQL Server Analysis Services (Tabular) or Azure Analysis Services.
+Este artículo da por hecho que estás familiarizado con el desarrollo de modelos tabulares con [Analysis Services Projects for Visual Studio](https://marketplace.visualstudio.com/items?itemName=ProBITools.MicrosoftAnalysisServicesModelingProjects) (conocidos anteriormente como SQL Server Data Tools). Esto es habitual entre los desarrolladores que usan SQL Server Analysis Services (Tabular) o Azure Analysis Services.
 
-- If you have never used Visual Studio for Tabular model development, you can safely skip this topic.
-- If you previously used Tabular Editor 2.x for Tabular model development, we recommend you skip directly to the @migrate-from-te2 article.
+- Si nunca has usado Visual Studio para el desarrollo de modelos tabulares, puedes omitir este tema sin problema.
+- Si antes usabas Tabular Editor 2.x para el desarrollo de modelos tabulares, te recomendamos que pases directamente al artículo @migrate-from-te2.
 
-## Partial migration
+## Migración parcial
 
-Tabular Editor 3 contains features that allow you to completely migrate away from Visual Studio for tabular model development. This is in contrast to Tabular Editor 2.x, where some users still preferred using Visual Studio for things like table import, visualization of relationships and preview of data.
+Tabular Editor 3 incluye funciones que te permiten prescindir por completo de Visual Studio para el desarrollo de modelos tabulares. Esto contrasta con Tabular Editor 2.x, donde algunos usuarios seguían prefiriendo usar Visual Studio para tareas como importar tablas, visualizar relaciones y previsualizar datos.
 
-However, as you familiarize yourself with Tabular Editor 3, you might still find it useful to open your tabular models in Visual Studio from time to time. This is possible at any time, since Tabular Editor 3 does not modify the **Model.bim** file format (aka. the [TOM JSON](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)) used by Visual Studio, thus ensuring compatibility with Visual Studio.
+Sin embargo, a medida que te familiarices con Tabular Editor 3, puede que te siga resultando útil abrir tus modelos tabulares en Visual Studio de vez en cuando. Esto es posible en cualquier momento, ya que Tabular Editor 3 no modifica el formato del archivo **Model.bim** (también conocido como [TOM JSON](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)) que usa Visual Studio, lo que garantiza la compatibilidad con Visual Studio.
 
-The only exception is, if you decide to use Tabular Editor's [Save-to-folder](xref:parallel-development#what-is-save-to-folder) feature, as this file format is not supported by Visual Studio. However, you can easily recreate a Model.bim file for use with Visual Studio, using the **File > Save As...** option in Tabular Editor. The opposite conversion can also be performed by loading a Model.bim file in Tabular Editor and then using the **File > Save to Folder...** option.
+La única excepción se da si decides usar la función [Guardar en carpeta](xref:parallel-development#what-is-save-to-folder) de Tabular Editor, ya que este formato de archivo no es compatible con Visual Studio. Sin embargo, puedes volver a crear fácilmente un archivo Model.bim para usarlo con Visual Studio, usando la opción **Archivo > Guardar como...** en Tabular Editor. También puedes hacer la conversión inversa cargando un archivo Model.bim en Tabular Editor y luego usando la opción **Archivo > Guardar en carpeta...**.
 
-### Automating file format conversion
+### Automatización de la conversión de formatos de archivo
 
-If you often face the need to convert back and forth between Tabular Editor's (database.json) folder-based format and Visual Studio's (model.bim) file format, consider writing a small Windows command script using [Tabular Editor 2.x CLI](xref:command-line-options) to automate the conversion process.
+Si a menudo necesitas convertir de un lado a otro entre el formato basado en carpetas (Database.json) de Tabular Editor y el formato de archivo (model.bim) de Visual Studio, considera escribir un pequeño script de comandos de Windows usando la [CLI de Tabular Editor 2.x](xref:command-line-options) para automatizar el proceso de conversión.
 
-# [Model.bim to folder](#tab/frombim)
+# [De Model.bim a carpeta](#tab/frombim)
 
-To convert from model.bim to database.json (folder-based format):
+Para convertir de model.bim a Database.json (formato basado en carpetas):
 
 ```cmd
-tabulareditor.exe model.bim -F database.json
+tabulareditor.exe model.bim -F Database.json
 ```
 
-# [Folder to model.bim](#tab/fromfolder)
+# [De carpeta a model.bim](#tab/fromfolder)
 
-To convert from database.json (folder-based format) to model.bim:
+Para convertir de Database.json (formato basado en carpetas) a model.bim:
 
 ```cmd
-tabulareditor.exe database.json -B model.bim
+tabulareditor.exe Database.json -B model.bim
 ```
 
 ***
 
 > [!NOTE]
-> The command line script above assumes you have [Tabular Editor 2.x](xref:getting-started-te2) installed. The installation location of Tabular Editor 2.x should also be specified as part of your [PATH environment variable](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/path).
+> El script de línea de comandos anterior asume que tienes instalado [Tabular Editor 2.x](xref:getting-started-te2). La ubicación de instalación de Tabular Editor 2.x también debe especificarse en tu [variable de entorno PATH](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/path).
 
-## Integrated Workspace server
+## Servidor de Workspace Integrada
 
-When starting a new Analysis Services (Tabular) project in Visual Studio, you are prompted to choose if you want to use Visual Studio's Integrated workspace server or provide your own instance of Analysis Services. In addition, you must decide the compatibility level of the tabular model (see screenshot below).
+Al iniciar un nuevo proyecto de Analysis Services (Tabular) en Visual Studio, se te pedirá que elijas si quieres usar el servidor de Workspace Integrada de Visual Studio o proporcionar tu propia instancia de Analysis Services. Además, debes decidir el nivel de compatibilidad del modelo tabular (consulta la captura de pantalla a continuación).
 
 ![VS New Project](~/content/assets/images/vs-new-project.png)
 
-In contrast, when creating a new model in Tabular Editor, using a workspace server is completely optional (but recommended - see [workspace mode](xref:workspace-mode)).
+En cambio, al crear un modelo nuevo en Tabular Editor, el uso de un servidor de Workspace es completamente opcional (aunque se recomienda; consulta [modo del área de trabajo](xref:workspace-mode)).
 
-Below is the dialog box shown when creating a new model in Tabular Editor 3:
+A continuación se muestra el cuadro de diálogo que aparece al crear un modelo nuevo en Tabular Editor 3:
 
 ![New model dialog](~/content/assets/images/new-model.png)
 
-If you enable the **Use workspace database** option, Tabular Editor will prompt you for an Analysis Services instance and database name that will be used as workspace database while working on the model. If you do not enable this option, you will be able to create and work on your model in "offline" mode, which still allows you to add tables, relationships, author DAX expressions, etc. However, you will have to deploy your offline model to an instance of Analysis Services before you can refresh, preview and query the data in the model.
+Si habilitas la opción **Usar base de datos del Workspace**, Tabular Editor te solicitará una instancia de Analysis Services y un nombre de base de datos que se usará como base de datos del Workspace mientras trabajas en el modelo. Si no activas esta opción, podrás crear y trabajar en tu modelo en modo "sin conexión", lo que te permite añadir tablas, relaciones, crear expresiones DAX, etc. Sin embargo, tendrás que desplegar tu modelo sin conexión en una instancia de Analysis Services antes de poder actualizar, obtener una vista previa y consultar los datos del modelo.
 
 > [!IMPORTANT]
-> Tabular Editor 3 does not provide a feature equivalent to the **Integrated workspace** option of Visual Studio. Essentially, the integrated workspace is an Analysis Services instance managed by Visual Studio. Since Analysis Services is proprietary software from Microsoft, we cannot ship it alongside Tabular Editor 3. Instead, if you would like to run a local instance of Analysis Services for use with Tabular Editor, we recommend that you install [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
+> Tabular Editor 3 no ofrece una característica equivalente a la opción de **Workspace Integrada** de Visual Studio. En esencia, la Workspace Integrada es una instancia de Analysis Services administrada por Visual Studio. Dado que Analysis Services es software propietario de Microsoft, no podemos incluirlo junto con Tabular Editor 3. En su lugar, si quieres ejecutar una instancia local de Analysis Services para usarla con Tabular Editor, te recomendamos que instales [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
-### Compatibility level requirements
+### Requisitos del nivel de compatibilidad
 
-Tabular Editor lets you choose the following compatibility levels for creating Analysis Services databases:
+Tabular Editor te permite elegir los siguientes niveles de compatibilidad para crear bases de datos de Analysis Services:
 
 - 1200 (Azure Analysis Services / SQL Server 2016+)
 - 1400 (Azure Analysis Services / SQL Server 2017+)
 - 1500 (Azure Analysis Services / SQL Server 2019+)
 
-In addition, Tabular Editor lets you choose compatibility levels suitable for Power BI datasets that will be deployed to the Power BI service through the [XMLA endpoint](xref:powerbi-xmla).
+Además, Tabular Editor permite elegir niveles de compatibilidad adecuados para los Datasets de Power BI que se publicarán en el servicio de Power BI a través del [punto de conexión XMLA](xref:powerbi-xmla).
 
 > [!NOTE]
-> Tabular Editor does not support compatibility levels below 1200, as these do not use the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) metadata format. If you plan on migrating development from Visual Studio to Tabular Editor for a model in compatibility level 1100 or 1103, **you must upgrade the compatibility level to at least 1200** before migrating to Tabular Editor. By doing so, you will no longer be able to deploy the model to SQL Server 2014 Analysis Services.
+> Tabular Editor no admite niveles de compatibilidad inferiores a 1200, ya que estos no usan el formato de metadatos [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions). Si planea migrar el desarrollo de Visual Studio a Tabular Editor para un modelo con nivel de compatibilidad 1100 o 1103, **debe actualizar el nivel de compatibilidad al menos a 1200** antes de migrar a Tabular Editor. Al hacerlo, ya no podrá implementar el modelo en SQL Server 2014 Analysis Services.
 
-## Visual Studio projects
+## Proyectos de Visual Studio
 
-When creating an Analysis Services (Tabular) project in Visual Studio, a number of files are created in the project folder next to the Model.bim file. These files contain project- and user-specific information which is not related to the Tabular Object Model (TOM). The screenshot below shows the files resulting from creating a new tabular project in Visual Studio.
+Al crear un proyecto de Analysis Services (Tabular) en Visual Studio, se crean varios archivos en la carpeta del proyecto junto al archivo Model.bim. Estos archivos contienen información específica del proyecto y del usuario que no está relacionada con el Tabular Object Model (TOM). La siguiente captura de pantalla muestra los archivos resultantes de crear un nuevo proyecto tabular en Visual Studio.
 
 ![VS Project File Structure](~/content/assets/images/vs-file-structure.png)
 
-When migrating to Tabular Editor, you only need to bring the Model.bim file, as the concept of "project" does not exist here. Instead, Tabular Editor simply loads the model metadata directly from the Model.bim file. In some cases, a file called the [Tabular Model User Options (tmuo) file](xref:user-options) is created next to the Model.bim file. This file is used by Tabular Editor to store user- and model specific settings, such as whether or not to use a workspace database, (encrypted) user credentials for data sources, etc.
+Al migrar a Tabular Editor, solo necesita llevar el archivo Model.bim, ya que aquí no existe el concepto de "proyecto". En su lugar, Tabular Editor simplemente carga los metadatos del modelo directamente desde el archivo Model.bim. En algunos casos, se crea junto al archivo Model.bim un archivo llamado [archivo Tabular Model User Options (tmuo)](xref:user-options). Tabular Editor usa este archivo para almacenar configuración específica del usuario y del modelo, como si se debe usar o no una base de datos del Workspace, credenciales de usuario (cifradas) para los Data source, etc.
 
-To keep the "project" directory clean, we therefore recommend to copy the Model.bim file created by Visual Studio into a new directory, before loading the file in Tabular Editor.
+Para mantener limpia la carpeta del "proyecto", recomendamos copiar el archivo Model.bim creado por Visual Studio en una carpeta nueva antes de cargarlo en Tabular Editor.
 
 ![Te File Structure](~/content/assets/images/te-file-structure.png)
 
-If you want to use the [Save-to-folder](xref:parallel-development#what-is-save-to-folder) feature, which is recommended for parallel development and integration with version control systems, now is the time to save the model as a folder from within Tabular Editor (**File > Save To Folder...**).
+Si quiere usar la función [Guardar en carpeta](xref:parallel-development#what-is-save-to-folder), recomendada para el desarrollo en paralelo y la integración con sistemas de control de versiones, ahora es el momento de guardar el modelo en una carpeta desde Tabular Editor (**Archivo > Guardar en carpeta...**).
 
 ![Te Folder Structure](~/content/assets/images/te-folder-structure.png)
 
-## Version control
+## Control de versiones
 
-Tabular Editor does not have any integrated version control of model metadata. However, since all model metadata is stored as simple text (JSON) files on the disk, it is straightforward to include the tabular model metadata in any type of version control system. For this reason, most Tabular Editor users prefer to still keep Visual Studio installed, in order to have access to the [Visual Studio Team Explorer](https://docs.microsoft.com/en-us/azure/devops/user-guide/work-team-explorer?view=azure-devops) or, specifically for git, the new [Git Changes window](https://docs.microsoft.com/en-us/visualstudio/version-control/git-with-visual-studio?view=vs-2019) of Visual Studio 2019.
-
-> [!NOTE]
-> These days, it seems that [git](https://git-scm.com/) is the preferred version control system by most developers. Git integration in Tabular Editor 3 is planned for a future update.
-
-Once you migrate to Tabular Editor, you do not need to keep the original Tabular model project and supporting files created by Visual Studio. You can still use the Visual Studio Team Explorer or Git Changes window to look at code changes, manage version control branches, perform code check-ins, merges, etc.
-
-Of course, most version control systems also have their own set of tools that you can use without relying on Visual Studio. For example, git has its command line and many popular tools that integrate directly with the Windows Explorer, such as [TortoiseGit](https://tortoisegit.org/).
-
-### Save-to-folder and version control
-
-The main advantage of using the [Save-to-folder](xref:parallel-development#what-is-save-to-folder) option, is that the model metadata is broken out into multiple small files, instead of storing everything in a large JSON document. Many properties in the TOM are arrays of objects (for example tables, measures and columns). Since all such objects have explicit names, their order in the array does not matter. Sometimes it happens that the order is changed during serialization to JSON, and this causes most version control system to indicate that a change was made to the file. However, since this ordering does not have any semantic meaning, we should not bother handling merge conflicts that may arise from this type of change.
-
-With Save-to-folder serialization, the number of arrays used in the JSON files are greatly reduced, as objects that would otherwise be stored as arrays, are now broken out into individual files stored within a subfolder. When Tabular Editor loads the model metadata from disk, it traverses all these subfolders to ensure all objects are deserialized correctly into the TOM.
-
-As such, Save-to-folder serialization greatly reduces the chance that merge conflicts are ever encountered, when two or more developers make parallel changes to the same tabular model.
-
-## UI differences
-
-This section lists the most important differences between the user interfaces of Tabular Editor 3 and Visual Studio for tabular model development. If you are an avid Visual Studio user, you should feel quite comfortable with Tabular Editor 3's user interface. If you would like a more detailed walkthrough, please see <xref:user-interface>.
-
-### Tabular Model Explorer vs. TOM Explorer
-
-In Visual Studio, a hierarchical overview of the model metadata can be found in the **Tabular Model Explorer**.
-
-![Vs Tom Explorer](~/content/assets/images/vs-tom-explorer.png)
-
-In Tabular Editor, this is called the **TOM Explorer** view. In Tabular Editor, all data modeling generally revolves around locating the relevant objects in the TOM Explorer and then performing certain actions by invoking the right-click context menu, by navigating to the main menu, or by editing object properties in the **Properties** view. In Tabular Editor, you can use intuitive operations such as multi-select, drag-drop, copy-paste and undo-redo for all data modeling operations.
-
-![Vs Tom Explorer](~/content/assets/images/tom-explorer.png)
-
-The TOM Explorer in Tabular Editor also has shortcut options for showing/hiding certain types of objects, hidden objects, display folders, and for quickly searching and filtering the metadata hierarchy.
-
-See @tom-explorer-view for more information.
-
-### Property Grid
-
-Both Visual Studio and Tabular Editor include a property grid that allows you to edit most object properties of whatever object is currently selected. Below is a comparison between the Visual Studio property grid (left) and the Tabular Editor property grid (right) for the same measure:
-
-![Property grid in Visual Studio and Tabular Editor](~/content/assets/images/property-grid-vs-te.png)
-
-The two generally work the same way, except that Tabular Editor uses property names that are closely aligned with the TOM object properties. Tabular Editor also adds a number of properties that are not found in the TOM, to make certain modeling operations easier. For example, by expanding the **Translated Names** property, you can compare and edit object name translations across all model cultures.
-
-### Editing DAX expressions
-
-In Visual Studio, you can use the formula bar or open a DAX editor window by right-clicking on a measure in the Tabular Model Explorer and choosing "Edit formula".
-
-Tabular Editor works quite similar, with the formula bar being replaced by the **Expression Editor** view. In addition, if you want to edit the DAX expressions for one or more objects in a standalone document, you can right-click on those objects (measures, calculated columns, calculated tables), and choose **Script DAX**.
-
-The DAX code editor in Tabular Editor 3 is one of the main reasons for using the tool. You can read more about it [here](xref:dax-editor).
-
-### Error List vs. Messages View
-
-In Visual Studio, DAX syntax errors are shown as warnings within the **Error List** (see screenshot below). In addition, measures that have errors are indicated with a warning triangle in the measures grid.
-
-![Vs Error List](~/content/assets/images/vs-error-list.png)
-
-In Tabular Editor, we use the Messages View to consolidate all error, warning and informational messages posted by different sources during model development. Specifically for DAX syntax errors, these are shown as errors in the Messages View, and any measures that have an error are indicated with a red dot in the TOM Explorer (see screenshot below).
-
-![Te Messages](~/content/assets/images/te-messages.png)
-
-In the screenshot above, notice how there are three different message-posting sources:
-
-- **Analysis Services**: When metadata changes are saved to a connected instance of Analysis Services, the server updates the TOM metadata to indicate if any objects are in an erroneous state. Specifically, the [State](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.state?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_State) and [ErrorMessage](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.errormessage?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_ErrorMessage) properties are updated. Tabular Editor displays these error messages in the Messages View. These messages are not shown when Tabular Editor is used offline (i.e. without a connection to Analysis Services).
-- **Tabular Editor Semantic Analysis**: In addition, Tabular Editor 3 performs its own semantic analysis of all DAX expressions in the model. Any syntax or semantic errors encountered are reported here.
-- **Expression Editor**: Lastly, if any documents are open in Tabular Editor 3, such as the Expression Editor, any DAX syntax or semantic errors encountered in the document are reported here.
-
-### Previewing table data
-
-In Visual Studio, tables and their content are displayed in a tabbed view once you load the Model.bim file. In Tabular Editor 3, you can preview table data by right-clicking on a table in the TOM Explorer, and choosing **Preview Data**. This opens a new document tab that lets you scroll through all rows of the table, as well as filter and sort the columns. It even works for model using DirectQuery!
-
-Also, you can freely rearrange the documents, to view the content of several tables at once (see screenshot below).
-
-![Te3 Table Preview](~/content/assets/images/te3-table-preview.png)
-
-### Importing tables
-
-To import new tables with Tabular Editor 3, use the **Model > Import tables...** option. This launches Tabular Editor 3's Import Table Wizard, which guides you through the process of connecting to a data source and selecting tables to import. The process is relatively similar to the legacy table import in Visual Studio.
-
-One important difference is that Tabular Editor 3 does not include a visual Power Query Editor. You can still edit Power Query (M) expressions as text, but if your model relies heavily on complex data transformation expressed as Power Query queries, you should consider to keep using Visual Studio for purposes of editing the Power Query queries.
+Tabular Editor no incluye ninguna solución Integrada de control de versiones para los metadatos del modelo. Sin embargo, como todos los metadatos del modelo se almacenan en el disco como archivos de texto sin formato (JSON), resulta sencillo incluir los metadatos del modelo tabular en cualquier tipo de sistema de control de versiones. Por este motivo, la mayoría de los usuarios de Tabular Editor prefieren seguir teniendo Visual Studio instalado para acceder a [Visual Studio Team Explorer](https://docs.microsoft.com/en-us/azure/devops/user-guide/work-team-explorer?view=azure-devops) o, específicamente para Git, a la nueva [ventana Cambios de Git](https://docs.microsoft.com/en-us/visualstudio/version-control/git-with-visual-studio?view=vs-2019) de Visual Studio 2019.
 
 > [!NOTE]
-> Performing complex data transformations using Power Query is generally not recommended for enterprise data modeling, due to the increased overhead of data refresh operations. Instead, prepare your data into a star schema using other ETL tools, and store the star schema data in a relational database, such as SQL Server or Azure SQL Database. Then, import tables to your tabular model from that database.
+> A día de hoy, parece que [git](https://git-scm.com/) es el sistema de control de versiones preferido por la mayoría de los desarrolladores. La integración con Git en Tabular Editor 3 está prevista para una actualización futura.
 
-#### Editing partitions and updating table schema
+Una vez que migre a Tabular Editor, ya no necesita conservar el proyecto original del modelo Tabular ni los archivos de apoyo creados por Visual Studio. Aun así, puede usar Visual Studio Team Explorer o la ventana Cambios de Git para ver cambios en el código, administrar ramas del control de versiones, realizar check-ins, fusiones, etc.
 
-In Tabular Editor 3, you can update the schema of a table without forcing a table refresh. Partitions are displayed in the TOM Explorer as individual objects. Click on a partition to edit its expression (M or SQL) in the Expression Editor.
+Por supuesto, la mayoría de los sistemas de control de versiones también tienen su propio conjunto de herramientas que puedes usar sin depender de Visual Studio. Por ejemplo, Git tiene su línea de comandos y muchas herramientas populares que se integran directamente con el Explorador de Windows, como [TortoiseGit](https://tortoisegit.org/).
 
-Once a partition expression has been updated, Tabular Editor can automatically detect if the table schema resulting from the updated expression, is different from the set of columns defined in the model. To perform a schema update, right-click on the partition or table in the TOM Explorer and choose **Update table schema...**.
+### Guardar en carpeta y control de versiones
 
-For more information about table import and schema updates, see @importing-tables.
+La principal ventaja de usar la opción [Guardar en carpeta](xref:parallel-development#what-is-save-to-folder) es que los metadatos del modelo se dividen en varios archivos pequeños, en lugar de almacenar todo en un único documento JSON grande. Muchas propiedades del TOM son arrays de objetos (por ejemplo, tablas, medidas y columnas). Como todos estos objetos tienen nombres explícitos, su orden en el array no importa. A veces, al serializar a JSON, el orden cambia, y esto hace que la mayoría de los sistemas de control de versiones indiquen que el archivo ha cambiado. Sin embargo, como este orden no tiene ningún significado semántico, no deberíamos perder tiempo resolviendo conflictos de fusión que puedan surgir por este tipo de cambio.
 
-### Visualizing relationships
+Con la serialización de Guardar en carpeta, se reduce considerablemente el número de arrays utilizados en los archivos JSON, ya que los objetos que de otro modo se almacenarían como arrays ahora se separan en archivos individuales guardados en una subcarpeta. Cuando Tabular Editor carga los metadatos del modelo desde el disco, recorre todas estas subcarpetas para garantizar que todos los objetos se deserialicen correctamente en el TOM.
 
-Visual Studio includes a diagram tool that lets you visualize and create relationships between tables.
+De este modo, la serialización de Guardar en carpeta reduce enormemente la probabilidad de encontrar conflictos de fusión cuando dos o más desarrolladores realizan cambios en paralelo sobre el mismo modelo tabular.
 
-Tabular Editor 3 also includes a diagram tool, that can be accessed using **File > New > Diagram**. A new diagram document tab will be created, at which point you can add tables from the TOM Explorer by dragging and dropping, or from the **Diagram > Add tables...** menu.
+## Diferencias en la interfaz de usuario
 
-Once tables have been added to the diagram, you can create relationship between columns simply by dragging from one column to another.
+Esta sección enumera las diferencias más importantes entre las interfaces de usuario de Tabular Editor 3 y Visual Studio para el desarrollo de modelos tabulares. Si eres un usuario habitual de Visual Studio, deberías sentirte bastante cómodo con la interfaz de usuario de Tabular Editor 3. Si quieres un recorrido más detallado, consulta <xref:user-interface>.
 
-![Te3 Diagram View](~/content/assets/images/te3-diagram-view.png)
+### Explorador de modelos tabulares vs. Explorador TOM
+
+En Visual Studio, puedes encontrar una vista jerárquica de los metadatos del modelo en el **Explorador de modelos tabulares**.
+
+![Vs Explorador Tom](~/content/assets/images/vs-tom-explorer.png)
+
+En Tabular Editor, esta vista se llama **Explorador TOM**. En Tabular Editor, todo el modelado del Data model suele girar en torno a localizar los objetos relevantes en el Explorador TOM y, a continuación, realizar determinadas acciones mediante el menú contextual con clic derecho, desde el menú principal o editando las propiedades del objeto en la vista **Propiedades**. En Tabular Editor, puedes usar operaciones intuitivas como selección múltiple, arrastrar y soltar, copiar y pegar, y deshacer y rehacer para todas las operaciones de modelado del Data model.
+
+![Vs Explorador Tom](~/content/assets/images/tom-explorer.png)
+
+El Explorador TOM de Tabular Editor también incluye opciones de acceso directo para mostrar u ocultar determinados tipos de objetos, objetos ocultos, carpetas de visualización y para buscar y filtrar rápidamente la jerarquía de metadatos.
+
+Consulta @tom-explorer-view para obtener más información.
+
+### Cuadrícula de propiedades
+
+Tanto Visual Studio como Tabular Editor incluyen una cuadrícula de propiedades que te permite editar la mayoría de las propiedades del objeto que esté seleccionado en ese momento. A continuación se muestra una comparación entre la cuadrícula de propiedades de Visual Studio (izquierda) y la cuadrícula de propiedades de Tabular Editor (derecha) para la misma medida:
+
+![Cuadrícula de propiedades en Visual Studio y Tabular Editor](~/content/assets/images/property-grid-vs-te.png)
+
+En general, ambas funcionan de la misma manera, salvo que Tabular Editor usa nombres de propiedades estrechamente alineados con las propiedades de los objetos TOM. Tabular Editor también agrega varias propiedades que no se encuentran en el TOM, para facilitar determinadas operaciones de modelado. Por ejemplo, al expandir la propiedad **Nombres traducidos**, puedes comparar y editar las traducciones de nombres de objetos en todas las configuraciones regionales del modelo.
+
+### Edición de expresiones DAX
+
+En Visual Studio, puedes usar la barra de fórmulas o abrir una ventana del editor de DAX haciendo clic con el botón derecho en una medida en el Explorador de modelos tabulares y eligiendo "Editar fórmula".
+
+Tabular Editor funciona de forma muy similar; en lugar de la barra de fórmulas, se usa la vista **Editor de expresiones**. Además, si quieres editar las expresiones DAX de uno o varios objetos en un documento independiente, puedes hacer clic con el botón derecho en esos objetos (medidas, columnas calculadas, tablas calculadas) y elegir **Script DAX**.
+
+El editor de código DAX de Tabular Editor 3 es uno de los principales motivos para usar la herramienta. Puedes leer más al respecto [aquí](xref:dax-editor).
+
+### Lista de errores vs. vista de mensajes
+
+En Visual Studio, los errores de sintaxis DAX se muestran como advertencias en la **Lista de errores** (ver la captura de pantalla a continuación). Además, las medidas que tienen errores se indican con un triángulo de advertencia en la cuadrícula de medidas.
+
+![Lista de errores de Visual Studio](~/content/assets/images/vs-error-list.png)
+
+En Tabular Editor, usamos la vista de mensajes para consolidar todos los mensajes de error, advertencia e informativos publicados por distintas fuentes durante el desarrollo del modelo. En concreto, los errores de sintaxis DAX se muestran como errores en la vista de mensajes, y cualquier medida que tenga un error se indica con un punto rojo en el Explorador TOM (ver la captura de pantalla a continuación).
+
+![Mensajes de Tabular Editor](~/content/assets/images/te-messages.png)
+
+En la captura anterior, fíjate en que hay tres fuentes diferentes que publican mensajes:
+
+- **Analysis Services**: Cuando se guardan cambios de metadatos en una instancia conectada de Analysis Services, el servidor actualiza los metadatos TOM para indicar si algún objeto está en un estado erróneo. En concreto, se actualizan las propiedades [State](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.state?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_State) y [ErrorMessage](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.errormessage?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_ErrorMessage) de la medida. Tabular Editor muestra estos mensajes de error en la vista de mensajes. Estos mensajes no se muestran cuando Tabular Editor se usa sin conexión (es decir, sin conectarse a Analysis Services).
+- **Análisis semántico de Tabular Editor**: Además, Tabular Editor 3 realiza su propio análisis semántico de todas las expresiones DAX del modelo. Cualquier error de sintaxis o de semántica que se encuentre se informa aquí.
+- **Editor de expresiones**: Por último, si hay documentos abiertos en Tabular Editor 3, como el Editor de expresiones, cualquier error de sintaxis o de semántica de DAX que se encuentre en el documento se informa aquí.
+
+### Vista previa de los datos de la tabla
+
+En Visual Studio, las tablas y su contenido se muestran en una vista con pestañas una vez que se carga el archivo Model.bim. En Tabular Editor 3, puedes obtener una vista previa de los datos de una tabla haciendo clic con el botón derecho en una tabla del Explorador TOM y seleccionando **Vista previa de datos**. Esto abre una nueva pestaña de documento que te permite desplazarte por todas las filas de la tabla, así como filtrar y ordenar las columnas. ¡Incluso funciona en modelos que usan DirectQuery!
+
+Además, puedes reorganizar los documentos libremente para ver el contenido de varias tablas a la vez (consulta la captura de pantalla siguiente).
+
+![Vista previa de tabla de Te3](~/content/assets/images/te3-table-preview.png)
+
+### Importación de tablas
+
+Para importar nuevas tablas con Tabular Editor 3, usa la opción **Modelo > Importar tablas...**. Esto inicia el Asistente para importar tablas de Tabular Editor 3, que te guía durante el proceso de conectarte a un Data source y seleccionar las tablas que deseas importar. El proceso es bastante similar a la importación de tablas heredada en Visual Studio.
+
+Una diferencia importante es que Tabular Editor 3 no incluye un editor Visual de Power Query. Aun así, puedes editar expresiones de Power Query (M) como texto, pero si tu modelo depende en gran medida de transformaciones de datos complejas expresadas como consultas de Power Query, considera seguir usando Visual Studio para editarlas.
 
 > [!NOTE]
-> For performance reasons, the diagram tool does not inspect the data of the model, nor does it validate the uniqueness or directionality of any relationships you create. It is up to you to ensure that relationships are created correctly. If a relationship has been incorrectly defined, Analysis Services will return an error state which is shown in the **Messages View**.
+> Por lo general, no se recomienda realizar transformaciones de datos complejas con Power Query para el modelado de datos empresarial, debido a la sobrecarga adicional de las operaciones de actualización de datos. En su lugar, prepara los datos en un esquema en estrella con otras herramientas ETL y almacena los datos del esquema en estrella en una base de datos relacional, como SQL Server o Azure SQL Database. Después, importa las tablas a tu modelo tabular desde esa base de datos.
 
-### Model deployment
+#### Edición de particiones y actualización del esquema de la tabla
 
-Tabular Editor lets you easily deploy the model metadata to any instance of Analysis Services. You can invoke Tabular Editor's Deployment Wizard under **Model > Deploy...** or by hitting CTRL+SHIFT+D.
+En Tabular Editor 3, puedes actualizar el esquema de una tabla sin forzar una actualización de la tabla. Las particiones se muestran en el Explorador TOM como objetos individuales. Haz clic en una partición para editar su expresión (M o SQL) en el Editor de expresiones.
 
-For more information, see [Model deployment](../features/deployment.md).
+Una vez actualizada la expresión de una partición, Tabular Editor puede detectar automáticamente si el esquema de la tabla resultante difiere del conjunto de columnas definido en el modelo. Para realizar una actualización del esquema, haz clic con el botón derecho en la partición o la tabla en el Explorador TOM y elige **Actualizar esquema de tabla...**.
 
-## Next steps
+Para obtener más información sobre la importación de tablas y las actualizaciones de esquema, consulta @importing-tables.
+
+### Visualización de relaciones
+
+Visual Studio incluye una herramienta de diagramas que te permite visualizar y crear relaciones entre tablas.
+
+Tabular Editor 3 también incluye una herramienta de diagramas a la que puedes acceder desde **Archivo > Nuevo > Diagrama**. Se creará una nueva pestaña de diagrama. Desde ahí podrás agregar tablas desde el Explorador TOM arrastrándolas y soltándolas, o desde el menú **Diagrama > Agregar tablas...**.
+
+Una vez agregadas las tablas al diagrama, puedes crear una relación entre columnas simplemente arrastrando desde una columna a otra.
+
+![Vista de diagrama de Te3](~/content/assets/images/te3-diagram-view.png)
+
+> [!NOTE]
+> Por razones de rendimiento, la herramienta de diagramas no inspecciona los datos del modelo ni valida la unicidad o la direccionalidad de las relaciones que crees. Depende de ti asegurarte de que las relaciones se crean correctamente. Si una relación se ha definido incorrectamente, Analysis Services devolverá un estado de error que se mostrará en la **vista de mensajes**.
+
+### Implementación del modelo
+
+Tabular Editor te permite implementar fácilmente los metadatos del modelo en cualquier instancia de Analysis Services. Puedes abrir el Asistente de implementación de Tabular Editor desde **Modelo > Implementar...** o pulsando CTRL+SHIFT+D.
+
+Para obtener más información, consulta [Implementación del modelo](../features/deployment.md).
+
+## Pasos siguientes
 
 - @migrate-from-te2
 - @parallel-development
