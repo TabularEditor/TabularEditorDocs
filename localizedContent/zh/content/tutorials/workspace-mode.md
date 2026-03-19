@@ -1,6 +1,6 @@
 ---
 uid: workspace-mode-wt
-title: Workspace Mode
+title: 工作区模式
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:
@@ -9,15 +9,15 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           partial: true
-          note: Premium Per User XMLA Endpoints Only
-        - edition: Enterprise
+          note: 仅限 Premium Per User 的 XMLA 端点
+        - edition: 企业版
           full: true
 ---
 
-# (Walkthrough) Workspace Mode
+# （演练）工作区模式
 
 [!include[workspace-mode](../features/workspace-mode.partial.md)]
