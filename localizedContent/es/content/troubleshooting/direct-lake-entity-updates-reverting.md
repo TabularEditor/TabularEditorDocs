@@ -1,6 +1,6 @@
 ---
-uid: direct-lake-entity-updates-reverting
-title: Entity Name Changes Revert in Direct Lake Models
+uid: reversion-de-cambios-de-nombre-de-entidad-en-modelos-direct-lake
+title: Se revierten los cambios de nombre de entidades en modelos Direct Lake
 author: Morten Lønskov
 updated: 2025-10-14
 applies_to:
@@ -9,7 +9,7 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           none: true
         - edition: Business
           none: true
@@ -17,52 +17,52 @@ applies_to:
           full: true
 ---
 
-# Entity Name Changes Revert in Direct Lake Models
+# Se revierten los cambios de nombre de entidades en modelos Direct Lake
 
-After editing `EntityName` in Tabular Editor 3 for a Direct Lake table partition, the model may reload in Power BI  with the original names. This behavior often looks like TE3 did not persist the change, but it is caused by how Power BI interprets Direct Lake metadata during refresh.
-
----
-
-## Symptoms
-
-- Table metadata changes appear in TE3 but revert after you refresh the model in Power BI.
-- The reverted tables are Direct Lake tables whose metadata was altered outside Power BI.
-- Refresh operations run without explicit errors, yet the renamed objects fall back to their original names.
+Después de editar `EntityName` en Tabular Editor 3 para una partición de una tabla Direct Lake, es posible que el modelo se recargue en Power BI con los nombres originales. Este comportamiento suele dar la impresión de que TE3 no ha conservado el cambio, pero se debe a cómo Power BI interpreta los metadatos de Direct Lake durante la actualización.
 
 ---
 
-## Root cause
+## Síntomas
 
-Power BI binds Direct Lake tables to their origin through the `SourceLineageTag` property. When the tag does not match the current partition's `EntityName`, Power BI assumes the table should stay synchronized with the original source and restores the previous metadata. Direct Lake partitions also expect intentional changes to be registered through the `ChangedProperties` collection; without it, Power BI ignores manual edits made outside the service.
-
----
-
-## Resolution steps
-
-1. **Open the table partition.** For each Direct Lake table, edit the associated `EntityName`.
-2. **Synchronize partition details.**
-   - Set the table's `SourceLineageTag` to exactly match the new `EntityName`.
-   - Set the `Name` property to true for table's `ChangedProperties` collection so Power BI treats the rename as intentional.
-3. **Save the model in TE3.**
-4. **Refresh the affected table (or the entire model) in Power BI.**
-   The names should now persist.
+- Los cambios de metadatos de la tabla aparecen en TE3, pero se revierten después de actualizar el modelo en Power BI.
+- Las tablas revertidas son tablas Direct Lake cuyos metadatos se modificaron fuera de Power BI.
+- Las operaciones de actualización se ejecutan sin errores explícitos, pero los objetos renombrados vuelven a sus nombres originales.
 
 ---
 
-## Important notes
+## Causa raíz
 
-- TE3 does not update `SourceLineageTag` automatically when you rename the table. Always align the tag manually.
-- The `ChangedProperties` flag is required only for Direct Lake (and other composite) tables; legacy import models do not need it.
-- These behaviors originate from Power BI’s metadata synchronization rules, not from TE3 storage.
+Power BI vincula las tablas Direct Lake a su origen mediante la propiedad `SourceLineageTag`. Cuando la etiqueta no coincide con el `EntityName` de la partición actual, Power BI asume que la tabla debe seguir sincronizada con el origen original y restaura los metadatos anteriores. Las particiones Direct Lake también esperan que los cambios intencionados se registren mediante la colección `ChangedProperties`; sin ello, Power BI ignora las ediciones manuales realizadas fuera del servicio.
 
-## Automate bulk updates with C\#
+---
 
-When you have many Direct Lake tables to adjust, you can run the following TE3 script. It prompts for new entity names, updates each selected table, syncs the `SourceLineageTag`, and flags the changed metadata.
+## Pasos para solucionarlo
 
-> **Use it in TE3:** Select the relevant Direct Lake tables, open the **C# Script** window, paste the script, and run it.
+1. **Abra la partición de la tabla.** Para cada tabla Direct Lake, edite el `EntityName` asociado.
+2. **Sincronice los detalles de la partición.**
+   - Configure el `SourceLineageTag` de la tabla para que coincida exactamente con el nuevo `EntityName`.
+   - Establezca la propiedad `Name` en true en la colección `ChangedProperties` de la tabla para que Power BI trate el cambio de nombre como intencionado.
+3. **Guarda el modelo en TE3.**
+4. **Actualiza la tabla afectada (o el modelo completo) en Power BI.**
+   Ahora los nombres deberían conservarse.
+
+---
+
+## Notas importantes
+
+- TE3 no actualiza `SourceLineageTag` automáticamente cuando cambias el nombre de la tabla. Alinea siempre la etiqueta manualmente.
+- El indicador `ChangedProperties` solo es necesario en tablas Direct Lake (y otras tablas compuestas); los modelos heredados en Import mode no lo requieren.
+- Estos comportamientos se deben a las reglas de sincronización de metadatos de Power BI, no al almacenamiento de TE3.
+
+## Automatiza actualizaciones masivas con C\#
+
+Cuando tienes muchas tablas Direct Lake que ajustar, puedes ejecutar el siguiente script de TE3. Te pide nuevos nombres de entidad, actualiza cada tabla seleccionada, sincroniza el `SourceLineageTag` y marca los metadatos modificados.
+
+> **Úsalo en TE3:** Selecciona las tablas Direct Lake relevantes, abre la ventana **C# Script**, pega el script y ejecútalo.
 
 ```csharp
-// -------- Namespaces --------
+// -------- Espacios de nombres --------
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -70,22 +70,22 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using TW = TabularEditor.TOMWrapper;
 
-// -------- Guard: need tables selected --------
+// -------- Comprobación: se necesitan tablas seleccionadas --------
 var tables = Selected.Tables.ToList();
 if (tables.Count == 0)
 {
-    Warning("Select one or more tables first.");
+    Warning("Selecciona primero una o más tablas.");
     return;
 }
 
-// -------- Build editable rows from selected tables --------
+// -------- Crear filas editables a partir de las tablas seleccionadas --------
 var candidates = tables
     .Select(table => new { Table = table, Partition = table.Partitions.OfType<TW.EntityPartition>().FirstOrDefault() })
     .ToList();
 
 foreach (var skipped in candidates.Where(c => c.Partition == null))
 {
-    Warning($"Skipping '{skipped.Table.Name}': no Entity partition.");
+    Warning($"Se omite '{skipped.Table.Name}': no hay ninguna partición Entity.");
 }
 
 var rows = new BindingList<EntityEditRow>(
@@ -96,21 +96,21 @@ var rows = new BindingList<EntityEditRow>(
 
 if (rows.Count == 0)
 {
-    Warning("No selected tables have an Entity partition. Nothing to edit.");
+    Warning("Ninguna de las tablas seleccionadas tiene una partición Entity. No hay nada que editar.");
     return;
 }
 
-// -------- Show batch dialog --------
+// -------- Mostrar el cuadro de diálogo por lotes --------
 using (var dialog = new BatchEntityEditor(rows))
 {
     if (dialog.ShowDialog() != DialogResult.OK)
     {
-        Info("Cancelled. No changes applied.");
+        Info("Cancelado. No se aplicó ningún cambio.");
         return;
     }
 }
 
-// -------- Apply changes --------
+// -------- Aplicar cambios --------
 const string ExtendedPropertyName = "Changed Property Name";
 var updated = 0;
 
@@ -122,18 +122,18 @@ foreach (var row in rows)
             continue;
 
         updated++;
-        Output($"Updated '{row.TableName}': Entity='{row.CurrentEntity}', Partition='{row.Partition.Name}', SourceLineageTag='{row.CurrentEntity}'.");
+        Output($"Actualizada '{row.TableName}': Entity='{row.CurrentEntity}', Partición='{row.Partition.Name}', SourceLineageTag='{row.CurrentEntity}'.");
     }
     catch (Exception ex)
     {
-        Error($"Failed on '{row.TableName}': {ex.Message}");
+        Error($"Error al procesar '{row.TableName}': {ex.Message}");
     }
 }
 
-Info($"Done. {updated} table(s) updated.");
+Info($"Listo. Se actualizaron {updated} tabla(s).");
 
 
-// ====================== Support types / UI ======================
+// ====================== Tipos auxiliares / IU ======================
 public class EntityEditRow
 {
     public EntityEditRow(TW.Table table, TW.EntityPartition partition)
@@ -174,7 +174,7 @@ public class EntityEditRow
 
             if (nameConflict)
             {
-                warn?.Invoke($"Partition rename skipped for '{TableName}': another partition already named '{target}'.");
+                warn?.Invoke($"Cambio de nombre de la partición omitido para '{TableName}': ya existe otra partición llamada '{target}'.");
             }
             else
             {
@@ -184,7 +184,7 @@ public class EntityEditRow
                 }
                 catch (Exception ex)
                 {
-                    warn?.Invoke($"Partition rename failed for '{TableName}': {ex.Message}");
+                    warn?.Invoke($"No se pudo cambiar el nombre de la partición para '{TableName}': {ex.Message}");
                 }
             }
         }
@@ -195,7 +195,7 @@ public class EntityEditRow
         }
         catch (Exception ex)
         {
-            warn?.Invoke($"SourceLineageTag not set on '{TableName}': {ex.Message}");
+            warn?.Invoke($"SourceLineageTag no se estableció en '{TableName}': {ex.Message}");
         }
 
         Table.SetExtendedProperty(extendedPropertyName, "true", TW.ExtendedPropertyType.String);
@@ -217,7 +217,7 @@ public class BatchEntityEditor : Form
 
     private void BuildUi()
     {
-        Text = "Edit Entity names for selected tables";
+        Text = "Editar los nombres de entidad de las tablas seleccionadas";
         TopMost = true;
         ShowInTaskbar = false;
         StartPosition = FormStartPosition.CenterScreen;
@@ -242,7 +242,7 @@ public class BatchEntityEditor : Form
 
         root.Controls.Add(new Label
         {
-            Text = "Edit the Entity name for each table. Leave 'New Entity' unchanged to skip.",
+            Text = "Edita el nombre de la entidad de cada tabla. Si dejas 'Nueva entidad' sin cambios, se omitirá.",
             AutoSize = true,
             Dock = DockStyle.Fill,
             Padding = new Padding(0, 0, 0, 6)
@@ -265,21 +265,21 @@ public class BatchEntityEditor : Form
             new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(EntityEditRow.TableName),
-                HeaderText = "Table",
+                HeaderText = "Tabla",
                 ReadOnly = true,
                 FillWeight = 28
             },
             new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(EntityEditRow.CurrentEntity),
-                HeaderText = "Current Entity",
+                HeaderText = "Entidad actual",
                 ReadOnly = true,
                 FillWeight = 36
             },
             new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(EntityEditRow.NewEntity),
-                HeaderText = "New Entity",
+                HeaderText = "Nueva entidad",
                 FillWeight = 36
             });
 
@@ -294,8 +294,8 @@ public class BatchEntityEditor : Form
             Padding = new Padding(0)
         };
 
-        var ok = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 0, 8) };
-        var cancel = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 8, 8) };
+        var ok = new Button { Text = "Aceptar", DialogResult = DialogResult.OK, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 0, 8) };
+        var cancel = new Button { Text = "Cancelar", DialogResult = DialogResult.Cancel, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 8, 8) };
 
         buttons.Controls.Add(ok);
         buttons.Controls.Add(cancel);
@@ -318,8 +318,8 @@ public class BatchEntityEditor : Form
 ```
 
 > [!NOTE]
-> The script was generated using an LLM for code assistance, but has been tested by the Tabular Editor team.
+> El script se generó usando un LLM para Code Assist, pero el equipo de Tabular Editor lo ha probado.
 
-Running the script updates only the tables that receive a new entity name. After the script finishes, review the changes, save the model, and refresh in Power BI to confirm the metadata persists.
+Al ejecutar el script, solo se actualizan las tablas a las que se les asigna un nuevo nombre de entidad. Cuando termine el script, revisa los cambios, guarda el modelo y actualízalo en Power BI para confirmar que los metadatos se conservan.
 
-Finally, open each updated partition and verify that `Name` is present in the `ChangedProperties` collection before refreshing from Power BI.
+Por último, abre cada partición actualizada y comprueba que `Name` aparece en la colección `ChangedProperties` antes de actualizar desde Power BI.
