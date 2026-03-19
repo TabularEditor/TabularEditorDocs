@@ -1,6 +1,6 @@
 ---
 uid: xmla-as-connectivity
-title: XMLA / Analysis Services connectivity
+title: Conectividad con XMLA / Analysis Services
 author: Daniel Otykier
 updated: 2024-05-01
 applies_to:
@@ -9,232 +9,232 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           none: true
-        - edition: Business
+        - edition: Empresa
           partial: true
-          note: "Only Premium Per User XMLA Endpoints"
-        - edition: Enterprise
+          note: "Solo los puntos de conexión XMLA de Premium por usuario"
+        - edition: Empresarial
           full: true
 ---
 
-# XMLA / Analysis Services connectivity
+# Conectividad con XMLA / Analysis Services
 
-Tabular Editor uses the [AMO client library](https://learn.microsoft.com/en-us/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) to connect to the Power BI / Fabric XMLA endpoint or instances of SQL Server or Azure Analysis Services (Tabular). Authentication and authorization is handled by the AMO client library, which means that Tabular Editor does not store any credentials or tokens. Moreover, users will need sufficient permissions to connect to the XMLA endpoint or Analysis Services instance. In most cases, the user must be a member of the Analysis Services server administrator role or have administrative permissions in the Power BI workspace.
+Tabular Editor usa la [biblioteca cliente de AMO](https://learn.microsoft.com/en-us/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) para conectarse al punto de conexión XMLA de Power BI / Fabric o a instancias de SQL Server o Azure Analysis Services (Tabular). La autenticación y la autorización las gestiona la biblioteca cliente de AMO, lo que significa que Tabular Editor no almacena credenciales ni tokens. Además, los usuarios deben tener permisos suficientes para conectarse al punto de conexión XMLA o a una instancia de Analysis Services. En la mayoría de los casos, el usuario debe ser miembro del rol de administrador del servidor de Analysis Services o tener permisos de administración en el Workspace de Power BI.
 
-In the following article, we will use the term "semantic model server" to mean the service accessed through the Power BI / Fabric XMLA endpoint or any instance of SQL Server Analysis Services Tabular (SSAS) or Azure Analysis Services (AAS).
+En el siguiente artículo, usaremos el término "servidor de modelo semántico" para referirnos al servicio al que se accede a través del punto de conexión XMLA de Power BI / Fabric o de cualquier instancia de SQL Server Analysis Services Tabular (SSAS) o Azure Analysis Services (AAS).
 
-## Connection dialog
+## Cuadro de diálogo de conexión
 
-To connect to the semantic model server, go to **File** > **Open** > **Model from DB...**, or press **Ctrl+Shift+O**.
+Para conectarte al servidor de modelo semántico, ve a **Archivo** > **Abrir** > **Modelo desde BD...**, o pulsa **Ctrl+Shift+O**.
 
-This will open the **Load Semantic Model from Database** dialog, where you can specify the server name, an XMLA connection string or pick a local SSAS instance from a dropdown. Moreover, you can specify the type of authentication to use.
-
-> [!NOTE]
-> In Tabular Editor 2.x, the **Advanced Options** (for specifying read/write mode and a custom status bar color) are not available.
-
-![Connect Dialog](~/content/assets/images/connect-dialog.png)
-
-## Select database
-
-After you click "OK", Tabular Editor will connect to the semantic model server and retrieve a list of databases that you have access to. Select the database you want to work with, and click "OK".
-
-## Advanced Connection String Properties
-
-In all versions of Tabular Editor, you can specify an OLAP connection string in the **Server** textbox, rather than just the server name.
-
-A typical OLAP connection string looks like this:
-
-```
-Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated Security=SSPI;
-```
+Se abrirá el cuadro de diálogo **Cargar modelo semántico desde la base de datos**, donde puedes especificar el nombre del servidor, una cadena de conexión XMLA o elegir una instancia local de SSAS en una lista desplegable. Además, puedes especificar el tipo de autenticación que vas a usar.
 
 > [!NOTE]
-> If the `Initial Catalog` property is specified in the connection string, the **Select Database** dialog will not be shown, and Tabular Editor will connect directly to the specified database.
+> En Tabular Editor 2.x, las **Opciones avanzadas** (para especificar el modo de lectura/escritura y un color personalizado para la barra de estado) no están disponibles.
 
-OLAP connection strings support many properties in addition to the ones shown above. For a full list of properties, see the [Microsoft documentation](https://learn.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions).
+![Cuadro de diálogo de conexión](~/content/assets/images/connect-dialog.png)
 
-In addition to the properties listed in the documentation, AMO connection strings also supports the following properties:
+## Seleccionar base de datos
 
-### Locale Identifier
+Después de hacer clic en "Aceptar", Tabular Editor se conectará al servidor de modelo semántico y recuperará una lista de bases de datos a las que tienes acceso. Selecciona la base de datos con la que quieres trabajar y haz clic en "Aceptar".
 
-You can specify the language to use for the connection by setting the `Locale Identifier` property. The value is a number that corresponds to a specific language. For example, `1033` corresponds to English (United States).
+## Propiedades avanzadas de la cadena de conexión
+
+En todas las versiones de Tabular Editor, puedes especificar una cadena de conexión OLAP en el cuadro de texto **Server**, en lugar de solo el nombre del servidor.
+
+Una cadena de conexión OLAP típica tiene este aspecto:
 
 ```
-Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated Security=SSPI;Locale Identifier=1033;
+Provider=MSOLAP;Data source=servername;Initial Catalog=databasename;Seguridad Integrada=SSPI;
 ```
 
-This is useful if you want error messages and other server messages to be in a specific language. If the `Locale Identifier` property is not specified, the language of the client operating system is used.
+> [!NOTE]
+> Si se especifica la propiedad `Initial Catalog` en la cadena de conexión, no se mostrará el cuadro de diálogo **Select Database**, y Tabular Editor se conectará directamente a la base de datos especificada.
 
-Most Analysis Services instances support several languages. See [this page for a full list of locale identifiers (LCID)](https://learn.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-fulltext-languages-transact-sql?view=sql-server-ver16).
+Las cadenas de conexión OLAP admiten muchas propiedades además de las mostradas anteriormente. Para ver la lista completa de propiedades, consulta la [documentación de Microsoft](https://learn.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions).
 
-## Fabric/Power BI XMLA Settings
+Además de las propiedades enumeradas en la documentación, las cadenas de conexión de AMO también admiten las siguientes propiedades:
 
-Two admin settings must be switched on to enable the XMLA endpoint in Fabric/Power BI.
+### Identificador de configuración regional
 
-### Enable Tennant XMLA Endpoint
+Puedes especificar el idioma que se usará para la conexión estableciendo la propiedad `Locale Identifier`. El valor es un número que corresponde a un idioma específico. Por ejemplo, `1033` corresponde a inglés (Estados Unidos).
 
-In the Fabric/Power BI admin portal, the integration setting "Allow XMLA endpoints and Analyze in Excel with on-premises semantic models" must be enabled
+```
+Provider=MSOLAP;Data source=servername;Initial Catalog=databasename;Seguridad Integrada=SSPI;Locale Identifier=1033;
+```
 
-At the tenant level, the setting may be restricted to only certain users. If the setting is restricted in your organization, ensure all required users are allowed to use the XMLA endpoint at the tenant level.
+Esto es útil si quieres que los mensajes de error y otros mensajes del servidor estén en un idioma específico. Si no se especifica la propiedad `Locale Identifier`, se usa el idioma del sistema operativo del cliente.
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
+La mayoría de las instancias de Analysis Services admiten varios idiomas. Consulta [esta página para ver la lista completa de identificadores de configuración regional (LCID)](https://learn.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-fulltext-languages-transact-sql?view=sql-server-ver16).
 
-### Enable XMLA Read Write on Capacity
+## Configuración de XMLA de Fabric/Power BI
 
-To use the XMLA endpoint, the workspace that hosts a semantic model must be assigned to a capacity (FSku or Power BI Premium Per User), and the capacity must have XMLA ["Read Write" enabled in the capacity settings.](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#enable-xmla-read-write)
+Hay que activar dos configuraciones de administrador para habilitar el punto de conexión XMLA en Fabric/Power BI.
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
+### Habilitar el punto de conexión XMLA del inquilino
 
-Read Write is enabled in the Admin Portal by navigating to
+En el portal de administración de Fabric/Power BI, se debe habilitar la configuración de integración "Permitir puntos de conexión XMLA y Analizar en Excel con modelos semánticos locales"
 
-1. Capacity Settings
-2. Choosing the type of capacity
-3. Selecting the relevant Capacity
-4. Navigating to Power BI Workloads and scrolling down to find the XMLA Endpoint setting choosing "Read Write"
+A nivel de inquilino, la configuración puede estar restringida a ciertos usuarios. Si en tu organización esta configuración está restringida, asegúrate de que todos los usuarios necesarios tengan permiso para usar el punto de conexión XMLA a nivel de inquilino.
 
-### Workspace Level User Rights
+![Configuración de administrador del inquilino](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
 
-To edit models using the XMLA endpoint the user's account needs to have access to the workspace as either **Contributor**, **Member** or **Admin**. In the workspace choose 'Manage Access' and add the user account or a Entra ID group that the user belongs to with the required role. For more information on roles in workspaces please see Microsoft's Documentation: [Roles in Workspaces](https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces)
+### Habilitar lectura y escritura de XMLA en la capacidad
 
-### Read/Write on Semantic Model
+Para usar el punto de conexión XMLA, el Workspace que hospeda un modelo semántico debe estar asignado a una capacidad (FSku o Power BI Premium Per User) y la capacidad debe tener XMLA con ["Read Write" habilitado en la configuración de la capacidad.](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#enable-xmla-read-write)
 
-Ensure that the user's account has Write permission to the semantic model. This can be required even if the user is an admin on the workspace as mentioned above.
+![Configuración del administrador del inquilino](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
-To check that your account has the necessary permissions start by locating the model in the Fabric/Power BI workspace and first click on the hamburger symbol (3 vertical dots) and go to the "Manage permissions" page.
+La opción "Read Write" se habilita en el portal de administración, yendo a
 
-![Manage Permissions on Semantic Model](~/content/assets/images/common/XMLASettings/ManagePermissionsonSemanticModel.png)
+1. Configuración de capacidad
+2. Elegir el tipo de capacidad
+3. Seleccionar la capacidad correspondiente
+4. Ve a Cargas de trabajo de Power BI y desplázate hacia abajo hasta encontrar la configuración del punto de conexión XMLA y elige "Read Write"
 
-Validate or give the user's account or the Entra ID group that they belong to either **Workspace Admin**, **Workspace Contributor**, or **Write permission** on the semantic model. For example, in the screenshot below, only the 3 users highlighted in Blue would be able to access the model through Tabular Editor:
+### Permisos de usuario a nivel de Workspace
 
-![User Permissions on Semantic Model](~/content/assets/images/common/XMLASettings/UserPermissionsonSemanticModel.png)
+Para editar modelos usando el punto de conexión XMLA, la cuenta del usuario debe tener acceso al Workspace como **Colaborador**, **Miembro** o **Administrador**. En el Workspace, elige "Administrar acceso" y agrega la cuenta de usuario o un grupo de Entra ID al que pertenezca el usuario con el rol requerido. Para obtener más información sobre los roles en Workspaces, consulta la documentación de Microsoft: [Roles en Workspaces](https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces)
 
-### Set workspace to large semantic models
+### Lectura/escritura en el modelo semántico
 
-To ensure the best experience while editing models using the XMLA endpoint the workspace should have its semantic storage format set to **Large Semantic model storage format**. Go to 'Workspace Settings' in the top right corner of the Fabric/Power BI workspace. First navigate to the 'License info', secondly validate if the storage format is set to large and if not choose 'Edit' to change the storage format.
+Asegúrate de que la cuenta del usuario tenga permiso de escritura en el modelo semántico. Esto puede ser necesario incluso si el usuario es administrador del Workspace, como se mencionó anteriormente.
 
-![Large Semantic Model Storage Format](~/content/assets/images/common/XMLASettings/LargeSemanticModelStorageFormat.png)
+Para comprobar que tu cuenta tiene los permisos necesarios, empieza por localizar el modelo en el Workspace de Fabric/Power BI; luego haz clic en el icono de más opciones (3 puntos verticales) y ve a la página "Administrar permisos".
 
-## Additional Fabric/Power BI settings.
+![Administrar permisos en el modelo semántico](~/content/assets/images/common/XMLASettings/ManagePermissionsonSemanticModel.png)
 
-### Disable Package Refresh
+Comprueba o concede a la cuenta del usuario o al grupo de Entra ID al que pertenezca el rol de **Administrador del Workspace** o **Colaborador del Workspace**, o el **permiso de escritura** en el modelo semántico. Por ejemplo, en la captura de pantalla siguiente, solo los 3 usuarios resaltados en azul podrían acceder al modelo a través de Tabular Editor:
 
-If another user, other than the semantic model's owner, needs to edit the model through the XMLA endpoint, the security admin setting in Fabric/Power BI called "Block republish and disable package refresh" must be disabled.
+![Permisos de usuario en el modelo semántico](~/content/assets/images/common/XMLASettings/UserPermissionsonSemanticModel.png)
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
+### Configurar el Workspace para modelos semánticos grandes
 
-## Unsupported model types
+Para garantizar la mejor experiencia al editar modelos usando el punto de conexión XMLA, el Workspace debe tener el formato de almacenamiento semántico establecido en **Formato de almacenamiento de modelos semánticos grandes**. Ve a "Configuración del Workspace" en la esquina superior derecha del Workspace de Fabric/Power BI. Primero, ve a "Información de licencia"; después, comprueba si el formato de almacenamiento está establecido como grande y, si no es así, elige "Editar" para cambiar el formato de almacenamiento.
 
-Several types of models do not support XMLA connections, [listed below](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#unsupported-semantic-models).
+![Formato de almacenamiento de modelo semántico grande](~/content/assets/images/common/XMLASettings/LargeSemanticModelStorageFormat.png)
 
-The following semantic models aren't accessible by using the XMLA endpoint. These semantic models won't appear under the workspace in Tabular Editor or any other tool.
+## Configuración adicional de Fabric/Power BI.
 
-- Semantic models based on a live connection to an Azure Analysis Services or SQL Server Analysis Services model.
-- Semantic models based on a live connection to a Power BI semantic model in another workspace.
-- Semantic models with Push data by using the REST API.
-- Semantic models in My Workspace.
-- Excel workbook semantic models
+### Deshabilitar la actualización del paquete
 
-In Fabric, the default semantic model of a lakehouse or warehouse can be opened/connected to in Tabular Editor, but [not edited](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#considerations-and-limitations). Moreover, some operations that require read access to certain [DMVs](https://learn.microsoft.com/en-us/analysis-services/instances/use-dynamic-management-views-dmvs-to-monitor-analysis-services?view=asallproducts-allversions), such as collecting VertiPaq Analyzer statistics, may not be supported on default semantic models.
+Si un usuario distinto del propietario del modelo semántico necesita editar el modelo a través del punto de conexión XMLA, debe deshabilitarse la configuración de administración de seguridad de Fabric/Power BI denominada "Bloquear la republicación y deshabilitar la actualización del paquete".
 
-## Troubleshooting XMLA connections
+![Configuración del administrador del inquilino](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
 
-### Testing a simple connection
+## Tipos de modelo no compatibles
 
-These steps show how to most reliably connect to a Fabric/Power BI semantic model from Tabular Editor.
+Varios tipos de modelos no admiten conexiones XMLA, [enumerados a continuación](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#unsupported-semantic-models).
 
-1. Connecting to a semantic model in Fabric is through the 'File' > 'Open' > 'Model from DB' (default shortcut Ctrl+Shift+O)
+No se puede acceder a los siguientes modelos semánticos mediante el punto de conexión XMLA. Estos modelos semánticos no aparecerán en el Workspace en Tabular Editor ni en ninguna otra herramienta.
 
-2. You'll be presented with a dialogue (see below), and you need to put the Power BI connection string into the text box labeled 'Server'. Leave the rest of the options as configured in the screenshot (these are defaults). The connection string is in the form shown below. You can find this connection string in the Service (more details here in this [Microsoft doc in the sections 'Connecting to a Premium Workspace' and 'To get the workspace connection URL'](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#connecting-to-a-premium-workspace)
+- Modelos semánticos basados en una conexión en directo a un modelo de Azure Analysis Services o SQL Server Analysis Services.
+- Modelos semánticos basados en una conexión en directo a un modelo semántico de Power BI en otro Workspace.
+- Modelos semánticos con datos push mediante la API REST.
+- Modelos semánticos en Mi Workspace.
+- Modelos semánticos de libros de Excel
 
-![Load Model From Database](~/content/assets/images/common/XMLASettings/LoadModelFromDatabase.png)
+En Fabric, el modelo semántico predeterminado de un Lakehouse o un Warehouse se puede abrir o conectar desde Tabular Editor, pero [no se puede editar](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#considerations-and-limitations). Además, algunas operaciones que requieren acceso de lectura a determinadas [DMVs](https://learn.microsoft.com/en-us/analysis-services/instances/use-dynamic-management-views-dmvs-to-monitor-analysis-services?view=asallproducts-allversions), como recopilar estadísticas del Analizador VertiPaq, podrían no estar admitidas en los modelos semánticos predeterminados.
 
-Please copy and paste the connection string directly from the workspace rather than copying from somewhere/someone else or modifying it in any way.
+## Solución de problemas de conexiones XMLA
 
-3. Depending on your machine (if your Windows login is linked to Entra ID or your identity provider) you may be prompted to log in. It's important that the account you use is the one with permission to the workspace. If your organization has multiple tenants or if you have multiple logins, this might not match your Windows login. You should use the exact credential that is shown in the Fabric web UI for your user.
+### Probar una conexión sencilla
+
+Estos pasos muestran cómo conectarse de la forma más fiable a un modelo semántico de Fabric/Power BI desde Tabular Editor.
+
+1. Para conectarse a un modelo semántico en Fabric, seleccione 'Archivo' > 'Abrir' > 'Modelo desde BD' (atajo predeterminado Ctrl+Shift+O)
+
+2. Se te mostrará un cuadro de diálogo (ver más abajo) y tendrás que pegar la cadena de conexión de Power BI en el cuadro de texto etiquetado como 'Servidor'. Deja el resto de opciones tal como aparecen en la captura de pantalla (son los valores predeterminados). La cadena de conexión tiene el formato que se muestra a continuación. Puedes encontrar esta cadena de conexión en el servicio (más detalles aquí en este [documento de Microsoft en las secciones 'Connecting to a Premium Workspace' y 'To get the workspace connection URL'](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#connecting-to-a-premium-workspace)
+
+![Cargar modelo desde base de datos](~/content/assets/images/common/XMLASettings/LoadModelFromDatabase.png)
+
+Copia y pega la cadena de conexión directamente desde el Workspace, en lugar de copiarla de otro sitio o de otra persona, o de modificarla de cualquier manera.
+
+3. Según tu equipo (si tu inicio de sesión de Windows está vinculado a Entra ID o a tu proveedor de identidades), es posible que se te solicite iniciar sesión. Es importante que la cuenta que uses sea la que tenga permisos para acceder al Workspace. Si tu organización tiene varios tenants o si tienes varios inicios de sesión, puede que esto no coincida con tu inicio de sesión de Windows. Debes usar exactamente la credencial que se muestra en la interfaz web de Fabric para tu usuario.
 
 ![Authenticate to FabricPowerBI](~/content/assets/images/common/XMLASettings/AuthenticateToFabricPowerBI.png)
 
-4. After successful authentication, you'll be presented with a 'Choose database' dialog. Select one and click 'Ok'.
+4. Después de autenticarte correctamente, verás el cuadro de diálogo "Choose database". Selecciona una y haz clic en "Ok".
 
 ![Choose Database](~/content/assets/images/common/XMLASettings/ChooseDatabase.png)
 
-### Set Authentication Type to Microsoft Entra ID
+### Establece el tipo de autenticación en Microsoft Entra ID
 
-In some cases the 'Integrated' security option could be different from the user account that should be used for authenticating against the Fabric/Power BI service. The next step to take is to choose the **Microsoft Entra MFA** option in the open model dialog box.
+En algunos casos, la opción de seguridad "Integrada" puede ser distinta de la cuenta de usuario que debería usarse para autenticarse frente al servicio de Fabric/Power BI. El siguiente paso es elegir la opción **Microsoft Entra MFA** en el cuadro de diálogo de apertura del modelo.
 
 ![Microsoft Entra MFA](~/content/assets/images/common/XMLASettings/LoadModelFromDatabaseMicrosoftEntraID.png)
 
-Choosing the 'Microsoft Entra MFA' option forces the multifactor authentication and allows for choosing the specific account that is needed to connect to the workspace.
+Al elegir la opción "Microsoft Entra MFA" se obliga a usar la autenticación multifactor y te permite seleccionar la cuenta específica necesaria para conectarte al Workspace.
 
-### Multiple tenants
+### Varios tenants
 
-If you've double-checked the user name and connection string as above and are still having issues, the next thing to check is whether adding the tenant GUID to the connection string helps. This might be an issue if you belong to multiple tenants.
+Si has verificado el nombre de usuario y la cadena de conexión como se indicó antes y sigues teniendo problemas, lo siguiente que debes comprobar es si ayuda añadir el GUID del tenant a la cadena de conexión. Esto puede ser un problema si perteneces a varios tenants.
 
-The tenant ID can be found directly in Power BI by clicking the top-right question mark and selecting 'About Power BI'. The tenant ID is shown as part of the 'Tenant URL'. Be careful, as the text box is typically too small to display the whole thing in the window in Power BI. Double-click on the URL shown, which will highlight the entire thing, that you can copy and paste.
+El ID de tenant se puede encontrar directamente en Power BI haciendo clic en el signo de interrogación de la esquina superior derecha y seleccionando "About Power BI". El ID de tenant se muestra como parte de la "Tenant URL". Ten cuidado: el cuadro de texto suele ser demasiado pequeño para mostrarla completa en la ventana de Power BI. Haz doble clic en la URL que se muestra para resaltar la cadena completa; así podrás copiarla y pegarla.
 
-The whole URL is not the tenant ID. The tenant ID is the GUID at the end of the string, after "ctid=". So in the screenshot below, my tenant ID starts with "ddec", but yours will be different. Once you have the tenant ID, you can change the connection string that you used above: replace the part of the path that says "myorg" with your tenant ID.
+La URL completa no es el ID de tenant. El ID de tenant es el GUID al final de la cadena, después de "ctid=". En la captura de pantalla de abajo, mi ID de tenant empieza por "ddec", pero el tuyo será distinto. Cuando tengas el ID de tenant, puedes cambiar la cadena de conexión que usaste antes: reemplaza la parte de la ruta que dice "myorg" por tu ID de tenant.
 
-An example is below. Your tenant ID and your workspace name will be different than those shown.
+A continuación tienes un ejemplo. Tu ID de tenant y el nombre de tu Workspace serán distintos de los que se muestran.
 
-- Old: `powerbi://api.powerbi.com/v1.0/myorg/WorkspaceName`
-- New: `powerbi://api.powerbi.com/v1.0/eeds65sv-kl25-4d12-990a-770ca3eb6226/WorkspaceName`
+- Anterior: `powerbi://api.powerbi.com/v1.0/myorg/WorkspaceName`
+- Nuevo: `powerbi://api.powerbi.com/v1.0/eeds65sv-kl25-4d12-990a-770ca3eb6226/WorkspaceName`
 
-You can also use the tenant name (e.g. `fabrikam.com`) as shown in [this article](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#connecting-to-a-premium-workspace).
+También puedes usar el nombre del tenant (p. ej., `fabrikam.com`), como se muestra en [este artículo](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#connecting-to-a-premium-workspace) sobre cómo conectarse a un Workspace Premium.
 
-Then, attempt connecting precisely as the instructions in the [Testing a simple connection section](#testing-a-simple-connection)
+A continuación, intenta conectarte siguiendo al pie de la letra las instrucciones de la sección [Probar una conexión simple](#testing-a-simple-connection)
 
-### Duplicate names
+### Nombres duplicados
 
-There can be issues connecting to a model if the workspace name is a duplicate of another workspace or if the model name is a duplicate name of another model.
+Puede haber problemas al conectarte a un modelo si el nombre del Workspace está duplicado con el de otro Workspace o si el nombre del modelo está duplicado con el de otro modelo.
 
-If there are duplicate names, please refer to Microsoft's documentation in the sections ["Duplicate workspace names" and "Duplicate semantic model name"](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#duplicate-workspace-names) to learn how to modify the connection string to address these issues
+Si hay nombres duplicados, consulta la documentación de Microsoft en las secciones ["Nombres de Workspace duplicados" y "Nombre de modelo semántico duplicado"](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#duplicate-workspace-names) para aprender a modificar la cadena de conexión y así solucionar estos problemas
 
-### Proxy handling
+### Gestión de proxy
 
-Another common cause of connectivity issues is proxies. For more information about this, please review [this article](xref:proxy-settings).
+Otra causa habitual de problemas de conectividad son los servidores proxy. Para más información, revisa [este artículo](xref:proxy-settings).
 
-### Testing connectivity using PowerShell
+### Probar la conectividad con PowerShell
 
-If connectivity issues persist even after attempting the troubleshooting steps mentioned above, it is also possible to connect directly to the XMLA endpoint using the [Microsoft-provided Analysis Services client libraries](https://www.nuget.org/packages/Microsoft.AnalysisServices/), _without_ using Tabular Editor. We can do this using a simple PowerShell script as shown below. If this connection also fails, it is a clear indication that the issue is unrelated to Tabular Editor; in this case, you should consider raising a support ticket with Microsoft. When contacting Microsoft, inform them of which version of the **Microsoft.AnalysisServices.Tabular.dll** and **Microsoft.Identity.Client.dll** you're using, and also include the PowerShell script. Also, inform them whether you're using the .NET Core (Tabular Editor 3) or .NET Framework (Tabular Editor 2) versions of the DLLs. Avoid mentioning Tabular Editor directly in your support request, as this may confuse their 1st-level support. After creating the support ticket, please also notify us via support@tabulareditor.com, as we are interested in tracking the frequency of these issues.
+Si los problemas de conectividad persisten incluso después de intentar los pasos de solución de problemas anteriores, también es posible conectarse directamente al punto de conexión XMLA mediante las [bibliotecas cliente de Analysis Services proporcionadas por Microsoft](https://www.nuget.org/packages/Microsoft.AnalysisServices/), _sin_ usar Tabular Editor. Podemos hacerlo con un script sencillo de PowerShell, como se muestra a continuación. Si esta conexión también falla, es una señal clara de que el problema no está relacionado con Tabular Editor; en ese caso, considera abrir un caso de soporte con Microsoft. Al ponerte en contacto con Microsoft, indícales qué versión de **Microsoft.AnalysisServices.Tabular.dll** y **Microsoft.Identity.Client.dll** estás usando, e incluye también el script de PowerShell. Indícales también si estás usando las versiones de las DLL de .NET Core (Tabular Editor 3) o de .NET Framework (Tabular Editor 2). Evita mencionar Tabular Editor directamente en tu solicitud de soporte, ya que esto puede confundir al soporte de primer nivel. Después de crear el ticket de soporte, avísanos también en support@tabulareditor.com, ya que nos interesa hacer seguimiento de la frecuencia de estos problemas.
 
-To use the script:
+Para usar el script:
 
-1. Navigate to the Tabular Editor 3 installation folder through Windows Explorer
-2. Right-click somewhere in the folder and choose "Open in Terminal". This should open a PowerShell window. You can also open a regular command window and type `pwsh` to launch PowerShell.
-3. Check that the PowerShell version is at least 6.2.0. If the constrained language mode is restricted, try to open the terminal as an administrator or request assistance from your IT admin team to run the script.
-4. In notepad, adjust the XMLA URL in the script below to match the endpoint you're trying to connect to. Then, copy the modified script into the PowerShell window and hit [Enter] to run it.
+1. Navega hasta la carpeta de instalación de Tabular Editor 3 en el Explorador de Windows
+2. Haz clic con el botón derecho en algún lugar de la carpeta y elige "Abrir en Terminal". Esto debería abrir una ventana de PowerShell. También puedes abrir una ventana de comandos normal y escribir `pwsh` para iniciar PowerShell.
+3. Comprueba que la versión de PowerShell sea al menos la 6.2.0. Si el modo de lenguaje restringido está restringido, intenta abrir el terminal como administrador o solicita ayuda a tu equipo de administración de TI para ejecutar el script.
+4. En el Bloc de notas, ajusta la URL XMLA del script siguiente para que coincida con el punto de conexión al que intentas acceder. Luego, copia el script modificado en la ventana de PowerShell y presiona [Enter] para ejecutarlo.
 
 ```powershell
-# Run this script from the Tabular Editor 3 installation folder, since this folder
-# contains all of the DLLs required.
+# Ejecuta este script desde la carpeta de instalación de Tabular Editor 3, ya que esta carpeta
+# contiene todas las DLL necesarias.
 
-# Config
-# TODO: Update the XMLA URL below and modify connection string properties as needed
+# Configuración
+# TODO: Actualiza la URL de XMLA a continuación y modifica las propiedades de la cadena de conexión según sea necesario
 $xmla = "powerbi://api.powerbi.com/v1.0/myorg/workspace-name"
 $connectionString = "Provider=MSOLAP;Data Source=$xmla;Interactive Login=Always;Identity Mode=Connection"
 
-# Load DLLs
+# Cargar DLLs
 Add-Type -Path "Microsoft.AnalysisServices.Tabular.dll"
 
-# Create Microsoft.AnalysisServices.Tabular.Server object:
+# Crear el objeto Microsoft.AnalysisServices.Tabular.Server:
 $server = New-Object Microsoft.AnalysisServices.Tabular.Server
 
 try {
-	# Connect
+	# Conectar
 	$server.Connect($connectionString)
 
-	Write-Host "Connection succeeded." -ForegroundColor Green
-	Write-Host "Connected to: $($server.Name)"
+	Write-Host "Conexión establecida." -ForegroundColor Green
+	Write-Host "Conectado a: $($server.Name)"
 }
 catch {
-	Write-Host "Connection failed:" -ForegroundColor Red
+	Write-Host "Error de conexión:" -ForegroundColor Red
 	Write-Host $_.Exception.Message -ForegroundColor Red
 }
 ```
 
-If the script **succeeds**, it means that your machine is able to connect to the XMLA endpoint using the Microsoft client libraries. If, simultaneously, you're **not** able to connect using Tabular Editor, please post a ticket on our [Tabular Editor 2](https://github.com/TabularEditor/TabularEditor/issues) or [Tabular Editor 3](https://github.com/TabularEditor/TabularEditor3/issues) support page, or send an email to support@tabulareditor.com (**Tabular Editor 3 Enterprise Edition customers only**).
+Si el script **se ejecuta correctamente**, significa que tu máquina puede conectarse al punto de conexión XMLA usando las bibliotecas cliente de Microsoft. Si, al mismo tiempo, **no** puedes conectarte con Tabular Editor, abre un ticket en nuestra página de soporte de [Tabular Editor 2](https://github.com/TabularEditor/TabularEditor/issues) o [Tabular Editor 3](https://github.com/TabularEditor/TabularEditor3/issues), o envía un correo a support@tabulareditor.com (**solo para clientes de la Edición Enterprise de Tabular Editor 3**).
 
-If the script **fails**, something on your environment is blocking XMLA endpoint connectivity, and so Tabular Editor will also not be able to connect. In this case, please reach out to your IT department for troubleshooting firewalls/proxies, before contacting Microsoft support.
+Si el script **falla**, algo en tu entorno está bloqueando la conectividad con el punto de conexión XMLA, por lo que Tabular Editor tampoco podrá conectarse. En este caso, ponte en contacto con tu departamento de TI para solucionar problemas con los firewalls/proxies antes de contactar con el soporte de Microsoft.
 
-If the script **succeeds** using Tabular Editor 2 DLLs, but **fails** using Tabular Editor 3 DLLs (or vice versa), please reach out to Microsoft support, since the issue in this case would be a discrepancy between the .NET Framework version of the DLLs (used by Tabular Editor 2) and the .NET Core version of the DLLs (used by Tabular Editor 3).
+Si el script **se ejecuta correctamente** con las DLL de Tabular Editor 2, pero **falla** con las DLL de Tabular Editor 3 (o viceversa), ponte en contacto con el soporte de Microsoft, ya que en este caso el problema sería una discrepancia entre la versión de .NET Framework de las DLL (usadas por Tabular Editor 2) y la versión de .NET Core de las DLL (usadas por Tabular Editor 3).
