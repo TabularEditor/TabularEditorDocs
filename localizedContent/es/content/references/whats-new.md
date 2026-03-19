@@ -1,6 +1,6 @@
 ---
 uid: whats-new
-title: What's new
+title: Novedades
 author: Morten Lønskov
 updated: 2023-10-11
 ---
