@@ -1,6 +1,6 @@
 ---
 uid: data-security-setup-ols
-title: Setup or Modify OLS
+title: Configurar o modificar OLS
 author: Kurt Buhler
 updated: 2023-03-02
 applies_to:
@@ -17,94 +17,94 @@ applies_to:
           full: true
 ---
 
-# Setup or Modify Object-Level Security (OLS)
+# Configurar o modificar la seguridad a nivel de objetos (OLS)
 
-![Data Security Visual Abstract](~/content/assets/images/data-security/data-security-configure-ols-visual-abstract.png)
-
----
-
-**OLS is changed by adjusting the Roles or Object Permissions defined for Tables or Columns.** Object Permissions are TOM Properties visible with the `Object Level Security` property that can be either `Default` (no OLS; functionally similar to `Read`), `Read`, or `None`. OLS differs from RLS in that it does not filter data, but prevents execution of the object **and all dependents.** This means any relationship or measure that references the object where `Object Level Security` is set to `None` will return an error upon evaluation.
+![Resumen Visual de seguridad de datos](~/content/assets/images/data-security/data-security-configure-ols-visual-abstract.png)
 
 ---
 
-- [**About Data Security and RLS/OLS:**](data-security-about.md) A functional overview of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
-- [**Modify/Setup an RLS Configuration:**](data-security-setup-rls.md) How to configure <span style="color:#01a99d">RLS</span> in a dataset.
-- **Modify/Setup an OLS Configuration (This Article):** How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
-- [**Testing RLS/OLS with Impersonation:**](data-security-testing.md) How to easily validate Data Security with Tabular Editor.
+**La OLS se modifica ajustando los roles o los permisos de objeto definidos para tablas o columnas.** Los permisos de objeto son propiedades TOM visibles en la propiedad `Object Level Security`, que puede ser `Default` (sin OLS; funcionalmente similar a `Read`), `Read` o `None`. La OLS se diferencia de la RLS en que no filtra los datos, sino que impide la ejecución del objeto **y de todos sus dependientes.** Esto significa que cualquier relación o medida que haga referencia al objeto donde `Object Level Security` esté establecido en `None` devolverá un error al evaluarse.
 
 ---
 
-## Configuring OLS in Tabular Editor 3
-
-_Below is an overview of common changes one might make to existing OLS. Additionally, strategies for configuring OLS for atypical objects (Measures, Calculation Groups) are described, below:_
+- [**Acerca de la seguridad de datos y RLS/OLS:**](data-security-about.md) Una visión general funcional de <span style="color:#01a99d">RLS</span> y <span style="color:#8d7bae">OLS</span>.
+- [**Modificar/configurar una configuración de RLS:**](data-security-setup-rls.md) Cómo configurar <span style="color:#01a99d">RLS</span> en un Dataset.
+- **Modificar/configurar la configuración de OLS (este artículo):** Cómo configurar <span style="color:#8d7bae">OLS</span> en un Dataset.
+- [**Probar RLS/OLS con suplantación:**](data-security-testing.md) Cómo validar fácilmente la seguridad de datos con Tabular Editor.
 
 ---
 
-### 1. Remove a Role
+## Configurar OLS en Tabular Editor 3
 
-To remove a Role from the model, you can simply delete the Role object with `Del` or by right-clicking and selecting 'Delete'.
+_A continuación se ofrece una visión general de los cambios habituales que se pueden realizar en una configuración de OLS existente. Además, a continuación se describen estrategias para configurar OLS en objetos no habituales (medidas, grupos de cálculo):_
+
+---
+
+### 1. Eliminar un rol
+
+Para quitar un rol del modelo, basta con eliminar el objeto de rol pulsando `Del` o haciendo clic con el botón derecho y seleccionando "Eliminar".
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-delete-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Deleting a Role in the model.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-delete-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Eliminación de un rol del modelo.</figcaption>
 </figure>
 
 > [!NOTE]
-> All users assigned to this role will no longer be able to see model data, so long as at least one other Role exists.
+> Los usuarios asignados a este rol ya no podrán ver los datos del modelo, mientras exista al menos otro rol.
 
 ---
 
-### 2. Add a New Role
+### 2. Agregar un nuevo rol
 
-To add a Role to the model:
+Para agregar un rol al modelo:
 
-1. **Right-Click the 'Roles' Object Type:** This will open the dialogue to let you create a new Role.
-2. **Select 'Create' > 'Role':** Name the new role.
-
-<figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Creating a new Role in the model.</figcaption>
-</figure>
-
-3. **Set the `Model Permission` Property to `Read`:** This is necessary for Power BI datasets.
+1. **Haz clic con el botón derecho en el tipo de objeto "Roles":** Se abrirá el cuadro de diálogo para crear un nuevo rol.
+2. **Selecciona "Crear" > "Rol":** Asigna un nombre al nuevo rol.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> Setting the Model Permission property is necessary for Power BI.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Creación de un nuevo rol en el modelo.</figcaption>
 </figure>
 
-4. **Set Permissions:** Set RLS Table Permissions and/or OLS Object Permissions, as described, below.
+3. **Establece la propiedad `Model Permission` en `Read`:** Esto es necesario para los Datasets de Power BI.
+
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Establecer la propiedad Model Permission es necesario para Power BI.</figcaption>
+</figure>
+
+4. **Configura los permisos:** Establece los permisos de tabla de RLS y/o los permisos de objeto de OLS, como se describe a continuación.
 
 ---
 
-### 3. Remove OLS
+### 3. Eliminar OLS
 
-To remove OLS from the model, all Columns and Tables must have their `Object Level Security` property configured to `Default` for all roles. To remove Data Security from the model, all Roles must be deleted.
+Para eliminar OLS del modelo, todas las columnas y tablas deben tener la propiedad `Object Level Security` configurada en `Default` para todos los roles. Para quitar la seguridad de datos del modelo, tienes que eliminar todos los roles.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-default.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> The Object-Level Security property can be found in the <i>Properties</i> pane when selecting a Column or Table. The property does not exist for Measures, Relationships and other Object Types.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-default.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 4:</strong> La propiedad de seguridad a nivel de objetos se encuentra en el panel de <i>Propiedades</i> al seleccionar una columna o tabla. La propiedad no existe para medidas, relaciones y otros tipos de objetos.</figcaption>
 </figure>
 
 > [!NOTE]
-> Once all roles are deleted, all users will be able to see all data so long as they have _Read_ permissions on the dataset.
+> Una vez que hayas eliminado todos los roles, todos los usuarios podrán ver todos los datos siempre que tengan permisos de _Read_ en el Dataset.
 
 ---
 
-### 4. Setup or Change OLS
+### 4. Configurar o cambiar OLS
 
-Setup or Modification of OLS is trivial for Columns and Table. You just have to select the object and navigate to the `Object Level Security` property, using the dropdown to change the property to the desired value.
+Configurar o modificar OLS es muy fácil para columnas y tablas. Solo tienes que seleccionar el objeto y navegar hasta la propiedad `Object Level Security`, usando el desplegable para cambiarla al valor deseado.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-change.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> The Object-Level Security property can be changed with an adjacent drop-down, allowing selection of <i>Default</i>, <i>None</i> or <i>Read</i>.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-ols-change.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 4:</strong> La propiedad de seguridad a nivel de objetos se puede cambiar mediante el menú desplegable adyacente, que permite seleccionar <i>Default</i>, <i>None</i> o <i>Read</i>.</figcaption>
 </figure>
 
 ---&#x20;
 
-### 5. Combine OLS with RLS
+### 5. Combinar OLS con RLS
 
-Successfully combining RLS with OLS requires designing a model and Data Security / Access Management strategy that align. Since RLS and OLS cannot combine across roles, this means if you plan on implementing both RLS and OLS, users are limited to a single role.
+Combinar RLS con OLS con éxito requiere diseñar un modelo y una estrategia de seguridad de datos / gestión de acceso que estén alineados. Dado que RLS y OLS no se pueden combinar entre roles, esto significa que, si planeas implementar tanto RLS como OLS, los usuarios quedan limitados a un único rol.
 
 ---
 
-### 6. Configure OLS for Measures
+### 6. Configurar OLS para las medidas
 
-Natively, OLS works only on Columns, Tables and their dependents; there is no `Object-Level Security` property for measures. However, since OLS also applies to dependents, it is possible to design OLS that works on measures via disconnected tables or calculation groups. To do this, the measure DAX has to be altered to evaluate a column or calculation group configured with RLS. If the `Object-Level Security` property of that object is `None`, then the Measure will not evaluate.
+De forma nativa, OLS solo funciona con columnas, tablas y sus dependencias; no existe ninguna propiedad `seguridad a nivel de objetos` para las medidas. Sin embargo, como OLS también se aplica a las dependencias, es posible diseñar OLS que funcione con las medidas mediante tablas desconectadas o grupos de cálculo. Para ello, el DAX de la medida debe modificarse para evaluar una columna o un grupo de cálculo configurado con RLS. Si la propiedad `seguridad a nivel de objetos` de ese objeto es `None`, la medida no se evaluará.
 
-See also [this article by SQLBI](https://www.sqlbi.com/articles/hiding-measures-by-using-object-level-security-in-power-bi/) which explains this approach in detail.
+Consulta también [este artículo de SQLBI](https://www.sqlbi.com/articles/hiding-measures-by-using-object-level-security-in-power-bi/), que explica en detalle este enfoque para ocultar medidas.
