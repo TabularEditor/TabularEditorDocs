@@ -1,6 +1,6 @@
 ---
 uid: drag-drop
-title: Drag and drop objects
+title: Arrastrar y soltar objetos
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,12 +9,12 @@ applies_to:
       full: true
 ---
 
-## Drag and drop objects
+## Arrastrar y soltar objetos
 
-By far the most useful feature of Tabular Editor, when working on models with many measures/columns organised in display folders. Check out the animation below:
+Con diferencia, la función más útil de Tabular Editor, al trabajar con modelos con muchas medidas y columnas organizadas en carpetas de visualización. Mira la animación a continuación:
 
 ![](https://github.com/TabularEditor/TabularEditor/blob/master/Documentation/DragDropFolders.gif)
 
-Notice how the display folder property of every single object below the folder is changed, when the entire folder is dragged. No more going over measures/columns one-by-one, to change the display folder structure. What you see is what you get.
+Fíjate en cómo cambia la propiedad de carpeta de visualización de cada objeto dentro de la carpeta cuando se arrastra la carpeta completa. Se acabó tener que revisar medidas y columnas una a una para cambiar la estructura de carpetas de visualización. Lo que ves es lo que obtienes.
 
-(This works with translations too!)
+(¡Esto también funciona con las traducciones!)
