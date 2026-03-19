@@ -1,6 +1,6 @@
 ---
 uid: importing-tables-te2
-title: Importing Tables in TE2
+title: Importación de tablas en TE2
 author: Daniel Otykier
 updated: 2020-05-03
 applies_to:
@@ -11,147 +11,147 @@ applies_to:
       partial: true
 ---
 
-# Importing Tables in Tabular Editor 2
+# Importación de tablas en Tabular Editor 2
 
-If you already have a Legacy Data Source in your model, you can right click it, and choose "Import Tables...". Tabular Editor will attempt to connect using the data provider and credentials specified in the Data Source. If successful, you should get a list of all the databases, tables and views accessible through the Data Source:
+Si ya tienes un Data source heredado en tu modelo, haz clic con el botón derecho sobre él y elige "Importar tablas...". Tabular Editor intentará conectarse mediante el proveedor de datos y las credenciales especificados en el Data source. Si la conexión se establece correctamente, deberías ver una lista de todas las bases de datos, tablas y vistas accesibles a través del Data source:
 
 ![image](https://user-images.githubusercontent.com/8976200/49701892-35ea3900-fbf2-11e8-951a-8858179426c6.png)
 
-Clicking a table or view on the left-hand side will display a preview of the data on the right. You can deselect columns that you do not want to include, although [the data import best practice](https://www.sqlbi.com/articles/data-import-best-practices-in-power-bi/) suggests to always use views, and include only columns in those views that are needed in the Tabular Model. The UI will show you the resulting SQL query. By default, Tabular Editor will import a table/view using `SELECT * FROM ...`, but if you toggle any column in the preview, the resulting query will include an explicit list of columns. To switch back to `SELECT * FROM ...`, toggle the "Select all columns" checkbox in the upper right corner.
+Al hacer clic en una tabla o vista en el lado izquierdo, se mostrará una vista previa de los datos a la derecha. Puedes desmarcar las columnas que no quieras incluir, aunque [la práctica recomendada de importación de datos](https://www.sqlbi.com/articles/data-import-best-practices-in-power-bi/) sugiere usar siempre vistas e incluir en esas vistas solo las columnas necesarias en el modelo tabular. La interfaz de usuario te mostrará la consulta SQL resultante. De forma predeterminada, Tabular Editor importará una tabla/vista usando `SELECT * FROM ...`, pero si activas o desactivas cualquier columna en la vista previa, la consulta resultante incluirá una lista explícita de columnas. Para volver a `SELECT * FROM ...`, marca la casilla "Seleccionar todas las columnas" en la esquina superior derecha.
 
-You can select multiple tables/views to import at once. When you click "Import", all selected tables/views will be imported as new tables with all columns populated from the metadata. A single partition will be created on each table, holding the resulting SQL query from the UI.
+Puedes seleccionar varias tablas/vistas para importarlas a la vez. Cuando hagas clic en "Importar", todas las tablas/vistas seleccionadas se importarán como nuevas tablas, con todas las columnas rellenadas a partir de los metadatos. Se creará una sola partición en cada tabla, que contendrá la consulta SQL resultante de la interfaz de usuario.
 
-That's it! No more going back and forth between Tabular Editor and SSDT.
+¡Listo! Se acabó ir y venir entre Tabular Editor y SSDT.
 
-## A note on Legacy vs. Structured Data Sources
+## Una nota sobre los Data sources heredados frente a los orígenes de datos estructurados
 
-As there is currently no way for Tabular Editor to infer the metadata returned from M (Power Query) expressions, this UI only supports Legacy (aka. Provider) Data Sources. If you must use Structured Data Sources, you can still use a temporary Legacy connection to import the table schema initially (assuming your data source can be accessed through SQL, OLE DB or ODBC), and then manually switch the partitions on the imported tables, to use the Structured Data Sources. If you are importing data from "exotic" data sources, such as web services, Azure Data Lake Storage, etc. schema metadata can not be imported automatically, but [there is an option for providing the metadata information through the clipboard](/Importing-Tables#power-query-data-sources).
+Como actualmente no hay forma de que Tabular Editor infiera los metadatos devueltos por las expresiones M (Power Query), esta interfaz de usuario solo admite Data sources heredados (también llamados Provider). Si necesitas usar orígenes de datos estructurados, aún puedes usar una conexión heredada temporal para importar inicialmente el esquema de la tabla (siempre que se pueda acceder a tu Data source mediante SQL, OLE DB u ODBC) y, después, cambiar manualmente las particiones de las tablas importadas para que usen los orígenes de datos estructurados. Si estás importando datos desde Data sources "poco habituales", como servicios web, Azure Data Lake Storage, etc., los metadatos del esquema no se pueden importar automáticamente, pero [hay una opción para proporcionar la información de metadatos a través del portapapeles](/Importing-Tables#power-query-data-sources).
 
-In general, though, it is recommended to always use a Legacy connection for the following types of sources:
+En general, sin embargo, se recomienda usar siempre una conexión Legacy para los siguientes tipos de orígenes:
 
-- SQL Server databases
-- Azure SQL Databases
+- Bases de datos de SQL Server
+- Bases de datos de Azure SQL
 - Azure SQL Data Warehouse
-- Azure Databricks (through ODBC)
-- Any relational OLEDB data source
-- Any relational ODBC source
+- Azure Databricks (mediante ODBC)
+- Cualquier Data source relacional OLE DB
+- Cualquier origen ODBC relacional
 
-For authentication using Azure Active Directory with MFA, please see here.
+Para la autenticación con Azure Active Directory y MFA, consulta aquí.
 
-## Importing without a pre-existing Data Source
+## Importar sin un Data source preexistente
 
-If your model does not yet contain any data sources, you can import tables by going to the "Model" menu and clicking "Import Tables...". The resulting UI looks like this:
+Si tu modelo aún no contiene ningún Data source, puedes importar tablas yendo al menú "Model" y haciendo clic en "Import Tables...". La IU resultante se ve así:
 
 ![image](https://user-images.githubusercontent.com/8976200/49702141-74cdbe00-fbf5-11e8-8a88-5bc2a0a6c80d.png)
 
-Leaving the selection at "Create a new Data Source and add it to the model" will display the Connection Dialog UI when clicking "Next". This dialog lets you specify the connection details:
+Si dejas la selección en "Create a new Data source and add it to the model", al hacer clic en "Next" se mostrará el cuadro de diálogo de conexión. Este cuadro de diálogo te permite especificar los detalles de la conexión:
 
 ![image](https://user-images.githubusercontent.com/8976200/49702167-a5adf300-fbf5-11e8-8d06-d6670ad456d4.png)
 
-When clicking "OK", a (Legacy) Data Source using the specified connection will be created in your model, and you will be taken to the import page shown above.
+Al hacer clic en "OK", se creará en tu modelo un Data source (Legacy) con la conexión especificada y se te llevará a la página de importación mostrada arriba.
 
-The next option on the list, "Use a temporary connection", will not cause a new Data Source to be added to the model. This means that you are responsible for assigning a Data Source to the partitions of the newly imported table, before deploying the model.
+La siguiente opción de la lista, "Use a temporary connection", no hará que se agregue un nuevo Data source al modelo. Esto significa que eres responsable de asignar un Data source a las particiones de la tabla recién importada antes de implementar el modelo.
 
-The last option, "Manually import metadata from another application", is used when you want to import a new table based on a list of column metadata. This is useful for Structured (Power Query) Data Sources, [see below](/Importing-Tables#power-query-data-sources).
+La última opción, "Manually import metadata from another application", se usa cuando quieres importar una nueva tabla a partir de una lista de metadatos de columnas. Esto resulta útil para Data sources estructurados (Power Query); [consulta a continuación](/Importing-Tables#power-query-data-sources).
 
-## SQL capabilities
+## Capacidades de SQL
 
-For non-SQL Server data sources (or more precisely, data sources that do not use the Native SQL Client driver), please pay attention to the two dropdown-boxes near the bottom of the screen:
+Para los Data sources que no sean de SQL Server (o, más precisamente, los Data sources que no usan el controlador Native SQL Client), presta atención a los dos menús desplegables cerca de la parte inferior de la pantalla:
 
 ![image](https://user-images.githubusercontent.com/8976200/51613859-b952b600-1f24-11e9-8fd7-7c5269aaab26.png)
 
-The "Reduce rows using"-dropdown lets you specify which row reduction clause to use, when querying the source for preview data, since the Table Import Wizard will only retrieve 200 rows of data from the source table or view. You can choose between the most common row reduction clauses, such as "TOP", "LIMIT", "FETCH FIRST", etc.
+El menú desplegable "Reduce rows using" te permite especificar qué cláusula de reducción de filas se debe usar al consultar el origen para obtener datos de vista previa, ya que el Asistente de importación de tablas solo recuperará 200 filas de datos de la tabla o vista de origen. Puedes elegir entre las cláusulas de reducción de filas más comunes, como "TOP", "LIMIT", "FETCH FIRST", etc.
 
-The "Identifier quotes"-dropdown lets you specify how object names (column, tables) should be quoted in the generated SQL statements. This applies to both the data preview, as well as the SQL statement used in the table partition query, when the table is imported to the tabular model. By default, square brackets are used, but this can be changed to other common types of identifier quotes.
+El menú desplegable "Comillas de identificador" te permite especificar cómo deben ir entrecomillados los nombres de los objetos (columnas, tablas) en las instrucciones SQL generadas. Esto se aplica tanto a la vista previa de los datos como a la sentencia SQL utilizada en la consulta de partición de la tabla cuando esta se importa en el modelo tabular. De forma predeterminada, se usan corchetes, pero puedes cambiarlo a otros tipos habituales de comillas de identificador.
 
-## Changing the source of a table
+## Cambiar el origen de una tabla
 
-Another way to bring up the import page, is to right-click on an existing table (that uses a Legacy Data Source), and choose "Select Columns...". If that table was previously imported using the UI, the import page should show up with the source table/view and imported columns pre-selected. You may add/remove columns or even choose an entirely different table to be imported in place of the table you selected in your model. Keep in mind that any columns in your table, that were deselected or no longer exists in your source table/view will be removed from your model. You can always undo operations such as this using CTRL+Z.
+Otra forma de abrir la página de importación es hacer clic con el botón derecho en una tabla existente (que use un Data source heredado) y elegir "Seleccionar columnas...". Si esa tabla se importó previamente mediante la interfaz de usuario, la página de importación debería mostrarse con la tabla/vista de origen y las columnas importadas ya preseleccionadas. Puedes agregar o quitar columnas, o incluso elegir una tabla completamente distinta para importarla en lugar de la tabla que seleccionaste en tu modelo. Ten en cuenta que cualquier columna de tu tabla que hayas desmarcado o que ya no exista en la tabla/vista de origen se eliminará de tu modelo. Siempre puedes deshacer operaciones como esta con CTRL+Z.
 
-## Refreshing Table Metadata
+## Actualizar los metadatos de la tabla
 
-As of version 2.8, Tabular Editor has a new UI feature that lets you easily check for schema drift. That is, detecting columns that had their data type changed, or were added or removed to source tables and views. This check may be invoked at the Model level (again, this only applies to Legacy Data Sources), at the Data Source level, at the Table level or at the Partition level. This is done by right-clicking the object and choosing "Refresh Table Metadata..."
+Desde la versión 2,8, Tabular Editor incorpora una nueva función en la interfaz de usuario que te permite comprobar fácilmente la deriva del esquema. Es decir, permite detectar columnas cuyo tipo de datos haya cambiado o que se hayan añadido o eliminado en las tablas y vistas de origen. Esta comprobación puede ejecutarse a nivel de modelo (de nuevo, esto solo se aplica a Legacy Data Sources), a nivel de Data source, a nivel de tabla o a nivel de partición. Para ello, haz clic con el botón derecho en el objeto y elige "Actualizar metadatos de la tabla..."
 
 ![image](https://user-images.githubusercontent.com/8976200/49702346-7e582580-fbf7-11e8-9a62-04c6963179e5.png)
 
-Changes are detected based on the "Source Column" and "Data Type" properties of all data columns on the respective tables. If any changes are detected, Tabular Editor will display the above UI, detailing the changes. You may deselect changes that you do not want to apply to your model, although keep in mind that some changes may cause processing errors (for example, source columns that do not exist in the source table/view/query).
+Los cambios se detectan en función de las propiedades "Columna de origen" y "Tipo de datos" de todas las columnas de datos en las tablas correspondientes. Si se detecta algún cambio, Tabular Editor mostrará la interfaz anterior, detallando los cambios. Puedes desmarcar los cambios que no quieras aplicar al modelo, aunque ten en cuenta que algunos cambios pueden provocar errores de procesamiento (por ejemplo, columnas de origen que no existen en la tabla/vista/consulta de origen).
 
-This mechanism (as well as the Import Table UI) uses the FormatOnly-flag, when querying the metadata from the source. This means that you can have table partitions that use Stored Procedures. The FormatOnly-flag ensures that the Stored Proc is never executed directly. Instead, static analysis is performed by the server, in order to return only metadata describing the result set that would be returned from the Stored Proc upon execution. Depending on your RDBMS, there may be some limitations of the FormatOnly-flag when used with Stored Procedures. For more information on this topic when using SQL Server as a data source, please see [this article](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-describe-first-result-set-transact-sql?view=sql-server-2017#remarks).
+Este mecanismo (al igual que la interfaz de Importar tabla) usa el indicador FormatOnly al consultar los metadatos del origen. Esto significa que puedes tener particiones de tabla que usen procedimientos almacenados. El indicador FormatOnly-flag garantiza que el procedimiento almacenado nunca se ejecute directamente. En su lugar, el servidor realiza un análisis estático para devolver solo los metadatos que describen el conjunto de resultados que devolvería el procedimiento almacenado al ejecutarse. Según el RDBMS que utilices, el indicador FormatOnly puede tener algunas limitaciones cuando se usa con procedimientos almacenados. Para más información sobre este tema al usar SQL Server como Data source, consulta [este artículo](https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-describe-first-result-set-transact-sql?view=sql-server-2017#remarks).
 
-### CLI support
+### Soporte para la CLI
 
-You can perform a schema check at the model level from the command line by using the `-SC` flag. Note that the schema check, when executed through the CLI, will only report mapping issues. It will not make any changes to your model. This is useful if you're using Tabular Editor within CI/CD pipelines, as mapping issues could potentially cause problems after deploying your model to a test/production environment.
+Puedes realizar una comprobación de esquema a nivel de modelo desde la línea de comandos con la opción `-SC`. Ten en cuenta que la comprobación del esquema, cuando se ejecuta a través de la CLI, solo generará un Report de problemas de asignación. No realizará ningún cambio en tu modelo. Esto resulta útil si usas Tabular Editor en canalizaciones de CI/CD, ya que los problemas de asignación podrían ocasionar problemas después de desplegar tu modelo en un entorno de prueba/producción.
 
-### Ignoring objects
+### Omitir objetos
 
-As of Tabular Editor 2.9.8, you can exclude objects from schema checks / metadata refresh. This is controlled by setting an annotation on the objects that you wish to leave out. As the annotation name, use the codes listed below. You can leave the annotation value blank or set it to "1", "true" or "yes". Setting the annotation value to "0", "false" or "no" will effectively disable the annotation, as if it didn't exist:
+A partir de Tabular Editor 2.9.8, puedes excluir objetos de las comprobaciones de esquema o de la actualización de metadatos. Esto se controla estableciendo una anotación en los objetos que quieras omitir. Como nombre de la anotación, usa los códigos que se indican a continuación. Puedes dejar el valor de la anotación en blanco o establecerlo en "1", "true" o "yes". Si estableces el valor de la anotación en "0", "false" o "no", la anotación quedará deshabilitada en la práctica, como si no existiera:
 
-**Table flags:**
+**Banderas de tabla:**
 
-- `TabularEditor_SkipSchemaCheck`: Causes Tabular Editor to completely skip a schema check on this table.
-- `TabularEditor_IgnoreSourceColumnAdded`: Tabular Editor will ignore additional columns that are not mapped to any table columns on this table.
-- `TabularEditor_IgnoreDataTypeChange`: Tabular Editor will ignore mismatched data types on any column of the table.
-- `TabularEditor_IgnoreMissingSourceColumn`: Tabular Editor will ignore imported columns where the source column apparently does not exist in the source.
+- `TabularEditor_SkipSchemaCheck`: Hace que Tabular Editor omita por completo la comprobación de esquema en esta tabla.
+- `TabularEditor_IgnoreSourceColumnAdded`: Tabular Editor ignorará las columnas adicionales que no estén asignadas a ninguna columna de la tabla.
+- `TabularEditor_IgnoreDataTypeChange`: Tabular Editor ignorará los tipos de datos que no coincidan en cualquier columna de la tabla.
+- `TabularEditor_IgnoreMissingSourceColumn`: Tabular Editor ignorará las columnas importadas cuya columna de origen aparentemente no exista en el origen.
 
-**Column flags:**
+**Banderas de columna:**
 
-- `TabularEditor_IgnoreDataTypeChange`: Tabular Editor will ignore mismatched data type on this specific column.
-- `TabularEditor_IgnoreMissingSourceColumn`: Tabular Editor will ignore an apparently missing source column for this specific column.
+- `TabularEditor_IgnoreDataTypeChange`: Tabular Editor ignorará el tipo de datos que no coincida en esta columna concreta.
+- `TabularEditor_IgnoreMissingSourceColumn`: Tabular Editor ignorará la ausencia aparente de la columna de origen para esta columna concreta.
 
-The flags impact schema checking through both the UI and the CLI.
+Las banderas afectan a la comprobación de esquema tanto en la UI como en la CLI.
 
-### Treating warnings as errors
+### Tratar las advertencias como errores
 
-By default, the CLI will report an error when a partition query could not be executed, or when the imported table contains a column that does not match any column in the source query. The CLI will report a warning when a column's data type does not match the column in the source query, or if the source query contains columns that are not mapped to any columns in the imported table. The CLI will also report a warning when source queries of different partitions on the same table, do not return the same columns.
+De forma predeterminada, la CLI emitirá un Report de error cuando no se haya podido ejecutar una consulta de partición o cuando la tabla importada contenga una columna que no coincida con ninguna columna de la consulta de origen. La CLI generará un Report de advertencia cuando el tipo de datos de una columna no coincida con el de la columna en la consulta de origen, o si la consulta de origen contiene columnas que no estén asignadas a ninguna columna de la tabla importada. La CLI también generará un Report de advertencia cuando las consultas de origen de distintas particiones de la misma tabla no devuelvan las mismas columnas.
 
-Starting with Tabular Editor version 2.14.1, you can change the behaviour of the CLI such that all warnings as listed above are reported as errors. To do this, add the following annotation at the **model** level:
+A partir de la versión 2.14.1 de Tabular Editor, puedes cambiar el comportamiento de la CLI para que todas las advertencias indicadas anteriormente aparezcan en el Report como errores. Para hacerlo, añade la siguiente anotación a nivel de **modelo**:
 
-- `TabularEditor_SchemaCheckNoWarnings`: Causes Tabular Editor to treat all schema check warnings as errors.
+- `TabularEditor_SchemaCheckNoWarnings`: Hace que Tabular Editor trate todas las advertencias de comprobación de esquema como errores.
 
-## Azure Active Directory with MFA
+## Azure Active Directory con MFA
 
-If you want to import tables from an Azure SQL Database or Azure Synapse SQL pool, you will likely need Azure Active Directory multi-factor authentication. Unfortunately, this is not supported by the SQL Native Client provider used in .NET Framework. Instead, use the MSOLEDBSQL provider (which also has the benefit that it is generally faster than the native client, when Analysis Services reads data from the table). Make sure you have the [latest (x86) version](https://docs.microsoft.com/en-us/sql/connect/oledb/download-oledb-driver-for-sql-server?view=sql-server-ver15) of this driver installed, to make this work on your local machine.
+Si quieres importar tablas desde una base de datos Azure SQL o desde un pool de SQL de Azure Synapse, probablemente necesites la autenticación multifactor de Azure Active Directory. Lamentablemente, el proveedor SQL Native Client usado en .NET Framework no admite esto. En su lugar, usa el proveedor MSOLEDBSQL (con la ventaja adicional de que, por lo general, es más rápido que el cliente nativo cuando Analysis Services lee datos de la tabla). Asegúrate de tener instalada la [última versión (x86)](https://docs.microsoft.com/en-us/sql/connect/oledb/download-oledb-driver-for-sql-server?view=sql-server-ver15) de este controlador para que funcione en tu equipo local.
 
-Here are step by step instructions to set up the data source to work with MFA:
+Aquí tienes instrucciones paso a paso para configurar el Data source y que funcione con MFA:
 
-1. Create a new legacy data source and add it to your model. Model > New Data Source (Legacy)
-2. Specify `System.Data.OleDb` as the Provider property and use a connection string that looks as follows, substituting the correct server, database and user names:
+1. Crea un nuevo Data source heredado y agrégalo a tu modelo. Model > New Data Source (Legacy)
+2. Especifica `System.Data.OleDb` como valor de la propiedad Provider y utiliza una cadena de conexión como la siguiente, sustituyendo los nombres correctos del servidor, la base de datos y el usuario:
 
-### For Synapse SQL pools:
+### Para pools de SQL de Synapse:
 
 ```
 Provider=MSOLEDBSQL;Data Source=<synapse workspace name>-ondemand.sql.azuresynapse.net;User ID=daniel@adventureworks.com;Database=<database name>;Authentication=ActiveDirectoryInteractive
 ```
 
-### For Azure SQL databases:
+### Para bases de datos de Azure SQL:
 
 ```
 Provider=MSOLEDBSQL;Data Source=<sql server name>.database.windows.net;User ID=daniel@adventureworks.com;Database=<database name>;Authentication=ActiveDirectoryInteractive
 ```
 
-3. To import tables from this source, right-click on the data source and choose "Import Tables...", the Import Table Wizard UI should appear showing a list of tables/views from the source. Note, that for Synapse SQL pools, you may have to specify "TOP (without NOLOCK)" as a row clause, in order for the data preview to work.
-4. When deploying your model to Analysis Services, you will most likely need to specify other credentials, such as a Service Principal application ID and secret or a SQL account, in order for Analysis Services to authenticate itself against the source when refreshing table data. This can be specified using TMSL or SSMS post-deployment, or you can set this up as [part of your CI/CD deployment pipeline](https://tabulareditor.com/blog/youre-deploying-it-wrong-as-edition-part-5#creating-your-first-release-pipeline).
+3. Para importar tablas desde este origen, haz clic con el botón derecho en el Data source y elige "Import Tables...". Debería aparecer la interfaz del Import Table Wizard, mostrando una lista de tablas/vistas del origen. Ten en cuenta que, para pools de SQL de Synapse, puede que tengas que especificar "TOP (without NOLOCK)" como cláusula de filas para que la vista previa de los datos funcione.
+4. Al implementar tu modelo en Analysis Services, lo más probable es que necesites especificar otras credenciales, como el ID de aplicación y el secreto de una entidad de servicio (Service Principal) o una cuenta de SQL, para que Analysis Services pueda autenticarse frente al origen al actualizar los datos de la tabla. Puedes especificarlo mediante TMSL o SSMS después de la implementación, o bien configurarlo como [parte de tu canalización de implementación de CI/CD](https://tabulareditor.com/blog/youre-deploying-it-wrong-as-edition-part-5#creating-your-first-release-pipeline).
 
-## Manually importing schema/metadata
+## Importar manualmente el esquema y los metadatos
 
-If you're using a data source not supported by the Import Tables Wizard, you have the option of manually importing metadata. This option provides a UI where you can enter or paste in a table schema on the left hand side, which will be automatically parsed for column name and data type information. Alternatively, you can manually type each column name on the right hand side and choose a data type in the drop down. Either way, this is faster than manually creating a table and adding individual data columns through the main UI. When you're done, hit "Import!", adjust the table name and partition expression.
+Si estás usando un Data source que no es compatible con el Import Tables Wizard, tienes la opción de importar los metadatos manualmente. Esta opción ofrece una interfaz en la que puedes escribir o pegar un esquema de tabla en el lado izquierdo, que se analizará automáticamente para obtener el nombre de las columnas y la información de tipo de datos. Como alternativa, puedes escribir manualmente cada nombre de columna en el lado derecho y elegir un tipo de datos en la lista desplegable. En cualquier caso, es más rápido que crear una tabla manualmente y agregar columnas de datos individuales desde la interfaz principal. Cuando termines, haz clic en "Import!", y ajusta el nombre de la tabla y la expresión de partición.
 
-When parsing the text on the left hand side, Tabular Editor searches for certain keywords, in order to determine how the information is structured. It's pretty liberal in the way it interprets data, so you can, for example, paste in a list of columns from a CREATE TABLE SQL script, or the output of the Power Query `Table.Schema(...)` function as described below. The only requirements is that each line of text represents one column of source data.
+Al analizar el texto del lado izquierdo, Tabular Editor busca ciertas palabras clave para determinar cómo está estructurada la información. Es bastante tolerante al interpretar los datos; por ejemplo, puedes pegar una lista de columnas de un script SQL CREATE TABLE o la salida de la función de Power Query `Table.Schema(...)`, tal como se describe a continuación. El único requisito es que cada línea de texto represente una columna de los datos de origen.
 
 ![image](https://user-images.githubusercontent.com/8976200/70419758-6f07f400-1a66-11ea-838d-9a587c8021ca.png)
 
-## Power Query data sources
+## Data sources de Power Query
 
-Since there is no officially supported way to execute or validate a Power Query/M expression, Tabular Editor only has limited support for Power Query data sources. As of 2.9.0, you may use the "Manually import metadata from another application"-option of the Import Table Wizard, as described above, to import a schema from a Power Query query in Excel or Power BI Desktop. The workflow is the following:
+Como no existe una forma oficialmente admitida de ejecutar o validar una expresión de Power Query/M, Tabular Editor solo ofrece compatibilidad limitada con los Data sources de Power Query. A partir de la versión 2.9.0, puedes usar la opción "Importar metadatos manualmente desde otra aplicación" del Asistente para importar tablas, como se describió anteriormente, para importar un esquema desde una consulta de Power Query en Excel o Power BI Desktop. El flujo de trabajo es el siguiente:
 
-- First, make sure your model contains a Power Query Data Source. Right-click Data Sources > New Data Source (Power Query). If you're going to load data from a SQL Server, specify "tds" as the protocol and fill out the Database, Server and AuthenticationKind properties.
+- En primer lugar, asegúrate de que tu modelo contiene un Data source de Power Query. Haz clic con el botón derecho en Data Sources > New Data Source (Power Query). Si vas a cargar datos desde SQL Server, especifica "tds" como protocolo y completa las propiedades Database, Server y AuthenticationKind.
   ![image](https://user-images.githubusercontent.com/8976200/70418811-6dd5c780-1a64-11ea-8332-d074c6b2d5c2.png)
-- For other types of data sources, it may be easier to create the initial model and first few tables in SSDT, to figure out how the Data Source should be configured, and then use the technique below only when adding additional tables.
-- Use Power Query within Excel or Power BI Desktop to connect to your source data and apply any transformations needed.
-- Using Power Query's Advanced Editor, add a step that uses the `Table.Schema(...)` [M function](https://docs.microsoft.com/en-us/powerquery-m/table-schema) on the previous output:
+- Para otros tipos de Data sources, puede resultarte más fácil crear el modelo inicial y las primeras tablas en SSDT para averiguar cómo debe configurarse el Data source, y luego usar la técnica que se describe a continuación solo al añadir tablas adicionales.
+- Usa Power Query en Excel o Power BI Desktop para conectarte a tus datos de origen y aplicar las transformaciones necesarias.
+- En el Editor avanzado de Power Query, añade un paso que use la [función M](https://docs.microsoft.com/en-us/powerquery-m/table-schema) `Table.Schema(...)` sobre el resultado anterior:
   ![image](https://user-images.githubusercontent.com/8976200/70416018-5562ae80-1a5e-11ea-8962-529304ce83f0.png)
-- Select the full output preview, copy it into the clipboard (CTRL+A, CTRL+C) and paste it into the schema/metadata textbox in the Import Tables Wizard:
+- Selecciona toda la vista previa de la salida, cópiala al portapapeles (CTRL+A, CTRL+C) y pégala en el cuadro de texto de esquema/metadatos del Asistente para importar tablas:
   ![image](https://user-images.githubusercontent.com/8976200/70416817-2e0ce100-1a60-11ea-9e2b-430cecf88d0a.png)
-- Click "Import!" and provide a proper name for your table.
-- Lastly, paste the original M expression you used in Excel/Power BI, from before you modified it with the `Table.Schema(...)` function, into the partition on the newly created table. Modify the M expression to point to the source you specified in the first step:
+- Haz clic en "Import!" y ponle un nombre adecuado a tu tabla.
+- Por último, pega en la partición de la tabla recién creada la expresión M original que usaste en Excel/Power BI, la que tenías antes de modificarla con la función `Table.Schema(...)`. Modifica la expresión M para que apunte al origen que especificaste en el primer paso:
   ![image](https://user-images.githubusercontent.com/8976200/70418985-dae95d00-1a64-11ea-8bfb-8dda16c33742.png)
