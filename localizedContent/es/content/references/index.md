@@ -1,33 +1,33 @@
-# References
+# Referencias
 
-This section contains reference materials for Tabular Editor.
+Esta sección contiene materiales de referencia para Tabular Editor.
 
-## In this section
+## En esta sección
 
-### Downloads and Releases
+### Descargas y versiones
 
-- @downloads - Download links and installation packages for Tabular Editor 3
-- @release-history - Complete version history with download links
-- @whats-new - Latest features and updates
+- @downloads: enlaces de descarga y paquetes de instalación para Tabular Editor 3
+- @release-history: historial completo de versiones con enlaces de descarga
+- @whats-new: novedades y actualizaciones más recientes
 
-### Technical Reference
+### Referencia técnica
 
-- @faq - Frequently asked questions and answers
-- @preferences - Application settings and configuration options
-- @policies - The use of group policies
-- @shortcuts3 - Keyboard shortcuts reference with Tabular Editor 3
-- @shortcuts2 - Keyboard shortcuts reference with Tabular Editor 2
-- @user-options - Tabular Model User Options (.tmuo) File
+- @faq: preguntas frecuentes y respuestas
+- @preferences: preferencias de la aplicación y opciones de configuración
+- @policies: el uso de directivas de grupo
+- @shortcuts3: referencia de atajos de teclado para Tabular Editor 3
+- @shortcuts2: referencia de atajos de teclado para Tabular Editor 2
+- @user-options: archivo de opciones de usuario del modelo tabular (.tmuo)
 
-### Development and Planning
+### Desarrollo y planificación
 
-- @roadmap - Product roadmap and future plans
+- @roadmap: hoja de ruta del producto y planes futuros
 
-### Deprecated Features
+### Funciones obsoletas
 
-- @formatdax - Information about deprecated DAX formatting functionality
+- @formatdax: información sobre la funcionalidad de formato de DAX obsoleta
 
 ---
 
-_Use this section to find detailed reference information, downloads, and technical documentation._
+_Utiliza esta sección para encontrar información de referencia detallada, descargas y documentación técnica._
 
