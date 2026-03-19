@@ -4,7 +4,6 @@ title: Keyboard shortcuts Tabular Editor 3
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
-applies_to:
   products:
     - product: Tabular Editor 2
       none: true

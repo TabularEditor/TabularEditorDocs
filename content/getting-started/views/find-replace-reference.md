@@ -17,4 +17,4 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-[!include[using-bpa](../../features/views/find-replace.md)]
+[!include[find-replace](../../features/views/find-replace.md)]
