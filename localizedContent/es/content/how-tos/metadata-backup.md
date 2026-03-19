@@ -1,6 +1,6 @@
 ---
 uid: metadata-backup
-title: Metadata Backup
+title: Copia de seguridad de metadatos
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,12 +9,12 @@ applies_to:
       full: true
 ---
 
-## Metadata Backup
+## Copia de seguridad de metadatos
 
-If you wish, Tabular Editor can automatically save a backup copy of the existing model metadata, prior to each save (when connected to an existing database) or deployment. This is useful if you're not using a version control system, but still need to rollback to a previous version of your model.
+Si lo deseas, Tabular Editor puede guardar automáticamente una copia de seguridad de los metadatos del modelo existente antes de cada guardado (cuando estés conectado a una base de datos existente) o despliegue. Esto resulta útil si no utilizas un sistema de control de versiones, pero aun así necesitas revertir a una versión anterior de tu modelo.
 
-To enable this setting, go to "File" > "Preferences", enable the checkbox and choose a folder to place the metadata backups:
+Para habilitar esta configuración, ve a "Archivo" > "Preferencias", activa la casilla y elige una carpeta donde guardar las copias de seguridad de metadatos:
 
 <img src="https://user-images.githubusercontent.com/8976200/91543926-3de69100-e91f-11ea-88de-3def2b97eae0.png" width="300" />
 
-If the setting is enabled, a compressed (zipped) version of the existing model metadata will be saved to this location whenever you use the Deployment Wizard, or when you click the "Save" button while connected to a (workspace) database.
+Si la configuración está habilitada, se guardará en esta ubicación una versión comprimida (zip) de los metadatos del modelo existente cada vez que uses el Asistente de implementación o cuando hagas clic en el botón "Guardar" mientras estés conectado a una base de datos (workspace).
