@@ -1,6 +1,6 @@
 ---
 uid: import-export-translations
-title: Import/Export Translations
+title: Importar/exportar traducciones
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,6 +9,6 @@ applies_to:
       full: true
 ---
 
-## Import/Export Translations
+## Importar/exportar traducciones
 
-Select one or more cultures in the Explorer Tree, right-click and choose "Export Translations..." to generate a .json file that can be imported later in either Tabular Editor or Visual Studio. Choose "Import Translations..." to import a corresponding .json file. You can choose whether to overwrite existing translations. If you don't, translations defined in the .json file will only be applied to objects that do not already have a translation for the given culture.
+Seleccione una o varias configuraciones regionales en el árbol del Explorador, haga clic con el botón derecho y elija "Exportar traducciones..." para generar un archivo .json que pueda importar más adelante en Tabular Editor o en Visual Studio. Elija "Importar traducciones..." para importar el archivo .json correspondiente. Puede elegir si desea sobrescribir las traducciones existentes. Si no lo hace, las traducciones definidas en el archivo .json solo se aplicarán a los objetos que aún no tengan una traducción para la configuración regional indicada.
