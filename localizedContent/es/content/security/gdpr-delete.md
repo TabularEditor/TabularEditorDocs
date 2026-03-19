@@ -1,8 +1,8 @@
 ---
 uid: gdpr-delete
-title: GDPR Deletion
+title: Eliminación conforme al RGPD
 ---
 
-# User Data Deletion
+# Eliminación de datos de usuario
 
-In order to request a complete data deletion of all user records, please send an e-mail to gdpr@tabulareditor.com.
+Para solicitar la eliminación completa de todos los registros de usuario, por favor, envíe un correo electrónico a gdpr@tabulareditor.com.
