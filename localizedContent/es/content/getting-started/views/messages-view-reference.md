@@ -1,6 +1,6 @@
 ---
 uid: messages-view-reference
-title: Messages view
+title: Vista de mensajes
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
