@@ -1,30 +1,30 @@
 ---
-uid: perspectives-translations
-title: Perspectives and Translations
+uid: perspectivas-traducciones
+title: Perspectivas y traducciones
 applies_to:
   products:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
       full: true
-      note: Includes dedicated Perspective and Translation Editors
+      note: Incluye editores dedicados para perspectivas y traducciones
 ---
 
-## Working with Perspectives and Translations
+## Trabajar con perspectivas y traducciones
 
-You can add/edit existing perspectives and translations (cultures), by clicking the Model node in the Explorer Tree, and locating the relevant properties at the bottom of the property grid. Alternatively, when your Explorer Tree is [showing all object types](../features/hierarchical-display.md), you can view and edit perspectives, cultures and roles directly in the tree.
+Puedes agregar o editar perspectivas y traducciones (configuraciones regionales) existentes haciendo clic en el nodo Modelo del árbol del Explorador y buscando las propiedades correspondientes en la parte inferior de la cuadrícula de propiedades. Como alternativa, cuando el árbol del Explorador [muestre todos los tipos de objeto](../features/hierarchical-display.md), puedes ver y editar perspectivas, configuraciones regionales y roles directamente en el árbol.
 
 ![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/RolesPerspectivesTranslations.png)
 
-You can duplicate an existing perspective, role or translation by opening the right-click menu and choose "Duplicate". This will create an exact copy of the object, which you can then modify to your needs.
+Puedes duplicar una perspectiva, un rol o una traducción existente abriendo el menú con el botón derecho y seleccionando "Duplicar". Esto creará una copia exacta del objeto, que después puedes modificar según tus necesidades.
 
-To view perspectives and/or translations "in action", use the two dropdown lists in the toolbar near the top of the screen. Choosing a perspective will hide all objects that are not included in that perspective, while choosing a translation will show all objects in the tree using the translated names and display folders. When hitting F2 to change the names of objects/display folders or when dragging objects around in the tree, the changes will only apply to the selected translation.
+Para ver las perspectivas y/o traducciones "en acción", usa las dos listas desplegables de la barra de herramientas, en la parte superior de la pantalla. Al elegir una perspectiva, se ocultarán todos los objetos que no estén incluidos en esa perspectiva, mientras que al elegir una traducción se mostrarán todos los objetos del árbol usando los nombres traducidos y las carpetas de visualización. Al pulsar F2 para cambiar los nombres de los objetos o las carpetas de visualización, o al arrastrar objetos dentro del árbol, los cambios solo se aplicarán a la traducción seleccionada.
 
-## Perspectives/Translations within object context
+## Perspectivas/traducciones en el contexto de un objeto
 
-When one or more objects are selected in the tree, you will find 4 special property collections within the Property Grid:
+Cuando se seleccionen uno o más objetos en el árbol, encontrarás 4 colecciones de propiedades especiales en la cuadrícula de propiedades:
 
-- **Captions**, **Descriptions** and **Display Folders** shows a list of all cultures in the model, with the translated names, descriptions and display folders respectively of the selected objects for each culture.
-- **Perspectives** shows a list of all perspectives in the model, with an indication of whether or nor the selected objects belong to each perspective.
+- **Títulos**, **Descripciones** y **Carpetas de visualización** muestran una lista de todas las configuraciones regionales del modelo y, para cada configuración regional, los nombres, descripciones y carpetas de visualización traducidos de los objetos seleccionados, respectivamente.
+- **Perspectivas** muestra una lista de todas las perspectivas del modelo, indicando si los objetos seleccionados pertenecen o no a cada perspectiva.
 
-You can use these collections in the Property Grid to change the translations and perspective inclusions for one or more objects at a time.
+Puedes usar estas colecciones en la cuadrícula de propiedades para cambiar las traducciones y la pertenencia a perspectivas de uno o más objetos a la vez.
