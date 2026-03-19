@@ -1,7 +1,7 @@
-## Deserialize Metric View for these code samples
+## Deserializar Metric View para estos ejemplos de código
 
-This how-to uses a sample e-commerce Metric View representing sales data with three dimension tables (product, customer, date) joined to a fact table (orders).
-Run the snippet below first, if you'd like to follow along with the code in the rest of this how-to
+Esta guía paso a paso usa una Metric View de ejemplo de comercio electrónico que representa datos de ventas, con tres tablas de dimensiones (producto, cliente y fecha) unidas a una tabla de hechos (pedidos).
+Ejecuta primero el siguiente fragmento si quieres seguir el código en el resto de esta guía
 
 ```csharp
 SemanticBridge.MetricView.Deserialize("""
