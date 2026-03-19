@@ -1,6 +1,6 @@
 ---
 uid: incremental-refresh-workspace-mode
-title: Using Workspace Mode on a Model with Incremental Refresh
+title: 在启用了增量刷新的模型中使用工作区模式
 author: Kurt Buhler
 updated: 2023-01-09
 applies_to:
@@ -8,48 +8,48 @@ applies_to:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
-      since: 3.4.2 and earlier
+      since: 3.4.2 及更早版本
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Workspace mode and incremental refresh
+# 工作区模式与增量刷新
 
 > [!IMPORTANT]
-> This article only applies to versions 3.4.2 and earlier of Tabular Editor.
-> Since the 3.5.0 update, _Workspace Mode_ will not overwrite deployed Refresh Policy partitions from scheduled refreshes.
-> Refresh policy partitions will also not be serialized in source control. You can change this setting in _'Tools > Preferences... > Save-to-Folder'_.
+> 这篇文章只适用于 Tabular Editor 3.4.2 及更早版本。
+> 自 3.5.0 更新起，_工作区模式_ 不会覆盖通过计划刷新部署的刷新策略分区。
+> 刷新策略分区也不会被序列化并纳入源代码管理。 你可以在 _'Tools > 偏好设置…… > Save-to-Folder'_. 中更改此设置。
 
 ---
 
-![Incremental Refresh Workspace Mode Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-workspace-mode.png)
+![增量刷新工作区模式 Visual 摘要](~/content/assets/images/tutorials/incremental-refresh-workspace-mode.png)
 
 ---
 
-Incremental Refresh creates new partitions upon the first scheduled refresh in a day. As a result, any local metadata (i.e. `.bim` or `database.json`) will be out-of-sync with the remote model metadata after the refresh. As a result, **when working with a model that has tables configured with Incremental Refresh, _Workspace Mode_ is not recommended**.
+增量刷新会在一天中的第一次计划刷新时创建新的分区。 因此，刷新后，任何本地元数据（即 `.bim` 或 `Database.json`）都会与远程模型元数据不同步。 因此，**在处理表已配置增量刷新的模型时，不建议使用 _工作区模式_**。
 
 > [!IMPORTANT]
-> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services, custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> 在 Tabular Editor 3 中设置增量刷新仅限于托管在 Power BI Dataset 服务中的数据集。 对于 Analysis Services，需要自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ---
 
-### Workspace Mode is not Recommended
+### 不建议使用工作区模式
 
-The reason is because _Workspace Mode_ will overwrite the remote model metadata with local metadata files; any out-of-sync changes (like to Policy Range partitions) will be lost. When working with _Workspace Mode_ on these models, you would need to _Apply refresh policy_ for tables using incremental refresh before saving changes every day.
+原因在于：_工作区模式_ 会用本地元数据文件覆盖远程模型元数据；任何不同步的更改（例如对策略范围分区的更改）都会丢失。 在这些模型上使用 _工作区模式_ 时，你每天在保存更改之前，都需要对使用增量刷新的表执行 _应用刷新策略_。
 
-![Workspace mode can get out of sync with local metadata.](~/content/assets/images/tutorials/incremental-refresh-workspace-mode-out-of-sync.png)
+![工作区模式可能会与本地元数据不同步。](~/content/assets/images/tutorials/incremental-refresh-workspace-mode-out-of-sync.png)
 
-### Recommendation: Develop & Deploy from Local Metadata
+### 建议：基于本地元数据进行开发和部署
 
-**Instead, it is recommended to develop the model from the local metadata files.** Changes can be deployed excluding partitions governed by a Refresh Policy, so there is no risk of overwriting the policies created by Power BI. A second read/refresh instance of Tabular Editor can be connected to the remote model for testing purposes.
+**相反，建议基于本地元数据文件来开发模型。** 部署更改时可以排除受刷新策略管控的分区，因此不会有覆盖 Power BI 所创建策略的风险。 可启动第二个 Tabular Editor 读取/刷新实例，并连接到远程模型用于测试。
 
-To deploy the model, go _Model > Deploy..._ which opens the Deployment Wizard. Here you can select whether you want to include partitions governed by Incremental Refresh policies:
+要部署模型，请转到 _Model > Deploy..._，这将打开 Deployment Wizard。 在这里，你可以选择是否包含受增量刷新刷新策略控制的分区：
 
-![Deploy partitions, avoiding partitions with refresh policies.](~/content/assets/images/tutorials/incremental-refresh-deploy-partitions.png)
+![部署分区，同时避开带有刷新策略的分区。](~/content/assets/images/tutorials/incremental-refresh-deploy-partitions.png)
 
-By deploying the model without these Policy Range partitions, you are mitigating any potential impact due to out-of-sync incremental refresh partitions between the metadata and remote model.
+部署模型时不包含这些 Policy Range 分区，可降低因元数据与远程模型之间的增量刷新分区不同步而带来的潜在影响。
