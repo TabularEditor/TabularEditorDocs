@@ -1,6 +1,6 @@
 ---
 uid: new-as-model
-title: Create an Analysis Services Model
+title: Crear un modelo de Analysis Services
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:
@@ -13,63 +13,63 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Limited to SQL Server Standard Edition"
+          note: "Limitado a SQL Server Standard Edition"
         - edition: Enterprise
           full: true
 ---
 
-# (Tutorial) Creating your first Analysis Services Model
+# (Tutorial) Cómo crear tu primer modelo de Analysis Services
 
-This page walks you through the process of creating a new Analysis Services tabular model from scratch using Tabular Editor 3.
-
-> [!NOTE]
-> Tabular Editor 3 Business Edition is limited to [SQL Server Standard Edition](https://docs.microsoft.com/en-us/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) and [Azure Analysis Services Basic Tier](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#basic-tier). Note that certain modeling features are not supported at these tiers.
-
-##### Creating a new model
-
-- From the File menu, choose New > Model... or hit `CTRL+N`
-
-![New model](https://user-images.githubusercontent.com/8976200/116813646-02a6fc80-ab55-11eb-89b0-8909b768ce7e.png)
-
-- Provide a name for your model or use the default value. Then, choose the compatibility level depending on which version of Analysis Services you are targeting. Your options are the following:
-  - 1200 (Works with SQL Server 2016 or newer, and Azure Analysis Services)
-  - 1400 (Works with SQL Server 2017 or newer, and Azure Analysis Services)
-  - 1500 (Works with SQL Server 2019 or Azure Analysis Services)
-  - 1600 (Works with SQL Server 2022 or Azure Analysis Services)
-  - 1700 (Works with SQL Server 2025 or Azure Analysis Services)
-
-- For the best development experience, check the "Use workspace database" option. This requires that you have an instance of Analysis Services available on which your workspace database will be deployed. This could be a local or a remote instance of SQL Server Analysis Services or it could be an instance of Azure Analysis Services. When you click OK, you will be prompted to enter the connection string for the Analysis Services instance in which you want the workspace database created.
-
-  [Learn more about workspace databases](xref:workspace-mode).
+En esta página te guiamos paso a paso por el proceso de crear desde cero un nuevo modelo tabular de Analysis Services con Tabular Editor 3.
 
 > [!NOTE]
-> With a workspace database, you can validate Power Query (M expressions) and import table schema from Power Query expressions. You can also refresh and query data in the workspace database, making it easier to debug and test your DAX expressions.
+> La Edición Business de Tabular Editor 3 se limita a la [edición Standard de SQL Server](https://docs.microsoft.com/en-us/analysis-services/analysis-services-features-supported-by-the-editions-of-sql-server-2016?view=asallproducts-allversions#tabular-models) y al [nivel Basic de Azure Analysis Services](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#basic-tier). Ten en cuenta que algunas características de modelado no se admiten en estos niveles.
 
-Once your model is created, the next step is to add a data source and some tables.
+##### Crear un nuevo modelo
 
-#### Adding a data source and tables
+- En el menú Archivo, elige Nuevo > Modelo... o pulsa `CTRL+N`
 
-Before you can import data to your tabular model, you have to set up one or more data sources. Locate the TOM Explorer, right-click on the "Data Sources" folder and choose "Create". For a model that uses compatibility level 1400 or higher, we have two options: Legacy and Power Query data sources. To learn more about the differences between these two types of data sources, [consult the Microsoft Analysis Services blog](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
+![Nuevo modelo](https://user-images.githubusercontent.com/8976200/116813646-02a6fc80-ab55-11eb-89b0-8909b768ce7e.png)
 
-![Add data source](https://user-images.githubusercontent.com/8976200/124598010-72db4280-de64-11eb-818a-e5793f061185.png)
+- Proporciona un nombre para tu modelo o usa el valor predeterminado. Luego, elige el nivel de compatibilidad en función de la versión de Analysis Services a la que apuntas. Tus opciones son las siguientes:
+  - 1200 (Funciona con SQL Server 2016 o posterior y con Azure Analysis Services)
+  - 1400 (Funciona con SQL Server 2017 o posterior y con Azure Analysis Services)
+  - 1500 (Funciona con SQL Server 2019 o Azure Analysis Services)
+  - 1600 (Funciona con SQL Server 2022 o Azure Analysis Services)
+  - 1700 (Funciona con SQL Server 2025 o Azure Analysis Services)
 
-In this example, we will create a Power Query data source, which we will use to import a few tables from a SQL Server relational database. Once the data source is created, hit F2 to rename it and configure the data source using the Property Grid as seen in the screenshot below:
+- Para obtener la mejor experiencia de desarrollo, selecciona la opción "Usar base de datos del Workspace". Esto requiere que tengas disponible una instancia de Analysis Services en la que se implementará la base de datos del Workspace. Puede ser una instancia local o remota de SQL Server Analysis Services, o una instancia de Azure Analysis Services. Al hacer clic en Aceptar, se te solicitará que introduzcas la cadena de conexión de la instancia de Analysis Services en la que quieres que se cree la base de datos del Workspace.
 
-![Set data source properties](https://user-images.githubusercontent.com/8976200/124599856-71ab1500-de66-11eb-8ede-3a6272872734.png)
+  [Más información sobre las bases de datos de Workspace](xref:workspace-mode).
 
-In our example, we set the following properties:
+> [!NOTE]
+> Con una base de datos de Workspace, puedes validar Power Query (expresiones M) e importar el esquema de tablas a partir de expresiones de Power Query. También puedes actualizar y consultar datos en la base de datos de Workspace, lo que facilita la depuración y las pruebas de tus expresiones DAX.
 
-| Property           | Value                  |
+Una vez creado el modelo, el siguiente paso es agregar un Data source y algunas tablas.
+
+#### Agregar un Data source y tablas
+
+Antes de poder importar datos a tu modelo tabular, tienes que configurar uno o varios Data sources. Ubica el Explorador TOM, haz clic con el botón derecho en la carpeta "Data sources" y elige "Crear". Para un modelo que use un nivel de compatibilidad 1400 o superior, tienes dos opciones: Legacy y Data sources de Power Query. Para obtener más información sobre las diferencias entre estos dos tipos de Data source, [consulta el blog de Microsoft Analysis Services](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
+
+![Agregar Data source](https://user-images.githubusercontent.com/8976200/124598010-72db4280-de64-11eb-818a-e5793f061185.png)
+
+En este ejemplo, crearemos un Data source de Power Query, que usaremos para importar algunas tablas de una base de datos relacional de SQL Server. Una vez creado el Data source, pulsa F2 para cambiarle el nombre y configúralo con la cuadrícula de propiedades, como se muestra en la captura de pantalla siguiente:
+
+![Establecer propiedades del Data source](https://user-images.githubusercontent.com/8976200/124599856-71ab1500-de66-11eb-8ede-3a6272872734.png)
+
+En nuestro ejemplo, establecimos las siguientes propiedades:
+
+| Propiedad          | Valor                  |
 | ------------------ | ---------------------- |
-| Name               | `AdventureWorks`       |
-| Protocol           | `tds`                  |
-| Database           | `AdventureWorksDW2017` |
-| Server             | `localhost`            |
+| Nombre             | `AdventureWorks`       |
+| Protocolo          | `tds`                  |
+| Base de datos      | `AdventureWorksDW2017` |
+| Servidor           | `localhost`            |
 | AuthenticationKind | `ServiceAccount`       |
 
-Hit Save (Ctrl+S). You will be prompted to provide a path and file name for the Model.bim file which will hold the model metadata that you have created so far. You may also save the model as a folder structure instead (File > Save to folder...), which is recommended if you plan to integrate your model metadata into a version controlled environment. If you are using a Workspace Database, Tabular Editor 3 will also synchronize the metadata to the connected instance of Analysis Services.
+Haz clic en Guardar (Ctrl+S). Se te pedirá que indiques una ruta y un nombre de archivo para el archivo Model.bim, que contendrá los metadatos del modelo que has creado hasta ahora. También puedes guardar el modelo como una estructura de carpetas (Archivo > Guardar en carpeta...), lo cual se recomienda si piensas integrar los metadatos del modelo en un entorno con control de versiones. Si estás usando una base de datos de Workspace, Tabular Editor 3 también sincronizará los metadatos con la instancia conectada de Analysis Services.
 
-Next, add a new table to the model by right-clicking on the "Tables" folder and choosing "Create > Table" (you can also hit Alt+5). Give the table a name, in our example `Internet Sales`. Expand the table, locate the partition on the table and provide the following M query as the partition expression, in order to populate the table with data:
+A continuación, añade una nueva tabla al modelo haciendo clic con el botón derecho en la carpeta "Tablas" y eligiendo "Crear > Tabla" (también puedes pulsar Alt+5). Asigna un nombre a la tabla; en nuestro ejemplo, `Internet Sales`. Expande la tabla, localiza la partición de la tabla y proporciona la siguiente consulta M como expresión de la partición, para rellenar la tabla con datos:
 
 ```M
 let
@@ -79,57 +79,57 @@ in
     Data
 ```
 
-This assumes that the relational SQL Server database contains a table named "FactInternetSales" within the "dbo" schema.
+Esto asume que la base de datos relacional de SQL Server contiene una tabla llamada "FactInternetSales" dentro del esquema "dbo".
 
-![M partition expression](https://user-images.githubusercontent.com/8976200/124601212-dd41b200-de67-11eb-9720-3890d7d746ba.png)
+![Expresión de partición M](https://user-images.githubusercontent.com/8976200/124601212-dd41b200-de67-11eb-9720-3890d7d746ba.png)
 
-Next, right-click on the newly created table and choose "Update table schema...". This allows Tabular Editor to automatically populate the table columns based on the partition query.
+A continuación, haz clic con el botón derecho en la tabla recién creada y elige "Actualizar esquema de tabla...". Esto permite que Tabular Editor rellene automáticamente las columnas de la tabla en función de la consulta de la partición.
 
 > [!NOTE]
-> If you are not using a Workspace Database, this operation is only available in Tabular Editor version 3.1.0 or newer.
+> Si no estás usando una base de datos de Workspace, esta operación solo está disponible en Tabular Editor, versión 3.1.0 o posterior.
 
-![Schema compare](https://user-images.githubusercontent.com/8976200/124601333-0104f800-de68-11eb-94f7-654c9e8ff206.png)
+![Comparación de esquemas](https://user-images.githubusercontent.com/8976200/124601333-0104f800-de68-11eb-94f7-654c9e8ff206.png)
 
-Hit "OK" to add the columns to the table. Hit Save again (Ctrl+S). If you are using a Workspace Database, you may refresh the table on the server and browse the data in the table once the refresh operation is complete. To do so, right-click the table and choose "Refresh table > Automatic (table)". Wait for the operation on the "Data Refresh" tab to complete, then right-click the table and choose "Preview" (you can do so from the TOM Explorer as well), to view the actual data within the table:
+Haz clic en "Aceptar" para añadir las columnas a la tabla. Haz clic en Guardar de nuevo (Ctrl+S). Si estás usando una base de datos de Workspace, puedes actualizar la tabla en el servidor y explorar los datos de la tabla una vez que finalice la operación de actualización. Para ello, haz clic con el botón derecho en la tabla y elige "Actualizar tabla > Automático (tabla)". Espera a que finalice la operación en la pestaña "Actualización de datos" y, después, haz clic con el botón derecho en la tabla y elige "Vista previa" (también puedes hacerlo desde el Explorador TOM) para ver los datos reales de la tabla:
 
-![Data refresh](https://user-images.githubusercontent.com/8976200/124602234-f0a14d00-de68-11eb-8886-dc7e0d255f9a.png)
+![Actualización de datos](https://user-images.githubusercontent.com/8976200/124602234-f0a14d00-de68-11eb-8886-dc7e0d255f9a.png)
 
-If the table you imported is a dimension table, we recommend setting the "Key" property of the primary key column on the table, to "true". This makes it easier to define relationships between this and other tables, as we shall see later.
+Si la tabla que importaste es una tabla de dimensión, recomendamos establecer la propiedad "Key" de la columna de clave principal de la tabla como "true". Esto facilita definir relaciones entre esta tabla y otras, como veremos más adelante.
 
-Repeat this process for any table you wish to import to your Tabular model. You don't have to refresh the data in each table one by one - instead, you can run the refresh operation at the model level.
+Repite este proceso con cualquier tabla que quieras importar en tu modelo tabular. No tienes que actualizar los datos de cada tabla una por una; en su lugar, puedes ejecutar la operación de actualización a nivel del modelo.
 
-#### Defining relationships
+#### Definición de relaciones
 
-Once you have imported a number of tables, the easiest way to define the relationships between them with Tabular Editor 3, is to create a new diagram. Choose "File > New > Diagram". Then, multi-select and drag the tables into the diagram view or right-click on the tables and choose "Add to diagram":
+Una vez que hayas importado varias tablas, la forma más sencilla de definir las relaciones entre ellas con Tabular Editor 3 es crear un nuevo diagrama. Elige "File > New > Diagram". Después, selecciona varias tablas y arrástralas a la Vista de diagrama, o haz clic con el botón derecho en las tablas y elige "Add to diagram":
 
 ![Add to diagram](https://user-images.githubusercontent.com/8976200/124602823-8a68fa00-de69-11eb-9332-09ad42c4f1b3.png)
 
-To create a relationship between two tables, locate the foreign key column on the fact table and "drag" that column to the primary key column on the dimension table. Hit "OK" to confirm the relationship settings in the dialog that appears.
+Para crear una relación entre dos tablas, localiza la columna de clave externa en la tabla de hechos y "arrastra" esa columna hasta la columna de clave primaria de la tabla de dimensiones. Pulsa "OK" para confirmar la configuración de la relación en el cuadro de diálogo que aparece.
 
-![Diagram view](https://user-images.githubusercontent.com/8976200/124604764-8f2ead80-de6b-11eb-88d0-c9cebbca57d0.png)
+![Vista de diagrama](https://user-images.githubusercontent.com/8976200/124604764-8f2ead80-de6b-11eb-88d0-c9cebbca57d0.png)
 
-Close the diagram view (no need to save it, as you can always reconstruct the diagram later). Hit Ctrl+S once again to save the model. Now it's time to add some business logic. If you're using a Workspace Database, now is a good time to execute a refresh (automatic or calculate) at the model level, to ensure that the supporting structures for the relationships are created on the server, thus bringing the model into a queryable state.
+Cierra la Vista de diagrama (no hace falta guardarla, ya que siempre puedes reconstruir el diagrama más adelante). Pulsa Ctrl+S de nuevo para guardar el modelo. Ahora toca añadir algo de lógica de negocio. Si estás usando una Workspace Database, este es un buen momento para ejecutar una actualización ("Automatic" o "Calculate") a nivel del modelo, para asegurarte de que en el servidor se crean las estructuras de soporte para las relaciones y, así, dejar el modelo en un estado consultable.
 
-#### Adding measures
+#### Añadir medidas
 
-Select one of the tables in the TOM Explorer and hit Alt+1 (or choose Create > New Measure) to add a measure to that table. Give the measure a name and provide a DAX expression for the measure.
+Selecciona una de las tablas en el Explorador TOM y pulsa Alt+1 (o elige Create > New Measure) para añadir una medida a esa tabla. Asigna un nombre a la medida y proporciona una expresión DAX para la medida.
 
-![Add measure](https://user-images.githubusercontent.com/8976200/124605349-19771180-de6c-11eb-94be-7baf8b5e0ee9.png)
+![Agregar medida](https://user-images.githubusercontent.com/8976200/124605349-19771180-de6c-11eb-94be-7baf8b5e0ee9.png)
 
-Hit Ctrl+S to save the model metadata.
+Pulsa Ctrl+S para guardar los metadatos del modelo.
 
-If you're using a Workspace Database, you can now test your new measure directly inside Tabular Editor 3. The easiest way to test it is by using a Pivot Grid. Choose File > New > Pivot Grid, then drag the newly created measure from the TOM Explorer into the grid. You can also drag columns and hierarchies from the TOM Explorer into the Filter, Row or Column area of the Pivot Grid, to slice your measure by different dimension attributes:
+Si estás usando una Workspace Database, ahora puedes probar tu nueva medida directamente en Tabular Editor 3. La forma más sencilla de probarla es usar un Pivot Grid. Elige File > New > Pivot Grid y, a continuación, arrastra la medida recién creada desde el Explorador TOM a la cuadrícula. También puedes arrastrar columnas y jerarquías desde el Explorador TOM a las áreas Filter, Row o Column del Pivot Grid para segmentar tu medida por distintos atributos de dimensión:
 
 ![Pivot Grid](https://user-images.githubusercontent.com/8976200/124605906-ae7a0a80-de6c-11eb-985d-6fd580ed81d1.png)
 
-If you didn't use a Workspace Database, you will have to deploy your model to an instance of Analysis Services, before you can perform data refreshes and query the model.
+Si no usaste una Workspace Database, tendrás que desplegar tu modelo en una instancia de Analysis Services antes de poder realizar actualizaciones de datos y consultar el modelo.
 
-#### Deploying the data model
+#### Implementación del Data model
 
-To deploy the model metadata to any instance of Analysis Services, click on the "Model" menu and choose "Deploy...". This brings up the Tabular Editor 3 Deployment Wizard which is similar to the Deployment Wizard of Tabular Editor 2.X. Follow the instructions on the various pages of the wizard, to deploy the model metadata to an instance of Analysis Services. You can also use the Deployment Wizard to generate a TMSL/XMLA script, that can be handed over to an Analysis Services server administrator for manual deployment.
+Para implementar los metadatos del modelo en cualquier instancia de Analysis Services, haz clic en el menú "Modelo" y elige "Implementar...". Esto abre el Asistente de implementación de Tabular Editor 3, similar al Asistente de implementación de Tabular Editor 2.X. Sigue las instrucciones de las distintas páginas del asistente para implementar los metadatos del modelo en una instancia de Analysis Services. También puedes usar el Asistente de implementación para generar un script TMSL/XMLA, que puedes entregar a un administrador del servidor de Analysis Services para que lo implemente manualmente.
 
 ![Deployment](https://user-images.githubusercontent.com/8976200/124607262-f5b4cb00-de6d-11eb-8139-4f74b5ae19bf.png)
 
-To refresh and test the deployed database, you can use the standard management and client tools provided by Microsoft, or you can use another instance of Tabular Editor 3 (assuming you have administrative access on the instance of Analysis Services where the deployed model resides).
+Para actualizar y probar la base de datos implementada, puedes usar las herramientas estándar de administración y cliente proporcionadas por Microsoft, o bien otra instancia de Tabular Editor 3 (siempre que tengas acceso administrativo a la instancia de Analysis Services donde se encuentra el modelo implementado).
 
-The paragraph above provides a good reason for using the Workspace Database approach described above. When connected to a workspace database, you will be able to perform all development operations, including data refresh and testing of business logic within the same instance of Tabular Editor 3, without having to rely on other tools.
+El párrafo anterior ofrece un buen motivo para usar el enfoque de la base de datos de Workspace descrito anteriormente. Cuando estés conectado a una base de datos de Workspace, podrás realizar todas las operaciones de desarrollo, incluida la actualización de datos y las pruebas de la lógica de negocio, dentro de la misma instancia de Tabular Editor 3, sin depender de otras herramientas.
