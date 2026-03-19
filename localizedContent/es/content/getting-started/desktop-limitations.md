@@ -1,6 +1,6 @@
 ---
 uid: desktop-limitations
-title: Power BI Desktop Limitations (Outdated)
+title: Limitaciones de Power BI Desktop (obsoletas)
 author: Morten Lønskov
 updated: 2023-08-21
 applies_to:
@@ -17,121 +17,121 @@ applies_to:
           full: true
 ---
 
-# Power BI Desktop limitations
+# Limitaciones de Power BI Desktop
 
-When using Tabular Editor (any edition) as an [external tool for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools), there are a few limitations to be aware about.
+Al usar Tabular Editor (cualquier edición) como [herramienta externa para Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools), hay algunas limitaciones que debes tener en cuenta.
 
-The limitations mentioned in this article apply to Tabular Editor 2.x as well.
+Las limitaciones mencionadas en este artículo también se aplican a Tabular Editor 2.x.
 
-## Unsupported Operations
+## Operaciones no compatibles
 
-As of the June 2025 Power BI Desktop update, there are no longer any unsupported write operations. In other words, third party tools can now freely modify any aspect of the semantic model hosted in Power BI Desktop, including adding and removing tables and columns, changing data types, etc. As such, most of the information in this article is no longer relevant. However, if you're using a version of Power BI Desktop prior to the June 2025 update, please view the limitations in the [Data modeling operations](#data-modeling-operations) section below.
+A partir de la actualización de junio de 2025 de Power BI Desktop, ya no hay operaciones de escritura no compatibles. En otras palabras, las herramientas de terceros ahora pueden modificar libremente cualquier aspecto del modelo semántico alojado en Power BI Desktop, incluida la posibilidad de agregar y quitar tablas y columnas, cambiar tipos de datos, etc. Por lo tanto, la mayor parte de la información de este artículo ya no es relevante. Sin embargo, si usas una versión de Power BI Desktop anterior a la actualización de junio de 2025, consulta las limitaciones en la sección [Operaciones de modelado de datos](#data-modeling-operations) más abajo.
 
-More information in [the official blog post](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).
+Más información en [la entrada oficial del blog](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).
 
-## Power BI file types
+## Tipos de archivo de Power BI
 
-When using Power BI, you will encounter three different file types commonly used:
+Al usar Power BI, encontrarás tres tipos de archivo habituales:
 
 - **.pbix** (Power BI Report)
-- **.pbit** (Power BI Template)
-- **.pbip** (Power BI Project)
+- **.pbit** (Plantilla de Power BI)
+- **.pbip** (Proyecto de Power BI)
 
-Both these files can be opened in Power BI Desktop and essentially defines everything related to a Power BI report: Data sources, Power Query transformations, the tabular data model, report pages, visuals, bookmarks, etc.
+Estos dos archivos se pueden abrir en Power BI Desktop y, básicamente, definen todo lo relacionado con un Report de Power BI: Data sources, transformaciones de Power Query, el Data model tabular, páginas del Report, Visuals, Bookmarks, etc.
 
-The main difference between, is that the **.pbix and .pbip file contains model data**, whereas the **.pbit file contains no data**. In addition, a **.pbix** file does not contain the model metadata in this format, and therefore, **a .pbix file cannot be loaded directly in Tabular Editor** in any way. Instead, you will have to rely on the External Tools integration, which requires you to load the .pbix file in Power BI Desktop, as described below.
+La principal diferencia es que los archivos **.pbix y .pbip contienen datos del modelo**, mientras que el archivo **.pbit no contiene datos**. Además, un archivo **.pbix** no contiene los metadatos del modelo en este formato y, por tanto, **no se puede cargar un archivo .pbix directamente en Tabular Editor** en modo alguno. En su lugar, tendrás que recurrir a la integración de Herramientas externas, que requiere cargar el archivo .pbix en Power BI Desktop, tal como se describe a continuación.
 
 > [!WARNING]
-> Even though it is technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. As such, there is always a risk of making changes to the .pbit file which would cause the file to become unloadable in Power BI Desktop, or cause stability issues once loaded. In this case, Microsoft support will be unable to assist you.
+> Aunque técnicamente es posible cargar y guardar metadatos del modelo desde y hacia un archivo .pbit, este enfoque no es compatible con Power BI Desktop. Por ello, siempre existe el riesgo de hacer cambios en el archivo .pbit que hagan que Power BI Desktop ya no pueda cargarlo o que generen problemas de estabilidad una vez cargado. En ese caso, el soporte técnico de Microsoft no podrá ayudarte.
 
 > [!NOTE]
-> Since **Tabular Editor 3 Desktop Edition** is only intended to be used as an External Tool for Power BI Desktop, this edition does not allow loading and saving a .pbit file. You may however still use Tabular Editor 2.x for this purpose. See <xref:editions> to learn more about the difference between the Tabular Editor 3 editions.
+> Dado que **Tabular Editor 3 Edición de escritorio** está pensado únicamente para usarse como herramienta externa de Power BI Desktop, esta edición no permite cargar ni guardar un archivo .pbit. No obstante, puedes seguir usando Tabular Editor 2.x para este fin. Consulta <xref:editions> para obtener más información sobre las diferencias entre las ediciones de Tabular Editor 3.
 
-## External Tool architecture
+## Arquitectura de herramientas externas
 
-When a Power BI Desktop report (.pbix or .pbit file) contains a data model (that is, one or more tables have been added in Import or DirectQuery mode), that data model is hosted inside an instance of Analysis Services managed by Power BI Desktop. External Tools may connect to this instance of Analysis Services for different purposes.
+Cuando un Report de Power BI Desktop (archivo .pbix o .pbit) contiene un Data model (es decir, se han agregado una o más tablas en modo Import o DirectQuery), ese Data model se aloja dentro de una instancia de Analysis Services administrada por Power BI Desktop. Las herramientas externas pueden conectarse a esta instancia de Analysis Services para distintos propósitos.
 
 > [!IMPORTANT]
-> Power BI Desktop reports that use a **Live Connection** to SSAS, Azure AS or a dataset in a Power BI workspace do not contain a data model. As such, these reports **cannot** be used with external tools such as Tabular Editor.
+> Los Report de Power BI Desktop que usan una **Live Connection** a SSAS, Azure AS o a un Dataset en un Workspace de Power BI no contienen un Data model. Por lo tanto, estos Reports **no** se pueden usar con herramientas externas como Tabular Editor.
 
-External tools may connect to the instance of Analysis Services managed by Power BI Desktop through a specific port number assigned by Power BI Desktop. When a tool is launched directly from the "External Tools" ribbon in Power BI Desktop, this port number is passed to the external tool as a command line argument. In Tabular Editor's case, this causes the data model to be loaded in Tabular Editor.
+Las herramientas externas pueden conectarse a la instancia de Analysis Services administrada por Power BI Desktop mediante un número de puerto específico asignado por Power BI Desktop. Cuando una herramienta se inicia directamente desde la cinta "Herramientas externas" de Power BI Desktop, este número de puerto se pasa a la herramienta externa como argumento de la línea de comandos. En el caso de Tabular Editor, esto hace que el Data model se cargue en Tabular Editor.
 
 <img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
-Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). In this regard, the Analysis Services instance managed by Power BI Desktop is no different from any other type of Analysis Services instance.
+Una vez conectada a la instancia de Analysis Services, una herramienta externa puede obtener información sobre los metadatos del modelo, ejecutar consultas DAX o MDX sobre el Data model e incluso aplicar cambios a los metadatos del modelo mediante las [bibliotecas de cliente proporcionadas por Microsoft](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). En este sentido, la instancia de Analysis Services administrada por Power BI Desktop no difiere de cualquier otro tipo de instancia de Analysis Services.
 
-## Data modeling operations
+## Operaciones de modelado del Data model
 
-However, due to the way Power BI Desktop interoperates with Analysis Services, there are a few important limitations to the type of changes external tools may apply to the model metadata. These are listed [in the official documentation for External Tools](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) and repeated here for convenience:
+Sin embargo, debido a la forma en que Power BI Desktop interactúa con Analysis Services, existen algunas limitaciones importantes respecto al tipo de cambios que las herramientas externas pueden aplicar a los metadatos del modelo. Estas se enumeran [en la documentación oficial de herramientas externas](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) y se repiten aquí para mayor comodidad:
 
-### [Pre June 2025](#tab/postjune2023)
+### [Antes de junio de 2025](#tab/postjune2023)
 
-**Pre June 2025 Power BI Desktop limitations when connecting through third party tools:**
+**Limitaciones de Power BI Desktop previas a junio de 2025 al conectarse mediante herramientas de terceros:**
 
-| Object                                         | Connect to AS instance       |
-| ---------------------------------------------- | ---------------------------- |
-| Tables                                         | No                           |
-| Columns                                        | Yes <sup>[1](#columns)</sup> |
-| Calculated tables                              | Yes                          |
-| Calculated columns                             | Yes                          |
-| Relationships                                  | Yes                          |
-| Measures                                       | Yes                          |
-| Model KPIs                                     | Yes                          |
-| Calculation groups                             | Yes                          |
-| Perspectives                                   | Yes                          |
-| Translations                                   | Yes                          |
-| Row Level Security (RLS)    | Yes                          |
-| Object Level Security (OLS) | Yes                          |
-| Annotations                                    | Yes                          |
-| M expressions                                  | No                           |
+| Objeto                                               | Conectarse a la instancia de AS |
+| ---------------------------------------------------- | ------------------------------- |
+| Tablas                                               | No                              |
+| Columnas                                             | Sí <sup>[1](#columns)</sup>     |
+| Tablas calculadas                                    | Sí                              |
+| Columnas calculadas                                  | Sí                              |
+| Relaciones                                           | Sí                              |
+| Medidas                                              | Sí                              |
+| KPIs del modelo                                      | Sí                              |
+| Grupos de cálculo                                    | Sí                              |
+| Perspectivas                                         | Sí                              |
+| Traducciones                                         | Sí                              |
+| Seguridad a nivel de fila (RLS)   | Sí                              |
+| Seguridad a nivel de objeto (OLS) | Sí                              |
+| Anotaciones                                          | Sí                              |
+| Expresiones M                                        | No                              |
 
-<a name="columns">1</a> - When using external tools to connect to the AS instance, changing a column's data type is supported, however, renaming columns is not supported.
+<a name="columns">1</a> - Al usar herramientas externas para conectarse a la instancia de AS, se admite cambiar el tipo de datos de una columna; sin embargo, no se admite renombrar columnas.
 
-Power BI Desktop _project files_ offer a broader scope of supported write operations. Those objects and operations that are not supported through using Tabular Editor as an External Tool may be supported by editing Power BI Desktop project files. Please refer to Microsoft documentation to learn more: [Power BI Desktop projects - Model authoring](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring).
+Los _archivos de proyecto_ de Power BI Desktop ofrecen un alcance más amplio de operaciones de escritura compatibles. Los objetos y las operaciones que no se admiten al usar Tabular Editor como herramienta externa pueden estar disponibles al editar los archivos de proyecto de Power BI Desktop. Consulta la documentación de Microsoft para obtener más información: [Proyectos de Power BI Desktop: creación del modelo](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring).
 
-### [Pre June 2023](#tab/prejune2023)
+### [Antes de junio de 2023](#tab/prejune2023)
 
-**Pre June 2023 Power BI Desktop limitations when connecting through third party tools:**
+**Limitaciones de Power BI Desktop anteriores a junio de 2023 al conectarse mediante herramientas de terceros:**
 
-- Define and edit measures for calculations, including format string, KPI, and detail rows settings.
-- Add calculation groups for calculation reusability in complex models.
-- Create perspectives to define focused, business-domain specific views of dataset metadata.
-- Apply metadata translations to support multi-language versions within a single dataset.
-- Add dataset roles for row-level security (RLS) and object-level security (OLS) rules to restrict data access.
-- Define and edit field parameters.
+- Definir y editar medidas para cálculos, incluyendo la cadena de formato, el KPI y la configuración de filas de detalle.
+- Agregar grupos de cálculo para reutilizar cálculos en modelos complejos.
+- Crear perspectivas para definir vistas enfocadas, específicas del dominio de negocio, de los metadatos del Dataset.
+- Aplicar traducciones de metadatos para admitir versiones multilingües dentro de un único Dataset.
+- Agregar roles del Dataset con reglas de seguridad a nivel de filas (RLS) y de seguridad a nivel de objetos (OLS) para restringir el acceso a los datos.
+- Definir y editar parámetros de campo.
 
-Though unsupported, it turns out that a number of operations can still be applied without causing issues. For example, setting properties such as Display Folder, Description, Summarization, etc. on individual columns using an external tool seems to work just fine at the time of writing. For this reason, Tabular Editor has an option that allows advanced users to experiment, by allowing all data modeling operations even when connected to a Power BI Desktop model. You can enable this option under **Tools > Preferences > Power BI > Allow _unsupported_ modeling operations**, but make sure you understand the risks involved before doing so.
+Aunque no esté admitido, resulta que aún se pueden aplicar varias operaciones sin causar problemas. Por ejemplo, en el momento de escribir esto, establecer propiedades como carpeta de visualización, Descripción, Resumir por, etc., en columnas individuales mediante una herramienta externa parece funcionar sin problemas. Por este motivo, Tabular Editor incluye una opción que permite a los usuarios avanzados experimentar, habilitando todas las operaciones de modelado de datos incluso al estar conectados a un Data model de Power BI Desktop. Puedes habilitar esta opción en **Herramientas > Preferencias > Power BI > Permitir operaciones de modelado _no compatibles_**, pero asegúrate de comprender los riesgos antes de hacerlo.
 
 ---
 
-## Data modeling limitations
+## Limitaciones del modelado del Data model
 
-All Tabular Object Model (TOM) metadata can be accessed for read-only. Write operations are limited because Power BI Desktop must remain in-sync with the external modifications, therefore the following operations are not supported, in addition to those mentioned in the tabs above:
+Se puede acceder a todos los metadatos del Tabular Object Model (TOM) en modo de solo lectura. Las operaciones de escritura son limitadas porque Power BI Desktop debe mantenerse sincronizado con las modificaciones externas; por lo tanto, además de las mencionadas en las pestañas anteriores, no se admiten las siguientes operaciones:
 
-- Any TOM object types not covered in Supported write operations, such as tables and columns.
-- Editing a Power BI Desktop template (PBIT) file.
-- Report-level or data-level translations.
-- Renaming tables and columns is not yet supported
-- Sending processing commands to a dataset loaded in Power BI Desktop
+- Cualquier tipo de objeto TOM que no esté incluido en las operaciones de escritura compatibles, como tablas y columnas.
+- Editar un archivo de plantilla de Power BI Desktop (PBIT).
+- Traducciones a nivel de Report o a nivel de datos.
+- Aún no se admite cambiar el nombre de las tablas ni de las columnas
+- Enviar comandos de procesamiento a un Dataset cargado en Power BI Desktop
 
 > [!NOTE]
-> The Analysis Services instance managed by Power BI Desktop does not enforce the allowed data modeling operations. It is up to the External Tool to ensure that no unsupported changes are made. Ignoring this may lead to unpredictable results, corrupt .pbix/.pbit report files or Power BI Desktop becoming unstable.
+> La instancia de Analysis Services administrada por Power BI Desktop no aplica las restricciones correspondientes a las operaciones permitidas de modelado del Data model. La herramienta externa debe asegurarse de que no se realicen cambios no compatibles. Ignorar esto puede provocar resultados impredecibles, archivos de Report .pbix/.pbit corruptos o que Power BI Desktop se vuelva inestable.
 
 > [!IMPORTANT]
-> Changes to the data model can break your Power BI report visuals. If, for example, a measure is moved from one table to another, any visual using that measure will need to be updated. Kurt Buhler has a blog on how to fix these errors in a less manual way here: [Fix Power BI "Something is wrong with one or more fields"](https://data-goblins.com/power-bi/something-is-wrong-with-one-or-more-fields)
+> Los cambios en el Data model pueden hacer que los Visuales de tu Report de Power BI dejen de funcionar. Si, por ejemplo, se mueve una medida de una tabla a otra, cualquier Visual que use esa medida tendrá que actualizarse. Kurt Buhler tiene una entrada de blog sobre cómo corregir estos errores de una forma menos manual aquí: [Fix Power BI "Something is wrong with one or more fields"](https://data-goblins.com/power-bi/something-is-wrong-with-one-or-more-fields)
 
-# Tabular Editor and Power BI Desktop
+# Tabular Editor y Power BI Desktop
 
-When using Tabular Editor (any edition) as an external tool for Power BI Desktop, all unsupported operations according to the list above, are disabled by default. In other words, Tabular Editor will not allow you to add or rename tables, columns, perform refreshes etc. on a Power BI Desktop model.
+Cuando usas Tabular Editor (cualquier edición) como herramienta externa para Power BI Desktop, todas las operaciones no compatibles según la lista anterior se deshabilitan de forma predeterminada. En otras palabras, Tabular Editor no te permitirá agregar o cambiar el nombre de tablas o columnas, realizar actualizaciones, etc. en un modelo de Power BI Desktop.
 
-Though unsupported, it turns out that a number of operations can still be applied without causing issues. For this reason, Tabular Editor has an option that allows advanced users to experiment, by allowing all data modeling operations even when connected to a Power BI Desktop model. You can enable this option under **Tools > Preferences > Power BI > Allow _unsupported_ modeling operations**, but make sure you understand the risks involved before doing so.
+Aunque no sea compatible, resulta que se pueden aplicar varias operaciones sin causar problemas. Por este motivo, Tabular Editor incluye una opción que permite a los usuarios avanzados experimentar habilitando todas las operaciones de modelado de datos, incluso cuando se conecta a un Data model de Power BI Desktop. Puedes habilitar esta opción en **Herramientas > Preferencia > Power BI > Permitir operaciones de modelado _no admitidas_**, pero asegúrate de entender los riesgos antes de hacerlo.
 
 > [!NOTE]
-> In Tabular Editor 2.x, this setting is available under **File > Preferences > Allow unsupported Power BI features (experimental)**
+> En Tabular Editor 2.x, esta configuración está disponible en **Archivo > Preferencia > Permitir características no admitidas de Power BI (experimental)**
 
-Once this feature is enabled, Tabular Editor will no longer block any modeling operation, but instead provide you full read/write access to all TOM objects and properties. While the feature is enabled, you will see a warning prompt whenever you open a Power BI Desktop model in Tabular Editor:
+Una vez habilitada esta característica, Tabular Editor dejará de bloquear cualquier operación de modelado y, en su lugar, te proporcionará acceso completo de lectura/escritura a todos los objetos y propiedades de TOM. Mientras la característica esté habilitada, verás un aviso cada vez que abras un modelo de Power BI Desktop en Tabular Editor:
 
-![Warning shown when unsupported modeling is enabled](~/content/assets/images/pbi-desktop-warning.png)
+![Advertencia mostrada cuando el modelado no admitido está habilitado](~/content/assets/images/pbi-desktop-warning.png)
 
 > [!WARNING]
-> If your .pbix or .pbit file becomes corrupt or causes Power BI Desktop instability due to unsupported changes made through an External Tool, Microsoft Support will not be able to assist you. For this reason, **always** keep a backup of your .pbix or .pbit file before launching any External Tool that allows making changes to your data model.
+> Si tu archivo .pbix o .pbit se daña o provoca inestabilidad en Power BI Desktop debido a cambios no admitidos realizados mediante una herramienta externa, el soporte de Microsoft no podrá ayudarte. Por este motivo, conserva **siempre** una copia de seguridad de tu archivo .pbix o .pbit antes de iniciar cualquier herramienta externa que permita hacer cambios en tu Data model.
