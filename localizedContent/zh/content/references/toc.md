@@ -1,4 +1,4 @@
-# Downloads and Releases
+# 下载与版本发布
 
 ## @downloads
 
@@ -6,11 +6,11 @@
 
 ## @whats-new
 
-# Technical Reference
+# 技术参考
 
 ## @faq
 
-## @preferences
+## @偏好
 
 ## @policies
 
@@ -24,10 +24,10 @@
 
 ## @user-setting-files-te2
 
-# Development and Planning
+# 开发与规划
 
 ## @roadmap
 
-# Deprecated Features
+# 已弃用的功能
 
 ## @formatdax
