@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-import
-title: Import a Metric View and View Diagnostics
+title: Importar una Vista de métricas y ver los diagnósticos
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -18,35 +18,35 @@ applies_to:
           full: true
 ---
 
-# Import a Metric View and View Diagnostics
+# Importar una Vista de métricas y ver los diagnósticos
 
-This how-to demonstrates how to import a Metric View into a Tabular model using C# scripts, and how to view diagnostic messages from the import process.
+Este procedimiento explica cómo importar una Vista de métricas a un modelo tabular mediante C# Scripts y cómo ver los mensajes de diagnóstico del proceso de importación.
 
-## Prerequisites
+## Requisitos previos
 
-You must have a Tabular model open in Tabular Editor before importing. This can be:
+Antes de importar, debes tener un modelo tabular abierto en Tabular Editor. Puede ser:
 
-- A new, empty model
-- An existing model you want to enhance with objects from the Metric View
+- Un modelo nuevo y vacío
+- Un modelo existente que quieras mejorar con objetos de la Vista de métricas
 
-## Import methods
+## Métodos de importación
 
-There are two import methods:
+Hay dos métodos de importación:
 
-| Method                    | Description                                    |
-| ------------------------- | ---------------------------------------------- |
-| `ImportToTabularFromFile` | Loads from a file path and imports in one step |
-| `ImportToTabular`         | Imports the currently loaded Metric View       |
+| Método                    | Descripción                                               |
+| ------------------------- | --------------------------------------------------------- |
+| `ImportToTabularFromFile` | Carga desde una ruta de archivo e importa en un solo paso |
+| `ImportToTabular`         | Importa la Vista de métricas cargada actualmente          |
 
-Both methods require:
+Ambos métodos requieren:
 
-- The target Tabular `Model`
-- Databricks hostname (for M partition expressions)
-- Databricks HTTP path (for M partition expressions)
+- El modelo tabular `Model` de destino
+- Nombre de host de Databricks (para expresiones M de partición)
+- Ruta HTTP de Databricks (para expresiones M de partición)
 
-## Import from file
+## Importar desde archivo
 
-Use `ImportToTabularFromFile` to load and import in one operation:
+Use `ImportToTabularFromFile` para cargar e importar en una sola operación:
 
 ```csharp
 var success = SemanticBridge.MetricView.ImportToTabularFromFile(
@@ -60,33 +60,33 @@ var success = SemanticBridge.MetricView.ImportToTabularFromFile(
 var sb = new System.Text.StringBuilder();
 if (success)
 {
-    sb.AppendLine("Import successful!");
-    sb.AppendLine($"Diagnostics: {diagnostics.Count}");
+    sb.AppendLine("¡Importación correcta!");
+    sb.AppendLine($"Diagnósticos: {diagnostics.Count}");
 }
 else
 {
-    sb.AppendLine("Import failed.");
-    sb.AppendLine($"Errors: {diagnostics.Count}");
+    sb.AppendLine("Error al importar.");
+    sb.AppendLine($"Errores: {diagnostics.Count}");
 }
 
 Output(sb.ToString());
 ```
 
-## Import a loaded Metric View
+## Importar una Metric View cargada
 
-If you've already loaded a Metric View (for inspection or modification), use `ImportToTabular`:
+Si ya has cargado una Metric View (para inspeccionarla o modificarla), usa `ImportToTabular`:
 
 ```csharp
-// Load the Metric View first
+// Primero, carga la Metric View
 SemanticBridge.MetricView.Load("C:/MetricViews/sales-metrics.yaml");
 
-// Optionally inspect or modify it
+// Opcionalmente, revísala o modifícala
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Importing Metric View with {view.Dimensions.Count} dimensions and {view.Measures.Count} measures");
+sb.AppendLine($"Importando la Metric View con {view.Dimensions.Count} dimensiones y {view.Measures.Count} medidas");
 
-// Import to Tabular
+// Importar a Tabular
 var success = SemanticBridge.MetricView.ImportToTabular(
     Model,
     "your-workspace.azuredatabricks.net",
@@ -96,19 +96,19 @@ var success = SemanticBridge.MetricView.ImportToTabular(
 
 if (success)
 {
-    sb.AppendLine("Import successful!");
+    sb.AppendLine("¡Importación correcta!");
 }
 else
 {
-    sb.AppendLine("Import failed.");
+    sb.AppendLine("Error al importar.");
 }
 
 Output(sb.ToString());
 ```
 
-## Using placeholder connection values
+## Usar valores de conexión ficticios
 
-If you're testing the translation without a real Databricks connection, you can use placeholder values:
+Si estás probando la traducción sin una conexión real a Databricks, puedes usar valores ficticios:
 
 ```csharp
 var success = SemanticBridge.MetricView.ImportToTabularFromFile(
@@ -120,24 +120,24 @@ var success = SemanticBridge.MetricView.ImportToTabularFromFile(
 );
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("Import complete (with placeholder connection values)");
-sb.AppendLine("Note: Update the M partition expressions before refreshing data.");
+sb.AppendLine("Importación completada (con valores de conexión ficticios)");
+sb.AppendLine("Nota: Actualiza las expresiones M de partición antes de actualizar los datos.");
 Output(sb.ToString());
 ```
 
-## View diagnostics after import
+## Ver diagnósticos después de la importación
 
-You can access diagnostics from the last import at any time using `ImportDiagnostics`.
-This example assumes that you have previously run an import, either via GUI or C# script.
+Puedes acceder a los diagnósticos de la última importación en cualquier momento usando `ImportDiagnostics`.
+Este ejemplo supone que ya has ejecutado una importación, ya sea desde la interfaz gráfica o mediante un C# Script.
 
 ```csharp
 var diagnostics = SemanticBridge.MetricView.ImportDiagnostics;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("LAST IMPORT DIAGNOSTICS");
-sb.AppendLine("-----------------------");
+sb.AppendLine("DIAGN\u00d3STICOS DE LA \u00daLTIMA IMPORTACI\u00d3N");
+sb.AppendLine("-------------------------------");
 sb.AppendLine("");
-sb.AppendLine($"Total issues: {diagnostics.Count}");
+sb.AppendLine($"Total de incidencias: {diagnostics.Count}");
 sb.AppendLine("");
 
 foreach (var diag in diagnostics)
@@ -148,42 +148,42 @@ foreach (var diag in diagnostics)
 Output(sb.ToString());
 ```
 
-## Output diagnostics directly
+## Mostrar los diagnósticos directamente
 
-For quick inspection, you can output the diagnostics collection directly:
+Para una inspección rápida, puedes mostrar directamente la colección de diagnósticos:
 
 ```csharp
-// Output all diagnostics from the last import
+// Mostrar todos los diagnósticos de la última importación
 SemanticBridge.MetricView.ImportDiagnostics.Output();
 ```
 
-## Complete workflow example
+## Ejemplo de flujo de trabajo completo
 
-Load, validate, and import with full diagnostic reporting:
+Carga, valida e importa con un informe de diagnóstico completo:
 
 ```csharp
 var sb = new System.Text.StringBuilder();
 
-// Load the Metric View
+// Cargar la Metric View
 SemanticBridge.MetricView.Load("C:/MetricViews/sales-metrics.yaml");
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine("METRIC VIEW SUMMARY");
-sb.AppendLine("-------------------");
-sb.AppendLine($"Source: {view.Source}");
-sb.AppendLine($"Joins: {view.Joins?.Count ?? 0}");
-sb.AppendLine($"Dimensions: {view.Dimensions.Count}");
-sb.AppendLine($"Measures: {view.Measures.Count}");
+sb.AppendLine("RESUMEN DE LA METRIC VIEW");
+sb.AppendLine("------------------------");
+sb.AppendLine($"Origen: {view.Source}");
+sb.AppendLine($"Uniones: {view.Joins?.Count ?? 0}");
+sb.AppendLine($"Dimensiones: {view.Dimensions.Count}");
+sb.AppendLine($"Medidas: {view.Measures.Count}");
 sb.AppendLine("");
 
-// Validate first
+// Validar primero
 var validationDiags = SemanticBridge.MetricView.Validate().ToList();
-sb.AppendLine("VALIDATION");
+sb.AppendLine("VALIDACIÓN");
 sb.AppendLine("----------");
-sb.AppendLine($"Issues: {validationDiags.Count}");
+sb.AppendLine($"Incidencias: {validationDiags.Count}");
 sb.AppendLine("");
 
-// Import
+// Importar
 var success = SemanticBridge.MetricView.ImportToTabular(
     Model,
     "your-workspace.azuredatabricks.net",
@@ -191,15 +191,15 @@ var success = SemanticBridge.MetricView.ImportToTabular(
     out var importDiags
 );
 
-sb.AppendLine("IMPORT RESULT");
-sb.AppendLine("-------------");
-sb.AppendLine($"Success: {success}");
-sb.AppendLine($"Diagnostics: {importDiags.Count}");
+sb.AppendLine("RESULTADO DE LA IMPORTACIÓN");
+sb.AppendLine("---------------------------");
+sb.AppendLine($"Éxito: {success}");
+sb.AppendLine($"Diagnósticos: {importDiags.Count}");
 sb.AppendLine("");
 
 if (importDiags.Count > 0)
 {
-    sb.AppendLine("Import issues:");
+    sb.AppendLine("Incidencias de la importación:");
     foreach (var diag in importDiags)
     {
         sb.AppendLine($"  [{diag.Severity}] {diag.Message}");
@@ -209,8 +209,8 @@ if (importDiags.Count > 0)
 Output(sb.ToString());
 ```
 
-## See also
+## Ver también
 
-- [Semantic Bridge Overview](xref:semantic-bridge)
-- [Validate a Metric View](xref:semantic-bridge-validate-default)
-- [Load and Inspect a Metric View](xref:semantic-bridge-load-inspect)
+- [Descripción general de Semantic Bridge](xref:semantic-bridge)
+- [Validar una vista de métricas](xref:semantic-bridge-validate-default)
+- [Cargar e inspeccionar una vista de métricas](xref:semantic-bridge-load-inspect)
