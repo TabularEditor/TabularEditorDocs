@@ -1,6 +1,6 @@
 ---
 uid: incremental-refresh-workspace-mode
-title: Using Workspace Mode on a Model with Incremental Refresh
+title: Uso del modo del área de trabajo en un modelo con actualización incremental
 author: Kurt Buhler
 updated: 2023-01-09
 applies_to:
@@ -8,48 +8,48 @@ applies_to:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
-      since: 3.4.2 and earlier
+      since: 3.4.2 y versiones anteriores
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           none: true
-        - edition: Business
+        - edition: Empresa
           full: true
         - edition: Enterprise
           full: true
 ---
 
-# Workspace mode and incremental refresh
+# Modo del área de trabajo y actualización incremental
 
 > [!IMPORTANT]
-> This article only applies to versions 3.4.2 and earlier of Tabular Editor.
-> Since the 3.5.0 update, _Workspace Mode_ will not overwrite deployed Refresh Policy partitions from scheduled refreshes.
-> Refresh policy partitions will also not be serialized in source control. You can change this setting in _'Tools > Preferences... > Save-to-Folder'_.
+> Este artículo solo se aplica a las versiones 3.4.2 y anteriores de Tabular Editor.
+> Desde la actualización 3.5.0, el _modo del área de trabajo_ no sobrescribirá las particiones de la política de actualización implementadas mediante actualizaciones programadas.
+> Las particiones de política de actualización tampoco se serializarán en el control de código fuente. Puedes cambiar esta configuración en _'Tools > Preferencias... > Save-to-Folder'_.
 
 ---
 
-![Incremental Refresh Workspace Mode Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-workspace-mode.png)
+![Resumen Visual del modo del área de trabajo con actualización incremental](~/content/assets/images/tutorials/incremental-refresh-workspace-mode.png)
 
 ---
 
-Incremental Refresh creates new partitions upon the first scheduled refresh in a day. As a result, any local metadata (i.e. `.bim` or `database.json`) will be out-of-sync with the remote model metadata after the refresh. As a result, **when working with a model that has tables configured with Incremental Refresh, _Workspace Mode_ is not recommended**.
+La actualización incremental crea nuevas particiones en la primera actualización programada del día. Como resultado, cualquier metadato local (es decir, `.bim` o `Database.json`) quedará desincronizado respecto a los metadatos del modelo remoto después de la actualización. Como resultado, **al trabajar con un modelo que tenga tablas configuradas con actualización incremental, no se recomienda el _modo del área de trabajo_.**.
 
 > [!IMPORTANT]
-> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services, custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> La configuración de la actualización incremental con Tabular Editor 3 se limita al Dataset alojado en el servicio Power BI Datasets. Para Analysis Services, se requiere una [creación de particiones](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizada.
 
 ---
 
-### Workspace Mode is not Recommended
+### No se recomienda el modo del área de trabajo
 
-The reason is because _Workspace Mode_ will overwrite the remote model metadata with local metadata files; any out-of-sync changes (like to Policy Range partitions) will be lost. When working with _Workspace Mode_ on these models, you would need to _Apply refresh policy_ for tables using incremental refresh before saving changes every day.
+El motivo es que el _modo del área de trabajo_ sobrescribirá los metadatos del modelo remoto con los archivos de metadatos locales; se perderán los cambios que no estén sincronizados (por ejemplo, en las particiones del intervalo de la política). Al trabajar con el _modo del área de trabajo_ en estos modelos, tendrías que _Aplicar la política de actualización_ a las tablas que usan actualización incremental antes de guardar los cambios cada día.
 
-![Workspace mode can get out of sync with local metadata.](~/content/assets/images/tutorials/incremental-refresh-workspace-mode-out-of-sync.png)
+![El modo del área de trabajo puede desincronizarse de los metadatos locales.](~/content/assets/images/tutorials/incremental-refresh-workspace-mode-out-of-sync.png)
 
-### Recommendation: Develop & Deploy from Local Metadata
+### Recomendación: Desarrollar e implementar desde metadatos locales
 
-**Instead, it is recommended to develop the model from the local metadata files.** Changes can be deployed excluding partitions governed by a Refresh Policy, so there is no risk of overwriting the policies created by Power BI. A second read/refresh instance of Tabular Editor can be connected to the remote model for testing purposes.
+**En su lugar, se recomienda desarrollar el modelo a partir de los archivos de metadatos locales.** Puedes implementar los cambios excluyendo las particiones regidas por una política de actualización, por lo que no hay riesgo de sobrescribir las políticas creadas por Power BI. Puedes conectar una segunda instancia de lectura/actualización de Tabular Editor al modelo remoto con fines de prueba.
 
-To deploy the model, go _Model > Deploy..._ which opens the Deployment Wizard. Here you can select whether you want to include partitions governed by Incremental Refresh policies:
+Para implementar el modelo, ve a _Model > Deploy..._, lo que abre el Asistente de implementación. Aquí puedes seleccionar si quieres incluir particiones regidas por políticas de actualización incremental:
 
-![Deploy partitions, avoiding partitions with refresh policies.](~/content/assets/images/tutorials/incremental-refresh-deploy-partitions.png)
+![Implementar particiones, evitando las que tienen políticas de actualización.](~/content/assets/images/tutorials/incremental-refresh-deploy-partitions.png)
 
-By deploying the model without these Policy Range partitions, you are mitigating any potential impact due to out-of-sync incremental refresh partitions between the metadata and remote model.
+Al implementar el modelo sin estas particiones de Policy Range, mitigas cualquier posible impacto debido a particiones de actualización incremental desincronizadas entre los metadatos y el modelo remoto.
