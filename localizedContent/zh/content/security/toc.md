@@ -1,6 +1,6 @@
 # @security-privacy
 
-# Legal
+# 法律
 
 ## @te3-eula
 
