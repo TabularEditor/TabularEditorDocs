@@ -1,6 +1,6 @@
 ---
 uid: roadmap
-title: Roadmap
+title: Hoja de ruta
 author: Morten Lønskov
 updated: 2025-10-29
 applies_to:
@@ -11,156 +11,156 @@ applies_to:
       full: true
 ---
 
-# Tabular Editor 3 Roadmap
+# Hoja de ruta de Tabular Editor 3
 
-Below is an overview of major new features to be shipped with Tabular Editor 3 updates in the short- to long term:
+A continuación se muestra un resumen de las principales novedades que se incluirán en las actualizaciones de Tabular Editor 3 a corto y largo plazo:
 
-# [Upcoming](#tab/upcoming)
+# [Próximamente](#tab/upcoming)
 
-## In Development
+## En desarrollo
 
-- **Semantic Bridge enhancements**: Support for v1.1 properties and enhanced import UI
-- **Localization improvements**: Expanding language support and refining existing translations
-- **Power Query (M) Auto-Formatting**: Advanced formatting capabilities for M expressions
-- **Graphical Model Comparison**: See the changes that are applied to
+- **Mejoras de Semantic Bridge**: compatibilidad con las propiedades de la versión 1.1 y una interfaz de importación mejorada
+- **Mejoras de localización**: ampliación de la compatibilidad con idiomas y perfeccionamiento de las traducciones existentes
+- **Autoformato de Power Query (M)**: capacidades de formato avanzadas para expresiones M
+- **Comparación gráfica de modelos**: ver los cambios que se aplican a
 
-## Up Next
+## Próximamente
 
-- AI Assistant in Tabular Editor
-- .NET 10 Support
-- Git integration
-- Power Query (M) Editing Enhancements
-- TOM Properties shown as TMDL and TMSL Scripts
-- Standalone CLI application
-- Built-in Macros
+- Asistente de IA en Tabular Editor
+- Compatibilidad con «.NET 10»
+- Integración con Git
+- Mejoras en la edición de Power Query (M)
+- Propiedades de TOM mostradas como scripts de TMDL y TMSL
+- Aplicación CLI independiente
+- Macros integradas
 
-## Future
+## Futuro
 
-- DAX Debugger Filter Context visualizer
-- Configurable Daxscilla autocomplete code snippets
-- Configurable theming for code editors (syntax highlighting colors)
-- Incremental deployment (a la [ALM Toolkit](http://alm-toolkit.com/))
-- Macro Actions improvements such as automatic application across model and preferences for which to apply
+- Visual de contexto de filtro del depurador de DAX
+- Fragmentos de código de autocompletado de Daxscilla configurables
+- Temas configurables para los editores de código (colores de resaltado de sintaxis)
+- Implementación incremental (al estilo de [ALM Toolkit](http://alm-toolkit.com/))
+- Mejoras en Acciones de macro, como la aplicación automática en todo el modelo y preferencias para decidir cuáles aplicar
 
-# [Shipped](#tab/shipped)
+# [Lanzado](#tab/shipped)
 
-For detailed information about each release, see the [full release history](xref:release-history).
+Para obtener información detallada sobre cada versión, consulta el [historial completo de versiones](xref:release-history).
 
-## Shipped in 2026
+## Lanzado en 2026
 
-✅ [**Localization**](xref:references-application-language) - Chinese, Spanish (Preview), Japanese, German, and French (Experimental) language support (v3.25.0)
+✅ [**Localización**](xref:references-application-language) - Compatibilidad con chino, español (vista previa), japonés, alemán y francés (experimental) (v3.25.0)
 
-✅ [**Built-in Best Practice Analyzer rules**](xref:built-in-bpa-rules) - Comprehensive set of BPA rules covering formatting, metadata, model layout, DAX expressions, and translations (v3.25.0)
+✅ [**Reglas integradas del Best Practice Analyzer**](xref:built-in-bpa-rules) - Conjunto completo de reglas de BPA que cubren el formato, los metadatos, el diseño del modelo, las expresiones DAX y las traducciones (v3.25.0)
 
-✅ **Semantic Bridge** - Create semantic models from Databricks Metric Views (Enterprise Edition, v3.25.0)
+✅ **Semantic Bridge** - Crea modelos semánticos a partir de Databricks Metric Views (Edición Enterprise, v3.25.0)
 
-✅ [**Save with supporting files for Fabric**](xref:save-with-supporting-files) - Support for .platform and definition.pbism files to match Fabric repository structure (v3.25.0)
+✅ [**Guardar con archivos auxiliares para Fabric**](xref:save-with-supporting-files) - Compatibilidad con archivos .platform y definition.pbism para ajustarse a la estructura del repositorio de Fabric (v3.25.0)
 
-✅ **Calendar Editor** - Enhanced UI for managing calendar objects for time intelligence (v3.25.0)
+✅ **Editor de calendario**: interfaz mejorada para administrar objetos de calendario para la inteligencia temporal (v3.25.0)
 
-✅ [**Advanced Refresh dialog**](xref:advanced-refresh) - Configure parallelism, effective date for incremental refresh, and [refresh override profiles](xref:refresh-overrides) (Business/Enterprise Edition, v3.25.0)
+✅ [**Cuadro de diálogo de actualización avanzada**](xref:advanced-refresh): configura el paralelismo, la fecha de vigencia de la actualización incremental y los [perfiles de anulación de actualización](xref:refresh-overrides) (Edición Business/Edición Enterprise, v3.25.0)
 
-## Shipped in 2025
+## Lanzado en 2025
 
-✅ [**DAX Package Manager**](xref:dax-package-manager) - Find and install DAX packages from daxlib.org with a single click (v3.24.0)
+✅ [**Administrador de paquetes DAX**](xref:dax-package-manager): busca e instala paquetes DAX desde daxlib.org con un solo clic (v3.24.0)
 
-✅ **UDF Namespaces** - Hierarchical organization of User-Defined Functions with customizable namespace properties (v3.24.0)
+✅ **Espacios de nombres de UDF**: organización jerárquica de funciones definidas por el usuario con propiedades de espacio de nombres personalizables (v3.24.0)
 
-✅ **Visual Calculations improvements** - Enhanced DAX editor support for Visual Calculation functions and visual column references (v3.24.0)
+✅ **Mejoras en los Cálculos Visuales**: mejor compatibilidad del editor DAX con funciones de Cálculo Visual y referencias a columnas Visuales (v3.24.0)
 
-✅ [**DAX User-Defined Functions (UDFs)**](xref:udfs) - Create and manage reusable DAX functions (v3.23.0)
+✅ [**Funciones DAX definidas por el usuario (UDF)**](xref:udfs): crea y administra una función DAX definida por el usuario reutilizable (v3.23.0)
 
-✅ [**Calendars**](xref:calendars) - Calendar-based time intelligence features with enhanced UI (v3.23.0)
+✅ [**Calendarios**](xref:calendars): funciones de inteligencia temporal basadas en calendarios con una interfaz mejorada (v3.23.0)
 
-✅ **Fabric SQL Databases and Mirrored Databases support** - Import wizard support for new Fabric data sources in Import and Direct Lake modes (v3.23.0)
+✅ **Compatibilidad con Fabric SQL Databases y Mirrored Databases**: el asistente de importación ahora admite nuevos Data sources de Fabric en los modos Import y Direct Lake (v3.23.0)
 
-✅ [**Direct Lake on OneLake and SQL**](xref:direct-lake-guidance) - Full support for Direct Lake modes including mixed mode/hybrid models (Enterprise Edition, v3.22.0)
+✅ [**Direct Lake en OneLake y SQL**](xref:direct-lake-guidance): compatibilidad completa con los modos de Direct Lake, incluidos el modo mixto y los modelos híbridos (Edición Enterprise, v3.22.0)
 
-✅ **Word-based autocomplete** - DAX editor now supports multi-word search in autocomplete (v3.22.0)
+✅ **Autocompletado por palabras**: el editor DAX ahora admite búsquedas de varias palabras en el autocompletado (v3.22.0)
 
-✅ **Diagram view enhancements** - Column data type icons, bi-directional relationship indicators, and improved table display options (v3.21.0)
+✅ **Mejoras en la vista de diagrama**: iconos del tipo de datos de las columnas, indicadores de relación bidireccional y opciones mejoradas de visualización de tablas (v3.21.0)
 
-✅ **Copy TMDL scripts from TOM Explorer** - Export individual objects as TMDL to clipboard or file (v3.21.0)
+✅ **Copiar scripts de TMDL desde el Explorador TOM**: exporta objetos individuales como TMDL al portapapeles o a un archivo (v3.21.0)
 
-✅ **DAX Optimizer RLS support** - View DAX Optimizer results for RLS and Calculation Item expressions (v3.21.0)
+✅ **Compatibilidad con RLS en el Optimizador de DAX**: ve los resultados del Optimizador de DAX para RLS y expresiones de elementos de cálculo (v3.21.0)
 
-✅ **MetadataSource property** - New Model object property for C# scripts to access model metadata location (v3.21.0)
+✅ **Propiedad MetadataSource**: nueva propiedad del objeto Model para que los C# Scripts puedan acceder a la ubicación de los metadatos del modelo (v3.21.0)
 
-✅ **C# Editor improvements** - Enhanced code editing experience with better IntelliSense and flexible search
+✅ **Mejoras en el editor de C#**: experiencia de edición de código mejorada con un IntelliSense más preciso y búsqueda flexible
 
-✅ **Native ARM64 builds** - Optimized performance on ARM64 processors (v3.23.0)
+✅ **Compilaciones nativas ARM64**: rendimiento optimizado en procesadores ARM64 (v3.23.0)
 
-## Shipped in 2024
+## Lanzado en 2024
 
-✅ DAX Debugger Locals Enhancement
+✅ Mejora de variables locales del depurador de DAX
 
-✅ Full Direct Lake Integration
+✅ Integración completa con Direct Lake
 
-✅ DAX Optimizer Integration (Preview)
+✅ Integración del Optimizador de DAX (vista previa)
 
-✅ .Net 8 migration
+✅ Migración a .Net 8
 
-✅ Pivot Grid Enhancement
+✅ Mejora de Pivot Grid
 
-✅ DAX Query Enhancement
+✅ Mejora de la Consulta DAX
 
-✅ TMDL GA Support
+✅ Compatibilidad con TMDL GA
 
-✅ Code Actions
+✅ Acciones de código
 
-✅ GA of DAX Optimizer Integration
+✅ Disponibilidad general de la integración con el Optimizador de DAX
 
-✅ Data Refresh View Improvements
+✅ Mejoras en la vista de actualización de datos
 
-✅ Power Query (M) Highlighting
+✅ Resaltado de Power Query (M)
 
-## Shipped in 2023
+## Lanzado en 2023
 
-✅ TMDL Support as standard Save to Folder file format. (Depending on release of TMDL by Microsoft)
+✅ Compatibilidad con TMDL como formato de archivo estándar de Guardar en carpeta. (Dependiendo del lanzamiento de TMDL por parte de Microsoft)
 
-✅ Import Table Wizard support for Databricks (pending availability of REST endpoint for fetching metadata/schema)
+✅ Compatibilidad del Asistente para importar tablas con Databricks (a la espera de que esté disponible el punto de conexión REST para obtener metadatos/esquema)
 
-✅ Metadata Translation Editor (view that can be opened when selecting one or more cultures, similar to the Tabular Translator tool)
+✅ Editor de traducción de metadatos (vista que se puede abrir al seleccionar una o varias configuraciones regionales, similar a la herramienta Tabular Translator)
 
-✅ Perspective Editor (view that can be opened when selecting one or more perspectives, allowing you to check/uncheck objects visible in those perspectives)
+✅ Editor de perspectivas (vista que se puede abrir al seleccionar una o varias perspectivas, lo que le permite marcar o desmarcar los objetos visibles en esas perspectivas)
 
-✅ Improved Support for Oracle Databases
+✅ Compatibilidad mejorada con bases de datos Oracle
 
-✅ Import Table Wizard support for Power BI datamarts (Use Datamart SQL Endpoint)
+✅ Compatibilidad del Asistente para importar tablas con datamarts de Power BI (Use el punto de conexión SQL del datamart)
 
-## Shipped in 2022
+## Lanzado en 2022
 
-✅  DAX Debugger
+✅ Depurador de DAX
 
-✅  .NET 6 migration
+✅ Migración a .NET 6
 
-✅  C# code assist (autocomplete, calltips, etc.)
+✅ Code Assist para C# (autocompletar, información de parámetros, etc.)
 
-✅  Import Table Wizard support for Snowflake
+✅ Compatibilidad del Asistente para importar tablas con Snowflake
 
-✅  Import Table Wizard support for Power BI dataflows
+✅  Compatibilidad del Asistente para importar tablas con Dataflow de Power BI
 
-✅  Configurable hotkeys
+✅ Atajos de teclado configurables
 
-✅  Support for DAX window functions
+✅ Compatibilidad con funciones de ventana de DAX
 
-✅  Git integration (private preview)
+✅ Integración con Git (vista previa privada)
 
-## Shipped in 2021
+## Lanzado en 2021
 
-✅  Import Table Wizard
+✅ Asistente para importar tablas
 
-✅  Portable Version
+✅  Versión portátil
 
-✅  Pivot Grid, Table Preview and DAX Query impersonation of a specific role or user, making it easy to test RLS/OLS
+✅  Pivot Grid, Vista previa de tabla y suplantación en la Consulta DAX de un rol o usuario específicos, lo que facilita probar RLS/OLS
 
-✅  DAX Script support for calculation groups and calculation items
+✅  Compatibilidad con Script DAX para grupos de cálculo y elementos de cálculo
 
-✅  Offline DAX formatting
+✅  Formato DAX sin conexión
 
 ***
 
-# Tabular Editor 2 Roadmap
+# Hoja de ruta de Tabular Editor 2
 
 > [!NOTE]
-> abular Editor 2 is no longer under active development and will not receive any major feature additions or improvements from our side. We are, however, committed to keeping it up-to-date, ensuring support for new semantic modelling features as they are released from Microsoft, and also fixing any critical or blocking issues. As the project is open-source under MIT, anyone is welcome to submit pull requests, which will be reviewed and approved by our team.
+> Tabular Editor 2 ya no está en desarrollo activo y no recibirá de nuestra parte nuevas funciones importantes ni mejoras. Sin embargo, nos comprometemos a mantenerlo actualizado, garantizando la compatibilidad con las nuevas funcionalidades de los modelos semánticos a medida que Microsoft las publique, y también a corregir cualquier incidencia crítica o bloqueante. Como el proyecto es de código abierto bajo la licencia MIT, cualquiera puede enviar pull requests, que nuestro equipo revisará y aprobará.
