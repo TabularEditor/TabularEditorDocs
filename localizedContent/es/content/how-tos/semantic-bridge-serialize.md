@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-serialize
-title: Serialize a Metric View to YAML
+title: Serializar una Metric View en formato YAML
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -18,56 +18,56 @@ applies_to:
           full: true
 ---
 
-# Serialize a Metric View to YAML
+# Serializar una Metric View en formato YAML
 
-This how-to demonstrates how to serialize a Metric View back to YAML format, either as a string or saved to a file.
+Este procedimiento explica cómo volver a serializar una Metric View al formato YAML, ya sea como una cadena o guardándola en un archivo.
 
 > [!WARNING]
-> The MVP only supports v0.1 Metric View properties. Any v1.1 metadata present in a loaded Metric View is silently ignored and will be lost when you serialize.
-> Do not overwrite a source YAML file that contains v1.1 metadata.
+> El MVP solo admite propiedades de Metric View v0.1. Cualquier metadato v1.1 presente en una Metric View cargada se omite sin avisar y se perderá al serializar.
+> No sobrescriba un archivo YAML de origen que contenga metadatos v1.1.
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
-## Serialize to a string
+## Serializar como cadena
 
-Use `Serialize()` to get the YAML representation:
+Use `Serialize()` para obtener la representación en YAML:
 
 ```csharp
 var yaml = SemanticBridge.MetricView.Serialize();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("YAML output:");
+sb.AppendLine("Salida de YAML:");
 sb.AppendLine("------------");
 sb.AppendLine(yaml);
 Output(sb.ToString());
 ```
 
-## Save to a file
+## Guardar en un archivo
 
-Use `Save(path)` to write the YAML directly to disk:
+Use `Save(path)` para escribir el YAML directamente en el disco:
 
 ```csharp
 var path = "C:/MetricViews/updated-sales-metrics.yaml";
 
 SemanticBridge.MetricView.Save(path);
 
-Output($"Metric View saved to: {path}");
+Output($"Metric View guardada en: {path}");
 ```
 
-## Round-trip workflow
+## Flujo de trabajo de ida y vuelta
 
-A common workflow is to load, modify, and save a Metric View:
+Un flujo de trabajo habitual es cargar, modificar y guardar una Metric View:
 
 ```csharp
 using System.Globalization;
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
-// The Metric View is already loaded from the include above
+// La Metric View ya está cargada desde la inclusión anterior
 
 var view = SemanticBridge.MetricView.Model;
 var textInfo = CultureInfo.CurrentCulture.TextInfo;
 
-// Modify: rename dimensions from snake_case to Title Case
+// Modificar: renombrar las dimensiones de snake_case a Title Case
 var renamed = view.Dimensions.Select(dim => new MetricView.Dimension
 {
     Name = textInfo.ToTitleCase(dim.Name.Replace('_', ' ')),
@@ -80,20 +80,20 @@ foreach (var dim in renamed)
     view.Dimensions.Add(dim);
 }
 
-// Serialize to see the result
+// Serializar para ver el resultado
 var yaml = SemanticBridge.MetricView.Serialize();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("Modified YAML:");
+sb.AppendLine("YAML modificado:");
 sb.AppendLine("--------------");
 sb.AppendLine(yaml);
 Output(sb.ToString());
 ```
 
-**Output:**
+**Salida:**
 
 ```
-Modified YAML:
+YAML modificado:
 --------------
 version: 0.1
 source: sales.fact.orders
@@ -131,7 +131,7 @@ measures:
   expr: COUNT(DISTINCT customer_id)
 ```
 
-## See also
+## Ver también
 
 - @semantic-bridge-load-inspect
 - @semantic-bridge-import
