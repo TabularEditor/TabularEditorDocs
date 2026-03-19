@@ -1,6 +1,6 @@
 ---
 uid: calendar-blank-value
-title: Calendar function blank date error
+title: Error de fecha en blanco en la función Calendar
 author: Morten Lønskov
 updated: 2025-10-20
 applies_to:
@@ -17,25 +17,25 @@ applies_to:
           full: true
 ---
 
-# Calendar function blank date error
+# Error de fecha en blanco en la función Calendar
 
-## Overview
+## Información general
 
-This error may occur when refreshing a model in **Tabular Editor 3 (TE3)**, even if the affected table does not directly reference a `CALENDAR()` function. It typically indicates that a dependent Date or Calendar table relies on values from other tables that are temporarily empty, resulting in blank start or end date values.
+Este error puede aparecer al actualizar un modelo en **Tabular Editor 3 (TE3)**, incluso si la tabla afectada no hace referencia directamente a una función `CALENDAR()`. Normalmente indica que una tabla de Fecha o Calendario dependiente se basa en valores de otras tablas que están temporalmente vacías, lo que da como resultado valores en blanco para la fecha de inicio o de fin.
 
-## Symptoms
+## Síntomas
 
-- Model refresh in Tabular Editor 3 fails with:
+- La actualización del modelo en Tabular Editor 3 falla con:
 
   ```
-  The start date or end date in Calendar function cannot be Blank value.
+  La fecha de inicio o la fecha de fin en la función Calendar no puede estar en blanco.
   ```
 
-- The same model or table refreshes successfully in Power BI Desktop or Power BI Service.
+- El mismo modelo o tabla se actualiza correctamente en Power BI Desktop o en Power BI Service.
 
-- Reimporting the table under a new name (for example, _TableName 1_) succeeds temporarily.
+- Reimportar la tabla con un nombre nuevo (por ejemplo, _TableName 1_) funciona de manera temporal.
 
-- The M expression for the affected table appears simple and valid:
+- La expresión M de la tabla afectada parece sencilla y válida:
 
   ```m
   let
@@ -45,11 +45,11 @@ This error may occur when refreshing a model in **Tabular Editor 3 (TE3)**, even
     Data
   ```
 
-## Cause
+## Causa
 
-Although the error may appear unrelated to the table being refreshed, it usually originates from a downstream dependency in the model.
+Aunque el error pueda parecer no estar relacionado con la tabla que se está actualizando, por lo general se origina en una dependencia posterior del modelo.
 
-For example, a Date or Calendar table may define its range dynamically based on the minimum and maximum dates across multiple transactional tables:
+Por ejemplo, una tabla de Fecha o Calendario puede definir su rango de forma dinámica en función de las fechas mínima y máxima de varias tablas transaccionales:
 
 ```dax
 CALENDAR(
@@ -58,16 +58,16 @@ CALENDAR(
 )
 ```
 
-If one or more of those source tables is empty, the `MINX` or `MAXX` expressions return blank, which causes the `CALENDAR()` function to fail.
+Si una o varias de esas tablas de origen están vacías, las expresiones `MINX` o `MAXX` devuelven un valor en blanco, lo que hace que la función `CALENDAR()` falle.
 
-## Steps to resolve
+## Pasos para solucionarlo
 
-1. **Identify dependent tables**
-   - Use the **Dependencies** view in Tabular Editor 3 to locate Date or Calendar tables that reference other tables’ date fields.
-2. **Check for empty tables**
-   - Verify that all referenced tables contain data. If a source table is empty, refresh the data source or adjust your schema variable configuration.
-3. **Add default fallback values**
-   - To prevent blank boundaries, wrap expressions with `COALESCE()` or specify default date values:
+1. **Identifica las tablas dependientes**
+   - Usa la vista **Dependencies** en Tabular Editor 3 para localizar tablas de fecha o calendario que hagan referencia a campos de fecha de otras tablas.
+2. **Comprueba si hay tablas vacías**
+   - Comprueba que todas las tablas a las que se hace referencia contienen datos. Si una tabla de origen está vacía, actualiza el Data source o ajusta la configuración de la variable de esquema.
+3. **Agrega valores predeterminados alternativos**
+   - Para evitar límites vacíos, envuelve las expresiones con `COALESCE()` o especifica valores de fecha predeterminados:
 
      ```dax
      CALENDAR(
@@ -75,10 +75,10 @@ If one or more of those source tables is empty, the `MINX` or `MAXX` expressions
        COALESCE(MAXX(...), TODAY())
      )
      ```
-4. **Reprocess the model**
-   - After applying fixes or data updates, reprocess the affected tables in Tabular Editor 3.
+4. **Vuelve a procesar el modelo**
+   - Después de aplicar correcciones o actualizaciones de datos, vuelve a procesar las tablas afectadas en Tabular Editor 3.
 
-## Additional notes
+## Notas adicionales
 
 > [!NOTE]
-> This issue can occur when introducing schema variables in M scripts, such as using a variable to define the schema name (for example, `SchemaVar`).
+> Este problema puede producirse al introducir variables de esquema en scripts M, por ejemplo, al usar una variable para definir el nombre del esquema (p. ej., `SchemaVar`).
