@@ -1,4 +1,4 @@
-# Create a New Model
+# 创建新模型
 
 ## @new-as-model
 
@@ -6,19 +6,19 @@
 
 ## @direct-lake-guidance
 
-# Connect to a Model
+# 连接到模型
 
 ## @powerbi-xmla
 
 ## @workspace-mode
 
-# Adding Tables & Data Sources
+# 添加表和数据源
 
 ## @importing-tables
 
 ## @connecting-to-azure-databricks
 
-# Configuring Data Security
+# 配置数据安全性
 
 ## @data-security-about
 
@@ -28,7 +28,7 @@
 
 ## @data-security-testing
 
-# Incremental Refresh
+# 增量刷新
 
 ## @incremental-refresh-about
 
@@ -40,18 +40,18 @@
 
 ## @incremental-refresh-workspace-mode
 
-# Advanced Modelling
+# 高级建模
 
 ## @udfs
 
 ## @calendars
 
-## @detail-rows-expression
+## 明细行表达式
 
-## @user-defined-aggregations
+## 用户自定义聚合函数
 
-# Automation with C# Scripting
+# 使用 C# Script 实现自动化
 
-## @creating-macros
+## 创建宏
 
-## @csharp-script-library
+## C# 脚本库
