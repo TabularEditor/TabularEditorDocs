@@ -1,4 +1,4 @@
-# Downloads and Releases
+# Descargas y lanzamientos
 
 ## @downloads
 
@@ -6,11 +6,11 @@
 
 ## @whats-new
 
-# Technical Reference
+# Referencia técnica
 
 ## @faq
 
-## @preferences
+## @preferencias
 
 ## @policies
 
@@ -24,10 +24,10 @@
 
 ## @user-setting-files-te2
 
-# Development and Planning
+# Desarrollo y planificación
 
 ## @roadmap
 
-# Deprecated Features
+# Funciones obsoletas
 
 ## @formatdax
