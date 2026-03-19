@@ -1,26 +1,26 @@
 ---
 uid: faq
-title: Frequently Asked Questions
+title: Preguntas frecuentes
 ---
 
-# Frequently Asked Questions
+# Preguntas frecuentes
 
-## What is Tabular Editor?
+## ¿Qué es Tabular Editor?
 
-Essentially, Tabular Editor provides a UI for editing the metadata making up an Analysis Services Tabular Model. The main difference between using Tabular Editor for editing a model versus using Visual Studio, is that Tabular Editor does not load any _data_ - only _metadata_. This means that no validations or calculations are performed when you create and modify measures, display folders, etc. Validations and calculations are performed only when the user chooses to persist the changes to the database. This provides a better developer experience for medium to large sized models, which tend to be slow to work with in Visual Studio.
+En esencia, Tabular Editor ofrece una interfaz de usuario para editar los metadatos que componen un modelo tabular de Analysis Services. La principal diferencia entre usar Tabular Editor para editar un modelo y usar Visual Studio es que Tabular Editor no carga ningún _dato_, solo _metadatos_. Esto significa que no se realizan validaciones ni cálculos cuando creas y modificas medidas, carpetas de visualización, etc. Las validaciones y los cálculos solo se ejecutan cuando el usuario decide guardar los cambios en la base de datos. Esto te da una mejor experiencia de desarrollo en modelos de tamaño medio a grande, que suelen ser lentos de manejar en Visual Studio.
 
-Additionally, Tabular Editor has a lot of [features](../getting-started/boosting-productivity-te3.md) that will generally boost your productivity and make certain tasks easier.
+Además, Tabular Editor incluye muchas [funcionalidades](../getting-started/boosting-productivity-te3.md) que, por lo general, aumentarán tu productividad y facilitarán ciertas tareas.
 
-## Why do we need yet another tool for SSAS Tabular?
+## ¿Por qué necesitamos otra herramienta más para SSAS Tabular?
 
-Working with Analysis Services Tabular, you may already be familiar with SQL Server Data Tools (Visual Studio), [DAX Editor](https://www.sqlbi.com/tools/dax-editor/), [DAX Studio](https://www.sqlbi.com/tools/dax-studio/), [BISM Normalizer](http://bism-normalizer.com/) and [BIDSHelper](https://bidshelper.codeplex.com/). These are all excellent tools, each with their own purposes. Tabular Editor is not intended to replace any of these tools, but should rather be seen as a supplement to them. Please view the [Why Tabular Editor](https://tabulareditor.com/why-tabular-editor) article, to see why Tabular Editor is justified.
+Si trabajas con Analysis Services Tabular, quizá ya conozcas SQL Server Data Tools (Visual Studio), [Editor de DAX](https://www.sqlbi.com/tools/dax-editor/), [DAX Studio](https://www.sqlbi.com/tools/dax-studio/), [BISM Normalizer](http://bism-normalizer.com/) y [BIDSHelper](https://bidshelper.codeplex.com/). Todas son herramientas excelentes, cada una con sus propios fines. Tabular Editor no pretende sustituir a ninguna de estas herramientas; más bien, debería verse como un complemento de ellas. Consulta el artículo [Por qué Tabular Editor](https://tabulareditor.com/why-tabular-editor) para ver por qué Tabular Editor tiene sentido.
 
-## Why isn't Tabular Editor available as a plug-in for Visual Studio?
+## ¿Por qué Tabular Editor no está disponible como complemento para Visual Studio?
 
-While a better user experience for working with Tabular Models inside Visual Studio would definitely be appreciated, a stand-alone tool provides some benefits over a plug-in: First of all, you **don't need a Visual Studio/SSDT installation to use Tabular Editor**. Tabular Editor only requires the AMO libraries, which is quite a small installation compared to VS. Secondly, TabularEditor.exe can be executed with command-line options for deployment, scripting, etc., which would not be possible in a .vsix (plug-in) project.
+Aunque se agradecería una mejor experiencia de usuario para trabajar con modelos tabulares dentro de Visual Studio, una herramienta independiente ofrece algunas ventajas frente a un complemento: en primer lugar, **no necesitas una instalación de Visual Studio/SSDT para usar Tabular Editor**. Tabular Editor solo requiere las bibliotecas AMO, que suponen una instalación bastante pequeña en comparación con VS. En segundo lugar, TabularEditor.exe puede ejecutarse con opciones de línea de comandos para implementación, scripting, etc., algo que no sería posible en un proyecto .vsix (complemento).
 
-Also worth mentioning: Tabular Editor can be downloaded as a [standalone .zip file](https://github.com/TabularEditor/TabularEditor/releases/latest/download/TabularEditor.Portable.zip), meaning you do not need to install anything. In other words, you can run Tabular Editor without having admin rights on your Windows machine. Simply download the zip file, extract it, and run TabularEditor.exe.
+También vale la pena mencionar que Tabular Editor se puede descargar como un [archivo .zip independiente](https://github.com/TabularEditor/TabularEditor/releases/latest/download/TabularEditor.Portable.zip), lo que significa que no necesitas instalar nada. En otras palabras, puedes ejecutar Tabular Editor sin tener permisos de administrador en tu equipo con Windows. Simplemente descarga el archivo zip, extráelo y ejecuta TabularEditor.exe.
 
-## What features are planned for upcoming releases?
+## ¿Qué funcionalidades están previstas para las próximas versiones?
 
-You can view the current roadmap [here](roadmap.md).
+Puedes ver la hoja de ruta actual [aquí](roadmap.md).
