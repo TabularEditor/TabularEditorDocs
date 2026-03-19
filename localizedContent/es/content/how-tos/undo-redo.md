@@ -1,6 +1,6 @@
 ---
 uid: undo-redo
-title: Undo/Redo support
+title: Compatibilidad con Deshacer/Rehacer
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,8 +9,8 @@ applies_to:
       full: true
 ---
 
-## Undo/Redo support
+## Compatibilidad con Deshacer/Rehacer
 
-Any change you make in Tabular Editor can be undone using CTRL+Z and subsequently redone using CTRL+Y. There is no limit to the number of operations that can be undone, but the stack is reset when you open a Model.bim file or load a model from a database.
+Cualquier cambio que hagas en Tabular Editor se puede deshacer con CTRL+Z y, a continuación, rehacer con CTRL+Y. No hay límite en el número de operaciones que se pueden deshacer, pero la pila se restablece cuando abres un archivo Model.bim o cargas un modelo desde una base de datos.
 
-When deleting objects from the model, all translations, perspectives and relationships that reference the deleted objects are also automatically deleted (whereas Visual Studio normally shows an error message that the object cannot be deleted). If you make a mistake, you can use the Undo functionality to restore the deleted object, which will also restore any translations, perspectives or relationships that were deleted. Note that even though Tabular Editor can detect [DAX formula dependencies](xref:formula-fix-up-dependencies), Tabular Editor will not warn you in case you delete a measure or column which is used in the DAX expression of another measure or calculated column.
+Al eliminar objetos del modelo, todas las traducciones, perspectivas y relaciones que hagan referencia a los objetos eliminados también se eliminan automáticamente (mientras que Visual Studio normalmente muestra un mensaje de error indicando que el objeto no se puede eliminar). Si cometes un error, puedes usar la función Deshacer para restaurar el objeto eliminado, lo que también restaurará cualquier traducción, perspectiva o relación eliminada. Ten en cuenta que, aunque Tabular Editor puede detectar [dependencias de fórmulas DAX](xref:formula-fix-up-dependencies), Tabular Editor no te avisará si eliminas una medida o una columna que se usa en la expresión DAX de otra medida o columna calculada.
