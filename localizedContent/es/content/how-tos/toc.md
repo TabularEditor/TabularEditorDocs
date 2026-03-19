@@ -1,66 +1,66 @@
-# Scripting and Automation
+# Secuencias de comandos y automatización
 
-## [Advanced Scripting](Advanced-Scripting.md)
+## [Secuencias de comandos avanzadas](Advanced-Scripting.md)
 
-## [Script Reference Objects](script-reference-objects.md)
+## [Objetos de referencia del script](script-reference-objects.md)
 
-# Model Management and Deployment
+# Gestión y despliegue de modelos
 
-## [Deploy Current Model](deploy-current-model.md)
+## [Desplegar el modelo actual](deploy-current-model.md)
 
-## [Connect to SSAS](connect-ssas.md)
+## [Conectarse a SSAS](connect-ssas.md)
 
-## [Load and Save](load-save.md)
+## [Cargar y guardar](load-save.md)
 
-## [Folder Serialization](folder-serialization.md)
+## [Serialización de carpetas](folder-serialization.md)
 
-## [Master Model Pattern](Master-model-pattern.md)
+## [Patrón de modelo maestro](Master-model-pattern.md)
 
-## [Update compatibility level](update-compatibility-level.md)
+## [Actualizar el nivel de compatibilidad](update-compatibility-level.md)
 
-# Data Import and Tables
+# Importación de datos y tablas
 
-## [Importing Tables (TE2)](Importing-Tables.md)
+## [Importar tablas (TE2)](Importing-Tables.md)
 
-## [Importing Tables from Excel (TE2)](importing-tables-from-excel.md)
+## [Importar tablas desde Excel (TE2)](importing-tables-from-excel.md)
 
-## [Replace Tables](replace-tables.md)
+## [Reemplazar tablas](replace-tables.md)
 
-# Model Organization and Structure
+# Organización y estructura del modelo
 
-## [Advanced Filtering of Explorer Tree](Advanced-Filtering-of-the-Explorer-Tree.md)
+## [Filtrado avanzado del árbol del explorador](Advanced-Filtering-of-the-Explorer-Tree.md)
 
-## [Drag and Drop](drag-drop.md)
+## [Arrastrar y soltar](drag-drop.md)
 
-## [Duplicate and Batch Rename](duplicate-batchrename.md)
+## [Duplicar y cambiar el nombre en lote](duplicate-batchrename.md)
 
-## [Edit Properties](edit-properties.md)
+## [Editar propiedades](edit-properties.md)
 
-# Translations and Perspectives
+# Traducciones y perspectivas
 
-## [Import/Export Translations](import-export-translations.md)
+## [Importar/exportar traducciones](import-export-translations.md)
 
-## [Perspectives and Translations](perspectives-translations.md)
+## [Perspectivas y traducciones](perspectives-translations.md)
 
-# Data Security and Roles
+# Seguridad de datos y roles
 
-## [Roles and Row-Level Security](roles-rls.md)
+## [Roles y seguridad a nivel de filas](roles-rls.md)
 
-# Connectivity and Integration
+# Conectividad e integración
 
-## [XMLA Analysis Services Connectivity](xmla-as-connectivity.md)
+## [Conectividad de Analysis Services mediante XMLA](xmla-as-connectivity.md)
 
-## [Power BI XMLA PBIX Workaround](powerbi-xmla-pbix-workaround.md)
+## [Solución alternativa para PBIX con XMLA en Power BI](powerbi-xmla-pbix-workaround.md)
 
-# Model Maintenance
+# Mantenimiento del modelo
 
-## [Formula Fixup Dependencies](formula-fixup-dependencies.md)
+## [Dependencias de corrección de fórmulas](formula-fixup-dependencies.md)
 
-## [Metadata Backup](metadata-backup.md)
+## [Copia de seguridad de metadatos](metadata-backup.md)
 
-## [Undo and Redo](undo-redo.md)
+## [Deshacer y rehacer](undo-redo.md)
 
-# [Semantic Bridge](semantic-bridge-how-tos.md)
+# [Puente semántico](semantic-bridge-how-tos.md)
 
 ## @semantic-bridge-load-inspect
 
