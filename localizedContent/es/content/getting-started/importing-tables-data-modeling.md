@@ -1,6 +1,6 @@
 ---
 uid: importing-tables-data-modeling
-title: Importing tables and data modeling
+title: Importación de tablas y modelado del Data model
 author: Daniel Otykier
 updated: 2021-10-08
 applies_to:
@@ -17,64 +17,64 @@ applies_to:
           full: true
 ---
 
-# Importing tables and data modeling
+# Importación de tablas y modelado del Data model
 
-This article describes how to use the [Table Import Wizard](#table-import-wizard) of Tabular Editor 3, to add new tables to the model. There is also a section on how to [update the table schema](#updating-table-schema) of an existing table. Lastly, we cover how to use the [diagram tool](#working-with-diagrams) to define and edit relationships between tables.
+Este artículo describe cómo usar el [Asistente de importación de tablas](#table-import-wizard) de Tabular Editor 3 para agregar nuevas tablas al modelo. También hay una sección sobre cómo [actualizar el esquema de la tabla](#updating-table-schema) de una tabla existente. Por último, explicamos cómo usar la [herramienta de diagramas](#working-with-diagrams) para definir y editar relaciones entre tablas.
 
-## Table Import Wizard
+## Asistente de importación de tablas
 
 [!include[importing-tables1](../features/import-tables.partial.md)]
 
-# Working with diagrams
+# Trabajar con diagramas
 
-In Tabular Editor 3, **diagrams** are documents that can be used to visualize and edit the relationships between tables in the model. You can create as many diagrams as you want to visualize certain areas of your model. A diagram can be saved as a standalone file. See <xref:supported-files#diagram-file-te3diag> for more information.
+En Tabular Editor 3, los **diagramas** son documentos que puedes usar para visualizar y editar las relaciones entre las tablas del modelo. Puedes crear tantos diagramas como quieras para visualizar áreas concretas de tu modelo. Un diagrama se puede guardar como un archivo independiente. Consulta <xref:supported-files#diagram-file-te3diag> para obtener más información.
 
 > [!NOTE]
-> We recommend creating multiple smaller diagrams over few large diagrams. When a diagram contains more than 20 or so tables, it quickly becomes overwhelming and difficult to understand.
+> Recomendamos crear varios diagramas pequeños en lugar de unos pocos diagramas grandes. Cuando un diagrama contiene más de unas 20 tablas, enseguida se vuelve abrumador y difícil de entender.
 
-After loading a model in Tabular Editor 3, choose the **File > New > Diagram** menu option to create a new diagram.
+Después de cargar un modelo en Tabular Editor 3, elige la opción de menú **Archivo > Nuevo > Diagrama** para crear un diagrama nuevo.
 
-## Adding tables
+## Agregar tablas
 
-Add initial tables to the diagram in any of the following ways:
+Agrega las tablas iniciales al diagrama de cualquiera de estas maneras:
 
-- (Multi-)select tables in the TOM Explorer, then right-click and choose **Add to diagram**.
-- (Multi-)select tables in the TOM Explorer, then drag the tables over to the diagram
-- Use the **Diagram > Add tables...** menu option, and (multi-)select the tables you want to add through the dialog box.
+- (Multi-)selecciona tablas en el Explorador TOM y, a continuación, haz clic con el botón derecho y elige **Agregar al diagrama**.
+- Selecciona (Multi-)tablas en el Explorador TOM y, después, arrástralas al diagrama
+- Usa la opción de menú **Diagrama > Agregar tablas...** y (multi-)selecciona las tablas que quieras agregar en el cuadro de diálogo.
   ![Diagram Add Tables](~/content/assets/images/diagram-add-tables.png)
 
-To add additional tables to the diagram, use the technique above again, or right-click on an existing table in the diagram and choose one of the following options:
+Para agregar más tablas al diagrama, vuelve a usar la técnica anterior o haz clic con el botón derecho en una tabla existente del diagrama y elige una de estas opciones:
 
-- **Add tables that filter this table**: Adds all tables to the diagram which may, directly or indirectly through other tables, filter the currently selected table. Useful when starting from a fact table.
-- **Add all related tables**: Adds all tables to the diagram which are directly related to the currently selected table. Useful when starting from a dimension table.
+- **Agregar tablas que filtren esta tabla**: Agrega al diagrama todas las tablas que puedan filtrar, directa o indirectamente a través de otras tablas, la tabla seleccionada. Útil cuando empiezas desde una tabla de hechos.
+- **Agregar todas las tablas relacionadas**: Agrega al diagrama todas las tablas que estén directamente relacionadas con la tabla seleccionada. Útil cuando empiezas desde una tabla de dimensión.
   ![Add Related Tables](~/content/assets/images/add-related-tables.png)
 
-Before proceeding, rearrange and resize the tables in the diagram to suit your preferences, or use the **Diagram > Auto-arrange** feature to have Tabular Editor 3 lay out the tables automatically.
+Antes de continuar, reorganiza y cambia el tamaño de las tablas en el diagrama según tus preferencias, o usa la función **Diagrama > Organizar automáticamente** para que Tabular Editor 3 distribuya las tablas automáticamente.
 
-## Modifying relationships using the diagram
+## Modificar relaciones con el diagrama
 
-To add a new relationship between two tables, locate the column on the fact table (many-side) of the relationship, and drag that column over to the corresponding column on the dimension table (one-side). Confirm the settings for the relationship and hit **OK**.
+Para agregar una nueva relación entre dos tablas, localiza la columna en la tabla de hechos (lado de muchos) de la relación y arrástrala a la columna correspondiente en la tabla de dimensión (lado de uno). Confirma la configuración de la relación y pulsa **OK**.
 
-![Create Relationship](~/content/assets/images/create-relationship.png)
+![Crear relación](~/content/assets/images/create-relationship.png)
 
-To edit an existing relationship, right-click on it and choose **Edit relationship**. The right-click menu also contains shortcuts for reversing or deleting a relationship, as shown on the screenshot below.
+Para editar una relación existente, haz clic con el botón derecho sobre ella y elige **Editar relación**. El menú contextual también incluye accesos directos para invertir o eliminar una relación, como se muestra en la captura de pantalla siguiente.
 
-![Edit Relationship Diagram](~/content/assets/images/edit-relationship-diagram.png)
+![Editar diagrama de relación](~/content/assets/images/edit-relationship-diagram.png)
 
 > [!NOTE]
-> You can also create relationships without using a diagram, through the TOM Explorer. Locate the column from which the relationship should start (many-side / fact-table side), right-click and choose **Create > Relationship from**. Specify the destination column in the Create Relationship dialog that appears on the screen.
+> También puedes crear relaciones sin usar un diagrama, desde el Explorador TOM. Localiza la columna desde la que debe comenzar la relación (lado de muchos / lado de la tabla de hechos), haz clic con el botón derecho y elige **Crear > Relación desde**. Especifica la columna de destino en el cuadro de diálogo Crear relación que aparece en pantalla.
 
-## Saving a diagram
+## Guardar un diagrama
 
-To save a diagram, simply use the **File > Save** (CTRL+S) option. Tabular Editor 3 will prompt you to save the diagram if you close the document or the application while the diagram has unsaved changes.
+Para guardar un diagrama, simplemente usa la opción **Archivo > Guardar** (CTRL+S). Tabular Editor 3 te pedirá que guardes el diagrama si cierras el documento o la aplicación cuando el diagrama tenga cambios sin guardar.
 
 > [!TIP]
-> The same diagram file can be loaded for different data models. Diagrams reference tables by their names. Any tables not present in the model upon diagram load are simply removed from the diagram.
+> El mismo archivo de diagrama puede cargarse para diferentes Data model. Los diagramas hacen referencia a las tablas por su nombre. Las tablas que no estén presentes en el modelo al cargar el diagrama simplemente se eliminan del diagrama.
 
 > [!NOTE]
-> Every time you add or modify a relationship, you will have to run a "calculate" refresh on the data model, before the relationships can be used when querying the model.
+> Cada vez que agregue o modifique una relación, deberá ejecutar una actualización de tipo "calculate" en el Data model antes de que las relaciones puedan usarse al consultar el modelo.
 
-# Next steps
+# Siguientes pasos
 
 - @refresh-preview-query
 - @creating-and-testing-dax
