@@ -1,6 +1,6 @@
 ---
 uid: powerbi-xmla-pbix-workaround
-title: Creating PBIX File from XMLA Endpoint.
+title: Creación de un archivo PBIX a partir de un punto de conexión XMLA.
 author: Morten Lønskov
 updated: 2023-10-18
 applies_to:
@@ -13,86 +13,86 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Only Premium Per User XMLA Endpoints"
+          note: "Solo los puntos de conexión XMLA de Premium por usuario"
         - edition: Enterprise
           full: true
 ---
 
-# Downloading a Power BI dataset to a .pbix using the XMLA endpoint
+# Descargar un Dataset de Power BI a un archivo .pbix mediante el punto de conexión XMLA
 
-Once a change is made to a Power BI semantic model through the XMLA endpoint, it's not possible to download the model as a .pbix file from the Power BI service.
+Una vez que se realiza un cambio en un modelo semántico de Power BI mediante el punto de conexión XMLA, no es posible descargar el modelo como un archivo .pbix desde el servicio de Power BI.
 
-However, with the Power BI Project file, it's possible to create a .pbix file from the remote model by following the three-step process, which is described as follows.
+Sin embargo, con el archivo de Proyecto de Power BI, es posible crear un archivo .pbix a partir del modelo remoto siguiendo el proceso de tres pasos que se describe a continuación.
 
-![XLMA to PBIX Overview](~/content/assets/images/power-bi/create-pbix-from-xmla-overview.png)
+![Resumen de XMLA a PBIX](~/content/assets/images/power-bi/create-pbix-from-xmla-overview.png)
 
 > [!NOTE]
-> The described workaround isn't officially supported by Microsoft. There's no guarantee that it works for every model. Specifically, if you've added custom partitions or other objects [listed here](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations), Power BI Desktop may not be able to correctly open the file following this approach. See below for a script to handle incremental refresh partitions.
+> La solución alternativa descrita no está respaldada oficialmente por Microsoft. No hay garantía de que funcione con todos los modelos. En concreto, si has agregado particiones personalizadas u otros objetos [enumerados aquí](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations), es posible que Power BI Desktop no pueda abrir correctamente el archivo siguiendo este enfoque. Consulta a continuación un script para gestionar las particiones de actualización incremental.
 
-## Step 1: Create and save an empty Power BI projects (.pbip) file
+## Paso 1: Crear y guardar un archivo de Proyecto de Power BI (.pbip) vacío
 
-The first step is to create a new Power BI report and save it as an empty Power BI Project (.pbip) file, as depicted in the following diagram.
+El primer paso es crear un nuevo Report de Power BI y guardarlo como un archivo de Proyecto de Power BI (.pbip) vacío, como se muestra en el siguiente diagrama.
 
 ![Save PBIP file](~/content/assets/images/power-bi/save-pbip-file.png)
 
-This creates a folder structure that contains an empty _model_ file. This _model_ file contains the model metadata. You'll overwrite this metadata in the next step with the metadata of the published model that you want to save to .pbix.
+Esto crea una estructura de carpetas que contiene un archivo _model_ vacío. Este archivo _model_ contiene los metadatos del modelo. En el siguiente paso sobrescribirás estos metadatos con los del modelo publicado que quieres guardar en .pbix.
 
 ![PBIP with Model file](~/content/assets/images/power-bi/pbip-file-bim-model.png)
 
-Close Power BI desktop, and proceed with the next step in Tabular Editor.
+Cierra Power BI Desktop y continúa con el siguiente paso en Tabular Editor.
 
-## Step 2: Open XMLA model with Tabular Editor
+## Paso 2: Abrir el modelo XMLA con Tabular Editor
 
-With Tabular Editor open, connect to the Fabric workspace via the XMLA endpoint. Load the Power BI semantic model you want to convert to a .pbix.
+Con Tabular Editor abierto, conéctate al Workspace de Fabric mediante el punto de conexión XMLA. Carga el modelo semántico de Power BI que quieras convertir en un archivo .pbix.
 
-## Step 3: Save XMLA model into .pbip
+## Paso 3: Guardar el modelo XMLA en un archivo .pbip
 
-In Tabular Editor using _File > Save as..._, navigate to the Power BI Project folder. Overwrite the _model.bim_ file shown in the previous diagram.
+En Tabular Editor, selecciona _Archivo > Guardar como..._ y navega hasta la carpeta del Proyecto de Power BI. Sobrescribe el archivo _model.bim_ que se muestra en el diagrama anterior.
 
-This will save the remote model into the Power BI Project that will now contain the model metadata.
+Esto guardará el modelo remoto en el Proyecto de Power BI, que ahora contendrá los metadatos del modelo.
 
-If the .pbip folder is configured to store the model as [TMDL](xref:tmdl) files, you will need to use the Save To Folder option in Tabular Editor instead. Then navigate to the Power BI project folder for the semantic model (ModelName.SemanticModel), open the 'definition' folder and save your model there.
+Si la carpeta .pbip está configurada para almacenar el modelo como archivos [TMDL](xref:tmdl), tendrás que usar la opción Guardar en carpeta en Tabular Editor. Luego, navega hasta la carpeta del Proyecto de Power BI del modelo semántico (ModelName.SemanticModel), abre la carpeta "definition" y guarda ahí tu modelo.
 
 > [!NOTE]
-> To enable TMDL go to **Tools > Preferences > File Formats > Save-to-folder**, and select "TMDL" in the **Serialization mode** dropdown. See [TMDL documentation for more information](xref:tmdl)
+> Para habilitar TMDL, ve a **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** y selecciona "TMDL" en la lista desplegable **Modo de serialización**. Consulta la [documentación de TMDL para más información](xref:tmdl)
 
-## Step 3.1: Remove incremental refresh partitions and create new (Optional)
+## Paso 3,1: Eliminar las particiones de actualización incremental y crear otras nuevas (Opcional)
 
-Use the Convert Incremental Refresh script below to delete incremental refresh partitions and create a single partition for each table containing the expression used in the incremental refresh expression.
+Usa el script Convert Incremental Refresh que aparece a continuación para eliminar las particiones de actualización incremental y crear una única partición por tabla que contenga la expresión usada en la actualización incremental.
 
-## Step 4: Save to .pbix and open this file in Power BI Desktop
+## Paso 4: Guardar como un archivo .pbix y abrirlo en Power BI Desktop
 
-![PBIP with Tables](~/content/assets/images/power-bi/pbip-includes-tables.png)
+![PBIP con tablas](~/content/assets/images/power-bi/pbip-includes-tables.png)
 
-Open the .pbip and the Power BI report will now contain the XMLA endpoint semantic model.
+Abre el archivo .pbip y el Report de Power BI pasará a contener el modelo semántico del punto de conexión XMLA.
 
-Save it to a .pbix using _File > Save As..._ in Power BI Desktop.
+Guárdalo como un archivo .pbix con _Archivo > Guardar como..._ en Power BI Desktop.
 
-## Re-hydrate .pbix
+## Rehidratar el archivo .pbix
 
-The .pbix now contains the model that was published to the Fabric workspace. When you open the .pbix, you can _re-hydrate_ the file, meaning that you load the data based on the connections specified in the model.
+El .pbix ahora contiene el modelo que se publicó en el Workspace de Fabric. Cuando abras el .pbix, puedes _rehidratar_ el archivo; es decir, cargar los datos según las conexiones especificadas en el modelo.
 
-## Convert Incremental Refresh partitions
+## Convertir particiones de actualización incremental
 
-The above step 4 will fail if the semantic model has incremental refresh enabled as a Power BI desktop model cannot contain multiple partitions.
-In this case the following script should be run against the model to convert incremental refresh partitions into single partitions
+El paso 4 anterior fallará si el modelo semántico tiene la actualización incremental habilitada, ya que un modelo de Power BI Desktop no puede contener varias particiones.
+En ese caso, debes ejecutar el siguiente script en el modelo para convertir las particiones de actualización incremental en particiones únicas
 
 ```csharp
 foreach (var t in Model.Tables)
 {
     if(t.EnableRefreshPolicy)
     {
-        //We will collect the SourceExpression from the Incremental Refresh Source Expression of the table
+        //Recopilaremos el SourceExpression de la expresión de origen de la actualización incremental de la tabla
         string m_expression = t.SourceExpression.ToString();
          
-        //We will generate a new partition name
+        //Generaremos un nuevo nombre de partición
         string partition_name = t.Name + "-" + Guid.NewGuid();
 
-        //Now we will create a new partition
+        //Ahora crearemos una nueva partición
         var partition = t.AddMPartition(partition_name, m_expression);
         partition.Mode = ModeType.Import;
         
-        //Next we will delete all the incremental refresh partitions of the table
+        //A continuación eliminaremos todas las particiones de actualización incremental de la tabla
         foreach (var p in t.Partitions.OfType<PolicyRangePartition>().ToList())
         {
             p.Delete();
@@ -101,4 +101,4 @@ foreach (var t in Model.Tables)
 };
 ```
 
-Thank you to [Micah Dail](https://twitter.com/MicahDail) for creating the script and suggesting it to be included in this document.
+Gracias a [Micah Dail](https://twitter.com/MicahDail) por crear el script y sugerir que se incluyera en este documento.
