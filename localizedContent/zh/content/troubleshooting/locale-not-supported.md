@@ -1,6 +1,6 @@
 ---
 uid: locale-not-supported
-title: Locale Not Supported
+title: 区域设置不受支持
 author: Morten Lønskov
 updated: 2025-09-02
 applies_to:
@@ -9,60 +9,60 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Locale Not Supported
+# 区域设置不受支持
 
-You may encounter the warning message:
+你可能会看到以下警告信息：
 
 ```plaintext
-The XXXX locale is not supported
+不支持 XXXX 区域设置
 ```
 
-in the Tabular Editor 3 Message view.
+在 Tabular Editor 3 的“信息视图”中。
 
-![Locale not supported message](~/content/assets/images/troubleshooting/locale-not-supported-message-view.png)
+![区域设置不受支持信息](~/content/assets/images/troubleshooting/locale-not-supported-message-view.png)
 
-This issue usually occurs when your local machine uses a **regional configuration not supported by the Analysis Services (SSAS) engine**.  
-In most cases, the error is triggered by another underlying issue or warning, but this message is shown as a result.
-
----
-
-## Scenarios and Solutions
-
-### 1. Connecting to a Local SSAS Instance
-
-If you are running SQL Server Analysis Services (SSAS) locally on your machine:
-
-- **Solution:** Change the **service account** used by the SSAS instance.  
-  Updating the account often resolves unsupported locale mismatches.
+当你的本地计算机使用 **Analysis Services (SSAS) 引擎不支持的区域设置** 时，通常会出现此问题。  
+在大多数情况下，该错误由其他潜在问题或警告触发，但最终会表现为这条信息。
 
 ---
 
-### 2. Connecting to a Remote SSAS, Azure AS, or Power BI
+## 场景与解决方案
 
-When connecting to a remote instance, you have two possible solutions:
+### 1。 连接到本地 SSAS 实例
 
-#### Option A: Specify Locale in the Connection String
+如果你在本地计算机上运行 SQL Server Analysis Services (SSAS)：
 
-Explicitly set a supported locale (e.g., English – 1033) by adding `LocaleIdentifier=1033` to your connection string.
+- **解决方案：** 更改 SSAS 实例使用的 **服务账户**。  
+  更新该账户通常可以解决由于区域设置不受支持而导致的不匹配问题。
 
-**Example (Azure AS):**
+---
+
+### 2。 连接到远程 SSAS、Azure AS 或 Power BI
+
+连接到远程实例时，有两种可行的解决方案：
+
+#### 选项 A：在连接字符串中指定区域设置
+
+在连接字符串中添加 `LocaleIdentifier=1033`，即可显式设置受支持的区域设置(例如：英语 – 1033)。
+
+**示例（Azure AS）：**
 
 ```plaintext
-Data Source=asazure://westeurope.asazure.windows.net/instance-name;LocaleIdentifier=1033
+数据源=asazure://westeurope.asazure.windows.net/instance-name;LocaleIdentifier=1033
 ```
 
-#### Option B: Change Regional Settings on Your Machine
+#### 选项 B：更改计算机上的区域设置
 
-Adjust your local system’s regional and language settings to match a supported locale.
+将本地系统的区域和语言设置调整为受支持的区域设置。
 
-- **Recommended settings:**
-  - **Regional format:** English (United States)
-  - **Windows Display Language:** English (United States)
+- **推荐设置：**
+  - **区域格式：** 英语（美国）
+  - **Windows 显示语言：** 英语（美国）
