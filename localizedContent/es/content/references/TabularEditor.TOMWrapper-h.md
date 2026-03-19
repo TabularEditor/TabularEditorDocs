@@ -1,6 +1,6 @@
-# TabularEditor.TOMWrapper Reference
+# Referencia de TabularEditor.TOMWrapper
 
-This is auto-generated documentation for the TOMWrapper API. Use CTRL+F or the sidebar on the right, to locate a specific class, property or method.
+Esta es documentación generada automáticamente para la API de TOMWrapper. Usa CTRL+F o la barra lateral de la derecha para localizar una clase, una propiedad o un método concretos.
 
 ## `AddObjectType`
 
@@ -10,17 +10,17 @@ public enum TabularEditor.TOMWrapper.AddObjectType
 
 ```
 
-Enum
+Enumeración
 
-| Value | Name             | Summary |
+| Valor | Nombre           | Resumen |
 | ----- | ---------------- | ------- |
-| `1`   | Measure          |         |
+| `1`   | Medida           |         |
 | `2`   | CalculatedColumn |         |
-| `3`   | Hierarchy        |         |
+| `3`   | Jerarquía        |         |
 
 ## `CalculatedColumn`
 
-Base class declaration for CalculatedColumn
+Declaración de la clase base de CalculatedColumn
 
 ```csharp
 public class TabularEditor.TOMWrapper.CalculatedColumn
@@ -28,19 +28,19 @@ public class TabularEditor.TOMWrapper.CalculatedColumn
 
 ```
 
-Properties
+Propiedades
 
-| Type                                       | Name               | Summary                                                                      |
-| ------------------------------------------ | ------------------ | ---------------------------------------------------------------------------- |
-| `Dictionary<IDaxObject, List<Dependency>>` | Dependencies       |                                                                              |
-| `String`                                   | Expression         | Gets or sets the Expression of the CalculatedColumn.         |
-| `Boolean`                                  | IsDataTypeInferred | Gets or sets the IsDataTypeInferred of the CalculatedColumn. |
-| `CalculatedColumn`                         | MetadataObject     |                                                                              |
-| `Boolean`                                  | NeedsValidation    |                                                                              |
+| Tipo                                       | Nombre             | Resumen                                                                                  |
+| ------------------------------------------ | ------------------ | ---------------------------------------------------------------------------------------- |
+| `Dictionary<IDaxObject, List<Dependency>>` | Dependencias       |                                                                                          |
+| `String`                                   | Expresión          | Obtiene o establece la expresión de CalculatedColumn.                    |
+| `Boolean`                                  | IsDataTypeInferred | Obtiene o establece la propiedad IsDataTypeInferred de CalculatedColumn. |
+| `CalculatedColumn`                         | MetadataObject     |                                                                                          |
+| `Boolean`                                  | NeedsValidation    |                                                                                          |
 
-Methods
+Métodos
 
-| Type                 | Name                                                                                                     | Summary |
+| Tipo                 | Nombre                                                                                                   | Resumen |
 | -------------------- | -------------------------------------------------------------------------------------------------------- | ------- |
 | `TabularNamedObject` | Clone(`String` newName = null, `Boolean` includeTranslations = True)                  |         |
 | `TabularNamedObject` | CloneTo(`Table` table, `String` newName = null, `Boolean` includeTranslations = True) |         |
@@ -54,28 +54,28 @@ public class TabularEditor.TOMWrapper.CalculatedTable
 
 ```
 
-Properties
+Propiedades
 
-| Type                                       | Name            | Summary |
+| Tipo                                       | Nombre          | Resumen |
 | ------------------------------------------ | --------------- | ------- |
-| `Dictionary<IDaxObject, List<Dependency>>` | Dependencies    |         |
-| `String`                                   | Expression      |         |
+| `Dictionary<IDaxObject, List<Dependency>>` | Dependencias    |         |
+| `String`                                   | Expresión       |         |
 | `Boolean`                                  | NeedsValidation |         |
 | `String`                                   | ObjectTypeName  |         |
 
-Methods
+Métodos
 
-| Type      | Name                                                                                              | Summary                                                                                                                            |
-| --------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `void`    | CheckChildrenErrors()                                                          |                                                                                                                                    |
-| `Boolean` | Editable(`String` propertyName)                                                |                                                                                                                                    |
-| `void`    | Init()                                                                         |                                                                                                                                    |
-| `void`    | OnPropertyChanged(`String` propertyName, `Object` oldValue, `Object` newValue) |                                                                                                                                    |
-| `void`    | ReinitColumns()                                                                | Call this method after the model is saved to a DB, to check for changed columns (in case of expression changes) |
+| Tipo      | Nombre                                                                                            | Resumen                                                                                                                                                                   |
+| --------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void`    | CheckChildrenErrors()                                                          |                                                                                                                                                                           |
+| `Boolean` | Editable(`String` propertyName)                                                |                                                                                                                                                                           |
+| `void`    | Init()                                                                         |                                                                                                                                                                           |
+| `void`    | OnPropertyChanged(`String` propertyName, `Object` oldValue, `Object` newValue) |                                                                                                                                                                           |
+| `void`    | ReinitColumns()                                                                | Llame a este método después de guardar el modelo en una base de datos para comprobar si hay columnas modificadas (por si han cambiado las expresiones) |
 
 ## `CalculatedTableColumn`
 
-Base class declaration for CalculatedTableColumn
+Declaración de la clase base para CalculatedTableColumn
 
 ```csharp
 public class TabularEditor.TOMWrapper.CalculatedTableColumn
@@ -83,19 +83,19 @@ public class TabularEditor.TOMWrapper.CalculatedTableColumn
 
 ```
 
-Properties
+Propiedades
 
-| Type                    | Name               | Summary                                                                           |
-| ----------------------- | ------------------ | --------------------------------------------------------------------------------- |
-| `Column`                | ColumnOrigin       | Gets or sets the ColumnOrigin of the CalculatedTableColumn.       |
-| `Boolean`               | IsDataTypeInferred | Gets or sets the IsDataTypeInferred of the CalculatedTableColumn. |
-| `Boolean`               | IsNameInferred     | Gets or sets the IsNameInferred of the CalculatedTableColumn.     |
-| `CalculatedTableColumn` | MetadataObject     |                                                                                   |
-| `String`                | SourceColumn       | Gets or sets the SourceColumn of the CalculatedTableColumn.       |
+| Tipo                    | Nombre             | Resumen                                                                                       |
+| ----------------------- | ------------------ | --------------------------------------------------------------------------------------------- |
+| `Column`                | ColumnOrigin       | Obtiene o establece la propiedad ColumnOrigin de CalculatedTableColumn.       |
+| `Boolean`               | IsDataTypeInferred | Obtiene o establece la propiedad IsDataTypeInferred de CalculatedTableColumn. |
+| `Boolean`               | IsNameInferred     | Obtiene o establece la propiedad IsNameInferred de CalculatedTableColumn.     |
+| `CalculatedTableColumn` | MetadataObject     |                                                                                               |
+| `String`                | SourceColumn       | Obtiene o establece la propiedad SourceColumn de CalculatedTableColumn.       |
 
 ## `Column`
 
-Base class declaration for Column
+Declaración de la clase base para Column
 
 ```csharp
 public abstract class TabularEditor.TOMWrapper.Column
@@ -103,47 +103,47 @@ public abstract class TabularEditor.TOMWrapper.Column
 
 ```
 
-Properties
+Propiedades
 
-| Type                         | Name                                            | Summary                                                                                                             |
-| ---------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `Alignment`                  | Alignment                                       | Gets or sets the Alignment of the Column.                                                           |
-| `String`                     | DataCategory                                    | Gets or sets the DataCategory of the Column.                                                        |
-| `DataType`                   | DataType                                        | Gets or sets the DataType of the Column.                                                            |
-| `String`                     | DaxObjectFullName                               |                                                                                                                     |
-| `String`                     | DaxObjectName                                   |                                                                                                                     |
-| `String`                     | DaxTableName                                    |                                                                                                                     |
-| `HashSet<IExpressionObject>` | Dependants                                      |                                                                                                                     |
-| `String`                     | Description                                     | Gets or sets the Description of the Column.                                                         |
-| `String`                     | DisplayFolder                                   | Gets or sets the DisplayFolder of the Column.                                                       |
-| `Int32`                      | DisplayOrdinal                                  | Gets or sets the DisplayOrdinal of the Column.                                                      |
-| `String`                     | ErrorMessage                                    | Gets or sets the ErrorMessage of the Column.                                                        |
-| `String`                     | FormatString                                    | Gets or sets the FormatString of the Column.                                                        |
-| `PerspectiveIndexer`         | InPerspective                                   |                                                                                                                     |
-| `Boolean`                    | IsAvailableInMDX                                | Gets or sets the IsAvailableInMDX of the Column.                                                    |
-| `Boolean`                    | IsDefaultImage                                  | Gets or sets the IsDefaultImage of the Column.                                                      |
-| `Boolean`                    | IsDefaultLabel                                  | Gets or sets the IsDefaultLabel of the Column.                                                      |
-| `Boolean`                    | IsHidden                                        | Gets or sets the IsHidden of the Column.                                                            |
-| `Boolean`                    | IsKey                                           | Gets or sets the IsKey of the Column.                                                               |
-| `Boolean`                    | IsNullable                                      | Gets or sets the IsNullable of the Column.                                                          |
-| `Boolean`                    | IsUnique                                        | Gets or sets the IsUnique of the Column.                                                            |
-| `Boolean`                    | KeepUniqueRows                                  | Gets or sets the KeepUniqueRows of the Column.                                                      |
-| `Column`                     | MetadataObject                                  |                                                                                                                     |
-| `Column`                     | SortByColumn                                    | Gets or sets the SortByColumn of the Column.                                                        |
-| `String`                     | SourceProviderType                              | Gets or sets the SourceProviderType of the Column.                                                  |
-| `ObjectState`                | State                                           | Gets or sets the State of the Column.                                                               |
-| `AggregateFunction`          | SummarizeBy                                     | Gets or sets the SummarizeBy of the Column.                                                         |
-| `Table`                      | Table                                           |                                                                                                                     |
-| `Int32`                      | TableDetailPosition                             | Gets or sets the TableDetailPosition of the Column.                                                 |
-| `TranslationIndexer`         | TranslatedDescriptions                          | Collection of localized descriptions for this Column.                                               |
-| `TranslationIndexer`         | TranslatedDisplayFolders                        | Collection of localized Display Folders for this Column.                                            |
-| `ColumnType`                 | Type                                            | Gets or sets the Type of the Column.                                                                |
-| `IEnumerable<Hierarchy>`     | UsedInHierarchies<a id="used-in-hierarchy"></a> | Enumerates all hierarchies in which this column is used as a level.                                 |
-| `IEnumerable<Relationship>`  | UsedInRelationships                             | Enumerates all relationships in which this column participates (either as  or ). |
+| Tipo                         | Nombre                                             | Resumen                                                                                                              |
+| ---------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `Alignment`                  | Alignment                                          | Obtiene o establece la propiedad Alignment de la columna.                                            |
+| `String`                     | DataCategory                                       | Obtiene o establece la propiedad DataCategory de la columna.                                         |
+| `DataType`                   | DataType                                           | Obtiene o establece la propiedad DataType de la columna.                                             |
+| `String`                     | DaxObjectFullName                                  |                                                                                                                      |
+| `String`                     | DaxObjectName                                      |                                                                                                                      |
+| `String`                     | DaxTableName                                       |                                                                                                                      |
+| `HashSet<IExpressionObject>` | Dependants                                         |                                                                                                                      |
+| `String`                     | Description                                        | Obtiene o establece la propiedad Description de la columna.                                          |
+| `String`                     | DisplayFolder                                      | Obtiene o establece la propiedad DisplayFolder de la columna.                                        |
+| `Int32`                      | DisplayOrdinal                                     | Obtiene o establece la propiedad DisplayOrdinal de la columna.                                       |
+| `String`                     | ErrorMessage                                       | Obtiene o establece la propiedad ErrorMessage de la columna.                                         |
+| `String`                     | FormatString                                       | Obtiene o establece la propiedad FormatString de la columna.                                         |
+| `IndexadorDePerspectiva`     | EnPerspectiva                                      |                                                                                                                      |
+| `Boolean`                    | IsAvailableInMDX                                   | Obtiene o establece la propiedad IsAvailableInMDX de la columna.                                     |
+| `Boolean`                    | IsDefaultImage                                     | Obtiene o establece la propiedad IsDefaultImage de la columna.                                       |
+| `Boolean`                    | IsDefaultLabel                                     | Obtiene o establece la propiedad IsDefaultLabel de la columna.                                       |
+| `Boolean`                    | IsHidden                                           | Obtiene o establece la propiedad IsHidden de la columna.                                             |
+| `Boolean`                    | IsKey                                              | Obtiene o establece la propiedad IsKey de la columna.                                                |
+| `Boolean`                    | IsNullable                                         | Obtiene o establece la propiedad IsNullable de la columna.                                           |
+| `Boolean`                    | IsUnique                                           | Obtiene o establece la propiedad IsUnique de la columna.                                             |
+| `Boolean`                    | KeepUniqueRows                                     | Obtiene o establece la propiedad KeepUniqueRows de la columna.                                       |
+| `Column`                     | MetadataObject                                     |                                                                                                                      |
+| `Column`                     | SortByColumn                                       | Obtiene o establece la propiedad SortByColumn de la columna.                                         |
+| `String`                     | SourceProviderType                                 | Obtiene o establece la propiedad SourceProviderType de la columna.                                   |
+| `ObjectState`                | State                                              | Obtiene o establece la propiedad State de la columna.                                                |
+| `AggregateFunction`          | SummarizeBy                                        | Obtiene o establece la propiedad SummarizeBy de la columna.                                          |
+| `Table`                      | Table                                              |                                                                                                                      |
+| `Int32`                      | TableDetailPosition                                | Obtiene o establece el valor de TableDetailPosition de la columna.                                   |
+| `TranslationIndexer`         | TranslatedDescriptions                             | Colección de descripciones localizadas para esta columna.                                            |
+| `TranslationIndexer`         | TranslatedDisplayFolders                           | Colección de carpetas de visualización localizadas para esta columna.                                |
+| `ColumnType`                 | Tipo                                               | Obtiene o establece el tipo de la columna.                                                           |
+| `IEnumerable<Hierarchy>`     | Se usa en jerarquías<a id="used-in-hierarchy"></a> | Enumera todas las jerarquías en las que esta columna se usa como nivel.                              |
+| `IEnumerable<Relationship>`  | Se usa en relaciones                               | Enumera todas las relaciones en las que participa esta columna (ya sea como  o ). |
 
-Methods
+Métodos
 
-| Type     | Name                                                                                                                    | Summary |
+| Tipo     | Nombre                                                                                                                  | Resumen |
 | -------- | ----------------------------------------------------------------------------------------------------------------------- | ------- |
 | `void`   | Delete()                                                                                             |         |
 | `String` | GetAnnotation(`String` name)                                                                         |         |
@@ -155,7 +155,7 @@ Methods
 
 ## `ColumnCollection`
 
-Collection class for Column. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección de `Column`. Proporciona propiedades útiles para establecer una propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.ColumnCollection
@@ -163,14 +163,14 @@ public class TabularEditor.TOMWrapper.ColumnCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type                | Name                | Summary |
+| Tipo                | Nombre              | Resumen |
 | ------------------- | ------------------- | ------- |
 | `Alignment`         | Alignment           |         |
 | `String`            | DataCategory        |         |
 | `DataType`          | DataType            |         |
-| `String`            | Description         |         |
+| `String`            | Descripción         |         |
 | `String`            | DisplayFolder       |         |
 | `Int32`             | DisplayOrdinal      |         |
 | `String`            | FormatString        |         |
@@ -182,22 +182,22 @@ Properties
 | `Boolean`           | IsNullable          |         |
 | `Boolean`           | IsUnique            |         |
 | `Boolean`           | KeepUniqueRows      |         |
-| `Table`             | Parent              |         |
+| `Table`             | Padre               |         |
 | `Column`            | SortByColumn        |         |
 | `String`            | SourceProviderType  |         |
 | `AggregateFunction` | SummarizeBy         |         |
 | `Int32`             | TableDetailPosition |         |
 
-Methods
+Métodos
 
-| Type                  | Name                               | Summary |
+| Tipo                  | Nombre                             | Resumen |
 | --------------------- | ---------------------------------- | ------- |
 | `IEnumerator<Column>` | GetEnumerator() |         |
 | `String`              | ToString()      |         |
 
-## `Culture`
+## `configuración regional`
 
-Base class declaration for Culture
+Declaración de la clase base de la configuración regional
 
 ```csharp
 public class TabularEditor.TOMWrapper.Culture
@@ -205,27 +205,27 @@ public class TabularEditor.TOMWrapper.Culture
 
 ```
 
-Properties
+Propiedades
 
-| Type                          | Name                         | Summary |
-| ----------------------------- | ---------------------------- | ------- |
-| `String`                      | DisplayName                  |         |
-| `Culture`                     | MetadataObject               |         |
-| `String`                      | Name                         |         |
-| `ObjectTranslationCollection` | ObjectTranslations           |         |
-| `String`                      | StatsColumnCaptions          |         |
-| `String`                      | StatsColumnDisplayFolders    |         |
-| `String`                      | StatsHierarchyCaptions       |         |
-| `String`                      | StatsHierarchyDisplayFolders |         |
-| `String`                      | StatsLevelCaptions           |         |
-| `String`                      | StatsMeasureCaptions         |         |
-| `String`                      | StatsMeasureDisplayFolders   |         |
-| `String`                      | StatsTableCaptions           |         |
-| `Boolean`                     | Unassigned                   |         |
+| Tipo                          | Nombre                                                    | Resumen |
+| ----------------------------- | --------------------------------------------------------- | ------- |
+| `String`                      | Nombre para mostrar                                       |         |
+| `configuración regional`      | Objeto de metadatos                                       |         |
+| `String`                      | Nombre                                                    |         |
+| `ObjectTranslationCollection` | Traducciones del objeto                                   |         |
+| `String`                      | Títulos de columnas de estadísticas                       |         |
+| `String`                      | Carpetas de visualización para columnas de estadísticas   |         |
+| `String`                      | Títulos de jerarquías de estadísticas                     |         |
+| `String`                      | Carpetas de visualización para jerarquías de estadísticas |         |
+| `String`                      | Títulos de niveles de estadísticas                        |         |
+| `String`                      | Títulos de medidas de estadísticas                        |         |
+| `String`                      | Carpetas de visualización para medidas de estadísticas    |         |
+| `String`                      | Títulos de tablas de estadísticas                         |         |
+| `Boolean`                     | Sin asignar                                               |         |
 
-Methods
+Métodos
 
-| Type                 | Name                                                                                              | Summary |
+| Tipo                 | Nombre                                                                                            | Resumen |
 | -------------------- | ------------------------------------------------------------------------------------------------- | ------- |
 | `Boolean`            | Browsable(`String` propertyName)                                               |         |
 | `TabularNamedObject` | Clone(`String` newName, `Boolean` includeTranslations)                         |         |
@@ -237,23 +237,24 @@ Methods
 
 ## `CultureCollection`
 
-Collection class for Culture. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección para configuraciones regionales. Proporciona propiedades prácticas para establecer una propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.CultureCollection
     : TabularObjectCollection<Culture, Culture, Model>, IList, ICollection, IEnumerable, INotifyCollectionChanged, ICollection<Culture>, IEnumerable<Culture>, IList<Culture>, ITabularObjectCollection, IExpandableIndexer
+// Culture: configuración regional
 
 ```
 
-Properties
+Propiedades
 
-| Type    | Name   | Summary |
+| Tipo    | Nombre | Resumen |
 | ------- | ------ | ------- |
-| `Model` | Parent |         |
+| `Model` | Padre  |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
@@ -265,17 +266,17 @@ public class TabularEditor.TOMWrapper.CultureConverter
 
 ```
 
-Methods
+Métodos
 
-| Type                       | Name                                                                                                                          | Summary |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `Boolean`                  | CanConvertFrom(`ITypeDescriptorContext` context, `Type` sourceType)                                        |         |
-| `Boolean`                  | CanConvertTo(`ITypeDescriptorContext` context, `Type` destinationType)                                     |         |
-| `Object`                   | ConvertFrom(`ITypeDescriptorContext` context, `CultureInfo` culture, `Object` value)                       |         |
-| `Object`                   | ConvertTo(`ITypeDescriptorContext` context, `CultureInfo` culture, `Object` value, `Type` destinationType) |         |
-| `StandardValuesCollection` | GetStandardValues(`ITypeDescriptorContext` context)                                                        |         |
-| `Boolean`                  | GetStandardValuesExclusive(`ITypeDescriptorContext` context)                                               |         |
-| `Boolean`                  | GetStandardValuesSupported(`ITypeDescriptorContext` context)                                               |         |
+| Tipo                       | Nombre                                                                                                                                                                          | Resumen |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `Boolean`                  | CanConvertFrom(`ITypeDescriptorContext` context, `Type` sourceType)                                                                                          |         |
+| `Boolean`                  | CanConvertTo(`ITypeDescriptorContext` context, `Type` destinationType)                                                                                       |         |
+| `Object`                   | ConvertFrom(`ITypeDescriptorContext` context, `CultureInfo` culture, `Object` value) — culture: configuración regional                       |         |
+| `Object`                   | ConvertTo(`ITypeDescriptorContext` context, `CultureInfo` culture, `Object` value, `Type` destinationType) — culture: configuración regional |         |
+| `StandardValuesCollection` | GetStandardValues(`ITypeDescriptorContext` context)                                                                                                          |         |
+| `Boolean`                  | GetStandardValuesExclusive(`ITypeDescriptorContext` context)                                                                                                 |         |
+| `Boolean`                  | GetStandardValuesSupported(`ITypeDescriptorContext` context)                                                                                                 |         |
 
 ## `Database`
 
@@ -284,9 +285,9 @@ public class TabularEditor.TOMWrapper.Database
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name               | Summary |
+| Tipo                 | Nombre             | Resumen |
 | -------------------- | ------------------ | ------- |
 | `Nullable<Int32>`    | CompatibilityLevel |         |
 | `Nullable<DateTime>` | CreatedTimestamp   |         |
@@ -300,15 +301,15 @@ Properties
 | `Database`           | TOMDatabase        |         |
 | `Nullable<Int64>`    | Version            |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
 ## `DataColumn`
 
-Base class declaration for DataColumn
+Declaración de la clase base para DataColumn
 
 ```csharp
 public class TabularEditor.TOMWrapper.DataColumn
@@ -316,16 +317,16 @@ public class TabularEditor.TOMWrapper.DataColumn
 
 ```
 
-Properties
+Propiedades
 
-| Type         | Name           | Summary                                                          |
-| ------------ | -------------- | ---------------------------------------------------------------- |
-| `DataColumn` | MetadataObject |                                                                  |
-| `String`     | SourceColumn   | Gets or sets the SourceColumn of the DataColumn. |
+| Tipo         | Nombre         | Resumen                                                                               |
+| ------------ | -------------- | ------------------------------------------------------------------------------------- |
+| `DataColumn` | MetadataObject |                                                                                       |
+| `String`     | SourceColumn   | Obtiene o establece la propiedad SourceColumn de la clase DataColumn. |
 
 ## `DataSource`
 
-Base class declaration for DataSource
+Declaración de la clase base de DataSource
 
 ```csharp
 public abstract class TabularEditor.TOMWrapper.DataSource
@@ -333,25 +334,25 @@ public abstract class TabularEditor.TOMWrapper.DataSource
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name                   | Summary                                                                   |
-| -------------------- | ---------------------- | ------------------------------------------------------------------------- |
-| `String`             | Description            | Gets or sets the Description of the DataSource.           |
-| `DataSource`         | MetadataObject         |                                                                           |
-| `TranslationIndexer` | TranslatedDescriptions | Collection of localized descriptions for this DataSource. |
-| `DataSourceType`     | Type                   | Gets or sets the Type of the DataSource.                  |
+| Tipo                 | Nombre                 | Resumen                                                                      |
+| -------------------- | ---------------------- | ---------------------------------------------------------------------------- |
+| `String`             | Descripción            | Obtiene o establece la descripción del DataSource.           |
+| `DataSource`         | MetadataObject         |                                                                              |
+| `TranslationIndexer` | TranslatedDescriptions | Colección de descripciones localizadas para este DataSource. |
+| `DataSourceType`     | Tipo                   | Obtiene o establece el tipo del DataSource.                  |
 
-Methods
+Métodos
 
-| Type     | Name                                                                                       | Summary |
+| Tipo     | Nombre                                                                                     | Resumen |
 | -------- | ------------------------------------------------------------------------------------------ | ------- |
 | `String` | GetAnnotation(`String` name)                                            |         |
 | `void`   | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |         |
 
 ## `DataSourceCollection`
 
-Collection class for DataSource. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección para DataSource. Ofrece propiedades convenientes para establecer una propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.DataSourceCollection
@@ -359,16 +360,16 @@ public class TabularEditor.TOMWrapper.DataSourceCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type     | Name        | Summary |
+| Tipo     | Nombre      | Resumen |
 | -------- | ----------- | ------- |
-| `String` | Description |         |
-| `Model`  | Parent      |         |
+| `String` | Descripción |         |
+| `Model`  | Padre       |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
@@ -379,13 +380,13 @@ public struct TabularEditor.TOMWrapper.Dependency
 
 ```
 
-Fields
+Campos
 
-| Type      | Name           | Summary |
+| Tipo      | Nombre         | Resumen |
 | --------- | -------------- | ------- |
-| `Int32`   | from           |         |
+| `Int32`   | desde          |         |
 | `Boolean` | fullyQualified |         |
-| `Int32`   | to             |         |
+| `Int32`   | hasta          |         |
 
 ## `DependencyHelper`
 
@@ -394,12 +395,12 @@ public static class TabularEditor.TOMWrapper.DependencyHelper
 
 ```
 
-Static Methods
+Métodos estáticos
 
-| Type     | Name                                                                                                                                           | Summary                                                                                                                   |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `void`   | AddDep(this `IExpressionObject` target, `IDaxObject` dependsOn, `Int32` fromChar, `Int32` toChar, `Boolean` fullyQualified) |                                                                                                                           |
-| `String` | NoQ(this `String` objectName, `Boolean` table = False)                                                                      | Removes qualifiers such as ' ' and [ ] around a name. |
+| Tipo     | Nombre                                                                                                                                         | Resumen                                                                                                                          |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `void`   | AddDep(this `IExpressionObject` target, `IDaxObject` dependsOn, `Int32` fromChar, `Int32` toChar, `Boolean` fullyQualified) |                                                                                                                                  |
+| `String` | NoQ(this `String` objectName, `Boolean` table = False)                                                                      | Elimina calificadores como ' ' y [ ] alrededor de un nombre. |
 
 ## `DeploymentMode`
 
@@ -411,7 +412,7 @@ public enum TabularEditor.TOMWrapper.DeploymentMode
 
 Enum
 
-| Value | Name           | Summary |
+| Valor | Nombre         | Resumen |
 | ----- | -------------- | ------- |
 | `0`   | CreateDatabase |         |
 | `1`   | CreateOrAlter  |         |
@@ -423,22 +424,22 @@ public class TabularEditor.TOMWrapper.DeploymentOptions
 
 ```
 
-Fields
+Campos
 
-| Type             | Name              | Summary |
-| ---------------- | ----------------- | ------- |
-| `Boolean`        | DeployConnections |         |
-| `DeploymentMode` | DeployMode        |         |
-| `Boolean`        | DeployPartitions  |         |
-| `Boolean`        | DeployRoleMembers |         |
-| `Boolean`        | DeployRoles       |         |
+| Tipo             | Nombre                     | Resumen |
+| ---------------- | -------------------------- | ------- |
+| `Boolean`        | DeployConnections          |         |
+| `DeploymentMode` | DeployMode                 |         |
+| `Boolean`        | Desplegar particiones      |         |
+| `Boolean`        | Desplegar miembros del rol |         |
+| `Boolean`        | Desplegar roles            |         |
 
-Static Fields
+Campos estáticos
 
-| Type                | Name          | Summary |
-| ------------------- | ------------- | ------- |
-| `DeploymentOptions` | Default       |         |
-| `DeploymentOptions` | StructureOnly |         |
+| Tipo                | Nombre         | Resumen |
+| ------------------- | -------------- | ------- |
+| `DeploymentOptions` | Predeterminado |         |
+| `DeploymentOptions` | StructureOnly  |         |
 
 ## `DeploymentResult`
 
@@ -447,12 +448,12 @@ public class TabularEditor.TOMWrapper.DeploymentResult
 
 ```
 
-Fields
+Campos
 
-| Type                    | Name     | Summary |
-| ----------------------- | -------- | ------- |
-| `IReadOnlyList<String>` | Issues   |         |
-| `IReadOnlyList<String>` | Warnings |         |
+| Tipo                    | Nombre       | Resumen |
+| ----------------------- | ------------ | ------- |
+| `IReadOnlyList<String>` | Problemas    |         |
+| `IReadOnlyList<String>` | Advertencias |         |
 
 ## `DeploymentStatus`
 
@@ -462,9 +463,9 @@ public enum TabularEditor.TOMWrapper.DeploymentStatus
 
 ```
 
-Enum
+Enumeración
 
-| Value | Name            | Summary |
+| Valor | Nombre          | Resumen |
 | ----- | --------------- | ------- |
 | `0`   | ChangesSaved    |         |
 | `1`   | DeployComplete  |         |
@@ -472,7 +473,7 @@ Enum
 
 ## `Folder`
 
-Represents a Folder in the TreeView. Does not correspond to any object in the TOM.  Implements IDisplayFolderObject since a Folder can itself be located within another  display folder.  Implements IParentObject since a Folder can contain child objects.
+Representa una carpeta en el TreeView. No se corresponde con ningún objeto en el TOM.  Implementa IDisplayFolderObject, ya que una carpeta también puede estar ubicada dentro de otra carpeta de visualización.  Implementa IParentObject, ya que una carpeta puede contener objetos secundarios.
 
 ```csharp
 public class TabularEditor.TOMWrapper.Folder
@@ -480,19 +481,19 @@ public class TabularEditor.TOMWrapper.Folder
 
 ```
 
-Properties
+Propiedades
 
-| Type                     | Name                     | Summary |
+| Tipo                     | Nombre                   | Resumen |
 | ------------------------ | ------------------------ | ------- |
 | `IDetailObjectContainer` | Container                |         |
-| `Culture`                | Culture                  |         |
+| `configuración regional` | Configuración regional   |         |
 | `String`                 | DisplayFolder            |         |
 | `String`                 | ErrorMessage             |         |
 | `String`                 | FullPath                 |         |
 | `TabularModelHandler`    | Handler                  |         |
 | `Int32`                  | MetadataIndex            |         |
 | `Model`                  | Model                    |         |
-| `String`                 | Name                     |         |
+| `String`                 | Nombre                   |         |
 | `ObjectType`             | ObjectType               |         |
 | `Table`                  | ParentTable              |         |
 | `String`                 | Path                     |         |
@@ -500,28 +501,28 @@ Properties
 | `TranslationIndexer`     | TranslatedDisplayFolders |         |
 | `TranslationIndexer`     | TranslatedNames          |         |
 
-Events
+Eventos
 
-| Type                          | Name            | Summary |
+| Tipo                          | Nombre          | Resumen |
 | ----------------------------- | --------------- | ------- |
 | `PropertyChangedEventHandler` | PropertyChanged |         |
 
-Methods
+Métodos
 
-| Type                               | Name                                                                 | Summary                                                                                                                                                                                                               |
-| ---------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `void`                             | CheckChildrenErrors()                             |                                                                                                                                                                                                                       |
-| `void`                             | Delete()                                          | Deleting a folder does not delete child objects - it just removes the folder.  Any child folders are retained (but will be moved up the display folder hierarchy). |
-| `IEnumerable<ITabularNamedObject>` | GetChildren()                                     |                                                                                                                                                                                                                       |
-| `IEnumerable<IDetailObject>`       | GetChildrenByFolders(`Boolean` recursive = False) |                                                                                                                                                                                                                       |
-| `void`                             | SetFolderName(`String` newName)                   |                                                                                                                                                                                                                       |
-| `void`                             | UndoSetPath(`String` value)                       |                                                                                                                                                                                                                       |
+| Tipo                               | Nombre                                                               | Resumen                                                                                                                                                                                                                                                     |
+| ---------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void`                             | CheckChildrenErrors()                             |                                                                                                                                                                                                                                                             |
+| `void`                             | Delete()                                          | Eliminar una carpeta no elimina los objetos secundarios; solo elimina la carpeta.  Las carpetas secundarias se conservan (pero se moverán un nivel arriba en la jerarquía de carpetas de visualización). |
+| `IEnumerable<ITabularNamedObject>` | GetChildren()                                     |                                                                                                                                                                                                                                                             |
+| `IEnumerable<IDetailObject>`       | GetChildrenByFolders(`Boolean` recursive = False) |                                                                                                                                                                                                                                                             |
+| `void`                             | SetFolderName(`String` newName)                   |                                                                                                                                                                                                                                                             |
+| `void`                             | UndoSetPath(`String` value)                       |                                                                                                                                                                                                                                                             |
 
-Static Methods
+Métodos estáticos
 
-| Type     | Name                                                                                                                               | Summary |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `Folder` | CreateFolder(`Table` table, `String` path = , `Boolean` useFixedCulture = False, `Culture` fixedCulture = null) |         |
+| Tipo     | Nombre                                                                                                                                            | Resumen |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `Folder` | CreateFolder(`Table` table, `String` path = , `Boolean` useFixedCulture = False, `configuración regional` fixedCulture = null) |         |
 
 ## `FolderHelper`
 
@@ -530,25 +531,25 @@ public static class TabularEditor.TOMWrapper.FolderHelper
 
 ```
 
-Static Methods
+Métodos estáticos
 
-| Type                     | Name                                                                                                              | Summary |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------- | ------- |
-| `String`                 | ConcatPath(this `String` path, `String` additionalPath)                                        |         |
-| `String`                 | ConcatPath(this `IEnumerable<String>` pathBits)                                                |         |
-| `IDetailObjectContainer` | GetContainer(this `IDetailObject` obj)                                                         |         |
-| `String`                 | GetDisplayFolder(this `IDetailObject` folderObject, `Culture` culture)                         |         |
-| `String`                 | GetFullPath(`ITabularNamedObject` obj)                                                         |         |
-| `Boolean`                | HasAncestor(this `IDetailObject` child, `ITabularNamedObject` ancestor, `Culture` culture)     |         |
-| `Boolean`                | HasParent(this `IDetailObject` child, `ITabularNamedObject` parent, `Culture` culture)         |         |
-| `Int32`                  | Level(this `String` path)                                                                      |         |
-| `String`                 | PathFromFullPath(`String` path)                                                                |         |
-| `void`                   | SetDisplayFolder(this `IDetailObject` folderObject, `String` newFolderName, `Culture` culture) |         |
-| `String`                 | TrimFolder(this `String` folderPath)                                                           |         |
+| Tipo                     | Nombre                                                                                                                           | Resumen |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `String`                 | ConcatPath(this `String` path, `String` additionalPath)                                                       |         |
+| `String`                 | ConcatPath(this `IEnumerable<String>` pathBits)                                                               |         |
+| `IDetailObjectContainer` | GetContainer(this `IDetailObject` obj)                                                                        |         |
+| `String`                 | GetDisplayFolder(this `IDetailObject` folderObject, `configuración regional` culture)                         |         |
+| `String`                 | GetFullPath(`ITabularNamedObject` obj)                                                                        |         |
+| `Boolean`                | HasAncestor(this `IDetailObject` child, `ITabularNamedObject` ancestor, `configuración regional` culture)     |         |
+| `Boolean`                | HasParent(this `IDetailObject` child, `ITabularNamedObject` parent, `configuración regional` culture)         |         |
+| `Int32`                  | Level(this `String` path)                                                                                     |         |
+| `String`                 | PathFromFullPath(`String` path)                                                                               |         |
+| `void`                   | SetDisplayFolder(this `IDetailObject` folderObject, `String` newFolderName, `configuración regional` culture) |         |
+| `String`                 | TrimFolder(this `String` folderPath)                                                                          |         |
 
 ## `Hierarchy`
 
-Base class declaration for Hierarchy
+Declaración de la clase base para Hierarchy
 
 ```csharp
 public class TabularEditor.TOMWrapper.Hierarchy
@@ -556,25 +557,25 @@ public class TabularEditor.TOMWrapper.Hierarchy
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name                     | Summary                                                                                     |
-| -------------------- | ------------------------ | ------------------------------------------------------------------------------------------- |
-| `String`             | Description              | Gets or sets the Description of the Hierarchy.                              |
-| `String`             | DisplayFolder            | Gets or sets the DisplayFolder of the Hierarchy.                            |
-| `PerspectiveIndexer` | InPerspective            |                                                                                             |
-| `Boolean`            | IsHidden                 | Gets or sets the IsHidden of the Hierarchy.                                 |
-| `LevelCollection`    | Levels                   |                                                                                             |
-| `Hierarchy`          | MetadataObject           |                                                                                             |
-| `Boolean`            | Reordering               | Set to true, when multiple levels are going to be re-ordered as one action. |
-| `ObjectState`        | State                    | Gets or sets the State of the Hierarchy.                                    |
-| `Table`              | Table                    |                                                                                             |
-| `TranslationIndexer` | TranslatedDescriptions   | Collection of localized descriptions for this Hierarchy.                    |
-| `TranslationIndexer` | TranslatedDisplayFolders | Collection of localized Display Folders for this Hierarchy.                 |
+| Tipo                     | Nombre                   | Resumen                                                                                             |
+| ------------------------ | ------------------------ | --------------------------------------------------------------------------------------------------- |
+| `String`                 | Descripción              | Obtiene o establece la descripción de la jerarquía.                                 |
+| `String`                 | DisplayFolder            | Obtiene o establece DisplayFolder de la jerarquía.                                  |
+| `IndexadorDePerspectiva` | EnPerspectiva            |                                                                                                     |
+| `Boolean`                | IsHidden                 | Obtiene o establece IsHidden de la jerarquía.                                       |
+| `LevelCollection`        | Levels                   |                                                                                                     |
+| `Hierarchy`              | MetadataObject           |                                                                                                     |
+| `Boolean`                | Reordering               | Establézcalo en true cuando se vayan a reordenar varios niveles en una sola acción. |
+| `ObjectState`            | State                    | Obtiene o establece el estado de la jerarquía.                                      |
+| `Table`                  | Tabla                    |                                                                                                     |
+| `TranslationIndexer`     | TranslatedDescriptions   | Colección de descripciones localizadas para esta jerarquía.                         |
+| `TranslationIndexer`     | TranslatedDisplayFolders | Colección de carpetas de visualización localizadas para esta jerarquía.             |
 
-Methods
+Métodos
 
-| Type                               | Name                                                                                              | Summary |
+| Tipo                               | Nombre                                                                                            | Resumen |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------- | ------- |
 | `Level`                            | AddLevel(`Column` column, `String` levelName = null, `Int32` ordinal = -1)     |         |
 | `Level`                            | AddLevel(`String` columnName, `String` levelName = null, `Int32` ordinal = -1) |         |
@@ -591,7 +592,7 @@ Methods
 
 ## `HierarchyCollection`
 
-Collection class for Hierarchy. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección de jerarquías. Proporciona propiedades convenientes para establecer una propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.HierarchyCollection
@@ -599,18 +600,18 @@ public class TabularEditor.TOMWrapper.HierarchyCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type      | Name          | Summary |
-| --------- | ------------- | ------- |
-| `String`  | Description   |         |
-| `String`  | DisplayFolder |         |
-| `Boolean` | IsHidden      |         |
-| `Table`   | Parent        |         |
+| Tipo      | Nombre         | Resumen |
+| --------- | -------------- | ------- |
+| `String`  | Description    |         |
+| `String`  | DisplayFolder  |         |
+| `Boolean` | IsHidden       |         |
+| `Table`   | Elemento padre |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
@@ -622,9 +623,9 @@ public class TabularEditor.TOMWrapper.HierarchyColumnConverter
 
 ```
 
-Methods
+Métodos
 
-| Type      | Name                                                                            | Summary |
+| Tipo      | Nombre                                                                          | Resumen |
 | --------- | ------------------------------------------------------------------------------- | ------- |
 | `Boolean` | GetStandardValuesExclusive(`ITypeDescriptorContext` context) |         |
 | `Boolean` | IsValid(`ITypeDescriptorContext` context, `Object` value)    |         |
@@ -637,9 +638,9 @@ public interface TabularEditor.TOMWrapper.IAnnotationObject
 
 ```
 
-Methods
+Métodos
 
-| Type     | Name                                                                                       | Summary |
+| Tipo     | Nombre                                                                                     | Resumen |
 | -------- | ------------------------------------------------------------------------------------------ | ------- |
 | `String` | GetAnnotation(`String` name)                                            |         |
 | `void`   | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |         |
@@ -651,9 +652,9 @@ public interface TabularEditor.TOMWrapper.IClonableObject
 
 ```
 
-Methods
+Métodos
 
-| Type                 | Name                                                                      | Summary |
+| Tipo                 | Nombre                                                                    | Resumen |
 | -------------------- | ------------------------------------------------------------------------- | ------- |
 | `TabularNamedObject` | Clone(`String` newName, `Boolean` includeTranslations) |         |
 
@@ -665,34 +666,34 @@ public interface TabularEditor.TOMWrapper.IDaxObject
 
 ```
 
-Properties
+Propiedades
 
-| Type                         | Name              | Summary |
+| Tipo                         | Nombre            | Resumen |
 | ---------------------------- | ----------------- | ------- |
 | `String`                     | DaxObjectFullName |         |
 | `String`                     | DaxObjectName     |         |
 | `String`                     | DaxTableName      |         |
-| `HashSet<IExpressionObject>` | Dependants        |         |
+| `HashSet<IExpressionObject>` | Dependientes      |         |
 
 ## `IDescriptionObject`
 
-Objects that can have descriptions
+Objetos que pueden tener descripciones
 
 ```csharp
 public interface TabularEditor.TOMWrapper.IDescriptionObject
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name                   | Summary |
+| Tipo                 | Nombre                 | Resumen |
 | -------------------- | ---------------------- | ------- |
-| `String`             | Description            |         |
+| `String`             | Descripción            |         |
 | `TranslationIndexer` | TranslatedDescriptions |         |
 
 ## `IDetailObject`
 
-Represents an object than can be contained in a Display Folder. Examples:  - Measures  - Columns  - Hierarchies  - Folders
+Representa un objeto que puede estar dentro de una carpeta de visualización. Ejemplos:  - medidas  - Columnas  - Jerarquías  - Carpetas
 
 ```csharp
 public interface TabularEditor.TOMWrapper.IDetailObject
@@ -700,16 +701,16 @@ public interface TabularEditor.TOMWrapper.IDetailObject
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name                     | Summary |
+| Tipo                 | Nombre                   | Resumen |
 | -------------------- | ------------------------ | ------- |
 | `String`             | DisplayFolder            |         |
 | `TranslationIndexer` | TranslatedDisplayFolders |         |
 
 ## `IDetailObjectContainer`
 
-Represents an objects that can contain other objects as well as display folders. Examples:  - Folders  - Table
+Representa un objeto que puede contener otros objetos, además de carpetas de visualización. Ejemplos:  - Carpetas  - Tabla
 
 ```csharp
 public interface TabularEditor.TOMWrapper.IDetailObjectContainer
@@ -717,30 +718,30 @@ public interface TabularEditor.TOMWrapper.IDetailObjectContainer
 
 ```
 
-Properties
+Propiedades
 
-| Type    | Name        | Summary |
+| Tipo    | Nombre      | Resumen |
 | ------- | ----------- | ------- |
 | `Table` | ParentTable |         |
 
-Methods
+Métodos
 
-| Type                         | Name                                                                 | Summary |
+| Tipo                         | Nombre                                                               | Resumen |
 | ---------------------------- | -------------------------------------------------------------------- | ------- |
 | `IEnumerable<IDetailObject>` | GetChildrenByFolders(`Boolean` recursive = False) |         |
 
 ## `IErrorMessageObject`
 
-Objects that can have error messages
+Objetos que pueden contener mensajes de error
 
 ```csharp
 public interface TabularEditor.TOMWrapper.IErrorMessageObject
 
 ```
 
-Properties
+Propiedades
 
-| Type     | Name         | Summary |
+| Tipo     | Nombre       | Resumen |
 | -------- | ------------ | ------- |
 | `String` | ErrorMessage |         |
 
@@ -752,26 +753,26 @@ public interface TabularEditor.TOMWrapper.IExpressionObject
 
 ```
 
-Properties
+Propiedades
 
-| Type                                       | Name            | Summary |
+| Tipo                                       | Nombre          | Resumen |
 | ------------------------------------------ | --------------- | ------- |
-| `Dictionary<IDaxObject, List<Dependency>>` | Dependencies    |         |
-| `String`                                   | Expression      |         |
+| `Dictionary<IDaxObject, List<Dependency>>` | Dependencias    |         |
+| `String`                                   | Expresión       |         |
 | `Boolean`                                  | NeedsValidation |         |
 
 ## `IHideableObject`
 
-Objects that can be shown/hidden
+Objetos que se pueden mostrar u ocultar
 
 ```csharp
 public interface TabularEditor.TOMWrapper.IHideableObject
 
 ```
 
-Properties
+Propiedades
 
-| Type      | Name     | Summary |
+| Tipo      | Nombre   | Resumen |
 | --------- | -------- | ------- |
 | `Boolean` | IsHidden |         |
 
@@ -783,11 +784,11 @@ public class TabularEditor.TOMWrapper.IntelliSenseAttribute
 
 ```
 
-Properties
+Propiedades
 
-| Type     | Name        | Summary |
+| Tipo     | Nombre      | Resumen |
 | -------- | ----------- | ------- |
-| `String` | Description |         |
+| `String` | Descripción |         |
 
 ## `ITabularNamedObject`
 
@@ -797,9 +798,9 @@ public interface TabularEditor.TOMWrapper.ITabularNamedObject
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name            | Summary |
+| Tipo                 | Nombre          | Resumen |
 | -------------------- | --------------- | ------- |
 | `Int32`              | MetadataIndex   |         |
 | `String`             | Name            |         |
@@ -813,9 +814,9 @@ public interface TabularEditor.TOMWrapper.ITabularObject
 
 ```
 
-Properties
+Propiedades
 
-| Type         | Name       | Summary |
+| Tipo         | Nombre     | Resumen |
 | ------------ | ---------- | ------- |
 | `Model`      | Model      |         |
 | `ObjectType` | ObjectType |         |
@@ -828,17 +829,17 @@ public interface TabularEditor.TOMWrapper.ITabularObjectCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type                  | Name           | Summary |
+| Tipo                  | Nombre         | Resumen |
 | --------------------- | -------------- | ------- |
 | `String`              | CollectionName |         |
 | `TabularModelHandler` | Handler        |         |
 | `IEnumerable<String>` | Keys           |         |
 
-Methods
+Métodos
 
-| Type                       | Name                                                 | Summary |
+| Tipo                       | Nombre                                               | Resumen |
 | -------------------------- | ---------------------------------------------------- | ------- |
 | `void`                     | Add(`TabularNamedObject` obj)     |         |
 | `void`                     | Clear()                           |         |
@@ -850,22 +851,22 @@ Methods
 
 ## `ITabularObjectContainer`
 
-TabularObjects that can contain other objects should use this interface.
+Los `TabularObjects` que pueden contener otros objetos deben usar esta interfaz.
 
 ```csharp
 public interface TabularEditor.TOMWrapper.ITabularObjectContainer
 
 ```
 
-Methods
+Métodos
 
-| Type                               | Name                             | Summary |
+| Tipo                               | Nombre                           | Resumen |
 | ---------------------------------- | -------------------------------- | ------- |
 | `IEnumerable<ITabularNamedObject>` | GetChildren() |         |
 
 ## `ITabularPerspectiveObject`
 
-Objects that can be shown/hidden in individual perspectives
+Objetos que pueden mostrarse u ocultarse en perspectivas individuales
 
 ```csharp
 public interface TabularEditor.TOMWrapper.ITabularPerspectiveObject
@@ -873,15 +874,15 @@ public interface TabularEditor.TOMWrapper.ITabularPerspectiveObject
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name          | Summary |
+| Tipo                 | Nombre        | Resumen |
 | -------------------- | ------------- | ------- |
 | `PerspectiveIndexer` | InPerspective |         |
 
 ## `ITabularTableObject`
 
-Object that belongs to a specific table.
+Objeto que pertenece a una tabla específica.
 
 ```csharp
 public interface TabularEditor.TOMWrapper.ITabularTableObject
@@ -889,21 +890,21 @@ public interface TabularEditor.TOMWrapper.ITabularTableObject
 
 ```
 
-Properties
+Propiedades
 
-| Type    | Name  | Summary |
-| ------- | ----- | ------- |
-| `Table` | Table |         |
+| Tipo    | Nombre | Resumen |
+| ------- | ------ | ------- |
+| `Table` | Tabla  |         |
 
-Methods
+Métodos
 
-| Type   | Name                        | Summary |
+| Tipo   | Nombre                      | Resumen |
 | ------ | --------------------------- | ------- |
 | `void` | Delete() |         |
 
 ## `KPI`
 
-Base class declaration for KPI
+Declaración de la clase base para KPI
 
 ```csharp
 public class TabularEditor.TOMWrapper.KPI
@@ -911,27 +912,27 @@ public class TabularEditor.TOMWrapper.KPI
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name                   | Summary                                                            |
-| -------------------- | ---------------------- | ------------------------------------------------------------------ |
-| `String`             | Description            | Gets or sets the Description of the KPI.           |
-| `Measure`            | Measure                | Gets or sets the Measure of the KPI.               |
-| `KPI`                | MetadataObject         |                                                                    |
-| `String`             | StatusDescription      | Gets or sets the StatusDescription of the KPI.     |
-| `String`             | StatusExpression       | Gets or sets the StatusExpression of the KPI.      |
-| `String`             | StatusGraphic          | Gets or sets the StatusGraphic of the KPI.         |
-| `String`             | TargetDescription      | Gets or sets the TargetDescription of the KPI.     |
-| `String`             | TargetExpression       | Gets or sets the TargetExpression of the KPI.      |
-| `String`             | TargetFormatString     | Gets or sets the TargetFormatString of the KPI.    |
-| `TranslationIndexer` | TranslatedDescriptions | Collection of localized descriptions for this KPI. |
-| `String`             | TrendDescription       | Gets or sets the TrendDescription of the KPI.      |
-| `String`             | TrendExpression        | Gets or sets the TrendExpression of the KPI.       |
-| `String`             | TrendGraphic           | Gets or sets the TrendGraphic of the KPI.          |
+| Tipo                 | Nombre                 | Resumen                                                                     |
+| -------------------- | ---------------------- | --------------------------------------------------------------------------- |
+| `String`             | Descripción            | Obtiene o establece la descripción del KPI.                 |
+| `medida`             | Medida                 | Obtiene o establece la medida del KPI.                      |
+| `KPI`                | MetadataObject         |                                                                             |
+| `String`             | StatusDescription      | Obtiene o establece el valor de StatusDescription del KPI.  |
+| `String`             | StatusExpression       | Obtiene o establece el valor de StatusExpression del KPI.   |
+| `String`             | StatusGraphic          | Obtiene o establece el valor de StatusGraphic del KPI.      |
+| `String`             | TargetDescription      | Obtiene o establece el valor de TargetDescription del KPI.  |
+| `String`             | TargetExpression       | Obtiene o establece el valor de TargetExpression del KPI.   |
+| `String`             | TargetFormatString     | Obtiene o establece el valor de TargetFormatString del KPI. |
+| `TranslationIndexer` | TranslatedDescriptions | Colección de descripciones localizadas para este KPI.       |
+| `String`             | TrendDescription       | Obtiene o establece el valor de TrendDescription del KPI.   |
+| `String`             | TrendExpression        | Obtiene o establece la propiedad TrendExpression del KPI.   |
+| `String`             | TrendGraphic           | Obtiene o establece la propiedad TrendGraphic del KPI.      |
 
-Methods
+Métodos
 
-| Type      | Name                                                                                       | Summary |
+| Tipo      | Nombre                                                                                     | Resumen |
 | --------- | ------------------------------------------------------------------------------------------ | ------- |
 | `Boolean` | Browsable(`String` propertyName)                                        |         |
 | `Boolean` | Editable(`String` propertyName)                                         |         |
@@ -940,7 +941,7 @@ Methods
 
 ## `Level`
 
-Base class declaration for Level
+Declaración de la clase base para Level
 
 ```csharp
 public class TabularEditor.TOMWrapper.Level
@@ -948,32 +949,32 @@ public class TabularEditor.TOMWrapper.Level
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name                   | Summary                                                              |
-| -------------------- | ---------------------- | -------------------------------------------------------------------- |
-| `Column`             | Column                 | Gets or sets the Column of the Level.                |
-| `String`             | Description            | Gets or sets the Description of the Level.           |
-| `Hierarchy`          | Hierarchy              | Gets or sets the Hierarchy of the Level.             |
-| `Level`              | MetadataObject         |                                                                      |
-| `Int32`              | Ordinal                | Gets or sets the Ordinal of the Level.               |
-| `Table`              | Table                  |                                                                      |
-| `TranslationIndexer` | TranslatedDescriptions | Collection of localized descriptions for this Level. |
+| Tipo                 | Nombre                 | Resumen                                                               |
+| -------------------- | ---------------------- | --------------------------------------------------------------------- |
+| `Column`             | Columna                | Obtiene o establece la columna del nivel.             |
+| `String`             | Descripción            | Obtiene o establece la descripción del nivel.         |
+| `Hierarchy`          | Jerarquía              | Obtiene o establece la jerarquía del nivel.           |
+| `Level`              | MetadataObject         |                                                                       |
+| `Int32`              | Ordinal                | Obtiene o establece el ordinal del nivel.             |
+| `Table`              | Tabla                  |                                                                       |
+| `TranslationIndexer` | TranslatedDescriptions | Colección de descripciones localizadas de este nivel. |
 
-Methods
+Métodos
 
-| Type     | Name                                                                                                                    | Summary                                               |
-| -------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| `void`   | Delete()                                                                                             | Deletes the level from the hierarchy. |
-| `String` | GetAnnotation(`String` name)                                                                         |                                                       |
-| `void`   | OnPropertyChanged(`String` propertyName, `Object` oldValue, `Object` newValue)                       |                                                       |
-| `void`   | OnPropertyChanging(`String` propertyName, `Object` newValue, `Boolean&` undoable, `Boolean&` cancel) |                                                       |
-| `void`   | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True)                              |                                                       |
-| `void`   | Undelete(`ITabularObjectCollection` collection)                                                      |                                                       |
+| Tipo     | Nombre                                                                                                                  | Resumen                                           |
+| -------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `void`   | Delete()                                                                                             | Elimina el nivel de la jerarquía. |
+| `String` | GetAnnotation(`String` name)                                                                         |                                                   |
+| `void`   | OnPropertyChanged(`String` propertyName, `Object` oldValue, `Object` newValue)                       |                                                   |
+| `void`   | OnPropertyChanging(`String` propertyName, `Object` newValue, `Boolean&` undoable, `Boolean&` cancel) |                                                   |
+| `void`   | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True)                              |                                                   |
+| `void`   | Undelete(`ITabularObjectCollection` collection)                                                      |                                                   |
 
 ## `LevelCollection`
 
-Collection class for Level. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección de `Level`. Proporciona propiedades prácticas para establecer una propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.LevelCollection
@@ -981,16 +982,16 @@ public class TabularEditor.TOMWrapper.LevelCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type        | Name        | Summary |
+| Tipo        | Nombre      | Resumen |
 | ----------- | ----------- | ------- |
-| `String`    | Description |         |
-| `Hierarchy` | Parent      |         |
+| `String`    | Descripción |         |
+| `Hierarchy` | Padre       |         |
 
-Methods
+Métodos
 
-| Type      | Name                                    | Summary |
+| Tipo      | Nombre                                  | Resumen |
 | --------- | --------------------------------------- | ------- |
 | `void`    | Add(`Level` item)    |         |
 | `Boolean` | Remove(`Level` item) |         |
@@ -1004,25 +1005,25 @@ public class TabularEditor.TOMWrapper.LogicalGroup
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name            | Summary |
+| Tipo                 | Nombre          | Resumen |
 | -------------------- | --------------- | ------- |
 | `Int32`              | MetadataIndex   |         |
 | `Model`              | Model           |         |
-| `String`             | Name            |         |
+| `String`             | Nombre          |         |
 | `ObjectType`         | ObjectType      |         |
 | `TranslationIndexer` | TranslatedNames |         |
 
-Events
+Eventos
 
-| Type                          | Name            | Summary |
+| Tipo                          | Nombre          | Resumen |
 | ----------------------------- | --------------- | ------- |
 | `PropertyChangedEventHandler` | PropertyChanged |         |
 
-Methods
+Métodos
 
-| Type                               | Name                             | Summary |
+| Tipo                               | Nombre                           | Resumen |
 | ---------------------------------- | -------------------------------- | ------- |
 | `IEnumerable<ITabularNamedObject>` | GetChildren() |         |
 
@@ -1036,22 +1037,22 @@ public enum TabularEditor.TOMWrapper.LogicalTreeOptions
 
 Enum
 
-| Value | Name           | Summary |
-| ----- | -------------- | ------- |
-| `1`   | DisplayFolders |         |
-| `2`   | Columns        |         |
-| `4`   | Measures       |         |
-| `8`   | KPIs           |         |
-| `16`  | Hierarchies    |         |
-| `32`  | Levels         |         |
-| `64`  | ShowHidden     |         |
-| `128` | AllObjectTypes |         |
-| `256` | ShowRoot       |         |
-| `447` | Default        |         |
+| Valor | Nombre                    | Resumen |
+| ----- | ------------------------- | ------- |
+| `1`   | DisplayFolders            |         |
+| `2`   | Columns                   |         |
+| `4`   | Medidas                   |         |
+| `8`   | KPI                       |         |
+| `16`  | Jerarquías                |         |
+| `32`  | Niveles                   |         |
+| `64`  | Mostrar elementos ocultos |         |
+| `128` | Todos los tipos de objeto |         |
+| `256` | Mostrar la raíz           |         |
+| `447` | Predeterminado            |         |
 
-## `Measure`
+## `medida`
 
-Base class declaration for Measure
+Declaración de la clase base de la medida
 
 ```csharp
 public class TabularEditor.TOMWrapper.Measure
@@ -1059,35 +1060,35 @@ public class TabularEditor.TOMWrapper.Measure
 
 ```
 
-Properties
+Propiedades
 
-| Type                                       | Name                     | Summary                                                                   |
-| ------------------------------------------ | ------------------------ | ------------------------------------------------------------------------- |
-| `DataType`                                 | DataType                 | Gets or sets the DataType of the Measure.                 |
-| `String`                                   | DaxObjectFullName        |                                                                           |
-| `String`                                   | DaxObjectName            |                                                                           |
-| `String`                                   | DaxTableName             |                                                                           |
-| `HashSet<IExpressionObject>`               | Dependants               |                                                                           |
-| `Dictionary<IDaxObject, List<Dependency>>` | Dependencies             |                                                                           |
-| `String`                                   | Description              | Gets or sets the Description of the Measure.              |
-| `String`                                   | DisplayFolder            | Gets or sets the DisplayFolder of the Measure.            |
-| `String`                                   | ErrorMessage             | Gets or sets the ErrorMessage of the Measure.             |
-| `String`                                   | Expression               | Gets or sets the Expression of the Measure.               |
-| `String`                                   | FormatString             | Gets or sets the FormatString of the Measure.             |
-| `PerspectiveIndexer`                       | InPerspective            |                                                                           |
-| `Boolean`                                  | IsHidden                 | Gets or sets the IsHidden of the Measure.                 |
-| `Boolean`                                  | IsSimpleMeasure          | Gets or sets the IsSimpleMeasure of the Measure.          |
-| `KPI`                                      | KPI                      | Gets or sets the KPI of the Measure.                      |
-| `Measure`                                  | MetadataObject           |                                                                           |
-| `Boolean`                                  | NeedsValidation          |                                                                           |
-| `ObjectState`                              | State                    | Gets or sets the State of the Measure.                    |
-| `Table`                                    | Table                    |                                                                           |
-| `TranslationIndexer`                       | TranslatedDescriptions   | Collection of localized descriptions for this Measure.    |
-| `TranslationIndexer`                       | TranslatedDisplayFolders | Collection of localized Display Folders for this Measure. |
+| Tipo                                       | Nombre                   | Resumen                                                                            |
+| ------------------------------------------ | ------------------------ | ---------------------------------------------------------------------------------- |
+| `DataType`                                 | DataType                 | Obtiene o establece el DataType de la medida.                      |
+| `String`                                   | DaxObjectFullName        |                                                                                    |
+| `String`                                   | DaxObjectName            |                                                                                    |
+| `String`                                   | DaxTableName             |                                                                                    |
+| `HashSet<IExpressionObject>`               | Dependientes             |                                                                                    |
+| `Dictionary<IDaxObject, List<Dependency>>` | Dependencias             |                                                                                    |
+| `String`                                   | Descripción              | Obtiene o establece la descripción de la medida.                   |
+| `String`                                   | DisplayFolder            | Obtiene o establece la propiedad DisplayFolder de la medida.       |
+| `String`                                   | ErrorMessage             | Obtiene o establece la propiedad ErrorMessage de la medida.        |
+| `String`                                   | Expresión                | Obtiene o establece la expresión de la medida.                     |
+| `String`                                   | FormatString             | Obtiene o establece la propiedad FormatString de la medida.        |
+| `IndexadorDePerspectiva`                   | EnPerspectiva            |                                                                                    |
+| `Boolean`                                  | IsHidden                 | Obtiene o establece la propiedad IsHidden de la medida.            |
+| `Boolean`                                  | IsSimpleMeasure          | Obtiene o establece la propiedad IsSimpleMeasure de la medida.     |
+| `KPI`                                      | KPI                      | Obtiene o establece el KPI de la medida.                           |
+| `medida`                                   | MetadataObject           |                                                                                    |
+| `Boolean`                                  | NeedsValidation          |                                                                                    |
+| `ObjectState`                              | State                    | Obtiene o establece el estado de la medida.                        |
+| `Table`                                    | Table                    |                                                                                    |
+| `TranslationIndexer`                       | TranslatedDescriptions   | Colección de descripciones localizadas de esta medida.             |
+| `TranslationIndexer`                       | TranslatedDisplayFolders | Colección de carpetas de visualización localizadas de esta medida. |
 
-Methods
+Métodos
 
-| Type                 | Name                                                                                                                    | Summary |
+| Tipo                 | Nombre                                                                                                                  | Resumen |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------- |
 | `Boolean`            | Browsable(`String` propertyName)                                                                     |         |
 | `TabularNamedObject` | Clone(`String` newName = null, `Boolean` includeTranslations = True)                                 |         |
@@ -1103,7 +1104,7 @@ Methods
 
 ## `MeasureCollection`
 
-Collection class for Measure. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección para la medida. Proporciona propiedades útiles para establecer una misma propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.MeasureCollection
@@ -1111,11 +1112,11 @@ public class TabularEditor.TOMWrapper.MeasureCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type      | Name            | Summary |
+| Tipo      | Nombre          | Resumen |
 | --------- | --------------- | ------- |
-| `String`  | Description     |         |
+| `String`  | Descripción     |         |
 | `String`  | DisplayFolder   |         |
 | `String`  | Expression      |         |
 | `String`  | FormatString    |         |
@@ -1124,15 +1125,15 @@ Properties
 | `KPI`     | KPI             |         |
 | `Table`   | Parent          |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
 ## `Model`
 
-Base class declaration for Model
+Declaración de la clase base de la clase Model
 
 ```csharp
 public class TabularEditor.TOMWrapper.Model
@@ -1140,53 +1141,53 @@ public class TabularEditor.TOMWrapper.Model
 
 ```
 
-Fields
+Campos
 
-| Type           | Name               | Summary |
-| -------------- | ------------------ | ------- |
-| `LogicalGroup` | GroupDataSources   |         |
-| `LogicalGroup` | GroupPerspectives  |         |
-| `LogicalGroup` | GroupRelationships |         |
-| `LogicalGroup` | GroupRoles         |         |
-| `LogicalGroup` | GroupTables        |         |
-| `LogicalGroup` | GroupTranslations  |         |
+| Tipo           | Nombre            | Resumen |
+| -------------- | ----------------- | ------- |
+| `LogicalGroup` | GroupDataSources  |         |
+| `LogicalGroup` | GroupPerspectivas |         |
+| `LogicalGroup` | GroupRelaciones   |         |
+| `LogicalGroup` | GroupRoles        |         |
+| `LogicalGroup` | GroupTables       |         |
+| `LogicalGroup` | GroupTranslations |         |
 
-Properties
+Propiedades
 
-| Type                        | Name                   | Summary                                                              |
-| --------------------------- | ---------------------- | -------------------------------------------------------------------- |
-| `IEnumerable<Column>`       | AllColumns             |                                                                      |
-| `IEnumerable<Hierarchy>`    | AllHierarchies         |                                                                      |
-| `IEnumerable<Level>`        | AllLevels              |                                                                      |
-| `IEnumerable<Measure>`      | AllMeasures            |                                                                      |
-| `String`                    | Collation              | Gets or sets the Collation of the Model.             |
-| `String`                    | Culture                | Gets or sets the Culture of the Model.               |
-| `CultureCollection`         | Cultures               |                                                                      |
-| `Database`                  | Database               |                                                                      |
-| `DataSourceCollection`      | DataSources            |                                                                      |
-| `DataViewType`              | DefaultDataView        | Gets or sets the DefaultDataView of the Model.       |
-| `ModeType`                  | DefaultMode            | Gets or sets the DefaultMode of the Model.           |
-| `String`                    | Description            | Gets or sets the Description of the Model.           |
-| `Boolean`                   | HasLocalChanges        | Gets or sets the HasLocalChanges of the Model.       |
-| `IEnumerable<LogicalGroup>` | LogicalChildGroups     |                                                                      |
-| `Model`                     | MetadataObject         |                                                                      |
-| `PerspectiveCollection`     | Perspectives           |                                                                      |
-| `RelationshipCollection2`   | Relationships          |                                                                      |
-| `ModelRoleCollection`       | Roles                  |                                                                      |
-| `String`                    | StorageLocation        | Gets or sets the StorageLocation of the Model.       |
-| `TableCollection`           | Tables                 |                                                                      |
-| `TranslationIndexer`        | TranslatedDescriptions | Collection of localized descriptions for this Model. |
+| Tipo                        | Nombre                     | Resumen                                                                      |
+| --------------------------- | -------------------------- | ---------------------------------------------------------------------------- |
+| `IEnumerable<Column>`       | AllColumns                 |                                                                              |
+| `IEnumerable<Hierarchy>`    | AllHierarchies             |                                                                              |
+| `IEnumerable<Level>`        | AllLevels                  |                                                                              |
+| `IEnumerable<Measure>`      | AllMeasures                |                                                                              |
+| `String`                    | Intercalación              | Obtiene o establece la intercalación del modelo.             |
+| `String`                    | Configuración regional     | Obtiene o establece la configuración regional del modelo.    |
+| `CultureCollection`         | Configuraciones regionales |                                                                              |
+| `Database`                  | Base de datos              |                                                                              |
+| `DataSourceCollection`      | Fuentes de datos           |                                                                              |
+| `DataViewType`              | DefaultDataView            | Obtiene o establece el DefaultDataView del modelo.           |
+| `ModeType`                  | DefaultMode                | Obtiene o establece la propiedad DefaultMode del modelo.     |
+| `String`                    | Descripción                | Obtiene o establece la descripción del modelo.               |
+| `Boolean`                   | HasLocalChanges            | Obtiene o establece la propiedad HasLocalChanges del modelo. |
+| `IEnumerable<LogicalGroup>` | LogicalChildGroups         |                                                                              |
+| `Model`                     | MetadataObject             |                                                                              |
+| `PerspectiveCollection`     | Perspectivas               |                                                                              |
+| `RelationshipCollection2`   | Relaciones                 |                                                                              |
+| `ModelRoleCollection`       | Roles                      |                                                                              |
+| `String`                    | StorageLocation            | Obtiene o establece la propiedad StorageLocation del modelo. |
+| `TableCollection`           | Tablas                     |                                                                              |
+| `TranslationIndexer`        | TranslatedDescriptions     | Colección de descripciones localizadas para este modelo.     |
 
-Methods
+Métodos
 
-| Type                               | Name                                                                                       | Summary |
+| Tipo                               | Nombre                                                                                     | Resumen |
 | ---------------------------------- | ------------------------------------------------------------------------------------------ | ------- |
 | `CalculatedTable`                  | AddCalculatedTable()                                                    |         |
-| `Perspective`                      | AddPerspective(`String` name = null)                                    |         |
-| `SingleColumnRelationship`         | AddRelationship()                                                       |         |
-| `ModelRole`                        | AddRole(`String` name = null)                                           |         |
+| `perspectiva`                      | AddPerspective(`String` name = null) perspectiva                        |         |
+| `RelaciónDeColumnaÚnica`           | AddRelationship() relación                                              |         |
+| `RolDelModelo`                     | AddRole(`String` name = null) rol                                       |         |
 | `Table`                            | AddTable()                                                              |         |
-| `Culture`                          | AddTranslation(`String` cultureId)                                      |         |
+| `configuración regional`           | AddTranslation(`String` cultureId) configuración regional               |         |
 | `String`                           | GetAnnotation(`String` name)                                            |         |
 | `IEnumerable<ITabularNamedObject>` | GetChildren()                                                           |         |
 | `void`                             | Init()                                                                  |         |
@@ -1195,7 +1196,7 @@ Methods
 
 ## `ModelRole`
 
-Base class declaration for ModelRole
+Declaración de la clase base del rol del modelo
 
 ```csharp
 public class TabularEditor.TOMWrapper.ModelRole
@@ -1203,19 +1204,19 @@ public class TabularEditor.TOMWrapper.ModelRole
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name                   | Summary                                                                  |
-| -------------------- | ---------------------- | ------------------------------------------------------------------------ |
-| `String`             | Description            | Gets or sets the Description of the ModelRole.           |
-| `ModelRole`          | MetadataObject         |                                                                          |
-| `ModelPermission`    | ModelPermission        | Gets or sets the ModelPermission of the ModelRole.       |
-| `RoleRLSIndexer`     | RowLevelSecurity       |                                                                          |
-| `TranslationIndexer` | TranslatedDescriptions | Collection of localized descriptions for this ModelRole. |
+| Tipo                 | Nombre                 | Resumen                                                                        |
+| -------------------- | ---------------------- | ------------------------------------------------------------------------------ |
+| `String`             | Descripción            | Obtiene o establece la descripción del rol del modelo.         |
+| `ModelRole`          | MetadataObject         |                                                                                |
+| `ModelPermission`    | ModelPermission        | Obtiene o establece el ModelPermission del rol del modelo.     |
+| `RoleRLSIndexer`     | RowLevelSecurity       |                                                                                |
+| `TranslationIndexer` | TranslatedDescriptions | Colección de descripciones localizadas de este rol del modelo. |
 
-Methods
+Métodos
 
-| Type                 | Name                                                                                       | Summary |
+| Tipo                 | Nombre                                                                                     | Resumen |
 | -------------------- | ------------------------------------------------------------------------------------------ | ------- |
 | `TabularNamedObject` | Clone(`String` newName, `Boolean` includeTranslations)                  |         |
 | `void`               | Delete()                                                                |         |
@@ -1226,7 +1227,7 @@ Methods
 
 ## `ModelRoleCollection`
 
-Collection class for ModelRole. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección para ModelRole. Proporciona propiedades prácticas para establecer una misma propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.ModelRoleCollection
@@ -1234,17 +1235,17 @@ public class TabularEditor.TOMWrapper.ModelRoleCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type              | Name            | Summary |
+| Tipo              | Nombre          | Resumen |
 | ----------------- | --------------- | ------- |
-| `String`          | Description     |         |
+| `String`          | Descripción     |         |
 | `ModelPermission` | ModelPermission |         |
-| `Model`           | Parent          |         |
+| `Model`           | Padre           |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
@@ -1256,9 +1257,9 @@ public class TabularEditor.TOMWrapper.NullTree
 
 ```
 
-Methods
+Métodos
 
-| Type   | Name                                                                                     | Summary |
+| Tipo   | Nombre                                                                                   | Resumen |
 | ------ | ---------------------------------------------------------------------------------------- | ------- |
 | `void` | OnNodesChanged(`ITabularObject` nodeItem)                             |         |
 | `void` | OnNodesInserted(`ITabularObject` parent, `ITabularObject[]` children) |         |
@@ -1273,12 +1274,12 @@ public enum TabularEditor.TOMWrapper.ObjectOrder
 
 ```
 
-Enum
+Enumeración
 
-| Value | Name         | Summary |
-| ----- | ------------ | ------- |
-| `0`   | Alphabetical |         |
-| `1`   | Metadata     |         |
+| Valor | Nombre     | Resumen |
+| ----- | ---------- | ------- |
+| `0`   | Alfabético |         |
+| `1`   | Metadatos  |         |
 
 ## `ObjectType`
 
@@ -1288,40 +1289,40 @@ public enum TabularEditor.TOMWrapper.ObjectType
 
 ```
 
-Enum
+Enumeración
 
-| Value  | Name                 | Summary |
-| ------ | -------------------- | ------- |
-| `-2`   | Group                |         |
-| `-1`   | Folder               |         |
-| `1`    | Model                |         |
-| `2`    | DataSource           |         |
-| `3`    | Table                |         |
-| `4`    | Column               |         |
-| `5`    | AttributeHierarchy   |         |
-| `6`    | Partition            |         |
-| `7`    | Relationship         |         |
-| `8`    | Measure              |         |
-| `9`    | Hierarchy            |         |
-| `10`   | Level                |         |
-| `11`   | Annotation           |         |
-| `12`   | KPI                  |         |
-| `13`   | Culture              |         |
-| `14`   | ObjectTranslation    |         |
-| `15`   | LinguisticMetadata   |         |
-| `29`   | Perspective          |         |
-| `30`   | PerspectiveTable     |         |
-| `31`   | PerspectiveColumn    |         |
-| `32`   | PerspectiveHierarchy |         |
-| `33`   | PerspectiveMeasure   |         |
-| `34`   | Role                 |         |
-| `35`   | RoleMembership       |         |
-| `36`   | TablePermission      |         |
-| `1000` | Database             |         |
+| Valor  | Nombre                   | Resumen |
+| ------ | ------------------------ | ------- |
+| `-2`   | Grupo                    |         |
+| `-1`   | Carpeta                  |         |
+| `1`    | Modelo                   |         |
+| `2`    | Fuente de datos          |         |
+| `3`    | Tabla                    |         |
+| `4`    | Columna                  |         |
+| `5`    | Jerarquía de atributos   |         |
+| `6`    | Partición                |         |
+| `7`    | Relación                 |         |
+| `8`    | Medida                   |         |
+| `9`    | Jerarquía                |         |
+| `10`   | Nivel                    |         |
+| `11`   | Anotación                |         |
+| `12`   | KPI                      |         |
+| `13`   | Configuración regional   |         |
+| `14`   | Traducción de objetos    |         |
+| `15`   | Metadatos lingüísticos   |         |
+| `29`   | Perspectiva              |         |
+| `30`   | Tabla de perspectiva     |         |
+| `31`   | Columna de perspectiva   |         |
+| `32`   | Jerarquía de perspectiva |         |
+| `33`   | Medida de perspectiva    |         |
+| `34`   | Rol                      |         |
+| `35`   | Membresía del rol        |         |
+| `36`   | Permiso de tabla         |         |
+| `1000` | Base de datos            |         |
 
-## `Partition`
+## `partición`
 
-Base class declaration for Partition
+Declaración de la clase base de `partición`
 
 ```csharp
 public class TabularEditor.TOMWrapper.Partition
@@ -1329,29 +1330,29 @@ public class TabularEditor.TOMWrapper.Partition
 
 ```
 
-Properties
+Propiedades
 
-| Type                  | Name                   | Summary                                                                  |
-| --------------------- | ---------------------- | ------------------------------------------------------------------------ |
-| `DataSource`          | DataSource             |                                                                          |
-| `DataViewType`        | DataView               | Gets or sets the DataView of the Partition.              |
-| `String`              | Description            | Gets or sets the Description of the Partition.           |
-| `String`              | ErrorMessage           | Gets or sets the ErrorMessage of the Partition.          |
-| `String`              | Expression             |                                                                          |
-| `Partition`           | MetadataObject         |                                                                          |
-| `ModeType`            | Mode                   | Gets or sets the Mode of the Partition.                  |
-| `String`              | Name                   |                                                                          |
-| `String`              | Query                  |                                                                          |
-| `DateTime`            | RefreshedTime          |                                                                          |
-| `String`              | Source                 |                                                                          |
-| `PartitionSourceType` | SourceType             | Gets or sets the SourceType of the Partition.            |
-| `ObjectState`         | State                  | Gets or sets the State of the Partition.                 |
-| `Table`               | Table                  |                                                                          |
-| `TranslationIndexer`  | TranslatedDescriptions | Collection of localized descriptions for this Partition. |
+| Tipo                      | Nombre                 | Resumen                                                                          |
+| ------------------------- | ---------------------- | -------------------------------------------------------------------------------- |
+| `DataSource`              | DataSource             |                                                                                  |
+| `DataViewType`            | DataView               | Obtiene o establece la propiedad `DataView` de la partición.     |
+| `String`                  | Description            | Obtiene o establece la propiedad `Description` de la partición.  |
+| `String`                  | ErrorMessage           | Obtiene o establece la propiedad `ErrorMessage` de la partición. |
+| `String`                  | Expression             |                                                                                  |
+| `partición`               | MetadataObject         |                                                                                  |
+| `ModeType`                | Mode                   | Obtiene o establece la propiedad `Mode` de la partición.         |
+| `String`                  | Name                   |                                                                                  |
+| `String`                  | Query                  |                                                                                  |
+| `DateTime`                | RefreshedTime          |                                                                                  |
+| `String`                  | Source                 |                                                                                  |
+| `TipoDeOrigenDePartición` | SourceType             | Obtiene o establece el SourceType de la partición.               |
+| `ObjectState`             | State                  | Obtiene o establece el State de la partición.                    |
+| `Table`                   | Table                  |                                                                                  |
+| `TranslationIndexer`      | TranslatedDescriptions | Colección de descripciones localizadas para esta partición.      |
 
-Methods
+Métodos
 
-| Type      | Name                                                                                       | Summary |
+| Tipo      | Nombre                                                                                     | Resumen |
 | --------- | ------------------------------------------------------------------------------------------ | ------- |
 | `Boolean` | Browsable(`String` propertyName)                                        |         |
 | `Boolean` | Editable(`String` propertyName)                                         |         |
@@ -1359,9 +1360,9 @@ Methods
 | `void`    | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |         |
 | `void`    | Undelete(`ITabularObjectCollection` collection)                         |         |
 
-## `PartitionCollection`
+## `Colección de particiones`
 
-Collection class for Partition. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección para la partición. Ofrece propiedades prácticas para establecer una misma propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.PartitionCollection
@@ -1369,24 +1370,24 @@ public class TabularEditor.TOMWrapper.PartitionCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type           | Name        | Summary |
+| Tipo           | Nombre      | Resumen |
 | -------------- | ----------- | ------- |
 | `DataViewType` | DataView    |         |
-| `String`       | Description |         |
-| `ModeType`     | Mode        |         |
-| `Table`        | Parent      |         |
+| `String`       | Descripción |         |
+| `ModeType`     | Modo        |         |
+| `Table`        | Padre       |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
-## `Perspective`
+## `perspectiva`
 
-Base class declaration for Perspective
+Declaración de la clase base de la perspectiva
 
 ```csharp
 public class TabularEditor.TOMWrapper.Perspective
@@ -1394,17 +1395,17 @@ public class TabularEditor.TOMWrapper.Perspective
 
 ```
 
-Properties
+Propiedades
 
-| Type                 | Name                   | Summary                                                                    |
-| -------------------- | ---------------------- | -------------------------------------------------------------------------- |
-| `String`             | Description            | Gets or sets the Description of the Perspective.           |
-| `Perspective`        | MetadataObject         |                                                                            |
-| `TranslationIndexer` | TranslatedDescriptions | Collection of localized descriptions for this Perspective. |
+| Tipo                 | Nombre                 | Resumen                                                                     |
+| -------------------- | ---------------------- | --------------------------------------------------------------------------- |
+| `String`             | Descripción            | Obtiene o establece la descripción de la perspectiva.       |
+| `perspectiva`        | MetadataObject         |                                                                             |
+| `TranslationIndexer` | TranslatedDescriptions | Colección de descripciones localizadas de esta perspectiva. |
 
-Methods
+Métodos
 
-| Type                 | Name                                                                                       | Summary |
+| Tipo                 | Nombre                                                                                     | Resumen |
 | -------------------- | ------------------------------------------------------------------------------------------ | ------- |
 | `TabularNamedObject` | Clone(`String` newName, `Boolean` includeTranslations)                  |         |
 | `void`               | Delete()                                                                |         |
@@ -1414,7 +1415,7 @@ Methods
 
 ## `PerspectiveCollection`
 
-Collection class for Perspective. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección para la perspectiva. Ofrece propiedades prácticas para establecer una misma propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.PerspectiveCollection
@@ -1422,16 +1423,16 @@ public class TabularEditor.TOMWrapper.PerspectiveCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type     | Name        | Summary |
+| Tipo     | Nombre      | Resumen |
 | -------- | ----------- | ------- |
-| `String` | Description |         |
-| `Model`  | Parent      |         |
+| `String` | Descripción |         |
+| `Model`  | Padre       |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
@@ -1443,18 +1444,18 @@ public class TabularEditor.TOMWrapper.PerspectiveColumnIndexer
 
 ```
 
-Properties
+Propiedades
 
-| Type     | Name   | Summary |
-| -------- | ------ | ------- |
-| `Column` | Column |         |
+| Tipo     | Nombre  | Resumen |
+| -------- | ------- | ------- |
+| `Column` | Columna |         |
 
-Methods
+Métodos
 
-| Type   | Name                                                                               | Summary |
+| Tipo   | Nombre                                                                             | Resumen |
 | ------ | ---------------------------------------------------------------------------------- | ------- |
 | `void` | Refresh()                                                       |         |
-| `void` | SetInPerspective(`Perspective` perspective, `Boolean` included) |         |
+| `void` | SetInPerspective(`perspectiva` perspectiva, `Boolean` included) |         |
 
 ## `PerspectiveHierarchyIndexer`
 
@@ -1464,20 +1465,20 @@ public class TabularEditor.TOMWrapper.PerspectiveHierarchyIndexer
 
 ```
 
-Properties
+Propiedades
 
-| Type        | Name      | Summary |
+| Tipo        | Nombre    | Resumen |
 | ----------- | --------- | ------- |
 | `Hierarchy` | Hierarchy |         |
 
-Methods
+Métodos
 
-| Type   | Name                                                                               | Summary |
+| Tipo   | Nombre                                                                             | Resumen |
 | ------ | ---------------------------------------------------------------------------------- | ------- |
 | `void` | Refresh()                                                       |         |
-| `void` | SetInPerspective(`Perspective` perspective, `Boolean` included) |         |
+| `void` | SetInPerspective(`perspectiva` perspectiva, `Boolean` included) |         |
 
-## `PerspectiveIndexer`
+## `Indexador de perspectivas`
 
 ```csharp
 public abstract class TabularEditor.TOMWrapper.PerspectiveIndexer
@@ -1485,35 +1486,35 @@ public abstract class TabularEditor.TOMWrapper.PerspectiveIndexer
 
 ```
 
-Fields
+Campos
 
-| Type                 | Name          | Summary |
+| Tipo                 | Nombre        | Resumen |
 | -------------------- | ------------- | ------- |
 | `TabularNamedObject` | TabularObject |         |
 
-Properties
+Propiedades
 
-| Type                               | Name           | Summary |
-| ---------------------------------- | -------------- | ------- |
-| `Boolean`                          | Item           |         |
-| `Boolean`                          | Item           |         |
-| `IEnumerable<String>`              | Keys           |         |
-| `Dictionary<Perspective, Boolean>` | PerspectiveMap |         |
-| `String`                           | Summary        |         |
+| Tipo                               | Nombre               | Resumen |
+| ---------------------------------- | -------------------- | ------- |
+| `Boolean`                          | Item                 |         |
+| `Boolean`                          | Item                 |         |
+| `IEnumerable<String>`              | Keys                 |         |
+| `Dictionary<Perspective, Boolean>` | Mapa de perspectivas |         |
+| `String`                           | Summary              |         |
 
-Methods
+Métodos
 
-| Type                          | Name                                                                               | Summary                                                  |
-| ----------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| `void`                        | All()                                                           | Includes the object in all perspectives. |
-| `Dictionary<String, Boolean>` | Copy()                                                          |                                                          |
-| `void`                        | CopyFrom(`PerspectiveIndexer` source)                           |                                                          |
-| `void`                        | CopyFrom(`IDictionary<String, Boolean>` source)                 |                                                          |
-| `String`                      | GetDisplayName(`String` key)                                    |                                                          |
-| `IEnumerator<Boolean>`        | GetEnumerator()                                                 |                                                          |
-| `void`                        | None()                                                          |                                                          |
-| `void`                        | Refresh()                                                       |                                                          |
-| `void`                        | SetInPerspective(`Perspective` perspective, `Boolean` included) |                                                          |
+| Tipo                          | Nombre                                                                             | Resumen                                                      |
+| ----------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `void`                        | All()                                                           | Incluye el objeto en todas las perspectivas. |
+| `Dictionary<String, Boolean>` | Copy()                                                          |                                                              |
+| `void`                        | CopyFrom(`PerspectiveIndexer` source)                           |                                                              |
+| `void`                        | CopyFrom(`IDictionary<String, Boolean>` source)                 |                                                              |
+| `String`                      | GetDisplayName(`String` key)                                    |                                                              |
+| `IEnumerator<Boolean>`        | GetEnumerator()                                                 |                                                              |
+| `void`                        | None()                                                          |                                                              |
+| `void`                        | Refresh()                                                       |                                                              |
+| `void`                        | SetInPerspective(`Perspective` perspective, `Boolean` included) |                                                              |
 
 ## `PerspectiveMeasureIndexer`
 
@@ -1523,18 +1524,18 @@ public class TabularEditor.TOMWrapper.PerspectiveMeasureIndexer
 
 ```
 
-Properties
+Propiedades
 
-| Type      | Name    | Summary |
-| --------- | ------- | ------- |
-| `Measure` | Measure |         |
+| Tipo     | Nombre | Resumen |
+| -------- | ------ | ------- |
+| `medida` | Medida |         |
 
-Methods
+Métodos
 
-| Type   | Name                                                                               | Summary |
+| Tipo   | Nombre                                                                             | Resumen |
 | ------ | ---------------------------------------------------------------------------------- | ------- |
 | `void` | Refresh()                                                       |         |
-| `void` | SetInPerspective(`Perspective` perspective, `Boolean` included) |         |
+| `void` | SetInPerspective(`perspectiva` perspectiva, `Boolean` included) |         |
 
 ## `PerspectiveTableIndexer`
 
@@ -1544,16 +1545,16 @@ public class TabularEditor.TOMWrapper.PerspectiveTableIndexer
 
 ```
 
-Properties
+Propiedades
 
-| Type      | Name  | Summary |
-| --------- | ----- | ------- |
-| `Boolean` | Item  |         |
-| `Table`   | Table |         |
+| Tipo      | Nombre | Resumen |
+| --------- | ------ | ------- |
+| `Boolean` | Item   |         |
+| `Table`   | Table  |         |
 
-Methods
+Métodos
 
-| Type               | Name                                                                               | Summary |
+| Tipo               | Nombre                                                                             | Resumen |
 | ------------------ | ---------------------------------------------------------------------------------- | ------- |
 | `PerspectiveTable` | EnsurePTExists(`Perspective` perspective)                       |         |
 | `void`             | Refresh()                                                       |         |
@@ -1561,7 +1562,7 @@ Methods
 
 ## `ProviderDataSource`
 
-Base class declaration for ProviderDataSource
+Declaración de la clase base de ProviderDataSource
 
 ```csharp
 public class TabularEditor.TOMWrapper.ProviderDataSource
@@ -1569,36 +1570,36 @@ public class TabularEditor.TOMWrapper.ProviderDataSource
 
 ```
 
-Properties
+Propiedades
 
-| Type                  | Name              | Summary                                                                       |
-| --------------------- | ----------------- | ----------------------------------------------------------------------------- |
-| `String`              | Account           | Gets or sets the Account of the ProviderDataSource.           |
-| `String`              | ConnectionString  | Gets or sets the ConnectionString of the ProviderDataSource.  |
-| `ImpersonationMode`   | ImpersonationMode | Gets or sets the ImpersonationMode of the ProviderDataSource. |
-| `DatasourceIsolation` | Isolation         | Gets or sets the Isolation of the ProviderDataSource.         |
-| `Boolean`             | IsPowerBIMashup   |                                                                               |
-| `String`              | Location          |                                                                               |
-| `Int32`               | MaxConnections    | Gets or sets the MaxConnections of the ProviderDataSource.    |
-| `ProviderDataSource`  | MetadataObject    |                                                                               |
-| `String`              | MQuery            |                                                                               |
-| `String`              | Name              |                                                                               |
-| `String`              | Password          | Gets or sets the Password of the ProviderDataSource.          |
-| `String`              | Provider          | Gets or sets the Provider of the ProviderDataSource.          |
-| `String`              | SourceID          |                                                                               |
-| `Int32`               | Timeout           | Gets or sets the Timeout of the ProviderDataSource.           |
+| Tipo                  | Nombre            | Resumen                                                                                   |
+| --------------------- | ----------------- | ----------------------------------------------------------------------------------------- |
+| `String`              | Account           | Obtiene o establece la propiedad Account de ProviderDataSource.           |
+| `String`              | ConnectionString  | Obtiene o establece la propiedad ConnectionString de ProviderDataSource.  |
+| `ImpersonationMode`   | ImpersonationMode | Obtiene o establece la propiedad ImpersonationMode de ProviderDataSource. |
+| `DatasourceIsolation` | Isolation         | Obtiene o establece la propiedad Isolation de ProviderDataSource.         |
+| `Boolean`             | IsPowerBIMashup   |                                                                                           |
+| `String`              | Location          |                                                                                           |
+| `Int32`               | MaxConnections    | Obtiene o establece el valor de MaxConnections de ProviderDataSource.     |
+| `ProviderDataSource`  | MetadataObject    |                                                                                           |
+| `String`              | MQuery            |                                                                                           |
+| `String`              | Name              |                                                                                           |
+| `String`              | Password          | Obtiene o establece el valor de Password de ProviderDataSource.           |
+| `String`              | Provider          | Obtiene o establece el valor de Provider de ProviderDataSource.           |
+| `String`              | SourceID          |                                                                                           |
+| `Int32`               | Timeout           | Obtiene o establece el valor de Timeout de ProviderDataSource.            |
 
-Methods
+Métodos
 
-| Type      | Name                                                | Summary |
+| Tipo      | Nombre                                              | Resumen |
 | --------- | --------------------------------------------------- | ------- |
 | `Boolean` | Browsable(`String` propertyName) |         |
 | `Boolean` | Editable(`String` propertyName)  |         |
 | `void`    | Init()                           |         |
 
-## `Relationship`
+## `relación`
 
-Base class declaration for Relationship
+Declaración de la clase base de la relación
 
 ```csharp
 public abstract class TabularEditor.TOMWrapper.Relationship
@@ -1606,31 +1607,31 @@ public abstract class TabularEditor.TOMWrapper.Relationship
 
 ```
 
-Properties
+Propiedades
 
-| Type                           | Name                       | Summary                                                                          |
-| ------------------------------ | -------------------------- | -------------------------------------------------------------------------------- |
-| `CrossFilteringBehavior`       | CrossFilteringBehavior     | Gets or sets the CrossFilteringBehavior of the Relationship.     |
-| `Table`                        | FromTable                  | Gets or sets the FromTable of the Relationship.                  |
-| `Boolean`                      | IsActive                   | Gets or sets the IsActive of the Relationship.                   |
-| `DateTimeRelationshipBehavior` | JoinOnDateBehavior         | Gets or sets the JoinOnDateBehavior of the Relationship.         |
-| `Relationship`                 | MetadataObject             |                                                                                  |
-| `Boolean`                      | RelyOnReferentialIntegrity | Gets or sets the RelyOnReferentialIntegrity of the Relationship. |
-| `SecurityFilteringBehavior`    | SecurityFilteringBehavior  | Gets or sets the SecurityFilteringBehavior of the Relationship.  |
-| `ObjectState`                  | State                      | Gets or sets the State of the Relationship.                      |
-| `Table`                        | ToTable                    | Gets or sets the ToTable of the Relationship.                    |
-| `RelationshipType`             | Type                       | Gets or sets the Type of the Relationship.                       |
+| Tipo                                     | Nombre                     | Resumen                                                                                    |
+| ---------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------ |
+| `CrossFilteringBehavior`                 | CrossFilteringBehavior     | Obtiene o establece el CrossFilteringBehavior de la relación.              |
+| `Table`                                  | FromTable                  | Obtiene o establece el FromTable de la relación.                           |
+| `Boolean`                                | IsActive                   | Obtiene o establece el IsActive de la relación.                            |
+| `Comportamiento de relación de DateTime` | JoinOnDateBehavior         | Obtiene o establece el valor de JoinOnDateBehavior de la relación.         |
+| `relación`                               | MetadataObject             |                                                                                            |
+| `Boolean`                                | RelyOnReferentialIntegrity | Obtiene o establece el valor de RelyOnReferentialIntegrity de la relación. |
+| `SecurityFilteringBehavior`              | SecurityFilteringBehavior  | Obtiene o establece el valor de SecurityFilteringBehavior de la relación.  |
+| `ObjectState`                            | State                      | Obtiene o establece el valor de State de la relación.                      |
+| `Table`                                  | ToTable                    | Obtiene o establece el valor de ToTable de la relación.                    |
+| `Tipo de relación`                       | Type                       | Obtiene o establece el valor de Type de la relación.                       |
 
-Methods
+Métodos
 
-| Type     | Name                                                                                       | Summary |
+| Tipo     | Nombre                                                                                     | Resumen |
 | -------- | ------------------------------------------------------------------------------------------ | ------- |
 | `String` | GetAnnotation(`String` name)                                            |         |
 | `void`   | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True) |         |
 
 ## `RelationshipCollection`
 
-Collection class for Relationship. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección para la relación. Ofrece propiedades prácticas para establecer una misma propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.RelationshipCollection
@@ -1638,9 +1639,9 @@ public class TabularEditor.TOMWrapper.RelationshipCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type                           | Name                       | Summary |
+| Tipo                           | Nombre                     | Resumen |
 | ------------------------------ | -------------------------- | ------- |
 | `CrossFilteringBehavior`       | CrossFilteringBehavior     |         |
 | `Boolean`                      | IsActive                   |         |
@@ -1649,9 +1650,9 @@ Properties
 | `Boolean`                      | RelyOnReferentialIntegrity |         |
 | `SecurityFilteringBehavior`    | SecurityFilteringBehavior  |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
@@ -1663,9 +1664,9 @@ public class TabularEditor.TOMWrapper.RelationshipCollection2
 
 ```
 
-Properties
+Propiedades
 
-| Type                           | Name                       | Summary |
+| Tipo                           | Nombre                     | Resumen |
 | ------------------------------ | -------------------------- | ------- |
 | `CrossFilteringBehavior`       | CrossFilteringBehavior     |         |
 | `Boolean`                      | IsActive                   |         |
@@ -1674,15 +1675,15 @@ Properties
 | `Boolean`                      | RelyOnReferentialIntegrity |         |
 | `SecurityFilteringBehavior`    | SecurityFilteringBehavior  |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
 ## `RoleRLSIndexer`
 
-The RoleRLSIndexer is used to browse all filters across all tables in the model, for  one specific role. This is in contrast to the TableRLSIndexer, which browses the  filters across all roles in the model, for one specific table.
+El RoleRLSIndexer se utiliza para explorar todos los filtros de todas las tablas del modelo, para un rol específico. Esto contrasta con el TableRLSIndexer, que explora los filtros de todos los roles del modelo, para una tabla específica.
 
 ```csharp
 public class TabularEditor.TOMWrapper.RoleRLSIndexer
@@ -1690,25 +1691,25 @@ public class TabularEditor.TOMWrapper.RoleRLSIndexer
 
 ```
 
-Fields
+Campos
 
-| Type        | Name | Summary |
-| ----------- | ---- | ------- |
-| `ModelRole` | Role |         |
+| Tipo        | Nombre | Resumen |
+| ----------- | ------ | ------- |
+| `ModelRole` | Rol    |         |
 
-Properties
+Propiedades
 
-| Type                        | Name    | Summary |
-| --------------------------- | ------- | ------- |
-| `String`                    | Item    |         |
-| `String`                    | Item    |         |
-| `IEnumerable<String>`       | Keys    |         |
-| `Dictionary<Table, String>` | RLSMap  |         |
-| `String`                    | Summary |         |
+| Tipo                        | Nombre   | Resumen |
+| --------------------------- | -------- | ------- |
+| `String`                    | Elemento |         |
+| `String`                    | Elemento |         |
+| `IEnumerable<String>`       | Claves   |         |
+| `Dictionary<Table, String>` | RLSMap   |         |
+| `String`                    | Resumen  |         |
 
-Methods
+Métodos
 
-| Type                  | Name                                                                | Summary |
+| Tipo                  | Nombre                                                              | Resumen |
 | --------------------- | ------------------------------------------------------------------- | ------- |
 | `void`                | Clear()                                          |         |
 | `void`                | CopyFrom(`RoleRLSIndexer` source)                |         |
@@ -1724,9 +1725,9 @@ public class TabularEditor.TOMWrapper.SerializeOptions
 
 ```
 
-Fields
+Campos
 
-| Type              | Name                     | Summary |
+| Tipo              | Nombre                   | Resumen |
 | ----------------- | ------------------------ | ------- |
 | `Boolean`         | IgnoreInferredObjects    |         |
 | `Boolean`         | IgnoreInferredProperties |         |
@@ -1735,15 +1736,15 @@ Fields
 | `Boolean`         | PrefixFilenames          |         |
 | `Boolean`         | SplitMultilineStrings    |         |
 
-Static Properties
+Propiedades estáticas
 
-| Type               | Name    | Summary |
-| ------------------ | ------- | ------- |
-| `SerializeOptions` | Default |         |
+| Tipo               | Nombre         | Resumen |
+| ------------------ | -------------- | ------- |
+| `SerializeOptions` | Predeterminado |         |
 
 ## `SingleColumnRelationship`
 
-Base class declaration for SingleColumnRelationship
+Declaración de la clase base para `SingleColumnRelationship`
 
 ```csharp
 public class TabularEditor.TOMWrapper.SingleColumnRelationship
@@ -1751,20 +1752,20 @@ public class TabularEditor.TOMWrapper.SingleColumnRelationship
 
 ```
 
-Properties
+Propiedades
 
-| Type                         | Name            | Summary                                                                           |
-| ---------------------------- | --------------- | --------------------------------------------------------------------------------- |
-| `RelationshipEndCardinality` | FromCardinality | Gets or sets the FromCardinality of the SingleColumnRelationship. |
-| `Column`                     | FromColumn      | Gets or sets the FromColumn of the SingleColumnRelationship.      |
-| `SingleColumnRelationship`   | MetadataObject  |                                                                                   |
-| `String`                     | Name            |                                                                                   |
-| `RelationshipEndCardinality` | ToCardinality   | Gets or sets the ToCardinality of the SingleColumnRelationship.   |
-| `Column`                     | ToColumn        | Gets or sets the ToColumn of the SingleColumnRelationship.        |
+| Tipo                         | Nombre          | Resumen                                                                                                   |
+| ---------------------------- | --------------- | --------------------------------------------------------------------------------------------------------- |
+| `RelationshipEndCardinality` | FromCardinality | Obtiene o establece la propiedad FromCardinality de la relación SingleColumnRelationship. |
+| `Column`                     | FromColumn      | Obtiene o establece la propiedad FromColumn de la relación SingleColumnRelationship.      |
+| `SingleColumnRelationship`   | MetadataObject  |                                                                                                           |
+| `String`                     | Nombre          |                                                                                                           |
+| `RelationshipEndCardinality` | ToCardinality   | Obtiene o establece la propiedad ToCardinality de la relación SingleColumnRelationship.   |
+| `Column`                     | ToColumn        | Obtiene o establece la propiedad ToColumn de la relación SingleColumnRelationship.        |
 
-Methods
+Métodos
 
-| Type      | Name                                                                                                                    | Summary |
+| Tipo      | Nombre                                                                                                                  | Resumen |
 | --------- | ----------------------------------------------------------------------------------------------------------------------- | ------- |
 | `Boolean` | Browsable(`String` propertyName)                                                                     |         |
 | `void`    | Delete()                                                                                             |         |
@@ -1777,7 +1778,7 @@ Methods
 
 ## `Table`
 
-Base class declaration for Table
+Declaración de la clase base para `Table`
 
 ```csharp
 public class TabularEditor.TOMWrapper.Table
@@ -1785,41 +1786,41 @@ public class TabularEditor.TOMWrapper.Table
 
 ```
 
-Properties
+Propiedades
 
-| Type                         | Name                   | Summary                                                              |
-| ---------------------------- | ---------------------- | -------------------------------------------------------------------- |
-| `IEnumerable<Level>`         | AllLevels              |                                                                      |
-| `ColumnCollection`           | Columns                |                                                                      |
-| `String`                     | DataCategory           | Gets or sets the DataCategory of the Table.          |
-| `String`                     | DaxObjectFullName      |                                                                      |
-| `String`                     | DaxObjectName          |                                                                      |
-| `String`                     | DaxTableName           |                                                                      |
-| `HashSet<IExpressionObject>` | Dependants             |                                                                      |
-| `String`                     | Description            | Gets or sets the Description of the Table.           |
-| `String`                     | ErrorMessage           |                                                                      |
-| `HierarchyCollection`        | Hierarchies            |                                                                      |
-| `PerspectiveIndexer`         | InPerspective          |                                                                      |
-| `Boolean`                    | IsHidden               | Gets or sets the IsHidden of the Table.              |
-| `MeasureCollection`          | Measures               |                                                                      |
-| `Table`                      | MetadataObject         |                                                                      |
-| `String`                     | Name                   |                                                                      |
-| `Table`                      | ParentTable            |                                                                      |
-| `PartitionCollection`        | Partitions             |                                                                      |
-| `TableRLSIndexer`            | RowLevelSecurity       |                                                                      |
-| `String`                     | Source                 |                                                                      |
-| `PartitionSourceType`        | SourceType             |                                                                      |
-| `TranslationIndexer`         | TranslatedDescriptions | Collection of localized descriptions for this Table. |
+| Tipo                         | Nombre                 | Resumen                                                                            |
+| ---------------------------- | ---------------------- | ---------------------------------------------------------------------------------- |
+| `IEnumerable<Level>`         | AllLevels              |                                                                                    |
+| `ColumnCollection`           | Columns                |                                                                                    |
+| `String`                     | DataCategory           | Obtiene o establece la propiedad DataCategory de la clase `Table`. |
+| `String`                     | DaxObjectFullName      |                                                                                    |
+| `String`                     | DaxObjectName          |                                                                                    |
+| `String`                     | DaxTableName           |                                                                                    |
+| `HashSet<IExpressionObject>` | Dependants             |                                                                                    |
+| `String`                     | Description            | Obtiene o establece la propiedad Description de la tabla.          |
+| `String`                     | ErrorMessage           |                                                                                    |
+| `HierarchyCollection`        | Hierarchies            |                                                                                    |
+| `IndexadorDePerspectiva`     | EnPerspectiva          |                                                                                    |
+| `Boolean`                    | IsHidden               | Obtiene o establece la propiedad IsHidden de la tabla.             |
+| `ColecciónDeMedidas`         | Medidas                |                                                                                    |
+| `Table`                      | MetadataObject         |                                                                                    |
+| `String`                     | Name                   |                                                                                    |
+| `Table`                      | ParentTable            |                                                                                    |
+| `ColecciónDeParticiones`     | Particiones            |                                                                                    |
+| `TableRLSIndexer`            | RowLevelSecurity       |                                                                                    |
+| `String`                     | Origen                 |                                                                                    |
+| `TipoDeOrigenDePartición`    | SourceType             |                                                                                    |
+| `TranslationIndexer`         | TranslatedDescriptions | Colección de descripciones localizadas para esta tabla.            |
 
-Methods
+Métodos
 
-| Type                               | Name                                                                                                                      | Summary                                                                          |
+| Tipo                               | Nombre                                                                                                                    | Resumen                                                                          |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `CalculatedColumn`                 | AddCalculatedColumn(`String` name = null, `String` expression = null, `String` displayFolder = null)   |                                                                                  |
 | `DataColumn`                       | AddDataColumn(`String` name = null, `String` sourceColumn = null, `String` displayFolder = null)       |                                                                                  |
 | `Hierarchy`                        | AddHierarchy(`String` name = null, `String` displayFolder = null, `Column[]` levels)                   |                                                                                  |
 | `Hierarchy`                        | AddHierarchy(`String` name, `String` displayFolder = null, `String[]` levels)                          |                                                                                  |
-| `Measure`                          | AddMeasure(`String` name = null, `String` expression = null, `String` displayFolder = null)            |                                                                                  |
+| `medida`                           | AddMeasure(`String` name = null, `String` expression = null, `String` displayFolder = null)            |                                                                                  |
 | `Boolean`                          | Browsable(`String` propertyName)                                                                       |                                                                                  |
 | `void`                             | CheckChildrenErrors()                                                                                  |                                                                                  |
 | `void`                             | Children_CollectionChanged(`Object` sender, `NotifyCollectionChangedEventArgs` e) |                                                                                  |
@@ -1827,7 +1828,7 @@ Methods
 | `void`                             | Delete()                                                                                               |                                                                                  |
 | `Boolean`                          | Editable(`String` propertyName)                                                                        |                                                                                  |
 | `String`                           | GetAnnotation(`String` name)                                                                           |                                                                                  |
-| `IEnumerable<ITabularNamedObject>` | GetChildren()                                                                                          | Returns all columns, measures and hierarchies inside this table. |
+| `IEnumerable<ITabularNamedObject>` | GetChildren()                                                                                          | Devuelve todas las columnas, medidas y jerarquías de esta tabla. |
 | `IEnumerable<IDetailObject>`       | GetChildrenByFolders(`Boolean` recursive)                                                              |                                                                                  |
 | `void`                             | Init()                                                                                                 |                                                                                  |
 | `void`                             | InitRLSIndexer()                                                                                       |                                                                                  |
@@ -1836,15 +1837,15 @@ Methods
 | `void`                             | SetAnnotation(`String` name, `String` value, `Boolean` undoable = True)                                |                                                                                  |
 | `void`                             | Undelete(`ITabularObjectCollection` collection)                                                        |                                                                                  |
 
-Static Fields
+Campos estáticos
 
-| Type     | Name                  | Summary |
+| Tipo     | Nombre                | Resumen |
 | -------- | --------------------- | ------- |
 | `Char[]` | InvalidTableNameChars |         |
 
 ## `TableCollection`
 
-Collection class for Table. Provides convenient properties for setting a property on multiple objects at once.
+Clase de colección para `Table`. Ofrece propiedades prácticas para establecer una propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.TableCollection
@@ -1852,18 +1853,18 @@ public class TabularEditor.TOMWrapper.TableCollection
 
 ```
 
-Properties
+Propiedades
 
-| Type      | Name         | Summary |
+| Tipo      | Nombre       | Resumen |
 | --------- | ------------ | ------- |
 | `String`  | DataCategory |         |
-| `String`  | Description  |         |
+| `String`  | Descripción  |         |
 | `Boolean` | IsHidden     |         |
 | `Model`   | Parent       |         |
 
-Methods
+Métodos
 
-| Type     | Name                          | Summary |
+| Tipo     | Nombre                        | Resumen |
 | -------- | ----------------------------- | ------- |
 | `String` | ToString() |         |
 
@@ -1874,15 +1875,15 @@ public static class TabularEditor.TOMWrapper.TableExtension
 
 ```
 
-Static Methods
+Métodos estáticos
 
-| Type                  | Name                                                 | Summary |
+| Tipo                  | Nombre                                               | Resumen |
 | --------------------- | ---------------------------------------------------- | ------- |
 | `PartitionSourceType` | GetSourceType(this `Table` table) |         |
 
 ## `TableRLSIndexer`
 
-The TableRLSIndexer is used to browse all filters defined on one specific table, across  all roles in the model. This is in contrast to the RoleRLSIndexer, which browses the  filters across all tables for one specific role.
+El TableRLSIndexer se utiliza para recorrer todos los filtros definidos en una tabla concreta, en todos los roles del modelo. A diferencia del RoleRLSIndexer, que recorre los filtros de todas las tablas para un rol concreto.
 
 ```csharp
 public class TabularEditor.TOMWrapper.TableRLSIndexer
@@ -1890,32 +1891,32 @@ public class TabularEditor.TOMWrapper.TableRLSIndexer
 
 ```
 
-Fields
+Campos
 
-| Type    | Name  | Summary |
-| ------- | ----- | ------- |
-| `Table` | Table |         |
+| Tipo    | Nombre | Resumen |
+| ------- | ------ | ------- |
+| `Table` | Tabla  |         |
 
-Properties
+Propiedades
 
-| Type                            | Name    | Summary |
-| ------------------------------- | ------- | ------- |
-| `String`                        | Item    |         |
-| `String`                        | Item    |         |
-| `IEnumerable<String>`           | Keys    |         |
-| `Dictionary<ModelRole, String>` | RLSMap  |         |
-| `String`                        | Summary |         |
+| Tipo                            | Nombre   | Resumen |
+| ------------------------------- | -------- | ------- |
+| `String`                        | Elemento |         |
+| `String`                        | Elemento |         |
+| `IEnumerable<String>`           | Claves   |         |
+| `Dictionary<ModelRole, String>` | RLSMap   |         |
+| `String`                        | Resumen  |         |
 
-Methods
+Métodos
 
-| Type                  | Name                                                                   | Summary |
-| --------------------- | ---------------------------------------------------------------------- | ------- |
-| `void`                | Clear()                                             |         |
-| `void`                | CopyFrom(`TableRLSIndexer` source)                  |         |
-| `String`              | GetDisplayName(`String` key)                        |         |
-| `IEnumerator<String>` | GetEnumerator()                                     |         |
-| `void`                | Refresh()                                           |         |
-| `void`                | SetRLS(`ModelRole` role, `String` filterExpression) |         |
+| Tipo                  | Nombre                                                                | Resumen |
+| --------------------- | --------------------------------------------------------------------- | ------- |
+| `void`                | Clear()                                            |         |
+| `void`                | CopyFrom(`TableRLSIndexer` source)                 |         |
+| `String`              | GetDisplayName(`String` key)                       |         |
+| `IEnumerator<String>` | GetEnumerator()                                    |         |
+| `void`                | Refresh()                                          |         |
+| `void`                | SetRLS(`ModelRole` rol, `String` filterExpression) |         |
 
 ## `TabularCollectionHelper`
 
@@ -1924,46 +1925,46 @@ public static class TabularEditor.TOMWrapper.TabularCollectionHelper
 
 ```
 
-Static Methods
+Métodos estáticos
 
-| Type   | Name                                                                                                                    | Summary |
+| Tipo   | Nombre                                                                                                                  | Resumen |
 | ------ | ----------------------------------------------------------------------------------------------------------------------- | ------- |
-| `void` | InPerspective(this `IEnumerable<Table>` tables, `String` perspective, `Boolean` value)               |         |
-| `void` | InPerspective(this `IEnumerable<Column>` columns, `String` perspective, `Boolean` value)             |         |
-| `void` | InPerspective(this `IEnumerable<Hierarchy>` hierarchies, `String` perspective, `Boolean` value)      |         |
-| `void` | InPerspective(this `IEnumerable<Measure>` measures, `String` perspective, `Boolean` value)           |         |
-| `void` | InPerspective(this `IEnumerable<Table>` tables, `Perspective` perspective, `Boolean` value)          |         |
-| `void` | InPerspective(this `IEnumerable<Column>` columns, `Perspective` perspective, `Boolean` value)        |         |
-| `void` | InPerspective(this `IEnumerable<Hierarchy>` hierarchies, `Perspective` perspective, `Boolean` value) |         |
+| `void` | InPerspective(this `IEnumerable<Table>` tables, `String` perspectiva, `Boolean` value)               |         |
+| `void` | InPerspective(this `IEnumerable<Column>` columns, `String` perspectiva, `Boolean` value)             |         |
+| `void` | InPerspective(this `IEnumerable<Hierarchy>` hierarchies, `String` perspectiva, `Boolean` value)      |         |
+| `void` | InPerspective(this `IEnumerable<Measure>` medidas, `String` perspectiva, `Boolean` value)            |         |
+| `void` | InPerspective(this `IEnumerable<Table>` tables, `Perspective` perspectiva, `Boolean` value)          |         |
+| `void` | InPerspective(this `IEnumerable<Column>` columns, `perspectiva` perspectiva, `Boolean` value)        |         |
+| `void` | InPerspective(this `IEnumerable<Hierarchy>` hierarchies, `perspectiva` perspectiva, `Boolean` value) |         |
 | `void` | InPerspective(this `IEnumerable<Measure>` measures, `Perspective` perspective, `Boolean` value)      |         |
 | `void` | SetDisplayFolder(this `IEnumerable<Measure>` measures, `String` displayFolder)                       |         |
 
 ## `TabularCommonActions`
 
-Provides convenient methods for common actions on a Tabular Model, that often involve changing multiple objects at once.  For example, these methods may be used to easily perform UI drag and drop operations that will change hierarchy levels,  display folders, etc.
+Proporciona métodos prácticos para realizar acciones comunes en un modelo tabular, que a menudo implican modificar varios objetos a la vez.  Por ejemplo, estos métodos pueden usarse para realizar con facilidad operaciones de arrastrar y soltar en la interfaz de usuario, que cambian niveles de jerarquía, carpetas de visualización, etc.
 
 ```csharp
 public class TabularEditor.TOMWrapper.TabularCommonActions
 
 ```
 
-Properties
+Propiedades
 
-| Type                  | Name    | Summary |
+| Tipo                  | Nombre  | Resumen |
 | --------------------- | ------- | ------- |
 | `TabularModelHandler` | Handler |         |
 
-Methods
+Métodos
 
-| Type     | Name                                                                                                                            | Summary |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `void`   | AddColumnsToHierarchy(`IEnumerable<Column>` columns, `Hierarchy` hierarchy, `Int32` firstOrdinal = -1)       |         |
-| `Level`  | AddColumnToHierarchy(`Column` column, `Hierarchy` hierarchy, `Int32` ordinal = -1)                           |         |
-| `void`   | MoveObjects(`IEnumerable<IDetailObject>` objects, `Table` newTable, `Culture` culture)                       |         |
-| `String` | NewColumnName(`String` prefix, `Table` table)                                                                |         |
-| `String` | NewMeasureName(`String` prefix)                                                                              |         |
-| `void`   | ReorderLevels(`IEnumerable<Level>` levels, `Int32` firstOrdinal)                                             |         |
-| `void`   | SetContainer(`IEnumerable<IDetailObject>` objects, `IDetailObjectContainer` newContainer, `Culture` culture) |         |
+| Tipo     | Nombre                                                                                                                                         | Resumen |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `void`   | AddColumnsToHierarchy(`IEnumerable<Column>` columns, `Hierarchy` hierarchy, `Int32` firstOrdinal = -1)                      |         |
+| `Level`  | AddColumnToHierarchy(`Column` column, `Hierarchy` hierarchy, `Int32` ordinal = -1)                                          |         |
+| `void`   | MoveObjects(`IEnumerable<IDetailObject>` objects, `Table` newTable, `configuración regional` culture)                       |         |
+| `String` | NewColumnName(`String` prefix, `Table` table)                                                                               |         |
+| `String` | NewMeasureName(`String` prefix)                                                                                             |         |
+| `void`   | ReorderLevels(`IEnumerable<Level>` levels, `Int32` firstOrdinal)                                                            |         |
+| `void`   | SetContainer(`IEnumerable<IDetailObject>` objects, `IDetailObjectContainer` newContainer, `configuración regional` culture) |         |
 
 ## `TabularConnection`
 
@@ -1972,9 +1973,9 @@ public static class TabularEditor.TOMWrapper.TabularConnection
 
 ```
 
-Static Methods
+Métodos estáticos
 
-| Type     | Name                                                                                              | Summary |
+| Tipo     | Nombre                                                                                            | Resumen |
 | -------- | ------------------------------------------------------------------------------------------------- | ------- |
 | `String` | GetConnectionString(`String` serverName)                                       |         |
 | `String` | GetConnectionString(`String` serverName, `String` userName, `String` password) |         |
@@ -1986,9 +1987,9 @@ public static class TabularEditor.TOMWrapper.TabularCultureHelper
 
 ```
 
-Static Methods
+Métodos estáticos
 
-| Type      | Name                                                                                                                            | Summary |
+| Tipo      | Nombre                                                                                                                          | Resumen |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | `Boolean` | ImportTranslations(`String` culturesJson, `Model` Model, `Boolean` overwriteExisting, `Boolean` haltOnError) |         |
 
@@ -1999,15 +2000,15 @@ public class TabularEditor.TOMWrapper.TabularDeployer
 
 ```
 
-Static Methods
+Métodos estáticos
 
-| Type               | Name                                                                                                                              | Summary                                                                                                                                                                                                                                                                      |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `void`             | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseName)                            | Deploys the specified database to the specified target server and database ID, using the specified options.  Returns a list of DAX errors (if any) on objects inside the database, in case the deployment was successful. |
-| `DeploymentResult` | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseID, `DeploymentOptions` options) | Deploys the specified database to the specified target server and database ID, using the specified options.  Returns a list of DAX errors (if any) on objects inside the database, in case the deployment was successful. |
-| `String`           | GetTMSL(`Database` db, `Server` server, `String` targetDatabaseID, `DeploymentOptions` options)                |                                                                                                                                                                                                                                                                              |
-| `void`             | SaveModelMetadataBackup(`String` connectionString, `String` targetDatabaseID, `String` backupFilePath)         |                                                                                                                                                                                                                                                                              |
-| `void`             | WriteZip(`String` fileName, `String` content)                                                                  |                                                                                                                                                                                                                                                                              |
+| Tipo               | Nombre                                                                                                                            | Resumen                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void`             | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseName)                            | Despliega la base de datos especificada en el servidor de destino y en la base de datos con el ID especificado, utilizando las opciones indicadas.  Devuelve una lista de errores de DAX (si los hay) de los objetos de la base de datos, en caso de que la implementación se haya realizado correctamente. |
+| `DeploymentResult` | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseID, `DeploymentOptions` options) | Despliega la base de datos especificada en el servidor de destino y en la base de datos con el ID especificado, utilizando las opciones indicadas.  Devuelve una lista de errores de DAX (si los hay) de los objetos de la base de datos, en caso de que la implementación se haya realizado correctamente. |
+| `String`           | GetTMSL(`Database` db, `Server` server, `String` targetDatabaseID, `DeploymentOptions` options)                |                                                                                                                                                                                                                                                                                                                                                                |
+| `void`             | SaveModelMetadataBackup(`String` connectionString, `String` targetDatabaseID, `String` backupFilePath)         |                                                                                                                                                                                                                                                                                                                                                                |
+| `void`             | WriteZip(`String` fileName, `String` content)                                                                  |                                                                                                                                                                                                                                                                                                                                                                |
 
 ## `TabularModelHandler`
 
@@ -2017,83 +2018,83 @@ public class TabularEditor.TOMWrapper.TabularModelHandler
 
 ```
 
-Fields
+Campos
 
-| Type                                           | Name               | Summary |
+| Tipo                                           | Nombre             | Resumen |
 | ---------------------------------------------- | ------------------ | ------- |
 | `Dictionary<String, ITabularObjectCollection>` | WrapperCollections |         |
 | `Dictionary<MetadataObject, TabularObject>`    | WrapperLookup      |         |
 
-Properties
+Propiedades
 
-| Type                                        | Name                     | Summary                                                                                                                                                                                                                                                                                      |
-| ------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TabularCommonActions`                      | Actions                  |                                                                                                                                                                                                                                                                                              |
-| `Boolean`                                   | AutoFixup                | Specifies whether object name changes (tables, column, measures) should result in  automatic DAX expression updates to reflect the changed names. When set to true,  all expressions in the model are parsed, to build a dependency tree. |
-| `Database`                                  | Database                 |                                                                                                                                                                                                                                                                                              |
-| `Boolean`                                   | DelayBuildDependencyTree |                                                                                                                                                                                                                                                                                              |
-| `IList<Tuple<NamedMetadataObject, String>>` | Errors                   |                                                                                                                                                                                                                                                                                              |
-| `Boolean`                                   | HasUnsavedChanges        |                                                                                                                                                                                                                                                                                              |
-| `Boolean`                                   | IsConnected              |                                                                                                                                                                                                                                                                                              |
-| `Model`                                     | Model                    |                                                                                                                                                                                                                                                                                              |
-| `String`                                    | Status                   |                                                                                                                                                                                                                                                                                              |
-| `TabularTree`                               | Tree                     |                                                                                                                                                                                                                                                                                              |
-| `UndoManager`                               | UndoManager              |                                                                                                                                                                                                                                                                                              |
-| `Int64`                                     | Version                  |                                                                                                                                                                                                                                                                                              |
+| Tipo                                        | Nombre                   | Resumen                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TabularCommonActions`                      | Actions                  |                                                                                                                                                                                                                                                                                                                                                                |
+| `Boolean`                                   | AutoFixup                | Especifica si los cambios en los nombres de los objetos (tablas, columnas, medidas) deben provocar actualizaciones automáticas de las expresiones DAX para reflejar los nombres modificados. Cuando se establece en true, se analizan todas las expresiones del modelo para crear un árbol de dependencias. |
+| `Database`                                  | Database                 |                                                                                                                                                                                                                                                                                                                                                                |
+| `Boolean`                                   | DelayBuildDependencyTree |                                                                                                                                                                                                                                                                                                                                                                |
+| `IList<Tuple<NamedMetadataObject, String>>` | Errors                   |                                                                                                                                                                                                                                                                                                                                                                |
+| `Boolean`                                   | HasUnsavedChanges        |                                                                                                                                                                                                                                                                                                                                                                |
+| `Boolean`                                   | IsConnected              |                                                                                                                                                                                                                                                                                                                                                                |
+| `Model`                                     | Model                    |                                                                                                                                                                                                                                                                                                                                                                |
+| `String`                                    | Status                   |                                                                                                                                                                                                                                                                                                                                                                |
+| `TabularTree`                               | Tree                     |                                                                                                                                                                                                                                                                                                                                                                |
+| `UndoManager`                               | UndoManager              |                                                                                                                                                                                                                                                                                                                                                                |
+| `Int64`                                     | Version                  |                                                                                                                                                                                                                                                                                                                                                                |
 
-Methods
+Métodos
 
-| Type                        | Name                                                                                                               | Summary                                                                                                                                                                                                                                                                                            |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `IDetailObject`             | Add(`AddObjectType` objectType, `IDetailObjectContainer` container)                             |                                                                                                                                                                                                                                                                                                    |
-| `void`                      | BeginUpdate(`String` undoName)                                                                  |                                                                                                                                                                                                                                                                                                    |
-| `void`                      | BuildDependencyTree(`IExpressionObject` expressionObj)                                          |                                                                                                                                                                                                                                                                                                    |
-| `void`                      | BuildDependencyTree()                                                                           |                                                                                                                                                                                                                                                                                                    |
-| `ConflictInfo`              | CheckConflicts()                                                                                |                                                                                                                                                                                                                                                                                                    |
-| `IList<TabularNamedObject>` | DeserializeObjects(`String` json)                                                               |                                                                                                                                                                                                                                                                                                    |
-| `void`                      | Dispose()                                                                                       |                                                                                                                                                                                                                                                                                                    |
-| `void`                      | DoFixup(`IDaxObject` obj, `String` newName)                                                     | Changes all references to object "obj", to reflect "newName"                                                                                                                                                                                                                                       |
-| `Int32`                     | EndUpdate(`Boolean` undoable = True, `Boolean` rollback = False)                                |                                                                                                                                                                                                                                                                                                    |
-| `Int32`                     | EndUpdateAll(`Boolean` rollback = False)                                                        |                                                                                                                                                                                                                                                                                                    |
-| `Model`                     | GetModel()                                                                                      |                                                                                                                                                                                                                                                                                                    |
-| `Boolean`                   | ImportTranslations(`String` culturesJson, `Boolean` overwriteExisting, `Boolean` ignoreInvalid) | Applys translation from a JSON string.                                                                                                                                                                                                                                             |
-| `void`                      | SaveDB()                                                                                        | Saves the changes to the database. It is the users responsibility to check if changes were made  to the database since it was loaded to the TOMWrapper. You can use Handler.CheckConflicts() for  this purpose. |
-| `void`                      | SaveFile(`String` fileName, `SerializeOptions` options)                                         |                                                                                                                                                                                                                                                                                                    |
-| `void`                      | SaveToFolder(`String` path, `SerializeOptions` options)                                         |                                                                                                                                                                                                                                                                                                    |
-| `String`                    | ScriptCreateOrReplace()                                                                         | Scripts the entire database                                                                                                                                                                                                                                                                        |
-| `String`                    | ScriptCreateOrReplace(`TabularNamedObject` obj)                                                 | Scripts the entire database                                                                                                                                                                                                                                                                        |
-| `String`                    | ScriptTranslations(`IEnumerable<Culture>` translations)                                         |                                                                                                                                                                                                                                                                                                    |
-| `String`                    | SerializeObjects(`IEnumerable<TabularNamedObject>` objects)                                     |                                                                                                                                                                                                                                                                                                    |
-| `void`                      | UpdateFolders(`Table` table)                                                                    |                                                                                                                                                                                                                                                                                                    |
-| `void`                      | UpdateLevels(`Hierarchy` hierarchy)                                                             |                                                                                                                                                                                                                                                                                                    |
-| `void`                      | UpdateObject(`ITabularObject` obj)                                                              |                                                                                                                                                                                                                                                                                                    |
-| `void`                      | UpdateTables()                                                                                  |                                                                                                                                                                                                                                                                                                    |
+| Tipo                        | Nombre                                                                                                             | Resumen                                                                                                                                                                                                                                                                                                         |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `IDetailObject`             | Add(`AddObjectType` objectType, `IDetailObjectContainer` container)                             |                                                                                                                                                                                                                                                                                                                 |
+| `void`                      | BeginUpdate(`String` undoName)                                                                  |                                                                                                                                                                                                                                                                                                                 |
+| `void`                      | BuildDependencyTree(`IExpressionObject` expressionObj)                                          |                                                                                                                                                                                                                                                                                                                 |
+| `void`                      | BuildDependencyTree()                                                                           |                                                                                                                                                                                                                                                                                                                 |
+| `ConflictInfo`              | CheckConflicts()                                                                                |                                                                                                                                                                                                                                                                                                                 |
+| `IList<TabularNamedObject>` | DeserializeObjects(`String` json)                                                               |                                                                                                                                                                                                                                                                                                                 |
+| `void`                      | Dispose()                                                                                       |                                                                                                                                                                                                                                                                                                                 |
+| `void`                      | DoFixup(`IDaxObject` obj, `String` newName)                                                     | Cambia todas las referencias al objeto "obj" para que reflejen "newName"                                                                                                                                                                                                                                        |
+| `Int32`                     | EndUpdate(`Boolean` undoable = True, `Boolean` rollback = False)                                |                                                                                                                                                                                                                                                                                                                 |
+| `Int32`                     | EndUpdateAll(`Boolean` rollback = False)                                                        |                                                                                                                                                                                                                                                                                                                 |
+| `Model`                     | GetModel()                                                                                      |                                                                                                                                                                                                                                                                                                                 |
+| `Boolean`                   | ImportTranslations(`String` culturesJson, `Boolean` overwriteExisting, `Boolean` ignoreInvalid) | Aplica una traducción a partir de una cadena JSON.                                                                                                                                                                                                                                              |
+| `void`                      | SaveDB()                                                                                        | Guarda los cambios en la base de datos. Es responsabilidad del usuario comprobar si se han realizado cambios en la base de datos desde que se cargó en TOMWrapper. Puedes usar Handler.CheckConflicts() para este propósito. |
+| `void`                      | SaveFile(`String` fileName, `SerializeOptions` options)                                         |                                                                                                                                                                                                                                                                                                                 |
+| `void`                      | SaveToFolder(`String` path, `SerializeOptions` options)                                         |                                                                                                                                                                                                                                                                                                                 |
+| `String`                    | ScriptCreateOrReplace()                                                                         | Genera un script de toda la base de datos                                                                                                                                                                                                                                                                       |
+| `String`                    | ScriptCreateOrReplace(`TabularNamedObject` obj)                                                 | Genera un script de toda la base de datos                                                                                                                                                                                                                                                                       |
+| `String`                    | ScriptTraducciones(`IEnumerable<Culture>` translations)                                         |                                                                                                                                                                                                                                                                                                                 |
+| `String`                    | SerializeObjects(`IEnumerable<TabularNamedObject>` objects)                                     |                                                                                                                                                                                                                                                                                                                 |
+| `void`                      | UpdateFolders(`Table` table)                                                                    |                                                                                                                                                                                                                                                                                                                 |
+| `void`                      | UpdateLevels(`Hierarchy` hierarchy)                                                             |                                                                                                                                                                                                                                                                                                                 |
+| `void`                      | UpdateObject(`ITabularObject` obj)                                                              |                                                                                                                                                                                                                                                                                                                 |
+| `void`                      | UpdateTables()                                                                                  |                                                                                                                                                                                                                                                                                                                 |
 
-Static Fields
+Campos estáticos
 
-| Type     | Name                                        | Summary |
+| Tipo     | Nombre                                      | Resumen |
 | -------- | ------------------------------------------- | ------- |
 | `String` | PROP_ERRORS            |         |
 | `String` | PROP_HASUNSAVEDCHANGES |         |
 | `String` | PROP_ISCONNECTED       |         |
 | `String` | PROP_STATUS            |         |
 
-Static Properties
+Propiedades estáticas
 
-| Type                  | Name      | Summary |
+| Tipo                  | Nombre    | Resumen |
 | --------------------- | --------- | ------- |
 | `TabularModelHandler` | Singleton |         |
 
-Static Methods
+Métodos estáticos
 
-| Type                                            | Name                                                         | Summary |
+| Tipo                                            | Nombre                                                       | Resumen |
 | ----------------------------------------------- | ------------------------------------------------------------ | ------- |
 | `List<Tuple<NamedMetadataObject, String>>`      | CheckErrors(`Database` database)          |         |
 | `List<Tuple<NamedMetadataObject, ObjectState>>` | CheckProcessingState(`Database` database) |         |
 
 ## `TabularNamedObject`
 
-A TabularObject is a wrapper for the Microsoft.AnalysisServices.Tabular.NamedMetadataObject class.  This wrapper is used for all objects that are to be viewable and editable in the Tabular Editor.  The same base class is used for all kinds of objects in a Tabular Model. This base class provides  method for editing the (localized) name and description.
+Un TabularObject es una clase envoltorio de la clase Microsoft.AnalysisServices.Tabular.NamedMetadataObject.  Este envoltorio se utiliza para todos los objetos que deben ser visibles y editables en Tabular Editor.  La misma clase base se usa para todo tipo de objetos de un modelo tabular. Esta clase base proporciona un método para editar el nombre y la descripción (localizados).
 
 ```csharp
 public abstract class TabularEditor.TOMWrapper.TabularNamedObject
@@ -2101,24 +2102,24 @@ public abstract class TabularEditor.TOMWrapper.TabularNamedObject
 
 ```
 
-Properties
+Propiedades
 
-| Type                  | Name            | Summary                                                        |
-| --------------------- | --------------- | -------------------------------------------------------------- |
-| `Int32`               | MetadataIndex   |                                                                |
-| `NamedMetadataObject` | MetadataObject  |                                                                |
-| `String`              | Name            |                                                                |
-| `TranslationIndexer`  | TranslatedNames | Collection of localized names for this object. |
+| Tipo                  | Nombre          | Resumen                                                          |
+| --------------------- | --------------- | ---------------------------------------------------------------- |
+| `Int32`               | MetadataIndex   |                                                                  |
+| `NamedMetadataObject` | MetadataObject  |                                                                  |
+| `String`              | Nombre          |                                                                  |
+| `TranslationIndexer`  | TranslatedNames | Colección de nombres localizados de este objeto. |
 
-Methods
+Métodos
 
-| Type                 | Name                                                                      | Summary                                                                                                                                                                                                                                                                                                |
-| -------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `TabularNamedObject` | Clone(`String` newName, `Boolean` includeTranslations) |                                                                                                                                                                                                                                                                                                        |
-| `Int32`              | CompareTo(`Object` obj)                                |                                                                                                                                                                                                                                                                                                        |
-| `void`               | Delete()                                               |                                                                                                                                                                                                                                                                                                        |
-| `void`               | Init()                                                 |                                                                                                                                                                                                                                                                                                        |
-| `void`               | Undelete(`ITabularObjectCollection` collection)        | Hacky workaround needed to undo a delete operations.  Derived classes must take care to update any objects "owned" by the  object in question. For example, a Measure must take care of updating  the wrapper for its KPI (if any). |
+| Tipo                 | Nombre                                                                    | Resumen                                                                                                                                                                                                                                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `TabularNamedObject` | Clone(`String` newName, `Boolean` includeTranslations) |                                                                                                                                                                                                                                                                                                                                                  |
+| `Int32`              | CompareTo(`Object` obj)                                |                                                                                                                                                                                                                                                                                                                                                  |
+| `void`               | Delete()                                               |                                                                                                                                                                                                                                                                                                                                                  |
+| `void`               | Init()                                                 |                                                                                                                                                                                                                                                                                                                                                  |
+| `void`               | Undelete(`ITabularObjectCollection` collection)        | Se necesita un apaño algo chapucero para deshacer una operación de borrado.  Las clases derivadas deben asegurarse de actualizar cualquier objeto "propiedad" del objeto en cuestión. Por ejemplo, una medida debe asegurarse de actualizar el wrapper de su KPI (si lo hay). |
 
 ## `TabularObject`
 
@@ -2128,39 +2129,39 @@ public abstract class TabularEditor.TOMWrapper.TabularObject
 
 ```
 
-Fields
+Campos
 
-| Type                       | Name       | Summary |
+| Tipo                       | Nombre     | Resumen |
 | -------------------------- | ---------- | ------- |
 | `ITabularObjectCollection` | Collection |         |
 | `TabularModelHandler`      | Handler    |         |
 
-Properties
+Propiedades
 
-| Type                 | Name                     | Summary |
-| -------------------- | ------------------------ | ------- |
-| `MetadataObject`     | MetadataObject           |         |
-| `Model`              | Model                    |         |
-| `ObjectType`         | ObjectType               |         |
-| `String`             | ObjectTypeName           |         |
-| `TranslationIndexer` | TranslatedDescriptions   |         |
-| `TranslationIndexer` | TranslatedDisplayFolders |         |
+| Tipo                    | Nombre                   | Resumen |
+| ----------------------- | ------------------------ | ------- |
+| `MetadataObject`        | MetadataObject           |         |
+| `Model`                 | Model                    |         |
+| `ObjectType`            | ObjectType               |         |
+| `String`                | ObjectTypeName           |         |
+| `IndexadorDeTraducción` | TranslatedDescriptions   |         |
+| `IndexadorDeTraducción` | TranslatedDisplayFolders |         |
 
-Events
+Eventos
 
-| Type                           | Name             | Summary |
+| Tipo                           | Nombre           | Resumen |
 | ------------------------------ | ---------------- | ------- |
 | `PropertyChangedEventHandler`  | PropertyChanged  |         |
 | `PropertyChangingEventHandler` | PropertyChanging |         |
 
-Methods
+Métodos
 
-| Type      | Name                                                                                                                    | Summary                                                                                                                                                                                                                                      |
-| --------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `void`    | Init()                                                                                               | Derived members should override this method to instantiate child objects                                                                                                                                                                     |
-| `void`    | OnPropertyChanged(`String` propertyName, `Object` oldValue, `Object` newValue)                       |                                                                                                                                                                                                                                              |
-| `void`    | OnPropertyChanging(`String` propertyName, `Object` newValue, `Boolean&` undoable, `Boolean&` cancel) | Called before a property is changed on an object. Derived classes can control how the change is handled.  Throw ArgumentException within this method, to display an error message in the UI. |
-| `Boolean` | SetField(`T&` field, `T` value, `String` propertyName = null)                                        |                                                                                                                                                                                                                                              |
+| Tipo      | Nombre                                                                                                                  | Resumen                                                                                                                                                                                                                                                                          |
+| --------- | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void`    | Init()                                                                                               | Los miembros derivados deben sobrescribir este método para crear instancias de los objetos secundarios                                                                                                                                                                           |
+| `void`    | OnPropertyChanged(`String` propertyName, `Object` oldValue, `Object` newValue)                       |                                                                                                                                                                                                                                                                                  |
+| `void`    | OnPropertyChanging(`String` propertyName, `Object` newValue, `Boolean&` undoable, `Boolean&` cancel) | Se llama antes de cambiar una propiedad de un objeto. Las clases derivadas pueden controlar cómo se gestiona el cambio.  Lance ArgumentException dentro de este método para mostrar mensajes de error en la interfaz de usuario. |
+| `Boolean` | SetField(`T&` field, `T` value, `String` propertyName = null)                                        |                                                                                                                                                                                                                                                                                  |
 
 ## `TabularObjectCollection<T, TT, TP>`
 
@@ -2170,9 +2171,9 @@ public abstract class TabularEditor.TOMWrapper.TabularObjectCollection<T, TT, TP
 
 ```
 
-Properties
+Propiedades
 
-| Type                                    | Name                     | Summary |
+| Tipo                                    | Nombre                   | Resumen |
 | --------------------------------------- | ------------------------ | ------- |
 | `String`                                | CollectionName           |         |
 | `Int32`                                 | Count                    |         |
@@ -2180,22 +2181,22 @@ Properties
 | `Boolean`                               | IsFixedSize              |         |
 | `Boolean`                               | IsReadOnly               |         |
 | `Boolean`                               | IsSynchronized           |         |
-| `T`                                     | Item                     |         |
-| `T`                                     | Item                     |         |
-| `IEnumerable<String>`                   | Keys                     |         |
+| `T`                                     | Elemento                 |         |
+| `T`                                     | Elemento                 |         |
+| `IEnumerable<String>`                   | Claves                   |         |
 | `NamedMetadataObjectCollection<TT, TP>` | MetadataObjectCollection |         |
-| `String`                                | Summary                  |         |
+| `String`                                | Resumen                  |         |
 | `Object`                                | SyncRoot                 |         |
 
-Events
+Eventos
 
-| Type                                  | Name              | Summary |
+| Tipo                                  | Nombre            | Resumen |
 | ------------------------------------- | ----------------- | ------- |
 | `NotifyCollectionChangedEventHandler` | CollectionChanged |         |
 
-Methods
+Métodos
 
-| Type                       | Name                                                       | Summary |
+| Tipo                       | Nombre                                                     | Resumen |
 | -------------------------- | ---------------------------------------------------------- | ------- |
 | `void`                     | Add(`T` item)                           |         |
 | `void`                     | Add(`TabularNamedObject` item)          |         |
@@ -2229,15 +2230,15 @@ public class TabularEditor.TOMWrapper.TabularObjectComparer
 
 ```
 
-Properties
+Propiedades
 
-| Type          | Name  | Summary |
-| ------------- | ----- | ------- |
-| `ObjectOrder` | Order |         |
+| Tipo          | Nombre | Resumen |
+| ------------- | ------ | ------- |
+| `ObjectOrder` | Orden  |         |
 
-Methods
+Métodos
 
-| Type    | Name                                                                         | Summary |
+| Tipo    | Nombre                                                                       | Resumen |
 | ------- | ---------------------------------------------------------------------------- | ------- |
 | `Int32` | Compare(`Object` x, `Object` y)                           |         |
 | `Int32` | Compare(`ITabularNamedObject` x, `ITabularNamedObject` y) |         |
@@ -2249,22 +2250,22 @@ public static class TabularEditor.TOMWrapper.TabularObjectHelper
 
 ```
 
-Static Methods
+Métodos estáticos
 
-| Type      | Name                                                                                            | Summary |
-| --------- | ----------------------------------------------------------------------------------------------- | ------- |
-| `String`  | GetLinqPath(this `TabularNamedObject` obj)                                   |         |
-| `String`  | GetName(this `ITabularNamedObject` obj, `Culture` culture)                   |         |
-| `String`  | GetObjectPath(this `MetadataObject` obj)                                     |         |
-| `String`  | GetObjectPath(this `TabularObject` obj)                                      |         |
-| `String`  | GetTypeName(this `ObjectType` objType, `Boolean` plural = False)             |         |
-| `String`  | GetTypeName(this `ITabularObject` obj, `Boolean` plural = False)             |         |
-| `Boolean` | SetName(this `ITabularNamedObject` obj, `String` newName, `Culture` culture) |         |
-| `String`  | SplitCamelCase(this `String` str)                                            |         |
+| Tipo      | Nombre                                                                                                         | Resumen |
+| --------- | -------------------------------------------------------------------------------------------------------------- | ------- |
+| `String`  | GetLinqPath(this `TabularNamedObject` obj)                                                  |         |
+| `String`  | GetName(this `ITabularNamedObject` obj, `configuración regional` culture)                   |         |
+| `String`  | GetObjectPath(this `MetadataObject` obj)                                                    |         |
+| `String`  | GetObjectPath(this `TabularObject` obj)                                                     |         |
+| `String`  | GetTypeName(this `ObjectType` objType, `Boolean` plural = False)                            |         |
+| `String`  | GetTypeName(this `ITabularObject` obj, `Boolean` plural = False)                            |         |
+| `Boolean` | SetName(this `ITabularNamedObject` obj, `String` newName, `configuración regional` culture) |         |
+| `String`  | SplitCamelCase(this `String` str)                                                           |         |
 
 ## `TabularTree`
 
-The TabularLogicalModel controls the relation between TabularObjects for display in the TreeViewAdv  control. Each individual TabularObject does not know or care about its logical relation to other  objects (for example, through DisplayFolders in a specific culture). TabularObjects only care  about their physical relations which are inherited from the Tabular Object Model directly (i.e.,  a measure belongs to a table, etc.).
+El TabularLogicalModel controla la relación entre TabularObjects para su visualización en el control TreeViewAdv. Cada TabularObject individual no sabe ni le importa cuál es su relación lógica con otros objetos (por ejemplo, a través de DisplayFolders en una configuración regional específica). Los TabularObjects solo se preocupan por sus relaciones físicas, que se heredan directamente del Tabular Object Model (es decir, una medida pertenece a una tabla, etc.).
 
 ```csharp
 public abstract class TabularEditor.TOMWrapper.TabularTree
@@ -2272,62 +2273,63 @@ public abstract class TabularEditor.TOMWrapper.TabularTree
 
 ```
 
-Fields
+Campos
 
-| Type                         | Name       | Summary |
+| Tipo                         | Nombre     | Resumen |
 | ---------------------------- | ---------- | ------- |
 | `Dictionary<String, Folder>` | FolderTree |         |
 
-Properties
+Propiedades
 
-| Type                  | Name        | Summary |
-| --------------------- | ----------- | ------- |
-| `Culture`             | Culture     |         |
-| `String`              | Filter      |         |
-| `TabularModelHandler` | Handler     |         |
-| `Model`               | Model       |         |
-| `LogicalTreeOptions`  | Options     |         |
-| `Perspective`         | Perspective |         |
-| `Int32`               | UpdateLocks |         |
+| Tipo                     | Nombre                 | Resumen |
+| ------------------------ | ---------------------- | ------- |
+| `configuración regional` | Configuración regional |         |
+| `String`                 | Filtro                 |         |
+| `TabularModelHandler`    | Manejador              |         |
+| `Model`                  | Modelo                 |         |
+| `LogicalTreeOptions`     | Opciones               |         |
+| `perspectiva`            | Perspectiva            |         |
+| `Int32`                  | UpdateLocks            |         |
 
-Events
+Eventos
 
-| Type                          | Name            | Summary |
+| Tipo                          | Nombre          | Resumen |
 | ----------------------------- | --------------- | ------- |
 | `PropertyChangedEventHandler` | PropertyChanged |         |
 
-Methods
+Métodos
 
-| Type                   | Name                                                                                                         | Summary                                                                                                                                                                                |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `void`                 | BeginUpdate()                                                                             |                                                                                                                                                                                        |
-| `void`                 | EndUpdate()                                                                               |                                                                                                                                                                                        |
-| `IEnumerable`          | GetChildren(`ITabularObjectContainer` tabularObject)                                      | This method encapsulates the logic of how the tree representation of the tabular model should be structured                                                                            |
-| `Func<String, String>` | GetFolderMutation(`Object` source, `Object` destination)                                  |                                                                                                                                                                                        |
-| `Func<String, String>` | GetFolderMutation(`String` oldPath, `String` newPath)                                     |                                                                                                                                                                                        |
-| `void`                 | ModifyDisplayFolder(`Table` table, `String` oldPath, `String` newPath, `Culture` culture) | Updates the DisplayFolder property of all tabular objects within one table. Objects residing  in subfolders to the updated path, will also be updated. |
-| `void`                 | OnNodesChanged(`ITabularObject` nodeItem)                                                 |                                                                                                                                                                                        |
-| `void`                 | OnNodesInserted(`ITabularObject` parent, `ITabularObject[]` children)                     |                                                                                                                                                                                        |
-| `void`                 | OnNodesInserted(`ITabularObject` parent, `IEnumerable<ITabularObject>` children)          |                                                                                                                                                                                        |
-| `void`                 | OnNodesRemoved(`ITabularObject` parent, `ITabularObject[]` children)                      |                                                                                                                                                                                        |
-| `void`                 | OnNodesRemoved(`ITabularObject` parent, `IEnumerable<ITabularObject>` children)           |                                                                                                                                                                                        |
-| `void`                 | OnStructureChanged(`ITabularNamedObject` obj = null)                                      |                                                                                                                                                                                        |
-| `void`                 | SetCulture(`String` cultureName)                                                          |                                                                                                                                                                                        |
-| `void`                 | SetPerspective(`String` perspectiveName)                                                  |                                                                                                                                                                                        |
-| `void`                 | UpdateFolder(`Folder` folder, `String` oldFullPath = null)                                |                                                                                                                                                                                        |
-| `Boolean`              | VisibleInTree(`ITabularNamedObject` tabularObject)                                        |                                                                                                                                                                                        |
+| Tipo                   | Nombre                                                                                                                      | Resumen                                                                                                                                                                                                               |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void`                 | BeginUpdate()                                                                                            |                                                                                                                                                                                                                       |
+| `void`                 | EndUpdate()                                                                                              |                                                                                                                                                                                                                       |
+| `IEnumerable`          | GetChildren(`ITabularObjectContainer` tabularObject)                                                     | Este método encapsula la lógica de cómo debe estructurarse la representación en árbol del modelo tabular                                                                                                              |
+| `Func<String, String>` | GetFolderMutation(`Object` source, `Object` destination)                                                 |                                                                                                                                                                                                                       |
+| `Func<String, String>` | GetFolderMutation(`String` oldPath, `String` newPath)                                                    |                                                                                                                                                                                                                       |
+| `void`                 | ModifyDisplayFolder(`Table` table, `String` oldPath, `String` newPath, `configuración regional` culture) | Actualiza la propiedad DisplayFolder de todos los objetos tabulares dentro de una tabla. Los objetos que se encuentren en subcarpetas de la ruta actualizada también se actualizarán. |
+| `void`                 | OnNodesChanged(`ITabularObject` nodeItem)                                                                |                                                                                                                                                                                                                       |
+| `void`                 | OnNodesInserted(`ITabularObject` parent, `ITabularObject[]` children)                                    |                                                                                                                                                                                                                       |
+| `void`                 | OnNodesInserted(`ITabularObject` parent, `IEnumerable<ITabularObject>` children)                         |                                                                                                                                                                                                                       |
+| `void`                 | OnNodesRemoved(`ITabularObject` parent, `ITabularObject[]` children)                                     |                                                                                                                                                                                                                       |
+| `void`                 | OnNodesRemoved(`ITabularObject` parent, `IEnumerable<ITabularObject>` children)                          |                                                                                                                                                                                                                       |
+| `void`                 | OnStructureChanged(`ITabularNamedObject` obj = null)                                                     |                                                                                                                                                                                                                       |
+| `void`                 | SetConfiguraciónRegional(`String` nombreConfiguraciónRegional)                                           |                                                                                                                                                                                                                       |
+| `void`                 | SetPerspectiva(`String` nombrePerspectiva)                                                               |                                                                                                                                                                                                                       |
+| `void`                 | UpdateFolder(`Folder` folder, `String` oldFullPath = null)                                               |                                                                                                                                                                                                                       |
+| `Boolean`              | VisibleInTree(`ITabularNamedObject` tabularObject)                                                       |                                                                                                                                                                                                                       |
 
-## `TranslationIndexer`
+## `Indexador de traducción`
 
 ```csharp
+// Indexador de traducción
 public class TabularEditor.TOMWrapper.TranslationIndexer
     : IEnumerable<String>, IEnumerable, IExpandableIndexer
 
 ```
 
-Properties
+Propiedades
 
-| Type                  | Name            | Summary |
+| Tipo                  | Nombre          | Resumen |
 | --------------------- | --------------- | ------- |
 | `String`              | DefaultValue    |         |
 | `String`              | Item            |         |
@@ -2336,19 +2338,19 @@ Properties
 | `String`              | Summary         |         |
 | `Int32`               | TranslatedCount |         |
 
-Methods
+Métodos
 
-| Type                         | Name                                                                                                  | Summary                                                                                                                                                                                                                                                                             |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `void`                       | Clear()                                                                            | Clears all translated values for the object.                                                                                                                                                                                                                        |
-| `Boolean`                    | Contains(`Culture` culture)                                                        |                                                                                                                                                                                                                                                                                     |
-| `Dictionary<String, String>` | Copy()                                                                             |                                                                                                                                                                                                                                                                                     |
-| `void`                       | CopyFrom(`TranslationIndexer` translations, `Func<String, String>` mutator = null) |                                                                                                                                                                                                                                                                                     |
-| `void`                       | CopyFrom(`IDictionary<String, String>` source)                                     |                                                                                                                                                                                                                                                                                     |
-| `String`                     | GetDisplayName(`String` key)                                                       |                                                                                                                                                                                                                                                                                     |
-| `IEnumerator<String>`        | GetEnumerator()                                                                    |                                                                                                                                                                                                                                                                                     |
-| `void`                       | Refresh()                                                                          |                                                                                                                                                                                                                                                                                     |
-| `void`                       | Reset()                                                                            | Resets the translations of the object. Caption translations are removed, making the object appear with  the base name in all locales. Display Folder and Description translations are set to the untranslated  value of the object. |
-| `void`                       | SetAll(`String` value)                                                             |                                                                                                                                                                                                                                                                                     |
+| Tipo                         | Nombre                                                                                                | Resumen                                                                                                                                                                                                                                                                                                                                          |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `void`                       | Clear()                                                                            | Elimina todos los valores traducidos del objeto.                                                                                                                                                                                                                                                                                 |
+| `Boolean`                    | Contains(`configuración regional` configuraciónRegional)                           |                                                                                                                                                                                                                                                                                                                                                  |
+| `Dictionary<String, String>` | Copy()                                                                             |                                                                                                                                                                                                                                                                                                                                                  |
+| `void`                       | CopyFrom(`TranslationIndexer` traducciones, `Func<String, String>` mutator = null) |                                                                                                                                                                                                                                                                                                                                                  |
+| `void`                       | CopyFrom(`IDictionary<String, String>` source)                                     |                                                                                                                                                                                                                                                                                                                                                  |
+| `String`                     | GetDisplayName(`String` key)                                                       |                                                                                                                                                                                                                                                                                                                                                  |
+| `IEnumerator<String>`        | GetEnumerator()                                                                    |                                                                                                                                                                                                                                                                                                                                                  |
+| `void`                       | Refresh()                                                                          |                                                                                                                                                                                                                                                                                                                                                  |
+| `void`                       | Reset()                                                                            | Restablece las traducciones del objeto. Se eliminan las traducciones del título, haciendo que el objeto aparezca con el nombre base en todas las configuraciones regionales. Las traducciones de la carpeta de visualización y la descripción se establecen en el valor no traducido del objeto. |
+| `void`                       | SetAll(`String` value)                                                             |                                                                                                                                                                                                                                                                                                                                                  |
 
 
