@@ -1,6 +1,6 @@
 ---
 uid: migrate-from-te2
-title: Migrating from Tabular Editor 2.x
+title: Migración desde Tabular Editor 2.x
 author: Daniel Otykier
 updated: 2021-09-30
 applies_to:
@@ -17,136 +17,136 @@ applies_to:
           full: true
 ---
 
-# Migrating from Tabular Editor 2.x
+# Migración desde Tabular Editor 2.x
 
-This article is intended for developers who already have some experience using Tabular Editor 2.x for Power BI Dataset or Analysis Services Tabular development. The article highlights similarities and important feature additions of Tabular Editor 3, to get you quickly up to speed.
+Este artículo está dirigido a desarrolladores que ya tienen algo de experiencia usando Tabular Editor 2.x para desarrollar un Dataset de Power BI o Analysis Services Tabular. El artículo destaca las similitudes y las principales novedades de Tabular Editor 3 para que te pongas al día rápidamente.
 
-## Installation side-by-side
+## Instalación en paralelo
 
-Tabular Editor 3 has a different product code than Tabular Editor 2.x. This means that you can install both tools side-by-side without issues. In fact, the tools are installed into separate program folders and their settings are also kept in separate folders. In other words, the term "upgrade" or "downgrade" between Tabular Editor 2.x and Tabular Editor 3 does not apply. It is better to think of Tabular Editor 3 as an entirely different product.
+Tabular Editor 3 tiene un código de producto diferente al de Tabular Editor 2.x. Esto significa que puedes instalar ambas herramientas en paralelo sin problemas. De hecho, las herramientas se instalan en carpetas de programa separadas y su configuración también se guarda en carpetas distintas. En otras palabras, no tiene sentido hablar de “actualizar” o “volver a una versión anterior” entre Tabular Editor 2.x y Tabular Editor 3. Es mejor pensar en Tabular Editor 3 como un producto totalmente distinto.
 
-## Feature comparison
+## Comparación de características
 
-In terms of features, Tabular Editor 3 is essentially a superset of Tabular Editor 2.x, with few exceptions. The table below compares all major features of the two tools:
+En cuanto a funcionalidades, Tabular Editor 3 es, en esencia, un superconjunto de Tabular Editor 2.x, con pocas excepciones. La tabla siguiente compara las principales funcionalidades de ambas herramientas:
 
-|                                                                                                                                | Tabular Editor 2.x                      | Tabular Editor 3                                          |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------- | --------------------------------------------------------- |
-| Edit all TOM objects and properties                                                                                            | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| Batch editing and renaming                                                                                                     | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| Copy/paste and drag/drop support                                                                                               | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| Undo/redo data modeling operations                                                                                             | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| Load/save model metadata to disk                                                                                               | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
-| Save-to-folder                                                                                                                 | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
-| [daxformatter.com](https://daxformatter.com) integration                                                       | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| Advanced data modeling (OLS, Perspectives, Calculation Groups, Metadata Translations, etc.) | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
-| Syntax highlighting and automatic formula fixup                                                                                | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| View DAX dependencies between objects                                                                                          | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| Import Table Wizard                                                                                                            | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| Deployment Wizard                                                                                                              | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
-| Best Practice Analyzer                                                                                                         | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| C# scripting and automation                                                                                                    | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| Use as External Tool for Power BI Desktop                                                                                      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| Connect to SSAS/Azure AS/Power BI Premium                                                                                      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
-| Command-line interface                                                                                                         | <span class="emoji">&#10004;</span> | _[Coming soon](xref:roadmap)_                             |
-| Premium, customizable user-interface with high-DPI, multi-monitor and theming support                                          |                                                         | <span class="emoji">&#10004;</span>   |
-| World-class DAX editor with IntelliSense<sup>TM</sup>-like features                                                            |                                                         | <span class="emoji">&#10004;</span>   |
-| Offline DAX syntax checking and column/data type inference                                                                     |                                                         | <span class="emoji">&#10004;</span>   |
-| Improved Table Import Wizard and Table Schema Update check with Power Query support                                            |                                                         | <span class="emoji">&#10004;</span>   |
-| DAX querying, table preview and Pivot Grids                                                                                    |                                                         | <span class="emoji">&#10004;</span>   |
-| Create diagrams for visualizing and editing table relationships                                                                |                                                         | <span class="emoji">&#10004;</span>   |
-| Execute data refresh operations in the background                                                                              |                                                         | <span class="emoji">&#10004;</span>\* |
-| C# macro recorder                                                                                                              |                                                         | <span class="emoji">&#10004;</span>   |
-| Edit multiple DAX expressions in a single document using DAX scripting                                                         |                                                         | <span class="emoji">&#10004;</span>   |
-| [VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) integration                                                |                                                         | <span class="emoji">&#10004;</span>   |
+|                                                                                                                                                     | Tabular Editor 2.x                      | Tabular Editor 3                                          |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- |
+| Editar todos los objetos y propiedades de TOM                                                                                                       | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Edición y cambio de nombre por lotes                                                                                                                | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Compatibilidad con copiar/pegar y arrastrar/soltar                                                                                                  | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Deshacer/rehacer operaciones de modelado del Data model                                                                                             | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Cargar/guardar metadatos del modelo en disco                                                                                                        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
+| Guardar en carpeta                                                                                                                                  | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
+| Integración con [daxformatter.com](https://daxformatter.com)                                                                        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Modelado de datos avanzado en Data model (OLS, perspectivas, grupos de cálculo, traducciones de metadatos, etc.) | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
+| Resaltado de sintaxis y corrección automática de fórmulas                                                                                           | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Ver las dependencias de DAX entre objetos                                                                                                           | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Asistente para importar tablas                                                                                                                      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Asistente de implementación                                                                                                                         | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
+| Best Practice Analyzer                                                                                                                              | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Secuencias de comandos y automatización con C# Script                                                                                               | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Usar como herramienta externa para Power BI Desktop                                                                                                 | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
+| Conectar a SSAS/Azure AS/Power BI Premium                                                                                                           | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
+| Interfaz de línea de comandos                                                                                                                       | <span class="emoji">&#10004;</span> | _[Próximamente](xref:roadmap)_                            |
+| Interfaz de usuario prémium y personalizable, con compatibilidad con alta densidad de píxeles, varios monitores y temas                             |                                                         | <span class="emoji">&#10004;</span>   |
+| Editor DAX de clase mundial con funciones similares a IntelliSense<sup>TM</sup>                                                                     |                                                         | <span class="emoji">&#10004;</span>   |
+| Comprobación sin conexión de la sintaxis de DAX e inferencia de columnas y tipos de datos                                                           |                                                         | <span class="emoji">&#10004;</span>   |
+| Asistente mejorado para importar tablas y comprobación de actualización del esquema de la tabla, con compatibilidad con Power Query                 |                                                         | <span class="emoji">&#10004;</span>   |
+| Consultas DAX, vista previa de tabla y Pivot Grids                                                                                                  |                                                         | <span class="emoji">&#10004;</span>   |
+| Crear diagramas para visualizar y editar las relaciones entre tablas                                                                                |                                                         | <span class="emoji">&#10004;</span>   |
+| Ejecutar operaciones de actualización de datos en segundo plano                                                                                     |                                                         | <span class="emoji">&#10004;</span>\* |
+| Grabador de macros en C#                                                                                                                            |                                                         | <span class="emoji">&#10004;</span>   |
+| Editar varias expresiones DAX en un único documento mediante Scripts DAX                                                                            |                                                         | <span class="emoji">&#10004;</span>   |
+| Integración con [Analizador VertiPaq](https://www.sqlbi.com/tools/vertipaq-analyzer/)                                                               |                                                         | <span class="emoji">&#10004;</span>   |
 
-\***Note:** Limitations apply depending on which [edition](xref:editions) of Tabular Editor 3 you are using.
+\***Nota:** Se aplican limitaciones según la [edición](xref:editions) de Tabular Editor 3 que estés usando.
 
-## Feature differences
+## Diferencias de características
 
-Below is a summary of important feature differences.
+A continuación se muestra un resumen de las diferencias más importantes entre las características.
 
-### User interface
+### Interfaz de usuario
 
-The first thing you will notice when launching Tabular Editor 3, is the new Visual Studio Shell-like interface. This interface is fully customizable, supports high-DPI, multiple monitors and even allows you to change the theming. All interface elements can be moved to different locations, so if you prefer the interface layout of Tabular Editor 2.x, immediately choose **Classic layout** from the **Window** menu.
+Lo primero que notarás al iniciar Tabular Editor 3 es la nueva interfaz, similar al shell de Visual Studio. Esta interfaz es totalmente personalizable, es compatible con pantallas de alta resolución DPI, varios monitores e incluso permite cambiar el tema. Todos los elementos de la interfaz se pueden mover a distintas ubicaciones; por lo tanto, si prefieres el diseño de la interfaz de Tabular Editor 2.x, elige inmediatamente **Diseño clásico** en el menú **Ventana**.
 
-In general, though, interface elements that exist in Tabular Editor 2.x have the same name in Tabular Editor 3, so it should be relatively easy to navigate the new interface. A few important differences are listed below:
+En general, los elementos de la interfaz que existen en Tabular Editor 2.x tienen el mismo nombre en Tabular Editor 3, así que debería ser relativamente fácil orientarte en la nueva interfaz. A continuación se enumeran algunas diferencias importantes:
 
-- The **Advanced Scripting** tab in Tabular Editor 2.x is gone. In Tabular Editor 3, you instead create _C# Scripts_\* using the **File > New** menu. You are not limited to working on a single script at a time. In addition, **Custom actions** have been renamed to **Macros**.
-- **Dynamic LINQ filtering** is not currently available within the TOM Explorer. Instead, if you want to find objects using [Dynamic LINQ](https://dynamic-linq.net/expression-language) you have to bring up the **Find and replace** dialog by pressing CTRL+F.
-- If you close the **Expression Editor** you can bring it back by doubleclicking on the icon of an object in the **TOM Explorer**, or by choosing the **View > Expression Editor** menu option.
-- When using the default layout in Tabular Editor 3, the **Best Practice Analyzer** will be located as a tab next to the **TOM Explorer**. Here, you will also find the new **Data Refresh** view (which lets you view the queue of background refresh operations) and the **Macros** view (which lets you manage any macros that were previously saved from C# scripts).
-- Tabular Editor 3 displays all DAX syntax and semantic errors in the new **Messages View**. In the default layout, this is located at the bottom left of the interface.
-- In addition, Tabular Editor 3 includes **VertiPaq Analyzer** (which you may be familiar with from [DAX Studio](https://daxstudio.org/)).
-- As a final note, Tabular Editor 3 introduces the concept of **documents**, which is just a generic term for C# scripts, DAX scripts, DAX Queries, Diagrams, Data Previews and Pivot Grids.
+- La pestaña **Scripting avanzado** de Tabular Editor 2.x ha desaparecido. En Tabular Editor 3, en cambio, creas **C# Scripts** desde el menú **Archivo > Nuevo**. No estás limitado a trabajar en un único script cada vez. Además, las **Acciones personalizadas** han pasado a llamarse **macros**.
+- El **filtrado con Dynamic LINQ** no está disponible actualmente en el Explorador TOM. En su lugar, si quieres buscar objetos usando [Dynamic LINQ](https://dynamic-linq.net/expression-language), tienes que abrir el cuadro de diálogo **Buscar y reemplazar** pulsando CTRL+F.
+- Si cierras el **Editor de expresiones**, puedes volver a abrirlo haciendo doble clic en el icono de un objeto en el **Explorador TOM**, o eligiendo la opción de menú **Ver > Editor de expresiones**.
+- Al usar el diseño predeterminado en Tabular Editor 3, el **Best Practice Analyzer** estará en una pestaña junto al **Explorador TOM**. Aquí también encontrarás la nueva vista **Actualización de datos** (que te permite ver la cola de operaciones de actualización en segundo plano) y la vista **macros** (que te permite gestionar las macros guardadas previamente a partir de C# Scripts).
+- Tabular Editor 3 muestra todos los errores de sintaxis y semántica de DAX en la nueva **vista de mensajes**. En el diseño predeterminado, se encuentra en la parte inferior izquierda de la interfaz.
+- Además, Tabular Editor 3 incluye el **Analizador VertiPaq** (que quizá ya conozcas de [DAX Studio](https://daxstudio.org/)).
+- Como nota final, Tabular Editor 3 introduce el concepto de **documentos**, que es simplemente un término genérico para C# Scripts, Scripts DAX, consultas DAX, diagramas, vistas previas de datos y Pivot Grids.
 
-For more information, see <xref:user-interface>.
+Para más información, consulta <xref:user-interface>.
 
-### New DAX editor and semantic capabilities
+### Nuevo editor de DAX y capacidades semánticas
 
-Tabular Editor 3 features its very own DAX parsing engine (aka. the "semantic analyzer"), which means that the tool now understands the semantics of any DAX code in your model. This engine is also used to power our DAX editor (codename "Daxscilla"), to enable features such as syntax highlighting, automatic formatting, code completion, calltips, refactoring and much more. Of course the editor is highly configurable, allowing you to tweak it to match your preferred DAX coding style.
+Tabular Editor 3 incorpora su propio motor de análisis sintáctico de DAX (también conocido como el "analizador semántico"), lo que significa que la herramienta ahora entiende la semántica de cualquier código DAX de tu modelo. Este motor también se usa para impulsar nuestro editor de DAX (nombre en clave "Daxscilla"), y para habilitar funciones como el resaltado de sintaxis, el formato automático, el autocompletado de código, los calltips, la refactorización y mucho más. Por supuesto, el editor es altamente configurable, lo que te permite ajustarlo para que se adapte a tu estilo de programación de DAX.
 
-To learn more about the new DAX editor, see <xref:dax-editor>.
+Para obtener más información sobre el nuevo editor de DAX, consulta <xref:dax-editor>.
 
-In addition, the semantic analyzer continuously reports any DAX syntax or semantic errors across all objects in your model. This works even if not connected to Analysis Services and is lightning fast. The semantic analyzer also enabled Tabular Editor 3 to automatically infer data types from DAX expressions. In other words, Tabular Editor 3 automatically detects which columns would result from a calculated table expression. This is a big improvement over Tabular Editor 2.x, where you would have to manually map columns on a calculated table, or rely on Analysis Services to return the column metadata.
+Además, el analizador semántico reporta continuamente cualquier error de sintaxis o semántica de DAX en todos los objetos de tu modelo. Esto funciona incluso sin estar conectado a Analysis Services y es rapidísimo. El analizador semántico también permite a Tabular Editor 3 inferir automáticamente los tipos de datos a partir de expresiones DAX. En otras palabras, Tabular Editor 3 detecta automáticamente qué columnas resultarían de una expresión de tabla calculada. Esto supone una gran mejora respecto a Tabular Editor 2.x, donde tenías que asignar manualmente las columnas de una tabla calculada o depender de Analysis Services para que devolviera los metadatos de las columnas.
 
-### Table Import and Schema Update with Power Query support
+### Importación de tablas y actualización del esquema con compatibilidad con Power Query
 
-Another major advantage of Tabular Editor 3 over Tabular Editor 2.x is its support for structured data sources and Power Query (M) partitions. Specifically, the "Schema Update" feature now works for these types of data sources and partitions, and the Table Import Wizard can generate the necessary M code when importing new tables.
+Otra gran ventaja de Tabular Editor 3 frente a Tabular Editor 2.x es la compatibilidad con orígenes de datos estructurados y particiones de Power Query (M). En concreto, la funcionalidad "Actualización del esquema" ahora funciona con estos tipos de Data sources y particiones, y el Asistente para importar tablas puede generar el código M necesario al importar nuevas tablas.
 
-The schema compare dialog itself also has a number of improvements, for example allowing you to easily map a column delete+column insert operation to a single column rename operation (and vice versa). There are also options for controlling how floating and decimal data types should be treated (for example, sometimes your data source may be using a floating point data type, but you may still want to import it always as a decimal type).
+El propio cuadro de diálogo de comparación de esquemas también incluye varias mejoras; por ejemplo, te permite asignar fácilmente una operación de eliminación de columna + inserción de columna a una única operación de cambio de nombre de columna (y viceversa). También hay opciones para controlar cómo deben tratarse los tipos de datos de punto flotante y decimal (por ejemplo, a veces tu Data source puede estar usando un tipo de datos de punto flotante, pero quizá quieras importarlo siempre como tipo decimal).
 
-To learn more, see <xref:importing-tables>.
+Para obtener más información, consulta <xref:importing-tables>.
 
-### Workspace mode
+### Modo del área de trabajo
 
-Tabular Editor 3 introduces the concept of **workspace mode**, in which model metadata is loaded from disk (Model.bim or Database.json), and then immediately deployed to an Analysis Services instance of your choice. Whenever you hit Save (CTRL+S), the workspace database is synchronized and updated model metadata is saved back to the disk. The advantage of this approach, is that Tabular Editor is connected to Analysis Services, thus enabling the [connected features](#connected-features) listed below, while also making it easy to update the source files on disk. With Tabular Editor 2.x, you had to open a model from a database, and then remember to manually save to disk once in a while.
+Tabular Editor 3 introduce el concepto de **modo del área de trabajo**, en el que los metadatos del modelo se cargan desde el disco (Model.bim o Database.json) y, a continuación, se despliegan inmediatamente en una instancia de Analysis Services que elijas. Cada vez que pulsas Guardar (CTRL+S), la base de datos de Workspace se sincroniza y los metadatos actualizados del modelo se guardan de nuevo en disco. La ventaja de este enfoque es que Tabular Editor se conecta a Analysis Services, lo que habilita las [funciones conectadas](#connected-features) que se enumeran a continuación, y al mismo tiempo facilita la actualización de los archivos de origen en el disco. Con Tabular Editor 2.x, tenías que abrir un modelo desde una base de datos y luego acordarte de guardarlo manualmente en el disco de vez en cuando.
 
-This approach is ideal to enable [parallel development](xref:parallel-development) and model metadata integration with version control systems.
+Este enfoque es ideal para habilitar el [desarrollo en paralelo](xref:parallel-development) y la integración de metadatos del modelo con sistemas de control de versiones.
 
-For more information, see <xref:workspace-mode>.
+Para obtener más información, consulta <xref:workspace-mode>.
 
-### Connected features
+### Funciones conectadas
 
-Tabular Editor 3 includes a number of new connected features, allowing you to use it as a client tool for Analysis Services. These features are enabled whenever Tabular Editor 3 is connected to Analysis Services, either directly or when using the [workspace mode](#workspace-mode) feature.
+Tabular Editor 3 incluye varias funciones conectadas nuevas, lo que te permite usarlo como herramienta cliente para Analysis Services. Estas funciones se habilitan siempre que Tabular Editor 3 esté conectado a Analysis Services, ya sea directamente o al usar la característica [modo del área de trabajo](#workspace-mode).
 
-The new connected features are:
+Las nuevas funciones conectadas son:
 
-- Table data previewing
+- Vista previa de datos de tablas
 - PivotGrids
-- DAX Querying
-- Data refresh operations
-- VertiPaq Analyzer
+- Consulta DAX
+- Operaciones de actualización de datos
+- Analizador VertiPaq
 
-### Diagrams
+### Diagramas
 
-One highly requested feature of Tabular Editor 2.x, was the ability to better visualize relationships between tables. With Tabular Editor 3, you can now create model diagrams. Each diagram is a simple JSON file that holds the names and coordinates of tables to be included in the diagram. Tabular Editor 3 then renders the tables and relationships and provides features for easily editing relationships, adding additional tables to the diagram based on existing relationships, etc.
+Una función muy solicitada de Tabular Editor 2.x era poder visualizar mejor las relaciones entre tablas. Con Tabular Editor 3, ahora puedes crear diagramas del modelo. Cada diagrama es un archivo JSON sencillo que contiene los nombres y las coordenadas de las tablas que se incluirán en el diagrama. A continuación, Tabular Editor 3 renderiza las tablas y sus relaciones, y ofrece funciones para editarlas fácilmente, añadir tablas adicionales al diagrama en función de las relaciones existentes, etc.
 
-![Easily add related tables](~/content/assets/images/diagram-menu.png)
+![Añade fácilmente tablas relacionadas](~/content/assets/images/diagram-menu.png)
 
-See [Working with diagrams](xref:importing-tables-data-modeling#working-with-diagrams) for more information.
+Consulta [Trabajar con diagramas](xref:importing-tables-data-modeling#working-with-diagrams) para obtener más información.
 
-### C# Scripts and Macro recorder
+### C# Scripts y grabador de macros
 
-The **Advanced Scripting** feature of Tabular Editor 2.x has carried over to Tabular Editor 3 as **C# Scripts**. One important difference in Tabular Editor 3 is that you are no longer limited to working with a single script. Instead, using the **File > New > C# Script** option, you can create and work with as many C# scripts as you need. Similar to Tabular Editor 2.x, these scripts can be saved as reusable actions that are integrated directly into the right-click context menu of the TOM Explorer. In Tabular Editor 3, we call these actions **Macros**, and you can even create your own menus and toolbars to which you can add macros.
+La característica **Scripting avanzado** de Tabular Editor 2.x se ha trasladado a Tabular Editor 3 como **C# Scripts**. Una diferencia importante en Tabular Editor 3 es que ya no estás limitado a trabajar con un único script. En su lugar, con la opción **Archivo > Nuevo > C# Script**, puedes crear y trabajar con tantos C# Scripts como necesites. Al igual que en Tabular Editor 2.x, estos scripts se pueden guardar como acciones reutilizables integradas directamente en el menú contextual del Explorador TOM al hacer clic con el botón derecho. En Tabular Editor 3, llamamos a estas acciones **macros**, y hasta puedes crear tus propios menús y barras de herramientas para añadir macros.
 
-Most importantly, Tabular Editor 3 features a **Macro recorder** that you can use to automatically generate C# code from user interactions.
+Y, lo más importante, Tabular Editor 3 incluye un **grabador de macros** que puedes usar para generar automáticamente código C# a partir de tus interacciones.
 
-To learn more, see @cs-scripts-and-macros.
+Para obtener más información, consulta @cs-scripts-and-macros.
 
-### DAX Scripting
+### Script DAX
 
-The last important feature you need to know about, when coming from Tabular Editor 2.x, is **DAX Scripting**. With this feature, you can create documents that allow you to edit the DAX expression and basic properties of several calculated objects at once. Calculated objects are measures, calculated columns, calculated tables, etc.
+La última característica importante que necesitas conocer, si vienes de Tabular Editor 2.x, es **Script DAX**. Con esta característica, puedes crear documentos que te permiten editar la expresión DAX y las propiedades básicas de varios objetos calculados a la vez. Los objetos calculados son medidas, columnas calculadas, tablas calculadas, etc.
 
-This is very convenient when authoring complex business logic across several objects. By (multi)selecting objects in the TOM Explorer, right-clicking and choosing the **Script DAX** option, you get a new DAX script containing the definitions of all selected objects. The DAX script editor of course has all of the same DAX capabilities of the Expression Editor and the DAX query editor.
+Esto es muy práctico al crear una lógica de negocio compleja repartida entre varios objetos. Al (multi)seleccionar objetos en el Explorador TOM, hacer clic con el botón derecho y elegir la opción **Script DAX**, obtienes un nuevo script de DAX que contiene las definiciones de todos los objetos seleccionados. El editor de Script DAX, por supuesto, tiene las mismas capacidades de DAX que el Editor de expresiones y el editor de Consulta DAX.
 
-When working in **connected** or **workspace** mode, DAX scripting is an incredibly powerful tool to quickly modify and test updated business logic, for example when using it in conjunction with a Pivot Grid as shown in the screenshot below. Simply hitting SHIFT+F5 causes the database to be updated based on the DAX expressions in the script, after which the Pivot Grid will immediately update.
+Al trabajar en modo **conectado** o **Workspace**, Script DAX es una herramienta increíblemente potente para modificar y probar rápidamente la lógica de negocio actualizada; por ejemplo, cuando lo usas junto con un Pivot Grid, como se muestra en la captura de pantalla siguiente. Con solo pulsar SHIFT+F5, la base de datos se actualiza en función de las expresiones DAX del script, tras lo cual el Pivot Grid se actualiza de inmediato.
 
-![Dax Scripting And Pivot](~/content/assets/images/dax-scripting-and-pivot.png)
+![Scripting de Dax y Pivot](~/content/assets/images/dax-scripting-and-pivot.png)
 
-To learn more, see @dax-script-introduction.
+Para obtener más información, consulta @dax-script-introduction.
 
-## Next steps
+## Siguientes pasos
 
 - @migrate-from-vs
-- @parallel-development
-- @boosting-productivity-te3
+- @desarrollo-en-paralelo
+- @aumento-de-la-productividad-te3
