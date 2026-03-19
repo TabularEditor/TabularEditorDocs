@@ -1,6 +1,6 @@
 ---
 uid: bpa-view-reference
-title: Best Practice Analyzer view
+title: Vista de Best Practice Analyzer
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
