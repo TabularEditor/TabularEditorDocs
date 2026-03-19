@@ -1,20 +1,20 @@
 ---
 uid: find-replace-reference
-title: Find/Replace
+title: Buscar/Reemplazar
 author: Morten Lønskov
 updated: 2023-03-22
 applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Works differently than showed in this article"
+      note: "Funciona de forma diferente a como se muestra en este artículo"
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           full: true
-        - edition: Business
+        - edition: Negocios
           full: true
-        - edition: Enterprise
+        - edition: Empresarial
           full: true
 ---
 
