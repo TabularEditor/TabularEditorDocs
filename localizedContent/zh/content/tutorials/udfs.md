@@ -1,6 +1,6 @@
 ---
 uid: udfs
-title: DAX User-Defined Functions
+title: DAX 用户自定义函数
 author: Daniel Otykier
 updated: 2025-09-15
 applies_to:
@@ -10,69 +10,69 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.23.0
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# DAX User-Defined Functions
+# DAX 用户自定义函数
 
-DAX User-Defined Functions (UDFs) is a new capability of semantic models introduced in Power BI Desktop with the September 2025 update.
+DAX 用户自定义函数 (UDFs) 是语义模型的一项新功能，在 Power BI Desktop 的 2025 年九月更新中引入。
 
-The feature lets you create reusable DAX functions that you can invoke from within any DAX expression of your model, even other functions. This powerful feature helps you maintain consistency, reduce code duplication, and create more maintainable DAX expressions.
+该功能让你能够创建可复用的 DAX 函数，并可在模型中的任何 DAX 表达式里调用，甚至在其他函数中也能调用。 这个强大的功能可帮助你保持一致性、减少代码重复，并创建更易维护的 DAX 表达式。
 
-Tabular Editor 3 supports UDFs starting from version 3.23.0, although we recommend using [3.23.1](xref:release-3-23-1) (or newer) to benefit from various bug fixes and improvements.
+Tabular Editor 3 自 3.23.0 版本起支持 UDFs。不过，我们建议使用 [3.23.1](xref:release-3-23-1)（或更高版本），以获得多项 bug 修复与改进。
 
-For a more detailed introduction to UDFs in Tabular Editor 3, check out [this blog post](https://tabulareditor.com/blog/how-to-get-started-using-udfs-in-tabular-editor-3).
+如需更详细了解 Tabular Editor 3 中 UDF 的入门内容，请参阅[这篇博客文章](https://tabulareditor.com/blog/how-to-get-started-using-udfs-in-tabular-editor-3)。
 
-## Understanding UDFs
+## 理解 UDFs
 
-UDFs can be thought of as custom DAX functions that you define once and can use throughout your model. You define which parameters the function accepts, which can be both scalar- or table-valued, or even references to objects, and then you provide the DAX expression that uses those parameters to compute a result, which can also be scalar- or table-valued.
+你可以将 UDFs 理解为自定义 DAX 函数：定义一次，即可在整个模型中反复使用。 你可以定义函数要接受哪些参数；这些参数既可以是标量值或表值，也可以是对对象的引用。然后，你需要提供一个使用这些参数来计算结果的 DAX 表达式，而结果同样可以是标量值或表值。
 
-To learn more about how DAX UDFs work, we recommend [this article by SQLBI](https://www.sqlbi.com/articles/introducing-user-defined-functions-in-dax/).
+如需进一步了解 DAX UDF 的工作原理，我们推荐阅读 [SQLBI 的这篇文章](https://www.sqlbi.com/articles/introducing-user-defined-functions-in-dax/)。
 
-## Prerequisites
+## 前提条件
 
-Before you can create and use UDFs in Tabular Editor 3, ensure that:
+在 Tabular Editor 3 中创建和使用 UDFs 之前，确保满足以下条件：
 
-- Your model compatibility level is **1702 or higher**
+- 你的模型兼容级别为 **1702 或更高**
 
-## Creating Your First UDF
+## 创建你的第一个 UDF
 
-### Step 1: Set Up the Model
+### 第 1 步：设置模型
 
-First, verify your model's compatibility level is appropriate for UDFs:
+首先，确认你的模型兼容级别满足 UDF 的要求：
 
-1. Open your model in Tabular Editor 3
-2. Select the root node ("Model") in the **TOM Explorer**
-3. In the **Properties** panel, expand the **Database** property, then check that the **Compatibility Level** is set to **1702** or higher
-4. If needed, update the compatibility level and save your model
+1. 在 Tabular Editor 3 中打开你的模型
+2. 在 **TOM Explorer** 中选择根节点（“Model”）
+3. 在 **Properties** 面板中，展开 **Database** 属性，然后确认 **兼容级别** 已设置为 **1702** 或更高
+4. 如有需要，更新兼容级别并保存你的模型
 
-![Setting Compatibility Level](~/content/assets/images/tutorials/udfs-cl1702.png)
+![设置兼容级别](~/content/assets/images/tutorials/udfs-cl1702.png)
 
-### Step 2: Add a New Function
+### 步骤 2：添加新函数
 
-1. In the **TOM Explorer**, locate the **Functions** folder under your model
-2. Right-click on the **Functions** folder
-3. Select **Create > User-Defined Function**
-4. Give your function a descriptive name (spaces and special characters are not allowed; underscores and periods are permitted)
+1. 在 **TOM Explorer** 中，找到模型下的 **Functions** 文件夹
+2. 右键单击 **Functions** 文件夹
+3. 选择 **Create > User-Defined Function**
+4. 为函数取一个有描述性的名称（不允许空格和特殊字符；允许使用下划线和句点）
 
-![Creating a UDF](~/content/assets/images/tutorials/new-udf.png)
+![创建 UDF](~/content/assets/images/tutorials/new-udf.png)
 
-You can also add a UDFs through the **Model > Add User-Defined Function** menu option.
+你也可以通过 **Model > Add User-Defined Function** 菜单选项添加 UDF。
 
-Alternatively, you can create UDFs directly from the **DEFINE** section of a DAX query, by hitting F7 (Apply) or using the **Query > Apply** menu option. If your query contains multiple query-scoped definitions, you can also select just a subset of them and hit F8 (Apply Selection).
+另外，你也可以在 DAX 查询的 **DEFINE** 部分直接创建 UDF：按下 F7（Apply），或使用 **Query > Apply** 菜单选项。 如果查询包含多个查询作用域的定义，你也可以只选择其中一部分，然后按 F8（Apply Selection）。
 
-![Creating a UDF from DAX Query](~/content/assets/images/tutorials/udf-from-query.png)
+![从 DAX 查询创建 UDF](~/content/assets/images/tutorials/udf-from-query.png)
 
-### Step 3: Define Your Function
+### 步骤 3：定义你的函数
 
-In the **Expression Editor**, define your function using proper UDF syntax.
+在 **表达式编辑器** 中，使用正确的 UDF 语法定义你的函数。
 
-Here's a basic example that adds two numbers together:
+下面是一个将两个数字相加的基础示例：
 
 ```dax
 // Adds two numbers together
@@ -84,13 +84,13 @@ Here's a basic example that adds two numbers together:
 ```
 
 > [!TIP]
-> Use the **"Use correct UDF syntax"** code action in the Expression Editor if you need help with the proper syntax structure.
+> 如果你需要语法结构方面的帮助，可以在表达式编辑器中使用 **“Use correct UDF syntax”** 代码操作。
 
-## UDF Syntax and Structure
+## UDF 语法与结构
 
-### Basic Syntax
+### 基本语法
 
-UDFs follow this general structure:
+UDF 通常采用以下结构：
 
 ```dax
 FUNCTION FunctionName =
@@ -103,18 +103,18 @@ FUNCTION FunctionName =
     => expression_using_parameters
 ```
 
-### Parameter Evaluation Mode
+### 参数求值模式
 
-A key aspect of UDFs is that parameters can be defined in one of two modes, **pass-by-value** and **pass-by-reference**. By default, and unless you specify otherwise, a parameter will by **pass-by-value**. This essentially means that the parameter behaves just like a DAX variable (i.e. one that is defined using the `VAR` keyword) inside the UDF expression. In other words, when the UDF is called, the parameter values are "copied" into the function and any reference to that parameter inside the function will always return the same value.
+UDF 的一个关键特性是，参数可采用两种模式定义：**按值传递**和 **按引用传递**。 默认情况下，除非你另有指定，参数将采用**按值传递**。 这意味着该参数在 UDF 表达式内部的行为与 DAX 变量基本一致（即使用 `VAR` 关键字定义的变量）。 换句话说，当调用 UDF 时，参数值会被“复制”到函数中，函数内部对该参数的任何引用都会始终返回相同的值。
 
-In contrast, **pass-by-reference** parameters behave more like measures. That is, the result of evaluating the parameter _inside the function_ may differ depending on the evaluation context.
+相比之下，**按引用传递**参数的行为更像度量值。 也就是说，在函数_内部_对该参数进行求值的结果，可能会因评估语境不同而变化。
 
-To specify the evaluation mode, include a parameter specification after the parameter name, separated by a colon (`:`). The specification can be either `VAL` or `EXPR` for "pass-by-value" and "pass-by-reference", respectively. As mentioned above, "pass-by-value" is the default, so `VAL` is implicit if not specified. For example:
+要指定求值模式，请在参数名后添加参数规格，并用冒号（`:`）分隔。 该说明可以是 `VAL` 或 `EXPR`，分别对应“按值传递”和“按引用传递”。 如上所述，“按值传递”是默认值，因此未指定时会隐式采用 `VAL`。 例如：
 
 ```dax
 (
-    x: VAL,   // Pass-by-value parameter - the DAX expression is evaluated once when the function is called, and the result is "copied" into the function
-    y: EXPR   // Pass-by-reference parameter - can be any DAX expression which will observe whatever context the parameter is later referenced under
+    x: VAL,   // 按值传递参数 - DAX 表达式在调用函数时仅求值一次，结果会被“复制”到函数中
+    y: EXPR   // 按引用传递参数 - 可以是任意 DAX 表达式，之后在引用该参数时会遵循当时的上下文
 )
 =>
 ROW(
@@ -125,128 +125,128 @@ ROW(
 )
 ```
 
-Calling the above function with a measure reference for each parameter, e.g. `MyFunction([Some Measure], [Some Measure])`, will yield different results for the `y` parameter depending on the current filter context, as shown in the screenshot below:
+在调用上述函数时，如果为每个参数都传入一个度量值引用，例如 `MyFunction([Some Measure], [Some Measure])`，则如下方截图所示，`y` 参数会根据当前筛选语境产生不同的结果：
 
-![Pass-by-value vs Pass-by-reference](~/content/assets/images/tutorials/udf-pass-by-ref.png)
+![按值传递 vs 按引用传递](~/content/assets/images/tutorials/udf-pass-by-ref.png)
 
-In addition to specifying the evaluation mode, you can also constrain the parameter type by specifying a data type before the evaluation mode, e.g. `x: INT64 VAL` or `y: TABLE EXPR`.
+除了指定求值模式之外，你还可以通过在求值模式前指定数据类型来约束参数类型，例如 `x: INT64 VAL` 或 `y: TABLE EXPR`。
 
-These type specifications are optional, but if specified they will perform an implicit type conversion on arguments passed to the function, and will also affect the autocomplete suggestions in Tabular Editor 3 when writing DAX code that calls the function.
+这些类型说明是可选的，但一旦指定，它们会对传入函数的参数执行隐式类型转换；同时，也会影响在 Tabular Editor 3 中编写调用该函数的 DAX 代码时的自动完成建议。
 
-Check the [Microsoft specification for UDFs](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) for the complete list of available constraints.
+可用约束的完整列表，请参阅 [Microsoft 的 UDF 规范](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions)。
 
-## Using UDFs in Your Model
+## 在模型中使用 UDF
 
-### In Object Expressions
+### 在对象表达式中
 
-Once you've created a UDF, you can use it in any DAX expression throughout your model. Tabular Editor 3's autocomplete will suggest your UDFs as you type.
+创建 UDF 之后，你可以在整个模型中的任何 DAX 表达式里使用它。 你输入时，Tabular Editor 3 的自动完成功能会提示你已定义的 UDF。
 
-### In DAX Scripts
+### 在 DAX脚本中
 
-UDFs are also available when working with DAX Scripts:
+在使用 DAX脚本时，也可以使用 UDF：
 
 ```dax
 -- Function: MyFuncRenamed
 FUNCTION MyFuncRenamed =
-    // Adds two numbers together
+    // 将两个数字相加
     (
-        x: INT64, // The first number
-        y: INT64  // The second number
+        x: INT64, // 第一个数字
+        y: INT64  // 第二个数字
     )
     => x + y
 
--- Measure: [New Measure]
+-- 度量值: [New Measure]
 MEASURE 'Date'[New Measure] = MyFuncRenamed(1,2)
 ```
 
-### In DAX Queries
+### 在 DAX 查询中
 
-Tabular Editor 3 adds powerful new features for working with UDFs in DAX queries. We already mentioned above how you can "apply" a UDF from the **DEFINE** section of a DAX query, to have it become a permanent part of your model. In addition, if using a UDF inside a DAX query, you can right-click on the function invocation and choose **Define Function** to automatically generate the function definition in the **DEFINE** section of your query:
+Tabular Editor 3 新增了用于在 DAX 查询中使用 UDF 的强大功能。 我们在上文已经提到，你可以从 DAX 查询的 **DEFINE** 部分“应用”某个 UDF，使其成为模型的永久组成部分。 此外，在 DAX 查询中使用 UDF 时，你可以在函数调用处右键并选择 **Define Function**，即可自动在查询的 **DEFINE** 部分生成函数定义：
 
-![Define Function from Query](~/content/assets/images/tutorials/udf-define.png)
+![从查询中执行 Define Function](~/content/assets/images/tutorials/udf-define.png)
 
-As can be seen from the screen above, the following options are available when right-clicking on a UDF invocation:
+从上方截图可以看出，在 UDF 调用处右键可使用以下选项：
 
-- **Peek Definition** (Alt+F12): Opens a nested, read-only editor below the current cursor position, showing you the function definition
-- **Go To Definition** (F12): Navigates to the function definition in the **Functions** folder of your model, or, if the function is defined in the current query or script, to the function definition inside the editor
-- **Inline Function**: Replaces the function invocation with the actual function definition, substituting parameters with the actual arguments passed to the function
-- **Define Function** (DAX scripts or DAX queries only): Generates the function definition in the **DEFINE** section of your query, if it doesn't already exist there
-- **Define Function with dependencies** (DAX scripts or DAX queries only): Similar to the above, but also generates definitions for any other UDFs that the function depends on
+- **窥视定义**（Alt+F12）：在当前光标位置下方打开一个嵌套的只读编辑器，显示该函数的定义
+- **转到定义**（F12）：导航到模型中 **Functions** 文件夹内的函数定义；如果该函数是在当前查询或脚本中定义的，则导航到编辑器内的函数定义
+- **Inline Function**：将函数调用替换为实际的函数定义，并将形参替换为传入函数的实际参数值
+- **Define Function**（仅适用于 DAX 脚本或 DAX 查询）：如果查询的 **DEFINE** 部分还没有该函数定义，就会在其中生成函数定义
+- **Define Function with dependencies**（仅适用于 DAX 脚本或 DAX 查询）：与上面类似，但还会为该函数依赖的其他 UDF 一并生成定义
 
-## DAX Package Manager
+## DAX 组件管理器
 
-Tabular Editor 3.24.0 introduces a new feature called the **DAX Package Manager**, which allows you to easily discover, install, and manage DAX UDF libraries from within Tabular Editor. At launch, the package manager supports the popular [DaxLib](https://daxlib.org) feed, which contains a wide range of useful UDFs for various scenarios.
+Tabular Editor 3.24.0 引入了一项名为 **DAX 组件管理器** 的新功能，让你可以直接在 Tabular Editor 中轻松发现、安装和管理 DAX UDF 库。 在首次发布时，组件管理器支持热门的 [DaxLib](https://daxlib.org) 源，其中包含覆盖多种场景的大量实用 UDF。
 
-System administrators can disable access to the DAX Package Manager by specifying a [group policy](xref:policies).
+系统管理员可以通过指定 [组策略](xref:policies) 来禁用对 DAX 组件管理器的访问。
 
-## Advanced Features
+## 高级功能
 
-### Formula Fixup
+### 公式修复
 
-When you rename a UDF, Tabular Editor 3 automatically updates all references throughout your model, just like with measures and other objects.
+当你重命名某个 UDF 时，Tabular Editor 3 会像处理度量值和其他对象一样，自动更新模型中所有相关引用。
 
-### Peek Definition
+### 窥视定义
 
-The **Peek Definition** feature works with UDFs, allowing you to quickly view the function's implementation without navigating away from your current context.
+**窥视定义** 功能支持 UDF，让你无需离开当前上下文就能快速查看函数实现。
 
-![Peek Definition for UDFs](~/content/assets/images/tutorials/udf-peek-definition.png)
+![UDF 的窥视定义](~/content/assets/images/tutorials/udf-peek-definition.png)
 
-### Dependencies View
+### 依赖项视图
 
-UDFs appear in the **DAX Dependencies** (Shift+F12) view, showing both:
+UDF 会显示在 **DAX 依赖项**（Shift+F12）视图中，同时展示：
 
-- **Objects that depend on the function**: Which measures, columns, etc. use the UDF
-- **Objects the function depends on**: Which measures, columns, etc. the UDF references
+- **依赖该函数的对象**：哪些度量值、列等使用了该 UDF
+- **该函数依赖的对象**：该 UDF 引用了哪些度量值、列等
 
-### Batch Rename
+### 批量重命名
 
-When you select multiple UDFs in the TOM Explorer, you can use the **Batch Rename** (F2) option from the right-click context menu to rename them all at once, using search-and-replace patterns, and optionally regular expressions.
+在 TOM Explorer 中选择多个 UDF 后，你可以在右键上下文菜单中使用 **批量重命名** (F2)，通过“查找和替换”模式一次性为它们全部重命名，并可选择使用正则表达式。
 
-### Namespaces
+### 命名空间
 
-The concept of "namespace" doesn't exist in DAX, yet the recommendation is to name UDFs in such a way that ambiguities are avoided and that the origin of the UDF is clear. For example `DaxLib.Convert.CelsiusToFahrenheit` (using '.' as namespace separators). When a UDF is named this way, the TOM Explorer will display the UDF in a hierarchy based on the names. You can toggle the display of UDFs by namespace using the **Group User-Defined Functions by namespace** toggle button in the toolbar above the TOM Explorer (note, this button is only visible when working with a model using Compatibility Level 1702 or higher).
+DAX 中并没有“命名空间”的概念，但我们建议为 UDF 命名时尽量避免歧义，并让 UDF 的来源一目了然。 例如 `DaxLib.Convert.CelsiusToFahrenheit`（使用“.” 作为命名空间分隔符）。 当 UDF 采用这种命名方式时，TOM Explorer 会根据名称以层级结构显示 UDF。 你可以使用 TOM Explorer 上方工具栏中的 **Group User-Defined Functions by namespace** 切换按钮，按命名空间对 UDF 的显示进行分组（注意：仅当处理兼容级别为 1702 或更高的模型时，才会显示该按钮）。
 
-![DAX UDFs grouped by namespace](~/content/assets/images/udf-namespaces-tom-explorer.png)
+![按命名空间分组的 DAX UDF](~/content/assets/images/udf-namespaces-tom-explorer.png)
 
-In Tabular Editor, UDFs also have a "Namespace" _property_, allowing you to customize the namespace of each UDF individually, without changing the actual UDF object name. This is very similar to Display Folders for measures. Setting a different value for the "Namespace" property, than would could be inferred from the UDF name, is useful for example if you want to batch rename (F2) multiple UDFs to get rid of the namespaces in their names, but you still want to keep them nicely organized in the TOM Explorer.
+在 Tabular Editor 中，UDF 还有一个“Namespace” _属性_，让你可以为每个 UDF 单独自定义命名空间，而不用更改实际的 UDF 对象名称。 这与度量值的显示文件夹非常相似。 例如，如果你想对多个 UDF 执行批量重命名 (F2)，去掉名称中的命名空间，但仍希望它们在 TOM Explorer 中保持良好的层级组织，那么将“Namespace”属性设置为不同于可从 UDF 名称中推断出的值就会很有用。
 
 > [!NOTE]
-> This organizational feature in Tabular Editor doesn't affect DAX code. You still need to type out the full UDF name when calling a UDF, including any namespace parts.
+> Tabular Editor 里的这个组织功能不会影响 DAX 代码。 调用 UDF 时，你仍然需要输入完整的 UDF 名称，包括所有命名空间部分。
 
-## Best Practices
+## 最佳实践
 
-### Naming Conventions
+### 命名规范
 
-- Use descriptive names that clearly indicate the function's purpose
-- Consider prefixing UDFs with your organization's initials (e.g., `ACME.CalculateDiscount`)
-- Avoid generic names that might conflict with future DAX functions
+- 使用具有描述性的名称，清晰表明函数用途
+- 可考虑用组织的首字母缩写作为 UDF 前缀（例如 `ACME.CalculateDiscount`）
+- 避免使用过于通用的名称，以免与未来的 DAX 函数发生冲突
 
-### Documentation
+### 文档
 
-- Always include comments describing what the function does
-- Document each parameter's purpose and expected data type
-- Include usage examples in your comments
+- 始终添加注释，说明该函数的作用
+- 记录每个参数的用途以及预期的数据类型
+- 在注释中提供用法示例
 
 ```dax
-// Calculates the percentage change between two values
-// Usage: PercentChange(100, 110) returns 0.10 (10% increase)
+// 计算两个值之间的百分比变化
+// 用法：PercentChange(100, 110) 返回 0.10（增加 10%）
 (
-    oldValue: DOUBLE,    // The original value
-    newValue: DOUBLE     // The new value to compare against
+    oldValue: DOUBLE,    // 原始值
+    newValue: DOUBLE     // 用于对比的新值
 )
 => DIVIDE(newValue - oldValue, oldValue)
 ```
 
-Tabular Editor 3 automatically picks up any comments and displays them appropriately in autocomplete suggestions and tooltips.
+Tabular Editor 3 会自动识别所有注释，并在自动完成建议和工具提示中以合适的方式显示。
 
-![UDF Autocomplete with Comments](~/content/assets/images/tutorials/udf-comment-tooltips.png)
+![带注释的 UDF 自动完成](~/content/assets/images/tutorials/udf-comment-tooltips.png)
 
-## Common Use Cases
+## 常见使用场景
 
-### Mathematical Operations
+### 数学运算
 
 ```dax
-// Calculate compound interest
+// 计算复利
 (
     principal: DOUBLE,
     rate: DOUBLE,
@@ -255,10 +255,10 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 => principal * POWER(1 + rate, periods)
 ```
 
-### String Manipulation
+### 字符串处理
 
 ```dax
-// Format a full name from first and last name components
+// 将名字和姓氏组合成完整姓名
 (
     firstName: STRING,
     lastName: STRING
@@ -266,20 +266,20 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 => TRIM(firstName) & " " & TRIM(lastName)
 ```
 
-### Date Calculations
+### 日期计算
 
 ```dax
-// Get the fiscal year based on a date (fiscal year starts July 1)
+// 根据日期获取财政年度（财年从七月1日开始）
 (
     inputDate: DATETIME
 )
 => IF(MONTH(inputDate) >= 7, YEAR(inputDate) + 1, YEAR(inputDate))
 ```
 
-### Business Logic
+### 业务逻辑
 
 ```dax
-// Apply tiered discount based on quantity
+// 根据数量应用阶梯折扣
 (
     quantity: INT64
 )
@@ -292,33 +292,33 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 )
 ```
 
-## Troubleshooting
+## 故障排查
 
-### Common Issues
+### 常见问题
 
-**Function not appearing in autocomplete**
+**函数未出现在自动补全中**
 
-- Verify the function was saved successfully
-- Check that there are no syntax errors in the function definition
-- Ensure you're using the function in a compatible context
+- 确认函数已成功保存
+- 检查函数定义中是否存在语法错误
+- 确保在兼容的上下文中使用该函数
 
-**Parameter constraint errors**
+**参数约束错误**
 
-- Review the parameter types you've specified
-- Make sure you're passing compatible values to the function
-- Check the Microsoft documentation for supported constraint types
+- 检查你指定的参数类型
+- 确保你向函数传递的是兼容的值
+- 查看 Microsoft 文档，了解支持的约束类型
 
-**Function not working after deployment**
+**部署后函数无法正常工作**
 
-- Verify your target environment supports UDFs (compatibility level 1702+). As of September 16th, 2025, the Power BI Service does not yet support UDFs, nor does Azure Analysis Services or SQL Server Analysis Services.
+- 确认目标环境支持 UDF（兼容级别 1702+）。 截至 2025 年九月十六日，Power BI 服务尚不支持 UDF，Azure Analysis Services 和 SQL Server Analysis Services 也同样不支持。
 
-## Limitations
+## 局限性
 
-- UDFs are currently a preview feature and may have limitations in certain deployment scenarios
-- Not all Power BI environments support UDFs (requires specific builds)
-- UDFs cannot be recursive (call themselves)
-- UDFs do not support optional parameters, parameters with default values, or parameter overloading
+- UDF 目前为预览功能，在某些部署场景中可能会有局限
+- 并非所有 Power BI 环境都支持 UDF（需要特定构建版本）
+- UDF 不能递归（调用自身）
+- UDF 不支持可选参数、带默认值的参数或参数重载
 
 ---
 
-UDFs in Tabular Editor 3 provide a powerful way to create reusable, maintainable DAX code. By following these guidelines and best practices, you can build a library of functions that will improve your model's consistency and reduce development time.
+Tabular Editor 3 中的 UDF 提供了一种强大方式，可用于创建可复用、易维护的 DAX 代码。 遵循这些指南和最佳实践，你可以构建一个函数库，从而提升模型一致性并缩短开发时间。
