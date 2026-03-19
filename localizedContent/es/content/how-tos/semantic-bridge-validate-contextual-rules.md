@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-validate-contextual-rules
-title: Create Contextual Validation Rules
+title: Crear reglas de validación contextuales
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -18,25 +18,25 @@ applies_to:
           full: true
 ---
 
-# Create Contextual Validation Rules
+# Crear reglas de validación contextuales
 
-This how-to demonstrates how to create validation rules that check conditions across multiple objects using the validation context.
-These rules are for illustrative purposes only and do not necessarily reflect hard technical requirements of either Metric Views or the Semantic Bridge.
+Este procedimiento muestra cómo crear reglas de validación que comprueben condiciones entre varios objetos mediante el contexto de validación.
+Estas reglas son solo ilustrativas y no reflejan necesariamente requisitos técnicos estrictos de Metric Views ni de Semantic Bridge.
 
-## When to use contextual rules
+## Cuándo usar reglas contextuales
 
-Use contextual rules when you need to:
+Use reglas contextuales cuando necesite:
 
-- Detect duplicate names across objects
-- Check that names don't conflict between different object types
-- Access information about previously validated objects
+- Detectar nombres duplicados entre objetos
+- Comprobar que los nombres no entren en conflicto entre distintos tipos de objeto
+- Acceder a información sobre objetos validados previamente
 
 > [!NOTE]
-> The validation process validates each Metric View object in order, so the context consists only of those items already visited in the validation.
+> El proceso de validación revisa cada objeto de Metric View en orden, por lo que el contexto solo incluye los elementos que ya se han visitado durante la validación.
 
-## The MakeValidationRule method
+## El método MakeValidationRule
 
-The generic `MakeValidationRule<T>` method provides access to the validation context:
+El método genérico `MakeValidationRule<T>` proporciona acceso al contexto de validación:
 
 ```csharp
 SemanticBridge.MetricView.MakeValidationRule<IMetricViewObjectType>(
@@ -49,25 +49,25 @@ SemanticBridge.MetricView.MakeValidationRule<IMetricViewObjectType>(
 );
 ```
 
-The `context` parameter provides:
+El parámetro `context` proporciona:
 
-- `context.DimensionNames` - names of dimensions already validated
-- `context.MeasureNames` - names of measures already validated
-- `context.JoinNames` - names of joins already validated
-- `context.MakeError(message)` - create an error diagnostic
-- `context.MakeError(message, property)` - create an error diagnostic, calling out the specific property with an error
+- `context.DimensionNames` - nombres de las dimensiones ya validadas
+- `context.MeasureNames` - nombres de las medidas ya validadas
+- `context.JoinNames` - nombres de los joins ya validados
+- `context.MakeError(message)` - crea un diagnóstico de error
+- `context.MakeError(message, property)` - crea un diagnóstico de error e indica la propiedad específica con un error
 
-Because you create the diagnostic message in the body of the validation function, you can put details about the current object being validated into the message.
+Como creas el mensaje de diagnóstico en el cuerpo de la función de validación, puedes incluir en el mensaje detalles sobre el objeto actual que se está validando.
 
-## Using directive for Metric View types
+## Directiva `using` para los tipos de Metric View
 
-Add this using directive to reference Metric View types:
+Agrega esta directiva `using` para hacer referencia a los tipos de Metric View:
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 ```
 
-## Rule: Metric View Measure name must not duplicate a Metric View dimension name
+## Regla: El nombre de una medida de Metric View no debe duplicar el nombre de una dimensión de Metric View
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -77,12 +77,12 @@ var measureNotDimensionRule = SemanticBridge.MetricView.MakeValidationRule<Metri
     "naming",
     (measure, context) =>
         context.DimensionNames.Contains(measure.Name)
-            ? [context.MakeError($"Measure '{measure.Name}' has the same name as a dimension")]
+            ? [context.MakeError($"La medida '{measure.Name}' tiene el mismo nombre que una dimensión")]
             : []
 );
 ```
 
-## Rule: Metric View Measure name must not duplicate another Metric View measure
+## Regla: El nombre de una medida de Metric View no debe duplicar otra medida de Metric View
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -92,33 +92,33 @@ var noDuplicateMeasureRule = SemanticBridge.MetricView.MakeValidationRule<Metric
     "naming",
     (measure, context) =>
         context.MeasureNames.Contains(measure.Name)
-            ? [context.MakeError($"Measure '{measure.Name}' is defined more than once")]
+            ? [context.MakeError($"La medida '{measure.Name}' está definida más de una vez")]
             : []
 );
 ```
 
-## Why separate rules are better
+## Por qué es mejor separar las reglas
 
-Notice that we created two separate rules instead of one combined rule. This is the recommended approach because:
+Fíjate en que creamos dos reglas separadas en lugar de una regla combinada. Este es el enfoque recomendado porque:
 
-1. **Clearer error messages**: Each rule produces a specific, actionable message
-2. **Easier maintenance**: Rules can be added, removed, or modified independently
-3. **Simpler logic**: Each rule checks exactly one condition
-4. **Better categorization**: Rules can be grouped and filtered by purpose
+1. **Mensajes de error más claros**: Cada regla genera un mensaje específico y útil
+2. **Mantenimiento más sencillo**: Las reglas se pueden agregar, quitar o modificar de forma independiente
+3. **Lógica más sencilla**: Cada regla comprueba exactamente una condición
+4. **Mejor categorización**: Las reglas se pueden agrupar y filtrar según su finalidad
 
-## Complete example
+## Ejemplo completo
 
-This Metric View has naming conflicts that will trigger both contextual rules:
+Este Metric View tiene conflictos de nombres que activarán ambas reglas contextuales:
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
-// Create a Metric View with naming conflicts
+// Crear una Metric View con conflictos de nombres
 SemanticBridge.MetricView.Deserialize("""
     version: 0.1
     source: sales.fact.orders
     dimensions:
-      # 'revenue' is used as both a dimension and measure name
+      # 'revenue' se usa tanto como nombre de dimensión como de medida
       - name: revenue
         expr: source.revenue
       - name: quantity
@@ -126,26 +126,26 @@ SemanticBridge.MetricView.Deserialize("""
       - name: order_date
         expr: source.order_date
     measures:
-      # measureNotDimensionRule violation - same name as dimension
+      # infracción de measureNotDimensionRule: mismo nombre que una dimensión
       - name: revenue
         expr: SUM(source.revenue)
-      # noDuplicateMeasureRule violation - 'total_quantity' appears twice
+      # infracción de noDuplicateMeasureRule: 'total_quantity' aparece dos veces
       - name: total_quantity
         expr: SUM(source.quantity)
       - name: total_quantity
         expr: COUNT(source.order_id)
-      # This one is fine
+      # Este está bien
       - name: order_count
         expr: COUNT(source.order_id)
     """);
 
-// Define contextual rules
+// Definir reglas contextuales
 var measureNotDimensionRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(
     "measure_not_dimension_name",
     "naming",
     (measure, context) =>
         context.DimensionNames.Contains(measure.Name)
-            ? [context.MakeError($"Measure '{measure.Name}' has the same name as a dimension")]
+            ? [context.MakeError($"La medida '{measure.Name}' tiene el mismo nombre que una dimensión")]
             : []
 );
 
@@ -154,22 +154,22 @@ var noDuplicateMeasureRule = SemanticBridge.MetricView.MakeValidationRule<Metric
     "naming",
     (measure, context) =>
         context.MeasureNames.Contains(measure.Name)
-            ? [context.MakeError($"Measure '{measure.Name}' is defined more than once")]
+            ? [context.MakeError($"La medida '{measure.Name}' está definida más de una vez")]
             : []
 );
 
-// Run validation
+// Ejecutar la validación
 var diagnostics = SemanticBridge.MetricView.Validate([
     measureNotDimensionRule,
     noDuplicateMeasureRule
 ]).ToList();
 
-// Output results
+// Mostrar resultados
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("CONTEXTUAL VALIDATION RESULTS");
+sb.AppendLine("RESULTADOS DE VALIDACIÓN CONTEXTUAL");
 sb.AppendLine("-----------------------------");
 sb.AppendLine("");
-sb.AppendLine($"Found {diagnostics.Count} issue(s):");
+sb.AppendLine($"Se encontraron {diagnostics.Count} incidencia(s):");
 sb.AppendLine("");
 
 foreach (var diag in diagnostics)
@@ -180,21 +180,21 @@ foreach (var diag in diagnostics)
 Output(sb.ToString());
 ```
 
-**Output:**
+**Salida:**
 
 ```
-CONTEXTUAL VALIDATION RESULTS
+RESULTADOS DE VALIDACIÓN CONTEXTUAL
 -----------------------------
 
-Found 2 issue(s):
+Se encontraron 2 problema(s):
 
-[Error] Measure 'revenue' has the same name as a dimension
-[Error] Measure 'total_quantity' is defined more than once
+[Error] La medida 'revenue' tiene el mismo nombre que una dimensión
+[Error] La medida 'total_quantity' está definida más de una vez
 ```
 
-## Combining with default rules
+## Combinar con las reglas predeterminadas
 
-You can run contextual rules alongside the default validation rules:
+Puedes ejecutar reglas contextuales junto con las reglas de validación predeterminadas:
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -205,25 +205,25 @@ var customRules = new[] {
         "naming",
         (measure, context) =>
             context.DimensionNames.Contains(measure.Name)
-                ? [context.MakeError($"Measure '{measure.Name}' has the same name as a dimension")]
+                ? [context.MakeError($"La medida '{measure.Name}' tiene el mismo nombre que una dimensión")]
                 : []
     )
 };
 
-// Run default rules first
+// Ejecuta primero las reglas predeterminadas
 var defaultDiagnostics = SemanticBridge.MetricView.Validate().ToList();
 
-// Then run custom rules
+// Después ejecuta las reglas personalizadas
 var customDiagnostics = SemanticBridge.MetricView.Validate(customRules).ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Default rule issues: {defaultDiagnostics.Count}");
-sb.AppendLine($"Custom rule issues: {customDiagnostics.Count}");
+sb.AppendLine($"Incidencias de las reglas predeterminadas: {defaultDiagnostics.Count}");
+sb.AppendLine($"Incidencias de las reglas personalizadas: {customDiagnostics.Count}");
 Output(sb.ToString());
 ```
 
-## See also
+## Ver también
 
-- [Semantic Bridge Validation](xref:semantic-bridge-metric-view-validation)
-- [Create Simple Validation Rules](xref:semantic-bridge-validate-simple-rules)
-- [Validate with Default Rules](xref:semantic-bridge-validate-default)
+- [Validación de Semantic Bridge](xref:semantic-bridge-metric-view-validation)
+- [Crear reglas de validación sencillas](xref:semantic-bridge-validate-simple-rules)
+- [Validar con reglas predeterminadas](xref:semantic-bridge-validate-default)
