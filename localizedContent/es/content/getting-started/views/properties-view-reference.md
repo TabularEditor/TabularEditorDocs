@@ -1,6 +1,6 @@
 ---
 uid: properties-view-reference
-title: Properties view
+title: Vista de propiedades
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
