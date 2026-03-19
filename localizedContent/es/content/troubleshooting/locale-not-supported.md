@@ -1,6 +1,6 @@
 ---
 uid: locale-not-supported
-title: Locale Not Supported
+title: Configuración regional no admitida
 author: Morten Lønskov
 updated: 2025-09-02
 applies_to:
@@ -17,52 +17,52 @@ applies_to:
           full: true
 ---
 
-# Locale Not Supported
+# Configuración regional no admitida
 
-You may encounter the warning message:
+Es posible que veas el siguiente mensaje de advertencia en los mensajes:
 
 ```plaintext
-The XXXX locale is not supported
+La configuración regional XXXX no es compatible
 ```
 
-in the Tabular Editor 3 Message view.
+en la vista de mensajes de Tabular Editor 3.
 
-![Locale not supported message](~/content/assets/images/troubleshooting/locale-not-supported-message-view.png)
+![Mensaje de configuración regional no admitida en mensajes](~/content/assets/images/troubleshooting/locale-not-supported-message-view.png)
 
-This issue usually occurs when your local machine uses a **regional configuration not supported by the Analysis Services (SSAS) engine**.  
-In most cases, the error is triggered by another underlying issue or warning, but this message is shown as a result.
+Este problema suele producirse cuando tu equipo usa una **configuración regional que el motor de Analysis Services (SSAS) no admite**.  
+En la mayoría de los casos, el error se desencadena por otro problema o advertencia subyacente, pero este mensaje se muestra como consecuencia en los mensajes.
 
 ---
 
-## Scenarios and Solutions
+## Escenarios y soluciones
 
-### 1. Connecting to a Local SSAS Instance
+### 1. Conexión a una instancia local de SSAS
 
-If you are running SQL Server Analysis Services (SSAS) locally on your machine:
+Si ejecutas SQL Server Analysis Services (SSAS) localmente en tu equipo:
 
-- **Solution:** Change the **service account** used by the SSAS instance.  
-  Updating the account often resolves unsupported locale mismatches.
+- **Solución:** Cambia la **cuenta de servicio** que usa la instancia de SSAS.  
+  Actualizar la cuenta suele resolver incompatibilidades de configuración regional no admitida.
 
 ---
 
-### 2. Connecting to a Remote SSAS, Azure AS, or Power BI
+### 2. Conexión a un SSAS remoto, Azure AS o Power BI
 
-When connecting to a remote instance, you have two possible solutions:
+Al conectarte a una instancia remota, tienes dos posibles soluciones:
 
-#### Option A: Specify Locale in the Connection String
+#### Opción A: especificar la configuración regional en la cadena de conexión
 
-Explicitly set a supported locale (e.g., English – 1033) by adding `LocaleIdentifier=1033` to your connection string.
+Configura explícitamente una configuración regional compatible (p. ej., inglés: 1033) añadiendo `LocaleIdentifier=1033` a tu cadena de conexión.
 
-**Example (Azure AS):**
+**Ejemplo (Azure AS):**
 
 ```plaintext
-Data Source=asazure://westeurope.asazure.windows.net/instance-name;LocaleIdentifier=1033
+Data source=asazure://westeurope.asazure.windows.net/instance-name;LocaleIdentifier=1033
 ```
 
-#### Option B: Change Regional Settings on Your Machine
+#### Opción B: Cambiar la configuración regional en tu equipo
 
-Adjust your local system’s regional and language settings to match a supported locale.
+Ajusta la configuración regional y de idioma de tu sistema local para que coincida con una configuración regional compatible.
 
-- **Recommended settings:**
-  - **Regional format:** English (United States)
-  - **Windows Display Language:** English (United States)
+- **Configuración recomendada:**
+  - **Formato regional:** Inglés (Estados Unidos)
+  - **Idioma de visualización de Windows:** Inglés (Estados Unidos)
