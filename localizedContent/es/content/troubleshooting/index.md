@@ -1,15 +1,15 @@
-# Troubleshooting
+# Solución de problemas
 
-This section contains troubleshooting guides and solutions for common issues.
+Esta sección contiene guías de solución de problemas y soluciones para incidencias comunes.
 
-## In this section
+## En esta sección
 
-- @licensing-activation - Resolving license and activation issues
-- @proxy-settings - Proxy setting issues
-- @locale-not-supported - Locale Not Supported
-- @calendar-blank-value - Calendar function blank date error
-- @direct-lake-entity-updates-reverting - Entity Name Changes Revert in Direct Lake Models
+- @licensing-activation - Resolución de problemas de licencia y activación
+- @proxy-settings - Problemas de configuración del proxy
+- @locale-not-supported - Configuración regional no compatible
+- @calendar-blank-value - Error de fecha en blanco en la función Calendar
+- @direct-lake-entity-updates-reverting - Los cambios en los nombres de las entidades se revierten en los modelos Direct Lake
 
 ---
 
-_Find solutions to common problems and get help when needed._
+_Encuentra soluciones a problemas comunes y obtén ayuda cuando la necesites._
