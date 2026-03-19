@@ -1,67 +1,67 @@
-# How-tos
+# Guías prácticas
 
-This section contains step-by-step guides for accomplishing specific tasks with Tabular Editor.
+Esta sección contiene guías paso a paso para realizar tareas específicas con Tabular Editor.
 
-## In this section
+## En esta sección
 
-### Scripting and Automation
+### Secuencias de comandos y automatización
 
-- [Advanced Scripting](Advanced-Scripting.md) - C# scripting for model manipulation and automation
-- [Script Reference Objects](script-reference-objects.md) - Working with object references in scripts
+- [Scripting avanzado](Advanced-Scripting.md) - C# Script para manipular el modelo y automatizar tareas
+- [Objetos de referencia de scripts](script-reference-objects.md) - Trabajar con referencias a objetos en scripts
 
-### Model Management and Deployment
+### Administración y despliegue de modelos
 
-- [Deployment](../features/deployment.md) - Deploy models to Analysis Services databases
-- [Connect to SSAS](connect-ssas.md) - Connect to and work with SSAS Tabular databases
-- [Load and Save](load-save.md) - Loading and saving model files
-- [Folder Serialization](folder-serialization.md) - Save models as folder structures for version control
-- [Master Model Pattern](Master-model-pattern.md) - Managing multiple models with perspectives
+- [Despliegue](../features/deployment.md) - Desplegar modelos en bases de datos de Analysis Services
+- [Conectar a SSAS](connect-ssas.md) - Conectarse a bases de datos tabulares de SSAS y trabajar con ellas
+- [Cargar y guardar](load-save.md) - Cargar y guardar archivos de modelo
+- [Serialización en carpetas](folder-serialization.md) - Guardar modelos como estructuras de carpetas para el control de versiones
+- [Patrón de modelo maestro](Master-model-pattern.md) - Administrar varios modelos con perspectivas
 
-### Data Import and Tables
+### Importación de datos y tablas
 
-- [Importing Tables](Importing-Tables.md) - Import tables from various data sources
-- [Importing Tables from Excel](importing-tables-from-excel.md) - Excel-specific import procedures
-- [Replace Tables](replace-tables.md) - Replace existing tables with new data sources
+- [Importar tablas](Importing-Tables.md) - Importar tablas desde varias Data sources
+- [Importar tablas desde Excel](importing-tables-from-excel.md) - Procedimientos de importación específicos de Excel
+- [Reemplazar tablas](replace-tables.md) - Reemplazar tablas existentes por nuevas Data sources
 
-### Model Organization and Structure
+### Organización y estructura del modelo
 
-- [Advanced Filtering of Explorer Tree](Advanced-Filtering-of-the-Explorer-Tree.md) - Filter and organize model objects
-- [Drag and Drop](drag-drop.md) - Using drag and drop functionality
-- [Duplicate and Batch Rename](duplicate-batchrename.md) - Efficiently manage object names
-- [Edit Properties](edit-properties.md) - Modify object properties
+- [Filtrado avanzado del árbol del explorador](Advanced-Filtering-of-the-Explorer-Tree.md) - Filtrar y organizar objetos del modelo
+- [Arrastrar y soltar](drag-drop.md) - Usar la funcionalidad de arrastrar y soltar
+- [Duplicar y cambiar nombres en lote](duplicate-batchrename.md) - Administrar nombres de objetos de forma eficiente
+- [Editar propiedades](edit-properties.md) - Modificar propiedades de los objetos
 
-### Translations and Perspectives
+### Traducciones y perspectivas
 
-- [Import/Export Translations](import-export-translations.md) - Manage multi-language support
-- [Perspectives and Translations](perspectives-translations.md) - Working with model perspectives
+- [Importar/Exportar traducciones](import-export-translations.md) - Administrar la compatibilidad multilingüe
+- [Perspectivas y traducciones](perspectives-translations.md) - Trabajar con perspectivas del modelo
 
-### Data Security and Roles
+### Seguridad de datos y roles
 
-- [Roles and Row-Level Security](roles-rls.md) - Implement data security with RLS
+- [Roles y seguridad a nivel de filas](roles-rls.md) - Implementa la seguridad de los datos con RLS
 
-### Connectivity and Integration
+### Conectividad e integración
 
-- [XMLA Analysis Services Connectivity](xmla-as-connectivity.md) - Connect via XMLA endpoints
-- [Power BI XMLA PBIX Workaround](powerbi-xmla-pbix-workaround.md) - Work with Power BI through XMLA
+- [Conectividad XMLA con Analysis Services](xmla-as-connectivity.md) - Conéctate a través de puntos de conexión XMLA
+- [Solución alternativa para PBIX de Power BI con XMLA](powerbi-xmla-pbix-workaround.md) - Trabaja con Power BI a través de XMLA
 
-### Model Maintenance
+### Mantenimiento del modelo
 
-- [Formula Fixup Dependencies](formula-fixup-dependencies.md) - Automatically fix formula references
-- [Metadata Backup](metadata-backup.md) - Backup and restore model metadata
-- [Undo and Redo](undo-redo.md) - Using undo/redo functionality
+- [Dependencias de ajuste de fórmulas](formula-fixup-dependencies.md) - Corrige automáticamente las referencias de fórmulas
+- [Copia de seguridad de metadatos](metadata-backup.md) - Crea una copia de seguridad y restaura los metadatos del modelo
+- [Deshacer y rehacer](undo-redo.md) - Usa la función de deshacer/rehacer
 
-### Semantic Bridge
+### Puente semántico
 
-- @semantic-bridge-load-inspect - Load a Metric View and explore its structure
-- @semantic-bridge-import - Import a Metric View to Tabular and view diagnostics
-- @semantic-bridge-validate-default - Validate with built-in rules
-- @semantic-bridge-validate-simple-rules - Create predicate-based validation rules
-- @semantic-bridge-validate-contextual-rules - Create rules with cross-object checks
-- @semantic-bridge-add-object - Add a new object to a Metric View
-- @semantic-bridge-remove-object - Remove objects from a Metric View
-- @semantic-bridge-rename-objects - Rename objects using copy-modify pattern
-- @semantic-bridge-serialize - Serialize a Metric View back to YAML
+- @semantic-bridge-load-inspect - Carga una vista de métricas y explora su estructura
+- @semantic-bridge-import - Importa una vista de métricas en Tabular y consulta los diagnósticos
+- @semantic-bridge-validate-default - Valida con reglas integradas
+- @semantic-bridge-validate-simple-rules - Crea reglas de validación basadas en predicados
+- @semantic-bridge-validate-contextual-rules - Crea reglas con comprobaciones entre objetos
+- @semantic-bridge-add-object - Agrega un nuevo objeto a una vista de métricas
+- @semantic-bridge-remove-object - Quita objetos de una vista de métricas
+- @semantic-bridge-rename-objects - Cambia el nombre de objetos usando el patrón de copiar y modificar
+- @semantic-bridge-serialize - Serializa una vista de métricas de vuelta a YAML
 
 ---
 
-_Navigate using the table of contents to find guides for specific tasks._
+_Navega por la tabla de contenido para encontrar guías sobre tareas específicas._
