@@ -1,6 +1,6 @@
 ---
 uid: direct-lake-guidance
-title: Direct Lake Guidance
+title: Direct Lake 指南
 author: Daniel Otykier
 updated: 2024-06-18
 applies_to:
@@ -10,107 +10,107 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.22.0
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           none: true
-        - edition: Business
+        - edition: 商业版
           none: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Direct Lake Guidance
+# Direct Lake 指南
 
-With the release of Tabular Editor 3.22.0, we have added support for Direct Lake on OneLake in addition to Direct Lake on SQL. This article provides a short overview of the differences between these two modes, and how they compare to other storage modes available in Power BI semantic models.
+随着 Tabular Editor 3.22.0 的发布，我们在支持 SQL 上的 Direct Lake 之外，也新增了对 OneLake 上的 Direct Lake 的支持。 本文将简要概述这两种模式的差异，并说明它们与 Power BI 语义模型中其他可用存储模式相比有何不同。
 
-## Storage mode overview
+## 存储模式概览
 
-The following table summarizes the storage modes available in Power BI semantic models:
+下表汇总了 Power BI 语义模型中可用的存储模式：
 
-| Storage Mode           | Description                                                                                                                                                                                               | Recommended Use Cases                                                                                                                                                                   |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Import                 | Data is imported into the semantic model and stored in the model's in-memory cache (VertiPaq).                                                                         | When you need fast query performance and can afford to refresh the data periodically.                                                                                   |
-| DirectQuery            | Data is queried directly from the source at query time, without being imported into the model. Supports various sources, such as SQL, KQL and even other semantic models. | When you need real-time data access or when the data volume is too large to fit in memory.                                                                              |
-| Dual                   | A hybrid mode where the engine can choose between returning the imported data or delegating to DirectQuery, depending on the query context.                                               | When your model contains a mix of DirectQuery and Import tables (for example when using aggregations), and you have tables that are related to both. |
-| Direct Lake on OneLake | Utilizes the Delta Parquet story format to quickly swap the data into semantic model memory when needed.                                                                                  | When your data is already available as tables or materialized views in a Fabric Warehouse or Lakehouse.                                                                 |
-| Direct Lake on SQL     | Older version of Direct Lake which utilizes the SQL Analytics Endpoint of Fabric Warehouses or Lakehouses.                                                                                | Not recommended for new development (use Direct Lake on OneLake instead).                                                                            |
-
-> [!NOTE]
-> It is also possible to create tables that contain a mix of partitions in **Import** and **DirectQuery** mode (also known as "hybrid tables"). This is commonly done on large fact tables that require incremental refresh while some data is queried directly from the source. See [this article](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla) for more information.
-
-## Direct Lake on OneLake vs. Direct Lake on SQL
-
-[Direct Lake on OneLake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#key-concepts-and-terminology) was introduced in March 2025 as an alternative to Direct Lake on SQL. With Direct Lake on OneLake, there is no dependency on the SQL endpoint and no fallback to DirectQuery mode. This also means that the [usual restrictions that apply to DirectQuery models](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about#modeling-limitations) do not apply to Direct Lake on OneLake models.
-
-However, as with Direct Lake on SQL, there are still some [limitations that _do_ apply](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). The most important limitations are listed below. See the link for a full list of limitations:
-
-- Calculated columns on Direct Lake tables cannot reference columns that are sourced from OneLake.
-- Calculated tables on Direct Lake models cannot refer columns on Direct Lake tables that are sourced from OneLake.
-
-One possible workaround for the above limitation, is to create a **composite model** by combining Direct Lake tables with Import tables. This is allowed with Direct Lake on OneLake, but not with Direct Lake on SQL. In this case, you would typically use Import mode for smaller dimension tables, where you may need to add custom groupings, which calculated columns are ideal for, while keeping the larger fact tables in Direct Lake mode.
-
-Alternatively, ensure that your source contains the columns it needs. If you add columns through a view, please note that the view must be materialized in the Fabric Warehouse or Lakehouse, as Direct Lake on OneLake does not support non-materialized views.
-
-## Collation
-
-When using **Direct Lake on OneLake**, the collation of the model is the same as for an Import model, which is case-insensitive by default.
-
-For a **Direct Lake on SQL** model, the collation is case-insensitive for queries that do not fallback to DirectQuery. If the query does fallback, the collation depends on the collation of the source. For a Fabric Warehouse, the collation might be case-sensitive, in which case you should specify a [case-sensitive collation on the model](https://data-goblins.com/power-bi/case-specific).
+| 存储模式                     | 说明                                                                         | 推荐使用场景                                                |
+| ------------------------ | -------------------------------------------------------------------------- | ----------------------------------------------------- |
+| 导入                       | 数据将导入语义模型，并存储在模型的内存缓存（VertiPaq）中。                                          | 适用于需要快速查询性能，且可以定期刷新数据的场景。                             |
+| DirectQuery              | 在查询时直接从数据源获取数据，而不会将数据导入模型。 支持多种数据源，例如 SQL、KQL，甚至是其他语义模型。                   | 适用于需要实时访问数据，或数据量过大而无法装入内存的场景。                         |
+| 双重                       | 一种混合模式：引擎会根据查询上下文，在返回已导入的数据与将查询委派给 DirectQuery 之间进行选择。                     | 当你的模型同时包含 DirectQuery 表和导入表（例如使用聚合时），并且存在同时与两者相关联的表时。 |
+| 在 OneLake 上的 Direct Lake | 利用 Delta Parquet 存储格式，在需要时快速将数据加载到语义模型内存中。                                 | 当你的数据已以表或物化视图的形式存在于 Fabric Warehouse 或 Lakehouse 中时。  |
+| 在 SQL 上的 Direct Lake     | Direct Lake 的旧版本，使用 Fabric Warehouse 或 Lakehouse 的 SQL analytics endpoint。 | 不建议用于新开发（改用在 OneLake 上的 Direct Lake）。                 |
 
 > [!NOTE]
-> You cannot change the collation of a model once the metadata has been deployed to Analysis Services / Power BI. As such, if you plan to use Direct Lake on SQL with a case-sensitive Fabric Warehouse, you must set the collation on the model metadata before it's deployed:
+> 还可以创建同时包含 **Import** 和 **DirectQuery** 模式分区的表（也称为“混合表格”）。 这通常用于大型事实表：既需要增量刷新，又希望部分数据直接从源进行查询。 更多信息，请参阅[这篇文章](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla)。
+
+## 在 OneLake 上的 Direct Lake 与在 SQL 上的 Direct Lake
+
+[在 OneLake 上的 Direct Lake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#key-concepts-and-terminology) 于 2025 年三月推出，作为在 SQL 上的 Direct Lake 的替代方案。 使用在 OneLake 上的 Direct Lake 时，不依赖 SQL 端点，也不会回退到 DirectQuery 模式。 这也意味着，适用于 DirectQuery 模型的[常见限制](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about#modeling-limitations)不适用于在 OneLake 上的 Direct Lake 模型。
+
+不过，与在 SQL 上的 Direct Lake 一样，仍然有一些[确实适用的限制](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。 下面列出最重要的限制。 完整限制列表请参阅该链接：
+
+- Direct Lake 表上的计算列不能引用源自 OneLake 的列。
+- Direct Lake 模型中的计算表格不能引用源自 OneLake 的 Direct Lake 表中的列。
+
+针对上述限制的一种可行变通方案，是通过将 Direct Lake 表与导入表组合，创建一个**复合模型**。 在 OneLake 上的 Direct Lake 允许这样做，但在 SQL 上的 Direct Lake 不允许。 在这种情况下，通常会对较小的维度表使用导入模式，因为可能需要添加自定义分组，而计算列非常适合用于此，同时将较大的事实表保持为 Direct Lake 模式。
+
+或者，确保源中包含所需的列。 如果通过视图添加列，请注意该视图必须在 Fabric Warehouse 或 Lakehouse 中物化，因为 OneLake 上的 Direct Lake 不支持非物化视图。
+
+## 排序规则
+
+使用 **OneLake 上的 Direct Lake** 时，模型的排序规则和导入模式一样，默认不区分大小写。
+
+对于 **SQL 上的 Direct Lake** 模型，如果查询不会回退到 DirectQuery，则排序规则不区分大小写。 如果查询发生回退，排序规则取决于数据源的排序规则。 对于 Fabric Warehouse，排序规则可能区分大小写；在这种情况下，你应该在模型上指定一个[区分大小写的排序规则](https://data-goblins.com/power-bi/case-specific)。
+
+> [!NOTE]
+> 一旦元数据已部署到 Analysis Services / Power BI，你就无法更改模型的排序规则。 因此，如果你打算用 SQL 上的 Direct Lake 连接到区分大小写的 Fabric Warehouse，你必须在部署之前先在模型元数据上设置排序规则：
 >
-> 1. Create a new model in Tabular Editor 3 (File > New > Model...)
-> 2. Uncheck "Use workspace database"
-> 3. Set the **Collation** property on the model to `Latin1_General_100_BIN2_UTF8`
-> 4. Save the model (Ctrl+S).
-> 5. Now, open the model from the file you just saved. When prompted to connect to a workspace database, choose "Yes".
+> 1. 在 Tabular Editor 3 中创建一个新模型（File > New > Model...）
+> 2. 取消选中“使用 Workspace 数据库”
+> 3. 将模型的 **Collation** 属性设置为 `Latin1_General_100_BIN2_UTF8`
+> 4. 保存模型（Ctrl+S）。
+> 5. 现在，从你刚保存的文件中打开该模型。 当提示连接到 Workspace 数据库时，选择“Yes”。
 >
-> With this approach, the model metadata gets deployed with the correct collation from the start, and you can then add tables in Direct Lake on SQL mode without running into collation issues.
+> 采用这种方式，模型元数据会从一开始就以正确的排序规则部署。之后你就可以在 SQL 上的 Direct Lake 模式下添加表，而不会遇到排序规则问题。
 
-## Table Import Wizard
+## 表导入向导
 
-To add Direct Lake tables using Tabular Editor 3's Table Import Wizard, choose **Microsoft Fabric Lakehouse**, **Microsoft Fabric Warehouse**, **Microsoft Fabric SQL Database** or **Microsoft Fabric Mirrored Database** as the source:
+要使用 Tabular Editor 3 的表导入向导添加 Direct Lake 表，请选择 **Microsoft Fabric Lakehouse**、**Microsoft Fabric Warehouse**、**Microsoft Fabric SQL Database** 或 **Microsoft Fabric Mirrored Database** 作为数据源：
 
-![Import Table Wizard Fabric](../assets/images/import-table-wizard-fabric.png)
+![Fabric 表导入向导](../assets/images/import-table-wizard-fabric.png)
 
-After signing in, you will be presented with a list of all available Fabric Lakehouses/Warehouses in workspaces you have access to. Select the one you want to connect to and hit **OK**:
+登录后，你会看到一个列表，其中包含你有权访问的 Workspace 中所有可用的 Fabric Lakehouse/Warehouse。 选择你要连接的项，然后点击 **OK**：
 
-![Import Table Wizard Select Lakehouse](../assets/images/import-table-wizard-select-lakehouse.png)
+![表导入向导：选择 Lakehouse](../assets/images/import-table-wizard-select-lakehouse.png)
 
-Unless you want to specify a custom SQL query, or configure the tables for DirectQuery mode, simply hit **Next** to select the tables from a list of tables/views in the source:
+除非你想指定自定义 SQL 查询，或将表配置为 DirectQuery 模式，否则直接点击 **Next**，从数据源的表/视图列表中选择：
 
-![Import Table Wizard Select Vs Custom Query](../assets/images/import-table-wizard-select-vs-custom-query.png)
+![表导入向导：从列表选择 vs 自定义查询](../assets/images/import-table-wizard-select-vs-custom-query.png)
 
-Select the tables/views you wish to import. Note that **non-materialized views** are not supported in Direct Lake on OneLake mode. Attempting to add such a view to the model will result in an error upon saving the model metadata.
+选择你要导入的表/视图。 请注意，OneLake 上的 Direct Lake 模式不支持 **非物化视图**。 尝试将这类视图添加到模型中，保存模型元数据时会报错。
 
-![Import Table Wizard Select Objects](../assets/images/import-table-wizard-select-objects.png)
+![导入表向导：选择对象](../assets/images/import-table-wizard-select-objects.png)
 
-On the last page, choose which mode you want the table partition to be configured with:
+在最后一页，选择要用哪种模式来配置表分区：
 
-![Table Import Wizard Partition Mode](../assets/images/table-import-wizard-partition-mode.png)
+![表导入向导：分区模式](../assets/images/table-import-wizard-partition-mode.png)
 
-The choices are:
+可选项包括：
 
-- Direct Lake on OneLake
-- Direct Lake on SQL
-- Import (M)
+- OneLake 上的 Direct Lake
+- SQL 上的 Direct Lake
+- 导入 (M)
 
 > [!NOTE]
-> If you're working on a model that already contains tables, one or more of the choices mentioned above may not be available, if the model does not support combining tables in different storage modes. For example, if the model contains a table in Direct Lake on SQL mode, you cannot add tables in other modes.
+> 如果你正在处理的模型已包含表，并且该模型不支持将不同存储模式的表组合在一起，那么上述一个或多个选项可能不可用。 例如，如果模型里有一张使用“SQL 上的 Direct Lake”模式的表，你就不能再添加其他模式的表。
 
-## Power Query (M) expressions
+## Power Query (M) 表达式
 
-This section contains a more technical description on how the TOM objects and properties need to be configured, in case you want to manually set up tables for Direct Lake mode without using the Table Import Wizard.
+本节会更偏技术性地说明：如果你想在不使用“表导入向导”的情况下，手动将表设置为 Direct Lake 模式，需要如何配置 TOM 对象和属性。
 
-### Direct Lake on OneLake
+### OneLake 上的 Direct Lake
 
-To manually set up a table for **Direct Lake on OneLake** mode, you need to do the following:
+要手动将表设置为 **OneLake 上的 Direct Lake** 模式，需要执行以下操作：
 
-1. **Create Shared Expression**: Direct Lake tables use "Entity" partitions, which much reference a Shared Expression in the model. Start out by creating this shared expression, if you don't have it already. Name it `DatabaseQuery`:
+1. **创建共享表达式**：Direct Lake 表使用“Entity”分区，该分区必须引用模型中的共享表达式。 如果你还没有该共享表达式，请先创建它。 将其命名为 `DatabaseQuery`：
 
-![Create Shared Expression](../assets/images/create-shared-expression.png)
+![创建共享表达式](../assets/images/create-shared-expression.png)
 
-2. **Configure Shared Expression**: Set the **Kind** property of the expression you created in step 1 to "M", and set the _Expression_\* property to the following M query, replacing the IDs in the URL for your Fabric workspace and Lakehouse/Warehouse:
+2. **配置共享表达式**：将你在步骤 1 中创建的表达式的 **Kind** 属性设为“M”，并将 **Expression** 属性设置为以下 M 查询，同时将 URL 中的 ID 替换为你的 Fabric Workspace 和 Lakehouse/Warehouse 对应的 ID：
 
 ```m
 let
@@ -119,38 +119,38 @@ in
     Source
 ```
 
-3. **Create Table and Entity Partition**: Create a new table in the model (Alt+5), then expand the table partitions in the TOM Explorer, and create new _Entity Partition_:
+3. **创建表和 Entity 分区**：在模型中创建一个新表（Alt+5），然后在 TOM Explorer 中展开该表的分区，并创建新的 _Entity 分区_：
 
-![Create Entity Partition](../assets/images/create-entity-partition.png)
+![创建 Entity 分区](../assets/images/create-entity-partition.png)
 
-Delete the regular import partition that was automatically created when you created the table.
+删除你创建表时自动生成的常规导入分区。
 
-4. **Configure Entity Partition**: Set the following properties on the Entity Partition:
+4. **配置 Entity 分区**：为 Entity 分区设置以下属性：
 
-| Property          | Value                                                                                                                                                                        |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Name              | (Recommended) Set to the same name as the table                                                                                                           |
-| Entity Name       | (Required) Set to the name of the table in the Lakehouse/Warehouse                                                                                        |
-| Expression Source | (Required) Set to the Shared Expression you created in step 1, typically `DatabaseQuery`                                                                  |
-| Mode              | (Required) `DirectLake`                                                                                                                                   |
-| Schema Name       | (Optional) Set to the schema name in the Lakehouse/Warehouse, if applicable. If not set, the default schema will be used. |
+| 属性    | 值                                                      |
+| ----- | ------------------------------------------------------ |
+| 名称    | （推荐）设置为与表相同的名称                                         |
+| 实体名称  | （必填）设置为 Lakehouse/Warehouse 中该表的名称                     |
+| 表达式来源 | （必填）设置为在步骤 1 中创建的共享表达式，通常为 `DatabaseQuery`             |
+| 模式    | （必填）`DirectLake`                                       |
+| 架构名称  | （可选）如适用，设置为 Lakehouse/Warehouse 中的架构名称。 如果未设置，将使用默认架构。 |
 
-The final result should look like this:
+最终结果应如下所示：
 
-![Configure Entity Partition](../assets/images/configure-entity-partition.png)
+![配置实体分区](../assets/images/configure-entity-partition.png)
 
-5. **Update column metadata**: At this stage, you should be able to use Tabular Editor's **Update Table Schema** feature to update the column metadata for the table. This will automatically retrieve the column names and data types from the Lakehouse/Warehouse:
+5. **更新列元数据**：在此阶段，你应该可以使用 Tabular Editor 的 **更新表架构** 功能来更新该表的列元数据。 这会自动从 Lakehouse/Warehouse 检索列名和数据类型：
 
-![Update Table Schema Entity](../assets/images/update-table-schema-entity.png)
+![更新表架构实体](../assets/images/update-table-schema-entity.png)
 
-Alternatively, manually add Data Columns to the table (Alt+4) and specify the `Name`, `Data Type`, `Source Column` and any other relevant properties for each column.
+或者，手动向表中添加数据列（Alt+4），并为每一列指定 `Name`、`Data Type`、`Source Column` 以及其他相关属性。
 
 > [!NOTE]
-> When a Direct Lake table is added to the model, it needs to be manually "refreshed" after the first metadata deployment. Otherwise, the table will not contain any data when queried. This refresh only needs to be performed once. Tabular Editor 3 will automatically refresh the table when the model metadata is saved, if the **Auto-refresh when saving new tables** under **Tools > Preferences > Model Deployment > Data Refresh**.
+> 将 Direct Lake 表添加到模型后，在首次部署元数据后需要手动“刷新”一次。 否则，查询时该表将不包含任何数据。 此刷新只需执行一次。 如果在 **工具 > 偏好 > 模型部署 > 数据刷新** 下启用 **保存新表时自动刷新**，Tabular Editor 3 会在保存模型元数据时自动刷新该表。
 
-### Direct Lake on SQL
+### SQL 上的 Direct Lake
 
-To manually set up a table for **Direct Lake on SQL** mode, follow the steps in the section above for Direct Lake on OneLake, but use the following M query in the Shared Expression instead:
+要手动将表设置为 **SQL 上的 Direct Lake** 模式，请按照上文“在 OneLake 上使用 Direct Lake”一节的步骤操作，但在共享表达式中改用以下 M 查询：
 
 ```m
 let
@@ -159,17 +159,17 @@ in
     database
 ```
 
-Replace `<sql-endpoint>` with the connection string of the [SQL Analytics Endpoint of the Fabric Warehouse](https://learn.microsoft.com/en-us/fabric/data-warehouse/query-warehouse) or [Lakehouse](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint), and `<warehouse/lakehouse name>` with the name of the Warehouse or Lakehouse.
+将 `<sql-endpoint>` 替换为 [Fabric Warehouse 的 SQL analytics endpoint](https://learn.microsoft.com/en-us/fabric/data-warehouse/query-warehouse) 或 [Lakehouse 的 SQL analytics endpoint](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint) 的连接字符串；将 `<warehouse/lakehouse name>` 替换为相应的 Warehouse 或 Lakehouse 名称。
 
-### Import from Lakehouse / Warehouse
+### 从 Lakehouse / Warehouse 导入
 
-If you want to configure a table for **Import** mode while sourcing data from a Fabric Lakehouse or Warehouse, the steps are as follows:
+如果你希望在从 Fabric Lakehouse 或 Warehouse 获取数据的同时，将表配置为 **导入** 模式，可按以下步骤操作：
 
-1. **Create table**: Create a new table in the model (Alt+5), then expand the table partitions in the TOM Explorer. By default, you should see a single partition of type "Import" created automatically:
+1. **创建表**：在模型中创建一个新表（Alt+5），然后在 TOM Explorer 中展开该表的分区。 默认情况下，你应该会看到系统自动创建的一个“Import”类型分区：
 
-![M Import Partition](../assets/images/m-import-partition.png)
+![M 导入分区](../assets/images/m-import-partition.png)
 
-2. **Configure Import Partition**: Set the following M query on the Import Partition:
+2. **配置 Import 分区**：在 Import 分区上设置以下 M 查询：
 
 ```m
 let
@@ -179,19 +179,19 @@ in
     Data
 ```
 
-Replace `<sql-endpoint>` with the connection string of the [SQL Analytics Endpoint of the Fabric Warehouse](https://learn.microsoft.com/en-us/fabric/data-warehouse/query-warehouse) or [Lakehouse](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint), and `<warehouse/lakehouse name>` with the name of the Warehouse or Lakehouse.
+将 `<sql-endpoint>` 替换为 [Fabric Warehouse 的 SQL analytics endpoint](https://learn.microsoft.com/en-us/fabric/data-warehouse/query-warehouse) 或 [Lakehouse 的 SQL analytics endpoint](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-sql-analytics-endpoint) 的连接字符串；将 `<warehouse/lakehouse name>` 替换为相应的 Warehouse 或 Lakehouse 名称。
 
-Replace `<schema-name>` with the schema name in the Warehouse/Lakehouse, and `<table/view-name>` with the name of the table or view you want to import. Note that tables in Import Mode can use non-materialized views as the data source, since the data is queried through the SQL endpoint during refresh operations.
+将 `<schema-name>` 替换为 Warehouse/Lakehouse 中的架构名称，并将 `<table/view-name>` 替换为你要导入的表或视图名称。 注意：导入模式下的表可以使用非物化视图作为数据源，因为刷新时会通过 SQL 端点查询数据。
 
-3. **Update column metadata**: Use Tabular Editor's **Update Table Schema** feature to update the column metadata for the table. This will automatically retrieve the column names and data types from the Lakehouse/Warehouse. Alternatively, create Data Columns manually (Alt+4) and specify the `Name`, `Data Type`, `Source Column` and any other relevant properties for each column.
+3. **更新列元数据**：使用 Tabular Editor 的 **Update Table Schema** 功能更新该表的列元数据。 此操作会自动从 Lakehouse/Warehouse 获取列名和数据类型。 或者，手动创建数据列（Alt+4），并为每一列指定 `Name`、`Data Type`、`Source Column` 以及其他相关属性。
 
-## Converting between storage modes
+## 在不同存储模式之间转换
 
-It is straightforward to convert between Direct Lake on SQL and Direct Lake on OneLake using the information in this article, because you only need to modify the M query of the Shared Expression referenced by the Direct Lake partitions.
+根据本文中的信息，在 Direct Lake on SQL 与 Direct Lake on OneLake 之间转换很简单，因为你只需要修改 Direct Lake 分区所引用的共享表达式的 M 查询。
 
-If you want to convert from Import to Direct Lake it's slightly more complicated because of the different partition types involved.
+如果你想从导入模式转换为 Direct Lake，会稍微复杂一些，因为涉及不同的分区类型。
 
-To make things easier, we have prepared a set of C# scripts that can help you convert between different storage modes:
+为简化操作，我们准备了一组 C# Script，可帮助你在不同存储模式之间进行转换：
 
-- [Convert Direct Lake on SQL to Direct Lake on OneLake](xref:script-convert-dlsql-to-dlol)
-- [Convert Import to Direct Lake on OneLake](xref:script-convert-import-to-dlol)
+- [将 Direct Lake on SQL 转换为 Direct Lake on OneLake](xref:script-convert-dlsql-to-dlol)
+- [将导入模式转换为 Direct Lake on OneLake](xref:script-convert-import-to-dlol)
