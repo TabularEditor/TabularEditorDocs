@@ -1,6 +1,6 @@
 ---
 uid: master-model-pattern
-title: Master Model Pattern
+title: Patrón del modelo maestro
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,158 +9,158 @@ applies_to:
       full: true
 ---
 
-# Master Model Pattern
+# Patrón del modelo maestro
 
-It is not uncommon to have several Tabular models in an organisation, with a substantial amount of functional overlap. For the development team, keeping these models up to date with shared features can be a pain point. In this article, we'll see an alternate approach that may be suitable in situations where it makes sense to combine all these models into a single "Master" model, that is then deployed partially into several different subset models. Tabular Editor enables this approach by utilising perspectives in a special way (while still allowing perspectives to work the usual way).
+No es raro que una organización tenga varios modelos tabulares, con un solapamiento funcional considerable. Para el equipo de desarrollo, mantener estos modelos al día con funcionalidades compartidas puede ser un quebradero de cabeza. En este artículo veremos un enfoque alternativo que puede ser adecuado cuando tenga sentido combinar todos estos modelos en un único modelo "maestro", que luego se despliega parcialmente en varios modelos derivados distintos. Tabular Editor habilita este enfoque utilizando las perspectivas de una forma especial (sin dejar de permitir que las perspectivas funcionen de la manera habitual).
 
-**Disclaimer:** While this technique works, it is not supported by Microsoft, and there is a fair amount of learning, scripting and hacking involved. Decide for yourself whether you think it's the right approach for your team.
+**Descargo de responsabilidad:** Aunque esta técnica funciona, Microsoft no la admite y requiere una buena dosis de aprendizaje, escritura de scripts y algo de hacking. Decide por ti mismo si crees que es el enfoque adecuado para tu equipo.
 
-For simplicity, consider the AdventureWorks sample model:
+Para simplificar, consideremos el modelo de ejemplo AdventureWorks:
 
 ![image](https://user-images.githubusercontent.com/8976200/43959290-895c1c96-9cae-11e8-8112-008f54cb400a.png)
 
-Let's say that for some reason, these is a need to deploy everything relating to Internet Sales as one model, and everything relating to Reseller Sales as another. This could be for security reasons, performance, scalability, or maybe even because your team is servicing a number of external clients, where each client needs their own copy of the model, containing both shared and specific functionality.
+Supongamos que, por alguna razón, hay que desplegar todo lo relacionado con Internet Sales como un modelo y todo lo relacionado con Reseller Sales como otro. Puede ser por motivos de seguridad, rendimiento, escalabilidad o incluso porque tu equipo da servicio a varios clientes externos y cada cliente necesita su propia copia del modelo, con funcionalidad tanto compartida como específica.
 
-Instead of actually maintaining one development branch for each of the different versions, the technique presented here, lets you maintain just one model using metadata to indicate how the model should be split upon deployment.
+En lugar de mantener una rama de desarrollo para cada una de las versiones, la técnica que se presenta aquí te permite mantener un único modelo y usar metadatos para indicar cómo debe dividirse en el momento del despliegue.
 
-## (Ab)using perspectives
+## (Ab)uso de perspectivas
 
-The idea is quite simple. Start by adding a number of new perspectives to your model, corresponding to the number of target models you need to deploy to. Make sure to prefix these perspectives in a consistent way, to separate them from user-oriented perspectives:
+La idea es bastante simple. Empieza agregando varias perspectivas nuevas al modelo, en función del número de modelos de destino que necesites implementar. Asegúrate de anteponer un prefijo coherente a estas perspectivas para separarlas de las perspectivas orientadas al usuario:
 
 ![image](https://user-images.githubusercontent.com/8976200/43960154-6b637042-9cb1-11e8-906b-6671bbb9558e.png)
 
-Here, we use a `$`-sign as the prefix on the perspective names. Later on we will see how these perspectives are stripped from the model, so that end users will not see them. They are only used by the model developers.
+Aquí usamos el signo `-` como prefijo en los nombres de las perspectivas. Más adelante veremos cómo se eliminan estas perspectivas del modelo, de modo que los usuarios finales no las vean. Solo las usan los desarrolladores del modelo.
 
-Now, simply add all objects needed in the individual models to these perspectives. Use the Perspective dropdown in Tabular Editor to confirm that a model contains the necessary objects. Here's a handy script that can be used to ensure that all dependencies are included in the perspective as well:
+Ahora, simplemente agrega a estas perspectivas todos los objetos que se necesiten en los modelos individuales. Usa la lista desplegable de perspectiva en Tabular Editor para confirmar que un modelo contiene los objetos necesarios. Aquí tienes un script práctico que también puedes usar para asegurarte de que todas las dependencias estén incluidas en la perspectiva:
 
 ```csharp
-// Look through all hierarchies in the current perspective:
+// Recorre todas las jerarquías de la perspectiva actual:
 foreach(var h in Model.AllHierarchies.Where(h => h.InPerspective[Selected.Perspective]))
 {
-    // Make sure columns used in hierarchy levels are included in the perspective:
+    // Asegúrate de que las columnas usadas en los niveles de jerarquía estén incluidas en la perspectiva:
     foreach(var level in h.Levels) {
         level.Column.InPerspective[Selected.Perspective] = true;
     }
 }
 
-// Loop through all measures and columns in the current perspective:
+// Recorre todas las medidas y columnas de la perspectiva actual:
 foreach(var obj in Model.AllMeasures.Cast<ITabularPerspectiveObject>()
     .Concat(Model.AllColumns).Where(m => m.InPerspective[Selected.Perspective])
     .OfType<IDaxDependantObject>().ToList())
 {
-    // Loop through all objects that the current object depends on:
+    // Recorre todos los objetos de los que depende el objeto actual:
     foreach(var dep in obj.DependsOn.Deep())
     {
-        // Include columns, measure and table dependencies:
+        // Incluye las dependencias de columnas, medidas y tablas:
         var columnDep = dep as Column; if(columnDep != null) columnDep.InPerspective[Selected.Perspective] = true;
         var measureDep = dep as Measure; if(measureDep != null) measureDep.InPerspective[Selected.Perspective] = true;
         var tableDep = dep as Table; if(tableDep != null) tableDep.InPerspective[Selected.Perspective] = true;
     }    
 }
 
-// Look through all columns that have a SortByColumn in the current perspective:
+// Recorre todas las columnas que tienen una SortByColumn en la perspectiva actual:
 foreach(var c in Model.AllColumns.Where(c => c.InPerspective[Selected.Perspective] && c.SortByColumn != null))
 {
     c.SortByColumn.InPerspective[Selected.Perspective] = true;   
 }
 ```
 
-**Explanation:** First, the script loops through all hierarchies in the current perspective (the perspective currently selected in the dropdown at the top of the screen). For every such hierarchy, it ensures that all columns used as hierarchy levels appear in the perspective. Next, the script loops through all columns and measures of the current perspective. For each of these objects, all DAX dependencies in the form of measure-, column- or table references are also included in the perspective. Please note that expressions such as `DISTINCTCOUNT('Customer'[CustomerId])` will result in all columns of the 'Customer' table being included in the perspective, as Tabular Editor treats such an expression as having a dependency both on the [CustomerId] column itself, and on the 'Customer' table. Lastly, the script ensures that any columns that are used as a "Sort By"-column, are also included in the perspective.
+**Explicación:** Primero, el script recorre todas las jerarquías de la perspectiva actual (la perspectiva seleccionada en ese momento en la lista desplegable de la parte superior de la pantalla). Para cada una de estas jerarquías, se asegura de que todas las columnas usadas como niveles de jerarquía aparezcan en la perspectiva. A continuación, el script recorre todas las columnas y medidas de la perspectiva actual. Para cada uno de estos objetos, también se incluyen en la perspectiva todas las dependencias de DAX en forma de referencias a medidas, columnas o tablas. Ten en cuenta que expresiones como `DISTINCTCOUNT('Customer'[CustomerId])` harán que se incluyan en la perspectiva todas las columnas de la tabla 'Customer', ya que Tabular Editor trata ese tipo de expresión como si tuviera una dependencia tanto de la propia columna [CustomerId] como de la tabla 'Customer'. Por último, el script se asegura de que cualquier columna que se use como columna de "Ordenar por" también se incluya en la perspectiva.
 
-I recommend saving this script as a Custom Action at the Model level, to make it easy to invoke it going forward.
+Te recomiendo guardar este script como una acción personalizada a nivel de modelo para que te resulte fácil ejecutarlo en adelante.
 
-By the way, if you want to make a copy of a perspective, you can already do that through the UI. Click on the "Perspectives" node in the explorer tree, and then click the ellipsis button in the property grid:
+Por cierto, si quieres hacer una copia de una perspectiva, ya puedes hacerlo desde la IU. Haz clic en el nodo "perspectivas" del árbol del explorador y, después, haz clic en el botón de puntos suspensivos de la cuadrícula de propiedades:
 
 ![image](https://user-images.githubusercontent.com/8976200/44028910-c7ffab80-9efb-11e8-813a-5b0f5c137bab.png)
 
-This will open a dialog that lets you create and delete perspectives, as well as clone existing perspectives:
+Esto abrirá un cuadro de diálogo que te permite crear y eliminar perspectivas, así como clonar las existentes:
 
 ![image](https://user-images.githubusercontent.com/8976200/44028953-f13c91ca-9efb-11e8-936a-1f0e1d4eb93f.png)
 
-To supplement this, here's a script that removes all invisible and unused objects from a perspective, in case you need to clean up a bit:
+Para complementar esto, aquí tienes un script que elimina de una perspectiva todos los objetos invisibles y sin uso, por si necesitas hacer un poco de limpieza:
 
 ```csharp
-// Loop through all columns of the current perspective:
+// Recorre todas las columnas de la perspectiva actual:
 foreach(var c in Model.AllColumns.Where(c => c.InPerspective[Selected.Perspective])) {
     if(
-        // If the column is hidden (or the parent table is hidden):
+        // Si la columna está oculta (o la tabla principal está oculta):
         (c.IsHidden || c.Table.IsHidden) 
 
-        // And not used in any relationships:
+        // Y no se usa en ninguna relación:
         && !c.UsedInRelationships.Any()
         
-        // And not used as the SortByColumn for any other columns in the perspective:
+        // Y no se usa como SortByColumn para ninguna otra columna de la perspectiva:
         && !c.UsedInSortBy.Any(sb => !sb.IsHidden && sb.InPerspective[Selected.Perspective])
         
-        // And not used in any hierarchies in the perspective:
+        // Y no se usa en ninguna jerarquía de la perspectiva:
         && !c.UsedInHierarchies.Any(h => h.InPerspective[Selected.Perspective])
         
-        // And not referenced in any DAX expression for other visible objects in the perspective:
+        // Y no se hace referencia a ella en ninguna expresión DAX de otros objetos visibles de la perspectiva:
         && !c.ReferencedBy.Deep().OfType<ITabularPerspectiveObject>()
             .Any(obj => obj.InPerspective[Selected.Perspective] && !(obj as IHideableObject).IsHidden)
             
-        // And not referenced by any roles:
+        // Y no se hace referencia a ella desde ningún rol:
         && !c.ReferencedBy.Roles.Any()    )
     {
-        // If all of the above, then the column can be removed from the current perspective:
+        // Si se cumple todo lo anterior, la columna se puede quitar de la perspectiva actual:
         c.InPerspective[Selected.Perspective] = false; 
     }
 }
 
-// Loop through all measures of the current perspective:
+// Recorre todas las medidas de la perspectiva actual:
 foreach(var m in Model.AllMeasures.Where(m => m.InPerspective[Selected.Perspective])) {
     if(
-        // If the measure is hidden (or the parent table is hidden):
+        // Si la medida está oculta (o la tabla principal está oculta):
         (m.IsHidden || m.Table.IsHidden) 
 
-        // And not referenced in any DAX expression for other visible objects in the perspective:
+        // Y no se hace referencia a ella en ninguna expresión DAX de otros objetos visibles de la perspectiva:
         && !m.ReferencedBy.Deep().OfType<ITabularPerspectiveObject>()
             .Any(obj => obj.InPerspective[Selected.Perspective] && !(obj as IHideableObject).IsHidden)
     )
     {
-        // If all of the above, then the column can be removed from the current perspective:
+        // Si se cumple todo lo anterior, la medida se puede quitar de la perspectiva actual:
         m.InPerspective[Selected.Perspective] = false; 
     }
 }
 ```
 
-**Explanation:** The script first loops through all columns of the currently selected perspective. It removes a column from the perspective only if all of the following are true:
+**Explicación:** Primero, el script recorre todas las columnas de la perspectiva seleccionada actualmente. Quita una columna de la perspectiva solo si se cumple todo lo siguiente:
 
-- The column is hidden (or the table in which the column resides is hidden)
-- The column does not participate in any relationships
-- The column is not used as the SortByColumn of any other visible column in the perspective
-- The column is not used as a level in any hierarchies in the perspective
-- The column is not directly or indirectly referenced in any DAX expressions on other visible objects in the perspective
-- The column is not used in any row level filter expressions
+- La columna está oculta (o la tabla que contiene la columna está oculta)
+- La columna no participa en ninguna relación
+- La columna no se usa como SortByColumn de ninguna otra columna visible en la perspectiva
+- La columna no se usa como nivel en ninguna jerarquía de la perspectiva
+- No se hace referencia directa ni indirecta a la columna en ninguna expresión DAX de otros objetos visibles en la perspectiva
+- La columna no se usa en ninguna expresión de filtro a nivel de fila
 
-For measures, we do the same thing, but simplified to only remove measures that meet the following criteria:
+Para las medidas, hacemos lo mismo, pero de forma simplificada: solo quitamos las medidas que cumplan los siguientes criterios:
 
-- The measure is hidden (or the table in which the measure resides is hidden)
-- The measure is not directly or indirectly referenced in any DAX expressions on other visible objects in the perspective
+- La medida está oculta (o la tabla donde se encuentra la medida está oculta)
+- No se hace referencia a la medida, directa ni indirectamente, en ninguna expresión DAX de otros objetos visibles de la perspectiva
 
-If you're a team of developers working on the model, you should already be using Tabular Editors ["Save to Folder" functionality](xref:folder-serialization) together with a source control environment such as Git. Make sure to check the "Serialize perspectives per-object" option under "File" > "Preferences" > "Save to Folder", to avoid getting heaps of merge conflicts on your perspective definitions.
+Si trabajas en un equipo de desarrolladores en el modelo, ya deberías estar usando la funcionalidad ["Guardar en carpeta"](xref:folder-serialization) de Tabular Editor junto con un entorno de control de código fuente como Git. Asegúrate de activar la opción "Serializar perspectivas por objeto" en "Archivo" > "Preferencias" > "Guardar en carpeta" para evitar un montón de conflictos de fusión en las definiciones de tus perspectivas.
 
 ![image](https://user-images.githubusercontent.com/8976200/44029969-935e0efe-9eff-11e8-93de-c1223f7ebe7f.png)
 
-## Adding more fine-grained control
+## Añadir un control más granular
 
-By now, you've probably guessed that we're going to use scripting to create one version of the model for every of our prefixed developer perspectives. The script will simply remove all objects from the model, that are not included in a given developer perspective. However, before we do that, there are a couple more situations we need to handle.
+A estas alturas, probablemente ya hayas adivinado que vamos a usar scripts para crear una versión del modelo para cada una de nuestras perspectivas de desarrollador prefijadas. El script simplemente quitará del modelo todos los objetos que no estén incluidos en una perspectiva de desarrollador determinada. Sin embargo, antes de hacerlo, hay un par de situaciones más que debemos contemplar.
 
-### Controlling non-perspective objects
+### Controlar objetos que no pertenecen a ninguna perspectiva
 
-Some objects, such as perspectives, data sources and roles, are not included nor excluded from perspectives themselves, but we may still need a way to specify which of our model versions they should belong to. For this, we're going to use annotations. So going back to our Adventure Works model, we may want the "Inventory" and "Internet Operation" perspectives to appear in "$InternetModel" and "$ManagementModel", while "Reseller Operation" should appear in "$ResellerModel" and "$ManagementModel".
+Algunos objetos, como las perspectivas, los Data sources y los roles, no se incluyen ni se excluyen en las propias perspectivas, pero aun así puede que necesitemos una forma de especificar a qué versiones del modelo deben pertenecer. Para esto, vamos a usar anotaciones. Volviendo a nuestro modelo de Adventure Works, puede que queramos que las perspectivas "Inventory" y "Internet Operation" aparezcan en "$InternetModel" y "$ManagementModel", mientras que "Reseller Operation" debería aparecer en "$ResellerModel" y "$ManagementModel".
 
-So let's add a new annotation called "DevPerspectives" on each of the 3 original perspectives, and let's just supply the names of the developer perspectives as a comma-separated string:
+Así que vamos a añadir una nueva anotación llamada "DevPerspectives" en cada una de las 3 perspectivas originales, y simplemente proporcionaremos los nombres de las perspectivas de desarrollador como una cadena separada por comas:
 
 ![image](https://user-images.githubusercontent.com/8976200/44032304-01bdcc70-9f07-11e8-9b28-db0912ea1ade.png)
 
-When adding new _user_ perspectives to the model, remember to add the same annotation and provide the names of the developer perspectives that you want the _user_ perspective included in. When scripting the final model versions later on, we will use the information in these annotations to include the perspectives needed. We can do the same thing for data sources and roles.
+Cuando agregues nuevas perspectivas de _usuario_ al modelo, recuerda añadir la misma anotación y proporcionar los nombres de las perspectivas de desarrollador en las que quieres que se incluya la perspectiva de _usuario_. Cuando más adelante generemos mediante scripting las versiones finales del modelo, usaremos la información de estas anotaciones para incluir las perspectivas necesarias. Podemos hacer lo mismo con los Data sources y los roles.
 
-### Controlling object metadata
+### Controlar metadatos de los objetos
 
-There may also be situations where the same measure should have slightly different expressions or format strings across the different model versions. Again, we can use annotation to provide the metadata per developer perspective, and then apply the metadata when we script out the final model.
+También puede haber situaciones en las que la misma medida deba tener expresiones o cadenas de formato ligeramente distintas entre las diferentes versiones del modelo. De nuevo, podemos usar anotaciones para proporcionar los metadatos por perspectiva de desarrollador y, luego, aplicar esos metadatos cuando generemos mediante scripting el modelo final.
 
-The easiest way to get all object properties serialized into text, would probably be the [ExportProperties](/Useful-script-snippets#export-object-properties-to-a-file) script function. However, that's a little overkill for our use case, so let's just specify directly which properties we want to store as annotations. Create the following script:
+La forma más sencilla de serializar todas las propiedades de los objetos en texto probablemente sea la función de script [ExportProperties](/Useful-script-snippets#export-object-properties-to-a-file). Sin embargo, para nuestro caso de uso es un poco excesivo, así que vamos a especificar directamente qué propiedades queremos guardar como anotaciones. Crea el siguiente script:
 
 ```csharp
 foreach(var m in Selected.Measures) { 
@@ -170,11 +170,11 @@ foreach(var m in Selected.Measures) {
 }
 ```
 
-And save it as a custom action named "Save Metadata as Annotations":
+A continuación, guárdalo como una acción personalizada llamada "Save Metadata as Annotations":
 
 ![image](https://user-images.githubusercontent.com/8976200/44033695-7a754482-9f0b-11e8-937b-0bc0987ce7cb.png)
 
-Similarly, save the following script as a custom action called "Load Metadata from Annotations":
+Del mismo modo, guarda el siguiente script como una acción personalizada llamada "Load Metadata from Annotations":
 
 ```csharp
 foreach(Measure m in Selected.Measures) { 
@@ -185,40 +185,40 @@ foreach(Measure m in Selected.Measures) {
 }
 ```
 
-The idea is that we create one annotation for each of the properties we would like to maintain different versions of, per developer perspective. If you need to maintain other properties than those shown in the script (Expression, FormatString, Description) separately, just add them to the script. You can do the same thing for other object types, but it probably won't make sense for much other than measures and perhaps calculated columns and partitions (to maintain different query expressions per model version, for example).
+La idea es crear una anotación para cada una de las propiedades de las que queremos mantener versiones distintas, según la perspectiva del desarrollador. Si necesitas mantener por separado otras propiedades además de las que se muestran en el script (Expression, FormatString, Description), simplemente añádelas al script. Puedes hacer lo mismo con otros tipos de objetos, pero probablemente no tenga mucho sentido salvo para medidas y quizá columnas calculadas y particiones (para mantener, por ejemplo, distintas expresiones de consulta por versión del modelo).
 
-Use your new custom actions to apply model version specific changes to the developer perspectives (or add the annotations by hand). For example, in our Adventure Works sample, we want the [Day Count] measure to have a different expression in the $ResellerModel perspective, so we apply the changes to the measure, and invoke the "Save Metadata as Annotations" action while having selected the "$ResellerModel" perspective in the dropdown:
+Usa tus nuevas acciones personalizadas para aplicar cambios específicos de la versión del modelo a las perspectivas del desarrollador (o añade las anotaciones a mano). Por ejemplo, en nuestro ejemplo de Adventure Works, queremos que la medida [Day Count] tenga una expresión diferente en la perspectiva $ResellerModel; para ello, aplicamos los cambios a la medida y ejecutamos la acción "Save Metadata as Annotations" con la perspectiva "$ResellerModel" seleccionada en el desplegable:
 
 ![image](https://user-images.githubusercontent.com/8976200/44033944-3104e414-9f0c-11e8-9f06-396bf85a0e4f.png)
 
-In the screenshot above, we have 3 annotations for each of the developer perspectives. In reality, though, we would only need to create these annotations for those developer perspectives where the properties should differ from their native values.
+En la captura anterior, tenemos 3 anotaciones para cada una de las perspectivas del desarrollador. Sin embargo, en la práctica solo tendríamos que crear estas anotaciones para aquellas perspectivas del desarrollador en las que las propiedades deban diferir de sus valores originales.
 
-## Altering partition queries
+## Modificar las consultas de partición
 
-We can use a similar technique to apply changes to partition queries between the different versions. For example, we may want different SQL `WHERE` criterias on some partition queries depending on the version. Let's start by creating a set of new annotations on our _table_ objects, to specify the base SQL query we want our partitions to use for each version. Here, for example, we want to restrict which records are included in the Product table on two of our three versions:
+Podemos usar una técnica similar para aplicar cambios a las consultas de partición entre las distintas versiones. Por ejemplo, quizá quieras criterios SQL `WHERE` distintos en algunas consultas de partición según la versión. Empecemos creando un conjunto de nuevas anotaciones en nuestros objetos de _tabla_ para especificar la consulta SQL base que queremos que usen nuestras particiones para cada versión. Aquí, por ejemplo, queremos restringir qué registros se incluyen en la tabla Product en dos de nuestras tres versiones:
 
 ![image](https://user-images.githubusercontent.com/8976200/44736562-69221580-aaa4-11e8-82ee-88388015d30d.png)
 
-For tables that have multiple partitions, we specify the WHERE criteria using "placeholders", that will be replaced later on:
+En las tablas que tienen varias particiones, especifica los criterios WHERE mediante "marcadores de posición", que se reemplazarán más adelante:
 
 ![image](https://user-images.githubusercontent.com/8976200/44737015-b3f05d00-aaa5-11e8-9bad-cadd5b4dae35.png)
 
-Define the placeholder values within each partition (note, you must be using [Tabular Editor v. 2.7.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.3) or newer to edit partition annotations through the UI):
+Define los valores de los marcadores de posición dentro de cada partición (nota: debes usar [Tabular Editor v. 2.7.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.3) o una versión posterior para editar las anotaciones de partición desde la interfaz de usuario):
 
 ![image](https://user-images.githubusercontent.com/8976200/44737199-2a8d5a80-aaa6-11e8-8813-8189b593da98.png)
 
-In dynamic partitioning scenarios, don't forget to include these annotations in the script you're using when creating the new partitions. In the next section, we'll see how to apply these placeholder values during deployment.
+En escenarios de particionado dinámico, no olvides incluir estas anotaciones en el script que uses al crear las nuevas particiones. En la siguiente sección, veremos cómo aplicar estos valores de los marcadores de posición durante la implementación.
 
-## Deploying different versions
+## Despliegue de distintas versiones
 
-Finally, we are ready to deploy our model as 3 different versions. Unfortunately, the Deployment Wizard UI in Tabular Editor cannot split up the model for us based on the perspectives and annotations we created, so we'd have to create an additional script, that strips down our model to a specific version. This script can then be executed as part of a command-line deployment, so that the whole deployment process can be packaged in a command file, a PowerShell executable or maybe even integrated in your build/automated deployment process?
+Por fin, estamos listos para desplegar nuestro modelo en 3 versiones diferentes. Por desgracia, la interfaz del Asistente de implementación de Tabular Editor no puede dividir el modelo en función de las perspectivas y anotaciones que hemos creado, así que tendríamos que crear un script adicional que reduzca nuestro modelo a una versión concreta. ¿Este script puede ejecutarse entonces como parte de un despliegue desde la línea de comandos, de modo que todo el proceso de despliegue pueda empaquetarse en un archivo de comandos, un ejecutable de PowerShell o quizá incluso integrarse en tu proceso de compilación/despliegue automatizado?
 
-The script we need looks like the following. The idea is that we create one script per developer perspective. Save the script as a text file and name it something like `ResellerModel.cs`:
+El script que necesitamos es el siguiente. La idea es crear un script por cada perspectiva de desarrollador. Guarda el script como un archivo de texto y llámalo, por ejemplo, `ResellerModel.cs`:
 
 ```csharp
-var version = "`$`ResellerModel"; // TODO: Replace this with the name of your developer perspective
+var version = "ResellerModel"; // TODO: Sustituye esto por el nombre de tu perspectiva de desarrollador
 
-// Remove tables, measures, columns and hierarchies that are not part of the perspective:
+// Quita tablas, medidas, columnas y jerarquías que no formen parte de la perspectiva:
 foreach(var t in Model.Tables.ToList()) {
     if(!t.InPerspective[version]) t.Delete();
     else {
@@ -228,29 +228,29 @@ foreach(var t in Model.Tables.ToList()) {
     }
 }
 
-// Remove user perspectives based on annotations and all developer perspectives:
+// Quita las perspectivas de usuario en función de las anotaciones y todas las perspectivas de desarrollador:
 foreach(var p in Model.Perspectives.ToList()) {
-    if(p.Name.StartsWith("`$`")) p.Delete();
+    if(p.Name.StartsWith("Dev")) p.Delete();
 
-    // Keep all other perspectives that do not have the "DevPerspectives" annotation, while removing
-    // those that have the annotation, if <version> is not specified in the annotation:
+    // Conserva todas las demás perspectivas que no tengan la anotación "DevPerspectives", y elimina
+    // las que sí la tengan si <version> no está especificado en la anotación:
     if(p.GetAnnotation("DevPerspectives") != null && !p.GetAnnotation("DevPerspectives").Contains(version)) 
         p.Delete();
 }
 
-// Remove data sources based on annotations:
+// Quita los Data sources en función de las anotaciones:
 foreach(var ds in Model.DataSources.ToList()) {
     if(ds.GetAnnotation("DevPerspectives") == null) continue;
     if(!ds.GetAnnotation("DevPerspectives").Contains(version)) ds.Delete();
 }
 
-// Remove roles based on annotations:
+// Quita roles en función de las anotaciones:
 foreach(var r in Model.Roles.ToList()) {
     if(r.GetAnnotation("DevPerspectives") == null) continue;
     if(!r.GetAnnotation("DevPerspectives").Contains(version)) r.Delete();
 }
 
-// Modify measures based on annotations:
+// Modifica medidas en función de las anotaciones:
 foreach(Measure m in Model.AllMeasures) {
     var expr = m.GetAnnotation(version + "_Expression"); if(expr == null) continue;
     m.Expression = expr;
@@ -258,16 +258,16 @@ foreach(Measure m in Model.AllMeasures) {
     m.Description = m.GetAnnotation(version + "_Description");    
 }
 
-// Set partition queries according to annotations:
+// Establece las consultas de partición según las anotaciones:
 foreach(Table t in Model.Tables) {
     var queryWithPlaceholders = t.GetAnnotation(version + "_PartitionQuery"); if(queryWithPlaceholders == null) continue;
     
-    // Loop through all partitions in this table:
+    // Recorre todas las particiones de esta tabla:
     foreach(Partition p in t.Partitions) {
         
         var finalQuery = queryWithPlaceholders;
 
-        // Replace all placeholder values:
+        // Sustituye todos los valores de los marcadores de posición:
         foreach(var placeholder in p.Annotations.Keys) {
             finalQuery = finalQuery.Replace("%" + placeholder + "%", p.GetAnnotation(placeholder));
         }
@@ -276,61 +276,61 @@ foreach(Table t in Model.Tables) {
     }
 }
 
-// TODO: Modify other objects based on annotations, if applicable...
+// TODO: Modifica otros objetos en función de las anotaciones, si procede...
 ```
 
-**Explanation:** First, we remove all tables, columns, measures and hierarchies, that are not part of the perspective defined in line 1 of the script. Then, we remove any additional objects where we may have applied the "DevPerspectives" annotation as described previously, along with all the developer perspectives themselves. Afterwards, we apply any changes to measure expressions, format strings or descriptions based on the annotations, if any. Finally, we apply partition queries as defined in annotations (if any), while also replacing placeholder values with the annotated values (if any).
+**Explicación:** Primero, quitamos todas las tablas, columnas, medidas y jerarquías que no formen parte de la perspectiva definida en la línea 1 del script. Después, quitamos cualquier objeto adicional en el que hayamos aplicado la anotación "DevPerspectives", tal y como se describió antes, junto con todas las perspectivas de desarrollador. A continuación, aplicamos cualquier cambio en las expresiones de medida, cadenas de formato o descripciones en función de las anotaciones, si las hubiera. Por último, aplicamos las consultas de partición definidas en las anotaciones (si las hubiera) y, además, sustituimos los valores de los marcadores de posición por los valores anotados (si los hubiera).
 
-Note that we could also just add additional specific model changes directly to this script, if we wanted to, but the whole point of this exercise was how we can maintain several models directly from within Tabular Editor. The script above is the same, regardless of which version we want to deploy (except, of course, for line 1).
+Ten en cuenta que también podríamos añadir cambios específicos adicionales del modelo directamente a este script si quisiéramos, pero el objetivo de este ejercicio era ver cómo podemos mantener varios modelos directamente desde Tabular Editor. El script anterior es el mismo, independientemente de la versión que queramos desplegar (salvo, por supuesto, la línea 1).
 
-Finally, we can load our Model.bim file, execute the script, and deploy the modified model in one go, using the following [command line syntax](/Command-line-Options):
+Por último, podemos cargar nuestro archivo Model.bim, ejecutar el script y desplegar el modelo modificado de una sola vez, usando la siguiente [sintaxis de línea de comandos](/Command-line-Options):
 
 ```sh
 start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.bim -S ResellerModel.cs -D localhost AdventureWorksReseller -O -R
 ```
 
-To deploy the Internet or Management versions, we would need to do the same, providing the corresponding scripts:
+Para desplegar las versiones Internet o Management, tendríamos que hacer lo mismo e indicar los scripts correspondientes:
 
 ```sh
 start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.bim -S InternetModel.cs -D localhost AdventureWorksInternet -O -R
 start /wait /d "c:\Program Files (x86)\Tabular Editor" TabularEditor.exe Model.bim -S ManagementModel.cs -D localhost AdventureWorksManagement -O -R
 ```
 
-This assumes that you are executing the command line within the directory of your Model.bim file (or Database.json file if using the "Save to Folder"-functionality). The -S switch instructs Tabular Editor to apply the supplied script to the model, and the -D switch performs the deployment. The -O switch allows overwriting an existing database with the same name, and the -R switch indicates that we also want to overwrite roles of the target database.
+Esto supone que estás ejecutando el comando desde el directorio donde se encuentra tu archivo Model.bim (o el archivo Database.json si usas la funcionalidad "Guardar en carpeta"). El modificador -S indica a Tabular Editor que aplique al modelo el script proporcionado, y el modificador -D realiza el despliegue. El modificador -O permite sobrescribir una base de datos existente con el mismo nombre, y el modificador -R indica que también queremos sobrescribir los roles de la base de datos de destino.
 
-## Master model processing
+## Procesamiento del modelo maestro
 
-If you have a dedicated processing server and large amounts of data overlap between the individual models, it may make sense for you to process the data into the master model first, before splitting it up. This way, you can avoid processing the same data several times, into individual models. **This assumes, however, that you are not processing any tables where the partition query has been changed between versions, as shown in [this section](/xref:Master-model-pattern#altering-partition-queries).** The recipe for this is outlined below:
+Si tienes un servidor de procesamiento dedicado y existe un gran solapamiento de datos entre los modelos individuales, puede tener sentido procesar primero los datos en el modelo maestro antes de dividirlo. Así puedes evitar procesar los mismos datos varias veces en modelos individuales. **No obstante, esto supone que no estás procesando ninguna tabla en la que la consulta de partición haya cambiado entre versiones, como se muestra en [esta sección](/xref:Master-model-pattern#altering-partition-queries).** La receta para hacerlo se describe a continuación:
 
-1. (Optional - in case there were metadata changes) Deploy your master model to your processing server
-2. Perform the processing you need on your master model (do not process tables that have version-specific partition queries).
-3. Synchronise the master model into every individual model and use the command above to strip down the individual models after synchronisation, followed by a ProcessRecalc if necessary.
-4. (Optional) Process any tables on the individual models, that have version-specific partition queries.
+1. (Opcional, en caso de que haya cambios en los metadatos) Implementa tu modelo maestro en tu servidor de procesamiento
+2. Realiza el procesamiento que necesites en tu modelo maestro (no proceses las tablas que tengan consultas de partición específicas de la versión).
+3. Sincroniza el modelo maestro en cada modelo individual y usa el comando anterior para depurar los modelos individuales después de la sincronización; a continuación, ejecuta un ProcessRecalc si es necesario.
+4. (Opcional) Procesa las tablas de los modelos individuales que tengan consultas de partición específicas de la versión.
 
-## Tips and tricks
+## Consejos y trucos
 
-When you're starting to use custom annotations a lot, there may be situations where you want to list all objects with a specific annotation. This is where the Dynamic LINQ expressions of the Filter-box comes in handy.
+Cuando empiezas a usar con frecuencia anotaciones personalizadas, puede haber situaciones en las que quieras enumerar todos los objetos con una anotación concreta. Aquí es donde las expresiones LINQ dinámicas del cuadro de filtro resultan muy útiles.
 
-First off, let's say we wanted to find all objects where we added an annotation with the name "$InternetModel_Expression". Type the following into the filter textbox and hit ENTER:
+Para empezar, supongamos que queremos encontrar todos los objetos en los que hemos añadido una anotación con el nombre "$InternetModel_Expression". Escribe lo siguiente en el cuadro de texto del filtro y pulsa ENTER:
 
 ```
-:GetAnnotation("`$`InternetModel_Expression")<>null
+:GetAnnotation("$InternetModel_Expression")<>null
 ```
 
-Or, if you want to find all objects, that have an annotation ending with the word "_Expression", use:
+O, si quieres encontrar todos los objetos que tengan una anotación que termine en "_Expression", usa:
 
 ```
 :GetAnnotations().Any(EndsWith("_Expression"))
 ```
 
-Note that these functions are case-sensitive, so if your annotation was written in lowercase, the above filter would not catch it.
+Ten en cuenta que estas funciones distinguen entre mayúsculas y minúsculas; por lo tanto, si tu anotación se escribió en minúsculas, el filtro anterior no la encontrará.
 
-You could also search for objects where the annotation had a specific value:
+También puedes buscar objetos en los que la anotación tenga un valor específico:
 
 ```
-:GetAnnotation(`$`InternetModel_Description).Contains("TODO")
+:GetAnnotation("$InternetModel_Description").Contains("TODO")
 ```
 
-## Conclusion
+## Conclusión
 
-The technique described here can be very helpful when maintaining many similar models with a lots of shared functionality, such as Calendar tables and other common dimensions. The scripts used can be neatly reused as Custom Actions within Tabular Editor, while the actual deployment can be automated in various ways.
+La técnica que se describe aquí puede ser muy útil para mantener muchos modelos similares con gran parte de funcionalidad compartida, como las tablas de calendario y otras dimensiones comunes. Los scripts utilizados se pueden reutilizar fácilmente como acciones personalizadas en Tabular Editor, mientras que el despliegue se puede automatizar de varias formas.
