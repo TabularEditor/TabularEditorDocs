@@ -2,7 +2,7 @@
 uid: udfs
 title: DAX User-Defined Functions
 author: Daniel Otykier
-updated: 2025-09-15
+updated: 2026-03-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -217,6 +217,7 @@ In Tabular Editor, UDFs also have a "Namespace" *property*, allowing you to cust
 - Use descriptive names that clearly indicate the function's purpose
 - Consider prefixing UDFs with your organization's initials (e.g., `ACME.CalculateDiscount`)
 - Avoid generic names that might conflict with future DAX functions
+- Use compound names with a separator character (`.` or `_`). For example, `Finance.CalcProfit` or `My_CalcProfit`. This prevents your UDF from breaking if Microsoft introduces a built-in DAX function with the same name. See the [built-in BPA rule](xref:kb.bpa-udf-use-compound-names) for more details
 
 ### Documentation
 - Always include comments describing what the function does

@@ -1,3 +1,6 @@
+# AI Features
+## @ai-assistant
+
 # User Interface
 ## @user-interface
 ## @tom-explorer-view

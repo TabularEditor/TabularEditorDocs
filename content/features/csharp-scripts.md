@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2025-08-27
+updated: 2026-03-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -132,6 +132,36 @@ Selected.Measures
         .ForEach(m => m.Name += " DEPRECATED");
 ```
 
+### Complete list of Selected accessors
+
+The following table lists all available singular and plural accessors on the `Selected` object. Singular accessors throw a `SelectionException` if the current selection does not contain exactly one object of that type. Plural accessors return an empty collection if no objects of that type are selected.
+
+| Singular | Plural | Object Type |
+| -- | -- | -- |
+| `Selected.Measure` | `Selected.Measures` | Measures |
+| `Selected.Column` | `Selected.Columns` | All column types |
+| `Selected.DataColumn` | `Selected.DataColumns` | Data columns |
+| `Selected.CalculatedColumn` | `Selected.CalculatedColumns` | Calculated columns |
+| `Selected.CalculatedTableColumn` | `Selected.CalculatedTableColumns` | Calculated table columns |
+| `Selected.Hierarchy` | `Selected.Hierarchies` | Hierarchies |
+| `Selected.Level` | `Selected.Levels` | Hierarchy levels |
+| `Selected.Table` | `Selected.Tables` | Tables |
+| `Selected.CalculatedTable` | `Selected.CalculatedTables` | Calculated tables |
+| `Selected.Partition` | `Selected.Partitions` | Partitions |
+| `Selected.Role` | `Selected.Roles` | Model roles |
+| `Selected.TablePermission` | `Selected.TablePermissions` | Table permissions |
+| `Selected.KPI` | `Selected.KPIs` | KPIs |
+| `Selected.Calendar` | `Selected.Calendars` | Calendars |
+| `Selected.CalculationItem` | `Selected.CalculationItems` | Calculation items |
+| `Selected.Function` | `Selected.Functions` | User-defined functions |
+| `Selected.DataSource` | `Selected.DataSources` | Data sources |
+| `Selected.SingleColumnRelationship` | `Selected.SingleColumnRelationships` | Relationships |
+| `Selected.Perspective` | `Selected.Perspectives` | Perspectives |
+| `Selected.Culture` | `Selected.Cultures` | Translations |
+
+> [!NOTE]
+> The accessors for Role, KPI, Calendar, CalculationItem, TablePermission, Function, DataSource, SingleColumnRelationship, CalculatedColumn, CalculatedTableColumn, DataColumn, CalculatedTable and Partition were added in Tabular Editor 3.26.0.
+
 ## Helper methods
 Tabular Editor provides a set of special helper methods to make certain script tasks easier to achieve. Note that some of these may be invoked as extension methods. For example, `object.Output();` and `Output(object);` are equivalent.
 
@@ -177,6 +207,28 @@ The dialog will appear in one of four different ways, depending on the kind of o
 ![C-sharp Output](~/content/assets/images/c-sharp-script-output-function-enumerated.png)
 
 You can tick the "Don't show more outputs" checkbox at the lower left-hand corner, to prevent the script from halting on any further `.Output()` invocations.
+
+## Running scripts with preview
+
+The **Run with preview** action lets you review all model changes made by a C# script before committing them. This is useful when running unfamiliar scripts or performing bulk modifications.
+
+To use this feature, click **Script > Run with preview** in the toolbar or menu. The workflow is:
+
+1. Tabular Editor takes a snapshot of the model metadata before execution
+2. The script runs normally
+3. If the script succeeds and changes are detected, a preview dialog appears showing a side-by-side hierarchical diff of the model (before and after)
+4. Changes are color-coded: green for added objects, red for deleted and orange for modified properties
+5. Use the **Filter Changes Only** checkbox to hide unchanged items and focus on what the script changed
+6. Click **OK** to accept the changes, or **Revert** to undo all changes
+
+<!-- TODO: screenshot of ScriptPreviewDialog showing a diff -->
+
+If the script fails (compilation or runtime error), all changes are automatically rolled back and no preview dialog is shown. If the script succeeds but makes no detectable changes, an informational message is displayed instead.
+
+All changes from a script execution are wrapped in a single undo transaction. Even after accepting changes through the preview dialog, you can still undo the entire operation with **Ctrl+Z**.
+
+> [!TIP]
+> The [AI Assistant](xref:ai-assistant) uses this preview feature automatically when executing C# scripts, so you always get a chance to review AI-generated model changes before they are applied.
 
 ## .NET references
 
