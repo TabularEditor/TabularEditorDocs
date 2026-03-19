@@ -1,6 +1,6 @@
 ---
 uid: connecting-to-azure-databricks
-title: Connecting to Azure Databricks
+title: Conexión a Azure Databricks
 author: David Bojsen
 updated: 2025-08-05
 applies_to:
@@ -18,196 +18,196 @@ applies_to:
           full: true
 ---
 
-# (Tutorial) Connecting to Azure Databricks
+# (Tutorial) Conexión a Azure Databricks
 
-Tabular Editor 3 supports connecting to Azure Databricks as a data source for your semantic models. This tutorial will guide you through the process of setting up a connection to Azure Databricks and importing data from it.
+Tabular Editor 3 te permite conectarte a Azure Databricks como Data source para tus modelos semánticos. Este tutorial te guiará por el proceso de configurar una conexión a Azure Databricks e importar datos desde Databricks.
 
-## Prerequisites
+## Requisitos previos
 
-Before you begin, ensure you have the following:
+Antes de empezar, asegúrate de tener lo siguiente:
 
-- A valid Azure Databricks workspace
-- Appropriate permissions to access the Databricks data
-- Tabular Editor 3 (Desktop, Business, or Enterprise edition)
+- Un Workspace válido de Azure Databricks
+- Permisos adecuados para acceder a los datos de Databricks
+- Tabular Editor 3 (edición Desktop, Business o Edición Enterprise)
 
-## Authentication Methods
+## Métodos de autenticación
 
-When connecting to Azure Databricks, you have two main authentication methods:
+Al conectarte a Azure Databricks, tienes dos métodos principales de autenticación:
 
-### 1. Microsoft Entra ID (formerly Azure AD) Authentication
+### 1. Autenticación de Microsoft Entra ID (antes Azure AD)
 
-This is the recommended approach for connecting to Azure Databricks when your organization uses Microsoft Entra ID. This method provides seamless single sign-on and better security through managed identities.
+Este es el enfoque recomendado para conectarte a Azure Databricks cuando tu organización usa Microsoft Entra ID. Este método ofrece inicio de sesión único sin complicaciones y mayor seguridad mediante identidades administradas.
 
-#### About the Tabular Editor Enterprise Application
+#### Acerca de la aplicación empresarial de Tabular Editor
 
-When you connect to Azure Databricks using Microsoft Entra ID authentication, Tabular Editor uses a registered enterprise application named "Tabular Editor 3 - User Delegated Access to Azure Databricks" with the Application (client) ID: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`.
+Al conectarte a Azure Databricks mediante la autenticación de Microsoft Entra ID, Tabular Editor utiliza una aplicación empresarial registrada llamada "Tabular Editor 3 - User Delegated Access to Azure Databricks" con el identificador de aplicación (cliente): `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`.
 
-This enterprise application requires the following API permissions:
+Esta aplicación empresarial requiere los siguientes permisos de API:
 
 - **Microsoft Graph** (`00000003-0000-0000-c000-000000000000`)
-  - `offline_access` (Delegated) - This permission allows Tabular Editor to maintain access to the data you've given it permission to access, even when you're not actively using the application. This is needed for maintaining a persistent connection to Databricks.
-  - `openid` (Delegated) - Allows users to sign in to the app with their work or school accounts and allows the app to see basic user profile information.
-  - `profile` (Delegated) - Allows the app to see basic profile information such as name, email, picture, username.
-  - `User.Read` (Delegated) - Allows the app to read your profile, and to identify you when accessing the Databricks API.
+  - `offline_access` (Delegado): este permiso permite a Tabular Editor mantener el acceso a los datos para los que le has dado permiso, incluso cuando no estés usando la aplicación activamente. Esto es necesario para mantener una conexión persistente con Databricks.
+  - `openid` (Delegado): permite que los usuarios inicien sesión en la aplicación con sus cuentas profesionales o educativas y permite que la aplicación vea información básica del perfil del usuario.
+  - `profile` (Delegado): permite que la aplicación vea información básica del perfil, como nombre, correo electrónico, foto y nombre de usuario.
+  - `User.Read` (Delegado): permite que la aplicación lea tu perfil y te identifique al acceder a la API de Databricks.
 
-- **Azure Databricks API** (`2ff814a6-3304-4ab8-85cb-cd0e6f879c1d`)
-  - `user_impersonation` (Delegated) - Access Azure Databricks on behalf of the signed-in user. This allows Tabular Editor to connect to your Databricks workspace using your credentials.
+- **API de Azure Databricks** (`2ff814a6-3304-4ab8-85cb-cd0e6f879c1d`)
+  - `user_impersonation` (Delegado): permite acceder a Azure Databricks en nombre del usuario que ha iniciado sesión. Esto permite que Tabular Editor se conecte a tu Workspace de Databricks usando tus credenciales.
 
-For more information about Microsoft Entra ID permissions, please refer to the [Microsoft documentation on permission types](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent) and [application consent experience](https://learn.microsoft.com/en-us/azure/active-directory/develop/application-consent-experience).
+Para más información sobre los permisos de Microsoft Entra ID, consulta la [documentación de Microsoft sobre los tipos de permisos](https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent) y la [experiencia de consentimiento de aplicaciones](https://learn.microsoft.com/en-us/azure/active-directory/develop/application-consent-experience).
 
 > [!IMPORTANT]
-> These permissions are required for Tabular Editor to access your Azure Databricks data securely through your Microsoft Entra ID credentials. Without these permissions, Tabular Editor cannot authenticate to your Azure Databricks workspace properly.
+> Estos permisos son necesarios para que Tabular Editor acceda de forma segura a tus datos de Azure Databricks mediante tus credenciales de Microsoft Entra ID. Sin estos permisos, Tabular Editor no puede autenticarse correctamente en tu Workspace de Azure Databricks.
 
-#### Consent Process for Microsoft Entra ID Authentication
+#### Proceso de consentimiento para la autenticación de Microsoft Entra ID
 
-When you first attempt to connect to Azure Databricks using Microsoft Entra ID authentication, you may be prompted to consent to the required permissions. The consent process depends on your organization's Microsoft Entra ID policies:
+La primera vez que intentes conectarte a Azure Databricks mediante la autenticación de Microsoft Entra ID, es posible que se te pida que concedas consentimiento para los permisos necesarios. El proceso de consentimiento depende de las directivas de Microsoft Entra ID de tu organización:
 
-##### User Consent
+##### Consentimiento del usuario
 
-If your organization allows user consent for applications:
+Si tu organización permite que los usuarios otorguen consentimiento a las aplicaciones:
 
-1. You will see a consent prompt from Microsoft asking for permission to allow Tabular Editor to access Azure Databricks on your behalf
-2. Review the permissions being requested
-3. Click **Accept** to grant consent
+1. Verás un aviso de consentimiento de Microsoft en el que se te pide permiso para que Tabular Editor acceda a Azure Databricks en tu nombre
+2. Revisa los permisos que se están solicitando
+3. Haz clic en **Aceptar** para otorgar el consentimiento
 
 > [!NOTE]
-> Whether admin consent is required depends on your organization's Microsoft Entra ID policies, not necessarily the specific API permissions being requested. Many organizations allow users to consent to delegated permissions themselves, while others require administrator approval for all third-party applications regardless of permission level.
+> Que se requiera el consentimiento del administrador depende de las directivas de Microsoft Entra ID de tu organización, no necesariamente de los permisos de API específicos que se estén solicitando. Muchas organizaciones permiten que los usuarios otorguen por sí mismos el consentimiento para permisos delegados, mientras que otras requieren la aprobación del administrador para todas las aplicaciones de terceros, independientemente del nivel de permisos.
 
-##### Admin Consent Required
+##### Consentimiento del administrador requerido
 
-If your organization restricts user consent (common in enterprise environments):
+Si tu organización restringe el consentimiento del usuario (algo habitual en entornos empresariales):
 
-1. You will receive an error message indicating that admin consent is required
-2. You'll need to contact your IT department or Microsoft Entra ID administrator
-3. Provide them with:
-   - Application Name: "Tabular Editor 3 - User Delegated Access to Azure Databricks"
-   - Application ID: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`
-   - Required Permissions: Microsoft Graph (offline_access, openid, profile, User.Read) and Azure Databricks API (user_impersonation)
+1. Recibirás un mensaje de error en 'mensajes' que indica que se requiere el consentimiento del administrador
+2. Tendrás que ponerte en contacto con tu departamento de TI o con el administrador de Microsoft Entra ID
+3. Facilítales lo siguiente:
+   - Nombre de la aplicación: "Tabular Editor 3 - User Delegated Access to Azure Databricks"
+   - ID de la aplicación: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`
+   - Permisos necesarios: Microsoft Graph (offline_access, openid, profile, User.Read) y Azure Databricks API (user_impersonation)
 
-Your administrator can grant organization-wide consent in one of two ways:
+Tu administrador puede conceder el consentimiento para toda la organización de una de estas dos formas:
 
-**Option 1: Through the Microsoft Entra ID Admin Portal**
+**Opción 1: A través del portal de administración de Microsoft Entra ID**
 
-1. Navigate to Microsoft Entra ID > Enterprise Applications
-2. Search for "Tabular Editor 3 - User Delegated Access to Azure Databricks"
-3. Select the application and go to Permissions
-4. Click "Grant admin consent for [Organization]"
+1. Ve a Microsoft Entra ID > Aplicaciones empresariales
+2. Busca "Tabular Editor 3 - User Delegated Access to Azure Databricks"
+3. Selecciona la aplicación y ve a Permisos
+4. Haz clic en "Conceder consentimiento del administrador para [Organization]"
 
-**Option 2: Using the Direct Admin Consent URL**
-Administrators can use the following direct link to grant consent:
+**Opción 2: Con la URL directa de consentimiento del administrador**
+Los administradores pueden usar el siguiente enlace directo para conceder el consentimiento:
 
 ```
 https://login.microsoftonline.com/organizations/v2.0/adminconsent?client_id=ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c&scope=https://graph.microsoft.com/offline_access%20https://graph.microsoft.com/openid%20https://graph.microsoft.com/profile%20https://graph.microsoft.com/User.Read%202ff814a6-3304-4ab8-85cb-cd0e6f879c1d/user_impersonation&redirect_uri=https://tabulareditor.com
 ```
 
-For more information about admin consent, see Microsoft's documentation on [Configure how users consent to applications](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/configure-user-consent).
+Para más información sobre el consentimiento del administrador, consulta la documentación de Microsoft sobre [Configurar cómo los usuarios dan su consentimiento a las aplicaciones](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/configure-user-consent).
 
-#### Steps for Microsoft Entra ID Authentication:
+#### Pasos para la autenticación con Microsoft Entra ID:
 
-1. In Tabular Editor 3, go to **Model** > **Import tables...**
-2. Select **New Source** > **Databricks**
-3. In the connection dialog:
-   - Enter your Databricks workspace URL (format: `https://<region>.azuredatabricks.net`)
-   - Select **Microsoft Entra ID** as the authentication method
-   - For HTTP Path, specify the path to your Databricks cluster (e.g., `/sql/1.0/warehouses/<warehouse-id>`)
+1. En Tabular Editor 3, ve a **Modelo** > **Importar tablas...**
+2. Selecciona **Nuevo origen** > **Databricks**
+3. En el cuadro de diálogo de conexión:
+   - Introduce la URL de tu Workspace de Databricks (formato: `https://<region>.azuredatabricks.net`)
+   - Selecciona **Microsoft Entra ID** como método de autenticación
+   - Para HTTP Path, especifica la ruta a tu clúster de Databricks (p. ej., `/sql/1.0/warehouses/<warehouse-id>`)
 
 > [!NOTE]
-> Your Databricks workspace URL should be in the format `https://<region>.azuredatabricks.net` - for example, `https://westeurope.azuredatabricks.net`.
+> La URL de tu Workspace de Databricks debe tener el formato `https://<region>.azuredatabricks.net`; por ejemplo, `https://westeurope.azuredatabricks.net`.
 
-### 2. Personal Access Token (PAT) Authentication
+### 2. Autenticación mediante token de acceso personal (PAT)
 
-If Microsoft Entra ID integration is not available or if you prefer token-based authentication, you can use a Personal Access Token.
+Si la integración con Microsoft Entra ID no está disponible o si prefieres la autenticación basada en tokens, puedes usar un token de acceso personal.
 
-#### Steps for PAT Authentication:
+#### Pasos para la autenticación con PAT:
 
-1. Generate a Personal Access Token in your Azure Databricks workspace:
-   - Go to your Databricks workspace
-   - Click on your user profile icon in the top-right corner
-   - Select **User Settings**
-   - Go to the **Access Tokens** tab
-   - Click **Generate New Token**
-   - Provide a name and optionally set an expiration time
-   - Click **Generate** and copy the token value
+1. Genera un token de acceso personal en tu Workspace de Azure Databricks:
+   - Ve a tu Workspace de Databricks
+   - Haz clic en el icono de tu perfil de usuario en la esquina superior derecha
+   - Selecciona **Configuración de usuario**
+   - Ve a la pestaña **Tokens de acceso**
+   - Haz clic en **Generar nuevo token**
+   - Indica un nombre y, si lo deseas, establece una fecha de caducidad
+   - Haz clic en **Generar** y copia el valor del token
 
-2. In Tabular Editor 3, go to **Model** > **Import tables...**
+2. En Tabular Editor 3, ve a **Modelo** > **Importar tablas...**
 
-3. Select **New Source** > **Databricks**
+3. Selecciona **Nueva fuente** > **Databricks**
 
-4. In the connection dialog:
-   - Enter your Databricks workspace URL
-   - Select **Personal Access Token** as the authentication method
-   - Paste your token into the Token field
-   - For HTTP Path, specify the path to your Databricks cluster (e.g., `/sql/1.0/warehouses/<warehouse-id>`)
+4. En el cuadro de diálogo de conexión:
+   - Introduce la URL de tu Workspace de Databricks
+   - Selecciona **Token de acceso personal** como método de autenticación
+   - Pega tu token en el campo **Token**
+   - En HTTP Path, especifica la ruta a tu clúster de Databricks (p. ej., `/sql/1.0/warehouses/<warehouse-id>`)
 
-## Finding Your HTTP Path
+## Cómo encontrar tu HTTP Path
 
-The HTTP Path parameter is essential for connecting to your Databricks SQL warehouse. To find this value:
+El parámetro HTTP Path es esencial para conectarte a tu Databricks SQL Warehouse. Para encontrar este valor:
 
-1. Go to your Databricks workspace
-2. Navigate to **SQL** > **SQL Warehouses**
-3. Select the SQL warehouse you want to connect to
-4. Look for the **Connection Details** section
-5. Copy the HTTP Path value which should be in the format: `/sql/1.0/warehouses/<warehouse-id>`
+1. Ve a tu Workspace de Databricks
+2. Ve a **SQL** > **SQL Warehouses**
+3. Selecciona el SQL Warehouse al que quieres conectarte
+4. Busca la sección **Detalles de conexión**
+5. Copia el valor de la ruta HTTP, que debe tener el formato: `/sql/1.0/warehouses/<warehouse-id>`
 
-## Importing Tables from Databricks
+## Importación de tablas desde Databricks
 
-Once you've configured your connection:
+Una vez que hayas configurado la conexión:
 
-1. Click **Test Connection** to verify your credentials and connection settings
-2. If the connection is successful, click **Next**
-3. Select whether to import specific tables/views or use a custom SQL query
-4. If selecting tables/views:
-   - Browse through the available catalogs, schemas, and tables
-   - Select the tables you wish to import
-   - Optionally preview and filter columns
-5. Review your selections and click **Import** to finalize
+1. Haz clic en **Probar conexión** para verificar tus credenciales y la configuración de la conexión
+2. Si la conexión es correcta, haz clic en **Siguiente**
+3. Selecciona si quieres importar tablas/vistas específicas o usar una consulta SQL personalizada
+4. Si seleccionas tablas/vistas:
+   - Explora los catálogos, esquemas y tablas disponibles
+   - Selecciona las tablas que quieres importar
+   - Opcionalmente, previsualiza y filtra las columnas
+5. Revisa tus selecciones y haz clic en **Importar** para finalizar
 
-## Troubleshooting Connection Issues
+## Solución de problemas de conexión
 
-If you encounter issues connecting to Azure Databricks:
+Si tienes problemas para conectarte a Azure Databricks:
 
-- Verify your workspace URL is correct and accessible
-- Ensure your Personal Access Token hasn't expired (if using PAT authentication)
-- Check that your user account has the necessary permissions in Databricks
-- Verify the HTTP Path points to an active SQL warehouse
-- Ensure your network allows connections to the Databricks service
+- Comprueba que la URL de tu Workspace sea correcta y accesible
+- Asegúrate de que tu token de acceso personal, Personal Access Token, no haya caducado (si usas la autenticación PAT)
+- Comprueba que tu cuenta de usuario tiene los permisos necesarios en Databricks
+- Comprueba que la ruta HTTP apunte a un SQL Warehouse activo
+- Asegúrate de que tu red permita conexiones al servicio de Databricks
 
-### Resolving Microsoft Entra ID Authentication Issues
+### Solución de problemas de autenticación de Microsoft Entra ID
 
-If you're using Microsoft Entra ID authentication and encounter errors:
+Si usas la autenticación de Microsoft Entra ID y se producen errores:
 
 #### "AADSTS65001: The user or administrator has not consented to use the application"
 
-This error occurs when the required permissions haven't been granted:
+Este error se produce cuando no se han concedido los permisos necesarios:
 
-1. If you have sufficient privileges:
-   - Click the consent link in the error message
-   - Review and accept the permissions request
+1. Si tienes los privilegios necesarios:
+   - Haz clic en el enlace de consentimiento en los mensajes de error
+   - Revisa y acepta la solicitud de permisos
 
-2. If you don't have sufficient privileges:
-   - Contact your IT administrator
-   - Provide them with the application ID: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`
-   - Request they grant organizational consent for the Tabular Editor enterprise application
+2. Si no tienes privilegios suficientes:
+   - Contacta con tu administrador de TI
+   - Proporciónale el identificador de la aplicación: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`
+   - Pídele que conceda el consentimiento de la organización para la aplicación empresarial de Tabular Editor
 
 #### "AADSTS700016: Application with identifier was not found in the directory"
 
-This may occur if your organization uses a restricted application policy:
+Esto puede ocurrir si tu organización usa una política de aplicaciones restringidas:
 
-1. Contact your Microsoft Entra ID administrator
-2. Request that they add the Tabular Editor enterprise application (ID: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`) to your organization's allowed application list
+1. Contacta con tu administrador de Microsoft Entra ID
+2. Pídele que añada la aplicación empresarial de Tabular Editor (ID: `ea0fc0fe-ed02-40d7-a29a-cc0a59d8b42c`) a la lista de aplicaciones permitidas de tu organización
 
 > [!TIP]
-> In some organizations, IT departments may require a formal request or security review before approving new enterprise applications. Be prepared to explain that this application is used by Tabular Editor 3 to securely connect to Azure Databricks resources using the organization's existing Microsoft Entra ID authentication infrastructure.
+> En algunas organizaciones, los departamentos de TI pueden exigir una solicitud formal o una revisión de seguridad antes de aprobar nuevas aplicaciones empresariales. Prepárate para explicar que Tabular Editor 3 utiliza esta aplicación para conectarse de forma segura a recursos de Azure Databricks mediante la infraestructura de autenticación existente de Microsoft Entra ID de la organización.
 
-## Using Update Table Schema with Databricks
+## Uso de «Actualizar esquema de tabla» con Databricks
 
-After importing tables from Azure Databricks, you can use Tabular Editor's **Update Table Schema** feature to keep your model in sync with changes in the Databricks tables.
+Después de importar tablas desde Azure Databricks, puedes usar la característica **Actualizar esquema de tabla** de Tabular Editor para mantener tu modelo sincronizado con los cambios en las tablas de Databricks.
 
-To update the schema:
+Para actualizar el esquema:
 
-1. Right-click on the imported table in the TOM Explorer
-2. Select **Update Table Schema**
-3. Review any detected changes and apply them as needed
+1. Haz clic con el botón derecho en la tabla importada en el Explorador TOM
+2. Selecciona **Actualizar esquema de tabla**
+3. Revisa los cambios detectados y aplícalos según sea necesario
 
-For complex queries or if you encounter issues with schema detection, consider enabling the **Use Analysis Services for change detection** option under **Tools** > **Preferences** > **Schema Compare** as described in the [Updating Table Schema](xref:importing-tables#updating-table-schema-through-analysis-services) documentation.
+Para consultas complejas o si tienes problemas con la detección del esquema, considera habilitar la opción **Usar Analysis Services para la detección de cambios** en **Herramientas** > **Preferencias** > **Comparación de esquemas**, tal como se describe en la documentación [Actualización del esquema de la tabla](xref:importing-tables#updating-table-schema-through-analysis-services).
 
