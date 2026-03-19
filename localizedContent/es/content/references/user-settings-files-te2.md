@@ -1,6 +1,6 @@
 ---
-uid: user-setting-files-te2
-title: User Settings Files Tabular Editor 2
+uid: archivos-de-configuracion-del-usuario-te2
+title: Archivos de configuración del usuario de Tabular Editor 2
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,19 +9,19 @@ applies_to:
       none: true
 ---
 
-## User Settings Files Tabular Editor 2
+## Archivos de configuración del usuario de Tabular Editor 2
 
-When Tabular Editor 2 is started, it writes some additional files to the disk at various locations. What follows is a description of these files and their content:
+Cuando se inicia Tabular Editor 2, escribe algunos archivos adicionales en el disco en varias ubicaciones. A continuación se describen estos archivos y su contenido:
 
-### In %ProgramData%\TabularEditor
+### En %ProgramData%\TabularEditor
 
-- **BPARules.json** Best Practice Analyzer rules that are available to all users.
-- **TOMWrapper.dll** This file is used when executing scripts inside Tabular Editor. You can also reference the .dll in your own .NET projects, to utilise the wrapper code. If you are having issues executing advanced scripts after upgrading Tabular Editor, please delete this file and restart Tabular Editor.
-- **Preferences.json** This file stores all preferences set in the File > Preferences dialog.
+- **BPARules.json** Reglas del Best Practice Analyzer disponibles para todos los usuarios.
+- **TOMWrapper.dll** Este archivo se utiliza al ejecutar scripts dentro de Tabular Editor. También puedes hacer referencia a la .dll en tus propios proyectos .NET para aprovechar el código del wrapper. Si tienes problemas al ejecutar scripts avanzados después de actualizar Tabular Editor, elimina este archivo y reinicia Tabular Editor.
+- **Preferences.json** Este archivo almacena todas las preferencias establecidas en el cuadro de diálogo Archivo > Preferencias.
 
-### In %AppData%\Local\TabularEditor
+### En %AppData%\Local\TabularEditor
 
-- **BPARules.json** Best Practice Analyzer rules that are available only to the current user.
-- **CustomActions.json** Custom script actions that can be invoked from the right-click menu or the Tools-menu of the Explorer Tree. These actions can be created on the Advanced Script Editor tab.
-- **RecentFiles.json** Stores a list of recently opened .bim files. The last most 10 items in this list is displayed in the File > Recent Files menu.
-- **RecentServers.json** Stores a list of recently accessed server names. These are displayed in the dropdown portion of the "Connect to Database" dialog box and in the Deployment Wizard.
+- **BPARules.json** Reglas del Best Practice Analyzer disponibles solo para el usuario actual.
+- **CustomActions.json** Acciones de script personalizadas que se pueden invocar desde el menú contextual de clic derecho o desde el menú Herramientas del árbol del Explorador. Estas acciones se pueden crear en la pestaña Editor avanzado de scripts.
+- **RecentFiles.json** Almacena una lista de archivos .bim abiertos recientemente. Los 10 últimos elementos de esta lista se muestran en el menú Archivo > Archivos recientes.
+- **RecentServers.json** Almacena una lista de nombres de servidores a los que se accedió recientemente. Se muestran en la lista desplegable del cuadro de diálogo "Conectar a la base de datos" y en el Asistente de implementación.
