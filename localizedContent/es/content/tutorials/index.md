@@ -1,24 +1,24 @@
-# Tutorials
+# Tutoriales
 
-This section contains comprehensive tutorials for learning Tabular Editor.
+Esta sección contiene tutoriales exhaustivos para aprender Tabular Editor.
 
-## In this section
+## En esta sección
 
-- @calendars - Creating and managing calendar tables
-- @connecting-to-azure-databricks - Database connectivity
-- @creating-macros - Automation with macros
-- @direct-lake-guidance - Working with Direct Lake models
-- @powerbi-xmla - Editing through XMLA endpoint
-- @importing-tables - Data import workflows
-- @new-as-model - Creating AS models
-- @new-pbi-model - Creating Power BI models
-- @udfs - Creating custom functions
-- @workspace-mode-wt - Collaborative development
-- @data-security-about - Row-level and object-level security
-- @incremental-refresh-about - Large dataset management
-- @detail-rows-expression - Configuring drillthrough details
-- @user-defined-aggregations - Optimizing query performance with aggregations
+- @calendars - Creación y administración de tablas de calendario
+- @connecting-to-azure-databricks - Conectividad con bases de datos
+- @creating-macros - Automatización mediante macros
+- @direct-lake-guidance - Trabajo con modelos Direct Lake
+- @powerbi-xmla - Edición mediante el punto de conexión XMLA
+- @importing-tables - Flujos de trabajo de importación de datos
+- @new-as-model - Creación de modelos de Analysis Services
+- @new-pbi-model - Creación de modelos de Power BI
+- @udfs - Creación de funciones personalizadas
+- @workspace-mode-wt - Desarrollo colaborativo
+- @data-security-about - Seguridad a nivel de fila y seguridad a nivel de objetos
+- @incremental-refresh-about - Administración de Datasets de gran tamaño
+- @detail-rows-expression - Configuración de detalles de drillthrough
+- @user-defined-aggregations - Optimización del rendimiento de consultas con agregaciones
 
 ---
 
-_Navigate using the table of contents to find tutorials for your skill level._
+_Navega con la tabla de contenidos para encontrar tutoriales adecuados a tu nivel._
