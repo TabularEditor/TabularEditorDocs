@@ -1,6 +1,6 @@
 ---
 uid: incremental-refresh-modify
-title: Modify an Existing Refresh Policy
+title: Modificar una política de actualización existente
 author: Kurt Buhler
 updated: 2023-01-09
 applies_to:
@@ -17,68 +17,54 @@ applies_to:
           full: true
 ---
 
-# Modifying Incremental Refresh
+# Modificar la actualización incremental
 
-![Incremental Refresh Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-modify-a-refresh-policy.png)
+![Resumen Visual de la actualización incremental](~/content/assets/images/tutorials/incremental-refresh-modify-a-refresh-policy.png)
 
 ---
 
-**Incremental Refresh is changed by adjusting the Refresh Policy properties.** Depending on what you want to change, you will adjust a different property. A full overview of these properties is [here](xref:incremental-refresh-about#overview-of-all-properties).
+**La actualización incremental se modifica ajustando las propiedades de la política de actualización.** Según lo que desee cambiar, ajustará una propiedad distinta. Encontrarás una descripción completa de estas propiedades [aquí](xref:incremental-refresh-about#overview-of-all-properties).
 
 > [!IMPORTANT]
-> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> La configuración de la actualización incremental con Tabular Editor 3 solo está disponible para Datasets alojados en el servicio Power BI Datasets. En Analysis Services se requiere la [creación de particiones](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizada.
 
 ---
 
-## Change Incremental Refresh
+## Cambiar la actualización incremental
 
-Below is a general description of how you modify an existing Refresh Policy:
+A continuación se muestra una descripción general de cómo modificar una política de actualización existente:
 
-1. **Connect:** Connect to the model.
+1. **Conectar:** Conéctese al modelo.
 
-2. **Select the Table:** Select the table already configured for Incremental Refresh.
+2. **Seleccionar la tabla:** Seleccione la tabla que ya está configurada para la actualización incremental.
 
-3. **Find 'Refresh Policy' properties:** In the _Properties_ window, go to the _Refresh Policy_ section.
+3. **Busque las propiedades de "política de actualización":** En la ventana _Propiedades_, vaya a la sección _política de actualización_.
 
     <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
 
-4. **Change the property:** Change the **Property** specified in the below sections, depending on what you want to change. For an overview of all Refresh Policy properties and what they do, see [here](xref:incremental-refresh-about#overview-of-all-properties).
+4. **Cambiar la propiedad:** Cambie la **Propiedad** indicada en las secciones siguientes, según lo que desee cambiar. Para ver un resumen de todas las propiedades de la política de actualización y lo que hacen, consulta [aquí](xref:incremental-refresh-about#overview-of-all-properties).
 
-5. **Apply Changes:** Deploy the model changes.
+5. **Aplicar cambios:** Implemente los cambios en el modelo.
 
-6. **Apply Refresh Policy:** Right-click the table and select _Apply Refresh Policy_.
+6. **Aplicar política de actualización:** Haga clic con el botón derecho en la tabla y seleccione _Aplicar política de actualización_.
 
     <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
-7. **Refresh all partitions:** Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
+7. **Actualizar todas las particiones:** Haga clic mientras mantiene pulsada la tecla Mayús para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
     <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
 
 ---
 
-Below is an overview of common changes one might make to an existing Refresh Policy:
+A continuación se muestra una descripción general de los cambios habituales que se pueden hacer en una política de actualización existente:
 
-### Extend or Reduce the Window for Archived Data
+### Ampliar o reducir la ventana de datos archivados
 
-**Purpose:** Add or reduce the amount of data in the model.
+**Propósito:** Agregar o reducir la cantidad de datos en el modelo.
 
-**Property:** <span style="color:#BC4A47">_RollingWindowPeriods_</span>. Increase to extend the window (more data); decrease to reduce the window (less data).
+**Propiedad:** <span style="color:#BC4A47">_RollingWindowPeriods_</span>. Aumenta el valor para ampliar la ventana (más datos); disminúyelo para reducirla (menos datos).
 
-**Note:** You can also change the <span style="color:#BC4A47">_RollingWindowGranularity_</span> to make a more fine-grain selection, i.e. from 3 Years to 36 Months.
-
-<br></br>
-
----
-
-<br></br>
-
-### Extend or Reduce the Window for Refreshed Data
-
-**Purpose:** Add or reduce the amount of data being refreshed in a scheduled refresh operation.
-
-**Property:** <span style="color:#455C86">_IncrementalWindowPeriods_</span>. Increase to extend the window (more data); decrease to reduce the window (less data).
-
-**Note:** You can also change the <span style="color:#455C86">_IncrementalWindowGranularity_</span> to make a more fine-grain selection, i.e. from 3 Years to 36 Months.
+**Nota:** También puedes cambiar <span style="color:#BC4A47">_RollingWindowGranularity_</span> para hacer una selección más granular; es decir, de 3 años a 36 meses.
 
 <br></br>
 
@@ -86,13 +72,13 @@ Below is an overview of common changes one might make to an existing Refresh Pol
 
 <br></br>
 
-### Only Refresh Complete Periods
+### Ampliar o reducir la ventana de datos actualizados
 
-**Purpose:** Exclude partial (incomplete) periods from the <span style="color:#BC4A47">Rolling Window</span>
+**Propósito:** Agregar o reducir la cantidad de datos que se actualizan en una operación de actualización programada.
 
-**Property:** <span style="color:#455C86">_IncrementalWindowPeriodsOffset_</span>. Set the value to `-1` to offset the period by 1, excluding the current period.
+**Propiedad:** <span style="color:#455C86">_IncrementalWindowPeriods_</span>. Aumenta el valor para ampliar la ventana (más datos); disminúyelo para reducirla (menos datos).
 
-**Note:** You can further offset this window to refresh i.e. only the periods behind the most recent complete period.
+**Nota:** También puedes cambiar <span style="color:#455C86">_IncrementalWindowGranularity_</span> para hacer una selección más granular; es decir, de 3 años a 36 meses.
 
 <br></br>
 
@@ -100,21 +86,35 @@ Below is an overview of common changes one might make to an existing Refresh Pol
 
 <br></br>
 
-### Change Incremental Refresh Mode
+### Actualizar solo períodos completos
 
-**Purpose:** To change from `Import` to `Hybrid` tables, or vice-versa.
+**Propósito:** Excluir períodos parciales (incompletos) de la <span style="color:#BC4A47">ventana móvil</span>
 
-**Property:** _Mode_
+**Propiedad:** <span style="color:#455C86">_IncrementalWindowPeriodsOffset_</span>. Establece el valor en `-1` para desplazar el período en 1 y excluir el período actual.
 
-**Note:** Follow the below process to change Incremental Refresh Mode:
+**Nota:** Puedes desplazar aún más esta ventana para actualizar, p. ej., solo los períodos anteriores al período completo más reciente.
 
-1. Change _Mode_ to the desired value `Import` or `Hybrid`
-2. Right-click the table and select _Apply Refresh Policy_
-3. Deploy the model changes
-4. Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
+<br></br>
+
+---
+
+<br></br>
+
+### Cambiar el modo de actualización incremental
+
+**Propósito:** Cambiar las tablas de `Import` a `Hybrid`, o viceversa.
+
+**Propiedad:** _Mode_
+
+**Nota:** Sigue el proceso que se indica a continuación para cambiar el modo de actualización incremental:
+
+1. Cambia _Mode_ al valor deseado: `Import` o `Hybrid`
+2. Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_
+3. Implementa los cambios en el modelo
+4. Mantén presionada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 > [!NOTE]
-> It is recommended to check that the Rolling Window is appropriately set for the selected _Mode_. When switching from `Import` to `Hybrid` Mode, the latest Policy Range Partition will become the DirectQuery partition. You may wish to opt for a more fine-grain window, to limit the amount of data queried with DirectQuery.
+> Se recomienda comprobar que la ventana móvil esté configurada correctamente para el _Mode_ seleccionado. Al cambiar del modo `Import` al modo `Hybrid`, la última partición de intervalo de la directiva pasará a ser la partición de DirectQuery. Puede que te convenga optar por una ventana más granular para limitar la cantidad de datos consultados con DirectQuery.
 
 <br></br>
 
@@ -122,26 +122,26 @@ Below is an overview of common changes one might make to an existing Refresh Pol
 
 <br></br>
 
-### Configure 'Detect Data Changes'
+### Configura "Detectar cambios en los datos"
 
-**Purpose:** To configure that archived data will refresh if the value of a date column (i.e. _LastUpdate_) changes.
+**Propósito:** Configurar que los datos archivados se actualicen si cambia el valor de una columna de fecha (p. ej., _LastUpdate_).
 
-**Property:** _PollingExpression_. Add a valid M Expression which returns a maximum date value for a column. All records containing that date will be refreshed, irrespective of their partition.
+**Propiedad:** _PollingExpression_. Agrega una expresión M válida que devuelva el valor máximo de fecha de una columna. Se actualizarán todos los registros que contengan esa fecha, independientemente de su partición.
 
-**Note:** Follow the below process to configure 'Detect Data Changes':
+**Nota:** Sigue el proceso que se indica a continuación para configurar "Detectar cambios en los datos":
 
-1. When the table is selected, in the _Expression Editor_ window, select _Polling Expression_ from the top-left dropdown
-2. Copy in the below M Expression, replacing _LastUpdate_ with your desired column name.
+1. Con la tabla seleccionada, en la ventana del _Editor de expresiones_, selecciona _Expresión de sondeo_ en el menú desplegable de la esquina superior izquierda
+2. Copia la siguiente expresión M y sustituye _LastUpdate_ por el nombre de columna que quieras.
 
 ```M
-// Retrieves the maximum value of the column [LastUpdate]
-// Replace LastUpdate with your own column name
-// The data will refresh for any records where the value in this column
-//    equals the maximum value in the column across the entire table
+// Recupera el valor máximo de la columna [LastUpdate]
+// Sustituye LastUpdate por el nombre de tu propia columna
+// Los datos se actualizarán para cualquier registro donde el valor de esta columna
+//    sea igual al valor máximo de la columna en toda la tabla
 let
     #"maxLastUpdate" =
         List.Max(
-            // Replace the below with your column and table name
+            // Sustituye lo siguiente por el nombre de tu columna y de tu tabla
             Orders[LastUpdate] 
         ),
 
@@ -153,12 +153,12 @@ in
     accountForNu11
 ```
 
-3. Right-click the table and select _Apply Refresh Policy_
-4. Deploy the model changes
-5. Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
+3. Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_
+4. Implementa los cambios en el modelo
+5. Mayús + clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 > [!WARNING]
-> Any records will update if the value equals the maximum value in the column. It does not necessarily update explicitly  because the value has changed, or if the value equals the refresh date.
+> Se actualizará cualquier registro cuyo valor sea igual al valor máximo de la columna. No necesariamente se actualiza de forma explícita porque el valor haya cambiado o porque sea igual a la fecha de actualización.
 
 <br></br>
 
@@ -166,14 +166,14 @@ in
 
 <br></br>
 
-### Applying refresh policies with `EffectiveDate`
+### Aplicación de políticas de actualización con `EffectiveDate`
 
-If you want to generate partitions while overriding the current date (for purposes of generating different rolling window ranges), you can use a small script in Tabular Editor to apply the refresh policy with the [EffectiveDate](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters) parameter.
+Si quieres generar particiones sustituyendo la fecha actual (para generar distintos rangos de ventana deslizante), puedes usar un pequeño script en Tabular Editor para aplicar la política de actualización con el parámetro [EffectiveDate](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters).
 
-With the incremental refresh table selected, run the following script in Tabular Editor's _'New C# Script'_ pane instead of applying the refresh policy by right-clicking the table.
+Con la tabla de actualización incremental seleccionada, ejecuta el siguiente script en el panel _'Nuevo C# Script'_ de Tabular Editor, en lugar de aplicar la política de actualización haciendo clic con el botón derecho en la tabla.
 
 ```csharp
-// Todo: replace with your effective date
+// Todo: reemplaza por tu fecha efectiva
 var effectiveDate = new DateTime(2020, 1, 1);  
 Selected.Table.ApplyRefreshPolicy(effectiveDate);
 ```
@@ -188,18 +188,18 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 
 <br></br>
 
-### Disabling Incremental Refresh
+### Deshabilitar la actualización incremental
 
-**Purpose:** To disable a refresh policy because it is not needed or the use-case no longer fits.
+**Propósito:** Deshabilitar una política de actualización porque ya no es necesaria o el caso de uso ya no aplica.
 
-**Property:** _EnableRefreshPolicy_
+**Propiedad:** _EnableRefreshPolicy_
 
-**Note:** To disable Incremental Refresh, follow the below steps:
+**Nota:** Para deshabilitar la actualización incremental, sigue estos pasos:
 
-1. **Copy the _Source Expression_:** With the table selected, in the _Expression Editor_ window, select _Source Expression_ from the top-left dropdown. Copy the _Source Expression_ to a separate text editor window.
-2. **Disable the Refresh Policy:** Change _EnableRefreshPolicy_ to `False`
-3. **Remove all Policy Range partitions:** Select and delete all of the Policy Range partitions
-4. **Create a new M Partition:** Right-click the table and select _Create > New Partition_. Set the partition _kind_ property to `M`.
-5. **Paste the _Source Expression_:** Copy the _Source Expression_ from **Step 6** into the _Expression Editor_ as the _M Expression_ when selecting the new partition.
-6. **Apply Changes:** Deploy the model changes.
-7. **Refresh the Table:** Select and right-click the table. Select _Refresh > Full refresh (table)_. You can right-click the table and select _'Preview data'_ to see the result.
+1. **Copia la _Expresión de origen_:** Con la tabla seleccionada, en la ventana _Editor de expresiones_, selecciona _Expresión de origen_ en el menú desplegable de la esquina superior izquierda. Copia la _Expresión de origen_ en una ventana aparte de un editor de texto.
+2. **Deshabilita la política de actualización:** Cambia _EnableRefreshPolicy_ a `False`
+3. **Elimina todas las particiones de Policy Range:** Selecciona y elimina todas las particiones de Policy Range
+4. **Crea una nueva partición M:** Haz clic con el botón derecho en la tabla y selecciona _Crear > Nueva partición_. Establece la propiedad _kind_ de la partición en `M`.
+5. **Pega la _Expresión de origen_:** Copia la _Expresión de origen_ del **Paso 6** en el _Editor de expresiones_ como _Expresión M_ al seleccionar la nueva partición.
+6. **Aplicar cambios:** Implementa los cambios del modelo.
+7. **Actualizar la tabla:** Selecciona la tabla y haz clic con el botón derecho. Selecciona _Actualizar > Actualización completa (tabla)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
