@@ -1,6 +1,6 @@
 ---
 uid: diagram-view-reference
-title: Diagram View
+title: Vista de diagrama
 author: Morten Lønskov
 updated: 2025-04-24
 applies_to:
