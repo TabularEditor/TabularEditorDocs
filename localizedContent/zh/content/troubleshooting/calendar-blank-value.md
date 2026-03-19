@@ -1,6 +1,6 @@
 ---
 uid: calendar-blank-value
-title: Calendar function blank date error
+title: Calendar 函数日期为空的错误
 author: Morten Lønskov
 updated: 2025-10-20
 applies_to:
@@ -9,33 +9,33 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Calendar function blank date error
+# Calendar 函数日期为空的错误
 
-## Overview
+## 概述
 
-This error may occur when refreshing a model in **Tabular Editor 3 (TE3)**, even if the affected table does not directly reference a `CALENDAR()` function. It typically indicates that a dependent Date or Calendar table relies on values from other tables that are temporarily empty, resulting in blank start or end date values.
+在 **Tabular Editor 3 (TE3)** 中刷新模型时可能会出现这个错误，即使受影响的表并未直接引用 `CALENDAR()` 函数。 这通常表示某个依赖的日期表或日历表依赖其他表中的值，而这些表在刷新过程中会暂时为空，导致开始日期或结束日期的值为空白。
 
-## Symptoms
+## 症状
 
-- Model refresh in Tabular Editor 3 fails with:
+- 在 Tabular Editor 3 中刷新模型失败，错误为：
 
   ```
-  The start date or end date in Calendar function cannot be Blank value.
+  Calendar 函数中的开始日期或结束日期不能为“空白”值。
   ```
 
-- The same model or table refreshes successfully in Power BI Desktop or Power BI Service.
+- 同一模型或表在 Power BI Desktop 或 Power BI Service 中可以成功刷新。
 
-- Reimporting the table under a new name (for example, _TableName 1_) succeeds temporarily.
+- 使用新名称重新导入该表（例如 _TableName 1_）可暂时成功。
 
-- The M expression for the affected table appears simple and valid:
+- 受影响表的 M 表达式看起来很简单且有效：
 
   ```m
   let
@@ -45,11 +45,11 @@ This error may occur when refreshing a model in **Tabular Editor 3 (TE3)**, even
     Data
   ```
 
-## Cause
+## 原因
 
-Although the error may appear unrelated to the table being refreshed, it usually originates from a downstream dependency in the model.
+虽然这个错误看起来与正在刷新的表无关，但通常源自模型中的下游依赖项。
 
-For example, a Date or Calendar table may define its range dynamically based on the minimum and maximum dates across multiple transactional tables:
+例如，日期表或日历表可能会基于多个事务表中的最小日期和最大日期，动态定义其范围：
 
 ```dax
 CALENDAR(
@@ -58,16 +58,16 @@ CALENDAR(
 )
 ```
 
-If one or more of those source tables is empty, the `MINX` or `MAXX` expressions return blank, which causes the `CALENDAR()` function to fail.
+如果其中一个或多个源表为空，`MINX` 或 `MAXX` 表达式会返回空白值，从而导致 `CALENDAR()` 函数失败。
 
-## Steps to resolve
+## 解决步骤
 
-1. **Identify dependent tables**
-   - Use the **Dependencies** view in Tabular Editor 3 to locate Date or Calendar tables that reference other tables’ date fields.
-2. **Check for empty tables**
-   - Verify that all referenced tables contain data. If a source table is empty, refresh the data source or adjust your schema variable configuration.
-3. **Add default fallback values**
-   - To prevent blank boundaries, wrap expressions with `COALESCE()` or specify default date values:
+1. **识别依赖表**
+   - 在 Tabular Editor 3 中使用 **Dependencies** 视图，找出引用其他表日期字段的 Date 或 Calendar 表。
+2. **检查空表**
+   - 确认所有被引用的表都包含数据。 如果源表为空，请刷新数据源或调整架构变量配置。
+3. **添加默认兜底值**
+   - 为避免边界为空，请用 `COALESCE()` 包裹表达式，或指定默认日期值：
 
      ```dax
      CALENDAR(
@@ -75,10 +75,10 @@ If one or more of those source tables is empty, the `MINX` or `MAXX` expressions
        COALESCE(MAXX(...), TODAY())
      )
      ```
-4. **Reprocess the model**
-   - After applying fixes or data updates, reprocess the affected tables in Tabular Editor 3.
+4. **重新处理模型**
+   - 在应用修复或更新数据后，在 Tabular Editor 3 中重新处理受影响的表。
 
-## Additional notes
+## 补充说明
 
 > [!NOTE]
-> This issue can occur when introducing schema variables in M scripts, such as using a variable to define the schema name (for example, `SchemaVar`).
+> 此问题可能在 M 脚本中引入架构变量时出现，例如使用变量来定义架构名称（如 `SchemaVar`）。
