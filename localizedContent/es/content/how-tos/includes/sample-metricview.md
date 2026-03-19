@@ -1,4 +1,4 @@
-This how-to uses a sample e-commerce Metric View representing sales data with three dimension tables (product, customer, date) joined to a fact table (orders).
+Este tutorial paso a paso utiliza una Vista de Métricas de comercio electrónico de ejemplo que representa datos de ventas, con tres tablas de dimensiones (producto, cliente y fecha) unidas a una tabla de hechos (pedidos).
 
 ```yaml
 version: 0.1
