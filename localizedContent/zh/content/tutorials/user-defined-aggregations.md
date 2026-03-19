@@ -1,6 +1,6 @@
 ---
 uid: user-defined-aggregations
-title: User-defined Aggregations
+title: 用户自定义聚合
 author: Just Blindbæk
 updated: 2026-02-19
 applies_to:
@@ -9,129 +9,129 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Implementing User-defined Aggregations
+# 实现用户自定义聚合
 
-A fully imported fact table caches every row in memory — including high-cardinality columns like individual order lines, transaction IDs, and row-level attributes that most report consumers never need. User-defined aggregations address this by splitting the fact table in two: a small, pre-aggregated **Import** table that handles the vast majority of report queries from the in-memory cache, and a **DirectQuery** detail table that holds all the row-level data without consuming memory. Power BI and Analysis Services automatically route each query to whichever table can answer it.
+完全导入的事实表会将每一行都缓存在内存中——包括高基数列，例如单个订单行、交易 ID，以及大多数 Report 使用者根本用不到的行级属性。 用户自定义聚合通过将事实表拆分为两部分来解决这一问题：一个小型的预聚合 **Import** 表，可从内存缓存中处理绝大多数 Report 查询；以及一个 **DirectQuery** 明细表，用于保存所有行级数据且不占用内存。 Power BI 和 Analysis Services 会自动将每个查询路由到能够回答它的那张表。
 
-The high-cardinality columns moved to DirectQuery come with a performance trade-off — queries that use them are sent directly to the source database rather than served from the in-memory engine. Hiding those columns from the default field list ensures that report consumers interact with the fast aggregation path by default, while advanced users who build reports that require row-level detail are aware they are working with DirectQuery columns.
+迁移到 DirectQuery 的高基数列会带来性能取舍——使用这些列的查询会直接发送到源数据库，而不是由内存引擎提供。 从默认字段列表中隐藏这些列，可确保 Report 使用者默认走更快的聚合路径；同时也让需要行级明细来构建 Report 的高级用户明确自己正在使用 DirectQuery 列。
 
-In this tutorial, you configure a user-defined aggregation for the `Orders` fact table in the SpaceParts model. You create a detail table that holds the full row-level data in DirectQuery mode, then configure the existing `Orders` table as the aggregation table with the appropriate column mappings.
+在本教程中，你将为 SpaceParts 模型中的 `Orders` 事实表配置一个用户定义的聚合。 你将先创建一张以 DirectQuery 模式保存完整行级数据的明细表，然后把现有的 `Orders` 表配置为聚合表，并设置相应的列映射。
 
 > [!NOTE]
-> The steps in this tutorial apply to both Tabular Editor 2 and Tabular Editor 3. Screenshots show Tabular Editor 3.
+> 本教程中的步骤同时适用于 Tabular Editor 2 和 Tabular Editor 3。 屏幕截图展示的是 Tabular Editor 3。
 
-## Prerequisites
+## 先决条件
 
-Before you begin, you should have:
+开始之前，你需要具备：
 
-- Tabular Editor 2 or Tabular Editor 3
-- A Power BI or Analysis Services semantic model with at least one Import fact table
-- Basic familiarity with storage modes (Import, DirectQuery, Dual)
+- Tabular Editor 2 或 Tabular Editor 3
+- 一个 Power BI 或 Analysis Services 语义模型，且至少包含一张 Import 事实表
+- 对存储模式（Import、DirectQuery、Dual）有基本了解
 
-## How Aggregations Work
+## 聚合的工作原理
 
-The aggregation pattern uses two versions of the same fact table:
+聚合模式使用同一张事实表的两个版本：
 
-| Table                                                 | Storage mode | Purpose                                                                                                                   |
-| ----------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| **Aggregation table** (`Orders`)   | Import       | Pre-aggregated data cached in memory. Answers summary queries.                            |
-| **Detail table** (`Order details`) | DirectQuery  | Full row-level data queried at source. Used when the aggregation cannot answer the query. |
+| 表                        | 存储模式        | 用途                             |
+| ------------------------ | ----------- | ------------------------------ |
+| **聚合表**（`Orders`）        | 导入          | 预聚合数据缓存在内存中。 用于回答汇总查询。         |
+| **明细表**（`Order details`） | DirectQuery | 在数据源端查询完整的行级数据。 当聚合无法满足该查询时使用。 |
 
-Dimension tables are set to **Dual** storage mode so they can participate in both Import and DirectQuery query paths.
+维度表设置为 **Dual** 存储模式，以便同时参与 Import 和 DirectQuery 两种查询路径。
 
-Setting tables to Dual or DirectQuery storage mode alone does not enable aggregation routing — it only creates a composite model where queries are directed based on storage mode. The **Alternate Of** property is what activates user-defined aggregations: it creates an explicit column-level mapping that tells the engine "when a query asks for this column from the detail table, you can use this pre-aggregated column instead." Without `Alternate Of`, the engine has no basis for substitution and will not route queries to the aggregation table. The engine evaluates every incoming query against these mappings to determine whether the aggregation table can answer it, and falls back to DirectQuery only when it cannot.
+只把表设置为 Dual 或 DirectQuery 存储模式并不会启用聚合路由——它只会创建一个复合模型，查询会根据存储模式被路由。 **Alternate Of** 属性用于激活用户定义的聚合：它会创建一个显式的列级映射，告诉引擎“当查询从明细表请求此列时，可以改用这个预聚合列”。 如果没有 `Alternate Of`，引擎就没有替换依据，也不会将查询路由到聚合表。 引擎会根据这些映射评估每个传入查询，以确定聚合表是否能够回答；只有在无法回答时才会回退到 DirectQuery。
 
 > [!IMPORTANT]
-> DirectQuery comes with known limitations that affect model design and report functionality. The most relevant for this pattern are: queries against DirectQuery columns depend on source response time; cloud sources have a one-million-row return limit per query; the automatic date/time hierarchy is unavailable for DirectQuery tables; and some DAX functions are not supported in DirectQuery mode. Review the full list before proceeding: [Use DirectQuery in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery).
+> DirectQuery 存在一些已知限制，会影响模型设计和 Report 功能。 与此模式最相关的包括：针对 DirectQuery 列的查询依赖数据源响应时间；云数据源每个查询最多返回一百万行；DirectQuery 表无法使用自动日期/时间层次结构；并且部分 DAX 函数在 DirectQuery 模式下不受支持。 继续之前先查看完整列表：[在 Power BI Desktop 中使用 DirectQuery](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery)。
 
-## Step 1: Set dimension tables to Dual storage mode
+## 步骤 1：将维度表设置为 Dual 存储模式
 
-Each dimension table that relates to the fact table must be set to **Dual** storage mode. This allows the engine to use dimension attributes in both Import and DirectQuery query paths.
+每个与事实表相关联的维度表都必须设置为 **Dual** 存储模式。 这使引擎能够在 Import 和 DirectQuery 两种查询路径中使用维度属性。
 
-For each dimension table (`Customers`, `Products`):
+对每个维度表（`Customers`、`Products`）：
 
-1. In the **TOM Explorer**, expand the table and then expand **Partitions**.
-2. Select the partition.
-3. In the **Properties** panel, find the **Mode** field under **Options** and set it to **Dual**.
+1. 在 **TOM Explorer** 中展开该表，然后展开 **Partitions**。
+2. 选择该分区。
+3. 在 **Properties** 面板中，找到 **Options** 下的 **Mode** 字段，并将其设置为 **Dual**。
 
-![The Customers partition selected in TOM Explorer with Mode set to Dual in the Properties panel](../assets/images/tutorials/user-defined-aggregations/mode-dual.jpg)
+![在 TOM Explorer 中选中 Customers 分区，并在 Properties 面板中将 Mode 设为 Dual](../assets/images/tutorials/user-defined-aggregations/mode-dual.jpg)
 
-Repeat this for every dimension table that participates in a relationship with the fact table.
+对每个与事实表存在关系的维度表重复上述操作。
 
-## Step 2: Create the detail table
+## 步骤 2：创建明细表
 
-The detail table is a copy of the original fact table, configured to query the source directly in DirectQuery mode. It is hidden from report consumers — its only purpose is to serve granular queries that the aggregation table cannot answer.
+明细表是原始事实表的副本，配置为在 DirectQuery 模式下直接向数据源发起查询。 它会对 Report 使用者隐藏——唯一用途是处理聚合表无法解答的明细级查询。
 
-### Duplicate the fact table
+### 复制事实表
 
-Create a copy of the **Orders** table and name it **Order details**. In Tabular Editor, you can do this by selecting the **Orders** table and using the right-click context menu to select **Duplicate 1 table**.
+创建 **Orders** 表的副本，并将其命名为 **Order details**。 在 Tabular Editor 中，你可以选中 **Orders** 表，然后在右键菜单中选择 **Duplicate 1 table**。
 
-### Set the partition to DirectQuery
+### 将分区设置为 DirectQuery
 
-1. In the **TOM Explorer**, expand **Order details** and then expand **Partitions**.
-2. Select the partition.
-3. In the **Properties** panel, set **Mode** to **DirectQuery**.
+1. 在 **TOM Explorer** 中，展开 **Order details**，然后展开 **分区**。
+2. 选择该分区。
+3. 在 **Properties** 面板中，将 **Mode** 设置为 **DirectQuery**。
 
-![The Order details partition selected in TOM Explorer with Mode set to DirectQuery in the Properties panel](../assets/images/tutorials/user-defined-aggregations/model-directquery.jpg)
+![在 TOM Explorer 中选择 Order details 分区，并在 Properties 面板中将 Mode 设置为 DirectQuery](../assets/images/tutorials/user-defined-aggregations/model-directquery.jpg)
 
-### Delete the measures
+### 删除度量值
 
-Any DAX measures copied from `Orders` — such as `Quantity` and `Value` — should be deleted from `Order details`. Measures belong on the aggregation table, not the detail table.
+从 `Orders` 复制过来的任何 DAX 度量值——比如 `Quantity` 和 `Value`——都应该从 `Order details` 里删掉。 度量值应该放在聚合表上，而不是明细表上。
 
-### Hide all columns and the table
+### 隐藏所有列和该表
 
-Select all columns in `Order details` and set **Hidden** to **True** in the **Properties** panel. Then select the `Order details` table itself and also set **Hidden** to **True**.
+选中 `Order details` 中的所有列，并在 **Properties** 面板中将 **Hidden** 设置为 **True**。 然后选中 `Order details` 表本身，也将 **Hidden** 设置为 **True**。
 
 > [!NOTE]
-> Hiding the detail table and all its columns ensures that report consumers always interact with the aggregation table. The detail table is an implementation detail of the aggregation architecture.
+> 隐藏明细表及其所有列，可确保 Report 使用者始终只与聚合表交互。 明细表是聚合架构的实现细节。
 
-## Step 3: Create relationships and set Rely On Referential Integrity
+## 步骤 3：创建关系并设置“Rely On Referential Integrity”
 
-The detail table needs the same relationships to dimension tables as the aggregation table, so the engine can route DirectQuery queries correctly.
+明细表需要与聚合表相同的维度表关系，这样引擎才能正确路由 DirectQuery 查询。
 
-Create the following relationships from the `Order details` table:
+在 `Order details` 表中创建以下关系：
 
 - `Order details[Customer Key]` → `Customers[Customer Key]`
 - `Order details[Product Key]` → `Products[Product Key]`
 
-For each of these new relationships, set **Rely On Referential Integrity** to **True** in the **Properties** panel.
+对于上述每条新建关系，请在“属性”窗格中将 **Rely On Referential Integrity** 设置为 **True**。
 
-![The relationship from Order details to Products selected in TOM Explorer, with Rely On Referential Integrity set to True in the Properties panel](../assets/images/tutorials/user-defined-aggregations/rely-on-referential-integrity.jpg)
-
-> [!NOTE]
-> **Rely On Referential Integrity** tells the engine to use an INNER JOIN instead of an OUTER JOIN when generating DirectQuery SQL. This improves query performance and is safe to enable when every foreign key value in the detail table has a matching row in the dimension table.
-
-## Step 4: Slim down the aggregation table
-
-The aggregation table (`Orders`) should only contain what the engine needs for aggregation routing:
-
-- **Relationship key columns**: `Customer Key`, `Product Key` — used to match dimension filters
-- **Numeric base columns**: `Net Order Quantity`, `Net Order Value` — will be mapped to detail table columns in the next step
-- **DAX measures**: `Quantity`, `Value`
-
-Delete all other columns from `Orders` — dates, document numbers, status fields, and any other attribute columns. These exist only in `Order details`.
+![在 TOM Explorer 中选中从 Order details 到 Products 的关系，并在“属性”窗格中将 Rely On Referential Integrity 设置为 True](../assets/images/tutorials/user-defined-aggregations/rely-on-referential-integrity.jpg)
 
 > [!NOTE]
-> For aggregation routing to work correctly, any attribute column absent from the aggregation table must exist in the detail table. The engine falls back to DirectQuery when a query references a column that is not in the aggregation table — so the detail table must have a complete copy of the fact data.
+> **Rely On Referential Integrity** 用于指示引擎在生成 DirectQuery SQL 时使用 INNER JOIN，而非 OUTER JOIN。 这能提升查询性能；当明细表中的每个外键值在维度表中都有匹配行时，启用它是安全的。
+
+## 步骤 4：精简聚合表
+
+聚合表（`Orders`）应只包含引擎进行聚合路由所需的内容：
+
+- **关系键列**：`Customer Key`、`Product Key` — 用于匹配维度筛选条件
+- **基础数值列**：`Net Order Quantity`、`Net Order Value` — 下一步将映射到明细表中的列
+- **DAX 度量值**：`Quantity`、`Value`
+
+删除 `Orders` 中所有其他列——日期、单据号、状态字段，以及任何其他属性列。 这些只应存在于 `Order details` 中。
+
+> [!NOTE]
+> 为确保聚合路由正常工作，聚合表中缺失的任何属性列都必须存在于明细表中。 当查询引用了聚合表中不存在的列时，引擎会回退到 DirectQuery，因此明细表必须完整保留一份事实数据的副本。
 >
-> This pattern works best for **high-cardinality columns that are rarely used in reports** — individual transaction IDs, document numbers, row-level status fields, and similar attributes. If the fact table also contains low-cardinality columns that appear frequently in reports (such as a region code or a product category flag), consider moving those to a dimension table in Dual mode instead, so they are served from the in-memory cache rather than from DirectQuery.
+> 这种模式最适用于**基数高但在 Report 中很少用的列**——单笔交易 ID、单据号、行级状态字段，以及类似属性。 如果事实表里还有在 Report 中经常出现的低基数列（例如区域代码或产品类别标记），可以考虑把这些列移到 Dual 模式的维度表中，这样这些列将由内存缓存提供，而不是通过 DirectQuery 获取。
 
 > [!TIP]
-> Also hide the `Orders` table itself by setting **Hidden** to **True** on the table. Like the detail table, the aggregation table is an implementation detail and should not appear in the report field list.
+> 另外，也可以通过在该表上将 **Hidden** 设置为 **True** 来隐藏 `Orders` 表本身。 和明细表一样，聚合表属于实现细节，不该出现在 Report 字段列表中。
 
-## Step 5: Update measures to reference the detail table
+## 步骤 5：更新度量值，使其引用明细表
 
-The measures on the aggregation table must reference the **detail table**, not the aggregation table itself. This is what enables the engine to fall back to DirectQuery correctly: when a query cannot be answered from the in-memory cache, the engine follows the measure reference to `Order details` and queries the source.
+聚合表上的度量值必须引用**明细表**，而不是聚合表本身。 这正是引擎能够正确回退到 DirectQuery 的原因：当查询无法从内存缓存中得到结果时，引擎会根据度量值的引用转到 `Order details` 并查询数据源。
 
-Update each measure on `Orders` to reference the corresponding column in `Order details`:
+将 `Orders` 上的每个度量值更新为引用 `Order details` 中对应的列：
 
 ```dax
 // Quantity
@@ -139,37 +139,37 @@ SUM( 'Order details'[Net Order Quantity] )
 ```
 
 ```dax
-// Value
+// 值
 SUM( 'Order details'[Net Order Value] )
 ```
 
 > [!NOTE]
-> Measures do not have to reside on the aggregation table. They can be defined on `Order details` or on any other table in the model — for example, a dedicated, empty measures table. In this tutorial they are kept on `Orders` for simplicity.
+> 度量值不一定要放在聚合表中。 它们可以定义在 `Order details` 上，也可以定义在模型中的任何其他表上——例如，专门的空白度量值表。 为简单起见，本教程将它们放在 `Orders` 上。
 
-## Step 6: Configure the Alternate Of property
+## 步骤 6：配置 Alternate Of 属性
 
-For each numeric base column in the aggregation table, configure the **Alternate Of** property to tell the engine which column in the detail table it maps to.
+对于聚合表中的每个数值型基础列，配置 **Alternate Of** 属性，以告诉引擎它对应明细表中的哪一列。
 
-1. In the **TOM Explorer**, expand the `Orders` table and select a base column — for example, **Net Order Quantity**.
-2. In the **Properties** panel, expand the **Alternate Of** group.
-3. Set **Base Column** to the corresponding column in the detail table: `Order details[Net Order Quantity]`.
-4. Verify that **Summarization** is set to **Sum**.
+1. 在 **TOM Explorer** 中，展开 `Orders` 表并选择一个基础列——例如 **Net Order Quantity**。
+2. 在 **属性** 面板中，展开 **Alternate Of** 分组。
+3. 将 **Base Column** 设置为明细表中对应的列：`Order details[Net Order Quantity]`。
+4. 确认 **Summarization** 设置为 **Sum**。
 
-![The Net Order Quantity column in Orders selected, with Alternate Of Base Column set to Order details[Net Order Quantity] and Summarization set to Sum](../assets/images/tutorials/user-defined-aggregations/alternate-of.jpg)
+![在 Orders 表中选中 Net Order Quantity 列，将 Alternate Of Base Column 设置为 Order details[Net Order Quantity]，并将 Summarization 设置为 Sum](../assets/images/tutorials/user-defined-aggregations/alternate-of.jpg)
 
-Repeat for **Net Order Value**, mapping it to `Order details[Net Order Value]` with **Summarization: Sum**.
+对 **Net Order Value** 重复上述操作，将其映射到 `Order details[Net Order Value]`，并设置 **Summarization: Sum**。
 
-## Verifying the Result
+## 验证结果
 
-The diagram view in Tabular Editor shows the completed aggregation architecture. Both `Orders` and `Order details` connect to the same dimension tables through parallel sets of relationships.
+Tabular Editor 中的图表视图显示已完成的聚合架构。 `Orders` 和 `Order details` 都通过并行的关系集连接到同一组维度表。
 
-![Tabular Editor diagram view showing the Orders aggregation table and Order details detail table, both connected to Customers and Products via relationships](../assets/images/tutorials/user-defined-aggregations/diagram-view-tabular-editor.jpg)
+![Tabular Editor 图表视图，显示 Orders 聚合表和 Order details 明细表，两者均通过关系连接到 Customers 和 Products](../assets/images/tutorials/user-defined-aggregations/diagram-view-tabular-editor.jpg)
 
-In Power BI Desktop, the model view shows the same structure with storage mode icons and color coding: the dimension tables display the Dual storage mode indicator, `Order details` shows as DirectQuery and hidden, and `Orders` shows as Import and hidden.
+在 Power BI Desktop 中，模型视图会以存储模式图标和颜色编码显示相同的结构：维度表显示 Dual 存储模式指示器，`Order details` 显示为 DirectQuery 且已隐藏，`Orders` 显示为 Import 且已隐藏。
 
-![Power BI Desktop model view showing the completed aggregation setup with Dual-mode dimensions, a hidden Import aggregation table, and a hidden DirectQuery detail table](../assets/images/tutorials/user-defined-aggregations/diagram-view-power-bi-desktop.jpg)
+![Power BI Desktop 模型视图，显示已完成的聚合设置：Dual 模式的维度表、隐藏的 Import 聚合表，以及隐藏的 DirectQuery 明细表](../assets/images/tutorials/user-defined-aggregations/diagram-view-power-bi-desktop.jpg)
 
-## Further Reading
+## 延伸阅读
 
-- [Microsoft Docs: User-defined aggregations in Power BI](https://learn.microsoft.com/en-us/power-bi/transform-model/aggregations-advanced)
-- [Microsoft Docs: Storage modes in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-storage-mode)
+- [Microsoft 文档：Power BI 中的用户定义聚合](https://learn.microsoft.com/en-us/power-bi/transform-model/aggregations-advanced)
+- [Microsoft 文档：Power BI Desktop 中的存储模式](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-storage-mode)
