@@ -1,26 +1,26 @@
-﻿- name: Home
+﻿- name: Inicio
   href: index.md
-- name: Getting started
-  href: getting-started/
-  homepage: getting-started/index.md
-- name: Features
-  href: features/
-  homepage: features/index.md
-- name: How-tos
-  href: how-tos/
-  homepage: how-tos/index.md
-- name: Tutorials
-  href: tutorials/
-  homepage: tutorials/index.md
-- name: References
-  href: references/
-  homepage: references/index.md
-- name: Troubleshooting
-  href: troubleshooting/
-  homepage: troubleshooting/index.md
-- name: Security
-  href: security/
-  homepage: security/index.md
+- name: Primeros pasos
+  href: primeros-pasos/
+  homepage: primeros-pasos/index.md
+- name: Características
+  href: caracteristicas/
+  homepage: caracteristicas/index.md
+- name: Guías prácticas
+  href: guias-practicas/
+  homepage: guias-practicas/index.md
+- name: Tutoriales
+  href: tutoriales/
+  homepage: tutoriales/index.md
+- name: Referencias
+  href: referencias/
+  homepage: referencias/index.md
+- name: Solución de problemas
+  href: solucion-de-problemas/
+  homepage: solucion-de-problemas/index.md
+- name: Seguridad
+  href: seguridad/
+  homepage: seguridad/index.md
 - name: API
   href: api/
   homepage: api/index.md
