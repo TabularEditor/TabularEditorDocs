@@ -1,6 +1,6 @@
 ---
 uid: references-application-language
-title: Application Language
+title: Idioma de la aplicación
 author: Morten Lønskov
 updated: 2026-01-12
 applies_to:
@@ -16,88 +16,88 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Change the display language for Tabular Editor 3's user interface.
+description: Cambia el idioma de visualización de la interfaz de usuario de Tabular Editor 3.
 ---
 
-# Application Language
+# Idioma de la aplicación
 
-Tabular Editor 3 supports multiple UI languages. You can switch between them at any time.
-
-> [!NOTE]
-> Tabular Editor 3 is still not fully localized. Specifically we have so far not localized the individual TOM properties.
-
-## Supported Languages
-
-| Language | Status          |
-| -------- | --------------- |
-| English  | Fully supported |
-| Spanish  | Preview         |
-| Chinese  | Preview         |
-| French   | Beta            |
-| German   | Beta            |
-| Japanese | Beta            |
+Tabular Editor 3 admite varios idiomas en la interfaz de usuario. Puedes alternar entre ellos en cualquier momento.
 
 > [!NOTE]
-> **Preview** languages have core UI elements translated but may have incomplete coverage. **Beta** languages are experimental and may have significant gaps or inconsistencies. Report issues on [GitHub](https://github.com/TabularEditor/TabularEditor3/issues).
+> Tabular Editor 3 aún no está totalmente localizado. En concreto, por ahora no hemos localizado las propiedades individuales de TOM.
 
-### Preview Languages
+## Idiomas admitidos
 
-The languages under Beta support means that they have been verified by an human translator, but that Tabular Editor 3 may still not be fully localized. Specifically we have so far not localized the individual TOM properties.
+| Idioma  | Estado                |
+| ------- | --------------------- |
+| Inglés  | Totalmente compatible |
+| Español | En vista previa       |
+| Chino   | En vista previa       |
+| Francés | Beta                  |
+| Alemán  | Beta                  |
+| Japonés | Beta                  |
 
-### Beta Languages
+> [!NOTE]
+> Los idiomas en **Preview** tienen traducidos los elementos principales de la interfaz, pero la cobertura puede ser incompleta. Los idiomas **Beta** son experimentales y pueden tener lagunas importantes o incoherencias. Envía un **Report** de problemas en [GitHub](https://github.com/TabularEditor/TabularEditor3/issues).
 
-Beta languages have been translated exclusively through AI and have not been verified by human translators. We plan to bring beta languages into Preview in Q2 2026.
+### Idiomas en Preview
 
-## Changing the Language
+Que un idioma tenga soporte beta significa que ha sido verificado por un traductor humano, pero es posible que Tabular Editor 3 aún no esté totalmente localizado. En concreto, por ahora no hemos localizado las propiedades individuales de TOM.
 
-There are two ways to change the application language:
+### Idiomas Beta
 
-### Via Window Menu
+Los idiomas beta se han traducido exclusivamente con IA y no han sido revisados por traductores humanos. Planeamos pasar los idiomas Beta a Preview en el segundo trimestre de 2026.
 
-1. Click **Window** > **Language**
-2. Select your desired language
-3. Click **OK** when prompted to restart
-4. Restart Tabular Editor 3 manually
+## Cambiar el idioma
 
-[Change Language via Window Menu](~/content/assets/images/user-interface/chaning-language-windows-ui.png)
+Hay dos formas de cambiar el idioma de la aplicación:
 
-### Via Preferences
+### Desde el menú Ventana
 
-1. Click **Tools** > **Preferences**
-2. Navigate to **UI** section
-3. Select your desired language from the **Language** dropdown
-4. Click **OK** when prompted to restart
-5. Restart Tabular Editor 3 manually
+1. Haz clic en **Ventana** > **Idioma**
+2. Selecciona el idioma deseado
+3. Haz clic en **OK** cuando se te solicite reiniciar
+4. Reinicia Tabular Editor 3 manualmente
 
-[Change Language via Window Menu](~/content/assets/images/user-interface/chaning-language-preferences.png)
+[Cambiar el idioma a través del menú Ventana](~/content/assets/images/user-interface/chaning-language-windows-ui.png)
 
-## Restart Requirement
+### Desde Preferencia
 
-**You must restart Tabular Editor 3** for language changes to take effect. The application prompts you to restart but does not restart automatically. Save your work before changing the language.
+1. Haz clic en **Herramientas** > **Preferencia**
+2. Ve a la sección **UI**
+3. Selecciona el idioma que desees en el menú desplegable **Idioma**
+4. Haz clic en **Aceptar** cuando se te solicite reiniciar
+5. Reinicia Tabular Editor 3 manualmente
 
-[Change Language via Window Menu](~/content/assets/images/user-interface/chaning-language-restart-pop-up.png)
+[Cambiar idioma desde el menú Ventana](~/content/assets/images/user-interface/chaning-language-preferences.png)
 
-## Installation Language
+## Requisito de reinicio
 
-During installation, the installer prompts you to select a language (English, Spanish, or Chinese). This sets your initial language preference, and Tabular Editor 3 displays in that language on first launch.
+**Debes reiniciar Tabular Editor 3** para que los cambios de idioma surtan efecto. La aplicación te pide que reinicies, pero no se reinicia automáticamente. Guarda tu trabajo antes de cambiar el idioma.
 
-The installer writes your selection to the preferences file in your LocalAppData folder. You can change this later using either method above.
+[Cambiar idioma desde el menú Ventana](~/content/assets/images/user-interface/chaning-language-restart-pop-up.png)
 
-## Language Persistence
+## Idioma de instalación
 
-Your language preference is stored in `UiPreferences.json` in your user profile. The setting persists across application updates and restarts.
+Durante la instalación, el instalador te pide que selecciones un idioma (inglés, español o chino). Esto establece tu preferencia de idioma inicial, y Tabular Editor 3 se mostrará en ese idioma al iniciarse por primera vez.
 
-## Providing Feedback
+El instalador guarda tu selección en el archivo de preferencias de tu carpeta LocalAppData. Puedes cambiarlo más adelante con cualquiera de los dos métodos anteriores.
 
-### Translation Issues
+## Persistencia del idioma
 
-If you find incorrect translations or missing text:
+Tu preferencia de idioma se guarda en `UiPreferences.json` en tu perfil de usuario. La configuración se mantiene tras las actualizaciones de la aplicación y los reinicios.
 
-- Open an issue on [GitHub](https://github.com/TabularEditor/TabularEditor3/issues)
-- Include the language, the incorrect text, and where it appears in the UI
-- Suggest the correct translation if possible
+## Enviar comentarios
 
-## See Also
+### Problemas de traducción
 
-- [Preferences](xref:preferences)
-- [User Interface Overview](xref:user-interface)
+Si encuentras traducciones incorrectas o texto faltante:
+
+- Abre una incidencia en [GitHub](https://github.com/TabularEditor/TabularEditor3/issues)
+- Incluye el idioma, el texto incorrecto y en qué parte de la interfaz de usuario aparece
+- Sugiere la traducción correcta si es posible
+
+## Véase también
+
+- [Preferencias](xref:preferences)
+- [Descripción general de la interfaz de usuario](xref:user-interface)
