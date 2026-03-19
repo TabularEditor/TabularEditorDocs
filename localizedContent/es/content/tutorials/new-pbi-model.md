@@ -1,6 +1,6 @@
 ---
 uid: new-pbi-model
-title: Create a Power BI Semantic Model
+title: Crear un modelo semántico de Power BI
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:
@@ -9,34 +9,34 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: Escritorio
           none: true
         - edition: Business
           partial: true
-          note: "Premium Per User XMLA Endpoints Only"
+          note: "Solo para los puntos de conexión XMLA de Premium por usuario"
         - edition: Enterprise
           full: true
 ---
 
-# (Tutorial) Creating your first Power BI semantic model
+# (Tutorial) Cómo crear tu primer modelo semántico de Power BI
 
-This page walks you through the process of creating a new Power BI semantic model from scratch using Tabular Editor 3.
+Esta página te guía paso a paso por el proceso de crear un nuevo modelo semántico de Power BI desde cero con Tabular Editor 3.
 
 > [!IMPORTANT]
-> Tabular Editor 3 Business Edition is limited to [Power BI Premium Per User](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-per-user-faq). For Fabric/Power BI Premium or Embedded capacity, you must upgrade to Tabular Editor 3 Enterprise Edition. In either case, the Power BI workspace in which the semantic model is to be deployed, must have its [XMLA read/write endpoint enabled](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write).
+> La Edición Business de Tabular Editor 3 está limitada a [Power BI Premium por usuario](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-per-user-faq). Para usar una capacidad de Fabric/Power BI Premium o Embedded, debes actualizar a la Edición Enterprise de Tabular Editor 3. En cualquiera de los casos, el Workspace de Power BI en el que se vaya a implementar el modelo semántico debe tener habilitado el [punto de conexión XMLA de lectura/escritura](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write).
 >
-> Tabular Editor 3 Desktop Edition does not have any support for Power BI semantic models.
+> La Edición de escritorio de Tabular Editor 3 no admite modelos semánticos de Power BI.
 >
-> [More information](xref:editions).
+> [Más información](xref:editions).
 
-##### Creating a new semantic model
+##### Crear un nuevo modelo semántico
 
-1. From the File menu, choose New > Model... or hit `CTRL+N`
+1. En el menú Archivo, elige Nuevo > Modelo... o pulsa `CTRL+N`
 
-![New model](~/content/assets/images/tutorials/new-pbi-model.png)
+![Nuevo modelo](~/content/assets/images/tutorials/new-pbi-model.png)
 
-- Provide a name for your model or use the default value. Then, set the compatibility level to "1609 (Power BI / Fabric)".
-- For the best development experience, check the "Use workspace database" option. This requires that you have a development workspace available in Power BI, with XMLA read/write enabled. When you click OK, you will be prompted to enter the connection string for the Power BI workspace in which you want the workspace database created.
+- Indica un nombre para tu modelo o usa el valor predeterminado. Luego, establece el nivel de compatibilidad en "1609 (Power BI / Fabric)".
+- Para obtener la mejor experiencia de desarrollo, marca la opción "Usar base de datos del Workspace". Esto requiere que tengas un Workspace de desarrollo disponible en Power BI, con el punto de conexión XMLA de lectura/escritura habilitado. Al hacer clic en Aceptar, se te pedirá que introduzcas la cadena de conexión del Workspace de Power BI en el que quieres que se cree la base de datos del Workspace.
 
 > [!NOTE]
-> With a workspace database, you can validate Power Query (M expressions) and import table schema from Power Query expressions. You can also refresh and query data in the workspace database, making it easier to debug and test your DAX expressions.
+> Con una base de datos del Workspace, puedes validar Power Query (expresiones M) e importar el esquema de la tabla desde expresiones de Power Query. También puedes actualizar y consultar datos en la base de datos del Workspace, lo que facilita la depuración y las pruebas de tus expresiones DAX.
