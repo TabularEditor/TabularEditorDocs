@@ -1,6 +1,6 @@
 ---
 uid: connect-ssas
-title: Connect & Deploy to SSAS
+title: Conectar e implementar en SSAS
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,14 +9,14 @@ applies_to:
       full: true
 ---
 
-## Connect/deploy to SSAS Tabular Databases
+## Conectar/implementar en bases de datos tabulares de SSAS
 
-Hitting CTRL+SHIFT+O lets you open a Tabular Model directly from a Tabular Database that has already been deployed. Enter the server address and (optionally) provide a username and password. After hitting "OK", you will be prompted with a list of databases and the server. Select the one you want to load, and click "OK" again.
+Al pulsar CTRL+SHIFT+O, puedes abrir un modelo tabular directamente desde una base de datos tabular que ya se ha implementado. Introduce la dirección del servidor y (opcionalmente) proporciona un nombre de usuario y una contraseña. Después de hacer clic en "Aceptar", se te mostrará una lista de las bases de datos del servidor. Selecciona la que quieras cargar y haz clic en "Aceptar" de nuevo.
 
 ![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
 
-The dialog shown also lets you connect to Azure Analysis Services instances, if you provide the full name of the Azure AS instance, starting with "azureas://". The "Local Instance" dropdown, may be used to browse and connect to any running instances of Power BI Desktop or Visual Studio Integrated Workspaces. **Note that although Tabular Editor can make changes to a Power BI model through the TOM, this is not supported by Microsoft and may corrupt your .pbix file. Proceed at your own risk!**
+El cuadro de diálogo mostrado también te permite conectarte a instancias de Azure Analysis Services si proporcionas el nombre completo de la instancia de Azure AS, empezando por "azureas://". Puedes usar la lista desplegable "Instancia local" para buscar y conectarte a cualquier instancia en ejecución de Power BI Desktop o a áreas de trabajo Integradas de Visual Studio. **Ten en cuenta que, aunque Tabular Editor puede realizar cambios en un modelo de Power BI a través de TOM, Microsoft no lo admite y podría dañar el archivo .pbix. ¡Continúa bajo tu propia responsabilidad!**
 
-Any time you press CTRL+S after the database has been loaded, the database will be updated with any changes you've made in Tabular Editor. Client tools (Excel, Power BI, DAX Studio, etc.) should be able to immediately view the changes in the database after this. Note that you may need to manually recalculate objects in the model, depending on the changes made, to successfully query the model.
+Cada vez que pulses CTRL+S después de cargar la base de datos, esta se actualizará con los cambios que hayas hecho en Tabular Editor. Herramientas cliente (Excel, Power BI, DAX Studio, etc.) deberían poder ver inmediatamente los cambios en la base de datos a partir de ese momento. Ten en cuenta que, según los cambios realizados, puede que necesites recalcular manualmente los objetos del modelo para poder consultarlo correctamente.
 
-If you want to save the connected model to a Model.bim file, choose "Save As..." from the "File" menu.
+Si quieres guardar el modelo en modo conectado en un archivo Model.bim, elige "Guardar como..." en el menú "Archivo".
