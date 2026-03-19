@@ -1,6 +1,6 @@
 ---
 uid: refresh-preview-query
-title: Refreshing, previewing and querying data
+title: Actualización, vista previa y consulta de datos
 author: Daniel Otykier
 updated: 2026-01-08
 applies_to:
@@ -17,171 +17,171 @@ applies_to:
           full: true
 ---
 
-# Refreshing, previewing and querying data
+# Actualización, vista previa y consulta de datos
 
-When Tabular Editor 3 is connected to an instance of Analysis Services, a number of additional **connected features** are available, allowing you to use Tabular Editor 3 as a client tool for Analysis Services.
+Cuando Tabular Editor 3 se conecta a una instancia de Analysis Services, se habilitan varias **funciones conectadas** adicionales que le permiten usar Tabular Editor 3 como herramienta cliente para Analysis Services.
 
 > [!NOTE]
-> The phrase "connected to an instance of Analysis Services" means any one of the following:
+> La expresión "conectado a una instancia de Analysis Services" se refiere a cualquiera de las siguientes opciones:
 >
-> - Loading a model in [**workspace mode**](xref:workspace-mode)
-> - Loading a model directly from SQL Server Analysis Services, Azure Analysis Services or the Power BI XMLA endpoint
-> - Using Tabular Editor 3 as an external tool for Power BI Desktop
+> - Cargar un modelo en el [**modo del área de trabajo**](xref:workspace-mode)
+> - Cargar un modelo directamente desde SQL Server Analysis Services, Azure Analysis Services o el punto de conexión XMLA de Power BI
+> - Usar Tabular Editor 3 como herramienta externa para Power BI Desktop
 
-In summary, these connected features are:
+En resumen, estas funciones conectadas son:
 
-- Data refresh operations
-- Table data previewing
+- Operaciones de actualización de datos
+- Vista previa de datos de las tablas
 - PivotGrids
-- DAX Querying
-- VertiPaq Analyzer
+- Consulta DAX
+- Analizador VertiPaq
 
-# Refreshing data
+# Actualización de datos
 
-Tabular Editor does not automatically trigger refresh operations in Analysis Services when changes are made to the data model. This is by design, to ensure that saving metadata changes to Analysis Services does not take too long. Potentially, a refresh operation can take a long time to complete, during which no additional metadata may be updated on the server. Of course, the drawback of this, is that you can make changes using Tabular Editor, which causes the model to enter a state where it is only partly queryable or not queryable at all. Depending on what type of data model change was made, different levels of refresh may be needed.
+Tabular Editor no inicia automáticamente operaciones de actualización en Analysis Services cuando se realizan cambios en el Data model. Esto se hace así por diseño, para garantizar que guardar los cambios de metadatos en Analysis Services no lleve demasiado tiempo. Una operación de actualización puede tardar mucho en completarse; durante ese tiempo, no se puede actualizar ningún metadato adicional en el servidor. Como contrapartida, puede hacer cambios con Tabular Editor, lo que hace que el modelo pase a un estado en el que solo se puede consultar parcialmente o no se puede consultar en absoluto. Según el tipo de cambio realizado en el Data model, puede que necesites aplicar distintos niveles de actualización.
 
-In general, the following changes require a full refresh, before the mentioned object can be queried (that is, a data refresh followed by a calculate refresh):
+En general, los siguientes cambios requieren una actualización completa antes de poder consultar el objeto mencionado (es decir, una actualización de datos seguida de una actualización de cálculo):
 
-- Adding a new table to the model
-- Adding a new column to a table
+- Agregar una nueva tabla al modelo
+- Agregar una nueva columna a una tabla
 
-In general, the following changes require a calculate refresh:
+En general, los siguientes cambios requieren una actualización de cálculo:
 
-- Changing the DAX expression of a calculated table or calculated column
-- Adding or modifying a relationship
-- Adding, renaming or removing a calculation item from a calculation group
+- Cambiar la expresión DAX de una tabla calculada o de una columna calculada
+- Agregar o modificar una relación
+- Agregar, cambiar el nombre o quitar un elemento de cálculo de un grupo de cálculo
 
-Notably, adding, modifying or removing measures from a model does not require any type of refresh (unless the measure is referenced by a calculated column, in which case the table in which that column resides has to be recalculated).
+Cabe destacar que añadir, modificar o quitar medidas a un modelo no requiere ningún tipo de actualización (a menos que la medida esté referenciada por una columna calculada; en ese caso, habrá que recalcular la tabla en la que se encuentra esa columna).
 
-To initiate a refresh using Tabular Editor, simply right click on the Table or Partition you wish to refresh, navigate to **Refresh table** or **Refresh partition**, and then choose the type of refresh you want to perform.
+Para iniciar una actualización con Tabular Editor, haz clic con el botón derecho en la tabla o partición que quieras actualizar, ve a **Actualizar tabla** o **Actualizar partición** y elige el tipo de actualización que quieres ejecutar.
 
-![Refresh Table](~/content/assets/images/refresh-table.png)
+![Actualizar tabla](~/content/assets/images/refresh-table.png)
 
-You may also initiate a refresh at the model level through the **Model > Refresh model** menu. Once the refresh operation starts, you will see the text "Data refresh started... <ins>View refresh queue</ins>". Click on the link or locate the **Data refresh** view through the **View > Data refresh** menu option. This will display a list of all refresh operations (both present and current), displaying the status message returned from Analysis Services including progress counters and duration, and allowing you to cancel an unintended refresh.
+También puedes iniciar una actualización a nivel de modelo desde el menú **Modelo > Actualizar modelo**. Una vez iniciada la operación de actualización, verás el texto "Data refresh started... <ins>Ver cola de actualizaciones</ins>". Haz clic en el enlace o abre la vista **Actualización de datos** desde la opción de menú **Vista > Actualización de datos**. Esto mostrará una lista de todas las operaciones de actualización (tanto las pasadas como las que están en curso), con los mensajes de estado devueltos por Analysis Services, incluidos los contadores de progreso y la duración, y te permitirá cancelar una actualización iniciada por error.
 
-![Data Refresh View2](~/content/assets/images/data-refresh-view2.png)
+![Vista de actualización de datos](~/content/assets/images/data-refresh-view2.png)
 
 > [!TIP]
-> The Data Refresh view includes a **Start Time** column that shows when each refresh operation began. Click the column header to sort operations chronologically, making it easy to see your most recent refreshes first. You can sort by any column to organize refresh operations according to your needs. See [Data Refresh view](xref:data-refresh-view) for more details.
+> La vista de actualización de datos incluye una columna **Hora de inicio** que muestra cuándo comenzó cada operación de actualización. Haz clic en el encabezado de la columna para ordenar las operaciones cronológicamente; así verás primero las actualizaciones más recientes. Puedes ordenar por cualquier columna para organizar las operaciones de actualización según tus necesidades. Consulta la [vista de actualización de datos](xref:data-refresh-view) para obtener más información.
 
-While a refresh is in progress you can continue work on your data model, querying and previewing data or queueing new data refresh operations according to this article. However, you will not be able to save model changes to Analysis Services until the all data refresh operations complete.
+Mientras una actualización está en curso, puedes seguir trabajando en tu Data model, consultando y previsualizando datos o poniendo en cola nuevas operaciones de actualización de datos, tal como se describe en este artículo. Sin embargo, no podrás guardar los cambios del modelo en Analysis Services hasta que finalicen todas las operaciones de actualización de datos.
 
-## Supported refresh operations
+## Operaciones de actualización compatibles
 
-Tabular Editor 3 supports refresh operations on different object types. The supported refresh types are shown below:
+Tabular Editor 3 admite operaciones de actualización en distintos tipos de objetos. Los tipos de actualización compatibles se muestran a continuación:
 
-- **Model** (Automatic, calculate, full)
-- **(Imported) Table** (Automatic, calculate, data only, full)
-- **Partition** (Full)
-- **Calculated Table** (Calculate)
-- **Calculation Group** (Calculate)
+- **Modelo** (Automática, cálculo, completa)
+- **Tabla (importada)** (Automática, cálculo, solo datos, completa)
+- **Partición** (Completa)
+- **Tabla calculada** (Calculate)
+- **Grupo de cálculo** (Calculate)
 
-See [Refresh Types](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) for more information about the types of refresh operations supported by Analysis Services / Power BI.
+Consulta [Tipos de actualización](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) para obtener más información sobre los tipos de operaciones de actualización compatibles con Analysis Services / Power BI.
 
-# Previewing table data
+# Vista previa de los datos de la tabla
 
-At certain points during DAX authoring and data model development, you may need to inspect the contents of your tables on a row-by-row basis. Of course, you could write a DAX query to achieve this, but Tabular Editor 3 makes that even easier by allowing you to preview table data directly. To do this, right-click on a table and choose the **Preview data** option.
+En determinados momentos, durante la creación de DAX y el desarrollo del Data model, es posible que necesites inspeccionar el contenido de tus tablas fila por fila. Por supuesto, podrías escribir una consulta DAX para hacerlo, pero Tabular Editor 3 lo pone aún más fácil al permitirte previsualizar los datos de la tabla directamente. Para ello, haz clic con el botón derecho en una tabla y elige la opción **Vista previa de datos**.
 
 ![Preview Data](~/content/assets/images/preview-data-big.png)
 
-You can open multiple such table previews and arrange them anyway you like in the user interface. In addition, you can sort or filter individual columns. There is no practical limit to the number of rows that can be previewed. Tabular Editor simply executes a [`TOPNSKIP`](https://dax.guide/topnskip) DAX query against the model, to return just a small number of records suitable to fill the current view.
+Puedes abrir varias vistas previas de tabla y organizarlas como quieras en la interfaz de usuario. Además, puedes ordenar o filtrar columnas individuales. No hay un límite práctico para el número de filas que se pueden previsualizar. Tabular Editor simplemente ejecuta una consulta DAX [`TOPNSKIP`](https://dax.guide/topnskip) contra el modelo y devuelve solo un número reducido de registros, suficiente para rellenar la vista actual.
 
-If one or more calculated columns are in an invalid state, those columns contain the text _(Calculation needed)_. You can recalculate the table by right-clicking on the column and choosing the **Recalculate table...** option.
+Si una o más columnas calculadas están en un estado no válido, esas columnas contienen el texto _(Calculation needed)_. Puedes recalcular la tabla haciendo clic con el botón derecho en la columna y eligiendo la opción **Recalcular tabla...**.
 
 ![Recalculate Table](~/content/assets/images/recalculate-table.png)
 
-# Pivot Grids
+# Pivot Grid
 
-After adding or editing DAX measures in a model, it is common for model developers to test these measures. Traditionally, this was typically done using client tools such as Excel or Power BI. With Tabular Editor 3, you can now use **Pivot Grids** which behave much like the famous PivotTables of Excel. The Pivot Grid lets you quickly create summarized views of the data in your model, allowing you test the behavior of your DAX measures when filtering and slicing by various columns and hierarchies.
+Después de agregar o editar medidas DAX en un modelo, es habitual que los desarrolladores del modelo prueben estas medidas. Tradicionalmente, esto solía hacerse con herramientas cliente como Excel o Power BI. Con Tabular Editor 3, ahora puedes usar **Pivot Grid**, que se comportan de forma muy parecida a las conocidas tablas dinámicas de Excel. Pivot Grid te permite crear rápidamente vistas resumidas de los datos de tu modelo, lo que te permite probar el comportamiento de tus medidas DAX al filtrar y segmentar por varias columnas y jerarquías.
 
-To create a new Pivot Grid, use the **File > New > Pivot Grid** option. From here, you can either drag measures, columns and hierarchies from the TOM Explorer into the grid, or you can use the **Pivot Grid > Show fields** menu option to display a popup list of all fields that can be dragged into the Pivot Grid (see screenshot below).
+Para crear una nueva Pivot Grid, usa la opción **Archivo > Nuevo > Pivot Grid**. Desde aquí, puedes arrastrar medidas, columnas y jerarquías desde el Explorador TOM a la cuadrícula, o bien usar la opción de menú **Pivot Grid > Mostrar campos** para ver una lista emergente de todos los campos que se pueden arrastrar a la Pivot Grid (consulta la captura de pantalla a continuación).
 
 ![Show Fields Pivot](~/content/assets/images/show-fields-pivot.png)
 
-As fields are dragged into the Pivot Grid, Tabular Editor generates MDX queries that are sent to Analysis Services, to display the resulting data. In this regard, the behavior is very similar to Pivot Tables in Excel. You can rearrange fields in the Pivot Grid by dragging and dropping, and there are various right-click menu options available for customizing how the data is displayed.
+A medida que se arrastran campos a la Pivot Grid, Tabular Editor genera consultas MDX que se envían a Analysis Services para mostrar los datos resultantes. En este sentido, el comportamiento es muy similar al de las tablas dinámicas de Excel. Puedes reorganizar los campos del Pivot Grid arrastrándolos y soltándolos, y hay varias opciones en el menú contextual para personalizar la forma en que se muestran los datos.
 
-![Customizing Pivot Grids](~/content/assets/images/customizing-pivot-grids.png)
+![Personalizar Pivot Grid](~/content/assets/images/customizing-pivot-grids.png)
 
-The Pivot Grid is automatically refreshed when a change is made to the model or a refresh operation finishes. You can toggle this auto-refresh capability within the **Pivot Grid** menu.
+El Pivot Grid se actualiza automáticamente cuando se realiza un cambio en el modelo o finaliza una operación de actualización. Puedes activar o desactivar esta actualización automática en el menú **Pivot Grid**.
 
-# DAX Queries
+# Consultas DAX
 
-A more direct way to query the data in your model, is to write a DAX query. Use the **File > New > DAX Query** menu option to create a new DAX query document. You can have multiple DAX query documents open at the same time.
+Una forma más directa de consultar los datos de tu modelo es escribir una consulta DAX. Usa la opción de menú **Archivo > Nuevo > Consulta DAX** para crear un nuevo documento de consulta DAX. Puedes tener varios documentos de consulta DAX abiertos al mismo tiempo.
 
-DAX queries can be saved and loaded to and from standalone files using the `.dax` or `.msdax` file extension. See @supported-files for more information.
+Las consultas DAX se pueden guardar y cargar desde archivos independientes usando la extensión `.dax` o `.msdax`. Consulta @supported-files para obtener más información.
 
-Type your DAX `EVALUATE` query into the editor and hit **Query > Execute** (F5) to send the query to Analysis Services and see the result. By default, Tabular Editor 3 limits the number of rows returned from Analysis Services to 1000, but this can be changed under **Tools > Preferences > Data Browsing > DAX Query**. If a query exceeds this limit, Tabular Editor 3 displays a shortcut that lets you retrieve all records (see screenshot below).
+Escribe tu consulta DAX `EVALUATE` en el editor y pulsa **Consulta > Ejecutar** (F5) para enviar la consulta a Analysis Services y ver el resultado. De forma predeterminada, Tabular Editor 3 limita a 1000 el número de filas devueltas por Analysis Services, pero esto se puede cambiar en **Herramientas > Preferencias > Navegación de datos > Consulta DAX**. Si una consulta supera este límite, Tabular Editor 3 muestra un acceso directo que te permite recuperar todos los registros (consulta la captura de pantalla a continuación).
 
-![Query Rowset Limit](~/content/assets/images/query-rowset-limit.png)
+![Límite de filas del conjunto de resultados de la consulta](~/content/assets/images/query-rowset-limit.png)
 
 > [!WARNING]
-> Displaying a large number of records in the query result window could take a while and drastically increase the memory consumed by Tabular Editor 3.
+> Mostrar un gran número de registros en la ventana de resultados de la consulta podría tardar un rato y aumentar drásticamente la memoria consumida por Tabular Editor 3.
 
-Tabular Editor 3 uses the same DAX code editor for query editing as for defining DAX expressions on objects. As such, all the features regarding code-completion, auto-formatting, etc. are available. See @dax-editor for more information. In addition, since a DAX query has a slightly different syntax than object expressions, the DAX query editor provides a few more options for common tasks.
+Tabular Editor 3 usa el mismo editor de código DAX para editar consultas que para definir expresiones DAX en los objetos. Por tanto, están disponibles todas las funciones de autocompletado, formato automático, etc. Consulta @dax-editor para obtener más información. Además, como una consulta DAX tiene una sintaxis ligeramente distinta a las expresiones de objetos, el editor de consultas DAX ofrece algunas opciones adicionales para tareas comunes.
 
-For example, if you right-click on a measure reference, there is an option to **Define measure** as seen on the screenshot below. This option will add a `DEFINE MEASURE` statement at the top of your DAX query, allowing you to easily modify the DAX expression of that measure within the scope of the query.
+Por ejemplo, si haces clic con el botón derecho en una referencia a una medida, aparece la opción **Definir medida**, como se ve en la captura de pantalla siguiente. Esta opción añadirá una instrucción `DEFINE MEASURE` en la parte superior de tu consulta DAX, lo que te permitirá modificar fácilmente la expresión DAX de esa medida dentro del ámbito de la consulta.
 
-![Dax Query Features](~/content/assets/images/dax-query-features.png)
+![Funciones de la Consulta Dax](~/content/assets/images/dax-query-features.png)
 
-In addition, a DAX query can contain multiple `EVALUATE` statements. When that is the case, Tabular Editor 3 displays the result from each such statement on a separate, numbered tab. If you only want to execute a single `EVALUATE` statement, even though your document contains multiple, you can place the cursor somewhere within the statement you want to execute, and then use the **Query > Execute selection** (SHIFT+F5) option.
+Además, una consulta DAX puede contener varias instrucciones `EVALUATE`. En ese caso, Tabular Editor 3 muestra el resultado de cada instrucción en una pestaña numerada independiente. Si solo quieres ejecutar una única instrucción `EVALUATE`, aunque tu documento contenga varias, puedes colocar el cursor en cualquier parte de la instrucción que quieras ejecutar y, a continuación, usar la opción **Consulta > Ejecutar selección** (SHIFT+F5).
 
-A DAX query in Tabular Editor 3 is automatically refreshed when a change is made to the model or a refresh operation finishes. You can toggle this auto-refresh capability within the **Query** menu.
+Una Consulta DAX en Tabular Editor 3 se actualiza automáticamente cuando se realiza un cambio en el modelo o cuando finaliza una operación de actualización. Puedes activar o desactivar esta función de actualización automática en el menú **Consulta**.
 
-# Impersonation
+# Suplantación
 
-When querying the data in the model, it is sometimes useful to be able to impersonate a specific user or a combination of roles, to see what the behavior of the model from an end user perspective would be. Tabular Editor 3 allows you to impersonate a specific user or one or more roles, by clicking on the **Impersonate...** button. This applies to [Table previews](#previewing-table-data), [Pivot Grids](#pivot-grids) and [DAX queries](#dax-queries).
+Al consultar los datos del modelo, a veces resulta útil poder suplantar a un usuario específico o una combinación de roles, para ver cómo se comporta el modelo desde la perspectiva de un usuario final. Tabular Editor 3 te permite suplantar a un usuario específico o a uno o varios roles haciendo clic en el botón **Suplantar...**. Esto se aplica a las [Vistas previas de tabla](#previewing-table-data), los [Pivot Grid](#pivot-grids) y las [Consultas DAX](#dax-queries).
 
 > [!NOTE]
-> To impersonate a user, Tabular Editor adds the [`EffectiveUserName` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) to the connection string, when connecting to Analysis Services. To impersonate a role, Tabular Editor adds the [`Roles` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) to the connection string. This only applies to the data view (i.e. the DAX query, the Pivot Grid or the Table Preview) where the impersonation is specified.
+> Para suplantar a un usuario, Tabular Editor agrega la propiedad [`EffectiveUserName`](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) a la cadena de conexión al conectarse a Analysis Services. Para suplantar un rol, Tabular Editor agrega la propiedad [`Roles`](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) a la cadena de conexión. Esto solo se aplica a la vista de datos (es decir, la Consulta DAX, el Pivot Grid o la Vista previa de tabla) en la que se especifica la suplantación.
 
-When clicking on the **Impersonation..** button (which can also be found through the **Query**, **Pivot Grid** or **Table Preview** menu, depending on which type of data view is active), a popup allows you to specify either a user, or select one or more roles.
+Al hacer clic en el botón **Suplantación...** (que también puedes encontrar en el menú **Consulta**, **Pivot Grid** o **Vista previa de tabla**, según el tipo de vista de datos activa), se abre un cuadro de diálogo que te permite especificar un usuario o seleccionar uno o varios roles.
 
-![Select Impersonation](~/content/assets/images/select-impersonation.png)
+![Seleccionar suplantación](~/content/assets/images/select-impersonation.png)
 
-Once the impersonation is enabled, the **Impersonation..** button is checked, and the impersonation will be applied to the current data view. By clicking on the small arrow next to the **Impersonation..** button, you can view and quickly switch between the 10 most recent impersonations used.
+Una vez habilitada la suplantación, el botón **Suplantación...** queda marcado y se aplicará a la vista de datos actual. Al hacer clic en la pequeña flecha junto al botón **Suplantación...**, puedes ver y cambiar rápidamente entre las 10 suplantaciones más recientes que has usado.
 
-![Impersonation Dropdown](~/content/assets/images/impersonation-dropdown.png)
+![Menú desplegable de suplantación](~/content/assets/images/impersonation-dropdown.png)
 
-When auto-refresh is enabled on a data view, changing the impersonation will immediately refresh the view.
+Cuando la actualización automática está habilitada en una vista de datos, cambiar la suplantación actualizará la vista de inmediato.
 
 ## CustomData
 
-The CustomData feature allows you to pass a custom string value that can be used in DAX expressions, typically for implementing dynamic row-level security scenarios. This feature can be combined with any of the impersonation options described above, including **No Impersonation**.
+La característica CustomData permite pasar un valor de cadena personalizado que puede usarse en expresiones DAX, normalmente para implementar escenarios dinámicos de seguridad a nivel de filas. Esta característica se puede combinar con cualquiera de las opciones de suplantación descritas anteriormente, incluida la opción **Sin suplantación**.
 
-![Select Impersonation](~/content/assets/images/impersonation-customdata.png)
+![Seleccionar suplantación](~/content/assets/images/impersonation-customdata.png)
 
-When you enter a value in the **CustomData** input field, Tabular Editor 3 adds the [`CustomData` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) to the connection string. This value can then be retrieved within your DAX expressions using the [`CUSTOMDATA()` function](https://dax.guide/customdata/).
+Cuando introduces un valor en el campo de entrada **CustomData**, Tabular Editor 3 agrega la propiedad [`CustomData`](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) a la cadena de conexión. A continuación, puedes recuperar este valor en tus expresiones DAX mediante la [`función CUSTOMDATA()`](https://dax.guide/customdata/).
 
-CustomData is commonly used in implementing dynamic row-level security when an application uses custom authentication. The value you provide can be leveraged in role filter expressions to control which rows users can see based on the custom data passed through the connection string.
+CustomData se usa habitualmente para implementar seguridad a nivel de filas dinámica cuando una aplicación utiliza autenticación personalizada. El valor que proporciones puede utilizarse en las expresiones de filtro del rol para controlar qué filas pueden ver los usuarios en función de los datos personalizados que se pasan a través de la cadena de conexión.
 
-This feature is particularly useful in **Power BI Embedded** scenarios, where you can natively utilize CustomData to add row filters that pass free text (strings) to leverage dynamic row-level security in embedded reports, dashboards, and tiles.
+Esta característica es especialmente útil en escenarios de **Power BI Embedded**, donde puedes utilizar CustomData de forma nativa para agregar filtros de fila que transmitan texto libre (cadenas) y así aprovechar la seguridad a nivel de filas dinámica en Reports, Dashboards y Tiles integrados.
 
-**Example use case:** You might pass a user's department or region as CustomData, and then use that value in a role's filter expression like:
+**Ejemplo de caso de uso:** Podrías pasar el departamento o la región de un usuario como CustomData y, luego, usar ese valor en la expresión de filtro de un rol, por ejemplo:
 
 ```dax
 'Department'[DepartmentCode] = CUSTOMDATA()
 ```
 
-# VertiPaq Analyzer
+# Analizador VertiPaq
 
-Tabular Editor 3 includes a version of the open-source [VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) tool, created by [SQLBI](https://sqlbi.com). VertiPaq Analyzer is useful to analyze VertiPaq storage structures for your Power BI or Tabular data model.
+Tabular Editor 3 incluye una versión de la herramienta de código abierto [Analizador VertiPaq](https://www.sqlbi.com/tools/vertipaq-analyzer/), creada por [SQLBI](https://sqlbi.com). El Analizador VertiPaq es útil para analizar las estructuras de almacenamiento VertiPaq de tu Data model de Power BI o de un Data model tabular.
 
-With Tabular Editor 3, you can collect VertiPaq Analyzer statistics while you are connected to any instance of Analysis Services. You can also export the statistics as a [.vpax file](https://www.youtube.com/watch?v=zRa9y01Ub30), or import statistics from a .vpax file.
+Con Tabular Editor 3, puedes recopilar estadísticas del Analizador VertiPaq mientras estás conectado a cualquier instancia de Analysis Services. También puedes exportar las estadísticas como un [archivo .vpax](https://www.youtube.com/watch?v=zRa9y01Ub30) o importar estadísticas desde un archivo .vpax.
 
-To collect statistics, simply hit the **Collect stats** button in the **VertiPaq Analyzer** view.
+Para recopilar estadísticas, simplemente haz clic en el botón **Recopilar estadísticas** en la vista **Analizador VertiPaq**.
 
-![Vertipaq Analyzer Collect Stats](~/content/assets/images/vertipaq-analyzer-collect-stats.png)
+![Analizador VertiPaq: Recopilar estadísticas](~/content/assets/images/vertipaq-analyzer-collect-stats.png)
 
-Once statistics are collected, VertiPaq Analyzer displays a summary of the model size, number of tables, etc. You can find more detailed statistics on the **Tables**, **Columns**, **Relationships** and **Partitions** tabs.
+Una vez recopiladas las estadísticas, el Analizador VertiPaq muestra un resumen del tamaño del modelo, el número de tablas, etc. Puedes encontrar estadísticas más detalladas en las pestañas **Tablas**, **Columnas**, **Relaciones** y **Particiones**.
 
-Additionally, whenever statistics have been loaded, Tabular Editor 3 will display cardinality and size information as a tooltip when hovering the mouse cursor over objects in the TOM Explorer:
+Además, siempre que se hayan cargado estadísticas, Tabular Editor 3 mostrará información de cardinalidad y tamaño en una información sobre herramientas al pasar el cursor del ratón sobre los objetos del Explorador TOM:
 
-![Vertipaq Analyzer Stats in TOM Explorer](~/content/assets/images/vertipaq-analyzer-stats.png)
+![Estadísticas del Analizador VertiPaq en el Explorador TOM](~/content/assets/images/vertipaq-analyzer-stats.png)
 
-...or when hovering the mouse cursor over object references in DAX expressions:
+...o al situar el cursor sobre las referencias a objetos en expresiones DAX:
 
-![Vertipaq Analyzer Stats in a DAX expression](~/content/assets/images/vertipaq-analyzer-stats-dax.png)
+![Estadísticas del Analizador VertiPaq en una expresión DAX](~/content/assets/images/vertipaq-analyzer-stats-dax.png)
 
-# Next steps
+# Siguientes pasos
 
 - @creating-and-testing-dax
