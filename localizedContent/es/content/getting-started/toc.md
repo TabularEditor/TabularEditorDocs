@@ -1,6 +1,6 @@
-# [Welcome](index.md)
+# [Bienvenido](index.md)
 
-# Introduction to Tabular Editor
+# Introducción a Tabular Editor
 
 ## @general-introduction
 
@@ -14,7 +14,7 @@
 
 ## @azure-marketplace
 
-# Getting Started with Tabular Editor 3
+# Primeros pasos con Tabular Editor 3
 
 ## @getting-started
 
@@ -24,13 +24,13 @@
 
 # @getting-started-te2
 
-# Power BI Desktop & Tabular Editor
+# Power BI Desktop y Tabular Editor
 
 ## @desktop-integration
 
 ## @desktop-limitations
 
-# User Interface
+# Interfaz de usuario
 
 ## @user-interface-reference
 
@@ -42,34 +42,34 @@
 
 ## @macros-view-reference
 
-## @messages-view-reference
+## @mensajes-view-reference
 
 ## @properties-view-reference
 
 ## @tom-explorer-view-reference
 
-## @diagram-view-reference
+## @referencia-de-la-vista-de-diagrama
 
-# Parallel development
+# Desarrollo en paralelo
 
-## @parallel-development
+## @desarrollo-en-paralelo
 
-## @optimizing-workflow-workspace-mode
+## @optimizar-el-flujo-de-trabajo-en-modo-espacio-de-trabajo
 
-# Built models faster with Tabular Editor
+# Cree modelos más rápido con Tabular Editor
 
-## @boosting-productivity-te3
+## @aumentar-la-productividad-te3
 
-## @importing-tables-data-modeling
+## @importar-tablas-para-el-modelado-de-datos
 
-## @refresh-preview-query
+## @actualizar-vista-previa-de-la-consulta
 
-## @creating-and-testing-dax
+## @crear-y-probar-dax
 
-## @dax-script-introduction
+## @introduccion-al-script-de-dax
 
 ## @bpa
 
-## @cs-scripts-and-macros
+## @scripts-y-macros-de-csharp
 
-## @personalizing-te3
+## @personalizar-te3
