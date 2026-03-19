@@ -111,11 +111,7 @@ In some cases, it is possible to automatically fix the issues on objects satisfy
     "Scope": "Column",
     "Expression": "Model.Relationships.Any(FromColumn = outerIt) and not IsHidden and not Table.IsHidden",
     "FixExpression": "IsHidden = true",
-    "Compatibility": [
-      1200,
-      1400
-    ],
-    "IsValid": false
+    "CompatibilityLevel": 1200
 }
 ```
 

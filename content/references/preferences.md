@@ -48,6 +48,10 @@ When checked, warnings about Power BI auto date/time tables will be suppressed. 
 
 In Power BI Desktop it is common to insert a line break on the first line of a DAX expression, due to the way the formula bar displays the DAX code. If you often switch back and forth between Tabular Editor and Power BI Desktop, consider enabling this option to have Tabular Editor 3 insert the line break automatically.
 
+##### *Only for multi-line DAX expressions* (enabled)
+
+When "Line break on first line of DAX" is enabled, this sub-setting controls whether the line break is added only for multi-line DAX expressions. When checked, single-line expressions are left unchanged.
+
 ##### *Default Power BI authentication mode* (Integrated)
 
 Select the default authentication method (Integrated, ServicePrincipal, or MasterUser) to use when connecting to Power BI datasets.
@@ -84,6 +88,12 @@ If unchecked, you will have to explicitly run a Best Practice Analysis from insi
 ##### *Built-in BPA rules* (enabled for new users)
 
 Choose whether to enable, disable, or be prompted about using Tabular Editor's built-in Best Practice Analyzer rules. The built-in rules cover key best practices across formatting, metadata, model layout, DAX expressions, and translations. New installations will have built-in rules enabled by default.
+
+### Notifications
+
+##### *Data refresh notification* (enabled)
+
+When checked, a notification is displayed when a data refresh operation completes.
 
 ### DAX Formula Fix-up
 

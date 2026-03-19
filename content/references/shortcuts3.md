@@ -106,7 +106,7 @@ applies_to:
 |Show auto-complete|Ctrl+Space|
 |Show calltip|Ctrl+Shift+Space|
 |Format DAX|F6|
-|Format DAX (Short lines)|Ctrl+F6|
+|Format DAX (Short lines)|Shift+F6|
 |Comment lines|Ctrl+K|
 |Uncomment lines|Ctrl+U|
 |Toggle comments|Ctrl+/|
@@ -125,6 +125,11 @@ applies_to:
 |---|---|
 |Execute query|F5|
 |Execute selection|Shift+F5|
+|Apply|F7|
+|Apply & Sync|Shift+F7|
+|Apply Selection|F8|
+|Apply Selection & Sync|Shift+F8|
+|Show Code Actions|Ctrl+.|
 
 ## DAX Script
 
