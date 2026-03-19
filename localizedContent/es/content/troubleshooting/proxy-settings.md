@@ -1,6 +1,6 @@
 ---
 uid: proxy-settings
-title: Proxy settings
+title: Configuración del proxy
 author: Daniel Otykier
 updated: 2024-11-07
 applies_to:
@@ -17,41 +17,41 @@ applies_to:
           full: true
 ---
 
-# Proxy settings
+# Configuración del proxy
 
-Due to different proxy behavior between .NET Core (used by Tabular Editor 3) and .NET Framework (used by Tabular Editor 2 and DAX Studio), you may experience issues with connecting to external services, such as the Power BI service, when using Tabular Editor 3 behind a proxy server.
+Debido a las diferencias en el comportamiento del proxy entre .NET Core (utilizado por Tabular Editor 3) y .NET Framework (utilizado por Tabular Editor 2 y DAX Studio), es posible que tengas problemas al conectarte a servicios externos, como el servicio de Power BI, cuando uses Tabular Editor 3 detrás de un servidor proxy.
 
-For example, you might see the following error message when trying to connect to the Power BI service:
+Por ejemplo, podrías ver el siguiente mensaje de error al intentar conectarte al servicio Power BI:
 
 ![No such host is known-error](~/content/assets/images/troubleshooting/proxy-error.png)
 
-Typical error messages you would see, are:
+Los mensajes de error típicos que puedes ver son:
 
-**Title:** `Could not connect to server`
+**Título:** `Could not connect to server`
 
-**Message:**
+**Mensaje:**
 
 - `No such host is known. (login.microsoftonline.com:443)`
 - `Unable to obtain authentication token using the credentials provided`
 - `The requested address is not valid in its context. (login.microsoftonline.com:443)`
 
-When this happens, the first thing you should try is to change the proxy settings in Tabular Editor 3. You can find these settings under **Tools > Preferences > Proxy Settings**:
+Cuando esto sucede, lo primero que debes probar es cambiar la configuración del proxy en Tabular Editor 3. Puedes encontrar estos ajustes en **Tools > Preferencias > Proxy Settings**:
 
 ![Proxy settings in Tabular Editor 3](~/content/assets/images/troubleshooting/proxy-settings.png)
 
-In most cases, changing the **Proxy Type** from `None` to `System` will resolve the issue. This setting tells Tabular Editor 3 to use the system-wide proxy settings configured in Windows. If you are still experiencing issues, you can try setting the **Proxy Type** to `Custom` and enter the proxy server address and port manually.
+En la mayoría de los casos, cambiar el **Tipo de proxy** de `None` a `System` resolverá el problema. Esta opción indica a Tabular Editor 3 que use la configuración del proxy del sistema definida en Windows. Si sigues teniendo problemas, puedes intentar configurar el **Tipo de proxy** como `Custom` e introducir manualmente la dirección y el puerto del servidor proxy.
 
 > [!IMPORTANT]
-> After changing the proxy settings, you must restart Tabular Editor 3 for the changes to take effect.
+> Después de cambiar la configuración del proxy, debes reiniciar Tabular Editor 3 para que los cambios surtan efecto.
 
-# .NET Core vs. .NET Framework proxy handling
+# Gestión del proxy en .NET Core frente a .NET Framework
 
-If the suggestion above does not solve the problem, starting with version 3.21.0 of Tabular Editor, you can try the following alternative solution:
+Si la sugerencia anterior no resuelve el problema, a partir de la versión 3.21.0 de Tabular Editor puedes probar la siguiente solución alternativa:
 
 > [!NOTE]
-> The solutions outlined below require Tabular Editor 3.21.0 or newer, because the AS configuration options are only available in the AMO/TOM client library v. [19.94.1.1](https://www.nuget.org/packages/Microsoft.AnalysisServices/19.94.1.1). Previous versions of Tabular Editor 3 use an older version of this client library, which ignores these configuration options.
+> Las soluciones que se describen a continuación requieren Tabular Editor 3.21.0 o posterior, ya que las opciones de configuración de AS solo están disponibles en la biblioteca cliente AMO/TOM v. [19.94.1.1](https://www.nuget.org/packages/Microsoft.AnalysisServices/19.94.1.1). Las versiones anteriores de Tabular Editor 3 usan una versión más antigua de esta biblioteca cliente, que ignora estas opciones de configuración.
 
-Create a file called <a href="https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/AnalysisServices.AppSettings.json" download="AnalysisServices.AppSettings.json">**AnalysisServices.AppSettings.json**</a> and put it in the installation folder for Tabular Editor 3 (i.e. the same folder that TabularEditor3.exe resides in). Add the following content to the file:
+Crea un archivo llamado <a href="https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/AnalysisServices.AppSettings.json" download="AnalysisServices.AppSettings.json">**AnalysisServices.AppSettings.json**</a> y colócalo en la carpeta de instalación de Tabular Editor 3 (es decir, la misma carpeta en la que se encuentra TabularEditor3.exe). Añade el siguiente contenido al archivo:
 
 ```json
 {
@@ -63,15 +63,15 @@ Create a file called <a href="https://raw.githubusercontent.com/TabularEditor/Ta
 }
 ```
 
-To turn on external MSAL proxy support for all .NET core applications on your machine, you can also set the following environment variable rather than using the AppSettings file as described above:
+Para habilitar la compatibilidad con proxy externo de MSAL para todas las aplicaciones .NET Core de tu equipo, también puedes establecer la siguiente variable de entorno en lugar de usar el archivo AppSettings como se describe arriba:
 
-| Environment variable name                                            | Environment variable value |
-| -------------------------------------------------------------------- | -------------------------- |
-| MS_AS_MsalConnectivityMode | 1                          |
+| Nombre de la variable de entorno                                     | Valor de la variable de entorno |
+| -------------------------------------------------------------------- | ------------------------------- |
+| MS_AS_MsalConnectivityMode | 1                               |
 
-# Enabling diagnostics
+# Habilitar diagnósticos
 
-If you're still not able to connect after attempting the solutions outlined above, it may help to turn on advanced diagnostics logging. You can do that, either by modifying the **AnalysisServices.AppSettings.json** file to look like the following:
+Si, después de intentar las soluciones descritas anteriormente, sigues sin poder conectarte, puede ser útil activar el registro de diagnósticos avanzados. Puedes hacerlo ya sea modificando el archivo **AnalysisServices.AppSettings.json** para que quede de la siguiente forma:
 
 ```json
 {
@@ -90,17 +90,17 @@ If you're still not able to connect after attempting the solutions outlined abov
 }
 ```
 
-or if using Environment Variables, by setting the following:
+o, si usas variables de entorno, configurando lo siguiente:
 
-| Environment variable name                                                                      | Environment variable value                        |
+| Nombre de la variable de entorno                                                               | Valor de la variable de entorno                   |
 | ---------------------------------------------------------------------------------------------- | ------------------------------------------------- |
 | MS_AS_AADAUTHENTICATOR_LOG      | 1                                                 |
 | MS_AS_AADAUTHENTICATOR_LOGLEVEL | 4                                                 |
 | MS_AS_AADAUTHENTICATOR_LOGFILE  | \<path to trace file\> |
 
-`<path to trace file>` must point to a file in a directory that exists. I.e. if you want the file to be written to `c:\temp\logs\as-auth.log`, you must ensure that the directory `c:\temp\logs` exists.
+`<path to trace file>` debe apuntar a un archivo ubicado en un directorio existente. Es decir. si quieres que el archivo se escriba en `c:\temp\logs\as-auth.log`, debes asegurarte de que exista el directorio `c:\temp\logs`.
 
-The contents of this trace file are useful when contacting Microsoft support.
+El contenido de este archivo de seguimiento es útil al ponerte en contacto con el soporte técnico de Microsoft.
 
 > [!IMPORTANT]
-> You must restart Tabular Editor 3 after making changes to the **AnalysisServices.AppSettings.json** file, or after modifying environment variables.
+> Debes reiniciar Tabular Editor 3 después de realizar cambios en el archivo **AnalysisServices.AppSettings.json** o después de modificar variables de entorno.
