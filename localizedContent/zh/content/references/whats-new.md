@@ -1,6 +1,6 @@
 ---
 uid: whats-new
-title: What's new
+title: 更新内容
 author: Morten Lønskov
 updated: 2023-10-11
 ---
