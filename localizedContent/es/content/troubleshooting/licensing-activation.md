@@ -1,6 +1,6 @@
 ---
 uid: licensing-activation
-title: Install and Activate Tabular Editor 3
+title: Instalar y activar Tabular Editor 3
 author: Daniel Otykier
 applies_to:
   products:
@@ -18,88 +18,88 @@ applies_to:
 
 # Tabular Editor 3
 
-## Installation
+## Instalación
 
-Download the latest version of Tabular Editor 3 from our [downloads page](xref:downloads).
+Descarga la versión más reciente de Tabular Editor 3 desde nuestra [página de descargas](xref:downloads).
 
-## Prerequisites
+## Requisitos previos
 
-None.
+Ninguno.
 
-## System requirements
+## Requisitos del sistema
 
-- **Operating system:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 or newer
+- **Sistema operativo:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 o posterior
 - **.NET Framework:** [4.7.2](https://dotnet.microsoft.com/download/dotnet-framework)
 
-## Activating your installation
+## Activación de la instalación
 
-Tabular Editor 3 is commercial software. Visit our [home page](https://tabulareditor.com) for pricing details and purchase options. If you haven't previously used Tabular Editor 3 you are eligible to a free 30-day trial.
+Tabular Editor 3 es software comercial. Visita nuestra [página principal](https://tabulareditor.com) para consultar precios y opciones de compra. Si no has usado Tabular Editor 3 anteriormente, puedes optar a una prueba gratuita de 30 días.
 
-The first time you launch Tabular Editor 3 on a new machine, you are prompted to activate the product.
+La primera vez que inicies Tabular Editor 3 en un equipo nuevo, se te pedirá que actives el producto.
 
-![Product activation](~/content/assets/images/getting-started/product-activation.png)
+![Activación del producto](~/content/assets/images/getting-started/product-activation.png)
 
-### Activating using an existing license key
+### Activación con una clave de licencia existente
 
-Once you purchase a license for Tabular Editor 3, you should receive an e-mail with a 25-character string which is your license key. When prompted, enter the license key and hit "Next >" to activate the product.
+Una vez que compres una licencia de Tabular Editor 3, recibirás un correo electrónico con una cadena de 25 caracteres, que será tu clave de licencia. Cuando se te solicite, introduce la clave de licencia y pulsa "Siguiente >" para activar el producto.
 
-![Enter License Key](~/content/assets/images/getting-started/enter-license-key.png)
-
-> [!NOTE]
-> For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
-
-#### Changing seats on Enterprise Edition
-
-To change an Enterprise seat the existing user will have to be deregistered from the seat through the [Tabular Editor Self-Service portal](https://tabulareditor.com/my-account/). The subscription owner or license administrator can create an account or login with an existing to administrate the license seats.
+![Introducir la clave de licencia](~/content/assets/images/getting-started/enter-license-key.png)
 
 > [!NOTE]
-> Changing a user is only possible on the Enterprise Edition.
+> Para los tipos de licencia multiusuario, tendrás que introducir tu dirección de correo electrónico además de la clave de licencia. Tabular Editor 3 te lo solicitará si la clave de licencia que introduces corresponde a una licencia multiusuario.
 
-### Requesting a trial license
+#### Cambiar asientos en la Edición Enterprise
 
-If you haven't used Tabular Editor 3 before, you are eligible to a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
+Para cambiar un asiento de Enterprise, primero hay que dar de baja al usuario actual del asiento a través del [portal de autoservicio de Tabular Editor](https://tabulareditor.com/my-account/). El propietario de la suscripción o el administrador de licencias puede crear una cuenta o iniciar sesión con una cuenta existente para administrar los asientos de la licencia.
 
 > [!NOTE]
-> Tabular Editor ApS will not sent unsolicited e-mails or forward your e-mail address to third parties, when signing up for a 30-day trial license. View our @privacy-policy for more information.
+> Cambiar un usuario solo es posible en la Edición Enterprise.
 
-### Changing a license key
+### Solicitar una licencia de prueba
 
-When Tabular Editor 3 is activated, you may change your license key in the Help menu by choosing "About Tabular Editor".
+Si aún no has usado Tabular Editor 3, tienes derecho a una prueba gratuita de 30 días. Al elegir esta opción, se te pedirá una dirección de correo electrónico. Usamos la dirección de correo electrónico para validar si ya tienes una activación de Tabular Editor 3.
 
-![About Te3](~/content/assets/images/getting-started/about-te3.png)
+> [!NOTE]
+> Tabular Editor ApS no enviará correos electrónicos no solicitados ni compartirá tu dirección de correo electrónico con terceros al registrarte para obtener una licencia de prueba de 30 días. Consulta nuestra @privacy-policy para obtener más información.
 
-In the dialog, select "Change license key". Note that this option is only available if no model is loaded in Tabular Editor. IF you already loaded a model you can close it under File > Close model.
+### Cambiar una clave de licencia
 
-#### Registry details
+Cuando Tabular Editor 3 esté activado, puedes cambiar tu clave de licencia en el menú Ayuda seleccionando "Acerca de Tabular Editor".
 
-Tabular Editor 3 uses the Windows Registry to store activation details.
+![Acerca de Te3](~/content/assets/images/getting-started/about-te3.png)
 
-To view the current license key assigned to the machine, run the following command in the Windows Command Prompt (Start > Run > cmd.exe):
+En el cuadro de diálogo, selecciona "Cambiar clave de licencia". Ten en cuenta que esta opción solo está disponible si no hay ningún modelo cargado en Tabular Editor. Si ya has cargado un modelo, puedes cerrarlo en Archivo > Cerrar modelo.
+
+#### Detalles del Registro de Windows
+
+Tabular Editor 3 usa el Registro de Windows para almacenar los detalles de activación.
+
+Para ver la clave de licencia actual asignada al equipo, ejecuta el siguiente comando en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
 
 ```cmd
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` to view and modify the **LicenseKey** and **User** values.
+También puedes usar `regedit.exe` (Editor del Registro de Windows) y navegar a `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` para ver y modificar los valores **LicenseKey** y **User**.
 
-A system administrator may also proactively assign Tabular Editor 3 licenses to a machine by specifying the **LicenseKey** and **User** values under each user’s `SOFTWARE\Kapacity\Tabular Editor 3` registry key.
+Un administrador del sistema también puede asignar de forma proactiva licencias de Tabular Editor 3 a un equipo especificando los valores **LicenseKey** y **User** en la clave del Registro `SOFTWARE\Kapacity\Tabular Editor 3` de cada usuario.
 
-![Registry Editor](~/content/assets/images/troubleshooting/registry-editor.png)
+![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
 
-### Changing a license key through the registry
+### Cambiar una clave de licencia a través del Registro de Windows
 
-If, for any reason, you are unable to change the license key using the procedure outlined above, you can always reset the license assigned to Tabular Editor 3 by using the Registry Editor:
+Si por cualquier motivo no puedes cambiar la clave de licencia mediante el procedimiento descrito anteriormente, siempre puedes restablecer la licencia asignada a Tabular Editor 3 mediante el Editor del Registro:
 
-1. Close all instances of Tabular Editor 3.
-2. Open the Registry Editor in Windows (Start > Run > regedit.msc).
-3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above).
-4. Delete all values within this key.
-5. Close the Registry Editor and restart Tabular Editor 3.
+1. Cierra todas las instancias de Tabular Editor 3.
+2. Abre el Editor del Registro en Windows (Inicio > Ejecutar > regedit.msc).
+3. Busca `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (consulta la captura de pantalla anterior).
+4. Elimina todos los valores de esta clave.
+5. Cierra el Editor del Registro y reinicia Tabular Editor 3.
 
-Alternatively, run the following command in a Windows Command Prompt (Start > Run > cmd.exe):
+Como alternativa, ejecuta el siguiente comando en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
 
 ```cmd
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 ```
 
-The next time you launch Tabular Editor 3, you will be prompted for a license key, just as when the tool was first installed on the machine.
+La próxima vez que inicies Tabular Editor 3, se te pedirá una clave de licencia, igual que cuando la herramienta se instaló por primera vez en el equipo.
