@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-rename-objects
-title: Rename Objects in a Metric View
+title: Renombrar objetos en una Metric View
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -18,26 +18,26 @@ applies_to:
           full: true
 ---
 
-# Rename objects in a Metric View
+# Renombrar objetos en una Metric View
 
-This how-to demonstrates how to rename Metric View dimensions using a copy-modify pattern for bulk transformations.
-The same patterns apply to all collections in a Metric View.
+En este procedimiento se muestra cómo renombrar las dimensiones de una Metric View mediante un patrón de copia y modificación para realizar transformaciones en bloque.
+Los mismos patrones se aplican a todas las colecciones de una Metric View.
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
-## The copy-modify pattern
+## El patrón de copia y modificación
 
-Since Metric View dimension names are properties on objects in a collection, the cleanest approach is to:
+Como los nombres de las dimensiones de una Metric View son propiedades de objetos dentro de una colección, el enfoque más limpio es:
 
-1. Create new Metric View `Dimension` objects with the modified names
-2. Clear the original collection
-3. Add the new objects
+1. Crear nuevos objetos `Dimension` de la Metric View con los nombres modificados
+2. Vaciar la colección original
+3. Agregar los nuevos objetos
 
-This avoids issues with modifying objects while iterating.
+Esto evita problemas al modificar objetos mientras se recorre la colección.
 
-## Convert snake_case to Title Case
+## Convertir snake_case a Title Case
 
-Transform Metric View dimension names from `product_name` to `Product Name`:
+Transforme los nombres de las dimensiones de una Metric View de `product_name` a `Product Name`:
 
 ```csharp
 using System.Globalization;
@@ -79,10 +79,10 @@ foreach (var dim in view.Dimensions)
 Output(sb.ToString());
 ```
 
-**Output:**
+**Salida:**
 
 ```
-BEFORE
+ANTES
 ------
   product_name
   product_category
@@ -91,31 +91,31 @@ BEFORE
   order_year
   order_month
 
-AFTER
+DESPUÉS
 -----
-  Product Name
-  Product Category
-  Customer Segment
-  Order Date
-  Order Year
-  Order Month
+  Nombre del producto
+  Categoría del producto
+  Segmento de cliente
+  Fecha de pedido
+  Año de pedido
+  Mes de pedido
 ```
 
-## Rename using a mapping dictionary
+## Renombrar con un diccionario de mapeo
 
-Apply specific renames using a lookup:
+Aplica cambios de nombre específicos mediante una búsqueda:
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 var view = SemanticBridge.MetricView.Model;
 
-// Define rename mappings
+// Definir asignaciones de cambio de nombre
 var renames = new Dictionary<string, string>
 {
     { "product_name", "Product" },
     { "product_category", "Category" },
-    { "customer_segment", "Segment" },
+    { "customer_segment", "Segmentos" },
     { "order_date", "Date" },
     { "order_year", "Year" },
     { "order_month", "Month" }
@@ -123,7 +123,7 @@ var renames = new Dictionary<string, string>
 
 var sb = new System.Text.StringBuilder();
 
-// Create renamed dimensions
+// Crear dimensiones renombradas
 var renamed = view.Dimensions
     .Select(
         dim => new MetricView.Dimension
@@ -133,14 +133,14 @@ var renamed = view.Dimensions
         })
     .ToList();
 
-// Replace the collection
+// Reemplazar la colección
 view.Dimensions.Clear();
 foreach (var dim in renamed)
 {
     view.Dimensions.Add(dim);
 }
 
-sb.AppendLine("Renamed dimensions:");
+sb.AppendLine("Dimensiones renombradas:");
 sb.AppendLine("-------------------");
 foreach (var dim in view.Dimensions)
 {
@@ -150,20 +150,20 @@ foreach (var dim in view.Dimensions)
 Output(sb.ToString());
 ```
 
-**Output:**
+**Salida:**
 
 ```
-Renamed dimensions:
+Dimensiones renombradas:
 -------------------
   Product              <- product.product_name
   Category             <- product.category
-  Segment              <- customer.segment
+  Segmentos            <- customer.segment
   Date                 <- date.full_date
   Year                 <- date.year
   Month                <- date.month_name
 ```
 
-## See also
+## Ver también
 
 - @semantic-bridge-add-object
 - @semantic-bridge-remove-object
