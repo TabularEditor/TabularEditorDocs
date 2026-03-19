@@ -1,6 +1,6 @@
 ---
 uid: general-introduction
-title: General introduction and architecture
+title: Introducción general y arquitectura
 author: Daniel Otykier
 updated: 2021-09-30
 applies_to:
@@ -11,109 +11,109 @@ applies_to:
       full: true
 ---
 
-# General introduction and architecture
+# Introducción general y arquitectura
 
-Tabular Editor is a Windows desktop application for developing tabular models. Specifically, the tool lets you edit the Tabular Object Model (TOM) metadata. The tool can load the TOM metadata from a file or from an existing Analysis Services database, and it can also deploy updated TOM metadata to Analysis Services.
+Tabular Editor es una aplicación de escritorio para Windows que permite desarrollar modelos tabulares. En concreto, la herramienta le permite editar los metadatos del Tabular Object Model (TOM). La herramienta puede cargar los metadatos TOM desde un archivo o desde una base de datos de Analysis Services existente, y también puede implementar metadatos TOM actualizados en Analysis Services.
 
 > [!NOTE]
-> We use the term **tabular model** to represent both Analysis Services Tabular models as well as Power BI datasets, since Analysis Services Tabular is the data model engine used by Power BI. Similarly, when we use term **Analysis Services**, we mean "any instance of Analysis Services", which could be SQL Server Analysis Services, Power BI Desktop or the Power BI Service XMLA Endpoint.
+> Usamos el término **modelo tabular** para referirnos tanto a los modelos tabulares de Analysis Services como a los **Dataset** de Power BI, ya que Analysis Services Tabular es el motor de **Data model** que usa Power BI. Del mismo modo, cuando usamos el término **Analysis Services**, nos referimos a «cualquier instancia de Analysis Services», que puede ser SQL Server Analysis Services, Power BI Desktop o el punto de conexión XMLA del servicio Power BI.
 
-## Tabular Object Model (TOM) metadata
+## Metadatos de Tabular Object Model (TOM)
 
-A data model is made up by a number of tables. Each table has one or more columns, and a table may also contain measures and hierarchies. Typically, the data model also defines relationships between tables, data sources containing connection details and table partitions containing data source expressions (SQL or M queries) for loading data, etc. All of this information is collectively called the **model metadata**, and it is stored in a JSON based format known as the **Tabular Object Model (TOM)**.
+Un **Data model** se compone de varias tablas. Cada tabla tiene una o varias columnas, y también puede contener medidas y jerarquías. Normalmente, el **Data model** también define relaciones entre tablas, uno o varios **Data source** con los detalles de conexión y particiones de tabla que contienen expresiones de origen de datos (consultas SQL o M) para cargar datos, etc. Toda esta información se denomina en conjunto los **metadatos del modelo** y se almacena en un formato basado en JSON conocido como **Tabular Object Model (TOM)**.
 
-- When a tabular model is created using Visual Studio, the JSON representing the TOM metadata is stored in a file called **Model.bim**.
-- When a data model is created using Power BI Desktop, the TOM metadata is embedded within the .pbix or .pbit file (since this file format also contains a lot of other details, such as definitions of visuals, bookmarks, etc., which is not related to the data model itself).
+- Cuando se crea un modelo tabular con Visual Studio, el JSON que representa los metadatos TOM se guarda en un archivo llamado **Model.bim**.
+- Cuando se crea un **Data model** con Power BI Desktop, los metadatos TOM se incrustan en el archivo .pbix o .pbit (ya que este formato de archivo también contiene muchos otros detalles, como definiciones de **Visual**, **Bookmark**, etc., que no están relacionados con el propio **Data model**).
 
-Using a client library called [AMO/TOM](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), Tabular Editor is able to load and save metadata to and from this JSON based format. In addition, the client library allows Tabular Editor to connect directly to any instance of Analysis Services, in order to obtain the model metadata from an existing database. This is illustrated in the figure below.
+Mediante una biblioteca cliente llamada [AMO/TOM](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), Tabular Editor puede cargar y guardar metadatos en este formato basado en JSON. Además, la biblioteca cliente permite a Tabular Editor conectarse directamente a cualquier instancia de Analysis Services para obtener los metadatos del modelo desde una base de datos existente. Esto se ilustra en la figura siguiente.
 
 ![Architecture](~/content/assets/images/architecture.png)
 
 > [!NOTE]
-> In the paragraph above, we used the term **database** to represent a model that has been deployed to Analysis Services. Within the Power BI Service the term **dataset** is used to represent the same thing, namely a tabular model.
+> En el párrafo anterior, usamos el término **base de datos** para referirnos a un modelo que se ha desplegado en Analysis Services. En el servicio de Power BI se usa el término **Dataset** para referirse a lo mismo, es decir, a un modelo tabular.
 
-Tabular Editor can load model metadata from the following sources:
+Tabular Editor puede cargar los metadatos del modelo desde las siguientes fuentes:
 
-- [1] Model.bim files
-- [2] Database.json files (see @parallel-development for more information)
-- [3] .pbit files (Power BI Template)
-- [4] A database on SQL Server Analysis Services (Tabular)
-- [5] A database on Azure Analysis Services
-- [6] A dataset in a Power BI Premium\* Workspace
-- [7] A Power BI Desktop report in Import/DirectQuery mode
+- [1] Archivos Model.bim
+- [2] Archivos Database.json (consulta @parallel-development para más información)
+- [3] Archivos .pbit (plantilla de Power BI)
+- [4] Una base de datos en SQL Server Analysis Services (Tabular)
+- [5] Una base de datos en Azure Analysis Services
+- [6] Un Dataset en un Workspace de Power BI Premium\*
+- [7] Un Report de Power BI Desktop en modo Import/DirectQuery
 
-\*Power BI Premium/Embedded Capacity or Power BI Premium-Per-User is required in order to enable the [XMLA Endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools). The XMLA Endpoint must be enabled for any third party tool to connect to Power BI datasets.
+\*Se requiere una capacidad de Power BI Premium/Embedded o Power BI Premium-Per-User para habilitar el [punto de conexión XMLA](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools). El punto de conexión XMLA debe estar habilitado para que cualquier herramienta de terceros pueda conectarse a los Datasets de Power BI.
 
 > [!IMPORTANT]
-> Tabular Editor 2.x supports all sources 1-7 above. Tabular Editor 3 supports only some sources depending on which [edition of Tabular Editor 3](xref:editions) you are using.
+> Tabular Editor 2.x admite todas las fuentes 1-7 anteriores. Tabular Editor 3 solo admite algunas fuentes, en función de la [edición de Tabular Editor 3](xref:editions) que estés utilizando.
 
-Once the model metadata has been loaded in Tabular Editor, the user is free to add/edit/remove **objects** and change **object properties**. Modifications are not saved back to the source until the user explicitly saves the model, either by choosing **File > Save** or by hitting CTRL+S. If the model metadata was loaded from a file source (sources 1-3 above), that file will then be updated. If the model metadata was loaded from Analysis Services (sources 4-7 above), then the changes are saved back to Analysis Services. Note that certain changes may cause objects to enter a state where they can no longer be queried by end-users. For example, if you add a column to a table, you will need to [refresh the table](xref:refresh-preview-query#refreshing-data) before users can query the contents of that table or any measures that dependent on the table.
+Una vez cargados los metadatos del modelo en Tabular Editor, puedes agregar/editar/eliminar **objetos** y cambiar las **propiedades de los objetos**. Las modificaciones no se guardan en el origen hasta que guardes el modelo de forma explícita, ya sea seleccionando **Archivo > Guardar** o pulsando CTRL+S. Si los metadatos del modelo se cargaron desde una fuente de archivo (fuentes 1-3 anteriores), ese archivo se actualizará. Si los metadatos del modelo se cargaron desde Analysis Services (fuentes 4-7 anteriores), los cambios se guardan de nuevo en Analysis Services. Ten en cuenta que algunos cambios pueden hacer que los objetos pasen a un estado en el que los usuarios finales ya no puedan consultarlos. Por ejemplo, si agregas una columna a una tabla, tendrás que [actualizar la tabla](xref:refresh-preview-query#refreshing-data) antes de que los usuarios puedan consultar el contenido de esa tabla o cualquier medida que dependa de ella.
 
 > [!WARNING]
-> Certain limitations apply when saving model metadata changes back to Power BI Desktop (source 7 above). See @desktop-limitations for more information.
+> Se aplican ciertas limitaciones al guardar nuevamente en Power BI Desktop los cambios en los metadatos del modelo (fuente 7 anterior). Consulta @desktop-limitations para más información.
 
-### TOM objects and properties
+### Objetos y propiedades de TOM
 
-The TOM metadata is made up of **objects** and **properties**.
+Los metadatos de TOM se componen de **objetos** y **propiedades**.
 
-Examples of TOM **objects**:
+Ejemplos de **objetos** de TOM:
 
 - Data Sources
-- Tables
-- Partitions
-- Measures
-- KPIs
-- Columns
-- Model Roles
+- Tablas
+- Particiones
+- Medidas
+- KPI
+- Columnas
+- Roles del modelo
 
-Examples of TOM **object properties**:
+Ejemplos de **propiedades de objetos** de TOM:
 
-- `Name` (text)
-- `Display Folder` (text)
-- `Description` (text)
-- `Hidden` (true/false)
-- `Summarize By` (one of: None, Sum, Min, Max, ...)
+- `Name` (texto)
+- `Carpeta de visualización` (texto)
+- `Description` (texto)
+- `Hidden` (verdadero/falso)
+- `Summarize By` (uno de los siguientes: None, Sum, Min, Max, ...)
 
-Most properties are simple values (text, true/false, one-of-selections aka. enums), but properties can also reference other objects (for example, the `Sort By Column` property should reference a column). Properties can also be arrays of objects, such as the `Members` property on the Model Role object.
+La mayoría de las propiedades son valores simples (texto, verdadero/falso, selecciones de una lista, también llamadas. enumeraciones), pero las propiedades también pueden hacer referencia a otros objetos (por ejemplo, la propiedad `Sort By Column` debería hacer referencia a una columna). Las propiedades también pueden ser arreglos de objetos, como la propiedad `Members` del objeto rol del modelo.
 
-Tabular Editor generally uses the same name for objects and properties as those defined in the [Microsoft.AnalysisServices.Tabular namespace](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet). If you want to learn more about specific TOM objects or properties, always consult the namespace documentation. For example, to learn what the "Summarize By" column property does, first locate the "Column" class in Microsoft's documentation, then expand "Properties" and scroll to "SummarizeBy". You should then get to [this article](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet).
+Tabular Editor suele usar los mismos nombres para los objetos y las propiedades que los definidos en el [espacio de nombres Microsoft.AnalysisServices.Tabular](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet). Si quieres saber más sobre objetos o propiedades específicas de TOM, consulta siempre la documentación del espacio de nombres. Por ejemplo, para saber qué hace la propiedad de columna "Summarize By", primero localiza la clase "Column" en la documentación de Microsoft; después, expande "Properties" y desplázate hasta "SummarizeBy". Entonces llegarás a [este artículo](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet).
 
-![SummarizeBy on Microsoft's docs](~/content/assets/images/asdocs-summarizyby.png)
+![SummarizeBy en la documentación de Microsoft](~/content/assets/images/asdocs-summarizyby.png)
 
-### Editing property values
+### Edición de valores de propiedades
 
-Both versions of Tabular Editor display the object model metadata in a hierarchical view known as the **TOM Explorer** view, which roughly corresponds to the hierarchical structure of the JSON metadata:
+Ambas versiones de Tabular Editor muestran los metadatos del modelo de objetos en una vista jerárquica conocida como el **Explorador TOM**, que se corresponde aproximadamente con la estructura jerárquica de los metadatos JSON:
 
-![TOM Explorer](~/content/assets/images/tom-explorer.png)
+![Explorador TOM](~/content/assets/images/tom-explorer.png)
 
-In general, Tabular Editor lets you modify object properties by first selecting an object in the TOM Explorer (you can select multiple objects at once by holding down SHIFT or CTRL), and then simply editing the property value within the **Properties view** (see screenshot below).
+En general, Tabular Editor te permite modificar las propiedades de los objetos seleccionando primero un objeto en el Explorador TOM (puedes seleccionar varios objetos a la vez manteniendo pulsadas las teclas SHIFT o CTRL) y, después, editando directamente el valor de la propiedad en la **vista de propiedades** (consulta la captura de pantalla a continuación).
 
-![Properties View](~/content/assets/images/properties-view.png)
+![Vista de propiedades](~/content/assets/images/properties-view.png)
 
-Tabular Editor does not perform explicit validation of modified property values, except for some basic rules (for example, object names cannot be empty, measure names have to be unique, etc.). It is your responsibility as a tabular model developer to know which properties to set and what values to use.
+Tabular Editor no realiza una validación explícita de los valores de las propiedades modificadas, excepto por algunas reglas básicas (por ejemplo, los nombres de los objetos no pueden estar vacíos, los nombres de las medidas deben ser únicos, etc.). Como desarrollador de modelos tabulares, es tu responsabilidad saber qué propiedades debes establecer y qué valores usar.
 
-If you make a mistake while editing property values, you can always press CTRL+Z (Edit > Undo) to roll back the last property change.
+Si cometes un error al editar los valores de las propiedades, siempre puedes pulsar CTRL+Z (Editar > Deshacer) para revertir el último cambio de propiedad.
 
-## Architecture
+## Arquitectura
 
-As hinted above, Tabular Editor has two different modes of operation: Metadata from file (aka. **file mode**) and metadata from Analysis Services (aka. **connected mode**). In addition, Tabular Editor 3 introduces a hybrid approach called [**workspace mode**](xref:workspace-mode).
+Como se indicó anteriormente, Tabular Editor tiene dos modos de funcionamiento: metadatos desde un archivo (también conocido como **modo de archivo**) y metadatos desde Analysis Services (también conocido como **modo conectado**). Además, Tabular Editor 3 introduce un enfoque híbrido llamado [**modo del área de trabajo**](xref:workspace-mode).
 
-Before proceeding, it is important to understand the differences between these modes:
+Antes de continuar, es importante entender las diferencias entre estos modos:
 
-- In **file mode**, Tabular Editor loads and saves all model metadata from and to a file on disk. In this mode, Tabular Editor cannot interact with model **data** (that is, table previews, DAX queries, Pivot Grids, and data refresh operations are not enabled). This mode can be used entirely offline, even when no instance of Analysis Services is available. The supported file formats for model metadata are:
-  - Model.bim (same format used by Visual Studio)
-  - Database.json (folder structure only used by Tabular Editor)
-  - .pbit (Power BI Template)
-- In **connected mode**, Tabular Editor loads and saves model metadata from and to Analysis Services. In this mode, it is possible to interact with model **data** using Tabular Editor 3 (table previews, DAX queries, Pivot Grids and data refresh). This mode requires connectivity to an instance of Analysis Services.
-- In **workspace mode**, Tabular Editor 3 loads model metadata from a file on disk AND deploys the metadata to Analysis Services. On subsequent saves (CTRL+S), updates are saved both to disk and to the connected instance of Analysis Services. It is possible to interact with model **data** similar to **connected mode**.
+- En el **modo de archivo**, Tabular Editor carga todos los metadatos del modelo desde un archivo en disco y los guarda de nuevo en ese mismo archivo. En este modo, Tabular Editor no puede interactuar con los **datos** del modelo (es decir, no se habilitan las vistas previas de tabla, las consultas DAX, Pivot Grid ni las operaciones de actualización de datos). Este modo puede usarse completamente sin conexión, incluso cuando no hay ninguna instancia de Analysis Services disponible. Los formatos de archivo compatibles para los metadatos del modelo son:
+  - Model.bim (mismo formato que usa Visual Studio)
+  - Database.json (estructura de carpetas que solo usa Tabular Editor)
+  - .pbit (plantilla de Power BI)
+- En el **modo conectado**, Tabular Editor carga los metadatos del modelo desde Analysis Services y los guarda de nuevo en Analysis Services. En este modo, es posible interactuar con los **datos** del modelo con Tabular Editor 3 (vistas previas de tabla, consultas DAX, Pivot Grid y actualización de datos). Este modo requiere conexión a una instancia de Analysis Services.
+- En el **modo del área de trabajo**, Tabular Editor 3 carga los metadatos del modelo desde un archivo en disco y los despliega en Analysis Services. En los guardados posteriores (CTRL+S), las actualizaciones se guardan tanto en el disco como en la instancia de Analysis Services conectada. Es posible interactuar con los **datos** del modelo de forma similar al **modo conectado**.
 
-### Metadata synchronization
+### Sincronización de metadatos
 
-One of the major benefits of Tabular Editor over the standard tools (Visual Studio, Power BI Desktop), is that model metadata is only saved upon request. In other words, you can make multiple changes to objects and properties without having to wait for any Analysis Services instance to become synchronized between each change. The synchronization of the Analysis Services database is an operation that may take several seconds to complete, depending on the size and complexity of the data model. In Power BI Desktop, this synchronization happens every time the notorious "Working on it" spinner appears on the screen. In Tabular Editor, this only happens when you explicitly save your changes (CTRL+S).
+Una de las principales ventajas de Tabular Editor frente a las herramientas estándar (Visual Studio, Power BI Desktop) es que los metadatos del modelo solo se guardan cuando lo solicitas. En otras palabras, puedes hacer varios cambios en objetos y propiedades sin tener que esperar a que una instancia de Analysis Services se sincronice después de cada cambio. La sincronización de la base de datos de Analysis Services es una operación que puede tardar varios segundos en completarse, según el tamaño y la complejidad del Data model. En Power BI Desktop, esta sincronización ocurre cada vez que aparece en pantalla el conocido indicador giratorio "Working on it". En Tabular Editor, esto solo ocurre cuando guardas explícitamente los cambios (CTRL+S).
 
-The downside is, of course, that you have to remember to explicitly save your changes, before you can test the impact of any metadata modifications that were made.
+La desventaja es, por supuesto, que tienes que acordarte de guardar explícitamente los cambios antes de poder probar el impacto de cualquier modificación de metadatos que hayas realizado.
 
-## Next steps
+## Próximos pasos
 
 - @installation-activation-basic
 - @migrate-from-vs
