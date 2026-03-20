@@ -34,8 +34,6 @@ To save your model to folder, follow these steps:
 
 ## Serialization settings
 The serialization settings defines how the model objects are split into separate files. In these settings you can also define if you wish to use JSON or TMDL formats.
-> [!NOTE]
->JSON is the default format as TMDL is currently in preview. 
 
 
 ### [Tabular Editor 2 Preferences](#tab/TE2Preferences)
@@ -54,7 +52,7 @@ The tabs General and Save-to-folder contains settings regarding the serializatio
 Tabular Editor 3 has a default setting for JSON serialization and you must actively choose a different setting in serialization mode, which is also where you change to the TMDL format. 
 ***
 ### Serialization Model Annotation
-Tabular Editor saves the serialization settings on your model so that they will always stay the same no matter who is working on the model. This ensures that a developer's local preferences do not overwrite model's setting and lead to a unmanageable merge in your source control. You can find these annotations in the TOM Explorer properties of the Model > Annotations > TabularEditor_SerializeOptions
+Tabular Editor saves the serialization settings on your model so that they will always stay the same no matter who is working on the model. This ensures that a developer's local preferences do not overwrite model's setting and lead to an unmanageable merge in your source control. You can find these annotations in the TOM Explorer properties of the Model > Annotations > TabularEditor_SerializeOptions
 <br></br>
 ![TE3 Preferences](~/content/assets/images/common/SaveToFolderModelAnnotation.png)
 

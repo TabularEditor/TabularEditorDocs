@@ -1,7 +1,7 @@
 ﻿---
 uid: desktop-integration
 title: Power BI Desktop Integration
-applies to:
+applies_to:
   products:
     - product: Tabular Editor 2
       full: true
@@ -16,7 +16,7 @@ applies to:
 ---
 # Power BI Desktop Integration
 
-[Power BI Desktop supports External Tools](https://docs.microsoft.com/da-dk/power-bi/create-reports/desktop-external-tools) which allows Tabular Editor to perform  modeling operations when working with Imported or DirectQuery data in Desktop.
+[Power BI Desktop supports External Tools](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-external-tools) which allows Tabular Editor to perform  modeling operations when working with Imported or DirectQuery data in Desktop.
 
 ![image](~/content/assets/images/getting-started/power-bi-desktop-integration.png)
 
@@ -32,7 +32,7 @@ Also, it is highly recommended that [automatic date/time](https://docs.microsoft
 When a Power BI Desktop report contains a data model (that is, one or more tables have been added in Import or DirectQuery mode), that data model is hosted inside an instance of Analysis Services managed by Power BI Desktop. External Tools may connect to this instance of Analysis Services for different purposes.
 
 > [!IMPORTANT]
-> Power BI Desktop reports that use a **Live Connection** to SSAS, Azure AS or a dataset in a Power BI workspace do not contain a data model. As such, these reports **can not** be used with external tools such as Tabular Editor.
+> Power BI Desktop reports that use a **Live Connection** to SSAS, Azure AS or a dataset in a Power BI workspace do not contain a data model. As such, these reports **cannot** be used with external tools such as Tabular Editor.
 
 > [!IMPORTANT]
 > Power BI Desktop reports that directly edits a **Direct Lake** or other model Fabric do not contain a data model. Instead, Tabular Editor will open the model directly from the service which is essentially what Power BI Desktop also does.
@@ -45,6 +45,6 @@ Once connected to the instance of Analysis Services, an external tool can obtain
 
 ## Supported Modeling Operations
 
-As of the June 2025 Power BI Desktop update, there are no longer any unsupported write operations. In other words, third party tools can now freely modify any aspect of the semantic model hosted in Power BI Desktop, including adding and removing tables and columns, changing data types, etc. However, if you're using a version of Power BI Desktop prior to the June 2025 update, please view the limitations in the [Desktop Limitations](xref: desktop-limitations) article.
+As of the June 2025 Power BI Desktop update, there are no longer any unsupported write operations. In other words, third party tools can now freely modify any aspect of the semantic model hosted in Power BI Desktop, including adding and removing tables and columns, changing data types, etc. However, if you're using a version of Power BI Desktop prior to the June 2025 update, please view the limitations in the [Desktop Limitations](xref:desktop-limitations) article.
 
 More information in [the official blog post](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).

@@ -30,7 +30,7 @@ This page walks you through the process of creating a new Analysis Services tabu
 
 ![New model](https://user-images.githubusercontent.com/8976200/116813646-02a6fc80-ab55-11eb-89b0-8909b768ce7e.png)
 
-- Provide a name for your model or use the default value. Then, choose the compatibility level depending on which version of Analysis Services you are targetting. Your options are the following:
+- Provide a name for your model or use the default value. Then, choose the compatibility level depending on which version of Analysis Services you are targeting. Your options are the following:
   - 1200 (Works with SQL Server 2016 or newer, and Azure Analysis Services)
   - 1400 (Works with SQL Server 2017 or newer, and Azure Analysis Services)
   - 1500 (Works with SQL Server 2019 or Azure Analysis Services)
@@ -48,11 +48,11 @@ Once your model is created, the next step is to add a data source and some table
 
 #### Adding a data source and tables
 
-Before you can import data to your tabular model, you have to set up one or more data sources. Locate the TOM Explorer, right-click on the "Data Sources" folder and choose "Create". For a model that uses compatibility level 1400 or higher, we have two options: Legacy and Power Query data sources. To learn more about th differences between these two types of data sources, [consult the Microsoft Analysis Services blog](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
+Before you can import data to your tabular model, you have to set up one or more data sources. Locate the TOM Explorer, right-click on the "Data Sources" folder and choose "Create". For a model that uses compatibility level 1400 or higher, we have two options: Legacy and Power Query data sources. To learn more about the differences between these two types of data sources, [consult the Microsoft Analysis Services blog](https://docs.microsoft.com/en-us/archive/blogs/analysisservices/using-legacy-data-sources-in-tabular-1400).
 
 ![Add data source](https://user-images.githubusercontent.com/8976200/124598010-72db4280-de64-11eb-818a-e5793f061185.png)
 
-In this example, we will create a Power Query data source, which we will use to import a few tables from a SQL Server relational database. Once the data source is created, hit F2 to rename it and configure the data source using the Propery Grid as seen in the screenshot below:
+In this example, we will create a Power Query data source, which we will use to import a few tables from a SQL Server relational database. Once the data source is created, hit F2 to rename it and configure the data source using the Property Grid as seen in the screenshot below:
 
 ![Set data source properties](https://user-images.githubusercontent.com/8976200/124599856-71ab1500-de66-11eb-8ede-3a6272872734.png)
 

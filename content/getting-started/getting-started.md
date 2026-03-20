@@ -36,7 +36,7 @@ See the .NET supported OS policy for current Windows versions supported by each 
 
 ## Activating your installation
 
-Tabular Editor 3 is commercial software. Visit our [home page](https://tabulareditor.com) for pricing details and purchase options. If you haven't previously used Tabular Editor 3 you are eligible to a free 30-day trial.
+Tabular Editor 3 is commercial software. Visit our [home page](https://tabulareditor.com) for pricing details and purchase options. If you haven't previously used Tabular Editor 3 you are eligible for a free 30-day trial.
 
 The first time you launch Tabular Editor 3 on a new machine, you are prompted to activate the product.
 
@@ -55,10 +55,10 @@ Note that Tabular Editor 3 installations are activated **per user**. In other wo
 
 ### Requesting a trial license
 
-If you haven't used Tabular Editor 3 before, you are eligible to a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
+If you haven't used Tabular Editor 3 before, you are eligible for a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
 
 > [!NOTE]
-> Tabular Editor ApS will not sent unsolicited e-mails or forward your e-mail address to third parties, when signing up for a 30-day trial license. View our @privacy-policy for more information.
+> Tabular Editor ApS will not send unsolicited e-mails or forward your e-mail address to third parties, when signing up for a 30-day trial license. View our @privacy-policy for more information.
 
 ### Changing a license key
 

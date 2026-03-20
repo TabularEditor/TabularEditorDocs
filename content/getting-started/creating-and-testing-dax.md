@@ -34,7 +34,7 @@ The remainder of this article describes how to create measures and other calcula
 Once you have [imported some tables](xref:importing-tables-data-modeling#importing-new-tables) to your model and [created relationships between them](xref:importing-tables-data-modeling#modifying-relationships-using-the-diagram), it is time to add some explicit measures containing your business logic.
 
 > [!TIP]
-> Technically, you are not required to add explicit measures to your model before visualizing data in a Power BI report. However, it is a best practice to always do so, as MDX-based client tools (such as Excel and Tabular Editor 3's Pivot Grid) requires explicit measures. In addition, [Calculation Groups](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) only apply to explicit measures.
+> Technically, you are not required to add explicit measures to your model before visualizing data in a Power BI report. However, it is a best practice to always do so, as MDX-based client tools (such as Excel and Tabular Editor 3's Pivot Grid) require explicit measures. In addition, [Calculation Groups](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) only apply to explicit measures.
 
 To add a new measure using Tabular Editor, right-click on the table in which you want to add the measure, then choose **Create > Measure** (ALT+1).
 

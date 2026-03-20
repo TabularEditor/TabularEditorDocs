@@ -25,7 +25,7 @@ This section contains a number of articles that will let you quickly become fami
 
 Below is an overview of the articles and what you will learn in each:
 
-- @importing-tables-data-modeling: This article describes how to import tables, upate table schemas and visualize and edit relationships.
+- @importing-tables-data-modeling: This article describes how to import tables, update table schemas and visualize and edit relationships.
 - @refresh-preview-query: This article describes how to schedule refresh operations, how to preview table data, how to view summarized data using Pivot Grids, how to create and execute DAX queries and how to use Tabular Editor 3's integrated version of [VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/).
 - @creating-and-testing-dax: This article introduces Tabular Editor 3's powerful DAX editor and demonstrates how to quickly add and edit DAX calculations to your model such as measures, calculated columns and calculated tables.
 - @dax-script-introduction: This article demonstrates how to use the DAX scripting feature, to write, maintain and test complex business logic across multiple measures, by combining their definition in a single DAX script.

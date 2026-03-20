@@ -27,7 +27,9 @@ Example files are available for each several file type, based on the [learn.tabu
 
 ## Dataset file types
 
-Tabular Editor supports four file types for semantic models: .bim, Power BI files (.pbit and.pbip), .json and .tmdl. Each file type has different features and limitations, which are explained below.
+Tabular Editor supports four file types for semantic models: .bim, Power BI files (.pbit and .pbip), .json and .tmdl. Each file type has different features and limitations, which are explained below.
+
+Additionally, Tabular Editor 3 Business and Enterprise editions support **saving with supporting files** for Microsoft Fabric Git integration. This creates a folder structure containing .platform and definition.pbism metadata files alongside your model files, enabling seamless synchronization with Fabric workspaces. See [Save with supporting files](xref:save-with-supporting-files) for details.
 
 > [!NOTE]
 > Since **Tabular Editor 3 Desktop Edition** is only intended to be used as an External Tool for Power BI Desktop, this edition does not allow loading and saving semantic model files. You may however still use Tabular Editor 2.x for this purpose. See <xref:editions> to learn more about the difference between the Tabular Editor 3 editions.
@@ -43,6 +45,19 @@ However, it has a large drawback: as it's a single large file, it's difficult to
 ![Supported File Types BIM](~/content/assets/images/file-types/te3-supported-file-bim.png)
 
 [Download example .bim file ](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/bim-file-example.bim)
+
+#### Save with supporting files for Fabric Git integration
+
+When using the **Save with supporting files** option (Business and Enterprise editions), Tabular Editor creates a folder structure compatible with Microsoft Fabric Git integration:
+
+```
+DatabaseName.SemanticModel/
+├── .platform
+├── definition.pbism
+└── model.bim
+```
+
+This structure enables you to commit your semantic models to Git repositories and synchronize them with Fabric workspaces. See [Save with supporting files](xref:save-with-supporting-files) for complete documentation.
 
 
 ### [Power BI](#tab/PowerBI)
@@ -81,7 +96,7 @@ This format preserves the structure and properties of your objects, such as tabl
 
 This format has been supported in Tabular Editor from the early days and is a proven, though by Microsoft unsupported, method for storing your dataset objects as individual files. Thereby enabling developers to track changes in source control and collaborate on building semantic models.
 
-There is full compatibility between Tabular Editor 2 and 3 with regards to the the JSON file structure.
+There is full compatibility between Tabular Editor 2 and 3 with regards to the JSON file structure.
 
 In order to save a semantic model to JSON you must use the 'Save to Folder' option when saving the first time. Subsequent saves to a model loaded from a JSON structured model maintains the setting. it's always possible to convert a model that is in JSON to a .bim file using 'File > Save As'
 
@@ -89,7 +104,7 @@ In order to save a semantic model to JSON you must use the 'Save to Folder' opti
 ![Supported File Types JSON](~/content/assets/images/file-types/te3-supported-file-json.png)
 
 1. The overall model has a database json and each TOM headline has its own folder
-2. In tables, each table exist in its own folder
+2. In tables, each table exists in its own folder
 3. An individual table as a TableName json file with folders for measures, columns and partitions
 4. The measures on the table each have their own json file.
 
@@ -124,7 +139,45 @@ For further reading please see: [TMDL](xref:tmdl)
 
 [Download example TMDL Folder Structure](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/tmdl-model-example.zip)
 
+#### Save with supporting files for Fabric Git integration
+
+When using the **Save with supporting files** option (Business and Enterprise editions), Tabular Editor creates a folder structure compatible with Microsoft Fabric Git integration:
+
+```
+DatabaseName.SemanticModel/
+├── .platform
+├── definition.pbism
+└── definition/
+    ├── database.tmdl
+    ├── tables.tmdl
+    └── ...
+```
+
+The human-readable TMDL format is particularly well-suited for version control and code reviews when using Fabric Git integration. See [Save with supporting files](xref:save-with-supporting-files) for complete documentation.
+
 ***
+
+## Fabric Git Integration files
+
+When using the **Save with supporting files** feature (Business and Enterprise editions), Tabular Editor creates additional metadata files required for Microsoft Fabric Git integration. These files are automatically generated and managed by Tabular Editor.
+
+### .platform
+
+The .platform file contains metadata about the semantic model item, including:
+- **type**: Identifies the item as a SemanticModel
+- **displayName**: The name displayed in Fabric workspaces (synchronized from the Database `Name` property)
+- **description**: The description shown in Fabric (synchronized from the Database `Description` property)
+- **logicalId**: An automatically generated cross-workspace identifier
+
+This file is a JSON file that should not be manually edited unless you understand the Fabric item format.
+
+### definition.pbism
+
+The definition.pbism file contains the overall definition and core settings of the semantic model. This file works alongside the model metadata (stored as either model.bim or in the definition/ folder) to provide complete semantic model information required by Microsoft Fabric.
+
+Both files are automatically created when you check the **Save with supporting files** option during save operations. The resulting folder structure (with .SemanticModel suffix) can be committed to Git repositories and synchronized with Fabric workspaces.
+
+For complete documentation on this feature, see [Save with supporting files](xref:save-with-supporting-files).
 
 ## Tabular Editor Supporting files
 
@@ -136,7 +189,7 @@ All supporting files can be saved individually using either Ctrl+S or 'File > Sa
 
 A .te3diag file is a file format that stores the diagram of a model created with TE3. 
 
-These file can be useful for documenting the model structure and logic for other developers who work on the same project. A .te3diag file can be saved in the same folder as the model file for easy access and reference.
+These files can be useful for documenting the model structure and logic for other developers who work on the same project. A .te3diag file can be saved in the same folder as the model file for easy access and reference.
 
 Diagram files are actually JSON that is stored in a Tabular Editor 3 extension.
 

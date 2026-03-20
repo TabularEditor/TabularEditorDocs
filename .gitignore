@@ -1,4 +1,5 @@
-/docfx.json
+/metadata/languages.json
+
 
 ###############
 #    folder   #
@@ -12,13 +13,22 @@
 /**/xdocoutput/
 /**/node_modules/
 /**/*.sln.ide/
+**/__pycache__/
 /TestResults/
 /.vs/
 .NuGet/
 artifacts/
 target/
-/_site/*
-!/_site/staticwebapp.config.json
+/_site/
+
+# Localized content
+/localizedContent/en/
+/localizedContent/*/docfx.json
+!/localizedContent/*/.translation-status.json
+# Shared directories copied during build (not translated, always overwritten)
+/localizedContent/*/content/api/
+/localizedContent/*/content/assets/
+
 .vscode/
 .vs/
 

@@ -4,6 +4,13 @@
         <name>TabularEditor3.Shared</name>
     </assembly>
     <members>
+        <member name="T:TabularEditor.Shared.AdvancedRefresh.OverrideCollectionConverter">
+            <summary>
+            Custom JsonConverter for OverrideCollection from Microsoft.AnalysisServices.Tabular
+            This will be automatically applied when OverrideCollection instances are serialized
+            within collections (List, Dictionary, etc.) if registered in JsonSerializerSettings.
+            </summary>
+        </member>
         <member name="T:TabularEditor.Shared.StaTaskScheduler">
             <summary>Provides a scheduler that uses STA threads.</summary>
         </member>
@@ -50,6 +57,11 @@
             Base path when the analyzer searches for rule files (typically the same path as the Model.bim or database.json file is stored in)
             </summary>
         </member>
+        <member name="M:TabularEditor.Shared.BPA.Analyzer.ApplyBuiltInRulePreferences(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Apply user's disabled rule state from preferences. This is called from BpaService.
+            </summary>
+        </member>
         <member name="M:TabularEditor.Shared.BPA.BestPracticeAnalyzerScriptHelper.ReplaceRuleDescriptionPlaceholders(System.String,TabularEditor.Shared.BPA.AnalyzerResult)">
             <summary>
             Replaces object, object name and object type tokens in the given description
@@ -78,12 +90,18 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:TabularEditor.Shared.Infrastructure.AzureAdAuthenticationService.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
+        <member name="T:TabularEditor.Shared.Infrastructure.AuthenticationConstants">
             <summary>
-            This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext.
+            Contains Azure AD client IDs and scopes used for authentication.
             </summary>
         </member>
-        <member name="M:TabularEditor.Shared.Infrastructure.FabricClientHelper.GetClientAsync(TabularEditor.Shared.Services.IPreferencesProvider,System.String,System.Boolean,System.IntPtr,System.Threading.CancellationToken)">
+        <member name="M:TabularEditor.Shared.Infrastructure.AuthenticationConstants.GetPowerBiScopes(System.String)">
+            <summary>
+            Gets the Power BI scopes based on the Power BI REST API endpoint URL.
+            Different cloud environments (commercial, government, Germany, China) require different scopes.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Infrastructure.AzureIdentityClientHelper.GetClientAsync(TabularEditor.Shared.Services.IPreferencesProvider,System.String,System.Boolean,System.IntPtr,System.Threading.CancellationToken)">
             <summary>
             Gets an ExtendedFabricClient object - either from the cache (i.e. the most recently used one) or by creating a new one if the cache is empty.
             User will be prompted for credentials if no cached client is available.
@@ -95,9 +113,10 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:TabularEditor.Shared.Infrastructure.MsalHelper.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
+        <member name="M:TabularEditor.Shared.Infrastructure.AzureIdentityClientHelper.IsAuthenticationCanceled(System.Exception)">
             <summary>
-            This object must be created on the UI thread, as it captures the synchronization context for use when the custom web UI is invoked.
+            Checks if the given exception represents an authentication cancellation by the user.
+            Handles Azure.Identity, MSAL (used by TOM), SqlClient, and OleDb authentication cancellations.
             </summary>
         </member>
         <member name="T:TabularEditor.Shared.Interaction.NamedObjectEditableCollection`1">
@@ -570,6 +589,16 @@
             The currently selected column (if exactly one column is selected in the explorer tree).
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Calendars">
+            <summary>
+            The currently selected calendars.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Interaction.Selection.Calendar">
+            <summary>
+            The currently selected calendar (if exactly one calendar is selected in the explorer tree).
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Interaction.Selection.Object">
             <summary>
             The currently selected object (if exactly one object is selected in the explorer tree).
@@ -778,6 +807,383 @@
               Looks up a localized string similar to Username and password.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BillionsFormat">
+            <summary>
+              Looks up a localized string similar to {0} B.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaCategoryErrorPrevention">
+            <summary>
+              Looks up a localized string similar to Error Prevention.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaCategoryFormatting">
+            <summary>
+              Looks up a localized string similar to Formatting.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaCategoryGovernance">
+            <summary>
+              Looks up a localized string similar to Governance.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaCategoryMaintenance">
+            <summary>
+              Looks up a localized string similar to Maintenance.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaCategoryModelLayout">
+            <summary>
+              Looks up a localized string similar to Model Layout.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaCategoryNamingConventions">
+            <summary>
+              Looks up a localized string similar to Naming Conventions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaCategoryPerformance">
+            <summary>
+              Looks up a localized string similar to Performance.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleAvoidInvalidCharactersDescriptionsDescription">
+            <summary>
+              Looks up a localized string similar to Object descriptions must not contain control characters (except whitespace). Invalid characters will prevent model deployment and cause errors. The fix expression automatically replaces invalid characters with spaces..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleAvoidInvalidCharactersDescriptionsName">
+            <summary>
+              Looks up a localized string similar to Avoid invalid characters in descriptions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleAvoidInvalidCharactersNamesDescription">
+            <summary>
+              Looks up a localized string similar to Object names must not contain control characters (except whitespace). Invalid characters will prevent model deployment and cause errors. The fix expression automatically replaces invalid characters with spaces..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleAvoidInvalidCharactersNamesName">
+            <summary>
+              Looks up a localized string similar to Avoid invalid characters in names.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleAvoidProviderPartitionsStructuredDescription">
+             <summary>
+               Looks up a localized string similar to Power BI does not support legacy provider partitions that reference structured data sources. Partitions using structured data sources must use M expressions, or the structured data source should be converted to a provider data source to avoid deployment failures.
+            
+            Reference: https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools#data-source-declaration
+            .
+             </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleAvoidProviderPartitionsStructuredName">
+            <summary>
+              Looks up a localized string similar to Avoid structured data sources with provider partitions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleCalculationGroupsNoItemsDescription">
+            <summary>
+              Looks up a localized string similar to Calculation groups without calculation items are non-functional and should be removed. A calculation group must contain at least one calculation item to provide any value..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleCalculationGroupsNoItemsName">
+            <summary>
+              Looks up a localized string similar to Calculation groups with no calculation items.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleDataColumnSourceDescription">
+            <summary>
+              Looks up a localized string similar to Every data column must reference a source column from the data source. Missing source column mappings will cause processing failures when refreshing the model..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleDataColumnSourceName">
+            <summary>
+              Looks up a localized string similar to Data columns must have a source column.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleDateTableExistsDescription">
+            <summary>
+              Looks up a localized string similar to Models should include a date table marked with DataCategory &apos;Time&apos; to enable time intelligence functions and provide proper date filtering capabilities. Without a date table, time-based calculations and analysis may not work correctly..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleDateTableExistsName">
+            <summary>
+              Looks up a localized string similar to Model should have a date table.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleDoNotSummarizeNumericDescription">
+            <summary>
+              Looks up a localized string similar to Visible numeric columns should have SummarizeBy set to &apos;None&apos; to prevent automatic aggregation in Power BI. Use explicit measures instead of implicit column aggregation to ensure correct calculations and better performance..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleDoNotSummarizeNumericName">
+            <summary>
+              Looks up a localized string similar to Do not summarize numeric columns.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleExpressionRequiredDescription">
+            <summary>
+              Looks up a localized string similar to Measures, calculated columns, and calculation items require a DAX expression to function. Objects without expressions will not return any values and may cause errors in reports..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleExpressionRequiredName">
+            <summary>
+              Looks up a localized string similar to Expression-reliant objects must have an expression.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleFormatStringColumnsDescription">
+            <summary>
+              Looks up a localized string similar to Visible numeric and date columns should have a format string defined to ensure consistent and appropriate display formatting in reports. This improves user experience and data readability..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleFormatStringColumnsName">
+            <summary>
+              Looks up a localized string similar to Provide format string for visible numeric columns.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleFormatStringMeasuresDescription">
+            <summary>
+              Looks up a localized string similar to Visible numeric and date measures should have a format string defined to ensure consistent and appropriate display formatting in reports. This improves user experience and data readability..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleFormatStringMeasuresName">
+            <summary>
+              Looks up a localized string similar to Provide format string for visible numeric measures.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleHideForeignKeysDescription">
+            <summary>
+              Looks up a localized string similar to Columns used on the many side of relationships should be hidden from end users. These foreign key columns are typically only needed for relationships and should not be used directly in reports..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleHideForeignKeysName">
+            <summary>
+              Looks up a localized string similar to Hide foreign keys.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleIsAvailableInMdxDescription">
+             <summary>
+               Looks up a localized string similar to Hidden columns that are not used for sorting or in hierarchies should have their IsAvailableInMdx property set to false. This prevents unnecessary attribute hierarchy creation, reducing processing time and memory consumption.
+            
+            Reference: https://blog.crossjoin.co.uk/2018/07/02/isavailableinmdx-ssas-tabular/.
+             </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleIsAvailableInMdxName">
+            <summary>
+              Looks up a localized string similar to Set IsAvailableInMdx to false on non-attribute columns.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleIsAvailableInMdxTrueNecessaryDescription">
+            <summary>
+              Looks up a localized string similar to Columns used for sorting, in hierarchies, in variations, or that have a sort-by column must have IsAvailableInMdx set to true. Disabling attribute hierarchies on these columns will cause errors or unexpected behavior..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleIsAvailableInMdxTrueNecessaryName">
+            <summary>
+              Looks up a localized string similar to Set IsAvailableInMdx to true on necessary columns.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleManyToManySingleDirectionDescription">
+            <summary>
+              Looks up a localized string similar to Bi-directional filtering on many-to-many relationships can cause performance issues and ambiguous filter context. Use single-direction filtering unless bi-directional filtering is specifically required for your scenario..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleManyToManySingleDirectionName">
+            <summary>
+              Looks up a localized string similar to Many-to-many relationships should be single-direction.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRulePerspectivesNoObjectsDescription">
+            <summary>
+              Looks up a localized string similar to Perspectives without any tables serve no purpose and should be removed. Empty perspectives add unnecessary complexity without providing any value to end users..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRulePerspectivesNoObjectsName">
+            <summary>
+              Looks up a localized string similar to Perspectives with no objects.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRulePowerBiLatestCompatibilityDescription">
+            <summary>
+              Looks up a localized string similar to Power BI models should use the latest generally available compatibility level (currently {0}) to access the newest features, performance improvements, and ensure ongoing support..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRulePowerBiLatestCompatibilityName">
+            <summary>
+              Looks up a localized string similar to Power BI models should use latest compatibility level.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleRelationshipSameDatatypeDescription">
+            <summary>
+              Looks up a localized string similar to Both columns in a relationship must have matching data types to ensure proper functionality. Mismatched data types can cause relationship failures, unexpected results, or performance degradation. Integer data types are recommended for optimal performance..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleRelationshipSameDatatypeName">
+            <summary>
+              Looks up a localized string similar to Relationship columns should be of the same data type.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleRemoveAutoDateTableDescription">
+             <summary>
+               Looks up a localized string similar to Auto-generated date tables (DateTableTemplate_ or LocalDateTable_) should be removed from the model. Disable auto-date tables in Power BI Desktop settings and use explicit date tables instead to reduce memory consumption and improve model performance.
+            
+            Reference: https://www.youtube.com/watch?v=xu3uDEHtCrg.
+             </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleRemoveAutoDateTableName">
+            <summary>
+              Looks up a localized string similar to Remove auto-date table.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleRemoveUnusedDataSourcesDescription">
+            <summary>
+              Looks up a localized string similar to Data sources that are not referenced by any partition or table expression can be safely removed from the model. Removing unused data sources helps keep the model clean and easier to maintain..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleRemoveUnusedDataSourcesName">
+            <summary>
+              Looks up a localized string similar to Remove data sources not referenced by any partitions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRulesForLocalUser">
+            <summary>
+              Looks up a localized string similar to Rules for the local user.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRulesOnLocalMachine">
+            <summary>
+              Looks up a localized string similar to Rules on the local machine.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleSpecifyApplicationNameDescription">
+            <summary>
+              Looks up a localized string similar to SQL Server connection strings should include an Application Name parameter to help database administrators identify the source of connections. Use a descriptive name like &apos;AnalysisServicesTabular [ServerName] [ModelName]&apos; for easier troubleshooting and monitoring..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleSpecifyApplicationNameName">
+            <summary>
+              Looks up a localized string similar to Specify Application Name in connection string.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTranslateDescriptionsDescription">
+            <summary>
+              Looks up a localized string similar to When your model supports multiple languages, object descriptions should be translated for each culture. This ensures all users can understand the purpose and content of objects regardless of their language preference..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTranslateDescriptionsName">
+            <summary>
+              Looks up a localized string similar to Translate Object Descriptions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTranslateDisplayFoldersDescription">
+            <summary>
+              Looks up a localized string similar to When your model supports multiple languages, display folders should be translated for each culture. Without translations, users viewing the model in different languages will not see the intended folder organization..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTranslateDisplayFoldersName">
+            <summary>
+              Looks up a localized string similar to Translate Display Folders.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTranslateHierarchyLevelsDescription">
+            <summary>
+              Looks up a localized string similar to When your model supports multiple languages, hierarchy level names should be translated for each culture. This ensures users can understand the hierarchy structure in their preferred language..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTranslateHierarchyLevelsName">
+            <summary>
+              Looks up a localized string similar to Translate Hierarchy Levels.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTranslatePerspectivesDescription">
+            <summary>
+              Looks up a localized string similar to When your model supports multiple languages, the model and perspective names should be translated for each culture. This provides a fully localized experience for users in different regions..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTranslatePerspectivesName">
+            <summary>
+              Looks up a localized string similar to Translate Perspectives.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTranslateVisibleNamesDescription">
+            <summary>
+              Looks up a localized string similar to When your model supports multiple languages, visible object names should be translated for each culture. This provides a localized experience for users working in different languages..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTranslateVisibleNamesName">
+            <summary>
+              Looks up a localized string similar to Translate Visible Object Names.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTrimObjectNamesDescription">
+            <summary>
+              Looks up a localized string similar to Object names should not have leading or trailing spaces. These unintentional spaces commonly occur when copying or duplicating objects and can cause confusion and inconsistency..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleTrimObjectNamesName">
+            <summary>
+              Looks up a localized string similar to Trim object names.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleCalculationGroupsNoDescriptionDescription">
+            <summary>
+              Looks up a localized string similar to Visible calculation groups should have descriptions to explain their purpose and how the calculation items modify measure behavior. Descriptions appear in tooltips in Power BI Desktop and can be used to generate automated data documentation..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleCalculationGroupsNoDescriptionName">
+            <summary>
+              Looks up a localized string similar to Visible calculation groups with no description.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleColumnsNoDescriptionDescription">
+            <summary>
+              Looks up a localized string similar to Visible columns should have descriptions to help users understand what data they contain. Descriptions appear in tooltips in Power BI Desktop and can be used to generate automated data documentation..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleColumnsNoDescriptionName">
+            <summary>
+              Looks up a localized string similar to Visible columns with no description.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleMeasuresNoDescriptionDescription">
+            <summary>
+              Looks up a localized string similar to Visible measures should have descriptions to explain what they calculate and how they should be used. Descriptions appear in tooltips in Power BI Desktop and can be used to generate automated data documentation..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleMeasuresNoDescriptionName">
+            <summary>
+              Looks up a localized string similar to Visible measures with no description.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleTablesNoDescriptionDescription">
+            <summary>
+              Looks up a localized string similar to Visible tables should have descriptions to help users understand their purpose and content. Descriptions appear in tooltips in Power BI Desktop and can be used to generate automated data documentation..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleTablesNoDescriptionName">
+            <summary>
+              Looks up a localized string similar to Visible tables with no description.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleUdfNoDescriptionDescription">
+            <summary>
+              Looks up a localized string similar to User-defined functions should have descriptions documenting their purpose, parameters, and return values. This helps developers understand how to use these custom functions correctly..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BpaRuleVisibleUdfNoDescriptionName">
+            <summary>
+              Looks up a localized string similar to User-defined functions with no description.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.BytesFormat">
+            <summary>
+              Looks up a localized string similar to {0} Bytes.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.CannotPerformProcessingDisconnected">
+            <summary>
+              Looks up a localized string similar to Cannot perform processing on a disconnected model..
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.ColumnValues">
             <summary>
               Looks up a localized string similar to Column values.
@@ -786,6 +1192,21 @@
         <member name="P:TabularEditor.Shared.Localization.Strings.Datamart">
             <summary>
               Looks up a localized string similar to Datamart.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DataRefreshComplete">
+            <summary>
+              Looks up a localized string similar to Data refresh complete..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DataRefreshFailed">
+            <summary>
+              Looks up a localized string similar to Data refresh failed..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DataRefreshStarted">
+            <summary>
+              Looks up a localized string similar to Data refresh started....
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.DaxOptimizerAccountRegistrationIncomplete">
@@ -798,15 +1219,25 @@
               Looks up a localized string similar to File upload to the DAX Optimizer service is disabled by a local policy..
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.DaxPackageManager_DisabledDueToLowModelCompatibilityLevel">
+            <summary>
+              Looks up a localized string similar to Disabled due to low model compatibility level ({0} &lt; {1}).
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.DefaultSemanticModel">
             <summary>
               Looks up a localized string similar to Semantic Model (Default).
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.Error">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.ErrorLoadingUserOptionsDetails">
              <summary>
                Looks up a localized string similar to An error occurred while trying to deserialize the User Options (.tmuo) file:
-                
+            
             {0}.
              </summary>
         </member>
@@ -818,6 +1249,11 @@
         <member name="P:TabularEditor.Shared.Localization.Strings.ExternalBrowserAuthentication">
             <summary>
               Looks up a localized string similar to External browser.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.GigabytesFormat">
+            <summary>
+              Looks up a localized string similar to {0} GB.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.KeepSortingAndFilteringAlways">
@@ -850,14 +1286,39 @@
               Looks up a localized string similar to Sorting and filtering is reset when the query is modified, ignoring whitespace/comment modifications..
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.KilobytesFormat">
+            <summary>
+              Looks up a localized string similar to {0} KB.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.Lakehouse">
             <summary>
               Looks up a localized string similar to Lakehouse.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.MegabytesFormat">
+            <summary>
+              Looks up a localized string similar to {0} MB.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.MillionsFormat">
+            <summary>
+              Looks up a localized string similar to {0} M.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.MirroredAzureDatabricksCatalog">
+            <summary>
+              Looks up a localized string similar to Mirrored Azure Databricks catalog.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.MirroredDatabase">
             <summary>
               Looks up a localized string similar to Mirrored Database.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ModelRefreshDescription">
+            <summary>
+              Looks up a localized string similar to {0} model refresh.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.MyWorkspace">
@@ -875,6 +1336,11 @@
               Looks up a localized string similar to OAuth.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.PartitionRefreshDescription">
+            <summary>
+              Looks up a localized string similar to {0} refresh of {1:partition {2}|{} partitions}.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.ProxyTypeCustom">
             <summary>
               Looks up a localized string similar to Custom.
@@ -890,10 +1356,53 @@
               Looks up a localized string similar to System.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.RelationshipsWithParentheses">
+            <summary>
+              Looks up a localized string similar to (Relationships).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SalesContact">
+            <summary>
+              Looks up a localized string similar to sales@tabulareditor.com.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SaveBeforeProcessing">
+            <summary>
+              Looks up a localized string similar to Save changes before processing?.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SaveBeforeProcessingDescription">
+            <summary>
+              Looks up a localized string similar to You have made changes to the model metadata which has not yet been saved. Do you want to save these changes before starting the refresh job?.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.ScalarExpression">
             <summary>
               Looks up a localized string similar to Scalar expression.
             </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SemanticBridge_NotAvailable_InitializationFailure">
+             <summary>
+               Looks up a localized string similar to SemanticBridge service failed to initialize.
+            {0}
+            Please contact {1} with this information for assistance.
+            
+            Exception:
+            {2}.
+             </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SemanticBridge_NotAvailable_LicenseFailure">
+             <summary>
+               Looks up a localized string similar to SemanticBridge service is not available due to your license level.
+            {0}
+            Please contact {1} with this information for assistance..
+             </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SemanticBridge_NotAvailable_UnexpectedState">
+             <summary>
+               Looks up a localized string similar to SemanticBridge service is not available for an unknown reason.
+            This is an unexpected error. Please contact {0} for assistance.
+             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.SemanticModel">
             <summary>
@@ -915,9 +1424,34 @@
               Looks up a localized string similar to SQL Database.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.StartProcessingOutOfSync">
+            <summary>
+              Looks up a localized string similar to Start processing when metadata are out-of-sync?.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.StartProcessingOutOfSyncDescription">
+            <summary>
+              Looks up a localized string similar to You have made changes to the model metadata which has not yet been saved, and a refresh job is currently in progress. Would you like to queue a new refresh job anyway?.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.SupportContact">
+            <summary>
+              Looks up a localized string similar to support@tabulareditor.com.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.TableExpression">
             <summary>
               Looks up a localized string similar to Table expression.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.TableRefreshDescription">
+            <summary>
+              Looks up a localized string similar to {0} refresh of {1:table {2}|{} tables}.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ThousandsFormat">
+            <summary>
+              Looks up a localized string similar to {0} K.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.UnableToFindFabricArtifact">
@@ -925,14 +1459,39 @@
               Looks up a localized string similar to Unable to find a warehouse, lakehouse, SQL database, or Mirrored Database with the specified workspaceId {0} and objectId {1}.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.UnableToProcessPartition">
+            <summary>
+              Looks up a localized string similar to Unable to process partition &apos;{0}&apos;. The partition is not available on the deployed database..
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.UnableToProcessTable">
+            <summary>
+              Looks up a localized string similar to Unable to process table &apos;{0}&apos;. The table is not available on the deployed database..
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.UnknownFabricArtifactType">
             <summary>
               Looks up a localized string similar to (Unknown).
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.ViewRefreshQueue">
+            <summary>
+              Looks up a localized string similar to View refresh queue.
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Localization.Strings.Warehouse">
             <summary>
               Looks up a localized string similar to Warehouse.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Localization.Strings.Warning">
+            <summary>
+              Looks up a localized string similar to Warning.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.Shared.Models.UserEncryptedConnectionStringSerializer">
+            <summary>
+            This class ensures that a connection string is encrypted/decrypted in case it contains sensitive data.
             </summary>
         </member>
         <member name="T:TabularEditor.Shared.Scripting.ScriptHelper">
@@ -1184,6 +1743,61 @@
             <summary>
             An object that represents the current selection in the TOM Explorer.
             </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Scripting.ScriptHost.SemanticBridge">
+             <summary>
+             SemanticBridge service for cross-platform semantic model operations.
+             </summary>
+             <remarks>
+             <para>
+             <b>State Persistence:</b> The service maintains state (e.g., currently loaded MetricView)
+             that persists across multiple script executions, allowing workflows like:
+             <code>
+             // Script 1: Load and validate
+             SemanticBridge.MetricView.Load(@"C:\data.yaml");
+             var diag = SemanticBridge.MetricView.Validate();
+            
+             // Script 2 (later): Use the same loaded view
+             SemanticBridge.MetricView.ImportToTabular(Model, "host", "path", out var diag);
+             </code>
+             </para>
+             <para>
+             <b>Availability:</b> This service requires an appropriate license. If
+             the feature is disabled, accessing it will throw a <see cref="T:TabularEditor.Shared.Scripting.ScriptException"/>
+             with guidance.
+             </para>
+             </remarks>
+             <example>
+             Load and validate a Databricks MetricView:
+             <code>
+             SemanticBridge.MetricView.Load(@"C:\path\to\metricview.yaml");
+             var diagnostics = SemanticBridge.MetricView.Validate();
+             foreach (var diag in diagnostics)
+             {
+                 Output($"{diag.Severity}: {diag.Message}");
+             }
+             </code>
+            
+             Import a MetricView into the current Tabular model:
+             <code>
+             SemanticBridge.MetricView.Load(@"C:\path\to\metricview.yaml");
+             var success = SemanticBridge.MetricView.ImportToTabular(
+                 Model,
+                 "databricks-host.cloud.databricks.com",
+                 "/sql/1.0/warehouses/abc123",
+                 out var diagnostics);
+             if (!success)
+             {
+                 foreach (var error in diagnostics)
+                     Output($"Import failed: {error.Message}");
+             }
+             </code>
+             </example>
+             <exception cref="T:TabularEditor.Shared.Scripting.ScriptException">
+             Thrown when the SemanticBridge service is not available (feature not enabled for license tier)
+             </exception>
+             <seealso cref="T:TabularEditor.SemanticBridge.SemanticBridgeService"/>
+             <seealso cref="T:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService"/>
         </member>
         <member name="M:TabularEditor.Shared.Scripting.ScriptHost.CollectVertiPaqAnalyzerStats">
             <summary>
@@ -1595,16 +2209,6 @@
             TODO: Handle DirectQuery / user-delegated credentials
             </summary>
         </member>
-        <member name="M:TabularEditor.Shared.Services.Connectivity.Databricks.DatabricksInfoProvider.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
-            <summary>
-            This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.Shared.Services.Connectivity.Dataflows.DataflowsInfoProvider.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
-            <summary>
-            This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext
-            </summary>
-        </member>
         <member name="M:TabularEditor.Shared.Services.Connectivity.Fabric.FabricInfoProvider.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
             <summary>
             This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext
@@ -1671,11 +2275,6 @@
             <param name="complexKeyStr"></param>
             <param name="writable"></param>
             <returns>RegistryKey For the complex Subkey. </returns>
-        </member>
-        <member name="M:TabularEditor.Shared.Services.Connectivity.Sql.SqlSourceInfoProvider.#ctor(TabularEditor.Shared.Services.IPreferencesProvider)">
-            <summary>
-            This object must be constructed on the UI thread, as it uses the WindowsFormsSynchronizationContext.
-            </summary>
         </member>
         <member name="M:TabularEditor.Shared.Services.FileSystemHelper.DirectoryFromPath(System.String)">
             <summary>
@@ -1753,6 +2352,12 @@
             True to allow DAX debugging.
             </summary>
         </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.SemanticBridge">
+            <summary>
+            True to allow use of the SemanticBridge library for cross-platform
+            model migrations
+            </summary>
+        </member>
         <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.XmlaMetadata">
             <summary>
             True to allow XMLA connectivity.
@@ -1761,6 +2366,11 @@
         <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.XmlaEnterpriseTier">
             <summary>
             True to allow Enterprise features, such as DirectLake in Power BI, or Perspectives/Multi-partitions in SSAS/Azure AS
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.BuiltInBpaRules">
+            <summary>
+            Show Built-in BPA rules
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.AnyXmlaEndpoint">
@@ -1782,6 +2392,16 @@
         <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.GitIntegrationPreview">
             <summary>
             When this feature switch is enabled, end users may enable the Git Integration Preview feature (through the preferences dialog)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.SaveWithSupportingFiles">
+            <summary>
+            True to allow saving semantic models with Fabric supporting files (.platform and definition.pbism).
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.IFeatureSwitchService.AdvancedRefresh">
+            <summary>
+            True to allow access to the Advanced Refresh dialog.
             </summary>
         </member>
         <member name="M:TabularEditor.Shared.Services.IModelManagerService.UnsavedModelCheck">
@@ -1850,6 +2470,17 @@
             Model is not yet saved to disk
             </summary>
         </member>
+        <member name="T:TabularEditor.Shared.Services.ISemanticBridgeInitializationService">
+            <summary>
+                Manages lifecycle of Semantic Bridge service; initialization and
+                re-initialization on license state changes.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.ISemanticBridgeInitializationService.Init">
+            <summary>
+                Gets the current initialization result, re-evaluating if license state changed.
+            </summary>
+        </member>
         <member name="T:TabularEditor.Shared.Services.PromptIcon">
             <summary>
             Corresponds to MessageBoxIcon
@@ -1864,6 +2495,22 @@
             <summary>
             Corresponds to Windows.Forms.MessageBoxButtons
             </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.IUserOptionsService.LoadForServerModel(System.String,System.String)">
+            <summary>
+            Loads UserOptions for a model connected via XMLA endpoint.
+            </summary>
+            <param name="serverName">The server name or connection string.</param>
+            <param name="databaseName">The database name.</param>
+            <returns>The loaded UserOptions or a new instance if none exists.</returns>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.IUserOptionsService.SaveForServerModel(System.String,System.String,TabularEditor.Shared.Models.UserOptions)">
+            <summary>
+            Saves UserOptions for a model connected via XMLA endpoint.
+            </summary>
+            <param name="serverName">The server name or connection string.</param>
+            <param name="databaseName">The database name.</param>
+            <param name="options">The UserOptions to save.</param>
         </member>
         <member name="T:TabularEditor.Shared.Services.IpHelper">
             <summary>
@@ -1944,6 +2591,41 @@
             Always: Sorting and filtering are never reset if the columns still exist.
             </summary>
         </member>
+        <member name="T:TabularEditor.Shared.Services.RefreshConfig">
+            <summary>
+            Provides additional configuration options for data refresh operations.
+            </summary>
+            <param name="RefreshType"></param>
+            <param name="ApplyRefreshPolicy"></param>
+            <param name="EffectiveDate"></param>
+            <param name="MaxParallelism"></param>
+            <param name="Overrides"></param>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.RefreshConfig.#ctor(TabularEditor.TOMWrapper.RefreshType,System.Boolean,System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Collections.Generic.List{TabularEditor.Shared.AdvancedRefresh.OverrideCollection})">
+            <summary>
+            Provides additional configuration options for data refresh operations.
+            </summary>
+            <param name="RefreshType"></param>
+            <param name="ApplyRefreshPolicy"></param>
+            <param name="EffectiveDate"></param>
+            <param name="MaxParallelism"></param>
+            <param name="Overrides"></param>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.RefreshConfig.RefreshType">
+            <summary></summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.RefreshConfig.ApplyRefreshPolicy">
+            <summary></summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.RefreshConfig.EffectiveDate">
+            <summary></summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.RefreshConfig.MaxParallelism">
+            <summary></summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.RefreshConfig.Overrides">
+            <summary></summary>
+        </member>
         <member name="M:TabularEditor.Shared.Services.SafeDataOperationsHandler.RunAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.Func{``0},TabularEditor.Shared.Services.TableImportSettings)">
             <summary>
             This method performs the specified data operation <paramref name="asyncDataOp"/> in a safe manner.
@@ -1957,6 +2639,74 @@
             <param name="emptyResult"></param>
             <param name="settings"></param>
             <returns></returns>
+        </member>
+        <member name="T:TabularEditor.Shared.Services.SemanticBridgeFeatureCheckAdapter">
+            <summary>
+                Adapter that bridges IFeatureSwitchService (internal to
+                TabularEditor3.Shared) to ISemanticBridgeFeatureCheck (internal to
+                SemanticBridge).  This allows SemanticBridge to check feature flags
+                without creating circular dependencies.
+                TabularEditor3.Shared needs to depend on SemanticBridge to set up the
+                C# scripting environment, so we can't use IFeatureSwitchService
+                directly in SemanticBridge.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.SemanticBridgeFeatureCheckAdapter.#ctor(TabularEditor.Shared.Services.IFeatureSwitchService)">
+            <summary>
+                Adapter that bridges IFeatureSwitchService (internal to
+                TabularEditor3.Shared) to ISemanticBridgeFeatureCheck (internal to
+                SemanticBridge).  This allows SemanticBridge to check feature flags
+                without creating circular dependencies.
+                TabularEditor3.Shared needs to depend on SemanticBridge to set up the
+                C# scripting environment, so we can't use IFeatureSwitchService
+                directly in SemanticBridge.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.SemanticBridgeFeatureCheckAdapter.IsEnabled">
+            <summary>
+                Returns true if the SemanticBridge feature is enabled based on the
+                current license tier.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.Shared.Services.SemanticBridgeInitializationService.Init">
+            <summary>
+                Used by Main.cs during application startup to preserve failure context.
+                The Result contains the service instance in the Success case.
+            </summary>
+            <remarks>
+                <para>
+                    <b>Smart Setter Behavior:</b> The setter only updates the backing
+                    field if the result type changes.
+                    This preserves state if we see multiple events which would enable
+                    the service, e.g. Trial -> Enterprise
+                </para>
+                <para>
+                    <b>License Transition Examples:</b>
+                    <list type="bullet">
+                        <item>
+                            Not Enterprise → Enterprise: Service becomes available
+                        </item>
+                        <item>
+                            Enterprise → Not Enterprise: Service becomes unavailable
+                        </item>
+                        <item>
+                            Enterprise → Enterprise: No-op, existing service preserved
+                        </item>
+                    </list>
+                </para>
+            </remarks>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.SemanticBridgeInitializationService.LogTelemetryForInitializationFailure(TabularEditor.SemanticBridge.ServiceInitializationResult)">
+            <summary>
+                Logs telemetry for unexpected initialization failures.
+                Success and LicenseFailure are expected outcomes and do not trigger logging.
+            </summary>
+            <param name="result">The initialization result to evaluate for telemetry logging.</param>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.SqlConnectionHelper.IsAuthenticationCancelled(System.Exception)">
+            <summary>
+            Checks if the given exception represents an authentication cancellation by the user.
+            </summary>
         </member>
         <member name="F:TabularEditor.Shared.Services.IdentifierQuoting.Backtick">
             <summary>
@@ -1983,6 +2733,12 @@
         <member name="T:TabularEditor.Shared.Services.SensitiveProcessor">
             <summary>
             Process telemetry exceptions to ensure that the exception message does not contain sensitive data
+            </summary>
+        </member>
+        <member name="M:TabularEditor.Shared.Services.UserOptionsService.GetServerModelUserOptionsFileName(System.String,System.String)">
+            <summary>
+            Gets the file path for storing UserOptions for a server model.
+            Format: %LocalAppData%\TabularEditor3\UserOptions\{sanitizedServerName}.{databaseName}.{userName}.tmuo
             </summary>
         </member>
         <member name="M:TabularEditor.Shared.Services.UserOptionsService.GetTabularModelUserOptionsFileName(System.String)">
@@ -2021,11 +2777,6 @@
             If an EVALUATE statement uses a START AT clause, or if the main table expression returned is surrounded by "TOPN", the assumption is that
             the user knows what they're doing, and so this flag will be set to false, indicating that we should not limit the number of rows by wrapping
             the expression in a TOPN.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.Shared.UserEncryptedConnectionStringSerializer">
-            <summary>
-            This class ensures that a connection string is encrypted/decrypted in case it contains sensitive data.
             </summary>
         </member>
         <member name="P:TabularEditor.Shared.ViewModels.DaxOptimizer.DaxOptimizerNavigationViewModel.Recommendations">

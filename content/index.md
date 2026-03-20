@@ -32,11 +32,19 @@ Tabular Editor 3 is a more advanced application which offers a premium experienc
 - World class [DAX editor](xref:dax-editor) with syntax highlighting, semantic checking, auto-complete, context awareness and much, much more
 - Table browser, Pivot Grid browser and DAX Query editor
 - [Import Table Wizard](xref:importing-tables) with support for Power Query data sources
-- [Data Refresh view](xref:data-refresh-view) allows you to queue and execute refresh operations in the background
+- [Data Refresh view](xref:data-refresh-view) with [Advanced Refresh dialog](xref:advanced-refresh) for queuing and executing refresh operations in the background
 - Diagram editor to easily visualize and edit table relationships
-- New [DAX Scripting](xref:dax-scripts) capability to edit DAX expressions for multiple objects in a single document
-- VertiPaq Analyzer integration
+- [DAX Scripting](xref:dax-scripts) capability to edit DAX expressions for multiple objects in a single document
+- [DAX User-Defined Functions (UDFs)](xref:udfs) with assistance, code actions and namespaces
+- [Calendar Editor](xref:calendars) for creating and managing date tables with enhanced time intelligence
+- [DAX Package Manager](xref:dax-package-manager) for installing and managing DAX packages
+- [Built-in Best Practice Analyzer rules](xref:built-in-bpa-rules)
+- VertiPaq Analyzer integration with [DAX Optimizer](xref:dax-optimizer-integration)
 - [DAX debugger](xref:dax-debugger)
+- [Code Actions](xref:code-actions) for quick fixes and refactoring
+- [Metadata Translation Editor](xref:metadata-translation-editor) and [Perspective Editor](xref:perspective-editor)
+- [Save with supporting files](xref:save-with-supporting-files) for Fabric Git integration
+- [Localization support](xref:references-application-language) (Chinese, Spanish, Japanese, German, French)
 
 ### [Tabular Editor 2.x](#tab/TE2) 
 
@@ -68,18 +76,18 @@ The table below lists all the main features of both tools.
 |Batch editing and renaming|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Copy/paste and drag/drop support|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Undo/redo data modeling operations|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Load/save model metadata to disk|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|Save-to-folder|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
+|Load/save model metadata to disk|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|
+|Save-to-folder|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|
 |[daxformatter.com](https://daxformatter.com) integration|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Advanced data modeling (OLS, Perspectives, Calculation Groups, Metadata Translations, etc.)|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
+|Advanced data modeling (OLS, Perspectives, Calculation Groups, Metadata Translations, etc.)|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|
 |Syntax highlighting and automatic formula fixup|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |View DAX dependencies between objects|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Import Table Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Deployment Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
+|Deployment Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|
 |Best Practice Analyzer|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |C# scripting and automation|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Use as External Tool for Power BI Desktop|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Connect to SSAS/Azure AS/Power BI Premium|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
+|Connect to SSAS/Azure AS/Power BI Premium|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|
 |Command-line interface|<span class="emoji">&#10004;</span>||
 |Premium, customizable user-interface with high-DPI, multi-monitor and theming support||<span class="emoji">&#10004;</span>|
 |World-class DAX editor with IntelliSense<sup>TM</sup>-like features, offline formatting, and more||<span class="emoji">&#10004;</span>|
@@ -87,7 +95,7 @@ The table below lists all the main features of both tools.
 |Improved Table Import Wizard and Table Schema Update check with Power Query support||<span class="emoji">&#10004;</span>|
 |DAX querying, table preview and Pivot Grids||<span class="emoji">&#10004;</span>|
 |Create diagrams for visualizing and editing table relationships||<span class="emoji">&#10004;</span>|
-|Execute data refresh operations in the background||<span class="emoji">&#10004;</span>*|
+|Execute data refresh operations in the background||<span class="emoji">&#10004;</span>\*|
 |C# macro recorder||<span class="emoji">&#10004;</span>|
 |Edit multiple DAX expressions in a single document using [DAX scripting](xref:dax-scripts)||<span class="emoji">&#10004;</span>|
 |[VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) integration||<span class="emoji">&#10004;</span>|
@@ -97,14 +105,20 @@ The table below lists all the main features of both tools.
 |[Table Groups](xref:table-groups)||<span class="emoji">&#10004;</span>|
 |[DAX Optimizer Integration](xref:dax-optimizer-integration)||<span class="emoji">&#10004;</span>|
 |[Code Actions](xref:code-actions)||<span class="emoji">&#10004;</span>|
+|[DAX User-Defined Functions (UDFs)](xref:udfs) Assistance, Code Action and Namespaces||<span class="emoji">&#10004;</span>|
+|[Calendar Editor](xref:calendars) for enhanced time intelligence||<span class="emoji">&#10004;</span>|
+|[DAX Package Manager](xref:dax-package-manager)||<span class="emoji">&#10004;</span>|
+|[Built-in Best Practice Analyzer rules](xref:built-in-bpa-rules)||<span class="emoji">&#10004;</span>|
+|[Advanced Refresh dialog](xref:advanced-refresh) with [refresh override profiles](xref:refresh-overrides) (Business/Enterprise Edition)||<span class="emoji">&#10004;</span>\*|
+|[Save with supporting files for Fabric](xref:save-with-supporting-files)||<span class="emoji">&#10004;</span>|
+|Semantic Bridge for Databricks Metric Views (Enterprise Edition)||<span class="emoji">&#10004;</span>\*|
+|[Localization support](xref:references-application-language) (Chinese, Spanish, Japanese, German, French)||<span class="emoji">&#10004;</span>|
 
 \***Note:** Limitations apply depending on which [edition](xref:editions) of Tabular Editor 3 you are using.
 
-Below is a more detailed description of some of the features listed above.
-
 ### Common features
 
-Both tools provide the same features in terms of which data modeling options are available, by basically exposing every object and property of the [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), in an intuitive and responsive user interface. You can edit advanced object properties that are not available through the standard tools. The tools can load model metadata from files or from any instance of Analysis Services. Changes are only synchronized when you hit Ctrl+S (save) thus providing an "offline" editing experience which most people consider to be superior to the "always synchronized"-mode of the standard tools. This is especially noticable when working on large and complex data models.
+Both tools provide the same features in terms of which data modeling options are available, by basically exposing every object and property of the [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), in an intuitive and responsive user interface. You can edit advanced object properties that are not available through the standard tools. The tools can load model metadata from files or from any instance of Analysis Services. Changes are only synchronized when you hit Ctrl+S (save) thus providing an "offline" editing experience which most people consider to be superior to the "always synchronized"-mode of the standard tools. This is especially noticeable when working on large and complex data models.
 
 In addition, both tools enables making multiple model metadata changes in batches, renaming objects in batches, copy/pasting objects, dragging/dropping objects across tables and display folders, etc. The tools even have undo/redo support.
 

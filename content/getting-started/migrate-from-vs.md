@@ -67,7 +67,7 @@ Below is the dialog box shown when creating a new model in Tabular Editor 3:
 
 ![New model dialog](~/content/assets/images/new-model.png)
 
-If you enable the **Use workspace database** option, Tabular Editor will prompt you for an Analysis Services instance and database name that will be used as as workspace database while working on the model. If you do not enable this option, you will be able to create and work on your model in "offline" mode, which still allows you to add tables, relationships, author DAX expressions, etc. However, you will have to deploy your offline model to an instance of Analysis Services before you can refresh, preview and query the data in the model.
+If you enable the **Use workspace database** option, Tabular Editor will prompt you for an Analysis Services instance and database name that will be used as workspace database while working on the model. If you do not enable this option, you will be able to create and work on your model in "offline" mode, which still allows you to add tables, relationships, author DAX expressions, etc. However, you will have to deploy your offline model to an instance of Analysis Services before you can refresh, preview and query the data in the model.
 
 > [!IMPORTANT]
 > Tabular Editor 3 does not provide a feature equivalent to the **Integrated workspace** option of Visual Studio. Essentially, the integrated workspace is an Analysis Services instance managed by Visual Studio. Since Analysis Services is proprietary software from Microsoft, we cannot ship it alongside Tabular Editor 3. Instead, if you would like to run a local instance of Analysis Services for use with Tabular Editor, we recommend that you install [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
@@ -172,7 +172,7 @@ In the screenshot above, notice how there are three different message-posting so
 
 ### Previewing table data
 
-In Visual Studio, tables and their content are displayed in a tabbed view once you load the Model.bim file. In Tabular Editor 3, you can preview table data by right-clicking on a table in the TOM Explorer, and chooseing **Preview Data**. This opens a new document tab that lets you scroll through all rows of the table, as well as filter and sort the columns. It even works for model using DirectQuery!
+In Visual Studio, tables and their content are displayed in a tabbed view once you load the Model.bim file. In Tabular Editor 3, you can preview table data by right-clicking on a table in the TOM Explorer, and choosing **Preview Data**. This opens a new document tab that lets you scroll through all rows of the table, as well as filter and sort the columns. It even works for model using DirectQuery!
 
 Also, you can freely rearrange the documents, to view the content of several tables at once (see screenshot below).
 

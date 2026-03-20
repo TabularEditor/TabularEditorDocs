@@ -37,7 +37,7 @@ _Both RLS & OLS can be easily configured, modified and tested from within Tabula
 
 <div class="NOTE">
   <h5>WHY CONFIGURE ROW- OR OBJECT-LEVEL SECURITY?</h5>
-  Configuring RLS or OLS can be benificial for your model & reporting:  
+  Configuring RLS or OLS can be beneficial for your model & reporting:  
   <li> Reduce risk and improve governance by ensuring users only see data they have access to.
   <li> Configure dynamic RLS with central role tables for consistency and lightweight maintenance.
   <li> Have granular control over what data and objects can be queried.

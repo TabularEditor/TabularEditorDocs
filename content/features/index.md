@@ -55,4 +55,6 @@ This section contains documentation about Tabular Editor features.
 ### Command Line and Integration
 - @command-line-options - CLI usage and automation
 
----
+### Semantic Bridge for cross-platform translations
+- @semantic-bridge - Semantic Bridge overview
+- @semantic-bridge-metric-view-validation - Validation rules system for Metric Views

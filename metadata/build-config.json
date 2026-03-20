@@ -1,0 +1,34 @@
+{
+  "_comment": "Shared build configuration for all build scripts. Edit this file to add/remove content directories.",
+  "defaultLanguage": "en",
+  "contentDirectories": {
+    "_comment": "Directories that contain translatable content (markdown and HTML files)",
+    "directories": [
+      "features",
+      "getting-started",
+      "how-tos",
+      "references",
+      "kb",
+      "security",
+      "troubleshooting",
+      "tutorials",
+      "whats-new"
+    ]
+  },
+  "sharedDirectories": {
+    "_comment": "Directories that are shared across languages (assets, API docs). Not translated.",
+    "directories": [
+      "assets",
+      "api"
+    ]
+  },
+  "rootFiles": {
+    "_comment": "Root-level files that should be copied/localized",
+    "files": [
+      "index.md",
+      "toc.yml",
+      "404.html",
+      "_ui-strings.json"
+    ]
+  }
+}

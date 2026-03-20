@@ -349,7 +349,7 @@ var tsv = ExportProperties(Model.AllMeasures, "Name,InPerspective[Inventory]");
 SaveFile(@"c:\Project\MeasurePerspectiveInventory.tsv", tsv);
 ```
 
-Similarly, for translations, annotations, etc. For example, if you wanted to see all danish translations applied to tables, columns, hierarchies, levells and measures:
+Similarly, for translations, annotations, etc. For example, if you wanted to see all danish translations applied to tables, columns, hierarchies, levels and measures:
 
 ```csharp
 // Construct a list of objects:
@@ -856,7 +856,7 @@ If you are working with a Power BI-based model that uses Power Query (M) express
 
 To solve this issue, you can run the following script on your model, to replace the power query partitions with corresponding native SQL query partitions, and to create a legacy (provider) data source on the model, which will work with Tabular Editor 2's Import Data wizard:
 
-There are two versions of the script: The first one uses the MSOLEDBSQL provider for the created legacy data source, and hardcoded credentials. This is useful for local development. The second one uses the SQLNCLI provider, which is available on Microsoft-hosted build agents on Azure DevOps, and reads credentials and server/database names from environment variables, making the script useful for integration in Azure Pipeliens.
+There are two versions of the script: The first one uses the MSOLEDBSQL provider for the created legacy data source, and hardcoded credentials. This is useful for local development. The second one uses the SQLNCLI provider, which is available on Microsoft-hosted build agents on Azure DevOps, and reads credentials and server/database names from environment variables, making the script useful for integration in Azure Pipelines.
 
 MSOLEDBSQL version, which reads connection information from M partitions and prompts for user name and password through Azure AD:
 ```csharp

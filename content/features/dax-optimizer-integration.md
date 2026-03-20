@@ -30,7 +30,7 @@ Tabular Editor 3.18.0 introduces **DAX Optimizer** as an integrated experience. 
 
 Watch Marco Russo from [SQLBI](https://www.sqlbi.com) introduce the DAX Optimizer integration in Tabular Editor 3:
 
-<iframe width="640" height="360" src="https://www.youtube.com/embed/Z5lZdI79tF8" title="Detect and Fix Issues with Tabular Editor 3 and DAX Optimizer Integration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="640" height="360" src="https://www.youtube-nocookie.com/embed/Z5lZdI79tF8" title="Detect and Fix Issues with Tabular Editor 3 and DAX Optimizer Integration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Getting started
 
@@ -101,7 +101,7 @@ Once you click the **OK** button, the VPAX file will be uploaded to DAX Optimize
 
 By default, VPAX files uploaded using Tabular Editor 3 will be obfuscated. In the **Upload Model** you may toggle obfuscation on/off for new model uploads. Subsequent model version uploads will be obfuscated or not depending on the first version upload. You can also export an obfuscated VPAX file locally without uploading to DAX Optimizer through the **VertiPaq Analyzer** view. In this case, a dictionary file is generated and stored on your local machine, next to the exported .ovpax file. This dictionary file is used to deobfuscate the contents of the .ovpax file.
 
-When obfuscated VPAX data is uploaded to the DAX Optimizer service through the **DAX Optimizer** view, Tabular Editor automatically keeps track of obfuscation dictionaries by storing them in the `%LocalAppData%\TabularEditor3\DaxOptimizer` folder on your local machine. As such, when browsing models using the **DAX Optimizer** feature in Tabular Editor 3, models are automatically deobfuscated if a suitable dictionary is found in this folder, providing a more seemless experience when using obfuscation.
+When obfuscated VPAX data is uploaded to the DAX Optimizer service through the **DAX Optimizer** view, Tabular Editor automatically keeps track of obfuscation dictionaries by storing them in the `%LocalAppData%\TabularEditor3\DaxOptimizer` folder on your local machine. As such, when browsing models using the **DAX Optimizer** feature in Tabular Editor 3, models are automatically deobfuscated if a suitable dictionary is found in this folder, providing a more seamless experience when using obfuscation.
 
 If the dictionary is not found, you will have an option to manually specify a dictionary file.
 

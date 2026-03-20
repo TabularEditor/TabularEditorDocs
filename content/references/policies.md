@@ -47,7 +47,10 @@ Below is a listing of the policies that can be controlled. To enforce one or mor
 
 ## Disabling web communications
 
-If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, ànd `DisableDaxOptimizer` policies.
+If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, and `DisableDaxOptimizer` policies.
+
+> [!NOTE]
+> Even when the above policies are specified, Tabular Editor 3 will still make occasional requests to `https://api.tabulareditor.com` for purposes of license validation. If Tabular Editor 3 is not able to reach this endpoint (due to a firewall or proxy), the user will have to [manually activate](xref:installation-activation-basic#manual-activation-no-internet) the product every 30 days.
 
 ## Disabling custom scripts
 

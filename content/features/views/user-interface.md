@@ -82,7 +82,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
   ![File Menu New](~/content/assets/images/file-menu-new.png)
 
 > [!IMPORTANT]
-> The **New > Model...** option is not available in Tabular Editor 3 Desktop Edition, as this edition may only be used as an External Tool for Poewr BI Desktop. [More information](xref:editions).
+> The **New > Model...** option is not available in Tabular Editor 3 Desktop Edition, as this edition may only be used as an External Tool for Power BI Desktop. [More information](xref:editions).
 
 - **Open**: Opens a submenu with options for loading a data model from various sources, as well as on option for loading any other type of file. The submenu items are:
 
@@ -99,7 +99,7 @@ The **File** menu primarily contains menu items for dealing with loading and sav
 > In Tabular Editor 3 Desktop Edition the **Open > Model from file...** and **Open > Model from folder...** options are not available and the **Open > File...** dialog only allows opening [supporting files](xref:supported-files#supported-file-types), not files containing metadata.
 
 - **Revert**: This option lets you reload the model metadata from the source, discarding any changes that are made in Tabular Editor, which have not yet been saved. This option is useful when Tabular Editor 3 is used as an External Tool for Power BI Desktop, and a change is made in Power BI Desktop while Tabular Editor 3 is connected. By choosing **Revert**, Tabular Editor 3 can reload the model metadata from Power BI Desktop without having to reconnect.
-- **Close**: This closes the active document (for example a DAX Query, a C# script or a data model diagram). If the document has unsaved changes, Tabular Editor will prompt you to save the changes before closing.
+- **Close Document** (Ctrl+W): Closes the currently active document or panel in the main area, such as a DAX Query, a C# script, a data model diagram, or any other view with focus. If the document has unsaved changes, Tabular Editor will prompt you to save the changes before closing. This command is context-aware and will close whichever item is currently active in the main workspace area.
 - **Close model**: This unloads the currently loaded model metadata from Tabular Editor. If you made changes to the metadata, Tabular Editor will prompt you to save the changes before closing.
 - **Save**: This saves the active document back to the source file. If no document is active, this saves the model metadata back to the source, which could be a Model.bim file, a Database.json (folder structure) or a connected instance of Analysis Services (including Power BI Desktop) or the Power BI XMLA endpoint.
 - **Save as...** This allows you to save the active document as a new file. If no document is active, this allows you to save the model metadata as a new file, using the .bim (JSON-based) file.

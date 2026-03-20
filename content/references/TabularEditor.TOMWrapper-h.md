@@ -2092,8 +2092,8 @@ Static Methods
 
 | Type | Name | Summary | 
 | --- | --- | --- | 
-| `void` | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseName) | Deploys the specified database to the specified target server and database ID, using the specified options.  Returns a list of DAX errors (if any) on objects inside the database, in case the deployment was succesful. | 
-| `DeploymentResult` | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseID, `DeploymentOptions` options) | Deploys the specified database to the specified target server and database ID, using the specified options.  Returns a list of DAX errors (if any) on objects inside the database, in case the deployment was succesful. | 
+| `void` | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseName) | Deploys the specified database to the specified target server and database ID, using the specified options.  Returns a list of DAX errors (if any) on objects inside the database, in case the deployment was successful. | 
+| `DeploymentResult` | Deploy(`Database` db, `String` targetConnectionString, `String` targetDatabaseID, `DeploymentOptions` options) | Deploys the specified database to the specified target server and database ID, using the specified options.  Returns a list of DAX errors (if any) on objects inside the database, in case the deployment was successful. | 
 | `String` | GetTMSL(`Database` db, `Server` server, `String` targetDatabaseID, `DeploymentOptions` options) |  | 
 | `void` | SaveModelMetadataBackup(`String` connectionString, `String` targetDatabaseID, `String` backupFilePath) |  | 
 | `void` | WriteZip(`String` fileName, `String` content) |  | 

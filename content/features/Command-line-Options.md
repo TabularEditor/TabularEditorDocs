@@ -214,6 +214,58 @@ $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
 exit $p.ExitCode
 ```
 
+### Passing Parameters to Scripts via Environment Variables
+
+When executing C# scripts with the `-S` switch in Azure DevOps pipelines, the recommended way to pass parameters is through environment variables rather than command-line arguments. C# scripts can read environment variables using `Environment.GetEnvironmentVariable()`, and Azure DevOps automatically makes all pipeline variables available as environment variables.
+
+**Example - Setting environment variables in YAML:**
+
+```yaml
+variables:
+  deployEnv: 'Production'
+  serverName: 'prod-sql-server'
+
+steps:
+- script: TabularEditor.exe "Model.bim" -S "UpdateModel.csx" -D "$(serverName)" "MyDatabase" -O -V -E -W
+  displayName: 'Deploy with Script Parameters'
+  env:
+    DEPLOY_ENV: $(deployEnv)
+    SERVER_NAME: $(serverName)
+```
+
+**Example - PowerShell Task with environment variables:**
+
+```yaml
+- task: PowerShell@2
+  displayName: 'Run Tabular Editor Script'
+  env:
+    DEPLOY_ENV: 'UAT'
+    CONNECTION_STRING: $(sqldwConnectionString)
+  inputs:
+    targetType: 'inline'
+    script: |
+      $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru `
+             -ArgumentList "`"Model.bim`" -S `"ConfigureModel.csx`" -B `"output/Model.bim`" -V"
+      exit $p.ExitCode
+```
+
+**In your C# script (e.g., UpdateModel.csx):**
+
+```csharp
+var deployEnv = Environment.GetEnvironmentVariable("DEPLOY_ENV");
+var serverName = Environment.GetEnvironmentVariable("SERVER_NAME");
+
+Info($"Configuring model for {deployEnv} environment on {serverName}");
+
+// Apply environment-specific changes
+foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
+{
+    ds.ConnectionString = ds.ConnectionString.Replace("{SERVER}", serverName);
+}
+```
+
+This approach is cleaner and more maintainable than hardcoding values in scripts or using complex string replacement techniques. For more information on using environment variables in C# scripts, see [C# Scripts - Accessing Environment Variables](xref:csharp-scripts#accessing-environment-variables).
+
 ## Running the Best Practice Analyzer
 
 You can use the "-A" switch to have Tabular Editor scan your model for all objects that are in violation of any Best Practice Rules defined on the local machine (in the %AppData%\..\Local\TabularEditor\BPARules.json file), or as annotations within the model itself. Alternatively, you can specify a path of a .json file containing Best Practice Rules after the "-A" switch, to scan the model using the rules defined in the file. Objects that are in violation will be outputted to the console.
@@ -240,7 +292,7 @@ The command line provides various details, depending on the switches used and an
 |Error|(Any)|Error loading file: ...|The file is corrupt or does not contain valid TOM metadata in a JSON format|
 |Error|(Any)|Error loading model: ...|Not able to connect to the provided Analysis Services instance, database not found, database metadata corrupt or database not of a supported compatibility level|
 |Error|-SCRIPT|Specified script file not found||
-|Error|-SCRIPT|Script compilation errors:|Script contained invalid C# syntax. Details will be outputted on the following lines.
+|Error|-SCRIPT|Script compilation errors:|Script contained invalid C# syntax. Details will be outputted on the following lines.|
 |Error|-SCRIPT|Script execution error: ...|Unhandled exception when executing the script.|
 |Information|-SCRIPT|Script line #: ...|Use of the `Info(string)` or `Output(string)` methods within the script.|
 |Warning|-SCRIPT|Script warning: ...|Use of the `Warning(string)` method within the script.|
@@ -252,8 +304,8 @@ The command line provides various details, depending on the switches used and an
 |Warning|-ANALYZE|... violates rule ...|Best Practice Analyzer results for rules of severity level 2.|
 |Error|-ANALYZE|... violates rule ...|Best Practice Analyzer results for rules of severity level 3 or higher.|
 |Error|-DEPLOY|Deployment failed! ...|Failure reason returned directly from Analysis Service instance (for example: Database not found, Database override not allowed, etc.)|
-|Information|-DEPLOY|Unprocessed object: ...|Objects that are in state "NoData" or "CalculationNeeded" after succesful deployment. Use the -W switch to treat these as Level=Warning.|
-|Warning|-DEPLOY|Object not in "Ready" state: ...|Objects that are in state "DependencyError", "EvaluationError" or "SemanticError" after succesful deployment. If using the -W switch, also includes objects in state "NoData" or "CalculationNeeded".|
-|Warning|-DEPLOY|Error on X:...|Objects containing invalid DAX after succesful deployment (measures, calculated columns, calculated tables, roles). Use the -E switch to treat these as Level=Error.|
+|Information|-DEPLOY|Unprocessed object: ...|Objects that are in state "NoData" or "CalculationNeeded" after successful deployment. Use the -W switch to treat these as Level=Warning.|
+|Warning|-DEPLOY|Object not in "Ready" state: ...|Objects that are in state "DependencyError", "EvaluationError" or "SemanticError" after successful deployment. If using the -W switch, also includes objects in state "NoData" or "CalculationNeeded".|
+|Warning|-DEPLOY|Error on X:...|Objects containing invalid DAX after successful deployment (measures, calculated columns, calculated tables, roles). Use the -E switch to treat these as Level=Error.|
 
 If any of the "Error" level outputs are encountered, Tabular Editor will return Exit Code = 1. Otherwise 0.

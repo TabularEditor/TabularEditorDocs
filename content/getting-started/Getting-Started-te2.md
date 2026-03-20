@@ -50,9 +50,9 @@ On the top right side of the main UI, you see the DAX Editor, which may be used 
 
 Use the property grid in the lower right corner, to examine and set properties of objects, such as Format String, Description along with translations and perspective memberships. You can also set the Display Folder property here, but it's easier to simply drag and drop objects within the tree to update their Display Folder (try selecting multiple objects using CTRL or SHIFT).
 
-To edit perspectives or translations (cultures), select the "Model" object in the tree, and locate the "Model Perspectives" or "Model Cultures" properties, in the property grid. Click the small elipsis button to open a collection editor for adding/removing/editing perspectives/cultures.
+To edit perspectives or translations (cultures), select the "Model" object in the tree, and locate the "Model Perspectives" or "Model Cultures" properties, in the property grid. Click the small ellipsis button to open a collection editor for adding/removing/editing perspectives/cultures.
 
-![Editing perspectives - click the elipsis button to the right](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Edit%20Perspectives.png)
+![Editing perspectives - click the ellipsis button to the right](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Edit%20Perspectives.png)
 
 To save your changes back to the Model.bim file, click the save button or hit CTRL+S. If you opened an existing Tabular Database, the changes are saved directly back to the database. You will be prompted if the database was changed since you loaded it into Tabular Editor. You can always undo your changes by pressing CTRL+Z.
 
@@ -92,7 +92,7 @@ By default, partitions, data sources and roles will not be overwritten in the ta
 More information on command-line options can be found [here](../features/Command-line-Options.md).
 
 > [!NOTE]
-> Since TabularEditor.exe is a Windows Forms application, running it from the command line will execute the application in a different thread, returning control to the caller immediately. This may cause issues when running deployments as part of a batch job where you need to await succesful deployment before proceeding with the job. If you experience these issues, use `start /wait` to let TabularEditor finish its job before returning control to the caller:
+> Since TabularEditor.exe is a Windows Forms application, running it from the command line will execute the application in a different thread, returning control to the caller immediately. This may cause issues when running deployments as part of a batch job where you need to await successful deployment before proceeding with the job. If you experience these issues, use `start /wait` to let TabularEditor finish its job before returning control to the caller:
 > 
 > `start /wait TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
