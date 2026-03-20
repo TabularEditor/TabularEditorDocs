@@ -8,13 +8,13 @@ applies_to:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
-      since: 3.4.2 及更早版本
+      since: 3.4.2 and earlier
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           none: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
 ---
 

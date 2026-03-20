@@ -10,12 +10,13 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.24.0
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           full: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
+description: Enterprise Edition feature providing 27 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
 description: 企业版功能：Tabular Editor 3 以硬编码方式内置 27 条精选最佳实践规则，并集成知识库。
 ---
 

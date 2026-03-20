@@ -9,12 +9,12 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           none: true
-        - edition: 商业版
+        - edition: Business
           partial: true
-          note: "仅适用于 Premium Per User 的 XMLA endpoint"
-        - edition: 企业版
+          note: "Only Premium Per User XMLA Endpoints"
+        - edition: Enterprise
           full: true
 ---
 

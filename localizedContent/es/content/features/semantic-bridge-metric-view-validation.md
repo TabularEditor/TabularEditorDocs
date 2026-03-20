@@ -10,11 +10,11 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.25.0
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           none: true
-        - edition: Negocios
+        - edition: Business
           none: true
-        - edition: Corporativo
+        - edition: Enterprise
           full: true
 ---
 

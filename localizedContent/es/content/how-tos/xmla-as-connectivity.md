@@ -9,12 +9,12 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           none: true
-        - edition: Empresa
+        - edition: Business
           partial: true
-          note: "Solo los puntos de conexión XMLA de Premium por usuario"
-        - edition: Empresarial
+          note: "Only Premium Per User XMLA Endpoints"
+        - edition: Enterprise
           full: true
 ---
 

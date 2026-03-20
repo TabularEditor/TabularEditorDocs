@@ -8,11 +8,11 @@ applies_to:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
-      since: 3.4.2 y versiones anteriores
+      since: 3.4.2 and earlier
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           none: true
-        - edition: Empresa
+        - edition: Business
           full: true
         - edition: Enterprise
           full: true

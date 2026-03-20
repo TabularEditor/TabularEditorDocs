@@ -1,5 +1,5 @@
 ---
-uid: puente semántico
+uid: semantic-bridge
 title: Puente semántico
 author: Greg Baldini
 updated: 2025-01-23
@@ -10,11 +10,11 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.25.0
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           none: true
-        - edition: Negocios
+        - edition: Business
           none: true
-        - edition: Empresarial
+        - edition: Enterprise
           full: true
 ---
 

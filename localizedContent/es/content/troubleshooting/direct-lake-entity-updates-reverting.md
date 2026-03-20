@@ -1,5 +1,5 @@
 ---
-uid: reversion-de-cambios-de-nombre-de-entidad-en-modelos-direct-lake
+uid: direct-lake-entity-updates-reverting
 title: Se revierten los cambios de nombre de entidades en modelos Direct Lake
 author: Morten Lønskov
 updated: 2025-10-14
@@ -9,7 +9,7 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           none: true
         - edition: Business
           none: true

@@ -7,11 +7,11 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           full: true
-        - edition: Negocio
+        - edition: Business
           full: true
-        - edition: Empresarial
+        - edition: Enterprise
           full: true
 ---
 

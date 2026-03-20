@@ -9,7 +9,7 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           full: true
         - edition: Business
           full: true

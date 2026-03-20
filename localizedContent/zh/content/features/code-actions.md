@@ -1,5 +1,5 @@
 ---
-uid: 代码操作
+uid: code-actions
 title: 代码操作
 author: Daniel Otykier
 updated: 2024-10-30
@@ -10,11 +10,11 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.18.0
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           full: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
 ---
 

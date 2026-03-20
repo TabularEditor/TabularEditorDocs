@@ -10,12 +10,13 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.25.0
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           full: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
+description: Change the display language for Tabular Editor 3's user interface.
 description: 更改 Tabular Editor 3 界面的显示语言。
 ---
 

@@ -1,5 +1,5 @@
 ---
-uid: 日历
+uid: calendars
 title: 日历（增强时间智能）
 author: Daniel Otykier 和 Maria José Ferreira
 updated: 2026-01-22
@@ -10,11 +10,11 @@ applies_to:
     - product: Tabular Editor 3
       since: 3.23.0
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           full: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
 ---
 
