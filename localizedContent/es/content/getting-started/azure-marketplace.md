@@ -34,7 +34,8 @@ Sigue este procedimiento para comprar licencias de Tabular Editor 3 a través de
 
    ![Azure Marketplace Subscribe to offer](~/content/assets/images/azuremarketplace-offer-page.png)
 
-   > [!TIP]> La suscripción y el plan se pueden cambiar más adelante durante el proceso de compra.
+   > [!TIP]
+   > La suscripción y el plan se pueden cambiar más adelante durante el proceso de compra.
 
 5. Selecciona la suscripción para administrar el recurso de la suscripción de Tabular Editor 3 y los costos. Asigna el recurso a un grupo de recursos existente o crea un grupo nuevo con este fin.
 
@@ -42,7 +43,8 @@ Sigue este procedimiento para comprar licencias de Tabular Editor 3 a través de
 
    ![Azure Marketplace purchase details](~/content/assets/images/azuremarketplace-setup-purchase.png)
 
-   > [!IMPORTANT]> Si no activas la renovación automática, tu suscripción se cancelará después del primer período de facturación.
+   > [!IMPORTANT]
+   > Si no activas la renovación automática, tu suscripción se cancelará después del primer período de facturación.
 
 7. Haz clic en **Revisar + suscribirse**.
 
@@ -70,15 +72,18 @@ Sigue el procedimiento que se indica a continuación para finalizar la activaci�
 
 1. Una vez redirigido desde el portal de Azure, se te pedirá que inicies sesión en el portal de autoservicio de Tabular Editor con una cuenta existente o que crees una nueva.
 
-   > [!IMPORTANT]> Usa la misma dirección de correo electrónico para tu cuenta de Tabular Editor que la que usaste como correo del comprador o del beneficiario en tu compra del portal de Azure. Si las direcciones de correo no coinciden, no se podrá vincular la suscripción de Azure Marketplace a tu cuenta.
+   > [!IMPORTANT]
+   > Usa la misma dirección de correo electrónico para tu cuenta de Tabular Editor que la que usaste como correo del comprador o del beneficiario en tu compra del portal de Azure. Si las direcciones de correo no coinciden, no se podrá vincular la suscripción de Azure Marketplace a tu cuenta.
 
-   > [!TIP]> Al crear una cuenta nueva para el portal de autoservicio, tendrás que dar tu consentimiento y aceptar la solicitud de permisos.
+   > [!TIP]
+   > Al crear una cuenta nueva para el portal de autoservicio, tendrás que dar tu consentimiento y aceptar la solicitud de permisos.
 
    Una vez hayas iniciado sesión, verás la suscripción recién adquirida en la parte superior de la página de suscripciones, en la sección "Suscripciones pendientes de Azure Marketplace".
 
    ![Suscripción pendiente en Azure Marketplace](~/content/assets/images/azuremarketplace-pending-subscription.png)
 
-   > [!NOTE]> Si no ves tu suscripción pendiente en la lista, vuelve al portal de Azure y haz clic de nuevo en el botón **Configurar cuenta ahora** para que se te redirija con la información correcta de la suscripción.
+   > [!NOTE]
+   > Si no ves tu suscripción pendiente en la lista, vuelve al portal de Azure y haz clic de nuevo en el botón **Configurar cuenta ahora** para que se te redirija con la información correcta de la suscripción.
 
 2. Haz clic en el botón **Activar** de la suscripción que quieres activar. Esto mostrará los detalles de la suscripción.
 
