@@ -1,5 +1,5 @@
 ---
-uid: 部署
+uid: deployment
 title: 模型部署
 applies_to:
   products:
