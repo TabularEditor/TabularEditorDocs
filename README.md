@@ -104,6 +104,19 @@ TEDoc/
 
 > **Note:** English content from `content/` is automatically copied to `localizedContent/en/content/` during build. For other languages, Crowdin manages translations via PRs. Shared directories (assets, api) are always synced from English. To use English as fallback for missing/outdated translations during local development, add the `--sync` flag.
 
+# Bookmark Links and Translations
+
+When linking to a specific heading within a page (e.g., `#my-heading`), the anchor ID is auto-generated from the heading text. When headings are translated by Crowdin, the anchor changes, breaking bookmark links.
+
+To prevent this, add an `<a name="..."></a>` tag above any heading that is referenced by a bookmark link:
+
+```markdown
+<a name="my-heading"></a>
+## My Heading
+```
+
+Crowdin does not translate HTML `name` attributes, so the anchor remains stable across all languages. Only add these to headings that are actually linked to — there is no need to add them to every heading.
+
 # Translating UI Strings
 
 The `_ui-strings.json` file controls the text of site-wide UI elements that are not part of the documentation content itself: the header navigation, header buttons, footer text, and the AI translation warning banner. These strings are applied at runtime by the JavaScript bundle for non-English pages.
