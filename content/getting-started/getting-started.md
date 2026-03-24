@@ -75,6 +75,7 @@ By accepting this, the current license is removed, and you will have to re-enter
 > [!IMPORTANT]
 > Once a license key is removed, as described above, the product will not be usable by the current user on that machine until a new license key is entered.
 
+<a name="registry-details"></a>
 #### Registry details
 
 Tabular Editor 3 uses the Windows Registry to store activation details.

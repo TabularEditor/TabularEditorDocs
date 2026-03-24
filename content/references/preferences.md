@@ -203,6 +203,7 @@ When saving a model loaded from a PBIX file, use the PBIX filename as the defaul
 
 Automatically create .tmuo (Tabular Model User Options) files for new models. These files store user-specific settings like diagram layouts and window positions.
 
+<a name="tabular-editor--keyboard"></a>
 ## Tabular Editor > Keyboard
 
 ![Keyboard mappings](~/content/assets/images/keyboard-mappings.png)
@@ -526,6 +527,7 @@ Specify the locale for DAX functions and formatting.
 
 These settings are relevant only when Tabular Editor 3 cannot determine the version of Analysis Services used, as is the case when a Model.bim file is loaded directly. In this case, Tabular Editor tries to guess which version the model will be deployed to, based on the compatibility level. If Tabular Editor reports incorrect semantic/syntax errors, you may need to tweak these settings.
 
+<a name="dax-editor--auto-formatting"></a>
 ## DAX Editor > Auto Formatting
 
 ![Auto Formatting Settings](~/content/assets/images/auto-formatting-settings.png)
@@ -651,6 +653,7 @@ Referencing certain table names do not require surrounding single quotes in DAX.
 
 Extension columns can be defined without a table name. When checked, the DAX editor will always add the table prefix to an extension column.
 
+<a name="dax-editor--code-assist"></a>
 ## DAX Editor > Code Assist
 
 ![Placeholder: Screenshot of DAX Editor Code Assist preferences page]

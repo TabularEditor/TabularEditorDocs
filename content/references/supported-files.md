@@ -17,6 +17,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+<a name="supported-file-types"></a>
 # Supported file types
 
 Tabular Editor 3 uses a number of different file formats and document types, some of which are not used by Analysis Services or Power BI. This article provides an overview and a description of each of these file types.
@@ -185,6 +186,7 @@ Supporting files are files which are not used by Analysis Services or Power BI. 
 
 All supporting files can be saved individually using either Ctrl+S or 'File > Save' while having the corresponding document or window open and focused. 
 
+<a name="diagram-file-te3diag"></a>
 ### Diagram file (.te3diag)
 
 A .te3diag file is a file format that stores the diagram of a model created with TE3. 

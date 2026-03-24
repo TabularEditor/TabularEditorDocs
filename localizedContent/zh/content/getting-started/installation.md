@@ -40,6 +40,7 @@ applies_to:
 > [!NOTE]
 > 对于多用户许可证类型，除了许可证密钥之外，你还需要输入电子邮件地址。 如果你输入的许可证密钥对应多用户许可证，Tabular Editor 3 会提示你这样做。
 
+<a name="manual-activation-no-internet"></a>
 #### 手动激活（无网络）
 
 如果你无法访问互联网，例如由于代理，Tabular Editor 会提示你进行手动激活。

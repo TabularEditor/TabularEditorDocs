@@ -42,6 +42,7 @@ Hay varias vistas adicionales disponibles, con distintos propósitos. Más infor
 
 Todos los elementos de la interfaz de usuario se pueden redimensionar o reorganizar para adaptarlos a tus necesidades. Incluso puedes arrastrar vistas individuales fuera de la vista principal, dividiendo así una instancia de Tabular Editor 3 entre varios monitores. Tabular Editor 3 guardará la personalización al cerrar la aplicación y la cargará automáticamente la próxima vez que se inicie.
 
+<a name="choosing-a-different-layout"></a>
 ### Elegir un diseño diferente
 
 Para restablecer la aplicación al diseño predeterminado, elige la opción **Ventana > Diseño predeterminado**. Los usuarios de Tabular Editor 2.x pueden preferir la opción **Ventana > Diseño clásico**, que coloca el Explorador TOM en el lado izquierdo de la pantalla y la vista de propiedades debajo del Editor de expresiones.
@@ -50,6 +51,7 @@ Usa la opción **"Ventana > Capturar diseño actual..."** para guardar un diseñ
 
 ![Administrar diseños](~/content/assets/images/manage-layouts.png)
 
+<a name="changing-themes-and-palettes"></a>
 ### Cambiar temas y paletas
 
 Puedes cambiar el aspecto visual de Tabular Editor 3 eligiendo un tema o una paleta diferentes. Tabular Editor 3 incluye cinco temas diferentes (a veces llamados "skins"), disponibles en el menú **Ventana > Temas**:
@@ -61,6 +63,7 @@ Para los temas basados en vectores (Basic y Bezier), usa la opción de menú **V
 
 ![Palettes](~/content/assets/images/palettes.png)
 
+<a name="menus"></a>
 # Menús
 
 La siguiente sección describe los menús de Tabular Editor 3 con más detalle.
@@ -135,6 +138,7 @@ El menú **Editar** contiene los elementos de menú estándar de las aplicacione
 - **Seleccionar todo**: Selecciona todo el texto del documento activo o todos los objetos que pertenecen al mismo elemento padre en el Explorador TOM.
 - **Code Assist**: Esta opción está disponible cuando se edita código DAX. Proporciona un acceso directo a varias funciones de Code Assist relevantes para la edición de código DAX. Consulte [editor de DAX](xref:dax-editor#code-assist-features) para obtener más información.
 
+<a name="view"></a>
 ## Vista
 
 El menú **Vista** le permite navegar entre las distintas vistas de la interfaz de usuario de Tabular Editor 3. Si una vista está oculta, al hacer clic en el título de la vista en este menú se volverá a mostrar y pasará a primer plano. Ten en cuenta que los documentos no se muestran en el menú Ver. Para navegar entre documentos, usa el [menú Ventana](#window).
@@ -178,6 +182,7 @@ El menú **Herramientas** contiene opciones para controlar las preferencias y pe
 - **Personalizar...** Abre el cuadro de diálogo de personalización del diseño de la interfaz de usuario de Tabular Editor 3, que permite crear nuevas barras de herramientas, reorganizar y editar menús y botones de la barra de herramientas, etc.
 - **Preferencias...** Abre el cuadro de diálogo de Preferencias de Tabular Editor 3, que funciona como un centro para administrar todos los demás aspectos de Tabular Editor y sus características, como la comprobación de actualizaciones, la configuración del proxy, los límites de filas de consulta, los tiempos de espera de las solicitudes, etc. Consulte @preferences para obtener más información.
 
+<a name="window"></a>
 ## Ventana
 
 El menú **Ventana** proporciona accesos directos para administrar y navegar entre las distintas vistas y documentos (conocidos colectivamente como _ventanas_) de la aplicación. También incluye elementos de menú para controlar los temas y las paletas de colores, tal como se describe [arriba](#changing-themes-and-palettes).

@@ -29,6 +29,7 @@ applies_to:
 
 更多信息请参阅 [官方博客文章](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/)。
 
+<a name="power-bi-file-types"></a>
 ## Power BI 文件类型
 
 使用 Power BI 时，你通常会遇到三种常见的文件类型：
@@ -60,6 +61,7 @@ applies_to:
 
 连接到 Analysis Services 实例后，外部工具可以获取模型元数据信息，对 Data model 执行 DAX 或 MDX 查询，甚至还能通过 [Microsoft 提供的客户端库](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions) 来更改模型元数据。 从这一点来看，由 Power BI Desktop 管理的 Analysis Services 实例与任何其他类型的 Analysis Services 实例没有区别。
 
+<a name="data-modeling-operations"></a>
 ## Data model 建模操作
 
 不过，由于 Power BI Desktop 与 Analysis Services 的互操作方式所限，外部工具可对模型元数据应用的更改类型存在一些重要限制。 这些限制已在[外部工具官方文档](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)中列出，这里为方便起见再次说明：

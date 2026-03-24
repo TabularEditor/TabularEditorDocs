@@ -110,6 +110,7 @@ When this is checked, a tab character (`\t`) is inserted whenever the TAB button
 
 DAX supports line comments that use slashes (`//`) or hyphens (`--`). This setting determines which style of comment is used when Tabular Editor 3 generates DAX code, such as when using the DAX script feature.
 
+<a name="dax-settings"></a>
 ## DAX Settings
 
 These settings determine certain behavior of the DAX code analyzer. The *Locale* setting is simply a matter of preference. All other settings are relevant only when Tabular Editor 3 cannot determine the version of Analysis Services used, as is the case for example when a Model.bim file is loaded directly. In this case, Tabular Editor tries to guess which version the model will be deployed to, based on the compatibility level specified in the model, but depending on the actual version of the deployment target, there may be various DAX language differences, which Tabular Editor cannot determine. If Tabular Editor reports incorrect semantic/syntax errors, you may need to tweak these settings.

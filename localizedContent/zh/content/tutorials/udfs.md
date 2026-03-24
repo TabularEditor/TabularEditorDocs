@@ -202,6 +202,7 @@ UDF 会显示在 **DAX 依赖项**（Shift+F12）视图中，同时展示：
 
 在 TOM Explorer 中选择多个 UDF 后，你可以在右键上下文菜单中使用 **批量重命名** (F2)，通过“查找和替换”模式一次性为它们全部重命名，并可选择使用正则表达式。
 
+<a name="namespaces"></a>
 ### 命名空间
 
 DAX 中并没有“命名空间”的概念，但我们建议为 UDF 命名时尽量避免歧义，并让 UDF 的来源一目了然。 例如 `DaxLib.Convert.CelsiusToFahrenheit`（使用“.” 作为命名空间分隔符）。 当 UDF 采用这种命名方式时，TOM Explorer 会根据名称以层级结构显示 UDF。 你可以使用 TOM Explorer 上方工具栏中的 **Group User-Defined Functions by namespace** 切换按钮，按命名空间对 UDF 的显示进行分组（注意：仅当处理兼容级别为 1702 或更高的模型时，才会显示该按钮）。

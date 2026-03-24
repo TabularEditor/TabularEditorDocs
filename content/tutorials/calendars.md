@@ -172,6 +172,7 @@ Columns with their **Hidden** property set to `True` do not appear in the Calend
 
 A future version of Tabular Editor will address these limitations.
 
+<a name="time-related-columns"></a>
 ### Time-Related Columns
 
 In addition to mapping columns to specific time unit categories, you can mark columns as **time-related**. Time-related columns are columns in your Date table that don't fit into a specific time unit category but should still receive special treatment during time intelligence calculations.

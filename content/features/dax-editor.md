@@ -28,6 +28,7 @@ It comes in three different *flavours*:
 
 All three flavours support the same operations in terms of [keyboard shortcuts](xref:shortcuts3#dax-code), syntax highlighting, code assist, etc.
 
+<a name="code-assist-features"></a>
 ## Code Assist features
 
 The main enabler of productivity in Tabular Editor 3's DAX Editor, is its **Parameter Info** and **Auto-Complete** features. Collectively, these are known as **Code Assist** features (other vendors use the term "IntelliSense").

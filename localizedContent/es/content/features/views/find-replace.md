@@ -18,6 +18,7 @@ applies_to:
           full: true
 ---
 
+<a name="find"></a>
 # Buscar
 
 En Tabular Editor, puede utilizar la funcionalidad avanzada de búsqueda para buscar expresiones específicas en todos los documentos abiertos y en el Dataset. Se puede acceder al cuadro de diálogo Buscar mediante el atajo de teclado Ctrl+F.
@@ -46,6 +47,7 @@ Además, puede especificar dónde buscar, en distintas áreas de su instancia de
 > [!TIP]
 > También puedes usar el campo de búsqueda del Explorador TOM para buscar en el Dataset en lugar del cuadro de diálogo Buscar
 
+<a name="replace"></a>
 ## Reemplazar
 
 El cuadro de diálogo Reemplazar le permite, al igual que Buscar, buscar una expresión y después reemplazarla por otra distinta.

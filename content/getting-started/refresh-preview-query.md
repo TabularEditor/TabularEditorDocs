@@ -35,6 +35,7 @@ In summary, these connected features are:
 - DAX Querying
 - VertiPaq Analyzer
 
+<a name="refreshing-data"></a>
 # Refreshing data
 
 Tabular Editor does not automatically trigger refresh operations in Analysis Services when changes are made to the data model. This is by design, to ensure that saving metadata changes to Analysis Services does not take too long. Potentially, a refresh operation can take a long time to complete, during which no additional metadata may be updated on the server. Of course, the drawback of this, is that you can make changes using Tabular Editor, which causes the model to enter a state where it is only partly queryable or not queryable at all. Depending on what type of data model change was made, different levels of refresh may be needed.
@@ -78,6 +79,7 @@ Tabular Editor 3 supports refresh operations on different object types. The supp
 
 See [Refresh Types](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) for more information about the types of refresh operations supported by Analysis Services / Power BI.
 
+<a name="previewing-table-data"></a>
 # Previewing table data
 
 At certain points during DAX authoring and data model development, you may need to inspect the contents of your tables on a row-by-row basis. Of course, you could write a DAX query to achieve this, but Tabular Editor 3 makes that even easier by allowing you to preview table data directly. To do this, right-click on a table and choose the **Preview data** option.
@@ -90,6 +92,7 @@ If one or more calculated columns are in an invalid state, those columns contain
 
 ![Recalculate Table](~/content/assets/images/recalculate-table.png)
 
+<a name="pivot-grids"></a>
 # Pivot Grids
 
 After adding or editing DAX measures in a model, it is common for model developers to test these measures. Traditionally, this was typically done using client tools such as Excel or Power BI. With Tabular Editor 3, you can now use **Pivot Grids** which behave much like the famous PivotTables of Excel. The Pivot Grid lets you quickly create summarized views of the data in your model, allowing you test the behavior of your DAX measures when filtering and slicing by various columns and hierarchies.
@@ -104,6 +107,7 @@ As fields are dragged into the Pivot Grid, Tabular Editor generates MDX queries 
 
 The Pivot Grid is automatically refreshed when a change is made to the model or a refresh operation finishes. You can toggle this auto-refresh capability within the **Pivot Grid** menu.
 
+<a name="dax-queries"></a>
 # DAX Queries
 
 A more direct way to query the data in your model, is to write a DAX query. Use the **File > New > DAX Query** menu option to create a new DAX query document. You can have multiple DAX query documents open at the same time.

@@ -49,6 +49,7 @@ One possible workaround for the above limitation, is to create a **composite mod
 
 Alternatively, ensure that your source contains the columns it needs. If you add columns through a view, please note that the view must be materialized in the Fabric Warehouse or Lakehouse, as Direct Lake on OneLake does not support non-materialized views.
 
+<a name="collation"></a>
 ## Collation
 
 When using **Direct Lake on OneLake**, the collation of the model is the same as for an Import model, which is case-insensitive by default.
