@@ -1,5 +1,5 @@
 ---
-uid: interfaz-de-usuario
+uid: user-interface
 title: Interfaz de usuario básica
 author: Daniel Otykier
 updated: 2021-09-08
