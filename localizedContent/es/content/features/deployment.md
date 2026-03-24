@@ -1,5 +1,5 @@
 ---
-uid: implementación
+uid: deployment
 title: Implementación del modelo
 applies_to:
   products:
