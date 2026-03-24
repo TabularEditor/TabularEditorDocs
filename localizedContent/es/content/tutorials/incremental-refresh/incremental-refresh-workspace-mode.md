@@ -8,7 +8,7 @@ applies_to:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
-      since: 3.4.2 and earlier
+      since: 3.4.2 y versiones anteriores
       editions:
         - edition: Desktop
           none: true
