@@ -1,5 +1,5 @@
 ---
-uid: perspectivas-traducciones
+uid: perspectives-translations
 title: Perspectivas y traducciones
 applies_to:
   products:
