@@ -31,6 +31,7 @@ applies_to:
 |Close Document|Ctrl+W|
 |Exit|Alt+F4|
 |Deployment wizard|Ctrl+Shift+D|
+|Switch In-Focus Window|Ctrl+Tab|
 
 ## Edit
 
