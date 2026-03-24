@@ -1,5 +1,5 @@
 ---
-uid: privacy-policy
+uid: política-de-privacidad
 title: Política de privacidad
 author: Søren Toft Joensen
 updated: 2021-09-08
@@ -9,9 +9,9 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           full: true
-        - edition: Empresa
+        - edition: Business
           full: true
         - edition: Enterprise
           full: true
