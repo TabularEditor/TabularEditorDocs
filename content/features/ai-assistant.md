@@ -29,8 +29,6 @@ The AI Assistant uses a bring-your-own-key model. You provide an API key from on
 
 ![AI Assistant First Pane on Open](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
 
-![AI Assistant First Pane on Open](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open-figma.png)
-
 ## Getting Started
 
 1. Open **Tools > Preferences > AI Assistant**
@@ -38,7 +36,8 @@ The AI Assistant uses a bring-your-own-key model. You provide an API key from on
 3. Open the AI Assistant panel from **View > AI Assistant**
 4. Type a message and press **Enter** to start a conversation
 
-API keys are stored encrypted on your local machine.
+> [!NOTE]
+> API keys are stored encrypted on your local machine.
 
 ## Supported Providers
 
@@ -51,7 +50,7 @@ API keys are stored encrypted on your local machine.
 
 The Custom provider option supports local or organizational LLMs that expose an OpenAI-compatible API endpoint. This allows you to keep all data within your own infrastructure for data privacy or compliance requirements.
 
-<!-- TODO: screenshot of provider configuration in Preferences -->
+![AI Assistant Provider Preferences](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
 
 ## Capabilities
 
@@ -84,7 +83,7 @@ When the AI Assistant generates code, it creates **artifacts** that open directl
 
 Artifacts stream in real-time as the AI generates them. C# script artifacts include safety analysis that flags potentially unsafe code (e.g. file system access or network operations).
 
-<!-- TODO: screenshot of conversation with artifact being generated -->
+![AI Assistant Generate C# Script](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
 
 ## Custom Instructions
 
@@ -168,7 +167,7 @@ For each consent request, you can choose the duration:
 | For this model | Persisted in the model's user options (.tmuo) file |
 | Always | Global preference, persisted across all models |
 
-<!-- TODO: screenshot of consent dialog -->
+![AI Assistant Consent Dialog](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
 
 ## Preferences
 

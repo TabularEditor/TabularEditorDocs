@@ -221,7 +221,7 @@ To use this feature, click **Script > Run with preview** in the toolbar or menu.
 5. Use the **Filter Changes Only** checkbox to hide unchanged items and focus on what the script changed
 6. Click **OK** to accept the changes, or **Revert** to undo all changes
 
-<!-- TODO: screenshot of ScriptPreviewDialog showing a diff -->
+![AI Assistant First Pane on Open](~/content/assets/images/c-sharp-script-preview-changes.png) 
 
 If the script fails (compilation or runtime error), all changes are automatically rolled back and no preview dialog is shown. If the script succeeds but makes no detectable changes, an informational message is displayed instead.
 
