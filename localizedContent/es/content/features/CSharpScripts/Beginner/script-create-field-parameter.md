@@ -1,5 +1,5 @@
 ---
-uid: create-field-parameter
+uid: crear-parametro-de-campo
 title: Crear parámetro de campo
 author: Daniel Otykier
 updated: 2024-01-27
