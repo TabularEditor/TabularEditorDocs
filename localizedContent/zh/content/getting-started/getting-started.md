@@ -9,11 +9,11 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           full: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
 ---
 
@@ -76,7 +76,6 @@ Tabular Editor 3 激活后，您可以在“帮助”菜单中选择“关于 Ta
 > [!IMPORTANT]
 > 按上述方式删除许可证密钥后，在该计算机上的当前用户重新输入新的许可证密钥之前，将无法使用该产品。
 
-<a name="registry-details"></a>
 #### 注册表详细信息
 
 Tabular Editor 3 使用 Windows 注册表来存储激活详细信息。
