@@ -1,5 +1,5 @@
 ---
-uid: puente semántico
+uid: semantic-bridge
 title: Puente semántico
 author: Greg Baldini
 updated: 2025-01-23
