@@ -1,5 +1,5 @@
 ---
-uid: 元数据翻译编辑器
+uid: metadata-translation-editor
 title: 元数据翻译编辑器
 author: Šarūnas Jučius
 updated: 2023-04-18
