@@ -1,5 +1,5 @@
 ---
-uid: user-interface
+uid: 用户界面
 title: 基本用户界面
 author: Daniel Otykier
 updated: 2021-09-08
@@ -9,11 +9,11 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           full: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
 ---
 
@@ -42,7 +42,6 @@ applies_to:
 
 所有 UI 元素都可以调整大小和/或重新排列，以满足你的需求。 你甚至可以将某个视图从主窗口拖出，从而把同一个 Tabular Editor 3 实例分布到多个显示器上。 关闭应用时，Tabular Editor 3 会保存这些自定义设置，并在下次启动时自动恢复。
 
-<a name="choosing-a-different-layout"></a>
 ### 选择不同的布局
 
 要将应用重置为默认布局，请选择 **窗口 > 默认布局**。 Tabular Editor 2.x 用户可能更喜欢 **窗口 > 经典布局** 选项：TOM Explorer 位于屏幕左侧，属性视图位于表达式编辑器下方。
@@ -51,7 +50,6 @@ applies_to:
 
 ![管理布局](~/content/assets/images/manage-layouts.png)
 
-<a name="changing-themes-and-palettes"></a>
 ### 更改主题和调色板
 
 你可以通过选择不同的主题和/或调色板来更改 Tabular Editor 3 的外观。 Tabular Editor 3 内置五种不同的主题（有时也称为“皮肤”），可通过 **窗口 > 主题** 菜单选择：
@@ -63,7 +61,6 @@ applies_to:
 
 ![Palettes](~/content/assets/images/palettes.png)
 
-<a name="menus"></a>
 # 菜单
 
 以下部分将更详细地介绍 Tabular Editor 3 中的各个菜单。
@@ -138,7 +135,6 @@ applies_to:
 - **全选**：选中当前活动文档中的所有文本，或选中 TOM Explorer 中属于同一父级的所有对象。
 - **Code Assist**：此选项仅在编辑 DAX 代码时可用。 它提供了一个快捷入口，可访问多种与编辑 DAX 代码相关的 Code Assist 功能。 更多信息，请参阅 [DAX 编辑器](xref:dax-editor#code-assist-features)。
 
-<a name="view"></a>
 ## 视图
 
 **视图** 菜单可让你在 Tabular Editor 3 用户界面的不同视图之间导航。 如果某个视图已被隐藏，在此菜单中点击该视图的标题即可取消隐藏，并将其置于焦点。 注意，“视图”菜单中不会显示文档。 要在文档之间切换，请使用[窗口菜单](#window)。
@@ -165,7 +161,7 @@ applies_to:
 > **Deploy** 选项在 Tabular Editor 3 桌面版中不可用。 有关详细信息，请参阅 @editions。
 
 - **导入表...** 启动 Tabular Editor 3 导入表向导。 有关详细信息，请参阅 @importing-tables。
-- **更新表架构...** 检测数据源(s)中当前选定的表(s)或分区(s)的架构更改，并与当前已导入的列进行比较。 有关详细信息，请参阅 @importing-tables#updating-table-schema 。
+- **更新表架构...** 检测数据源(s)中当前选定的表(s)或分区(s)的架构更改，并与当前已导入的列进行比较。 有关详细信息，请参阅 @importing-tables#updating-table-schema。
 - **Script DAX**: 为当前选定的对象生成 DAX 脚本(如果未选择任何对象，则为模型中的所有 DAX 对象生成 DAX 脚本)。 有关详细信息，请参阅 @dax-scripts。
 - **刷新模型**: 当 Tabular Editor 连接到 Analysis Services 实例时，此子菜单包含用于在模型级别启动后台刷新操作的选项。 此子菜单包含以下选项。 有关详细信息，请参阅 [刷新命令 (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。
   - **自动（模型）**：Analysis Services 将决定要刷新的对象（仅刷新不处于“Ready”状态的对象）。
@@ -182,7 +178,6 @@ applies_to:
 - **自定义...** 启动 Tabular Editor 3 用户界面布局自定义对话框，可在其中创建新工具栏、重新排列并编辑菜单和工具栏按钮等。
 - **偏好...** 启动 Tabular Editor 3 偏好对话框。它是管理 Tabular Editor 及其各项功能的中心入口，例如更新检查、代理设置、查询行数限制、请求超时等。 有关详细信息，请参阅 @preferences。
 
-<a name="window"></a>
 ## 窗口
 
 **窗口** 菜单提供用于管理和在应用程序的各种视图与文档之间导航的快捷方式（统称为 _窗口_）。 它还包含用于控制主题和调色板的菜单项，如[上文](#changing-themes-and-palettes)所述。
