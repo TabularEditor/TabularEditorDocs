@@ -1,5 +1,5 @@
 ---
-uid: 图表视图
+uid: diagram-view
 title: 图表视图
 author: Morten Lønskov
 updated: 2025-04-24

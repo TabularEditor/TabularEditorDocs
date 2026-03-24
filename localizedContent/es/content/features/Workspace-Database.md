@@ -1,5 +1,5 @@
 ---
-uid: bases-de-datos-del-espacio-de-trabajo
+uid: workspace-databases
 title: Presentamos las bases de datos de Workspace
 applies_to:
   products:

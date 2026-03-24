@@ -1,5 +1,5 @@
 ---
-uid: 最佳实践分析器
+uid: best-practice-analyzer
 title: 最佳实践分析器
 applies_to:
   products:

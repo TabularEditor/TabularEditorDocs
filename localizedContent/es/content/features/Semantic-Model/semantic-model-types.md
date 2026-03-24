@@ -1,5 +1,5 @@
 ---
-uid: tipos-de-modelos-semanticos
+uid: semantic-model-types
 title: Tipos de modelos semánticos de Power BI
 author: Morten Lønskov
 updated: 2025-06-19
