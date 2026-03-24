@@ -1,5 +1,5 @@
 ---
-uid: perspective-editor
+uid: 透视编辑器
 title: 透视编辑器
 author: Šarūnas Jučius
 updated: 2022-03-16
@@ -9,11 +9,11 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           full: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
 ---
 
