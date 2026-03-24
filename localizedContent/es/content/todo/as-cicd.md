@@ -1,6 +1,6 @@
 ---
 uid: as-cicd
-title: CI/CD de Analysis Services con Azure DevOps y Tabular Editor
+title: Analysis Services CI/CD with Azure DevOps and Tabular Editor
 author: Daniel Otykier
 updated: 2021-10-04
 ---
