@@ -26,7 +26,10 @@ The AI Assistant uses a bring-your-own-key model. You provide an API key from on
 > [!NOTE]
 > The AI Assistant is in public preview starting with Tabular Editor 3.26.0.
 
-<!-- TODO: screenshot of AI Assistant panel open in TE3 -->
+
+![AI Assistant First Pane on Open](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
+
+![AI Assistant First Pane on Open](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open-figma.png)
 
 ## Getting Started
 
