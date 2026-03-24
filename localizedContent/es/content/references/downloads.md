@@ -1,5 +1,5 @@
 ---
-uid: descargas
+uid: downloads
 title: Todas las descargas
 author: Daniel Otykier
 updated: 2026-02-11
