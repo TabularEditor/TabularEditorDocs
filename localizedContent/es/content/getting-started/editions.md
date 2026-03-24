@@ -1,5 +1,5 @@
 ---
-uid: editions
+uid: ediciones
 title: Comparar ediciones
 author: Søren Toft Joensen
 updated: 2025-02-07
