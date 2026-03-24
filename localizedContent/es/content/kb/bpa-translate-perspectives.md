@@ -1,5 +1,5 @@
 ---
-uid: kb.bpa-translate-perspectivas
+uid: kb.bpa-translate-perspectives
 title: Traducir los nombres de las perspectivas en todas las configuraciones regionales
 author: Morten Lønskov
 updated: 2026-01-09
