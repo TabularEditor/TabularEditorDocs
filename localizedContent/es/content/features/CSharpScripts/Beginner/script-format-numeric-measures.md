@@ -1,5 +1,5 @@
 ---
-uid: script-format-numeric-measures
+uid: script-formato-medidas-numericas
 title: Formatear medidas numéricas
 author: Morten Lønskov
 updated: 2023-11-29
