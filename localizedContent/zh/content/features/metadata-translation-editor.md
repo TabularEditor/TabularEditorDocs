@@ -1,5 +1,5 @@
 ---
-uid: metadata-translation-editor
+uid: 元数据翻译编辑器
 title: 元数据翻译编辑器
 author: Šarūnas Jučius
 updated: 2023-04-18
@@ -9,11 +9,11 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           full: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
 ---
 
