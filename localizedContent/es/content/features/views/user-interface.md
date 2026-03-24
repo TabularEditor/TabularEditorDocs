@@ -50,6 +50,30 @@ Usa la opción **"Ventana > Capturar diseño actual..."** para guardar un diseñ
 
 ![Administrar diseños](~/content/assets/images/manage-layouts.png)
 
+### Window docking options
+
+When rearranging views and documents in Tabular Editor 3, you can choose to dock windows in different areas of the interface. When dragging a window to a new position, docking indicators will appear showing you the available docking locations.
+
+![Window Docking Options](~/content/assets/images/window-docking-options.png)
+
+There are two primary ways to dock windows, each serving a different purpose:
+
+**Document tab docking (center indicator)**: When you drag a window to the center docking indicator, it will be placed in the main document area. Windows docked this way become document tabs that:
+
+- Can be cycled through using **Ctrl+Tab**
+- Are displayed in the main working area alongside other documents like DAX queries, scripts, and diagrams
+- Do not have auto-hide functionality
+
+**Tool window docking (edge indicators)**: When you drag a window to the left, right, top, or bottom docking indicators, it will be docked as a tool window. Tool windows:
+
+- Are not accessible via **Ctrl+Tab**
+- Display a pin icon that enables auto-hide functionality (making the window collapse when not in use)
+- Behave similarly to other tool windows such as the TOM Explorer and Messages view
+- Can be docked at various positions around the main document area
+
+> [!TIP]
+> The size of a docked window is determined by the available space in the area you choose to dock it, not by the docking option itself. You can resize windows by dragging the dividers between them.
+
 ### Cambiar temas y paletas
 
 Puedes cambiar el aspecto visual de Tabular Editor 3 eligiendo un tema o una paleta diferentes. Tabular Editor 3 incluye cinco temas diferentes (a veces llamados "skins"), disponibles en el menú **Ventana > Temas**:
