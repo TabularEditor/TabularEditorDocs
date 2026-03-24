@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: Solo puntos de conexión XMLA para Premium Per User
+          note: Solo puntos de conexión XMLA de Premium Per User
         - edition: Enterprise
           full: true
 ---
