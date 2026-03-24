@@ -13,7 +13,7 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: Premium Per User XMLA Endpoints Only
+          note: 仅适用于 Premium Per User XMLA 终结点
         - edition: Enterprise
           full: true
 ---
