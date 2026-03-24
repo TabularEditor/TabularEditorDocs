@@ -1,5 +1,5 @@
 ---
-uid: editions
+uid: 版本
 title: 比较版本
 author: Søren Toft Joensen
 updated: 2025-02-07
