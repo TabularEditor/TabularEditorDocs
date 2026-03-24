@@ -208,7 +208,6 @@ in
 
 ***
 
-<a name="overview-of-all-properties"></a>
 #### Resumen de todas las propiedades
 
 _A continuación se muestra un resumen de las propiedades de TOM de un Data model que se usan para configurar la actualización incremental:_
