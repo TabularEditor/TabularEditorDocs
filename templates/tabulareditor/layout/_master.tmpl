@@ -253,7 +253,7 @@
 
           {{! meta applies to }}
           {{#applies_to}}
-          <div class="applies-to-div"><strong>Applies to: </strong>
+          <div class="applies-to-div"><strong data-ui-string="appliesTo">Applies to: </strong>
             <ul class="applies-to">
             {{#products}}
               <li class="applies-to-product{{#note}} applies-to-tooltip{{/note}}">
@@ -270,7 +270,7 @@
                 {{/editions}}
                 {{#since}}
                   <span class="version-info">
-                    ({{#until}}Available in {{since}}–{{until}}{{/until}}{{^until}}Available since {{since}}{{/until}})
+                    ({{#until}}<span data-ui-string="availableIn">Available in</span> {{since}}–{{until}}{{/until}}{{^until}}<span data-ui-string="availableSince">Available since</span> {{since}}{{/until}})
                   </span>
                 {{/since}}
                 {{^editions}}

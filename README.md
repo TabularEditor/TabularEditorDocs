@@ -151,4 +151,18 @@ If a key is missing from a language's file, or no `_ui-strings.json` exists at a
 | `footer.privacyPolicy` | `Privacy & Cookie policy` | Footer bottom link |
 | `footer.termsConditions` | `Terms & Conditions` | Footer bottom link |
 | `footer.licenseTerms` | `License terms` | Footer bottom link |
-
+| `appliesTo` | `Applies to: ` | "Applies to" label on article metadata |
+| `availableSince` | `Available since` | Version availability label (e.g., "Available since 3.5.0") |
+| `availableIn` | `Available in` | Version range label (e.g., "Available in 3.5.0–3.8.0") |
+| `inThisArticle` | `In this article` | Sidebar table of contents heading |
+| `searchResultsCount` | `{count} results for "{query}"` | Search results summary |
+| `searchNoResults` | `No results for "{query}"` | No search results message |
+| `tocFilter` | `Filter by title` | TOC filter input placeholder |
+| `nextArticle` | `Next` | Next article navigation |
+| `prevArticle` | `Previous` | Previous article navigation |
+| `themeLight` | `Light` | Theme picker option |
+| `themeDark` | `Dark` | Theme picker option |
+| `themeAuto` | `Auto` | Theme picker option |
+| `changeTheme` | `Change theme` | Theme picker label |
+| `copy` | `Copy` | Code block copy button |
+| `downloadPdf` | `Download PDF` | PDF download button |
