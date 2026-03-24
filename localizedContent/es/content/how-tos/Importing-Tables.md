@@ -68,7 +68,6 @@ El menú desplegable "Comillas de identificador" te permite especificar cómo de
 
 Otra forma de abrir la página de importación es hacer clic con el botón derecho en una tabla existente (que use un Data source heredado) y elegir "Seleccionar columnas...". Si esa tabla se importó previamente mediante la interfaz de usuario, la página de importación debería mostrarse con la tabla/vista de origen y las columnas importadas ya preseleccionadas. Puedes agregar o quitar columnas, o incluso elegir una tabla completamente distinta para importarla en lugar de la tabla que seleccionaste en tu modelo. Ten en cuenta que cualquier columna de tu tabla que hayas desmarcado o que ya no exista en la tabla/vista de origen se eliminará de tu modelo. Siempre puedes deshacer operaciones como esta con CTRL+Z.
 
-<a name="refreshing-table-metadata"></a>
 ## Actualizar los metadatos de la tabla
 
 Desde la versión 2,8, Tabular Editor incorpora una nueva función en la interfaz de usuario que te permite comprobar fácilmente la deriva del esquema. Es decir, permite detectar columnas cuyo tipo de datos haya cambiado o que se hayan añadido o eliminado en las tablas y vistas de origen. Esta comprobación puede ejecutarse a nivel de modelo (de nuevo, esto solo se aplica a Legacy Data Sources), a nivel de Data source, a nivel de tabla o a nivel de partición. Para ello, haz clic con el botón derecho en el objeto y elige "Actualizar metadatos de la tabla..."
@@ -83,7 +82,6 @@ Este mecanismo (al igual que la interfaz de Importar tabla) usa el indicador For
 
 Puedes realizar una comprobación de esquema a nivel de modelo desde la línea de comandos con la opción `-SC`. Ten en cuenta que la comprobación del esquema, cuando se ejecuta a través de la CLI, solo generará un Report de problemas de asignación. No realizará ningún cambio en tu modelo. Esto resulta útil si usas Tabular Editor en canalizaciones de CI/CD, ya que los problemas de asignación podrían ocasionar problemas después de desplegar tu modelo en un entorno de prueba/producción.
 
-<a name="ignoring-objects"></a>
 ### Omitir objetos
 
 A partir de Tabular Editor 2.9.8, puedes excluir objetos de las comprobaciones de esquema o de la actualización de metadatos. Esto se controla estableciendo una anotación en los objetos que quieras omitir. Como nombre de la anotación, usa los códigos que se indican a continuación. Puedes dejar el valor de la anotación en blanco o establecerlo en "1", "true" o "yes". Si estableces el valor de la anotación en "0", "false" o "no", la anotación quedará deshabilitada en la práctica, como si no existiera:
