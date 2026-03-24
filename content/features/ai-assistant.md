@@ -19,7 +19,7 @@ applies_to:
 ---
 # AI Assistant
 
-The AI Assistant is a chat-based interface for AI-assisted semantic model development designed to help you create semantic models faster. With enterprise ready design, full control of what is sent to the AI and built in  It can explore your model metadata, write and execute DAX queries, generate C# scripts, run Best Practice Analyzer checks, query VertiPaq Analyzer statistics and search the Tabular Editor knowledge base.
+The AI Assistant is a chat-based interface for AI-assisted semantic model development designed to help you create semantic models faster. With an enterprise-ready design, full control of what is sent to the AI, and built-in consent management, you can use the AI Assistant with confidence. It can explore your model metadata, write and execute DAX queries, generate C# scripts, run Best Practice Analyzer checks, query VertiPaq Analyzer statistics and search the Tabular Editor knowledge base.
 
 The AI Assistant uses a bring-your-own-key model. You provide an API key from one of the supported providers and the assistant runs directly against that provider's API.
 
@@ -41,6 +41,8 @@ The AI Assistant uses a bring-your-own-key model. You provide an API key from on
 
 ## Supported Providers
 
+Configure your AI provider under **Tools > Preferences > AI Assistant > AI Provider**. Select a provider from the dropdown, enter your API key and optionally override the default model name.
+
 | Provider | Default Model | Configuration Required |
 | -- | -- | -- |
 | OpenAI | gpt-4o | API key. Optional Organization ID and Project ID |
@@ -48,9 +50,27 @@ The AI Assistant uses a bring-your-own-key model. You provide an API key from on
 | Azure OpenAI | Deployment-dependent | API key, endpoint URL and deployment name |
 | Custom (OpenAI-compatible) | User-specified | API key and custom endpoint URL |
 
-The Custom provider option supports local or organizational LLMs that expose an OpenAI-compatible API endpoint. This allows you to keep all data within your own infrastructure for data privacy or compliance requirements.
+![AI Assistant Provider Selection](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
 
-![AI Assistant Provider Preferences](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
+### OpenAI
+
+Select **OpenAI** as the provider and enter your API key. You can optionally specify an Organization ID and Project ID if your OpenAI account uses these. The default model is **gpt-4o**, but you can change it to any model available on your account.
+
+![AI Assistant OpenAI Configuration](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
+
+### Anthropic
+
+Select **Anthropic** as the provider and enter your API key. The default model is **claude-sonnet-4-6**. You can change the model name to any Anthropic model available on your account.
+
+![AI Assistant Anthropic Configuration](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
+
+### Azure OpenAI
+
+Select **Azure OpenAI** as the provider. Enter your API key and the service endpoint URL for your Azure OpenAI resource. Set the model name to match your deployment name.
+
+### Custom (OpenAI-compatible)
+
+The Custom provider option supports local or organizational LLMs that expose an OpenAI-compatible API endpoint. Enter your API key and the custom endpoint URL. This allows you to keep all data within your own infrastructure for data privacy or compliance requirements.
 
 ## Capabilities
 
@@ -104,15 +124,15 @@ The AI Assistant includes the following built-in Custom Instructions:
 | UDFs | UDF, function, user-defined |
 | BPA | BPA, best practice, rule, violation |
 
-Custom Instructions are shown as pills above assistant responses, indicating which instructions influenced the response. You can toggle this display in **Preferences > AI Assistant > Show Custom Instructions**.
+Custom Instructions are shown as indicators above assistant responses, indicating which instructions influenced the response. You can toggle this display in **Preferences > AI Assistant > Preferences > Show custom instructions indicator**.
 
-### Invoke an instruction
+### Invoking a Custom Instruction
 
-Type `/` to choose between custom instructions or reference the full `/instruction-id` at the start of your message to explicitly invoke a specific skill. For example, `/dax-querying` forces the DAX querying skill regardless of message content.
+Type `/` to browse available custom instructions, or type the full `/instruction-id` at the start of your message to explicitly invoke a specific instruction. For example, `/dax-querying` forces the DAX querying instruction regardless of message content.
 
 ### Add your own Custom Instructions
 
-You can create custom instructions by placing `.md` files in `%LocalAppData%\TabularEditor3\AI\CustomInstructions\`. Each file requires YAML frontmatter defining the skill metadata:
+You can create custom instructions by placing `.md` files in `%LocalAppData%\TabularEditor3\AI\CustomInstructions\`. Each file requires YAML frontmatter defining the instruction metadata:
 
 ```yaml
 ---
@@ -133,7 +153,7 @@ triggers:
 ---
 
 Your instruction content goes here. This is the text that will be
-injected into the AI's system prompt when the skill is activated.
+injected into the AI's system prompt when the instruction is activated.
 ```
 
 | Field | Required | Default | Description |
@@ -144,7 +164,7 @@ injected into the AI's system prompt when the skill is activated.
 | `priority` | No | 100 | Higher values are injected first when multiple Custom Instructions match |
 | `always_inject` | No | false | If true, always included in the system prompt |
 | `hidden` | No | false | If true, not shown in `/command` autocomplete |
-| `triggers.keywords` | No | [] | Words that activate the skill (case-insensitive) |
+| `triggers.keywords` | No | [] | Words that activate the instruction (case-insensitive) |
 | `triggers.patterns` | No | [] | Regex patterns for complex matching |
 | `triggers.context_required` | No | [] | Conditions that must be met (e.g. `model_loaded`) |
 
@@ -152,35 +172,60 @@ Custom Instructions with an `id` matching a built-in instruction will override t
 
 ## Consent
 
-The AI Assistant requests permission before sending model data to the AI provider. Consent is scoped to specific data types:
+The AI Assistant requests permission before sending data to the AI provider. Consent is scoped to specific data types:
 
-- **Model Metadata**: Table and column schemas, measure definitions
-- **Query Data**: DAX query results and data samples
-- **Script Context**: C# code snippets from open editors
+| Consent Category | Description |
+| -- | -- |
+| Query data | DAX query results and data samples |
+| Read documents | Reading content from open documents such as DAX scripts and DAX queries |
+| Modify documents | Making changes to open documents |
+| Model metadata | Table and column schemas, measure definitions and other model metadata |
+| Edit BPA rules | Creating or modifying Best Practice Analyzer rules |
+| Read macros | Reading macro definitions |
 
-For each consent request, you can choose the duration:
+When the AI Assistant needs access to a data type for the first time, a consent dialog appears. You can choose the duration of your consent:
 
 | Option | Scope |
 | -- | -- |
 | This time | Single request only |
 | This session | Until Tabular Editor is restarted |
 | For this model | Persisted in the model's user options (.tmuo) file |
-| Always | Global preference, persisted across all models |
+| Always | Global preference, persisted across all models and sessions |
 
 ![AI Assistant Consent Dialog](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
 
+### Managing Consents
+
+You can review and reset your consent choices under **Tools > Preferences > AI Assistant > AI Consents**. Each consent category shows its current state. Click **Reset** to revoke an "Always allowed" consent and return it to "Ask when needed".
+
+![AI Assistant Consent Settings](~/content/assets/images/ai-assistant/ai-assistant-consent-reset.png)
+
 ## Preferences
 
-Configure the AI Assistant under **Tools > Preferences > AI Assistant**:
+Configure AI Assistant display and behavior options under **Tools > Preferences > AI Assistant > Preferences**.
+
+### Chat Display
 
 | Preference | Default | Description |
 | -- | -- | -- |
-| Show Selection Context | false | Display the currently selected model object in the chat |
-| Show Custom Instructions | false | Show skill pills above assistant responses |
-| Show Knowledge Base Search | false | Display progress when searching the knowledge base |
-| Auto Compact | true | Automatically summarize old messages when approaching the context limit |
-| Auto Compact Threshold | 80% | Token usage percentage that triggers auto-compaction |
-| Show Script Preview | true | Show the script preview dialog when executing AI-generated C# scripts |
+| Show selection context indicator | true | Display the currently selected model object in the chat |
+| Show custom instructions indicator | true | Show Custom Instruction indicators above assistant responses |
+| Show knowledge base search indicator | true | Display progress when searching the knowledge base |
+
+### Context Compaction
+
+| Preference | Default | Description |
+| -- | -- | -- |
+| Auto compact | true | Automatically summarize old messages when approaching the context limit |
+| Auto compact threshold % | 80 | Token usage percentage that triggers auto-compaction |
+
+### C# Script
+
+| Preference | Default | Description |
+| -- | -- | -- |
+| Show script impact preview | true | Show the script impact preview dialog when executing AI-generated C# scripts |
+
+![AI Assistant Preferences](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
 
 ## Limitations
 
