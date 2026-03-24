@@ -1,67 +1,115 @@
 # Interfaz de usuario
-## @user-interface
+
+## @interfaz-de-usuario
+
 ## @tom-explorer-view
-## @properties-view
-## @bpa-view
-## @data-refresh-view
-## @find-replace
-## @messages-view
-## @diagram-view
+
+## @vista-de-propiedades
+
+## @vista-de-bpa
+
+## @vista-de-actualizacion-de-datos
+
+## @buscar-y-reemplazar
+
+## @vista-de-mensajes
+
+## @vista de diagrama
 
 # Características de DAX
-## @dax-debugger
-## @dax-editor
-## @dax-query
-## @dax-scripts
+
+## @depurador-de-dax
+
+## @editor-de-dax
+
+## @consulta-dax
+
+## @scripts-de-dax
+
 ## @code-actions
-## @dax-package-manager
+
+## @administrador-de-paquetes-dax
 
 # Secuencias de comandos y automatización
-## @csharp-scripts
+
+## @scripts-de-csharp
+
 ## Biblioteca de C# Script
-### @csharp-script-library
-### @script-library-beginner
+
+### @biblioteca-de-csharp-script
+
+### @biblioteca-de-scripts-para-principiantes
+
 ### @script-library-advanced
-## @script-helper-methods
-## @useful-script-snippets
+
+## @metodos-de-ayuda-para-scripts
+
+## @fragmentos-de-script-utiles
+
 ## @macros
 
 # Análisis y calidad del modelo
+
 ## @best-practice-analyzer
-### @built-in-bpa-rules
+
+### @reglas-de-bpa-integradas
+
 ### @using-bpa
+
 ### @using-bpa-sample-rules-expressions
+
 ## @dax-optimizer-integration
 
 # Exploración de datos y conectividad
+
 ## @import-tables
+
 ## @pivot-grid
+
 ## @semantic-model-types
+
 ### @direct-lake-sql-model
+
 ### @dq-over-as-limitations
 
 # Funciones avanzadas de modelado
+
 ## @metadata-translation-editor
+
 ## @perspective-editor
 
 # Organización del modelo
+
 ## @hierarchical-display
+
 ## @table-groups
 
 # Implementación y administración del modelo
+
 ## [Implementación del modelo](deployment.md)
+
 ## @workspace-databases
+
 ## @workspace-mode
+
 ## @tmdl
+
 ## @save-to-folder
-## @save-with-supporting-files
-## @advanced-refresh
-## @refresh-overrides
+
+## @guardar-con-archivos-de-apoyo
+
+## @actualización-avanzada
+
+## @sobrescrituras-de-actualización
 
 # Línea de comandos e integración
+
 ## @command-line-options
 
 # Puente semántico para traducciones multiplataforma
-## @semantic-bridge
-## @semantic-bridge-metric-view-object-model
-## @semantic-bridge-metric-view-validation
+
+## @puente-semántico
+
+## @puente-semántico-vista-de-métricas-modelo-de-objetos
+
+## @puente-semántico-vista-de-métricas-validación
