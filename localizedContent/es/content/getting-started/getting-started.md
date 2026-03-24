@@ -9,9 +9,9 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           full: true
-        - edition: Empresarial
+        - edition: Business
           full: true
         - edition: Enterprise
           full: true
@@ -76,7 +76,6 @@ Al aceptarlo, se quita la licencia actual y tendrás que volver a introducir una
 > [!IMPORTANT]
 > Una vez que se quita una clave de licencia, tal como se describe arriba, el usuario actual no podrá usar el producto en ese equipo hasta que se introduzca una nueva clave de licencia.
 
-<a name="registry-details"></a>
 #### Detalles del registro
 
 Tabular Editor 3 usa el Registro de Windows para almacenar los detalles de activación.
