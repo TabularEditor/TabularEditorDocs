@@ -9,11 +9,11 @@ applies_to:
       full: true
     - product: Tabular Editor 3
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           none: true
         - edition: Business
           full: true
-        - edition: Empresarial
+        - edition: Enterprise
           full: true
 ---
 
