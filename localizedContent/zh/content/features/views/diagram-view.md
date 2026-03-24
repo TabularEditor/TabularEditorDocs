@@ -1,5 +1,5 @@
 ---
-uid: diagram-view
+uid: 图表视图
 title: 图表视图
 author: Morten Lønskov
 updated: 2025-04-24
@@ -9,11 +9,11 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           full: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
 ---
 
