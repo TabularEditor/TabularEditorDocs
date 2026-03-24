@@ -9,11 +9,11 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           none: true
         - edition: Business
           partial: true
-          note: "Solo para los puntos de conexión XMLA de Premium por usuario"
+          note: "Solo puntos de conexión XMLA Premium por usuario"
         - edition: Enterprise
           full: true
 ---
