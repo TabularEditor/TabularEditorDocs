@@ -15,6 +15,7 @@ Usage:
     python sync-localized-content.py --status              # Show all languages
     python sync-localized-content.py --status es           # Show Spanish details
     python sync-localized-content.py --sync es             # Sync Spanish content
+    python sync-localized-content.py --shared-only es      # Sync only shared dirs (assets, api)
     python sync-localized-content.py --init es             # Initialize tracking
     python sync-localized-content.py --mark-translated es  # Mark all as translated
     python sync-localized-content.py --json                # JSON output for CI
@@ -277,6 +278,31 @@ def sync_english(dry_run: bool = False) -> dict[str, int]:
     return counts
 
 
+def sync_shared_only(lang: str, dry_run: bool = False) -> dict[str, int]:
+    """Sync only shared directories (assets, api) for a language.
+
+    Used when full translation sync is disabled (Crowdin manages translations).
+    Skips hash comparison and translation status tracking.
+    """
+    localized_content_dir = LOCALIZED_DIR / lang / "content"
+    counts = {"synced_dirs": 0}
+
+    if not dry_run:
+        localized_content_dir.mkdir(parents=True, exist_ok=True)
+
+    for dir_name in get_shared_directories():
+        src = CONTENT_DIR / dir_name
+        dest = localized_content_dir / dir_name
+        if src.exists() and not dry_run:
+            if dest.exists():
+                shutil.rmtree(dest)
+            shutil.copytree(src, dest)
+            print(f"  Synced shared: {dir_name}/")
+            counts["synced_dirs"] += 1
+
+    return counts
+
+
 def init_language(lang: str, source_files: dict[str, str]) -> None:
     """Initialize translation tracking for an existing language.
     
@@ -439,6 +465,11 @@ def main() -> int:
         help="Sync content for a language (use 'en' for English)"
     )
     parser.add_argument(
+        "--shared-only",
+        metavar="LANG",
+        help="Sync only shared directories (assets, api) for a language"
+    )
+    parser.add_argument(
         "--init",
         metavar="LANG",
         help="Initialize tracking for existing translations"
@@ -465,10 +496,18 @@ def main() -> int:
     )
     
     args = parser.parse_args()
-    
+
+    # --shared-only doesn't need source file hashes, handle it early
+    if args.shared_only:
+        lang = args.shared_only
+        print(f"Syncing shared directories for '{lang}'...")
+        counts = sync_shared_only(lang, args.dry_run)
+        print(f"\nShared sync complete: {counts['synced_dirs']} directory(ies) synced")
+        return 0
+
     # Get source files (needed for most operations)
     source_files = get_source_files()
-    
+
     if args.status:
         if args.status == "__all__":
             print_status_summary(args.json)
@@ -479,7 +518,7 @@ def main() -> int:
     if args.sync:
         lang = args.sync
         print(f"Syncing content for '{lang}'...")
-        
+
         if lang == "en":
             counts = sync_english(args.dry_run)
             print(f"\nEnglish sync complete: {counts['copied']} files copied")
@@ -490,7 +529,7 @@ def main() -> int:
             print(f"  Replaced (outdated->English): {counts['replaced']}")
             print(f"  Copied (new->English): {counts['copied']}")
         return 0
-    
+
     if args.init:
         init_language(args.init, source_files)
         return 0
