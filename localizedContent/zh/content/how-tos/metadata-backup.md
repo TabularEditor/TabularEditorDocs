@@ -1,5 +1,5 @@
 ---
-uid: 元数据备份
+uid: metadata-backup
 title: 元数据备份
 applies_to:
   products:
