@@ -1,5 +1,5 @@
 ---
-uid: security-privacy
+uid: 安全与隐私
 title: 安全概述
 author: Daniel Otykier
 updated: 2024-10-30
@@ -9,11 +9,11 @@ applies_to:
       none: true
     - product: Tabular Editor 3
       editions:
-        - edition: 桌面版
+        - edition: Desktop
           full: true
-        - edition: 商业版
+        - edition: Business
           full: true
-        - edition: 企业版
+        - edition: Enterprise
           full: true
 ---
 
