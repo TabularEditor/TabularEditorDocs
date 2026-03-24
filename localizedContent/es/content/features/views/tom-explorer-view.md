@@ -10,7 +10,7 @@ applies_to:
       note: "Funciona de forma distinta a como se muestra en este artículo"
     - product: Tabular Editor 3
       editions:
-        - edition: Escritorio
+        - edition: Desktop
           full: true
         - edition: Business
           full: true
