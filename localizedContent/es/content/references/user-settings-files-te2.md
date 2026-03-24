@@ -1,5 +1,5 @@
 ---
-uid: user-setting-files-te2
+uid: archivos-de-configuracion-del-usuario-te2
 title: Archivos de configuración del usuario de Tabular Editor 2
 applies_to:
   products:
