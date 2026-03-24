@@ -16,7 +16,6 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Change the display language for Tabular Editor 3's user interface.
 description: 更改 Tabular Editor 3 界面的显示语言。
 ---
 
