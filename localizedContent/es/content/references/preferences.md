@@ -1,5 +1,5 @@
 ---
-uid: preferencias
+uid: preferences
 title: Control de preferencias
 author: Daniel Otykier
 updated: 2026-01-12
