@@ -1,9 +1,9 @@
-# @licensing-activation
+# Activación de licencia
 
-# @proxy-settings
+# Configuración del proxy
 
-# @locale-not-supported
+# Configuración regional no compatible
 
-# @calendar-blank-value
+# Valor vacío del calendario
 
-# @direct-lake-entity-updates-reverting
+# Revirtiendo las actualizaciones de entidades de Direct Lake
