@@ -1,5 +1,5 @@
 ---
-uid: grupos-de-tablas
+uid: table-groups
 title: Grupos de tablas
 author: Daniel Otykier
 updated: 2023-03-08
