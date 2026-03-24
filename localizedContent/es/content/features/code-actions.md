@@ -74,7 +74,6 @@ En la captura de pantalla siguiente, por ejemplo, la acción **Prefijar la varia
 
 ![Acción de código: todas las ocurrencias](~/content/assets/images/features/code-action-all-occurrences.png)
 
-<a name="list-of-code-actions"></a>
 ## Lista de acciones de código
 
 La tabla siguiente enumera todas las acciones de código disponibles actualmente. Puede activar o desactivar las acciones de código en el cuadro de diálogo **Herramientas > Preferencias**, en **Editores de texto > Editor de DAX > Acciones de código** (una actualización futura le permitirá activar o desactivar cada acción para una experiencia más personalizada). Algunas acciones de código también tienen opciones de configuración adicionales, como qué prefijo usar para los nombres de las variables.
