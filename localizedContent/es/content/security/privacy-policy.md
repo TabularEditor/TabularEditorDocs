@@ -1,5 +1,5 @@
 ---
-uid: política-de-privacidad
+uid: privacy-policy
 title: Política de privacidad
 author: Søren Toft Joensen
 updated: 2021-09-08
