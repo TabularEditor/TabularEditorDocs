@@ -1,5 +1,5 @@
 ---
-uid: 用户界面
+uid: user-interface
 title: 基本用户界面
 author: Daniel Otykier
 updated: 2021-09-08
