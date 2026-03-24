@@ -40,7 +40,6 @@ Una vez que compres una licencia de Tabular Editor 3, deberías recibir un corre
 > [!NOTE]
 > Para los tipos de licencia para varios usuarios, tendrás que introducir tu dirección de correo electrónico además de la clave de licencia. Tabular Editor 3 te lo solicitará si la clave de licencia que introduces corresponde a una licencia multiusuario.
 
-<a name="manual-activation-no-internet"></a>
 #### Activación manual (sin Internet)
 
 Si no tienes acceso a Internet, por ejemplo, debido a un proxy, Tabular Editor te pedirá que realices una activación manual.
