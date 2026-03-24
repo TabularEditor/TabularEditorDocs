@@ -129,6 +129,7 @@ Selected.Measures
         .ForEach(m => m.Name += " DEPRECATED");
 ```
 
+<a name="helper-methods"></a>
 ## Métodos auxiliares
 
 Para facilitar la depuración de scripts, Tabular Editor ofrece un conjunto de métodos auxiliares especiales. Internamente, se trata de métodos estáticos decorados con el atributo `[ScriptMethod]`. Este atributo permite que los scripts llamen a los métodos directamente, sin necesidad de especificar un espacio de nombres o un nombre de clase. Los complementos también pueden usar el atributo `[ScriptMethod]` para exponer métodos estáticos públicos para su uso en scripts, de forma similar.

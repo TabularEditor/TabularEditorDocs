@@ -30,6 +30,7 @@ The Semantic Bridge is a semantic model compiler, with the capability to transla
 This allows you to reuse business logic on multiple data platforms, supporting end users and meeting them where they consume the data.
 It also allows for migrations from one platform to another.
 
+<a name="interface"></a>
 ## Interface
 
 ### Import Metric View YAML
@@ -118,6 +119,7 @@ Specifically, you can
 - import a Metric View to Tabular with [`SemanticBridge.MetricView.ImportToTabularFromFile`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabularFromFile_System_String_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), which does the exact same as the GUI shown above, or [`SemanticBridge.MetricView.ImportToTabular`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabular_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), which is similar, but operates on the currently loaded Metric View, rather than reading one from disk.
 
 
+<a name="mvp-limitations"></a>
 ## MVP Limitations
 
 ### Supported platforms

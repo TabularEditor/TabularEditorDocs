@@ -29,6 +29,7 @@ applies_to:
 
 这三种模式在[键盘快捷键](xref:shortcuts3#dax-code)、语法高亮、Code Assist 等方面支持的操作完全一致。
 
+<a name="code-assist-features"></a>
 ## Code Assist 功能
 
 Tabular Editor 3 的 DAX编辑器提升效率的关键在于其**参数信息**和**自动补全**功能。 这些功能统称为 **Code Assist**（其他厂商通常称之为“IntelliSense”）。

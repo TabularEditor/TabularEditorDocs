@@ -29,6 +29,7 @@ As of the June 2025 Power BI Desktop update, there are no longer any unsupported
 
 More information in [the official blog post](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).
 
+<a name="power-bi-file-types"></a>
 ## Power BI file types
 
 When using Power BI, you will encounter three different file types commonly used:
@@ -60,6 +61,7 @@ External tools may connect to the instance of Analysis Services managed by Power
 
 Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). In this regard, the Analysis Services instance managed by Power BI Desktop is no different from any other type of Analysis Services instance.
 
+<a name="data-modeling-operations"></a>
 ## Data modeling operations
 
 However, due to the way Power BI Desktop interoperates with Analysis Services, there are a few important limitations to the type of changes external tools may apply to the model metadata. These are listed [in the official documentation for External Tools](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) and repeated here for convenience:

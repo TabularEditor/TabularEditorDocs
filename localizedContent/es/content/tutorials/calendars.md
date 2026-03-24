@@ -174,6 +174,7 @@ Las columnas cuya propiedad **Hidden** está establecida en `True` no aparecen e
 
 Una versión futura de Tabular Editor solucionará estas limitaciones.
 
+<a name="time-related-columns"></a>
 ### Columnas relacionadas con el tiempo
 
 Además de asignar columnas a categorías específicas de unidades de tiempo, puedes marcar columnas como **relacionadas con el tiempo**. Las columnas relacionadas con el tiempo son columnas de tu tabla de fechas que no encajan en una categoría específica de unidad de tiempo, pero aun así deberían recibir un tratamiento especial durante los cálculos de inteligencia temporal.

@@ -202,6 +202,7 @@ Las UDF aparecen en la vista **Dependencias de DAX** (Shift+F12), mostrando lo s
 
 Cuando seleccionas varias UDFs en el Explorador TOM, puedes usar la opción **Renombrar en lote** (F2) desde el menú contextual de clic derecho para cambiarles el nombre a todas de una sola vez, mediante patrones de búsqueda y sustitución y, opcionalmente, expresiones regulares.
 
+<a name="namespaces"></a>
 ### Espacios de nombres
 
 El concepto de "espacio de nombres" no existe en DAX, pero se recomienda nombrar las UDFs de forma que se eviten ambigüedades y quede claro el origen de la UDF. Por ejemplo, `DaxLib.Convert.CelsiusToFahrenheit` (usando '.' como separador de espacios de nombres). Cuando una UDF se nombra así, el Explorador TOM la mostrará en una jerarquía basada en esos nombres. Puedes alternar la visualización de las UDFs por espacio de nombres mediante el botón de alternancia **Agrupar funciones definidas por el usuario por espacio de nombres** de la barra de herramientas situada encima del Explorador TOM (nota: este botón solo es visible cuando trabajas con un modelo con nivel de compatibilidad 1702 o superior).

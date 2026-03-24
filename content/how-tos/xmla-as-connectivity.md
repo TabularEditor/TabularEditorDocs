@@ -136,6 +136,7 @@ In Fabric, the default semantic model of a lakehouse or warehouse can be opened/
 
 ## Troubleshooting XMLA connections
 
+<a name="testing-a-simple-connection"></a>
 ### Testing a simple connection
 
 These steps show how to most reliably connect to a Fabric/Power BI semantic model from Tabular Editor. 

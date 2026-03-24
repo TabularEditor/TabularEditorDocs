@@ -235,6 +235,7 @@ using TabularEditor.UI;
 - TabularEditor.Exe
 - Microsoft.AnalysisServices.Tabular.Dll
 
+<a name="accessing-environment-variables"></a>
 ## 访问环境变量
 
 通过 Tabular Editor CLI 运行 C# Script 时（尤其是在 CI/CD 流水线中），可以使用环境变量向脚本传递参数。 这是推荐的做法，因为 Tabular Editor CLI 执行的 C# Script 不支持传统的命令行参数。
@@ -315,6 +316,7 @@ foreach(var table in Model.Tables)
 Info($"已为 {environment} 环境配置模型");
 ```
 
+<a name="compatibility"></a>
 ## 兼容性
 
 Tabular Editor 2 和 Tabular Editor 3 的脚本 API 大多兼容，但在某些情况下，你可能希望根据所使用的版本对代码进行条件编译。 为此，你可以使用预处理器指令，这些指令是在 Tabular Editor 3.10.0 中引入的。

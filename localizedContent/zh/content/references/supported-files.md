@@ -18,6 +18,7 @@ applies_to:
           full: true
 ---
 
+<a name="supported-file-types"></a>
 # 支持的文件类型
 
 Tabular Editor 3 使用多种不同的文件格式和文档类型，其中一些并非 Analysis Services 或 Power BI 使用的格式。 本文将概述并逐一介绍这些文件类型。
@@ -187,6 +188,7 @@ DatabaseName.SemanticModel/
 
 打开并选中对应的文档或窗口后，你可以用 Ctrl+S 或“文件 > 保存”来单独保存任何辅助文件。
 
+<a name="diagram-file-te3diag"></a>
 ### 关系图文件 (.te3diag)
 
 .te3diag 文件是一种文件格式，用于存储使用 TE3 创建的模型关系图。

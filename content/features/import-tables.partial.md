@@ -29,6 +29,7 @@ Depending on your version of Analysis Services, there are different ways of defi
 > [!NOTE]
 > The Table Import Wizard and Update Table Schema feature of Tabular Editor 2.x only supports Legacy data sources with SQL partitions. In other words, there is no support for Power Query partitions. For this reason, Legacy data sources are usually recommended, as they provide the highest level of interoperability between the developer tools.
 
+<a name="importing-new-tables"></a>
 ## Importing new tables
 
 When importing tables (Model menu > Import tables...), Tabular Editor presents you with the options mentioned above (for creating a new data source), as well as a list of data sources already present in the model. Avoid creating new data sources if the tables you want to import are available in one of the data sources already specified in the model.
@@ -104,6 +105,7 @@ At this point, you should see your tables imported with all columns, data types,
 
 ![Import Complete](~/content/assets/images/import-complete.png)
 
+<a name="updating-table-schema"></a>
 # Updating table schema
 
 If columns are added/changed in the source, or if you recently modified a partition expression or query, you can use Tabular Editor's **Update table schema** feature to update the column metadata in your model.
@@ -129,6 +131,7 @@ If you do not want the name change to be propagated to the imported column (but 
 
 ![Deselect Name](~/content/assets/images/deselect-name.png)
 
+<a name="updating-table-schema-through-analysis-services"></a>
 ## Updating table schema through Analysis Services
 
 By default, Tabular Editor 3 attempts to connect directly to the data source for the purposes of updating the imported table schema. Naturally, this only works when the data source is supported by Tabular Editor 3. If you need to update the schema of a table imported from a data source that is not supported by Tabular Editor 3, you can enable the **Use Analysis Services for change detection** option under **Tools > Preferences > Schema Compare**. This also applies when the M expression of a partition or shared expression is too complex for Tabular Editor 3's built-in schema detection feature. For example, the built-in schema detection does not support certain M functions.

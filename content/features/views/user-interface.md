@@ -41,6 +41,7 @@ There are a number of additional views available, serving various purposes. More
 
 All UI elements may be resized and/or rearranged to fit your needs. You can even drag individual views out of the main view, thus splitting up an instance of Tabular Editor 3 across multiple monitors. Tabular Editor 3 will save the customization when the application is closed, and reload it automatically upon next launch.
 
+<a name="choosing-a-different-layout"></a>
 ### Choosing a different layout
 
 To reset the application to the default layout, choose the **Window > Default layout** option. Users of Tabular Editor 2.x may prefer the **Window > Classic layout** option which places the TOM Explorer on the left side of the screen, and the Properties view below the Expression Editor.
@@ -49,6 +50,7 @@ Use the **Window > Capture current layout..." option to save a customized layout
 
 ![Manage Layouts](~/content/assets/images/manage-layouts.png)
 
+<a name="changing-themes-and-palettes"></a>
 ### Changing themes and palettes
 
 The visual appearance of Tabular Editor 3 can be changed by choosing a different theme and/or palette. Tabular Editor 3 ships with five different themes (sometimes called "skins"), available through the **Window > Themes** menu:
@@ -60,6 +62,7 @@ For the vector based themes (Basic and Bezier), use the **Window > Palette** men
 
 ![Palettes](~/content/assets/images/palettes.png)
 
+<a name="menus"></a>
 # Menus
 
 The following section describes the menus in Tabular Editor 3 in more details.
@@ -134,6 +137,7 @@ The **Edit** menu contains standard Windows application menu items for editing a
 - **Select all**: Selects all text in the currently active document, or all objects belonging to the same parent within the TOM Explorer.
 - **Code assist**: This option is available when editing DAX code. It provides a shortcut to various code assist features relevant for editing DAX code. See [DAX editor](xref:dax-editor#code-assist-features) for more information.
 
+<a name="view"></a>
 ## View
 
 The **View** menu lets you navigate between the different views of the Tabular Editor 3 UI. If a view has been hidden, click on the view title in this menu will unhide the view and bring it into focus. Note that documents are not shown in the View menu. To navigate between documents, use the [Window menu](#window).
@@ -177,6 +181,7 @@ The **Tools** menu contains options for controlling Tabular Editor 3 preferences
 - **Customize...** Launches the Tabular Editor 3 User Interface Layout customization dialog, which lets you create new toolbars, rearrange and edit menus and toolbar buttons, etc.
 - **Preferences...** Launches the Tabular Editor 3 Preferences dialog, which is a central hub for managing all other aspects of Tabular Editor and its features, such as update checks, proxy settings, query row limits, request timeouts, etc. See @preferences for more information.
 
+<a name="window"></a>
 ## Window
 
 The **Window** menu provides shortcuts for managing and navigating between the various views and documents (collectively known as *windows*) of the application. It also has menu items for controlling the theming and color palettes as described [above](#changing-themes-and-palettes).

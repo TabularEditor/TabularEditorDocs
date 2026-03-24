@@ -110,6 +110,7 @@ _行号_、_代码折叠_、_可见空白字符_ 和 _缩进参考线_ 等设置
 
 DAX 支持使用斜杠（`//`）或连字符（`--`）的行注释。 此设置决定 Tabular Editor 3 在生成 DAX 代码时使用哪种注释样式，例如使用 DAX 脚本功能时。
 
+<a name="dax-settings"></a>
 ## DAX 设置
 
 这些设置决定 DAX 代码分析器的某些行为。 _Locale_ 区域设置仅是个人偏好问题。 其他设置仅在 Tabular Editor 3 无法确定所使用的 Analysis Services 版本时才适用，例如直接加载 Model.bim 文件时。 在这种情况下，Tabular Editor 会根据模型中指定的兼容级别来推测模型将部署到哪个版本。不过，实际部署目标的版本可能不同，DAX 语言也可能存在各种差异，而这些差异 Tabular Editor 无法确定。 如果 Tabular Editor 错误地报告语义/语法错误，你可能需要微调这些设置。

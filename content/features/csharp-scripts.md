@@ -226,6 +226,7 @@ In addition, the following .NET Framework assemblies are loaded by default:
 - TabularEditor.Exe
 - Microsoft.AnalysisServices.Tabular.Dll
 
+<a name="accessing-environment-variables"></a>
 ## Accessing Environment Variables
 
 When running C# scripts via the Tabular Editor CLI (especially in CI/CD pipelines), you can pass parameters to your scripts using environment variables. This is the recommended approach, as C# scripts executed by Tabular Editor CLI don't support traditional command-line arguments.
@@ -306,6 +307,7 @@ foreach(var table in Model.Tables)
 Info($"Configured model for {environment} environment");
 ```
 
+<a name="compatibility"></a>
 ## Compatibility
 
 The scripting APIs for Tabular Editor 2 and Tabular Editor 3 are mostly compatible, however, there are cases where you want to conditionally compile code depending on which version you're using. For this, you can use preprocessor directives, which were introduced in Tabular Editor 3.10.0.

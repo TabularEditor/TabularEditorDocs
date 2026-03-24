@@ -79,6 +79,7 @@ The debugger provides the following views (if they are hidden, they can be acces
 - Evaluation Context
 - Call Tree
 
+<a name="locals"></a>
 ## Locals
 This view lists the columns, measures and variables within the current scope of execution and displays their values. It also displays the value of the current subexpression being debugged. Values in this list are updated automatically when stepping to a different subexpression, or when the evaluation context is changed. **Local values are always evaluated at the currently selected item of the call tree**.
 
@@ -144,6 +145,7 @@ Notice how the values in the **Locals** view are updated as the tree is navigate
 
 ![Step into selection](~/content/assets/images/debugger-step-into-selection.png)
 
+<a name="scalar-predicates"></a>
 ## Scalar predicates
 
 Scalar predicates used in filter arguments of the [`CALCULATE`](https://dax.guide/calculate) or [`CALCULATETABLE`](https://dax.guide/calculatetable) functions are handled in a special way, in the **Locals** view.

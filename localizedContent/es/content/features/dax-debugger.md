@@ -83,6 +83,7 @@ El depurador proporciona las siguientes vistas (si están ocultas, puedes accede
 - Contexto de evaluación
 - Árbol de llamadas
 
+<a name="locals"></a>
 ## Variables locales
 
 Esta vista enumera las columnas, las medidas y las variables dentro del ámbito de ejecución actual y muestra sus valores. También muestra el valor de la subexpresión actual que se está depurando. Los valores de esta lista se actualizan automáticamente al avanzar a otra subexpresión o cuando se cambia el contexto de evaluación. **Los valores locales siempre se evalúan en el elemento actualmente seleccionado del árbol de llamadas**.
@@ -153,6 +154,7 @@ Fíjate en cómo se actualizan los valores de la vista **Locals** a medida que n
 
 ![Entrar en la selección](~/content/assets/images/debugger-step-into-selection.png)
 
+<a name="scalar-predicates"></a>
 ## Predicados escalares
 
 Los predicados escalares usados en los argumentos de filtro de las funciones [`CALCULATE`](https://dax.guide/calculate) o [`CALCULATETABLE`](https://dax.guide/calculatetable) se tratan de forma especial en la vista **Locals**.

@@ -1,2257 +1,1506 @@
 {
   "language": "es",
-  "lastSync": "2026-03-20T12:36:51.939029+00:00",
   "sourceBaseline": "content",
   "files": {
     "features/advanced-refresh.md": {
       "sourceHash": "sha256:a3f181fa26c3fb2a96949d37a42a9b2729ea01279baa4ce78cab95fca8047ff7",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295593+00:00",
-      "translatedAt": null
+      "status": "translated"
     },
     "features/Best-Practice-Analyzer.md": {
       "sourceHash": "sha256:b95e98bcacdc9bec745a801592ec906a4bb1490a44f997c700f4f6244436fe78",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295658+00:00",
-      "translatedAt": "2026-03-11T09:13:06.377784+00:00"
+      "status": "translated"
     },
     "features/built-in-bpa-rules.md": {
       "sourceHash": "sha256:233d6d9f44bae808b345197b2c7b5691cb0b4af32ddb66468ef5debb4c1653fa",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295691+00:00",
-      "translatedAt": "2026-03-11T09:13:06.377822+00:00"
+      "status": "translated"
     },
     "features/code-actions.md": {
       "sourceHash": "sha256:2965d0ab377e3989e5adefdf317b44318049f00f8c51c35df2a7632dee475fbf",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295720+00:00",
-      "translatedAt": "2026-03-11T09:13:06.377856+00:00"
+      "status": "translated"
     },
     "features/Command-line-Options.md": {
       "sourceHash": "sha256:6b2a4865311b0da759029cb643f838fa0243438a352cb8e855deb53ae8804146",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295748+00:00",
-      "translatedAt": "2026-03-11T09:13:06.377887+00:00"
+      "status": "translated"
     },
     "features/creating-macros.md": {
       "sourceHash": "sha256:031b3f5aca8eec28c78609ef421d48595cdc2df96f073d7a52ab16bebdf44326",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295773+00:00",
-      "translatedAt": "2026-03-11T09:13:06.377914+00:00"
+      "status": "translated"
     },
     "features/csharp-scripts.md": {
       "sourceHash": "sha256:fe043bad73d6f8e483b6413ca58f6a62f5ded53074863ab11e5cde5fc0975ac3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295798+00:00",
-      "translatedAt": "2026-03-11T09:13:06.377943+00:00"
+      "status": "translated"
     },
     "features/Custom-Actions-hidden.md": {
       "sourceHash": "sha256:0100c53a221855d5b1a8fa5c2a810fd9f56eda751fedb1eccad1b76d0cb8189c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295823+00:00",
-      "translatedAt": "2026-03-11T09:13:06.377967+00:00"
+      "status": "translated"
     },
     "features/dax-debugger.md": {
       "sourceHash": "sha256:20fdc750de8ab9f6d153f82b51c392201b53c89da26b3ee6a4508f87ac3a8403",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295848+00:00",
-      "translatedAt": "2026-03-11T09:13:06.377991+00:00"
+      "status": "translated"
     },
     "features/dax-editor.md": {
       "sourceHash": "sha256:1f2c0c195b157d031bc3ced3a532165fb97a69de0c1636749b0775f487dcd236",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295873+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378016+00:00"
+      "status": "translated"
     },
     "features/dax-optimizer-integration.md": {
       "sourceHash": "sha256:445aebdd1cfe2ebba6ad4d31786808f963aaa394d2971079a9dbf1bdf31dcde3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295897+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378040+00:00"
+      "status": "translated"
     },
     "features/dax-package-manager.md": {
       "sourceHash": "sha256:a8f12f885d8ffa3af88d600aa9f9f584f081bc527407cb9c3332a7780c7d1903",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295924+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378065+00:00"
+      "status": "translated"
     },
     "features/dax-query.md": {
       "sourceHash": "sha256:8c45adcffa202f972c37ddd6b1278da37dbe3ecdc0b62f85abf27a723f7f8f0c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295949+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378093+00:00"
+      "status": "translated"
     },
     "features/dax-scripts.md": {
       "sourceHash": "sha256:e88d01ebe77b65464d9b7abd6688a27c3fee2e3f8539d8ebd51c2e5b813e105d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295974+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378122+00:00"
+      "status": "translated"
     },
     "features/deployment.md": {
       "sourceHash": "sha256:9e60fe917808f281dd83193a448915452f828350dca386fe8c2b2bfef15c0365",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.295998+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378178+00:00"
+      "status": "translated"
     },
     "features/hierarchical-display.md": {
       "sourceHash": "sha256:2f5c506f7b35ecfea164cccfee74ce6de9c8dd317c01fff96fd04e132512c0dc",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296024+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378205+00:00"
+      "status": "translated"
     },
     "features/import-tables.partial.md": {
       "sourceHash": "sha256:b82db90bbf187352379ec8762cbd205610e72490e130136debac3b75ec70ce42",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296049+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378229+00:00"
+      "status": "translated"
     },
     "features/index.md": {
       "sourceHash": "sha256:50f03bfd484f4801fd99569881b836a2c93d4d8b179ab731f588cb3c0c9b2a35",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296075+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378258+00:00"
+      "status": "translated"
     },
     "features/metadata-translation-editor.md": {
       "sourceHash": "sha256:4262cf9f4d08a6f141fe470c9ac670d33edd49f9c4755bcc17fc8bbb26f31a41",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296101+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378285+00:00"
+      "status": "translated"
     },
     "features/perspective-editor.md": {
       "sourceHash": "sha256:c52ab63a25c110c9302b50b563d52d81d7bbe7a4b7fc999908cae7cff5a1b77f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296126+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378309+00:00"
+      "status": "translated"
     },
     "features/pivot-grid.md": {
       "sourceHash": "sha256:b6af168f855063133df7efcafa67927ff16748fe3cdd59c4fb0b9786d93be066",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296187+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378346+00:00"
+      "status": "translated"
     },
     "features/refresh-overrides.md": {
       "sourceHash": "sha256:d2363ece74c675093076e1d3bb692fb2841cb9c705e52a458aec64df266d9f36",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296222+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378380+00:00"
+      "status": "translated"
     },
     "features/save-to-folder.md": {
       "sourceHash": "sha256:ef91c2f9f796fef7e91358ead257c2b3cf32c57092114cb95c4f16ca4552a503",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296249+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378406+00:00"
+      "status": "translated"
     },
     "features/save-with-supporting-files.md": {
       "sourceHash": "sha256:8b436e18eaae2061c8521ac117fa08e8ed83c43a218b7631c1409caaedf1974d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296274+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378435+00:00"
+      "status": "translated"
     },
     "features/script-helper-methods.md": {
       "sourceHash": "sha256:52ece0ac2ca74b3aceefd177057e773977da7b27b44977e432c3ed207677b6c6",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296299+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378464+00:00"
+      "status": "translated"
     },
     "features/semantic-bridge-metric-view-object-model.md": {
       "sourceHash": "sha256:d27290a24b2917dcaa396d9d0aa9c1d2680b00dfba2e976d15007749b3831d08",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296328+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378571+00:00"
+      "status": "translated"
     },
     "features/semantic-bridge-metric-view-validation.md": {
       "sourceHash": "sha256:81d096d6308ae4b99b860082843c6e89e753a6374efd9787264bbd158329a96d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296353+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378595+00:00"
+      "status": "translated"
     },
     "features/semantic-bridge.md": {
       "sourceHash": "sha256:a8da16703cd2c553fbdbf78e8337d1a2a9499b964f48373e4817012153c33548",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296378+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378615+00:00"
+      "status": "translated"
     },
     "features/table-groups.md": {
       "sourceHash": "sha256:6a2a5c2d24ce7f1f8171211e61ddb8f2774619d945fb24bcf33fc83db6c0f8e8",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296401+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378632+00:00"
+      "status": "translated"
     },
     "features/tmdl.md": {
       "sourceHash": "sha256:4b1e71e59f7377cb6694e22848a9831907d8bce20459dbb5814a4badcde68463",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296425+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378649+00:00"
+      "status": "translated"
     },
     "features/toc.md": {
       "sourceHash": "sha256:124251b5b1d7b83b2daba79f72ec18bf2961bd43075635ebda15094992f326ea",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296452+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378663+00:00"
+      "status": "translated"
     },
     "features/Useful-script-snippets.md": {
       "sourceHash": "sha256:1a220bb878ce665e3ba52328c2929758bf399c56613d9a072b2d5894710d4be2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296477+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378679+00:00"
+      "status": "translated"
     },
     "features/using-bpa-sample-rules-expressions.md": {
       "sourceHash": "sha256:fbf4aca9a2718fc53171edac32f27bbacd194e1b3644c4f19a62c996435697a2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296502+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378695+00:00"
+      "status": "translated"
     },
     "features/using-bpa.md": {
       "sourceHash": "sha256:a750489f209d1bb3d314368e15c88913e3fad6c08402139c29aa77d172755684",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296527+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378708+00:00"
+      "status": "translated"
     },
     "features/Workspace-Database.md": {
       "sourceHash": "sha256:037cf90e068ae6f0297fad2560012d9c08072abee11af6833c07e4d9bd4f4f7f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296550+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378723+00:00"
+      "status": "translated"
     },
     "features/workspace-mode.partial.md": {
       "sourceHash": "sha256:14bcfb19450618ce483f54692c50573694a0f9f1432923610e4bfb3b42d56155",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296575+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378738+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/csharp-script-library-advanced.md": {
       "sourceHash": "sha256:d9896cd8b9c754d2c382efcb22525c1e4af263988d656cff7b95d250115fb299",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296608+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378760+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/csharp-script-library-beginner.md": {
       "sourceHash": "sha256:728395ae6dc4b6686c418b09ed9d090c41ca9066a4c734e82469075c34fc4881",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296633+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378792+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/csharp-script-library.md": {
       "sourceHash": "sha256:4a83b9ee945a704d09879d38757a8e8838acdce54c519a9191d3748c80f2c6dc",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296658+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378808+00:00"
+      "status": "translated"
     },
     "features/Semantic-Model/direct-lake-sql-model.md": {
       "sourceHash": "sha256:24c924ac00b363280270397b20e38bfcb58ec284ffcbafd332acdef9cdf70517",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296684+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378840+00:00"
+      "status": "translated"
     },
     "features/Semantic-Model/direct-query-over-as.md": {
       "sourceHash": "sha256:85af1a152e4cf86a04fdd91bcf518bea567e30e55688e99f2201d524eaad22a9",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296708+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378856+00:00"
+      "status": "translated"
     },
     "features/Semantic-Model/semantic-model-types.md": {
       "sourceHash": "sha256:64a1be153fec80ec6235186a2ec316d53fe9af11dfc9d1cbee637c0ed6fd41dd",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296735+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378869+00:00"
+      "status": "translated"
     },
     "features/views/bpa-view.md": {
       "sourceHash": "sha256:c7ec9d9df36d5f768d0d6384f7b1baa7ddd134a5222d34fa32fbec4f9eb44395",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296762+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378895+00:00"
+      "status": "translated"
     },
     "features/views/data-refresh-view.md": {
       "sourceHash": "sha256:b248eb0c684a13d7f3d787b0ddd6a1637f4556eed8da40138dab30ccc308003e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296788+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378917+00:00"
+      "status": "translated"
     },
     "features/views/diagram-view.md": {
       "sourceHash": "sha256:980b80557f3d1bf12969c4d974f53b1e76e211c152d544447fcb9b77dd32294e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296817+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378932+00:00"
+      "status": "translated"
     },
     "features/views/find-replace.md": {
       "sourceHash": "sha256:f42cbffa4ba076ede971a7f74eb1a04c51a671f709167e80d123a27708f348b6",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296842+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378946+00:00"
+      "status": "translated"
     },
     "features/views/macros-view.md": {
       "sourceHash": "sha256:520dd7be90d9a286f15c145d0c3f151213fc79a4c9f8b25af4de9b766f20b012",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296866+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378960+00:00"
+      "status": "translated"
     },
     "features/views/messages-view.md": {
       "sourceHash": "sha256:f4d90ae99db74ddc3742853ad8ca848480cafe1c392565525394db5b24003a6a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296889+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378974+00:00"
+      "status": "translated"
     },
     "features/views/properties-view.md": {
       "sourceHash": "sha256:f001df97118de15a898b6d160c3ad5df453589bdace10f50391eb8223802f30e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296913+00:00",
-      "translatedAt": "2026-03-11T09:13:06.378988+00:00"
+      "status": "translated"
     },
     "features/views/tom-explorer-view.md": {
       "sourceHash": "sha256:3d2dbacf216f262ac4cc0380a1545b11c2bd9ae3d953e4a4afb870431c777d96",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296938+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379001+00:00"
+      "status": "translated"
     },
     "features/views/user-interface.md": {
       "sourceHash": "sha256:986ae970de12c4745c8c55268cc2278f50ed0f0f612237b8701645df0a3571f8",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296964+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379015+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-add-databricks-metadata-descriptions.md": {
       "sourceHash": "sha256:1cdf755e7b2b922a65e1e5458e87ad870bf94d7fa559cdd811f0c4cbd8a671f8",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.296993+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379043+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-convert-dlsql-to-dlol.md": {
       "sourceHash": "sha256:a9ccc97caf8639e63c4b196449dbebb7efade5aa9e0991f3f460f6b6a46f7415",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297021+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379061+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-convert-import-to-dlol.md": {
       "sourceHash": "sha256:f6e6afd6430cc5eaf734a29eee11ba1bdc300efcd2f3e9a8566ab933cad8a0d7",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297048+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379076+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-count-things.md": {
       "sourceHash": "sha256:a57cc71eca07c7ef5625dcd0de4ef25dbd135d124376ee97b5c163f135e094ac",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297073+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379092+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-and-replace-M-parameter.md": {
       "sourceHash": "sha256:98e78822d061113b577caa032c5cec2ecdc01dc3cc54415d895d6635b5372a40",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297098+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379110+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-databricks-relationships.md": {
       "sourceHash": "sha256:2c057aa107ad51f212de201495d4b957a9caedb5b4020295677215937c1bb989",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297129+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379126+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-create-date-table.md": {
       "sourceHash": "sha256:d3a6814c2600eb4104b75aa09736fe94c707a5b9314affe7228ffad221a7c58d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297173+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379142+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-databricks-semantic-model-set-up.md": {
       "sourceHash": "sha256:a88f9235ec3544b569919b71dfd67918aadda89f3594bd4a930dc2cd0cd6c3b1",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297207+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379158+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-find-replace-selected-measures.md": {
       "sourceHash": "sha256:8810d2b2c4b290a475cf2c25547d55e11581052adecd15722d33722f1dee8d7f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297233+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379176+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-format-power-query.md": {
       "sourceHash": "sha256:e0d227f4dee9e9555941f4f1692f9149db96601ef93cfe170fac0aec1ef15a7d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297258+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379191+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-implement-incremental-refresh.md": {
       "sourceHash": "sha256:d073d4bf9223b7c04a68b06f0430d5116eef349187beeb4ae624f0b28a40ba67",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297284+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379205+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-implement-user-defined-aggregations.md": {
       "sourceHash": "sha256:e6d7233c69c13b465e0a8c444a458d13115711ce3e093651a0177bd074eac83b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297312+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379221+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-output-things.md": {
       "sourceHash": "sha256:55aa64a311c8d33ea0012e86cca9c7d9e39b492bf1f9012f442234966871c568",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297336+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379237+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Advanced/script-remove-measures-with-error.md": {
       "sourceHash": "sha256:98a4e7ce55c0cbe7bc418827593433cf4cd4c24d02b266114b80cb2b14ef29bc",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297370+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379253+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-count-rows.md": {
       "sourceHash": "sha256:880b4cecde42c22e2ac5449590145195c30dd0b53499dc57eb5bfce960575ab3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297408+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379277+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-field-parameter.md": {
       "sourceHash": "sha256:b900174834019481edb57daee36c1cd06ab33e5e04ded0ad7989bd211c034df3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297438+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379295+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-m-parameter.md": {
       "sourceHash": "sha256:495d56bf23e3a8b96b109e692530b55539dd59f8d6861ffa17a0aadebd2ef00e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297464+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379312+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-measure-table.md": {
       "sourceHash": "sha256:287bd8089fa3be09b2d5cc7830934549c219b6957cd71b76e36c75400168b8af",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297489+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379330+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-sum-measures-from-columns.md": {
       "sourceHash": "sha256:9aeacf4afb6eb0ea78b0783bb0f17203b478f3b504e17080f9e01d40973d068b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297517+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379345+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-create-table-groups.md": {
       "sourceHash": "sha256:297ec32a4bd6104b89273ae6ef1708b653f81bea40c8c5fac8ef8a8e73e59cb9",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297544+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379362+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-display-unique-column-values.md": {
       "sourceHash": "sha256:18b6074f21c2f083eb8bc5486d060ba6f9655db11f4f5e7e087460eeae839128",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297581+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379377+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-edit-hidden-partitions.md": {
       "sourceHash": "sha256:12372b7806e13174ec41bb1dfe207f63a039e7e416b50a7a441325dc1a788e22",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297611+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379391+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-format-numeric-measures.md": {
       "sourceHash": "sha256:efcac83bb47fb34182536fd7626e1e9159186aed8addc1218a089bcf8f995836",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297636+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379404+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Beginner/script-show-data-source-dependencies.md": {
       "sourceHash": "sha256:4754d28371a514ff7e5ce78cd6d87f0a4a9a4907336e0fca1f0af4a05774d6c9",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297661+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379418+00:00"
+      "status": "translated"
     },
     "features/CSharpScripts/Template/csharp-script-Template.md": {
       "sourceHash": "sha256:97b462002593a46b2335518b6e0773f101ec09a5ae39ef2800a4dd584940d835",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297688+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379456+00:00"
+      "status": "translated"
     },
     "getting-started/azure-marketplace.md": {
       "sourceHash": "sha256:7e5c57b8926ef7ca70b7da036ae439e63bf3559959742e13394bd7ecf6d17166",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297714+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379473+00:00"
+      "status": "translated"
     },
     "getting-started/boosting-productivity-te3.md": {
       "sourceHash": "sha256:1dd6814ad7f714f01e4b7ca3e3c6565cd1c6deaff949c02fb6c1d2d493e95e92",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297740+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379488+00:00"
+      "status": "translated"
     },
     "getting-started/bpa.md": {
       "sourceHash": "sha256:1942bcbb9b7d7f130e4f9869e1d541a12efc14d706b082ae013a016f779c9d3d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297765+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379502+00:00"
+      "status": "translated"
     },
     "getting-started/creating-and-testing-dax.md": {
       "sourceHash": "sha256:0650899dbd3142d41cb52eeb857e1829a3482874388865d999b577fa9fb7b704",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297790+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379516+00:00"
+      "status": "translated"
     },
     "getting-started/cs-scripts-and-macros.md": {
       "sourceHash": "sha256:a32b793efb495fb0a23a981df218b49b34e58d0d6c2c19f2d037b8ae229887ce",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297816+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379537+00:00"
+      "status": "translated"
     },
     "getting-started/dax-script-introduction.md": {
       "sourceHash": "sha256:4393ece02e4cc62ad20d3ee63c1cf86866c6b70cbf5fd5124806da2adace7336",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297840+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379550+00:00"
+      "status": "translated"
     },
     "getting-started/desktop-limitations.md": {
       "sourceHash": "sha256:77d974f5d7444f6d09d4dceb67c21946e514884fd10b2b2777d43b3693dac3cc",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297866+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379564+00:00"
+      "status": "translated"
     },
     "getting-started/editions.md": {
       "sourceHash": "sha256:16752e36d2acf132ad4ce88ebcd226c065b77b11fc0ccca64612fe095709e2c4",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297891+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379579+00:00"
+      "status": "translated"
     },
     "getting-started/general-introduction.md": {
       "sourceHash": "sha256:61337e48a6edff56d82bc3cbe0d2618d8139c93d434c1342ef312b7b8ba80d78",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297919+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379592+00:00"
+      "status": "translated"
     },
     "getting-started/Getting-Started-te2.md": {
       "sourceHash": "sha256:33dfe416723db01f219fafff7262251d16f9fda0d75570bac748a42d67930012",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297944+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379605+00:00"
+      "status": "translated"
     },
     "getting-started/getting-started.md": {
       "sourceHash": "sha256:28ea3283bb5bef0b4fd62eea31b3d4a5bb0d65abbe7d498451e2952d915756cd",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297971+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379622+00:00"
+      "status": "translated"
     },
     "getting-started/importing-tables-data-modeling.md": {
       "sourceHash": "sha256:539c1165edc406679fcb0d9dedcaa96ebf598346c49df92018cf74f52da894c6",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.297997+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379638+00:00"
+      "status": "translated"
     },
     "getting-started/index.md": {
       "sourceHash": "sha256:1cff893340218b6b9399d31193263f541a0afd5205d2c520580069cf18b634b8",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298021+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379653+00:00"
+      "status": "translated"
     },
     "getting-started/installation.md": {
       "sourceHash": "sha256:ae80dbaf88ee37d9427ee9e0400e2ed7229530595e768027886ed6dc1fa4f87b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298047+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379667+00:00"
+      "status": "translated"
     },
     "getting-started/migrate-from-desktop.md": {
       "sourceHash": "sha256:dc1fd7a811ed4408a7a453ec25361274f2bab258e2ea5329aa6d897c9afe04d4",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298070+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379682+00:00"
+      "status": "translated"
     },
     "getting-started/migrate-from-te2.md": {
       "sourceHash": "sha256:942550423c2eb42cad3282142919fe92972d84b1f0c2cd12c4571f39422abc51",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298095+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379696+00:00"
+      "status": "translated"
     },
     "getting-started/migrate-from-vs.md": {
       "sourceHash": "sha256:b7943609a6bab00f3299960d772ddf12a4161d46a011e5821a86e4c4560fd9a4",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298120+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379708+00:00"
+      "status": "translated"
     },
     "getting-started/optimizing-workflow-workspace-mode.md": {
       "sourceHash": "sha256:b549dd9c660da15116394520e2c7db8a1167f1062a90964f8a078fac0969f7fa",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298145+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379722+00:00"
+      "status": "translated"
     },
     "getting-started/parallel-development.md": {
       "sourceHash": "sha256:771e22a14e4149f7d32da22a47ba73440b81a61564b1de976f16520c6e98fee0",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298193+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379737+00:00"
+      "status": "translated"
     },
     "getting-started/personalizing-te3.md": {
       "sourceHash": "sha256:af5c6881e93c82a790f36c1cfd84dbf7456c320e067a207193b7d59a40e5773b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298218+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379751+00:00"
+      "status": "translated"
     },
     "getting-started/Power-BI-Desktop-Integration.md": {
       "sourceHash": "sha256:7c23b5811b153da076659cc097d65d04eb73794464942c3058059346eed3860f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298243+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379766+00:00"
+      "status": "translated"
     },
     "getting-started/refresh-preview-query.md": {
       "sourceHash": "sha256:1b95ce652f9fe220ce0baa2bdb2e0de95e1746729d9d6f4f1807717b04f6b804",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298267+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379781+00:00"
+      "status": "translated"
     },
     "getting-started/toc.md": {
       "sourceHash": "sha256:e2f87443d4ec79c44180a2e305fdf21ef9361b8f2f97c9b5f4f30816cf64727e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298291+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379794+00:00"
+      "status": "translated"
     },
     "getting-started/training-telearn.md": {
       "sourceHash": "sha256:d58ebfdb0ba3721250865f314b7e234d07d60883edbd87ae9abb53dfbe6c54d2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298314+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379808+00:00"
+      "status": "translated"
     },
     "getting-started/views/bpa-view-reference.md": {
       "sourceHash": "sha256:b1b9af1605783a0d1a7215c3cbd463444d6e870ed8e31edc952c328e73f9996c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298343+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379834+00:00"
+      "status": "translated"
     },
     "getting-started/views/data-refresh-view-reference.md": {
       "sourceHash": "sha256:2b0531afa0df2babacda9b8b0f942b626195ec5a6034aa9a158250d2168e7a7f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298381+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379853+00:00"
+      "status": "translated"
     },
     "getting-started/views/diagram-view-reference.md": {
       "sourceHash": "sha256:7d20597c914bebc07cfa6f3937a8183d152b8ba642e70e1cf8a6b041edd2a2f7",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298413+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379866+00:00"
+      "status": "translated"
     },
     "getting-started/views/find-replace-reference.md": {
       "sourceHash": "sha256:eea63df2e08bedcae9c7bc5f00fb21386cd95c9171ea8ad89f87f959c05a26ad",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298437+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379880+00:00"
+      "status": "translated"
     },
     "getting-started/views/macros-view-reference.md": {
       "sourceHash": "sha256:88d73c55965ca306db4ad3e379fa987063c89c17c95ebed50e83d6240b9cb71a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298461+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379896+00:00"
+      "status": "translated"
     },
     "getting-started/views/messages-view-reference.md": {
       "sourceHash": "sha256:a68d178caeb8eada8179a539ae061a3e5be49562edd30e5d95f154f749de8bff",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298489+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379911+00:00"
+      "status": "translated"
     },
     "getting-started/views/properties-view-reference.md": {
       "sourceHash": "sha256:f15e10357990e0871d0c6d003f3e422574ce05503a20e6ee1f8c585cabc45d53",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298516+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379926+00:00"
+      "status": "translated"
     },
     "getting-started/views/tom-explorer-view-reference.md": {
       "sourceHash": "sha256:cff7e065f5ad8926552d64ce6170e782d999e24f3894e0b0a7e2f9858a801a7a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298540+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379940+00:00"
+      "status": "translated"
     },
     "getting-started/views/user-interface-reference.md": {
       "sourceHash": "sha256:2725adb9a676940d5e4b83c68c4989d2f40d503a83a216397840857874398563",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298568+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379954+00:00"
+      "status": "translated"
     },
     "how-tos/Advanced-Filtering-of-the-Explorer-Tree.md": {
       "sourceHash": "sha256:95d4c41f0fdc8f73ebbdde8c9829278f7e6cd01264c25c5b46763c225a0ec988",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298595+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379970+00:00"
+      "status": "translated"
     },
     "how-tos/Advanced-Scripting.md": {
       "sourceHash": "sha256:631d59ddf5d4bd7a39db9f62c2c11b1376e1933685da763c8b0992bdf982e370",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298621+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379985+00:00"
+      "status": "translated"
     },
     "how-tos/connect-ssas.md": {
       "sourceHash": "sha256:c2dfe9827a42110e7d25cfe9c3ed7c4a04ff7c2990d1ed10f64ab3c551037b16",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298653+00:00",
-      "translatedAt": "2026-03-11T09:13:06.379999+00:00"
+      "status": "translated"
     },
     "how-tos/deploy-current-model.md": {
       "sourceHash": "sha256:6ab8db3b6bcc1757ae8d0fdd51133ddc53334d3d7a78c45c7c4085a3f652027d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298685+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380020+00:00"
+      "status": "translated"
     },
     "how-tos/drag-drop.md": {
       "sourceHash": "sha256:b3b4f89d0bc2b76a905e868d06d50917d81f8d4d64b3b1b5002dbfdf06fa6e72",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298717+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380036+00:00"
+      "status": "translated"
     },
     "how-tos/duplicate-batchrename.md": {
       "sourceHash": "sha256:0da1c04c8e0206882f716e3957cf86dae92500d4f6b6d51c7c7e44e5d33b3f54",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298744+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380051+00:00"
+      "status": "translated"
     },
     "how-tos/edit-properties.md": {
       "sourceHash": "sha256:e3edbd6a49beb9bb75a2d2076e51bea33227202ea910b070cedda099c17618f4",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298768+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380065+00:00"
+      "status": "translated"
     },
     "how-tos/folder-serialization.md": {
       "sourceHash": "sha256:8b41e78bef09301284841690f12002ed1ca983c845d3b1d8b1b6cc85cb73c5b1",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298792+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380079+00:00"
+      "status": "translated"
     },
     "how-tos/formula-fixup-dependencies.md": {
       "sourceHash": "sha256:cbb583c5453297aa76e267f86984587c0947dea569d937f291d54fc0921ddf23",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298817+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380094+00:00"
+      "status": "translated"
     },
     "how-tos/import-export-translations.md": {
       "sourceHash": "sha256:ee2d4bbed5fad42c661ef39838e0a62ea4a9459a7350a949b4c540569b77f6eb",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298841+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380109+00:00"
+      "status": "translated"
     },
     "how-tos/importing-tables-from-excel.md": {
       "sourceHash": "sha256:54be367cdb3652a1f329935b5f663df6076a420b1d1782b968fc3f467a580fe3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298867+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380124+00:00"
+      "status": "translated"
     },
     "how-tos/Importing-Tables.md": {
       "sourceHash": "sha256:17f8530c0bc0109b8e199fe56d36919fc24697fc437674e7728fadb353c878e5",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298894+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380138+00:00"
+      "status": "translated"
     },
     "how-tos/incremental-refresh2-h.md": {
       "sourceHash": "sha256:b7cb1ce87b83b31c3cf44af327adf14324cbed8448fcf15223121c3bd083f819",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298923+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380154+00:00"
+      "status": "translated"
     },
     "how-tos/index.md": {
       "sourceHash": "sha256:d6ca415819641e338d7d22d2eaabd75a2e83585fd226537776c6c00a22bb0f92",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298949+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380169+00:00"
+      "status": "translated"
     },
     "how-tos/load-save.md": {
       "sourceHash": "sha256:5999c48324037425d2cde3d8f82aa9afd0d419c2401c9605e31b5df0973bc2b4",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.298974+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380184+00:00"
+      "status": "translated"
     },
     "how-tos/Master-model-pattern.md": {
       "sourceHash": "sha256:e6efeec6d7944d0aff773e9cc4219cd255af65bf23cd4b1aa39553d63ba033c5",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299006+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380198+00:00"
+      "status": "translated"
     },
     "how-tos/metadata-backup.md": {
       "sourceHash": "sha256:8c842b9fb0eb88fbcbc09a20036e1d21f6d6e48a6cf882141e2bc63cb759e329",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299029+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380221+00:00"
+      "status": "translated"
     },
     "how-tos/perspectives-translations.md": {
       "sourceHash": "sha256:6b640688ab87fee2e73e02776f4042efffa3f1bc007b0e607214c89a3386e16f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299066+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380238+00:00"
+      "status": "translated"
     },
     "how-tos/powerbi-xmla-pbix-workaround.md": {
       "sourceHash": "sha256:032818b434b6b69fbe8db47914cee6c58a56d00cb279e47da3e99129c9f45315",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299111+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380253+00:00"
+      "status": "translated"
     },
     "how-tos/replace-tables.md": {
       "sourceHash": "sha256:a71712e15de2cfb89a52c8022246743617bb75c97a025c6b0d2f02bb1569e80d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299137+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380294+00:00"
+      "status": "translated"
     },
     "how-tos/roles-rls.md": {
       "sourceHash": "sha256:0f3e7a0ecf642bd55eeb6865d7c881563cf8e2f7708517172590def678060540",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299181+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380357+00:00"
+      "status": "translated"
     },
     "how-tos/script-reference-objects.md": {
       "sourceHash": "sha256:486150d7fb6512e0038b7aa1d95480bc1dd4cda5116e9ca99e0ad75c420a57d1",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299210+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380394+00:00"
+      "status": "translated"
     },
     "how-tos/semantic-bridge-add-object.md": {
       "sourceHash": "sha256:47cebddcb3457d0c355fd207c68de6fb980ad1e9b864ec39d80ca64aac861217",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299236+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380423+00:00"
+      "status": "translated"
     },
     "how-tos/semantic-bridge-how-tos.md": {
       "sourceHash": "sha256:ebc5e0ee2c2688b218ad90eb3ab2882183651deb6e797058bc34192e3850602f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299262+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380451+00:00"
+      "status": "translated"
     },
     "how-tos/semantic-bridge-import.md": {
       "sourceHash": "sha256:f6f20eecc7756a8ef3739106b3ebc82ab85ba4282fee87701ecd8b78d415f397",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299287+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380482+00:00"
+      "status": "translated"
     },
     "how-tos/semantic-bridge-load-inspect.md": {
       "sourceHash": "sha256:c4903b1f3dae22e24ef7401892ef4ec18d284493b19217a92095a6ec02e774d2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299312+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380508+00:00"
+      "status": "translated"
     },
     "how-tos/semantic-bridge-remove-object.md": {
       "sourceHash": "sha256:0201f69d14698b005e06d60f6a721b3bc371d83bbc885944df38cc82e58aeb10",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299336+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380536+00:00"
+      "status": "translated"
     },
     "how-tos/semantic-bridge-rename-objects.md": {
       "sourceHash": "sha256:980236af341a7130899bb8bfa1655636edef998c95ba27d0552d504b1039c735",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299361+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380561+00:00"
+      "status": "translated"
     },
     "how-tos/semantic-bridge-serialize.md": {
       "sourceHash": "sha256:2ca79bc033307934ac2ee7223639b8b71d7c7dc76fdaf5d13ec3d638d279bb40",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299385+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380586+00:00"
+      "status": "translated"
     },
     "how-tos/semantic-bridge-validate-contextual-rules.md": {
       "sourceHash": "sha256:2c8475f1c9b0d4169ff21e493fc47e4c03eb16fd06aa88b6fa9065ef2a03a2a9",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299410+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380615+00:00"
+      "status": "translated"
     },
     "how-tos/semantic-bridge-validate-default.md": {
       "sourceHash": "sha256:744cb9028b5d70ec6146649d98c6e5b2b909abfb6dd76addde90bfe2f9534c80",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299443+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380643+00:00"
+      "status": "translated"
     },
     "how-tos/semantic-bridge-validate-simple-rules.md": {
       "sourceHash": "sha256:871544d36d746d980df2cce373ca58961a3b21a612e28361e5ad5af1f37fda0d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299468+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380674+00:00"
+      "status": "translated"
     },
     "how-tos/toc.md": {
       "sourceHash": "sha256:1b2f757b9db44d77156204b5fa006f78828eba9bc76fad02d97f54ece3cf3bf7",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299502+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380703+00:00"
+      "status": "translated"
     },
     "how-tos/undo-redo.md": {
       "sourceHash": "sha256:e03d98c7fe13f0ada9d6a887c417798a510ad82916e7b2c4e98c498a2d5ba69d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299526+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380733+00:00"
+      "status": "translated"
     },
     "how-tos/update-compatibility-level.md": {
       "sourceHash": "sha256:6ff9fa9aa0a1979456abec53ec14addbf3c00a188bc8426adda43333e4ce1701",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299557+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380759+00:00"
+      "status": "translated"
     },
     "how-tos/xmla-as-connectivity.md": {
       "sourceHash": "sha256:cf80a9d3d83420cd977af328fc21c63066ee28a7e12665b277d866f1e280ff40",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299589+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380785+00:00"
+      "status": "translated"
     },
     "how-tos/includes/sample-metricview-deserialize.md": {
       "sourceHash": "sha256:3f4bfcdeebb12a2cc7395441588f12fcb79ac7c0cdd6df4d0fc81193cf80419c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299616+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380839+00:00"
+      "status": "translated"
     },
     "how-tos/includes/sample-metricview.md": {
       "sourceHash": "sha256:41ed9d676177a7c23aec90bfbe9e703e7a18a1498009cc26b916805bca31ac41",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299641+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380873+00:00"
+      "status": "translated"
     },
     "how-tos/includes/sample-metricview.yaml": {
       "sourceHash": "sha256:cd42d73830a347784d89cceab989764ccf168f965987ccb183dee2095b5cf464",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299667+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380902+00:00"
+      "status": "translated"
     },
     "references/application-language.md": {
       "sourceHash": "sha256:2b145c41ce53e4fb5013008471d79d4f7fe0602e4bedff220be0fcaa3028ee7c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299695+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380937+00:00"
+      "status": "translated"
     },
     "references/downloads.md": {
       "sourceHash": "sha256:443087bae7d1bdebac65c03f355e1152f85d5d135d4f0783f6b710a6fd8941aa",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299720+00:00",
-      "translatedAt": "2026-03-11T09:13:06.380973+00:00"
+      "status": "translated"
     },
     "references/FAQ.md": {
       "sourceHash": "sha256:821216efcbde4b1e629a83a1979c77a4cfd9f3b5c1f0ebcd273e3d828311d29b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299752+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381005+00:00"
+      "status": "translated"
     },
     "references/FormatDax.md": {
       "sourceHash": "sha256:1b225bea6ccef4ae3a996a02443464307999ea958824b62b7445206245daf7e6",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299777+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381034+00:00"
+      "status": "translated"
     },
     "references/index.md": {
       "sourceHash": "sha256:2a1ed8e5bca82a8c8f180ba910dd7fc87ee891adef3d59234248f751545da10e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299802+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381068+00:00"
+      "status": "translated"
     },
     "references/Keyboard-Shortcuts2.md": {
       "sourceHash": "sha256:e0807f2e3f258f1c0d62555107041dfbaa17650d7150dca186ef237431af4ced",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299827+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381105+00:00"
+      "status": "translated"
     },
     "references/policies.md": {
       "sourceHash": "sha256:9092b34841be3fdcf0021e529713a49d47346556b06073b3f81407ce15503c95",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299853+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381139+00:00"
+      "status": "translated"
     },
     "references/preferences.md": {
       "sourceHash": "sha256:6fe02d486971ff696c28b22e9e2a88662bb67d41cce4099342a1ba0f23c3089f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299882+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381177+00:00"
+      "status": "translated"
     },
     "references/release-history.md": {
       "sourceHash": "sha256:30f7a485e3e60ebd809664c4b93f58c8598b0bc7d0fc4bc3715305179c0ed133",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299914+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381215+00:00"
+      "status": "translated"
     },
     "references/roadmap.md": {
       "sourceHash": "sha256:dc7eb645cafbae20584b9422f22de6bba82c6c86aaaa41c3922f430b29d962d3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299941+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381252+00:00"
+      "status": "translated"
     },
     "references/Roadmap2-h.md": {
       "sourceHash": "sha256:269e6b5b5fc980f70aa642ad6882ed01909631c2afafe6daff399e6efdbea8f1",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299967+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381285+00:00"
+      "status": "translated"
     },
     "references/shortcuts3.md": {
       "sourceHash": "sha256:c58efcb0bfd40d9a32809349f54a791c86ee5a501718c4aaca7b72733e74347e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.299992+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381322+00:00"
+      "status": "translated"
     },
     "references/SQL-Server-2017-support-h.md": {
       "sourceHash": "sha256:db00c8642b2526adb31b4dfe2c7e56cc0040c8c34fec031125f7064bfa41b63c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300017+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381357+00:00"
+      "status": "translated"
     },
     "references/supported-files.md": {
       "sourceHash": "sha256:79abc83bd95b9f176b4567e47e482ce1100ad12913143dead97f7d0b03ba3720",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300041+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381410+00:00"
+      "status": "translated"
     },
     "references/TabularEditor.TOMWrapper-h.md": {
       "sourceHash": "sha256:603e7d30f3b77493a42ed2c269400c4139617bd026588328a78dfb16c92f317c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300066+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381585+00:00"
+      "status": "translated"
     },
     "references/toc.md": {
       "sourceHash": "sha256:2a8242ed589d5a5c1726553305054d7aa2a004cbd758bd270534ea0f26500621",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300097+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381708+00:00"
+      "status": "translated"
     },
     "references/user-options.md": {
       "sourceHash": "sha256:3547b53ce1fe8d2e177517d1937921bd4b8320f09ed7434e037e0d4db6f70981",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300130+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381778+00:00"
+      "status": "translated"
     },
     "references/user-settings-files-te2.md": {
       "sourceHash": "sha256:4a17aaa1b20a1c4d0f54affd7af348292b7f08a73504b0e3665f6e817f11f88f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300229+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381814+00:00"
+      "status": "translated"
     },
     "references/whats-new.md": {
       "sourceHash": "sha256:e3887e4264963f35ae76ae568968c9fb7249858520e60ffbbd8adf944e77491a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300271+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381833+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_0_1.md": {
       "sourceHash": "sha256:4f90835a7971b4820009525b985c3e279039d71151e54d45753130777aa671ce",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300307+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381869+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_0_10.md": {
       "sourceHash": "sha256:2b7777b0f54be87bc8bf9e080b4986f3e0d13e9431040fe5f80bc91980a286a4",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300344+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381887+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_0_2.md": {
       "sourceHash": "sha256:4c4fa9537b2f5691880e242791c3b091af34b0b9839ef2e7049adf4ed82a8801",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300378+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381901+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_0_3.md": {
       "sourceHash": "sha256:68d74ed0dd95601fccb517df398d555811ec85f50470b976df9b3b567a73a434",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300409+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381914+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_0_4.md": {
       "sourceHash": "sha256:eae59197c4a996948b54885cc9f9c4775e38ad255f256f5f8b35219c7e52db79",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300452+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381936+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_0_5.md": {
       "sourceHash": "sha256:c39eb7e39bb3704d5691b8a4c0c7c3f9d5525c46586f29ffac646c2aa55f78f1",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300487+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381950+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_0_6.md": {
       "sourceHash": "sha256:6c43864671d333449ff843ba761a878b5bd9c3a4e56407ee193f25e07f7fc82f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300521+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381964+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_0_7.md": {
       "sourceHash": "sha256:bd673da3dffc46611b124a292422bde1ecfa8360f0cc49732c029d610e6ad343",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300557+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381977+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_0_8.md": {
       "sourceHash": "sha256:df7eb26d1c7a747cbadc84887b83437c36b038f3578b32e07d656965a6fb8313",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300591+00:00",
-      "translatedAt": "2026-03-11T09:13:06.381992+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_0_9.md": {
       "sourceHash": "sha256:8efdca40e1b9b66def91c1f2fa0813171e54537686a5cc4e1a17be4fc9130723",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300624+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382006+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_10_0.md": {
       "sourceHash": "sha256:5049f3d981c44f82d9cecbc0e1c5ac0c8b5ab5137280e9957dfafdca0126b717",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300659+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382020+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_10_1.md": {
       "sourceHash": "sha256:875854de66aaec104359b884495bf6b51bca7325859d14fce9fe69057f6d7690",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300692+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382033+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_11_0.md": {
       "sourceHash": "sha256:021ecd692848551cfac260cbeb0b916c55df53273bbf2a197587ccce5b28d8db",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300725+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382046+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_12_0.md": {
       "sourceHash": "sha256:edb7df4534aed409999badff422f868c8c8014e8a13526c1cc378c44fc5e3837",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300759+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382058+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_12_1.md": {
       "sourceHash": "sha256:f16279a68ee3df9a44a514232180cb1f3c1eb876c79c5c248d5c4fc0f3606893",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300795+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382071+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_13_0.md": {
       "sourceHash": "sha256:499f64520f241e0fe9d67cc959f734a4ae2aafa0e02dec11ec9328198a176159",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300828+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382084+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_14_0.md": {
       "sourceHash": "sha256:31fd3fcc3de4989ef621536886603c7d14809ff8abb2b92ecee610cab80ea447",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300865+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382099+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_15_0.md": {
       "sourceHash": "sha256:f6e31f4a06cf0638a436461ca586375185fb6d83bb1f84769ca77714d6d85373",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300900+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382112+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_16_0.md": {
       "sourceHash": "sha256:1b4ac68461f244e79d06ab74147edda6273a66d810cd7a51ee208692bf570d25",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300937+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382126+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_16_1.md": {
       "sourceHash": "sha256:72b2fd9dfd0d056f91f0b57281b175432f4e1be79c2eddbd821fe69089461ad4",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.300974+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382139+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_16_2.md": {
       "sourceHash": "sha256:43b57904637bb57a6761d28eb7fe672e6c379f2dcd70d59c0a0e3f2d40690d7e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301011+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382155+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_17_0.md": {
       "sourceHash": "sha256:7a2234e15b112c51fa69cb1ee20242f34e58f555d2aac7ec85b3eaace801d276",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301048+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382169+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_17_1.md": {
       "sourceHash": "sha256:5506c04dceed3f9087ecc8ffccc73e0c846dc564a7bdc5dc8d3bb059521946cf",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301086+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382186+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_18_0.md": {
       "sourceHash": "sha256:794ca24e8ddacd1ea723639b9511a1550e9d5e9fbbc9e924f241c2871b9c2196",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301120+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382199+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_18_1.md": {
       "sourceHash": "sha256:821a9da8c370a714da2ea8e89bfad676e8115c366019ef36f46edf0e6127fe7e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301248+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382214+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_18_2.md": {
       "sourceHash": "sha256:cb3a96d6736f0a2394f226d3c1d7ffe1888781741ea19ed03b4dcff3fe8474a0",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301410+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382227+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_19_0.md": {
       "sourceHash": "sha256:c35acaddef5e1a0c26d8946c910cc60e73fd7387e68a4258c06befbbdb4633f2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301522+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382263+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_1_0.md": {
       "sourceHash": "sha256:22b2ffee0b524fa1ca565e36f263b612fc243df5f213ff2a39b86d1a52bad6b8",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301594+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382279+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_1_1.md": {
       "sourceHash": "sha256:fef2f46ee6c5fa38fd785bc0a3b0de38c79d2b654cd906c61577cae09b6511c3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301657+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382294+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_1_2.md": {
       "sourceHash": "sha256:8741312f51bdca558a909b8a5b6bb6466a9d9d9512960687ef611980b7fb13b3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301706+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382308+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_1_3.md": {
       "sourceHash": "sha256:4167126ca437e2f0bf9162170b8fd9b183b560e455767835b7593a2b91507e26",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301747+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382324+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_1_4.md": {
       "sourceHash": "sha256:a7ee27790de5c9dfe8e3c1fc919c6f7c8174da7bfa9f50633dbc75a9ae5e0ebb",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301787+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382338+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_1_5.md": {
       "sourceHash": "sha256:50e2bcd0f0552965f413a0675665e4aff37913526fce4b762fe745453a927309",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301832+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382354+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_1_6.md": {
       "sourceHash": "sha256:ee331894b3d1d983cebc386a7722c268df841b87982e7cb00b4c8238d91849f6",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301871+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382368+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_1_7.md": {
       "sourceHash": "sha256:0c2dd7f51db662b57a39a2d62b47947aa0b139449a1872382288078d3588de4d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301915+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382384+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_20_0.md": {
       "sourceHash": "sha256:b7b01a2570adb84248f5daefa4fb67c904aa3e86c5a6f76981b39eaac307e120",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301955+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382400+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_20_1.md": {
       "sourceHash": "sha256:c2c6eea97accfbe2a647977c0c5bf465d9ee8b1acf04d9873b32371268550fa6",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.301995+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382413+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_21_0.md": {
       "sourceHash": "sha256:42faa7c3ce84c0f5c7d7784e97add9b7bedaf38f2f6b3221b2bc304d864d43b6",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302035+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382427+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_22_0.md": {
       "sourceHash": "sha256:bc2ca2fdef85e48d39ea13b915a49c718151242d913c81e0e6882a1e9bbf6327",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302073+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382441+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_22_1.md": {
       "sourceHash": "sha256:ff9af1848652e8e0b7bd21630e2ac64b802c17454d37394ae9355efff2c23c67",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302116+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382454+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_23_0.md": {
       "sourceHash": "sha256:4d58b8bce271a54de47e21a2adef2fe4eda998ef7ca6a8bfb5b51fd9aa150dee",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302156+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382471+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_23_1.md": {
       "sourceHash": "sha256:3ff1341b1e0137f5fe9207ae386a30817be1497345d8cfa5df1a4b4b8dd6107f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302196+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382485+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_24_0.md": {
       "sourceHash": "sha256:ce832ff6d1995bc3638f1965f1ecefde7c0e49932f2fc42507b450193b179935",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302235+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382497+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_24_1.md": {
       "sourceHash": "sha256:80e1125a923675ad3e4504b46b37640376e194ff5ecbacf6a00330b20a8a6ec5",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302274+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382511+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_24_2.md": {
       "sourceHash": "sha256:893114bb290ec42da3d606631f01ed47ba501f9fcd4cf7d4bdcdd73af8ed9836",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302313+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382524+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_25_0.md": {
       "sourceHash": "sha256:1ea99aa120d56dd1cce9309c1cef346bb8bf62619420099a278e13d2ce123622",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302353+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382539+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_25_1.md": {
       "sourceHash": "sha256:a87e83af303e7f21e202aff5230470e76aff37a0f4d047a451875ebd1c17aad4",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302394+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382554+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_25_2.md": {
       "sourceHash": "sha256:112207b0ea9c112fff765c543e76ab4126a57aa808225f33b4540b5923b9e827",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302434+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382568+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_25_3.md": {
       "sourceHash": "sha256:4012345c860df7cd946fb6841ffae2b784639ddcbd5a219b16155addca036efa",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302476+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382582+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_25_5.md": {
       "sourceHash": "sha256:7144981670ed4e6fe18d1fb3e28b158cd32912ba22b1bd20798bd20d32cad741",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302519+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382596+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_2_0.md": {
       "sourceHash": "sha256:6ecf64ba7d0f65cd64c9b32ab46e3850b1c7ec033b9476a6192d5769c5bb12f2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302561+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382610+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_2_1.md": {
       "sourceHash": "sha256:ea8937b624cc1128a892a687bfd23fdc536638d8a81efef8a2048baf632cc7a5",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302634+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382623+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_2_2.md": {
       "sourceHash": "sha256:744d48cbe380075f3a3d442bebfff7444fa9023e2d3945a6e50898e4600841fe",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302693+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382635+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_2_3.md": {
       "sourceHash": "sha256:8c5389af01656e536faa8eabe7460e18c6aab4a62c543d80299e1cfdcc1afd50",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302738+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382649+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_3_0.md": {
       "sourceHash": "sha256:f15db7654636a547034b22e1f5bba04be511349b93e1aef08fde7010f43eabaf",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302780+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382663+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_3_1.md": {
       "sourceHash": "sha256:d272ef003c110516559a348f5295cf82a4ee1bff2e009b882cb7bc7cb51092e0",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302821+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382676+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_3_2.md": {
       "sourceHash": "sha256:d08125afaed41782db0bb8fbf83f2e78c28e8c46db887d437cfb31545a3932f9",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302863+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382691+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_3_3.md": {
       "sourceHash": "sha256:e5b8c6b56a4b96f45972422c4fbfa03fbb709c018d5f11590deb5c2b71d8fd83",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302904+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382705+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_3_4.md": {
       "sourceHash": "sha256:84c5028c878ef1c45ce054680d1333e441f23771611bfb7ea382481a1ffad6fc",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302948+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382721+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_3_5.md": {
       "sourceHash": "sha256:d5feae59a649bf8b811f5cf755c2916166de03e67770cd8e34b11553b38a87c0",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.302989+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382734+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_3_6.md": {
       "sourceHash": "sha256:65208a7bf0072e7a0d2c03b7bff4e915f51a9887a394bd439576b5146db3282c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303029+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382750+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_4_0.md": {
       "sourceHash": "sha256:f20043008ef5673020ea9daa33bf6f8587005a191248e74852f7b45b12506442",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303075+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382764+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_4_1.md": {
       "sourceHash": "sha256:429344a948a9ffe9a834aa625598625247f93164f72bb04d712ad3346f3b61b0",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303115+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382780+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_4_2.md": {
       "sourceHash": "sha256:36fb93b69db715b9f5b5b398530c3f9b58026020af5876ac9959996d4676cadb",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303153+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382794+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_5_0.md": {
       "sourceHash": "sha256:617775d38e30f4b632cee846088b385ad92586f59a159b2b47da954df2ceba36",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303196+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382810+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_5_1.md": {
       "sourceHash": "sha256:886e863e3e341e4f6f2247545ca023731546bb974b7280b8414f40a9b1d9984b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303238+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382825+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_6_0.md": {
       "sourceHash": "sha256:596c121f04782773b41eb122d56f79a8110a9cec2bd7356577d392dbe1dbdcb2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303282+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382841+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_7_0.md": {
       "sourceHash": "sha256:855ac7bfe0b863764f62d2fe015af40dff189ba01e925b209937f91183327ed1",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303322+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382856+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_7_1.md": {
       "sourceHash": "sha256:728972a441ab5076cd1c8d6fec671071f19709e59e8ba3461e75947efcf27b0b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303362+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382870+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_8_0.md": {
       "sourceHash": "sha256:22f799307afd7023f568e1ab561d84a04ab17873724b175fc5297a38122db9df",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303401+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382883+00:00"
+      "status": "translated"
     },
     "references/release-notes/3_9_0.md": {
       "sourceHash": "sha256:1a84abd1786511b5866baca58ae4e73d03b64a76948a8ff19a7fb2a2cc23988b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303457+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382897+00:00"
+      "status": "translated"
     },
     "references/release-notes/beta-16_6.md": {
       "sourceHash": "sha256:6f69b0b3fecd9de0dd92b1e8ddb826554594f74ec46c71a4a0e3548871b40290",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303504+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382911+00:00"
+      "status": "translated"
     },
     "references/release-notes/beta-17_4.md": {
       "sourceHash": "sha256:8172363576b8f546b2ebe6cd9ce517f99fdf56ce3ff29ea87eabd5bccfaeb3b3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303544+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382925+00:00"
+      "status": "translated"
     },
     "references/release-notes/beta-18_1.md": {
       "sourceHash": "sha256:9a598f4bc2cf7575f46ddb732bc0d96ba65659dd6dfb180488c5eb667e1ac53c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303582+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382939+00:00"
+      "status": "translated"
     },
     "references/release-notes/beta-18_2.md": {
       "sourceHash": "sha256:03a0435624e0bd41b2667a98fee65f90a4c80355f4a2237cd941ad85a138577e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303622+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382953+00:00"
+      "status": "translated"
     },
     "references/release-notes/beta-18_3.md": {
       "sourceHash": "sha256:7493081d9011736b7ac078eb92bcc615e41f8a76aa4d0af6f966ed5a9ea671f3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303661+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382966+00:00"
+      "status": "translated"
     },
     "references/release-notes/beta-18_4.md": {
       "sourceHash": "sha256:1c13e6e1d9e4d852a20450200cdd205a3f8ab0c655a8ccfe81a52ae0e2bf6246",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303699+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382980+00:00"
+      "status": "translated"
     },
     "references/release-notes/beta-18_5.md": {
       "sourceHash": "sha256:6d943c183893bf768292e4a185899aa9f78839292bc0839eb685583ddec03358",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303736+00:00",
-      "translatedAt": "2026-03-11T09:13:06.382994+00:00"
+      "status": "translated"
     },
     "kb/bpa-avoid-invalid-characters-descriptions.md": {
       "sourceHash": "sha256:e1ab3b636de9a49a6c62cc900b49c51e138d0ee3cc1588bd2c102b16056449f2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303781+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383039+00:00"
+      "status": "translated"
     },
     "kb/bpa-avoid-invalid-characters-names.md": {
       "sourceHash": "sha256:dbb102b008123984fdb1e23f2a6c47e8e6741cc85a28ad6c20111e1915548198",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303831+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383060+00:00"
+      "status": "translated"
     },
     "kb/bpa-avoid-provider-partitions-structured.md": {
       "sourceHash": "sha256:448f378b6fc6d8d04266a43c75302dd7252d623fb811555c1cf0fb8240e6c6cb",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303876+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383078+00:00"
+      "status": "translated"
     },
     "kb/bpa-calculation-groups-no-items.md": {
       "sourceHash": "sha256:3437dabfe44b34fa1a43cf96ce9853060fe16f0e3e742906bb14dc13860628c5",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303919+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383094+00:00"
+      "status": "translated"
     },
     "kb/bpa-data-column-source.md": {
       "sourceHash": "sha256:b7f6ae4783b0623ae359df487021142386d62c94ae785950e33cf58aa9b4964a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.303964+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383108+00:00"
+      "status": "translated"
     },
     "kb/bpa-date-table-exists.md": {
       "sourceHash": "sha256:cdd48113cf8b398961e8180b357e538ce668dac9d7957a7cd57f9b5f79383347",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304005+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383124+00:00"
+      "status": "translated"
     },
     "kb/bpa-do-not-summarize-numeric.md": {
       "sourceHash": "sha256:6ba62d431be290fc77e7a8292ce582d2e0f0a427b70b3ff8139aba8467c5fd9a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304045+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383140+00:00"
+      "status": "translated"
     },
     "kb/bpa-expression-required.md": {
       "sourceHash": "sha256:70979585bf4e27b51ab9fbc2ceb7fe01d0b380a6422f32e3dafb25831f505ccd",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304083+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383155+00:00"
+      "status": "translated"
     },
     "kb/bpa-format-string-columns.md": {
       "sourceHash": "sha256:e21436631db1326ec9bb6e5144c3596b6b4cf08fab5c2b50753baa3925c2c815",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304122+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383171+00:00"
+      "status": "translated"
     },
     "kb/bpa-format-string-measures.md": {
       "sourceHash": "sha256:3bc53cc91e1370a99162e252117bc534514140bd54d9f174d0b7905d97f63ac8",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304163+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383186+00:00"
+      "status": "translated"
     },
     "kb/bpa-hide-foreign-keys.md": {
       "sourceHash": "sha256:299852702c84c3e412fd28183dd3c3a1a14c7fed99391bfa4b9a55e2e95d83c6",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304203+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383201+00:00"
+      "status": "translated"
     },
     "kb/bpa-many-to-many-single-direction.md": {
       "sourceHash": "sha256:69900d8c9a83fa75dde15bb6015b975d1bafbfb55f5f9e81303705aa3ab792f8",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304246+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383217+00:00"
+      "status": "translated"
     },
     "kb/bpa-perspectives-no-objects.md": {
       "sourceHash": "sha256:fb6fdaf5edb9d02bfbfeff47bcab9ed92c613d4a73aafa23b3be594913b5fd4b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304293+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383231+00:00"
+      "status": "translated"
     },
     "kb/bpa-powerbi-latest-compatibility.md": {
       "sourceHash": "sha256:9385968afdcce0b67a7332c7ccd7efb4c633b4b485581a2d244530269082c52a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304350+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383246+00:00"
+      "status": "translated"
     },
     "kb/bpa-relationship-same-datatype.md": {
       "sourceHash": "sha256:a61a0744ac2497ace5ff92e59f31d563df61216a04ce64aeced2e30240d0ac4f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304402+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383261+00:00"
+      "status": "translated"
     },
     "kb/bpa-remove-auto-date-table.md": {
       "sourceHash": "sha256:96c8da84cf9e550ab9b1d40aa8253796cc325ffc2386bd875e350f5fadd4db52",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304454+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383277+00:00"
+      "status": "translated"
     },
     "kb/bpa-remove-unused-data-sources.md": {
       "sourceHash": "sha256:c49846acf4d5326b6dcfaffd42ae33d38a110cf111c14cca3476ca89d9819c32",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304500+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383292+00:00"
+      "status": "translated"
     },
     "kb/bpa-set-isavailableinmdx-false.md": {
       "sourceHash": "sha256:f3d18c1a403e7cad3d49570f209c68ce1ab539301c0e0099f4aa0bbe1e8f5f8c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304544+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383308+00:00"
+      "status": "translated"
     },
     "kb/bpa-set-isavailableinmdx-true-necessary.md": {
       "sourceHash": "sha256:b0bb9ccba1eaddf3abaa7def7c1fe17c9cbdfd7ea8e4f728d919f54b6b516f66",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304589+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383322+00:00"
+      "status": "translated"
     },
     "kb/bpa-specify-application-name.md": {
       "sourceHash": "sha256:e93bf3c1c57fa05f0522694980f7b511779ac127d6a6abf47571a4500d7320f9",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304739+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383339+00:00"
+      "status": "translated"
     },
     "kb/bpa-translate-descriptions.md": {
       "sourceHash": "sha256:241a9cbde9056914f8494f0d29e37d0f17266b9aaaf672c0c731610bc1130d94",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304813+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383354+00:00"
+      "status": "translated"
     },
     "kb/bpa-translate-display-folders.md": {
       "sourceHash": "sha256:aad20fc98449ad88378f6fcec1d4da25429fc0dd15710d8e0cddb4062944480d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304845+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383370+00:00"
+      "status": "translated"
     },
     "kb/bpa-translate-hierarchy-levels.md": {
       "sourceHash": "sha256:71d10084d1e0f2c546fce80d73388ea5da05135f813b8512fdf60a5593381711",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304869+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383384+00:00"
+      "status": "translated"
     },
     "kb/bpa-translate-perspectives.md": {
       "sourceHash": "sha256:b1ba0f2c572b59dd564e9fb2ac02cf2fc05d7fc495b0f6ab5406ee8cf4027912",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304893+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383399+00:00"
+      "status": "translated"
     },
     "kb/bpa-translate-visible-names.md": {
       "sourceHash": "sha256:fe5dd4b69830746c9af69840c8f8975c1e279f4c5959f90f7388ac27b0552001",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304916+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383414+00:00"
+      "status": "translated"
     },
     "kb/bpa-trim-object-names.md": {
       "sourceHash": "sha256:387cd8339cd496acfed940f772b2772b55a923269f4c2e8e90e5bd7f48a8bb75",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304945+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383429+00:00"
+      "status": "translated"
     },
     "kb/bpa-visible-objects-no-description.md": {
       "sourceHash": "sha256:a0eaaa105b4326ffa49f4e6240b4cb6f84e0007bfa455065d64bfe721bcf5f9e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.304979+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383446+00:00"
+      "status": "translated"
     },
     "kb/DI001.md": {
       "sourceHash": "sha256:25783e67a976a42a7cabe303f2c5381f58d07b67de7bc5f89b84f438c86cc299",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305013+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383461+00:00"
+      "status": "translated"
     },
     "kb/DI002.md": {
       "sourceHash": "sha256:561ec551f444faf58f604028df338a3bdb83cc37ac6cc296db53d1d0a2d8aa9b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305043+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383476+00:00"
+      "status": "translated"
     },
     "kb/DI003.md": {
       "sourceHash": "sha256:76cfa3c7a491d3b15f4dcbb8793f0ca59da12cb8aed5db6cee66b15f6943f027",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305073+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383492+00:00"
+      "status": "translated"
     },
     "kb/DI004.md": {
       "sourceHash": "sha256:1caf47bc6102b0081dc285ecbd9219dd710073c8f3abc8662af3f9d88cac7ed9",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305102+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383556+00:00"
+      "status": "translated"
     },
     "kb/DI005.md": {
       "sourceHash": "sha256:7febf977cd43487cb392144bd4223f352d1911c03cb2976f5a9d967f774dfd17",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305130+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383581+00:00"
+      "status": "translated"
     },
     "kb/DI006.md": {
       "sourceHash": "sha256:c78dba443fb20fb07079a810a4e2564660e9a0519068713000d203ad52fef6a8",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305159+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383603+00:00"
+      "status": "translated"
     },
     "kb/DI007.md": {
       "sourceHash": "sha256:8633dc8c141fadd780cfc42dd27c94d89556a53f03282a1cfade47249922a4b7",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305187+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383620+00:00"
+      "status": "translated"
     },
     "kb/DI008.md": {
       "sourceHash": "sha256:48f3168b416e177a426c6e933f7d5a48d8c18749f33693b1600f9882a4f25cbb",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305211+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383634+00:00"
+      "status": "translated"
     },
     "kb/DI009.md": {
       "sourceHash": "sha256:fb4313a94b1c454af18a68b8fb2e002f471e0a2d0d97bf100eb05363edff7a7a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305243+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383650+00:00"
+      "status": "translated"
     },
     "kb/DI010.md": {
       "sourceHash": "sha256:43867cfd04ef7ee82d8ee6a8cfb3080bb0e4a703ff4bc7e7d34c8a09728f6e4b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305275+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383668+00:00"
+      "status": "translated"
     },
     "kb/DI011.md": {
       "sourceHash": "sha256:c87f24040121b3efea63e5fee9fce16acf9f9075b76b9b2e4da412eb04720e35",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305308+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383685+00:00"
+      "status": "translated"
     },
     "kb/DI012.md": {
       "sourceHash": "sha256:33dd64c2880b75abea78fe99e999c79478066262665081c9269861c8aeacce10",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305358+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383699+00:00"
+      "status": "translated"
     },
     "kb/DI013.md": {
       "sourceHash": "sha256:b8ba1b12d831664e73e208b8778daea7cca6b39982b40aeac7f0c7cb67698fd1",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305386+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383712+00:00"
+      "status": "translated"
     },
     "kb/DI014.md": {
       "sourceHash": "sha256:2d337e7363fb934ca706e037e388710c2e05aefaea1c64f58b430ecec12cec99",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305410+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383727+00:00"
+      "status": "translated"
     },
     "kb/DI015.md": {
       "sourceHash": "sha256:08da38c3345155cb4d2826a3974c8aac8f7e5607baf2408bceefd7c3aa20f5eb",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305439+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383743+00:00"
+      "status": "translated"
     },
     "kb/DR001.md": {
       "sourceHash": "sha256:95d71ac50e5393d178a2810260b4d14ab400bd2472cedd7b34f4ab76eb4a95d0",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305473+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383762+00:00"
+      "status": "translated"
     },
     "kb/DR002.md": {
       "sourceHash": "sha256:8f34b0a352f00b138fabe27f6f0c94d486a3ce71e7940eea7596fc66dfa91de7",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305507+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383778+00:00"
+      "status": "translated"
     },
     "kb/DR003.md": {
       "sourceHash": "sha256:0c8e4590399adb2a53a133b4495750caa773cd5c79d3de9b75d9c97917c09ff5",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305542+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383876+00:00"
+      "status": "translated"
     },
     "kb/DR004.md": {
       "sourceHash": "sha256:bb39fa203c9290c3be5226702a613cfde1af0b151f3f4caca990a199f6aa875d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305636+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383914+00:00"
+      "status": "translated"
     },
     "kb/DR005.md": {
       "sourceHash": "sha256:05894b5b1a0ab1c9f641ced87626eaa332f3a0c575af29ed6faa3a59bfd0a40d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305762+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383953+00:00"
+      "status": "translated"
     },
     "kb/DR006.md": {
       "sourceHash": "sha256:1ba9f39490bc64310a41acd5cef7a9c3b939fa5d22c28ca3bd211b28b7cb0cc8",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305815+00:00",
-      "translatedAt": "2026-03-11T09:13:06.383978+00:00"
+      "status": "translated"
     },
     "kb/DR007.md": {
       "sourceHash": "sha256:53f849a4055bb6875e47677d8f85296ebf8877a9dc0933abd126b141ac13fea3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305855+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384006+00:00"
+      "status": "translated"
     },
     "kb/DR008.md": {
       "sourceHash": "sha256:37f6d0770424f1182e0dbeeea9045ce087d9a42eb8492160b130351d49f6dfae",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305891+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384034+00:00"
+      "status": "translated"
     },
     "kb/DR009.md": {
       "sourceHash": "sha256:b0bb1af2ba8ad830e16441b9e4e1f9bfee463f3d4df83c5a663b67167f617368",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305942+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384060+00:00"
+      "status": "translated"
     },
     "kb/DR010.md": {
       "sourceHash": "sha256:0d27c6fd8af6bafb4f91cb941cdca10fbcd3a624d0066daab88634354a3c5b4d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.305986+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384085+00:00"
+      "status": "translated"
     },
     "kb/DR011.md": {
       "sourceHash": "sha256:d2a50f75d0a4feb91e1ee4c7879e4839aa5d8193b0ad509da5fd892b655a6430",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306024+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384111+00:00"
+      "status": "translated"
     },
     "kb/DR012.md": {
       "sourceHash": "sha256:8394a610677b999f04ef2be435bb2b53b838fa924fcc8c6b195720fd20cc63cb",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306063+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384132+00:00"
+      "status": "translated"
     },
     "kb/DR013.md": {
       "sourceHash": "sha256:57fb582e349dc96388134c30775e3956f18f1370030163b93c7d5f6b2ed74264",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306102+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384154+00:00"
+      "status": "translated"
     },
     "kb/DR014.md": {
       "sourceHash": "sha256:204c5bed823d9cf87efdf87e45959ca9b172f4e066f8fd59f36417f1342ee8bf",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306143+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384175+00:00"
+      "status": "translated"
     },
     "kb/index.md": {
       "sourceHash": "sha256:86639aab87287a6fa22a24e4bd4e73b4c2101050db8fc40fec71f74578f6c6c2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306207+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384197+00:00"
+      "status": "translated"
     },
     "kb/RW001.md": {
       "sourceHash": "sha256:f1eb1722568740f11d8758df85670050ca3dcca28fa288911bdff6eeecd06c44",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306236+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384219+00:00"
+      "status": "translated"
     },
     "kb/RW002.md": {
       "sourceHash": "sha256:b7a7ad43cd3d1034dc3bf9f7507601265960becd05ea316fd1bd8802d01b117b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306264+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384240+00:00"
+      "status": "translated"
     },
     "kb/RW003.md": {
       "sourceHash": "sha256:e41f03c10279ba88c2bfb1b9d3a5eafeb8d9fa536f459809b57f0291407d25eb",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306292+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384263+00:00"
+      "status": "translated"
     },
     "kb/toc.md": {
       "sourceHash": "sha256:64a6d46f855afa5a748dc2f2393641abdc38473e142817a9e0e043a924e01c1c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306320+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384288+00:00"
+      "status": "translated"
     },
     "security/gdpr-delete.md": {
       "sourceHash": "sha256:e21e2f61114f7765cf5dab166ac9204244d3b6d056567ceb947410171480436c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306352+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384341+00:00"
+      "status": "translated"
     },
     "security/index.md": {
       "sourceHash": "sha256:956d0f7d76b544f0b5f70f7de43436d701221ca2c842efa8bef4ebb0e91179b3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306382+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384373+00:00"
+      "status": "translated"
     },
     "security/privacy-policy.md": {
       "sourceHash": "sha256:da89cecb73fc1b4de82c27c50ed76e6ca8f9365c1018f329a2502d855c5d9b1b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306420+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384402+00:00"
+      "status": "translated"
     },
     "security/security-privacy.md": {
       "sourceHash": "sha256:449a306a6aa7e7376460bfa3c802d42fa6e53781fac39a287a64bb2cea0e349c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306468+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384426+00:00"
+      "status": "translated"
     },
     "security/te3-eula.md": {
       "sourceHash": "sha256:52fed84c515c55a2415b99bfbece46051c6d12cd409b324fbd52fab222214435",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306503+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384459+00:00"
+      "status": "translated"
     },
     "security/third-party-notices.md": {
       "sourceHash": "sha256:38d3a67fc048930c6da47d2f6af09fbf463d002dced7a385e587389aab42f2f2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306537+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384482+00:00"
+      "status": "translated"
     },
     "security/toc.md": {
       "sourceHash": "sha256:cd3387b30602644747d9a3268b58f11db953524611b1a0c565af57d99cc954ff",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306566+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384505+00:00"
+      "status": "translated"
     },
     "troubleshooting/calendar-blank-value.md": {
       "sourceHash": "sha256:34be544d6ed74231467eb6250280305eec9ac7df68119d382026e4d6a3966169",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306609+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384544+00:00"
+      "status": "translated"
     },
     "troubleshooting/direct-lake-entity-updates-reverting.md": {
       "sourceHash": "sha256:02969e9dec89cad15a480bfe0ace86e8f3e8ef943b6e0a20ab233034846029c8",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306644+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384573+00:00"
+      "status": "translated"
     },
     "troubleshooting/index.md": {
       "sourceHash": "sha256:30d2e5d94e50a74d5ff8522ce6a738d1378034bc97e094cc7f319ce19148023b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306671+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384591+00:00"
+      "status": "translated"
     },
     "troubleshooting/licensing-activation.md": {
       "sourceHash": "sha256:d64bc93160e955bf39b7f7c316200882e301e466d0c40548e3f975bc258096fd",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306699+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384609+00:00"
+      "status": "translated"
     },
     "troubleshooting/locale-not-supported.md": {
       "sourceHash": "sha256:381d1e4b89e12bd52d76bf83d583c5df01918b3b1e0facdc2b9895c312db7290",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306725+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384635+00:00"
+      "status": "translated"
     },
     "troubleshooting/proxy-settings.md": {
       "sourceHash": "sha256:312d26f827c50d0daaf4bc95aeb42b6e263330046db563374d5dc44c3d8524ab",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306755+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384659+00:00"
+      "status": "translated"
     },
     "troubleshooting/toc.md": {
       "sourceHash": "sha256:123158de09eea87e20e872f5d2eb233c6cbed3f6a585170c2c304edcc4483577",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306785+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384680+00:00"
+      "status": "translated"
     },
     "tutorials/calendars.md": {
       "sourceHash": "sha256:cc9cfd5bd837c7e00deb3e1753e72ffa4a7e38441465f2debc08abfdc66fc138",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306813+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384710+00:00"
+      "status": "translated"
     },
     "tutorials/connecting-to-azure-databricks.md": {
       "sourceHash": "sha256:05f30942709cf7b0b25b56e593bc29c36564c8b85525eb6240b9c6dcae674156",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306841+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384737+00:00"
+      "status": "translated"
     },
     "tutorials/creating-macros.md": {
       "sourceHash": "sha256:aaaf277d68310b19f1cb98127df696d654b1729b083a23211f5050435cddde01",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306884+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384760+00:00"
+      "status": "translated"
     },
     "tutorials/detail-rows-expression.md": {
       "sourceHash": "sha256:525e717f1598862cc24d406a29ff960782a20bd05c80bf87acec6d4e2b26ca3a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306921+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384784+00:00"
+      "status": "translated"
     },
     "tutorials/direct-lake-guidance.md": {
       "sourceHash": "sha256:d2f12ce024b19491468051cd810308da7147965aa84fecee4cc255b6a929705d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306948+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384806+00:00"
+      "status": "translated"
     },
     "tutorials/importing-tables.md": {
       "sourceHash": "sha256:6dee33a9de491f235d0520976222c5fa84aecea75e9c20094fdef12d8bf7abf5",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.306973+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384832+00:00"
+      "status": "translated"
     },
     "tutorials/index.md": {
       "sourceHash": "sha256:9c632bdce66bdb47d8a087fa61be80247151cdf61601ceb834481f8ef49da3ec",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307040+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384856+00:00"
+      "status": "translated"
     },
     "tutorials/new-as-model.md": {
       "sourceHash": "sha256:3a3cf1f4b09fa5c93afeef984c89b548eb7c289e47e0b7f64cd61dce72ab88e2",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307100+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384879+00:00"
+      "status": "translated"
     },
     "tutorials/new-pbi-model.md": {
       "sourceHash": "sha256:8461303b7161afcaf58f8513c85ae2a48f5e3d0c19c4bd45c2fef4149e3de363",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307138+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384896+00:00"
+      "status": "translated"
     },
     "tutorials/powerbi-xmla.md": {
       "sourceHash": "sha256:4ec8d37ee8644e56a17ac7a3662a38de1498b8fdca1ab8a737109fa971ee0881",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307190+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384913+00:00"
+      "status": "translated"
     },
     "tutorials/toc.md": {
       "sourceHash": "sha256:e79cc11f5e05d84a3f615483f2822ce848db0c6f537da131957927b6569c643a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307222+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384933+00:00"
+      "status": "translated"
     },
     "tutorials/udfs.md": {
       "sourceHash": "sha256:dcc0d3f956f4e241a9a6653e852f3823f57fcad790918099135eecc649efa3cf",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307254+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384950+00:00"
+      "status": "translated"
     },
     "tutorials/user-defined-aggregations.md": {
       "sourceHash": "sha256:8e353aa782edadd1734d8e8c4c4e30b41b3edd150956cb0289c771002181005a",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307284+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384969+00:00"
+      "status": "translated"
     },
     "tutorials/workspace-mode.md": {
       "sourceHash": "sha256:f90519dd1b92514690fdd3530c190719ceb7a6526ed5911a534f09800ff867ff",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307314+00:00",
-      "translatedAt": "2026-03-11T09:13:06.384991+00:00"
+      "status": "translated"
     },
     "tutorials/data-security/data-security-about.md": {
       "sourceHash": "sha256:67f06a996eb51a92f12af6334fb67e35bd0dbe90b7087f1d26a37ddfd4909381",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307343+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385033+00:00"
+      "status": "translated"
     },
     "tutorials/data-security/data-security-setup-ols.md": {
       "sourceHash": "sha256:ba55db45323585ce76de9ac9702c90a0d6e0836161a3eabcecdb779351f653f7",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307371+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385057+00:00"
+      "status": "translated"
     },
     "tutorials/data-security/data-security-setup-rls.md": {
       "sourceHash": "sha256:37aa92c73edc07e2f9d01afd3de6d85045b6730da6ddbbcc452f5d14b43e9460",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307397+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385078+00:00"
+      "status": "translated"
     },
     "tutorials/data-security/data-security-testing.md": {
       "sourceHash": "sha256:bc93809b7fafe060954311b3a1d97aecce69e906f20fca244220384fcc1f1147",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307425+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385098+00:00"
+      "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-about.md": {
       "sourceHash": "sha256:80c779772e0e1f5638302bee4ae27ffcec86249050f34ca30ccdb8031537e894",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307454+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385148+00:00"
+      "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-modify.md": {
       "sourceHash": "sha256:71a9811c9adec7c0ea3e188bc4d604eec123f11854c98611ff1e98d4582f6305",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307479+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385176+00:00"
+      "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-schema.md": {
       "sourceHash": "sha256:aa35afdc0710e4e8ac5373c1a16ee44843848ecf0669e61e49769217a0b04d6d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307508+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385195+00:00"
+      "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-setup.md": {
       "sourceHash": "sha256:6899e4a1b7393cd795b3fec5bcd60339648769fc91e279f8e04102a97d7c9f3d",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307540+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385213+00:00"
+      "status": "translated"
     },
     "tutorials/incremental-refresh/incremental-refresh-workspace-mode.md": {
       "sourceHash": "sha256:98f31b4429d3a98a7541041c417d062257da648ffd393b7e44bb7c5429660953",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307583+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385244+00:00"
+      "status": "translated"
     },
     "whats-new/3-11-0.html": {
       "sourceHash": "sha256:8e741c7bee681e80aef9a0cac12b2c4a08193ba1a64e896f825400209a615dd0",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307610+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385284+00:00"
+      "status": "translated"
     },
     "whats-new/3-12-0.html": {
       "sourceHash": "sha256:1185bd5e0f896cf0241dba6051a1d23f8122df33d35ca629751388ca46e5411b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307636+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385308+00:00"
+      "status": "translated"
     },
     "whats-new/3-12-1.html": {
       "sourceHash": "sha256:0e1800850f435b7939eaf29d4c05564b315198f49bd8a9539dd180c2289aaca4",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307660+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385329+00:00"
+      "status": "translated"
     },
     "whats-new/3-13-0.html": {
       "sourceHash": "sha256:fe072740d52a6d0664d5a54627f904603dca096280c9a0c3e4d67fa0dfa89236",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307686+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385349+00:00"
+      "status": "translated"
     },
     "whats-new/3-14-0.html": {
       "sourceHash": "sha256:516c949f7443084eeb6e3c4c5981e5ff4960ddd65622dd0f34b5b9c47b81431e",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307710+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385370+00:00"
+      "status": "translated"
     },
     "whats-new/3-15-0.html": {
       "sourceHash": "sha256:21384e1d1473d31ef1d1076640a94dc9f48033a072ae9e56e37b700954319083",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307735+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385391+00:00"
+      "status": "translated"
     },
     "whats-new/3-16-0.html": {
       "sourceHash": "sha256:2ea751dad6a56088eb1e35934df0e3def7ceb65e15877e869778a2c946bbb322",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307758+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385410+00:00"
+      "status": "translated"
     },
     "whats-new/3-17-0.html": {
       "sourceHash": "sha256:5d0ae23d2d1a98813d3c06f3c50039838fe3b4e024ef3b4d61462469d9d904a3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307783+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385432+00:00"
+      "status": "translated"
     },
     "whats-new/3-17-1.html": {
       "sourceHash": "sha256:5d0ae23d2d1a98813d3c06f3c50039838fe3b4e024ef3b4d61462469d9d904a3",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307807+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385453+00:00"
+      "status": "translated"
     },
     "whats-new/3-18-0.html": {
       "sourceHash": "sha256:379bc949c979ed11804eacb3090b760cb0b67f7e10d4a01b1b7e314b1fe98739",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307832+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385476+00:00"
+      "status": "translated"
     },
     "whats-new/3-18-1.html": {
       "sourceHash": "sha256:264150226e01169f6dd8569bb48d8c13192aedd54d78d17b51df115ca260c0c9",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307855+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385500+00:00"
+      "status": "translated"
     },
     "whats-new/3-18-2.html": {
       "sourceHash": "sha256:07289f60b049811a09e673f8642fe4dcbc50efddb8ad77718cf55d16e4b69200",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307880+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385523+00:00"
+      "status": "translated"
     },
     "whats-new/3-19-0.html": {
       "sourceHash": "sha256:264b6c6843e8a6c737c5e88953856e08a9ece0ebd39ac78b2a58cef1b69796db",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307905+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385545+00:00"
+      "status": "translated"
     },
     "whats-new/3-20-0.html": {
       "sourceHash": "sha256:165affb599d769434c2e227fc63aa174509c08ec5a501e357ff028b3bb26bbd7",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307932+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385582+00:00"
+      "status": "translated"
     },
     "whats-new/3-21-0.html": {
       "sourceHash": "sha256:0560eecc9d57bfa393d9415121f00a06c9e0692db7bbf924c81fd5e32f99283c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307956+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385610+00:00"
+      "status": "translated"
     },
     "whats-new/3-22-0.html": {
       "sourceHash": "sha256:d5c122abcc84f8fdea50724e96e35435f1ce4e71e204cbd4b4bf2822dc98bbb1",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.307980+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385631+00:00"
+      "status": "translated"
     },
     "whats-new/3-22-1.html": {
       "sourceHash": "sha256:65af209383626dfef5ecc828f1d6050cf336ff370c7f3b58c2233352ab39ef02",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308003+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385652+00:00"
+      "status": "translated"
     },
     "whats-new/3-23-0.html": {
       "sourceHash": "sha256:c8a1848ae04394a58fe7146ebfa57ace75dafed1fbe735e6feba8a43d805ac11",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308027+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385675+00:00"
+      "status": "translated"
     },
     "whats-new/3-23-1.html": {
       "sourceHash": "sha256:258468e5a7e6f2437aa12b410807dceabf6d5b5060c8607ea88b157ee8dc2b8f",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308052+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385696+00:00"
+      "status": "translated"
     },
     "whats-new/3-24-0.html": {
       "sourceHash": "sha256:addd6ae83a458d866e21cf5b566afd011b438d822206582320568f2a5efa2c5b",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308076+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385718+00:00"
+      "status": "translated"
     },
     "whats-new/3-24-1.html": {
       "sourceHash": "sha256:971a290fd477bc5955d7e55e0868b296e8b4016774ca60206f9e04d719a8e273",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308098+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385740+00:00"
+      "status": "translated"
     },
     "whats-new/3-24-2.html": {
       "sourceHash": "sha256:b4c35a93026703f8aa4b295d1bca544dd64c9fbbd0f191e6c484aaed0d501d02",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308122+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385763+00:00"
+      "status": "translated"
     },
     "whats-new/3-25-0.html": {
       "sourceHash": "sha256:ecb851a842a1bb429299b338684019c5e58c5a41d49e50f52bde33460e1d17c4",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308214+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385785+00:00"
+      "status": "translated"
     },
     "whats-new/3-25-1.html": {
       "sourceHash": "sha256:0164edb73af4cbdf606868a921664852b195a2230d52ae4df0b77028c40ea798",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308249+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385809+00:00"
+      "status": "translated"
     },
     "whats-new/3-25-2.html": {
       "sourceHash": "sha256:d698e79f8caf50a91fb5563c900116a4ed42d0259db6412db4cc0e1a44ad7dca",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308275+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385830+00:00"
+      "status": "translated"
     },
     "whats-new/3-25-3.html": {
       "sourceHash": "sha256:fa93ee8ef8188bc519bde65fb7c222301d13ac1867b883028505bc3a5a7e76c0",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308301+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385853+00:00"
+      "status": "translated"
     },
     "whats-new/generic.html": {
       "sourceHash": "sha256:5db66c26cee732683b90bc9374802446f747ffb7ee43cbbcad0e977805871f2c",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308326+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385885+00:00"
+      "status": "translated"
     },
     "whats-new/index.html": {
       "sourceHash": "sha256:5b9c85b1dffecec8f9912e589adb5fb38de25f01803f8a3618053f6994580251",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308350+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385908+00:00"
+      "status": "translated"
     },
     "index.md": {
       "sourceHash": "sha256:81a81e409a97ca4d17b0fc503180b5ef6926ce0ba00e62d9b257f58613dc5697",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308376+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385937+00:00"
+      "status": "translated"
     },
     "toc.yml": {
       "sourceHash": "sha256:364efc09fddb9e225cd3fa156dce1c88b52b39f816af4ea9d49622a2df522a65",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308401+00:00",
-      "translatedAt": null
+      "status": "translated"
     },
     "404.html": {
       "sourceHash": "sha256:a630d6e508ff79709689c70f0dba4244fc700783402a0a6c75f4018f61cec3b5",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308426+00:00",
-      "translatedAt": "2026-03-11T09:13:06.385990+00:00"
+      "status": "translated"
     },
     "_ui-strings.json": {
       "sourceHash": "sha256:b97210e8c2ad0c87c8f5ed95f8f2cc31c85725c96907e91c5ba950df78d14963",
-      "status": "translated",
-      "lastChecked": "2026-03-20T12:36:50.308451+00:00",
-      "translatedAt": "2026-03-11T09:13:06.386013+00:00"
+      "status": "translated"
     }
   },
   "summary": {

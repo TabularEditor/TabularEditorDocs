@@ -15,6 +15,7 @@ Usage:
     python sync-localized-content.py --status              # Show all languages
     python sync-localized-content.py --status es           # Show Spanish details
     python sync-localized-content.py --sync es             # Sync Spanish content
+    python sync-localized-content.py --shared-only es      # Sync only shared dirs (assets, api)
     python sync-localized-content.py --init es             # Initialize tracking
     python sync-localized-content.py --mark-translated es  # Mark all as translated
     python sync-localized-content.py --json                # JSON output for CI
@@ -25,7 +26,6 @@ import json
 import os
 import shutil
 import sys
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -56,7 +56,6 @@ def load_translation_status(lang: str) -> dict[str, Any]:
     if not status_path.exists():
         return {
             "language": lang,
-            "lastSync": None,
             "sourceBaseline": str(CONTENT_DIR),
             "files": {},
             "summary": {
@@ -76,9 +75,6 @@ def save_translation_status(lang: str, status: dict[str, Any]) -> None:
     """Save the translation status file for a language."""
     status_path = LOCALIZED_DIR / lang / STATUS_FILENAME
     status_path.parent.mkdir(parents=True, exist_ok=True)
-    
-    # Update timestamp
-    status["lastSync"] = datetime.now(timezone.utc).isoformat()
     
     # Recalculate summary
     files = status.get("files", {})
@@ -156,27 +152,21 @@ def check_translation_status(lang: str, source_files: dict[str, str]) -> dict[st
             new_files[rel_path] = {
                 "sourceHash": source_hash,
                 "status": STATUS_UNTRANSLATED,
-                "lastChecked": datetime.now(timezone.utc).isoformat()
             }
         else:
             stored_hash = file_info.get("sourceHash", "")
-            
+
             if stored_hash == source_hash:
                 # Source hasn't changed, translation is current
                 new_files[rel_path] = {
                     "sourceHash": source_hash,
                     "status": STATUS_TRANSLATED,
-                    "lastChecked": datetime.now(timezone.utc).isoformat(),
-                    "translatedAt": file_info.get("translatedAt", datetime.now(timezone.utc).isoformat())
                 }
             else:
                 # Source changed since translation was made
                 new_files[rel_path] = {
                     "sourceHash": source_hash,
                     "status": STATUS_OUTDATED,
-                    "previousHash": stored_hash,
-                    "lastChecked": datetime.now(timezone.utc).isoformat(),
-                    "translatedAt": file_info.get("translatedAt")
                 }
     
     status["files"] = new_files
@@ -208,7 +198,6 @@ def sync_language(lang: str, source_files: dict[str, str], dry_run: bool = False
                 shutil.copy2(source_file, dest_file)
                 # Update status to untranslated (since we replaced with English)
                 file_info["status"] = STATUS_UNTRANSLATED
-                file_info["replacedAt"] = datetime.now(timezone.utc).isoformat()
             counts["replaced"] += 1
             print(f"  Replaced (outdated): {rel_path}")
         elif file_status == STATUS_UNTRANSLATED:
@@ -289,6 +278,31 @@ def sync_english(dry_run: bool = False) -> dict[str, int]:
     return counts
 
 
+def sync_shared_only(lang: str, dry_run: bool = False) -> dict[str, int]:
+    """Sync only shared directories (assets, api) for a language.
+
+    Used when full translation sync is disabled (Crowdin manages translations).
+    Skips hash comparison and translation status tracking.
+    """
+    localized_content_dir = LOCALIZED_DIR / lang / "content"
+    counts = {"synced_dirs": 0}
+
+    if not dry_run:
+        localized_content_dir.mkdir(parents=True, exist_ok=True)
+
+    for dir_name in get_shared_directories():
+        src = CONTENT_DIR / dir_name
+        dest = localized_content_dir / dir_name
+        if src.exists() and not dry_run:
+            if dest.exists():
+                shutil.rmtree(dest)
+            shutil.copytree(src, dest)
+            print(f"  Synced shared: {dir_name}/")
+            counts["synced_dirs"] += 1
+
+    return counts
+
+
 def init_language(lang: str, source_files: dict[str, str]) -> None:
     """Initialize translation tracking for an existing language.
     
@@ -302,7 +316,6 @@ def init_language(lang: str, source_files: dict[str, str]) -> None:
     
     status = {
         "language": lang,
-        "lastSync": datetime.now(timezone.utc).isoformat(),
         "sourceBaseline": str(CONTENT_DIR),
         "files": {}
     }
@@ -315,15 +328,12 @@ def init_language(lang: str, source_files: dict[str, str]) -> None:
             status["files"][rel_path] = {
                 "sourceHash": source_hash,
                 "status": STATUS_TRANSLATED,
-                "lastChecked": datetime.now(timezone.utc).isoformat(),
-                "translatedAt": datetime.now(timezone.utc).isoformat()
             }
         else:
             # File missing - mark as untranslated
             status["files"][rel_path] = {
                 "sourceHash": source_hash,
                 "status": STATUS_UNTRANSLATED,
-                "lastChecked": datetime.now(timezone.utc).isoformat()
             }
     
     save_translation_status(lang, status)
@@ -340,20 +350,17 @@ def mark_translated(lang: str, file_paths: list[str] | None, source_files: dict[
     If file_paths is None, marks all files in the language.
     """
     status = load_translation_status(lang)
-    now = datetime.now(timezone.utc).isoformat()
-    
+
     if file_paths is None:
         # Mark all files
         file_paths = list(source_files.keys())
-    
+
     updated = 0
     for rel_path in file_paths:
         if rel_path in source_files:
             status["files"][rel_path] = {
                 "sourceHash": source_files[rel_path],
                 "status": STATUS_TRANSLATED,
-                "lastChecked": now,
-                "translatedAt": now
             }
             updated += 1
     
@@ -458,6 +465,11 @@ def main() -> int:
         help="Sync content for a language (use 'en' for English)"
     )
     parser.add_argument(
+        "--shared-only",
+        metavar="LANG",
+        help="Sync only shared directories (assets, api) for a language"
+    )
+    parser.add_argument(
         "--init",
         metavar="LANG",
         help="Initialize tracking for existing translations"
@@ -484,10 +496,18 @@ def main() -> int:
     )
     
     args = parser.parse_args()
-    
+
+    # --shared-only doesn't need source file hashes, handle it early
+    if args.shared_only:
+        lang = args.shared_only
+        print(f"Syncing shared directories for '{lang}'...")
+        counts = sync_shared_only(lang, args.dry_run)
+        print(f"\nShared sync complete: {counts['synced_dirs']} directory(ies) synced")
+        return 0
+
     # Get source files (needed for most operations)
     source_files = get_source_files()
-    
+
     if args.status:
         if args.status == "__all__":
             print_status_summary(args.json)
@@ -498,7 +518,7 @@ def main() -> int:
     if args.sync:
         lang = args.sync
         print(f"Syncing content for '{lang}'...")
-        
+
         if lang == "en":
             counts = sync_english(args.dry_run)
             print(f"\nEnglish sync complete: {counts['copied']} files copied")
@@ -509,7 +529,7 @@ def main() -> int:
             print(f"  Replaced (outdated->English): {counts['replaced']}")
             print(f"  Copied (new->English): {counts['copied']}")
         return 0
-    
+
     if args.init:
         init_language(args.init, source_files)
         return 0
