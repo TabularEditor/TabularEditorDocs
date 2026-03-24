@@ -208,7 +208,6 @@ in
 
 ***
 
-<a name="overview-of-all-properties"></a>
 #### 所有属性概览
 
 _下面概述了 Data model 中用于配置增量刷新的 TOM 属性：_
