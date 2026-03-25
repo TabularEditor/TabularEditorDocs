@@ -2,7 +2,7 @@
 uid: built-in-bpa-rules
 title: Reglas BPA integradas
 author: Morten Lønskov
-updated: 2026-01-09
+updated: 2026-03-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,14 +16,14 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Función de la Edición Enterprise que ofrece 27 reglas de prácticas recomendadas seleccionadas e incorporadas de forma nativa en Tabular Editor 3, con integración en la base de conocimiento.
+description: Enterprise Edition feature providing 28 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
 ---
 
 # Reglas BPA integradas
 
 ## Información general
 
-La Edición Enterprise de Tabular Editor 3 incluye 27 reglas de prácticas recomendadas integradas. Estas reglas cubren problemas habituales en el desarrollo de un modelo semántico y se actualizan automáticamente con cada versión.
+Tabular Editor 3 Enterprise Edition includes 28 built-in best practice rules. Estas reglas cubren problemas habituales en el desarrollo de un modelo semántico y se actualizan automáticamente con cada versión.
 
 A diferencia de las reglas personalizadas almacenadas en archivos JSON, las reglas integradas:
 
@@ -37,7 +37,7 @@ A diferencia de las reglas personalizadas almacenadas en archivos JSON, las regl
 
 ### Categorías de reglas
 
-Las 27 reglas integradas cubren cuatro áreas:
+The 28 built-in rules cover four areas:
 
 - **Prevención de errores**: caracteres no válidos, expresiones ausentes, incompatibilidades de tipo de datos
 - **Rendimiento**: relaciones, particiones, agregaciones
@@ -82,7 +82,7 @@ Las reglas integradas usan prefijos de ID reservados. Cuando creas una regla per
 
 ## Catálogo de reglas integradas
 
-La versión inicial incluye las siguientes reglas:
+The current set includes the following rules:
 
 ### Reglas de prevención de errores
 
@@ -92,6 +92,7 @@ La versión inicial incluye las siguientes reglas:
 - [La columna de datos debe tener un origen](xref:kb.bpa-data-column-source)
 - [Las columnas de relación deben tener el mismo tipo de datos](xref:kb.bpa-relationship-same-datatype)
 - [Evita las particiones del proveedor con orígenes de datos estructurados](xref:kb.bpa-avoid-provider-partitions-structured)
+- [Use Compound Names for User-Defined Functions](xref:kb.bpa-udf-use-compound-names)
 
 ### Reglas de rendimiento
 
