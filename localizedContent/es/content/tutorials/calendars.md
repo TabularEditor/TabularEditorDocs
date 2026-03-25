@@ -158,21 +158,11 @@ Las columnas asociadas tienen el mismo comportamiento de filtro que la columna p
 
 ![Panel de columnas asociadas en el Editor de calendario](~/content/assets/images/tutorials/calendar-associated-columns.png)
 
-## Limitaciones conocidas del Editor de calendario
+#### Sort By Columns
 
-- **Columnas "Ordenar por" y columnas asociadas**
+When a Primary time unit column has a **Sort By** column defined, the Sort By column is automatically treated as an associated column. This ensures that both columns receive the same filter behavior during time intelligence calculations, aligning with how Analysis Services processes calendar configurations.
 
-Cuando una columna se usa como columna **Ordenar por** de una columna principal de la unidad de tiempo, Analysis Services la trata implícitamente como una columna asociada. No deberías añadir explícitamente esa columna de Ordenar por como columna asociada en el Editor de calendario, ya que esto provocará un error de Analysis Services (asignación duplicada).
-
-Por ejemplo, si estableces `MonthName` como columna principal para "Mes del año" y `MonthName` tiene configurada `MonthNumber` como su columna Ordenar por, entonces `MonthNumber` queda asociada implícitamente. En este caso, no necesitas (ni debes) añadir `MonthNumber` como columna asociada explícita. La columna Ordenar por seguirá proporcionando el comportamiento mejorado del calendario esperado (incluida la gestión correcta de `FILTER` y `REMOVEFILTERS()`), ya que la asociación se infiere.
-
-Ten en cuenta que este comportamiento es asimétrico: si, en su lugar, estableces la columna Ordenar por (p. ej., `MonthNumber`) como columna principal de unidad de tiempo, entonces la columna de presentación (p. ej., `MonthName`) **no** se trata automáticamente como asociada. En ese caso, si lo deseas, puedes añadir explícitamente la columna de visualización como columna asociada.
-
-- **Las columnas ocultas no se muestran**
-
-Las columnas cuya propiedad **Hidden** está establecida en `True` no aparecen en las listas desplegables de columnas del Editor de calendario ni en los paneles **Columnas asociadas** y **Columnas relacionadas con el tiempo**. Esto es un comportamiento no deseado, ya que es posible que las columnas ocultas aún deban usarse para la configuración del calendario (por ejemplo, las columnas de clave numérica usadas para ordenar suelen ocultarse a los usuarios finales).
-
-Una versión futura de Tabular Editor solucionará estas limitaciones.
+For example, if you map a `MonthName` column to "Month of Year" and `MonthName` is sorted by a `MonthNumber` column, the `MonthNumber` column is automatically associated with the time unit. You don't need to manually add the Sort By column to the Associated Columns panel—the Calendar Editor handles this automatically.
 
 ### Columnas relacionadas con el tiempo
 
