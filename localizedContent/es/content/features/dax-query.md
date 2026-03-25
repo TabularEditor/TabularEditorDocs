@@ -31,7 +31,7 @@ El Editor de DAX integrado y con reconocimiento de contexto garantiza que, al in
 
 ## Opciones de Consulta DAX
 
-La ventana de Consulta DAX tiene cinco opciones de consulta diferentes.
+The DAX query window has six different query options.
 
 ![Barra de herramientas de Consulta Dax](~/content/assets/images/features/dax_query_window/dax_query_toolbar.png)
 
@@ -74,7 +74,7 @@ Los atajos de teclado para estos comandos son:
 - Aplicar (F7)
 - Aplicar medidas y sincronizar (Mayús+F7)
 - Aplicar selección (F8)
-- Aplicar selección y sincronizar (Mayús F7)
+- Apply Selection and Sync (Shift+F8)
 
 ## Ejemplo de Consulta DAX
 
