@@ -108,18 +108,14 @@ En algunos casos, es posible corregir automáticamente los problemas en los obje
 ```json
 {
     "ID": "FKCOLUMNS_HIDDEN",
-    "Name": "Ocultar columnas de clave externa",
+    "Name": "Hide foreign key columns",
     "Category": null,
-    "Description": "Las columnas utilizadas en el lado Many de una relación deben estar ocultas.",
+    "Description": "Columns used on the Many side of a relationship should be hidden.",
     "Severity": 1,
     "Scope": "Column",
     "Expression": "Model.Relationships.Any(FromColumn = outerIt) and not IsHidden and not Table.IsHidden",
     "FixExpression": "IsHidden = true",
-    "Compatibility": [
-      1200,
-      1400
-    ],
-    "IsValid": false
+    "CompatibilityLevel": 1200
 }
 ```
 
