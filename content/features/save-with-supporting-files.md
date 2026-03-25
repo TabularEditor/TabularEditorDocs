@@ -108,7 +108,7 @@ When your semantic model is saved with supporting files and synchronized to your
 
 When your model is synchronized to Microsoft Fabric/Power BI, the semantic model name displayed in the workspace is based on the `displayName` property in the .platform file, which is automatically set from the Database `Name` property in Tabular Editor. This means the name you configure in Tabular Editor will be the name displayed in Fabric/Power BI.
 
-Tabular Editor automatically sets the model culture to **en-US** when saving with supporting files. This ensures the model culture is present when synchronizing with Fabric, preventing uncommitted changes that can occur if the culture is not set during the initial synchronization.
+Tabular Editor automatically sets the model culture to **en-US** when saving with supporting files, if the model does not already have a culture specified. This ensures the model culture is present when synchronizing with Fabric, preventing uncommitted changes that can occur if the culture is not set during the initial synchronization.
 
 For more information, see:
 - [Microsoft Fabric Git integration documentation](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/intro-to-git-integration?tabs=azure-devops)

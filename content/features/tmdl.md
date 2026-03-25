@@ -4,7 +4,6 @@ title: Tabular Model Definition Language (TMDL)
 author: Daniel Otykier
 updated: 2023-05-22
 applies_to:
-applies_to:
   products:
     - product: Tabular Editor 2
       full: true

@@ -4,7 +4,6 @@ title: Best Practice Analyzer view
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
-applies_to:
   products:
     - product: Tabular Editor 2
       full: true

@@ -2,7 +2,7 @@
 uid: policies
 title: Policies
 author: Daniel Otykier
-updated: 2024-10-30
+updated: 2026-03-25
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -44,10 +44,11 @@ Below is a listing of the policies that can be controlled. To enforce one or mor
 | DisableDaxOptimizerUpload | **(TE3 Only)** Users will not be allowed to upload VPAX files through the DAX Optimizer integration feature. Implicitly enforced when `DisableDaxOptimizer` is enforced. |
 | RequireDaxOptimizerObfuscation | **(TE3 Only)** Users will not be allowed to upload un-obfuscated (clear text) VPAX files through the DAX Optimizer integration feature. Implicitly enforced when `DisableDaxOptimizer` or `DisableDaxOptimizerUpload` is enforced. |
 | DisableDaxPackageManager | **(TE3 Only)** The DAX Package Manager feature will not be available. |
+| DisableAi | **(TE3 Only)** All AI functionality is disabled. The AI module is not loaded at startup and no AI-related features are available. Any previously stored API key configuration is cleared. |
 
 ## Disabling web communications
 
-If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, and `DisableDaxOptimizer` policies.
+If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, `DisableDaxOptimizer`, and `DisableAi` policies.
 
 > [!NOTE]
 > Even when the above policies are specified, Tabular Editor 3 will still make occasional requests to `https://api.tabulareditor.com` for purposes of license validation. If Tabular Editor 3 is not able to reach this endpoint (due to a firewall or proxy), the user will have to [manually activate](xref:installation-activation-basic#manual-activation-no-internet) the product every 30 days.
@@ -55,3 +56,7 @@ If you want to ensure that Tabular Editor does not perform web requests, specify
 ## Disabling custom scripts
 
 If you want to ensure that Tabular Editor does not allow users to execute arbitrary code, specify the `DisableCSharpScripts` and `DisableMacros` policies.
+
+## Disabling AI features
+
+If you want to prevent all AI functionality, specify the `DisableAi` policy. This prevents the AI module from loading at startup and clears any stored API key configuration.

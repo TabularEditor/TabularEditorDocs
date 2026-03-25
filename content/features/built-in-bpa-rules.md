@@ -2,7 +2,7 @@
 uid: built-in-bpa-rules
 title: Built-in BPA Rules
 author: Morten Lønskov
-updated: 2026-01-09
+updated: 2026-03-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,14 +16,14 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Enterprise Edition feature providing 27 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
+description: Enterprise Edition feature providing 28 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
 ---
 
 # Built-in BPA Rules
 
 ## Overview
 
-Tabular Editor 3 Enterprise Edition includes 27 built-in best practice rules. These rules cover common issues in semantic model development and are updated automatically with each release.
+Tabular Editor 3 Enterprise Edition includes 28 built-in best practice rules. These rules cover common issues in semantic model development and are updated automatically with each release.
 
 Unlike custom rules stored in JSON files, built-in rules:
 - Are integrated directly into the application
@@ -36,7 +36,7 @@ Unlike custom rules stored in JSON files, built-in rules:
 
 ### Rule Categories
 
-The 27 built-in rules cover four areas:
+The 28 built-in rules cover four areas:
 - **Error Prevention**: Invalid characters, missing expressions, data type mismatches
 - **Performance**: Relationships, partitions, aggregations
 - **Formatting**: Format strings, visibility, naming conventions
@@ -78,7 +78,7 @@ Built-in rules use reserved ID prefixes. When you create a custom rule, Tabular 
 
 ## Built-in Rules Catalog
 
-The initial release includes the following rules:
+The current set includes the following rules:
 
 
 ### Error Prevention Rules
@@ -88,6 +88,7 @@ The initial release includes the following rules:
 - [Data Column Must Have Source](xref:kb.bpa-data-column-source)
 - [Relationship Columns Must Have Same Data Type](xref:kb.bpa-relationship-same-datatype)
 - [Avoid Provider Partitions with Structured Data Sources](xref:kb.bpa-avoid-provider-partitions-structured)
+- [Use Compound Names for User-Defined Functions](xref:kb.bpa-udf-use-compound-names)
 
 ### Performance Rules
 - [Many-to-Many Relationships Should Use Single Direction](xref:kb.bpa-many-to-many-single-direction)
@@ -107,7 +108,6 @@ The initial release includes the following rules:
 - [Calculation Groups Should Contain Items](xref:kb.bpa-calculation-groups-no-items)
 - [Perspectives Should Contain Objects](xref:kb.bpa-perspectives-no-objects)
 - [Use Latest Power BI Compatibility Level](xref:kb.bpa-powerbi-latest-compatibility)
-
 
 ## Working with Built-in and Custom Rules
 

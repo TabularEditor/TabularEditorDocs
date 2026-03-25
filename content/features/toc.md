@@ -40,10 +40,12 @@
 ### @direct-lake-sql-model
 ### @dq-over-as-limitations
 
+# AI Features
+## @ai-assistant
+
 # Advanced Modelling Features
 ## @metadata-translation-editor
 ## @perspective-editor
-
 
 # Model Organization
 ## @hierarchical-display

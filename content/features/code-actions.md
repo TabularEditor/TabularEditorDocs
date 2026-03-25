@@ -56,7 +56,7 @@ Lastly, a lightbulb or screwdriver icon is shown in the editor's left margin whe
 
 When you hover the mouse cursor over an action in the Code Actions menu, a tooltip will show more information about the action. Click the "Learn more" link, to view the knowledge-base (KB) article for the action.
 
-![Code Action Tooltip](~/content/assets/images/features/code-action-tooltip.png)]
+![Code Action Tooltip](~/content/assets/images/features/code-action-tooltip.png)
 
 ## Code Action indicators
 
@@ -99,6 +99,7 @@ The Code Actions below will appear with orange dots under the first two characte
 | DI013 | [Use division instead of DIVIDE](xref:DI013) | When the 2nd argument of [`DIVIDE`](https://dax.guide/DIVIDE) is a non-zero constant, it is more efficient to use the division operator. Example:<br>`DIVIDE(x, 2)` -> `x / 2` |
 | DI014 | [Replace IFERROR with DIVIDE](xref:DI014) | Use the [`DIVIDE`](https://dax.guide/DIVIDE) function instead of [`IFERROR`](https://dax.guide/IFERROR) to provide an alternate result when a division has a zero denominator. Example:<br>`IFERROR(x / y, 0)` -> `DIVIDE(x, y, 0)` |
 | DI015 | [Replace IF with DIVIDE](xref:DI015) | Use the [`DIVIDE`](https://dax.guide/DIVIDE) function instead of [`IF`](https://dax.guide/IF) to more easily check for zero or blank in the denominator. Example:<br>`IF(y <> 0, x / y)` -> `DIVIDE(x, y)` |
+| DI016 | Use correct UDF syntax | Use correct syntax for User-Defined Function expressions. Example:<br>`(x, y) => x + y` |
 
 ### Readability
 

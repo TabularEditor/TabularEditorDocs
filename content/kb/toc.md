@@ -26,6 +26,7 @@
 ## @kb.bpa-remove-unused-data-sources
 ## @kb.bpa-specify-application-name
 ## @kb.bpa-powerbi-latest-compatibility
+## @kb.bpa-udf-use-compound-names
 
 # Code Actions
 ## DAX Code Analysis (DI)
