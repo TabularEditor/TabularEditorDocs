@@ -49,6 +49,10 @@ Cuando la marcas, se ocultarán las advertencias sobre las tablas de fecha/hora 
 
 En Power BI Desktop es habitual insertar un salto de línea en la primera línea de una expresión DAX, debido a la forma en que la barra de fórmulas muestra el código DAX. Si alternas con frecuencia entre Tabular Editor y Power BI Desktop, considera habilitar esta opción para que Tabular Editor 3 inserte el salto de línea automáticamente.
 
+##### _Only for multi-line DAX expressions_ (enabled)
+
+When "Line break on first line of DAX" is enabled, this sub-setting controls whether the line break is added only for multi-line DAX expressions. When checked, single-line expressions are left unchanged.
+
 ##### _Modo de autenticación predeterminado de Power BI_ (Integrada)
 
 Selecciona el método de autenticación predeterminado (Integrada, ServicePrincipal o MasterUser) que se usará al conectarte a Datasets de Power BI.
@@ -85,6 +89,12 @@ Si se desactiva, tendrás que ejecutar explícitamente un análisis de práctica
 ##### _Reglas BPA integradas_ (habilitadas para usuarios nuevos)
 
 Elige si quieres habilitar, deshabilitar o que se te pregunte sobre el uso de las reglas integradas de Best Practice Analyzer de Tabular Editor. Las reglas integradas cubren procedimientos recomendados clave en formato, metadatos, diseño del modelo, expresiones DAX y traducciones. Las instalaciones nuevas tendrán las reglas integradas habilitadas de forma predeterminada.
+
+### Notifications
+
+##### _Data refresh notification_ (enabled)
+
+When checked, a notification is displayed when a data refresh operation completes.
 
 ### Ajuste de fórmulas DAX
 
@@ -166,7 +176,7 @@ Crea una copia de seguridad del modelo al guardar cambios localmente. Esto te of
 
 ##### _Ubicación para guardar la copia de seguridad_
 
-Especifica la carpeta donde se almacenan las copias de seguridad creadas al guardar. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
+Especifica la carpeta donde se almacenan las copias de seguridad creadas al guardar. By default, backups are not created unless a location is specified.
 
 ##### _Copia de seguridad al implementar_ (habilitado)
 
