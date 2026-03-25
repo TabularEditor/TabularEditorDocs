@@ -72,6 +72,10 @@
 
 ### @dq-over-as-limitations
 
+# AI Features
+
+## @ai-assistant
+
 # Funciones avanzadas de modelado
 
 ## @metadata-translation-editor
