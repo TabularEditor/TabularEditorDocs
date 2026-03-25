@@ -19,7 +19,7 @@ applies_to:
 ---
 # AI Assistant
 
-The AI Assistant is a chat-based interface for AI-assisted semantic model development designed to help you create semantic models faster. With an enterprise-ready design, full control of what is sent to the AI, and built-in consent management, you can use the AI Assistant with confidence. It can explore your model metadata, write and execute DAX queries, generate C# scripts, run Best Practice Analyzer checks, query VertiPaq Analyzer statistics and search the Tabular Editor knowledge base.
+The AI Assistant is a chat-based interface for AI-assisted semantic model development designed to help you create semantic models faster. With an enterprise-ready design, full control of what is sent to the AI, and built-in consent management, you can use the AI Assistant with confidence. The AI Assistant has undergone independent security penetration testing. For details, visit the [Tabular Editor Trust Center](https://trust.tabulareditor.com). It can explore your model metadata, write and execute DAX queries, generate C# scripts, run Best Practice Analyzer checks, query VertiPaq Analyzer statistics and search the Tabular Editor knowledge base.
 
 The AI Assistant uses a bring-your-own-key model. You provide an API key from one of the supported providers and the assistant runs directly against that provider's API.
 
@@ -71,6 +71,32 @@ Select **Azure OpenAI** as the provider. Enter your API key and the service endp
 ### Custom (OpenAI-compatible)
 
 The Custom provider option supports local or organizational LLMs that expose an OpenAI-compatible API endpoint. Enter your API key and the custom endpoint URL. This allows you to keep all data within your own infrastructure for data privacy or compliance requirements.
+
+### Using a local or organizational LLM
+
+You can run the AI Assistant against a self-hosted LLM by using the Custom provider. This keeps all data within your own infrastructure — whether that is a model running on your local machine or a centrally hosted LLM within your organization's network. Either way, no data is sent to a third-party cloud provider.
+
+Several tools can host models with an OpenAI-compatible API:
+
+- [Ollama](https://ollama.com) — lightweight CLI for downloading and running models locally
+- [LM Studio](https://lmstudio.ai) — desktop application with a graphical interface for managing and running local models
+- [LocalAI](https://localai.io) — self-hosted, community-driven alternative with broad model support
+
+These tools can run on a developer's workstation for individual use, or be deployed on a shared server within your organization to provide a centrally managed LLM endpoint for your team.
+
+#### Example: Ollama
+
+1. [Download and install Ollama](https://ollama.com/download)
+2. Pull a model, for example: `ollama pull llama3.1`
+3. Start the Ollama server (it runs automatically after installation, by default on port 11434)
+4. In Tabular Editor, go to **Tools > Preferences > AI Assistant > AI Provider**
+5. Set **Choose provider** to **Custom (OpenAI-compatible)**
+6. Set **Service Endpoint** to `http://localhost:11434/v1`
+7. Set **Model name** to the model you pulled (e.g. `llama3.1`)
+8. The **API Key** field can be set to any non-empty value (e.g. `ollama`) — Ollama does not require authentication, but the field cannot be left blank
+
+> [!NOTE]
+> Response quality with local models depends on the model size and your hardware. Larger models generally produce better results but require more RAM and a capable GPU. The AI Assistant's tool-calling capabilities require a model that supports function calling in the OpenAI-compatible format.
 
 ## Capabilities
 
