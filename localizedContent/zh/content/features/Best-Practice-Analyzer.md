@@ -49,7 +49,7 @@ applies_to:
 该 UI 包含两个列表：上方列表表示当前已加载的规则的 **集合**。 在此列表中选择一个规则集后，下方列表会显示该规则集中定义的所有规则。 默认会显示三个规则集：
 
 - **当前模型中的规则**：顾名思义，这是在当前模型中定义的规则集。 规则定义以注释的形式存储在 Model 对象上。
-- **本地用户的规则**：这些规则存储在你的 `%AppData%\..\Local\TabularEditor\BPARules.json` 文件中。 这些规则将应用于当前登录的 Windows 用户在 Tabular Editor 中加载的所有模型。
+- **Rules for the local user**: These are rules that are stored in your `%AppData%\..\Local\TabularEditor3\BPARules.json` file (Tabular Editor 3) or `%AppData%\..\Local\TabularEditor\BPARules.json` file (Tabular Editor 2). 这些规则将应用于当前登录的 Windows 用户在 Tabular Editor 中加载的所有模型。
 - **本机上的规则**：这些规则存储在 `%ProgramData%\TabularEditor\BPARules.json` 文件中。 这些规则将应用于当前机器上在 Tabular Editor 中加载的所有模型。
 
 如果同一条规则（按 ID）同时存在于多个规则集中，则优先级从上到下：也就是说，模型中定义的规则会优先于本机上定义的同 ID 规则。 这样你就可以覆盖现有规则，例如以便考虑模型特定的约定。
