@@ -1,6 +1,8 @@
 ---
 uid: workspace-databases
 title: Presentamos las bases de datos de Workspace
+author: Morten Lønskov
+updated: 2026-03-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -63,3 +65,12 @@ El archivo incluye un nombre de usuario para evitar que varios desarrolladores s
 2. Conectarse a la base de datos recién implementada en "modo del área de trabajo".
 
 En "modo del área de trabajo", Tabular Editor guarda simultáneamente su modelo en disco y actualiza la base de datos de Workspace cada vez que pulsa Guardar (ctrl+s). Esto le permite probar rápidamente código nuevo y ver los mensajes de error proporcionados por Analysis Services, sin tener que desplegar manualmente la base de datos ni invocar Archivo > Guardar como... o Archivo > Guardar en carpeta... siempre que desee guardar los metadatos del modelo en el disco.
+
+### Incremental Refresh Expression Change Detection
+
+When opening a model with a workspace database, Tabular Editor compares the local incremental refresh `Source Expression` and `Polling Expression` with those on the workspace database, for each table governed by a `BasicRefreshPolicy`.
+
+If Tabular Editor detects differences, it prompts you to overwrite the workspace database expressions with your local version. This prevents accidental loss of expression changes, which is particularly important when collaborating via Git where multiple developers may modify these expressions independently.
+
+> [!TIP]
+> If you are working in a team and notice the prompt appearing frequently, coordinate with your team members to ensure incremental refresh expressions are not modified independently in different branches.
