@@ -79,9 +79,14 @@ Al hacer clic con el botón derecho en cualquier parte de la Vista de diagrama, 
 - **Agregar tablas...**: Abre un cuadro de diálogo para agregar manualmente tablas adicionales al diagrama.
 - **Agregar tablas que filtran esta tabla**: Incorpora automáticamente las tablas relacionadas que filtran la tabla actual.
 - **Agregar todas las tablas relacionadas**: Carga todas las tablas que comparten una relación con la tabla seleccionada.
+- **Edit relationship**: Opens the relationship editor for the selected relationship. Only visible when a relationship is selected.
+- **Invert relationship**: Swaps the from and to sides of the selected relationship. Only visible when a relationship is selected.
+- **Activate relationship**: Activates an inactive relationship. Only visible when an inactive relationship is selected.
+- **Deactivate relationship**: Deactivates an active relationship. Only visible when an active relationship is selected.
 - **Ajustar a la página**: Ajusta el zoom del diagrama para que quepan todas las tablas visibles.
-- **Organizar automáticamente**: Organiza automáticamente las tablas en un esquema en estrella
+- **Auto-Arrange**: Automatically arrange tables into a star schema.
 - **Quitar del diagrama**: Oculta la tabla seleccionada de la vista actual.
+- **Delete relationship**: Deletes the selected relationship from the model. Only visible when a relationship is selected.
 
 ### Indicadores de relación
 
