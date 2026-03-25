@@ -2,7 +2,7 @@
 uid: downloads
 title: Todas las descargas
 author: Daniel Otykier
-updated: 2026-02-11
+updated: 2026-03-25
 ---
 
 # Descargas de Tabular Editor 3
@@ -11,17 +11,14 @@ Esta página ofrece instrucciones de descarga e instalación para Tabular Editor
 
 ## Última versión
 
-Descargas de Tabular Editor 3.25.5 para **.NET 8**:
+Tabular Editor 3.26.0 **.NET 8** downloads:
 
-- Descarga [Tabular Editor 3.25.5 (64 bits)](https://cdn.tabulareditor.com/files/TabularEditor.3.25.5.Installer.x64.Net8.exe) _(recomendado)_
-- Descargar [Tabular Editor 3.25.5 (ARM64)](https://cdn.tabulareditor.com/files/TabularEditor.3.25.5.Installer.ARM64.Net8.exe)
-- Versiones portátiles: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.5.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.5.ARM64.Net8.zip)
-- Versión MSI: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.5.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.5.ARM64.Net8.msi)
+- Download [Tabular Editor 3.26.0 (64 bit)](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.Installer.x64.Net8.exe) _(recommended)_
+- Download [Tabular Editor 3.26.0 (ARM64)](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.Installer.ARM64.Net8.exe)
+- Portable versions: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.ARM64.Net8.zip)
+- MSI version: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.ARM64.Net8.msi)
 
-Lee las [últimas notas de la versión](release-notes/3_25_5.md).
-
-> [!NOTE]
-> A partir de Tabular Editor 3.23.0, ahora ofrecemos versiones nativas para [ARM64](https://learn.microsoft.com/en-us/windows/arm/overview). Las versiones de 32 bits (x86) se han dejado de ofrecer.
+Read the [latest release notes](release-notes/3_26_0.md).
 
 ## Instrucciones de instalación
 
@@ -33,6 +30,10 @@ No es necesario desinstalar versiones anteriores al actualizar a una versión m�
 
 ## Historial
 
+- 2026-03-25 **Tabular Editor 3.26.0** (_[Release notes](release-notes/3_26_0.md)_)
+  - .NET 8 installer (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.Installer.ARM64.Net8.exe)
+  - .NET 8 portable (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.ARM64.Net8.zip)
+  - .NET 8 installer (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.ARM64.Net8.msi)
 - 2026-03-02 **Tabular Editor 3.25.5** (_[Notas de la versión](release-notes/3_25_5.md)_)
   - .NET 8 instalador (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.5.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.5.Installer.ARM64.Net8.exe)
   - .NET 8 portátil (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.5.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.25.5.ARM64.Net8.zip)
