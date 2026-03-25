@@ -54,6 +54,8 @@
 
 ## @kb.bpa-powerbi-latest-compatibility
 
+## @kb.bpa-udf-use-compound-names
+
 # Acciones de código
 
 ## Análisis de código DAX (DI)
