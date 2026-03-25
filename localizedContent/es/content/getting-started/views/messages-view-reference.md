@@ -17,4 +17,4 @@ applies_to:
           full: true
 ---
 
-[!include[using-bpa](../../features/views/messages-view.md)]
+[!include[messages-view](../../features/views/messages-view.md)]
