@@ -54,6 +54,8 @@
 
 ## @kb.bpa-powerbi-latest-compatibility
 
+## @kb.bpa-udf-use-compound-names
+
 # 代码操作
 
 ## DAX 代码分析（DI）
