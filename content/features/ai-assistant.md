@@ -95,8 +95,23 @@ These tools can run on a developer's workstation for individual use, or be deplo
 7. Set **Model name** to the model you pulled (e.g. `llama3.1`)
 8. The **API Key** field can be set to any non-empty value (e.g. `ollama`) — Ollama does not require authentication, but the field cannot be left blank
 
+#### Example: LM Studio
+
+1. [Download and LM Studio](https://lmstudio.ai/download)
+2. Pull a model. Either through the model search page on the left panel or the CLI. For example: `lms get lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`
+3. Start the LM Studio server. Either through the developer page on the left panel or through the CLI. for example `lms server start`
+   Note, you will have to configure it to use OpenAI compatible mode. Additionally, you may have to change the default context size to be over 100,000 tokens.
+4. In Tabular Editor, go to **Tools > Preferences > AI Assistant > AI Provider**
+5. Set **Choose provider** to **Custom (OpenAI-compatible)**
+6. Set **Service Endpoint** to `http://localhost:1234/v1`
+7. Set **Model name** to the model you pulled (e.g. `lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`)
+8. The **API Key** field can be set to any non-empty value (e.g. `lms`) — LM Studio does not require authentication, but the field cannot be left blank
+
+
 > [!NOTE]
 > Response quality with local models depends on the model size and your hardware. Larger models generally produce better results but require more RAM and a capable GPU. The AI Assistant's tool-calling capabilities require a model that supports function calling in the OpenAI-compatible format.
+> 
+> We recommend a model with a *minimum* of 30 billion parameters but ideally at least 100 billion parameters. For example, the Qwen3.5-122B-A10B model performed well in our internal testing.
 
 ## Capabilities
 
