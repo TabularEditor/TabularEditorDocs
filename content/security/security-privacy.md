@@ -2,7 +2,7 @@
 uid: security-privacy
 title: Security overview
 author: Daniel Otykier
-updated: 2024-10-30
+updated: 2026-03-25
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -53,6 +53,31 @@ In the following, "model data" refers to the actual data records stored within t
 
 Because of the requirement for a user to have administrative privileges on the instance of Analysis Services or Power BI workspace that they are connecting to, the user will, by definition, also have access to all data content of the Analysis Services database or Power BI dataset. Tabular Editor only allows retrieval of data through the AMO client library mentioned above. Tabular Editor 3 provides features for browsing and querying model data. Regardless of which technique is used to access the data **Tabular Editor only stores retrieved data in local memory. Tabular Editor does not collect, publish, share, transfer or otherwise make public any model data obtained through the tool**. If a user chooses to copy or export query results obtained through Tabular Editor, it is their responsibility to treat the copied or exported data according to the confidentiality of the data. This is no different than a user connecting to the Analysis Services database or Power BI dataset using client tools such as Excel or Power BI, in which case they will also have the option to copy query results.
 
+### AI Assistant
+
+Tabular Editor 3 includes an optional AI Assistant for chat-based semantic model development. The AI Assistant is an optional module that the user selects during installation. If you choose not to install the module, no AI-related code is present on the machine and none of the behavior described in this section applies. The AI Assistant uses a **bring-your-own-key** model. You provide an API key from a supported AI provider (OpenAI, Anthropic, Azure OpenAI or any OpenAI-compatible endpoint). No built-in API key is included and Tabular Editor does not provide or intermediate any AI service.
+
+**Data flow.** All communication between the AI Assistant and the AI provider happens directly from the client machine to the provider API. No data passes through Tabular Editor servers. The data sent depends on the actions you perform in the chat and is scoped to the following categories, each requiring explicit user consent before any data is transmitted:
+
+| Consent Category | Data Sent to AI Provider |
+| -- | -- |
+| Model metadata | Table and column schemas, measure definitions and other structural model metadata |
+| Query data | DAX query results and data samples |
+| Read documents | Content from open documents such as DAX scripts and DAX queries |
+| Modify documents | Requests to make changes to open documents |
+| Edit BPA rules | Best Practice Analyzer rule definitions |
+| Read macros | Macro definitions from the user macro library |
+
+**Consent management.** The AI Assistant prompts for consent the first time it needs access to each data category. You choose the duration of your consent: single request, current session, the current model only, or always. You can review and revoke consents at any time under **Tools > Preferences > AI Assistant > AI Consents**. Per-model consents for query data and model metadata are stored in the model user options (.tmuo) file. Global "always" consents are stored in the local Preferences.json file.
+
+**API key storage.** API keys are stored encrypted on the local machine in the Preferences.json file. If the AI module is not loaded (for example because it was excluded during installation or disabled by policy), any previously stored API key configuration is cleared automatically.
+
+**Conversation storage.** Conversations are stored locally on the client machine in `%LocalAppData%\TabularEditor3\AI\Conversations\`. No conversation data is sent to Tabular Editor servers.
+
+**Disabling the AI Assistant.** The AI Assistant is an optional component. You can exclude it during installation, disable it under **Tools > Preferences > AI Assistant**, or enforce the `DisableAi` [policy](xref:policies) through the Windows registry.
+
+**Penetration testing.** A separate penetration test of the AI Assistant has been performed. The report is available in our [Trust Center](https://trust.tabulareditor.com/).
+
 ### Web requests
 
 Tabular Editor may perform requests to online resources (web URLs) only in the following cases:
@@ -70,6 +95,7 @@ Tabular Editor may perform requests to online resources (web URLs) only in the f
   - https://australiaeast.api.daxoptimizer.com/api
   - https://eastus.api.daxoptimizer.com/api
   - https://westeurope.api.daxoptimizer.com/api
+- **AI Assistant.** When the AI Assistant is configured and in use, Tabular Editor 3 sends requests directly to the configured AI provider API. The endpoints depend on the selected provider (for example `https://api.openai.com` for OpenAI, `https://api.anthropic.com` for Anthropic, or a user-specified endpoint for Azure OpenAI and custom providers). Only data for which the user has granted consent is included in these requests. See the [AI Assistant](#ai-assistant) section above for details on data categories and consent management.
 - **Importing Best Practice Rules.** Tabular Editor has a feature that allows a user to specify an URL from which to retrieve a list of Best Practice rules in a JSON based format. This type of request only downloads the JSON data from the URL - no data is transmitted to the URL.
 - **Using C# scripts.** Tabular Editor allows users to write and execute code written in C#, for purposes of automation. Such a script may potentially connect to online resources, using C# language features and the .NET runtime. The user is always responsible for ensuring that executed code does not cause any unintended sharing of data. Tabular Editor ApS cannot be held liable for any damages, losses or leaks caused by the use of the C# scripting feature in general. Tabular Editor will never execute C# scripts without the explicit action of the user.
 
@@ -82,6 +108,7 @@ To allow traffic to the above mentioned web requests, you'll have to whitelist:
 - DAX Formatter (Tabular Editor 2.x only): **https://www.daxformatter.com**
 - Import Best Practice Rules / C# Scripts: Depends on the context
 - DAX Optimizer: Endpoints listed above.
+- AI Assistant: Depends on the configured provider (e.g. **https://api.openai.com**, **https://api.anthropic.com**, or user-specified Azure OpenAI / custom endpoints)
 
 > [!NOTE]
 > A system administrator may enforce certain [policies](xref:policies), which can be used to disable some or all of the features shown on the list above.
