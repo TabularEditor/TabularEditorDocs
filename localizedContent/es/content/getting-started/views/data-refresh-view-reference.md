@@ -17,4 +17,4 @@ applies_to:
           full: true
 ---
 
-[!include[using-bpa](../../features/views/data-refresh-view.md)]
+[!include[data-refresh-view](../../features/views/data-refresh-view.md)]
