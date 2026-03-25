@@ -49,6 +49,10 @@ applies_to:
 
 在 Power BI Desktop 中，由于公式栏显示 DAX 代码的方式，通常会在 DAX 表达式的第一行插入换行。 如果你经常在 Tabular Editor 和 Power BI Desktop 之间来回切换，可考虑启用此选项，让 Tabular Editor 3 自动插入该换行。
 
+##### _Only for multi-line DAX expressions_ (enabled)
+
+When "Line break on first line of DAX" is enabled, this sub-setting controls whether the line break is added only for multi-line DAX expressions. When checked, single-line expressions are left unchanged.
+
 ##### _默认 Power BI 身份验证模式_（集成）
 
 选择连接到 Power BI Dataset 时要使用的默认身份验证方法（集成、ServicePrincipal 或 MasterUser）。
@@ -85,6 +89,12 @@ applies_to:
 ##### _内置 BPA 规则_（新用户默认启用）
 
 选择启用、禁用，或在使用 Tabular Editor 内置的 Best Practice Analyzer 规则前提示你确认。 内置规则覆盖格式设置、元数据、模型布局、DAX 表达式以及翻译等方面的关键最佳实践。 新安装将默认启用内置规则。
+
+### Notifications
+
+##### _Data refresh notification_ (enabled)
+
+When checked, a notification is displayed when a data refresh operation completes.
 
 ### DAX 公式自动修正
 
@@ -166,7 +176,7 @@ applies_to:
 
 ##### _备份保存位置_
 
-指定用于存储保存备份的文件夹。 默认情况下，除非指定位置，否则不会创建备份。
+指定用于存储保存备份的文件夹。 By default, backups are not created unless a location is specified.
 
 ##### _部署时备份_（已启用）
 
