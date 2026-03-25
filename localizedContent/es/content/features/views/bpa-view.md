@@ -1,9 +1,8 @@
-﻿---
+---
 uid: bpa-view
-title: Vista del Analizador de Mejores Prácticas
+title: Best Practice Analyzer view
 author: Daniel Otykier
 updated: 2021-09-08
-applies_to:
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,4 +16,5 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
+
 [!include[using-bpa](../../features/using-bpa.md)]
