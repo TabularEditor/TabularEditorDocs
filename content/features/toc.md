@@ -1,6 +1,3 @@
-# AI Features
-## @ai-assistant
-
 # User Interface
 ## @user-interface
 ## @tom-explorer-view
@@ -43,10 +40,12 @@
 ### @direct-lake-sql-model
 ### @dq-over-as-limitations
 
+# AI Features
+## @ai-assistant
+
 # Advanced Modelling Features
 ## @metadata-translation-editor
 ## @perspective-editor
-
 
 # Model Organization
 ## @hierarchical-display

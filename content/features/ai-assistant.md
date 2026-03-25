@@ -131,7 +131,7 @@ Artifacts stream in real-time as the AI generates them. C# script artifacts incl
 
 ![AI Assistant Generate C# Script](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
 
-When you execute a C# script from the chat, the **Script Preview** dialog shows a side-by-side diff of all model metadata changes made by the script. You can accept the changes or revert them. See [Running scripts with preview](xref:csharp-scripts#running-scripts-with-preview) for details.
+When you execute a C# script from the chat, the **Script Preview** dialog shows a side-by-side diff of all model metadata changes made by the script. You can accept the changes or revert them. See [Running scripts with preview](xref:csharp-scripts#run-c-scripts-with-preview) for details.
 
 ![Script Preview - Model Changes](~/content/assets/images/preview-script-changes.png)
 
