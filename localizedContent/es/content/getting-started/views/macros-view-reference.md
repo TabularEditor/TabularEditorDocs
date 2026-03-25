@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-[!include[using-bpa](../../features/views/macros-view.md)]
+[!include[macros-view](../../features/views/macros-view.md)]
 
 ## Próximos pasos
 
