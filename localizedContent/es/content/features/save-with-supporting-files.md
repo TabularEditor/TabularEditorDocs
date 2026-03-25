@@ -110,7 +110,7 @@ Cuando su modelo semántico se guarda con archivos auxiliares y se sincroniza co
 
 Cuando tu modelo se sincroniza con Microsoft Fabric/Power BI, el nombre del modelo semántico que se muestra en el Workspace se basa en la propiedad `displayName` del archivo .platform, que se establece automáticamente a partir de la propiedad `Name` de la base de datos en Tabular Editor. Esto significa que el nombre que configures en Tabular Editor será el que se muestre en Fabric/Power BI.
 
-Tabular Editor establece automáticamente la configuración regional del modelo en **en-US** al guardar con archivos de soporte. Esto garantiza que la configuración regional del modelo esté presente al sincronizar con Fabric, evitando cambios sin confirmar que pueden producirse si la configuración regional no se establece durante la sincronización inicial.
+Tabular Editor automatically sets the model culture to **en-US** when saving with supporting files, if the model does not already have a culture specified. Esto garantiza que la configuración regional del modelo esté presente al sincronizar con Fabric, evitando cambios sin confirmar que pueden producirse si la configuración regional no se establece durante la sincronización inicial.
 
 Para obtener más información, consulta:
 
