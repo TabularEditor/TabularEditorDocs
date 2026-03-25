@@ -110,7 +110,7 @@ Tabular Editor 会在保存位置以 Database 名称创建一个带 **.SemanticM
 
 当你的模型同步到 Microsoft Fabric/Power BI 后，Workspace 中显示的语义模型名称由 .platform 文件中的 `displayName` 属性决定，而该属性会根据 Tabular Editor 中 Database 的 `Name` 属性自动设置。 这意味着你在 Tabular Editor 中配置的名称，就是在 Fabric/Power BI 中显示的名称。
 
-Tabular Editor 在以“保存并包含支持文件”方式保存时，会自动将模型的区域设置设为 **en-US**。 这可确保在与 Fabric 同步时包含模型区域设置，避免在初次同步时未设置区域设置而产生未提交的更改。
+Tabular Editor automatically sets the model culture to **en-US** when saving with supporting files, if the model does not already have a culture specified. 这可确保在与 Fabric 同步时包含模型区域设置，避免在初次同步时未设置区域设置而产生未提交的更改。
 
 更多信息见：
 
