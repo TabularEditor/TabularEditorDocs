@@ -458,7 +458,8 @@ start /wait TabularEditor.exe "localhost" "AdventureWorks" -S "c:\Projects\Autog
 
 ## Crear columnas de datos a partir de los metadatos del origen de la partición
 
-**Nota:** Si usas la versión 2.7.2 o posterior, asegúrate de probar la nueva función "Import Table...".
+> [!NOTE]
+> The `RefreshDataColumns()` method described below is only available in **Tabular Editor 2**. In Tabular Editor 3, use the **Import Table...** feature instead.
 
 Si una tabla usa una partición de tipo Query basada en un origen de datos del proveedor OLE DB, podemos actualizar automáticamente los metadatos de las columnas de esa tabla ejecutando el siguiente fragmento:
 
