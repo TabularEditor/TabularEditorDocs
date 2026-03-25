@@ -72,6 +72,10 @@
 
 ### @dq-over-as-limitations
 
+# AI Features
+
+## @ai-assistant
+
 # 高级建模功能
 
 ## @元数据翻译编辑器
