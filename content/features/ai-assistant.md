@@ -104,7 +104,7 @@ The AI Assistant has access to your model context and can perform the following 
 
 - **Model exploration**: Query model metadata including tables, columns, measures, relationships and their properties
 - **DAX query writing**: Generate DAX queries and execute them against your connected model, returning result sets directly in the chat
-- **C# script generation**: Create C# scripts for model modifications that open in a new editor window. Scripts are executed with the [run with preview](xref:csharp-scripts#running-scripts-with-preview) feature, showing a diff of all model changes before applying them. All changes are visible in real-time and can be undone with **Ctrl+Z**
+- **C# script generation**: Create C# scripts for model modifications that open in a new editor window. When you click **Execute** in the chat, the [preview changes](xref:csharp-scripts#running-scripts-with-preview) dialog is shown by default, letting you review all model metadata changes before accepting them. You can also open the script in the editor and run it from the script toolbar, with or without the preview. Model metadata changes can be undone with **Ctrl+Z**
 - **Best Practice Analyzer**: Run BPA analysis, view rule violations and create or modify BPA rules
 - **VertiPaq Analyzer**: Query memory usage statistics and column cardinality
 - **Document access**: Read and modify open documents such as DAX scripts and DAX queries
@@ -130,6 +130,10 @@ When the AI Assistant generates code, it creates **artifacts** that open directl
 Artifacts stream in real-time as the AI generates them. C# script artifacts include safety analysis that flags potentially unsafe code (e.g. file system access or network operations).
 
 ![AI Assistant Generate C# Script](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
+
+When you execute a C# script from the chat, the **Script Preview** dialog shows a side-by-side diff of all model metadata changes made by the script. You can accept the changes or revert them. See [Running scripts with preview](xref:csharp-scripts#running-scripts-with-preview) for details.
+
+![Script Preview - Model Changes](~/content/assets/images/preview-script-changes.png)
 
 ## Custom Instructions
 
@@ -245,11 +249,17 @@ Configure AI Assistant display and behavior options under **Tools > Preferences 
 | Auto compact | true | Automatically summarize old messages when approaching the context limit |
 | Auto compact threshold % | 80 | Token usage percentage that triggers auto-compaction |
 
+### Knowledge Base
+
+| Preference | Default | Description |
+| -- | -- | -- |
+| Check for knowledge base updates on startup | true | Automatically check for knowledge base updates when Tabular Editor starts |
+
 ### C# Script
 
 | Preference | Default | Description |
 | -- | -- | -- |
-| Show script impact preview | true | Show the script impact preview dialog when executing AI-generated C# scripts |
+| Preview changes | true | Show the preview changes dialog when executing AI-generated C# scripts from the chat |
 
 ![AI Assistant Preferences](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
 

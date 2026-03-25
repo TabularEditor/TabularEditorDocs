@@ -210,25 +210,29 @@ You can tick the "Don't show more outputs" checkbox at the lower left-hand corne
 
 ## Run C# Scripts with Preview
 
-The **Run with preview** action lets you review all model changes made by a C# script before committing them. This is useful when running unfamiliar scripts or performing bulk modifications.
+The **Run with preview** action lets you review all model metadata changes made by a C# script before committing them. This is useful when running unfamiliar scripts or performing bulk modifications.
 
 To use this feature, click **Script > Run with preview** in the toolbar or menu. The workflow is:
 
 1. Tabular Editor takes a snapshot of the model metadata before execution
-2. The script runs normally
-3. If the script succeeds and changes are detected, a preview dialog appears showing a side-by-side hierarchical diff of the model (before and after)
-4. Changes are color-coded: green for added objects, red for deleted and orange for modified properties
-5. Use the **Filter Changes Only** checkbox to hide unchanged items and focus on what the script changed
-6. Click **OK** to accept the changes, or **Revert** to undo all changes
+2. The script runs to completion
+3. Tabular Editor compares the current model metadata state to the snapshot taken before execution
+4. If changes are detected, a preview dialog appears showing a side-by-side hierarchical diff of the model (before and after)
+5. Changes are color-coded: green for added objects, red for deleted and orange for modified properties
+6. Use the **Show changes only** checkbox to hide unchanged items and focus on what the script changed
+7. Click **OK** to accept the changes, or **Revert** to undo all changes
 
-![AI Assistant First Pane on Open](~/content/assets/images/c-sharp-script-preview-changes.png) 
+![Script Preview - Model Changes](~/content/assets/images/c-sharp-script-preview-changes.png)
 
-If the script fails (compilation or runtime error), all changes are automatically rolled back and no preview dialog is shown. If the script succeeds but makes no detectable changes, an informational message is displayed instead.
+If the script fails (compilation or runtime error), all model metadata changes are automatically rolled back and no preview dialog is shown. If the script succeeds but makes no detectable metadata changes, an informational message is displayed instead.
 
-All changes from a script execution are wrapped in a single undo transaction. Even after accepting changes through the preview dialog, you can still undo the entire operation with **Ctrl+Z**.
+All model metadata changes from a script execution are wrapped in a single undo transaction. Even after accepting changes through the preview dialog, you can still undo the entire operation with **Ctrl+Z**.
+
+> [!IMPORTANT]
+> The preview and undo features only apply to model metadata changes. If a script performs external operations such as writing to files, databases or making web requests, those operations are executed immediately and cannot be reverted. The preview dialog does not attempt to analyze the script code — it works by comparing the model metadata state before and after execution.
 
 > [!TIP]
-> The [AI Assistant](xref:ai-assistant) uses this preview feature automatically when executing C# scripts, so you always get a chance to review AI-generated model changes before they are applied.
+> The [AI Assistant](xref:ai-assistant) shows the preview changes dialog automatically when you execute C# scripts from the chat, so you always get a chance to review AI-generated model changes before they are applied.
 
 ## .NET references
 
