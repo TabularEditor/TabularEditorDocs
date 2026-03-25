@@ -17,7 +17,7 @@ applies_to:
           full: true
 ---
 
-[!include[using-bpa](../../features/views/user-interface.md)]
+[!include[user-interface](../../features/views/user-interface.md)]
 
 # 后续步骤
 
