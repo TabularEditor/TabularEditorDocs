@@ -24,7 +24,7 @@ The AI Assistant is a chat-based interface for AI-assisted semantic model develo
 The AI Assistant uses a bring-your-own-key model. You provide an API key from one of the supported providers and the assistant runs directly against that provider's API.
 
 > [!NOTE]
-> The AI Assistant is in public preview starting with Tabular Editor 3.26.0.
+> The AI Assistant is in public preview starting with Tabular Editor 3.26.0. We welcome feedback on the experience as we continue to refine it.
 
 
 ![AI Assistant First Pane on Open](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
@@ -35,6 +35,9 @@ The AI Assistant uses a bring-your-own-key model. You provide an API key from on
 2. Select your AI provider and enter your API key
 3. Open the AI Assistant panel from **View > AI Assistant**
 4. Type a message and press **Enter** to start a conversation
+
+> [!TIP]
+> Use our [interactive demo of the AI Assistant](https://demos.tabulareditor.com/psl/of150vcy?) to see how to set up and use it.
 
 > [!NOTE]
 > API keys are stored encrypted on your local machine.
@@ -110,7 +113,8 @@ These tools can run on a developer's workstation for individual use, or be deplo
 
 > [!NOTE]
 > Response quality with local models depends on the model size and your hardware. Larger models generally produce better results but require more RAM and a capable GPU. The AI Assistant's tool-calling capabilities require a model that supports function calling in the OpenAI-compatible format.
-> 
+
+> [!TIP]
 > We recommend a model with a *minimum* of 30 billion parameters but ideally at least 100 billion parameters. For example, the Qwen3.5-122B-A10B model performed well in our internal testing.
 
 ## Capabilities
@@ -140,7 +144,7 @@ When the AI Assistant generates code, it creates **artifacts** that open directl
 
 - **C# Scripts**: Open in a new C# script editor with syntax highlighting, compilation and execution support
 - **DAX Queries**: Open in a new DAX query editor with syntax highlighting and execution support
-- **Macros**: C# scripts saved as reusable macros
+
 
 Artifacts stream in real-time as the AI generates them. C# script artifacts include safety analysis that flags potentially unsafe code (e.g. file system access or network operations).
 
