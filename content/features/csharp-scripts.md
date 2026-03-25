@@ -208,7 +208,7 @@ The dialog will appear in one of four different ways, depending on the kind of o
 
 You can tick the "Don't show more outputs" checkbox at the lower left-hand corner, to prevent the script from halting on any further `.Output()` invocations.
 
-## Running scripts with preview
+## Run C# Scripts with Preview
 
 The **Run with preview** action lets you review all model changes made by a C# script before committing them. This is useful when running unfamiliar scripts or performing bulk modifications.
 
