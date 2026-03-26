@@ -4,16 +4,18 @@ title: Convert Direct Lake on OneLake to import
 author: Morten Lønskov
 updated: 2025-06-25
 applies_to:
-  versions:
-    - version: 2.x
-    - version: 3.x
+  products:
+    - product: Tabular Editor 2
+      full: true
+    - product: Tabular Editor 3
+      full: true
 ---
 
-# Convert Import to Direct Lake on OneLake
+# Convert Direct Lake on OneLake to Import
 
 ## Script Purpose
 
-This script converts Direct Lake on OneLake (DL/OL) to Import mode tables. As laid out in the [Direct Lake guidance article](xref:direct-lake-guidance), we need to replace the partition(s) on such tables with a single [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet), which specifies the name and schema of the table/materialized view in the Fabric Lakehouse or Warehouse, while referencing a Shared Expression that uses the [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) (OneLake) connector.
+This script converts Direct Lake on OneLake (DL/OL) to Import mode tables. As laid out in the [Direct Lake guidance article](xref:direct-lake-guidance), we need to replace the [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet) on such tables, with a corresponding regular M partition in Import mode.
 
 ## Prerequisites
 
@@ -23,7 +25,7 @@ You will also need to know the **Schema** of the table/materialized view you wis
 
 ## Script
 
-### Convert Import mode tables to Direct Lake on OneLake
+### Convert Direct Lake on OneLake tables to Import mode
 
 ```csharp
 // ===================================================================================
