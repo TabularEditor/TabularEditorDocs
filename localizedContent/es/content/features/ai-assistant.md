@@ -294,4 +294,7 @@ Configure AI Assistant display and behavior options under **Tools > Preferences 
 
 ## Disabling the AI Assistant
 
-The AI Assistant is an optional component. You can exclude it during installation. If installed, you can disable it under **Tools > Preferences > AI Assistant**. When disabled, the AI Assistant does not run or send any data to external providers.
+The AI Assistant is an optional component. While the feature is in public preview, it will be excluded by default during installation, but users have the option to include it. You can modify an existing Tabular Editor 3 installation, to include or exclude the AI Assistant component, by running the Tabular Editor 3 installer again. If using the portable build of Tabular Editor 3, you can remove the AI Assistant component by deleting the file named `TabularEditor3.AI.dll` from the installation directory.
+
+> [!NOTE]
+> Regardless of whether the AI Assistant component is installed or not, a system admin can disable all AI functionality in Tabular Editor 3 by specifying the [`DisableAi` policy](xref:policies).
