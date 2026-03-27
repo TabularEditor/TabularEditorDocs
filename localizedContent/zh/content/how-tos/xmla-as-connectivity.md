@@ -139,6 +139,8 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 
 ## XMLA 连接故障排除
 
+<a name="testing-a-simple-connection"></a>
+
 ### 测试简单连接
 
 以下步骤展示了如何以最可靠的方式从 Tabular Editor 连接到 Fabric/Power BI 语义模型。
