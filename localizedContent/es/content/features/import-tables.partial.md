@@ -30,6 +30,8 @@ Según su versión de Analysis Services, existen diferentes formas de definir or
 > [!NOTE]
 > El Asistente para importar tablas y la función Actualizar esquema de tabla de Tabular Editor 2.x solo admiten orígenes de datos Legacy con particiones SQL. En otras palabras, no hay compatibilidad con particiones de Power Query. Por este motivo, suelen recomendarse los orígenes de datos heredados, ya que proporcionan el mayor nivel de interoperabilidad entre las herramientas de desarrollo.
 
+<a name="importing-new-tables"></a>
+
 ## Importación de nuevas tablas
 
 Al importar tablas (menú Modelo > Importar tablas...), Tabular Editor te muestra las opciones mencionadas anteriormente (para crear un nuevo origen de datos), además de una lista de los orígenes de datos ya presentes en el modelo. Evita crear nuevos orígenes de datos si las tablas que quieres importar ya están disponibles en alguno de los orígenes de datos especificados en el modelo.
@@ -105,6 +107,8 @@ En este punto, debería ver sus tablas importadas con todas las columnas, los ti
 
 ![Import Complete](~/content/assets/images/import-complete.png)
 
+<a name="updating-table-schema"></a>
+
 # Actualización del esquema de tabla
 
 Si se agregan o cambian columnas en el origen, o si ha modificado recientemente una expresión de partición o una consulta, puede usar la característica **Actualizar esquema de tabla** de Tabular Editor para actualizar los metadatos de las columnas en su modelo.
@@ -129,6 +133,8 @@ Para evitar que se rompan las fórmulas DAX existentes que dependen de la column
 Si no quieres que el cambio de nombre se propague a la columna importada (y solo quieres actualizar la propiedad SourceColumn para reflejar el nombre cambiado en el origen de datos), puedes desmarcar la operación de actualización `Name` en el menú desplegable:
 
 ![Deselect Name](~/content/assets/images/deselect-name.png)
+
+<a name="updating-table-schema-through-analysis-services"></a>
 
 ## Actualizar el esquema de la tabla mediante Analysis Services
 
