@@ -2,7 +2,7 @@
 uid: getting-started
 title: Instalación y activación
 author: Morten Lønskov
-updated: 2025-09-23
+updated: 2026-03-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -115,14 +115,28 @@ La próxima vez que inicies Tabular Editor 3, se te pedirá una clave de licenci
 Puedes implementar Tabular Editor de forma silenciosa y aprovisionar previamente la licencia mediante el Registro de Windows.
 
 1. **Instalar de forma silenciosa** (sin interfaz de usuario, sin reinicio):
+
    ```powershell
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
    ```
 
+   To include the **AI Assistant** feature, specify the `ADDLOCAL` property. The AI Assistant is not installed by default.
+
+   ```powershell
+   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
+   ```
+
+   | MSI Feature   | Description                       | Installed by default              |
+   | ------------- | --------------------------------- | --------------------------------- |
+   | `MainFeature` | Core Tabular Editor 3 application | Yes (Required) |
+   | `AIAssistant` | AI Assistant for Tabular Editor 3 | No                                |
+
+   > [!NOTE]> When using `ADDLOCAL`, you must include `MainFeature` alongside any optional features. Specifying only `AIAssistant` without `MainFeature` results in an incomplete installation.
+
 También puedes usar `/package` en lugar de `/i`. Sustituye `<version>` por la cadena de versión real. Usa el MSI de ARM64 si corresponde.
 
-Para obtener más información sobre las opciones de línea de comandos disponibles para MSI, consulta la documentación oficial de Microsoft:  
-[Opciones de línea de comandos del Instalador estándar de Microsoft: aplicaciones Win32 | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
+For details on available MSI command-line options, see the official Microsoft documentation:
+[Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
 2. **Escribe la licencia en el Registro** **antes de la primera ejecución** de la aplicación:
 
