@@ -108,9 +108,9 @@ En algunos casos, es posible corregir automáticamente los problemas en los obje
 ```json
 {
     "ID": "FKCOLUMNS_HIDDEN",
-    "Name": "Hide foreign key columns",
+    "Name": "Ocultar columnas de clave foránea",
     "Category": null,
-    "Description": "Columns used on the Many side of a relationship should be hidden.",
+    "Description": "Las columnas que se usan en el lado Many de una relación deberían estar ocultas.",
     "Severity": 1,
     "Scope": "Column",
     "Expression": "Model.Relationships.Any(FromColumn = outerIt) and not IsHidden and not Table.IsHidden",
