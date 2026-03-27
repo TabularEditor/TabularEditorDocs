@@ -35,7 +35,7 @@ Directrices completas para crear modelos de Power BI y Analysis Services de alta
 - @kb.bpa-remove-unused-data-sources - Eliminar definiciones de Data source no utilizadas
 - @kb.bpa-specify-application-name - Establecer nombres de aplicación en las cadenas de conexión para la supervisión
 - @kb.bpa-powerbi-latest-compatibility - Mantener la compatibilidad con las últimas funcionalidades de Power BI
-- @kb.bpa-udf-use-compound-names - Ensure UDF names don't conflict with future built-in DAX functions
+- @kb.bpa-udf-use-compound-names - Asegúrate de que los nombres de las UDF no entren en conflicto con funciones DAX integradas que puedan añadirse en el futuro
 
 ## Acciones de código
 
