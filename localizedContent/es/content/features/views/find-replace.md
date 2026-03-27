@@ -18,12 +18,14 @@ applies_to:
           full: true
 ---
 
+<a name="find"></a>
+
 # Buscar
 
 En Tabular Editor, puede utilizar la funcionalidad avanzada de búsqueda para buscar expresiones específicas en todos los documentos abiertos y en el Dataset. Se puede acceder al cuadro de diálogo Buscar mediante el atajo de teclado Ctrl+F.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog.png" alt="Find Dialog Box" style="width: 300px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Ventana "Buscar" en Tabular Editor. Ctrl+F abre el cuadro de diálogo. </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog.png" alt="Find Dialog Box" style="width: 300px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Ventana de Reemplazar en Tabular Editor. Ctrl+F abre el cuadro de diálogo </figcaption>
 </figure>
 
 Para realizar una búsqueda, defina la expresión que desea buscar y utilice las Opciones para determinar si deben cumplirse determinados criterios. Por ejemplo, puede elegir si debe coincidir el uso de mayúsculas y minúsculas entre la expresión de búsqueda y el texto encontrado, o utilizar expresiones regulares.
@@ -46,6 +48,8 @@ Además, puede especificar dónde buscar, en distintas áreas de su instancia de
 > [!TIP]
 > También puedes usar el campo de búsqueda del Explorador TOM para buscar en el Dataset en lugar del cuadro de diálogo Buscar
 
+<a name="replace"></a>
+
 ## Reemplazar
 
 El cuadro de diálogo Reemplazar le permite, al igual que Buscar, buscar una expresión y después reemplazarla por otra distinta.
@@ -54,7 +58,7 @@ El cuadro de diálogo Reemplazar no requiere nada en el campo _Reemplazar con_, 
 Tiene las mismas opciones que en el cuadro de diálogo Buscar para definir los criterios de búsqueda, pero la función _Buscar en_ solo está disponible para documentos; es decir, no puede buscar y reemplazar dentro de los objetos de su Dataset.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog.png" alt="Replace Dialog Box" style="width: 300px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Ventana de Reemplazar en Tabular Editor. Ctrl+F abre el cuadro de diálogo </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/find-dialog.png" alt="Replace Dialog Box" style="width: 300px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Ventana de Reemplazar en Tabular Editor. Ctrl+F abre el cuadro de diálogo. </figcaption>
 </figure>
 
 > [!TIP]
