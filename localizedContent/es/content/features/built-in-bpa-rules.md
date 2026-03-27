@@ -16,14 +16,14 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Enterprise Edition feature providing 28 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
+description: Funcionalidad de la Edición Enterprise que ofrece 28 reglas de mejores prácticas seleccionadas y codificadas de forma nativa en Tabular Editor 3, con integración de la base de conocimientos.
 ---
 
 # Reglas BPA integradas
 
 ## Información general
 
-Tabular Editor 3 Enterprise Edition includes 28 built-in best practice rules. Estas reglas cubren problemas habituales en el desarrollo de un modelo semántico y se actualizan automáticamente con cada versión.
+La Edición Enterprise de Tabular Editor 3 incluye 28 reglas de mejores prácticas integradas. Estas reglas cubren problemas habituales en el desarrollo de un modelo semántico y se actualizan automáticamente con cada versión.
 
 A diferencia de las reglas personalizadas almacenadas en archivos JSON, las reglas integradas:
 
@@ -37,7 +37,7 @@ A diferencia de las reglas personalizadas almacenadas en archivos JSON, las regl
 
 ### Categorías de reglas
 
-The 28 built-in rules cover four areas:
+Las 28 reglas integradas cubren cuatro áreas:
 
 - **Prevención de errores**: caracteres no válidos, expresiones ausentes, incompatibilidades de tipo de datos
 - **Rendimiento**: relaciones, particiones, agregaciones
@@ -82,7 +82,7 @@ Las reglas integradas usan prefijos de ID reservados. Cuando creas una regla per
 
 ## Catálogo de reglas integradas
 
-The current set includes the following rules:
+El conjunto actual incluye las siguientes reglas:
 
 ### Reglas de prevención de errores
 
@@ -92,7 +92,7 @@ The current set includes the following rules:
 - [La columna de datos debe tener un origen](xref:kb.bpa-data-column-source)
 - [Las columnas de relación deben tener el mismo tipo de datos](xref:kb.bpa-relationship-same-datatype)
 - [Evita las particiones del proveedor con orígenes de datos estructurados](xref:kb.bpa-avoid-provider-partitions-structured)
-- [Use Compound Names for User-Defined Functions](xref:kb.bpa-udf-use-compound-names)
+- [Usar nombres compuestos para funciones definidas por el usuario](xref:kb.bpa-udf-use-compound-names)
 
 ### Reglas de rendimiento
 
