@@ -237,7 +237,7 @@ Métodos
 
 ## `CultureCollection`
 
-Clase de colección para configuraciones regionales. Proporciona propiedades prácticas para establecer una propiedad en varios objetos a la vez.
+Clase de colección de jerarquías. Proporciona propiedades convenientes para establecer una propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.CultureCollection
@@ -592,7 +592,7 @@ Métodos
 
 ## `HierarchyCollection`
 
-Clase de colección de jerarquías. Proporciona propiedades convenientes para establecer una propiedad en varios objetos a la vez.
+Clase de colección de `Level`. Proporciona propiedades prácticas para establecer una propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.HierarchyCollection
@@ -974,7 +974,7 @@ Métodos
 
 ## `LevelCollection`
 
-Clase de colección de `Level`. Proporciona propiedades prácticas para establecer una propiedad en varios objetos a la vez.
+Clase de colección para la medida. Proporciona propiedades útiles para establecer una misma propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.LevelCollection
@@ -1104,7 +1104,7 @@ Métodos
 
 ## `MeasureCollection`
 
-Clase de colección para la medida. Proporciona propiedades útiles para establecer una misma propiedad en varios objetos a la vez.
+Clase de colección para `Table`. Ofrece propiedades prácticas para establecer una propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.MeasureCollection
@@ -1845,7 +1845,7 @@ Campos estáticos
 
 ## `TableCollection`
 
-Clase de colección para `Table`. Ofrece propiedades prácticas para establecer una propiedad en varios objetos a la vez.
+Clase de colección para configuraciones regionales. Proporciona propiedades prácticas para establecer una propiedad en varios objetos a la vez.
 
 ```csharp
 public class TabularEditor.TOMWrapper.TableCollection
