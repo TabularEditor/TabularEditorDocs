@@ -1,67 +1,67 @@
 ---
 uid: kb.bpa-udf-use-compound-names
-title: Use Compound Names for User-Defined Functions
+title: Use nombres compuestos para las funciones definidas por el usuario
 author: Morten Lønskov
 updated: 2026-03-19
-description: Best practice rule ensuring User-Defined Functions use separator characters to prevent naming conflicts with future built-in DAX functions.
+description: Regla de buenas prácticas que garantiza que las funciones definidas por el usuario usen caracteres separadores para evitar conflictos de nombres con futuras funciones DAX integradas.
 ---
 
-# Use Compound Names for User-Defined Functions
+# Use nombres compuestos para las funciones definidas por el usuario
 
-## Overview
+## Descripción general
 
-This best practice rule identifies User-Defined Functions (UDFs) whose names do not contain a separator character (`.` or `_`). Compound names prevent naming conflicts if Microsoft introduces a built-in DAX function with the same name.
+Esta regla de buenas prácticas identifica funciones definidas por el usuario (UDFs) cuyos nombres no contienen un carácter separador (`.` o `_`). Los nombres compuestos evitan conflictos de nombres si Microsoft introduce una función de DAX integrada con el mismo nombre.
 
-- Category: Error Prevention
+- Categoría: Prevención de errores
 
-- Severity: Low (1)
+- Gravedad: Baja (1)
 
-## Applies To
+## Se aplica a
 
-- User-Defined Functions
+- Funciones definidas por el usuario
 
-## Why This Matters
+## Por qué es importante
 
-UDFs without separator characters in their names risk breaking in the future:
+Las UDFs sin caracteres separadores en sus nombres corren el riesgo de dejar de funcionar en el futuro:
 
-- **Naming conflicts**: If Microsoft adds a new built-in DAX function with the same name as your UDF, the built-in function takes precedence and your UDF will stop working
-- **Ambiguity**: Without a namespace or prefix, it is unclear whether a function call refers to a built-in DAX function or a custom UDF
-- **Maintenance burden**: Renaming UDFs after a conflict occurs requires updating all references throughout the model
+- **Conflictos de nombres**: Si Microsoft agrega una nueva función DAX integrada con el mismo nombre que su UDF, la función integrada tiene prioridad y su UDF dejará de funcionar
+- **Ambigüedad**: Sin un espacio de nombres o un prefijo, no queda claro si una llamada a una función hace referencia a una función de DAX integrada o a una UDF personalizada
+- **Carga de mantenimiento**: Cambiar el nombre de las UDFs tras producirse un conflicto requiere actualizar todas las referencias en todo el modelo
 
-Using compound names (e.g., `Finance.CalcProfit` or `My_CalcProfit`) makes your UDFs distinguishable from built-in DAX functions.
+Usar nombres compuestos (por ejemplo, `Finance.CalcProfit` o `My_CalcProfit`) permite distinguir sus UDFs de las funciones DAX integradas.
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when a UDF name contains neither a period nor an underscore:
+La regla se activa cuando el nombre de una UDF no contiene ni un punto ni un guion bajo:
 
 ```csharp
 not Name.Contains(".") and not Name.Contains("_")
 ```
 
-## How to Fix
+## Cómo corregir
 
-### Manual Fix
+### Corrección manual
 
-1. In the **TOM Explorer**, locate the User-Defined Function
-2. Rename it to include a namespace separator (`.`) or underscore (`_`)
-3. Tabular Editor automatically updates all references throughout the model
+1. En el **Explorador TOM**, localice la función definida por el usuario
+2. Cambie el nombre para incluir un separador de espacio de nombres (`.`) o un guion bajo (`_`)
+3. Tabular Editor actualiza automáticamente todas las referencias del modelo
 
-## Common Causes
+## Causas comunes
 
-### Cause 1: Simple Naming
+### Causa 1: Nomenclatura sencilla
 
-The function was given a plain name without considering future conflicts.
+Se le dio a la función un nombre simple sin considerar posibles conflictos futuros.
 
-### Cause 2: Imported from Query
+### Causa 2: Importada desde una consulta
 
-A UDF was applied from a DAX query DEFINE section where namespace conventions were not followed.
+Se aplicó una UDF desde la sección DEFINE de una consulta DAX, donde no se respetaron las convenciones de espacios de nombres.
 
-## Example
+## Ejemplo
 
-### Before Fix
+### Antes de la corrección
 
 ```dax
-// Function named without separator
+// Función nombrada sin separador
 FUNCTION CalcProfit =
     (
         revenue: DOUBLE,
@@ -70,10 +70,10 @@ FUNCTION CalcProfit =
     => revenue - cost
 ```
 
-### After Fix
+### Después de la corrección
 
 ```dax
-// Function named with namespace separator
+// Función nombrada con separador de espacios de nombres
 FUNCTION Finance.CalcProfit =
     (
         revenue: DOUBLE,
@@ -82,11 +82,11 @@ FUNCTION Finance.CalcProfit =
     => revenue - cost
 ```
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1702** and higher.
+Esta regla se aplica a modelos con nivel de compatibilidad **1702** y superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [DAX User-Defined Functions](xref:udfs)
-- [Built-in BPA Rules](xref:built-in-bpa-rules)
+- [Funciones DAX definidas por el usuario](xref:udfs)
+- [Reglas BPA integradas](xref:built-in-bpa-rules)
