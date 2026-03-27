@@ -46,12 +46,12 @@
 
 ## @calendars
 
-## 明细行表达式
+## @detail-rows-expression
 
-## 用户自定义聚合函数
+## @user-defined-aggregations
 
 # 使用 C# Script 实现自动化
 
-## 创建宏
+## @creating-macros
 
-## C# 脚本库
+## @csharp-script-library
