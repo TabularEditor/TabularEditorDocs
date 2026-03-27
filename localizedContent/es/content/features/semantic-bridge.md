@@ -31,6 +31,8 @@ El Puente semántico es un compilador de modelos semánticos capaz de traducir l
 Esto permite reutilizar la lógica de negocio en varias plataformas de datos, dar soporte a los usuarios finales y llegar hasta donde consumen los datos.
 También permite migraciones de una plataforma a otra.
 
+<a name="interface"></a>
+
 ## Interfaz
 
 ### Importar YAML de Metric View
@@ -118,6 +120,8 @@ En concreto, puedes
   - puedes crear tus propias reglas de validación personalizadas con [`SemanticBridge.MetricView.MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___) y sus versiones más simples
 - importar una Metric View a un modelo tabular con [`SemanticBridge.MetricView.ImportToTabularFromFile`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabularFromFile_System_String_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), que hace exactamente lo mismo que la GUI mostrada arriba, o [`SemanticBridge.MetricView.ImportToTabular`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabular_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), que es similar, pero opera sobre la Metric View cargada actualmente, en lugar de leer una desde el disco.
 
+<a name="mvp-limitations"></a>
+
 ## Limitaciones del MVP
 
 ### Plataformas compatibles
@@ -163,7 +167,7 @@ Las Metric Views proporcionan una capa estructurada sobre expresiones SQL, por l
 El MVP no se conecta a ninguna plataforma aparte de Tabular, sino que funciona completamente con archivos locales.
 Debe crear su YAML de Metric View por su cuenta y luego colocarlo donde Tabular Editor pueda verlo.
 
-### API de C\#
+### API de C\\#
 
 La interfaz de C# se ha diseñado para optimizar el flujo de trabajo de traducción automática.
 Por ello, hay pocas opciones para interactuar con la Metric View cargada actualmente, y ciertos tipos de operaciones resultan torpes.
@@ -194,7 +198,7 @@ Por ello, hemos adoptado las siguientes definiciones y estándares en nuestra do
 ### Terminología general de modelado dimensional
 
 Hay muchos términos que se usan de forma general al hablar de un modelo dimensional o de un modelo semántico, y también dentro del modelo de objetos y los formatos de serialización de una plataforma específica.
-Por ejemplo, el término "medida" se refiere de forma genérica a un valor cuantitativo que se agrega en un modelo dimensional para representar una métrica de negocio de interés, pero también se refiere a un tipo específico de objeto tanto en Databricks Metric Views como en los modelos tabulares. En una Metric View, una medida es una expresión SQL con nombre que define una agregación en la Metric View, y en un modelo tabular, una medida es una expresión DAX con nombre que define una agregación en el modelo tabular.
+En una Metric View, una medida es una expresión SQL con nombre que define una agregación en la Metric View, y en un modelo tabular, una medida es una expresión DAX con nombre que define una agregación en el modelo tabular.
 Es imposible hablar del trabajo de Semantic Bridge sin hablar a la vez de los múltiples significados de estas palabras.
 Por ejemplo, hablamos de traducir una medida de Metric View a una medida tabular.
 Por eso, **siempre nos referimos a un objeto del modelo de una plataforma específica indicando la plataforma y el objeto, por ejemplo "medida de Metric View" o "medida tabular"**.
