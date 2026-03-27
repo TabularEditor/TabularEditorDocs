@@ -76,6 +76,8 @@ Al aceptarlo, se quita la licencia actual y tendrás que volver a introducir una
 > [!IMPORTANT]
 > Una vez que se quita una clave de licencia, tal como se describe arriba, el usuario actual no podrá usar el producto en ese equipo hasta que se introduzca una nueva clave de licencia.
 
+<a name="registry-details"></a>
+
 #### Detalles del registro
 
 Tabular Editor 3 usa el Registro de Windows para almacenar los detalles de activación.
@@ -86,9 +88,9 @@ Para ver la clave de licencia actual asignada al equipo, ejecuta el siguiente co
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-También puedes usar `regedit.exe` (Editor del Registro de Windows) y navegar a `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` para ver y modificar los valores **LicenseKey** y **User**.
-
 Un administrador del sistema también puede asignar por adelantado licencias de Tabular Editor 3 a un equipo, especificando los valores **LicenseKey** y **User** en la clave de registro `SOFTWARE\\Kapacity\\Tabular Editor 3` de cada usuario.
+
+También puedes usar `regedit.exe` (Editor del Registro de Windows) y navegar a `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` para ver y modificar los valores **LicenseKey** y **User**.
 
 ![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
 
@@ -126,7 +128,7 @@ Puedes implementar Tabular Editor de forma silenciosa y aprovisionar previamente
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
    ```
 
-   | MSI Feature   | Description                       | Installed by default              |
+   | MSI Feature   | Descripción                       | Installed by default              |
    | ------------- | --------------------------------- | --------------------------------- |
    | `MainFeature` | Core Tabular Editor 3 application | Yes (Required) |
    | `AIAssistant` | AI Assistant for Tabular Editor 3 | No                                |
