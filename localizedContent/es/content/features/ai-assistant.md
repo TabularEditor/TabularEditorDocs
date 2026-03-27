@@ -67,6 +67,9 @@ Select **Anthropic** as the provider and enter your API key. The default model i
 
 ![AI Assistant Anthropic Configuration](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
 
+> [!IMPORTANT]
+> Anthropic enforces input token per minute (ITPM) rate limits based on your account tier. A new API key starts at Tier 1 with 30,000 ITPM for Claude Sonnet 4.x. A single request against a large model can exceed this limit. Purchase $40 or more in API credits to reach Tier 2 (450,000 ITPM). See the [Anthropic rate limits documentation](https://docs.anthropic.com/en/api/rate-limits) for full tier details.
+
 ### Azure OpenAI
 
 Select **Azure OpenAI** as the provider. Enter your API key and the service endpoint URL for your Azure OpenAI resource. Set the model name to match your deployment name.
@@ -279,6 +282,23 @@ Configure AI Assistant display and behavior options under **Tools > Preferences 
 | Preview changes | true    | Show the preview changes dialog when executing AI-generated C# scripts from the chat |
 
 ![AI Assistant Preferences](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
+
+## Token Usage
+
+Each message to the AI Assistant consumes input tokens. The token cost of a single message depends on what context is included:
+
+- **System prompt and custom instructions**: Sent with every message. Typically 5,000 to 15,000 tokens depending on which custom instructions are active.
+- **Model metadata**: When the assistant needs to understand your model, it retrieves metadata through tool calls. A compact summary includes table names, column names, measure names, relationships and descriptions. A full metadata retrieval includes the complete model definition. For large models this can consume tens of thousands of tokens.
+
+### Reducing Token Usage
+
+Select specific objects in the **TOM Explorer** before asking your question. When objects are selected, the assistant scopes its context to those objects instead of retrieving metadata for the entire model. This is the most effective way to reduce both token usage and API cost.
+
+Other ways to reduce token usage:
+
+- Ask focused questions about specific tables, measures or columns rather than broad questions about the entire model
+- Start new conversations when switching topics to avoid accumulating long conversation histories
+- Use a smaller or less expensive model for exploratory questions
 
 ## Limitations
 
