@@ -42,6 +42,8 @@ applies_to:
 
 所有 UI 元素都可以调整大小和/或重新排列，以满足你的需求。 你甚至可以将某个视图从主窗口拖出，从而把同一个 Tabular Editor 3 实例分布到多个显示器上。 关闭应用时，Tabular Editor 3 会保存这些自定义设置，并在下次启动时自动恢复。
 
+<a name="choosing-a-different-layout"></a>
+
 ### 选择不同的布局
 
 要将应用重置为默认布局，请选择 **窗口 > 默认布局**。 Tabular Editor 2.x 用户可能更喜欢 **窗口 > 经典布局** 选项：TOM Explorer 位于屏幕左侧，属性视图位于表达式编辑器下方。
@@ -50,29 +52,31 @@ applies_to:
 
 ![管理布局](~/content/assets/images/manage-layouts.png)
 
-### Window docking options
+<a name="changing-themes-and-palettes"></a>
 
-When rearranging views and documents in Tabular Editor 3, you can choose to dock windows in different areas of the interface. When dragging a window to a new position, docking indicators will appear showing you the available docking locations.
+### 窗口停靠选项
 
-![Window Docking Options](~/content/assets/images/window-docking-options.png)
+在 Tabular Editor 3 中重新排列视图和文档时，你可以选择将窗口停靠到界面的不同区域。 将窗口拖到新位置时，会出现停靠指示器，显示可用的停靠位置。
 
-There are two primary ways to dock windows, each serving a different purpose:
+![窗口停靠选项](~/content/assets/images/window-docking-options.png)
 
-**Document tab docking (center indicator)**: When you drag a window to the center docking indicator, it will be placed in the main document area. Windows docked this way become document tabs that:
+停靠窗口主要有两种方式，各有不同用途：
 
-- Can be cycled through using **Ctrl+Tab**
-- Are displayed in the main working area alongside other documents like DAX queries, scripts, and diagrams
-- Do not have auto-hide functionality
+**文档选项卡停靠（中心指示器）**：将窗口拖到中心停靠指示器时，它会被放置在主文档区域。 以这种方式停靠的窗口会成为文档选项卡，其特点包括：
 
-**Tool window docking (edge indicators)**: When you drag a window to the left, right, top, or bottom docking indicators, it will be docked as a tool window. Tool windows:
+- 可使用 **Ctrl+Tab** 在选项卡之间切换
+- 会在主工作区与 DAX 查询、脚本和图表等其他文档并排显示
+- 不支持自动隐藏
 
-- Are not accessible via **Ctrl+Tab**
-- Display a pin icon that enables auto-hide functionality (making the window collapse when not in use)
-- Behave similarly to other tool windows such as the TOM Explorer and Messages view
-- Can be docked at various positions around the main document area
+**工具窗口停靠（边缘指示器）**：将窗口拖到左侧、右侧、顶部或底部的停靠指示器时，它会作为工具窗口停靠。 工具窗口：
+
+- 无法通过 **Ctrl+Tab** 访问
+- 带有图钉图标，可用于启用自动隐藏（不使用时窗口会折叠）
+- 其行为与 TOM Explorer 和信息视图等其他工具窗口类似
+- 可停靠在主文档区域周围的不同位置
 
 > [!TIP]
-> The size of a docked window is determined by the available space in the area you choose to dock it, not by the docking option itself. You can resize windows by dragging the dividers between them.
+> 停靠窗口的大小取决于你选择停靠区域中的可用空间，而不是停靠选项本身。 你可以拖动窗口之间的分隔线来调整大小。
 
 ### 更改主题和调色板
 
@@ -84,6 +88,8 @@ There are two primary ways to dock windows, each serving a different purpose:
 对于基于矢量的主题（Basic 和 Bezier），可以用 **窗口 > 调色板** 菜单项来更改主题使用的颜色。
 
 ![Palettes](~/content/assets/images/palettes.png)
+
+<a name="menus"></a>
 
 # 菜单
 
@@ -159,6 +165,8 @@ There are two primary ways to dock windows, each serving a different purpose:
 - **全选**：选中当前活动文档中的所有文本，或选中 TOM Explorer 中属于同一父级的所有对象。
 - **Code Assist**：此选项仅在编辑 DAX 代码时可用。 它提供了一个快捷入口，可访问多种与编辑 DAX 代码相关的 Code Assist 功能。 更多信息，请参阅 [DAX 编辑器](xref:dax-editor#code-assist-features)。
 
+<a name="view"></a>
+
 ## 视图
 
 **视图** 菜单可让你在 Tabular Editor 3 用户界面的不同视图之间导航。 如果某个视图已被隐藏，在此菜单中点击该视图的标题即可取消隐藏，并将其置于焦点。 注意，“视图”菜单中不会显示文档。 要在文档之间切换，请使用[窗口菜单](#window)。
@@ -201,6 +209,8 @@ There are two primary ways to dock windows, each serving a different purpose:
 
 - **自定义...** 启动 Tabular Editor 3 用户界面布局自定义对话框，可在其中创建新工具栏、重新排列并编辑菜单和工具栏按钮等。
 - **偏好...** 启动 Tabular Editor 3 偏好对话框。它是管理 Tabular Editor 及其各项功能的中心入口，例如更新检查、代理设置、查询行数限制、请求超时等。 有关详细信息，请参阅 @preferences。
+
+<a name="window"></a>
 
 ## 窗口
 
