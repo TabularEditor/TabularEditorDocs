@@ -10,7 +10,7 @@
 
 ## @faq
 
-## @偏好
+## @preferences
 
 ## @policies
 
