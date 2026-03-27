@@ -1,28 +1,28 @@
 # Interfaz de usuario
 
-## @interfaz-de-usuario
+## @user-interface
 
 ## @tom-explorer-view
 
-## @vista-de-propiedades
+## @properties-view
 
-## @vista-de-bpa
+## @bpa-view
 
-## @vista-de-actualizacion-de-datos
+## @data-refresh-view
 
-## @buscar-y-reemplazar
+## @find-replace
 
-## @vista-de-mensajes
+## @messages-view
 
-## @vista de diagrama
+## @diagram-view
 
 # Características de DAX
 
-## @depurador-de-dax
+## @dax-debugger
 
-## @editor-de-dax
+## @dax-editor
 
-## @consulta-dax
+## @dax-query
 
 ## @scripts-de-dax
 
