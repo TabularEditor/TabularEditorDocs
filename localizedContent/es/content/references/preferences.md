@@ -51,7 +51,7 @@ En Power BI Desktop es habitual insertar un salto de línea en la primera línea
 
 ##### _Only for multi-line DAX expressions_ (enabled)
 
-When "Line break on first line of DAX" is enabled, this sub-setting controls whether the line break is added only for multi-line DAX expressions. When checked, single-line expressions are left unchanged.
+Cuando se habilita "Salto de línea en la primera línea de DAX", esta subconfiguración controla si el salto de línea se añade solo a expresiones DAX de varias líneas. Si se selecciona, las expresiones de una sola línea se dejan sin cambios.
 
 ##### _Modo de autenticación predeterminado de Power BI_ (Integrada)
 
@@ -90,11 +90,11 @@ Si se desactiva, tendrás que ejecutar explícitamente un análisis de práctica
 
 Elige si quieres habilitar, deshabilitar o que se te pregunte sobre el uso de las reglas integradas de Best Practice Analyzer de Tabular Editor. Las reglas integradas cubren procedimientos recomendados clave en formato, metadatos, diseño del modelo, expresiones DAX y traducciones. Las instalaciones nuevas tendrán las reglas integradas habilitadas de forma predeterminada.
 
-### Notifications
+### Notificaciones
 
 ##### _Data refresh notification_ (enabled)
 
-When checked, a notification is displayed when a data refresh operation completes.
+Si se selecciona, se muestra una notificación cuando finaliza una operación de actualización de datos.
 
 ### Ajuste de fórmulas DAX
 
@@ -176,7 +176,7 @@ Crea una copia de seguridad del modelo al guardar cambios localmente. Esto te of
 
 ##### _Ubicación para guardar la copia de seguridad_
 
-Especifica la carpeta donde se almacenan las copias de seguridad creadas al guardar. By default, backups are not created unless a location is specified.
+Especifica la carpeta donde se almacenan las copias de seguridad creadas al guardar. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
 
 ##### _Copia de seguridad al implementar_ (habilitado)
 
@@ -213,6 +213,8 @@ Al guardar un modelo cargado desde un archivo PBIX, usa el nombre del archivo PB
 ##### _Crear opciones de usuario para modelos nuevos_ (habilitado)
 
 Crea automáticamente archivos .tmuo (Tabular Model User Options) para los modelos nuevos. Estos archivos almacenan ajustes específicos de cada usuario, como los diseños del diagrama y las posiciones de las ventanas.
+
+<a name="tabular-editor--keyboard"></a>
 
 ## Tabular Editor > Teclado
 
@@ -539,6 +541,8 @@ Especifica la configuración regional para las funciones de DAX y el formato.
 
 Estas configuraciones solo son relevantes cuando Tabular Editor 3 no puede determinar la versión de Analysis Services utilizada, como ocurre cuando se carga directamente un archivo Model.bim. En este caso, Tabular Editor intenta deducir a qué versión se implementará el modelo, en función del nivel de compatibilidad. Si Tabular Editor genera un Report de errores semánticos o de sintaxis que no lo son, puede que debas ajustar esta configuración.
 
+Esta opción controla específicamente si debe aplicarse el formato automático de las llamadas a funciones (espaciado entre argumentos y paréntesis) al cerrar un paréntesis.
+
 ## Editor de DAX > Formato automático
 
 ![Configuración de formato automático](~/content/assets/images/auto-formatting-settings.png)
@@ -551,19 +555,19 @@ Esta opción aplicará automáticamente ciertas reglas de formato cuando se prod
 
 ##### _Formatear automáticamente las llamadas a funciones_ (habilitado)
 
-Esta opción controla específicamente si debe aplicarse el formato automático de las llamadas a funciones (espaciado entre argumentos y paréntesis) al cerrar un paréntesis.
-
-##### _Sangría automática_ (habilitado)
-
 Esta opción aplica sangría automáticamente a los argumentos de una función cuando se inserta un salto de línea dentro de una llamada a una función.
 
 ##### _Cierre automático de llaves_ (habilitado)
 
-Esta opción inserta automáticamente la llave o la comilla de cierre cuando se escribe una llave o comilla de apertura.
+Esta opción aplica sangría automáticamente a los argumentos de una función cuando se inserta un salto de línea dentro de una llamada a una función.
+
+##### _Sangría automática_ (habilitado)
+
+Cuando está habilitada, esta opción envuelve automáticamente la selección actual con la llave de cierre al escribir una llave de apertura.
 
 ##### _Envolver la selección_ (habilitado)
 
-Cuando está habilitada, esta opción envuelve automáticamente la selección actual con la llave de cierre al escribir una llave de apertura.
+Esta opción inserta automáticamente la llave o la comilla de cierre cuando se escribe una llave o comilla de apertura.
 
 ### Reglas de formato
 
@@ -571,13 +575,13 @@ Estos ajustes controlan cómo se formatean los espacios en blanco del código DA
 
 ##### _Espacio después de las funciones_ (deshabilitado)
 
-# [Habilitado](#tab/space-after-function-on)
+# [Deshabilitado](#tab/space-after-function-off)
 
 ```DAX
 SUM ( 'Sales'[Amount] )
 ```
 
-# [Deshabilitado](#tab/space-after-function-off)
+# [Habilitado](#tab/space-after-function-on)
 
 ```DAX
 SUM( 'Sales'[Amount] )
@@ -585,11 +589,11 @@ SUM( 'Sales'[Amount] )
 
 ***
 
-##### _Salto de línea después de las funciones_ (deshabilitado)
+##### [Habilitado](#tab/newline-after-function-on)
 
 Se aplica solo cuando es necesario dividir una llamada de función en varias líneas.
 
-# [Habilitado](#tab/newline-after-function-on)
+# [Deshabilitado](#tab/newline-after-function-off)
 
 ```DAX
 SUM
@@ -598,7 +602,7 @@ SUM
 )
 ```
 
-# [Deshabilitado](#tab/newline-after-function-off)
+# _Salto de línea después de las funciones_ (deshabilitado)
 
 ```DAX
 SUM(
@@ -610,13 +614,13 @@ SUM(
 
 ##### _Añadir espacios en los paréntesis_ (habilitado)
 
-# [Habilitado](#tab/pad-parentheses-on)
+# [Deshabilitado](#tab/pad-parentheses-off)
 
 ```DAX
 SUM( Sales[Amount] )
 ```
 
-# [Deshabilitado](#tab/pad-parentheses-off)
+# [Habilitado](#tab/pad-parentheses-on)
 
 ```DAX
 SUM(Sales[Amount])
@@ -626,11 +630,11 @@ SUM(Sales[Amount])
 
 ##### _Límite de línea del formato largo_ (120)
 
-El número máximo de caracteres que se pueden mantener en una sola línea antes de dividir una expresión en varias líneas, al usar la opción **Formatear DAX (líneas largas)**.
+El número máximo de caracteres que se conservarán en una sola línea antes de dividir una expresión en varias líneas, al usar la opción **Formatear DAX (líneas cortas)**.
 
 ##### _Límite de línea del formato corto_ (60)
 
-El número máximo de caracteres que se conservarán en una sola línea antes de dividir una expresión en varias líneas, al usar la opción **Formatear DAX (líneas cortas)**.
+El número máximo de caracteres que se pueden mantener en una sola línea antes de dividir una expresión en varias líneas, al usar la opción **Formatear DAX (líneas largas)**.
 
 ### Mayúsculas/minúsculas y comillas
 
@@ -663,6 +667,8 @@ Para hacer referencia a ciertos nombres de tabla no es necesario encerrarlos ent
 ##### _Anteponer siempre el prefijo a las columnas de extensión_ (deshabilitado)
 
 Las columnas de extensión se pueden definir sin un nombre de tabla. Si se activa, el Editor de DAX siempre agregará el prefijo de tabla a una columna de extensión.
+
+_Disparador de sugerencias de llamada_
 
 ## Editor de DAX > Code Assist
 
@@ -708,7 +714,7 @@ Define prefijos aceptables para nombres de variables (p. ej., `_`, `__`, `var_`,
 
 Define prefijos aceptables para nombres de columnas temporales (p. ej., `@`, `_`, `x`, `x_`). Las acciones de código sugerirán añadir estos prefijos a los nombres de columnas temporales que no sigan la convención.
 
-## Editor SQL / Editor M / Editor de C\#
+## Editor SQL / Editor M / Editor de C\\#
 
 ![Marcador de posición: captura de pantalla de las páginas de preferencias de los editores SQL/M/C#]
 
