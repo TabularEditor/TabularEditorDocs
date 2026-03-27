@@ -29,6 +29,8 @@ Viene en tres _sabores_ diferentes:
 
 Las tres modalidades admiten las mismas operaciones, como [atajos de teclado](xref:shortcuts3#dax-code), resaltado de sintaxis, Code Assist, etc.
 
+<a name="code-assist-features"></a>
+
 ## Funciones de Code Assist
 
 El principal impulsor de la productividad en el Editor de DAX de Tabular Editor 3 son las funciones **Información de parámetros** y **Autocompletar**. En conjunto, se conocen como funciones de **Code Assist** (otros proveedores usan el término "IntelliSense").
