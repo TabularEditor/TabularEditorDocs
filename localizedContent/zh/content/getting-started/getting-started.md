@@ -2,7 +2,7 @@
 uid: getting-started
 title: 安装与激活
 author: Morten Lønskov
-updated: 2025-09-23
+updated: 2026-03-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -115,13 +115,27 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 你可以以静默方式部署 Tabular Editor，并通过 Windows 注册表预先配置许可证。
 
 1. **静默安装**（无 UI，不重启）：
+
    ```powershell
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
    ```
 
+   To include the **AI Assistant** feature, specify the `ADDLOCAL` property. The AI Assistant is not installed by default.
+
+   ```powershell
+   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
+   ```
+
+   | MSI Feature   | Description                       | Installed by default              |
+   | ------------- | --------------------------------- | --------------------------------- |
+   | `MainFeature` | Core Tabular Editor 3 application | Yes (Required) |
+   | `AIAssistant` | AI Assistant for Tabular Editor 3 | No                                |
+
+   > [!NOTE]> When using `ADDLOCAL`, you must include `MainFeature` alongside any optional features. Specifying only `AIAssistant` without `MainFeature` results in an incomplete installation.
+
 你也可以使用 `/package` 替代 `/i`。 将 `<version>` 替换为实际的版本字符串。 如适用，请使用 ARM64 MSI。
 
-有关可用 MSI 命令行选项的详细信息，请参阅 Microsoft 官方文档：  
+For details on available MSI command-line options, see the official Microsoft documentation:
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
 2. **在应用程序首次启动之前**，**将许可证写入注册表**：
