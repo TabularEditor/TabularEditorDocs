@@ -1,4 +1,4 @@
-﻿---
+---
 uid: bpa-view
 title: Best Practice Analyzer view
 author: Daniel Otykier
