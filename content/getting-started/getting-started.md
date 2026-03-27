@@ -125,7 +125,7 @@ You can deploy Tabular Editor silently and pre-provision the license through the
 
    | MSI Feature | Description | Installed by default |
    |-------------|-------------|----------------------|
-   | `MainFeature` | Core Tabular Editor 3 application | Yes |
+   | `MainFeature` | Core Tabular Editor 3 application | Yes (Required) |
    | `AIAssistant` | AI Assistant for Tabular Editor 3 | No |
 
    > [!NOTE]
