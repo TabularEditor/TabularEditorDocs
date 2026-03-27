@@ -48,28 +48,28 @@
 
 ## @tom-explorer-view-reference
 
-## @图表视图参考
+## @diagram-view-reference
 
 # 并行开发
 
-## @并行开发
+## @parallel-development
 
-## @在工作区模式下优化工作流程
+## @optimizing-workflow-workspace-mode
 
 # 使用 Tabular Editor 更快地构建模型
 
 ## @boosting-productivity-te3
 
-## @导入表格进行数据建模
+## @importing-tables-data-modeling
 
-## @刷新查询预览
+## @refresh-preview-query
 
 ## @creating-and-testing-dax
 
 ## @dax-script-introduction
 
-## @最佳实践分析器
+## @bpa
 
-## @C# 脚本和宏
+## @cs-scripts-and-macros
 
 ## @personalizing-te3
