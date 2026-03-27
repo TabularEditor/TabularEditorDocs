@@ -97,7 +97,7 @@ De forma predeterminada, las particiones, los Data source y los roles no se sobr
 Puedes encontrar más información sobre las opciones de la línea de comandos [aquí](../features/Command-line-Options.md).
 
 > [!NOTE]
-> Como TabularEditor.exe es una aplicación de Windows Forms, al ejecutarla desde la línea de comandos se hará en un subproceso distinto, devolviendo el control al proceso que la invocó de inmediato. Esto puede causar problemas al ejecutar despliegues como parte de un trabajo por lotes, cuando necesitas esperar a que el despliegue se complete correctamente antes de continuar con la tarea. Si tienes estos problemas, usa `start /wait` para que TabularEditor termine su trabajo antes de devolver el control al proceso que lo invocó:
+> Como TabularEditor.exe es una aplicación de Windows Forms, al ejecutarla desde la línea de comandos se hará en un subproceso distinto, devolviendo el control al proceso que la invocó de inmediato. Si tienes estos problemas, usa `start /wait` para que TabularEditor termine su trabajo antes de devolver el control al proceso que lo invocó: Esto puede causar problemas al ejecutar despliegues como parte de un trabajo por lotes, cuando necesitas esperar a que el despliegue se complete correctamente antes de continuar con la tarea.
 >
 > `start /wait TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
