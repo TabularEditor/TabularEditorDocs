@@ -24,27 +24,27 @@
 
 ## @dax-query
 
-## @scripts-de-dax
+## @dax-scripts
 
 ## @code-actions
 
-## @administrador-de-paquetes-dax
+## @dax-package-manager
 
 # Secuencias de comandos y automatización
 
-## @scripts-de-csharp
+## @csharp-scripts
 
 ## Biblioteca de C# Script
 
-### @biblioteca-de-csharp-script
+### @csharp-script-library
 
-### @biblioteca-de-scripts-para-principiantes
+### @script-library-beginner
 
 ### @script-library-advanced
 
-## @metodos-de-ayuda-para-scripts
+## @script-helper-methods
 
-## @fragmentos-de-script-utiles
+## @useful-script-snippets
 
 ## @macros
 
@@ -52,7 +52,7 @@
 
 ## @best-practice-analyzer
 
-### @reglas-de-bpa-integradas
+### @built-in-bpa-rules
 
 ### @using-bpa
 
@@ -100,11 +100,11 @@
 
 ## @save-to-folder
 
-## @guardar-con-archivos-de-apoyo
+## @save-with-supporting-files
 
-## @actualización-avanzada
+## @advanced-refresh
 
-## @sobrescrituras-de-actualización
+## @refresh-overrides
 
 # Línea de comandos e integración
 
@@ -112,8 +112,8 @@
 
 # Puente semántico para traducciones multiplataforma
 
-## @puente-semántico
+## @semantic-bridge
 
-## @puente-semántico-vista-de-métricas-modelo-de-objetos
+## @semantic-bridge-metric-view-object-model
 
-## @puente-semántico-vista-de-métricas-validación
+## @semantic-bridge-metric-view-validation
