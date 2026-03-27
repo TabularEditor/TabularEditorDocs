@@ -10,7 +10,7 @@
 
 ## @faq
 
-## @preferencias
+## @preferences
 
 ## @policies
 
