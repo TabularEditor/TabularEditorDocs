@@ -1,6 +1,6 @@
 ---
 uid: script-convert-dlol-to-import
-title: Convert Direct Lake on OneLake to import
+title: Convertir Direct Lake en OneLake a modo Import
 author: Morten Lønskov
 updated: 2025-06-25
 applies_to:
@@ -11,28 +11,28 @@ applies_to:
       full: true
 ---
 
-# Convert Direct Lake on OneLake to Import
+# Convertir Direct Lake en OneLake al modo Import
 
-## Script Purpose
+## Objetivo del script
 
-This script converts Direct Lake on OneLake (DL/OL) to Import mode tables. As laid out in the [Direct Lake guidance article](xref:direct-lake-guidance), we need to replace the [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet) on such tables, with a corresponding regular M partition in Import mode.
+Este script convierte las tablas de Direct Lake en OneLake (DL/OL) al modo Import mode. Tal como se indica en el [artículo de orientación de Direct Lake](xref:direct-lake-guidance), necesitamos reemplazar el [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet) de este tipo de tablas por la partición M normal correspondiente en el modo Import mode.
 
-## Prerequisites
+## Requisitos previos
 
-You will need the **SQL Endpoint** as well as the **Name** of your Fabric Warehouse or Lakehouse. Both can be found in the Fabric portal.
+Necesitarás el **punto de conexión de análisis SQL** y el **nombre** de tu Warehouse o Lakehouse de Fabric. Ambos pueden encontrarse en el portal de Fabric.
 
-You will also need to know the **Schema** of the table/materialized view you wish to connect to. For Lakehouses the default is dbo.
+También tendrás que conocer el **esquema** de la tabla o vista materializada a la que quieres conectarte. En los Lakehouse, el valor predeterminado es dbo.
 
 ## Script
 
-### Convert Direct Lake on OneLake tables to Import mode
+### Convertir tablas Direct Lake en OneLake al modo Import mode
 
 ```csharp
 // ===================================================================================
-// Convert Direct Lake on OneLake tables back to Import mode
+// Convertir tablas Direct Lake en OneLake de vuelta a Import mode
 // ----------------------------------------
-// This scripts converts the selected or all tables from Direct Lake on OneLake to import
-//  It adds a shared expression named SQLEndpoint and replaces the existing DatabaseQuery if it no longer needed
+// Este script convierte las tablas seleccionadas o todas de Direct Lake en OneLake a Import mode
+//  Agrega una expresión compartida llamada SQLEndpoint y reemplaza la DatabaseQuery existente si ya no se necesita
 // ===================================================================================
 using System;
 using System.Linq;
@@ -41,7 +41,7 @@ using System.Windows.Forms;
 using System.Drawing;
 
 // -------------------------------------------------------------------
-// 1) Scope‐picker dialog
+// 1) Diálogo para elegir el ámbito
 // -------------------------------------------------------------------
 public class ScopeSelectionDialog : Form
 {
@@ -50,7 +50,7 @@ public class ScopeSelectionDialog : Form
 
     public ScopeSelectionDialog(int selectedCount, int totalCount)
     {
-        Text = "Choose tables to convert";
+        Text = "Elige las tablas que quieres convertir";
         AutoSize = true; AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterParent;
         Padding = new Padding(20);
@@ -62,7 +62,7 @@ public class ScopeSelectionDialog : Form
         Controls.Add(layout);
 
         layout.Controls.Add(new Label {
-            Text = $"You have {selectedCount} table(s) selected,\nand {totalCount} Direct Lake table(s) in the model.",
+            Text = $"Tienes {selectedCount} tabla(s) seleccionadas,\ny {totalCount} tabla(s) Direct Lake en el modelo.",
             AutoSize = true, TextAlign = ContentAlignment.MiddleLeft
         });
 
@@ -73,19 +73,19 @@ public class ScopeSelectionDialog : Form
         };
 
         var btnOnly = new Button {
-            Text = "Only selected tables", AutoSize = true,
+            Text = "Solo las tablas seleccionadas", AutoSize = true,
             DialogResult = DialogResult.OK
         };
         btnOnly.Click += (s, e) => SelectedOption = ScopeOption.OnlySelected;
 
         var btnAll = new Button {
-            Text = "All tables", AutoSize = true,
+            Text = "Todas las tablas", AutoSize = true,
             DialogResult = DialogResult.Retry
         };
         btnAll.Click += (s, e) => SelectedOption = ScopeOption.All;
 
         var btnCancel = new Button {
-            Text = "Cancel", AutoSize = true,
+            Text = "Cancelar", AutoSize = true,
             DialogResult = DialogResult.Cancel
         };
         btnCancel.Click += (s, e) => SelectedOption = ScopeOption.Cancel;
@@ -99,7 +99,7 @@ public class ScopeSelectionDialog : Form
 }
 
 // -------------------------------------------------------------------
-// 2) SQL‐import dialog (schema now required)
+// 2) Diálogo de importación SQL (ahora el esquema es obligatorio)
 // -------------------------------------------------------------------
 public class SqlImportDialog : Form
 {
@@ -110,7 +110,7 @@ public class SqlImportDialog : Form
 
     public SqlImportDialog(string endpoint, string db, string schema)
     {
-        Text = "Convert Direct Lake → Import";
+        Text = "Convertir Direct Lake → Import mode";
         AutoSize = true; AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterParent;
         Padding = new Padding(20);
@@ -122,38 +122,38 @@ public class SqlImportDialog : Form
         Controls.Add(layout);
 
         // Endpoint
-        layout.Controls.Add(new Label { Text = "SQL Analytics Endpoint:", AutoSize = true });
+        layout.Controls.Add(new Label { Text = "Punto de conexión de análisis SQL:", AutoSize = true });
         SqlEndpoint = new TextBox { Width = 800, Text = endpoint };
         layout.Controls.Add(SqlEndpoint);
 
-        // Database
+        // Base de datos
         layout.Controls.Add(new Label {
-            Text = "Lakehouse/Warehouse Name:", Padding = new Padding(0, 20, 0, 0),
+            Text = "Nombre del Lakehouse/Warehouse:", Padding = new Padding(0, 20, 0, 0),
             AutoSize = true
         });
         DatabaseName = new TextBox { Width = 800, Text = db };
         layout.Controls.Add(DatabaseName);
 
-        // Schema (required)
+        // Esquema (obligatorio)
         layout.Controls.Add(new Label {
-            Text = "Schema:", Padding = new Padding(0, 20, 0, 0),
+            Text = "Esquema:", Padding = new Padding(0, 20, 0, 0),
             AutoSize = true
         });
         Schema = new TextBox { Width = 800, Text = schema };
         layout.Controls.Add(Schema);
 
-        // Buttons
+        // Botones
         var panel = new FlowLayoutPanel {
             FlowDirection = FlowDirection.RightToLeft,
             Dock = DockStyle.Fill, AutoSize = true,
             Padding = new Padding(0, 20, 0, 0)
         };
         okButton = new Button {
-            Text = "OK", DialogResult = DialogResult.OK,
+            Text = "Aceptar", DialogResult = DialogResult.OK,
             AutoSize = true, Enabled = false
         };
         var cancel = new Button {
-            Text = "Cancel", DialogResult = DialogResult.Cancel,
+            Text = "Cancelar", DialogResult = DialogResult.Cancel,
             AutoSize = true
         };
         panel.Controls.AddRange(new Control[] { okButton, cancel });
@@ -162,7 +162,7 @@ public class SqlImportDialog : Form
         AcceptButton = okButton;
         CancelButton = cancel;
 
-        // Only enable OK when all three fields are non-empty
+        // Solo habilitar Aceptar cuando los tres campos no estén vacíos
         SqlEndpoint.TextChanged += Validate;
         DatabaseName.TextChanged += Validate;
         Schema.TextChanged += Validate;
@@ -179,19 +179,19 @@ public class SqlImportDialog : Form
 }
 
 // -------------------------------------------------------------------
-// 3) Main conversion logic
+// 3) Lógica principal de conversión
 // -------------------------------------------------------------------
 WaitFormVisible = false;
 Application.UseWaitCursor = false;
 
-// 3.1) Find all Direct Lake tables
+// 3,1) Encontrar todas las tablas Direct Lake
 var allDirectLake = Model.Tables
     .Where(t => t.Partitions.Count == 1
              && t.Partitions[0].SourceType == PartitionSourceType.Entity
              && t.Partitions[0].Mode == ModeType.DirectLake)
     .ToList();
 
-// 3.2) And those you’ve selected
+// 3,2) Y las que has seleccionado
 var selectedDirect = Selected.Tables
     .Cast<Table>()
     .Where(t => t.Partitions.Count == 1
@@ -199,7 +199,7 @@ var selectedDirect = Selected.Tables
              && t.Partitions[0].Mode == ModeType.DirectLake)
     .ToList();
 
-// 3.3) Ask scope
+// 3,3) Preguntar el ámbito
 var scopeDialog = new ScopeSelectionDialog(selectedDirect.Count, allDirectLake.Count);
 var dr = scopeDialog.ShowDialog();
 if (dr == DialogResult.Cancel || scopeDialog.SelectedOption == ScopeSelectionDialog.ScopeOption.Cancel)
@@ -212,15 +212,15 @@ var tablesToConvert = isAllTables
 
 if (tablesToConvert.Count == 0)
 {
-    Warning("No Direct Lake tables found in the chosen scope.");
+    Warning("No se encontraron tablas Direct Lake en el ámbito seleccionado.");
     return;
 }
 
-// 3.4) Ask for connection + schema
+// 3,4) Pedir conexión + esquema
 var sqlDialog = new SqlImportDialog("", "", "");
 if (sqlDialog.ShowDialog() == DialogResult.Cancel) return;
 
-// 3.5) Upsert shared expression "SQLEndpoint"
+// 3,5) Insertar o actualizar la expresión compartida "SQLEndpoint"
 const string sqlTemplate = @"let
     endpoint = Sql.Database(""{0}"",""{1}"")
 in
@@ -232,14 +232,14 @@ sqlexpr.Expression = string.Format(
     sqlDialog.SqlEndpoint.Text,
     sqlDialog.DatabaseName.Text);
 
-// 3.6) M‐partition template
+// 3,6) Plantilla de partición M
 const string mTemplate = @"let
     Source = SQLEndpoint,
     Data = Source{{[Schema=""{0}"",Item=""{1}""]}}[Data]
 in
     Data";
 
-// 3.7) Swap partitions
+// 3,7) Cambiar particiones
 foreach (var table in tablesToConvert)
 {
     var oldP = table.Partitions[0];
@@ -253,33 +253,33 @@ foreach (var table in tablesToConvert)
     oldP.Delete();
 }
 
-// 3.8) If converting the **entire model**, delete the old DatabaseQuery expr
+// 3,8) Si se convierte **todo el modelo**, eliminar la expresión DatabaseQuery anterior
 if (isAllTables)
 {
     var oldDbq = Model.Expressions.FirstOrDefault(e => e.Name == "DatabaseQuery");
     if (oldDbq != null)
-        oldDbq.Delete();   // TE3 API: Expression.Delete() removes it from the model
+        oldDbq.Delete();   // API de TE3: Expression.Delete() la elimina del modelo
 }
 
-// 3.9) Ensure default mode is Import
+// 3,9) Asegurar que el modo predeterminado sea Import mode
 Model.DefaultMode = ModeType.Import;
 
-Info("Conversion complete: Direct Lake → Import" + 
-     (isAllTables ? " (DatabaseQuery removed)" : "") + ".");
+Info("Conversión completada: Direct Lake → Import mode" + 
+     (isAllTables ? " (DatabaseQuery eliminado)" : "") + ".");
 ```
 
-### Explanation
+### Explicación
 
-The script first prompts the user to determine the scope of the conversion by choosing between converting only the selected tables or all tables in the model. It then identifies which tables are currently in Direct Lake mode within the chosen scope. If no applicable tables are found, or if the user cancels the dialog, the script terminates.
+El script primero te pide que determines el alcance de la conversión, eligiendo entre convertir solo las tablas seleccionadas o todas las tablas del modelo. A continuación, identifica qué tablas están actualmente en modo Direct Lake dentro del ámbito elegido. Si no se encuentran tablas aplicables o si cancelas el cuadro de diálogo, el script finaliza.
 
-The user is then prompted to enter the SQL Analytics Endpoint, the name of the Lakehouse or Warehouse, and a required Schema name. The script ensures all three fields are populated before allowing the user to proceed.
+Después, el script te pide que introduzcas el punto de conexión de análisis SQL, el nombre del Lakehouse o Warehouse y un nombre de esquema obligatorio. El script se asegura de que los tres campos estén rellenados antes de dejarte continuar.
 
-Next, the script creates or updates a Shared Expression named `SQLEndpoint`, using the provided connection details. This expression uses the `Sql.Database` connector to access the Lakehouse or Warehouse.
+A continuación, el script crea o actualiza una expresión compartida llamada `SQLEndpoint` con los detalles de conexión proporcionados. Esta expresión usa el conector `Sql.Database` para acceder al Lakehouse o Warehouse.
 
-For each table being converted, the script creates a new Import mode M partition that references the `SQLEndpoint` expression and uses the specified schema and table name. The existing Direct Lake partition is renamed and then removed, leaving only the new Import partition.
+Para cada tabla que se convierte, el script crea una nueva partición M en modo Import mode que hace referencia a la expresión `SQLEndpoint` y usa el esquema indicado y el nombre de la tabla. La partición Direct Lake existente se renombra y luego se elimina, dejando únicamente la nueva partición en modo Import.
 
-Finally, if the user chose to convert all Direct Lake tables in the model, the script checks for an existing Shared Expression named `DatabaseQuery` and deletes it if found. The model's default storage mode is then set to Import, and a confirmation message is displayed.
+Por último, si elegiste convertir todas las tablas Direct Lake del modelo, el script busca una expresión compartida existente llamada `DatabaseQuery` y la elimina si la encuentra. Luego, el modo de almacenamiento predeterminado del modelo se establece en Import y se muestra un mensaje de confirmación.
 
-## Use of AI disclaimer
+## Descargo de responsabilidad sobre el uso de IA
 
-This script was created with the help of an LLM.
+Este script se creó con la ayuda de un LLM.
