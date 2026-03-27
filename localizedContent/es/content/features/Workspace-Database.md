@@ -66,11 +66,11 @@ El archivo incluye un nombre de usuario para evitar que varios desarrolladores s
 
 En "modo del área de trabajo", Tabular Editor guarda simultáneamente su modelo en disco y actualiza la base de datos de Workspace cada vez que pulsa Guardar (ctrl+s). Esto le permite probar rápidamente código nuevo y ver los mensajes de error proporcionados por Analysis Services, sin tener que desplegar manualmente la base de datos ni invocar Archivo > Guardar como... o Archivo > Guardar en carpeta... siempre que desee guardar los metadatos del modelo en el disco.
 
-### Incremental Refresh Expression Change Detection
+### Detección de cambios en expresiones de actualización incremental
 
-When opening a model with a workspace database, Tabular Editor compares the local incremental refresh `Source Expression` and `Polling Expression` with those on the workspace database, for each table governed by a `BasicRefreshPolicy`.
+Al abrir un modelo con una base de datos en el Workspace, Tabular Editor compara las `Source Expression` y `Polling Expression` locales de la actualización incremental con las de la base de datos del Workspace, para cada tabla regida por una `BasicRefreshPolicy`.
 
-If Tabular Editor detects differences, it prompts you to overwrite the workspace database expressions with your local version. This prevents accidental loss of expression changes, which is particularly important when collaborating via Git where multiple developers may modify these expressions independently.
+Si Tabular Editor detecta diferencias, se te solicita que sobrescribas las expresiones de la base de datos del Workspace con tu versión local. Esto evita la pérdida accidental de cambios en las expresiones, lo cual es especialmente importante al colaborar mediante Git, donde varios desarrolladores pueden modificar estas expresiones de forma independiente.
 
 > [!TIP]
-> If you are working in a team and notice the prompt appearing frequently, coordinate with your team members to ensure incremental refresh expressions are not modified independently in different branches.
+> Si trabajas en equipo y ves que el mensaje aparece con frecuencia, coordínate con tus compañeros para asegurarte de que las expresiones de actualización incremental no se modifiquen de forma independiente en ramas diferentes.
