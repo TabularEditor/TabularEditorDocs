@@ -139,6 +139,8 @@ En Fabric, el modelo semántico predeterminado de un Lakehouse o un Warehouse se
 
 ## Solución de problemas de conexiones XMLA
 
+<a name="testing-a-simple-connection"></a>
+
 ### Probar una conexión sencilla
 
 Estos pasos muestran cómo conectarse de la forma más fiable a un modelo semántico de Fabric/Power BI desde Tabular Editor.
