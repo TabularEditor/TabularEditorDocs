@@ -44,11 +44,11 @@ A continuación se muestra una lista de las directivas que se pueden controlar. 
 | DisableDaxOptimizerUpload      | **(Solo TE3)** No se permitirá a los usuarios cargar archivos VPAX mediante la función de integración del Optimizador de DAX. Se aplica implícitamente cuando se aplica `DisableDaxOptimizer`.                                                                                     |
 | RequireDaxOptimizerObfuscation | **(Solo TE3)** No se permitirá a los usuarios cargar archivos VPAX sin ofuscar (en texto sin formato) mediante la función de integración del Optimizador de DAX. Se aplica implícitamente cuando se aplica `DisableDaxOptimizer` o `DisableDaxOptimizerUpload`. |
 | DisableDaxPackageManager       | **(Solo TE3)** La función del Administrador de paquetes de DAX no estará disponible.                                                                                                                                                                                                               |
-| DisableAi                      | **(TE3 Only)** All AI functionality is disabled. The AI module is not loaded at startup and no AI-related features are available. Any previously stored API key configuration is cleared.                                                                          |
+| DisableAi                      | **(Solo TE3)** Toda la funcionalidad de IA está deshabilitada. El módulo de IA no se carga al iniciar y no se dispone de ninguna función relacionada con la IA. Se borra cualquier configuración de clave de API almacenada previamente.                           |
 
 ## Deshabilitar las comunicaciones web
 
-If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, `DisableDaxOptimizer`, and `DisableAi` policies.
+Si quieres asegurarte de que Tabular Editor no realice solicitudes web, especifica las directivas `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, `DisableDaxOptimizer` y `DisableAi`.
 
 > [!NOTE]
 > Incluso cuando se especifican las políticas anteriores, Tabular Editor 3 seguirá realizando solicitudes ocasionales a `https://api.tabulareditor.com` para validar la licencia. Si Tabular Editor 3 no puede acceder a este endpoint (debido a un cortafuegos o un proxy), el usuario tendrá que [activar manualmente](xref:installation-activation-basic#manual-activation-no-internet) el producto cada 30 días.
@@ -57,6 +57,6 @@ If you want to ensure that Tabular Editor does not perform web requests, specify
 
 Si quieres asegurarte de que Tabular Editor no permita a los usuarios ejecutar código arbitrario, especifica las políticas `DisableCSharpScripts` y `DisableMacros` para deshabilitar las macros.
 
-## Disabling AI features
+## Deshabilitar las funciones de IA
 
-If you want to prevent all AI functionality, specify the `DisableAi` policy. This prevents the AI module from loading at startup and clears any stored API key configuration.
+Si quieres impedir toda la funcionalidad de IA, especifica la directiva `DisableAi`. Esto evita que el módulo de IA se cargue al inicio y borra cualquier configuración de clave de API almacenada previamente.
