@@ -2,7 +2,7 @@
 uid: direct-lake-sql-model
 title: Direct Lake on SQL Semantic Models
 author: Morten Lønskov
-updated: 2024-08-22
+updated: 2026-03-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,14 +24,13 @@ Direct Lake on SQL semantic models connect directly to data sources stored in [O
 > As of [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md), Tabular Editor 3 supports Direct Lake on OneLake, which is recommended in most scenarios. See our [Direct Lake guidance](xref:direct-lake-guidance) article for more information.
 
 Tabular Editor 3 can create and connect to this type of model. For a tutorial on this please refer to our blog article: [Direct Lake semantic models: How to use them with Tabular Editor](https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/). 
-Tabular Editor 3 can create direct lake semantic models with both the Lakehouse and Datawarehouse SQL Endpoint. 
+Tabular Editor 3 can create Direct Lake semantic models with both the Lakehouse and Datawarehouse SQL Endpoint. 
 
-Tabular Editor 2 can connect to Direct Lake semantic models, but does not have any built in functionality to create new tables or direct lake semantic models. This needs to be done manually or with a C# script. 
+Tabular Editor 2 can connect to Direct Lake semantic models, but does not have any built-in functionality to create new tables or Direct Lake semantic models. This needs to be done manually or with a C# script. 
 
-<div class="NOTE">
-  <h5>Direct Lake limitations</h5>
-  There are  several limitations to the changes that can be made to a Direct Lake model: <a href="https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#known-issues-and-limitations">Direct Lake Known Issues and Limitations</a> We recommend <a "https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/"> this article by SQLBI</a> for a initial overview of choosing between Direct Lake and Import mode.
-</div>
+> [!NOTE]
+> **Direct Lake limitations**
+> There are several limitations to the changes that can be made to a Direct Lake model. See [Direct Lake Considerations and Limitations](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations) for the full list. See also [this article by SQLBI](https://www.sqlbi.com/blog/marco/2024/04/06/direct-lake-vs-import-mode-in-power-bi/) for an overview of choosing between Direct Lake and Import mode.
 
 ## Creating a Direct Lake on SQL model in Tabular Editor 3
 
@@ -43,7 +42,7 @@ Using the checkbox ensures that Direct Lake specific properties and annotations 
 
 > [!NOTE]
 > Direct Lake on SQL models currently use a collation that is different from regular Power BI import semantic models. This may lead to different results when querying the model, or when referencing object names in DAX code.
- For more information please see this blog post by Kurt Buhler: [Case-sensitive models in Power BI: consequences & considerations](https://data-goblins.com/power-bi/case-specific)
+> For more information, see this blog post by Kurt Buhler: [Case-sensitive models in Power BI: consequences & considerations](https://data-goblins.com/power-bi/case-specific).
 
 > [!IMPORTANT]
 > As of [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md), the Direct Lake checkbox has been removed from the New Model dialog. You must [manually set the collation on your model to match that of your Fabric Warehouse](xref:direct-lake-guidance#collation) if using Direct Lake on SQL.
@@ -62,7 +61,7 @@ The top title bar of Tabular Editor shows which type of model is open in that in
 
 ## Converting a Direct Lake model to Import Mode
 
-The below C# script converts and existing model into 'Import Mode'. This can be useful if the data latency requirements of your model does not require Direct Lake or you want to avoid the limitations of a Direct Lake model but have already started building one inside Fabric.
+The below C# script converts an existing model into Import mode. This can be useful if the data latency requirements of your model does not require Direct Lake or you want to avoid the limitations of a Direct Lake model but have already started building one inside Fabric.
 
 Running the script is possible when Tabular Editor is connected to a semantic model through the XMLA endpoint. However, saving changes directly back to the Power BI/Fabric workspace is not supported by Microsoft. To circumvent this, the recommended approach is to use the "Model > Deploy..." option. This allows for the deployment of the newly converted model as a new entity in a workspace.
 
