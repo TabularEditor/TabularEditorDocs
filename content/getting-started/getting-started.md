@@ -2,7 +2,7 @@
 uid: getting-started
 title: Installation and Activation
 author: Morten Lønskov
-updated: 2025-09-23
+updated: 2026-03-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -118,9 +118,22 @@ You can deploy Tabular Editor silently and pre-provision the license through the
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
    ```
 
+   To include the **AI Assistant** feature, specify the `ADDLOCAL` property. The AI Assistant is not installed by default.
+   ```powershell
+   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
+   ```
+
+   | MSI Feature | Description | Installed by default |
+   |-------------|-------------|----------------------|
+   | `MainFeature` | Core Tabular Editor 3 application | Yes (Required) |
+   | `AIAssistant` | AI Assistant for Tabular Editor 3 | No |
+
+   > [!NOTE]
+   > When using `ADDLOCAL`, you must include `MainFeature` alongside any optional features. Specifying only `AIAssistant` without `MainFeature` results in an incomplete installation.
+
 You may also use `/package` instead of `/i`. Replace `<version>` with the actual version string. Use the ARM64 MSI if applicable.
 
-For details on available MSI command-line options, please refer to the official Microsoft documentation:  
+For details on available MSI command-line options, see the official Microsoft documentation:
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
 2. **Write the license to the Registry** **before the first launch** of the application:
