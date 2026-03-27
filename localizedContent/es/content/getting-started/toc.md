@@ -42,34 +42,34 @@
 
 ## @macros-view-reference
 
-## @mensajes-view-reference
+## @messages-view-reference
 
 ## @properties-view-reference
 
 ## @tom-explorer-view-reference
 
-## @referencia-de-la-vista-de-diagrama
+## @diagram-view-reference
 
 # Desarrollo en paralelo
 
-## @desarrollo-en-paralelo
+## @parallel-development
 
-## @optimizar-el-flujo-de-trabajo-en-modo-espacio-de-trabajo
+## @optimizing-workflow-workspace-mode
 
 # Cree modelos más rápido con Tabular Editor
 
-## @aumentar-la-productividad-te3
+## @boosting-productivity-te3
 
-## @importar-tablas-para-el-modelado-de-datos
+## @importing-tables-data-modeling
 
-## @actualizar-vista-previa-de-la-consulta
+## @refresh-preview-query
 
-## @crear-y-probar-dax
+## @creating-and-testing-dax
 
-## @introduccion-al-script-de-dax
+## @dax-script-introduction
 
 ## @bpa
 
-## @scripts-y-macros-de-csharp
+## @cs-scripts-and-macros
 
-## @personalizar-te3
+## @personalizing-te3
