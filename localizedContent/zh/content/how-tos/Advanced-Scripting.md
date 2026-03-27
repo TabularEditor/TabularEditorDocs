@@ -129,6 +129,8 @@ Selected.Measures
         .ForEach(m => m.Name += " DEPRECATED");
 ```
 
+<a name="helper-methods"></a>
+
 ## 辅助方法
 
 为了让脚本调试更容易，Tabular Editor 提供了一组特殊的辅助方法。 从内部实现来看，这些是用 `[ScriptMethod]` 特性修饰的静态方法。 该特性允许脚本直接调用这些方法，无需指定命名空间或类名。 插件也可以使用 `[ScriptMethod]` 特性，以类似方式将公共静态方法公开给脚本调用。
