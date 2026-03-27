@@ -122,23 +122,23 @@ Puedes implementar Tabular Editor de forma silenciosa y aprovisionar previamente
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
    ```
 
-   To include the **AI Assistant** feature, specify the `ADDLOCAL` property. The AI Assistant is not installed by default.
+   Para incluir la característica **Asistente de IA**, especifique la propiedad `ADDLOCAL`. El Asistente de IA no se instala de forma predeterminada.
 
    ```powershell
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
    ```
 
-   | MSI Feature   | Descripción                       | Installed by default              |
-   | ------------- | --------------------------------- | --------------------------------- |
-   | `MainFeature` | Core Tabular Editor 3 application | Yes (Required) |
-   | `AIAssistant` | AI Assistant for Tabular Editor 3 | No                                |
+   | Característica de MSI | Descripción                              | Instalado de forma predeterminada   |
+   | --------------------- | ---------------------------------------- | ----------------------------------- |
+   | `MainFeature`         | Aplicación principal de Tabular Editor 3 | Sí (obligatorio) |
+   | `AIAssistant`         | Asistente de IA para Tabular Editor 3    | No                                  |
 
-   > [!NOTE]> When using `ADDLOCAL`, you must include `MainFeature` alongside any optional features. Specifying only `AIAssistant` without `MainFeature` results in an incomplete installation.
+   > [!NOTE]> When using `ADDLOCAL`, you must include `MainFeature` alongside any optional features. Especificar solo `AIAssistant` sin `MainFeature` da como resultado una instalación incompleta.
 
 También puedes usar `/package` en lugar de `/i`. Sustituye `<version>` por la cadena de versión real. Usa el MSI de ARM64 si corresponde.
 
-For details on available MSI command-line options, see the official Microsoft documentation:
-[Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
+Para obtener más información sobre las opciones disponibles de la línea de comandos de MSI, consulte la documentación oficial de Microsoft:
+[Opciones de línea de comandos de Microsoft Standard Installer - aplicaciones Win32 | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
 2. **Escribe la licencia en el Registro** **antes de la primera ejecución** de la aplicación:
 
