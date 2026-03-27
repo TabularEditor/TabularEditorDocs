@@ -1,67 +1,67 @@
 ---
 uid: kb.bpa-udf-use-compound-names
-title: Use Compound Names for User-Defined Functions
+title: 为用户定义函数使用复合名称
 author: Morten Lønskov
 updated: 2026-03-19
-description: Best practice rule ensuring User-Defined Functions use separator characters to prevent naming conflicts with future built-in DAX functions.
+description: 最佳实践规则：确保 DEFINE 中的用户定义函数使用分隔符字符，避免将来与新增的内置 DAX 函数发生命名冲突。
 ---
 
-# Use Compound Names for User-Defined Functions
+# 为用户定义函数使用复合名称
 
-## Overview
+## 概述
 
-This best practice rule identifies User-Defined Functions (UDFs) whose names do not contain a separator character (`.` or `_`). Compound names prevent naming conflicts if Microsoft introduces a built-in DAX function with the same name.
+此最佳实践规则会识别在 DEFINE 中定义且名称中不包含分隔符字符（`.` 或 `_`）的用户定义函数（UDF）。 复合名称可以避免命名冲突：如果 Microsoft 引入了同名的内置 DAX 函数，也不会受到影响。
 
-- Category: Error Prevention
+- 类别：预防错误
 
-- Severity: Low (1)
+- 严重性：低（1）
 
-## Applies To
+## 适用范围
 
-- User-Defined Functions
+- 用户定义函数
 
-## Why This Matters
+## 为什么这很重要
 
-UDFs without separator characters in their names risk breaking in the future:
+名称中不含分隔符字符的 UDF 将来可能会失效，风险包括：
 
-- **Naming conflicts**: If Microsoft adds a new built-in DAX function with the same name as your UDF, the built-in function takes precedence and your UDF will stop working
-- **Ambiguity**: Without a namespace or prefix, it is unclear whether a function call refers to a built-in DAX function or a custom UDF
-- **Maintenance burden**: Renaming UDFs after a conflict occurs requires updating all references throughout the model
+- **命名冲突**：如果 Microsoft 添加了与你的 UDF 同名的新内置 DAX 函数，内置函数将优先生效，你的 UDF 将无法继续工作
+- **歧义**：如果没有命名空间或前缀，就难以判断一次函数调用指向的是内置 DAX 函数还是自定义 UDF
+- **维护成本**：一旦发生冲突后才重命名 UDF，就需要在整个模型中更新所有引用
 
-Using compound names (e.g., `Finance.CalcProfit` or `My_CalcProfit`) makes your UDFs distinguishable from built-in DAX functions.
+使用复合名称（例如 `Finance.CalcProfit` 或 `My_CalcProfit`）可以让你的 UDF 与内置 DAX 函数明显区分开来。
 
-## When This Rule Triggers
+## 此规则何时触发
 
-The rule triggers when a UDF name contains neither a period nor an underscore:
+当 UDF 名称既不包含句点也不包含下划线时，将触发此规则：
 
 ```csharp
 not Name.Contains(".") and not Name.Contains("_")
 ```
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In the **TOM Explorer**, locate the User-Defined Function
-2. Rename it to include a namespace separator (`.`) or underscore (`_`)
-3. Tabular Editor automatically updates all references throughout the model
+1. 在 **TOM Explorer** 中找到该用户定义函数
+2. 将其重命名，使名称包含命名空间分隔符（`.`）或下划线（`_`）
+3. Tabular Editor 会在整个模型中自动更新所有引用
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Simple Naming
+### 原因 1：命名过于简单
 
-The function was given a plain name without considering future conflicts.
+该函数使用了一个普通名称，未考虑未来可能发生的冲突。
 
-### Cause 2: Imported from Query
+### 原因 2：从查询导入
 
-A UDF was applied from a DAX query DEFINE section where namespace conventions were not followed.
+该 UDF 应用于 DAX 查询的 DEFINE 部分，但未遵循命名空间约定。
 
-## Example
+## 示例
 
-### Before Fix
+### 修复前
 
 ```dax
-// Function named without separator
+// 未使用命名空间分隔符命名的函数
 FUNCTION CalcProfit =
     (
         revenue: DOUBLE,
@@ -70,10 +70,10 @@ FUNCTION CalcProfit =
     => revenue - cost
 ```
 
-### After Fix
+### 修复后
 
 ```dax
-// Function named with namespace separator
+// 使用命名空间分隔符命名的函数
 FUNCTION Finance.CalcProfit =
     (
         revenue: DOUBLE,
@@ -82,11 +82,11 @@ FUNCTION Finance.CalcProfit =
     => revenue - cost
 ```
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1702** and higher.
+这个规则适用于兼容级别为 **1702** 及以上的模型。
 
-## Related Rules
+## 相关规则
 
-- [DAX User-Defined Functions](xref:udfs)
-- [Built-in BPA Rules](xref:built-in-bpa-rules)
+- [DAX 用户自定义函数](xref:udfs)
+- [内置 BPA 规则](xref:built-in-bpa-rules)
