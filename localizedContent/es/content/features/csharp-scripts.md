@@ -139,35 +139,35 @@ Selected.Measures
         .ForEach(m => m.Name += " DEPRECATED");
 ```
 
-### Complete list of Selected accessors
+### Lista completa de los accesores de `Selected`
 
-The following table lists all available singular and plural accessors on the `Selected` object. Singular accessors throw a `SelectionException` if the current selection does not contain exactly one object of that type. Plural accessors return an empty collection if no objects of that type are selected.
+La siguiente tabla enumera todos los accesores singulares y plurales disponibles en el objeto `Selected`. Los accesores singulares lanzan una `SelectionException` si la selección actual no contiene exactamente un objeto de ese tipo. Los accesores plurales devuelven una colección vacía si no se selecciona ningún objeto de ese tipo.
 
-| Singular                            | Plural                               | Object Type              |
-| ----------------------------------- | ------------------------------------ | ------------------------ |
-| `Selected.Measure`                  | `Selected.Measures`                  | Measures                 |
-| `Selected.Column`                   | `Selected.Columns`                   | All column types         |
-| `Selected.DataColumn`               | `Selected.DataColumns`               | Data columns             |
-| `Selected.CalculatedColumn`         | `Selected.CalculatedColumns`         | Calculated columns       |
-| `Selected.CalculatedTableColumn`    | `Selected.CalculatedTableColumns`    | Calculated table columns |
-| `Selected.Hierarchy`                | `Selected.Hierarchies`               | Hierarchies              |
-| `Selected.Level`                    | `Selected.Levels`                    | Hierarchy levels         |
-| `Selected.Table`                    | `Selected.Tables`                    | Tables                   |
-| `Selected.CalculatedTable`          | `Selected.CalculatedTables`          | Calculated tables        |
-| `Selected.Partition`                | `Selected.Partitions`                | Partitions               |
-| `Selected.Role`                     | `Selected.Roles`                     | Model roles              |
-| `Selected.TablePermission`          | `Selected.TablePermissions`          | Table permissions        |
-| `Selected.KPI`                      | `Selected.KPIs`                      | KPIs                     |
-| `Selected.Calendar`                 | `Selected.Calendars`                 | Calendars                |
-| `Selected.CalculationItem`          | `Selected.CalculationItems`          | Calculation items        |
-| `Selected.Function`                 | `Selected.Functions`                 | User-defined functions   |
-| `Selected.DataSource`               | `Selected.DataSources`               | Data sources             |
-| `Selected.SingleColumnRelationship` | `Selected.SingleColumnRelationships` | Relationships            |
-| `Selected.Perspective`              | `Selected.Perspectives`              | Perspectives             |
-| `Selected.Culture`                  | `Selected.Cultures`                  | Translations             |
+| Singular                              | Plural                               | Tipo de objeto                     |
+| ------------------------------------- | ------------------------------------ | ---------------------------------- |
+| `Selected.Medida`                     | `Selected.Measures`                  | Medidas                            |
+| `Selected.Column`                     | `Selected.Columns`                   | Todos los tipos de columna         |
+| `Selected.DataColumn`                 | `Selected.DataColumns`               | Columnas de datos                  |
+| `Selected.CalculatedColumn`           | `Selected.CalculatedColumns`         | Columnas calculadas                |
+| `Selected.CalculatedTableColumn`      | `Selected.CalculatedTableColumns`    | Columnas de tablas calculadas      |
+| `Selected.Hierarchy`                  | `Selected.Hierarchies`               | Jerarquías                         |
+| `Selected.Level`                      | `Selected.Levels`                    | Niveles de jerarquía               |
+| `Selected.Table`                      | `Selected.Tables`                    | Tablas                             |
+| `Selected.CalculatedTable`            | `Selected.CalculatedTables`          | Tablas calculadas                  |
+| `Selected.Partición`                  | `Selected.Particiones`               | Particiones                        |
+| `Selected.rol`                        | `Selected.Roles`                     | Roles del modelo                   |
+| `Selected.TablePermission`            | `Selected.TablePermissions`          | Permisos de tabla                  |
+| `Selected.KPI`                        | `Selected.KPIs`                      | KPI                                |
+| `Selected.Calendar`                   | `Selected.Calendars`                 | Calendarios                        |
+| `Selected.CalculationItem`            | `Selected.CalculationItems`          | Elementos de cálculo               |
+| `Selected.Function`                   | `Selected.Functions`                 | Funciones definidas por el usuario |
+| `Selected.DataSource`                 | `Selected.DataSources`               | Fuentes de datos                   |
+| `Selected.SingleColumnRelationship`   | `Selected.SingleColumnRelationships` | Relaciones                         |
+| `Perspectiva seleccionada`            | `Selected.Perspectives`              | Perspectivas                       |
+| `Configuración regional seleccionada` | `Selected.Cultures`                  | Traducciones                       |
 
 > [!NOTE]
-> The accessors for Role, KPI, Calendar, CalculationItem, TablePermission, Function, DataSource, SingleColumnRelationship, CalculatedColumn, CalculatedTableColumn, DataColumn, CalculatedTable and Partition were added in Tabular Editor 3.26.0.
+> Los accesores de Rol, KPI, Calendar, CalculationItem, TablePermission, Function, DataSource, SingleColumnRelationship, CalculatedColumn, CalculatedTableColumn, DataColumn, CalculatedTable y Partición se agregaron en Tabular Editor 3.26.0.
 
 ## Métodos auxiliares
 
@@ -180,7 +180,7 @@ Tabular Editor proporciona un conjunto de métodos auxiliares especiales para fa
 - `void ImportProperties(string tsvData)` - forma práctica de cargar propiedades en varios objetos desde una cadena TSV.
 - `void CustomAction(string name)` - invoca una macro por su nombre.
 - `void CustomAction(this IEnumerable<ITabularNamedObject> objects, string name)` - invoca una macro en los objetos especificados.
-- `string ConvertDax(string dax, bool useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y configuraciones regionales distintas de EE. UU./Reino Unido. Si `useSemicolons` es true (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido al formato no EE. UU./Reino Unido. Es decir, las comas (separadores de lista) se convertirán en punto y coma, y los puntos (separadores decimales) se convertirán en comas. Y viceversa si `useSemicolons` se establece en false.
+- `string ConvertDax(string dax, bool useSemicolons)` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y configuraciones regionales distintas de EE. UU./Reino Unido. Si `useSemicolons` es true (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido al formato no EE. Es decir, las comas (separadores de lista) se convertirán en punto y coma, y los puntos (separadores decimales) se convertirán en comas. Y viceversa si `useSemicolons` se establece en false.
 - `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - da formato a las expresiones DAX en todos los objetos de la colección proporcionada
 - `void FormatDax(this IDaxDependantObject obj)` - pone un objeto en cola para dar formato a la expresión DAX cuando finalice la ejecución del script, o cuando se llame al método `CallDaxFormatter`.
 - `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - da formato a todas las expresiones DAX de los objetos puestos en cola hasta el momento
@@ -217,31 +217,31 @@ El cuadro de diálogo aparecerá de una de estas cuatro maneras, según el tipo 
 
 Puede marcar la casilla "No mostrar más salidas" en la esquina inferior izquierda para evitar que el script se detenga en futuras invocaciones de `.Output()`.
 
-## Run C# Scripts with Preview
+## Ejecutar C# Scripts con vista previa
 
-The **Run with preview** action lets you review all model metadata changes made by a C# script before committing them. This is useful when running unfamiliar scripts or performing bulk modifications.
+La acción **Ejecutar con vista previa** te permite revisar todos los cambios de metadatos del modelo realizados por un C# Script antes de confirmarlos. Esto resulta útil al ejecutar scripts desconocidos o al realizar modificaciones masivas.
 
-To use this feature, click **Script > Run with preview** in the toolbar or menu. The workflow is:
+Para usar esta función, haz clic en **Script > Ejecutar con vista previa** en la barra de herramientas o en el menú. El flujo de trabajo es el siguiente:
 
-1. Tabular Editor takes a snapshot of the model metadata before execution
-2. The script runs to completion
-3. Tabular Editor compares the current model metadata state to the snapshot taken before execution
-4. If changes are detected, a preview dialog appears showing a side-by-side hierarchical diff of the model (before and after)
-5. Changes are color-coded: green for added objects, red for deleted and orange for modified properties
-6. Use the **Show changes only** checkbox to hide unchanged items and focus on what the script changed
-7. Click **OK** to accept the changes, or **Revert** to undo all changes
+1. Tabular Editor toma una instantánea de los metadatos del modelo antes de la ejecución
+2. El script se ejecuta hasta completarse
+3. Tabular Editor compara el estado actual de los metadatos del modelo con la instantánea tomada antes de la ejecución
+4. Si se detectan cambios, aparecerá un cuadro de diálogo de vista previa que muestra, lado a lado, una comparación jerárquica de las diferencias del modelo (antes y después)
+5. Los cambios se codifican por colores: verde para los objetos agregados, rojo para los eliminados y naranja para las propiedades modificadas
+6. Usa la casilla **Mostrar solo cambios** para ocultar los elementos sin cambios y centrarte en lo que modificó el script
+7. Haz clic en **OK** para aceptar los cambios, o en **Revert** para deshacer todos los cambios
 
-![Script Preview - Model Changes](~/content/assets/images/c-sharp-script-preview-changes.png)
+![Vista previa del script: cambios en el modelo](~/content/assets/images/c-sharp-script-preview-changes.png)
 
-If the script fails (compilation or runtime error), all model metadata changes are automatically rolled back and no preview dialog is shown. If the script succeeds but makes no detectable metadata changes, an informational message is displayed instead.
+Si el script falla (error de compilación o en tiempo de ejecución), todos los cambios de metadatos del modelo se revierten automáticamente y no se muestra ningún cuadro de diálogo de vista previa. Si el script se ejecuta correctamente pero no realiza ningún cambio detectable en los metadatos, se muestran mensajes informativos en su lugar.
 
-All model metadata changes from a script execution are wrapped in a single undo transaction. Even after accepting changes through the preview dialog, you can still undo the entire operation with **Ctrl+Z**.
+Todos los cambios de metadatos del modelo derivados de la ejecución de un script se agrupan en una única transacción de deshacer. Incluso después de aceptar los cambios en el cuadro de diálogo de vista previa, aún puede deshacer toda la operación con **Ctrl+Z**.
 
 > [!IMPORTANT]
-> The preview and undo features only apply to model metadata changes. If a script performs external operations such as writing to files, databases or making web requests, those operations are executed immediately and cannot be reverted. The preview dialog does not attempt to analyze the script code — it works by comparing the model metadata state before and after execution.
+> Las funciones de vista previa y deshacer solo se aplican a los cambios de metadatos del modelo. Si un script realiza operaciones externas, como escribir en archivos, bases de datos o realizar solicitudes web, esas operaciones se ejecutan de inmediato y no se pueden revertir. El cuadro de diálogo de vista previa no intenta analizar el código del script; funciona comparando el estado de los metadatos del modelo antes y después de la ejecución.
 
 > [!TIP]
-> The [AI Assistant](xref:ai-assistant) shows the preview changes dialog automatically when you execute C# scripts from the chat, so you always get a chance to review AI-generated model changes before they are applied.
+> El [Asistente de IA](xref:ai-assistant) muestra automáticamente el cuadro de diálogo de vista previa de cambios cuando ejecuta C# Script desde el chat, de modo que siempre puede revisar los cambios del modelo generados por la IA antes de que se apliquen.
 
 ## Referencias de .NET
 
@@ -290,6 +290,8 @@ Además, los siguientes ensamblados de .NET Framework se cargan de forma predete
 - TomWrapper.Dll
 - TabularEditor.Exe
 - Microsoft.AnalysisServices.Tabular.Dll
+
+<a name="accessing-environment-variables"></a>
 
 ## Acceso a variables de entorno
 
@@ -370,6 +372,8 @@ foreach(var table in Model.Tables)
 
 Info($"Modelo configurado para el entorno {environment}");
 ```
+
+<a name="compatibility"></a>
 
 ## Compatibilidad
 
