@@ -1,28 +1,28 @@
 # 用户界面
 
-## @用户界面
+## @user-interface
 
-## @tom-explorer-view 资源管理器视图
+## @tom-explorer-view
 
-## @属性视图
+## @properties-view
 
-## @bpa-view 视图
+## @bpa-view
 
-## @数据刷新视图
+## @data-refresh-view
 
-## @查找与替换
+## @find-replace
 
-## @消息视图
+## @messages-view
 
-## @图表视图
+## @diagram-view
 
 # DAX 功能
 
-## @dax-debugger 调试器
+## @dax-debugger
 
-## @dax-editor 编辑器
+## @dax-editor
 
-## @dax-query 查询
+## @dax-query
 
 ## @dax-scripts 脚本
 
