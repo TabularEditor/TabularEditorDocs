@@ -4,7 +4,6 @@ title: TOM Explorer view
 author: Morten Lønskov
 updated: 2023-02-21
 applies_to:
-applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
@@ -18,4 +17,4 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-[!include[using-bpa](../../features/views/tom-explorer-view.md)]
+[!include[tom-explorer-view](../../features/views/tom-explorer-view.md)]

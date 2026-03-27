@@ -47,7 +47,7 @@ If you need to add, remove or modify the rules applying to your model, there's a
 This UI contains two lists: The top list represents the **collections** of rules that are currently loaded. Selecting a collection in this list, will display all the rules that are defined within this collection in the bottom list. By default, three rule collections will show up:
 
 * **Rules within the current model**: As the name indicates, this is the collection of rules that have been defined within the current model. The rule definitions are stored as an annotation on the Model object.
-* **Rules for the local user**: These are rules that are stored in your `%AppData%\..\Local\TabularEditor\BPARules.json` file. These rules will apply to all models that are loaded in Tabular Editor by the currently logged in Windows user.
+* **Rules for the local user**: These are rules that are stored in your `%AppData%\..\Local\TabularEditor3\BPARules.json` file (Tabular Editor 3) or `%AppData%\..\Local\TabularEditor\BPARules.json` file (Tabular Editor 2). These rules will apply to all models that are loaded in Tabular Editor by the currently logged in Windows user.
 * **Rules on the local machine**: These rules are stored in the `%ProgramData%\TabularEditor\BPARules.json`. These rules will apply to all models that are loaded in Tabular Editor on the current machine.
 
 If the same rule (by ID) is located in more than one collection, the order of precedence is from top to bottom, meaning a rule defined within the model takes precedence over a rule, with the same ID, defined on the local machine. This allows you to override existing rules, for example to take model specific conventions into account.

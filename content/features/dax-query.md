@@ -30,7 +30,7 @@ The built-in context-aware DAX Editor ensures that only the two valid DAX keywor
 
 ## DAX Query Options
 
-The DAX query window has five different query options.
+The DAX query window has six different query options.
 
 ![Dax Query Toolbar](~/content/assets/images/features/dax_query_window/dax_query_toolbar.png)
 
@@ -74,7 +74,7 @@ The shortcuts for these commands are:
 - Apply (F7)
 - Apply Measures & Sync (Shift+F7)
 - Apply Selection (F8)
-- Apply Selection and Synch (Shift F7)
+- Apply Selection and Sync (Shift+F8)
 
 ## DAX Query Example
 

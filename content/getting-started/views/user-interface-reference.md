@@ -16,7 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-[!include[using-bpa](../../features/views/user-interface.md)]
+[!include[user-interface](../../features/views/user-interface.md)]
 
 # Next steps
 

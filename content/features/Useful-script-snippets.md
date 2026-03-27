@@ -441,7 +441,9 @@ start /wait TabularEditor.exe "localhost" "AdventureWorks" -S "c:\Projects\Autog
 ***
 
 ## Creating Data Columns from Partition Source metadata
-**Note:** If you're using version 2.7.2 or newer, make sure to try the new "Import Table..." feature.
+
+> [!NOTE]
+> The `RefreshDataColumns()` method described below is only available in **Tabular Editor 2**. In Tabular Editor 3, use the **Import Table...** feature instead.
 
 If a table uses a Query partition based on an OLE DB provider data source, we can automatically refresh the column metadata of that table by executing the following snippet:
 ```csharp

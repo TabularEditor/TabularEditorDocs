@@ -77,9 +77,14 @@ Right-clicking anywhere in the Diagram View opens a context menu that provides q
 - **Add tables...**: Opens a dialog to manually add additional tables to the diagram.
 - **Add tables that filter this table**: Automatically brings in related tables that filter the current one.
 - **Add all related tables**: Loads all tables that share relationships with the selected table.
+- **Edit relationship**: Opens the relationship editor for the selected relationship. Only visible when a relationship is selected.
+- **Invert relationship**: Swaps the from and to sides of the selected relationship. Only visible when a relationship is selected.
+- **Activate relationship**: Activates an inactive relationship. Only visible when an inactive relationship is selected.
+- **Deactivate relationship**: Deactivates an active relationship. Only visible when an active relationship is selected.
 - **Fit to page**: Adjusts the diagram zoom to fit all visible tables.
-- **Auto-Arrange**: Automatically arrange tables into a star schema
+- **Auto-Arrange**: Automatically arrange tables into a star schema.
 - **Remove from diagram**: Hides the selected table from the current view.
+- **Delete relationship**: Deletes the selected relationship from the model. Only visible when a relationship is selected.
 
 ### Relationship Indicators
 

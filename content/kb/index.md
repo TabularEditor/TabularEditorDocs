@@ -35,6 +35,7 @@ Comprehensive guidelines for building high-quality, maintainable Power BI and An
 - @kb.bpa-remove-unused-data-sources - Eliminate unused data source definitions
 - @kb.bpa-specify-application-name - Set application names in connection strings for monitoring
 - @kb.bpa-powerbi-latest-compatibility - Maintain compatibility with latest Power BI features
+- @kb.bpa-udf-use-compound-names - Ensure UDF names don't conflict with future built-in DAX functions
 
 ## Code Actions
 ### DAX Code Analysis (DI)

@@ -11,7 +11,7 @@ applies_to:
       since: 3.25.0
       editions:
         - edition: Desktop
-          full: true
+          none: true
         - edition: Business
           full: true
         - edition: Enterprise

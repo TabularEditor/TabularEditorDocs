@@ -16,4 +16,4 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-[!include[using-bpa](../../features/views/properties-view.md)]
+[!include[properties-view](../../features/views/properties-view.md)]
