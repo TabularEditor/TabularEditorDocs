@@ -1,6 +1,6 @@
 ---
 uid: deploy-current-model
-title: Deploy Current Loaded Model
+title: Implementar el modelo cargado actualmente
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -8,16 +8,17 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-## Deployment
 
-If you want to deploy the currently loaded model to a new database, or overwrite an existing database with the model changes (for example when loading from a Model.bim file), use the Deployment Wizard under "Model" > "Deploy...". 
+## Implementación
 
-Tabular Editor comes with a deployment wizard that provides a few benefits compared to deploying from SSDT - especially when deploying to an existing database. After choosing a server and a database to deploy to, you have the following options for the deployment at hand:
+Si quieres implementar el modelo cargado actualmente en una nueva base de datos o sobrescribir una base de datos existente con los cambios del modelo (por ejemplo, al cargarlo desde un archivo Model.bim), usa el Asistente de implementación en "Model" > "Deploy...".
 
-![Deployment Wizard](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
+Tabular Editor incluye un Asistente de implementación que ofrece varias ventajas frente a la implementación desde SSDT, especialmente al implementar en una base de datos existente. Después de elegir un servidor y una base de datos de destino, tienes las siguientes opciones para esta implementación:
 
-Leaving the "Deploy Connections" box unchecked, will make sure that all the data sources on the target database stay untouched. You will get an error if your model contains one or more tables with a data source, that does not already exist in the target database.
+![Asistente de implementación](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
 
-Similarly, leaving out "Deploy Table Partitions", will make sure that existing partitions on your tables are not changed, leaving the data in the partitions intact.
+Si dejas desmarcada la casilla "Deploy Connections", te aseguras de que todos los Data sources de la base de datos de destino permanezcan intactos. Recibirás un error si tu modelo contiene una o más tablas con un Data source que no exista ya en la base de datos de destino.
 
-When the "Deploy Roles" box is checked, the roles in the target database will be updated to reflect what you have in the loaded model, however if the "Deploy Role Members" is unchecked, the members of each role will be unchanged in the target database.
+Del mismo modo, si dejas desmarcada la casilla "Deploy Table Partitions", te aseguras de que las particiones existentes de tus tablas no se modifiquen y de que los datos de las particiones se mantengan intactos.
+
+Cuando la casilla "Deploy Roles" está marcada, los roles de la base de datos de destino se actualizarán para reflejar los del modelo cargado; sin embargo, si la casilla "Deploy Role Members" está desmarcada, los miembros de cada rol permanecerán sin cambios en la base de datos de destino.

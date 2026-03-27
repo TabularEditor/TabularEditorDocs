@@ -1,6 +1,6 @@
 ---
 uid: scripting-referencing-objects
-title: Scripting/referencing objects
+title: Crear scripts y hacer referencia a objetos
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,12 +9,13 @@ applies_to:
       full: true
 ---
 
-## Scripting/referencing objects
-You can use drag-and-drop functionality, to script out objects in the following ways:
+## Crear scripts y hacer referencia a objetos
 
-* Drag one or more objects to another Windows application (text editor or SSMS)
-JSON code representing the dragged object(s) will be created. When dragging the Model node, a Table, a Role or a Data Source, a "createOrReplace" script is created.
+Puedes usar la función de arrastrar y soltar para generar scripts de objetos de las siguientes formas:
 
-* Dragging an object (measure, column or table) into the DAX expression editor, will insert a fully-qualified DAX-reference to the object in question.
+- Arrastra uno o varios objetos a otra aplicación de Windows (editor de texto o SSMS)
+  Se generará código JSON que representa el/los objeto(s) arrastrados. Al arrastrar el nodo Model, una tabla, un rol o un Data source, se crea un script "CreateOrReplace".
 
-* Dragging an object to the Advanced Script editor, will insert the C# code necessary to access the object through the TOM tree.
+- Al arrastrar un objeto (una medida, una columna o una tabla) al Editor de expresiones DAX, se insertará una referencia DAX totalmente calificada al objeto en cuestión.
+
+- Al arrastrar un objeto al editor de scripts avanzados, se insertará el código C# necesario para acceder al objeto a través del árbol TOM.

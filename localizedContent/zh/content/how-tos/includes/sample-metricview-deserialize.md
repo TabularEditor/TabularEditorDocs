@@ -1,7 +1,7 @@
-## Deserialize Metric View for these code samples
+## 对这些代码示例的 Metric View 进行反序列化
 
-This how-to uses a sample e-commerce Metric View representing sales data with three dimension tables (product, customer, date) joined to a fact table (orders).
-Run the snippet below first, if you'd like to follow along with the code in the rest of this how-to
+本操作指南使用一个示例电商 Metric View 来表示销售数据，其中三个维度表（product、customer、date）连接到一个事实表（orders）。
+如果你想在阅读本操作指南其余部分时跟着代码一起操作，请先运行下面的代码片段
 
 ```csharp
 SemanticBridge.MetricView.Deserialize("""

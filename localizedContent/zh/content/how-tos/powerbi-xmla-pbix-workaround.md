@@ -1,6 +1,6 @@
 ---
 uid: powerbi-xmla-pbix-workaround
-title: Creating PBIX File from XMLA Endpoint.
+title: 从 XMLA endpoint 创建 PBIX 文件。
 author: Morten Lønskov
 updated: 2023-10-18
 applies_to:
@@ -13,83 +13,86 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Only Premium Per User XMLA Endpoints"
+          note: "仅高级每用户版支持 XMLA 终结点"
         - edition: Enterprise
           full: true
 ---
-# Downloading a Power BI dataset to a .pbix using the XMLA endpoint
 
-Once a change is made to a Power BI semantic model through the XMLA endpoint, it's not possible to download the model as a .pbix file from the Power BI service. 
+# 使用 XMLA endpoint 将 Power BI Dataset 下载为 .pbix 文件
 
-However, with the Power BI Project file, it's possible to create a .pbix file from the remote model by following the three-step process, which is described as follows. 
+一旦通过 XMLA endpoint 对 Power BI 语义模型进行了更改，就无法再从 Power BI 服务将该模型下载为 .pbix 文件。
+
+不过，借助 Power BI Project 文件，你可以按下述三个步骤，从远程模型创建一个 .pbix 文件。
 
 ![XLMA to PBIX Overview](~/content/assets/images/power-bi/create-pbix-from-xmla-overview.png)
 
 > [!NOTE]
-> The described workaround isn't officially supported by Microsoft. There's no guarantee that it works for every model. Specifically, if you've added custom partitions or other objects [listed here](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations), Power BI Desktop may not be able to correctly open the file following this approach. See below for a script to handle incremental refresh partitions.
+> 本文所述的变通方法并非 Microsoft 官方支持。 无法保证它对每个模型都有效。 特别是，如果你添加了自定义分区或其他 [此处列出的](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) 对象，Power BI Desktop 可能无法按此方式正确打开该文件。 下方提供了一个脚本，用于处理增量刷新分区。
 
-## Step 1: Create and save an empty Power BI projects (.pbip) file
+## 步骤 1：创建并保存一个空的 Power BI Project（.pbip）文件
 
-The first step is to create a new Power BI report and save it as an empty Power BI Project (.pbip) file, as depicted in the following diagram.
+第一步是新建一个 Power BI Report，并将其保存为空的 Power BI Project（.pbip）文件，如下图所示。
 
 ![Save PBIP file](~/content/assets/images/power-bi/save-pbip-file.png)
 
-This creates a folder structure that contains an empty _model_ file. This _model_ file contains the model metadata. You'll overwrite this metadata in the next step with the metadata of the published model that you want to save to .pbix.
+这会创建一个文件夹结构，其中包含一个空的 _model_ 文件。 该 _model_ 文件包含模型元数据。 在下一步中，你将用要保存为 .pbix 的已发布模型的元数据覆盖这些元数据。
 
 ![PBIP with Model file](~/content/assets/images/power-bi/pbip-file-bim-model.png)
 
-Close Power BI desktop, and proceed with the next step in Tabular Editor.
+关闭 Power BI Desktop，然后在 Tabular Editor 中继续下一步操作。
 
-## Step 2: Open XMLA model with Tabular Editor
+## 步骤 2：使用 Tabular Editor 打开 XMLA 模型
 
-With Tabular Editor open, connect to the Fabric workspace via the XMLA endpoint. Load the Power BI semantic model you want to convert to a .pbix. 
+打开 Tabular Editor 后，通过 XMLA endpoint 连接到 Fabric Workspace。 加载要转换为 .pbix 的 Power BI 语义模型。
 
-## Step 3: Save XMLA model into .pbip
+## 步骤 3：将 XMLA 模型保存为 .pbip
 
-In Tabular Editor using _File > Save as..._, navigate to the Power BI Project folder. Overwrite the _model.bim_ file shown in the previous diagram. 
+在 Tabular Editor 中使用 _文件 > 另存为..._，导航到 Power BI Project 文件夹。 覆盖上一张图中显示的 _model.bim_ 文件。
 
-This will save the remote model into the Power BI Project that will now contain the model metadata.
+这样会把远程模型保存到 Power BI Project 中，现在这个项目会包含模型元数据。
 
-If the .pbip folder is configured to store the model as [TMDL](xref:tmdl) files, you will need to use the Save To Folder option in Tabular Editor instead. Then navigate to the Power BI project folder for the semantic model (ModelName.SemanticModel), open the 'definition' folder and save your model there.
+如果 .pbip 文件夹配置为将模型存储为 [TMDL](xref:tmdl) 文件，你就需要改用 Tabular Editor 里的“保存到文件夹”选项。 然后转到该语义模型的 Power BI Project 文件夹（ModelName.SemanticModel），打开“definition”文件夹，并把模型保存在那里。
 
 > [!NOTE]
-> To enable TMDL go to **Tools > Preferences > File Formats > Save-to-folder**, and select "TMDL" in the **Serialization mode** dropdown. See [TMDL documentation for more information](xref:tmdl)
+> 若要启用 TMDL，请转到 **Tools > 偏好 > File Formats > Save-to-folder**，并在 **Serialization mode** 下拉列表中选择 "TMDL"。 有关详细信息，请参阅 [TMDL 文档](xref:tmdl)
 
-## Step 3.1: Remove incremental refresh partitions and create new (Optional)
-Use the Convert Incremental Refresh script below to delete incremental refresh partitions and create a single partition for each table containing the expression used in the incremental refresh expression.
+## 步骤 3.1：移除增量刷新的分区并创建新的分区（可选）
 
-## Step 4: Save to .pbix and open this file in Power BI Desktop
+使用下面的 Convert Incremental Refresh 脚本删除增量刷新分区，并为每个表创建一个包含增量刷新中使用的表达式的单一分区。
 
-![PBIP with Tables](~/content/assets/images/power-bi/pbip-includes-tables.png)
+## 步骤 4：保存为 .pbix 并在 Power BI Desktop 中打开该文件
 
-Open the .pbip and the Power BI report will now contain the XMLA endpoint semantic model.
+![包含表的 PBIP](~/content/assets/images/power-bi/pbip-includes-tables.png)
 
-Save it to a .pbix using _File > Save As..._ in Power BI Desktop.
+打开 .pbip 后，Power BI Report 现在会包含 XMLA endpoint 语义模型。
 
-## Re-hydrate .pbix
-The .pbix now contains the model that was published to the Fabric workspace. When you open the .pbix, you can _re-hydrate_ the file, meaning that you load the data based on the connections specified in the model.
+在 Power BI Desktop 中使用 _文件 > 另存为..._ 将其保存为 .pbix。
 
-## Convert Incremental Refresh partitions
-The above step 4 will fail if the semantic model has incremental refresh enabled as a Power BI desktop model cannot contain multiple partitions.
-In this case the following script should be run against the model to convert incremental refresh partitions into single partitions
+## 重新水合 .pbix
 
+这个 .pbix 现在包含已发布到 Fabric Workspace 的模型。 打开 .pbix 后，可以对该文件进行 _重新水合_，也就是根据模型中指定的连接来加载数据。
+
+## 转换增量刷新分区
+
+如果语义模型启用了增量刷新，上述步骤 4 将失败，因为 Power BI Desktop 模型不能包含多个分区。
+在这种情况下，应针对该模型运行以下脚本，将增量刷新分区转换为单一分区
 
 ```csharp
 foreach (var t in Model.Tables)
 {
     if(t.EnableRefreshPolicy)
     {
-        //We will collect the SourceExpression from the Incremental Refresh Source Expression of the table
+        //我们将从表的增量刷新源表达式中收集 SourceExpression
         string m_expression = t.SourceExpression.ToString();
          
-        //We will generate a new partition name
+        //我们将生成一个新的分区名称
         string partition_name = t.Name + "-" + Guid.NewGuid();
 
-        //Now we will create a new partition
+        //现在我们将创建一个新的分区
         var partition = t.AddMPartition(partition_name, m_expression);
         partition.Mode = ModeType.Import;
         
-        //Next we will delete all the incremental refresh partitions of the table
+        //接下来我们将删除该表的所有增量刷新分区
         foreach (var p in t.Partitions.OfType<PolicyRangePartition>().ToList())
         {
             p.Delete();
@@ -98,4 +101,4 @@ foreach (var t in Model.Tables)
 };
 ```
 
-Thank you to [Micah Dail](https://twitter.com/MicahDail) for creating the script and suggesting it to be included in this document. 
+感谢 [Micah Dail](https://twitter.com/MicahDail) 编写该脚本，并建议将其纳入本文档。

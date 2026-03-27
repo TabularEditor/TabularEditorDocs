@@ -1,6 +1,6 @@
 ---
 uid: script-create-databricks-relationships
-title: Create Databricks Relationships
+title: Crear relaciones de Databricks
 author: Johnny Winter
 updated: 2025-09-04
 applies_to:
@@ -10,39 +10,42 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Create Databricks Relationships
 
-## Script Purpose
-This script was created as part of the Tabular Editor x Databricks series. In Unity Catalog it is possible to define primary and foreign key relationships between tables. This script can re-use this information to automatically detect and create relationships in Tabular Editor. Whilst importing the relationships, the script will also hide primary and foreign keys and set IsAvailableInMDX to false (with the exception of DateTime type primary keys). Primary keys are also marked as IsKey = TRUE in the semantic model. 
-<br></br>
-> [!NOTE] 
-> This script requires the Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
-Each run of the script will prompt the user for a Databricks Personal Access Token. This is required to authenticate to Databricks.
-The script utilises the information_schema tables in Unity Catalog to retrieve relationship information, so you may need to double check with your Databricks administrator to make sure you have permission to query these tables.
-<br></br>
+# Crear relaciones de Databricks
+
+## Propósito del script
+
+Este script se creó como parte de la serie Tabular Editor x Databricks. En Unity Catalog es posible definir relaciones de clave primaria y foránea entre tablas. Este script puede reutilizar esta información para detectar y crear automáticamente relaciones en Tabular Editor. Al importar las relaciones, el script también ocultará las claves principales y foráneas y establecerá IsAvailableInMDX en false (excepto en el caso de las claves principales de tipo DateTime). Las claves principales también se marcan como IsKey = TRUE en el modelo semántico. <br></br>
+
+> [!NOTE]
+> Este script requiere tener instalado el controlador ODBC Simba Spark (descárguelo desde https://www.databricks.com/spark/odbc-drivers-download)
+> En cada ejecución del script, se solicitará al usuario un token de acceso personal de Databricks. Esto es necesario para autenticarse en Databricks.
+> El script utiliza las tablas information_schema de Unity Catalog para recuperar información sobre las relaciones, por lo que quizá deba consultarlo con su administrador de Databricks para asegurarse de que tiene permisos para consultarlas. <br></br>
+
 ## Script
 
-### Create Databricks Relationships
+### Crear relaciones de Databricks
+
 ```csharp
 /*
- * Title: Create Databricks Relationships
+ * Title: Crear relaciones de Databricks
  * Author: Johnny Winter, greyskullanalytics.com
  *
- * This script, when executed, will loop through the currently selected tables and send a query to the Databricks Information Schema tables to see if any foreign keys
- * have been defined. Where foreign keys are identified, the script will create relationships between the tables in the semantic model.
- * With the exception of dimension columns that are datetime type, key columns will be hidden once relationshsips are created, with primary keys marked as primary keys and IsAvailableInMDX set to false.
- * Step 1:  Select one or more tables in the model. These should be tables which have a foreign key relationship defined in Unity Catalog
-            (typically fact tables, but they could also be bridge tables or outrigger dimensions).
- * Step 2:  Run this script
- * Step 3:  Enter your Databricks Personal Access Token when prompted
- * Step 4:  The script will connect to Databricks and detect where foreign keys exist on the selected table. 
-            If the relationship does not already exist in the semantic model, it will be created.
-            If a relationship already exists between the two tables, the new relationship will be created as inactive
-            For each table processed, a message box will display the number of relationships created.
- *          Click OK to continue to the next table. 
- * Notes:
- *  -   This script requires the Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
- *  -   Each run of the script will prompt the user for a Databricks Personal Access Token
+ * Este script, cuando se ejecuta, recorrerá las tablas seleccionadas actualmente y enviará una consulta a las tablas de Information Schema de Databricks para comprobar si se han definido claves foráneas.
+ * Cuando se identifiquen claves foráneas, el script creará relaciones entre las tablas en el modelo semántico.
+ * A excepción de las columnas de dimensión de tipo DateTime, las columnas clave se ocultarán una vez creadas las relaciones; además, las claves primarias se marcarán como tales y se establecerá IsAvailableInMDX en false.
+ * Paso 1:  Seleccione una o varias tablas en el modelo. Deben ser tablas que tengan definida una relación de clave foránea en Unity Catalog
+            (normalmente tablas de hechos, pero también pueden ser tablas puente o dimensiones outrigger).
+ * Paso 2:  Ejecute este script
+ * Paso 3:  Introduzca su token de acceso personal de Databricks cuando se le solicite
+ * Paso 4:  El script se conectará a Databricks y detectará si existen claves foráneas en la tabla seleccionada. 
+            Si la relación aún no existe en el modelo semántico, se creará.
+            Si ya existe una relación entre las dos tablas, la nueva relación se creará como inactiva.
+            Para cada tabla procesada, un cuadro de mensaje mostrará el número de relaciones creadas.
+ *          Haga clic en Aceptar para continuar con la siguiente tabla. 
+ * Notas:
+ *  -   Este script requiere que el controlador ODBC de Simba Spark esté instalado (descárguelo desde https://www.databricks.com/spark/odbc-drivers-download)
+ *  -   En cada ejecución del script, se pedirá al usuario un token de acceso personal de Databricks
  */
 #r "Microsoft.VisualBasic"
 using System;
@@ -53,7 +56,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using sysData = System.Data;
 
-//code to create a masked input box for Databricks PAT token
+//código para crear un cuadro de entrada enmascarado para el token PAT de Databricks
 public partial class PasswordInputForm : Form
 {
     public string Password { get; private set; }
@@ -77,7 +80,7 @@ public partial class PasswordInputForm : Form
         this.MaximizeBox = false;
         this.MinimizeBox = false;
 
-        // Prompt label
+        // Etiqueta de solicitud
         promptLabel = new Label();
         promptLabel.Text = prompt;
         promptLabel.Location = new System.Drawing.Point(12, 15);
@@ -85,11 +88,11 @@ public partial class PasswordInputForm : Form
         promptLabel.AutoSize = false;
         this.Controls.Add(promptLabel);
 
-        // Password textbox
+        // Cuadro de texto de contraseña
         passwordTextBox = new TextBox();
         passwordTextBox.Location = new System.Drawing.Point(12, 55);
         passwordTextBox.Size = new System.Drawing.Size(360, 20);
-        passwordTextBox.UseSystemPasswordChar = true; // This masks the input
+        passwordTextBox.UseSystemPasswordChar = true; // Enmascara la entrada
         passwordTextBox.KeyPress += (s, e) =>
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -100,27 +103,27 @@ public partial class PasswordInputForm : Form
         };
         this.Controls.Add(passwordTextBox);
 
-        // OK button
+        // Botón Aceptar
         okButton = new Button();
-        okButton.Text = "OK";
+        okButton.Text = "Aceptar";
         okButton.Location = new System.Drawing.Point(216, 85);
         okButton.Size = new System.Drawing.Size(150, 50);
         okButton.Click += OkButton_Click;
         this.Controls.Add(okButton);
 
-        // Cancel button
+        // Botón Cancelar
         cancelButton = new Button();
-        cancelButton.Text = "Cancel";
+        cancelButton.Text = "Cancelar";
         cancelButton.Location = new System.Drawing.Point(297, 85);
         cancelButton.Size = new System.Drawing.Size(150, 50);
         cancelButton.Click += CancelButton_Click;
         this.Controls.Add(cancelButton);
 
-        // Set default and cancel buttons
+        // Establecer botones predeterminados y de cancelación
         this.AcceptButton = okButton;
         this.CancelButton = cancelButton;
 
-        // Focus on textbox when form loads
+        // Poner el foco en el cuadro de texto cuando se carga el formulario
         this.Load += (s, e) => passwordTextBox.Focus();
     }
 
@@ -179,7 +182,7 @@ public static class MaskedInputHelper
             };
             var buttonOk = new Button()
             {
-                Text = "OK",
+                Text = "Aceptar",
                 Size = new System.Drawing.Size(150, 50),
                 Left = 12,
                 Width = 150,
@@ -188,7 +191,7 @@ public static class MaskedInputHelper
             };
             var buttonCancel = new Button()
             {
-                Text = "Cancel",
+                Text = "Cancelar",
                 Size = new System.Drawing.Size(150, 50),
                 Left = 175,
                 Width = 150,
@@ -212,7 +215,7 @@ public static class MaskedInputHelper
     }
 }
 
-//Code to retrieve Databricks Connection information from the M Query in a table partition
+//Código para recuperar la información de conexión de Databricks desde la consulta M en una partición de tabla
 public class DatabricksConnectionInfo
 {
     public string ServerHostname { get; set; }
@@ -236,35 +239,35 @@ public class PowerQueryMParser
     public static DatabricksConnectionInfo ParseMQuery(string mQuery)
     {
         if (string.IsNullOrWhiteSpace(mQuery))
-            throw new ArgumentException("M query cannot be null or empty");
+            throw new ArgumentException("La consulta M no puede ser null ni estar vacía");
 
         var connectionInfo = new DatabricksConnectionInfo();
 
         try
         {
-            // Parse Source line to extract server hostname and HTTP path
+            // Analizar la línea Source para extraer el nombre de host del servidor y la ruta HTTP
             ParseSourceLine(mQuery, connectionInfo);
 
-            // Parse Database line to extract database name
+            // Analizar la línea Database para extraer el nombre de la base de datos
             ParseDatabaseLine(mQuery, connectionInfo);
 
-            // Parse Schema line to extract schema name
+            // Analizar la línea Schema para extraer el nombre del esquema
             ParseSchemaLine(mQuery, connectionInfo);
 
-            // Parse Data line to extract table name
+            // Analizar la línea Data para extraer el nombre de la tabla
             ParseDataLine(mQuery, connectionInfo);
 
             return connectionInfo;
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException($"Error parsing M query: {ex.Message}", ex);
+            throw new InvalidOperationException($"Error al analizar la consulta M: {ex.Message}", ex);
         }
     }
 
     private static void ParseSourceLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        // Pattern to match both:
+        // Patrón para coincidir con ambos:
         // Source = DatabricksMultiCloud.Catalogs("hostname", "httppath", null),
         // Source = Databricks.Catalogs("hostname", "httppath", null),
         var sourcePattern =
@@ -277,7 +280,7 @@ public class PowerQueryMParser
 
         if (!sourceMatch.Success)
             throw new FormatException(
-                "Could not find valid Source definition in M query (supports both Databricks and DatabricksMultiCloud connectors)"
+                "No se pudo encontrar una definición Source válida en la consulta M (admite conectores Databricks y DatabricksMultiCloud)"
             );
 
         connectionInfo.ServerHostname = sourceMatch.Groups[1].Value;
@@ -286,7 +289,7 @@ public class PowerQueryMParser
 
     private static void ParseDatabaseLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        // Pattern to match: Database = Source{[Name="databasename",Kind="Database"]}[Data],
+        // Patrón para coincidir con: Database = Source{[Name="databasename",Kind="Database"]}[Data],
         var databasePattern =
             @"Database\s*=\s*Source\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Database""\s*\]\s*}\s*\[\s*Data\s*\]";
         var databaseMatch = Regex.Match(
@@ -296,14 +299,14 @@ public class PowerQueryMParser
         );
 
         if (!databaseMatch.Success)
-            throw new FormatException("Could not find valid Database definition in M query");
+            throw new FormatException("No se pudo encontrar una definición Database válida en la consulta M");
 
         connectionInfo.DatabaseName = databaseMatch.Groups[1].Value;
     }
 
     private static void ParseSchemaLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        // Pattern to match: Schema = Database{[Name="schemaname",Kind="Schema"]}[Data],
+        // Patrón para coincidir con: Schema = Database{[Name="schemaname",Kind="Schema"]}[Data],
         var schemaPattern =
             @"Schema\s*=\s*Database\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Schema""\s*\]\s*}\s*\[\s*Data\s*\]";
         var schemaMatch = Regex.Match(
@@ -313,14 +316,14 @@ public class PowerQueryMParser
         );
 
         if (!schemaMatch.Success)
-            throw new FormatException("Could not find valid Schema definition in M query");
+            throw new FormatException("No se pudo encontrar una definición Schema válida en la consulta M");
 
         connectionInfo.SchemaName = schemaMatch.Groups[1].Value;
     }
 
     private static void ParseDataLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        // Pattern to match: Data = Schema{[Name="tablename",Kind="Table"]}[Data]
+        // Patrón para coincidir con: Data = Schema{[Name="tablename",Kind="Table"]}[Data]
         var dataPattern =
             @"Data\s*=\s*Schema\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Table""\s*\]\s*}\s*\[\s*Data\s*\]";
         var dataMatch = Regex.Match(
@@ -330,70 +333,70 @@ public class PowerQueryMParser
         );
 
         if (!dataMatch.Success)
-            throw new FormatException("Could not find valid Data definition in M query");
+            throw new FormatException("No se pudo encontrar una definición Data válida en la consulta M");
 
         connectionInfo.TableName = dataMatch.Groups[1].Value;
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//main script
+//script principal
 
 
 
-//check that user has a table selected
+//comprobar que el usuario tiene una tabla seleccionada
 if (Selected.Tables.Count == 0)
 {
-    // toggle the 'Running Macro' spinbox
+    // alternar el indicador giratorio 'Running Macro'
     ScriptHelper.WaitFormVisible = false;
-    Interaction.MsgBox("Select one or more tables", MsgBoxStyle.Critical, "Table Required");
+    Interaction.MsgBox("Seleccione una o varias tablas", MsgBoxStyle.Critical, "Tabla requerida");
     return;
 }
 
-//prompt for personal access token - required to authenticate to Databricks
+//solicitar token de acceso personal: necesario para autenticarse en Databricks
 string dbxPAT;
 do
 {
-    // toggle the 'Running Macro' spinbox
+    // alternar el indicador giratorio 'Running Macro'
     ScriptHelper.WaitFormVisible = false;
     dbxPAT = MaskedInputHelper.GetMaskedInput(
-        "Please enter your Databricks Personal Access Token (needed to connect to the SQL Endpoint)",
-        "Personal Access Token"
+        "Introduzca su token de acceso personal de Databricks (necesario para conectarse al punto de conexión SQL)",
+        "Token de acceso personal"
     );
 
     if (string.IsNullOrEmpty(dbxPAT))
     {
-        return; // User cancelled
+        return; // El usuario canceló
     }
 
     if (string.IsNullOrWhiteSpace(dbxPAT))
     {
         MessageBox.Show(
-            "Personal Access Token required",
-            "Personal Access Token required",
+            "Se requiere un token de acceso personal",
+            "Se requiere un token de acceso personal",
             MessageBoxButtons.OK,
             MessageBoxIcon.Warning
         );
     }
 } while (string.IsNullOrWhiteSpace(dbxPAT));
 
-// toggle the 'Running Macro' spinbox
+// alternar el indicador giratorio 'Running Macro'
 ScriptHelper.WaitFormVisible = true;
 
-//for each selected table, get the Databricks connection info from the partition info
+//para cada tabla seleccionada, obtener la información de conexión de Databricks desde la información de la partición
 foreach (var t in Selected.Tables)
 {
     string mQuery = t.Partitions[t.Name].Expression;
     var connectionInfo = PowerQueryMParser.ParseMQuery(mQuery);
     var rels = 0;
-    // Access individual components
+    // Acceder a componentes individuales
     string serverHostname = connectionInfo.ServerHostname;
     string httpPath = connectionInfo.HttpPath;
     string databaseName = connectionInfo.DatabaseName;
     string schemaName = connectionInfo.SchemaName;
     string tableName = connectionInfo.TableName;
 
-    //use this query to see if any primary/foreign key relationships have been defined in Unity Catalog
+    //usar esta consulta para ver si se han definido relaciones de clave primaria/clave foránea en Unity Catalog
     var query =
         @"
         SELECT
@@ -431,7 +434,7 @@ foreach (var t in Selected.Tables)
         AND fk.position_in_unique_constraint = 1
 ";
 
-    //set DBX connection string
+    //establecer cadena de conexión de DBX
     var odbcConnStr =
         @"DSN=Simba Spark;driver=C:\Program Files\Simba Spark ODBC Driver;host="
         + serverHostname
@@ -440,7 +443,7 @@ foreach (var t in Selected.Tables)
         + ";thrifttransport=2;ssl=1;authmech=3;uid=token;pwd="
         + dbxPAT;
 
-    //test connection
+    //probar conexión
     OdbcConnection conn = new OdbcConnection(odbcConnStr);
     try
     {
@@ -448,34 +451,34 @@ foreach (var t in Selected.Tables)
     }
     catch
     {
-        // toggle the 'Running Macro' spinbox
+        // alternar el indicador giratorio 'Running Macro'
         ScriptHelper.WaitFormVisible = false;
         Interaction.MsgBox(
-            @"Connection failed
+            @"La conexión falló
 
-Please check the following prequisites:
+Compruebe los siguientes requisitos previos:
     
-- you must have the Simba Spark ODBC Driver installed 
-(download from https://www.databricks.com/spark/odbc-drivers-download)
+- debe tener instalado el controlador ODBC de Simba Spark 
+(descárguelo desde https://www.databricks.com/spark/odbc-drivers-download)
 
-- the ODBC driver must be installed in the path C:\Program Files\Simba Spark ODBC Driver
+- el controlador ODBC debe estar instalado en la ruta C:\Program Files\Simba Spark ODBC Driver
 
-- check that the Databricks server name "
+- compruebe que el nombre del servidor de Databricks "
                 + serverHostname
-                + @" is correct
+                + @" es correcto
 
-- check that the Databricks SQL endpoint / HTTP Path "
+- compruebe que el punto de conexión SQL de Databricks / HTTP Path "
                 + httpPath
-                + @" is correct
+                + @" es correcto
 
-- check that you have used a valid Personal Access Token",
+- compruebe que ha usado un token de acceso personal válido",
             MsgBoxStyle.Critical,
-            "Connection Error"
+            "Error de conexión"
         );
         return;
     }
 
-    //send query
+    //enviar consulta
     OdbcDataAdapter da = new OdbcDataAdapter(query, conn);
     var dbxRelationships = new sysData.DataTable();
 
@@ -485,35 +488,35 @@ Please check the following prequisites:
     }
     catch
     {
-        // toggle the 'Running Macro' spinbox
+        // alternar el indicador giratorio 'Running Macro'
         ScriptHelper.WaitFormVisible = false;
         Interaction.MsgBox(
-            @"Connection failed
+            @"La conexión falló
 
-    Either: 
-        - the table "
+    O bien: 
+        - la tabla "
                 + schemaName
                 + "."
                 + tableName
-                + " does not exist"
+                + " no existe"
                 + @"
         
-        - you do not have permissions to query this table
+        - no tiene permisos para consultar esta tabla
         
-        - the connection timed out. Please check that the SQL Endpoint cluster is running",
+        - se agotó el tiempo de espera de la conexión. Compruebe que el clúster del punto de conexión SQL esté en ejecución",
             MsgBoxStyle.Critical,
-            "Connection Error"
+            "Error de conexión"
         );
         return;
     }
 
-    //for every table in the model, see if it matches a row in the Databricks query
+    //para cada tabla del modelo, comprobar si coincide con una fila en la consulta de Databricks
     foreach (var dt in Model.Tables)
     {
-        //get the source table information
+        //obtener la información de la tabla de origen
         string sourceMQuery = dt.Partitions[dt.Name].Expression;
         var sourceConnectionInfo = PowerQueryMParser.ParseMQuery(sourceMQuery);
-        // Access individual components
+        // Acceder a componentes individuales
         string sourceSchemaName = sourceConnectionInfo.SchemaName;
         string sourceTableName = sourceConnectionInfo.TableName;
 
@@ -538,19 +541,19 @@ Please check the following prequisites:
                             {
                                 var factColumn = fc;
 
-                                // Check whether a relationship already exists between the two columns:
+                                // Comprobar si ya existe una relación entre las dos columnas:
                                 if (
                                     !Model.Relationships.Any(r =>
                                         r.FromColumn == factColumn && r.ToColumn == dimColumn
                                     )
                                 )
                                 {
-                                    // If relationships already exists between the two tables, new relationships will be created as inactive:
+                                    // Si ya existe una relación entre las dos tablas, las nuevas relaciones se crearán como inactivas:
                                     var makeInactive = Model.Relationships.Any(r =>
                                         r.FromTable == t && r.ToTable == dimTable
                                     );
 
-                                    // Add the new relationship:
+                                    // Agregar la nueva relación:
                                     var rel = Model.AddRelationship();
                                     rel.FromColumn = factColumn;
                                     rel.ToColumn = dimColumn;
@@ -572,40 +575,38 @@ Please check the following prequisites:
             }
         }
     }
-    // toggle the 'Running Macro' spinbox
+    // alternar el indicador giratorio 'Running Macro'
     ScriptHelper.WaitFormVisible = false;
     Interaction.MsgBox(
-        rels + " relationships added to " + t.Name,
+        rels + " relaciones agregadas a " + t.Name,
         MsgBoxStyle.Information,
-        "Add relationships"
+        "Agregar relaciones"
     );
-    // toggle the 'Running Macro' spinbox
+    // alternar el indicador giratorio 'Running Macro'
     ScriptHelper.WaitFormVisible = true;
     conn.Close();
 }
 ```
-### Explanation
-The script uses WinForms to prompt for a Databricks personal access token, used to authenticate to Databricks. For each selected table, the script retrieves the Databricks connection string information and schema and table name from the M query in the selected table's partition. Using the Spark ODBC driver it then sends a SQL query to Databricks that queries the information_schema tables to find any foreign key relationships for the table that are defined in Unity Catalog. For each row returned in the SQL query, the script looks for matching table and column names in the model and where a relationship does not already exist, a new one is created. For role playing dimensions, where the same table might have multiple foreign keys relating to a single table, the first relationship detected will be the active one, and all other subsequent relationships are created as inactive. The script will also hide primary and foreign keys and set IsAvailableInMDX to false (with the exception of DateTime type primary keys). Primary keys are also marked as IsKey = TRUE in the semantic model. After the script has run for each selected table, a dialogue box will appear showing how many new relationships were created.
 
-## Example Output
+### Explicación
+
+El script usa WinForms para solicitar un token de acceso personal de Databricks, que se utiliza para autenticarse en Databricks. Para cada tabla seleccionada, el script recupera la información de la cadena de conexión de Databricks y el esquema y el nombre de la tabla a partir de la consulta M de la partición de la tabla seleccionada. A continuación, mediante el controlador ODBC de Spark, envía a Databricks una consulta SQL que consulta las tablas information_schema para encontrar las relaciones de clave foránea definidas en Unity Catalog para esa tabla. Para cada fila devuelta en la consulta SQL, el script busca en el modelo nombres de tablas y columnas coincidentes y, si aún no existe una relación, crea una nueva. En las dimensiones con roles, donde la misma tabla puede tener varias claves externas relacionadas con una sola tabla, la primera relación detectada será la activa y todas las demás relaciones posteriores se crearán como inactivas. El script también ocultará las claves primarias y foráneas, y establecerá IsAvailableInMDX en false (con la excepción de las claves primarias de tipo DateTime). Las claves primarias también se marcan como IsKey = TRUE en el modelo semántico. Después de ejecutar el script para cada tabla seleccionada, aparecerá un cuadro de diálogo que mostrará cuántas relaciones nuevas se han creado.
+
+## Salida de ejemplo
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-before.png" alt="Table relationships before running the script" style="width: 1000px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Before running the script, no relationships are defined.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-before.png" alt="Table relationships before running the script" style="width: 1000px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Antes de ejecutar el script, no hay relaciones definidas.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-pat.png" alt="Prompt for Databricks personal access token" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> The script will prompt you for a Databricks personal access token so it can authenticate to Databricks.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-pat.png" alt="Prompt for Databricks personal access token" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> El script le solicitará un token de acceso personal de Databricks para poder autenticarse en Databricks.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-done.png" alt="The number of new relationships created" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> After the script has run for each selected table, the number of new relationships created is displayed.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-done.png" alt="The number of new relationships created" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Después de ejecutar el script para cada tabla seleccionada, se muestra el número de relaciones nuevas creadas.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-after.png" alt="Table relationships after running the script" style="width: 750px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> Table relationships after running the script.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-after.png" alt="Table relationships after running the script" style="width: 750px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 4:</strong> Relaciones entre tablas después de ejecutar el script.</figcaption>
 </figure>
 

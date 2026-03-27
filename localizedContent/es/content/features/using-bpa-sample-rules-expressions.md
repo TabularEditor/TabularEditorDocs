@@ -1,6 +1,6 @@
-﻿---
+---
 uid: using-bpa-sample-rules-expressions
-title: BPA Sample Rules Expression
+title: Expresión de reglas de muestra de BPA
 author: Morten Lønskov
 updated: 2023-02-21
 applies_to:
@@ -16,69 +16,72 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-#  Rule Expression Samples
-In this section, you'll see some examples of Dynamic LINQ expressions that can be used to define rules. The expression that is entered in the Rule Expression Editor, will be evaluated whenever focus leaves the textbox, and any syntax errors will be shown on top of the screen:
+
+# Ejemplos de expresiones de reglas
+
+En esta sección verás algunos ejemplos de expresiones de LINQ dinámico que se pueden usar para definir reglas. La expresión que se escribe en el Editor de expresiones se evaluará cada vez que el foco abandone el cuadro de texto, y cualquier error de sintaxis se mostrará en la parte superior de la pantalla:
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25380170/9f01634e-29af-11e7-952e-e10a1f28df32.png)
 
-Your rule expressions may access any public properties on the objects in the TOM. If you try to access a property that does not exist on that type of object, an error will also be shown:
+Sus expresiones de reglas pueden acceder a cualquier propiedad pública de los objetos del TOM. Si intenta acceder a una propiedad que no existe en ese tipo de objeto, también se mostrará un error:
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25381302/798bab98-29b3-11e7-931e-789e5286fc45.png)
 
-"Expression" does not exist on the "Column" object, but if we switch the dropdown to "Calculated Columns", the statement above works fine:
+"Expression" no existe en el objeto "Column", pero si cambiamos el menú desplegable a "Columnas calculadas", la instrucción anterior funciona sin problema:
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25380451/87b160da-29b0-11e7-8e2e-c4e47593007d.png)
 
-Dynamic LINQ supports all the standard arithmetic, logical and comparison operators, and using the "."-notation, you can access subproperties and -methods of all objects.
+LINQ dinámico admite todos los operadores aritméticos, lógicos y de comparación estándar y, mediante la notación ".", puede acceder a subpropiedades y -métodos de todos los objetos.
 
 ```
 String.IsNullOrWhitespace(Expression) and not Name.StartsWith("Dummy")
 ```
 
-The above statement, applied to Calculated Columns, Calculated Tables or Measures, flags those that have an empty DAX expression unless the object's name starts with the text "Dummy".
+La instrucción anterior, aplicada a columnas calculadas, tablas calculadas o medidas, marca aquellas que tienen una expresión DAX vacía, salvo que el nombre del objeto empiece por el texto "Dummy".
 
-Using LINQ, we can also work with collections of objects. The following expression, applied to tables, will find those that have more than 10 columns which are not organized in Display Folders:
+Con LINQ también podemos trabajar con colecciones de objetos. La siguiente expresión, aplicada a tablas, encontrará aquellas que tengan más de 10 columnas que no estén organizadas en carpetas de visualización:
 
 ```
 Columns.Count(DisplayFolder = "") > 10
 ```
 
-Whenever we use a LINQ method to iterate over a collection, the expression used as an argument to the LINQ method is evaluated on the items in the collection. Indeed, DisplayFolder is a property on columns that does not exist at the Table level.
+Cada vez que usamos un método LINQ para iterar sobre una colección, la expresión que se usa como argumento del método LINQ se evalúa para los elementos de la colección. En efecto, DisplayFolder es una propiedad de las columnas que no existe a nivel de tabla.
 
-Here, we see this rule in action on the Adventure Works tabular model. Note how the "Reseller" table shows up as being in violation, while the "Reseller Sales" does not show up (columns in the latter have been organized in Display Folders):
+Aquí vemos esta regla en acción en el modelo tabular Adventure Works. Observa cómo la tabla "Reseller" aparece como incumpliendo la regla, mientras que "Reseller Sales" no aparece (las columnas de esta última se han organizado en carpetas de visualización):
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25380809/d9d1c3a4-29b1-11e7-839e-29450ad39c8a.png)
 
-To refer to the parent object inside a LINQ method, use the special "outerIt" syntax. This rule, applied to tables, will find those that contain columns whose name does not start with the table name:
+Para hacer referencia al objeto padre dentro de un método LINQ, usa la sintaxis especial "outerIt". Esta regla, aplicada a tablas, encontrará aquellas que contienen columnas cuyo nombre no empieza por el nombre de la tabla:
 
 ```
 Columns.Any(not Name.StartsWith(outerIt.Name))
 ```
 
-It would probably make more sense to apply this rule to Columns directly, in which case it should be written as:
+Probablemente tenga más sentido aplicar esta regla directamente a las columnas; en ese caso, debería escribirse así:
 
 ```
 not Name.StartsWith(Table.Name)
 ```
 
-To compare against enumeration properties, simply pass the enumerated value as a string. This rule, will find all columns whose name end with the word "Key" or "ID", but where the SummarizeBy property has not been set to "None":
+Para comparar con propiedades de enumeración, basta con pasar el valor enumerado como una cadena. Esta regla encontrará todas las columnas cuyo nombre termina con la palabra "Key" o "ID", pero en las que la propiedad SummarizeBy no se ha establecido en "None":
 
 ```
 (Name.EndsWith("Key") or Name.EndsWith("ID")) and SummarizeBy <> "None"
 ```
 
-## Finding unused objects
-When building Tabular Models it is important to avoid high-cardinality columns at all costs. Typical culprits are system timestamps, technical keys, etc. that have been imported to the model by mistake. In general, we should make sure that the model only contains columns that are actually needed. Wouldn't it be nice if the Best Practice Analyzer could tell us which columns are likely not needed at all?
+## Búsqueda de objetos sin usar
 
-The following rule will report columns that:
+Al crear modelos tabulares, es importante evitar a toda costa las columnas de alta cardinalidad. Los culpables típicos son marcas de tiempo del sistema, claves técnicas, etc., que se han importado al modelo por error. En general, debemos asegurarnos de que el modelo solo contenga las columnas que realmente se necesitan. ¿No sería genial si el Best Practice Analyzer pudiera decirnos qué columnas probablemente no se necesitan en absoluto?
 
-- ...are hidden (or whose parent table is hidden)
-- ...are not referenced by any DAX expressions (considers all DAX expressions in the model - even drillthrough and RLS filter expressions)
-- ...do not participate in any relationships
-- ...are not used as the "Sort By"-column of any other column
-- ...are not used as levels of a hierarchy.
+La siguiente regla informará sobre las columnas que:
 
-The Dynamic LINQ expression for this BPA rule is:
+- ...están ocultas (o cuya tabla padre está oculta)
+- ...no están referenciadas por ninguna expresión DAX (considera todas las expresiones DAX del modelo, incluso drillthrough y expresiones de filtro de RLS)
+- ...no participan en ninguna relación
+- ...no se usan como columna de "Ordenar por" de ninguna otra columna
+- ...no se usan como niveles de una jerarquía.
+
+La expresión de LINQ dinámico para esta regla de BPA es:
 
 ```
 (IsHidden or Table.IsHidden)
@@ -86,9 +89,9 @@ and ReferencedBy.Count = 0
 and (not UsedInRelationships.Any())
 and (not UsedInSortBy.Any())
 and (not UsedInHierarchies.Any())
-``` 
+```
 
-The same technique can be used to find unused measures. It's a little simpler, since measures can't participate in relationships, etc. So instead, let's spice things up a bit, by also considering whether any downstream objects that reference a given measure, are visible or not. That is, if measure [A] is referenced by measure [B], and both measure [A] and [B] are hidden, and no other DAX expressions refer to these two measures, we should let the developer know that it is safe to remove both of them:
+La misma técnica se puede usar para encontrar medidas no utilizadas. Es un poco más sencillo, ya que las medidas no pueden participar en relaciones, etc. Así que, para hacerlo un poco más interesante, también vamos a tener en cuenta si los objetos dependientes que hacen referencia a una medida determinada están visibles o no. Es decir, si la medida [A] es referenciada por la medida [B], y tanto la medida [A] como [B] están ocultas, y ninguna otra expresión DAX hace referencia a estas dos medidas, deberíamos indicar al desarrollador que es seguro eliminar ambas:
 
 ```
 (IsHidden or Table.IsHidden)
@@ -98,8 +101,9 @@ and not ReferencedBy.AllTables.Any(not IsHidden)
 and not ReferencedBy.Roles.Any()
 ```
 
-## Fixing objects
-In some cases, it is possible to automatically fix the issues on objects satisfying the criteria of a rule. For example when it's just a matter of setting a simple property on the object. Take a closer look at the JSON behind the following rule:
+## Corrección de objetos
+
+En algunos casos, es posible corregir automáticamente los problemas en los objetos que cumplen los criterios de una regla. Por ejemplo, cuando solo se trata de establecer una propiedad simple en el objeto. Examine con más detalle el JSON detrás de la siguiente regla:
 
 ```json
 {
@@ -111,16 +115,12 @@ In some cases, it is possible to automatically fix the issues on objects satisfy
     "Scope": "Column",
     "Expression": "Model.Relationships.Any(FromColumn = outerIt) and not IsHidden and not Table.IsHidden",
     "FixExpression": "IsHidden = true",
-    "Compatibility": [
-      1200,
-      1400
-    ],
-    "IsValid": false
+    "CompatibilityLevel": 1200
 }
 ```
 
-This rule finds all columns that are used in a relationship (on the "Many"/"From" side), but where the column or its parent table are not hidden. It is recommended that such columns are never shown, as users should filter data using the related (dimension) table instead. So the fix in this case, would be to set the columns IsHidden property to true, which is exactly what the "FixExpression" string above does. To see this in action, right-click any objects that violate the rule, and choose "Generate Fix Script". This puts a small script into the clipboard, which can be pasted into the Advanced Script Editor, from where you can easily review the code and execute it:
+Esta regla encuentra todas las columnas que se usan en una relación (en el lado "Many"/"From"), pero en las que ni la columna ni su tabla principal están ocultas. Se recomienda que estas columnas nunca se muestren, ya que los usuarios deberían filtrar los datos usando la tabla relacionada (de dimensión). Así, la corrección en este caso sería establecer la propiedad IsHidden de las columnas en true, que es exactamente lo que hace la cadena "FixExpression" anterior. Para verlo en acción, haz clic con el botón derecho en cualquier objeto que incumpla la regla y elige "Generar script de corrección". Esto coloca un pequeño script en el portapapeles, que se puede pegar en el Editor avanzado de scripts, desde donde puedes revisar el código fácilmente y ejecutarlo:
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25298489/9035bab6-26f5-11e7-8134-8502daaf4132.png)
 
-Remember that you can always undo (CTRL+Z) changes done to a model after script execution.
+Recuerda que siempre puedes deshacer (CTRL+Z) los cambios realizados en un modelo después de ejecutar el script.

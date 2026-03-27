@@ -1,35 +1,57 @@
-# Create a New Model
+# Crear un nuevo modelo
+
 ## @new-as-model
+
 ## @new-pbi-model
+
 ## @direct-lake-guidance
 
-# Connect to a Model
+# Conectarse a un modelo
+
 ## @powerbi-xmla
+
 ## @workspace-mode
 
-# Adding Tables & Data Sources
+# Añadir tablas y Data sources
+
 ## @importing-tables
+
 ## @connecting-to-azure-databricks
 
-# Configuring Data Security
+# Configurar la seguridad de los datos
+
 ## @data-security-about
+
 ## @data-security-setup-rls
+
 ## @data-security-setup-ols
+
 ## @data-security-testing
 
-# Incremental Refresh
+# Actualización incremental
+
 ## @incremental-refresh-about
+
 ## @incremental-refresh-modify
+
 ## @incremental-refresh-setup
+
 ## @incremental-refresh-schema
+
 ## @incremental-refresh-workspace-mode
 
-# Advanced Modelling
+# Modelado avanzado
+
 ## @udfs
+
 ## @calendars
+
 ## @detail-rows-expression
+
 ## @user-defined-aggregations
 
-# Automation with C# Scripting
+# Automatización con C# Script
+
 ## @creating-macros
+
 ## @csharp-script-library

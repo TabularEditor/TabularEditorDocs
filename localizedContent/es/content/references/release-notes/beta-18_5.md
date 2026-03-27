@@ -1,26 +1,25 @@
-﻿# Tabular Editor 3 BETA-18.5
+# Tabular Editor 3 BETA-18.5
 
 > [!IMPORTANT]
-> A newer version of Tabular Editor is available. You can find the latest version [here](https://docs.tabulareditor.com/references/release-notes).
+> Hay una versión más reciente de Tabular Editor disponible. Puedes encontrar la versión más reciente [aquí](https://docs.tabulareditor.com/references/release-notes).
 
+- Descarga [Tabular Editor 3 BETA-18.5](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.5.x86.msi)
+- Descarga [Tabular Editor 3 BETA-18.5 (64 bits)](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.5.x64.msi)
+- [Todas las versiones](https://docs.tabulareditor.com/projects/te3/en/latest/downloads.html)
 
-- Download [Tabular Editor 3 BETA-18.5](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.5.x86.msi)
-- Download [Tabular Editor 3 BETA-18.5 (64 bit)](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.5.x64.msi)
-- [All releases](https://docs.tabulareditor.com/projects/te3/en/latest/downloads.html)
+## Nuevas características en BETA-18.5:
 
-## New features in BETA-18.5:
-
-- The Search dialog (CTRL+F) now supports searching the entire model. When this option is selected in the dropdown, another dropdown appears that lets you choose which object properties to search. There are also options for regular expressions, backslash expressions and also [Dynamic LINQ search, similar to Tabular Editor 2.x](https://docs.tabulareditor.com/Advanced-Filtering-of-the-Explorer-Tree.html) (Dynamic LINQ can also be enabled by entering `:` as the first character in the "Find what" field). Search results are displayed in a separate window, and double-clicking on an item in the search results window will take you directly to that item, highlighting the relevant property in the property grid:
+- El cuadro de diálogo Buscar (CTRL+F) ahora permite buscar en todo el modelo. Cuando seleccionas esta opción en la lista desplegable, aparece otra lista desplegable que te permite elegir qué propiedades de los objetos quieres buscar. También hay opciones para expresiones regulares, expresiones con barra invertida y también [búsqueda con LINQ dinámico, similar a Tabular Editor 2.x](https://docs.tabulareditor.com/Advanced-Filtering-of-the-Explorer-Tree.html) (también puedes habilitar LINQ dinámico escribiendo `:` como primer carácter en el campo "Buscar qué"). Los resultados de la búsqueda se muestran en una ventana independiente y, al hacer doble clic en un elemento de esa ventana, irás directamente a él, resaltando la propiedad correspondiente en la cuadrícula de propiedades:
 
 ![image](https://user-images.githubusercontent.com/30911111/119983803-edd94f80-bfc0-11eb-91cb-aee084e0c83d.png)
 
-- Added support for DAX date literal syntax `dt"2021-05-27"`
-- Updated TOM to version 19.21.0
+- Se agregó compatibilidad con la sintaxis literal de fecha de DAX `dt"2021-05-27"`
+- Se actualizó TOM a la versión 19.21.0
 
-## Bugfixes and minor updates in BETA-18.5:
+## Correcciones de errores y actualizaciones menores en BETA-18.5:
 
-- Added multiline string editor for table SourceExpressions
-- Ensure relationship names are not regenerated when cutting and pasting
-- Added BPA support for the `it` keyword in FixExpressions, see https://github.com/TabularEditor/TabularEditor/issues/846
-- Improved behavior of Find/Replace window when switching between documents/UI elements
-- Fixed a bug with the precedence order of the NOT keyword, see https://github.com/TabularEditor/TabularEditor3/issues/5.
+- Se agregó un editor de cadenas multilínea para la propiedad SourceExpressions de las tablas
+- Se garantiza que los nombres de las relaciones no se regeneren al cortar y pegar
+- Se agregó compatibilidad con BPA para la palabra clave `it` en FixExpressions; consulta https://github.com/TabularEditor/TabularEditor/issues/846
+- Se mejoró el comportamiento de la ventana Buscar/Reemplazar al cambiar entre documentos o elementos de la interfaz de usuario
+- Se corrigió un error con el orden de precedencia de la palabra clave NOT; consulta https://github.com/TabularEditor/TabularEditor3/issues/5.

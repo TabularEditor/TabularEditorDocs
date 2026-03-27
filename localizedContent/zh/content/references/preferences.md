@@ -1,6 +1,6 @@
-﻿---
+---
 uid: preferences
-title: Controlling preferences
+title: 管理偏好设置
 author: Daniel Otykier
 updated: 2026-01-12
 applies_to:
@@ -16,555 +16,568 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Tabular Editor 3 Preferences
 
-Tabular data model development processes and workflows differ greatly from organization to organization. To ensure that the tool can fit into as many of these workflows as possible, Tabular Editor 3 is highly customizable - not just in terms of the user interface's look and feel, but also on more advanced topics such as web proxies, updates and feedback, row limits, timeouts, schema compare preferences, etc.
+# Tabular Editor 3 偏好设置
 
-This article describes the Tabular Editor 3 Preferences dialogs and the settings that you can control through it.
+不同组织的 Tabular Data model 开发流程和工作流差异很大。 为了确保该工具尽可能适配这些工作流，Tabular Editor 3 高度可定制——不仅是用户界面的外观和体验，还涵盖更高级的主题，比如 Web 代理、更新和反馈、行数限制、超时、架构比较偏好等。
 
-To access the preferences dialog, go to **Tools > Preferences**.
+本文介绍 Tabular Editor 3 的“偏好设置”对话框，以及你可以通过该对话框控制的设置。
+
+要打开“偏好设置”对话框，请依次选择 **工具 > 偏好**。
 
 > [!NOTE]
-> All Tabular Editor preferences are stored for each Windows user profile, in the `%localappdata%\TabularEditor3` folder. It is possible to migrate your settings to another machine by simply copying the contents of this folder.
+> 所有 Tabular Editor 偏好设置都会针对每个 Windows 用户配置文件分别存储在 `%localappdata%\\TabularEditor3` 文件夹中。 只需复制该文件夹中的内容，即可将你的设置迁移到另一台机器。
 
 > [!TIP]
-> Use the search box at the top of the Preferences dialog to quickly find specific settings.
+> 在“偏好”对话框顶部使用搜索框，可快速找到特定设置。
 
-## Tabular Editor > Features
+## Tabular Editor > 功能
 
 ![Pref General Features](~/content/assets/images/pref-general-features.png)
 
 ### Power BI
 
-##### *Allow unsupported editing* (disabled)
+##### _允许不受支持的编辑_（已禁用）
 
-This option is only relevant when Tabular Editor 3 is used as an external tool for Power BI Desktop. When checked, all TOM data modeling properties are available for editing when connected to an instance of Power BI Desktop. It's generally recommended to leave this unchecked, to make sure that you do not accidentally make changes to your Power BI file, [that are not supported by Power BI Desktop](xref:desktop-limitations).
+仅当将 Tabular Editor 3 作为 Power BI Desktop 的外部工具使用时，此选项才适用。 勾选后，连接到 Power BI Desktop 实例时，你就能编辑所有 TOM Data model 建模属性。 通常建议保持未选中，以免不小心修改 Power BI 文件中 [Power BI Desktop 不支持](xref:desktop-limitations) 的内容。
 
-##### *Hide auto date/time warnings* (disabled)
+##### _隐藏自动日期/时间警告_（已禁用）
 
-When checked, warnings about Power BI auto date/time tables will be suppressed. These warnings appear when the "Auto date/time" setting in Power BI Desktop is enabled, which creates calculated tables that trigger warnings in Tabular Editor 3's built-in DAX analyzer.
+勾选后，将不再显示有关 Power BI 自动日期/时间表的警告。 当 Power BI Desktop 中启用“自动日期/时间”设置时，会创建计算表格，从而触发 Tabular Editor 3 内置 DAX 分析器的警告。
 
-##### *Line break on first line of DAX* (disabled)
+##### _在 DAX 首行换行_（已禁用）
 
-In Power BI Desktop it is common to insert a line break on the first line of a DAX expression, due to the way the formula bar displays the DAX code. If you often switch back and forth between Tabular Editor and Power BI Desktop, consider enabling this option to have Tabular Editor 3 insert the line break automatically.
+在 Power BI Desktop 中，由于公式栏显示 DAX 代码的方式，通常会在 DAX 表达式的第一行插入换行。 如果你经常在 Tabular Editor 和 Power BI Desktop 之间来回切换，可考虑启用此选项，让 Tabular Editor 3 自动插入该换行。
 
-##### *Default Power BI authentication mode* (Integrated)
+##### _Only for multi-line DAX expressions_ (enabled)
 
-Select the default authentication method (Integrated, ServicePrincipal, or MasterUser) to use when connecting to Power BI datasets.
+When "Line break on first line of DAX" is enabled, this sub-setting controls whether the line break is added only for multi-line DAX expressions. When checked, single-line expressions are left unchanged.
 
-### Metadata Synchronization
+##### _默认 Power BI 身份验证模式_（集成）
 
-These settings control the behavior of Tabular Editor 3 when model metadata is loaded from a database on an instance of Analysis Services. The settings specify how Tabular Editor 3 should deal with metadata changes applied to the database from outside the application.
+选择连接到 Power BI Dataset 时要使用的默认身份验证方法（集成、ServicePrincipal 或 MasterUser）。
 
-##### *Warn when local metadata is out-of-sync with deployed model* (enabled)
+### 元数据同步
 
-When checked, an information bar is displayed inside Tabular Editor, whenever you have made local changes to the model that have not yet been saved to Analysis Services. For example, if you're wondering why a DAX query or a Pivot Grid does not produce the expected result, this could be due to a measure expression being changed in Tabular Editor without saving the change to Analysis Services. The bar disappears when you hit save (Ctrl+S).
+这些设置用于控制 Tabular Editor 3 在从 Analysis Services 实例上的数据库加载模型元数据时的行为。 这些设置用于指定 Tabular Editor 3 应如何处理从应用程序外部对数据库应用的元数据更改。
 
-##### *Track external model changes* (enabled)
+##### _当本地元数据与已部署模型不同步时发出警告_（已启用）
 
-Just like Power BI Desktop can detect when an external tool makes a change to the data model, so too can Tabular Editor. This option is only relevant for local instances of Analysis Services (i.e. msmdsrv.exe processes running on the same machine as Tabular Editor). When checked, Tabular Editor starts a trace on Analysis Services and notifies you if external changes are made.
+勾选后，只要你对模型进行了尚未保存到 Analysis Services 的本地更改，Tabular Editor 内就会显示一条信息栏。 例如，如果你在排查某个 DAX 查询或 Pivot Grid 为何未产生预期结果，原因可能是你在 Tabular Editor 中更改了某个度量值表达式，但没有将更改保存到 Analysis Services。 当你按下保存（Ctrl+S）时，该提示条就会消失。
 
-##### *Refresh local Tabular Object Model metadata automatically* (enabled)
+##### _跟踪外部模型更改_（已启用）
 
-When the tracing mechanism as described above is enabled, this option allows Tabular Editor to automatically refresh the model metadata when an external change is detected. This is useful if you often switch back and forth between Power BI Desktop and Tabular Editor 3.
+就像 Power BI Desktop 能检测到外部工具对 Data model 做出的更改一样，Tabular Editor 也能做到。 这个选项只适用于 Analysis Services 的本地实例（也就是在和 Tabular Editor 同一台机器上运行的 msmdsrv.exe 进程）。 勾选后，Tabular Editor 会在 Analysis Services 上启动跟踪，并在检测到外部更改时通知你。
 
-##### *Cleanup orphaned Tabular Editor traces*
+##### _自动刷新本地 Tabular Object Model 元数据_（已启用）
 
-Normally, Tabular Editor 3 should automatically stop and remove any AS traces started due to the settings above. However, if the application was shut down prematurely, the traces may never be stopped. By clicking this button, all AS traces started by any instance of Tabular Editor will be removed.
+启用上述跟踪机制后，这个选项会让 Tabular Editor 在检测到外部更改时自动刷新模型元数据。 如果你经常在 Power BI Desktop 和 Tabular Editor 3 之间来回切换，这会很有用。
+
+##### _清理遗留的 Tabular Editor 跟踪_
+
+通常，Tabular Editor 3 会自动停止并移除因上述设置而启动的所有 AS 跟踪。 但如果应用程序过早关闭，这些跟踪可能就不会停止。 点击此按钮后，将移除由任何 Tabular Editor 实例启动的所有 AS 跟踪。
 
 > [!NOTE]
-> The cleanup button is only available when Tabular Editor is connected to an instance of Analysis Services.
+> 清理按钮只有在 Tabular Editor 连接到 Analysis Services 实例时才可用。
 
 ### Best Practice Analyzer
 
-##### *Scan for Best Practice violations in the background* (enabled)
+##### _在后台扫描最佳实践违规项_（已启用）
 
-If unchecked, you will have to explicitly run a Best Practice Analysis from inside the Best Practice Analyzer tool window, to view if there are any violations. If checked, the scan happens continuously on a background thread whenever changes are made. For very large models, or models with very complex Best Practice rules, this may cause issues.
+如果未勾选，你需要在 Best Practice Analyzer 工具窗口中手动运行一次“最佳实践分析”，才能查看是否存在违规项。 勾选后，只要发生更改，就会在后台线程中持续执行扫描。 对于非常大的模型，或包含非常复杂的最佳实践规则的模型，这可能会引发问题。
 
-##### *Built-in BPA rules* (enabled for new users)
+##### _内置 BPA 规则_（新用户默认启用）
 
-Choose whether to enable, disable, or be prompted about using Tabular Editor's built-in Best Practice Analyzer rules. The built-in rules cover key best practices across formatting, metadata, model layout, DAX expressions, and translations. New installations will have built-in rules enabled by default.
+选择启用、禁用，或在使用 Tabular Editor 内置的 Best Practice Analyzer 规则前提示你确认。 内置规则覆盖格式设置、元数据、模型布局、DAX 表达式以及翻译等方面的关键最佳实践。 新安装将默认启用内置规则。
 
-### DAX Formula Fix-up
+### Notifications
 
-##### *Enable formula fix-up* (enabled)
+##### _Data refresh notification_ (enabled)
 
-Automatically adjusts references in DAX expressions when objects are renamed or moved. This feature ensures that your DAX code remains valid when you reorganize your model.
+When checked, a notification is displayed when a data refresh operation completes.
 
-##### *Enable formula fix-up on paste* (enabled)
+### DAX 公式自动修正
 
-Automatically adjusts references in DAX expressions when pasting objects. This is useful when copying measures or calculated columns between tables or models.
+##### _启用公式修复_（已启用）
+
+当对象被重命名或移动时，自动调整 DAX 表达式中的引用。 这个功能可确保你在重新组织模型时，DAX 代码仍然有效。
+
+##### _粘贴时启用公式修复_（已启用）
+
+在粘贴对象时，自动调整 DAX 表达式中的引用。 在表或模型之间复制度量值或计算列时很有用。
 
 ### Direct Lake
 
-##### *Auto-refresh on save* (enabled)
+##### _保存时自动刷新_（已启用）
 
-Automatically refresh Direct Lake tables when saving changes to ensure data is current. This ensures that your Direct Lake model stays in sync with the underlying data source.
+保存更改时自动刷新 Direct Lake 表，确保数据为最新。 这可确保你的 Direct Lake 模型与底层数据源保持同步。
 
-## Tabular Editor > Updates and Feedback
+## Tabular Editor > 更新与反馈
 
-![Placeholder: Screenshot of Updates and Feedback preferences page]
+![占位符：更新和反馈偏好页面的屏幕截图]
 
-##### *Check for updates on start-up* (enabled)
+##### _启动时检查更新_（已启用）
 
-When checked, Tabular Editor will check for new versions when the application starts. This ensures you stay up to date with the latest features and bug fixes.
+勾选后，Tabular Editor 会在应用启动时检查是否有新版本。 这可确保你及时了解最新功能和错误修复。
 
-##### *Check for major updates only* (disabled)
+##### _仅检查主要更新_（已禁用）
 
-When checked, only major version updates will trigger notifications. Minor and patch updates will be ignored.
+勾选后，只有主版本更新才会触发通知。 次要版本和补丁更新将被忽略。
 
-##### *Help improve Tabular Editor by collecting anonymous usage data* (enabled)
+##### _通过收集匿名使用数据帮助改进 Tabular Editor_（已启用）
 
-Data does not contain any personally identifiable information, nor any information about the structure or content of your data models. If you would still like to opt out of telemetry, uncheck this.
+数据不包含任何个人身份信息，也不包含有关你的 Data model 的结构或内容的任何信息。 如果你仍希望退出遥测，请取消勾选此项。
 
-##### *Send error reports* (enabled)
+##### _发送错误 Report_（已启用）
 
-In cases of crashes, Tabular Editor displays an option for sending a crash report when this is checked. Crash reports are very helpful when debugging, so please leave this checked if you don't mind!
+勾选后，如果发生崩溃，Tabular Editor 会显示发送崩溃 Report 的选项。 崩溃 Report 在调试时非常有帮助，所以如果你不介意，就保持勾选吧！
 
-## Tabular Editor > Deployment
+## Tabular Editor > 部署
 
-![Placeholder: Screenshot of Deployment preferences page]
+![占位符：部署偏好页面的屏幕截图]
 
-Configure which types of objects are deployed by default when using the deployment wizard:
+使用 Deployment Wizard 时，配置默认要部署的对象类型：
 
-##### *Deploy data sources* (disabled)
+##### _部署数据源_（已禁用）
 
-Include data source definitions when deploying. Enable this if you want data source connection strings and settings to be deployed along with your model changes.
+部署时包含数据源定义。 如果你希望在部署模型更改的同时部署数据源连接字符串和设置，请启用此选项。
 
-##### *Deploy partitions* (disabled)
+##### _部署分区_（已禁用）
 
-Include partition definitions when deploying. Enable this if you want partition configurations to be deployed along with your model changes.
+部署时包含分区定义。 如果你希望在部署模型更改的同时部署分区配置，请启用此选项。
 
-##### *Deploy refresh policy partitions* (disabled)
+##### _部署刷新策略分区_（已禁用）
 
-Include incremental refresh policy partitions when deploying. This controls whether partitions created by incremental refresh policies are deployed.
+部署时包含由增量刷新策略创建的分区。 此选项用于控制是否部署由增量刷新策略创建的分区。
 
-##### *Deploy model roles* (disabled)
+##### _部署模型角色_（已禁用）
 
-Include role definitions when deploying. Enable this if you want Row-Level Security (RLS) and Object-Level Security (OLS) roles to be deployed.
+部署时包含角色定义。 若要部署行级安全性（RLS）和对象级安全性（OLS）角色，请启用此选项。
 
-##### *Deploy model role members* (disabled)
+##### _部署模型角色成员_（已禁用）
 
-Include role member assignments when deploying. Enable this if you want user and group assignments to security roles to be deployed.
+部署时包含角色成员分配。 若要部署安全角色的用户和组分配，请启用此选项。
 
-##### *Deploy shared expressions* (disabled)
+##### _部署共享表达式_（已禁用）
 
-Include shared expressions (M expressions) when deploying. Enable this if you want Power Query shared expressions to be deployed.
+部署时包含共享表达式（M 表达式）。 如需部署 Power Query 共享表达式，请启用此选项。
 
-### Deployment Metadata
+### 部署元数据
 
-##### *Annotate deployment metadata* (disabled)
+##### _标注部署元数据_（已禁用）
 
-Add deployment timestamp and user information as annotations on deployed objects. This can be useful for tracking when and by whom model changes were deployed.
+在已部署的对象上添加部署时间戳和用户信息作为注释。 这有助于跟踪模型更改是在什么时候、由谁部署的。
 
-### Backup Settings
+### 备份设置
 
-##### *Backup on save* (enabled)
+##### _保存时备份_（已启用）
 
-Create a backup of the model when saving changes locally. This provides a safety net in case you need to revert changes.
+在本地保存更改时创建模型备份。 如果需要回退更改，这会提供一道安全保障。
 
-##### *Save backup location*
+##### _备份保存位置_
 
-Specify the folder where save backups are stored. By default, backups are not created unless a location is specified.
+指定用于存储保存备份的文件夹。 By default, backups are not created unless a location is specified.
 
-##### *Backup on deploy* (enabled)
+##### _部署时备份_（已启用）
 
-Create a backup of the target model before deploying changes. This allows you to restore the previous version if needed.
+在部署更改之前，为目标模型创建备份。 这样可以在需要时还原到之前的版本。
 
-##### *Backup location*
+##### _备份位置_
 
-Specify the folder where deployment backups are stored. By default, backups are not created unless a location is specified.
+指定用于存储部署备份的文件夹。 默认情况下，除非指定位置，否则不会创建备份。
 
-## Tabular Editor > Defaults
+## Tabular Editor > 默认设置
 
-![Placeholder: Screenshot of Defaults preferences page]
+![占位符：默认设置偏好页面的屏幕截图]
 
-##### *New model compatibility level* (1600)
+##### _新模型兼容级别_（1600）
 
-Set the default compatibility level for newly created models. Compatibility level 1600 corresponds to SQL Server 2022 and Power BI.
+为新创建的模型设置默认兼容级别。 兼容级别 1600 对应 SQL Server 2022 和 Power BI。
 
-##### *Use latest compatibility level as default* (enabled)
+##### _将最新兼容级别设为默认_（已启用）
 
-Automatically use the latest available compatibility level for new models. When enabled, this overrides the specific compatibility level setting above.
+新模型会自动使用最新可用的兼容级别。 启用后，将覆盖上方的具体兼容级别设置。
 
-##### *New models use workspace database* (enabled)
+##### _新模型使用 Workspace 数据库_（已启用）
 
-When creating a new model, automatically create a workspace database on Analysis Services. This allows you to immediately test and query your model during development.
+创建新模型时，会在 Analysis Services 上自动创建一个 Workspace 数据库。 这样便可在开发过程中立即测试并查询模型。
 
-##### *Default save mode* (AlwaysAsk)
+##### _默认保存模式_（AlwaysAsk）
 
-Choose whether to always save as a file (.bim), folder (multiple JSON files), TMDL (Tabular Model Definition Language), or always ask when saving. Options: AlwaysAsk, File, Folder, TMDL.
+选择保存时是始终保存为文件（.bim）、文件夹（多个 JSON 文件）、TMDL（Tabular Model Definition Language），还是每次保存都询问。 选项：AlwaysAsk、File、Folder、TMDL。
 
-##### *Use PBIX file name when saving to disk* (enabled)
+##### _保存到磁盘时使用 PBIX 文件名_（已启用）
 
-When saving a model loaded from a PBIX file, use the PBIX filename as the default. This maintains naming consistency between Power BI files and saved model metadata.
+保存从 PBIX 文件加载的模型时，默认使用 PBIX 文件名。 这可以保持 Power BI 文件与已保存模型元数据之间的命名一致性。
 
-##### *Create user options for new models* (enabled)
+##### _为新模型创建用户选项_（已启用）
 
-Automatically create .tmuo (Tabular Model User Options) files for new models. These files store user-specific settings like diagram layouts and window positions.
+为新模型自动创建 .tmuo（Tabular Model User Options）文件。 这些文件会存储用户特定的设置，例如图表布局和窗口位置。
 
-## Tabular Editor > Keyboard
+## Tabular Editor > 键盘
 
-![Keyboard mappings](~/content/assets/images/keyboard-mappings.png)
+![键盘映射](~/content/assets/images/keyboard-mappings.png)
 
-Configure keyboard shortcuts for all Tabular Editor commands. Use the search functionality to quickly find specific commands and assign or modify their keyboard shortcuts to match your preferred workflow.
+为所有 Tabular Editor 命令配置键盘快捷键。 使用搜索功能可以快速找到特定命令，并分配或修改其键盘快捷键，以符合您偏好的工作流程。
 
-## Tabular Editor > TOM Explorer View
+## Tabular Editor > TOM Explorer 视图
 
-![Tom Explorer Settings](~/content/assets/images/tom-explorer-settings.png)
+![Tom Explorer 设置](~/content/assets/images/tom-explorer-settings.png)
 
-Control which objects and properties are visible in the TOM (Tabular Object Model) Explorer:
+控制 TOM（Tabular Object Model）Explorer 中哪些对象和属性可见：
 
-##### *Display folders* (enabled)
+##### _显示文件夹_（已启用）
 
-Show or hide display folder groupings. When enabled, objects are organized into their display folder hierarchy.
+显示或隐藏“显示文件夹”分组。 启用后，对象会按其“显示文件夹”层级进行组织。
 
-##### *Hidden objects* (disabled)
+##### _隐藏对象_（已禁用）
 
-Show or hide objects marked as hidden in the model. Enable this if you need to work with hidden tables, columns, or measures.
+显示或隐藏在模型中标记为隐藏的对象。 如需处理隐藏的表、列或度量值，请启用此选项。
 
-##### *All object types* (enabled)
+##### _所有对象类型_（已启用）
 
-Show all object types in the explorer tree. When disabled, only the most common object types are shown.
+在资源管理器树中显示所有对象类型。 禁用后，仅显示最常用的对象类型。
 
-##### *Sort alphabetically* (enabled)
+##### _按字母顺序排序_（已启用）
 
-Sort objects alphabetically instead of by creation order. This makes it easier to find specific objects in large models.
+按字母顺序对对象排序，而不是按创建顺序。 这能让您在大型模型中更轻松地找到特定对象。
 
-##### *Show measures* (enabled)
+##### _显示度量值_（已启用）
 
-Display measures in the explorer tree.
+在资源管理器树中显示度量值。
 
-##### *Show columns* (enabled)
+##### _显示列_（已启用）
 
-Display columns in the explorer tree.
+在资源管理器树中显示列。
 
-##### *Show hierarchies* (enabled)
+##### _显示层次结构_（已启用）
 
-Display hierarchies in the explorer tree.
+在资源管理器树中显示层次结构。
 
-##### *Show partitions* (enabled)
+##### _显示分区_（已启用）
 
-Display partitions in the explorer tree.
+在资源管理器树中显示分区。
 
-##### *Show metadata information* (disabled)
+##### _显示元数据信息_（已禁用）
 
-Display additional metadata properties in tooltips and property grid. This includes information like lineage tags, creation timestamps, and other technical metadata.
+在工具提示和属性网格中显示额外的元数据属性。 这包括 Lineage tag、创建时间戳以及其他技术元数据等信息。
 
-##### *Show full branch* (disabled)
+##### _显示完整分支_（已禁用）
 
-When filtering the TOM Explorer, by default Tabular Editor 3 shows all items in the hierarchy that matches the filter string, including their parents. If you want to see all child items as well (even though these might not match the filter string), enable this option.
+在筛选 TOM Explorer 时，默认情况下，Tabular Editor 3 会显示层次结构中与筛选字符串匹配的所有项，包括它们的父项。 如果你也想查看所有子项（即使它们可能不匹配筛选字符串），就启用这个选项。
 
-##### *Always show delete warnings* (disabled)
+##### _始终显示删除警告_（已禁用）
 
-If you prefer Tabular Editor 3 to prompt you to confirm all object deletions, enable this setting. Otherwise, Tabular Editor 3 will only prompt you to confirm multi-object deletions, or deletions of objects that are referenced by other objects.
+如果你希望 Tabular Editor 3 在删除任何对象时都提示你确认，就启用这个设置。 否则，Tabular Editor 3 只会在删除多个对象时，或删除被其他对象引用的对象时提示你确认。
 
 > [!NOTE]
-> All delete operations in Tabular Editor 3 can be undone by hitting CTRL+Z.
+> 在 Tabular Editor 3 中，所有删除操作都可以按 CTRL+Z 撤销。
 
-### Column Preferences
+### 列偏好设置
 
-Configure which columns are visible in multi-column views and their display order.
+配置多列视图中显示哪些列，以及它们的显示顺序。
 
-## Tabular Editor > Copy/Paste
+## Tabular Editor > 复制/粘贴
 
-![Placeholder: Screenshot of Copy/Paste preferences page]
+![占位符：复制/粘贴偏好页面的屏幕截图]
 
-Control what metadata is included when copying objects:
+控制复制对象时包含哪些元数据：
 
-##### *Include translations* (enabled)
+##### _包含翻译_（已启用）
 
-Copy translation metadata with objects. When enabled, any translations defined for the copied object will also be copied.
+随对象一起复制翻译元数据。 启用后，复制对象上定义的任何翻译也会一并复制。
 
-##### *Include perspectives* (enabled)
+##### _包含透视_（已启用）
 
-Copy perspective membership with objects. When enabled, the copied object will belong to the same perspectives as the original.
+随对象一起复制其透视归属关系。 启用后，复制的对象将与原对象属于相同的透视。
 
-##### *Include RLS* (enabled)
+##### _包含 RLS_（已启用）
 
-Copy Row-Level Security expressions with objects. This applies when copying tables that have RLS rules defined.
+随对象一起复制行级安全性表达式。 仅在复制已定义 RLS 规则的表时适用。
 
-##### *Include OLS* (enabled)
+##### _包含 OLS_（已启用）
 
-Copy Object-Level Security settings with objects. This applies when copying objects that have OLS restrictions.
+随对象一起复制对象级安全性设置。 在复制带有 OLS 限制的对象时适用。
 
-## Tabular Editor > Perspectives
+## Tabular Editor > 透视
 
-![Placeholder: Screenshot of Perspectives preferences page]
+![占位符：透视偏好页面的屏幕截图]
 
-Control how perspective membership is handled:
+控制如何处理透视成员资格：
 
-##### *Inherit perspective membership for new objects* (disabled)
+##### _新对象继承透视成员资格_（已禁用）
 
-Newly created objects automatically inherit perspective membership from their parent. For example, a new measure would automatically be added to the same perspectives as its parent table.
+新建对象会自动从其父对象继承透视成员资格。 例如，新建的度量值会自动添加到与其父表相同的透视中。
 
-##### *Inherit perspective membership for relocated objects* (disabled)
+##### _移动后的对象继承透视成员资格_（已禁用）
 
-Objects that are moved inherit perspective membership from their new parent. This is useful when reorganizing your model structure.
+被移动的对象会从其新的父对象继承透视成员资格。 这在重新组织模型结构时很有用。
 
-##### *Inherit when adding table to perspective* (enabled)
+##### _将表添加到透视时继承_（已启用）
 
-Automatically add all table objects (columns, measures, hierarchies) when a table is added to a perspective.
+将表添加到透视时，自动添加该表的所有对象（列、度量值、层次结构）。
 
-##### *Inherit when removing table from perspective* (enabled)
+##### _从透视中移除表时一并移除_（已启用）
 
-Automatically remove all table objects when a table is removed from a perspective.
+从透视中移除表时，自动移除该表的所有对象。
 
-## Tabular Editor > Schema Compare
+## Tabular Editor > 架构比较
 
-![Placeholder: Screenshot of Schema Compare preferences page]
+![占位符：架构比较偏好页面的屏幕截图]
 
-Configure which changes are ignored during schema comparison when updating table schemas:
+配置在更新表架构并进行架构比较时要忽略哪些更改：
 
-##### *Ignore Import mode changes* (disabled)
+##### _忽略导入模式更改_（已禁用）
 
-Don't flag changes to Import mode properties. Enable this if you want to ignore changes between Import, DirectQuery, and Dual modes during schema comparison.
+不要标记导入模式属性的更改。 如果希望在架构比较期间忽略导入模式、DirectQuery 模式和 Dual 模式之间的更改，请启用此选项。
 
-##### *Ignore data type changes* (disabled)
+##### _忽略数据类型更改_（已禁用）
 
-Don't flag column data type changes. Enable this if you want to ignore data type changes during schema comparison.
+不要标记列数据类型的更改。 如果希望在架构比较期间忽略数据类型更改，请启用此选项。
 
-##### *Ignore description changes* (disabled)
+##### _忽略描述更改_（已禁用）
 
-Don't flag changes to object descriptions. Enable this if you don't want to see description changes in the schema comparison.
+不要标记对象描述的更改。 如果你不想在架构比较中看到描述的更改，请启用此选项。
 
-##### *Ignore decimal to double changes* (disabled)
+##### _忽略 decimal 与 double 之间的更改_（已禁用）
 
-Don't flag changes between decimal and double data types. This is useful when working with data sources that don't distinguish between these types.
+不要将 decimal 与 double 数据类型之间的更改标记为差异。 在处理不会区分这些类型的数据源时，这很有用。
 
-##### *Prioritize Analysis Services schema detector* (disabled)
+##### _优先使用 Analysis Services 架构检测器_（已禁用）
 
-Use Analysis Services metadata as the source of truth for schema detection. When enabled, Tabular Editor will query the Analysis Services instance directly instead of using the data source provider's schema information.
+将 Analysis Services 元数据作为架构检测的权威依据。 启用后，Tabular Editor 将直接查询 Analysis Services 实例，而不是使用数据源提供程序的架构信息。
 
-## Tabular Editor > Save to Folder/File
+## Tabular Editor > 保存到文件夹/文件
 
-![Placeholder: Screenshot of Save to Folder preferences page]
+![占位符：保存到文件夹偏好设置页面的屏幕截图]
 
-### Serialization Mode
+### 序列化模式
 
-##### *Use TMDL format* (disabled)
+##### _使用 TMDL 格式_（已禁用）
 
-Save model metadata using the Tabular Model Definition Language (TMDL) format instead of JSON. TMDL is the modern format recommended for version control and collaboration.
+使用 Tabular Model Definition Language（TMDL）格式而非 JSON 来保存模型元数据。 TMDL 是推荐用于版本控制与协作的现代格式。
 
-##### *Use recommended serialization settings* (enabled)
+##### _使用推荐的序列化设置_（已启用）
 
-Apply recommended settings for folder-based serialization (overrides custom settings). When enabled, Tabular Editor uses best practices for saving models to folders, optimized for version control.
+应用基于文件夹的序列化推荐设置（会覆盖自定义设置）。 启用后，Tabular Editor 会使用将模型保存到文件夹的最佳实践，并针对版本控制进行优化。
 
-### Legacy (JSON) Serialization Settings
+### 传统（JSON）序列化设置
 
-##### *Prefix filenames* (disabled)
+##### _为文件名添加前缀_（已禁用）
 
-Add numeric prefixes to filenames for ordering. This can help maintain a consistent file order in file explorers.
+为文件名添加数字前缀以便排序。 这有助于在文件资源管理器中保持一致的文件顺序。
 
-##### *Local relationships* (enabled)
+##### _本地关系_（已启用）
 
-Store relationship definitions with individual tables instead of in a central location. This makes it easier to see which relationships belong to each table when using version control.
+将关系定义与各个表一起存储，而不是集中存放在一个位置。 在使用版本控制时，这样更容易看清每个表分别包含哪些关系。
 
-##### *Local perspectives* (enabled)
+##### _本地透视_（已启用）
 
-Store perspective membership with individual objects instead of in a central location. This reduces merge conflicts in version control.
+将透视成员关系与各个对象一起存储，而不是集中存放在一个位置。 这会减少版本控制中的合并冲突。
 
-##### *Local translations* (enabled)
+##### _本地翻译_（已启用）
 
-Store translations with individual objects instead of in a central location. This reduces merge conflicts in version control.
+将翻译与各个对象一起存储，而不是集中保存在一个位置。 这会减少版本控制中的合并冲突。
 
-##### *Levels*
+##### _级别_
 
-Select which object types to serialize at different folder levels. This allows you to organize your model files into a hierarchical structure.
+选择在不同文件夹层级要序列化的对象类型。 这让你可以将模型文件组织成分层结构。
 
-##### *Ignore inferred objects* (enabled)
+##### _忽略推断对象_（已启用）
 
-Don't serialize objects that are automatically inferred by the engine. This reduces clutter in saved metadata.
+不要序列化由引擎自动推断的对象。 这能减少已保存元数据的杂乱。
 
-##### *Ignore inferred properties* (enabled)
+##### _忽略推断属性_（已启用）
 
-Don't serialize properties that are automatically inferred by the engine. This keeps saved metadata clean and focused on explicitly set values.
+不要序列化由引擎自动推断的属性。 这能让已保存的元数据保持整洁，并专注于显式设置的值。
 
-##### *Ignore timestamps* (enabled)
+##### _忽略时间戳_（已启用）
 
-Don't serialize timestamp metadata. This is highly recommended for version control as it prevents unnecessary changes in every commit.
+不要序列化时间戳元数据。 强烈建议在版本控制中启用此项，因为它可以避免每次提交都产生不必要的变更。
 
-##### *Ignore lineage tags* (disabled)
+##### _忽略 Lineage tag_（已禁用）
 
-Don't serialize Power BI lineage tag metadata. Enable this if you don't want lineage information in your saved metadata.
+不要序列化 Power BI 的 Lineage tag 元数据。 如果你不希望已保存的元数据中包含 Lineage tag 信息，就启用此项。
 
-##### *Ignore privacy settings* (disabled)
+##### _忽略隐私设置_（已禁用）
 
-Don't serialize data source privacy settings. Enable this if you manage privacy settings separately.
+不要序列化数据源隐私设置。 如果你单独管理隐私设置，请启用此项。
 
-##### *Include sensitive data* (disabled)
+##### _包含敏感数据_（已禁用）
 
-Include sensitive information like passwords in serialized metadata. This is not recommended for security reasons.
+在序列化的元数据中包含密码等敏感信息。 出于安全原因，不建议这样做。
 
-##### *Ignore incremental refresh partitions* (disabled)
+##### _忽略增量刷新分区_（已禁用）
 
-Don't serialize partitions created by incremental refresh policies. Enable this if you want incremental refresh to be managed separately from your saved metadata.
+不要序列化由增量刷新策略创建的分区。 如果希望增量刷新与已保存的元数据分开管理，请启用此选项。
 
-##### *Split multiline strings* (enabled)
+##### _拆分多行字符串_（已启用）
 
-Split long string values across multiple lines for better readability in version control. This makes it easier to see changes in DAX expressions and other long text properties.
+将较长的字符串值拆分为多行，便于在版本控制中阅读。 这样更容易看清 DAX 表达式和其他长文本属性的改动。
 
-##### *Sort arrays* (disabled)
+##### _排序数组_（已禁用）
 
-Sort array elements alphabetically for consistent serialization. This can reduce meaningless differences in version control, but may change the logical order of some elements.
+按字母顺序对数组元素排序，以获得一致的序列化结果。 这可以减少版本控制中无意义的差异，但也可能改变某些元素的逻辑顺序。
 
-### TMDL Serialization Settings
+### TMDL 序列化设置
 
-##### *Indentation mode* (tabs)
+##### _缩进模式_（制表符）
 
-Choose between tabs or spaces for indentation in TMDL files. Tabs are the default and recommended option.
+选择在 TMDL 文件中使用制表符或空格进行缩进。 制表符是默认且推荐的选项。
 
-##### *Indentation spaces* (4)
+##### _缩进空格数_（4）
 
-When using spaces, specify the number of spaces per indentation level.
+使用空格时，指定每级缩进的空格数。
 
-## Data Browsing > General
+## 数据浏览 > 常规
 
-![Placeholder: Screenshot of Data Browsing General preferences page]
+![占位符：数据浏览“常规”偏好页面的屏幕截图]
 
-##### *Auto-refresh data preview* (enabled)
+##### _自动刷新数据预览_（已启用）
 
-Automatically refresh table preview windows when model changes are saved. This feature is super-useful when debugging - update an expression in one window while having a data preview open in another. Whenever you hit CTRL+S, the preview is automatically refreshed.
+在保存模型更改时，自动刷新表格预览窗口。 此功能在调试时非常实用：可以在一个窗口中更新表达式，同时在另一个窗口中保持打开数据预览。 每次按下 CTRL+S，预览都会自动刷新。
 
-##### *Auto-execute DAX queries* (enabled)
+##### _自动执行 DAX 查询_（已启用）
 
-Automatically execute DAX queries when model changes are saved. Similar to auto-refresh data preview, this allows you to see the immediate impact of changes to measures or calculated columns.
+在保存模型更改时自动执行 DAX 查询。 与自动刷新数据预览类似，它可以让你立即看到对度量值或计算列的更改所带来的影响。
 
-##### *DAX query smart selection* (enabled)
+##### _DAX 查询智能选择_（已启用）
 
-When executing a partial selection in a DAX query, intelligently determine the query context. This allows you to execute just a portion of your query for testing.
+在 DAX 查询中执行部分选择时，智能确定查询上下文。 这样你就可以只执行查询的一部分来进行测试。
 
-##### *Keep filtering and sorting in DAX query results* (WhenQueryUnchanged)
+##### _在 DAX 查询结果中保留筛选和排序_ (WhenQueryUnchanged)
 
-Control whether to preserve grid filters and sorting when re-executing queries:
-- **Never**: Sorting and filtering are always reset when a query is executed
-- **WhenQueryUnchanged**: Sorting and filtering are reset only when the query is modified
-- **Always**: Sorting and filtering are never reset if the columns still exist
+控制重新执行查询时是否保留网格筛选和排序：
 
-##### *Direct query max rows* (100)
+- **Never**：每次执行查询都会重置排序和筛选
+- **WhenQueryUnchanged**：仅在查询被修改时才会重置排序和筛选
+- **Always**：只要列仍然存在，就不会重置排序和筛选
 
-Maximum number of rows to retrieve in Direct Query mode. Adjust this if you need to preview more data, but be mindful of performance.
+##### _Direct Query 最大行数_ (100)
 
-##### *DAX query max rows* (1000)
+Direct Query 模式下可检索的最大行数。 如果你需要预览更多数据，可以调高此值，但要注意性能影响。
 
-Maximum number of rows to retrieve for DAX queries. Increase this if you need to analyze larger result sets.
+##### _DAX 查询最大行数_ (1000)
 
-## Data Browsing > Pivot Grid
+DAX 查询可检索的最大行数。 如果你需要分析更大的结果集，可以增加此值。
 
-![Placeholder: Screenshot of Pivot Grid preferences page]
+## 数据浏览 > Pivot Grid
 
-##### *Auto-refresh pivot grid* (enabled)
+![占位符：Pivot Grid 偏好设置页面截图]
 
-Automatically refresh pivot grids when model changes are saved. Just like with DAX queries, this allows you to immediately see the impact of changes to measures.
+##### _自动刷新 Pivot Grid_ (已启用)
 
-##### *Pivot grid customization default layout* (StackedDefault)
+保存模型更改后自动刷新 Pivot Grid。 与 DAX 查询类似，这使你能立即看到对度量值所做更改的影响。
 
-Choose the default layout for the pivot grid field list. Options include:
-- **StackedDefault**: Fields and areas in a single stacked panel
-- **StackedSideBySide**: Fields and areas in side-by-side panels
-- **TopPanelOnly**: Field list at the top only
-- **BottomPanelOnly2by2**: Field list in a 2x2 grid at the bottom
-- **BottomPanelOnly1by4**: Field list in a 1x4 layout at the bottom
+##### _Pivot Grid 自定义默认布局_ (StackedDefault)
 
-##### *Show all fields in pivot customization* (enabled)
+选择 Pivot Grid 字段列表的默认布局。 可选项包括：
 
-Display all available fields in the pivot grid field list by default, including hidden fields.
+- **StackedDefault**：字段和区域显示在同一个堆叠面板中
+- **StackedSideBySide**：字段和区域显示在并排面板中
+- **TopPanelOnly**：字段列表仅在顶部显示
+- **BottomPanelOnly2by2**: 底部以 2x2 网格显示字段列表
+- **BottomPanelOnly1by4**：底部 1x4 布局的字段列表
 
-##### *Pivot header word wrap* (enabled)
+##### _在透视表自定义中显示所有字段_（已启用）
 
-Enable word wrapping in pivot grid headers. This makes long field names more readable.
+默认在 Pivot Grid 字段列表中显示所有可用字段，包括隐藏字段。
 
-##### *Warn if pivot grid fields mismatch* (enabled)
+##### _Pivot Grid 标题自动换行_（已启用）
 
-Show a warning when pivot grid field definitions don't match the current model. This can happen if you've deleted or renamed fields used in a saved pivot grid.
+在 Pivot Grid 标题中启用自动换行。 这样可以让较长的字段名更易读。
 
-##### *Always show pivot grid field list* (enabled)
+##### _Pivot Grid 字段不匹配时发出警告_（已启用）
 
-Keep the pivot grid field list visible by default. Disable this if you prefer more screen space for the pivot grid itself.
+当 Pivot Grid 的字段定义与当前模型不匹配时显示警告。 如果你删除或重命名了已保存的 Pivot Grid 中使用的字段，就可能出现这种情况。
 
-## DAX Editor > General
+##### _始终显示 Pivot Grid 字段列表_（已启用）
 
-![Dax Editor General](~/content/assets/images/dax-editor-general.png)
+默认保持 Pivot Grid 字段列表可见。 如果你希望为 Pivot Grid 本身留出更多屏幕空间，请禁用此选项。
 
-Tabular Editor 3's DAX editor is highly configurable. This page provides settings for general configuration of the DAX editor:
+## DAX编辑器 > 常规
 
-##### *Line numbers* (enabled)
+![Dax 编辑器 常规](~/content/assets/images/dax-editor-general.png)
 
-Display line numbers in the left margin of the editor.
+Tabular Editor 3 的 DAX编辑器可高度自定义。 本页面提供 DAX编辑器的常规配置选项：
 
-##### *Code folding* (enabled)
+##### _行号_（已启用）
 
-Enable collapsible regions in DAX code for better readability. Make sure you try out this feature!
+在编辑器左侧边距显示行号。
 
-##### *Visible whitespace* (disabled)
+##### _代码折叠_（已启用）
 
-Show dots for spaces and arrows for tabs. This can be helpful when diagnosing indentation issues.
+在 DAX 代码中启用可折叠区域，以提升可读性。 一定要试试这个功能！
 
-##### *Indentation guides* (enabled)
+##### _显示空白字符_（已禁用）
 
-Display vertical lines to show indentation levels.
+用圆点表示空格，用箭头表示制表符。 在诊断缩进问题时很有帮助。
 
-##### *Use tabs* (disabled)
+##### _缩进引导线_（已启用）
 
-When checked, a tab character (`\t`) is inserted whenever the TAB button is hit. Otherwise, a number of spaces corresponding to the *Indent width* setting is inserted.
+显示竖线以标示缩进层级。
 
-##### *Comment style* (slashes)
+##### _使用制表符_（已禁用）
 
-DAX supports line comments that use slashes (`//`) or hyphens (`--`). This setting determines which style of comment is used when Tabular Editor 3 generates DAX code.
+选中后，每次按下 TAB 键都会插入一个制表符字符（`\t`）。 否则，会插入与 _缩进宽度_ 设置对应数量的空格。
 
-##### *DAX function documentation*
+##### _注释样式_（斜杠）
 
-Use this setting to specify which URL to launch in the default web browser, whenever you hit F12 while the cursor is on a DAX function. Options include https://dax.guide (recommended) and Microsoft's official documentation.
+DAX 支持使用斜杠（`//`）或连字符（`--`）的行注释。 这个设置决定 Tabular Editor 3 生成 DAX 代码时用哪种注释样式。
 
-### DAX Settings
+##### _DAX 函数文档_
 
-##### *Locale*
+使用此设置指定：当光标位于某个 DAX 函数上并按下 F12 时，默认浏览器要打开的 URL。 可选项包括 https://dax.guide（推荐）以及 Microsoft 的官方文档。
 
-Specify the locale for DAX functions and formatting.
+### DAX 设置
 
-##### *Analysis Services version settings*
+##### _区域设置_
 
-These settings are relevant only when Tabular Editor 3 cannot determine the version of Analysis Services used, as is the case when a Model.bim file is loaded directly. In this case, Tabular Editor tries to guess which version the model will be deployed to, based on the compatibility level. If Tabular Editor reports incorrect semantic/syntax errors, you may need to tweak these settings.
+设置 DAX 函数和格式所使用的区域设置。
 
-## DAX Editor > Auto Formatting
+##### _Analysis Services 版本设置_
 
-![Auto Formatting Settings](~/content/assets/images/auto-formatting-settings.png)
+只有当 Tabular Editor 3 无法确定所使用的 Analysis Services 版本时，这些设置才会用得上，比如直接加载 Model.bim 文件时就是这样。 在这种情况下，Tabular Editor 会根据兼容级别来推测模型将部署到的版本。 如果 Tabular Editor 报告的语义/语法错误不正确，你可能需要调整这些设置。
 
-The DAX Editor is **very** powerful and helps you produce beautiful, readable DAX code as you type.
+## DAX编辑器 > 自动格式化
 
-##### *Auto format code as you type* (enabled)
+![自动格式化设置](~/content/assets/images/auto-formatting-settings.png)
 
-This option will automatically apply certain formatting rules whenever certain keystrokes occur. For example, when a parenthesis is closed, this feature will ensure that everything within the parentheses is formatted according to the other settings on this page.
+DAX编辑器 **非常** 强大，能在你输入的同时帮你写出漂亮、易读的 DAX 代码。
 
-##### *Auto-format function calls* (enabled)
+##### _输入时自动格式化代码_（已启用）
 
-This option specifically controls whether automatic formatting of function calls (spacing between arguments and parentheses) should happen when a parenthesis is closed.
+这个选项会在发生某些按键操作时，自动应用特定的格式规则。 例如，当输入右括号时，此功能会确保括号内的内容按照本页的其他设置进行格式化。
 
-##### *Auto-indent* (enabled)
+##### _自动格式化函数调用_（已启用）
 
-This option automatically indents function arguments when a line break is inserted within a function call.
+此选项专门控制：当输入右括号时，是否对函数调用（参数与括号之间的空格）进行自动格式化。
 
-##### *Auto-brace* (enabled)
+##### _自动缩进_（已启用）
 
-This option automatically inserts the closing brace or quote whenever an opening brace or quote is entered.
+这个选项会在函数调用内插入换行时，自动缩进函数参数。
 
-##### *Wrap selection* (enabled)
+##### _自动补全括号/引号_（已启用）
 
-When enabled, this option automatically wraps the current selection with the closing brace, when an opening brace is entered.
+启用后，输入左括号或左引号时会自动补全对应的右括号或右引号。
 
-### Formatting Rules
+##### _包裹选区_（已启用）
 
-These settings control how DAX code whitespace is formatted, both when auto-formatting occurs and when code is manually formatted.
+启用后，输入左括号时，会自动在当前选区外加上对应的括号。
 
-##### *Space after functions* (disabled)
+### 格式化规则
 
-# [Enabled](#tab/space-after-function-on)
+这些设置用于控制 DAX 代码中空白字符的格式：既包括自动格式化时的处理，也包括手动格式化代码时的处理。
+
+##### _函数后加空格_（已禁用）
+
+# [已启用](#tab/space-after-function-on)
 
 ```DAX
 SUM ( 'Sales'[Amount] )
 ```
 
-# [Disabled](#tab/space-after-function-off)
+# [已禁用](#tab/space-after-function-off)
 
 ```DAX
 SUM( 'Sales'[Amount] )
@@ -572,11 +585,11 @@ SUM( 'Sales'[Amount] )
 
 ***
 
-##### *Newline after functions* (disabled)
+##### _函数后换行_（已禁用）
 
-Applies only when a function call needs to be broken across multiple lines.
+仅在函数调用需要拆分为多行时生效。
 
-# [Enabled](#tab/newline-after-function-on)
+# [已启用](#tab/newline-after-function-on)
 
 ```DAX
 SUM
@@ -585,7 +598,7 @@ SUM
 )
 ```
 
-# [Disabled](#tab/newline-after-function-off)
+# [已禁用](#tab/newline-after-function-off)
 
 ```DAX
 SUM(
@@ -595,15 +608,15 @@ SUM(
 
 ***
 
-##### *Pad parentheses* (enabled)
+##### _括号内补空格_（已启用）
 
-# [Enabled](#tab/pad-parentheses-on)
+# [已启用](#tab/pad-parentheses-on)
 
 ```DAX
 SUM( Sales[Amount] )
 ```
 
-# [Disabled](#tab/pad-parentheses-off)
+# [已禁用](#tab/pad-parentheses-off)
 
 ```DAX
 SUM(Sales[Amount])
@@ -611,213 +624,216 @@ SUM(Sales[Amount])
 
 ***
 
-##### *Long format line limit* (120)
+##### _长格式行长度限制_（120）
 
-The maximal number of characters to keep on a single line before an expression is broken across multiple lines, when using the **Format DAX (long lines)** option.
+在使用 **格式化 DAX（长行）** 选项时，表达式在被拆分为多行之前，单行可保留的最大字符数。
 
-##### *Short format line limit* (60)
+##### _短格式行长度限制_（60）
 
-The maximal number of characters to keep on a single line before an expression is broken across multiple lines, when using the **Format DAX (short lines)** option.
+使用 **Format DAX (short lines)** 选项时，表达式在拆分为多行之前，每行最多保留的字符数。
 
-### Casings and Quotes
+### 大小写与引号
 
-In addition to formatting the DAX code whitespace, Tabular Editor 3 can also fix object references and function/keyword casings.
+除了格式化 DAX 代码的空白字符外，Tabular Editor 3 还可以修正对象引用，以及函数/关键字的大小写。
 
-##### *Fix measure/column qualifiers* (enabled)
+##### _修正度量值/列限定符_（已启用）
 
-When checked, table prefixes are automatically removed from measure references, and automatically inserted on column references.
+选中后，会自动从度量值引用中移除表前缀，并在列引用中自动插入表前缀。
 
-##### *Preferred keyword casing* (UPPER)
+##### _首选关键字大小写_（大写）
 
-This setting allows you to change the casing used for keywords, such as `ORDER BY`, `VAR`, `EVALUATE`, etc.
+此设置允许你更改关键字使用的大小写，例如 `ORDER BY`、`VAR`、`EVALUATE` 等。
 
-##### *Preferred function casing* (UPPER)
+##### _首选函数大小写_（大写）
 
-This setting allows you to change the casing used for functions, such as `CALCULATE(...)`, `SUM(...)`, etc.
+此设置允许你更改函数使用的大小写，例如 `CALCULATE(...)`、`SUM(...)` 等。
 
-##### *Fix keyword/function casing* (enabled)
+##### _修正关键字/函数大小写_（已启用）
 
-When checked, casing of keywords and functions is automatically corrected whenever code is auto-formatted or manually formatted.
+选中后，无论是自动格式化还是手动格式化代码，都会自动更正关键字和函数的大小写。
 
-##### *Fix object reference casing* (enabled)
+##### _修正对象引用大小写_（已启用）
 
-DAX is a case-insensitive language. When this is enabled, references to tables, columns and measures are automatically corrected such that the casing matches the physical name of the referenced objects.
+DAX 是一门大小写不敏感的语言。 启用后，会自动更正对表、列和度量值的引用，使其大小写与所引用对象的实际名称一致。
 
-##### *Always quote tables* (disabled)
+##### _始终为表名加引号_（已禁用）
 
-Referencing certain table names do not require surrounding single quotes in DAX. However, if you prefer table references to always be quoted, you can check this option.
+在 DAX 中，引用某些表名时不需要用单引号括起来。 不过，如果你希望表引用始终带引号，可以选中此选项。
 
-##### *Always prefix extension columns* (disabled)
+##### _扩展列始终加前缀_（已禁用）
 
-Extension columns can be defined without a table name. When checked, the DAX editor will always add the table prefix to an extension column.
+扩展列可以在定义时不带表名。 选中后，DAX编辑器将始终为扩展列添加表前缀。
 
-## DAX Editor > Code Assist
+## DAX编辑器 > Code Assist
 
-![Placeholder: Screenshot of DAX Editor Code Assist preferences page]
+![占位符：DAX编辑器 Code Assist 偏好设置页面的屏幕截图]
 
-On this page, you can configure the two most important Code Assist features, namely calltips (aka. "parameter info") and auto-complete.
+在此页面上，你可以配置两项最重要的 Code Assist 功能：调用提示（也称“参数信息”）和自动完成。
 
-##### *Auto-complete trigger*
+##### _自动完成触发方式_
 
-Control when the auto-complete list appears. Options include automatic triggering after typing a certain number of characters, or manual triggering with CTRL+Space.
+控制自动完成列表何时显示。 选项包括：输入达到指定字符数后自动触发，或使用 CTRL+Space 手动触发。
 
-##### *Calltip trigger*
+##### _调用提示触发方式_
 
-Control when parameter information appears. Options include automatic triggering when opening a function parenthesis, or manual triggering.
+控制参数信息何时显示。 选项包括在输入函数左括号时自动触发，或手动触发。
 
-##### *Incremental search* (enabled)
+##### _增量搜索_（已启用）
 
-Enable fuzzy/incremental searching in auto-complete. This allows you to find items by typing parts of their name, not just the beginning.
+在自动完成中启用模糊/增量搜索。 这样你就可以通过输入名称的一部分来查找项目，而不仅限于从开头匹配。
 
-##### *Suggest table names* (enabled)
+##### _建议表名_（已启用）
 
-Include table names in auto-complete suggestions.
+在自动完成建议中包含表名。
 
-##### *Always quote table names* (disabled)
+##### _始终为表名加引号_（已禁用）
 
-Automatically quote table names in suggestions, even when not required.
+在建议中自动为表名加引号，即使并非必需。
 
-##### *Show first letter only* (disabled)
+##### _仅显示首字母_（已禁用）
 
-Only show items starting with the typed letter. Disable this to use incremental search instead.
+只显示以所输入字母开头的项目。 禁用此项即可改用增量搜索。
 
-## DAX Editor > Code Actions
+## DAX编辑器 > 代码操作
 
-![Placeholder: Screenshot of DAX Editor Code Actions preferences page]
+![占位符：DAX编辑器“代码操作”偏好页面的屏幕截图]
 
-Configure automatic code improvement suggestions:
+配置自动代码改进建议：
 
-##### *Variable prefixes*
+##### _变量前缀_
 
-Define acceptable prefixes for variable names (e.g., `_`, `__`, `$`, `var_`, `var`, `v_`, `v`, `VAR_`). Code actions will suggest adding these prefixes to variable names that don't follow the convention.
+定义变量名可接受的前缀（例如 `_`、`__`、`var_`、`var`、`v_`、`v`、`VAR_`）。 代码操作会建议为不符合规范的变量名称添加这些前缀。
 
-##### *Column prefixes*
+##### _列前缀_
 
-Define acceptable prefixes for temporary column names (e.g., `@`, `$`, `_`, `x`, `x_`). Code actions will suggest adding these prefixes to temporary column names that don't follow the convention.
+定义临时列名可接受的前缀（例如 `@`、`_`、`x`、`x_`）。 代码操作会建议为不符合规范的临时列名称添加这些前缀。
 
-## SQL Editor / M Editor / C# Editor
+## SQL 编辑器 / M 编辑器 / C# 编辑器
 
-![Placeholder: Screenshot of SQL/M/C# Editor preferences pages]
+![占位符：SQL/M/C# 编辑器偏好页面的屏幕截图]
 
-Similar configuration options are available for SQL, M (Power Query), and C# script editors, including:
-- Syntax highlighting and color schemes
-- Auto-formatting options
-- Code assist and auto-complete features
-- Comment styles and indentation preferences
+SQL、M（Power Query）和 C# Script 编辑器也提供类似的配置选项，包括：
 
-Each editor can be customized independently to match your preferred coding style.
+- 语法高亮和配色方案
+- 自动格式化选项
+- Code Assist 和自动完成功能
+- 注释样式和缩进偏好
+
+每个编辑器都可以单独自定义，以符合你偏好的代码风格。
 
 ## DAX Formatter
 
-![Placeholder: Screenshot of DAX Formatter preferences page]
+![占位符：DAX Formatter 偏好页面截图]
 
-##### *DAX formatter consent* (disabled)
+##### _DAX formatter 同意_（已禁用）
 
-Agree to send DAX code to the external DAX formatting service (www.daxformatter.com). When enabled, you can use this service to format DAX code according to community standards.
+同意将 DAX 代码发送到外部 DAX 格式化服务 (www.daxformatter.com)。 启用后，你可以使用此服务按社区标准格式化 DAX 代码。
 
-##### *DAX formatter request timeout* (5000)
+##### _DAX formatter 请求超时_（5000）
 
-Timeout in milliseconds for DAX formatter requests. Increase this if you frequently get timeout errors when using the DAX formatter.
+DAX formatter 请求的超时时间，单位为毫秒。 如果你在使用 DAX formatter 时经常遇到超时错误，可以把这个值调大。
 
-## DAX Optimizer Integration
+## DAX优化器集成
 
-![Placeholder: Screenshot of DAX Optimizer Integration preferences page]
+![占位符：DAX优化器集成偏好页面截图]
 
-Configure integration with DAX Optimizer (Enterprise Edition only):
+配置 DAX优化器集成（仅企业版）：
 
-##### *Connect automatically* (null/prompt)
+##### _自动连接_（null/提示）
 
-Automatically connect to DAX Optimizer when available. When not set, you will be prompted the first time.
+在可用时自动连接到 DAX优化器。 如果未设置，首次使用时会提示你。
 
-##### *Obfuscate VPAX files* (enabled)
+##### _对 VPAX 文件进行混淆处理_（已启用）
 
-Anonymize model metadata when sending to DAX Optimizer. This protects sensitive information like table and column names while still allowing analysis.
+发送到 DAX优化器时对模型元数据进行匿名化处理。 这能保护表名、列名等敏感信息，同时仍允许进行分析。
 
-##### *Obfuscation dictionary directory* (`%LocalAppData%\TabularEditor3\DaxOptimizer`)
+##### _混淆字典目录_（`%LocalAppData%\TabularEditor3\DaxOptimizer`）
 
-Specify where obfuscation dictionaries are stored. The dictionary maintains consistent obfuscation across multiple analyses.
+指定混淆字典的存储位置。 该字典可在多次分析之间保持一致的混淆结果。
 
-## VertiPaq Analyzer
+## VertiPaq分析器
 
-![Placeholder: Screenshot of VertiPaq Analyzer preferences page]
+![占位符：VertiPaq分析器偏好页面截图]
 
-##### *Include TOM metadata* (enabled)
+##### _包含 TOM 元数据_（已启用）
 
-Include Tabular Object Model metadata in VertiPaq Analyzer statistics. This provides richer information about your model structure.
+在 VertiPaq分析器的统计信息中包含 Tabular Object Model 元数据。 这会为你的模型结构提供更丰富的信息。
 
-##### *Read stats from data* (enabled)
+##### _从数据读取统计信息_（已启用）
 
-Read statistics by scanning actual data (more accurate but slower). When disabled, only metadata is used.
+通过扫描实际数据来读取统计信息（更准确，但更慢）。 禁用后，将仅使用元数据。
 
-##### *Direct Lake extraction mode* (ResidentOnly)
+##### _Direct Lake 提取模式_（ResidentOnly）
 
-How to extract statistics from Direct Lake models:
-- **ResidentOnly**: Only analyze data currently loaded in memory
-- **All**: Include non-resident data (slower, may trigger data loading)
+如何从 Direct Lake 模型中提取统计信息：
 
-##### *Read stats from Dynamic Management Views* (disabled)
+- **ResidentOnly**：仅分析当前已加载到内存中的数据
+- **All**：包含未驻留的数据（更慢，可能触发数据加载）
 
-Use DMVs to gather statistics (faster but less accurate). This is an alternative to reading from data.
+##### _从动态管理视图读取统计信息_（已禁用）
 
-##### *Relationship sample rows* (3)
+使用 DMV 收集统计信息（更快，但准确性较低）。 这是读取数据统计信息的替代方案。
 
-Number of rows to sample when analyzing relationships. Higher values provide more accuracy but take longer.
+##### _关系采样行数_（3）
 
-##### *Column batch size* (50)
+分析关系时要采样的行数。 数值越高越准确，但耗时更长。
 
-Number of columns to analyze in each batch. Adjust this based on your model size and performance requirements.
+##### _列批次大小_（50）
 
-## Power BI Integration
+每批要分析的列数。 可根据模型大小和性能需求进行调整。
 
-![Placeholder: Screenshot of Power BI Integration preferences page]
+## Power BI 集成
 
-##### *Power BI endpoint base URL* (`https://api.powerbi.com`)
+![占位符：Power BI 集成偏好页面截图]
 
-The base URL for Power BI API calls. Change this if you're working with a sovereign cloud or custom environment.
+##### _Power BI 端点基础 URL_（`https://api.powerbi.com`）
 
-##### *Fabric endpoint base URL* (`https://api.fabric.microsoft.com`)
+用于 Power BI API 调用的基础 URL。 如果你使用的是主权云或自定义环境，请更改此项。
 
-The base URL for Microsoft Fabric API calls. Change this if you're working with a sovereign cloud or custom environment.
+##### _Fabric 端点基础 URL_（`https://api.fabric.microsoft.com`）
 
-##### *Use embedded browser for authentication* (enabled)
+用于调用 Microsoft Fabric API 的基础 URL。 如果你在主权云或自定义环境中工作，请更改此项。
 
-Use the embedded browser for OAuth authentication instead of the system browser. This provides a more integrated experience.
+##### _使用嵌入式浏览器进行身份验证_（已启用）
 
-## Proxy Settings
+使用嵌入式浏览器进行 OAuth 身份验证，而不是系统浏览器。 这将带来更紧密的集成体验。
 
-![Placeholder: Screenshot of Proxy Settings preferences page]
+## 代理设置
 
-##### *Proxy type* (None)
+![占位符：代理设置偏好页面的屏幕截图]
 
-Choose between:
-- **None**: No proxy configuration
-- **System**: Use system proxy settings
-- **Custom**: Specify custom proxy configuration
+##### _代理类型_（无）
 
-##### *Proxy address*
+可在以下选项中选择：
 
-The address of the proxy server (e.g., `http://proxy.company.com:8080`).
+- **无**：不配置代理
+- **系统**：使用系统代理设置
+- **自定义**：指定自定义代理配置
 
-##### *Proxy user*
+##### _代理地址_
 
-Username for proxy authentication if required.
+代理服务器的地址（例如 `http://proxy.company.com:8080`）。
 
-##### *Proxy password*
+##### _代理用户名_
 
-Password for proxy authentication (stored encrypted).
+如需代理身份验证，请输入用户名。
 
-##### *Use default credentials* (enabled)
+##### _代理密码_
 
-Use the current Windows credentials for proxy authentication. This implements the [same behavior as Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy).
+用于代理身份验证的密码（加密存储）。
 
-##### *Bypass proxy on local* (enabled)
+##### _使用默认凭据_（已启用）
 
-Bypass the proxy for local addresses. This is recommended for performance.
+使用当前 Windows 凭据进行代理身份验证。 其行为与 [Power BI Desktop 一致](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-troubleshooting-sign-in#using-default-system-credentials-for-web-proxy)。
 
-##### *Proxy bypass list*
+##### _对本地地址绕过代理_（已启用）
 
-List of addresses that should bypass the proxy (e.g., `localhost;*.company.local`).
+对本地地址绕过代理。 建议启用以提升性能。
 
-## Next Steps
+##### _代理例外列表_
 
-For a user-friendly guide to the most commonly adjusted preferences, see the getting started guide (Personalizing TE3)[xrefid: personalizing-te3].
+应绕过代理的地址列表（例如 `localhost;*.company.local`）。
+
+## 后续步骤
+
+如需查看最常调整的偏好设置的易用指南，请参阅入门指南（Personalizing TE3）[xrefid: personalizing-te3]。

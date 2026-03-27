@@ -1,92 +1,92 @@
 ---
 uid: kb.bpa-relationship-same-datatype
-title: Relationship Columns Must Have Same Data Type
+title: 关系列必须具有相同的数据类型
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring relationships connect columns with matching data types to prevent errors and performance issues.
+description: 此最佳实践规则可确保关系所连接的列数据类型一致，从而避免错误并减少性能问题。
 ---
 
-# Relationship Columns Must Have Same Data Type
+# 关系列必须具有相同的数据类型
 
-## Overview
+## 概述
 
-This best practice rule identifies relationships where the connected columns have mismatched data types. Both columns in a relationship must share the same data type to ensure proper filtering, prevent errors, and maintain optimal query performance.
+此最佳实践规则用于识别关系两端所连接的列数据类型不一致的情况。 关系中的两列必须使用相同的数据类型，才能确保筛选正常、防止错误，并保持最佳查询性能。
 
-- Category: Error Prevention
+- 类别：错误预防
 
-- Severity: High (3)
+- 严重性：高（3）
 
-## Applies To
+## 适用范围
 
-- Relationships
+- 关系
 
-## Why This Matters
+## 为什么这很重要
 
-Relationships with mismatched data types cause serious problems:
+数据类型不匹配的关系会导致严重问题：
 
-- **Model validation errors**: The model may fail to save or deploy
-- **Relationship creation failures**: Power BI and Analysis Services may reject the relationship
-- **Implicit conversions**: Expensive data type conversions on every query
-- **Incorrect results**: Type coercion leads to unexpected filtering behavior
-- **Performance degradation**: Converting data types during queries slows execution
-- **Memory overhead**: Additional memory required for conversion buffers
+- **模型验证错误**：模型可能无法保存或部署
+- **关系创建失败**：Power BI 和 Analysis Services 可能会拒绝该关系
+- **隐式转换**：每次查询都会进行代价高昂的数据类型转换
+- **结果不正确**：类型强制转换会导致意外的筛选行为
+- **性能下降**：查询过程中转换数据类型会拖慢执行速度
+- **内存开销**：转换缓冲区需要额外内存
 
-## When This Rule Triggers
+## 何时触发此规则
 
-The rule triggers when:
+出现以下情况时会触发该规则：
 
 ```csharp
 FromColumn.DataType != ToColumn.DataType
 ```
 
-This detects relationships connecting columns with different data types.
+这用于检测连接了不同数据类型列的关系。
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. Identify which column should change data type
-2. Change the data type in **Power Query**, in the underlying data source or in the model
-3. Delete the existing relationship
-4. Create a new relationship between the corrected columns
-5. Verify filtering works correctly
+1. 确定需要更改数据类型的列
+2. 在 **Power Query**、底层数据源或模型中更改数据类型
+3. 删除现有关系
+4. 在更正后的列之间创建新的关系
+5. 确认筛选功能是否正常
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Inconsistent Data Type Choices
+### 原因 1：数据类型选择不一致
 
-Different data types chosen for the same logical key during import or table creation.
+在导入或创建表时，为同一个逻辑键选择了不同的数据类型。
 
-### Cause 2: Source System Differences
+### 原因 2：源系统差异
 
-Foreign keys imported from different source systems with different type conventions.
+从不同源系统导入的外键，使用了不同的类型约定。
 
-### Cause 3: DateTime vs Date Mismatch
+### 原因 3：DateTime 与 Date 类型不匹配
 
-Fact tables using DateTime columns while date dimensions use Date type.
+事实表使用 DateTime 列，而日期维度使用 Date 类型。
 
-## Example
+## 示例
 
-### Before Fix
-
-```
-Relationship: Sales[CustomerID] (Int64) → Customers[CustomerID] (String)
-```
-
-**Error**: Relationship fails validation or creates performance issues with implicit conversion
-
-### After Fix
+### 修复前
 
 ```
-Relationship: Sales[CustomerID] (Int64) → Customers[CustomerID] (Int64)
+关系：Sales[CustomerID] (Int64) → Customers[CustomerID] (String)
 ```
 
-**Result**: Relationship works efficiently with no type conversion overhead
+**错误**：关系验证失败，或因隐式转换导致性能问题
 
-## Compatibility Level
+### 修复后
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+关系：Sales[CustomerID] (Int64) → Customers[CustomerID] (Int64)
+```
 
-## Related Rules
+**结果**：关系可高效运行，无类型转换开销
 
-- [Many-to-Many Relationships Should Use Single Direction](xref:kb.bpa-many-to-many-single-direction) - Relationship performance optimization
+## 兼容级别
+
+本规则适用于兼容级别为 **1200** 及以上的模型。
+
+## 相关规则
+
+- [多对多关系应使用单向筛选](xref:kb.bpa-many-to-many-single-direction) - 关系性能优化

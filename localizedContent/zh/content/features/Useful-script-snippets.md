@@ -1,6 +1,6 @@
-﻿---
+---
 uid: useful-script-snippets
-title: Useful script snippets
+title: 实用脚本片段
 author: Daniel Otykier
 applies_to:
   products:
@@ -15,144 +15,151 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Useful Script Snippets
 
-Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](/Advanced-Scripting) of Tabular Editor. Many of these scripts are useful to save as [Custom Actions](/Custom-Actions), so that you can easily reuse them from the context menu.'
+# 实用脚本片段
 
-Also, make sure to check out our script library @csharp-script-library, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor.
+这里汇总了一些小脚本片段，帮助你开始使用 Tabular Editor 的 [高级脚本功能](/Advanced-Scripting)。 其中许多脚本都适合保存为 [自定义操作](/Custom-Actions)，这样你就能从上下文菜单中轻松重复使用它们。'
+
+另外，也别忘了看看我们的脚本库 @csharp-script-library，里面有更多贴近实战的示例，展示你可以用 Tabular Editor 的脚本能力做些什么。
 
 ***
 
-## Create measures from columns
+## 从列创建度量值
+
 ```csharp
-// Creates a SUM measure for every currently selected column and hide the column.
+// 为每个当前选中的列创建一个 SUM 度量值，并隐藏该列。
 foreach(var c in Selected.Columns)
 {
     var newMeasure = c.Table.AddMeasure(
-        "Sum of " + c.Name,                    // Name
-        "SUM(" + c.DaxObjectFullName + ")",    // DAX expression
-        c.DisplayFolder                        // Display Folder
+        "Sum of " + c.Name,                    // 名称
+        "SUM(" + c.DaxObjectFullName + ")",    // DAX 表达式
+        c.DisplayFolder                        // 显示文件夹
     );
     
-    // Set the format string on the new measure:
+    // 为新度量值设置格式字符串：
     newMeasure.FormatString = "0.00";
 
-    // Provide some documentation:
-    newMeasure.Description = "This measure is the sum of column " + c.DaxObjectFullName;
+    // 提供一些说明文档：
+    newMeasure.Description = "此度量值是对列求和 " + c.DaxObjectFullName;
 
-    // Hide the base column:
+    // 隐藏基础列：
     c.IsHidden = true;
 }
 ```
-This snippet uses the `<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` function to create a new measure on the table. We use the `DaxObjectFullName` property to get the fully qualified name of the column for use in the DAX expression: `'TableName'[ColumnName]`.
+
+此片段使用 `<Table>.AddMeasure(<name>, <expression>, <displayFolder>)` 函数，在表上创建一个新的度量值。 我们使用 `DaxObjectFullName` 属性来获取列的完全限定名称，用于 DAX 表达式：`'TableName'[ColumnName]`。
 
 ***
 
-## Generate Time Intelligence measures
-First, create custom actions for individual Time Intelligence aggregations. For example:
+## 生成时间智能度量值
+
+首先，为各个时间智能汇总分别创建自定义操作。 例如：
+
 ```csharp
-// Creates a TOTALYTD measure for every selected measure.
+// 为每个选中的度量值创建一个 TOTALYTD 度量值。
 foreach(var m in Selected.Measures) {
     m.Table.AddMeasure(
-        m.Name + " YTD",                                       // Name
-        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // DAX expression
-        m.DisplayFolder                                        // Display Folder
+        m.Name + " YTD",                                       // 名称
+        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // DAX 表达式
+        m.DisplayFolder                                        // 显示文件夹
     );
 }
 ```
-Here, we use the `DaxObjectName` property, to generate an unqualified reference for use in the DAX expression, as this is a measure: `[MeasureName]`. Save this as a Custom Action called "Time Intelligence\Create YTD measure" that applies to measures. Create similar actions for MTD, LY, and whatever else you need. Then, create the following as a new action:
+
+这里我们使用 `DaxObjectName` 属性来生成用于 DAX 表达式的非限定引用，因为这是一个度量值：`[MeasureName]`。 将其保存为名为 "Time Intelligence\Create YTD measure" 的自定义操作，并将其应用于度量值。 按同样方式为 MTD、LY，以及你需要的其他项创建操作。 然后，创建下面这个新操作：
 
 ```csharp
-// Invoke all Time Intelligence Custom Actions:
-CustomAction(@"Time Intelligence\Create YTD measure");
-CustomAction(@"Time Intelligence\Create MTD measure");
-CustomAction(@"Time Intelligence\Create LY measure");
+// 调用所有时间智能自定义操作:
+CustomAction(@"Time Intelligence\\Create YTD measure");
+CustomAction(@"Time Intelligence\\Create MTD measure");
+CustomAction(@"Time Intelligence\\Create LY measure");
 ```
-This illustrates how you can execute one (or more) Custom Actions from within another action (beware of circular references - that will cause Tabular Editor to crash). Save this as a new Custom Action "Time Intelligence\All of the above", and you will have an easy way to generate all your Time Intelligence measures with a single click:
+
+这展示了如何在另一个操作内部执行一个（或多个）自定义操作（注意避免循环引用——这会导致 Tabular Editor 崩溃）。 将其另存为新的自定义操作“时间智能\以上全部”，即可一键生成所有时间智能度量值：
 
 ![image](https://user-images.githubusercontent.com/8976200/36632257-5565c8ca-197c-11e8-8498-82667b6e1049.png)
 
-Of course, you may also put all your time intelligence calculations into a single script such as the following:
+当然，您也可以将所有时间智能计算放入一个脚本中，如下所示：
 
 ```csharp
 var dateColumn = "'Date'[Date]";
 
-// Creates time intelligence measures for every selected measure:
+// 为每个所选度量值创建时间智能度量值：
 foreach(var m in Selected.Measures) {
     // Year-to-date:
     m.Table.AddMeasure(
         m.Name + " YTD",                                       // Name
         "TOTALYTD(" + m.DaxObjectName + ", " + dateColumn + ")",     // DAX expression
-        m.DisplayFolder                                        // Display Folder
+        m.DisplayFolder                                        // 显示文件夹
     );
     
     // Previous year:
     m.Table.AddMeasure(
         m.Name + " PY",                                       // Name
         "CALCULATE(" + m.DaxObjectName + ", SAMEPERIODLASTYEAR(" + dateColumn + "))",     // DAX expression
-        m.DisplayFolder                                        // Display Folder
+        m.DisplayFolder                                        // 显示文件夹
     );    
     
     // Year-over-year
     m.Table.AddMeasure(
         m.Name + " YoY",                                       // Name
         m.DaxObjectName + " - [" + m.Name + " PY]",            // DAX expression
-        m.DisplayFolder                                        // Display Folder
+        m.DisplayFolder                                        // 显示文件夹
     );
     
     // Year-over-year %:
     m.Table.AddMeasure(
         m.Name + " YoY%",                                       // Name
         "DIVIDE([" + m.Name + " YoY], [" + m.Name + " PY])",    // DAX expression
-        m.DisplayFolder                                         // Display Folder
+        m.DisplayFolder                                         // 显示文件夹
     ).FormatString = "0.0 %";                                   // Set format string as percentage
     
     // Quarter-to-date:
     m.Table.AddMeasure(
         m.Name + " QTD",                                            // Name
         "TOTALQTD(" + m.DaxObjectName + ", " + dateColumn + ")",    // DAX expression
-        m.DisplayFolder                                             // Display Folder
+        m.DisplayFolder                                             // 显示文件夹
     );
     
     // Month-to-date:
     m.Table.AddMeasure(
         m.Name + " MTD",                                       // Name
         "TOTALMTD(" + m.DaxObjectName + ", " + dateColumn + ")",     // DAX expression
-        m.DisplayFolder                                        // Display Folder
+        m.DisplayFolder                                        // 显示文件夹
     );
 }
 ```
 
-### Including additional properties
+### 包含其他属性
 
-If you want to set additional properties on the newly created measure, the above script can be modified like so:
+如果您想为新建的度量值设置其他属性，可以将上述脚本修改如下：
 
 ```csharp
-// Creates a TOTALYTD measure for every selected measure.
+// 为每个所选度量值创建一个 TOTALYTD 度量值。
 foreach(var m in Selected.Measures) {
     var newMeasure = m.Table.AddMeasure(
         m.Name + " YTD",                                       // Name
         "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // DAX expression
-        m.DisplayFolder                                        // Display Folder
+        m.DisplayFolder                                        // 显示文件夹
     );
-    newMeasure.FormatString = m.FormatString;               // Copy format string from original measure
+    newMeasure.FormatString = m.FormatString;               // 从原始度量值复制格式字符串
     foreach(var c in Model.Cultures) {
-        newMeasure.TranslatedNames[c] = m.TranslatedNames[c] + " YTD"; // Copy translated names for every culture
-        newMeasure.TranslatedDisplayFolders[c] = m.TranslatedDisplayFolders[c]; // Copy translated display folders
+        newMeasure.TranslatedNames[c] = m.TranslatedNames[c] + " YTD"; // 为每个区域设置复制翻译名称
+        newMeasure.TranslatedDisplayFolders[c] = m.TranslatedDisplayFolders[c]; // 复制翻译后的显示文件夹
     }
 }
 ```
 
 ***
 
-## Setting default translations
+## 设置默认翻译
 
-Sometimes it is useful to have default translations applied to all (visible) objects. In this case, a default translation is just the original name/description/display folder of an object. One of the advantages of this, is that all translation objects will be included when exporting translations in the JSON format, i.e. for use with [SSAS Tabular Translator](https://www.sqlbi.com/tools/ssas-tabular-translator/).
+有时，为所有（可见的）对象应用默认翻译会很方便。 在这种情况下，默认翻译就是对象的原始名称/说明/显示文件夹。 这样做的一个好处是：以 JSON 格式导出翻译时会包含所有翻译对象，即可用于 [SSAS Tabular Translator](https://www.sqlbi.com/tools/ssas-tabular-translator/)。
 
-The script below will loop through all cultures in the model, and for every visible object, that doesn't already have a translation, it will assign the default values:
+下面的脚本会遍历模型中的所有区域设置；对每个可见对象，如果还没有翻译，就会为其分配默认值：
 
 ```csharp
-// Apply default translations to all (visible) translatable objects, across all cultures in the model:
+// 将默认翻译应用到模型中所有区域设置下的所有（可见）可翻译对象：
 foreach(var culture in Model.Cultures)
 {
     ApplyDefaultTranslation(Model, culture);
@@ -172,13 +179,13 @@ foreach(var culture in Model.Cultures)
 
 void ApplyDefaultTranslation(ITranslatableObject obj, Culture culture)
 {
-    // Only apply the default translation when a translation does not already exist:
+    // 仅在尚不存在翻译时才应用默认翻译：
     if(string.IsNullOrEmpty(obj.TranslatedNames[culture]))
     {
-        // Default name translation:
+        // 默认名称翻译：
         obj.TranslatedNames[culture] = obj.Name;
 
-        // Default description translation:
+        // 默认说明翻译：
         var dObj = obj as IDescriptionObject;
         if(dObj != null && string.IsNullOrEmpty(obj.TranslatedDescriptions[culture])
             && !string.IsNullOrEmpty(dObj.Description))
@@ -186,7 +193,7 @@ void ApplyDefaultTranslation(ITranslatableObject obj, Culture culture)
             obj.TranslatedDescriptions[culture] = dObj.Description;
         }
 
-        // Default display folder translation:
+        // 默认显示文件夹翻译：
         var fObj = obj as IFolderObject;
         if(fObj != null && string.IsNullOrEmpty(fObj.TranslatedDisplayFolders[culture])
             && !string.IsNullOrEmpty(fObj.DisplayFolder))
@@ -199,8 +206,9 @@ void ApplyDefaultTranslation(ITranslatableObject obj, Culture culture)
 
 ***
 
-## Handling perspectives
-Measures, columns, hierarchies and tables all expose the `InPerspective` property, which holds a True/False value for every perspective in the model, that indicates if the given object is a member of that perspective or not. So for example:
+## 处理透视
+
+度量值、列、层级结构和表都提供 `InPerspective` 属性。该属性会为模型中的每个透视保存一个 True/False 值，用于指示给定对象是否属于该透视。 例如：
 
 ```csharp
 foreach(var measure in Selected.Measures)
@@ -210,57 +218,57 @@ foreach(var measure in Selected.Measures)
 }
 ```
 
-The script above ensures that all selected measures are visible in the "Inventory" perspective and hidden in the "Reseller Operation" perspective.
+上面的脚本确保所有选中的度量值在 "Inventory" 透视中可见，并在 "Reseller Operation" 透视中隐藏。
 
-In addition to getting/setting the membership in an individual perspective, the `InPerspective` property also supports the following methods:
+除了获取/设置单个透视中的成员关系之外，`InPerspective` 属性还支持以下方法：
 
-* `<<object>>.InPerspective.None()` - removes the object from all perspectives.
-* `<<object>>.InPerspective.All()` - includes the object in all perspectives.
-* `<<object>>.CopyFrom(string[] perspectives)` - includes the object in all specified perspectives (array of string containing names of the perspectives).
-* `<<object>>.CopyFrom(perspectiveIndexer perspectives)` - copies perspective inclusions from another `InPerspective` property.
+- `<<object>>.InPerspective.None()` - 将对象从所有透视中移除。
+- `<<object>>.InPerspective.All()` - 将对象包含在所有透视中。
+- `<<object>>.CopyFrom(string[] perspectives)` - 将对象包含在所有指定的透视中（包含透视名称的字符串数组）。
+- `<<object>>.CopyFrom(perspectiveIndexer perspectives)` - 从另一个 `InPerspective` 属性复制透视包含关系。
 
-The latter may be used to copy perspective memberships from one object to another. For example, say have a base measure [Reseller Total Sales], and you want to make sure that all currently selected measures are visible in the same perspectives as this base measure. The following script does the trick:
+后者可用于将一个对象的透视成员关系复制到另一个对象。 例如，假设你有一个基准度量值 [Reseller Total Sales]，并希望确保当前选中的所有度量值都在与该基准度量值相同的透视中可见。 下面的脚本即可实现：
 
 ```csharp
 var baseMeasure = Model.Tables["Reseller Sales"].Measures["Reseller Total Sales"];
 
 foreach(var measure in Selected.Measures)
 {
-    /* Uncomment the line below, if you want 'measure' to be hidden
-       from perspectives that 'baseMeasure' is hidden in: */
+    /* 如果你希望在 'baseMeasure' 被隐藏的那些透视中，也隐藏 'measure'，
+       请取消注释下面这一行： */
     // measure.InPerspective.None();
 
     measure.InPerspective.CopyFrom(baseMeasure.InPerspective);
 }
 ```
 
-This technique can be used also when generating new objects from code. For example, if we want to ensure that auto-generated Time Intelligence measures are only visible in the same perspectives as their base measure, we can extend the script from the previous section as:
+在通过代码生成新对象时，也可以使用这种技巧。 例如，如果我们希望确保自动生成的时间智能度量值只在其基础度量值所在的透视中可见，我们可以在上一节脚本的基础上扩展为：
 
 ```csharp
-// Creates a TOTALYTD measure for every selected measure.
+// 为每个选中的度量值创建一个 TOTALYTD 度量值。
 foreach(var m in Selected.Measures) {
     var newMeasure = m.Table.AddMeasure(
-        m.Name + " YTD",                                       // Name
-        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // DAX expression
-        m.DisplayFolder                                        // Display Folder
+        m.Name + " YTD",                                       // 名称
+        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // DAX 表达式
+        m.DisplayFolder                                        // 显示文件夹
     );
-    newMeasure.InPerspective.CopyFrom(m.InPerspective);        // Apply perspectives from the base measure
+    newMeasure.InPerspective.CopyFrom(m.InPerspective);        // 从基础度量值复制透视设置
 }
 ```
 
 ***
 
-## Generating partitions
+## 生成分区
 
-If you need to provide custom partitioning for a table, C# scripting can help you quickly generate many partitions. The basic idea is to add an annotation to your table, containing the SQL or M query to use as a template for each partition. The script will then swap in filter parameters as needed. For example, using SQL partitions, we could add an annotation named `PartitionTemplateSQL` and set its value to `SELECT * FROM fact_ResellerSales WHERE CalendarID BETWEEN {0} AND {1}`. The `{0}` and `{1}` placeholders will be replaced by our script, when generating the final partitions. In this case, `CalendarID` is an integer, but in general, it is your job to ensure that the resulting string is a valid SQL (or M) query.
+如果你需要为某个表进行自定义分区，C# Script 可以帮助你快速生成大量分区。 基本思路是：在表上添加一个注释，其中包含要作为每个分区模板的 SQL 或 M 查询。 脚本随后会按需替换筛选参数。 例如，使用 SQL 分区时，我们可以添加一个名为 `PartitionTemplateSQL` 的注释，并将其值设置为 `SELECT * FROM fact_ResellerSales WHERE CalendarID BETWEEN {0} AND {1}`。 在生成最终分区时，脚本会用实际值替换 `{0}` 和 `{1}` 占位符。 在这个例子中，`CalendarID` 是一个整数。但一般来说，你需要自行确保最终生成的字符串是有效的 SQL（或 M）查询。
 
 ![](https://user-images.githubusercontent.com/8976200/70135273-07c6fa00-168a-11ea-84f6-90f0b3498ed8.png)
 
-The example here generates one partition per month. Select a table that has the `PartitionTemplateSQL` annotation assigned, then run the script.
+这里的示例每月生成一个分区。 选择一个已分配 `PartitionTemplateSQL` 注释的表，然后运行脚本。
 
 ```csharp
-var firstPartition = new DateTime(2018,1,1); // First partition date
-var lastPartition = new DateTime(2020,12,1); // Last partition date
+var firstPartition = new DateTime(2018,1,1); // 第一个分区日期
+var lastPartition = new DateTime(2020,12,1); // 最后一个分区日期
 
 var templateSql = Selected.Table.GetAnnotation("PartitionTemplateSQL");
 if(string.IsNullOrEmpty(templateSql)) throw new Exception("No partition template!");
@@ -268,88 +276,94 @@ if(string.IsNullOrEmpty(templateSql)) throw new Exception("No partition template
 var currentPartition = firstPartition;
 while(currentPartition <= lastPartition)
 {
-    // Calculate the from and to CalendarID's (integer values) based on the currentPartition date:
+    // 基于 currentPartition 日期，计算起止 CalendarID（整数值）：
     var calendarIdFrom = currentPartition.ToString("yyyyMMdd");
     var calendarIdTo = currentPartition.AddMonths(1).AddDays(-1).ToString("yyyyMMdd");
     
-    // Determine a unique name for the partition - since we're partitioning at a monthly level, we just use yyyyMM:
+    // 为分区确定一个唯一名称——因为我们按月分区，所以直接使用 yyyyMM：
     var partitionName = Selected.Table.Name + "_" + currentPartition.ToString("yyyyMM");
     
-    // Swap in the placeholder values in the partition template SQL:
+    // 将分区模板 SQL 中的占位符值替换为实际值：
     var partitionQuery = string.Format(templateSql, calendarIdFrom, calendarIdTo);
     
-    // Create the partition (use .AddMPartition if you used an M query template instead of SQL):
+    // 创建分区（如果你使用的是 M 查询模板而不是 SQL，请改用 .AddMPartition）：
     Selected.Table.AddPartition(partitionName, partitionQuery);
     
-    // Increment to next month (change this to .AddDays, .AddYears, etc. if you need more or fewer partitions):
+    // 递增到下一个月（如需更多或更少的分区，可改为 .AddDays、.AddYears 等）：
     currentPartition = currentPartition.AddMonths(1);
 }
 ```
 
 ***
 
-## Export object properties to a file
-For some workflows, it may be useful to edit multiple object properties in bulk using Excel. Use the following snippet to export a standard set of properties to a .TSV file, which can then be subsequently imported (see below).
+## 将对象属性导出到文件
+
+在某些工作流中，使用 Excel 批量编辑多个对象属性会很有用。 使用以下代码片段将一组标准属性导出到 .TSV 文件，之后还可以再导入（见下文）。
+
 ```csharp
-// Export properties for the currently selected objects:
+// 导出当前选中对象的属性:
 var tsv = ExportProperties(Selected);
 SaveFile("Exported Properties 1.tsv", tsv);
 ```
-The resulting .TSV file looks like this, when opened in Excel:
+
+生成的 .TSV 文件在 Excel 中打开后如下所示：
 ![image](https://user-images.githubusercontent.com/8976200/36632472-e8e96ef6-197e-11e8-8285-6816b09ad036.png)
-The contents of the first column (Object) is a reference to the object. If the contents of this column is changed, subsequent import of the properties might not work correctly. To change the name of an object, only change the value in the second column (Name).
+第一列（Object）中的内容是该对象的引用。 如果修改了这一列的内容，后续导入属性时可能无法正常工作。 若要更改对象名称，只需修改第二列（Name）的值。
 
-By default, the file is saved to the same folder as TabularEditor.exe is located. By default, only the following properties are exported (where applicable, depending on the type of object exported):
+默认情况下，文件会保存到与 TabularEditor.exe 所在相同的文件夹。 默认情况下，仅导出以下属性（是否适用取决于导出对象的类型）：
 
-* Name
-* Description
-* SourceColumn
-* Expression
-* FormatString
-* DataType
+- 名称
+- 描述
+- 源列
+- 表达式
+- 格式字符串
+- 数据类型
 
-To export different properties, supply a comma-separated list of property names to be exported as the 2nd argument to `ExportProperties`:
+要导出不同的属性，请将要导出的属性名称以逗号分隔，作为 `ExportProperties` 的第二个参数提供：
+
 ```csharp
-// Export the names and Detail Rows Expressions for all measures on the currently selected table:
+// 导出当前选中表中所有度量值的名称和明细行表达式:
 var tsv = ExportProperties(Selected.Table.Measures, "Name,DetailRowsExpression");
 SaveFile("Exported Properties 2.tsv", tsv);
 ```
-The available property names can be found in the [TOM API documentation](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.aspx). These are mostly identical to the names shown in the Tabular Editor property grid in CamelCase and with spaces removed (with a few exceptions, for example, the "Hidden" property is called `IsHidden` in the TOM API).
 
-To import properties, use the following snippet:
+可用的属性名称可在 [TOM API 文档](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.aspx) 中查看。 这些名称大多与 Tabular Editor 属性网格中显示的名称一致：采用 CamelCase，并移除了空格（也有少数例外，例如，“Hidden” 属性在 TOM API 中名为 `IsHidden`）。
+
+要导入属性，请使用以下代码片段：
+
 ```csharp
-// Imports and applies the properties in the specified file:
+// 导入并应用指定文件中的属性:
 var tsv = ReadFile("Exported Properties 1.tsv");
 ImportProperties(tsv);
 ```
 
-### Exporting indexed properties
+### 导出带索引的属性
 
-As of Tabular Editor 2.11.0, the `ExportProperties` and `ImportProperties` methods support indexed properties. Indexed properties are properties that take a key in addition to the property name. One example is `myMeasure.TranslatedNames`. This property represents the collection of all strings applied as name translations for `myMeasure`. In C#, you can access the translated caption of a specific culture using the indexing operator: `myMeasure.TranslatedNames["da-DK"]`.
+从 Tabular Editor 2.11.0 开始，`ExportProperties` 和 `ImportProperties` 方法支持带索引的属性。 带索引的属性是指除了属性名之外，还需要一个键的属性。 例如：`myMeasure.TranslatedNames`。 该属性表示为 `myMeasure` 提供名称翻译的所有字符串集合。 在 C# 中，你可以使用索引运算符访问特定区域设置的译名：`myMeasure.TranslatedNames["da-DK"]`。
 
-Long story short, you can now export all translations, perspective information, annotations, extended properties, row-level- and object-level security information on objects in your Tabular model.
+简而言之，你现在可以导出 Tabular 模型中对象的所有翻译、透视信息、注释、扩展属性，以及行级安全性和对象级安全性信息。
 
-For example, the following script will produce a TSV file of all model measures and information about which perspectives each is visible in:
+例如，下面的脚本会生成一个 TSV 文件，包含模型中的所有度量值，以及每个度量值在哪些透视中可见：
 
 ```csharp
 var tsv = ExportProperties(Model.AllMeasures, "Name,InPerspective");
 SaveFile(@"c:\Project\MeasurePerspectives.tsv", tsv);
 ```
 
-The TSV file looks like this, when opened in Excel:
+在 Excel 中打开后，这个 TSV 文件如下所示：
 
 ![image](https://user-images.githubusercontent.com/8976200/85208532-956dec80-b331-11ea-8568-32dbd4cc5516.png)
 
-And just as shown above, you can make changes in Excel, hit save, and then load the updated values back into Tabular Editor using `ImportProperties`.
+如上所示，你可以直接在 Excel 中修改内容，保存后再使用 `ImportProperties` 将更新后的值导入回 Tabular Editor。
 
-If you want to list only a specific or a few specific perspectives, you can specify those in the 2nd argument in the call to `ExportProperties`:
+如果你只想列出某一个或少数几个特定的透视，可以在调用 `ExportProperties` 时的第二个参数中指定它们：
 
 ```csharp
 var tsv = ExportProperties(Model.AllMeasures, "Name,InPerspective[Inventory]");
 SaveFile(@"c:\Project\MeasurePerspectiveInventory.tsv", tsv);
 ```
 
-Similarly, for translations, annotations, etc. For example, if you wanted to see all danish translations applied to tables, columns, hierarchies, levels and measures:
+同样地，翻译、批注等也是如此。 例如，如果您想查看应用到表、列、层次结构、级别和度量值的所有丹麦语翻译：
 
 ```csharp
 // Construct a list of objects:
@@ -366,8 +380,9 @@ SaveFile(@"c:\Project\ObjectTranslations.tsv", tsv);
 
 ***
 
-## Generating documentation
-The `ExportProperties` method shown above, can also be used if you want to document all or parts of your model. The following snippet will extract a set of properties from all visible measures or columns in a Tabular Model, and save it as a TSV file:
+## 生成文档
+
+上面展示的 `ExportProperties` 方法也可用于记录您的模型的全部或部分内容。 下面的代码片段会从表格模型中的所有可见度量值或列提取一组属性，并将其保存为 TSV 文件：
 
 ```csharp
 // Construct a list of all visible columns and measures:
@@ -383,56 +398,57 @@ var tsv = ExportProperties(objects,"Name,ObjectType,Parent,Description,FormatStr
 // ...or save the TSV to a file:
 SaveFile("documentation.tsv", tsv);
 ```
+
 ***
 
-## Generating measures from a file
+## 从文件生成度量值
 
-The above techniques of exporting/importing properties, is useful if you want to edit object properties in bulk of *existing* objects in your model. What if you want to import a list of measures that do not already exist?
+上述导出/导入属性的技巧，适用于你想要对模型中_已有_对象的属性进行批量编辑的场景。 如果你想导入一份尚不存在的度量值列表呢？
 
-Let's say you have a TSV (tab-separated values) file that contains Names, Descriptions and DAX Expressions of measures you'd like to import into an existing Tabular Model. You can use the following script to read in the file, split it out into rows and columns, and generate the measures. The script also assigns a special annotation to each measure, so that it can delete measures that were previously created using the same script.
+假设你有一个 TSV（制表符分隔值）文件，其中包含你希望导入到现有表格模型中的度量值名称、说明和 DAX 表达式。 你可以使用下面的脚本读取该文件，将其拆分为行与列，并生成这些度量值。 该脚本还会为每个度量值设置一个特殊注释，以便删除之前通过同一脚本创建的度量值。
 
 ```csharp
-var targetTable = Model.Tables["Program"];  // Name of the table that should hold the measures
-var measureMetadata = ReadFile(@"c:\Test\MyMeasures.tsv");   // c:\Test\MyMeasures.tsv is a tab-separated file with a header row and 3 columns: Name, Description, Expression
+var targetTable = Model.Tables["Program"];  // 应保存度量值的表的名称
+var measureMetadata = ReadFile(@"c:\Test\MyMeasures.tsv");   // c:\Test\MyMeasures.tsv 是一个包含标题行和 3 列：Name、Description、Expression 的制表符分隔文件
 
-// Delete all measures from the target table that have an "AUTOGEN" annotation with the value "1":
+// 删除目标表中所有带有值为 "1" 的 "AUTOGEN" 注释的度量值：
 foreach(var m in targetTable.Measures.Where(m => m.GetAnnotation("AUTOGEN") == "1").ToList())
 {
     m.Delete();
 }
 
-// Split the file into rows by CR and LF characters:
+// 按 CR 和 LF 字符将文件拆分为行：
 var tsvRows = measureMetadata.Split(new[] {'\r','\n'},StringSplitOptions.RemoveEmptyEntries);
 
-// Loop through all rows but skip the first one:
+// 遍历所有行，但跳过第一行：
 foreach(var row in tsvRows.Skip(1))
 {
-    var tsvColumns = row.Split('\t');     // Assume file uses tabs as column separator
-    var name = tsvColumns[0];             // 1st column contains measure name
-    var description = tsvColumns[1];      // 2nd column contains measure description
-    var expression = tsvColumns[2];       // 3rd column contains measure expression
+    var tsvColumns = row.Split('\t');     // 假设文件使用制表符作为列分隔符
+    var name = tsvColumns[0];             // 第 1 列包含度量值名称
+    var description = tsvColumns[1];      // 第 2 列包含度量值说明
+    var expression = tsvColumns[2];       // 第 3 列包含度量值表达式
 
-    // This assumes that the model does not already contain a measure with the same name (if it does, the new measure will get a numeric suffix):
+    // 这假设模型中尚不存在同名的度量值（如果存在，新度量值将获得一个数字后缀）：
     var measure = targetTable.AddMeasure(name);
     measure.Description = description;
     measure.Expression = expression;
-    measure.SetAnnotation("AUTOGEN", "1");  // Set a special annotation on the measure, so we can find it and delete it the next time the script is executed.
+    measure.SetAnnotation("AUTOGEN", "1");  // 在该度量值上设置一个特殊注释，以便下次执行脚本时找到并删除它。
 }
 ```
 
-If you need to automate this process, save the above script into a file and use the [Tabular Editor CLI](/Command-line-Options) as follows:
+如果你需要将此流程自动化，请将上面的脚本保存到文件中，然后按如下方式使用 [Tabular Editor CLI](/Command-line-Options)：
 
 ```powershell
 start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
 ```
 
-for example:
+例如：
 
 ```powershell
 start /wait TabularEditor.exe "c:\Projects\AdventureWorks\Model.bim" -S "c:\Projects\AutogenMeasures.cs" -B "c:\Projects\AdventureWorks\Build\Model.bim"
 ```
 
-...or, if you prefer to run the script against an already deployed database:
+……或者，如希望针对已部署的数据库运行该脚本：
 
 ```powershell
 start /wait TabularEditor.exe "localhost" "AdventureWorks" -S "c:\Projects\AutogenMeasures.cs" -D "localhost" "AdventureWorks" -O
@@ -440,16 +456,21 @@ start /wait TabularEditor.exe "localhost" "AdventureWorks" -S "c:\Projects\Autog
 
 ***
 
-## Creating Data Columns from Partition Source metadata
-**Note:** If you're using version 2.7.2 or newer, make sure to try the new "Import Table..." feature.
+## 从分区源元数据创建数据列
 
-If a table uses a Query partition based on an OLE DB provider data source, we can automatically refresh the column metadata of that table by executing the following snippet:
+> [!NOTE]
+> The `RefreshDataColumns()` method described below is only available in **Tabular Editor 2**. In Tabular Editor 3, use the **Import Table...** feature instead.
+
+如果某个表使用基于 OLE DB 提供程序数据源的查询分区，我们可以通过执行以下代码片段自动刷新该表的列元数据：
+
 ```csharp
 Model.Tables["Reseller Sales"].RefreshDataColumns();
 ```
-This is useful when adding new tables to a model, to avoid having to create every Data Column on the table manually. The snippet above assumes that the partition source can be accessed locally, using the existing connection string of the Partition Source for the 'Reseller Sales' table. The snippet above will extract the schema from the partition query, and add a Data Column to the table for every column in the source query.
 
-If you need to supply a different connection string for this operation, you can do that in the snippet as well:
+这在向模型中添加新表时很有用，可以避免在表上逐个手动创建每个数据列。 上面的代码片段假设可以在本地访问分区源，并使用“Reseller Sales”表分区源的现有连接字符串。 上面的代码片段会从分区查询中提取架构，并为源查询中的每一列在表上添加一个数据列。
+
+如果需要为此操作提供不同的连接字符串，也可以在代码片段中指定：
+
 ```csharp
 var source = Model.DataSources["DWH"] as ProviderDataSource;
 var oldConnectionString = source.ConnectionString;
@@ -457,19 +478,21 @@ source.ConnectionString = "...";   // Enter the connection string you want to us
 Model.Tables["Reseller Sales"].RefreshDataColumns();
 source.ConnectionString = oldConnectionString;
 ```
-This assumes that the partitions of the 'Reseller Sales' table is using a Provider Data Source with the name "DWH".
+
+这假设“Reseller Sales”表的分区使用名为“DWH”的 Provider数据源。
 
 ***
 
-## Format DAX expressions
-Please see [FormatDax](/FormatDax) for more information.
+## 格式化 DAX 表达式
+
+更多信息请参阅 [FormatDax](/FormatDax)。
 
 ```csharp
 // Works in Tabular Editor version 2.13.0 or newer:
 Selected.Measures.FormatDax();
 ```
 
-Alternate syntax:
+替代语法：
 
 ```csharp
 // Works in Tabular Editor version 2.13.0 or newer:
@@ -479,8 +502,9 @@ foreach(var m in Selected.Measures)
 
 ***
 
-## Generate list of source columns for a table
-The following script outputs a nicely formatted list of source columns for the currently selected table. This may be useful if you want to replace partition queries that use `SELECT *` with explicit columns.
+## 为表生成源列列表
+
+以下脚本会为当前选中的表输出一份格式良好的源列列表。 如果你想把使用 `SELECT *` 的分区查询替换为显式列清单，这会很有用。
 
 ```csharp
 string.Join(",\r\n", 
@@ -492,12 +516,13 @@ string.Join(",\r\n",
 
 ***
 
-## Auto-creating relationships
-If you're consistently using a certain set of naming conventions within your team, you'll quickly find that scripts can be even more powerful.
+## 自动创建关系
 
-The following script, when executed on one or more fact tables, will automatically create relationships to all relevant dimension tables, based on column names. The script will search for fact table columns having the name pattern `xxxyyyKey` where the xxx is an optional qualifier for role-playing use, and the yyy is the dimension table name. On the dimension table, a column named `yyyKey` must exist and have the same data type as the column on the fact table. For example, a column named "ProductKey" will be related to the "ProductKey" column on the Product table. You can specify a different column name suffix to use in place of "Key".
+如果你的团队始终遵循一套固定的命名规范，你会很快发现脚本能发挥更大的作用。
 
-If a relationship already exists between the fact and dimension table, the script will create the new relationship as inactive.
+以下脚本在一个或多个事实表上执行时，会根据列名自动创建到所有相关维度表的关系。 脚本会查找事实表中名称符合 `xxxyyyKey` 模式的列，其中 xxx 是可选的限定词，用于角色扮演用途，yyy 是维度表名称。 在维度表上，必须存在名为 `yyyKey` 的列，并且其数据类型要与事实表上的对应列相同。 例如，名为“ProductKey”的列会与 Product 表中的“ProductKey”列建立关系。 你可以指定一个不同的列名后缀来替代“Key”。
+
+如果事实表与维度表之间已存在关系，脚本会将新创建的关系设为非活动状态。
 
 ```csharp
 var keySuffix = "Key";
@@ -537,8 +562,9 @@ foreach(var fact in Selected.Tables)
 
 ***
 
-## Create DumpFilters measure
-Inspired by [this article](https://www.sqlbi.com/articles/displaying-filter-context-in-power-bi-tooltips/), here's a script that will create a [DumpFilters] measure on the currently selected table:
+## 创建 DumpFilters 度量值
+
+受[这篇文章](https://www.sqlbi.com/articles/displaying-filter-context-in-power-bi-tooltips/)启发，下面的脚本会在当前所选表中创建一个名为 [DumpFilters] 的度量值：
 
 ```csharp
 var dax = "VAR MaxFilters = 3 RETURN ";
@@ -553,7 +579,7 @@ var dumpFilterDax = @"IF (
     RETURN ___x & UNICHAR(13) & UNICHAR(10)
 )";
 
-// Loop through all columns of the model to construct the complete DAX expression:
+// 遍历模型的所有列，构建完整的 DAX 表达式：
 bool first = true;
 foreach(var column in Model.AllColumns)
 {
@@ -562,40 +588,38 @@ foreach(var column in Model.AllColumns)
     if(first) first = false;
 }
 
-// Add the measure to the currently selected table:
+// 将度量值添加到当前选中的表：
 Selected.Table.AddMeasure("DumpFilters", dax);
 ```
 
 ***
 
-## CamelCase to Proper Case
+## 将 CamelCase 转换为 Proper Case
 
-A common naming scheme for columns and tables on a relation database, is CamelCase. That is, names do not contain any spaces and individual words start with a capital letter. In a Tabular model, tables and columns that are not hidden, will be visible to business users, and so it would often be preferable to use a "prettier" naming scheme. The following script will convert CamelCased names to Proper Case. Sequences of uppercase letters are kept as-is (acronyms). For example, the script will convert the following:
+在关系数据库中，列和表常见的一种命名方式是 CamelCase。 也就是说，名称不包含空格，每个单词都以大写字母开头。 在 Tabular 模型中，未隐藏的表和列会对业务用户可见，因此通常更适合采用更“易读”的命名方式。 下面的脚本会将 CamelCase 命名转换为 Proper Case。 连续的大写字母序列会保持原样（缩写）。 例如，该脚本会转换以下内容：
 
-* `CustomerWorkZipcode` to `Customer Work Zipcode`
-* `CustomerAccountID` to `Customer Account ID`
-* `NSASecurityID` to `NSA Security ID`
+- `CustomerWorkZipcode` 转为 `Customer Work Zipcode`
+- `CustomerAccountID` 转为 `Customer Account ID`
+- `NSASecurityID` 转为 `NSA Security ID`
 
-I highly recommend saving this script as a Custom Action that applies to all object types (except Relationships, KPIs, Table Permissions and Translations, as these do not have an editable "Name" property):
+强烈建议将此脚本保存为适用于所有对象类型的自定义操作（关系、KPI、表格权限和翻译除外，因为这些对象没有可编辑的“Name”属性）：
 
 ```csharp
 foreach(var obj in Selected.OfType<ITabularNamedObject>()) {
     var oldName = obj.Name;
     var newName = new System.Text.StringBuilder();
     for(int i = 0; i < oldName.Length; i++) {
-        // First letter should always be capitalized:
+        // 首字母始终大写：
         if(i == 0) newName.Append(Char.ToUpper(oldName[i]));
 
-        // A sequence of two uppercase letters followed by a lowercase letter should have a space inserted
-        // after the first letter:
+        // 两个大写字母后面紧跟一个小写字母的序列，需要在第一个字母后插入空格：
         else if(i + 2 < oldName.Length && char.IsLower(oldName[i + 2]) && char.IsUpper(oldName[i + 1]) && char.IsUpper(oldName[i]))
         {
             newName.Append(oldName[i]);
             newName.Append(" ");
         }
 
-        // All other sequences of a lowercase letter followed by an uppercase letter, should have a space
-        // inserted after the first letter:
+        // 其他所有“小写字母 + 大写字母”的序列，需要在第一个字母后插入空格：
         else if(i + 1 < oldName.Length && char.IsLower(oldName[i]) && char.IsUpper(oldName[i+1]))
         {
             newName.Append(oldName[i]);
@@ -612,57 +636,59 @@ foreach(var obj in Selected.OfType<ITabularNamedObject>()) {
 
 ***
 
-## Exporting dependencies between tables and measures
+## 导出表与度量值之间的依赖关系
 
-Let's say you have a large, complex model, and you want to know which measures are potentially affected by changes to the underlying data.
+假设你有一个庞大而复杂的模型，并且想知道哪些度量值可能会受到基础数据变更的影响。
 
-The following script loops through all the measures of your model, and for each measure, it outputs a list of tables that measure depends on - both directly and indirectly. The list is outputted as a Tab-separated file.
+下面的脚本会遍历模型中的所有度量值，并为每个度量值输出它所依赖的表清单——包括直接依赖与间接依赖。 该列表会以制表符分隔的文件形式输出。
 
 ```csharp
-string tsv = "Measure\tDependsOnTable"; // TSV file header row
+string tsv = "Measure\tDependsOnTable"; // TSV 文件表头行
 
-// Loop through all measures:
+// 遍历所有度量值：
 foreach(var m in Model.AllMeasures) {
 
-    // Get a list of ALL objects referenced by this measure (both directly and indirectly through other measures):
+    // 获取该度量值引用的 ALL 对象列表（既包括直接引用，也包括通过其他度量值间接引用）：
     var allReferences = m.DependsOn.Deep();
 
-    // Filter the previous list of references to table references only. For column references, let's get th
-    // table that each column belongs to. Finally, keep only distinct tables:
+    // 将引用列表筛选为仅包含表的引用。对于列引用，获取该列所属的表。
+    // 最后，仅保留不重复的表：
     var allTableReferences = allReferences.OfType<Table>()
         .Concat(allReferences.OfType<Column>().Select(c => c.Table)).Distinct();
 
-    // Output TSV rows - one for each table reference:
+    // 输出 TSV 行——每个表引用一行：
     foreach(var t in allTableReferences)
         tsv += string.Format("\r\n{0}\t{1}", m.Name, t.Name);
 }
     
 tsv.Output();   
-// SaveFile("c:\\MyProjects\\SSAS\\MeasureTableDependencies.tsv", tsv); // Uncomment this line to save output to a file
+// SaveFile("c:\\MyProjects\\SSAS\\MeasureTableDependencies.tsv", tsv); // 取消注释此行即可将输出保存到文件
 ```
+
 ***
 
-## Setting up Aggregations (Power BI Dataset only)
-As of [Tabular Editor 2.11.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.11.3), you can now set the `AlternateOf` property on a column, enabling you to define aggregation tables on your model. This feature is enabled for Power BI Datasets (Compatibility Level 1460 or higher) through the Power BI Service XMLA endpoint.
+## 设置聚合（仅限 Power BI Dataset）
 
-Select a range of columns and run the following script to initiate the `AlternateOf` property on them:
+自 [Tabular Editor 2.11.3](https://github.com/TabularEditor/TabularEditor/releases/tag/2.11.3) 起，你可以在列上设置 `AlternateOf` 属性，从而在模型中定义聚合表。 该功能可通过 Power BI 服务的 XMLA endpoint 用于 Power BI Dataset（兼容级别 1460 或更高）。
+
+选中一组列并运行下面的脚本，以初始化它们的 `AlternateOf` 属性：
 
 ```csharp
 foreach(var col in Selected.Columns) col.AddAlternateOf();
 ```
 
-Work your way through the columns one by one, to map them to the base column and set the summarization accordingly (Sum/Min/Max/GroupBy). Alternatively, if you want to automate this process, and your aggregation table columns have identical names as the base table columns, you can use the following script, which will map the columns for you:
+依次逐列处理，将其映射到基础列，并相应设置汇总方式（Sum/Min/Max/GroupBy）。 或者，如果你想自动化此流程，并且你的聚合表列与基础表列的名称完全相同，可以使用下面的脚本，它会为你自动映射这些列：
 
 ```csharp
-// Select two tables in the tree (ctrl+click). The aggregation table is assumed to be the one with fewest columns.
-// This script will set up the AlternateOf property on all columns on the aggregation table. Agg table columns must
-// have the same name as the base table columns for this script to work.
+// 在树中选择两张表（Ctrl+单击）。假定聚合表是列数最少的那一张。
+// 此脚本会为聚合表上的所有列设置 AlternateOf 属性。要使脚本生效，聚合表列必须
+// 与基础表列同名。
 var aggTable = Selected.Tables.OrderBy(t => t.Columns.Count).First();
 var baseTable = Selected.Tables.OrderByDescending(t => t.Columns.Count).First();
 
 foreach(var col in aggTable.Columns)
 {
-    // The script will set the summarization type to "Group By", unless the column uses data type decimal/double:
+    // 脚本会将汇总类型设置为 "Group By"，除非该列使用的数据类型为 decimal/double：
     var summarization = SummarizationType.GroupBy;
     if(col.DataType == DataType.Double || col.DataType == DataType.Decimal)
         summarization = SummarizationType.Sum;
@@ -671,30 +697,30 @@ foreach(var col in aggTable.Columns)
 }
 ```
 
-After running the script, you should see that the `AlternateOf` property has been assigned on all columns on your agg table (see screenshot below). Keep in mind, that the base table partition must use DirectQuery for aggregations to work.
+运行脚本后，你应该会看到聚合表上的所有列都已分配 `AlternateOf` 属性（见下方屏幕截图）。 请记住，基础表分区必须使用 DirectQuery，聚合才能生效。
 
 ![image](https://user-images.githubusercontent.com/8976200/85851134-6ed70800-b7ae-11ea-82eb-37fcaa2ca9c4.png)
 
 ***
 
-## Querying Analysis Services
+## 查询 Analysis Services
 
-As of version [2.12.1](https://github.com/TabularEditor/TabularEditor/releases/tag/2.12.1), Tabular Editor now provides a number of helper methods for executing DAX queries and evaluating DAX expressions against your model. These methods work only when model metadata have been loaded directly from an instance of Analysis Services, such as when using the "File > Open > From DB..." option, or when using the Power BI external tools integration of Tabular Editor.
+从版本 [2.12.1](https://github.com/TabularEditor/TabularEditor/releases/tag/2.12.1) 开始，Tabular Editor 现已提供多种辅助方法，可针对你的模型执行 DAX 查询并对 DAX 表达式求值。 这些方法仅在模型元数据直接从 Analysis Services 实例加载时才适用，例如使用“File > Open > From DB...”选项，或使用 Tabular Editor 的 Power BI 外部工具集成功能时。
 
-The following methods are available:
+可用的方法如下：
 
-| Method | Description |
-| ------ | ----------- |
-| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | This methods passes the specified TMSL or XMLA script to the connected instance of Analysis Services. This is useful when you want to refresh data in a table on the AS instance. Note that if you use this method to perform metadata changes to your model, your local model metadata will become out-of-sync with the metadata on the AS instance, and you may receive a version conflict warning the next time you try to save the model metadata. Set the `isXmla` parameter to `true` if  sending an XMLA script. |
-| `IDataReader ExecuteReader(string dax)` | Executes the specified DAX *query* against the connected AS database and returns the resulting [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) object. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. Note that you can not have multiple open data readers at once. Tabular Editor will automatically close them in case you forget to explicitly close or dispose the reader. |
-| `DataSet ExecuteDax(string dax)` | Executes the specified DAX *query* against the connected AS database and returns a [DataSet](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) object containing the data returned from the query. A DAX query contains one or more [`EVALUATE`](https://dax.guide/EVALUATE) statements. The resulting DataSet object contains one DataTable for each `EVALUATE` statement. Returning very large data tables is not recommended as they may cause out-of-memory or other stability errors. |
-| `object EvaluateDax(string dax)` | Executes the specified DAX *expression* against the connected AS database and returns an object representing the result. If the DAX expression is scalar, an object of the relevant type is returned (string, long, decimal, double, DateTime). If the DAX expression is table-valued, a [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6) is returned. |
+| 方法                                                            | 说明                                                                                                                                                                                                                                                                                                 |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | 此方法会将指定的 TMSL 或 XMLA 脚本传递给已连接的 Analysis Services 实例。 当你需要在 AS 实例上刷新某张表的数据时，这个方法很有用。 请注意，如果你使用此方法对模型进行元数据更改，你的本地模型元数据将与 AS 实例上的元数据不同步；下次尝试保存模型元数据时，可能会收到版本冲突警告。 如果要发送 XMLA 脚本，请将 `isXmla` 参数设置为 `true`。                                                                                             |
+| `IDataReader ExecuteReader(string dax)`                       | 对已连接的 AS 数据库执行指定的 DAX _查询_，并返回生成的 [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) 对象。 DAX 查询包含一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句。 请注意，你不能同时打开多个数据读取器。 如果你忘记显式关闭或释放读取器，Tabular Editor 会自动将其关闭。    |
+| `DataSet ExecuteDax(string dax)`                              | 对已连接的 AS 数据库执行指定的 DAX _查询_，并返回一个 [DataSet](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) 对象，其中包含查询返回的数据。 DAX 查询包含一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句。 返回的 DataSet 对象中，每个 `EVALUATE` 语句都会对应一个 DataTable。 不建议返回非常大的数据表，因为它们可能会导致内存不足或其他稳定性错误。 |
+| `object EvaluateDax(string dax)`                              | 针对已连接的 AS 数据库执行指定的 DAX _表达式_，并返回一个表示结果的对象。 如果 DAX 表达式是标量，则会返回相应类型的对象（string、long、decimal、double、DateTime）。 如果 DAX 表达式为表值，则会返回 [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6)。                                                                |
 
-The methods are scoped to the `Model.Database` object, but they can also be executed directly without any prefix.
+这些方法的作用域在 `Model.Database` 对象下，但也可以不加任何前缀直接执行。
 
-Darren Gosbell presents an interesting use-case of generating data-driven measures using the `ExecuteDax` method [here](https://darren.gosbell.com/2020/08/the-best-way-to-generate-data-driven-measures-in-power-bi-using-tabular-editor/).
+Darren Gosbell 在[这里](https://darren.gosbell.com/2020/08/the-best-way-to-generate-data-driven-measures-in-power-bi-using-tabular-editor/)介绍了一个有趣的用例：使用 `ExecuteDax` 方法生成数据驱动的度量值。
 
-Another option is to create a reusable script for refreshing a table. For example, to perform a recalculation, use this:
+另一种做法是创建一个可复用的脚本，用于刷新某个表。 例如，要执行重新计算，请使用以下代码：
 
 ```csharp
 var type = "calculate";
@@ -708,9 +734,9 @@ var tmsl = "{ \"refresh\": { \"type\": \"%type%\", \"objects\": [ { \"database\"
 ExecuteCommand(tmsl);
 ```
 
-### Clearing the Analysis Services engine cache
+### 清除 Analysis Services 引擎缓存
 
-As of Tabular Editor 2.16.6 or Tabular Editor 3.2.3, you can use the following syntax to send raw XMLA commands to Analysis Services. The example below shows how this can be used to clear the AS engine cache:
+从 Tabular Editor 2.16.6 或 Tabular Editor 3.2.3 开始，你可以使用以下语法向 Analysis Services 发送原始 XMLA 命令。 下面的示例演示了如何使用它来清除 AS 引擎缓存：
 
 ```csharp
 var clearCacheXmla = string.Format(@"<ClearCache xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">  
@@ -722,9 +748,9 @@ var clearCacheXmla = string.Format(@"<ClearCache xmlns=""http://schemas.microsof
 ExecuteCommand(clearCacheXmla, isXmla: true);
 ```
 
-### Visualize query results
+### 可视化查询结果
 
-You can also use the `Output` helper method to visualize the result of a DAX expression returned from `EvaluateDax` directly:
+也可以使用 `Output` 辅助方法，直接将 `EvaluateDax` 返回的 DAX 表达式结果可视化：
 
 ```csharp
 EvaluateDax("1 + 2").Output(); // An integer
@@ -734,7 +760,7 @@ EvaluateDax("{ (1, 2, 3) }").Output(); // A table
 
 ![image](https://user-images.githubusercontent.com/8976200/91638299-bbd59580-ea0e-11ea-882b-55bff73c30fb.png)
 
-...or, if you want to return the value of the currently selected measure:
+……或者，如果想返回当前选中度量值的值：
 
 ```csharp
 EvaluateDax(Selected.Measure.DaxObjectFullName).Output();
@@ -742,15 +768,16 @@ EvaluateDax(Selected.Measure.DaxObjectFullName).Output();
 
 ![image](https://user-images.githubusercontent.com/8976200/91638367-6f3e8a00-ea0f-11ea-90cd-7d2e4cff6e31.png)
 
-And here's a more advanced example that allows you to select and evaluate multiple measures at once:
+下面是一个更高级的示例，可一次选择并对多个度量值求值：
 
 ```csharp
 var dax = "ROW(" + string.Join(",", Selected.Measures.Select(m => "\"" + m.Name + "\", " + m.DaxObjectFullName).ToArray()) + ")";
 EvaluateDax(dax).Output();
 ```
+
 ![image](https://user-images.githubusercontent.com/8976200/91638356-546c1580-ea0f-11ea-8302-3e40829e00dd.png)
 
-If you're really advanced, you could use SUMMARIZECOLUMNS or some other DAX function to visualize the selected measure sliced by some column:
+如果确实很熟练，可以使用 SUMMARIZECOLUMNS 或其他 DAX 函数，将选中的度量值按某个列进行切片并可视化：
 
 ```csharp
 var dax = "SUMMARIZECOLUMNS('Product'[Color], " + string.Join(",", Selected.Measures.Select(m => "\"" + m.Name + "\", " + m.DaxObjectFullName).ToArray()) + ")";
@@ -759,18 +786,18 @@ EvaluateDax(dax).Output();
 
 ![image](https://user-images.githubusercontent.com/8976200/91638389-9b5a0b00-ea0f-11ea-819f-d3eee3ddfa71.png)
 
-Remember you can save these scripts as Custom Actions by clicking the "+" icon just above the script editor. This way, you get an easily reusable collection of DAX queries that you can execute and visualize directly from inside the Tabular Editor context menu:
+请记住，你可以点击脚本编辑器正上方的“+”图标，将这些脚本保存为自定义操作。 这样一来，你就能获得一套便于复用的 DAX 查询集合，并且可以直接在 Tabular Editor 的上下文菜单中执行和可视化：
 
 ![image](https://user-images.githubusercontent.com/8976200/91638790-305e0380-ea12-11ea-9d84-313f4388496f.png)
 
-### Exporting data
+### 导出数据
 
-You can use the following script to evaluate a DAX query and stream the results to a file (the script uses a tab-separated file format):
+你可以使用下面的脚本来执行一个 DAX 查询，并将结果流式写入文件（脚本使用制表符分隔格式）：
 
 ```csharp
 using System.IO;
 
-// This script evaluates a DAX query and writes the results to file using a tab-separated format:
+// 此脚本会执行一个 DAX 查询，并以制表符分隔的格式将结果写入文件：
 
 var dax = "EVALUATE 'Customer'";
 var file = @"c:\temp\file.csv";
@@ -779,7 +806,7 @@ var columnSeparator = "\t";
 using(var daxReader = ExecuteReader(dax))
 using(var fileWriter = new StreamWriter(file))
 {
-    // Write column headers:
+    // 写入列标题：
     fileWriter.WriteLine(string.Join(columnSeparator, Enumerable.Range(0, daxReader.FieldCount - 1).Select(f => daxReader.GetName(f))));
 
     while(daxReader.Read())
@@ -792,13 +819,13 @@ using(var fileWriter = new StreamWriter(file))
 }
 ```
 
-If you come up with some other interesting uses of these methods, please consider sharing them in the [community scripts repository](https://github.com/TabularEditor/Scripts). Thanks!
+如果你想到了这些方法的其他有趣用法，请考虑在[社区脚本 repository](https://github.com/TabularEditor/Scripts)中分享。 谢谢！
 
 ***
 
-## Replace Power Query server and database names
+## 替换 Power Query 服务器和数据库名称
 
-Power BI Dataset that import data from SQL Server-based datasources, often contain M expressions that look like the following. Tabular Editor does unfortunately not have any mechanism for "parsing" such an expression, but if we wanted to replace the server and database names in this expression with something else, without knowing the original values, we can exploit the fact that the values are enclosed in double quotes:
+从基于 SQL Server 的数据源导入数据的 Power BI Dataset，通常会包含类似下面这样的 M 表达式。 Tabular Editor 很遗憾没有用于“解析”这类表达式的机制。不过，如果我们想在不知道原始值的情况下，将其中的服务器和数据库名称替换为其他内容，可以利用这样一个事实：这些值都被双引号括起来：
 
 ```M
 let
@@ -809,18 +836,16 @@ in
     dbo_DimProduct
 ```
 
-The following script will replace the first occurrence of a value in double quotes with a server name, and the second occurrence of a value in double quotes with a database name. Both replacement values are read from environment variables:
+下面的脚本会将第一个双引号中的值替换为服务器名称，并将第二个双引号中的值替换为数据库名称。 这两个替换值都从环境变量中读取：
 
 ```csharp
-// This script is used to replace the server and database names across
-// all power query partitions, with the ones provided through environment
-// variables:
+// 此脚本用于将所有 Power Query 分区中的服务器和数据库名称，
+// 统一替换为通过环境变量提供的值：
 var server = "\"" + Environment.GetEnvironmentVariable("SQLServerName") + "\"";
 var database = "\"" + Environment.GetEnvironmentVariable("SQLDatabaseName") + "\"";
 
-// This function will extract all quoted values from the M expression, returning a list of strings
-// with the values extracted (in order), but ignoring any quoted values where a hashtag (#) precedes
-// the quotation mark:
+// 此函数会从 M 表达式中提取所有被引号括起来的值，并以字符串列表形式返回
+// （按出现顺序）。但如果某个引号前面紧跟井号（#），则忽略该引号中的值：
 var split = new Func<string, List<string>>(m => { 
     var result = new List<string>();
     var i = 0;
@@ -831,11 +856,11 @@ var split = new Func<string, List<string>>(m => {
     }
     return result;
 });
-var GetServer = new Func<string, string>(m => split(m)[0]);    // Server name is usually the 1st encountered string
-var GetDatabase = new Func<string, string>(m => split(m)[1]);  // Database name is usually the 2nd encountered string
+var GetServer = new Func<string, string>(m => split(m)[0]);    // 服务器名通常是遇到的第一个字符串
+var GetDatabase = new Func<string, string>(m => split(m)[1]);  // 数据库名通常是遇到的第二个字符串
 
-// Loop through all partitions on the model, replacing the server and database names from the partitions
-// with the ones specified in environment variables:
+// 遍历模型中的所有分区，将分区里原有的服务器和数据库名称替换为
+// 环境变量中指定的值：
 foreach(var p in Model.AllPartitions.OfType<MPartition>())
 {
     if (p.Expression.Contains("Source = Sql.Database"))
@@ -847,35 +872,34 @@ foreach(var p in Model.AllPartitions.OfType<MPartition>())
 }
 ```
 
-
 ***
 
-## Replace Power Query data sources and partitions with Legacy
+## 将 Power Query 数据源和分区替换为 Legacy
 
-If you are working with a Power BI-based model that uses Power Query (M) expressions for partitions against a SQL Server-based data source, you will unfortunately not be able to use Tabular Editor 2's Data Import wizard or perform a schema check (i.e. comparing imported columns with columns in the data source).
+如果你在处理一个基于 Power BI 的模型，并且该模型的分区使用 Power Query（M）表达式来访问基于 SQL Server 的数据源，那么你将无法使用 Tabular Editor 2 的数据导入向导，也无法执行架构检查（即，将导入的列与数据源中的列进行对比）。
 
-To solve this issue, you can run the following script on your model, to replace the power query partitions with corresponding native SQL query partitions, and to create a legacy (provider) data source on the model, which will work with Tabular Editor 2's Import Data wizard:
+要解决这个问题，你可以在模型上运行下面的脚本：它会将 Power Query 分区替换为对应的原生 SQL 查询分区，并在模型上创建一个 Legacy（提供程序）数据源，从而让 Tabular Editor 2 的“导入数据”向导可以正常工作：
 
-There are two versions of the script: The first one uses the MSOLEDBSQL provider for the created legacy data source, and hardcoded credentials. This is useful for local development. The second one uses the SQLNCLI provider, which is available on Microsoft-hosted build agents on Azure DevOps, and reads credentials and server/database names from environment variables, making the script useful for integration in Azure Pipelines.
+脚本有两个版本：第一个版本为创建的 Legacy 数据源使用 MSOLEDBSQL 提供程序，并将凭据硬编码在脚本中。 这对于本地开发很有用。 第二个示例使用 SQLNCLI 提供程序，该提供程序在 Azure DevOps 的 Microsoft 托管构建代理上可用，并从环境变量中读取凭据以及服务器和数据库名称，因此适合集成到 Azure Pipelines 中。
 
-MSOLEDBSQL version, which reads connection information from M partitions and prompts for user name and password through Azure AD:
+MSOLEDBSQL 版本：从 M 分区读取连接信息，并通过 Azure AD 提示输入用户名和密码：
+
 ```csharp
 #r "Microsoft.VisualBasic"
 
-// This script replaces all Power Query partitions on this model with a
-// legacy partition using the provided connection string with INTERACTIVE
-// AAD authentication. The script assumes that all Power Query partitions
-// load data from the same SQL Server-based data source.
+// 此脚本会将该模型上的所有 Power Query 分区替换为一个
+// 使用所提供连接字符串、并采用 INTERACTIVE
+// AAD 身份验证的 Legacy 分区。脚本假定所有 Power Query 分区
+// 都从同一个基于 SQL Server 的数据源加载数据。
 
-// Provide the following information:
+// 请提供以下信息：
 var authMode = "ActiveDirectoryInteractive";
-var userId = Microsoft.VisualBasic.Interaction.InputBox("Type your AAD user name", "User name", "name@domain.com", 0, 0);
+var userId = Microsoft.VisualBasic.Interaction.InputBox("输入你的 AAD 用户名", "用户名", "name@domain.com", 0, 0);
 if(userId == "") return;
-var password = ""; // Leave blank when using ActiveDirectoryInteractive authentication
+var password = ""; // 使用 ActiveDirectoryInteractive 身份验证时请留空
 
-// This function will extract all quoted values from the M expression, returning a list of strings
-// with the values extracted (in order), but ignoring any quoted values where a hashtag (#) precedes
-// the quotation mark:
+// 此函数会从 M 表达式中提取所有被引号括起来的值，并以字符串列表形式返回
+// （按出现顺序）。但如果某个引号前面紧跟井号（#），则忽略该引号中的值：
 var split = new Func<string, List<string>>(m => { 
     var result = new List<string>();
     var i = 0;
@@ -886,15 +910,15 @@ var split = new Func<string, List<string>>(m => {
     }
     return result;
 });
-var GetServer = new Func<string, string>(m => split(m)[0]);    // Server name is usually the 1st encountered string
-var GetDatabase = new Func<string, string>(m => split(m)[1]);  // Database name is usually the 2nd encountered string
-var GetSchema = new Func<string, string>(m => split(m)[2]);    // Schema name is usually the 3rd encountered string
-var GetTable = new Func<string, string>(m => split(m)[3]);     // Table name is usually the 4th encountered string
+var GetServer = new Func<string, string>(m => split(m)[0]);    // 服务器名通常是遇到的第一个字符串
+var GetDatabase = new Func<string, string>(m => split(m)[1]);  // 数据库名通常是遇到的第二个字符串
+var GetSchema = new Func<string, string>(m => split(m)[2]);    // 架构名通常是遇到的第三个字符串
+var GetTable = new Func<string, string>(m => split(m)[3]);     // 表名通常是遇到的第四个字符串
 
 var server = GetServer(Model.AllPartitions.OfType<MPartition>().First().Expression);
 var database = GetDatabase(Model.AllPartitions.OfType<MPartition>().First().Expression);
 
-// Add a legacy data source to the model:
+// 向模型添加一个 Legacy 数据源：
 var ds = Model.AddDataSource("AzureSQL");
 ds.Provider = "System.Data.OleDb";
 ds.ConnectionString = string.Format(
@@ -905,7 +929,7 @@ ds.ConnectionString = string.Format(
     userId,
     password);
 
-// Remove Power Query partitions from all tables and replace them with a single Legacy partition:
+// 从所有表中移除 Power Query 分区，并将其替换为一个 Legacy 分区：
 foreach(var t in Model.Tables.Where(t => t.Partitions.OfType<MPartition>().Any()))
 {
     var mPartitions = t.Partitions.OfType<MPartition>();
@@ -917,22 +941,22 @@ foreach(var t in Model.Tables.Where(t => t.Partitions.OfType<MPartition>().Any()
 }
 ```
 
-SQLNCLI version reading connection info from environment variables:
+SQLNCLI 版本：从环境变量读取连接信息：
+
 ```csharp
-// This script replaces all Power Query partitions on this model with a
-// legacy partition, reading the SQL server name, database name, user name
-// and password from corresponding environment variables. The script assumes
-// that all Power Query partitions load data from the same SQL Server-based
-// data source.
+// 此脚本会将此模型中的所有 Power Query 分区替换为
+// 一个传统分区，并从对应的环境变量中读取 SQL Server 名称、数据库名称、用户名
+// 和密码。脚本假定
+// 所有 Power Query 分区都从同一个基于 SQL Server 的
+// 数据源加载数据。
 
 var server = Environment.GetEnvironmentVariable("SQLServerName");
 var database = Environment.GetEnvironmentVariable("SQLDatabaseName");
 var userId = Environment.GetEnvironmentVariable("SQLUserName");
 var password = Environment.GetEnvironmentVariable("SQLUserPassword");
 
-// This function will extract all quoted values from the M expression, returning a list of strings
-// with the values extracted (in order), but ignoring any quoted values where a hashtag (#) precedes
-// the quotation mark:
+// 此函数会从 M 表达式中提取所有加引号的值，返回一个字符串列表。
+// 列表包含提取到的值（按顺序），但会忽略这样的加引号值：引号前紧跟一个井号 (#)。
 var split = new Func<string, List<string>>(m => { 
     var result = new List<string>();
     var i = 0;
@@ -943,12 +967,12 @@ var split = new Func<string, List<string>>(m => {
     }
     return result;
 });
-var GetServer = new Func<string, string>(m => split(m)[0]);    // Server name is usually the 1st encountered string
-var GetDatabase = new Func<string, string>(m => split(m)[1]);  // Database name is usually the 2nd encountered string
-var GetSchema = new Func<string, string>(m => split(m)[2]);    // Schema name is usually the 3rd encountered string
-var GetTable = new Func<string, string>(m => split(m)[3]);     // Table name is usually the 4th encountered string
+var GetServer = new Func<string, string>(m => split(m)[0]);    // 服务器名称通常是第一个匹配到的字符串
+var GetDatabase = new Func<string, string>(m => split(m)[1]);  // 数据库名称通常是第二个匹配到的字符串
+var GetSchema = new Func<string, string>(m => split(m)[2]);    // 架构名称通常是第三个匹配到的字符串
+var GetTable = new Func<string, string>(m => split(m)[3]);     // 表名称通常是第四个匹配到的字符串
 
-// Add a legacy data source to the model:
+// 向模型添加一个传统数据源：
 var ds = Model.AddDataSource("AzureSQL");
 ds.Provider = "System.Data.SqlClient";
 ds.ConnectionString = string.Format(
@@ -958,7 +982,7 @@ ds.ConnectionString = string.Format(
     userId,
     password);
 
-// Remove Power Query partitions from all tables and replace them with a single Legacy partition:
+// 从所有表中删除 Power Query 分区，并用单个传统分区替换：
 foreach(var t in Model.Tables.Where(t => t.Partitions.OfType<MPartition>().Any()))
 {
     var mPartitions = t.Partitions.OfType<MPartition>();

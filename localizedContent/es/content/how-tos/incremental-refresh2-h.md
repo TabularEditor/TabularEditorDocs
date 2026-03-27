@@ -1,6 +1,6 @@
-﻿---
+---
 uid: incremental-refresh-policy
-title: Incremental Refresh
+title: Actualización incremental
 author: Daniel Otykier
 updated: 2021-02-15
 applies_to:
@@ -13,47 +13,52 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Limited to SQL Server Standard Edition"
+          note: "Limitado a SQL Server Standard Edition"
         - edition: Enterprise
           full: true
 ---
-# Incremental Refresh
 
-Datasets hosted in the Power BI service can have [Incremental Refresh](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) set up on one or more tables. To configure or modify Incremental Refresh on a Power BI dataset, you can either use the [XMLA endpoint of the Power BI service directly](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla), or you can use Tabular Editor connected to the XMLA endpoint, as described below:
+# Actualización incremental
+
+Los Datasets alojados en el servicio de Power BI pueden tener configurada la [actualización incremental](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) en una o varias tablas. Para configurar o modificar la actualización incremental en un Dataset de Power BI, puedes usar directamente el [punto de conexión XMLA del servicio de Power BI](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla), o puedes usar Tabular Editor conectado al punto de conexión XMLA, como se describe a continuación:
 
 > [!IMPORTANT]
-> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> La configuración de la actualización incremental con Tabular Editor 3 está limitada a los Datasets alojados en el servicio Power BI Datasets. En Analysis Services se requieren [particiones](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizadas.
 
-## Setting up Incremental Refresh from scratch with Tabular Editor
+## Configurar la actualización incremental desde cero con Tabular Editor
 
-1. Connect to the Power BI XMLA R/W endpoint of your workspace, and open the dataset on which you want to configure Incremental Refresh.
-2. Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)), so let's start by adding two new Shared Expressions in Tabular Editor:
-  ![Add shared expressions](https://user-images.githubusercontent.com/8976200/121341006-8906e900-c920-11eb-97af-ee683ff40609.png)
-3. Name them `RangeStart` and `RangeEnd` respectively, set their `Kind` property to "M" and set their expression to the following (the actual date/time value you specify doesn't matter, as it will be set by the PBI service when starting the data refresh):
+1. Conéctate al punto de conexión XMLA R/W de Power BI de tu Workspace, y abre el Dataset en el que quieres configurar la actualización incremental.
+2. La actualización incremental requiere que se creen los parámetros `RangeStart` y `RangeEnd` ([más información](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)), así que empecemos agregando dos nuevas expresiones compartidas en Tabular Editor:
+   ![Agregar expresiones compartidas](https://user-images.githubusercontent.com/8976200/121341006-8906e900-c920-11eb-97af-ee683ff40609.png)
+3. Asígnales los nombres `RangeStart` y `RangeEnd`, respectivamente, establece su propiedad `Kind` en "M" y define su expresión como sigue (el valor real de fecha y hora que especifiques no importa, ya que lo establecerá el servicio de Power BI al iniciar la actualización de datos):
+
   ```M
   #datetime(2021, 6, 9, 0, 0, 0) meta [IsParameterQuery=true, Type="DateTime", IsParameterQueryRequired=true]
   ```
-  ![Set kind property](https://user-images.githubusercontent.com/8976200/121342389-dc2d6b80-c921-11eb-8848-b67950e55e36.png)
-4. Next, select the table on which you want to enable incremental refresh
-5. Set the `EnableRefreshPolicy` property on the table to "true":
-  ![Enable Refresh Policy](https://user-images.githubusercontent.com/8976200/121339872-3842c080-c91f-11eb-8e63-a051b34fb36f.png)
-6. Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partitions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
-  ![Configure Properties](https://user-images.githubusercontent.com/45298358/170603450-8232ad55-0b4a-4ead-b113-786a781f94ad.png)
-7. Save your model (Ctrl+S).
-8. Right-click on the table and choose "Apply Refresh Policy".
-  ![Apply Refresh Policy](https://user-images.githubusercontent.com/8976200/121342947-78577280-c922-11eb-82b5-a517fbe86c3e.png)
 
-That's it! At this point, you should see that the Power BI service has automatically generated the partitions on your table, based on the policy you specified.
+![Establecer la propiedad Kind](https://user-images.githubusercontent.com/8976200/121342389-dc2d6b80-c921-11eb-8848-b67950e55e36.png)
+4. A continuación, selecciona la tabla en la que quieres habilitar la actualización incremental
+5. Establece la propiedad `EnableRefreshPolicy` de la tabla en "true":
+![Habilitar la política de actualización](https://user-images.githubusercontent.com/8976200/121339872-3842c080-c91f-11eb-8e63-a051b34fb36f.png)
+6. Configura las propiedades restantes según la política de actualización incremental que necesites. Recuerda especificar una expresión M para la propiedad `SourceExpression` (esta es la expresión que se agregará a las particiones creadas por la política de actualización incremental, y debería usar los parámetros `RangeStart` y `RangeEnd` para filtrar los datos en el origen). El operador = solo debe aplicarse a RangeStart o a RangeEnd, pero no a ambos, ya que los datos podrían duplicarse.
+![Configurar propiedades](https://user-images.githubusercontent.com/45298358/170603450-8232ad55-0b4a-4ead-b113-786a781f94ad.png)
+7. Guarda el modelo (Ctrl+S).
+8. Haz clic derecho en la tabla y elige "Aplicar política de actualización".
+![Aplicar política de actualización](https://user-images.githubusercontent.com/8976200/121342947-78577280-c922-11eb-82b5-a517fbe86c3e.png)
 
-![Generated Partitions](https://user-images.githubusercontent.com/8976200/121343417-eef47000-c922-11eb-8731-1ac4dde916ef.png)
+¡Eso es todo! En este punto, deberías ver que el servicio de Power BI ha generado automáticamente las particiones en tu tabla, en función de la política que especificaste.
 
-The next step is to refresh the data in the partitions. You can use the Power BI service for that, or you can refresh the partitions in batches using [XMLA/TMSL through SQL Server Management Studio](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms), or even using [Tabular Editor's scripting](https://www.elegantbi.com/post/datarefreshintabulareditor).
+![Particiones generadas](https://user-images.githubusercontent.com/8976200/121343417-eef47000-c922-11eb-8731-1ac4dde916ef.png)
 
-### Full refresh with incremental refresh policy applied
-If you have applied a refresh policy to your table and wish to perform a full refresh, you must ensure that you set [applyRefreshPolicy to false](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#override-incremental-refresh-behavior) in your script. This will ensure that you perform a full refresh of all the partitions in your table. 
-The TMSL Command would in our example look like this:
+El siguiente paso es actualizar los datos de las particiones. Para ello, puedes usar el servicio de Power BI o actualizar las particiones por lotes mediante [XMLA/TMSL desde SQL Server Management Studio](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#refresh-management-with-sql-server-management-studio-ssms), o incluso con el scripting de [Tabular Editor](https://www.elegantbi.com/post/datarefreshintabulareditor).
+
+### Actualización completa con la política de actualización incremental aplicada
+
+Si has aplicado una política de actualización a tu tabla y quieres realizar una actualización completa, debes asegurarte de establecer [applyRefreshPolicy a false](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla#override-incremental-refresh-behavior) en tu script. Esto garantiza que realices una actualización completa de todas las particiones de tu tabla.
+En nuestro ejemplo, el comando TMSL tendría este aspecto:
+
   ```
-{
+  {
   "refresh": {
     "type": "full",
     "applyRefreshPolicy": false
@@ -64,34 +69,35 @@ The TMSL Command would in our example look like this:
       }
     ]
   }
-}
+  }
   ```
-## Modifying existing refresh policies
 
-You can also use Tabular Editor to modify existing refresh policies that has been set up using Power BI Desktop. Simply follow step 6-8 above in this case.
+## Modificar políticas de actualización existentes
 
-## Applying refresh policies with `EffectiveDate`
+También puedes usar Tabular Editor para modificar las políticas de actualización existentes que se han configurado con Power BI Desktop. En este caso, simplemente sigue los pasos 6-8 anteriores.
 
-If you want to generate partitions while overriding the current date (for purposes of generating different rolling window ranges), you can use a small script in Tabular Editor to apply the refresh policy with the [EffectiveDate](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters) parameter.
+## Aplicar políticas de actualización con `EffectiveDate`
 
-With the incremental refresh table selected, run the following script in Tabular Editor's "Advanced Scripting" pane, in place of step 8 above:
+Si quieres generar particiones sobrescribiendo la fecha actual (para generar distintos rangos de ventana móvil), puedes usar un pequeño script en Tabular Editor para aplicar la política de actualización con el parámetro [EffectiveDate](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#optional-parameters).
+
+Con la tabla de actualización incremental seleccionada, ejecuta el siguiente script en el panel "Advanced Scripting" de Tabular Editor, en lugar del paso 8 anterior:
 
 ```csharp
 var effectiveDate = new DateTime(2020, 1, 1);  // Todo: replace with your effective date
 Selected.Table.ApplyRefreshPolicy(effectiveDate);
 ```
 
-![Use scripts to apply refresh policy](https://user-images.githubusercontent.com/8976200/121344362-f9633980-c923-11eb-916c-44a35cf03a36.png)
+![Usar scripts para aplicar la política de actualización](https://user-images.githubusercontent.com/8976200/121344362-f9633980-c923-11eb-916c-44a35cf03a36.png)
 
-## Removing Incremental Refresh using Tabular Editor
+## Eliminar la actualización incremental con Tabular Editor
 
-You may need to remove the incremental refresh policy from a table.
+Puede que debas quitar la política de actualización para la actualización incremental de una tabla.
 
-1. Select the table in the TOM view and get the M code from the SourceExpression property and save it somewhere.
-2. Change the EnableRefreshPolicy value from TRUE to FALSE.
-3. Right-click on the table and create a new M partition.
-4. Paste in the M code from step 1 above as the partition's expression.
-5. Edit the M code to remove the step that contains the Table.SelectRows() function for the RangeStart/RangeEnd parameters.
-6. Delete all of the historical partitions. They have a SourceType of "Policy Range".
-7. Refresh the table (Tabular Editor 3) or in the service refresh the dataset to repopulate the table.
-8. Optionally delete the RangeStart/RangeEnd shared expressions if there are no other tables in the model with an Incremental Refresh policy set.
+1. Selecciona la tabla en la vista TOM, obtén el código M de la propiedad SourceExpression y guárdalo en algún lugar.
+2. Cambia el valor de EnableRefreshPolicy de TRUE a FALSE.
+3. Haz clic con el botón derecho en la tabla y crea una nueva partición M.
+4. Pega el código M del paso 1 anterior como la expresión de la partición.
+5. Edita el código M para quitar el paso que contiene la función Table.SelectRows() para los parámetros RangeStart/RangeEnd.
+6. Elimina todas las particiones históricas. Tienen el valor "Policy Range" en SourceType.
+7. Actualiza la tabla (en Tabular Editor 3) o, en el servicio, actualiza el Dataset para volver a poblarla.
+8. Opcionalmente, elimina las expresiones compartidas RangeStart/RangeEnd si no hay ninguna otra tabla en el modelo con una política de actualización para la actualización incremental configurada.

@@ -1,6 +1,6 @@
 ---
 uid: script-implement-incremental-refresh
-title: Setup Incremental Refresh
+title: Configurar la actualización incremental
 author: Kurt Buhler
 updated: 2023-03-01
 applies_to:
@@ -10,31 +10,31 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Configure Incremental Refresh
 
-## Script Purpose
-If you want to configure Incremental Refresh for an import table based on a specific date field.
-This script will work for `datetime`, `date`, or `integer` date columns for which you want to configure incremental refresh.
+# Configurar la actualización incremental
 
-To use the script, select the date column in the table for which you want to configure incremental refresh, then run the script. The script will only run if you don't already have a #"RangeStart" and #"RangeEnd" parameter, and the selected table doesn't already have a Refresh Policy configured.
+## Propósito del script
 
+Si quieres configurar la actualización incremental para una tabla de importación basada en un campo de fecha específico.
+Este script funciona con columnas de fecha `datetime`, `date` o `integer` en las que quieras configurar la actualización incremental.
 
-> [!NOTE] 
-> This script will automatically modify the M partition of the table to add the filter step.
-> Be sure to check that this was done correctly. 
+Para usar el script, selecciona la columna de fecha de la tabla para la que quieras configurar la actualización incremental y, después, ejecuta el script. El script solo se ejecutará si aún no tienes los parámetros #"RangeStart" y #"RangeEnd" y la tabla seleccionada todavía no tiene configurada una política de actualización.
+
+> [!NOTE]
+> Este script modificará automáticamente la partición M de la tabla para agregar el paso de filtro.
+> Asegúrate de comprobar que se ha hecho correctamente.
 >
-> If you have many steps you must be sure to move this step to a point when it will fold to the data source. 
-> Make sure you adjust all the `#"Step References" in Power Query
+> Si tienes muchos pasos, asegúrate de mover este paso a un punto en el que pueda plegarse hasta la fuente de datos.
+> Asegúrate de ajustar todas las \`#"Step References" en Power Query
 
-
-> [!NOTE] 
-> This script uses user input to generate the refresh policy. 
-> Make sure you enter the correct values in the user input dialogue box.
-
+> [!NOTE]
+> Este script usa la entrada del usuario para generar la política de actualización.
+> Asegúrate de introducir los valores correctos en el cuadro de diálogo de entrada del usuario.
 
 ## Script
 
-### Implement Incremental Refresh for Selected Column
+### Implementar la actualización incremental para la columna seleccionada
+
 ```csharp
 // This script will automatically generate an Incremental Refresh policy for a selected table
 // It is generated based on the selected column
@@ -479,17 +479,17 @@ catch
     Error( "No valid table selected! Ending script without changes." );
 }
 ```
-### Explanation
-This snippet will configure incremental refresh in the selected table based on a selected date column.
 
-## Example Output
+### Explicación
+
+Este fragmento configurará la actualización incremental en la tabla seleccionada en función de la columna de fecha seleccionada.
+
+## Salida de ejemplo
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> When running the script, you are prompted to select the Table you want to configure, and the DateTime or Int column the policy will be configured for. Then, the dialog in this image will appear to let you enter the Refresh Policy parameters.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh.png" alt="The prompt that helps you configure incremental refresh based on selected columns" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Al ejecutar el script, se te pedirá que selecciones la tabla que quieres configurar y la columna DateTime o Int para la que se configurará la política. Luego, aparecerá el cuadro de diálogo de esta imagen para que pueda introducir los parámetros de la política de actualización.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh-success.png" alt="A confirmation dialog that acknowledges you have configured the refresh policy" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> A confirmation dialog will inform you about the success of the Refresh Policy configuration, explaining it back to you in plain words.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-configure-incremental-refresh-success.png" alt="A confirmation dialog that acknowledges you have configured the refresh policy" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Un cuadro de diálogo de confirmación le informará del éxito de la configuración de la política de actualización y se la explicará en palabras sencillas.</figcaption>
 </figure>

@@ -1,6 +1,6 @@
-﻿---
+---
 uid: desktop-integration
-title: Power BI Desktop Integration
+title: Power BI Desktop 集成
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -14,37 +14,38 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Power BI Desktop Integration
 
-[Power BI Desktop supports External Tools](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-external-tools) which allows Tabular Editor to perform  modeling operations when working with Imported or DirectQuery data in Desktop.
+# Power BI Desktop 集成
+
+[Power BI Desktop 支持外部工具](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-external-tools)，这使 Tabular Editor 在桌面版中处理导入或 DirectQuery 数据时能够执行建模操作。
 
 ![image](~/content/assets/images/getting-started/power-bi-desktop-integration.png)
 
-## Prerequisites
+## 先决条件
 
-- [Power BI Desktop](https://www.microsoft.com/en-us/download/details.aspx?id=58494) (July 2020 or newer)
-- [Latest version of Tabular Editor](https://tabulareditor.com/downloads)
+- [Power BI Desktop](https://www.microsoft.com/en-us/download/details.aspx?id=58494)（2020 年七月或更高版本）
+- [最新版 Tabular Editor](https://tabulareditor.com/downloads)
 
-Also, it is highly recommended that [automatic date/time](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-auto-date-time) is **disabled** (Power BI Desktop setting under "Data Load").
+此外，强烈建议**禁用**[自动日期/时间](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-auto-date-time)（Power BI Desktop 中“数据加载”下的设置）。
 
-## External Tool architecture
+## 外部工具架构
 
-When a Power BI Desktop report contains a data model (that is, one or more tables have been added in Import or DirectQuery mode), that data model is hosted inside an instance of Analysis Services managed by Power BI Desktop. External Tools may connect to this instance of Analysis Services for different purposes.
-
-> [!IMPORTANT]
-> Power BI Desktop reports that use a **Live Connection** to SSAS, Azure AS or a dataset in a Power BI workspace do not contain a data model. As such, these reports **cannot** be used with external tools such as Tabular Editor.
+当 Power BI Desktop Report 包含 Data model（即以导入或 DirectQuery 模式添加了一张或多张表）时，该 Data model 会托管在由 Power BI Desktop 管理的 Analysis Services 实例中。 外部工具可以出于不同目的连接到该 Analysis Services 实例。
 
 > [!IMPORTANT]
-> Power BI Desktop reports that directly edits a **Direct Lake** or other model Fabric do not contain a data model. Instead, Tabular Editor will open the model directly from the service which is essentially what Power BI Desktop also does.
+> 通过 **Live Connection** 连接到 SSAS、Azure AS 或 Power BI Workspace 中的 Dataset 的 Power BI Desktop Report 不包含 Data model。 因此，这些 Report **无法**与 Tabular Editor 等外部工具一起使用。
 
-External tools may connect to the instance of Analysis Services managed by Power BI Desktop through a specific port number assigned by Power BI Desktop. When a tool is launched directly from the "External Tools" ribbon in Power BI Desktop, this port number is passed to the external tool as a command line argument. In Tabular Editor's case, this causes the data model to be loaded in Tabular Editor.
+> [!IMPORTANT]
+> 直接编辑 Fabric 中的 **Direct Lake** 或其他模型的 Power BI Desktop Report 不包含 Data model。 相反，Tabular Editor 将直接从服务中打开模型——这基本上也是 Power BI Desktop 的做法。
+
+外部工具可以通过 Power BI Desktop 分配的特定端口号，连接到由 Power BI Desktop 管理的 Analysis Services 实例。 当你从 Power BI Desktop 的“外部工具”功能区直接启动某个工具时，该端口号会作为命令行参数传递给外部工具。 对于 Tabular Editor 而言，这会使其加载该 Data model。
 
 <img class="noscale" src="~/content/assets/images/external-tool-architecture.png" />
 
-Once connected to the instance of Analysis Services, an external tool can obtain information about the model metadata, execute DAX or MDX queries against the data model, an even apply changes to the model metadata through [Microsoft-provided client libraries](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions). In this regard, the Analysis Services instance managed by Power BI Desktop is no different from any other type of Analysis Services instance.
+一旦连接到 Analysis Services 实例，外部工具就可以获取模型元数据信息，针对 Data model 执行 DAX 或 MDX 查询，甚至还能通过 [Microsoft 提供的客户端库](https://docs.microsoft.com/en-us/analysis-services/client-libraries?view=asallproducts-allversions) 来更改模型元数据。 从这一点来看，由 Power BI Desktop 管理的 Analysis Services 实例与任何其他类型的 Analysis Services 实例并无不同。
 
-## Supported Modeling Operations
+## 支持的建模操作
 
-As of the June 2025 Power BI Desktop update, there are no longer any unsupported write operations. In other words, third party tools can now freely modify any aspect of the semantic model hosted in Power BI Desktop, including adding and removing tables and columns, changing data types, etc. However, if you're using a version of Power BI Desktop prior to the June 2025 update, please view the limitations in the [Desktop Limitations](xref:desktop-limitations) article.
+从 2025 年六月的 Power BI Desktop 更新开始，已不再存在任何不受支持的写入操作。 换句话说，第三方工具现在可以自由修改托管在 Power BI Desktop 中的语义模型的任何方面，包括添加和删除表与列、更改数据类型等。 不过，如果您使用的是 2025 年六月更新之前版本的 Power BI Desktop，请参阅[桌面版限制](xref:desktop-limitations)一文了解相关限制。
 
-More information in [the official blog post](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/).
+更多信息请参阅[官方博客文章](https://powerbi.microsoft.com/en-us/blog/open-and-edit-any-semantic-model-with-power-bi-tools/)。

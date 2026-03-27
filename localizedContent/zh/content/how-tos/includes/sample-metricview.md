@@ -1,4 +1,4 @@
-This how-to uses a sample e-commerce Metric View representing sales data with three dimension tables (product, customer, date) joined to a fact table (orders).
+本操作指南使用一个示例电商 Metric View 来展示销售数据：三张维度表（产品、客户、日期）与一张事实表（订单）进行联接。
 
 ```yaml
 version: 0.1
@@ -26,7 +26,7 @@ dimensions:
     expr: date.year
   - name: order_month
     expr: date.month_name
-measures:
+度量值:
   - name: total_revenue
     expr: SUM(revenue)
   - name: order_count

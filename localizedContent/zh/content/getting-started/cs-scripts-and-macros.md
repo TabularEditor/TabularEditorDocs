@@ -1,149 +1,150 @@
 ---
 uid: cs-scripts-and-macros
-title: Introduction to C# scripts and macros
+title: C# Script 与宏简介
 author: Daniel Otykier
 updated: 2021-11-03
 ---
-# Introduction to C# scripts and macros
 
-Any software that claims to improve your productivity should provide some means of **automating user interactions**. In Tabular Editor, you can write C# scripts for exactly this purpose. With C# scripts in Tabular Editor, you can, for example:
+# C# Script 与宏简介
 
-- Automate creation of TOM objects such as measures, tables, calculation items
-- Interact with the currently selected object(s) in the TOM Explorer
-- Automatically assign properties to multiple objects
-- Import and export metadata in various formats, for auditing or documentation purposes
+任何声称能提升你生产力的软件，都应该提供某种方式来**自动化用户交互**。 在 Tabular Editor 中，你可以为此编写 C# Script。 借助 Tabular Editor 中的 C# Script，例如你可以：
 
-If a script modifies your model metadata, you will be able to view the modifications immediately in the TOM Explorer and the Properties view. Moreover, you can **undo script changes**, effectively rolling back the model metadata to the point before the script was executed. If a script fails execution, the changes are automatically rolled back by default.
+- 自动创建 TOM 对象，例如度量值、表、计算项
+- 与 TOM Explorer 中当前选定的对象(s)交互
+- 自动为多个对象分配属性
+- 以多种格式导入和导出元数据，用于审计或编写文档
 
-Tabular Editor 3 includes a simple **script recorder** which helps you learn the syntax used, by incrementally adding lines of script code as you make changes to your model.
+如果脚本修改了你的模型元数据，你可以立即在 TOM Explorer 和属性视图中看到这些修改。 此外，你还可以**撤销脚本更改**，将模型元数据有效回滚到脚本执行之前的状态。 如果脚本执行失败，默认会自动回滚更改。
 
-A script can be saved as a standalone file (`.csx` file extension), which can be shared among Tabular Editor users. In addition, a script can be stored as a reusable **macro**, which integrates the script more closely with Tabular Editors user interface.
+Tabular Editor 3 内置一个简单的**Script recorder**，当你对模型进行更改时，它会逐步添加脚本代码行，帮助你学习所使用的语法。
 
-# Creating a script
+脚本可以保存为独立文件（`.csx` 扩展名），并可在 Tabular Editor 用户之间共享。 此外，脚本还可以保存为可复用的**宏**，从而让脚本与 Tabular Editor 的用户界面更紧密地集成。
 
-To create a new C# script, use the **File > New > C# Script** menu option. Note that this option is available even when no model is loaded in Tabular Editor.
+# 创建脚本
 
-For your first script, enter the following code:
+要创建新的 C# 脚本，请使用菜单 **文件 > 新建 > C# Script**。 注意：即使 Tabular Editor 里没有加载任何模型，也能用这个选项。
+
+在你的第一个脚本中，输入以下代码：
 
 ```csharp
 Info("Hello world!");
 ```
 
-Hit F5 to run the code.
+按 F5 运行代码。
 
-![Your very first script](~/content/assets/images/first-script.png)
+![你的第一个脚本](~/content/assets/images/first-script.png)
 
-If you made a mistake while typing the code, any syntax errors will be shown in the **Messages view**.
+如果你在输入代码时出现错误，所有语法错误都会在 **信息视图** 中显示。
 
-- To save the script as a file, simply hit **File > Save** (Ctrl+S).
-- To open a script from a file, use the **File > Open > File...** (Ctrl+O) option. The Open File dialog will look for files with the `.cs` or `.csx` extensions by default.
+- 要将脚本保存为文件，只需点击 **文件 > 保存**（Ctrl+S）即可。
+- 要从文件打开脚本，请使用 **文件 > 打开 > 文件...**（Ctrl+O）选项。 “打开文件”对话框默认会查找扩展名为 `.cs` 或 `.csx` 的文件。
 
-# Using the script recorder
+# 使用 Script recorder 功能
 
-While a C# script is in focus, you can start the script recorder in Tabular Editor by using the **C# Script > Record script** menu option. While the script is recording, any change you make to your model metadata will cause additional lines of code to be added to the script. Note that you cannot edit the script manually until you stop the recording.
+当 C# Script 脚本视图处于焦点时，你可以在 Tabular Editor 中通过 **C# Script > 录制脚本** 菜单选项启动 Script recorder。 在录制期间，你对模型元数据所做的任何更改，都会让脚本中追加相应的代码行。 请注意，在停止录制之前，你无法手动编辑脚本。
 
 ![Csharp Script Recorder](~/content/assets/images/csharp-script-recorder.png)
 
-# Accessing model metadata
+# 访问模型元数据
 
-In order to access specific objects within the currently loaded model, you need to use the C# syntax for navigating through the Tabular Object Model (TOM) hierarchy. The root of this hierarchy is the `Model` object.
+要访问当前加载的模型中的特定对象，你需要使用 C# 语法在 Tabular Object Model (TOM) 层次结构中进行导航。 该层次结构的根节点是 `Model` 对象。
 
-The script below outputs the name of the currently loaded model. If no model is loaded, a warning is displayed.
+下面的脚本会输出当前加载模型的名称。 如果未加载任何模型，将显示警告。
 
 ```csharp
 if(Model != null)
-    Info("The name of the current model is: " + Model.Name);
+    Info("当前模型的名称为： " + Model.Name);
 else
-    Warning("No model is currently loaded!");
+    Warning("当前未加载任何模型！");
 ```
 
-The `Model` object is a wrapper of the [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) class, exposing a subset of its properties, with some additional methods and properties for convenience.
+`Model` 对象是对 [Microsoft.AnalysisServices.Tabular.Model](https://msdn.microsoft.com/en-us/library/microsoft.analysisservices.tabular.model.aspx) 类的封装，公开其中一部分属性，并额外提供了一些便捷的方法和属性。
 
-To access a specific measure, you will need to know the name of that measure as well as the name of the table the measure resides in:
+要访问某个特定的度量值，你需要知道该度量值的名称，以及它所在表的名称：
 
 ```csharp
 var myMeasure = Model.Tables["Internet Sales"].Measures["Internet Total Sales"];
-myMeasure.Description = "The formula for this measure is: " + myMeasure.Expression;
+myMeasure.Description = "此度量值的公式为： " + myMeasure.Expression;
 ```
 
-Line 1 in the script above locates the "Internet Total Sales" measure on the "Internet Sales" table, then stores a reference to that measure in the `myMeasure` variable.
+上述脚本的第 1 行在“Internet Sales”表上定位到“Internet Total Sales”度量值，然后将该度量值的引用存入 `myMeasure` 变量。
 
-Line 2 in the script sets the description of the measure, based on a hardcoded string and the (DAX) expression of the measure.
+脚本的第 2 行根据一段硬编码字符串以及该度量值的（DAX）表达式来设置度量值的说明。
 
-Tabular Editor can auto-generate the code that references a specific object, by dragging and dropping the object from the TOM Explorer into the C# script view.
+Tabular Editor 可以自动生成引用特定对象的代码：将对象从 TOM Explorer 拖放到 C# Script 视图即可。
 
-![Generate an object reference by dragging](~/content/assets/images/generate-csharp-code.gif)
+![通过拖放生成对象引用](~/content/assets/images/generate-csharp-code.gif)
 
-Most TOM objects (tables, columns, measures, etc.) in Tabular Editor, exposes the same set of properties that are available when using the AMO/TOM client libraries directly. For this reason, you can refer to [Microsoft's AMO/TOM documentation](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet), to learn which properties are available. For example, [here](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) is the documentation for available measure properties.
+Tabular Editor 中的大多数 TOM 对象（表、列、度量值等） 公开的属性集与直接使用 AMO/TOM 客户端库时可用的属性集相同。 因此，你可以参考 [Microsoft 的 AMO/TOM 文档](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet)，了解有哪些可用属性。 例如，[此处](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure?view=analysisservices-dotnet#properties) 提供了可用度量值属性的文档。
 
-# Accessing current TOM Explorer selection
+# 访问当前 TOM Explorer 的选中项
 
-To make scripts reusable, it is rarely enough to be able to reference objects in the model directly by name, as shown above. Instead, it is useful to refer to whichever object(s) is currently selected in Tabular Editor's **TOM Explorer view**. This is possible through the use of the `Selected` object.
+为了让脚本可复用，仅仅像上面那样通过名称直接引用模型中的对象通常远远不够。 相反，引用 Tabular Editor 的 **TOM Explorer 视图** 中当前选中的对象(一个或多个)会更有用。 这可以通过使用 `Selected` 对象来实现。
 
 ```csharp
-Info("You have currently selected: " + Selected.Measures.Count + " measure(s).");
+Info("你当前已选择： " + Selected.Measures.Count + " 个度量值(s)。");
 ```
 
-The `Selected` object by itself is a collection of all objects currently selected, including objects within selected display folders. In addition, the `Selected` object contains multiple properties that makes it easy to refer to specific object types, such as the `.Measures` property shown in the example above. In general, these properties exist in both a plural (`.Measures`) and a singular (`.Measure`) form. The former is a collection that you can iterate through, and which will be empty if the current selection does not contain any objects of that type, whereas the latter is a reference to the currently selected object, if and only if exactly one of that type of object is selected.
+`Selected` 对象本身是一个集合，包含当前选中的所有对象，包括所选显示文件夹中的对象。 此外，`Selected` 对象还包含多个属性，便于引用特定对象类型，例如上例中的 `.Measures` 属性，即度量值集合。 一般来说，这些属性同时提供复数形式（`.Measures`，度量值集合）和单数形式（`.Measure`，度量值）。 前者是一个可供你迭代的集合；如果当前选择不包含该类型的任何对象，它将为空。后者则是对当前所选对象的引用，只有在且仅在恰好选中了一个该类型对象时才会有值。
 
-The @useful-script-snippets article contains many examples of scripts that use the `Selected` object to perform various tasks.
+@useful-script-snippets 文章包含了许多示例脚本，展示如何使用 `Selected` 对象来完成各种任务。
 
-# Interacting with the user
+# 与用户交互
 
-In the examples above, we used the `Info(...)` and `Warning(...)` global methods to show a message to the user in various flavors. Tabular Editor provides a number of these global methods as well as extension methods for showing and collecting information, and for various other common tasks. The most commonly used are listed below:
+在上面的示例中，我们使用 `Info(...)` 和 `Warning(...)` 全局方法，以不同方式向用户显示信息。 Tabular Editor 提供了不少这类全局方法以及扩展方法，用于显示与收集信息，以及处理其他常见任务。 最常用的如下：
 
-* `void Output(object value)` - halts script execution and displays detailed information about the provided object. When the provided object is a TOM object or a collection of TOM objects, a detailed view of all properties are shown.
-* `void SaveFile(string filePath, string content)` - convenient way to save text data to a file.
-* `string ReadFile(string filePath)` - convenient way to load text data from a file.
-* `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties = "...")` - convenient way to export a set of properties from multiple objects as a TSV string.
-* `void ImportProperties(string tsvData)` - convenient way to load properties into multiple objects from a TSV string.
-* `string ConvertDax(dax, useSemicolons)` - converts a DAX expression between US/UK and non-US/UK locales. If `useSemicolons` is true (default) the `dax` string is converted from the native US/UK format to non-US/UK. That is, commas (list separators) will be converted to semicolons and periods (decimal separators) will be converted to commas. Vice versa if `useSemicolons` is set to false.
-* `void FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - formats DAX expressions on all objects in the provided collection
-* `void FormatDax(IDaxDependantObject obj)` - queues an object for DAX expression formatting when script execution is complete, or when the `CallDaxFormatter` method is called.
-* `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - formats all DAX expressions on objects enqueued so far
-* `void Info(string message)` - Displays an informational message.
-* `void Warning(string message)` - Displays a warning message.
-* `void Error(string message)` - Displays an error message.
-* `measure SelectMeasure(Measure preselect = null, string label = "...")` - Displays a list of all measures and �prompts the user to select one.
-* `T SelectObject<T>(this IEnumerable<T> objects, T preselect = null, string label = "...") where T: TabularNamedObject` - Displays a list of the provided objects, prompting the user to select one, and returns that object (or null if the cancel button was pressed).
-* `IList<T> SelectObjects<T>(this IEnumerable<T> objects, IEnumerable<T> preselect = null, string label = "...") where T: TabularNamedObject` - Displays a list of the provided objects, prompting the user to select any number of objects and returns the list of objects selected (or null if the cancel button was pressed).
+- `void Output(object value)` - 暂停脚本执行，并显示所提供对象的详细信息。 如果提供的对象是 TOM 对象或 TOM 对象集合，将显示其所有属性的详细视图。
+- `void SaveFile(string filePath, string content)` - 将文本数据保存到文件的便捷方式。
+- `string ReadFile(string filePath)` - 从文件加载文本数据的便捷方式。
+- `string ExportProperties(IEnumerable<ITabularNamedObject> objects, string properties = "...")` - 将多个对象的一组属性导出为 TSV 字符串的便捷方式。
+- `void ImportProperties(string tsvData)` - 将 TSV 字符串中的属性导入多个对象的便捷方式。
+- `string ConvertDax(dax, useSemicolons)` - 在 US/UK 与非 US/UK 区域设置之间相互转换 DAX 表达式。 如果 `useSemicolons` 为 true（默认），`dax` 字符串会从 US/UK 本地格式转换为非 US/UK 格式。 也就是说，逗号（列表分隔符）会转换为分号，句点（小数分隔符）会转换为逗号。 如果将 `useSemicolons` 设为 false，则反之亦然。
+- `void FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - 对所提供集合中的所有对象的 DAX 表达式进行格式化
+- `void FormatDax(IDaxDependantObject obj)` - 将对象加入队列，以便在脚本执行完成后，或调用 `CallDaxFormatter` 方法时，对其 DAX 表达式进行格式化。
+- `void CallDaxFormatter(bool shortFormat, bool? skipSpace)` - 对截至目前已入队对象的所有 DAX 表达式进行格式化
+- `void Info(string message)` - 显示一条信息。
+- `void Warning(string message)` - 显示一条警告信息。
+- `void Error(string message)` - 显示一条错误信息。
+- `measure SelectMeasure(Measure preselect = null, string label = "...")` - 显示所有度量值的列表，并提示你选择一个。
+- `T SelectObject<T>(this IEnumerable<T> objects, T preselect = null, string label = "...") where T: TabularNamedObject` - 显示提供的对象列表，提示你选择一个，并返回该对象（如果按下“取消”按钮，则返回 null）。
+- `IList<T> SelectObjects<T>(this IEnumerable<T> objects, IEnumerable<T> preselect = null, string label = "...") where T: TabularNamedObject` - 显示提供的对象列表，提示你选择任意数量的对象，并返回所选对象的列表（如果按下“取消”按钮，则返回 null）。
 
-# Saving a script as a macro
+# 将脚本保存为宏
 
-Scripts that you use often can be saved as reusabe macros, which are always available when you launch Tabular Editor. Moreover, macros are automatically integrated in the context menu of the **TOM Explorer view** and you can even use the **Tools > Customize...** option to add macros to existing or custom menus and toolbars.
+你经常使用的脚本可以保存为可重复使用的宏，每次启动 Tabular Editor 时都能使用。 此外，宏会自动集成到 **TOM Explorer 视图** 的上下文菜单中；你甚至可以使用 **工具 > 自定义...** 选项，将宏添加到现有或自定义的菜单和工具栏。
 
-To save a script as a macro, use the **C# Script > Save as Macro...** option.
+要将脚本保存为宏，请使用 **C# Script > 保存为宏...** 选项。
 
-![Save New Macro](~/content/assets/images/save-new-macro.png)
+![保存新宏](~/content/assets/images/save-new-macro.png)
 
-Provide a name for your macro. You can use backslashes to organize macros into folders, i.e. a name such as "My Macros\Test" will create a "My Macros" submenu in the context menu of the TOM Explorer, and within this submenu there will be a "Test" menu option that invokes the script.
+给你的宏起个名字。 你可以使用反斜杠将宏组织到文件夹中。例如，名称 "My Macros\Test" 会在 TOM Explorer 的上下文菜单中创建一个 "My Macros" 子菜单，并在该子菜单中提供一个 "Test" 菜单选项，用于调用该脚本。
 
-You may also provide an optional tooltip which will be displayed when hovering over the menu option created by the macro.
+你还可以提供一个可选的工具提示，当鼠标悬停在宏创建的菜单选项上时会显示该提示。
 
-You should also specify the macro context, which specifies the type(s) of objects that needs to be selected in order for the macro to be available in the context menu.
+你还需要指定宏上下文，用来规定需要选中哪些类型(一种或多种)的对象，宏才会在上下文菜单中可用。
 
-Lastly, you can specify a C# expression which should evaluate to true/false (typically based on the `Selected` or `Model` objects) under **Macro enabled condition (advanced)**. This lets you control more granularly whether the macro should be enabled or not, based on the current selection. For example, you could use the following expression:
+最后，你可以在 **宏启用条件（高级）** 下指定一个应计算为 true/false 的 C# 表达式（通常基于 `Selected` 或 `Model` 对象）。 这样你就可以根据当前选择，更细粒度地控制宏是否应启用。 例如，你可以使用以下表达式：
 
 ```csharp
 Selected.Measures.Count == 1
 ```
 
-to enable your macro only when exactly 1 measure is selected.
+仅当恰好选中 1 个度量值时才启用宏。
 
-# Managing macros
+# 管理宏
 
-You can view all previously saved macros in the **Macros view**. To bring this view into focus, use the **View > Macros** menu option. This view allows you to:
+你可以在**宏视图**中查看之前保存的所有宏。 要将此视图置于前台，请使用 **视图 > 宏** 菜单项。 该视图可让你：
 
-- **Rename a macro** (simply put the cursor into the **Name** column and type the new name)
-- **Delete a macro.** Select it and click the red "X" button above the list of macros.
-- **Edit a macro.** Double-click the macro in the list (double-click on the "Id" column of the list). This will open the macro in a new C# script view, where you can make code changes. Hit Ctrl+S to save the code changes. If you need to edit other macro properties (tooltip, macro context, etc.), use the **C# Script > Edit Macro...** menu option.
+- **重命名宏**（只需将光标放到 **Name** 列中，然后输入新名称）
+- **删除宏。** 选中它，然后单击宏列表上方的红色“X”按钮。
+- **编辑宏。** 在列表中双击该宏（双击列表的“Id”列）。 这会在新的 C# Script 视图中打开该宏，你可以在那里修改代码。 按 Ctrl+S 保存代码更改。 如果你需要编辑其他宏属性（工具提示、宏上下文等），请使用 **C# Script > Edit Macro...** 菜单项。
 
-# Next steps
+# 后续步骤
 
 - @personalizing-te3
 - @boosting-productivity-te3
 
-# Further reading
+# 延伸阅读
 
 - @csharp-scripts
 - @useful-script-snippets

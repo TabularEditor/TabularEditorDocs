@@ -1,6 +1,6 @@
-﻿---
+---
 uid: deployment
-title: Model deployment
+title: Implementación del modelo
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,59 +15,59 @@ applies_to:
           full: true
 ---
 
-## Model deployment
+## Implementación del modelo
 
-Tabular Editor 3 (Business and Enterprise Edition) can take a copy of the currently loaded semantic model metadata, and deploy it to an Analysis Services instance, or the Power BI / Fabric XMLA endpoint.
+Tabular Editor 3 (Edición Business y Edición Enterprise) puede tomar una copia de los metadatos del modelo semántico cargado actualmente y desplegarla en una instancia de Analysis Services o en el punto de conexión XMLA de Power BI / Fabric.
 
-To perform a deployment, launch the **Deployment Wizard** through the **Model > Deploy...** menu option.
+Para realizar una implementación, inicia el **Asistente de implementación** desde la opción de menú **Modelo > Implementar...**.
 
 > [!NOTE]
-> Tabular Editor 3 Business Edition has certain [limitations](xref:editions) regarding what type of Analysis Services instance, or Power BI / Fabric workspace is supported for XMLA connectivity. This applies to deployment as well.
+> Tabular Editor 3 Edición Business tiene ciertas [limitaciones](xref:editions) con respecto a qué tipo de instancia de Analysis Services, o Workspace de Power BI / Fabric se admite para la conectividad XMLA. Esto también se aplica a la implementación.
 
-## Deployment options
+## Opciones de implementación
 
-After selecting the destination server and database to deploy, you are presented with a list of **Deployment options**, as shown in the screenshot below.
+Después de seleccionar el servidor y la base de datos de destino para la implementación, se muestra una lista de **opciones de implementación**, como se ve en la captura de pantalla siguiente.
 
-![Deployment Options](~/content/assets/images/deployment-options.png)
+![Opciones de implementación](~/content/assets/images/deployment-options.png)
 
-These are:
+Son las siguientes:
 
-- **Deploy Model Structure**: This indicates that the model metadata will be deployed. Unchecking this prevents you from performing the deployment (the option exists for historic reasons).
-- **Deploy Data Sources**: For models that use *explicit* data sources, this option indicates whether any such data sources will be included in the deployment. Unchecking this option may be useful, if one or more properties on a data source has been modified, and you do not intend to deploy these modifications. For example, if you are deploying model metadata from a Development environment to a Test environment, you may want to retain any connection strings, etc. on the destination environment as-is. Note that this option is typically not enabled for Power BI / Fabric semantic models, because such models use *implicit* data sources, where credentials are managed by the Power BI service, and connection details are stored in the M queries on partitions or shared expressions in the model.
-- **Deploy Table Partitions**: This option indicates whether table partitions should be deployed. In some cases, the destination database may contain partitions that are not present in the model metadata. Unchecking this option will prevent the deployment from modifying any existing partitions on the destination server. If this option is checked, Tabular Editor will synchronize the partitions on the destination server with the model metadata. If any partitions are present on the destination server, but not in the model metadata, they will be removed (including the data contained in them).
-  - **Deploy partitions governed by Incremental Refresh Policies**: When the **Deploy Table Partitions** option is enabled, you will have an option to avoid deploying partitions that are governed by Incremental Refresh Policies. This is useful when you have a model with partitions that created automatically by the [Incremental Refresh Policy](xref:incremental-refresh-about), and you want to deploy all partitions except those governed by the policy.
-- **Deploy Model Roles**: This option indicates whether roles defined in the model should be deployed. Unchecking this option will retain existing roles on the model as-is. If you are deploying changes to tables or columns in the model, you may have to revisit [RLS or OLS settings](xref:data-security-about), to ensure that they are still valid.
-  - **Deploy Model Role Members**: This option indicates whether role members should be deployed. It is common to manage role members directly on the server, rather than in the model metadata. Unchecking this option will prevent the deployment from modifying any existing role members on the destination server.
+- **Implementar la estructura del modelo**: Indica que se implementarán los metadatos del modelo. Si desmarcas esta opción, no podrás realizar la implementación (la opción existe por motivos históricos).
+- **Implementar orígenes de datos**: Para los modelos que usan orígenes de datos _explícitos_, esta opción indica si se incluirá algún origen de datos de este tipo en la implementación. Desmarcar esta opción puede ser útil si se han modificado una o varias propiedades de un origen de datos y no tiene intención de implementar estas modificaciones. Por ejemplo, si estás implementando metadatos del modelo desde un entorno de desarrollo a un entorno de pruebas, es posible que quieras conservar las cadenas de conexión, etc. del entorno de destino tal como están. Tenga en cuenta que, por lo general, esta opción no está habilitada para los modelos semánticos de Power BI / Fabric, ya que estos modelos usan orígenes de datos _implícitos_, en los que las credenciales las administra el servicio de Power BI y los detalles de conexión se almacenan en las consultas M de las particiones o en las expresiones compartidas del modelo.
+- **Implementar particiones de tablas**: Esta opción indica si se deben implementar las particiones de tablas. En algunos casos, la base de datos de destino puede contener particiones que no están presentes en los metadatos del modelo. Desmarcar esta opción evitará que la implementación modifique cualquier partición existente en el servidor de destino. Si esta opción está seleccionada, Tabular Editor sincronizará las particiones del servidor de destino con los metadatos del modelo. Si hay particiones en el servidor de destino que no estén en los metadatos del modelo, se eliminarán (incluidos los datos que contengan).
+  - **Implementar particiones regidas por las Políticas de actualización incremental**: Cuando la opción **Implementar particiones de tabla** está habilitada, tendrá la opción de evitar implementar particiones regidas por las Políticas de actualización incremental. Esto resulta útil cuando tiene un modelo con particiones que se crean automáticamente mediante la [política de actualización incremental](xref:incremental-refresh-about) y quiere implementar todas las particiones excepto las regidas por la política.
+- **Implementar roles del modelo**: Esta opción indica si se deben implementar los roles definidos en el modelo. Al desmarcar esta opción, se mantendrán tal cual los roles existentes en el modelo. Si va a implementar cambios en tablas o columnas del modelo, quizá tenga que revisar la [configuración de RLS u OLS](xref:data-security-about) para asegurarse de que siga siendo válida.
+  - **Implementar miembros de roles del modelo**: Esta opción indica si se deben implementar los miembros de los roles. Es habitual administrar los miembros de rol directamente en el servidor, en lugar de hacerlo en los metadatos del modelo. Al desmarcar esta opción, se evitará que la implementación modifique los miembros de rol existentes en el servidor de destino.
 
-## Deployment script
+## Script de implementación
 
-During deployment, Tabular Editor generates a [CreateOrReplace TMSL script](https://learn.microsoft.com/en-us/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions), which is then executed against the Analysis Services engine. The CreateOrReplace script contains all the metadata required to recreate the model, including tables, columns, measures, relationships, perspectives, translations, etc. If the model does not already exist on the target server, it will be created. If the model already exists, existing objects will be replaced with the new metadata specified in the script.
+Durante la implementación, Tabular Editor genera un [script TMSL CreateOrReplace](https://learn.microsoft.com/en-us/analysis-services/tmsl/createorreplace-command-tmsl?view=asallproducts-allversions), que luego se ejecuta en el motor de Analysis Services. El script CreateOrReplace contiene todos los metadatos necesarios para volver a crear el modelo, incluidas tablas, columnas, medidas, relaciones, perspectivas, traducciones, etc. Si el modelo aún no existe en el servidor de destino, se creará. Si el modelo ya existe, los objetos existentes se reemplazarán por los nuevos metadatos especificados en el script.
 
-If any of the options on the **Deployment options** page were deselected, Tabular Editor will use the original metadata definition of those objects in the generated TMSL script, thus retaining their definitions as-is on the server.
+Si se desmarcó alguna de las opciones de la página **Opciones de implementación**, Tabular Editor usará la definición de metadatos original de esos objetos en el script TMSL generado, conservando así sus definiciones tal cual en el servidor.
 
-The last page of the deployment wizard lets you export the generated script, so you can review the changes before executing them.
+La última página del Asistente de implementación le permite exportar el script generado, para que pueda revisar los cambios antes de ejecutarlos.
 
-## Deployment impact
-
-> [!WARNING]
-> This type of deployment is a **metadata-only deployment**. Depending on the types of changes made to the model, imported data could be lost during deployment. In this case, you may need to execute a refresh operation once the deployment is complete.
-
-As a rule of thumb, the following changes can be made to the model without requiring a subsequent data refresh:
-
-- Adding/editing/removing measures and KPIs, including their DAX expressions.
-- Editing properties such as FormatString, Description, DisplayFolder, etc.
-- Adding/editing/removing metadata translations, perspectives, OLS and RLS roles.
-
-The following changes may require a **Calculate refresh**, before the objects can be queried:
-
-- Adding/editing calculated column, calculated tables and calculation groups
-- Adding/editing relationships
-- Adding/editing hierarchies
-- Removing columns/tables
-
-The following changes may require a **Full refresh**:
-
-- Adding/editing partitions, tables and columns
+## Impacto de la implementación
 
 > [!WARNING]
-> Because of the potential impact of deploying a semantic model this way, we recommend not using this option to perform a deployment against a production environment. It is better to set up a [CI/CD pipeline for deploying models to production environments](https://blog.tabulareditor.com/category/ci-cd/).
+> Este tipo de implementación es una **implementación solo de metadatos**. Según los tipos de cambios realizados en el modelo, durante la implementación podrían perderse datos importados. En ese caso, puede que tenga que ejecutar una operación de actualización una vez finalizada la implementación.
+
+Como regla general, los siguientes cambios se pueden realizar en el modelo sin necesidad de una actualización de datos posterior:
+
+- Agregar/editar/eliminar medidas y KPIs, incluidas sus expresiones DAX.
+- Edición de propiedades como FormatString, Description, DisplayFolder, etc.
+- Agregar/editar/quitar traducciones de metadatos, perspectivas y roles de OLS y RLS.
+
+Los siguientes cambios pueden requerir una **actualización de cálculo** antes de poder consultar los objetos:
+
+- Agregar/editar columnas calculadas, tablas calculadas y grupos de cálculo
+- Agregar/editar relaciones
+- Agregar/editar jerarquías
+- Eliminar columnas/tablas
+
+Los siguientes cambios pueden requerir una **actualización completa**:
+
+- Agregar/editar particiones, tablas y columnas
+
+> [!WARNING]
+> Debido al posible impacto de desplegar un modelo semántico de esta manera, recomendamos no usar esta opción para realizar un despliegue en un entorno de producción. Es mejor configurar una [canalización de CI/CD para implementar modelos en entornos de producción](https://blog.tabulareditor.com/category/ci-cd/).

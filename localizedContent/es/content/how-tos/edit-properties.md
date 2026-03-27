@@ -1,6 +1,6 @@
 ---
 uid: editing-properties
-title: Editing properties
+title: Edición de propiedades
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,13 +9,14 @@ applies_to:
       full: true
 ---
 
-## Editing properties
-The Property Grid on the lower right side of the screen, shows most of the properties for the object(s) selected in the Explorer Tree. If you select multiple objects at once, the Property Grid lets you simultaneously edit properties for the selected objects. This is useful for example when setting the Format String property. Examples of properties you can set through the Property Grid:
+## Edición de propiedades
 
-* Name (you can rename objects directly in the Explorer Tree by hitting F2)
-* Description
-* Display Folder (can also be renamed directly in the Explorer Tree, also [drag/drop](drag-drop.md))
-* Hidden (can be set for multiple objects through the right-click context menu in the Explorer Tree)
-* Format String
+La Cuadrícula de propiedades, situada en la parte inferior derecha de la pantalla, muestra la mayoría de las propiedades del objeto(s) seleccionado en el Árbol del Explorador. Si seleccionas varios objetos a la vez, la Cuadrícula de propiedades te permite editar simultáneamente las propiedades de los objetos seleccionados. Esto resulta útil, por ejemplo, al establecer la propiedad "Cadena de formato". Ejemplos de propiedades que puedes establecer mediante la Cuadrícula de propiedades:
 
-Different properties exist, depending on what kind of object was selected.
+- Nombre (puedes cambiar el nombre de los objetos directamente en el árbol del Explorador pulsando F2)
+- Descripción
+- Carpeta de visualización (también puedes cambiarle el nombre directamente en el árbol del Explorador; o mediante [arrastrar y soltar](drag-drop.md))
+- Oculto (puedes establecerlo para varios objetos desde el menú contextual del árbol del Explorador, haciendo clic con el botón derecho)
+- Cadena de formato
+
+Existen distintas propiedades, según el tipo de objeto seleccionado.

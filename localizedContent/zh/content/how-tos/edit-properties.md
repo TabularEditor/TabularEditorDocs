@@ -1,6 +1,6 @@
 ---
 uid: editing-properties
-title: Editing properties
+title: 编辑属性
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,13 +9,14 @@ applies_to:
       full: true
 ---
 
-## Editing properties
-The Property Grid on the lower right side of the screen, shows most of the properties for the object(s) selected in the Explorer Tree. If you select multiple objects at once, the Property Grid lets you simultaneously edit properties for the selected objects. This is useful for example when setting the Format String property. Examples of properties you can set through the Property Grid:
+## 编辑属性
 
-* Name (you can rename objects directly in the Explorer Tree by hitting F2)
-* Description
-* Display Folder (can also be renamed directly in the Explorer Tree, also [drag/drop](drag-drop.md))
-* Hidden (can be set for multiple objects through the right-click context menu in the Explorer Tree)
-* Format String
+屏幕右下角的“属性网格”会显示资源管理器树中所选对象(们)的大多数属性。 如果你一次选择多个对象，“属性网格”可让你同时编辑这些对象的属性。 例如在设置“格式字符串”属性时，这会很有用。 你可以通过“属性网格”设置的属性示例：
 
-Different properties exist, depending on what kind of object was selected.
+- 名称（在资源管理器树中按 F2 可直接重命名对象）
+- 描述
+- 显示文件夹（同样可在资源管理器树中直接重命名，并支持[拖放](drag-drop.md)）
+- 隐藏（可在资源管理器树中通过右键菜单对多个对象进行设置）
+- 格式字符串
+
+根据所选对象的类型不同，可用的属性也会有所不同。

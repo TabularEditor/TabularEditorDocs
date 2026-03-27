@@ -1,6 +1,6 @@
-﻿---
+---
 uid: getting-started-te2
-title: Getting Started with Tabular Editor 2
+title: Primeros pasos con Tabular Editor 2
 author: Daniel Otykier
 updated: 2021-09-21
 applies_to:
@@ -10,100 +10,106 @@ applies_to:
     - product: Tabular Editor 3
       none: true
 ---
-# Getting Started
 
-## Installation
-Simply download the .msi file from the [Release page](https://github.com/TabularEditor/TabularEditor/releases/latest) and run the .msi installation.
+# Primeros pasos
 
-## Prerequisites
-None.
+## Instalación
+
+Simplemente descarga el archivo .msi desde la [página de versiones](https://github.com/TabularEditor/TabularEditor/releases/latest) y ejecuta el instalador .msi.
+
+## Requisitos previos
+
+Ninguno.
 
 > [!NOTE]
-> Tabular Editor uses the [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) to load and save metadata to and from Model.bim files or existing databases. This is included in the .msi installer. Visit the official Microsoft documentation for [Analysis Services Client Libraries](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-data-providers).
+> Tabular Editor usa el [Tabular Object Model](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) para cargar metadatos desde archivos Model.bim o bases de datos existentes, y volver a guardarlos en ellos. Esto se incluye en el instalador .msi. Consulta la documentación oficial de Microsoft sobre [Analysis Services Client Libraries](https://docs.microsoft.com/en-us/azure/analysis-services/analysis-services-data-providers).
 
-## System requirements
+## Requisitos del sistema
 
-- **Operating system:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 or newer
-- **.NET Framework:** [4.6](https://dotnet.microsoft.com/download/dotnet-framework)
+- **Sistema operativo:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 o posterior
+- **.NET Framework:** [4,6](https://dotnet.microsoft.com/download/dotnet-framework)
 
-## Working with Tabular Editor
+## Trabajar con Tabular Editor
 
-The recommended workflow is to set up the tables and relationships using SSDT as normal, and then use Tabular Editor to do the rest. That is: Create calculated columns, measures, hierarchies, perspectives, translations, display folders, and every other kind of fine-tuning you can think of.
+El flujo de trabajo recomendado es configurar las tablas y relaciones con SSDT como de costumbre y, a continuación, usar Tabular Editor para el resto. Es decir: crea columnas calculadas, medidas, jerarquías, perspectivas, traducciones, carpetas de visualización y cualquier otro ajuste fino que se te ocurra.
 
-Load a Model.bim file by choosing the Open > From File... option in the File menu (CTRL+O), or open an existing database from an instance of Analysis Services by choosing the Open > From DB... option. In the latter case, you will be prompted for a server name and optional credentials:
+Carga un archivo Model.bim seleccionando Abrir > Desde archivo... en el menú Archivo (CTRL+O), o abre una base de datos existente desde una instancia de Analysis Services seleccionando Abrir > Desde BD... opción. En este último caso, se te pedirá un nombre de servidor y credenciales opcionales:
 
-![Connecting to an already deployed Tabular Model](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
+![Conexión a un modelo tabular ya implementado](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
 
-This also works with the new Azure Analysis Services PaaS. The "Local Instance" dropdown, may be used to browse and connect to any running instances of Power BI Desktop or Visual Studio Integrated Workspaces. **Note that although Tabular Editor can make changes to a Power BI model through the TOM, not all modeling operations are supported by Microsoft. [More information](Power-BI-Desktop-Integration.md)**
+Esto también es compatible con el nuevo Azure Analysis Services PaaS. El menú desplegable "Instancia local" se puede usar para explorar y conectarte a cualquier instancia en ejecución de Power BI Desktop o a espacios de trabajo integrados de Visual Studio. **Ten en cuenta que, aunque Tabular Editor puede realizar cambios en un modelo de Power BI a través de TOM, Microsoft no admite todas las operaciones de modelado. [Más información](Power-BI-Desktop-Integration.md)**
 
-After clicking "OK", you will be presented with a list of databases on the server.
+Después de hacer clic en "Aceptar", se mostrará una lista de bases de datos en el servidor.
 
-This is how the UI looks after a model has been loaded into Tabular Editor:
+Así es como se ve la interfaz de usuario después de cargar un modelo en Tabular Editor:
 
-![The main UI of Tabular Editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Main%20UI.png)
+![La interfaz de usuario principal de Tabular Editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Main%20UI.png)
 
-The tree on the left side of the screen, displays all tables in the Tabular Model. Expanding a table will show all columns, measures and hierarchies within the table, grouped by their Display Folders. Use the buttons just above the tree, to toggle display folders, hidden objects, certain types of objects, or filter out objects by names. Right-clicking anywhere in the tree, will bring up a context menu with common actions, such as adding new measures, making an object hidden, duplicating objects, deleting objects, etc. Hit F2 to rename the currently selected object or multiselect and right-click to batch rename multiple objects.
+El árbol del lado izquierdo de la pantalla muestra todas las tablas del modelo tabular. Al expandir una tabla, se mostrarán todas las columnas, medidas y jerarquías dentro de la tabla, agrupadas por sus carpetas de visualización. Usa los botones justo encima del árbol para alternar las carpetas de visualización, los objetos ocultos, ciertos tipos de objetos o para filtrar objetos por nombre. Al hacer clic con el botón derecho en cualquier parte del árbol, se abrirá un menú contextual con acciones habituales, como agregar nuevas medidas, ocultar un objeto, duplicar objetos, eliminar objetos, etc. Pulsa F2 para cambiar el nombre del objeto seleccionado actualmente, o selecciona varios y haz clic con el botón derecho para cambiar el nombre en lote de varios objetos.
 
-![Batch Renaming lets you rename multiple objects simultaneously](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/BatchRename.png)
+![El cambio de nombre en lote te permite cambiar el nombre de varios objetos a la vez](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/BatchRename.png)
 
-On the top right side of the main UI, you see the DAX Editor, which may be used to edit the DAX expression of any measure or calculated column in the model. Click the "DAX Formatter" button to automatically format the code through www.daxformatter.com.
+En la parte superior derecha de la interfaz de usuario principal, verás el Editor de DAX, que puedes usar para editar la expresión DAX de cualquier medida o columna calculada del modelo. Haz clic en el botón "DAX Formatter" para dar formato automáticamente al código a través de www.daxformatter.com.
 
-Use the property grid in the lower right corner, to examine and set properties of objects, such as Format String, Description along with translations and perspective memberships. You can also set the Display Folder property here, but it's easier to simply drag and drop objects within the tree to update their Display Folder (try selecting multiple objects using CTRL or SHIFT).
+Usa la cuadrícula de propiedades en la esquina inferior derecha para revisar y configurar las propiedades de los objetos, como la cadena de formato, la descripción, las traducciones y la pertenencia a perspectivas. Aquí también puedes establecer la propiedad "carpeta de visualización", pero es más sencillo arrastrar y soltar objetos dentro del árbol para actualizar su carpeta de visualización (prueba a seleccionar varios objetos con CTRL o SHIFT).
 
-To edit perspectives or translations (cultures), select the "Model" object in the tree, and locate the "Model Perspectives" or "Model Cultures" properties, in the property grid. Click the small ellipsis button to open a collection editor for adding/removing/editing perspectives/cultures.
+Para editar perspectivas o traducciones (configuraciones regionales), selecciona el objeto "Model" en el árbol y localiza las propiedades "Model Perspectives" o "Model Cultures" en la cuadrícula de propiedades. Haz clic en el pequeño botón de puntos suspensivos para abrir un editor de colecciones y agregar, quitar o editar perspectivas y configuraciones regionales.
 
-![Editing perspectives - click the ellipsis button to the right](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Edit%20Perspectives.png)
+![Edición de perspectivas: haz clic en el botón de puntos suspensivos de la derecha](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Edit%20Perspectives.png)
 
-To save your changes back to the Model.bim file, click the save button or hit CTRL+S. If you opened an existing Tabular Database, the changes are saved directly back to the database. You will be prompted if the database was changed since you loaded it into Tabular Editor. You can always undo your changes by pressing CTRL+Z.
+Para guardar los cambios en el archivo Model.bim, haz clic en el botón Guardar o pulsa CTRL+S. Si abriste una base de datos tabular existente, los cambios se guardan directamente en la base de datos. Se te avisará si la base de datos cambió desde que la cargaste en Tabular Editor. Siempre puedes deshacer los cambios pulsando CTRL+Z.
 
-If you want to deploy your model to another location, go to the "Model" menu and choose "Deploy".
+Si quieres implementar tu modelo en otra ubicación, ve al menú "Modelo" y elige "Implementar".
 
-## Deployment
-Tabular Editor comes with a deployment wizard that provides a few benefits compared to deploying from SSDT - especially when deploying to an existing database. After choosing a server and a database to deploy to, you have the following options for the deployment at hand:
+## Implementación
 
-![Deployment Wizard](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
+Tabular Editor incluye un asistente de implementación que ofrece algunas ventajas frente a la implementación desde SSDT, especialmente al implementar en una base de datos existente. Después de elegir un servidor y una base de datos donde realizar la implementación, tienes las siguientes opciones:
 
-Leaving the "Deploy Connections" box unchecked, will make sure that all the data sources on the target database stay untouched. You will get an error if your model contains one or more tables with a data source, that does not already exist in the target database.
+![Asistente de implementación](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Deployment.png)
 
-Similarly, leaving out "Deploy Table Partitions", will make sure that existing partitions on your tables are not changed, leaving the data in the partitions intact.
+Si dejas sin marcar la casilla "Implementar conexiones", te aseguras de que todos los Data source de la base de datos de destino se mantengan intactos. Recibirás un error si tu modelo contiene una o más tablas con un Data source que no exista ya en la base de datos de destino.
 
-When the "Deploy Roles" box is checked, the roles in the target database will be updated to reflect what you have in the loaded model, however if the "Deploy Role Members" is unchecked, the members of each role will be unchanged in the target database.
+Del mismo modo, si omites "Implementar particiones de tabla", te aseguras de que las particiones existentes en tus tablas no se modifiquen, manteniendo intactos los datos de las particiones.
 
-## Command Line usage
-You can use the command line for automated deployment. All deployment options that are available through the GUI, are also available through the command line.
+Cuando la casilla "Implementar roles" está marcada, los roles de la base de datos de destino se actualizarán para reflejar lo que tienes en el modelo cargado; sin embargo, si la casilla "Implementar miembros de rol" está desmarcada, los miembros de cada rol no cambiarán en la base de datos de destino.
 
-### Deployment Examples
+## Uso de la línea de comandos
+
+Puedes usar la línea de comandos para una implementación automatizada. Todas las opciones de implementación disponibles en la GUI también lo están en la línea de comandos.
+
+### Ejemplos de implementación
 
 `TabularEditor.exe c:\Projects\Model.bim`
 
-Opens the Tabular Editor GUI and loads the specified Model.bim file (without deploying anything).
+Abre la GUI de Tabular Editor y carga el archivo Model.bim especificado (sin implementar nada).
 
 `TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
-Deploys the specified Model.bim file to the SSAS instance running on localhost, overwriting or creating the AdventureWorks database. The GUI will not be loaded.
+Implementa el archivo Model.bim especificado en la instancia de SSAS que se ejecuta en localhost, sobrescribiendo o creando la base de datos AdventureWorks. La GUI no se cargará.
 
-By default, partitions, data sources and roles will not be overwritten in the target database. This behaviour can be changed by adding one or more of the following switches to the command above:
+De forma predeterminada, las particiones, los Data source y los roles no se sobrescribirán en la base de datos de destino. Este comportamiento se puede cambiar añadiendo uno o más de los siguientes modificadores al comando anterior:
 
-* `-P` Overwrite **p**artitions
-* `-C` Overwrite **c**onnections (data sources)
-* `-R` Overwrite **r**oles
-* `-M` Overwrite role **m**embers
+- `-P` Sobrescribir **p**articiones
+- `-C` Sobrescribir **c**onexiones (Data source)
+- `-R` Sobrescribir **r**oles
+- `-M` Sobrescribir **m**iembros del rol
 
-More information on command-line options can be found [here](../features/Command-line-Options.md).
+Puedes encontrar más información sobre las opciones de la línea de comandos [aquí](../features/Command-line-Options.md).
 
 > [!NOTE]
-> Since TabularEditor.exe is a Windows Forms application, running it from the command line will execute the application in a different thread, returning control to the caller immediately. This may cause issues when running deployments as part of a batch job where you need to await successful deployment before proceeding with the job. If you experience these issues, use `start /wait` to let TabularEditor finish its job before returning control to the caller:
-> 
+> Como TabularEditor.exe es una aplicación de Windows Forms, al ejecutarla desde la línea de comandos se hará en un subproceso distinto, devolviendo el control al proceso que la invocó de inmediato. Esto puede causar problemas al ejecutar despliegues como parte de un trabajo por lotes, cuando necesitas esperar a que el despliegue se complete correctamente antes de continuar con la tarea. Si tienes estos problemas, usa `start /wait` para que TabularEditor termine su trabajo antes de devolver el control al proceso que lo invocó:
+>
 > `start /wait TabularEditor.exe c:\Projects\Model.bim -deploy localhost AdventureWorks`
 
-## Advanced Scripting
-Tabular Editor lets you use C# to script changes to the loaded model. This is practical when you want to apply several changes to many objects at once. The Advanced Script editor has access to two objects:
+## Scripting avanzado
 
-* `Selected` which represents all objects that are currently selected in the explorer tree.
-* `Model` which represents the entire Tabular Object Model tree.
+Tabular Editor te permite usar C# para crear scripts que modifiquen el modelo cargado. Esto es práctico cuando quieres aplicar varios cambios a muchos objetos a la vez. El editor de scripts avanzado tiene acceso a dos objetos:
 
-The Advanced Script editor has some limited IntelliSense functionality to get you started:
+- `Selected`, que representa todos los objetos que están seleccionados actualmente en el árbol del explorador.
+- `Model`, que representa todo el árbol del Tabular Object Model.
 
-![IntelliSense helps you create scripts for Tabular Editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AdvancedEditor%20intellisense.png)
+El editor de scripts avanzado incluye una funcionalidad de IntelliSense limitada para ayudarte a empezar:
 
-More documentation and examples on Advanced Scripting, can be [found here](../how-tos/Advanced-Scripting.md).
+![IntelliSense te ayuda a crear scripts para Tabular Editor](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AdvancedEditor%20intellisense.png)
+
+Puedes encontrar más documentación y ejemplos sobre scripting avanzado [aquí](../how-tos/Advanced-Scripting.md).

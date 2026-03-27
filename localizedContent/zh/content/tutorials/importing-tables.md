@@ -1,6 +1,6 @@
-﻿---
+---
 uid: importing-tables
-title: Importing Tables
+title: 导入表格
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# (Tutorial) Importing Tables
+
+# （教程）导入表格
 
 [!include[importing-tables](~/content/features/import-tables.partial.md)]

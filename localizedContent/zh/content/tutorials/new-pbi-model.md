@@ -1,6 +1,6 @@
-﻿---
+---
 uid: new-pbi-model
-title: Create a Power BI Semantic Model
+title: 创建 Power BI 语义模型
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:
@@ -13,29 +13,30 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: "Premium Per User XMLA Endpoints Only"
+          note: "仅限高级每用户 XMLA 终结点"
         - edition: Enterprise
           full: true
 ---
-# (Tutorial) Creating your first Power BI semantic model
 
-This page walks you through the process of creating a new Power BI semantic model from scratch using Tabular Editor 3.
+# （教程）创建第一个 Power BI 语义模型
+
+本页将带你从零开始，使用 Tabular Editor 3 创建一个全新的 Power BI 语义模型。
 
 > [!IMPORTANT]
-> Tabular Editor 3 Business Edition is limited to [Power BI Premium Per User](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-per-user-faq). For Fabric/Power BI Premium or Embedded capacity, you must upgrade to Tabular Editor 3 Enterprise Edition. In either case, the Power BI workspace in which the semantic model is to be deployed, must have its [XMLA read/write endpoint enabled](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write).
+> Tabular Editor 3 商业版仅适用于 [Power BI Premium Per User](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-per-user-faq)。 如果你使用 Fabric/Power BI Premium 或 Embedded 容量，则必须升级到 Tabular Editor 3 企业版。 无论哪种情况，要部署语义模型的 Power BI Workspace 都必须启用 [XMLA 读/写端点](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write)。
 >
-> Tabular Editor 3 Desktop Edition does not have any support for Power BI semantic models.
-> 
-> [More information](xref:editions).
+> Tabular Editor 3 桌面版不支持 Power BI 语义模型。
+>
+> [更多信息](xref:editions)。
 
-##### Creating a new semantic model
+##### 创建新的语义模型
 
-1. From the File menu, choose New > Model... or hit `CTRL+N`
+1. 在“文件”菜单中，选择“新建” > “模型……” 或按 `CTRL+N`
 
-![New model](~/content/assets/images/tutorials/new-pbi-model.png)
+![新建模型](~/content/assets/images/tutorials/new-pbi-model.png)
 
-- Provide a name for your model or use the default value. Then, set the compatibility level to "1609 (Power BI / Fabric)".
-- For the best development experience, check the "Use workspace database" option. This requires that you have a development workspace available in Power BI, with XMLA read/write enabled. When you click OK, you will be prompted to enter the connection string for the Power BI workspace in which you want the workspace database created.
+- 为模型指定名称，或使用默认值。 然后，将兼容级别设置为“1609（Power BI / Fabric）”。
+- 为了获得最佳开发体验，请勾选“使用 Workspace 数据库”选项。 这要求你在 Power BI 中有一个可用的开发 Workspace，并已启用 XMLA 读/写。 单击“确定”后，系统会提示你输入 Power BI Workspace 的连接字符串，以便在该 Power BI Workspace 中创建 Workspace 数据库。
 
 > [!NOTE]
-> With a workspace database, you can validate Power Query (M expressions) and import table schema from Power Query expressions. You can also refresh and query data in the workspace database, making it easier to debug and test your DAX expressions.
+> 使用 Workspace 数据库，你可以验证 Power Query（M 表达式），并从 Power Query 表达式中导入表架构。 你还可以在 Workspace 数据库中刷新和查询数据，便于调试和测试 DAX 表达式。

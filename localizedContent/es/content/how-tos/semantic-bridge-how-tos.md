@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-how-tos
-title: Semantic Bridge How-Tos
+title: Guías prácticas del puente semántico
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -17,27 +17,28 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Semantic Bridge How-Tos
 
-These how-tos are focused on interacting with the [Databricks Metric View object model](xref:semantic-bridge-metric-view-object-model) and supporting import workflows to bring these Metric Views into a Tabular semantic model.
+# Guías prácticas del puente semántico
 
-## Getting Started
+Estas guías prácticas se centran en interactuar con el [modelo de objetos de Metric View de Databricks](xref:semantic-bridge-metric-view-object-model) y en respaldar los flujos de trabajo de importación para incorporar estas Metric Views en un modelo semántico tabular.
 
-- @semantic-bridge-load-inspect - Load a Metric View and explore its structure
-- @semantic-bridge-import - Import a Metric View to Tabular and view diagnostics
+## Primeros pasos
 
-## Validation
+- @semantic-bridge-load-inspect - Cargar una Metric View y explorar su estructura
+- @semantic-bridge-import - Importar una Metric View a Tabular y ver los diagnósticos
 
-- @semantic-bridge-validate-default - Validate with built-in rules
-- @semantic-bridge-validate-simple-rules - Create predicate-based validation rules for naming conventions
-- @semantic-bridge-validate-contextual-rules - Create rules with cross-object checks like duplicate detection
+## Validación
 
-## Manipulating the Object Model
+- @semantic-bridge-validate-default - Validar con reglas integradas
+- @semantic-bridge-validate-simple-rules - Crear reglas de validación basadas en predicados para convenciones de nomenclatura
+- @semantic-bridge-validate-contextual-rules - Crear reglas con comprobaciones entre objetos, como la detección de duplicados
 
-- @semantic-bridge-add-object - Add a new object to a Metric View
-- @semantic-bridge-remove-object - Remove objects from a Metric View
-- @semantic-bridge-rename-objects - Rename objects using copy-modify pattern
+## Manipulación del modelo de objetos
 
-## Serialization
+- @semantic-bridge-add-object - Agregar un nuevo objeto a una Metric View
+- @semantic-bridge-remove-object - Quitar objetos de una Metric View
+- @semantic-bridge-rename-objects - Cambiar el nombre de los objetos mediante el patrón de copiar y modificar
 
-- @semantic-bridge-serialize - Serialize a Metric View back to YAML
+## Serialización
+
+- @semantic-bridge-serialize - Serializar una Metric View de nuevo a YAML

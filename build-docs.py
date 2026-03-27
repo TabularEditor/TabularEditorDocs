@@ -69,35 +69,44 @@ def get_available_languages() -> list[str]:
     ])
 
 
-def prepare_localized_content(lang: str) -> int:
+def prepare_localized_content(lang: str, sync: bool = False) -> int:
     """Run sync-localized-content.py for a language.
-    
-    For English: copies all source content
-    For other languages: syncs with translation tracking, 
-                         falls back to English for outdated/missing files
+
+    For English: always copies all source content (required for docfx)
+    For other languages:
+        sync=True:  full English fallback sync (hash comparison, copy missing/outdated)
+        sync=False: only sync shared directories (assets, api) — Crowdin manages translations
     """
     if lang == "en":
-        description = "Syncing English content from source"
+        # English always needs full sync
+        return run_command(
+            [sys.executable, "build_scripts/sync-localized-content.py", "--sync", "en"],
+            "Syncing English content from source"
+        )
+
+    if sync:
+        return run_command(
+            [sys.executable, "build_scripts/sync-localized-content.py", "--sync", lang],
+            f"Syncing {lang} content (fallback to English for outdated)"
+        )
     else:
-        description = f"Syncing {lang} content (fallback to English for outdated)"
-    
-    return run_command(
-        [sys.executable, "build_scripts/sync-localized-content.py", "--sync", lang],
-        description
-    )
+        return run_command(
+            [sys.executable, "build_scripts/sync-localized-content.py", "--shared-only", lang],
+            f"Syncing shared directories for {lang}"
+        )
 
 
-def build_language(lang: str) -> int:
+def build_language(lang: str, sync: bool = False) -> int:
     """Build documentation for a specific language."""
     config_path = f"localizedContent/{lang}/docfx.json"
-    
+
     if not os.path.exists(config_path):
         print(f"Error: Config file not found: {config_path}")
         print("Run 'python gen_redirects.py' first to generate configs.")
         return 1
-    
+
     # Prepare content (copy from source for en, or fallbacks for other langs)
-    result = prepare_localized_content(lang)
+    result = prepare_localized_content(lang, sync=sync)
     if result != 0:
         return result
     
@@ -213,6 +222,7 @@ def main() -> int:
     parser.add_argument("--serve", action="store_true", help="Build English and serve locally")
     parser.add_argument("--skip-gen", action="store_true", help="Skip gen_redirects.py")
     parser.add_argument("--no-api-copy", action="store_true", help="Skip copying API docs")
+    parser.add_argument("--sync", action="store_true", help="Sync English fallback for missing/outdated translations (for local dev)")
     
     args = parser.parse_args()
     
@@ -247,7 +257,7 @@ def main() -> int:
     
     if args.serve:
         # Build English only and serve
-        result = build_language("en")
+        result = build_language("en", sync=True)
         if result != 0:
             return result
         
@@ -286,7 +296,7 @@ def main() -> int:
     
     # Build all requested languages
     for lang in build_langs:
-        result = build_language(lang)
+        result = build_language(lang, sync=args.sync)
         if result != 0:
             return result
         

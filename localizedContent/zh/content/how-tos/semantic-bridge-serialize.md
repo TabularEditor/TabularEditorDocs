@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-serialize
-title: Serialize a Metric View to YAML
+title: 将 Metric View 序列化为 YAML
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -17,20 +17,20 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Serialize a Metric View to YAML
 
-This how-to demonstrates how to serialize a Metric View back to YAML format, either as a string or saved to a file.
+# 将 Metric View 序列化为 YAML
+
+本操作指南演示如何将 Metric View 序列化回 YAML 格式：既可以作为字符串获取，也可以保存到文件中。
 
 > [!WARNING]
-> The MVP only supports v0.1 Metric View properties. Any v1.1 metadata present in a loaded Metric View is silently ignored and will be lost when you serialize.
-> Do not overwrite a source YAML file that contains v1.1 metadata.
-
+> MVP 仅支持 v0.1 的 Metric View 属性。 如果加载的 Metric View 中包含任何 v1.1 元数据，系统会静默忽略；在序列化时，这些元数据将会丢失。
+> 不要覆盖包含 v1.1 元数据的源 YAML 文件。
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
-## Serialize to a string
+## 序列化为字符串
 
-Use `Serialize()` to get the YAML representation:
+使用 `Serialize()` 获取 YAML 表示形式：
 
 ```csharp
 var yaml = SemanticBridge.MetricView.Serialize();
@@ -42,9 +42,9 @@ sb.AppendLine(yaml);
 Output(sb.ToString());
 ```
 
-## Save to a file
+## 保存到文件
 
-Use `Save(path)` to write the YAML directly to disk:
+使用 `Save(path)` 将 YAML 直接写入磁盘：
 
 ```csharp
 var path = "C:/MetricViews/updated-sales-metrics.yaml";
@@ -54,9 +54,9 @@ SemanticBridge.MetricView.Save(path);
 Output($"Metric View saved to: {path}");
 ```
 
-## Round-trip workflow
+## 往返式工作流
 
-A common workflow is to load, modify, and save a Metric View:
+一种常见的工作流是加载、修改并保存 Metric View：
 
 ```csharp
 using System.Globalization;
@@ -90,10 +90,10 @@ sb.AppendLine(yaml);
 Output(sb.ToString());
 ```
 
-**Output:**
+**输出：**
 
 ```
-Modified YAML:
+修改后的 YAML：
 --------------
 version: 0.1
 source: sales.fact.orders
@@ -112,7 +112,7 @@ dimensions:
   expr: product.product_name
 - name: Product Category
   expr: product.category
-- name: Customer Segment
+- name: 客户分段
   expr: customer.segment
 - name: Order Date
   expr: date.full_date
@@ -131,7 +131,7 @@ measures:
   expr: COUNT(DISTINCT customer_id)
 ```
 
-## See also
+## 另见
 
 - @semantic-bridge-load-inspect
 - @semantic-bridge-import

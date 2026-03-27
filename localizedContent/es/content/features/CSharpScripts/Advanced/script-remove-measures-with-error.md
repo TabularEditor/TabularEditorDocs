@@ -1,6 +1,6 @@
 ---
 uid: script-remove-measures-with-error
-title: View/Remove Measures with Errors
+title: Ver/eliminar medidas con errores
 author: Kurt Buhler
 updated: 2023-02-28
 applies_to:
@@ -10,45 +10,48 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# View/Remove Measures with Errors
 
-## Script Purpose
-If you want to see all the measures that have errors and have the option to delete them from the model, saving a back-up .tsv of the deleted measures to a selected directory (in case you want to re-add them, later).
+# Ver/eliminar medidas con errores
+
+## Propósito del script
+
+Si quieres ver todas las medidas con errores y tener la opción de eliminarlas del modelo, puedes guardar una copia de seguridad en un archivo .tsv de las medidas eliminadas en el directorio que selecciones (por si quieres volver a agregarlas más adelante).
 
 ## Script
 
-### View & Remove Measures with Errors
+### Ver y eliminar medidas con errores
+
 ```csharp
-// This script scans the model and shows all measures with errors, giving the option to remove them.
+// Este script examina el modelo y muestra todas las medidas con errores, dando la opción de quitarlas.
 //
-// .GetCachedSemantics(...) method is only available in TE3
+// El método .GetCachedSemantics(...) solo está disponible en TE3
 using System.Windows.Forms;
 
-// Hide the 'Running Macro' spinbox
+// Oculta el spinbox de "Running Macro"
 ScriptHelper.WaitFormVisible = false;
 
-// Get all the measures that have errors
+// Obtén todas las medidas que tienen errores
 var measuresWithError = Model.AllMeasures.Where(m => m.GetCachedSemantics(ExpressionProperty.Expression).HasError).ToList();
-//Prior to Tabular Editor 3.12.0 the GetSemantics method must be used.
+// En versiones anteriores a Tabular Editor 3.12.0 debe usarse el método GetSemantics.
 //var measuresWithError = Model.AllMeasures.Where(m => m.GetSemantics(ExpressionProperty.Expression).HasError).ToList();
 
-// If no measures with errors, end script with error.
+// Si no hay medidas con errores, finaliza el script con un error.
 if ( measuresWithError.Count == 0 )
 { 
-Info ( "No measures with errors! 👍" );
+Info ( "¡No hay medidas con errores! 👍" );
 }
 
-// Handle erroneous measures
+// Gestiona las medidas erróneas
 else 
 {
 
-// View the list of measures with an error
+// Muestra la lista de medidas con un error
 measuresWithError.Output();
 
-//   From the list, you can select 1 or more measures to delete
-var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Select measures to delete.\nYou will be able to export a back-up, later.");
+//   En la lista, puedes seleccionar 1 o más medidas para eliminarlas
+var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Selecciona las medidas que quieres eliminar.\nMás adelante podrás exportar una copia de seguridad.");
 
-    // Delete the selected measures
+    // Elimina las medidas seleccionadas
     try
     {
         foreach ( var _m in _ToDelete ) 
@@ -57,72 +60,70 @@ var _ToDelete = SelectObjects(measuresWithError, measuresWithError, "Select meas
             }
     
         Info ( 
-            "Deleted " + 
+            "Se eliminaron " + 
             Convert.ToString(_ToDelete.Count()) + 
-            " measures with errors." 
+            " medidas con errores." 
         );
     
-        // Create an instance of the FolderBrowserDialog class
+        // Crea una instancia de la clase FolderBrowserDialog
         FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
         
-        // Set the title of the dialog box
-        folderBrowserDialog.Description = "Select a directory to output a backup of the deleted measures.";
+        // Establece el título del cuadro de diálogo
+        folderBrowserDialog.Description = "Selecciona un directorio donde guardar una copia de seguridad de las medidas eliminadas.";
         
-        // Set the root folder of the dialog box
+        // Establece la carpeta raíz del cuadro de diálogo
         folderBrowserDialog.RootFolder = Environment.SpecialFolder.MyComputer;
         
-        // Show the dialog box and get the result
+        // Muestra el cuadro de diálogo y obtiene el resultado
         DialogResult result = folderBrowserDialog.ShowDialog();
         
-        // Check if the user clicked the OK button and get the selected path
+        // Comprueba si el usuario hizo clic en Aceptar y obtiene la ruta seleccionada
         if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog.SelectedPath))
             {
-                // Get the output path as a string
+                // Obtén la ruta de salida como una cadena
                 string _outputPath = folderBrowserDialog.SelectedPath;
                 
-                // Get the properties of the deleted measures
+                // Obtén las propiedades de las medidas eliminadas
                 var _backup = ExportProperties( _ToDelete );
     
-                // Save a backup of the deleted measures
+                // Guarda una copia de seguridad de las medidas eliminadas
                 SaveFile( _outputPath + "/DeletedMeasures-" + Model.Name + DateTime.Today.ToString("-yyyy-MM-dd") + ".tsv", _backup);
     
                 Info ( 
-                    "Exported a backup of " + 
+                    "Se exportó una copia de seguridad de " + 
                     Convert.ToString(_ToDelete.Count()) +
-                    " Measures to " + 
+                    " medidas a " + 
                     _outputPath
                 );
             }
     }
     catch
-    // Display an info box if no measure was selected
+    // Muestra un cuadro de información si no se seleccionó ninguna medida
     {
-    Info ( "No measure selected." );
+    Info ( "No se seleccionó ninguna medida." );
     }
 }
 
 ```
-### Explanation
-This snippet gets all the measures that have errors according to the Tabular Editor Semantic Analysis. It then will display them in an output box where you can manually browse them or make changes. Thereafter, measures can be selected for removal. The removed measures can be saved as a back-up .tsv file in case you want to import them, later.
 
-## Example Output
+### Explicación
+
+Este fragmento obtiene todas las medidas que tienen errores según el análisis semántico de Tabular Editor. Después, las mostrará en una ventana de salida donde podrás revisarlas manualmente o hacer cambios. A continuación, se pueden seleccionar medidas para eliminarlas. Las medidas quitadas se pueden guardar como un archivo .tsv de copia de seguridad por si quieres importarlas más adelante.
+
+## Ejemplo de salida
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-view-error-measures.png" alt="An output dialog that lets the user view and edit any measures with errors in Tabular Editor" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> An output dialog allows you to view and also edit any measures that currently have 'errors' according to the analysis services semantic analysis.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-view-error-measures.png" alt="An output dialog that lets the user view and edit any measures with errors in Tabular Editor" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Un cuadro de diálogo de salida te permite ver y editar cualquier medida que actualmente tenga "errores" según el análisis semántico de Analysis Services.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-delete-error-measures.png" alt="A selection dialog that lets the user select measures to delete" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Measures with errors can be selected for deletion.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-delete-error-measures.png" alt="A selection dialog that lets the user select measures to delete" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Las medidas con errores se pueden seleccionar para eliminarlas.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-delete-error-measures-success.png" alt="A confirmation dialog that informs the user the deletion was successful" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> A confirmation dialog will inform you deletion of the measures was successful.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-delete-error-measures-success.png" alt="A confirmation dialog that informs the user the deletion was successful" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Un cuadro de diálogo de confirmación te informará de que la eliminación de las medidas se realizó correctamente.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-delete-error-measures-backup.png" alt="A dialog that lets the user select a directory to save a .tsv back-up of the deleted measure metadata" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> An optional .tsv backup of the measure properties and definitions can be saved to a local directory, in case they need to be re-added, later.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-delete-error-measures-backup.png" alt="A dialog that lets the user select a directory to save a .tsv back-up of the deleted measure metadata" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 4:</strong> De forma opcional, se puede guardar en un directorio local una copia de seguridad .tsv de las propiedades y definiciones de las medidas, por si fuera necesario volver a agregarlas más adelante.</figcaption>
 </figure>

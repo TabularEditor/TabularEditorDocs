@@ -1,6 +1,6 @@
 ---
 uid: incremental-refresh-setup
-title: Set Up a New Refresh Policy
+title: Configurar una nueva política de actualización
 author: Kurt Buhler
 updated: 2023-01-09
 applies_to:
@@ -16,26 +16,27 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Setting up Incremental Refresh
 
-![Incremental Refresh Setup Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-setup-refresh-policy.png)
+# Configurar la actualización incremental
+
+![Resumen Visual de la configuración de actualización incremental](~/content/assets/images/tutorials/incremental-refresh-setup-refresh-policy.png)
 
 ---
 
-To set up Incremental Refresh, you must configure a new Refresh Policy for the table. This is easily done by configuring the Refresh Policy properties once _EnableRefreshPolicy_ is set to `True`:
+Para configurar la actualización incremental, debe definir una nueva política de actualización para la tabla. Esto se hace fácilmente configurando las propiedades de la política de actualización una vez que _EnableRefreshPolicy_ se haya establecido en `True`:
 
 > [!IMPORTANT]
-> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. 
-> For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> La configuración de la actualización incremental con Tabular Editor 3 solo se admite para Datasets alojados en el servicio Power BI Datasets.
+> Para Analysis Services, se requiere [particionado](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizado.
 
-### Configure a New Refresh Policy
+### Configurar una nueva política de actualización
 
-1. __Connect to the model:__ Connect to the Power BI XMLA endpoint of your workspace, and open the dataset upon which you want to configure Incremental Refresh.
-2. __Create the `RangeStart` and `RangeEnd` Parameters:__ Incremental refresh requires the `RangeStart` and `RangeEnd` parameters to be created ([more information](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)). Add two new Shared Expressions in Tabular Editor:
+1. **Conéctese al modelo:** Conéctese al punto de conexión XMLA de Power BI de su Workspace y abra el Dataset en el que desea configurar la actualización incremental.
+2. **Crea los parámetros `RangeStart` y `RangeEnd`:** La actualización incremental requiere que se creen los parámetros `RangeStart` y `RangeEnd` ([más información](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)). Agregue dos nuevas expresiones compartidas en Tabular Editor:
 
 <img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 
-3. __Configure the `RangeStart` and `RangeEnd` Parameters:__ Name them `RangeStart` and `RangeEnd` respectively, set their `Kind` property to "M" and set their expression to the following (the actual date/time value you specify doesn't matter, as it will be set by Power BI Service when starting the data refresh):
+3. **Configure los parámetros `RangeStart` y `RangeEnd`:** Asígneles los nombres `RangeStart` y `RangeEnd`, respectivamente; establezca su propiedad `Kind` en "M" y defina su expresión como se indica a continuación (el valor real de fecha y hora que especifique no importa, ya que el servicio de Power BI lo establecerá al iniciar la actualización de datos):
 
 ```M
 #datetime(2021, 6, 9, 0, 0, 0) 
@@ -48,20 +49,20 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
 ```
 
 <img src="~/content/assets/images/shared-expression-kind.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
-  
-4. __Copy Partition M Code__: Navigate to the table for which you want to configure incremental refresh. Fold it out and select your partition containing your Power Query M Expression. Copy your code to Notepad, you will need it in step 6.
 
-5. __Enable the Table Refresh Policy:__ In the _'Properties'_ window, set the `EnableRefreshPolicy` property on the table to `True`:
+4. **Copie el código M de la partición:** Vaya a la tabla para la que desea configurar la actualización incremental. Despliegue la tabla y seleccione la partición que contiene su expresión M de Power Query. Copia el código en el Bloc de notas; lo necesitarás en el paso 6.
+
+5. **Habilite la política de actualización de la tabla:** En la ventana _Propiedades_, establezca la propiedad `EnableRefreshPolicy` de la tabla en `True`:
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-enable-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 
-6. __Configure the Table Refresh:__ Next, select the table for which you want to configure incremental refresh. In the **Expression Editor** window, Select __'Source Expression'__ from the dropdown, insert your Power Query M Expression from step 4 and alter the Power Query M Expression such that there is a filter step on the date column for which you will enable incremental refresh. 
+6. **Configura la actualización de la tabla:** A continuación, selecciona la tabla en la que quieres configurar la actualización incremental. En la ventana del **Editor de expresiones**, selecciona **'Source Expression'** en la lista desplegable, inserta tu expresión de Power Query M del paso 4 y modifícala para que incluya un paso de filtrado en la columna de fecha para la que habilitarás la actualización incremental.
 
-   _An example of one such valid filter step is below:_
-  
+   _A continuación se muestra un ejemplo de un paso de filtro válido:_
+
 ```M
-// The filter step must be able to fold back to the data source
-// No steps before this should break query folding
+// El paso de filtro debe poder plegarse de nuevo al Data source
+// Ningún paso anterior debe romper el plegado de consultas
 #"Incremental Refresh Filter Step" = 
     Table.SelectRows(
         Navigation,
@@ -71,41 +72,40 @@ To set up Incremental Refresh, you must configure a new Refresh Policy for the t
     )
 ```
 
-   Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart` or `RangeEnd` to the appropriate data type. For more information about this, see [here](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
+Las columnas de tipo fecha, cadena o entero también se pueden filtrar manteniendo el plegado de consultas, usando funciones que convierten `RangeStart` o `RangeEnd` al tipo de datos adecuado. Para obtener más información, consulta [aquí](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
-7. __Configure Refresh Policy:__ Configure the remaining properties according to the incremental refresh policy you need. Remember to specify an M expression for the `SourceExpression` property (this is the expression that will be added to partitions created by the incremental refresh policy, which should use the `RangeStart` and `RangeEnd` parameters to filter the data in the source). The = operator should only be applied to either RangeStart or RangeEnd, but not both, as data may be duplicated.
+7. **Configura la política de actualización:** Configura las propiedades restantes según la política de actualización incremental que necesites. Recuerda especificar una expresión M para la propiedad `SourceExpression` (esta es la expresión que se añadirá a las particiones creadas por la política de actualización incremental y debe usar los parámetros `RangeStart` y `RangeEnd` para filtrar los datos en el origen). El operador = solo debe aplicarse a RangeStart o a RangeEnd, pero no a ambos, ya que podrían duplicarse los datos.
 
-   - __Source Expression:__ The M Expression that be added to partitions created by the Refresh Policy.
-   - __IncrementalWindowGranularity:__ The granularity of the incremental (refresh) window.
-   - __IncrementalWindowPeriods:__ # periods (of granularity specified above) wherein data should be refreshed.
-   - __IncrementalWindowPeriodsOffset:__ Set to `-1` to set _'Only Refresh Complete Periods'_
-   - __RollingWindowGranularity:__ The granularity of the rolling (archive) window.
-   - __RollingWindowPeriods:__ # periods (of granularity specified above) wherein data should be archived.
-   - __Mode:__ Whether it is standard `Import` Refresh Policy or `Hybrid`, where the last partition is DirectQuery.
-   - __PollingExpression:__ A valid M Expression configured to detect data changes. For more information about _Polling Expression_ or other Refresh Policy properties, see [here](xref:incremental-refresh-about#overview-of-all-properties).
-  
-8. __Apply Model Changes:__ Save your model (Ctrl+S).
-9. __Apply Refresh Policy:__ Right-click on the table and choose "Apply Refresh Policy".
-  
+   - **Source Expression:** La expresión M que se añadirá a las particiones creadas por la política de actualización.
+   - **IncrementalWindowGranularity:** La granularidad de la ventana incremental (de actualización).
+   - **IncrementalWindowPeriods:** Número de períodos (con la granularidad indicada más arriba) durante los cuales se deben actualizar los datos.
+   - **IncrementalWindowPeriodsOffset:** Establécelo en `-1` para configurar _'Only Refresh Complete Periods'_
+   - **RollingWindowGranularity:** La granularidad de la ventana deslizante (de archivo).
+   - **RollingWindowPeriods:** Número de períodos (con la granularidad indicada más arriba) durante los cuales se deben archivar los datos.
+   - **Mode:** Si es una política de actualización `Import` estándar o `Hybrid`, en la que la última partición es DirectQuery.
+   - **PollingExpression:** Una expresión M válida configurada para detectar cambios en los datos. Para más información sobre _Polling Expression_ u otras propiedades de la política de actualización, consulta [aquí](xref:incremental-refresh-about#overview-of-all-properties).
+8. **Aplicar cambios al modelo:** Guarda el modelo (Ctrl+S).
+9. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y elige "Aplicar política de actualización".
+
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 
-   __That's it!__ At this point, you should see that the Power BI service has automatically generated the partitions on your table, based on the policy you specified. All that's left is to refresh all the partitions.
+**¡Listo!** En este punto, deberías ver que el servicio de Power BI ha generado automáticamente las particiones de tu tabla, según la política que especificaste. Solo queda actualizar todas las particiones.
 
 <img src="~/content/assets/images/generated-partitions-te3.png" class="noscale" alt="Refresh All Partitions" style="width:400px !important"/>
 
-10. __Refresh all partitions:__ Shift-click to select all partitions. Right-click and select _Refresh > Full refresh (partition)_. You can right-click the table and select _'Preview data'_ to see the result.
+10. **Actualizar todas las particiones:** Mantén pulsada Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Preview data'_ para ver el resultado.
 
    <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:400px !important"/>
 
-Finally, you can configure the scheduled refresh in Power BI Service. Power BI will automatically handle the partitioning of your table. You can always connect to the remote model to view and validate the partitions, i.e. using the VertiPaq Analyzer. 
+Por último, puedes configurar la actualización programada en Power BI Service. Power BI se encargará automáticamente de crear las particiones de tu tabla. Siempre puedes conectarte al modelo remoto para ver y validar las particiones, por ejemplo, usando el Analizador VertiPaq.
 
 -------------
 
-### Incremental Refresh with Integer Date Keys
+### Actualización incremental con claves de fecha de tipo entero
 
-If your date column is Integer data type, use the below in the place of the filter Step 4, above:
+Si tu columna de fecha es de tipo entero, usa lo siguiente en lugar del paso 4 del filtro anterior:
 
-1. __Create the custom function:__ Create a Shared Expression named `ConvertDatetimeToInt`:
+1. **Crea la función personalizada:** Crea una expresión compartida llamada `ConvertDatetimeToInt`:
 
 ```M
    // A custom M function which will return a DateTime value as a YYYYMMDD integer
@@ -113,19 +113,19 @@ If your date column is Integer data type, use the below in the place of the filt
         Date.Year(DateValue) * 10000 + Date.Month(DateValue) * 100 + Date.Day(DateValue)
 ```
 
-2. __Create the filter step:__ Use the custom function to convert `RangeStart` and `RangeEnd` in-line to Integer. The filter step is otherwise identical to if the Date column would be a DateTime column:
+2. **Crea el paso de filtro:** Usa la función personalizada para convertir `RangeStart` y `RangeEnd` en línea a un entero. Por lo demás, el paso de filtro es idéntico al que usarías si la columna Date fuera de tipo DateTime:
 
 ```M
 let
-   // Connect to your data source
+   // Conectar a tu Data source
    Source = 
       Sql.Database(#"SqlEndpoint", #"Database"),
 
-// Load the table data
+// Cargar los datos de la tabla
    Data = 
       Source{ [Schema="Factview", Item="Orders"] }[Data],
 
-   // Make any transformations that should fold back to the data source
+   // Realizar las transformaciones que deban plegarse de nuevo en el Data source
    #"Remove Unnecessary Columns" = 
       Table.RemoveColumns ( 
          Data, 
@@ -135,38 +135,38 @@ let
          } 
       ),
 
-   // Add incremental refresh filter step
-   //    The filter step must be able to fold back to the data source
-   //    No steps before this should break query folding
-   #"Incremental Refresh" = 
+   // Agregar el paso de filtro de actualización incremental
+   //    El paso de filtro debe poder plegarse de nuevo en el Data source
+   //    Ningún paso anterior a este debería romper el plegado de consultas
+   #"Actualización incremental" = 
      Table.SelectRows(
        #"Remove Unnecessary Columns",
          each [OrderDateKey] >= ConvertDatetimeToInt(#"RangeStart")
          and  [OrderDateKey] < ConvertDatetimeToInt(#"RangeEnd")
      )
 in
-   #"Incremental Refresh" 
+   #"Actualización incremental" 
 ```
 
-3. __Proceed as normal with the next steps:__ You can then proceed with configuring and applying the refresh policy with _'Apply refresh policy'_ and finally refreshing all partitions. Preview the data of the table after the refresh operations complete to see the result.
+3. **Continúa con normalidad con los siguientes pasos:** Después, puedes continuar con la configuración y la aplicación de la política de actualización con _"Aplicar política de actualización"_ y, por último, actualizar todas las particiones. Previsualiza los datos de la tabla una vez finalicen las operaciones de actualización para ver el resultado.
 
 -------------
 
-### Incremental Refresh with String Date Keys
+### Actualización incremental con claves de fecha de tipo cadena
 
-If your date column is of String data type, you should configure your filter step to parse the Date column without breaking query folding. This will vary depending on your source and how the date is formatted. Below is a hypothetical example for an Order Date formatted 'YYYY-MM-DD':
+Si tu columna de fecha es de tipo cadena, deberías configurar el paso de filtro para analizar la columna Date sin romper el plegado de consultas. Esto variará en función del origen y de cómo esté formateada la fecha. A continuación se muestra un ejemplo hipotético de una fecha de pedido con el formato 'YYYY-MM-DD':
 
-```M 
+```M
 let
-   // Connect to your data source
+   // Conectar a tu Data source
    Source = 
       Sql.Database(#"SqlEndpoint", #"Database"),
 
-   // Load the table data
+   // Cargar los datos de la tabla
    Data = 
       Source{ [Schema="Factview", Item="Orders"] }[Data],
 
-   // Make any transformations that should fold back to the    data source
+   // Realizar las transformaciones que deban plegarse de nuevo en el Data source
    #"Remove Unnecessary Columns" = 
       Table.RemoveColumns ( 
          Data, 
@@ -176,15 +176,15 @@ let
          } 
       ),
 
-   // Add incremental refresh filter step
-   //    The filter step must be able to fold back to the   data source
-   //    No steps before this should break query folding
-   #"Incremental Refresh" = 
+   // Agregar el paso de filtro de actualización incremental
+   //    El paso de filtro debe poder plegarse de nuevo en el Data source
+   //    Ningún paso anterior a este debería romper el plegado de consultas
+   #"Actualización incremental" = 
      Table.SelectRows(
        #"Remove Unnecessary Columns",
        each 
 
-       // Converts "2022-01-09" to DateTime, for example
+       // Convierte "2022-01-09" a DateTime, por ejemplo
        DateTime.From(
          Date.FromText(
            [OrderDate], 
@@ -202,33 +202,33 @@ let
        ) < #"RangeEnd"      
      )
 in
-   #"Incremental Refresh" 
+   #"Actualización incremental" 
 ```
 
-See also the documentation for the `Date.FromText` function in Power Query [here](https://learn.microsoft.com/en-us/powerquery-m/date-fromtext). Should it not be possible to convert the Date column in-line while preserving query folding, it is also possible to configure incremental refresh with a native query, as described in the section, below.
+Consulta también la documentación de la función `Date.FromText` en Power Query [aquí](https://learn.microsoft.com/en-us/powerquery-m/date-fromtext). Si no es posible convertir la columna Date sobre la marcha manteniendo el plegado de consultas, también puedes configurar la actualización incremental con una consulta nativa, como se describe en la sección siguiente.
 
 -------------
 
-### Incremental Refresh with Native Queries
+### Actualización incremental con consultas nativas
 
-If you have configured a native query, it may still be possible to configure and use incremental refresh, depending on your data source. To try this for yourself, you need to follow the following steps in the place of Step 4, above:
+Si has configurado una consulta nativa, quizá siga siendo posible configurar y usar la actualización incremental, según tu Data source. Para probarlo por tu cuenta, debes seguir estos pasos en lugar del paso 4 anterior:
 
-1. __Author and Save the Native Query:__ Write your native query in SQL Server Management Studio or Azure Data Studio. Include a placeholder `WHERE` clause which filters >= a DateTime parameter, and < another DateTime parameter.
+1. **Redacta y guarda la consulta nativa:** Escribe tu consulta nativa en SQL Server Management Studio o Azure Data Studio. Incluye una cláusula `WHERE` de ejemplo que filtre con >= un parámetro DateTime y con < otro parámetro DateTime.
 
-   <img src="~/content/assets/images/tutorials/incremental-refresh-native-query-sql.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>incremental-refresh-native-query-formatted.png
+   <img src="~/content/assets/images/tutorials/incremental-refresh-native-query-sql.png" class="noscale" alt="Actualizar todas las particiones" style="width:650px !important"/>incremental-refresh-native-query-formatted.png
 
-2. __Replace the Native Query String in the Source Expression:__ Copy the query and replace the existing query, which will be full of characters like (lf) (line feed), (cr) (carriage return) and (n) (new line). Doing this makes the query actually readable and editable without resorting to the Native Query user interface of Power BI Desktop.
+2. **Sustituye la cadena de consulta nativa en la expresión de origen:** Copia la consulta y sustituye la actual, que estará llena de caracteres como (lf) (salto de línea), (cr) (retorno de carro) y (n) (nueva línea). Esto hace que la consulta sea realmente legible y editable sin tener que recurrir a la interfaz de usuario de Consulta nativa de Power BI Desktop.
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-native-query-unformatted.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>
 
-   Replace the above text in the `Query` parameter to the below, for example:
+Sustituye el texto anterior en el parámetro `Query` por el siguiente, por ejemplo:
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-native-query-formatted.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>
 
-3. __Add `RangeStart` and `RangeEnd`:__ Concatenate "RangeStart" and "RangeEnd" inside of the `WHERE` clause, replacing the placeholder fields and converting the parameters to date with `Date.From` and to string data types using `Date.ToText` with the `Format` option set to `"yyyy-MM-dd`. Don't forget to include single quotes `'` on either side of the concatenation. Below is an example of what the final query would look like:
+3. **Añadir `RangeStart` y `RangeEnd`:** Concatena "RangeStart" y "RangeEnd" dentro de la cláusula `WHERE`, sustituyendo los campos de marcador de posición y convirtiendo los parámetros al tipo de fecha con `Date.From` y al tipo de texto mediante `Date.ToText`, con la opción `Format` establecida en `"yyyy-MM-dd`. No olvides incluir comillas simples `'` a ambos lados de la concatenación. A continuación tienes un ejemplo de cómo quedaría la consulta final:
 
 ```M
-// Example of a full native query that folds and works with Incremental Refresh
+// Ejemplo de una consulta nativa completa que se pliega y funciona con actualización incremental
 let
     Source = Sql.Database("yoursql.database.windows.net", "YourDatabaseName", 
     [Query="
@@ -258,8 +258,8 @@ in
    Source
 ```
 
-4. __Validate the new M Expression:__ You can attempt to save the changes to the table M Expression prior to enabling the refresh policy, to see if you get the expected results when setting the `RangeStart` and `RangeEnd` to specific values. If so, you can proceed as normal; Power BI will be able to handle the partitioning as expected if you configured the steps in Power Query.
+4. **Validar la nueva expresión M:** Puedes intentar guardar los cambios en la expresión M de la tabla antes de habilitar la política de actualización, para comprobar si obtienes los resultados esperados al establecer `RangeStart` y `RangeEnd` en valores concretos. Si es así, puedes continuar con normalidad; Power BI podrá encargarse de la creación de particiones como se espera si configuraste los pasos en Power Query.
 
-   It may not be necessary, but depending on the transformations in the native query, you may also try adding the parameter `[EnableFolding = True]` as described in [this article by Chris Webb](https://blog.crossjoin.co.uk/2021/02/21/query-folding-on-sql-queries-in-power-query-using-value-nativequery-and-enablefoldingtrue/).
+   Puede que no sea necesario, pero en función de las transformaciones de la consulta nativa, también puedes probar a añadir el parámetro `[EnableFolding = True]` tal y como se describe en [este artículo de Chris Webb](https://blog.crossjoin.co.uk/2021/02/21/query-folding-on-sql-queries-in-power-query-using-value-nativequery-and-enablefoldingtrue/).
 
-5. __Proceed as normal with the next steps:__ You can then proceed with configuring and applying the refresh policy with _'Apply refresh policy'_ and finally refreshing all partitions. Preview the data of the table after the refresh operations complete to see the result.
+5. **Continúa con normalidad con los siguientes pasos:** Después, puedes seguir con la configuración y aplicación de la política de actualización con _'Aplicar política de actualización'_ y, por último, actualizar todas las particiones. Previsualiza los datos de la tabla cuando finalicen las operaciones de actualización para ver el resultado.

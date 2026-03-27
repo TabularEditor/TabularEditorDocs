@@ -1,89 +1,90 @@
 ---
 uid: kb.bpa-perspectives-no-objects
-title: Perspectives Should Contain Objects
+title: Las perspectivas deben contener objetos
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule for removing empty perspectives that contain no visible objects.
+description: Regla de buenas prácticas para eliminar perspectivas vacías que no contienen ningún objeto visible.
 ---
 
-# Perspectives Should Contain Objects
+# Las perspectivas deben contener objetos
 
-## Overview
+## Descripción general
 
-This best practice rule identifies perspectives that don't contain any visible tables. Empty perspectives serve no purpose and should be removed.
+Esta regla de buenas prácticas identifica las perspectivas que no contienen ninguna tabla visible. Las perspectivas vacías no tienen ninguna utilidad y se deben eliminar.
 
-- Category: Maintenance
-- Severity: Low (1)
+- Categoría: Mantenimiento
+- Gravedad: Baja (1)
 
-## Applies To
+## Se aplica a
 
-- Perspectives
+- Perspectivas
 
-## Why This Matters
+## Por qué es importante
 
-- **User confusion**: Empty perspectives appear in client tools but show no data
+- **Confusión de los usuarios**: las perspectivas vacías aparecen en las herramientas cliente, pero no muestran datos
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when a perspective has no visible tables:
+La regla se activa cuando una perspectiva no tiene tablas visibles:
 
 ```csharp
 Model.Tables.Any(InPerspective[current.Name]) == false
 ```
 
-## How to Fix
+## Cómo corregirlo
 
-### Automatic Fix
+### Corrección automática
 
-This rule includes an automatic fix that deletes the empty perspective:
+Esta regla incluye una corrección automática que elimina la perspectiva vacía:
 
 ```csharp
 Delete()
 ```
 
-To apply:
-1. Run the **Best Practice Analyzer**
-2. Select the empty perspectives
-3. Click **Apply Fix**
+Para aplicarlo:
 
-### Manual Fix
+1. Ejecuta el **Best Practice Analyzer**
+2. Selecciona las perspectivas vacías
+3. Haz clic en **Aplicar corrección**
 
-1. In **TOM Explorer**, expand the **Perspectives** node
-2. Right-click the empty perspective
-3. Select **Delete**
+### Corrección manual
 
-## Common Causes
+1. En el **Explorador TOM**, expande el nodo **Perspectivas**
+2. Haz clic con el botón derecho en la perspectiva vacía
+3. Selecciona **Eliminar**
 
-### Cause 1: Removed All Tables
+## Causas comunes
 
-All tables removed from perspective without deleting it.
+### Causa 1: Se eliminaron todas las tablas
 
-### Cause 2: Incomplete Configuration
+Se quitaron todas las tablas de la perspectiva sin eliminarla.
 
-Perspective created during design but never populated.
+### Causa 2: Configuración incompleta
 
-## Example
+La perspectiva se creó durante el diseño, pero nunca se llegó a rellenar.
 
-### Before Fix
+## Ejemplo
 
-```
-Perspectives:
-  - Sales (contains: Sales, Customer, Product tables) ✓
-  - Marketing (contains: NO TABLES) ✗
-```
-
-### After Fix
+### Antes de la corrección
 
 ```
-Perspectives:
-  - Sales (contains: Sales, Customer, Product tables) ✓
+Perspectivas:
+  - Ventas (contiene: tablas de Ventas, Cliente y Producto) ✓
+  - Marketing (no contiene tablas) ✗
 ```
 
-## Compatibility Level
+### Después de la corrección
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Perspectivas:
+  - Ventas (contiene: tablas de Ventas, Cliente y Producto) ✓
+```
 
-## Learn More
+## Nivel de compatibilidad
 
-- [Perspectives in Tabular Models](https://learn.microsoft.com/analysis-services/tabular-models/perspectives-ssas-tabular)
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
+
+## Más información
+
+- [Perspectivas en modelos tabulares](https://learn.microsoft.com/analysis-services/tabular-models/perspectives-ssas-tabular)
 

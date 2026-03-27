@@ -1,6 +1,6 @@
 ---
 uid: creating-and-testing-dax
-title: Adding measures and other calculated objects
+title: Agregar medidas y otros objetos calculados
 author: Daniel Otykier
 updated: 2021-10-08
 applies_to:
@@ -17,121 +17,121 @@ applies_to:
           full: true
 ---
 
-# Adding measures and other calculated objects
+# Agregar medidas y otros objetos calculados
 
-Ever since Tabular Editor 2.x got released in early 2017, the ability to quickly modify DAX expressions across measures has always been the most popular feature of the tool. Combined with back and forward navigation, copy/paste operations, DAX dependency visualisation and undo/redo support, the tool has always been the preferred option for anyone working with large and complex data models, where the ability to quickly make multiple smaller changes is crucial.
+Desde que se lanzó Tabular Editor 2.x a principios de 2017, la posibilidad de modificar rápidamente expresiones DAX en varias medidas siempre ha sido la característica más popular de la herramienta. Junto con la navegación hacia atrás y hacia adelante, las operaciones de copiar y pegar, la visualización de dependencias de DAX y la compatibilidad con deshacer/rehacer, la herramienta siempre ha sido la opción preferida para quienes trabajan con modelos de Data model grandes y complejos, donde la capacidad de realizar rápidamente varios cambios pequeños es crucial.
 
-The only complaint in this regard, by users of Tabular Editor 2.x, was the lack of DAX code assist features (sometimes called "IntelliSense"). Especially when you are not a 100% proficient with DAX (and very few people are!), having the DAX code editor assist you in remembering syntax, function parameters, etc. is incredibly helpful.
+La única queja al respecto por parte de los usuarios de Tabular Editor 2.x era la falta de funciones de Code Assist para DAX (a veces llamadas "IntelliSense"). Especialmente cuando no dominas DAX al 100% (¡y muy poca gente lo hace!), que el editor de código DAX te ayude a recordar la sintaxis, los parámetros de las funciones, etc., resulta increíblemente útil.
 
-This has all been addressed with the new DAX code editor used by Tabular Editor 3.
+Todo esto se ha resuelto con el nuevo editor de código DAX que usa Tabular Editor 3.
 
-![Editing a complex DAX expression](~/content/assets/images/dax-editor-screenshot.png)
+![Edición de una expresión DAX compleja](~/content/assets/images/dax-editor-screenshot.png)
 
-The remainder of this article describes how to create measures and other calculated objects, and how to modify the DAX expressions on these objects. To learn more about the many features of the DAX code editor, see <xref:dax-editor>.
+El resto de este artículo describe cómo crear medidas y otros objetos calculados, y cómo modificar las expresiones DAX en estos objetos. Para obtener más información sobre las numerosas funciones del editor de código DAX, consulta <xref:dax-editor>.
 
-# Adding measures
+# Agregar medidas
 
-Once you have [imported some tables](xref:importing-tables-data-modeling#importing-new-tables) to your model and [created relationships between them](xref:importing-tables-data-modeling#modifying-relationships-using-the-diagram), it is time to add some explicit measures containing your business logic.
-
-> [!TIP]
-> Technically, you are not required to add explicit measures to your model before visualizing data in a Power BI report. However, it is a best practice to always do so, as MDX-based client tools (such as Excel and Tabular Editor 3's Pivot Grid) require explicit measures. In addition, [Calculation Groups](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) only apply to explicit measures.
-
-To add a new measure using Tabular Editor, right-click on the table in which you want to add the measure, then choose **Create > Measure** (ALT+1).
-
-![Adding New Measure](~/content/assets/images/adding-new-measure.png)
-
-When a new measure is added, the name of that measure will be editable. Hit ENTER when you have provided a name for the measure. You can always edit the name later in the **Properties** view or by pressing F2 while the measure is selected in the **TOM Explorer**.
-
-The **Expression Editor** view is used to provide the DAX expression for the measure. As you enter the code, notice how the DAX editor provides code suggestions and even underlines syntax or semantic errors.
-
-![Add Measure Edit Dax](~/content/assets/images/add-measure-edit-dax.png)
-
-The dropdown box at the top left corner of the **Expression Editor** is used to switch between different DAX properties of the currently selected object. For example, in newer versions of Analysis Services, measures have an `Expression` property as well as a [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/). Other types of objects can have different properties that contain DAX code. For example, [KPIs](https://docs.microsoft.com/en-us/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) have three different DAX properties. To add a KPI in Tabular Editor, right-click on a measure and choose **Create > KPI**.
-
-![Editing Kpis](~/content/assets/images/editing-kpis.png)
-
-If you want your measure to be hidden, simply right-click and choose the **Make invisible** (CTRL+I) option. Likewise, you can unhide a measure by choosing the **Make visible** (CTRL+U) option.
-
-## Other measure properties
-
-In addition to the `Name`, `Expression` and `Hidden` properties, you can use the **Properties** view to review and edit the value of all properties of the currently selected object(s) in the **TOM Explorer**. For measures, this is where you can set the `Format String`, for example. For more information, see [Properties view](xref:properties-view).
-
-# Adding calculated columns
-
-To add a calculated column, right-click on the table on which you want to add the column, and choose **Create > Calculated Column** (ALT+2). Give the column a name and edit its DAX expression using the **Expression Editor**, similar to how we did for measures above.
-
-> [!IMPORTANT]
-> This option is not available by default when connected to a Power BI Desktop model. This is because of the [limitations of Power BI Desktop support for external tools](xref:desktop-limitations). Click the link to learn more.
-
-> [!NOTE]
-> When the DAX expression of a calculated column has been changed, the table in which the column resides has to be refreshed before the column can be used in a report. See <xref:refresh-preview-query#refreshing-data> for more information.
-
-# Adding calculated tables
-
-To add a calculated table, right-click on the model or on the "Tables" folder, and choose **Create > Calculated Table** (ALT+6). Give the table a name and edit its DAX expression using the **Expression Editor**, similar to how we did for measures above. Notice that the columns on the table changes automatically, when you make a change to the DAX expression. This can cause cascading effects, if other DAX expressions reference the table, or if columns are used in a hierarchy.
-
-> [!IMPORTANT]
-> This option is not available by default when connected to a Power BI Desktop model. This is because of the [limitations of Power BI Desktop support for external tools](xref:desktop-limitations). Click the link to learn more.
-
-> [!NOTE]
-> When the DAX expression of a calculated table has been changed, the table has to be refreshed before it can be used in a report. See <xref:refresh-preview-query#refreshing-data> for more information.
-
-# Adding calculation groups
-
-To add a [calculation group](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), right-click on the model or on the "Tables" folder, and choose **Create > Calculation Group** (ALT+7). Give the Calculation Group a name. Also consider a different name for the default **Name** column.
-
-> [!IMPORTANT]
-> This option is only available on models at compatibility level 1500 or higher.
-
-To add calculation items, right-click on the newly created calculation group and choose **Create > Calculation Item**. Give the Calculation Item a name and edit its DAX expression using the **Expression Editor** similar to how we did for measures above.
-
-You can arrange the display order of Calculation Items by dragging them around in the TOM Explorer, or by setting the `Ordinal` property within the **Properties** view.
-
-> [!NOTE]
-> When Calculation Items are added, renamed or removed from a Calculation Group, the Calculation Group has to be refreshed before it can be used in a report. See <xref:refresh-preview-query#refreshing-data> for more information.
-
-# Common modeling operations
-
-## Copy / paste
-
-All objects in the TOM Explorer can be copied and pasted with Tabular Editor. You can even copy and paste between different instances of Tabular Editor, and even between Tabular Editor 2.x and Tabular Editor 3. You can use the familiar keyboard shortcuts:
-
-- **Edit > Copy** (CTRL+C)
-- **Edit > Cut** (CTRL+X)
-- **Edit > Paste** (CTRL+V)
+Una vez que hayas [importado algunas tablas](xref:importing-tables-data-modeling#importing-new-tables) a tu modelo y [creado relaciones entre ellas](xref:importing-tables-data-modeling#modifying-relationships-using-the-diagram), es el momento de agregar algunas medidas explícitas que contengan tu lógica de negocio.
 
 > [!TIP]
-> If you want to replace one table with another, retaining all existing relationships to/from that table, copy a table to the clipboard, then select the table you wish to replace in the TOM Explorer and paste. You will be prompted whether you want to replace the selected table with the one in the clipboard.
+> Técnicamente, no es obligatorio agregar medidas explícitas a tu modelo antes de visualizar datos en un Report de Power BI. Sin embargo, es una buena práctica hacerlo siempre, ya que las herramientas cliente basadas en MDX (como Excel y el Pivot Grid de Tabular Editor 3) requieren que las medidas se definan explícitamente. Además, los [grupos de cálculo](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) solo se aplican a medidas explícitas.
 
-## Undo / redo
+Para agregar una nueva medida con Tabular Editor, haz clic con el botón derecho en la tabla en la que quieres agregar la medida y luego elige **Crear > Medida** (ALT+1).
 
-Whenever a change is made to an object or property in Tabular Editor, the complete history of changes is tracked, allowing you to undo every change made. You can use the familiar keyboard shortcuts:
+![Agregar una nueva medida](~/content/assets/images/adding-new-measure.png)
 
-- **Edit > Undo** (CTRL+Z)
-- **Edit > Redo** (CTRL+Y)
+Cuando se agrega una nueva medida, podrás editar su nombre. Pulsa ENTER cuando hayas proporcionado un nombre para la medida. Puedes editar el nombre más adelante en la vista **Properties** o pulsando F2 mientras la medida está seleccionada en el **Explorador TOM**.
+
+La vista **Editor de expresiones** se usa para escribir la expresión DAX de la medida. Mientras escribes el código, fíjate en cómo el editor de DAX ofrece sugerencias e incluso subraya errores sintácticos o semánticos.
+
+![Agregar Medida Editar Dax](~/content/assets/images/add-measure-edit-dax.png)
+
+El desplegable de la esquina superior izquierda del **Editor de expresiones** se usa para alternar entre distintas propiedades DAX del objeto actualmente seleccionado. Por ejemplo, en las versiones más recientes de Analysis Services, las medidas tienen una propiedad `Expression` además de una [`Detail Rows Expression`](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/). Otros tipos de objetos pueden tener propiedades diferentes que contengan código DAX. Por ejemplo, los [KPI](https://docs.microsoft.com/en-us/analysis-services/tabular-models/kpis-ssas-tabular?view=asallproducts-allversions) tienen tres propiedades de DAX diferentes. Para agregar un KPI en Tabular Editor, haz clic con el botón derecho en una medida y selecciona **Create > KPI**.
+
+![Editar Kpis](~/content/assets/images/editing-kpis.png)
+
+Si quieres que tu medida esté oculta, haz clic con el botón derecho y selecciona la opción **Make invisible** (CTRL+I). Del mismo modo, puedes volver a mostrar una medida seleccionando la opción **Make visible** (CTRL+U).
+
+## Otras propiedades de la medida
+
+Además de las propiedades `Name`, `Expression` y `Hidden`, puedes usar la vista **Properties** para revisar y editar el valor de todas las propiedades del objeto(s) seleccionado actualmente en el **Explorador TOM**. En el caso de las medidas, aquí puedes establecer, por ejemplo, `Format String`. Para más información, consulta [vista de propiedades](xref:properties-view).
+
+# Agregar columnas calculadas
+
+Para agregar una columna calculada, haz clic con el botón derecho en la tabla a la que quieras agregarla y elige **Create > Calculated Column** (ALT+2). Ponle un nombre a la columna y edita su expresión DAX con el **Editor de expresiones**, igual que hicimos con las medidas más arriba.
+
+> [!IMPORTANT]
+> Esta opción no está disponible de forma predeterminada cuando te conectas a un modelo de Power BI Desktop. Esto se debe a las [limitaciones de la compatibilidad de Power BI Desktop con herramientas externas](xref:desktop-limitations). Haz clic en el enlace para obtener más información.
 
 > [!NOTE]
-> All text editors in Tabular Editor 3 have their own undo/redo history, so if the cursor is currently within a text editor, the keyboard shortcuts will undo/redo the typing within that editor. You can use the options in the **Edit** menu to perform an undo/redo at the model level, or deactivate the current text editor by clicking on another element in the user interface (such as the TOM Explorer).
+> Cuando se haya cambiado la expresión DAX de una columna calculada, debes actualizar la tabla en la que se encuentra la columna antes de poder usarla en un Report. Consulta <xref:refresh-preview-query#refreshing-data> para obtener más información.
 
-# Navigation
+# Agregar tablas calculadas
 
-While the cursor is over an object reference in the DAX editor, right-click and choose **Go to definition** (F12) to quickly jump to that object. Of course, you can also navigate between objects using the TOM Explorer.
+Para agregar una tabla calculada, haz clic con el botón derecho en el modelo o en la carpeta "Tablas" y elige **Crear > Tabla calculada** (ALT+6). Asigna un nombre a la tabla y edita su expresión DAX con el **Editor de expresiones**, igual que hicimos antes con las medidas. Observa que las columnas de la tabla cambian automáticamente cuando haces un cambio en la expresión DAX. Esto puede provocar efectos en cascada si otras expresiones DAX hacen referencia a la tabla o si se usan columnas en una jerarquía.
 
-You can use the arrow buttons in the top right corner of the **Expression Editor** to jump quickly back and forth between objects visited.
+> [!IMPORTANT]
+> Esta opción no está disponible de forma predeterminada cuando estás conectado a un modelo de Power BI Desktop. Esto se debe a las [limitaciones de compatibilidad de Power BI Desktop con herramientas externas](xref:desktop-limitations). Haz clic en el vínculo para obtener más información.
 
-## DAX Dependencies
+> [!NOTE]
+> Cuando cambias la expresión DAX de una tabla calculada, tienes que actualizar la tabla antes de poder usarla en un Report. Consulta <xref:refresh-preview-query#refreshing-data> para obtener más información.
 
-To view DAX dependencies between objects, select an object in the **TOM Explorer**, then right-click and choose **Show dependencies** (SHIFT+F12). This will open a window that displays the dependencies (in both directions) of the selected object. Double-click on an object in this window to quickly navigate to that object.
+# Agregar grupos de cálculo
 
-![Dax Dependencies And Tom Explorer](~/content/assets/images/dax-dependencies-and-tom-explorer.png)
+Para agregar un [grupo de cálculo](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions), haz clic con el botón derecho en el modelo o en la carpeta "Tablas" y elige **Crear > Grupo de cálculo** (ALT+7). Asigna un nombre al grupo de cálculo. Considera también usar un nombre diferente para la columna **Name** predeterminada.
 
-# Display folders
+> [!IMPORTANT]
+> Esta opción solo está disponible en modelos con nivel de compatibilidad 1500 o superior.
 
-Once your model starts to gain a considerable number of measures, a good practice is to organize them using Display Folders. In Tabular Editor, to create a Display Folder, either edit the `Display Folder` property through the **Properties** view, or alternatively, right-click on the measure(s), and select the **Create > Display Folder** option.
+Para agregar elementos de cálculo, haz clic con el botón derecho en el grupo de cálculo recién creado y elige **Crear > Elemento de cálculo**. Asigna un nombre al elemento de cálculo y edita su expresión DAX con el **Editor de expresiones**, igual que hicimos antes con las medidas.
 
-You can also cut/copy/paste or drag and drop objects between display folders.
+Puedes organizar el orden de visualización de los elementos de cálculo arrastrándolos en el Explorador TOM o estableciendo la propiedad `Ordinal` en la vista **Propiedades**.
 
-# Next steps
+> [!NOTE]
+> Cuando agregas, cambias el nombre o eliminas elementos de cálculo de un grupo de cálculo, tienes que actualizar el grupo de cálculo antes de poder usarlo en un Report. Consulta <xref:refresh-preview-query#refreshing-data> para obtener más información.
+
+# Operaciones de modelado comunes
+
+## Copiar y pegar
+
+Todos los objetos del Explorador TOM se pueden copiar y pegar en Tabular Editor. Incluso puedes copiar y pegar entre diferentes instancias de Tabular Editor, e incluso entre Tabular Editor 2.x y Tabular Editor 3. Puedes usar los atajos de teclado habituales:
+
+- **Editar > Copiar** (CTRL+C)
+- **Editar > Cortar** (CTRL+X)
+- **Editar > Pegar** (CTRL+V)
+
+> [!TIP]
+> Si quieres sustituir una tabla por otra y conservar todas las relaciones existentes con esa tabla, copia una tabla al portapapeles; después, en el Explorador TOM, selecciona la tabla que quieras sustituir y pega. Se te preguntará si quieres reemplazar la tabla seleccionada por la que está en el portapapeles.
+
+## Deshacer / rehacer
+
+Cada vez que haces un cambio en un objeto o una propiedad en Tabular Editor, se registra el historial completo de cambios, lo que te permite deshacer cualquier cambio que hayas hecho. Puedes usar los atajos de teclado habituales:
+
+- **Editar > Deshacer** (CTRL+Z)
+- **Editar > Rehacer** (CTRL+Y)
+
+> [!NOTE]
+> Todos los editores de texto de Tabular Editor 3 tienen su propio historial de deshacer/rehacer, por lo que, si el cursor está dentro de un editor de texto, los atajos de teclado desharán y rehacerán lo que hayas escrito en ese editor. Puedes usar las opciones del menú **Editar** para deshacer/rehacer a nivel de modelo, o desactivar el editor de texto actual haciendo clic en otro elemento de la interfaz de usuario (como el Explorador TOM).
+
+# Navegación
+
+Cuando el cursor esté sobre una referencia a un objeto en el editor de DAX, haz clic con el botón derecho y elige **Ir a definición** (F12) para saltar rápidamente a ese objeto. Por supuesto, también puedes navegar entre objetos usando el Explorador TOM.
+
+Puedes usar los botones de flecha de la esquina superior derecha del **Editor de expresiones** para saltar rápidamente hacia delante y hacia atrás entre los objetos visitados.
+
+## Dependencias de DAX
+
+Para ver las dependencias de DAX entre objetos, selecciona un objeto en el **Explorador TOM**; luego, haz clic con el botón derecho y elige **Mostrar dependencias** (SHIFT+F12). Esto abrirá una ventana que muestra las dependencias (en ambas direcciones) del objeto seleccionado. Haz doble clic en un objeto en esta ventana para navegar rápidamente hasta él.
+
+![Dependencias de Dax y Explorador Tom](~/content/assets/images/dax-dependencies-and-tom-explorer.png)
+
+# Carpetas de visualización
+
+Cuando tu modelo empieza a tener un número considerable de medidas, una buena práctica es organizarlas usando carpetas de visualización. En Tabular Editor, para crear una carpeta de visualización, edita la propiedad `Display Folder` en la vista **Propiedades** o, alternativamente, haz clic con el botón derecho en medida(s) y selecciona la opción **Crear > Carpeta de visualización**.
+
+También puedes cortar/copiar/pegar o arrastrar y soltar objetos entre carpetas de visualización.
+
+# Próximos pasos
 
 - @dax-script-introduction
 - @bpa

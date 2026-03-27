@@ -1,6 +1,6 @@
-﻿---
+---
 uid: diagram-view-reference
-title: Diagram View
+title: 图表视图
 author: Morten Lønskov
 updated: 2025-04-24
 applies_to:
@@ -16,4 +16,5 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-[!include[using-bpa](../../features/views/data-refresh-view.md)]
+
+[!include[diagram-view](../../features/views/diagram-view.md)]

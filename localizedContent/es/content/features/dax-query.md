@@ -1,6 +1,6 @@
-﻿---
+---
 uid: dax-query
-title: DAX Queries
+title: Consultas DAX
 author: Morten Lønskov
 updated: 2025-08-27
 applies_to:
@@ -16,91 +16,91 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# DAX Queries
 
-Tabular Editor has a built-in DAX query window to write and execute DAX queries against the semantic model.
+# Consultas DAX
 
-A widespread use case for DAX queries is the DAX query produced by the [Power BI Performance Analyzer](https://www.sqlbi.com/articles/introducing-the-power-bi-performance-analyzer/), where it is possible to copy the query of each visual for troubleshooting, debugging, or detailed performance analysis.
+Tabular Editor incluye una ventana integrada de Consulta DAX para escribir y ejecutar consultas DAX sobre el modelo semántico.
 
-The window can be opened while connected to a semantic model using either the **File > New > DAX Query** menu or the toolbar shortcut.
+Un caso de uso muy común de las Consultas DAX es la Consulta DAX generada por el [Analizador de rendimiento de Power BI](https://www.sqlbi.com/articles/introducing-the-power-bi-performance-analyzer/), que permite copiar la consulta de cada Visual para solucionar problemas, depurar o realizar un análisis de rendimiento detallado.
 
-![Dax Query New](~/content/assets/images/features/dax_query_window/create_new_dax_query.png)
+La ventana se puede abrir mientras estás conectado a un modelo semántico desde el menú **Archivo > Nuevo > Consulta DAX** o mediante el acceso directo de la barra de herramientas.
 
-The built-in context-aware DAX Editor ensures that only the two valid DAX keywords are available when starting a new query: DEFINE or EVALUATE (Press Ctrl+Space to verify for yourself)
+![Consulta Dax Nueva](~/content/assets/images/features/dax_query_window/create_new_dax_query.png)
 
-## DAX Query Options
+El Editor de DAX integrado y con reconocimiento de contexto garantiza que, al iniciar una nueva consulta, solo estén disponibles las dos palabras clave válidas de DAX: DEFINE o EVALUATE (Presione Ctrl+Space para comprobarlo usted mismo)
 
-The DAX query window has five different query options.
+## Opciones de Consulta DAX
 
-![Dax Query Toolbar](~/content/assets/images/features/dax_query_window/dax_query_toolbar.png)
+The DAX query window has six different query options.
 
+![Barra de herramientas de Consulta Dax](~/content/assets/images/features/dax_query_window/dax_query_toolbar.png)
 
-1. **Execute (F5)**: If there is a selection, it executes the selected DAX; otherwise, it executes the full query in the DAX Query editor.
-2. **Execute full query**: It executes the full query in the DAX Query editor
-3. **Execute Selection (Shift+F5)**: If there is a selection, it executes it. Otherwise, it executes the EVALUATE statement where the cursor is currently located.
-4. **Stop**: This button cancels the current query execution.
-5. **Auto Execute Query**: It allows for keeping track of the connected semantic model and updating the query results whenever something changes in the model. This can be useful for understanding e.g. how the result of a measure changes if modified.
-6. **Keep sorting and filtering**: It allows users to control how sorting and filtering are preserved in the result grid(s) when executing queries. There are three preferences available:
-   - **Never**: Sorting and filtering reset each time the query runs.
-   - **When query is modified**: Sorting and filtering reset only when the query structure changes.
-   - **Always**: Sorting and filtering persist as long as columns remain in the new query.
+1. **Ejecutar (F5)**: Si hay una selección, ejecuta el DAX seleccionado; de lo contrario, ejecuta la consulta completa en el editor de Consulta DAX.
+2. **Ejecutar consulta completa**: Ejecuta la consulta completa en el Editor de Consulta DAX
+3. **Ejecutar selección (Mayús+F5)**: Si hay una selección, la ejecuta. De lo contrario, ejecuta la instrucción EVALUATE donde se encuentre el cursor en ese momento.
+4. **Detener**: Este botón cancela la ejecución de la consulta actual.
+5. **Ejecutar consulta automáticamente**: Permite hacer un seguimiento del modelo semántico conectado y actualizar los resultados de la consulta cada vez que algo cambie en el modelo. Esto puede ser útil para entender, por ejemplo, cómo cambia el resultado de una medida si la modificas.
+6. **Mantener la ordenación y el filtrado**: Permite a los usuarios controlar cómo se mantienen la ordenación y el filtrado en la cuadrícula(s) de resultados al ejecutar consultas. Hay tres preferencias disponibles:
+   - **Nunca**: La ordenación y el filtrado se restablecen cada vez que se ejecuta la consulta.
+   - **Cuando se modifica la consulta**: La ordenación y el filtrado se restablecen solo cuando cambia la estructura de la consulta.
+   - **Siempre**: La ordenación y el filtrado se conservan mientras las columnas sigan estando en la nueva consulta.
 
-The default values of "Auto Execute Query" and "Keep Sorting and Filtering" preferences can be set up in the Preferences dialog: **Tools > Preferences... > Data browsing > DAX Query** > Basic. 
+Los valores predeterminados de las preferencias "Ejecutar consulta automáticamente" y "Mantener la ordenación y el filtrado" se pueden configurar en el cuadro de diálogo de Preferencias: **Herramientas > Preferencias... > Exploración de datos > Consulta DAX** > Básico.
 
-### Adding or Updating Measures, Columns and Tables with DAX Queries
+### Añadir o actualizar medidas, columnas y tablas con consultas DAX
 
-Tabular Editor (3.12.0 and higher) has the ability to add or change measures directly through the DAX Query window.
+Tabular Editor (3.12.0 y versiones posteriores) permite agregar o cambiar medidas directamente desde la ventana de Consulta DAX.
 
-From Tabular Editor 3.23.0, Apply and Apply selection also process DEFINE COLUMN and DEFINE TABLE statements. Tabular Editor will create the corresponding calculated columns/tables in your model, or update their expressions if they already exist.
+A partir de Tabular Editor 3.23.0, "Aplicar" y "Aplicar selección" también procesan las instrucciones DEFINE COLUMN y DEFINE TABLE. Tabular Editor creará en el modelo las columnas o tablas calculadas correspondientes, o actualizará sus expresiones si ya existen.
 
-There are four options for applying DAX Query defined measures, columns and tables to the model: 
+Hay cuatro opciones para aplicar al modelo las medidas, columnas y tablas definidas en la Consulta DAX:
 
-![Dax Query Apply Measure](~/content/assets/images/features/dax_query_window/dax_query_apply_measure.png)
+![Consulta DAX Aplicar medida](~/content/assets/images/features/dax_query_window/dax_query_apply_measure.png)
 
-The "Apply" option syncs the DAX expression for all measures, columns or tables explicitly defined in the query to the definition of the object. Any measures, columns or tables that do not already exist are created.
+La opción "Aplicar" sincroniza la expresión DAX de todas las medidas, columnas o tablas definidas explícitamente en la consulta con la definición del objeto. Se crean las medidas, columnas o tablas que aún no existan.
 
-"Apply Measures & Sync" applies the DAX expression to the definition of the measures, columns or tables and saves the model.
+"Aplicar medidas y sincronizar" aplica la expresión DAX a la definición de las medidas, columnas o tablas y guarda el modelo.
 
-The "Apply Selection" and "Apply Selection & Sync" will only apply the measures, columns or tables within the current selection of the query editor.
+Las opciones "Aplicar selección" y "Aplicar selección y sincronizar" solo aplican las medidas, columnas o tablas incluidas en la selección actual del editor de consultas.
 
-Unlike the [DAX Script feature](xrefid:dax-scripts), only the expression property of a measure can be updated this way, as the DAX query syntax does not support specifying other properties, such as Description, Display Folder, etc.
+A diferencia de la [funcionalidad de Script DAX](xrefid:dax-scripts), de este modo solo puede actualizarse la propiedad de expresión de una medida, ya que la sintaxis de la Consulta DAX no permite especificar otras propiedades, como la descripción, la carpeta de visualización, etc.
 
-The "Apply" option has also been added to the right-click context menu.
+La opción "Aplicar" también se ha añadido al menú contextual al hacer clic con el botón derecho.
 
-![Dax Query Apply Right Click](~/content/assets/images/features/dax_query_window/dax_query_apply_measure_right_click.png)
+![Consulta Dax Aplicar Clic Derecho](~/content/assets/images/features/dax_query_window/dax_query_apply_measure_right_click.png)
 
-The shortcuts for these commands are:
+Los atajos de teclado para estos comandos son:
 
-- Apply (F7)
-- Apply Measures & Sync (Shift+F7)
-- Apply Selection (F8)
-- Apply Selection and Synch (Shift F7)
+- Aplicar (F7)
+- Aplicar medidas y sincronizar (Mayús+F7)
+- Aplicar selección (F8)
+- Apply Selection and Sync (Shift+F8)
 
-## DAX Query Example
+## Ejemplo de Consulta DAX
 
-A DAX query always returns a table of results, and the simplest form of DAX query to create is one that evaluates a table within the model.
+Una Consulta DAX siempre devuelve una tabla de resultados, y la forma más sencilla de crear una es evaluar una tabla dentro del modelo.
 
 ```DAX
 EVALUATE
 Products
 ```
 
-![Dax Query Evaluate Table](~/content/assets/images/features/dax_query_window/evaluate_table.png)
+![Consulta Dax Evaluar tabla](~/content/assets/images/features/dax_query_window/evaluate_table.png)
 
-It is also possible to return the value of a measure, but a table constructor {} is required around the measure name to turn the scalar value into a 1x1 table.
+También es posible devolver el valor de una medida, pero se requiere un constructor de tablas {} alrededor del nombre de la medida para convertir el valor escalar en una tabla de 1x1.
 
 ```DAX
 EVALUATE
 { [Invoice Lines] }
 ```
 
-![Dax Query Evaluate Measure](~/content/assets/images/features/dax_query_window/evaluate_measure.png)
+![Consulta Dax Evaluar medida](~/content/assets/images/features/dax_query_window/evaluate_measure.png)
 
-### Multiple EVALUATE statements
+### Varias instrucciones EVALUATE
 
-It is perfectly possible to have multiple EVALUATE statements inside the same DAX query. This query type is most often encountered with Power BI Performance Analyzer queries.
+Es perfectamente posible tener varias instrucciones EVALUATE dentro de la misma Consulta DAX. Este tipo de consulta se encuentra con mayor frecuencia en las consultas del Analizador de rendimiento de Power BI.
 
-Both tables are returned in the below statement but as separate row tabs in the result pane.
+Ambas tablas se devuelven en la siguiente instrucción, pero como pestañas separadas en el panel de resultados.
 
 ```DAX
 EVALUATE
@@ -110,21 +110,21 @@ EVALUATE
 Customers
 ```
 
-![Dax Query Evaluate Multiple Tables](~/content/assets/images/features/dax_query_window/multiple_evaluate_table.png)
+![Consulta Dax Evaluar varias tablas](~/content/assets/images/features/dax_query_window/multiple_evaluate_table.png)
 
-## Debugging DAX Query
+## Depuración de Consulta DAX
 
-DAX queries are one of the two places where it is possible to run the [DAX Debugger](xrefid:dax-debugger), the other being the Pivot Grid.
+Las Consultas DAX son uno de los dos lugares donde es posible ejecutar el [Depurador de DAX](xrefid:dax-debugger); el otro es el Pivot Grid.
 
-The DAX debugger unlocks the ability to understand how the DAX works inside a single cell. To start the debugger simply right click on the desired cell and choose 'Debug cell', which will start the debugger in the context of the chosen cell.
+El Depurador de DAX permite comprender cómo funciona DAX dentro de una sola celda. Para iniciar el depurador, basta con hacer clic con el botón derecho en la celda deseada y elegir "Depurar celda"; esto iniciará el depurador en el contexto de la celda seleccionada.
 
-![Dax Query Debugger](~/content/assets/images/features/dax_query_window/dax_query_open_dax_debugger.gif)
+![Consulta Dax Depurador](~/content/assets/images/features/dax_query_window/dax_query_open_dax_debugger.gif)
 
-## Export DAX Query results
+## Exportar resultados de la Consulta DAX
 
-Tabular Editor 3, beginning from version 3.16.0, introduces the new capability of exporting the results of a DAX Query to either CSV or Excel. After running the DAX Query, a button activates in the toolbar, enabling users to save the results locally in CSV or Excel format.
+Tabular Editor 3, a partir de la versión 3.16.0, incorpora la nueva capacidad de exportar los resultados de una Consulta DAX a CSV o Excel. Tras ejecutar la Consulta DAX, se activa un botón en la barra de herramientas que permite guardar los resultados localmente en formato CSV o Excel.
 
 > [!TIP]
-> To Export more than 1001 rows choose "click to get all rows" after running the DAX Query
+> Para exportar más de 1001 filas, seleccione "haga clic para obtener todas las filas" después de ejecutar la Consulta DAX
 
-![Dax Query Export Data](~/content/assets/images/features/dax_query_window/dax_query_export_data.png)
+![Consulta Dax Exportar datos](~/content/assets/images/features/dax_query_window/dax_query_export_data.png)

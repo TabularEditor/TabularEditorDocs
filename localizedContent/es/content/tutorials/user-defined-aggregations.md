@@ -1,6 +1,6 @@
-﻿---
+---
 uid: user-defined-aggregations
-title: User-defined Aggregations
+title: Agregaciones definidas por el usuario
 author: Just Blindbæk
 updated: 2026-02-19
 applies_to:
@@ -16,121 +16,122 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Implementing User-defined Aggregations
 
-A fully imported fact table caches every row in memory — including high-cardinality columns like individual order lines, transaction IDs, and row-level attributes that most report consumers never need. User-defined aggregations address this by splitting the fact table in two: a small, pre-aggregated **Import** table that handles the vast majority of report queries from the in-memory cache, and a **DirectQuery** detail table that holds all the row-level data without consuming memory. Power BI and Analysis Services automatically route each query to whichever table can answer it.
+# Implementación de agregaciones definidas por el usuario
 
-The high-cardinality columns moved to DirectQuery come with a performance trade-off — queries that use them are sent directly to the source database rather than served from the in-memory engine. Hiding those columns from the default field list ensures that report consumers interact with the fast aggregation path by default, while advanced users who build reports that require row-level detail are aware they are working with DirectQuery columns.
+Una tabla de hechos completamente importada mantiene en caché en memoria cada fila —incluidas columnas de alta cardinalidad, como líneas de pedido individuales, identificadores de transacción y atributos a nivel de fila que la mayoría de los usuarios del Report nunca necesitan. Las agregaciones definidas por el usuario resuelven esto dividiendo la tabla de hechos en dos: una tabla pequeña y preagregada en modo **Import** que atiende la gran mayoría de las consultas de Report desde la caché en memoria, y una tabla de detalle **DirectQuery** que contiene todos los datos a nivel de fila sin consumir memoria. Power BI y Analysis Services enrutan automáticamente cada consulta a la tabla que pueda responderla.
 
-In this tutorial, you configure a user-defined aggregation for the `Orders` fact table in the SpaceParts model. You create a detail table that holds the full row-level data in DirectQuery mode, then configure the existing `Orders` table as the aggregation table with the appropriate column mappings.
+Las columnas de alta cardinalidad que se mueven a DirectQuery implican una contrapartida de rendimiento: las consultas que las usan se envían directamente a la base de datos de origen, en lugar de atenderse desde el motor en memoria. Ocultar esas columnas de la lista de campos predeterminada garantiza que los usuarios del Report interactúen de forma predeterminada con la ruta rápida de agregación, mientras que los usuarios avanzados que crean Report que requieren detalle a nivel de fila sean conscientes de que están trabajando con columnas de DirectQuery.
+
+En este tutorial, configurarás una agregación definida por el usuario para la tabla de hechos `Orders` en el modelo SpaceParts. Crearás una tabla de detalle que contenga todos los datos a nivel de fila en modo DirectQuery y, a continuación, configurarás la tabla `Orders` existente como tabla de agregación con las asignaciones de columnas adecuadas.
 
 > [!NOTE]
-> The steps in this tutorial apply to both Tabular Editor 2 and Tabular Editor 3. Screenshots show Tabular Editor 3.
+> Los pasos de este tutorial se aplican tanto a Tabular Editor 2 como a Tabular Editor 3. Las capturas de pantalla corresponden a Tabular Editor 3.
 
-## Prerequisites
+## Requisitos previos
 
-Before you begin, you should have:
+Antes de empezar, debes tener:
 
-- Tabular Editor 2 or Tabular Editor 3
-- A Power BI or Analysis Services semantic model with at least one Import fact table
-- Basic familiarity with storage modes (Import, DirectQuery, Dual)
+- Tabular Editor 2 o Tabular Editor 3
+- Un modelo semántico de Power BI o Analysis Services con al menos una tabla de hechos en modo Import
+- Conocimientos básicos de los modos de almacenamiento (Import, DirectQuery, Dual)
 
-## How Aggregations Work
+## Cómo funcionan las agregaciones
 
-The aggregation pattern uses two versions of the same fact table:
+El patrón de agregación utiliza dos versiones de la misma tabla de hechos:
 
-| Table | Storage mode | Purpose |
-|---|---|---|
-| **Aggregation table** (`Orders`) | Import | Pre-aggregated data cached in memory. Answers summary queries. |
-| **Detail table** (`Order details`) | DirectQuery | Full row-level data queried at source. Used when the aggregation cannot answer the query. |
+| Tabla                                                     | Modo de almacenamiento | Propósito                                                                                                                                               |
+| --------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tabla de agregación** (`Orders`)     | Import                 | Datos preagregados almacenados en caché en memoria. Responde a consultas resumidas.                                     |
+| **Tabla de detalle** (`Order details`) | DirectQuery            | Datos completos a nivel de fila consultados en el origen. Se usa cuando la agregación no puede responder a la consulta. |
 
-Dimension tables are set to **Dual** storage mode so they can participate in both Import and DirectQuery query paths.
+Las tablas de dimensiones se configuran en modo de almacenamiento **Dual** para que puedan participar en las rutas de consulta de Import y DirectQuery.
 
-Setting tables to Dual or DirectQuery storage mode alone does not enable aggregation routing — it only creates a composite model where queries are directed based on storage mode. The **Alternate Of** property is what activates user-defined aggregations: it creates an explicit column-level mapping that tells the engine "when a query asks for this column from the detail table, you can use this pre-aggregated column instead." Without `Alternate Of`, the engine has no basis for substitution and will not route queries to the aggregation table. The engine evaluates every incoming query against these mappings to determine whether the aggregation table can answer it, and falls back to DirectQuery only when it cannot.
+Configurar tablas en modo de almacenamiento Dual o DirectQuery por sí solo no habilita el enrutamiento de agregaciones; solo crea un modelo compuesto en el que las consultas se dirigen en función del modo de almacenamiento. La propiedad **Alternate Of** es la que activa las agregaciones definidas por el usuario: crea una asignación explícita a nivel de columna que le indica al motor: "cuando una consulta solicita esta columna de la tabla de detalle, puedes usar esta columna preagregada en su lugar". Sin `Alternate Of`, el motor no tiene fundamento para realizar la sustitución y no enrutará las consultas a la tabla de agregación. El motor evalúa cada consulta entrante con estas asignaciones para determinar si la tabla de agregación puede responderla, y recurre a DirectQuery solo cuando no puede.
 
 > [!IMPORTANT]
-> DirectQuery comes with known limitations that affect model design and report functionality. The most relevant for this pattern are: queries against DirectQuery columns depend on source response time; cloud sources have a one-million-row return limit per query; the automatic date/time hierarchy is unavailable for DirectQuery tables; and some DAX functions are not supported in DirectQuery mode. Review the full list before proceeding: [Use DirectQuery in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery).
+> DirectQuery tiene limitaciones conocidas que afectan al diseño del modelo y a la funcionalidad de los Report. Las más relevantes para este patrón son: las consultas contra columnas DirectQuery dependen del tiempo de respuesta del origen; los orígenes en la nube tienen un límite de devolución de un millón de filas por consulta; la jerarquía automática de fecha/hora no está disponible para las tablas DirectQuery; y algunas funciones DAX no se admiten en modo DirectQuery. Revisa la lista completa antes de continuar: [Usar DirectQuery en Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery).
 
-## Step 1: Set dimension tables to Dual storage mode
+## Paso 1: Configura las tablas de dimensiones en modo de almacenamiento Dual
 
-Each dimension table that relates to the fact table must be set to **Dual** storage mode. This allows the engine to use dimension attributes in both Import and DirectQuery query paths.
+Cada tabla de dimensiones relacionada con la tabla de hechos debe configurarse en modo de almacenamiento **Dual**. Esto permite que el motor use atributos de dimensión en las rutas de consulta de Import y DirectQuery.
 
-For each dimension table (`Customers`, `Products`):
+Para cada tabla de dimensiones (`Customers`, `Products`):
 
-1. In the **TOM Explorer**, expand the table and then expand **Partitions**.
-2. Select the partition.
-3. In the **Properties** panel, find the **Mode** field under **Options** and set it to **Dual**.
+1. En el **Explorador TOM**, expande la tabla y, a continuación, expande **particiones**.
+2. Selecciona la partición.
+3. En el panel **Properties**, busca el campo **Mode** en **Options** y establécelo en **Dual**.
 
-![The Customers partition selected in TOM Explorer with Mode set to Dual in the Properties panel](../assets/images/tutorials/user-defined-aggregations/mode-dual.jpg)
+![La partición Customers seleccionada en el Explorador TOM, con Mode configurado como Dual en el panel Properties](../assets/images/tutorials/user-defined-aggregations/mode-dual.jpg)
 
-Repeat this for every dimension table that participates in a relationship with the fact table.
+Repite esto para cada tabla de dimensión que participe en una relación con la tabla de hechos.
 
-## Step 2: Create the detail table
+## Paso 2: Crear la tabla de detalle
 
-The detail table is a copy of the original fact table, configured to query the source directly in DirectQuery mode. It is hidden from report consumers — its only purpose is to serve granular queries that the aggregation table cannot answer.
+La tabla de detalle es una copia de la tabla de hechos original, configurada para consultar el origen directamente en modo DirectQuery. Está oculta para los consumidores del Report; su único propósito es atender consultas granulares que la tabla de agregación no puede responder.
 
-### Duplicate the fact table
+### Duplicar la tabla de hechos
 
-Create a copy of the **Orders** table and name it **Order details**. In Tabular Editor, you can do this by selecting the **Orders** table and using the right-click context menu to select **Duplicate 1 table**.
+Crea una copia de la tabla **Orders** y asígnale el nombre **Order details**. En Tabular Editor, puedes hacerlo seleccionando la tabla **Orders** y usando el menú contextual con clic con el botón derecho para elegir **Duplicate 1 table**.
 
-### Set the partition to DirectQuery
+### Configurar la partición en DirectQuery
 
-1. In the **TOM Explorer**, expand **Order details** and then expand **Partitions**.
-2. Select the partition.
-3. In the **Properties** panel, set **Mode** to **DirectQuery**.
+1. En el **Explorador TOM**, expande **Order details** y luego expande **Particiones**.
+2. Selecciona la partición.
+3. En el panel **Properties**, establece **Mode** en **DirectQuery**.
 
-![The Order details partition selected in TOM Explorer with Mode set to DirectQuery in the Properties panel](../assets/images/tutorials/user-defined-aggregations/model-directquery.jpg)
+![La partición Order details seleccionada en el Explorador TOM, con Mode configurado como DirectQuery en el panel Properties](../assets/images/tutorials/user-defined-aggregations/model-directquery.jpg)
 
-### Delete the measures
+### Eliminar las medidas
 
-Any DAX measures copied from `Orders` — such as `Quantity` and `Value` — should be deleted from `Order details`. Measures belong on the aggregation table, not the detail table.
+Elimina de `Order details` cualquier medida DAX copiada de `Orders`, como `Quantity` y `Value`. Las medidas deben estar en la tabla de agregación, no en la tabla de detalle.
 
-### Hide all columns and the table
+### Ocultar todas las columnas y la tabla
 
-Select all columns in `Order details` and set **Hidden** to **True** in the **Properties** panel. Then select the `Order details` table itself and also set **Hidden** to **True**.
+Selecciona todas las columnas de `Order details` y establece **Hidden** en **True** en el panel **Properties**. Después, selecciona la propia tabla `Order details` y también establece **Hidden** en **True**.
 
 > [!NOTE]
-> Hiding the detail table and all its columns ensures that report consumers always interact with the aggregation table. The detail table is an implementation detail of the aggregation architecture.
+> Ocultar la tabla de detalle y todas sus columnas garantiza que los consumidores del Report siempre interactúen con la tabla de agregación. La tabla de detalle es un detalle de implementación de la arquitectura de agregación.
 
-## Step 3: Create relationships and set Rely On Referential Integrity
+## Paso 3: Crear relaciones y establecer la opción Rely On Referential Integrity
 
-The detail table needs the same relationships to dimension tables as the aggregation table, so the engine can route DirectQuery queries correctly.
+La tabla de detalle necesita las mismas relaciones con las tablas de dimensión que la tabla de agregación para que el motor pueda enrutar correctamente las consultas DirectQuery.
 
-Create the following relationships from the `Order details` table:
+Crea las siguientes relaciones a partir de la tabla `Order details`:
 
 - `Order details[Customer Key]` → `Customers[Customer Key]`
 - `Order details[Product Key]` → `Products[Product Key]`
 
-For each of these new relationships, set **Rely On Referential Integrity** to **True** in the **Properties** panel.
+Para cada una de estas nuevas relaciones, establece **Rely On Referential Integrity** como **True** en el panel **Properties**.
 
-![The relationship from Order details to Products selected in TOM Explorer, with Rely On Referential Integrity set to True in the Properties panel](../assets/images/tutorials/user-defined-aggregations/rely-on-referential-integrity.jpg)
-
-> [!NOTE]
-> **Rely On Referential Integrity** tells the engine to use an INNER JOIN instead of an OUTER JOIN when generating DirectQuery SQL. This improves query performance and is safe to enable when every foreign key value in the detail table has a matching row in the dimension table.
-
-## Step 4: Slim down the aggregation table
-
-The aggregation table (`Orders`) should only contain what the engine needs for aggregation routing:
-
-- **Relationship key columns**: `Customer Key`, `Product Key` — used to match dimension filters
-- **Numeric base columns**: `Net Order Quantity`, `Net Order Value` — will be mapped to detail table columns in the next step
-- **DAX measures**: `Quantity`, `Value`
-
-Delete all other columns from `Orders` — dates, document numbers, status fields, and any other attribute columns. These exist only in `Order details`.
+![La relación entre Order details y Products seleccionada en el Explorador TOM, con Rely On Referential Integrity configurado en True en el panel Properties](../assets/images/tutorials/user-defined-aggregations/rely-on-referential-integrity.jpg)
 
 > [!NOTE]
-> For aggregation routing to work correctly, any attribute column absent from the aggregation table must exist in the detail table. The engine falls back to DirectQuery when a query references a column that is not in the aggregation table — so the detail table must have a complete copy of the fact data.
+> **Rely On Referential Integrity** le indica al motor que use un INNER JOIN en lugar de un OUTER JOIN al generar el SQL de DirectQuery. Esto mejora el rendimiento de las consultas y es seguro activarlo cuando todos los valores de clave externa de la tabla de detalle tienen una fila coincidente en la tabla de dimensiones.
+
+## Paso 4: Reducir la tabla de agregación
+
+La tabla de agregación (`Orders`) solo debería contener lo que el motor necesita para el enrutamiento de agregaciones:
+
+- **Columnas clave de relación**: `Customer Key`, `Product Key` — se usan para hacer coincidir los filtros de las dimensiones
+- **Columnas base numéricas**: `Net Order Quantity`, `Net Order Value` — se asignarán a las columnas de la tabla de detalle en el siguiente paso
+- **Medidas DAX**: `Quantity`, `Value`
+
+Elimina todas las demás columnas de `Orders` — fechas, números de documento, campos de estado y cualquier otra columna de atributo. Estas columnas solo existen en `Order details`.
+
+> [!NOTE]
+> Para que el enrutamiento de agregaciones funcione correctamente, cualquier columna de atributo ausente en la tabla de agregación debe existir en la tabla de detalle. El motor recurre a DirectQuery cuando una consulta hace referencia a una columna que no está en la tabla de agregación; por lo que la tabla de detalle debe tener una copia completa de los datos de la tabla de hechos.
 >
-> This pattern works best for **high-cardinality columns that are rarely used in reports** — individual transaction IDs, document numbers, row-level status fields, and similar attributes. If the fact table also contains low-cardinality columns that appear frequently in reports (such as a region code or a product category flag), consider moving those to a dimension table in Dual mode instead, so they are served from the in-memory cache rather than from DirectQuery.
+> Este patrón funciona mejor para **columnas de alta cardinalidad que rara vez se usan en un Report**: identificadores de transacción individuales, números de documento, campos de estado a nivel de fila y atributos similares. Si la tabla de hechos también contiene columnas de baja cardinalidad que aparecen con frecuencia en un Report (como un código de región o un indicador de categoría de producto), plantéate moverlas a una tabla de dimensiones en modo Dual, para que se sirvan desde la caché en memoria en lugar de desde DirectQuery.
 
 > [!TIP]
-> Also hide the `Orders` table itself by setting **Hidden** to **True** on the table. Like the detail table, the aggregation table is an implementation detail and should not appear in the report field list.
+> Además, oculta la tabla `Orders` estableciendo **Hidden** en **True**. Al igual que la tabla de detalle, la tabla de agregación es un detalle de implementación y no debería aparecer en la lista de campos del Report.
 
-## Step 5: Update measures to reference the detail table
+## Paso 5: Actualizar las medidas para que hagan referencia a la tabla de detalle
 
-The measures on the aggregation table must reference the **detail table**, not the aggregation table itself. This is what enables the engine to fall back to DirectQuery correctly: when a query cannot be answered from the in-memory cache, the engine follows the measure reference to `Order details` and queries the source.
+Las medidas de la tabla de agregación deben hacer referencia a la **tabla de detalle**, no a la propia tabla de agregación. Esto es lo que permite al motor recurrir a DirectQuery correctamente: cuando una consulta no se puede resolver desde la caché en memoria, el motor sigue la referencia de la medida a `Order details` y consulta el origen.
 
-Update each measure on `Orders` to reference the corresponding column in `Order details`:
+Actualiza cada medida de `Orders` para que haga referencia a la columna correspondiente en `Order details`:
 
 ```dax
 // Quantity
@@ -138,37 +139,37 @@ SUM( 'Order details'[Net Order Quantity] )
 ```
 
 ```dax
-// Value
+// Valor
 SUM( 'Order details'[Net Order Value] )
 ```
 
 > [!NOTE]
-> Measures do not have to reside on the aggregation table. They can be defined on `Order details` or on any other table in the model — for example, a dedicated, empty measures table. In this tutorial they are kept on `Orders` for simplicity.
+> Las medidas no tienen por qué residir en la tabla de agregación. Se pueden definir en `Order details` o en cualquier otra tabla del modelo; por ejemplo, en una tabla de medidas dedicada y vacía. En este tutorial se mantienen en `Orders` por simplicidad.
 
-## Step 6: Configure the Alternate Of property
+## Paso 6: Configura la propiedad Alternate Of
 
-For each numeric base column in the aggregation table, configure the **Alternate Of** property to tell the engine which column in the detail table it maps to.
+Para cada columna base numérica de la tabla de agregación, configura la propiedad **Alternate Of** para indicarle al motor a qué columna de la tabla de detalle se asigna.
 
-1. In the **TOM Explorer**, expand the `Orders` table and select a base column — for example, **Net Order Quantity**.
-2. In the **Properties** panel, expand the **Alternate Of** group.
-3. Set **Base Column** to the corresponding column in the detail table: `Order details[Net Order Quantity]`.
-4. Verify that **Summarization** is set to **Sum**.
+1. En el **Explorador TOM**, expande la tabla `Orders` y selecciona una columna base; por ejemplo, **Net Order Quantity**.
+2. En el panel de **Propiedades**, expande el grupo **Alternate Of**.
+3. Establece **Base Column** en la columna correspondiente de la tabla de detalle: `Order details[Net Order Quantity]`.
+4. Comprueba que **Summarization** esté configurado como **Sum**.
 
-![The Net Order Quantity column in Orders selected, with Alternate Of Base Column set to Order details[Net Order Quantity] and Summarization set to Sum](../assets/images/tutorials/user-defined-aggregations/alternate-of.jpg)
+![La columna Net Order Quantity seleccionada en Orders, con Alternate Of Base Column establecido en Order details[Net Order Quantity] y Summarization configurado como Sum](../assets/images/tutorials/user-defined-aggregations/alternate-of.jpg)
 
-Repeat for **Net Order Value**, mapping it to `Order details[Net Order Value]` with **Summarization: Sum**.
+Repite el proceso para **Net Order Value**, asignándolo a `Order details[Net Order Value]` con **Summarization: Sum**.
 
-## Verifying the Result
+## Verificación del resultado
 
-The diagram view in Tabular Editor shows the completed aggregation architecture. Both `Orders` and `Order details` connect to the same dimension tables through parallel sets of relationships.
+En Tabular Editor, la vista de diagrama muestra la arquitectura de agregación ya completada. Tanto `Orders` como `Order details` se conectan a las mismas tablas de dimensión mediante conjuntos paralelos de relaciones.
 
-![Tabular Editor diagram view showing the Orders aggregation table and Order details detail table, both connected to Customers and Products via relationships](../assets/images/tutorials/user-defined-aggregations/diagram-view-tabular-editor.jpg)
+![Vista de diagrama de Tabular Editor que muestra la tabla de agregación Orders y la tabla de detalle Order details, ambas conectadas a Customers y Products mediante relaciones](../assets/images/tutorials/user-defined-aggregations/diagram-view-tabular-editor.jpg)
 
-In Power BI Desktop, the model view shows the same structure with storage mode icons and color coding: the dimension tables display the Dual storage mode indicator, `Order details` shows as DirectQuery and hidden, and `Orders` shows as Import and hidden.
+En Power BI Desktop, la vista de modelo muestra la misma estructura con iconos del modo de almacenamiento y codificación por colores: las tablas de dimensión muestran el indicador de modo de almacenamiento Dual; `Order details` aparece como DirectQuery y oculto; y `Orders` aparece como Import y oculto.
 
-![Power BI Desktop model view showing the completed aggregation setup with Dual-mode dimensions, a hidden Import aggregation table, and a hidden DirectQuery detail table](../assets/images/tutorials/user-defined-aggregations/diagram-view-power-bi-desktop.jpg)
+![Vista de modelo de Power BI Desktop que muestra la configuración de agregación completada con dimensiones en modo Dual, una tabla de agregación oculta en modo Import y una tabla de detalle oculta en modo DirectQuery](../assets/images/tutorials/user-defined-aggregations/diagram-view-power-bi-desktop.jpg)
 
-## Further Reading
+## Más información
 
-- [Microsoft Docs: User-defined aggregations in Power BI](https://learn.microsoft.com/en-us/power-bi/transform-model/aggregations-advanced)
-- [Microsoft Docs: Storage modes in Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-storage-mode)
+- [Microsoft Docs: Agregaciones definidas por el usuario en Power BI](https://learn.microsoft.com/en-us/power-bi/transform-model/aggregations-advanced)
+- [Microsoft Docs: Modos de almacenamiento en Power BI Desktop](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-storage-mode)

@@ -1,89 +1,90 @@
 ---
 uid: kb.bpa-perspectives-no-objects
-title: Perspectives Should Contain Objects
+title: 透视应包含对象
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule for removing empty perspectives that contain no visible objects.
+description: 用于移除不含任何可见对象的空透视的最佳实践规则。
 ---
 
-# Perspectives Should Contain Objects
+# 透视应包含对象
 
-## Overview
+## 概览
 
-This best practice rule identifies perspectives that don't contain any visible tables. Empty perspectives serve no purpose and should be removed.
+此最佳实践规则用于识别不包含任何可见表的透视。 空透视没有任何用途，应将其移除。
 
-- Category: Maintenance
-- Severity: Low (1)
+- 类别：维护
+- 严重性：低（1）
 
-## Applies To
+## 适用范围
 
-- Perspectives
+- 透视
 
-## Why This Matters
+## 为什么这很重要
 
-- **User confusion**: Empty perspectives appear in client tools but show no data
+- **用户困惑**: 空透视会显示在客户端工具中，但不会展示任何数据
 
-## When This Rule Triggers
+## 何时触发此规则
 
-The rule triggers when a perspective has no visible tables:
+当某个透视没有任何可见表时，会触发该规则：
 
 ```csharp
 Model.Tables.Any(InPerspective[current.Name]) == false
 ```
 
-## How to Fix
+## 如何修复
 
-### Automatic Fix
+### 自动修复
 
-This rule includes an automatic fix that deletes the empty perspective:
+此规则包含一项自动修复，可删除空透视：
 
 ```csharp
 Delete()
 ```
 
-To apply:
-1. Run the **Best Practice Analyzer**
-2. Select the empty perspectives
-3. Click **Apply Fix**
+应用方法：
 
-### Manual Fix
+1. 运行 **Best Practice Analyzer**
+2. 选择空透视
+3. 单击 **应用修复**
 
-1. In **TOM Explorer**, expand the **Perspectives** node
-2. Right-click the empty perspective
-3. Select **Delete**
+### 手动修复
 
-## Common Causes
+1. 在 **TOM Explorer** 中展开 **透视** 节点
+2. 右键单击空白透视
+3. 选择 **删除**
 
-### Cause 1: Removed All Tables
+## 常见原因
 
-All tables removed from perspective without deleting it.
+### 原因 1：已移除所有表
 
-### Cause 2: Incomplete Configuration
+未删除透视的情况下，从透视中移除了所有表。
 
-Perspective created during design but never populated.
+### 原因 2：配置不完整
 
-## Example
+在设计时创建了透视，但从未填充任何内容。
 
-### Before Fix
+## 示例
 
-```
-Perspectives:
-  - Sales (contains: Sales, Customer, Product tables) ✓
-  - Marketing (contains: NO TABLES) ✗
-```
-
-### After Fix
+### 修复前
 
 ```
-Perspectives:
-  - Sales (contains: Sales, Customer, Product tables) ✓
+透视：
+  - Sales（包含：Sales、Customer、Product 表）✓
+  - Marketing（包含：无表）✗
 ```
 
-## Compatibility Level
+### 修复后
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+透视：
+  - Sales（包含：Sales、Customer、Product 表）✓
+```
 
-## Learn More
+## 兼容级别
 
-- [Perspectives in Tabular Models](https://learn.microsoft.com/analysis-services/tabular-models/perspectives-ssas-tabular)
+此规则适用于兼容级别 **1200** 及以上的模型。
+
+## 了解更多
+
+- [表格模型中的透视](https://learn.microsoft.com/analysis-services/tabular-models/perspectives-ssas-tabular)
 

@@ -1,6 +1,6 @@
-﻿---
+---
 uid: data-refresh-view-reference
-title: Data Refresh view
+title: Vista de actualización de datos
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -16,4 +16,5 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-[!include[using-bpa](../../features/views/data-refresh-view.md)]
+
+[!include[data-refresh-view](../../features/views/data-refresh-view.md)]

@@ -1,6 +1,6 @@
-﻿---
+---
 uid: workspace-mode-wt
-title: Workspace Mode
+title: Modo del área de trabajo
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:
@@ -13,9 +13,11 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: Premium Per User XMLA Endpoints Only
+          note: Solo puntos de conexión XMLA de Premium por usuario
         - edition: Enterprise
           full: true
 ---
-# (Walkthrough) Workspace Mode
+
+# (Guía paso a paso) Modo del área de trabajo
+
 [!include[workspace-mode](../features/workspace-mode.partial.md)]

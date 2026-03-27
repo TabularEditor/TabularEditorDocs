@@ -1,87 +1,87 @@
 ---
 uid: kb.bpa-translate-perspectives
-title: Translate Perspective Names for All Cultures
+title: Traducir los nombres de las perspectivas en todas las configuraciones regionales
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring perspective names are translated for all defined cultures.
+description: Regla de buenas prácticas que garantiza que los nombres de las perspectivas estén traducidos en todas las configuraciones regionales definidas.
 ---
 
-# Translate Perspective Names for All Cultures
+# Traducir los nombres de las perspectivas en todas las configuraciones regionales
 
-## Overview
+## Resumen
 
-This rule identifies model perspectives that lack name translations for one or more cultures.
+Esta regla identifica las perspectivas del modelo cuyo nombre no tiene traducción en una o más configuraciones regionales.
 
-- Category: Model Layout
-- Severity: Low (1)
+- Categoría: Diseño del modelo
+- Gravedad: Baja (1)
 
-## Applies To
+## Se aplica a
 
-- Model
-- Perspectives
+- Modelo
+- Perspectivas
 
-## Why This Matters
+## Por qué es importante
 
-- **Incomplete localization**: Perspectives display in default language only
-- **Inconsistent experience**: Mix of translated and untranslated perspective names
-- **User confusion**: Expected language support not available
-- **Professional appearance**: Incomplete translations reduce model quality
+- **Localización incompleta**: Las perspectivas se muestran solo en el idioma predeterminado
+- **Experiencia incoherente**: Mezcla de nombres de perspectivas traducidos y sin traducir
+- **Confusión del usuario**: La compatibilidad de idioma esperada no está disponible
+- **Apariencia profesional**: Las traducciones incompletas reducen la calidad del modelo
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-This rule triggers when a perspective has:
+Esta regla se activa cuando una perspectiva tiene:
 
-- At least one culture in the model that is **missing a translation** for the perspective name
+- Al menos una configuración regional del modelo en la que **falta la traducción** del nombre de la perspectiva
 
 ```csharp
 Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ```
 
-## How to Fix
+## Cómo solucionarlo
 
-### Manual Fix
+### Solución manual
 
-1. In **TOM Explorer**, select the perspective
-2. In **Properties** pane, expand **Translated Names**
-3. Enter translation for each culture
+1. En el **Explorador TOM**, selecciona la perspectiva
+2. En el panel **Propiedades**, expande **Nombres traducidos**
+3. Introduce la traducción para cada configuración regional
 
-## Common Causes
+## Causas comunes
 
-### Cause 1: New Perspectives Added
+### Causa 1: Se agregaron nuevas perspectivas
 
-Perspectives created without translations.
+Perspectivas creadas sin traducciones.
 
-### Cause 2: Culture Added Later
+### Causa 2: La configuración regional se agregó más tarde
 
-Culture added after perspectives were defined.
+La configuración regional se agregó después de que se definieran las perspectivas.
 
-### Cause 3: Incomplete Translation
+### Causa 3: Traducción incompleta
 
-Translation workflow didn't cover perspectives.
+El flujo de trabajo de traducción no incluyó las perspectivas.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Perspective: "Sales Analysis"
-English: "Sales Analysis"
-German: (missing)
-```
-
-### After Fix
+### Antes de la corrección
 
 ```
-Perspective: "Sales Analysis"
-English: "Sales Analysis"
-German: "Vertriebsanalyse"
+Perspectiva: "Sales Analysis"
+Inglés: "Sales Analysis"
+Alemán: (sin traducir)
 ```
 
-## Compatibility Level
+### Después de la corrección
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Perspectiva: "Sales Analysis"
+Inglés: "Sales Analysis"
+Alemán: "Vertriebsanalyse"
+```
 
-## Related Rules
+## Nivel de compatibilidad
 
-- [Translate Visible Names](xref:kb.bpa-translate-visible-names) - Translating object names
-- [Translate Descriptions](xref:kb.bpa-translate-descriptions) - Translating descriptions
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
+
+## Reglas relacionadas
+
+- [Traducir nombres visibles](xref:kb.bpa-translate-visible-names) - Traducción de nombres de objetos
+- [Traducir descripciones](xref:kb.bpa-translate-descriptions) - Traducción de descripciones

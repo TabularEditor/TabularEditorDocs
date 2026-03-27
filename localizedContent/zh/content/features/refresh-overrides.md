@@ -1,6 +1,6 @@
 ---
 uid: refresh-overrides
-title: Refresh Override Profiles
+title: 刷新覆盖配置文件
 author: Daniel Otykier
 updated: 2026-01-20
 applies_to:
@@ -11,56 +11,58 @@ applies_to:
       since: 3.25.0
       editions:
         - edition: Desktop
-          full: true
+          none: true
         - edition: Business
           full: true
         - edition: Enterprise
           full: true
 ---
-# Refresh Override Profiles
 
-Refresh override profiles allow you to temporarily modify certain model properties during a refresh operation without changing the actual model metadata. This is configured through the [Advanced Refresh dialog](xref:advanced-refresh).
+# 刷新覆盖配置文件
 
-## Why use refresh overrides?
+刷新覆盖配置文件允许你在刷新过程中临时修改某些模型属性，而无需更改实际的模型元数据。 这可以通过[高级刷新对话框](xref:advanced-refresh)进行配置。
 
-When developing and testing semantic models, you often need to refresh data with different configurations than what's defined in the model metadata. Common scenarios include:
+## 为什么要使用刷新覆盖？
 
-- **Loading a subset of data** to speed up development refresh operations
-- **Connecting to a different data source** (e.g., a development or test database)
-- **Testing with different parameter values** before committing changes to the model
+在开发和测试语义模型时，你经常需要使用与模型元数据中定义不同的配置来刷新数据。 常见场景包括：
 
-Without refresh overrides, you would need to temporarily modify the model metadata, perform the refresh, and then remember to revert the changes. This approach is error-prone—it's easy to forget to revert a change, potentially resulting in incorrect metadata being deployed to production.
+- **只加载一部分数据**，以加快开发阶段的刷新操作
+- **连接到不同的数据源**（例如开发或测试数据库）
+- **使用不同的参数值进行测试**，再提交对模型的更改
 
-Refresh overrides solve this problem by keeping temporary refresh configurations separate from the model metadata.
+如果没有刷新覆盖，你就需要临时修改模型元数据，执行刷新，然后记得再将这些更改还原。 这种方式很容易出错——你可能会忘记还原某项更改，从而将错误的元数据部署到生产环境。
 
-## Override profile structure
+刷新覆盖通过将临时刷新配置与模型元数据分离，解决了这个问题。
 
-Override profiles use JSON that follows the [TMSL refresh command specification](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions). The JSON is an array of override objects, where each object can contain one or more of the following:
+## 覆盖配置文件结构
 
-- `scope` - Limit the override to a specific table or partition (optional)
-- `dataSources` - Override data source connection properties
-- `expressions` - Override shared expressions (M parameters)
-- `partitions` - Override partition source queries
-- `columns` - Override column source mappings (DataColumns only)
+覆盖配置文件使用符合[TMSL 刷新命令规范](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions)的 JSON。 该 JSON 是一个由覆盖对象组成的数组，其中每个对象可以包含以下一项或多项内容：
 
-Each override within `dataSources`, `expressions`, `partitions`, or `columns` must include an `originalObject` property that identifies which model object to override.
+- `scope` - 将覆盖范围限定为特定的表或分区（可选）
+- `dataSources` - 覆盖数据源连接属性
+- `expressions` - 覆盖共享表达式（M 参数）
+- `partitions` - 覆盖分区源查询
+- `columns` - 覆盖列的源映射（仅适用于 DataColumns）
 
-### Override scope
+在 `dataSources`、`expressions`、`partitions` 或 `columns` 中的每个覆盖项都必须包含 `originalObject` 属性，用于标识要覆盖的模型对象。
 
-By default, overrides apply globally to the refresh operation. However, you can use the `scope` property to limit an override to only affect a specific table or partition. This is useful when you want to refresh the entire model but need specific tables to source data differently than what's configured in the model metadata.
+### 覆盖范围
 
-The `scope` object can contain:
-- `database` - The database name
-- `table` - The table name (applies override only when refreshing this table)
-- `partition` - The partition name (applies override only when refreshing this partition)
+默认情况下，覆盖对刷新操作全局生效。 不过，你可以用 `scope` 属性把覆盖限制为只影响某个特定的表或分区。 当你想刷新整个模型，但需要某些表以不同于模型元数据中配置的方式获取数据时，这会很有用。
 
-## Examples
+`scope` 对象可以包含：
 
-Below are examples you can copy directly into a new override profile and modify for your needs.
+- `database` - 数据库名
+- `table` - 表名（仅在刷新此表时应用覆盖）
+- `partition` - 分区名（仅在刷新此分区时应用覆盖）
 
-### Limiting rows with a SQL query override
+## 示例
 
-This example overrides a partition to load only the top 10,000 rows, useful for faster refresh during development:
+下面的示例可直接复制到新的覆盖配置文件中，并按需修改。
+
+### 使用 SQL 查询覆盖来限制行数
+
+此示例覆盖一个分区，使其仅加载前 10,000 行，以加快开发阶段的刷新速度：
 
 ```json
 [
@@ -81,9 +83,9 @@ This example overrides a partition to load only the top 10,000 rows, useful for 
 ]
 ```
 
-### Filtering data by date range
+### 按日期范围筛选数据
 
-Load only recent data by adding a WHERE clause:
+通过添加 WHERE 子句仅加载最近的数据：
 
 ```json
 [
@@ -104,9 +106,9 @@ Load only recent data by adding a WHERE clause:
 ]
 ```
 
-### Overriding multiple partitions
+### 覆盖多个分区
 
-You can override multiple partitions in a single profile:
+你可以在一个配置文件中覆盖多个分区：
 
 ```json
 [
@@ -137,9 +139,9 @@ You can override multiple partitions in a single profile:
 ]
 ```
 
-### Overriding a data source connection string
+### 重写数据源连接字符串
 
-Connect to a different server or database during refresh:
+刷新时连接到其他服务器或数据库：
 
 ```json
 [
@@ -157,9 +159,9 @@ Connect to a different server or database during refresh:
 ]
 ```
 
-### Overriding a shared expression (M parameter)
+### 重写共享表达式（M 参数）
 
-Override an M parameter value, such as a server name parameter:
+重写 M 参数值，例如服务器名称参数：
 
 ```json
 [
@@ -177,9 +179,9 @@ Override an M parameter value, such as a server name parameter:
 ]
 ```
 
-### Combining multiple override types
+### 组合多种重写类型
 
-You can combine data source, expression, and partition overrides in a single profile:
+你可以在单个配置文件中组合数据源、表达式和分区的重写：
 
 ```json
 [
@@ -209,9 +211,9 @@ You can combine data source, expression, and partition overrides in a single pro
 ]
 ```
 
-### Overriding a Power Query partition
+### 重写 Power Query 分区
 
-For partitions that use M (Power Query), override the expression:
+对于使用 M（Power Query）的分区，可以重写其表达式：
 
 ```json
 [
@@ -232,9 +234,9 @@ For partitions that use M (Power Query), override the expression:
 ]
 ```
 
-### Using scope to target a specific table
+### 使用 scope 指定特定表
 
-When refreshing the entire model, you can use the `scope` property to apply an override only to a specific table. This example overrides the data source connection string, but only when refreshing the "Sales" table:
+刷新整个模型时，你可以使用 `scope` 属性，使重写仅应用于特定表。 此示例会重写数据源连接字符串，但仅在刷新“Sales”表时生效：
 
 ```json
 [
@@ -255,11 +257,11 @@ When refreshing the entire model, you can use the `scope` property to apply an o
 ]
 ```
 
-With this configuration, when you refresh the entire model, all tables will use the default data source except for the "Sales" table, which will load data from the connection specified in the override.
+使用此配置后，刷新整个模型时，除“Sales”表外，所有表都会使用默认数据源；“Sales”表将从重写中指定的连接加载数据。
 
-### Multiple scoped overrides
+### 多个作用域重写
 
-You can combine multiple scoped overrides in a single profile. This example uses different data sources for different tables:
+你可以在单个配置文件中组合多个作用域重写。 此示例为不同表使用不同的数据源：
 
 ```json
 [
@@ -294,21 +296,21 @@ You can combine multiple scoped overrides in a single profile. This example uses
 ]
 ```
 
-## Tips for creating override profiles
+## 创建重写配置文件的提示
 
-1. **Find object names**: The `originalObject` property requires exact names of databases, tables, partitions, data sources, and expressions as they appear in your model. You can find these names in the TOM Explorer.
+1. **查找对象名称**：`originalObject` 属性要求数据库、表、分区、数据源和表达式的名称与它们在模型中显示的完全一致。 你可以在 TOM Explorer 中找到这些名称。
 
-2. **Start simple**: Begin with a single override and test it before adding more complexity.
+2. **从简单开始**：先从单个覆盖开始，测试通过后再逐步增加复杂度。
 
-3. **Use Export TMSL script**: After configuring an override profile, use the **Export TMSL script...** button in the Advanced Refresh dialog to see the complete TMSL command that will be generated. This helps verify your overrides are correctly applied.
+3. **使用导出 TMSL 脚本**：配置好覆盖配置文件后，在“高级刷新”对话框中点击 **导出 TMSL 脚本...** 按钮，即可查看将生成的完整 TMSL 命令。 这有助于验证你所做的覆盖是否已正确应用。
 
-4. **Database name**: The database name in the `originalObject` should match the name of your semantic model as it appears on the server (or will appear after deployment).
+4. **数据库名称**：`originalObject` 中的数据库名称应与你在服务器上看到的语义模型名称一致（或部署后将显示的名称）。
 
-## Profile storage
+## 配置文件存储
 
-Override profiles are stored per-model in the `UserOptions.tmuo` file:
+覆盖配置文件按模型存储在 `UserOptions.tmuo` 文件中：
 
-- **For models saved on disk**: The `.tmuo` file is stored alongside the model files (e.g., in the same folder as your `.bim` file or Database.tmdl)
-- **For XMLA-connected models**: The `.tmuo` files are stored under `%LocalAppData%\TabularEditor3\UserOptions`
+- **适用于保存在磁盘上的模型**：`.tmuo` 文件与模型文件存放在同一位置（例如与你的 `.bim` 文件或 Database.tmdl 位于同一文件夹中）
+- **对于通过 XMLA 连接的模型**：`.tmuo` 文件存放在 `%LocalAppData%\TabularEditor3\UserOptions` 下
 
-This means override profiles are preserved across Tabular Editor sessions. As it's not recommended to add the .tmuo files to source control, you can share override profiles among team members by manually editing the .tmuo files.
+这意味着覆盖配置文件会在 Tabular Editor 的不同会话之间保留。 由于不建议将 .tmuo 文件纳入版本控制，你可以通过手动编辑 .tmuo 文件，在团队成员之间共享覆盖配置文件。

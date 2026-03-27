@@ -1,48 +1,48 @@
 ---
 uid: kb.bpa-visible-objects-no-description
-title: Visible Objects Should Have Descriptions
+title: Los objetos visibles deben tener descripciones
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring visible model objects have descriptions to improve discoverability and user experience.
+description: Regla de buenas prácticas que garantiza que los objetos visibles del modelo tengan descripciones para facilitar su descubrimiento y mejorar la experiencia del usuario.
 ---
 
-# Visible Objects Should Have Descriptions
+# Los objetos visibles deben tener descripciones
 
-## Overview
+## Resumen
 
-This best practice rule identifies visible tables, columns, measures, calculation groups, and user-defined functions that lack descriptions. Adding descriptions improves model usability, documentation quality, and user experience.
+Esta regla de buenas prácticas identifica tablas, columnas, medidas, grupos de cálculo y funciones definidas por el usuario visibles que carecen de descripciones. Añadir descripciones mejora la usabilidad del modelo, la calidad de la documentación y la experiencia del usuario.
 
-- Category: **Maintenance**
+- Categoría: **Mantenimiento**
 
-- Severity: Low (1)
+- Gravedad: Baja (1)
 
-## Applies To
+## Se aplica a
 
-- Tables
-- Calculated Tables
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
-- Measures
-- Calculation Groups
-- User-Defined Functions (Compatibility Level 1702+)
+- Tablas
+- Tablas calculadas
+- Columnas de datos
+- Columnas calculadas
+- Columnas de tablas calculadas
+- Medidas
+- Grupos de cálculo
+- Funciones definidas por el usuario (nivel de compatibilidad 1702+)
 
-## Why This Matters
+## Por qué es importante
 
-Descriptions provide critical context for model users:
+Las descripciones aportan contexto crítico a los usuarios del modelo:
 
-- **Improved discoverability**: Users understand field purpose before using them
-- **Better self-service BI**: Business users can work independently with clear guidance
-- **Reduced support burden**: Fewer questions about field definitions
-- **Enhanced tooltips**: Power BI and Excel show descriptions in hover tooltips
-- **Documentation foundation**: Descriptions form the basis for automated documentation
-- **Governance and compliance**: Descriptions can include data lineage and business definitions
-- **Usage by AI**: AI Agents can better infer the purpose of an object if it has a description. 
-Without descriptions, users guess at field meanings, leading to incorrect analysis and increased support requests.
+- **Mayor facilidad de descubrimiento**: Los usuarios entienden para qué sirven los campos antes de usarlos
+- **Mejor BI de autoservicio**: Los usuarios de negocio pueden trabajar de forma independiente con una guía clara
+- **Menor carga de soporte**: Menos preguntas sobre las definiciones de los campos
+- **Tooltips mejorados**: Power BI y Excel muestran descripciones en la información sobre herramientas al pasar el cursor
+- **Fundamento de la documentación**: Las descripciones sirven de base para la documentación automatizada
+- **Gobernanza y cumplimiento**: Las descripciones pueden incluir el linaje de datos y definiciones empresariales
+- **Uso por IA**: Los agentes de IA pueden inferir mejor el propósito de un objeto si tiene una descripción.
+  Sin descripciones, los usuarios tienen que adivinar el significado de los campos, lo que lleva a análisis incorrectos y a más solicitudes de soporte.
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when an object is **visible** AND has an empty or whitespace-only description:
+La regla se activa cuando un objeto es **visible** Y tiene una descripción vacía o formada únicamente por espacios en blanco:
 
 ```csharp
 string.IsNullOrWhitespace(Description)
@@ -50,57 +50,57 @@ and
 IsHidden == false
 ```
 
-**Note**: Hidden objects are excluded because they are not meant for end-user consumption.
+**Nota**: Se excluyen los objetos ocultos porque no están pensados para el consumo de los usuarios finales.
 
-## How to Fix
+## Cómo solucionarlo
 
-### Manual Fix
+### Solución manual
 
-1. In **TOM Explorer**, select the object
-2. In **Properties** pane, locate the **Description** field
-3. Enter a clear, concise description
-4. Save changes
+1. En el **Explorador TOM**, selecciona el objeto
+2. En el panel de **Propiedades**, localiza el campo **Descripción**
+3. Escribe una descripción clara y concisa
+4. Guarda los cambios
 
-## Common Causes
+## Causas comunes
 
-### Cause 1: Missing Documentation During Development
+### Causa 1: Falta de documentación durante el desarrollo
 
-Objects created without adding descriptions.
+Objetos creados sin añadir descripciones.
 
-### Cause 2: Rapid Prototyping
+### Causa 2: Prototipado rápido
 
-Models built quickly without proper documentation.
+Modelos creados rápidamente sin la documentación adecuada.
 
-### Cause 3: Legacy Models
+### Causa 3: Modelos heredados
 
-Older models created before description standards were established.
+Modelos antiguos creados antes de que se establecieran los estándares de descripción.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Measure: [Total Revenue]
-Description: (empty)
-```
-
-**User experience**: Tooltip shows no information, users must guess measure purpose.
-
-### After Fix
+### Antes de la solución
 
 ```
-Measure: [Total Revenue]
-Description: "Total revenue excluding taxes and discounts. Calculated as SUM(Sales[UnitPrice] * Sales[Quantity]). Use for financial reporting."
+Medida: [Total Revenue]
+Descripción: (vacía)
 ```
 
-**User experience**: Clear tooltip helps users understand and correctly use the measure.
+**Experiencia de usuario**: La información sobre herramientas no muestra información; los usuarios deben adivinar para qué sirve la medida.
 
-## Compatibility Level
+### Después de la corrección
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Medida: [Total Revenue]
+Descripción: "Ingresos totales excluyendo impuestos y descuentos. Se calcula como SUM(Sales[UnitPrice] * Sales[Quantity]). Úsela para informes financieros."
+```
 
-User-Defined Function descriptions are validated at compatibility level **1702** and higher.
+**Experiencia de usuario**: Una información sobre herramientas clara ayuda a los usuarios a comprender y a usar correctamente la medida.
 
-## Related Rules
+## Nivel de compatibilidad
 
-- [Avoid Invalid Characters in Descriptions](xref:kb.bpa-avoid-invalid-characters-descriptions) - Ensuring description quality
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
+
+Las descripciones de las funciones definidas por el usuario se validan en el nivel de compatibilidad **1702** y superior.
+
+## Reglas relacionadas
+
+- [Evitar caracteres no válidos en las descripciones](xref:kb.bpa-avoid-invalid-characters-descriptions) - Garantizar la calidad de las descripciones

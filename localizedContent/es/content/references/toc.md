@@ -1,20 +1,33 @@
-# Downloads and Releases
+# Descargas y lanzamientos
+
 ## @downloads
+
 ## @release-history
+
 ## @whats-new
 
-# Technical Reference
+# Referencia técnica
+
 ## @faq
+
 ## @preferences
+
 ## @policies
+
 ## @shortcuts3
+
 ## @shortcuts2
+
 ## @user-options
+
 ## @supported-files
+
 ## @user-setting-files-te2
 
-# Development and Planning
+# Desarrollo y planificación
+
 ## @roadmap
 
-# Deprecated Features
-## @formatdax 
+# Funciones obsoletas
+
+## @formatdax

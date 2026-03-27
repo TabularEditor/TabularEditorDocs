@@ -1,6 +1,6 @@
-﻿---
+---
 uid: metadata-translation-editor
-title: Metadata Translation Editor
+title: 元数据翻译编辑器
 author: Šarūnas Jučius
 updated: 2023-04-18
 applies_to:
@@ -16,26 +16,27 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Metadata Translation Editor
 
-The **Metadata Translation Editor** provides an overview of the translated names, descriptions and display folders of translatable objects in the model. You can launch the Metadata Translation Editor through the **View** menu. Alternatively, if you only need to edit certain translations, select them in the **TOM Explorer** (hold down CTRL or SHIFT to multi-select), then right-click and choose **Show in metadata translation editor**.
+# 元数据翻译编辑器
 
-![Metadata Translation Editor](~/content/assets/images/metadata-translation-editor.png)
+**元数据翻译编辑器**可概览模型中可翻译对象的名称、说明和显示文件夹的翻译内容。 你可以通过 **视图** 菜单启动元数据翻译编辑器。 另外，如果你只需要编辑部分翻译，请在 **TOM Explorer** 中选中它们（按住 CTRL 或 SHIFT 可多选），然后右键单击并选择 **在元数据翻译编辑器中显示**。
 
-Use the input fields in the metadata translation editor to quickly add/remove or edit translations of object names, descriptions and display folder names for the corresponding language. The first three columns in the editor allow you to change the default names, descriptions and display folder names of objects. You can use Undo (Ctrl+Z) and Redo (Ctrl+Y) the usual way.
+![元数据翻译编辑器](~/content/assets/images/metadata-translation-editor.png)
 
-## Metadata Translation Editor toolbar
+使用元数据翻译编辑器中的输入字段，可以快速为相应语言添加、删除或编辑对象名称、说明和显示文件夹名称的翻译。 编辑器中的前三列允许你更改对象的默认名称、说明和显示文件夹名称。 你可以像平常一样使用撤销（Ctrl+Z）和重做（Ctrl+Y）。
 
-While the Metadata Translation Editor is active, the accompanying toolbar provides the following options:
+## 元数据翻译编辑器工具栏
 
-- ![Metadata Translation Editor New Translation](~/content/assets/images/metadata-translation-editor-add-translation.png) **New translation**: This button adds a new translation to the model. The translation will be displayed in the Metadata Translation Editor.
-- ![Metadata Translation Editor Hide Members](~/content/assets/images/perspective-editor-hide-members.png) **Show/Hide hidden objects**: Enable this option if you want to see all objects in the Metadata Translation Editor, including hidden objects.
-- ![Metadata Translation Editor Hide Names](~/content/assets/images/metadata-translation-editor-name.png) **Show/Hide names**: Disable this option if you don't want to see the name translation columns in Metadata Translation Editor.
-- ![Metadata Translation Editor Hide Descriptions](~/content/assets/images/metadata-translation-editor-description.png) **Show/Hide descriptions**: Disable this option if you don't want to see the description translation columns in Metadata Translation Editor
-- ![Metadata Translation Editor Hide Display Folders](~/content/assets/images/perspective-editor-folder.png) **Show/Hide display folders**: Disable this option if you don't want to see the display folder translation columns in Metadata Translation Editor
+在元数据翻译编辑器处于活动状态时，工具栏提供以下选项：
 
-## Working with many translations
+- ![Metadata Translation Editor New Translation](~/content/assets/images/metadata-translation-editor-add-translation.png) **新建翻译**：点击此按钮可向模型中添加一条新翻译。 该翻译将显示在元数据翻译编辑器中。
+- ![Metadata Translation Editor Hide Members](~/content/assets/images/perspective-editor-hide-members.png) **显示/隐藏已隐藏对象**：如果你想在元数据翻译编辑器中查看所有对象，包括隐藏对象，请启用此选项。
+- ![Metadata Translation Editor Hide Names](~/content/assets/images/metadata-translation-editor-name.png) **显示/隐藏名称**：如果你不想在元数据翻译编辑器中看到名称翻译列，就关闭此选项。
+- ![Metadata Translation Editor Hide Descriptions](~/content/assets/images/metadata-translation-editor-description.png) **显示/隐藏说明**：如果你不想在元数据翻译编辑器中看到说明翻译列，就关闭此选项
+- ![Metadata Translation Editor Hide Display Folders](~/content/assets/images/perspective-editor-folder.png) **显示/隐藏显示文件夹**：如果你不想在元数据翻译编辑器中看到显示文件夹翻译列，就关闭此选项
 
-If you're working on a model with many translations, it may be impractical to display all of them at once. You can rearrange the display order of translations in the Metadata Translation Editor, by dragging the column headers around, making it easier to compare translations side-by-side. Moreover, you can add/remove translations from the editor at any time, through the right-click context menu:
+## 处理大量翻译
 
-![Metadata Translation Editor Columns](~/content/assets/images/metadata-translation-editor-columns-bands.png)
+如果你正在处理包含大量翻译的模型，一次性显示所有翻译可能并不现实。 在元数据翻译编辑器中，你可以通过拖动列标题来调整翻译的显示顺序，更方便并排对照翻译内容。 此外，你可以随时通过右键上下文菜单在编辑器中添加或删除翻译：
+
+![元数据翻译编辑器列](~/content/assets/images/metadata-translation-editor-columns-bands.png)

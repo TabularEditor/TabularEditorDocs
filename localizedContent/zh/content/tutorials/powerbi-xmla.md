@@ -1,6 +1,6 @@
 ---
 uid: powerbi-xmla
-title: Editing through XMLA endpoint
+title: 通过 XMLA endpoint 编辑
 author: Daniel Otykier
 updated: 2021-10-01
 applies_to:
@@ -13,41 +13,41 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: Premium Per User XMLA Endpoints Only
+          note: 仅适用于 Premium Per User XMLA 终结点
         - edition: Enterprise
           full: true
 ---
-# Editing a Power BI dataset through the XMLA endpoint
 
-You can use Tabular Editor 3 to connect to a Power BI dataset published to the Power BI service through the [XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools). The XMLA endpoint is available for Power BI Premium Capacity workspaces (i.e. workspaces assigned to a Px, Ax or EMx SKU), or Power BI Premium-Per-User (PPU) workspaces.
+# 通过 XMLA endpoint 编辑 Power BI Dataset
+
+你可以使用 Tabular Editor 3，通过 [XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools) 连接到发布到 Power BI 服务的 Power BI Dataset。 XMLA endpoint 可用于 Power BI Premium 容量 Workspace（即分配到 Px、Ax 或 EMx SKU 的 Workspace），或 Power BI Premium Per User（PPU）Workspace。
 
 > [!NOTE]
-> Power BI Pro licenses are not sufficient for accessing Power BI datasets in a shared workspace. Premium/Embedded capacity or Premium-Per-User Power BI licensing is required for XMLA access.
+> 仅有 Power BI Pro 许可证不足以在共享 Workspace 中访问 Power BI Dataset。 进行 XMLA 访问需要 Premium/Embedded 容量或 Power BI Premium Per User 许可。
 
-## Prerequisites
+## 先决条件
 
-Tabular Editor requires the XMLA endpoint to allow both read/write access. This setting is controlled by [your capacity admin](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write).
+Tabular Editor 要求 XMLA endpoint 同时允许读取和写入访问。 该设置由容量管理员控制，详见[这里](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write)。
 
 > [!IMPORTANT]
-> If using Tabular Editor 3 be aware of the [license limitations](xref:editions) for connecting to the Power BI XMLA endpoint. You need at least Tabular Editor 3 Business or Enterprise Edition depending on the type of Power BI Workspace used.
+> 如果你使用 Tabular Editor 3，请注意连接到 Power BI XMLA endpoint 的[许可证限制](xref:editions)。 根据你使用的 Power BI Workspace 类型，你至少需要 Tabular Editor 3 商业版或企业版。
 
-## Limitations
+## 限制
 
-When connecting to a dataset through the XMLA endpoint, all data modeling operations supported by the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) are available for editing. In other words, the [Power BI Desktop Limitations](xref:desktop-limitations) do not apply when editing a dataset through the XMLA endpoint of the Power BI Service.
+通过 XMLA endpoint 连接到 Dataset 时，可以编辑 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 支持的所有 Data model 建模操作。 换句话说，通过 Power BI 服务的 XMLA endpoint 编辑 Dataset 时，[Power BI Desktop 限制](xref:desktop-limitations) 不适用。
 
+## 工作流
 
-## Workflow
+Power BI XMLA endpoint 本质上相当于公开了一个 Analysis Services 实例，Tabular Editor 可以连接到该实例。 因此，你可以将 Power BI Workspace 视为 Analysis Services 的**服务器**，而 Workspace 中的每个 Power BI Dataset 则对应 Analysis Services 的**数据库**。 连接到 XMLA endpoint 后，Tabular Editor 的所有建模和管理功能都可用。 如果你决定使用 Tabular Editor 来构建并维护你的 Power BI Dataset，也应考虑为模型元数据使用某种版本控制系统。
 
-The Power BI XMLA endpoint essentially exposes an instance of Analysis Services that Tabular Editor can connect to. As such, you can treat the Power BI workspace as the Analysis Services **server** with each Power BI dataset in the workspace corresponding to an Analysis Services **database**. All of Tabular Editor's modeling and management features are available when connecting to the XMLA endpoint. If you decide to use Tabular Editor to build and maintain your Power BI datasets, you should also consider some kind of version control system for your model metadata.
+工作流如下：
 
-The workflow is then:
+1. 在 Tabular Editor 中创建新的 Data model，或通过 Power BI 的 XMLA endpoint 连接到现有的 Dataset
+2. 将此模型保存为 **Model.bim** 文件，或使用 Tabular Editor 的 [保存到文件夹](xref:save-to-folder) 选项。
+3. 每当你要更改模型时，加载你在步骤 2 中保存的文件/文件夹。 第一次这样做时，决定是否要使用 [Workspace 数据库](xref:workspace-mode)。
+4. 当你准备将更改发布到 Power BI 服务时，通过 Tabular Editor 进行部署（**Model > Deploy...**），从而在 Power BI Workspace 中创建新的 Dataset，或覆盖现有 Dataset。
 
-1. Create a new data model in Tabular Editor or connect to an existing dataset through the Power BI XMLA endpoint
-2. Save this model as a **Model.bim** file or use Tabular Editor's [Save to folder](xref:save-to-folder) option.
-3. Whenever you want to make changes to the model, load the file/folder you saved in step 2. The first time you do this, decide whether you want to use a [workspace database](xref:workspace-mode) or not.
-4. Once you are ready to publish your changes to the Power BI service, perform a deployment through Tabular Editor (**Model > Deploy...**), thus creating a new or overwriting an existing dataset in a Power BI workspace.
-
-## Next steps
+## 后续步骤
 
 - @new-pbi-model
 - @workspace-mode

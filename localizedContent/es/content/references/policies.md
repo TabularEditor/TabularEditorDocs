@@ -1,8 +1,8 @@
 ---
 uid: policies
-title: Policies
+title: Directivas
 author: Daniel Otykier
-updated: 2024-10-30
+updated: 2026-03-25
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,41 +17,46 @@ applies_to:
           full: true
 ---
 
-# Policies
+# Directivas
 
-Some IT organisations may wish to limit certain features of Tabular Editor. This is possible through the use of group policies, by setting certain values in the Windows registry.
+Algunas organizaciones de TI pueden querer limitar ciertas funcionalidades de Tabular Editor. Esto es posible mediante el uso de directivas de grupo, estableciendo determinados valores en el Registro de Windows.
 
 > [!NOTE]
-> This functionality requires the following versions of Tabular Editor:
+> Esta funcionalidad requiere las siguientes versiones de Tabular Editor:
 >
->   - Tabular Editor 2 version [2.17.0](https://github.com/TabularEditor/TabularEditor/releases/tag/2.17.0) or newer
->   - Tabular Editor 3 version [3.3.5](https://github.com/TabularEditor/TabularEditor3/releases/tag/3.3.5) or newer.
+> - Tabular Editor 2, versión [2.17.0](https://github.com/TabularEditor/TabularEditor/releases/tag/2.17.0) o posterior
+> - Tabular Editor 3, versión [3.3.5](https://github.com/TabularEditor/TabularEditor3/releases/tag/3.3.5) o posterior.
 
-Below is a listing of the policies that can be controlled. To enforce one or more of these policies, add a non-zero DWORD value to the registry key. The name of the value specifies which policy to enforce.
+A continuación se muestra una lista de las directivas que se pueden controlar. Para aplicar una o varias de estas directivas, agregue un valor DWORD distinto de cero a la clave del registro. El nombre del valor indica qué directiva se aplicará.
 
-**Registry key:** HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor\
+**Clave del Registro:** HKEY_CURRENT_USER\Software\Policies\Kapacity\Tabular Editor\
 
-|Value|When enforced...|
-|--|--|
-| DisableUpdates | Tabular Editor will not check if newer versions are available online. Moreover, users cannot manually check if new updates are available through the tool. |
-| DisableCSharpScripts | Tabular Editor will not let users create and execute C# scripts. |
-| DisableMacros | Tabular Editor will not let users save or run macros. Moreover, macros defined in the %LocalAppData% folder will not be loaded and compiled upon application startup. |
-| DisableBpaDownload | Tabular Editor will not allow Best Practice Analyzer rules to be downloaded from the web. |
-| DisableWebDaxFormatter | Tabular Editor will disable the DAX code formatter, which performs a webrequest to daxformatter.com. (TE3 will still allow formatting code through the built-in DAX formatter) |
-| DisableErrorReports | **(TE3 Only)** Tabular Editor will not allow users to send error/crash reports to the Tabular Editor 3 support team. |
-| DisableTelemetry | **(TE3 Only)** Tabular Editor will not collect and send anonymous usage data to the Tabular Editor 3 support team. |
-| DisableDaxOptimizer | **(TE3 Only)** The DAX Optimizer integration feature will not be available |
-| DisableDaxOptimizerUpload | **(TE3 Only)** Users will not be allowed to upload VPAX files through the DAX Optimizer integration feature. Implicitly enforced when `DisableDaxOptimizer` is enforced. |
-| RequireDaxOptimizerObfuscation | **(TE3 Only)** Users will not be allowed to upload un-obfuscated (clear text) VPAX files through the DAX Optimizer integration feature. Implicitly enforced when `DisableDaxOptimizer` or `DisableDaxOptimizerUpload` is enforced. |
-| DisableDaxPackageManager | **(TE3 Only)** The DAX Package Manager feature will not be available. |
+| Valor                          | Cuando se aplica...                                                                                                                                                                                                                                                                   |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DisableUpdates                 | Tabular Editor no comprobará si hay versiones más recientes disponibles en línea. Además, los usuarios no podrán comprobar manualmente si hay nuevas actualizaciones disponibles en la herramienta.                                                                                                   |
+| DisableCSharpScripts           | Tabular Editor no permitirá a los usuarios crear ni ejecutar C# Scripts.                                                                                                                                                                                                                                              |
+| DisableMacros                  | Tabular Editor no permitirá a los usuarios guardar ni ejecutar macros. Además, las macros definidas en la carpeta %LocalAppData% no se cargarán ni se compilarán al iniciar la aplicación.                                                                                                            |
+| DisableBpaDownload             | Tabular Editor no permitirá descargar desde la web las reglas de Best Practice Analyzer.                                                                                                                                                                                                                              |
+| DisableWebDaxFormatter         | Tabular Editor deshabilitará el formateador de código DAX, que realiza una solicitud web a daxformatter.com. (TE3 seguirá permitiendo dar formato al código mediante el formateador de DAX integrado)                                                                              |
+| DisableErrorReports            | **(Solo TE3)** Tabular Editor no permitirá a los usuarios enviar Reportes de error/caída al equipo de soporte de Tabular Editor 3.                                                                                                                                                                 |
+| DisableTelemetry               | **(Solo TE3)** Tabular Editor no recopilará ni enviará datos de uso anónimos al equipo de soporte de Tabular Editor 3.                                                                                                                                                                             |
+| DisableDaxOptimizer            | **(Solo TE3)** La función de integración del Optimizador de DAX no estará disponible                                                                                                                                                                                                                               |
+| DisableDaxOptimizerUpload      | **(Solo TE3)** No se permitirá a los usuarios cargar archivos VPAX mediante la función de integración del Optimizador de DAX. Se aplica implícitamente cuando se aplica `DisableDaxOptimizer`.                                                                                     |
+| RequireDaxOptimizerObfuscation | **(Solo TE3)** No se permitirá a los usuarios cargar archivos VPAX sin ofuscar (en texto sin formato) mediante la función de integración del Optimizador de DAX. Se aplica implícitamente cuando se aplica `DisableDaxOptimizer` o `DisableDaxOptimizerUpload`. |
+| DisableDaxPackageManager       | **(Solo TE3)** La función del Administrador de paquetes de DAX no estará disponible.                                                                                                                                                                                                               |
+| DisableAi                      | **(TE3 Only)** All AI functionality is disabled. The AI module is not loaded at startup and no AI-related features are available. Any previously stored API key configuration is cleared.                                                                          |
 
-## Disabling web communications
+## Deshabilitar las comunicaciones web
 
-If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, and `DisableDaxOptimizer` policies.
+If you want to ensure that Tabular Editor does not perform web requests, specify the `DisableUpdates`, `DisableBpaDownload`, `DisableWebDaxFormatter`, `DisableErrorReports`, `DisableTelemetry`, `DisableDaxOptimizer`, and `DisableAi` policies.
 
 > [!NOTE]
-> Even when the above policies are specified, Tabular Editor 3 will still make occasional requests to `https://api.tabulareditor.com` for purposes of license validation. If Tabular Editor 3 is not able to reach this endpoint (due to a firewall or proxy), the user will have to [manually activate](xref:installation-activation-basic#manual-activation-no-internet) the product every 30 days.
+> Incluso cuando se especifican las políticas anteriores, Tabular Editor 3 seguirá realizando solicitudes ocasionales a `https://api.tabulareditor.com` para validar la licencia. Si Tabular Editor 3 no puede acceder a este endpoint (debido a un cortafuegos o un proxy), el usuario tendrá que [activar manualmente](xref:installation-activation-basic#manual-activation-no-internet) el producto cada 30 días.
 
-## Disabling custom scripts
+## Deshabilitar los scripts personalizados
 
-If you want to ensure that Tabular Editor does not allow users to execute arbitrary code, specify the `DisableCSharpScripts` and `DisableMacros` policies.
+Si quieres asegurarte de que Tabular Editor no permita a los usuarios ejecutar código arbitrario, especifica las políticas `DisableCSharpScripts` y `DisableMacros` para deshabilitar las macros.
+
+## Disabling AI features
+
+If you want to prevent all AI functionality, specify the `DisableAi` policy. This prevents the AI module from loading at startup and clears any stored API key configuration.

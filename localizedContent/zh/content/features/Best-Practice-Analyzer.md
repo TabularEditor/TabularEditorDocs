@@ -1,6 +1,6 @@
-﻿---
+---
 uid: best-practice-analyzer
-title: Best Practice Analyzer
+title: 最佳实践分析器
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -14,67 +14,72 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Best Practice Analyzer
 
-As of [Tabular Editor 2.8.1](https://github.com/TabularEditor/TabularEditor/releases/tag/2.8.1), the Best Practice Analyzer has received a major overhaul.
+# 最佳实践分析器
 
-The first thing you'll notice, is that Tabular Editor now reports the number of Best Practice issues directly within the main UI:
+自 [Tabular Editor 2.8.1](https://github.com/TabularEditor/TabularEditor/releases/tag/2.8.1) 起，最佳实践分析器已进行了重大改版。
+
+你首先会注意到，Tabular Editor 现在会在主 UI 中直接显示最佳实践问题的数量：
 
 ![image](https://user-images.githubusercontent.com/8976200/53631987-baee5880-3c0b-11e9-9d66-e906cccce2be.png)
 
-Whenever a change is made to the model, the Best Practice Analyzer scans your model for issues in the background. You can disable this feature under File > Preferences.
+每当对模型进行更改时，最佳实践分析器都会在后台扫描你的模型以查找问题。 你可以在“文件 > 偏好设置”中禁用此功能。
 
-Clicking the link (or pressing F10), brings up the new and improved Best Practice Analyzer UI:
+点击该链接（或按 F10），会打开全新升级的最佳实践分析器 UI：
 
 ![image](https://user-images.githubusercontent.com/8976200/53631947-9eeab700-3c0b-11e9-9217-5739d4de2f88.png)
 
-If you've used the Best Practice Analyzer in previous versions, the first thing you'll notice is that the UI has been completely redesigned, making it take up less real estate on your screen. This allows you to dock the window on one side of your desktop, while keeping the main window in the other side, allowing you to work with both at once.
+如果你在旧版本中用过最佳实践分析器，你首先会注意到该 UI 已完全重新设计，占用的屏幕空间更小。 这样你就可以将该窗口停靠在桌面一侧，同时将主窗口放在另一侧，从而同时操作两者。
 
-The Best Practice Analyzer window continuously lists all the **effective rules** on your model as well as the objects that are in violation of each rule. Right-clicking anywhere inside the list or using the toolbar buttons at the top of the window, let's you perform the following actions:
+最佳实践分析器窗口会持续列出模型中所有 **生效规则**，以及违反各规则的对象。 在列表中的任意位置右键单击，或使用窗口顶部的工具栏按钮，即可执行以下操作：
 
-* **Manage rules...**: This opens the Manage Rules UI, which we will cover below. This UI can also be accessed through the "Tools > Manage BPA Rules..." menu of the main UI.
-* **Go to object...**: Choosing this option or double-clicking on an object in the list, takes you to the same object in the main UI.
-* **Ignore item/items**: Selecting one or more objects in the list and choosing this option, will apply an annotation to the chosen objects indicating that the Best Practice Analyzer should ignore the objects going forward. If you ignored an object by mistake, toggle the "Show ignored" button at the top of the screen. This will let you unignore an object that was previously ignored.
-* **Ignore rule**: If you've selected one or more rules in the list, this option will put an annotation at the model level that indicates, that the selected rule should always be ignored. Again, by toggling the "Show ignored" button, you can unignore rules as well.
-* **Generate fix script**: Rules that have an easy fix (meaning the issue can be resolved simply by setting a single property on the object), will have this option enabled. By clicking, you will get a C# script copied into your clipboard. This script can then be subsequently pasted into the [Advanced Scripting](../how-tos/Advanced-Scripting.md) area of Tabular Editor, where you can review it before executing it to apply the fix.
-* **Apply fix**: This option is also available for rules than have an easy fix, as mentioned above. Instead of copying the script to the clipboard, it will be executed immediately.
+- **管理规则...**：打开“管理规则”界面，我们将在下文介绍。 你也可以在主界面通过“工具 > 管理 BPA 规则...”菜单打开此界面。
+- **转到对象...**：选择此选项，或在列表中双击某个对象，会在主界面中定位到同一对象。
+- **忽略项（单个/多个）**：在列表中选择一个或多个对象并选择此选项，会为所选对象添加注释，表明 Best Practice Analyzer 今后应忽略这些对象。 如果你误将某个对象设为忽略，请点击屏幕顶部的“显示已忽略”按钮。 这样你就可以取消忽略之前被忽略的对象。
+- **忽略规则**：如果你在列表中选择了一条或多条规则，此选项会在模型级别添加一条注释，用于指示所选规则应始终被忽略。 同样，通过切换“显示已忽略”按钮，你也可以取消忽略这些规则。
+- **生成修复脚本**：对于可轻松修复的规则（即只需在对象上设置一个属性就能解决问题），将启用此选项。 点击后，会将一个 C# Script 复制到剪贴板。 然后，你可以将该脚本粘贴到 Tabular Editor 的 [高级脚本](../how-tos/Advanced-Scripting.md) 区域中，在执行以应用修复之前先进行检查。
+- **应用修复**：如上所述，此选项也适用于可轻松修复的规则。 它不会将脚本复制到剪贴板，而是立即执行。
 
-## Managing Best Practice Rules
-If you need to add, remove or modify the rules applying to your model, there's a brand new UI for that as well. You can bring it up by clicking the top-left button on the Best Practice Analyzer window, or by using the "Tools > Manage BPA Rules..." menu item in the main window.
+## 管理最佳实践规则
+
+如果你需要添加、删除或修改应用于模型的规则，这里也提供了一套全新的 UI。 你可以通过点击 Best Practice Analyzer 窗口左上角的按钮将其调出，或在主窗口中使用 "Tools > Manage BPA Rules..." 菜单项。
 
 ![image](https://user-images.githubusercontent.com/8976200/53632990-2f29fb80-3c0e-11e9-82fe-ee9c921662c7.png)
 
-This UI contains two lists: The top list represents the **collections** of rules that are currently loaded. Selecting a collection in this list, will display all the rules that are defined within this collection in the bottom list. By default, three rule collections will show up:
+该 UI 包含两个列表：上方列表表示当前已加载的规则的 **集合**。 在此列表中选择一个规则集后，下方列表会显示该规则集中定义的所有规则。 默认会显示三个规则集：
 
-* **Rules within the current model**: As the name indicates, this is the collection of rules that have been defined within the current model. The rule definitions are stored as an annotation on the Model object.
-* **Rules for the local user**: These are rules that are stored in your `%AppData%\..\Local\TabularEditor\BPARules.json` file. These rules will apply to all models that are loaded in Tabular Editor by the currently logged in Windows user.
-* **Rules on the local machine**: These rules are stored in the `%ProgramData%\TabularEditor\BPARules.json`. These rules will apply to all models that are loaded in Tabular Editor on the current machine.
+- **当前模型中的规则**：顾名思义，这是在当前模型中定义的规则集。 规则定义以注释的形式存储在 Model 对象上。
+- **Rules for the local user**: These are rules that are stored in your `%AppData%\..\Local\TabularEditor3\BPARules.json` file (Tabular Editor 3) or `%AppData%\..\Local\TabularEditor\BPARules.json` file (Tabular Editor 2). 这些规则将应用于当前登录的 Windows 用户在 Tabular Editor 中加载的所有模型。
+- **本机上的规则**：这些规则存储在 `%ProgramData%\TabularEditor\BPARules.json` 文件中。 这些规则将应用于当前机器上在 Tabular Editor 中加载的所有模型。
 
-If the same rule (by ID) is located in more than one collection, the order of precedence is from top to bottom, meaning a rule defined within the model takes precedence over a rule, with the same ID, defined on the local machine. This allows you to override existing rules, for example to take model specific conventions into account.
+如果同一条规则（按 ID）同时存在于多个规则集中，则优先级从上到下：也就是说，模型中定义的规则会优先于本机上定义的同 ID 规则。 这样你就可以覆盖现有规则，例如以便考虑模型特定的约定。
 
-At the top of the list, you'll see a special collection called **(Effective rules)**. Selecting this collection will show you the list of rules that actually apply to the currently loaded model, respecting the precedence of rules with identical ID's, as mentioned above. The lower list will indicate which collection a rule belongs to. Also, you will notice that a rule will have its name striked out, if a rule with a similar ID exists in a collection of higher precedence:
+在列表顶部，你会看到一个名为 **(Effective rules)** 的特殊集合。 选择此规则集后，将显示实际应用于当前加载模型的规则列表，并会遵循上述相同 ID 规则的优先级。 下方列表会标明每条规则属于哪个规则集。 此外，如果在优先级更高的规则集中已存在 ID 相近的规则，你会看到该规则的名称会被划线显示：
 
 ![image](https://user-images.githubusercontent.com/8976200/53633831-74e7c380-3c10-11e9-925e-1419987f5a17.png)
 
-### Adding additional collections
-A new feature in Tabular Editor 2.8.1, is the possibility of including rules from other sources on a model. If, for example, you have a rules file located on a network share, you can now include that file as a rule collection in the current model. If you have write access to the location of the file, you'll also be able to add/modify/remove rules from the file. Rule collections that are added this way take precedence over rules that are defined within the model. If you add multiple such collections, you can shift them up and down to control their mutual precedence.
+### 添加额外规则集
 
-Click the "Add..." button to add a new rule collection to the model. This provides the following options:
+Tabular Editor 2.8.1 的一项新功能是：可以在模型中包含来自其他来源的规则。 例如，如果你有一个存放在网络共享上的规则文件，现在可以将该文件作为规则集包含到当前模型中。 如果你对该文件所在位置有写入权限，还可以在该文件中添加/修改/删除规则。 以这种方式添加的规则集，其优先级高于模型内定义的规则。 如果你添加了多个此类规则集，可以通过上下移动它们来控制彼此之间的优先级。
+
+点击“添加...”按钮，将新的规则集添加到模型中。 这会提供以下选项：
 
 ![image](https://user-images.githubusercontent.com/8976200/53634211-7cf43300-3c11-11e9-8fed-7df113264a6f.png)
 
-* **Create new Rule File**: This will create a new, empty, .json file at the specified location, which you can subsequently add rules to. When choosing the file, notice that there is an option for using relative file paths. This is useful when you want to store the rule file in the same code repository as the current model. However, please be aware that a relative rule file reference only works, when the model has been loaded from disk (since there is no working directory when loading a model from an instance of Analysis Services).
-* **Include local Rule File**: Use this option if you already have a .json file containing rules, that you want to include in your model. Again, you have the option of using relative file paths, which may be beneficial if the file is located close to the model metadata. If the file is located on a network share (or generally, on a drive different than where the currently loaded model metadata resides), you can only include it using an absolute path.
-* **Include Rule File from URL**: This option lets you specify an HTTP/HTTPS URL, that should return a valid rule definition (json). This is useful if you want to include rules from an online source, for example the [standard BPA rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json) from the [BestPracticeRules GitHub site](https://github.com/microsoft/Analysis-Services/tree/master/BestPracticeRules). Note that rule collections added from online sources will be read-only.
+- **创建新规则文件**：将在指定位置创建一个新的空的 .json 文件，之后你可以向其中添加规则。 选择文件时请注意：可以使用相对文件路径。 当你希望将规则文件与当前模型存放在同一个代码仓库中时，这会很有用。 不过请注意：相对路径的规则文件引用仅在模型从磁盘加载时才有效（因为从 Analysis Services 实例加载模型时没有工作目录）。
+- **包含本地规则文件**：如果你已经有一个包含规则的 .json 文件，并希望将其包含到模型中，请使用此选项。 同样，你也可以选择使用相对文件路径；如果该文件与模型元数据位置相近，这会更方便。 如果文件位于网络共享上（或更一般地说，位于与当前加载的模型元数据不同的驱动器上），则只能使用绝对路径来包含它。
+- **从 URL 包含规则文件**：使用此选项可指定一个 HTTP/HTTPS URL，该 URL 应返回有效的规则定义（JSON）。 如果你希望从在线来源包含规则，这会很有用。例如，来自 [BestPracticeRules GitHub 站点](https://github.com/microsoft/Analysis-Services/tree/master/BestPracticeRules) 的[标准 BPA 规则](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json)。 注意：从在线来源添加的规则集将是只读的。
 
-### Modifying rules within a collection
-The lower part of the screen will let you add, edit, clone and delete rules within the currently selected collection, provided you have write access to the location where the collection is stored. Also, the "Move to..." button allows you to move or copy the selected rule to another collection, making it easy to manage multiple collections of rules. 
+### 修改规则集中的规则
 
-### Rule Description Placeholders
-One small improvement compared to previous versions, is that you can now use the following placeholder values within the Best Practice Rule's description. This provides more customisable descriptions that will appear as tooltips in the Best Practice UI:
+在你对规则集存储位置拥有写入权限的前提下，屏幕下半部分可让你在当前选中的规则集中添加、编辑、克隆和删除规则。 此外，“移动到...”按钮允许你将所选规则移动或复制到另一个规则集，便于管理多个规则集。
 
-* `%object%` returns a fully qualified DAX reference (if applicable) to the current object
-* `%objectname%` returns only the name of the current object
-* `%objecttype%` returns the type of the current object
+### 规则说明占位符
+
+与之前版本相比，有一个小改进：现在你可以在“最佳实践规则”的描述中使用以下占位符值。 这将提供更多可自定义的描述，这些描述会在“最佳实践”界面中以工具提示的形式显示：
+
+- `%object%` 返回对当前对象的完全限定 DAX 引用（如适用）
+- `%objectname%` 仅返回当前对象的名称
+- `%objecttype%` 返回当前对象的类型
 
 ![image](https://user-images.githubusercontent.com/8976200/53671918-587f7180-3c78-11e9-855f-ed497f2c0c98.png)

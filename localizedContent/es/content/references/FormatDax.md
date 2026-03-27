@@ -1,6 +1,6 @@
-﻿---
+---
 uid: formatdax
-title: FormatDax deprecation
+title: Deprecación de FormatDax
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -8,13 +8,15 @@ applies_to:
     - product: Tabular Editor 3
       none: true
 ---
-# FormatDax deprecation
 
-The `FormatDax` method (which is one of the available [helper methods](xref:advanced-scripting#helper-methods) in Tabular Editor) has been deprecated with the release of Tabular Editor 2.13.0.
+# Deprecación de FormatDax
 
-The reason for the deprecation is that the web service at https://www.daxformatter.com/ was starting to experience a heavy load of multiple request in quick succession, which were causing issues at their end. This is because the `FormatDax` method performs a web request each time it is called in a script, and many people have been using scripts such as the following:
+El método `FormatDax` (que es uno de los [métodos auxiliares](xref:advanced-scripting#helper-methods) disponibles en Tabular Editor) ha quedado obsoleto con el lanzamiento de Tabular Editor 2.13.0.
 
-**Don't do this!**
+El motivo de esta deprecación es que el servicio web de https://www.daxformatter.com/ estaba empezando a recibir una carga elevada de múltiples solicitudes en rápida sucesión, lo que les estaba causando problemas. Esto se debe a que el método `FormatDax` realiza una solicitud web cada vez que se invoca en un script, y muchas personas han estado usando scripts como el siguiente:
+
+**¡No hagas esto!**
+
 ```csharp
 foreach(var m in Model.AllMeasures)
 {
@@ -23,13 +25,13 @@ foreach(var m in Model.AllMeasures)
 }
 ```
 
-This is fine for small models with a few tens of measures, but the traffic on www.daxformatter.com indicates that a script such as the above is being executed across multiple models with thousands of measures, even several times per day!
+Esto está bien para modelos pequeños con unas pocas decenas de medidas, pero el tráfico en www.daxformatter.com indica que se está ejecutando un script como el anterior en varios modelos con miles de medidas, ¡incluso varias veces al día!
 
-To address this issue, Tabular Editor 2.13.0 will show a warning when `FormatDax` is called more than three times in a row, using the syntax above. In addition, subsequent calls will be throttled with a 5 second delay between each call.
+Para abordar este problema, Tabular Editor 2.13.0 mostrará una advertencia cuando se llame a `FormatDax` más de tres veces seguidas, usando la sintaxis anterior. Además, las llamadas posteriores se limitarán, con un retraso de 5 segundos entre cada una.
 
-## Alternative syntax
+## Sintaxis alternativa
 
-Tabular Editor 2.13.0 introduces two different ways of calling FormatDax. The above script can be rewritten into either of the following:
+Tabular Editor 2.13.0 incorpora dos formas distintas de llamar a FormatDax. El script anterior se puede reescribir de cualquiera de las siguientes maneras:
 
 ```csharp
 foreach(var m in Model.AllMeasures)
@@ -38,13 +40,13 @@ foreach(var m in Model.AllMeasures)
 }
 ```
 
-...or simply...:
+...o simplemente...:
 
 ```csharp
 Model.AllMeasures.FormatDax();
 ```
 
-Both these approaches will batch all www.daxformatter.com calls into a single request. You may also use the global method syntax if you prefer:
+Ambos enfoques agruparán todas las llamadas a www.daxformatter.com en una sola solicitud. También puedes usar la sintaxis de método global si lo prefieres:
 
 ```csharp
 foreach(var m in Model.AllMeasures)
@@ -53,19 +55,19 @@ foreach(var m in Model.AllMeasures)
 }
 ```
 
-...or simply...:
+...o simplemente...:
 
 ```csharp
 FormatDax(Model.AllMeasures);
 ```
 
-## More details
+## Más detalles
 
-Technically, `FormatDax` has now been implemented as two overloaded extension methods:
+Técnicamente, `FormatDax` ahora se ha implementado como dos métodos de extensión sobrecargados:
 
-1) `void FormatDax(this IDaxDependantObject obj)`
-2) `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat = false, bool? skipSpaceAfterFunctionName = null)`
+1. `void FormatDax(this IDaxDependantObject obj)`
+2. `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat = false, bool? skipSpaceAfterFunctionName = null)`
 
-Overload #1 above will queue the provided object for formatting when script execution completes, or when a call is made to the new `void CallDaxFormatter()` method. Overload #2 will immediately call www.daxformatter.com with a single web request that will format all DAX expressions for all the objects provided in the enumerable. You may use either of these methods as you see fit.
+La sobrecarga núm. 1 anterior pondrá en cola el objeto proporcionado para darle formato cuando finalice la ejecución del script o cuando se llame al nuevo método `void CallDaxFormatter()`. La sobrecarga n.º 2 llamará inmediatamente a www.daxformatter.com mediante una única solicitud web, que dará formato a todas las expresiones DAX de todos los objetos proporcionados en el enumerable. Puedes usar cualquiera de estos métodos según te convenga.
 
-Note that the new method does not take any string arguments. It considers all DAX properties on the provided object for formatting (for measures, this is the Expression and DetailRowsExpression properties, for KPIs, this is the StatusExpression, TargetExpression and TrendExpression, etc.).
+Ten en cuenta que el nuevo método no acepta ningún argumento de tipo cadena. Tiene en cuenta todas las propiedades DAX del objeto proporcionado para darles formato (en las medidas, son las propiedades Expression y DetailRowsExpression; en los KPI, son StatusExpression, TargetExpression y TrendExpression, etc.).

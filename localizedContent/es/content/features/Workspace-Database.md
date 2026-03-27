@@ -1,6 +1,8 @@
-﻿---
+---
 uid: workspace-databases
-title: Introducing Workspace Databases
+title: Presentamos las bases de datos de Workspace
+author: Morten Lønskov
+updated: 2026-03-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -14,32 +16,34 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-## Introducing Workspace Databases
-Tabular Editor 3.0 supports editing model metadata loaded from disk with a simultaneous connection to a database deployed to an instance of Analysis Services. We call this database the _workspace database_. Going forward, this is the recommended approach to tabular modeling within Tabular Editor.
 
-This makes the development workflow a lot simpler, since you only need to hit Save (Ctrl+S) once, to simultaneously save your changes to the disk **and** update the metadata in the workspace database. This also has the advantage, that any error messages returned from Analysis Services, are immediately visible in Tabular Editor upon hitting Save. In a sense, this is similar to the way SSDT / Visual Studio or Power BI Desktop does, except that you are in control of when the workspace database is updated.
+## Presentamos las bases de datos de Workspace
 
-When you load a model from a Model.bim file or folder structure, you will see the following prompt:
+Tabular Editor 3.0 permite editar los metadatos del modelo cargados desde el disco mientras se mantiene una conexión simultánea a una base de datos implementada en una instancia de Analysis Services. A esta base de datos la llamamos _base de datos de Workspace_. De ahora en adelante, este es el enfoque recomendado para el modelado tabular en Tabular Editor.
+
+Esto simplifica mucho el flujo de trabajo de desarrollo, ya que solo tienes que pulsar Guardar (Ctrl+S) una sola vez para guardar los cambios en el disco **y** actualizar simultáneamente los metadatos en la base de datos de Workspace. Esto también tiene la ventaja de que cualesquiera mensajes de error devueltos por Analysis Services son inmediatamente visibles en Tabular Editor al pulsar Guardar. En cierto modo, es similar a cómo funcionan SSDT / Visual Studio o Power BI Desktop, salvo que tú controlas cuándo se actualiza la base de datos de Workspace.
+
+Cuando cargas un modelo desde un archivo Model.bim o una estructura de carpetas, verás el siguiente aviso:
 
 ![image](https://user-images.githubusercontent.com/8976200/58166683-a65db180-7c8a-11e9-9df3-be9a716b3ad1.png)
 
-* **Yes**: Model metadata is loaded from disk and then immediately deployed to an instance of Analysis Services. Tabular Editor will then connect to the newly deployed database. The next time the same model is loaded from disk, Tabular Editor will redeploy and connect to the database automatically.
-* **No**: Model metadata is loaded from disk into Tabular Editor as usual, without connecting to an instance of Analysis Services.
-* **No, don't ask again**: Same as the option above, but Tabular Editor will not ask again the next time the same model is loaded.
+- **Sí**: Los metadatos del modelo se cargan desde el disco y, a continuación, se implementan inmediatamente en una instancia de Analysis Services. Luego, Tabular Editor se conectará a la base de datos recién implementada. La próxima vez que se cargue el mismo modelo desde el disco, Tabular Editor volverá a implementarlo y se conectará a la base de datos automáticamente.
+- **No**: Los metadatos del modelo se cargan desde el disco en Tabular Editor como siempre, sin conectarse a una instancia de Analysis Services.
+- **No, no preguntar de nuevo**: Igual que la opción anterior, pero Tabular Editor no volverá a preguntar la próxima vez que se cargue el mismo modelo.
 
-### Setting up a Workspace Database
+### Configurar una base de datos de Workspace
 
-When you select the "Yes" option in the prompt shown above, you will be asked for a servername and (optional) credentials to an instance of Analysis Services. Hitting "OK" will show you a list of databases already on the instance. Tabular Editor assumes that you want to deploy a new database and provides a default name for the new database, based on your Windows username and the current date and time:
+Cuando seleccionas la opción "Sí" en el aviso mostrado arriba, se te pedirá un nombre de servidor y credenciales (opcionales) para una instancia de Analysis Services. Al hacer clic en "OK", verás una lista de las bases de datos que ya existen en la instancia. Tabular Editor asume que quieres desplegar una nueva base de datos y proporciona un nombre predeterminado para ella, basado en tu nombre de usuario de Windows y la fecha y hora actuales:
 
 ![image](https://user-images.githubusercontent.com/8976200/58179509-a10f5f80-7ca8-11e9-9764-4cb76b9d1a8b.png)
 
-If you want to use and existing database as your workspace database, simply select it on the list. **Warning: If you choose an existing database, it will be overwritten with the metadata of the model loaded from disk. For this reason it is not recommended to set up workspace databases on a production instance!**
+Si desea usar una base de datos existente como base de datos de Workspace, simplemente selecciónela en la lista. **Advertencia: Si elige una base de datos existente, se sobrescribirá con los metadatos del modelo cargado desde el disco. Por este motivo, no se recomienda configurar bases de datos de Workspace en una instancia de producción!**
 
-### The User Options file (.tmuo)
+### El archivo de opciones de usuario (.tmuo)
 
-To track the workspace settings for each model in your file system, Tabular Editor 3.0 introduces a new file of type .tmuo (short for Tabular Model User Options), which will be placed next to the Model.bim or Database.json file.
+Para realizar un seguimiento de la configuración de Workspace de cada modelo en su sistema de archivos, Tabular Editor 3.0 introduce un nuevo archivo de tipo .tmuo (abreviatura de Tabular Model User Options), que se colocará junto al archivo Model.bim o al archivo Database.json.
 
-The .tmuo file is just a simple JSON document with the following content:
+El archivo .tmuo es un simple documento JSON con el siguiente contenido:
 
 ```json
 {
@@ -49,15 +53,24 @@ The .tmuo file is just a simple JSON document with the following content:
 }
 ```
 
-When loading model metadata from disk, Tabular Editor looks for the presence of a .tmuo file within the same directory as the loaded model file. The name of the .tmuo file must follow the pattern:
+Al cargar metadatos del modelo desde el disco, Tabular Editor busca la presencia de un archivo .tmuo en el mismo directorio que el archivo de modelo cargado. El nombre del archivo .tmuo debe seguir el patrón:
 
 ```
 <modelfilename>.<windowsusername>.tmuo
 ```
 
-The reason that the file contains a username, is to prevent multiple developers from inadvertently overwriting each others workspace databases in parallel development workflows. If the file is present and the "UseWorkspace" flag in the file is set to "true", Tabular Editor will perform the following steps when loading a model from disk:
+El archivo incluye un nombre de usuario para evitar que varios desarrolladores sobrescriban sin darse cuenta las bases de datos de Workspace de otros en flujos de trabajo de desarrollo en paralelo. Si el archivo está presente y el indicador "UseWorkspace" del archivo está establecido en "true", Tabular Editor realizará los siguientes pasos al cargar un modelo desde el disco:
 
-1. Deploy the model metadata to the workspace database (overwriting existing metadata), using the server- and database name specified in the .tmuo file.
-2. Connect to the newly deployed database in "workspace mode".
+1. Desplegar los metadatos del modelo en la base de datos de Workspace (sobrescribiendo los metadatos existentes), usando el nombre del servidor y el de la base de datos especificados en el archivo .tmuo.
+2. Conectarse a la base de datos recién implementada en "modo del área de trabajo".
 
-When in "workspace mode", Tabular Editor simultaneously saves your model to disk and updates the workspace database, whenever you hit Save (ctrl+s). This lets you rapidly test new code and see error messages provided by Analysis Services, without having to manually deploy the database or invoking File > Save As... or File > Save to Folder... whenever you want to persist model metadata to disk.
+En "modo del área de trabajo", Tabular Editor guarda simultáneamente su modelo en disco y actualiza la base de datos de Workspace cada vez que pulsa Guardar (ctrl+s). Esto le permite probar rápidamente código nuevo y ver los mensajes de error proporcionados por Analysis Services, sin tener que desplegar manualmente la base de datos ni invocar Archivo > Guardar como... o Archivo > Guardar en carpeta... siempre que desee guardar los metadatos del modelo en el disco.
+
+### Incremental Refresh Expression Change Detection
+
+When opening a model with a workspace database, Tabular Editor compares the local incremental refresh `Source Expression` and `Polling Expression` with those on the workspace database, for each table governed by a `BasicRefreshPolicy`.
+
+If Tabular Editor detects differences, it prompts you to overwrite the workspace database expressions with your local version. This prevents accidental loss of expression changes, which is particularly important when collaborating via Git where multiple developers may modify these expressions independently.
+
+> [!TIP]
+> If you are working in a team and notice the prompt appearing frequently, coordinate with your team members to ensure incremental refresh expressions are not modified independently in different branches.

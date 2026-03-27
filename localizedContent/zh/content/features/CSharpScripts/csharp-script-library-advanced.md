@@ -1,6 +1,6 @@
 ---
 uid: script-library-advanced
-title: Advanced C# Scripts
+title: 高级 C# 脚本
 author: Morten Lønskov
 updated: 2026-02-20
 applies_to:
@@ -11,26 +11,27 @@ applies_to:
       full: true
 ---
 
-# C# Script Library: Advanced Scripts
+# C# Script 库: 高级脚本
 
-These are more advanced scripts with sophisticated functionalities requiring a more advanced understanding of the C# language and TOM. They are more difficult to modify and thus recommended only once you have become comfortable with the foundations of C# Scripting in Tabular Editor.
+这些脚本更高级，功能更复杂，需要对 C# 语言和 TOM 有更深入的理解。 它们更难修改，因此建议在你已熟悉 Tabular Editor 中 C# Script 的基础之后再使用。
 
 <br>
 <br>
 
-| <div style="width:250px">Script Name</div> | Purpose | Use-case |
-| --- | --- | --- |
-| [Count Model Objects](xref:script-count-things) | Counts all the different objects by type in a model. | When you need an overview of the model contents or want to count objects by type. | 
-| [Output Object Details in a Grid](xref:script-output-things) | Outputs object details in a grid view. | When you need to output object details in a grid view for inspection. |
-| [Create Date Table](xref:script-create-date-table) | Creates a formatted Date table based on selected Date columns in the model. | When you need to create a new date table based on a template. |
-| [Create M Parameter (Auto-Replace)](xref:script-create-and-replace-parameter) | Creates a new M Parameter and automatically adds it to M Partitions. | When you want to replace strings in multiple partitions (i.e. connection strings) with a dynamic M Parameter. |
-| [Format Power Query](xref:script-format-power-query) | Formats the Power Query of a selected M Partition by using the powerqueryformatter.com API. | When you have complex Power Query and need to make it more readable for reading or making changes. |
-| [Implement Incremental Refresh](xref:script-implement-incremental-refresh) | Configures Incremental Refresh automatically using parameters from a UI dialogue box. | When you need to implement incremental refresh but aren't comfortable with the configuration in the table settings. |
-| [Remove Measures with Errors](xref:script-remove-measures-with-error) | Creates a new M Parameter and automatically adds it to M Partitions. | When you want to replace strings in multiple partitions (i.e. connection strings) with a dynamic M Parameter. |
-| [Find & Replace in Selected Measures](xref:script-find-replace) | Searches for a substring in the DAX of selected measures, replacing with another substring. | When you need to quickly find/replace values in multiple DAX measures (i.e. `CALCULATE` filter or broken object references). |
-| [Databricks Semantic Model Set-up](xref:script-databricks-semantic-model-set-up) | Friendly name tables and columns and set column best practices | When your Databricks object names need making more user friendly. |
-| [Create Databricks Relationships](xref:script-create-databricks-relationships) | Create relationships based on primary and foreign key definitions in Databricks Unity Catalog | When you want to re-use Databricks relationship definitions that have already been defined in Unity Catalog. |
-| [Add Databricks Metadata Descriptions](xref:script-add-databricks-metadata-descriptions) | Update table and column descriptions based on Databricks Unity Catalog | When you want to re-use Databricks table and column comments that have already been defined in Unity Catalog. |
-| [Convert DL/SQL to DL/OL](xref:script-convert-dlsql-to-dlol) | Changes the partitions of a Direct Lake over SQL model to Direct Lake over OneLake | Useful for easily migrating to Direct Lake over OneLake |
-| [Convert Import to DL/OL](xref:script-convert-dlsql-to-dlol) | Changes the partitions of a Import model to Direct Lake over OneLake | Useful for easily migrating to Direct Lake over OneLake |
-| [Implement User-defined Aggregations](xref:script-implement-user-defined-aggregations) | Automates the configuration of user-defined aggregations for a selected fact table. | When you want to implement the user-defined aggregations pattern without manually performing each configuration step. |
+| <div style="width:250px">脚本名称</div>                                     | 用途                                                                        | 使用场景                                                                |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [统计模型对象](xref:script-count-things)                                      | 按类型统计模型中各类对象的数量。                                                          | 当你需要概览模型内容，或想按类型统计对象数量时。                                            |
+| [在网格中输出对象详细信息](xref:script-output-things)                               | 以网格视图输出对象详细信息。                                                            | 当你需要在网格视图中输出对象详细信息以便检查时。                                            |
+| [创建日期表](xref:script-create-date-table)                                  | 基于模型中选定的日期列创建格式化的日期表。                                                     | 当你需要基于模板创建新的日期表时。                                                   |
+| [创建 M 参数（自动替换）](xref:script-create-and-replace-parameter)               | 创建新的 M 参数，并自动将其添加到 M 分区。                                                  | 当你想用动态 M 参数替换多个分区中的字符串（例如连接字符串）时。                                   |
+| [格式化 Power Query](xref:script-format-power-query)                       | 使用 powerqueryformatter.com API 格式化所选 M 分区中的 Power Query。  | 当 Power Query 很复杂，需要提高可读性以便阅读或修改时。                                  |
+| [实施增量刷新](xref:script-implement-incremental-refresh)                     | 通过 UI 对话框中的参数自动配置增量刷新。                                                    | 当你需要实施增量刷新，但不太熟悉表设置中的配置方式时。                                         |
+| [删除包含错误的度量值](xref:script-remove-measures-with-error)                    | 创建新的 M 参数，并自动将其添加到 M 分区。                                                  | 当你想用动态 M 参数替换多个分区中的字符串（例如连接字符串）时。                                   |
+| [在所选度量值中查找/替换](xref:script-find-replace)                                | 在所选度量值的 DAX 中搜索子字符串，并替换为另一个子字符串。                                          | 当你需要在多个 DAX 度量值中快速查找/替换值时（例如 `CALCULATE` 筛选器或失效的对象引用）。              |
+| [Databricks 语义模型设置](xref:script-databricks-semantic-model-set-up)       | 为表和列指定友好名称，并设置列最佳实践                                                       | 当你需要让 Databricks 对象名称更便于用户理解时。                                      |
+| [创建 Databricks 关系](xref:script-create-databricks-relationships)         | 基于 Databricks Unity Catalog 中的主键和外键定义创建关系                                 | 当你想复用 Unity Catalog 中已定义的 Databricks 关系时。                           |
+| [添加 Databricks 元数据说明](xref:script-add-databricks-metadata-descriptions) | 基于 Databricks Unity Catalog 更新表和列说明                                       | 当你想复用 Unity Catalog 中已定义的 Databricks 表和列注释时。                        |
+| [将 DL/SQL 转换为 DL/OL](xref:script-convert-dlsql-to-dlol)                 | 将 Direct Lake over SQL 模型的分区更改为 Direct Lake over OneLake                  | 可用于轻松迁移到 Direct Lake over OneLake                                   |
+| [Convert Import to DL/OL](xref:script-convert-import-to-dlol)           | 将 Import 模型的分区更改为基于 OneLake 的 Direct Lake                                 | 有助于轻松迁移到基于 OneLake 的 Direct Lake                                    |
+| [Convert DL/OL to Import](xref:script-convert-dlol-to-import)           | Changes the partitions of a Direct Lake over OneLake model to Import mode | Useful for easily migrating from Direct Lake over OneLake to Import |
+| [实现用户定义的聚合](xref:script-implement-user-defined-aggregations)            | 自动为所选事实表配置用户定义的聚合。                                                        | 当需要实现用户定义的聚合模式，但又不想手动执行每个配置步骤时。                                     |

@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-add-object
-title: Add an Object to a Metric View
+title: Agregar un objeto a una Metric View
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -17,16 +17,17 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Add an object to a Metric View
 
-This how-to demonstrates how to add a new Metric View dimension (field) to a loaded Metric View.
-Similar patterns apply to all Metric View collections.
+# Agregar un objeto a una Metric View
+
+En esta guía se muestra cómo agregar una nueva dimensión (campo) a una Metric View cargada.
+Este patrón se aplica a todas las colecciones de Metric View.
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
-## Create a new Metric View Dimension object
+## Crear un nuevo objeto de dimensión de Metric View
 
-Use the Metric View `Dimension` constructor to create a new Metric View dimension:
+Utiliza el constructor `Dimension` de Metric View para crear una nueva dimensión de Metric View:
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -38,9 +39,9 @@ var newDimension = new MetricView.Dimension
 };
 ```
 
-## Add to the Metric View
+## Agregar a la Metric View
 
-The Metric View `Dimensions` property is an `IList<Dimension>`, so you can use `Add()`:
+La propiedad `Dimensions` de la Metric View es un `IList<Dimension>`, por lo que puedes usar `Add()`:
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -60,14 +61,14 @@ sb.AppendLine($"Dimensions after adding: {SemanticBridge.MetricView.Model.Dimens
 Output(sb.ToString());
 ```
 
-**Output**
+**Salida**
 
 ```
-Dimensions before adding: 8
-Dimensions after adding: 9
+Dimensiones antes de agregar: 8
+Dimensiones después de agregar: 9
 ```
 
-## See also
+## Ver también
 
 - @semantic-bridge-remove-object
 - @semantic-bridge-rename-objects

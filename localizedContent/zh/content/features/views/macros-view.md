@@ -1,6 +1,6 @@
-﻿---
+---
 uid: macros-view
-title: Macros view
+title: 宏视图
 author: Morten Lønskov
 updated: 2023-03-22
 applies_to:
@@ -16,33 +16,31 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Macros view
-Macros are a powerful feature of Tabular Editor that allow you to automate repetitive tasks or create custom actions for your models. A macro is a script written in C# that can access and manipulate the Tabular Object Model (TOM). 
 
-You can create, edit, run and manage macros from the Macros menu in Tabular Editor.
+# 宏视图
+
+宏是 Tabular Editor 的一项强大功能，可让你自动化重复任务，或为你的模型创建自定义操作。 宏是用 C# 编写的脚本，可访问并操作 Tabular Object Model (TOM)。
+
+你可以在 Tabular Editor 的“宏”菜单中创建、编辑、运行和管理宏。
 
 > [!TIP]
-> You can nest your macros in folders by prefixing your macro name in the following pattern `FolderName\MacroName`
+> 你可以按以下模式在宏名称前加上前缀，将宏归类到文件夹中：`FolderName\MacroName`
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/macros-view.png" alt="Macro Window" style="width: 500px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Macro window in Tabular Editor. Provides an overview of all your saved Macros </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/macros-view.png" alt="Macro Window" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> Tabular Editor 中的宏窗口。 概述所有已保存的宏 </figcaption>
 </figure>
 
 > [!NOTE]
-> The macros view displays a list of all macros currently saved in your `%localappdata%\TabularEditor3\MacroActions.json` file.
+> 宏视图会列出当前保存在你的 `%localappdata%\TabularEditor3\MacroActions.json` 文件中的所有宏。
 
-- You can delete a macro by clicking on the "X" button at the top left corner of the view.
-- You can edit a macro by double-clicking on the list item. This will bring up a [C# script document](xref:csharp-scripts) containing the code that will be executed when the macro is invoked. To save your changes to the macro, click the "Edit Macro..." toolbar button (see screenshot below) or use the **C# Script > Edit Macro...** menu item.
-- To create a new macro, start by creating a new [C# script](xref:csharp-scripts), then save it as a macro using the **C# Script > Save as Macro...** menu item.
-
+- 你可以点击视图左上角的“X”按钮删除宏。
+- 你可以双击列表项来编辑宏。 这将打开一个 [C# Script 文档](xref:csharp-scripts)，其中包含宏被调用时将执行的代码。 要保存对宏的更改，点击工具栏按钮“编辑宏...”（见下方截图），或使用菜单项 **C# Script > 编辑宏...**。
+- 要创建新宏，先创建一个新的 [C# Script](xref:csharp-scripts)，然后使用菜单项 **C# Script > 另存为宏...** 把它保存为宏。
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/edit-macro.png" alt="Edit Macro Button" style="width: 500px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> When you have a Macro open you can save it back by choosing "Edit Macro..." </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/edit-macro.png" alt="Edit Macro Button" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2:</strong> 当你打开一个宏时，可以将其保存回去，方法是选择 "编辑宏……" </figcaption>
 </figure>
 
-
-## Next steps
+## 后续步骤
 
 - @creating-macros

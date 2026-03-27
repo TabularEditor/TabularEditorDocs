@@ -97,6 +97,7 @@ The schema compare dialog itself also has a number of improvements, for example 
 
 To learn more, see <xref:importing-tables>.
 
+<a name="workspace-mode"></a>
 ### Workspace mode
 
 Tabular Editor 3 introduces the concept of **workspace mode**, in which model metadata is loaded from disk (Model.bim or Database.json), and then immediately deployed to an Analysis Services instance of your choice. Whenever you hit Save (CTRL+S), the workspace database is synchronized and updated model metadata is saved back to the disk. The advantage of this approach, is that Tabular Editor is connected to Analysis Services, thus enabling the [connected features](#connected-features) listed below, while also making it easy to update the source files on disk. With Tabular Editor 2.x, you had to open a model from a database, and then remember to manually save to disk once in a while.
@@ -105,6 +106,7 @@ This approach is ideal to enable [parallel development](xref:parallel-developmen
 
 For more information, see <xref:workspace-mode>.
 
+<a name="connected-features"></a>
 ### Connected features
 
 Tabular Editor 3 includes a number of new connected features, allowing you to use it as a client tool for Analysis Services. These features are enabled whenever Tabular Editor 3 is connected to Analysis Services, either directly or when using the [workspace mode](#workspace-mode) feature.

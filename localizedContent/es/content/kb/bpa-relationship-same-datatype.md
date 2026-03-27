@@ -1,92 +1,92 @@
 ---
 uid: kb.bpa-relationship-same-datatype
-title: Relationship Columns Must Have Same Data Type
+title: Las columnas de una relación deben tener el mismo tipo de datos
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring relationships connect columns with matching data types to prevent errors and performance issues.
+description: Regla de buenas prácticas que garantiza que las relaciones conecten columnas con tipos de datos coincidentes para evitar errores y problemas de rendimiento.
 ---
 
-# Relationship Columns Must Have Same Data Type
+# Las columnas de una relación deben tener el mismo tipo de datos
 
-## Overview
+## Descripción general
 
-This best practice rule identifies relationships where the connected columns have mismatched data types. Both columns in a relationship must share the same data type to ensure proper filtering, prevent errors, and maintain optimal query performance.
+Esta regla de prácticas recomendadas identifica relaciones en las que las columnas vinculadas tienen tipos de datos distintos. Ambas columnas de una relación deben compartir el mismo tipo de datos para garantizar un filtrado correcto, evitar errores y mantener un rendimiento óptimo de las consultas.
 
-- Category: Error Prevention
+- Categoría: Prevención de errores
 
-- Severity: High (3)
+- Gravedad: Alta (3)
 
-## Applies To
+## Se aplica a
 
-- Relationships
+- Relaciones
 
-## Why This Matters
+## Por qué es importante
 
-Relationships with mismatched data types cause serious problems:
+Las relaciones con tipos de datos que no coinciden provocan problemas graves:
 
-- **Model validation errors**: The model may fail to save or deploy
-- **Relationship creation failures**: Power BI and Analysis Services may reject the relationship
-- **Implicit conversions**: Expensive data type conversions on every query
-- **Incorrect results**: Type coercion leads to unexpected filtering behavior
-- **Performance degradation**: Converting data types during queries slows execution
-- **Memory overhead**: Additional memory required for conversion buffers
+- **Errores de validación del modelo**: Es posible que el modelo no se pueda guardar ni publicar
+- **Errores al crear relaciones**: Power BI y Analysis Services pueden rechazar la relación
+- **Conversiones implícitas**: Conversiones de tipo de datos costosas en cada consulta
+- **Resultados incorrectos**: La conversión forzada de tipos provoca un comportamiento de filtrado inesperado
+- **Degradación del rendimiento**: Convertir tipos de datos durante las consultas ralentiza la ejecución
+- **Sobrecarga de memoria**: Se requiere memoria adicional para los búferes de conversión
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when:
+La regla se activa cuando:
 
 ```csharp
 FromColumn.DataType != ToColumn.DataType
 ```
 
-This detects relationships connecting columns with different data types.
+Esto detecta relaciones que conectan columnas con tipos de datos diferentes.
 
-## How to Fix
+## Cómo corregirlo
 
-### Manual Fix
+### Solución manual
 
-1. Identify which column should change data type
-2. Change the data type in **Power Query**, in the underlying data source or in the model
-3. Delete the existing relationship
-4. Create a new relationship between the corrected columns
-5. Verify filtering works correctly
+1. Identifica qué columna debe cambiar de tipo de datos
+2. Cambia el tipo de datos en **Power Query**, en el Data source subyacente o en el modelo
+3. Elimina la relación existente
+4. Crea una nueva relación entre las columnas corregidas
+5. Comprueba que el filtrado funciona correctamente
 
-## Common Causes
+## Causas comunes
 
-### Cause 1: Inconsistent Data Type Choices
+### Causa 1: Selección incoherente de tipos de datos
 
-Different data types chosen for the same logical key during import or table creation.
+Se eligieron distintos tipos de datos para la misma clave lógica durante la importación o la creación de la tabla.
 
-### Cause 2: Source System Differences
+### Causa 2: Diferencias entre sistemas de origen
 
-Foreign keys imported from different source systems with different type conventions.
+Claves foráneas importadas desde distintos sistemas de origen con convenciones de tipo diferentes.
 
-### Cause 3: DateTime vs Date Mismatch
+### Causa 3: Desajuste entre DateTime y Date
 
-Fact tables using DateTime columns while date dimensions use Date type.
+Tablas de hechos que usan columnas DateTime mientras que las dimensiones de fecha usan el tipo Date.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Relationship: Sales[CustomerID] (Int64) → Customers[CustomerID] (String)
-```
-
-**Error**: Relationship fails validation or creates performance issues with implicit conversion
-
-### After Fix
+### Antes de la corrección
 
 ```
-Relationship: Sales[CustomerID] (Int64) → Customers[CustomerID] (Int64)
+Relación: Sales[CustomerID] (Int64) → Customers[CustomerID] (String)
 ```
 
-**Result**: Relationship works efficiently with no type conversion overhead
+**Error**: la relación no pasa la validación o provoca problemas de rendimiento por conversión implícita
 
-## Compatibility Level
+### Después de la corrección
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Relación: Sales[CustomerID] (Int64) → Customers[CustomerID] (Int64)
+```
 
-## Related Rules
+**Resultado**: la relación funciona de forma eficiente, sin sobrecarga por conversión de tipos
 
-- [Many-to-Many Relationships Should Use Single Direction](xref:kb.bpa-many-to-many-single-direction) - Relationship performance optimization
+## Nivel de compatibilidad
+
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
+
+## Reglas relacionadas
+
+- [Las relaciones de muchos a muchos deben usar una sola dirección](xref:kb.bpa-many-to-many-single-direction) - Optimización del rendimiento de las relaciones

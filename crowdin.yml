@@ -3,7 +3,7 @@
     "source": "/content/**/*.md",
     "translation": "/localizedContent/%two_letters_code%/%original_path%/%original_file_name%",
     "ignore": [
-      "/content/**/TOC.md"
+      "/content/**/toc.md"
     ]
   },
   {

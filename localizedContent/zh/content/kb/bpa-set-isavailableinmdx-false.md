@@ -1,74 +1,76 @@
 ---
 uid: kb.bpa-set-isavailableinmdx-false
-title: Set IsAvailableInMDX to False
+title: 将 IsAvailableInMDX 设置为 False
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule to optimize performance by disabling MDX access for hidden columns that are not used in relationships or hierarchies.
+description: 最佳实践规则：对未用于关系或层次结构的隐藏列禁用 MDX 访问，以优化性能。
 ---
 
-# Set IsAvailableInMDX to False
+# 将 IsAvailableInMDX 设置为 False
 
-## Overview
+## 概览
 
-This best practice rule identifies hidden columns that have the `IsAvailableInMDX` property set to `true` but don't need to be accessible through MDX queries. Setting this property to `false` for unused hidden columns can improve query performance and reduce memory overhead.
+此最佳实践规则用于识别已隐藏但 `IsAvailableInMDX` 属性仍设置为 `true`、且无需通过 MDX 查询访问的列。 对未使用的隐藏列将该属性设置为 `false`，可提升查询性能并降低内存开销。
 
-- Category: Performance
-- Severity: Medium (2)
+- 类别：性能
+- 严重性：中（2）
 
-## Applies To
+## 适用对象
 
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- 数据列
+- 计算列
+- 计算表格列
 
-## Why This Matters
+## 为什么重要
 
-When a column has `IsAvailableInMDX` set to `true`, the Analysis Services engine maintains additional metadata and structures to support MDX queries against that column. For hidden columns that aren't used in relationships, hierarchies, variations, calendars, or as sort-by columns, this overhead is unnecessary and can:
+当某列的 `IsAvailableInMDX` 设置为 `true` 时，Analysis Services 引擎会维护额外的元数据和结构，以支持针对该列的 MDX 查询。 对于未用于关系、层次结构、变体、日历，或未用作“按列排序”列的隐藏列，这类开销没有必要，并可能导致：
 
-- Increase memory consumption
-- Slow down query processing
-- Add complexity to the model metadata
+- 增加内存消耗
+- 降低查询处理速度
+- 增加模型元数据的复杂度
 
-By explicitly setting `IsAvailableInMDX` to `false` for these columns, you optimize the model for DAX-only scenarios, which is the primary query language for Power BI and modern Analysis Services models.
+对这些列显式地将 `IsAvailableInMDX` 设置为 `false`，即可针对仅使用 DAX 的场景优化模型；而 DAX 是 Power BI 和现代 Analysis Services 模型的主要查询语言。
 
 > [!WARNING]
-> **Excel PivotTable Compatibility**: Setting `IsAvailableInMDX` to `false` prevents columns from being dragged to the rows or columns area of Excel PivotTables. Excel PivotTables generate MDX queries when connecting to Analysis Services Tabular models, and they require attribute hierarchies (which are only built when `IsAvailableInMDX = true`) to function properly. If your users need to analyze data using Excel PivotTables or other MDX-based tools, **do not** apply this rule to columns they need to access. For more details, see [Chris Webb's article on IsAvailableInMDX](https://blog.crossjoin.co.uk/2018/07/02/isavailableinmdx-ssas-tabular/).
+> **Excel 数据透视表兼容性**：将 `IsAvailableInMDX` 设为 `false` 会导致无法将列拖到 Excel 数据透视表的“行”或“列”区域。 Excel 数据透视表在连接到 Analysis Services 表格模型时会生成 MDX 查询，并且需要属性层次结构（仅在 `IsAvailableInMDX = true` 时才会构建）才能正常工作。 如果你的用户需要使用 Excel 数据透视表或其他基于 MDX 的工具来分析数据，请**不要**将此规则应用到他们需要访问的列。 更多详细信息，请参阅 [Chris Webb 关于 IsAvailableInMDX 的文章](https://blog.crossjoin.co.uk/2018/07/02/isavailableinmdx-ssas-tabular/)。
 
-## When This Rule Triggers
+## 何时触发此规则
 
-The rule triggers when all of the following conditions are met:
+当满足以下所有条件时，此规则会触发：
 
-1. The column has `IsAvailableInMDX = true`
-2. The column is hidden (or its table is hidden)
-3. The column is NOT used in any `SortBy` relationships
-4. The column is NOT used in any hierarchies
-5. The column is NOT used in any variations
-6. The column is NOT used in any calendars
-7. The column is NOT serving as a `SortByColumn` for another column
+1. 该列的 `IsAvailableInMDX = true`
+2. 该列已隐藏（或其所属表已隐藏）
+3. 该列未用于任何 `SortBy` 关系
+4. 该列未用于任何层次结构
+5. 该列未用于任何变体
+6. 该列未用于任何日历
+7. 该列未作为其他列的 `SortByColumn` 使用
 
-## How to Fix
+## 如何修复
 
-### Automatic Fix
+### 自动修复
 
-This rule includes an automatic fix expression. When you apply the fix in the Best Practice Analyzer:
+此规则包含一条自动修复表达式。 当您在 Best Practice Analyzer 中应用此修复时：
 
 ```csharp
 IsAvailableInMDX = false
 ```
-To apply:
-1. In the **Best Practice Analyzer** select flagged objects
-3. Click **Apply Fix**
 
-### Manual Fix
+应用步骤：
 
-1. In the **TOM Explorer**, locate the flagged column
-2. In the **Properties** pane, find the `IsAvailableInMDX` property
-3. Set the value to `false`
-4. Save your changes
+1. 在 **Best Practice Analyzer** 中选择被标记的对象
+2. 单击 **Apply Fix**
 
-## Example
+### 手动修复
 
-Consider a hidden calculated column used only for intermediate calculations:
+1. 在 **TOM Explorer** 中，找到被标记的列
+2. 在 **Properties** 窗格中，找到 `IsAvailableInMDX` 属性
+3. 将值设置为 `false`
+4. 保存更改
+
+## 示例
+
+考虑一个仅用于中间计算的隐藏计算列：
 
 ```dax
 _TempCalculation = 
@@ -78,17 +80,18 @@ CALCULATE(
 )
 ```
 
-If this column is:
-- Hidden from client tools
-- Not used in any hierarchies or relationships
-- Not referenced by sort operations
+如果该列满足以下条件：
 
-Then setting `IsAvailableInMDX = false` is recommended for optimal performance.
+- 在客户端工具中隐藏
+- 未用于任何层次结构或关系
+- 未在排序操作中引用
 
-## Compatibility Level
+因此，建议将 `IsAvailableInMDX` 设为 `false`，以获得最佳性能。
 
-This rule applies to models with compatibility level **1200** and higher.
+## 兼容级别
 
-## Related Rules
+此规则适用于兼容级别为 **1200** 及更高的模型。
 
-- [Set IsAvailableInMDX to True When Necessary](xref:kb.bpa-set-isavailableinmdx-true-necessary) - The complementary rule ensuring columns that need MDX access have it enabled
+## 相关规则
+
+- [必要时将 IsAvailableInMDX 设为 True](xref:kb.bpa-set-isavailableinmdx-true-necessary) - 互补规则，用于确保需要通过 MDX 访问的列已启用该功能

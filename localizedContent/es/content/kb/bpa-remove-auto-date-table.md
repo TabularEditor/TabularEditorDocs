@@ -1,106 +1,106 @@
 ---
 uid: kb.bpa-remove-auto-date-table
-title: Remove Auto Date Tables
+title: Eliminar tablas de fechas automáticas
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule to identify and remove automatically generated date tables that increase model size and reduce performance.
+description: Regla de buenas prácticas para identificar y eliminar tablas de fechas generadas automáticamente que aumentan el tamaño del modelo y reducen el rendimiento.
 ---
 
-# Remove Auto Date Tables
+# Eliminar tablas de fechas automáticas
 
-## Overview
+## Descripción general
 
-This best practice rule identifies automatically generated date tables created by Power BI Desktop. These auto-generated tables (`DateTableTemplate_` and `LocalDateTable_`) should be removed in favor of a single, explicit date table to optimize model size and performance.
+Esta regla de buenas prácticas identifica las tablas de fechas generadas automáticamente por Power BI Desktop. Estas tablas generadas automáticamente (`DateTableTemplate_` y `LocalDateTable_`) deben eliminarse y sustituirse por una única tabla de fechas explícita para optimizar el tamaño y el rendimiento del modelo.
 
-- Category: Performance
+- Categoría: Rendimiento
 
-- Severity: Medium (2)
+- Gravedad: Media (2)
 
-## Applies To
+## Se aplica a
 
-- Tables
-- Calculated Tables
+- Tablas
+- Tablas calculadas
 
-## Why This Matters
+## Por qué es importante
 
-Power BI automatically creates hidden date tables for every date/datetime column when "Auto Date/Time" is enabled. This causes issues:
+Power BI crea automáticamente tablas de fechas ocultas para cada columna de fecha o fecha y hora cuando está habilitada la opción "Auto Date/Time". Esto provoca problemas:
 
-- **Increased model size**: Each auto-generated table adds unnecessary data
-- **Memory overhead**: Multiple date tables consume more memory than one shared table
-- **Slower refresh**: Additional tables increase refresh duration
+- **Aumento del tamaño del modelo**: Cada tabla generada automáticamente añade datos innecesarios
+- **Sobrecarga de memoria**: Varias tablas de fechas consumen más memoria que una sola tabla compartida
+- **Actualización más lenta**: Las tablas adicionales aumentan la duración de la actualización
 
-A single, well-designed date table is far more efficient and maintainable.
+Una única tabla de fechas bien diseñada es mucho más eficiente y fácil de mantener.
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when it finds calculated tables with names that:
+La regla se activa cuando encuentra tablas calculadas cuyos nombres:
 
-- Start with `"DateTableTemplate_"`, or
-- Start with `"LocalDateTable_"`
+- Comienzan por `"DateTableTemplate_"`, o
+- Comienzan por `"LocalDateTable_"`
 
-These prefixes indicate Power BI's automatically generated date tables.
+Estos prefijos indican las tablas de fechas generadas automáticamente por Power BI.
 
-## How to Fix
+## Cómo solucionarlo
 
-### Manual Fix
+### Solución manual
 
-1. Disable **Auto Date/Time** in Power BI Desktop (**File** > **Options** > **Data Load**)
-2. Create a dedicated date table.
-3. Mark it as a date table and create relationships to fact tables
-4. In **TOM Explorer**, delete tables starting with `DateTableTemplate_` or `LocalDateTable_`
-5. Verify custom date table relationships work correctly
+1. Deshabilita **Fecha/hora automática** en Power BI Desktop (**Archivo** > **Opciones** > **Carga de datos**)
+2. Crea una tabla de fechas específica.
+3. Márcala como tabla de fechas y crea relaciones con las tablas de hechos
+4. En el **Explorador TOM**, elimina las tablas que empiecen por `DateTableTemplate_` o `LocalDateTable_`
+5. Comprueba que las relaciones de la tabla de fechas personalizada funcionen correctamente
 
-## Common Causes
+## Causas habituales
 
-### Cause 1: Auto Date/Time Feature Enabled
+### Causa 1: Función de Fecha/hora automática habilitada
 
-Power BI Desktop's "Auto Date/Time" feature automatically creates these tables.
+La función "Fecha/hora automática" de Power BI Desktop crea estas tablas automáticamente.
 
-### Cause 2: Migrated Models
+### Causa 2: Modelos migrados
 
-Models created with auto tables enabled and never cleaned up.
+Modelos creados con las tablas automáticas habilitadas y que nunca se depuraron.
 
-### Cause 3: Default Settings
+### Causa 3: Configuración predeterminada
 
-New models use default settings which enable auto date tables.
+Los modelos nuevos usan la configuración predeterminada, que habilita las tablas de fechas automáticas.
 
-## Example
+## Ejemplo
 
-### Before Fix
+### Antes de la corrección
 
 ```
-Tables:
+Tablas:
   - Sales
-  - LocalDateTable_OrderDate (hidden, auto-generated)
-  - LocalDateTable_ShipDate (hidden, auto-generated)
+  - LocalDateTable_OrderDate (oculta, generada automáticamente)
+  - LocalDateTable_ShipDate (oculta, generada automáticamente)
   - Products
-  - LocalDateTable_ReleaseDate (hidden, auto-generated)
+  - LocalDateTable_ReleaseDate (oculta, generada automáticamente)
 ```
 
-**Result**: Multiple hidden tables inflate model size
+**Resultado**: Varias tablas ocultas aumentan el tamaño del modelo
 
-### After Fix
+### Después de la corrección
 
 ```
-Tables:
+Tablas:
   - Sales
   - Products
-  - DateTable (explicit, marked as date table)
-    -> Relationships to Sales[OrderDate], Sales[ShipDate], Products[ReleaseDate]
+  - DateTable (explícita, marcada mediante Marcar como tabla de fechas)
+    -> Relaciones con Sales[OrderDate], Sales[ShipDate], Products[ReleaseDate]
 ```
 
-**Result**: Single efficient date table serves all date relationships
+**Resultado**: Una única tabla de fechas eficiente sirve para todas las relaciones de fechas
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Date Table Should Exist](xref:kb.bpa-date-table-exists) - Ensuring a proper date table is present
+- [Debe existir una tabla de fechas](xref:kb.bpa-date-table-exists) - Garantiza que haya una tabla de fechas adecuada
 
-## Learn More
+## Más información
 
-- [Disable Auto Date/Time in Power BI](https://learn.microsoft.com/power-bi/guidance/auto-date-time)
-- [Create Date Tables](https://learn.microsoft.com/power-bi/guidance/model-date-tables)
-- [Date Table Best Practices](https://www.sqlbi.com/articles/creating-a-simple-date-table-in-dax/)
+- [Desactivar fecha y hora automáticas en Power BI](https://learn.microsoft.com/power-bi/guidance/auto-date-time)
+- [Crear tablas de fechas](https://learn.microsoft.com/power-bi/guidance/model-date-tables)
+- [Prácticas recomendadas para tablas de fechas](https://www.sqlbi.com/articles/creating-a-simple-date-table-in-dax/)

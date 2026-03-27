@@ -1,6 +1,6 @@
-﻿---
+---
 uid: dax-scripts
-title: DAX Scripts
+title: Script DAX
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -16,66 +16,67 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# DAX Scripts
 
-**DAX Script** allow you to view and edit DAX expressions and basic properties for multiple objects, in a single document. This is useful, for example, when complex business logic is spread out across multiple measures.
+# Script DAX
 
-You can script the DAX code for any TOM explorer object that has DAX expressions.
+**Script DAX** le permite ver y editar expresiones DAX y propiedades básicas de varios objetos en un único documento. Esto resulta útil, por ejemplo, cuando una lógica de negocio compleja está repartida entre varias medidas.
 
-To use this feature, locate the objects for which you would like to generate a single document, in the TOM Explorer. Multi-select the objects, then right-click and choose **Script DAX**. A new document is created, containing the DAX expressions and basic properties of all the selected objects. You can also generate a DAX script for all objects within a table or all objects within the model, by choosing the table or model object respectively.
+Puede crear un script del código DAX para cualquier objeto del Explorador TOM que tenga expresiones DAX.
+
+Para usar esta funcionalidad, localice en el Explorador TOM los objetos para los que desee generar un único documento. Seleccione varios objetos y, a continuación, haga clic con el botón derecho y elija **Script DAX**. Se crea un documento nuevo que contiene las expresiones DAX y las propiedades básicas de todos los objetos seleccionados. También puede generar un Script DAX para todos los objetos de una tabla o para todos los objetos del modelo, seleccionando, respectivamente, el objeto de tabla o el objeto de modelo.
 
 ![Dax Script](~/content/assets/images/dax-script.png)
 
-Editing objects through a DAX script is slightly different than editing through the **Expression Editor**. With the latter, changes are applied immediately when you navigate to a different object. In a DAX script, however, changes are not applied until you explicitly do so by using the **Script > Apply** (F5) option. If you are connected to an instance of Analysis Services, you can use the **Script > Apply & Sync** (SHIFT+F5) option to simultaneously apply the changes and save the updated model metadata to Analysis Services.
+Editar objetos mediante un Script DAX es ligeramente diferente a hacerlo mediante el **Editor de expresiones**. Con este último, los cambios se aplican de inmediato cuando navega a otro objeto. En un Script DAX, sin embargo, los cambios no se aplican hasta que lo haga explícitamente con la opción **Script > Aplicar** (F5). Si está conectado a una instancia de Analysis Services, puede usar la opción **Script > Aplicar y sincronizar** (SHIFT+F5) para aplicar los cambios y guardar a la vez los metadatos del modelo actualizados en Analysis Services.
 
-You can undo/redo changes made by a DAX script using the usual keyboard shortcuts (Ctrl+Z / Ctrl+Y).
+Puede deshacer/rehacer los cambios realizados en un Script DAX usando los atajos de teclado habituales (Ctrl+Z / Ctrl+Y).
 
-## Multiple DAX scripts
+## Múltiples scripts DAX
 
-You can create as many DAX scripts as you want, if you prefer to have multiple document windows open instead of a single one. This way, you can use the usual IDE features to place the documents side by side, on different monitors, etc. Be aware, that the code within DAX script windows is not updated automatically when changes are made to the object expression/properties in the TOM. So in other words, if you have two or more DAX scripts containing the definition of the same object(s), then the last script to be applied (F5), will always override any changes made through other DAX scripts, or directly through the **Properties View**.
+Puede crear tantos documentos Script DAX como desee si prefiere tener varias ventanas de documento abiertas en lugar de una sola. De esta forma, puedes usar las funciones habituales del IDE para colocar los documentos uno al lado del otro, en monitores diferentes, etc. Ten en cuenta que el código de las ventanas de Script DAX no se actualiza automáticamente cuando se realizan cambios en la expresión o en las propiedades del objeto en el TOM. En otras palabras, si tienes dos o más Scripts DAX que contienen la definición del mismo objeto(s), el último Script DAX que se aplique (F5) siempre sobrescribirá cualquier cambio realizado mediante otros Scripts DAX o directamente a través de la **vista de propiedades**.
 
-## Working with DAX script files
+## Trabajar con archivos de Script DAX
 
-DAX scripts can be saved as text files, using the `.te3daxs` file extension. To save a DAX script as a file, simply use the **File > Save** (Ctrl+S) option. To open a DAX script from a text file, use the **File > Open > File...** (Ctrl+O) option.
+Los Scripts DAX se pueden guardar como archivos de texto, usando la extensión `.te3daxs`. Para guardar un Script DAX como archivo, simplemente usa la opción **Archivo > Guardar** (Ctrl+S). Para abrir un Script DAX desde un archivo de texto, usa la opción **Archivo > Abrir > Archivo...** (Ctrl+O).
 
 > [!NOTE]
-> DAX scripts are not model specific, but since DAX expressions may point to measures, columns and tables defined in the model, there are no guarantees that any DAX script can be applied to any model. DAX scripts are mostly useful for working with several DAX objects within a single document, in the context of a specific data model.
+> Los Scripts DAX no son específicos de un modelo, pero como las expresiones DAX pueden apuntar a medidas, columnas y tablas definidas en el modelo, no se garantiza que cualquier Script DAX pueda aplicarse a cualquier modelo. Los scripts DAX son especialmente útiles para trabajar con varios objetos DAX dentro de un único documento, en el contexto de un modelo de datos específico.
 
-## DAX script editor
+## Editor de Script DAX
 
-The DAX script editor has all the capabilities of the DAX editor used elsewhere in Tabular Editor 3. Specifically, auto-complete, auto-formatting, calltips, etc.
+El editor de Script DAX tiene todas las capacidades del editor DAX que se usa en otras partes de Tabular Editor 3. En concreto, autocompletado, autoformato, información de parámetros, etc.
 
-In addition, to easily manage large DAX scripts, two dropdowns are displayed at the top of the DAX script view. The dropdown on the left allows you to jump between objects defined in the script, whereas the dropdown on the right allows you to jump between properties on the current object.
+Además, para gestionar fácilmente Scripts DAX extensos, se muestran dos listas desplegables en la parte superior de la vista de Script DAX. El menú desplegable de la izquierda te permite cambiar entre los objetos definidos en el script, mientras que el de la derecha te permite cambiar entre las propiedades del objeto actual.
 
-![Dax Script Navigation](~/content/assets/images/dax-script-navigation.png)
+![Navegación del Script DAX](~/content/assets/images/dax-script-navigation.png)
 
-## Define measures
+## Definir medidas
 
-If you want to include the definition of a measure that is referenced in the script, but not already defined in the script, you can do so by right-clicking on a measure reference, and choose the "Define Measure" or "Define Measure with dependencies" option.
+Si quieres incluir la definición de una medida a la que se hace referencia en el script, pero que todavía no está definida en el script, puedes hacerlo haciendo clic con el botón derecho en una referencia de medida y eligiendo la opción "Definir medida" o "Definir medida con dependencias".
 
-![Define Measure With Deps](~/content/assets/images/define-measure-with-deps.png)
+![Definir medida con dependencias](~/content/assets/images/define-measure-with-deps.png)
 
-## Shortcuts
+## Atajos
 
-To apply the script to the model, use the following shortcuts:
+Para aplicar el script al modelo, usa los siguientes atajos:
 
-- **F5**: Apply the entire script to the local model metadata
-- **Shift+F5**: Apply the entire script to the local model metadata, then save the model metadata back to the source
-- **F8**: Apply the currently selected part of the script to the local model metadata
-- **Shift+F8**: Apply the currently selected part of the script to the local model metadata, then save the model metadata back to the source
+- **F5**: Aplicar el script completo a los metadatos del modelo local
+- **Shift+F5**: Aplicar el script completo a los metadatos del modelo local y, a continuación, guardar los metadatos del modelo de nuevo en el origen
+- **F8**: Aplicar la parte seleccionada actualmente del script a los metadatos del modelo local
+- **Shift+F8**: Aplicar la parte seleccionada actualmente del script a los metadatos del modelo local y, a continuación, guardar los metadatos del modelo de nuevo en el origen
 
-## DAX objects supported
+## Objetos DAX compatibles
 
-Tabular Editor 3 supports editing the following types of objects using a DAX script:
+Tabular Editor 3 admite la edición de los siguientes tipos de objetos mediante un Script DAX:
 
-- Measures (including KPIs)
-- Calculated columns
-- Calculated tables
-- Calculation groups (including calculation items)
+- Medidas (incluidos los KPI)
+- Columnas calculadas
+- Tablas calculadas
+- Grupos de cálculo (incluidos los elementos de cálculo)
 
-# DAX script syntax
+# Sintaxis del Script DAX
 
-The syntax for DAX scripts is the following:
+La sintaxis de los Scripts DAX es la siguiente:
 
 ```dax
 <DAX script>:
@@ -136,28 +137,28 @@ CALCULATIONGROUP 'Table name'[Column name]
 ```
 
 > [!TIP]
-> Users of TMDL will undoubtedly have noticed that some similarities exist between the syntax of DAX scripts and the syntax of TMDL. In fact, TMDL was inspired by DAX scripts. However, to keep things simple, DAX scripts intentionally supports only objects that have one or more DAX expressions associated with them. Moreover, the DAX script syntax is designed to be compatible with the `DEFINE` section of a DAX query (provided the DAX script does not specify any object properties). TMDL, on the other hand, is used to define the entire model metadata, and is not limited to DAX objects. However, blocks of TMDL code cannot be readily used in a DAX query as the syntax for defining object names in TMDL, is not valid in DAX.
+> Los usuarios de TMDL sin duda habrán notado que hay algunas similitudes entre la sintaxis de los Scripts DAX y la sintaxis de TMDL. De hecho, TMDL se inspiró en los Scripts DAX. Sin embargo, para simplificar, los Scripts DAX solo admiten intencionadamente objetos que tengan una o varias expresiones DAX asociadas. Además, la sintaxis de los Scripts DAX está diseñada para ser compatible con la sección `DEFINE` de una consulta DAX (siempre que el Script DAX no especifique ninguna propiedad de objeto). TMDL, en cambio, se usa para definir todos los metadatos del modelo y no se limita a los objetos DAX. Sin embargo, los bloques de código TMDL no se pueden usar directamente en una consulta DAX, ya que la sintaxis para definir los nombres de los objetos en TMDL no es válida en DAX.
 
-## Example 1: Measure
+## Ejemplo 1: Medida
 
-As an example, the script below defines the `[Internet Total Sales]` measure on the `'Internet Sales'` table. In addition to the DAX expression of the measure, the script also includes the measure description and format string.
+Como ejemplo, el siguiente script define la medida `[Internet Total Sales]` en la tabla `'Internet Sales'`. Además de la expresión DAX de la medida, el script también incluye la descripción y la cadena de formato de la medida.
 
 ```dax
 ----------------------------------
--- Measure: [Internet Total Sales]
+-- Medida: [Internet Total Sales]
 ----------------------------------
 MEASURE 'Internet Sales'[Internet Total Sales] = SUM('Internet Sales'[Sales Amount])
-    Description = "Returns the sum of all Internet Sales"
+    Description = "Devuelve la suma de todas las ventas por Internet"
     FormatString = "\$#,0.00;(\$#,0.00);\$#,0.00"
 ```
 
-## Example 2: Measure with status and target KPI
+## Ejemplo 2: Medida con KPI de estado y objetivo
 
-The DAX script below defines the `[Internet Current Quarter Sales Performance]` measure, which includes a KPI that has a status and a target expression. The status KPI uses the "Shapes" graphic.
+El siguiente Script DAX define la medida `[Internet Current Quarter Sales Performance]`, que incluye un KPI con una expresión de estado y otra de objetivo. El KPI de estado usa el gráfico "Shapes".
 
 ```dax
 --------------------------------------------------------
--- Measure: [Internet Current Quarter Sales Performance]
+-- Medida: [Internet Current Quarter Sales Performance]
 --------------------------------------------------------
 MEASURE 'Internet Sales'[Internet Current Quarter Sales Performance] =
     IFERROR(
@@ -176,16 +177,16 @@ MEASURE 'Internet Sales'[Internet Current Quarter Sales Performance] =
     , KpiTargetExpression = 1.1
 ```
 
-## Example 3: Calculation group
+## Ejemplo 3: Grupo de cálculo
 
-The DAX script below defines the `'Time Intelligence'` calculation group with the `[Period]` column. The calculation group contains 6 calculation items that performs various time calculations. Notice how the `"YoY %"` item applies a different format string.
+El siguiente Script DAX define el grupo de cálculo `'Time Intelligence'` con la columna `[Period]`. El grupo de cálculo contiene 6 elementos de cálculo que realizan diversos cálculos de tiempo. Observe cómo el elemento `"YoY %"` aplica una cadena de formato diferente.
 
 ```dax
 -----------------------------------------
--- Calculation Group: 'Time Intelligence'
+-- Grupo de cálculo: 'Time Intelligence'
 -----------------------------------------
 CALCULATIONGROUP 'Time Intelligence'[Period]
-    Description = "Use this table to perform time calculations"
+    Description = "Utilice esta tabla para realizar cálculos de tiempo"
 
     CALCULATIONITEM "Current" = SELECTEDMEASURE()
         Ordinal = 0
@@ -216,28 +217,28 @@ CALCULATIONGROUP 'Time Intelligence'[Period]
         Ordinal = 5
 ```
 
-# Unspecified or empty expressions / properties
+# Expresiones o propiedades sin especificar o vacías
 
-As of Tabular Editor 3.16.0, it is possible to specify empty expressions and property values in DAX scripts, or omit object expressions entirely.
+A partir de Tabular Editor 3.16.0, es posible especificar expresiones y valores de propiedad vacíos en Scripts DAX, o incluso omitir por completo las expresiones del objeto.
 
-For example, the following script will create a measure with an empty DAX expression, an empty format string and no Display Folder. If the measure already exists, it will be updated to have an empty DAX expression, an empty format string and no Display Folder.
+Por ejemplo, el siguiente script creará una medida con una expresión DAX vacía, una cadena de formato vacía y sin carpeta de visualización. Si la medida ya existe, se actualizará para tener una expresión DAX vacía, una cadena de formato vacía y sin carpeta de visualización.
 
 ```dax
 MEASURE 'Internet Sales'[Internet Total Sales] =
-    , Description = "TODO: Ask business how this should be implemented and formatted."
+    , Description = "TODO: Consultar con el área de negocio cómo debe implementarse y formatearse."
     , FormatString =
     , DisplayFolder =
 ```
 
-Note that the `,` (comma) before properties following an empty expression is mandatory. Commas are optional when the preceding expression is non-empty.
+Ten en cuenta que la coma (`,`) antes de las propiedades que siguen a una expresión vacía es obligatoria. Las comas son opcionales cuando la expresión anterior no está vacía.
 
-If you want to keep the existing DAX expression on a measure, you can omit the `=` sign after the object name:
+Si quieres conservar la expresión DAX existente de una medida, puedes omitir el signo `=` después del nombre del objeto:
 
 ```dax
 MEASURE 'Internet Sales'[Internet Total Sales]
     DisplayFolder = "Totals"
 ```
 
-The example above will update the `[Internet Total Sales]` measure to have the specified `DisplayFolder`, but will keep the existing DAX expression. All other properties on the object, such as `Description` and `FormatString`, will remain unchanged.
+El ejemplo anterior actualizará la medida `[Internet Total Sales]` para que tenga el `DisplayFolder` especificado, pero mantendrá la expresión DAX existente. El resto de las propiedades del objeto, como `Description` y `FormatString`, permanecerán sin cambios.
 
-These new features make it easier to write scripts that only update specific properties of an object, without having to specify the entire object definition. This way, scripts can more easily be reused across different models.
+Estas nuevas características facilitan escribir scripts que solo actualizan propiedades concretas de un objeto, sin tener que especificar toda la definición del objeto. De este modo, los scripts se pueden reutilizar más fácilmente en distintos modelos.

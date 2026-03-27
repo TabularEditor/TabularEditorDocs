@@ -1,6 +1,6 @@
 ---
 uid: scripting-referencing-objects
-title: Scripting/referencing objects
+title: 脚本编写与对象引用
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,12 +9,13 @@ applies_to:
       full: true
 ---
 
-## Scripting/referencing objects
-You can use drag-and-drop functionality, to script out objects in the following ways:
+## 脚本编写与对象引用
 
-* Drag one or more objects to another Windows application (text editor or SSMS)
-JSON code representing the dragged object(s) will be created. When dragging the Model node, a Table, a Role or a Data Source, a "createOrReplace" script is created.
+你可以使用拖放功能，通过以下方式为对象生成脚本：
 
-* Dragging an object (measure, column or table) into the DAX expression editor, will insert a fully-qualified DAX-reference to the object in question.
+- 将一个或多个对象拖到另一款 Windows 应用程序 (文本编辑器或 SSMS)
+  将会生成表示所拖动对象的 JSON 代码。 拖动“模型”节点、表、角色或数据源时，会生成 CreateOrReplace 脚本。
 
-* Dragging an object to the Advanced Script editor, will insert the C# code necessary to access the object through the TOM tree.
+- 将对象（度量值、列或表）拖到 DAX 表达式编辑器中，会插入该对象的完全限定 DAX 引用。
+
+- 将对象拖到高级脚本编辑器中，会插入通过 TOM 树访问该对象所需的 C# 代码。

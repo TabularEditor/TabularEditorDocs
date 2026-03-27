@@ -1,6 +1,6 @@
-﻿---
+---
 uid: workspace-mode-wt
-title: Workspace Mode
+title: 工作区模式
 author: Daniel Otykier
 updated: 2021-09-06
 applies_to:
@@ -13,9 +13,11 @@ applies_to:
           none: true
         - edition: Business
           partial: true
-          note: Premium Per User XMLA Endpoints Only
+          note: 仅限高级每用户 XMLA 终结点
         - edition: Enterprise
           full: true
 ---
-# (Walkthrough) Workspace Mode
+
+# （演练）工作区模式
+
 [!include[workspace-mode](../features/workspace-mode.partial.md)]

@@ -1,7 +1,7 @@
 ---
 uid: calendars
-title: Calendars (Enhanced Time Intelligence)
-author: Daniel Otykier and Maria José Ferreira
+title: Calendarios (inteligencia temporal mejorada)
+author: Daniel Otykier y María José Ferreira
 updated: 2026-01-22
 applies_to:
   products:
@@ -18,236 +18,229 @@ applies_to:
           full: true
 ---
 
-# Calendars (Enhanced Time Intelligence)
+# Calendarios (inteligencia temporal mejorada)
 
-The September 2025 release of Power BI Desktop introduced a new Public Preview feature called **Enhanced Time Intelligence** (also known as **Calendar-based Time Intelligence**). This feature lets you define custom calendars in your semantic model, enabling time intelligence calculations across diverse calendar systems such as fiscal, retail (4-4-5, 4-5-4, 5-4-4), ISO, and other non-Gregorian calendars.
+La versión de septiembre de 2025 de Power BI Desktop incorporó una nueva característica en versión preliminar pública llamada **Inteligencia temporal mejorada** (también conocida como **Inteligencia temporal basada en calendario**). Esta característica le permite definir calendarios personalizados en su modelo semántico, lo que habilita cálculos de inteligencia temporal en distintos sistemas de calendario, como los fiscales, los minoristas (4-4-5, 4-5-4, 5-4-4), el ISO y otros calendarios no gregorianos.
 
-Unlike classic time intelligence functions that assume a standard Gregorian calendar, the new calendar-based functions derive their behavior from explicit column mappings you define in your Date table. This approach also introduces week-level time intelligence calculations that were difficult to perform previously.
+A diferencia de las funciones clásicas de inteligencia temporal, que asumen un calendario gregoriano estándar, las nuevas funciones basadas en calendario derivan su comportamiento de las asignaciones explícitas de columnas que defina en su tabla de fechas. Este enfoque también incorpora cálculos de inteligencia temporal a nivel de semana que antes resultaban difíciles de realizar.
 
-For more information about how calendar-based time intelligence works, see:
-- [Introducing Calendar-based Time Intelligence in DAX](https://www.sqlbi.com/articles/introducing-calendar-based-time-intelligence-in-dax/) (SQLBI)
-- [Calendar-based Time Intelligence Preview](https://powerbi.microsoft.com/en-us/blog/calendar-based-time-intelligence-time-intelligence-tailored-preview/) (Microsoft)
+Para más información sobre cómo funciona la inteligencia temporal basada en calendario, consulta:
 
-## Defining a Calendar
+- [Presentación de la inteligencia temporal basada en calendario en DAX](https://www.sqlbi.com/articles/introducing-calendar-based-time-intelligence-in-dax/) (SQLBI)
+- [Versión preliminar de la inteligencia temporal basada en calendario](https://powerbi.microsoft.com/en-us/blog/calendar-based-time-intelligence-time-intelligence-tailored-preview/) (Microsoft)
 
-![Creating a calendar](~/content/assets/images/tutorials/calendar-create.png)
+## Definición de un calendario
 
-1. Right-click on a table in your model (typically a Date table) and select **Create > Calendar...**.
-2. Give your calendar a name, e.g. `Fiscal`.
+![Crear un calendario](~/content/assets/images/tutorials/calendar-create.png)
 
-Once calendars are added to a table, they will be shown in the TOM Explorer under the **Calendars** node:
+1. Haz clic con el botón derecho en una tabla de tu modelo (normalmente una tabla de fechas) y selecciona **Crear > Calendario...**.
+2. Asigne un nombre al calendario; por ejemplo, `Fiscal`.
 
-![Calendar in TOM Explorer](~/content/assets/images/tutorials/calendar-tom-explorer.png)
+Una vez que se agregan calendarios a una tabla, se mostrarán en el Explorador TOM, en el nodo **Calendars**:
 
-Before you can use a calendar in your DAX calculations, you need to configure it by mapping columns in the table to the appropriate time unit categories.
+![Calendario en el Explorador TOM](~/content/assets/images/tutorials/calendar-tom-explorer.png)
 
-## The Calendar Editor
+Antes de poder usar un calendario en sus cálculos de DAX, debe configurarlo asignando las columnas de la tabla a las categorías de unidades de tiempo correspondientes.
 
-The January 2026 release of Tabular Editor 3 introduced a dedicated **Calendar Editor** that provides a comprehensive interface for configuring calendars. The editor displays all time unit categories in a structured grid with helpful tooltips, and performs real-time validation to help you avoid configuration errors.
+## Editor de calendario
 
-### Opening the Calendar Editor
+La versión de enero de 2026 de Tabular Editor 3 incorporó un **Editor de calendario** dedicado que ofrece una interfaz completa para configurar calendarios. El editor muestra todas las categorías de unidades de tiempo en una cuadrícula estructurada con descripciones emergentes útiles y realiza una validación en tiempo real para ayudarle a evitar errores de configuración.
 
-You can open the Calendar Editor in any of the following ways:
+### Abrir el Editor de calendario
 
-- Double-click an existing calendar under a table in the TOM Explorer.
-- Right-click an existing calendar under a table in the TOM Explorer and choose **Edit Calendar...**.
-- Select a calendar in the TOM Explorer, then open the **Calendar** menu and choose **Edit Calendar...**.
-- Open the **View** menu and choose **Calendar Editor**.
+Puede abrir el Editor de calendario de cualquiera de las siguientes formas:
 
-![Calendar Editor](~/content/assets/images/tutorials/calendar-editor.png)
+- Haga doble clic en un calendario existente debajo de una tabla en el Explorador TOM.
+- Haga clic con el botón derecho en un calendario existente debajo de una tabla en el Explorador TOM y elija **Editar calendario...**.
+- Seleccione un calendario en el Explorador TOM y, luego, abra el menú **Calendario** y elija **Editar calendario...**.
+- Abra el menú **Vista** y elija **Editor de calendario**.
 
-### Layout of the Calendar Editor
+![Editor de calendario](~/content/assets/images/tutorials/calendar-editor.png)
 
-The Calendar Editor is split into two main areas:
+### Diseño del Editor de calendario
 
-1. **Calendars grid (left panel)**
-   A vertical grid where each calendar is displayed as a column and time unit categories are displayed as rows. The rows are organized hierarchically by Year, Quarter, Month, Week, and Day. In this grid you can:
+El Editor de calendario se divide en dos áreas principales:
 
-   - Select the table that the calendar should get its columns from (typically a Date table) in the **Table** row.
-   - Map columns to time unit categories by selecting from the dropdown in each cell.
-   - See real-time validation feedback via icons and tooltips.
-   - Create additional calendars using the **+ Add Calendar** column (if your model requires multiple calendar definitions).
-   - Rename calendars by editing the name directly in the grid.
-   - Delete calendars by right-clicking on a calendar column.
+1. **Cuadrícula de calendarios (panel izquierdo)**
+   Una cuadrícula vertical donde cada calendario se muestra como una columna y las categorías de unidades de tiempo se muestran como filas. Las filas se organizan jerárquicamente por año, trimestre, mes, semana y día. En esta cuadrícula puedes:
 
-2. **Context panel (right panel)**
-   A detail panel that changes based on your selection in the calendars grid:
+   - Selecciona la tabla de la que el calendario debe tomar sus columnas (normalmente una tabla de fechas) en la fila **Tabla**.
+   - Asigna columnas a categorías de unidad de tiempo seleccionando una opción en el menú desplegable de cada celda.
+   - Consulta los resultados de validación en tiempo real mediante iconos y descripciones emergentes.
+   - Crea calendarios adicionales con la columna **+ Agregar calendario** (si tu modelo requiere varias definiciones de calendario).
+   - Cambia el nombre de los calendarios editando el nombre directamente en la cuadrícula.
+   - Elimina calendarios haciendo clic con el botón derecho en una columna de calendario.
 
-   - **Associated Columns**: When you select a time unit row that has a column mapped, this panel lets you select additional associated columns.
-   - **Time-Related Columns**: When you select the "Time-related columns" row at the bottom of the grid, this panel lets you mark columns as time-related.
+2. **Panel de contexto (panel derecho)**
+   Un panel de detalles que cambia según tu selección en la cuadrícula de calendarios:
 
-![Calendar Editor layout showing the calendars grid and context panel](~/content/assets/images/tutorials/calendar-editor-parts.png)
+   - **Columnas asociadas**: Cuando seleccionas una fila de unidad de tiempo que tiene una columna asignada, este panel te permite seleccionar columnas asociadas adicionales.
+   - **Columnas relacionadas con el tiempo**: Cuando seleccionas la fila "Columnas relacionadas con el tiempo" en la parte inferior de la cuadrícula, este panel te permite marcar columnas como relacionadas con el tiempo.
 
-### Mapping Columns to Time Units
+![Diseño del Editor de calendario que muestra la cuadrícula de calendarios y el panel de contexto](~/content/assets/images/tutorials/calendar-editor-parts.png)
 
-The calendars grid displays all available time unit categories. To map a column to a time unit, click on a time-unit cell under a calendar column in the grid. This opens a dropdown where you can select the **primary column** for that time unit.
+### Asignar columnas a unidades de tiempo
 
-![Selecting a column from the dropdown](~/content/assets/images/tutorials/calendar-dropdown-column-selection.png)
+La cuadrícula de calendarios muestra todas las categorías de unidades de tiempo disponibles. Para asignar una columna a una unidad de tiempo, haz clic en una celda de unidad de tiempo debajo de una columna de calendario en la cuadrícula. Esto abre un menú desplegable donde puedes seleccionar la **columna principal** para esa unidad de tiempo.
 
-You don't need to map every time unit—only the ones that apply to your calendar structure and for which your table has appropriate columns.
+![Seleccionar una columna en el menú desplegable](~/content/assets/images/tutorials/calendar-dropdown-column-selection.png)
 
-Time units are divided into **complete** categories (which uniquely identify a period on their own) and **partial** categories (which require a parent time unit to be mapped first). Hover over any time unit row to see a tooltip describing the expected data format and examples.
+No necesitas asignar todas las unidades de tiempo; solo las que se apliquen a la estructura de tu calendario y para las que tu tabla tenga las columnas adecuadas.
 
-![Tooltip for a complete time unit showing description and examples](~/content/assets/images/tutorials/calendar-complete-time-unit-tooltip.png)
+Las unidades de tiempo se dividen en categorías **completas** (que identifican de forma única un período por sí mismas) y categorías **parciales** (que requieren asignar primero una unidad de tiempo principal). Pasa el cursor sobre cualquier fila de unidad de tiempo para ver una descripción emergente con el formato de datos esperado y ejemplos.
 
-For partial time units, the tooltip also shows which parent time units must be mapped:
+![Descripción emergente de una unidad de tiempo completa que muestra la descripción y ejemplos](~/content/assets/images/tutorials/calendar-complete-time-unit-tooltip.png)
 
-![Tooltip for a partial time unit showing dependencies](~/content/assets/images/tutorials/calendar-partial-time-unit-tooltip.png)
+En el caso de las unidades de tiempo parciales, la descripción emergente también muestra qué unidades de tiempo principales deben asignarse:
 
-#### Example: Using Partial Time Units
+![Descripción emergente de una unidad de tiempo parcial que muestra dependencias](~/content/assets/images/tutorials/calendar-partial-time-unit-tooltip.png)
 
-In some cases, your Date table may not have columns that uniquely identify complete time units like Quarter or Month (e.g., "Q1 2024" or "January 2024"). Instead, you might have columns like `QuarterOfYear` (1-4) and `MonthOfYear` (1-12) that only make sense when combined with a Year column.
+#### Ejemplo: usar unidades de tiempo parciales
 
-In this scenario, you can map the partial time units (`Quarter of Year`, `Month of Year`) along with the `Year` complete time unit. This is a valid configuration because the partial time units can derive their full context from the Year mapping.
+En algunos casos, tu tabla de fechas puede no tener columnas que identifiquen de forma única unidades de tiempo completas como Trimestre o Mes (por ejemplo, "T1 2024" o "enero de 2024"). En su lugar, podrías tener columnas como `QuarterOfYear` (1-4) y `MonthOfYear` (1-12) que solo tienen sentido cuando se combinan con una columna de Año.
 
-![A calendar configuration using partial time units](~/content/assets/images/tutorials/calendar-simple-example.png)
+En este escenario, puedes mapear las unidades de tiempo parciales (`Quarter of Year`, `Month of Year`) junto con la unidad de tiempo completa `Year`. Esta es una configuración válida porque las unidades de tiempo parciales pueden obtener su contexto completo del mapeo de `Year`.
+
+![Una configuración de calendario con unidades de tiempo parciales](~/content/assets/images/tutorials/calendar-simple-example.png)
 
 > [!TIP]
-> To see the available columns and their values while configuring your calendar, right-click on your Date table in the TOM Explorer and choose **Preview Data**.
+> Para ver las columnas disponibles y sus valores mientras configuras tu calendario, haz clic con el botón derecho en tu tabla de fechas en el Explorador TOM y elige **Vista previa de datos**.
 >
-> ![Preview Data option in context menu](~/content/assets/images/tutorials/calendar-preview-data-button.png)
+> ![Opción Vista previa de datos en el menú contextual](~/content/assets/images/tutorials/calendar-preview-data-button.png)
 >
-> You can then dock the Data Preview window next to the Calendar Editor for easy reference.
+> Después, puedes acoplar la ventana de Vista previa de datos junto al Editor de calendario para consultarla fácilmente.
 >
-> ![Docking the Data Preview window](~/content/assets/images/tutorials/calendar-dock-example.png)
+> ![Acoplando la ventana de Vista previa de datos](~/content/assets/images/tutorials/calendar-dock-example.png)
 >
-> Alternatively, you can use the **DAX Query** window to query your Date table and keep it visible alongside the Calendar Editor.
+> Como alternativa, puedes usar la ventana **Consulta DAX** para consultar tu tabla de fechas y mantenerla visible junto al Editor de calendario.
 
-With the Date table preview docked, you can see the column values as you configure your calendar:
+Con la Vista previa de tabla de la tabla de fechas acoplada, puedes ver los valores de las columnas mientras configuras tu calendario:
 
-![Calendar Editor with Date table preview](~/content/assets/images/tutorials/calendar-configured-example.png)
+![Editor de calendario con la Vista previa de tabla de la tabla de fechas](~/content/assets/images/tutorials/calendar-configured-example.png)
 
-**Complete Time Units:**
+**Unidades de tiempo completas:**
 
-| Time Unit | Description | Examples |
-|-----------|-------------|----------|
-| Year | The year | 2024, 2025 |
-| Quarter | The quarter including the year | Q1 2024, Q2 2025 |
-| Month | The month including the year | January 2023, 2024 Feb |
-| Week | The week including the year | Week 50 2023, W50-2023 |
-| Date | The date | 12/31/2025, 4/3/2023 |
+| Unidad de tiempo | Descripción                    | Ejemplos                       |
+| ---------------- | ------------------------------ | ------------------------------ |
+| Año              | El año                         | 2024, 2025                     |
+| Trimestre        | El trimestre incluyendo el año | T1 2024, T2 2025               |
+| Mes              | El mes incluyendo el año       | Enero de 2023, Febrero de 2024 |
+| Semana           | La semana incluyendo el año    | Semana 50 de 2023, W50-2023    |
+| Fecha            | La fecha                       | 31/12/2025, 3/4/2023           |
 
-**Partial Time Units** (require a parent time unit to be mapped):
+**Unidades de tiempo parciales** (requieren que se asigne una unidad de tiempo principal):
 
-| Time Unit | Description | Examples | Requires | Or requires one of |
-|-----------|-------------|----------|----------|-------------------|
-| Quarter of Year | The quarter of the year | Q1, Quarter 2, YQ1 | Year | |
-| Month of Year | The month of the year | January, M11, 11 | Year | |
-| Month of Quarter | The month within a quarter | 1, QM2 | Quarter | <ul><li>Quarter of Year + Year</li></ul> |
-| Week of Year | The week of the year | Week 50, W50, 50 | Year | |
-| Week of Quarter | The week within a quarter | QW10, 10 | Quarter | <ul><li>Quarter of Year + Year</li></ul> |
-| Week of Month | The week within a month | MW2, 2 | Month | <ul><li>Month of Year + Year</li><li>Month of Quarter + Quarter</li><li>Month of Quarter + Quarter of Year + Year</li></ul> |
-| Day of Year | The day of the year | 365, D1 | Year | |
-| Day of Quarter | The day within a quarter | QD2, 50 | Quarter | <ul><li>Quarter of Year + Year</li></ul> |
-| Day of Month | The day of the month | MD10, 30 | Month | <ul><li>Month of Year + Year</li><li>Month of Quarter + Quarter</li><li>Month of Quarter + Quarter of Year + Year</li></ul> |
-| Day of Week | The day of the week | WD5, 5 | Week | <ul><li>Week of Year + Year</li><li>Week of Quarter + Quarter</li><li>Week of Quarter + Quarter of Year + Year</li><li>Week of Month + Month</li><li>Week of Month + Month of Year + Year</li><li>Week of Month + Month of Quarter + Quarter</li><li>Week of Month + Month of Quarter + Quarter of Year + Year</li></ul> |
+| Unidad de tiempo     | Descripción                      | Ejemplos             | Requiere  | O requiere uno de                                                                                                                                                                                                                                                                                                                          |
+| -------------------- | -------------------------------- | -------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Trimestre del año    | El trimestre del año             | Q1, Trimestre 2, YQ1 | Año       |                                                                                                                                                                                                                                                                                                                                            |
+| Mes del año          | El mes del año                   | Enero, M11, 11       | Año       |                                                                                                                                                                                                                                                                                                                                            |
+| Mes del trimestre    | El mes dentro del trimestre      | 1, QM2               | Trimestre | <ul><li>Trimestre del año + Año</li></ul>                                                                                                                                                                                                                                                                                                  |
+| Semana del año       | La semana del año                | Semana 50, W50, 50   | Año       |                                                                                                                                                                                                                                                                                                                                            |
+| Semana del trimestre | La semana dentro de un trimestre | QW10, 10             | Trimestre | <ul><li>Trimestre del año + Año</li></ul>                                                                                                                                                                                                                                                                                                  |
+| Semana del mes       | La semana dentro de un mes       | MW2, 2               | Mes       | <ul><li>Mes del año + Año</li><li>Mes del trimestre + Trimestre</li><li>Mes del trimestre + Trimestre del año + Año</li></ul>                                                                                                                                                                                                              |
+| Día del año          | El día del año                   | 365, D1              | Año       |                                                                                                                                                                                                                                                                                                                                            |
+| Día del trimestre    | El día dentro de un trimestre    | QD2, 50              | Trimestre | <ul><li>Trimestre del año + Año</li></ul>                                                                                                                                                                                                                                                                                                  |
+| Día del mes          | El día del mes                   | MD10, 30             | Mes       | <ul><li>Mes del año + año</li><li>Mes del trimestre + trimestre</li><li>Mes del trimestre + trimestre del año + año</li></ul>                                                                                                                                                                                                              |
+| Día de la semana     | El día de la semana              | WD5, 5               | Semana    | <ul><li>Semana del año + año</li><li>Semana del trimestre + trimestre</li><li>Semana del trimestre + trimestre del año + año</li><li>Semana del mes + mes</li><li>Semana del mes + mes del año + año</li><li>Semana del mes + mes del trimestre + trimestre</li><li>Semana del mes + mes del trimestre + trimestre del año + año</li></ul> |
 
-### Associated Columns
+### Columnas asociadas
 
-When you map a column to a time unit, that column becomes the **primary column** for that time unit. You can optionally add **associated columns** that represent the same time unit in a different format.
+Cuando asignas una columna a una unidad de tiempo, esa columna se convierte en la **columna principal** de esa unidad de tiempo. De forma opcional, puedes añadir **columnas asociadas** que representen la misma unidad de tiempo en un formato diferente.
 
-For example, if you map a numeric `MonthNumber` column (containing values 1-12) to "Month of Year", you might also want to associate a `MonthName` column (containing "January", "February", etc.) with the same time unit. Both columns represent the same concept, but in different formats.
+Por ejemplo, si asignas una columna numérica `MonthNumber` (que contiene valores 1-12) a "Month of Year", puede que también quieras asociar una columna `MonthName` (que contiene "January", "February", etc.) con la misma unidad de tiempo. Ambas columnas representan el mismo concepto, pero en formatos distintos.
 
-To add associated columns:
+Para añadir columnas asociadas:
 
-1. Select a time unit row in the grid that has a column mapped.
-2. In the **Associated Columns** panel on the right, check the columns you want to associate with that time unit.
+1. Selecciona en la cuadrícula una fila de unidad de tiempo que tenga una columna asignada.
+2. En el panel **Columnas asociadas** de la derecha, marca las columnas que quieras asociar a esa unidad de tiempo.
 
-Associated columns receive the same filter behavior as the primary column during time intelligence calculations.
+Las columnas asociadas tienen el mismo comportamiento de filtro que la columna principal durante los cálculos de inteligencia temporal.
 
-![Associated Columns panel in the Calendar Editor](~/content/assets/images/tutorials/calendar-associated-columns.png)
+![Panel de columnas asociadas en el Editor de calendario](~/content/assets/images/tutorials/calendar-associated-columns.png)
 
-## Known limitations of the Calendar Editor
-- **Sort By columns and Associated columns**
+#### Sort By Columns
 
-When a column is used as a **Sort By** column for a Primary time unit column, Analysis Services implicitly treats it as an Associated column. You should **not** explicitly add that Sort By column as an Associated column in the Calendar Editor, as this will cause an error from Analysis Services (duplicate mapping).
+When a Primary time unit column has a **Sort By** column defined, the Sort By column is automatically treated as an associated column. This ensures that both columns receive the same filter behavior during time intelligence calculations, aligning with how Analysis Services processes calendar configurations.
 
-For example, if you set `MonthName` as the Primary column for "Month of Year" and `MonthName` has `MonthNumber` configured as its Sort By column, then `MonthNumber` is implicitly associated. In this case, you do not need to (and should not) add `MonthNumber` as an explicit Associated column. The Sort By column will still provide the expected enhanced calendar behavior (including proper `REMOVEFILTERS()` handling) since the association is inferred.
+For example, if you map a `MonthName` column to "Month of Year" and `MonthName` is sorted by a `MonthNumber` column, the `MonthNumber` column is automatically associated with the time unit. You don't need to manually add the Sort By column to the Associated Columns panel—the Calendar Editor handles this automatically.
 
-Note that this behavior is asymmetric: if you instead set the Sort By column (e.g., `MonthNumber`) as the Primary time unit column, then the display column (e.g., `MonthName`) is **not** automatically treated as Associated. In that scenario, you can explicitly add the display column as an Associated column if desired.
+### Columnas relacionadas con el tiempo
 
-- **Hidden columns are not displayed**
+Además de asignar columnas a categorías específicas de unidades de tiempo, puedes marcar columnas como **relacionadas con el tiempo**. Las columnas relacionadas con el tiempo son columnas de tu tabla de fechas que no encajan en una categoría específica de unidad de tiempo, pero aun así deberían recibir un tratamiento especial durante los cálculos de inteligencia temporal.
 
-Columns with their **Hidden** property set to `True` do not appear in the Calendar Editor's column dropdowns or in the Associated Columns and Time-Related Columns panels. This is unintended behavior, as hidden columns may still need to be used for calendar configuration (for example, numeric key columns used for sorting are often hidden from end users).
+Algunos ejemplos de columnas relacionadas con el tiempo:
 
-A future version of Tabular Editor will address these limitations.
+- `IsHoliday` - Un indicador que señala si la fecha es un día festivo
+- `IsWeekday` - Un indicador que señala si la fecha es un día laborable
+- `FiscalPeriodName` - Una etiqueta descriptiva para el período fiscal
 
-### Time-Related Columns
+**Cómo se comportan las columnas relacionadas con el tiempo:**
 
-In addition to mapping columns to specific time unit categories, you can mark columns as **time-related**. Time-related columns are columns in your Date table that don't fit into a specific time unit category but should still receive special treatment during time intelligence calculations.
+- Durante los **desplazamientos laterales** (como `DATEADD` o `SAMEPERIODLASTYEAR`), se conservan los filtros en las columnas relacionadas con el tiempo, manteniendo la misma granularidad.
+- Durante los **desplazamientos jerárquicos** (como `DATESYTD` o `NEXTMONTH`), se eliminan los filtros en las columnas relacionadas con el tiempo.
 
-Examples of time-related columns include:
-- `IsHoliday` - A flag indicating whether the date is a holiday
-- `IsWeekday` - A flag indicating whether the date is a weekday
-- `FiscalPeriodName` - A descriptive label for the fiscal period
+Para más detalles sobre los desplazamientos laterales y jerárquicos, consulta [Comprender el desplazamiento lateral y el desplazamiento jerárquico](https://www.sqlbi.com/articles/introducing-calendar-based-time-intelligence-in-dax/#:~:text=Understanding%20lateral%20shift%20and%20hierarchical%20shift) (SQLBI).
 
-**How time-related columns behave:**
+Para configurar columnas relacionadas con el tiempo:
 
-- During **lateral shifts** (such as `DATEADD` or `SAMEPERIODLASTYEAR`), filters on time-related columns are preserved, maintaining the same granularity.
-- During **hierarchical shifts** (such as `DATESYTD` or `NEXTMONTH`), filters on time-related columns are cleared.
+1. Selecciona la fila de **Columnas relacionadas con el tiempo** al final de la cuadrícula de calendarios.
+2. En el panel **Columnas relacionadas con el tiempo** de la derecha, marca las columnas que quieras considerar como relacionadas con el tiempo.
 
-For more details on lateral and hierarchical shifts, see [Understanding lateral shift and hierarchical shift](https://www.sqlbi.com/articles/introducing-calendar-based-time-intelligence-in-dax/#:~:text=Understanding%20lateral%20shift%20and%20hierarchical%20shift) (SQLBI).
+![Panel de columnas relacionadas con el tiempo](~/content/assets/images/tutorials/calendar-time-related-columns.png)
 
-To configure time-related columns:
+### Aplicación de cambios
 
-1. Select the **Time-related columns** row at the bottom of the calendars grid.
-2. In the **Time-Related Columns** panel on the right, check the columns you want to mark as time-related.
+Los cambios realizados en el Editor de calendario se aplican al modelo local (pero no se guardan en disco) de dos maneras:
 
-![Time-Related Columns panel](~/content/assets/images/tutorials/calendar-time-related-columns.png)
+- Haz clic en el botón **Aceptar** de la barra de herramientas para aplicar los cambios al modelo local.
+- Los cambios también se aplican automáticamente cuando sales del Editor de calendario (al perder el foco de la vista).
 
-### Applying Changes
+Puedes descartar los cambios pendientes haciendo clic en el botón **Cancelar** antes de cambiar a otra vista.
 
-Changes made in the Calendar Editor are applied to the local model (but not saved to disk) in two ways:
+Para conservar los cambios, guarda el modelo.
 
-- Click the **Accept** button in the toolbar to apply changes to the local model.
-- Changes are also automatically applied when you navigate away from the Calendar Editor (losing focus from the view).
+## Validación en tiempo real
 
-You can discard pending changes by clicking the **Cancel** button before navigating away.
+El Editor de calendario realiza una validación en tiempo real mientras configuras tus calendarios. Los avisos de validación se muestran mediante iconos y descripciones emergentes directamente en la cuadrícula, lo que te ayuda a identificar y resolver problemas antes de guardar.
 
-To persist the changes, save the model.
+Se aplican las siguientes reglas:
 
-## Real-Time Validation
+1. **Nombre de calendario único**
+   Cada calendario debe tener un nombre único en el modelo semántico. Si creas un calendario con un nombre duplicado, el editor añade automáticamente un sufijo (p. ej., "(1)") para garantizar que sea único.
 
-The Calendar Editor performs real-time validation as you configure your calendars. Validation feedback is displayed via icons and tooltips directly in the grid, helping you identify and resolve issues before saving.
+2. **Validación de dependencias de unidades de tiempo**
+   Las unidades de tiempo parciales requieren que sus unidades de tiempo principales estén asignadas. Por ejemplo, si asignas una columna a "Día del mes", también debes asignar una columna a "Mes" (o a "Mes del año" + "Año", etc.). El editor resalta las celdas con dependencias faltantes y muestra una descripción emergente que explica qué unidades de tiempo principales son necesarias.
 
-The following rules are enforced:
+   ![Error de dependencia que muestra la unidad de tiempo principal que falta](~/content/assets/images/tutorials/calendar-dependency-error.png)
 
-1. **Unique calendar name**
-   Each calendar must have a unique name in the semantic model. If you create a calendar with a duplicate name, the editor automatically appends a suffix (e.g., "(1)") to ensure uniqueness.
+3. **Coherencia de categorías entre calendarios**
+   Si tu modelo contiene varios calendarios, una columna debe estar asociada a la misma categoría de unidad de tiempo en todos los calendarios. Por ejemplo, si asignas una columna `FiscalYear` como "Año" en un calendario, no puedes asignar esa misma columna como "Semana del año" en otro calendario.
 
-2. **Time unit dependency validation**
-   Partial time units require their parent time units to be mapped. For example, if you map a column to "Day of Month", you must also map a column to "Month" (or to "Month of Year" + "Year", etc.). The editor highlights cells with missing dependencies and displays a tooltip explaining which parent time units are required.
+   ![Conflicto de categoría entre calendarios que muestra el error Time Unit Conflict](~/content/assets/images/tutorials/calendar-cross-category-validation.png)
 
-   ![Dependency error showing missing parent time unit](~/content/assets/images/tutorials/calendar-dependency-error.png)
+## Configurar calendarios con el cuadro de diálogo de asignaciones de columnas
 
-3. **Cross-calendar category consistency**
-   If your model contains multiple calendars, a column must be associated with the same time unit category across all calendars. For example, if you map a `FiscalYear` column as "Year" in one calendar, you cannot map the same column as "Week of Year" in another calendar.
+Como alternativa al Editor de calendario, puedes configurar un calendario haciendo clic con el botón derecho sobre él en el Explorador TOM y eligiendo la opción **Editar asignaciones de columna...**:
 
-   ![Cross-calendar category conflict showing Time Unit Conflict error](~/content/assets/images/tutorials/calendar-cross-category-validation.png)
+![Edición de las asignaciones de columnas del calendario](~/content/assets/images/edit-calendar-mappings.png)
 
-## Configuring Calendars with the Column Mappings Dialog
+Este cuadro de diálogo te permite añadir asociaciones de columnas de una en una. Haz clic en **Añadir asociación de columna** y elige **Asociación de columna** para añadir una nueva asignación. Para cada asociación, seleccionas una columna y la asignas a una categoría de unidad de tiempo. También puedes añadir más columnas asociadas a cada asignación; para ello, expande la propiedad **Columnas**.
 
-As an alternative to the Calendar Editor, you can configure a calendar by right-clicking on it in the TOM Explorer and choosing the **Edit Column Mappings...** option:
+![Asociaciones de columna en el Editor de colecciones](~/content/assets/images/tutorials/calendar-example.png)
 
-![Editing calendar column mappings](~/content/assets/images/edit-calendar-mappings.png)
+#### Añadir columnas relacionadas con el tiempo en el cuadro de diálogo de asignaciones de columnas
 
-This dialog allows you to add column associations one at a time. Click **Add Column Association** and choose **Column Association** to add a new mapping. For each association, you select a column and assign it to a time unit category. You can also add additional associated columns for each mapping by expanding the **Columns** property.
+Para añadir columnas relacionadas con el tiempo mediante este cuadro de diálogo, haz clic en **Añadir asociación de columna** y elige **Grupo de columnas**. Esto crea un grupo de columnas relacionadas con el tiempo, donde puedes añadir columnas que deben tratarse como relacionadas con el tiempo (consulta [Columnas relacionadas con el tiempo](#time-related-columns) para obtener más información sobre cómo se comportan estas columnas).
 
-![Column associations in the Collection Editor](~/content/assets/images/tutorials/calendar-example.png)
+![Añadir un grupo de columnas para columnas relacionadas con el tiempo](~/content/assets/images/tutorials/calendar-collection-editor-column-group.png)
 
-#### Adding Time-Related Columns in the Column Mappings Dialog
+El editor de calendario se recomienda para la mayoría de los escenarios, ya que ofrece una visión más completa de todas las unidades de tiempo, descripciones emergentes útiles y mensajes de validación en tiempo real.
 
-To add time-related columns through this dialog, click **Add Column Association** and choose **Column Group**. This creates a Time Related Column Group where you can add columns that should be treated as time-related (see [Time-Related Columns](#time-related-columns) for more information about how these columns behave).
+## Uso de calendarios en DAX
 
-![Adding a Column Group for time-related columns](~/content/assets/images/tutorials/calendar-collection-editor-column-group.png)
+Una vez que hayas definido un calendario y asignado sus columnas, podrás usarlo en tus cálculos DAX. Los calendarios funcionan con las funciones de inteligencia temporal de DAX existentes que aceptan una columna de fecha como entrada (como [`TOTALYTD`](https://dax.guide/totalytd), [`CLOSINGBALANCEMONTH`](https://dax.guide/closingbalancemonth) y [`DATEADD`](https://dax.guide/dateadd)).
 
-The Calendar Editor is recommended for most scenarios as it provides a more comprehensive view of all time units, helpful tooltips, and real-time validation feedback.
-
-## Using Calendars in DAX
-
-Once you've defined a calendar and mapped its columns, you can use it in your DAX calculations. Calendars work with existing DAX time intelligence functions that accept a date column as input (such as [`TOTALYTD`](https://dax.guide/totalytd), [`CLOSINGBALANCEMONTH`](https://dax.guide/closingbalancemonth) and [`DATEADD`](https://dax.guide/dateadd)).
-
-Additionally, 8 new DAX functions for week-based time intelligence have been introduced. These functions exclusively work with calendars:
+Además, se han incorporado 8 nuevas funciones DAX para la inteligencia temporal basada en semanas. Estas funciones solo funcionan con calendarios:
 
 - [`CLOSINGBALANCEWEEK`](https://dax.guide/closingbalanceweek)
 - [`OPENINGBALANCEWEEK`](https://dax.guide/openingbalanceweek)
@@ -258,4 +251,4 @@ Additionally, 8 new DAX functions for week-based time intelligence have been int
 - [`DATESWTD`](https://dax.guide/dateswtd)
 - [`TOTALWTD`](https://dax.guide/totalwtd)
 
-Click the links above to learn more about each function.
+Haz clic en los enlaces anteriores para obtener más información sobre cada función.

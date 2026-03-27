@@ -1,96 +1,98 @@
-﻿# Tabular Editor 3 BETA-16.6
+# Tabular Editor 3 BETA-16.6
 
 > [!IMPORTANT]
-> A newer version of Tabular Editor is available. You can find the latest version [here](https://docs.tabulareditor.com/references/release-notes).
+> Tabular Editor 有更新版本可用。 你可以在[这里](https://docs.tabulareditor.com/references/release-notes)找到最新版本。
 
-- Download [Tabular Editor 3 BETA-16.6](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-16.6.x86.msi)
-- Download [Tabular Editor 3 BETA-16.6 (64 bit)](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-16.6.x64.msi)
+- 下载 [Tabular Editor 3 BETA-16.6](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-16.6.x86.msi)
+- 下载 [Tabular Editor 3 BETA-16.6（64 位）](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-16.6.x64.msi)
 
-## Updates in BETA-16.6:
+## BETA-16.6 更新内容：
 
-- Fixed an issue with the "Group By Columns" collection editor's Add-button.
-- Changed the default Compatibility Level for new Power BI Datasets to 1560.
-- Allow creation of new table-level objects (measures, columns, hierarchies) when the currently selected object is a table-level object itself.
+- 修复了“Group By Columns”集合编辑器的“添加”按钮问题。
+- 将新建 Power BI 数据集的默认兼容级别更改为 1560。
+- 当当前所选对象本身就是表级对象时，允许创建新的表级对象（度量值、列、层级结构）。
 
-## Updates in BETA-16.5:
+## BETA-16.5 更新内容：
 
-- Installer should now correctly register Tabular Editor 3 as an external tool for Power BI Desktop
-- Added the "-nosplash" CLI option, which is used when Power BI Desktop launches Tabular Editor 3, as the splash screen could sometimes cause Tabular Editor 3 to become "hidden" behind Power BI Desktop. After upgrading Tabular Editor 3, make sure you restart Power BI Desktop.
-- Download links now uses our Azure CDN which is where we will host Tabular Editor 3 binaries going forward. The following URLs always point to the latest version of Tabular Editor 3:
+- 安装程序现在应能正确将 Tabular Editor 3 注册为 Power BI Desktop 的外部工具
+- 新增命令行选项“-nosplash”。Power BI Desktop 启动 Tabular Editor 3 时会使用该选项，因为启动画面有时会导致 Tabular Editor 3 被 Power BI Desktop 遮挡在后方。 升级 Tabular Editor 3 后，记得重启 Power BI Desktop。
+- 下载链接现已改用我们的 Azure CDN，今后 Tabular Editor 3 的二进制文件将托管于此。 以下 URL 始终指向 Tabular Editor 3 的最新版本：
   - https://cdn.tabulareditor.com/files/latest/TabularEditor.3.x86.msi
   - https://cdn.tabulareditor.com/files/latest/TabularEditor.3.x64.msi
 
-## Updates in BETA-16.4:
+## BETA-16.4 更新内容：
 
-A rather big list of bug fixes and minor improvements incoming:
+大量 Bug 修复和小幅改进即将到来：
 
-### General improvements:
-- Name of .pbix file is now used as the database name when saving a .pbix model as a .bim/folder structure.
-- Added x64 support (both x64 and x86 builds are targeting "Any CPU", but the latter has the "Prefer32Bits" flag set)
-- Installer has been updated. It's now using WiX, which ensures that the registry and local app data folder are neatly cleaned when the product is uninstalled. In addition, it looks better :-)
-- Macro recorder now supports recording of most (all?) model changes that can be done through the UI
-- Added support for multi-column scalar predicates, which is a new DAX syntax that was added recently. Tabular Editor tries to guess which version of Analysis Services is used based on the model metadata, but since this is not always possible (e.g. when working offline), you can override how Tabular Editor treats multi-column scalar predicate table filter expressions under Tools > Preferences > DAX Editor > General > Semantic Engine Features).
-- Updated TOM to version 19.18.0.
+### 常规改进：
 
-### Usability improvements:
-- Increased the "hitbox" of the expand/collapse arrow in TOM Explorer increased (see [this comment](https://github.com/TabularEditor3/PublicPreview/issues/81#issuecomment-789637586))
-- Double-clicking the icon next to an object in the TOM Explorer now brings the DAX Expression Editor into view.
+- 在将 .pbix 模型保存为 .bim/文件夹结构时，现在会使用 .pbix 文件名作为数据库名称。
+- 新增 x64 支持（x64 和 x86 构建均以“Any CPU”为目标，但后者设置了“Prefer32Bits”标志）
+- 安装程序已更新。 现在改用 WiX，这可确保卸载产品时能干净地清理注册表和本地应用数据文件夹。 此外，它看起来也更美观了 :-)
+- 宏录制器现已支持录制大多数（甚至全部？） 可通过 UI 进行的模型更改
+- 新增对多列标量谓词的支持。这是一种最近新增的 DAX 语法。 Tabular Editor 会根据模型元数据推断所使用的 Analysis Services 版本，但这并不总是可行（例如离线工作时）。因此，你可以在“工具 > 偏好 > DAX编辑器 > 常规 > 语义引擎功能”中，指定 Tabular Editor 如何处理多列标量谓词表筛选表达式）。
+- 将 TOM 更新到 19.18.0 版。
 
-### Bug fixes:
-- Fixed DAX semantic analyzer issue, which would cause "ghost" error messages in certain expressions
-- Fixed issue #75 
-- Fixed issue #77
-- Fixed issue #84
-- Fixed a number of crashes based on telemetry. @**Everyone**: Keep sending those error reports when an exception occurs, and please provide descriptions - they are invaluable when trying to figure out what went wrong! Thanks!
+### 易用性改进：
 
-## Updates in BETA-16.3:
+- 增大了 TOM Explorer 中展开/折叠箭头的可点击区域（见[此评论](https://github.com/TabularEditor3/PublicPreview/issues/81#issuecomment-789637586)）
+- 在 TOM Explorer 中双击对象旁的图标，即可打开 DAX 表达式编辑器。
 
-- "Custom Actions" have been renamed to "Macros".
-  - There's a new window that lets you manage all macros currently defined. Edit an existing macro by doubleclicking on an item.
-  - Once a C# script is saved as a macro, the document will update the macro on subsequent saves (Ctrl+S). Use File > Save As... if you need to save the script as a file.
-  - Macros can have identical names. They are distinguished internally using an auto-assigned ID.
-  - Fixed an issue that prevented a macro from being saved
-- The Window menu now also contains a "New" submenu, containing the same menu items as "File > New"
-- Inactive toolbars and menus are now hidden by default, to reduce UI cluttering (can be changed in Tools > Preferences > User Interface).
-- Fixed a DAX parser bug that caused `GENERATESERIES` to provide a table with a wrongly-named column, possibly related to #61
-- Fix for issue #74 (EndBatch() called before BeginBatch() crash)
-- Added warning and refresh of local TOM tree upon save to DB, if changes were made to the deployed model metadata outside of Tabular Editor
+### Bug 修复：
 
+- 修复了 DAX 语义分析器的问题，该问题会在某些表达式中产生“幽灵”错误信息
+- 修复了问题 #75
+- 修复了问题 #77
+- 修复了问题 #84
+- 根据遥测数据修复了多处崩溃问题。 @**Everyone**：发生异常时请继续发送这些错误报告，并尽量附上描述——这在我们排查问题、弄清楚哪里出错时非常宝贵！ 谢谢！
 
-## Updates in BETA-16.2:
+## BETA-16.3 更新：
 
-- Table Preview can now auto-refresh similar to DAX queries/pivot grids (see issue #73)
-- Fixed a bug that would prevent Table Preview from showing a calculated table that had not been refreshed
-- DAX script support for creating calculated columns and calculated tables
-- DAX scripts can now be partially executed (see issue #69). 4 buttons should light up on the "DAX Script" toolbar, when editing a DAX script. These buttons have the following shortcuts:
-  - `F5` will apply the full script.
-  - `Shift+F5` will apply the full script and also sync the connected database.
-  - `F8` will apply only the current selection.
-  - `Shift+F8` will apply the current selection and sync the connected database.
-- Added a watermark to the diagram view to guide users on how to add tables to the diagram (see issue #76)
-- Background Best Practice Analysis should no longer freeze the UI (see issue #79)
-- Toolbar buttons/context menu options for ignoring rules/objects on the Best Practice Analyzer view, should now work correctly
-- The "please wait" form should no longer overlap any dialogs being spawned from a C# script
-- Various bug fixes (possibly related to issue #74)
+- “Custom Actions” 已重命名为“宏”。
+  - 新增一个窗口，可让你管理当前定义的所有宏。 双击列表项即可编辑现有宏。
+  - 当将 C# Script 保存为宏后，之后每次保存（Ctrl+S）时，文档都会更新该宏。 使用“文件 > 另存为……” 即可将脚本保存为文件。
+  - 宏名称可以相同。 在内部会通过自动分配的 ID 来区分它们。
+  - 修复了导致无法保存宏的问题
+- “窗口”菜单现在也包含一个“新建”子菜单，其中包含与“文件 > 新建”相同的菜单项
+- 默认隐藏未启用的工具栏和菜单，以减少 UI 杂乱（可在“工具 > 偏好 > 用户界面”中更改）。
+- 修复了 DAX 解析器的一个 bug：该问题会导致 `GENERATESERIES` 返回的表中有一列列名错误，可能与 #61 有关
+- 修复问题 #74（在调用 BeginBatch() 之前调用 EndBatch() 会导致崩溃）
+- 新增：保存到数据库时，若在 Tabular Editor 之外更改了已部署模型的元数据，将发出警告并刷新本地 TOM 树
 
-## Updates in BETA-16.1:
+## BETA-16.2 更新：
 
-- Measures now use a "calculator" icon, to better align the experience with Power BI Desktop. Calculation Item icons have also been changed slightly, so that they are distinguishable from measures.
-- Key columns are now shown in **bold**
-- Added "Define Measure" and "Inline Measure" refactoring options
-- Improved auto-complete behaviour around DEFINE / EVALUATE statements of DAX queries. For example, autocomplete can now also suggest measures, columns and tables defined inside the query.
-- Auto-complete now also suggests measures for the Name parameter of functions such as SUMMARIZECOLUMNS, ADDCOLUMNS, etc., completing both the Name and the Expression parameter at once: 
-![autocomplete names](https://user-images.githubusercontent.com/8976200/107629428-66aada80-6c62-11eb-91e4-d5528947840a.gif)
-- Revisited #42.
-- Deployment Wizard now stores deployment preferences (destination + options) to the .tmuo file sitting next to the Model.bim or Database.json file on disk. This makes it easier to perform deployments when switching between different models, if each model is always deployed to the same destination.
-- Updated TOM to 19.16.3. Should fix issue #63.
-- Fixed issue #64.
-- Fixed a bug with model files appearing in the "Recent Files" menu.
+- 表格预览现在可以像 DAX 查询和 Pivot Grid 一样自动刷新（见问题 #73）
+- 修复了一个 bug：表格预览无法显示尚未刷新的计算表格
+- 新增：支持使用 DAX脚本创建计算列和计算表格
+- DAX脚本现在支持部分执行（见问题 #69）。 编辑 DAX脚本时，“DAX脚本”工具栏上的 4 个按钮应该会亮起。 这些按钮对应的快捷键如下：
+  - `F5` 将应用完整脚本。
+  - `Shift+F5` 将应用完整脚本，并同步已连接的数据库。
+  - `F8` 将仅应用当前所选内容。
+  - `Shift+F8` 将应用当前所选内容，并同步已连接的数据库。
+- 在图表视图中添加了水印，用于引导用户将表添加到图表中（见问题 #76）
+- 后台运行的 Best Practice Analysis 不应再导致 UI 卡死（见问题 #79）
+- Best Practice Analyzer 视图中用于忽略规则/对象的工具栏按钮和右键菜单选项，现在应能正常工作
+- “请稍候”窗口不应再与由 C# Script 弹出的任何对话框重叠
+- 修复了多项 bug（可能与问题 #74 有关）
 
-## Updates in BETA-16.0:
+## BETA-16.1 更新：
 
-- Deployment Wizard updated. Also fixes issue #42 and #43.
-- Support for DEFINE COLUMN and TABLE syntax in DAX queries
-- The File menu now has a "Recent Files" and a "Recent Tabular Models" submenu. The former holds references to the 10 most recent DAX scripts, model diagrams, DAX queries and C# scripts that were saved/opened. The latter holds references to the 10 most recent model files (bim / pbit / folder).
-- Fixed #67 
-- Fixed #66 
+- 度量值现在使用“计算器”图标，以便更好地与 Power BI Desktop 的体验保持一致。 计算项图标也做了轻微调整，以便与度量值区分开来。
+- 关键列现在以 **粗体** 显示
+- 新增“Define Measure”和“Inline Measure”重构选项
+- 改进了 DAX 查询中 DEFINE / EVALUATE 语句相关的自动补全行为。 例如，自动补全现在也会提示在查询内部定义的度量值、列和表。
+- 自动补全现在也会针对 SUMMARIZECOLUMNS、ADDCOLUMNS 等函数的 Name 参数提示度量值，并可一次性补全 Name 和 Expression 参数：
+  ![autocomplete names](https://user-images.githubusercontent.com/8976200/107629428-66aada80-6c62-11eb-91e4-d5528947840a.gif)
+- 重新审阅了 #42。
+- Deployment Wizard 现在会将部署偏好（目标 + 选项）保存到磁盘上与 Model.bim 或 Database.json 同目录的 .tmuo 文件中。 如果每个模型始终部署到同一目标，那么在不同模型之间切换时执行部署会更轻松。
+- 已将 TOM 更新到 19.16.3。 应可修复问题 #63。
+- 已修复问题 #64。
+- 修复了模型文件出现在“最近使用的文件”菜单中的一个错误。
+
+## BETA-16.0 更新：
+
+- Deployment Wizard 已更新。 同时修复了问题 #42 和 #43。
+- 在 DAX 查询中支持 DEFINE COLUMN 和 TABLE 语法
+- “文件”菜单现在包含“最近使用的文件”和“最近使用的表格模型”子菜单。 前者会列出最近保存或打开的 10 个 DAX脚本、模型关系图、DAX 查询和 C# Script。 后者保存对最近 10 个模型文件（bim / pbit / 文件夹）的引用。
+- 已修复 #67
+- 已修复 #66

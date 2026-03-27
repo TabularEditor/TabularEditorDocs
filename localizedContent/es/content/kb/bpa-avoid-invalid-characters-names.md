@@ -1,64 +1,64 @@
 ---
 uid: kb.bpa-avoid-invalid-characters-names
-title: Avoid Invalid Characters in Object Names
+title: Evite caracteres no válidos en los nombres de los objetos
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule preventing deployment errors by identifying control characters in object names.
+description: Regla de mejores prácticas que evita errores de implementación al identificar caracteres de control en los nombres de los objetos.
 ---
 
-# Avoid Invalid Characters in Object Names
+# Evite caracteres no válidos en los nombres de los objetos
 
-## Overview
+## Información general
 
-This best practice rule identifies objects whose names contain invalid control characters (non-printable characters excluding standard whitespace). These characters can cause deployment failures, rendering issues, and data corruption.
+Esta regla de mejores prácticas identifica objetos cuyos nombres contienen caracteres de control no válidos (caracteres no imprimibles, excepto los espacios en blanco estándar). Estos caracteres pueden provocar fallos de implementación, problemas de representación y corrupción de datos.
 
-- Category: Error Prevention
-- Severity: High (3)
+- Categoría: Prevención de errores
+- Gravedad: Alta (3)
 
-## Applies To
+## Se aplica a
 
-- Tables
-- Measures
-- Hierarchies
-- Levels
-- Perspectives
-- Partitions
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
-- KPIs
-- Model Roles
-- Calculation Groups
-- Calculation Items
+- Tablas
+- Medidas
+- Jerarquías
+- Niveles
+- Perspectivas
+- Particiones
+- Columnas de datos
+- Columnas calculadas
+- Columnas de tablas calculadas
+- KPI
+- Roles del modelo
+- Grupos de cálculo
+- Elementos de cálculo
 
-## Why This Matters
+## Por qué es importante
 
-Control characters in object names cause serious issues:
+Los caracteres de control en los nombres de los objetos provocan problemas graves:
 
-- **Deployment failures**: Power BI Service and Analysis Services may reject models with invalid characters
-- **Rendering problems**: Client tools may display garbled or invisible names
-- **DAX parsing errors**: Invalid characters can break DAX expressions referencing the object
-- **XML corruption**: Model metadata (TMSL/XMLA) may become malformed
-- **Copy/paste issues**: Names may not transfer correctly between applications
-- **Encoding problems**: Cross-platform compatibility issues
+- **Fallos de implementación**: Power BI Service y Analysis Services pueden rechazar modelos con caracteres no válidos
+- **Problemas de renderizado**: Las herramientas cliente pueden mostrar nombres ilegibles o invisibles
+- **Errores de análisis de DAX**: Los caracteres no válidos pueden invalidar expresiones DAX que hagan referencia al objeto
+- **Corrupción de XML**: Los metadatos del modelo (TMSL/XMLA) pueden quedar mal formados
+- **Problemas al copiar y pegar**: Es posible que los nombres no se transfieran correctamente entre aplicaciones
+- **Problemas de codificación**: Incidencias de compatibilidad entre plataformas
 
-Standard whitespace (spaces, newlines, carriage returns) is allowed, but control characters should be removed.
+Se permite el espacio en blanco estándar (espacios, saltos de línea, retornos de carro), pero deben eliminarse los caracteres de control.
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when an object's name contains control characters that are not standard whitespace:
+La regla se activa cuando el nombre de un objeto contiene caracteres de control que no son espacios en blanco estándar:
 
 ```csharp
 Name.ToCharArray().Any(char.IsControl(it) and !char.IsWhiteSpace(it))
 ```
 
-This detects problematic characters while allowing legitimate whitespace formatting.
+Esto detecta caracteres problemáticos y, a la vez, permite un formato de espacio en blanco válido.
 
-## How to Fix
+## Cómo solucionarlo
 
-### Automatic Fix
+### Corrección automática
 
-This rule includes an automatic fix that replaces invalid characters with spaces:
+Esta regla incluye una corrección automática que reemplaza los caracteres no válidos por espacios:
 
 ```csharp
 Name = string.Concat(
@@ -68,58 +68,59 @@ Name = string.Concat(
 )
 ```
 
-To apply:
-1. In the **Best Practice Analyzer** select flagged objects
-2. Click **Apply Fix**
+Para aplicarlo:
 
-### Manual Fix
+1. En el **Best Practice Analyzer**, selecciona los objetos marcados
+2. Haz clic en **Aplicar corrección**
 
-1. In **TOM Explorer**, select the object
-2. In **Properties** pane, locate the **Name** field
-3. Edit the name to remove invalid characters
-4. Save changes
+### Corrección manual
 
-## Common Causes
+1. En el **Explorador TOM**, selecciona el objeto
+2. En el panel **Propiedades**, busca el campo **Nombre**
+3. Edita el nombre para eliminar los caracteres no válidos
+4. Guarda los cambios
 
-### Cause 1: Copy/Paste from Rich Text
+## Causas comunes
 
-Copying names from Word documents, web pages, or emails can introduce hidden formatting characters.
+### Causa 1: Copiar y pegar desde texto enriquecido
 
-### Cause 2: Automated Name Generation
+Copiar nombres desde documentos de Word, páginas web o correos electrónicos puede introducir caracteres de formato ocultos.
 
-Scripts generating names may include control characters from source systems.
+### Causa 2: Generación automatizada de nombres
 
-### Cause 3: Data Import from External Sources
+Los scripts que generan nombres pueden incluir caracteres de control de los sistemas de origen.
 
-Importing metadata that contains encoding artifacts or control codes.
+### Causa 3: Importación de datos desde orígenes externos
 
-## Example
+Importación de metadatos que contienen artefactos de codificación o códigos de control.
 
-### Before Fix
+## Ejemplo
 
-```
-Measure Name: "Total\x00Sales"  (contains NULL character)
-```
-
-Deployment fails with "Invalid character in object name"
-
-### After Fix
+### Antes de la corrección
 
 ```
-Measure Name: "Total Sales"  (NULL replaced with space)
+Nombre de la medida: "Total\x00Sales"  (contiene un carácter NULL)
 ```
 
-Deploys successfully and displays correctly in all tools.
+La implementación falla con el error "Invalid character in object name"
 
-## Compatibility Level
+### Después de la corrección
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Nombre de la medida: "Total Sales"  (NULL sustituido por un espacio)
+```
 
-## Related Rules
+Se implementa correctamente y se muestra correctamente en todas las herramientas.
 
-- [Avoid Invalid Characters in Descriptions](xref:kb.bpa-avoid-invalid-characters-descriptions) - Similar validation for description properties
-- [Trim Object Names](xref:kb.bpa-trim-object-names) - Removing leading/trailing spaces
+## Nivel de compatibilidad
 
-## Learn More
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 
-- [DAX Naming Rules](https://learn.microsoft.com/dax/dax-syntax-reference)
+## Reglas relacionadas
+
+- [Evitar caracteres no válidos en las descripciones](xref:kb.bpa-avoid-invalid-characters-descriptions) - Validación similar para las propiedades de descripción
+- [Recortar nombres de objetos](xref:kb.bpa-trim-object-names) - Eliminación de espacios al inicio y al final
+
+## Más información
+
+- [Reglas de nomenclatura de DAX](https://learn.microsoft.com/dax/dax-syntax-reference)

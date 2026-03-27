@@ -1,6 +1,6 @@
 ---
 uid: optimizing-workflow-workspace-mode
-title: Optimizing development workflow using Workspace Mode
+title: Optimización del flujo de trabajo de desarrollo con el modo del área de trabajo
 author: Daniel Otykier
 updated: 2021-10-05
 applies_to:
@@ -17,9 +17,10 @@ applies_to:
           full: true
 ---
 
-# Optimizing development workflow using Workspace Mode
+# Optimización del flujo de trabajo de desarrollo con el modo del área de trabajo
+
 [!include[workspace-mode](~/content/features/workspace-mode.partial.md)]
 
-# Next steps
+# Pasos a seguir
 
 - @boosting-productivity-te3

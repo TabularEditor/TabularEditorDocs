@@ -1,53 +1,54 @@
 ---
 uid: kb.bpa-many-to-many-single-direction
-title: Many-to-Many Relationships Should Use Single Direction
+title: Las relaciones de muchos a muchos deberían ser unidireccionales
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule to avoid performance issues by using single-direction filtering on many-to-many relationships.
+description: Regla de prácticas recomendadas para evitar problemas de rendimiento mediante filtrado unidireccional en relaciones de muchos a muchos.
 ---
 
-# Many-to-Many Relationships Should Use Single Direction
+# Las relaciones de muchos a muchos deberían ser unidireccionales
 
-## Overview
+## Descripción general
 
-This best practice rule identifies many-to-many relationships that use bidirectional cross-filtering. Many-to-many relationships with both-directions filtering cause significant performance degradation.
+Esta regla de prácticas recomendadas identifica relaciones de muchos a muchos que usan filtrado cruzado bidireccional. Las relaciones de muchos a muchos con filtrado en ambas direcciones provocan una degradación significativa del rendimiento.
 
-- Category: Performance
-- Severity: Medium (2)
+- Categoría: Rendimiento
+- Gravedad: Media (2)
 
-## Applies To
+## Se aplica a
 
-- Relationships
+- Relaciones
 
-## Why This Matters
+## Por qué es importante
 
-- **Severe performance impact**: Engine must evaluate filters in both directions
-- **Memory consumption**: Additional filter contexts maintained
-- **Ambiguous filter paths**: Multiple routes produce unexpected results
-- **Complex DAX logic**: Debugging filter context becomes difficult
-- **Risk circular dependencies**: Can lead to infinite evaluation loops
+- **Impacto grave en el rendimiento**: el motor debe evaluar los filtros en ambas direcciones
+- **Consumo de memoria**: se mantienen contextos de filtro adicionales
+- **Rutas de filtro ambiguas**: varias rutas producen resultados inesperados
+- **Lógica DAX compleja**: depurar el contexto de filtro se vuelve difícil
+- **Riesgo de dependencias circulares**: puede provocar bucles de evaluación infinitos
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when a relationship meets all conditions:
+La regla se activa cuando una relación cumple todas estas condiciones:
 
 1. `FromCardinality = "Many"`
 2. `ToCardinality = "Many"`
 3. `CrossFilteringBehavior = "BothDirections"`
 
-## How to Fix
+## Cómo solucionarlo
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, locate the flagged relationship
-2. In **Properties** pane, find `Cross Filter Direction`
-3. Change from **Both** to **Single**
+1. En el **Explorador TOM**, localiza la relación marcada
+2. En el panel de **Propiedades**, busca `Dirección de filtro cruzado`
+3. Cambia de **Ambos** a **Único**
 
-Choose direction based on typical filter flow:
-- From dimension to fact
-- From lookup to data table
+Elige la dirección según el flujo típico del filtro:
 
-When opposite-direction filtering is needed, handle explicitly in measures:
+- De la dimensión a la tabla de hechos
+- De la tabla de búsqueda a la tabla de datos
+
+Cuando necesites filtrar en sentido contrario, manéjalo explícitamente en las medidas:
 
 ```dax
 SalesWithCrossFilter = 
@@ -57,37 +58,37 @@ CALCULATE(
 )
 ```
 
-## Common Causes
+## Causas habituales
 
-### Cause 1: Default Both-Direction Setting
+### Causa 1: Configuración predeterminada en ambas direcciones
 
-Model designer applied bidirectional filtering by default.
+El diseñador de modelos aplicó el filtrado bidireccional de forma predeterminada.
 
-### Cause 2: Misunderstood Requirements
+### Causa 2: Requisitos mal entendidos
 
-Believed both-direction filtering was necessary for all scenarios.
+Se creía que el filtrado en ambas direcciones era necesario para todos los escenarios.
 
-### Cause 3: Quick Fix Approach
+### Causa 3: Enfoque de corrección rápida
 
-Used both-direction filtering to solve a specific problem without considering performance.
+Se usó el filtrado en ambas direcciones para resolver un problema concreto sin considerar el rendimiento.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-'Sales' (Many) <--> (Many) 'ProductBridge'
-Cross Filter Direction: Both  ← Problem
-```
-
-### After Fix
+### Antes de la corrección
 
 ```
-'Sales' (Many) --> (Many) 'ProductBridge'
-Cross Filter Direction: Single
+'Sales' (Muchos) <--> (Muchos) 'ProductBridge'
+Dirección de filtro cruzado: Ambos  ← Problema
 ```
 
-When Products need to filter Sales, use DAX:
+### Después de la corrección
+
+```
+'Sales' (Muchos) --> (Muchos) 'ProductBridge'
+Dirección de filtro cruzado: Único
+```
+
+Si 'Products' debe filtrar 'Sales', usa DAX:
 
 ```dax
 SalesForSelectedProducts = 
@@ -99,17 +100,17 @@ CALCULATE(
 )
 ```
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Relationship Data Types Must Match](xref:kb.bpa-relationship-same-datatype) - Ensuring relationship integrity
+- [Los tipos de datos de la relación deben coincidir](xref:kb.bpa-relationship-same-datatype) - Garantizar la integridad de la relación
 
-## Learn More
+## Más información
 
-- [Many-to-Many Relationships in Power BI](https://learn.microsoft.com/power-bi/transform-model/desktop-many-to-many-relationships)
-- [Relationship Cross-Filtering](https://learn.microsoft.com/power-bi/transform-model/desktop-relationships-understand)
-- [DAX CROSSFILTER Function](https://dax.guide/crossfilter/)
-- [DAX TREATAS Function](https://dax.guide/treatas)
+- [Relaciones de muchos a muchos en Power BI](https://learn.microsoft.com/power-bi/transform-model/desktop-many-to-many-relationships)
+- [Filtrado cruzado de relaciones](https://learn.microsoft.com/power-bi/transform-model/desktop-relationships-understand)
+- [Función CROSSFILTER de DAX](https://dax.guide/crossfilter/)
+- [Función TREATAS de DAX](https://dax.guide/treatas)

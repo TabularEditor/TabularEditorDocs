@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-validate-default
-title: Validate a Metric View with Default Rules
+title: Validar una vista de métricas con las reglas predeterminadas
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -17,66 +17,67 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Validate a Metric View with Default Rules
 
-This how-to demonstrates how to validate a loaded Metric View using the built-in validation rules and interpret the diagnostic messages.
+# Validar una vista de métricas con las reglas predeterminadas
 
-## Default validation rules
+Esta guía muestra cómo validar una vista de métricas cargada con las reglas de validación integradas e interpretar los mensajes de diagnóstico.
 
-The Semantic Bridge includes these built-in validation rules:
+## Reglas de validación predeterminadas
 
-| Rule                     | Description                                                                   |
-|--------------------------|-------------------------------------------------------------------------------|
-| JoinNameRequired         | Metric View Join must have a name                                             |
-| UniqueJoinName           | Metric View Join names must be unique                                         |
-| JoinSourceRequired       | Metric View Join must have a source                                           |
-| JoinOnOrUsingRequired    | Metric View Join must specify either `on` or `using`                          |
-| JoinOnOrUsingExclusivity | Metric View Join cannot specify both `on` and `using`                         |
-| JoinOnFormat             | Metric View Join `on` clause must be a valid equijoin expression              |
-| JoinUsingColumnCount     | Metric View Join `using` clause must have exactly one column (MVP limitation) |
-| DimensionNameRequired    | Metric View Dimension must have a name                                        |
-| UniqueDimensionName      | Metric View Dimension names must be unique                                    |
-| DimensionExprRequired    | Metric View Dimension must have an expression                                 |
-| MeasureNameRequired      | Metric View Measure must have a name                                          |
-| UniqueMeasureName        | Metric View Measure names must be unique                                      |
-| MeasureExprRequired      | Metric View Measure must have an expression                                   |
+El Semantic Bridge incluye estas reglas de validación integradas:
 
-## Run validation with default rules
+| Regla                      | Descripción                                                                                                              |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| JoinNameRequired           | La unión de la vista de métricas debe tener un nombre                                                                    |
+| UniqueJoinName             | Los nombres de las uniones de la vista de métricas deben ser únicos                                                      |
+| JoinSourceRequired         | La unión de la vista de métricas debe tener un origen                                                                    |
+| JoinOnOrUsingRequired      | La unión de la vista de métricas debe especificar `on` o `using`                                                         |
+| JoinOnOrUsingExclusivity   | Una unión de Metric View no puede especificar simultáneamente `on` y `using`                                             |
+| JoinOnFormat               | La cláusula `on` de la unión de Metric View debe ser una expresión de equiunión válida                                   |
+| JoinUsingColumnCOUNT       | La cláusula `using` de la unión de Metric View debe tener exactamente una columna (limitación de MVP) |
+| DimensionNameRequired      | La dimensión de Metric View debe tener un nombre                                                                         |
+| UniqueDimensionName        | Los nombres de las dimensiones de Metric View deben ser únicos                                                           |
+| DimensionExprRequired      | La dimensión de Metric View debe tener una expresión                                                                     |
+| NombreDeMedidaRequerido    | La medida de Metric View debe tener un nombre                                                                            |
+| NombreDeMedidaUnico        | Los nombres de las medidas de Metric View deben ser únicos                                                               |
+| ExpresionDeMedidaRequerida | La medida de Metric View debe tener una expresión                                                                        |
 
-Call `Validate()` with no arguments to use the built-in validation rules.
+## Ejecutar la validación con las reglas predeterminadas
+
+Llama a `Validate()` sin argumentos para usar las reglas de validación integradas.
 
 ```csharp
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
-Output($"Validation complete: {diagnostics.Count} issue(s) found");
+Output($"Validación completada: se encontraron {diagnostics.Count} problema(s)");
 ```
 
-## Interpret diagnostic messages
+## Interpreta los mensajes de diagnóstico
 
-Each diagnostic message contains:
+Cada mensaje de diagnóstico contiene:
 
-- **Severity**: Error, Warning, or Information
-- **Message**: Description of the issue
-- **Path**: Location of the object in the Metric View hierarchy
+- **Gravedad**: Error, Advertencia o Información
+- **Mensaje**: Descripción del problema
+- **Ruta**: Ubicación del objeto en la jerarquía de Metric View
 
 ```csharp
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("VALIDATION RESULTS");
+sb.AppendLine("RESULTADOS DE LA VALIDACIÓN");
 sb.AppendLine("------------------");
 sb.AppendLine("");
 
 if (diagnostics.Count == 0)
 {
-    sb.AppendLine("No issues found.");
+    sb.AppendLine("No se encontraron problemas.");
 }
 else
 {
     foreach (var diag in diagnostics)
     {
         sb.AppendLine($"[{diag.Severity}] {diag.Message}");
-        sb.AppendLine($"  Path: {diag.Path}");
+        sb.AppendLine($"  Ruta: {diag.Path}");
         sb.AppendLine("");
     }
 }
@@ -84,30 +85,30 @@ else
 Output(sb.ToString());
 ```
 
-## Example with validation errors
+## Ejemplo con errores de validación
 
-Some rules (required fields) are enforced during deserialization.
-The remaining rules check for duplicates and structural issues after deserialization.
+Algunas reglas (campos obligatorios) se aplican durante la deserialización.
+Las reglas restantes comprueban si hay duplicados y problemas estructurales después de la deserialización.
 
-This Metric View demonstrates violations that are caught by `Validate()`:
+Esta Metric View muestra infracciones que `Validate()` detecta:
 
 ```csharp
 SemanticBridge.MetricView.Deserialize("""
     version: 0.1
     source: sales.fact.orders
     joins:
-      # UniqueJoinName - duplicate name 'customer'
+      # UniqueJoinName - nombre duplicado 'customer'
       - name: customer
         source: sales.dim.customer
         on: customer_id = customer.customer_id
       - name: customer
         source: sales.dim.customer_backup
         on: customer_id = customer_backup.customer_id
-      # JoinOnOrUsingRequired - neither on nor using
+      # JoinOnOrUsingRequired - no se especifica ni on ni using
       - name: date
         source: sales.dim.date
     dimensions:
-      # UniqueDimensionName - duplicate name 'category'
+      # UniqueDimensionName - nombre duplicado 'category'
       - name: category
         expr: product.category
       - name: category
@@ -115,7 +116,7 @@ SemanticBridge.MetricView.Deserialize("""
       - name: product_name
         expr: product.product_name
     measures:
-      # UniqueMeasureName - duplicate name 'total'
+      # UniqueMeasureName - nombre duplicado 'total'
       - name: total
         expr: SUM(revenue)
       - name: total
@@ -127,7 +128,7 @@ SemanticBridge.MetricView.Deserialize("""
 var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Found {diagnostics.Count} issue(s):");
+sb.AppendLine($"Se encontraron {diagnostics.Count} problema(s):");
 sb.AppendLine("");
 
 foreach (var diag in diagnostics)
@@ -138,22 +139,22 @@ foreach (var diag in diagnostics)
 Output(sb.ToString());
 ```
 
-**Output:**
+**Salida:**
 
 ```
-Found 6 issue(s):
+Se encontraron 6 problema(s):
 
-[Error] Join 'customer' must use a simple equality condition with table prefixes (e.g. 'source.column = dimension.column')
-[Error] Duplicate join name: 'customer'
-[Error] Join 'customer' must use a simple equality condition with table prefixes (e.g. 'source.column = dimension.column')
-[Error] Join 'date' must specify either 'on' or 'using' clause
-[Error] Duplicate dimension name: 'category'
-[Error] Duplicate measure name: 'total'
+[Error] La unión 'customer' debe usar una condición de igualdad simple con prefijos de tabla (p. ej., 'source.column = dimension.column')
+[Error] Nombre de unión duplicado: 'customer'
+[Error] La unión 'customer' debe usar una condición de igualdad simple con prefijos de tabla (p. ej., 'source.column = dimension.column')
+[Error] La unión 'date' debe especificar una cláusula 'on' o 'using'
+[Error] Nombre de dimensión duplicado: 'category'
+[Error] Nombre de medida duplicado: 'total'
 ```
 
-## Filter diagnostics by severity
+## Filtrar diagnósticos por gravedad
 
-You can filter diagnostics to focus on errors only:
+Puedes filtrar los diagnósticos para centrarte solo en los errores:
 
 ```csharp
 using System.Linq;
@@ -163,17 +164,17 @@ var diagnostics = SemanticBridge.MetricView.Validate().ToList();
 var errors = diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error).ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Errors: {errors.Count}");
-sb.AppendLine($"Total issues: {diagnostics.Count}");
+sb.AppendLine($"Errores: {errors.Count}");
+sb.AppendLine($"Total de problemas: {diagnostics.Count}");
 Output(sb.ToString());
 ```
 
-## Next steps
+## Siguientes pasos
 
-- [Create simple validation rules](xref:semantic-bridge-validate-simple-rules) to enforce your own conventions
-- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules) for cross-object checks
+- [Crear reglas de validación simples](xref:semantic-bridge-validate-simple-rules) para aplicar tus propias convenciones
+- [Crear reglas de validación contextuales](xref:semantic-bridge-validate-contextual-rules) para comprobaciones entre objetos
 
-## See also
+## Ver también
 
-- [Semantic Bridge Validation](xref:semantic-bridge-metric-view-validation)
-- [Metric View Object Model](xref:semantic-bridge-metric-view-object-model)
+- [Validación de Semantic Bridge](xref:semantic-bridge-metric-view-validation)
+- [Modelo de objetos de la Metric View](xref:semantic-bridge-metric-view-object-model)

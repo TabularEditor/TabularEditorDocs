@@ -1,6 +1,6 @@
 ---
 uid: data-security-setup-rls
-title: Setup or Modify RLS
+title: Configurar o modificar RLS
 author: Kurt Buhler
 updated: 2023-03-14
 applies_to:
@@ -16,119 +16,112 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Configure Row-Level Security (RLS)
 
+# Configurar la seguridad a nivel de filas (RLS)
 
-![Data Security Visual Abstract](~/content/assets/images/data-security/data-security-configure-rls-visual-abstract.png)
-
-
----
-
-__RLS is changed by adjusting the Roles or Table Permissions defined for Tables.__ This DAX _Filter Expression_ can be viewed in the Expression Editor window when selecting a Table Permission within a particular role. This Filter Expression is the most important piece of the RLS configuration that determines what data is seen by a user.
+![Resumen Visual de seguridad de datos](~/content/assets/images/data-security/data-security-configure-rls-visual-abstract.png)
 
 ---
 
-- [__About Data Security and RLS/OLS:__](data-security-about.md) A functional overview of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
-- __Modify/Setup an RLS Configuration (This Article):__ How to configure <span style="color:#01a99d">RLS</span> in a dataset.
-- [__Modify/Setup an OLS Configuration:__](data-security-setup-ols.md) How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
-- [__Testing RLS/OLS with Impersonation:__](data-security-testing.md) How to easily validate Data Security with Tabular Editor.
+**RLS se modifica ajustando los roles o los permisos de tabla definidos en las tablas.** Esta _expresión de filtro_ de DAX se puede ver en la ventana del Editor de expresiones al seleccionar un permiso de tabla dentro de un rol específico. Esta expresión de filtro es la parte más importante de la configuración de RLS, ya que determina qué datos ve un usuario.
 
 ---
 
-## Configuring RLS in Tabular Editor 3
-_Below is an overview of common changes one might make to existing RLS:_
+- [**Acerca de la seguridad de datos y RLS/OLS:**](data-security-about.md) Una descripción general funcional de <span style="color:#01a99d">RLS</span> y <span style="color:#8d7bae">OLS</span>.
+- **Configurar o modificar una configuración de RLS (este artículo):** Cómo configurar <span style="color:#01a99d">RLS</span> en un Dataset.
+- [**Configurar o modificar una configuración de OLS:**](data-security-setup-ols.md) Cómo configurar <span style="color:#8d7bae">OLS</span> en un Dataset.
+- [**Pruebas de RLS/OLS con suplantación:**](data-security-testing.md) Cómo validar fácilmente la seguridad de datos con Tabular Editor.
 
 ---
 
-### 1. Remove a Role
-To remove a Role from the model, you can simply delete the Role object with `Del` or by right-clicking and selecting 'Delete'. 
+## Configuración de RLS en Tabular Editor 3
+
+_A continuación se muestra un resumen de cambios habituales que podrías hacer en una configuración de RLS existente:_
+
+---
+
+### 1. Eliminar un rol
+
+Para eliminar un rol del modelo, basta con eliminar el objeto de rol con `Del` o haciendo clic con el botón derecho y seleccionando "Delete".
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-delete-role.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Deleting a Role in the model.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-delete-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Eliminación de un rol en el modelo.</figcaption>
 </figure>
 
 > [!NOTE]
-> All users assigned to this role will no longer be able to see model data, so long as at least one other Role exists. 
+> Todos los usuarios asignados a este rol ya no podrán ver los datos del modelo, siempre que exista al menos otro rol.
 
 ---
 
-### 2. Add a New Role
-To add a Role to the model: 
-1. __Right-Click the 'Roles' Object Type:__ This will open the dialogue to let you create a new Role.
-2. __Select 'Create' > 'Role':__ Name the new role.
+### 2. Agregar un nuevo rol
 
+Para agregar un rol al modelo:
 
-<figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Creating a new Role in the model.</figcaption>
-</figure>
-
-
-3. __Set the `Model Permission` Property to `Read`:__ This is necessary for any members of the role to be able to access the dataset at all.
-
+1. **Haz clic con el botón derecho en el tipo de objeto 'Roles':** Esto abrirá el cuadro de diálogo para que puedas crear un nuevo rol.
+2. **Selecciona 'Crear' > 'rol':** Asigna un nombre al nuevo rol.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-model-permission-read.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> Setting the Model Permission property is necessary.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-create-role.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Creación de un nuevo rol en el modelo.</figcaption>
 </figure>
 
+3. **Establece la propiedad `Model Permission` en `Read`:** Esto es necesario para que cualquier miembro del rol pueda acceder al Dataset.
 
-4. __Set Permissions:__ Set RLS Table Permissions and/or OLS Object Permissions, as described, below.
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-model-permission-read.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Es necesario establecer la propiedad `Model Permission`.</figcaption>
+</figure>
+
+4. **Establece permisos:** Configura los permisos de tabla de RLS y/o los permisos de objeto de OLS, como se describe a continuación.
 
 ---
 
-### 3. Remove RLS
-To remove RLS from the model, all Table Permissions must be deleted. To remove Data Security from the model, all Roles must be deleted. 
+### 3. Eliminar RLS
 
+Para quitar el RLS del modelo, se deben eliminar todos los permisos de tabla. Para quitar la seguridad de datos del modelo, se deben eliminar todos los roles.
 
 > [!NOTE]
-> Once all roles are deleted, all users will be able to see all data so long as they have _Read_ permissions on the dataset.
+> Una vez eliminados todos los roles, todos los usuarios podrán ver todos los datos siempre que tengan permisos de _Read_ sobre el Dataset.
 
 ---
 
-### 4. Modify a Table Permission
-To modify an existing Table Permission for a specific role:
+### 4. Modificar un permiso de tabla
 
+Para modificar un permiso de tabla existente para un rol específico:
 
-1. __Expand the Role:__ This will reveal the Table Permissions. 
-2. __Select the Table Permission:__ This will reveal the DAX for the Filter Permission in the Expression Editor.
-
+1. **Expande el rol:** Esto mostrará los permisos de tabla.
+2. **Selecciona el permiso de tabla:** Esto mostrará el DAX del permiso de filtro en el Editor de expresiones.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-table-permissions-dax.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> The DAX Filter Expression is visible in the Expression Editor when selecting a Table Permission.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-table-permissions-dax.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 4:</strong> La expresión de filtro de DAX se muestra en el Editor de expresiones al seleccionar un permiso de tabla.</figcaption>
 </figure>
 
-3. __Adjust the Filter Expression / RLS Table Permissions:__ It is recommended that you test / validate the DAX before using it:
-  - Copy the Filter Expression to a new DAX Query window under an `EVALUATE` statement.
-  - Add it as the Expression of an `ADDCOLUMNS` statement iterating over Table, or part of the table.
-  - Execute it and observe the results.
-  - Replace `USERNAME()` or `USERPRINCIPALNAME()` in dynamic RLS with a known value from the Security Table.
-  - Re-run the DAX Query and validate that the results appear as expected. Repeat until satisfied.
+3. **Ajusta la expresión de filtro / los permisos de tabla de RLS:** Se recomienda probar o validar el DAX antes de usarlo:
 
+- Copia la expresión de filtro en una nueva ventana de Consulta DAX, bajo una instrucción `EVALUATE`.
+- Agrégala como la expresión de una instrucción `ADDCOLUMNS` que itere sobre la tabla, o sobre una parte de la tabla.
+- Ejecútala y observa los resultados.
+- Sustituye `USERNAME()` o `USERPRINCIPALNAME()` en el RLS dinámico por un valor conocido de la tabla de seguridad.
+- Vuelve a ejecutar la Consulta DAX y valida que los resultados aparezcan como se espera. Repite hasta quedar conforme.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-rls-validation.png" alt="Data Security Validation" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 5:</strong> An example of how RLS can be validated from the DAX query window by using the Filter Expression inside of an Iterator over the Table (or part of the table, like the user alias). In this example, the original RLS Filter Expression in the Table Permission has been modified (Yellow) where an explicit User Principal Name in the dataset is added instead, to test (Green). The RLS code is executed inside of the ADDCOLUMNS iterator over a relevant part of the table. The checkmark indicates any row that evaluates to TRUE. The test demonstrates that the RLS is - for this UPN - working as expected, since <i>Gal Aehad</i> is the only user returning TRUE when their UPN is given.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-rls-validation.png" alt="Data Security Validation" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 5:</strong> Un ejemplo de cómo se puede validar RLS desde la ventana de Consulta DAX mediante la expresión FILTER dentro de un iterador sobre la tabla (o parte de ella, como el alias de usuario). En este ejemplo, se ha modificado (amarillo) la expresión de filtro RLS original en el permiso de tabla y, en su lugar, se ha añadido un User Principal Name explícito al Dataset para hacer la prueba (verde). El código de RLS se ejecuta dentro del iterador ADDCOLUMNS sobre una parte relevante de la tabla. La marca de verificación indica cualquier fila que, al ejecutarse con EVALUATE, se evalúa como TRUE. La prueba demuestra que el RLS —para este UPN— funciona como se espera, ya que <i>Gal Aehad</i> es el único usuario para el que se hace RETURN de TRUE cuando se indica su UPN.</figcaption>
 </figure>
 
 ```dax
 EVALUATE
 
-// Create a table to test your RLS
+// Crea una tabla para probar tu RLS
 ADDCOLUMNS ( 
   VALUES ( 'Regions'[Territory Directors] ),
   "@RLS-Validation",
 
-    // RLS Code
+    // Código de RLS
     VAR _CurrentUser = 
       SELECTCOLUMNS (
         FILTER ( 
           'Employees', 
           'Employees'[Employee Email]
 
-            // Replace USERPRINCIPALNAME() with a user email to test
+            // Reemplaza USERPRINCIPALNAME() por el correo de un usuario para probar
             = "gal.aehad@spaceparts.co" // USERPRINCIPALNAME ()
         ),
         "@Name", 'Employees'[Employee Name]
@@ -138,59 +131,58 @@ ADDCOLUMNS (
 
 )
 
-// Order from TRUE() to FALSE()
-// Where it is TRUE() the data will be visible
+// Ordena de TRUE() a FALSE()
+// Cuando sea TRUE(), los datos serán visibles
 ORDER BY [@RLS-Validation] DESC
 ```
 
 ---
 
-### 5. Add a New Table Permission to a Role
-To add a new table permission:
+### 5. Agregar un nuevo permiso de tabla a un rol
 
+Para agregar un nuevo permiso de tabla:
 
-1. __Right-Click the Role:__ Select 'Add table permission...'
+1. **Haz clic con el botón derecho en el rol:** Selecciona 'Agregar permiso de tabla...'
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-table-permissions.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 6:</strong> In Tabular Editor, Table Permissions for RLS are visible under the role. New table permissions can be created by right-clicking a Role and selecting <i>'Add Table Partition...'</i></figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-table-permissions.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 6:</strong> En Tabular Editor, los permisos de tabla para RLS son visibles bajo el rol. Los nuevos permisos de tabla se pueden crear haciendo clic con el botón derecho en un rol y seleccionando <i>'Agregar partición de tabla...'</i></figcaption>
 </figure>
 
-2. __Select the Table and press 'OK':__ Select the table for which you want to create the permission.
-3. __Write the Filter Expression / RLS Table Permissions:__ Write the DAX for the filter expression. As above, you want to validate this filter expression (See __Figure 5__):
-  - Copy the Filter Expression to a new DAX Query window under an `EVALUATE` statement.
-  - Add it as the Expression of an `ADDCOLUMNS` statement iterating over Table, or part of the table.
-  - Execute it and observe the results.
-  - Replace `USERNAME()` or `USERPRINCIPALNAME()` in dynamic RLS with a known value from the Security Table.
-  - Re-run the DAX Query and validate that the results appear as expected. Repeat until satisfied.
+2. **Selecciona la tabla y pulsa 'Aceptar':** Selecciona la tabla para la que quieras crear el permiso.
+3. **Escribe la expresión FILTER / permisos de tabla de RLS:** Redacta el DAX de la expresión FILTER. Como antes, quieres validar esta expresión de filtro (Ver la **Figura 5**):
+
+- Copia la expresión FILTER en una nueva ventana de Consulta DAX, debajo de una instrucción `EVALUATE`.
+- Añádela como la expresión de una instrucción `ADDCOLUMNS` que itere sobre la tabla o sobre una parte de ella.
+- Ejecútala y observa los resultados.
+- Sustituye `USERNAME()` o `USERPRINCIPALNAME()` en el RLS dinámico por un valor conocido de la tabla de seguridad.
+- Vuelve a ejecutar la Consulta DAX y valida que los resultados aparezcan como se espera. Repite hasta quedar conforme.
 
 ---
 
-### 6. Assign or Remove Users from a Role
-You can assign and remove users/groups from roles through Tabular Editor.
+### 6. Asignar o quitar usuarios de un rol
 
-  1. Right-Click the __Role__, select __Edit members__...
-  
-<figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-edit-members.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 7:</strong>Users can be assigned to roles by right-clicking a Role and selecting <i>'Edit members...'.</i></figcaption>
-</figure>
+Puedes asignar y quitar usuarios o grupos de los roles desde Tabular Editor.
 
-  2. Click the __dropdown button__ on the 'Add Windows AD Member' button and choose __Azure AD Member__:
+1. Haz clic con el botón derecho en el **rol** y selecciona **Editar miembros**...
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-edit-members-dialog.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 8:</strong> For AAS/SSAS models, users can be added via the <i>'Edit members...'</i> dialog box.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-edit-members.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 7:</strong> Los usuarios pueden asignarse a roles haciendo clic con el botón derecho en un rol y seleccionando <i>'Editar miembros...'.</i></figcaption>
 </figure>
 
-  3. Specify the Azure AD user identity (typically, the user e-mail address) as the __Member Name__ property.
-  4. Click __OK__.
-  5. __Save__ the model.
+2. Haz clic en el **botón desplegable** del botón 'Agregar miembro de Windows AD' y selecciona **Miembro de Azure AD**:
+
+<figure style="padding-top: 15px;">
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-edit-members-dialog.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 8:</strong> Para modelos AAS/SSAS, los usuarios se pueden agregar mediante el cuadro de diálogo <i>'Editar miembros...'</i>.</figcaption>
+</figure>
+
+3. Especifica la identidad del usuario de Azure AD (normalmente, la dirección de correo electrónico del usuario) en la propiedad **Nombre de miembro**.
+4. Haz clic en **Aceptar**.
+5. **Guarda** el modelo.
 
 > [!IMPORTANT]
-> If your organisation is using on-premises Active Directory with SQL Server Analysis Services, you will need to use the __Windows AD Member__ option instead of __Azure AD Member__.
+> Si tu organización usa Active Directory local con SQL Server Analysis Services, tendrás que usar la opción **Miembro de Windows AD** en lugar de **Miembro de Azure AD**.
 
 > [!NOTE]
-> Once a Power BI dataset has been published to the Power BI Service, you can also manage role members through the [Dataset Security settings](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#manage-security-on-your-model). Alternatively, you can manage role members through [SQL Server Management Studio](https://learn.microsoft.com/en-us/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) (this applies to AAS/SSAS models in addition to Power BI dataset).
+> Una vez que hayas publicado un Dataset de Power BI en el servicio Power BI, también puedes administrar los miembros del rol desde la [configuración de seguridad del Dataset](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#manage-security-on-your-model). Como alternativa, puedes administrar los miembros del rol desde [SQL Server Management Studio](https://learn.microsoft.com/en-us/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) (esto se aplica a los modelos AAS/SSAS, además del Dataset de Power BI).
 
 ---

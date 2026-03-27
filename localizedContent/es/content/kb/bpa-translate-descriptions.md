@@ -1,99 +1,99 @@
 ---
 uid: kb.bpa-translate-descriptions
-title: Translate Descriptions for All Cultures
+title: Traducir las descripciones para todas las configuraciones regionales
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring object descriptions are translated for all defined cultures.
+description: Regla de buenas prácticas que garantiza que las descripciones de los objetos estén traducidas para todas las configuraciones regionales definidas.
 ---
 
-# Translate Descriptions for All Cultures
+# Traducir las descripciones para todas las configuraciones regionales
 
-## Overview
+## Resumen
 
-This rule identifies objects with descriptions that lack translations for one or more cultures.
+Esta regla identifica objetos con descripciones a las que les faltan traducciones para una o varias configuraciones regionales.
 
-- Category: Model Layout
-- Severity: Low (1)
+- Categoría: Diseño del modelo
+- Gravedad: Baja (1)
 
-## Applies To
+## Se aplica a
 
-- Model
-- Tables
-- Measures
-- Hierarchies
-- Levels
-- Perspectives
-- Data Columns
-- Calculated Columns
-- Calculated Tables
-- Calculated Table Columns
+- Modelo
+- Tablas
+- Medidas
+- Jerarquías
+- Niveles
+- Perspectivas
+- Columnas de datos
+- Columnas calculadas
+- Tablas calculadas
+- Columnas de tablas calculadas
 
-## Why This Matters
+## Por qué es importante
 
-- **Incomplete localization**: Descriptions display in default language only
-- **Inconsistent help text**: Users see mix of languages
-- **User confusion**: Documentation appears incomplete
-- **Professional appearance**: Missing translations reduce model quality
+- **Localización incompleta**: Las descripciones solo se muestran en el idioma predeterminado
+- **Texto de ayuda incoherente**: Los usuarios ven una mezcla de idiomas
+- **Confusión de los usuarios**: La documentación parece incompleta
+- **Apariencia profesional**: Las traducciones faltantes reducen la calidad del modelo
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
 ```csharp
 not string.IsNullOrEmpty(Description) 
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedDescriptions[it]))
 ```
-This rule triggers when an object meets both of these conditions:
 
-1. The object has a description (not empty)
-2. At least one culture in the model is missing a translation for that description
+Esta regla se activa cuando un objeto cumple ambas condiciones:
 
-In other words, if you have descriptions and multiple cultures defined, all descriptions should be translated for all cultures.
+1. El objeto tiene una descripción (no está vacía)
+2. Al menos una configuración regional del modelo carece de traducción para esa descripción
 
+En otras palabras, si tienes descripciones y varias configuraciones regionales definidas, todas las descripciones deben estar traducidas para todas las configuraciones regionales.
 
-## How to Fix
+## Cómo solucionarlo
 
-### Manual Fix
+### Solución manual
 
-1. In **TOM Explorer**, select the object
-2. In **Properties** pane, expand **Translated Descriptions**
-3. Enter translation for each culture
+1. En el **Explorador TOM**, selecciona el objeto
+2. En el panel **Propiedades**, expande la sección **Descripciones traducidas**
+3. Introduce una traducción para cada configuración regional
 
-## Common Causes
+## Causas comunes
 
-### Cause 1: New Descriptions Added
+### Causa 1: Se añadieron nuevas descripciones
 
-Descriptions created without translations.
+Descripciones creadas sin traducciones.
 
-### Cause 2: Culture Added Later
+### Causa 2: Se añadió una configuración regional posteriormente
 
-Culture added after descriptions were written.
+Se añadió una configuración regional después de escribir las descripciones.
 
-### Cause 3: Incomplete Translation
+### Causa 3: Traducción incompleta
 
-Translation process didn't cover descriptions.
+El proceso de traducción no cubrió las descripciones.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Measure: [Total Revenue]
-Description (English): "Sum of all revenue"
-Description (Spanish): (missing)
-```
-
-### After Fix
+### Antes de la corrección
 
 ```
-Measure: [Total Revenue]
-Description (English): "Sum of all revenue"
-Description (Spanish): "Suma de todos los ingresos"
+Medida: [Total Revenue]
+Descripción (inglés): "Sum of all revenue"
+Descripción (español): (falta)
 ```
 
-## Compatibility Level
+### Después de la corrección
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Medida: [Total Revenue]
+Descripción (inglés): "Sum of all revenue"
+Descripción (español): "Suma de todos los ingresos"
+```
 
-## Related Rules
+## Nivel de compatibilidad
 
-- [Translate Visible Names](xref:kb.bpa-translate-visible-names) - Translating object names
-- [Translate Display Folders](xref:kb.bpa-translate-display-folders) - Translating display folders
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
+
+## Reglas relacionadas
+
+- [Traducir nombres visibles](xref:kb.bpa-translate-visible-names) - Traducción de nombres de objetos
+- [Traducir carpetas de visualización](xref:kb.bpa-translate-display-folders) - Traducción de carpetas de visualización

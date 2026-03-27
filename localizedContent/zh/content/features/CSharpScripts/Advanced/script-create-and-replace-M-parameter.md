@@ -1,6 +1,6 @@
 ---
 uid: script-create-and-replace-parameter
-title: Create M Parameter (Auto-Replace)
+title: 创建 M 参数（自动替换）
 author: Kurt Buhler
 updated: 2023-02-28
 applies_to:
@@ -10,19 +10,21 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Create New M Parameter and Add it to Existing M Partitions
 
-## Script Purpose
-If you want to replace a string in model M Partitions (i.e. connection string, filter condition, column name, etc.) with a parameter value.
-<br></br>
-> [!NOTE] 
-> This script only works with parameters of `string` data type. 
-> For other data types, please modify the variable types & parameter value appropriately.
-<br></br>
+# 创建新的 M 参数并将其添加到现有的 M 分区
 
-## Script
+## 脚本用途
 
-### Create New M Parameter and Add it to Existing M Partitions
+若要在模型的 M 分区中替换某个字符串（即连接字符串、筛选条件、列名等） 替换为参数值。 <br></br>
+
+> [!NOTE]
+> 此脚本仅适用于 `string` 数据类型的参数。
+> 对于其他数据类型，请相应修改变量类型和参数值。 <br></br>
+
+## 脚本
+
+### 创建新的 M 参数并将其添加到现有的 M 分区
+
 ```csharp
 // This script creates a new M Parameter as a 'Shared Expression'.
 // It will also find the default value in all M partitions and replace them with the parameter object name.
@@ -184,18 +186,18 @@ using (Form prompt = new Form())
     }
 }
 ```
-### Explanation
-This snippet opens a dialogue box for the user to enter the parameter name and value, then creates the parameter as a 'Shared Expression' in the model.
-It will then search all M partitions for the default value, replacing them with the `#"ParameterName"`. 
 
-## Example Output
+### 说明
+
+这段代码会打开一个对话框，让你输入参数名称和值，然后在模型中以“共享表达式”的形式创建该参数。
+随后，它会在所有 M 分区中搜索默认值，并将其替换为 `#"ParameterName"`。
+
+## 输出示例
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-m-parameter.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> The pop-up dialog that appears when running the script, prompting for the parameter name and value.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-m-parameter.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>运行脚本时弹出的对话框，会提示输入参数名称和值。</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> Confirmation dialog illustrating that the parameter has been created, and the corresponding value substring has been replaced in all M Partition expressions. For parameters of other types, adjust the C# code, appropriately.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2:</strong> 确认对话框显示参数已创建，并且已在所有 M 分区表达式中替换了对应的值子串。 如需使用其他类型的参数，请相应调整 C# 代码。</figcaption>
 </figure>

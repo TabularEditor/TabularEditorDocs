@@ -1,6 +1,6 @@
-﻿---
+---
 uid: messages-view-reference
-title: Messages view
+title: 信息视图
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -16,4 +16,5 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-[!include[using-bpa](../../features/views/messages-view.md)]
+
+[!include[messages-view](../../features/views/messages-view.md)]

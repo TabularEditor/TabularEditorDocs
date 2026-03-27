@@ -1,6 +1,6 @@
 ---
 uid: migrate-from-desktop
-title: Migrating from Power BI Desktop
+title: Migración desde Power BI Desktop
 author: Daniel Otykier
 updated: 2021-09-30
 applies_to:
@@ -17,230 +17,230 @@ applies_to:
           full: true
 ---
 
-# Migrating from Power BI Desktop
+# Migración desde Power BI Desktop
 
-If you are already familiar with data modeling concepts in Power BI Desktop, this article is intended to help you migrate your data modeling over to Tabular Editor. Thus, we assume you have a solid understanding of concepts such as the Power Query Editor, imported vs. calculated tables, calculated columns, measures, etc.
+Si ya estás familiarizado con los conceptos de modelado de datos en Power BI Desktop, este artículo pretende ayudarte a migrar el modelado de tu Data model a Tabular Editor. Por tanto, asumimos que tienes un sólido conocimiento de conceptos como el Editor de Power Query, las tablas importadas frente a las tablas calculadas, las columnas calculadas, las medidas, etc.
 
-## Power BI and Tabular Editor
+## Power BI y Tabular Editor
 
-Historically, Tabular Editor was designed as a tool for SQL Server Analysis Services (Tabular) and Azure Analysis Services developer. When Power BI first launched, there was no supported way for third party tools to access the Analysis Services instance hosting the Power BI data model, and so the only way to create and edit a Power BI dataset, was through Power BI Desktop.
+Históricamente, Tabular Editor se diseñó como una herramienta para desarrolladores de SQL Server Analysis Services (Tabular) y de Azure Analysis Services. Cuando se lanzó Power BI por primera vez, no había ninguna forma admitida para que las herramientas de terceros accedieran a la instancia de Analysis Services que alojaba el Data model de Power BI, así que la única manera de crear y editar un Dataset de Power BI era mediante Power BI Desktop.
 
-This changed in March 2020, when [Microsoft announced the read/write XMLA endpoint in Power BI Premium](https://powerbi.microsoft.com/en-us/blog/announcing-read-write-xmla-endpoints-in-power-bi-premium-public-preview/). A few months later, it even became possible to use third party tools in conjunction with Power BI Desktop, with the [announcement of the External Tools feature](https://powerbi.microsoft.com/en-us/blog/announcing-public-preview-of-external-tools-in-power-bi-desktop/).
+Esto cambió en marzo de 2020, cuando [Microsoft anunció el punto de conexión XMLA de lectura/escritura en Power BI Premium](https://powerbi.microsoft.com/en-us/blog/announcing-read-write-xmla-endpoints-in-power-bi-premium-public-preview/). Unos meses después, incluso fue posible usar herramientas de terceros junto con Power BI Desktop, con el [anuncio de la función Herramientas externas](https://powerbi.microsoft.com/en-us/blog/announcing-public-preview-of-external-tools-in-power-bi-desktop/).
 
-The availability of the XMLA endpoint in Power BI Premium allows data model developers to leverage their existing skills and tools, and it is not a secret that Microsoft is investing heavily in making [Power BI Premium a superset of Analysis Services](https://community.powerbi.com/t5/Webinars-and-Video-Gallery/Power-BI-Premium-as-a-superset-of-Analysis-Services-the-XMLA/m-p/1434121). In other words, the integration of third party tools, community as well as commercial, with Power BI is something that is here to stay. In fact, Amir Netz, CTO of Microsoft Analytics, made a [joint statement](https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices/) with Marco Russo, founder of SQLBI, to affirm this point.
+La disponibilidad del punto de conexión XMLA en Power BI Premium permite a los desarrolladores de Data model aprovechar sus habilidades y herramientas existentes, y no es ningún secreto que Microsoft está invirtiendo mucho en hacer de [Power BI Premium un superconjunto de Analysis Services](https://community.powerbi.com/t5/Webinars-and-Video-Gallery/Power-BI-Premium-as-a-superset-of-Analysis-Services-the-XMLA/m-p/1434121). En otras palabras, la integración de herramientas de terceros, tanto de la comunidad como comerciales, con Power BI es algo que ha llegado para quedarse. De hecho, Amir Netz, CTO de Microsoft Analytics, hizo una [declaración conjunta](https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices/) con Marco Russo, fundador de SQLBI, para reafirmar este punto.
 
-Here at Tabular Editor ApS, we firmly believe that Tabular Editor 3 is the best tabular data modeling tool available right now, and thanks to the integrations mentioned above, the tool is no longer reserved for SQL Server or Azure Analysis Services developers. 
+En Tabular Editor ApS, creemos firmemente que Tabular Editor 3 es la mejor herramienta de modelado tabular de Data model disponible ahora mismo y, gracias a las integraciones mencionadas, ya no está reservada para los desarrolladores de SQL Server o de Azure Analysis Services.
 
-Before proceeding, it is important to understand that Tabular Editor can be used in conjunction with Power BI in two very different scenarios:
+Antes de continuar, es importante entender que Tabular Editor se puede usar junto con Power BI en dos escenarios muy diferentes:
 
-- **Scenario 1:** Tabular Editor as an External Tool for Power BI Desktop.
-- **Scenario 2:** Tabular Editor with the Power BI Premium XMLA Endpoint.
+- **Escenario 1:** Tabular Editor como herramienta externa para Power BI Desktop.
+- **Escenario 2:** Tabular Editor con el punto de conexión XMLA de Power BI Premium.
 
 > [!IMPORTANT]
-> You cannot use Tabular Editor to directly load a .pbix file. For more information, see <xref:desktop-limitations#power-bi-file-types>.
+> No puedes usar Tabular Editor para cargar directamente un archivo .pbix. Para más información, consulta <xref:desktop-limitations#power-bi-file-types>.
 
-### Scenario 1: Tabular Editor as an External Tool for Power BI Desktop
+### Escenario 1: Tabular Editor como herramienta externa para Power BI Desktop
 
-Generally, this scenario is intended for self-service analysts and Power BI Desktop users without access to Power BI Premium, to make certain data modeling operations easier (for example, adding and editing measures), and to unlock advanced modeling options not otherwise available (calculation groups, perspectives and metadata translations).
+En general, este escenario está pensado para analistas de autoservicio y usuarios de Power BI Desktop sin acceso a Power BI Premium, para facilitar determinadas operaciones de modelado del Data model (por ejemplo, agregar y editar medidas) y para habilitar opciones avanzadas de modelado que, de otro modo, no estarían disponibles (grupos de cálculo, perspectivas y traducciones de metadatos).
 
-External tools connect to the Analysis Services model hosted by Power BI Desktop. This allows the tool to make certain changes to the data model. Currently, however, not all types of data modeling operations are supported by Power BI Desktop. It is important to understand this limitation and how Tabular Editor behaves when used as an external tool for Power BI Desktop. See <xref:desktop-limitations> for more information about this.
+Las herramientas externas se conectan al modelo de Analysis Services hospedado por Power BI Desktop. Esto permite que la herramienta realice determinados cambios en el Data model. Sin embargo, actualmente no todos los tipos de operaciones de modelado del Data model están admitidos por Power BI Desktop. Es importante entender esta limitación y cómo se comporta Tabular Editor cuando se usa como herramienta externa para Power BI Desktop. Consulta <xref:desktop-limitations> para obtener más información al respecto.
 
-The typical workflow in this scenario, is the following:
+El flujo de trabajo típico en este escenario es el siguiente:
 
-1. Open a .pbit or .pbix file in Power BI Desktop
-2. Launch Tabular Editor through the External Tools ribbon
-3. Switch back and forth between Tabular Editor and Power BI Desktop, depending on what type of change you need to make. For example, you can add and edit measures through Tabular Editor, but you must use Power BI Desktop if you need to add a new table to the model.
-4. Whenever you make a change in Tabular Editor, use **File > Save** (CTRL+S) to write the changes back to Power BI Desktop.
-5. When you are done making changes, close Tabular Editor. Then, publish or save the report as usual from within Power BI Desktop.
+1. Abre un archivo .pbit o .pbix en Power BI Desktop
+2. Inicia Tabular Editor desde la cinta de opciones Herramientas externas
+3. Ve alternando entre Tabular Editor y Power BI Desktop, según el tipo de cambio que necesites realizar. Por ejemplo, puedes agregar y editar medidas con Tabular Editor, pero debes usar Power BI Desktop si necesitas agregar una nueva tabla al modelo.
+4. Cada vez que hagas un cambio en Tabular Editor, usa **Archivo > Guardar** (CTRL+S) para guardar los cambios en Power BI Desktop.
+5. Cuando termines de hacer cambios, cierra Tabular Editor. Después, publica o guarda el Report como de costumbre desde Power BI Desktop.
 
 > [!NOTE]
-> As of October 2021, there is a bug in Power BI Desktop that sometimes prevents Desktop from automatically refreshing the field list and visuals to reflect changes made through external tools. When this happens, saving the .pbix file and reopening it, or manually refreshing a table within the model, usually causes the field list and all visuals to update correctly.
+> A partir de octubre de 2021, hay un error en Power BI Desktop que a veces impide que Power BI Desktop actualice automáticamente la lista de campos y los Visuales para reflejar los cambios realizados con herramientas externas. Cuando esto ocurre, guarda el archivo .pbix y vuelve a abrirlo, o actualiza manualmente una tabla del modelo; por lo general, esto hace que la lista de campos y todos los Visuales se actualicen correctamente.
 
-The [modeling limitations](xref:desktop-limitations) that apply to External Tools are only relevant regarding write operations/model modifications. You can still use Tabular Editor 3's connected features to browse the data within the model through table data previews, Pivot Grids or DAX queries, as described later in this guide.
+Las [limitaciones de modelado](xref:desktop-limitations) que se aplican a las herramientas externas solo son relevantes en lo que respecta a operaciones de escritura o modificaciones del modelo. Aun así, puedes usar las funciones conectadas de Tabular Editor 3 para explorar los datos del modelo mediante vistas previas de los datos de las tablas, Pivot Grids o consultas DAX, como se describe más adelante en esta guía.
 
-### Scenario 2: Tabular Editor with the Power BI Premium XMLA Endpoint
+### Escenario 2: Tabular Editor con el punto de conexión XMLA de Power BI Premium
 
-This scenario is for BI professionals in organizations that use Power BI Premium Capacity or Power BI Premium-Per-User workspaces, who intend to replace Power BI Desktop altogether for purposes of dataset development.
+Este escenario está dirigido a profesionales de BI en organizaciones que usan capacidad de Power BI Premium o Workspaces de Power BI Premium por usuario, y que pretenden reemplazar por completo Power BI Desktop para el desarrollo de Datasets.
 
-Essentially, the Power BI Premium XMLA Endpoint exposes an instance of Analysis Services (Tabular). In this scenario, Tabular Editor behaves no different than it would when connected to Azure Analysis Services or SQL Server Analysis Services (Tabular).
+En esencia, el punto de conexión XMLA de Power BI Premium expone una instancia de Analysis Services (Tabular). En este escenario, Tabular Editor se comporta igual que cuando está conectado a Azure Analysis Services o a SQL Server Analysis Services (Tabular).
 
-The typical workflow in this scenario, is the following:
+El flujo de trabajo típico en este escenario es el siguiente:
 
-1. When first migrating to Tabular Editor, use the XMLA endpoint to open a Power BI dataset in Tabular Editor, then save the model metadata as a file (Model.bim) or folder (Database.json). See @parallel-development for more information.
-2. Going forward, open the model metadata in Tabular Editor from the file or folder you saved in step 1. Optionally use [workspace mode](xref:workspace-mode).
-3. Apply changes using Tabular Editor.
-4. If using workspace mode, changes should be immediately visible in the Power BI service every time you hit Save (CTRL+S) in Tabular Editor.
-5. If not using workspace mode or when done making changes, use Tabular Editor's **Model > Deploy...** option to publish the changes to the Power BI service.
+1. Al migrar por primera vez a Tabular Editor, usa el punto de conexión XMLA para abrir un Dataset de Power BI en Tabular Editor y después guarda los metadatos del modelo como un archivo (Model.bim) o una carpeta (Database.json). Consulta @parallel-development para obtener más información.
+2. A partir de ahí, abre en Tabular Editor los metadatos del modelo desde el archivo o la carpeta que guardaste en el paso 1. Opcionalmente, usa el [modo del área de trabajo](xref:workspace-mode).
+3. Aplica los cambios con Tabular Editor.
+4. Si usas el modo del área de trabajo, los cambios deberían ser visibles de inmediato en el servicio de Power BI cada vez que pulses Guardar (CTRL+S) en Tabular Editor.
+5. Si no usas el modo del área de trabajo o cuando hayas terminado de hacer cambios, usa la opción **Model > Deploy...** de Tabular Editor para publicar los cambios en el servicio de Power BI.
 
-As the model metadata "source of truth" in this scenario, is the file or folder structure stored on disk, this scenario not only enables parallel development with version control integration, but also continuous integration/continuous deployment (CI/CD) using an automated build server such as Azure DevOps. 
-
-> [!WARNING]
-> As soon as you apply changes to a Power BI dataset through the Power BI service XMLA endpoint, that dataset can no longer be downloaded as a .pbix file. See [Dataset connectivity with the XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets) for more information.
-
-When using Tabular Editor to connect to the dataset through the XMLA endpoint, there are no limitations to the types of write operations/model modifications that can be made.
-
-The remainder of this article focuses on differences between Power BI Desktop and Tabular Editor for data model development. Some sections only apply to scenario 2, due to the [modeling limitations](xref:desktop-limitations) that apply when using Tabular Editor as an external tool for Power BI Desktop (scenario 1).
-
-## Tabular Editor 3 user interface
-
-If you are new to Tabular Editor, we recommend reading through the following resources to understand Tabular Editor 3's user interface:
-
-- [Getting to know Tabular Editor 3's User Interface](xref:user-interface)
-- [TOM Explorer view](xref:tom-explorer-view)
-- [Properties view](xref:properties-view)
-- [DAX editor](xref:dax-editor)
-
-## Tabular Editor 3 how-tos
-
-What follows is a quick walkthrough of how to achieve common tasks in Tabular Editor 3.
-
-### How to add a measure
-
-To add a new measure to your model, right-click on the table in the **TOM Explorer** on which you want the new measure to reside, then choose **Create > Measure** (shortcut ALT+1). After the measure is added, you can immediately type the name of the measure.
-
-![Add Measure](~/content/assets/images/add-measure.png)
-
-### How to rename a measure
-
-If you need to edit the name of the measure (or any other object), simply select the measure and hit F2 (or double-click the measure name). If multiple objects are selected, you will see the Batch rename dialog, that makes it easy to rename multiple objects in one go.
-
-![Batch Rename](~/content/assets/images/batch-rename.png)
+Dado que, en este escenario, la "fuente de verdad" de los metadatos del modelo es la estructura de archivos o carpetas almacenada en disco, este enfoque no solo permite el desarrollo en paralelo con integración del control de versiones, sino también la integración continua y la entrega/despliegue continuos (CI/CD) mediante un servidor de compilación automatizado como Azure DevOps.
 
 > [!WARNING]
-> Changing object names in the data model may cause report visuals to stop working, if the visuals rely on one or more of the objects being renamed. External tools cannot access information about Power BI visuals, so Tabular Editor is not able to warn you before an object that is used in a visual is renamed or deleted.
+> En cuanto apliques cambios a un Dataset de Power BI a través del punto de conexión XMLA del servicio de Power BI, ese Dataset ya no se podrá descargar como archivo .pbix. Consulta [Conectividad del Dataset con el punto de conexión XMLA](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#power-bi-desktop-authored-datasets) para obtener más información.
 
-### How to create a copy of a measure
+Cuando usas Tabular Editor para conectarte al Dataset mediante el punto de conexión XMLA, no hay limitaciones en cuanto a los tipos de operaciones de escritura o modificaciones del modelo que se pueden realizar.
 
-In Tabular Editor 3, you can use the familiar Cut (CTRL+X), Copy (CTRL+C) and Paste (CTRL+V) operations to quickly move around and make copies of objects. You can also drag objects between tables and display folders using the **TOM Explorer**. If you make a mistake along the way, you can use the Undo (CTRL+Z) and Redo (CTRL+Y) options (repeatedly) to navigate back and forth through the history of changes applied.
+El resto de este artículo se centra en las diferencias entre Power BI Desktop y Tabular Editor para el desarrollo de Data model. Algunas secciones solo se aplican al escenario 2, debido a las [limitaciones de modelado](xref:desktop-limitations) que se aplican cuando se usa Tabular Editor como herramienta externa para Power BI Desktop (escenario 1).
 
-### How to modify the DAX expression of a measure
+## Interfaz de usuario de Tabular Editor 3
 
-Locate the measure you want to modify in the **TOM Explorer** and select it. You can toggle the display of hidden objects (CTRL+6) and display folders (CTRL+5) using the toolbar buttons near the top of the TOM Explorer. You may also type the partial name of the measure in the search box, to filter the **TOM explorer**.
+Si eres nuevo en Tabular Editor, te recomendamos revisar los siguientes recursos para entender la interfaz de usuario de Tabular Editor 3:
 
-Once the measure is selected, you should see the DAX expression of the measure in the **Expression Editor** and various properties such as `Description`, `Format String`, `Hidden`, etc. in the **Properties** grid.
+- [Conoce la interfaz de usuario de Tabular Editor 3](xref:user-interface)
+- [Vista del Explorador TOM](xref:tom-explorer-view)
+- [vista de propiedades](xref:properties-view)
+- [Editor de DAX](xref:dax-editor)
 
-![Modify Measure](~/content/assets/images/modify-measure.png)
+## Guías prácticas de Tabular Editor 3
 
-To modify the DAX expression, simply place the cursor in the **Expression Editor** and update the DAX code. Hit F6 to automatically format the code. If you select a different object in the TOM Explorer or click the green checkmark button **Expression > Accept** (F5), the expression change is stored locally in Tabular Editor. You can also cancel the modification you made by hitting the red "X", **Expression > Cancel**. If you accidentally hit **Accept**, you can always undo the change by using the **Edit > Undo** (CTRL+Z) option.
+A continuación encontrarás un recorrido rápido para realizar tareas habituales en Tabular Editor 3.
 
-To save your changes back to Power BI Desktop, the Power BI XMLA endpoint, or the file on disk from which the model was loaded, hit **File > Save** (CTRL+S).
+### Cómo agregar una medida
 
-To learn more about the capabilities of the Expression Editor, when writing DAX code, see <xref:dax-editor>.
+Para agregar una nueva medida al modelo, haz clic con el botón derecho en la tabla del **Explorador TOM** donde quieres que se ubique la nueva medida y selecciona **Crear > Medida** (atajo ALT+1). Después de agregar la medida, puedes escribir inmediatamente su nombre.
 
-### How to visualize dependencies between measures
+![Agregar medida](~/content/assets/images/add-measure.png)
 
-While a measure is selected in the **TOM Explorer** use the **Measure > Show dependencies** (SHIFT+F12) option. This causes a new window to pop up, visualizing the dependency tree of the DAX expression for that measure. You can switch between viewing both upstream and downstream dependencies.
+### Cómo cambiar el nombre de una medida
+
+Si necesitas editar el nombre de la medida (o de cualquier otro objeto), solo tienes que seleccionar la medida y pulsar F2 (o hacer doble clic en el nombre de la medida). Si seleccionas varios objetos, verás el cuadro de diálogo «Renombrar en lote», que facilita renombrar varios objetos de una sola vez.
+
+![Renombrar en lote](~/content/assets/images/batch-rename.png)
+
+> [!WARNING]
+> Cambiar los nombres de los objetos en el Data model puede provocar que los Visual del Report dejen de funcionar, si los Visual dependen de uno o varios de los objetos cuyo nombre se haya cambiado. Las herramientas externas no pueden acceder a la información sobre los Visuales de Power BI, por lo que Tabular Editor no puede avisarte antes de que se renombre o se elimine un objeto que se use en un Visual.
+
+### Cómo crear una copia de una medida
+
+En Tabular Editor 3, puedes usar las conocidas operaciones Cortar (CTRL+X), Copiar (CTRL+C) y Pegar (CTRL+V) para mover objetos rápidamente y crear copias. También puedes arrastrar objetos entre tablas y carpetas de visualización con el **Explorador TOM**. Si cometes un error durante el proceso, puedes usar las opciones Deshacer (CTRL+Z) y Rehacer (CTRL+Y) (repetidamente) para desplazarte hacia atrás y hacia delante por el historial de cambios aplicados.
+
+### Cómo modificar la expresión DAX de una medida
+
+Busca la medida que quieres modificar en el **Explorador TOM** y selecciónala. Puedes alternar la visualización de objetos ocultos (CTRL+6) y de carpetas de visualización (CTRL+5) con los botones de la barra de herramientas cerca de la parte superior del Explorador TOM. También puedes escribir parte del nombre de la medida en el cuadro de búsqueda para filtrar el **Explorador TOM**.
+
+Una vez seleccionada la medida, verás su expresión DAX en el **Editor de expresiones** y varias propiedades, como `Description`, `Format String`, `Hidden`, etc., en la cuadrícula de **Propiedades**.
+
+![Modificar medida](~/content/assets/images/modify-measure.png)
+
+Para modificar la expresión DAX, solo tienes que colocar el cursor en el **Editor de expresiones** y actualizar el código DAX. Pulsa F6 para dar formato al código automáticamente. Si seleccionas otro objeto en el Explorador TOM o haces clic en el botón con la marca de verificación verde **Expression > Accept** (F5), el cambio en la expresión se guarda localmente en Tabular Editor. También puedes cancelar la modificación que has hecho pulsando la "X" roja, en **Expression > Cancel**. Si pulsas **Accept** por accidente, siempre puedes deshacer el cambio con la opción **Edit > Undo** (CTRL+Z).
+
+Para guardar los cambios en Power BI Desktop, en el punto de conexión XMLA de Power BI o en el archivo en disco desde el que se cargó el modelo, pulsa **File > Save** (CTRL+S).
+
+Para obtener más información sobre las capacidades del Editor de expresiones al escribir código DAX, consulta <xref:dax-editor>.
+
+### Cómo visualizar las dependencias entre medidas
+
+Con una medida seleccionada en el **Explorador TOM**, usa la opción **Measure > Show dependencies** (SHIFT+F12). Esto hace que se abra una nueva ventana que muestra el árbol de dependencias de la expresión DAX de esa medida. Puedes alternar entre ver las dependencias ascendentes y descendentes.
 
 ![Show Dependencies](~/content/assets/images/show-dependencies.png)
 
-Double-clicking on an item in the dependencies view navigate to that object in the **TOM Explorer**.
+Al hacer doble clic en un elemento de la vista de dependencias, se navegará hasta ese objeto en el **Explorador TOM**.
 
-### How to change the format string of a measure
+### Cómo cambiar la cadena de formato de una medida
 
-Locate the measure you want to modify in the **TOM Explorer** and select it. You can toggle the display of hidden objects (CTRL+6) and display folders (CTRL+5) using the toolbar buttons near the top of the TOM Explorer. You may also type the partial name of the measure in the search box, to filter the **TOM explorer**.
+Busca la medida que quieres modificar en el **Explorador TOM** y selecciónala. Puedes alternar la visualización de los objetos ocultos (CTRL+6) y las carpetas de visualización (CTRL+5) mediante los botones de la barra de herramientas situados en la parte superior del Explorador TOM. También puedes escribir parte del nombre de la medida en el cuadro de búsqueda para filtrar el **Explorador TOM**.
 
-Once the measure is selected, locate the `Format String` property in the **Properties** grid, expand it, and set the format string properties according to your preferences. Note the dropdown button at the right of the `Format` property. You may also freely enter a format string in the `Format String` property itself.
+Una vez seleccionada la medida, busca la propiedad `Format String` en la cuadrícula de **Properties**, expándela y ajusta la cadena de formato según tus preferencias. Fíjate en el botón desplegable a la derecha de la propiedad `Format`. También puedes escribir libremente una cadena de formato directamente en la propiedad `Format String`.
 
 ![Format String](~/content/assets/images/format-string.png)
 
-### How to modify the DAX expression of multiple measures
+### Cómo modificar la expresión DAX de varias medidas
 
-Tabular Editor 3 allows you to select multiple measures in order to create a **DAX Script**, which lets you modify the DAX expression and various properties of all selected measures at once.
+Tabular Editor 3 te permite seleccionar varias medidas para crear un **Script DAX**, con el que puedes modificar la expresión DAX y varias propiedades de todas las medidas seleccionadas a la vez.
 
-To create a DAX script based on existing measures, simply select the measures in the **TOM Explorer** (hold down the CTLR key to select multiple objects or hold down the SHIFT key to select a range of objects). Then, right click and hit **Script DAX**.
+Para crear un Script DAX basado en medidas existentes, solo tienes que seleccionar las medidas en el **Explorador TOM** (mantén pulsada la tecla CTRL para seleccionar varios objetos o la tecla SHIFT para seleccionar un rango de objetos). Después, haz clic con el botón derecho y selecciona **Script DAX**.
 
 ![Script Dax](~/content/assets/images/script-dax.png)
 
-You can add or modify properties such as `Description`, `FormatString`, `Visible`, `DetailRows` and more directly in the script.
+Puedes agregar o modificar propiedades como `Description`, `FormatString`, `Visible`, `DetailRows` y otras directamente en el script.
 
-Hit F5 to apply the script to the data model. Note that unlike the **Expression Editor**, navigating to a different object will not automatically apply any changes made to the script. You can still use the **Edit > Undo** (CTRL+Z) option to roll back any changes applied by a DAX script.
+Pulsa F5 para aplicar el script al Data model. Ten en cuenta que, a diferencia del **Editor de expresiones**, al navegar a otro objeto no se aplicarán automáticamente los cambios realizados en el script. También puedes usar la opción **Edit > Undo** (CTRL+Z) para deshacer cualquier cambio aplicado por un Script DAX.
 
-See @dax-script-introduction for more information.
+Consulta @dax-script-introduction para obtener más información.
 
-### How to preview data in a table
+### Cómo previsualizar datos en una tabla
 
-To view the contents of a table (similar to the Data Tab in Power BI Desktop), simply right-click on a table and choose "Preview data". This will open a new tab containing a preview of the table content. You can scroll through all rows of the table, as well as apply sorting or filtering to columns. Unlike Power BI Desktop, you can open as many of these preview tabs as you like and arrange them next to each other in the user interface. The preview also works for tables in [DirectQuery mode](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery) (although the preview will be limited to the first 100 records).
+Para ver el contenido de una tabla (similar a la pestaña Datos de Power BI Desktop), haz clic con el botón derecho en una tabla y elige "Preview data". Esto abrirá una nueva pestaña con una vista previa del contenido de la tabla. Puedes desplazarte por todas las filas de la tabla y aplicar ordenación o filtrado a las columnas. A diferencia de Power BI Desktop, puedes abrir tantas de estas pestañas de vista previa como quieras y organizarlas una junto a otra en la interfaz de usuario. La vista previa también funciona con tablas en [modo DirectQuery](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-use-directquery) (aunque la vista previa se limitará a los primeros 100 registros).
 
-![Preview Data](~/content/assets/images/preview-data.png)
-
-> [!NOTE]
-> The **Preview data** feature is only available when Tabular Editor is connected to Power BI Desktop or a dataset in the Power BI XMLA endpoint.
-
-See @refresh-preview-query for more information.
-
-### How to add a calculation group
-
-[Calculation Groups](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) are useful for defining and reusing a modified DAX filter context or other type of business logic across all model measures. To add a calculation group using Tabular Editor, simply use the **Model > New Calculation Group** (ALT+7) option.
-
-![Add Calculation Group](~/content/assets/images/add-calc-group.png)
-
-Give the calculation group a name, then, while the Calculation Group is selected in the **TOM Explorer**, add new Calculation Items by using the **Calculation Group Table > Create > Calculation Item** option. You can copy (CTRL+C) and paste (CTRL+V) calculation items to speed up this process for additional items.
-
-![Add Calc Item](~/content/assets/images/add-calc-item.png)
-
-### How to add a new table
-
-To add a new table to a model, use the **Model > Import tables...** option. Tabular Editor's [Import Table Wizard](xref:importing-tables) will guide you through the process.
+![Vista previa de datos](~/content/assets/images/preview-data.png)
 
 > [!NOTE]
-> Tabular Editor 3 does not support every data source otherwise supported by Power BI. If your model uses a data source not supported by Tabular Editor, the easiest way to import a new table from the same source is to copy an existing table in Tabular Editor (CTRL+C / CTRL+V), and then modify the partition expression and update the table schema as shown below. For this to work, make sure that the **Tools > Preferences > Schema Compare > Use Analysis Services for change detection** option is enabled. See <xref:importing-tables#updating-table-schema-through-analysis-services> for more information.
+> La función **Vista previa de datos** solo está disponible cuando Tabular Editor está conectado a Power BI Desktop o a un Dataset en el punto de conexión XMLA de Power BI.
 
-> [!IMPORTANT]
-> This option is not available by default when using Tabular Editor as an external tool, since adding/editing tables through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).
+Consulta @refresh-preview-query para obtener más información.
 
-See @importing-tables-data-modeling for more information.
+### Cómo agregar un grupo de cálculo
 
-### How to modify a Power Query expression on a table
+Los [grupos de cálculo](https://docs.microsoft.com/en-us/analysis-services/tabular-models/calculation-groups?view=asallproducts-allversions) son útiles para definir y reutilizar un contexto de filtro de DAX modificado u otro tipo de lógica de negocio en todas las medidas del modelo. Para agregar un grupo de cálculo con Tabular Editor, usa la opción **Modelo > Nuevo grupo de cálculo** (ALT+7).
 
-Power Query (M) expressions that define what is loaded into each table reside in the corresponding table's **Partition**. The partitions can be located in the **TOM Explorer**. When selecting a partition, Tabular Editor displays the M expression for that partition in the **Expression Editor**, allowing you to edit it. After editing and accepting the expression change, you can right-click on the partition in the **TOM Explorer** and choose the **Update table schema...** option in order to detect if the columns imported on the table should be changed, based on the updated Power Query expression.
+![Agregar grupo de cálculo](~/content/assets/images/add-calc-group.png)
 
-![Power Query Update Schema](~/content/assets/images/power-query-update-schema.png)
+Asigna un nombre al grupo de cálculo y, con el grupo de cálculo seleccionado en el **Explorador TOM**, agrega nuevos elementos de cálculo mediante la opción **Tabla del grupo de cálculo > Crear > Elemento de cálculo**. Puedes copiar (CTRL+C) y pegar (CTRL+V) elementos de cálculo para agilizar este proceso al crear elementos adicionales.
 
-> [!NOTE]
-> Currently, Tabular Editor 3 does not perform any validation of the partition expression. For Power Query (M) expressions, this is planned for a later update of Tabular Editor 3.
+![Agregar elemento de cálculo](~/content/assets/images/add-calc-item.png)
 
-> [!IMPORTANT]
-> Partition expressions are read-only by default when using Tabular Editor as an external tool, since editing partitions through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).
+### Cómo agregar una nueva tabla
 
-If the Power Query expression changes gives rise to any changes on the imported table columns, a dialog that lets you review these changes will show:
-
-![Apply schema changes](~/content/assets/images/combine-sourcecolumn-update.png)
-
-### How to modify a shared Power Query expression
-
-Shared Expressions are M queries that are not directly used to load data into a table. For example, when you create a Power Query parameter in Power BI Desktop, the M expression for this parameter is stored as a Shared Expression. In Tabular Editor, These can be accessed through the Shared Expressions folder of the **TOM Explorer** and edited just like M queries on partitions.
-
-![Shared Expression](~/content/assets/images/shared-expression.png)
-
-> [!IMPORTANT]
-> Shared expressions are read-only by default when using Tabular Editor as an external tool, since editing partitions through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).
-
-### How to add relationships between tables
-
-The easiest way to add relationships between two tables is to create a new diagram, add the two tables to the diagram, and then visually dragging a column from one table to another, to indicate the columns that should participate in the relationship. This is similar to how you would create a relationship in Power BI Desktop.
-
-1. To create a new diagram use the **File > New > Diagram** option.
-2. To add tables to the diagram, either drag and drop the tables from the **TOM Explorer** or use the **Diagram > Add tables...** option.
-3. Once the tables are added, locate the column on the (many-side) fact table, and drag it over to the corresponding column on the (one-side) dimension table.
-4. Confirm the relationship settings and hit "OK".
-
-![Shared Expression](~/content/assets/images/create-relationship-through-diagram.gif)
-
-See [Working with diagrams](xref:importing-tables-data-modeling#working-with-diagrams) for more information.
-
-> [!IMPORTANT]
-> Relationships cannot be modified when using Tabular Editor as an external tool, since editing relationships through external tools is [not supported by Power BI Desktop](xref:desktop-limitations).
-
-### How to publish to the Power BI Service
-
-To publish or update a dataset in the Power BI Service, use the **Model > Deploy...** option and use the XMLA endpoint of the workspace, in which you want to publish the dataset.
-
-If you loaded the model metadata directly from the XMLA Endpoint, you only need to hit **File > Save** (CTRL+S), to update the dataset that was loaded in Tabular Editor.
+Para agregar una tabla nueva a un modelo, usa la opción **Modelo > Importar tablas...**. El [Asistente para importar tablas](xref:importing-tables) de Tabular Editor te guiará durante el proceso.
 
 > [!NOTE]
-> The **Model > Deploy...** option is **not** available in Tabular Editor 3 Desktop Edition, as this edition is only intended to be used as an External Tool for Power BI Desktop. [More information](xref:editions).
+> Tabular Editor 3 no es compatible con todos los Data sources que admite Power BI. Si tu modelo usa un Data source que Tabular Editor no admite, la forma más sencilla de importar una tabla nueva desde el mismo Data source es copiar una tabla existente en Tabular Editor (CTRL+C / CTRL+V) y luego modificar la expresión de la partición y actualizar el esquema de la tabla, como se muestra a continuación. Para que esto funcione, asegúrate de que esté habilitada la opción **Herramientas > Preferencia > Comparación de esquema > Usar Analysis Services para la detección de cambios**. Consulta <xref:importing-tables#updating-table-schema-through-analysis-services> para obtener más información.
 
-## Next steps
+> [!IMPORTANT]
+> Esta opción no está disponible de forma predeterminada al usar Tabular Editor como herramienta externa, ya que [Power BI Desktop no admite](xref:desktop-limitations) agregar o editar tablas mediante herramientas externas.
+
+Consulta @importing-tables-data-modeling para obtener más información.
+
+### Cómo modificar una expresión de Power Query en una tabla
+
+Las expresiones de Power Query (M) que definen lo que se carga en cada tabla se encuentran en la **partición** correspondiente de la tabla. Puedes encontrar las particiones en el **Explorador TOM**. Al seleccionar una partición, Tabular Editor muestra la expresión M de esa partición en el **Editor de expresiones**, lo que te permite editarla. Tras editar y aceptar el cambio de expresión, puedes hacer clic con el botón derecho en la partición del **Explorador TOM** y elegir la opción **Actualizar esquema de la tabla...** para detectar si deben cambiarse las columnas importadas en la tabla, en función de la expresión actualizada de Power Query.
+
+![Power Query: actualizar el esquema](~/content/assets/images/power-query-update-schema.png)
+
+> [!NOTE]
+> Actualmente, Tabular Editor 3 no realiza ninguna validación de la expresión de la partición. Para expresiones de Power Query (M), esto está previsto para una actualización posterior de Tabular Editor 3.
+
+> [!IMPORTANT]
+> Las expresiones de partición son de solo lectura de forma predeterminada al usar Tabular Editor como herramienta externa, ya que la edición de particiones mediante herramientas externas [no es compatible con Power BI Desktop](xref:desktop-limitations).
+
+Si los cambios en la expresión de Power Query provocan modificaciones en las columnas importadas de la tabla, se mostrará un cuadro de diálogo que te permitirá revisarlas:
+
+![Aplicar cambios de esquema](~/content/assets/images/combine-sourcecolumn-update.png)
+
+### Cómo modificar una expresión compartida de Power Query
+
+Las expresiones compartidas son consultas M que no se usan directamente para cargar datos en una tabla. Por ejemplo, cuando creas un parámetro de Power Query en Power BI Desktop, la expresión M de ese parámetro se almacena como una expresión compartida. En Tabular Editor, se puede acceder a ellas desde la carpeta Expresiones compartidas del **Explorador TOM** y editarlas igual que las consultas M de las particiones.
+
+![Expresión compartida](~/content/assets/images/shared-expression.png)
+
+> [!IMPORTANT]
+> Las expresiones compartidas son de solo lectura de forma predeterminada al usar Tabular Editor como herramienta externa, ya que la edición de particiones mediante herramientas externas [no es compatible con Power BI Desktop](xref:desktop-limitations).
+
+### Cómo agregar relaciones entre tablas
+
+La forma más sencilla de agregar relaciones entre dos tablas es crear un nuevo diagrama, agregar ambas tablas al diagrama y, después, arrastrar una columna de una tabla a otra para indicar qué columnas deben participar en la relación. Esto es similar a cómo crearías una relación en Power BI Desktop.
+
+1. Para crear un nuevo diagrama, usa la opción **Archivo > Nuevo > Diagrama**.
+2. Para agregar tablas al diagrama, arrastra y suelta las tablas desde el **Explorador TOM** o usa la opción **Diagrama > Agregar tablas...**.
+3. Una vez agregadas las tablas, busca la columna en la tabla de hechos (lado de muchos) y arrástrala a la columna correspondiente en la tabla de dimensiones (lado de uno).
+4. Confirma la configuración de la relación y pulsa "OK".
+
+![Crear relación mediante diagrama](~/content/assets/images/create-relationship-through-diagram.gif)
+
+Consulta [Trabajar con diagramas](xref:importing-tables-data-modeling#working-with-diagrams) para obtener más información.
+
+> [!IMPORTANT]
+> Las relaciones no se pueden modificar al usar Tabular Editor como herramienta externa, ya que la edición de relaciones mediante herramientas externas [no es compatible con Power BI Desktop](xref:desktop-limitations).
+
+### Cómo publicar en Power BI Service
+
+Para publicar o actualizar un Dataset en el Power BI Service, usa la opción **Modelo > Implementar...** y especifica el punto de conexión XMLA del Workspace en el que quieras publicarlo.
+
+Si cargaste los metadatos del modelo directamente desde el punto de conexión XMLA, solo tienes que hacer clic en **Archivo > Guardar** (CTRL+S) para actualizar el Dataset que se cargó en Tabular Editor.
+
+> [!NOTE]
+> La opción **Model > Deploy...** **no** está disponible en Tabular Editor 3 Edición de escritorio, ya que esta edición está pensada únicamente para usarse como herramienta externa para Power BI Desktop. [Más información](xref:editions).
+
+## Pasos siguientes
 
 - <xref:user-interface>
 - @parallel-development

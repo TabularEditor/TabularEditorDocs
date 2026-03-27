@@ -1,6 +1,6 @@
 ---
 uid: incremental-refresh-about
-title: What is a Refresh Policy?
+title: ¿Qué es una política de actualización?
 author: Kurt Buhler
 updated: 2023-01-09
 applies_to:
@@ -16,37 +16,39 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# What is a Refresh Policy?
 
-![Incremental Refresh Visual Abstract](~/content/assets/images/tutorials/incremental-refresh-header.png)
+# ¿Qué es una política de actualización?
+
+![Resumen Visual de la actualización incremental](~/content/assets/images/tutorials/incremental-refresh-header.png)
 
 ---
 
-Datasets hosted in the Power BI service can have [Incremental Refresh](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) configured for one or more data tables. __The purpose of Incremental Refresh is to achieve faster, more efficient refreshes by only retrieving recent/changing data, _incrementally refreshing_ the table.__ To do this, the table is automatically divided into partitions, such that only recent or changing data is <span style="color:#01a99d">refreshed ("hot" partitions)</span> or even <span style="color:#8d7bae">retrieved in real-time (["Direct Query" partitions in "Hybrid Tables"](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables))</span> while <span style="color:#939799">older, static data is archived ("cold" partitions).</span>
+Los Datasets alojados en el servicio de Power BI pueden configurar la [actualización incremental](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview) en una o varias tablas de datos. **El objetivo de la actualización incremental es lograr actualizaciones más rápidas y eficientes al recuperar solo los datos recientes o cambiantes y _actualizar la tabla de forma incremental_.** Para ello, la tabla se divide automáticamente en particiones, de modo que solo <span style="color:#01a99d">se actualizan los datos recientes o cambiantes (particiones "hot")</span> o incluso <span style="color:#8d7bae">se recuperan en tiempo real ([particiones "DirectQuery" en "tablas híbridas"](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables))</span>, mientras que <span style="color:#939799">los datos más antiguos y estáticos se archivan (particiones "cold").</span>
 
-_Incremental refresh can be easily configured and modified from within Tabular Editor._
+_La actualización incremental se puede configurar y modificar fácilmente desde Tabular Editor._
 
 > [!NOTE]
-> Configuring incremental refresh can be beneficial for your data model:  
-> - Reduce refresh time & resource consumption
-> - Experience shorter and more dependable scheduled refreshes
+> Configurar la actualización incremental puede aportar ventajas a tu Data model:
+>
+> - Reduce el tiempo de actualización y el consumo de recursos
+> - Disfruta de actualizaciones programadas más cortas y fiables
 
 > [!IMPORTANT]
-> Setting up Incremental Refresh with Tabular Editor 3 is limited to dataset hosted in the Power BI Datasets service. For Analysis Services custom [partitioning](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) is required.
+> La configuración de la actualización incremental con Tabular Editor 3 se limita a Datasets alojados en el servicio de Datasets de Power BI. Para Analysis Services, se requiere un [particionamiento](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions) personalizado.
 
 ---
 
-### How does it work?
+### ¿Cómo funciona?
 
-To create the partitions, Power BI uses the `RangeStart` and `RangeEnd` _datetime_ parameters in Power Query. These parameters are used in a filter step of the table partition M Expression, filtering a table datetime column. Columns that are of date, string or integer types can still be filtered while maintaining query folding using functions that convert `RangeStart`, `RangeEnd` or the date column to the appropriate data type. For more information about this, see [here](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
+Para crear las particiones, Power BI usa los parámetros _datetime_ `RangeStart` y `RangeEnd` en Power Query. Estos parámetros se usan en un paso de filtrado de la expresión M de la partición de la tabla, filtrando una columna de fecha y hora de la tabla. Las columnas de tipo fecha, cadena o entero pueden seguir filtrándose manteniendo el plegado de consultas, query folding, mediante funciones que convierten `RangeStart`, `RangeEnd` o la columna de fecha al tipo de datos adecuado. Para más información sobre esto, consulta [aquí](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
-An example is given below. Incremental Refresh is applied to a table _'Orders'_ upon the _[Order Date]_ column:
+A continuación se muestra un ejemplo. La actualización incremental se aplica a la tabla _'Orders'_ en la columna _[Order Date]_:
 
+# [Solo el paso de filtro](#tab/filterstep)
 
-# [Filter Step Only](#tab/filterstep)
 ```M
-// The filter step should ideally be able to fold back to the data source
-// No steps before this should break query folding
+// Idealmente, el paso de filtro debería poder plegarse de nuevo al Data source
+// Ningún paso anterior a este debería interrumpir el plegado de consultas
 #"Incremental Refresh Filter Step" = 
     Table.SelectRows(
         Navigation,
@@ -56,10 +58,11 @@ An example is given below. Incremental Refresh is applied to a table _'Orders'_ 
     )
 ```
 
-# [Full M Expression](#tab/fullexp)
+# [Expresión M completa](#tab/fullexp)
+
 ```M
 let
-    // The data source should ideally support Query Folding
+    // Idealmente, el Data source debería admitir el plegado de consultas
     Source = Sql.Database(#"ServerParameter", #"DatabaseParameter"),
 
     Navigation = 
@@ -67,8 +70,8 @@ let
             [ Schema="DW_fact", Item="Internet Sales" ] 
         } [Data],
 
-    // The filter step should ideally be able to fold back to the data source
-    // No steps before this should break query folding
+    // Idealmente, el paso de filtro debería poder plegarse de nuevo al Data source
+    // Ningún paso anterior a este debería interrumpir el plegado de consultas
     #"Incremental Refresh Filter Step" = 
         Table.SelectRows(
             Navigation,
@@ -81,9 +84,10 @@ in
 ```
 
 # [RangeStart](#tab/rangestart)
+
 ```M
-// It does not matter what the initial value is for the RangeStart parameter
-// The parameter must be of data type "datetime"
+// No importa cuál sea el valor inicial del parámetro RangeStart
+// El parámetro debe ser del tipo de datos "datetime"
 #datetime(2022, 12, 01, 0, 0, 0) 
     meta 
         [
@@ -94,9 +98,10 @@ in
 ```
 
 # [RangeEnd](#tab/rangend)
+
 ```M
-// It does not matter what the initial value is for the RangeEnd parameter
-// The parameter must be of data type "datetime"
+// No importa cuál sea el valor inicial del parámetro RangeEnd
+// El parámetro debe ser del tipo de datos "datetime"
 #datetime(2022, 12, 31, 0, 0, 0) 
     meta 
         [
@@ -105,79 +110,83 @@ in
             Type = type datetime
         ]
 ```
+
 ***
 
 > [!WARNING]
-> Incremental refresh is designed for data sources that support [Power Query query folding](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding). Ideally, [query folding shouldn't be broken](https://learn.microsoft.com/en-us/power-query/step-folding-indicators) before the filter step is applied.
-> There's no explicit requirement for the final query to fold, except when implementing [Hybrid Tables](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.).
-
-
+> La actualización incremental está diseñada para Data source que admiten el [plegado de consultas de Power Query](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=Incremental%20refresh%20is%20designed%20for%20data%20sources%20that%20support%20query%20folding). Lo ideal es que el [plegado de consultas no se rompa](https://learn.microsoft.com/en-us/power-query/step-folding-indicators) antes de aplicar el paso de filtro.
+> No existe un requisito explícito de que la consulta final se pliegue, excepto al implementar [tablas híbridas](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#:~:text=However%2C%20if%20the%20incremental%20refresh%20policy%20includes%20getting%20real%2Dtime%20data%20with%20DirectQuery%2C%20non%2Dfolding%20transformations%20can%27t%20be%20used.).
 
 ---
 
-### What is a Refresh Policy?
+### ¿Qué es una política de actualización?
 
-A _Refresh Policy_ determines how the data is partitioned, and which of these Policy Range Partitions will be updated upon refresh. It consists of a set of table TOM properties which can be setup or changed.
+Una _política de actualización_ determina cómo se particionan los datos y cuáles de estas particiones del rango de la política se actualizarán al realizar una actualización. Consta de un conjunto de propiedades TOM de la tabla que se pueden configurar o cambiar.
 
 > [!WARNING]
-> __Power BI Desktop limitations:__ Configuring incremental refresh when connected to a local Power BI Desktop model is not supported. To configure incremental refresh for a local Power BI Desktop model, use the Power BI Desktop user interface.
+> **Limitaciones de Power BI Desktop:** No se admite configurar la actualización incremental cuando se está conectado a un modelo local de Power BI Desktop. Para configurar la actualización incremental en un modelo local de Power BI Desktop, utiliza la interfaz de usuario de Power BI Desktop.
 
 ---
 
-### Refresh Policy properties
+### Propiedades de la política de actualización
 
 <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh"  style="width:704px !important"/>
 
-Four different kinds of properties make up a basic Refresh Policy:
-1. <span style="color:#455C86">__Incremental window__</span> __properties__: The period window wherein data is <span style="color:#455C86">_kept up-to-date_</span>.
-2. <span style="color:#BC4A47">__Rolling window__</span> __properties__: The period window wherein data is <span style="color:#BC4A47">_archived_</span>.
-3. __Source expressions__: Define table schema and Power Query transformations of the table.
-4. __Mode__: Whether `Import` or `Hybrid` tables are used.
+Una política de actualización básica se compone de cuatro tipos distintos de propiedades:
 
-![Incremental Refresh Policy Windows](~/content/assets/images/tutorials/incremental-refresh-policy-windows.png)
+1. <span style="color:#455C86">**Ventana incremental**</span> **propiedades**: El período durante el cual los datos se <span style="color:#455C86">_mantienen actualizados_</span>.
+2. <span style="color:#BC4A47">**Ventana deslizante**</span> **propiedades**: El período durante el cual los datos se <span style="color:#BC4A47">_archivan_</span>.
+3. **Expresiones de origen**: Definen el esquema de la tabla y las transformaciones de Power Query de la tabla.
+4. **Modo**: Si se usan tablas `Import` o `Hybrid`.
 
----
-
-#### Comparing to Power BI Desktop
-
-In Power BI Desktop, these properties are named differently. Below is an overview of how the properties match the Power BI Desktop user interface.
-
-![Incremental Refresh Policy Windows Properties](~/content/assets/images/tutorials/incremental-refresh-window-properties.png)
+![Ventanas de la política de actualización de la actualización incremental](~/content/assets/images/tutorials/incremental-refresh-policy-windows.png)
 
 ---
 
-#### Advanced Properties
+#### Comparación con Power BI Desktop
 
-Depending on the configured properties, Incremental Refresh may function differently. Below is an overview of the different Incremental Refresh configurations:
+En Power BI Desktop, estas propiedades se denominan de forma diferente. A continuación se muestra una descripción general de cómo se corresponden las propiedades con la interfaz de usuario de Power BI Desktop.
 
-# [Standard (Import)](#tab/import)
-In the standard configuration of Incremental Refresh, all partitions are imported in-memory. Partitions in the <span style="color:#BC4A47">rolling window</span> are archived, while those in the <span style="color:#455C86">incremental window</span> are refreshed. 
+![Propiedades de las ventanas de la política de actualización incremental](~/content/assets/images/tutorials/incremental-refresh-window-properties.png)
 
-# [Hybrid](#tab/hybrid)
-In the <span style="color:#01a99d">__*[hybrid](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)*__</span> configuration of Incremental Refresh, the latest policy range partition in the <span style="color:#455C86">incremental window</span> is queried in real time using DirectQuery.
+---
 
-This is configured with the <em>Mode</em> property when set to <code>Hybrid</code>. 
+#### Propiedades avanzadas
 
-![Incremental Refresh Policy Windows](~/content/assets/images/tutorials/incremental-refresh-mode-pbi-match.png)
+Según las propiedades configuradas, la actualización incremental puede funcionar de forma diferente. A continuación se muestra una descripción general de las distintas configuraciones de actualización incremental:
 
-# [Only Refresh Complete Periods](#tab/completeperiods)
-In this configuration, the policy range will not include the current period in the <span style="color:#BC4A47">rolling window</span>. 
+# [Estándar (Importación)](#tab/import)
 
-In the standard configuration of Incremental Refresh, the current period is always in the <span style="color:#455C86">incremental window</span>. This might not be the desired behavior, as the data will change with each refresh. If the users do not expect to see partial data for a partial day, you can configure 'Only Refresh Complete Periods'.
+En la configuración estándar de actualización incremental, todas las particiones se importan en memoria. Las particiones de la <span style="color:#BC4A47">ventana móvil</span> se archivan, mientras que las de la <span style="color:#455C86">ventana incremental</span> se actualizan.
 
-This is configured with the <em>IncrementalPeriodsOffset</em> property. In the above example, a value of <code>-1</code> for an <em>IncrementalGranularity</em> of <code>Day</code> will exclude the current date from the <span style="color:#455C86">incremental window</span> and thus the data scope; only complete days will be refreshed.
+# [Híbrida](#tab/hybrid)
 
-![Incremental Refresh Policy Windows](~/content/assets/images/tutorials/incremental-refresh-period-offset-pbi-match.png)
+En la configuración <span style="color:#01a99d">**_[híbrida](https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables)_**</span> de la actualización incremental del Dataset, la partición más reciente del rango definido por la política en la <span style="color:#455C86">ventana incremental</span> se consulta en tiempo real mediante DirectQuery.
 
-# [Detect Data Changes](#tab/datachanges)
-In this configuration, not all records are refreshed in the <span style="color:#455C86">incremental window</span>. Instead, records are only refreshed if they change. Detect data changes can further optimize refresh performance when using incremental refresh. To identify data changes you use a _Polling Expression_. A Polling Expression is a separate property that expects a valid M Expression to identify a maximum date from a list of dates.
+Esto se configura mediante la propiedad <em>Mode</em> cuando se establece en <code>Hybrid</code>.
 
-Typically, you use the Polling Expression on a DateTime column of a table to identify the latest date. If any records match that date, they'll be refreshed. A common example is using a column like [LastUpdateDt] to label records that were updated or added with the current DateTime value. Any records that have values equal to the latest [LastUpdateDt] are refreshed.
+![Ventanas de política de actualización incremental](~/content/assets/images/tutorials/incremental-refresh-mode-pbi-match.png)
+
+# [Actualizar solo períodos completos](#tab/completeperiods)
+
+En esta configuración, el intervalo de la política no incluirá el período actual en la <span style="color:#BC4A47">ventana móvil</span>.
+
+En la configuración estándar de actualización incremental, el período actual siempre está en la <span style="color:#455C86">ventana incremental</span>. Puede que este comportamiento no sea el deseado, ya que los datos cambiarán con cada actualización. Si los usuarios no esperan ver datos parciales de un día incompleto, puede configurar "Actualizar solo períodos completos".
+
+Esto se configura con la propiedad <em>IncrementalPeriodsOffset</em>. En el ejemplo anterior, un valor de <code>-1</code> para un <em>IncrementalGranularity</em> de <code>Day</code> excluirá la fecha actual de la <span style="color:#455C86">ventana incremental</span> y, por tanto, del ámbito de datos; solo se actualizarán los días completos.
+
+![Ventanas de política de actualización incremental](~/content/assets/images/tutorials/incremental-refresh-period-offset-pbi-match.png)
+
+# [Detectar cambios en los datos](#tab/datachanges)
+
+En esta configuración, no se actualizan todos los registros en la <span style="color:#455C86">ventana incremental</span>. En su lugar, los registros solo se actualizan si cambian. Detectar cambios en los datos puede optimizar aún más el rendimiento de actualización al usar la actualización incremental. Para identificar cambios en los datos, usa una _Polling Expression_. Una Polling Expression es una propiedad independiente que espera una expresión M válida para identificar la fecha máxima de una lista de fechas.
+
+Normalmente, se usa una Polling Expression en una columna de tipo DateTime de una tabla para identificar la fecha más reciente. Si hay registros que coinciden con esa fecha, se actualizarán. Un ejemplo típico es usar una columna como [LastUpdateDt] para marcar los registros que se actualizaron o se agregaron con el valor DateTime actual. Se actualizan los registros cuyos valores sean iguales al [LastUpdateDt] más reciente.
 
 > [!NOTE]
-> Records in archived partitions are _not_ refreshed.
+> Los registros en particiones archivadas _no_ se actualizan.
 
-An example of a valid `Polling Expression` property is below. You can use this as a template when configuring _Detect Data Changes_ in your model from Tabular Editor:
+A continuación se muestra un ejemplo de una propiedad `Polling Expression` válida. Puedes usarlo como plantilla al configurar _Detect Data Changes_ en tu modelo desde Tabular Editor:
 
 ```M
 // Retrieves the maximum value of the column [LastUpdateDt]
@@ -195,15 +204,16 @@ in
     accountForNu11
 ```
 
-![Incremental Refresh Policy Windows](~/content/assets/images/tutorials/incremental-refresh-detect-changes-pbi-match.png)
+![Ventanas de la política de actualización incremental](~/content/assets/images/tutorials/incremental-refresh-detect-changes-pbi-match.png)
 
 ***
 
-#### Overview of all properties
+#### Resumen de todas las propiedades
 
-_Below is an overview of the TOM Properties in a data model used to configure Incremental Refresh:_
+_A continuación se muestra un resumen de las propiedades de TOM de un Data model que se usan para configurar la actualización incremental:_
 
 <!-- Specific styling for the below table -->
+
 <style>
     th.formatting {
         text-align: center; 
@@ -220,76 +230,126 @@ _Below is an overview of the TOM Properties in a data model used to configure In
 </style>
 
 <!-- Refresh Policy TOM Properties table -->
+
 <div class="table-responsive" id="RefreshPolicyPropertiesOverview">
     <table class="table table-bordered table-striped table-condensed">
         <thead>
             <tr>
-                <th class="formatting">Property Name</th>
-                <th class="formatting">Power BI Desktop Equivalent</th>
-                <th class="formatting">Description</th>
-                <th class="formatting">Expected Value</th>
+                <th class="formatting">Nombre de la propiedad</th>
+                <th class="formatting">Equivalente en Power BI Desktop</th>
+                <th class="formatting">Descripción</th>
+                <th class="formatting">Valor esperado</th>
             </tr>
         </thead>
         <tbody style="font-size:80%;">
             <tr>
                 <td class="formatting"><span id="enablerefreshpolicy"><em><b>EnableRefreshPolicy</b></em></a></span></td>
-                <td class="formatting">Incrementally refresh this table</td>
-                <td class="formatting">Whether a refresh policy is enabled for the table.<br /><br>In Tabular Editor, other Refresh Policy properties will only be visible if this value is set to <code>True</code>.</td>
-                <td class="formatting"><code>True</code> or <code>False</code>.</td>
+                <td class="formatting">Actualizar esta tabla de forma incremental</td>
+                <td class="formatting">Indica si la tabla tiene habilitada una política de actualización.<br /><br>En Tabular Editor, el resto de las propiedades de la política de actualización solo se mostrarán si este valor se establece en <code>True</code>.</td>
+                <td class="formatting"><code>True</code> o <code>False</code>.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#455C86" id="incrementalgranularity"><em><b>IncrementalGranularity</b></em></span></td>
-                <td class="formatting">Incremental Refresh Period</td>
-                <td class="formatting">The granularity of the incremental window.<br /><br>Example:<br /><em>"Refresh data in the last 30 <strong><em>days</em></strong> before refresh date."</em></td>
-                <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> or <code>Year</code>. Must be smaller than or equal to the IncrementalGranularity.</td>
+                <td class="formatting">Período de actualización incremental</td>
+                <td class="formatting">La granularidad de la ventana incremental.<br /><br>Ejemplo:<br /><em>"Actualizar los datos de los últimos 30 <strong><em>días</em></strong> anteriores a la fecha de actualización."</em></td>
+                <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> o <code>Year</code>. Debe ser menor o igual que el IncrementalGranularity.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#455C86" id="incrementalperiods"><em><b>IncrementalPeriods</b></em></span></td>
-                <td class="formatting">Number of Incremental Refresh Periods</td>
-                <td class="formatting">The number of periods for the incremental window.<br /><br>Example:<br /><em>"Refresh data in the last <strong><em>30</em></strong> days before refresh date."</em></td>
-                <td class="formatting">An integer of the number of <em>IncrementalGranularity</em> periods. Must define a total period smaller than the <em>RollingWindowPeriods</em></td>
+                <td class="formatting">Número de períodos de actualización incremental</td>
+                <td class="formatting">El número de períodos de la ventana incremental.<br /><br>Ejemplo:<br /><em>"Actualizar los datos de los últimos <strong><em>30</em></strong> días antes de la fecha de actualización."</em></td>
+                <td class="formatting">Un número entero que indique el número de períodos de <em>IncrementalGranularity</em>. Debe definir un período total inferior a <em>RollingWindowPeriods</em></td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#455C86" id="incrementaloffset"><b><em>IncrementalPeriodsOffset</b></em></span></td>
-                <td class="formatting">Only refresh complete days</td>
-                <td class="formatting">The offset to be applied to <em>IncrementalPeriods</em>.<br /><br>Example for:<br /><em>IncrementalPeriodsOffset</em>=<code>-1</code>; <br /><em>IncrementalPeriods</em> = <code>30</code>;<br /><em>IncrementalGranularity</em> = <code>Day</code>: <br /><em>"Only refresh data in the last 30 days, from the day before refresh date.</em></td>
-                <td class="formatting">An integer of the number of <em>IncrementalGranularity</em> periods to shift the Incremental window.</td>
+                <td class="formatting">Actualizar solo días completos</td>
+                <td class="formatting">El desplazamiento que se aplicará a <em>IncrementalPeriods</em>.<br /><br>Ejemplo para:<br /><em>IncrementalPeriodsOffset</em>=<code>-1</code>; <br /><em>IncrementalPeriods</em> = <code>30</code>;<br /><em>IncrementalGranularity</em> = <code>Day</code>: <br /><em>"Actualizar solo los datos de los últimos 30 días, desde el día anterior a la fecha de actualización.</em></td>
+                <td class="formatting">Un número entero con el número de períodos de <em>IncrementalGranularity</em> para desplazar la ventana incremental.</td>
             </tr>
             <tr>
-                <td class="formatting"><span id="refreshpolicymode"><b><em>Mode</b></em></span></td>
-                <td class="formatting">Get the latest data in real time with DirectQuery</td>
-                <td class="formatting">Specifies whether Incremental Refresh is configured with only import partitions or also a DirectQuery partition, to result in a <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"Hybrid Table"</a>.</td>
-                <td class="formatting"><code>Import</code> or <code>Hybrid</code>.</td>
+                <td class="formatting"><span id="refreshpolicymode"><b><em>Modo</b></em></span></td>
+                <td class="formatting">Obtenga los datos más recientes en tiempo real con DirectQuery</td>
+                <td class="formatting">Especifica si la actualización incremental se configura únicamente con particiones de importación o también con una partición de DirectQuery, para dar como resultado una <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"tabla híbrida"</a>.</td>
+                <td class="formatting"><code>Import</code> o <code>Hybrid</code>.</td>
             </tr>
             <tr>
                 <td class="formatting"><b><em>PolicyType</b></em></td>
                 <td class="formatting">N/A</td>
-                <td class="formatting">Specifies the type of refresh policy.</td>
-                <td class="formatting">Can only contain a single value: <code>Basic</code>.</td>
+                <td class="formatting">Especifica el tipo de política de actualización.</td>
+                <td class="formatting">Solo puede contener un único valor: <code>Basic</code>.</td>
             </tr>
             <tr>
-                <td class="formatting"><span id="pollingexpression"><b><em>PollingExpression</b><br />(Optional)</em></span></td>
-                <td class="formatting">Detect Data Changes</td>
-                <td class="formatting">The M Expression used to detect changes in a specific column such as <em>LastUpdateDate</em><br /><br>In Tabular Editor, <strong>the <em>Polling Expression</em> can be viewed and modified from the <em>Expression Editor</em> window</strong> by selecting it from the dropdown menu in the top-left.</td>.
-                <td class="formatting">A valid M Expression that returns a scalar value of the latest date in a column. All records in incremental window hot partitions containing that value for the column will be refreshed.<br><br>Records in archived partitions are <i>not</i> refreshed.</td>
+                <td class="formatting"><span id="pollingexpression"><b><em>PollingExpression</b><br />(Opcional)</em></span></td>
+                <td class="formatting">Detectar cambios en los datos</td>
+                <td class="formatting">La expresión M que se usa para detectar cambios en una columna específica, como <em>LastUpdateDate</em><br /><br>En Tabular Editor, <strong>la <em>PollingExpression</em> se puede ver y modificar desde la ventana del <em>Editor de expresiones</em></strong> seleccionándola en el menú desplegable de la esquina superior izquierda.</td>.
+                <table class="table table-bordered table-striped table-condensed">
+        <thead>
+            <tr>
+                <th class="formatting">Nombre de la propiedad</th>
+                <th class="formatting">Equivalente en Power BI Desktop</th>
+                <th class="formatting">Descripción</th>
+                <th class="formatting">Valor esperado</th>
+            </tr>
+        </thead>
+        <tbody style="font-size:80%;">
+            <tr>
+                <td class="formatting"><span id="enablerefreshpolicy"><em><b>EnableRefreshPolicy</b></em></a></span></td>
+                <td class="formatting">Actualizar esta tabla de forma incremental</td>
+                <td class="formatting">Indica si hay una política de actualización habilitada para la tabla.<br /><br>En Tabular Editor, otras propiedades de la política de actualización solo serán visibles si este valor se establece en <code>True</code>.</td>
+                <td class="formatting"><code>True</code> o <code>False</code>.</td>
+            </tr>
+            <tr>
+                <td class="formatting"><span style="color:#455C86" id="incrementalgranularity"><em><b>IncrementalGranularity</b></em></span></td>
+                <td class="formatting">Período de actualización incremental</td>
+                <td class="formatting">La granularidad de la ventana incremental.<br /><br>Ejemplo:<br /><em>"Actualice los datos de los últimos 30 <strong><em>días</em></strong> antes de la fecha de actualización."</em></td>
+                <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> o <code>Year</code>. Debe ser menor o igual que el valor de IncrementalGranularity.</td>
+            </tr>
+            <tr>
+                <td class="formatting"><span style="color:#455C86" id="incrementalperiods"><em><b>IncrementalPeriods</b></em></span></td>
+                <td class="formatting">Número de períodos de actualización incremental</td>
+                <td class="formatting">El número de períodos de la ventana incremental.<br /><br>Ejemplo:<br /><em>"Actualice los datos de los últimos <strong><em>30</em></strong> días antes de la fecha de actualización."</em></td>
+                <td class="formatting">Un número entero que indica la cantidad de períodos de <em>IncrementalGranularity</em>. Debe definir un período total inferior a <em>RollingWindowPeriods</em></td>
+            </tr>
+            <tr>
+                <td class="formatting"><span style="color:#455C86" id="incrementaloffset"><b><em>IncrementalPeriodsOffset</b></em></span></td>
+                <td class="formatting">Actualizar solo los días completos</td>
+                <td class="formatting">El desplazamiento que se aplicará a <em>IncrementalPeriods</em>.<br /><br>Ejemplo para:<br /><em>IncrementalPeriodsOffset</em>=<code>-1</code>; <br /><em>IncrementalPeriods</em> = <code>30</code>;<br /><em>IncrementalGranularity</em> = <code>Day</code>: <br /><em>"Actualizar solo los datos de los últimos 30 días, desde el día anterior a la fecha de actualización.</em></td>
+                <td class="formatting">Un número entero que indica la cantidad de períodos de <em>IncrementalGranularity</em> para desplazar la ventana incremental.</td>
+            </tr>
+            <tr>
+                <td class="formatting"><span id="refreshpolicymode"><b><em>Mode</b></em></span></td>
+                <td class="formatting">Obtener los datos más recientes en tiempo real con DirectQuery</td>
+                <td class="formatting">Especifica si la actualización incremental está configurada solo con particiones de importación o también con una partición de DirectQuery, para crear una <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"tabla híbrida"</a>.</td>
+                <td class="formatting"><code>Import</code> o <code>Hybrid</code>.</td>
+            </tr>
+            <tr>
+                <td class="formatting"><b><em>PolicyType</b></td>
+                <td class="formatting">N/A</td>
+                <td class="formatting">Especifica el tipo de política de actualización.</td>
+                <td class="formatting">Solo puede contener un único valor: <code>Basic</code>.</td>
+            </tr>
+            <tr>
+                <td class="formatting"><span id="pollingexpression"><b><em>PollingExpression</b><br />(Opcional)</em></span></td>
+                <td class="formatting">Detectar cambios en los datos</td>
+                <td class="formatting">La expresión M utilizada para detectar cambios en una columna específica, como <em>LastUpdateDate</em>.<br /><br>En Tabular Editor, <strong>la <em>Polling Expression</em> se puede ver y modificar desde la ventana del <em>Editor de expresiones</em></strong> seleccionándola en el menú desplegable de la esquina superior izquierda.</td><td class="formatting">Una expresión M válida que devuelve un valor escalar de la fecha más reciente de una columna. Se actualizarán todos los registros de las particiones activas de la ventana incremental que contengan ese valor en la columna.<br><br>Los registros de las particiones archivadas <i>no</i> se actualizan.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#BC4A47" id="rollinggranularity"><b><em>RollingWindowGranularity</b></em></span></td>
-                <td class="formatting">Archive Data Period</td>
-                <td class="formatting">The granularity of the rolling window.<br /><br>Example:<br /><em>"Archive data starting 3 <strong><em>years</em></strong> before refresh date."</em></td>
-                <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> or <code>Year</code>. Must be larger than or equal to the IncrementalGranularity.</td>
+                <td class="formatting">Período de archivado de datos</td>
+                <td class="formatting">La granularidad de la ventana deslizante.<br /><br>Ejemplo:<br /><em>"Archivar datos a partir de 3 <strong><em>años</em></strong> antes de la fecha de actualización."</em></td>
+                <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> o <code>Year</code>. Debe ser mayor o igual que IncrementalGranularity.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#BC4A47" id="rollingperiods"><b><em>RollingWindowPeriods</b></em></span></td>
-                <td class="formatting">Number of Archive Data Periods</td>
-                <td class="formatting">The number of periods for the rolling window.<br /><br>Example:<br /><em>"Archive data starting <strong><em>3</em></strong> years before refresh date."</em></td>
-                <td class="formatting">An integer of the number of <em>RollingWindowGranularity</em> periods. Must define a total period larger than the   <em>IncrementalPeriods</em></td>
+                <td class="formatting">Número de períodos de datos archivados</td>
+                <td class="formatting">El número de períodos para la ventana móvil.<br /><br>Ejemplo:<br /><em>"Archivar datos a partir de <strong><em>3</em></strong> años antes de la fecha de actualización."</em></td>
+                <td class="formatting">Un entero con el número de períodos de <em>RollingWindowGranularity</em>. Debe definir un período total mayor que el   <em>IncrementalPeriods</em></td>
             </tr>
             <tr>
-                <td class="formatting"><b><em>SourceExpression</b></em></td>
-                <td class="formatting">Power Query Source Expression</td>
-                <td class="formatting">The M Expression for the table data source. This is where the original table M Expression is, and where any existing Power Query transformations would be modified.<br /><br>In Tabular Editor, <strong>the <em>Source Expression</em> can be viewed and modified from the <em>Expression Editor</em></strong> by selecting it from the dropdown menu in the top-left.</td>
-                <td class="formatting">A valid M Expression containing a filter step appropriately using <code>RangeStart</code> and <code>RangeEnd</code>.</td>
+                <td class="formatting"><b><em>SourceExpression</b></td>
+                <td class="formatting">Expresión de origen de Power Query</td>
+                <td class="formatting">La expresión M para el Data source de la tabla. Aquí es donde se encuentra la expresión M original de la tabla y donde se modificarían las transformaciones existentes de Power Query.<br /><br>En Tabular Editor, <strong>la <em>Source Expression</em> se puede ver y modificar desde el <em>Editor de expresiones</em></strong> seleccionándola en el menú desplegable de la parte superior izquierda.</td>
+                <td class="formatting">Una expresión M válida que contenga un paso de filtro usando adecuadamente <code>RangeStart</code> y <code>RangeEnd</code>.</td>
             </tr>
         </tbody>
     </table>

@@ -1,8 +1,8 @@
-﻿---
+---
 uid: getting-started
-title: Installation and Activation
+title: Instalación y activación
 author: Morten Lønskov
-updated: 2025-09-23
+updated: 2026-03-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,129 +16,147 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Getting Started
 
-## Installation
+# Primeros pasos
 
-Download the latest version of Tabular Editor 3 from our [downloads page](xref:downloads).
+## Instalación
 
-## Prerequisites
+Descarga la versión más reciente de Tabular Editor 3 desde nuestra [página de descargas](xref:downloads).
 
-None.
+## Requisitos previos
 
-## System requirements
+Ninguno.
 
-- **Operating system:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 or newer
-- **Architecture:** x64,  ARM64 (native from 3.23.0)
-- **.NET Runtime:** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+## Requisitos del sistema
 
-See the .NET supported OS policy for current Windows versions supported by each runtime.
+- **Sistema operativo:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 o versiones posteriores
+- **Arquitectura:** x64, ARM64 (nativo a partir de 3.23.0)
+- **Runtime de .NET:** [.NET Runtime de Escritorio 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
-## Activating your installation
+Consulta la directiva de sistemas operativos compatibles de .NET para ver qué versiones actuales de Windows admite cada entorno de ejecución.
 
-Tabular Editor 3 is commercial software. Visit our [home page](https://tabulareditor.com) for pricing details and purchase options. If you haven't previously used Tabular Editor 3 you are eligible for a free 30-day trial.
+## Activación de su instalación
 
-The first time you launch Tabular Editor 3 on a new machine, you are prompted to activate the product.
+Tabular Editor 3 es software comercial. Visita nuestra [página principal](https://tabulareditor.com) para conocer los precios y las opciones de compra. Si no ha usado Tabular Editor 3 previamente, puede optar a una prueba gratuita de 30 días.
 
-![Product activation](~/content/assets/images/getting-started/product-activation.png)
+La primera vez que inicie Tabular Editor 3 en un equipo nuevo, se le pedirá que active el producto.
 
-### Activating using an existing license key
+![Activación del producto](~/content/assets/images/getting-started/product-activation.png)
 
-Once you purchase a license for Tabular Editor 3, you should receive an e-mail with a 25-character string which is your license key. When prompted, enter the license key and hit "Next >" to activate the product.
+### Activación con una clave de licencia existente
 
-![Enter License Key](~/content/assets/images/getting-started/enter-license-key.png)
+Una vez que compres una licencia de Tabular Editor 3, deberías recibir un correo electrónico con una cadena de 25 caracteres; esa es tu clave de licencia. Cuando se te solicite, introduce la clave de licencia y pulsa "Siguiente >" para activar el producto.
 
-> [!NOTE]
-> For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
-
-Note that Tabular Editor 3 installations are activated **per user**. In other words, if multiple users share the same machine, each user will have to activate the product on their Windows user profile.
-
-### Requesting a trial license
-
-If you haven't used Tabular Editor 3 before, you are eligible for a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
+![Introducir clave de licencia](~/content/assets/images/getting-started/enter-license-key.png)
 
 > [!NOTE]
-> Tabular Editor ApS will not send unsolicited e-mails or forward your e-mail address to third parties, when signing up for a 30-day trial license. View our @privacy-policy for more information.
+> Para los tipos de licencia multiusuario, tendrás que introducir tu dirección de correo electrónico además de la clave de licencia. Tabular Editor 3 te lo solicitará si la clave de licencia que introduces corresponde a una licencia multiusuario.
 
-### Changing a license key
+Ten en cuenta que las instalaciones de Tabular Editor 3 se activan **por usuario**. En otras palabras, si varios usuarios comparten el mismo equipo, cada uno tendrá que activar el producto en su perfil de usuario de Windows.
 
-When Tabular Editor 3 is activated, you may change your license key in the Help menu by choosing "About Tabular Editor".
+### Solicitar una licencia de prueba
+
+Si no ha usado Tabular Editor 3 antes, puede optar a una prueba gratuita de 30 días. Al elegir esta opción, se te solicitará una dirección de correo electrónico. Usamos la dirección de correo electrónico para validar si ya tienes una activación de Tabular Editor 3.
+
+> [!NOTE]
+> Al registrarse para obtener una licencia de prueba de 30 días, Tabular Editor ApS no le enviará correos electrónicos no solicitados ni reenviará su dirección de correo electrónico a terceros. Consulta nuestra @privacy-policy para obtener más información.
+
+### Cambiar una clave de licencia
+
+Cuando Tabular Editor 3 esté activado, puedes cambiar tu clave de licencia en el menú Ayuda seleccionando "Acerca de Tabular Editor".
 
 ![About Te3](~/content/assets/images/getting-started/about-te3.png)
 
-In the dialog, select "Change license key". Note that this option is only available if no model is loaded in Tabular Editor. If you already loaded a model you can close it under File > Close model. Once you click "Change license key", Tabular Editor will prompt you whether you want to remove the current license:
+En el cuadro de diálogo, selecciona "Cambiar clave de licencia". Ten en cuenta que esta opción solo está disponible si no hay ningún modelo cargado en Tabular Editor. Si ya has cargado un modelo, puedes cerrarlo desde Archivo > Cerrar modelo. Cuando hagas clic en "Cambiar clave de licencia", Tabular Editor te preguntará si quieres eliminar la licencia actual:
 
-![image](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
+![imagen](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
 
-By accepting this, the current license is removed, and you will have to re-enter a license key to use the product.
+Al aceptarlo, se quita la licencia actual y tendrás que volver a introducir una clave de licencia para usar el producto.
 
 > [!IMPORTANT]
-> Once a license key is removed, as described above, the product will not be usable by the current user on that machine until a new license key is entered.
+> Una vez que se quita una clave de licencia, tal como se describe arriba, el usuario actual no podrá usar el producto en ese equipo hasta que se introduzca una nueva clave de licencia.
 
-#### Registry details
+#### Detalles del registro
 
-Tabular Editor 3 uses the Windows Registry to store activation details.
+Tabular Editor 3 usa el Registro de Windows para almacenar los detalles de activación.
 
-To view the current license key assigned to the machine, run the following command in the Windows Command Prompt (Start > Run > cmd.exe):
+Para ver la clave de licencia actual asignada al equipo, ejecuta el siguiente comando en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
 
 ```cmd
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` to view and modify the **LicenseKey** and **User** values.
+También puedes usar `regedit.exe` (Editor del Registro de Windows) y navegar a `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` para ver y modificar los valores **LicenseKey** y **User**.
 
-A system administrator may also proactively assign Tabular Editor 3 licenses to a machine by specifying the **LicenseKey** and **User** values under each user’s `SOFTWARE\Kapacity\Tabular Editor 3` registry key.
+Un administrador del sistema también puede asignar por adelantado licencias de Tabular Editor 3 a un equipo, especificando los valores **LicenseKey** y **User** en la clave de registro `SOFTWARE\\Kapacity\\Tabular Editor 3` de cada usuario.
 
-![Registry Editor](~/content/assets/images/troubleshooting/registry-editor.png)
+![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
 
-### Changing a license key through the registry
+### Cambiar una clave de licencia mediante el Registro
 
-If, for any reason, you are unable to change the license key using the procedure outlined above, you can always reset the license assigned to Tabular Editor 3 by using the Registry Editor:
+Si por cualquier motivo no puedes cambiar la clave de licencia siguiendo el procedimiento descrito anteriormente, siempre puedes restablecer la licencia asignada a Tabular Editor 3 mediante el Editor del Registro:
 
-1. Close all instances of Tabular Editor 3.  
-2. Open the Registry Editor in Windows (Start > Run > regedit.msc).  
-3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above).  
-4. Delete all values within this key.  
-5. Close the Registry Editor and restart Tabular Editor 3.
+1. Cierra todas las instancias de Tabular Editor 3.
+2. Abre el Editor del Registro en Windows (Inicio > Ejecutar > regedit.msc).
+3. Localiza `HKEY_CURRENT_USER\\SOFTWARE\\Kapacity\\Tabular Editor 3` (consulta la captura de pantalla anterior).
+4. Elimina todos los valores dentro de esta clave.
+5. Cierra el Editor del Registro y reinicia Tabular Editor 3.
 
-Alternatively, run the following command in a Windows Command Prompt (Start > Run > cmd.exe):
+Como alternativa, ejecuta el siguiente comando en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
 
 ```cmd
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 ```
 
-The next time you launch Tabular Editor 3, you will be prompted for a license key, just as when the tool was first installed on the machine.
+La próxima vez que inicies Tabular Editor 3, se te pedirá una clave de licencia, igual que cuando la herramienta se instaló por primera vez en el equipo.
 
-### Silent installation and license pre-provisioning
+### Instalación silenciosa y aprovisionamiento previo de licencias
 
-You can deploy Tabular Editor silently and pre-provision the license through the Windows Registry.
+Puedes implementar Tabular Editor de forma silenciosa y aprovisionar previamente la licencia mediante el Registro de Windows.
 
-1. **Install silently** (no UI, no reboot):
+1. **Instalar de forma silenciosa** (sin interfaz de usuario, sin reinicio):
+
    ```powershell
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
    ```
 
-You may also use `/package` instead of `/i`. Replace `<version>` with the actual version string. Use the ARM64 MSI if applicable.
+   To include the **AI Assistant** feature, specify the `ADDLOCAL` property. The AI Assistant is not installed by default.
 
-For details on available MSI command-line options, please refer to the official Microsoft documentation:  
+   ```powershell
+   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
+   ```
+
+   | MSI Feature   | Description                       | Installed by default              |
+   | ------------- | --------------------------------- | --------------------------------- |
+   | `MainFeature` | Core Tabular Editor 3 application | Yes (Required) |
+   | `AIAssistant` | AI Assistant for Tabular Editor 3 | No                                |
+
+   > [!NOTE]> When using `ADDLOCAL`, you must include `MainFeature` alongside any optional features. Specifying only `AIAssistant` without `MainFeature` results in an incomplete installation.
+
+También puedes usar `/package` en lugar de `/i`. Sustituye `<version>` por la cadena de versión real. Usa el MSI de ARM64 si corresponde.
+
+For details on available MSI command-line options, see the official Microsoft documentation:
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
-2. **Write the license to the Registry** **before the first launch** of the application:
+2. **Escribe la licencia en el Registro** **antes de la primera ejecución** de la aplicación:
+
    ```bat
-   REM Per-user license key (HKCU)
+   REM Clave de licencia por usuario (HKCU)
    REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
    ```
 
-   If you are using an **Enterprise Edition** license key, also set the licensed user’s e‑mail:
+   Si utilizas una clave de licencia de **Edición Enterprise**, establece también el correo electrónico del usuario con licencia:
+
    ```bat
    REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
    ```
 
-**Notes**
-- The installer does **not** accept a license parameter; licensing is handled via the Registry entries above.
-- Keys are stored under **HKCU** (per-user). Ensure the commands run in the context of the target user (e.g., via logon script or similar) so the values are written to the correct profile.
-- For additional keys and values, see the [Registry details](#registry-details).
+**Notas**
 
-## Next steps
+- El instalador **no** acepta un parámetro de licencia; la gestión de licencias se realiza mediante las entradas del Registro indicadas arriba.
+- Las claves se almacenan en **HKCU** (por usuario). Asegúrese de que los comandos se ejecuten en el contexto del usuario de destino (por ejemplo, mediante un script de inicio de sesión o similar) para que los valores se escriban en el perfil correcto.
+- Para ver claves y valores adicionales, consulte los [detalles del Registro](#registry-details).
 
-- [Overview of Tabular Editor 3's user interface](xref:user-interface)
+## Siguientes pasos
+
+- [Información general sobre la interfaz de usuario de Tabular Editor 3](xref:user-interface)

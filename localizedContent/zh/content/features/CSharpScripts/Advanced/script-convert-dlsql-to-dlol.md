@@ -1,6 +1,6 @@
 ---
 uid: script-convert-dlsql-to-dlol
-title: Convert Direct Lake on SQL to OneLake
+title: 将 Direct Lake on SQL 转换为 OneLake
 author: Daniel Otykier
 updated: 2025-06-20
 applies_to:
@@ -10,23 +10,24 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Convert Direct Lake on SQL to OneLake
 
-## Script Purpose
+# 将 Direct Lake on SQL 转换为 OneLake
 
-This script converts a model that uses Direct Lake on SQL (DL/SQL) to Direct Lake on OneLake (DL/OL). As laid out in the [Direct Lake guidance article](xref:direct-lake-guidance), this is a simple matter of updating the M query on the Shared Expression used by the Direct Lake partitions on the model, to use the [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) connector instead of the [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database) connector.
+## 脚本用途
 
-## Prerequisites
+此脚本会将使用 Direct Lake on SQL (DL/SQL) 的模型转换为 Direct Lake on OneLake (DL/OL)。 如 [Direct Lake 指南文章](xref:direct-lake-guidance) 所述，这只需更新模型中 Direct Lake 分区使用的共享表达式上的 M 查询，使其使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) 连接器，而不是 [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database) 连接器。
 
-You will need the **Workspace ID** as well as the **Resource ID** of your Fabric Warehouse or Lakehouse. Both are GUIDs that are part of the URL when navigating to the Warehouse or Lakehouse in the Fabric portal:
+## 先决条件
 
-![Lakehouse Warehouse URL](~/content/assets/images/lakehouse-warehouse-url.png)
+你需要 **Workspace ID**，以及 Fabric Warehouse 或 Lakehouse 的 **Resource ID**。 这两个值都是 GUID，在 Fabric 门户中导航到 Warehouse 或 Lakehouse 时，它们会出现在 URL 中：
 
-In the screenshot above, the **Workspace ID** of the lakehouse is highlighted in blue, while the **Resource ID** is highlighted in green.
+![Lakehouse 和 Warehouse 的 URL](~/content/assets/images/lakehouse-warehouse-url.png)
 
-## Script
+在上面的截图中，Lakehouse 的 **Workspace ID** 用蓝色标出，而 **Resource ID** 用绿色标出。
 
-### Convert Direct Lake on SQL to OneLake
+## 脚本
+
+### 将 Direct Lake on SQL 转换为 OneLake
 
 ```csharp
 // ==================================================================
@@ -145,10 +146,10 @@ public class UrlNameDialog : Form
 }
 ```
 
-### Explanation
+### 说明
 
-The script first attempts to locate an EntityPartition that is configured for Direct Lake mode and has an Expression Source (a reference to a Shared Expression). If no such partition is found, it displays a warning message and exits. Moreover, the referenced Shared Expression must specify the `Sql.Database` connector, which indicates that the model is currently using Direct Lake on SQL.
+该脚本首先会尝试定位一个配置为 Direct Lake 模式且具有 Expression Source（指向 Shared Expression 的引用）的 EntityPartition 分区。 如果找不到此类分区，脚本会显示一条警告信息并退出。 此外，被引用的共享表达式必须指定 `Sql.Database` 连接器，这表明该模型当前正在使用 Direct Lake on SQL。
 
-Once the script confirms that the model is using Direct Lake on SQL, it prompts the user to input the **Workspace ID** and **Resource ID** of the Fabric Warehouse or Lakehouse. The script then replaces the `Sql.Database` connector in the Shared Expression with the `AzureStorage.DataLake` connector, using the provided IDs.
+脚本确认模型使用 Direct Lake on SQL 后，会提示用户输入 Fabric Warehouse 或 Lakehouse 的 **Workspace ID** 和 **Resource ID**。 随后，脚本会在共享表达式中将 `Sql.Database` 连接器替换为 `AzureStorage.DataLake` 连接器，并使用所提供的 ID。
 
-Finally, if the model has a collation set, it clears it, as this change requires a new collation. The script then informs the user that the model has been successfully converted to Direct Lake on OneLake.
+最后，如果模型已设置排序规则，脚本会将其清除，因为此更改需要新的排序规则。 随后，脚本会通知用户，该模型已成功转换为 OneLake 上的 Direct Lake。

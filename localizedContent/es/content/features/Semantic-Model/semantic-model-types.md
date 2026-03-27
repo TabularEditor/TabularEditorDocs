@@ -1,6 +1,6 @@
-﻿---
+---
 uid: semantic-model-types
-title: Power BI Semantic model Types
+title: Tipos de modelos semánticos de Power BI
 author: Morten Lønskov
 updated: 2025-06-19
 applies_to:
@@ -17,61 +17,59 @@ applies_to:
           full: true
 ---
 
+# Tipos de modelos semánticos
 
-# Semantic Model Types
+Tabular Editor puede trabajar con varios tipos de modelos. A continuación encontrarás un resumen de qué tipos de modelo funcionan con Tabular Editor y qué capacidades se pueden usar con cada tipo de modelo.
 
-Tabular Editor can work with several different model types. Below is an overview of which model types work with Tabular Editor and the capabilities that can be used with each model type. 
+| Tipo de modelo                                     | Importación | Direct Query | Direct Lake en OneLake                  | Direct Lake en SQL            | .pbix | .pbip |
+| -------------------------------------------------- | ----------- | ------------ | --------------------------------------- | ----------------------------- | --------------------- | --------------------- |
+| Conectar en Tabular Editor                         | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Crear nuevo modelo                                 | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Escribir medidas                                   | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Crear y editar tablas                              | ✔️          | ✔️           | ✔️<sup>[1](#DirectLake)</sup>           | ✔️<sup>[1](#DirectLake)</sup> | ✔️                    | ✔️                    |
+| Crear y editar particiones                         | ✔️          | ✔️           | ✔️<sup>[1](#DirectLake)</sup>           | ✔️<sup>[1](#DirectLake)</sup> | ✔️                    | ✔️                    |
+| Crear y editar columnas                            | ✔️          | ✔️           | ✔️<sup>[1](#DirectLake)</sup>           | ✔️<sup>[1](#DirectLake)</sup> | ✔️                    | ✔️                    |
+| Crear y editar tablas calculadas                   | ✔️          | ✔️           | ✔️<sup>[2](#DirectLakeCalculated)</sup> | ✔️                            | ✔️                    | ✔️                    |
+| Crear y editar columnas calculadas                 | ✔️          | ✔️           | ✔️<sup>[2](#DirectLakeCalculated)</sup> | ✔️                            | ✔️                    | ✔️                    |
+| Crear y editar grupos de cálculo                   | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Crear y editar relaciones                          | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Crear y editar roles                               | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Crear y editar perspectivas                        | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Crear y editar traducciones                        | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Usar Best Practice Analyzer                        | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Editar todas las propiedades de TOM                | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Crear diagramas<sup>[3](#TE3Prem)</sup>            | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Usar vista previa de datos<sup>[3](#TE3Prem)</sup> | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Usar Pivot Grids<sup>[3](#TE3Prem)</sup>           | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Usar consultas DAX<sup>[3](#TE3Prem)</sup>         | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Usar el depurador de DAX<sup>[3](#TE3Prem)</sup>   | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Usar Vertipac Analyzer<sup>[3](#TE3Prem)</sup>     | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Procesar modelo y tablas<sup>[3](#TE3Prem)</sup>   | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
+| Eliminar objetos                                   | ✔️          | ✔️           | ✔️                                      | ✔️                            | ✔️                    | ✔️                    |
 
+**Leyenda:**
 
-|Model Type|Import|Direct Query|Direct Lake on OneLake|Direct Lake on SQL|.pbix|.pbip|
-|---|---|---|---|---|
-|Connect in Tabular Editor|✔️|✔️|✔️|✔️|✔️|
-|Create new model|✔️|✔️|✔️|✔️|✔️|✔️|
-|Write Measures|✔️|✔️|✔️|✔️|✔️|✔️|
-|Create & Edit Tables|✔️|✔️|✔️<sup>[1](#DirectLake)</sup>|✔️<sup>[1](#DirectLake)</sup>|✔️|✔️|
-|Create & Edit Partitions|✔️|✔️|✔️<sup>[1](#DirectLake)</sup>|✔️<sup>[1](#DirectLake)</sup>|✔️|✔️|
-|Create & Edit Columns|✔️|✔️|✔️<sup>[1](#DirectLake)</sup>|✔️<sup>[1](#DirectLake)</sup>|✔️|✔️|
-|Create & Edit Calculated Tables|✔️|✔️|✔️<sup>[2](#DirectLakeCalculated)</sup>|✔️|✔️|✔️|
-|Create & Edit Calculated Columns|✔️|✔️|✔️<sup>[2](#DirectLakeCalculated)</sup>|✔️|✔️|✔️|
-|Create & Edit Calculation Groups|✔️|✔️|✔️|✔️|✔️|
-|Create & Edit Relationships|✔️|✔️|✔️|✔️|✔️|
-|Create & Edit Roles|✔️|✔️|✔️|✔️|✔️|✔️|
-|Create & Edit Perspectives|✔️|✔️|✔️|✔️|✔️|✔️|
-|Create & Edit Translations|✔️|✔️|✔️|✔️|✔️|✔️|
-|Use Best Practice Analyzer|✔️|✔️|✔️|✔️|✔️|
-|Edit All TOM properties|✔️|✔️|✔️|✔️|✔️|✔️|
-|Create Diagrams<sup>[3](#TE3Prem)</sup>|✔️|✔️|✔️|✔️|✔️|✔️|
-|Use Preview Data<sup>[3](#TE3Prem)</sup>|✔️|✔️|✔️|✔️|✔️|✔️|
-|Use Pivot Grids<sup>[3](#TE3Prem)</sup>|✔️|✔️|✔️|✔️|✔️|✔️|
-|Use DAX Queries<sup>[3](#TE3Prem)</sup>|✔️|✔️|✔️|✔️|✔️|✔️|
-|Use DAX Debugger<sup>[3](#TE3Prem)</sup>|✔️|✔️|✔️|✔️|✔️|✔️|
-|Use Vertipac Analyzer<sup>[3](#TE3Prem)</sup>|✔️|✔️|✔️|✔️|✔️|✔️|
-|Process Model and Tables<sup>[3](#TE3Prem)</sup>|✔️|✔️|✔️|✔️|✔️|✔️|
-|Delete Objects|✔️|✔️|✔️|✔️|
+- ✔️: Compatible
+- ❌: No compatible
 
-**Legend:**
-- ✔️: Supported 
-- ❌: Unsupported
+<a name="DirectLake">1</a> - La partición de la tabla debe ser una partición de entidad para funcionar correctamente, y los modelos Direct Lake solo pueden tener una partición. <a name="DirectLakeCalculated">2</a> - Las tablas y columnas calculadas no pueden hacer referencia a tablas o columnas Direct Lake en OneLake.
 
+<a name="TE3Prem">3</a> - Solo funciones de Tabular Editor 3. Las operaciones realizadas a través del punto de conexión XMLA requieren una licencia Business o Enterprise. [Más información](xref:editions).
 
-<a name="DirectLake">1</a> - The table partition must be an Entity Partition to work correctly and Direct Lake models can only have one partition.
-<a name="DirectLakeCalculated">2</a> - Calculated Tables and Columns cannot refer to Direct Lake on OneLake tables or columns.
+> [!NOTE]
+> En la versión de junio de 2025 de Power BI Desktop, se eliminaron todas las limitaciones de modelado para herramientas de terceros. Antes de eso, no se admitían varias operaciones de modelado. Consulta [Limitaciones de Power BI Desktop](xref:desktop-limitations)
 
-<a name="TE3Prem">3</a> - Tabular Editor 3 features only. Operations performed through the XMLA endpoint requires a Business or Enterprise license. [More information](xref:editions).
+> [!TIP]
+> Para más detalles sobre las restricciones de los modelos Direct Lake, consulta la [documentación de Direct Lake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview) de Microsoft
 
->[!NOTE]
-> The June 2025 Release of Power BI Desktop all modeling limitations for third party tools where lifted. Prior to that various modeling operations where not supported. See [Power BI Desktop Limitations](xref:desktop-limitations)
+## Tipos de modelos semánticos no compatibles
 
->[!TIP]
-> For further details on restrictions on Direct Lake models refer to Microsoft's [Direct Lake documentation](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)
+Los siguientes tipos de modelos semánticos no son compatibles, ya que no admiten operaciones de escritura XMLA.
 
-## Unsupported Semantic Model types
-The following semantic model types are unsupported, as they don't support XMLA write operations.
-
-- Reports based on a live connection to an Azure Analysis Services or SQL Server Analysis Services model.
-- Reports based on a live connection to a Power BI dataset.
-- Models with Push data.
-- Models stored in Power BI My Workspace.
-- Models stored in Power BI Pro Workspace.
-- Direct Lake Default Semantic Models. (It is possible to connect to a default dataset, but it is not possible to change it through the XMLA endpoint)
-- Excel workbook Semantic Models.
+- Reports basados en una conexión en vivo con un modelo de Azure Analysis Services o SQL Server Analysis Services.
+- Reports basados en una conexión en directo a un dataset de Power BI.
+- Modelos con datos push.
+- Modelos almacenados en Mi Workspace de Power BI.
+- Modelos almacenados en el Workspace Pro de Power BI.
+- Modelos semánticos predeterminados de Direct Lake. (Es posible conectarse a un dataset predeterminado, pero no es posible cambiarlo a través del punto de conexión XMLA)
+- Modelos semánticos de libros de Excel.

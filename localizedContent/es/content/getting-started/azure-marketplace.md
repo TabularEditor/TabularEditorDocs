@@ -1,122 +1,123 @@
-﻿---
+---
 uid: azure-marketplace
-title: Purchase via Azure Marketplace
+title: Compra a través de Azure Marketplace
 author: Peer Grønnerup
 updated: 2026-01-05
 ---
-# Purchase Tabular Editor 3 through the Azure Marketplace
 
-Tabular Editor 3 is available on the Azure Marketplace as a public offer. This document provides an overview of how to streamline your purchase by acquiring Tabular Editor 3 directly through the Azure Marketplace.
+# Compra Tabular Editor 3 a través de Azure Marketplace
 
-Visit the [Tabular Editor 3 offering on Azure Marketplace](https://marketplace.microsoft.com/en-us/marketplace/apps?search=tabular%20editor%203) to get started.
+Tabular Editor 3 está disponible en Azure Marketplace como una oferta pública. Este documento ofrece una visión general de cómo agilizar tu compra adquiriendo Tabular Editor 3 directamente a través de Azure Marketplace.
 
-## Requirements
-To purchase Tabular Editor via the Azure Marketplace, you need:
-- An Azure subscription (verify if you already have a subscription or create a new subscription)
-- An Azure AD account with at least Contributor role for the Azure subscription
+Visita la [oferta de Tabular Editor 3 en Azure Marketplace](https://marketplace.microsoft.com/en-us/marketplace/apps?search=tabular%20editor%203) para empezar.
 
-Also ensure these [prerequisites](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/enable-marketplace-purchases) are met before proceeding with the purchase of Tabular Editor 3 through the Azure Marketplace.
+## Requisitos
 
-## How to purchase Tabular Editor 3 in the Azure Marketplace
+Para comprar Tabular Editor a través de Azure Marketplace, necesitas:
 
-Follow this procedure to purchase Tabular Editor 3 licenses through the Azure Marketplace:
+- Una suscripción de Azure (comprueba si ya tienes una suscripción o crea una nueva)
+- Una cuenta de Azure AD con al menos el rol de Colaborador en la suscripción de Azure
 
-1. Sign in to the [Azure Portal](https://portal.azure.com/)
-2. Navigate directly to the Marketplace page or search for "Marketplace" using the search box at the top of the page.
-3. On the Azure Marketplace page, search for "Tabular Editor 3" and click on the Tabular Editor 3 offering.
-4. Select your subscription and license plan, then click **Subscribe**.
-    
+Asegúrate también de que se cumplan estos [requisitos previos](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/enable-marketplace-purchases) antes de continuar con la compra de Tabular Editor 3 a través de Azure Marketplace.
+
+## Cómo comprar Tabular Editor 3 en Azure Marketplace
+
+Sigue este procedimiento para comprar licencias de Tabular Editor 3 a través de Azure Marketplace:
+
+1. Inicia sesión en el [Portal de Azure](https://portal.azure.com/)
+
+2. Ve directamente a la página de Marketplace o busca "Marketplace" usando el cuadro de búsqueda en la parte superior de la página.
+
+3. En la página de Azure Marketplace, busca "Tabular Editor 3" y haz clic en la oferta de Tabular Editor 3.
+
+4. Selecciona tu suscripción y el plan de licencias, y luego haz clic en **Suscribirse**.
+
    ![Azure Marketplace Subscribe to offer](~/content/assets/images/azuremarketplace-offer-page.png)
 
-   > [!TIP]
-   > The subscription and plan can be changed later in the purchasing process.
+   > [!TIP]> La suscripción y el plan se pueden cambiar más adelante durante el proceso de compra.
 
-5. Select the subscription to manage the Tabular Editor 3 subscription resource and costs. Assign the resource to an existing resource group or create a new group for this purpose.
+5. Selecciona la suscripción para administrar el recurso de la suscripción de Tabular Editor 3 y los costos. Asigna el recurso a un grupo de recursos existente o crea un grupo nuevo con este fin.
 
-6. Provide a name for the resource and configure your subscription by selecting the plan, contract duration, number of seats, and auto-renewal preference.
-  
+6. Proporciona un nombre para el recurso y configura tu suscripción seleccionando el plan, la duración del contrato, el número de puestos y la preferencia de renovación automática.
+
    ![Azure Marketplace purchase details](~/content/assets/images/azuremarketplace-setup-purchase.png)
 
-   > [!IMPORTANT]
-   > If you do not enable auto-renew, your subscription will be cancelled after the first billing term.
+   > [!IMPORTANT]> Si no activas la renovación automática, tu suscripción se cancelará después del primer período de facturación.
 
-7. Click **Review + Subscribe**.
+7. Haz clic en **Revisar + suscribirse**.
 
-8. Review the terms and verify the purchase details, then click **Subscribe** at the bottom of the page.
-   
-   ![Azure Marketplace subscribe to offer](~/content/assets/images/azuremarketplace-subscribe.png)
+8. Revisa los términos y comprueba los detalles de la compra y, después, haz clic en **Suscribirse** al final de la página.
 
-9. Wait until the subscription creation is complete, then click **Configure account now** to complete your subscription. This will redirect you to the Tabular Editor self-service page.
-   
-   ![Azure Marketplace configure purchase](~/content/assets/images/azuremarketplace-configure-purchase.png)
+   ![Suscribirse a la oferta en Azure Marketplace](~/content/assets/images/azuremarketplace-subscribe.png)
+
+9. Espera a que finalice la creación de la suscripción y, después, haz clic en **Configurar cuenta ahora** para completar tu suscripción. Esto te redirigirá a la página de autoservicio de Tabular Editor.
+
+   ![Configurar compra en Azure Marketplace](~/content/assets/images/azuremarketplace-configure-purchase.png)
 
 > [!NOTE]
-> Each edition of Tabular Editor 3 must be purchased separately. You cannot combine different editions in a single Azure Marketplace transaction.
+> Cada edición de Tabular Editor 3 debe comprarse por separado. No puedes combinar ediciones diferentes en una sola transacción de Azure Marketplace.
 
-For more details, see: [Purchase a SaaS offer in Azure Portal](https://learn.microsoft.com/en-us/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
+Para más detalles, consulta: [Comprar una oferta SaaS en el portal de Azure](https://learn.microsoft.com/en-us/marketplace/purchase-saas-offer-in-azure-portal#saas-subscription-and-configuration)
 
-## Activating your Azure Marketplace subscription
+## Activar tu suscripción de Azure Marketplace
 
-Final completion of your purchase requires you to activate the subscription on the Tabular Editor self-service portal. Activating the subscription requires a Tabular Editor user account.
+Para completar la compra, debes activar la suscripción en el portal de autoservicio de Tabular Editor. Para activar la suscripción, necesitas una cuenta de usuario de Tabular Editor.
 
 > [!IMPORTANT]
-> You must use the **Configure account now** link from the Azure Portal to complete activation. This link contains essential subscription details required for activation. If you navigate away or close the page before signing in, return to the Azure Portal and click **Configure account now** again to ensure proper activation.
+> Debes usar el vínculo **Configurar cuenta ahora** del portal de Azure para completar la activación. Este vínculo contiene detalles esenciales de la suscripción necesarios para la activación. Si sales de la página o la cierras antes de iniciar sesión, vuelve al portal de Azure y haz clic en **Configurar cuenta ahora** de nuevo para garantizar que la activación sea correcta.
 
-Follow the procedure below to finalize the activation of your purchase:
+Sigue el procedimiento que se indica a continuación para finalizar la activación de la compra:
 
-1. Once redirected from the Azure Portal, you are requested to sign in to the Tabular Editor Self-service portal using an existing account or by creating a new one.
-   
-   > [!IMPORTANT]
-   > Use the same email address for your Tabular Editor account as the purchaser or beneficiary email from your Azure Portal purchase. Mismatched emails will prevent the Azure Marketplace subscription from linking to your account.
-   
-   > [!TIP]
-   > You will need to give consent and accept the permission request when creating a new account for the self-service portal.
+1. Una vez redirigido desde el portal de Azure, se te pedirá que inicies sesión en el portal de autoservicio de Tabular Editor con una cuenta existente o que crees una nueva.
 
-   Once signed in, you will see the newly purchased subscription at the top of the subscriptions page under the section "Pending Azure Marketplace subscriptions".
+   > [!IMPORTANT]> Usa la misma dirección de correo electrónico para tu cuenta de Tabular Editor que la que usaste como correo del comprador o del beneficiario en tu compra del portal de Azure. Si las direcciones de correo no coinciden, no se podrá vincular la suscripción de Azure Marketplace a tu cuenta.
 
-   ![Azure Marketplace pending subscription](~/content/assets/images/azuremarketplace-pending-subscription.png)
+   > [!TIP]> Al crear una cuenta nueva para el portal de autoservicio, tendrás que dar tu consentimiento y aceptar la solicitud de permisos.
 
-   > [!NOTE]
-   > If you don't see your pending subscription listed, return to the Azure Portal and click the **Configure account now** button again to be redirected with the correct subscription information.
-   
-2. Click the **Activate** button for the subscription you wish to activate. This will display the subscription details.
+   Una vez hayas iniciado sesión, verás la suscripción recién adquirida en la parte superior de la página de suscripciones, en la sección "Suscripciones pendientes de Azure Marketplace".
+
+   ![Suscripción pendiente en Azure Marketplace](~/content/assets/images/azuremarketplace-pending-subscription.png)
+
+   > [!NOTE]> Si no ves tu suscripción pendiente en la lista, vuelve al portal de Azure y haz clic de nuevo en el botón **Configurar cuenta ahora** para que se te redirija con la información correcta de la suscripción.
+
+2. Haz clic en el botón **Activar** de la suscripción que quieres activar. Esto mostrará los detalles de la suscripción.
 
    ![Azure Marketplace activate subscription](~/content/assets/images/azuremarketplace-activate-subscription.png)
 
-3. Review the details one final time and click **Confirm Activation**.
+3. Revisa los detalles por última vez y haz clic en **Confirmar activación**.
 
-4. The subscription will now be activated and the required licenses will be created. Once activation is complete:
-   - Your subscription status in Azure will change from "Pending account configuration" to "Subscribed"
-   - You will receive an email containing your license key(s)
-   - The subscription will appear under **Subscriptions** in the Tabular Editor self-service portal. Click the ellipsis menu (three dots) and select **View subscription details** to view subscription information including the subscription period.
-   
-      ![Azure Marketplace subscription activated](~/content/assets/images/azuremarketplace-subscription-activated.png)
+4. Ahora se activará la suscripción y se crearán las licencias necesarias. Cuando se complete la activación:
+   - El estado de tu suscripción en Azure cambiará de "Pending account configuration" a "Subscribed"
+   - Recibirás un correo electrónico con tu clave(s) de licencia
+   - La suscripción aparecerá en **Subscriptions** en el portal de autoservicio de Tabular Editor. Haz clic en el menú de tres puntos (puntos suspensivos) y selecciona **Ver detalles de la suscripción** para ver la información de la suscripción, incluido el período de suscripción.
 
-## Installing and activating licenses
+     ![Azure Marketplace subscription activated](~/content/assets/images/azuremarketplace-subscription-activated.png)
 
-Please read @installation-activation-basic for more details on how to install, activate, and configure your Tabular Editor 3 licenses.
+## Instalación y activación de licencias
 
-## Changing Azure Marketplace subscriptions
+Consulta @installation-activation-basic para obtener más información sobre cómo instalar, activar y configurar tus licencias de Tabular Editor 3.
 
-All modifications to Tabular Editor 3 subscriptions purchased through the Azure Marketplace must be made in the Azure Portal. 
+## Cambiar suscripciones de Azure Marketplace
 
-### How to modify your subscription
+Todas las modificaciones de las suscripciones de Tabular Editor 3 adquiridas a través de Azure Marketplace deben realizarse en el Portal de Azure.
 
-1. Sign in to the [Azure Portal](https://portal.azure.com/)
-2. Navigate to **Home** > **SaaS** or search for "SaaS" in the search box
-3. Locate and select your Tabular Editor 3 subscription from the list
-4. On the subscription overview page, you can perform the following actions:
-   - **Change plan**: Upgrade to a higher Tabular Editor 3 edition
-   - **Change No. of users**: Add additional user licenses
-   - **Edit Auto-renew**: Enable or disable automatic renewal
-   - **Cancel subscription**: Terminate your subscription
-   - **Change Azure subscription**: Modify the Azure subscription used for billing
-   - **Change resource group**: Move the subscription resource to a different resource group
+### Cómo modificar tu suscripción
+
+1. Inicia sesión en el [Portal de Azure](https://portal.azure.com/)
+2. Ve a **Inicio** > **SaaS** o busca "SaaS" en el cuadro de búsqueda
+3. Busca y selecciona tu suscripción de Tabular Editor 3 en la lista
+4. En la página de información general de la suscripción, puedes realizar las siguientes acciones:
+   - **Cambiar plan**: Actualiza a una edición superior de Tabular Editor 3
+   - **Cambiar el número de usuarios**: Añade licencias de usuario adicionales
+   - **Editar renovación automática**: Habilita o deshabilita la renovación automática
+   - **Cancelar suscripción**: Finaliza tu suscripción
+   - **Cambiar suscripción de Azure**: Modifica la suscripción de Azure utilizada para la facturación
+   - **Cambiar grupo de recursos**: Mueve el recurso de la suscripción a otro grupo de recursos
 
 > [!NOTE]
-> **Downgrades not supported**: You cannot downgrade to a lower edition or reduce the number of users during an active subscription period. To move to a lower-tier plan or reduce seats, turn off **Auto-renew** for your current subscription and purchase a new subscription with your desired configuration before the current term ends.
+> **No se admiten los cambios a una edición inferior**: No puedes cambiar a una edición inferior ni reducir el número de usuarios durante un período de suscripción activo. Para pasar a un plan de un nivel inferior o reducir los puestos, desactiva la **Renovación automática** de tu suscripción actual y compra una nueva suscripción con la configuración que prefieras antes de que finalice el periodo actual.
 
 > [!IMPORTANT]
-> Canceling a subscription immediately revokes access to all licenses under that subscription and cannot be undone. To maintain access until the end of your current billing period, click **Edit Auto-renew** and turn off automatic renewal instead. Refunds are processed according to the refund policy. For more information, see [Refund policies](https://learn.microsoft.com/en-us/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) for Microsoft Marketplace.
+> Cancelar una suscripción revoca inmediatamente el acceso a todas las licencias de esa suscripción y no se puede deshacer. Para mantener el acceso hasta el final de tu período de facturación actual, haz clic en **Editar renovación automática** y, en su lugar, desactiva la renovación automática. Los reembolsos se procesan según la política de reembolso. Para saber más, consulta [Políticas de reembolso](https://learn.microsoft.com/en-us/marketplace/refund-policies?WT.mc_id=Portal-Microsoft_Azure_Marketplace#software-as-a-service-saas-offers) de Microsoft Marketplace.
 
-For more information about managing SaaS subscriptions in Azure, see: [SaaS subscription lifecycle management](https://learn.microsoft.com/en-us/marketplace/saas-subscription-lifecycle-management)
+Para saber más sobre cómo gestionar suscripciones de SaaS en Azure, consulta [Administración del ciclo de vida de suscripciones de SaaS](https://learn.microsoft.com/en-us/marketplace/saas-subscription-lifecycle-management)

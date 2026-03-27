@@ -1,87 +1,87 @@
 ---
 uid: kb.bpa-translate-perspectives
-title: Translate Perspective Names for All Cultures
+title: 为所有区域设置翻译透视名称
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring perspective names are translated for all defined cultures.
+description: 最佳实践规则：确保为所有已定义的区域设置翻译透视名称。
 ---
 
-# Translate Perspective Names for All Cultures
+# 为所有区域设置翻译透视名称
 
-## Overview
+## 概述
 
-This rule identifies model perspectives that lack name translations for one or more cultures.
+此规则用于识别在一个或多个区域设置中缺少名称翻译的模型透视。
 
-- Category: Model Layout
-- Severity: Low (1)
+- 类别：模型布局
+- 严重性：低（1）
 
-## Applies To
+## 适用对象
 
-- Model
-- Perspectives
+- 模型
+- 透视
 
-## Why This Matters
+## 为什么这很重要
 
-- **Incomplete localization**: Perspectives display in default language only
-- **Inconsistent experience**: Mix of translated and untranslated perspective names
-- **User confusion**: Expected language support not available
-- **Professional appearance**: Incomplete translations reduce model quality
+- **本地化不完整**：透视仅以默认语言显示
+- **体验不一致**：透视名称中既有已翻译的，也有未翻译的
+- **用户困惑**：无法获得预期的语言支持
+- **专业形象**：翻译不完整会降低模型质量
 
-## When This Rule Triggers
+## 何时触发此规则
 
-This rule triggers when a perspective has:
+当透视存在以下情况时，此规则会触发：
 
-- At least one culture in the model that is **missing a translation** for the perspective name
+- 模型中至少有一个区域设置的该透视名称**缺少翻译**
 
 ```csharp
 Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ```
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, select the perspective
-2. In **Properties** pane, expand **Translated Names**
-3. Enter translation for each culture
+1. 在 **TOM Explorer** 中选择该透视
+2. 在 **Properties** 窗格中，展开 **Translated Names**
+3. 为每个区域设置输入相应的翻译
 
-## Common Causes
+## 常见原因
 
-### Cause 1: New Perspectives Added
+### 原因 1：新增透视
 
-Perspectives created without translations.
+创建透视时未包含翻译。
 
-### Cause 2: Culture Added Later
+### 原因 2：后续添加了区域设置
 
-Culture added after perspectives were defined.
+在定义透视之后才添加区域设置。
 
-### Cause 3: Incomplete Translation
+### 原因 3：翻译不完整
 
-Translation workflow didn't cover perspectives.
+翻译工作流未覆盖透视。
 
-## Example
+## 示例
 
-### Before Fix
-
-```
-Perspective: "Sales Analysis"
-English: "Sales Analysis"
-German: (missing)
-```
-
-### After Fix
+### 修复前
 
 ```
-Perspective: "Sales Analysis"
-English: "Sales Analysis"
-German: "Vertriebsanalyse"
+透视: "Sales Analysis"
+英语: "Sales Analysis"
+德语:（缺失）
 ```
 
-## Compatibility Level
+### 修复后
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+透视: "Sales Analysis"
+英语: "Sales Analysis"
+德语: "Vertriebsanalyse"
+```
 
-## Related Rules
+## 兼容级别
 
-- [Translate Visible Names](xref:kb.bpa-translate-visible-names) - Translating object names
-- [Translate Descriptions](xref:kb.bpa-translate-descriptions) - Translating descriptions
+这个规则适用于兼容级别为 **1200** 及以上的模型。
+
+## 相关规则
+
+- [翻译可见名称](xref:kb.bpa-translate-visible-names) - 翻译对象名称
+- [翻译描述](xref:kb.bpa-translate-descriptions) - 翻译描述

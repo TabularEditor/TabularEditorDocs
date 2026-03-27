@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-import
-title: Import a Metric View and View Diagnostics
+title: 导入指标视图并查看诊断信息
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -17,35 +17,36 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Import a Metric View and View Diagnostics
 
-This how-to demonstrates how to import a Metric View into a Tabular model using C# scripts, and how to view diagnostic messages from the import process.
+# 导入指标视图并查看诊断信息
 
-## Prerequisites
+本教程演示如何使用 C# Script 将指标视图导入表格模型，以及如何查看导入过程中输出的诊断信息。
 
-You must have a Tabular model open in Tabular Editor before importing. This can be:
+## 先决条件
 
-- A new, empty model
-- An existing model you want to enhance with objects from the Metric View
+导入之前，你必须先在 Tabular Editor 中打开一个表格模型。 可以是：
 
-## Import methods
+- 一个新的空模型
+- 一个现有模型，你希望使用指标视图中的对象对其进行扩展
 
-There are two import methods:
+## 导入方法
 
-| Method                    | Description                                    |
-|---------------------------|------------------------------------------------|
-| `ImportToTabularFromFile` | Loads from a file path and imports in one step |
-| `ImportToTabular`         | Imports the currently loaded Metric View       |
+有两种导入方法：
 
-Both methods require:
+| 方法                        | 说明                |
+| ------------------------- | ----------------- |
+| `ImportToTabularFromFile` | 从指定文件路径加载，并一步完成导入 |
+| `ImportToTabular`         | 导入当前已加载的指标视图      |
 
-- The target Tabular `Model`
-- Databricks hostname (for M partition expressions)
-- Databricks HTTP path (for M partition expressions)
+两种方法都需要：
 
-## Import from file
+- 目标 Tabular `Model`
+- Databricks 主机名（用于 M 分区表达式）
+- Databricks HTTP 路径（用于 M 分区表达式）
 
-Use `ImportToTabularFromFile` to load and import in one operation:
+## 从文件导入
+
+使用 `ImportToTabularFromFile` 一次完成加载和导入：
 
 ```csharp
 var success = SemanticBridge.MetricView.ImportToTabularFromFile(
@@ -59,33 +60,33 @@ var success = SemanticBridge.MetricView.ImportToTabularFromFile(
 var sb = new System.Text.StringBuilder();
 if (success)
 {
-    sb.AppendLine("Import successful!");
-    sb.AppendLine($"Diagnostics: {diagnostics.Count}");
+    sb.AppendLine("导入成功！");
+    sb.AppendLine($"诊断信息： {diagnostics.Count}");
 }
 else
 {
-    sb.AppendLine("Import failed.");
-    sb.AppendLine($"Errors: {diagnostics.Count}");
+    sb.AppendLine("导入失败。");
+    sb.AppendLine($"错误： {diagnostics.Count}");
 }
 
 Output(sb.ToString());
 ```
 
-## Import a loaded Metric View
+## 导入已加载的 Metric View
 
-If you've already loaded a Metric View (for inspection or modification), use `ImportToTabular`:
+如果你已经加载了 Metric View（用于检查或修改），就用 `ImportToTabular`：
 
 ```csharp
-// Load the Metric View first
+// 先加载 Metric View
 SemanticBridge.MetricView.Load("C:/MetricViews/sales-metrics.yaml");
 
-// Optionally inspect or modify it
+// 可选：检查或修改
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Importing Metric View with {view.Dimensions.Count} dimensions and {view.Measures.Count} measures");
+sb.AppendLine($"正在导入包含 {view.Dimensions.Count} 个维度和 {view.Measures.Count} 个度量值的 Metric View");
 
-// Import to Tabular
+// 导入到 Tabular
 var success = SemanticBridge.MetricView.ImportToTabular(
     Model,
     "your-workspace.azuredatabricks.net",
@@ -95,19 +96,19 @@ var success = SemanticBridge.MetricView.ImportToTabular(
 
 if (success)
 {
-    sb.AppendLine("Import successful!");
+    sb.AppendLine("导入成功！");
 }
 else
 {
-    sb.AppendLine("Import failed.");
+    sb.AppendLine("导入失败。");
 }
 
 Output(sb.ToString());
 ```
 
-## Using placeholder connection values
+## 使用占位符连接值
 
-If you're testing the translation without a real Databricks connection, you can use placeholder values:
+如果你在没有真实 Databricks 连接的情况下测试翻译，可以使用占位符值：
 
 ```csharp
 var success = SemanticBridge.MetricView.ImportToTabularFromFile(
@@ -119,24 +120,24 @@ var success = SemanticBridge.MetricView.ImportToTabularFromFile(
 );
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("Import complete (with placeholder connection values)");
-sb.AppendLine("Note: Update the M partition expressions before refreshing data.");
+sb.AppendLine("导入完成（使用占位符连接值）");
+sb.AppendLine("注意：请在刷新数据之前更新 M 分区表达式。");
 Output(sb.ToString());
 ```
 
-## View diagnostics after import
+## 导入后查看诊断信息
 
-You can access diagnostics from the last import at any time using `ImportDiagnostics`.
-This example assumes that you have previously run an import, either via GUI or C# script.
+你可以随时通过 `ImportDiagnostics` 访问上一次导入的诊断信息。
+此示例假定你之前已经运行过一次导入，可以通过 GUI 或 C# Script 进行。
 
 ```csharp
 var diagnostics = SemanticBridge.MetricView.ImportDiagnostics;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("LAST IMPORT DIAGNOSTICS");
+sb.AppendLine("上次导入诊断信息");
 sb.AppendLine("-----------------------");
 sb.AppendLine("");
-sb.AppendLine($"Total issues: {diagnostics.Count}");
+sb.AppendLine($"问题总数： {diagnostics.Count}");
 sb.AppendLine("");
 
 foreach (var diag in diagnostics)
@@ -147,42 +148,42 @@ foreach (var diag in diagnostics)
 Output(sb.ToString());
 ```
 
-## Output diagnostics directly
+## 直接输出诊断信息
 
-For quick inspection, you can output the diagnostics collection directly:
+为了快速查看，你可以直接输出诊断信息集合：
 
 ```csharp
-// Output all diagnostics from the last import
+// 输出上一次导入的全部诊断信息
 SemanticBridge.MetricView.ImportDiagnostics.Output();
 ```
 
-## Complete workflow example
+## 完整工作流示例
 
-Load, validate, and import with full diagnostic reporting:
+加载、验证并导入，并输出完整的诊断报告：
 
 ```csharp
 var sb = new System.Text.StringBuilder();
 
-// Load the Metric View
+// 加载 Metric View
 SemanticBridge.MetricView.Load("C:/MetricViews/sales-metrics.yaml");
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine("METRIC VIEW SUMMARY");
+sb.AppendLine("Metric View 概览");
 sb.AppendLine("-------------------");
-sb.AppendLine($"Source: {view.Source}");
-sb.AppendLine($"Joins: {view.Joins?.Count ?? 0}");
-sb.AppendLine($"Dimensions: {view.Dimensions.Count}");
-sb.AppendLine($"Measures: {view.Measures.Count}");
+sb.AppendLine($"来源： {view.Source}");
+sb.AppendLine($"连接数： {view.Joins?.Count ?? 0}");
+sb.AppendLine($"维度数： {view.Dimensions.Count}");
+sb.AppendLine($"度量值数： {view.Measures.Count}");
 sb.AppendLine("");
 
-// Validate first
+// 先验证
 var validationDiags = SemanticBridge.MetricView.Validate().ToList();
-sb.AppendLine("VALIDATION");
+sb.AppendLine("验证");
 sb.AppendLine("----------");
-sb.AppendLine($"Issues: {validationDiags.Count}");
+sb.AppendLine($"问题数： {validationDiags.Count}");
 sb.AppendLine("");
 
-// Import
+// 导入
 var success = SemanticBridge.MetricView.ImportToTabular(
     Model,
     "your-workspace.azuredatabricks.net",
@@ -190,15 +191,15 @@ var success = SemanticBridge.MetricView.ImportToTabular(
     out var importDiags
 );
 
-sb.AppendLine("IMPORT RESULT");
+sb.AppendLine("导入结果");
 sb.AppendLine("-------------");
-sb.AppendLine($"Success: {success}");
-sb.AppendLine($"Diagnostics: {importDiags.Count}");
+sb.AppendLine($"是否成功： {success}");
+sb.AppendLine($"诊断信息： {importDiags.Count}");
 sb.AppendLine("");
 
 if (importDiags.Count > 0)
 {
-    sb.AppendLine("Import issues:");
+    sb.AppendLine("导入问题：");
     foreach (var diag in importDiags)
     {
         sb.AppendLine($"  [{diag.Severity}] {diag.Message}");
@@ -208,8 +209,8 @@ if (importDiags.Count > 0)
 Output(sb.ToString());
 ```
 
-## See also
+## 另见
 
-- [Semantic Bridge Overview](xref:semantic-bridge)
-- [Validate a Metric View](xref:semantic-bridge-validate-default)
-- [Load and Inspect a Metric View](xref:semantic-bridge-load-inspect)
+- [Semantic Bridge 概览](xref:semantic-bridge)
+- [验证指标视图](xref:semantic-bridge-validate-default)
+- [加载并检查指标视图](xref:semantic-bridge-load-inspect)

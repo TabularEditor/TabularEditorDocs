@@ -1,6 +1,6 @@
 ---
 uid: data-security-testing
-title: Testing RLS/OLS
+title: Pruebas de RLS/OLS
 author: Kurt Buhler
 updated: 2023-03-02
 applies_to:
@@ -16,73 +16,70 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Testing Data Security with Impersonation
 
+# Probar la seguridad de los datos mediante suplantación
 
-![Data Security Visual Abstract](~/content/assets/images/data-security/data-security-testing-visual-abstract.png)
-
+![Resumen Visual de la seguridad de datos](~/content/assets/images/data-security/data-security-testing-visual-abstract.png)
 
 ---
 
-__DAX Queries__, __Pivot Grid__, or __Preview Data__ enable testing of Data Security in Tabular Editor. It is recommended to *always* test Data Security with any changes to configuration, to mitigate risk of incorrect RLS/OLS implementation and the consequences thereof.
+Las **Consultas DAX**, el **Pivot Grid** o la **Vista previa de datos** permiten poner a prueba la seguridad de los datos en Tabular Editor. Se recomienda _siempre_ probar la seguridad de los datos ante cualquier cambio en la configuración, para mitigar el riesgo de una implementación incorrecta de RLS/OLS y sus consecuencias.
 
 > [!IMPORTANT]
-> Testing Data Security with Impersonation using Tabular Editor 3 is limited to datasets hosted in an Analysis Services instance or the Power BI Service. Tabular Editor 3 Desktop Licenses cannot benefit from this feature.
+> Las pruebas de seguridad de datos con suplantación en Tabular Editor 3 están limitadas a Datasets alojados en una instancia de Analysis Services o en Power BI Service. Las licencias de Tabular Editor 3 Desktop no pueden aprovechar esta funcionalidad.
 
 ---
 
-
-- [__About Data Security and RLS/OLS:__](data-security-about.md) A functional overview of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
-- [__Modify/Setup an RLS Configuration:__](data-security-setup-rls.md) How to configure <span style="color:#01a99d">RLS</span> in a dataset.
-- [__Modify/Setup an OLS Configuration:__](data-security-setup-ols.md) How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
-- __Testing RLS/OLS with Impersonation (This Article):__ How to easily validate Data Security with Tabular Editor.
+- [**Acerca de la seguridad de datos y RLS/OLS:**](data-security-about.md) Una descripción general funcional de <span style="color:#01a99d">RLS</span> y <span style="color:#8d7bae">OLS</span>.
+- [**Modificar/Configurar una configuración de RLS:**](data-security-setup-rls.md) Cómo configurar <span style="color:#01a99d">RLS</span> en un Dataset.
+- [**Modificar/Configurar una configuración de OLS:**](data-security-setup-ols.md) Cómo configurar <span style="color:#8d7bae">OLS</span> en un Dataset.
+- **Probar RLS/OLS mediante suplantación (este artículo):** Cómo validar fácilmente la seguridad de los datos con Tabular Editor.
 
 ---
 
-## Testing with Impersonation
+## Pruebas con suplantación
 
-__Data Security can be easily tested using _Impersonation_ in Tabular Editor 3.__ Impersonation is a feature that lets you view a query result as a model Role or User. It is similar to the _'View As Role...'_ feature in the Power BI service, with two key differences:
+**La seguridad de los datos se puede probar fácilmente mediante la _suplantación_ en Tabular Editor 3.** La suplantación es una funcionalidad que te permite ver el resultado de una consulta como si fueras un rol o un usuario del modelo. Es similar a la funcionalidad _"Ver como rol..."_ del servicio de Power BI, con dos diferencias clave:
 
-1. The End-User being impersonated requires __dataset Build permissions__ in addition to Role assignment & Dataset Read access. 
-2. Any query can be executed within Tabular Editor 3; it is not limited to available report visuals, as in the Power BI Service.
+1. El usuario final suplantado necesita **permisos de compilación del Dataset**, además de la asignación de rol y el acceso de lectura al Dataset.
+2. Puedes ejecutar cualquier consulta dentro de Tabular Editor 3; no está limitado a los Visuales disponibles del Report, como ocurre en el servicio de Power BI.
 
- This is valuable, as it lets the developer run defined tests to see how the result would be viewed by any end-user with Build permissions. This helps ensure that even for complex queries and DAX expressions, the Data Security works as expected, and users only see what they should see.
-
+Esto es valioso, ya que permite al desarrollador ejecutar pruebas predefinidas para ver cómo vería el resultado cualquier usuario final con permisos de compilación. Esto ayuda a garantizar que, incluso con consultas complejas y expresiones DAX, la seguridad de datos funcione como se espera y que los usuarios solo vean lo que deben.
 
 > [!IMPORTANT]
-> Ensure that Build permissions are not provisioned by providing end-users Workspace Roles (Contributor, Member, Admin), as these roles have __Write__ permissions to the dataset and thus bypass Data Security; the testing will appear to not work, even if it's configured correctly. 
-
+> Asegúrate de que no se concedan permisos de compilación al asignar a los usuarios finales roles del Workspace (Contributor, Member, Admin), ya que estos roles tienen permisos de **Write** sobre el Dataset y, por tanto, eluden la seguridad de datos; parecerá que las pruebas no funcionan, aunque esté configurado correctamente.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> A demonstration of RLS testing in Tabular Editor using impersonation. Shown is testing with (A) Data Preview, (B) DAX Queries and (C) Pivot Grid.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Demostración de pruebas de RLS en Tabular Editor mediante suplantación. Se muestran las pruebas con (A) Vista previa de datos, (B) Consultas DAX y (C) Pivot Grid.</figcaption>
 </figure>
 
 ---
 
-## How to Test with Impersonation
-To test with impersonation, follow the below steps:
+## Cómo probar con suplantación
 
-1. __Ensure that the Dataset Configuration & Access is correct:__
-End-users being impersonated...
-  - _...have been assigned to the appropriate __Roles__._
-  - _...have been provisioned __Dataset Read Access__._
-  - _...have been provisioned __Dataset Build Access__. (Power BI)_
-  - _...__are not__ Workspace Contributors, Members or Admins (Power BI)_.
+Para probar con suplantación, sigue estos pasos:
 
-2. __Create a new DAX Query, Pivot Grid or Preview Data window:__ 
-  - It's recommended that you start with _Preview Data_ to observe the effect on model tables
-  - Thereafter, perform a second validation with a _DAX Query_. This is because DAX Queries can be saved for documentation and later reference, if a change occurs in the model requiring re-testing.
+1. **Asegúrate de que la configuración y el acceso al Dataset sean correctos:**
+   Los usuarios finales que se van a suplantar...
 
-3. __Select 'Impersonation' and enter the User e-mail__: If you have implemented _Static RLS_, you can test the role, instead.
+- _...estén asignados a los **roles** adecuados._
+- _...tengan concedido el **Acceso de lectura al Dataset**._
+- _...tengan concedido el **Acceso de compilación al Dataset**. (Power BI)_
+- _...**no sean** Contributor, Member ni Admin del Workspace (Power BI)_.
 
-4. __Explore the data to validate that the results appear as expected:__ (according to the Security Rules). 
+2. **Crea una nueva Consulta DAX, un Pivot Grid o una ventana de Vista previa de datos:**
 
+- Se recomienda empezar con _Vista previa de datos_ para observar el efecto en las tablas del modelo
+- Después, realiza una segunda validación con una _DAX Query_. Esto se debe a que las consultas DAX se pueden guardar como documentación y para consultarlas más adelante si se produce un cambio en el modelo que requiera volver a probar.
 
-### Tips for Testing
+3. **Selecciona 'Suplantación' e introduce el correo electrónico del usuario**: Si has implementado _RLS estático_, puedes probar el rol en su lugar.
 
-1. __Test more than one user:__ It's recommended you test at least 3-10 different users per Role. You can also automate the testing to iterate through each UPN in the Security Table (i.e. using C# Scripting and Macros). 
+4. **Explora los datos para validar que los resultados se muestran como se espera:** (según las reglas de seguridad).
 
-2. __Test each Role & Table Permission:__ Since each Table Permission represents a different DAX Filter Expression, they all have to be tested, separately. Ensure that each Role is tested, and that each test includes the relevant tables with configured Filter Expressions. For example, if a Role consists of table expressions on the 'Customers' and 'Products' table, ensure your query includes attributes from both tables for validation purposes. 
+### Consejos para las pruebas
 
-3. __Test many Queries/Measures:__ Try to find complex queries to test, particularly those which might be problematic in the context of Data Security. For example, if calculations require comparing to a total, unfiltered average (i.e. % of total) and it's expected that _that total_ is not filtered in RLS, the developer may need to re-think the Data Security implementation as a function of the model.
+1. **Prueba con más de un usuario:** Se recomienda probar al menos 3-10 usuarios distintos por rol. También puedes automatizar las pruebas para recorrer cada UPN de la tabla de seguridad (por ejemplo, usando C# Scripts y macros).
+
+2. **Prueba cada rol y permiso de tabla:** Dado que cada permiso de tabla representa una expresión de filtro DAX diferente, hay que probarlos todos por separado. Asegúrate de que se prueba cada rol y de que cada prueba incluye las tablas pertinentes con las expresiones de filtro configuradas. Por ejemplo, si un rol incluye expresiones de filtro en las tablas 'Customers' y 'Products', asegúrate de que la consulta incluya atributos de ambas tablas para la validación.
+
+3. **Prueba muchas consultas/medidas:** Intenta encontrar consultas complejas para probar, especialmente las que puedan resultar problemáticas en el contexto de la seguridad de datos. Por ejemplo, si los cálculos requieren comparar con un promedio total sin filtrar (es decir, el % del total) y se espera que _ese total_ no esté filtrado en RLS, es posible que el desarrollador tenga que replantearse la implementación de la seguridad de datos en función del modelo.

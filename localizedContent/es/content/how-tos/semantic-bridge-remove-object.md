@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-remove-object
-title: Remove an Object from a Metric View
+title: Eliminar un objeto de una Metric View
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -17,51 +17,52 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Remove an object from a Metric View
 
-This how-to demonstrates how to remove Metric View dimensions from a loaded Metric View.
-Similar approaches apply to all collections in a Metric View.
+# Eliminar un objeto de una Metric View
+
+Este procedimiento muestra cómo eliminar dimensiones de Metric View de una Metric View cargada.
+El mismo enfoque se aplica a todas las colecciones de una Metric View.
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
 > [!NOTE]
-> Each removal script here affects the currently loaded Metric View.
-> If you want to run all of these, make sure to run the `Deserialize` above before each removal.
+> Cada script de eliminación que se muestra aquí afecta a la Metric View cargada en ese momento.
+> Si quieres ejecutar todos estos scripts, asegúrate de ejecutar el comando `Deserialize` anterior antes de cada eliminación.
 
-## Remove by name
+## Eliminar por nombre
 
-Find the Metric View dimension and remove it from the collection:
+Localiza la dimensión de la Metric View y elimínala de la colección:
 
 ```csharp
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Dimensions before: {view.Dimensions.Count}");
+sb.AppendLine($"Dimensiones antes: {view.Dimensions.Count}");
 
 var dimToRemove = view.Dimensions.FirstOrDefault(d => d.Name == "order_month");
 if (dimToRemove != null)
 {
     view.Dimensions.Remove(dimToRemove);
-    sb.AppendLine($"Removed: {dimToRemove.Name}");
+    sb.AppendLine($"Eliminada: {dimToRemove.Name}");
 }
 
-sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
+sb.AppendLine($"Dimensiones después: {view.Dimensions.Count}");
 Output(sb.ToString());
 ```
 
-**Output:**
+**Salida:**
 
 ```
-Dimensions before: 6
-Removed: order_month
-Dimensions after: 5
+Dimensiones antes: 6
+Eliminada: order_month
+Dimensiones después: 5
 ```
 
-Observe that if you run the script above twice in a row, there is no additional removal; the before and after counts are both 5.
+Observa que, si ejecutas el script anterior dos veces seguidas, no se elimina nada más; los recuentos de antes y después son ambos 5.
 
-## Remove multiple Metric View dimensions
+## Eliminar varias dimensiones de una Metric View
 
-Use LINQ to filter and rebuild the collection:
+Usa LINQ para filtrar y reconstruir la colección:
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -69,25 +70,25 @@ using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Dimensions before: {view.Dimensions.Count}");
+sb.AppendLine($"Dimensiones antes: {view.Dimensions.Count}");
 
-// Remove all date-related dimensions
+// Eliminar todas las dimensiones relacionadas con fechas
 string[] toRemove = ["order_date", "order_year", "order_month"];
 
 var toKeep = view.Dimensions
     .Where(d => !toRemove.Contains(d.Name))
     .ToList();
 
-// Clear and repopulate
+// Vaciar y volver a rellenar
 view.Dimensions.Clear();
 foreach (var dim in toKeep)
 {
     view.Dimensions.Add(dim);
 }
 
-sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
+sb.AppendLine($"Dimensiones después: {view.Dimensions.Count}");
 sb.AppendLine();
-sb.AppendLine("Remaining dimensions:");
+sb.AppendLine("Dimensiones restantes:");
 sb.AppendLine("---------------------");
 foreach (var dim in view.Dimensions)
 {
@@ -97,33 +98,33 @@ foreach (var dim in view.Dimensions)
 Output(sb.ToString());
 ```
 
-**Output:**
+**Salida:**
 
 ```
-Dimensions before: 6
-Dimensions after: 3
+Dimensiones antes: 6
+Dimensiones después: 3
 
-Remaining dimensions:
+Dimensiones restantes:
 ---------------------
   product_name
   product_category
   customer_segment
 ```
 
-## Remove Metric View dimensions from a specific table
+## Eliminar dimensiones de Metric View de una tabla específica
 
-Remove all Metric View dimensions that reference the date table.
+Elimina todas las dimensiones de Metric View que hacen referencia a la tabla de fechas.
 
 > [!WARNING]
-> This example is not guaranteed to remove all and exclusively Metric View dimensions which reference a given Metric View Join.
-> Metric View Dimensions may include near-arbitrary SQL expressions, and may also reference previously defined Metric View Dimensions.
-> This example is for illustrative purposes only.
+> No se garantiza que este ejemplo elimine todas, y solo, las dimensiones de Metric View que hagan referencia a un Metric View Join determinado.
+> Las dimensiones de Metric View pueden incluir expresiones SQL casi arbitrarias y también pueden hacer referencia a dimensiones de Metric View definidas anteriormente.
+> Este ejemplo es solo con fines ilustrativos.
 
 ```csharp
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Dimensions before: {view.Dimensions.Count}");
+sb.AppendLine($"Dimensiones antes: {view.Dimensions.Count}");
 
 var toRemove = view.Dimensions
     .Where(d => d.Expr.StartsWith("date."))
@@ -132,24 +133,24 @@ var toRemove = view.Dimensions
 foreach (var dim in toRemove)
 {
     view.Dimensions.Remove(dim);
-    sb.AppendLine($"Removed: {dim.Name} ({dim.Expr})");
+    sb.AppendLine($"Eliminado: {dim.Name} ({dim.Expr})");
 }
 
-sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
+sb.AppendLine($"Dimensiones después: {view.Dimensions.Count}");
 Output(sb.ToString());
 ```
 
-**Output:**
+**Salida:**
 
 ```
-Dimensions before: 6
-Removed: order_date (date.full_date)
-Removed: order_year (date.year)
-Removed: order_month (date.month_name)
-Dimensions after: 3
+Dimensiones antes: 6
+Eliminado: order_date (date.full_date)
+Eliminado: order_year (date.year)
+Eliminado: order_month (date.month_name)
+Dimensiones después: 3
 ```
 
-## See also
+## Ver también
 
 - @semantic-bridge-add-object
 - @semantic-bridge-rename-objects

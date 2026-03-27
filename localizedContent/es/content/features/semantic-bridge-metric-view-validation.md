@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-metric-view-validation
-title: Semantic Bridge Metric View Validation
+title: Validación de Metric View en Semantic Bridge
 author: Greg Baldini
 updated: 2025-01-23
 applies_to:
@@ -17,37 +17,38 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Semantic Bridge Validation
+
+# Validación de Semantic Bridge
 
 <!--
 SUMMARY: Describes the validation framework for Metric Views in the Semantic Bridge, including built-in validation rules, diagnostic messages (errors/warnings/info), and how validation integrates with the import workflow.
 -->
 
-There is a validation framework built into the Semantic Bridge to allow users to validate and define rules to check a Metric View before importing it to Tabular.
-This validation is shared at every stage of the translation pipeline, from first deserializing the Metric View, through to errors in translation to DAX and Tabular.
+Hay un marco de validación integrado en el Semantic Bridge que permite a los usuarios validar y definir reglas para comprobar una Metric View antes de importarla en Tabular.
+Esta validación se comparte en todas las etapas de la canalización de traducción, desde la deserialización inicial del Metric View hasta la detección de errores al traducir a DAX y Tabular.
 
 > [!NOTE]
-> The Semantic Bridge is currently in its MVP phase, so interfaces may change as the feature matures.
-> For now, the only interface to validation is through C# scripts.
+> El Semantic Bridge se encuentra actualmente en su fase de MVP, por lo que las interfaces pueden cambiar a medida que la funcionalidad madure.
+> Por ahora, la única interfaz para la validación es a través de scripts de C#.
 
-## Validation process
+## Proceso de validación
 
-There are several phases of validation
+Hay varias fases de validación
 
-1. upon deserializing some YAML, to check that it represents a valid Metric View
-2. acting on the loaded Metric View
-3. upon translating the Metric View to Tabular
+1. al deserializar YAML para comprobar que representa un Metric View válido
+2. al actuar sobre el Metric View cargado
+3. al traducir el Metric View a Tabular
 
-The first and third are automatic and internal to the Semantic Bridge, but the second is where users can provide their own validation rules.
+La primera y la tercera son automáticas e internas del Semantic Bridge, pero en la segunda los usuarios pueden aportar sus propias reglas de validación.
 
-Validation is a process of evaluating each of a set of validation rules against all objects in the Metric View.
-A validation rule is defined to apply to exactly one type of Metric View object, e.g. a `Join` or `Measure`.
-After a validation is complete, all diagnostics from rule violations are returned to the user for further action.
+La validación es el proceso de evaluar cada regla de validación de un conjunto sobre todos los objetos del Metric View.
+Una regla de validación se define para aplicarse a un único tipo de objeto de Metric View; por ejemplo, un `Join` o un `Measure`.
+Una vez completada la validación, se devuelven al usuario todos los diagnósticos de los incumplimientos de reglas para que actúe en consecuencia.
 
-## Anatomy of a validation rule
+## Anatomía de una regla de validación
 
-Validation rules are all instances of [`IMetricViewValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.html).
-Rather than dig into that interface, it is easier to understand and work with validation rules with the helper methods:
+Las reglas de validación son todas instancias de [`IMetricViewValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.html).
+En lugar de profundizar en esa interfaz, es más fácil entender y trabajar con las reglas de validación mediante los métodos auxiliares:
 
 - [`MakeValidationRuleForDimension`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRuleForDimension_System_String_System_String_System_String_System_Func_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Dimension_System_Boolean__)
 - [`MakeValidationRuleForJoin`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRuleForJoin_System_String_System_String_System_String_System_Func_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Join_System_Boolean__)
@@ -55,38 +56,38 @@ Rather than dig into that interface, it is easier to understand and work with va
 - [`MakeValidationRuleForView`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRuleForView_System_String_System_String_System_String_System_Func_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_View_System_Boolean__)
 - [`MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___)
 
-The first four are all special purpose to make a rule for the object type in their name.
-They offer a simplified interface where you provide:
+Las cuatro primeras son específicas para crear una regla para el tipo de objeto indicado en su nombre.
+Ofrecen una interfaz simplificada en la que proporcionas:
 
-- `name`: a short, unique name to identify the rule
-- `category`: useful for grouping similar rules together, but ultimately completely optional
-- `message`: the message that will be shown in the diagnostic message when this rule is violated
-- `isInvalid`: a function that will take the Metric View object as an argument, and will return `true` if that object is invalid
+- `name`: un nombre corto y único para identificar la regla
+- `category`: útil para agrupar reglas similares, pero en última instancia es completamente opcional
+- `message`: el texto que se mostrará en el mensaje de diagnóstico cuando se incumpla esta regla
+- `isInvalid`: una función que tomará el objeto de Metric View como argumento y devolverá `true` si ese objeto no es válido
 
-The name and category are intended to make it easier to deal with collections of rules, as you will do in C# scripts that utilize custom rules.
+El nombre y la categoría están pensados para facilitar el trabajo con colecciones de reglas, como se hace en scripts de C# que utilizan reglas personalizadas.
 
-This is easier to understand with an example:
+Esto se entiende mejor con un ejemplo:
 
 ```csharp
-// create a rule to check for underscores in dimension names
+// crear una regla para comprobar si hay guiones bajos en los nombres de las dimensiones
 var myRule = SemanticBridge.MetricView.MakeValidationRuleForDimension(
 	"no_underscores",
 	"naming",
-	"Do not include underscores in dimension names. Use user-friendly names with spaces.",
+	"No se deben incluir guiones bajos en los nombres de las dimensiones. Se deben usar nombres fáciles de leer con espacios.",
 	(dimension) => dimension.Name.Contains('_')
 	);
 ```
 
-This makes a rule that will apply to all [Metric View `Dimension`s](/api/TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension.html).
-The rule is named (ironically) "no_underscores".
-It has a category of "naming", to indicate that it has to do with how we name things.
-The message you will see when the rule is violated is, "Do not include underscores in dimension names. Use user-friendly names with spaces."
-The last argument defines a function that will be called for each Metric View dimension in the model; its body is a boolean expression that returns `true` for a Metric View dimension with an underscore in its `Name` property.
+Esto crea una regla que se aplicará a todas las [`Dimension`s de Metric View](/api/TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Dimension.html).
+La regla se llama (irónicamente) "no_underscores".
+Tiene la categoría "naming", para indicar que tiene que ver con cómo nombramos las cosas.
+El mensaje que verá cuando se incumpla la regla es: "No incluya guiones bajos en los nombres de las dimensiones. Use nombres fáciles de leer con espacios."
+El último argumento define una función a la que se llamará para cada dimensión de Metric View del modelo; su cuerpo es una expresión booleana que devuelve `true` para una dimensión de Metric View con un guion bajo en su propiedad `Name`.
 
-Here's a full script that defines a Metric View inline, and then deserializes and validates it, showing how this rule is used.
+Aquí tienes un script completo que define una Metric View en línea y luego la deserializa y la valida, mostrando cómo se usa esta regla.
 
 ```csharp
-// create a new simple Metric View
+// crear una nueva Metric View simple
 SemanticBridge.MetricView.Deserialize("""
     version: 0.1
     source: database.schema.table
@@ -97,37 +98,37 @@ SemanticBridge.MetricView.Deserialize("""
         expr: source.another_field_with_no_underscores
     """);
 
-// create a new validation rule
+// crear una nueva regla de validación
 var myRule = SemanticBridge.MetricView.MakeValidationRuleForDimension(
     "no_underscores",
     "naming",
-    "Do not include underscores in dimension names. Use user-friendly names with spaces.",
+    "No incluya guiones bajos en los nombres de las dimensiones. Use nombres fáciles de leer con espacios.",
     (dimension) => dimension.Name.Contains('_')
     );
 
-// run validation with the rule defined above and output the diagnostic messages
+// ejecutar la validación con la regla definida arriba e imprimir los mensajes de diagnóstico
 Output(SemanticBridge.MetricView.Validate([myRule]));
 ```
 
-You can see that one of the fields defined as a Metric View dimension has an underscore in its name.
-When you run the script, you can see one diagnostic message after validating with the rule we defined.
-You can see the details that are provided in the diagnostic message:
+Puedes ver que uno de los campos definidos como dimensión de Metric View tiene un guion bajo en su nombre.
+Al ejecutar el script, verás un único mensaje de diagnóstico después de validar con la regla que definimos.
+Puedes ver los detalles que se proporcionan en el mensaje de diagnóstico:
 
-- Code, Context: not used when you use one of these helper methods to make your rule
-- Message: the message you defined in the rule
-- Path: a representation of where you find that object in the Metric View
-- Severity: set to Error by default with these helpers
+- Código, Contexto: no se utilizan cuando usas uno de estos métodos auxiliares para crear la regla
+- Mensaje: el mensaje que definiste en la regla
+- Ruta: una representación de dónde se encuentra ese objeto en la Vista de métricas
+- Gravedad: se establece en Error de forma predeterminada con estos métodos auxiliares
 
-![output from one field violating the validation rule](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation.png)
+![salida de un campo que infringe la regla de validación](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation.png)
 
-If you want more control over the diagnostic message and more flexibility in the function for your validation, you can use `MakeValidationRule` mentioned above to make a contextual validation rule.
+Si quieres más control sobre el mensaje de diagnóstico y más flexibilidad en la función de validación, puedes usar `MakeValidationRule` mencionado arriba para crear una regla de validación contextual.
 
 ```csharp
-// necessary to use the Metric View object model
-// aliasing to avoid conflicts with same-named TOM objects
+// necesario para usar el modelo de objetos de Metric View
+// asignación de alias para evitar conflictos con objetos TOM con el mismo nombre
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
-// create a new simple Metric View
+// crear una nueva Metric View sencilla
 SemanticBridge.MetricView.Deserialize("""
     version: 0.1
     source: database.schema.table
@@ -138,54 +139,53 @@ SemanticBridge.MetricView.Deserialize("""
         expr: source.same_field
     """);
 
-// create a new validation rule
+// crear una nueva regla de validación
 var myRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Dimension>(
     "no_duplicate_dimensions",
     "naming",
     (dimension, context) =>
         context.DimensionNames.Contains(dimension.Name)
-            ? [context.MakeError($"{dimension.Name} appears more than once as a dimension")]
+            ? [context.MakeError($"{dimension.Name} aparece más de una vez como dimensión")]
             : []
     );
 
-// run validation with the rule defined above and output the diagnostic messages
+// ejecutar la validación con la regla definida anteriormente y mostrar los mensajes de diagnóstico
 Output(SemanticBridge.MetricView.Validate([myRule]));
 ```
 
-This helper method requires you to pass the object type as a type parameter, and the validation function now is a two-parameter function, defined with the signature `(objectType, context)`.
-The first parameter is the Metric View object that the rule is evaluated for.
-The second parameter is an [`IReadOnlyValidationContext`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext.html).
-This context object holds collections with the names of already-checked objects; this makes it useful to check for duplicate names.
-The context object also has a helper method to make a new diagnostic message; the benefit here is that your message doesn't have to be a hard-coded string, but can include properties of the object you are checking.
-You can see in this example that we include the duplicated Metric View dimension name in the message.
+Este método auxiliar requiere que pases el tipo de objeto como parámetro de tipo, y ahora la función de validación es una función de dos parámetros, definida con la firma `(objectType, context)`.
+El primer parámetro es el objeto de Metric View para el que se evalúa la regla.
+El segundo parámetro es un [`IReadOnlyValidationContext`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.Validation.IReadOnlyValidationContext.html).
+Este objeto de contexto contiene colecciones con los nombres de los objetos ya comprobados; esto lo hace útil para detectar nombres duplicados.
+El objeto de contexto también incluye un método auxiliar para crear un nuevo mensaje de diagnóstico; la ventaja es que el mensaje no tiene por qué ser una cadena codificada de forma fija, sino que puede incluir propiedades del objeto que estás comprobando.
+En este ejemplo puedes ver que incluimos en el mensaje el nombre duplicado de la dimensión de Metric View.
 
-![output from one field violating the more complex validation rule](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation2.png)
+![salida de un campo que infringe la regla de validación más compleja](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation2.png)
 
-## Validation rule best practices
+## Buenas prácticas para reglas de validación
 
-It is a good idea to make many simple rules, rather than fewer, more complex rules.
-The validation process is very light-weight, so there are not performance concerns from a proliferation of rules.
-For example, if you want to make sure that Metric View dimension names are not `camelCased`, not `kebab-cased` and not `snake_cased`, it is better to make three separate rules, rather than trying to check for each of those conditions in a single rule.
-This allows each rule to be simple, and for the messages to be very specific, and therefore more easily actionable.
+Es recomendable crear muchas reglas simples, en lugar de menos reglas más complejas.
+El proceso de validación es muy ligero, así que no hay problemas de rendimiento por tener muchas reglas.
+Por ejemplo, si quieres asegurarte de que los nombres de las dimensiones de Metric View no estén en `camelCased`, ni en `kebab-cased` ni en `snake_cased`, es mejor crear tres reglas independientes, en lugar de intentar comprobar todas esas condiciones en una sola regla.
+Esto permite que cada regla sea simple y que los mensajes sean muy específicos y, por tanto, más fáciles de solucionar.
 
-In general, once you have a rule that catches a specific issue, it is better to leave that alone, rather than editing it.
-If you find that the rule is missing some condition you'd like to catch, just add a new, small, simple rule to catch that new condition.
+En general, cuando ya tienes una regla que detecta un problema concreto, es mejor dejarla tal cual en vez de editarla.
+Si ves que a la regla le falta alguna condición que te gustaría detectar, solo tienes que añadir una regla nueva, pequeña y simple para cubrir esa condición.
 
-You can save many different rules in a C# script for re-use with different Metric Views.
-Because [a loaded Metric View is accessible in multiple scripts](xref:semantic-bridge-metric-view-object-model#loading-and-accessing-the-metric-view) you can save C# scripts that only define rules and then call `SemanticBridge.MetricView.Validate`, and re-use those validation scripts easily.
-See the image below, where the script on the left, "load-mv.csx" has already been run, to load a Metric View to Tabular Editor.
-Then, the second script, on the right, "run-rules.csx", is run second to validate.
-This second script could be one that you keep around for all of your Metric Views.
+Puedes guardar muchas reglas distintas en un C# Script para reutilizarlas con diferentes Metric Views.
+Como [una Metric View cargada es accesible desde varios scripts](xref:semantic-bridge-metric-view-object-model#loading-and-accessing-the-metric-view), puedes guardar varios archivos C# Script que solo definan reglas y luego llamar a `SemanticBridge.MetricView.Validate` y reutilizar esos scripts de validación fácilmente.
+Mira la imagen de abajo: el script de la izquierda, "load-mv.csx", ya se ha ejecutado para cargar una Metric View en Tabular Editor.
+Después, se ejecuta el segundo script, a la derecha, "run-rules.csx", para validar.
+Este segundo script podría ser uno que tengas siempre a mano para todas tus Metric Views.
 
+![salida de un campo que infringe la regla de validación más compleja](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation3.png)
 
-![output from one field violating the more complex validation rule](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-validation3.png)
-
-The scripts are copied below for convenience, but are just rearrangements of scripts we saw above.
+Los scripts se copian a continuación por comodidad, pero no son más que reorganizaciones de los scripts que vimos anteriormente.
 
 **"load-mv.csx"**
 
 ```csharp
-// create a new simple Metric View
+// crear una nueva Metric View simple
 SemanticBridge.MetricView.Deserialize("""
     version: 0.1
     source: database.schema.table
@@ -200,32 +200,32 @@ SemanticBridge.MetricView.Deserialize("""
 **"run-rules.csx"**
 
 ```csharp
-// necessary to use the Metric View object model
-// aliasing to avoid conflicts with same-named TOM objects
+// necesario para usar el modelo de objetos de Metric View
+// uso de alias para evitar conflictos con objetos TOM del mismo nombre
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
-//create a simple validation rule
+// crear una regla de validación sencilla
 var simpleRule = SemanticBridge.MetricView.MakeValidationRuleForDimension(
     "no_underscores",
     "naming",
-    "Do not include underscores in dimension names. Use user-friendly names with spaces.",
+    "No incluya guiones bajos en los nombres de las dimensiones. Use nombres fáciles de usar con espacios.",
     (dimension) => dimension.Name.Contains('_')
     );
 
-// create a contextual validation rule
+// crear una regla de validación contextual
 var contextualRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Dimension>(
     "no_duplicate_dimensions",
     "naming",
     (dimension, context) =>
         context.DimensionNames.Contains(dimension.Name)
-            ? [context.MakeError($"{dimension.Name} appears more than once as a dimension")]
+            ? [context.MakeError($"{dimension.Name} aparece más de una vez como dimensión")]
             : []
     );
 
-// run validation with the rules defined above and output the diagnostic messages
+// ejecutar la validación con las reglas definidas anteriormente y generar los mensajes de diagnóstico
 Output(SemanticBridge.MetricView.Validate([simpleRule, contextualRule]));
 ```
 
-## References
+## Referencias
 
 - @semantic-bridge-how-tos

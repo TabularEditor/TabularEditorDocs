@@ -163,6 +163,7 @@ When a Primary time unit column has a **Sort By** column defined, the Sort By co
 
 For example, if you map a `MonthName` column to "Month of Year" and `MonthName` is sorted by a `MonthNumber` column, the `MonthNumber` column is automatically associated with the time unit. You don't need to manually add the Sort By column to the Associated Columns panel—the Calendar Editor handles this automatically.
 
+<a name="time-related-columns"></a>
 ### Time-Related Columns
 
 In addition to mapping columns to specific time unit categories, you can mark columns as **time-related**. Time-related columns are columns in your Date table that don't fit into a specific time unit category but should still receive special treatment during time intelligence calculations.

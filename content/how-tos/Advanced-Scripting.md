@@ -122,6 +122,7 @@ Selected.Measures
         .ForEach(m => m.Name += " DEPRECATED");
 ```
 
+<a name="helper-methods"></a>
 ## Helper methods
 To make debugging scripts easier, Tabular Editor provides a set of special helper methods. Internally, these are static methods decorated with the `[ScriptMethod]`-attribute. This attribute allows scripts to call the methods directly, without the need to specify a namespace or class name. Plugins may also use the `[ScriptMethod]` attribute to expose public static methods for scripting in a similar way.
 

@@ -1,6 +1,6 @@
 ---
 uid: formula-fix-up-dependencies
-title: Formula Fix-up and Formula Dependencies
+title: Corrección automática de fórmulas y dependencias de fórmulas
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,9 +9,10 @@ applies_to:
       full: true
 ---
 
-## Formula Fix-up and Formula Dependencies
-Tabular Editor continuously parses the DAX expressions of all measures, calculated columns and calculated tables in your model, to construct a dependency tree of these objects. This dependency tree is used for the Formula Fix-up functionality, which may be enabled under "File" > "Preferences". Formula Fix-up automatically updates the DAX expression of any measure, calculated column or calculated table, whenever an object that was referenced in the expression is renamed.
+## Corrección automática de fórmulas y dependencias de fórmulas
 
-To visualize the dependency tree, right-click the object in the explorer tree and choose "Show dependencies..."
+Tabular Editor analiza continuamente las expresiones DAX de todas las medidas, columnas calculadas y tablas calculadas de tu modelo para construir un árbol de dependencias de estos objetos. Este árbol de dependencias se usa para la funcionalidad de Corrección automática de fórmulas, que puedes habilitar en "Archivo" > "Preferencia". La Corrección automática de fórmulas actualiza la expresión DAX de cualquier medida, columna calculada o tabla calculada cada vez que se cambia el nombre de un objeto al que se hacía referencia en la expresión.
+
+Para visualizar el árbol de dependencias, haz clic con el botón derecho en el objeto del árbol del explorador y selecciona "Mostrar dependencias..."
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/22482528/b37d27e2-e7f9-11e6-8b89-c503f9fffcac.png)

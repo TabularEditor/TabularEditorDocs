@@ -1,6 +1,6 @@
-﻿---
+---
 uid: properties-view-reference
-title: Properties view
+title: 属性视图
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -16,4 +16,5 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-[!include[using-bpa](../../features/views/properties-view.md)]
+
+[!include[properties-view](../../features/views/properties-view.md)]

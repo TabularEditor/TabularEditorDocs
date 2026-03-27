@@ -1,6 +1,6 @@
-﻿---
+---
 uid: te3-eula
-title: Standard License Terms
+title: 标准许可条款
 author: Søren Toft Joensen
 updated: 2021-07-10
 applies_to:
@@ -16,6 +16,7 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Tabular Editor 3 Standard License Terms 
 
-The latest version of our license terms is always available on https://tabulareditor.com/license-terms
+# Tabular Editor 3 标准许可条款
+
+我们的许可条款最新版本始终可在 https://tabulareditor.com/license-terms 查阅

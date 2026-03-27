@@ -1,6 +1,6 @@
 ---
 uid: script-create-date-table
-title: Create Date Table
+title: 创建日期表
 author: Kurt Buhler
 updated: 2023-02-28
 applies_to:
@@ -10,86 +10,90 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Create a Date Table
 
-## Script Purpose
-You can use this script to create a new, organized and configured date table based on 1-2 selected date columns in the model.
-The first selected column should be the earliest date and the second selected column should be the latest date. Both should be selected before running the script / macro.
+# 创建日期表
 
-This script will create the below objects in the model:
-1. A measure `[RefDate]`, which will have the latest date in the model scope; i.e. last day of sales. You can adjust this measure manually and re-process the date table to re-generate it based on a different reference date (i.e. if you want to change it to TODAY() or add a filter)
-2. The `'Date'` table - The table can be configured in a separate DAX Query window and copied back into the script if you have other requirements.
-   - All columns will be organized in display folders
-   - Column properties like Sort By will be set
+## 脚本用途
 
-This script does not yet create model relationships between the created date table and date fields in your model.
+你可以使用此脚本，基于模型中所选的 1-2 个日期列创建一张新的、结构清晰且已配置好的日期表。
+第一个选中的列应包含最早日期，第二个选中的列应包含最晚日期。 运行脚本/宏之前，请先同时选中这两列。
 
-## Script
+此脚本将在模型中创建以下对象：
 
-### Create Date Table
+1. 一个度量值 `[RefDate]`，其值为模型范围内的最新日期；例如：最后一个销售日。 你可以手动调整该度量值，然后重新处理日期表，以便基于不同的参考日期重新生成（即如果你想将其改为 TODAY() 或添加筛选器）
+2. `'Date'` 表——如果你有其他需求，可以在单独的 DAX 查询窗口中配置该表，然后将内容复制回脚本。
+   - 所有列都会归入显示文件夹中
+   - 将设置“排序依据”等列属性
+
+此脚本目前不会在创建的日期表与模型中的日期字段之间创建关系。
+
+## 脚本
+
+### 创建日期表
+
 ```csharp
-// To use this C# Script:
+// 要使用此 C# Script：
 //
-// 1. Run the script
-// 2. Select the column that has the earliest date
-// 3. Select the column that has the latest date
+// 1. 运行脚本
+// 2. 选择包含最早日期的列
+// 3. 选择包含最晚日期的列
 
-// List of all DateTime columns in the model
+// 模型中所有 DateTime 列的列表
 var _dateColumns = Model.AllColumns.Where(c => c.DataType == DataType.DateTime ).ToList();
 
-// Select the column with the earliest date in the model
+// 在模型中选择包含最早日期的列
 try
 {
     string _EarliestDate = 
         SelectColumn(
             _dateColumns, 
             null, 
-            "Select the Column with the Earliest Date:"
+            "请选择包含最早日期的列："
         ).DaxObjectFullName;
     
     try
     {
-        // Select the column with the latest date in the model
+        // 在模型中选择包含最晚日期的列
         string _LatestDate = 
             SelectColumn(
                 _dateColumns, 
                 null, 
-                "Select the Column with the Latest Date:"
+                "请选择包含最晚日期的列："
             ).DaxObjectFullName;
         
         
-        // Create measure for reference date
+        // 创建参考日期度量值
         var _RefDateMeasure = _dateColumns[0].Table.AddMeasure(
             "RefDate",
             "CALCULATE ( MAX ( " + _LatestDate + " ), REMOVEFILTERS ( ) )"
         );
         
         
-        // Formatted date table DAX
-        // Based on date table from https://www.sqlbi.com/topics/date-table/
-        // To adjust, copy everything after the @" into a DAX query window & replace
+        // 格式化的日期表 DAX
+        // 基于 https://www.sqlbi.com/topics/date-table/ 中的日期表
+        // 如需调整，将 @" 之后的所有内容复制到 DAX 查询窗口并替换
         
-        var _DateDaxExpression = @"-- Reference date for the latest date in the report
-        -- Until when the business wants to see data in reports
+        var _DateDaxExpression = @"-- Report 中最新日期的参考日期
+        -- 业务希望在 Report 中查看数据的截止日期
         VAR _Refdate_Measure = [RefDate]
         VAR _Today = TODAY ( )
         
-        -- Replace with ""Today"" if [RefDate] evaluates blank
+        -- 如果 [RefDate] 结果为空，则替换为 ""Today""
         VAR _Refdate = IF ( ISBLANK ( _Refdate_Measure ), _Today, _Refdate_Measure )
             VAR _RefYear        = YEAR ( _Refdate )
             VAR _RefQuarter     = _RefYear * 100 + QUARTER(_Refdate)
             VAR _RefMonth       = _RefYear * 100 + MONTH(_Refdate)
             VAR _RefWeek_EU     = _RefYear * 100 + WEEKNUM(_Refdate, 2)
         
-        -- Earliest date in the model scope
+        -- 模型范围内的最早日期
         VAR _EarliestDate       = DATE ( YEAR ( MIN ( " + _EarliestDate + @" ) ) - 2, 1, 1 )
         VAR _EarliestDate_Safe  = MIN ( _EarliestDate, DATE ( YEAR ( _Today ) + 1, 1, 1 ) )
         
-        -- Latest date in the model scope
+        -- 模型范围内的最晚日期
         VAR _LatestDate_Safe    = DATE ( YEAR ( _Refdate ) + 2, 12, 1 )
         
         ------------------------------------------
-        -- Base calendar table
+        -- 基础日历表
         VAR _Base_Calendar      = CALENDAR ( _EarliestDate_Safe, _LatestDate_Safe )
         ------------------------------------------
         
@@ -258,7 +262,7 @@ try
         RETURN 
             _Result";
         
-        // Create date table
+        // 创建日期表
         var _date = Model.AddCalculatedTable(
             "Date",
             _DateDaxExpression
@@ -266,39 +270,39 @@ try
         
         //-------------------------------------------------------------------------------------------//
         
-        // Sort by...
+        // 设置排序依据...
         
-        // Sort Weekdays
+        // 排序：星期
         (_date.Columns["Weekday Name (i.e. Monday)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Weekday Number EU (i.e. 1)"] as CalculatedTableColumn);
         (_date.Columns["Weekday Short (i.e. Mon)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Weekday Number EU (i.e. 1)"] as CalculatedTableColumn);
         
-        // Sort Weeks
+        // 排序：周
         (_date.Columns["Calendar Week EU (ie WK25)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Week Number EU (ie 25)"] as CalculatedTableColumn);
         (_date.Columns["Calendar Week ISO (ie WK25)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Week Number ISO (ie 25)"] as CalculatedTableColumn);
         (_date.Columns["Calendar Week US (ie WK25)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Week Number US (ie 25)"] as CalculatedTableColumn);
         
-        // Sort Months
+        // 排序：月
         (_date.Columns["Calendar Month (ie Jan)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Month # (ie 1)"] as CalculatedTableColumn);
         (_date.Columns["Calendar Month Day (i.e. Jan 05)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Month Day (i.e. 0105)"] as CalculatedTableColumn);
         (_date.Columns["Calendar Month Year (ie Jan 21)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Year Month (ie 202101)"] as CalculatedTableColumn);
         
-        // Sort Quarters
+        // 排序：季度
         (_date.Columns["Calendar Quarter Year (ie Q1 2021)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Year Quarter (ie 202101)"] as CalculatedTableColumn);
         
-        // Sort Years
+        // 排序：年
         (_date.Columns["Calendar Year (ie 2021)"] as CalculatedTableColumn).SortByColumn = (_date.Columns["Calendar Year Number (ie 2021)"] as CalculatedTableColumn);
         
         
         //-------------------------------------------------------------------------------------------//
         
         
-        // For all the columns in the date table:
+        // 针对日期表中的所有列：
         foreach (var c in _date.Columns )
         {
         c.DisplayFolder = "7. Boolean Fields";
         c.IsHidden = true;
         
-        // Organize the date table into folders
+        // 将日期表整理到文件夹中
             if ( ( c.DataType == DataType.DateTime & c.Name.Contains("Date") ) )
                 {
                 c.DisplayFolder = "6. Calendar Date";
@@ -344,17 +348,17 @@ try
         
         }
         
-        // Mark as date table
+        // 标记为日期表格
         _date.DataCategory = "Time";
         
         
         //-------------------------------------------------------------------------------------------//
         
         
-        // Create Workdays MTD, QTD, YTD logic 
-        //      (separate into measures & calc. column to be easier to maintain)
+        // 创建 Workdays MTD、QTD、YTD 的逻辑
+        //      (拆分为度量值和计算列，便于维护)
         //
-        // Add calculated columns for Workdays MTD, QTD, YTD
+        // 添加 Workdays MTD、QTD、YTD 的计算列
         
         string _WorkdaysDax = @"VAR _Holidays =
             CALCULATETABLE (
@@ -406,7 +410,7 @@ try
         //-------------------------------------------------------------------------------------------//
         
         
-        // Create measures for showing how many workdays passed
+        // 创建用于显示已过去多少个工作日的度量值
         _WorkdaysDax = @"CALCULATE(
             MAX( 'Date'[Workdays MTD] ),
             'Date'[IsDateInScope] = TRUE
@@ -430,7 +434,7 @@ try
             "5. Weekday / Workday\\Measures\\# Workdays"
         );
         
-        // Create measures showing how many workdays are in the selected period
+        // 创建用于显示所选期间内包含多少个工作日的度量值
         
         _WorkdaysDax = @"IF (
             HASONEVALUE ('Date'[Calendar Month Year (ie Jan 21)]),
@@ -459,7 +463,7 @@ try
         );
         
         
-        // Create measures showing how many workdays passed as a %
+        // 创建用于显示已过去工作日占比的度量值
         
         _WorkdaysDax = @"IF (
             HASONEVALUE ('Date'[Calendar Month Year (ie Jan 21)]),
@@ -491,7 +495,7 @@ try
         //-------------------------------------------------------------------------------------------//
         
         
-        // Move the reference measure to the newly created 'Date' table.
+        // 将参考度量值移到新创建的 'Date' 表。
         _RefDateMeasure.Delete();
         _RefDateMeasure = Model.Tables["Date"].AddMeasure(
             "RefDate",
@@ -501,41 +505,39 @@ try
         
         _RefDateMeasure.IsHidden = true;
         
-        Info ( "Created a new, organized 'Date' table based on the template in the C# Script.\nThe Earliest Date is taken from " + _EarliestDate + "\nThe Latest Date is taken from " + _LatestDate );
+        Info ( "已根据 C# Script 中的模板创建并整理新的 'Date' 表。\n最早日期取自 " + _EarliestDate + "\n最晚日期取自 " + _LatestDate );
     
         }
         catch
         {
-            Error( "Latest column not selected! Ending script without making changes." );
+            Error( "未选择最晚日期列！脚本结束，不做任何更改。" );
         }
 }
 catch
 {
-    Error( "Earliest column not selected! Ending script without making changes." );
+    Error( "未选择最早日期列！脚本结束，不做任何更改。" );
 }
 
 ```
-### Explanation
-This snippet takes the selected columns and creates a measure to highlight the maximum date for reporting. It then creates a formatted Date table with common columns used for reporting. The date table only contains calendar dates and not fiscal periods.
 
-## Example Output
+### 说明
+
+此代码段会获取你所选的列，并创建一个度量值，用于在 Report 中显示最大日期。 随后会创建一张格式化的 Date 表，其中包含用于制作 Report 的常用列。 该日期表仅包含日历日期，不包含财务期间。
+
+## 示例输出
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-earliest-date.png" alt="Select Earliest date dialog" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> When running the script, a dialog will appear which prompts you to select a DateTime column from the model that contains the earliest date for which you want to configure your Date table.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-earliest-date.png" alt="Select Earliest date dialog" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图1：</strong>运行脚本时，会弹出一个对话框，提示您从模型中选择一个包含最早日期的 DateTime 列，以便配置日期表。</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-latest-date.png" alt="Select Latest date dialog" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong>  Once selecting the earliest date, a dialog will appear which prompts you to select a DateTime column from the model that contains the latest date for which you want to configure your Date table.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-latest-date.png" alt="Select Latest date dialog" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图2：</strong>选择最早日期后，会弹出一个对话框，提示您从模型中选择一个包含最晚日期的 DateTime 列，以便配置日期表。</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-confirmation.png" alt="Confirmation of the date table being created" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> A confirmation dialog will inform you that the Date table was configured successfully based on the two selected dates.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-confirmation.png" alt="Confirmation of the date table being created" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图3：</strong>确认对话框将告知您，日期表已基于所选的两个日期成功配置。</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table.png" alt="Resulting Date Table Template" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> An example of an organized, configured date table created with a single click using this script.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table.png" alt="Resulting Date Table Template" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图4：</strong>使用此脚本一键创建的、结构清晰且已配置完成的日期表示例。</figcaption>
 </figure>

@@ -1,86 +1,86 @@
 ---
 uid: kb.bpa-powerbi-latest-compatibility
-title: Use Latest Compatibility Level for Power BI Models
+title: Usar el nivel de compatibilidad más reciente para los modelos de Power BI
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring Power BI models use the latest compatibility level for optimal features and performance.
+description: Regla de buenas prácticas que garantiza que los modelos de Power BI usen el nivel de compatibilidad más reciente para obtener funciones y rendimiento óptimos.
 ---
 
-# Use Latest Compatibility Level for Power BI Models
+# Usar el nivel de compatibilidad más reciente para los modelos de Power BI
 
-## Overview
+## Resumen
 
-This rule identifies Power BI models not using the latest available compatibility level. Using the latest level ensures access to newest features, performance optimizations, and bug fixes.
+Esta regla identifica los modelos de Power BI que no están usando el nivel de compatibilidad más reciente disponible. Usar el nivel más reciente garantiza el acceso a las funciones más nuevas, optimizaciones de rendimiento y correcciones de errores.
 
-- Category: Governance
-- Severity: High (3)
+- Categoría: Gobernanza
+- Gravedad: Alta (3)
 
-## Applies To
+## Se aplica a
 
-- Model (Power BI semantic models only)
+- Modelo (solo modelos semánticos de Power BI)
 
-## Why This Matters
+## Por qué es importante
 
-- **Missing features**: New DAX functions and model capabilities unavailable
-- **Future compatibility**: Easier upgrades when using recent levels
+- **Funciones ausentes**: nuevas funciones de DAX y capacidades del modelo no disponibles
+- **Compatibilidad futura**: actualizaciones más sencillas al usar niveles recientes
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-For Power BI models, triggers when compatibility level is below current maximum:
+En los modelos de Power BI, se activa cuando el nivel de compatibilidad está por debajo del máximo actual:
 
 ```csharp
 Model.Database.CompatibilityMode=="PowerBI" 
 and Model.Database.CompatibilityLevel<>[CurrentMaxLevel]
 ```
 
-## How to Fix
+## Cómo corregirlo
 
-### Automatic Fix
+### Corrección automática
 
-The best practice rule includes an automatic fix that sets the Compatibility Level to the highest available that exists on the current installation of Tabular Editor 3. If you have an older version of Tabular Editor 3 installed you should update your installation. 
+La regla de prácticas recomendadas incluye una corrección automática que establece el nivel de compatibilidad en el nivel más alto disponible en la instalación actual de Tabular Editor 3. Si tienes instalada una versión antigua de Tabular Editor 3, deberías actualizarla.
 
 ```csharp
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
 ```
 
-### Manual Fix
+### Corrección manual
 
-1. In Tabular Editor, go to **Model** properties
-2. Set **Compatibility Level** to the latest version
-3. Test all DAX expressions and features
-4. Deploy to Power BI Service
+1. En Tabular Editor, ve a las propiedades de **Model**
+2. Establece el **nivel de compatibilidad** en el nivel más reciente disponible
+3. Prueba todas las expresiones y funcionalidades de DAX
+4. Implementa en el servicio Power BI
 
-## Common Causes
+## Causas habituales
 
-### Cause 1: Model Created in Power BI Desktop
+### Causa 1: Modelo creado en Power BI Desktop
 
-Model created with in Power BI Desktop does not necessarily have the latest Compatibility Level. 
+Un modelo creado en Power BI Desktop no necesariamente tiene el nivel de compatibilidad más reciente.
 
-### Cause 2: Model Created at Lower Level
+### Causa 2: Modelo creado con un nivel de compatibilidad inferior
 
-Model created with older version of Power BI Desktop.
+Modelo creado con una versión anterior de Power BI Desktop.
 
-### Cause 3: Conservative Approach
+### Causa 3: Enfoque conservador
 
-Team policy to delay upgrades.
+Política del equipo: retrasar las actualizaciones.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Model Compatibility Level: 1500
-Current Maximum Level: 1700
-```
-
-### After Fix
+### Antes de la corrección
 
 ```
-Model Compatibility Level: 1700 (Latest)
+Nivel de compatibilidad del modelo: 1500
+Nivel máximo actual: 1700
 ```
 
-Access to new features like enhanced calculation groups and field parameters.
+### Después de la corrección
 
-## Compatibility Level
+```
+Nivel de compatibilidad del modelo: 1700 (la más reciente)
+```
 
-This rule applies to Power BI models at all compatibility levels.
+Acceso a nuevas funcionalidades, como grupos de cálculo mejorados y parámetros de campo.
+
+## Nivel de compatibilidad
+
+Esta regla se aplica a los modelos de Power BI en todos los niveles de compatibilidad.

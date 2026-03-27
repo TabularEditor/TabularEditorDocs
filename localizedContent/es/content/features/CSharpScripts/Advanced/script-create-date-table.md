@@ -1,6 +1,6 @@
 ---
 uid: script-create-date-table
-title: Create Date Table
+title: Crear tabla de fechas
 author: Kurt Buhler
 updated: 2023-02-28
 applies_to:
@@ -10,23 +10,27 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Create a Date Table
 
-## Script Purpose
-You can use this script to create a new, organized and configured date table based on 1-2 selected date columns in the model.
-The first selected column should be the earliest date and the second selected column should be the latest date. Both should be selected before running the script / macro.
+# Crear una tabla de fechas
 
-This script will create the below objects in the model:
-1. A measure `[RefDate]`, which will have the latest date in the model scope; i.e. last day of sales. You can adjust this measure manually and re-process the date table to re-generate it based on a different reference date (i.e. if you want to change it to TODAY() or add a filter)
-2. The `'Date'` table - The table can be configured in a separate DAX Query window and copied back into the script if you have other requirements.
-   - All columns will be organized in display folders
-   - Column properties like Sort By will be set
+## Propósito del script
 
-This script does not yet create model relationships between the created date table and date fields in your model.
+Puedes usar este script para crear una tabla de fechas nueva, organizada y configurada, a partir de 1-2 columnas de fecha seleccionadas en el modelo.
+La primera columna seleccionada debe contener la fecha más antigua y la segunda, la fecha más reciente. Ambas deben estar seleccionadas antes de ejecutar el script o la macro.
+
+Este script creará los siguientes objetos en el modelo:
+
+1. Una medida `[RefDate]`, que tendrá la fecha más reciente en el ámbito del modelo; es decir, el último día de ventas. Puedes ajustar esta medida manualmente y volver a procesar la tabla de fechas para regenerarla en función de una fecha de referencia diferente (es decir, si quieres cambiarla por TODAY() o agregar un filtro)
+2. La tabla `'Date'`: la tabla se puede configurar en una ventana de Consulta DAX independiente y copiarse de nuevo en el script si tienes otros requisitos.
+   - Todas las columnas se organizarán en carpetas de visualización
+   - Se establecerán propiedades de columna como Ordenar por
+
+Este script aún no crea relaciones de modelo entre la tabla de fechas creada y los campos de fecha de tu modelo.
 
 ## Script
 
-### Create Date Table
+### Crear tabla de fechas
+
 ```csharp
 // To use this C# Script:
 //
@@ -515,27 +519,25 @@ catch
 }
 
 ```
-### Explanation
-This snippet takes the selected columns and creates a measure to highlight the maximum date for reporting. It then creates a formatted Date table with common columns used for reporting. The date table only contains calendar dates and not fiscal periods.
 
-## Example Output
+### Explicación
+
+Este fragmento toma las columnas seleccionadas y crea una medida para resaltar la fecha máxima para los informes. Después, crea una tabla Date con formato con las columnas comunes que se usan para los informes. La tabla de fechas solo contiene fechas del calendario, no períodos fiscales.
+
+## Salida de ejemplo
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-earliest-date.png" alt="Select Earliest date dialog" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> When running the script, a dialog will appear which prompts you to select a DateTime column from the model that contains the earliest date for which you want to configure your Date table.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-earliest-date.png" alt="Select Earliest date dialog" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Al ejecutar el script, aparecerá un cuadro de diálogo que le pedirá que seleccione una columna DateTime del modelo que contenga la fecha más antigua para la que desea configurar su tabla de fechas.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-latest-date.png" alt="Select Latest date dialog" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong>  Once selecting the earliest date, a dialog will appear which prompts you to select a DateTime column from the model that contains the latest date for which you want to configure your Date table.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-select-latest-date.png" alt="Select Latest date dialog" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Una vez seleccionada la fecha más antigua, aparecerá un cuadro de diálogo que le pedirá que seleccione una columna DateTime del modelo que contenga la fecha más reciente para la que desea configurar su tabla de fechas.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-confirmation.png" alt="Confirmation of the date table being created" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 3:</strong> A confirmation dialog will inform you that the Date table was configured successfully based on the two selected dates.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table-confirmation.png" alt="Confirmation of the date table being created" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 3:</strong> Un cuadro de diálogo de confirmación le informará de que la tabla de fechas se configuró correctamente en función de las dos fechas seleccionadas.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table.png" alt="Resulting Date Table Template" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> An example of an organized, configured date table created with a single click using this script.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-date-table.png" alt="Resulting Date Table Template" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 4:</strong> Ejemplo de una tabla de fechas organizada y configurada, creada con un solo clic mediante este script.</figcaption>
 </figure>

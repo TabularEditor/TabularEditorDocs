@@ -1,35 +1,35 @@
 ---
 uid: kb.bpa-format-string-measures
-title: Provide Format String for Measures
+title: Proporcionar una cadena de formato a las medidas
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring visible measures have appropriate format strings for consistent display.
+description: Regla de mejores prácticas que garantiza que las medidas visibles tengan cadenas de formato adecuadas para una visualización coherente.
 ---
 
-# Provide Format String for Measures
+# Proporcionar una cadena de formato a las medidas
 
-## Overview
+## Información general
 
-This best practice rule identifies visible measures with numeric or date data types that lack format strings. All measures should have explicit format strings for professional, consistent display.
+Esta regla de mejores prácticas identifica las medidas visibles con tipos de datos numéricos o de fecha que no tienen una cadena de formato. Todas las medidas deben tener cadenas de formato explícitas para una visualización profesional y coherente.
 
-- Category: Formatting
+- Categoría: Formato
 
-- Severity: Medium (2)
+- Gravedad: Media (2)
 
-## Applies To
+## Se aplica a
 
-- Measures
+- Medidas
 
-## Why This Matters
+## Por qué es importante
 
-Measures without format strings display raw values, causing user confusion and inconsistent reporting. Format strings ensure:
+Las medidas sin cadenas de formato muestran valores sin procesar, lo que genera confusión entre los usuarios y Reports incoherentes. Las cadenas de formato garantizan:
 
-- **Professional appearance**: Values display with appropriate currency, percentage, or number formatting
-- **Consistency**: All reports show values in the same format
-- **User confidence**: Properly formatted numbers are easier to read and interpret
-- **Business alignment**: Formatting matches corporate standards
+- **Aspecto profesional**: Los valores se muestran con el formato adecuado de moneda, porcentaje o número
+- **Coherencia**: Todos los Reports muestran los valores con el mismo formato
+- **Confianza del usuario**: Los números con el formato correcto son más fáciles de leer e interpretar
+- **Alineación con el negocio**: El formato coincide con los estándares corporativos
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
 ```csharp
 IsVisible
@@ -37,69 +37,69 @@ and string.IsNullOrWhitespace(FormatString)
 and (DataType = "Int64" or DataType = "DateTime" or DataType = "Double" or DataType = "Decimal")
 ```
 
-## How to Fix
+## Cómo solucionarlo
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, select the measure
-2. In **Properties** pane, locate the **Format String** field
-3. Enter an appropriate format string based on what the measure calculates
-4. Save changes
+1. En el **Explorador TOM**, seleccione la medida
+2. En el panel de **Propiedades**, busca el campo **Cadena de formato**
+3. Escribe una cadena de formato adecuada en función de lo que calcule la medida
+4. Guarda los cambios
 
-### Common Format Patterns
+### Patrones de formato habituales
 
 ```dax
-Total Revenue = 
+Ingresos totales = 
 SUM('Sales'[Amount])
-// Format String: "$#,0"
+// Cadena de formato: "$#,0"
 
-Average Price = 
+Precio promedio = 
 AVERAGE('Sales'[UnitPrice])
-// Format String: "$#,0.00"
+// Cadena de formato: "$#,0,00"
 
-YoY Growth = 
+Crecimiento interanual = 
 DIVIDE([This Year] - [Last Year], [Last Year], 0)
-// Format String: "0.0%"
+// Cadena de formato: "0,0%"
 
-Order Count = 
+Recuento de pedidos = 
 COUNTROWS('Orders')
-// Format String: "#,0"
+// Cadena de formato: "#,0"
 ```
 
-## Common Causes
+## Causas habituales
 
-### Cause 1: Missing Format Definition
+### Causa 1: Falta la definición de formato
 
-When creating a new measure the default state is to not have any format string set.
+Al crear una nueva medida, de forma predeterminada no se establece ninguna cadena de formato.
 
-### Cause 2: Copy/Paste from Calculated Columns
+### Causa 2: Copiar y pegar desde columnas calculadas
 
-Copying measures from columns that don't require format strings.
+Copia de medidas desde columnas que no requieren cadenas de formato.
 
-## Example
+## Ejemplo
 
-### Before Fix
+### Antes de la corrección
 
 ```dax
 Total Revenue = SUM('Sales'[Amount])
-// No Format String
+// Sin cadena de formato
 ```
 
-**Display**: 1234567.89 (hard to read, no currency symbol)
+**Visualización**: 1234567.89 (difícil de leer, sin símbolo de moneda)
 
-### After Fix
+### Después de la corrección
 
 ```dax
 Total Revenue = SUM('Sales'[Amount])
-// Format String: "$#,0"
+// Cadena de formato: "$#,0"
 ```
 
-**Display**: $1,234,568 (clear, professional formatting)
+**Visualización**: $1.234.568 (formato claro y profesional)
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Format String for Columns](xref:kb.bpa-format-string-columns) - Similar validation for columns
+- [Cadena de formato para columnas](xref:kb.bpa-format-string-columns) - Validación similar para las columnas

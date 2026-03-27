@@ -1,93 +1,94 @@
 ---
 uid: kb.bpa-data-column-source
-title: Data Column Must Have Source
+title: La columna de datos debe tener una columna de origen
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring data columns have a valid source column mapping to prevent refresh errors.
+description: Regla de mejores prácticas que garantiza que las columnas de datos tengan una asignación válida a una columna de origen para evitar errores de actualización.
 ---
 
-# Data Column Must Have Source
+# La columna de datos debe tener una columna de origen
 
-## Overview
+## Descripción general
 
-This best practice rule identifies data columns that lack a valid `SourceColumn` property. Every data column must reference a source column from the underlying data source to function correctly during refresh.
+Esta regla de mejores prácticas identifica las columnas de datos que no tienen una propiedad `SourceColumn` válida. Cada columna de datos debe hacer referencia a una columna de origen en el Data source subyacente para funcionar correctamente durante la actualización.
 
-- Category: Error Prevention
-- Severity: High (3)
+- Categoría: Prevención de errores
+- Gravedad: Alta (3)
 
-## Applies To
+## Se aplica a
 
-- Data Columns
+- Columnas de datos
 
-## Why This Matters
+## Por qué es importante
 
-- **Refresh failures**: Data refresh operations fail with column not found errors
-- **Deployment issues**: Model validation fails in Power BI Service or Analysis Services
-- **Data integrity**: Column remains empty or contains stale data
-- **Broken dependencies**: Measures and relationships produce incorrect results
+- **Fallos de actualización**: Las operaciones de actualización de datos fallan con errores de "columna no encontrada"
+- **Problemas de implementación**: La validación del modelo falla en Power BI Service o Analysis Services
+- **Integridad de datos**: La columna permanece vacía o contiene datos desactualizados
+- **Dependencias rotas**: Las medidas y las relaciones producen resultados incorrectos
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-The rule triggers when a data column has:
+La regla se activa cuando una columna de datos tiene:
 
 ```csharp
 string.IsNullOrWhitespace(SourceColumn)
 ```
 
-## How to Fix
+## Cómo corregirlo
 
-### Manual Fix
+### Corrección manual
 
-1. In **TOM Explorer**, locate the flagged data column
-2. In **Properties** pane, find the `Source Column` property
-3. Enter the correct source column name from your data source query
-4. Verify the mapping matches the partition query
+1. En el **Explorador TOM**, localiza la columna de datos marcada
+2. En el panel de **Propiedades**, busca la propiedad `Source Column`
+3. Especifica el nombre correcto de la columna de origen en la consulta de tu Data source
+4. Comprueba que la asignación coincida con la consulta de la partición
 
-The source column name must exactly match:
-- For Power Query: Column name in M expression output
-- For SQL: Column name or alias in SELECT statement
-- For Direct Lake: Column name in Delta Lake table
+El nombre de la columna de origen debe coincidir exactamente con:
 
-## Common Causes
+- Para Power Query: nombre de la columna en la salida de la expresión M
+- Para SQL: nombre de la columna o alias en la instrucción SELECT
+- Para Direct Lake: nombre de la columna en la tabla de Delta Lake
 
-### Cause 1: Renamed Source Column
+## Causas habituales
 
-Source query was modified and column renamed.
+### Causa 1: Columna de origen con nombre cambiado
 
-### Cause 2: Manual Column Creation
+Se modificó la consulta de origen y se renombró la columna.
 
-Column created manually without specifying source.
+### Causa 2: Creación manual de columnas
 
-### Cause 3: Copy/Paste Corruption
+La columna se creó manualmente sin especificar el origen.
 
-Columns copied from another table without preserving metadata.
+### Causa 3: Corrupción al copiar y pegar
 
-## Example
+Se copiaron columnas de otra tabla sin conservar los metadatos.
 
-### Before Fix
+## Ejemplo
+
+### Antes de corregir
 
 ```
-Table: Sales
-Column: ProductName (DataColumn)
+Tabla: Sales
+Columna: ProductName (DataColumn)
   SourceColumn: [empty]
 ```
 
-Result: Refresh fails with "Column 'ProductName' not found in source query"
+Resultado: la actualización falla con "No se encuentra la columna 'ProductName' en la consulta de origen"
 
-### After Fix
+### Después de corregir
 
 ```
-Table: Sales
-Column: ProductName (DataColumn)
+Tabla: Sales
+Columna: ProductName (DataColumn)
   SourceColumn: ProductName
 ```
 
-Result: Column populates correctly during refresh
+Resultado: la columna se carga correctamente durante la actualización
 
-## Compatibility Level
+## Nivel de compatibilidad
 
-This rule applies to models with compatibility level **1200** and higher.
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** o superior.
 
-## Related Rules
+## Reglas relacionadas
 
-- [Expression Required for Calculated Objects](xref:kb.bpa-expression-required) - Ensuring calculated columns have expressions
+- [Expresión obligatoria para objetos calculados](xref:kb.bpa-expression-required) - Garantiza que las columnas calculadas tengan expresiones

@@ -1,6 +1,6 @@
 ---
 uid: detail-rows-expression
-title: Detail Rows Expression
+title: 明细行表达式
 author: Just Blindbæk
 updated: 2026-02-15
 applies_to:
@@ -16,64 +16,65 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Implementing Detail Rows Expressions
 
-When a user double-clicks a value in an Excel PivotTable connected to a Power BI or Analysis Services model, they trigger a **drillthrough** — a sheet opens showing the underlying rows behind that aggregated value. By default, the model returns all columns from the measure's host table, which is rarely useful for end users.
+# 实现明细行表达式
 
-A **Detail Rows Expression** lets you define exactly which columns appear in that drillthrough result. You write a DAX table expression that returns the shape of data you want the consumer to see — combining columns from the fact table with related attributes from dimension tables.
+当用户在连接到 Power BI 或 Analysis Services 模型的 Excel 数据透视表中双击某个值时，会触发 **钻取** 操作——系统会打开一个工作表，显示该汇总值背后的底层明细行。 默认情况下，模型会返回该度量值所在表中的所有列，这对最终用户通常没有太大帮助。
 
-It is also worth noting that while an Excel PivotTable normally queries the model using MDX, a double-click drillthrough action is executed as a **DAX query**. This makes Detail Rows Expressions particularly effective for retrieving high-cardinality data — such as transaction IDs or individual order lines — where DAX significantly outperforms MDX.
+**明细行表达式**可让你精确定义钻取结果中显示哪些列。 你需要编写一个 DAX 表表达式，返回你希望用户看到的数据形状——把事实表中的列与维度表中的相关属性组合在一起。
 
-In this tutorial, you configure a **table-level** Detail Rows Expression on the `Orders` table, so the same friendly drillthrough result applies to all measures on that table. You then see how to override it for a specific measure.
+另外值得注意的是：虽然 Excel 数据透视表通常使用 MDX 查询模型，但双击触发的钻取操作会以 **DAX 查询** 的形式执行。 因此，明细行表达式在获取高基数数据 — 例如交易 ID 或单条订单行 — 时尤其有效，因为在这类场景下 DAX 的性能明显优于 MDX。
+
+在本教程中，你将在 `Orders` 表上配置一个**表级**的明细行表达式，使该表上的所有度量值都使用同一套更友好的钻取结果。 然后，你会看到如何为某个特定度量值覆盖该设置。
 
 > [!NOTE]
-> The steps in this tutorial apply to both Tabular Editor 2 and Tabular Editor 3. Screenshots show Tabular Editor 3.
+> 本教程中的步骤同时适用于 Tabular Editor 2 和 Tabular Editor 3。 屏幕截图以 Tabular Editor 3 为例。
 
-## Prerequisites
+## 先决条件
 
-Before you begin, you should have:
+开始之前，你需要具备：
 
-- Tabular Editor 2 or Tabular Editor 3
-- A semantic model with at least one table containing measures
-- Basic familiarity with DAX
-- Excel connected to your model to test drillthrough
+- Tabular Editor 2 或 Tabular Editor 3
+- 一个语义模型，其中至少有一张表包含度量值
+- 对 DAX 有基本了解
+- 将 Excel 连接到模型以测试钻取功能
 
-## Default Drillthrough Behavior
+## 默认钻取行为
 
-Before adding a Detail Rows Expression, it helps to see what end users experience by default.
+在添加“详细信息行表达式”之前，先了解最终用户默认会看到的内容会很有帮助。
 
-When a user double-clicks an aggregated value in a PivotTable, the model returns all columns from the fact table — using raw internal column names, with no dimension attributes and no control over which columns are shown.
+当用户在数据透视表中双击某个聚合值时，模型会返回事实表中的所有列——使用未经处理的内部列名，不包含任何维度属性，也无法控制显示哪些列。
 
-![Default drillthrough result in Excel showing raw, unformatted column names from the fact table](../assets/images/tutorials/detail-rows-expression/default-drillthrough.jpg)
+![Excel 中的默认钻取结果，显示来自事实表的原始、未格式化列名](../assets/images/tutorials/detail-rows-expression/default-drillthrough.jpg)
 
-The result is technically correct, but not useful: internal column names are exposed, related dimension attributes such as product names and customer accounts are missing, and there is no control over column order or selection.
+这个结果在技术上是正确的，但并不实用：内部列名被直接暴露；产品名称、客户账号等相关维度属性缺失；也无法控制列的顺序或取舍。
 
-## Table-Level vs. Measure-Level Detail Rows Expressions
+## 表级与度量值级的详细信息行表达式
 
-A Detail Rows Expression can be defined at two levels:
+详细信息行表达式可以在两个层级定义：
 
-| Level | Property name | Scope |
-|---|---|---|
-| **Table** | Default Detail Rows Expression | Applies to all measures on the table |
-| **Measure** | Detail Rows Expression | Applies to that measure only; overrides the table-level expression |
+| 级别      | 属性名称       | 作用范围             |
+| ------- | ---------- | ---------------- |
+| **表**   | 默认详细信息行表达式 | 适用于该表上的所有度量值     |
+| **度量值** | 详细信息行表达式   | 仅应用于该度量值；覆盖表级表达式 |
 
-Starting with a table-level expression is the most practical approach — one expression covers every measure on the table. If a specific measure requires different detail columns, you can override it with a measure-level expression, which takes precedence.
+从表级表达式入手最实用——一条表达式就能覆盖该表上的每个度量值。 如果某个特定度量值需要不同的明细列，你可以用度量值级表达式来覆盖它，且该表达式具有更高优先级。
 
-## Creating a Table-Level Detail Rows Expression
+## 创建表级详细信息行表达式
 
-### Step 1: Select the table and locate the property
+### 步骤 1：选择表并定位该属性
 
-In the **TOM Explorer**, select the table you want to configure — in this case, the `Orders` table. In the **Properties** panel, find the **Default Detail Rows Expression** field under the **Options** group.
+在 **TOM Explorer** 中，选择你要配置的表——本例中是 `Orders` 表。 在 **Properties** 面板中，在 **Options** 组下找到 **Default Detail Rows Expression** 字段。
 
-![The Orders table selected in TOM Explorer, with the Default Detail Rows Expression property visible and empty in the Properties panel](../assets/images/tutorials/detail-rows-expression/tom-and-default-detail-rows-expression-field.jpg)
+![在 TOM Explorer 中选中 Orders 表，Properties 面板中可见且为空的 Default Detail Rows Expression 属性](../assets/images/tutorials/detail-rows-expression/tom-and-default-detail-rows-expression-field.jpg)
 
-### Step 2: Open the Expression Editor
+### 步骤 2：打开表达式编辑器
 
-Click the **Default Detail Rows Expression** field to open it in the **Expression Editor**.
+单击 **Default Detail Rows Expression** 字段，在 **表达式编辑器** 中将其打开。
 
-### Step 3: Write the SELECTCOLUMNS expression
+### 步骤 3：编写 SELECTCOLUMNS 表达式
 
-Enter a DAX expression using `SELECTCOLUMNS` to define the columns to return. Use `RELATED()` to bring in columns from dimension tables.
+输入一个使用 `SELECTCOLUMNS` 的 DAX 表达式，用来定义要返回的列。 使用 `RELATED()` 引入来自维度表的列。
 
 ```dax
 SELECTCOLUMNS(
@@ -87,39 +88,39 @@ SELECTCOLUMNS(
 )
 ```
 
-![The SELECTCOLUMNS expression entered in the Expression Editor, targeting the Orders table](../assets/images/tutorials/detail-rows-expression/expression-editor.jpg)
+![在表达式编辑器中输入的 SELECTCOLUMNS 表达式，目标为 Orders 表](../assets/images/tutorials/detail-rows-expression/expression-editor.jpg)
 
-`SELECTCOLUMNS` takes the source table as its first argument, followed by pairs of `"Column Name", expression`:
+`SELECTCOLUMNS` 将源表作为第一个参数，后面跟着成对的 `"列名", 表达式`：
 
-- Columns from the `Orders` fact table are referenced directly: `Orders[Order Date]`, `Orders[Sales Order Document Number]`
-- Columns from related dimension tables are retrieved using `RELATED()`: `Products[Product Name]`, `Customers[Account Name]`
-- Measures can also be included: `[Quantity]`, `[Value]`
+- 来自 `Orders` 事实表的列可直接引用：`Orders[Order Date]`、`Orders[Sales Order Document Number]`
+- 通过 `RELATED()` 获取相关维度表中的列：`Products[Product Name]`、`Customers[Account Name]`
+- 也可以包含度量值：`[Quantity]`、`[Value]`
 
 > [!NOTE]
-> `RELATED()` works here because `SELECTCOLUMNS` iterates over rows of the `Orders` table, giving each row a row context that allows navigation to related tables via existing relationships.
+> `RELATED()` 在这里之所以可用，是因为 `SELECTCOLUMNS` 会迭代 `Orders` 表的各行，为每一行提供行语境，从而可通过现有关系导航到相关表。
 
 > [!TIP]
-> While `SELECTCOLUMNS` is the standard pattern, any valid DAX table expression can be used. For example, you can wrap the expression in `CALCULATETABLE` to apply additional filters, use `ADDCOLUMNS` to include derived values, or call `DETAILROWS` to reuse another measure's Detail Rows Expression and avoid duplication.
+> 虽然 `SELECTCOLUMNS` 是标准模式，但你也可以用任何有效的 DAX 表表达式。 例如，你可以用 `CALCULATETABLE` 将该表达式包起来以应用额外筛选，用 `ADDCOLUMNS` 添加派生值，或调用 `DETAILROWS` 复用其他度量值的 Detail Rows Expression，以避免重复编写。
 
-### Step 4: Save the model
+### 步骤 4：保存模型
 
-Save with **Ctrl+S** and deploy or publish the model to your target environment.
+按 **Ctrl+S** 保存，然后将模型部署或发布到目标环境。
 
-## Testing the Result
+## 测试结果
 
-Open or refresh your Excel PivotTable and double-click any aggregated value. The drillthrough sheet now shows the columns you defined — with friendly names and dimension attributes included.
+打开或刷新 Excel 数据透视表，然后双击任意汇总值。 现在，下钻明细工作表会显示你定义的列——以更友好的名称呈现，并包含维度属性。
 
-![Drillthrough result in Excel showing the custom columns defined in the Detail Rows Expression](../assets/images/tutorials/detail-rows-expression/dre-drillthrough.jpg)
+![Excel 中的下钻明细结果，显示在 Detail Rows Expression 中定义的自定义列](../assets/images/tutorials/detail-rows-expression/dre-drillthrough.jpg)
 
-Compare this to the default result: instead of raw internal column names, users see meaningful headers and values pulled from related dimension tables.
+对比默认结果：用户看到的是有意义的标题，而不是内部的原始列名；同时还会显示从相关维度表中获取的值。
 
-## Overriding with a Measure-Level Expression
+## 用度量值级别的表达式进行覆盖
 
-If a specific measure requires a different set of detail columns, you can define a **Detail Rows Expression** directly on that measure. This overrides the table-level expression for that measure only.
+如果某个特定度量值需要不同的一组明细列，你可以直接在该度量值上定义 **Detail Rows Expression**。 这会仅对该度量值生效，从而覆盖表级表达式。
 
-1. In the **TOM Explorer**, expand the table and select the measure — for example, `Quantity` under `Orders`.
-2. In the **Properties** panel, find the **Detail Rows Expression** field.
-3. Enter a `SELECTCOLUMNS` expression tailored to that measure.
+1. 在 **TOM Explorer** 中，展开表并选择该度量值——例如 `Orders` 下的 `Quantity`。
+2. 在 **Properties** 面板中，找到 **Detail Rows Expression** 字段。
+3. 输入一个为该度量值量身定制的 `SELECTCOLUMNS` 表达式。
 
 ```dax
 SELECTCOLUMNS(
@@ -135,24 +136,24 @@ SELECTCOLUMNS(
 )
 ```
 
-![A measure-specific Detail Rows Expression defined on the Quantity measure, visible in both the Expression Editor and the Properties panel](../assets/images/tutorials/detail-rows-expression/specific-detail-rows-expression.jpg)
+![在 Quantity 度量值上定义的度量值专用 Detail Rows Expression，可在“表达式编辑器”和“属性”面板中看到](../assets/images/tutorials/detail-rows-expression/specific-detail-rows-expression.jpg)
 
-When a client tool requests drillthrough for this measure, the measure-level expression is used instead of the table default.
+当客户端工具对该度量值发起钻取明细请求时，将使用度量值级表达式，而不是表级默认表达式。
 
-## Troubleshooting
+## 故障排除
 
-**Drillthrough still shows raw columns**
-The model may not have been saved and deployed after adding the expression. Save the model, redeploy, and reconnect Excel before testing.
+**钻取仍显示原始列**
+添加表达式后，模型可能尚未保存并重新部署。 保存模型，重新部署，并在测试前重新连接 Excel。
 
-**Expression not applied to a specific measure**
-If you have defined both a table-level and a measure-level expression, the measure-level takes precedence. Verify which expression is active by selecting the measure in the **Properties** panel and checking the **Detail Rows Expression** field.
+**表达式未应用到特定度量值**
+如果你同时定义了表级和度量值级表达式，则以度量值级为准。 在 **属性** 面板中选中该度量值，然后查看 **Detail Rows Expression** 字段，确认当前生效的是哪个表达式。
 
-**`RELATED()` returns an error**
-`RELATED()` requires an active many-to-one relationship from the source table to the referenced dimension table. Check that the relationship exists and is active in your model.
+**`RELATED()` 返回错误**
+`RELATED()` 需要从源表到所引用维度表存在一条活动的多对一关系。 检查你的模型中该关系是否存在且处于活动状态。
 
-## Further Reading
+## 延伸阅读
 
-- [DAX Guide: SELECTCOLUMNS](https://dax.guide/selectcolumns/)
-- [DAX Guide: RELATED](https://dax.guide/related/)
-- [Microsoft Docs: Detail Rows Expressions](https://learn.microsoft.com/en-us/analysis-services/tabular-models/detail-rows-expressions)
-- [SQLBI: Controlling drillthrough in Excel PivotTables](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)
+- [DAX Guide：SELECTCOLUMNS](https://dax.guide/selectcolumns/)
+- [DAX Guide：RELATED](https://dax.guide/related/)
+- [Microsoft Docs：Detail Rows Expressions](https://learn.microsoft.com/en-us/analysis-services/tabular-models/detail-rows-expressions)
+- [SQLBI：在 Excel 数据透视表中控制钻取](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)

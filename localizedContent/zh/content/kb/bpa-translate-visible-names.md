@@ -1,99 +1,99 @@
 ---
 uid: kb.bpa-translate-visible-names
-title: Translate Visible Object Names for All Cultures
+title: 为所有区域设置翻译可见对象名称
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring visible object names are translated for all defined cultures.
+description: 最佳实践规则：确保为所有已定义的区域设置提供可见对象名称的翻译。
 ---
 
-# Translate Visible Object Names for All Cultures
+# 为所有区域设置翻译可见对象名称
 
-## Overview
+## 概述
 
-This rule identifies visible objects whose names lack translations for one or more cultures defined in the model.
+此规则用于识别在模型中定义的一个或多个区域设置中缺少名称翻译的可见对象。
 
-- Category: Model Layout
-- Severity: Low (1)
+- 类别：模型布局
+- 严重性：低（1）
 
-## Applies To
+## 适用范围
 
-- Tables
-- Measures
-- Hierarchies
-- Data Columns
-- Calculated Columns
-- Calculated Tables
-- Calculated Table Columns
+- 表
+- 度量值
+- 层次结构
+- 数据列
+- 计算列
+- 计算表格
+- 计算表格列
 
-## Why This Matters
+## 为什么这很重要
 
-- **Incomplete localization**: Users in different cultures see untranslated names
-- **Inconsistent experience**: Mix of translated and untranslated content
-- **User confusion**: Expected language support not provided
-- **Professional appearance**: Incomplete translations appear unpolished
+- **本地化不完整**：不同区域设置的用户会看到未翻译的名称
+- **体验不一致**：翻译与未翻译内容混杂
+- **用户困惑**：未提供预期的语言支持
+- **专业形象**：翻译不完整会显得不够专业
 
-## When This Rule Triggers
+## 触发条件
 
-This rule triggers when an object meets both of these conditions:
+当对象同时满足以下两个条件时，此规则会触发：
 
-1. The object is **visible** to end users (not hidden)
-2. At least one culture in the model is **missing a translation** for the object name
+1. 该对象对终端用户**可见**（未隐藏）
+2. 在模型中，至少有一个区域设置**缺少该对象名称的翻译**
 
-In other words visible objects with multiple cultures defined should have their names translated for each culture.
+也就是说，如果可见对象定义了多个区域设置，就应为每个区域设置翻译其名称。
 
 ```csharp
 IsVisible 
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ```
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, select the object
-2. In **Properties** pane, expand **Translated Names**
-3. Enter translation for each culture
-4. Save changes
+1. 在 **TOM Explorer** 中选择该对象
+2. 在 **Properties** 窗格中，展开 **Translated Names**
+3. 为每个区域设置输入翻译
+4. 保存更改
 
-## Common Causes
+## 常见原因
 
-### Cause 1: New Objects Added
+### 原因 1：添加了新对象
 
-New objects created without translations.
+新建对象时未提供翻译。
 
-### Cause 2: Culture Added Later
+### 原因 2：后续才添加区域设置
 
-Culture added to model after objects were created.
+在创建对象之后才向模型添加区域设置。
 
-### Cause 3: Incomplete Translation Process
+### 原因 3：翻译流程不完整
 
-Translation workflow didn't cover all objects.
+翻译流程未覆盖所有对象。
 
-## Example
+## 示例
 
-### Before Fix
-
-```
-Measure: [Total Sales]
-English: "Total Sales"
-Spanish: (missing)
-French: (missing)
-```
-
-### After Fix
+### 修复前
 
 ```
-Measure: [Total Sales]
-English: "Total Sales"
-Spanish: "Total de Ventas"
-French: "Total des Ventes"
+度量值：[Total Sales]
+英语：“Total Sales”
+西班牙语：（缺失）
+法语：（缺失）
 ```
 
-## Compatibility Level
+### 修复后
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+度量值：[Total Sales]
+英语：“Total Sales”
+西班牙语：“Total de Ventas”
+法语：“Total des Ventes”
+```
 
-## Related Rules
+## 兼容级别
 
-- [Translate Perspectives](xref:kb.bpa-translate-perspectives) - Translating perspective names
-- [Translate Descriptions](xref:kb.bpa-translate-descriptions) - Translating descriptions
+该规则适用于兼容级别为 **1200** 及以上的模型。
+
+## 相关规则
+
+- [翻译透视](xref:kb.bpa-translate-perspectives) - 如何翻译透视名称
+- [翻译描述](xref:kb.bpa-translate-descriptions) - 如何翻译描述

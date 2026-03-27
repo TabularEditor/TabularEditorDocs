@@ -1,6 +1,6 @@
 ---
 uid: script-convert-import-to-dlol
-title: Convert Import to Direct Lake on OneLake
+title: 在 OneLake 上将导入模式表转换为 Direct Lake
 author: Daniel Otykier
 updated: 2025-06-20
 applies_to:
@@ -10,49 +10,48 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Convert Import to Direct Lake on OneLake
 
-## Script Purpose
+# 在 OneLake 上将导入模式表转换为 Direct Lake
 
-This script converts Import mode tables to Direct Lake on OneLake (DL/OL). As laid out in the [Direct Lake guidance article](xref:direct-lake-guidance), we need to replace the partition(s) on such tables with a single [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet), which specifies the name and schema of the table/materialized view in the Fabric Lakehouse or Warehouse, while referencing a Shared Expression that uses the [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) (OneLake) connector.
+## 脚本用途
 
-## Prerequisites
+此脚本将导入模式表转换为 OneLake 上的 Direct Lake（DL/OL）。 正如 [Direct Lake 指南文章](xref:direct-lake-guidance) 中所述，我们需要将这类表的分区替换为单个 [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet)。该分区会指定 Fabric Lakehouse 或 Warehouse 中表/物化视图的名称和架构，并引用一个使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake)（OneLake）连接器的共享表达式（Shared Expression）。
 
-You will need the **Workspace ID** as well as the **Resource ID** of your Fabric Warehouse or Lakehouse. Both are GUIDs that are part of the URL when navigating to the Warehouse or Lakehouse in the Fabric portal:
+## 先决条件
+
+你需要 **Workspace ID**，以及 Fabric Warehouse 或 Lakehouse 的 **Resource ID**。 这两者都是 GUID，当你在 Fabric 门户中导航到 Warehouse 或 Lakehouse 时，它们会出现在 URL 中：
 
 ![Lakehouse Warehouse URL](~/content/assets/images/lakehouse-warehouse-url.png)
 
-In the screenshot above, the **Workspace ID** of the lakehouse is highlighted in blue, while the **Resource ID** is highlighted in green.
+在上面的截图中，Lakehouse 的 **Workspace ID** 用蓝色标注，**Resource ID** 用绿色标注。
 
-If you are connecting to a Fabric Warehouse or a Lakehouse that supports schemas, you will also need to know the **Schema** of the table/materialized view you wish to connect to.
+如果你要连接到支持架构的 Fabric Warehouse 或 Lakehouse，还需要知道你要连接的表/物化视图的 **Schema**。
 
 > [!WARNING]
-> Tables in Import mode can define transformations inside their partitions (expressed using SQL or M). These transformations will be lost when converting to Direct Lake on OneLake mode, as the Direct Lake partitions must contain a 1:1 mapping of the columns in the source table/materialized view. Therefore, ensure that the source table/materialized view has the same name in the Fabric Warehouse or Lakehouse as it does in the semantic model, and that column mappings are correct before running this script.
+> 导入模式表可以在其分区中定义转换（使用 SQL 或 M 表达）。 当转换为 OneLake 上的 Direct Lake 模式时，这些转换将会丢失，因为 Direct Lake 分区必须与源表/物化视图中的列保持 1:1 映射。 因此，在运行此脚本之前，请确保源表/物化视图在 Fabric Warehouse 或 Lakehouse 中的名称与语义模型中的名称一致，并且列映射正确。
 
-## Script
+## 脚本
 
-### Convert Import mode tables to Direct Lake on OneLake
+### 将导入模式表转换为 OneLake 上的 Direct Lake
 
 ```csharp
 // ==================================================================
-// Convert Import to Direct Lake on OneLake
+// 将导入模式转换为 OneLake 上的 Direct Lake
 // ----------------------------------------
 // 
-// This script converts the selected (import) tables, or all tables
-// in the model, if nothing is selected, to Direct Lake on OneLake
-// tables.
+// 此脚本会将所选的 (导入) 表；如果未选择任何内容，则会将模型中的所有表
+// 转换为 OneLake 上的 Direct Lake 表。
 //
-// WARNING: The script assumes that tables have the same name in the
-// Fabric Warehouse or Lakehouse, as they do in the semantic model.
-// Moreover, any transformations (M or SQL based) in the import
-// partitions, will be lost, as Direct Lake mode tables must contain
-// 1:1 the same columns as the source table/materialized view.
+// 警告：脚本假设这些表在 Fabric Warehouse 或 Lakehouse 中的名称
+// 与其在语义模型中的名称一致。
+// 另外，导入分区中的任何转换 (基于 M 或 SQL) 都会丢失，
+// 因为 Direct Lake 模式表必须与源表/物化视图保持 1:1 相同的列。
 //
-// You will need the Workspace ID and the ID of your Fabric Warehouse
-// or Lakehouse (both are GUIDs).
+// 你需要 Workspace ID，以及 Fabric Warehouse
+// 或 Lakehouse 的 ID (两者都是 GUID)。
 // ==================================================================
 
-// Find the Shared Expression that is being used by EntityPartitions on the model:
+// 查找模型中 EntityPartition 正在使用的共享表达式：
 using System.Windows.Forms;
 using System.Drawing;
 using System.Data;
@@ -68,14 +67,14 @@ Application.UseWaitCursor = false;
 
 if(importTables.Count == 0)
 {
-    Warning("Model or selection does not contain any tables in import mode");
+    Warning("模型或所选内容不包含任何导入模式表");
     return;
 }
 else
 {
-    var result = MessageBox.Show("The following tables will be converted:\r\n\r\n" + string.Join("\r\n", importTables.Select(t => "  - " + t.Name)) +
-        "\r\n\r\nProceed?",
-        "Confirm conversion?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+    var result = MessageBox.Show("将转换以下表：\r\n\r\n" + string.Join("\r\n", importTables.Select(t => "  - " + t.Name)) +
+        "\r\n\r\n继续？",
+        "确认转换？", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
     if (result == DialogResult.Cancel) return;
 }
 
@@ -84,7 +83,7 @@ string resourceId = string.Empty;
 var sharedExpression = Model.Expressions.FirstOrDefault(e => e.Expression.Contains("AzureStorage.DataLake"));
 if(sharedExpression != null)
 {
-    // Extract existing workspace ID and resource ID
+    // 提取现有的 Workspace ID 和 Resource ID
     var ix = sharedExpression.Expression.IndexOf("onelake.dfs.fabric.microsoft.com");
     var url = sharedExpression.Expression.Substring(ix + 33, 73);
     var guids = url.Split('/');
@@ -121,7 +120,7 @@ foreach(var table in importTables)
     ep.Name = table.Name;
 }
 
-Info("Tables converted to Direct Lake on OneLake mode.");
+Info("表已转换为 OneLake 上的 Direct Lake 模式。");
 
 public class UrlNameDialog : Form
 {
@@ -132,7 +131,7 @@ public class UrlNameDialog : Form
 
     public UrlNameDialog(string workspaceId, string resourceId)
     {
-        Text = "Convert Direct Lake on SQL to OneLake";
+        Text = "将 SQL 上的 Direct Lake 转换到 OneLake";
         AutoSize = true;
         AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterParent;
@@ -173,8 +172,8 @@ public class UrlNameDialog : Form
             AutoSize = true
         };
 
-        okButton = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Enabled = false };
-        var cancelButton = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true };
+        okButton = new Button { Text = "确定", DialogResult = DialogResult.OK, AutoSize = true, Enabled = false };
+        var cancelButton = new Button { Text = "取消", DialogResult = DialogResult.Cancel, AutoSize = true };
         buttonPanel.Controls.Add(okButton);
         buttonPanel.Controls.Add(cancelButton);
 
@@ -195,12 +194,12 @@ public class UrlNameDialog : Form
 }
 ```
 
-### Explanation
+### 说明
 
-The script first determines whether to convert all Import mode tables in the model or only those selected by the user. It then checks if any such tables exist and prompts the user for confirmation before proceeding.
+脚本首先判断：是转换模型中所有导入模式表，还是仅转换用户选中的表。 接着，脚本会检查是否存在此类表，并在继续之前提示用户确认。
 
-The script then attempts to locate a Shared Expression that uses the `AzureStorage.DataLake` connector. If such an expression exists, it extracts the Workspace ID and Resource ID from its expression. If no such expression is found, it creates a new one.
+脚本随后会尝试查找一个使用 `AzureStorage.DataLake` 连接器的共享表达式。 如果存在这样的表达式，它会从该表达式中提取 Workspace ID 和 Resource ID。 如果未找到这样的表达式，它会创建一个新的表达式。
 
-The user is then prompted to input the Workspace ID and Resource ID of the Fabric Warehouse or Lakehouse, as well as an optional Schema name. The script replaces the existing Shared Expression with a new one that uses the provided IDs, if they were changed.
+随后会提示用户输入 Fabric Warehouse 或 Lakehouse 的 Workspace ID 和 Resource ID，以及一个可选的 Schema 名称。 如果这些 ID 有所更改，脚本会用一个使用所提供 ID 的新共享表达式替换现有共享表达式。
 
-Finally, for each Import mode table, the script creates a new EntityPartition with the specified name and schema, referencing the Shared Expression. It then deletes any existing partitions on the table that are not the newly created EntityPartition.
+最后，对于每个导入模式表，脚本都会创建一个新的 EntityPartition，并使用指定的名称和架构，同时引用共享表达式。 随后，它会删除表上除新创建的 EntityPartition 之外的所有现有分区。

@@ -1,6 +1,6 @@
 ---
 uid: direct-lake-entity-updates-reverting
-title: Entity Name Changes Revert in Direct Lake Models
+title: Direct Lake 模型中的实体名称更改会被还原
 author: Morten Lønskov
 updated: 2025-10-14
 applies_to:
@@ -16,52 +16,53 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Entity Name Changes Revert in Direct Lake Models
 
-After editing `EntityName` in Tabular Editor 3 for a Direct Lake table partition, the model may reload in Power BI  with the original names. This behavior often looks like TE3 did not persist the change, but it is caused by how Power BI interprets Direct Lake metadata during refresh.
+# Direct Lake 模型中的实体名称更改会被还原
 
----
-
-## Symptoms
-
-- Table metadata changes appear in TE3 but revert after you refresh the model in Power BI.
-- The reverted tables are Direct Lake tables whose metadata was altered outside Power BI.
-- Refresh operations run without explicit errors, yet the renamed objects fall back to their original names.
+在 Tabular Editor 3 中编辑 Direct Lake 表分区的 `EntityName` 后，模型在 Power BI 中重新加载时可能会恢复为原始名称。 这种现象常常看起来像是 TE3 没有保存更改，但根因是 Power BI 在刷新期间解析 Direct Lake 元数据的方式。
 
 ---
 
-## Root cause
+## 症状
 
-Power BI binds Direct Lake tables to their origin through the `SourceLineageTag` property. When the tag does not match the current partition's `EntityName`, Power BI assumes the table should stay synchronized with the original source and restores the previous metadata. Direct Lake partitions also expect intentional changes to be registered through the `ChangedProperties` collection; without it, Power BI ignores manual edits made outside the service.
-
----
-
-## Resolution steps
-
-1. **Open the table partition.** For each Direct Lake table, edit the associated `EntityName`.
-2. **Synchronize partition details.**
-   - Set the table's `SourceLineageTag` to exactly match the new `EntityName`.
-   - Set the `Name` property to true for table's `ChangedProperties` collection so Power BI treats the rename as intentional.
-3. **Save the model in TE3.**
-4. **Refresh the affected table (or the entire model) in Power BI.** 
-The names should now persist.
+- 表的元数据更改在 TE3 中可见，但在 Power BI 中刷新模型后会被还原。
+- 被还原的是 Direct Lake 表，这些表的元数据是在 Power BI 之外修改的。
+- 刷新操作不会报出明确错误，但已重命名的对象会恢复为原始名称。
 
 ---
 
-## Important notes
+## 根本原因
 
-- TE3 does not update `SourceLineageTag` automatically when you rename the table. Always align the tag manually.
-- The `ChangedProperties` flag is required only for Direct Lake (and other composite) tables; legacy import models do not need it.
-- These behaviors originate from Power BI’s metadata synchronization rules, not from TE3 storage.
+Power BI 通过 `SourceLineageTag` 属性将 Direct Lake 表与其来源绑定。 当该标记与当前分区的 `EntityName` 不匹配时，Power BI 会认为表应与原始源保持同步，并恢复之前的元数据。 Direct Lake 分区还要求通过 `ChangedProperties` 集合记录有意的更改；否则，Power BI 会忽略在 Power BI 服务之外进行的手动编辑。
 
-## Automate bulk updates with C#
+---
 
-When you have many Direct Lake tables to adjust, you can run the following TE3 script. It prompts for new entity names, updates each selected table, syncs the `SourceLineageTag`, and flags the changed metadata.
+## 解决步骤
 
-> **Use it in TE3:** Select the relevant Direct Lake tables, open the **C# Script** window, paste the script, and run it.
+1. **打开表分区。** 对于每个 Direct Lake 表，编辑关联的 `EntityName`。
+2. **同步分区详细信息。**
+   - 将表的 `SourceLineageTag` 设置为与新的 `EntityName` 完全一致。
+   - 在表的 `ChangedProperties` 集合中将 `Name` 属性设置为 true，以便 Power BI 将重命名视为有意更改。
+3. **在 TE3 中保存模型。**
+4. **在 Power BI 中刷新受影响的表（或整个模型）。**
+   这些名称现在应能保持不变。
+
+---
+
+## 重要说明
+
+- 重命名表时，TE3 不会自动更新 `SourceLineageTag`。 务必手动对齐该标记。
+- 只有 Direct Lake 表（以及其他复合表）才需要 `ChangedProperties` 标志；传统的导入模式模型不需要它。
+- 这些行为源自 Power BI 的元数据同步规则，而不是 TE3 的存储机制。
+
+## 使用 C# 自动化批量更新
+
+需要调整多个 Direct Lake 表时，可以运行以下 TE3 脚本。 它会提示输入新的实体名称，更新每个选中的表，同步 `SourceLineageTag`，并标记已更改的元数据。
+
+> **在 TE3 中使用：** 选择相关的 Direct Lake 表，打开 **C# Script** 窗口，粘贴脚本并运行。
 
 ```csharp
-// -------- Namespaces --------
+// -------- 命名空间 --------
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -69,22 +70,22 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using TW = TabularEditor.TOMWrapper;
 
-// -------- Guard: need tables selected --------
+// -------- 检查：需要先选中表 --------
 var tables = Selected.Tables.ToList();
 if (tables.Count == 0)
 {
-    Warning("Select one or more tables first.");
+    Warning("先选择一个或多个表。");
     return;
 }
 
-// -------- Build editable rows from selected tables --------
+// -------- 从所选表构建可编辑的行 --------
 var candidates = tables
     .Select(table => new { Table = table, Partition = table.Partitions.OfType<TW.EntityPartition>().FirstOrDefault() })
     .ToList();
 
 foreach (var skipped in candidates.Where(c => c.Partition == null))
 {
-    Warning($"Skipping '{skipped.Table.Name}': no Entity partition.");
+    Warning($"跳过 '{skipped.Table.Name}'：没有 Entity 分区。");
 }
 
 var rows = new BindingList<EntityEditRow>(
@@ -95,21 +96,21 @@ var rows = new BindingList<EntityEditRow>(
 
 if (rows.Count == 0)
 {
-    Warning("No selected tables have an Entity partition. Nothing to edit.");
+    Warning("所选表中没有任何表包含 Entity 分区。无可编辑内容。");
     return;
 }
 
-// -------- Show batch dialog --------
+// -------- 显示批量对话框 --------
 using (var dialog = new BatchEntityEditor(rows))
 {
     if (dialog.ShowDialog() != DialogResult.OK)
     {
-        Info("Cancelled. No changes applied.");
+        Info("已取消。未应用任何更改。");
         return;
     }
 }
 
-// -------- Apply changes --------
+// -------- 应用更改 --------
 const string ExtendedPropertyName = "Changed Property Name";
 var updated = 0;
 
@@ -121,18 +122,18 @@ foreach (var row in rows)
             continue;
 
         updated++;
-        Output($"Updated '{row.TableName}': Entity='{row.CurrentEntity}', Partition='{row.Partition.Name}', SourceLineageTag='{row.CurrentEntity}'.");
+        Output($"已更新 '{row.TableName}'：Entity='{row.CurrentEntity}'，分区='{row.Partition.Name}'，SourceLineageTag='{row.CurrentEntity}'。");
     }
     catch (Exception ex)
     {
-        Error($"Failed on '{row.TableName}': {ex.Message}");
+        Error($"处理 '{row.TableName}' 失败：{ex.Message}");
     }
 }
 
-Info($"Done. {updated} table(s) updated.");
+Info($"完成。{updated} 个表(s)已更新。");
 
 
-// ====================== Support types / UI ======================
+// ====================== 支持类型 / UI ======================
 public class EntityEditRow
 {
     public EntityEditRow(TW.Table table, TW.EntityPartition partition)
@@ -173,7 +174,7 @@ public class EntityEditRow
 
             if (nameConflict)
             {
-                warn?.Invoke($"Partition rename skipped for '{TableName}': another partition already named '{target}'.");
+                warn?.Invoke($"已跳过分区重命名：表 '{TableName}' 中另一个分区已命名为 '{target}'。");
             }
             else
             {
@@ -183,7 +184,7 @@ public class EntityEditRow
                 }
                 catch (Exception ex)
                 {
-                    warn?.Invoke($"Partition rename failed for '{TableName}': {ex.Message}");
+                    warn?.Invoke($"表 '{TableName}' 的分区重命名失败：{ex.Message}");
                 }
             }
         }
@@ -194,7 +195,7 @@ public class EntityEditRow
         }
         catch (Exception ex)
         {
-            warn?.Invoke($"SourceLineageTag not set on '{TableName}': {ex.Message}");
+            warn?.Invoke($"未在 '{TableName}' 上设置 SourceLineageTag：{ex.Message}");
         }
 
         Table.SetExtendedProperty(extendedPropertyName, "true", TW.ExtendedPropertyType.String);
@@ -216,7 +217,7 @@ public class BatchEntityEditor : Form
 
     private void BuildUi()
     {
-        Text = "Edit Entity names for selected tables";
+        Text = "编辑所选表的 Entity 名称";
         TopMost = true;
         ShowInTaskbar = false;
         StartPosition = FormStartPosition.CenterScreen;
@@ -241,7 +242,7 @@ public class BatchEntityEditor : Form
 
         root.Controls.Add(new Label
         {
-            Text = "Edit the Entity name for each table. Leave 'New Entity' unchanged to skip.",
+            Text = "为每个表编辑 Entity 名称。保持“New Entity”不变即可跳过。",
             AutoSize = true,
             Dock = DockStyle.Fill,
             Padding = new Padding(0, 0, 0, 6)
@@ -264,21 +265,21 @@ public class BatchEntityEditor : Form
             new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(EntityEditRow.TableName),
-                HeaderText = "Table",
+                HeaderText = "表",
                 ReadOnly = true,
                 FillWeight = 28
             },
             new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(EntityEditRow.CurrentEntity),
-                HeaderText = "Current Entity",
+                HeaderText = "当前 Entity",
                 ReadOnly = true,
                 FillWeight = 36
             },
             new DataGridViewTextBoxColumn
             {
                 DataPropertyName = nameof(EntityEditRow.NewEntity),
-                HeaderText = "New Entity",
+                HeaderText = "新 Entity",
                 FillWeight = 36
             });
 
@@ -293,8 +294,8 @@ public class BatchEntityEditor : Form
             Padding = new Padding(0)
         };
 
-        var ok = new Button { Text = "OK", DialogResult = DialogResult.OK, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 0, 8) };
-        var cancel = new Button { Text = "Cancel", DialogResult = DialogResult.Cancel, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 8, 8) };
+        var ok = new Button { Text = "确定", DialogResult = DialogResult.OK, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 0, 8) };
+        var cancel = new Button { Text = "取消", DialogResult = DialogResult.Cancel, AutoSize = true, Height = 32, Width = 110, Margin = new Padding(8, 8, 8, 8) };
 
         buttons.Controls.Add(ok);
         buttons.Controls.Add(cancel);
@@ -315,9 +316,10 @@ public class BatchEntityEditor : Form
     }
 }
 ```
-> [!NOTE] 
-> The script was generated using an LLM for code assistance, but has been tested by the Tabular Editor team. 
 
-Running the script updates only the tables that receive a new entity name. After the script finishes, review the changes, save the model, and refresh in Power BI to confirm the metadata persists.
+> [!NOTE]
+> 该脚本使用 LLM 进行 Code Assist 生成，但已由 Tabular Editor 团队测试。
 
-Finally, open each updated partition and verify that `Name` is present in the `ChangedProperties` collection before refreshing from Power BI.
+运行该脚本只会更新那些被设置了新实体名称的表。 脚本运行结束后，检查更改、保存模型，并在 Power BI 中刷新，以确认元数据能够持久保留。
+
+最后，在从 Power BI 刷新之前，打开每个已更新的分区，并验证 `ChangedProperties` 集合中包含 `Name`。

@@ -1,6 +1,6 @@
 ---
 uid: dq-over-as-limitations
-title: Direct Query over Analysis Services
+title: Analysis Services 上的直接查询
 author: Morten Lønskov
 updated: 2025-07-14
 applies_to:
@@ -17,45 +17,47 @@ applies_to:
           full: true
 ---
 
-## Overview
+## 概述
 
-Tabular Editor 3 can **connect** to composite models that leverage **DirectQuery over Analysis Services (DQ‑over‑AS)**, but full modeling support is **not yet available**.  Most authoring tasks work as expected; however, operations that rely on synchronising metadata with the remote semantic model—such as *Update table schema*—are currently limited.
+Tabular Editor 3 可以**连接**使用 **DirectQuery over Analysis Services (DQ‑over‑AS)** 的复合模型，但完整的建模支持**尚未提供**。  大多数创作任务都符合预期；但是，依赖与远程语义模型同步元数据的操作——例如 _更新
+0表
+0架构_——目前受到限制。
 
->[!IMPORTANT]
-> Until full DQ‑over‑AS support ships, model metadata edited in Tabular Editor 3 **is not automatically kept in sync** with the source dataset. You must apply one of the work‑arounds listed below whenever columns or measures are added to the underlying Analysis Services model.
+> [!IMPORTANT]
+> 在完整的 DQ‑over‑AS 支持发布之前，Tabular Editor 3 中编辑的模型元数据**不会自动与源数据集保持同步**。 每当在底层 Analysis Services 模型中新增列或度量值时，都必须采用下面列出的其中一种变通方法。
 
-## Current limitations
+## 当前限制
 
-| Feature                     | Status in TE3   | Notes                                                                                      |
-| --------------------------- | --------------- | ------------------------------------------------------------------------------------------ |
-| **Update table schema**     | ❌ Not supported | Attempting to run **Model > Update table schema** on a DQ‑over‑AS table has no effect.     |
-| **Measure synchronisation** | ❌ Not supported | Measures created in the source dataset do not appear automatically in the composite model. |
+| 功能                    | TE3 中的状态 | 说明                                                           |
+| --------------------- | -------- | ------------------------------------------------------------ |
+| **更新&#xA;0表&#xA;0架构** | ❌ 不支持    | 在 DQ‑over‑AS 表上尝试运行 **Model > Update table schema** 不会有任何效果。 |
+| **度量值同步**             | ❌ 不支持    | 在源数据集中创建的度量值不会自动出现在复合模型中。                                    |
 
-## Work‑arounds
+## 变通方法
 
-### 1. Manually add missing columns
+### 1. 手动添加缺失的列
 
-1. In **TOM Explorer**, select the table that requires the new column.
-2. Choose **Add > Data Column**.
-3. In the *Properties* window, set:
+1. 在 **TOM Explorer** 中，选择需要新增列的表。
+2. 选择 **添加 > 数据列**。
+3. 在 _属性_ 窗口中，设置：
 
-   * **SourceColumnName** – *exactly* match the **Name** of the column in the remote table.
-   * **SourceLineageTag** – copy the **LineageTag** value from the source column.
-4. Save and deploy the model.
+   - **SourceColumnName** – 必须与远程表中该列的 **Name** _完全_一致。
+   - **SourceLineageTag** – 从源列复制 **LineageTag** 值。
+4. 保存并部署模型。
 
->[!NOTE]
-> Column names and lineage tags must match *character‑for‑character*.  Any mismatch will cause deployment errors.
+> [!NOTE]
+> 列名和 Lineage tag 必须_逐字符_完全一致。  任何不一致都会导致部署错误。
 
-### 2. Use the “Import tables from remote model” C# script
+### 2. 使用“Import tables from remote model” C# 脚本
 
-Daniel Otykier’s article on LinkedIn provides a [ready‑made C# automation script](https://www.linkedin.com/pulse/composite-models-tabular-editor-daniel-otykier/) that:
+Daniel Otykier 在 LinkedIn 上的文章提供了一个[现成的 C# 自动化脚本](https://www.linkedin.com/pulse/composite-models-tabular-editor-daniel-otykier/)：
 
-1. Temporarily imports full copies of tables from the remote model.
-2. Lets you copy columns (and other metadata) into existing tables.
-3. Deletes the temporary tables after the copy is complete.
+1. 临时从远程模型导入表的完整副本。
+2. 可将列（以及其他元数据）复制到现有表中。
+3. 复制完成后删除这些临时表。
 
-This approach is faster when several tables require updates.
+当需要更新的表较多时，这种方法更快。
 
-### 3. One‑click macro to pull new measures
+### 3. 一键宏：拉取新增度量值
 
-[rem-bou's](https://github.com/rem-bou) GitHub repository contains an advanced macro that scans the source dataset for measures that are **missing** in the composite model and adds them automatically: [Create-Update DQ over AS model connection](https://github.com/rem-bou/TabularEditor-Scripts/blob/main/Advanced/One-Click%20Macros/Create-Update%20DQ%20over%20AS%20model%20connection.csx)
+[rem-bou's](https://github.com/rem-bou) 的 GitHub 仓库包含一个高级宏，用于扫描源数据集，查找复合模型中**缺失**的度量值并自动添加：[Create-Update DQ over AS model connection](https://github.com/rem-bou/TabularEditor-Scripts/blob/main/Advanced/One-Click%20Macros/Create-Update%20DQ%20over%20AS%20model%20connection.csx)

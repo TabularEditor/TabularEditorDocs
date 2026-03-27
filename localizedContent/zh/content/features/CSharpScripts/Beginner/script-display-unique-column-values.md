@@ -1,6 +1,6 @@
 ---
 uid: script-display-unique-column-values
-title: Distinct Column Values
+title: 列的唯一值
 author: Morten Lønskov
 updated: 2024-05-27
 applies_to:
@@ -10,27 +10,32 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Distinct Column Values
 
-## Script Purpose
-Display the distinct values in a column for quick data profiling and access.
-Save as a Macro on the column level to have it quickly available. 
+# 列的唯一值
+
+## 脚本用途
+
+显示某列的去重值，便于快速进行数据概览和查阅。
+可在列级别将其另存为宏，方便快速调用。
 
 <br></br>
 
-## Script
+## 脚本
 
-### Script Title
+### 脚本标题
+
 ```csharp
-// Construct the DAX expression to get all distinct column values, from the selected column:
+// 构造 DAX 表达式，从所选列获取所有不重复的列值：
 var dax = string.Format("ALL({0})", Selected.Column.DaxObjectFullName);
 
-// Evaluate the DAX expression against the connected model:
+// 针对已连接的模型评估该 DAX 表达式：
 var result = EvaluateDax(dax);
 
-// Output the DataTable containing the result of the DAX expression:
+// 输出包含 DAX 表达式结果的 DataTable：
 Output(result);
 ```
-### Explanation
-The script uses the ALL() DAX function against the selected columns and display the result in an output dialog box. 
+
+### 说明
+
+该脚本对所选列应用 ALL() DAX 函数，并在输出对话框中显示结果。
 

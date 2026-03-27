@@ -1,6 +1,6 @@
 ---
 uid: semantic-bridge-validate-contextual-rules
-title: Create Contextual Validation Rules
+title: 创建上下文验证规则
 author: Greg Baldini
 updated: 2025-01-27
 applies_to:
@@ -17,25 +17,26 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Create Contextual Validation Rules
 
-This how-to demonstrates how to create validation rules that check conditions across multiple objects using the validation context.
-These rules are for illustrative purposes only and do not necessarily reflect hard technical requirements of either Metric Views or the Semantic Bridge.
+# 创建上下文验证规则
 
-## When to use contextual rules
+本操作指南演示如何使用验证上下文创建验证规则，以检查跨多个对象的条件。
+这些规则仅用于演示，并不一定反映 Metric Views 或 Semantic Bridge 的严格技术要求。
 
-Use contextual rules when you need to:
+## 何时使用上下文规则
 
-- Detect duplicate names across objects
-- Check that names don't conflict between different object types
-- Access information about previously validated objects
+在需要执行以下操作时，请使用上下文规则：
+
+- 检测跨对象的重复名称
+- 检查不同对象类型之间是否存在名称冲突
+- 访问先前已验证对象的信息
 
 > [!NOTE]
-> The validation process validates each Metric View object in order, so the context consists only of those items already visited in the validation.
+> 验证过程会按顺序验证每个 Metric View 对象，因此上下文只包含在本次验证过程中已访问过的项。
 
-## The MakeValidationRule method
+## MakeValidationRule 方法
 
-The generic `MakeValidationRule<T>` method provides access to the validation context:
+泛型方法 `MakeValidationRule<T>` 可用于访问验证上下文：
 
 ```csharp
 SemanticBridge.MetricView.MakeValidationRule<IMetricViewObjectType>(
@@ -48,25 +49,25 @@ SemanticBridge.MetricView.MakeValidationRule<IMetricViewObjectType>(
 );
 ```
 
-The `context` parameter provides:
+`context` 参数提供以下内容：
 
-- `context.DimensionNames` - names of dimensions already validated
-- `context.MeasureNames` - names of measures already validated
-- `context.JoinNames` - names of joins already validated
-- `context.MakeError(message)` - create an error diagnostic
-- `context.MakeError(message, property)` - create an error diagnostic, calling out the specific property with an error
+- `context.DimensionNames` - 已验证的维度名称列表
+- `context.MeasureNames` - 已验证的度量值名称列表
+- `context.JoinNames` - 已验证的连接名称
+- `context.MakeError(message)` - 创建一条错误诊断信息
+- `context.MakeError(message, property)` - 创建一条错误诊断信息，并明确指出发生错误的具体属性
 
-Because you create the diagnostic message in the body of the validation function, you can put details about the current object being validated into the message.
+由于诊断信息是在验证函数体内创建的，你可以在信息中加入当前正在验证对象的详细信息。
 
-## Using directive for Metric View types
+## Metric View 类型的 using 指令
 
-Add this using directive to reference Metric View types:
+添加以下 using 指令以引用 Metric View 类型：
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 ```
 
-## Rule: Metric View Measure name must not duplicate a Metric View dimension name
+## 规则：Metric View 度量值名称不得与 Metric View 维度名称重复
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -76,12 +77,12 @@ var measureNotDimensionRule = SemanticBridge.MetricView.MakeValidationRule<Metri
     "naming",
     (measure, context) =>
         context.DimensionNames.Contains(measure.Name)
-            ? [context.MakeError($"Measure '{measure.Name}' has the same name as a dimension")]
+            ? [context.MakeError($"度量值 '{measure.Name}' 与维度同名")]
             : []
 );
 ```
 
-## Rule: Metric View Measure name must not duplicate another Metric View measure
+## 规则：Metric View 度量值名称不得与另一个 Metric View 度量值重复
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -91,33 +92,33 @@ var noDuplicateMeasureRule = SemanticBridge.MetricView.MakeValidationRule<Metric
     "naming",
     (measure, context) =>
         context.MeasureNames.Contains(measure.Name)
-            ? [context.MakeError($"Measure '{measure.Name}' is defined more than once")]
+            ? [context.MakeError($"度量值 '{measure.Name}' 被定义了多次")]
             : []
 );
 ```
 
-## Why separate rules are better
+## 为什么拆分规则更好
 
-Notice that we created two separate rules instead of one combined rule. This is the recommended approach because:
+注意，我们创建了两条独立的规则，而不是把它们合并成一条规则。 推荐这样做，原因是：
 
-1. **Clearer error messages**: Each rule produces a specific, actionable message
-2. **Easier maintenance**: Rules can be added, removed, or modified independently
-3. **Simpler logic**: Each rule checks exactly one condition
-4. **Better categorization**: Rules can be grouped and filtered by purpose
+1. **更清晰的错误信息**：每条规则都会生成明确、可操作的信息
+2. **更易维护**：规则可以独立新增、移除或修改
+3. **逻辑更简单**：每条规则只检查一个条件
+4. **更便于分类**：规则可以按用途分组和筛选
 
-## Complete example
+## 完整示例
 
-This Metric View has naming conflicts that will trigger both contextual rules:
+此 Metric View 存在命名冲突，将同时触发这两条上下文规则：
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
-// Create a Metric View with naming conflicts
+// 创建一个存在命名冲突的 Metric View
 SemanticBridge.MetricView.Deserialize("""
     version: 0.1
     source: sales.fact.orders
     dimensions:
-      # 'revenue' is used as both a dimension and measure name
+      # 'revenue' 同时被用作维度名和度量值名
       - name: revenue
         expr: source.revenue
       - name: quantity
@@ -125,26 +126,26 @@ SemanticBridge.MetricView.Deserialize("""
       - name: order_date
         expr: source.order_date
     measures:
-      # measureNotDimensionRule violation - same name as dimension
+      # 违反 measureNotDimensionRule - 与维度同名
       - name: revenue
         expr: SUM(source.revenue)
-      # noDuplicateMeasureRule violation - 'total_quantity' appears twice
+      # 违反 noDuplicateMeasureRule - 'total_quantity' 出现两次
       - name: total_quantity
         expr: SUM(source.quantity)
       - name: total_quantity
         expr: COUNT(source.order_id)
-      # This one is fine
+      # 这一项是正常的
       - name: order_count
         expr: COUNT(source.order_id)
     """);
 
-// Define contextual rules
+// 定义上下文规则
 var measureNotDimensionRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(
     "measure_not_dimension_name",
     "naming",
     (measure, context) =>
         context.DimensionNames.Contains(measure.Name)
-            ? [context.MakeError($"Measure '{measure.Name}' has the same name as a dimension")]
+            ? [context.MakeError($"度量值 '{measure.Name}' 与维度同名")]
             : []
 );
 
@@ -153,22 +154,22 @@ var noDuplicateMeasureRule = SemanticBridge.MetricView.MakeValidationRule<Metric
     "naming",
     (measure, context) =>
         context.MeasureNames.Contains(measure.Name)
-            ? [context.MakeError($"Measure '{measure.Name}' is defined more than once")]
+            ? [context.MakeError($"度量值 '{measure.Name}' 被定义了多次")]
             : []
 );
 
-// Run validation
+// 运行验证
 var diagnostics = SemanticBridge.MetricView.Validate([
     measureNotDimensionRule,
     noDuplicateMeasureRule
 ]).ToList();
 
-// Output results
+// 输出结果
 var sb = new System.Text.StringBuilder();
-sb.AppendLine("CONTEXTUAL VALIDATION RESULTS");
+sb.AppendLine("上下文验证结果");
 sb.AppendLine("-----------------------------");
 sb.AppendLine("");
-sb.AppendLine($"Found {diagnostics.Count} issue(s):");
+sb.AppendLine($"发现 {diagnostics.Count} 个问题：");
 sb.AppendLine("");
 
 foreach (var diag in diagnostics)
@@ -179,21 +180,21 @@ foreach (var diag in diagnostics)
 Output(sb.ToString());
 ```
 
-**Output:**
+**输出：**
 
 ```
-CONTEXTUAL VALIDATION RESULTS
+上下文验证结果
 -----------------------------
 
-Found 2 issue(s):
+发现 2 个问题(s):
 
-[Error] Measure 'revenue' has the same name as a dimension
-[Error] Measure 'total_quantity' is defined more than once
+[Error] 度量值 'revenue' 与维度同名
+[Error] 度量值 'total_quantity' 被重复定义
 ```
 
-## Combining with default rules
+## 与默认规则组合
 
-You can run contextual rules alongside the default validation rules:
+你可以将上下文规则与默认验证规则一起运行：
 
 ```csharp
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -204,25 +205,25 @@ var customRules = new[] {
         "naming",
         (measure, context) =>
             context.DimensionNames.Contains(measure.Name)
-                ? [context.MakeError($"Measure '{measure.Name}' has the same name as a dimension")]
+                ? [context.MakeError($"度量值 '{measure.Name}' 与某个维度同名")]
                 : []
     )
 };
 
-// Run default rules first
+// 先运行默认规则
 var defaultDiagnostics = SemanticBridge.MetricView.Validate().ToList();
 
-// Then run custom rules
+// 然后运行自定义规则
 var customDiagnostics = SemanticBridge.MetricView.Validate(customRules).ToList();
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Default rule issues: {defaultDiagnostics.Count}");
-sb.AppendLine($"Custom rule issues: {customDiagnostics.Count}");
+sb.AppendLine($"默认规则问题数：{defaultDiagnostics.Count}");
+sb.AppendLine($"自定义规则问题数：{customDiagnostics.Count}");
 Output(sb.ToString());
 ```
 
-## See also
+## 另见
 
-- [Semantic Bridge Validation](xref:semantic-bridge-metric-view-validation)
-- [Create Simple Validation Rules](xref:semantic-bridge-validate-simple-rules)
-- [Validate with Default Rules](xref:semantic-bridge-validate-default)
+- [Semantic Bridge 验证](xref:semantic-bridge-metric-view-validation)
+- [创建简单验证规则](xref:semantic-bridge-validate-simple-rules)
+- [使用默认规则进行验证](xref:semantic-bridge-validate-default)

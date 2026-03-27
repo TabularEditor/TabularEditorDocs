@@ -1,6 +1,6 @@
 ---
 uid: hierarchical-display
-title: Hierarchical display
+title: 层级显示
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -14,13 +14,15 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-## Hierarchical display
-Objects of the loaded model are shown in the TOM Explorer Tree. By default, all object types (visible tables, roles, relationships, etc.) are shown. If you only want to see tables, measures, columns and hierarchies, go to the "View" menu and toggle off "Show all object types".
+
+## 层级显示
+
+已加载模型中的对象会显示在 TOM Explorer 树状视图中。 默认情况下，会显示所有对象类型（可见表、角色、关系等） 都会显示。 如果只想查看表、度量值、列和层级结构，请在“View”菜单中关闭“Show all object types”。
 
 ![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AllObjectTypes.png)
 
-Expanding a table in the "Tables" group, you will find the measures, columns and hierarchies contained in the table presented in their respective display folders by default. This way, objects are arranged similar to how end-users would see them in client tools:
+展开“Tables”组中的某个表后，会在该表下看到其包含的度量值、列和层级结构，默认按各自的显示文件夹显示。 这样，对象的排列方式就类似于最终用户在客户端工具中看到的效果：
 
 ![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/DisplayFolders.png)
 
-Use the buttons immediately above the Explorer Tree, to toggle invisible objects, display folders, measures, columns and hierarchies, or to filter objects by name. You can rename an object by selecting it in then hitting F2. This also works for display folders. If you double-click a measure or calculated column, you may edit its [DAX expression](dax-editor.md). Right-clicking will show a context menu, providing a range of handy shortcuts for operations such as setting visibility, perspective inclusion, adding columns to a hierarchy, etc.
+使用 Explorer Tree 正上方的按钮，可切换显示不可见对象、显示文件夹、度量值、列和层级结构，也可按名称筛选对象。 选中对象后按 F2 即可重命名。 显示文件夹也同样适用。 双击度量值或计算列，即可编辑其[DAX 表达式](dax-editor.md)。 右键单击会显示上下文菜单，提供一系列便捷的快捷操作，例如设置可见性、是否包含在透视中、将列添加到层级结构等。

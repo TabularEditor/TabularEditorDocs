@@ -1,6 +1,6 @@
 ---
 uid: data-security-testing
-title: Testing RLS/OLS
+title: 测试 RLS/OLS
 author: Kurt Buhler
 updated: 2023-03-02
 applies_to:
@@ -16,73 +16,70 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Testing Data Security with Impersonation
 
+# 通过模拟测试数据安全
 
-![Data Security Visual Abstract](~/content/assets/images/data-security/data-security-testing-visual-abstract.png)
-
+![数据安全 Visual 摘要](~/content/assets/images/data-security/data-security-testing-visual-abstract.png)
 
 ---
 
-__DAX Queries__, __Pivot Grid__, or __Preview Data__ enable testing of Data Security in Tabular Editor. It is recommended to *always* test Data Security with any changes to configuration, to mitigate risk of incorrect RLS/OLS implementation and the consequences thereof.
+**DAX 查询**、**Pivot Grid** 或 **预览数据** 可用于在 Tabular Editor 中测试数据安全。 建议每次更改配置后都_务必_测试数据安全，以降低 RLS/OLS 实施不当及其后果带来的风险。
 
 > [!IMPORTANT]
-> Testing Data Security with Impersonation using Tabular Editor 3 is limited to datasets hosted in an Analysis Services instance or the Power BI Service. Tabular Editor 3 Desktop Licenses cannot benefit from this feature.
+> 在 Tabular Editor 3 中使用模拟来测试数据安全，仅适用于托管在 Analysis Services 实例或 Power BI 服务中的 Dataset。 Tabular Editor 3 桌面版许可证无法使用此功能。
 
 ---
 
-
-- [__About Data Security and RLS/OLS:__](data-security-about.md) A functional overview of <span style="color:#01a99d">RLS</span> & <span style="color:#8d7bae">OLS</span>.
-- [__Modify/Setup an RLS Configuration:__](data-security-setup-rls.md) How to configure <span style="color:#01a99d">RLS</span> in a dataset.
-- [__Modify/Setup an OLS Configuration:__](data-security-setup-ols.md) How to configure <span style="color:#8d7bae">OLS</span> in a dataset.
-- __Testing RLS/OLS with Impersonation (This Article):__ How to easily validate Data Security with Tabular Editor.
+- [**关于数据安全和 RLS/OLS：**](data-security-about.md) <span style="color:#01a99d">RLS</span> 与 <span style="color:#8d7bae">OLS</span> 的功能概览。
+- [**修改/设置 RLS 配置：**](data-security-setup-rls.md) 如何在 Dataset 中配置 <span style="color:#01a99d">RLS</span>。
+- [**修改/设置 OLS 配置：**](data-security-setup-ols.md) 如何在 Dataset 中配置 <span style="color:#8d7bae">OLS</span>。
+- **使用模拟测试 RLS/OLS（本文）：** 如何使用 Tabular Editor 轻松验证数据安全。
 
 ---
 
-## Testing with Impersonation
+## 使用模拟进行测试
 
-__Data Security can be easily tested using _Impersonation_ in Tabular Editor 3.__ Impersonation is a feature that lets you view a query result as a model Role or User. It is similar to the _'View As Role...'_ feature in the Power BI service, with two key differences:
+**在 Tabular Editor 3 中使用 _模拟_ 功能即可轻松测试数据安全。** “模拟”是一项功能，可让你以模型角色或用户的身份查看查询结果。 它类似于 Power BI 服务中的 _“以角色查看...”_ 功能，但有两个关键区别：
 
-1. The End-User being impersonated requires __dataset Build permissions__ in addition to Role assignment & Dataset Read access. 
-2. Any query can be executed within Tabular Editor 3; it is not limited to available report visuals, as in the Power BI Service.
+1. 被模拟的最终用户除了要分配角色并有 Dataset 读取权限外，还必须拥有 **Dataset 构建权限**。
+2. 在 Tabular Editor 3 中可以执行任何查询；不像 Power BI 服务那样，仅限于 Report 中现有的 Visual。
 
- This is valuable, as it lets the developer run defined tests to see how the result would be viewed by any end-user with Build permissions. This helps ensure that even for complex queries and DAX expressions, the Data Security works as expected, and users only see what they should see.
-
+这很有价值，因为它让你可以运行预定义的测试，看看任何拥有构建权限的最终用户会如何看到结果。 这有助于确保即使面对复杂查询和 DAX 表达式，数据安全也能按预期工作，用户只会看到他们应该看到的内容。
 
 > [!IMPORTANT]
-> Ensure that Build permissions are not provisioned by providing end-users Workspace Roles (Contributor, Member, Admin), as these roles have __Write__ permissions to the dataset and thus bypass Data Security; the testing will appear to not work, even if it's configured correctly. 
-
+> 请确保不要通过为最终用户分配 Workspace 角色（Contributor、Member、Admin）来授予 Build 权限，因为这些角色对 Dataset 具有 **Write** 权限，从而会绕过数据安全；即使配置正确，测试也会看起来像没有生效一样。
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> A demonstration of RLS testing in Tabular Editor using impersonation. Shown is testing with (A) Data Preview, (B) DAX Queries and (C) Pivot Grid.</figcaption>
+  <img class="noscale" src="~/content/assets/images/data-security/data-security-impersonation-demo.gif" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> 在 Tabular Editor 中使用模拟身份进行 RLS 测试的演示。 图中展示了分别使用 (A) 数据预览、(B) DAX 查询和 (C) Pivot Grid 进行的测试。</figcaption>
 </figure>
 
 ---
 
-## How to Test with Impersonation
-To test with impersonation, follow the below steps:
+## 如何使用模拟身份进行测试
 
-1. __Ensure that the Dataset Configuration & Access is correct:__
-End-users being impersonated...
-  - _...have been assigned to the appropriate __Roles__._
-  - _...have been provisioned __Dataset Read Access__._
-  - _...have been provisioned __Dataset Build Access__. (Power BI)_
-  - _...__are not__ Workspace Contributors, Members or Admins (Power BI)_.
+要使用模拟身份进行测试，按以下步骤操作：
 
-2. __Create a new DAX Query, Pivot Grid or Preview Data window:__ 
-  - It's recommended that you start with _Preview Data_ to observe the effect on model tables
-  - Thereafter, perform a second validation with a _DAX Query_. This is because DAX Queries can be saved for documentation and later reference, if a change occurs in the model requiring re-testing.
+1. **确保 Dataset 配置和访问权限正确:**
+   被模拟的最终用户……
 
-3. __Select 'Impersonation' and enter the User e-mail__: If you have implemented _Static RLS_, you can test the role, instead.
+- _...已分配到相应的 **角色**。_
+- _...已被授予 **Dataset 读取访问权限**。_
+- _...已被授予 **Dataset 生成访问权限**。 (Power BI)_
+- _...**不是** Workspace 的 Contributor、Member 或 Admin（Power BI）_。
 
-4. __Explore the data to validate that the results appear as expected:__ (according to the Security Rules). 
+2. **新建一个 DAX 查询、Pivot Grid 或“预览数据”窗口：**
 
+- 建议先从 _预览数据_ 开始，以观察对模型表的影响
+- 随后，再用 _DAX 查询_ 进行第二次验证。 这是因为 DAX 查询可以保存，用于文档记录和后续参考；当模型发生变更需要重新测试时会很有用。
 
-### Tips for Testing
+3. **选择 'Impersonation' 并输入用户电子邮件:** 如果你已实施 _Static RLS_，也可以改为测试该角色。
 
-1. __Test more than one user:__ It's recommended you test at least 3-10 different users per Role. You can also automate the testing to iterate through each UPN in the Security Table (i.e. using C# Scripting and Macros). 
+4. **浏览数据，验证结果是否符合预期：**（根据安全规则）。
 
-2. __Test each Role & Table Permission:__ Since each Table Permission represents a different DAX Filter Expression, they all have to be tested, separately. Ensure that each Role is tested, and that each test includes the relevant tables with configured Filter Expressions. For example, if a Role consists of table expressions on the 'Customers' and 'Products' table, ensure your query includes attributes from both tables for validation purposes. 
+### 测试技巧
 
-3. __Test many Queries/Measures:__ Try to find complex queries to test, particularly those which might be problematic in the context of Data Security. For example, if calculations require comparing to a total, unfiltered average (i.e. % of total) and it's expected that _that total_ is not filtered in RLS, the developer may need to re-think the Data Security implementation as a function of the model.
+1. **测试多个用户:** 建议每个角色至少测试 3-10 个不同用户。 你也可以将测试自动化，遍历安全表中的每个 UPN（例如使用 C# Script 和宏）。
+
+2. **测试每个角色和表格权限：** 由于每个表格权限对应不同的 DAX 筛选表达式，因此必须分别测试。 确保对每个角色都进行了测试，并且每次测试都包含配置了筛选表达式的相关表。 例如，如果某个角色在“Customers”和“Products”表上定义了表表达式，确保你的查询同时包含这两张表的属性，以便进行验证。
+
+3. **测试多种查询/度量值：** 尽量找一些复杂查询来测试，尤其是在数据安全场景下可能出现问题的那些。 例如，如果计算需要与未过滤的总体平均值（即占总计的百分比）进行比较，并且预期 _该总计_ 在 RLS 中不会被过滤，那么开发者可能需要结合模型重新审视数据安全的实现方案。

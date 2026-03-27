@@ -1,6 +1,6 @@
 ---
 uid: detail-rows-expression
-title: Detail Rows Expression
+title: Expresión de filas de detalle
 author: Just Blindbæk
 updated: 2026-02-15
 applies_to:
@@ -16,64 +16,65 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Implementing Detail Rows Expressions
 
-When a user double-clicks a value in an Excel PivotTable connected to a Power BI or Analysis Services model, they trigger a **drillthrough** — a sheet opens showing the underlying rows behind that aggregated value. By default, the model returns all columns from the measure's host table, which is rarely useful for end users.
+# Implementación de expresiones de filas de detalle
 
-A **Detail Rows Expression** lets you define exactly which columns appear in that drillthrough result. You write a DAX table expression that returns the shape of data you want the consumer to see — combining columns from the fact table with related attributes from dimension tables.
+Cuando un usuario hace doble clic en un valor de una tabla dinámica de Excel conectada a un modelo de Power BI o Analysis Services, inicia un **drillthrough**: se abre una hoja que muestra las filas subyacentes de ese valor agregado. De forma predeterminada, el modelo devuelve todas las columnas de la tabla que contiene la medida, lo que rara vez resulta útil para los usuarios finales.
 
-It is also worth noting that while an Excel PivotTable normally queries the model using MDX, a double-click drillthrough action is executed as a **DAX query**. This makes Detail Rows Expressions particularly effective for retrieving high-cardinality data — such as transaction IDs or individual order lines — where DAX significantly outperforms MDX.
+Una **Expresión de filas de detalle** permite definir exactamente qué columnas aparecen en ese resultado de drillthrough. Escribes una expresión de tabla DAX que devuelve la forma de los datos que quieres que vea el usuario, combinando columnas de la tabla de hechos con atributos relacionados de las tablas de dimensiones.
 
-In this tutorial, you configure a **table-level** Detail Rows Expression on the `Orders` table, so the same friendly drillthrough result applies to all measures on that table. You then see how to override it for a specific measure.
+También conviene tener en cuenta que, aunque una tabla dinámica de Excel normalmente consulta el modelo mediante MDX, una acción de drillthrough con doble clic se ejecuta como una **consulta DAX**. Esto hace que las Expresiones de filas de detalle sean especialmente eficaces para recuperar datos de alta cardinalidad, como identificadores de transacción o líneas de pedido individuales, donde DAX supera claramente a MDX.
+
+En este tutorial, configurarás una Expresión de filas de detalle **a nivel de tabla** en la tabla `Orders`, de modo que el mismo resultado de drillthrough, más fácil de usar, se aplique a todas las medidas de esa tabla. Luego verás cómo reemplazarla en una medida específica.
 
 > [!NOTE]
-> The steps in this tutorial apply to both Tabular Editor 2 and Tabular Editor 3. Screenshots show Tabular Editor 3.
+> Los pasos de este tutorial se aplican tanto a Tabular Editor 2 como a Tabular Editor 3. Las capturas de pantalla corresponden a Tabular Editor 3.
 
-## Prerequisites
+## Requisitos previos
 
-Before you begin, you should have:
+Antes de empezar, deberías tener:
 
-- Tabular Editor 2 or Tabular Editor 3
-- A semantic model with at least one table containing measures
-- Basic familiarity with DAX
-- Excel connected to your model to test drillthrough
+- Tabular Editor 2 o Tabular Editor 3
+- Un modelo semántico con al menos una tabla que contenga medidas
+- Conocimientos básicos de DAX
+- Excel conectado a tu modelo para probar el drillthrough
 
-## Default Drillthrough Behavior
+## Comportamiento predeterminado del drillthrough
 
-Before adding a Detail Rows Expression, it helps to see what end users experience by default.
+Antes de agregar una expresión de filas de detalle, conviene ver qué experimentan los usuarios finales de forma predeterminada.
 
-When a user double-clicks an aggregated value in a PivotTable, the model returns all columns from the fact table — using raw internal column names, with no dimension attributes and no control over which columns are shown.
+Cuando un usuario hace doble clic en un valor agregado de una tabla dinámica, el modelo devuelve todas las columnas de la tabla de hechos —con nombres internos de columna en bruto, sin atributos de las dimensiones y sin control sobre qué columnas se muestran.
 
-![Default drillthrough result in Excel showing raw, unformatted column names from the fact table](../assets/images/tutorials/detail-rows-expression/default-drillthrough.jpg)
+![Resultado del drillthrough predeterminado en Excel que muestra nombres de columna en bruto y sin formato de la tabla de hechos](../assets/images/tutorials/detail-rows-expression/default-drillthrough.jpg)
 
-The result is technically correct, but not useful: internal column names are exposed, related dimension attributes such as product names and customer accounts are missing, and there is no control over column order or selection.
+El resultado es técnicamente correcto, pero no es útil: se exponen los nombres de columnas internos, faltan atributos de dimensión relacionados, como nombres de productos y cuentas de clientes, y no hay control sobre el orden ni la selección de las columnas.
 
-## Table-Level vs. Measure-Level Detail Rows Expressions
+## Expresiones de filas de detalle: nivel de tabla vs. nivel de medida
 
-A Detail Rows Expression can be defined at two levels:
+Una expresión de filas de detalle se puede definir en dos niveles:
 
-| Level | Property name | Scope |
-|---|---|---|
-| **Table** | Default Detail Rows Expression | Applies to all measures on the table |
-| **Measure** | Detail Rows Expression | Applies to that measure only; overrides the table-level expression |
+| Nivel      | Nombre de la propiedad                       | Ámbito                                                                  |
+| ---------- | -------------------------------------------- | ----------------------------------------------------------------------- |
+| **Tabla**  | Expresión de filas de detalle predeterminada | Se aplica a todas las medidas de la tabla                               |
+| **Medida** | Expresión de filas de detalle                | Se aplica solo a esa medida; sobrescribe la expresión de nivel de tabla |
 
-Starting with a table-level expression is the most practical approach — one expression covers every measure on the table. If a specific measure requires different detail columns, you can override it with a measure-level expression, which takes precedence.
+Empezar con una expresión a nivel de tabla es el enfoque más práctico: una sola expresión cubre todas las medidas de la tabla. Si una medida específica necesita columnas de detalle distintas, puedes sobrescribirla con una expresión de nivel de medida, que tiene prioridad.
 
-## Creating a Table-Level Detail Rows Expression
+## Crear una expresión de filas de detalle a nivel de tabla
 
-### Step 1: Select the table and locate the property
+### Paso 1: Selecciona la tabla y encuentra la propiedad
 
-In the **TOM Explorer**, select the table you want to configure — in this case, the `Orders` table. In the **Properties** panel, find the **Default Detail Rows Expression** field under the **Options** group.
+En el **Explorador TOM**, selecciona la tabla que quieras configurar; en este caso, la tabla `Orders`. En el panel de **Propiedades**, busca el campo **Expresión de filas de detalle predeterminada** en el grupo **Opciones**.
 
-![The Orders table selected in TOM Explorer, with the Default Detail Rows Expression property visible and empty in the Properties panel](../assets/images/tutorials/detail-rows-expression/tom-and-default-detail-rows-expression-field.jpg)
+![La tabla Orders seleccionada en el Explorador TOM, con la propiedad Expresión de filas de detalle predeterminada visible y vacía en el panel de Propiedades](../assets/images/tutorials/detail-rows-expression/tom-and-default-detail-rows-expression-field.jpg)
 
-### Step 2: Open the Expression Editor
+### Paso 2: Abre el Editor de expresiones
 
-Click the **Default Detail Rows Expression** field to open it in the **Expression Editor**.
+Haz clic en el campo **Default Detail Rows Expression** para abrirlo en el **Editor de expresiones**.
 
-### Step 3: Write the SELECTCOLUMNS expression
+### Paso 3: Escribe la expresión SELECTCOLUMNS
 
-Enter a DAX expression using `SELECTCOLUMNS` to define the columns to return. Use `RELATED()` to bring in columns from dimension tables.
+Escribe una expresión DAX con `SELECTCOLUMNS` para definir las columnas que se devolverán. Usa `RELATED()` para traer columnas de tablas de dimensiones.
 
 ```dax
 SELECTCOLUMNS(
@@ -87,39 +88,39 @@ SELECTCOLUMNS(
 )
 ```
 
-![The SELECTCOLUMNS expression entered in the Expression Editor, targeting the Orders table](../assets/images/tutorials/detail-rows-expression/expression-editor.jpg)
+![La expresión SELECTCOLUMNS escrita en el Editor de expresiones, aplicada a la tabla Orders](../assets/images/tutorials/detail-rows-expression/expression-editor.jpg)
 
-`SELECTCOLUMNS` takes the source table as its first argument, followed by pairs of `"Column Name", expression`:
+`SELECTCOLUMNS` toma la tabla de origen como su primer argumento y, a continuación, pares de `"Nombre de columna", expresión`:
 
-- Columns from the `Orders` fact table are referenced directly: `Orders[Order Date]`, `Orders[Sales Order Document Number]`
-- Columns from related dimension tables are retrieved using `RELATED()`: `Products[Product Name]`, `Customers[Account Name]`
-- Measures can also be included: `[Quantity]`, `[Value]`
+- Las columnas de la tabla de hechos `Orders` se referencian directamente: `Orders[Order Date]`, `Orders[Sales Order Document Number]`
+- Las columnas de tablas de dimensiones relacionadas se recuperan con `RELATED()`: `Products[Product Name]`, `Customers[Account Name]`
+- También puedes incluir medidas: `[Quantity]`, `[Value]`
 
 > [!NOTE]
-> `RELATED()` works here because `SELECTCOLUMNS` iterates over rows of the `Orders` table, giving each row a row context that allows navigation to related tables via existing relationships.
+> `RELATED()` funciona aquí porque `SELECTCOLUMNS` itera sobre las filas de la tabla `Orders`, dando a cada fila un contexto de fila que permite navegar a tablas relacionadas mediante las relaciones existentes.
 
 > [!TIP]
-> While `SELECTCOLUMNS` is the standard pattern, any valid DAX table expression can be used. For example, you can wrap the expression in `CALCULATETABLE` to apply additional filters, use `ADDCOLUMNS` to include derived values, or call `DETAILROWS` to reuse another measure's Detail Rows Expression and avoid duplication.
+> Aunque `SELECTCOLUMNS` es el patrón estándar, puedes usar cualquier expresión de tabla DAX válida. Por ejemplo, puedes encapsular la expresión en `CALCULATETABLE` para aplicar filtros adicionales, usar `ADDCOLUMNS` para incluir valores derivados o llamar a `DETAILROWS` para reutilizar la expresión Detail Rows Expression de otra medida y evitar duplicaciones.
 
-### Step 4: Save the model
+### Paso 4: Guarda el modelo
 
-Save with **Ctrl+S** and deploy or publish the model to your target environment.
+Guarda con **Ctrl+S** y despliega o publica el modelo en tu entorno de destino.
 
-## Testing the Result
+## Prueba el resultado
 
-Open or refresh your Excel PivotTable and double-click any aggregated value. The drillthrough sheet now shows the columns you defined — with friendly names and dimension attributes included.
+Abre o actualiza tu tabla dinámica de Excel y haz doble clic en cualquier valor agregado. La hoja de desglose ahora muestra las columnas que definiste —con nombres descriptivos e incluyendo atributos de dimensión.
 
-![Drillthrough result in Excel showing the custom columns defined in the Detail Rows Expression](../assets/images/tutorials/detail-rows-expression/dre-drillthrough.jpg)
+![Resultado del desglose en Excel que muestra las columnas personalizadas definidas en la Detail Rows Expression](../assets/images/tutorials/detail-rows-expression/dre-drillthrough.jpg)
 
-Compare this to the default result: instead of raw internal column names, users see meaningful headers and values pulled from related dimension tables.
+Compáralo con el resultado predeterminado: en lugar de los nombres internos de columna en bruto, los usuarios ven encabezados significativos y valores extraídos de tablas de dimensiones relacionadas.
 
-## Overriding with a Measure-Level Expression
+## Sobrescritura con una expresión a nivel de medida
 
-If a specific measure requires a different set of detail columns, you can define a **Detail Rows Expression** directly on that measure. This overrides the table-level expression for that measure only.
+Si una medida concreta requiere un conjunto distinto de columnas de detalle, puedes definir una **Detail Rows Expression** directamente en esa medida. Esto sobrescribe la expresión a nivel de tabla solo para esa medida.
 
-1. In the **TOM Explorer**, expand the table and select the measure — for example, `Quantity` under `Orders`.
-2. In the **Properties** panel, find the **Detail Rows Expression** field.
-3. Enter a `SELECTCOLUMNS` expression tailored to that measure.
+1. En el **Explorador TOM**, expande la tabla y selecciona la medida —por ejemplo, `Quantity` en `Orders`.
+2. En el panel **Propiedades**, busca el campo **Detail Rows Expression**.
+3. Escribe una expresión `SELECTCOLUMNS` específica para esa medida.
 
 ```dax
 SELECTCOLUMNS(
@@ -135,24 +136,24 @@ SELECTCOLUMNS(
 )
 ```
 
-![A measure-specific Detail Rows Expression defined on the Quantity measure, visible in both the Expression Editor and the Properties panel](../assets/images/tutorials/detail-rows-expression/specific-detail-rows-expression.jpg)
+![Una expresión de filas de detalle específica de una medida, definida en la medida Quantity, visible tanto en el Editor de expresiones como en el panel de Propiedades](../assets/images/tutorials/detail-rows-expression/specific-detail-rows-expression.jpg)
 
-When a client tool requests drillthrough for this measure, the measure-level expression is used instead of the table default.
+Cuando una herramienta cliente solicita drillthrough para esta medida, se usa la expresión a nivel de medida en lugar de la predeterminada de la tabla.
 
-## Troubleshooting
+## Solución de problemas
 
-**Drillthrough still shows raw columns**
-The model may not have been saved and deployed after adding the expression. Save the model, redeploy, and reconnect Excel before testing.
+**El drillthrough sigue mostrando columnas sin procesar**
+Puede que el modelo no se haya guardado ni implementado después de agregar la expresión. Guarda el modelo, vuelve a implementarlo y reconecta Excel antes de realizar la prueba.
 
-**Expression not applied to a specific measure**
-If you have defined both a table-level and a measure-level expression, the measure-level takes precedence. Verify which expression is active by selecting the measure in the **Properties** panel and checking the **Detail Rows Expression** field.
+**La expresión no se aplica a una medida específica**
+Si has definido tanto una expresión a nivel de tabla como una a nivel de medida, prevalece la de nivel de medida. Comprueba qué expresión está activa seleccionando la medida en el panel **Propiedades** y revisando el campo **Expresión de filas de detalle**.
 
-**`RELATED()` returns an error**
-`RELATED()` requires an active many-to-one relationship from the source table to the referenced dimension table. Check that the relationship exists and is active in your model.
+**`RELATED()` devuelve un error**
+`RELATED()` requiere una relación activa de varios a uno desde la tabla de origen hacia la tabla de dimensiones referenciada. Comprueba que la relación exista y esté activa en tu modelo.
 
-## Further Reading
+## Lecturas adicionales
 
 - [DAX Guide: SELECTCOLUMNS](https://dax.guide/selectcolumns/)
 - [DAX Guide: RELATED](https://dax.guide/related/)
-- [Microsoft Docs: Detail Rows Expressions](https://learn.microsoft.com/en-us/analysis-services/tabular-models/detail-rows-expressions)
+- [Microsoft Docs: Expresiones de filas de detalle](https://learn.microsoft.com/en-us/analysis-services/tabular-models/detail-rows-expressions)
 - [SQLBI: Controlling drillthrough in Excel PivotTables](https://www.sqlbi.com/articles/controlling-drillthrough-in-excel-pivottables-connected-to-power-bi-or-analysis-services/)

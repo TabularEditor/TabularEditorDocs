@@ -1,6 +1,6 @@
 ---
 uid: hierarchical-display
-title: Hierarchical display
+title: Visualización jerárquica
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -14,13 +14,15 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-## Hierarchical display
-Objects of the loaded model are shown in the TOM Explorer Tree. By default, all object types (visible tables, roles, relationships, etc.) are shown. If you only want to see tables, measures, columns and hierarchies, go to the "View" menu and toggle off "Show all object types".
+
+## Visualización jerárquica
+
+Los objetos del modelo cargado se muestran en el árbol del Explorador TOM. De forma predeterminada, todos los tipos de objetos (tablas visibles, roles, relaciones, etc.) se muestran. Si solo desea ver tablas, medidas, columnas y jerarquías, vaya al menú "Ver" y desactive "Mostrar todos los tipos de objetos".
 
 ![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/AllObjectTypes.png)
 
-Expanding a table in the "Tables" group, you will find the measures, columns and hierarchies contained in the table presented in their respective display folders by default. This way, objects are arranged similar to how end-users would see them in client tools:
+Al expandir una tabla en el grupo "Tablas", encontrará las medidas, columnas y jerarquías que contiene la tabla, organizadas de forma predeterminada en sus respectivas carpetas de visualización. Así, los objetos se organizan de forma similar a como los usuarios finales los verían en las herramientas cliente:
 
 ![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/DisplayFolders.png)
 
-Use the buttons immediately above the Explorer Tree, to toggle invisible objects, display folders, measures, columns and hierarchies, or to filter objects by name. You can rename an object by selecting it in then hitting F2. This also works for display folders. If you double-click a measure or calculated column, you may edit its [DAX expression](dax-editor.md). Right-clicking will show a context menu, providing a range of handy shortcuts for operations such as setting visibility, perspective inclusion, adding columns to a hierarchy, etc.
+Utilice los botones inmediatamente encima del árbol del Explorador para activar o desactivar la visualización de objetos invisibles, carpetas de visualización, medidas, columnas y jerarquías, o para filtrar los objetos por nombre. Puede cambiar el nombre de un objeto seleccionándolo y después pulsando F2. Esto también funciona con las carpetas de visualización. Si hace doble clic en una medida o columna calculada, puede editar su [expresión DAX](dax-editor.md). Al hacer clic con el botón derecho se mostrará un menú contextual con una serie de accesos directos útiles para operaciones como establecer la visibilidad, incluir en una perspectiva, agregar columnas a una jerarquía, etc.

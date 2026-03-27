@@ -1,6 +1,6 @@
-﻿---
+---
 uid: supported-files
-title: Supported file types
+title: Tipos de archivo compatibles
 author: Morten Lønskov
 updated: 2023-10-17
 applies_to:
@@ -11,44 +11,47 @@ applies_to:
       editions:
         - edition: Desktop
           partial: true
-          note: "Desktop Edition does not support model metadata files"
+          note: "La Edición de escritorio no admite archivos de metadatos de modelos"
         - edition: Business
           full: true
         - edition: Enterprise
           full: true
 ---
-# Supported file types
 
-Tabular Editor 3 uses a number of different file formats and document types, some of which are not used by Analysis Services or Power BI. This article provides an overview and a description of each of these file types.
+# Tipos de archivo compatibles
 
-![Supported File Types](~/content/assets/images/file-types/te3-supported-file-types.png)
+Tabular Editor 3 utiliza varios formatos de archivo y tipos de documento, algunos de los cuales no se usan en Analysis Services ni en Power BI. Este artículo ofrece una descripción general y una explicación de cada uno de estos tipos de archivo.
 
-Example files are available for each several file type, based on the [learn.tabulareditor.com](https://tabulareditor.com/learn) course 2 Business Case.
+![Tipos de archivo compatibles](~/content/assets/images/file-types/te3-supported-file-types.png)
 
-## Dataset file types
+Hay archivos de ejemplo disponibles para cada tipo de archivo, basados en el caso práctico “Business Case” del curso 2 de [learn.tabulareditor.com](https://tabulareditor.com/learn).
 
-Tabular Editor supports four file types for semantic models: .bim, Power BI files (.pbit and .pbip), .json and .tmdl. Each file type has different features and limitations, which are explained below.
+## Tipos de archivo del Dataset
 
-Additionally, Tabular Editor 3 Business and Enterprise editions support **saving with supporting files** for Microsoft Fabric Git integration. This creates a folder structure containing .platform and definition.pbism metadata files alongside your model files, enabling seamless synchronization with Fabric workspaces. See [Save with supporting files](xref:save-with-supporting-files) for details.
+Tabular Editor admite cuatro tipos de archivo para modelos semánticos: .bim, archivos de Power BI (.pbit y .pbip), .json y .tmdl. Cada tipo de archivo tiene características y limitaciones distintas, que se explican a continuación.
+
+Además, las ediciones Business y Edición Enterprise de Tabular Editor 3 admiten **guardar con archivos auxiliares** para la integración de Git de Microsoft Fabric. Esto crea una estructura de carpetas que contiene los archivos de metadatos .platform y definition.pbism junto a los archivos de tu modelo, lo que permite una sincronización fluida con los Workspaces de Fabric. Consulta [Guardar con archivos auxiliares](xref:save-with-supporting-files) para obtener más información.
 
 > [!NOTE]
-> Since **Tabular Editor 3 Desktop Edition** is only intended to be used as an External Tool for Power BI Desktop, this edition does not allow loading and saving semantic model files. You may however still use Tabular Editor 2.x for this purpose. See <xref:editions> to learn more about the difference between the Tabular Editor 3 editions.
+> Dado que **Tabular Editor 3 Edición de escritorio** solo está diseñado para usarse como herramienta externa de Power BI Desktop, esta edición no permite cargar ni guardar archivos de modelo semántico. No obstante, puedes seguir usando Tabular Editor 2.x para este fin. Consulta <xref:editions> para obtener más información sobre las diferencias entre las ediciones de Tabular Editor 3.
 
-### [Tabular Model Files (.bim)](#tab/BIM)
-A .bim file is a single file consisting of nested JSON that is known as TMSL. 
+### [Archivos de modelo tabular (.bim)](#tab/BIM)
 
-It's the original format for a semantic model that Microsoft supports. 
+Un archivo .bim es un único archivo que contiene JSON anidado, conocido como TMSL.
 
-However, it has a large drawback: as it's a single large file, it's difficult to track changes and use good team development practices such as git source control.
+Es el formato original de un modelo semántico que Microsoft admite.
 
-#### .bim file in a folder
+Sin embargo, tiene un gran inconveniente: al ser un único archivo grande, es difícil hacer seguimiento de los cambios y aplicar buenas prácticas de desarrollo en equipo, como el control de versiones con Git.
+
+#### Archivo «.bim» en una carpeta
+
 ![Supported File Types BIM](~/content/assets/images/file-types/te3-supported-file-bim.png)
 
-[Download example .bim file ](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/bim-file-example.bim)
+[Descarga el archivo de ejemplo .bim](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/bim-file-example.bim)
 
-#### Save with supporting files for Fabric Git integration
+#### Guardar con archivos auxiliares para la integración de Git de Fabric
 
-When using the **Save with supporting files** option (Business and Enterprise editions), Tabular Editor creates a folder structure compatible with Microsoft Fabric Git integration:
+Al usar la opción **Guardar con archivos auxiliares** (ediciones Business y Edición Enterprise), Tabular Editor crea una estructura de carpetas compatible con la integración de Git de Microsoft Fabric:
 
 ```
 DatabaseName.SemanticModel/
@@ -57,91 +60,89 @@ DatabaseName.SemanticModel/
 └── model.bim
 ```
 
-This structure enables you to commit your semantic models to Git repositories and synchronize them with Fabric workspaces. See [Save with supporting files](xref:save-with-supporting-files) for complete documentation.
-
+Esta estructura te permite realizar commits de tus modelos semánticos en repositorios Git y sincronizarlos con los Workspaces de Fabric. Consulta [Guardar con archivos auxiliares](xref:save-with-supporting-files) para ver la documentación completa.
 
 ### [Power BI](#tab/PowerBI)
 
-Tabular Editor can handle two types of Power BI storage formats:
+Tabular Editor puede trabajar con dos tipos de formatos de almacenamiento de Power BI:
 
-- Power BI Template files (.pbit)
-- Power BI Project folders (.pbip)
+- Archivos de plantilla de Power BI (.pbit)
+- Carpetas del Proyecto de Power BI (.pbip)
 
+#### Carpetas del Proyecto de Power BI (.pbip) _(Versión preliminar)_
 
-
-#### Power BI Project folders (.pbip ) *(Preview)*
-Power BI Project folders were introduced in June 2023 and is available in Power BI Desktop as a preview feature (also known as "Developer Mode"). The storage format is an alternative way to store the contents of a .pbix file, in a format that is more friendly to version control and 3rd party reading/editing of the content.
+Las carpetas del Proyecto de Power BI se introdujeron en junio de 2023 y están disponibles en Power BI Desktop como una funcionalidad en versión preliminar (también conocida como "Modo de desarrollador"). Este formato de almacenamiento es una forma alternativa de guardar el contenido de un archivo .pbix, en un formato más compatible con el control de versiones y con la lectura/edición del contenido por parte de terceros.
 
 > [!WARNING]
-> Just like a .pbix file, a Power BI Project folder may contain model **data** in addition to **metadata**, so the folder should be treated as sensitive in the same way as a .pbix file should be.
+> Al igual que un archivo .pbix, una carpeta del Proyecto de Power BI puede contener **datos** del modelo además de **metadatos**; por tanto, debe tratarse como información confidencial, del mismo modo que un archivo .pbix.
 
-At the root of the Power BI Project folders sits a .pbip file. The file is essentially a pointer to a Power BI report definition file, which may then in turn point to a Power BI dataset, either locally in the same folder structure (stored as a model.bim file), or a dataset published to the Power BI service (in this case, the report is said to be in *Live connect* mode). If a dataset (model.bim file) is present in the Power BI Project folder, Tabular Editor will be able to load this model metadata when opening the .pbip file.
+En la raíz de las carpetas del Proyecto de Power BI se encuentra un archivo .pbip. En esencia, el archivo es un puntero a un archivo de definición de informe de Power BI, que a su vez puede apuntar a un Dataset de Power BI: ya sea de forma local, en la misma estructura de carpetas (almacenado como un archivo model.bim), o a un Dataset publicado en el servicio de Power BI (en este caso, se considera que el Report está en modo _Live connect_). Si hay un Dataset (archivo model.bim) en la carpeta del Proyecto de Power BI, Tabular Editor podrá cargar estos metadatos del modelo al abrir el archivo .pbip.
 
-To learn more about Power BI Project folders, please read [this official blog post from Microsoft](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-power-bi-desktop-developer-mode-preview/).
+Para obtener más información sobre las carpetas del Proyecto de Power BI, consulta [esta entrada oficial del blog de Microsoft](https://powerbi.microsoft.com/en-us/blog/deep-dive-into-power-bi-desktop-developer-mode-preview/).
 
 > [!IMPORTANT]
-> Power BI Project file is the recommended format when using Power BI with Tabular Editor, as it supports the [widest range of modeling operations](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring). Making other types of changes to the model metadata than those listed, may cause your model to become unloadable in Power BI Desktop, and in this case, Microsoft Support will not be able to help you.
+> El archivo del Proyecto de Power BI es el formato recomendado cuando usas Power BI con Tabular Editor, ya que admite la [gama más amplia de operaciones de modelado](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring). Realizar cambios en los metadatos del modelo distintos de los enumerados puede hacer que el modelo deje de poder cargarse en Power BI Desktop; en ese caso, el Soporte técnico de Microsoft no podrá ayudarte.
 
-#### Power BI Template file (.pbit)
-Power BI Template files are similar to .pbix files, with the exception that they do not contain any model **data** - only model **metadata**. As such, this model metadata can be opened and edited in Tabular Editor.
+#### Archivo de plantilla de Power BI (.pbit)
+
+Los archivos de plantilla de Power BI son similares a los archivos .pbix, con la diferencia de que no contienen **datos** del modelo; solo **metadatos** del modelo. Por tanto, estos metadatos del modelo se pueden abrir y editar en Tabular Editor.
 
 > [!WARNING]
-> Even though it's technically possible to load and save model metadata to and from a .pbit file, this approach is unsupported by Power BI Desktop. Tabular Editor will show a warning and block changes by default. Use Power BI Project folders instead, if you intend to make changes to your Power BI model through Tabular Editor.
+> Aunque técnicamente es posible cargar metadatos del modelo desde un archivo .pbit y volver a guardarlos en un .pbit, este enfoque no está admitido por Power BI Desktop. Tabular Editor mostrará una advertencia y bloqueará los cambios de forma predeterminada. En su lugar, usa carpetas del Proyecto de Power BI si tienes previsto hacer cambios en tu modelo de Power BI a través de Tabular Editor.
 
-### [Tabular Model Folder (.json)](#tab/JSON)
+### [Carpeta de modelo tabular (.json)](#tab/JSON)
 
-Tabular Editor allows you to save your dataset objects as separate JSON files, which is a custom serialization format. 
+Tabular Editor te permite guardar los objetos de tu Dataset como archivos JSON independientes, usando un formato de serialización personalizado.
 
-This format preserves the structure and properties of your objects, such as tables, columns, measures, and relationships.
+Este formato conserva la estructura y las propiedades de tus objetos, como tablas, columnas, medidas y relaciones.
 
-This format has been supported in Tabular Editor from the early days and is a proven, though by Microsoft unsupported, method for storing your dataset objects as individual files. Thereby enabling developers to track changes in source control and collaborate on building semantic models.
+Este formato es compatible con Tabular Editor desde sus inicios y es un método probado —aunque Microsoft no lo admite— para almacenar los objetos del Dataset como archivos individuales. De este modo, los desarrolladores pueden hacer un seguimiento de los cambios en el control de código fuente y colaborar en la creación de modelos semánticos.
 
-There is full compatibility between Tabular Editor 2 and 3 with regards to the JSON file structure.
+Hay compatibilidad total entre Tabular Editor 2 y 3 en lo que respecta a la estructura de archivos JSON.
 
-In order to save a semantic model to JSON you must use the 'Save to Folder' option when saving the first time. Subsequent saves to a model loaded from a JSON structured model maintains the setting. it's always possible to convert a model that is in JSON to a .bim file using 'File > Save As'
+Para guardar un modelo semántico en JSON, debes usar la opción "Guardar en carpeta" la primera vez que lo guardes. Los guardados posteriores de un modelo cargado desde un modelo estructurado en JSON mantienen la configuración. siempre es posible convertir un modelo que está en JSON a un archivo .bim usando 'Archivo > Guardar como'
 
+![Tipos de archivo compatibles JSON](~/content/assets/images/file-types/te3-supported-file-json.png)
 
-![Supported File Types JSON](~/content/assets/images/file-types/te3-supported-file-json.png)
+1. El modelo completo incluye un archivo json de la base de datos y cada encabezado TOM tiene su propia carpeta
+2. En la carpeta tables, cada tabla tiene su propia carpeta
+3. Una tabla individual como un archivo json de TableName con carpetas para medidas, columnas y particiones
+4. Las medidas de la tabla tienen cada una su propio archivo json.
 
-1. The overall model has a database json and each TOM headline has its own folder
-2. In tables, each table exists in its own folder
-3. An individual table as a TableName json file with folders for measures, columns and partitions
-4. The measures on the table each have their own json file.
+La configuración de serialización gestiona la profundidad de los objetos json que se crearán.
 
-The depth of which json objects that will be created are handled by the serialization settings. 
+Un único archivo JSON para una medida contiene todas las propiedades de esa medida:
 
-A single JSON file for a measure contains all the properties of that measure:
- 
-![Supported File Types JSON File](~/content/assets/images/file-types/te3-supported-file-json-measure.png)
+![Tipos de archivo compatibles: archivo JSON de una medida](~/content/assets/images/file-types/te3-supported-file-json-measure.png)
 
+Para más información sobre Guardar en carpeta y la configuración de serialización, consulta: [Guardar en carpeta](xref:save-to-folder)
 
-For more information on Save to Folder and serialization settings please refer to: [Save to Folder](xref:save-to-folder)
-
-[Download example JSON Folder Structure](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/json-model-example.zip)
+[Descargar ejemplo de estructura de carpetas JSON](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/json-model-example.zip)
 
 ### [TMDL](#tab/TMDL)
 
-TMDL stands for Tabular Model Definition Language and it's a new format for defining and managing datasets in a human readable format using YAML like syntax. 
+TMDL significa Tabular Model Definition Language y es un nuevo formato para definir y administrar los Dataset en un formato legible para las personas, usando una sintaxis similar a YAML.
 
-Microsoft introduced TMDL as a preview feature in April 2023, aiming to provide a unified and consistent way of working with datasets across different platforms and tools. 
+Microsoft presentó TMDL como una característica en versión preliminar en abril de 2023, con el objetivo de ofrecer una forma unificada y coherente de trabajar con los Dataset en distintas plataformas y herramientas.
 
-TMDL is designed to support dataset source control, enabling users to track changes, collaborate, and automate workflows with semantic models. 
+TMDL está diseñado para admitir el control de código fuente de los Dataset, lo que permite a los usuarios hacer un seguimiento de los cambios, colaborar y automatizar flujos de trabajo con modelos semánticos.
+
 > [!Note]
-> TMDL is in preview, which means that it's not fully stable and may have some limitations or issues. 
+> TMDL está en versión preliminar, lo que significa que aún no es totalmente estable y puede tener algunas limitaciones o problemas.
 
-![Supported File Types TMDL](~/content/assets/images/file-types/te3-supported-file-tmdl.png)
+![Tipos de archivo compatibles TMDL](~/content/assets/images/file-types/te3-supported-file-tmdl.png)
 
-1. The overall serialization is on the top object level from the TOM
-2. Each table is a single file
-3. The TMDL file consist of a YAML like indentation with each column and measure inside the file.
+1. La serialización general se realiza en el nivel del objeto superior de TOM
+2. Cada tabla es un único archivo
+3. El archivo TMDL usa una sangría similar a la de YAML e incluye cada columna y medida dentro del archivo.
 
-For further reading please see: [TMDL](xref:tmdl)
+Para ampliar información, consulta: [TMDL](xref:tmdl)
 
-[Download example TMDL Folder Structure](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/tmdl-model-example.zip)
+[Descargar ejemplo de estructura de carpetas TMDL](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/tmdl-model-example.zip)
 
-#### Save with supporting files for Fabric Git integration
+#### Guardar con archivos auxiliares para la integración de Git de Fabric
 
-When using the **Save with supporting files** option (Business and Enterprise editions), Tabular Editor creates a folder structure compatible with Microsoft Fabric Git integration:
+Al usar la opción **Guardar con archivos auxiliares** (ediciones Business y Edición Enterprise), Tabular Editor crea una estructura de carpetas compatible con la integración de Git de Microsoft Fabric:
 
 ```
 DatabaseName.SemanticModel/
@@ -153,139 +154,142 @@ DatabaseName.SemanticModel/
     └── ...
 ```
 
-The human-readable TMDL format is particularly well-suited for version control and code reviews when using Fabric Git integration. See [Save with supporting files](xref:save-with-supporting-files) for complete documentation.
+El formato TMDL legible para humanos es especialmente adecuado para el control de versiones y las revisiones de código cuando se usa la integración de Git de Fabric. Consulta [Guardar con archivos auxiliares](xref:save-with-supporting-files) para ver la documentación completa.
 
 ***
 
-## Fabric Git Integration files
+## Archivos de integración de Git de Fabric
 
-When using the **Save with supporting files** feature (Business and Enterprise editions), Tabular Editor creates additional metadata files required for Microsoft Fabric Git integration. These files are automatically generated and managed by Tabular Editor.
+Al usar la característica **Guardar con archivos auxiliares** (ediciones Business y Edición Enterprise), Tabular Editor crea archivos de metadatos adicionales necesarios para la integración de Git de Microsoft Fabric. Tabular Editor genera y gestiona estos archivos automáticamente.
 
 ### .platform
 
-The .platform file contains metadata about the semantic model item, including:
-- **type**: Identifies the item as a SemanticModel
-- **displayName**: The name displayed in Fabric workspaces (synchronized from the Database `Name` property)
-- **description**: The description shown in Fabric (synchronized from the Database `Description` property)
-- **logicalId**: An automatically generated cross-workspace identifier
+El archivo .platform contiene metadatos sobre el elemento de modelo semántico, incluidos:
 
-This file is a JSON file that should not be manually edited unless you understand the Fabric item format.
+- **type**: Identifica el elemento como SemanticModel
+- **displayName**: El nombre que se muestra en los Workspaces de Fabric (sincronizado desde la propiedad `Name` de `Database`)
+- **description**: La descripción que se muestra en Fabric (sincronizada desde la propiedad `Description` de `Database`)
+- **logicalId**: Un identificador entre Workspaces generado automáticamente
+
+Este archivo JSON no debe editarse manualmente a menos que entiendas el formato de elementos de Fabric.
 
 ### definition.pbism
 
-The definition.pbism file contains the overall definition and core settings of the semantic model. This file works alongside the model metadata (stored as either model.bim or in the definition/ folder) to provide complete semantic model information required by Microsoft Fabric.
+El archivo definition.pbism contiene la definición general y la configuración principal del modelo semántico. Este archivo funciona junto con los metadatos del modelo (almacenados como model.bim o en la carpeta definition/) para proporcionar la información completa del modelo semántico que requiere Microsoft Fabric.
 
-Both files are automatically created when you check the **Save with supporting files** option during save operations. The resulting folder structure (with .SemanticModel suffix) can be committed to Git repositories and synchronized with Fabric workspaces.
+Ambos archivos se crean automáticamente cuando seleccionas la opción **Save with supporting files** durante las operaciones de guardado. La estructura de carpetas resultante (con el sufijo .SemanticModel) puede confirmarse en repositorios de Git y sincronizarse con los Workspaces de Fabric.
 
-For complete documentation on this feature, see [Save with supporting files](xref:save-with-supporting-files).
+Para consultar la documentación completa de esta característica, consulta [Save with supporting files](xref:save-with-supporting-files).
 
-## Tabular Editor Supporting files
+## Archivos de soporte de Tabular Editor
 
-Supporting files are files which are not used by Analysis Services or Power BI. Instead, these files all support different kinds of development workflow in Tabular Editor 3 and other tools.
+Los archivos de soporte son archivos que no utilizan Analysis Services ni Power BI. En su lugar, estos archivos sirven de apoyo a distintos flujos de trabajo de desarrollo en Tabular Editor 3 y otras herramientas.
 
-All supporting files can be saved individually using either Ctrl+S or 'File > Save' while having the corresponding document or window open and focused. 
+Todos los archivos auxiliares se pueden guardar individualmente con Ctrl+S o con 'Archivo > Guardar', siempre que tengas abierto y en primer plano el documento o la ventana correspondiente.
 
-### Diagram file (.te3diag)
+### Archivo de diagrama (.te3diag)
 
-A .te3diag file is a file format that stores the diagram of a model created with TE3. 
+Un archivo .te3diag es un archivo que almacena el diagrama de un modelo creado con TE3.
 
-These files can be useful for documenting the model structure and logic for other developers who work on the same project. A .te3diag file can be saved in the same folder as the model file for easy access and reference.
+Estos archivos pueden ser útiles para documentar la estructura y la lógica del modelo para otros desarrolladores que trabajen en el mismo proyecto. Un archivo .te3diag se puede guardar en la misma carpeta que el archivo del modelo para facilitar el acceso y la consulta.
 
-Diagram files are actually JSON that is stored in a Tabular Editor 3 extension.
+Los archivos de diagrama en realidad son archivos JSON almacenados en una extensión de Tabular Editor 3.
 
-[Download example Diagram File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/te3-diagram.te3diag)
+[Descargar archivo de diagrama de ejemplo](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/te3-diagram.te3diag)
 
-### DAX query files (.dax or .msdax)
+### Archivos de consulta DAX (.dax o .msdax)
 
-DAX queries are expressions that can be used to manipulate and analyze data in semantic models. A DAX file is a text file that contains one or more DAX queries. 
+Las consultas DAX son expresiones que se pueden usar para manipular y analizar datos en modelos semánticos. Un archivo DAX es un archivo de texto que contiene una o varias consultas DAX.
 
-You can save a DAX file in Tabular Editor 3 and use it later to run the queries again. You can also open a DAX file in other tools that support DAX, such as [DAX Studio](https://daxstudio.org).
+Puedes guardar un archivo DAX en Tabular Editor 3 y usarlo más adelante para volver a ejecutar las consultas. También puedes abrir un archivo DAX en otras herramientas que admitan DAX, como [DAX Studio](https://daxstudio.org).
 
-[Download example DAX File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/dax-query-example.dax)
+[Descargar archivo DAX de ejemplo](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/dax-query-example.dax)
 
-These files can only be opened while Tabular Editor 3 is connected to an instance of Analysis Services or the Power BI / Fabric XMLA endpoint.
+Estos archivos solo se pueden abrir cuando Tabular Editor 3 está conectado a una instancia de Analysis Services o al punto de conexión XMLA de Power BI / Fabric.
 
-### Pivot Grid layouts (.te3pivot)
+### Diseños de Pivot Grid (.te3pivot)
 
-These files contain the layout of a Pivot Grid in Tabular Editor 3. They are simple JSON files specifying which fields (measures, columns, hierarchies) are displayed in the Pivot Grid, and how they are arranged.
+Estos archivos contienen el diseño de un Pivot Grid en Tabular Editor 3. Son archivos JSON sencillos que especifican qué campos (medidas, columnas, jerarquías) se muestran en el Pivot Grid y cómo se organizan.
 
-These files can only be opened while Tabular Editor 3 is connected to an instance of Analysis Services or the Power BI / Fabric XMLA endpoint.
+Estos archivos solo se pueden abrir cuando Tabular Editor 3 está conectado a una instancia de Analysis Services o al punto de conexión XMLA de Power BI / Fabric.
 
-### DAX Scripts (.te3daxs)
+### Scripts DAX (.te3daxs)
 
-These files are saved DAX scripts (not queries) which are used in Tabular Editor to manipulate many DAX objects at once. For example, modifying multiple measures in a semantic model.
+Estos archivos son Scripts DAX guardados (no consultas) que se usan en Tabular Editor para manipular varios objetos DAX a la vez. Por ejemplo, modificar varias medidas en un modelo semántico.
 
-### C# Scripts (.csx)
+### C# Script (.csx)
 
-Creating and editing C# Scripts is one of Tabular Editor's biggest productivity features.
+Crear y editar C# Scripts es una de las funciones de productividad más potentes de Tabular Editor.
 
-These scripts can be saved as files with the .csc extension and loaded into Tabular Editor as well as saved as Macros. A [MacroActions.json local setting file](xref:supported-files#macroactionsjson) is maintained by Tabular Editor.
+Estos scripts se pueden guardar como archivos con la extensión .csc, cargarse en Tabular Editor y también guardarse como macros. Tabular Editor mantiene un [archivo de configuración local llamado MacroActions.json](xref:supported-files#macroactionsjson).
 
-This way, scripts can be reused without having to write them from scratch every time. The [script library](xref:csharp-script-library) is a good place investigate and reuse various examples of scripts as they demonstrate different features and functionalities of C#. 
+Así, puedes reutilizar los scripts sin tener que escribirlos desde cero cada vez. La [biblioteca de scripts](xref:csharp-script-library) es un buen lugar para explorar y reutilizar varios ejemplos de scripts, ya que muestran distintas características y funcionalidades de C#.
 
-[Download example C# Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/create-sum-measures-csharp.csx)
+[Descargar archivo de ejemplo de script de C#](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/create-sum-measures-csharp.csx)
 
-### Vertipaq Analyzer Files (.vpax)
+### Archivos de VertiPaq Analyzer (.vpax)
 
-With Tabular Editor, you can export and import .vpax files using the Vertipaq Analyzer feature. A .vpax file is a compressed file that contains information about the size and structure of your semantic model, but not the actual data. 
+Con Tabular Editor, puedes exportar e importar archivos .vpax con la función VertiPaq Analyzer. Un archivo .vpax es un archivo comprimido que contiene información sobre el tamaño y la estructura de tu modelo semántico, pero no los datos reales.
 
-You can use this file to analyze and optimize your model performance, without exposing sensitive data. For example, you can use the [DAX optimizer](https://www.daxoptimizer.com/) tool to get suggestions on how to improve your DAX formulas based on the .vpax file.
+Puedes usar este archivo para analizar y optimizar el rendimiento del modelo, sin exponer datos confidenciales. Por ejemplo, puedes usar la herramienta [DAX optimizer](https://www.daxoptimizer.com/) para obtener sugerencias sobre cómo mejorar tus fórmulas DAX en función del archivo .vpax.
 
-[Download example DAX Script File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/dax-script-example.te3daxs)
+[Descargar archivo de ejemplo de script DAX](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/dax-script-example.te3daxs)
 
-Unlike other supporting file types creating a .vpax file is done within the Vertipaq Analyzer window using the 'Import' and 'Export' buttons. 
+A diferencia de otros tipos de archivos compatibles, la creación de un archivo .vpax se realiza en la ventana de VertiPaq Analyzer mediante los botones 'Import' y 'Export'.
 
 ![VPAX](~/content/assets/images/file-types/te3-supported-file-vpax.png)
 
-[Download example VPAX file](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/vpaq-example.vpax)
+[Descargar archivo VPAX de ejemplo](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/vpaq-example.vpax)
 
 > [!WARNING]
-> If your model metadata is confidential, a .vpax file should also be considered confidential and only shared with that in mind. If you are concerned about protecting IP, Tabular Editor 3 has an option to obfuscate VPAX files.
+> Si los metadatos de tu modelo son confidenciales, un archivo .vpax también debe considerarse confidencial y compartirse únicamente teniendo esto en cuenta. Si te preocupa proteger la propiedad intelectual, Tabular Editor 3 ofrece una opción para ofuscar archivos VPAX.
 
-#### Obfuscation
+#### Ofuscación
 
-If you need to hand off the VPAX file to a 3rd party, such as a consultant or a tool vendor, you can obfuscate the file to hide the model metadata. This is done by selecting the 'Obfuscated Export...' option under the drop-down button next to the 'Export' button in the Vertipaq Analyzer window.
+Si necesitas entregar el archivo VPAX a un tercero, como un consultor o un proveedor de herramientas, puedes ofuscarlo para ocultar los metadatos del modelo. Para hacerlo, selecciona la opción "Obfuscated Export..." en el menú desplegable junto al botón "Export" en la ventana de VertiPaq Analyzer.
 
-An obfuscated VPAX file uses the .ovpax file extension.
+Un archivo VPAX ofuscado usa la extensión .ovpax.
 
 ![Export obfuscated VPAX](~/content/assets/images/obfuscated-vpax.png)
 
-For more documentation on Vertipaq Analyzer please see: [sqlbi Vertipaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer) and [sqlbi Docs: Vertipaq Analyzer](https://docs.sqlbi.com/vertipaq-analyzer/)
+Para más documentación sobre VertiPaq Analyzer, consulta: [sqlbi Vertipaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer) y [sqlbi Docs: Vertipaq Analyzer](https://docs.sqlbi.com/vertipaq-analyzer/)
 
-For more information about obfuscation of VPAX files, please see: [VPAX Obfuscator](https://www.sqlbi.com/blog/marco/2024/03/15/vpax-obfuscator-a-library-to-obfuscate-vpax-files/)
+Para más información sobre la ofuscación de archivos VPAX, consulta: [VPAX Obfuscator](https://www.sqlbi.com/blog/marco/2024/03/15/vpax-obfuscator-a-library-to-obfuscate-vpax-files/)
 
-## Local Setting Files
+## Archivos de configuración local
 
-Tabular Editor maintains several local files in the "%localappdata%\TabularEditor3" folder. These files are functionally relevant for Tabular Editor 3 and are useful to know.
+Tabular Editor mantiene varios archivos locales en la carpeta "%localappdata%\TabularEditor3". Estos archivos son funcionalmente relevantes para Tabular Editor 3 y conviene conocerlos.
 
-It can be helpful to share these files across a team so that all developers have the same Macros and BPA rules.
+Te puede resultar útil compartir estos archivos con el equipo para que todos los desarrolladores tengan las mismas macros y reglas de BPA.
 
 > [!TIP]
-> A windows native way of syncing a version controlled file into the "%localappdata%\TabularEditor3" folder is to use [SymLink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/).
+> Una forma nativa de Windows de sincronizar un archivo con control de versiones en la carpeta "%localappdata%\TabularEditor3" es usar [SymLink](https://www.howtogeek.com/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/).
 >
-> Store the required files in Git or OneDrive and create a Symlink to the "%localappdata%\TabularEditor3" folder, but be aware that this could end up with synchronization issues, if multiple users update the same file version.
-> However, this is not supported by Tabular Editor directly, so implement it at your own discretion. 
-
+> Guarda los archivos necesarios en Git u OneDrive y crea un Symlink a la carpeta "%localappdata%\TabularEditor3", pero ten en cuenta que esto puede acabar causando problemas de sincronización si varios usuarios actualizan la misma versión del archivo.
+> Sin embargo, Tabular Editor no lo admite directamente, así que impleméntalo bajo tu propia responsabilidad.
 
 ### MacroActions.json
-This file stores all the macros that you have created or imported. It can be useful to share this file with your colleagues or backup it in a version control system and can also be configured to sync with a remote repository that contains macros (See tip above).
 
-This file contains the index of each macro that is used in the software. If you need to change the order or the name of any macro, you can edit this file manually with a text editor. However, be careful not to introduce any errors or inconsistencies in the file thereby corrupting so make sure to create a backup.
+Este archivo almacena todas las macros que hayas creado o importado. Te puede resultar útil compartir este archivo con tus compañeros o guardarlo como copia de seguridad en un sistema de control de versiones. También puedes configurarlo para que se sincronice con un repositorio remoto que contenga macros (consulta el consejo anterior).
 
-[Download example MacroActions File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
+Este archivo contiene el índice de cada macro que se utiliza en la aplicación. Si necesitas cambiar el orden o el nombre de alguna macro, puedes editar este archivo manualmente con un editor de texto. Eso sí: ten cuidado de no introducir errores o incoherencias en el archivo, ya que podrías corromperlo; asegúrate de crear una copia de seguridad.
 
+[Descargar archivo MacroActions.json de ejemplo](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
 
 ### BPARules.json
-The file contains the [Best Practice Analyzer rules](xref:using-bpa) and fix expressions. The only place to add and edit  fix expressions is inside this JSON file.
-It is recommended to store the PBA rule file in version control, which also enables the possibility of running the BPA rules against the semantic model before deployment. 
 
-You can download the official Microsoft BPA rules here: [PBA Rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json)
+El archivo contiene las [reglas de Best Practice Analyzer](xref:using-bpa) y expresiones de corrección. El único lugar donde puedes añadir y editar expresiones de corrección es este archivo JSON.
+Se recomienda almacenar el archivo de reglas de BPA en un sistema de control de versiones, lo que también permite ejecutar las reglas de BPA contra el modelo semántico antes del despliegue.
+
+Puedes descargar aquí las reglas oficiales de BPA de Microsoft: [PBA Rules](https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json)
 
 ### RecentServers.json
-Contains all the servers a user has been connected to. It can be advisable to edit it manually to 'forget' past servers no longer relevant.
+
+Contiene todos los servidores a los que te has conectado. Te puede venir bien editarlo manualmente para "olvidar" servidores anteriores que ya no sean relevantes.
 
 ### Layouts.json
-The Layouts file is automatically generated by Tabular Editor when starting the application. It contains all information to how Tabular Editor 3's UI layout is configured.
+
+El archivo Layouts lo genera automáticamente Tabular Editor al iniciar la aplicación. Contiene toda la información sobre cómo se configura el diseño de la interfaz de usuario de Tabular Editor 3.
 
 > [!TIP]
-> Deleting this file will reset Tabular Editor's layout. If the Tabular Editor layout does not behave as expected a good first step is to backup this file somewhere else, delete the original and restart Tabular Editor 3.
+> Si eliminas este archivo, se restablecerá el diseño de Tabular Editor. Si el diseño de Tabular Editor no se comporta como esperas, un buen primer paso es guardar una copia de seguridad de este archivo en otro lugar, eliminar el original y reiniciar Tabular Editor 3.

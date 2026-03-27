@@ -1,13 +1,13 @@
-﻿---
+---
 uid: creating-macros
-title: Creating macros
+title: Creación de macros
 author: Morten Lønskov
 updated: 2023-12-07
 applies_to:
   products:
     - product: Tabular Editor 2
       full: true
-      note: "Called Custom Actions"
+      note: "Se denominan Custom Actions"
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
@@ -17,59 +17,61 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# (Tutorial) Creating macros
 
-Macros are C# scripts that have been saved in Tabular Editor to be easily reused across semantic models.
-Saving a script as a  Macro will allow that macro to be used when right clicking on the objects in the TOM Explorer making it simple to apply the script to your model.
+# (Tutorial) Creación de macros
 
-> [!NOTE] 
-> In Tabular Editor 2, the feature to reuse C# Script is called @custom-actions.
+Las macros son C# Scripts que se han guardado en Tabular Editor para reutilizarlos fácilmente en distintos modelos semánticos.
+Guardar un script como macro permitirá usar esa macro al hacer clic con el botón derecho en los objetos del Explorador TOM, lo que facilita aplicar el script a tu modelo.
 
-## Creating a Macro
+> [!NOTE]
+> En Tabular Editor 2, la función para reutilizar C# Scripts se llama @custom-actions.
 
-The first step in creating a Macro is to create and test a C# script. 
+## Crear una macro
+
+El primer paso para crear una macro es crear y probar un C# Script.
 
 > [!TIP]
->One easy way to get started with C# scripting is to use the built in record function that lets you record the actions you take in the TOM Explorer.
->This way you can see how to interact with the different model objects and create reusable scripts.
->Another way is to reuse existing scripts such as those in our [script library](xref:csharp-script-library).
->In this tutorial we use the script [Format Numeric Measures](xref:script-format-numeric-measures) to showcase the Macro functionality.
+> Una forma sencilla de empezar a crear C# Scripts es usar la función integrada de grabación, que te permite grabar las acciones que realizas en el Explorador TOM.
+> así puedes ver cómo interactuar con los distintos objetos del modelo y crear scripts reutilizables.
+> otra opción es reutilizar scripts existentes, como los de nuestra [biblioteca de scripts](xref:csharp-script-library).
+> en este tutorial usamos el script [Format Numeric Measures](xref:script-format-numeric-measures) para mostrar la funcionalidad de las macros.
 
-Once the script works according requirements the script can be saved using the toolbar button "Save as Macro" which will open the "Save Macro" window.
+Cuando el script funcione según lo previsto, puedes guardarlo con el botón de la barra de herramientas "Guardar como macro", que abrirá la ventana "Guardar macro".
 
-![Macro Create infobox](~/content/assets/images/features/macros/macro_tutorial_create_infobox.png)
+![Cuadro de información para crear una macro](~/content/assets/images/features/macros/macro_tutorial_create_infobox.png)
 
-The "Save Macro" window allows three options:
-1. Macro Name: Give the Macro a name and use backslash "\" to create folder path for the macro (See below)
-2. Provide a tooltip for the Macro to remember what it does in detail
-3. Select a context where the Macro should be available. 
+La ventana "Guardar macro" ofrece tres opciones:
 
-![Macro Save infobox](~/content/assets/images/features/macros/macro_tutorial_save_window.png)
+1. Nombre de la macro: Ponle un nombre a la macro y usa la barra invertida "\" para crear una ruta de carpetas para la macro (ver más abajo)
+2. Añade un tooltip a la macro para recordar en detalle qué hace
+3. Selecciona el contexto en el que debe estar disponible la macro.
 
-In the above example the Macro will be saved in a folder called Formatting\Beginner and the script is called "Format Numeric Measures". It will be saved in the context of measures.
+![Cuadro de diálogo para guardar la macro](~/content/assets/images/features/macros/macro_tutorial_save_window.png)
 
-### Macro Context
-Macros are saved in a "valid context" that determines which objects in the model the script can be applied to. 
+En el ejemplo anterior, la macro se guardará en una carpeta llamada Formatting\Beginner y el script se llama "Formatear medidas numéricas". Se guardará en el contexto de medidas.
 
-This Macro can then be used when Right Clicking on a measure in the TOM Explorer. The context given while saving the Macro determines which objects will show the Macro when right clicking on that object.
+### Contexto de la macro
 
-Tabular Editor will suggest a context based on the script that is being saved. 
+Las macros se guardan en un "contexto válido" que determina a qué objetos del modelo se puede aplicar el script.
 
-![Macro Menu Shortcut](~/content/assets/images/features/macros/macro_tutorial_menu_shortcut.png)
+Esta macro se puede usar al hacer clic con el botón derecho sobre una medida en el Explorador TOM. El contexto indicado al guardar la macro determina en qué objetos aparecerá la macro al hacer clic con el botón derecho sobre ellos.
 
-## Edit a Macro
+Tabular Editor sugerirá un contexto en función del script que se esté guardando.
 
-A macro can be opened by double clicking it in the Macro pane and after editing the C# script saved using _Ctrl + S_ or the Edit Macro button. 
+![Acceso directo al menú de macros](~/content/assets/images/features/macros/macro_tutorial_menu_shortcut.png)
 
-![Macro Edit Infobox](~/content/assets/images/features/macros/macro_tutorial_edit_infobox.png)
+## Editar una macro
 
+Puedes abrir una macro haciendo doble clic en ella en el panel de macros y, tras editar el C# Script, guardarla con _Ctrl + S_ o con el botón Edit Macro.
 
-## Macro JSON file
+![Infocuadro de edición de la macro](~/content/assets/images/features/macros/macro_tutorial_edit_infobox.png)
 
-Macros are stored in the %LocalAppFolder%/TabularEditor3 as a JSON file called MacroActions.json. For more information on file types in Tabular Editor please see [Supported File Types](xref:supported-files#macroactionsjson)
+## Archivo JSON de macros
 
-## Macro file example
+Las macros se almacenan en %LocalAppFolder%/TabularEditor3 como un archivo JSON llamado MacroActions.json. Para obtener más información sobre los tipos de archivo en Tabular Editor, consulta [Tipos de archivo compatibles](xref:supported-files#macroactionsjson)
 
-An example of a MacroActions.JSON file can be found here. It contains several of the C# scripts from our script library: [Download example MacroActions File](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
+## Ejemplo de archivo de macros
+
+Aquí puedes encontrar un ejemplo de archivo MacroActions.json. Contiene varios de los C# Scripts de nuestra biblioteca: [Descargar archivo de ejemplo de MacroActions](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
 
 

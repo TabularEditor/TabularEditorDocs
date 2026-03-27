@@ -1,6 +1,6 @@
-﻿---
+---
 uid: dax-editor
-title: DAX Editor
+title: Editor de DAX
 author: Daniel Otykier
 updated: 2023-02-03
 applies_to:
@@ -16,66 +16,67 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# DAX Editor
 
-The **DAX Editor** is the centerpiece of Tabular Editor 3.
+# Editor de DAX
 
-It comes in three different *flavours*:
+El **Editor de DAX** es la pieza central de Tabular Editor 3.
 
-- **Expression Editor** Used for making quick changes to singular DAX expressions on objects in the TOM Explorer.
-- **DAX Query** (Connected feature) Used for writing DAX queries in order to retrieve data from the connected instance of Analysis Services / Power BI.
-- **DAX Script** Used for viewing and editing DAX expressions and basic properties across multiple objects in a single document.
+Viene en tres _sabores_ diferentes:
 
-All three flavours support the same operations in terms of [keyboard shortcuts](xref:shortcuts3#dax-code), syntax highlighting, code assist, etc.
+- **Editor de expresiones** Se utiliza para realizar cambios rápidos en expresiones DAX individuales en los objetos del Explorador TOM.
+- **Consulta DAX** (funcionalidad conectada): Se utiliza para escribir consultas DAX y recuperar datos de la instancia conectada de Analysis Services/Power BI.
+- **Script DAX:** Se utiliza para ver y editar expresiones DAX y propiedades básicas en varios objetos dentro de un único documento.
 
-## Code Assist features
+Las tres modalidades admiten las mismas operaciones, como [atajos de teclado](xref:shortcuts3#dax-code), resaltado de sintaxis, Code Assist, etc.
 
-The main enabler of productivity in Tabular Editor 3's DAX Editor, is its **Parameter Info** and **Auto-Complete** features. Collectively, these are known as **Code Assist** features (other vendors use the term "IntelliSense").
+## Funciones de Code Assist
 
-**Parameter Info** provides details about the DAX function and its parameter at the position of the cursor. The information is displayed in a tooltip above the cursor. Hit [Esc] to close the tooltip and [Ctrl+Shift+Space] to display it.
+El principal impulsor de la productividad en el Editor de DAX de Tabular Editor 3 son las funciones **Información de parámetros** y **Autocompletar**. En conjunto, se conocen como funciones de **Code Assist** (otros proveedores usan el término "IntelliSense").
 
-**Auto-Complete** provides context-sensitive suggestions as you type, in a dropdown box. You can use the keyboard to navigate the items in the dropdown and hitting [Enter] or [Tab] will insert the selected item into your code. You can hit [Esc] to close the dropdown and [Ctrl+Space] to open it.
+**Información de parámetros** ofrece detalles sobre la función DAX y su parámetro en la posición del cursor. La información se muestra en un globo de ayuda sobre el cursor. Pulsa [Esc] para cerrar el globo de ayuda y [Ctrl+Shift+Space] para mostrarlo.
 
-These features can also be invoked through the context menu of the editor.
+**Autocompletar** ofrece sugerencias en función del contexto mientras escribes, en una lista desplegable. Puedes usar el teclado para desplazarte por los elementos de la lista desplegable, y al pulsar [Enter] o [Tab] se insertará el elemento seleccionado en tu código. Puedes pulsar [Esc] para cerrar la lista desplegable y [Ctrl+Space] para abrirla.
 
-DAX calltips update as you cycle syntax alternatives using the Up/Down arrows.
+Estas funciones también se pueden activar desde el menú contextual del editor.
+
+Los calltips de DAX se actualizan al alternar entre las opciones de sintaxis con las flechas Arriba/Abajo.
 
 ![Dax Code Assist](~/content/assets/images/dax-code-assist.png)
 
-Most aspects of code assist can be configured under [**Tools > Preferences > Text Editors > DAX Editor > Code Assist**](xref:preferences#dax-editor--code-assist).
+La mayoría de los aspectos de Code Assist se pueden configurar en [**Herramientas > Preferencias > Editores de texto > Editor de DAX > Code Assist**](xref:preferences#dax-editor--code-assist).
 
-## Peek Definition
+## Ver la definición
 
-While the cursor is over an object reference such as a variable or a measure reference, hit [Alt+F12] to display an inline editor with the definition of that object, below the cursor. This is useful when you want to see the DAX code of a referenced object without leaving the current position in the document.
+Con el cursor sobre una referencia a un objeto, como una variable o una referencia a una medida, pulsa [Alt+F12] para mostrar un editor en línea con la definición de ese objeto, debajo del cursor. Esto resulta útil cuando desea ver el código DAX de un objeto al que se hace referencia sin salir de la posición actual del documento.
 
-![Peek Definition](~/content/assets/images/peek-definition.png)
+![Ver la definición](~/content/assets/images/peek-definition.png)
 
-Use the Esc key to close the Peek Definition panel again.
+Usa la tecla Esc para volver a cerrar el panel de Ver la definición.
 
-## Go To Definition
+## Ir a definición
 
-Instead of peeking, we can also jump straight to the location where the referenced object is defined. To do this, hit [F12]. If the referenced object is not defined within the current document, this operation will jump over to that object in the TOM Explorer. If needed, you can navigate back using [Alt+Left Arrow].
+En lugar de usar Ver la definición, también podemos saltar directamente a la ubicación donde está definido el objeto referenciado. Para ello, pulsa [F12]. Si el objeto referenciado no está definido en el documento actual, esta operación saltará a ese objeto en el Explorador TOM. Si lo necesita, puede volver atrás con [Alt+Flecha izquierda].
 
-# Define Measure
+# Definir medida
 
-For DAX scripts and DAX queries, it is sometimes useful to include the definition of a measure that is referenced elsewhere in the code. The **Define Measure** feature lets you do that when the cursor is over a measure reference. You may also choose the **Define Measure with Dependencies** option if you want to include all downstream measure references as well.
+En los scripts DAX y las consultas DAX, a veces es útil incluir la definición de una medida a la que se hace referencia en otra parte del código. La función **Definir medida** permite hacerlo cuando el cursor está sobre una referencia a una medida. También puede elegir la opción **Definir medida con dependencias** si desea incluir también todas las referencias posteriores a medidas.
 
-![Define Measure With Deps](~/content/assets/images/define-measure-with-deps.png)
+![Definir medida con dependencias](~/content/assets/images/define-measure-with-deps.png)
 
-# Inline Measure
+# Medida en línea
 
-If you want to bring the definition of a measure into the current document, the **Inline Measure** feature lets you do just that. When a row context is surrounding the original measure reference, Tabular Editor automatically surrounds the measure expression with [`CALCULATE`](https://dax.guide/calculate) (which is implicit in measure references).
+Si desea traer la definición de una medida al documento actual, la función **Medida en línea** permite hacerlo. Cuando un contexto de fila envuelve la referencia a la medida original, Tabular Editor encierra automáticamente la expresión de la medida en [`CALCULATE`](https://dax.guide/calculate) (tal como ocurre implícitamente en las referencias a medidas).
 
-# Format DAX
+# Formatear DAX
 
-The DAX Editor in Tabular Editor 3 automatically formats your code as you type, i.e. fixing casing of functions and object references, adding proper indentation and spaces between parentheses, etc. All of this can be configured under [**Tools > Preferences > Text Editors > DAX Editor > Auto Formatting**](xref:preferences#dax-editor--auto-formatting).
+El Editor de DAX de Tabular Editor 3 formatea automáticamente su código mientras escribe; es decir, corrige las mayúsculas y minúsculas de las funciones y las referencias a objetos, añade la sangría adecuada y los espacios entre paréntesis, etc. Todo esto se puede configurar en [**Herramientas > Preferencias > Editores de texto > Editor de DAX > Formato automático**](xref:preferences#dax-editor--auto-formatting).
 
-However, sometimes it is necessary to format the entire document. This can be done by hitting [F6] or [Shift+F6] if you prefer more frequent line breaks. For DAX Queries, you may also use [Alt+F6] to reformat the code to always add commas at the front of a line, which is useful when debugging. 
+Sin embargo, a veces es necesario formatear todo el documento. Puedes hacerlo pulsando [F6] o [Shift+F6] si prefieres saltos de línea más frecuentes. Para las Consultas DAX, también puedes usar [Alt+F6] para reformatear el código y hacer que las comas se coloquen siempre al principio de cada línea, lo cual es útil al depurar.
 
-# Refactoring
+# Refactorización
 
-If you want to change the name of a variable or extension column, you can use the **Refactor** option (Ctrl+R) while the cursor is located on the variable or extension column reference. This will select all instances of that object, allowing you to rename it everywhere at once.
+Si quieres cambiar el nombre de una variable o de una columna de extensión, puedes usar la opción **Refactor** (Ctrl+R) con el cursor situado sobre la referencia de la variable o de la columna de extensión. Esto seleccionará todas las apariciones de ese objeto, lo que te permite cambiarle el nombre en todas partes de una sola vez.
 
-# Configurable keyboard shortcuts
+# Atajos de teclado configurables
 
-The DAX Editor and code editors in general are highly configurable and support a lot of additional commands for quickly and productively editing code. You can view all of these commands, as well as modify and assign keyboard shortcuts under **Tools > Preferences > Tabular Editor > Keyboard**.
+El Editor de DAX y los editores de código en general son muy configurables y admiten muchos comandos adicionales para editar código de forma rápida y productiva. Puedes ver todos estos comandos, así como modificar y asignar atajos de teclado en **Herramientas > Preferencias > Tabular Editor > Teclado**.

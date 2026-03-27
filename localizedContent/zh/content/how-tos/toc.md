@@ -1,49 +1,81 @@
-# Scripting and Automation
-## [Advanced Scripting](Advanced-Scripting.md)
-## [Script Reference Objects](script-reference-objects.md)
+# 脚本和自动化
 
-# Model Management and Deployment
-## [Deploy Current Model](deploy-current-model.md)
-## [Connect to SSAS](connect-ssas.md)
-## [Load and Save](load-save.md)
-## [Folder Serialization](folder-serialization.md)
-## [Master Model Pattern](Master-model-pattern.md)
-## [Update compatibility level](update-compatibility-level.md)
+## [高级脚本](Advanced-Scripting.md)
 
-# Data Import and Tables
-## [Importing Tables (TE2)](Importing-Tables.md)
-## [Importing Tables from Excel (TE2)](importing-tables-from-excel.md)
-## [Replace Tables](replace-tables.md)
+## [脚本引用对象](script-reference-objects.md)
 
-# Model Organization and Structure
-## [Advanced Filtering of Explorer Tree](Advanced-Filtering-of-the-Explorer-Tree.md)
-## [Drag and Drop](drag-drop.md)
-## [Duplicate and Batch Rename](duplicate-batchrename.md)
-## [Edit Properties](edit-properties.md)
+# 模型管理与部署
 
-# Translations and Perspectives
-## [Import/Export Translations](import-export-translations.md)
-## [Perspectives and Translations](perspectives-translations.md)
+## [部署当前模型](deploy-current-model.md)
 
-# Data Security and Roles
-## [Roles and Row-Level Security](roles-rls.md)
+## [连接到 SSAS](connect-ssas.md)
 
-# Connectivity and Integration
-## [XMLA Analysis Services Connectivity](xmla-as-connectivity.md)
-## [Power BI XMLA PBIX Workaround](powerbi-xmla-pbix-workaround.md)
+## [加载与保存](load-save.md)
 
-# Model Maintenance
-## [Formula Fixup Dependencies](formula-fixup-dependencies.md)
-## [Metadata Backup](metadata-backup.md)
-## [Undo and Redo](undo-redo.md)
+## [文件夹序列化](folder-serialization.md)
 
-# [Semantic Bridge](semantic-bridge-how-tos.md)
+## [主模型模式](Master-model-pattern.md)
+
+## [更新兼容级别](update-compatibility-level.md)
+
+# 数据导入与表格
+
+## [导入表（TE2）](Importing-Tables.md)
+
+## [从 Excel 导入表（TE2）](importing-tables-from-excel.md)
+
+## [替换表](replace-tables.md)
+
+# 模型组织与结构
+
+## [资源管理器树的高级筛选](Advanced-Filtering-of-the-Explorer-Tree.md)
+
+## [拖放](drag-drop.md)
+
+## [复制与批量重命名](duplicate-batchrename.md)
+
+## [编辑属性](edit-properties.md)
+
+# 翻译与透视
+
+## [导入/导出翻译](import-export-translations.md)
+
+## [透视与翻译](perspectives-translations.md)
+
+# 数据安全与角色
+
+## [角色与行级安全性](roles-rls.md)
+
+# 连接与集成
+
+## [XMLA Analysis Services 连接](xmla-as-connectivity.md)
+
+## [Power BI XMLA PBIX 变通方案](powerbi-xmla-pbix-workaround.md)
+
+# 模型维护
+
+## [公式修复依赖项](formula-fixup-dependencies.md)
+
+## [元数据备份](metadata-backup.md)
+
+## [撤销与重做](undo-redo.md)
+
+# [语义桥](semantic-bridge-how-tos.md)
+
 ## @semantic-bridge-load-inspect
+
 ## @semantic-bridge-import
+
 ## @semantic-bridge-validate-default
+
 ## @semantic-bridge-validate-simple-rules
+
 ## @semantic-bridge-validate-contextual-rules
+
 ## @semantic-bridge-add-object
+
 ## @semantic-bridge-remove-object
+
 ## @semantic-bridge-rename-objects
+
 ## @semantic-bridge-serialize

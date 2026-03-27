@@ -1,64 +1,64 @@
 ---
 uid: kb.bpa-avoid-invalid-characters-names
-title: Avoid Invalid Characters in Object Names
+title: 避免在对象名称中使用无效字符
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule preventing deployment errors by identifying control characters in object names.
+description: 这条最佳实践规则通过识别对象名称中的控制字符来防止部署错误。
 ---
 
-# Avoid Invalid Characters in Object Names
+# 避免在对象名称中使用无效字符
 
-## Overview
+## 概述
 
-This best practice rule identifies objects whose names contain invalid control characters (non-printable characters excluding standard whitespace). These characters can cause deployment failures, rendering issues, and data corruption.
+这条最佳实践规则用于识别名称中包含无效控制字符的对象（即不包括标准空白字符的不可打印字符）。 这些字符可能导致部署失败、呈现问题以及数据损坏。
 
-- Category: Error Prevention
-- Severity: High (3)
+- 类别：错误预防
+- 严重性：高（3）
 
-## Applies To
+## 适用于
 
-- Tables
-- Measures
-- Hierarchies
-- Levels
-- Perspectives
-- Partitions
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
-- KPIs
-- Model Roles
-- Calculation Groups
-- Calculation Items
+- 表
+- 度量值
+- 层次结构
+- 级别
+- 透视
+- 分区
+- 数据列
+- 计算列
+- 计算表格列
+- KPI
+- 模型角色
+- 计算组
+- 计算项
 
-## Why This Matters
+## 为什么这很重要
 
-Control characters in object names cause serious issues:
+对象名称中的控制字符会引发严重问题：
 
-- **Deployment failures**: Power BI Service and Analysis Services may reject models with invalid characters
-- **Rendering problems**: Client tools may display garbled or invisible names
-- **DAX parsing errors**: Invalid characters can break DAX expressions referencing the object
-- **XML corruption**: Model metadata (TMSL/XMLA) may become malformed
-- **Copy/paste issues**: Names may not transfer correctly between applications
-- **Encoding problems**: Cross-platform compatibility issues
+- **部署失败**：Power BI 服务和 Analysis Services 可能会拒绝包含无效字符的模型
+- **呈现问题**：客户端工具可能会显示乱码或不可见的名称
+- **DAX 解析错误**：无效字符可能会导致引用该对象的 DAX 表达式出错
+- **XML 损坏**：模型元数据（TMSL/XMLA）可能会变得格式异常
+- **复制/粘贴问题**：名称在不同应用之间可能无法正确传递
+- **编码问题**：影响跨平台兼容性
 
-Standard whitespace (spaces, newlines, carriage returns) is allowed, but control characters should be removed.
+允许使用标准空白字符（空格、换行、回车），但要移除控制字符。
 
-## When This Rule Triggers
+## 何时会触发此规则
 
-The rule triggers when an object's name contains control characters that are not standard whitespace:
+当对象名称包含非标准空白字符的控制字符时，此规则会触发：
 
 ```csharp
 Name.ToCharArray().Any(char.IsControl(it) and !char.IsWhiteSpace(it))
 ```
 
-This detects problematic characters while allowing legitimate whitespace formatting.
+这样既能保留正常的空白格式，也能检测出有问题的字符。
 
-## How to Fix
+## 如何修复
 
-### Automatic Fix
+### 自动修复
 
-This rule includes an automatic fix that replaces invalid characters with spaces:
+这个规则提供自动修复，会把无效字符替换为空格：
 
 ```csharp
 Name = string.Concat(
@@ -68,58 +68,59 @@ Name = string.Concat(
 )
 ```
 
-To apply:
-1. In the **Best Practice Analyzer** select flagged objects
-2. Click **Apply Fix**
+操作步骤：
 
-### Manual Fix
+1. 在 **Best Practice Analyzer** 中选择被标记的对象
+2. 单击 **Apply Fix**
 
-1. In **TOM Explorer**, select the object
-2. In **Properties** pane, locate the **Name** field
-3. Edit the name to remove invalid characters
-4. Save changes
+### 手动修复
 
-## Common Causes
+1. 在 **TOM Explorer** 中选择对象
+2. 在 **Properties** 窗格中找到 **Name** 字段
+3. 编辑名称，移除无效字符
+4. 保存更改
 
-### Cause 1: Copy/Paste from Rich Text
+## 常见原因
 
-Copying names from Word documents, web pages, or emails can introduce hidden formatting characters.
+### 原因 1：从富文本复制/粘贴
 
-### Cause 2: Automated Name Generation
+从 Word 文档、网页或邮件中复制名称，可能会带入隐藏的格式字符。
 
-Scripts generating names may include control characters from source systems.
+### 原因 2：自动生成名称
 
-### Cause 3: Data Import from External Sources
+用于生成名称的脚本可能会从源系统带入控制字符。
 
-Importing metadata that contains encoding artifacts or control codes.
+### 原因 3：从外部源导入数据
 
-## Example
+导入包含编码残留或控制码的元数据。
 
-### Before Fix
+## 示例
 
-```
-Measure Name: "Total\x00Sales"  (contains NULL character)
-```
-
-Deployment fails with "Invalid character in object name"
-
-### After Fix
+### 修复前
 
 ```
-Measure Name: "Total Sales"  (NULL replaced with space)
+度量值名称：“Total\x00Sales”（包含 NULL 字符）
 ```
 
-Deploys successfully and displays correctly in all tools.
+部署失败，提示“对象名称中包含无效字符”
 
-## Compatibility Level
+### 修复后
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+度量值名称：“Total Sales”（将 NULL 替换为空格）
+```
 
-## Related Rules
+部署成功，并在所有工具中正确显示。
 
-- [Avoid Invalid Characters in Descriptions](xref:kb.bpa-avoid-invalid-characters-descriptions) - Similar validation for description properties
-- [Trim Object Names](xref:kb.bpa-trim-object-names) - Removing leading/trailing spaces
+## 兼容级别
 
-## Learn More
+本规则适用于兼容级别为 **1200** 及以上的模型。
 
-- [DAX Naming Rules](https://learn.microsoft.com/dax/dax-syntax-reference)
+## 相关规则
+
+- [避免在描述中使用无效字符](xref:kb.bpa-avoid-invalid-characters-descriptions) —— 针对描述属性的类似验证
+- [修剪对象名称](xref:kb.bpa-trim-object-names) —— 删除首尾空格
+
+## 了解更多
+
+- [DAX 命名规则](https://learn.microsoft.com/dax/dax-syntax-reference)

@@ -1,6 +1,6 @@
 ---
 uid: update-compatibility-level
-title: Update compatibility level
+title: Actualizar el nivel de compatibilidad
 author: Morten Lønskov
 updated: 2026-01-12
 applies_to:
@@ -17,86 +17,86 @@ applies_to:
           full: true
 ---
 
-# Update compatibility level
+# Actualizar el nivel de compatibilidad
 
-A model's **Compatibility Level** controls which Tabular Object Model (TOM) features you can use. When Microsoft introduces new capabilities, like custom calendars or DAX user-defined functions, they're often gated behind a newer compatibility level. You'll need to upgrade before these features appear in Tabular Editor.
+El **nivel de compatibilidad** de un modelo controla qué características del Tabular Object Model (TOM) puedes usar. Cuando Microsoft introduce nuevas capacidades, como calendarios personalizados o funciones DAX definidas por el usuario, a menudo quedan disponibles solo a partir de un nivel de compatibilidad más reciente. Tendrás que actualizar antes de que estas características aparezcan en Tabular Editor.
 
 > [!WARNING]
-> Compatibility upgrades are one-way. You can upgrade but can't reliably downgrade. Treat this like a schema upgrade and validate your deployment targets first.
+> Las actualizaciones de compatibilidad son unidireccionales. Puedes actualizar, pero no puedes volver atrás de forma fiable. Trátalo como una actualización de esquema y valida primero los destinos de implementación.
 
-## When to upgrade
+## Cuándo actualizar
 
-Upgrade when:
+Actualiza cuando:
 
-- A feature exists in Power BI Desktop but the related TOM property is missing in Tabular Editor
-- You need newly introduced capabilities like **custom calendars** (1701+) or **DAX user-defined functions** (1702+)
-- You're standardizing development across environments and want consistent minimum feature sets
+- Existe una característica en Power BI Desktop, pero falta la propiedad TOM relacionada en Tabular Editor
+- Necesitas capacidades introducidas recientemente, como **calendarios personalizados** (1701+) o **funciones DAX definidas por el usuario** (1702+)
+- Estás estandarizando el desarrollo entre entornos y quieres conjuntos mínimos de características coherentes
 
-## Before you start
+## Antes de empezar
 
-### Back up your model
+### Haz una copia de seguridad del modelo
 
-Because upgrades are irreversible:
+Como las actualizaciones son irreversibles:
 
-- Back up the model metadata (and ideally the full project)
-- Use source control with a clean commit before changing anything
+- Haz una copia de seguridad de los metadatos del modelo (e idealmente del proyecto completo)
+- Usa control de versiones y asegúrate de tener un commit limpio antes de cambiar nada
 
-### Confirm target support
+### Confirma la compatibilidad del destino
 
-Compatibility level support differs by platform (SSAS, Azure Analysis Services, Fabric/Power BI Premium). If your deployment target doesn't support the selected level, you'll be blocked from deploying. See [Compatibility level for tabular models in Analysis Services](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+El soporte del nivel de compatibilidad varía según la plataforma (SSAS, Azure Analysis Services, Fabric/Power BI Premium). Si tu destino de implementación no admite el nivel seleccionado, no podrás implementar. Consulta [Nivel de compatibilidad para modelos tabulares en Analysis Services](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
-## Update the compatibility level
+## Actualiza el nivel de compatibilidad
 
-![Update Compatibility Level](~/content/assets/images/how-to/updatecompatabilitylevel.gif)
+![Actualizar el nivel de compatibilidad](~/content/assets/images/how-to/updatecompatabilitylevel.gif)
 
-### Open your model
+### Abre tu modelo
 
-Open your model in Tabular Editor using one of these approaches:
+Abre tu modelo en Tabular Editor con uno de estos métodos:
 
-- Open a file-based model definition (`.bim` file)
-- Connect to a running model (SSAS/AAS/Power BI semantic model via XMLA endpoint)
+- Abre una definición de modelo basada en un archivo (un archivo `.bim`)
+- Conéctate a un modelo en ejecución (modelo semántico de SSAS/AAS/Power BI a través del punto de conexión XMLA)
 
-### Select the model root
+### Selecciona la raíz del modelo
 
-In the **TOM Explorer**, select the top-level **Model** (root node).
+En el **Explorador TOM**, selecciona el **Model** de nivel superior (nodo raíz).
 
-### Locate Compatibility Level
+### Localiza el nivel de compatibilidad
 
-In the **Properties** panel:
+En el panel de **Propiedades**:
 
-1. Expand **Database**
-2. Find **Compatibility Level**
+1. Expande **Database**
+2. Busca **nivel de compatibilidad**
 
-### Set the new level
+### Establece el nuevo nivel
 
-Set the compatibility level to the minimum required for your feature (or the highest supported by your platform).
+Establece el nivel de compatibilidad en el mínimo necesario para tu funcionalidad (o en el máximo que admita tu plataforma).
 
-Examples:
+Ejemplos:
 
-- **Custom calendars:** 1701+
-- **DAX UDFs:** 1702+
+- **Calendarios personalizados:** 1701+
+- **UDFs de DAX:** 1702+
 
 > [!NOTE]
-> Minimum required levels for features can change as the platform evolves. Always verify prerequisites in current documentation. Some levels/features are Power BI-only and may not be available on SSAS/AAS.
+> Los niveles mínimos necesarios para las funcionalidades pueden cambiar a medida que evoluciona la plataforma. Verifica siempre los requisitos previos en la documentación actual. Algunos niveles/funcionalidades son exclusivos de Power BI y es posible que no estén disponibles en SSAS/AAS.
 
-### Save
+### Guardar
 
-Save the model to apply the change:
+Guarda el modelo para aplicar el cambio:
 
-- If connected to a remote model, saving applies the metadata change back to the server
-- If editing a file-based model, saving updates the metadata on disk
+- Si estás conectado a un modelo remoto, al guardar se aplica de nuevo en el servidor el cambio en los metadatos
+- Si estás editando un modelo basado en archivos, al guardar se actualizan los metadatos en el disco
 
-After saving, Tabular Editor surfaces the newly enabled objects and properties.
+Después de guardar, Tabular Editor muestra los objetos y propiedades que se acaban de habilitar.
 
-## Choose the right level
+## Elige el nivel adecuado
 
-### For SSAS/AAS deployments
+### Para implementaciones de SSAS/AAS
 
-Choose the [latest compatibility level supported by your server version](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+Elige el [nivel de compatibilidad más reciente compatible con la versión de tu servidor](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
-### For Power BI Desktop
+### Para Power BI Desktop
 
-Query your Power BI Desktop engine to see which compatibility levels it supports. Use [DAX Studio or DAX Query View](https://www.sqlbi.com/blog/marco/2024/03/10/compatibility-levels-and-engine-supported-by-power-bi-desktop/):
+Consulta el motor de Power BI Desktop para ver qué niveles de compatibilidad admite. Usa [DAX Studio o Vista de Consulta DAX](https://www.sqlbi.com/blog/marco/2024/03/10/compatibility-levels-and-engine-supported-by-power-bi-desktop/):
 
 ```sql
 SELECT * FROM $SYSTEM.DISCOVER_PROPERTIES
@@ -105,22 +105,22 @@ WHERE [PropertyName] = 'ProviderVersion'
    OR [PropertyName] = 'SupportedCompatibilityLevels'
 ```
 
-## Troubleshooting
+## Solución de problemas
 
-### Can't deploy to SSAS/AAS after upgrade
+### No se puede implementar en SSAS/AAS después de la actualización
 
-You may have selected a compatibility level not supported by the target server. Validate server support before upgrading.
+Puede que hayas seleccionado un nivel de compatibilidad que no admite el servidor de destino. Valida la compatibilidad del servidor antes de actualizar.
 
-**Reference:** [Compatibility level for tabular models in Analysis Services](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+**Referencia:** [Nivel de compatibilidad para modelos tabulares en Analysis Services](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
-### Can I downgrade?
+### ¿Puedo volver a una versión anterior?
 
-No. Downgrades aren't supported and aren't a safe or reliable remediation strategy.
+No. No se admiten las bajadas de versión y no son una estrategia de corrección segura ni fiable.
 
-## Verification
+## Verificación
 
-After updating and saving:
+Después de actualizar y guardar:
 
-- Confirm **Database → Compatibility Level** reflects the new value in Tabular Editor
-- Verify the expected feature surfaces (e.g., the **Functions** node becomes available at 1702+)
-- If targeting SSAS/AAS, validate deployment against the server's supported compatibility levels
+- Confirma que **Base de datos → Nivel de compatibilidad** refleja el nuevo valor en Tabular Editor
+- Verifica que se muestran las características esperadas (p. ej., el nodo **Functions** está disponible a partir de 1702+)
+- Si el destino es SSAS/AAS, valida la implementación con los niveles de compatibilidad que admite el servidor

@@ -1,92 +1,92 @@
 ---
 uid: kb.bpa-translate-hierarchy-levels
-title: Translate Hierarchy Level Names for All Cultures
+title: Traducir los nombres de los niveles de jerarquía para todas las configuraciones regionales
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule ensuring hierarchy level names are translated for all defined cultures.
+description: Regla de buenas prácticas que garantiza que los nombres de los niveles de jerarquía estén traducidos para todas las configuraciones regionales definidas.
 ---
 
-# Translate Hierarchy Level Names for All Cultures
+# Traducir los nombres de los niveles de jerarquía para todas las configuraciones regionales
 
-## Overview
+## Descripción general
 
-This rule identifies hierarchy levels in visible hierarchies that lack name translations for one or more cultures.
+Esta regla identifica niveles de jerarquía en jerarquías visibles cuyos nombres carecen de traducciones para una o varias configuraciones regionales.
 
-- Category: Model Layout
-- Severity: Low (1)
+- Categoría: Diseño del modelo
+- Gravedad: Baja (1)
 
-## Applies To
+## Se aplica a
 
-- Levels (within hierarchies)
+- Niveles (dentro de jerarquías)
 
-## Why This Matters
+## Por qué es importante
 
-- **Incomplete localization**: Level names display in default language only
-- **Inconsistent experience**: Partially translated hierarchies
-- **User confusion**: Navigation appears incomplete
-- **Professional appearance**: Missing translations reduce quality
+- **Localización incompleta**: Los nombres de los niveles se muestran solo en el idioma predeterminado
+- **Experiencia inconsistente**: Jerarquías traducidas parcialmente
+- **Confusión del usuario**: La navegación parece incompleta
+- **Apariencia profesional**: La falta de traducciones reduce la calidad
 
-## When This Rule Triggers
+## Cuándo se activa esta regla
 
-This rule triggers when a hierarchy level meets both of these conditions:
+Esta regla se activa cuando un nivel de jerarquía cumple estas dos condiciones:
 
-1. The hierarchy containing the level is **visible** to end users
-2. At least one culture in the model is **missing a translation** for the level name
+1. La jerarquía que contiene el nivel es **visible** para los usuarios finales
+2. Al menos una configuración regional del modelo **no tiene una traducción** para el nombre del nivel
 
-That is if you have visible hierarchies with multiple cultures, all the level names within those hierarchies should be translated for each culture.
+Es decir: si tienes jerarquías visibles con varias configuraciones regionales, todos los nombres de nivel dentro de esas jerarquías deben estar traducidos para cada configuración regional.
 
 ```csharp
 Hierarchy.IsVisible 
 and Model.Cultures.Any(string.IsNullOrEmpty(outerIt.TranslatedNames[it]))
 ```
 
-## How to Fix
+## Cómo solucionarlo
 
-### Manual Fix
+### Solución manual
 
-1. In **TOM Explorer**, select the level
-2. In **Properties** pane, expand **Translated Names**
-3. Enter translation for each culture
+1. En el **Explorador TOM**, selecciona el nivel
+2. En el panel **Propiedades**, expande **Nombres traducidos**
+3. Introduce la traducción para cada configuración regional
 
-## Common Causes
+## Causas habituales
 
-### Cause 1: New Levels Added
+### Causa 1: Se añadieron nuevos niveles
 
-Levels created without translations.
+Niveles creados sin traducción.
 
-### Cause 2: Culture Added Later
+### Causa 2: La configuración regional se añadió más tarde
 
-Culture added after hierarchy was created.
+Se agregó la configuración regional después de crear la jerarquía.
 
-### Cause 3: Incomplete Translation
+### Causa 3: Traducción incompleta
 
-Translation process didn't cover all hierarchy levels.
+El proceso de traducción no cubrió todos los niveles de la jerarquía.
 
-## Example
+## Ejemplo
 
-### Before Fix
-
-```
-Hierarchy: Geography
-  Level: Country
-    English: "Country"
-    Spanish: (missing)
-```
-
-### After Fix
+### Antes de corregir
 
 ```
-Hierarchy: Geography
-  Level: Country
-    English: "Country"
-    Spanish: "País"
+Jerarquía: Geografía
+  Nivel: País
+    Inglés: "Country"
+    Español: (sin traducir)
 ```
 
-## Compatibility Level
+### Después de corregir
 
-This rule applies to models with compatibility level **1200** and higher.
+```
+Jerarquía: Geografía
+  Nivel: País
+    Inglés: "Country"
+    Español: "País"
+```
 
-## Related Rules
+## Nivel de compatibilidad
 
-- [Translate Visible Names](xref:kb.bpa-translate-visible-names) - Translating object names
-- [Translate Perspectives](xref:kb.bpa-translate-perspectives) - Translating perspective names
+Esta regla se aplica a modelos con nivel de compatibilidad **1200** y superior.
+
+## Reglas relacionadas
+
+- [Traducir nombres visibles](xref:kb.bpa-translate-visible-names) - Traducción de nombres de objetos
+- [Traducir perspectivas](xref:kb.bpa-translate-perspectives) - Traducción de nombres de perspectiva

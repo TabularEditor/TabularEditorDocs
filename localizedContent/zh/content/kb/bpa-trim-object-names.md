@@ -1,103 +1,103 @@
 ---
 uid: kb.bpa-trim-object-names
-title: Trim Leading and Trailing Spaces from Object Names
+title: 删除对象名称首尾空格
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule for removing leading and trailing spaces from object names to prevent confusion and referencing issues.
+description: 用于删除对象名称首尾空格的最佳实践规则，以避免混淆和引用问题。
 ---
 
-# Trim Leading and Trailing Spaces from Object Names
+# 删除对象名称首尾空格
 
-## Overview
+## 概述
 
-This best practice rule identifies objects whose names contain leading or trailing spaces. These unnecessary spaces cause DAX referencing issues, display problems, and general confusion.
+此最佳实践规则用于识别名称包含首尾空格的对象。 这些多余的空格会导致 DAX 引用问题、显示异常，并引起混淆。
 
-- Category: **Naming Conventions**
-- Severity: Low (1)
+- 类别：**命名约定**
+- 严重性：低 (1)
 
-## Applies To
+## 适用对象
 
-- Model
-- Tables
-- Measures
-- Hierarchies
-- Levels
-- Perspectives
-- Partitions
-- Provider Data Sources
-- Data Columns
-- Calculated Columns
-- Calculated Tables
-- Calculated Table Columns
-- Structured Data Sources
-- Named Expressions
-- Model Roles
-- Calculation Groups
-- Calculation Items
+- 模型
+- 表
+- 度量值
+- 层次结构
+- 级别
+- 透视
+- 分区
+- Provider数据源
+- 数据列
+- 计算列
+- 计算表格
+- 计算表格列
+- Structured数据源
+- Named Expression
+- 模型角色
+- 计算组
+- 计算项
 
-## Why This Matters
+## 为什么这很重要
 
-- **DAX syntax problems**: Extra spaces require careful bracket notation
-- **Display inconsistency**: Objects appear misaligned in field lists
-- **Search difficulties**: Users may not find objects when searching
-- **Maintenance confusion**: Developers may create duplicates not noticing spaces
+- **DAX 语法问题**：多余的空格会迫使你在使用括号引用时更加小心
+- **显示不一致**：对象在字段列表中看起来不对齐
+- **搜索困难**：用户搜索时可能找不到对象
+- **维护易混淆**：开发人员可能没注意到空格，从而创建重复对象
 
-## When This Rule Triggers
+## 此规则何时触发
 
-The rule triggers when an object name starts or ends with a space:
+当对象名称以空格开头或结尾时，会触发此规则：
 
 ```csharp
 Name.StartsWith(" ") or Name.EndsWith(" ")
 ```
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. In **TOM Explorer**, locate the object
-2. Right-click and select **Rename** (or press F2)
-3. Remove leading/trailing spaces
-4. Press Enter to confirm
+1. 在 **TOM Explorer** 中找到该对象
+2. 右键单击并选择 **重命名**（或按 F2）
+3. 删除首尾空格
+4. 按 Enter 键确认
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Accidental Spacebar Presses
+### 原因 1：误按空格键
 
-Accidental spacebar presses during naming.
+命名时误按空格键。
 
-### Cause 2: Copy/Paste from External Sources
+### 原因 2：从外部来源复制/粘贴
 
-Copy/paste from documents with formatting.
+从带格式的文档中复制/粘贴。
 
-### Cause 3: Duplicating objects
+### 原因 3：复制对象
 
-When duplicating objects the name will have an added " copy" post-fixed. It is easy to miss deleting the space before "copy" 
+复制对象时，名称末尾会追加“ copy”后缀。 很容易忽略删除 "copy" 前面的空格
 
-## Example
+## 示例
 
-### Before Fix
+### 修复前
 
 ```
-Measures:
+度量值：
   - Total Sales
-  -  Total Sales  (with spaces - appears different!)
+  -  Total Sales  (带空格——看起来不一样！)
 ```
 
-DAX: `[ Total Sales]` - Which one?
+DAX: `[ Total Sales]` ——用哪一个？
 
-### After Fix
+### 修复后
 
 ```
-Measures:
-  - Total Sales (single consistent measure)
+度量值：
+  - Total Sales (单一且一致的度量值)
 ```
 
-DAX: `[Total Sales]` - Unambiguous
+DAX: `[Total Sales]` ——没有歧义
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1200** and higher.
+此规则适用于兼容级别为 **1200** 及更高的模型。
 
-## Related Rules
+## 相关规则
 
-- [Avoid Invalid Characters in Names](xref:kb.bpa-avoid-invalid-characters-names) - Related naming hygiene rule
+- [避免名称中包含无效字符](xref:kb.bpa-avoid-invalid-characters-names) ——相关的命名卫生规则

@@ -1,6 +1,6 @@
 ---
 uid: update-compatibility-level
-title: Update compatibility level
+title: 更新兼容级别
 author: Morten Lønskov
 updated: 2026-01-12
 applies_to:
@@ -17,86 +17,86 @@ applies_to:
           full: true
 ---
 
-# Update compatibility level
+# 更新兼容级别
 
-A model's **Compatibility Level** controls which Tabular Object Model (TOM) features you can use. When Microsoft introduces new capabilities, like custom calendars or DAX user-defined functions, they're often gated behind a newer compatibility level. You'll need to upgrade before these features appear in Tabular Editor.
+模型的 **兼容级别** 决定你可以使用哪些 Tabular Object Model (TOM) 功能。 当 Microsoft 引入自定义日历或 DAX 用户定义函数等新功能时，这些功能通常需要在较新的兼容级别下才会开放。 你需要先升级，这些功能才会出现在 Tabular Editor 中。
 
 > [!WARNING]
-> Compatibility upgrades are one-way. You can upgrade but can't reliably downgrade. Treat this like a schema upgrade and validate your deployment targets first.
+> 兼容级别升级是单向的。 你可以升级，但无法可靠地降级。 将其视为一次架构升级，并先验证你的部署目标。
 
-## When to upgrade
+## 何时升级
 
-Upgrade when:
+在以下情况下升级：
 
-- A feature exists in Power BI Desktop but the related TOM property is missing in Tabular Editor
-- You need newly introduced capabilities like **custom calendars** (1701+) or **DAX user-defined functions** (1702+)
-- You're standardizing development across environments and want consistent minimum feature sets
+- Power BI Desktop 中有某个功能，但在 Tabular Editor 中缺少对应的 TOM 属性
+- 你需要新引入的功能，例如 **自定义日历**（1701+）或 **DAX 用户定义函数**（1702+）
+- 你正在跨环境统一开发标准，并希望各环境的最低功能集保持一致
 
-## Before you start
+## 开始之前
 
-### Back up your model
+### 备份你的模型
 
-Because upgrades are irreversible:
+因为升级不可逆：
 
-- Back up the model metadata (and ideally the full project)
-- Use source control with a clean commit before changing anything
+- 备份模型元数据（最好连同整个项目一起备份）
+- 在进行任何更改之前，先在源代码管理中创建一个干净的 commit
 
-### Confirm target support
+### 确认目标端支持情况
 
-Compatibility level support differs by platform (SSAS, Azure Analysis Services, Fabric/Power BI Premium). If your deployment target doesn't support the selected level, you'll be blocked from deploying. See [Compatibility level for tabular models in Analysis Services](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+不同平台（SSAS、Azure Analysis Services、Fabric/Power BI Premium）对兼容级别的支持情况不同。 如果你的部署目标不支持所选级别，将无法部署。 参阅 [Analysis Services 中表格模型的兼容级别](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
-## Update the compatibility level
+## 更新兼容级别
 
-![Update Compatibility Level](~/content/assets/images/how-to/updatecompatabilitylevel.gif)
+![更新兼容级别](~/content/assets/images/how-to/updatecompatabilitylevel.gif)
 
-### Open your model
+### 打开模型
 
-Open your model in Tabular Editor using one of these approaches:
+使用以下任一方式在 Tabular Editor 中打开你的模型：
 
-- Open a file-based model definition (`.bim` file)
-- Connect to a running model (SSAS/AAS/Power BI semantic model via XMLA endpoint)
+- 打开基于文件的模型定义（`.bim` 文件）
+- 连接到正在运行的模型（通过 XMLA endpoint 连接到 SSAS/AAS/Power BI 语义模型）
 
-### Select the model root
+### 选择模型根节点
 
-In the **TOM Explorer**, select the top-level **Model** (root node).
+在 **TOM Explorer** 中，选择顶层的 **Model**（根节点）。
 
-### Locate Compatibility Level
+### 找到兼容级别
 
-In the **Properties** panel:
+在 **Properties** 面板中：
 
-1. Expand **Database**
-2. Find **Compatibility Level**
+1. 展开 **Database**
+2. 找到 **兼容级别**
 
-### Set the new level
+### 设置新的级别
 
-Set the compatibility level to the minimum required for your feature (or the highest supported by your platform).
+将兼容级别设置为所需功能的最低级别（或平台支持的最高级别）。
 
-Examples:
+示例：
 
-- **Custom calendars:** 1701+
-- **DAX UDFs:** 1702+
+- **自定义日历：** 1701+
+- **DAX UDFs：** 1702+
 
 > [!NOTE]
-> Minimum required levels for features can change as the platform evolves. Always verify prerequisites in current documentation. Some levels/features are Power BI-only and may not be available on SSAS/AAS.
+> 随着平台演进，某些功能所需的最低级别可能会发生变化。 始终在最新文档中核对前置条件。 部分级别/功能仅适用于 Power BI，在 SSAS/AAS 上可能不可用。
 
-### Save
+### 保存
 
-Save the model to apply the change:
+保存模型以应用更改：
 
-- If connected to a remote model, saving applies the metadata change back to the server
-- If editing a file-based model, saving updates the metadata on disk
+- 如果连接到远程模型，保存会将元数据更改回写到服务器
+- 如果编辑的是基于文件的模型，保存会更新磁盘上的元数据
 
-After saving, Tabular Editor surfaces the newly enabled objects and properties.
+保存后，Tabular Editor 会显示新启用的对象和属性。
 
-## Choose the right level
+## 选择合适的级别
 
-### For SSAS/AAS deployments
+### 适用于 SSAS/AAS 部署
 
-Choose the [latest compatibility level supported by your server version](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+选择[服务器版本所支持的最新兼容级别](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
-### For Power BI Desktop
+### 适用于 Power BI Desktop
 
-Query your Power BI Desktop engine to see which compatibility levels it supports. Use [DAX Studio or DAX Query View](https://www.sqlbi.com/blog/marco/2024/03/10/compatibility-levels-and-engine-supported-by-power-bi-desktop/):
+查询 Power BI Desktop 引擎，查看它支持哪些兼容级别。 使用 [DAX Studio 或 DAX 查询视图](https://www.sqlbi.com/blog/marco/2024/03/10/compatibility-levels-and-engine-supported-by-power-bi-desktop/)：
 
 ```sql
 SELECT * FROM $SYSTEM.DISCOVER_PROPERTIES
@@ -105,22 +105,22 @@ WHERE [PropertyName] = 'ProviderVersion'
    OR [PropertyName] = 'SupportedCompatibilityLevels'
 ```
 
-## Troubleshooting
+## 故障排查
 
-### Can't deploy to SSAS/AAS after upgrade
+### 升级后无法部署到 SSAS/AAS
 
-You may have selected a compatibility level not supported by the target server. Validate server support before upgrading.
+你可能选择了目标服务器不支持的兼容级别。 升级前先确认目标服务器是否支持。
 
-**Reference:** [Compatibility level for tabular models in Analysis Services](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+**参考：** [Analysis Services 中表格模型的兼容级别](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
-### Can I downgrade?
+### 我可以降级吗？
 
-No. Downgrades aren't supported and aren't a safe or reliable remediation strategy.
+不能。 不支持降级，而且这也不是安全或可靠的补救措施。
 
-## Verification
+## 验证
 
-After updating and saving:
+更新并保存后：
 
-- Confirm **Database → Compatibility Level** reflects the new value in Tabular Editor
-- Verify the expected feature surfaces (e.g., the **Functions** node becomes available at 1702+)
-- If targeting SSAS/AAS, validate deployment against the server's supported compatibility levels
+- 确认 Tabular Editor 中的 **数据库 → 兼容级别** 已反映新值
+- 验证预期功能是否已显示（例如，兼容级别达到 1702 及以上时，**Functions** 节点将可用）
+- 如果部署目标为 SSAS/AAS，请根据服务器支持的兼容级别验证部署是否可行

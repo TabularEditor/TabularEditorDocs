@@ -1,6 +1,6 @@
 ---
 uid: script-create-measure-table
-title: Create Measure Table
+title: Crear tabla de medidas
 author: Morten Lønskov
 updated: 2023-11-29
 applies_to:
@@ -10,17 +10,19 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Create Measure Table
 
-## Script Purpose
-The scripts creates a hidden measure table containing one hidden column
+# Crear tabla de medidas
 
+## Propósito del script
+
+Los scripts crean una tabla de medidas oculta que contiene una columna oculta
 
 ## Script
 
-### Create Measure Table
+### Crear tabla de medidas
+
 ```csharp
-// Create a calculated table with a single column which is hidden:
-var table = Model.AddCalculatedTable("Model Measures", "{0}");
+// Crear una tabla calculada con una sola columna que estará oculta:
+var table = Model.AddCalculatedTable("Medidas del modelo", "{0}");
 table.Columns[0].IsHidden = true;
 ```

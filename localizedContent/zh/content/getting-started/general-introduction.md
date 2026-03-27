@@ -1,6 +1,6 @@
 ---
 uid: general-introduction
-title: General introduction and architecture
+title: 总体介绍和体系结构
 author: Daniel Otykier
 updated: 2021-09-30
 applies_to:
@@ -11,109 +11,109 @@ applies_to:
       full: true
 ---
 
-# General introduction and architecture
+# 总体介绍和体系结构
 
-Tabular Editor is a Windows desktop application for developing tabular models. Specifically, the tool lets you edit the Tabular Object Model (TOM) metadata. The tool can load the TOM metadata from a file or from an existing Analysis Services database, and it can also deploy updated TOM metadata to Analysis Services.
-
-> [!NOTE]
-> We use the term **tabular model** to represent both Analysis Services Tabular models as well as Power BI datasets, since Analysis Services Tabular is the data model engine used by Power BI. Similarly, when we use term **Analysis Services**, we mean "any instance of Analysis Services", which could be SQL Server Analysis Services, Power BI Desktop or the Power BI Service XMLA Endpoint.
-
-## Tabular Object Model (TOM) metadata
-
-A data model is made up by a number of tables. Each table has one or more columns, and a table may also contain measures and hierarchies. Typically, the data model also defines relationships between tables, data sources containing connection details and table partitions containing data source expressions (SQL or M queries) for loading data, etc. All of this information is collectively called the **model metadata**, and it is stored in a JSON based format known as the **Tabular Object Model (TOM)**.
-
-- When a tabular model is created using Visual Studio, the JSON representing the TOM metadata is stored in a file called **Model.bim**.
-- When a data model is created using Power BI Desktop, the TOM metadata is embedded within the .pbix or .pbit file (since this file format also contains a lot of other details, such as definitions of visuals, bookmarks, etc., which is not related to the data model itself).
-
-Using a client library called [AMO/TOM](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), Tabular Editor is able to load and save metadata to and from this JSON based format. In addition, the client library allows Tabular Editor to connect directly to any instance of Analysis Services, in order to obtain the model metadata from an existing database. This is illustrated in the figure below.
-
-![Architecture](~/content/assets/images/architecture.png)
+Tabular Editor 是一款用于开发表格模型的 Windows 桌面应用程序。 具体而言，该工具可用于编辑 Tabular Object Model (TOM) 元数据。 这个工具可以从文件或现有的 Analysis Services 数据库加载 TOM 元数据，也可以将更新后的 TOM 元数据部署到 Analysis Services。
 
 > [!NOTE]
-> In the paragraph above, we used the term **database** to represent a model that has been deployed to Analysis Services. Within the Power BI Service the term **dataset** is used to represent the same thing, namely a tabular model.
+> 我们使用术语 **表格模型** 来同时表示 Analysis Services Tabular 模型和 Power BI Dataset，因为 Analysis Services Tabular 是 Power BI 使用的 Data model 引擎。 同样，当我们使用术语 **Analysis Services** 时，指的是“Analysis Services 的任何实例”，例如 SQL Server Analysis Services、Power BI Desktop，或 Power BI 服务的 XMLA 端点。
 
-Tabular Editor can load model metadata from the following sources:
+## Tabular Object Model (TOM) 元数据
 
-- [1] Model.bim files
-- [2] Database.json files (see @parallel-development for more information)
-- [3] .pbit files (Power BI Template)
-- [4] A database on SQL Server Analysis Services (Tabular)
-- [5] A database on Azure Analysis Services
-- [6] A dataset in a Power BI Premium* Workspace
-- [7] A Power BI Desktop report in Import/DirectQuery mode
+一个 Data model 由多张表组成。 每张表有一列或多列，还可能包含度量值和层次结构。 通常，Data model 还会定义表之间的关系、包含连接详细信息的数据源，以及包含数据源表达式 (SQL 或 M 查询) 的表分区，用于加载数据等。 所有这些信息统称为 **模型元数据**，并以一种基于 JSON 的格式存储，该格式称为 **Tabular Object Model (TOM)**。
 
-*Power BI Premium/Embedded Capacity or Power BI Premium-Per-User is required in order to enable the [XMLA Endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools). The XMLA Endpoint must be enabled for any third party tool to connect to Power BI datasets.
+- 当使用 Visual Studio 创建表格模型时，用于表示 TOM 元数据的 JSON 会存储在名为 **Model.bim** 的文件中。
+- 当使用 Power BI Desktop 创建 Data model 时，TOM 元数据会嵌入在 .pbix 或 .pbit 文件中 (因为这种文件格式还包含许多其他细节，例如 Visual 的定义、Bookmark 等，而这些与 Data model 本身无关)。
+
+借助名为 [AMO/TOM](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 的客户端库，Tabular Editor 能够从这种基于 JSON 的格式加载元数据，并将其保存回该格式。 此外，该客户端库还允许 Tabular Editor 直接连接到任何 Analysis Services 实例，以便从现有数据库获取模型元数据。 下图对此进行了说明。
+
+![架构](~/content/assets/images/architecture.png)
+
+> [!NOTE]
+> 在上文段落中，我们使用术语 **database** 来表示已部署到 Analysis Services 的模型。 在 Power BI 服务中，术语 **dataset** 用来表示同一事物，即表格模型。
+
+Tabular Editor 可从以下来源加载模型元数据：
+
+- [1] Model.bim 文件
+- [2] Database.json 文件（更多信息见 @parallel-development）
+- [3] .pbit 文件（Power BI 模板）
+- [4] SQL Server Analysis Services（表格模式）上的数据库
+- [5] Azure Analysis Services 上的数据库
+- [6] Power BI Premium\* Workspace 中的 Dataset
+- [7] Import/DirectQuery 模式下的 Power BI Desktop Report
+
+\*要启用 [XMLA 端点](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools)，必须拥有 Power BI Premium/Embedded 容量或 Power BI Premium-Per-User。 任何第三方工具要连接到 Power BI Dataset，都必须启用 XMLA 端点。
 
 > [!IMPORTANT]
-> Tabular Editor 2.x supports all sources 1-7 above. Tabular Editor 3 supports only some sources depending on which [edition of Tabular Editor 3](xref:editions) you are using.
+> Tabular Editor 2.x 支持以上 1-7 的所有来源。 Tabular Editor 3 仅支持其中部分来源，具体取决于你使用的是哪种 [Tabular Editor 3 版本](xref:editions)。
 
-Once the model metadata has been loaded in Tabular Editor, the user is free to add/edit/remove **objects** and change **object properties**. Modifications are not saved back to the source until the user explicitly saves the model, either by choosing **File > Save** or by hitting CTRL+S. If the model metadata was loaded from a file source (sources 1-3 above), that file will then be updated. If the model metadata was loaded from Analysis Services (sources 4-7 above), then the changes are saved back to Analysis Services. Note that certain changes may cause objects to enter a state where they can no longer be queried by end-users. For example, if you add a column to a table, you will need to [refresh the table](xref:refresh-preview-query#refreshing-data) before users can query the contents of that table or any measures that dependent on the table.
+在 Tabular Editor 中加载模型元数据后，你可以自由添加/编辑/删除 **对象**，并更改 **对象属性**。 在你明确保存模型之前，修改不会写回到源。你可以选择 **File > Save**，或按 CTRL+S。 如果模型元数据是从文件源加载的（以上来源 1-3），该文件会被更新。 如果模型元数据是从 Analysis Services 加载的（以上来源 4-7），更改会保存回 Analysis Services。 注意，某些更改可能会导致对象进入最终用户无法再查询的状态。 例如，如果你在表中添加了一列，在用户能够查询该表内容或任何依赖于该表的度量值之前，你需要先 [刷新表](xref:refresh-preview-query#refreshing-data)。
 
 > [!WARNING]
-> Certain limitations apply when saving model metadata changes back to Power BI Desktop (source 7 above). See @desktop-limitations for more information.
+> 将模型元数据的更改保存回 Power BI Desktop（以上来源 7）时，会有一些限制。 更多信息见 @desktop-limitations。
 
-### TOM objects and properties
+### TOM 对象和属性
 
-The TOM metadata is made up of **objects** and **properties**.
+TOM 元数据由 **对象** 和 **属性** 组成。
 
-Examples of TOM **objects**:
+TOM **对象** 示例：
 
-- Data Sources
-- Tables
-- Partitions
-- Measures
-- KPIs
-- Columns
-- Model Roles
+- 数据源
+- 表
+- 分区
+- 度量值
+- KPI
+- 列
+- 模型角色
 
-Examples of TOM **object properties**:
+TOM **对象属性**示例：
 
-- `Name` (text)
-- `Display Folder` (text)
-- `Description` (text)
-- `Hidden` (true/false)
-- `Summarize By` (one of: None, Sum, Min, Max, ...)
+- `Name`（文本）
+- `显示文件夹`（文本）
+- `Description`（文本）
+- `Hidden`（true/false）
+- `Summarize By`（可选项之一：None、Sum、Min、Max、...）
 
-Most properties are simple values (text, true/false, one-of-selections aka. enums), but properties can also reference other objects (for example, the `Sort By Column` property should reference a column). Properties can also be arrays of objects, such as the `Members` property on the Model Role object.
+大多数属性都是简单值（文本、true/false、从选项中选择其一，也称为。 枚举），但属性也可以引用其他对象（例如，`Sort By Column` 属性应引用一列）。 属性也可以是对象数组，例如模型角色对象上的 `Members` 属性。
 
-Tabular Editor generally uses the same name for objects and properties as those defined in the [Microsoft.AnalysisServices.Tabular namespace](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet). If you want to learn more about specific TOM objects or properties, always consult the namespace documentation. For example, to learn what the "Summarize By" column property does, first locate the "Column" class in Microsoft's documentation, then expand "Properties" and scroll to "SummarizeBy". You should then get to [this article](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet).
+Tabular Editor 通常沿用 [Microsoft.AnalysisServices.Tabular 命名空间](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet) 中定义的对象和属性名称。 如果你想进一步了解特定的 TOM 对象或属性，请始终查阅命名空间文档。 例如，要了解“Summarize By”这一列属性的作用，先在 Microsoft 文档中找到“Column”类，然后展开“Properties”，再滚动到“SummarizeBy”。 然后你会看到[这篇文章](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet)。
 
-![SummarizeBy on Microsoft's docs](~/content/assets/images/asdocs-summarizyby.png)
+![Microsoft 文档中的 SummarizeBy](~/content/assets/images/asdocs-summarizyby.png)
 
-### Editing property values
+### 编辑属性值
 
-Both versions of Tabular Editor display the object model metadata in a hierarchical view known as the **TOM Explorer** view, which roughly corresponds to the hierarchical structure of the JSON metadata:
+Tabular Editor 的两个版本都会以层级视图显示对象模型元数据，这个视图称为 **TOM Explorer**，其结构大致对应 JSON 元数据的层级结构：
 
 ![TOM Explorer](~/content/assets/images/tom-explorer.png)
 
-In general, Tabular Editor lets you modify object properties by first selecting an object in the TOM Explorer (you can select multiple objects at once by holding down SHIFT or CTRL), and then simply editing the property value within the **Properties view** (see screenshot below).
+通常情况下，Tabular Editor 允许你先在 TOM Explorer 中选择一个对象（按住 SHIFT 或 CTRL 可一次选择多个对象），然后直接在 **属性视图** 中编辑属性值（见下图）。
 
-![Properties View](~/content/assets/images/properties-view.png)
+![属性视图](~/content/assets/images/properties-view.png)
 
-Tabular Editor does not perform explicit validation of modified property values, except for some basic rules (for example, object names cannot be empty, measure names have to be unique, etc.). It is your responsibility as a tabular model developer to know which properties to set and what values to use.
+Tabular Editor 不会对修改后的属性值进行显式验证，除了少数基本规则（例如，对象名称不能为空、度量值名称必须唯一等）。 作为表格模型开发人员，你需要自己清楚应设置哪些属性，以及应使用什么值。
 
-If you make a mistake while editing property values, you can always press CTRL+Z (Edit > Undo) to roll back the last property change.
+如果你在编辑属性值时出错，随时都可以按 CTRL+Z（编辑 > 撤销）撤销上一次属性更改。
 
-## Architecture
+## 架构
 
-As hinted above, Tabular Editor has two different modes of operation: Metadata from file (aka. **file mode**) and metadata from Analysis Services (aka. **connected mode**). In addition, Tabular Editor 3 introduces a hybrid approach called [**workspace mode**](xref:workspace-mode).
+如上所述，Tabular Editor 有两种不同的运行模式：来自文件的元数据（即 **文件模式**）以及来自 Analysis Services 的元数据（即 **连接模式**）。 此外，Tabular Editor 3 引入了一种混合方式，称为 [**工作区模式**](xref:workspace-mode)。
 
-Before proceeding, it is important to understand the differences between these modes:
+在继续之前，了解这些模式之间的差异很重要：
 
-- In **file mode**, Tabular Editor loads and saves all model metadata from and to a file on disk. In this mode, Tabular Editor cannot interact with model **data** (that is, table previews, DAX queries, Pivot Grids, and data refresh operations are not enabled). This mode can be used entirely offline, even when no instance of Analysis Services is available. The supported file formats for model metadata are:
-  - Model.bim (same format used by Visual Studio)
-  - Database.json (folder structure only used by Tabular Editor)
-  - .pbit (Power BI Template)
-- In **connected mode**, Tabular Editor loads and saves model metadata from and to Analysis Services. In this mode, it is possible to interact with model **data** using Tabular Editor 3 (table previews, DAX queries, Pivot Grids and data refresh). This mode requires connectivity to an instance of Analysis Services.
-- In **workspace mode**, Tabular Editor 3 loads model metadata from a file on disk AND deploys the metadata to Analysis Services. On subsequent saves (CTRL+S), updates are saved both to disk and to the connected instance of Analysis Services. It is possible to interact with model **data** similar to **connected mode**.
+- 在 **文件模式** 下，Tabular Editor 会从磁盘上的文件加载并将所有模型元数据保存回该文件。 在此模式下，Tabular Editor 无法与模型 **数据** 交互（也就是说，不支持表格预览、DAX 查询、Pivot Grid 以及数据刷新操作）。 该模式可完全离线使用，即使没有可用的 Analysis Services 实例也可以。 支持的模型元数据文件格式包括：
+  - Model.bim（与 Visual Studio 使用的格式相同）
+  - Database.json（仅 Tabular Editor 使用的文件夹结构格式）
+  - .pbit（Power BI 模板）
+- 在 **连接模式** 下，Tabular Editor 会从 Analysis Services 加载模型元数据，并将元数据保存回 Analysis Services。 在此模式下，可以使用 Tabular Editor 3 与模型 **数据** 交互（表格预览、DAX 查询、Pivot Grid 和数据刷新）。 该模式需要连接到某个 Analysis Services 实例。
+- 在 **工作区模式** 下，Tabular Editor 3 会从磁盘上的文件加载模型元数据，并将元数据部署到 Analysis Services。 后续保存（CTRL+S）时，更新会同时写入磁盘和已连接的 Analysis Services 实例。 你也可以像在 **连接模式** 下一样与模型 **数据** 交互。
 
-### Metadata synchronization
+### 元数据同步
 
-One of the major benefits of Tabular Editor over the standard tools (Visual Studio, Power BI Desktop), is that model metadata is only saved upon request. In other words, you can make multiple changes to objects and properties without having to wait for any Analysis Services instance to become synchronized between each change. The synchronization of the Analysis Services database is an operation that may take several seconds to complete, depending on the size and complexity of the data model. In Power BI Desktop, this synchronization happens every time the notorious "Working on it" spinner appears on the screen. In Tabular Editor, this only happens when you explicitly save your changes (CTRL+S).
+与标准工具（Visual Studio、Power BI Desktop）相比，Tabular Editor 的一大优势在于：模型元数据只有在你主动保存时才会写入。 换句话说，你可以对对象和属性进行多次修改，而不必在每次更改之间都等待某个 Analysis Services 实例完成同步。 同步 Analysis Services 数据库可能需要几秒钟才能完成，具体取决于 Data model 的大小和复杂程度。 在 Power BI Desktop 中，每当屏幕上出现那个臭名昭著的“Working on it”加载动画时，就会进行这种同步。 在 Tabular Editor 中，只有当你显式保存更改（CTRL+S）时才会进行同步。
 
-The downside is, of course, that you have to remember to explicitly save your changes, before you can test the impact of any metadata modifications that were made.
+当然，缺点是：在测试任何元数据修改带来的影响之前，你必须记得先显式保存这些更改。
 
-## Next steps
+## 后续步骤
 
 - @installation-activation-basic
 - @migrate-from-vs

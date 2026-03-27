@@ -1,6 +1,6 @@
-﻿---
+---
 uid: user-interface-reference
-title: Basic user interface
+title: Interfaz de usuario básica
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -16,10 +16,11 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-[!include[using-bpa](../../features/views/user-interface.md)]
 
-# Next steps
+[!include[user-interface](../../features/views/user-interface.md)]
+
+# Siguientes pasos
 
 - @tom-explorer-view
 - @supported-files
-- @preferences
+- @preferencias

@@ -1,6 +1,6 @@
 ---
 uid: personalizing-te3
-title: Personalizing and configuring Tabular Editor 3 to suit your needs
+title: Personalización y configuración de Tabular Editor 3 para adaptarlo a tus necesidades
 author: Daniel Otykier
 updated: 2021-09-28
 applies_to:
@@ -17,142 +17,142 @@ applies_to:
           full: true
 ---
 
-# Personalizing and configuring Tabular Editor 3 to suit your needs
+# Personalización y configuración de Tabular Editor 3 para adaptarlo a tus necesidades
 
-Tabular Editor 3 provides a wide range of configuration options, that allow you to tweak the tool to your specific needs and preferred workflow. In this article, we will guide you through the settings that are most commonly adjusted by individual model developers.
+Tabular Editor 3 ofrece una amplia gama de opciones de configuración que te permiten ajustar la herramienta a tus necesidades específicas y a tu flujo de trabajo preferido. En este artículo, te guiaremos a través de la configuración que los desarrolladores de modelos suelen ajustar con más frecuencia.
 
-Most of the settings covered in this article are accessed through the **Tools > Preferences** menu option. Throughout the article, we will list individual settings in the following style, for easy reference:
+A la mayoría de las opciones tratadas en este artículo se accede desde la opción de menú **Herramientas > Preferencias**. A lo largo del artículo, enumeraremos las configuraciones individuales con el siguiente formato para facilitar la consulta:
 
-***Name of setting* (default value)**<br/>Description of setting.
+**_Nombre de la configuración_ (valor predeterminado)**<br/>Descripción de la configuración.
 
 > [!TIP]
-> Use the **search box** at the top of the Preferences dialog to quickly locate settings by name or keyword. The search filters the preferences tree in real-time, helping you navigate directly to the setting you need.
+> Usa el **cuadro de búsqueda** en la parte superior del cuadro de diálogo de preferencias para localizar rápidamente ajustes por nombre o palabra clave. La búsqueda filtra el árbol de preferencias en tiempo real, ayudándote a ir directamente a la configuración que necesitas.
 
-# General features
+# Características generales
 
-The first page you will encounter within the **Preferences** dialog is the **Tabular Editor > Features** page (see screenshot below). Below is a short description of the features on this page, and what they are commonly used for:
+La primera página que encontrarás en el cuadro de diálogo **Preferencias** es **Tabular Editor > Características** (consulta la captura de pantalla a continuación). A continuación se muestra una breve descripción de las características de esta página y para qué se suelen usar:
 
-![Pref General Features](~/content/assets/images/pref-general-features.png)
+![Preferencias: características generales](~/content/assets/images/pref-general-features.png)
 
 ## Power BI
 
-These settings are mostly useful for developers who use Tabular Editor 3 as an [External Tool for Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools).
+Estas configuraciones son especialmente útiles para los desarrolladores que usan Tabular Editor 3 como [herramienta externa para Power BI Desktop](https://docs.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools).
 
-##### *Allow unsupported modeling operations* (disabled)
+##### _Permitir operaciones de modelado no compatibles_ (deshabilitado)
 
-External Tools for Power BI Desktop have some [limitations](xref:desktop-limitations). By default, Tabular Editor 3 will prevent the user from making unsupported changes to the data model. There may be some advanced modeling features which work well, even though they are not supported cf. the previous link. To unlock all Tabular Object Model objects and properties, enable this setting.
+Las herramientas externas para Power BI Desktop tienen algunas [limitaciones](xref:desktop-limitations). De forma predeterminada, Tabular Editor 3 te impedirá hacer cambios no compatibles en el Data model. Puede haber algunas características avanzadas de modelado que funcionen bien, aunque no estén admitidas; consulta el enlace anterior. Para desbloquear todos los objetos y propiedades del Tabular Object Model, habilita esta configuración.
 
-##### *Hide auto date/time warnings* (disabled)
+##### _Ocultar advertencias de fecha/hora automáticas_ (deshabilitado)
 
-When the "Auto date/time" setting in Power BI Desktop is enabled, a number of calculated tables are created automatically. Unfortunately, these tables contain DAX code which trigger a warning message by Tabular Editor 3's built-in DAX analyzer. To hide these warnings, enable this setting.
+Cuando la configuración "Fecha/hora automática" de Power BI Desktop está habilitada, se crean automáticamente varias tablas calculadas. Por desgracia, estas tablas incluyen código DAX que hace que el analizador de DAX integrado de Tabular Editor 3 muestre un mensaje de advertencia. Para ocultar estas advertencias, habilita esta configuración.
 
-##### *Line break on first line of DAX* (disabled)
+##### _Salto de línea en la primera línea de DAX_ (deshabilitado)
 
-In Power BI Desktop it is common to insert a line break on the first line of a DAX expression, due to the way the formula bar displays the DAX code. If you often switch back and forth between Tabular Editor and Power BI Desktop, consider enabling this option to have Tabular Editor 3 insert the line break automatically, whenever a DAX expression is edited through the tool.
+En Power BI Desktop es habitual insertar un salto de línea en la primera línea de una expresión DAX, debido a cómo la barra de fórmulas muestra el código DAX. Si a menudo alternas entre Tabular Editor y Power BI Desktop, considera habilitar esta opción para que Tabular Editor 3 inserte el salto de línea automáticamente cada vez que se edite una expresión DAX desde la herramienta.
 
-## Metadata Synchronization
+## Sincronización de metadatos
 
-These settings controls the behavior of Tabular Editor 3, when model metadata is loaded from a database on an instance of Analysis Services. The settings specify how Tabular Editor 3 should deal with metadata changes applied to the database from outside the application, such as when another user makes a change to the database, or when you make a change to the model through Power BI Desktop while Tabular Editor 3 is used as an external tool.
+Estas opciones controlan el comportamiento de Tabular Editor 3 cuando los metadatos del modelo se cargan desde una base de datos en una instancia de Analysis Services. Estas opciones especifican cómo Tabular Editor 3 gestiona los cambios de metadatos aplicados a la base de datos desde fuera de la aplicación; por ejemplo, cuando otro usuario modifica la base de datos o cuando tú cambias el modelo desde Power BI Desktop mientras usas Tabular Editor 3 como herramienta externa.
 
-##### *Warn when local metadata is out-of-sync with deployed model* (enabled)
+##### _Avisar cuando los metadatos locales no estén sincronizados con el modelo implementado_ (habilitado)
 
-When this is checked, Tabular Editor displays a warning message when you attempt to save changes, while another user or process has made a change to the database since the model metadata was loaded into your instance of Tabular Editor.
+Cuando esta opción está activada, Tabular Editor muestra un mensaje de advertencia al intentar guardar cambios si otro usuario o proceso ha modificado la base de datos desde que los metadatos del modelo se cargaron en tu instancia de Tabular Editor.
 
-##### *Track external model changes* (enabled)
+##### _Seguir los cambios externos del modelo_ (habilitado)
 
-This option is only relevant for local instances of Analysis Services (i.e. msmdsrv.exe processes running on the same machine as Tabular Editor). When checked, Tabular Editor starts a trace on Analysis Services and notifies you if external changes are made.
+Esta opción solo es relevante para instancias locales de Analysis Services (es decir, procesos msmdsrv.exe que se ejecutan en la misma máquina que Tabular Editor). Cuando está activada, Tabular Editor inicia un seguimiento en Analysis Services y te notifica si se realizan cambios externos.
 
-##### *Refresh local Tabular Object Model metadata automatically* (enabled)
+##### _Actualizar automáticamente los metadatos locales del Tabular Object Model_ (habilitado)
 
-When the tracing mechanism as described above is enabled, this option allows Tabular Editor to automatically refresh the model metadata when an external change is detected. This is useful if you often switch back and forth between Power BI Desktop and Tabular Editor 3, as this ensures that changes made in Power BI Desktop are automatically synced to Tabular Editor.
+Cuando el mecanismo de seguimiento descrito anteriormente está habilitado, esta opción permite que Tabular Editor actualice automáticamente los metadatos del modelo cuando se detecta un cambio externo. Esto es útil si alternas con frecuencia entre Power BI Desktop y Tabular Editor 3, ya que garantiza que los cambios realizados en Power BI Desktop se sincronicen automáticamente con Tabular Editor.
 
-##### *Cleanup orphaned Tabular Editor traces*
+##### _Limpiar seguimientos huérfanos de Tabular Editor_
 
-Normally, Tabular Editor 3 should automatically stop and remove any AS traces started due to the settings above. However, if the application was shut down prematurely, the traces may never be stopped. By clicking this button, all AS traces started by any instance of Tabular Editor, on the current instance of Analysis Services, will be removed.
-
-> [!NOTE]
-> The cleanup button is only available when Tabular Editor is connected to an instance of Analysis Services.
-
-# TOM Explorer settings
-
-The settings below control various aspects of the TOM Explorer. You can find these settings under **Tabular Editor > TOM Explorer**:
-
-![Tom Explorer Settings](~/content/assets/images/tom-explorer-settings.png)
-
-##### *Show full branch* (disabled)
-
-When filtering the TOM Explorer, by default Tabular Editor 3 shows all items in the hierarchy that matches the filter string, including their parents. If you want to see all child items as well (even though these might not match the filter string), enable this option.
-
-##### *Always show delete warnings* (disabled)
-
-If you prefer Tabular Editor 3 to prompt you to confirm all object deletions, enable this setting. Otherwise, Tabular Editor 3 will only prompt you to confirm multi-object deletions, or deletions of objects that are referenced by other objects.
+Normalmente, Tabular Editor 3 debería detener y eliminar automáticamente cualquier seguimiento de AS iniciado debido a las opciones anteriores. Sin embargo, si la aplicación se cerró de forma prematura, es posible que esos seguimientos nunca se detengan. Al hacer clic en este botón, se eliminarán todos los seguimientos de AS iniciados por cualquier instancia de Tabular Editor en la instancia actual de Analysis Services.
 
 > [!NOTE]
-> All delete operations in Tabular Editor 3 can be undone by hitting CTRL+Z.
+> El botón de limpieza solo está disponible cuando Tabular Editor está conectado a una instancia de Analysis Services.
 
-# DAX editor general settings
+# Configuración del Explorador TOM
 
-Tabular Editor 3's DAX editor is highly configurable, and it is easy to get overwhelmed by the many settings available. This section highlights the most common and important settings. Locate the general settings under **Text Editors > DAX Editor > General**:
+Las opciones siguientes controlan varios aspectos del Explorador TOM. Puedes encontrar estos ajustes en **Tabular Editor > Explorador TOM**:
 
-![Dax Editor General](~/content/assets/images/dax-editor-general.png)
+![Ajustes del Explorador Tom](~/content/assets/images/tom-explorer-settings.png)
+
+##### _Mostrar toda la rama_ (desactivado)
+
+Al filtrar el Explorador TOM, de forma predeterminada, Tabular Editor 3 muestra todos los elementos de la jerarquía que coinciden con la cadena de filtro, incluidos sus elementos padre. Si también quieres ver todos los elementos secundarios (aunque no coincidan con la cadena de filtro), habilita esta opción.
+
+##### _Mostrar siempre advertencias de eliminación_ (desactivado)
+
+Si prefieres que Tabular Editor 3 te pida confirmar todas las eliminaciones de objetos, habilita esta opción. De lo contrario, Tabular Editor 3 solo te pedirá que confirmes las eliminaciones de varios objetos o las eliminaciones de objetos a los que hacen referencia otros objetos.
+
+> [!NOTE]
+> Todas las operaciones de eliminación en Tabular Editor 3 se pueden deshacer pulsando CTRL+Z.
+
+# Ajustes generales del Editor de DAX
+
+El Editor de DAX de Tabular Editor 3 es muy configurable y es fácil sentirse abrumado por la gran cantidad de ajustes disponibles. Esta sección destaca los ajustes más comunes e importantes. Encuentra los ajustes generales en **Editores de texto > Editor de DAX > General**:
+
+![General del Editor de Dax](~/content/assets/images/dax-editor-general.png)
 
 ## General
 
-The *Line numbers*, *Code folding*, *Visible whitespace* and *Indentation guides* settings can be used to toggle various visual feature of the editor. In the screenshot below, all four options have been enabled:
+Los ajustes _Números de línea_, _Plegado de código_, _Espacios en blanco visibles_ y _Guías de sangría_ sirven para activar o desactivar varias características Visuales del editor. En la captura de pantalla siguiente, se han habilitado las cuatro opciones:
 
-![Visible Whitespace](~/content/assets/images/visible-whitespace.png)
+![Espacios en blanco visibles](~/content/assets/images/visible-whitespace.png)
 
-##### *Use tabs* (disabled)
+##### _Usar tabulaciones_ (desactivado)
 
-When this is checked, a tab character (`\t`) is inserted whenever the TAB button is hit. Otherwise, a number of spaces corresponding to the *Indent width* setting is inserted.
+Al marcar esta opción, se inserta un carácter de tabulación (`\t`) cada vez que se pulsa la tecla TAB. De lo contrario, se inserta un número de espacios correspondiente al ajuste _Ancho de sangría_.
 
-##### *Comment style* (slashes)
+##### _Estilo de comentario_ (barras inclinadas)
 
-DAX supports line comments that use slashes (`//`) or hyphens (`--`). This setting determines which style of comment is used when Tabular Editor 3 generates DAX code, such as when using the DAX script feature.
+DAX admite comentarios de línea con barras (`//`) o guiones (`--`). Este ajuste determina qué estilo de comentario se usa cuando Tabular Editor 3 genera código DAX, por ejemplo, al usar la funcionalidad de scripts DAX.
 
-## DAX Settings
+## Ajustes de DAX
 
-These settings determine certain behavior of the DAX code analyzer. The *Locale* setting is simply a matter of preference. All other settings are relevant only when Tabular Editor 3 cannot determine the version of Analysis Services used, as is the case for example when a Model.bim file is loaded directly. In this case, Tabular Editor tries to guess which version the model will be deployed to, based on the compatibility level specified in the model, but depending on the actual version of the deployment target, there may be various DAX language differences, which Tabular Editor cannot determine. If Tabular Editor reports incorrect semantic/syntax errors, you may need to tweak these settings.
+Estas opciones determinan determinados comportamientos del analizador de código DAX. La opción _Locale_ es simplemente una cuestión de preferencia. El resto de las opciones solo son relevantes cuando Tabular Editor 3 no puede determinar la versión de Analysis Services utilizada, como ocurre, por ejemplo, cuando se carga directamente un archivo Model.bim. En este caso, Tabular Editor intenta deducir en qué versión se implementará el modelo, basándose en el nivel de compatibilidad especificado en el modelo; sin embargo, en función de la versión real del destino de implementación, pueden existir distintas diferencias en el lenguaje DAX que Tabular Editor no puede determinar. Si Tabular Editor muestra errores semánticos o de sintaxis incorrectos en el Report, es posible que tengas que ajustar estas configuraciones.
 
-# Auto Formatting
+# Formato automático
 
-On the **Text Editors > DAX Editor > Auto Formatting** page, you can find a wide range of settings for controlling how your DAX code is formatted.
+En la página **Editores de texto > Editor de DAX > Formato automático**, encontrarás una amplia variedad de configuraciones para controlar cómo se formatea tu código DAX.
 
-![Auto Formatting Settings](~/content/assets/images/auto-formatting-settings.png)
+![Configuración de formato automático](~/content/assets/images/auto-formatting-settings.png)
 
-##### *Auto format code as you type* (enabled)
+##### _Formatear automáticamente el código al escribir_ (habilitado)
 
-This option will automatically apply certain formatting rules whenever certain keystrokes occur. For example, when a parenthesis is closed, this feature will ensure that everything within the parentheses is formatted according to the other settings on this page.
+Esta opción aplicará automáticamente determinadas reglas de formato cuando se produzcan ciertas pulsaciones de teclas. Por ejemplo, al cerrar un paréntesis, esta función se asegura de que todo lo que esté dentro del paréntesis se formatee según el resto de las configuraciones de esta página.
 
-##### *Auto-format function calls* (enabled)
+##### _Formatear automáticamente las llamadas a funciones_ (habilitado)
 
-This option specifically controls whether automatic formatting of function calls (that is, spacing between arguments and parentheses), should happen when a parenthesis is closed.
+Esta opción controla específicamente si el formato automático de las llamadas a funciones (es decir, el espaciado entre argumentos y paréntesis) debe aplicarse cuando se cierra un paréntesis.
 
-##### *Auto-indent* (enabled)
+##### _Sangría automática_ (habilitado)
 
-This option automatically indents function arguments when a line break is inserted within a function call.
+Esta opción aplica sangría automáticamente a los argumentos de las funciones cuando se inserta un salto de línea dentro de una llamada a función.
 
-##### *Auto-brace* (enabled)
+##### _Autocierre de llaves_ (habilitado)
 
-This option automatically inserts the closing brace or quote whenever an opening brace or quote is entered.
+Esta opción inserta automáticamente la llave o comilla de cierre cuando se introduce una llave o comilla de apertura.
 
-##### *Wrap selection* (enabled)
+##### _Encapsular la selección_ (habilitado)
 
-When enabled, this option automatically wraps the current selection with the closing brace, when an opening brace is entered.
+Cuando está habilitada, esta opción envuelve automáticamente la selección actual con la llave de cierre cuando se introduce una llave de apertura.
 
-## Formatting rules
+## Reglas de formato
 
-These settings control how DAX code whitespace is formatted, both when auto-formatting occurs, but also when code is manually formatted (using the **Format DAX** menu options).
+Estas configuraciones controlan cómo se formatea el espacio en blanco del código DAX, tanto cuando se aplica el formato automático como cuando el código se formatea manualmente (mediante las opciones del menú **Formatear DAX**).
 
-##### *Space after functions* (disabled)
+##### _Espacio después de las funciones_ (deshabilitado)
 
-# [Enabled](#tab/tab1)
+# [Habilitado](#tab/tab1)
 
 ```DAX
 SUM ( 'Sales'[Amount] )
 ```
 
-# [Disabled](#tab/tab2)
+# [Deshabilitado](#tab/tab2)
 
 ```DAX
 SUM( 'Sales'[Amount] )
@@ -160,11 +160,11 @@ SUM( 'Sales'[Amount] )
 
 ***
 
-##### *Newline after functions* (disabled)
+##### _Nueva línea después de las funciones_ (deshabilitado)
 
-Applies only when a function call needs to be broken across multiple lines.
+Solo se aplica cuando una llamada a una función debe dividirse en varias líneas.
 
-# [Enabled](#tab/tab3)
+# [Habilitado](#tab/tab3)
 
 ```DAX
 SUM
@@ -173,7 +173,7 @@ SUM
 )
 ```
 
-# [Disabled](#tab/tab4)
+# [Deshabilitado](#tab/tab4)
 
 ```DAX
 SUM(
@@ -183,18 +183,18 @@ SUM(
 
 ***
 
-##### *Newline before operator* (enabled)
+##### _Nueva línea antes del operador_ (habilitado)
 
-Applies only when a binary operation needs to be broken across multiple lines.
+Solo se aplica cuando una operación binaria debe dividirse en varias líneas.
 
-# [Enabled](#tab/tab5)
+# [Habilitado](#tab/tab5)
 
 ```DAX
 [Internet Total Sales]
     + [Reseller Total Sales]
 ```
 
-# [Disabled](#tab/tab6)
+# [Deshabilitado](#tab/tab6)
 
 ```DAX
 [Internet Total Sales] +
@@ -203,15 +203,15 @@ Applies only when a binary operation needs to be broken across multiple lines.
 
 ***
 
-##### *Pad parentheses* (enabled)
+##### _Añadir espacios dentro de los paréntesis_ (habilitado)
 
-# [Enabled](#tab/tab7)
+# [Habilitado](#tab/tab7)
 
 ```DAX
 SUM( Sales[Amount] )
 ```
 
-# [Disabled](#tab/tab8)
+# [Deshabilitado](#tab/tab8)
 
 ```DAX
 SUM(Sales[Amount])
@@ -219,49 +219,49 @@ SUM(Sales[Amount])
 
 ***
 
-##### *Long format line limit* (120)
+##### _Límite de línea en formato largo_ (120)
 
-The maximal number of characters to keep on a single line before an expression is broken across multiple lines, when using the **Format DAX (long lines)** option.
+El número máximo de caracteres que se pueden mantener en una sola línea antes de que una expresión se divida en varias líneas, al usar la opción **Formato DAX (líneas largas)**.
 
-##### *Short format line limit* (60)
+##### _Límite de línea en formato corto_ (60)
 
-The maximal number of characters to keep on a single line before an expression is broken across multiple lines, when using the **Format DAX (short lines)** option.
+El número máximo de caracteres que se pueden mantener en una sola línea antes de que una expresión se divida en varias líneas, al usar la opción **Formato DAX (líneas cortas)**.
 
 > [!NOTE]
-> Most settings above are only in effect when using the (default) built-in DAX formatter.
+> La mayoría de los ajustes anteriores solo surten efecto al usar el formateador de DAX integrado (predeterminado).
 
-## Casings and quotes
+## Uso de mayúsculas y comillas
 
-In addition to formatting the DAX code whitespace, Tabular Editor 3 can also fix object references and function/keyword casings.
+Además de formatear los espacios en blanco del código DAX, Tabular Editor 3 también puede corregir las referencias a objetos y el uso de mayúsculas y minúsculas de funciones y palabras clave.
 
-##### *Fix measure/column qualifiers* (enabled)
+##### _Corregir calificadores de medidas/columnas_ (activado)
 
-When this is checked, table prefixes are automatically removed from measure references, and automatically inserted on column references.
+Cuando esta opción está marcada, los prefijos de tabla se eliminan automáticamente de las referencias a medidas y se insertan automáticamente en las referencias a columnas.
 
-##### *Preferred keyword casing* (default = UPPER)
+##### _Capitalización preferida de palabras clave_ (predeterminado = UPPER)
 
-This setting allows you to change the casing used for keywords, such as `ORDER BY`, `VAR`, `EVALUATE`, etc. This also applies when a keyword is inserted through the auto-complete feature.
+Esta configuración te permite cambiar el uso de mayúsculas/minúsculas en las palabras clave, como `ORDER BY`, `VAR`, `EVALUATE`, etc. Esto también se aplica cuando una palabra clave se inserta mediante la función de autocompletado.
 
-##### *Preferred function casing* (default = UPPER)
+##### _Capitalización preferida de funciones_ (predeterminado = UPPER)
 
-This setting allows you to change the casing used for functions, such as `CALCULATE(...)`, `SUM(...)`, etc. This also applies when a function is inserted through the auto-complete feature.
+Esta configuración te permite cambiar la capitalización de las funciones, como `CALCULATE(...)`, `SUM(...)`, etc. Esto también se aplica cuando una función se inserta mediante el autocompletado.
 
-##### *Fix keyword/function casing* (enabled)
+##### _Corregir mayúsculas/minúsculas de palabras clave y funciones_ (activado)
 
-When this is checked, casing of keywords and functions is automatically corrected whenever code is auto-formatted or manually formatted.
+Cuando esta opción está marcada, el uso de mayúsculas/minúsculas en palabras clave y funciones se corrige automáticamente cada vez que el código se formatea automáticamente o de forma manual.
 
-##### *Fix object reference casing* (enabled)
+##### _Corregir mayúsculas/minúsculas de las referencias a objetos_ (activado)
 
-DAX is a case-insensitive language. When this is enabled, references to tables, columns and measures are automatically corrected such that the casing matches the physical name of the referenced objects. This fixup happens whenever code is auto-formatted or manually formatted.
+DAX no distingue entre mayúsculas y minúsculas. Cuando está activado, las referencias a tablas, columnas y medidas se corrigen automáticamente para que el uso de mayúsculas/minúsculas coincida con el nombre físico de los objetos a los que se hace referencia. Esta corrección se realiza cada vez que el código se formatea automáticamente o de forma manual.
 
-##### *Always quote tables* (disabled)
+##### _Citar siempre las tablas_ (desactivado)
 
-Referencing certain table names do not require surrounding single quotes in DAX. However, if you prefer table references to always be quoted, regardless of the table name, you can check this option.
+En DAX, para hacer referencia a determinados nombres de tabla no es necesario poner comillas simples alrededor. Sin embargo, si prefieres que las referencias a tablas vayan siempre entre comillas, independientemente del nombre de la tabla, puedes activar esta opción.
 
-##### *Always prefix extension columns* (disabled)
+##### _Anteponer siempre el prefijo de tabla a las columnas de extensión_ (desactivado)
 
-Extension columns can be defined without a table name. When this is checked, the DAX editor will always add the table prefix to an extension column, even if the table name is blank. In that case, the column reference will look like `''[Extension Column]`.
+Las columnas de extensión se pueden definir sin un nombre de tabla. Cuando esta opción está seleccionada, el Editor de DAX siempre añadirá el prefijo de tabla a una columna de extensión, incluso si el nombre de la tabla está en blanco. En ese caso, la referencia a la columna se verá así: `''[Extension Column]`.
 
-# Next steps
+# Siguientes pasos
 
 - @boosting-productivity-te3

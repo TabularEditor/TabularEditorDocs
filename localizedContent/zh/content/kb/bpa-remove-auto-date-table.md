@@ -1,106 +1,106 @@
 ---
 uid: kb.bpa-remove-auto-date-table
-title: Remove Auto Date Tables
+title: 移除自动日期表
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule to identify and remove automatically generated date tables that increase model size and reduce performance.
+description: 用于识别并移除会增大模型体积、降低性能的自动生成日期表的最佳实践规则。
 ---
 
-# Remove Auto Date Tables
+# 移除自动日期表
 
-## Overview
+## 概述
 
-This best practice rule identifies automatically generated date tables created by Power BI Desktop. These auto-generated tables (`DateTableTemplate_` and `LocalDateTable_`) should be removed in favor of a single, explicit date table to optimize model size and performance.
+此最佳实践规则用于识别由 Power BI Desktop 自动生成的日期表。 应移除这些自动生成的表（`DateTableTemplate_` 和 `LocalDateTable_`），改用一个明确、统一的日期表，以优化模型大小和性能。
 
-- Category: Performance
+- 类别：性能
 
-- Severity: Medium (2)
+- 严重性：中（2）
 
-## Applies To
+## 适用范围
 
-- Tables
-- Calculated Tables
+- 表
+- 计算表格
 
-## Why This Matters
+## 为什么这很重要
 
-Power BI automatically creates hidden date tables for every date/datetime column when "Auto Date/Time" is enabled. This causes issues:
+当启用“自动日期/时间”时，Power BI 会为每个日期/日期时间列自动创建隐藏的日期表。 这会带来以下问题：
 
-- **Increased model size**: Each auto-generated table adds unnecessary data
-- **Memory overhead**: Multiple date tables consume more memory than one shared table
-- **Slower refresh**: Additional tables increase refresh duration
+- **模型大小增加**：每个自动生成的表都会添加不必要的数据
+- **内存开销增加**：多个日期表比共享同一个日期表占用更多内存
+- **刷新更慢**：额外的表会增加刷新耗时
 
-A single, well-designed date table is far more efficient and maintainable.
+使用一个设计良好的日期表会更高效，也更易于维护。
 
-## When This Rule Triggers
+## 此规则何时触发
 
-The rule triggers when it finds calculated tables with names that:
+当规则发现名称符合以下条件的计算表格时会触发：
 
-- Start with `"DateTableTemplate_"`, or
-- Start with `"LocalDateTable_"`
+- 以 `"DateTableTemplate_"` 开头，或
+- 以 `"LocalDateTable_"` 开头
 
-These prefixes indicate Power BI's automatically generated date tables.
+这些前缀表示这些日期表是由 Power BI 自动生成的。
 
-## How to Fix
+## 如何修复
 
-### Manual Fix
+### 手动修复
 
-1. Disable **Auto Date/Time** in Power BI Desktop (**File** > **Options** > **Data Load**)
-2. Create a dedicated date table.
-3. Mark it as a date table and create relationships to fact tables
-4. In **TOM Explorer**, delete tables starting with `DateTableTemplate_` or `LocalDateTable_`
-5. Verify custom date table relationships work correctly
+1. 在 Power BI Desktop 中禁用 **自动日期/时间**（**文件** > **选项** > **数据加载**）
+2. 创建一个专用的日期表。
+3. 将其标记为日期表，并与事实表建立关系
+4. 在 **TOM Explorer** 中删除以 `DateTableTemplate_` 或 `LocalDateTable_` 开头的表
+5. 验证自定义日期表关系是否正常工作
 
-## Common Causes
+## 常见原因
 
-### Cause 1: Auto Date/Time Feature Enabled
+### 原因 1：启用了自动日期/时间功能
 
-Power BI Desktop's "Auto Date/Time" feature automatically creates these tables.
+Power BI Desktop 的“自动日期/时间”功能会自动创建这些表格。
 
-### Cause 2: Migrated Models
+### 原因 2：迁移过来的模型
 
-Models created with auto tables enabled and never cleaned up.
+这些模型是在启用自动日期表的情况下创建的，之后从未清理过。
 
-### Cause 3: Default Settings
+### 原因 3：默认设置
 
-New models use default settings which enable auto date tables.
+新模型会使用默认设置，从而启用自动日期表。
 
-## Example
+## 示例
 
-### Before Fix
+### 修复前
 
 ```
-Tables:
+表格：
   - Sales
-  - LocalDateTable_OrderDate (hidden, auto-generated)
-  - LocalDateTable_ShipDate (hidden, auto-generated)
+  - LocalDateTable_OrderDate（隐藏，自动生成）
+  - LocalDateTable_ShipDate（隐藏，自动生成）
   - Products
-  - LocalDateTable_ReleaseDate (hidden, auto-generated)
+  - LocalDateTable_ReleaseDate（隐藏，自动生成）
 ```
 
-**Result**: Multiple hidden tables inflate model size
+**结果**：多个隐藏表会导致模型体积膨胀
 
-### After Fix
+### 修复后
 
 ```
-Tables:
+表格：
   - Sales
   - Products
-  - DateTable (explicit, marked as date table)
-    -> Relationships to Sales[OrderDate], Sales[ShipDate], Products[ReleaseDate]
+  - DateTable（显式创建，标记为日期表格）
+    -> 与 Sales[OrderDate]、Sales[ShipDate]、Products[ReleaseDate] 建立关系
 ```
 
-**Result**: Single efficient date table serves all date relationships
+**结果**：一个高效的日期表即可支撑所有日期关系
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1200** and higher.
+这个规则适用于兼容级别 **1200** 及更高的模型。
 
-## Related Rules
+## 相关规则
 
-- [Date Table Should Exist](xref:kb.bpa-date-table-exists) - Ensuring a proper date table is present
+- [应存在日期表](xref:kb.bpa-date-table-exists) - 确保存在合适的日期表
 
-## Learn More
+## 了解更多
 
-- [Disable Auto Date/Time in Power BI](https://learn.microsoft.com/power-bi/guidance/auto-date-time)
-- [Create Date Tables](https://learn.microsoft.com/power-bi/guidance/model-date-tables)
-- [Date Table Best Practices](https://www.sqlbi.com/articles/creating-a-simple-date-table-in-dax/)
+- [在 Power BI 中禁用自动日期/时间](https://learn.microsoft.com/power-bi/guidance/auto-date-time)
+- [创建日期表](https://learn.microsoft.com/power-bi/guidance/model-date-tables)
+- [日期表最佳实践](https://www.sqlbi.com/articles/creating-a-simple-date-table-in-dax/)

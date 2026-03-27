@@ -1,36 +1,40 @@
 ---
 uid: csharp-script-library
-title: C# Script Library
+title: Biblioteca de scripts de C#
 author: Morten Lønskov
 updated: 2023-02-23
-
----
-# C# Script Library
-
-![C# Script Library](~/content/assets/images/Cscripts/script-library-header.png)
-
 ---
 
-This section contains official Tabular Editor scripts that have been verified and validated by the Tabular Editor team. These scripts are used in demos, conferences and documentation by the Tabular Editor team, and are maintained here for your convenience.  Use of these scripts are still your own responsibility.
+# Biblioteca de scripts de C\#
 
-There are also other resources online with C# Scripts that are maintained by the community such as PowerBI.tips excellent repository: [PowerBI.Tips C# Script Repository](https://github.com/PowerBI-tips/TabularEditor-Scripts) and Michael Kovalsky's excellent blog [ElegantBI](https://www.elegantbi.com/) and [Repository for Tabular Scripts](https://github.com/m-kovalsky/Tabular)
+![Biblioteca de scripts de C#](~/content/assets/images/Cscripts/script-library-header.png)
 
+---
 
-## Tabular Editor Versions
-The top of each article denotes script compatibility in TE2.x (Tabular Editor 2) and/or TE3.x (Tabular Editor 3)
+Esta sección contiene scripts oficiales de Tabular Editor que el equipo de Tabular Editor ha verificado y validado. Estos scripts son utilizados por el equipo de Tabular Editor en demostraciones, conferencias y documentación, y se mantienen aquí para su comodidad.  El uso de estos scripts sigue siendo responsabilidad exclusiva suya.
 
-### Scripting with Tabular Editor as a Power BI External Tool
+También hay otros recursos en línea con C# Scripts mantenidos por la comunidad, como el excelente repositorio de PowerBI.tips: [Repositorio de C# Scripts de PowerBI.Tips](https://github.com/PowerBI-tips/TabularEditor-Scripts) y el excelente blog de Michael Kovalsky [ElegantBI](https://www.elegantbi.com/) y el [Repositorio para scripts tabulares](https://github.com/m-kovalsky/Tabular)
+
+## Versiones de Tabular Editor
+
+La parte superior de cada artículo indica la compatibilidad del script con TE2.x (Tabular Editor 2) y/o TE3.x (Tabular Editor 3)
+
+### Creación de scripts con Tabular Editor como herramienta externa de Power BI
+
 <br></br>
-> [!NOTE] 
-> Some scripts does not work when connected to a Power BI Desktop model, due to the limitations of Power BI Desktop External tools: [External Tool Limitations](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). You can still experiment with the script by enabling unsupported modeling operations under preferences.
-<br></br>
 
-### [Tabular Editor 2 Preferences](#tab/TE2Preferences)
-"File > Preferences" 
-![Edit Hidden Partitions](~/content/assets/images/te2-file-menu.png)
-### [Tabular Editor 3 Preferences](#tab/TE3Preferences)
-"Tools > Preferences" 
-![Edit Hidden Partitions](~/content/assets/images/tools-menu.png)
+> [!NOTE]
+> Algunos scripts no funcionan cuando se conectan a un modelo de Power BI Desktop, debido a las limitaciones de las herramientas externas de Power BI Desktop: [Limitaciones de las herramientas externas](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations). Aun así, puede experimentar con el script habilitando las operaciones de modelado no compatibles en las preferencias. <br></br>
+
+### [Preferencias de Tabular Editor 2](#tab/TE2Preferences)
+
+"Archivo > Preferencias"
+![Editar particiones ocultas](~/content/assets/images/te2-file-menu.png)
+
+### [Preferencias de Tabular Editor 3](#tab/TE3Preferences)
+
+"Herramientas > Preferencias"
+![Editar particiones ocultas](~/content/assets/images/tools-menu.png)
 
 
 

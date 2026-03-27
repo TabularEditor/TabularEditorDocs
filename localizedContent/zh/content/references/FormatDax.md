@@ -1,6 +1,6 @@
-﻿---
+---
 uid: formatdax
-title: FormatDax deprecation
+title: FormatDax 弃用说明
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -8,13 +8,15 @@ applies_to:
     - product: Tabular Editor 3
       none: true
 ---
-# FormatDax deprecation
 
-The `FormatDax` method (which is one of the available [helper methods](xref:advanced-scripting#helper-methods) in Tabular Editor) has been deprecated with the release of Tabular Editor 2.13.0.
+# FormatDax 弃用说明
 
-The reason for the deprecation is that the web service at https://www.daxformatter.com/ was starting to experience a heavy load of multiple request in quick succession, which were causing issues at their end. This is because the `FormatDax` method performs a web request each time it is called in a script, and many people have been using scripts such as the following:
+随着 Tabular Editor 2.13.0 的发布，`FormatDax` 方法（Tabular Editor 中可用的[辅助方法](xref:advanced-scripting#helper-methods)之一）已被弃用。
 
-**Don't do this!**
+弃用的原因是 https://www.daxformatter.com/ 的 Web 服务开始在短时间内收到大量连续请求，导致对方服务端出现问题。 这是因为 `FormatDax` 方法在脚本中每次被调用时都会发起一次 Web 请求，而很多人一直在使用如下这类脚本：
+
+**不要这样做！**
+
 ```csharp
 foreach(var m in Model.AllMeasures)
 {
@@ -23,13 +25,13 @@ foreach(var m in Model.AllMeasures)
 }
 ```
 
-This is fine for small models with a few tens of measures, but the traffic on www.daxformatter.com indicates that a script such as the above is being executed across multiple models with thousands of measures, even several times per day!
+对于只有几十个度量值的小模型来说这没问题，但 www.daxformatter.com 的流量表明，上述脚本正被用于包含数千个度量值的多个模型上，甚至每天执行好几次！
 
-To address this issue, Tabular Editor 2.13.0 will show a warning when `FormatDax` is called more than three times in a row, using the syntax above. In addition, subsequent calls will be throttled with a 5 second delay between each call.
+为解决该问题，当使用上述语法连续调用 `FormatDax` 超过三次时，Tabular Editor 2.13.0 会显示一条警告。 此外，后续调用将会被限流，每次调用之间会强制延迟 5 秒。
 
-## Alternative syntax
+## 替代写法
 
-Tabular Editor 2.13.0 introduces two different ways of calling FormatDax. The above script can be rewritten into either of the following:
+Tabular Editor 2.13.0 引入了两种不同的方式来调用 `FormatDax`。 上面的脚本可以改写为以下任意一种：
 
 ```csharp
 foreach(var m in Model.AllMeasures)
@@ -38,13 +40,13 @@ foreach(var m in Model.AllMeasures)
 }
 ```
 
-...or simply...:
+……或者更简单地写成……：
 
 ```csharp
 Model.AllMeasures.FormatDax();
 ```
 
-Both these approaches will batch all www.daxformatter.com calls into a single request. You may also use the global method syntax if you prefer:
+这两种方式都会将对 www.daxformatter.com 的所有调用合并为一次请求。 如果你愿意，也可以使用全局方法的写法：
 
 ```csharp
 foreach(var m in Model.AllMeasures)
@@ -53,19 +55,19 @@ foreach(var m in Model.AllMeasures)
 }
 ```
 
-...or simply...:
+……或者更简单地写成……：
 
 ```csharp
 FormatDax(Model.AllMeasures);
 ```
 
-## More details
+## 更多详情
 
-Technically, `FormatDax` has now been implemented as two overloaded extension methods:
+从技术角度来说，`FormatDax` 现已实现为两个重载的扩展方法：
 
-1) `void FormatDax(this IDaxDependantObject obj)`
-2) `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat = false, bool? skipSpaceAfterFunctionName = null)`
+1. `void FormatDax(this IDaxDependantObject obj)`
+2. `void FormatDax(this IEnumerable<IDaxDependantObject> objects, bool shortFormat = false, bool? skipSpaceAfterFunctionName = null)`
 
-Overload #1 above will queue the provided object for formatting when script execution completes, or when a call is made to the new `void CallDaxFormatter()` method. Overload #2 will immediately call www.daxformatter.com with a single web request that will format all DAX expressions for all the objects provided in the enumerable. You may use either of these methods as you see fit.
+上面的重载 #1 会在脚本执行完成后，或在调用新增的 `void CallDaxFormatter()` 方法时，将所提供的对象加入格式化队列。 重载 #2 会立即通过一次 Web 请求调用 www.daxformatter.com，对枚举中提供的所有对象的全部 DAX 表达式进行格式化。 你可以根据需要选择使用其中任意一种方法。
 
-Note that the new method does not take any string arguments. It considers all DAX properties on the provided object for formatting (for measures, this is the Expression and DetailRowsExpression properties, for KPIs, this is the StatusExpression, TargetExpression and TrendExpression, etc.).
+注意，这个新方法不接受任何字符串参数。 它会对所提供对象上的所有 DAX 属性进行格式化（例如：对于度量值，包括 Expression 和 DetailRowsExpression 属性；对于 KPI，包括 StatusExpression、TargetExpression 和 TrendExpression 等）。

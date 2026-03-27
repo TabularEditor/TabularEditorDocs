@@ -35,6 +35,7 @@ This allows you to work with Metric Views programmatically through C# scripts, s
 Other than the [import GUI](xref:semantic-bridge#interface), all access to and interaction with a Metric View is through C# scripts.
 All content in this document is referring to C# code that you will use in a [C# script](xref:csharp-scripts).
 
+<a name="loading-and-accessing-the-metric-view"></a>
 ## Loading and accessing the Metric View
 
 You can load a Metric view with [`SemanticBridge.MetricView.Load`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Load_System_String_) or [`SemanticBridge.MetricView.Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Deserialize_System_String_).

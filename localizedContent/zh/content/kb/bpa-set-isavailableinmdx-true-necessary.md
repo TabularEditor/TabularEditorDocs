@@ -1,46 +1,47 @@
 ---
 uid: kb.bpa-set-isavailableinmdx-true-necessary
-title: Set IsAvailableInMDX to True When Necessary
+title: 必要时将 IsAvailableInMDX 设置为 True
 author: Morten Lønskov
 updated: 2026-01-09
-description: Best practice rule preventing query errors by ensuring columns used in hierarchies and relationships have MDX availability enabled.
+description: 一条最佳实践规则：通过确保用于层次结构和关系的列启用 MDX 可用性，防止查询错误。
 ---
 
-# Set IsAvailableInMDX to True When Necessary
+# 必要时将 IsAvailableInMDX 设置为 True
 
-## Overview
+## 概述
 
-This best practice rule identifies columns that have `IsAvailableInMDX` set to `false` but are actually used in scenarios requiring MDX access. These columns must have MDX availability enabled to function correctly in hierarchies, relationships, and sort operations.
+此最佳实践规则会识别那些将 `IsAvailableInMDX` 设为 `false`，但实际用于需要 MDX 访问场景的列。 这些列必须启用 MDX 可用性，才能在层次结构、关系和排序操作中正常工作。
 
-- Category: Error Prevention
-- Severity: High (3)
+- 类别：错误预防
+- 严重性：高（3）
 
-## Applies To
+## 适用对象
 
-- Data Columns
-- Calculated Columns
-- Calculated Table Columns
+- 数据列
+- 计算列
+- 计算表格列
 
-## Why This Matters
+## 为什么这很重要
 
-When a column is used in certain model structures, the Analysis Services engine requires MDX access to that column. Disabling MDX access for columns that need it causes:
+当某列用于特定的模型结构时，Analysis Services 引擎需要通过 MDX 访问该列。 对需要 MDX 的列禁用 MDX 访问会导致：
 
-- **Query failures**: Hierarchies and sort operations fail with errors
-- **Broken visualizations**: Charts and tables using affected hierarchies display errors
-- **Relationship problems**: MDX queries against relationships may fail
-- **Calendar/variation errors**: Time intelligence features break
-- **Unpredictable behavior**: Some queries work while others fail depending on client tool
+- **查询失败**：层次结构和排序操作会失败并报错
+- **可视化出错**：使用受影响层次结构的图表和表格会显示错误
+- **关系问题**：针对关系的 MDX 查询可能失败
+- **日历/变体错误**：时间智能功能会失效
+- **行为不可预测**：某些查询能运行，另一些会失败，取决于客户端工具
 
-Columns need `IsAvailableInMDX = true` when they are:
-- Used in hierarchies as levels
-- Referenced as sort-by columns
-- Used in variations (alternate hierarchies)
-- Part of calendar definitions
-- Serving as sort-by targets for other columns
+当列满足以下情况时，需要 `IsAvailableInMDX = true`：
 
-## When This Rule Triggers
+- 在层次结构中用作级别
+- 作为“按此列排序”列被引用
+- 用于变体（替代层级）
+- 是日历定义的一部分
+- 作为其他列的“按此列排序”目标列
 
-The rule triggers when a column has `IsAvailableInMDX = false` AND any of these conditions are true:
+## 该规则何时触发
+
+当某列的 `IsAvailableInMDX = false` 且满足以下任一条件时，规则会触发：
 
 ```csharp
 IsAvailableInMDX = false
@@ -58,87 +59,88 @@ and
 )
 ```
 
-The rule checks these dependency collections:
+这个规则会检查以下依赖集合：
 
-| Property | Description | Example Usage |
-|----------|-------------|---------------|
-| `UsedInHierarchies` | Hierarchies where column is a level | Product hierarchy levels |
-| `UsedInSortBy` | Columns using this as sort key | Month names sorted by month number |
-| `UsedInVariations` | Alternate hierarchies using column | Product variations |
-| `UsedInCalendars` | Calendar metadata references | Date table calendar definitions |
-| `SortByColumn` | Column sorts by another column | This column has a sort-by reference |
+| 属性                  | 说明             | 使用示例           |
+| ------------------- | -------------- | -------------- |
+| `UsedInHierarchies` | 该列作为层级级别时所属的层级 | 产品层级级别         |
+| `UsedInSortBy`      | 使用该列作为排序键的列    | 按月份编号对月份名称进行排序 |
+| `UsedInVariations`  | 使用该列的备用层级      | 产品变体           |
+| `UsedInCalendars`   | 对日历元数据的引用      | 日期表的日历定义       |
+| `SortByColumn`      | 该列按另一列排序       | 此列包含“按列排序”的引用  |
 
-## How to Fix
+## 如何修复
 
-### Automatic Fix
+### 自动修复
 
-This rule includes an automatic fix:
+此规则包含一个自动修复：
 
 ```csharp
 IsAvailableInMDX = true
 ```
 
-To apply:
-1. In the **Best Practice Analyzer** select flagged objects
-3. Click **Apply Fix**
+应用步骤：
 
-### Manual Fix
+1. 在 **Best Practice Analyzer** 中选择被标记的对象
+2. 点击 **Apply Fix**
 
-1. In **TOM Explorer**, locate the flagged column
-2. In **Properties** pane, find `IsAvailableInMDX`
-3. Set the value to `true`
-4. Save and test affected hierarchies/sorts
+### 手动修复
 
-## Common Scenarios
+1. 在 **TOM Explorer** 中找到被标记的列
+2. 在 **属性** 窗格中找到 `IsAvailableInMDX`
+3. 将值设置为 `true`
+4. 保存并测试受影响的层次结构和排序
 
-### Scenario 1: Hierarchy Level Column
+## 常见场景
 
-**Problem**: A column used as a hierarchy level has MDX disabled
+### 场景 1：层次结构级别列
+
+**问题**：用作层次结构级别的列禁用了 MDX
 
 ```dax
 Hierarchy: Geography
   Levels:
     - Country
-    - State (IsAvailableInMDX = false)  ← Problem
+    - State (IsAvailableInMDX = false)  ← 问题
     - City
 ```
 
-**Error**: "The hierarchy 'Geography' cannot be used because one of its levels is not available in MDX."
+**错误**："由于其中一个级别在 MDX 中不可用，无法使用层次结构 'Geography'。"
 
-**Solution**: Set `State[IsAvailableInMDX] = true`
+**解决方案**：将 `State[IsAvailableInMDX]` 设为 `true`
 
-### Scenario 2: Sort-By Column
+### 场景 2：排序依据列
 
-**Problem**: A column serving as a sort-by target has MDX disabled
+**问题**：作为按列排序目标的列禁用了 MDX
 
 ```
 Month Name column:
   - SortByColumn = MonthNumber
-  - MonthNumber.IsAvailableInMDX = false  ← Problem
+  - MonthNumber.IsAvailableInMDX = false  ← 问题
 ```
 
-**Error**: Months display in alphabetical order instead of calendar order
+**错误**：月份按字母顺序显示，而不是按日历顺序
 
-**Solution**: Set `MonthNumber[IsAvailableInMDX] = true`
+**解决方案**：将 `MonthNumber[IsAvailableInMDX]` 设为 `true`
 
-### Scenario 3: Calendar Definition
+### 场景 3：日历定义
 
-**Problem**: A date column used in calendar metadata has MDX disabled
+**问题**：日历元数据中使用的日期列禁用了 MDX
 
 ```
 DateTable:
-  - Calendar uses DateKey column
-  - DateKey.IsAvailableInMDX = false  ← Problem
+  - Calendar 使用 DateKey 列
+  - DateKey.IsAvailableInMDX = false  ← 问题
 ```
 
-**Error**: Time intelligence functions fail
+**错误**：时间智能函数失败
 
-**Solution**: Set `DateKey[IsAvailableInMDX] = true`
+**解决方案**：将 `DateKey[IsAvailableInMDX] = true`
 
-## Compatibility Level
+## 兼容级别
 
-This rule applies to models with compatibility level **1200** and higher.
+本规则适用于兼容级别为 **1200** 及以上的模型。
 
-## Related Rules
+## 相关规则
 
-- [Set IsAvailableInMDX to False](xref:kb.bpa-set-isavailableinmdx-false) - The complementary optimization rule
+- [将 IsAvailableInMDX 设为 False](xref:kb.bpa-set-isavailableinmdx-false) — 配套的优化规则

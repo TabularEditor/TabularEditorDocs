@@ -50,12 +50,13 @@ swa start _site
 | `--serve` | Build and serve locally (English only, for development) |
 | `--skip-gen` | Skip running gen_redirects.py (use existing configs) |
 | `--no-api-copy` | Skip copying API docs to localized sites |
+| `--sync` | Sync English fallback for missing/outdated translations (for local dev) |
 
 ## What the Build Script Does
 
 1. **Generates DocFX configurations** - Runs `gen_redirects.py` to create `docfx.json` for each language
 2. **Generates language manifest** - Creates `metadata/languages.json` for runtime language switching
-3. **Syncs content** - Copies English source content; uses English as fallback for missing translations. Readds the english file if the file is modified in content or deleted in translation.
+3. **Syncs content** - Copies English source to `localizedContent/en/`. For other languages, only shared directories (assets, api) are synced by default since Crowdin manages translations. Use `--sync` to enable full English fallback for missing/outdated translations (useful for local development).
 4. **Builds documentation** - Runs DocFX for each requested language
 5. **Fixes API docs** - Patches xref links in generated API documentation
 6. **Copies API docs** - Shares English API docs with localized sites
@@ -101,7 +102,20 @@ TEDoc/
 4. Add a translated `_ui-strings.json` to the content subdirectory (see [Translating UI Strings](#translating-ui-strings) below). If no translation is provided, an automatic fallback will be generated.
 5. Run `python build-docs.py --all` to generate configs and build. Language will be added dynamically to language picker.
 
-> **Note:** English content from `content/` is automatically copied to `localizedContent/en/content/` during build. For other languages, English content is used as fallback for missing translations. This includes `_ui-strings.json` — if no translated version exists, English UI strings are used.
+> **Note:** English content from `content/` is automatically copied to `localizedContent/en/content/` during build. For other languages, Crowdin manages translations via PRs. Shared directories (assets, api) are always synced from English. To use English as fallback for missing/outdated translations during local development, add the `--sync` flag.
+
+# Bookmark Links and Translations
+
+When linking to a specific heading within a page (e.g., `#my-heading`), the anchor ID is auto-generated from the heading text. When headings are translated by Crowdin, the anchor changes, breaking bookmark links.
+
+To prevent this, add an `<a name="..."></a>` tag above any heading that is referenced by a bookmark link:
+
+```markdown
+<a name="my-heading"></a>
+## My Heading
+```
+
+Crowdin does not translate HTML `name` attributes, so the anchor remains stable across all languages. Only add these to headings that are actually linked to — there is no need to add them to every heading.
 
 # Translating UI Strings
 
@@ -137,4 +151,18 @@ If a key is missing from a language's file, or no `_ui-strings.json` exists at a
 | `footer.privacyPolicy` | `Privacy & Cookie policy` | Footer bottom link |
 | `footer.termsConditions` | `Terms & Conditions` | Footer bottom link |
 | `footer.licenseTerms` | `License terms` | Footer bottom link |
-
+| `appliesTo` | `Applies to: ` | "Applies to" label on article metadata |
+| `availableSince` | `Available since` | Version availability label (e.g., "Available since 3.5.0") |
+| `availableIn` | `Available in` | Version range label (e.g., "Available in 3.5.0–3.8.0") |
+| `inThisArticle` | `In this article` | Sidebar table of contents heading |
+| `searchResultsCount` | `{count} results for "{query}"` | Search results summary |
+| `searchNoResults` | `No results for "{query}"` | No search results message |
+| `tocFilter` | `Filter by title` | TOC filter input placeholder |
+| `nextArticle` | `Next` | Next article navigation |
+| `prevArticle` | `Previous` | Previous article navigation |
+| `themeLight` | `Light` | Theme picker option |
+| `themeDark` | `Dark` | Theme picker option |
+| `themeAuto` | `Auto` | Theme picker option |
+| `changeTheme` | `Change theme` | Theme picker label |
+| `copy` | `Copy` | Code block copy button |
+| `downloadPdf` | `Download PDF` | PDF download button |

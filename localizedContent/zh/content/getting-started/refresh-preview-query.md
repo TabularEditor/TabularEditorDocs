@@ -1,6 +1,6 @@
 ---
 uid: refresh-preview-query
-title: Refreshing, previewing and querying data
+title: 刷新、预览与查询数据
 author: Daniel Otykier
 updated: 2026-01-08
 applies_to:
@@ -16,171 +16,172 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Refreshing, previewing and querying data
 
-When Tabular Editor 3 is connected to an instance of Analysis Services, a number of additional **connected features** are available, allowing you to use Tabular Editor 3 as a client tool for Analysis Services.
+# 刷新、预览与查询数据
+
+当 Tabular Editor 3 连接到某个 Analysis Services 实例时，会提供一系列额外的**连接功能**，使你能够将 Tabular Editor 3 作为 Analysis Services 的客户端工具来使用。
 
 > [!NOTE]
-> The phrase "connected to an instance of Analysis Services" means any one of the following:
-> 
-> - Loading a model in [**workspace mode**](xref:workspace-mode)
-> - Loading a model directly from SQL Server Analysis Services, Azure Analysis Services or the Power BI XMLA endpoint
-> - Using Tabular Editor 3 as an external tool for Power BI Desktop
+> “连接到某个 Analysis Services 实例”是指以下任意一种情况：
+>
+> - 在[**工作区模式**](xref:workspace-mode)中加载模型
+> - 直接从 SQL Server Analysis Services、Azure Analysis Services 或 Power BI XMLA endpoint 加载模型
+> - 将 Tabular Editor 3 用作 Power BI Desktop 的外部工具
 
-In summary, these connected features are:
+总结一下，这些连接功能包括：
 
-- Data refresh operations
-- Table data previewing
+- 数据刷新操作
+- 表数据预览
 - PivotGrids
-- DAX Querying
-- VertiPaq Analyzer
+- DAX 查询
+- VertiPaq分析器
 
-# Refreshing data
+# 刷新数据
 
-Tabular Editor does not automatically trigger refresh operations in Analysis Services when changes are made to the data model. This is by design, to ensure that saving metadata changes to Analysis Services does not take too long. Potentially, a refresh operation can take a long time to complete, during which no additional metadata may be updated on the server. Of course, the drawback of this, is that you can make changes using Tabular Editor, which causes the model to enter a state where it is only partly queryable or not queryable at all. Depending on what type of data model change was made, different levels of refresh may be needed.
+当对 Data model 进行更改时，Tabular Editor 不会在 Analysis Services 中自动触发刷新操作。 这是有意为之，以确保将元数据更改保存到 Analysis Services 时不会耗时过长。 刷新操作可能需要很长时间才能完成，在此期间，服务器上将无法更新任何其他元数据。 当然，这样做的缺点是：你可以使用 Tabular Editor 进行更改，从而让模型进入只能部分可查询、甚至完全无法查询的状态。 根据对 Data model 进行的更改类型，可能需要不同级别的刷新。
 
-In general, the following changes require a full refresh, before the mentioned object can be queried (that is, a data refresh followed by a calculate refresh):
+通常，在可以查询所述对象之前，以下更改需要执行一次完全刷新（即先进行数据刷新，再进行计算刷新）：
 
-- Adding a new table to the model
-- Adding a new column to a table
+- 向模型添加新表
+- 向表添加新列
 
-In general, the following changes require a calculate refresh:
+通常，以下更改需要计算刷新：
 
-- Changing the DAX expression of a calculated table or calculated column
-- Adding or modifying a relationship
-- Adding, renaming or removing a calculation item from a calculation group
+- 更改计算表格或计算列的 DAX 表达式
+- 添加或修改关系
+- 在计算组中添加、重命名或删除计算项
 
-Notably, adding, modifying or removing measures from a model does not require any type of refresh (unless the measure is referenced by a calculated column, in which case the table in which that column resides has to be recalculated).
+需要指出的是，在模型中添加、修改或删除度量值不需要任何类型的刷新（除非该度量值被计算列引用；此时，包含该计算列的表必须重新计算）。
 
-To initiate a refresh using Tabular Editor, simply right click on the Table or Partition you wish to refresh, navigate to **Refresh table** or **Refresh partition**, and then choose the type of refresh you want to perform.
+要在 Tabular Editor 中启动刷新，只需在要刷新的表或分区上右键单击，选择 **刷新表** 或 **刷新分区**，然后选择要执行的刷新类型。
 
-![Refresh Table](~/content/assets/images/refresh-table.png)
+![刷新表](~/content/assets/images/refresh-table.png)
 
-You may also initiate a refresh at the model level through the **Model > Refresh model** menu. Once the refresh operation starts, you will see the text "Data refresh started... <ins>View refresh queue</ins>". Click on the link or locate the **Data refresh** view through the **View > Data refresh** menu option. This will display a list of all refresh operations (both present and current), displaying the status message returned from Analysis Services including progress counters and duration, and allowing you to cancel an unintended refresh.
+你也可以通过 **模型 > 刷新模型** 菜单在模型级别启动刷新。 刷新操作开始后，你会看到文本“数据刷新已开始…… <ins>查看刷新队列</ins>”。 单击该链接，或通过 **视图 > 数据刷新** 菜单选项打开 **数据刷新** 视图。 这将显示所有刷新操作(历史和当前)的列表，显示 Analysis Services 返回的状态消息(包括进度计数器和持续时间)，并允许你取消非预期的刷新。
 
-![Data Refresh View2](~/content/assets/images/data-refresh-view2.png)
+![数据刷新视图](~/content/assets/images/data-refresh-view2.png)
 
 > [!TIP]
-> The Data Refresh view includes a **Start Time** column that shows when each refresh operation began. Click the column header to sort operations chronologically, making it easy to see your most recent refreshes first. You can sort by any column to organize refresh operations according to your needs. See [Data Refresh view](xref:data-refresh-view) for more details.
+> 数据刷新视图包含一个 **开始时间** 列，用来显示每次刷新操作是什么时候开始的。 单击列标题即可按时间顺序对操作排序，方便你优先查看最新的刷新记录。 你也可以按任意列排序，以便根据需要整理刷新操作。 详情请参阅 [数据刷新视图](xref:data-refresh-view)。
 
-While a refresh is in progress you can continue work on your data model, querying and previewing data or queueing new data refresh operations according to this article. However, you will not be able to save model changes to Analysis Services until the all data refresh operations complete.
+在刷新进行期间，你可以继续处理你的 Data model，按本文所述继续查询和预览数据，或将新的数据刷新操作加入队列。 不过，在所有数据刷新操作完成之前，你无法将模型更改保存到 Analysis Services。
 
+## 支持的刷新操作
 
-## Supported refresh operations
+Tabular Editor 3 支持对不同对象类型执行刷新操作。 支持的刷新类型如下所示：
 
-Tabular Editor 3 supports refresh operations on different object types. The supported refresh types are shown below:
+- **模型**（自动、计算、完全）
+- **（导入）表**（自动、计算、仅数据、完全）
+- **分区**（完全）
+- **计算表格**（计算）
+- **计算组**（计算）
 
-- **Model** (Automatic, calculate, full)
-- **(Imported) Table** (Automatic, calculate, data only, full)
-- **Partition** (Full)
-- **Calculated Table** (Calculate)
-- **Calculation Group** (Calculate)
+想了解 Analysis Services / Power BI 支持的刷新操作类型，你可以查看 [刷新类型](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request)。
 
-See [Refresh Types](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) for more information about the types of refresh operations supported by Analysis Services / Power BI.
+# 预览表格数据
 
-# Previewing table data
+在编写 DAX 和开发 Data model 的过程中，有时你可能需要逐行检查表中的内容。 当然，你也可以编写 DAX 查询来实现这一点；但 Tabular Editor 3 让这件事更简单，你可以直接预览表格数据。 要做到这一点，你可以右键单击某个表格，然后选择 **预览数据**。
 
-At certain points during DAX authoring and data model development, you may need to inspect the contents of your tables on a row-by-row basis. Of course, you could write a DAX query to achieve this, but Tabular Editor 3 makes that even easier by allowing you to preview table data directly. To do this, right-click on a table and choose the **Preview data** option.
+![预览数据](~/content/assets/images/preview-data-big.png)
 
-![Preview Data](~/content/assets/images/preview-data-big.png)
+你可以打开多个此类表格预览，并在用户界面中按你的习惯随意排列。 此外，你还可以对单个列进行排序或筛选。 可预览的行数实际上没有限制。 Tabular Editor 只是在模型上执行一条 [`TOPNSKIP`](https://dax.guide/topnskip) DAX 查询，返回少量记录，用于填充当前视图。
 
-You can open multiple such table previews and arrange them anyway you like in the user interface. In addition, you can sort or filter individual columns. There is no practical limit to the number of rows that can be previewed. Tabular Editor simply executes a [`TOPNSKIP`](https://dax.guide/topnskip) DAX query against the model, to return just a small number of records suitable to fill the current view.
+如果一个或多个计算列处于无效状态，这些列会显示文本 _(需要计算)_。 你可以通过右键单击该列并选择 **重新计算表格...** 选项来重新计算表格。
 
-If one or more calculated columns are in an invalid state, those columns contain the text *(Calculation needed)*. You can recalculate the table by right-clicking on the column and choosing the **Recalculate table...** option.
+![重新计算表格](~/content/assets/images/recalculate-table.png)
 
-![Recalculate Table](~/content/assets/images/recalculate-table.png)
+# Pivot Grid：数据透视网格
 
-# Pivot Grids
+在模型中新增或编辑 DAX 度量值后，你通常会想测试一下这些度量值。 传统上，这通常通过 Excel 或 Power BI 等客户端工具来完成。 借助 Tabular Editor 3，你现在可以使用 **Pivot Grid**，其使用方式与 Excel 中著名的数据透视表非常相似。 Pivot Grid 可让你快速创建模型数据的汇总视图，从而在按不同列与层级进行筛选和切片时，测试 DAX 度量值的行为。
 
-After adding or editing DAX measures in a model, it is common for model developers to test these measures. Traditionally, this was typically done using client tools such as Excel or Power BI. With Tabular Editor 3, you can now use **Pivot Grids** which behave much like the famous PivotTables of Excel. The Pivot Grid lets you quickly create summarized views of the data in your model, allowing you test the behavior of your DAX measures when filtering and slicing by various columns and hierarchies.
+要创建新的 Pivot Grid，请选择 **文件 > 新建 > Pivot Grid**。 接下来，你可以将度量值、列和层级从 TOM Explorer 拖入网格；也可以使用 **Pivot Grid > 显示字段** 菜单选项，显示一个弹出列表，其中列出了所有可拖入 Pivot Grid 的字段（见下图）。
 
-To create a new Pivot Grid, use the **File > New > Pivot Grid** option. From here, you can either drag measures, columns and hierarchies from the TOM Explorer into the grid, or you can use the **Pivot Grid > Show fields** menu option to display a popup list of all fields that can be dragged into the Pivot Grid (see screenshot below).
+![显示字段 Pivot](~/content/assets/images/show-fields-pivot.png)
 
-![Show Fields Pivot](~/content/assets/images/show-fields-pivot.png)
+当字段被拖入 Pivot Grid 时，Tabular Editor 会生成 MDX 查询并发送到 Analysis Services，以显示结果数据。 在这一点上，其行为与 Excel 中的数据透视表非常相似。 你可以通过拖拽重新排列 Pivot Grid 中的字段，并可通过右键菜单中的多种选项自定义数据的显示方式。
 
-As fields are dragged into the Pivot Grid, Tabular Editor generates MDX queries that are sent to Analysis Services, to display the resulting data. In this regard, the behavior is very similar to Pivot Tables in Excel. You can rearrange fields in the Pivot Grid by dragging and dropping, and there are various right-click menu options available for customizing how the data is displayed.
+![自定义 Pivot Grid](~/content/assets/images/customizing-pivot-grids.png)
 
-![Customizing Pivot Grids](~/content/assets/images/customizing-pivot-grids.png)
+当模型发生更改或刷新操作完成时，Pivot Grid 会自动刷新。 你可以在 **Pivot Grid** 菜单中切换此自动刷新功能。
 
-The Pivot Grid is automatically refreshed when a change is made to the model or a refresh operation finishes. You can toggle this auto-refresh capability within the **Pivot Grid** menu.
+# DAX 查询
 
-# DAX Queries
+查询模型数据更直接的方式是编写 DAX 查询。 你可以使用 **文件 > 新建 > DAX 查询** 菜单选项来创建新的 DAX 查询文档。 你可以同时打开多个 DAX 查询文档。
 
-A more direct way to query the data in your model, is to write a DAX query. Use the **File > New > DAX Query** menu option to create a new DAX query document. You can have multiple DAX query documents open at the same time.
+DAX 查询可以使用 `.dax` 或 `.msdax` 文件扩展名保存到独立文件中，也可以从这些文件中加载。 更多信息请参阅 @supported-files。
 
-DAX queries can be saved and loaded to and from standalone files using the `.dax` or `.msdax` file extension. See @supported-files for more information.
+在编辑器中输入 DAX `EVALUATE` 查询，然后点击 **查询 > 执行**（F5），即可将查询发送到 Analysis Services 并查看结果。 默认情况下，Tabular Editor 3 会将 Analysis Services 返回的行数限制为 1000；但你可以在 **工具 > 偏好 > 数据浏览 > DAX 查询** 中更改此设置。 如果查询超过此限制，Tabular Editor 3 会显示一个快捷链接，方便你检索所有记录（见下方截图）。
 
-Type your DAX `EVALUATE` query into the editor and hit **Query > Execute** (F5) to send the query to Analysis Services and see the result. By default, Tabular Editor 3 limits the number of rows returned from Analysis Services to 1000, but this can be changed under **Tools > Preferences > Data Browsing > DAX Query**. If a query exceeds this limit, Tabular Editor 3 displays a shortcut that lets you retrieve all records (see screenshot below).
-
-![Query Rowset Limit](~/content/assets/images/query-rowset-limit.png)
+![查询行集限制](~/content/assets/images/query-rowset-limit.png)
 
 > [!WARNING]
-> Displaying a large number of records in the query result window could take a while and drastically increase the memory consumed by Tabular Editor 3.
+> 在查询结果窗口中显示大量记录可能需要一些时间，并会显著增加 Tabular Editor 3 的内存占用。
 
-Tabular Editor 3 uses the same DAX code editor for query editing as for defining DAX expressions on objects. As such, all the features regarding code-completion, auto-formatting, etc. are available. See @dax-editor for more information. In addition, since a DAX query has a slightly different syntax than object expressions, the DAX query editor provides a few more options for common tasks.
+Tabular Editor 3 在编辑查询时使用与在对象上定义 DAX 表达式相同的 DAX 代码编辑器。 因此，代码补全、自动格式化等所有相关功能都可用。 更多信息请参阅 @dax-editor。 此外，由于 DAX 查询的语法与对象表达式略有不同，DAX 查询编辑器还为常见任务提供了一些额外选项。
 
-For example, if you right-click on a measure reference, there is an option to **Define measure** as seen on the screenshot below. This option will add a `DEFINE MEASURE` statement at the top of your DAX query, allowing you to easily modify the DAX expression of that measure within the scope of the query.
+例如，如果你右键单击某个度量值引用，就会看到 **定义度量值** 选项，如下方截图所示。 此选项会在 DAX 查询顶部添加一条 `DEFINE MEASURE` 语句，使你可以在查询作用域内轻松修改该度量值的 DAX 表达式。
 
-![Dax Query Features](~/content/assets/images/dax-query-features.png)
+![Dax 查询功能](~/content/assets/images/dax-query-features.png)
 
-In addition, a DAX query can contain multiple `EVALUATE` statements. When that is the case, Tabular Editor 3 displays the result from each such statement on a separate, numbered tab. If you only want to execute a single `EVALUATE` statement, even though your document contains multiple, you can place the cursor somewhere within the statement you want to execute, and then use the **Query > Execute selection** (SHIFT+F5) option.
+此外，一个 DAX 查询可以包含多个 `EVALUATE` 语句。 在这种情况下，Tabular Editor 3 会将每条语句的结果显示在单独的编号选项卡上。 如果文档中包含多个 `EVALUATE` 语句，但你只想执行其中一条，可以将光标放在要执行的语句中的任意位置，然后使用 **查询 > 执行所选内容**（SHIFT+F5）。
 
-A DAX query in Tabular Editor 3 is automatically refreshed when a change is made to the model or a refresh operation finishes. You can toggle this auto-refresh capability within the **Query** menu.
+Tabular Editor 3 中的 DAX 查询会在模型发生更改或刷新操作完成时自动刷新。 你可以在 **查询** 菜单中开启或关闭此自动刷新功能。
 
-# Impersonation
+# 身份模拟
 
-When querying the data in the model, it is sometimes useful to be able to impersonate a specific user or a combination of roles, to see what the behavior of the model from an end user perspective would be. Tabular Editor 3 allows you to impersonate a specific user or one or more roles, by clicking on the **Impersonate...** button. This applies to [Table previews](#previewing-table-data), [Pivot Grids](#pivot-grids) and [DAX queries](#dax-queries). 
+在查询模型中的数据时，有时需要模拟某个特定用户或一组角色，以便从最终用户的透视角度查看模型的行为表现。 Tabular Editor 3 支持点击 **模拟身份...** 按钮，来模拟特定用户或一个或多个角色。 这适用于 [表格预览](#previewing-table-data)、[Pivot Grid](#pivot-grids) 和 [DAX 查询](#dax-queries)。
 
 > [!NOTE]
-> To impersonate a user, Tabular Editor adds the [`EffectiveUserName` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) to the connection string, when connecting to Analysis Services. To impersonate a role, Tabular Editor adds the [`Roles` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) to the connection string. This only applies to the data view (i.e. the DAX query, the Pivot Grid or the Table Preview) where the impersonation is specified.
+> 要模拟用户，Tabular Editor 在连接到 Analysis Services 时会将 [`EffectiveUserName` 属性](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#effectiveusername) 添加到连接字符串中。 为了模拟角色，Tabular Editor 会将 [`Roles` 属性](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#roles) 添加到连接字符串中。 这仅适用于指定了模拟身份的那个数据视图（即 DAX 查询、Pivot Grid 或表格预览）。
 
-When clicking on the **Impersonation..** button (which can also be found through the **Query**, **Pivot Grid** or **Table Preview** menu, depending on which type of data view is active), a popup allows you to specify either a user, or select one or more roles.
+点击 **模拟身份..** 按钮后（根据当前激活的数据视图类型，也可以在 **查询**、**Pivot Grid** 或 **表格预览** 菜单中找到），会弹出一个窗口，让你指定用户或选择一个或多个角色。
 
-![Select Impersonation](~/content/assets/images/select-impersonation.png)
+![选择模拟身份](~/content/assets/images/select-impersonation.png)
 
-Once the impersonation is enabled, the **Impersonation..** button is checked, and the impersonation will be applied to the current data view. By clicking on the small arrow next to the **Impersonation..** button, you can view and quickly switch between the 10 most recent impersonations used.
+启用模拟身份后，**模拟身份..** 按钮将显示为已选中，并且该模拟身份会应用于当前数据视图。 点击 **模拟身份..** 按钮旁的小箭头，你可以查看并快速切换最近使用的 10 个模拟身份。
 
-![Impersonation Dropdown](~/content/assets/images/impersonation-dropdown.png)
+![模拟身份下拉列表](~/content/assets/images/impersonation-dropdown.png)
 
-When auto-refresh is enabled on a data view, changing the impersonation will immediately refresh the view. 
+当某个数据视图启用了自动刷新时，更改模拟身份会立即刷新该视图。
 
 ## CustomData
 
-The CustomData feature allows you to pass a custom string value that can be used in DAX expressions, typically for implementing dynamic row-level security scenarios. This feature can be combined with any of the impersonation options described above, including **No Impersonation**.
+CustomData 功能允许你传入一个自定义字符串值，可在 DAX 表达式中使用，通常用于实现动态行级安全性方案。 此功能可以与上文介绍的任何模拟选项结合使用，包括 **不进行模拟**。
 
-![Select Impersonation](~/content/assets/images/impersonation-customdata.png)
+![选择模拟](~/content/assets/images/impersonation-customdata.png)
 
-When you enter a value in the **CustomData** input field, Tabular Editor 3 adds the [`CustomData` property](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) to the connection string. This value can then be retrieved within your DAX expressions using the [`CUSTOMDATA()` function](https://dax.guide/customdata/).
+当你在 **CustomData** 输入框中输入值时，Tabular Editor 3 会将 [`CustomData` 属性](https://docs.microsoft.com/en-us/analysis-services/instances/connection-string-properties-analysis-services?view=asallproducts-allversions#customdata) 添加到连接字符串中。 然后，你可以在 DAX 表达式中通过 [`CUSTOMDATA()` 函数](https://dax.guide/customdata/) 取回该值。
 
-CustomData is commonly used in implementing dynamic row-level security when an application uses custom authentication. The value you provide can be leveraged in role filter expressions to control which rows users can see based on the custom data passed through the connection string.
+当应用使用自定义身份验证时，CustomData 常用于实现动态行级安全性。 你提供的值可用于角色筛选表达式，通过连接字符串传入的自定义数据来控制用户能够看到哪些行。
 
-This feature is particularly useful in **Power BI Embedded** scenarios, where you can natively utilize CustomData to add row filters that pass free text (strings) to leverage dynamic row-level security in embedded reports, dashboards, and tiles.
+此功能在 **Power BI Embedded** 场景中特别有用，你可以直接利用 CustomData 添加行筛选器，传入自由文本(字符串)，从而在嵌入式 Report、Dashboard 和 Tile 中实现动态行级安全性。
 
-**Example use case:** You might pass a user's department or region as CustomData, and then use that value in a role's filter expression like:
+**示例用例：** 你可以将用户的部门或区域作为 CustomData 传入，然后在某个角色的筛选表达式中使用该值，例如：
+
 ```dax
 'Department'[DepartmentCode] = CUSTOMDATA()
-```   
+```
 
-# VertiPaq Analyzer
+# VertiPaq分析器
 
-Tabular Editor 3 includes a version of the open-source [VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) tool, created by [SQLBI](https://sqlbi.com). VertiPaq Analyzer is useful to analyze VertiPaq storage structures for your Power BI or Tabular data model.
+Tabular Editor 3 内置了由 [SQLBI](https://sqlbi.com) 创建的开源工具 [VertiPaq分析器](https://www.sqlbi.com/tools/vertipaq-analyzer/) 的一个版本。 VertiPaq分析器可用于分析 Power BI 或 Tabular Data model 的 VertiPaq 存储结构。
 
-With Tabular Editor 3, you can collect VertiPaq Analyzer statistics while you are connected to any instance of Analysis Services. You can also export the statistics as a [.vpax file](https://www.youtube.com/watch?v=zRa9y01Ub30), or import statistics from a .vpax file.
+使用 Tabular Editor 3，只要你连接到任意 Analysis Services 实例，就可以收集 VertiPaq分析器统计信息。 你还可以将统计信息导出为 [.vpax 文件](https://www.youtube.com/watch?v=zRa9y01Ub30)，或从 .vpax 文件导入统计信息。
 
-To collect statistics, simply hit the **Collect stats** button in the **VertiPaq Analyzer** view.
+要收集统计信息，只需在 **VertiPaq分析器** 视图中点击 **收集统计信息** 按钮。
 
-![Vertipaq Analyzer Collect Stats](~/content/assets/images/vertipaq-analyzer-collect-stats.png)
+![VertiPaq分析器收集统计信息](~/content/assets/images/vertipaq-analyzer-collect-stats.png)
 
-Once statistics are collected, VertiPaq Analyzer displays a summary of the model size, number of tables, etc. You can find more detailed statistics on the **Tables**, **Columns**, **Relationships** and **Partitions** tabs.
+收集完成后，VertiPaq分析器会显示模型大小、表数量等摘要信息。 你可以在 **表**、**列**、**关系** 和 **分区** 选项卡中查看更详细的统计信息。
 
-Additionally, whenever statistics have been loaded, Tabular Editor 3 will display cardinality and size information as a tooltip when hovering the mouse cursor over objects in the TOM Explorer:
+此外，只要已加载统计信息，当鼠标悬停在 TOM Explorer 中的对象上时，Tabular Editor 3 就会以工具提示的形式显示基数和大小信息：
 
-![Vertipaq Analyzer Stats in TOM Explorer](~/content/assets/images/vertipaq-analyzer-stats.png)
+![TOM Explorer 中的 VertiPaq分析器统计信息](~/content/assets/images/vertipaq-analyzer-stats.png)
 
-...or when hovering the mouse cursor over object references in DAX expressions:
+……或将鼠标指针悬停在 DAX 表达式中的对象引用上时：
 
-![Vertipaq Analyzer Stats in a DAX expression](~/content/assets/images/vertipaq-analyzer-stats-dax.png)
+![DAX 表达式中的 VertiPaq分析器统计信息](~/content/assets/images/vertipaq-analyzer-stats-dax.png)
 
-# Next steps
+# 后续步骤
 
 - @creating-and-testing-dax

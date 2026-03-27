@@ -65,6 +65,7 @@ The "Identifier quotes"-dropdown lets you specify how object names (column, tabl
 
 Another way to bring up the import page, is to right-click on an existing table (that uses a Legacy Data Source), and choose "Select Columns...". If that table was previously imported using the UI, the import page should show up with the source table/view and imported columns pre-selected. You may add/remove columns or even choose an entirely different table to be imported in place of the table you selected in your model. Keep in mind that any columns in your table, that were deselected or no longer exists in your source table/view will be removed from your model. You can always undo operations such as this using CTRL+Z.
 
+<a name="refreshing-table-metadata"></a>
 ## Refreshing Table Metadata
 
 As of version 2.8, Tabular Editor has a new UI feature that lets you easily check for schema drift. That is, detecting columns that had their data type changed, or were added or removed to source tables and views. This check may be invoked at the Model level (again, this only applies to Legacy Data Sources), at the Data Source level, at the Table level or at the Partition level. This is done by right-clicking the object and choosing "Refresh Table Metadata..."
@@ -79,6 +80,7 @@ This mechanism (as well as the Import Table UI) uses the FormatOnly-flag, when q
 
 You can perform a schema check at the model level from the command line by using the `-SC` flag. Note that the schema check, when executed through the CLI, will only report mapping issues. It will not make any changes to your model. This is useful if you're using Tabular Editor within CI/CD pipelines, as mapping issues could potentially cause problems after deploying your model to a test/production environment.
 
+<a name="ignoring-objects"></a>
 ### Ignoring objects
 
 As of Tabular Editor 2.9.8, you can exclude objects from schema checks / metadata refresh. This is controlled by setting an annotation on the objects that you wish to leave out. As the annotation name, use the codes listed below. You can leave the annotation value blank or set it to "1", "true" or "yes". Setting the annotation value to "0", "false" or "no" will effectively disable the annotation, as if it didn't exist:

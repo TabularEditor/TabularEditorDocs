@@ -1,6 +1,6 @@
 ---
 uid: script-output-things
-title: Output Object Details in a Grid
+title: 以网格形式输出对象详细信息
 author: Daniel Otykier
 updated: 2024-12-13
 applies_to:
@@ -10,16 +10,19 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Output Object Details in a Grid
 
-## Script Purpose
-Another way to get an overview of objects in the model, and how they are configured, is to output them in a grid using the C# [`DataTable`](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable?view=net-8.0) class. This is a very flexible technique, as you can add only the information you are interested in, as columns of the `DataTable`. Moreover, when passing a `DataTable` to the `Output()` method, Tabular Editor will automatically display it in a grid view, which is very convenient for inspecting the data.
+# 以网格形式输出对象详细信息
 
-## Script
+## 脚本用途
 
-### Show measure complexity details
+另一种查看模型中对象及其配置概况的方法，是使用 C# 的 [`DataTable`](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable?view=net-8.0) 类将它们以网格形式输出。 这种技术非常灵活，你可以只把自己关心的信息作为 `DataTable` 的列添加进去。 此外，将 `DataTable` 传给 `Output()` 方法时，Tabular Editor 会自动以网格视图显示它，这对检查数据非常方便。
+
+## 脚本
+
+### 显示度量值复杂度详情
+
 ```csharp
-// This script displays a grid with details about each measure in the model.
+// 此脚本显示一个网格，其中包含模型中每个度量值的详细信息。
 using System.Data;
 
 var result = new DataTable();
@@ -46,21 +49,22 @@ foreach(var m in Model.AllMeasures)
 
 Output(result);
 ```
-### Explanation
-This snippet first configures a `DataTable` object with the columns we want to display in the grid. We explicitly specify the `typeof(int)` for some of the columns, to ensure that sorting works correctly. We then iterate over all measures in the model, and for each measure, we create a new row in the `DataTable` with the desired information. Finally, we pass the `DataTable` to the `Output()` method, which will display the grid.
 
-The columns displayed are:
+### 说明
 
-- **Name**: The name of the measure.
-- **Table**: The name of the table the measure belongs to.
-- **Expression token count**: The number of tokens in the measure expression. This is a rough measure of DAX complexity.
-- **Expression line count**: The number of lines in the measure expression, not counting empty lines.
-- **Description line count**: The number of lines in the measure description, not counting empty lines.
-- **Format String**: The measure's format string expresssion or format string, if any.
+这段代码首先配置一个 `DataTable` 对象，包含我们希望在网格中显示的各个列。 我们为其中一些列显式指定 `typeof(int)`，以确保排序能够正确工作。 然后我们遍历模型中的所有度量值；对每个度量值，在 `DataTable` 中创建一行，并填入所需信息。 最后，我们将 `DataTable` 传给 `Output()` 方法，它会显示该网格。
 
-## Example Output
+显示的列包括：
+
+- **Name**：度量值的名称。
+- **Table**：该度量值所属表的名称。
+- **表达式词元数量**: 度量值表达式中的词元数量。 这是衡量 DAX 复杂度的一个粗略指标。
+- **表达式行数**：度量值表达式的行数，不计空行。
+- **描述行数**: 度量值描述的行数，不计空行。
+- **格式字符串**: 度量值的格式字符串表达式或格式字符串（如有）。
+
+## 示例输出
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/script-output-things-example.png" alt="Example of the dialog pop-up that displays the grid." style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Example of the dialog pop-up that displays the grid. Both Tabular Editor 2 and Tabular Editor 3 will let you sort the grid columns as well as copy the output to the clipboard. However, Tabular Editor 3 also has additional features for grouping, filtering, and searching within the grid.</figcaption>
+  <img class="noscale" src="~/content/assets/images/script-output-things-example.png" alt="Example of the dialog pop-up that displays the grid." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong> 显示网格的对话框弹窗示例。 Tabular Editor 2 和 Tabular Editor 3 都允许对网格列进行排序，并将输出复制到剪贴板。 不过，Tabular Editor 3 还额外提供在网格中进行分组、筛选和搜索的功能。</figcaption>
 </figure>

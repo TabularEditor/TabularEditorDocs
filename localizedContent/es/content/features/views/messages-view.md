@@ -1,6 +1,6 @@
-﻿---
+---
 uid: messages-view
-title: Messages view
+title: Vista de mensajes
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -16,33 +16,34 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Messages view
 
-The Messages view in Tabular Editor 3 is a tool window that displays various types of messages related to the current dataset. 
+# Vista de mensajes
+
+La vista de mensajes en Tabular Editor 3 es una ventana de herramientas que muestra varios tipos de mensajes relacionados con el Dataset actual.
 
 > [!TIP]
-> You can double-click on a message to jump to the source of the error in the model tree or script editor.
+> Puede hacer doble clic en un mensaje para ir al origen del error en el árbol del modelo o en el editor de scripts.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/user-interface/messages-view.png" alt="Message View" style="width: 500px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Messages window in Tabular Editor. Provides an overview of all warnings and errors in your dataset </figcaption>
+  <img class="noscale" src="~/content/assets/images/user-interface/messages-view.png" alt="Message View" style="width: 500px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Ventana de mensajes en Tabular Editor. Ofrece una visión general de todas las advertencias y errores de su Dataset </figcaption>
 </figure>
 
+La vista de mensajes le indicará el origen y el objeto que genera el mensaje.
 
-The Messages view will tell you the Source and the object from which the message is being generated. 
+Se muestran dos tipos de mensajes, errores y advertencias
 
-There are two types of messages displayed Errors and Warnings
-- Errors: This tab shows any errors that prevent your model from being deployed or saved. For example, if you have an invalid expression in a calculation item or a circular dependency in a relationship. 
-- Warnings: This tab shows any warnings that does not concur with standards but does not prevent your model from being usable. This is for example having fully qualified measure references.
-- 
-## Copying Messages
-The message view allows for copying out the error message using Ctrl+C.
- 
-From Tabular Editor 3.23.0 Ctrl+C copies the selected cell by default. Use Ctrl+Shift+C (or Copy Row in right-click menu) for row-level copy.
+- Errores: Esta pestaña muestra cualquier error que impida que su modelo se implemente o se guarde. Por ejemplo, si tiene una expresión no válida en un elemento de cálculo o una dependencia circular en una relación.
+- Advertencias: Esta pestaña muestra cualquier advertencia que no concuerda con los estándares, pero que no impide que su modelo pueda utilizarse. Por ejemplo, tener referencias a medidas con nombres totalmente cualificados.
+-
+
+## Copiar mensajes
+
+La vista de mensajes permite copiar el mensaje de error con Ctrl+C.
+
+A partir de Tabular Editor 3.23.0, Ctrl+C copia la celda seleccionada de forma predeterminada. Use Ctrl+Shift+C (o Copiar fila en el menú contextual) para copiar a nivel de fila.
 
 > [!TIP]
-> Right-click a cell to choose Copy Cell / Copy Row.
+> Haga clic con el botón derecho en una celda para elegir Copiar celda / Copiar fila.
 
-
-![Message View Copy](~/content/assets/images/messages-view-copy.png)
+![Copia de vista de mensajes](~/content/assets/images/messages-view-copy.png)
 

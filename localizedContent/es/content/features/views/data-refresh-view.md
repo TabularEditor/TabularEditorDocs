@@ -1,6 +1,6 @@
-﻿---
+---
 uid: data-refresh-view
-title: Data Refresh view
+title: Vista de actualización de datos
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -16,40 +16,40 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Data Refresh View
-The Data Refresh view allows you to investigate in detail how your data is being refreshed on the server.
-A new active refresh will appear when a new refresh is triggered through the TOM Explorer. 
 
+# Vista de actualización de datos
+
+La vista de Actualización de datos le permite investigar en detalle cómo se están actualizando sus datos en el servidor.
+Aparecerá una nueva actualización activa cuando se inicie una actualización desde el Explorador TOM.
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/data-refresh-view.png" alt="Data Refresh View" style="width: 550px;"/>
-  <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> Data Refresh View in Tabular Editor. New refresh can be started by right-clicking a table and selecting refresh </figcaption>
+  <img class="noscale" src="~/content/assets/images/data-refresh-view.png" alt="Data Refresh View" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 1:</strong> Vista de actualización de datos en Tabular Editor. Se puede iniciar una nueva actualización haciendo clic con el botón derecho en una tabla y seleccionando Actualizar </figcaption>
 </figure>
 
-A new refresh will run in the background so that you can continue to build your dataset, and Tabular Editor will let you know if the refresh fails with a pop up.
+Una nueva actualización se ejecutará en segundo plano para que pueda seguir creando su conjunto de datos, y Tabular Editor le avisará mediante una ventana emergente si la actualización falla.
 
-## Data Refresh view columns
+## Columnas de la vista de actualización de datos
 
-The Data Refresh view displays the following information for each refresh operation:
+La vista de actualización de datos muestra la siguiente información para cada operación de actualización:
 
-- **Object**: The name of the model object being refreshed (table, partition, or model)
-- **Description**: Additional details about the refresh operation and its current state
-- **Progress**: Shows the number of rows that have been imported so far.
-- **Start Time**: The date and time when the refresh operation began. This is useful for tracking when operations were initiated, especially when multiple refreshes are queued
-- **Duration**: The elapsed time since the refresh operation started, updated in real-time for active operations
+- **Objeto**: El nombre del objeto del modelo que se está actualizando (tabla, partición o modelo)
+- **Descripción**: Detalles adicionales sobre la operación de actualización y su estado actual
+- **Progreso**: Muestra el número de filas que se han importado hasta el momento.
+- **Hora de inicio**: La fecha y la hora en que comenzó la operación de actualización. Esto es útil para llevar un registro de cuándo se iniciaron las operaciones, especialmente cuando hay varias actualizaciones en cola
+- **Duración**: El tiempo transcurrido desde que se inició la operación de actualización, actualizado en tiempo real para las operaciones activas
 
-### Sorting refresh operations
+### Ordenar operaciones de actualización
 
-You can sort the refresh operations by clicking on any column header. This is particularly useful for:
+Puedes ordenar las operaciones de actualización haciendo clic en el encabezado de cualquier columna. Esto es especialmente útil para:
 
-- Clicking the **Start Time** column to sort refresh operations chronologically, with the most recent operations appearing first (descending sort) or last (ascending sort)
-- Sorting by **Duration** to identify long-running operations
-- Sorting by **Object** to group refreshes by table or partition name
+- Hacer clic en la columna **Hora de inicio** para ordenar las operaciones de actualización de forma cronológica; las más recientes aparecen primero (orden descendente) o al final (orden ascendente)
+- Ordenar por **Duración** para identificar operaciones de larga duración
+- Ordenar por **Objeto** para agrupar las actualizaciones por nombre de tabla o partición
 
-Click a column header once to sort ascending, and click again to sort descending. This makes it easy to identify the latest refresh operations when working with multiple refresh queues. 
+Haz clic una vez en el encabezado de una columna para ordenar de forma ascendente, y vuelve a hacer clic para ordenar de forma descendente. Esto facilita identificar las últimas operaciones de actualización cuando trabajas con varias colas de actualización.
 
-> [!NOTE]
-> All the messages and durations shown in the Data Refresh window are estimates only. Tabular Editor listens to [trace events from SSAS](https://learn.microsoft.com/en-us/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions) during processing. SSAS is not guaranteed to send all trace messages to the client (for example it may throttle the trace event notifications during times of peak CPU/memory consumption). 
+> [!NOTA]
+> Todos los mensajes y las duraciones que se muestran en la ventana de actualización de datos son solo estimaciones. Tabular Editor escucha los [eventos de seguimiento de SSAS](https://learn.microsoft.com/en-us/analysis-services/trace-events/analysis-services-trace-events?view=asallproducts-allversions) durante el procesamiento. SSAS no garantiza que envíe todos los mensajes de seguimiento al cliente (por ejemplo, puede limitar las notificaciones de eventos de seguimiento durante picos de consumo de CPU/memoria).
 
 > [!TIP]
-> If you need accurate and reliable information about refresh progress and durations, you should connect [SQL Server Profiler](https://learn.microsoft.com/en-us/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) to your SSAS instance, and collect the information manually during processing.
+> Si necesita información precisa y fiable sobre el progreso y la duración de la actualización, debe conectar [SQL Server Profiler](https://learn.microsoft.com/en-us/sql/tools/sql-server-profiler/sql-server-profiler?view=sql-server-ver16) a su instancia de SSAS y recopilar la información manualmente durante el procesamiento.

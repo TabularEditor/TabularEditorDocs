@@ -1,6 +1,6 @@
 ---
 uid: script-library-beginner
-title: Beginner C# Scripts
+title: C# Scripts para principiantes
 author: Morten Lønskov
 updated: 2023-02-27
 applies_to:
@@ -11,22 +11,22 @@ applies_to:
       full: true
 ---
 
-# C# Script Library: Beginner Scripts
+# Biblioteca de C# Scripts: scripts para principiantes
 
-These are more basic scripts that are easy to understand or modify. They have a defined scope and limited complexity; you don't need a reasonable knowledge of the C# language to use, understand and modify these scripts. They are thus a good place to start when beginning to author C# Scripts in Tabular Editor.
+Estos son scripts más básicos, fáciles de entender o modificar. Tienen un alcance definido y una complejidad limitada; no necesitas tener un conocimiento sólido del lenguaje C# para usarlos, entenderlos y modificarlos. Por eso, son un buen punto de partida para empezar a escribir C# Scripts en Tabular Editor.
 
 <br>
 <br>
 
-| <div style="width:250px">Script Name</div> | Purpose | Use-case |
-| --- | --- | --- |
-| [Count Table Rows](xref:script-count-rows) | Evaluates a COUNTROWS ( 'Table' ) of a selected table. | When you want to check how many rows are in a table, or if it's been loaded. |
-| [Create Sum Measures from Columns](xref:script-create-sum-measures-from-columns) | Create SUM ( 'Table'[Column] ) measures from any selected column. | When you have many columns in a new table / model and must make many measures at once. |
-| [Create Measure Table](xref:script-create-measure-table) | Create a measure table | When you want to create an empty table to use as an organizing measure table|
-| [Create Table Groups](xref:script-create-table-groups) | Organize the model into Table Groups | When you want to have an automatic organization of your tables using the table group feature of Tabular Editor 3 |
-| [Create M Parameter](xref:script-create-m-parameter) | Create a new M Parameter in 'Shared Expressions' | When you want to create a parameter to use in other Power Query queries (M Partitions / Shared Expressions). |
-| [Edit Hidden Partitions](xref:script-edit-hidden-partitions) | Reveals the properties of hidden partitions in Calc. Groups & Calc. Tables | When you need to see or edit the TOM properties of these hidden partitions. | 
-| [Format Numeric Measures](xref:script-format-numeric-measures) | Formats the chosen measures | When you want to quickly apply a format string to the currently selected measures |
-| [Show Data Source Dependencies](xref:script-show-data-source-dependencies) | Shows dependencies for data sources | For explicit (legacy) data sources it can be hard to know exactly where they are used. This script shows you which partition reference the chosen data source |
-| [Create Field Parameters](xref:create-field-parameter) | Quickly create a field parameter table | Choose the objects that should be in the field parameter and the script will take care of the rest |
-| [Display Unique Column Values](xref:script-display-unique-column-values) | Display unique values in a column | When you want to see the unique values in the currently selected column |
+| <div style="width:250px">Nombre del script</div>                                           | Propósito                                                                                                                                                               | Caso de uso                                                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Contar filas de una tabla](xref:script-count-rows)                                        | Evalúa un COUNTROWS ( 'Table' ) de una tabla seleccionada.                                                                           | Cuando quieres comprobar cuántas filas hay en una tabla o si se ha cargado.                                                                                                                      |
+| [Crear medidas de suma a partir de columnas](xref:script-create-sum-measures-from-columns) | Crea medidas SUM ( 'Table'[Column] ) a partir de cualquier columna seleccionada. | Cuando tienes muchas columnas en una tabla o modelo nuevo y necesitas crear muchas medidas de una sola vez.                                                                                      |
+| [Crear tabla de medidas](xref:script-create-measure-table)                                 | Crea una tabla de medidas                                                                                                                                               | Cuando quieres crear una tabla vacía para usarla como tabla de medidas de organización                                                                                                                           |
+| [Crear grupos de tablas](xref:script-create-table-groups)                                  | Organiza el modelo en grupos de tablas                                                                                                                                  | Cuando quieres organizar automáticamente tus tablas con la funcionalidad de grupos de tablas de Tabular Editor 3                                                                                                 |
+| [Crear parámetro M](xref:script-create-m-parameter)                                        | Crear un nuevo parámetro M en 'Expresiones compartidas'                                                                                                                 | Cuando quieres crear un parámetro para usarlo en otras consultas de Power Query (particiones M / Expresiones compartidas).                                                    |
+| [Editar particiones ocultas](xref:script-edit-hidden-partitions)                           | Muestra las propiedades de las particiones ocultas en Calc. Grupos y Calc. Tablas                                                       | Cuando necesitas ver o editar las propiedades TOM de estas particiones ocultas.                                                                                                                  |
+| [Dar formato a medidas numéricas](xref:script-format-numeric-measures)                     | Da formato a las medidas elegidas                                                                                                                                       | Cuando quieres aplicar rápidamente una cadena de formato a las medidas seleccionadas actualmente                                                                                                                 |
+| [Mostrar dependencias de los Data source](xref:script-show-data-source-dependencies)       | Muestra las dependencias de los Data source                                                                                                                             | Para los Data source explícitos (heredados), puede ser difícil saber exactamente dónde se usan. Este script muestra qué partición hace referencia al Data source seleccionado |
+| [Crear parámetros de campo](xref:create-field-parameter)                                   | Crear rápidamente una tabla de parámetros de campo                                                                                                                      | Elige los objetos que deben formar parte del parámetro de campo y el script se encargará del resto                                                                                                               |
+| [Mostrar valores únicos de columna](xref:script-display-unique-column-values)              | Mostrar valores únicos en una columna                                                                                                                                   | Cuando quieres ver los valores únicos de la columna seleccionada actualmente                                                                                                                                     |

@@ -40,6 +40,7 @@ Once you purchase a license for Tabular Editor 3, you should receive an e-mail w
 > [!NOTE]
 > For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
 
+<a name="manual-activation-no-internet"></a>
 #### Manual Activation (No Internet)
 If you do not have access to the internet e.g., due to a proxy Tabular Editor will prompt you to do a manual activation. 
 

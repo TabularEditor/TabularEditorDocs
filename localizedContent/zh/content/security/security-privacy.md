@@ -1,8 +1,8 @@
-﻿---
+---
 uid: security-privacy
-title: Security overview
+title: 安全概述
 author: Daniel Otykier
-updated: 2024-10-30
+updated: 2026-03-25
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,80 +16,110 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Tabular Editor 3 Security and Privacy
 
-This document describes the security and privacy considerations of Tabular Editor 3 and its use. In the following, the phrase "Tabular Editor" can mean both the commercial tool Tabular Editor 3, as well as the open-source tool Tabular Editor 2.X. Whenever something considers only one of the tools, we will use their explicit names "Tabular Editor 3" or "Tabular Editor 2.X".
+# Tabular Editor 3 的安全与隐私
 
-## Microsoft advice on third-party tools such as Tabular Editor
+本文档介绍 Tabular Editor 3 及其使用过程中的安全与隐私注意事项。 下文中，“Tabular Editor”一词既可指商业工具 Tabular Editor 3，也可指开源工具 Tabular Editor 2.X。 当内容仅针对其中一款工具时，我们将使用明确名称“Tabular Editor 3”或“Tabular Editor 2.X”。
 
-Microsoft supports the use of community third-party tools as communicated here: [Community and third-party tools for developing enterprise-level Power BI and Analysis Services models]( https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices)
+## Microsoft 关于 Tabular Editor 等第三方工具的建议
 
-Microsoft's Power BI implementation planning documentation specifically includes Tabular Editor in advanced data modeling scenarios and enterprise development: [Power BI usage scenarios: Advanced data model management](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
+Microsoft 在此处说明其支持使用社区第三方工具：[用于开发企业级 Power BI 和 Analysis Services 模型的社区和第三方工具](https://powerbi.microsoft.com/en-us/blog/community-tools-for-enterprise-powerbi-and-analysisservices)
 
-## Trust Center
-At Tabular Editor, we are committed to transparency and strong security practices. Visit our [Trust Center](https://trust.tabulareditor.com/) to find details about our SOC 2 audit report, key policy documents, license terms, and our approach to infrastructure and organizational security. You’ll also find information about our sub-processors and how we work to keep your data safe.
+Microsoft 的 Power BI 实施规划文档在高级数据建模场景与企业级开发中明确提到 Tabular Editor：[Power BI 使用场景：高级 Data model 管理](https://learn.microsoft.com/en-us/power-bi/guidance/powerbi-implementation-planning-usage-scenario-advanced-data-model-management#tabular-editor)
 
-## Metadata and Data Privacy
+## 信任中心
 
-Tabular Editor is primarily an offline tool, meaning that all data and metadata reside locally in the client machine on which Tabular Editor is installed, and all user interactions are performed locally as well. An Internet connection is not required to run and use Tabular Editor.
+在 Tabular Editor，我们坚持透明度，并践行强有力的安全措施。 访问我们的 [信任中心](https://trust.tabulareditor.com/)，了解我们的 SOC 2 审计报告、关键政策文档、许可条款，以及我们在基础设施和组织安全方面的做法。 您还可以了解我们的子处理方，以及我们为保障您的数据安全所做的工作。
 
-That being said, there are scenarios in which Tabular Editor connects to remote services for various purposes. These are described in the following:
+## 元数据与数据隐私
 
-### Analysis Services XMLA Protocol
+Tabular Editor 主要是一款离线工具，这意味着所有数据和元数据都保存在安装了 Tabular Editor 的本机上，所有用户交互也都在本地完成。 运行和使用 Tabular Editor 不需要互联网连接。
 
-All communication with Analysis Services instances or Power BI Premium workspaces happens through the use of the [Microsoft Analysis Management Objects (AMO)](https://docs.microsoft.com/en-us/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) client libraries, or more specifically, the [Tabular Object Model (TOM) extension for AMO](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions). These client libraries are provided by Microsoft for redistribution in 3rd party applications such as Tabular Editor. For licensing details, please refer to the [AMO EULA](https://go.microsoft.com/fwlink/?linkid=852989).
+不过，在某些场景下，Tabular Editor 会出于不同目的连接到远程服务。 具体如下：
 
-When Tabular Editor connects to an instance of Analysis Services (local network or cloud) or a Power BI Premium workspace (cloud), this connection is performed through the client libraries mentioned above. By design, the AMO library handles the authentication and authorization of the user. Only users with administrative privileges on the Analysis Services instance or Power BI Premium workspace, are allowed to connect. This is no different than when using Microsoft tools such as SQL Server Management Studio or SQL Server Data Tools (which use the same client libraries for connectivity).
+### Analysis Services XMLA 协议
 
-### Tabular Object Model metadata
+与 Analysis Services 实例或 Power BI Premium Workspace 的所有通信，都通过 [Microsoft Analysis Management Objects (AMO)](https://docs.microsoft.com/en-us/analysis-services/amo/developing-with-analysis-management-objects-amo?view=asallproducts-allversions) 客户端库进行；更具体地说，是通过 [AMO 的 Tabular Object Model (TOM) 扩展](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)。 这些客户端库由 Microsoft 提供，可供 Tabular Editor 等第三方应用程序重新分发。 有关许可详情，请参阅 [AMO EULA](https://go.microsoft.com/fwlink/?linkid=852989)。
 
-Once the AMO/TOM client library establishes connection, Tabular Editor will request the full Tabular Object Model (TOM) metadata for the specific Analysis Services database or Power BI dataset that the user wants to connect to. The AMO/TOM client library then serves this metadata to the client application (Tabular Editor) in a programmatic approach, allowing the application to apply metadata changes, such as renaming an object, adding a description, modifying a DAX expression, etc. In addition, the AMO/TOM client library provides methods for serializing the TOM metadata into a JSON-based format. Tabular Editor uses this technique to allow users to save the model metadata as a local JSON file, for purposes of version control of the data model structure. **Note: The JSON file produced this way contains no actual data records. The file contains only model metadata, that is, information about the structure of the model in terms of tables, columns, measures, DAX expressions, etc.** While model metadata is generally not considered confidential information, it is the responsibility of the user of Tabular Editor to handle any file produced this way with the required confidentiality (i.e. not sharing the file with 3rd parties, etc.).
+当 Tabular Editor 连接到 Analysis Services 实例（本地网络或云端）或 Power BI Premium Workspace（云端）时，会通过上述客户端库建立连接。 按设计，AMO 库负责处理用户的身份验证和授权。 只有在 Analysis Services 实例或 Power BI Premium Workspace 上拥有管理员权限的用户才允许连接。 这与使用 SQL Server Management Studio 或 SQL Server Data Tools 等 Microsoft 工具并无不同（这些工具连接时也使用相同的客户端库）。
 
-**Tabular Editor does not collect, publish, share, transfer or otherwise make public any model metadata obtained through the AMO/TOM client library unless the user specifically initiates an action to do so** (for example by saving the model metadata JSON file to a shared network location, or deploying the model metadata to another instance of Analysis Services or Power BI workspace).
+### Tabular Object Model 元数据
 
-### Model data content
+AMO/TOM 客户端库建立连接后，Tabular Editor 会请求用户要连接的特定 Analysis Services 数据库或 Power BI Dataset 的完整 Tabular Object Model (TOM) 元数据。 随后，AMO/TOM 客户端库会以编程方式将这些元数据提供给客户端应用程序（Tabular Editor），使应用程序能够应用元数据更改，例如重命名对象、添加说明、修改 DAX 表达式等。 此外，AMO/TOM 客户端库还提供将 TOM 元数据序列化为基于 JSON 的格式的方法。 Tabular Editor 使用该技术，使用户能够将模型元数据保存为本地 JSON 文件，用于对 Data model 结构进行版本控制。 **注意：以此方式生成的 JSON 文件不包含任何实际数据记录。 该文件仅包含模型元数据，即关于模型结构的信息，包括表、列、度量值、DAX 表达式等。** 虽然模型元数据通常不被视为机密信息，但 Tabular Editor 的用户有责任按所需的保密要求妥善处理以这种方式生成的任何文件（例如，不与第三方共享该文件等）。
 
-In the following, "model data" refers to the actual data records stored within the Analysis Services database or Power BI dataset. Depending on the source database or dataset, it is very likely that the model data is confidential.
+**除非用户明确发起相关操作，否则 Tabular Editor 不会收集、发布、共享、传输或以其他方式公开通过 AMO/TOM 客户端库获取的任何模型元数据**（例如，将模型元数据 JSON 文件保存到共享网络位置，或将模型元数据部署到另一个 Analysis Services 实例或 Power BI Workspace）。
 
-Because of the requirement for a user to have administrative privileges on the instance of Analysis Services or Power BI workspace that they are connecting to, the user will, by definition, also have access to all data content of the Analysis Services database or Power BI dataset. Tabular Editor only allows retrieval of data through the AMO client library mentioned above. Tabular Editor 3 provides features for browsing and querying model data. Regardless of which technique is used to access the data **Tabular Editor only stores retrieved data in local memory. Tabular Editor does not collect, publish, share, transfer or otherwise make public any model data obtained through the tool**. If a user chooses to copy or export query results obtained through Tabular Editor, it is their responsibility to treat the copied or exported data according to the confidentiality of the data. This is no different than a user connecting to the Analysis Services database or Power BI dataset using client tools such as Excel or Power BI, in which case they will also have the option to copy query results.
+### 模型数据内容
 
-### Web requests
+下文中，“模型数据”指存储在 Analysis Services 数据库或 Power BI Dataset 中的实际数据记录。 根据源数据库或 Dataset 的不同，模型数据很可能属于机密信息。
 
-Tabular Editor may perform requests to online resources (web URLs) only in the following cases:
+由于连接到 Analysis Services 实例或 Power BI Workspace 需要具备管理员权限，因此用户也将能够访问 Analysis Services 数据库或 Power BI Dataset 中的全部数据内容。 Tabular Editor 仅允许通过上述 AMO 客户端库检索数据。 Tabular Editor 3 提供用于浏览和查询模型数据的功能。 无论使用哪种技术访问数据，**Tabular Editor 都只会将检索到的数据存储在本地内存中。 Tabular Editor 不会收集、发布、共享、传输或以其他方式公开通过该工具获取的任何模型数据**。 如果用户选择复制或导出通过 Tabular Editor 获取的查询结果，则其有责任根据数据的保密级别来处理这些复制或导出的数据。 这与使用 Excel 或 Power BI 等客户端工具连接到 Analysis Services 数据库或 Power BI Dataset 并无不同；在这种情况下，你同样可以选择复制查询结果。
 
-- **License activation\*.** When Tabular Editor 3 is first launched, and at periodic intervals thereafter, the tool may perform a request to our licensing service. This request contains encrypted information about the license key entered by the user, the e-mail address of the user (if provided), the local machine name and a one-way encoded hash identifying the current installation. No other data is transmitted in this request. The purpose of this request, is to activate and validate the license key used by the installation, enforce trial limitations, as well as allowing the user to manage their installations of Tabular Editor 3 through our licensing service.
-- **Upgrade checks\*.** Each time Tabular Editor 3 is launched, it may perform a request to our application service, in order to determine if a newer version of Tabular Editor 3 is available. This request does not contain any data.
-- **Usage telemetry\*.** By default, Tabular Editor 3 collects and transmits anonymous usage data as users interact with the tool. This data includes information about which UI objects a user interacts with and the timing of each. It also contains high-level information about the Tabular data model being edited through the tool. This information only relates to high-level properties like compatibility level and mode, number of tables, type of server (Analysis Services vs. Power BI vs. Power BI Desktop), etc. **No personally identifiable data is collected this way**, neither do we collect any information about names of objects or DAX expressions in the Tabular Object Model itself. A user may opt out of sending telemetry data to us at any point.
-- **Error reports\*.** When an unexpected error occurs, we transmit the stack trace and (anonymized) error message, along with an optional description provided by the user. If a user opts out of sending telemetry data, error reports will also not be sent.
-- **Using the DAX formatter.** (Tabular Editor 2.x only) A DAX expression may be formatted by clicking a button in Tabular Editor. In this case, the DAX expression (and nothing else) is sent to the www.daxformatter.com webservice. The first time a user clicks this button, an explicit warning message is shown, asking them to confirm their intent. Tabular Editor 3 does not perform web requests when formatting DAX code.
-- **DAX Optimizer**. If a user has a [Tabular Tools account](https://tabulartools.com) with a [DAX Optimizer](https://daxoptimizer.com) subscription, they will be able to browse their DAX Optimizer workspace, view issues and suggestions, and upload new VPAX files directly from within Tabular Editor 3. VPAX files contains model metadata and statistics, but no actual model *data*. The DAX Optimizer Integration feature in Tabular Editor 3 causes various requests to one or more of the below endpoints (depending on authentication type and region specified when the Tabular Tools account was created).<br/>
-  For more information, please consult the [DAX Optimizer documentation](https://docs.daxoptimizer.com/legal/data-processing).<br/>
-  Endpoints used:
+### AI Assistant
+
+Tabular Editor 3 includes an optional AI Assistant for chat-based semantic model development. The AI Assistant is an optional module that the user selects during installation. If you choose not to install the module, no AI-related code is present on the machine and none of the behavior described in this section applies. The AI Assistant uses a **bring-your-own-key** model. You provide an API key from a supported AI provider (OpenAI, Anthropic, Azure OpenAI or any OpenAI-compatible endpoint). No built-in API key is included and Tabular Editor does not provide or intermediate any AI service.
+
+**Data flow.** All communication between the AI Assistant and the AI provider happens directly from the client machine to the provider API. No data passes through Tabular Editor servers. The data sent depends on the actions you perform in the chat and is scoped to the following categories, each requiring explicit user consent before any data is transmitted:
+
+| Consent Category | Data Sent to AI Provider                                                          |
+| ---------------- | --------------------------------------------------------------------------------- |
+| Model metadata   | Table and column schemas, measure definitions and other structural model metadata |
+| Query data       | DAX query results and data samples                                                |
+| Read documents   | Content from open documents such as DAX scripts and DAX queries                   |
+| Modify documents | Requests to make changes to open documents                                        |
+| Edit BPA rules   | Best Practice Analyzer rule definitions                                           |
+| Read macros      | Macro definitions from the user macro library                                     |
+
+**Consent management.** The AI Assistant prompts for consent the first time it needs access to each data category. You choose the duration of your consent: single request, current session, the current model only, or always. You can review and revoke consents at any time under **Tools > Preferences > AI Assistant > AI Consents**. Per-model consents for query data and model metadata are stored in the model user options (.tmuo) file. Global "always" consents are stored in the local Preferences.json file.
+
+**API key storage.** API keys are stored encrypted on the local machine in the Preferences.json file. If the AI module is not loaded (for example because it was excluded during installation or disabled by policy), any previously stored API key configuration is cleared automatically.
+
+**Conversation storage.** Conversations are stored locally on the client machine in `%LocalAppData%\TabularEditor3\AI\Conversations\`. No conversation data is sent to Tabular Editor servers.
+
+**Disabling the AI Assistant.** The AI Assistant is an optional component. You can exclude it during installation, disable it under **Tools > Preferences > AI Assistant**, or enforce the `DisableAi` [policy](xref:policies) through the Windows registry.
+
+**Penetration testing.** A separate penetration test of the AI Assistant has been performed. The report is available in our [Trust Center](https://trust.tabulareditor.com/).
+
+### Web 请求
+
+Tabular Editor 仅会在以下情况下向在线资源（Web URL）发起请求：
+
+- **许可证激活\*.** 首次启动 Tabular Editor 3 时，以及此后定期，工具可能会向我们的许可服务发起请求。 该请求包含你输入的许可证密钥的加密信息、你的电子邮件地址（如有提供）、本地计算机名称，以及用于标识当前安装的单向编码哈希值。 该请求不会传输任何其他数据。 该请求用于激活并验证此安装所使用的许可证密钥、执行试用限制，并允许你通过我们的许可服务管理你的 Tabular Editor 3 安装。
+- **升级检查\*.** 每次启动 Tabular Editor 3 时，它可能会向我们的应用服务发起请求，以确定是否有可用的新版 Tabular Editor 3。 该请求不包含任何数据。
+- **使用情况遥测\*.** 默认情况下，Tabular Editor 3 会在你使用工具时收集并传输匿名使用数据。 这些数据包括你与哪些 UI 对象交互，以及每次交互的时间信息。 它还包含有关通过该工具编辑的 Tabular 数据模型的概览信息。 这些信息仅涉及兼容级别和模式、表数量、服务器类型（Analysis Services、Power BI 或 Power BI Desktop）等高层属性。**我们不会以这种方式收集任何个人身份信息**，也不会收集 Tabular Object Model 本身中有关对象名称或 DAX 表达式的任何信息。 你可以随时选择不向我们发送遥测数据。
+- **错误 Report\*.** 当发生意外错误时，我们会传输堆栈跟踪和（已匿名化的）错误信息，并附带你提供的可选说明。 如果你选择不发送遥测数据，也不会发送错误 Report。
+- **使用 DAX 格式化器。**（仅限 Tabular Editor 2.x）你可以在 Tabular Editor 中点击按钮来格式化 DAX 表达式。 在这种情况下，只会将该 DAX 表达式(and nothing else)发送到 www.daxformatter.com Web 服务。 你第一次点击此按钮时，会显示一条明确的警告信息，让你确认是否继续。 Tabular Editor 3 在格式化 DAX 代码时不会发起 Web 请求。
+- **DAX优化器**。 如果你拥有 [Tabular Tools 帐户](https://tabulartools.com) 并订阅了 [DAX优化器](https://daxoptimizer.com)，就可以直接在 Tabular Editor 3 中浏览你的 DAX优化器 Workspace、查看问题和建议，并上传新的 VPAX 文件。 VPAX 文件包含模型元数据和统计信息，但不包含任何实际的模型 _数据_。 Tabular Editor 3 中的 DAX优化器集成功能会向下面一个或多个端点发起各种请求（取决于创建 Tabular Tools 帐户时指定的身份验证类型和区域）。<br/>
+  欲了解更多信息，请参阅 [DAX 优化器文档](https://docs.daxoptimizer.com/legal/data-processing)。<br/>
+  使用的端点：
   - https://account.tabulartools.com
   - https://licensing.api.daxoptimizer.com/api
   - https://australiaeast.api.daxoptimizer.com/api
   - https://eastus.api.daxoptimizer.com/api
   - https://westeurope.api.daxoptimizer.com/api
-- **Importing Best Practice Rules.** Tabular Editor has a feature that allows a user to specify an URL from which to retrieve a list of Best Practice rules in a JSON based format. This type of request only downloads the JSON data from the URL - no data is transmitted to the URL.
-- **Using C# scripts.** Tabular Editor allows users to write and execute code written in C#, for purposes of automation. Such a script may potentially connect to online resources, using C# language features and the .NET runtime. The user is always responsible for ensuring that executed code does not cause any unintended sharing of data. Tabular Editor ApS cannot be held liable for any damages, losses or leaks caused by the use of the C# scripting feature in general. Tabular Editor will never execute C# scripts without the explicit action of the user.
+- **AI Assistant.** When the AI Assistant is configured and in use, Tabular Editor 3 sends requests directly to the configured AI provider API. The endpoints depend on the selected provider (for example `https://api.openai.com` for OpenAI, `https://api.anthropic.com` for Anthropic, or a user-specified endpoint for Azure OpenAI and custom providers). Only data for which the user has granted consent is included in these requests. See the [AI Assistant](#ai-assistant) section above for details on data categories and consent management.
+- **导入最佳实践规则。** Tabular Editor 提供一项功能，让你可以指定一个 URL，从中获取以 JSON 格式提供的最佳实践规则列表。 此类请求只会从该 URL 下载 JSON 数据——不会向该 URL 传输任何数据。
+- **使用 C# Script。** Tabular Editor 允许用户编写并执行 C# 代码，以实现自动化。 此类脚本可能会使用 C# 语言特性和 .NET 运行时连接到在线资源。 你始终需要确保执行的代码不会导致任何非预期的数据共享。 对于使用 C# Script 功能可能造成的任何损害、损失或泄露，Tabular Editor ApS 概不负责。 未经用户明确操作，Tabular Editor 绝不会执行 C# Script。
 
-\***Any information we obtain through the license activation service, the usage telemetry or the error reports, is kept confidential. We will not share, publish or distribute the data collected in any way, shape or form.**
+\***我们通过许可证激活服务、使用情况遥测或错误 Report 获得的任何信息，都会予以保密。 我们不会以任何方式、任何形式共享、发布或分发所收集的数据。**
 
-**Firewall allowlist / acceptlist**
-To allow traffic to the above mentioned web requests, you'll have to whitelist:
-- License activation / upgrade checks: **https://api.tabulareditor.com**
-- Usage telemetry / Error reports: **https://*.in.applicationinsights.azure.com**
-- DAX Formatter (Tabular Editor 2.x only): **https://www.daxformatter.com**
-- Import Best Practice Rules / C# Scripts: Depends on the context
-- DAX Optimizer: Endpoints listed above.
+**防火墙允许列表 / 接受列表**
+如需允许上述 Web 请求的流量，请将以下地址加入允许列表：
+
+- 许可证激活 / 升级检查：**https://api.tabulareditor.com**
+- 使用情况遥测 / 错误 Report：**https://\*.in.applicationinsights.azure.com**
+- DAX Formatter（仅 Tabular Editor 2.x）：**https://www.daxformatter.com**
+- 导入最佳实践规则 / C# Script：视具体情况而定
+- DAX优化器：端点见上文列表。
+- AI Assistant: Depends on the configured provider (e.g. **https://api.openai.com**, **https://api.anthropic.com**, or user-specified Azure OpenAI / custom endpoints)
 
 > [!NOTE]
-> A system administrator may enforce certain [policies](xref:policies), which can be used to disable some or all of the features shown on the list above.
+> 系统管理员可能会强制执行某些[策略](xref:policies)，用来禁用上面列表中的部分或全部功能。
 
-## Application Security
+## 应用程序安全
 
-Tabular Editor does not require any elevated privileges on the Windows machine in which it is installed, neither does it access any restricted resources on the machine. One exception from this rule, is if using the Tabular Editor installer file (.msi), in which case the executable and support files required by the tool, are by default copied to the `Program Files` folder, which typically requires elevated permission. Both the Tabular Editor binary files as well as the installer file, have been signed with a code signing certificate issued to Kapacity A/S, which is your guarantee that the code has not been tampered with by any 3rd party.
+Tabular Editor 安装在 Windows 电脑上时不需要任何提升权限，也不会访问这台电脑上的任何受限资源。 此规则有一个例外：如果使用 Tabular Editor 安装程序文件（.msi），工具所需的可执行文件和支持文件默认会复制到 `Program Files` 文件夹；而该文件夹通常需要提升权限。 Tabular Editor 的二进制文件和安装程序文件都已使用签发给 Kapacity A/S 的代码签名证书进行签名，这能保证代码没有被任何第三方篡改。
 
-When the application is executing, all access to external resources are performed through the AMO/TOM client library or the web requests mentioned above.
+应用程序运行时，所有对外部资源的访问都通过 AMO/TOM 客户端库或上面提到的 Web 请求完成。
 
-The C# script feature allows Tabular Editor to execute arbitrary C# code within the .NET runtime. Such code is only compiled and executed on the explicit request of the user. C# scripts may also be saved as "macros", which makes it easier for the user to manage and execute multiple different scripts. The code is stored to the users own `%localappdata%` folder, ensuring that only they or a local machine administrator, can access the scripts. The user is always responsible for ensuring that executed code does not cause any unintended sideeffects. Under no circumstance can Tabular Editor ApS be held liable for any damages, losses or leaks caused by the use of the C# scripting or custom actions/macros features.
+C# Script 功能允许 Tabular Editor 在 .NET 运行时中执行任意 C# 代码。 此类代码仅会在用户明确提出请求时才会编译并执行。 C# Script 也可以保存为“宏”，便于用户管理并执行多个不同的脚本。 代码会存储在用户自己的 `%localappdata%` 文件夹中，确保只有用户本人或本机管理员可以访问这些脚本。 你始终需要负责确保执行的代码不会造成任何非预期的副作用。 在任何情况下，对于因使用 C# Script 或自定义操作/宏功能而造成的任何损害、损失或泄露，Tabular Editor ApS 均不承担任何责任。

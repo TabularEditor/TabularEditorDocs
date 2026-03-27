@@ -1,6 +1,6 @@
 ---
 uid: importing-tables-data-modeling
-title: Importing tables and data modeling
+title: 导入表并进行 Data model 建模
 author: Daniel Otykier
 updated: 2021-10-08
 applies_to:
@@ -16,63 +16,65 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Importing tables and data modeling
 
-This article describes how to use the [Table Import Wizard](#table-import-wizard) of Tabular Editor 3, to add new tables to the model. There is also a section on how to [update the table schema](#updating-table-schema) of an existing table. Lastly, we cover how to use the [diagram tool](#working-with-diagrams) to define and edit relationships between tables.
+# 导入表并进行 Data model 建模
 
-## Table Import Wizard
+本文介绍如何使用 Tabular Editor 3 的 [表导入向导](#table-import-wizard)，将新表添加到模型中。 此外还会介绍如何[更新现有表的表结构](#updating-table-schema)。 最后，我们将介绍如何使用[关系图工具](#working-with-diagrams)来定义并编辑表之间的关系。
+
+## 表导入向导
 
 [!include[importing-tables1](../features/import-tables.partial.md)]
 
-# Working with diagrams
+# 使用关系图
 
-In Tabular Editor 3, **diagrams** are documents that can be used to visualize and edit the relationships between tables in the model. You can create as many diagrams as you want to visualize certain areas of your model. A diagram can be saved as a standalone file. See <xref:supported-files#diagram-file-te3diag> for more information.
-
-> [!NOTE]
-> We recommend creating multiple smaller diagrams over few large diagrams. When a diagram contains more than 20 or so tables, it quickly becomes overwhelming and difficult to understand.
-
-After loading a model in Tabular Editor 3, choose the **File > New > Diagram** menu option to create a new diagram.
-
-## Adding tables
-
-Add initial tables to the diagram in any of the following ways:
-
-- (Multi-)select tables in the TOM Explorer, then right-click and choose **Add to diagram**.
-- (Multi-)select tables in the TOM Explorer, then drag the tables over to the diagram
-- Use the **Diagram > Add tables...** menu option, and (multi-)select the tables you want to add through the dialog box.
-  ![Diagram Add Tables](~/content/assets/images/diagram-add-tables.png)
-
-To add additional tables to the diagram, use the technique above again, or right-click on an existing table in the diagram and choose one of the following options:
-- **Add tables that filter this table**: Adds all tables to the diagram which may, directly or indirectly through other tables, filter the currently selected table. Useful when starting from a fact table.
-- **Add all related tables**: Adds all tables to the diagram which are directly related to the currently selected table. Useful when starting from a dimension table.
-  ![Add Related Tables](~/content/assets/images/add-related-tables.png)
-
-Before proceeding, rearrange and resize the tables in the diagram to suit your preferences, or use the **Diagram > Auto-arrange** feature to have Tabular Editor 3 lay out the tables automatically.
-
-## Modifying relationships using the diagram
-
-To add a new relationship between two tables, locate the column on the fact table (many-side) of the relationship, and drag that column over to the corresponding column on the dimension table (one-side). Confirm the settings for the relationship and hit **OK**.
-
-![Create Relationship](~/content/assets/images/create-relationship.png)
-
-To edit an existing relationship, right-click on it and choose **Edit relationship**. The right-click menu also contains shortcuts for reversing or deleting a relationship, as shown on the screenshot below.
-
-![Edit Relationship Diagram](~/content/assets/images/edit-relationship-diagram.png)
+在 Tabular Editor 3 中，**关系图**是一种文档，可用于直观显示并编辑模型中表之间的关系。 你可以按需创建任意数量的关系图，用于可视化模型的特定区域。 图表可以另存为独立文件。 更多信息详见 <xref:supported-files#diagram-file-te3diag>。
 
 > [!NOTE]
-> You can also create relationships without using a diagram, through the TOM Explorer. Locate the column from which the relationship should start (many-side / fact-table side), right-click and choose **Create > Relationship from**. Specify the destination column in the Create Relationship dialog that appears on the screen.
+> 我们建议创建多个较小的关系图，而不是少量大型关系图。 当关系图包含 20 张以上的表时，很快就会变得过于复杂，难以理解。
 
-## Saving a diagram
+在 Tabular Editor 3 中加载模型后，选择 **文件 > 新建 > 关系图** 菜单选项以创建新的关系图。
 
-To save a diagram, simply use the **File > Save** (CTRL+S) option. Tabular Editor 3 will prompt you to save the diagram if you close the document or the application while the diagram has unsaved changes.
+## 添加表
+
+可通过以下任一方式将初始表添加到关系图中：
+
+- 在 TOM Explorer 中(多选)选择表，然后右键单击并选择 **添加到关系图**。
+- 在 TOM Explorer 中(单选或多选)表，然后将表拖到关系图上
+- 使用 **关系图 > 添加表...** 菜单选项，然后在对话框中(单选或多选)要添加的表。
+  ![关系图：添加表](~/content/assets/images/diagram-add-tables.png)
+
+要向关系图添加更多表，可以再次使用上述方法；或者在关系图中右键单击现有表，并选择以下选项之一：
+
+- **添加筛选此表的表**：将所有可能直接筛选当前选中表，或通过其他表间接筛选当前选中表的表添加到关系图中。 从事实表开始时很有用。
+- **添加所有相关表**：将所有与当前选中表直接相关的表添加到关系图中。 从维度表开始时很有用。
+  ![添加相关表](~/content/assets/images/add-related-tables.png)
+
+在继续之前，先按你的偏好重新排列并调整关系图中的表大小；或者使用 **关系图 > 自动排列** 功能，让 Tabular Editor 3 自动布局这些表。
+
+## 使用关系图修改关系
+
+要在两张表之间添加新关系，请找到该关系中事实表（多方）上的列，并将该列拖到维度表（单方）上对应的列。 确认该关系的设置，然后单击 **确定**。
+
+![创建关系](~/content/assets/images/create-relationship.png)
+
+要编辑现有关系，请右键单击该关系并选择 **编辑关系**。 右键菜单还提供了反转或删除关系的快捷命令，如下图所示。
+
+![编辑关系图](~/content/assets/images/edit-relationship-diagram.png)
+
+> [!NOTE]
+> 你也可以不使用关系图，而是通过 TOM Explorer 创建关系。 找到应作为关系起点的列（多方/事实表一侧），右键单击并选择 **创建 > 从此列创建关系**。 在屏幕上弹出的“创建关系”对话框中指定目标列。
+
+## 保存关系图
+
+要保存关系图，只需使用 **文件 > 保存**（Ctrl+S）。 如果关系图有未保存的更改，而你尝试关闭文档或应用程序，Tabular Editor 3 会提示你保存关系图。
 
 > [!TIP]
-> The same diagram file can be loaded for different data models. Diagrams reference tables by their names. Any tables not present in the model upon diagram load are simply removed from the diagram.
+> 同一个关系图文件可以用于不同的 Data model。 关系图按表名引用表。 加载图表时，模型中不存在的任何表都会从图表中删除。
 
 > [!NOTE]
-> Every time you add or modify a relationship, you will have to run a "calculate" refresh on the data model, before the relationships can be used when querying the model.
+> 每次添加或修改关系后，都需要先对 Data model 运行一次“计算”刷新，然后才能在查询模型时使用这些关系。
 
-# Next steps
+# 后续步骤
 
 - @refresh-preview-query
 - @creating-and-testing-dax

@@ -1,23 +1,25 @@
-﻿---
+---
 uid: onboarding-te3
-title: Welcome
+title: Te damos la bienvenida
 author: Daniel Otykier
 ---
-# Welcome
+
+# Te damos la bienvenida
 
 <!--
 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src=https://player.vimeo.com/video/664699927?h=57bde801c7&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479 frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Introduction to Tabular Editor 3"></iframe></div><script src=https://player.vimeo.com/api/player.js></script>
 -->
-**Thank you for choosing Tabular Editor 3!**
 
-To help you get the most out of the tool, we have collected all of our onboarding material in this getting started section, that we hope you will enjoy. We recommend all new users of Tabular Editor 3 to read through this guide, skipping any topics that they are already familiar with.
+**¡Gracias por elegir Tabular Editor 3!**
+
+Para ayudarte a sacarle el máximo partido a la herramienta, hemos reunido todo nuestro material de introducción en esta sección de primeros pasos, que esperamos que disfrutes. Recomendamos a todos los nuevos usuarios de Tabular Editor 3 que lean esta guía y se salten los temas con los que ya estén familiarizados.
 
 > [!NOTE]
-> Some articles in this guide reference Tabular Editor 2, specifically the Command-Line Interface (CLI), for purposes of automated deployment and testing. A standalone CLI application to accompany Tabular Editor 3 is planned for release at a later time.
+> Algunos artículos de esta guía hacen referencia a Tabular Editor 2, en concreto a la interfaz de línea de comandos (CLI), para fines de implementación y pruebas automatizadas. Está previsto publicar más adelante una aplicación CLI independiente para acompañar a Tabular Editor 3.
 
-As this training material is focused on the Tabular Editor product, we assume that you already have a basic understanding of tabular data modeling (using either Power BI Desktop, Visual Studio or Tabular Editor 2.x). If you are new to tabular data modeling, we highly recommend looking into some of the training material and courses offered by third parties such as [sqlbi.com](https://sqlbi.com).
+Como este material de formación se centra en el producto Tabular Editor, asumimos que ya tienes una comprensión básica del modelado de datos tabulares (ya sea con Power BI Desktop, Visual Studio o Tabular Editor 2.x). Si eres nuevo en el modelado de datos tabulares, te recomendamos encarecidamente que consultes material de formación y cursos ofrecidos por terceros como [sqlbi.com](https://sqlbi.com).
 
-**Topics covered in this guide:**
+**Temas tratados en esta guía:**
 
 - @general-introduction
   - @installation-activation-basic
@@ -30,36 +32,37 @@ As this training material is focused on the Tabular Editor product, we assume th
   - @training-telearn
 
 - @getting-started-te2
+
 - @desktop-integration
   - @desktop-limitations
 
 - @user-interface
   - @bpa-view
-  - @data-refresh-view
-  - @find-replace
-  - @macros-view
-  - @messages-view  
-  - @properties-view
+  - @vista de actualización de datos
+  - @buscar y reemplazar
+  - @vista de macros
+  - @vista de mensajes
+  - @vista de propiedades
   - @tom-explorer-view
-  - @diagram-view
+  - @vista del diagrama
 
-- @parallel-development
-  - @optimizing-workflow-workspace-mode
+- @desarrollo en paralelo
+  - @optimizar el flujo de trabajo con el modo de área de trabajo
 
 - @boosting-productivity-te3
   - @importing-tables-data-modeling
-  - @refresh-preview-query
+  - @actualizar, previsualizar y consultar
   - @creating-and-testing-dax
   - @dax-script-introduction
   - @bpa
-  - @cs-scripts-and-macros
+  - @scripts de C# y macros
   - @personalizing-te3
 
-**Additional resources:**
+**Recursos adicionales:**
 
-- [TE3 reference docs](xref:getting-started)
-- [Download Tabular Editor](https://tabulareditor.com/download)
+- [Documentación de referencia de TE3](xref:getting-started)
+- [Descargar Tabular Editor](https://tabulareditor.com/download)
 - [Tabular Editor Learn](https://tabulareditor.com/learn)
-- [Dedicated support (Enterprise Edition customers only)](mailto:support@tabulareditor.com)
-- [Community support](https://github.com/TabularEditor/TabularEditor3/issues)
-- [Community discussions](https://github.com/TabularEditor/TabularEditor3/discussions)
+- [Soporte dedicado (solo para clientes de la Edición Enterprise)](mailto:support@tabulareditor.com)
+- [Soporte de la comunidad](https://github.com/TabularEditor/TabularEditor3/issues)
+- [Discusiones de la comunidad](https://github.com/TabularEditor/TabularEditor3/discussions)

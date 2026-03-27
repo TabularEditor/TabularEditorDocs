@@ -1,6 +1,6 @@
 ---
 uid: refresh-overrides
-title: Refresh Override Profiles
+title: Perfiles de sobrescritura de actualización
 author: Daniel Otykier
 updated: 2026-01-20
 applies_to:
@@ -11,56 +11,58 @@ applies_to:
       since: 3.25.0
       editions:
         - edition: Desktop
-          full: true
+          none: true
         - edition: Business
           full: true
         - edition: Enterprise
           full: true
 ---
-# Refresh Override Profiles
 
-Refresh override profiles allow you to temporarily modify certain model properties during a refresh operation without changing the actual model metadata. This is configured through the [Advanced Refresh dialog](xref:advanced-refresh).
+# Perfiles de sobrescritura de actualización
 
-## Why use refresh overrides?
+Los perfiles de sobrescritura de actualización te permiten modificar temporalmente determinadas propiedades del modelo durante una operación de actualización, sin cambiar los metadatos reales del modelo. Esto se configura en el [cuadro de diálogo Actualización avanzada](xref:advanced-refresh).
 
-When developing and testing semantic models, you often need to refresh data with different configurations than what's defined in the model metadata. Common scenarios include:
+## ¿Por qué usar sobrescrituras de actualización?
 
-- **Loading a subset of data** to speed up development refresh operations
-- **Connecting to a different data source** (e.g., a development or test database)
-- **Testing with different parameter values** before committing changes to the model
+Al desarrollar y probar modelos semánticos, a menudo necesitas actualizar los datos con configuraciones distintas de las definidas en los metadatos del modelo. Escenarios habituales:
 
-Without refresh overrides, you would need to temporarily modify the model metadata, perform the refresh, and then remember to revert the changes. This approach is error-prone—it's easy to forget to revert a change, potentially resulting in incorrect metadata being deployed to production.
+- **Cargar un subconjunto de datos** para acelerar las actualizaciones durante el desarrollo
+- **Conectarse a una fuente de datos diferente** (p. ej., una base de datos de desarrollo o de pruebas)
+- **Probar con distintos valores de parámetros** antes de confirmar los cambios en el modelo
 
-Refresh overrides solve this problem by keeping temporary refresh configurations separate from the model metadata.
+Sin sobrescrituras de actualización, tendrías que modificar temporalmente los metadatos del modelo, ejecutar la actualización y, después, acordarte de revertir los cambios. Este enfoque es propenso a errores: es fácil olvidarse de revertir un cambio, lo que podría provocar que se implementen metadatos incorrectos en producción.
 
-## Override profile structure
+Las sobrescrituras de actualización resuelven este problema al mantener las configuraciones temporales de actualización separadas de los metadatos del modelo.
 
-Override profiles use JSON that follows the [TMSL refresh command specification](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions). The JSON is an array of override objects, where each object can contain one or more of the following:
+## Estructura del perfil de sobrescritura
 
-- `scope` - Limit the override to a specific table or partition (optional)
-- `dataSources` - Override data source connection properties
-- `expressions` - Override shared expressions (M parameters)
-- `partitions` - Override partition source queries
-- `columns` - Override column source mappings (DataColumns only)
+Los perfiles de sobrescritura usan JSON que sigue la [especificación del comando de actualización de TMSL](https://learn.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions). El JSON es una matriz de objetos de sobrescritura, donde cada objeto puede contener uno o varios de los siguientes:
 
-Each override within `dataSources`, `expressions`, `partitions`, or `columns` must include an `originalObject` property that identifies which model object to override.
+- `scope` - Limita la sobrescritura a una tabla o partición específicas (opcional)
+- `dataSources` - Sobrescribe las propiedades de conexión de la fuente de datos
+- `expressions` - Sobrescribe las expresiones compartidas (parámetros M)
+- `partitions` - Sobrescribe las consultas de origen de las particiones
+- `columns` - Sobrescribe las asignaciones de origen de las columnas (solo DataColumns)
 
-### Override scope
+Cada sobrescritura dentro de `dataSources`, `expressions`, `partitions` o `columns` debe incluir una propiedad `originalObject` que identifique qué objeto del modelo se va a sobrescribir.
 
-By default, overrides apply globally to the refresh operation. However, you can use the `scope` property to limit an override to only affect a specific table or partition. This is useful when you want to refresh the entire model but need specific tables to source data differently than what's configured in the model metadata.
+### Ámbito de la sobrescritura
 
-The `scope` object can contain:
-- `database` - The database name
-- `table` - The table name (applies override only when refreshing this table)
-- `partition` - The partition name (applies override only when refreshing this partition)
+De forma predeterminada, las sobrescrituras se aplican de manera global a la operación de actualización. Sin embargo, puedes usar la propiedad `scope` para limitar una sobrescritura y que solo afecte a una tabla o partición específicas. Esto es útil cuando quieres actualizar todo el modelo, pero necesitas que determinadas tablas obtengan los datos de forma distinta a como está configurado en los metadatos del modelo.
 
-## Examples
+El objeto `scope` puede contener:
 
-Below are examples you can copy directly into a new override profile and modify for your needs.
+- `database` - El nombre de la base de datos
+- `table` - El nombre de la tabla (aplica la sobrescritura solo al actualizar esta tabla)
+- `partition` - El nombre de la partición (aplica la sobrescritura solo al actualizar esta partición)
 
-### Limiting rows with a SQL query override
+## Ejemplos
 
-This example overrides a partition to load only the top 10,000 rows, useful for faster refresh during development:
+A continuación tienes ejemplos que puedes copiar directamente en un nuevo perfil de sobrescritura y modificar según tus necesidades.
+
+### Limitar filas con una sobrescritura de consulta SQL
+
+Este ejemplo sobrescribe una partición para cargar solo las primeras 10.000 filas, útil para acelerar la actualización durante el desarrollo:
 
 ```json
 [
@@ -81,9 +83,9 @@ This example overrides a partition to load only the top 10,000 rows, useful for 
 ]
 ```
 
-### Filtering data by date range
+### Filtrar datos por rango de fechas
 
-Load only recent data by adding a WHERE clause:
+Carga solo los datos recientes añadiendo una cláusula WHERE:
 
 ```json
 [
@@ -104,9 +106,9 @@ Load only recent data by adding a WHERE clause:
 ]
 ```
 
-### Overriding multiple partitions
+### Sobrescribir varias particiones
 
-You can override multiple partitions in a single profile:
+Puedes sobrescribir varias particiones en un solo perfil:
 
 ```json
 [
@@ -137,9 +139,9 @@ You can override multiple partitions in a single profile:
 ]
 ```
 
-### Overriding a data source connection string
+### Sobrescritura de la cadena de conexión de un origen de datos
 
-Connect to a different server or database during refresh:
+Conectarse a un servidor o una base de datos diferente durante la actualización:
 
 ```json
 [
@@ -157,9 +159,9 @@ Connect to a different server or database during refresh:
 ]
 ```
 
-### Overriding a shared expression (M parameter)
+### Sobrescritura de una expresión compartida (parámetro M)
 
-Override an M parameter value, such as a server name parameter:
+Sobrescribir el valor de un parámetro M, como un parámetro de nombre de servidor:
 
 ```json
 [
@@ -177,9 +179,9 @@ Override an M parameter value, such as a server name parameter:
 ]
 ```
 
-### Combining multiple override types
+### Combinar varios tipos de sobrescritura
 
-You can combine data source, expression, and partition overrides in a single profile:
+Puede combinar sobrescrituras de orígenes de datos, expresiones y particiones en un solo perfil:
 
 ```json
 [
@@ -209,9 +211,9 @@ You can combine data source, expression, and partition overrides in a single pro
 ]
 ```
 
-### Overriding a Power Query partition
+### Sobrescritura de una partición de Power Query
 
-For partitions that use M (Power Query), override the expression:
+Para las particiones que usan M (Power Query), sobrescriba la expresión:
 
 ```json
 [
@@ -232,9 +234,9 @@ For partitions that use M (Power Query), override the expression:
 ]
 ```
 
-### Using scope to target a specific table
+### Uso de scope para dirigirse a una tabla específica
 
-When refreshing the entire model, you can use the `scope` property to apply an override only to a specific table. This example overrides the data source connection string, but only when refreshing the "Sales" table:
+Al actualizar todo el modelo, puede usar la propiedad `scope` para aplicar una sobrescritura solo a una tabla específica. Este ejemplo sobrescribe la cadena de conexión del origen de datos, pero solo al actualizar la tabla "Sales":
 
 ```json
 [
@@ -255,11 +257,11 @@ When refreshing the entire model, you can use the `scope` property to apply an o
 ]
 ```
 
-With this configuration, when you refresh the entire model, all tables will use the default data source except for the "Sales" table, which will load data from the connection specified in the override.
+Con esta configuración, al actualizar todo el modelo, todas las tablas usarán el origen de datos predeterminado, excepto la tabla "Sales", que cargará los datos desde la conexión especificada en la sobrescritura.
 
-### Multiple scoped overrides
+### Múltiples sobrescrituras con ámbito
 
-You can combine multiple scoped overrides in a single profile. This example uses different data sources for different tables:
+Puede combinar varias sobrescrituras con ámbito en un solo perfil. Este ejemplo utiliza distintos orígenes de datos para distintas tablas:
 
 ```json
 [
@@ -294,21 +296,21 @@ You can combine multiple scoped overrides in a single profile. This example uses
 ]
 ```
 
-## Tips for creating override profiles
+## Consejos para crear perfiles de sobrescritura
 
-1. **Find object names**: The `originalObject` property requires exact names of databases, tables, partitions, data sources, and expressions as they appear in your model. You can find these names in the TOM Explorer.
+1. **Buscar nombres de objetos**: La propiedad `originalObject` requiere los nombres exactos de bases de datos, tablas, particiones, orígenes de datos y expresiones tal como aparecen en su modelo. Puede encontrar estos nombres en el Explorador TOM.
 
-2. **Start simple**: Begin with a single override and test it before adding more complexity.
+2. **Empieza por lo simple**: Empieza con una sola sobrescritura y pruébala antes de añadir más complejidad.
 
-3. **Use Export TMSL script**: After configuring an override profile, use the **Export TMSL script...** button in the Advanced Refresh dialog to see the complete TMSL command that will be generated. This helps verify your overrides are correctly applied.
+3. **Usa Export TMSL script**: Después de configurar un perfil de sobrescritura, usa el botón **Export TMSL script...** del cuadro de diálogo Actualización avanzada para ver el comando TMSL completo que se generará. Esto ayuda a comprobar que las sobrescrituras se aplican correctamente.
 
-4. **Database name**: The database name in the `originalObject` should match the name of your semantic model as it appears on the server (or will appear after deployment).
+4. **Nombre de la base de datos**: El nombre de la base de datos en `originalObject` debe coincidir con el nombre del modelo semántico tal y como aparece en el servidor (o como aparecerá tras la implementación).
 
-## Profile storage
+## Almacenamiento de perfiles
 
-Override profiles are stored per-model in the `UserOptions.tmuo` file:
+Los perfiles de sobrescritura se almacenan por modelo en el archivo `UserOptions.tmuo`:
 
-- **For models saved on disk**: The `.tmuo` file is stored alongside the model files (e.g., in the same folder as your `.bim` file or Database.tmdl)
-- **For XMLA-connected models**: The `.tmuo` files are stored under `%LocalAppData%\TabularEditor3\UserOptions`
+- **Para modelos guardados en disco**: El archivo `.tmuo` se almacena junto a los archivos del modelo (por ejemplo, en la misma carpeta que el archivo `.bim` o Database.tmdl)
+- **Para modelos en modo conectado mediante XMLA**: Los archivos `.tmuo` se almacenan en `%LocalAppData%\\TabularEditor3\\UserOptions`
 
-This means override profiles are preserved across Tabular Editor sessions. As it's not recommended to add the .tmuo files to source control, you can share override profiles among team members by manually editing the .tmuo files.
+Esto significa que los perfiles de sobrescritura se conservan entre sesiones de Tabular Editor. Como no se recomienda añadir los archivos .tmuo al control de código fuente, puedes compartir perfiles de sobrescritura entre los miembros del equipo editando manualmente los archivos .tmuo.

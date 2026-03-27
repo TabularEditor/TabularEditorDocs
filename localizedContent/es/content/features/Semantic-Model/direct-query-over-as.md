@@ -1,6 +1,6 @@
 ---
 uid: dq-over-as-limitations
-title: Direct Query over Analysis Services
+title: Consulta directa sobre Analysis Services
 author: Morten Lønskov
 updated: 2025-07-14
 applies_to:
@@ -17,45 +17,45 @@ applies_to:
           full: true
 ---
 
-## Overview
+## Información general
 
-Tabular Editor 3 can **connect** to composite models that leverage **DirectQuery over Analysis Services (DQ‑over‑AS)**, but full modeling support is **not yet available**.  Most authoring tasks work as expected; however, operations that rely on synchronising metadata with the remote semantic model—such as *Update table schema*—are currently limited.
+Tabular Editor 3 puede **conectarse** a modelos compuestos que aprovechan **DirectQuery over Analysis Services (DQ‑over‑AS)**, pero la compatibilidad total con el modelado **aún no está disponible**.  La mayoría de las tareas de autoría funcionan según lo esperado; sin embargo, las operaciones que dependen de sincronizar metadatos con el modelo semántico remoto —como _Actualizar esquema de tabla_— están actualmente limitadas.
 
->[!IMPORTANT]
-> Until full DQ‑over‑AS support ships, model metadata edited in Tabular Editor 3 **is not automatically kept in sync** with the source dataset. You must apply one of the work‑arounds listed below whenever columns or measures are added to the underlying Analysis Services model.
+> [!IMPORTANT]
+> Hasta que se lance la compatibilidad completa con DQ‑over‑AS, los metadatos del modelo que se editen en Tabular Editor 3 **no se mantienen sincronizados automáticamente** con el conjunto de datos de origen. Debe aplicar una de las soluciones alternativas que se enumeran a continuación siempre que se agreguen columnas o medidas al modelo subyacente de Analysis Services.
 
-## Current limitations
+## Limitaciones actuales
 
-| Feature                     | Status in TE3   | Notes                                                                                      |
-| --------------------------- | --------------- | ------------------------------------------------------------------------------------------ |
-| **Update table schema**     | ❌ Not supported | Attempting to run **Model > Update table schema** on a DQ‑over‑AS table has no effect.     |
-| **Measure synchronisation** | ❌ Not supported | Measures created in the source dataset do not appear automatically in the composite model. |
+| Característica                  | Estado en TE3  | Notas                                                                                                                               |
+| ------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **Actualizar esquema de tabla** | ❌ No se admite | Al intentar ejecutar **Modelo > Actualizar esquema de tabla** en una tabla DQ‑over‑AS, no se produce ningún efecto. |
+| **Sincronización de medidas**   | ❌ No se admite | Las medidas creadas en el conjunto de datos de origen no aparecen automáticamente en el modelo compuesto.           |
 
-## Work‑arounds
+## Soluciones alternativas
 
-### 1. Manually add missing columns
+### 1. Agregar manualmente las columnas que faltan
 
-1. In **TOM Explorer**, select the table that requires the new column.
-2. Choose **Add > Data Column**.
-3. In the *Properties* window, set:
+1. En el **Explorador TOM**, seleccione la tabla que requiere la nueva columna.
+2. Elija **Agregar > Columna de datos**.
+3. En la ventana _Propiedades_, configure lo siguiente:
 
-   * **SourceColumnName** – *exactly* match the **Name** of the column in the remote table.
-   * **SourceLineageTag** – copy the **LineageTag** value from the source column.
-4. Save and deploy the model.
+   - **SourceColumnName** – debe coincidir _exactamente_ con el **Name** de la columna de la tabla remota.
+   - **SourceLineageTag** – copie el valor de **LineageTag** de la columna de origen.
+4. Guarde e implemente el modelo.
 
->[!NOTE]
-> Column names and lineage tags must match *character‑for‑character*.  Any mismatch will cause deployment errors.
+> [!NOTE]
+> Los nombres de las columnas y las etiquetas de linaje deben coincidir _carácter por carácter_.  Cualquier discrepancia provocará errores de implementación.
 
-### 2. Use the “Import tables from remote model” C# script
+### 2. Use el script de C# “Importar tablas desde el modelo remoto”
 
-Daniel Otykier’s article on LinkedIn provides a [ready‑made C# automation script](https://www.linkedin.com/pulse/composite-models-tabular-editor-daniel-otykier/) that:
+El artículo de Daniel Otykier en LinkedIn ofrece un [script de automatización en C# listo para usar](https://www.linkedin.com/pulse/composite-models-tabular-editor-daniel-otykier/) que:
 
-1. Temporarily imports full copies of tables from the remote model.
-2. Lets you copy columns (and other metadata) into existing tables.
-3. Deletes the temporary tables after the copy is complete.
+1. Importa temporalmente copias completas de tablas del modelo remoto.
+2. Le permite copiar columnas (y otros metadatos) en tablas existentes.
+3. Elimina las tablas temporales cuando finaliza la copia.
 
-This approach is faster when several tables require updates.
+Este enfoque es más rápido cuando varias tablas necesitan actualizaciones.
 
-### 3. One‑click macro to pull new measures
+### 3. Macro de un solo clic para incorporar medidas nuevas
 
-[rem-bou's](https://github.com/rem-bou) GitHub repository contains an advanced macro that scans the source dataset for measures that are **missing** in the composite model and adds them automatically: [Create-Update DQ over AS model connection](https://github.com/rem-bou/TabularEditor-Scripts/blob/main/Advanced/One-Click%20Macros/Create-Update%20DQ%20over%20AS%20model%20connection.csx)
+El repositorio de GitHub de [rem-bou](https://github.com/rem-bou) incluye una macro avanzada que analiza el Dataset de origen en busca de medidas que **faltan** en el modelo compuesto y las agrega automáticamente: [Create-Update DQ over AS model connection](https://github.com/rem-bou/TabularEditor-Scripts/blob/main/Advanced/One-Click%20Macros/Create-Update%20DQ%20over%20AS%20model%20connection.csx)

@@ -1,6 +1,6 @@
-﻿---
+---
 uid: macros-view-reference
-title: Macros view
+title: Vista de macros
 author: Morten Lønskov
 updated: 2023-03-22
 applies_to:
@@ -17,8 +17,8 @@ applies_to:
           full: true
 ---
 
-[!include[using-bpa](../../features/views/macros-view.md)]
+[!include[macros-view](../../features/views/macros-view.md)]
 
-## Next steps
+## Próximos pasos
 
 - @creating-macros

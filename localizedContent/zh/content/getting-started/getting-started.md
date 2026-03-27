@@ -1,8 +1,8 @@
-﻿---
+---
 uid: getting-started
-title: Installation and Activation
+title: 安装与激活
 author: Morten Lønskov
-updated: 2025-09-23
+updated: 2026-03-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,129 +16,147 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Getting Started
 
-## Installation
+# 快速入门
 
-Download the latest version of Tabular Editor 3 from our [downloads page](xref:downloads).
+## 安装
 
-## Prerequisites
+从我们的[下载页面](xref:downloads)下载最新版本的 Tabular Editor 3。
 
-None.
+## 先决条件
 
-## System requirements
+无。
 
-- **Operating system:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 or newer
-- **Architecture:** x64,  ARM64 (native from 3.23.0)
-- **.NET Runtime:** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+## 系统要求
 
-See the .NET supported OS policy for current Windows versions supported by each runtime.
+- **操作系统：** Windows 10、Windows 11、Windows Server 2016、Windows Server 2019 或更高版本
+- **体系结构：** x64、ARM64（自 3.23.0 起提供原生支持）
+- **.NET 运行时：** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
-## Activating your installation
+有关各运行时当前支持的 Windows 版本，请参阅 .NET 支持的 OS 策略。
 
-Tabular Editor 3 is commercial software. Visit our [home page](https://tabulareditor.com) for pricing details and purchase options. If you haven't previously used Tabular Editor 3 you are eligible for a free 30-day trial.
+## 激活安装
 
-The first time you launch Tabular Editor 3 on a new machine, you are prompted to activate the product.
+Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabulareditor.com)，了解定价详情和购买选项。 如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。
 
-![Product activation](~/content/assets/images/getting-started/product-activation.png)
+首次在新设备上启动 Tabular Editor 3 时，系统会提示进行产品激活。
 
-### Activating using an existing license key
+![产品激活](~/content/assets/images/getting-started/product-activation.png)
 
-Once you purchase a license for Tabular Editor 3, you should receive an e-mail with a 25-character string which is your license key. When prompted, enter the license key and hit "Next >" to activate the product.
+### 使用现有许可证密钥进行激活
 
-![Enter License Key](~/content/assets/images/getting-started/enter-license-key.png)
+购买 Tabular Editor 3 许可证后，您将收到一封电子邮件，其中包含一串 25 个字符的代码，也就是您的许可证密钥。 按提示输入许可证密钥，然后点击“下一步 >”以激活产品。
 
-> [!NOTE]
-> For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
-
-Note that Tabular Editor 3 installations are activated **per user**. In other words, if multiple users share the same machine, each user will have to activate the product on their Windows user profile.
-
-### Requesting a trial license
-
-If you haven't used Tabular Editor 3 before, you are eligible for a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
+![输入许可证密钥](~/content/assets/images/getting-started/enter-license-key.png)
 
 > [!NOTE]
-> Tabular Editor ApS will not send unsolicited e-mails or forward your e-mail address to third parties, when signing up for a 30-day trial license. View our @privacy-policy for more information.
+> 对于多用户许可证类型，除了许可证密钥之外，您还需要输入电子邮件地址。 如果您输入的许可证密钥对应多用户许可证，Tabular Editor 3 会提示您输入电子邮件地址。
 
-### Changing a license key
+请注意，Tabular Editor 3 的安装是**按用户**激活的。 换句话说，如果多个用户共用同一台计算机，则每个用户都必须在各自的 Windows 用户配置文件中激活产品。
 
-When Tabular Editor 3 is activated, you may change your license key in the Help menu by choosing "About Tabular Editor".
+### 申请试用许可证
 
-![About Te3](~/content/assets/images/getting-started/about-te3.png)
+如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。 选择此选项时，系统会提示您输入电子邮件地址。 我们会使用该电子邮件地址来验证您是否已经激活过 Tabular Editor 3。
 
-In the dialog, select "Change license key". Note that this option is only available if no model is loaded in Tabular Editor. If you already loaded a model you can close it under File > Close model. Once you click "Change license key", Tabular Editor will prompt you whether you want to remove the current license:
+> [!NOTE]
+> 在申请 30 天试用许可证时，Tabular Editor ApS 不会发送未经请求的电子邮件，也不会将你的电子邮件地址提供给第三方。 查看我们的 @privacy-policy 以了解更多信息。
 
-![image](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
+### 更改许可证密钥
 
-By accepting this, the current license is removed, and you will have to re-enter a license key to use the product.
+Tabular Editor 3 激活后，您可以在“帮助”菜单中选择“关于 Tabular Editor”来更改许可证密钥。
+
+![关于 Te3](~/content/assets/images/getting-started/about-te3.png)
+
+在对话框中，选择“更改许可证密钥”。 请注意，只有在 Tabular Editor 中未加载任何模型时，此选项才可用。 如果您已加载模型，可以通过“文件 > 关闭模型”将其关闭。 单击“更改许可证密钥”后，Tabular Editor 会询问您是否要删除当前许可证：
+
+![图片](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
+
+确认后，将删除当前许可证，并且您必须重新输入许可证密钥才能使用产品。
 
 > [!IMPORTANT]
-> Once a license key is removed, as described above, the product will not be usable by the current user on that machine until a new license key is entered.
+> 按上述方式删除许可证密钥后，在该计算机上的当前用户重新输入新的许可证密钥之前，将无法使用该产品。
 
-#### Registry details
+#### 注册表详细信息
 
-Tabular Editor 3 uses the Windows Registry to store activation details.
+Tabular Editor 3 使用 Windows 注册表来存储激活详细信息。
 
-To view the current license key assigned to the machine, run the following command in the Windows Command Prompt (Start > Run > cmd.exe):
+要查看分配给该计算机的当前许可证密钥，请在 Windows 命令提示符（开始 > 运行 > cmd.exe）中运行以下命令：
 
 ```cmd
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` to view and modify the **LicenseKey** and **User** values.
+你也可以使用 `regedit.exe`（Windows 注册表编辑器），前往 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`，查看并修改 **LicenseKey** 和 **User** 的值。
 
-A system administrator may also proactively assign Tabular Editor 3 licenses to a machine by specifying the **LicenseKey** and **User** values under each user’s `SOFTWARE\Kapacity\Tabular Editor 3` registry key.
+系统管理员也可以在每个用户的 `SOFTWARE\Kapacity\Tabular Editor 3` 注册表键下指定 **LicenseKey** 和 **User** 的值，提前为某台计算机分配 Tabular Editor 3 许可证。
 
-![Registry Editor](~/content/assets/images/troubleshooting/registry-editor.png)
+![注册表编辑器](~/content/assets/images/troubleshooting/registry-editor.png)
 
-### Changing a license key through the registry
+### 通过注册表更改许可证密钥
 
-If, for any reason, you are unable to change the license key using the procedure outlined above, you can always reset the license assigned to Tabular Editor 3 by using the Registry Editor:
+如果出于任何原因，你无法按上述流程更改许可证密钥，也可以随时通过注册表编辑器重置分配给 Tabular Editor 3 的许可证：
 
-1. Close all instances of Tabular Editor 3.  
-2. Open the Registry Editor in Windows (Start > Run > regedit.msc).  
-3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above).  
-4. Delete all values within this key.  
-5. Close the Registry Editor and restart Tabular Editor 3.
+1. 关闭所有 Tabular Editor 3 实例。
+2. 在 Windows 中打开注册表编辑器（开始 > 运行 > regedit.msc）。
+3. 定位到 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`（见上方截图）。
+4. 删除该项下的所有值。
+5. 关闭注册表编辑器，然后重新启动 Tabular Editor 3。
 
-Alternatively, run the following command in a Windows Command Prompt (Start > Run > cmd.exe):
+或者，在 Windows 命令提示符中运行以下命令（开始 > 运行 > cmd.exe）：
 
 ```cmd
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 ```
 
-The next time you launch Tabular Editor 3, you will be prompted for a license key, just as when the tool was first installed on the machine.
+下次启动 Tabular Editor 3 时，系统会提示你输入许可证密钥，就像该工具首次安装到此计算机上时一样。
 
-### Silent installation and license pre-provisioning
+### 静默安装与许可证预配置
 
-You can deploy Tabular Editor silently and pre-provision the license through the Windows Registry.
+你可以以静默方式部署 Tabular Editor，并通过 Windows 注册表预先配置许可证。
 
-1. **Install silently** (no UI, no reboot):
+1. **静默安装**（无 UI，不重启）：
+
    ```powershell
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
    ```
 
-You may also use `/package` instead of `/i`. Replace `<version>` with the actual version string. Use the ARM64 MSI if applicable.
+   To include the **AI Assistant** feature, specify the `ADDLOCAL` property. The AI Assistant is not installed by default.
 
-For details on available MSI command-line options, please refer to the official Microsoft documentation:  
+   ```powershell
+   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
+   ```
+
+   | MSI Feature   | Description                       | Installed by default              |
+   | ------------- | --------------------------------- | --------------------------------- |
+   | `MainFeature` | Core Tabular Editor 3 application | Yes (Required) |
+   | `AIAssistant` | AI Assistant for Tabular Editor 3 | No                                |
+
+   > [!NOTE]> When using `ADDLOCAL`, you must include `MainFeature` alongside any optional features. Specifying only `AIAssistant` without `MainFeature` results in an incomplete installation.
+
+你也可以使用 `/package` 替代 `/i`。 将 `<version>` 替换为实际的版本字符串。 如适用，请使用 ARM64 MSI。
+
+For details on available MSI command-line options, see the official Microsoft documentation:
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
-2. **Write the license to the Registry** **before the first launch** of the application:
+2. **在应用程序首次启动之前**，**将许可证写入注册表**：
+
    ```bat
    REM Per-user license key (HKCU)
    REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
    ```
 
-   If you are using an **Enterprise Edition** license key, also set the licensed user’s e‑mail:
+   如果你使用的是 **企业版** 许可证密钥，还需要设置获授权用户的电子邮件：
+
    ```bat
    REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
    ```
 
-**Notes**
-- The installer does **not** accept a license parameter; licensing is handled via the Registry entries above.
-- Keys are stored under **HKCU** (per-user). Ensure the commands run in the context of the target user (e.g., via logon script or similar) so the values are written to the correct profile.
-- For additional keys and values, see the [Registry details](#registry-details).
+**备注**
 
-## Next steps
+- 安装程序**不**接受许可证参数；许可证通过上述注册表项进行处理。
+- 注册表项存储在 **HKCU** 下（每用户）。 请确保这些命令在目标用户的上下文中运行（例如通过登录脚本等方式），以便将值写入正确的用户配置文件。
+- 有关更多键和值，请参阅[注册表详细信息](#registry-details)。
 
-- [Overview of Tabular Editor 3's user interface](xref:user-interface)
+## 后续步骤
+
+- [Tabular Editor 3 用户界面概览](xref:user-interface)

@@ -1,6 +1,6 @@
-﻿---
+---
 uid: advanced-filtering-explorer-tree
-title: Advanced Object Filtering
+title: 高级对象筛选
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -9,86 +9,90 @@ applies_to:
       partial: true
 ---
 
-# Advanced Object Filtering
+# 高级对象筛选
 
-This article describes how to use the "Filter" textbox within Tabular Editor - an incredibly useful feature when navigating complex models.
+本文介绍如何在 Tabular Editor 中使用“Filter”文本框——在浏览复杂模型时，这是一个非常实用的功能。
 
-## Filtering Mode
-As of [2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4), Tabular Editor now lets you decide how the filter should apply to objects in the hierarchy, and how search results are displayed. This is controlled using the three right-most toolbar buttons next to the Filter button:
+## 筛选模式
+
+从 [2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4) 起，Tabular Editor 允许你决定筛选器如何应用于层级结构中的对象，以及搜索结果的显示方式。 这通过紧挨着“Filter”按钮右侧的三个工具栏按钮来控制：
 
 ![image](https://user-images.githubusercontent.com/8976200/46567931-08a4b480-c93d-11e8-96fd-e197e87a0587.png)
 
-* ![image](https://user-images.githubusercontent.com/8976200/46567944-44d81500-c93d-11e8-91e2-d9822078dba7.png) **Hierarchical by parent**: The search will apply to _parent_ objects, that is Tables and Display Folders (if those are enabled). All child items will be displayed, when a parent item matches the search criteria.
-* ![image](https://user-images.githubusercontent.com/8976200/46567940-2ffb8180-c93d-11e8-9fba-84fbb79b6bb3.png) **Hierarchical by children**: The search will apply to _child_ objects, that is Measures, Columns, Hierarchies, etc. Parent objects will only be displayed if they have at least one child object matching the search criteria.
-* ![image](https://user-images.githubusercontent.com/8976200/46567941-37bb2600-c93d-11e8-9c02-86502f41bce8.png) **Flat**: The search will apply to all objects, and results will be displayed in a flat list. Objects that contain child items will still display these in a hierarchical manner.
+- ![image](https://user-images.githubusercontent.com/8976200/46567944-44d81500-c93d-11e8-91e2-d9822078dba7.png) **按父级分层**：搜索将应用于 _父级_ 对象，即表和显示文件夹（如已启用）。 当父级项匹配搜索条件时，将显示其所有子项。
+- ![image](https://user-images.githubusercontent.com/8976200/46567940-2ffb8180-c93d-11e8-9fba-84fbb79b6bb3.png) **按子级分层**：搜索将应用于 _子级_ 对象，即度量值、列、层级结构等。 父级对象仅在其至少有一个子对象匹配搜索条件时才会显示。
+- ![image](https://user-images.githubusercontent.com/8976200/46567941-37bb2600-c93d-11e8-9c02-86502f41bce8.png) **扁平**：搜索将应用于所有对象，结果以扁平列表显示。 包含子项的对象仍会以分层方式显示其子项。
 
-## Simple search
-Type anything into the Filter textbox and hit [Enter] to do a simple case-insensitive search within object names. For example, typing "sales" in the Filter textbox, using the "By Parent" filtering mode, will produce the following results:
+## 简单搜索
+
+在“Filter”文本框中输入任意内容，然后按 [Enter]，即可在对象名称中进行不区分大小写的简单搜索。 例如，在“Filter”文本框中输入“sales”，并使用“按父级”筛选模式，会得到如下结果：
 
 ![image](https://user-images.githubusercontent.com/8976200/46568002-5f5ebe00-c93e-11e8-997b-7f89dfd92076.png)
 
-Expanding any of the tables will reveal all measures, columns, hierarchies and partitions of the table. If we change the filtering mode to "By Child", the results will look like this:
+展开任意表，你就能看到该表的所有度量值、列、层级结构和分区。 如果你把筛选模式改为“按子级”，结果会是这样：
 
 ![image](https://user-images.githubusercontent.com/8976200/46568016-9f25a580-c93e-11e8-9bc2-c0a16a890256.png)
 
-Notice how the "Employee" table now appears in the list, since it has a couple of child items (columns in this case), that contain the word "sales".
+注意，“Employee”表现在也出现在列表中，因为它有几个子项（本例中是列）包含“sales”这个词。
 
-## Wildcard search
-When typing in a string in the Filter textbox, you can use the wildcard `?` to denote any single character, and `*` to denote any sequence of characters (zero or more). So typing `*sales*` would produce exactly the same results as shown above, however typing `sales*` will only show objects whose name _starts_ with the word "sales" (again, this is case-insensitive).
+## 通配符搜索
 
-Searching for `sales*` by parent:
+在“筛选”文本框中输入字符串时，可使用通配符 `?` 表示任意单个字符，使用 `*` 表示任意长度的字符序列（可为空）。 因此，输入 `*sales*` 会得到与上面完全相同的结果；但输入 `sales*` 只会显示名称以“sales”开头的对象（同样不区分大小写）。
+
+按父级搜索 `sales*`：
 
 ![image](https://user-images.githubusercontent.com/8976200/46568043-19eec080-c93f-11e8-8d81-2a6214bfa572.png)
 
-Searching for `sales*` by child:
+按子级搜索 `sales*`：
 
 ![image](https://user-images.githubusercontent.com/8976200/46568117-f9733600-c93f-11e8-96ab-f87769b8097c.png)
 
-Flat search for `sales*` (toggle info columns [Ctrl]+[F1] to show detailed information about each object):
+平铺模式下搜索 `sales*`（按 [Ctrl]+[F1] 切换信息列，以显示每个对象的详细信息）：
 
 ![image](https://user-images.githubusercontent.com/8976200/46568118-042dcb00-c940-11e8-82d1-516207450559.png)
 
-Wildcards can be placed anywhere in the string, and you can include as many as you need. If that's not complex enough, read on...
+通配符可以放在字符串中的任意位置，并且你可以按需使用多个。 如果这还不够复杂，继续往下看……
 
-## Dynamic LINQ search
-You can also use [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) to search for objects, which is the same thing you do when creating [Best Practice Analyzer rules](/Best-Practice-Analyzer). To enable Dynamic LINQ mode in the filter box, simply put a `:` (colon) in front of your search string. For example, to view all objects whose name end with "Key" (case-sensitive) write:
+## 动态 LINQ 搜索
+
+你还可以使用 [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) 来搜索对象，这和你创建 [Best Practice Analyzer 规则](/Best-Practice-Analyzer) 时做的一样。 要在筛选框中启用动态 LINQ 模式，只需在搜索字符串前加上 `:`（冒号）。 例如，要查看所有名称以“Key”结尾的对象（区分大小写），请输入：
 
 ```
 :Name.EndsWith("Key")
 ```
 
-...and hit [Enter]. In "Flat" filtering mode, the result looks like this:
+……然后按下 [Enter]。 在“平铺”筛选模式下，结果如下：
 
 ![image](https://user-images.githubusercontent.com/8976200/46568130-33dcd300-c940-11e8-903c-193e1acde0ad.png)
 
-For case-insensitive search in Dynamic LINQ, you can either convert the input string using something like:
+在动态 LINQ 中进行不区分大小写的搜索，你可以先用类似下面的方式转换输入字符串：
 
 ```
 :Name.ToUpper().EndsWith("KEY")
 ```
 
-or you can supply the [StringComparison](https://docs.microsoft.com/en-us/dotnet/api/system.string.endswith?view=netframework-4.7.2#System_String_EndsWith_System_String_System_StringComparison_) argument, like:
+或者也可以传入 [StringComparison](https://docs.microsoft.com/en-us/dotnet/api/system.string.endswith?view=netframework-4.7.2#System_String_EndsWith_System_String_System_StringComparison_) 参数，例如：
 
 ```
 :Name.EndsWith("Key", StringComparison.InvariantCultureIgnoreCase)
 ```
 
-You are not restricted to searching within the names of objects. Dynamic LINQ search strings can be as complex as you like, to evaluate any property (as well as sub-properties) of an object. So if you want to find all objects having an expression that contains the word "TODO", you would use the following search filter:
+你不必只在对象名称中进行搜索。 动态 LINQ 的搜索字符串可以按需写得很复杂，用于匹配对象的任意属性（以及子属性）。 因此，如果你想找出所有表达式中包含“TODO”一词的对象，可以使用以下筛选条件：
 
 ```
 :Expression.ToUpper().Contains("TODO")
 ```
 
-As another example, the following will display all hidden measures in the model that are not referenced by anything else:
+再举一例，下面将显示模型中所有未被任何其他对象引用的隐藏度量值：
 
 ```
 :ObjectType="Measure" and (IsHidden or Table.IsHidden) and ReferencedBy.Count=0
-````
+```
 
-You can also use Regular Expressions. The following will find all columns whose name contains the word "Number" OR "Amount":
+你也可以使用正则表达式。 下面会查找所有名称包含“Number”或“Amount”的列：
 
 ```
 :ObjectType="Column" and RegEx.IsMatch(Name,"(Number)|(Amount)")
 ```
 
-Note, that the display options (the toolbar buttons directly above the tree), may affect the results when using "By Parent" and "By Child" filtering mode. For example, the above LINQ filter only returns columns, but if your display options are currently set to not show columns, nothing will be displayed.
+注意：显示选项（树形视图正上方的工具栏按钮）可能会在使用“按父项”和“按子项”筛选模式时影响结果。 例如，上面的 LINQ 筛选器只返回列，但如果你的显示选项当前设置为不显示列，那么就不会显示任何内容。

@@ -1,6 +1,6 @@
 ---
 uid: script-display-unique-column-values
-title: Distinct Column Values
+title: Valores únicos de la columna
 author: Morten Lønskov
 updated: 2024-05-27
 applies_to:
@@ -10,27 +10,32 @@ applies_to:
     - product: Tabular Editor 3
       full: true
 ---
-# Distinct Column Values
 
-## Script Purpose
-Display the distinct values in a column for quick data profiling and access.
-Save as a Macro on the column level to have it quickly available. 
+# Valores únicos de la columna
+
+## Propósito del script
+
+Muestra los valores distintos de una columna para perfilar datos rápidamente y acceder a ellos.
+Guárdalo como una macro a nivel de columna para tenerlo disponible rápidamente.
 
 <br></br>
 
 ## Script
 
-### Script Title
+### Título del script
+
 ```csharp
-// Construct the DAX expression to get all distinct column values, from the selected column:
+// Construye la expresión DAX para obtener todos los valores distintos de la columna, a partir de la columna seleccionada:
 var dax = string.Format("ALL({0})", Selected.Column.DaxObjectFullName);
 
-// Evaluate the DAX expression against the connected model:
+// Evalúa la expresión DAX contra el modelo conectado:
 var result = EvaluateDax(dax);
 
-// Output the DataTable containing the result of the DAX expression:
+// Muestra el DataTable que contiene el resultado de la expresión DAX:
 Output(result);
 ```
-### Explanation
-The script uses the ALL() DAX function against the selected columns and display the result in an output dialog box. 
+
+### Explicación
+
+El script usa la función DAX ALL() sobre las columnas seleccionadas y muestra el resultado en un cuadro de diálogo de salida.
 
