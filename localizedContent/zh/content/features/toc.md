@@ -24,35 +24,35 @@
 
 ## @dax-query
 
-## @dax-scripts 脚本
+## @dax-scripts
 
-## @代码操作
+## @code-actions
 
-## @dax-package-manager 包管理器
+## @dax-package-manager
 
 # 脚本编写与自动化
 
-## @C# 脚本
+## @csharp-scripts
 
 ## C# Script 脚本库
 
-### @C# Script 脚本库
+### @csharp-script-library
 
-### @脚本库：入门
+### @script-library-beginner
 
-### @脚本库：高级
+### @script-library-advanced
 
-## @脚本帮助方法
+## @script-helper-methods
 
-## @实用脚本片段
+## @useful-script-snippets
 
-## @宏
+## @macros
 
 # 模型分析与质量
 
 ## @best-practice-analyzer
 
-### @内置 bpa 规则
+### @built-in-bpa-rules
 
 ### @using-bpa
 
@@ -78,9 +78,9 @@
 
 # 高级建模功能
 
-## @元数据翻译编辑器
+## @metadata-translation-editor
 
-## @透视-编辑器
+## @perspective-editor
 
 # 模型组织
 
@@ -100,11 +100,11 @@
 
 ## @save-to-folder
 
-## @保存并附带支持文件
+## @save-with-supporting-files
 
-## @高级刷新
+## @advanced-refresh
 
-## @刷新覆盖设置项
+## @refresh-overrides
 
 # 命令行与集成
 
@@ -112,8 +112,8 @@
 
 # 用于跨平台翻译的语义桥
 
-## @语义桥
+## @semantic-bridge
 
-## @语义桥度量视图对象模型
+## @semantic-bridge-metric-view-object-model
 
-## @语义桥度量视图验证
+## @semantic-bridge-metric-view-validation
