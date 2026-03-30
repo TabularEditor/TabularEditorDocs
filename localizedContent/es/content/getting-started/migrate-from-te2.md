@@ -152,5 +152,5 @@ Para obtener más información, consulta @dax-script-introduction.
 ## Siguientes pasos
 
 - @migrate-from-vs
-- @desarrollo-en-paralelo
-- @aumento-de-la-productividad-te3
+- @parallel-development
+- @boosting-productivity-te3
