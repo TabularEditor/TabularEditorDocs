@@ -19,11 +19,11 @@ applies_to:
 
 # 规则表达式示例
 
-在本节中，你将看到一些可用于定义规则的 Dynamic LINQ 表达式示例。 在规则表达式的“表达式编辑器”中输入的表达式会在文本框失去焦点时进行求值，任何语法错误都会显示在屏幕顶部：
+在本节中，你将看到一些可用于定义规则的 Dynamic LINQ 表达式示例。 在规则表达式的“表达式编辑器”中输入的表达式会在文本框失去焦点时进行求值，任何语法错误都会显示在屏幕顶部： 在规则表达式的“表达式编辑器”中输入的表达式会在文本框失去焦点时进行求值，任何语法错误都会显示在屏幕顶部：
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25380170/9f01634e-29af-11e7-952e-e10a1f28df32.png)
 
-你的规则表达式可以访问 TOM 中对象的任何公共属性。 如果你尝试访问该对象类型上不存在的属性，也会显示错误：
+你的规则表达式可以访问 TOM 中对象的任何公共属性。 如果你尝试访问该对象类型上不存在的属性，也会显示错误： 如果你尝试访问该对象类型上不存在的属性，也会显示错误：
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25381302/798bab98-29b3-11e7-931e-789e5286fc45.png)
 
@@ -39,19 +39,19 @@ String.IsNullOrWhitespace(Expression) and not Name.StartsWith("Dummy")
 
 将上述语句应用于计算列、计算表格或度量值时，会标记出 DAX 表达式为空且名称不以“Dummy”开头的对象。
 
-使用 LINQ，我们也可以处理对象集合。 将以下表达式应用于表时，会找出那些包含超过 10 个未归入显示文件夹的列的表：
+使用 LINQ，我们也可以处理对象集合。 使用 LINQ，我们也可以处理对象集合。 将以下表达式应用于表时，会找出那些包含超过 10 个未归入显示文件夹的列的表：
 
 ```
 Columns.Count(DisplayFolder = "") > 10
 ```
 
-每当我们使用某个 LINQ 方法遍历集合时，作为该 LINQ 方法参数的表达式都会在集合中的各个项目上进行求值。 确实，DisplayFolder 是列上的一个属性，在表级别并不存在。
+每当我们使用某个 LINQ 方法遍历集合时，作为该 LINQ 方法参数的表达式都会在集合中的各个项目上进行求值。 确实，DisplayFolder 是列上的一个属性，在表级别并不存在。 确实，DisplayFolder 是列上的一个属性，在表级别并不存在。
 
-在这里，我们可以看到这条规则在 Adventure Works 表格模型上的实际效果。 注意：“Reseller”表会显示为违规，而“Reseller Sales”不会（后者的列已整理到显示文件夹中）：
+在这里，我们可以看到这条规则在 Adventure Works 表格模型上的实际效果。 在这里，我们可以看到这条规则在 Adventure Works 表格模型上的实际效果。 注意：“Reseller”表会显示为违规，而“Reseller Sales”不会（后者的列已整理到显示文件夹中）：
 
 ![image](https://cloud.githubusercontent.com/assets/8976200/25380809/d9d1c3a4-29b1-11e7-839e-29450ad39c8a.png)
 
-要在 LINQ 方法中引用父对象，可以用特殊的 "outerIt" 语法。 将这条规则应用于表时，会找出那些包含列名不以表名开头的列的表：
+要在 LINQ 方法中引用父对象，可以用特殊的 "outerIt" 语法。 将这条规则应用于表时，会找出那些包含列名不以表名开头的列的表： 将这条规则应用于表时，会找出那些包含列名不以表名开头的列的表：
 
 ```
 Columns.Any(not Name.StartsWith(outerIt.Name))
@@ -63,7 +63,7 @@ Columns.Any(not Name.StartsWith(outerIt.Name))
 not Name.StartsWith(Table.Name)
 ```
 
-要与枚举属性进行比较，只需将枚举值作为字符串传入即可。 这条规则将找出所有名称以 "Key" 或 "ID" 结尾，但 SummarizeBy 属性未设置为 "None" 的列：
+要与枚举属性进行比较，只需将枚举值作为字符串传入即可。 要与枚举属性进行比较，只需将枚举值作为字符串传入即可。 这条规则将找出所有名称以 "Key" 或 "ID" 结尾，但 SummarizeBy 属性未设置为 "None" 的列：
 
 ```
 (Name.EndsWith("Key") or Name.EndsWith("ID")) and SummarizeBy <> "None"
