@@ -143,28 +143,28 @@ Selected.Measures
 
 La siguiente tabla enumera todos los accesores singulares y plurales disponibles en el objeto `Selected`. Los accesores singulares lanzan una `SelectionException` si la selección actual no contiene exactamente un objeto de ese tipo. Los accesores plurales devuelven una colección vacía si no se selecciona ningún objeto de ese tipo.
 
-| Singular                              | Plural                               | Tipo de objeto                     |
-| ------------------------------------- | ------------------------------------ | ---------------------------------- |
-| `Selected.Medida`                     | `Selected.Measures`                  | Medidas                            |
-| `Selected.Column`                     | `Selected.Columns`                   | Todos los tipos de columna         |
-| `Selected.DataColumn`                 | `Selected.DataColumns`               | Columnas de datos                  |
-| `Selected.CalculatedColumn`           | `Selected.CalculatedColumns`         | Columnas calculadas                |
-| `Selected.CalculatedTableColumn`      | `Selected.CalculatedTableColumns`    | Columnas de tablas calculadas      |
-| `Selected.Hierarchy`                  | `Selected.Hierarchies`               | Jerarquías                         |
-| `Selected.Level`                      | `Selected.Levels`                    | Niveles de jerarquía               |
-| `Selected.Table`                      | `Selected.Tables`                    | Tablas                             |
-| `Selected.CalculatedTable`            | `Selected.CalculatedTables`          | Tablas calculadas                  |
-| `Selected.Partición`                  | `Selected.Particiones`               | Particiones                        |
-| `Selected.rol`                        | `Selected.Roles`                     | Roles del modelo                   |
-| `Selected.TablePermission`            | `Selected.TablePermissions`          | Permisos de tabla                  |
-| `Selected.KPI`                        | `Selected.KPIs`                      | KPI                                |
-| `Selected.Calendar`                   | `Selected.Calendars`                 | Calendarios                        |
-| `Selected.CalculationItem`            | `Selected.CalculationItems`          | Elementos de cálculo               |
-| `Selected.Function`                   | `Selected.Functions`                 | Funciones definidas por el usuario |
-| `Selected.DataSource`                 | `Selected.DataSources`               | Fuentes de datos                   |
-| `Selected.SingleColumnRelationship`   | `Selected.SingleColumnRelationships` | Relaciones                         |
-| `Perspectiva seleccionada`            | `Selected.Perspectives`              | Perspectivas                       |
-| `Configuración regional seleccionada` | `Selected.Cultures`                  | Traducciones                       |
+| Singular                            | Plural                               | Tipo de objeto                     |
+| ----------------------------------- | ------------------------------------ | ---------------------------------- |
+| `Selected.Measure`                  | `Selected.Measures`                  | Medidas                            |
+| `Selected.Column`                   | `Selected.Columns`                   | Todos los tipos de columna         |
+| `Selected.DataColumn`               | `Selected.DataColumns`               | Columnas de datos                  |
+| `Selected.CalculatedColumn`         | `Selected.CalculatedColumns`         | Columnas calculadas                |
+| `Selected.CalculatedTableColumn`    | `Selected.CalculatedTableColumns`    | Columnas de tablas calculadas      |
+| `Selected.Hierarchy`                | `Selected.Hierarchies`               | Jerarquías                         |
+| `Selected.Level`                    | `Selected.Levels`                    | Niveles de jerarquía               |
+| `Selected.Table`                    | `Selected.Tables`                    | Tablas                             |
+| `Selected.CalculatedTable`          | `Selected.CalculatedTables`          | Tablas calculadas                  |
+| `Selected.Partición`                | `Selected.Particiones`               | Particiones                        |
+| `Selected.rol`                      | `Selected.Roles`                     | Roles del modelo                   |
+| `Selected.TablePermission`          | `Selected.TablePermissions`          | Permisos de tabla                  |
+| `Selected.KPI`                      | `Selected.KPIs`                      | KPI                                |
+| `Selected.Calendar`                 | `Selected.Calendars`                 | Calendarios                        |
+| `Selected.CalculationItem`          | `Selected.CalculationItems`          | Elementos de cálculo               |
+| `Selected.Function`                 | `Selected.Functions`                 | Funciones definidas por el usuario |
+| `Selected.DataSource`               | `Selected.DataSources`               | Fuentes de datos                   |
+| `Selected.SingleColumnRelationship` | `Selected.SingleColumnRelationships` | Relaciones                         |
+| `Selected.Perspective`              | `Selected.Perspectives`              | Perspectivas                       |
+| `Selected.Culture`                  | `Selected.Cultures`                  | Traducciones                       |
 
 > [!NOTE]
 > Los accesores de Rol, KPI, Calendar, CalculationItem, TablePermission, Function, DataSource, SingleColumnRelationship, CalculatedColumn, CalculatedTableColumn, DataColumn, CalculatedTable y Partición se agregaron en Tabular Editor 3.26.0.
