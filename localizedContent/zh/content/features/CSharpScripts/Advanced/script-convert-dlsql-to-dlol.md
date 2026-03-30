@@ -1,6 +1,6 @@
 ---
 uid: script-convert-dlsql-to-dlol
-title: 将 Direct Lake on SQL 转换为 OneLake
+title: Convert Direct Lake on SQL to OneLake
 author: Daniel Otykier
 updated: 2025-06-20
 applies_to:
@@ -11,7 +11,7 @@ applies_to:
       full: true
 ---
 
-# 将 Direct Lake on SQL 转换为 OneLake
+# Convert Direct Lake on SQL to OneLake
 
 ## 脚本用途
 
