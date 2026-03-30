@@ -1,5 +1,5 @@
 ---
-uid: macros
+uid: 宏
 title: 创建宏
 author: Morten Lønskov
 updated: 2023-12-07
