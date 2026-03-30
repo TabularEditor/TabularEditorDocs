@@ -43,7 +43,7 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
   Generates a DAX script for the selected table and its objects. Abre una nueva ventana del editor de scripts donde puede revisar o editar en conjunto las definiciones de DAX.
 
 - **Preview data**:
-  Opens the data preview pane displaying a sample of the data loaded into the selected table. Útil para validar o depurar. Solo existe al hacer clic con el botón derecho en las tablas.
+  Opens the data preview pane displaying a sample of the data loaded into the selected table. Útil para la validación o la depuración. Solo existe al hacer clic con el botón derecho en las tablas.
 
 - **Refresh**:
   Expands to a selection of possible refresh operation for the selected table. Esto solo está disponible si el modelo está conectado a un modelo en vivo, ya sea de forma independiente o en modo del área de trabajo. Esta opción solo está disponible para tablas y particiones.
