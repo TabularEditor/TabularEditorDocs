@@ -1,6 +1,6 @@
-本文演示如何在 Tabular Editor 中使用“高级脚本”功能，以一致的方式在多个对象之间维护 DAX 逻辑。 在[实用脚本片段一文](/Useful-script-snippets)中，我们已经看到，[如何使用自定义操作快速批量生成许多逻辑相近的度量值](/Useful-script-snippets#generate-time-intelligence-measures)；例如在创建时间智能计算时，这会很有用。
+本文演示如何在 Tabular Editor 中使用“高级脚本”功能，以一致的方式在多个对象之间维护 DAX 逻辑。 在[实用脚本片段一文](/Useful-script-snippets)中，我们已经看到，[如何使用自定义操作快速批量生成许多逻辑相近的度量值](/Useful-script-snippets#generate-time-intelligence-measures)；例如在创建时间智能计算时，这会很有用。 在[实用脚本片段一文](/Useful-script-snippets)中，我们已经看到，[如何使用自定义操作快速批量生成许多逻辑相近的度量值](/Useful-script-snippets#generate-time-intelligence-measures)；例如在创建时间智能计算时，这会很有用。
 
-在本文中，我们将在这个思路上更进一步，创建一个脚本“框架”，使我们能够在一个 TSV 文件（Tab Separated Values，制表符分隔值）中集中定义所需的全部计算。 使用 TSV 文件的优势在于：既可以在 Excel 中轻松编辑，又便于在 Tabular Editor 的脚本中解析并加载。
+在本文中，我们将在这个思路上更进一步，创建一个脚本“框架”，使我们能够在一个 TSV 文件（Tab Separated Values，制表符分隔值）中集中定义所需的全部计算。 使用 TSV 文件的优势在于：既可以在 Excel 中轻松编辑，又便于在 Tabular Editor 的脚本中解析并加载。 使用 TSV 文件的优势在于：既可以在 Excel 中轻松编辑，又便于在 Tabular Editor 的脚本中解析并加载。
 
 本文将以经典的 Adventure Works 为例，聚焦 Internet Sales 事实表及其相关维度表：
 
