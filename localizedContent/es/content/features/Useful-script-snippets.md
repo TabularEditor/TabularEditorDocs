@@ -27,22 +27,22 @@ Además, asegúrate de echar un vistazo a nuestra biblioteca de scripts @csharp-
 ## Crear medidas a partir de columnas
 
 ```csharp
-// Crea una medida SUM para cada columna seleccionada actualmente y oculta la columna.
+// Creates a SUM measure for every currently selected column and hide the column.
 foreach(var c in Selected.Columns)
 {
     var newMeasure = c.Table.AddMeasure(
-        "Suma de " + c.Name,                    // Nombre
-        "SUM(" + c.DaxObjectFullName + ")",    // Expresión DAX
-        c.DisplayFolder                        // Carpeta de visualización
+        "Sum of " + c.Name,                    // Name
+        "SUM(" + c.DaxObjectFullName + ")",    // DAX expression
+        c.DisplayFolder                        // Display Folder
     );
     
-    // Establece la cadena de formato en la nueva medida:
+    // Set the format string on the new measure:
     newMeasure.FormatString = "0.00";
 
-    // Añade algo de documentación:
-    newMeasure.Description = "Esta medida es la suma de la columna " + c.DaxObjectFullName;
+    // Provide some documentation:
+    newMeasure.Description = "This measure is the sum of column " + c.DaxObjectFullName;
 
-    // Oculta la columna base:
+    // Hide the base column:
     c.IsHidden = true;
 }
 ```
@@ -56,12 +56,12 @@ Este fragmento usa la función `<Table>.AddMeasure(<name>, <expression>, <displa
 Primero, crea acciones personalizadas para agregaciones individuales de inteligencia temporal. Por ejemplo:
 
 ```csharp
-// Crea una medida TOTALYTD para cada medida seleccionada.
+// Creates a TOTALYTD measure for every selected measure.
 foreach(var m in Selected.Measures) {
     m.Table.AddMeasure(
-        m.Name + " YTD",                                       // Nombre
-        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // Expresión DAX
-        m.DisplayFolder                                        // Carpeta de visualización
+        m.Name + " YTD",                                       // Name
+        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // DAX expression
+        m.DisplayFolder                                        // Display Folder
     );
 }
 ```
@@ -366,7 +366,7 @@ SaveFile(@"c:\Project\MeasurePerspectiveInventory.tsv", tsv);
 Del mismo modo, para traducciones, anotaciones, etc. Por ejemplo, si quisieras ver todas las traducciones al danés aplicadas a tablas, columnas, jerarquías, niveles y medidas:
 
 ```csharp
-// Construye una lista de objetos:
+// Construct a list of objects:
 var objects = new List<TabularNamedObject>();
 objects.AddRange(Model.Tables);
 objects.AddRange(Model.AllColumns);
@@ -385,17 +385,17 @@ SaveFile(@"c:\Project\ObjectTranslations.tsv", tsv);
 El método `ExportProperties` mostrado arriba también se puede usar si quieres documentar todo el modelo o parte de él. El siguiente fragmento extraerá un conjunto de propiedades de todas las medidas o columnas visibles de un modelo tabular y lo guardará como un archivo TSV:
 
 ```csharp
-// Construye una lista de todas las columnas y medidas visibles:
+// Construct a list of all visible columns and measures:
 var objects = Model.AllMeasures.Where(m => !m.IsHidden && !m.Table.IsHidden).Cast<ITabularNamedObject>()
       .Concat(Model.AllColumns.Where(c => !c.IsHidden && !c.Table.IsHidden));
 
-// Obtén sus propiedades en formato TSV (separado por tabulaciones):
+// Get their properties in TSV format (tabulator-separated):
 var tsv = ExportProperties(objects,"Name,ObjectType,Parent,Description,FormatString,DataType,Expression");
 
-// (Opcional) Mostrar en pantalla (después se puede copiar y pegar en Excel):
+// (Optional) Output to screen (can then be copy-pasted into Excel):
 // tsv.Output();
 
-// ...o guardar el TSV en un archivo:
+// ...or save the TSV to a file:
 SaveFile("documentation.tsv", tsv);
 ```
 
@@ -408,31 +408,31 @@ Las técnicas anteriores para exportar/importar propiedades son útiles si quier
 Supongamos que tienes un archivo TSV (valores separados por tabulaciones) que contiene los nombres, las descripciones y las expresiones DAX de las medidas que quieres importar a un modelo tabular existente. Puedes usar el siguiente script para leer el archivo, dividirlo en filas y columnas, y generar las medidas. El script también asigna una anotación especial a cada medida, para poder eliminar medidas que se hayan creado previamente con el mismo script.
 
 ```csharp
-var targetTable = Model.Tables["Program"];  // Nombre de la tabla que debe contener las medidas
-var measureMetadata = ReadFile(@"c:\Test\MyMeasures.tsv");   // c:\Test\MyMeasures.tsv es un archivo separado por tabulaciones con una fila de encabezado y 3 columnas: Name, Description, Expression
+var targetTable = Model.Tables["Program"];  // Name of the table that should hold the measures
+var measureMetadata = ReadFile(@"c:\Test\MyMeasures.tsv");   // c:\Test\MyMeasures.tsv is a tab-separated file with a header row and 3 columns: Name, Description, Expression
 
-// Elimina todas las medidas de la tabla de destino que tengan una anotación "AUTOGEN" con el valor "1":
+// Delete all measures from the target table that have an "AUTOGEN" annotation with the value "1":
 foreach(var m in targetTable.Measures.Where(m => m.GetAnnotation("AUTOGEN") == "1").ToList())
 {
     m.Delete();
 }
 
-// Divide el archivo en filas por caracteres CR y LF:
+// Split the file into rows by CR and LF characters:
 var tsvRows = measureMetadata.Split(new[] {'\r','\n'},StringSplitOptions.RemoveEmptyEntries);
 
-// Recorre todas las filas excepto la primera:
+// Loop through all rows but skip the first one:
 foreach(var row in tsvRows.Skip(1))
 {
-    var tsvColumns = row.Split('\t');     // Se asume que el archivo usa tabulaciones como separador de columnas
-    var name = tsvColumns[0];             // La primera columna contiene el nombre de la medida
-    var description = tsvColumns[1];      // La segunda columna contiene la descripción de la medida
-    var expression = tsvColumns[2];       // La tercera columna contiene la expresión de la medida
+    var tsvColumns = row.Split('\t');     // Assume file uses tabs as column separator
+    var name = tsvColumns[0];             // 1st column contains measure name
+    var description = tsvColumns[1];      // 2nd column contains measure description
+    var expression = tsvColumns[2];       // 3rd column contains measure expression
 
-    // Esto supone que el modelo no contiene ya una medida con el mismo nombre (si la contiene, la nueva medida recibirá un sufijo numérico):
+    // This assumes that the model does not already contain a measure with the same name (if it does, the new measure will get a numeric suffix):
     var measure = targetTable.AddMeasure(name);
     measure.Description = description;
     measure.Expression = expression;
-    measure.SetAnnotation("AUTOGEN", "1");  // Establece una anotación especial en la medida, para poder encontrarla y eliminarla la próxima vez que se ejecute el script.
+    measure.SetAnnotation("AUTOGEN", "1");  // Set a special annotation on the measure, so we can find it and delete it the next time the script is executed.
 }
 ```
 
@@ -474,7 +474,7 @@ Si necesitas proporcionar una cadena de conexión diferente para esta operación
 ```csharp
 var source = Model.DataSources["DWH"] as ProviderDataSource;
 var oldConnectionString = source.ConnectionString;
-source.ConnectionString = "...";   // Introduce la cadena de conexión que quieras usar para actualizar los metadatos
+source.ConnectionString = "...";   // Enter the connection string you want to use for metadata refresh
 Model.Tables["Reseller Sales"].RefreshDataColumns();
 source.ConnectionString = oldConnectionString;
 ```
@@ -488,14 +488,14 @@ Esto supone que las particiones de la tabla 'Reseller Sales' utilizan un origen 
 Consulta [FormatDax](/FormatDax) para obtener más información.
 
 ```csharp
-// Funciona en Tabular Editor 2.13.0 o versiones posteriores:
+// Works in Tabular Editor version 2.13.0 or newer:
 Selected.Measures.FormatDax();
 ```
 
 Sintaxis alternativa:
 
 ```csharp
-// Funciona en Tabular Editor 2.13.0 o versiones posteriores:
+// Works in Tabular Editor version 2.13.0 or newer:
 foreach(var m in Selected.Measures)
     m.FormatDax();
 ```
@@ -527,27 +527,27 @@ Si ya existe una relación entre la tabla de hechos y la de dimensiones, el scri
 ```csharp
 var keySuffix = "Key";
 
-// Recorre todas las tablas seleccionadas actualmente (se asume que son tablas de hechos):
+// Loop through all currently selected tables (assumed to be fact tables):
 foreach(var fact in Selected.Tables)
 {
-    // Recorre todas las columnas SK de la tabla actual:
+    // Loop through all SK columns on the current table:
     foreach(var factColumn in fact.Columns.Where(c => c.Name.EndsWith(keySuffix)))
     {
-        // Busca la tabla de dimensiones correspondiente a la columna SK actual:
+        // Find the dimension table corresponding to the current SK column:
         var dim = Model.Tables.FirstOrDefault(t => factColumn.Name.EndsWith(t.Name + keySuffix));
         if(dim != null)
         {
-            // Busca la columna clave en la tabla de dimensiones:
+            // Find the key column on the dimension table:
             var dimColumn = dim.Columns.FirstOrDefault(c => factColumn.Name.EndsWith(c.Name));
             if(dimColumn != null)
             {
-                // Comprueba si ya existe una relación entre las dos columnas:
+                // Check whether a relationship already exists between the two columns:
                 if(!Model.Relationships.Any(r => r.FromColumn == factColumn && r.ToColumn == dimColumn))
                 {
-                    // Si ya existen relaciones entre las dos tablas, las nuevas relaciones se crearán como inactivas:
+                    // If relationships already exists between the two tables, new relationships will be created as inactive:
                     var makeInactive = Model.Relationships.Any(r => r.FromTable == fact && r.ToTable == dim);
 
-                    // Agrega la nueva relación:
+                    // Add the new relationship:
                     var rel = Model.AddRelationship();
                     rel.FromColumn = factColumn;
                     rel.ToColumn = dimColumn;
@@ -575,11 +575,11 @@ var dumpFilterDax = @"IF (
     VAR ___t = TOPN ( MaxFilters, ___f, {0} )
     VAR ___d = CONCATENATEX ( ___t, {0}, "", "" )
     VAR ___x = ""{0} = "" & ___d 
-        & IF(___r > MaxFilters, "", ... ["" & ___r & "" elementos seleccionados]"") & "" ""
+        & IF(___r > MaxFilters, "", ... ["" & ___r & "" items selected]"") & "" ""
     RETURN ___x & UNICHAR(13) & UNICHAR(10)
 )";
 
-// Recorre todas las columnas del modelo para construir la expresión DAX completa:
+// Loop through all columns of the model to construct the complete DAX expression:
 bool first = true;
 foreach(var column in Model.AllColumns)
 {
@@ -588,7 +588,7 @@ foreach(var column in Model.AllColumns)
     if(first) first = false;
 }
 
-// Agrega la medida a la tabla seleccionada actualmente:
+// Add the measure to the currently selected table:
 Selected.Table.AddMeasure("DumpFilters", dax);
 ```
 
@@ -609,19 +609,19 @@ foreach(var obj in Selected.OfType<ITabularNamedObject>()) {
     var oldName = obj.Name;
     var newName = new System.Text.StringBuilder();
     for(int i = 0; i < oldName.Length; i++) {
-        // La primera letra siempre debe ir en mayúscula:
+        // First letter should always be capitalized:
         if(i == 0) newName.Append(Char.ToUpper(oldName[i]));
 
-        // En una secuencia de dos letras mayúsculas seguidas de una letra minúscula, se debe insertar un espacio
-        // después de la primera letra:
+        // A sequence of two uppercase letters followed by a lowercase letter should have a space inserted
+        // after the first letter:
         else if(i + 2 < oldName.Length && char.IsLower(oldName[i + 2]) && char.IsUpper(oldName[i + 1]) && char.IsUpper(oldName[i]))
         {
             newName.Append(oldName[i]);
             newName.Append(" ");
         }
 
-        // En todas las demás secuencias de una letra minúscula seguida de una letra mayúscula, se debe insertar un espacio
-        // después de la primera letra:
+        // All other sequences of a lowercase letter followed by an uppercase letter, should have a space
+        // inserted after the first letter:
         else if(i + 1 < oldName.Length && char.IsLower(oldName[i]) && char.IsUpper(oldName[i+1]))
         {
             newName.Append(oldName[i]);
@@ -645,26 +645,26 @@ Supongamos que tienes un modelo grande y complejo y quieres saber qué medidas p
 El siguiente script recorre todas las medidas de tu modelo y, para cada una, genera una lista de las tablas de las que depende, tanto directa como indirectamente. La lista se genera como un archivo separado por tabulaciones.
 
 ```csharp
-string tsv = "Medida\tTablaDeLaQueDepende"; // Fila de encabezado del archivo TSV
+string tsv = "Measure\tDependsOnTable"; // TSV file header row
 
-// Recorre todas las medidas:
+// Loop through all measures:
 foreach(var m in Model.AllMeasures) {
 
-    // Obtén una lista de todos los objetos a los que hace referencia esta medida (tanto directa como indirectamente a través de otras medidas):
+    // Get a list of ALL objects referenced by this measure (both directly and indirectly through other measures):
     var allReferences = m.DependsOn.Deep();
 
-    // Filtra la lista anterior de referencias para conservar solo las referencias a tablas. Para las
-    // referencias a columnas, obtén la tabla a la que pertenece cada columna. Por último, conserva solo las tablas distintas:
+    // Filter the previous list of references to table references only. For column references, let's get th
+    // table that each column belongs to. Finally, keep only distinct tables:
     var allTableReferences = allReferences.OfType<Table>()
         .Concat(allReferences.OfType<Column>().Select(c => c.Table)).Distinct();
 
-    // Genera filas TSV, una por cada referencia a tabla:
+    // Output TSV rows - one for each table reference:
     foreach(var t in allTableReferences)
         tsv += string.Format("\r\n{0}\t{1}", m.Name, t.Name);
 }
     
 tsv.Output();   
-// SaveFile("c:\\MyProjects\\SSAS\\MeasureTableDependencies.tsv", tsv); // Quita el comentario de esta línea para guardar la salida en un archivo
+// SaveFile("c:\\MyProjects\\SSAS\\MeasureTableDependencies.tsv", tsv); // Uncomment this line to save output to a file
 ```
 
 ***
@@ -682,15 +682,15 @@ foreach(var col in Selected.Columns) col.AddAlternateOf();
 Ve recorriendo las columnas una a una para asignarlas a la columna base y establecer el tipo de resumen correspondiente (Sum/Min/Max/GroupBy). Como alternativa, si quieres automatizar este proceso y las columnas de tu tabla de agregación tienen los mismos nombres que las columnas de la tabla base, puedes usar el siguiente script, que asignará las columnas por ti:
 
 ```csharp
-// Selecciona dos tablas en el árbol (Ctrl + clic). Se asume que la tabla de agregación es la que tiene menos columnas.
-// Este script configurará la propiedad AlternateOf en todas las columnas de la tabla de agregación. Para que este script funcione, las columnas de la tabla de agregación deben
-// tener el mismo nombre que las columnas de la tabla base.
+// Select two tables in the tree (ctrl+click). The aggregation table is assumed to be the one with fewest columns.
+// This script will set up the AlternateOf property on all columns on the aggregation table. Agg table columns must
+// have the same name as the base table columns for this script to work.
 var aggTable = Selected.Tables.OrderBy(t => t.Columns.Count).First();
 var baseTable = Selected.Tables.OrderByDescending(t => t.Columns.Count).First();
 
 foreach(var col in aggTable.Columns)
 {
-    // El script establecerá el tipo de agregación en "Group By", a menos que la columna use el tipo de datos decimal/double:
+    // The script will set the summarization type to "Group By", unless the column uses data type decimal/double:
     var summarization = SummarizationType.GroupBy;
     if(col.DataType == DataType.Double || col.DataType == DataType.Decimal)
         summarization = SummarizationType.Sum;
@@ -755,9 +755,9 @@ ExecuteCommand(clearCacheXmla, isXmla: true);
 También puede usar el método auxiliar `Output` para visualizar directamente el resultado de una expresión DAX devuelta por `EvaluateDax`:
 
 ```csharp
-EvaluateDax("1 + 2").Output(); // Un entero
-EvaluateDax("\"Hello from AS\"").Output(); // Una cadena
-EvaluateDax("{ (1, 2, 3) }").Output(); // Una tabla
+EvaluateDax("1 + 2").Output(); // An integer
+EvaluateDax("\"Hello from AS\"").Output(); // A string
+EvaluateDax("{ (1, 2, 3) }").Output(); // A table
 ```
 
 ![imagen](https://user-images.githubusercontent.com/8976200/91638299-bbd59580-ea0e-11ea-882b-55bff73c30fb.png)
