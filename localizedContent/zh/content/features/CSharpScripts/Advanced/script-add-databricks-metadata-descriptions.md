@@ -1,6 +1,6 @@
 ---
 uid: script-add-databricks-metadata-descriptions
-title: 添加 Databricks 元数据说明
+title: Add Databricks Metadata Descriptions
 author: Johnny Winter
 updated: 2025-09-04
 applies_to:
@@ -11,20 +11,20 @@ applies_to:
       full: true
 ---
 
-# 添加 Databricks 元数据说明
+# Add Databricks Metadata Descriptions
 
-## 脚本用途
+## Script Purpose
 
-此脚本是 Tabular Editor x Databricks 系列的一部分。 在 Unity Catalog 中，可以为表和列添加描述性注释。 此脚本可以复用这些信息，自动填充语义模型中的表和列描述。 <br></br>
+This script was created as part of the Tabular Editor x Databricks series. In Unity Catalog it is possible provide descriptive comments for tables and columns. This script can re-use this information to automatically populate table and column descriptions in your semantic model. <br></br>
 
 > [!NOTE]
-> 此脚本需要安装 Simba Spark ODBC Driver（可从 https://www.databricks.com/spark/odbc-drivers-download 下载）
-> 每次运行脚本都会提示用户输入 Databricks 个人访问令牌。 这是连接 Databricks 并完成身份验证所必需的。
-> 脚本会使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此你可能需要与 Databricks 管理员确认，确保你有权限查询这些表。 <br></br>
+> This script requires the Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
+> Each run of the script will prompt the user for a Databricks Personal Access Token. This is required to authenticate to Databricks.
+> The script utilises the information_schema tables in Unity Catalog to retrieve relationship information, so you may need to double check with your Databricks administrator to make sure you have permission to query these tables. <br></br>
 
-## 脚本
+## Script
 
-### 添加 Databricks 元数据说明
+### Add Databricks Metadata Descriptions
 
 ```csharp
 /*
@@ -560,18 +560,18 @@ Either:
 }
 ```
 
-### 说明
+### Explanation
 
-脚本使用 WinForms 提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。 对于每个选中的表，脚本会从该表分区的 M 查询中提取 Databricks 连接字符串信息，以及架构名和表名。 然后脚本通过 Spark ODBC 驱动向 Databricks 发送 SQL 查询，查询 information_schema 表，返回在 Unity Catalog 中定义的表描述。 随后会将该描述更新到语义模型中的表描述。 脚本还会对所选表发送第二个使用 DESCRIBE 命令的 SQL 查询，以获取列描述。 这些结果会被循环遍历，并在模型中添加描述。 脚本在每个选定表上运行完成后，会显示一个对话框，告知已更新的描述数量。
+The script uses WinForms to prompt for a Databricks personal access token, used to authenticate to Databricks. For each selected table, the script retrieves the Databricks connection string information and schema and table name from the M query in the selected table's partition. Using the Spark ODBC driver it then sends a SQL query to Databricks that queries the information_schema tables to return the table description that is defined in Unity Catalog. This is then updated on the table description in the semantic model. A second SQL Query using the DESCRIBE command is also sent to the selected table to get column descriptions. The results of this are looped through, with descriptions added in the model. Once the script has run on each selected table, a dialogue box is displayed to show the number of descriptions updated.
 
-## 输出示例
+## Example Output
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-pat.png" alt="Prompt for Databricks personal access token" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>脚本会提示你输入 Databricks 个人访问令牌，以便向 Databricks 验证身份。</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-databricks-relationships-pat.png" alt="Prompt for Databricks personal access token" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 1:</strong> The script will prompt you for a Databricks personal access token so it can authenticate to Databricks.</figcaption>
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-add-databricks-metadata-descriptions-done.png" alt="The number of descriptions updated" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 2：</strong>脚本在每个选定表上运行完成后，会显示已更新的描述条数。</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-add-databricks-metadata-descriptions-done.png" alt="The number of descriptions updated" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 2:</strong> After the script has run for each selected table, the number of descriptions updated is displayed.</figcaption>
 </figure>
 
 
