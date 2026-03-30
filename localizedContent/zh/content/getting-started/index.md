@@ -38,24 +38,24 @@ author: Daniel Otykier
 
 - @user-interface
   - @bpa-view
-  - @数据刷新视图
-  - @查找和替换
-  - @宏视图
-  - @消息视图
-  - @属性视图
+  - @data-refresh-view
+  - @find-replace
+  - @macros-view
+  - @messages-view
+  - @properties-view
   - @tom-explorer-view
-  - @图表视图
+  - @diagram-view
 
-- @并行开发
-  - @在工作区模式下优化工作流程
+- @parallel-development
+  - @optimizing-workflow-workspace-mode
 
 - @boosting-productivity-te3
-  - @导入表并进行数据建模
-  - @刷新、预览与查询
+  - @importing-tables-data-modeling
+  - @refresh-preview-query
   - @creating-and-testing-dax
   - @dax-script-introduction
   - @bpa
-  - @C# 脚本和宏
+  - @cs-scripts-and-macros
   - @personalizing-te3
 
 **更多资源：**
