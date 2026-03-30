@@ -36,34 +36,34 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
 
 ### Opciones del menú contextual de clic derecho
 
-- **Update table schema...**:
-  Checks for structural changes in the external data source and updates the table's schema accordingly. Esto es útil cuando se han agregado, cambiado de nombre o quitado columnas en el origen.
+- **Actualizar el esquema de la tabla...**:
+  Comprueba si hay cambios estructurales en el Data source externo y actualiza el esquema de la tabla en consecuencia. Esto es útil cuando se han agregado, cambiado de nombre o quitado columnas en el origen.
 
 - **Script DAX**:
-  Generates a DAX script for the selected table and its objects. Abre una nueva ventana del editor de scripts donde puede revisar o editar en conjunto las definiciones de DAX.
+  Genera un script DAX para la tabla seleccionada y sus objetos. Abre una nueva ventana del editor de scripts donde puede revisar o editar en conjunto las definiciones de DAX.
 
-- **Preview data**:
-  Opens the data preview pane displaying a sample of the data loaded into the selected table. Útil para la validación o la depuración. Solo existe al hacer clic con el botón derecho en las tablas.
+- **Vista previa de datos**:
+  Abre el panel de vista previa de datos y muestra un ejemplo de los datos cargados en la tabla seleccionada. Útil para la validación o la depuración. Solo existe al hacer clic con el botón derecho en las tablas.
 
-- **Refresh**:
-  Expands to a selection of possible refresh operation for the selected table. Esto solo está disponible si el modelo está conectado a un modelo en vivo, ya sea de forma independiente o en modo del área de trabajo. Esta opción solo está disponible para tablas y particiones.
+- **Actualizar**:
+  Despliega una selección de posibles operaciones de actualización para la tabla seleccionada. Esto solo está disponible si el modelo está conectado a un modelo en vivo, ya sea de forma independiente o en modo del área de trabajo. Esta opción solo está disponible para tablas y particiones.
 
-- **Create**:
-  Expands to a submenu allowing the creation of new measures, columns, hierarchies, display folders or calculation items under the selected object. Las opciones disponibles dependen del tipo de objeto seleccionado.
+- **Crear**:
+  Muestra un submenú que permite crear nuevas medidas, columnas, jerarquías, carpetas de visualización o elementos de cálculo bajo el objeto seleccionado. Las opciones disponibles dependen del tipo de objeto seleccionado.
 
-- **Move to group**:
-  Allows you to organize the table into a Table group within the TOM Explorer for easier model navigation. Esta opción solo está disponible para tablas.
+- **Mover a un grupo**:
+  Te permite organizar la tabla en un grupo de tablas dentro del Explorador TOM para navegar por el modelo con más facilidad. Esta opción solo está disponible para tablas.
 
-- **Make invisible**:
-  Marks the object as not visible in client tools. La tabla sigue formando parte del modelo, pero está oculta para los autores de informes. Como alternativa, usa el atajo **Ctrl+I** para ocultar el objeto.
+- **Hacer invisible**:
+  Marca el objeto como no visible en las herramientas cliente. La tabla sigue formando parte del modelo, pero está oculta para los autores de informes. Como alternativa, puedes usar el atajo **Ctrl+I** para ocultar el objeto.
 
-- **Shown in perspectives**:
-  Enables or disables the table's inclusion in one or more perspectives. Las perspectivas limitan lo que los usuarios finales pueden ver en herramientas como Power BI.
+- **Mostrar en perspectivas**:
+  Activa o desactiva la inclusión de la tabla en una o varias perspectivas. Las perspectivas limitan lo que los usuarios finales pueden ver en herramientas como Power BI.
 
 - **Cambio de nombre por lotes**: Al seleccionar más de un objeto, puede cambiarles el nombre por lotes mediante sustitución de cadenas o expresiones regulares. El atajo para renombrar por lotes es **F2**.
 
-- **Batch rename children...**:
-  Enables bulk renaming of all child objects under the table or display folder using regex or string replacement rules. También se puede acceder mediante el atajo **Shift+F2**.
+- **Renombrar objetos secundarios por lotes...**:
+  Permite renombrar en bloque todos los objetos secundarios de la tabla o la carpeta de visualización mediante expresiones regulares o reglas de reemplazo de cadenas. También se puede acceder mediante el atajo **Shift+F2**.
 
 - **Duplicate**:
   Creates a copy of the selected table, including all its columns, measures and partitions. También existe para todos los demás objetos del Explorador TOM.
