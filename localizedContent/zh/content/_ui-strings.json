@@ -20,5 +20,20 @@
   "footer.technicalSupport": "技术支持",
   "footer.privacyPolicy": "隐私与 Cookie 政策",
   "footer.termsConditions": "条款与条件",
-  "footer.licenseTerms": "许可条款"
+  "footer.licenseTerms": "许可条款",
+  "appliesTo": "适用于: ",
+  "availableSince": "自此版本起可用",
+  "availableIn": "适用范围",
+  "inThisArticle": "本文内容",
+  "searchResultsCount": "{count} 条与“{query}”相关的结果",
+  "searchNoResults": "未找到与“{query}”相关的结果",
+  "tocFilter": "按标题筛选",
+  "nextArticle": "下一篇",
+  "prevArticle": "上一篇",
+  "themeLight": "浅色",
+  "themeDark": "深色",
+  "themeAuto": "自动",
+  "changeTheme": "切换主题",
+  "copy": "复制",
+  "downloadPdf": "下载 PDF"
 }

@@ -50,6 +50,8 @@ Una posible solución para la limitación anterior es crear un **modelo compuest
 
 Como alternativa, asegúrese de que el origen contenga las columnas necesarias. Si agregas columnas a través de una vista, ten en cuenta que la vista debe estar materializada en el Warehouse o el Lakehouse de Fabric, ya que Direct Lake en OneLake no admite las vistas no materializadas.
 
+<a name="collation"></a>
+
 ## Intercalación
 
 Al usar **Direct Lake en OneLake**, la intercalación del modelo es la misma que la de un modelo en modo Import mode, que de forma predeterminada no distingue mayúsculas de minúsculas.

@@ -18,6 +18,8 @@ applies_to:
           full: true
 ---
 
+<a name="supported-file-types"></a>
+
 # Tipos de archivo compatibles
 
 Tabular Editor 3 utiliza varios formatos de archivo y tipos de documento, algunos de los cuales no se usan en Analysis Services ni en Power BI. Este artículo ofrece una descripción general y una explicación de cada uno de estos tipos de archivo.
@@ -186,6 +188,8 @@ Para consultar la documentación completa de esta característica, consulta [Sav
 Los archivos de soporte son archivos que no utilizan Analysis Services ni Power BI. En su lugar, estos archivos sirven de apoyo a distintos flujos de trabajo de desarrollo en Tabular Editor 3 y otras herramientas.
 
 Todos los archivos auxiliares se pueden guardar individualmente con Ctrl+S o con 'Archivo > Guardar', siempre que tengas abierto y en primer plano el documento o la ventana correspondiente.
+
+<a name="diagram-file-te3diag"></a>
 
 ### Archivo de diagrama (.te3diag)
 

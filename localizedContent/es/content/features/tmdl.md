@@ -1,6 +1,6 @@
 ---
 uid: tmdl
-title: Tabular Model Definition Language (TMDL)
+title: Lenguaje de definición de modelo tabular (TMDL)
 author: Daniel Otykier
 updated: 2023-05-22
 applies_to:
@@ -17,40 +17,40 @@ applies_to:
           full: true
 ---
 
-# Tabular Model Definition Language (TMDL)
+# Lenguaje de definición de modelo tabular (TMDL)
 
-**TMDL** is a model metadata file format [announced by Microsoft in April 2023](https://powerbi.microsoft.com/en-us/blog/announcing-public-preview-of-the-tabular-model-definition-language-tmdl/). It aims to provide a human-readable, text-based alternative to the JSON-based model.bim file format. TMDL is inspired by YAML, and as such, is easy to read and write, with minimal use of string quotes and escape characters. It also serializes a model as several smaller files in a folder structure, and is therefore also better suited for version control integration.
+**TMDL** es un formato de archivo de metadatos de modelo [anunciado por Microsoft en abril de 2023](https://powerbi.microsoft.com/en-us/blog/announcing-public-preview-of-the-tabular-model-definition-language-tmdl/). Su objetivo es ofrecer una alternativa basada en texto y legible para humanos al formato de archivo model.bim basado en JSON. TMDL se inspira en YAML y, por eso, es fácil de leer y escribir, con un uso mínimo de comillas en las cadenas y caracteres de escape. También serializa un modelo como varios archivos más pequeños en una estructura de carpetas y, por tanto, es más adecuado para la integración con el control de versiones.
 
-## Enabling TMDL in Tabular Editor 3
+## Habilitar TMDL en Tabular Editor 3
 
-To enable TMDL in Tabular Editor 3, go to **Tools > Preferences > File Formats > Save-to-folder**, and select "TMDL" in the **Serialization mode** dropdown. The legacy "save-to-folder" functionality will continue to exist side by side with TMDL, but is not a Microsoft supported format.
+Para habilitar TMDL en Tabular Editor 3, ve a **Herramientas > Preferencias > Formatos de archivo > Guardar en carpeta** y, en el desplegable **Modo de serialización**, selecciona "TMDL". La funcionalidad heredada "save-to-folder" seguirá existiendo en paralelo a TMDL, pero no es un formato admitido por Microsoft.
 
-After doing so, Tabular Editor 3 will use the TMDL format when saving a model as a folder (**File > Save to folder...**).
+Después de hacerlo, Tabular Editor 3 usará el formato TMDL al guardar un modelo en una carpeta (**Archivo > Guardar en carpeta...**).
 
 > [!NOTE]
-> When you load a model from a legacy Tabular Editor folder structure, it will still get saved into that same format when using **File > Save** (Ctrl+S). Only when you explicitly use the **File > Save to folder...** command, will the model be saved in the new TMDL format.
+> Cuando cargue un modelo desde una estructura de carpetas heredada de Tabular Editor, se seguirá guardando en ese mismo formato al usar **Archivo > Guardar** (Ctrl+S). Solo cuando uses explícitamente el comando **Archivo > Guardar en carpeta...** se guardará el modelo en el nuevo formato TMDL.
 
-## New models
+## Modelos nuevos
 
-When saving a new model for the first time, Tabular Editor (since v. 3.7.0), will now provide an option for saving the model as TMDL, even when the default serialization mode is not set to TMDL, as described in the previous section.
+Al guardar un modelo nuevo por primera vez, Tabular Editor (desde la v. 3.7.0) ahora ofrece una opción para guardar el modelo como TMDL, incluso si el modo de serialización predeterminado no está configurado como TMDL, tal como se describe en la sección anterior.
 
-![New Model Tmdl](~/content/assets/images/new-model-tmdl.png)
+![Nuevo modelo Tmdl](~/content/assets/images/new-model-tmdl.png)
 
-## TMDL and Microsoft Fabric Git Integration
+## TMDL y la integración con Git de Microsoft Fabric
 
-TMDL is fully compatible with Microsoft Fabric's Git integration feature. When you use the **Save with supporting files** option in Tabular Editor 3, the TMDL serialization format creates a folder structure that includes all necessary metadata files required by Fabric's Git integration.
+TMDL es totalmente compatible con la característica de integración con Git de Microsoft Fabric. Al usar la opción **Guardar con archivos de apoyo** en Tabular Editor 3, el formato de serialización TMDL crea una estructura de carpetas que incluye todos los archivos de metadatos necesarios para la integración con Git de Microsoft Fabric.
 
-The resulting folder structure includes:
+La estructura de carpetas resultante incluye:
 
-- **.platform** file with metadata (display name, description, logical ID)
-- **definition.pbism** file with semantic model settings
-- **definition/** folder containing your TMDL model files
+- Archivo **.platform** con metadatos (nombre para mostrar, descripción, ID lógico)
+- Archivo **definition.pbism** con la configuración del modelo semántico
+- carpeta **definition/** que contiene los archivos del modelo TMDL
 
-This combination allows you to commit your semantic models to Git repositories and synchronize them with Microsoft Fabric workspaces using Fabric's built-in Git integration capabilities. The human-readable nature of TMDL makes it particularly well-suited for code reviews and tracking changes in version control systems.
+Esta combinación te permite hacer commit de tus modelos semánticos en repositorios Git y sincronizarlos con los Workspaces de Microsoft Fabric mediante las capacidades de integración de Git integradas en Fabric. La naturaleza legible de TMDL lo hace especialmente adecuado para las revisiones de código y el seguimiento de cambios en sistemas de control de versiones.
 
-For detailed information on using this feature, see [Save with supporting files](xref:save-with-supporting-files).
+Para obtener información detallada sobre cómo usar esta característica, consulta [Guardar con archivos auxiliares](xref:save-with-supporting-files).
 
-# Next steps
+# Siguientes pasos
 
-- [TMDL overview (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-overview).
-- [Get started with TMDL (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-how-to)
+- [Información general de TMDL (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-overview).
+- [Primeros pasos con TMDL (Microsoft Learn)](https://learn.microsoft.com/en-us/analysis-services/tmdl/tmdl-how-to)

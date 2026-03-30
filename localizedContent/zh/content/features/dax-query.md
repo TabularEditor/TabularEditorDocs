@@ -31,7 +31,7 @@ DAX 查询的一个常见用例是由 [Power BI 性能分析器](https://www.sql
 
 ## DAX 查询选项
 
-The DAX query window has six different query options.
+DAX 查询窗口提供六种不同的查询选项。
 
 ![Dax 查询工具栏](~/content/assets/images/features/dax_query_window/dax_query_toolbar.png)
 
@@ -74,7 +74,7 @@ Tabular Editor（3.12.0 及更高版本）支持通过 DAX 查询窗口直接添
 - 应用 (F7)
 - 应用度量值并同步 (Shift+F7)
 - 应用选择 (F8)
-- Apply Selection and Sync (Shift+F8)
+- 应用所选内容并同步 (Shift+F8)
 
 ## DAX 查询示例
 

@@ -18,6 +18,8 @@ applies_to:
           full: true
 ---
 
+<a name="find"></a>
+
 # 查找
 
 在 Tabular Editor 中，你可以使用高级“查找”功能，在打开的文档和数据集中查找特定表达式。 可以通过键盘快捷键 Ctrl+F 打开“查找”对话框。
@@ -45,6 +47,8 @@ applies_to:
 
 > [!TIP]
 > 你也可以直接使用 TOM Explorer 中的搜索框来搜索你的 Dataset，而不必使用“查找”对话框
+
+<a name="replace"></a>
 
 ## 替换
 

@@ -42,6 +42,8 @@ Hay varias vistas adicionales disponibles, con distintos propósitos. Más infor
 
 Todos los elementos de la interfaz de usuario se pueden redimensionar o reorganizar para adaptarlos a tus necesidades. Incluso puedes arrastrar vistas individuales fuera de la vista principal, dividiendo así una instancia de Tabular Editor 3 entre varios monitores. Tabular Editor 3 guardará la personalización al cerrar la aplicación y la cargará automáticamente la próxima vez que se inicie.
 
+<a name="choosing-a-different-layout"></a>
+
 ### Elegir un diseño diferente
 
 Para restablecer la aplicación al diseño predeterminado, elige la opción **Ventana > Diseño predeterminado**. Los usuarios de Tabular Editor 2.x pueden preferir la opción **Ventana > Diseño clásico**, que coloca el Explorador TOM en el lado izquierdo de la pantalla y la vista de propiedades debajo del Editor de expresiones.
@@ -50,29 +52,31 @@ Usa la opción **"Ventana > Capturar diseño actual..."** para guardar un diseñ
 
 ![Administrar diseños](~/content/assets/images/manage-layouts.png)
 
-### Window docking options
+<a name="changing-themes-and-palettes"></a>
 
-When rearranging views and documents in Tabular Editor 3, you can choose to dock windows in different areas of the interface. When dragging a window to a new position, docking indicators will appear showing you the available docking locations.
+### Opciones de acoplamiento de ventanas
 
-![Window Docking Options](~/content/assets/images/window-docking-options.png)
+Al reorganizar vistas y documentos en Tabular Editor 3, puedes elegir acoplar ventanas en distintas áreas de la interfaz. Al arrastrar una ventana a una nueva posición, aparecerán indicadores de acoplamiento que te mostrarán las ubicaciones de acoplamiento disponibles.
 
-There are two primary ways to dock windows, each serving a different purpose:
+![Opciones de acoplamiento de ventanas](~/content/assets/images/window-docking-options.png)
 
-**Document tab docking (center indicator)**: When you drag a window to the center docking indicator, it will be placed in the main document area. Windows docked this way become document tabs that:
+Hay dos formas principales de acoplar ventanas, cada una con un propósito diferente:
 
-- Can be cycled through using **Ctrl+Tab**
-- Are displayed in the main working area alongside other documents like DAX queries, scripts, and diagrams
-- Do not have auto-hide functionality
+**Acoplamiento como pestaña de documento (indicador central)**: Cuando arrastras una ventana al indicador de acoplamiento central, se colocará en el área principal de documentos. Las ventanas acopladas de esta forma se convierten en pestañas de documento que:
 
-**Tool window docking (edge indicators)**: When you drag a window to the left, right, top, or bottom docking indicators, it will be docked as a tool window. Tool windows:
+- Se pueden recorrer con **Ctrl+Tab**
+- Se muestran en el área principal de trabajo junto con otros documentos, como consultas DAX, scripts y diagramas
+- No admiten la función de ocultación automática
 
-- Are not accessible via **Ctrl+Tab**
-- Display a pin icon that enables auto-hide functionality (making the window collapse when not in use)
-- Behave similarly to other tool windows such as the TOM Explorer and Messages view
-- Can be docked at various positions around the main document area
+**Acoplamiento como ventana de herramientas (indicadores de borde)**: Cuando arrastras una ventana a los indicadores de acoplamiento de la izquierda, derecha, arriba o abajo, se acoplará como una ventana de herramientas. Las ventanas de herramientas:
+
+- No son accesibles mediante **Ctrl+Tab**
+- Muestran un icono de chincheta que permite la ocultación automática (la ventana se contrae cuando no se está usando)
+- Se comportan de forma similar a otras ventanas de herramientas, como el Explorador TOM y la vista de mensajes
+- Se pueden acoplar en varias posiciones alrededor del área principal de documentos
 
 > [!TIP]
-> The size of a docked window is determined by the available space in the area you choose to dock it, not by the docking option itself. You can resize windows by dragging the dividers between them.
+> El tamaño de una ventana acoplada lo determina el espacio disponible en el área en la que decidas acoplarla, no la opción de acoplamiento en sí. Puedes cambiar el tamaño de las ventanas arrastrando los separadores entre ellas.
 
 ### Cambiar temas y paletas
 
@@ -84,6 +88,8 @@ Puedes cambiar el aspecto visual de Tabular Editor 3 eligiendo un tema o una pal
 Para los temas basados en vectores (Basic y Bezier), usa la opción de menú **Ventana > Paleta** para cambiar los colores del tema.
 
 ![Palettes](~/content/assets/images/palettes.png)
+
+<a name="menus"></a>
 
 # Menús
 
@@ -148,8 +154,8 @@ El menú **Editar** contiene los elementos de menú estándar de las aplicacione
 - **Rehacer**: Esta opción rehace el último deshacer aplicado a los metadatos del modelo. Cuando no hay ningún documento activo, el conocido acceso directo CTRL+Y se asigna a esta opción.
 - **Deshacer al escribir**: Deshace el último cambio de texto en el documento actualmente activo. Cuando no hay ningún documento activo, esta opción no está disponible.
 - **Rehacer al escribir**: Rehace el último deshacer dentro del documento activo. Cuando no hay ningún documento activo, esta opción no está disponible.
-- **Buscar**: Muestra el cuadro de diálogo "Buscar y reemplazar" con la pestaña "Buscar" seleccionada. [Más información](xref:find-replace#find).
 - **Reemplazar**: Muestra el cuadro de diálogo "Buscar y reemplazar" con la pestaña "Reemplazar" seleccionada. [Más información](xref:find-replace#replace).
+- **Buscar**: Muestra el cuadro de diálogo "Buscar y reemplazar" con la pestaña "Buscar" seleccionada. [Más información](xref:find-replace#find).
 - **Cortar / Copiar / Pegar**: Son las conocidas operaciones de edición de Windows. Si hay un documento activo, se aplican a la selección de texto dentro de ese documento. En caso contrario, estas opciones se pueden usar para manipular objetos en el Explorador TOM. Por ejemplo, puede duplicar varias medidas manteniendo pulsada la tecla SHIFT o CTRL mientras selecciona las medidas en el Explorador TOM y, después, pulsando CTRL+C y luego CTRL+V.
 - **Eliminar**: Elimina el texto seleccionado en el documento activo o el/los objeto(s) seleccionados actualmente en el Explorador TOM si no hay ningún documento activo.
 
@@ -159,11 +165,13 @@ El menú **Editar** contiene los elementos de menú estándar de las aplicacione
 - **Seleccionar todo**: Selecciona todo el texto del documento activo o todos los objetos que pertenecen al mismo elemento padre en el Explorador TOM.
 - **Code Assist**: Esta opción está disponible cuando se edita código DAX. Proporciona un acceso directo a varias funciones de Code Assist relevantes para la edición de código DAX. Consulte [editor de DAX](xref:dax-editor#code-assist-features) para obtener más información.
 
+<a name="view"></a>
+
 ## Vista
 
 El menú **Vista** le permite navegar entre las distintas vistas de la interfaz de usuario de Tabular Editor 3. Si una vista está oculta, al hacer clic en el título de la vista en este menú se volverá a mostrar y pasará a primer plano. Ten en cuenta que los documentos no se muestran en el menú Ver. Para navegar entre documentos, usa el [menú Ventana](#window).
 
-![Menú Ver](~/content/assets/images/view-menu.png)
+![Menú de vista](~/content/assets/images/model-menu.png)
 
 - **Explorador TOM**: El Explorador TOM presenta una vista jerárquica de todo el [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) de los metadatos del modelo cargado actualmente. Consulta @tom-explorer-view para obtener más información.
 - **Best Practice Analyzer**: Best Practice Analyzer le ayuda a mejorar la calidad de su modelo al permitirle especificar reglas para la validación de mejores prácticas. Consulta @bpa-view para obtener más información.
@@ -177,7 +185,7 @@ El menú **Vista** le permite navegar entre las distintas vistas de la interfaz 
 
 El menú **Modelo** muestra las acciones que se pueden realizar a nivel del objeto Modelo (el objeto raíz del Explorador TOM).
 
-![Menú de vista](~/content/assets/images/model-menu.png)
+![Menú Herramientas](~/content/assets/images/tools-menu.png)
 
 - **Implementar...**: Inicia el Asistente de implementación de Tabular Editor. Para obtener más información, consulta [Implementación del modelo](../deployment.md).
 
@@ -197,16 +205,18 @@ El menú **Modelo** muestra las acciones que se pueden realizar a nivel del obje
 
 El menú **Herramientas** contiene opciones para controlar las preferencias y personalizaciones de Tabular Editor 3.
 
-![Menú Herramientas](~/content/assets/images/tools-menu.png)
+![Menú Vista](~/content/assets/images/window-menu.png)
 
 - **Personalizar...** Abre el cuadro de diálogo de personalización del diseño de la interfaz de usuario de Tabular Editor 3, que permite crear nuevas barras de herramientas, reorganizar y editar menús y botones de la barra de herramientas, etc.
 - **Preferencias...** Abre el cuadro de diálogo de Preferencias de Tabular Editor 3, que funciona como un centro para administrar todos los demás aspectos de Tabular Editor y sus características, como la comprobación de actualizaciones, la configuración del proxy, los límites de filas de consulta, los tiempos de espera de las solicitudes, etc. Consulte @preferences para obtener más información.
+
+<a name="window"></a>
 
 ## Ventana
 
 El menú **Ventana** proporciona accesos directos para administrar y navegar entre las distintas vistas y documentos (conocidos colectivamente como _ventanas_) de la aplicación. También incluye elementos de menú para controlar los temas y las paletas de colores, tal como se describe [arriba](#changing-themes-and-palettes).
 
-![Menú Vista](~/content/assets/images/window-menu.png)
+![Menú Ver](~/content/assets/images/view-menu.png)
 
 - **Nuevo...** este submenú ofrece un acceso directo para crear nuevos [archivos auxiliares](xref:supported-files#supported-file-types). Las opciones aquí son idénticas a las de **Archivo > Nuevo**.
 

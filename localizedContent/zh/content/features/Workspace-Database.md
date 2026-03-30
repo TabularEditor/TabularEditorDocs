@@ -66,11 +66,11 @@ Tabular Editor 3.0 支持在同时连接到部署在 Analysis Services 实例上
 
 在“工作区模式”下，每次你按下保存 (ctrl+s)，Tabular Editor 都会同时将模型保存到磁盘，并更新 Workspace 数据库。 这样，你就能快速测试新代码并查看 Analysis Services 提供的错误信息，而无需手动部署数据库或调用“文件 > 另存为……” 或“文件 > 保存到文件夹……” 当你想将模型元数据持久保存到磁盘时
 
-### Incremental Refresh Expression Change Detection
+### 增量刷新表达式变更检测
 
-When opening a model with a workspace database, Tabular Editor compares the local incremental refresh `Source Expression` and `Polling Expression` with those on the workspace database, for each table governed by a `BasicRefreshPolicy`.
+当打开使用 Workspace 数据库的模型时，Tabular Editor 会针对每个由 `BasicRefreshPolicy` 管理的表，将本地增量刷新的 `Source Expression` 和 `Polling Expression` 与 Workspace 数据库中的对应表达式进行比较。
 
-If Tabular Editor detects differences, it prompts you to overwrite the workspace database expressions with your local version. This prevents accidental loss of expression changes, which is particularly important when collaborating via Git where multiple developers may modify these expressions independently.
+如果 Tabular Editor 检测到差异，它会提示你使用本地版本覆盖 Workspace 数据库中的表达式。 这可以防止表达式修改被意外丢失——在通过 Git 协作时尤为重要，因为多个开发者可能会分别独立修改这些表达式。
 
 > [!TIP]
-> If you are working in a team and notice the prompt appearing frequently, coordinate with your team members to ensure incremental refresh expressions are not modified independently in different branches.
+> 如果你在团队中工作，并发现此提示频繁出现，请与团队成员协调，确保不要在不同分支中分别独立修改增量刷新表达式。

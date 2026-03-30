@@ -129,6 +129,8 @@ Selected.Measures
         .ForEach(m => m.Name += " DEPRECATED");
 ```
 
+<a name="helper-methods"></a>
+
 ## Métodos auxiliares
 
 Para facilitar la depuración de scripts, Tabular Editor ofrece un conjunto de métodos auxiliares especiales. Internamente, se trata de métodos estáticos decorados con el atributo `[ScriptMethod]`. Este atributo permite que los scripts llamen a los métodos directamente, sin necesidad de especificar un espacio de nombres o un nombre de clase. Los complementos también pueden usar el atributo `[ScriptMethod]` para exponer métodos estáticos públicos para su uso en scripts, de forma similar.
@@ -142,7 +144,7 @@ A partir de la versión 2.7.4, Tabular Editor proporciona los siguientes método
 - `ImportProperties(tsvData);` - forma práctica de cargar propiedades en varios objetos a partir de una cadena TSV.
 - `CustomAction(name);` - invoca una acción personalizada por su nombre.
 - `CustomAction(objects, name);` - invoca una acción personalizada en los objetos especificados.
-- `ConvertDax(dax, useSemicolons);` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y otras configuraciones regionales. Si `useSemicolons` es `true` (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido al formato no EE. UU./Reino Unido. Es decir, las comas (separadores de lista) se convierten en punto y coma, y los puntos (separadores decimales) se convierten en comas. Y viceversa si `useSemicolons` se establece en `false`.
+- `ConvertDax(dax, useSemicolons);` - convierte una expresión DAX entre configuraciones regionales de EE. UU./Reino Unido y otras configuraciones regionales. Si `useSemicolons` es `true` (valor predeterminado), la cadena `dax` se convierte del formato nativo de EE. UU./Reino Unido al formato no EE. Es decir, las comas (separadores de lista) se convierten en punto y coma, y los puntos (separadores decimales) se convierten en comas. Y viceversa si `useSemicolons` se establece en `false`.
 - ¿`FormatDax(IEnumerable<IDaxDependantObject> objects, bool shortFormat, bool? skipSpace)` - da formato a las expresiones DAX de todos los objetos de la colección proporcionada
 - `FormatDax(IDaxDependantObject obj)` - pone un objeto en cola para dar formato a la expresión DAX cuando finalice la ejecución del script, o cuando se llame al método `CallDaxFormatter`.
 - ¿`CallDaxFormatter(bool shortFormat, bool? skipSpace)` - da formato a todas las expresiones DAX de los objetos puestos en cola hasta el momento

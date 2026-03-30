@@ -1,7 +1,7 @@
 ---
 uid: databricks-column-comments-length
-title: Databricks Column Comment Length Error
-author: Support Team
+title: Error de longitud del comentario de columna en Databricks
+author: Equipo de soporte
 updated: 2026-02-06
 applies_to:
   products:
@@ -17,200 +17,200 @@ applies_to:
           full: true
 ---
 
-# Databricks Column Comment Length Error
+# Error de longitud del comentario de columna en Databricks
 
-When using the Import Table Wizard to import tables from Databricks, you may encounter a connection error if column comments (descriptions) exceed 512 characters. This limitation exists in the Simba Spark ODBC Driver, even though Databricks Unity Catalog allows longer column comments.
+Al usar el Asistente para importar tablas para importar tablas desde Databricks, puede aparecer un error de conexión si los comentarios de columna (descripciones) superan los 512 caracteres. Esta limitación existe en el controlador ODBC de Simba Spark, aunque Databricks Unity Catalog permite comentarios de columna más largos.
 
-A typical error message looks like:
+Un ejemplo de mensajes de error típicos se ve así:
 
-**"Unable to connect to database 'database_name' on 'adb-xxxx.azuredatabricks.net/sql/1.0/warehouses/xxxx': Exception has been thrown by the target of an invocation."**
+**"No se puede conectar a la base de datos 'database_name' en 'adb-xxxx.azuredatabricks.net/sql/1.0/warehouses/xxxx': Se ha producido una excepción en el destino de una invocación."**
 
-This article explains why this occurs and provides two workarounds to resolve the issue.
-
----
-
-## Understanding the Issue
-
-The Simba Spark ODBC Driver, which Tabular Editor uses to connect to Databricks, has a default limit of 512 characters for column comments. This limit is enforced regardless of what Databricks Unity Catalog allows.
-
-### Why this happens
-
-1. **Default driver limitation**: The Simba Spark ODBC Driver is configured with a default `MaxCommentLen` parameter of 512 characters.
-
-2. **Unity Catalog allows longer comments**: Databricks Unity Catalog permits column descriptions longer than 512 characters, which can exceed the driver's limit.
-
-3. **Import wizard retrieval**: When the Import Table Wizard queries table metadata, it attempts to retrieve all column comments. If any comment exceeds the driver's limit, the connection fails with an invocation exception.
+Este artículo explica por qué pasa esto y ofrece dos soluciones alternativas para resolver el problema.
 
 ---
 
-## Resolution
+## Comprender el problema
 
-There are two approaches to resolve this issue:
+El controlador ODBC Simba Spark, que Tabular Editor utiliza para conectarse a Databricks, tiene un límite predeterminado de 512 caracteres para los comentarios de columna. Este límite se aplica independientemente de lo que permita Databricks Unity Catalog.
 
-### Option 1: Limit column comments in Databricks (Recommended for simplicity)
+### Por qué sucede
 
-The simplest approach is to ensure that all column descriptions in your Databricks Unity Catalog tables do not exceed 512 characters.
+1. **Limitación predeterminada del controlador**: El controlador ODBC Simba Spark está configurado con un parámetro `MaxCommentLen` predeterminado de 512 caracteres.
 
-**Steps:**
+2. **Unity Catalog permite comentarios más largos**: Databricks Unity Catalog permite descripciones de columna de más de 512 caracteres, lo que puede superar el límite del controlador.
 
-1. Review column comments in your Databricks tables.
-2. Identify any comments that exceed 512 characters.
-3. Edit those comments to be 512 characters or fewer.
-4. Save the changes in Databricks.
-5. Retry the import in Tabular Editor.
+3. **Recuperación en el asistente de importación**: Cuando el Asistente para importar tablas consulta los metadatos de la tabla, intenta recuperar todos los comentarios de columna. Si algún comentario supera el límite del controlador, la conexión falla con una excepción de invocación.
 
-**Benefits:**
+---
 
-- Simple to implement
-- No configuration changes required
-- Works across all tools connecting to Databricks
+## Resolución
 
-**Trade-offs:**
+Hay dos formas de resolver este problema:
 
-- Requires modification of source metadata
-- May lose information if descriptions are truncated
-- Not suitable if longer descriptions are required
+### Opción 1: Limitar los comentarios de columna en Databricks (Recomendado por su sencillez)
 
-### Option 2: Increase the MaxCommentLen parameter in Simba Driver
+El enfoque más sencillo es asegurarse de que todas las descripciones de columna de las tablas de Databricks Unity Catalog no superen los 512 caracteres.
 
-If you need to preserve column comments longer than 512 characters, you can configure the Simba Spark ODBC Driver to accommodate larger comments.
+**Pasos:**
+
+1. Revisa los comentarios de las columnas en tus tablas de Databricks.
+2. Identifica los comentarios que superen los 512 caracteres.
+3. Edita esos comentarios para que tengan 512 caracteres o menos.
+4. Guarda los cambios en Databricks.
+5. Vuelve a intentar la importación en Tabular Editor.
+
+**Ventajas:**
+
+- Fácil de implementar
+- No requiere cambios de configuración
+- Funciona con todas las herramientas que se conectan a Databricks
+
+**Compensaciones:**
+
+- Requiere modificar los metadatos de origen
+- Puede perderse información si las descripciones se truncan
+- No es adecuado si se necesitan descripciones más largas
+
+### Opción 2: Aumentar el parámetro MaxCommentLen en el controlador Simba
+
+Si necesitas conservar comentarios de columna de más de 512 caracteres, puedes configurar el Simba Spark ODBC Driver para admitir comentarios más extensos.
 
 > [!NOTE]
-> Before proceeding, ensure you have the latest version of the Simba Spark ODBC Driver for Databricks installed. You can download it from the [Microsoft Azure Databricks ODBC download page](https://learn.microsoft.com/azure/databricks/integrations/odbc/download).
+> Antes de continuar, asegúrate de tener instalada la versión más reciente del Simba Spark ODBC Driver for Databricks. Puedes descargarlo desde la [página de descarga de ODBC de Microsoft Azure Databricks](https://learn.microsoft.com/azure/databricks/integrations/odbc/download).
 
-**Steps:**
+**Pasos:**
 
-1. **Locate the Simba Spark ODBC Driver installation folder.**
+1. **Busca la carpeta de instalación de Simba Spark ODBC Driver.**
 
-   The default installation location for the 64-bit driver is:
+   La ubicación de instalación predeterminada del controlador de 64 bits es:
 
    ```
    C:\Program Files\Simba Spark ODBC Driver\
    ```
 
-   If you installed the driver to a custom location, navigate to that folder instead.
+   Si instalaste el controlador en una ubicación personalizada, ve a esa carpeta.
 
-2. **Create or edit the microsoft.sparkodbc.ini file.**
+2. **Crea o edita el archivo microsoft.sparkodbc.ini.**
 
-   In the driver installation folder, create a new file named **microsoft.sparkodbc.ini** (if it doesn't already exist).
+   En la carpeta de instalación del controlador, crea un archivo nuevo llamado **microsoft.sparkodbc.ini** (si aún no existe).
 
-   > [!NOTE]> The Simba Spark ODBC Driver installer does not create this .ini file by default, so you will likely need to create it manually.
+   > [!NOTE]> El instalador de Simba Spark ODBC Driver no crea este archivo .ini de forma predeterminada, así que probablemente tendrás que crearlo manualmente.
 
-3. **Add the MaxCommentLen configuration.**
+3. **Añade la configuración MaxCommentLen.**
 
-   Open the **microsoft.sparkodbc.ini** file in a text editor (such as Notepad) and add the following content:
-
-   ```ini
-   [Driver]
-   MaxCommentLen=2048
-   ```
-
-   Adjust the value (2048 in this example) to accommodate the maximum comment length you need.
-
-4. **Save the file.**
-
-   Ensure the file is saved as **microsoft.sparkodbc.ini** (not microsoft.sparkodbc.ini.txt) in the driver installation folder.
-
-5. **Restart Tabular Editor.**
-
-   Close all instances of Tabular Editor and reopen the application for the configuration change to take effect.
-
-6. **Retry the import.**
-
-   Use the Import Table Wizard again to import your Databricks tables. The connection should now succeed with the increased comment length limit.
-
-**Benefits:**
-
-- Preserves full column descriptions
-- No need to modify source metadata
-- Applies to all Databricks connections using this driver
-
-**Trade-offs:**
-
-- Requires file system access to the driver installation folder
-- Configuration file must be created manually
-- Changes apply machine-wide, affecting other applications using the same driver
-
----
-
-## Step-by-Step Example: Creating the microsoft.sparkodbc.ini File
-
-If you've never created an .ini file before, follow these detailed steps:
-
-1. **Open Notepad** (or your preferred text editor).
-
-2. **Type the following content:**
+   Abre el archivo **microsoft.sparkodbc.ini** en un editor de texto (como el Bloc de notas) y añade el siguiente contenido:
 
    ```ini
    [Driver]
    MaxCommentLen=2048
    ```
 
-3. **Save the file:**
-   - Click **File > Save As**
+   Ajusta el valor (2048 en este ejemplo) para que admita la longitud máxima de comentario que necesites.
 
-   - Navigate to `C:\Program Files\Simba Spark ODBC Driver\`
+4. **Guarda el archivo.**
 
-   - In the **Save as type** dropdown, select **All Files (_._)** (important!)
+   Asegúrate de guardar el archivo como **microsoft.sparkodbc.ini** (no microsoft.sparkodbc.ini.txt) en la carpeta de instalación del controlador.
 
-   - In the **File name** field, type exactly: **microsoft.sparkodbc.ini**
+5. **Reinicia Tabular Editor.**
 
-   - Click **Save**
-   > [!IMPORTANT]> Make sure to select "All Files" as the file type, otherwise Notepad will save it as microsoft.sparkodbc.ini.txt, which will not work.
+   Cierra todas las instancias de Tabular Editor y vuelve a abrir la aplicación para que el cambio de configuración surta efecto.
 
-4. **Verify the file was created correctly:**
-   - Open File Explorer and navigate to `C:\Program Files\Simba Spark ODBC Driver\`
-   - Confirm that you see a file named **microsoft.sparkodbc.ini** (not microsoft.sparkodbc.ini.txt)
+6. **Reintenta la importación.**
 
-5. **Close and restart Tabular Editor** for the changes to take effect.
+   Vuelve a ejecutar el Asistente para importar tablas para volver a importar tus tablas de Databricks. Ahora la conexión debería realizarse correctamente con el límite de longitud de comentarios aumentado.
 
----
+**Ventajas:**
 
-## Quick Troubleshooting Checklist
+- Conserva las descripciones completas de las columnas
+- No es necesario modificar los metadatos de origen
+- Se aplica a todas las conexiones de Databricks que usan este controlador
 
-- [ ] **Confirm the error message**: Verify that the connection error occurs during the Import Table Wizard when connecting to Databricks.
-- [ ] **Check column comment lengths**: Query your Databricks tables to identify any column comments exceeding 512 characters.
-- [ ] **Verify driver installation**: Confirm that the Simba Spark ODBC Driver is installed and locate its installation folder.
-- [ ] **Check .ini file location**: Ensure the **microsoft.sparkodbc.ini** file is in the correct folder (the driver installation directory, not a subdirectory).
-- [ ] **Verify file extension**: Confirm the file is named **microsoft.sparkodbc.ini** and not **microsoft.sparkodbc.ini.txt**.
-- [ ] **Restart Tabular Editor**: Configuration changes only take effect after restarting the application.
+**Inconvenientes:**
+
+- Requiere acceso al sistema de archivos de la carpeta de instalación del controlador
+- El archivo de configuración debe crearse manualmente
+- Los cambios se aplican en todo el equipo y afectan a otras aplicaciones que usan el mismo controlador
 
 ---
 
-## Prevention Best Practices
+## Ejemplo paso a paso: cómo crear el archivo microsoft.sparkodbc.ini
 
-1. **Establish comment length guidelines**: If you're managing Databricks metadata, consider establishing guidelines to keep column comments under 512 characters for maximum compatibility.
+Si nunca has creado un archivo .ini, sigue estos pasos detallados:
 
-2. **Test imports early**: When setting up a new Databricks environment, test table imports in Tabular Editor early in the development process to identify any metadata issues.
+1. **Abre el Bloc de notas** (o tu editor de texto preferido).
 
-3. **Document driver configuration**: If you modify the **microsoft.sparkodbc.ini** file, document the change in your team's runbook so others are aware of the customization.
+2. **Escribe el siguiente contenido:**
 
-4. **Review after driver updates**: When updating the Simba Spark ODBC Driver, verify that your **microsoft.sparkodbc.ini** file is still present, as driver updates may overwrite or remove custom configuration files.
+   ```ini
+   [Driver]
+   MaxCommentLen=2048
+   ```
+
+3. **Guarda el archivo:**
+   - Haz clic en **Archivo > Guardar como**
+
+   - Navega hasta `C:\Program Files\Simba Spark ODBC Driver\`
+
+   - En la lista desplegable **Guardar como tipo**, selecciona **Todos los archivos (_._)** (¡importante!)
+
+   - En el campo **Nombre de archivo**, escribe exactamente: **microsoft.sparkodbc.ini**
+
+   - Haga clic en **Guardar**
+   > [!IMPORTANT]> Asegúrate de seleccionar "Todos los archivos" como tipo de archivo; de lo contrario, el Bloc de notas lo guardará como microsoft.sparkodbc.ini.txt y no funcionará.
+
+4. **Comprueba que el archivo se creó correctamente:**
+   - Abre el Explorador de archivos y ve a `C:\Program Files\Simba Spark ODBC Driver\`
+   - Confirma que ves un archivo llamado **microsoft.sparkodbc.ini** (no microsoft.sparkodbc.ini.txt)
+
+5. **Cierra y reinicia Tabular Editor** para que los cambios surtan efecto.
 
 ---
 
-## Additional Resources
+## Lista de comprobación rápida para la solución de problemas
 
-- **[Databricks Knowledge Base - Unity Catalog Metadata Error](https://kb.databricks.com/unity-catalog/error-when-trying-to-load-a-dataset-after-integrating-unity-catalog-metadata-with-power-bi)**: Official Databricks documentation covering this issue and the MaxCommentLen parameter.
-- **[Simba Spark ODBC Driver for Azure Databricks](https://learn.microsoft.com/azure/databricks/integrations/odbc/download)**: Download the latest version of the Simba Spark ODBC Driver for Databricks.
-- **[Import Table Wizard](xref:importing-tables)**: Learn more about using the Import Table Wizard in Tabular Editor.
+- [ ] **Confirma los mensajes de error**: Verifica que el error de conexión se produce durante el Asistente para importar tablas al conectarte a Databricks.
+- [ ] **Comprueba la longitud de los comentarios de las columnas**: Consulta tus tablas de Databricks para identificar cualquier comentario de columna que supere los 512 caracteres.
+- [ ] **Verifica la instalación del controlador**: Confirma que el Simba Spark ODBC Driver esté instalado y localiza su carpeta de instalación.
+- [ ] **Comprueba la ubicación del archivo .ini**: Asegúrate de que el archivo **microsoft.sparkodbc.ini** esté en la carpeta correcta (el directorio de instalación del controlador, no un subdirectorio).
+- [ ] **Verifica la extensión del archivo**: Confirma que el archivo se llama **microsoft.sparkodbc.ini** y no **microsoft.sparkodbc.ini.txt**.
+- [ ] **Reinicia Tabular Editor**: Los cambios de configuración solo surten efecto después de reiniciar la aplicación.
 
 ---
 
-## Still Need Help?
+## Buenas prácticas de prevención
 
-If the steps above don't resolve your issue:
+1. **Establece directrices sobre la longitud de los comentarios**: Si gestionas metadatos de Databricks, considera establecer directrices para mantener los comentarios de las columnas por debajo de 512 caracteres y lograr la máxima compatibilidad.
 
-1. **Verify ODBC driver version**: Ensure you have the latest version of the Simba Spark ODBC Driver installed. You can download it from the [Microsoft Azure Databricks ODBC download page](https://learn.microsoft.com/azure/databricks/integrations/odbc/download).
+2. **Prueba las importaciones cuanto antes**: Al configurar un nuevo entorno de Databricks, prueba la importación de tablas en Tabular Editor al principio del proceso de desarrollo para identificar cualquier problema de metadatos.
 
-2. **Check ODBC Data Source configuration**: Open the Windows ODBC Data Source Administrator (odbcad32.exe) and verify that your Databricks connection is configured correctly.
+3. **Documenta la configuración del controlador**: Si modificas el archivo **microsoft.sparkodbc.ini**, documenta el cambio en el runbook de tu equipo para que los demás conozcan la personalización.
 
-3. **Test with a simpler table**: Try importing a Databricks table that you know has short column comments (or no comments) to confirm the connection works in general.
+4. **Revisa después de actualizar el controlador**: Al actualizar el Simba Spark ODBC Driver, comprueba que tu archivo **microsoft.sparkodbc.ini** siga presente, ya que las actualizaciones del controlador pueden sobrescribir o eliminar archivos de configuración personalizados.
 
-4. **Review ODBC driver logs**: The Simba Spark ODBC Driver can generate detailed logs. Refer to the driver documentation for instructions on enabling logging, which may provide additional diagnostic information.
+---
 
-5. **Contact support**: Reach out to Tabular Editor support with:
-   - The full error message text
-   - Your Databricks connection details (excluding credentials)
-   - The Simba Spark ODBC Driver version
-   - Whether you have created the microsoft.sparkodbc.ini file and its contents
+## Recursos adicionales
+
+- **[Databricks Knowledge Base - Unity Catalog Metadata Error](https://kb.databricks.com/unity-catalog/error-when-trying-to-load-a-dataset-after-integrating-unity-catalog-metadata-with-power-bi)**: Documentación oficial de Databricks que cubre este problema y el parámetro MaxCommentLen.
+- **[Simba Spark ODBC Driver for Azure Databricks](https://learn.microsoft.com/azure/databricks/integrations/odbc/download)**: Descarga la versión más reciente del Simba Spark ODBC Driver para Azure Databricks.
+- **[Asistente para importar tablas](xref:importing-tables)**: Obtén más información sobre cómo usar el Asistente para importar tablas en Tabular Editor.
+
+---
+
+## ¿Aún necesitas ayuda?
+
+Si los pasos anteriores no resuelven el problema:
+
+1. **Verifica la versión del controlador ODBC**: Asegúrate de tener instalada la versión más reciente del controlador ODBC Simba Spark. Puedes descargarlo desde la [página de descarga del ODBC de Microsoft Azure Databricks](https://learn.microsoft.com/azure/databricks/integrations/odbc/download).
+
+2. **Comprueba la configuración del Data source ODBC**: Abre el Administrador de Data source ODBC de Windows (odbcad32.exe) y verifica que la conexión a Databricks esté configurada correctamente.
+
+3. **Prueba con una tabla más sencilla**: Intenta importar una tabla de Databricks que sabes que tiene comentarios de columna cortos (o sin comentarios) para confirmar que la conexión funciona en general.
+
+4. **Revisa los registros del controlador ODBC**: El Simba Spark ODBC Driver puede generar registros detallados. Consulta la documentación del controlador para obtener instrucciones sobre cómo habilitar el registro, ya que puede aportar información de diagnóstico adicional.
+
+5. **Contacta con soporte**: Ponte en contacto con el soporte de Tabular Editor con:
+   - El texto completo de los mensajes de error
+   - Los detalles de tu conexión a Databricks (sin incluir credenciales)
+   - La versión del Simba Spark ODBC Driver
+   - Si has creado el archivo microsoft.sparkodbc.ini y su contenido

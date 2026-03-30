@@ -108,9 +108,9 @@ and not ReferencedBy.Roles.Any()
 ```json
 {
     "ID": "FKCOLUMNS_HIDDEN",
-    "Name": "Hide foreign key columns",
+    "Name": "隐藏外键列",
     "Category": null,
-    "Description": "Columns used on the Many side of a relationship should be hidden.",
+    "Description": "关系的“多”端使用的列应隐藏。",
     "Severity": 1,
     "Scope": "Column",
     "Expression": "Model.Relationships.Any(FromColumn = outerIt) and not IsHidden and not Table.IsHidden",

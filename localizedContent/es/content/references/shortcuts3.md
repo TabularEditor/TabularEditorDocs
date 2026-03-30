@@ -1,6 +1,6 @@
 ---
 uid: shortcuts3
-title: Keyboard shortcuts Tabular Editor 3
+title: Atajos de teclado de Tabular Editor 3
 author: Daniel Otykier
 updated: 2021-09-08
 applies_to:
@@ -17,156 +17,156 @@ applies_to:
           full: true
 ---
 
-# Keyboard shortcuts
+# Atajos de teclado
 
 ## General
 
-| Command                    | Shortcut     |
-| -------------------------- | ------------ |
-| New model                  | Ctrl+N       |
-| Open file                  | Ctrl+O       |
-| Load model from a database | Ctrl+Shift+O |
-| Save current item          | Ctrl+S       |
-| Save all                   | Ctrl+Shift+S |
-| Close Document             | Ctrl+W       |
-| Exit                       | Alt+F4       |
-| Deployment wizard          | Ctrl+Shift+D |
-| Switch In-Focus Window     | Ctrl+Tab     |
+| Comando                               | Atajo        |
+| ------------------------------------- | ------------ |
+| Nuevo modelo                          | Ctrl+N       |
+| Abrir archivo                         | Ctrl+O       |
+| Cargar modelo desde una base de datos | Ctrl+Shift+O |
+| Guardar el elemento actual            | Ctrl+S       |
+| Guardar todo                          | Ctrl+Shift+S |
+| Cerrar documento                      | Ctrl+W       |
+| Salir                                 | Alt+F4       |
+| Asistente de implementación           | Ctrl+Shift+D |
+| Cambiar la ventana activa             | Ctrl+Tab     |
 
-## Edit
+## Editar
 
-| Command    | Shortcut |
-| ---------- | -------- |
-| Select All | Ctrl+A   |
-| Copy       | Ctrl+C   |
-| Cut        | Ctrl+X   |
-| Paste      | Ctrl+V   |
-| Undo       | Ctrl+Z   |
-| Redo       | Ctrl+Y   |
-| Find       | Ctrl+F   |
-| Replace    | Ctrl+H   |
+| Comando          | Atajo  |
+| ---------------- | ------ |
+| Seleccionar todo | Ctrl+A |
+| Copiar           | Ctrl+C |
+| Cortar           | Ctrl+X |
+| Pegar            | Ctrl+V |
+| Deshacer         | Ctrl+Z |
+| Rehacer          | Ctrl+Y |
+| Buscar           | Ctrl+F |
+| Reemplazar       | Ctrl+H |
 
-## Data modelling
+## Modelado de Data model
 
-| Command                         | Shortcut  |
-| ------------------------------- | --------- |
-| Properties                      | F4        |
-| Edit object name / batch rename | F2        |
-| Batch rename children           | Shift+F2  |
-| View dependencies               | Shift+F12 |
-| Make invisible                  | Ctrl+I    |
-| Make visible                    | Ctrl+U    |
-| Create measure                  | Alt+1     |
-| Create calculated column        | Alt+2     |
-| Create hierarchy                | Alt+3     |
-| Create data column              | Alt+4     |
-| Create table                    | Alt+5     |
-| Create calculated table         | Alt+6     |
-| Create calculation group        | Alt+7     |
-| Accept expression change        | F5        |
+| Comando                                           | Atajo de teclado |
+| ------------------------------------------------- | ---------------- |
+| Propiedades                                       | F4               |
+| Editar el nombre del objeto / renombrar por lotes | F2               |
+| Renombrar elementos secundarios por lotes         | Shift+F2         |
+| Mostrar dependencias                              | Shift+F12        |
+| Ocultar                                           | Ctrl+I           |
+| Mostrar                                           | Ctrl+U           |
+| Crear medida                                      | Alt+1            |
+| Crear columna calculada                           | Alt+2            |
+| Crear jerarquía                                   | Alt+3            |
+| Crear columna de datos                            | Alt+4            |
+| Crear tabla                                       | Alt+5            |
+| Crear tabla calculada                             | Alt+6            |
+| Crear grupo de cálculo                            | Alt+7            |
+| Aceptar cambio de expresión                       | F5               |
 
-## TOM Explorer
+## Explorador TOM
 
-| Command                                         | Shortcut                      |
-| ----------------------------------------------- | ----------------------------- |
-| Navigate up or down                             | Up / Down arrow               |
-| Expand / collapse current node                  | Right / Left arrow            |
-| Expand / collapse current node and all subnodes | Ctrl+Right / Left arrow       |
-| Expand / collapse entire tree                   | Ctrl+Shift+Right / Left arrow |
-| Toggle measures                                 | Ctrl+1                        |
-| Toggle columns                                  | Ctrl+2                        |
-| Toggle hierarchies                              | Ctrl+3                        |
-| Toggle partitions                               | Ctrl+4                        |
-| Toggle display folders                          | Ctrl+5                        |
-| Toggle hidden objects                           | Ctrl+6                        |
-| Toggle info columns                             | Ctrl+7                        |
-| Navigate back                                   | Alt+Left arrow                |
-| Navigate forward                                | Alt+Right arrow               |
+| Comando                                                 | Atajo                                        |
+| ------------------------------------------------------- | -------------------------------------------- |
+| Navegar hacia arriba o hacia abajo                      | Flecha arriba / abajo                        |
+| Expandir / contraer el nodo actual                      | Flecha derecha / izquierda                   |
+| Expandir / contraer el nodo actual y todos los subnodos | Ctrl+Flecha derecha / Flecha izquierda       |
+| Expandir / contraer todo el árbol                       | Ctrl+Shift+Flecha derecha / Flecha izquierda |
+| Mostrar/ocultar medidas                                 | Ctrl+1                                       |
+| Mostrar/ocultar columnas                                | Ctrl+2                                       |
+| Mostrar/ocultar jerarquías                              | Ctrl+3                                       |
+| Mostrar/ocultar particiones                             | Ctrl+4                                       |
+| Mostrar/ocultar carpetas de visualización               | Ctrl+5                                       |
+| Mostrar/ocultar objetos ocultos                         | Ctrl+6                                       |
+| Mostrar/ocultar columnas de información                 | Ctrl+7                                       |
+| Navegar hacia atrás                                     | Alt+Flecha izquierda                         |
+| Navegar hacia adelante                                  | Alt+Flecha derecha                           |
 
-## Text/code editing (general)
+## Edición de texto/código (general)
 
-| Command         | Shortcut       |
-| --------------- | -------------- |
-| Cut line        | Ctrl+L         |
-| Delete line     | Ctrl+Shift+L   |
-| Copy line       | Ctrl+Shift+T   |
-| Transpose lines | Ctrl+T         |
-| Duplicate line  | Ctrl+D         |
-| Lowercase line  | Ctrl+U         |
-| Uppercase line  | Ctrl+Shift+U   |
-| Move lines up   | Alt+Up arrow   |
-| Move lines down | Alt+Down arrow |
+| Comando                         | Atajo             |
+| ------------------------------- | ----------------- |
+| Cortar línea                    | Ctrl+L            |
+| Eliminar línea                  | Ctrl+Shift+L      |
+| Copiar línea                    | Ctrl+Shift+T      |
+| Transponer líneas               | Ctrl+T            |
+| Duplicar línea                  | Ctrl+D            |
+| Convertir la línea a minúsculas | Ctrl+U            |
+| Convertir la línea a mayúsculas | Ctrl+Shift+U      |
+| Mover líneas hacia arriba       | Alt+Flecha arriba |
+| Mover líneas hacia abajo        | Alt+Flecha abajo  |
 
-## DAX code
+## Código DAX
 
-| Command                                     | Shortcut                               |
-| ------------------------------------------- | -------------------------------------- |
-| Go to definition                            | F12                                    |
-| Peek definition                             | Alt+F12                                |
-| Refactor                                    | Ctrl+R                                 |
-| Show auto-complete                          | Ctrl+Space                             |
-| Show calltip                                | Ctrl+Shift+Space                       |
-| Format DAX                                  | F6                                     |
-| Format DAX (Short lines) | Shift+F6                               |
-| Comment lines                               | Ctrl+K                                 |
-| Uncomment lines                             | Ctrl+U                                 |
-| Toggle comments                             | Ctrl+/                                 |
-| Collapse all foldable regions               | Ctrl+Alt+[   |
-| Expand all foldable regions                 | Ctrl+Alt+]   |
-| Toggle all foldable regions state           | Ctrl+Alt+;                             |
-| Collapse foldable region                    | Ctrl+Shift+[ |
-| Expand  foldable region                     | Ctrl+Shift+] |
-| Toggle foldable region state                | Ctrl+Shift+;                           |
-| Delete reference or words                   | Ctrl+Backspace or Ctrl+Delete          |
-| Expand Selection                            | Ctrl+Shift+E                           |
+| Comando                                              | Atajo                                  |
+| ---------------------------------------------------- | -------------------------------------- |
+| Ir a definición                                      | F12                                    |
+| Ver la definición                                    | Alt+F12                                |
+| Refactorizar                                         | Ctrl+R                                 |
+| Mostrar autocompletado                               | Ctrl+Space                             |
+| Mostrar sugerencia de parámetros                     | Ctrl+Shift+Space                       |
+| Formatear DAX                                        | F6                                     |
+| Dar formato a DAX (líneas cortas) | Shift+F6                               |
+| Comentar líneas                                      | Ctrl+K                                 |
+| Descomentar líneas                                   | Ctrl+U                                 |
+| Alternar comentarios                                 | Ctrl+/                                 |
+| Contraer todas las regiones plegables                | Ctrl+Alt+[   |
+| Expandir todas las regiones plegables                | Ctrl+Alt+]   |
+| Alternar el estado de todas las regiones plegables   | Ctrl+Alt+;                             |
+| Contraer región plegable                             | Ctrl+Shift+[ |
+| Expandir región plegable                             | Ctrl+Shift+] |
+| Alternar estado de la región plegable                | Ctrl+Shift+;                           |
+| Eliminar referencia o palabras                       | Ctrl+Retroceso o Ctrl+Supr             |
+| Expandir la selección                                | Ctrl+Mayús+E                           |
 
-## DAX Query
+## Consulta DAX
 
-| Command                                    | Shortcut               |
-| ------------------------------------------ | ---------------------- |
-| Execute query                              | F5                     |
-| Execute selection                          | Shift+F5               |
-| Apply                                      | F7                     |
-| Apply & Sync           | Shift+F7               |
-| Apply Selection                            | F8                     |
-| Apply Selection & Sync | Shift+F8               |
-| Show Code Actions                          | Ctrl+. |
+| Comando                         | Atajo                  |
+| ------------------------------- | ---------------------- |
+| Ejecutar consulta               | F5                     |
+| Ejecutar la selección           | Mayús+F5               |
+| Aplicar                         | F7                     |
+| Aplicar y sincronizar           | Mayús+F7               |
+| Aplicar selección               | F8                     |
+| Aplicar selección y sincronizar | Mayús+F8               |
+| Mostrar acciones de código      | Ctrl+. |
 
-## DAX Script
+## Script DAX
 
-| Command                        | Shortcut |
-| ------------------------------ | -------- |
-| Apply script                   | F5       |
-| Apply selection                | F8       |
-| Apply script and save model    | Shift+F5 |
-| Apply selection and save model | Shift+F8 |
+| Comando                               | Atajo    |
+| ------------------------------------- | -------- |
+| Aplicar script                        | F5       |
+| Aplicar selección                     | F8       |
+| Aplicar script y guardar el modelo    | Shift+F5 |
+| Aplicar selección y guardar el modelo | Shift+F8 |
 
-## DAX Debugger
+## Depurador de DAX
 
-| Command                                                 | Shortcut  |
-| ------------------------------------------------------- | --------- |
-| Step over                                               | F10       |
-| Step back                                               | Shift+F10 |
-| Step in                                                 | F11       |
-| Step out                                                | Shift+F11 |
-| Next row (innermost row context)     | F9        |
-| Previous row (innermost row context) | Shift+F9  |
+| Comando                                                          | Atajo     |
+| ---------------------------------------------------------------- | --------- |
+| Pasar por encima                                                 | F10       |
+| Retroceder                                                       | Shift+F10 |
+| Entrar                                                           | F11       |
+| Salir                                                            | Shift+F11 |
+| Fila siguiente (contexto de fila más interna) | F9        |
+| Fila anterior (contexto de fila más interna)  | Shift+F9  |
 
 ## C# Script
 
-| Command    | Shortcut |
-| ---------- | -------- |
-| Run script | F5       |
+| Comando         | Atajo |
+| --------------- | ----- |
+| Ejecutar script | F5    |
 
-# Customizing Shortcuts
+# Personalización de atajos
 
-Tabular Editor 3 allows for the customization of shortcuts by rebinding existing or adding new shortcuts.
+Tabular Editor 3 permite personalizar atajos reasignando los existentes o agregando nuevos.
 
-Setting shortcuts can be done through **Tools -> Preferences -> Keyboard** and locating the command that should have a shortcut binding and setting the binding in the menu.
-Shortcuts can be set for many different parts of Tabular Editor 3 including [Macros](xref:creating-macros) to have C# scripts available at the fingertips.
+Los atajos se pueden configurar desde **Herramientas -> Preferencias -> Teclado**; localiza el comando al que quieres asignar un atajo y establece la asignación en el menú.
+Puedes configurar atajos para muchas partes de Tabular Editor 3, incluidas las [Macros](xref:creating-macros), para tener C# Scripts siempre al alcance.
 
-![Dax Script](~/content/assets/images/SetShortcuts.png)
+![Script Dax](~/content/assets/images/SetShortcuts.png)
 
-1. Keyboard Menu in Preferences
-2. Find command that should have a shortcut
-3. Set shortcut by holding desired shortcuts key and use "Assign Shortcut"
+1. Menú de teclado en las preferencias
+2. Busca el comando al que quieres asignar un atajo
+3. Configura el atajo manteniendo pulsada la tecla de acceso directo deseada y usa "Asignar atajo"

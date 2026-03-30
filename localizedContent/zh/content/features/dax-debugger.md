@@ -83,6 +83,8 @@ DAX调试器会分析你模型中的 DAX 代码，并生成适用于评估子表
 - 评估语境
 - 调用树
 
+<a name="locals"></a>
+
 ## 局部变量
 
 此视图会列出当前执行范围内的列、度量值和变量，并显示它们的值。 它还会显示当前正在调试的子表达式的值。 当你单步切换到其他子表达式，或评估语境发生变化时，此列表中的值会自动更新。 **局部变量值始终在调用树中当前选定的项上求值**。
@@ -152,6 +154,8 @@ DAX调试器会分析你模型中的 DAX 代码，并生成适用于评估子表
 注意，当你在树中导航时，**Locals** 视图中的值会随之更新。 你也可以将光标悬停在表达式上，右键单击并选择 **Step into selection** 选项（Ctrl+B），进入某个子表达式。
 
 ![Step into selection](~/content/assets/images/debugger-step-into-selection.png)
+
+<a name="scalar-predicates"></a>
 
 ## 标量谓词
 

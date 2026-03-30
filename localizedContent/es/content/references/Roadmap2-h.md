@@ -33,7 +33,7 @@ Consulta también [esta incidencia](https://github.com/TabularEditor/TabularEdit
 
 ## Arquitectura de complementos de Tabular Editor / API pública para desarrolladores
 
-Quienes prefieren crear scripts de modelos tabulares con C# ya pueden usar TOMWrapper.dll desde hoy, en lugar de usar directamente la API TOM de Analysis Services. Esto aporta algunas ventajas. Por ejemplo, el espacio de nombres TOMWrapper facilita el trabajo con perspectivas y traducciones, gracias a los métodos y propiedades disponibles.
+Quienes prefieren crear scripts de modelos tabulares con C# ya pueden usar TOMWrapper.dll desde hoy, en lugar de usar directamente la API TOM de Analysis Services. Por ejemplo, el espacio de nombres TOMWrapper facilita el trabajo con perspectivas y traducciones, gracias a los métodos y propiedades disponibles.
 
 Yendo un paso más allá, sería interesante exponer más funcionalidades de Tabular Editor a los desarrolladores:
 

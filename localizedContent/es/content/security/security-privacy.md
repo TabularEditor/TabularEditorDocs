@@ -55,30 +55,30 @@ En lo que sigue, "datos del modelo" se refiere a los registros de datos reales a
 
 Dado que se requiere que el usuario tenga privilegios administrativos en la instancia de Analysis Services o en el Workspace de Power BI al que se está conectando, el usuario, por definición, también tendrá acceso a todo el contenido de datos de la base de datos de Analysis Services o del Dataset de Power BI. Tabular Editor solo permite recuperar datos a través de la biblioteca cliente AMO mencionada anteriormente. Tabular Editor 3 ofrece funcionalidades para explorar y consultar los datos del modelo. Independientemente de la técnica que se utilice para acceder a los datos, **Tabular Editor solo almacena los datos recuperados en la memoria local. Tabular Editor no recopila, publica, comparte, transfiere ni hace públicos de ningún otro modo los datos del modelo obtenidos a través de la herramienta**. Si un usuario decide copiar o exportar los resultados de consultas obtenidos a través de Tabular Editor, es su responsabilidad tratar los datos copiados o exportados de acuerdo con el nivel de confidencialidad de esos datos. Esto no difiere de cuando un usuario se conecta a la base de datos de Analysis Services o al Dataset de Power BI mediante herramientas cliente como Excel o Power BI; en ese caso, también tendrá la opción de copiar los resultados de la consulta.
 
-### AI Assistant
+### Asistente de IA
 
-Tabular Editor 3 includes an optional AI Assistant for chat-based semantic model development. The AI Assistant is an optional module that the user selects during installation. If you choose not to install the module, no AI-related code is present on the machine and none of the behavior described in this section applies. The AI Assistant uses a **bring-your-own-key** model. You provide an API key from a supported AI provider (OpenAI, Anthropic, Azure OpenAI or any OpenAI-compatible endpoint). No built-in API key is included and Tabular Editor does not provide or intermediate any AI service.
+Tabular Editor 3 incluye un Asistente de IA opcional para desarrollar modelos semánticos a través de un chat. El Asistente de IA es un módulo opcional que el usuario selecciona durante la instalación. Si eliges no instalar el módulo, no habrá ningún código relacionado con la IA en el equipo y no se aplicará nada de lo descrito en esta sección. El Asistente de IA usa un modelo **bring-your-own-key**. Proporcionas una clave de API de un proveedor de IA compatible (OpenAI, Anthropic, Azure OpenAI o cualquier punto de conexión compatible con OpenAI). No se incluye ninguna clave de API integrada y Tabular Editor no proporciona ni intermedia ningún servicio de IA.
 
-**Data flow.** All communication between the AI Assistant and the AI provider happens directly from the client machine to the provider API. No data passes through Tabular Editor servers. The data sent depends on the actions you perform in the chat and is scoped to the following categories, each requiring explicit user consent before any data is transmitted:
+**Flujo de datos.** Toda la comunicación entre el Asistente de IA y el proveedor de IA se realiza directamente desde el equipo cliente hasta la API del proveedor. Ningún dato pasa por los servidores de Tabular Editor. Los datos enviados dependen de las acciones que realices en el chat y se limitan a las siguientes categorías, cada una de las cuales requiere tu consentimiento explícito antes de que se transmita cualquier dato:
 
-| Consent Category | Data Sent to AI Provider                                                          |
-| ---------------- | --------------------------------------------------------------------------------- |
-| Model metadata   | Table and column schemas, measure definitions and other structural model metadata |
-| Query data       | DAX query results and data samples                                                |
-| Read documents   | Content from open documents such as DAX scripts and DAX queries                   |
-| Modify documents | Requests to make changes to open documents                                        |
-| Edit BPA rules   | Best Practice Analyzer rule definitions                                           |
-| Read macros      | Macro definitions from the user macro library                                     |
+| Categoría de consentimiento | Datos enviados al proveedor de IA                                                                 |
+| --------------------------- | ------------------------------------------------------------------------------------------------- |
+| Metadatos del modelo        | Esquemas de tablas y columnas, definiciones de medidas y otros metadatos estructurales del modelo |
+| Datos de consulta           | Resultados de consultas DAX y muestras de datos                                                   |
+| Lectura de documentos       | Contenido de documentos abiertos, como scripts DAX y consultas DAX                                |
+| Modificar documentos        | Solicitudes para realizar cambios en los documentos abiertos                                      |
+| Editar reglas del BPA       | Definiciones de reglas del Best Practice Analyzer                                                 |
+| Lectura de macros           | Definiciones de macros de la biblioteca de macros del usuario                                     |
 
-**Consent management.** The AI Assistant prompts for consent the first time it needs access to each data category. You choose the duration of your consent: single request, current session, the current model only, or always. You can review and revoke consents at any time under **Tools > Preferences > AI Assistant > AI Consents**. Per-model consents for query data and model metadata are stored in the model user options (.tmuo) file. Global "always" consents are stored in the local Preferences.json file.
+**Gestión del consentimiento.** El Asistente de IA solicita tu consentimiento la primera vez que necesita acceder a cada categoría de datos. Puedes elegir la duración de tu consentimiento: una sola solicitud, la sesión actual, solo el modelo actual o siempre. Puedes revisar y revocar los consentimientos en cualquier momento en **Herramientas > Preferencias > Asistente de IA > Consentimientos de IA**. Los consentimientos por modelo para datos de consulta y metadatos del modelo se almacenan en el archivo de opciones de usuario del modelo (.tmuo). Los consentimientos globales de "siempre" se almacenan en el archivo de preferencias local Preferences.json.
 
-**API key storage.** API keys are stored encrypted on the local machine in the Preferences.json file. If the AI module is not loaded (for example because it was excluded during installation or disabled by policy), any previously stored API key configuration is cleared automatically.
+**Almacenamiento de claves de API.** Las claves de API se almacenan cifradas en el equipo local, en el archivo de preferencias Preferences.json. Si el módulo de IA no se carga (por ejemplo, porque se excluyó durante la instalación o se deshabilitó mediante una directiva), cualquier configuración de claves de API almacenada anteriormente se borra automáticamente.
 
-**Conversation storage.** Conversations are stored locally on the client machine in `%LocalAppData%\TabularEditor3\AI\Conversations\`. No conversation data is sent to Tabular Editor servers.
+**Almacenamiento de conversaciones.** Las conversaciones se almacenan localmente en el equipo cliente en `%LocalAppData%\TabularEditor3\AI\Conversations\`. No se envían datos de conversaciones a los servidores de Tabular Editor.
 
-**Disabling the AI Assistant.** The AI Assistant is an optional component. You can exclude it during installation, disable it under **Tools > Preferences > AI Assistant**, or enforce the `DisableAi` [policy](xref:policies) through the Windows registry.
+**Deshabilitación del Asistente de IA.** El Asistente de IA es un componente opcional. Puedes excluirlo durante la instalación, deshabilitarlo en **Herramientas > Preferencias > Asistente de IA** o aplicar la [directiva](xref:policies) `DisableAi` mediante el registro de Windows.
 
-**Penetration testing.** A separate penetration test of the AI Assistant has been performed. The report is available in our [Trust Center](https://trust.tabulareditor.com/).
+**Pruebas de penetración.** Se ha realizado una prueba de penetración independiente del Asistente de IA. El Report está disponible en nuestro [Trust Center](https://trust.tabulareditor.com/).
 
 ### Solicitudes web
 
@@ -97,7 +97,7 @@ Tabular Editor puede realizar solicitudes a recursos en línea (URL web) solo en
   - https://australiaeast.api.daxoptimizer.com/api
   - https://eastus.api.daxoptimizer.com/api
   - https://westeurope.api.daxoptimizer.com/api
-- **AI Assistant.** When the AI Assistant is configured and in use, Tabular Editor 3 sends requests directly to the configured AI provider API. The endpoints depend on the selected provider (for example `https://api.openai.com` for OpenAI, `https://api.anthropic.com` for Anthropic, or a user-specified endpoint for Azure OpenAI and custom providers). Only data for which the user has granted consent is included in these requests. See the [AI Assistant](#ai-assistant) section above for details on data categories and consent management.
+- **Asistente de IA.** Cuando el Asistente de IA está configurado y en uso, Tabular Editor 3 envía solicitudes directamente a la API del proveedor de IA configurado. Los endpoints dependen del proveedor seleccionado (por ejemplo, `https://api.openai.com` para OpenAI, `https://api.anthropic.com` para Anthropic o el endpoint que especifiques para Azure OpenAI y proveedores personalizados). En estas solicitudes solo se incluye la información para la que hayas dado tu consentimiento. Consulta la sección [Asistente de IA](#ai-assistant) anterior para ver los detalles sobre las categorías de datos y la gestión del consentimiento.
 - **Importación de reglas de prácticas recomendadas.** Tabular Editor incluye una funcionalidad que permite especificar una dirección URL desde la que obtener una lista de reglas de prácticas recomendadas en formato JSON. Este tipo de solicitud solo descarga los datos JSON desde la URL; no se transmite ningún dato a la URL.
 - **Uso de C# Scripts.** Tabular Editor permite a los usuarios escribir y ejecutar código en C# con fines de automatización. Este tipo de script puede conectarse a recursos en línea mediante características del lenguaje C# y el entorno de ejecución de .NET. El usuario es siempre responsable de garantizar que el código ejecutado no provoque ningún intercambio de datos no deseado. Tabular Editor ApS no se hace responsable de ningún daño, pérdida o filtración causados por el uso, en general, de la funcionalidad de C# Script. Tabular Editor nunca ejecutará C# Scripts sin una acción explícita del usuario.
 
@@ -111,7 +111,7 @@ Para permitir el tráfico de las solicitudes web mencionadas anteriormente, debe
 - DAX Formatter (solo Tabular Editor 2.x): **https://www.daxformatter.com**
 - Importar reglas de prácticas recomendadas / C# Scripts: depende del contexto
 - Optimizador de DAX: puntos de conexión enumerados arriba.
-- AI Assistant: Depends on the configured provider (e.g. **https://api.openai.com**, **https://api.anthropic.com**, or user-specified Azure OpenAI / custom endpoints)
+- Asistente de IA: Depende del proveedor configurado (p. ej., **https://api.openai.com**, **https://api.anthropic.com** o endpoints de Azure OpenAI o personalizados especificados por el usuario)
 
 > [!NOTE]
 > Un administrador del sistema puede aplicar determinadas [directivas](xref:policies), que pueden usarse para deshabilitar algunas o todas las funciones mostradas en la lista anterior.

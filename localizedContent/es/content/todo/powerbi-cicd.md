@@ -1,10 +1,10 @@
 ---
 uid: powerbi-cicd
-title: Power BI CI/CD with Azure DevOps and Tabular Editor
+title: CI/CD para Power BI con Azure DevOps y Tabular Editor
 author: Daniel Otykier
 updated: 2021-10-04
 ---
 
-# Power BI CI/CD with Azure DevOps and Tabular Editor
+# CI/CD para Power BI con Azure DevOps y Tabular Editor
 
-(WIP)
+(En curso)

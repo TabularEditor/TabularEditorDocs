@@ -76,6 +76,8 @@ Tabular Editor 3 激活后，您可以在“帮助”菜单中选择“关于 Ta
 > [!IMPORTANT]
 > 按上述方式删除许可证密钥后，在该计算机上的当前用户重新输入新的许可证密钥之前，将无法使用该产品。
 
+<a name="registry-details"></a>
+
 #### 注册表详细信息
 
 Tabular Editor 3 使用 Windows 注册表来存储激活详细信息。
@@ -120,22 +122,22 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
    ```
 
-   To include the **AI Assistant** feature, specify the `ADDLOCAL` property. The AI Assistant is not installed by default.
+   要包含 **AI Assistant** 功能，请在 `ADDLOCAL` 属性中指定它。 AI Assistant 默认不安装。
 
    ```powershell
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
    ```
 
-   | MSI Feature   | Description                       | Installed by default              |
-   | ------------- | --------------------------------- | --------------------------------- |
-   | `MainFeature` | Core Tabular Editor 3 application | Yes (Required) |
-   | `AIAssistant` | AI Assistant for Tabular Editor 3 | No                                |
+   | MSI 功能        | 说明                                  | 默认安装  |
+   | ------------- | ----------------------------------- | ----- |
+   | `MainFeature` | Tabular Editor 3 的核心应用程序            | 是（必需） |
+   | `AIAssistant` | 适用于 Tabular Editor 3 的 AI Assistant | 否     |
 
-   > [!NOTE]> When using `ADDLOCAL`, you must include `MainFeature` alongside any optional features. Specifying only `AIAssistant` without `MainFeature` results in an incomplete installation.
+   > [!NOTE]> 使用 `ADDLOCAL` 时，除任何可选功能外，还必须包含 `MainFeature`。 只指定 `AIAssistant` 而不包含 `MainFeature` 会导致安装不完整。
 
 你也可以使用 `/package` 替代 `/i`。 将 `<version>` 替换为实际的版本字符串。 如适用，请使用 ARM64 MSI。
 
-For details on available MSI command-line options, see the official Microsoft documentation:
+有关可用的 MSI 命令行选项的详细信息，请参阅 Microsoft 官方文档：
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
 
 2. **在应用程序首次启动之前**，**将许可证写入注册表**：

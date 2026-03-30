@@ -1,10 +1,10 @@
 ---
 uid: powerbi-cicd
-title: Power BI CI/CD with Azure DevOps and Tabular Editor
+title: 借助 Azure DevOps 和 Tabular Editor 实现 Power BI 的 CI/CD
 author: Daniel Otykier
 updated: 2021-10-04
 ---
 
-# Power BI CI/CD with Azure DevOps and Tabular Editor
+# 借助 Azure DevOps 和 Tabular Editor 实现 Power BI 的 CI/CD
 
-(WIP)
+（进行中）

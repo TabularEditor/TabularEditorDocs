@@ -56,7 +56,7 @@ Tabular Editor 3.18.0 引入了一项名为 **代码操作** 的新功能。 此
 
 当你将鼠标指针悬停在代码操作菜单中的某个操作上时，工具提示会显示该操作的更多信息。 点击“了解更多”链接，即可查看该操作对应的知识库 (KB) 文章。
 
-![Code Action Tooltip](~/content/assets/images/features/code-action-tooltip.png)
+![代码操作工具提示](~/content/assets/images/features/code-action-tooltip.png)
 
 ## 代码操作指示器
 
@@ -73,6 +73,8 @@ Tabular Editor 3.18.0 引入了一项名为 **代码操作** 的新功能。 此
 例如在下面的截图中，**为变量添加 '_' 前缀** 操作可以应用到文档中的所有出现位置（即所有变量），而不只是光标下的 `totalSales` 变量：
 
 ![代码操作：所有出现位置](~/content/assets/images/features/code-action-all-occurrences.png)
+
+<a name="list-of-code-actions"></a>
 
 ## 代码操作列表
 
@@ -99,7 +101,7 @@ Tabular Editor 3.18.0 引入了一项名为 **代码操作** 的新功能。 此
 | DI013 | [使用除法运算符而不是 DIVIDE](xref:DI013)      | 当 [`DIVIDE`](https://dax.guide/DIVIDE) 的第二个参数是非零常量时，使用除法运算符更高效。 示例：<br>`DIVIDE(x, 2)` -> `x / 2`                                                                                                                                                                                                                                                                                                               |
 | DI014 | [用 DIVIDE 替换 IFERROR](xref:DI014)    | 当除法的分母为零时，请使用 [`DIVIDE`](https://dax.guide/DIVIDE) 函数替代 [`IFERROR`](https://dax.guide/IFERROR)，从而返回替代结果。 示例：<br>`IFERROR(x / y, 0)` -> `DIVIDE(x, y, 0)`                                                                                                                                                                                                                                                       |
 | DI015 | [用 DIVIDE 替换 IF](xref:DI015)         | 使用 [`DIVIDE`](https://dax.guide/DIVIDE) 函数代替 [`IF`](https://dax.guide/IF)，可以更方便地检查分母是否为零或空白。 示例：<br>`IF(y <> 0, x / y)` -> `DIVIDE(x, y)`                                                                                                                                                                                                                                                                      |
-| DI016 | Use correct UDF syntax               | Use correct syntax for User-Defined Function expressions. Example:<br>`(x, y) => x + y`                                                                                                                                                                                                                                                                                        |
+| DI016 | 使用正确的 UDF 语法                         | 为用户定义函数表达式使用正确的语法。 示例：<br>`(x, y) => x + y`                                                                                                                                                                                                                                                                                                                                                                    |
 
 ### 可读性
 

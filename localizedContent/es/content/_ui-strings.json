@@ -20,5 +20,20 @@
   "footer.technicalSupport": "Soporte técnico",
   "footer.privacyPolicy": "Política de privacidad y de cookies",
   "footer.termsConditions": "Términos y condiciones",
-  "footer.licenseTerms": "Términos de licencia"
+  "footer.licenseTerms": "Términos de licencia",
+  "appliesTo": "Se aplica a: ",
+  "availableSince": "Disponible desde",
+  "availableIn": "Disponible en",
+  "inThisArticle": "En este artículo",
+  "searchResultsCount": "{count} resultados de \"{query}\"",
+  "searchNoResults": "No hay resultados para \"{query}\"",
+  "tocFilter": "Filtrar por título",
+  "nextArticle": "Siguiente",
+  "prevArticle": "Anterior",
+  "themeLight": "Claro",
+  "themeDark": "Oscuro",
+  "themeAuto": "Automático",
+  "changeTheme": "Cambiar tema",
+  "copy": "Copiar",
+  "downloadPdf": "Descargar PDF"
 }

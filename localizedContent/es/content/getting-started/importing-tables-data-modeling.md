@@ -21,13 +21,17 @@ applies_to:
 
 Este artículo describe cómo usar el [Asistente de importación de tablas](#table-import-wizard) de Tabular Editor 3 para agregar nuevas tablas al modelo. También hay una sección sobre cómo [actualizar el esquema de la tabla](#updating-table-schema) de una tabla existente. Por último, explicamos cómo usar la [herramienta de diagramas](#working-with-diagrams) para definir y editar relaciones entre tablas.
 
+<a name="table-import-wizard"></a>
+
 ## Asistente de importación de tablas
 
 [!include[importing-tables1](../features/import-tables.partial.md)]
 
+<a name="working-with-diagrams"></a>
+
 # Trabajar con diagramas
 
-En Tabular Editor 3, los **diagramas** son documentos que puedes usar para visualizar y editar las relaciones entre las tablas del modelo. Puedes crear tantos diagramas como quieras para visualizar áreas concretas de tu modelo. Un diagrama se puede guardar como un archivo independiente. Consulta <xref:supported-files#diagram-file-te3diag> para obtener más información.
+En Tabular Editor 3, los **diagramas** son documentos que puedes usar para visualizar y editar las relaciones entre las tablas del modelo. Puedes crear tantos diagramas como quieras para visualizar áreas concretas de tu modelo. Consulta <xref:supported-files#diagram-file-te3diag> para obtener más información. Un diagrama se puede guardar como un archivo independiente.
 
 > [!NOTE]
 > Recomendamos crear varios diagramas pequeños en lugar de unos pocos diagramas grandes. Cuando un diagrama contiene más de unas 20 tablas, enseguida se vuelve abrumador y difícil de entender.
@@ -50,6 +54,8 @@ Para agregar más tablas al diagrama, vuelve a usar la técnica anterior o haz c
   ![Add Related Tables](~/content/assets/images/add-related-tables.png)
 
 Antes de continuar, reorganiza y cambia el tamaño de las tablas en el diagrama según tus preferencias, o usa la función **Diagrama > Organizar automáticamente** para que Tabular Editor 3 distribuya las tablas automáticamente.
+
+<a name="modifying-relationships-using-the-diagram"></a>
 
 ## Modificar relaciones con el diagrama
 

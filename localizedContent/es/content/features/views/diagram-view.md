@@ -79,14 +79,14 @@ Al hacer clic con el botón derecho en cualquier parte de la Vista de diagrama, 
 - **Agregar tablas...**: Abre un cuadro de diálogo para agregar manualmente tablas adicionales al diagrama.
 - **Agregar tablas que filtran esta tabla**: Incorpora automáticamente las tablas relacionadas que filtran la tabla actual.
 - **Agregar todas las tablas relacionadas**: Carga todas las tablas que comparten una relación con la tabla seleccionada.
-- **Edit relationship**: Opens the relationship editor for the selected relationship. Only visible when a relationship is selected.
-- **Invert relationship**: Swaps the from and to sides of the selected relationship. Only visible when a relationship is selected.
-- **Activate relationship**: Activates an inactive relationship. Only visible when an inactive relationship is selected.
-- **Deactivate relationship**: Deactivates an active relationship. Only visible when an active relationship is selected.
+- **Editar relación**: Abre el editor de relaciones para la relación seleccionada. Solo se muestra cuando se selecciona una relación.
+- **Invertir relación**: Intercambia los lados de origen y destino de la relación seleccionada. Solo se muestra cuando se selecciona una relación.
+- **Activar relación**: Activa una relación inactiva. Solo se muestra cuando se selecciona una relación inactiva.
+- **Desactivar relación**: Desactiva una relación activa. Solo se muestra cuando se selecciona una relación activa.
 - **Ajustar a la página**: Ajusta el zoom del diagrama para que quepan todas las tablas visibles.
-- **Auto-Arrange**: Automatically arrange tables into a star schema.
+- **Organizar automáticamente**: Organiza las tablas automáticamente en un esquema en estrella.
 - **Quitar del diagrama**: Oculta la tabla seleccionada de la vista actual.
-- **Delete relationship**: Deletes the selected relationship from the model. Only visible when a relationship is selected.
+- **Eliminar relación**: Elimina la relación seleccionada del modelo. Solo se muestra cuando se selecciona una relación.
 
 ### Indicadores de relación
 

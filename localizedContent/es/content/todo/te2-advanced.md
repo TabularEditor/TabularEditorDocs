@@ -1,11 +1,11 @@
-## View Table Partitions
+## Ver particiones de la tabla
 
 TODO
 
-## DAX Expression Editor
+## Editor de expresiones DAX
 
 TODO
 
-## Script Editor
+## Editor de scripts
 
-TODO (For now, please view [this article](../how-tos/Advanced-Scripting.md))
+TODO (Por ahora, revisa [este artículo](../how-tos/Advanced-Scripting.md))

@@ -61,7 +61,7 @@ Además de las propiedades `Name`, `Expression` y `Hidden`, puedes usar la vista
 Para agregar una columna calculada, haz clic con el botón derecho en la tabla a la que quieras agregarla y elige **Create > Calculated Column** (ALT+2). Ponle un nombre a la columna y edita su expresión DAX con el **Editor de expresiones**, igual que hicimos con las medidas más arriba.
 
 > [!IMPORTANT]
-> Esta opción no está disponible de forma predeterminada cuando te conectas a un modelo de Power BI Desktop. Esto se debe a las [limitaciones de la compatibilidad de Power BI Desktop con herramientas externas](xref:desktop-limitations). Haz clic en el enlace para obtener más información.
+> Esta opción no está disponible de forma predeterminada cuando estás conectado a un modelo de Power BI Desktop. Esto se debe a las [limitaciones de compatibilidad de Power BI Desktop con herramientas externas](xref:desktop-limitations). Haz clic en el vínculo para obtener más información.
 
 > [!NOTE]
 > Cuando se haya cambiado la expresión DAX de una columna calculada, debes actualizar la tabla en la que se encuentra la columna antes de poder usarla en un Report. Consulta <xref:refresh-preview-query#refreshing-data> para obtener más información.
@@ -71,7 +71,7 @@ Para agregar una columna calculada, haz clic con el botón derecho en la tabla a
 Para agregar una tabla calculada, haz clic con el botón derecho en el modelo o en la carpeta "Tablas" y elige **Crear > Tabla calculada** (ALT+6). Asigna un nombre a la tabla y edita su expresión DAX con el **Editor de expresiones**, igual que hicimos antes con las medidas. Observa que las columnas de la tabla cambian automáticamente cuando haces un cambio en la expresión DAX. Esto puede provocar efectos en cascada si otras expresiones DAX hacen referencia a la tabla o si se usan columnas en una jerarquía.
 
 > [!IMPORTANT]
-> Esta opción no está disponible de forma predeterminada cuando estás conectado a un modelo de Power BI Desktop. Esto se debe a las [limitaciones de compatibilidad de Power BI Desktop con herramientas externas](xref:desktop-limitations). Haz clic en el vínculo para obtener más información.
+> Esta opción no está disponible de forma predeterminada cuando te conectas a un modelo de Power BI Desktop. Esto se debe a las [limitaciones de la compatibilidad de Power BI Desktop con herramientas externas](xref:desktop-limitations). Haz clic en el enlace para obtener más información.
 
 > [!NOTE]
 > Cuando cambias la expresión DAX de una tabla calculada, tienes que actualizar la tabla antes de poder usarla en un Report. Consulta <xref:refresh-preview-query#refreshing-data> para obtener más información.

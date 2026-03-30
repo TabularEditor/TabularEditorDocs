@@ -35,7 +35,7 @@
 - @kb.bpa-remove-unused-data-sources - 移除未使用的数据源定义
 - @kb.bpa-specify-application-name - 在连接字符串中设置应用程序名称以便监控
 - @kb.bpa-powerbi-latest-compatibility - 保持对最新 Power BI 功能的兼容性
-- @kb.bpa-udf-use-compound-names - Ensure UDF names don't conflict with future built-in DAX functions
+- @kb.bpa-udf-use-compound-names - 确保 UDF 名称不会与未来的内置 DAX 函数发生冲突
 
 ## 代码操作
 

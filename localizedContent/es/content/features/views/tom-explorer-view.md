@@ -20,7 +20,7 @@ applies_to:
 
 # Uso del Explorador TOM en Tabular Editor 3
 
-The TOM Explorer is your main window for interacting with the objects of your data model. Objects such as tables, columns, measures, security groups etc. are all displayed in a hierarchical structure. Un modelo de datos tabular se representa mediante el llamado [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), y los metadatos de su TOM son los que se muestran en el Explorador TOM.
+El Explorador TOM es tu ventana principal para interactuar con los objetos de tu Data model. Objetos como tablas, columnas, medidas, grupos de seguridad, etc. se muestran en una estructura jerárquica. Un modelo de datos tabular se representa mediante el llamado [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions), y los metadatos de su TOM son los que se muestran en el Explorador TOM.
 
 El Explorador TOM consta de dos áreas principales: en primer lugar, los objetos del modelo de datos y, en segundo lugar, la barra de menús, que permite filtrar y cambiar lo que se presenta en la ventana principal.
 
@@ -55,15 +55,15 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
   Allows you to organize the table into a Table group within the TOM Explorer for easier model navigation. Esta opción solo está disponible para tablas.
 
 - **Make invisible**:
-  Marks the object as not visible in client tools. La tabla sigue formando parte del modelo, pero está oculta para los autores de informes. Alternative use the shortcut **Ctrl+I** to hide the object.
+  Marks the object as not visible in client tools. La tabla sigue formando parte del modelo, pero está oculta para los autores de informes. Como alternativa, usa el atajo **Ctrl+I** para ocultar el objeto.
 
 - **Shown in perspectives**:
   Enables or disables the table's inclusion in one or more perspectives. Las perspectivas limitan lo que los usuarios finales pueden ver en herramientas como Power BI.
 
-- **Cambio de nombre por lotes**: Al seleccionar más de un objeto, puede cambiarles el nombre por lotes mediante sustitución de cadenas o expresiones regulares. The shortcut for batch rename is **F2**.
+- **Cambio de nombre por lotes**: Al seleccionar más de un objeto, puede cambiarles el nombre por lotes mediante sustitución de cadenas o expresiones regulares. El atajo para renombrar por lotes es **F2**.
 
 - **Batch rename children...**:
-  Enables bulk renaming of all child objects under the table or display folder using regex or string replacement rules. Can also be accessed with the shortcut **Shift+F2**.
+  Enables bulk renaming of all child objects under the table or display folder using regex or string replacement rules. También se puede acceder mediante el atajo **Shift+F2**.
 
 - **Duplicate**:
   Creates a copy of the selected table, including all its columns, measures and partitions. También existe para todos los demás objetos del Explorador TOM.
@@ -72,7 +72,7 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
   Marks the table as a date table, enabling time intelligence features. Requiere que la tabla contenga una columna de fecha válida.
 
 - **Show dependencies**:
-  Visualizes dependencies between the selected table and other model objects. Can also be accessed via shortcut **Shift+F12**.
+  Visualizes dependencies between the selected table and other model objects. También se puede acceder mediante el atajo **Shift+F12**.
 
 - **Export script**:
   Exports the selected objects as a TMSL or TMDL script for use in deployment or source control.
@@ -84,65 +84,65 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
   Standard clipboard operations. Úsalas para mover, duplicar o quitar objetos del modelo.
 
 - **Properties**:
-  Opens the Properties pane for the selected object. Shortcut: **Alt+Enter**. Used to inspect and edit metadata, expressions, formatting and visibility settings.
+  Opens the Properties pane for the selected object. Atajo: **Alt+Enter**. Úsalo para inspeccionar y editar metadatos, expresiones, formato y configuración de visibilidad.
 
 ### Mostrar columnas de información
 
-El Explorador TOM permite activar o desactivar columnas de información adicional sobre los objetos del modelo de datos. This can be done with the shortcut **Ctrl+7**.
-These extra info also exists in the property window, but allow for a quick view of the Object Type, Format String, Data Type, Expression and Description.
-![Tom Explorer Show Hide Columns](~/content/assets/images/user-interface/TOMExplorerInfoColumns.png)
+El Explorador TOM permite activar o desactivar columnas de información adicional sobre los objetos del modelo de datos. Puedes hacerlo con el atajo **Ctrl+7**.
+Esta información adicional también está disponible en la ventana de propiedades, pero permite ver rápidamente el tipo de objeto, la cadena de formato, el tipo de datos, la expresión y la descripción.
+![Explorador TOM: mostrar/ocultar columnas](~/content/assets/images/user-interface/TOMExplorerInfoColumns.png)
 
 ## Barra de herramientas del Explorador TOM
 
-The toolbar allows you to show and hide different types of objects, toggle perspectives and languages and search for specific objects in the data model.
+La barra de herramientas te permite mostrar y ocultar distintos tipos de objetos, alternar perspectivas e idiomas y buscar objetos específicos en el Data model.
 ![Barra de herramientas del Explorador TOM](~/content/assets/images/user-interface/TOMExplorerToolbar.png)
 
-1. **Show/Hide Measures**
-   Toggle the visibility of measures within tables.
-   **Shortcut:** **Ctrl+1**
+1. **Mostrar/Ocultar medidas**
+   Alterna la visibilidad de las medidas dentro de las tablas.
+   **Atajo:** **Ctrl+1**
 
-2. **Show/Hide Columns**
-   Toggle the visibility of columns within tables.
-   **Shortcut:** **Ctrl+2**
+2. **Mostrar/Ocultar columnas**
+   Alterna la visibilidad de las columnas dentro de las tablas.
+   **Atajo:** **Ctrl+2**
 
-3. **Show/Hide Hierarchies**
-   Toggle whether hierarchies are shown in the TOM Explorer.
-   **Shortcut:** **Ctrl+3**
+3. **Mostrar/Ocultar jerarquías**
+   Alterna la visualización de las jerarquías en el Explorador TOM.
+   **Atajo:** **Ctrl+3**
 
-4. **Show/Hide Partitions**
-   Controls whether partitions are visible for tables.
-   **Shortcut:** **Ctrl+4**
+4. **Mostrar/Ocultar particiones**
+   Controla si las particiones son visibles en las tablas.
+   **Atajo:** **Ctrl+4**
 
-5. **Show/Hide Calendars**
-   Controls whether calendars are visible.
-   **Shortcut:** **Ctrl+8**
+5. **Mostrar/Ocultar calendarios**
+   Controla si los calendarios son visibles.
+   **Atajo:** **Ctrl+8**
 
-6. **Show/Hide Display Folders**
-   Enables or disables the display of folder organization within tables.
-   **Shortcut:** **Ctrl+5**
+6. **Mostrar/Ocultar carpetas de visualización**
+   Activa o desactiva la visualización de la organización por carpetas dentro de las tablas.
+   **Atajo:** **Ctrl+5**
 
-7. **Group User-Defined Functions by Namespace**
-   When enabled, DAX User-Defined Functions are grouped hierarchically by [namespace](xref:udfs#namespaces), rather than being shown as a flat list.
+7. **Agrupar funciones definidas por el usuario por espacio de nombres**
+   Cuando está habilitado, las funciones DAX definidas por el usuario se agrupan jerárquicamente por [espacio de nombres](xref:udfs#namespaces), en lugar de mostrarse como una lista plana.
 
-8. **Show/Hide Table Groups**
-   Toggle the visibility of table groups in the TOM Explorer tree. This provides quick access to the same setting found in **Tools > Preferences** without leaving the explorer.
+8. **Mostrar/ocultar grupos de tablas**
+   Activa o desactiva la visibilidad de los grupos de tablas en el árbol del Explorador TOM. Proporciona acceso rápido a la misma preferencia que se encuentra en **Herramientas > Preferencias** sin salir del explorador.
 
-9. **Show/Hide Hidden Objects**
-   Toggles whether hidden objects are shown.
-   **Shortcut:** **Ctrl+6**
+9. **Mostrar/ocultar objetos ocultos**
+   Activa o desactiva si se muestran los objetos ocultos.
+   **Acceso directo:** **Ctrl+6**
 
-10. **Show/Hide Info Columns**
-    Shows or hides metadata columns, such as data types or object status.
-    **Shortcut:** **Ctrl+7**
+10. **Mostrar/ocultar columnas de información**
+    Muestra u oculta columnas de metadatos, como los tipos de datos o el estado de los objetos.
+    **Acceso directo:** **Ctrl+7**
 
-11. **Perspective Selector**
-    Drop-down to choose a specific perspective. Solo se mostrarán en el Explorador TOM los objetos de la perspectiva seleccionada.
+11. **Selector de perspectiva**
+    Lista desplegable para seleccionar una perspectiva específica. Solo se mostrarán en el Explorador TOM los objetos de la perspectiva seleccionada.
 
-12. **Language Selector**
-    Allows switching between different languages for model metadata localization.
+12. **Selector de idioma**
+    Permite cambiar entre diferentes idiomas para la localización de los metadatos del modelo.
 
-13. **Collapse All**
-    Collapses all nodes in the TOM Explorer tree view.
+13. **Contraer todo**
+    Contrae todos los nodos de la vista en árbol del Explorador TOM.
 
-14. **Search Bar**
-    Provides real-time filtering and navigation within the TOM Explorer. Escribe para buscar en todos los objetos visibles del modelo.
+14. **Barra de búsqueda**
+    Proporciona filtrado y navegación en tiempo real dentro del Explorador TOM. Escribe para buscar en todos los objetos visibles del modelo.

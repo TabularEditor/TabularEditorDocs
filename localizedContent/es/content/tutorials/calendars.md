@@ -158,11 +158,13 @@ Las columnas asociadas tienen el mismo comportamiento de filtro que la columna p
 
 ![Panel de columnas asociadas en el Editor de calendario](~/content/assets/images/tutorials/calendar-associated-columns.png)
 
-#### Sort By Columns
+#### Columnas de «Ordenar por»
 
-When a Primary time unit column has a **Sort By** column defined, the Sort By column is automatically treated as an associated column. This ensures that both columns receive the same filter behavior during time intelligence calculations, aligning with how Analysis Services processes calendar configurations.
+Cuando una columna de unidad de tiempo principal tiene definida una columna **Ordenar por**, la columna **Ordenar por** se considera automáticamente una columna asociada. Esto garantiza que ambas columnas tengan el mismo comportamiento de filtrado durante los cálculos de inteligencia temporal, en consonancia con la manera en que Analysis Services procesa las configuraciones de calendario.
 
-For example, if you map a `MonthName` column to "Month of Year" and `MonthName` is sorted by a `MonthNumber` column, the `MonthNumber` column is automatically associated with the time unit. You don't need to manually add the Sort By column to the Associated Columns panel—the Calendar Editor handles this automatically.
+Por ejemplo, si asignas una columna `MonthName` a "Mes del año" y `MonthName` se ordena según una columna `MonthNumber`, la columna `MonthNumber` se asocia automáticamente a la unidad de tiempo. No tienes que añadir manualmente la columna Ordenar por al panel Columnas asociadas: el Editor de calendario se encarga de ello automáticamente.
+
+<a name="time-related-columns"></a>
 
 ### Columnas relacionadas con el tiempo
 

@@ -1,7 +1,7 @@
 ---
 uid: composite-model-measure-formatting
-title: Measure Format Properties in Composite Models
-author: Support Team
+title: Propiedades de formato de medidas en modelos compuestos
+author: Equipo de soporte
 updated: 2026-01-26
 applies_to:
   products:
@@ -17,149 +17,149 @@ applies_to:
           full: true
 ---
 
-# Measure Format Properties in Composite Models
+# Propiedades de formato de medidas en modelos compuestos
 
-When working with composite models that use a Live connection to Analysis Services (SSAS/AAS), you may encounter validation errors or confusing behavior when editing measure formatting properties. A common error message is:
+Al trabajar con modelos compuestos que usan una conexión en vivo a Analysis Services (SSAS/AAS), es posible que te encuentres con errores de validación o comportamientos confusos al editar las propiedades de formato de una medida. Un mensaje de error habitual es:
 
-**"A measure is not allowed to have both FormatString and Format Expression."**
+**"Una medida no puede tener a la vez FormatString y Format Expression."**
 
-This article explains why this occurs and how to resolve it.
-
----
-
-## Understanding the Issue
-
-Composite models combine local Power BI tables with remote tables from an SSAS/AAS semantic model via a Live connection. In this architecture, measure formatting can be ambiguous:
-
-- **FormatString**: A static format definition (e.g., "0.00" for currency).
-- **Format String Expression**: A dynamic format string evaluated at query time.
-
-The error occurs because the model ends up with both a static format and a dynamic format expression simultaneously—a state that is not allowed by the Tabular Object Model (TOM).
-
-### Why this happens
-
-In composite models:
-
-1. **Ownership ambiguity**: Remote measures are owned by the remote SSAS/AAS model. When you edit formatting in Tabular Editor, you may be trying to override remote metadata, which creates conflicts.
-
-2. **Metadata synchronization**: When a Format String Expression is present on a measure, the FormatString often appears as "Custom" to indicate dynamic formatting is active. If you then try to set a static FormatString simultaneously, both properties become populated, triggering the validation error.
-
-3. **Persistence constraints**: Changes to remote measure metadata may not persist cleanly because the remote model retains authoritative control. This leaves the local composite model in an inconsistent state.
+En este artículo se explica por qué ocurre y cómo resolverlo.
 
 ---
 
-## Root Causes
+## Comprender el problema
 
-### Remote measure formatting
+Los modelos compuestos combinan tablas locales de Power BI con tablas remotas de un modelo semántico de SSAS/AAS mediante una conexión en vivo. En esta arquitectura, el formato de las medidas puede ser ambiguo:
 
-If the problematic measure is defined in the remote SSAS/AAS model:
+- **FormatString**: Una definición de formato estática (p. ej., "0.00" o "0,00" para moneda).
+- **Format String Expression**: Una expresión de cadena de formato dinámica que se evalúa en el momento de la consulta.
 
-- Formatting should be managed in the source model, not in the Power BI composite model.
-- Attempting to override remote measure formatting in Power BI can result in both FormatString and Format String Expression being populated, leading to the validation error.
+El error se produce porque el modelo acaba teniendo a la vez un formato estático y una expresión de formato dinámica, un estado que el Tabular Object Model (TOM) no permite.
 
-### Script or automation setting both properties
+### Por qué sucede
 
-- If you are using C# scripts, Power Query transformations, or BPA rules to apply formatting, ensure they target only one approach per measure (either static or dynamic, not both).
+En los modelos compuestos:
 
-### Calculation groups with format expressions
+1. **Ambigüedad de propiedad**: las medidas remotas pertenecen al modelo SSAS/AAS remoto. Cuando editas el formato en Tabular Editor, puede que estés intentando sobrescribir los metadatos remotos, lo que genera conflictos.
 
-- Calculation groups can define Format String Expressions that override measure formats. If a calc item's format expression is active, the UI may still display the measure's static FormatString, creating the appearance of both being set.
+2. **Sincronización de metadatos**: cuando una medida tiene una expresión de cadena de formato dinámica, FormatString suele mostrarse como "Custom" para indicar que el formato dinámico está activo. Si después intentas establecer un FormatString estático a la vez, ambas propiedades se rellenan y se desencadena el error de validación.
 
-### Version or environment constraints
-
-- Dynamic format strings for measures have limited availability and may not be fully supported in certain Power BI versions or deployment modes (Report Server).
-- If you are on Power BI Desktop prior to 2025 or Power BI Report Server prior to January 2025, dynamic measure formats may not be supported.
+3. **Limitaciones de persistencia**: los cambios en los metadatos de las medidas remotas pueden no persistir correctamente porque el modelo remoto conserva el control definitivo. Esto deja el modelo compuesto local en un estado inconsistente.
 
 ---
 
-## Resolution
+## Causas raíz
 
-The solution depends on whether the measure is **remote** (from SSAS/AAS) or **local** (created in the composite model).
+### Formato de medidas remotas
 
-### If the measure is remote (from SSAS/AAS)
+Si la medida problemática está definida en el modelo SSAS/AAS remoto:
 
-This is the most common scenario. Remote measures are owned by the source semantic model.
+- El formato debe gestionarse en el modelo de origen, no en el modelo compuesto de Power BI.
+- Intentar reemplazar el formato de una medida remota en Power BI puede hacer que se rellenen tanto FormatString como la expresión de cadena de formato dinámica, lo que provoca el error de validación.
 
-**Recommended approach:**
+### Script o automatización que establece ambas propiedades
 
-1. **Manage formatting in the source model.** Open SSAS/AAS in SQL Server Management Studio or Tabular Editor connected to the source model, and set the formatting there.
+- Si utilizas C# Script, transformaciones de Power Query o reglas de BPA para aplicar formato, asegúrate de que, por cada medida, solo se use un enfoque (estático o dinámico, pero no ambos).
 
-2. **If report-specific formatting is required,** create a local "wrapper" measure in your Power BI composite model:
+### Grupos de cálculo con expresiones de formato
 
-   - Define a new measure in the local model that references the remote measure.
-   - Apply the desired format string to the wrapper measure.
-   - Use the wrapper measure in your report instead of the remote measure.
+- Los grupos de cálculo pueden definir expresiones de cadena de formato dinámicas que sobrescriben los formatos de las medidas. Si la expresión de formato de un elemento de cálculo está activa, la IU puede seguir mostrando el FormatString estático de la medida, dando la impresión de que ambos están establecidos.
 
-   **Trade-off:** This approach creates duplicates and adds maintenance overhead, but it is the most reliable way to apply report-specific formatting in a Live connection scenario.
+### Limitaciones de versión o entorno
 
-### If the measure is local (created in the composite model)
-
-**For static formatting (most common):**
-
-1. Select the measure in Tabular Editor.
-2. Clear the **Format String Expression** field (set it to empty/null).
-3. Set the measure's **Format String** to the desired static format (e.g., `"0.00%"` for percentage, `"$#,##0.00"` for currency).
-4. Save the model.
-
-**For dynamic formatting:**
-
-1. Select the measure.
-2. Keep or set the **Format String Expression** to your desired DAX expression (this is the only formatting property you should use).
-3. Leave the **Format String** as "Custom" (do not attempt to also set a static format string).
-4. Verify that your environment supports dynamic format strings (Power BI Desktop 2025 or later, or Power BI Report Server January 2025 or later).
+- Los formatos dinámicos para medidas están disponibles de forma limitada y es posible que no sean totalmente compatibles con determinadas versiones de Power BI o modos de implementación (Report Server).
+- Si usas una versión de Power BI Desktop anterior a 2025 o una versión de Power BI Report Server anterior a enero de 2025, es posible que no se admitan los formatos dinámicos de las medidas.
 
 ---
 
-## Quick Troubleshooting Checklist
+## Solución
 
-- [ ] **Determine measure ownership**: Is the measure remote (SSAS/AAS) or local (composite model)?
-- [ ] **Check Format String Expression**: Even if you didn't set it, verify whether it is populated. In the property grid, look for a non-empty "Format String Expression" field.
-- [ ] **Review scripts and rules**: If you use C# scripts or BPA rules to set measure formats, ensure they do not set both FormatString and Format String Expression in the same pass.
-- [ ] **Check calculation groups**: Confirm whether any calculation group items define a Format String Expression that might be overriding or conflicting with the measure's format.
-- [ ] **Verify environment version**: Confirm your Power BI Desktop (2025 or later) or Power BI Report Server (January 2025 or later) version, especially if using dynamic formats.
+La solución depende de si la medida es **remota** (de SSAS/AAS) o **local** (creada en el modelo compuesto).
+
+### Si la medida es remota (de SSAS/AAS)
+
+Este es el escenario más común. Las medidas remotas pertenecen al modelo semántico de origen.
+
+**Enfoque recomendado:**
+
+1. **Gestiona el formato en el modelo de origen.** Abre SSAS/AAS en SQL Server Management Studio o en Tabular Editor conectado al modelo de origen y configura el formato allí.
+
+2. **Si se requiere un formato específico del Report,** crea una medida "wrapper" local en tu modelo compuesto de Power BI:
+
+   - Define una nueva medida en el modelo local que haga referencia a la medida remota.
+   - Aplica la cadena de formato deseada a la medida "wrapper".
+   - Usa la medida "wrapper" en tu Report en lugar de la medida remota.
+
+   **Inconveniente:** Este enfoque crea duplicados y aumenta el esfuerzo de mantenimiento, pero es la forma más fiable de aplicar un formato específico del Report en un escenario de conexión en vivo.
+
+### Si la medida es local (creada en el modelo compuesto)
+
+**Para formato estático (lo más habitual):**
+
+1. Selecciona la medida en Tabular Editor.
+2. Vacía el campo **Expresión de cadena de formato dinámica** (déjalo en blanco o en null).
+3. Establece el **Format String** de la medida en el formato estático deseado (p. ej., `"0.00%"` para porcentaje, `"$#,##0.00"` para moneda).
+4. Guarda el modelo.
+
+**Para formato dinámico:**
+
+1. Selecciona la medida.
+2. Mantén o establece la **expresión de cadena de formato dinámica** en la expresión DAX que quieras (es la única propiedad de formato que deberías usar).
+3. Deja el **Format String** como "Custom" (no intentes establecer también una cadena de formato estática).
+4. Comprueba que tu entorno admite cadenas de formato dinámicas (Power BI Desktop 2025 o posterior, o Power BI Report Server de enero de 2025 o posterior).
 
 ---
 
-## Step-by-Step Examples
+## Lista rápida de comprobación para solucionar problemas
 
-### Example 1: Fixing a remote measure with static formatting
+- [ ] **Determina la propiedad de la medida**: ¿La medida es remota (SSAS/AAS) o local (modelo compuesto)?
+- [ ] **Comprueba la expresión de cadena de formato dinámica**: Aunque no la hayas configurado, verifica si está rellenada. En la cuadrícula de propiedades, busca un campo "Expresión de cadena de formato dinámica" que no esté vacío.
+- [ ] **Revisa scripts y reglas**: Si usas C# Scripts o reglas BPA para establecer formatos de medidas, asegúrate de que no establezcan FormatString y la expresión de cadena de formato dinámica a la vez en la misma ejecución.
+- [ ] **Comprueba los grupos de cálculo**: Confirma si algún elemento de un grupo de cálculo define un campo "Expresión de cadena de formato dinámica" que pueda estar reemplazando o entrando en conflicto con el formato de la medida.
+- [ ] **Verifica la versión del entorno**: Confirma la versión de Power BI Desktop (2025 o posterior) o de Power BI Report Server (enero de 2025 o posterior), especialmente si usas formatos dinámicos.
 
-**Scenario:** You have a "Sales Amount" measure in the remote SSAS model, and you want it formatted as currency in your Power BI report.
+---
 
-**Steps:**
+## Ejemplos paso a paso
 
-1. In Tabular Editor, connect directly to the SSAS/AAS model (not to the Power BI composite model).
-2. Navigate to the "Sales Amount" measure.
-3. Set its **Format String** to `"$#,##0.00"`.
-4. Save the model back to SSAS/AAS.
-5. Return to Tabular Editor connected to the Power BI composite model; the formatting should now be inherited.
+### Ejemplo 1: Corregir una medida remota con formato estático
 
-If formatting still does not appear correct in the report, create a local wrapper measure (see below).
+**Escenario:** Tienes una medida "Sales Amount" en el modelo SSAS remoto y quieres darle formato de moneda en tu Report de Power BI.
 
-### Example 2: Creating a wrapper measure for report-specific formatting
+**Pasos:**
 
-**Scenario:** You need the Sales Amount measure from SSAS formatted differently in this specific report.
+1. En Tabular Editor, conéctate directamente al modelo SSAS/AAS (no al modelo compuesto de Power BI).
+2. Ve a la medida "Sales Amount".
+3. Establece su **Format String** en `"$#,##0.00"`.
+4. Vuelve a guardar el modelo en SSAS/AAS.
+5. Vuelve a Tabular Editor con conexión al modelo compuesto de Power BI; ahora el formato debería heredarse.
 
-**Steps:**
+Si el formato sigue sin verse correcto en el Report, crea una medida envolvente local (consulta más abajo).
 
-1. In Tabular Editor, connect to the Power BI composite model.
-2. Create a new measure in a local table (or in the measure table if you have one):
+### Ejemplo 2: Crear una medida envolvente para un formato específico del Report
+
+**Escenario:** Necesitas que la medida Sales Amount de SSAS tenga un formato diferente en este Report específico.
+
+**Pasos:**
+
+1. En Tabular Editor, conéctate al modelo compuesto de Power BI.
+2. Crea una nueva medida en una tabla local (o en la tabla de medidas, si tienes una):
    ```
    Sales Amount (Formatted) = [Sales Amount]
    ```
-3. Set the **Format String** of the new measure to your desired format (e.g., `"$#,##0.00"`).
-4. Save the model.
-5. Update your report visuals to use the wrapper measure instead of the original remote measure.
+3. Establece la **Cadena de formato** de la nueva medida en el formato que desees (p. ej., `\"$#,##0.00\"`).
+4. Guarda el modelo.
+5. Actualiza los Visuales del Report para usar la medida envolvente en lugar de la medida remota original.
 
-### Example 3: Setting local measure with dynamic formatting
+### Ejemplo 3: Configurar una medida local con formato dinámico
 
-**Scenario:** You have a local measure in the composite model and want to apply conditional formatting based on a threshold.
+**Escenario:** Tienes una medida local en el modelo compuesto y quieres aplicar formato condicional en función de un umbral.
 
-**Steps:**
+**Pasos:**
 
-1. Select the measure in Tabular Editor.
-2. Ensure **Format String** is empty (do not set a static format).
-3. Set **Format String Expression** to your conditional expression:
+1. Selecciona la medida en Tabular Editor.
+2. Asegúrate de que **Cadena de formato** esté vacía (no establezcas un formato estático).
+3. Establece **Expresión de cadena de formato dinámica** en tu expresión condicional:
    ```dax
    IF(
        [YourMeasure] > 1000,
@@ -167,41 +167,41 @@ If formatting still does not appear correct in the report, create a local wrappe
        "0.00"
    )
    ```
-4. Do **not** also set a static FormatString.
-5. Save the model.
-6. Verify your Power BI version supports dynamic format strings (Desktop 2025+ or PBIRS Jan 2025+).
+4. No establezcas tampoco un FormatString estático.
+5. Guarda el modelo.
+6. Comprueba que tu versión de Power BI admite cadenas de formato dinámicas (Desktop 2025+ o PBIRS enero de 2025+).
 
 ---
 
-## Prevention Best Practices
+## Buenas prácticas de prevención
 
-1. **Decide on formatting strategy early**: Determine whether each measure should use static or dynamic formatting and stick to one approach per measure.
+1. **Define la estrategia de formato cuanto antes**: Decide si cada medida debe usar formato estático o dinámico y mantén un único enfoque por medida.
 
-2. **Audit remote measures**: Before editing formatting in a composite model, check whether the measure is remote. If so, manage formatting in the source SSAS/AAS model.
+2. **Audita las medidas remotas**: Antes de editar el formato en un modelo compuesto, comprueba si la medida es remota. Si es así, gestiona el formato en el modelo SSAS/AAS de origen.
 
-3. **Use version-appropriate features**: If you're using dynamic format strings, ensure all relevant environments (Desktop, Report Server, Analysis Services) support them for your Power BI version.
+3. **Usa funciones compatibles con tu versión**: Si usas cadenas de formato dinámicas, asegúrate de que todos los entornos relevantes (Desktop, Report Server, Analysis Services) las admiten en tu versión de Power BI.
 
-4. **Script defensively**: If you write C# scripts or BPA rules to format measures, separate the logic so you only set one for mat property per measure, and include a guard to check whether the other property is already populated.
+4. **Escribe scripts de forma defensiva**: Si escribes C# Scripts o reglas de BPA para dar formato a medidas, separa la lógica para que solo establezcas una propiedad de formato por medida e incluye una validación para comprobar si la otra propiedad ya está establecida.
 
-5. **Clear Format String Expression when switching to static**: If a measure previously used dynamic formatting, always clear the Format String Expression before attempting to set a static FormatString.
-
----
-
-## Additional Resources
-
-- **[Microsoft Docs - Measure Format Strings](https://learn.microsoft.com/en-us/analysis-services/tmsl/measures-object-tmsl)**: Official documentation on measure formatting in the Tabular Object Model.
-- **[Composite Models in Power BI](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-composite-models)**: Understanding Live connections and composite model architecture.
-- **[Dynamic Format Strings](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-dynamic-format-strings)**: Feature availability and usage guidance.
+5. **Borra la expresión de cadena de formato dinámica al pasar a formato estático**: Si una medida usaba antes formato dinámico, borra siempre la expresión de cadena de formato dinámica antes de intentar establecer un FormatString estático.
 
 ---
 
-## Still Need Help?
+## Recursos adicionales
 
-If the steps above don't resolve your issue:
+- **[Microsoft Docs - Cadenas de formato de medidas](https://learn.microsoft.com/en-us/analysis-services/tmsl/measures-object-tmsl)**: Documentación oficial sobre el formato de medidas en el Tabular Object Model.
+- **[Modelos compuestos en Power BI](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-composite-models)**: Cómo funcionan las conexiones en vivo y la arquitectura de modelos compuestos.
+- **[Cadenas de formato dinámicas](https://learn.microsoft.com/en-us/power-bi/create-reports/desktop-dynamic-format-strings)**: Disponibilidad de la funcionalidad y guía de uso.
 
-1. **Verify the measure is local**: Connect directly to your Power BI file (.pbix) in Tabular Editor to confirm the measure is defined locally, not remotely.
+---
 
-2. **Export diagnostic information**: Run the following Tabular Editor script to audit all measures:
+## ¿Aún necesitas ayuda?
+
+Si los pasos anteriores no resuelven tu problema:
+
+1. **Verifica que la medida es local**: Conéctate directamente a tu archivo de Power BI (.pbix) en Tabular Editor para confirmar que la medida está definida localmente, no de forma remota.
+
+2. **Exporta información de diagnóstico**: Ejecuta el siguiente script de Tabular Editor para auditar todas las medidas:
    ```csharp
    var measures = Model.AllMeasures;
    foreach (var m in measures)
@@ -223,4 +223,4 @@ If the steps above don't resolve your issue:
    }
    ```
 
-3. **Contact support**: Reach out with the diagnostic output and your Power BI and Tabular Editor version numbers.
+3. **Contacta con el soporte técnico**: Ponte en contacto y comparte la salida de diagnóstico, así como los números de versión de Power BI y Tabular Editor.

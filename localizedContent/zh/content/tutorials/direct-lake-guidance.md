@@ -50,6 +50,8 @@ applies_to:
 
 或者，确保源中包含所需的列。 如果通过视图添加列，请注意该视图必须在 Fabric Warehouse 或 Lakehouse 中物化，因为 OneLake 上的 Direct Lake 不支持非物化视图。
 
+<a name="collation"></a>
+
 ## 排序规则
 
 使用 **OneLake 上的 Direct Lake** 时，模型的排序规则和导入模式一样，默认不区分大小写。

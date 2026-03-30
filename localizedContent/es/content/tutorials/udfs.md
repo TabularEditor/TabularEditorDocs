@@ -202,6 +202,8 @@ Las UDF aparecen en la vista **Dependencias de DAX** (Shift+F12), mostrando lo s
 
 Cuando seleccionas varias UDFs en el Explorador TOM, puedes usar la opción **Renombrar en lote** (F2) desde el menú contextual de clic derecho para cambiarles el nombre a todas de una sola vez, mediante patrones de búsqueda y sustitución y, opcionalmente, expresiones regulares.
 
+<a name="namespaces"></a>
+
 ### Espacios de nombres
 
 El concepto de "espacio de nombres" no existe en DAX, pero se recomienda nombrar las UDFs de forma que se eviten ambigüedades y quede claro el origen de la UDF. Por ejemplo, `DaxLib.Convert.CelsiusToFahrenheit` (usando '.' como separador de espacios de nombres). Cuando una UDF se nombra así, el Explorador TOM la mostrará en una jerarquía basada en esos nombres. Puedes alternar la visualización de las UDFs por espacio de nombres mediante el botón de alternancia **Agrupar funciones definidas por el usuario por espacio de nombres** de la barra de herramientas situada encima del Explorador TOM (nota: este botón solo es visible cuando trabajas con un modelo con nivel de compatibilidad 1702 o superior).
@@ -220,7 +222,7 @@ En Tabular Editor, las UDFs también tienen una _propiedad_ "Namespace", que te 
 - Usa nombres descriptivos que indiquen claramente el propósito de la función
 - Considera anteponer a las UDF las iniciales de tu organización (por ejemplo, `ACME.CalculateDiscount`)
 - Evita nombres genéricos que puedan entrar en conflicto con futuras funciones de DAX
-- Use compound names with a separator character (`.` or `_`). For example, `Finance.CalcProfit` or `My_CalcProfit`. This prevents your UDF from breaking if Microsoft introduces a built-in DAX function with the same name. See the [built-in BPA rule](xref:kb.bpa-udf-use-compound-names) for more details
+- Usa nombres compuestos con un carácter separador (`.` o `_`). Por ejemplo, `Finance.CalcProfit` o `My_CalcProfit`. Esto evita que tu UDF deje de funcionar si Microsoft introduce una función DAX integrada con el mismo nombre. Consulta la [regla BPA integrada](xref:kb.bpa-udf-use-compound-names) para obtener más detalles
 
 ### Documentación
 

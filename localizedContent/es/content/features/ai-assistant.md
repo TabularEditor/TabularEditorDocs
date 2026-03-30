@@ -1,6 +1,6 @@
 ---
 uid: ai-assistant
-title: AI Assistant
+title: Asistente de IA
 author: Morten Lønskov
 updated: 2026-03-19
 applies_to:
@@ -18,171 +18,171 @@ applies_to:
           full: true
 ---
 
-# AI Assistant
+# Asistente de IA
 
-The AI Assistant is a chat-based interface for AI-assisted semantic model development designed to help you create semantic models faster. With an enterprise-ready design, full control of what is sent to the AI, and built-in consent management, you can use the AI Assistant with confidence. The AI Assistant has undergone independent security penetration testing. For details, visit the [Tabular Editor Trust Center](https://trust.tabulareditor.com). It can explore your model metadata, write and execute DAX queries, generate C# scripts, run Best Practice Analyzer checks, query VertiPaq Analyzer statistics and search the Tabular Editor knowledge base.
+El Asistente de IA es una interfaz de chat para el desarrollo de modelos semánticos asistido por IA, diseñada para ayudarte a crear modelos semánticos con mayor rapidez. Con un diseño preparado para entornos empresariales, control total sobre lo que se envía a la IA y gestión del consentimiento integrada, puedes usar el Asistente de IA con confianza. El Asistente de IA se ha sometido a pruebas de penetración de seguridad independientes. Para más detalles, visita el [Centro de confianza de Tabular Editor](https://trust.tabulareditor.com). Puede explorar los metadatos de tu modelo, escribir y ejecutar consultas DAX, generar C# Scripts, ejecutar comprobaciones del Best Practice Analyzer, consultar estadísticas del Analizador VertiPaq y buscar en la base de conocimientos de Tabular Editor.
 
-The AI Assistant uses a bring-your-own-key model. You provide an API key from one of the supported providers and the assistant runs directly against that provider's API.
+El Asistente de IA utiliza un modelo BYOK de clave aportada por el usuario. Tú proporcionas una clave de API de uno de los proveedores compatibles y el asistente se ejecuta directamente a través de la API de ese proveedor.
 
 > [!NOTE]
-> The AI Assistant is in public preview starting with Tabular Editor 3.26.0. We welcome feedback on the experience as we continue to refine it.
+> El Asistente de IA está en vista previa pública a partir de Tabular Editor 3.26.0. Agradecemos tus comentarios sobre la experiencia mientras seguimos mejorándola.
 
-![AI Assistant First Pane on Open](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
+![Primer panel del Asistente de IA al abrirlo](~/content/assets/images/ai-assistant/ai-assistant-panel-first-open.png)
 
-## Getting Started
+## Primeros pasos
 
-1. Open **Tools > Preferences > AI Assistant**
-2. Select your AI provider and enter your API key
-3. Open the AI Assistant panel from **View > AI Assistant**
-4. Type a message and press **Enter** to start a conversation
+1. Abre **Herramientas > Preferencias > Asistente de IA**
+2. Selecciona tu proveedor de IA e introduce tu clave de API
+3. Abre el panel del Asistente de IA desde **Vista > Asistente de IA**
+4. Escribe mensajes y pulsa **Enter** para iniciar una conversación
 
 > [!TIP]
-> Use our [interactive demo of the AI Assistant](https://demos.tabulareditor.com/psl/of150vcy?) to see how to set up and use it.
+> Usa nuestra [demo interactiva del Asistente de IA](https://demos.tabulareditor.com/psl/of150vcy?) para ver cómo configurarlo y usarlo.
 
 > [!NOTE]
-> API keys are stored encrypted on your local machine.
+> Las claves de API se almacenan cifradas en tu equipo local.
 
-## Supported Providers
+## Proveedores compatibles
 
-Configure your AI provider under **Tools > Preferences > AI Assistant > AI Provider**. Select a provider from the dropdown, enter your API key and optionally override the default model name.
+Configura tu proveedor de IA en **Herramientas > Preferencias > Asistente de IA > Proveedor de IA**. Selecciona un proveedor en el menú desplegable, introduce tu clave de API y, si lo deseas, sobrescribe el nombre del modelo predeterminado.
 
-| Provider                                      | Default Model        | Configuration Required                                           |
-| --------------------------------------------- | -------------------- | ---------------------------------------------------------------- |
-| OpenAI                                        | gpt-4o               | API key. Optional Organization ID and Project ID |
-| Anthropic                                     | claude-sonnet-4-6    | API key                                                          |
-| Azure OpenAI                                  | Deployment-dependent | API key, endpoint URL and deployment name                        |
-| Custom (OpenAI-compatible) | User-specified       | API key and custom endpoint URL                                  |
+| Proveedor                                                | Modelo predeterminado            | Configuración necesaria                                                        |
+| -------------------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------ |
+| OpenAI                                                   | gpt-4o                           | Clave de API. ID opcional de la organización e ID del proyecto |
+| Anthropic                                                | claude-sonnet-4-6                | Clave de API                                                                   |
+| Azure OpenAI                                             | Dependiente de la implementación | Clave de API, URL del punto de conexión y nombre de la implementación          |
+| Personalizado (compatible con OpenAI) | Especificado por el usuario      | Clave de API y URL personalizada del punto de conexión                         |
 
-![AI Assistant Provider Selection](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
+![Selección del proveedor del Asistente de IA en Preferencias](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
 
 ### OpenAI
 
-Select **OpenAI** as the provider and enter your API key. You can optionally specify an Organization ID and Project ID if your OpenAI account uses these. The default model is **gpt-4o**, but you can change it to any model available on your account.
+Selecciona **OpenAI** como proveedor e introduce tu clave de API. Opcionalmente, puedes especificar un ID de organización y un ID de proyecto si tu cuenta de OpenAI los usa. El modelo predeterminado es **gpt-4o**, pero puedes cambiarlo por cualquier modelo disponible en tu cuenta.
 
-![AI Assistant OpenAI Configuration](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
+![Configuración de OpenAI en el Asistente de IA](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
 
 ### Anthropic
 
-Select **Anthropic** as the provider and enter your API key. The default model is **claude-sonnet-4-6**. You can change the model name to any Anthropic model available on your account.
+Selecciona **Anthropic** como proveedor e introduce tu clave de API. El modelo predeterminado es **claude-sonnet-4-6**. Puedes cambiar el nombre del modelo a cualquier modelo de Anthropic disponible en tu cuenta.
 
-![AI Assistant Anthropic Configuration](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
+![Configuración de Anthropic en el Asistente de IA](~/content/assets/images/ai-assistant/ai-assistant-anthropic-config.png)
 
 > [!IMPORTANT]
-> Anthropic enforces input token per minute (ITPM) rate limits based on your account tier. A new API key starts at Tier 1 with 30,000 ITPM for Claude Sonnet 4.x. A single request against a large model can exceed this limit. Purchase $40 or more in API credits to reach Tier 2 (450,000 ITPM). See the [Anthropic rate limits documentation](https://docs.anthropic.com/en/api/rate-limits) for full tier details.
+> Anthropic aplica límites de velocidad de tokens de entrada por minuto (ITPM) en función del nivel de tu cuenta. Una nueva clave de API empieza en el Nivel 1 con 30.000 ITPM para Claude Sonnet 4.x. Una sola solicitud a un modelo grande puede superar este límite. Compra 40 USD o más en créditos de API para alcanzar el Nivel 2 (450.000 ITPM). Consulta la [documentación de límites de velocidad de Anthropic](https://docs.anthropic.com/en/api/rate-limits) para ver todos los detalles de los niveles.
 
 ### Azure OpenAI
 
-Select **Azure OpenAI** as the provider. Enter your API key and the service endpoint URL for your Azure OpenAI resource. Set the model name to match your deployment name.
+Selecciona **Azure OpenAI** como proveedor. Introduce tu clave de API y la URL del punto de conexión del servicio para tu recurso de Azure OpenAI. Configura el nombre del modelo para que coincida con el nombre de tu implementación.
 
-### Custom (OpenAI-compatible)
+### Personalizado (compatible con OpenAI)
 
-The Custom provider option supports local or organizational LLMs that expose an OpenAI-compatible API endpoint. Enter your API key and the custom endpoint URL. This allows you to keep all data within your own infrastructure for data privacy or compliance requirements.
+La opción de proveedor Personalizado admite LLM locales o de tu organización que expongan un punto de conexión de API compatible con OpenAI. Introduce tu clave de API y la URL del punto de conexión personalizado. Esto te permite mantener todos los datos dentro de tu propia infraestructura por motivos de privacidad o requisitos de cumplimiento.
 
-### Using a local or organizational LLM
+### Uso de un LLM local o de tu organización
 
-You can run the AI Assistant against a self-hosted LLM by using the Custom provider. This keeps all data within your own infrastructure — whether that is a model running on your local machine or a centrally hosted LLM within your organization's network. Either way, no data is sent to a third-party cloud provider.
+Puedes ejecutar el Asistente de IA con un LLM autoalojado mediante el proveedor Personalizado. Esto mantiene todos los datos dentro de tu propia infraestructura, ya sea un modelo que se ejecuta en tu equipo local o un LLM alojado de forma centralizada dentro de la red de tu organización. En cualquier caso, no se envía ningún dato a un proveedor de nube de terceros.
 
-Several tools can host models with an OpenAI-compatible API:
+Varias herramientas pueden alojar modelos con una API compatible con OpenAI:
 
-- [Ollama](https://ollama.com) — lightweight CLI for downloading and running models locally
-- [LM Studio](https://lmstudio.ai) — desktop application with a graphical interface for managing and running local models
-- [LocalAI](https://localai.io) — self-hosted, community-driven alternative with broad model support
+- [Ollama](https://ollama.com) — CLI ligera para descargar y ejecutar modelos localmente
+- [LM Studio](https://lmstudio.ai) — aplicación de escritorio con interfaz gráfica para administrar y ejecutar modelos locales
+- [LocalAI](https://localai.io) — alternativa autoalojada, impulsada por la comunidad, con una amplia compatibilidad de modelos
 
-These tools can run on a developer's workstation for individual use, or be deployed on a shared server within your organization to provide a centrally managed LLM endpoint for your team.
+Estas herramientas pueden ejecutarse en la estación de trabajo de un desarrollador para uso individual o implementarse en un servidor compartido dentro de tu organización para ofrecer a tu equipo un punto de conexión de LLM gestionado de forma centralizada.
 
-#### Example: Ollama
+#### Ejemplo: Ollama
 
-1. [Download and install Ollama](https://ollama.com/download)
-2. Pull a model, for example: `ollama pull llama3.1`
-3. Start the Ollama server (it runs automatically after installation, by default on port 11434)
-4. In Tabular Editor, go to **Tools > Preferences > AI Assistant > AI Provider**
-5. Set **Choose provider** to **Custom (OpenAI-compatible)**
-6. Set **Service Endpoint** to `http://localhost:11434/v1`
-7. Set **Model name** to the model you pulled (e.g. `llama3.1`)
-8. The **API Key** field can be set to any non-empty value (e.g. `ollama`) — Ollama does not require authentication, but the field cannot be left blank
+1. [Descarga e instala Ollama](https://ollama.com/download)
+2. Descarga un modelo, por ejemplo: `ollama pull llama3.1`
+3. Inicia el servidor de Ollama (se ejecuta automáticamente tras la instalación y, de forma predeterminada, en el puerto 11434)
+4. En Tabular Editor, ve a **Herramientas > Preferencias > Asistente de IA > Proveedor de IA**
+5. Configura **Elegir proveedor** como **Personalizado (compatible con OpenAI)**
+6. Establece **Punto de conexión del servicio** en `http://localhost:11434/v1`
+7. Establece **Nombre del modelo** con el modelo que descargaste (p. ej., `llama3.1`)
+8. El campo **Clave de API** puede establecerse con cualquier valor no vacío (p. ej., `ollama`) — Ollama no requiere autenticación, pero el campo no puede dejarse en blanco
 
-#### Example: LM Studio
+#### Ejemplo: LM Studio
 
-1. [Download and LM Studio](https://lmstudio.ai/download)
-2. Pull a model. Either through the model search page on the left panel or the CLI. For example: `lms get lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`
-3. Start the LM Studio server. Either through the developer page on the left panel or through the CLI. for example `lms server start`
-   Note, you will have to configure it to use OpenAI compatible mode. Additionally, you may have to change the default context size to be over 100,000 tokens.
-4. In Tabular Editor, go to **Tools > Preferences > AI Assistant > AI Provider**
-5. Set **Choose provider** to **Custom (OpenAI-compatible)**
-6. Set **Service Endpoint** to `http://localhost:1234/v1`
-7. Set **Model name** to the model you pulled (e.g. `lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`)
-8. The **API Key** field can be set to any non-empty value (e.g. `lms`) — LM Studio does not require authentication, but the field cannot be left blank
+1. [Descargar LM Studio](https://lmstudio.ai/download)
+2. Descarga un modelo. Ya sea desde la página de búsqueda de modelos del panel izquierdo o mediante la CLI. Por ejemplo: `lms get lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`
+3. Inicia el servidor de LM Studio. Ya sea desde la página para desarrolladores del panel izquierdo o mediante la CLI. por ejemplo `lms server start`
+   Nota: tendrás que configurarlo para que use el modo compatible con OpenAI. Además, puede que tengas que cambiar el tamaño de contexto predeterminado para que sea superior a 100000 tokens.
+4. En Tabular Editor, ve a **Herramientas > Preferencias > Asistente de IA > Proveedor de IA**
+5. Configura **Elegir proveedor** como **Personalizado (compatible con OpenAI)**
+6. Establece **Punto de conexión del servicio** en `http://localhost:1234/v1`
+7. Establece **Nombre del modelo** con el modelo que descargaste (p. ej., `lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF`)
+8. El campo **Clave de API** puede establecerse con cualquier valor no vacío (p. ej., `lms`) — LM Studio no requiere autenticación, pero el campo no puede dejarse en blanco
 
 > [!NOTE]
-> Response quality with local models depends on the model size and your hardware. Larger models generally produce better results but require more RAM and a capable GPU. The AI Assistant's tool-calling capabilities require a model that supports function calling in the OpenAI-compatible format.
+> La calidad de las respuestas con modelos locales depende del tamaño del modelo y de tu hardware. Los modelos más grandes suelen producir mejores resultados, pero requieren más RAM y una GPU capaz. Las capacidades de llamada a herramientas del Asistente de IA requieren un modelo que admita llamadas a funciones en el formato compatible con OpenAI.
 
 > [!TIP]
-> We recommend a model with a _minimum_ of 30 billion parameters but ideally at least 100 billion parameters. For example, the Qwen3.5-122B-A10B model performed well in our internal testing.
+> We recommend a model with a _minimum_ of 30 billion parameters but ideally at least 100 billion parameters. Por ejemplo, el modelo Qwen3.5-122B-A10B funcionó bien en nuestras pruebas internas.
 
-## Capabilities
+## Capacidades
 
-The AI Assistant has access to your model context and can perform the following actions:
+El Asistente de IA tiene acceso al contexto de tu modelo y puede realizar las siguientes acciones:
 
-- **Model exploration**: Query model metadata including tables, columns, measures, relationships and their properties
-- **DAX query writing**: Generate DAX queries and execute them against your connected model, returning result sets directly in the chat
-- **C# script generation**: Create C# scripts for model modifications that open in a new editor window. When you click **Execute** in the chat, the [preview changes](xref:csharp-scripts#running-scripts-with-preview) dialog is shown by default, letting you review all model metadata changes before accepting them. You can also open the script in the editor and run it from the script toolbar, with or without the preview. Model metadata changes can be undone with **Ctrl+Z**
-- **Best Practice Analyzer**: Run BPA analysis, view rule violations and create or modify BPA rules
-- **VertiPaq Analyzer**: Query memory usage statistics and column cardinality
-- **Document access**: Read and modify open documents such as DAX scripts and DAX queries
-- **Knowledge base search**: Search the embedded Tabular Editor documentation for answers
-- **UI navigation**: Generate `te3://` action links that open specific Tabular Editor dialogs and features
+- **Exploración del modelo**: Consultar los metadatos del modelo, incluidas tablas, columnas, medidas, relaciones y sus propiedades
+- **Redacción de Consultas DAX**: Generar Consultas DAX y ejecutarlas contra tu modelo en modo conectado, devolviendo conjuntos de resultados directamente en el chat
+- **Generación de C# Scripts**: Crear C# Scripts para modificar el modelo, que se abren en una nueva ventana del editor. Cuando haces clic en **Ejecutar** en el chat, de forma predeterminada se muestra el cuadro de diálogo [Vista previa de cambios](xref:csharp-scripts#running-scripts-with-preview), lo que te permite revisar todos los cambios en los metadatos del modelo antes de aceptarlos. También puedes abrir el script en el editor y ejecutarlo desde la barra de herramientas de scripts, con o sin la vista previa. Los cambios en los metadatos del modelo se pueden deshacer con **Ctrl+Z**
+- **Best Practice Analyzer**: Ejecutar el análisis de BPA, ver infracciones de las reglas y crear o modificar reglas de BPA
+- **Analizador VertiPaq**: Consultar estadísticas de uso de memoria y cardinalidad de columnas
+- **Acceso a documentos**: Leer y modificar documentos abiertos, como scripts DAX y Consultas DAX
+- **Búsqueda en la base de conocimientos**: Buscar en la documentación integrada de Tabular Editor para encontrar respuestas
+- **Navegación por la interfaz de usuario**: Generar enlaces de acción `te3://` que abren cuadros de diálogo y funcionalidades específicas de Tabular Editor
 
-## Conversations
+## Conversaciones
 
-The AI Assistant supports multiple simultaneous conversations. Each conversation maintains its own message history and context.
+El Asistente de IA admite varias conversaciones simultáneas. Cada conversación mantiene su propio historial de mensajes y contexto.
 
-- Conversations persist across sessions, stored locally in `%LocalAppData%\TabularEditor3\AI\Conversations\`
-- Titles are generated automatically after the first exchange. You can rename conversations manually
-- **Auto-compaction**: When the conversation approaches the context window limit (~80%), older messages are automatically summarized to free up space. A snapshot of the full conversation is archived before compaction
+- Las conversaciones se conservan entre sesiones y se almacenan localmente en `%LocalAppData%\TabularEditor3\AI\Conversations\`
+- Los títulos se generan automáticamente tras el primer intercambio. Puedes cambiar el nombre de las conversaciones manualmente
+- **Compactación automática**: Cuando la conversación se acerca al límite de la ventana de contexto (~80%), los mensajes más antiguos se resumen automáticamente para liberar espacio. Se archiva una instantánea de la conversación completa antes de la compactación
 
-## Artifacts
+## Artefactos
 
-When the AI Assistant generates code, it creates **artifacts** that open directly in editor windows:
+Cuando el Asistente de IA genera código, crea **artefactos** que se abren directamente en ventanas del editor:
 
-- **C# Scripts**: Open in a new C# script editor with syntax highlighting, compilation and execution support
-- **DAX Queries**: Open in a new DAX query editor with syntax highlighting and execution support
+- **C# Scripts**: Se abren en un nuevo editor de C# Script con resaltado de sintaxis, compilación y compatibilidad con la ejecución
+- **Consultas DAX**: Se abren en un nuevo editor de consultas DAX con resaltado de sintaxis y compatibilidad con la ejecución
 
-Artifacts stream in real-time as the AI generates them. C# script artifacts include safety analysis that flags potentially unsafe code (e.g. file system access or network operations).
+Los artefactos se transmiten en tiempo real a medida que la IA los genera. Los artefactos de C# Script incluyen un análisis de seguridad que señala código potencialmente inseguro (p. ej., acceso al sistema de archivos u operaciones de red).
 
-![AI Assistant Generate C# Script](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
+![Asistente de IA: generar un C# Script](~/content/assets/images/ai-assistant/ai-assistant-generate-c-sharp-script.png)
 
-When you execute a C# script from the chat, the **Script Preview** dialog shows a side-by-side diff of all model metadata changes made by the script. You can accept the changes or revert them. See [Running scripts with preview](xref:csharp-scripts#run-c-scripts-with-preview) for details.
+Cuando ejecutas un C# Script desde el chat, el cuadro de diálogo **Vista previa del script** muestra una comparación en paralelo de todos los cambios de metadatos del modelo realizados por el script. Puedes aceptar los cambios o revertirlos. Consulta [Ejecutar scripts con vista previa](xref:csharp-scripts#run-c-scripts-with-preview) para obtener más información.
 
-![Script Preview - Model Changes](~/content/assets/images/preview-script-changes.png)
+![Vista previa del script: cambios del modelo](~/content/assets/images/preview-script-changes.png)
 
-## Custom Instructions
+## Instrucciones personalizadas
 
-Custom Instructions are instruction sets that guide the AI Assistant's behavior for specific tasks. They are activated automatically based on intent detection or invoked explicitly.
+Las instrucciones personalizadas son conjuntos de instrucciones que guían el comportamiento del Asistente de IA para tareas específicas. Se activan automáticamente según la detección de intenciones o se invocan de forma explícita.
 
-### Built-in Custom Instructions
+### Instrucciones personalizadas integradas
 
-The AI Assistant includes the following built-in Custom Instructions:
+El Asistente de IA incluye las siguientes instrucciones personalizadas integradas:
 
-| Custom Instruction | Triggers On                                  |
-| ------------------ | -------------------------------------------- |
-| DAX Querying       | DAX, query, evaluate, measure                |
-| Model Modification | Modify, change, add, update, create          |
-| Model Design       | Design, architecture, pattern, best practice |
-| Organize Model     | Organize, clean up, folder, rename           |
-| Optimize Model     | Optimize, performance, slow, speed           |
-| Macros             | Macro, automate, record                      |
-| UDFs               | UDF, function, user-defined                  |
-| BPA                | BPA, best practice, rule, violation          |
+| Instrucción personalizada | Se activa cuando                                   |
+| ------------------------- | -------------------------------------------------- |
+| Consulta DAX              | DAX, consulta, EVALUATE, medida                    |
+| Modificación del modelo   | Modificar, cambiar, agregar, actualizar, crear     |
+| Diseño del modelo         | Diseño, arquitectura, patrón, práctica recomendada |
+| Organizar el modelo       | Organizar, limpiar, carpeta, cambiar nombre        |
+| Optimizar el modelo       | Optimizar, rendimiento, lento, velocidad           |
+| Macros                    | Macro, automatizar, grabar                         |
+| UDFs                      | UDF, función, definida por el usuario              |
+| BPA                       | BPA, práctica recomendada, regla, infracción       |
 
-Custom Instructions are shown as indicators above assistant responses, indicating which instructions influenced the response. You can toggle this display in **Preferences > AI Assistant > Preferences > Show custom instructions indicator**.
+Las instrucciones personalizadas se muestran como indicadores encima de las respuestas del asistente, lo que indica qué instrucciones influyeron en la respuesta. Puedes activar o desactivar esta visualización en **Preferencia > Asistente de IA > Preferencia > Mostrar indicador de instrucciones personalizadas**.
 
-### Invoking a Custom Instruction
+### Invocar una instrucción personalizada
 
-Type `/` to browse available custom instructions, or type the full `/instruction-id` at the start of your message to explicitly invoke a specific instruction. For example, `/dax-querying` forces the DAX querying instruction regardless of message content.
+Escribe `/` para explorar las instrucciones personalizadas disponibles, o escribe el `/instruction-id` completo al inicio de tu mensaje para invocar explícitamente una instrucción concreta. Por ejemplo, `/dax-querying` fuerza la instrucción de Consulta DAX independientemente del contenido de tu mensaje.
 
-### Add your own Custom Instructions
+### Añade tus propias instrucciones personalizadas
 
-You can create custom instructions by placing `.md` files in `%LocalAppData%\TabularEditor3\AI\CustomInstructions\`. Each file requires YAML frontmatter defining the instruction metadata:
+Puedes crear instrucciones personalizadas colocando archivos `.md` en `%LocalAppData%\TabularEditor3\AI\CustomInstructions\`. Cada archivo requiere un front matter YAML que defina los metadatos de la instrucción:
 
 ```yaml
 ---
@@ -202,119 +202,119 @@ triggers:
     - model_loaded
 ---
 
-Your instruction content goes here. This is the text that will be
-injected into the AI's system prompt when the instruction is activated.
+Aquí va el contenido de tu instrucción. Este es el texto que se
+insertará en el prompt del sistema de la IA cuando se active la instrucción.
 ```
 
-| Field                       | Required | Default                                                | Description                                                                                          |
-| --------------------------- | -------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| `id`                        | No       | Filename without `.md`                                 | Unique identifier, also used as `/id` for explicit invocation                                        |
-| `name`                      | No       | Title-cased `id`                                       | Display name in autocomplete                                                                         |
-| `description`               | No       | -                                                      | Short description shown below the name                                                               |
-| `priority`                  | No       | 100                                                    | Higher values are injected first when multiple Custom Instructions match                             |
-| `always_inject`             | No       | false                                                  | If true, always included in the system prompt                                                        |
-| `hidden`                    | No       | false                                                  | If true, not shown in `/command` autocomplete                                                        |
-| `triggers.keywords`         | No       | [] | Words that activate the instruction (case-insensitive)                            |
-| `triggers.patterns`         | No       | [] | Regex patterns for complex matching                                                                  |
-| `triggers.context_required` | No       | [] | Conditions that must be met (e.g. `model_loaded`) |
+| Campo                       | Obligatorio | Predeterminado                                         | Descripción                                                                                                 |
+| --------------------------- | ----------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| `id`                        | No          | Nombre de archivo sin `.md`                            | Identificador único; también se usa como `/id` para la invocación explícita                                 |
+| `name`                      | No          | `id` con mayúsculas iniciales                          | Nombre para mostrar en el autocompletado                                                                    |
+| `description`               | No          | -                                                      | Breve descripción que se muestra debajo del nombre                                                          |
+| `priority`                  | No          | 100                                                    | Los valores más altos se inyectan primero cuando coinciden varias instrucciones personalizadas              |
+| `always_inject`             | No          | false                                                  | Si es `true`, siempre se incluye en el prompt del sistema                                                   |
+| `hidden`                    | No          | false                                                  | Si es `true`, no se muestra en el autocompletado de `/command`                                              |
+| `triggers.keywords`         | No          | [] | Palabras que activan la instrucción (no distingue entre mayúsculas y minúsculas)         |
+| `triggers.patterns`         | No          | [] | Patrones de regex para coincidencias complejas                                                              |
+| `triggers.context_required` | No          | [] | Condiciones que deben cumplirse (p. ej., `model_loaded`) |
 
-Custom Instructions with an `id` matching a built-in instruction will override the built-in version.
+Las instrucciones personalizadas con un `id` que coincida con el de una instrucción integrada sustituirán la versión integrada.
 
-## Consent
+## Consentimiento
 
-The AI Assistant requests permission before sending data to the AI provider. Consent is scoped to specific data types:
+El Asistente de IA solicita permiso antes de enviar datos al proveedor de IA. El consentimiento se limita a tipos de datos específicos:
 
-| Consent Category | Description                                                             |
-| ---------------- | ----------------------------------------------------------------------- |
-| Query data       | DAX query results and data samples                                      |
-| Read documents   | Reading content from open documents such as DAX scripts and DAX queries |
-| Modify documents | Making changes to open documents                                        |
-| Model metadata   | Table and column schemas, measure definitions and other model metadata  |
-| Edit BPA rules   | Creating or modifying Best Practice Analyzer rules                      |
-| Read macros      | Reading macro definitions                                               |
+| Categoría de consentimiento | Descripción                                                                         |
+| --------------------------- | ----------------------------------------------------------------------------------- |
+| Datos de consulta           | Resultados de Consultas DAX y muestras de datos                                     |
+| Leer documentos             | Lectura del contenido de documentos abiertos, como scripts DAX y Consultas DAX      |
+| Modificar documentos        | Realizar cambios en los documentos abiertos                                         |
+| Metadatos del modelo        | Esquemas de tablas y columnas, definiciones de medidas y otros metadatos del modelo |
+| Editar reglas de BPA        | Crear o modificar reglas de Best Practice Analyzer                                  |
+| Leer macros                 | Lectura de las definiciones de macros                                               |
 
-When the AI Assistant needs access to a data type for the first time, a consent dialog appears. You can choose the duration of your consent:
+Cuando el Asistente de IA necesita acceder a un tipo de datos por primera vez, aparece un cuadro de diálogo de consentimiento. Puede elegir la duración de su consentimiento:
 
-| Option         | Scope                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------- |
-| This time      | Single request only                                                                   |
-| This session   | Until Tabular Editor is restarted                                                     |
-| For this model | Persisted in the model's user options (.tmuo) file |
-| Always         | Global preference, persisted across all models and sessions                           |
+| Opción           | Ámbito                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------ |
+| Esta vez         | Solo para esta solicitud                                                                               |
+| Esta sesión      | Hasta que se reinicie Tabular Editor                                                                   |
+| Para este modelo | Se conserva en el archivo de opciones de usuario (.tmuo) del modelo |
+| Siempre          | Preferencia global, que se conserva en todos los modelos y sesiones                                    |
 
-![AI Assistant Consent Dialog](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
+![Cuadro de diálogo de consentimiento del Asistente de IA](~/content/assets/images/ai-assistant/ai-assistant-generate-consent-dialog.png)
 
-### Managing Consents
+### Gestión de consentimientos
 
-You can review and reset your consent choices under **Tools > Preferences > AI Assistant > AI Consents**. Each consent category shows its current state. Click **Reset** to revoke an "Always allowed" consent and return it to "Ask when needed".
+Puedes revisar y restablecer tus opciones de consentimiento en **Herramientas > Preferencias > Asistente de IA > Consentimientos de IA**. Cada categoría de consentimiento muestra su estado actual. Haz clic en **Restablecer** para revocar un consentimiento de "Siempre permitido" y volver a "Preguntar cuando sea necesario".
 
-![AI Assistant Consent Settings](~/content/assets/images/ai-assistant/ai-assistant-consent-reset.png)
+![Configuración de consentimiento del Asistente de IA](~/content/assets/images/ai-assistant/ai-assistant-consent-reset.png)
 
-## Preferences
+## Preferencias
 
-Configure AI Assistant display and behavior options under **Tools > Preferences > AI Assistant > Preferences**.
+Configura las opciones de visualización y comportamiento del Asistente de IA en **Herramientas > Preferencias > Asistente de IA > Preferencias**.
 
-### Chat Display
+### Visualización del chat
 
-| Preference                           | Default | Description                                                  |
-| ------------------------------------ | ------- | ------------------------------------------------------------ |
-| Show selection context indicator     | true    | Display the currently selected model object in the chat      |
-| Show custom instructions indicator   | true    | Show Custom Instruction indicators above assistant responses |
-| Show knowledge base search indicator | true    | Display progress when searching the knowledge base           |
+| Preferencia                                               | Predeterminado | Descripción                                                                                    |
+| --------------------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------- |
+| Mostrar indicador de contexto de selección                | true           | Muestra el objeto del modelo seleccionado actualmente en el chat                               |
+| Mostrar indicador de instrucciones personalizadas         | true           | Muestra los indicadores de instrucciones personalizadas encima de las respuestas del asistente |
+| Mostrar indicador de búsqueda en la base de conocimientos | true           | Muestra el progreso al buscar en la base de conocimientos                                      |
 
-### Context Compaction
+### Compactación de contexto
 
-| Preference               | Default | Description                                                             |
-| ------------------------ | ------- | ----------------------------------------------------------------------- |
-| Auto compact             | true    | Automatically summarize old messages when approaching the context limit |
-| Auto compact threshold % | 80      | Token usage percentage that triggers auto-compaction                    |
+| Preferencia                         | Predeterminado | Descripción                                                                       |
+| ----------------------------------- | -------------- | --------------------------------------------------------------------------------- |
+| Compactación automática             | true           | Resumir automáticamente los mensajes antiguos al acercarse al límite del contexto |
+| Umbral de compactación automática % | 80             | Porcentaje de uso de tokens que activa la compactación automática                 |
 
-### Knowledge Base
+### Base de conocimientos
 
-| Preference                                  | Default | Description                                                               |
-| ------------------------------------------- | ------- | ------------------------------------------------------------------------- |
-| Check for knowledge base updates on startup | true    | Automatically check for knowledge base updates when Tabular Editor starts |
+| Preferencia                                                   | Predeterminado | Descripción                                                                                        |
+| ------------------------------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------- |
+| Buscar actualizaciones de la base de conocimientos al iniciar | true           | Buscar automáticamente actualizaciones de la base de conocimientos cuando se inicie Tabular Editor |
 
 ### C# Script
 
-| Preference      | Default | Description                                                                          |
-| --------------- | ------- | ------------------------------------------------------------------------------------ |
-| Preview changes | true    | Show the preview changes dialog when executing AI-generated C# scripts from the chat |
+| Preferencia           | Predeterminado | Descripción                                                                                                   |
+| --------------------- | -------------- | ------------------------------------------------------------------------------------------------------------- |
+| Previsualizar cambios | true           | Mostrar el cuadro de diálogo de vista previa de cambios al ejecutar C# Scripts generados por IA desde el chat |
 
-![AI Assistant Preferences](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
+![Preferencias del asistente de IA](~/content/assets/images/ai-assistant/ai-assistant-preferences.png)
 
-## Token Usage
+## Uso de tokens
 
-Each message to the AI Assistant consumes input tokens. The token cost of a single message depends on what context is included:
+Cada mensaje al Asistente de IA consume tokens de entrada. El coste en tokens de un solo mensaje depende de qué contexto se incluya:
 
-- **System prompt and custom instructions**: Sent with every message. Typically 5,000 to 15,000 tokens depending on which custom instructions are active.
-- **Model metadata**: When the assistant needs to understand your model, it retrieves metadata through tool calls. A compact summary includes table names, column names, measure names, relationships and descriptions. A full metadata retrieval includes the complete model definition. For large models this can consume tens of thousands of tokens.
+- **Prompt del sistema e instrucciones personalizadas**: Se envían con cada mensaje. Normalmente, entre 5.000 y 15.000 tokens, según las instrucciones personalizadas que estén activas.
+- **Metadatos del modelo**: Cuando el asistente necesita entender tu modelo, recupera los metadatos mediante llamadas a herramientas. Un resumen compacto incluye nombres de tablas, columnas y medidas, relaciones y descripciones. Una recuperación completa de metadatos incluye la definición completa del modelo. En modelos grandes, esto puede consumir decenas de miles de tokens.
 
-### Reducing Token Usage
+### Reducir el uso de tokens
 
-Select specific objects in the **TOM Explorer** before asking your question. When objects are selected, the assistant scopes its context to those objects instead of retrieving metadata for the entire model. This is the most effective way to reduce both token usage and API cost.
+Selecciona objetos específicos en el **Explorador TOM** antes de hacer tu pregunta. Cuando hay objetos seleccionados, el asistente limita su contexto a esos objetos en lugar de obtener los metadatos de todo el modelo. Esta es la forma más eficaz de reducir tanto el uso de tokens como el coste de la API.
 
-Other ways to reduce token usage:
+Otras formas de reducir el uso de tokens:
 
-- Ask focused questions about specific tables, measures or columns rather than broad questions about the entire model
-- Start new conversations when switching topics to avoid accumulating long conversation histories
-- Use a smaller or less expensive model for exploratory questions
+- Haz preguntas concretas sobre tablas, medidas o columnas específicas en lugar de preguntas generales sobre todo el modelo
+- Inicia nuevas conversaciones al cambiar de tema para evitar acumular historiales de conversación extensos
+- Usa un modelo más pequeño o menos costoso para preguntas exploratorias
 
-## Limitations
+## Limitaciones
 
-- Requires a user-provided API key. No built-in API key is included
-- AI responses depend on the selected model and provider capabilities
-- Maximum context window is 200,000 tokens
-- The AI Assistant is not a replacement for understanding DAX and semantic model design fundamentals
-- Response quality varies by provider and model selection
-- The AI Assistant cannot connect to external files, services or search the web
-- The AI Assistant cannot add or act as an MCP server
-- The AI Assistant cannot connect to a different model from within the chat. Use the Tabular Editor user interface to change model connections
-- The AI Assistant cannot manage preferences
+- Requiere una clave de API proporcionada por el usuario. No se incluye ninguna clave de API integrada
+- Las respuestas de la IA dependen del modelo seleccionado y de las capacidades del proveedor
+- La ventana de contexto máxima es de 200.000 tokens
+- El Asistente de IA no sustituye la comprensión de los fundamentos de DAX y del diseño de modelos semánticos
+- La calidad de las respuestas varía según el proveedor y el modelo seleccionado
+- El Asistente de IA no puede conectarse a archivos o servicios externos ni buscar en la web
+- El Asistente de IA no puede añadirse ni actuar como un servidor MCP
+- El Asistente de IA no puede conectarse a otro modelo desde el chat. Usa la interfaz de usuario de Tabular Editor para cambiar las conexiones del modelo
+- El Asistente de IA no puede administrar las preferencias
 
-## Disabling the AI Assistant
+## Desactivar el Asistente de IA
 
-The AI Assistant is an optional component. While the feature is in public preview, it will be excluded by default during installation, but users have the option to include it. You can modify an existing Tabular Editor 3 installation, to include or exclude the AI Assistant component, by running the Tabular Editor 3 installer again. If using the portable build of Tabular Editor 3, you can remove the AI Assistant component by deleting the file named `TabularEditor3.AI.dll` from the installation directory.
+El Asistente de IA es un componente opcional. Mientras la característica esté en versión preliminar pública, se excluirá de forma predeterminada durante la instalación, pero los usuarios tienen la opción de incluirla. Puedes modificar una instalación existente de Tabular Editor 3 para incluir o excluir el componente del Asistente de IA volviendo a ejecutar el instalador de Tabular Editor 3. Si usas la versión portable de Tabular Editor 3, puedes quitar el componente del Asistente de IA eliminando el archivo `TabularEditor3.AI.dll` del directorio de instalación.
 
 > [!NOTE]
-> Regardless of whether the AI Assistant component is installed or not, a system admin can disable all AI functionality in Tabular Editor 3 by specifying the [`DisableAi` policy](xref:policies).
+> Independientemente de si el componente del Asistente de IA está instalado o no, un administrador del sistema puede desactivar toda la funcionalidad de IA en Tabular Editor 3 especificando la [directiva `DisableAi`](xref:policies).

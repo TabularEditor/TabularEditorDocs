@@ -110,6 +110,8 @@ Al marcar esta opción, se inserta un carácter de tabulación (`\t`) cada vez q
 
 DAX admite comentarios de línea con barras (`//`) o guiones (`--`). Este ajuste determina qué estilo de comentario se usa cuando Tabular Editor 3 genera código DAX, por ejemplo, al usar la funcionalidad de scripts DAX.
 
+<a name="dax-settings"></a>
+
 ## Ajustes de DAX
 
 Estas opciones determinan determinados comportamientos del analizador de código DAX. La opción _Locale_ es simplemente una cuestión de preferencia. El resto de las opciones solo son relevantes cuando Tabular Editor 3 no puede determinar la versión de Analysis Services utilizada, como ocurre, por ejemplo, cuando se carga directamente un archivo Model.bim. En este caso, Tabular Editor intenta deducir en qué versión se implementará el modelo, basándose en el nivel de compatibilidad especificado en el modelo; sin embargo, en función de la versión real del destino de implementación, pueden existir distintas diferencias en el lenguaje DAX que Tabular Editor no puede determinar. Si Tabular Editor muestra errores semánticos o de sintaxis incorrectos en el Report, es posible que tengas que ajustar estas configuraciones.
@@ -128,11 +130,11 @@ Esta opción aplicará automáticamente determinadas reglas de formato cuando se
 
 Esta opción controla específicamente si el formato automático de las llamadas a funciones (es decir, el espaciado entre argumentos y paréntesis) debe aplicarse cuando se cierra un paréntesis.
 
-##### _Sangría automática_ (habilitado)
+##### _Autocierre de llaves_ (habilitado)
 
 Esta opción aplica sangría automáticamente a los argumentos de las funciones cuando se inserta un salto de línea dentro de una llamada a función.
 
-##### _Autocierre de llaves_ (habilitado)
+##### _Sangría automática_ (habilitado)
 
 Esta opción inserta automáticamente la llave o comilla de cierre cuando se introduce una llave o comilla de apertura.
 

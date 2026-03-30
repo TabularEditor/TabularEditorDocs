@@ -21,9 +21,13 @@ applies_to:
 
 本文介绍如何使用 Tabular Editor 3 的 [表导入向导](#table-import-wizard)，将新表添加到模型中。 此外还会介绍如何[更新现有表的表结构](#updating-table-schema)。 最后，我们将介绍如何使用[关系图工具](#working-with-diagrams)来定义并编辑表之间的关系。
 
+<a name="table-import-wizard"></a>
+
 ## 表导入向导
 
 [!include[importing-tables1](../features/import-tables.partial.md)]
+
+<a name="working-with-diagrams"></a>
 
 # 使用关系图
 
@@ -50,6 +54,8 @@ applies_to:
   ![添加相关表](~/content/assets/images/add-related-tables.png)
 
 在继续之前，先按你的偏好重新排列并调整关系图中的表大小；或者使用 **关系图 > 自动排列** 功能，让 Tabular Editor 3 自动布局这些表。
+
+<a name="modifying-relationships-using-the-diagram"></a>
 
 ## 使用关系图修改关系
 

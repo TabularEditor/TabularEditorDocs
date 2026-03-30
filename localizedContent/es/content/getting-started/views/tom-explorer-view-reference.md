@@ -1,13 +1,13 @@
 ---
 uid: tom-explorer-view-reference
-title: TOM Explorer view
+title: Vista del Explorador TOM
 author: Morten Lønskov
 updated: 2023-02-21
 applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Works differently than showed in this article"
+      note: "Funciona de forma diferente a como se muestra en este artículo"
     - product: Tabular Editor 3
       editions:
         - edition: Desktop

@@ -17,4 +17,4 @@ applies_to:
           full: true
 ---
 
-[!include[properties-view](../../features/views/properties-view.md)]
+[!include[vista de propiedades](../../features/views/properties-view.md)]
