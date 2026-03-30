@@ -38,16 +38,16 @@ Como este material de formación se centra en el producto Tabular Editor, asumim
 
 - @user-interface
   - @bpa-view
-  - @vista de actualización de datos
-  - @buscar y reemplazar
-  - @vista de macros
-  - @vista de mensajes
-  - @vista de propiedades
+  - @data-refresh-view
+  - @find-replace
+  - @macros-view
+  - @messages-view
+  - @properties-view
   - @tom-explorer-view
-  - @vista del diagrama
+  - @diagram-view
 
-- @desarrollo en paralelo
-  - @optimizar el flujo de trabajo con el modo de área de trabajo
+- @parallel-development
+  - @optimizing-workflow-workspace-mode
 
 - @boosting-productivity-te3
   - @importing-tables-data-modeling
@@ -55,7 +55,7 @@ Como este material de formación se centra en el producto Tabular Editor, asumim
   - @creating-and-testing-dax
   - @dax-script-introduction
   - @bpa
-  - @scripts de C# y macros
+  - @cs-scripts-and-macros
   - @personalizing-te3
 
 **Recursos adicionales:**
