@@ -63,28 +63,28 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
 - **Cambio de nombre por lotes**: Al seleccionar más de un objeto, puede cambiarles el nombre por lotes mediante sustitución de cadenas o expresiones regulares. El atajo para renombrar por lotes es **F2**.
 
 - **Renombrar objetos secundarios por lotes...**:
-  Permite renombrar en bloque todos los objetos secundarios de la tabla o la carpeta de visualización mediante expresiones regulares o reglas de reemplazo de cadenas. También se puede acceder mediante el atajo **Shift+F2**.
+  Permite renombrar en bloque todos los objetos secundarios de la tabla o la carpeta de visualización mediante expresiones regulares o reglas de reemplazo de cadenas. También puedes acceder con el atajo **Shift+F2**.
 
-- **Duplicate**:
-  Creates a copy of the selected table, including all its columns, measures and partitions. También existe para todos los demás objetos del Explorador TOM.
+- **Duplicar**:
+  Crea una copia de la tabla seleccionada, incluidas todas sus columnas, medidas y particiones. También existe para todos los demás objetos del Explorador TOM.
 
-- **Mark as date table...**:
-  Marks the table as a date table, enabling time intelligence features. Requiere que la tabla contenga una columna de fecha válida.
+- **Marcar como tabla de fechas...**:
+  Marca la tabla como una tabla de fechas, habilitando las funciones de inteligencia temporal. Requiere que la tabla contenga una columna de fecha válida.
 
-- **Show dependencies**:
-  Visualizes dependencies between the selected table and other model objects. También se puede acceder mediante el atajo **Shift+F12**.
+- **Mostrar dependencias**:
+  Visualiza las dependencias entre la tabla seleccionada y otros objetos del modelo. También se puede acceder mediante el atajo **Shift+F12**.
 
-- **Export script**:
-  Exports the selected objects as a TMSL or TMDL script for use in deployment or source control.
+- **Exportar script**:
+  Exporta los objetos seleccionados como un script TMSL o TMDL para usarlo en la implementación o el control de código fuente.
 
-- **Macro Menus**:
-  Macros can be placed into folders and run against the selected object. En el ejemplo anterior, el usuario tiene una carpeta de Modelado y análisis para scripts de macros aplicados a objetos de tabla.
+- **Menús de macros**:
+  Las macros se pueden colocar en carpetas y ejecutarse en el objeto seleccionado. En el ejemplo anterior, el usuario tiene una carpeta de Modelado y análisis para scripts de macros aplicados a objetos de tabla.
 
-- **Cut / Copy / Paste / Delete**:
-  Standard clipboard operations. Úsalas para mover, duplicar o quitar objetos del modelo.
+- **Cortar / Copiar / Pegar / Eliminar**:
+  Operaciones estándar del portapapeles. Úsalas para mover, duplicar o quitar objetos del modelo.
 
-- **Properties**:
-  Opens the Properties pane for the selected object. Atajo: **Alt+Enter**. Úsalo para inspeccionar y editar metadatos, expresiones, formato y configuración de visibilidad.
+- **Propiedades**:
+  Abre el panel de Propiedades del objeto seleccionado. Atajo: **Alt+Enter**. Sirve para inspeccionar y editar metadatos, expresiones, formato y configuración de visibilidad.
 
 ### Mostrar columnas de información
 
