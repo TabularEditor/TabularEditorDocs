@@ -167,7 +167,7 @@ Las Metric Views proporcionan una capa estructurada sobre expresiones SQL, por l
 El MVP no se conecta a ninguna plataforma aparte de Tabular, sino que funciona completamente con archivos locales.
 Debe crear su YAML de Metric View por su cuenta y luego colocarlo donde Tabular Editor pueda verlo.
 
-### API de C\\\#
+### API de C\#
 
 La interfaz de C# se ha diseñado para optimizar el flujo de trabajo de traducción automática.
 Por ello, hay pocas opciones para interactuar con la Metric View cargada actualmente, y ciertos tipos de operaciones resultan torpes.
