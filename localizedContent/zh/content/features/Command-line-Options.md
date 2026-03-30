@@ -1,5 +1,5 @@
 ---
-uid: command-line-options
+uid: 命令行选项
 title: 命令行
 author: Daniel Otykier
 updated: 2021-08-26
