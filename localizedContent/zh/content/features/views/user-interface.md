@@ -1,5 +1,5 @@
 ---
-uid: user-interface
+uid: 用户界面
 title: 基本用户界面
 author: Daniel Otykier
 updated: 2021-09-08
@@ -28,12 +28,12 @@ applies_to:
 ![基本用户界面](~/content/assets/images/basic-ui.png)
 
 1. **标题栏**：显示当前加载的文件名；如果已连接，还会显示 Analysis Services 数据库或 Power BI 数据集的名称。
-2. **菜单栏**：菜单栏用于访问 Tabular Editor 3 的各项功能。 有关所有菜单项的详细说明，请参阅[菜单](#menus)。 有关所有菜单项的详细说明，请参阅[菜单](#menus)。
-3. **工具栏**：工具栏提供对最常用功能的快速访问。 工具栏中可用的所有功能也都可以通过菜单访问。 你可以在 **工具 > 自定义...** 中自定义工具栏及其按钮 工具栏中可用的所有功能也都可以通过菜单访问。 你可以在 **工具 > 自定义...** 中自定义工具栏及其按钮
-4. **TOM Explorer 视图**：以层级结构展示您的数据模型，所有对象均可用 .  这些对象来自表示您的数据模型的 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 元数据。 顶部的切换按钮可让你筛选要显示的对象。 搜索框可按名称筛选对象。 顶部的切换按钮可让你筛选要显示的对象。 搜索框可按名称筛选对象。
+2. **菜单栏**：菜单栏用于访问 Tabular Editor 3 的各项功能。 有关所有菜单项的详细说明，请参阅[菜单](#menus)。
+3. **工具栏**：工具栏提供对最常用功能的快速访问。 工具栏中可用的所有功能也都可以通过菜单访问。 你可以在 **工具 > 自定义...** 中自定义工具栏及其按钮
+4. **TOM Explorer 视图**：以层级结构展示您的数据模型，所有对象均可用 .  这些对象来自表示您的数据模型的 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 元数据。 顶部的切换按钮可让你筛选要显示的对象。 搜索框可按名称筛选对象。
 5. **表达式编辑器**：表达式编辑器提供一种快捷方式，用于编辑 TOM Explorer 中当前选中对象的任意 DAX、SQL 或 M 表达式。 如果你关闭了表达式编辑器，只需在 TOM Explorer 中双击某个对象，即可将其重新打开。 顶部的下拉列表可让你在不同的表达式属性之间切换，以防当前选定对象包含多个此类属性（例如，KPI 具有目标表达式、状态表达式和趋势表达式，它们是同一个 KPI 对象下的 3 个不同 DAX 表达式）。
-6. **属性视图**：显示 TOM Explorer 中当前选定对象（一个或多个）的所有可用 TOM 属性的详细信息。 大多数属性都可以通过网格进行编辑，即使同时选中了多个对象也一样。 某些属性（例如“格式字符串”“连接字符串”“角色成员”）提供弹出对话框或集合编辑器，可通过点击属性值单元格中的省略号按钮打开。 大多数属性都可以通过网格进行编辑，即使同时选中了多个对象也一样。 某些属性（例如“格式字符串”“连接字符串”“角色成员”）提供弹出对话框或集合编辑器，可通过点击属性值单元格中的省略号按钮打开。
-7. **信息视图**：Tabular Editor 3 会持续分析你模型中的 DAX 表达式，查找语义错误。 任何此类错误都会在此处显示。 此外，此视图中显示的信息还可能来自 C# 脚本，或来自 Analysis Services 报告的错误消息。 任何此类错误都会在此处显示。 此外，此视图中显示的信息还可能来自 C# 脚本，或来自 Analysis Services 报告的错误消息。
+6. **属性视图**：显示 TOM Explorer 中当前选定对象（一个或多个）的所有可用 TOM 属性的详细信息。 大多数属性都可以通过网格进行编辑，即使同时选中了多个对象也一样。 某些属性（例如“格式字符串”“连接字符串”“角色成员”）提供弹出对话框或集合编辑器，可通过点击属性值单元格中的省略号按钮打开。
+7. **信息视图**：Tabular Editor 3 会持续分析你模型中的 DAX 表达式，查找语义错误。 任何此类错误都会在此处显示。 此外，此视图中显示的信息还可能来自 C# 脚本，或来自 Analysis Services 报告的错误消息。
 8. **状态栏**：状态栏会提供与当前选择相关的各种上下文信息、Best Practice Analyzer 的检测结果等。
 
 还提供一些其他视图，用于不同用途。 更多信息请查看 [视图菜单](#view) 一节。
