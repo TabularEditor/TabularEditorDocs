@@ -51,7 +51,7 @@ Como este material de formación se centra en el producto Tabular Editor, asumim
 
 - @boosting-productivity-te3
   - @importing-tables-data-modeling
-  - @actualizar, previsualizar y consultar
+  - @refresh-preview-query
   - @creating-and-testing-dax
   - @dax-script-introduction
   - @bpa
