@@ -1,5 +1,5 @@
 ---
-uid: 代码操作
+uid: code-actions
 title: 代码操作
 author: Daniel Otykier
 updated: 2024-10-30
