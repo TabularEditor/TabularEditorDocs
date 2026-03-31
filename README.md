@@ -166,3 +166,12 @@ If a key is missing from a language's file, or no `_ui-strings.json` exists at a
 | `changeTheme` | `Change theme` | Theme picker label |
 | `copy` | `Copy` | Code block copy button |
 | `downloadPdf` | `Download PDF` | PDF download button |
+| `search` | `Search documentation` | Search input placeholder |
+| `note` | `Note` | Alert box heading |
+| `warning` | `Warning` | Alert box heading |
+| `tip` | `Tip` | Alert box heading |
+| `important` | `Important` | Alert box heading |
+| `caution` | `Caution` | Alert box heading |
+| `tableOfContents` | `Table of Contents` | Mobile TOC offcanvas title |
+| `selectLanguage` | `Select language` | Language picker label |
+| `copyCode` | `Copy code` | Code block copy button aria-label |

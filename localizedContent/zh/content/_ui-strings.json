@@ -35,5 +35,14 @@
   "themeAuto": "自动",
   "changeTheme": "切换主题",
   "copy": "复制",
-  "downloadPdf": "下载 PDF"
+  "downloadPdf": "下载 PDF",
+  "search": "搜索文档",
+  "note": "注意",
+  "warning": "警告",
+  "tip": "提示",
+  "important": "重要",
+  "caution": "注意事项",
+  "tableOfContents": "目录",
+  "selectLanguage": "选择语言",
+  "copyCode": "复制代码"
 }
