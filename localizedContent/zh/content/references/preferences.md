@@ -1,5 +1,5 @@
 ---
-uid: 偏好设置
+uid: preferences
 title: 管理偏好设置
 author: Daniel Otykier
 updated: 2026-01-12
