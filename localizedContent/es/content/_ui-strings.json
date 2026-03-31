@@ -35,5 +35,14 @@
   "themeAuto": "Automático",
   "changeTheme": "Cambiar tema",
   "copy": "Copiar",
-  "downloadPdf": "Descargar PDF"
+  "downloadPdf": "Descargar PDF",
+  "search": "Buscar documentación",
+  "note": "Nota",
+  "warning": "Advertencia",
+  "tip": "Consejo",
+  "important": "Importante",
+  "caution": "Precaución",
+  "tableOfContents": "Tabla de contenidos",
+  "selectLanguage": "Seleccionar idioma",
+  "copyCode": "Copiar código"
 }
