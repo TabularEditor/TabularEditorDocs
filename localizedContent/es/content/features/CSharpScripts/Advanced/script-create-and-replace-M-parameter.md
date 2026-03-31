@@ -134,7 +134,7 @@ using (Form prompt = new Form())
         
         int _NrMPartitions = 0;
         int _NrReplacements = 0;
-        var _ReplacementsList = new List<string>();
+        var _ReplacementsList = new List<0>();
         
         foreach ( var _Tables in Model.Tables )
         {
