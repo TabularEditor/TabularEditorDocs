@@ -121,7 +121,7 @@ The Code Actions below will appear with teal green dots under the first two char
 | DR011 | [Rewrite using ISBLANK](xref:DR011) | Instead of comparing an expression with [`BLANK()`](https://dax.guide/BLANK), use the [`ISBLANK`](https://dax.guide/ISBLANK) function. Example:<br>`IF([Sales] = BLANK(), [Budget], [Sales])` -> `IF(ISBLANK([Sales], [Budget], [Sales])` |
 | DR012 | [Remove unnecessary BLANK](xref:DR012) | Some DAX functions, such as [`IF`](https://dax.guide/IF) and [`SWITCH`](https://dax.guide/SWITCH) already return `BLANK()` when the condition is false, so there is no need to explicitly specify `BLANK()`. Example:<br>`IF(a > b, a, BLANK())` -> `IF(a > b, a)` |
 | DR013 | [Simplify negated logic](xref:DR013) | When a logical expression is negated, it is often more readable to rewrite the expression using the negated operator. Example:<br>`NOT(a = b)` -> `a <> b` |
-| DR014 | [Simplify using IN](xref:DR014) | Rewrite compound predicates (equality comparisons of the same expression that are combined using [`OR`](https://dax.guide/OR) or [`||`](https://dax.guide/op/or/)) with the [`IN`](https://dax.guide/IN) operator. Example:<br>`a = 1 || a = 2 || a = 100` -> `a IN { 1, 2, 100 }` |
+| DR014 | [Simplify using IN](xref:DR014) | Rewrite compound predicates (equality comparisons of the same expression that are combined using [`OR`](https://dax.guide/OR) or [`\|\|`](https://dax.guide/op/or/)) with the [`IN`](https://dax.guide/IN) operator. Example:<br>`a = 1 \|\| a = 2 \|\| a = 100` -> `a IN { 1, 2, 100 }` |
 
 ### Rewrites
 
