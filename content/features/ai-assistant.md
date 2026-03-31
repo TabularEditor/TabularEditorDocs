@@ -298,7 +298,7 @@ Select specific objects in the **TOM Explorer** before asking your question. Whe
 
 Other ways to reduce token usage:
 
-- Ask focused questions about specific tables, measures or columns rather than broad questions about the entire model
+- Ask focused questions about specific tables, measures or columns rather than broad questions about the entire model. A vague prompt such as *"Set display folders on all measures"* forces the assistant to retrieve metadata for the entire model. A specific prompt such as *"Set display folders on the measures I have selected"* limits the context to the current selection and uses far fewer tokens
 - Start new conversations when switching topics to avoid accumulating long conversation histories
 - Use a smaller or less expensive model for exploratory questions
 
