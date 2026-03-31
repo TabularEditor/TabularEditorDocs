@@ -145,7 +145,7 @@ Selected.Measures
 
 | 单数                                  | 复数                                   | 对象类型    |
 | ----------------------------------- | ------------------------------------ | ------- |
-| `Selected.度量值`                      | `Selected.Measures`                  | 度量值     |
+| `Selected.Measure`                  | `Selected.Measures`                  | 度量值     |
 | `Selected.Column`                   | `Selected.Columns`                   | 所有列类型   |
 | `Selected.DataColumn`               | `Selected.DataColumns`               | 数据列     |
 | `Selected.CalculatedColumn`         | `Selected.CalculatedColumns`         | 计算列     |
@@ -154,8 +154,8 @@ Selected.Measures
 | `Selected.Level`                    | `Selected.Levels`                    | 层级      |
 | `Selected.Table`                    | `Selected.Tables`                    | 表格      |
 | `Selected.CalculatedTable`          | `Selected.CalculatedTables`          | 计算表格    |
-| `Selected.分区`                       | `Selected.Partitions`                | 分区      |
-| `Selected.角色`                       | `Selected.Roles`                     | 模型角色    |
+| `Selected.Partition`                | `Selected.Partitions`                | 分区      |
+| `Selected.Role`                     | `Selected.Roles`                     | 模型角色    |
 | `Selected.TablePermission`          | `Selected.TablePermissions`          | 表格权限    |
 | `Selected.KPI`                      | `Selected.KPIs`                      | KPI     |
 | `Selected.Calendar`                 | `Selected.Calendars`                 | 日历      |
@@ -163,8 +163,8 @@ Selected.Measures
 | `Selected.Function`                 | `Selected.Functions`                 | 用户自定义函数 |
 | `Selected.DataSource`               | `Selected.DataSources`               | 数据源     |
 | `Selected.SingleColumnRelationship` | `Selected.SingleColumnRelationships` | 关系      |
-| `Selected.透视`                       | `Selected.Perspectives`              | 透视      |
-| `Selected.区域设置`                     | `Selected.Cultures`                  | 翻译      |
+| `Selected.Perspective`              | `Selected.Perspectives`              | 透视      |
+| `Selected.Culture`                  | `Selected.Cultures`                  | 翻译      |
 
 > [!NOTE]
 > 在 Tabular Editor 3.26.0 中，新增了 角色、KPI、日历、计算项、表权限、函数、数据源、单列关系、计算列、计算表列、数据列、计算表和分区的访问器。
