@@ -34,7 +34,7 @@ $p = Start-Process -filePath TabularEditor.exe -Wait -NoNewWindow -PassThru -Arg
 Salida:
 
 ```cmd
-Usage:
+Uso:
 
 TABULAREDITOR ( file | server database | -L [name] ) [-S script1 [script2] [...]]
     [-SC] [-A [rules] | -AX rules] [(-B | -F | -TMDL) output [id]] [-V | -G] [-T resultsfile]
@@ -42,63 +42,63 @@ TABULAREDITOR ( file | server database | -L [name] ) [-S script1 [script2] [...]
         [-P [-Y]] [-S] [-R [-M]]]
         [-X xmla_script]] [-W] [-E]]
 
-file                Full path of the Model.bim file or database.json model folder to load.
-server              Server\instance name or connection string from which to load the model
-database            Database ID of the model to load. If blank (") picks the first available
-                      database on the server.
--L / -LOCAL         Connects to a Power BI Desktop (local) instance of Analysis Services. If no
-                      name is specified, this assumes that exactly 1 instance is running. Otherwise,
-                      name should match the name of the .pbix file loaded in Power BI Desktop.
--S / -SCRIPT        Execute the specified script on the model after loading.
-  scriptN             Full path of one or more files containing a C# script to execute or an inline
-                      script.
--SC / -SCHEMACHECK  Attempts to connect to all Provider Data Sources in order to detect table schema
-                    changes. Outputs...
-                      ...warnings for mismatched data types and unmapped source columns
-                      ...errors for unmapped model columns.
--A / -ANALYZE       Runs Best Practice Analyzer and outputs the result to the console.
-  rules               Optional path of file or URL of additional BPA rules to be analyzed. If
-                      specified, model is not analyzed against local user/local machine rules,
-                      but rules defined within the model are still applied.
--AX / -ANALYZEX     Same as -A / -ANALYZE but excludes rules specified in the model annotations.
--B / -BIM / -BUILD  Saves the model (after optional script execution) as a Model.bim file.
-  output              Full path of the Model.bim file to save to.
-  id                  Optional id/name to assign to the Database object when saving.
--F / -FOLDER        Saves the model (after optional script execution) as a Folder structure.
-  output              Full path of the folder to save to. Folder is created if it does not exist.
-  id                  Optional id/name to assign to the Database object when saving.
--TMDL               Saves the model (after optional script execution) as a TMDL folder structure.
-  output              Full path of the TMDL folder to save to. Folder is created if it does not exist.
-  id                  Optional id/name to assign to the Database object when saving.
--V / -VSTS          Output Visual Studio Team Services logging commands.
--G / -GITHUB        Output GitHub Actions workflow commands.
--T / -TRX         Produces a VSTEST (trx) file with details on the execution.
-  resultsfile       File name of the VSTEST XML file.
--D / -DEPLOY        Command-line deployment
-                      If no additional parameters are specified, this switch will save model metadata
-                      back to the source (file or database).
-  server              Name of server to deploy to or connection string to Analysis Services.
-  database            ID of the database to deploy (create/overwrite).
-  -L / -LOGIN         Disables integrated security when connecting to the server. Specify:
-    user                Username (must be a user with admin rights on the server)
-    pass                Password
-  -F / -FULL          Deploy the full model metadata, allowing overwrite of an existing database.
-  -O / -OVERWRITE     Allow deploy (overwrite) of an existing database.
-    -C / -CONNECTIONS   Deploy (overwrite) existing data sources in the model. After the -C switch, you
-                        can (optionally) specify any number of placeholder-value pairs. Doing so, will
-                        replace any occurrence of the specified placeholders (plch1, plch2, ...) in the
-                        connection strings of every data source in the model, with the specified values
+file                Ruta completa del archivo Model.bim o de la carpeta del modelo database.json que se va a cargar.
+server              Nombre del servidor\instancia o cadena de conexión desde la que se cargará el modelo.
+database            Id de la base de datos del modelo que se va a cargar. Si se deja en blanco (\"), se selecciona la primera
+                      base de datos disponible en el servidor.
+-L / -LOCAL         Se conecta a una instancia (local) de Analysis Services de Power BI Desktop. Si no se
+                      especifica ningún nombre, se asume que hay exactamente 1 instancia en ejecución. En caso contrario,
+                      el nombre debe coincidir con el nombre del archivo .pbix cargado en Power BI Desktop.
+-S / -SCRIPT        Ejecuta el script especificado en el modelo después de cargarlo.
+  scriptN             Ruta completa de uno o varios archivos que contienen un C# Script para ejecutar o un
+                      script en línea.
+-SC / -SCHEMACHECK  Intenta conectarse a todos los orígenes de datos del proveedor para detectar cambios en el esquema
+                    de las tablas. Genera...
+                      ...advertencias por tipos de datos no coincidentes y columnas de origen no asignadas
+                      ...errores por columnas del modelo no asignadas.
+-A / -ANALYZE       Ejecuta Best Practice Analyzer y muestra el resultado en la consola.
+  rules               Ruta opcional de un archivo o la URL de reglas BPA adicionales que se van a analizar. Si
+                      se especifica, el modelo no se analiza con las reglas del usuario local ni de la máquina local,
+                      pero las reglas definidas dentro del modelo se siguen aplicando.
+-AX / -ANALYZEX     Igual que -A / -ANALYZE, pero excluye las reglas especificadas en las anotaciones del modelo.
+-B / -BIM / -BUILD  Guarda el modelo (después de la ejecución opcional del script) como un archivo Model.bim.
+  output              Ruta completa del archivo Model.bim donde se guardará.
+  id                  Id/nombre opcional que se asignará al objeto Database al guardar.
+-F / -FOLDER        Guarda el modelo (después de la ejecución opcional del script) como una estructura de carpetas.
+  output              Ruta completa de la carpeta donde se guardará. La carpeta se crea si no existe.
+  id                  Id/nombre opcional que se asignará al objeto Database al guardar.
+-TMDL               Guarda el modelo (después de la ejecución opcional del script) como una estructura de carpetas TMDL.
+  output              Ruta completa de la carpeta TMDL donde se guardará. La carpeta se crea si no existe.
+  id                  Id/nombre opcional que se asignará al objeto Database al guardar.
+-V / -VSTS          Genera comandos de registro de Visual Studio Team Services.
+-G / -GITHUB        Genera comandos de flujo de trabajo para GitHub Actions.
+-T / -TRX         Genera un archivo VSTEST (trx) con detalles de la ejecución.
+  resultsfile       Nombre del archivo XML de VSTEST.
+-D / -DEPLOY        Despliegue desde la línea de comandos
+                      Si no se especifican parámetros adicionales, este modificador guardará los metadatos del modelo
+                      de nuevo en el origen (archivo o base de datos).
+  server              Nombre del servidor donde se realizará el despliegue o cadena de conexión a Analysis Services.
+  database            Id de la base de datos que se va a desplegar (crear/sobrescribir).
+  -L / -LOGIN         Desactiva la seguridad integrada al conectarse al servidor. Especifica:
+    user                Nombre de usuario (debe ser un usuario con derechos de administrador en el servidor)
+    pass                Contraseña
+  -F / -FULL          Despliega todos los metadatos del modelo, permitiendo sobrescribir una base de datos existente.
+  -O / -OVERWRITE     Permite desplegar (sobrescribir) una base de datos existente.
+    -C / -CONNECTIONS   Despliega (sobrescribe) los Data sources existentes en el modelo. Después del modificador -C,
+                        puedes especificar, opcionalmente, cualquier cantidad de pares marcador de posición/valor. Al hacerlo,
+                        se reemplazará cualquier aparición de los marcadores de posición especificados (plch1, plch2, ...) en las
+                        cadenas de conexión de cada Data source del modelo por los valores especificados
                         (value1, value2, ...).
-    -P / -PARTITIONS    Deploy (overwrite) existing table partitions in the model.
-      -Y / -SKIPPOLICY    Do not overwrite partitions that have Incremental Refresh Policies defined.
-    -S / -SHARED        Deploy (overwrite) shared expressions.
-    -R / -ROLES         Deploy roles.
-      -M / -MEMBERS       Deploy role members.
-  -X / -XMLA        No deployment. Generate XMLA/TMSL script for later deployment instead.
-    xmla_script       File name of the new XMLA/TMSL script output.
-  -W / -WARN        Outputs information about unprocessed objects as warnings.
-  -E / -ERR         Returns a non-zero exit code if Analysis Services returns any error messages after
-                      the metadata was deployed / updated.
+    -P / -PARTITIONS    Despliega (sobrescribe) las particiones de tabla existentes en el modelo.
+      -Y / -SKIPPOLICY    No sobrescribe las particiones que tengan definidas políticas de actualización incremental.
+    -S / -SHARED        Despliega (sobrescribe) expresiones compartidas.
+    -R / -ROLES         Despliega roles.
+      -M / -MEMBERS       Despliega miembros del rol.
+  -X / -XMLA        No realiza ningún despliegue. En su lugar, genera un script XMLA/TMSL para desplegarlo más tarde.
+    xmla_script       Nombre del archivo de salida del nuevo script XMLA/TMSL.
+  -W / -WARN        Muestra información sobre objetos sin procesar en forma de advertencias.
+  -E / -ERR         Devuelve un código de salida distinto de cero si Analysis Services devuelve mensajes de error después de que
+                      se hayan desplegado o actualizado los metadatos.
 ```
 
 > [!WARNING]
@@ -164,9 +164,9 @@ Durante el despliegue, quieres modificar la cadena para que apunte a una base de
 Coloca el siguiente script en un archivo llamado "ClearConnectionStrings.cs" o similar:
 
 ```csharp
-// This will replace the connection string of all Provider (legacy) data sources in the model
-// with a placeholder based on the name of the data source. E.g., if your data source is called
-// "SQLDW", the connection string after running this script would be "SQLDW":
+// Esto reemplazará la cadena de conexión de todos los orígenes de datos del proveedor (heredados) del modelo
+// por un marcador de posición basado en el nombre del Data source. Por ejemplo, si tu Data source se llama
+// "SQLDW", la cadena de conexión después de ejecutar este script sería "SQLDW":
 
 foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
     ds.ConnectionString = ds.Name;
@@ -241,7 +241,7 @@ variables:
 
 steps:
 - script: TabularEditor.exe "Model.bim" -S "UpdateModel.csx" -D "$(serverName)" "MyDatabase" -O -V -E -W
-  displayName: 'Deploy with Script Parameters'
+  displayName: 'Despliegue con parámetros de script'
   env:
     DEPLOY_ENV: $(deployEnv)
     SERVER_NAME: $(serverName)
@@ -251,7 +251,7 @@ steps:
 
 ```yaml
 - task: PowerShell@2
-  displayName: 'Run Tabular Editor Script'
+  displayName: 'Ejecutar script de Tabular Editor'
   env:
     DEPLOY_ENV: 'UAT'
     CONNECTION_STRING: $(sqldwConnectionString)
@@ -269,9 +269,9 @@ steps:
 var deployEnv = Environment.GetEnvironmentVariable("DEPLOY_ENV");
 var serverName = Environment.GetEnvironmentVariable("SERVER_NAME");
 
-Info($"Configuring model for {deployEnv} environment on {serverName}");
+Info($"Configurando el modelo para el entorno {deployEnv} en {serverName}");
 
-// Apply environment-specific changes
+// Aplicar cambios específicos del entorno
 foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
 {
     ds.ConnectionString = ds.ConnectionString.Replace("{SERVER}", serverName);
