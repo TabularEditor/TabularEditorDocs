@@ -36,55 +36,55 @@ El menú del botón derecho incluye los siguientes elementos, algunos de los cua
 
 ### Opciones del menú contextual de clic derecho
 
-- **Update table schema...**:
-  Checks for structural changes in the external data source and updates the table's schema accordingly. Esto es útil cuando se han agregado, cambiado de nombre o quitado columnas en el origen.
+- **Actualizar el esquema de la tabla...**:
+  Comprueba si hay cambios estructurales en el Data source externo y actualiza el esquema de la tabla en consecuencia. Esto es útil cuando se han agregado, cambiado de nombre o quitado columnas en el origen.
 
 - **Script DAX**:
-  Generates a DAX script for the selected table and its objects. Abre una nueva ventana del editor de scripts donde puede revisar o editar en conjunto las definiciones de DAX.
+  Genera un script DAX para la tabla seleccionada y sus objetos. Abre una nueva ventana del editor de scripts donde puede revisar o editar en conjunto las definiciones de DAX.
 
-- **Preview data**:
-  Opens the data preview pane displaying a sample of the data loaded into the selected table. Útil para validar o depurar. Solo existe al hacer clic con el botón derecho en las tablas.
+- **Vista previa de datos**:
+  Abre el panel de vista previa de datos y muestra un ejemplo de los datos cargados en la tabla seleccionada. Útil para la validación o la depuración. Solo existe al hacer clic con el botón derecho en las tablas.
 
-- **Refresh**:
-  Expands to a selection of possible refresh operation for the selected table. Esto solo está disponible si el modelo está conectado a un modelo en vivo, ya sea de forma independiente o en modo del área de trabajo. Esta opción solo está disponible para tablas y particiones.
+- **Actualizar**:
+  Despliega una selección de posibles operaciones de actualización para la tabla seleccionada. Esto solo está disponible si el modelo está conectado a un modelo en vivo, ya sea de forma independiente o en modo del área de trabajo. Esta opción solo está disponible para tablas y particiones.
 
-- **Create**:
-  Expands to a submenu allowing the creation of new measures, columns, hierarchies, display folders or calculation items under the selected object. Las opciones disponibles dependen del tipo de objeto seleccionado.
+- **Crear**:
+  Muestra un submenú que permite crear nuevas medidas, columnas, jerarquías, carpetas de visualización o elementos de cálculo bajo el objeto seleccionado. Las opciones disponibles dependen del tipo de objeto seleccionado.
 
-- **Move to group**:
-  Allows you to organize the table into a Table group within the TOM Explorer for easier model navigation. Esta opción solo está disponible para tablas.
+- **Mover a un grupo**:
+  Te permite organizar la tabla en un grupo de tablas dentro del Explorador TOM para navegar por el modelo con más facilidad. Esta opción solo está disponible para tablas.
 
-- **Make invisible**:
-  Marks the object as not visible in client tools. La tabla sigue formando parte del modelo, pero está oculta para los autores de informes. Como alternativa, usa el atajo **Ctrl+I** para ocultar el objeto.
+- **Hacer invisible**:
+  Marca el objeto como no visible en las herramientas cliente. La tabla sigue formando parte del modelo, pero está oculta para los autores de informes. Como alternativa, puedes usar el atajo **Ctrl+I** para ocultar el objeto.
 
-- **Shown in perspectives**:
-  Enables or disables the table's inclusion in one or more perspectives. Las perspectivas limitan lo que los usuarios finales pueden ver en herramientas como Power BI.
+- **Mostrar en perspectivas**:
+  Activa o desactiva la inclusión de la tabla en una o varias perspectivas. Las perspectivas limitan lo que los usuarios finales pueden ver en herramientas como Power BI.
 
 - **Cambio de nombre por lotes**: Al seleccionar más de un objeto, puede cambiarles el nombre por lotes mediante sustitución de cadenas o expresiones regulares. El atajo para renombrar por lotes es **F2**.
 
-- **Batch rename children...**:
-  Enables bulk renaming of all child objects under the table or display folder using regex or string replacement rules. También se puede acceder mediante el atajo **Shift+F2**.
+- **Renombrar objetos secundarios por lotes...**:
+  Permite renombrar en bloque todos los objetos secundarios de la tabla o la carpeta de visualización mediante expresiones regulares o reglas de reemplazo de cadenas. También puedes acceder con el atajo **Shift+F2**.
 
-- **Duplicate**:
-  Creates a copy of the selected table, including all its columns, measures and partitions. También existe para todos los demás objetos del Explorador TOM.
+- **Duplicar**:
+  Crea una copia de la tabla seleccionada, incluidas todas sus columnas, medidas y particiones. También existe para todos los demás objetos del Explorador TOM.
 
-- **Mark as date table...**:
-  Marks the table as a date table, enabling time intelligence features. Requiere que la tabla contenga una columna de fecha válida.
+- **Marcar como tabla de fechas...**:
+  Marca la tabla como una tabla de fechas, habilitando las funciones de inteligencia temporal. Requiere que la tabla contenga una columna de fecha válida.
 
-- **Show dependencies**:
-  Visualizes dependencies between the selected table and other model objects. También se puede acceder mediante el atajo **Shift+F12**.
+- **Mostrar dependencias**:
+  Visualiza las dependencias entre la tabla seleccionada y otros objetos del modelo. También se puede acceder mediante el atajo **Shift+F12**.
 
-- **Export script**:
-  Exports the selected objects as a TMSL or TMDL script for use in deployment or source control.
+- **Exportar script**:
+  Exporta los objetos seleccionados como un script TMSL o TMDL para usarlo en la implementación o el control de código fuente.
 
-- **Macro Menus**:
-  Macros can be placed into folders and run against the selected object. En el ejemplo anterior, el usuario tiene una carpeta de Modelado y análisis para scripts de macros aplicados a objetos de tabla.
+- **Menús de macros**:
+  Las macros se pueden colocar en carpetas y ejecutarse en el objeto seleccionado. En el ejemplo anterior, el usuario tiene una carpeta de Modelado y análisis para scripts de macros aplicados a objetos de tabla.
 
-- **Cut / Copy / Paste / Delete**:
-  Standard clipboard operations. Úsalas para mover, duplicar o quitar objetos del modelo.
+- **Cortar / Copiar / Pegar / Eliminar**:
+  Operaciones estándar del portapapeles. Úsalas para mover, duplicar o quitar objetos del modelo.
 
-- **Properties**:
-  Opens the Properties pane for the selected object. Atajo: **Alt+Enter**. Úsalo para inspeccionar y editar metadatos, expresiones, formato y configuración de visibilidad.
+- **Propiedades**:
+  Abre el panel de Propiedades del objeto seleccionado. Atajo: **Alt+Enter**. Sirve para inspeccionar y editar metadatos, expresiones, formato y configuración de visibilidad.
 
 ### Mostrar columnas de información
 

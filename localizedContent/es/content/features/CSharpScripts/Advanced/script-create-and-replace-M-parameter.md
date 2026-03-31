@@ -26,69 +26,69 @@ Si quieres reemplazar una cadena en las particiones M del modelo (por ejemplo, l
 ### Crear un nuevo parámetro M y agregarlo a las particiones M existentes
 
 ```csharp
-// Este script crea un nuevo parámetro M como una 'expresión compartida'.
-// También buscará el valor predeterminado en todas las particiones M y lo reemplazará por el nombre del objeto del parámetro.
+// This script creates a new M Parameter as a 'Shared Expression'.
+// It will also find the default value in all M partitions and replace them with the parameter object name.
 //#r "System.Drawing"
 
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-// Ocultar el control giratorio de 'Running Macro'
+// Hide the 'Running Macro' spinbox
 ScriptHelper.WaitFormVisible = false;
 
-// Inicializar variables
+// Initialize variables
 string _ParameterName = "New Parameter";
 string _ParameterValue = "ParameterValue";
 
-// Cuadro de diálogo de WinForms para obtener el nombre/valor del parámetro
+// WinForms prompt to get Parameter Name / Value input
 using (Form prompt = new Form())
 {
     Font formFont = new Font("Segoe UI", 11); 
 
-    // Configuración del cuadro de diálogo
+    // Prompt config
     prompt.AutoSize = true;
     prompt.MinimumSize = new Size(380, 120);
-    prompt.Text = "Crear nuevo parámetro M";
+    prompt.Text = "Create New M Parameter";
     prompt.StartPosition = FormStartPosition.CenterScreen;
 
-    // Buscar: etiqueta
-    Label parameterNameLabel = new Label() { Text = "Escribe el nombre:" };
+    // Find: label
+    Label parameterNameLabel = new Label() { Text = "Enter Name:" };
     parameterNameLabel.Location = new Point(20, 20);
     parameterNameLabel.AutoSize = true;
     parameterNameLabel.Font = formFont;
 
-    // Cuadro de texto para introducir el texto de la subcadena
+    // Textbox for inputing the substring text
     TextBox parameterNameBox = new TextBox();
     parameterNameBox.Width = 200;
     parameterNameBox.Location = new Point(parameterNameLabel.Location.X + parameterNameLabel.Width + 20, parameterNameLabel.Location.Y - 4);
     parameterNameBox.SelectedText = "New Parameter";
     parameterNameBox.Font = formFont;
 
-    // Reemplazar: etiqueta
-    Label parameterValueLabel = new Label() { Text = "Escribe el valor:" };
+    // Replace: label
+    Label parameterValueLabel = new Label() { Text = "Enter Value:" };
     parameterValueLabel.Location = new Point(parameterNameLabel.Location.X, parameterNameLabel.Location.Y + parameterNameLabel.Height + 20);
     parameterValueLabel.AutoSize = true;
     parameterValueLabel.Font = formFont;
 
-    // Cuadro de texto para introducir el texto de la subcadena
+    // Textbox for inputting the substring text
     TextBox parameterValueBox = new TextBox() { Left = parameterValueLabel.Right + 20, Top = parameterValueLabel.Location.Y - 4, Width = parameterNameBox.Width };
     parameterValueBox.SelectedText = "Parameter Value";
     parameterValueBox.Font = formFont;
 
-    // Botón Aceptar
-    Button okButton = new Button() { Text = "Crear", Left = 20, Width = 75, Top = parameterValueBox.Location.Y + parameterValueBox.Height + 20 };
+    // OK Button
+    Button okButton = new Button() { Text = "Create", Left = 20, Width = 75, Top = parameterValueBox.Location.Y + parameterValueBox.Height + 20 };
     okButton.MinimumSize = new Size(75, 25);
     okButton.AutoSize = true;
     okButton.Font = formFont;
 
-    // Botón Cancelar
-    Button cancelButton = new Button() { Text = "Cancelar", Left = okButton.Location.X + okButton.Width + 10, Top = okButton.Location.Y };
+    // Cancel Button
+    Button cancelButton = new Button() { Text = "Cancel", Left = okButton.Location.X + okButton.Width + 10, Top = okButton.Location.Y };
     cancelButton.MinimumSize = new Size(75, 25);
     cancelButton.AutoSize = true;
     cancelButton.Font = formFont;
 
-    // Acciones de los botones
+    // Button actions
     okButton.Click += (sender, e) => { _ParameterName = parameterNameBox.Text; _ParameterValue = parameterValueBox.Text; prompt.DialogResult = DialogResult.OK; };
     cancelButton.Click += (sender, e) => { prompt.DialogResult = DialogResult.Cancel; };
 
@@ -102,11 +102,11 @@ using (Form prompt = new Form())
     prompt.Controls.Add(okButton);
     prompt.Controls.Add(cancelButton);
 
-    // El usuario hizo clic en Aceptar, así que se ejecuta la lógica de buscar y reemplazar
+    // The user clicked OK, so perform the find-and-replace logic
     if (prompt.ShowDialog() == DialogResult.OK)
     {
 
-        // Crea el parámetro
+        // Creates the parameter
         Model.AddExpression( 
             _ParameterName, 
             @"
@@ -120,21 +120,21 @@ using (Form prompt = new Form())
         );
         
         
-        // Informa al usuario de que el parámetro se creó correctamente
+        // Informs the user that the parameter was successfully created
         Info ( 
-            "Se creó correctamente un nuevo parámetro: " + @"""" +
+            "Successfully created a new parameter: " + @"""" +
             _ParameterName + @"""" +
-            "\nValor predeterminado: " + @"""" +
+            "\nDefault value: " + @"""" +
             _ParameterValue + @"""");
         
         
-        // Busca el valor predeterminado del parámetro en las particiones M y lo reemplaza por el nombre del parámetro
+        // Finds the parameter default value in M Partitions & replaces with the parameter name
         string _Find = @"""" + _ParameterValue + @"""";
         string _Replace = @"#""" + _ParameterName + @"""";
         
         int _NrMPartitions = 0;
         int _NrReplacements = 0;
-        var _ReplacementsList = new List<string>();
+        var _ReplacementsList = new List<0>();
         
         foreach ( var _Tables in Model.Tables )
         {
@@ -146,43 +146,43 @@ using (Form prompt = new Form())
                     {
                         _p.Expression = _p.Expression.Replace( _Find, _Replace );
         
-                        // Lleva el control de qué particiones M se reemplazaron (y cuántas)
+                        // Tracks which M partitions were replaced (and how many)
                         _NrReplacements = _NrReplacements + 1;
                         _ReplacementsList.Add( _p.Name );
                     }
         
-                // Cuenta el total de particiones M
+                // Counts the total # M Partitions
                 _NrMPartitions = _NrMPartitions + 1;
                 }
             }
         }
         
         
-        // Crea una lista con viñetas de todas las particiones M que se reemplazaron
+        // Makes a bulleted list of all the M partitions that were replaced
         string _ReplacedPartitions = " • " + String.Join("\n • ", _ReplacementsList );
         
         
-        // Informa 
-        //      - Si la búsqueda y el reemplazo se realizaron correctamente
-        //      - Cuántas particiones M se reemplazaron
-        //      - En qué particiones M se aplicó la búsqueda y el reemplazo
+        // Informs 
+        //      - Whether the Find & Replace was successful
+        //      - How many M partitions were replaced
+        //      - Which M partitions had the Find & Replace done
         Info (
-            "Se reemplazó correctamente\n\n " +
+            "Successfully replaced\n\n " +
             _Find + 
-            "\n\n por: \n\n" + 
+            "\n\n with: \n\n" + 
             _Replace + 
-            "\n\n en " + 
+            "\n\n in " + 
             Convert.ToString(_NrReplacements) +
-            " de " +
+            " of " +
             Convert.ToString(_NrMPartitions) +  
-            " particiones M:\n" +
+            " M Partitions:\n" +
             _ReplacedPartitions
         );
 
     }
     else
     {
-    Error ( "Entrada cancelada. El script finalizó sin cambios.");
+    Error ( "Cancelled input! Ended script without changes.");
     }
 }
 ```
@@ -199,6 +199,5 @@ Luego buscará el valor predeterminado en todas las particiones M y lo reemplaza
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Cuadro de diálogo de confirmación que muestra que se ha creado el parámetro y que la subcadena de valor correspondiente se ha reemplazado en todas las expresiones de las particiones M. Para parámetros de otros tipos, ajusta el código C# según corresponda.</figcaption>
- Para parámetros de otros tipos, ajusta el código C# según corresponda.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Cuadro de diálogo de confirmación que muestra que se ha creado el parámetro y que la subcadena de valor correspondiente se ha reemplazado en todas las expresiones de las particiones M. Para parámetros de otros tipos, ajusta el código C# según corresponda.</figcaption> Para parámetros de otros tipos, ajusta el código C# según corresponda.</figcaption>
 </figure>

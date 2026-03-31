@@ -28,11 +28,11 @@ El Best Practice Analyzer (BPA) le permite definir reglas sobre los metadatos de
 
 La descripción general de BPA le muestra todas las reglas definidas en su modelo que actualmente se están incumpliendo:
 
-![BPA Overview](~/content/assets/images/common/BPAOverview.png)
+![Descripción general de BPA](~/content/assets/images/common/BPAOverview.png)
 
 Y siempre podrá ver en la interfaz principal cuántas reglas está infringiendo actualmente.
 
-![BPA Overview Line](~/content/assets/images/common/PBAOverviewMenuLine.png)
+![Línea de descripción general de BPA](~/content/assets/images/common/PBAOverviewMenuLine.png)
 
 Al hacer clic en el enlace (o pulsar F10) se abre la ventana completa de BPA.
 
@@ -60,8 +60,8 @@ La ventana del Best Practice Analyzer enumera continuamente todas las **reglas e
 
 Si necesitas agregar, quitar o modificar las reglas que se aplican a tu modelo, hay una interfaz específica para ello. Puedes abrirla haciendo clic en el botón de la esquina superior izquierda de la ventana de Best Practice Analyzer, o usando la opción de menú "Herramientas > Administrar reglas de BPA..." en la ventana principal.
 
-![BPA Manage Rules](~/content/assets/images/common/BPAOverviewManageRules.png)
+![Administrar reglas de BPA](~/content/assets/images/common/BPAOverviewManageRules.png)
 
 La ventana Administrar reglas de BPA contiene dos listas: la lista superior representa las **colecciones** de reglas que están cargadas actualmente. Al seleccionar una colección en esta lista, se mostrarán todas las reglas definidas dentro de esa colección en la lista inferior.
 
-![BPA Manage Rules UI](~/content/assets/images/common/PBAOverviewManageRulesPopUp.png)
+![Interfaz de Administrar reglas de BPA](~/content/assets/images/common/PBAOverviewManageRulesPopUp.png)

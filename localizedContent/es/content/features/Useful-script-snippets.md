@@ -27,22 +27,22 @@ Además, asegúrate de echar un vistazo a nuestra biblioteca de scripts @csharp-
 ## Crear medidas a partir de columnas
 
 ```csharp
-// Crea una medida SUM para cada columna seleccionada actualmente y oculta la columna.
+// Creates a SUM measure for every currently selected column and hide the column.
 foreach(var c in Selected.Columns)
 {
     var newMeasure = c.Table.AddMeasure(
-        "Suma de " + c.Name,                    // Nombre
-        "SUM(" + c.DaxObjectFullName + ")",    // Expresión DAX
-        c.DisplayFolder                        // Carpeta de visualización
+        "Sum of " + c.Name,                    // Name
+        "SUM(" + c.DaxObjectFullName + ")",    // DAX expression
+        c.DisplayFolder                        // Display Folder
     );
     
-    // Establece la cadena de formato en la nueva medida:
+    // Set the format string on the new measure:
     newMeasure.FormatString = "0.00";
 
-    // Añade algo de documentación:
-    newMeasure.Description = "Esta medida es la suma de la columna " + c.DaxObjectFullName;
+    // Provide some documentation:
+    newMeasure.Description = "This measure is the sum of column " + c.DaxObjectFullName;
 
-    // Oculta la columna base:
+    // Hide the base column:
     c.IsHidden = true;
 }
 ```
@@ -56,12 +56,12 @@ Este fragmento usa la función `<Table>.AddMeasure(<name>, <expression>, <displa
 Primero, crea acciones personalizadas para agregaciones individuales de inteligencia temporal. Por ejemplo:
 
 ```csharp
-// Crea una medida TOTALYTD para cada medida seleccionada.
+// Creates a TOTALYTD measure for every selected measure.
 foreach(var m in Selected.Measures) {
     m.Table.AddMeasure(
-        m.Name + " YTD",                                       // Nombre
-        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // Expresión DAX
-        m.DisplayFolder                                        // Carpeta de visualización
+        m.Name + " YTD",                                       // Name
+        "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",     // DAX expression
+        m.DisplayFolder                                        // Display Folder
     );
 }
 ```
@@ -77,7 +77,7 @@ CustomAction(@"Time Intelligence\Create LY measure");
 
 Esto ilustra cómo puedes ejecutar una (o varias) acciones personalizadas desde dentro de otra acción (ten cuidado con las referencias circulares: harán que Tabular Editor se bloquee). Guarda esto como una nueva acción personalizada "Inteligencia temporal\Todo lo anterior", y tendrás una forma sencilla de generar todas tus medidas de inteligencia temporal con un solo clic:
 
-![image](https://user-images.githubusercontent.com/8976200/36632257-5565c8ca-197c-11e8-8498-82667b6e1049.png)
+![imagen](https://user-images.githubusercontent.com/8976200/36632257-5565c8ca-197c-11e8-8498-82667b6e1049.png)
 
 Por supuesto, también puedes poner todos tus cálculos de inteligencia temporal en un único script como el siguiente:
 
@@ -314,10 +314,10 @@ De forma predeterminada, el archivo se guarda en la misma carpeta donde se encue
 
 - Nombre
 - Descripción
-- SourceColumn
-- Expression
-- FormatString
-- DataType
+- Columna de origen
+- Expresión
+- Cadena de formato
+- Tipo de datos
 
 Para exportar propiedades diferentes, proporciona una lista de nombres de propiedades separados por comas, que se exportarán como segundo argumento de `ExportProperties`:
 
@@ -352,7 +352,7 @@ SaveFile(@"c:\Project\MeasurePerspectives.tsv", tsv);
 
 El archivo TSV se ve así al abrirlo en Excel:
 
-![image](https://user-images.githubusercontent.com/8976200/85208532-956dec80-b331-11ea-8568-32dbd4cc5516.png)
+![imagen](https://user-images.githubusercontent.com/8976200/85208532-956dec80-b331-11ea-8568-32dbd4cc5516.png)
 
 Y tal y como se muestra arriba, puedes hacer cambios en Excel, guardar y luego cargar de nuevo los valores actualizados en Tabular Editor mediante `ImportProperties`.
 
@@ -439,7 +439,7 @@ foreach(var row in tsvRows.Skip(1))
 Si necesitas automatizar este proceso, guarda el script anterior en un archivo y usa la [Tabular Editor CLI](/Command-line-Options) de la siguiente manera:
 
 ```powershell
-start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
+start /wait TabularEditor.exe "<0>" -S "<1>" -B "<2>"
 ```
 
 por ejemplo:
@@ -701,7 +701,7 @@ foreach(var col in aggTable.Columns)
 
 Después de ejecutar el script, deberías ver que la propiedad `AlternateOf` se ha asignado a todas las columnas de tu tabla de agregación (consulta la captura de pantalla a continuación). Ten en cuenta que la partición de la tabla base debe usar DirectQuery para que las agregaciones funcionen.
 
-![image](https://user-images.githubusercontent.com/8976200/85851134-6ed70800-b7ae-11ea-82eb-37fcaa2ca9c4.png)
+![imagen](https://user-images.githubusercontent.com/8976200/85851134-6ed70800-b7ae-11ea-82eb-37fcaa2ca9c4.png)
 
 ***
 
@@ -715,7 +715,7 @@ Están disponibles los siguientes métodos:
 | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | Este método envía el script TMSL o XMLA especificado a la instancia conectada de Analysis Services. Esto resulta útil cuando desea actualizar datos de una tabla en la instancia de AS. Tenga en cuenta que, si utiliza este método para realizar cambios de metadatos en su modelo, los metadatos del modelo local quedarán desincronizados respecto a los metadatos de la instancia de AS, y es posible que reciba una advertencia de conflicto de versiones la próxima vez que intente guardar los metadatos del modelo. Establezca el parámetro `isXmla` en `true` si envía un script XMLA. |
 | `IDataReader ExecuteReader(string dax)`                       | Ejecuta la _consulta_ DAX especificada contra la base de datos de AS conectada y devuelve el objeto [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) resultante. Una consulta DAX contiene una o varias instrucciones [`EVALUATE`](https://dax.guide/EVALUATE). Tenga en cuenta que no puede tener varios lectores de datos abiertos al mismo tiempo. Tabular Editor los cerrará automáticamente en caso de que olvide cerrar o liberar el lector de forma explícita.                                         |
-| `DataSet ExecuteDax(string dax)`                              | Ejecuta la _consulta_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) que contiene los datos devueltos por la consulta. Una consulta DAX contiene una o varias instrucciones [`EVALUATE`](https://dax.guide/EVALUATE). El objeto Dataset resultante contiene una DataTable por cada instrucción `EVALUATE`. No se recomienda devolver tablas de datos muy grandes, ya que pueden provocar errores de falta de memoria u otros errores de estabilidad.            |
+| `Dataset ExecuteDax(string dax)`                              | Ejecuta la _consulta_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) que contiene los datos devueltos por la consulta. Una consulta DAX contiene una o varias instrucciones [`EVALUATE`](https://dax.guide/EVALUATE). El objeto Dataset resultante contiene una DataTable por cada instrucción `EVALUATE`. No se recomienda devolver tablas de datos muy grandes, ya que pueden provocar errores de falta de memoria u otros errores de estabilidad.            |
 | `object EvaluateDax(string dax)`                              | Ejecuta la _expresión_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto que representa el resultado. Si la expresión DAX es escalar, se devuelve un objeto del tipo correspondiente (string, long, decimal, double, DateTime). Si la expresión DAX es de tipo tabla, se devuelve un [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6).                                                                                                                                                                       |
 
 Los métodos están acotados al objeto `Model.Database`, pero también se pueden ejecutar directamente sin ningún prefijo.
@@ -741,11 +741,11 @@ ExecuteCommand(tmsl);
 A partir de Tabular Editor 2.16.6 o Tabular Editor 3.2.3, puede usar la siguiente sintaxis para enviar comandos XMLA sin procesar a Analysis Services. El siguiente ejemplo muestra cómo se puede usar para vaciar la caché del motor de AS:
 
 ```csharp
-var clearCacheXmla = string.Format(@"<ClearCache xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">  
-  <Object>
-    <DatabaseID>{0}</DatabaseID>
-  </Object>
-</ClearCache>", Model.Database.ID);
+var clearCacheXmla = string.Format(@"<0>  
+  <1>
+    <2>{0}</2>
+  </1>
+</0>", Model.Database.ID);
 
 ExecuteCommand(clearCacheXmla, isXmla: true);
 ```
@@ -760,7 +760,7 @@ EvaluateDax("\"Hello from AS\"").Output(); // A string
 EvaluateDax("{ (1, 2, 3) }").Output(); // A table
 ```
 
-![image](https://user-images.githubusercontent.com/8976200/91638299-bbd59580-ea0e-11ea-882b-55bff73c30fb.png)
+![imagen](https://user-images.githubusercontent.com/8976200/91638299-bbd59580-ea0e-11ea-882b-55bff73c30fb.png)
 
 ...o, si desea devolver el valor de la medida seleccionada actualmente:
 
@@ -768,7 +768,7 @@ EvaluateDax("{ (1, 2, 3) }").Output(); // A table
 EvaluateDax(Selected.Measure.DaxObjectFullName).Output();
 ```
 
-![image](https://user-images.githubusercontent.com/8976200/91638367-6f3e8a00-ea0f-11ea-90cd-7d2e4cff6e31.png)
+![imagen](https://user-images.githubusercontent.com/8976200/91638367-6f3e8a00-ea0f-11ea-90cd-7d2e4cff6e31.png)
 
 Y aquí tiene un ejemplo más avanzado que permite seleccionar y evaluar varias medidas a la vez:
 
@@ -777,7 +777,7 @@ var dax = "ROW(" + string.Join(",", Selected.Measures.Select(m => "\"" + m.Name 
 EvaluateDax(dax).Output();
 ```
 
-![image](https://user-images.githubusercontent.com/8976200/91638356-546c1580-ea0f-11ea-8302-3e40829e00dd.png)
+![imagen](https://user-images.githubusercontent.com/8976200/91638356-546c1580-ea0f-11ea-8302-3e40829e00dd.png)
 
 Si ya está en un nivel avanzado, puede usar SUMMARIZECOLUMNS u otra función DAX para visualizar la medida seleccionada desglosada por alguna columna:
 
@@ -786,11 +786,11 @@ var dax = "SUMMARIZECOLUMNS('Product'[Color], " + string.Join(",", Selected.Meas
 EvaluateDax(dax).Output();
 ```
 
-![image](https://user-images.githubusercontent.com/8976200/91638389-9b5a0b00-ea0f-11ea-819f-d3eee3ddfa71.png)
+![imagen](https://user-images.githubusercontent.com/8976200/91638389-9b5a0b00-ea0f-11ea-819f-d3eee3ddfa71.png)
 
 Recuerde que puede guardar estos scripts como Acciones personalizadas haciendo clic en el icono "+" justo encima del editor de scripts. De este modo, obtienes una colección de consultas DAX fácilmente reutilizable que puedes ejecutar y visualizar directamente desde el menú contextual de Tabular Editor:
 
-![image](https://user-images.githubusercontent.com/8976200/91638790-305e0380-ea12-11ea-9d84-313f4388496f.png)
+![imagen](https://user-images.githubusercontent.com/8976200/91638790-305e0380-ea12-11ea-9d84-313f4388496f.png)
 
 ### Exportación de datos
 

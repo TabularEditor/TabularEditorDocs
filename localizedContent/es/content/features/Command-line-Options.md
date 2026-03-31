@@ -42,63 +42,63 @@ TABULAREDITOR ( file | server database | -L [name] ) [-S script1 [script2] [...]
         [-P [-Y]] [-S] [-R [-M]]]
         [-X xmla_script]] [-W] [-E]]
 
-file                Ruta de acceso completa al archivo Model.bim o a la carpeta del modelo database.json que se va a cargar.
-server              Nombre de servidor\instancia o cadena de conexión desde la que se cargará el modelo
-database            ID de la base de datos del modelo que se va a cargar. Si se deja en blanco (""), selecciona la primera
+file                Ruta completa del archivo Model.bim o de la carpeta del modelo database.json que se va a cargar.
+server              Nombre del servidor\instancia o cadena de conexión desde la que se cargará el modelo.
+database            Id de la base de datos del modelo que se va a cargar. Si se deja en blanco (\"), se selecciona la primera
                       base de datos disponible en el servidor.
--L / -LOCAL         Se conecta a una instancia (local) de Analysis Services de Power BI Desktop. Si no se especifica un
-                      nombre, se supone que se está ejecutando exactamente 1 instancia. En caso contrario,
+-L / -LOCAL         Se conecta a una instancia (local) de Analysis Services de Power BI Desktop. Si no se
+                      especifica ningún nombre, se asume que hay exactamente 1 instancia en ejecución. En caso contrario,
                       el nombre debe coincidir con el nombre del archivo .pbix cargado en Power BI Desktop.
 -S / -SCRIPT        Ejecuta el script especificado en el modelo después de cargarlo.
-  scriptN             Ruta de acceso completa a uno o varios archivos que contienen un C# Script que se va a ejecutar o un
+  scriptN             Ruta completa de uno o varios archivos que contienen un C# Script para ejecutar o un
                       script en línea.
--SC / -SCHEMACHECK  Intenta conectarse a todos los orígenes de datos del proveedor para detectar cambios en el esquema de la tabla.
-                    Genera...
-                      ...advertencias para tipos de datos no coincidentes y columnas de origen no asignadas
-                      ...errores para columnas del modelo no asignadas.
+-SC / -SCHEMACHECK  Intenta conectarse a todos los orígenes de datos del proveedor para detectar cambios en el esquema
+                    de las tablas. Genera...
+                      ...advertencias por tipos de datos no coincidentes y columnas de origen no asignadas
+                      ...errores por columnas del modelo no asignadas.
 -A / -ANALYZE       Ejecuta Best Practice Analyzer y muestra el resultado en la consola.
-  rules               Ruta opcional de un archivo o una URL con reglas BPA adicionales que se van a analizar. Si se
-                      especifica, el modelo no se analiza con reglas locales del usuario o del equipo,
+  rules               Ruta opcional de un archivo o la URL de reglas BPA adicionales que se van a analizar. Si
+                      se especifica, el modelo no se analiza con las reglas del usuario local ni de la máquina local,
                       pero las reglas definidas dentro del modelo se siguen aplicando.
 -AX / -ANALYZEX     Igual que -A / -ANALYZE, pero excluye las reglas especificadas en las anotaciones del modelo.
 -B / -BIM / -BUILD  Guarda el modelo (después de la ejecución opcional del script) como un archivo Model.bim.
-  output              Ruta de acceso completa del archivo Model.bim donde se guardará.
-  id                  ID/nombre opcional que se asignará al objeto Database al guardar.
+  output              Ruta completa del archivo Model.bim donde se guardará.
+  id                  Id/nombre opcional que se asignará al objeto Database al guardar.
 -F / -FOLDER        Guarda el modelo (después de la ejecución opcional del script) como una estructura de carpetas.
-  output              Ruta de acceso completa de la carpeta donde se guardará. La carpeta se crea si no existe.
-  id                  ID/nombre opcional que se asignará al objeto Database al guardar.
+  output              Ruta completa de la carpeta donde se guardará. La carpeta se crea si no existe.
+  id                  Id/nombre opcional que se asignará al objeto Database al guardar.
 -TMDL               Guarda el modelo (después de la ejecución opcional del script) como una estructura de carpetas TMDL.
-  output              Ruta de acceso completa de la carpeta TMDL donde se guardará. La carpeta se crea si no existe.
-  id                  ID/nombre opcional que se asignará al objeto Database al guardar.
+  output              Ruta completa de la carpeta TMDL donde se guardará. La carpeta se crea si no existe.
+  id                  Id/nombre opcional que se asignará al objeto Database al guardar.
 -V / -VSTS          Genera comandos de registro de Visual Studio Team Services.
--G / -GITHUB        Genera comandos de flujo de trabajo de GitHub Actions.
--T / -TRX         Genera un archivo VSTEST (trx) con detalles sobre la ejecución.
-  resultsfile       Nombre de archivo del XML de VSTEST.
--D / -DEPLOY        Implementación desde la línea de comandos
+-G / -GITHUB        Genera comandos de flujo de trabajo para GitHub Actions.
+-T / -TRX         Genera un archivo VSTEST (trx) con detalles de la ejecución.
+  resultsfile       Nombre del archivo XML de VSTEST.
+-D / -DEPLOY        Despliegue desde la línea de comandos
                       Si no se especifican parámetros adicionales, este modificador guardará los metadatos del modelo
                       de nuevo en el origen (archivo o base de datos).
-  server              Nombre del servidor en el que implementar o cadena de conexión a Analysis Services.
-  database            ID de la base de datos que se va a implementar (crear/sobrescribir).
-  -L / -LOGIN         Deshabilita la seguridad integrada al conectarse al servidor. Especifica:
-    user                Nombre de usuario (debe ser un usuario con permisos de administrador en el servidor)
+  server              Nombre del servidor donde se realizará el despliegue o cadena de conexión a Analysis Services.
+  database            Id de la base de datos que se va a desplegar (crear/sobrescribir).
+  -L / -LOGIN         Desactiva la seguridad integrada al conectarse al servidor. Especifica:
+    user                Nombre de usuario (debe ser un usuario con derechos de administrador en el servidor)
     pass                Contraseña
-  -F / -FULL          Implementa todos los metadatos del modelo, permitiendo sobrescribir una base de datos existente.
-  -O / -OVERWRITE     Permite implementar (sobrescribir) una base de datos existente.
-    -C / -CONNECTIONS   Implementa (sobrescribe) los Data source existentes en el modelo. Después del modificador -C, puedes
-                        (opcionalmente) especificar cualquier número de pares marcador de posición-valor. Al hacerlo,
+  -F / -FULL          Despliega todos los metadatos del modelo, permitiendo sobrescribir una base de datos existente.
+  -O / -OVERWRITE     Permite desplegar (sobrescribir) una base de datos existente.
+    -C / -CONNECTIONS   Despliega (sobrescribe) los Data sources existentes en el modelo. Después del modificador -C,
+                        puedes especificar, opcionalmente, cualquier cantidad de pares marcador de posición/valor. Al hacerlo,
                         se reemplazará cualquier aparición de los marcadores de posición especificados (plch1, plch2, ...) en las
                         cadenas de conexión de cada Data source del modelo por los valores especificados
                         (value1, value2, ...).
-    -P / -PARTITIONS    Implementa (sobrescribe) las particiones de tabla existentes del modelo.
-      -Y / -SKIPPOLICY    No sobrescribe particiones que tengan definidas políticas de actualización incremental.
-    -S / -SHARED        Implementa (sobrescribe) expresiones compartidas.
-    -R / -ROLES         Implementa roles.
-      -M / -MEMBERS       Implementa miembros del rol.
-  -X / -XMLA        Sin implementación. En su lugar, genera un script XMLA/TMSL para una implementación posterior.
-    xmla_script       Nombre de archivo del nuevo script de salida XMLA/TMSL.
-  -W / -WARN        Muestra, como advertencias, información sobre objetos no procesados.
-  -E / -ERR         Devuelve un código de salida distinto de cero si Analysis Services devuelve algunos mensajes de error después de que
-                      los metadatos se hayan implementado/actualizado.
+    -P / -PARTITIONS    Despliega (sobrescribe) las particiones de tabla existentes en el modelo.
+      -Y / -SKIPPOLICY    No sobrescribe las particiones que tengan definidas políticas de actualización incremental.
+    -S / -SHARED        Despliega (sobrescribe) expresiones compartidas.
+    -R / -ROLES         Despliega roles.
+      -M / -MEMBERS       Despliega miembros del rol.
+  -X / -XMLA        No realiza ningún despliegue. En su lugar, genera un script XMLA/TMSL para desplegarlo más tarde.
+    xmla_script       Nombre del archivo de salida del nuevo script XMLA/TMSL.
+  -W / -WARN        Muestra información sobre objetos sin procesar en forma de advertencias.
+  -E / -ERR         Devuelve un código de salida distinto de cero si Analysis Services devuelve mensajes de error después de que
+                      se hayan desplegado o actualizado los metadatos.
 ```
 
 > [!WARNING]
@@ -164,8 +164,8 @@ Durante el despliegue, quieres modificar la cadena para que apunte a una base de
 Coloca el siguiente script en un archivo llamado "ClearConnectionStrings.cs" o similar:
 
 ```csharp
-// Esto reemplazará la cadena de conexión de todos los orígenes de datos de proveedor (heredados) del modelo
-// por un marcador de posición basado en el nombre del origen de datos. Por ejemplo, si tu origen de datos se llama
+// Esto reemplazará la cadena de conexión de todos los orígenes de datos del proveedor (heredados) del modelo
+// por un marcador de posición basado en el nombre del Data source. Por ejemplo, si tu Data source se llama
 // "SQLDW", la cadena de conexión después de ejecutar este script sería "SQLDW":
 
 foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
@@ -241,7 +241,7 @@ variables:
 
 steps:
 - script: TabularEditor.exe "Model.bim" -S "UpdateModel.csx" -D "$(serverName)" "MyDatabase" -O -V -E -W
-  displayName: 'Deploy with Script Parameters'
+  displayName: 'Despliegue con parámetros de script'
   env:
     DEPLOY_ENV: $(deployEnv)
     SERVER_NAME: $(serverName)
@@ -251,7 +251,7 @@ steps:
 
 ```yaml
 - task: PowerShell@2
-  displayName: 'Run Tabular Editor Script'
+  displayName: 'Ejecutar script de Tabular Editor'
   env:
     DEPLOY_ENV: 'UAT'
     CONNECTION_STRING: $(sqldwConnectionString)
@@ -269,9 +269,9 @@ steps:
 var deployEnv = Environment.GetEnvironmentVariable("DEPLOY_ENV");
 var serverName = Environment.GetEnvironmentVariable("SERVER_NAME");
 
-Info($"Configuring model for {deployEnv} environment on {serverName}");
+Info($"Configurando el modelo para el entorno {deployEnv} en {serverName}");
 
-// Apply environment-specific changes
+// Aplicar cambios específicos del entorno
 foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
 {
     ds.ConnectionString = ds.ConnectionString.Replace("{SERVER}", serverName);
@@ -316,9 +316,9 @@ La línea de comandos proporciona varios detalles, en función de los parámetro
 | Error       | -ANALYZE                        | No se encontró el archivo de reglas: ...               |                                                                                                                                                                                                                                                          |
 | Error       | -ANALYZE                        | Archivo de reglas no válido: ...                       | El archivo de reglas de BPA especificado está dañado o no contiene un JSON válido.                                                                                                                                                       |
 | Información | -ANALYZE                        | ... viola la regla ... | Resultados del Best Practice Analyzer para reglas con un nivel de gravedad de 1 o inferior.                                                                                                                                              |
-| Advertencia | -ANALYZE                        | ... ¡La implementación falló!                                          | Resultados del Best Practice Analyzer para reglas con un nivel de gravedad de 2.                                                                                                                                                         |
+| Advertencia | -ANALYZE                        | ... viola la regla ... | Resultados del Best Practice Analyzer para reglas con un nivel de gravedad de 2.                                                                                                                                                         |
 | Error       | -ANALYZE                        | ... viola la regla ... | Resultados del Best Practice Analyzer para reglas con un nivel de gravedad de 3 o superior.                                                                                                                                              |
-| Error       | -DEPLOY                         | viola la regla ... ... | Motivo del fallo devuelto directamente por la instancia de Analysis Service (por ejemplo: base de datos no encontrada, no se permite sobrescribir la base de datos, etc.)                             |
+| Error       | -DEPLOY                         | ¡La implementación falló! ...                                          | Motivo del fallo devuelto directamente por la instancia de Analysis Service (por ejemplo: base de datos no encontrada, no se permite sobrescribir la base de datos, etc.)                             |
 | Información | -DEPLOY                         | Objeto sin procesar: ...                               | Objetos que están en el estado "NoData" o "CalculationNeeded" tras una implementación correcta. Utilice el modificador -W para tratarlos como Nivel=Advertencia.                                                         |
 | Advertencia | -DEPLOY                         | El objeto no está en estado "Ready": ...               | Objetos que se encuentran en estado "DependencyError", "EvaluationError" o "SemanticError" después de un despliegue correcto. Si usa la opción -W, también incluye los objetos en estado "NoData" o "CalculationNeeded". |
 | Advertencia | -DEPLOY                         | Error en X:...                                         | Objetos que contienen DAX no válido después de un despliegue correcto (medidas, columnas calculadas, tablas calculadas, roles). Use la opción -E para tratarlos como Level=Error.                     |

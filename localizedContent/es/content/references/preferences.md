@@ -176,7 +176,7 @@ Crea una copia de seguridad del modelo al guardar cambios localmente. Esto te of
 
 ##### _Ubicación para guardar la copia de seguridad_
 
-Especifica la carpeta donde se almacenan las copias de seguridad creadas al guardar. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
+Especifica la carpeta donde se almacenan las copias de seguridad de los despliegues. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
 
 ##### _Copia de seguridad al implementar_ (habilitado)
 
@@ -184,7 +184,7 @@ Crea una copia de seguridad del modelo de destino antes de implementar los cambi
 
 ##### _Ubicación de copia de seguridad_
 
-Especifica la carpeta donde se almacenan las copias de seguridad de los despliegues. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
+De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación. Especifica la carpeta donde se almacenan las copias de seguridad creadas al guardar.
 
 ## Tabular Editor > Valores predeterminados
 
@@ -714,7 +714,7 @@ Define prefijos aceptables para nombres de variables (p. ej., `_`, `__`, `var_`,
 
 Define prefijos aceptables para nombres de columnas temporales (p. ej., `@`, `_`, `x`, `x_`). Las acciones de código sugerirán añadir estos prefijos a los nombres de columnas temporales que no sigan la convención.
 
-## Editor SQL / Editor M / Editor de C\\#
+## Editor SQL / Editor M / Editor de C\#
 
 ![Marcador de posición: captura de pantalla de las páginas de preferencias de los editores SQL/M/C#]
 

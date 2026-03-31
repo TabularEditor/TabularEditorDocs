@@ -154,8 +154,8 @@ Selected.Measures
 | `Selected.Level`                    | `Selected.Levels`                    | 层级      |
 | `Selected.Table`                    | `Selected.Tables`                    | 表格      |
 | `Selected.CalculatedTable`          | `Selected.CalculatedTables`          | 计算表格    |
-| `Selected.分区`                       | `Selected.Partitions`                | 分区      |
-| `Selected.角色`                       | `Selected.Roles`                     | 模型角色    |
+| `Selected.Partition`                | `Selected.Partitions`                | 分区      |
+| `Selected.Role`                     | `Selected.Roles`                     | 模型角色    |
 | `Selected.TablePermission`          | `Selected.TablePermissions`          | 表格权限    |
 | `Selected.KPI`                      | `Selected.KPIs`                      | KPI     |
 | `Selected.Calendar`                 | `Selected.Calendars`                 | 日历      |

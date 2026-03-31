@@ -297,31 +297,31 @@ _A continuación se muestra un resumen de las propiedades de TOM de un Data mode
             <tr>
                 <td class="formatting"><span id="enablerefreshpolicy"><em><b>EnableRefreshPolicy</b></em></a></span></td>
                 <td class="formatting">Actualizar esta tabla de forma incremental</td>
-                <td class="formatting">Indica si hay una política de actualización habilitada para la tabla.<br /><br>En Tabular Editor, otras propiedades de la política de actualización solo serán visibles si este valor se establece en <code>True</code>.</td>
+                <td class="formatting">Indica si la tabla tiene habilitada una política de actualización.<br /><br>En Tabular Editor, el resto de las propiedades de la política de actualización solo se mostrarán si este valor se establece en <code>True</code>.</td>
                 <td class="formatting"><code>True</code> o <code>False</code>.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#455C86" id="incrementalgranularity"><em><b>IncrementalGranularity</b></em></span></td>
                 <td class="formatting">Período de actualización incremental</td>
-                <td class="formatting">La granularidad de la ventana incremental.<br /><br>Ejemplo:<br /><em>"Actualice los datos de los últimos 30 <strong><em>días</em></strong> antes de la fecha de actualización."</em></td>
-                <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> o <code>Year</code>. Debe ser menor o igual que el valor de IncrementalGranularity.</td>
+                <td class="formatting">La granularidad de la ventana incremental.<br /><br>Ejemplo:<br /><em>"Actualizar los datos de los últimos 30 <strong><em>días</em></strong> anteriores a la fecha de actualización."</em></td>
+                <td class="formatting"><code>Day</code>, <code>Month</code>, <code>Quarter</code> o <code>Year</code>. Debe ser menor o igual que el IncrementalGranularity.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#455C86" id="incrementalperiods"><em><b>IncrementalPeriods</b></em></span></td>
                 <td class="formatting">Número de períodos de actualización incremental</td>
-                <td class="formatting">El número de períodos de la ventana incremental.<br /><br>Ejemplo:<br /><em>"Actualice los datos de los últimos <strong><em>30</em></strong> días antes de la fecha de actualización."</em></td>
-                <td class="formatting">Un número entero que indica la cantidad de períodos de <em>IncrementalGranularity</em>. Debe definir un período total inferior a <em>RollingWindowPeriods</em></td>
+                <td class="formatting">El número de períodos de la ventana incremental.<br /><br>Ejemplo:<br /><em>"Actualizar los datos de los últimos <strong><em>30</em></strong> días antes de la fecha de actualización."</em></td>
+                <td class="formatting">Un número entero que indique el número de períodos de <em>IncrementalGranularity</em>. Debe definir un período total inferior a <em>RollingWindowPeriods</em></td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#455C86" id="incrementaloffset"><b><em>IncrementalPeriodsOffset</b></em></span></td>
-                <td class="formatting">Actualizar solo los días completos</td>
+                <td class="formatting">Actualizar solo días completos</td>
                 <td class="formatting">El desplazamiento que se aplicará a <em>IncrementalPeriods</em>.<br /><br>Ejemplo para:<br /><em>IncrementalPeriodsOffset</em>=<code>-1</code>; <br /><em>IncrementalPeriods</em> = <code>30</code>;<br /><em>IncrementalGranularity</em> = <code>Day</code>: <br /><em>"Actualizar solo los datos de los últimos 30 días, desde el día anterior a la fecha de actualización.</em></td>
-                <td class="formatting">Un número entero que indica la cantidad de períodos de <em>IncrementalGranularity</em> para desplazar la ventana incremental.</td>
+                <td class="formatting">Un número entero con el número de períodos de <em>IncrementalGranularity</em> para desplazar la ventana incremental.</td>
             </tr>
             <tr>
                 <td class="formatting"><span id="refreshpolicymode"><b><em>Mode</b></em></span></td>
-                <td class="formatting">Obtener los datos más recientes en tiempo real con DirectQuery</td>
-                <td class="formatting">Especifica si la actualización incremental está configurada solo con particiones de importación o también con una partición de DirectQuery, para crear una <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"tabla híbrida"</a>.</td>
+                <td class="formatting">Obtenga los datos más recientes en tiempo real con DirectQuery</td>
+                <td class="formatting">Especifica si la actualización incremental se configura únicamente con particiones de importación o también con una partición de DirectQuery, para dar como resultado una <a href="https://learn.microsoft.com/en-us/power-bi/connect-data/service-dataset-modes-understand#hybrid-tables">"tabla híbrida"</a>.</td>
                 <td class="formatting"><code>Import</code> o <code>Hybrid</code>.</td>
             </tr>
             <tr>
@@ -333,7 +333,7 @@ _A continuación se muestra un resumen de las propiedades de TOM de un Data mode
             <tr>
                 <td class="formatting"><span id="pollingexpression"><b><em>PollingExpression</b><br />(Opcional)</em></span></td>
                 <td class="formatting">Detectar cambios en los datos</td>
-                <td class="formatting">La expresión M utilizada para detectar cambios en una columna específica, como <em>LastUpdateDate</em>.<br /><br>En Tabular Editor, <strong>la <em>Polling Expression</em> se puede ver y modificar desde la ventana del <em>Editor de expresiones</em></strong> seleccionándola en el menú desplegable de la esquina superior izquierda.</td><td class="formatting">Una expresión M válida que devuelve un valor escalar de la fecha más reciente de una columna. Se actualizarán todos los registros de las particiones activas de la ventana incremental que contengan ese valor en la columna.<br><br>Los registros de las particiones archivadas <i>no</i> se actualizan.</td>
+                <td class="formatting">La expresión M que se usa para detectar cambios en una columna específica, como <em>LastUpdateDate</em><br /><br>En Tabular Editor, <strong>la <em>PollingExpression</em> se puede ver y modificar desde la ventana del <em>Editor de expresiones</em></strong> seleccionándola en el menú desplegable de la esquina superior izquierda.</td><td class="formatting">Una expresión M válida que devuelve un valor escalar de la fecha más reciente de una columna. Se actualizarán todos los registros de las particiones activas de la ventana incremental que contengan ese valor en la columna.<br><br>Los registros de las particiones archivadas <i>no</i> se actualizan.</td>
             </tr>
             <tr>
                 <td class="formatting"><span style="color:#BC4A47" id="rollinggranularity"><b><em>RollingWindowGranularity</b></em></span></td>

@@ -43,11 +43,11 @@ Estas funciones también se pueden activar desde el menú contextual del editor.
 
 Los calltips de DAX se actualizan al alternar entre las opciones de sintaxis con las flechas Arriba/Abajo.
 
-![Dax Code Assist](~/content/assets/images/dax-code-assist.png)
+![Code Assist de Dax](~/content/assets/images/dax-code-assist.png)
 
 La mayoría de los aspectos de Code Assist se pueden configurar en [**Herramientas > Preferencias > Editores de texto > Editor de DAX > Code Assist**](xref:preferences#dax-editor--code-assist).
 
-## Ver la definición
+## Ver definición
 
 Con el cursor sobre una referencia a un objeto, como una variable o una referencia a una medida, pulsa [Alt+F12] para mostrar un editor en línea con la definición de ese objeto, debajo del cursor. Esto resulta útil cuando desea ver el código DAX de un objeto al que se hace referencia sin salir de la posición actual del documento.
 
