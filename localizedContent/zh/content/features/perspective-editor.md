@@ -1,5 +1,5 @@
 ---
-uid: 透视编辑器
+uid: perspective-editor
 title: 透视编辑器
 author: Šarūnas Jučius
 updated: 2022-03-16
