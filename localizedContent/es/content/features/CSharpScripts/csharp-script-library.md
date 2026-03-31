@@ -5,7 +5,7 @@ author: Morten Lønskov
 updated: 2023-02-23
 ---
 
-# Biblioteca de scripts de C\#
+# Biblioteca de scripts de C\\#
 
 ![Biblioteca de scripts de C#](~/content/assets/images/Cscripts/script-library-header.png)
 
