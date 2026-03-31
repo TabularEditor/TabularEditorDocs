@@ -1,5 +1,5 @@
 ---
-uid: 安全与隐私
+uid: security-privacy
 title: 安全概述
 author: Daniel Otykier
 updated: 2026-03-25
