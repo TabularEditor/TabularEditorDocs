@@ -35,7 +35,7 @@ Please refer to the matrix below for the full overview of supported scenarios:
 
 |Scenario / Edition|Desktop|Business|Enterprise|
 |---|---|---|---|
-|External Tool for Power BI Desktop|<span class="emoji"><span class="emoji">&#10004;</span></span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|External Tool for Power BI Desktop|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Load/save model metadata to disk**|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
 |Workspace Mode***|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
 |Power BI Premium Per User|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
