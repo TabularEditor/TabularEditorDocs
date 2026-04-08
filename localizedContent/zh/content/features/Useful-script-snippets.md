@@ -705,7 +705,7 @@ foreach(var col in aggTable.Columns)
 
 ## 查询 Analysis Services
 
-自版本 [2.12.1](https://github.com/TabularEditor/TabularEditor/releases/tag/2.12.1) 起，Tabular Editor 提供了多种辅助方法，用于针对你的模型执行 DAX 查询并对 DAX 表达式求值。 选项，或使用 Tabular Editor 与 Power BI 外部工具的集成功能时。
+自版本 [2.12.1](https://github.com/TabularEditor/TabularEditor/releases/tag/2.12.1) 起，Tabular Editor 提供了多种辅助方法，用于针对你的模型执行 DAX 查询并对 DAX 表达式求值。 这些方法仅在模型元数据直接从 Analysis Services 实例加载时才适用，例如使用 "File > Open > From DB..." 选项，或使用 Tabular Editor 与 Power BI 外部工具的集成功能时。
 
 以下方法可用：
 
