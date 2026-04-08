@@ -176,7 +176,7 @@ Crea una copia de seguridad del modelo al guardar cambios localmente. Esto te of
 
 ##### _Ubicación para guardar la copia de seguridad_
 
-Especifica la carpeta donde se almacenan las copias de seguridad de los despliegues. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
+Especifica la carpeta donde se almacenan las copias de seguridad creadas al guardar. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
 
 ##### _Copia de seguridad al implementar_ (habilitado)
 
@@ -184,7 +184,7 @@ Crea una copia de seguridad del modelo de destino antes de implementar los cambi
 
 ##### _Ubicación de copia de seguridad_
 
-Especifica la carpeta donde se almacenan las copias de seguridad creadas al guardar. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
+Especifica la carpeta donde se almacenan las copias de seguridad de los despliegues. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
 
 ## Tabular Editor > Valores predeterminados
 
