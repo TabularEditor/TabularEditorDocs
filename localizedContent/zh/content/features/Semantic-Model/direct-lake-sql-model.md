@@ -11,7 +11,7 @@ applies_to:
       editions:
         - edition: Desktop
           none: true
-        - edition: 商业版
+        - edition: Business
           none: true
         - edition: Enterprise
           full: true
