@@ -439,7 +439,7 @@ foreach(var row in tsvRows.Skip(1))
 Si necesitas automatizar este proceso, guarda el script anterior en un archivo y usa la [Tabular Editor CLI](/Command-line-Options) de la siguiente manera:
 
 ```powershell
-start /wait TabularEditor.exe "<0>" -S "<1>" -B "<2>"
+start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
 ```
 
 por ejemplo:
@@ -741,11 +741,11 @@ ExecuteCommand(tmsl);
 A partir de Tabular Editor 2.16.6 o Tabular Editor 3.2.3, puede usar la siguiente sintaxis para enviar comandos XMLA sin procesar a Analysis Services. El siguiente ejemplo muestra cómo se puede usar para vaciar la caché del motor de AS:
 
 ```csharp
-var clearCacheXmla = string.Format(@"<0>  
-  <1>
-    <2>{0}</2>
-  </1>
-</0>", Model.Database.ID);
+var clearCacheXmla = string.Format(@"<ClearCache xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">
+  <Object>
+    <DatabaseID>{0}</DatabaseID>
+  </Object>
+</ClearCache>", Model.Database.ID);
 
 ExecuteCommand(clearCacheXmla, isXmla: true);
 ```
