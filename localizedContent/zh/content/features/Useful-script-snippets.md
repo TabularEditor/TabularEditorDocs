@@ -75,7 +75,7 @@ CustomAction(@"Time Intelligence\Create MTD measure");
 CustomAction(@"Time Intelligence\Create LY measure");
 ```
 
-这展示了如何在一个操作中调用另一个操作来执行一个（或多个）自定义操作（注意避免循环引用，否则会导致 Tabular Editor 崩溃）。 将其另存为新的自定义操作“Time Intelligence\\All of the above”，即可通过一次单击轻松生成所有时间智能度量值：
+这展示了如何在一个操作中调用另一个操作来执行一个（或多个）自定义操作（注意避免循环引用，否则会导致 Tabular Editor 崩溃）。 将其另存为新的自定义操作“Time Intelligence\All of the above”，即可通过一次单击轻松生成所有时间智能度量值：
 
 ![image](https://user-images.githubusercontent.com/8976200/36632257-5565c8ca-197c-11e8-8498-82667b6e1049.png)
 
