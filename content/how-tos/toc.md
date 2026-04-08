@@ -9,6 +9,7 @@
 ## [Folder Serialization](folder-serialization.md)
 ## [Master Model Pattern](Master-model-pattern.md)
 ## [Update compatibility level](update-compatibility-level.md)
+## [Change compatibility mode](change-compatibility-mode.md)
 
 # Data Import and Tables
 ## [Importing Tables (TE2)](Importing-Tables.md)
