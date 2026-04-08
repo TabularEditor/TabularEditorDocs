@@ -44,7 +44,7 @@ TABULAREDITOR ( file | server database | -L [name] ) [-S script1 [script2] [...]
 
 file                Ruta completa del archivo Model.bim o de la carpeta del modelo database.json que se va a cargar.
 server              Nombre del servidor\instancia o cadena de conexión desde la que se cargará el modelo.
-database            Id de la base de datos del modelo que se va a cargar. Si se deja en blanco (\"), se selecciona la primera
+database            Id de la base de datos del modelo que se va a cargar. Si se deja en blanco ("), se selecciona la primera
                       base de datos disponible en el servidor.
 -L / -LOCAL         Se conecta a una instancia (local) de Analysis Services de Power BI Desktop. Si no se
                       especifica ningún nombre, se asume que hay exactamente 1 instancia en ejecución. En caso contrario,
