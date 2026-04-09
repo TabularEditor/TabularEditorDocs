@@ -20,9 +20,9 @@ applies_to:
 
 # 代码操作
 
-Tabular Editor 3.18.0 引入了一项名为 **代码操作** 的新功能。 此功能默认启用，但可在 **工具 > 偏好** 对话框中，于 **文本编辑器 > DAX编辑器 > 代码操作** 下将其禁用。 此功能默认启用，但可在 **工具 > 偏好** 对话框中，于 **文本编辑器 > DAX编辑器 > 代码操作** 下将其禁用。
+Tabular Editor 3.18.0 引入了一项名为 **代码操作** 的新功能。 此功能默认启用，但可在 **工具 > 偏好** 对话框中，于 **文本编辑器 > DAX编辑器 > 代码操作** 下将其禁用。
 
-代码操作是一项提升效率的功能，会在不打断你工作的情况下提供改进 DAX 代码的建议。 单击即可应用这些建议。 代码操作还可让你快速访问常用的代码重构操作。 单击即可应用这些建议。 代码操作还可让你快速访问常用的代码重构操作。
+代码操作是一项提升效率的功能，会在不打断你工作的情况下提供改进 DAX 代码的建议。 单击即可应用这些建议。 代码操作还可让你快速访问常用的代码重构操作。
 
 代码操作分为三类：
 
@@ -35,14 +35,14 @@ Tabular Editor 3.18.0 引入了一项名为 **代码操作** 的新功能。 此
    - 在可能的情况下简化复杂表达式
    - 删除冗余或不必要的代码
    - 应用一致的格式和命名规范
-3. **重写**：这些是用于重构你的 DAX 代码的建议。 它们未必是改进，但在进行较大规模的代码重构时通常很有用。 例如： 它们未必是改进，但在进行较大规模的代码重构时通常很有用。 例如：
+3. **重写**：这些是用于重构你的 DAX 代码的建议。 它们未必是改进，但在进行较大规模的代码重构时通常很有用。 例如：
    - 将 DAX “语法糖”改写为更冗长但更明确的显式代码
    - 重命名变量或扩展列的所有实例
    - 格式化代码
 
 ## 如何使用代码操作
 
-新增了一个命令及其对应的工具栏/菜单按钮 **显示代码操作**，默认键盘快捷键为 `Ctrl+.`。 该命令会在当前光标位置显示适用的代码操作： 该命令会在当前光标位置显示适用的代码操作：
+新增了一个命令及其对应的工具栏/菜单按钮 **显示代码操作**，默认键盘快捷键为 `Ctrl+.`。 该命令会在当前光标位置显示适用的代码操作：
 
 ![代码操作调用菜单](~/content/assets/images/features/code-action-invoke-menu.png)
 
@@ -50,25 +50,25 @@ Tabular Editor 3.18.0 引入了一项名为 **代码操作** 的新功能。 此
 
 ![代码操作重构子菜单](~/content/assets/images/features/code-action-refactor-submenu.png)
 
-最后，当光标放在具有可用操作的代码分段上时，编辑器左侧边距会显示一个灯泡或螺丝刀图标。 点击该图标也会打开代码操作菜单： 点击该图标也会打开代码操作菜单：
+最后，当光标放在具有可用操作的代码分段上时，编辑器左侧边距会显示一个灯泡或螺丝刀图标。 点击该图标也会打开代码操作菜单：
 
 ![代码操作边距](~/content/assets/images/features/code-action-margin.png)
 
-当你将鼠标指针悬停在代码操作菜单中的某个操作上时，工具提示会显示该操作的更多信息。 点击“了解更多”链接，即可查看该操作对应的知识库 (KB) 文章。 点击“了解更多”链接，即可查看该操作对应的知识库 (KB) 文章。
+当你将鼠标指针悬停在代码操作菜单中的某个操作上时，工具提示会显示该操作的更多信息。 点击“了解更多”链接，即可查看该操作对应的知识库 (KB) 文章。
 
 ![代码操作工具提示](~/content/assets/images/features/code-action-tooltip.png)
 
 ## 代码操作指示器
 
-**改进**和**可读性**类代码操作也会在代码编辑器中以可视化方式标记。 这能让你快速判断代码的哪些部分可以改进或提升可读性。 这能让你快速判断代码的哪些部分可以改进或提升可读性。
+**改进**和**可读性**类代码操作也会在代码编辑器中以可视化方式标记。 这能让你快速判断代码的哪些部分可以改进或提升可读性。
 
-- **改进** 会在代码分段开头的前几个字符下方显示橙色圆点（除非该代码分段已显示橙色的警告波浪线）。 当光标移动到代码分段上时，左侧边距会出现一个_灯泡_图标。 当光标移动到代码分段上时，左侧边距会出现一个_灯泡_图标。
-- **可读性**操作会在代码分段开头的前几个字符下方显示青绿色圆点。 当光标移到代码分段上时，左侧边距会显示一个_螺丝刀_图标。 当光标移到代码分段上时，左侧边距会显示一个_螺丝刀_图标。
+- **改进** 会在代码分段开头的前几个字符下方显示橙色圆点（除非该代码分段已显示橙色的警告波浪线）。 当光标移动到代码分段上时，左侧边距会出现一个_灯泡_图标。
+- **可读性**操作会在代码分段开头的前几个字符下方显示青绿色圆点。 当光标移到代码分段上时，左侧边距会显示一个_螺丝刀_图标。
 - 代码本身不会在视觉上直接标示出 **重写**；不过，当光标放在包含可用重写的代码分段上时，左侧边距会显示 _螺丝刀_ 图标。
 
 ## 应用到所有出现位置
 
-有些代码操作可以应用到当前 DAX 表达式、DAX 脚本或 DAX 查询中的所有出现位置，而不仅仅是光标所在的代码分段。 在这种情况下，代码操作会显示在“代码操作”菜单中，并在操作说明后追加 " (所有出现位置)"。 点击该操作会将更改应用到文档中的所有出现位置。 在这种情况下，代码操作会显示在“代码操作”菜单中，并在操作说明后追加 " (所有出现位置)"。 点击该操作会将更改应用到文档中的所有出现位置。
+有些代码操作可以应用到当前 DAX 表达式、DAX 脚本或 DAX 查询中的所有出现位置，而不仅仅是光标所在的代码分段。 在这种情况下，代码操作会显示在“代码操作”菜单中，并在操作说明后追加 " (所有出现位置)"。 点击该操作会将更改应用到文档中的所有出现位置。
 
 例如在下面的截图中，**为变量添加 '_' 前缀** 操作可以应用到文档中的所有出现位置（即所有变量），而不只是光标下的 `totalSales` 变量：
 
@@ -84,24 +84,24 @@ Tabular Editor 3.18.0 引入了一项名为 **代码操作** 的新功能。 此
 
 当光标放在代码分段上时，下列代码操作会在适用代码的前两个字符下方显示橙色圆点，并在左侧边距显示一个灯泡图标：
 
-| ID    | 名称                                   | 说明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ----- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DI001 | [删除未使用的变量](xref:DI001)               | 未在任何位置被引用的变量应当删除。 示例：<br>`VAR a = 1 VAR b = 2 RETURN a` -> `VAR a = 1 RETURN a` 示例：<br>`VAR a = 1 VAR b = 2 RETURN a` -> `VAR a = 1 RETURN a`                                                                                                                                                                                                                                                                                                                                                       |
-| DI002 | [删除所有未使用的变量](xref:DI002)             | 在变量块的 `RETURN` 部分未被使用的变量（无论是直接使用，还是通过其他变量间接使用）都应删除。 示例：<br>`VAR a = 1 VAR b = a RETURN 123` -> `123` 示例：<br>`VAR a = 1 VAR b = a RETURN 123` -> `123`                                                                                                                                                                                                                                                                                                                                               |
-| DI003 | [移除表名](xref:DI003)                   | 度量值引用不应包含表名，因为引用度量值时无需表名。 此外，这种做法还能让度量值引用更容易与列引用区分开来。 示例：<br>`Sales[Total Sales]` -> `[Total Sales]`                                                                                                                                                                                                                                                                                                                                                                                                |
-| DI004 | [添加表名](xref:DI004)                   | 列引用应包含表名，以避免歧义，并更容易将列引用与度量值引用区分开来。 示例：<br>`SUM([SalesAmount])` -> `SUM(Sales[SalesAmount])` 示例：<br>`SUM([SalesAmount])` -> `SUM(Sales[SalesAmount])`                                                                                                                                                                                                                                                                                                                                                |
-| DI005 | [将表筛选重写为标量谓词](xref:DI005)            | DAX 中一个常见的反模式是：在 [`CALCULATE`](https://dax.guide/CALCULATE) 的筛选参数中对一个表进行筛选，而实际上只需筛选该表中的一个或多个列即可。 示例：<br>`CALCULATE([Total Sales], FILTER(Products, Products[Color] = "Red"))` -> `CALCULATE([Total Sales], KEEPFILTERS(Products[Color] = "Red"))`<br>此代码操作支持原始表达式的多种变体。 示例：<br>`CALCULATE([Total Sales], FILTER(Products, Products[Color] = "Red"))` -> `CALCULATE([Total Sales], KEEPFILTERS(Products[Color] = "Red"))`<br>此代码操作支持原始表达式的多种变体。                                                      |
-| DI006 | [将多列筛选拆分为多个筛选](xref:DI006)           | 当使用 `AND` (或等效的 `&&` 运算符) 将表在多个列上的筛选组合在一起时，通常可以通过为每一列分别指定一个筛选来获得更好的性能。 示例：<br>`CALCULATE(..., Products[Color] = "Red" && Products[Size] = "Large")` -> `CALCULATE(..., Products[Color] = "Red", Products[Size] = "Large")`                                                                                                                                                                                                                                                       |
-| DI007 | [简化 SWITCH 语句](xref:DI007)           | 当 [`SWITCH`](https://dax.guide/SWITCH) 语句将 **&lt;Expression&gt;** 参数指定为 `TRUE()`，且所有 **&lt;Value&gt;** 参数都是对同一变量/度量值的简单比较时，该语句可以被简化。 示例：<br>`SWITCH(TRUE(), a = 1, ..., a = 2, ...)` -> `SWITCH(a, 1, ..., 2, ...)` 示例：<br>`SWITCH(TRUE(), a = 1, ..., a = 2, ...)` -> `SWITCH(a, 1, ..., 2, ...)`                                                                                                                  |
-| DI008 | [移除多余的 CALCULATE](xref:DI008)        | 应移除不必要的 [`CALCULATE`](https://dax.guide/CALCULATE) 函数：因为它不会修改筛选语境，或因为即使不写也会发生隐式语境转换。 应移除不必要的 [`CALCULATE`](https://dax.guide/CALCULATE) 函数：因为它不会修改筛选语境，或因为即使不写也会发生隐式语境转换。 示例：<br>`CALCULATE([Total Sales])` -> `[Total Sales]`<br>`AVERAGEX(Product, CALCULATE([Total Sales]))` -> `AVERAGEX(Product, [Total Sales])`<br><br>当 `CALCULATE` / `CALCULATETABLE` 的第一个参数是 DAX 变量时同样适用，例如：<br>`VAR x = [Total Sales] RETURN CALCULATE(x, Product[Color] = "Red")` -><br>`VAR x = [Total Sales] RETURN x` |
-| DI009 | [避免使用 CALCULATE 简写语法](xref:DI009)    | 示例：<br>`[Total Sales](Products[Color] = "Red")` -> `CALCULATE([Total Sales], Products[Color] = "Red")`                                                                                                                                                                                                                                                                                                                                                                                              |
-| DI010 | [用 MIN/MAX 替代 IF](xref:DI010)        | 当条件表达式用于返回两个值中的最小值或最大值时，使用 [`MIN`](https://dax.guide/MIN) 或 [`MAX`](https://dax.guide/MAX) 函数会更高效、更简洁。 示例：<br>`IF(a > b, a, b)` -> `MAX(a, b)` 示例：<br>`IF(a > b, a, b)` -> `MAX(a, b)`                                                                                                                                                                                                                                                                                                              |
-| DI011 | [用 ISEMPTY 替代 COUNTROWS](xref:DI011) | 检查表是否为空时，使用 [`ISEMPTY`](https://dax.guide/ISEMPTY) 比统计表的行数更高效。 示例：<br>`COUNTROWS(Products) = 0` -> `ISEMPTY(Products)` 示例：<br>`COUNTROWS(Products) = 0` -> `ISEMPTY(Products)`                                                                                                                                                                                                                                                                                                                      |
-| DI012 | [用 DIVIDE 替代除法运算符](xref:DI012)       | 当除法的分母是任意表达式时，请使用 [`DIVIDE`](https://dax.guide/DIVIDE) 而不是除法运算符，以避免除以零的错误。 示例：<br>`x / y` -> `DIVIDE(x, y)` 示例：<br>`x / y` -> `DIVIDE(x, y)`                                                                                                                                                                                                                                                                                                                                                        |
-| DI013 | [使用除法运算符而不是 DIVIDE](xref:DI013)      | 当 [`DIVIDE`](https://dax.guide/DIVIDE) 的第二个参数是非零常量时，使用除法运算符更高效。 示例：<br>`DIVIDE(x, 2)` -> `x / 2` 示例：<br>`DIVIDE(x, 2)` -> `x / 2`                                                                                                                                                                                                                                                                                                                                                                   |
-| DI014 | [用 DIVIDE 替换 IFERROR](xref:DI014)    | 当除法的分母为零时，请使用 [`DIVIDE`](https://dax.guide/DIVIDE) 函数替代 [`IFERROR`](https://dax.guide/IFERROR)，从而返回替代结果。 示例：<br>`IFERROR(x / y, 0)` -> `DIVIDE(x, y, 0)` 示例：<br>`IFERROR(x / y, 0)` -> `DIVIDE(x, y, 0)`                                                                                                                                                                                                                                                                                            |
-| DI015 | [用 DIVIDE 替换 IF](xref:DI015)         | 使用 [`DIVIDE`](https://dax.guide/DIVIDE) 函数代替 [`IF`](https://dax.guide/IF)，可以更方便地检查分母是否为零或空白。 示例：<br>`IF(y <> 0, x / y)` -> `DIVIDE(x, y)` 示例：<br>`IF(y <> 0, x / y)` -> `DIVIDE(x, y)`                                                                                                                                                                                                                                                                                                              |
-| DI016 | 使用正确的 UDF 语法                         | 为用户定义函数表达式使用正确的语法。 示例：<br>`(x, y) => x + y` 示例：<br>`(x, y) => x + y`                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ID    | 名称                                   | 说明                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ----- | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DI001 | [删除未使用的变量](xref:DI001)               | 未在任何位置被引用的变量应当删除。 示例：<br>`VAR a = 1 VAR b = 2 RETURN a` -> `VAR a = 1 RETURN a` 示例：<br>`VAR a = 1 VAR b = 2 RETURN a` -> `VAR a = 1 RETURN a`                                                                                                                                                                                                                                                                  |
+| DI002 | [删除所有未使用的变量](xref:DI002)             | 在变量块的 `RETURN` 部分未被使用的变量（无论是直接使用，还是通过其他变量间接使用）都应删除。 示例：<br>`VAR a = 1 VAR b = a RETURN 123` -> `123`                                                                                                                                                                                                                                                                                                           |
+| DI003 | [移除表名](xref:DI003)                   | 度量值引用不应包含表名，因为引用度量值时无需表名。 此外，这种做法还能让度量值引用更容易与列引用区分开来。 示例：<br>`Sales[Total Sales]` -> `[Total Sales]`                                                                                                                                                                                                                                                                                                           |
+| DI004 | [添加表名](xref:DI004)                   | 列引用应包含表名，以避免歧义，并更容易将列引用与度量值引用区分开来。 示例：<br>`SUM([SalesAmount])` -> `SUM(Sales[SalesAmount])`                                                                                                                                                                                                                                                                                                                    |
+| DI005 | [将表筛选重写为标量谓词](xref:DI005)            | DAX 中一个常见的反模式是：在 [`CALCULATE`](https://dax.guide/CALCULATE) 的筛选参数中对一个表进行筛选，而实际上只需筛选该表中的一个或多个列即可。 示例：<br>`CALCULATE([Total Sales], FILTER(Products, Products[Color] = "Red"))` -> `CALCULATE([Total Sales], KEEPFILTERS(Products[Color] = "Red"))`<br>此代码操作支持原始表达式的多种变体。                                                                                                                                        |
+| DI006 | [将多列筛选拆分为多个筛选](xref:DI006)           | 当使用 `AND` (或等效的 `&&` 运算符) 将表在多个列上的筛选组合在一起时，通常可以通过为每一列分别指定一个筛选来获得更好的性能。 示例：<br>`CALCULATE(..., Products[Color] = "Red" && Products[Size] = "Large")` -> `CALCULATE(..., Products[Color] = "Red", Products[Size] = "Large")`                                                                                                                                                                  |
+| DI007 | [简化 SWITCH 语句](xref:DI007)           | 当 [`SWITCH`](https://dax.guide/SWITCH) 语句将 **&lt;Expression&gt;** 参数指定为 `TRUE()`，且所有 **&lt;Value&gt;** 参数都是对同一变量/度量值的简单比较时，该语句可以被简化。 示例：<br>`SWITCH(TRUE(), a = 1, ..., a = 2, ...)` -> `SWITCH(a, 1, ..., 2, ...)`                                                                                                            |
+| DI008 | [移除多余的 CALCULATE](xref:DI008)        | 应移除不必要的 [`CALCULATE`](https://dax.guide/CALCULATE) 函数：因为它不会修改筛选语境，或因为即使不写也会发生隐式语境转换。 示例：<br>`CALCULATE([Total Sales])` -> `[Total Sales]`<br>`AVERAGEX(Product, CALCULATE([Total Sales]))` -> `AVERAGEX(Product, [Total Sales])`<br><br>当 `CALCULATE` / `CALCULATETABLE` 的第一个参数是 DAX 变量时同样适用，例如：<br>`VAR x = [Total Sales] RETURN CALCULATE(x, Product[Color] = "Red")` -><br>`VAR x = [Total Sales] RETURN x` |
+| DI009 | [避免使用 CALCULATE 简写语法](xref:DI009)    | 示例：<br>`[Total Sales](Products[Color] = "Red")` -> `CALCULATE([Total Sales], Products[Color] = "Red")`                                                                                                                                                                                                                                                                                                         |
+| DI010 | [用 MIN/MAX 替代 IF](xref:DI010)        | 当条件表达式用于返回两个值中的最小值或最大值时，使用 [`MIN`](https://dax.guide/MIN) 或 [`MAX`](https://dax.guide/MAX) 函数会更高效、更简洁。 示例：<br>`IF(a > b, a, b)` -> `MAX(a, b)`                                                                                                                                                                                                                                                                 |
+| DI011 | [用 ISEMPTY 替代 COUNTROWS](xref:DI011) | 检查表是否为空时，使用 [`ISEMPTY`](https://dax.guide/ISEMPTY) 比统计表的行数更高效。 示例：<br>`COUNTROWS(Products) = 0` -> `ISEMPTY(Products)`                                                                                                                                                                                                                                                                                         |
+| DI012 | [用 DIVIDE 替代除法运算符](xref:DI012)       | 当除法的分母是任意表达式时，请使用 [`DIVIDE`](https://dax.guide/DIVIDE) 而不是除法运算符，以避免除以零的错误。 示例：<br>`x / y` -> `DIVIDE(x, y)` 示例：<br>`x / y` -> `DIVIDE(x, y)`                                                                                                                                                                                                                                                                   |
+| DI013 | [使用除法运算符而不是 DIVIDE](xref:DI013)      | 当 [`DIVIDE`](https://dax.guide/DIVIDE) 的第二个参数是非零常量时，使用除法运算符更高效。 示例：<br>`DIVIDE(x, 2)` -> `x / 2` 示例：<br>`DIVIDE(x, 2)` -> `x / 2`                                                                                                                                                                                                                                                                              |
+| DI014 | [用 DIVIDE 替换 IFERROR](xref:DI014)    | 当除法的分母为零时，请使用 [`DIVIDE`](https://dax.guide/DIVIDE) 函数替代 [`IFERROR`](https://dax.guide/IFERROR)，从而返回替代结果。 示例：<br>`IFERROR(x / y, 0)` -> `DIVIDE(x, y, 0)` 示例：<br>`IFERROR(x / y, 0)` -> `DIVIDE(x, y, 0)`                                                                                                                                                                                                       |
+| DI015 | [用 DIVIDE 替换 IF](xref:DI015)         | 使用 [`DIVIDE`](https://dax.guide/DIVIDE) 函数代替 [`IF`](https://dax.guide/IF)，可以更方便地检查分母是否为零或空白。 示例：<br>`IF(y <> 0, x / y)` -> `DIVIDE(x, y)` 示例：<br>`IF(y <> 0, x / y)` -> `DIVIDE(x, y)`                                                                                                                                                                                                                         |
+| DI016 | 使用正确的 UDF 语法                         | 为用户定义函数表达式使用正确的语法。 示例：<br>`(x, y) => x + y` 示例：<br>`(x, y) => x + y`                                                                                                                                                                                                                                                                                                                                           |
 
 ### 可读性
 
