@@ -15,11 +15,11 @@ applies_to:
 
 ## 脚本用途
 
-此脚本用于将 OneLake 上的 Direct Lake（DL/OL）表转换为导入模式表。 如 [Direct Lake 指南文章](xref:direct-lake-guidance) 中所述，我们需要将此类表上的 [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet) 替换为导入模式下相应的常规 M 分区。
+此脚本用于将 OneLake 上的 Direct Lake（DL/OL）表转换为导入模式表。 此脚本用于将 OneLake 上的 Direct Lake（DL/OL）表转换为导入模式表。 如 [Direct Lake 指南文章](xref:direct-lake-guidance) 中所述，我们需要将此类表上的 [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet) 替换为导入模式下相应的常规 M 分区。
 
 ## 前提条件
 
-你需要 **SQL Endpoint**，以及 Fabric **Warehouse** 或 **Lakehouse** 的 **名称**。 这两项都可以在 Fabric 门户中找到。
+你需要 **SQL Endpoint**，以及 Fabric **Warehouse** 或 **Lakehouse** 的 **名称**。 这两项都可以在 Fabric 门户中找到。 这两项都可以在 Fabric 门户中找到。
 
 你还需要知道要连接的表/物化视图的 **Schema**。 对于 Lakehouse，默认值为 dbo。
 
@@ -274,11 +274,11 @@ Info("Conversion complete: Direct Lake → Import" +
 
 接着，脚本会提示你输入 SQL analytics endpoint、Lakehouse 或 Warehouse 的名称，以及必填的 Schema 名称。 脚本会确保这三个字段都已填写后，才允许你继续。
 
-接下来，脚本会使用提供的连接详细信息创建或更新一个名为 `SQLEndpoint` 的共享表达式。 此表达式使用 `Sql.Database` 连接器访问 Lakehouse 或 Warehouse。
+接下来，脚本会使用提供的连接详细信息创建或更新一个名为 `SQLEndpoint` 的共享表达式。 此表达式使用 `Sql.Database` 连接器访问 Lakehouse 或 Warehouse。 此表达式使用 `Sql.Database` 连接器访问 Lakehouse 或 Warehouse。
 
-对于每个要转换的表，脚本都会创建一个新的导入模式 M 分区，该分区引用 `SQLEndpoint` 表达式，并使用指定的 Schema 和表名。 现有的 Direct Lake 分区会先被重命名，然后被删除，最终只保留新的导入分区。
+对于每个要转换的表，脚本都会创建一个新的导入模式 M 分区，该分区引用 `SQLEndpoint` 表达式，并使用指定的 Schema 和表名。 现有的 Direct Lake 分区会先被重命名，然后被删除，最终只保留新的导入分区。 现有的 Direct Lake 分区会先被重命名，然后被删除，最终只保留新的导入分区。
 
-最后，如果你选择转换模型中的所有 Direct Lake 表，脚本会检查是否存在名为 `DatabaseQuery` 的共享表达式；如果存在，就将其删除。 随后，模型的默认存储模式会设置为导入模式，并显示确认信息。
+最后，如果你选择转换模型中的所有 Direct Lake 表，脚本会检查是否存在名为 `DatabaseQuery` 的共享表达式；如果存在，就将其删除。 随后，模型的默认存储模式会设置为导入模式，并显示确认信息。 随后，模型的默认存储模式会设置为导入模式，并显示确认信息。
 
 ## AI 使用声明
 
