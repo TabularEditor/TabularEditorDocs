@@ -2,7 +2,7 @@
 uid: script-add-databricks-metadata-descriptions
 title: Add Databricks Metadata Descriptions
 author: Johnny Winter
-updated: 2025-09-04
+updated: 2026-04-08
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -16,7 +16,8 @@ applies_to:
 This script was created as part of the Tabular Editor x Databricks series. In Unity Catalog it is possible provide descriptive comments for tables and columns. This script can re-use this information to automatically populate table and column descriptions in your semantic model.
 <br></br>
 > [!NOTE] 
-> This script requires the Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
+> This script requires a Databricks ODBC driver. We recommend the new [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download), which replaces the legacy Simba Spark ODBC Driver. The script auto-detects which driver is installed and uses it accordingly.
+
 Each run of the script will prompt the user for a Databricks Personal Access Token. This is required to authenticate to Databricks.
 The script utilises the information_schema tables in Unity Catalog to retrieve relationship information, so you may need to double check with your Databricks administrator to make sure you have permission to query these tables.
 <br></br>
@@ -37,7 +38,8 @@ The script utilises the information_schema tables in Unity Catalog to retrieve r
  *          For each table processed, a message box will display the number of descriptions updated.
  *          Click OK to continue to the next table.
  * Notes:
- *  -   This script requires the Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
+ *  -   This script requires the Databricks ODBC Driver (recommended) or legacy Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
+ *  -   The script auto-detects which driver is installed
  *  -   Each run of the script will prompt the user for a Databricks Personal Access Token
  */
 #r "Microsoft.VisualBasic"
@@ -376,6 +378,37 @@ do
 // toggle the 'Running Macro' spinbox
 ScriptHelper.WaitFormVisible = true;
 
+// auto-detect Databricks ODBC driver
+string driverPath;
+string newDriverPath = @"C:\Program Files\Databricks ODBC Driver";
+string legacyDriverPath = @"C:\Program Files\Simba Spark ODBC Driver";
+
+if (System.IO.Directory.Exists(newDriverPath))
+{
+    driverPath = newDriverPath;
+}
+else if (System.IO.Directory.Exists(legacyDriverPath))
+{
+    driverPath = legacyDriverPath;
+}
+else
+{
+    ScriptHelper.WaitFormVisible = false;
+    Interaction.MsgBox(
+        @"No Databricks ODBC driver found.
+
+Please install the Databricks ODBC Driver from:
+https://www.databricks.com/spark/odbc-drivers-download
+
+Expected installation paths:
+  " + newDriverPath + @"
+  " + legacyDriverPath,
+        MsgBoxStyle.Critical,
+        "ODBC Driver Not Found"
+    );
+    return;
+}
+
 //for each selected table, get the Databricks connection info from the partition info
 foreach (var t in Selected.Tables)
 {
@@ -391,11 +424,11 @@ foreach (var t in Selected.Tables)
     string tableName = connectionInfo.TableName;
     //set DBX connection string
     var odbcConnStr =
-        @"DSN=Simba Spark;driver=C:\Program Files\Simba Spark ODBC Driver;host="
+        @"Driver=" + driverPath + ";Host="
         + serverHostname
-        + ";port=443;httppath="
+        + ";Port=443;HTTPPath="
         + httpPath
-        + ";thrifttransport=2;ssl=1;authmech=3;uid=token;pwd="
+        + ";SSL=1;ThriftTransport=2;AuthMech=3;UID=token;PWD="
         + dbxPAT;
 
     //test connection
@@ -409,14 +442,12 @@ foreach (var t in Selected.Tables)
         // toggle the 'Running Macro' spinbox
         ScriptHelper.WaitFormVisible = false;
         Interaction.MsgBox(
-            @"Connection failed
+            @"Connection failed (using driver: " + driverPath + @")
 
-Please check the following prequisites:
+Please check the following prerequisites:
     
-- you must have the Simba Spark ODBC Driver installed 
+- you must have the Databricks ODBC Driver installed 
 (download from https://www.databricks.com/spark/odbc-drivers-download)
-
-- the ODBC driver must be installed in the path C:\Program Files\Simba Spark ODBC Driver
 
 - check that the Databricks server name "
                 + serverHostname
@@ -557,7 +588,7 @@ Either:
 }
 ```
 ### Explanation
-The script uses WinForms to prompt for a Databricks personal access token, used to authenticate to Databricks. For each selected table, the script retrieves the Databricks connection string information and schema and table name from the M query in the selected table's partition. Using the Spark ODBC driver it then sends a SQL query to Databricks that queries the information_schema tables to return the table description that is defined in Unity Catalog. This is then updated on the table description in the semantic model. A second SQL Query using the DESCRIBE command is also sent to the selected table to get column descriptions. The results of this are looped through, with descriptions added in the model. Once the script has run on each selected table, a dialogue box is displayed to show the number of descriptions updated.
+The script uses WinForms to prompt for a Databricks personal access token, used to authenticate to Databricks. It auto-detects whether the new Databricks ODBC Driver or the legacy Simba Spark ODBC Driver is installed. For each selected table, the script retrieves the Databricks connection string information and schema and table name from the M query in the selected table's partition. Using the detected ODBC driver it then sends a SQL query to Databricks that queries the information_schema tables to return the table description that is defined in Unity Catalog. This is then updated on the table description in the semantic model. A second SQL Query using the DESCRIBE command is also sent to the selected table to get column descriptions. The results of this are looped through, with descriptions added in the model. Once the script has run on each selected table, a dialogue box is displayed to show the number of descriptions updated.
 
 ## Example Output
 

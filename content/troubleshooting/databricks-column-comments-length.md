@@ -2,7 +2,7 @@
 uid: databricks-column-comments-length
 title: Databricks Column Comment Length Error
 author: Support Team
-updated: 2026-02-06
+updated: 2026-04-08
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -18,6 +18,9 @@ applies_to:
 ---
 
 # Databricks Column Comment Length Error
+
+> [!TIP]
+> Databricks has released a new ODBC driver that replaces the legacy Simba Spark ODBC Driver. The new [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) may not have the `MaxCommentLen` limitation described below. If you experience this issue, consider switching to the new driver, which Tabular Editor 3.26.0 and later supports.
 
 When using the Import Table Wizard to import tables from Databricks, you may encounter a connection error if column comments (descriptions) exceed 512 characters. This limitation exists in the Simba Spark ODBC Driver, even though Databricks Unity Catalog allows longer column comments.
 
