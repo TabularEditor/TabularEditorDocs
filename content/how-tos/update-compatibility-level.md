@@ -31,7 +31,7 @@ Compatibility Level and Compatibility Mode are separate properties that serve di
 | Property | Controls | Values |
 |---|---|---|
 | `Database.CompatibilityLevel` | Which TOM features are available (e.g., custom calendars, DAX UDFs) | `1200`, `1500`, `1600`, `1701`, `1702`, etc. |
-| `Database.CompatibilityMode` | Which platform the model targets and which edition restrictions apply | `Unknown`, `AnalysisServices`, `PowerBI`, `Excel` |
+| `Database.CompatibilityMode` | Which platform the model targets, which TOM objects and properties are available, and which edition restrictions apply | `Unknown`, `AnalysisServices`, `PowerBI`, `Excel` |
 
 If you need to change the platform target rather than unlock new TOM features, see [Change compatibility mode](xref:change-compatibility-mode).
 
