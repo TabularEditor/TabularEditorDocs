@@ -15,12 +15,11 @@ applies_to:
 
 ## 脚本用途
 
-这个脚本是 Tabular Editor x Databricks 系列的一部分。 在 Unity Catalog 中，可以为表和列添加描述性注释。 此脚本可复用这些信息，自动补全语义模型中的表和列说明。 <br></br> 在 Unity Catalog 中，可以为表和列添加描述性注释。 此脚本可复用这些信息，自动补全语义模型中的表和列说明。 <br></br>
+这个脚本是 Tabular Editor x Databricks 系列的一部分。 在 Unity Catalog 中，可以为表和列添加描述性注释。 此脚本可复用这些信息，自动补全语义模型中的表和列说明。 <br></br>
 
 > [!NOTE]
 > 这个脚本需要先安装 Simba Spark ODBC Driver（可从 https://www.databricks.com/spark/odbc-drivers-download 下载）
 > 每次运行脚本时，都会提示你输入 Databricks 个人访问令牌。 这是用于向 Databricks 进行身份验证所必需的。
-> 这个脚本使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此你可能需要和你的 Databricks 管理员再确认一下，确保你有权限查询这些表。 <br></br> 这是用于向 Databricks 进行身份验证所必需的。
 > 这个脚本使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此你可能需要和你的 Databricks 管理员再确认一下，确保你有权限查询这些表。 <br></br>
 
 ## 脚本
