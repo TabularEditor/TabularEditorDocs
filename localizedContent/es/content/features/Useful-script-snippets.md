@@ -439,7 +439,7 @@ foreach(var row in tsvRows.Skip(1))
 Si necesitas automatizar este proceso, guarda el script anterior en un archivo y usa la [Tabular Editor CLI](/Command-line-Options) de la siguiente manera:
 
 ```powershell
-start /wait TabularEditor.exe "<0>" -S "<1>" -B "<2>"
+start /wait TabularEditor.exe "<path to bim file>" -S "<path to script file>" -B "<path to modified bim file>"
 ```
 
 por ejemplo:
@@ -715,7 +715,7 @@ Están disponibles los siguientes métodos:
 | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | Este método envía el script TMSL o XMLA especificado a la instancia conectada de Analysis Services. Esto resulta útil cuando desea actualizar datos de una tabla en la instancia de AS. Tenga en cuenta que, si utiliza este método para realizar cambios de metadatos en su modelo, los metadatos del modelo local quedarán desincronizados respecto a los metadatos de la instancia de AS, y es posible que reciba una advertencia de conflicto de versiones la próxima vez que intente guardar los metadatos del modelo. Establezca el parámetro `isXmla` en `true` si envía un script XMLA. |
 | `IDataReader ExecuteReader(string dax)`                       | Ejecuta la _consulta_ DAX especificada contra la base de datos de AS conectada y devuelve el objeto [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) resultante. Una consulta DAX contiene una o varias instrucciones [`EVALUATE`](https://dax.guide/EVALUATE). Tenga en cuenta que no puede tener varios lectores de datos abiertos al mismo tiempo. Tabular Editor los cerrará automáticamente en caso de que olvide cerrar o liberar el lector de forma explícita.                                         |
-| `Dataset ExecuteDax(string dax)`                              | Ejecuta la _consulta_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) que contiene los datos devueltos por la consulta. Una consulta DAX contiene una o varias instrucciones [`EVALUATE`](https://dax.guide/EVALUATE). El objeto Dataset resultante contiene una DataTable por cada instrucción `EVALUATE`. No se recomienda devolver tablas de datos muy grandes, ya que pueden provocar errores de falta de memoria u otros errores de estabilidad.            |
+| `DataSet ExecuteDax(string dax)`                              | Ejecuta la _consulta_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) que contiene los datos devueltos por la consulta. Una consulta DAX contiene una o varias instrucciones [`EVALUATE`](https://dax.guide/EVALUATE). El objeto Dataset resultante contiene una DataTable por cada instrucción `EVALUATE`. No se recomienda devolver tablas de datos muy grandes, ya que pueden provocar errores de falta de memoria u otros errores de estabilidad.            |
 | `object EvaluateDax(string dax)`                              | Ejecuta la _expresión_ DAX especificada contra la base de datos de AS conectada y devuelve un objeto que representa el resultado. Si la expresión DAX es escalar, se devuelve un objeto del tipo correspondiente (string, long, decimal, double, DateTime). Si la expresión DAX es de tipo tabla, se devuelve un [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6).                                                                                                                                                                       |
 
 Los métodos están acotados al objeto `Model.Database`, pero también se pueden ejecutar directamente sin ningún prefijo.
@@ -741,11 +741,11 @@ ExecuteCommand(tmsl);
 A partir de Tabular Editor 2.16.6 o Tabular Editor 3.2.3, puede usar la siguiente sintaxis para enviar comandos XMLA sin procesar a Analysis Services. El siguiente ejemplo muestra cómo se puede usar para vaciar la caché del motor de AS:
 
 ```csharp
-var clearCacheXmla = string.Format(@"<0>  
-  <1>
-    <2>{0}</2>
-  </1>
-</0>", Model.Database.ID);
+var clearCacheXmla = string.Format(@"<ClearCache xmlns=""http://schemas.microsoft.com/analysisservices/2003/engine"">
+  <Object>
+    <DatabaseID>{0}</DatabaseID>
+  </Object>
+</ClearCache>", Model.Database.ID);
 
 ExecuteCommand(clearCacheXmla, isXmla: true);
 ```

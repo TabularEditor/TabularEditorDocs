@@ -134,7 +134,7 @@ using (Form prompt = new Form())
         
         int _NrMPartitions = 0;
         int _NrReplacements = 0;
-        var _ReplacementsList = new List<0>();
+        var _ReplacementsList = new List<string>();
         
         foreach ( var _Tables in Model.Tables )
         {
@@ -199,5 +199,5 @@ Luego buscará el valor predeterminado en todas las particiones M y lo reemplaza
 </figure>
 
 <figure style="padding-top: 15px;">
-  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Cuadro de diálogo de confirmación que muestra que se ha creado el parámetro y que la subcadena de valor correspondiente se ha reemplazado en todas las expresiones de las particiones M. Para parámetros de otros tipos, ajusta el código C# según corresponda.</figcaption> Para parámetros de otros tipos, ajusta el código C# según corresponda.</figcaption>
+  <img class="noscale" src="~/content/assets/images/Cscripts/script-create-parameter-auto-replace.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figura 2:</strong> Cuadro de diálogo de confirmación que muestra que se ha creado el parámetro y que la subcadena de valor correspondiente se ha reemplazado en todas las expresiones de las particiones M. Para parámetros de otros tipos, ajusta el código C# según corresponda.</figcaption>
 </figure>

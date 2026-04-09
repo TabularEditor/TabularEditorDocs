@@ -29,10 +29,10 @@ applies_to:
 
 ```csharp
 // ===================================================================================
-// 将 OneLake 上的 Direct Lake 表转换回导入模式
+// Convert Direct Lake on OneLake tables back to Import mode
 // ----------------------------------------
-// 此脚本会将选定的表或所有表从 OneLake 上的 Direct Lake 转换为导入模式
-//  它会添加一个名为 SQLEndpoint 的共享表达式，并在不再需要时删除现有的 DatabaseQuery
+// This scripts converts the selected or all tables from Direct Lake on OneLake to import
+//  It adds a shared expression named SQLEndpoint and replaces the existing DatabaseQuery if it no longer needed
 // ===================================================================================
 using System;
 using System.Linq;
@@ -41,7 +41,7 @@ using System.Windows.Forms;
 using System.Drawing;
 
 // -------------------------------------------------------------------
-// 1) 范围选择对话框
+// 1) Scope‐picker dialog
 // -------------------------------------------------------------------
 public class ScopeSelectionDialog : Form
 {
@@ -50,7 +50,7 @@ public class ScopeSelectionDialog : Form
 
     public ScopeSelectionDialog(int selectedCount, int totalCount)
     {
-        Text = "选择要转换的表";
+        Text = "Choose tables to convert";
         AutoSize = true; AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterParent;
         Padding = new Padding(20);
@@ -62,7 +62,7 @@ public class ScopeSelectionDialog : Form
         Controls.Add(layout);
 
         layout.Controls.Add(new Label {
-            Text = $"你已选择 {selectedCount} 个表(s)，\n并且模型中共有 {totalCount} 个 Direct Lake 表(s)。",
+            Text = $"You have {selectedCount} table(s) selected,\nand {totalCount} Direct Lake table(s) in the model.",
             AutoSize = true, TextAlign = ContentAlignment.MiddleLeft
         });
 
@@ -73,19 +73,19 @@ public class ScopeSelectionDialog : Form
         };
 
         var btnOnly = new Button {
-            Text = "仅选定的表", AutoSize = true,
+            Text = "Only selected tables", AutoSize = true,
             DialogResult = DialogResult.OK
         };
         btnOnly.Click += (s, e) => SelectedOption = ScopeOption.OnlySelected;
 
         var btnAll = new Button {
-            Text = "所有表", AutoSize = true,
+            Text = "All tables", AutoSize = true,
             DialogResult = DialogResult.Retry
         };
         btnAll.Click += (s, e) => SelectedOption = ScopeOption.All;
 
         var btnCancel = new Button {
-            Text = "取消", AutoSize = true,
+            Text = "Cancel", AutoSize = true,
             DialogResult = DialogResult.Cancel
         };
         btnCancel.Click += (s, e) => SelectedOption = ScopeOption.Cancel;
@@ -99,7 +99,7 @@ public class ScopeSelectionDialog : Form
 }
 
 // -------------------------------------------------------------------
-// 2) SQL 导入对话框（现需 Schema）
+// 2) SQL‐import dialog (schema now required)
 // -------------------------------------------------------------------
 public class SqlImportDialog : Form
 {
@@ -110,7 +110,7 @@ public class SqlImportDialog : Form
 
     public SqlImportDialog(string endpoint, string db, string schema)
     {
-        Text = "转换 Direct Lake → Import";
+        Text = "Convert Direct Lake → Import";
         AutoSize = true; AutoSizeMode = AutoSizeMode.GrowAndShrink;
         StartPosition = FormStartPosition.CenterParent;
         Padding = new Padding(20);
@@ -128,7 +128,7 @@ public class SqlImportDialog : Form
 
         // Database
         layout.Controls.Add(new Label {
-            Text = "Lakehouse/Warehouse 名称:", Padding = new Padding(0, 20, 0, 0),
+            Text = "Lakehouse/Warehouse Name:", Padding = new Padding(0, 20, 0, 0),
             AutoSize = true
         });
         DatabaseName = new TextBox { Width = 800, Text = db };
@@ -153,7 +153,7 @@ public class SqlImportDialog : Form
             AutoSize = true, Enabled = false
         };
         var cancel = new Button {
-            Text = "取消", DialogResult = DialogResult.Cancel,
+            Text = "Cancel", DialogResult = DialogResult.Cancel,
             AutoSize = true
         };
         panel.Controls.AddRange(new Control[] { okButton, cancel });
@@ -162,7 +162,7 @@ public class SqlImportDialog : Form
         AcceptButton = okButton;
         CancelButton = cancel;
 
-        // 仅当这三个字段都非空时才启用“OK”
+        // Only enable OK when all three fields are non-empty
         SqlEndpoint.TextChanged += Validate;
         DatabaseName.TextChanged += Validate;
         Schema.TextChanged += Validate;
@@ -179,19 +179,19 @@ public class SqlImportDialog : Form
 }
 
 // -------------------------------------------------------------------
-// 3) 主转换逻辑
+// 3) Main conversion logic
 // -------------------------------------------------------------------
 WaitFormVisible = false;
 Application.UseWaitCursor = false;
 
-// 3.1) 查找所有 Direct Lake 表
+// 3.1) Find all Direct Lake tables
 var allDirectLake = Model.Tables
     .Where(t => t.Partitions.Count == 1
              && t.Partitions[0].SourceType == PartitionSourceType.Entity
              && t.Partitions[0].Mode == ModeType.DirectLake)
     .ToList();
 
-// 3.2) 以及你选中的表
+// 3.2) And those you’ve selected
 var selectedDirect = Selected.Tables
     .Cast<Table>()
     .Where(t => t.Partitions.Count == 1
@@ -199,7 +199,7 @@ var selectedDirect = Selected.Tables
              && t.Partitions[0].Mode == ModeType.DirectLake)
     .ToList();
 
-// 3.3) 询问转换范围
+// 3.3) Ask scope
 var scopeDialog = new ScopeSelectionDialog(selectedDirect.Count, allDirectLake.Count);
 var dr = scopeDialog.ShowDialog();
 if (dr == DialogResult.Cancel || scopeDialog.SelectedOption == ScopeSelectionDialog.ScopeOption.Cancel)
@@ -212,15 +212,15 @@ var tablesToConvert = isAllTables
 
 if (tablesToConvert.Count == 0)
 {
-    Warning("在所选范围内未找到 Direct Lake 表。");
+    Warning("No Direct Lake tables found in the chosen scope.");
     return;
 }
 
-// 3.4) 询问连接信息和 Schema
+// 3.4) Ask for connection + schema
 var sqlDialog = new SqlImportDialog("", "", "");
 if (sqlDialog.ShowDialog() == DialogResult.Cancel) return;
 
-// 3.5) 创建或更新共享表达式 "SQLEndpoint"
+// 3.5) Upsert shared expression "SQLEndpoint"
 const string sqlTemplate = @"let
     endpoint = Sql.Database(""{0}"",""{1}"")
 in
@@ -232,14 +232,14 @@ sqlexpr.Expression = string.Format(
     sqlDialog.SqlEndpoint.Text,
     sqlDialog.DatabaseName.Text);
 
-// 3.6) M 分区模板
+// 3.6) M‐partition template
 const string mTemplate = @"let
     Source = SQLEndpoint,
     Data = Source{{[Schema=""{0}"",Item=""{1}""]}}[Data]
 in
     Data";
 
-// 3.7) 替换分区
+// 3.7) Swap partitions
 foreach (var table in tablesToConvert)
 {
     var oldP = table.Partitions[0];
@@ -253,19 +253,19 @@ foreach (var table in tablesToConvert)
     oldP.Delete();
 }
 
-// 3.8) 如果转换的是**整个模型**，则删除旧的 DatabaseQuery 表达式
+// 3.8) If converting the **entire model**, delete the old DatabaseQuery expr
 if (isAllTables)
 {
     var oldDbq = Model.Expressions.FirstOrDefault(e => e.Name == "DatabaseQuery");
     if (oldDbq != null)
-        oldDbq.Delete();   // TE3 API：Expression.Delete() 会将其从模型中移除
+        oldDbq.Delete();   // TE3 API: Expression.Delete() removes it from the model
 }
 
-// 3.9) 确保默认模式为 Import
+// 3.9) Ensure default mode is Import
 Model.DefaultMode = ModeType.Import;
 
-Info("转换完成：Direct Lake → Import" + 
-     (isAllTables ? " (DatabaseQuery 已移除)" : "") + ".");
+Info("Conversion complete: Direct Lake → Import" + 
+     (isAllTables ? " (DatabaseQuery removed)" : "") + ".");
 ```
 
 ### 说明

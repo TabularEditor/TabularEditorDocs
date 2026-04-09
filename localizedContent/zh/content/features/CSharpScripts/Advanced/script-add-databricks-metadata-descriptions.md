@@ -35,13 +35,13 @@ applies_to:
  * 如果有说明，就会把它添加到语义模型的说明中。
  * 步骤 1：在模型中选择一个或多个表
  * 步骤 2：运行这个脚本
- * 步骤 3：在出现提示时输入你的 Databricks 个人访问令牌
+ * 步骤 3：在出现提示时输入你的 Databricks Personal Access Token
  * 步骤 4：脚本会连接到 Databricks，并在表和列存在说明时更新对应说明。 
  *          对于处理的每个表，都会显示一个消息框，指出已更新的说明数量。
- *          点击“确定”继续处理下一个表。
+ *          点击“OK”继续处理下一个表。
  * 备注：
  *  -   这个脚本需要先安装 Simba Spark ODBC Driver（可从 https://www.databricks.com/spark/odbc-drivers-download 下载）
- *  -   每次运行脚本时，都会提示你输入 Databricks 个人访问令牌
+ *  -   每次运行脚本时，都会提示你输入 Databricks Personal Access Token
  */
 #r "Microsoft.VisualBasic"
 using System;
@@ -99,23 +99,23 @@ public partial class PasswordInputForm : Form
         };
         this.Controls.Add(passwordTextBox);
 
-        //确定按钮
+        //OK按钮
         okButton = new Button();
-        okButton.Text = "确定";
+        okButton.Text = "OK";
         okButton.Location = new System.Drawing.Point(216, 85);
         okButton.Size = new System.Drawing.Size(150, 50);
         okButton.Click += OkButton_Click;
         this.Controls.Add(okButton);
 
-        //取消按钮
+        //Cancel按钮
         cancelButton = new Button();
-        cancelButton.Text = "取消";
+        cancelButton.Text = "Cancel";
         cancelButton.Location = new System.Drawing.Point(297, 85);
         cancelButton.Size = new System.Drawing.Size(150, 50);
         cancelButton.Click += CancelButton_Click;
         this.Controls.Add(cancelButton);
 
-        //设置默认按钮和取消按钮
+        //设置默认按钮和Cancel按钮
         this.AcceptButton = okButton;
         this.CancelButton = cancelButton;
 
@@ -178,7 +178,7 @@ public static class MaskedInputHelper
             };
             var buttonOk = new Button()
             {
-                Text = "确定",
+                Text = "OK",
                 Size = new System.Drawing.Size(150, 50),
                 Left = 12,
                 Width = 150,
@@ -187,7 +187,7 @@ public static class MaskedInputHelper
             };
             var buttonCancel = new Button()
             {
-                Text = "取消",
+                Text = "Cancel",
                 Size = new System.Drawing.Size(150, 50),
                 Left = 175,
                 Width = 150,
@@ -349,27 +349,27 @@ if (Selected.Tables.Count == 0)
     return;
 }
 
-//提示输入个人访问令牌 - 这是连接 Databricks 进行身份验证所必需的
+//提示输入Personal Access Token - 这是连接 Databricks 进行身份验证所必需的
 string dbxPAT;
 do
 {
     //切换“正在运行宏”指示器
     ScriptHelper.WaitFormVisible = false;
     dbxPAT = MaskedInputHelper.GetMaskedInput(
-        "请输入你的 Databricks 个人访问令牌（连接到 SQL 终结点时需要）",
-        "个人访问令牌"
+        "请输入你的 Databricks Personal Access Token（连接到 SQL 终结点时需要）",
+        "Personal Access Token"
     );
 
     if (string.IsNullOrEmpty(dbxPAT))
     {
-        return; // 你已取消
+        return; // 你已Cancel
     }
 
     if (string.IsNullOrWhiteSpace(dbxPAT))
     {
         MessageBox.Show(
-            "需要提供个人访问令牌",
-            "需要提供个人访问令牌",
+            "需要提供Personal Access Token",
+            "需要提供Personal Access Token",
             MessageBoxButtons.OK,
             MessageBoxIcon.Warning
         );
@@ -429,9 +429,9 @@ foreach (var t in Selected.Tables)
                 + httpPath
                 + @" 是否正确
 
-- 请检查你使用的是有效的个人访问令牌",
+- 请检查你使用的是有效的Personal Access Token",
             MsgBoxStyle.Critical,
-            "连接错误"
+            "Connection Error"
         );
         return;
     }
@@ -471,7 +471,7 @@ foreach (var t in Selected.Tables)
     
     - 连接超时。请检查 SQL 终结点群集是否正在运行",
             MsgBoxStyle.Critical,
-            "连接错误 - 表元数据"
+            "Connection Error - 表元数据"
         );
         return;
     }
@@ -513,7 +513,7 @@ foreach (var t in Selected.Tables)
     
     - 连接超时。请检查 SQL 终结点群集是否正在运行",
             MsgBoxStyle.Critical,
-            "连接错误 - 列元数据"
+            "Connection Error - 列元数据"
         );
         return;
     }
