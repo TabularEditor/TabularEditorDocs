@@ -176,7 +176,7 @@ Crea una copia de seguridad del modelo al guardar cambios localmente. Esto te of
 
 ##### _Ubicación para guardar la copia de seguridad_
 
-Especifica la carpeta donde se almacenan las copias de seguridad creadas al guardar. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
+Especifique la carpeta donde se guardan las copias de seguridad. De forma predeterminada, no se crean copias de seguridad a menos que se especifique una ubicación.
 
 ##### _Copia de seguridad al implementar_ (habilitado)
 

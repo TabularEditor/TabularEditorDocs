@@ -31,7 +31,7 @@ Este artículo describe cómo usar el [Asistente de importación de tablas](#tab
 
 # Trabajar con diagramas
 
-En Tabular Editor 3, los **diagramas** son documentos que puedes usar para visualizar y editar las relaciones entre las tablas del modelo. Puedes crear tantos diagramas como quieras para visualizar áreas concretas de tu modelo. Consulta <xref:supported-files#diagram-file-te3diag> para obtener más información. Un diagrama se puede guardar como un archivo independiente.
+En Tabular Editor 3, los **diagramas** son documentos que puedes usar para visualizar y editar las relaciones entre las tablas del modelo. Puedes crear tantos diagramas como quieras para visualizar áreas concretas de tu modelo. Un diagrama se puede guardar como un archivo independiente. Consulta <xref:supported-files#diagram-file-te3diag> para obtener más información.
 
 > [!NOTE]
 > Recomendamos crear varios diagramas pequeños en lugar de unos pocos diagramas grandes. Cuando un diagrama contiene más de unas 20 tablas, enseguida se vuelve abrumador y difícil de entender.
