@@ -89,10 +89,19 @@ foreach (var col in Selected.Columns)
 
 ## The IExpressionObject interface
 
-Objects that hold expressions implement `IExpressionObject`. Cast to the interface for generic code that works across measures, partitions, calculation items, etc.
+Objects that hold expressions implement `IExpressionObject`. In Tabular Editor 2, this interface provides only the `Expression` property. In Tabular Editor 3, it adds `GetExpression()`, `SetExpression()` and `GetExpressionProperties()` for working with multiple expression types on a single object.
 
 ```csharp
-// List all expression types on an object
+// Tabular Editor 2: use the Expression property directly
+measure.Expression = "SUM('Sales'[Amount])";
+string dax = measure.Expression;
+```
+
+> [!NOTE]
+> The following `GetExpression`/`SetExpression` pattern is only available in Tabular Editor 3. In Tabular Editor 2, access the `Expression` property directly on the object.
+
+```csharp
+// Tabular Editor 3 only: list all expression types on an object
 var exprObj = (IExpressionObject)measure;
 foreach (var prop in exprObj.GetExpressionProperties())
 {
@@ -106,7 +115,7 @@ exprObj.SetExpression(ExpressionProperty.Expression, "SUM('Sales'[Amount])");
 exprObj.SetExpression(ExpressionProperty.FormatStringExpression, "\"$#,##0.00\"");
 ```
 
-The `ExpressionProperty` enum includes:
+The `ExpressionProperty` enum (Tabular Editor 3 only) includes:
 
 | Value | Used on |
 |---|---|

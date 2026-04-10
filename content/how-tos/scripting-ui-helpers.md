@@ -33,7 +33,7 @@ var table = SelectTable();                             // pick a table
 var column = SelectColumn(table.Columns);              // pick from filtered columns
 var measure = SelectMeasure();                         // pick a measure
 var obj = SelectObject<DataSource>(Model.DataSources); // generic selection
-var items = SelectObjects(collection);                 // multi-select
+var items = SelectObjects(collection);                 // multi-select (TE3 only)
 
 // Evaluate DAX
 var result = EvaluateDax("COUNTROWS('Sales')");        // run DAX on connected model
@@ -107,7 +107,10 @@ catch
 }
 ```
 
-### Multi-select
+### Multi-select (Tabular Editor 3 only)
+
+> [!NOTE]
+> `SelectObjects()` is only available in Tabular Editor 3. In Tabular Editor 2, use a single-select dialog in a loop or filter the selection before running the script.
 
 `SelectObjects()` allows the user to pick multiple objects.
 

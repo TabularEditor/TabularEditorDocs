@@ -118,10 +118,10 @@ var newMeasure = table.AddMeasure(
 
 ## Mixed selections
 
-When you need to handle multiple object types from the selection, use `Selected.Objects` which returns all selected items as `ITabularNamedObject`.
+When you need to handle multiple object types from the selection, iterate `Selected` directly. The `Selected` variable itself implements `IEnumerable<ITabularNamedObject>`.
 
 ```csharp
-foreach (var obj in Selected.Objects)
+foreach (var obj in Selected)
 {
     if (obj is IDescriptionObject desc)
         desc.Description = "Reviewed on " + DateTime.Today.ToString("yyyy-MM-dd");
