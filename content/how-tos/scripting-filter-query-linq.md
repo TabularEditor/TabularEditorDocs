@@ -2,7 +2,7 @@
 uid: how-to-filter-query-objects-linq
 title: How to Filter and Query Objects with LINQ
 author: Morten Lønskov
-updated: 2026-04-09
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,40 +12,39 @@ applies_to:
 ---
 # How to Filter and Query Objects with LINQ
 
-C# scripts use standard LINQ methods to filter, search and transform TOM object collections. This article covers the essential LINQ patterns for querying semantic model objects.
+C# scripts use standard LINQ methods to filter, search and transform TOM object collections. These patterns are building blocks. Use collection-returning methods in `foreach` loops, bool-returning methods in `if` conditions and scalar-returning methods in variable assignments.
 
 ## Quick reference
 
 ```csharp
-// Filter
-Model.AllMeasures.Where(m => m.Expression.Contains("CALCULATE"))
+// Filter -- returns a collection for use in foreach or further chaining
+Model.AllMeasures.Where(m => m.Name.EndsWith("Amount"));
 
-// Find one
-Model.Tables.First(t => t.Name == "Sales")
-Model.Tables.FirstOrDefault(t => t.Name == "Sales")   // returns null if not found
+// Find one -- returns a single object for assignment to a variable
+var table = Model.Tables.First(t => t.Name == "Sales");
+var tableOrNull = Model.Tables.FirstOrDefault(t => t.Name == "Sales");
 
-// Existence checks
-table.Measures.Any(m => m.IsHidden)                    // true if at least one
-table.Columns.All(c => c.Description != "")            // true if every one
+// Existence checks -- returns bool for use in if conditions
+if (table.Measures.Any(m => m.IsHidden)) { /* ... */ }
+if (table.Columns.All(c => c.Description != "")) { /* ... */ }
 
 // Count
-Model.AllColumns.Count(c => c.DataType == DataType.String)
+int count = Model.AllColumns.Count(c => c.DataType == DataType.String);
 
-// Project
-Model.AllMeasures.Select(m => m.Name).ToList()
+// Project -- returns a List<string> of only the measure names
+var names = Model.AllMeasures.Select(m => m.Name).ToList();
 
 // Sort
-Model.AllMeasures.OrderBy(m => m.Name)
-Model.AllMeasures.OrderByDescending(m => m.Table.Name)
+var sorted = Model.AllMeasures.OrderBy(m => m.Name);
 
 // Mutate
-Model.AllMeasures.Where(m => m.FormatString == "").ForEach(m => m.FormatString = "0.00")
+Model.AllMeasures.Where(m => m.FormatString == "").ForEach(m => m.FormatString = "0.00");
 
 // Type filter
-Model.AllColumns.OfType<CalculatedColumn>()
+var calcCols = Model.AllColumns.OfType<CalculatedColumn>();
 
-// Materialize before deleting
-table.Measures.Where(m => m.IsHidden).ToList().ForEach(m => m.Delete())
+// Materialize before modifying the collection
+table.Measures.Where(m => m.IsHidden).ToList().ForEach(m => m.Delete());
 ```
 
 ## Filtering with Where
@@ -53,14 +52,16 @@ table.Measures.Where(m => m.IsHidden).ToList().ForEach(m => m.Delete())
 `Where()` returns all objects matching a predicate. Chain multiple conditions with `&&` and `||`.
 
 ```csharp
-// Measures that use CALCULATE and are hidden
-var matches = Model.AllMeasures
-    .Where(m => m.Expression.Contains("CALCULATE") && m.IsHidden);
-
 // Columns with no description in a specific table
 var undocumented = Model.Tables["Sales"].Columns
     .Where(c => string.IsNullOrEmpty(c.Description));
 ```
+
+> [!WARNING]
+> String matching with `Contains()` finds the text anywhere in the expression, including inside string literals and comments. To detect actual DAX function usage, analyze the tokenized expression instead.
+
+> [!TIP]
+> When checking expression content with `Contains()`, consider case-insensitive comparison: `m.Expression.Contains("calculate", StringComparison.OrdinalIgnoreCase)`.
 
 ## Finding a single object
 
@@ -72,15 +73,12 @@ var sales = Model.Tables.First(t => t.Name == "Sales");
 
 // Returns null if not found (safe)
 var table = Model.Tables.FirstOrDefault(t => t.Name == "Sales");
-if (table == null) { Error("Table not found."); return; }
+if (table == null) { Error("Table not found."); return; } // return exits the script
 ```
 
 ## Existence and count checks
 
 ```csharp
-// Does any measure reference CALCULATE?
-bool usesCalc = Model.AllMeasures.Any(m => m.Expression.Contains("CALCULATE"));
-
 // Are all columns documented?
 bool allDocs = table.Columns.All(c => !string.IsNullOrEmpty(c.Description));
 
@@ -93,7 +91,7 @@ int count = Model.AllColumns.Count(c => c.DataType == DataType.String);
 `Select()` transforms each element. Use it to extract property values or build new structures.
 
 ```csharp
-// List of measure names
+// List of measure names only (returns List<string>)
 var names = Model.AllMeasures.Select(m => m.Name).ToList();
 
 // Table name + measure count pairs
@@ -114,20 +112,20 @@ Model.AllMeasures
 Model.Tables["Sales"].Measures.ForEach(m => m.DisplayFolder = "Sales Metrics");
 ```
 
-## Materializing with ToList before deletion
+## Materializing before modifying a collection
 
-When you delete objects inside a loop, you modify the collection being iterated. This causes a collection-modified exception. Always call `.ToList()` first to create a snapshot.
+When you modify objects inside a loop (delete, add, move), you change the collection being iterated. Always call `.ToList()` or `.ToArray()` first to create a snapshot.
 
 ```csharp
 // WRONG: modifying collection during iteration
 table.Measures.Where(m => m.IsHidden).ForEach(m => m.Delete()); // throws
 
-// CORRECT: materialize first, then delete
+// CORRECT: materialize first, then modify
 table.Measures.Where(m => m.IsHidden).ToList().ForEach(m => m.Delete());
 ```
 
 > [!WARNING]
-> Always call `.ToList()` before `.ForEach(x => x.Delete())` or any operation that adds/removes objects from the collection being iterated.
+> Failing to materialize causes: `"Collection was modified; enumeration operation may not complete."` This applies to any modification, not just deletion.
 
 ## Combining collections
 
@@ -137,6 +135,11 @@ Use `Concat()` to merge collections and `Distinct()` to remove duplicates.
 // All hidden objects (measures + columns) in a table
 var hidden = table.Measures.Where(m => m.IsHidden).Cast<ITabularNamedObject>()
     .Concat(table.Columns.Where(c => c.IsHidden).Cast<ITabularNamedObject>());
+
+// All unique tables referenced by selected measures
+var tables = Selected.Measures
+    .Select(m => m.Table)
+    .Distinct();
 ```
 
 ## Dynamic LINQ equivalent

@@ -2,7 +2,7 @@
 uid: how-to-use-selected-object
 title: How to Use the Selected Object
 author: Morten Lønskov
-updated: 2026-04-09
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,7 +12,7 @@ applies_to:
 ---
 # How to Use the Selected Object
 
-The `Selected` object provides access to whatever is currently selected in the **TOM Explorer** tree. Use it to write scripts that operate on user-selected objects rather than hardcoded names.
+The `Selected` object provides access to whatever is currently selected in the @tom-explorer-view-reference tree. Use it to write scripts that operate on user-selected objects rather than hardcoded names.
 
 ## Quick reference
 
@@ -21,17 +21,6 @@ The `Selected` object provides access to whatever is currently selected in the *
 Selected.Measure
 Selected.Table
 Selected.Column
-
-// Plural (zero or more, safe to iterate)
-Selected.Measures
-Selected.Tables
-Selected.Columns
-Selected.Hierarchies
-Selected.Partitions
-Selected.Levels
-Selected.CalculationItems
-Selected.Roles
-Selected.DataSources
 
 // Guard clause
 if (Selected.Measures.Count() == 0) { Error("Select at least one measure."); return; }
@@ -44,6 +33,18 @@ foreach (var m in Selected.Measures)
 Selected.Measures.ForEach(m => m.DisplayFolder = "KPIs");
 ```
 
+Plural accessors (zero or more, safe to iterate):
+
+- `Selected.Measures`
+- `Selected.Tables`
+- `Selected.Columns`
+- `Selected.Hierarchies`
+- `Selected.Partitions`
+- `Selected.Levels`
+- `Selected.CalculationItems`
+- `Selected.Roles`
+- `Selected.DataSources`
+
 ## Singular vs plural accessors
 
 The `Selected` object exposes both singular and plural accessors for each object type.
@@ -51,13 +52,13 @@ The `Selected` object exposes both singular and plural accessors for each object
 | Accessor | Returns | Behavior when count is not 1 |
 |---|---|---|
 | `Selected.Measure` | single `Measure` | Throws exception if 0 or 2+ measures selected |
-| `Selected.Measures` | `IEnumerable<Measure>` | Returns empty collection if none selected |
+| `Selected.Measures` | `IEnumerable<Measure>` | Returns a collection that may be empty but is never null. Safe to iterate directly. |
 
 Use the **singular** form when your script requires exactly one object. Use the **plural** form when the script should work on one or more objects.
 
 ## Guard clauses
 
-Always validate the selection before performing operations. This prevents confusing error messages.
+The plural accessor returns zero or more objects. A script may silently do nothing with an empty collection, or require a minimum count. Use a guard clause for the latter.
 
 ```csharp
 // Require at least one measure
@@ -66,7 +67,9 @@ if (Selected.Measures.Count() == 0)
     Error("No measures selected. Select one or more measures and run again.");
     return;
 }
+```
 
+```csharp
 // Require exactly one table
 if (Selected.Tables.Count() != 1)
 {
@@ -107,13 +110,8 @@ Selected.Measures.ForEach(m => m.InPerspective["Sales"] = true);
 When a single table is selected, use `Selected.Table` to add new objects to it.
 
 ```csharp
-if (Selected.Tables.Count() != 1) { Error("Select one table."); return; }
-
-var table = Selected.Table;
-var newMeasure = table.AddMeasure(
-    "Row Count",
-    "COUNTROWS(" + table.DaxObjectFullName + ")"
-);
+var t = Selected.Table;
+t.AddMeasure("Row Count", "COUNTROWS(" + t.DaxObjectFullName + ")");
 ```
 
 ## Mixed selections
@@ -121,12 +119,13 @@ var newMeasure = table.AddMeasure(
 When you need to handle multiple object types from the selection, iterate `Selected` directly. The `Selected` variable itself implements `IEnumerable<ITabularNamedObject>`.
 
 ```csharp
-foreach (var obj in Selected)
+foreach (var desc in Selected.OfType<IDescriptionObject>())
 {
-    if (obj is IDescriptionObject desc)
-        desc.Description = "Reviewed on " + DateTime.Today.ToString("yyyy-MM-dd");
+    desc.Description = "Reviewed on " + DateTime.Today.ToString("yyyy-MM-dd");
 }
 ```
+
+See @how-to-filter-query-objects-linq for more on LINQ filtering and @how-to-tom-interfaces for interface-based object handling.
 
 ## Try/catch for selection dialogs
 

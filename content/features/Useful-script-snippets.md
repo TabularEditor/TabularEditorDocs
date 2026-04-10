@@ -2,6 +2,7 @@
 uid: useful-script-snippets
 title: Useful script snippets
 author: Daniel Otykier
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,7 +23,7 @@ Here's a collection of small script snippets to get you started using the [Advan
 Also, make sure to check out our script library @csharp-script-library, for some more real-life examples of what you can do with the scripting capabilities of Tabular Editor.
 
 > [!TIP]
-> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](/how-tos/scripting-navigate-tom-hierarchy) how-to series. It covers object navigation, type checking, LINQ querying, dependencies, annotations, expressions and more.
+> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](/how-tos/scripting-navigate-tom-hierarchy) how-to series. For the complete TOM wrapper API, see the @api-index.
 
 ***
 

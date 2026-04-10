@@ -2,7 +2,7 @@
 uid: how-to-dynamic-linq-vs-csharp-linq
 title: How Dynamic LINQ Differs from C# LINQ
 author: Morten Lønskov
-updated: 2026-04-09
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ C# scripts use standard C# LINQ with lambda expressions. Best Practice Analyzer 
 | **TOM Explorer** tree filter (`:` prefix) | Dynamic LINQ |
 
 ## Syntax comparison
+
+In Dynamic LINQ, the object is implicit -- there is no lambda parameter like `m.` or `c.`. In BPA, the surrounding context is the **Applies to** scope setting, which determines which object type the expression evaluates against.
 
 | Concept | C# LINQ (scripts) | Dynamic LINQ (BPA / filter) |
 |---|---|---|
@@ -57,8 +59,10 @@ C# LINQ uses explicit lambda parameters. Dynamic LINQ evaluates properties on an
 
 ```csharp
 // C# LINQ: explicit lambda parameter
-Model.AllMeasures.Where(m => m.IsHidden && m.Description == "")
+Model.AllMeasures.Where(m => m.IsHidden && m.Description == "");
+```
 
+```
 // Dynamic LINQ: implicit "it" -- properties are accessed directly
 IsHidden and Description = ""
 ```
@@ -69,8 +73,10 @@ Both use dot notation, but C# requires the lambda parameter.
 
 ```csharp
 // C# LINQ
-Model.AllMeasures.Where(m => m.Table.IsHidden)
+Model.AllMeasures.Where(m => m.Table.IsHidden);
+```
 
+```
 // Dynamic LINQ
 Table.IsHidden
 ```
@@ -81,8 +87,10 @@ C# LINQ uses lambdas inside collection methods. Dynamic LINQ uses implicit conte
 
 ```csharp
 // C# LINQ: count columns with no description
-Model.Tables.Where(t => t.Columns.Count(c => c.Description == "") > 5)
+Model.Tables.Where(t => t.Columns.Count(c => c.Description == "") > 5);
+```
 
+```
 // Dynamic LINQ: same logic
 Columns.Count(Description = "") > 5
 ```
@@ -96,22 +104,21 @@ Inside a nested collection method in Dynamic LINQ, `it` refers to the inner obje
 Columns.Any(Name = outerIt.Name)
 ```
 
-In C#, this is handled naturally by lambda closure:
+In C#, the outer lambda parameter `t` remains in scope throughout the inner lambda body. The inner lambda `c => c.Name == t.Name` can reference `t` directly because it is captured by closure.
 
 ```csharp
-// C# equivalent
-Model.Tables.Where(t => t.Columns.Any(c => c.Name == t.Name))
+// C# equivalent -- t is accessible inside the inner lambda via closure
+Model.Tables.Where(t => t.Columns.Any(c => c.Name == t.Name));
 ```
 
 ## Type filtering
 
-C# uses `OfType<T>()` or `is`. Dynamic LINQ relies on the BPA rule's **Applies to** scope setting.
+C# uses `OfType<T>()` or `is`. In BPA, the rule's **Applies to** scope handles type filtering. You do not need type checks in the expression itself.
 
 | C# LINQ | Dynamic LINQ approach |
 |---|---|
 | `Model.AllColumns.OfType<CalculatedColumn>()` | Set BPA rule scope to **Calculated Columns** |
 | `Model.Tables.OfType<CalculationGroupTable>()` | Set BPA rule scope to **Calculation Group Tables** |
-| `obj is Measure` | Rule scope handles this; use `ObjectTypeName = "Measure"` if needed |
 
 ## Dependency properties
 
@@ -128,8 +135,10 @@ These work identically in both syntaxes, but Dynamic LINQ omits the object prefi
 
 ```csharp
 // C# LINQ
-Model.AllMeasures.Where(m => m.HasAnnotation("AUTOGEN"))
+Model.AllMeasures.Where(m => m.HasAnnotation("AUTOGEN"));
+```
 
+```
 // Dynamic LINQ
 HasAnnotation("AUTOGEN")
 ```
@@ -143,8 +152,10 @@ HasAnnotation("AUTOGEN")
 
 ```csharp
 // C# LINQ
-Model.AllMeasures.Where(m => m.InPerspective["Sales"])
+Model.AllMeasures.Where(m => m.InPerspective["Sales"]);
+```
 
+```
 // Dynamic LINQ
 InPerspective["Sales"]
 ```
@@ -157,17 +168,26 @@ InPerspective["Sales"]
 
 ## BPA fix expressions
 
-Fix expressions use `it.` as the assignment target. The left side of the assignment refers to the object that violated the rule.
+Fix expressions use `it.` as the assignment target. The `it` refers to the specific object that violated the rule -- the same object highlighted in the BPA results list.
+
+For example, given a BPA rule with expression `IsHidden and String.IsNullOrWhitespace(Description)` applied to **Measures**, each measure that matches appears in the BPA results. When you apply the fix, `it` refers to that specific measure:
 
 ```
-// Set IsHidden to true on the violating object
-it.IsHidden = true
-
-// Set description
+// Set the description on the violating measure
 it.Description = "TODO: Add description"
+
+// Unhide the violating object
+it.IsHidden = false
 ```
 
-There is no C# LINQ equivalent -- fix expressions are a BPA-specific feature.
+While fix expressions have no direct C# LINQ equivalent, you can achieve the same result in a script:
+
+```csharp
+foreach (var m in Model.AllMeasures.Where(m => m.IsHidden && string.IsNullOrWhiteSpace(m.Description)))
+{
+    m.Description = "TODO: Add description";
+}
+```
 
 ## Complete example: same rule in both syntaxes
 

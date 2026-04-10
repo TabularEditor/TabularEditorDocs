@@ -2,7 +2,7 @@
 uid: how-to-check-object-types
 title: How to Check Object Types
 author: Morten Lønskov
-updated: 2026-04-09
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,26 +12,25 @@ applies_to:
 ---
 # How to Check Object Types
 
-The TOM hierarchy uses inheritance. `Column` is an abstract base with subtypes `DataColumn`, `CalculatedColumn` and `CalculatedTableColumn`. `Table` has the subtype `CalculationGroupTable`. This article shows how to test and filter by type in C# scripts and Dynamic LINQ.
+The TOM hierarchy uses inheritance. `Column` is an abstract base with subtypes `DataColumn`, `CalculatedColumn` and `CalculatedTableColumn`. `Table` has subtypes `CalculatedTable` and `CalculationGroupTable`. Use the base type when working with shared properties like `Name`, `Description`, `IsHidden`, `FormatString` or `DisplayFolder`. Cast to a concrete subtype when you need type-specific properties, such as `Expression` on `CalculatedColumn` or `SourceColumn` on `DataColumn`.
 
 ## Quick reference
 
 ```csharp
-// Pattern matching (preferred)
+// Pattern matching -- checks type AND casts in one step
 if (col is CalculatedColumn cc)
-    Info(cc.Expression);
+    Info(cc.Expression);  // Expression is only on CalculatedColumn, not base Column
 
 // Filter a collection by type
 var calcCols = Model.AllColumns.OfType<CalculatedColumn>();
 var calcGroups = Model.Tables.OfType<CalculationGroupTable>();
 
-// Runtime type name
+// Runtime type name (use only for display/logging, not for logic)
 string typeName = obj.GetType().Name;   // "DataColumn", "Measure", etc.
-
-// Null-safe cast
-var dc = col as DataColumn;
-if (dc != null) { /* use dc */ }
 ```
+
+> [!NOTE]
+> Pattern matching with variable declaration (`col is CalculatedColumn cc`) requires the Roslyn compiler in Tabular Editor 2. Enable it under **File > Preferences > General > Use Roslyn compiler**. Tabular Editor 3 supports this by default.
 
 ## Type hierarchy
 
@@ -39,17 +38,17 @@ The key inheritance relationships in the TOM wrapper:
 
 | Base type | Subtypes |
 |---|---|
-| `Column` | `DataColumn`, `CalculatedColumn`, `CalculatedTableColumn` |
-| `Table` | `CalculatedTable`, `CalculationGroupTable` |
-| `Partition` | `MPartition`, `EntityPartition`, `PolicyRangePartition` |
-| `DataSource` | `ProviderDataSource`, `StructuredDataSource` |
+| (xref:TabularEditor.TOMWrapper.Column) | (xref:TabularEditor.TOMWrapper.DataColumn), (xref:TabularEditor.TOMWrapper.CalculatedColumn), (xref:TabularEditor.TOMWrapper.CalculatedTableColumn) |
+| (xref:TabularEditor.TOMWrapper.Table) | (xref:TabularEditor.TOMWrapper.CalculatedTable), (xref:TabularEditor.TOMWrapper.CalculationGroupTable) |
+| (xref:TabularEditor.TOMWrapper.Partition) | (xref:TabularEditor.TOMWrapper.MPartition), (xref:TabularEditor.TOMWrapper.EntityPartition), (xref:TabularEditor.TOMWrapper.PolicyRangePartition) |
+| (xref:TabularEditor.TOMWrapper.DataSource) | (xref:TabularEditor.TOMWrapper.ProviderDataSource), (xref:TabularEditor.TOMWrapper.StructuredDataSource) |
 
 ## Filtering collections by type
 
-`OfType<T>()` filters and casts in one step. Prefer it over `Where(x => x is T)`.
+`OfType<T>()` works on any collection and returns a filtered sequence containing only items that are the specified type. It returns an empty sequence if no items match.
 
 ```csharp
-// All calculated columns in the model
+// All calculated columns in the model (empty if model has none)
 var calculatedColumns = Model.AllColumns.OfType<CalculatedColumn>();
 
 // All M partitions (Power Query)
@@ -58,17 +57,30 @@ var mPartitions = Model.AllPartitions.OfType<MPartition>();
 // All calculation group tables
 var calcGroups = Model.Tables.OfType<CalculationGroupTable>();
 
-// All regular tables (exclude calculation groups)
-var regularTables = Model.Tables.Where(t => t is not CalculationGroupTable);
+// All regular tables (exclude calculation groups and calculated tables)
+var regularTables = Model.Tables.Where(t => t is not CalculationGroupTable && t is not CalculatedTable);
 ```
 
 ## Pattern matching with is
 
-Use C# pattern matching to test and cast in a single expression.
+Pattern matching does two things: it checks whether a value is a given type and optionally casts it into a new variable. The form `x is Type xx` asks "is `x` of type `Type`?" and, if true, gives you `xx` as a variable of that exact type.
+
+This is equivalent to:
+
+```csharp
+if (col is CalculatedColumn)
+{
+    var cc = (CalculatedColumn)col; // explicit cast
+    // use cc...
+}
+```
+
+If you only need the boolean check, use `x is Type` without the variable. If you also need subtype-specific properties, use `x is Type xx`.
 
 ```csharp
 foreach (var col in Model.AllColumns)
 {
+    // Expression is only available on CalculatedColumn, not the base Column type
     if (col is CalculatedColumn cc)
         Info($"{cc.Name}: {cc.Expression}");
     else if (col is DataColumn dc)
@@ -76,67 +88,20 @@ foreach (var col in Model.AllColumns)
 }
 ```
 
-## Checking ObjectType enum
-
-Every TOM object has an `ObjectType` property that returns an enum value. This identifies the base type, not the subtype.
-
-```csharp
-foreach (var obj in Selected.Objects)
-{
-    switch (obj.ObjectType)
-    {
-        case ObjectType.Measure:  /* ... */ break;
-        case ObjectType.Column:   /* ... */ break;
-        case ObjectType.Table:    /* ... */ break;
-        case ObjectType.Hierarchy: /* ... */ break;
-    }
-}
-```
-
-> [!WARNING]
-> `ObjectType` does not distinguish subtypes. A `CalculatedColumn` and a `DataColumn` both return `ObjectType.Column`. Use `is` or `OfType<T>()` when you need subtype-level checks.
-
-## Checking partition source type
-
-For partitions, use the `SourceType` property to distinguish between storage modes without type-casting.
-
-```csharp
-foreach (var p in Model.AllPartitions)
-{
-    switch (p.SourceType)
-    {
-        case PartitionSourceType.M:          /* Power Query */    break;
-        case PartitionSourceType.Calculated:  /* DAX calc table */ break;
-        case PartitionSourceType.Entity:      /* Direct Lake */    break;
-        case PartitionSourceType.Query:       /* Legacy SQL */     break;
-    }
-}
-```
-
 ## Dynamic LINQ equivalent
 
-In BPA rules, type filtering works differently. Set the rule's **Applies to** scope to target a specific object type. Within the expression, use `ObjectTypeName` for the base type name as a string.
-
-```
-// BPA expression context: the rule "Applies to" determines the object type
-// No C#-style type casting is available in Dynamic LINQ
-
-// Check the object type name (rarely needed since scope handles this)
-ObjectTypeName = "Measure"
-ObjectTypeName = "Column"
-```
-
-For subtypes like calculated columns, set the BPA rule scope to **Calculated Columns** rather than trying to filter by type in the expression.
+In BPA rules, type filtering is handled by the rule's **Applies to** scope. Set it to the target object type (e.g., **Calculated Columns**) rather than filtering by type in the expression. No C#-style type casting is available in Dynamic LINQ.
 
 ## Common pitfalls
 
 > [!IMPORTANT]
-> - `Column` is abstract. You cannot create an instance of `Column` directly. Use `table.AddDataColumn()` or `table.AddCalculatedColumn()` on regular tables. `AddCalculatedTableColumn()` is only available on `CalculatedTable`.
+> - `Column` is abstract, but you can access all properties defined on the base type (`Name`, `DataType`, `FormatString`, `IsHidden`, `Description`, `DisplayFolder`) without casting. Only cast to a subtype when you need subtype-specific properties like `Expression` on `CalculatedColumn`.
 > - `OfType<T>()` both filters and casts. `Where(x => x is T)` only filters, leaving you with the base type. Prefer `OfType<T>()` when you need access to subtype properties.
-> - `ObjectType` and `SourceType` are base-level checks. For subtype-specific logic (e.g., accessing `Expression` on a `CalculatedColumn`), use `is` or `OfType<T>()`.
+> - Calculated table columns are managed automatically. Edit the calculated table's `Expression` to add or change columns. You cannot add them directly.
 
 ## See also
 
 - @csharp-scripts
 - @using-bpa-sample-rules-expressions
 - @how-to-navigate-tom-hierarchy
+- @how-to-tom-interfaces

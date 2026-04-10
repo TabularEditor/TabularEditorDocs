@@ -2,7 +2,7 @@
 uid: how-to-add-clone-remove-objects
 title: How to Add, Clone and Remove Objects
 author: Morten Lønskov
-updated: 2026-04-09
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,7 +17,8 @@ C# scripts can create new model objects, clone existing ones and delete objects.
 ## Quick reference
 
 ```csharp
-// Add objects
+// Add objects -- all parameters after the first are optional.
+// See sections below for parameter details.
 table.AddMeasure("Name", "DAX Expression", "Display Folder");
 table.AddCalculatedColumn("Name", "DAX Expression", "Display Folder");
 table.AddDataColumn("Name", "SourceColumn", "Display Folder", DataType.String);
@@ -29,58 +30,78 @@ Model.AddTranslation("da-DK");
 
 // Relationships
 var rel = Model.AddRelationship();
-rel.FromColumn = Model.Tables["Sales"].Columns["ProductKey"];
-rel.ToColumn = Model.Tables["Product"].Columns["ProductKey"];
+rel.FromColumn = Model.Tables["Sales"].Columns["ProductKey"];   // many (N) side
+rel.ToColumn = Model.Tables["Product"].Columns["ProductKey"];   // one (1) side
 
 // Clone
 var clone = measure.Clone("New Name");                         // same table
 var clone = measure.Clone("New Name", true, targetTable);      // different table
 
-// Delete (always materialize first when deleting in a loop)
+// Delete (always materialize with ToList() before modifying a collection in a loop)
 measure.Delete();
 table.Measures.Where(m => m.IsHidden).ToList().ForEach(m => m.Delete());
 ```
 
 ## Adding measures
 
-`AddMeasure()` creates a new measure on a table. All parameters except the first are optional.
+`AddMeasure()` creates and returns a new `Measure` on a table. The first parameter is the name, the second is a DAX expression and the third is the display folder. All parameters except the first are optional.
+
+Capture the returned object in a variable to set additional properties. This pattern is the same across all `Add*` methods.
 
 ```csharp
 var table = Model.Tables["Sales"];
 
-// Simple measure
-var m = table.AddMeasure("Revenue", "SUM('Sales'[Amount])");
+// Create a measure and set properties on the returned object
+var m = table.AddMeasure(
+    "Revenue",                   // name
+    "SUM('Sales'[Amount])"       // DAX expression
+);
 m.FormatString = "#,##0.00";
 m.Description = "Total sales amount";
 
 // With display folder
-var m2 = table.AddMeasure("Cost", "SUM('Sales'[Cost])", "Financial");
+var m2 = table.AddMeasure(
+    "Cost",                      // name
+    "SUM('Sales'[Cost])",        // DAX expression
+    "Financial"                  // display folder
+);
 ```
 
 ## Adding columns
 
 ```csharp
-// Calculated column (DAX expression)
-var cc = table.AddCalculatedColumn("Profit", "'Sales'[Amount] - 'Sales'[Cost]");
+// Calculated column -- first parameter is the name, second is a DAX expression
+var cc = table.AddCalculatedColumn(
+    "Profit",                              // name
+    "'Sales'[Amount] - 'Sales'[Cost]"      // DAX expression
+);
 cc.DataType = DataType.Decimal;
 cc.FormatString = "#,##0.00";
 
-// Data column (maps to a source column)
-var dc = table.AddDataColumn("Region", "RegionName", "Geography", DataType.String);
+// Data column -- maps to a source column in the partition query
+var dc = table.AddDataColumn(
+    "Region",              // name
+    "RegionName",          // source column name
+    "Geography",           // display folder
+    DataType.String        // data type
+);
 ```
+
+> [!WARNING]
+> Adding a data column does not modify the table's partition query. You must update the M expression or SQL query separately to include a source column that matches the `sourceColumn` parameter.
 
 ## Adding hierarchies
 
-Pass columns as parameters to automatically create levels.
+The `levels` parameter is variadic. Pass any number of columns in a single call to create the corresponding levels automatically.
 
 ```csharp
 var dateTable = Model.Tables["Date"];
 var h = dateTable.AddHierarchy(
-    "Calendar",
-    "",
-    dateTable.Columns["Year"],
-    dateTable.Columns["Quarter"],
-    dateTable.Columns["Month"]
+    "Calendar",                        // name
+    "",                                // display folder
+    dateTable.Columns["Year"],         // level 1
+    dateTable.Columns["Quarter"],      // level 2
+    dateTable.Columns["Month"]         // level 3
 );
 ```
 
@@ -96,19 +117,28 @@ h.AddLevel(dateTable.Columns["FiscalMonth"]);
 ## Adding calculated tables
 
 ```csharp
-var ct = Model.AddCalculatedTable("DateKey List", "VALUES('Date'[DateKey])");
+var ct = Model.AddCalculatedTable(
+    "DateKey List",                    // name
+    "VALUES('Date'[DateKey])"          // DAX expression
+);
 ```
 
 ## Adding relationships
 
-`AddRelationship()` creates an empty relationship. You must set the columns explicitly.
+`AddRelationship()` creates and returns an empty relationship. You must set the columns explicitly.
+
+`FromColumn` is the many (N) side and `ToColumn` is the one (1) side. Tabular Editor does not detect the direction automatically. A useful mnemonic: F for From, F for Fact table (the many side).
+
+New relationships default to `CrossFilteringBehavior.OneDirection` and `IsActive = true`. Set these only if you need a different value.
 
 ```csharp
 var rel = Model.AddRelationship();
-rel.FromColumn = Model.Tables["Sales"].Columns["ProductKey"];
-rel.ToColumn = Model.Tables["Product"].Columns["ProductKey"];
-rel.CrossFilteringBehavior = CrossFilteringBehavior.OneDirection;
-rel.IsActive = true;
+rel.FromColumn = Model.Tables["Sales"].Columns["ProductKey"];   // many side (fact)
+rel.ToColumn = Model.Tables["Product"].Columns["ProductKey"];   // one side (dimension)
+
+// Only set these if you need non-default values:
+// rel.CrossFilteringBehavior = CrossFilteringBehavior.BothDirections;
+// rel.IsActive = false;
 ```
 
 ## Cloning objects
@@ -126,7 +156,7 @@ var copy2 = original.Clone("Revenue Copy", true, Model.Tables["Reporting"]);
 
 ## Generating measures from columns
 
-A common pattern: iterate selected columns and create derived measures.
+A common pattern: iterate selected columns and create derived measures. Note the use of `DaxObjectFullName` which returns the fully qualified, properly quoted DAX reference (e.g., `'Sales'[Amount]`) to avoid quoting errors.
 
 ```csharp
 foreach (var col in Selected.Columns)
@@ -143,7 +173,7 @@ foreach (var col in Selected.Columns)
 
 ## Deleting objects
 
-Call `Delete()` on any named object to remove it. When deleting inside a loop, always call `.ToList()` first to avoid modifying the collection during iteration.
+Call `Delete()` on any named object to remove it. When modifying a collection in a loop (deleting, adding or moving objects), always call `.ToList()` first to materialize a snapshot.
 
 ```csharp
 // Delete a single object
@@ -159,10 +189,10 @@ Model.AllMeasures
 ## Common pitfalls
 
 > [!WARNING]
-> - Always call `.ToList()` before deleting objects in a loop. Without it, modifying the collection during iteration causes an exception.
-> - `AddRelationship()` creates an incomplete relationship. You must assign both `FromColumn` and `ToColumn` before the model validates. Failing to do so results in a validation error.
-> - New objects have default property values. Set `DataType`, `FormatString`, `IsHidden` and other properties explicitly after creation.
-> - `Clone()` copies all metadata including annotations, translations and perspective membership. If you do not want to inherit these, remove them after cloning.
+> - Always call `.ToList()` or `.ToArray()` before modifying objects in a loop. Without it, modifying the collection during iteration causes: `"Collection was modified; enumeration operation may not complete."`
+> - `AddRelationship()` creates an incomplete relationship. You must assign both `FromColumn` and `ToColumn` before the model validates.
+> - `Column` is abstract, but you can access all base properties (`Name`, `DataType`, `FormatString`, `IsHidden`) without casting. Only cast to a subtype for type-specific properties.
+> - `Clone()` copies all metadata including annotations, translations and perspective membership. Remove unwanted metadata after cloning.
 
 ## See also
 
@@ -170,3 +200,7 @@ Model.AllMeasures
 - @script-create-sum-measures-from-columns
 - @how-to-navigate-tom-hierarchy
 - @how-to-use-selected-object
+- (xref:TabularEditor.TOMWrapper.Measure) -- Measure API reference
+- (xref:TabularEditor.TOMWrapper.Column) -- Column API reference
+- (xref:TabularEditor.TOMWrapper.Hierarchy) -- Hierarchy API reference
+- (xref:TabularEditor.TOMWrapper.SingleColumnRelationship) -- Relationship API reference

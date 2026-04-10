@@ -2,7 +2,7 @@
 uid: how-to-use-script-ui-helpers
 title: How to Use Script UI Helpers
 author: Morten Lønskov
-updated: 2026-04-09
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -234,6 +234,7 @@ WaitFormVisible = false;
 
 using (var form = new Form())
 {
+    // --- Form setup: AutoSize + layout panel for DPI-safe scaling ---
     form.Text = "Create Measure";
     form.AutoSize = true;
     form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -249,12 +250,11 @@ using (var form = new Form())
     };
     form.Controls.Add(layout);
 
-    // Name field
+    // --- Input fields: name and expression ---
     layout.Controls.Add(new Label { Text = "Measure name:", AutoSize = true });
     var nameBox = new TextBox { Width = 400 };
     layout.Controls.Add(nameBox);
 
-    // Expression field
     layout.Controls.Add(new Label {
         Text = "DAX expression:", AutoSize = true,
         Padding = new Padding(0, 10, 0, 0)
@@ -262,7 +262,7 @@ using (var form = new Form())
     var exprBox = new TextBox { Width = 400, Height = 80, Multiline = true };
     layout.Controls.Add(exprBox);
 
-    // Buttons
+    // --- Buttons: OK/Cancel with keyboard support ---
     var buttons = new FlowLayoutPanel {
         FlowDirection = FlowDirection.LeftToRight,
         Dock = DockStyle.Fill, AutoSize = true,
@@ -282,13 +282,14 @@ using (var form = new Form())
     form.AcceptButton = okBtn;
     form.CancelButton = cancelBtn;
 
-    // Enable OK only when both fields have content
+    // --- Validation: enable OK only when both fields have content ---
     EventHandler validate = (s, e) =>
         okBtn.Enabled = !string.IsNullOrWhiteSpace(nameBox.Text)
                      && !string.IsNullOrWhiteSpace(exprBox.Text);
     nameBox.TextChanged += validate;
     exprBox.TextChanged += validate;
 
+    // --- Process result ---
     if (form.ShowDialog() == DialogResult.OK)
     {
         var table = Selected.Table;

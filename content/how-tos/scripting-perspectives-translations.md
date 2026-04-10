@@ -2,7 +2,7 @@
 uid: how-to-work-with-perspectives-translations
 title: How to Work with Perspectives and Translations
 author: Morten Lønskov
-updated: 2026-04-09
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2

@@ -2,7 +2,7 @@
 uid: how-to-work-with-dependencies
 title: How to Work with Dependencies
 author: Morten Lønskov
-updated: 2026-04-09
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -13,6 +13,9 @@ applies_to:
 # How to Work with Dependencies
 
 The TOM wrapper tracks which objects reference which other objects through the `DependsOn` and `ReferencedBy` properties. Use these for impact analysis, finding unused objects and understanding DAX lineage.
+
+> [!NOTE]
+> The `DependsOn` and `ReferencedBy` properties expose the same dependency information shown in the **Dependency View** in Tabular Editor's UI.
 
 ## Quick reference
 
@@ -48,7 +51,7 @@ column.UsedInSortBy            // columns using this as SortByColumn
 
 ## DependsOn: what does this object reference?
 
-`DependsOn` is available on any `IDaxDependantObject`: measures, calculated columns, calculation items, KPIs, tables and partitions.
+`DependsOn` is available on (xref:TabularEditor.TOMWrapper.IDaxDependantObject) types -- objects that have a DAX expression. This includes measures, calculated columns, calculation items, KPIs, tables and partitions.
 
 ```csharp
 var measure = Model.AllMeasures.First(m => m.Name == "Revenue");
@@ -63,7 +66,7 @@ bool usesDate = measure.DependsOn.Tables.Any(t => t.Name == "Date");
 
 ## ReferencedBy: what references this object?
 
-`ReferencedBy` is available on any `IDaxObject`: columns, measures and tables.
+`ReferencedBy` is available on any (xref:TabularEditor.TOMWrapper.IDaxObject). This includes objects with no DAX expression of their own, such as `DataColumn`, which can still be referenced by name in other objects' DAX.
 
 ```csharp
 var column = Model.Tables["Sales"].Columns["Amount"];
@@ -93,7 +96,7 @@ var affectedMeasures = allDownstream.OfType<Measure>();
 
 ## Finding unused objects
 
-Objects with no references are candidates for cleanup.
+Objects with no references are candidates for cleanup. This pattern mirrors the built-in BPA rule for detecting unused objects.
 
 ```csharp
 // Measures not referenced by any other DAX expression
@@ -144,8 +147,8 @@ In BPA rule expressions, dependency properties are accessed directly on the obje
 ## Common pitfalls
 
 > [!IMPORTANT]
-> - `DependsOn` is only available on `IDaxDependantObject` types: `Measure`, `CalculatedColumn`, `CalculationItem`, `KPI`, `Table`, `Partition`, `TablePermission`. A `DataColumn` does not have `DependsOn` because it has no DAX expression.
-> - `ReferencedBy` is only available on `IDaxObject` types: `Column`, `Measure`, `Table`, `Hierarchy`. Not every object type has both properties.
+> - `DependsOn` requires a DAX expression and is only available on `IDaxDependantObject` types: `Measure`, `CalculatedColumn`, `CalculationItem`, `KPI`, `Table`, `Partition`, `TablePermission`. A `DataColumn` does not have `DependsOn` because it has no DAX expression.
+> - `ReferencedBy` does not require a DAX expression. It is available on any `IDaxObject` type: `Column`, `Measure`, `Table`, `Hierarchy`. A `DataColumn` has `ReferencedBy` because other objects can reference it by name. Not every object type has both properties.
 > - `UsedInRelationships`, `UsedInHierarchies` and `UsedInSortBy` are column-specific properties. They track structural usage, not DAX expression references. Check both structural and DAX references to find truly unused columns.
 > - `ReferencedBy.Deep()` and `DependsOn.Deep()` can be computationally expensive on large models with deeply nested dependency chains.
 

@@ -2,7 +2,7 @@
 uid: how-to-work-with-expressions
 title: How to Work with Expressions and DAX Properties
 author: Morten Lønskov
-updated: 2026-04-09
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -89,7 +89,7 @@ foreach (var col in Selected.Columns)
 
 ## The IExpressionObject interface
 
-Objects that hold expressions implement `IExpressionObject`. In Tabular Editor 2, this interface provides only the `Expression` property. In Tabular Editor 3, it adds `GetExpression()`, `SetExpression()` and `GetExpressionProperties()` for working with multiple expression types on a single object.
+Objects that hold expressions implement (xref:TabularEditor.TOMWrapper.IExpressionObject). In Tabular Editor 2, this interface provides only the `Expression` property. In Tabular Editor 3, it adds `GetExpression()`, `SetExpression()` and `GetExpressionProperties()` for working with multiple expression types on a single object.
 
 ```csharp
 // Tabular Editor 2: use the Expression property directly
@@ -129,18 +129,23 @@ The `ExpressionProperty` enum (Tabular Editor 3 only) includes:
 
 ## Formatting DAX
 
-Use `FormatDax()` to queue objects for formatting and `CallDaxFormatter()` to execute.
+`FormatDax()` queues objects for formatting. Formatting executes automatically at the end of the script. Call `CallDaxFormatter()` only when you need the formatted result mid-script.
 
 ```csharp
-// Format all measures in the model
+// Typical usage -- formatting happens automatically after the script ends
 foreach (var m in Model.AllMeasures)
     FormatDax(m);
-CallDaxFormatter();
+
+// Advanced: force formatting mid-script to read the result
+var before = Selected.Measure.Expression;
+FormatDax(Selected.Measure);
+CallDaxFormatter();                      // format NOW, not at script end
+var after = Selected.Measure.Expression; // now contains the formatted DAX
 ```
 
-## Tokenizing for complexity analysis
+## Tokenizing
 
-`Tokenize()` returns the DAX tokens in an expression. Use it to measure expression complexity.
+`Tokenize()` returns the DAX tokens in an expression. Tokens provide a reliable representation independent of whitespace and formatting. Use tokenization when you need to analyze the structure of a DAX expression beyond what the built-in dependency tracking and rename support already provides.
 
 ```csharp
 foreach (var m in Model.AllMeasures.OrderByDescending(m => m.Tokenize().Count))
@@ -148,6 +153,8 @@ foreach (var m in Model.AllMeasures.OrderByDescending(m => m.Tokenize().Count))
 ```
 
 ## Find and replace in expressions
+
+String replacement with `Replace()` operates on the raw expression text, including inside string literals and comments. For targeted replacement of specific DAX constructs (table references, column references), analyze the tokenized expression instead.
 
 ```csharp
 // Replace a column reference across all measures
@@ -173,7 +180,7 @@ In BPA rule expressions, expression properties are accessed directly on the obje
 > [!IMPORTANT]
 > - `DataColumn` does not have an `Expression` property. Only `CalculatedColumn`, `Measure`, `CalculationItem` and `Partition` have expressions. Accessing `Expression` on a `DataColumn` causes a compile error or runtime exception depending on context.
 > - `DaxObjectName` returns the unqualified name (e.g., `[Revenue]`) while `DaxObjectFullName` includes the table prefix (e.g., `'Sales'[Revenue]`). Use `DaxObjectFullName` for column references in DAX and `DaxObjectName` for measure references where table qualification is optional.
-> - `FormatDax()` only queues the object. You must call `CallDaxFormatter()` to actually format the expressions. The formatter requires an internet connection (it calls the daxformatter.com API).
+> - `FormatDax()` in Tabular Editor 2 calls the external daxformatter.com API and requires an internet connection. Tabular Editor 3 uses a built-in formatter by default. To use daxformatter.com in TE3, enable it in preferences.
 
 ## See also
 

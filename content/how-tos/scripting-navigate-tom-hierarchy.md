@@ -2,7 +2,7 @@
 uid: how-to-navigate-tom-hierarchy
 title: How to Navigate the TOM Object Hierarchy
 author: Morten Lønskov
-updated: 2026-04-09
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -12,7 +12,7 @@ applies_to:
 ---
 # How to Navigate the TOM Object Hierarchy
 
-Every C# script starts from the `Model` object, which is the root of the Tabular Object Model (TOM) hierarchy. This article shows how to reach any object in a semantic model.
+Every C# script starts from the `Model` object or the @csharp-scripts `Selected` object. These expose the Tabular Editor TOM wrapper, which wraps the Microsoft Analysis Services Tabular Object Model (TOM). See the (xref:TabularEditor.TOMWrapper) API reference for the full wrapper documentation.
 
 ## Quick reference
 
@@ -56,7 +56,7 @@ Use `FirstOrDefault()` when the object may not exist:
 
 ```csharp
 var table = Model.Tables.FirstOrDefault(t => t.Name == "Sales");
-if (table == null) { Error("Table not found"); return; }
+if (table == null) { Error("Table not found"); return; } // return exits the script early
 ```
 
 ## Navigating from child to parent
@@ -71,7 +71,14 @@ var model = measure.Model;                // The Model root
 var level = Model.AllLevels.First();
 var hierarchy = level.Hierarchy;           // parent hierarchy
 var table = level.Table;                   // parent table (via hierarchy)
+
+// Navigate up to Model and back down to a different table
+var m = Model.AllMeasures.First(m => m.Name == "Revenue");
+var otherCol = m.Table.Model.Tables["Product"].Columns.First();
 ```
+
+> [!NOTE]
+> The last example demonstrates that you can navigate up to `Model` from any child object and back down to any table in the model.
 
 ## Navigating table children
 
@@ -80,10 +87,10 @@ Each `Table` exposes typed collections for its child objects.
 ```csharp
 var table = Model.Tables["Sales"];
 
-table.Columns                              // ColumnCollection
-table.Measures                             // MeasureCollection
-table.Hierarchies                          // HierarchyCollection
-table.Partitions                           // PartitionCollection
+Output(table.Columns);                     // ColumnCollection
+Output(table.Measures);                    // MeasureCollection
+Output(table.Hierarchies);                 // HierarchyCollection
+Output(table.Partitions);                  // PartitionCollection
 ```
 
 ## Searching with predicates
@@ -110,7 +117,7 @@ foreach (var cg in Model.CalculationGroups)
 {
     foreach (var item in cg.CalculationItems)
     {
-        // item.Name, item.Expression, item.Ordinal
+        Info(item.Name + ": " + item.Expression);
     }
 }
 ```
