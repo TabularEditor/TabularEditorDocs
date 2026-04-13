@@ -21,7 +21,9 @@ C# scripts use standard C# LINQ with lambda expressions. Best Practice Analyzer 
 | C# scripts and macros | C# LINQ |
 | BPA rule expressions | Dynamic LINQ |
 | BPA fix expressions | Dynamic LINQ (with `it.` prefix for assignments) |
-| **TOM Explorer** tree filter (`:` prefix) | Dynamic LINQ |
+| **TOM Explorer** tree filter (`:` prefix)\* | Dynamic LINQ |
+
+\* Tabular Editor 2 only.
 
 ## Syntax comparison
 

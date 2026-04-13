@@ -22,21 +22,22 @@ Info("Operation completed.");                          // informational popup
 Warning("This might take a while.");                   // warning popup
 Error("No valid selection."); return;                  // error popup + stop script
 
-// Output
-Output(measure);                                       // property grid for a TOM object
-Output(listOfMeasures);                                // list view with property grid
-Output(dataTable);                                     // sortable/filterable grid
 Output("Hello");                                       // simple dialog
 
-// Object selection dialogs
+// Object selection dialogs (capture returns for reuse below)
 var table = SelectTable();                             // pick a table
 var column = SelectColumn(table.Columns);              // pick from filtered columns
 var measure = SelectMeasure();                         // pick a measure
-var obj = SelectObject<DataSource>(Model.DataSources); // generic selection
-var items = SelectObjects(collection);                 // multi-select (TE3 only)
+var ds = SelectObject<DataSource>(Model.DataSources);  // generic selection
+var items = SelectObjects(Model.AllMeasures);          // multi-select (TE3 only)
 
 // Evaluate DAX
 var result = EvaluateDax("COUNTROWS('Sales')");        // run DAX on connected model
+
+// Output (uses the variables assigned above)
+Output(measure);                                       // property grid for a TOM object
+Output(items);                                         // list view with property grid
+Output(result);                                        // sortable/filterable grid for a DataTable
 ```
 
 ## Messages: Info, Warning, Error
@@ -64,6 +65,9 @@ Info("Updated " + Selected.Measures.Count() + " measures.");
 | `IEnumerable<TabularNamedObject>` | List view with property grid |
 | `DataTable` | Sortable, filterable grid |
 | String or primitive | Simple message dialog |
+
+> [!NOTE]
+> String output uses Windows line endings. Use `\r\n` or `Environment.NewLine` to insert line breaks. A bare `\n` renders on one line. This catches users out with M expressions, which use `\n` and print as a single line in `Output()`.
 
 ### DataTable for structured output
 
@@ -169,237 +173,15 @@ else
 
 ## Custom WinForms dialogs
 
-For more complex input, build WinForms dialogs. Use `TableLayoutPanel` and `FlowLayoutPanel` with `AutoSize` for proper scaling across DPI settings.
-
-> [!WARNING]
-> Do not use manual pixel positioning with `Location = new Point(x, y)` for custom dialogs. This approach breaks at non-standard DPI settings. Use layout panels instead.
-
-### Simple prompt dialog
-
-```csharp
-using System.Windows.Forms;
-using System.Drawing;
-
-WaitFormVisible = false;
-
-using (var form = new Form())
-{
-    form.Text = "Enter a value";
-    form.AutoSize = true;
-    form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-    form.FormBorderStyle = FormBorderStyle.FixedDialog;
-    form.MaximizeBox = false;
-    form.MinimizeBox = false;
-    form.StartPosition = FormStartPosition.CenterParent;
-    form.Padding = new Padding(20);
-
-    var layout = new TableLayoutPanel {
-        ColumnCount = 1, Dock = DockStyle.Fill,
-        AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink
-    };
-    form.Controls.Add(layout);
-
-    layout.Controls.Add(new Label { Text = "Display folder name:", AutoSize = true });
-    var textBox = new TextBox { Width = 300, Text = "New Folder" };
-    layout.Controls.Add(textBox);
-
-    var buttons = new FlowLayoutPanel {
-        FlowDirection = FlowDirection.LeftToRight,
-        Dock = DockStyle.Fill, AutoSize = true,
-        Padding = new Padding(0, 10, 0, 0)
-    };
-    var okBtn = new Button { Text = "OK", AutoSize = true, DialogResult = DialogResult.OK };
-    var cancelBtn = new Button { Text = "Cancel", AutoSize = true, DialogResult = DialogResult.Cancel };
-    buttons.Controls.AddRange(new Control[] { okBtn, cancelBtn });
-    layout.Controls.Add(buttons);
-
-    form.AcceptButton = okBtn;
-    form.CancelButton = cancelBtn;
-
-    if (form.ShowDialog() == DialogResult.OK)
-    {
-        Selected.Measures.ForEach(m => m.DisplayFolder = textBox.Text);
-        Info("Updated display folder to: " + textBox.Text);
-    }
-}
-```
-
-### Multi-field form with validation
-
-```csharp
-using System.Windows.Forms;
-using System.Drawing;
-
-WaitFormVisible = false;
-
-using (var form = new Form())
-{
-    // --- Form setup: AutoSize + layout panel for DPI-safe scaling ---
-    form.Text = "Create Measure";
-    form.AutoSize = true;
-    form.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-    form.StartPosition = FormStartPosition.CenterParent;
-    form.FormBorderStyle = FormBorderStyle.FixedDialog;
-    form.MaximizeBox = false;
-    form.MinimizeBox = false;
-    form.Padding = new Padding(20);
-
-    var layout = new TableLayoutPanel {
-        ColumnCount = 1, Dock = DockStyle.Fill,
-        AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink
-    };
-    form.Controls.Add(layout);
-
-    // --- Input fields: name and expression ---
-    layout.Controls.Add(new Label { Text = "Measure name:", AutoSize = true });
-    var nameBox = new TextBox { Width = 400 };
-    layout.Controls.Add(nameBox);
-
-    layout.Controls.Add(new Label {
-        Text = "DAX expression:", AutoSize = true,
-        Padding = new Padding(0, 10, 0, 0)
-    });
-    var exprBox = new TextBox { Width = 400, Height = 80, Multiline = true };
-    layout.Controls.Add(exprBox);
-
-    // --- Buttons: OK/Cancel with keyboard support ---
-    var buttons = new FlowLayoutPanel {
-        FlowDirection = FlowDirection.LeftToRight,
-        Dock = DockStyle.Fill, AutoSize = true,
-        Padding = new Padding(0, 10, 0, 0)
-    };
-    var okBtn = new Button {
-        Text = "OK", AutoSize = true,
-        DialogResult = DialogResult.OK, Enabled = false
-    };
-    var cancelBtn = new Button {
-        Text = "Cancel", AutoSize = true,
-        DialogResult = DialogResult.Cancel
-    };
-    buttons.Controls.AddRange(new Control[] { okBtn, cancelBtn });
-    layout.Controls.Add(buttons);
-
-    form.AcceptButton = okBtn;
-    form.CancelButton = cancelBtn;
-
-    // --- Validation: enable OK only when both fields have content ---
-    EventHandler validate = (s, e) =>
-        okBtn.Enabled = !string.IsNullOrWhiteSpace(nameBox.Text)
-                     && !string.IsNullOrWhiteSpace(exprBox.Text);
-    nameBox.TextChanged += validate;
-    exprBox.TextChanged += validate;
-
-    // --- Process result ---
-    if (form.ShowDialog() == DialogResult.OK)
-    {
-        var table = Selected.Table;
-        table.AddMeasure(nameBox.Text.Trim(), exprBox.Text.Trim());
-        Info("Created measure: " + nameBox.Text.Trim());
-    }
-}
-```
-
-### Scope selection dialog (reusable class)
-
-For scripts that need a choice between operating on selected objects or all objects, create a reusable dialog class.
-
-```csharp
-using System.Windows.Forms;
-using System.Drawing;
-
-public class ScopeDialog : Form
-{
-    public enum ScopeOption { OnlySelected, All, Cancel }
-    public ScopeOption SelectedOption { get; private set; }
-
-    public ScopeDialog(int selectedCount, int totalCount)
-    {
-        Text = "Choose scope";
-        AutoSize = true;
-        AutoSizeMode = AutoSizeMode.GrowAndShrink;
-        StartPosition = FormStartPosition.CenterParent;
-        FormBorderStyle = FormBorderStyle.FixedDialog;
-        MaximizeBox = false;
-        MinimizeBox = false;
-        Padding = new Padding(20);
-
-        var layout = new TableLayoutPanel {
-            ColumnCount = 1, Dock = DockStyle.Fill,
-            AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink
-        };
-        Controls.Add(layout);
-
-        layout.Controls.Add(new Label {
-            Text = $"{selectedCount} object(s) selected out of {totalCount} total.",
-            AutoSize = true
-        });
-
-        var buttons = new FlowLayoutPanel {
-            FlowDirection = FlowDirection.LeftToRight,
-            Dock = DockStyle.Fill, AutoSize = true,
-            Padding = new Padding(0, 15, 0, 0)
-        };
-
-        var btnSelected = new Button {
-            Text = "Only selected", AutoSize = true,
-            DialogResult = DialogResult.OK
-        };
-        btnSelected.Click += (s, e) => SelectedOption = ScopeOption.OnlySelected;
-
-        var btnAll = new Button {
-            Text = "All objects", AutoSize = true,
-            DialogResult = DialogResult.Yes
-        };
-        btnAll.Click += (s, e) => SelectedOption = ScopeOption.All;
-
-        var btnCancel = new Button {
-            Text = "Cancel", AutoSize = true,
-            DialogResult = DialogResult.Cancel
-        };
-        btnCancel.Click += (s, e) => SelectedOption = ScopeOption.Cancel;
-
-        buttons.Controls.AddRange(new Control[] { btnSelected, btnAll, btnCancel });
-        layout.Controls.Add(buttons);
-
-        AcceptButton = btnSelected;
-        CancelButton = btnCancel;
-    }
-}
-
-// Usage:
-WaitFormVisible = false;
-using (var dialog = new ScopeDialog(Selected.Measures.Count(), Model.AllMeasures.Count()))
-{
-    dialog.ShowDialog();
-    switch (dialog.SelectedOption)
-    {
-        case ScopeDialog.ScopeOption.OnlySelected:
-            Selected.Measures.ForEach(m => m.FormatString = "#,##0.00");
-            break;
-        case ScopeDialog.ScopeOption.All:
-            Model.AllMeasures.ForEach(m => m.FormatString = "#,##0.00");
-            break;
-        case ScopeDialog.ScopeOption.Cancel:
-            break;
-    }
-}
-```
-
-### Key rules for scaling-safe dialogs
-
-- Set `AutoSize = true` and `AutoSizeMode = AutoSizeMode.GrowAndShrink` on the form.
-- Use `TableLayoutPanel` (vertical stacking) and `FlowLayoutPanel` (horizontal button rows) instead of manual coordinates.
-- Set `FormBorderStyle = FormBorderStyle.FixedDialog` and disable maximize/minimize.
-- Set `StartPosition = FormStartPosition.CenterParent`.
-- Always set `AcceptButton` and `CancelButton` for keyboard support (Enter/Escape).
-- Call `WaitFormVisible = false` before showing a dialog to hide the "Running Macro" spinner.
-- Wrap the form in a `using` statement for proper disposal.
+For input scenarios beyond what the built-in helpers provide, build custom WinForms dialogs directly in the script. See @how-to-build-custom-winforms-dialogs for patterns covering simple prompts, multi-field forms with validation and reusable dialog classes.
 
 ## See also
 
 - @script-helper-methods
 - @script-output-things
+- @how-to-build-custom-winforms-dialogs
 - @csharp-scripts
 - @script-implement-incremental-refresh
 - @script-find-replace
 - @script-convert-dlol-to-import
+

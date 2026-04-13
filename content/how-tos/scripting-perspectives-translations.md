@@ -12,7 +12,7 @@ applies_to:
 ---
 # How to Work with Perspectives and Translations
 
-Perspectives control which objects are visible in specific client views. Translations (cultures) provide localized names, descriptions and display folders. Both use indexer properties on TOM objects.
+Perspectives control which objects are visible in specific client views. Translations (cultures) provide localized names, descriptions and display folders. Both use indexer properties on TOM objects. See @how-to-navigate-tom-hierarchy for details on accessing TOM objects and their indexers.
 
 ## Quick reference
 
@@ -20,7 +20,7 @@ Perspectives control which objects are visible in specific client views. Transla
 // Perspectives
 measure.InPerspective["Sales"] = true;              // include in perspective
 measure.InPerspective["Sales"] = false;             // exclude from perspective
-bool isIn = measure.InPerspective["Sales"];          // check membership
+var isIn = measure.InPerspective["Sales"];           // check membership
 
 // Translations
 measure.TranslatedNames["da-DK"] = "Omsætning";    // set translated name
@@ -36,7 +36,7 @@ foreach (var culture in Model.Cultures)
 
 ## Setting perspective membership
 
-The `InPerspective` indexer is available on tables, columns, measures and hierarchies (any `ITabularPerspectiveObject`).
+The `InPerspective` indexer is available on tables, columns, measures and hierarchies (any (xref:TabularEditor.TOMWrapper.ITabularPerspectiveObject)).
 
 ```csharp
 // Add all measures in a table to a perspective
@@ -62,7 +62,7 @@ foreach (var p in Model.Perspectives)
 ## Creating and removing perspectives
 
 ```csharp
-// Create a new perspective
+// Create a new perspective (empty upon creation -- add objects as shown above)
 var p = Model.AddPerspective("Executive Dashboard");
 
 // Remove a perspective
@@ -71,7 +71,7 @@ Model.Perspectives["Old View"].Delete();
 
 ## Setting translations
 
-Translation indexers are available on objects implementing `ITranslatableObject` (tables, columns, measures, hierarchies, levels). Display folder translations require `IFolderObject` (measures, columns, hierarchies).
+Translation indexers are available on objects implementing (xref:TabularEditor.TOMWrapper.ITranslatableObject) (tables, columns, measures, hierarchies, levels). Display folder translations require (xref:TabularEditor.TOMWrapper.IFolderObject) (measures, columns, hierarchies).
 
 ```csharp
 var m = Model.AllMeasures.First(m => m.Name == "Revenue");

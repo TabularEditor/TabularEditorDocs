@@ -15,6 +15,7 @@
 ## [Work with Perspectives and Translations](scripting-perspectives-translations.md)
 ## [Add, Clone and Remove Objects](scripting-add-clone-remove-objects.md)
 ## [Use Script UI Helpers](scripting-ui-helpers.md)
+## [Build Custom WinForms Dialogs in Scripts](scripting-custom-winforms-dialogs.md)
 
 # Model Management and Deployment
 ## [Deploy Current Model](deploy-current-model.md)
