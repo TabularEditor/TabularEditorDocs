@@ -30,7 +30,7 @@ string typeName = obj.GetType().Name;   // "DataColumn", "Measure", etc.
 ```
 
 > [!NOTE]
-> Pattern matching with variable declaration (`col is CalculatedColumn cc`) requires the Roslyn compiler in Tabular Editor 2. Enable it under **File > Preferences > General > Use Roslyn compiler**. Tabular Editor 3 supports this by default.
+> Pattern matching with variable declaration (`col is CalculatedColumn cc`) requires the Roslyn compiler in Tabular Editor 2. Configure it under **File > Preferences > General > Compiler path**. See [Compiling with Roslyn](xref:advanced-scripting#compiling-with-roslyn) for details. Tabular Editor 3 supports this by default.
 
 ## Type hierarchy
 
