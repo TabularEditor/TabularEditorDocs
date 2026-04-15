@@ -34,24 +34,24 @@ Tabular Editor 3 各版本的主要区别在于它们支持哪些表格 Data mod
 
 支持的场景完整概览见下方矩阵：
 
-| 场景 / 版本                                        | 桌面版                                                                                | 商业版                                                       | 企业版                                                     |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
-| Power BI Desktop 外部工具                          | <span class="emoji"><span class="emoji">&#10004;</span></span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| 将模型元数据加载/保存到磁盘\*\*                             | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
-| 工作区模式\*\*\*                                    | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
-| Power BI Premium 按用户                           | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| SQL Server 开发者版                                | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
-| SQL Server 标准版                                 | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| SQL Server 企业版                                 | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| Azure AS 开发者层                                  | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
-| Azure AS 基础层                                   | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| Azure AS 标准层                                   | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| Power BI Premium 容量（P SKU）                     | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| Power BI Embedded 容量（A/EM SKU）                 | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| Fabric 容量（F SKU）                               | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| Semantic Bridge（Databricks）                    | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
-| [高级刷新对话框](xref:advanced-refresh)               | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| [免费 DAX优化器许可证](xref:dax-optimizer-integration) | <span class="emoji">&#10060;</span>                            | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| 场景 / 版本                                        | 桌面版                                                     | 商业版                                                       | 企业版                                                     |
+| ---------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
+| Power BI Desktop 外部工具                          | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| 将模型元数据加载/保存到磁盘\*\*                             | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| 工作区模式\*\*\*                                    | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| Power BI Premium 按用户                           | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| SQL Server 开发者版                                | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| SQL Server 标准版                                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| SQL Server 企业版                                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Azure AS 开发者层                                  | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| Azure AS 基础层                                   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| Azure AS 标准层                                   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Power BI Premium 容量（P SKU）                     | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Power BI Embedded 容量（A/EM SKU）                 | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Fabric 容量（F SKU）                               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| Semantic Bridge（Databricks）                    | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
+| [高级刷新对话框](xref:advanced-refresh)               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
+| [免费 DAX优化器许可证](xref:dax-optimizer-integration) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
 
 \*\*\*注意：\*\*如果 Analysis Services Data model 包含透视，或表包含多个分区，则需要企业版（不适用于 Power BI Desktop 或 Power BI Premium Per User 模型）。
 
@@ -67,18 +67,20 @@ Tabular Editor 3 各版本的主要区别在于它们支持哪些表格 Data mod
 
 同样地，[Power BI Premium-Per-User Workspace 不支持 Direct Lake Dataset](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#prerequisites)，所以使用该功能的 Power BI 模型也需要 TE3 企业版。
 
-| 模型类型            | 功能            | 商务版                                                     | 企业版                                                     |
-| --------------- | ------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Azure AS / SSAS | 透视            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | 多个分区          | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | DirectQuery\* | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | Direct Lake   | 不适用                                                     | 不适用                                                     |
-| Power BI        | 透视            | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Power BI        | 多个分区          | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Power BI        | DirectQuery   | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Power BI        | Direct Lake   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 模型类型            | 功能                      | 商务版                                                     | 企业版                                                     |
+| --------------- | ----------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Azure AS / SSAS | 透视                      | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | 多个分区                    | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | DirectQuery\*           | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | Direct Lake             | 不适用                                                     | 不适用                                                     |
+| Power BI        | Perspectives\*\*        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | Multiple partitions\*\* | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | DirectQuery             | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | Direct Lake             | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
 \***注意：** SQL Server 标准版 2019 年之前的 Analysis Services 不支持 DirectQuery。 Azure AS 基本层也同样不支持 DirectQuery。 [了解更多](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models)。
+
+\*\***Note:** Perspectives and multiple partitions are available in Business Edition for Power BI models, but the model's `CompatibilityMode` must be set to `PowerBI`. See [Change compatibility mode](xref:change-compatibility-mode) for instructions.
 
 如果您在使用 TE3 商业版许可证时尝试打开一个应用了上述一项或多项建模限制的模型，将会看到以下错误信息：
 
