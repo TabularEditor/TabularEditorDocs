@@ -29,10 +29,10 @@ Tabular Editor 3 支持将 Azure Databricks 连接为语义模型的数据源。
 - 有效的 Azure Databricks Workspace
 - 访问 Databricks 数据的相应权限
 - Tabular Editor 3（桌面版、商业版或企业版）
-- The [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) installed on your machine
+- 你电脑上安装的 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)
 
 > [!IMPORTANT]
-> Databricks has released a new ODBC driver that replaces the legacy Simba Spark ODBC Driver. We recommend installing the new [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download). Tabular Editor 3.26.0 and later supports both drivers, but the new driver is the recommended option going forward. The legacy Simba driver is available from the [Databricks ODBC driver archive](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc).
+> Databricks 已发布新的 ODBC 驱动程序，用于取代旧版 Simba Spark ODBC Driver。 我们建议安装新的 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)。 Tabular Editor 3.26.0 及更高版本支持这两种驱动程序，但从今往后建议优先使用新驱动程序。 旧版 Simba 驱动程序可从 [Databricks ODBC 驱动程序存档](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc) 下载。
 
 ## 身份验证方式
 
