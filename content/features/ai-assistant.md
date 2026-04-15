@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI Assistant
 author: Morten Lønskov
-updated: 2026-03-19
+updated: 2026-04-15
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -72,7 +72,31 @@ Select **Anthropic** as the provider and enter your API key. The default model i
 
 ### Azure OpenAI
 
-Select **Azure OpenAI** as the provider. Enter your API key and the service endpoint URL for your Azure OpenAI resource. Set the model name to match your deployment name.
+Select **Azure OpenAI** as the provider and configure three fields:
+
+- **API key** — the access key for your Azure OpenAI resource
+- **Service endpoint** — the endpoint URL for your resource, for example `https://your-resource.openai.azure.com`. Use the resource URL, not the `privatelink` alias; the SSL certificate is issued for `*.openai.azure.com` and connecting directly to `*.privatelink.openai.azure.com` fails certificate validation
+- **Model name** — the **deployment name**, not the underlying model name and not the resource name
+
+Azure OpenAI requires the deployment name in every API call. A deployment name is chosen when the deployment is created, so it can be any string. Deployments are often named after the model they serve (for example `gpt-4o`), but that is a convention, not a requirement. If you enter the resource name or a raw model name that does not exist as a deployment, the request fails.
+
+#### Finding your deployment name
+
+In the [Azure AI Foundry portal](https://ai.azure.com):
+
+1. Sign in and select your Azure OpenAI resource
+2. Open **Deployments** (or **Models + endpoints** if the resource has been upgraded to Foundry)
+3. Copy the value from the **Name** column
+
+Deployments created before your organization adopted Azure AI Foundry may not appear in the portal. List them from the Azure CLI:
+
+```bash
+az cognitiveservices account deployment list --name "<resource-name>" --resource-group "<resource-group>" --output table
+```
+
+See [Create and deploy an Azure OpenAI resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model) for more details.
+
+For 403 errors, SSL failures or "DeploymentNotFound" responses, see @azure-openai-connection-errors.
 
 ### Custom (OpenAI-compatible)
 

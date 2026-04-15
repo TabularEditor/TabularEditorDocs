@@ -7,3 +7,5 @@
 # @calendar-blank-value
 
 # @direct-lake-entity-updates-reverting
+
+# @azure-openai-connection-errors
