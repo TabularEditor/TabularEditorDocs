@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: Asistente de IA
 author: Morten Lønskov
-updated: 2026-03-19
+updated: 2026-04-15
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -72,7 +72,31 @@ Selecciona **Anthropic** como proveedor e introduce tu clave de API. El modelo p
 
 ### Azure OpenAI
 
-Selecciona **Azure OpenAI** como proveedor. Introduce tu clave de API y la URL del punto de conexión del servicio para tu recurso de Azure OpenAI. Configura el nombre del modelo para que coincida con el nombre de tu implementación.
+Select **Azure OpenAI** as the provider and configure three fields:
+
+- **API key** — the access key for your Azure OpenAI resource
+- **Service endpoint** — the endpoint URL for your resource, for example `https://your-resource.openai.azure.com`. Use the resource URL, not the `privatelink` alias; the SSL certificate is issued for `*.openai.azure.com` and connecting directly to `*.privatelink.openai.azure.com` fails certificate validation
+- **Model name** — the **deployment name**, not the underlying model name and not the resource name
+
+Azure OpenAI requires the deployment name in every API call. A deployment name is chosen when the deployment is created, so it can be any string. Deployments are often named after the model they serve (for example `gpt-4o`), but that is a convention, not a requirement. If you enter the resource name or a raw model name that does not exist as a deployment, the request fails.
+
+#### Finding your deployment name
+
+In the [Azure AI Foundry portal](https://ai.azure.com):
+
+1. Sign in and select your Azure OpenAI resource
+2. Open **Deployments** (or **Models + endpoints** if the resource has been upgraded to Foundry)
+3. Copy the value from the **Name** column
+
+Deployments created before your organization adopted Azure AI Foundry may not appear in the portal. List them from the Azure CLI:
+
+```bash
+az cognitiveservices account deployment list --name "<resource-name>" --resource-group "<resource-group>" --output table
+```
+
+See [Create and deploy an Azure OpenAI resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model) for more details.
+
+For 403 errors, SSL failures or "DeploymentNotFound" responses, see @azure-openai-connection-errors.
 
 ### Personalizado (compatible con OpenAI)
 
@@ -296,7 +320,7 @@ Selecciona objetos específicos en el **Explorador TOM** antes de hacer tu pregu
 
 Otras formas de reducir el uso de tokens:
 
-- Haz preguntas concretas sobre tablas, medidas o columnas específicas en lugar de preguntas generales sobre todo el modelo
+- Ask focused questions about specific tables, measures or columns rather than broad questions about the entire model. A vague prompt such as _"Set display folders on all measures"_ forces the assistant to retrieve metadata for the entire model. A specific prompt such as _"Set display folders on the measures I have selected"_ limits the context to the current selection and uses far fewer tokens
 - Inicia nuevas conversaciones al cambiar de tema para evitar acumular historiales de conversación extensos
 - Usa un modelo más pequeño o menos costoso para preguntas exploratorias
 
