@@ -29,10 +29,10 @@ Antes de empezar, asegúrate de tener lo siguiente:
 - Un Workspace válido de Azure Databricks
 - Permisos adecuados para acceder a los datos de Databricks
 - Tabular Editor 3 (edición Desktop, Business o Edición Enterprise)
-- The [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) installed on your machine
+- El [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) instalado en tu equipo
 
 > [!IMPORTANT]
-> Databricks has released a new ODBC driver that replaces the legacy Simba Spark ODBC Driver. We recommend installing the new [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download). Tabular Editor 3.26.0 and later supports both drivers, but the new driver is the recommended option going forward. The legacy Simba driver is available from the [Databricks ODBC driver archive](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc).
+> Databricks ha lanzado un nuevo controlador ODBC que sustituye al Simba Spark ODBC Driver heredado. Te recomendamos instalar el nuevo [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download). Tabular Editor 3.26.0 y versiones posteriores admiten ambos controladores, pero el nuevo controlador es la opción recomendada en adelante. El controlador heredado de Simba está disponible en el [archivo de controladores ODBC de Databricks](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc).
 
 ## Métodos de autenticación
 
