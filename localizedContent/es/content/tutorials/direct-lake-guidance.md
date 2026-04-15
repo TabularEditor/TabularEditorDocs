@@ -2,7 +2,7 @@
 uid: direct-lake-guidance
 title: Guía de Direct Lake
 author: Daniel Otykier
-updated: 2024-06-18
+updated: 2026-03-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -31,7 +31,7 @@ La siguiente tabla resume los modos de almacenamiento disponibles en modelos sem
 | Import                 | Los datos se importan al modelo semántico y se almacenan en la caché en memoria del modelo (VertiPaq).                                                                             | Cuando necesite un rendimiento de consulta rápido y pueda permitirse actualizar los datos periódicamente.                                                          |
 | DirectQuery            | Los datos se consultan directamente desde el origen en el momento de la consulta, sin importarse al modelo. Admite varios orígenes, como SQL, KQL e incluso otros modelos semánticos. | Cuando necesite acceso a datos en tiempo real o cuando el volumen de datos sea demasiado grande para caber en memoria.                                             |
 | Dual                   | Un modo híbrido en el que el motor puede elegir entre devolver los datos importados o delegar en DirectQuery, según el contexto de la consulta.                                                       | Cuando tu modelo contiene una mezcla de tablas DirectQuery e Import (por ejemplo, al usar agregaciones) y tienes tablas relacionadas con ambas. |
-| Direct Lake en OneLake | Utiliza el formato de almacenamiento Delta Parquet para cargar rápidamente los datos en la memoria del modelo semántico cuando sea necesario.                                                         | Cuando tus datos ya están disponibles como tablas o vistas materializadas en un Warehouse o Lakehouse de Fabric.                                                   |
+| Direct Lake en OneLake | Utilizes the Delta Parquet storage format to quickly swap the data into semantic model memory when needed.                                                                                            | Cuando tus datos ya están disponibles como tablas o vistas materializadas en un Warehouse o Lakehouse de Fabric.                                                   |
 | Direct Lake en SQL     | Versión anterior de Direct Lake que utiliza el punto de conexión de análisis SQL de un Warehouse o un Lakehouse de Fabric.                                                                            | No se recomienda para nuevos desarrollos (utilice Direct Lake en OneLake en su lugar).                                                          |
 
 > [!NOTE]
@@ -41,14 +41,26 @@ La siguiente tabla resume los modos de almacenamiento disponibles en modelos sem
 
 [Direct Lake en OneLake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#key-concepts-and-terminology) se presentó en marzo de 2025 como alternativa a Direct Lake en SQL. Con Direct Lake en OneLake, no hay dependencia del punto de conexión SQL ni se recurre al modo DirectQuery. Esto también significa que las [restricciones habituales que se aplican a los modelos DirectQuery](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about#modeling-limitations) no se aplican a los modelos Direct Lake en OneLake.
 
-Sin embargo, igual que con Direct Lake en SQL, aún hay algunas [limitaciones que _sí_ se aplican](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). A continuación se enumeran las limitaciones más importantes. Consulta el enlace para ver la lista completa de limitaciones:
+> [!NOTE]
+> Direct Lake on OneLake is currently in public preview. You must enable the tenant setting **User can create Direct Lake on OneLake semantic models (preview)** in the Fabric admin portal before you can create semantic models with this table storage mode.
 
-- Las columnas calculadas en tablas Direct Lake no pueden hacer referencia a columnas cuyo origen sea OneLake.
-- Las tablas calculadas en modelos Direct Lake no pueden hacer referencia a columnas de tablas Direct Lake cuyo origen sea OneLake.
+Sin embargo, igual que con Direct Lake en SQL, aún hay algunas [limitaciones que _sí_ se aplican](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations). Key limitations include:
 
-Una posible solución para la limitación anterior es crear un **modelo compuesto** combinando tablas Direct Lake con tablas Import. Esto está permitido con Direct Lake en OneLake, pero no con Direct Lake en SQL. En este caso, normalmente se usaría Import mode para las tablas de dimensiones más pequeñas, donde quizá necesite agregar agrupaciones personalizadas, para lo cual las columnas calculadas son ideales, mientras se mantienen las tablas de hechos más grandes en modo Direct Lake.
+- Calculated columns are not supported in either Direct Lake mode.
+- Calculated tables cannot reference columns or tables in Direct Lake storage mode. Calculation groups, what-if parameters and field parameters are supported because they create implicit calculated tables that do not reference Direct Lake columns.
+- Non-materialized SQL views are not supported as data sources for Direct Lake on OneLake tables. Use materialized views or ensure the source Delta table contains the columns you need.
+- Shortcuts in a lakehouse are not supported as data sources during the public preview of Direct Lake on OneLake.
 
-Como alternativa, asegúrese de que el origen contenga las columnas necesarias. Si agregas columnas a través de una vista, ten en cuenta que la vista debe estar materializada en el Warehouse o el Lakehouse de Fabric, ya que Direct Lake en OneLake no admite las vistas no materializadas.
+For a full and up-to-date list of limitations, see the [Microsoft documentation on Direct Lake considerations and limitations](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations).
+
+### Composite models
+
+One workaround for the calculated column limitation is to create a **composite model** by combining Direct Lake tables with Import tables. This is supported with Direct Lake on OneLake, but not with Direct Lake on SQL. In a composite model, you typically keep larger fact tables in Direct Lake mode while using Import mode for smaller dimension tables where you need calculated columns or custom groupings.
+
+Direct Lake on OneLake also supports combining with DirectQuery tables through XMLA-based tools such as Tabular Editor. Import tables can be added through Power BI web modeling, Power BI Desktop (live editing) or through XMLA tools.
+
+> [!NOTE]
+> Direct Lake on SQL does not support composite models. You cannot combine Direct Lake on SQL tables with Import, DirectQuery or Dual storage mode tables in the same semantic model. However, you can use Power BI Desktop to create a composite model _on top of_ a Direct Lake on SQL semantic model and extend it with new tables. See [Build a composite model on a semantic model](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-composite-models#building-a-composite-model-on-a-semantic-model-or-model) for more information.
 
 <a name="collation"></a>
 
@@ -59,7 +71,7 @@ Al usar **Direct Lake en OneLake**, la intercalación del modelo es la misma que
 En un modelo **Direct Lake en SQL**, la intercalación no distingue mayúsculas de minúsculas para las consultas que no recurren a DirectQuery. Si la consulta necesita recurrir a DirectQuery, la intercalación depende de la intercalación del origen. En un Warehouse de Fabric, la intercalación puede distinguir mayúsculas de minúsculas; en ese caso, deberías especificar una [intercalación que distinga mayúsculas de minúsculas en el modelo](https://data-goblins.com/power-bi/case-specific).
 
 > [!NOTE]
-> No puedes cambiar la intercalación de un modelo una vez que los metadatos se han desplegado en Analysis Services / Power BI. Por lo tanto, si piensas usar Direct Lake en SQL con un Warehouse de Fabric con distinción de mayúsculas y minúsculas, debes establecer la intercalación en los metadatos del modelo antes de desplegarlos:
+> No puedes cambiar la intercalación de un modelo una vez que los metadatos se han desplegado en Analysis Services / Power BI. As such, if you plan to use Direct Lake on SQL with a case-sensitive Fabric Warehouse, you must set the collation on the model metadata before it is deployed:
 >
 > 1. Crea un nuevo modelo en Tabular Editor 3 (Archivo > Nuevo > Modelo...)
 > 2. Desmarca "Use Workspace database"
@@ -108,11 +120,11 @@ Esta sección incluye una descripción más técnica de cómo deben configurarse
 
 Para configurar manualmente una tabla en el modo **Direct Lake en OneLake**, debes hacer lo siguiente:
 
-1. **Crear expresión compartida**: las tablas de Direct Lake usan particiones de tipo "Entity", que deben hacer referencia a una expresión compartida en el modelo. Empieza por crear esta expresión compartida, si todavía no la tienes. Asígnale el nombre `DatabaseQuery`:
+1. **Create Shared Expression**: Direct Lake tables use "Entity" partitions, which must reference a Shared Expression in the model. Start by creating this shared expression, if you do not have it already. Asígnale el nombre `DatabaseQuery`:
 
 ![Create Shared Expression](../assets/images/create-shared-expression.png)
 
-2. **Configurar la expresión compartida**: establece la propiedad **Kind** de la expresión que creaste en el paso 1 en "M" y la propiedad **Expression** en la siguiente consulta M, sustituyendo los ID de la URL por los de tu Workspace de Fabric y los de tu Lakehouse/Warehouse:
+2. **Configure Shared Expression**: Set the **Kind** property of the expression you created in step 1 to "M", and set the **Expression** property to the following M query, replacing the IDs in the URL for your Fabric workspace and Lakehouse/Warehouse:
 
 ```m
 let
