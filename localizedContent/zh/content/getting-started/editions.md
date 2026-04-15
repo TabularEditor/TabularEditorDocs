@@ -67,20 +67,20 @@ Tabular Editor 3 各版本的主要区别在于它们支持哪些表格 Data mod
 
 同样地，[Power BI Premium-Per-User Workspace 不支持 Direct Lake Dataset](https://learn.microsoft.com/en-us/power-bi/enterprise/directlake-overview#prerequisites)，所以使用该功能的 Power BI 模型也需要 TE3 企业版。
 
-| 模型类型            | 功能                      | 商务版                                                     | 企业版                                                     |
-| --------------- | ----------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| Azure AS / SSAS | 透视                      | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | 多个分区                    | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | DirectQuery\*           | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Azure AS / SSAS | Direct Lake             | 不适用                                                     | 不适用                                                     |
-| Power BI        | Perspectives\*\*        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Power BI        | Multiple partitions\*\* | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Power BI        | DirectQuery             | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
-| Power BI        | Direct Lake             | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| 模型类型            | 功能            | 商务版                                                     | 企业版                                                     |
+| --------------- | ------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| Azure AS / SSAS | 透视            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | 多个分区          | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | DirectQuery\* | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Azure AS / SSAS | Direct Lake   | 不适用                                                     | 不适用                                                     |
+| Power BI        | 透视\*\*        | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | 多个分区\*\*      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | DirectQuery   | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
+| Power BI        | Direct Lake   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
 \***注意：** SQL Server 标准版 2019 年之前的 Analysis Services 不支持 DirectQuery。 Azure AS 基本层也同样不支持 DirectQuery。 [了解更多](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models)。
 
-\*\***Note:** Perspectives and multiple partitions are available in Business Edition for Power BI models, but the model's `CompatibilityMode` must be set to `PowerBI`. See [Change compatibility mode](xref:change-compatibility-mode) for instructions.
+\*\***注意：** 在商业版中，Power BI 模型支持透视和多分区，但模型的 `CompatibilityMode` 必须设置为 `PowerBI`。 有关操作说明，请参阅 [更改兼容模式](xref:change-compatibility-mode)。
 
 如果您在使用 TE3 商业版许可证时尝试打开一个应用了上述一项或多项建模限制的模型，将会看到以下错误信息：
 
