@@ -20,7 +20,7 @@ applies_to:
 # Databricks 列注释长度超限错误
 
 > [!TIP]
-> Databricks has released a new ODBC driver that replaces the legacy Simba Spark ODBC Driver. The new [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) may not have the `MaxCommentLen` limitation described below. If you experience this issue, consider switching to the new driver, which Tabular Editor 3.26.0 and later supports.
+> Databricks 已发布新的 ODBC 驱动程序，用于替代旧版 Simba Spark ODBC 驱动程序。 新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) 可能没有下文所述的 `MaxCommentLen` 限制。 如果你遇到此问题，建议切换到新驱动程序，Tabular Editor 3.26.0 及更高版本已支持该驱动程序。
 
 使用“导入表向导”从 Databricks 导入表时，如果列注释（描述）超过 512 个字符，你可能会遇到连接错误。 这一限制来自 Simba Spark ODBC Driver，尽管 Databricks Unity Catalog 允许更长的列注释。
 
