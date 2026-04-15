@@ -1,148 +1,148 @@
 ---
 uid: tom-explorer-view
-title: TOM Explorer view
+title: TOM Explorer 视图
 author: Morten Lønskov
 updated: 2026-03-19
 applies_to:
   products:
     - product: Tabular Editor 2
       partial: true
-      note: "Works differently than shown in this article"
+      note: "它的工作方式与本文所示不同"
     - product: Tabular Editor 3
       editions:
-        - edition: Desktop
+        - edition: 桌面版
           full: true
-        - edition: Business
+        - edition: 商业版
           full: true
-        - edition: Enterprise
+        - edition: 企业版
           full: true
 ---
 
-# Using the TOM Explorer in Tabular Editor 3
+# 在 Tabular Editor 3 中使用 TOM Explorer
 
-The TOM Explorer is your main window for interacting with the objects of your data model. Objects such as tables, columns, measures, security groups etc. are all displayed in a hierarchical structure. A Tabular data model is represented by the so called [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) and it is the metadata of your TOM that is displayed in the TOM Explorer.
+TOM Explorer 是你与 Data model 对象交互的主窗口。 表、列、度量值、安全组等对象都会以层次结构显示。 Tabular 数据模型由所谓的 [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) 来表示，而 TOM Explorer 中显示的正是该 TOM 的元数据。
 
-The TOM Explorer consists of two main areas, firstly the data model objects and secondly the menu bar that allows for filtering and changing what is presented in the main window.
+TOM Explorer 由两个主要区域组成：第一部分是 Data model 对象，第二部分是菜单栏，可用于筛选并更改主窗口中显示的内容。
 
-![Tom Explorer](~/content/assets/images/user-interface/TOMExplorer.png)
+![TOM Explorer](~/content/assets/images/user-interface/TOMExplorer.png)
 
-## Data Model Objects
+## Data model 对象
 
-You can fold out objects in the TOM Explorer to see their children and follow the hierarchy of objects downwards. And if you right click on any object you will be given a list of options to interact with that specific object. As you can see below there are several options that you can use with a table. It is with this menu that you for example can easily refresh your tables and see the status of that refresh in the @data-refresh-view
+你可以在 TOM Explorer 中展开对象以查看其子对象，并沿着对象层次结构逐级向下浏览。 此外，如果你右键单击任意对象，就会看到可对该对象执行操作的选项列表。 如下所示，针对表可使用多个选项。 例如，你可以通过此菜单轻松刷新表，并在 @data-refresh-view 中查看刷新状态
 
-![Tom Explorer Interaction](~/content/assets/images/user-interface/TomExplorerRightClick.png)
+![Tom Explorer 交互](~/content/assets/images/user-interface/TomExplorerRightClick.png)
 
-The right click menu has the following items some of which can be expanded for more actions. The menu depends on the object type chosen (Table, partition, measure, column etc.) and the list below is not exhaustive for all types of objects but contains those most used.
+右键菜单包含以下选项，其中一些可展开以显示更多操作。 该菜单取决于所选对象的类型（表、分区、度量值、列等） 下方列表并未涵盖所有对象类型，只列出了最常用的那些类型。
 
-### Options in Right-click menu
+### 右键菜单选项
 
-- **Update table schema...**:
-  Checks for structural changes in the external data source and updates the table's schema accordingly. This is useful when columns have been added, renamed, or removed in the source.
+- **更新表架构...**：
+  检查外部数据源中的结构更改，并相应更新表的架构。 当源中新增、重命名或删除了列时，此功能非常有用。
 
-- **Script DAX**:
-  Generates a DAX script for the selected table and its objects. Opens a new script editor window where you can review or edit DAX definitions collectively.
+- **生成 DAX 脚本**：
+  为所选表及其对象生成 DAX 脚本。 打开一个新的脚本编辑器窗口，你可以在其中集中查看或编辑 DAX 定义。
 
-- **Preview data**:
-  Opens the data preview pane displaying a sample of the data loaded into the selected table. Useful for validation or debugging. Only exists when right clicking tables.
+- **预览数据**：
+  打开数据预览窗格，显示已加载到所选表中的数据样本。 可用于验证或调试。 仅在右键单击表时才会出现。
 
-- **Refresh**:
-  Expands to a selection of possible refresh operation for the selected table. This is available only if the model is connected to live model either stand alone or in workspace mode. This option is only available on tables and partitions.
+- **刷新**：
+  展开后会显示可对所选表执行的刷新操作列表。 仅当模型连接到实时模型时，此项才可用，无论是独立模式还是工作区模式。 此选项仅适用于表和分区。
 
-- **Create**:
-  Expands to a submenu allowing the creation of new measures, columns, hierarchies, display folders or calculation items under the selected object. The available options depends on the object type selected.
+- **创建**：
+  展开为一个子菜单，可在所选对象下创建新的度量值、列、层次结构、显示文件夹或计算项。 可用选项取决于所选的对象类型。
 
-- **Move to group**:
-  Allows you to organize the table into a Table group within the TOM Explorer for easier model navigation. This option is only available for tables.
+- **移至组**：
+  可将该表归入 TOM Explorer 中的表格组，便于更轻松地浏览模型。 此选项仅适用于表。
 
-- **Make invisible**:
-  Marks the object as not visible in client tools. The table remains part of the model but is hidden from report authors. Alternative use the shortcut **Ctrl+I** to hide the object.
+- **设为不可见**：
+  将对象标记为在客户端工具中不可见。 该表仍是模型的一部分，但会对 Report 作者隐藏。 也可以使用快捷键 **Ctrl+I** 隐藏该对象。
 
-- **Shown in perspectives**:
-  Enables or disables the table's inclusion in one or more perspectives. Perspectives limit what end-users can see in tools like Power BI.
+- **在透视中显示**：
+  启用或禁用该表在一个或多个透视中的显示。 透视用于限制最终用户在 Power BI 等工具中可见的内容。
 
-- **Batch rename**: When selecting more than one object you can batch rename those objects using string replacement or regex. The shortcut for batch rename is **F2**.
+- **批量重命名**：选择多个对象时，你可以使用字符串替换或正则表达式批量重命名这些对象。 批量重命名的快捷键为 **F2**。
 
-- **Batch rename children...**:
-  Enables bulk renaming of all child objects under the table or display folder using regex or string replacement rules. Can also be accessed with the shortcut **Shift+F2**.
+- **批量重命名子项...**：
+  可使用正则表达式或字符串替换规则，对表或显示文件夹下的所有子对象进行批量重命名。 也可以使用快捷键 **Shift+F2**。
 
-- **Duplicate**:
-  Creates a copy of the selected table, including all its columns, measures and partitions. Also exists for all other objects in the TOM Explorer.
+- **复制**：
+  创建所选表的副本，包括其所有列、度量值和分区。 在 TOM Explorer 中，其他所有对象也都有此选项。
 
-- **Mark as date table...**:
-  Marks the table as a date table, enabling time intelligence features. Requires that the table contains a valid date column.
+- **标记为日期表格...**：
+  将该表标记为日期表格，以启用时间智能功能。 要求该表包含有效的日期列。
 
-- **Show dependencies**:
-  Visualizes dependencies between the selected table and other model objects. Can also be accessed via shortcut **Shift+F12**.
+- **显示依赖关系**：
+  以可视化方式显示所选表与其他模型对象之间的依赖关系。 也可以使用快捷键 **Shift+F12**。
 
-- **Export script**:
-  Exports the selected objects as a TMSL or TMDL script for use in deployment or source control.
+- **导出脚本**：
+  将所选对象导出为 TMSL 或 TMDL 脚本，以用于部署或源代码管理。
 
-- **Macro Menus**:
-  Macros can be placed into folders and run against the selected object. In the example above the user has a Modelling and Analysis folder for Macro scripts on table objects.
+- **宏菜单**：
+  可将宏放入文件夹中，并对所选对象运行这些宏。 在上面的示例中，用户创建了一个“建模和分析”文件夹，用于存放适用于表对象的宏脚本。
 
-- **Cut / Copy / Paste / Delete**:
-  Standard clipboard operations. Use these to move, duplicate, or remove model objects.
+- **剪切 / 复制 / 粘贴 / 删除**：
+  标准剪贴板操作。 使用这些选项可移动、复制或删除模型对象。
 
-- **Properties**:
-  Opens the Properties pane for the selected object. Shortcut: **Alt+Enter**. Used to inspect and edit metadata, expressions, formatting and visibility settings.
+- **属性**：
+  打开所选对象的“属性”窗格。 快捷键：**Alt+Enter**。 用于检查和编辑元数据、表达式、格式设置和可见性设置。
 
-### Show Info Columns
+### 显示“信息”列
 
-The TOM Explorer allows for toggling on additional info columns about the data model objects. This can be done with the shortcut **Ctrl+7**.
-These extra info also exists in the property window, but allow for a quick view of the Object Type, Format String, Data Type, Expression and Description.
-![Tom Explorer Show Hide Columns](~/content/assets/images/user-interface/TOMExplorerInfoColumns.png)
+TOM Explorer 允许切换显示有关 Data model 对象的其他信息列。 也可以使用快捷键 **Ctrl+7** 执行此操作。
+这些额外信息在属性窗口中也可查看，但在这里可以快速查看对象类型、格式字符串、数据类型、表达式和说明。
+![TOM Explorer 显示/隐藏列](~/content/assets/images/user-interface/TOMExplorerInfoColumns.png)
 
-## TOM Explorer Toolbar
+## TOM Explorer 工具栏
 
-The toolbar allows you to show and hide different types of objects, toggle perspectives and languages and search for specific objects in the data model.
-![Tom Explorer Toolbar](~/content/assets/images/user-interface/TOMExplorerToolbar.png)
+该工具栏可让你显示和隐藏不同类型的对象，切换透视和语言，并在 Data model 中搜索特定对象。
+![TOM Explorer 工具栏](~/content/assets/images/user-interface/TOMExplorerToolbar.png)
 
-1. **Show/Hide Measures**
-   Toggle the visibility of measures within tables.
-   **Shortcut:** **Ctrl+1**
+1. **显示/隐藏度量值**
+   切换表内度量值的可见性。
+   **快捷键：** **Ctrl+1**
 
-2. **Show/Hide Columns**
-   Toggle the visibility of columns within tables.
-   **Shortcut:** **Ctrl+2**
+2. **显示/隐藏列**
+   切换表中列的可见性。
+   **快捷键：** **Ctrl+2**
 
-3. **Show/Hide Hierarchies**
-   Toggle whether hierarchies are shown in the TOM Explorer.
-   **Shortcut:** **Ctrl+3**
+3. **显示/隐藏层次结构**
+   切换是否在 TOM Explorer 中显示层次结构。
+   **快捷键：** **Ctrl+3**
 
-4. **Show/Hide Partitions**
-   Controls whether partitions are visible for tables.
-   **Shortcut:** **Ctrl+4**
+4. **显示/隐藏分区**
+   控制是否显示表的分区。
+   **快捷键：** **Ctrl+4**
 
-5. **Show/Hide Calendars**
-   Controls whether calendars are visible.
-   **Shortcut:** **Ctrl+8**
+5. **显示/隐藏日历**
+   控制是否显示日历。
+   **快捷键：** **Ctrl+8**
 
-6. **Show/Hide Display Folders**
-   Enables or disables the display of folder organization within tables.
-   **Shortcut:** **Ctrl+5**
+6. **显示/隐藏显示文件夹**
+   启用或禁用在表中按文件夹进行组织显示。
+   **快捷键：** **Ctrl+5**
 
-7. **Group User-Defined Functions by Namespace**
-   When enabled, DAX User-Defined Functions are grouped hierarchically by [namespace](xref:udfs#namespaces), rather than being shown as a flat list.
+7. **按命名空间对用户自定义函数分组**
+   启用后，DAX 用户自定义函数将按 [命名空间](xref:udfs#namespaces) 以层级方式分组显示，而不是以扁平列表显示。
 
-8. **Show/Hide Table Groups**
-   Toggle the visibility of table groups in the TOM Explorer tree. This provides quick access to the same setting found in **Tools > Preferences** without leaving the explorer.
+8. **显示/隐藏表格组**
+   切换 TOM Explorer 树中表格组的可见性。 这样无需离开资源管理器，即可快速访问 **Tools > Preferences** 中的相同设置。
 
-9. **Show/Hide Hidden Objects**
-   Toggles whether hidden objects are shown.
-   **Shortcut:** **Ctrl+6**
+9. **显示/隐藏隐藏对象**
+   切换是否显示隐藏对象。
+   **快捷键：** **Ctrl+6**
 
-10. **Show/Hide Info Columns**
-    Shows or hides metadata columns, such as data types or object status.
-    **Shortcut:** **Ctrl+7**
+10. **显示/隐藏信息列**
+    显示或隐藏元数据列，例如数据类型或对象状态。
+    **快捷键：** **Ctrl+7**
 
-11. **Perspective Selector**
-    Drop-down to choose a specific perspective. Only objects in the selected perspective will be shown in the TOM Explorer.
+11. **透视选择器**
+    用于选择特定透视的下拉列表。 TOM Explorer 中只会显示所选透视中的对象。
 
-12. **Language Selector**
-    Allows switching between different languages for model metadata localization.
+12. **语言选择器**
+    用于在不同语言之间切换，以本地化模型元数据。
 
-13. **Collapse All**
-    Collapses all nodes in the TOM Explorer tree view.
+13. **全部折叠**
+    折叠 TOM Explorer 树视图中的所有节点。
 
-14. **Search Bar**
-    Provides real-time filtering and navigation within the TOM Explorer. Type to search across all visible model objects.
+14. **搜索栏**
+    在 TOM Explorer 中提供实时筛选和导航功能。 输入即可搜索所有可见的模型对象。
