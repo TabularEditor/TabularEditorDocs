@@ -9,7 +9,7 @@ Esta sección contiene guías de solución de problemas y soluciones para incide
 - @locale-not-supported - Configuración regional no compatible
 - @calendar-blank-value - Error de fecha en blanco en la función Calendar
 - @direct-lake-entity-updates-reverting - Los cambios en los nombres de las entidades se revierten en los modelos Direct Lake
-- @azure-openai-connection-errors - AI Assistant connection failures when using Azure OpenAI
+- @azure-openai-connection-errors - Fallos de conexión del Asistente de IA al usar Azure OpenAI
 
 ---
 
