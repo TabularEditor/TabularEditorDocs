@@ -24,6 +24,17 @@ El **nivel de compatibilidad** de un modelo controla qué características del T
 > [!WARNING]
 > Las actualizaciones de compatibilidad son unidireccionales. Puedes actualizar, pero no puedes volver atrás de forma fiable. Trátalo como una actualización de esquema y valida primero los destinos de implementación.
 
+## Compatibility level vs. compatibility mode
+
+Compatibility Level and Compatibility Mode are separate properties that serve different purposes:
+
+| Propiedad                     | Controls                                                                                                               | Values                                                       |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `Database.CompatibilityLevel` | Which TOM features are available (e.g., custom calendars, DAX UDFs) | `1200`, `1500`, `1600`, `1701`, `1702`, etc. |
+| `Database.CompatibilityMode`  | Which platform the model targets, which TOM objects and properties are available, and which edition restrictions apply | `Unknown`, `AnalysisServices`, `PowerBI`, `Excel`            |
+
+If you need to change the platform target rather than unlock new TOM features, see [Change compatibility mode](xref:change-compatibility-mode).
+
 ## Cuándo actualizar
 
 Actualiza cuando:
