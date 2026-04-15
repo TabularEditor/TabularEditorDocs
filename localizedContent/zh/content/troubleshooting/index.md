@@ -9,6 +9,7 @@
 - @locale-not-supported - 不支持的区域设置
 - @calendar-blank-value - Calendar 函数日期为空错误
 - @direct-lake-entity-updates-reverting - Direct Lake 模型中实体名称更改会回退
+- @azure-openai-connection-errors - AI Assistant connection failures when using Azure OpenAI
 
 ---
 
