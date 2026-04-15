@@ -1,4 +1,4 @@
-﻿---
+---
 uid: tmdl
 title: Tabular Model Definition Language (TMDL)
 author: Daniel Otykier

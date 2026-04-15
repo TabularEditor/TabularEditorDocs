@@ -24,6 +24,17 @@ A model's **Compatibility Level** controls which Tabular Object Model (TOM) feat
 > [!WARNING]
 > Compatibility upgrades are one-way. You can upgrade but can't reliably downgrade. Treat this like a schema upgrade and validate your deployment targets first.
 
+## Compatibility level vs. compatibility mode
+
+Compatibility Level and Compatibility Mode are separate properties that serve different purposes:
+
+| Property | Controls | Values |
+|---|---|---|
+| `Database.CompatibilityLevel` | Which TOM features are available (e.g., custom calendars, DAX UDFs) | `1200`, `1500`, `1600`, `1701`, `1702`, etc. |
+| `Database.CompatibilityMode` | Which platform the model targets, which TOM objects and properties are available, and which edition restrictions apply | `Unknown`, `AnalysisServices`, `PowerBI`, `Excel` |
+
+If you need to change the platform target rather than unlock new TOM features, see [Change compatibility mode](xref:change-compatibility-mode).
+
 ## When to upgrade
 
 Upgrade when:

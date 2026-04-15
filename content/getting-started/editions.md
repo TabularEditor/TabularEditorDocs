@@ -35,7 +35,7 @@ Please refer to the matrix below for the full overview of supported scenarios:
 
 |Scenario / Edition|Desktop|Business|Enterprise|
 |---|---|---|---|
-|External Tool for Power BI Desktop|<span class="emoji"><span class="emoji">&#10004;</span></span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|External Tool for Power BI Desktop|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Load/save model metadata to disk**|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
 |Workspace Mode***|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>*|<span class="emoji">&#10004;</span>|
 |Power BI Premium Per User|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
@@ -72,12 +72,14 @@ Similarly, [Power BI Premium-Per-User workspaces do not support Direct Lake data
 |Azure AS / SSAS|Multiple partitions|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 |Azure AS / SSAS|DirectQuery*|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Azure AS / SSAS|Direct Lake|N/A|N/A|
-|Power BI|Perspectives|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Power BI|Multiple partitions|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Power BI|Perspectives**|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
+|Power BI|Multiple partitions**|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Power BI|DirectQuery|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
 |Power BI|Direct Lake|<span class="emoji">&#10060;</span>|<span class="emoji">&#10004;</span>|
 
 \***Note:** Analysis Services on SQL Server Standard Edition pre-2019 does not support DirectQuery. Nor does Azure AS Basic Tier. [Learn more](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models).
+
+\*\***Note:** Perspectives and multiple partitions are available in Business Edition for Power BI models, but the model's `CompatibilityMode` must be set to `PowerBI`. See [Change compatibility mode](xref:change-compatibility-mode) for instructions.
 
 If you attempt to open a model that uses one or more of the modeling restrictions listed above, while on a TE3 Business Edition license, you will see the error message below:
 

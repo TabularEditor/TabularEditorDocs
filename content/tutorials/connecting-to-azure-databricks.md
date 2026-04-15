@@ -2,7 +2,7 @@
 uid: connecting-to-azure-databricks
 title: Connecting to Azure Databricks
 author: David Bojsen
-updated: 2025-08-05
+updated: 2026-04-08
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,6 +28,10 @@ Before you begin, ensure you have the following:
 - A valid Azure Databricks workspace
 - Appropriate permissions to access the Databricks data
 - Tabular Editor 3 (Desktop, Business, or Enterprise edition)
+- The [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) installed on your machine
+
+> [!IMPORTANT]
+> Databricks has released a new ODBC driver that replaces the legacy Simba Spark ODBC Driver. We recommend installing the new [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download). Tabular Editor 3.26.0 and later supports both drivers, but the new driver is the recommended option going forward. The legacy Simba driver is available from the [Databricks ODBC driver archive](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc).
 
 ## Authentication Methods
 
