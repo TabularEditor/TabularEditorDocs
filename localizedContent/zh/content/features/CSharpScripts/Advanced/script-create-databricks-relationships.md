@@ -2,7 +2,7 @@
 uid: script-create-databricks-relationships
 title: 创建 Databricks 关系
 author: Johnny Winter
-updated: 2025-09-04
+updated: 2026-04-08
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -18,9 +18,10 @@ applies_to:
 此脚本是 Tabular Editor x Databricks 系列的一部分。 在 Unity Catalog 中，可以在表之间定义主键和外键关系。 此脚本可复用这些信息，在 Tabular Editor 中自动检测并创建关系。 在导入这些关系时，脚本还会隐藏主键和外键，并将 IsAvailableInMDX 设为 false（DateTime 类型的主键除外）。 主键也会在语义模型中标记为 IsKey = TRUE。 <br></br>
 
 > [!NOTE]
-> 此脚本需要安装 Simba Spark ODBC Driver (可从 https://www.databricks.com/spark/odbc-drivers-download 下载)
-> 每次运行脚本都会提示用户输入 Databricks 个人访问令牌。 这用于对 Databricks 进行身份验证。
-> 该脚本使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此你可能需要与 Databricks 管理员确认，确保你有权限查询这些表。 <br></br>
+> This script requires a Databricks ODBC driver. We recommend the new [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download), which replaces the legacy Simba Spark ODBC Driver. The script auto-detects which driver is installed and uses it accordingly.
+
+Each run of the script will prompt the user for a Databricks Personal Access Token. 这用于对 Databricks 进行身份验证。
+该脚本使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此你可能需要与 Databricks 管理员确认，确保你有权限查询这些表。 <br></br>
 
 ## 脚本
 
@@ -44,7 +45,8 @@ applies_to:
             For each table processed, a message box will display the number of relationships created.
  *          Click OK to continue to the next table. 
  * Notes:
- *  -   This script requires the Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
+ *  -   This script requires the Databricks ODBC Driver (recommended) or legacy Simba Spark ODBC Driver to be installed (download from https://www.databricks.com/spark/odbc-drivers-download)
+ *  -   The script auto-detects which driver is installed
  *  -   Each run of the script will prompt the user for a Databricks Personal Access Token
  */
 #r "Microsoft.VisualBasic"
@@ -383,6 +385,37 @@ do
 // toggle the 'Running Macro' spinbox
 ScriptHelper.WaitFormVisible = true;
 
+// auto-detect Databricks ODBC driver
+string driverPath;
+string newDriverPath = @"C:\Program Files\Databricks ODBC Driver";
+string legacyDriverPath = @"C:\Program Files\Simba Spark ODBC Driver";
+
+if (System.IO.Directory.Exists(newDriverPath))
+{
+    driverPath = newDriverPath;
+}
+else if (System.IO.Directory.Exists(legacyDriverPath))
+{
+    driverPath = legacyDriverPath;
+}
+else
+{
+    ScriptHelper.WaitFormVisible = false;
+    Interaction.MsgBox(
+        @"No Databricks ODBC driver found.
+
+Please install the Databricks ODBC Driver from:
+https://www.databricks.com/spark/odbc-drivers-download
+
+Expected installation paths:
+  " + newDriverPath + @"
+  " + legacyDriverPath,
+        MsgBoxStyle.Critical,
+        "ODBC Driver Not Found"
+    );
+    return;
+}
+
 //for each selected table, get the Databricks connection info from the partition info
 foreach (var t in Selected.Tables)
 {
@@ -436,11 +469,11 @@ foreach (var t in Selected.Tables)
 
     //set DBX connection string
     var odbcConnStr =
-        @"DSN=Simba Spark;driver=C:\Program Files\Simba Spark ODBC Driver;host="
+        @"Driver=" + driverPath + ";Host="
         + serverHostname
-        + ";port=443;httppath="
+        + ";Port=443;HTTPPath="
         + httpPath
-        + ";thrifttransport=2;ssl=1;authmech=3;uid=token;pwd="
+        + ";SSL=1;ThriftTransport=2;AuthMech=3;UID=token;PWD="
         + dbxPAT;
 
     //test connection
@@ -454,14 +487,12 @@ foreach (var t in Selected.Tables)
         // toggle the 'Running Macro' spinbox
         ScriptHelper.WaitFormVisible = false;
         Interaction.MsgBox(
-            @"Connection failed
+            @"Connection failed (using driver: " + driverPath + @")
 
-Please check the following prequisites:
+Please check the following prerequisites:
     
-- you must have the Simba Spark ODBC Driver installed 
+- you must have the Databricks ODBC Driver installed 
 (download from https://www.databricks.com/spark/odbc-drivers-download)
-
-- the ODBC driver must be installed in the path C:\Program Files\Simba Spark ODBC Driver
 
 - check that the Databricks server name "
                 + serverHostname
@@ -590,7 +621,7 @@ Please check the following prequisites:
 
 ### 说明
 
-脚本使用 WinForms 来提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。 对于每个选中的表，脚本会从该表分区中的 M 查询获取 Databricks 连接字符串信息，以及 schema 和表名。 随后脚本通过 Spark ODBC 驱动向 Databricks 发送 SQL 查询，查询 information_schema 表，以找出在 Unity Catalog 中为该表定义的任何外键关系。 对于 SQL 查询返回的每一行，脚本都会在模型中查找匹配的表名和列名；如果尚未存在关系，则会创建一个新的关系。 对于角色扮演维度，同一张表可能通过多个外键关联到同一目标表，脚本检测到的第一个关系将被设为活动关系，其他随后创建的关系均设为非活动。 脚本还会隐藏主键和外键，并将 IsAvailableInMDX 设为 false（DateTime 类型的主键除外）。 主键也会在语义模型中标记为 IsKey = TRUE。 脚本对所有选定表都运行完成后，会弹出一个对话框，显示新创建了多少个关系。
+脚本使用 WinForms 来提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。 It auto-detects whether the new Databricks ODBC Driver or the legacy Simba Spark ODBC Driver is installed. 对于每个选中的表，脚本会从该表分区中的 M 查询获取 Databricks 连接字符串信息，以及 schema 和表名。 Using the detected ODBC driver it then sends a SQL query to Databricks that queries the information_schema tables to find any foreign key relationships for the table that are defined in Unity Catalog. 对于 SQL 查询返回的每一行，脚本都会在模型中查找匹配的表名和列名；如果尚未存在关系，则会创建一个新的关系。 对于角色扮演维度，同一张表可能通过多个外键关联到同一目标表，脚本检测到的第一个关系将被设为活动关系，其他随后创建的关系均设为非活动。 脚本还会隐藏主键和外键，并将 IsAvailableInMDX 设为 false（DateTime 类型的主键除外）。 主键也会在语义模型中标记为 IsKey = TRUE。 脚本对所有选定表都运行完成后，会弹出一个对话框，显示新创建了多少个关系。
 
 ## 示例输出
 
