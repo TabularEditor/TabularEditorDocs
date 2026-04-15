@@ -26,13 +26,13 @@ applies_to:
 
 下表汇总了 Power BI 语义模型中可用的存储模式：
 
-| 存储模式                     | 说明                                                                                                                         | 推荐使用场景                                                |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| 导入                       | 数据将导入语义模型，并存储在模型的内存缓存（VertiPaq）中。                                                                                          | 适用于需要快速查询性能，且可以定期刷新数据的场景。                             |
-| DirectQuery              | 在查询时直接从数据源获取数据，而不会将数据导入模型。 支持多种数据源，例如 SQL、KQL，甚至是其他语义模型。                                                                   | 适用于需要实时访问数据，或数据量过大而无法装入内存的场景。                         |
-| 双重                       | 一种混合模式：引擎会根据查询上下文，在返回已导入的数据与将查询委派给 DirectQuery 之间进行选择。                                                                     | 当你的模型同时包含 DirectQuery 表和导入表（例如使用聚合时），并且存在同时与两者相关联的表时。 |
-| 在 OneLake 上的 Direct Lake | Utilizes the Delta Parquet storage format to quickly swap the data into semantic model memory when needed. | 当你的数据已以表或物化视图的形式存在于 Fabric Warehouse 或 Lakehouse 中时。  |
-| 在 SQL 上的 Direct Lake     | Direct Lake 的旧版本，使用 Fabric Warehouse 或 Lakehouse 的 SQL analytics endpoint。                                                 | 不建议用于新开发（改用在 OneLake 上的 Direct Lake）。                 |
+| 存储模式                     | 说明                                                                         | 推荐使用场景                                                |
+| ------------------------ | -------------------------------------------------------------------------- | ----------------------------------------------------- |
+| 导入                       | 数据将导入语义模型，并存储在模型的内存缓存（VertiPaq）中。                                          | 适用于需要快速查询性能，且可以定期刷新数据的场景。                             |
+| DirectQuery              | 在查询时直接从数据源获取数据，而不会将数据导入模型。 支持多种数据源，例如 SQL、KQL，甚至是其他语义模型。                   | 适用于需要实时访问数据，或数据量过大而无法装入内存的场景。                         |
+| 双重                       | 一种混合模式：引擎会根据查询上下文，在返回已导入的数据与将查询委派给 DirectQuery 之间进行选择。                     | 当你的模型同时包含 DirectQuery 表和导入表（例如使用聚合时），并且存在同时与两者相关联的表时。 |
+| 在 OneLake 上的 Direct Lake | 利用 Delta Parquet 存储格式，在需要时可快速将数据换入语义模型内存。                                  | 当你的数据已以表或物化视图的形式存在于 Fabric Warehouse 或 Lakehouse 中时。  |
+| 在 SQL 上的 Direct Lake     | Direct Lake 的旧版本，使用 Fabric Warehouse 或 Lakehouse 的 SQL analytics endpoint。 | 不建议用于新开发（改用在 OneLake 上的 Direct Lake）。                 |
 
 > [!NOTE]
 > 还可以创建同时包含 **Import** 和 **DirectQuery** 模式分区的表（也称为“混合表格”）。 这通常用于大型事实表：既需要增量刷新，又希望部分数据直接从源进行查询。 更多信息，请参阅[这篇文章](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-xmla)。
@@ -42,25 +42,25 @@ applies_to:
 [在 OneLake 上的 Direct Lake](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#key-concepts-and-terminology) 于 2025 年三月推出，作为在 SQL 上的 Direct Lake 的替代方案。 使用在 OneLake 上的 Direct Lake 时，不依赖 SQL 端点，也不会回退到 DirectQuery 模式。 这也意味着，适用于 DirectQuery 模型的[常见限制](https://learn.microsoft.com/en-us/power-bi/connect-data/desktop-directquery-about#modeling-limitations)不适用于在 OneLake 上的 Direct Lake 模型。
 
 > [!NOTE]
-> Direct Lake on OneLake is currently in public preview. You must enable the tenant setting **User can create Direct Lake on OneLake semantic models (preview)** in the Fabric admin portal before you can create semantic models with this table storage mode.
+> Direct Lake on OneLake 目前处于公共预览版。 在使用此表存储模式创建语义模型之前，必须先在 Fabric 管理门户中启用租户设置 **User can create Direct Lake on OneLake semantic models (preview)**。
 
-不过，与在 SQL 上的 Direct Lake 一样，仍然有一些[确实适用的限制](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。 Key limitations include:
+不过，与在 SQL 上的 Direct Lake 一样，仍然有一些[确实适用的限制](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。 主要限制包括：
 
-- Calculated columns are not supported in either Direct Lake mode.
-- Calculated tables cannot reference columns or tables in Direct Lake storage mode. Calculation groups, what-if parameters and field parameters are supported because they create implicit calculated tables that do not reference Direct Lake columns.
-- Non-materialized SQL views are not supported as data sources for Direct Lake on OneLake tables. Use materialized views or ensure the source Delta table contains the columns you need.
-- Shortcuts in a lakehouse are not supported as data sources during the public preview of Direct Lake on OneLake.
+- 两种 Direct Lake 模式都不支持计算列。
+- 计算表格不能引用 Direct Lake 存储模式中的列或表。 支持计算组、What-if 参数和字段参数，因为它们会创建不引用 Direct Lake 列的隐式计算表格。
+- 不支持将非物化 SQL 视图用作 Direct Lake on OneLake 表的数据源。 请使用物化视图，或确保源 Delta 表包含所需的列。
+- 在 Direct Lake on OneLake 公开预览期间，不支持将 Lakehouse 中的快捷方式用作数据源。
 
-For a full and up-to-date list of limitations, see the [Microsoft documentation on Direct Lake considerations and limitations](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations).
+有关完整且最新的限制列表，请参阅 [Microsoft 的 Direct Lake 注意事项和限制文档](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview#considerations-and-limitations)。
 
-### Composite models
+### 复合模型
 
-One workaround for the calculated column limitation is to create a **composite model** by combining Direct Lake tables with Import tables. This is supported with Direct Lake on OneLake, but not with Direct Lake on SQL. In a composite model, you typically keep larger fact tables in Direct Lake mode while using Import mode for smaller dimension tables where you need calculated columns or custom groupings.
+针对计算列限制，一种变通方案是将 Direct Lake 表与导入表组合起来，创建一个 **复合模型**。 Direct Lake on OneLake 支持这种做法，但 Direct Lake on SQL 不支持。 在复合模型中，通常会将较大的事实数据表保留为 Direct Lake 模式，而对需要计算列或自定义分组的较小维度表使用导入模式。
 
-Direct Lake on OneLake also supports combining with DirectQuery tables through XMLA-based tools such as Tabular Editor. Import tables can be added through Power BI web modeling, Power BI Desktop (live editing) or through XMLA tools.
+OneLake 上的 Direct Lake 还支持通过 Tabular Editor 等基于 XMLA 的工具与 DirectQuery 表组合使用。 可通过 Power BI 网页建模、Power BI Desktop（实时编辑）或 XMLA 工具添加导入表。
 
 > [!NOTE]
-> Direct Lake on SQL does not support composite models. You cannot combine Direct Lake on SQL tables with Import, DirectQuery or Dual storage mode tables in the same semantic model. However, you can use Power BI Desktop to create a composite model _on top of_ a Direct Lake on SQL semantic model and extend it with new tables. See [Build a composite model on a semantic model](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-composite-models#building-a-composite-model-on-a-semantic-model-or-model) for more information.
+> Direct Lake on SQL 不支持复合模型。 在同一语义模型中，不能将 Direct Lake on SQL 表与 Import、DirectQuery 或 Dual 存储模式的表组合使用。 不过，你可以使用 Power BI Desktop 在 Direct Lake on SQL 语义模型 _之上_ 创建复合模型，并用新表对其进行扩展。 更多信息见 [在语义模型之上构建复合模型](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-composite-models#building-a-composite-model-on-a-semantic-model-or-model)。
 
 <a name="collation"></a>
 
@@ -71,7 +71,7 @@ Direct Lake on OneLake also supports combining with DirectQuery tables through X
 对于 **SQL 上的 Direct Lake** 模型，如果查询不会回退到 DirectQuery，则排序规则不区分大小写。 如果查询发生回退，排序规则取决于数据源的排序规则。 对于 Fabric Warehouse，排序规则可能区分大小写；在这种情况下，你应该在模型上指定一个[区分大小写的排序规则](https://data-goblins.com/power-bi/case-specific)。
 
 > [!NOTE]
-> 一旦元数据已部署到 Analysis Services / Power BI，你就无法更改模型的排序规则。 As such, if you plan to use Direct Lake on SQL with a case-sensitive Fabric Warehouse, you must set the collation on the model metadata before it is deployed:
+> 一旦元数据已部署到 Analysis Services / Power BI，你就无法更改模型的排序规则。 因此，如果你打算将 Direct Lake on SQL 与区分大小写的 Fabric Warehouse 搭配使用，必须在部署前先在模型元数据中设置排序规则：
 >
 > 1. 在 Tabular Editor 3 中创建一个新模型（File > New > Model...）
 > 2. 取消选中“使用 Workspace 数据库”
@@ -120,11 +120,11 @@ Direct Lake on OneLake also supports combining with DirectQuery tables through X
 
 要手动将表设置为 **OneLake 上的 Direct Lake** 模式，需要执行以下操作：
 
-1. **Create Shared Expression**: Direct Lake tables use "Entity" partitions, which must reference a Shared Expression in the model. Start by creating this shared expression, if you do not have it already. 将其命名为 `DatabaseQuery`：
+1. **创建共享表达式**：Direct Lake 表使用“Entity”分区，该分区必须引用模型中的共享表达式。 如果尚未创建此共享表达式，请先创建它。 将其命名为 `DatabaseQuery`：
 
 ![创建共享表达式](../assets/images/create-shared-expression.png)
 
-2. **Configure Shared Expression**: Set the **Kind** property of the expression you created in step 1 to "M", and set the **Expression** property to the following M query, replacing the IDs in the URL for your Fabric workspace and Lakehouse/Warehouse:
+2. **配置共享表达式**：将你在步骤 1 中创建的表达式的 **Kind** 属性设为“ M ”，并将 **Expression** 属性设置为以下 M 查询，同时将 URL 中的 ID 替换为你的 Fabric Workspace 和 Lakehouse/Warehouse 对应的 ID：
 
 ```m
 let
