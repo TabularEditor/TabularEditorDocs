@@ -72,31 +72,31 @@ Selecciona **Anthropic** como proveedor e introduce tu clave de API. El modelo p
 
 ### Azure OpenAI
 
-Select **Azure OpenAI** as the provider and configure three fields:
+Selecciona **Azure OpenAI** como proveedor y configura tres campos:
 
-- **API key** — the access key for your Azure OpenAI resource
-- **Service endpoint** — the endpoint URL for your resource, for example `https://your-resource.openai.azure.com`. Use the resource URL, not the `privatelink` alias; the SSL certificate is issued for `*.openai.azure.com` and connecting directly to `*.privatelink.openai.azure.com` fails certificate validation
-- **Model name** — the **deployment name**, not the underlying model name and not the resource name
+- **Clave de API** — la clave de acceso de tu recurso de Azure OpenAI
+- **Punto de conexión del servicio** — la URL del punto de conexión de tu recurso, por ejemplo `https://your-resource.openai.azure.com`. Usa la URL del recurso, no el alias `privatelink`; el certificado SSL se emite para `*.openai.azure.com` y, si te conectas directamente a `*.privatelink.openai.azure.com`, fallará la validación del certificado
+- **Nombre del modelo** — el **nombre de la implementación**, no el nombre del modelo subyacente ni el nombre del recurso
 
-Azure OpenAI requires the deployment name in every API call. A deployment name is chosen when the deployment is created, so it can be any string. Deployments are often named after the model they serve (for example `gpt-4o`), but that is a convention, not a requirement. If you enter the resource name or a raw model name that does not exist as a deployment, the request fails.
+Azure OpenAI requiere el nombre de la implementación en cada llamada a la API. El nombre de la implementación se elige al crearla, así que puede ser cualquier cadena. Las implementaciones suelen llevar el nombre del modelo al que sirven (por ejemplo, `gpt-4o`), pero es una convención, no un requisito. Si introduces el nombre del recurso o un nombre de modelo que no exista como implementación, la solicitud fallará.
 
-#### Finding your deployment name
+#### Cómo encontrar el nombre de tu implementación
 
-In the [Azure AI Foundry portal](https://ai.azure.com):
+En el [portal de Azure AI Foundry](https://ai.azure.com):
 
-1. Sign in and select your Azure OpenAI resource
-2. Open **Deployments** (or **Models + endpoints** if the resource has been upgraded to Foundry)
-3. Copy the value from the **Name** column
+1. Inicia sesión y selecciona tu recurso de Azure OpenAI
+2. Abre **Implementaciones** (o **Modelos + puntos de conexión** si el recurso se ha actualizado a Foundry)
+3. Copia el valor de la columna **Nombre**
 
-Deployments created before your organization adopted Azure AI Foundry may not appear in the portal. List them from the Azure CLI:
+Es posible que las implementaciones creadas antes de que tu organización adoptara Azure AI Foundry no aparezcan en el portal. Enuméralas con la CLI de Azure:
 
 ```bash
 az cognitiveservices account deployment list --name "<resource-name>" --resource-group "<resource-group>" --output table
 ```
 
-See [Create and deploy an Azure OpenAI resource](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model) for more details.
+Consulta [Crear y desplegar un recurso de Azure OpenAI](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model) para más detalles.
 
-For 403 errors, SSL failures or "DeploymentNotFound" responses, see @azure-openai-connection-errors.
+Para errores 403, fallos de SSL o respuestas "DeploymentNotFound", consulta @azure-openai-connection-errors.
 
 ### Personalizado (compatible con OpenAI)
 
@@ -320,7 +320,7 @@ Selecciona objetos específicos en el **Explorador TOM** antes de hacer tu pregu
 
 Otras formas de reducir el uso de tokens:
 
-- Ask focused questions about specific tables, measures or columns rather than broad questions about the entire model. A vague prompt such as _"Set display folders on all measures"_ forces the assistant to retrieve metadata for the entire model. A specific prompt such as _"Set display folders on the measures I have selected"_ limits the context to the current selection and uses far fewer tokens
+- Haz preguntas concretas sobre tablas, medidas o columnas específicas en lugar de preguntas generales sobre todo el modelo. Una instrucción imprecisa como _"Establece carpetas de visualización en todas las medidas"_ obliga al asistente a recuperar metadatos de todo el modelo. Una instrucción específica como _"Establece carpetas de visualización en las medidas que he seleccionado"_ limita el contexto a la selección actual y usa muchos menos tokens
 - Inicia nuevas conversaciones al cambiar de tema para evitar acumular historiales de conversación extensos
 - Usa un modelo más pequeño o menos costoso para preguntas exploratorias
 
