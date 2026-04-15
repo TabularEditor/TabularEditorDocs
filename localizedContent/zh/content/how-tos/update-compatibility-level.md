@@ -24,16 +24,16 @@ applies_to:
 > [!WARNING]
 > 兼容级别升级是单向的。 你可以升级，但无法可靠地降级。 将其视为一次架构升级，并先验证你的部署目标。
 
-## Compatibility level vs. compatibility mode
+## 兼容级别与兼容模式
 
-Compatibility Level and Compatibility Mode are separate properties that serve different purposes:
+兼容级别和兼容模式是两个独立的属性，用途不同：
 
-| 属性                            | Controls                                                                                                               | Values                                                       |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `Database.CompatibilityLevel` | Which TOM features are available (e.g., custom calendars, DAX UDFs) | `1200`, `1500`, `1600`, `1701`, `1702`, etc. |
-| `Database.CompatibilityMode`  | Which platform the model targets, which TOM objects and properties are available, and which edition restrictions apply | `Unknown`, `AnalysisServices`, `PowerBI`, `Excel`            |
+| 属性                            | 控制内容                            | 值                                              |
+| ----------------------------- | ------------------------------- | ---------------------------------------------- |
+| `Database.CompatibilityLevel` | 可用的 TOM 功能（例如自定义日历、DAX UDF 等）   | `1200`、`1500`、`1600`、`1701`、`1702` 等。          |
+| `Database.CompatibilityMode`  | 模型面向的平台、可用的 TOM 对象和属性，以及适用的版本限制 | `Unknown`、`AnalysisServices`、`PowerBI`、`Excel` |
 
-If you need to change the platform target rather than unlock new TOM features, see [Change compatibility mode](xref:change-compatibility-mode).
+如果你需要更改目标平台，而不是解锁新的 TOM 功能，请参阅[更改兼容模式](xref:change-compatibility-mode)。
 
 ## 何时升级
 
