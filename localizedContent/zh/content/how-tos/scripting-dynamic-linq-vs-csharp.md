@@ -1,6 +1,6 @@
 ---
 uid: how-to-dynamic-linq-vs-csharp-linq
-title: How Dynamic LINQ Differs from C# LINQ
+title: Dynamic LINQ 与 C# LINQ 的区别
 author: Morten Lønskov
 updated: 2026-04-10
 applies_to:
@@ -11,43 +11,43 @@ applies_to:
       full: true
 ---
 
-# How Dynamic LINQ Differs from C# LINQ
+# Dynamic LINQ 与 C# LINQ 的区别
 
-C# scripts use standard C# LINQ with lambda expressions. Best Practice Analyzer (BPA) rules and Explorer tree filters use [Dynamic LINQ](https://dynamic-linq.net/expression-language), a string-based expression language with different syntax. This article is a translation guide between the two.
+C# Script 使用标准的 C# LINQ，并使用 Lambda 表达式。 Best Practice Analyzer (BPA) 规则和 Explorer 树筛选器使用 [Dynamic LINQ](https://dynamic-linq.net/expression-language)，这是一种基于字符串的表达式语言，其语法与 C# LINQ 不同。 本文提供两者之间的对照翻译指南。
 
-## Where each is used
+## 各自的使用场景
 
-| Context                                                        | Syntax                                                              |
-| -------------------------------------------------------------- | ------------------------------------------------------------------- |
-| C# scripts and macros                                          | C# LINQ                                                             |
-| BPA rule expressions                                           | Dynamic LINQ                                                        |
-| BPA fix expressions                                            | Dynamic LINQ (with `it.` prefix for assignments) |
-| **TOM Explorer** tree filter (`:` prefix)\* | Dynamic LINQ                                                        |
+| 上下文                             | 语法                           |
+| ------------------------------- | ---------------------------- |
+| C# Script 和宏                    | C# LINQ                      |
+| BPA 规则表达式                       | Dynamic LINQ                 |
+| BPA 修复表达式                       | Dynamic LINQ（赋值时使用 `it.` 前缀） |
+| **TOM Explorer** 树筛选器（`:` 前缀）\* | Dynamic LINQ                 |
 
-\* Tabular Editor 2 only.
+\* 仅适用于 Tabular Editor 2。
 
-## Syntax comparison
+## 语法对比
 
-In Dynamic LINQ, the object is implicit -- there is no lambda parameter like `m.` or `c.`. In BPA, the surrounding context is the **Applies to** scope setting, which determines which object type the expression evaluates against.
+在 Dynamic LINQ 中，对象是隐式的——没有像 `m.` 或 `c.` 这样的 lambda 参数。 在 BPA 中，上下文由 **适用于** 范围设置决定，它会确定表达式是针对哪种对象类型求值的。
 
-| Concept            | C# LINQ (scripts)       | Dynamic LINQ (BPA / filter) |
-| ------------------ | ------------------------------------------ | ---------------------------------------------- |
-| Boolean AND        | `&&`                                       | `and`                                          |
-| Boolean OR         | `\\|\\|`                                 | `or`                                           |
-| Boolean NOT        | `!`                                        | `not`                                          |
-| Equals             | `==`                                       | `=`                                            |
-| Not equals         | `!=`                                       | `!=` or `<>`                                   |
-| Greater/less       | `>`, `<`, `>=`, `<=`                       | `>`, `<`, `>=`, `<=`                           |
-| String contains    | `m.Name.Contains("Sales")`                 | `Name.Contains("Sales")`                       |
-| String starts with | `m.Name.StartsWith("Sum")`                 | `Name.StartsWith("Sum")`                       |
-| String ends with   | `m.Name.EndsWith("YTD")`                   | `Name.EndsWith("YTD")`                         |
-| Null/empty check   | `string.IsNullOrEmpty(m.Description)`      | `String.IsNullOrEmpty(Description)`            |
-| Whitespace check   | `string.IsNullOrWhiteSpace(m.Description)` | `String.IsNullOrWhitespace(Description)`       |
-| Regex match        | `Regex.IsMatch(m.Name, "pattern")`         | `RegEx.IsMatch(Name, "pattern")`               |
+| 概念             | C# LINQ（脚本）                                | Dynamic LINQ（BPA / 筛选器）                  |
+| -------------- | ------------------------------------------ | ---------------------------------------- |
+| 逻辑与            | `&&`                                       | `and`                                    |
+| 逻辑或            | `\\|\\|`                                 | `or`                                     |
+| 逻辑非            | `!`                                        | `not`                                    |
+| 等于             | `==`                                       | `=`                                      |
+| 不等于            | `!=`                                       | `!=` 或 `<>`                              |
+| 大于/小于          | `>`, `<`, `>=`, `<=`                       | `>`, `<`, `>=`, `<=`                     |
+| 字符串包含          | `m.Name.Contains("Sales")`                 | `Name.Contains("Sales")`                 |
+| 字符串以某内容开头      | `m.Name.StartsWith("Sum")`                 | `Name.StartsWith("Sum")`                 |
+| 字符串以某内容结尾      | `m.Name.EndsWith("YTD")`                   | `Name.EndsWith("YTD")`                   |
+| Null/空值/空字符串检查 | `string.IsNullOrEmpty(m.Description)`      | `String.IsNullOrEmpty(Description)`      |
+| 空白字符检查         | `string.IsNullOrWhiteSpace(m.Description)` | `String.IsNullOrWhitespace(Description)` |
+| 正则表达式匹配        | `Regex.IsMatch(m.Name, "pattern")`         | `RegEx.IsMatch(Name, "pattern")`         |
 
-## Enum comparison
+## 枚举值比较
 
-C# uses typed enum values. Dynamic LINQ uses string representations.
+C# 使用强类型的枚举值。 Dynamic LINQ 使用字符串来表示。
 
 | C# LINQ                                                             | Dynamic LINQ                                |
 | ------------------------------------------------------------------- | ------------------------------------------- |
@@ -56,9 +56,9 @@ C# uses typed enum values. Dynamic LINQ uses string representations.
 | `p.Mode == ModeType.DirectLake`                                     | `Mode = "DirectLake"`                       |
 | `r.CrossFilteringBehavior == CrossFilteringBehavior.BothDirections` | `CrossFilteringBehavior = "BothDirections"` |
 
-## Lambda expressions vs implicit context
+## Lambda 表达式与隐式上下文
 
-C# LINQ uses explicit lambda parameters. Dynamic LINQ evaluates properties on an implicit `it` context object.
+C# LINQ 使用显式的 lambda 参数。 Dynamic LINQ 会在隐式的 `it` 上下文对象中对属性求值。
 
 ```csharp
 // C# LINQ: explicit lambda parameter
@@ -70,9 +70,9 @@ Model.AllMeasures.Where(m => m.IsHidden && m.Description == "");
 IsHidden and Description = ""
 ```
 
-## Parent object navigation
+## 父对象导航
 
-Both use dot notation, but C# requires the lambda parameter.
+两者都使用点号表示法，但在 C# 中必须显式指定 lambda 参数。
 
 ```csharp
 // C# LINQ
@@ -84,9 +84,9 @@ Model.AllMeasures.Where(m => m.Table.IsHidden);
 Table.IsHidden
 ```
 
-## Collection methods
+## 集合方法
 
-C# LINQ uses lambdas inside collection methods. Dynamic LINQ uses implicit context within collection methods, with `outerIt` to reference the parent object.
+C# LINQ 在集合方法中使用 lambda 表达式。 Dynamic LINQ 在集合方法中使用隐式上下文，并用 `outerIt` 引用父对象。
 
 ```csharp
 // C# LINQ: count columns with no description
@@ -98,34 +98,34 @@ Model.Tables.Where(t => t.Columns.Count(c => c.Description == "") > 5);
 Columns.Count(Description = "") > 5
 ```
 
-### The outerIt keyword
+### `outerIt` 关键字
 
-Inside a nested collection method in Dynamic LINQ, `it` refers to the inner object (e.g., a column). Use `outerIt` to reference the outer object (e.g., the table).
+在 Dynamic LINQ 的嵌套集合方法中，`it` 指的是内层对象（例如列）。 使用 `outerIt` 引用外层对象（例如表）。
 
 ```
 // BPA rule on Tables: find tables where any column name matches the table name
 Columns.Any(Name = outerIt.Name)
 ```
 
-In C#, the outer lambda parameter `t` remains in scope throughout the inner lambda body. The inner lambda `c => c.Name == t.Name` can reference `t` directly because it is captured by closure.
+在 C# 中，外层 lambda 参数 `t` 在内层 lambda 的整个函数体中始终都在作用域内。 内层 lambda `c => c.Name == t.Name` 可以直接引用 `t`，因为它会被闭包捕获。
 
 ```csharp
 // C# equivalent -- t is accessible inside the inner lambda via closure
 Model.Tables.Where(t => t.Columns.Any(c => c.Name == t.Name));
 ```
 
-## Type filtering
+## 类型筛选
 
-C# uses `OfType<T>()` or `is`. In BPA, the rule's **Applies to** scope handles type filtering. You do not need type checks in the expression itself.
+C# 使用 `OfType<T>()` 或 `is`。 在 BPA 中，规则的 **适用于** 范围负责进行类型筛选。 无需在表达式本身中进行类型检查。
 
-| C# LINQ                                        | Dynamic LINQ approach                              |
-| ---------------------------------------------- | -------------------------------------------------- |
-| `Model.AllColumns.OfType<CalculatedColumn>()`  | Set BPA rule scope to **Calculated Columns**       |
-| `Model.Tables.OfType<CalculationGroupTable>()` | Set BPA rule scope to **Calculation Group Tables** |
+| C# LINQ                                        | Dynamic LINQ 写法           |
+| ---------------------------------------------- | ------------------------- |
+| `Model.AllColumns.OfType<CalculatedColumn>()`  | 将 BPA 规则的适用范围设置为 **计算列**  |
+| `Model.Tables.OfType<CalculationGroupTable>()` | 将 BPA 规则的适用范围设置为 **计算组表** |
 
-## Dependency properties
+## 依赖属性
 
-These work identically in both syntaxes, but Dynamic LINQ omits the object prefix.
+这些属性在两种语法中的工作方式完全相同，但 Dynamic LINQ 省略了对象前缀。
 
 | C# LINQ                       | Dynamic LINQ                |
 | ----------------------------- | --------------------------- |
@@ -134,7 +134,7 @@ These work identically in both syntaxes, but Dynamic LINQ omits the object prefi
 | `c.UsedInRelationships.Any()` | `UsedInRelationships.Any()` |
 | `c.ReferencedBy.AnyVisible`   | `ReferencedBy.AnyVisible`   |
 
-## Annotation methods
+## 注释方法
 
 ```csharp
 // C# LINQ
@@ -151,7 +151,7 @@ HasAnnotation("AUTOGEN")
 | `m.GetAnnotation("key") == "value"` | `GetAnnotation("key") = "value"` |
 | `m.HasAnnotation("key")`            | `HasAnnotation("key")`           |
 
-## Perspective and translation indexers
+## 透视与翻译索引器
 
 ```csharp
 // C# LINQ
@@ -169,11 +169,11 @@ InPerspective["Sales"]
 | `!m.InPerspective["Sales"]`                        | `not InPerspective["Sales"]`                     |
 | `string.IsNullOrEmpty(m.TranslatedNames["da-DK"])` | `String.IsNullOrEmpty(TranslatedNames["da-DK"])` |
 
-## BPA fix expressions
+## BPA 修复表达式
 
-Fix expressions use `it.` as the assignment target. The `it` refers to the specific object that violated the rule -- the same object highlighted in the BPA results list.
+在修复表达式中，使用 `it.` 作为赋值目标。 `it` 指的是违反该规则的那个特定对象——也就是 BPA 结果列表中高亮显示的同一个对象。
 
-For example, given a BPA rule with expression `IsHidden and String.IsNullOrWhitespace(Description)` applied to **Measures**, each measure that matches appears in the BPA results. When you apply the fix, `it` refers to that specific measure:
+例如，如果有一条 BPA 规则，其表达式为 `IsHidden and String.IsNullOrWhitespace(Description)`，并应用于 **度量值**，则每个匹配的度量值都会显示在 BPA 结果中。 应用修复时，`it` 指的就是那个特定的度量值：
 
 ```
 // Set the description on the violating measure
@@ -183,7 +183,7 @@ it.Description = "TODO: Add description"
 it.IsHidden = false
 ```
 
-While fix expressions have no direct C# LINQ equivalent, you can achieve the same result in a script:
+虽然修复表达式没有直接对应的 C# LINQ 写法，但你可以在脚本中实现相同的效果：
 
 ```csharp
 foreach (var m in Model.AllMeasures.Where(m => m.IsHidden && string.IsNullOrWhiteSpace(m.Description)))
@@ -192,11 +192,11 @@ foreach (var m in Model.AllMeasures.Where(m => m.IsHidden && string.IsNullOrWhit
 }
 ```
 
-## Complete example: same rule in both syntaxes
+## 完整示例：同一条规则的两种语法
 
-**Goal:** Find measures that are hidden, have no references and have no description.
+**目标：** 找出已隐藏、无引用且无描述的度量值。
 
-C# script:
+C# Script：
 
 ```csharp
 var unused = Model.AllMeasures
@@ -208,7 +208,7 @@ foreach (var m in unused)
     Info(m.DaxObjectFullName);
 ```
 
-BPA rule expression (applies to Measures):
+BPA 规则表达式（应用于度量值）：
 
 ```
 IsHidden and ReferencedBy.Count = 0 and String.IsNullOrWhitespace(Description)
