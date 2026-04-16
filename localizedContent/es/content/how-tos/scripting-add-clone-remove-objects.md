@@ -1,6 +1,6 @@
 ---
 uid: how-to-add-clone-remove-objects
-title: How to Add, Clone and Remove Objects
+title: Cómo agregar, clonar y eliminar objetos
 author: Morten Lønskov
 updated: 2026-04-10
 applies_to:
@@ -11,11 +11,11 @@ applies_to:
       full: true
 ---
 
-# How to Add, Clone and Remove Objects
+# Cómo agregar, clonar y eliminar objetos
 
-C# scripts can create new model objects, clone existing ones and delete objects. This article covers the Add, Clone and Delete patterns.
+Los C# Scripts pueden crear nuevos objetos del modelo, clonar los existentes y eliminarlos. Este artículo aborda los patrones de agregar, clonar y eliminar.
 
-## Quick reference
+## Referencia rápida
 
 ```csharp
 var table = Model.Tables["Sales"];
@@ -48,9 +48,9 @@ table.Measures.Where(m => m.IsHidden).ToList().ForEach(m => m.Delete());
 
 ## Agregar medidas
 
-`AddMeasure()` creates and returns a new `Measure` on a table. The first parameter is the name, the second is a DAX expression and the third is the display folder. All parameters except the first are optional.
+`AddMeasure()` crea y devuelve una nueva medida en una tabla. El primer parámetro es el nombre, el segundo es una expresión DAX y el tercero es la carpeta de visualización. Todos los parámetros, excepto el primero, son opcionales.
 
-Capture the returned object in a variable to set additional properties. This pattern is the same across all `Add*` methods.
+Captura el objeto devuelto en una variable para establecer propiedades adicionales. Este patrón es el mismo en todos los métodos `Add*`.
 
 ```csharp
 var table = Model.Tables["Sales"];
@@ -71,7 +71,7 @@ var m2 = table.AddMeasure(
 );
 ```
 
-## Adding columns
+## Agregar columnas
 
 ```csharp
 // Calculated column -- first parameter is the name, second is a DAX expression
@@ -92,11 +92,11 @@ var dc = table.AddDataColumn(
 ```
 
 > [!WARNING]
-> Adding a data column does not modify the table's partition query. You must update the M expression or SQL query separately to include a source column that matches the `sourceColumn` parameter.
+> Agregar una columna de datos no modifica la consulta de partición de la tabla. Debes actualizar la expresión M o la consulta SQL por separado para incluir una columna de origen que coincida con el parámetro `sourceColumn`.
 
-## Adding hierarchies
+## Agregar jerarquías
 
-The `levels` parameter is variadic. Pass any number of columns in a single call to create the corresponding levels automatically.
+El parámetro `levels` es variádico. Pasa cualquier número de columnas en una sola llamada para crear automáticamente los niveles correspondientes.
 
 ```csharp
 var dateTable = Model.Tables["Date"];
@@ -109,7 +109,7 @@ var h = dateTable.AddHierarchy(
 );
 ```
 
-Or add levels one at a time:
+O agrega niveles de uno en uno:
 
 ```csharp
 var h = dateTable.AddHierarchy("Fiscal");
@@ -127,13 +127,13 @@ var ct = Model.AddCalculatedTable(
 );
 ```
 
-## Adding relationships
+## Agregar relaciones
 
-`AddRelationship()` creates and returns an empty relationship. You must set the columns explicitly.
+`AddRelationship()` crea y devuelve una relación vacía. Debes establecer las columnas explícitamente.
 
-`FromColumn` is the many (N) side and `ToColumn` is the one (1) side. Tabular Editor does not detect the direction automatically. A useful mnemonic: F for From, F for Fact table (the many side).
+`FromColumn` es el lado de muchos (N) y `ToColumn` es el lado de uno (1). Tabular Editor no detecta la dirección automáticamente. Un truco mnemotécnico útil: F de From, F de Fact (tabla de hechos; el lado de muchos).
 
-New relationships default to `CrossFilteringBehavior.OneDirection` and `IsActive = true`. Set these only if you need a different value.
+Las relaciones nuevas tienen como valor predeterminado `CrossFilteringBehavior.OneDirection` e `IsActive = true`. Establece estos valores solo si necesitas que sean distintos.
 
 ```csharp
 var rel = Model.AddRelationship();
@@ -145,9 +145,9 @@ rel.ToColumn = Model.Tables["Product"].Columns["ProductKey"];   // one side (dim
 // rel.IsActive = false;
 ```
 
-## Cloning objects
+## Clonación de objetos
 
-`Clone()` creates a copy with all properties, annotations and translations.
+`Clone()` crea una copia con todas las propiedades, anotaciones y traducciones.
 
 ```csharp
 // Clone within the same table
@@ -158,9 +158,9 @@ var copy = original.Clone("Revenue Copy");
 var copy2 = original.Clone("Revenue Copy", true, Model.Tables["Reporting"]);
 ```
 
-## Generating measures from columns
+## Generar medidas a partir de columnas
 
-A common pattern: iterate selected columns and create derived measures. Note the use of `DaxObjectFullName` which returns the fully qualified, properly quoted DAX reference (e.g., `'Sales'[Amount]`) to avoid quoting errors.
+Un patrón habitual: recorre las columnas seleccionadas y crea medidas derivadas. Observa el uso de `DaxObjectFullName`, que devuelve la referencia DAX completa y con las comillas correctas (por ejemplo, `'Sales'[Amount]`) para evitar errores de comillas.
 
 ```csharp
 foreach (var col in Selected.Columns)
@@ -175,9 +175,9 @@ foreach (var col in Selected.Columns)
 }
 ```
 
-## Deleting objects
+## Eliminar objetos
 
-Call `Delete()` on any named object to remove it. When modifying a collection in a loop (deleting, adding or moving objects), always call `.ToList()` first to materialize a snapshot.
+Invoca `Delete()` en cualquier objeto con nombre para eliminarlo. Al modificar una colección en un bucle (eliminando, agregando o moviendo objetos), llama siempre primero a `.ToList()` para materializar una instantánea.
 
 ```csharp
 // Delete a single object
@@ -190,14 +190,14 @@ Model.AllMeasures
     .ForEach(m => m.Delete());
 ```
 
-## Common pitfalls
+## Errores comunes
 
 > [!WARNING]
 >
-> - Always call `.ToList()` or `.ToArray()` before modifying objects in a loop. Without it, modifying the collection during iteration causes: `"Collection was modified; enumeration operation may not complete."`
-> - `AddRelationship()` creates an incomplete relationship. You must assign both `FromColumn` and `ToColumn` before the model validates.
-> - `Column` is abstract, but you can access all base properties (`Name`, `DataType`, `FormatString`, `IsHidden`) without casting. Only cast to a subtype for type-specific properties.
-> - `Clone()` copies all metadata including annotations, translations and perspective membership. Remove unwanted metadata after cloning.
+> - Llama siempre a `.ToList()` o `.ToArray()` antes de modificar objetos en un bucle. Sin ello, modificar la colección durante la iteración provoca: `"Collection was modified; enumeration operation may not complete."`
+> - `AddRelationship()` crea una relación incompleta. Debes asignar tanto `FromColumn` como `ToColumn` antes de que el modelo se valide.
+> - `Column` es una clase abstracta, pero puedes acceder a todas las propiedades base (`Name`, `DataType`, `FormatString`, `IsHidden`) sin necesidad de hacer un cast. Haz cast a un subtipo solo para propiedades específicas del tipo.
+> - `Clone()` copia todos los metadatos, incluidas las anotaciones, las traducciones y la pertenencia a perspectivas. Elimina los metadatos no deseados después de clonar.
 
 ## Ver también
 
@@ -205,7 +205,7 @@ Model.AllMeasures
 - @script-create-sum-measures-from-columns
 - @how-to-navigate-tom-hierarchy
 - @how-to-use-selected-object
-- (xref:TabularEditor.TOMWrapper.Measure) -- Measure API reference
-- (xref:TabularEditor.TOMWrapper.Column) -- Column API reference
-- (xref:TabularEditor.TOMWrapper.Hierarchy) -- Hierarchy API reference
-- (xref:TabularEditor.TOMWrapper.SingleColumnRelationship) -- Relationship API reference
+- (xref:TabularEditor.TOMWrapper.Measure) -- Referencia de la API de la clase medida
+- (xref:TabularEditor.TOMWrapper.Column) -- Referencia de la API de la clase Column
+- (xref:TabularEditor.TOMWrapper.Hierarchy) -- Referencia de la API de jerarquía
+- (xref:TabularEditor.TOMWrapper.SingleColumnRelationship) -- Referencia de la API de relación
