@@ -1,6 +1,6 @@
 ---
 uid: how-to-use-script-ui-helpers
-title: How to Use Script UI Helpers
+title: Cómo usar los ayudantes de IU para scripts
 author: Morten Lønskov
 updated: 2026-04-10
 applies_to:
@@ -11,11 +11,11 @@ applies_to:
       full: true
 ---
 
-# How to Use Script UI Helpers
+# Cómo usar los ayudantes de IU para scripts
 
-Tabular Editor provides helper methods for user interaction in scripts: displaying output, showing messages, prompting for object selection, evaluating DAX and building custom dialogs. In the desktop UI, these show graphical dialogs. In the CLI, they write to the console.
+Tabular Editor proporciona métodos auxiliares para la interacción con el usuario en los scripts: mostrar salida, mostrar mensajes, solicitar la selección de objetos, evaluar DAX y crear cuadros de diálogo personalizados. En la interfaz de escritorio, estos métodos muestran cuadros de diálogo gráficos. En la CLI, estos métodos escriben en la consola.
 
-## Quick reference
+## Referencia rápida
 
 ```csharp
 // Messages
@@ -41,9 +41,9 @@ Output(items);                                         // list view with propert
 Output(result);                                        // sortable/filterable grid for a DataTable
 ```
 
-## Messages: Info, Warning, Error
+## Mensajes: Información, Advertencia y Error
 
-Use these for simple communication. `Error()` does not stop script execution by itself -- follow it with `return` if you want to halt.
+Úsalos para una comunicación sencilla. `Error()` no detiene la ejecución del script por sí solo; añade después `return` si quieres detenerla.
 
 ```csharp
 if (Selected.Measures.Count() == 0)
@@ -56,21 +56,21 @@ if (Selected.Measures.Count() == 0)
 Info("Updated " + Selected.Measures.Count() + " measures.");
 ```
 
-## Output
+## Salida
 
-`Output()` behaves differently depending on the argument type:
+`Output()` se comporta de forma distinta según el tipo de argumento:
 
-| Argument type                                                                   | Behavior                                      |
-| ------------------------------------------------------------------------------- | --------------------------------------------- |
-| TOM object (e.g., `Measure`) | Property grid allowing inspection and editing |
-| `IEnumerable<TabularNamedObject>`                                               | List view with property grid                  |
-| `DataTable`                                                                     | Sortable, filterable grid                     |
-| String or primitive                                                             | Simple message dialog                         |
+| Tipo de argumento                                      | Comportamiento                                       |
+| ------------------------------------------------------ | ---------------------------------------------------- |
+| Objeto TOM (por ejemplo, `Measure`) | Cuadrícula de propiedades para inspeccionar y editar |
+| `IEnumerable<TabularNamedObject>`                      | Vista de lista con cuadrícula de propiedades         |
+| `DataTable`                                            | Cuadrícula ordenable y filtrable                     |
+| Cadena o tipo primitivo                                | Cuadro de diálogo sencillo de mensajes               |
 
 > [!NOTE]
-> String output uses Windows line endings. Use `\r\n` or `Environment.NewLine` to insert line breaks. A bare `\n` renders on one line. This catches users out with M expressions, which use `\n` and print as a single line in `Output()`.
+> La salida de cadenas utiliza finales de línea de Windows. Usa `\r\n` o `Environment.NewLine` para insertar saltos de línea. Un simple `\n` se renderiza en una sola línea. Esto suele confundir a los usuarios con las expresiones M, que usan `\n` y se muestran como una sola línea en `Output()`.
 
-### DataTable for structured output
+### DataTable para una salida estructurada
 
 ```csharp
 using System.Data;
@@ -89,11 +89,11 @@ Output(result);
 ```
 
 > [!TIP]
-> Specify `typeof(int)` or `typeof(double)` for numeric columns to enable correct sorting in the output grid.
+> Especifica `typeof(int)` o `typeof(double)` en las columnas numéricas para que se ordenen correctamente en la cuadrícula de salida.
 
-## Object selection dialogs
+## Cuadros de diálogo de selección de objetos
 
-Selection helpers show a list dialog and return the user's choice. They throw an exception if the user cancels. Wrap them in try/catch.
+Los métodos auxiliares de selección muestran un cuadro de diálogo de lista y devuelven la elección del usuario. Lanzan una excepción si el usuario cancela. Envuélvelos en un bloque try/catch.
 
 ```csharp
 try
@@ -112,12 +112,12 @@ catch
 }
 ```
 
-### Multi-select (Tabular Editor 3 only)
+### Selección múltiple (solo en Tabular Editor 3)
 
 > [!NOTE]
-> `SelectObjects()` is only available in Tabular Editor 3. In Tabular Editor 2, use a single-select dialog in a loop or filter the selection before running the script.
+> `SelectObjects()` solo está disponible en Tabular Editor 3. En Tabular Editor 2, usa un cuadro de diálogo de selección única en un bucle o filtra la selección antes de ejecutar el script.
 
-`SelectObjects()` allows the user to pick multiple objects.
+`SelectObjects()` permite al usuario elegir varios objetos.
 
 ```csharp
 try
@@ -136,9 +136,9 @@ catch
 }
 ```
 
-## Evaluating DAX
+## Evaluación de DAX
 
-`EvaluateDax()` executes a DAX expression against the connected model and returns the result.
+`EvaluateDax()` ejecuta una expresión DAX en modo conectado contra el modelo conectado y devuelve el resultado.
 
 ```csharp
 var rowCount = Convert.ToInt64(EvaluateDax("COUNTROWS('Sales')"));
@@ -150,11 +150,11 @@ Output(result);
 ```
 
 > [!NOTE]
-> `EvaluateDax()` requires an active connection to an Analysis Services or Power BI instance. It does not work when editing a model offline.
+> `EvaluateDax()` requiere una conexión activa a una instancia de Analysis Services o Power BI. No funciona al editar un modelo sin conexión.
 
-## Guard clause patterns
+## Patrones de cláusulas de guarda
 
-Validate preconditions before the script runs.
+Valida las condiciones previas antes de que se ejecute el script.
 
 ```csharp
 // Require at least one column or measure
@@ -172,9 +172,9 @@ else
     ds = SelectObject<DataSource>(Model.DataSources, null, "Select a data source:");
 ```
 
-## Custom WinForms dialogs
+## Cuadros de diálogo personalizados de WinForms
 
-For input scenarios beyond what the built-in helpers provide, build custom WinForms dialogs directly in the script. See @how-to-build-custom-winforms-dialogs for patterns covering simple prompts, multi-field forms with validation and reusable dialog classes.
+Para escenarios de entrada que vayan más allá de lo que ofrecen los métodos auxiliares integrados, crea cuadros de diálogo personalizados de WinForms directamente en el script. Consulta @how-to-build-custom-winforms-dialogs para ver patrones que abarcan mensajes sencillos, formularios de varios campos con validación y clases de cuadros de diálogo reutilizables.
 
 ## Ver también
 
