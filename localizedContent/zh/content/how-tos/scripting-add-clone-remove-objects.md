@@ -1,6 +1,6 @@
 ---
 uid: how-to-add-clone-remove-objects
-title: How to Add, Clone and Remove Objects
+title: 如何添加、克隆和删除对象
 author: Morten Lønskov
 updated: 2026-04-10
 applies_to:
@@ -11,11 +11,11 @@ applies_to:
       full: true
 ---
 
-# How to Add, Clone and Remove Objects
+# 如何添加、克隆和删除对象
 
-C# scripts can create new model objects, clone existing ones and delete objects. This article covers the Add, Clone and Delete patterns.
+C# Script 可以创建新的模型对象、克隆现有对象并删除对象。 本文介绍 Add、Clone 和 Delete 的常用模式。
 
-## Quick reference
+## 快速参考
 
 ```csharp
 var table = Model.Tables["Sales"];
@@ -46,11 +46,11 @@ measure.Delete();
 table.Measures.Where(m => m.IsHidden).ToList().ForEach(m => m.Delete());
 ```
 
-## Adding measures
+## 添加度量值
 
-`AddMeasure()` creates and returns a new `Measure` on a table. The first parameter is the name, the second is a DAX expression and the third is the display folder. All parameters except the first are optional.
+`AddMeasure()` 会在表上创建并返回一个新的 `Measure` 度量值。 第一个参数是名称，第二个是 DAX 表达式，第三个是显示文件夹。 除第一个参数外，其他参数都是可选的。
 
-Capture the returned object in a variable to set additional properties. This pattern is the same across all `Add*` methods.
+将返回的对象保存到变量中，以便设置其他属性。 所有 `Add*` 方法都遵循这一模式。
 
 ```csharp
 var table = Model.Tables["Sales"];
@@ -71,7 +71,7 @@ var m2 = table.AddMeasure(
 );
 ```
 
-## Adding columns
+## 添加列
 
 ```csharp
 // Calculated column -- first parameter is the name, second is a DAX expression
@@ -92,11 +92,11 @@ var dc = table.AddDataColumn(
 ```
 
 > [!WARNING]
-> Adding a data column does not modify the table's partition query. You must update the M expression or SQL query separately to include a source column that matches the `sourceColumn` parameter.
+> 添加数据列不会修改表的分区查询。 你必须单独更新 M 表达式或 SQL 查询，以包含与 `sourceColumn` 参数匹配的源列。
 
-## Adding hierarchies
+## 添加层次结构
 
-The `levels` parameter is variadic. Pass any number of columns in a single call to create the corresponding levels automatically.
+`levels` 参数是可变参数。 在一次调用中传入任意数量的列，即可自动创建相应的级别。
 
 ```csharp
 var dateTable = Model.Tables["Date"];
@@ -109,7 +109,7 @@ var h = dateTable.AddHierarchy(
 );
 ```
 
-Or add levels one at a time:
+或者逐个添加级别：
 
 ```csharp
 var h = dateTable.AddHierarchy("Fiscal");
@@ -118,7 +118,7 @@ h.AddLevel(dateTable.Columns["FiscalQuarter"]);
 h.AddLevel(dateTable.Columns["FiscalMonth"]);
 ```
 
-## Adding calculated tables
+## 添加计算表格
 
 ```csharp
 var ct = Model.AddCalculatedTable(
@@ -127,13 +127,13 @@ var ct = Model.AddCalculatedTable(
 );
 ```
 
-## Adding relationships
+## 添加关系
 
-`AddRelationship()` creates and returns an empty relationship. You must set the columns explicitly.
+`AddRelationship()` 会创建并返回一个空关系。 你必须明确设置相关列。
 
-`FromColumn` is the many (N) side and `ToColumn` is the one (1) side. Tabular Editor does not detect the direction automatically. A useful mnemonic: F for From, F for Fact table (the many side).
+`FromColumn` 是多端 (N)，`ToColumn` 是一端 (1)。 Tabular Editor 不会自动检测关系方向。 一个好记的助记法：F 表示 From，F 也表示 Fact table（多的一侧）。
 
-New relationships default to `CrossFilteringBehavior.OneDirection` and `IsActive = true`. Set these only if you need a different value.
+新建关系默认使用 `CrossFilteringBehavior.OneDirection`，并且 `IsActive = true`。 仅在需要设置为其他值时才修改它们。
 
 ```csharp
 var rel = Model.AddRelationship();
@@ -145,9 +145,9 @@ rel.ToColumn = Model.Tables["Product"].Columns["ProductKey"];   // one side (dim
 // rel.IsActive = false;
 ```
 
-## Cloning objects
+## 克隆对象
 
-`Clone()` creates a copy with all properties, annotations and translations.
+`Clone()` 会创建一个包含所有属性、注释和翻译的副本。
 
 ```csharp
 // Clone within the same table
@@ -158,9 +158,9 @@ var copy = original.Clone("Revenue Copy");
 var copy2 = original.Clone("Revenue Copy", true, Model.Tables["Reporting"]);
 ```
 
-## Generating measures from columns
+## 从列生成度量值
 
-A common pattern: iterate selected columns and create derived measures. Note the use of `DaxObjectFullName` which returns the fully qualified, properly quoted DAX reference (e.g., `'Sales'[Amount]`) to avoid quoting errors.
+一种常见模式：遍历所选列并创建派生度量值。 请注意这里使用了 `DaxObjectFullName`。它会返回完全限定且正确加引号的 DAX 引用（例如 `'Sales'[Amount]`），以避免引号错误。
 
 ```csharp
 foreach (var col in Selected.Columns)
@@ -175,9 +175,9 @@ foreach (var col in Selected.Columns)
 }
 ```
 
-## Deleting objects
+## 删除对象
 
-Call `Delete()` on any named object to remove it. When modifying a collection in a loop (deleting, adding or moving objects), always call `.ToList()` first to materialize a snapshot.
+对任何命名对象调用 `Delete()` 即可将其删除。 在循环中修改集合时（删除、添加或移动对象），务必先调用 `.ToList()`，将当前集合物化为一个快照。
 
 ```csharp
 // Delete a single object
@@ -190,22 +190,22 @@ Model.AllMeasures
     .ForEach(m => m.Delete());
 ```
 
-## Common pitfalls
+## 常见陷阱
 
 > [!WARNING]
 >
-> - Always call `.ToList()` or `.ToArray()` before modifying objects in a loop. Without it, modifying the collection during iteration causes: `"Collection was modified; enumeration operation may not complete."`
-> - `AddRelationship()` creates an incomplete relationship. You must assign both `FromColumn` and `ToColumn` before the model validates.
-> - `Column` is abstract, but you can access all base properties (`Name`, `DataType`, `FormatString`, `IsHidden`) without casting. Only cast to a subtype for type-specific properties.
-> - `Clone()` copies all metadata including annotations, translations and perspective membership. Remove unwanted metadata after cloning.
+> - 在循环中修改对象之前，务必先调用 `.ToList()` 或 `.ToArray()`。 否则，在枚举过程中修改集合会导致：`"Collection was modified; enumeration operation may not complete."`
+> - `AddRelationship()` 会创建一个不完整的关系。 必须同时为 `FromColumn` 和 `ToColumn` 赋值，模型才能通过验证。
+> - `Column` 是抽象类，但无需强制转换也可以访问所有基类属性（`Name`、`DataType`、`FormatString`、`IsHidden`）。 只有在需要访问特定类型的属性时，才将其强制转换为子类型。
+> - `Clone()` 会复制所有元数据，包括注释、翻译以及透视成员资格。 克隆后删除不需要的元数据。
 
 ## 另见
 
 - @实用脚本片段
-- @script-create-sum-measures-from-columns
+- @从列创建求和度量值
 - @how-to-navigate-tom-hierarchy
 - @how-to-use-selected-object
-- (xref:TabularEditor.TOMWrapper.Measure) -- Measure API reference
-- (xref:TabularEditor.TOMWrapper.Column) -- Column API reference
-- (xref:TabularEditor.TOMWrapper.Hierarchy) -- Hierarchy API reference
-- (xref:TabularEditor.TOMWrapper.SingleColumnRelationship) -- Relationship API reference
+- (xref:TabularEditor.TOMWrapper.Measure) -- 度量值 API 参考
+- (xref:TabularEditor.TOMWrapper.Column) -- 列 API 参考
+- (xref:TabularEditor.TOMWrapper.Hierarchy) -- 层次结构 API 参考
+- (xref:TabularEditor.TOMWrapper.SingleColumnRelationship) -- 关系 API 参考
