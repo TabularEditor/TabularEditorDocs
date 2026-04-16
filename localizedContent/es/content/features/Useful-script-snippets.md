@@ -24,7 +24,7 @@ Aquí tienes una colección de pequeños fragmentos de script para empezar a usa
 Además, asegúrate de echar un vistazo a nuestra biblioteca de scripts @csharp-script-library para ver más ejemplos reales de lo que puedes hacer con las capacidades de scripting de Tabular Editor.
 
 > [!TIP]
-> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](/how-tos/scripting-navigate-tom-hierarchy) how-to series. For the complete TOM wrapper API, see the @api-index.
+> Si buscas material de referencia estructurado y organizado por patrones sobre C# Script y Dynamic LINQ, consulta la serie de guías prácticas [Patrones de scripting](/how-tos/scripting-navigate-tom-hierarchy). Para consultar la API completa del wrapper de TOM, ve a @api-index.
 
 ***
 
