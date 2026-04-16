@@ -2,6 +2,7 @@
 uid: useful-script-snippets
 title: 实用脚本片段
 author: Daniel Otykier
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,6 +22,9 @@ applies_to:
 这里汇总了一些简短的脚本片段，帮助你快速上手 Tabular Editor 的 [高级脚本功能](/Advanced-Scripting)。 其中很多脚本都适合保存为 [自定义操作](/Custom-Actions)，这样你就可以通过上下文菜单轻松复用它们。'
 
 另外，也别忘了看看我们的脚本库 @csharp-script-library，里面有更多贴近实际场景的示例，展示了你可以如何利用 Tabular Editor 的脚本功能。
+
+> [!TIP]
+> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](/how-tos/scripting-navigate-tom-hierarchy) how-to series. For the complete TOM wrapper API, see the @api-index.
 
 ***
 
