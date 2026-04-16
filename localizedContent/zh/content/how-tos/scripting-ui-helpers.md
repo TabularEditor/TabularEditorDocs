@@ -1,6 +1,6 @@
 ---
 uid: how-to-use-script-ui-helpers
-title: How to Use Script UI Helpers
+title: 如何使用脚本 UI 帮助程序
 author: Morten Lønskov
 updated: 2026-04-10
 applies_to:
@@ -11,11 +11,11 @@ applies_to:
       full: true
 ---
 
-# How to Use Script UI Helpers
+# 如何使用脚本 UI 帮助程序
 
-Tabular Editor provides helper methods for user interaction in scripts: displaying output, showing messages, prompting for object selection, evaluating DAX and building custom dialogs. In the desktop UI, these show graphical dialogs. In the CLI, they write to the console.
+Tabular Editor 为脚本中的用户交互提供了一些辅助方法：显示输出、显示信息、提示选择对象、对 DAX 求值，以及构建自定义对话框。 在桌面 UI 中，这些方法会弹出图形化对话框。 在 CLI 中，它们会输出到控制台。
 
-## Quick reference
+## 快速参考
 
 ```csharp
 // Messages
@@ -41,9 +41,9 @@ Output(items);                                         // list view with propert
 Output(result);                                        // sortable/filterable grid for a DataTable
 ```
 
-## Messages: Info, Warning, Error
+## 信息：信息、警告、错误
 
-Use these for simple communication. `Error()` does not stop script execution by itself -- follow it with `return` if you want to halt.
+用于简单沟通。 `Error()` 本身不会停止脚本执行——如果想中止，就在后面加上 `return`。
 
 ```csharp
 if (Selected.Measures.Count() == 0)
@@ -56,21 +56,21 @@ if (Selected.Measures.Count() == 0)
 Info("Updated " + Selected.Measures.Count() + " measures.");
 ```
 
-## Output
+## 输出
 
-`Output()` behaves differently depending on the argument type:
+`Output()` 的行为会因参数类型而异：
 
-| Argument type                                                                   | Behavior                                      |
-| ------------------------------------------------------------------------------- | --------------------------------------------- |
-| TOM object (e.g., `Measure`) | Property grid allowing inspection and editing |
-| `IEnumerable<TabularNamedObject>`                                               | List view with property grid                  |
-| `DataTable`                                                                     | Sortable, filterable grid                     |
-| String or primitive                                                             | Simple message dialog                         |
+| 参数类型                              | 行为            |
+| --------------------------------- | ------------- |
+| TOM 对象（例如 `Measure`）              | 可用于查看和编辑的属性网格 |
+| `IEnumerable<TabularNamedObject>` | 带属性网格的列表视图    |
+| `DataTable`                       | 可排序、可筛选的网格    |
+| 字符串或基本类型                          | 简单的信息对话框      |
 
 > [!NOTE]
-> String output uses Windows line endings. Use `\r\n` or `Environment.NewLine` to insert line breaks. A bare `\n` renders on one line. This catches users out with M expressions, which use `\n` and print as a single line in `Output()`.
+> 字符串输出使用 Windows 行结束符。 使用 `\r\n` 或 `Environment.NewLine` 来插入换行符。 单独的 `\\n` 会渲染为一行。 这常让使用 M 表达式的用户踩坑：M 表达式使用 `\\n`，但在 `Output()` 中会被打印成单行。
 
-### DataTable for structured output
+### 用于结构化输出的 DataTable
 
 ```csharp
 using System.Data;
@@ -89,11 +89,11 @@ Output(result);
 ```
 
 > [!TIP]
-> Specify `typeof(int)` or `typeof(double)` for numeric columns to enable correct sorting in the output grid.
+> 为数值列指定 `typeof(int)` 或 `typeof(double)`，以便在输出网格中正确排序。
 
-## Object selection dialogs
+## 对象选择对话框
 
-Selection helpers show a list dialog and return the user's choice. They throw an exception if the user cancels. Wrap them in try/catch.
+选择辅助函数会显示一个列表对话框，并返回用户的选择。 如果用户取消操作，它们会抛出异常。 请在 try/catch 中调用它们。
 
 ```csharp
 try
@@ -112,12 +112,12 @@ catch
 }
 ```
 
-### Multi-select (Tabular Editor 3 only)
+### 多选（仅限 Tabular Editor 3）
 
 > [!NOTE]
-> `SelectObjects()` is only available in Tabular Editor 3. In Tabular Editor 2, use a single-select dialog in a loop or filter the selection before running the script.
+> `SelectObjects()` 仅在 Tabular Editor 3 中可用。 在 Tabular Editor 2 中，可以在循环中使用单选对话框，或在运行脚本前先筛选选中的对象。
 
-`SelectObjects()` allows the user to pick multiple objects.
+`SelectObjects()` 允许用户选择多个对象。
 
 ```csharp
 try
@@ -136,9 +136,9 @@ catch
 }
 ```
 
-## Evaluating DAX
+## 评估 DAX
 
-`EvaluateDax()` executes a DAX expression against the connected model and returns the result.
+`EvaluateDax()` 会针对以连接模式连接的模型执行 DAX 表达式并返回结果。
 
 ```csharp
 var rowCount = Convert.ToInt64(EvaluateDax("COUNTROWS('Sales')"));
@@ -150,11 +150,11 @@ Output(result);
 ```
 
 > [!NOTE]
-> `EvaluateDax()` requires an active connection to an Analysis Services or Power BI instance. It does not work when editing a model offline.
+> `EvaluateDax()` 需要与 Analysis Services 或 Power BI 实例保持活动连接。 离线编辑模型时无法使用。
 
-## Guard clause patterns
+## 卫语句模式
 
-Validate preconditions before the script runs.
+在脚本运行前验证前置条件。
 
 ```csharp
 // Require at least one column or measure
@@ -172,9 +172,9 @@ else
     ds = SelectObject<DataSource>(Model.DataSources, null, "Select a data source:");
 ```
 
-## Custom WinForms dialogs
+## 自定义 WinForms 对话框
 
-For input scenarios beyond what the built-in helpers provide, build custom WinForms dialogs directly in the script. See @how-to-build-custom-winforms-dialogs for patterns covering simple prompts, multi-field forms with validation and reusable dialog classes.
+对于内置辅助函数无法覆盖的输入场景，可直接在脚本中构建自定义 WinForms 对话框。 有关简单提示、带验证的多字段表单以及可重用对话框类的实现模式，请参阅 @how-to-build-custom-winforms-dialogs。
 
 ## 另见
 
