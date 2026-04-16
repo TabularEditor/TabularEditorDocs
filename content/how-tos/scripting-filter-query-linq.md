@@ -29,7 +29,7 @@ if (table.Measures.Any(m => m.IsHidden)) { /* ... */ }
 if (table.Columns.All(c => c.Description != "")) { /* ... */ }
 
 // Count
-int count = Model.AllColumns.Count(c => c.DataType == DataType.String);
+var count = Model.AllColumns.Count(c => c.DataType == DataType.String);
 
 // Project -- returns a List<string> of only the measure names
 var names = Model.AllMeasures.Select(m => m.Name).ToList();
@@ -80,10 +80,10 @@ if (table == null) { Error("Table not found."); return; } // return exits the sc
 
 ```csharp
 // Are all columns documented?
-bool allDocs = table.Columns.All(c => !string.IsNullOrEmpty(c.Description));
+var allDocs = table.Columns.All(c => !string.IsNullOrEmpty(c.Description));
 
 // How many string columns?
-int count = Model.AllColumns.Count(c => c.DataType == DataType.String);
+var count = Model.AllColumns.Count(c => c.DataType == DataType.String);
 ```
 
 ## Projection with Select

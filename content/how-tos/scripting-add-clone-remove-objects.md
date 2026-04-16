@@ -17,12 +17,15 @@ C# scripts can create new model objects, clone existing ones and delete objects.
 ## Quick reference
 
 ```csharp
+var table = Model.Tables["Sales"];
+var measure = table.Measures["Revenue"];
+
 // Add objects -- all parameters after the first are optional.
 // See sections below for parameter details.
 table.AddMeasure("Name", "DAX Expression", "Display Folder");
 table.AddCalculatedColumn("Name", "DAX Expression", "Display Folder");
 table.AddDataColumn("Name", "SourceColumn", "Display Folder", DataType.String);
-table.AddHierarchy("Name", "Display Folder", col1, col2, col3);
+table.AddHierarchy("Name", "Display Folder", table.Columns["Year"], table.Columns["Month"]);
 Model.AddCalculatedTable("Name", "DAX Expression");
 Model.AddPerspective("Name");
 Model.AddRole("Name");
@@ -35,7 +38,7 @@ rel.ToColumn = Model.Tables["Product"].Columns["ProductKey"];   // one (1) side
 
 // Clone
 var clone = measure.Clone("New Name");                         // same table
-var clone = measure.Clone("New Name", true, targetTable);      // different table
+var cloneToOther = measure.Clone("New Name", true, Model.Tables["Reporting"]); // different table
 
 // Delete (always materialize with ToList() before modifying a collection in a loop)
 measure.Delete();

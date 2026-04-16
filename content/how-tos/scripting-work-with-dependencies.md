@@ -61,7 +61,7 @@ foreach (var col in measure.DependsOn.Columns)
     Info($"References column: {col.DaxObjectFullName}");
 
 // Check if measure depends on a specific table
-bool usesDate = measure.DependsOn.Tables.Any(t => t.Name == "Date");
+var usesDate = measure.DependsOn.Tables.Any(t => t.Name == "Date");
 ```
 
 ## ReferencedBy: what references this object?
@@ -76,7 +76,7 @@ foreach (var m in column.ReferencedBy.Measures)
     Info($"Referenced by: {m.DaxObjectFullName}");
 
 // Check if column is used in any RLS expression
-bool usedInRLS = column.ReferencedBy.Roles.Any();
+var usedInRLS = column.ReferencedBy.Roles.Any();
 ```
 
 ## Deep traversal

@@ -19,9 +19,9 @@ Measures, calculated columns, calculation items, KPIs and partitions all have ex
 ```csharp
 // Read and set expressions
 measure.Expression                                    // DAX formula string
-measure.Expression = "SUM('Sales'[Amount])"           // set formula
-measure.FormatString = "#,##0.00"                     // static format
-measure.FormatStringExpression = "..."                // dynamic format (DAX)
+measure.Expression = "SUM('Sales'[Amount])";          // set formula
+measure.FormatString = "#,##0.00";                    // static format
+measure.FormatStringExpression = "...";               // dynamic format (DAX)
 
 // Calculated column
 calcCol.Expression                                    // DAX formula
@@ -51,7 +51,7 @@ measure.Tokenize().Count    // DAX token count (complexity metric)
 var m = Model.AllMeasures.First(m => m.Name == "Revenue");
 
 // Read the current DAX
-string dax = m.Expression;
+var dax = m.Expression;
 
 // Replace a table reference in the expression
 m.Expression = m.Expression.Replace("'Old Table'", "'New Table'");
@@ -94,7 +94,7 @@ Objects that hold expressions implement (xref:TabularEditor.TOMWrapper.IExpressi
 ```csharp
 // Tabular Editor 2: use the Expression property directly
 measure.Expression = "SUM('Sales'[Amount])";
-string dax = measure.Expression;
+var dax = measure.Expression;
 ```
 
 > [!NOTE]
@@ -105,7 +105,7 @@ string dax = measure.Expression;
 var exprObj = (IExpressionObject)measure;
 foreach (var prop in exprObj.GetExpressionProperties())
 {
-    string expr = exprObj.GetExpression(prop);
+    var expr = exprObj.GetExpression(prop);
     if (!string.IsNullOrEmpty(expr))
         Info($"{prop}: {expr}");
 }
@@ -174,6 +174,9 @@ In BPA rule expressions, expression properties are accessed directly on the obje
 | `m.Expression.Contains("CALCULATE")` | `Expression.Contains("CALCULATE")` |
 | `m.FormatString == ""` | `FormatString = ""` |
 | `m.Expression.StartsWith("SUM")` | `Expression.StartsWith("SUM")` |
+
+> [!TIP]
+> When checking expression content with `Contains()` or `StartsWith()`, use case-insensitive comparison to avoid missing matches due to formatting differences: `m.Expression.Contains("calculate", StringComparison.OrdinalIgnoreCase)`.
 
 ## Common pitfalls
 

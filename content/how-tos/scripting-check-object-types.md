@@ -26,7 +26,7 @@ var calcCols = Model.AllColumns.OfType<CalculatedColumn>();
 var calcGroups = Model.Tables.OfType<CalculationGroupTable>();
 
 // Runtime type name (use only for display/logging, not for logic)
-string typeName = obj.GetType().Name;   // "DataColumn", "Measure", etc.
+var typeName = obj.GetType().Name;   // "DataColumn", "Measure", etc.
 ```
 
 > [!NOTE]

@@ -48,8 +48,8 @@ m.SetAnnotation("GeneratedBy", "DateTableScript");
 m.SetAnnotation("Owner", "Finance Team");
 
 // Read it back
-string owner = m.GetAnnotation("Owner");     // "Finance Team"
-string missing = m.GetAnnotation("NoKey");   // null
+var owner = m.GetAnnotation("Owner");          // "Finance Team"
+var missing = m.GetAnnotation("NoKey");        // null
 ```
 
 Later, retrieve all measures tagged by that script:
@@ -94,7 +94,7 @@ The `Annotations` property provides indexer access as an alternative to the meth
 
 ```csharp
 m.Annotations["key"] = "value";        // set
-string val = m.Annotations["key"];      // get
+var val = m.Annotations["key"];            // get
 ```
 
 ## Bulk annotation operations
@@ -123,16 +123,16 @@ Extended properties work similarly to annotations but support a typed `ExtendedP
 ```csharp
 // Store a JSON extended property (e.g., field parameter metadata)
 var table = Model.Tables["Parameter"];
-string json = "{\"version\":3,\"values\":[[\"Revenue\"],[\"Cost\"]]}";
+var json = "{\"version\":3,\"values\":[[\"Revenue\"],[\"Cost\"]]}";
 table.SetExtendedProperty("ParameterMetadata", json, ExtendedPropertyType.Json);
 
 // Read back
-string value = table.GetExtendedProperty("ParameterMetadata");
+var value = table.GetExtendedProperty("ParameterMetadata");
 var type = table.GetExtendedPropertyType("ParameterMetadata"); // ExtendedPropertyType.Json
 
 // Indexer access
 table.ExtendedProperties["key"] = "value";
-string val = table.ExtendedProperties["key"];
+var val = table.ExtendedProperties["key"];
 ```
 
 ## Dynamic LINQ equivalent

@@ -27,7 +27,7 @@ measure.TranslatedNames["da-DK"] = "Omsætning";    // set translated name
 measure.TranslatedDescriptions["da-DK"] = "...";    // set translated description
 measure.TranslatedDisplayFolders["da-DK"] = "Salg"; // set translated folder
 
-string name = measure.TranslatedNames["da-DK"];     // read translation (empty string if unset)
+var name = measure.TranslatedNames["da-DK"];     // read translation (empty string if unset)
 
 // Iterate cultures
 foreach (var culture in Model.Cultures)

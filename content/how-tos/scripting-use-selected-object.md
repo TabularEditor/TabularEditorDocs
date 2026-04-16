@@ -54,7 +54,7 @@ The `Selected` object exposes both singular and plural accessors for each object
 | `Selected.Measure` | single `Measure` | Throws exception if 0 or 2+ measures selected |
 | `Selected.Measures` | `IEnumerable<Measure>` | Returns a collection that may be empty but is never null. Safe to iterate directly. |
 
-Use the **singular** form when your script requires exactly one object. Use the **plural** form when the script should work on one or more objects.
+Use the **singular** form when your script requires exactly one object. Use the **plural** form when the script should work on zero or more objects.
 
 ## Guard clauses
 
