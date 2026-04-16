@@ -24,7 +24,7 @@ applies_to:
 另外，也别忘了看看我们的脚本库 @csharp-script-library，里面有更多贴近实际场景的示例，展示了你可以如何利用 Tabular Editor 的脚本功能。
 
 > [!TIP]
-> For structured, pattern-by-pattern reference material on C# scripting and Dynamic LINQ, see the [Scripting Patterns](/how-tos/scripting-navigate-tom-hierarchy) how-to series. For the complete TOM wrapper API, see the @api-index.
+> 如需查阅关于 C# Script 和 Dynamic LINQ 的结构化、按模式逐一讲解的参考资料，请参阅[脚本模式](/how-tos/scripting-navigate-tom-hierarchy)操作指南系列。 完整的 TOM 包装器 API 请参阅 @api-index。
 
 ***
 
