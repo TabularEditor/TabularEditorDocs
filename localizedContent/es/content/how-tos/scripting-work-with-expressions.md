@@ -1,6 +1,6 @@
 ---
 uid: how-to-work-with-expressions
-title: How to Work with Expressions and DAX Properties
+title: Cómo trabajar con expresiones y propiedades DAX
 author: Morten Lønskov
 updated: 2026-04-10
 applies_to:
@@ -11,11 +11,11 @@ applies_to:
       full: true
 ---
 
-# How to Work with Expressions and DAX Properties
+# Cómo trabajar con expresiones y propiedades DAX
 
-Measures, calculated columns, calculation items, KPIs and partitions all have expressions. This article covers reading, modifying and generating DAX expressions and working with the `IExpressionObject` interface.
+Las medidas, las columnas calculadas, los elementos de cálculo, los KPI y las particiones tienen expresiones. En este artículo verás cómo leer, modificar y generar expresiones DAX, y cómo trabajar con la interfaz `IExpressionObject`.
 
-## Quick reference
+## Referencia rápida
 
 ```csharp
 // Read and set expressions
@@ -46,7 +46,7 @@ CallDaxFormatter();         // execute queued formatting
 measure.Tokenize().Count    // DAX token count (complexity metric)
 ```
 
-## Reading and modifying measure expressions
+## Leer y modificar las expresiones de las medidas
 
 ```csharp
 var m = Model.AllMeasures.First(m => m.Name == "Revenue");
@@ -61,20 +61,20 @@ m.Expression = m.Expression.Replace("'Old Table'", "'New Table'");
 m.FormatString = "#,##0.00";
 ```
 
-## DAX object name properties
+## Propiedades de nombres de objetos DAX
 
-Every `IDaxObject` (table, column, measure, hierarchy) has properties that return its name in DAX-safe format with proper quoting.
+Cada `IDaxObject` (tabla, columna, medida o jerarquía) tiene propiedades que devuelven su nombre en un formato compatible con DAX y con el entrecomillado adecuado.
 
-| Propiedad           | Column example    | Measure example | Table example |
-| ------------------- | ----------------- | --------------- | ------------- |
-| `DaxObjectName`     | `[Amount]`        | `[Revenue]`     | `'Sales'`     |
-| `DaxObjectFullName` | `'Sales'[Amount]` | `[Revenue]`     | `'Sales'`     |
-| `DaxTableName`      | `'Sales'`         | `'Sales'`       | `'Sales'`     |
+| Propiedad           | Ejemplo de columna | Ejemplo de medida | Ejemplo de tabla |
+| ------------------- | ------------------ | ----------------- | ---------------- |
+| `DaxObjectName`     | `[Amount]`         | `[Revenue]`       | `'Sales'`        |
+| `DaxObjectFullName` | `'Sales'[Amount]`  | `[Revenue]`       | `'Sales'`        |
+| `DaxTableName`      | `'Sales'`          | `'Sales'`         | `'Sales'`        |
 
 > [!NOTE]
-> For measures, `DaxObjectFullName` returns the same value as `DaxObjectName` (unqualified). Measures do not require table qualification in DAX. For columns, `DaxObjectFullName` includes the table prefix.
+> En el caso de las medidas, `DaxObjectFullName` devuelve el mismo valor que `DaxObjectName` (sin calificar). En DAX, no hace falta calificar las medidas con la tabla. En las columnas, `DaxObjectFullName` incluye el prefijo de la tabla.
 
-Use these when generating DAX to avoid quoting errors:
+Utilice estos valores al generar DAX para evitar errores con las comillas:
 
 ```csharp
 // Generate a SUM measure for each selected column
@@ -88,9 +88,9 @@ foreach (var col in Selected.Columns)
 }
 ```
 
-## The IExpressionObject interface
+## La interfaz IExpressionObject
 
-Objects that hold expressions implement (xref:TabularEditor.TOMWrapper.IExpressionObject). In Tabular Editor 2, this interface provides only the `Expression` property. In Tabular Editor 3, it adds `GetExpression()`, `SetExpression()` and `GetExpressionProperties()` for working with multiple expression types on a single object.
+Los objetos que contienen expresiones implementan (xref:TabularEditor.TOMWrapper.IExpressionObject). En Tabular Editor 2, esta interfaz solo proporciona la propiedad `Expression`. En Tabular Editor 3, agrega `GetExpression()`, `SetExpression()` y `GetExpressionProperties()` para trabajar con varios tipos de expresión en un mismo objeto.
 
 ```csharp
 // Tabular Editor 2: use the Expression property directly
@@ -99,7 +99,7 @@ var dax = measure.Expression;
 ```
 
 > [!NOTE]
-> The following `GetExpression`/`SetExpression` pattern is only available in Tabular Editor 3. In Tabular Editor 2, access the `Expression` property directly on the object.
+> El siguiente patrón `GetExpression`/`SetExpression` solo está disponible en Tabular Editor 3. En Tabular Editor 2, accede directamente a la propiedad `Expression` del objeto.
 
 ```csharp
 // Tabular Editor 3 only: list all expression types on an object
@@ -116,21 +116,21 @@ exprObj.SetExpression(ExpressionProperty.Expression, "SUM('Sales'[Amount])");
 exprObj.SetExpression(ExpressionProperty.FormatStringExpression, "\"$#,##0.00\"");
 ```
 
-The `ExpressionProperty` enum (Tabular Editor 3 only) includes:
+La enumeración `ExpressionProperty` (solo en Tabular Editor 3) incluye:
 
-| Valor                    | Used on                                         |
-| ------------------------ | ----------------------------------------------- |
-| `Expression`             | Measures, calculated columns, calculation items |
-| `DetailRowsExpression`   | Medidas                                         |
-| `FormatStringExpression` | Measures, calculation items                     |
-| `TargetExpression`       | KPI                                             |
-| `StatusExpression`       | KPI                                             |
-| `TrendExpression`        | KPI                                             |
-| `MExpression`            | M partitions                                    |
+| Valor                    | Se usa en                                           |
+| ------------------------ | --------------------------------------------------- |
+| `Expression`             | Medidas, columnas calculadas y elementos de cálculo |
+| `DetailRowsExpression`   | Medidas                                             |
+| `FormatStringExpression` | Medidas y elementos de cálculo                      |
+| `TargetExpression`       | KPI                                                 |
+| `StatusExpression`       | KPI                                                 |
+| `TrendExpression`        | KPI                                                 |
+| `MExpression`            | Particiones de M                                    |
 
-## Formatting DAX
+## Dar formato a DAX
 
-`FormatDax()` queues objects for formatting. Formatting executes automatically at the end of the script. Call `CallDaxFormatter()` only when you need the formatted result mid-script.
+`FormatDax()` pone los objetos en cola para darles formato. El formato se aplica automáticamente al final del script. Llama a `CallDaxFormatter()` solo cuando necesites el resultado con formato a mitad del script.
 
 ```csharp
 // Typical usage -- formatting happens automatically after the script ends
@@ -144,18 +144,18 @@ CallDaxFormatter();                      // format NOW, not at script end
 var after = Selected.Measure.Expression; // now contains the formatted DAX
 ```
 
-## Tokenizing
+## Tokenización
 
-`Tokenize()` returns the DAX tokens in an expression. Tokens provide a reliable representation independent of whitespace and formatting. Use tokenization when you need to analyze the structure of a DAX expression beyond what the built-in dependency tracking and rename support already provides.
+`Tokenize()` devuelve los tokens de DAX de una expresión. Los tokens proporcionan una representación fiable, independiente de los espacios en blanco y del formato. Usa la tokenización cuando necesites analizar la estructura de una expresión DAX más allá de lo que ya ofrecen las funciones integradas de seguimiento de dependencias y cambio de nombre.
 
 ```csharp
 foreach (var m in Model.AllMeasures.OrderByDescending(m => m.Tokenize().Count))
     Info($"{m.Name}: {m.Tokenize().Count} tokens");
 ```
 
-## Find and replace in expressions
+## Buscar y reemplazar en expresiones
 
-String replacement with `Replace()` operates on the raw expression text, including inside string literals and comments. For targeted replacement of specific DAX constructs (table references, column references), analyze the tokenized expression instead.
+El reemplazo de cadenas con `Replace()` actúa sobre el texto sin procesar de la expresión, incluso dentro de literales de texto y comentarios. Para reemplazar de forma selectiva construcciones DAX específicas (referencias a tablas, referencias a columnas), analiza en su lugar la expresión tokenizada.
 
 ```csharp
 // Replace a column reference across all measures
@@ -165,11 +165,11 @@ foreach (var m in Model.AllMeasures.Where(m => m.Expression.Contains("[Old Colum
 }
 ```
 
-## Dynamic LINQ equivalent
+## Equivalente de LINQ dinámico
 
-In BPA rule expressions, expression properties are accessed directly on the object in context.
+En las expresiones de reglas de BPA, se accede directamente a las propiedades de la expresión en el objeto en contexto.
 
-| C# script                                 | Dynamic LINQ (BPA)   |
+| C# Script                                 | LINQ dinámico (BPA)  |
 | ----------------------------------------- | --------------------------------------- |
 | `string.IsNullOrWhiteSpace(m.Expression)` | `String.IsNullOrWhitespace(Expression)` |
 | `m.Expression.Contains("CALCULATE")`      | `Expression.Contains("CALCULATE")`      |
@@ -177,15 +177,15 @@ In BPA rule expressions, expression properties are accessed directly on the obje
 | `m.Expression.StartsWith("SUM")`          | `Expression.StartsWith("SUM")`          |
 
 > [!TIP]
-> When checking expression content with `Contains()` or `StartsWith()`, use case-insensitive comparison to avoid missing matches due to formatting differences: `m.Expression.Contains("calculate", StringComparison.OrdinalIgnoreCase)`.
+> Al comprobar el contenido de una expresión con `Contains()` o `StartsWith()`, usa una comparación que no distinga entre mayúsculas y minúsculas para evitar pasar por alto coincidencias debidas a diferencias de formato: `m.Expression.Contains("CALCULATE", StringComparison.OrdinalIgnoreCase)`.
 
-## Common pitfalls
+## Errores habituales
 
 > [!IMPORTANT]
 >
-> - `DataColumn` does not have an `Expression` property. Only `CalculatedColumn`, `Measure`, `CalculationItem` and `Partition` have expressions. Accessing `Expression` on a `DataColumn` causes a compile error or runtime exception depending on context.
-> - `DaxObjectName` returns the unqualified name (e.g., `[Revenue]`) while `DaxObjectFullName` includes the table prefix (e.g., `'Sales'[Revenue]`). Use `DaxObjectFullName` for column references in DAX and `DaxObjectName` for measure references where table qualification is optional.
-> - `FormatDax()` in Tabular Editor 2 calls the external daxformatter.com API and requires an internet connection. Tabular Editor 3 uses a built-in formatter by default. To use daxformatter.com in TE3, enable it in preferences.
+> - `DataColumn` no tiene una propiedad `Expression`. Solo `CalculatedColumn`, `medida`, `CalculationItem` y `partición` tienen expresiones. Acceder a la propiedad `Expression` de una `DataColumn` provoca un error de compilación o una excepción en tiempo de ejecución, según el contexto.
+> - `DaxObjectName` devuelve el nombre sin calificar (por ejemplo, `[Revenue]`), mientras que `DaxObjectFullName` incluye el prefijo de la tabla (por ejemplo, `'Sales'[Revenue]`). Use `DaxObjectFullName` para referirse a columnas en DAX y `DaxObjectName` para referirse a medidas cuando sea opcional calificar con la tabla.
+> - `FormatDax()` en Tabular Editor 2 llama a la API externa de daxformatter.com y requiere una conexión a Internet. Tabular Editor 3 usa un formateador integrado de forma predeterminada. Para usar daxformatter.com en TE3, actívalo en las preferencias.
 
 ## Ver también
 
