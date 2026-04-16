@@ -2,6 +2,21 @@
 ## [Advanced Scripting](Advanced-Scripting.md)
 ## [Script Reference Objects](script-reference-objects.md)
 
+# Scripting Patterns
+## [Navigate the TOM Object Hierarchy](scripting-navigate-tom-hierarchy.md)
+## [Check Object Types](scripting-check-object-types.md)
+## [Key TOM Interfaces](scripting-tom-interfaces.md)
+## [Dynamic LINQ vs C# LINQ](scripting-dynamic-linq-vs-csharp.md)
+## [Filter and Query Objects with LINQ](scripting-filter-query-linq.md)
+## [Use the Selected Object](scripting-use-selected-object.md)
+## [Work with Expressions and DAX Properties](scripting-work-with-expressions.md)
+## [Work with Dependencies](scripting-work-with-dependencies.md)
+## [Work with Annotations and Extended Properties](scripting-work-with-annotations.md)
+## [Work with Perspectives and Translations](scripting-perspectives-translations.md)
+## [Add, Clone and Remove Objects](scripting-add-clone-remove-objects.md)
+## [Use Script UI Helpers](scripting-ui-helpers.md)
+## [Build Custom WinForms Dialogs in Scripts](scripting-custom-winforms-dialogs.md)
+
 # Model Management and Deployment
 ## [Deploy Current Model](deploy-current-model.md)
 ## [Connect to SSAS](connect-ssas.md)
