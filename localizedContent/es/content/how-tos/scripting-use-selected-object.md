@@ -1,6 +1,6 @@
 ---
 uid: how-to-use-selected-object
-title: How to Use the Selected Object
+title: Cómo usar el objeto `Selected`
 author: Morten Lønskov
 updated: 2026-04-10
 applies_to:
@@ -11,11 +11,11 @@ applies_to:
       full: true
 ---
 
-# How to Use the Selected Object
+# Cómo usar el objeto `Selected`
 
-The `Selected` object provides access to whatever is currently selected in the @tom-explorer-view-reference tree. Use it to write scripts that operate on user-selected objects rather than hardcoded names.
+El objeto `Selected` proporciona acceso a lo que esté seleccionado en ese momento en el árbol de @tom-explorer-view-reference. Úselo para escribir scripts que operen sobre los objetos seleccionados por el usuario, en lugar de sobre nombres codificados de forma rígida.
 
-## Quick reference
+## Referencia rápida
 
 ```csharp
 // Singular (exactly one selected, throws if 0 or 2+)
@@ -34,7 +34,7 @@ foreach (var m in Selected.Measures)
 Selected.Measures.ForEach(m => m.DisplayFolder = "KPIs");
 ```
 
-Plural accessors (zero or more, safe to iterate):
+Accesores plurales (cero o más; seguros para iterar):
 
 - `Selected.Measures`
 - `Selected.Tables`
@@ -46,20 +46,20 @@ Plural accessors (zero or more, safe to iterate):
 - `Selected.Roles`
 - `Selected.DataSources`
 
-## Singular vs plural accessors
+## Accesores singulares y plurales
 
-The `Selected` object exposes both singular and plural accessors for each object type.
+El objeto `Selected` expone accesores tanto en singular como en plural para cada tipo de objeto.
 
-| Accessor            | Returns                | Behavior when count is not 1                                                                                        |
-| ------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `Selected.Measure`  | single `Measure`       | Throws exception if 0 or 2+ measures selected                                                                       |
-| `Selected.Measures` | `IEnumerable<Measure>` | Returns a collection that may be empty but is never null. Safe to iterate directly. |
+| Accesor             | Devuelve               | Comportamiento cuando el recuento no es 1                                                                                                     |
+| ------------------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Selected.Measure`  | una única `medida`     | Lanza una excepción si se seleccionan 0 medidas o 2 o más medidas                                                                             |
+| `Selected.Measures` | `IEnumerable<Measure>` | Devuelve una colección que puede estar vacía, pero nunca es nula. Puedes iterarla directamente con seguridad. |
 
-Use the **singular** form when your script requires exactly one object. Use the **plural** form when the script should work on zero or more objects.
+Usa la forma **singular** cuando tu script requiera exactamente un objeto. Usa la forma **plural** cuando el script deba funcionar con cero o más objetos.
 
-## Guard clauses
+## Cláusulas de guarda
 
-The plural accessor returns zero or more objects. A script may silently do nothing with an empty collection, or require a minimum count. Use a guard clause for the latter.
+El accesor plural devuelve cero o más objetos. Un script puede no hacer nada silenciosamente con una colección vacía, o bien requerir una cantidad mínima. Para este último caso, usa una cláusula de guarda.
 
 ```csharp
 // Require at least one measure
@@ -80,7 +80,7 @@ if (Selected.Tables.Count() != 1)
 var table = Selected.Table;
 ```
 
-For scripts that accept multiple object types, combine checks:
+En los scripts que aceptan varios tipos de objeto, combina las comprobaciones:
 
 ```csharp
 if (Selected.Columns.Count() == 0 && Selected.Measures.Count() == 0)
@@ -90,9 +90,9 @@ if (Selected.Columns.Count() == 0 && Selected.Measures.Count() == 0)
 }
 ```
 
-## Iterating selected objects
+## Iterar sobre los objetos seleccionados
 
-The plural accessor returns a collection you can iterate with `foreach` or LINQ.
+El accesor en plural devuelve una colección que puedes iterar con `foreach` o LINQ.
 
 ```csharp
 // Set display folder on all selected measures
@@ -106,18 +106,18 @@ Selected.Columns.ForEach(c => c.IsHidden = true);
 Selected.Measures.ForEach(m => m.InPerspective["Sales"] = true);
 ```
 
-## Working with the selected table
+## Trabajar con la tabla seleccionada
 
-When a single table is selected, use `Selected.Table` to add new objects to it.
+Cuando hay una sola tabla seleccionada, usa `Selected.Table` para agregar nuevos objetos a esa tabla.
 
 ```csharp
 var t = Selected.Table;
 t.AddMeasure("Row Count", "COUNTROWS(" + t.DaxObjectFullName + ")");
 ```
 
-## Mixed selections
+## Selecciones mixtas
 
-When you need to handle multiple object types from the selection, iterate `Selected` directly. The `Selected` variable itself implements `IEnumerable<ITabularNamedObject>`.
+Cuando necesites manejar varios tipos de objeto de la selección, itera `Selected` directamente. La propia variable `Selected` implementa `IEnumerable<ITabularNamedObject>`.
 
 ```csharp
 foreach (var desc in Selected.OfType<IDescriptionObject>())
@@ -126,11 +126,11 @@ foreach (var desc in Selected.OfType<IDescriptionObject>())
 }
 ```
 
-See @how-to-filter-query-objects-linq for more on LINQ filtering and @how-to-tom-interfaces for interface-based object handling.
+Consulta @how-to-filter-query-objects-linq para más información sobre el filtrado con LINQ y @how-to-tom-interfaces para el manejo de objetos basado en interfaces.
 
-## Try/catch for selection dialogs
+## Try/catch para diálogos de selección
 
-When using `SelectTable()`, `SelectColumn()`, or `SelectMeasure()` helper methods, wrap them in try/catch to handle user cancellation.
+Al usar los métodos auxiliares `SelectTable()`, `SelectColumn()` o `SelectMeasure()`, encapsúlalos en un bloque try/catch para controlar la cancelación por parte del usuario.
 
 ```csharp
 try
@@ -145,7 +145,7 @@ catch
 ```
 
 > [!NOTE]
-> The `Selected` object is only available in interactive contexts (Tabular Editor UI and macros). When running scripts via the CLI with the `-S` flag, `Selected` reflects the objects specified by `-O` arguments or is empty if none are specified.
+> El objeto `Selected` solo está disponible en contextos interactivos (la interfaz de usuario de Tabular Editor y las macros). Al ejecutar scripts mediante la CLI con la opción `-S`, `Selected` refleja los objetos especificados por los argumentos `-O` o queda vacío si no se especifica ninguno.
 
 ## Ver también
 
