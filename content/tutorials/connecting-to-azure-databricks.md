@@ -28,6 +28,9 @@ Tabular Editor uses the Power Query `Databricks.Catalogs()` function to connect 
 - **Implementation 2.0 (ADBC):** Uses the [Arrow Database Connectivity](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) driver. This is the default in Tabular Editor 3.26.1 and later, and matches the default used by Power BI Desktop. Newer Databricks workspaces require this implementation.
 - **Implementation 1.0 (legacy):** The original connector implementation. Still works on older Databricks workspaces but fails on newer ones with an empty catalog error.
 
+> [!NOTE]
+> The ADBC driver does not have to be installed on the machine where Tabular Editor is running. Only the Databricks ODBC Driver is required.
+
 > [!IMPORTANT]
 > If you have existing M-queries that were created with Tabular Editor 3.26.0 or earlier, they use the legacy implementation (`null` as the third parameter of `Databricks.Catalogs()`). If you encounter refresh errors on a newer Databricks workspace, update these queries to use Implementation 2.0. See [Databricks Refresh Fails with Empty Catalog Error](xref:databricks-refresh-empty-catalog) for step-by-step instructions.
 
