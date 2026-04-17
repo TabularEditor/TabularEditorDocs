@@ -2,7 +2,7 @@
 uid: semantic-bridge-validate-default
 title: 使用默认规则验证指标视图
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,21 +26,21 @@ applies_to:
 
 Semantic Bridge 内置以下验证规则：
 
-| 规则                       | 说明                                      |
-| ------------------------ | --------------------------------------- |
-| JoinNameRequired         | 指标视图联接必须有名称                             |
-| UniqueJoinName           | 指标视图联接名称必须唯一                            |
-| JoinSourceRequired       | 指标视图联接必须指定来源                            |
-| JoinOnOrUsingRequired    | 指标视图联接必须指定 `on` 或 `using` 之一            |
-| JoinOnOrUsingExclusivity | 指标视图的 Join 不能同时指定 `on` 和 `using`        |
-| JoinOnFormat             | 指标视图 Join 的 `on` 子句必须是有效的等值连接条件         |
-| JoinUsingColumnCOUNT     | 指标视图 Join 的 `using` 子句必须且只能包含一列（MVP 限制） |
-| DimensionNameRequired    | 指标视图的维度必须有名称                            |
-| UniqueDimensionName      | 指标视图的维度名称必须唯一                           |
-| DimensionExprRequired    | 指标视图的维度必须有表达式                           |
-| 度量值名称必填                  | 指标视图的度量值必须有名称                           |
-| 度量值名称唯一                  | 指标视图的度量值名称必须唯一                          |
-| 度量值表达式必填                 | 指标视图的度量值必须有表达式                          |
+| 规则                       | 说明                                                                                                          |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| JoinNameRequired         | 指标视图联接必须有名称                                                                                                 |
+| UniqueJoinName           | 指标视图联接名称必须唯一                                                                                                |
+| JoinSourceRequired       | 指标视图联接必须指定来源                                                                                                |
+| JoinOnOrUsingRequired    | 指标视图联接必须指定 `on` 或 `using` 之一                                                                                |
+| JoinOnOrUsingExclusivity | 指标视图的 Join 不能同时指定 `on` 和 `using`                                                                            |
+| JoinOnFormat             | 指标视图 Join 的 `on` 子句必须是有效的等值连接条件                                                                             |
+| JoinUsingColumnCOUNT     | Metric View Join `using` clause must have exactly one column (public preview limitation) |
+| DimensionNameRequired    | 指标视图的维度必须有名称                                                                                                |
+| UniqueDimensionName      | 指标视图的维度名称必须唯一                                                                                               |
+| DimensionExprRequired    | 指标视图的维度必须有表达式                                                                                               |
+| 度量值名称必填                  | 指标视图的度量值必须有名称                                                                                               |
+| 度量值名称唯一                  | 指标视图的度量值名称必须唯一                                                                                              |
+| 度量值表达式必填                 | 指标视图的度量值必须有表达式                                                                                              |
 
 ## 使用默认规则执行验证
 
