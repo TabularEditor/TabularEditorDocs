@@ -25,7 +25,7 @@ SUMMARY: Overview of the Semantic Bridge feature - a multi-platform semantic mod
 -->
 
 > [!NOTE]
-> The Semantic Bridge as released in 3.25.0 is in public preview. Tiene limitaciones, como se documenta a continuación, y tanto la API como el alcance de la funcionalidad pueden cambiar.
+> El Puente semántico, tal como se publicó en la versión 3.25.0, está disponible en versión preliminar pública. Tiene limitaciones, como se documenta a continuación, y tanto la API como el alcance de la funcionalidad pueden cambiar.
 
 El Puente semántico es un compilador de modelos semánticos capaz de traducir la estructura y las expresiones de un modelo semántico de una plataforma a otra.
 Esto permite reutilizar la lógica de negocio en varias plataformas de datos, dar soporte a los usuarios finales y llegar hasta donde consumen los datos.
@@ -122,11 +122,11 @@ En concreto, puedes
 
 <a name="public-preview-limitations"></a>
 
-## Public Preview Limitations
+## Limitaciones de la versión preliminar pública
 
 ### Plataformas compatibles
 
-In the public preview, we support translations from a Databricks Metric View to a Tabular model.
+En la versión preliminar pública, admitimos traducciones de una Metric View de Databricks a un modelo tabular.
 En concreto, admitimos las siguientes partes de una Databricks Metric View:
 
 - v0.1 Propiedades de Metric View:
@@ -138,7 +138,7 @@ En concreto, admitimos las siguientes partes de una Databricks Metric View:
   - no compatibles:
     - `filter`: una expresión de filtro SQL para la Metric View
 
-All v1.1 metadata is not supported in the public preview.
+En la versión preliminar pública no se admiten metadatos v1.1.
 Cualquier metadato v1.1 se ignora silenciosamente al deserializar una Metric View, por lo que no será visible en un C# Script y no afectará en modo alguno a la traducción a Tabular.
 
 > [!WARNING]
@@ -164,7 +164,7 @@ Las Metric Views proporcionan una capa estructurada sobre expresiones SQL, por l
 
 ### Conectividad
 
-The public preview does not connect to any platforms besides Tabular, but works entirely with local files.
+La versión preliminar pública no se conecta a ninguna plataforma aparte de Tabular, sino que funciona completamente con archivos locales.
 Debe crear su YAML de Metric View por su cuenta y luego colocarlo donde Tabular Editor pueda verlo.
 
 ### API de C\#
