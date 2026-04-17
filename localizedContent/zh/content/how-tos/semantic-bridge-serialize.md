@@ -23,7 +23,7 @@ applies_to:
 本操作指南演示如何将 Metric View 序列化回 YAML 格式：既可以作为字符串获取，也可以保存到文件中。
 
 > [!WARNING]
-> The public preview only supports v0.1 Metric View properties. 如果加载的 Metric View 中包含任何 v1.1 元数据，系统会静默忽略；在序列化时，这些元数据将会丢失。
+> 公共预览版仅支持 v0.1 版的 Metric View 属性。 如果加载的 Metric View 中包含任何 v1.1 元数据，系统会静默忽略；在序列化时，这些元数据将会丢失。
 > 不要覆盖包含 v1.1 元数据的源 YAML 文件。
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
