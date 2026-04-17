@@ -2,7 +2,7 @@
 uid: semantic-bridge-validate-default
 title: Validate a Metric View with Default Rules
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -33,7 +33,7 @@ The Semantic Bridge includes these built-in validation rules:
 | JoinOnOrUsingRequired    | Metric View Join must specify either `on` or `using`                          |
 | JoinOnOrUsingExclusivity | Metric View Join cannot specify both `on` and `using`                         |
 | JoinOnFormat             | Metric View Join `on` clause must be a valid equijoin expression              |
-| JoinUsingColumnCount     | Metric View Join `using` clause must have exactly one column (MVP limitation) |
+| JoinUsingColumnCount     | Metric View Join `using` clause must have exactly one column (public preview limitation) |
 | DimensionNameRequired    | Metric View Dimension must have a name                                        |
 | UniqueDimensionName      | Metric View Dimension names must be unique                                    |
 | DimensionExprRequired    | Metric View Dimension must have an expression                                 |
