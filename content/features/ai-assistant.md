@@ -48,8 +48,8 @@ Configure your AI provider under **Tools > Preferences > AI Assistant > AI Provi
 
 | Provider | Default Model | Configuration Required |
 | -- | -- | -- |
-| OpenAI | gpt-4o | API key. Optional Organization ID and Project ID |
-| Anthropic | claude-sonnet-4-6 | API key |
+| OpenAI | gpt-4o | API key. Optional base URL, Organization ID and Project ID |
+| Anthropic | claude-sonnet-4-6 | API key. Optional base URL |
 | Azure OpenAI | Deployment-dependent | API key, endpoint URL and deployment name |
 | Custom (OpenAI-compatible) | User-specified | API key and custom endpoint URL |
 
@@ -98,6 +98,9 @@ See [Create and deploy an Azure OpenAI resource](https://learn.microsoft.com/azu
 
 For 403 errors, SSL failures or "DeploymentNotFound" responses, see @azure-openai-connection-errors.
 
+> [!NOTE]
+> The **Azure OpenAI** provider is for classic Azure OpenAI resources that use the `api-version` query parameter. If you are using the new **Microsoft Foundry**, see [Using Microsoft Foundry](#using-microsoft-foundry) below.
+
 ### Custom (OpenAI-compatible)
 
 The Custom provider option supports local or organizational LLMs that expose an OpenAI-compatible API endpoint. Enter your API key and the custom endpoint URL. This allows you to keep all data within your own infrastructure for data privacy or compliance requirements.
@@ -143,6 +146,41 @@ These tools can run on a developer's workstation for individual use, or be deplo
 
 > [!TIP]
 > We recommend a model with a *minimum* of 30 billion parameters but ideally at least 100 billion parameters. For example, the Qwen3.5-122B-A10B model performed well in our internal testing.
+
+### Using Microsoft Foundry
+
+[Microsoft Foundry](https://ai.azure.com) (formerly Azure AI Foundry) lets you deploy OpenAI and Anthropic models in your Azure environment. These models are accessed through the **OpenAI** or **Anthropic** provider in Tabular Editor — not the **Azure OpenAI** provider, which is for classic Azure OpenAI resources.
+
+> [!IMPORTANT]
+> Do not use the **Azure OpenAI** provider for Microsoft Foundry models. The **Azure OpenAI** provider is only compatible with classic Azure OpenAI resources.
+
+#### OpenAI models on Microsoft Foundry
+
+To use an OpenAI model (such as GPT-4o or GPT-5.4-mini) deployed in Microsoft Foundry:
+
+1. In Tabular Editor, go to **Tools > Preferences > AI Assistant > AI Provider**
+2. Set **Choose provider** to **OpenAI**
+3. Set **Base URL** to your Foundry resource endpoint with `/openai/v1` appended. The URL follows one of these formats:
+   - `https://your-resource.services.ai.azure.com/openai/v1`
+   - `https://your-resource.openai.azure.com/openai/v1`
+4. Enter your Foundry **API Key**
+5. Set **Model name** to your deployment name (e.g. `gpt-5.4-mini`)
+
+> [!NOTE]
+> The base URL is not shown directly in the Microsoft Foundry portal. The portal shows a **Target URI** that includes the full API path (e.g. `https://your-resource.services.ai.azure.com/api/projects/YourProject/openai/v1/responses`). For the base URL, use just `https://your-resource.services.ai.azure.com/openai/v1`.
+
+#### Anthropic models on Microsoft Foundry
+
+To use an Anthropic model (such as Claude Sonnet 4.6) deployed in Microsoft Foundry:
+
+1. In Tabular Editor, go to **Tools > Preferences > AI Assistant > AI Provider**
+2. Set **Choose provider** to **Anthropic**
+3. Set **Base URL** to your Foundry resource endpoint with `/anthropic` appended, e.g. `https://your-resource.services.ai.azure.com/anthropic`
+4. Enter your Foundry **API Key**
+5. Set **Model name** to the model identifier (e.g. `claude-sonnet-4-6`)
+
+> [!NOTE]
+> The portal shows a **Target URI** like `https://your-resource.services.ai.azure.com/anthropic/v1/messages`. For the base URL, use the part up to and including `/anthropic` only.
 
 ## Capabilities
 
