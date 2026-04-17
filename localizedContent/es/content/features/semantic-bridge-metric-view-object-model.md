@@ -25,10 +25,10 @@ SUMMARY: Overview of the Metric View object model built into the Semantic Bridge
 -->
 
 > [!NOTE]
-> The Semantic Bridge as released in 3.25.0 is in public preview.
+> El Puente semántico, tal como se lanzó en la versión 3.25.0, se encuentra en vista previa pública.
 > Tiene limitaciones, como se documenta a continuación, y la API y el alcance de la funcionalidad están sujetos a cambios.
 > Este modelo de objetos carece claramente de muchas de las capacidades disponibles en TOMWrapper, con las que quizá esté familiarizado a partir de un C# Script para manipular un modelo tabular.
-> As noted in the [limitations of the Semantic Bridge](xref:semantic-bridge#public-preview-limitations), we currently only support Metric View v0.1 metadata.
+> Como se indica en las [limitaciones del Puente semántico](xref:semantic-bridge#public-preview-limitations), por el momento solo admitimos los metadatos de Metric View v0.1.
 
 Semantic Bridge incluye un modelo de objetos que representa una Metric View de Databricks.
 Esto te permite trabajar con Metric Views mediante programación a través de C# Scripts, de forma similar a como trabajas con un modelo tabular a través de TOMWrapper.
