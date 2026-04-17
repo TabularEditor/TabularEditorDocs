@@ -28,7 +28,7 @@ SUMMARY: Describes the validation framework for Metric Views in the Semantic Bri
 该验证贯穿翻译流程的每个阶段：从首次反序列化指标视图开始，到将其翻译为 DAX 和 Tabular 过程中出现的错误。
 
 > [!NOTE]
-> The Semantic Bridge is currently in public preview, so interfaces may change as the feature matures.
+> Semantic Bridge 目前处于公开预览阶段，因此随着功能逐步完善，相关接口可能会有所调整。
 > 目前，验证只能通过 C# Script 来进行。
 
 ## 验证流程
