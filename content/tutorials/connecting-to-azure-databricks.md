@@ -2,7 +2,7 @@
 uid: connecting-to-azure-databricks
 title: Connecting to Azure Databricks
 author: David Bojsen
-updated: 2026-04-08
+updated: 2026-04-16
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,6 +20,16 @@ applies_to:
 # (Tutorial) Connecting to Azure Databricks
 
 Tabular Editor 3 supports connecting to Azure Databricks as a data source for your semantic models. This tutorial will guide you through the process of setting up a connection to Azure Databricks and importing data from it.
+
+## Connector Implementation
+
+Tabular Editor uses the Power Query `Databricks.Catalogs()` function to connect to Databricks. This function supports two connector implementations:
+
+- **Implementation 2.0 (ADBC):** Uses the [Arrow Database Connectivity](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) driver. This is the default in Tabular Editor 3.26.1 and later, and matches the default used by Power BI Desktop. Newer Databricks workspaces require this implementation.
+- **Implementation 1.0 (legacy):** The original connector implementation. Still works on older Databricks workspaces but fails on newer ones with an empty catalog error.
+
+> [!IMPORTANT]
+> If you have existing M-queries that were created with Tabular Editor 3.26.0 or earlier, they use the legacy implementation (`null` as the third parameter of `Databricks.Catalogs()`). If you encounter refresh errors on a newer Databricks workspace, update these queries to use Implementation 2.0. See [Databricks Refresh Fails with Empty Catalog Error](xref:databricks-refresh-empty-catalog) for step-by-step instructions.
 
 ## Prerequisites
 
@@ -162,10 +172,15 @@ Once you've configured your connection:
 If you encounter issues connecting to Azure Databricks:
 
 - Verify your workspace URL is correct and accessible
-- Ensure your Personal Access Token hasn't expired (if using PAT authentication)
+- Ensure your Personal Access Token has not expired (if using PAT authentication)
 - Check that your user account has the necessary permissions in Databricks
 - Verify the HTTP Path points to an active SQL warehouse
 - Ensure your network allows connections to the Databricks service
+
+### Databricks-specific troubleshooting guides
+
+- [Databricks Refresh Fails with Empty Catalog Error](xref:databricks-refresh-empty-catalog) -- refresh fails after importing from a newer Databricks workspace
+- [Databricks Column Comment Length Error](xref:databricks-column-comments-length) -- import fails when column comments exceed 512 characters
 
 ### Resolving Microsoft Entra ID Authentication Issues
 
