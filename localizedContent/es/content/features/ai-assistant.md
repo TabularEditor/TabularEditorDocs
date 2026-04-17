@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: Asistente de IA
 author: Morten Lønskov
-updated: 2026-04-15
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -32,7 +32,7 @@ El Asistente de IA utiliza un modelo BYOK de clave aportada por el usuario. Tú 
 ## Primeros pasos
 
 1. Abre **Herramientas > Preferencias > Asistente de IA**
-2. Selecciona tu proveedor de IA e introduce tu clave de API
+2. Select your AI provider — on a fresh install this defaults to **None (AI disabled)** — then enter your API key
 3. Abre el panel del Asistente de IA desde **Vista > Asistente de IA**
 4. Escribe mensajes y pulsa **Enter** para iniciar una conversación
 
@@ -44,14 +44,14 @@ El Asistente de IA utiliza un modelo BYOK de clave aportada por el usuario. Tú 
 
 ## Proveedores compatibles
 
-Configura tu proveedor de IA en **Herramientas > Preferencias > Asistente de IA > Proveedor de IA**. Selecciona un proveedor en el menú desplegable, introduce tu clave de API y, si lo deseas, sobrescribe el nombre del modelo predeterminado.
+Configura tu proveedor de IA en **Herramientas > Preferencias > Asistente de IA > Proveedor de IA**. Select a provider from the dropdown — the default is **None (AI disabled)** until you configure one — enter your API key, and optionally override the default model. For OpenAI and Anthropic, the **Model name** field is a combo box pre-populated with known models; you can also type a custom model name.
 
-| Proveedor                                                | Modelo predeterminado            | Configuración necesaria                                                        |
-| -------------------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------ |
-| OpenAI                                                   | gpt-4o                           | Clave de API. ID opcional de la organización e ID del proyecto |
-| Anthropic                                                | claude-sonnet-4-6                | Clave de API                                                                   |
-| Azure OpenAI                                             | Dependiente de la implementación | Clave de API, URL del punto de conexión y nombre de la implementación          |
-| Personalizado (compatible con OpenAI) | Especificado por el usuario      | Clave de API y URL personalizada del punto de conexión                         |
+| Proveedor                                                | Modelo predeterminado            | Configuración necesaria                                                         |
+| -------------------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------- |
+| OpenAI                                                   | gpt-4o                           | Clave de API. Optional base URL, Organization ID and Project ID |
+| Anthropic                                                | claude-sonnet-4-6                | Clave de API. Optional base URL                                 |
+| Azure OpenAI                                             | Dependiente de la implementación | Clave de API, URL del punto de conexión y nombre de la implementación           |
+| Personalizado (compatible con OpenAI) | Especificado por el usuario      | Clave de API y URL personalizada del punto de conexión                          |
 
 ![Selección del proveedor del Asistente de IA en Preferencias](~/content/assets/images/ai-assistant/ai-assistant-provider-preferences.png)
 
@@ -98,6 +98,9 @@ Consulta [Crear y desplegar un recurso de Azure OpenAI](https://learn.microsoft.
 
 Para errores 403, fallos de SSL o respuestas "DeploymentNotFound", consulta @azure-openai-connection-errors.
 
+> [!NOTE]
+> The **Azure OpenAI** provider is for classic Azure OpenAI resources that use the `api-version` query parameter. If you are using the new **Microsoft Foundry**, see [Using Microsoft Foundry](#using-microsoft-foundry) below.
+
 ### Personalizado (compatible con OpenAI)
 
 La opción de proveedor Personalizado admite LLM locales o de tu organización que expongan un punto de conexión de API compatible con OpenAI. Introduce tu clave de API y la URL del punto de conexión personalizado. Esto te permite mantener todos los datos dentro de tu propia infraestructura por motivos de privacidad o requisitos de cumplimiento.
@@ -143,6 +146,41 @@ Estas herramientas pueden ejecutarse en la estación de trabajo de un desarrolla
 > [!TIP]
 > We recommend a model with a _minimum_ of 30 billion parameters but ideally at least 100 billion parameters. Por ejemplo, el modelo Qwen3.5-122B-A10B funcionó bien en nuestras pruebas internas.
 
+### Using Microsoft Foundry
+
+[Microsoft Foundry](https://ai.azure.com) (formerly Azure AI Foundry) lets you deploy OpenAI and Anthropic models in your Azure environment. These models are accessed through the **OpenAI** or **Anthropic** provider in Tabular Editor — not the **Azure OpenAI** provider, which is for classic Azure OpenAI resources.
+
+> [!IMPORTANT]
+> Do not use the **Azure OpenAI** provider for Microsoft Foundry models. The **Azure OpenAI** provider is only compatible with classic Azure OpenAI resources.
+
+#### OpenAI models on Microsoft Foundry
+
+To use an OpenAI model (such as GPT-4o or GPT-5.4-mini) deployed in Microsoft Foundry:
+
+1. En Tabular Editor, ve a **Herramientas > Preferencias > Asistente de IA > Proveedor de IA**
+2. Set **Choose provider** to **OpenAI**
+3. Set **Base URL** to your Foundry resource endpoint with `/openai/v1` appended. The URL follows one of these formats:
+   - `https://your-resource.services.ai.azure.com/openai/v1`
+   - `https://your-resource.openai.azure.com/openai/v1`
+4. Enter your Foundry **API Key**
+5. Set **Model name** to your deployment name (e.g. `gpt-5.4-mini`)
+
+> [!NOTE]
+> The base URL is not shown directly in the Microsoft Foundry portal. The portal shows a **Target URI** that includes the full API path (e.g. `https://your-resource.services.ai.azure.com/api/projects/YourProject/openai/v1/responses`). For the base URL, use just `https://your-resource.services.ai.azure.com/openai/v1`.
+
+#### Anthropic models on Microsoft Foundry
+
+To use an Anthropic model (such as Claude Sonnet 4.6) deployed in Microsoft Foundry:
+
+1. En Tabular Editor, ve a **Herramientas > Preferencias > Asistente de IA > Proveedor de IA**
+2. Set **Choose provider** to **Anthropic**
+3. Set **Base URL** to your Foundry resource endpoint with `/anthropic` appended, e.g. `https://your-resource.services.ai.azure.com/anthropic`
+4. Enter your Foundry **API Key**
+5. Set **Model name** to the model identifier (e.g. `claude-sonnet-4-6`)
+
+> [!NOTE]
+> The portal shows a **Target URI** like `https://your-resource.services.ai.azure.com/anthropic/v1/messages`. For the base URL, use the part up to and including `/anthropic` only.
+
 ## Capacidades
 
 El Asistente de IA tiene acceso al contexto de tu modelo y puede realizar las siguientes acciones:
@@ -155,6 +193,9 @@ El Asistente de IA tiene acceso al contexto de tu modelo y puede realizar las si
 - **Acceso a documentos**: Leer y modificar documentos abiertos, como scripts DAX y Consultas DAX
 - **Búsqueda en la base de conocimientos**: Buscar en la documentación integrada de Tabular Editor para encontrar respuestas
 - **Navegación por la interfaz de usuario**: Generar enlaces de acción `te3://` que abren cuadros de diálogo y funcionalidades específicas de Tabular Editor
+
+> [!NOTE]
+> Tools that require an active database connection — including DAX query execution and VertiPaq Analyzer statistics — are automatically hidden when working with a model file (for example a `.bim` or `.tmdl` folder) that is not connected to Analysis Services or Power BI. The assistant will still write DAX queries for you, but the **Execute** button on DAX query artifacts is disabled until a connection is established. VertiPaq Analyzer statistics remain available if they were previously loaded from a `.vpax` file.
 
 ## Conversaciones
 
@@ -312,7 +353,16 @@ Configura las opciones de visualización y comportamiento del Asistente de IA en
 Cada mensaje al Asistente de IA consume tokens de entrada. El coste en tokens de un solo mensaje depende de qué contexto se incluya:
 
 - **Prompt del sistema e instrucciones personalizadas**: Se envían con cada mensaje. Normalmente, entre 5.000 y 15.000 tokens, según las instrucciones personalizadas que estén activas.
-- **Metadatos del modelo**: Cuando el asistente necesita entender tu modelo, recupera los metadatos mediante llamadas a herramientas. Un resumen compacto incluye nombres de tablas, columnas y medidas, relaciones y descripciones. Una recuperación completa de metadatos incluye la definición completa del modelo. En modelos grandes, esto puede consumir decenas de miles de tokens.
+- **Metadatos del modelo**: Cuando el asistente necesita entender tu modelo, recupera los metadatos mediante llamadas a herramientas. To stay within provider rate limits on large models, the assistant uses a progressive-disclosure approach — it first fetches a lightweight overview (table and measure names, relationships), then searches for relevant objects by name, description or DAX expression, and only drills into full details for the specific tables or objects that the question requires. Tool results that would otherwise be very large are truncated with guidance on how the assistant can retrieve the remaining data.
+
+### Token Counter
+
+The token counter in the bottom-right of the chat input area shows cumulative token usage for the current conversation, including input from tool round-trips. Hover over the counter to see a breakdown:
+
+- **Input** — full-price input tokens for the conversation, with a sub-line showing how many of those were served from the provider's prompt cache
+- **Cache write** — tokens written to the prompt cache (provider-dependent)
+- **Output** — tokens generated by the model
+- **Context pressure** — percentage of the context window currently in use; also visualized by the slider bar next to the counter
 
 ### Reducir el uso de tokens
 
