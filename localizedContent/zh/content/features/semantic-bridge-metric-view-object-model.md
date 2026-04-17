@@ -2,7 +2,7 @@
 uid: semantic-bridge-metric-view-object-model
 title: Semantic Bridge Metric View 对象模型
 author: Greg Baldini
-updated: 2025-01-23
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,10 +25,10 @@ SUMMARY: Overview of the Metric View object model built into the Semantic Bridge
 -->
 
 > [!NOTE]
-> 3.25.0 中发布的 Semantic Bridge 属于 MVP 功能。
+> 3.25.0 中发布的语义桥目前处于公共预览阶段。
 > 其限制如下所述，且 API 与功能范围可能会发生变化。
 > 这里的对象模型明显缺少 TOMWrapper 中提供的许多便捷功能，而这些功能你可能已经在用于操作 Tabular 模型的 C# Script 中用过并熟悉。
-> 如 [Semantic Bridge 的限制](xref:semantic-bridge#mvp-limitations) 中所述，我们目前仅支持 Metric View v0.1 元数据。
+> 如[语义桥的限制](xref:semantic-bridge#public-preview-limitations)中所述，我们目前仅支持 Metric View v0.1 的元数据。
 
 Semantic Bridge 包含一个用于表示 Databricks Metric View 的对象模型。
 这使你可以通过 C# Script 以编程方式处理 Metric View，类似于通过 TOMWrapper 操作 Tabular 模型。
