@@ -2,7 +2,7 @@
 uid: semantic-bridge
 title: Semantic Bridge
 author: Greg Baldini
-updated: 2025-01-23
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,7 +24,7 @@ SUMMARY: Overview of the Semantic Bridge feature - a multi-platform semantic mod
 -->
 
 > [!NOTE]
-> The Semantic Bridge as released in 3.25.0 is an MVP feature. It has limitations as documented below, and the API and feature surface area are subject to change.
+> The Semantic Bridge as released in 3.25.0 is in public preview. It has limitations as documented below, and the API and feature surface area are subject to change.
 
 The Semantic Bridge is a semantic model compiler, with the capability to translate the structure and expressions of a semantic model from one platform to another.
 This allows you to reuse business logic on multiple data platforms, supporting end users and meeting them where they consume the data.
@@ -119,12 +119,12 @@ Specifically, you can
 - import a Metric View to Tabular with [`SemanticBridge.MetricView.ImportToTabularFromFile`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabularFromFile_System_String_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), which does the exact same as the GUI shown above, or [`SemanticBridge.MetricView.ImportToTabular`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabular_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), which is similar, but operates on the currently loaded Metric View, rather than reading one from disk.
 
 
-<a name="mvp-limitations"></a>
-## MVP Limitations
+<a name="public-preview-limitations"></a>
+## Public Preview Limitations
 
 ### Supported platforms
 
-In the MVP release, we support translations from a Databricks Metric View to a Tabular model.
+In the public preview, we support translations from a Databricks Metric View to a Tabular model.
 Specifically we support the following surface area of a Databricks Metric View:
 
 - v0.1 Metric View properties:
@@ -136,7 +136,7 @@ Specifically we support the following surface area of a Databricks Metric View:
 	- unsupported:
 		- `filter`: a SQL filter expression for the Metric View
 
-All v1.1 metadata is not supported in the MVP.
+All v1.1 metadata is not supported in the public preview.
 Any v1.1 metadata is silently ignored upon deserialization of a Metric View, so it will not be visible in a C# script and it will not affect the translation to Tabular in any way.
 
 > [!WARNING]
@@ -162,7 +162,7 @@ Metric Views provide a structured layer on top of SQL expressions, and so part o
 
 ### Connectivity
 
-The MVP does not connect to any platforms besides Tabular, but works entirely with local files.
+The public preview does not connect to any platforms besides Tabular, but works entirely with local files.
 You must create your Metric View YAML on your own and then put it where Tabular Editor can see it.
 
 ### C# API

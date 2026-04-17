@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI Assistant
 author: Morten Lønskov
-updated: 2026-04-15
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -32,7 +32,7 @@ The AI Assistant uses a bring-your-own-key model. You provide an API key from on
 ## Getting Started
 
 1. Open **Tools > Preferences > AI Assistant**
-2. Select your AI provider and enter your API key
+2. Select your AI provider — on a fresh install this defaults to **None (AI disabled)** — then enter your API key
 3. Open the AI Assistant panel from **View > AI Assistant**
 4. Type a message and press **Enter** to start a conversation
 
@@ -44,12 +44,12 @@ The AI Assistant uses a bring-your-own-key model. You provide an API key from on
 
 ## Supported Providers
 
-Configure your AI provider under **Tools > Preferences > AI Assistant > AI Provider**. Select a provider from the dropdown, enter your API key and optionally override the default model name.
+Configure your AI provider under **Tools > Preferences > AI Assistant > AI Provider**. Select a provider from the dropdown — the default is **None (AI disabled)** until you configure one — enter your API key, and optionally override the default model. For OpenAI and Anthropic, the **Model name** field is a combo box pre-populated with known models; you can also type a custom model name.
 
 | Provider | Default Model | Configuration Required |
 | -- | -- | -- |
-| OpenAI | gpt-4o | API key. Optional Organization ID and Project ID |
-| Anthropic | claude-sonnet-4-6 | API key |
+| OpenAI | gpt-4o | API key. Optional base URL, Organization ID and Project ID |
+| Anthropic | claude-sonnet-4-6 | API key. Optional base URL |
 | Azure OpenAI | Deployment-dependent | API key, endpoint URL and deployment name |
 | Custom (OpenAI-compatible) | User-specified | API key and custom endpoint URL |
 
@@ -98,6 +98,9 @@ See [Create and deploy an Azure OpenAI resource](https://learn.microsoft.com/azu
 
 For 403 errors, SSL failures or "DeploymentNotFound" responses, see @azure-openai-connection-errors.
 
+> [!NOTE]
+> The **Azure OpenAI** provider is for classic Azure OpenAI resources that use the `api-version` query parameter. If you are using the new **Microsoft Foundry**, see [Using Microsoft Foundry](#using-microsoft-foundry) below.
+
 ### Custom (OpenAI-compatible)
 
 The Custom provider option supports local or organizational LLMs that expose an OpenAI-compatible API endpoint. Enter your API key and the custom endpoint URL. This allows you to keep all data within your own infrastructure for data privacy or compliance requirements.
@@ -144,6 +147,41 @@ These tools can run on a developer's workstation for individual use, or be deplo
 > [!TIP]
 > We recommend a model with a *minimum* of 30 billion parameters but ideally at least 100 billion parameters. For example, the Qwen3.5-122B-A10B model performed well in our internal testing.
 
+### Using Microsoft Foundry
+
+[Microsoft Foundry](https://ai.azure.com) (formerly Azure AI Foundry) lets you deploy OpenAI and Anthropic models in your Azure environment. These models are accessed through the **OpenAI** or **Anthropic** provider in Tabular Editor — not the **Azure OpenAI** provider, which is for classic Azure OpenAI resources.
+
+> [!IMPORTANT]
+> Do not use the **Azure OpenAI** provider for Microsoft Foundry models. The **Azure OpenAI** provider is only compatible with classic Azure OpenAI resources.
+
+#### OpenAI models on Microsoft Foundry
+
+To use an OpenAI model (such as GPT-4o or GPT-5.4-mini) deployed in Microsoft Foundry:
+
+1. In Tabular Editor, go to **Tools > Preferences > AI Assistant > AI Provider**
+2. Set **Choose provider** to **OpenAI**
+3. Set **Base URL** to your Foundry resource endpoint with `/openai/v1` appended. The URL follows one of these formats:
+   - `https://your-resource.services.ai.azure.com/openai/v1`
+   - `https://your-resource.openai.azure.com/openai/v1`
+4. Enter your Foundry **API Key**
+5. Set **Model name** to your deployment name (e.g. `gpt-5.4-mini`)
+
+> [!NOTE]
+> The base URL is not shown directly in the Microsoft Foundry portal. The portal shows a **Target URI** that includes the full API path (e.g. `https://your-resource.services.ai.azure.com/api/projects/YourProject/openai/v1/responses`). For the base URL, use just `https://your-resource.services.ai.azure.com/openai/v1`.
+
+#### Anthropic models on Microsoft Foundry
+
+To use an Anthropic model (such as Claude Sonnet 4.6) deployed in Microsoft Foundry:
+
+1. In Tabular Editor, go to **Tools > Preferences > AI Assistant > AI Provider**
+2. Set **Choose provider** to **Anthropic**
+3. Set **Base URL** to your Foundry resource endpoint with `/anthropic` appended, e.g. `https://your-resource.services.ai.azure.com/anthropic`
+4. Enter your Foundry **API Key**
+5. Set **Model name** to the model identifier (e.g. `claude-sonnet-4-6`)
+
+> [!NOTE]
+> The portal shows a **Target URI** like `https://your-resource.services.ai.azure.com/anthropic/v1/messages`. For the base URL, use the part up to and including `/anthropic` only.
+
 ## Capabilities
 
 The AI Assistant has access to your model context and can perform the following actions:
@@ -156,6 +194,9 @@ The AI Assistant has access to your model context and can perform the following 
 - **Document access**: Read and modify open documents such as DAX scripts and DAX queries
 - **Knowledge base search**: Search the embedded Tabular Editor documentation for answers
 - **UI navigation**: Generate `te3://` action links that open specific Tabular Editor dialogs and features
+
+> [!NOTE]
+> Tools that require an active database connection — including DAX query execution and VertiPaq Analyzer statistics — are automatically hidden when working with a model file (for example a `.bim` or `.tmdl` folder) that is not connected to Analysis Services or Power BI. The assistant will still write DAX queries for you, but the **Execute** button on DAX query artifacts is disabled until a connection is established. VertiPaq Analyzer statistics remain available if they were previously loaded from a `.vpax` file.
 
 ## Conversations
 
@@ -314,7 +355,16 @@ Configure AI Assistant display and behavior options under **Tools > Preferences 
 Each message to the AI Assistant consumes input tokens. The token cost of a single message depends on what context is included:
 
 - **System prompt and custom instructions**: Sent with every message. Typically 5,000 to 15,000 tokens depending on which custom instructions are active.
-- **Model metadata**: When the assistant needs to understand your model, it retrieves metadata through tool calls. A compact summary includes table names, column names, measure names, relationships and descriptions. A full metadata retrieval includes the complete model definition. For large models this can consume tens of thousands of tokens.
+- **Model metadata**: When the assistant needs to understand your model, it retrieves metadata through tool calls. To stay within provider rate limits on large models, the assistant uses a progressive-disclosure approach — it first fetches a lightweight overview (table and measure names, relationships), then searches for relevant objects by name, description or DAX expression, and only drills into full details for the specific tables or objects that the question requires. Tool results that would otherwise be very large are truncated with guidance on how the assistant can retrieve the remaining data.
+
+### Token Counter
+
+The token counter in the bottom-right of the chat input area shows cumulative token usage for the current conversation, including input from tool round-trips. Hover over the counter to see a breakdown:
+
+- **Input** — full-price input tokens for the conversation, with a sub-line showing how many of those were served from the provider's prompt cache
+- **Cache write** — tokens written to the prompt cache (provider-dependent)
+- **Output** — tokens generated by the model
+- **Context pressure** — percentage of the context window currently in use; also visualized by the slider bar next to the counter
 
 ### Reducing Token Usage
 
