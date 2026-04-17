@@ -28,7 +28,7 @@ Hay un marco de validación integrado en el Semantic Bridge que permite a los us
 Esta validación se comparte en todas las etapas de la canalización de traducción, desde la deserialización inicial del Metric View hasta la detección de errores al traducir a DAX y Tabular.
 
 > [!NOTE]
-> The Semantic Bridge is currently in public preview, so interfaces may change as the feature matures.
+> El Semantic Bridge está actualmente en versión preliminar pública, por lo que las interfaces pueden cambiar a medida que la funcionalidad madura.
 > Por ahora, la única interfaz para la validación es a través de scripts de C#.
 
 ## Proceso de validación
