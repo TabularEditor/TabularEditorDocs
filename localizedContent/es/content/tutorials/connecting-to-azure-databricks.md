@@ -34,22 +34,22 @@ Antes de empezar, asegúrate de tener lo siguiente:
 > [!IMPORTANT]
 > Databricks ha lanzado un nuevo controlador ODBC que sustituye al Simba Spark ODBC Driver heredado. Te recomendamos instalar el nuevo [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download). Tabular Editor 3.26.0 y versiones posteriores admiten ambos controladores, pero el nuevo controlador es la opción recomendada en adelante. El controlador heredado de Simba está disponible en el [archivo de controladores ODBC de Databricks](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc).
 
-## Connector Implementation
+## Implementación del conector
 
-Tabular Editor uses the Power Query `Databricks.Catalogs()` function to connect to Databricks. This function supports two connector implementations:
+Tabular Editor usa la función `Databricks.Catalogs()` de Power Query para conectarse a Databricks. Esta función admite dos implementaciones del conector:
 
-- **Implementation 2.0 (ADBC):** Uses the [Arrow Database Connectivity](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) driver. This is the default in Tabular Editor 3.26.1 and later, and matches the default used by Power BI Desktop. Newer Databricks workspaces require this implementation.
-- **Implementation 1.0 (legacy):** The original connector implementation. Still works on older Databricks workspaces but fails on newer ones with an empty catalog error.
+- **Implementación 2,0 (ADBC):** Usa el controlador [Arrow Database Connectivity](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview). Es la opción predeterminada en Tabular Editor 3.26.1 y versiones posteriores, y coincide con la opción predeterminada de Power BI Desktop. Los Workspaces de Databricks más recientes requieren esta implementación.
+- **Implementación 1,0 (heredada):** La implementación original del conector. Sigue funcionando en Workspaces antiguos de Databricks, pero falla en los más recientes con un error de catálogo vacío.
 
 > [!NOTE]
-> The ADBC driver does not have to be installed on the machine where Tabular Editor is running. Only the Databricks ODBC Driver is required.
+> No es necesario instalar el controlador ADBC en la máquina donde se ejecuta Tabular Editor. Solo se requiere el controlador ODBC de Databricks.
 
 > [!IMPORTANT]
-> If you have existing M-queries that were created with Tabular Editor 3.26.0 or earlier, they use the legacy implementation (`null` as the third parameter of `Databricks.Catalogs()`). If you encounter refresh errors on a newer Databricks workspace, update these queries to use Implementation 2.0. See [Databricks Refresh Fails with Empty Catalog Error](xref:databricks-refresh-empty-catalog) for step-by-step instructions.
+> Si tienes consultas M existentes creadas con Tabular Editor 3.26.0 o una versión anterior, usan la implementación heredada (`null` como tercer parámetro de `Databricks.Catalogs()`). Si encuentras errores de actualización en un Workspace de Databricks más reciente, actualiza estas consultas para que usen la implementación 2,0. Consulta [Error de actualización de Databricks con catálogo vacío](xref:databricks-refresh-empty-catalog) para ver instrucciones paso a paso.
 
 ## Métodos de autenticación
 
-When connecting to Azure Databricks, you have several authentication methods:
+Al conectarte a Azure Databricks, puedes usar varios métodos de autenticación:
 
 ### 1. Autenticación de Microsoft Entra ID (antes Azure AD)
 
@@ -156,27 +156,27 @@ Si la integración con Microsoft Entra ID no está disponible o si prefieres la 
    - Pega tu token en el campo **Token**
    - En HTTP Path, especifica la ruta a tu clúster de Databricks (p. ej., `/sql/1.0/warehouses/<warehouse-id>`)
 
-### 3) OAuth Machine-to-Machine (M2M) Authentication
+### 3) Autenticación OAuth de máquina a máquina (M2M)
 
-Starting with Tabular Editor 3.26.1, you can authenticate with a Databricks service principal using the OAuth Machine-to-Machine (M2M) flow. This is useful for unattended scenarios — such as scheduled refresh or CI/CD pipelines — where you don't want the connection bound to an individual user's credentials. OAuth (M2M) is available across all Databricks clouds (Azure, AWS, and GCP).
+A partir de Tabular Editor 3.26.1, puedes autenticarte con una entidad de servicio de Databricks mediante el flujo OAuth de máquina a máquina (M2M). Esto resulta útil en escenarios desatendidos, como actualizaciones programadas o canalizaciones de CI/CD, donde no quieres que la conexión quede vinculada a las credenciales de un usuario concreto. OAuth (M2M) está disponible en todas las nubes de Databricks (Azure, AWS y GCP).
 
 #### Requisitos previos
 
-- A Databricks service principal with **Can Use** permissions on the target SQL warehouse
-- An OAuth **Client ID** and **Client Secret** for the service principal, generated in the Databricks account console or workspace settings
+- Una entidad de servicio de Databricks con permisos **Can Use** en el SQL Warehouse de destino
+- Un **Client ID** y un **Client Secret** de OAuth para la entidad de servicio, generados en la consola de la cuenta de Databricks o en la configuración del Workspace
 
-#### Steps for OAuth (M2M) Authentication:
+#### Pasos para la autenticación OAuth (M2M):
 
-1. In Tabular Editor 3, go to **Model** > **Import tables...**
-2. Select **New Source** > **Databricks**
-3. In the connection dialog:
-   - Enter your Databricks workspace URL
-   - Select **OAuth (M2M)** as the authentication method
-   - Enter the service principal's **Client ID** and **Client Secret**
-   - For HTTP Path, specify the path to your SQL warehouse (e.g. `/sql/1.0/warehouses/<warehouse-id>`)
+1. En Tabular Editor 3, ve a **Model** > **Import tables...**
+2. Selecciona **New Source** > **Databricks**
+3. En el cuadro de diálogo de conexión:
+   - Escribe la URL de tu Workspace de Databricks
+   - Selecciona **OAuth (M2M)** como método de autenticación
+   - Introduce el **Client ID** y el **Client Secret** del principal de servicio
+   - En HTTP Path, especifica la ruta a tu SQL Warehouse (p. ej., `/sql/1.0/warehouses/<warehouse-id>`)
 
 > [!NOTE]
-> The Databricks ODBC driver handles OAuth token acquisition and refresh automatically — no additional configuration is required on the Tabular Editor side.
+> El controlador ODBC de Databricks gestiona automáticamente la obtención y la renovación del token de OAuth; no se requiere ninguna configuración adicional en Tabular Editor.
 
 ## Cómo encontrar tu HTTP Path
 
@@ -206,15 +206,15 @@ Una vez que hayas configurado la conexión:
 Si tienes problemas para conectarte a Azure Databricks:
 
 - Comprueba que la URL de tu Workspace sea correcta y accesible
-- Ensure your Personal Access Token has not expired (if using PAT authentication)
+- Asegúrate de que tu Personal Access Token no haya caducado (si usas la autenticación PAT)
 - Comprueba que tu cuenta de usuario tiene los permisos necesarios en Databricks
 - Comprueba que la ruta HTTP apunte a un SQL Warehouse activo
 - Asegúrate de que tu red permita conexiones al servicio de Databricks
 
-### Databricks-specific troubleshooting guides
+### Guías de solución de problemas específicas de Databricks
 
-- [Databricks Refresh Fails with Empty Catalog Error](xref:databricks-refresh-empty-catalog) -- refresh fails after importing from a newer Databricks workspace
-- [Databricks Column Comment Length Error](xref:databricks-column-comments-length) -- import fails when column comments exceed 512 characters
+- [La actualización de Databricks falla con el error de catálogo vacío](xref:databricks-refresh-empty-catalog) -- la actualización falla tras importar desde un Workspace de Databricks más reciente
+- [Error de longitud en los comentarios de columnas de Databricks](xref:databricks-column-comments-length) -- la importación falla cuando los comentarios de las columnas superan los 512 caracteres
 
 ### Solución de problemas de autenticación de Microsoft Entra ID
 
