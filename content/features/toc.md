@@ -63,6 +63,15 @@
 
 # Command Line and Integration
 ## @command-line-options
+## [Tabular Editor CLI (Limited PuPr)](xref:te-cli)
+### @te-cli-install
+### @te-cli-auth
+### @te-cli-commands
+### @te-cli-config
+### @te-cli-interactive
+### @te-cli-automation
+### @te-cli-cicd
+### @te-cli-migrate
 
 # Semantic Bridge for cross-platform translations
 ## @semantic-bridge
