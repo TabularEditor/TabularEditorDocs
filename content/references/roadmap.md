@@ -2,7 +2,7 @@
 uid: roadmap
 title: Roadmap
 author: Morten Lønskov
-updated: 2025-10-29
+updated: 2026-04-21
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,10 +22,10 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 - **Localization improvements**: Expanding language support and refining existing translations
 - **Power Query (M) Auto-Formatting**: Advanced formatting capabilities for M expressions
 - **Graphical Model Comparison**: See the changes that are applied to 
+- **AI Assistant enhancements**: Expanding capabilities beyond the public preview
 
 ## Up Next
 
-- AI Assistant in Tabular Editor
 - .NET 10 Support
 - Git integration
 - Power Query (M) Editing Enhancements
@@ -46,6 +46,12 @@ Below is an overview of major new features to be shipped with Tabular Editor 3 u
 For detailed information about each release, see the [full release history](xref:release-history).
 
 ## Shipped in 2026
+
+✅ **AI Assistant (Public Preview)** - In-product AI Assistant for authoring and exploring semantic models (v3.26.0)
+
+✅ **Databricks connectivity improvements** - Support for the new Databricks ODBC Driver, OAuth (OIDC) authentication, and advanced connection options.
+
+✅ [**Run C# script with preview**](xref:csharp-scripts#run-c-scripts-with-preview) - Review all model changes made by a script before committing them, with the option to revert (v3.26.0)
 
 ✅ [**Localization**](xref:references-application-language) - Chinese, Spanish (Preview), Japanese, German, and French (Experimental) language support (v3.25.0)
 

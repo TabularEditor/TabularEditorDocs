@@ -30,7 +30,6 @@ You can use the DAX Package Manager with any model that supports DAX User-Define
 
 > [!WARNING]
 > DAX User-Defined Functions is currently (as of November 2025) a preview feature of Power BI. Consider their [limitations](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions#considerations-and-limitations) before use.
----
 
 ![DAX Package Manager](~/content/assets/images/dax-package-manager-overview.png)
 
