@@ -13,7 +13,7 @@ applies_to:
 
 # Dynamic LINQ 与 C# LINQ 的区别
 
-C# Script 使用标准的 C# LINQ，并使用 Lambda 表达式。 Best Practice Analyzer (BPA) 规则和 Explorer 树筛选器使用 [Dynamic LINQ](https://dynamic-linq.net/expression-language)，这是一种基于字符串的表达式语言，其语法与 C# LINQ 不同。 本文提供两者之间的对照翻译指南。
+C# Script 使用标准的 C# LINQ，并使用 Lambda 表达式。 C# Script 使用标准的 C# LINQ，并使用 Lambda 表达式。 Best Practice Analyzer (BPA) 规则和 Explorer 树筛选器使用 [Dynamic LINQ](https://dynamic-linq.net/expression-language)，这是一种基于字符串的表达式语言，其语法与 C# LINQ 不同。 本文提供两者之间的对照翻译指南。 本文提供两者之间的对照翻译指南。
 
 ## 各自的使用场景
 
@@ -28,12 +28,12 @@ C# Script 使用标准的 C# LINQ，并使用 Lambda 表达式。 Best Practice 
 
 ## 语法对比
 
-在 Dynamic LINQ 中，对象是隐式的——没有像 `m.` 或 `c.` 这样的 lambda 参数。 在 BPA 中，上下文由 **适用于** 范围设置决定，它会确定表达式是针对哪种对象类型求值的。
+在 Dynamic LINQ 中，对象是隐式的——没有像 `m.` 或 `c.` 这样的 lambda 参数。 在 BPA 中，上下文由 **适用于** 范围设置决定，它会确定表达式是针对哪种对象类型求值的。 在 BPA 中，上下文由 **适用于** 范围设置决定，它会确定表达式是针对哪种对象类型求值的。
 
 | 概念             | C# LINQ（脚本）                                | Dynamic LINQ（BPA / 筛选器）                  |
 | -------------- | ------------------------------------------ | ---------------------------------------- |
 | 逻辑与            | `&&`                                       | `and`                                    |
-| 逻辑或            | `\\|\\|`                                 | `or`                                     |
+| 逻辑或            | \`\\                                     | `or`                                     |
 | 逻辑非            | `!`                                        | `not`                                    |
 | 等于             | `==`                                       | `=`                                      |
 | 不等于            | `!=`                                       | `!=` 或 `<>`                              |
@@ -47,7 +47,7 @@ C# Script 使用标准的 C# LINQ，并使用 Lambda 表达式。 Best Practice 
 
 ## 枚举值比较
 
-C# 使用强类型的枚举值。 Dynamic LINQ 使用字符串来表示。
+C# 使用强类型的枚举值。 C# 使用强类型的枚举值。 Dynamic LINQ 使用字符串来表示。
 
 | C# LINQ                                                             | Dynamic LINQ                                |
 | ------------------------------------------------------------------- | ------------------------------------------- |
@@ -58,7 +58,7 @@ C# 使用强类型的枚举值。 Dynamic LINQ 使用字符串来表示。
 
 ## Lambda 表达式与隐式上下文
 
-C# LINQ 使用显式的 lambda 参数。 Dynamic LINQ 会在隐式的 `it` 上下文对象中对属性求值。
+C# LINQ 使用显式的 lambda 参数。 Dynamic LINQ 会在隐式的 `it` 上下文对象中对属性求值。 Dynamic LINQ 会在隐式的 `it` 上下文对象中对属性求值。
 
 ```csharp
 // C# LINQ: explicit lambda parameter
@@ -86,7 +86,7 @@ Table.IsHidden
 
 ## 集合方法
 
-C# LINQ 在集合方法中使用 lambda 表达式。 Dynamic LINQ 在集合方法中使用隐式上下文，并用 `outerIt` 引用父对象。
+C# LINQ 在集合方法中使用 lambda 表达式。 Dynamic LINQ 在集合方法中使用隐式上下文，并用 `outerIt` 引用父对象。 Dynamic LINQ 在集合方法中使用隐式上下文，并用 `outerIt` 引用父对象。
 
 ```csharp
 // C# LINQ: count columns with no description
@@ -100,14 +100,14 @@ Columns.Count(Description = "") > 5
 
 ### `outerIt` 关键字
 
-在 Dynamic LINQ 的嵌套集合方法中，`it` 指的是内层对象（例如列）。 使用 `outerIt` 引用外层对象（例如表）。
+在 Dynamic LINQ 的嵌套集合方法中，`it` 指的是内层对象（例如列）。 使用 `outerIt` 引用外层对象（例如表）。 使用 `outerIt` 引用外层对象（例如表）。
 
 ```
 // BPA rule on Tables: find tables where any column name matches the table name
 Columns.Any(Name = outerIt.Name)
 ```
 
-在 C# 中，外层 lambda 参数 `t` 在内层 lambda 的整个函数体中始终都在作用域内。 内层 lambda `c => c.Name == t.Name` 可以直接引用 `t`，因为它会被闭包捕获。
+在 C# 中，外层 lambda 参数 `t` 在内层 lambda 的整个函数体中始终都在作用域内。 在 C# 中，外层 lambda 参数 `t` 在内层 lambda 的整个函数体中始终都在作用域内。 内层 lambda `c => c.Name == t.Name` 可以直接引用 `t`，因为它会被闭包捕获。
 
 ```csharp
 // C# equivalent -- t is accessible inside the inner lambda via closure
@@ -116,7 +116,7 @@ Model.Tables.Where(t => t.Columns.Any(c => c.Name == t.Name));
 
 ## 类型筛选
 
-C# 使用 `OfType<T>()` 或 `is`。 在 BPA 中，规则的 **适用于** 范围负责进行类型筛选。 无需在表达式本身中进行类型检查。
+C# 使用 `OfType<T>()` 或 `is`。 在 BPA 中，规则的 **适用于** 范围负责进行类型筛选。 无需在表达式本身中进行类型检查。 在 BPA 中，规则的 **适用于** 范围负责进行类型筛选。 无需在表达式本身中进行类型检查。
 
 | C# LINQ                                        | Dynamic LINQ 写法           |
 | ---------------------------------------------- | ------------------------- |
@@ -173,7 +173,7 @@ InPerspective["Sales"]
 
 在修复表达式中，使用 `it.` 作为赋值目标。 `it` 指的是违反该规则的那个特定对象——也就是 BPA 结果列表中高亮显示的同一个对象。
 
-例如，如果有一条 BPA 规则，其表达式为 `IsHidden and String.IsNullOrWhitespace(Description)`，并应用于 **度量值**，则每个匹配的度量值都会显示在 BPA 结果中。 应用修复时，`it` 指的就是那个特定的度量值：
+例如，如果有一条 BPA 规则，其表达式为 `IsHidden and String.IsNullOrWhitespace(Description)`，并应用于 **度量值**，则每个匹配的度量值都会显示在 BPA 结果中。 应用修复时，`it` 指的就是那个特定的度量值： 应用修复时，`it` 指的就是那个特定的度量值：
 
 ```
 // Set the description on the violating measure
