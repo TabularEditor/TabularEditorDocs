@@ -19,7 +19,7 @@ applies_to:
 
 # 更改兼容模式
 
-模型的 **兼容模式** 决定模型面向的平台。 该属性决定：
+模型的 **兼容模式** 决定模型面向的平台。 该属性决定： 该属性决定：
 
 - 可用的 Tabular Object Model (TOM) 对象和属性
 - Tabular Editor 将应用哪些版本限制
@@ -32,14 +32,15 @@ applies_to:
 
 | 值                  | 含义                                                                                                                                                                                                                                                                                                |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Unknown`          | 未指定具体模式。 当未显式设置模式时的默认值。 AS 客户端库会根据所使用的 TOM 功能自动检测实际模式（例如，是否包含任何 Power BI 特有功能）。                                                                                                                                                                                                                   |
+| `Unknown`          | 未指定具体模式。 当未显式设置模式时的默认值。 未指定具体模式。 当未显式设置模式时的默认值。 AS 客户端库会根据所使用的 TOM 功能自动检测实际模式（例如，是否包含任何 Power BI 特有功能）。                                                                                                                                                                                           |
 | `AnalysisServices` | 模型以 SQL Server Analysis Services 或 Azure Analysis Services 为目标。                                                                                                                                                                                                                                   |
 | `PowerBI`          | 模型以 Power BI（Desktop、Premium Per User、Premium Capacity、Fabric）为目标。 某些 TOM 属性仅在此模式下可用。 有关详细信息，请参阅 [Microsoft.AnalysisServices.Tabular 命名空间参考](https://learn.microsoft.com/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet) 中各属性的“备注”部分。 |
-| `Excel`            | 该模型源自 Excel Power Pivot Data model。 Tabular Editor 不支持 Power Pivot 模型。                                                                                                                                                                                                                            |
+| `Excel`            | 该模型源自 Excel Power Pivot Data model。 该模型源自 Excel Power Pivot Data model。 Tabular Editor 不支持 Power Pivot 模型。                                                                                                                                                                                        |
 
-Azure Analysis Services 和 SQL Server Analysis Services 仅支持 `AnalysisServices` 模式。 Power BI 和 Fabric 同时支持 `AnalysisServices` 和 `PowerBI` 模式。
+Azure Analysis Services 和 SQL Server Analysis Services 仅支持 `AnalysisServices` 模式。 Power BI 和 Fabric 同时支持 `AnalysisServices` 和 `PowerBI` 模式。 Power BI 和 Fabric 同时支持 `AnalysisServices` 和 `PowerBI` 模式。
 
 > [!IMPORTANT]
+> Tabular Editor 使用兼容模式来确定版本限制。 [!IMPORTANT]
 > Tabular Editor 使用兼容模式来确定版本限制。 即使将模型部署到 Power BI，只要模型设置为 `AnalysisServices` 模式，透视和多个分区等功能仍会触发“仅企业版可用”的限制。
 
 ## 何时更改兼容模式
@@ -63,5 +64,5 @@ Azure Analysis Services 和 SQL Server Analysis Services 仅支持 `AnalysisServ
 ![更改兼容模式](~/content/assets/images/how-to/change-compatibility-mode.png)
 
 > [!NOTE]
-> 更改兼容模式会影响哪些 TOM 属性可用，以及模型的验证方式。 保存前，先确认部署目标与所选模式一致。
+> 更改兼容模式会影响哪些 TOM 属性可用，以及模型的验证方式。 保存前，先确认部署目标与所选模式一致。 保存前，先确认部署目标与所选模式一致。
 
