@@ -13,10 +13,10 @@ applies_to:
 
 # 如何在脚本中构建自定义 WinForms 对话框
 
-对于超出 `SelectTable()`、`SelectMeasure()` 以及其他内置辅助函数所能覆盖的输入场景，你可以直接在 C# Script 中构建自定义 WinForms 对话框。 使用 `TableLayoutPanel` 和 `FlowLayoutPanel` 并启用 `AutoSize`，以便在不同 DPI 设置下正确缩放。
+对于超出 `SelectTable()`、`SelectMeasure()` 以及其他内置辅助函数所能覆盖的输入场景，你可以直接在 C# Script 中构建自定义 WinForms 对话框。 使用 `TableLayoutPanel` 和 `FlowLayoutPanel` 并启用 `AutoSize`，以便在不同 DPI 设置下正确缩放。 使用 `TableLayoutPanel` 和 `FlowLayoutPanel` 并启用 `AutoSize`，以便在不同 DPI 设置下正确缩放。
 
 > [!WARNING]
-> 不要在自定义对话框中使用 `Location = new Point(x, y)` 进行手动像素定位。 这种做法在非标准 DPI 设置下会失效。 改用布局面板。
+> 不要在自定义对话框中使用 `Location = new Point(x, y)` 进行手动像素定位。 这种做法在非标准 DPI 设置下会失效。 改用布局面板。 这种做法在非标准 DPI 设置下会失效。 改用布局面板。
 
 ## 简单提示对话框
 
@@ -72,7 +72,7 @@ using (var form = new Form())
 
 ## 带验证的多字段表单
 
-将该提示对话框模式扩展到多个字段。 使用更改事件，只有当所有必填字段都有内容时才启用“确定”按钮。
+将该提示对话框模式扩展到多个字段。 将该提示对话框模式扩展到多个字段。 使用更改事件，只有当所有必填字段都有内容时才启用“确定”按钮。
 
 下面的代码块结构对应你编写对话框脚本时应遵循的顺序：窗体设置、输入字段、按钮、验证和结果处理。
 
