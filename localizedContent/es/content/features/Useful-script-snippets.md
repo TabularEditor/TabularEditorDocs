@@ -2,6 +2,7 @@
 uid: useful-script-snippets
 title: Fragmentos de script útiles
 author: Daniel Otykier
+updated: 2026-04-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,6 +22,9 @@ applies_to:
 Aquí tienes una colección de pequeños fragmentos de script para empezar a usar la [funcionalidad de scripting avanzado](/Advanced-Scripting) de Tabular Editor. Muchos de estos scripts son útiles para guardarlos como [Acciones personalizadas](/Custom-Actions), de modo que puedas reutilizarlos fácilmente desde el menú contextual.
 
 Además, asegúrate de echar un vistazo a nuestra biblioteca de scripts @csharp-script-library para ver más ejemplos reales de lo que puedes hacer con las capacidades de scripting de Tabular Editor.
+
+> [!TIP]
+> Si buscas material de referencia estructurado y organizado por patrones sobre C# Script y Dynamic LINQ, consulta la serie de guías prácticas [Patrones de scripting](/how-tos/scripting-navigate-tom-hierarchy). Para consultar la API completa del wrapper de TOM, ve a @api-index.
 
 ***
 

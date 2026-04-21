@@ -2,7 +2,7 @@
 uid: semantic-bridge
 title: 语义桥
 author: Greg Baldini
-updated: 2025-01-23
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ SUMMARY: Overview of the Semantic Bridge feature - a multi-platform semantic mod
 -->
 
 > [!NOTE]
-> 3.25.0 中发布的语义桥为 MVP 功能。 它存在下文所述的限制，且 API 和功能范围可能会发生变化。
+> 在 3.25.0 版本中发布的 Semantic Bridge 目前处于公共预览阶段。 它存在下文所述的限制，且 API 和功能范围可能会发生变化。
 
 语义桥是一个语义模型编译器，能够将语义模型的结构和表达式从一个平台转换到另一个平台。
 这样你就能在多个数据平台上复用业务逻辑，支持终端用户，并在他们使用数据的场景中为其提供支持。
@@ -120,13 +120,13 @@ SemanticBridge.MetricView.ImportDiagnostics.Output();
   - 你可以使用 [`SemanticBridge.MetricView.MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___) 及其更简化的版本创建自定义验证规则
 - 使用 [`SemanticBridge.MetricView.ImportToTabularFromFile`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabularFromFile_System_String_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_) 将 Metric View 导入到 Tabular，其作用与上方所示 GUI 完全相同；或使用 [`SemanticBridge.MetricView.ImportToTabular`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabular_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_)，功能类似，但它操作的是当前已加载的 Metric View，而不是从磁盘读取。
 
-<a name="mvp-limitations"></a>
+<a name="public-preview-limitations"></a>
 
-## MVP 限制
+## 公开预览限制
 
 ### 支持的平台
 
-在 MVP 版本中，我们支持将 Databricks Metric View 中的翻译迁移到 Tabular 模型。
+在公共预览版中，我们支持将 Databricks Metric View 的翻译转换到 Tabular 模型。
 具体来说，我们支持 Databricks Metric View 的以下内容：
 
 - v0.1 Metric View 属性：
@@ -138,7 +138,7 @@ SemanticBridge.MetricView.ImportDiagnostics.Output();
   - 不支持：
     - `filter`：用于 Metric View 的 SQL 筛选表达式
 
-MVP 不支持任何 v1.1 元数据。
+公开预览版不支持任何 v1.1 元数据。
 在反序列化 Metric View 时，任何 v1.1 元数据都会被静默忽略，因此在 C# Script 中不可见，也不会以任何方式影响翻译为 Tabular。
 
 > [!WARNING]
@@ -164,7 +164,7 @@ Metric View 在 SQL 表达式之上提供了一个结构化层，因此翻译 Me
 
 ### 连接
 
-MVP 不会连接除 Tabular 之外的任何平台，而是完全基于本地文件运行。
+公开预览版不会连接除 Tabular 之外的任何平台，而是完全基于本地文件运行。
 你必须自行创建 Metric View YAML，然后将其放到 Tabular Editor 能够访问的位置。
 
 ### C# API

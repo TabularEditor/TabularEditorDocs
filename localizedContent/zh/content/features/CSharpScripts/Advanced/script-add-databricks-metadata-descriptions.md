@@ -2,7 +2,7 @@
 uid: script-add-databricks-metadata-descriptions
 title: 添加 Databricks 元数据说明
 author: Johnny Winter
-updated: 2025-09-04
+updated: 2026-04-08
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -18,9 +18,10 @@ applies_to:
 这个脚本是 Tabular Editor x Databricks 系列的一部分。 在 Unity Catalog 中，可以为表和列添加描述性注释。 此脚本可复用这些信息，自动补全语义模型中的表和列说明。 <br></br>
 
 > [!NOTE]
-> 这个脚本需要先安装 Simba Spark ODBC Driver（可从 https://www.databricks.com/spark/odbc-drivers-download 下载）
-> 每次运行脚本时，都会提示你输入 Databricks 个人访问令牌。 这是用于向 Databricks 进行身份验证所必需的。
-> 这个脚本使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此你可能需要和你的 Databricks 管理员再确认一下，确保你有权限查询这些表。 <br></br>
+> 此脚本需要 Databricks ODBC 驱动程序。 我们推荐新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)，它将取代旧版 Simba Spark ODBC Driver。 脚本会自动检测已安装的驱动程序，并据此使用相应驱动程序。
+
+每次运行脚本时，都会提示你输入 Databricks 个人访问令牌。 这是用于向 Databricks 进行身份验证所必需的。
+这个脚本使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此你可能需要和你的 Databricks 管理员再确认一下，确保你有权限查询这些表。 <br></br>
 
 ## 脚本
 
@@ -28,20 +29,21 @@ applies_to:
 
 ```csharp
 /*
- * 标题：添加 Databricks 元数据说明
+ * 标题：添加 Databricks 元数据描述
  * 作者：Johnny Winter, greyskullanalytics.com
  *
- * 运行这个脚本时，它会遍历当前选中的表，并向 Databricks 发送查询，检查每个表是否在 Unity Catalog 中定义了元数据说明。
- * 如果有说明，就会把它添加到语义模型的说明中。
+ * 这个脚本运行时，会遍历当前选中的表，并向 Databricks 发送查询，以检查每个表是否在 Unity Catalog 中定义了元数据描述。
+ * 如果存在描述，则会将其添加到语义模型的描述中。
  * 步骤 1：在模型中选择一个或多个表
  * 步骤 2：运行这个脚本
- * 步骤 3：在出现提示时输入你的 Databricks Personal Access Token
- * 步骤 4：脚本会连接到 Databricks，并在表和列存在说明时更新对应说明。 
- *          对于处理的每个表，都会显示一个消息框，指出已更新的说明数量。
- *          点击“OK”继续处理下一个表。
- * 备注：
- *  -   这个脚本需要先安装 Simba Spark ODBC Driver（可从 https://www.databricks.com/spark/odbc-drivers-download 下载）
- *  -   每次运行脚本时，都会提示你输入 Databricks Personal Access Token
+ * 步骤 3：根据提示输入 Databricks 个人访问令牌
+ * 步骤 4：脚本将连接到 Databricks，并在存在描述时更新表和列的描述。
+ *          对于处理的每个表，消息框都会显示已更新的描述数量。
+ *          点击“确定”继续处理下一个表。
+ * 说明：
+ *  -   这个脚本需要先安装 Databricks ODBC Driver（推荐）或旧版 Simba Spark ODBC Driver（下载地址：https://www.databricks.com/spark/odbc-drivers-download）
+ *  -   脚本会自动检测已安装的驱动程序
+ *  -   每次运行脚本时，都会提示用户输入 Databricks 个人访问令牌
  */
 #r "Microsoft.VisualBasic"
 using System;
@@ -52,7 +54,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using sysData = System.Data;
 
-//用于创建 Databricks PAT 令牌掩码输入框的代码
+//用于创建 Databricks PAT 掩码输入框的代码
 public partial class PasswordInputForm : Form
 {
     public string Password { get; private set; }
@@ -88,7 +90,7 @@ public partial class PasswordInputForm : Form
         passwordTextBox = new TextBox();
         passwordTextBox.Location = new System.Drawing.Point(12, 55);
         passwordTextBox.Size = new System.Drawing.Size(360, 20);
-        passwordTextBox.UseSystemPasswordChar = true; // 这会隐藏输入内容
+        passwordTextBox.UseSystemPasswordChar = true; //这会隐藏输入内容
         passwordTextBox.KeyPress += (s, e) =>
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -99,27 +101,27 @@ public partial class PasswordInputForm : Form
         };
         this.Controls.Add(passwordTextBox);
 
-        //OK按钮
+        //确定按钮
         okButton = new Button();
-        okButton.Text = "OK";
+        okButton.Text = "确定";
         okButton.Location = new System.Drawing.Point(216, 85);
         okButton.Size = new System.Drawing.Size(150, 50);
         okButton.Click += OkButton_Click;
         this.Controls.Add(okButton);
 
-        //Cancel按钮
+        //取消按钮
         cancelButton = new Button();
-        cancelButton.Text = "Cancel";
+        cancelButton.Text = "取消";
         cancelButton.Location = new System.Drawing.Point(297, 85);
         cancelButton.Size = new System.Drawing.Size(150, 50);
         cancelButton.Click += CancelButton_Click;
         this.Controls.Add(cancelButton);
 
-        //设置默认按钮和Cancel按钮
+        //设置默认按钮和取消按钮
         this.AcceptButton = okButton;
         this.CancelButton = cancelButton;
 
-        //窗体加载时将焦点置于文本框
+        //窗体加载时将焦点放到文本框
         this.Load += (s, e) => passwordTextBox.Focus();
     }
 
@@ -178,7 +180,7 @@ public static class MaskedInputHelper
             };
             var buttonOk = new Button()
             {
-                Text = "OK",
+                Text = "确定",
                 Size = new System.Drawing.Size(150, 50),
                 Left = 12,
                 Width = 150,
@@ -187,7 +189,7 @@ public static class MaskedInputHelper
             };
             var buttonCancel = new Button()
             {
-                Text = "Cancel",
+                Text = "取消",
                 Size = new System.Drawing.Size(150, 50),
                 Left = 175,
                 Width = 150,
@@ -235,7 +237,7 @@ public class PowerQueryMParser
     public static DatabricksConnectionInfo ParseMQuery(string mQuery)
     {
         if (string.IsNullOrWhiteSpace(mQuery))
-            throw new ArgumentException("M 查询不能为空或空字符串");
+            throw new ArgumentException("M 查询不能为 null 或空字符串");
 
         var connectionInfo = new DatabricksConnectionInfo();
 
@@ -263,7 +265,7 @@ public class PowerQueryMParser
 
     private static void ParseSourceLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        //匹配以下两种模式：
+        //用于匹配以下两种模式：
         // Source = DatabricksMultiCloud.Catalogs("hostname", "httppath", null),
         // Source = Databricks.Catalogs("hostname", "httppath", null),
         var sourcePattern =
@@ -285,7 +287,7 @@ public class PowerQueryMParser
 
     private static void ParseDatabaseLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        //匹配模式：Database = Source{[Name="databasename",Kind="Database"]}[Data],
+        //用于匹配：Database = Source{[Name="databasename",Kind="Database"]}[Data],
         var databasePattern =
             @"Database\s*=\s*Source\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Database""\s*\]\s*}\s*\[\s*Data\s*\]";
         var databaseMatch = Regex.Match(
@@ -302,7 +304,7 @@ public class PowerQueryMParser
 
     private static void ParseSchemaLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        //匹配模式：Schema = Database{[Name="schemaname",Kind="Schema"]}[Data],
+        //用于匹配：Schema = Database{[Name="schemaname",Kind="Schema"]}[Data],
         var schemaPattern =
             @"Schema\s*=\s*Database\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Schema""\s*\]\s*}\s*\[\s*Data\s*\]";
         var schemaMatch = Regex.Match(
@@ -319,7 +321,7 @@ public class PowerQueryMParser
 
     private static void ParseDataLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        //匹配模式：Data = Schema{[Name="tablename",Kind="Table"]}[Data]
+        //用于匹配：Data = Schema{[Name="tablename",Kind="Table"]}[Data]
         var dataPattern =
             @"Data\s*=\s*Schema\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Table""\s*\]\s*}\s*\[\s*Data\s*\]";
         var dataMatch = Regex.Match(
@@ -340,53 +342,84 @@ public class PowerQueryMParser
 
 
 
-//检查你是否已选择表
+//检查用户是否已选择表
 if (Selected.Tables.Count == 0)
 {
-    //切换“正在运行宏”指示器
+    //切换“Running Macro”旋转提示
     ScriptHelper.WaitFormVisible = false;
-    Interaction.MsgBox("请选择一个或多个表", MsgBoxStyle.Critical, "需要选择表");
+    Interaction.MsgBox("请选择一个或多个表", MsgBoxStyle.Critical, "需要表");
     return;
 }
 
-//提示输入Personal Access Token - 这是连接 Databricks 进行身份验证所必需的
+//提示输入个人访问令牌 - 这是 Databricks 身份验证所必需的
 string dbxPAT;
 do
 {
-    //切换“正在运行宏”指示器
+    //切换“Running Macro”旋转提示
     ScriptHelper.WaitFormVisible = false;
     dbxPAT = MaskedInputHelper.GetMaskedInput(
-        "请输入你的 Databricks Personal Access Token（连接到 SQL 终结点时需要）",
-        "Personal Access Token"
+        "请输入 Databricks 个人访问令牌（连接到 SQL Endpoint 需要此令牌）",
+        "个人访问令牌"
     );
 
     if (string.IsNullOrEmpty(dbxPAT))
     {
-        return; // 你已Cancel
+        return; //用户已取消
     }
 
     if (string.IsNullOrWhiteSpace(dbxPAT))
     {
         MessageBox.Show(
-            "需要提供Personal Access Token",
-            "需要提供Personal Access Token",
+            "需要个人访问令牌",
+            "需要个人访问令牌",
             MessageBoxButtons.OK,
             MessageBoxIcon.Warning
         );
     }
 } while (string.IsNullOrWhiteSpace(dbxPAT));
 
-//切换“正在运行宏”指示器
+//切换“Running Macro”旋转提示
 ScriptHelper.WaitFormVisible = true;
 
-//对每个选中的表，从分区信息中获取 Databricks 连接信息
+//自动检测 Databricks ODBC 驱动程序
+string driverPath;
+string newDriverPath = @"C:\Program Files\Databricks ODBC Driver";
+string legacyDriverPath = @"C:\Program Files\Simba Spark ODBC Driver";
+
+if (System.IO.Directory.Exists(newDriverPath))
+{
+    driverPath = newDriverPath;
+}
+else if (System.IO.Directory.Exists(legacyDriverPath))
+{
+    driverPath = legacyDriverPath;
+}
+else
+{
+    ScriptHelper.WaitFormVisible = false;
+    Interaction.MsgBox(
+        @"未找到 Databricks ODBC 驱动程序。
+
+请从以下地址安装 Databricks ODBC Driver：
+https://www.databricks.com/spark/odbc-drivers-download
+
+预期安装路径：
+  " + newDriverPath + @"
+  " + legacyDriverPath,
+        MsgBoxStyle.Critical,
+        "未找到 ODBC 驱动程序"
+    );
+    return;
+}
+
+//对于每个选中的表，从分区信息中获取 Databricks 连接信息
 foreach (var t in Selected.Tables)
 {
     string mQuery = t.Partitions[t.Name].Expression;
     var connectionInfo = PowerQueryMParser.ParseMQuery(mQuery);
     var columnDescriptions = 0;
     var tableDescriptions = 0;
-    //访问各个部分
+    //访问各个组成部分
     string serverHostname = connectionInfo.ServerHostname;
     string httpPath = connectionInfo.HttpPath;
     string databaseName = connectionInfo.DatabaseName;
@@ -394,11 +427,11 @@ foreach (var t in Selected.Tables)
     string tableName = connectionInfo.TableName;
     //设置 DBX 连接字符串
     var odbcConnStr =
-        @"DSN=Simba Spark;driver=C:\Program Files\Simba Spark ODBC Driver;host="
+        @"Driver=" + driverPath + ";Host="
         + serverHostname
-        + ";port=443;httppath="
+        + ";Port=443;HTTPPath="
         + httpPath
-        + ";thrifttransport=2;ssl=1;authmech=3;uid=token;pwd="
+        + ";SSL=1;ThriftTransport=2;AuthMech=3;UID=token;PWD="
         + dbxPAT;
 
     //测试连接
@@ -409,29 +442,27 @@ foreach (var t in Selected.Tables)
     }
     catch
     {
-        //切换“正在运行宏”指示器
+        //切换“Running Macro”旋转提示
         ScriptHelper.WaitFormVisible = false;
         Interaction.MsgBox(
-            @"连接失败
+            @"连接失败（使用的驱动程序：" + driverPath + @"）
 
-请确认以下几点：
+请检查以下前提条件：
     
-- 你需要先安装 Simba Spark ODBC Driver 
-（可从 https://www.databricks.com/spark/odbc-drivers-download 下载）
+- 必须已安装 Databricks ODBC Driver
+（下载地址：https://www.databricks.com/spark/odbc-drivers-download）
 
-- ODBC 驱动程序必须安装在路径 C:\Program Files\Simba Spark ODBC Driver 中
-
-- 请检查 Databricks 服务器名称 "
+- 请确认 Databricks 服务器名称 "
                 + serverHostname
-                + @" 是否正确
+                + @" 正确
 
-- 请检查 Databricks SQL 终结点 / HTTP 路径 "
+- 请确认 Databricks SQL Endpoint / HTTP Path "
                 + httpPath
-                + @" 是否正确
+                + @" 正确
 
-- 请检查你使用的是有效的Personal Access Token",
+- 请确认你使用的是有效的个人访问令牌",
             MsgBoxStyle.Critical,
-            "Connection Error"
+            "连接错误"
         );
         return;
     }
@@ -454,12 +485,12 @@ foreach (var t in Selected.Tables)
     }
     catch
     {
-        //切换“正在运行宏”指示器
+        //切换“Running Macro”旋转提示
         ScriptHelper.WaitFormVisible = false;
         Interaction.MsgBox(
             @"连接失败
 
-可能是以下原因： 
+可能原因如下：
     - 表 "
                 + schemaName
                 + "."
@@ -467,11 +498,11 @@ foreach (var t in Selected.Tables)
                 + " 不存在"
                 + @"
     
-    - 你没有权限查询此表
+    - 你没有查询此表的权限
     
-    - 连接超时。请检查 SQL 终结点群集是否正在运行",
+    - 连接已超时。请检查 SQL Endpoint 集群是否正在运行",
             MsgBoxStyle.Critical,
-            "Connection Error - 表元数据"
+            "连接错误 - 表元数据"
         );
         return;
     }
@@ -481,7 +512,7 @@ foreach (var t in Selected.Tables)
         if (t.Description != row["comment"].ToString())
         {
             t.Description = row["comment"].ToString();
-            tableUpdate = t.Name + " 的表说明已更新。";
+            tableUpdate = t.Name + " 表描述已更新。";
         }
     }
 
@@ -496,12 +527,12 @@ foreach (var t in Selected.Tables)
     }
     catch
     {
-        //切换“正在运行宏”指示器
+        //切换“Running Macro”旋转提示
         ScriptHelper.WaitFormVisible = false;
         Interaction.MsgBox(
             @"连接失败
 
-可能是以下原因： 
+可能原因如下：
     - 表 "
                 + schemaName
                 + "."
@@ -509,16 +540,16 @@ foreach (var t in Selected.Tables)
                 + " 不存在"
                 + @"
     
-    - 你没有权限查询此表
+    - 你没有查询此表的权限
     
-    - 连接超时。请检查 SQL 终结点群集是否正在运行",
+    - 连接已超时。请检查 SQL Endpoint 集群是否正在运行",
             MsgBoxStyle.Critical,
-            "Connection Error - 列元数据"
+            "连接错误 - 列元数据"
         );
         return;
     }
 
-    //更新列说明
+    //更新列描述
     int counter = 0;
     foreach (sysData.DataRow row in dbxColumns.Rows)
     {
@@ -546,16 +577,16 @@ foreach (var t in Selected.Tables)
             + t.Name
             + " 中的 "
             + counter
-            + " 个说明";
+            + " 个描述";
     }
     else
     {
-        msg = "已更新 " + t.Name + " 中的 " + counter + " 个说明";
+        msg = "已更新 " + t.Name + " 中的 " + counter + " 个描述";
     }
-    //切换“正在运行宏”指示器
+    //切换“Running Macro”旋转提示
     ScriptHelper.WaitFormVisible = false;
-    Interaction.MsgBox(msg, MsgBoxStyle.Information, "更新元数据说明");
-    //切换“正在运行宏”指示器
+    Interaction.MsgBox(msg, MsgBoxStyle.Information, "更新元数据描述");
+    //切换“Running Macro”旋转提示
     ScriptHelper.WaitFormVisible = true;
     conn.Close();
 }
@@ -563,7 +594,7 @@ foreach (var t in Selected.Tables)
 
 ### 说明
 
-该脚本使用 WinForms 弹窗提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。 对每个选中的表，脚本都会从其分区中的 M 查询提取 Databricks 连接字符串信息，以及架构名和表名。 随后脚本会通过 Spark ODBC 驱动程序向 Databricks 发送 SQL 查询，查询 information_schema 表，从而获取 Unity Catalog 中定义的表说明。 然后会将其更新到语义模型中的表说明。 还会对所选表再发送一条使用 DESCRIBE 命令的 SQL 查询，以获取列说明。 随后会遍历这些结果，并在模型中补充说明。 脚本在每个选定的表上运行完毕后，会弹出对话框，显示已更新的描述数量。
+该脚本使用 WinForms 弹窗提示输入 Databricks 个人访问令牌，用于对 Databricks 进行身份验证。 它会自动检测已安装的是新版 Databricks ODBC Driver 还是旧版 Simba Spark ODBC Driver。 对每个选中的表，脚本都会从其分区中的 M 查询提取 Databricks 连接字符串信息，以及架构名和表名。 随后，脚本会使用检测到的 ODBC 驱动程序向 Databricks 发送 SQL 查询，查询 information_schema 表，从而返回 Unity Catalog 中定义的表说明。 然后会将其更新到语义模型中的表说明。 还会对所选表再发送一条使用 DESCRIBE 命令的 SQL 查询，以获取列说明。 随后会遍历这些结果，并在模型中补充说明。 脚本在每个选定的表上运行完毕后，会弹出对话框，显示已更新的描述数量。
 
 ## 输出示例
 
