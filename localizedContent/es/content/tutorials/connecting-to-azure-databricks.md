@@ -156,7 +156,7 @@ Si la integración con Microsoft Entra ID no está disponible o si prefieres la 
    - Pega tu token en el campo **Token**
    - En HTTP Path, especifica la ruta a tu clúster de Databricks (p. ej., `/sql/1.0/warehouses/<warehouse-id>`)
 
-### 3) Autenticación OAuth de máquina a máquina (M2M)
+### 3) 3) Autenticación OAuth de máquina a máquina (M2M)
 
 A partir de Tabular Editor 3.26.1, puedes autenticarte con una entidad de servicio de Databricks mediante el flujo OAuth de máquina a máquina (M2M). Esto resulta útil en escenarios desatendidos, como actualizaciones programadas o canalizaciones de CI/CD, donde no quieres que la conexión quede vinculada a las credenciales de un usuario concreto. OAuth (M2M) está disponible en todas las nubes de Databricks (Azure, AWS y GCP).
 
