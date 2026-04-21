@@ -27,7 +27,8 @@ applies_to:
 ![XLMA to PBIX Overview](~/content/assets/images/power-bi/create-pbix-from-xmla-overview.png)
 
 > [!NOTE]
-> 本文所述的变通方法并非 Microsoft 官方支持。 无法保证它对每个模型都有效。 特别是，如果你添加了自定义分区或其他 [此处列出的](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) 对象，Power BI Desktop 可能无法按此方式正确打开该文件。 下方提供了一个脚本，用于处理增量刷新分区。
+> 本文所述的变通方法并非 Microsoft 官方支持。 无法保证它对每个模型都有效。 [!NOTE]
+> 本文所述的变通方法并非 Microsoft 官方支持。 无法保证它对每个模型都有效。 特别是，如果你添加了自定义分区或其他 [此处列出的](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations) 对象，Power BI Desktop 可能无法按此方式正确打开该文件。 下方提供了一个脚本，用于处理增量刷新分区。 下方提供了一个脚本，用于处理增量刷新分区。
 
 ## 步骤 1：创建并保存一个空的 Power BI Project（.pbip）文件
 
@@ -35,7 +36,7 @@ applies_to:
 
 ![Save PBIP file](~/content/assets/images/power-bi/save-pbip-file.png)
 
-这会创建一个文件夹结构，其中包含一个空的 _model_ 文件。 该 _model_ 文件包含模型元数据。 在下一步中，你将用要保存为 .pbix 的已发布模型的元数据覆盖这些元数据。
+这会创建一个文件夹结构，其中包含一个空的 _model_ 文件。 该 _model_ 文件包含模型元数据。 在下一步中，你将用要保存为 .pbix 的已发布模型的元数据覆盖这些元数据。 该 _model_ 文件包含模型元数据。 在下一步中，你将用要保存为 .pbix 的已发布模型的元数据覆盖这些元数据。
 
 ![PBIP with Model file](~/content/assets/images/power-bi/pbip-file-bim-model.png)
 
@@ -43,18 +44,18 @@ applies_to:
 
 ## 步骤 2：使用 Tabular Editor 打开 XMLA 模型
 
-打开 Tabular Editor 后，通过 XMLA endpoint 连接到 Fabric Workspace。 加载要转换为 .pbix 的 Power BI 语义模型。
+打开 Tabular Editor 后，通过 XMLA endpoint 连接到 Fabric Workspace。 加载要转换为 .pbix 的 Power BI 语义模型。 加载要转换为 .pbix 的 Power BI 语义模型。
 
 ## 步骤 3：将 XMLA 模型保存为 .pbip
 
-在 Tabular Editor 中使用 _文件 > 另存为..._，导航到 Power BI Project 文件夹。 覆盖上一张图中显示的 _model.bim_ 文件。
+在 Tabular Editor 中使用 _文件 > 另存为..._，导航到 Power BI Project 文件夹。 覆盖上一张图中显示的 _model.bim_ 文件。 覆盖上一张图中显示的 _model.bim_ 文件。
 
 这样会把远程模型保存到 Power BI Project 中，现在这个项目会包含模型元数据。
 
-如果 .pbip 文件夹配置为将模型存储为 [TMDL](xref:tmdl) 文件，你就需要改用 Tabular Editor 里的“保存到文件夹”选项。 然后转到该语义模型的 Power BI Project 文件夹（ModelName.SemanticModel），打开“definition”文件夹，并把模型保存在那里。
+如果 .pbip 文件夹配置为将模型存储为 [TMDL](xref:tmdl) 文件，你就需要改用 Tabular Editor 里的“保存到文件夹”选项。 如果 .pbip 文件夹配置为将模型存储为 [TMDL](xref:tmdl) 文件，你就需要改用 Tabular Editor 里的“保存到文件夹”选项。 然后转到该语义模型的 Power BI Project 文件夹（ModelName.SemanticModel），打开“definition”文件夹，并把模型保存在那里。
 
 > [!NOTE]
-> 若要启用 TMDL，请转到 **Tools > 偏好 > File Formats > Save-to-folder**，并在 **Serialization mode** 下拉列表中选择 "TMDL"。 有关详细信息，请参阅 [TMDL 文档](xref:tmdl)
+> 若要启用 TMDL，请转到 **Tools > 偏好 > File Formats > Save-to-folder**，并在 **Serialization mode** 下拉列表中选择 "TMDL"。 有关详细信息，请参阅 [TMDL 文档](xref:tmdl) 有关详细信息，请参阅 [TMDL 文档](xref:tmdl)
 
 ## 步骤 3.1：移除增量刷新的分区并创建新的分区（可选）
 
@@ -70,11 +71,12 @@ applies_to:
 
 ## 重新水合 .pbix
 
-这个 .pbix 现在包含已发布到 Fabric Workspace 的模型。 打开 .pbix 后，可以对该文件进行 _重新水合_，也就是根据模型中指定的连接来加载数据。
+这个 .pbix 现在包含已发布到 Fabric Workspace 的模型。 打开 .pbix 后，可以对该文件进行 _重新水合_，也就是根据模型中指定的连接来加载数据。 打开 .pbix 后，可以对该文件进行 _重新水合_，也就是根据模型中指定的连接来加载数据。
 
 ## 转换增量刷新分区
 
 如果语义模型启用了增量刷新，上述步骤 4 将失败，因为 Power BI Desktop 模型不能包含多个分区。
+在这种情况下，应针对该模型运行以下脚本，将增量刷新分区转换为单一分区
 在这种情况下，应针对该模型运行以下脚本，将增量刷新分区转换为单一分区
 
 ```csharp
