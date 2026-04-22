@@ -80,6 +80,15 @@ During Limited Public Preview, the CLI does not require a license; you only need
 
 <!-- TBD: confirm exact license-outlook wording with marketing before publishing. -->
 
+## Feedback and community
+
+During the preview, bug reports, feature requests, and general discussion happen in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository on GitHub:
+
+- **Issues** — report bugs, request features, and track known problems.
+- **Discussions** — ask questions, share feedback, and swap usage tips with other early adopters.
+
+The repository does not host the CLI source code; it exists to give the community a public place to reach us during the preview.
+
 ## Next steps
 
 - @te-cli-install — download, install, verify.
@@ -92,4 +101,3 @@ During Limited Public Preview, the CLI does not require a license; you only need
 - @te-cli-migrate — migrating from the Tabular Editor 2 command line.
 
 <!-- TBD: add official download URL once confirmed. Blog draft says "Get it here"/"Download Tabular Editor CLI" — link not yet final. -->
-<!-- TBD: add feedback link for preview (blog references "[Feedback link]" — not yet resolved). -->
