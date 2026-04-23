@@ -13,7 +13,7 @@ applies_to:
 
 # 如何使用脚本 UI 帮助程序
 
-Tabular Editor 为脚本中的用户交互提供了一些辅助方法：显示输出、显示信息、提示选择对象、对 DAX 求值，以及构建自定义对话框。 在桌面 UI 中，这些方法会弹出图形化对话框。 在 CLI 中，它们会输出到控制台。 在桌面 UI 中，这些方法会弹出图形化对话框。 在 CLI 中，它们会输出到控制台。
+Tabular Editor 提供了一些用于脚本中用户交互的辅助方法：显示输出、显示信息、提示选择对象、对 DAX 求值，以及构建自定义对话框。 在桌面 UI 中，这些方法会弹出图形化对话框。 在 CLI 中，它们会输出到控制台。
 
 ## 快速参考
 
@@ -43,7 +43,7 @@ Output(result);                                        // sortable/filterable gr
 
 ## 信息：信息、警告、错误
 
-用于简单沟通。 用于简单沟通。 `Error()` 本身不会停止脚本执行——如果想中止，就在后面加上 `return`。
+用于简单沟通。 `Error()` 本身不会停止脚本执行——如果想要中止执行，请在后面加上 `return`。
 
 ```csharp
 if (Selected.Measures.Count() == 0)
@@ -68,8 +68,7 @@ Info("Updated " + Selected.Measures.Count() + " measures.");
 | 字符串或基本类型                          | 简单的信息对话框      |
 
 > [!NOTE]
-> 字符串输出使用 Windows 行结束符。 使用 `\r\n` 或 `Environment.NewLine` 来插入换行符。 单独的 `\\n` 会渲染为一行。 [!NOTE]
-> 字符串输出使用 Windows 行结束符。 使用 `\r\n` 或 `Environment.NewLine` 来插入换行符。 单独的 `\\n` 会渲染为一行。 这常让使用 M 表达式的用户踩坑：M 表达式使用 `\\n`，但在 `Output()` 中会被打印成单行。
+> 字符串输出使用 Windows 行结束符。 使用 `\r\n` 或 `Environment.NewLine` 来插入换行符。 单独的 `\\n` 会渲染为一行。 这常让使用 M 表达式的用户出错：M 表达式使用 `\n`，但在 `Output()` 中会作为单行输出。
 
 ### 用于结构化输出的 DataTable
 
@@ -94,7 +93,7 @@ Output(result);
 
 ## 对象选择对话框
 
-选择辅助函数会显示一个列表对话框，并返回用户的选择。 如果用户取消操作，它们会抛出异常。 请在 try/catch 中调用它们。 如果用户取消操作，它们会抛出异常。 请在 try/catch 中调用它们。
+选择辅助方法会显示一个列表对话框，并返回用户的选择。 如果用户取消操作，它们会抛出异常。 请在 try/catch 中调用它们。
 
 ```csharp
 try
@@ -116,7 +115,7 @@ catch
 ### 多选（仅限 Tabular Editor 3）
 
 > [!NOTE]
-> `SelectObjects()` 仅在 Tabular Editor 3 中可用。 在 Tabular Editor 2 中，可以在循环中使用单选对话框，或在运行脚本前先筛选选中的对象。 在 Tabular Editor 2 中，可以在循环中使用单选对话框，或在运行脚本前先筛选选中的对象。
+> `SelectObjects()` 仅在 Tabular Editor 3 中可用。 在 Tabular Editor 2 中，可以在循环中使用单选对话框，或在运行脚本前先筛选选中的对象。
 
 `SelectObjects()` 允许用户选择多个对象。
 
@@ -151,7 +150,7 @@ Output(result);
 ```
 
 > [!NOTE]
-> `EvaluateDax()` 需要与 Analysis Services 或 Power BI 实例保持活动连接。 离线编辑模型时无法使用。 离线编辑模型时无法使用。
+> `EvaluateDax()` 需要与 Analysis Services 或 Power BI 实例保持活动连接。 离线编辑模型时无法使用。
 
 ## 卫语句模式
 
@@ -175,7 +174,7 @@ else
 
 ## 自定义 WinForms 对话框
 
-对于内置辅助函数无法覆盖的输入场景，可直接在脚本中构建自定义 WinForms 对话框。 有关简单提示、带验证的多字段表单以及可重用对话框类的实现模式，请参阅 @how-to-build-custom-winforms-dialogs。 有关简单提示、带验证的多字段表单以及可重用对话框类的实现模式，请参阅 @how-to-build-custom-winforms-dialogs。
+如果内置辅助方法无法满足你的输入场景，可以直接在脚本中构建自定义 WinForms 对话框。 有关简单提示、带验证的多字段表单以及可重用对话框类的实现模式，请参阅 @how-to-build-custom-winforms-dialogs。
 
 ## 另见
 
