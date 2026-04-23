@@ -15,14 +15,13 @@ applies_to:
 
 ## 脚本用途
 
-这个脚本是 Tabular Editor x Databricks 系列的一部分。 在 Unity Catalog 中，可以为表和列添加描述性注释。 此脚本可复用这些信息，自动补全语义模型中的表和列说明。 <br></br> 在 Unity Catalog 中，可以为表和列添加描述性注释。 此脚本可复用这些信息，自动补全语义模型中的表和列说明。 <br></br>
+本脚本为 Tabular Editor x Databricks 系列的一部分而创建。 在 Unity Catalog 中，可以为表和列添加描述性注释。 此脚本可复用这些信息，自动补全语义模型中的表和列说明。 <br></br>
 
 > [!NOTE]
-> 此脚本需要 Databricks ODBC 驱动程序。 我们推荐新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)，它将取代旧版 Simba Spark ODBC Driver。 脚本会自动检测已安装的驱动程序，并据此使用相应驱动程序。 我们推荐新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)，它将取代旧版 Simba Spark ODBC Driver。 脚本会自动检测已安装的驱动程序，并据此使用相应驱动程序。
+> 此脚本需要 Databricks ODBC 驱动程序。 我们推荐新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)，它将取代旧版 Simba Spark ODBC Driver。 脚本会自动检测已安装的驱动程序，并据此使用相应驱动程序。
 
 每次运行脚本时，都会提示你输入 Databricks 个人访问令牌。 这是用于向 Databricks 进行身份验证所必需的。
-每次运行脚本时，都会提示你输入 Databricks 个人访问令牌。 这是用于向 Databricks 进行身份验证所必需的。
-这个脚本使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此你可能需要和你的 Databricks 管理员再确认一下，确保你有权限查询这些表。 <br></br> <br></br>
+该脚本会使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此你可能需要向 Databricks 管理员再次确认，确保自己有权限查询这些表。 <br></br>
 
 ## 脚本
 
