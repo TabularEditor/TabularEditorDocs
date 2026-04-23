@@ -14,8 +14,7 @@ applies_to:
 ---
 # Automation and Scripting
 
-> [!IMPORTANT]
-> The Tabular Editor CLI is in **Limited Public Preview**. It is offered for evaluation with a Tabular Editor account; no license is required during preview. Commands, flags, and outputs may change before general availability. **The preview build stops functioning after 2026-09-30.** We recommend against using the CLI in production CI/CD pipelines during preview.
+[!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
 The Tabular Editor CLI is designed as a composable building block. Every command supports structured output, disables interactive prompts on demand, and returns predictable exit codes. The same primitives work equally well for shell pipelines, Python scripts, PowerShell automation, and agent-driven workflows.
 

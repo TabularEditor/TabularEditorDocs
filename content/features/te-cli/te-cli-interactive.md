@@ -14,8 +14,7 @@ applies_to:
 ---
 # Interactive Mode
 
-> [!IMPORTANT]
-> The Tabular Editor CLI is in **Limited Public Preview**. It is offered for evaluation with a Tabular Editor account; no license is required during preview. Commands, flags, and outputs may change before general availability. **The preview build stops functioning after 2026-09-30.** We recommend against using the CLI in production CI/CD pipelines during preview.
+[!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
 Interactive mode is a guided REPL (read-eval-print loop) for exploring a model from the terminal. It's the gentlest on-ramp for users who are new to command lines, and a convenient workspace for ad-hoc sessions against a single model.
 

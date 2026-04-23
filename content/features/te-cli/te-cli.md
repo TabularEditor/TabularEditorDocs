@@ -18,8 +18,7 @@ The Tabular Editor CLI (`te`) is a cross-platform command-line interface for Pow
 
 Use it to inspect, edit, validate, deploy, refresh, and test semantic models from a terminal — against local TMDL or BIM files, Power BI Desktop, or semantic models in Fabric and Power BI Service workspaces.
 
-> [!IMPORTANT]
-> The Tabular Editor CLI is in **Limited Public Preview**. It is offered for evaluation with a Tabular Editor account; no license is required during preview. Commands, flags, and outputs may change before general availability. **The preview build stops functioning after 2026-09-30.** We recommend against using the CLI in production CI/CD pipelines during preview.
+[!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
 ## Built for three audiences
 

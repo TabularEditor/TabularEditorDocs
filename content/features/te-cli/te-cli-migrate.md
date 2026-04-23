@@ -14,8 +14,7 @@ applies_to:
 ---
 # Migrating from the TE2 Command Line
 
-> [!IMPORTANT]
-> The Tabular Editor CLI is in **Limited Public Preview**. It is offered for evaluation with a Tabular Editor account; no license is required during preview. Commands, flags, and outputs may change before general availability. **The preview build stops functioning after 2026-09-30.** We recommend against using the CLI in production CI/CD pipelines during preview.
+[!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
 Teams with existing build pipelines that invoke `TabularEditor.exe` with TE2-style flags (`-S`, `-A`, `-D`, `-O`, `-C`, etc.) can adopt the new CLI incrementally. The Tabular Editor CLI accepts both command shapes: the new subcommand-based form (`te deploy`, `te bpa run`, …) and the legacy TE2 flag syntax, via a built-in compatibility layer.
 
