@@ -14,7 +14,7 @@ applies_to:
 ---
 # Tabular Editor CLI (Limited Public Preview)
 
-The Tabular Editor CLI (`te`) is a cross-platform command-line interface for Power BI and Analysis Services semantic models. It runs on Windows, macOS, and Linux as a single self-contained executable and wraps the same model engine (TOMWrapper) that powers Tabular Editor 3 Desktop.
+The Tabular Editor CLI (`te`) is a cross-platform command-line interface for Power BI and Analysis Services semantic models. It runs on Windows, macOS, and Linux as a single self-contained executable and wraps the same model engine (TOMWrapper) that powers Tabular Editor 3.
 
 Use it to inspect, edit, validate, deploy, refresh, and test semantic models from a terminal — against local TMDL or BIM files, Power BI Desktop, or semantic models in Fabric and Power BI Service workspaces.
 
@@ -36,16 +36,16 @@ The CLI organizes more than 50 commands into 10 families. Each family maps to a 
 
 | Family | What it does | Example commands |
 | -- | -- | -- |
-| Model I/O | Load, save, export, initialize models | `te load`, `te save`, `te export` |
-| Model Editing | Get/set properties, add/remove/move objects | `te set`, `te add`, `te rm`, `te mv` |
-| Inspection | List objects, search, diff, dependency analysis | `te ls`, `te find`, `te diff`, `te deps` |
-| Analysis & Quality | Validate, run BPA, format DAX, analyze storage | `te validate`, `te bpa run`, `te format`, `te vertipaq` |
-| Execution | Run DAX queries, C# scripts, macros | `te query`, `te script`, `te macro` |
-| Deployment & Refresh | Deploy to workspace, trigger refresh, incremental refresh | `te deploy`, `te refresh`, `te incremental-refresh` |
-| Testing | Assertion tests, snapshots, A/B comparison | `te test run` |
-| Connection & Auth | Connect to workspaces, manage authentication and profiles | `te connect`, `te auth`, `te profile` |
-| Configuration | Settings and licensing | `te config`, `te license` |
-| Shell | Interactive mode, shell completions | `te interactive`, `te completion` |
+| [Model I/O](xref:te-cli-commands#model-io) | Load, save, export, initialize models | [`te load`](xref:te-cli-commands#load), [`te save`](xref:te-cli-commands#save), [`te export`](xref:te-cli-commands#export) |
+| [Model Editing](xref:te-cli-commands#model-editing) | Get/set properties, add/remove/move objects | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te rm`](xref:te-cli-commands#rm), [`te mv`](xref:te-cli-commands#mv) |
+| [Inspection](xref:te-cli-commands#inspection) | List objects, search, diff, dependency analysis | [`te ls`](xref:te-cli-commands#ls), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps) |
+| [Analysis & Quality](xref:te-cli-commands#analysis-and-quality) | Validate, run BPA, format DAX, analyze storage | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te format`](xref:te-cli-commands#format), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
+| [Execution](xref:te-cli-commands#execution) | Run DAX queries, C# scripts, macros | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te macro`](xref:te-cli-commands#macro) |
+| [Deployment & Refresh](xref:te-cli-commands#deployment-and-refresh) | Deploy to workspace, trigger refresh, incremental refresh | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te incremental-refresh`](xref:te-cli-commands#incremental-refresh) |
+| [Testing](xref:te-cli-commands#testing) | Assertion tests, snapshots, A/B comparison | [`te test run`](xref:te-cli-commands#test-run) |
+| [Connection & Auth](xref:te-cli-commands#connection-and-auth) | Connect to workspaces, manage authentication and profiles | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove) |
+| [Configuration](xref:te-cli-commands#configuration) | Settings and licensing | [`te config`](xref:te-cli-commands#config-show--paths--init--set), [`te license`](xref:te-cli-commands#license) |
+| [Shell](xref:te-cli-commands#shell) | Interactive mode, shell completions | [`te interactive`](xref:te-cli-commands#interactive), [`te completion`](xref:te-cli-commands#completion) |
 
 See @te-cli-commands for a full command reference with syntax, options, and examples for each command.
 
