@@ -31,7 +31,7 @@ var typeName = obj.GetType().Name;   // "DataColumn", "Measure", etc.
 ```
 
 > [!NOTE]
-> 带变量声明的模式匹配（`col is CalculatedColumn cc`）在 Tabular Editor 2 中需要 Roslyn 编译器。 在 **File > 偏好 > General > Compiler path** 下进行配置。 详情请参阅 [使用 Roslyn 编译](xref:advanced-scripting#compiling-with-roslyn)。 Tabular Editor 3 默认支持此功能。 在 **File > 偏好 > General > Compiler path** 下进行配置。 详情请参阅 [使用 Roslyn 编译](xref:advanced-scripting#compiling-with-roslyn)。 Tabular Editor 3 默认支持此功能。
+> 在 Tabular Editor 2 中，带变量声明的模式匹配（`col is CalculatedColumn cc`）需要 Roslyn 编译器。 在 **File > 偏好 > General > Compiler path** 下进行配置。 详情请参阅 [使用 Roslyn 编译](xref:advanced-scripting#compiling-with-roslyn)。 Tabular Editor 3 默认支持此功能。
 
 ## 类型层次结构
 
@@ -46,7 +46,7 @@ TOMWrapper 中的关键继承关系如下：
 
 ## 按类型筛选集合
 
-`OfType<T>()` 可用于任何集合，并返回一个经过筛选的序列，其中只包含指定类型的项。 如果没有匹配项，它会返回空序列。 如果没有匹配项，它会返回空序列。
+`OfType<T>()` 可用于任何集合，并返回一个经过筛选的序列，其中只包含指定类型的项。 如果没有匹配项，它会返回空序列。
 
 ```csharp
 // All calculated columns in the model (empty if model has none)
@@ -64,7 +64,7 @@ var regularTables = Model.Tables.Where(t => t is not CalculationGroupTable && t 
 
 ## 使用 is 进行模式匹配
 
-模式匹配会做两件事：检查某个值是否为给定类型，并可选择将其转换后赋给一个新变量。 模式匹配会做两件事：检查某个值是否为给定类型，并可选择将其转换后赋给一个新变量。 `x is Type xx` 这种形式会判断“`x` 是否为 `Type` 类型？”，如果为真，就会将 `xx` 作为该确切类型的变量提供给你。
+模式匹配会做两件事：检查某个值是否为给定类型，并可选择将其转换后赋给一个新变量。 `x is Type xx` 这种形式会判断“`x` 是否为 `Type` 类型？”，如果为真，就会将 `xx` 作为该确切类型的变量供你使用。
 
 这等同于：
 
@@ -76,7 +76,7 @@ if (col is CalculatedColumn)
 }
 ```
 
-如果你只需要布尔判断，使用不带变量的 `x is Type`。 如果你还需要访问子类型特有的属性，用 `x is Type xx`。 如果你还需要访问子类型特有的属性，用 `x is Type xx`。
+如果你只需要布尔判断，使用不带变量的 `x is Type`。 如果你还需要访问子类型特有的属性，用 `x is Type xx`。
 
 ```csharp
 foreach (var col in Model.AllColumns)
@@ -91,15 +91,15 @@ foreach (var col in Model.AllColumns)
 
 ## Dynamic LINQ 中的等效写法
 
-在 BPA 规则中，类型筛选是通过规则的 **Applies to** 范围来处理的。 把它设置为目标对象类型（例如 **计算列**），不要在表达式中按类型筛选。 在 BPA 规则中，类型筛选是通过规则的 **Applies to** 范围来处理的。 把它设置为目标对象类型（例如 **计算列**），不要在表达式中按类型筛选。 Dynamic LINQ 不支持 C# 风格的类型转换。
+在 BPA 规则中，类型筛选是通过规则的 **Applies to** 范围来处理的。 把它设置为目标对象类型（例如 **计算列**），不要在表达式中按类型筛选。 Dynamic LINQ 不支持 C# 风格的类型转换。
 
 ## 常见陷阱
 
 > [!IMPORTANT]
 >
-> - `Column` 是抽象类型，但你无需进行类型转换，也可以访问基类型上定义的所有属性（`Name`、`DataType`、`FormatString`、`IsHidden`、`Description`、`DisplayFolder`）。 只有在你需要子类型特有的属性（例如 `CalculatedColumn` 上的 `Expression`）时，才将其转换为该子类型。 只有在你需要子类型特有的属性（例如 `CalculatedColumn` 上的 `Expression`）时，才将其转换为该子类型。
-> - `OfType<T>()` 会同时进行筛选和类型转换。 `OfType<T>()` 会同时进行筛选和类型转换。 `Where(x => x is T)` 只会筛选，结果仍然是基类型。 当你需要访问子类型属性时，优先使用 `OfType<T>()`。 当你需要访问子类型属性时，优先使用 `OfType<T>()`。
-> - 计算表格的列会自动管理。 要添加或更改列，就编辑计算表格的 `Expression`。 你不能直接添加这些列。 要添加或更改列，就编辑计算表格的 `Expression`。 你不能直接添加这些列。
+> - `Column` 是抽象类型，但你无需进行类型转换，也可以访问基类型上定义的所有属性（`Name`、`DataType`、`FormatString`、`IsHidden`、`Description`、`DisplayFolder`）。 只有在你需要子类型特有的属性（例如 `CalculatedColumn` 上的 `Expression`）时，才将其转换为该子类型。
+> - `OfType<T>()` 会同时进行筛选和类型转换。 `Where(x => x is T)` 只会筛选，结果仍然是基类型。 当你需要访问子类型属性时，优先使用 `OfType<T>()`。
+> - 计算表格的列会自动维护。 要添加或更改列，就编辑计算表格的 `Expression`。 你不能直接添加这些列。
 
 ## 另见
 
