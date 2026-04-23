@@ -1,6 +1,6 @@
 ---
 uid: te-cli-config
-title: Configuration
+title: Custom Configuration
 author: Peer Grønnerup
 updated: 2026-04-20
 applies_to:
@@ -12,7 +12,7 @@ applies_to:
     - product: Tabular Editor CLI
       full: true
 ---
-# Configuration
+# Custom Configuration
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
