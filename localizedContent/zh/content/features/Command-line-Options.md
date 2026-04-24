@@ -225,7 +225,7 @@ exit $p.ExitCode
 
 ### 通过环境变量将参数传递给脚本
 
-在 Azure DevOps 管道中使用 `-S` 选项执行 C# 脚本时，建议通过环境变量而非命令行参数传递参数。 在 Azure DevOps 管道中使用 `-S` 选项执行 C# 脚本时，建议通过环境变量而非命令行参数传递参数。 C# 脚本可以使用 `Environment.GetEnvironmentVariable()` 读取环境变量；Azure DevOps 会自动将所有管道变量作为环境变量提供。
+在 Azure DevOps 管道中使用 `-S` 选项执行 C# 脚本时，建议通过环境变量而非命令行参数传递参数。 C# 脚本可以使用 `Environment.GetEnvironmentVariable()` 读取环境变量；Azure DevOps 会自动将所有管道变量作为环境变量提供。
 
 **示例：在 YAML 中设置环境变量：**
 
@@ -273,7 +273,7 @@ foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
 }
 ```
 
-这种方法比在脚本中硬编码值或使用复杂的字符串替换方式更简洁、更易维护。 这种方法比在脚本中硬编码值或使用复杂的字符串替换方式更简洁、更易维护。 有关在 C# 脚本中使用环境变量的更多信息，请参阅 [C# Scripts - Accessing Environment Variables](xref:csharp-scripts#accessing-environment-variables)。
+这种方法比在脚本中硬编码值或使用复杂的字符串替换方式更简洁、更易维护。 有关在 C# 脚本中使用环境变量的更多信息，请参阅 [C# Scripts - Accessing Environment Variables](xref:csharp-scripts#accessing-environment-variables)。
 
 ## 运行 Best Practice Analyzer
 
@@ -295,27 +295,27 @@ foreach(var ds in Model.DataSources.OfType<ProviderDataSource>())
 
 命令行会根据所使用的开关以及执行过程中遇到的事件，提供各类详细信息。 退出代码在 [2.7.4 版本](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4) 中引入。
 
-| 级别 | 命令            | 信息                                 | 说明                                                                                                                                                                         |
-| -- | ------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 错误 | （任意）          | 参数语法无效                             | 向 Tabular Editor CLI 提供了无效的参数                                                                                                                                              |
-| 错误 | （任意）          | 未找到文件……                            |                                                                                                                                                                            |
-| 错误 | （任意）          | 加载文件时出错……                          | 文件已损坏，或不包含 JSON 格式的有效 TOM 元数据                                                                                                                                              |
-| 错误 | （任意）          | 加载模型时出错……                          | 无法连接到所提供的 Analysis Services 实例，或找不到数据库，或数据库元数据已损坏，或数据库的兼容级别不受支持                                                                                                            |
-| 错误 | -SCRIPT       | 未找到指定的脚本文件                         |                                                                                                                                                                            |
-| 错误 | -SCRIPT       | 脚本编译错误：                            | 脚本包含无效的 C# 语法。 详细信息将输出在后续几行中。                                                                                                                                              |
-| 错误 | -SCRIPT       | 脚本执行错误：……                          | 执行脚本时发生未处理的异常。                                                                                                                                                             |
-| 信息 | -SCRIPT       | 脚本行号 #：……                          | 在脚本中使用 `Info(string)` 或 `Output(string)` 方法。                                                                                                                               |
-| 警告 | -SCRIPT       | 脚本警告：……                            | 在脚本中使用 `Warning(string)` 方法。                                                                                                                                               |
-| 错误 | -SCRIPT       | 脚本错误：……                            | 在脚本中使用 `Error(string)` 方法。                                                                                                                                                 |
-| 错误 | -FOLDER, -BIM | -FOLDER 和 -BIM 参数互斥。               | Tabular Editor 无法在一次运行中将当前加载的模型同时保存为文件夹结构和 .bim 文件。                                                                                                        |
-| 错误 | -ANALYZE      | 未找到规则文件：……                         |                                                                                                                                                                            |
-| 错误 | -ANALYZE      | 无效的规则文件：……                         | 指定的 BPA 规则文件已损坏或不包含有效的 JSON。                                                                                                                                               |
-| 信息 | -ANALYZE      | …… 违反规则……                          | Best Practice Analyzer 针对严重性级别为 1 或以下规则的结果。                                                                                                                                |
-| 警告 | -ANALYZE      | …… 违反规则 ……                         | Best Practice Analyzer 针对严重性级别 2 的规则的结果。                                                                                                                                   |
-| 错误 | -ANALYZE      | …… 违反规则 ……                         | Best Practice Analyzer 针对严重性级别 3 或更高的规则的结果。                                                                                                                                |
-| 错误 | -DEPLOY       | 部署失败！ ……                           | 由 Analysis Services 实例直接返回的失败原因（例如：找不到数据库、不允许数据库覆盖等）                                                                                                                       |
-| 信息 | -DEPLOY       | 未处理的对象: ……         | 成功部署后处于 "NoData" 或 "CalculationNeeded" 状态的对象。 使用 -W 开关将这些按 Level=Warning 处理。                                                                                               |
-| 警告 | -DEPLOY       | 对象不处于"Ready"状态: …… | 成功部署后处于 "DependencyError"、"EvaluationError" 或 "SemanticError" 状态的对象。 如果使用 -W 开关，还包括处于“NoData”或“CalculationNeeded”状态的对象。 如果使用 -W 开关，还包括处于“NoData”或“CalculationNeeded”状态的对象。 |
-| 警告 | -DEPLOY       | X 上发生错误：……                         | 成功部署后包含无效 DAX 的对象（度量值、计算列、计算表格、角色）。 使用 -E 选项将这些视为 Level=Error。                                                                                                             |
+| 级别 | 命令            | 信息                                 | 说明                                                                                                                      |
+| -- | ------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| 错误 | （任意）          | 参数语法无效                             | 向 Tabular Editor CLI 提供了无效的参数                                                                                           |
+| 错误 | （任意）          | 未找到文件……                            |                                                                                                                         |
+| 错误 | （任意）          | 加载文件时出错……                          | 文件已损坏，或不包含 JSON 格式的有效 TOM 元数据                                                                                           |
+| 错误 | （任意）          | 加载模型时出错……                          | 无法连接到所提供的 Analysis Services 实例，或找不到数据库，或数据库元数据已损坏，或数据库的兼容级别不受支持                                                         |
+| 错误 | -SCRIPT       | 未找到指定的脚本文件                         |                                                                                                                         |
+| 错误 | -SCRIPT       | 脚本编译错误：                            | 脚本包含无效的 C# 语法。 详细信息将输出在后续几行中。                                                                                           |
+| 错误 | -SCRIPT       | 脚本执行错误：……                          | 执行脚本时发生未处理的异常。                                                                                                          |
+| 信息 | -SCRIPT       | 脚本行号 #：……                          | 在脚本中使用 `Info(string)` 或 `Output(string)` 方法。                                                                            |
+| 警告 | -SCRIPT       | 脚本警告：……                            | 在脚本中使用 `Warning(string)` 方法。                                                                                            |
+| 错误 | -SCRIPT       | 脚本错误：……                            | 在脚本中使用 `Error(string)` 方法。                                                                                              |
+| 错误 | -FOLDER, -BIM | -FOLDER 和 -BIM 参数互斥。               | Tabular Editor 无法在一次运行中将当前加载的模型同时保存为文件夹结构和 .bim 文件。                                                     |
+| 错误 | -ANALYZE      | 未找到规则文件：……                         |                                                                                                                         |
+| 错误 | -ANALYZE      | 无效的规则文件：……                         | 指定的 BPA 规则文件已损坏或不包含有效的 JSON。                                                                                            |
+| 信息 | -ANALYZE      | …… 违反规则……                          | Best Practice Analyzer 针对严重性级别为 1 或以下规则的结果。                                                                             |
+| 警告 | -ANALYZE      | …… 违反规则 ……                         | Best Practice Analyzer 针对严重性级别 2 的规则的结果。                                                                                |
+| 错误 | -ANALYZE      | …… 违反规则 ……                         | Best Practice Analyzer 针对严重性级别 3 或更高的规则的结果。                                                                             |
+| 错误 | -DEPLOY       | 部署失败！ ……                           | 由 Analysis Services 实例直接返回的失败原因（例如：找不到数据库、不允许数据库覆盖等）                                                                    |
+| 信息 | -DEPLOY       | 未处理的对象: ……         | 成功部署后处于 "NoData" 或 "CalculationNeeded" 状态的对象。 使用 -W 开关将这些按 Level=Warning 处理。                                            |
+| 警告 | -DEPLOY       | 对象不处于"Ready"状态: …… | 成功部署后处于 "DependencyError"、"EvaluationError" 或 "SemanticError" 状态的对象。 如果使用 -W 开关，还包括处于“NoData”或“CalculationNeeded”状态的对象。 |
+| 警告 | -DEPLOY       | X 上发生错误：……                         | 成功部署后包含无效 DAX 的对象（度量值、计算列、计算表格、角色）。 使用 -E 选项将这些视为 Level=Error。                                                          |
 
 如果检测到任何级别为“Error”的输出，Tabular Editor 将返回 Exit Code = 1。 否则返回 0。
