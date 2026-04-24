@@ -50,7 +50,7 @@ A continuación se muestra una descripción general de cómo modificar una polí
 
     <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:450px !important"/>
 
-7. **Actualizar todas las particiones:** Haga clic mientras mantiene pulsada la tecla Mayús para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
+7. Mayús + clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
     <img src="~/content/assets/images/tutorials/incremental-refresh-refresh-all-partitions.png" class="noscale" alt="Refresh All Partitions" style="width:450px !important"/>
 
@@ -155,7 +155,7 @@ in
 
 3. Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_
 4. Implementa los cambios en el modelo
-5. Mayús + clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
+5. **Actualizar todas las particiones:** Haga clic mientras mantiene pulsada la tecla Mayús para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 > [!WARNING]
 > Se actualizará cualquier registro cuyo valor sea igual al valor máximo de la columna. No necesariamente se actualiza de forma explícita porque el valor haya cambiado o porque sea igual a la fecha de actualización.
