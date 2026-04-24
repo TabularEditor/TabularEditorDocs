@@ -15,17 +15,17 @@ applies_to:
 
 ## 筛选模式
 
-从 [2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4) 起，Tabular Editor 允许你决定筛选器如何应用于层级结构中的对象，以及搜索结果的显示方式。 这通过紧挨着“Filter”按钮右侧的三个工具栏按钮来控制：
+从 [2.7.4](https://github.com/TabularEditor/TabularEditor/releases/tag/2.7.4) 起，Tabular Editor 允许你决定筛选器如何应用于层级结构中的对象，以及搜索结果的显示方式。 这通过紧挨着“Filter”按钮右侧的三个工具栏按钮来控制： 这通过紧挨着“Filter”按钮右侧的三个工具栏按钮来控制：
 
 ![image](https://user-images.githubusercontent.com/8976200/46567931-08a4b480-c93d-11e8-96fd-e197e87a0587.png)
 
-- ![image](https://user-images.githubusercontent.com/8976200/46567944-44d81500-c93d-11e8-91e2-d9822078dba7.png) **按父级分层**：搜索将应用于 _父级_ 对象，即表和显示文件夹（如已启用）。 当父级项匹配搜索条件时，将显示其所有子项。
-- ![image](https://user-images.githubusercontent.com/8976200/46567940-2ffb8180-c93d-11e8-9fba-84fbb79b6bb3.png) **按子级分层**：搜索将应用于 _子级_ 对象，即度量值、列、层级结构等。 父级对象仅在其至少有一个子对象匹配搜索条件时才会显示。
-- ![image](https://user-images.githubusercontent.com/8976200/46567941-37bb2600-c93d-11e8-9c02-86502f41bce8.png) **扁平**：搜索将应用于所有对象，结果以扁平列表显示。 包含子项的对象仍会以分层方式显示其子项。
+- ![image](https://user-images.githubusercontent.com/8976200/46567944-44d81500-c93d-11e8-91e2-d9822078dba7.png) **按父级分层**：搜索将应用于 _父级_ 对象，即表和显示文件夹（如已启用）。 当父级项匹配搜索条件时，将显示其所有子项。 当父级项匹配搜索条件时，将显示其所有子项。
+- ![image](https://user-images.githubusercontent.com/8976200/46567940-2ffb8180-c93d-11e8-9fba-84fbb79b6bb3.png) **按子级分层**：搜索将应用于 _子级_ 对象，即度量值、列、层级结构等。 父级对象仅在其至少有一个子对象匹配搜索条件时才会显示。 父级对象仅在其至少有一个子对象匹配搜索条件时才会显示。
+- ![image](https://user-images.githubusercontent.com/8976200/46567941-37bb2600-c93d-11e8-9c02-86502f41bce8.png) **扁平**：搜索将应用于所有对象，结果以扁平列表显示。 包含子项的对象仍会以分层方式显示其子项。 包含子项的对象仍会以分层方式显示其子项。
 
 ## 简单搜索
 
-在“Filter”文本框中输入任意内容，然后按 [Enter]，即可在对象名称中进行不区分大小写的简单搜索。 例如，在“Filter”文本框中输入“sales”，并使用“按父级”筛选模式，会得到如下结果：
+在“Filter”文本框中输入任意内容，然后按 [Enter]，即可在对象名称中进行不区分大小写的简单搜索。 例如，在“Filter”文本框中输入“sales”，并使用“按父级”筛选模式，会得到如下结果： 例如，在“Filter”文本框中输入“sales”，并使用“按父级”筛选模式，会得到如下结果：
 
 ![image](https://user-images.githubusercontent.com/8976200/46568002-5f5ebe00-c93e-11e8-997b-7f89dfd92076.png)
 
@@ -55,7 +55,7 @@ applies_to:
 
 ## 动态 LINQ 搜索
 
-你还可以使用 [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) 来搜索对象，这和你创建 [Best Practice Analyzer 规则](/Best-Practice-Analyzer) 时做的一样。 要在筛选框中启用动态 LINQ 模式，只需在搜索字符串前加上 `:`（冒号）。 例如，要查看所有名称以“Key”结尾的对象（区分大小写），请输入：
+你还可以使用 [Dynamic LINQ](https://github.com/kahanu/System.Linq.Dynamic/wiki/Dynamic-Expressions) 来搜索对象，这和你创建 [Best Practice Analyzer 规则](/Best-Practice-Analyzer) 时做的一样。 要在筛选框中启用动态 LINQ 模式，只需在搜索字符串前加上 `:`（冒号）。 例如，要查看所有名称以“Key”结尾的对象（区分大小写），请输入： 要在筛选框中启用动态 LINQ 模式，只需在搜索字符串前加上 `:`（冒号）。 例如，要查看所有名称以“Key”结尾的对象（区分大小写），请输入：
 
 ```
 :Name.EndsWith("Key")
@@ -77,7 +77,7 @@ applies_to:
 :Name.EndsWith("Key", StringComparison.InvariantCultureIgnoreCase)
 ```
 
-你不必只在对象名称中进行搜索。 动态 LINQ 的搜索字符串可以按需写得很复杂，用于匹配对象的任意属性（以及子属性）。 因此，如果你想找出所有表达式中包含“TODO”一词的对象，可以使用以下筛选条件：
+你不必只在对象名称中进行搜索。 你不必只在对象名称中进行搜索。 动态 LINQ 的搜索字符串可以按需写得很复杂，用于匹配对象的任意属性（以及子属性）。 因此，如果你想找出所有表达式中包含“TODO”一词的对象，可以使用以下筛选条件： 因此，如果你想找出所有表达式中包含“TODO”一词的对象，可以使用以下筛选条件：
 
 ```
 :Expression.ToUpper().Contains("TODO")
@@ -89,7 +89,7 @@ applies_to:
 :ObjectType="Measure" and (IsHidden or Table.IsHidden) and ReferencedBy.Count=0
 ```
 
-你也可以使用正则表达式。 下面会查找所有名称包含“Number”或“Amount”的列：
+你也可以使用正则表达式。 你也可以使用正则表达式。 下面会查找所有名称包含“Number”或“Amount”的列：
 
 ```
 :ObjectType="Column" and RegEx.IsMatch(Name,"(Number)|(Amount)")
