@@ -22,7 +22,6 @@ applies_to:
 
 本操作指南演示如何使用“复制-修改”模式，对指标视图的维度进行批量重命名。
 同样的模式也适用于指标视图中的所有集合。
-同样的模式也适用于指标视图中的所有集合。
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
