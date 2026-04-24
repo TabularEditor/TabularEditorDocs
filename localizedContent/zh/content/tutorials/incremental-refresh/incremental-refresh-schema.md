@@ -24,11 +24,11 @@ applies_to:
 ---
 
 > [!IMPORTANT]
-> 使用 Tabular Editor 3 设置增量刷新仅限于托管在 Power BI Datasets 服务中的数据集。 在 Analysis Services 中，需要自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
+> 使用 Tabular Editor 3 设置增量刷新仅限于托管在 Power BI Datasets 服务中的数据集。 在 Analysis Services 中，需要自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。 在 Analysis Services 中，需要自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ---
 
-**当在已配置增量刷新的表中添加或删除列时，必须更新表架构。** 通常，这与更新单分区表的表架构遵循的流程相同。 Tabular Editor 可以自动为你检测并更新架构：
+**当在已配置增量刷新的表中添加或删除列时，必须更新表架构。** 通常，这与更新单分区表的表架构遵循的流程相同。 Tabular Editor 可以自动为你检测并更新架构： Tabular Editor 可以自动为你检测并更新架构：
 
 1. **检测架构更改：** 右键单击该表，然后选择 _“更新表架构...”_。
 
@@ -56,7 +56,7 @@ applies_to:
 
 <div class="WARNING">
   <h5>在更新表架构之前检查 M 表达式</h5>
-  <p>如果架构更改源自数据源，你可能仍需要修改 Power Query 的 <b><em>源表达式</em></b> 或 <b><em>轮询表达式</em></b>。 建议在使用 <em>'更新表架构...'</em> 之前仔细检查这些表达式</p>
+  <p>如果架构更改源自数据源，你可能仍需要修改 Power Query 的 <b><em>源表达式</em></b> 或 <b><em>轮询表达式</em></b>。 建议在使用 <em>'更新表架构...'</em> 之前仔细检查这些表达式 建议在使用 <em>'更新表架构...'</em> 之前仔细检查这些表达式</p>
 </div>
 
 ---
@@ -100,7 +100,7 @@ applies_to:
 
 <div class="NOTE">
   <h5>已删除的列对象仍可能被查询</h5>
-  <p>从模型中删除列对象，并不会阻止它们被查询——只要它们仍存在于数据源中，且没有在 Native Query 或 <b><em>Source Expression</em></b> 中删除。 已查询但未使用的列会对刷新时间和资源使用产生负面影响。 建议同时从元数据中删除这些列，并在数据源（例如视图）或 <b><em>Source Expression</em></b> 中将其移除。</p>
+  <p>从模型中删除列对象，并不会阻止它们被查询——只要它们仍存在于数据源中，且没有在 Native Query 或 <b><em>Source Expression</em></b> 中删除。 已查询但未使用的列会对刷新时间和资源使用产生负面影响。 建议同时从元数据中删除这些列，并在数据源（例如视图）或 <b><em>Source Expression</em></b> 中将其移除。 已查询但未使用的列会对刷新时间和资源使用产生负面影响。 建议同时从元数据中删除这些列，并在数据源（例如视图）或 <b><em>Source Expression</em></b> 中将其移除。</p>
 </div>
 
 ---
@@ -131,12 +131,12 @@ applies_to:
 
 # [不支持的数据源](#tab/addingfromunsupportedsource)
 
-如果无法通过表的上下文菜单中的 _“更新表架构...”_ 来 **自动更新表架构**，请按以下步骤操作。 无论列是在数据源中删除还是在 Power Query 中删除，这些步骤都相同。
+如果你在表的上下文菜单中使用 _“更新表架构...”_ 时__无法自动更新表架构__，请按以下步骤操作。 无论列是在数据源中删除，还是在 Power Query 中删除，这些步骤都相同。 无论列是在数据源中删除还是在 Power Query 中删除，这些步骤都相同。
 
 1. **选择源表达式：** 选中表后，在 _表达式编辑器_ 窗口中，从左上角的下拉列表中选择 _源表达式_。
-2. **更新 Power Query 表达式：** 如适用，检查并删除对已移除列的所有命名引用。 如果该列是通过 Power Query 排除的，可在此进行相应更改。
-3. **手动更新架构：** 右键单击表，然后选择 _创建 > 数据列_。 为该列设置合适的名称。
-4. **配置新列：** 将该列的 `data type` 属性设置为合适的值。 将 `Source Column` 属性设置为与源一致。 还可以配置其他附加属性（例如 `Format String`、`SummarizeBy`、`Data Category`...） 并可将该列添加到相应的显示文件夹中。
+2. **更新 Power Query 表达式：** 如适用，检查并删除对已移除列的所有命名引用。 如果该列是通过 Power Query 排除的，可在此进行相应更改。 **更新 Power Query 表达式：** 如适用，请检查并删除对已移除列的任何命名引用。 如果该列是通过 Power Query 排除的，你可以在此进行相应更改。
+3. **手动更新架构：** 右键单击表，然后选择 _创建 > 数据列_。 为该列设置合适的名称。 为该列设置合适的名称。
+4. **配置新列：** 将该列的 `data type` 属性设置为合适的值。 将 `Source Column` 属性设置为与源一致。 还可以配置其他附加属性（例如 `Format String`、`SummarizeBy`、`Data Category`...） 将 `Source Column` 属性设置为与源一致。 还可以配置其他附加属性（例如 `Format String`、`SummarizeBy`、`Data Category`...） 并可将该列添加到相应的显示文件夹中。
 5. **应用更改：** 部署模型的更改。
 6. **应用刷新策略：** 右键单击表，然后选择 _应用刷新策略_。
 7. **刷新所有分区：** 按住 Shift 键并单击，以选择所有分区。 右键单击，然后选择 _刷新 > 完全刷新（分区）_。 你可以右键单击表，然后选择 _'预览数据'_ 来查看结果。
