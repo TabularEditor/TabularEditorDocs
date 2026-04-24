@@ -48,7 +48,7 @@ foreach (var obj in Model.AllMeasures.OfType<IAnnotationObject>())
 
 ## 何时使用接口
 
-当你需要编写适用于多种对象类型的通用代码时，应使用接口。 与其逐个检查每种类型，不如这样：
+当你需要编写适用于多种对象类型的通用代码时，应使用接口。 与其逐个检查每种类型，不如这样： 与其逐个检查每种类型，不如这样：
 
 ```csharp
 // Without interfaces -- repetitive
