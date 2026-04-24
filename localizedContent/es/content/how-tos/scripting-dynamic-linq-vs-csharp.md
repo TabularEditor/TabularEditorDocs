@@ -11,7 +11,7 @@ applies_to:
       full: true
 ---
 
-# En qué se diferencia Dynamic LINQ de LINQ de C\\#
+# En qué se diferencia Dynamic LINQ de LINQ de C\\\#
 
 Los C# Scripts usan LINQ estándar de C# con expresiones lambda. Las reglas de Best Practice Analyzer (BPA) y los filtros del árbol del Explorador usan [Dynamic LINQ](https://dynamic-linq.net/expression-language), un lenguaje de expresiones basado en cadenas con una sintaxis diferente. Este artículo es una guía de traducción entre ambos.
 
