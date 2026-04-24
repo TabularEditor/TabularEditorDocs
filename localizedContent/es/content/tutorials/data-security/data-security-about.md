@@ -311,7 +311,7 @@ _En el ejemplo:_
 3. _Tommy, que no tiene asignado ningún rol, no puede ver ningún dato._
 
 > [!WARNING]
-> Los escenarios que combinan RLS y OLS no son raros. <br>Los escenarios en los que se usan correctamente sí lo son. <br>Asegúrate de que, si tienes el requisito de usar RLS y OLS juntos, lo consideres cuidadosamente durante el diseño del modelo.
+> Los escenarios que combinan RLS y OLS no son raros. <br>Los escenarios en los que se usan correctamente sí lo son. <br>Asegúrate de que, si necesitas RLS y OLS a la vez, lo consideres detenidamente durante el diseño del modelo.
 
 # [❌ RLS+OLS (Combinar roles)](#tab/rlsolscombined)
 
