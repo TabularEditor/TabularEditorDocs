@@ -115,7 +115,6 @@ Selected.Measures
 
 这会将当前选中的所有度量值名称中的“Amount”全部替换为“Value”。
 或者，我们也可以使用上面介绍的 LINQ ForEach() 方法，以便加入更复杂的逻辑：
-或者，我们也可以使用上面介绍的 LINQ ForEach() 方法，以便加入更复杂的逻辑：
 
 ```csharp
 Selected.Measures
