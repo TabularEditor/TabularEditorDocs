@@ -31,11 +31,11 @@ applies_to:
 
 **信息：**
 
-- `No such host is known。 (login.microsoftonline.com:443)` (login.microsoftonline.com:443)\`
+- `No such host is known。 (login.microsoftonline.com:443)`
 - `Unable to obtain authentication token using the credentials provided`
-- `The requested address is not valid in its context。 (login.microsoftonline.com:443)` (login.microsoftonline.com:443)\`
+- `The requested address is not valid in its context。 (login.microsoftonline.com:443)`
 
-出现这种情况时，首先请尝试修改 Tabular Editor 3 的代理设置。 这些设置位于 **工具 > 偏好 > 代理设置**： 这些设置位于 **工具 > 偏好 > 代理设置**：
+出现这种情况时，首先请尝试修改 Tabular Editor 3 的代理设置。 这些设置位于 **工具 > 偏好 > 代理设置**：
 
 ![Proxy settings in Tabular Editor 3](~/content/assets/images/troubleshooting/proxy-settings.png)
 
@@ -49,9 +49,9 @@ applies_to:
 如果上述建议仍无法解决问题，从 Tabular Editor 的 3.21.0 版本开始，你可以尝试以下替代方案：
 
 > [!NOTE]
-> 下面列出的解决方案需要 Tabular Editor 3.21.0 或更高版本，因为这些 AS 配置选项仅在 AMO/TOM 客户端库 v. [19.94.1.1](https://www.nuget.org/packages/Microsoft.AnalysisServices/19.94.1.1) 中提供。 更早版本的 Tabular Editor 3 使用的是该客户端库的旧版本，会忽略这些配置选项。 更早版本的 Tabular Editor 3 使用的是该客户端库的旧版本，会忽略这些配置选项。
+> 下面列出的解决方案需要 Tabular Editor 3.21.0 或更高版本，因为这些 AS 配置选项仅在 AMO/TOM 客户端库 v. [19.94.1.1](https://www.nuget.org/packages/Microsoft.AnalysisServices/19.94.1.1) 中提供。 更早版本的 Tabular Editor 3 使用的是该客户端库的旧版本，会忽略这些配置选项。
 
-创建一个名为 <a href="https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/AnalysisServices.AppSettings.json" download="AnalysisServices.AppSettings.json">**AnalysisServices.AppSettings.json**</a> 的文件，并将其放入 Tabular Editor 3 的安装目录（即 TabularEditor3.exe 所在的同一目录）。 将以下内容添加到该文件中： 将以下内容添加到该文件中：
+创建一个名为 <a href="https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/AnalysisServices.AppSettings.json" download="AnalysisServices.AppSettings.json">**AnalysisServices.AppSettings.json**</a> 的文件，并将其放入 Tabular Editor 3 的安装目录（即 TabularEditor3.exe 所在的同一目录）。 将以下内容添加到该文件中：
 
 ```json
 {
@@ -71,7 +71,7 @@ applies_to:
 
 # 启用诊断
 
-如果你在尝试以上解决方案后仍无法连接，启用高级诊断日志可能会有帮助。 如果你在尝试以上解决方案后仍无法连接，启用高级诊断日志可能会有帮助。 你可以修改 **AnalysisServices.AppSettings.json** 文件，将其内容调整为如下所示：
+如果你在尝试以上解决方案后仍无法连接，启用高级诊断日志可能会有帮助。 你可以修改 **AnalysisServices.AppSettings.json** 文件，将其内容调整为如下所示：
 
 ```json
 {
@@ -98,7 +98,7 @@ applies_to:
 | MS_AS_AADAUTHENTICATOR_LOGLEVEL | 4                                                 |
 | MS_AS_AADAUTHENTICATOR_LOGFILE  | \<path to trace file\> |
 
-`<path to trace file>` 必须指向位于现有目录中的某个文件。 即。 `<path to trace file>` 必须指向位于现有目录中的某个文件。 即。 也就是说，如果你希望将文件写入 `c:\temp\logs\as-auth.log`，则必须确保目录 `c:\temp\logs` 已存在。
+`<path to trace file>` 必须指向位于现有目录中的某个文件。 即。 也就是说，如果你希望将文件写入 `c:\temp\logs\as-auth.log`，则必须确保目录 `c:\temp\logs` 已存在。
 
 在联系 Microsoft 支持时，此跟踪文件的内容很有用。
 
