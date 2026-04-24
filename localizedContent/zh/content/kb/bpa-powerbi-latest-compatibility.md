@@ -37,7 +37,7 @@ and Model.Database.CompatibilityLevel<>[CurrentMaxLevel]
 
 ### 自动修复
 
-该最佳实践规则包含一个自动修复，会将兼容级别设置为当前安装的 Tabular Editor 3 所支持的最高可用级别。 如果您安装的是较旧版本的 Tabular Editor 3，请将其更新到最新版本。 如果您安装的是较旧版本的 Tabular Editor 3，请将其更新到最新版本。
+该最佳实践规则包含一个自动修复，会将兼容级别设置为当前安装的 Tabular Editor 3 所支持的最高可用级别。 如果您安装的是较旧版本的 Tabular Editor 3，请将其更新到最新版本。
 
 ```csharp
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
