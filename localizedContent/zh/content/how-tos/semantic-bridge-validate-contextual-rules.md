@@ -22,7 +22,6 @@ applies_to:
 
 本操作指南演示如何使用验证上下文创建验证规则，以检查跨多个对象的条件。
 这些规则仅用于演示，并不一定反映 Metric Views 或 Semantic Bridge 的严格技术要求。
-这些规则仅用于演示，并不一定反映 Metric Views 或 Semantic Bridge 的严格技术要求。
 
 ## 何时使用上下文规则
 
@@ -100,7 +99,7 @@ var noDuplicateMeasureRule = SemanticBridge.MetricView.MakeValidationRule<Metric
 
 ## 为什么拆分规则更好
 
-注意，我们创建了两条独立的规则，而不是把它们合并成一条规则。 推荐这样做，原因是： 推荐这样做，原因是：
+注意，我们创建了两条独立的规则，而不是把它们合并成一条规则。 推荐这样做，原因是：
 
 1. **更清晰的错误信息**：每条规则都会生成明确、可操作的信息
 2. **更易维护**：规则可以独立新增、移除或修改
