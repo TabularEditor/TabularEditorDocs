@@ -12,12 +12,12 @@ author: Daniel Otykier
 
 **感谢你选择 Tabular Editor 3！**
 
-为了帮助你充分发挥该工具的价值，我们已将所有入门资料汇总在本“快速开始”部分中，希望你会喜欢。 我们建议所有 Tabular Editor 3 的新用户通读本指南，跳过你已经熟悉的内容。
+为了帮助你充分发挥该工具的价值，我们已将所有入门资料汇总在本“快速开始”部分中，希望你会喜欢。 为了帮助你充分发挥该工具的价值，我们已将所有入门资料汇总在本“快速开始”部分中，希望你会喜欢。 我们建议所有 Tabular Editor 3 的新用户通读本指南，跳过你已经熟悉的内容。
 
 > [!NOTE]
-> 本指南中的部分文章会引用 Tabular Editor 2，尤其是其命令行界面 (CLI)，用于自动化部署和测试。 我们计划在稍后发布一款可与 Tabular Editor 3 配套使用的独立 CLI 应用程序。
+> 本指南中的部分文章会引用 Tabular Editor 2，尤其是其命令行界面 (CLI)，用于自动化部署和测试。 我们计划在稍后发布一款可与 Tabular Editor 3 配套使用的独立 CLI 应用程序。 我们计划在稍后发布一款可与 Tabular Editor 3 配套使用的独立 CLI 应用程序。
 
-由于本培训资料侧重于 Tabular Editor 产品，我们假设你已对表格数据建模有基本了解（例如使用 Power BI Desktop、Visual Studio 或 Tabular Editor 2.x 进行建模）。 如果你刚开始接触表格数据建模，我们强烈建议你参考一些第三方提供的培训资料和课程，例如 [sqlbi.com](https://sqlbi.com)。
+由于本培训资料侧重于 Tabular Editor 产品，我们假设你已对表格数据建模有基本了解（例如使用 Power BI Desktop、Visual Studio 或 Tabular Editor 2.x 进行建模）。 如果你刚开始接触表格数据建模，我们强烈建议你参考一些第三方提供的培训资料和课程，例如 [sqlbi.com](https://sqlbi.com)。 如果你刚开始接触表格数据建模，我们强烈建议你参考一些第三方提供的培训资料和课程，例如 [sqlbi.com](https://sqlbi.com)。
 
 **本指南涵盖的主题：**
 
