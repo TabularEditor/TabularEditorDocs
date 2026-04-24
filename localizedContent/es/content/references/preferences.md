@@ -714,7 +714,7 @@ Define prefijos aceptables para nombres de variables (p. ej., `_`, `__`, `var_`,
 
 Define prefijos aceptables para nombres de columnas temporales (p. ej., `@`, `_`, `x`, `x_`). Las acciones de código sugerirán añadir estos prefijos a los nombres de columnas temporales que no sigan la convención.
 
-## Editor SQL / Editor M / Editor de C\\\\#
+## Editor SQL / Editor M / Editor de C\#
 
 ![Marcador de posición: captura de pantalla de las páginas de preferencias de los editores SQL/M/C#]
 
