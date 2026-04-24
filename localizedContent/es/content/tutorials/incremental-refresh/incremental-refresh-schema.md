@@ -73,7 +73,7 @@ Para las columnas eliminadas en el **Data source** (es decir, eliminadas de la v
 2. **Aplicar cambios de esquema detectados:** En el cuadro de diálogo _'Aplicar cambios de esquema'_, confirma los cambios de esquema deseados.
 3. **Aplicar cambios:** Implementa los cambios del modelo.
 4. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
-5. **Actualizar todas las particiones:** Haz Mayús+clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
+5. **Actualizar todas las particiones:** Mantén pulsada la tecla Shift y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 # [Power Query](#tab/removingfrompq)
 
@@ -83,18 +83,18 @@ Para columnas eliminadas a través de **Power Query** (es decir, usando `Table.R
 2. **Aplicar cambios de esquema detectados:** En el cuadro de diálogo _'Aplicar cambios de esquema'_, confirma los cambios de esquema deseados.
 3. **Aplicar cambios:** Implementa los cambios del modelo.
 4. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
-5. **Actualizar todas las particiones:** Mantén presionada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
+5. **Actualizar todas las particiones:** Mantén pulsada la tecla Shift y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 # [Data source no compatible](#tab/removingfromunsupportedsource)
 
-Si **no puedes actualizar automáticamente el esquema de la tabla** con _'Actualizar el esquema de la tabla...'_ desde el menú contextual de la tabla, sigue los pasos a continuación. Estos pasos son los mismos tanto si las columnas se quitaron en el Data source como en Power Query.
+Si **no puedes actualizar automáticamente el esquema de la tabla** mediante _'Actualizar esquema de tabla...'_ desde el menú contextual de la tabla, sigue estos pasos. Estos pasos son los mismos tanto para las columnas eliminadas en el Data source como en Power Query.
 
 1. **Selecciona la expresión de origen:** Con la tabla seleccionada, en la ventana del _Editor de expresiones_, selecciona _Source Expression_ en la lista desplegable de la esquina superior izquierda.
-2. **Actualiza las expresiones de Power Query:** Comprueba y quita cualquier referencia con nombre a la columna eliminada, si corresponde. Si la columna se está excluyendo mediante Power Query, puedes hacer los cambios correspondientes aquí.
+2. **Actualizar las expresiones de Power Query:** Revisa y elimina cualquier referencia con nombre a la columna eliminada, si corresponde. Si la columna se está excluyendo mediante Power Query, puedes realizar aquí los cambios necesarios.
 3. **Actualiza manualmente el esquema:** Elimina el objeto de columna de datos de la tabla.
 4. **Aplicar cambios:** Implementa los cambios del modelo.
 5. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
-6. **Actualizar todas las particiones:** Mantén presionada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
+6. **Actualizar todas las particiones:** Haz Mayús+clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 ***
 
@@ -117,7 +117,7 @@ Para las columnas agregadas en el **Data source** (es decir, añadidas a la vist
 2. **Aplicar los cambios de esquema detectados:** En el cuadro de diálogo _'Aplicar cambios de esquema'_, confirma los cambios de esquema deseados.
 3. **Aplicar cambios:** Implementa los cambios del modelo.
 4. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
-5. **Actualizar todas las particiones:** Mantén pulsada la tecla Shift y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
+5. **Actualizar todas las particiones:** Mantén pulsada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 # [Power Query](#tab/addingfrompq)
 
@@ -127,18 +127,18 @@ Para las columnas eliminadas mediante **Power Query** (es decir, usando `Table.A
 2. **Aplicar los cambios de esquema detectados:** En el cuadro de diálogo _'Aplicar cambios de esquema'_, confirma los cambios de esquema deseados.
 3. **Aplicar cambios:** Implementa los cambios del modelo.
 4. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
-5. **Actualizar todas las particiones:** Mantén pulsada la tecla Shift y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
+5. **Actualizar todas las particiones:** Mantén presionada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 # [Data source no compatible](#tab/addingfromunsupportedsource)
 
-Si **no puedes actualizar automáticamente el esquema de la tabla** mediante _'Actualizar esquema de tabla...'_ desde el menú contextual de la tabla, sigue estos pasos. Estos pasos son los mismos tanto para las columnas eliminadas en el Data source como en Power Query.
+Si **no puedes actualizar automáticamente el esquema de la tabla** con _'Actualizar el esquema de la tabla...'_ desde el menú contextual de la tabla, sigue los pasos a continuación. Estos pasos son los mismos tanto si las columnas se quitaron en el Data source como en Power Query.
 
 1. **Seleccionar la expresión de origen:** Con la tabla seleccionada, en la ventana _Editor de expresiones_, selecciona _Source Expression_ en la lista desplegable de la esquina superior izquierda.
-2. **Actualizar las expresiones de Power Query:** Revisa y elimina cualquier referencia con nombre a la columna eliminada, si corresponde. Si la columna se está excluyendo mediante Power Query, puedes realizar aquí los cambios necesarios.
+2. **Actualiza las expresiones de Power Query:** Comprueba y quita cualquier referencia con nombre a la columna eliminada, si corresponde. Si la columna se está excluyendo mediante Power Query, puedes hacer los cambios correspondientes aquí.
 3. **Actualizar manualmente el esquema:** Haz clic con el botón derecho en la tabla y selecciona _Crear > Columna de datos_. Asigna un nombre adecuado a la columna.
 4. **Configurar la nueva columna:** Configura la propiedad `data type` de la columna según corresponda. Configura la propiedad `Source Column` para que coincida con el origen. También se pueden configurar propiedades adicionales (p. ej., `Format String`, `SummarizeBy`, `Data Category`...) y la columna se puede agregar a la carpeta de visualización correspondiente.
 5. **Aplicar cambios:** Implementa los cambios del modelo.
 6. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y selecciona _Aplicar política de actualización_.
-7. **Actualizar todas las particiones:** Mantén pulsada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
+7. **Actualizar todas las particiones:** Mantén presionada la tecla Mayús y haz clic para seleccionar todas las particiones. Haz clic con el botón derecho y selecciona _Actualizar > Actualización completa (partición)_. Puedes hacer clic con el botón derecho en la tabla y seleccionar _'Vista previa de datos'_ para ver el resultado.
 
 ***
