@@ -125,7 +125,6 @@ Selected.Measures
 
 这会将当前所选所有度量值的名称中出现的“Amount”替换为“Value”。
 或者，也可以按上文所述使用 LINQ 的 ForEach() 方法，以实现更复杂的逻辑：
-或者，也可以按上文所述使用 LINQ 的 ForEach() 方法，以实现更复杂的逻辑：
 
 ```csharp
 Selected.Measures
@@ -296,7 +295,7 @@ using TabularEditor.UI;
 
 ## 访问环境变量
 
-通过 Tabular Editor CLI 运行 C# Script 时（尤其是在 CI/CD 流水线中），可以使用环境变量向脚本传递参数。 这是推荐的做法，因为 Tabular Editor CLI 执行的 C# Script 不支持传统的命令行参数。 这是推荐的做法，因为 Tabular Editor CLI 执行的 C# Script 不支持传统的命令行参数。
+通过 Tabular Editor CLI 运行 C# Script 时（尤其是在 CI/CD 流水线中），可以使用环境变量向脚本传递参数。 这是推荐的做法，因为 Tabular Editor CLI 执行的 C# Script 不支持传统的命令行参数。
 
 ### 读取环境变量
 
