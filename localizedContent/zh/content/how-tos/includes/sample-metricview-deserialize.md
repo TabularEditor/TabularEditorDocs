@@ -2,6 +2,7 @@
 
 本操作指南使用一个示例电商 Metric View 来表示销售数据，其中三个维度表（product、customer、date）连接到一个事实表（orders）。
 如果你想在阅读本操作指南其余部分时跟着代码一起操作，请先运行下面的代码片段
+如果你想在阅读本操作指南其余部分时跟着代码一起操作，请先运行下面的代码片段
 
 ```csharp
 SemanticBridge.MetricView.Deserialize("""
