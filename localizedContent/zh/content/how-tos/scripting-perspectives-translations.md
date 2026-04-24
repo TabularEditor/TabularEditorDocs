@@ -72,7 +72,7 @@ Model.Perspectives["Old View"].Delete();
 
 ## 设置翻译
 
-翻译索引器适用于实现 (xref:TabularEditor.TOMWrapper.ITranslatableObject) 接口的对象（表、列、度量值、层次结构、级别）。 显示文件夹的翻译需要对象实现 (xref:TabularEditor.TOMWrapper.IFolderObject)（度量值、列、层次结构）。
+翻译索引器适用于实现 (xref:TabularEditor.TOMWrapper.ITranslatableObject) 接口的对象（表、列、度量值、层次结构、级别）。 显示文件夹的翻译需要对象实现 (xref:TabularEditor.TOMWrapper.IFolderObject)（度量值、列、层次结构）。 显示文件夹的翻译需要对象实现 (xref:TabularEditor.TOMWrapper.IFolderObject)（度量值、列、层次结构）。
 
 ```csharp
 var m = Model.AllMeasures.First(m => m.Name == "Revenue");
