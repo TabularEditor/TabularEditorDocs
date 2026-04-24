@@ -70,7 +70,7 @@ tabulareditor.exe Database.json -B model.bim
 
 ![New model dialog](~/content/assets/images/new-model.png)
 
-如果你启用 **使用工作区数据库** 选项，Tabular Editor 会提示你输入一个 Analysis Services 实例和数据库名称，作为你在处理模型时使用的 Workspace 数据库。 如果不启用此选项，你仍然可以在“离线”模式下创建并处理模型，依然可以添加表、关系、编写 DAX 表达式等。 但在你能够刷新、预览并查询模型中的数据之前，必须先将离线模型部署到某个 Analysis Services 实例。 如果不启用此选项，你仍然可以在“离线”模式下创建并处理模型，依然可以添加表、关系、编写 DAX 表达式等。 但在你能够刷新、预览并查询模型中的数据之前，必须先将离线模型部署到某个 Analysis Services 实例。
+如果你启用 **使用工作区数据库** 选项，Tabular Editor 会提示你输入一个 Analysis Services 实例和数据库名称，作为你在处理模型时使用的 Workspace 数据库。 如果不启用此选项，你仍然可以在“离线”模式下创建并处理模型，依然可以添加表、关系、编写 DAX 表达式等。 但在你能够刷新、预览并查询模型中的数据之前，必须先将离线模型部署到某个 Analysis Services 实例。
 
 > [!IMPORTANT]
 > Tabular Editor 3 不提供与 Visual Studio 的 **集成 Workspace** 选项等效的功能。 本质上，集成 Workspace 是由 Visual Studio 管理的一个 Analysis Services 实例。 由于 Analysis Services 是 Microsoft 的专有软件，我们无法将它随 Tabular Editor 3 一起发布。 作为替代方案，如果你希望运行一个供 Tabular Editor 使用的本地 Analysis Services 实例，我们建议你安装 [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)。 本质上，集成 Workspace 是由 Visual Studio 管理的一个 Analysis Services 实例。 由于 Analysis Services 是 Microsoft 的专有软件，我们无法将它随 Tabular Editor 3 一起发布。 作为替代方案，如果你希望运行一个供 Tabular Editor 使用的本地 Analysis Services 实例，我们建议你安装 [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)。
