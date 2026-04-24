@@ -19,16 +19,16 @@ applies_to:
 
 # 实现明细行表达式
 
-当用户在连接到 Power BI 或 Analysis Services 模型的 Excel 数据透视表中双击某个值时，会触发 **钻取** 操作——系统会打开一个工作表，显示该汇总值背后的底层明细行。 默认情况下，模型会返回该度量值所在表中的所有列，这对最终用户通常没有太大帮助。
+当用户在连接到 Power BI 或 Analysis Services 模型的 Excel 数据透视表中双击某个值时，会触发 **钻取** 操作——系统会打开一个工作表，显示该汇总值背后的底层明细行。 默认情况下，模型会返回该度量值所在表中的所有列，这对最终用户通常没有太大帮助。 默认情况下，模型会返回该度量值所在表中的所有列，这对最终用户通常没有太大帮助。
 
-**明细行表达式**可让你精确定义钻取结果中显示哪些列。 你需要编写一个 DAX 表表达式，返回你希望用户看到的数据形状——把事实表中的列与维度表中的相关属性组合在一起。
+**明细行表达式**可让你精确定义钻取结果中显示哪些列。 **明细行表达式**可让你精确定义钻取结果中显示哪些列。 你需要编写一个 DAX 表表达式，返回你希望用户看到的数据形状——把事实表中的列与维度表中的相关属性组合在一起。
 
-另外值得注意的是：虽然 Excel 数据透视表通常使用 MDX 查询模型，但双击触发的钻取操作会以 **DAX 查询** 的形式执行。 因此，明细行表达式在获取高基数数据 — 例如交易 ID 或单条订单行 — 时尤其有效，因为在这类场景下 DAX 的性能明显优于 MDX。
+另外值得注意的是：虽然 Excel 数据透视表通常使用 MDX 查询模型，但双击触发的钻取操作会以 **DAX 查询** 的形式执行。 因此，明细行表达式在获取高基数数据 — 例如交易 ID 或单条订单行 — 时尤其有效，因为在这类场景下 DAX 的性能明显优于 MDX。 因此，明细行表达式在获取高基数数据 — 例如交易 ID 或单条订单行 — 时尤其有效，因为在这类场景下 DAX 的性能明显优于 MDX。
 
-在本教程中，你将在 `Orders` 表上配置一个**表级**的明细行表达式，使该表上的所有度量值都使用同一套更友好的钻取结果。 然后，你会看到如何为某个特定度量值覆盖该设置。
+在本教程中，你将在 `Orders` 表上配置一个**表级**的明细行表达式，使该表上的所有度量值都使用同一套更友好的钻取结果。 然后，你会看到如何为某个特定度量值覆盖该设置。 然后，你会看到如何为某个特定度量值覆盖该设置。
 
 > [!NOTE]
-> 本教程中的步骤同时适用于 Tabular Editor 2 和 Tabular Editor 3。 屏幕截图以 Tabular Editor 3 为例。
+> 本教程中的步骤同时适用于 Tabular Editor 2 和 Tabular Editor 3。 屏幕截图以 Tabular Editor 3 为例。 屏幕截图以 Tabular Editor 3 为例。
 
 ## 先决条件
 
@@ -64,7 +64,7 @@ applies_to:
 
 ### 步骤 1：选择表并定位该属性
 
-在 **TOM Explorer** 中，选择你要配置的表——本例中是 `Orders` 表。 在 **Properties** 面板中，在 **Options** 组下找到 **Default Detail Rows Expression** 字段。
+在 **TOM Explorer** 中，选择你要配置的表——本例中是 `Orders` 表。 在 **Properties** 面板中，在 **Options** 组下找到 **Default Detail Rows Expression** 字段。 在 **Properties** 面板中，在 **Options** 组下找到 **Default Detail Rows Expression** 字段。
 
 ![在 TOM Explorer 中选中 Orders 表，Properties 面板中可见且为空的 Default Detail Rows Expression 属性](../assets/images/tutorials/detail-rows-expression/tom-and-default-detail-rows-expression-field.jpg)
 
@@ -74,7 +74,7 @@ applies_to:
 
 ### 步骤 3：编写 SELECTCOLUMNS 表达式
 
-输入一个使用 `SELECTCOLUMNS` 的 DAX 表达式，用来定义要返回的列。 使用 `RELATED()` 引入来自维度表的列。
+输入一个使用 `SELECTCOLUMNS` 的 DAX 表达式，用来定义要返回的列。 使用 `RELATED()` 引入来自维度表的列。 使用 `RELATED()` 引入来自维度表的列。
 
 ```dax
 SELECTCOLUMNS(
@@ -100,7 +100,7 @@ SELECTCOLUMNS(
 > `RELATED()` 在这里之所以可用，是因为 `SELECTCOLUMNS` 会迭代 `Orders` 表的各行，为每一行提供行语境，从而可通过现有关系导航到相关表。
 
 > [!TIP]
-> 虽然 `SELECTCOLUMNS` 是标准模式，但你也可以用任何有效的 DAX 表表达式。 例如，你可以用 `CALCULATETABLE` 将该表达式包起来以应用额外筛选，用 `ADDCOLUMNS` 添加派生值，或调用 `DETAILROWS` 复用其他度量值的 Detail Rows Expression，以避免重复编写。
+> 虽然 `SELECTCOLUMNS` 是标准模式，但你也可以用任何有效的 DAX 表表达式。 例如，你可以用 `CALCULATETABLE` 将该表达式包起来以应用额外筛选，用 `ADDCOLUMNS` 添加派生值，或调用 `DETAILROWS` 复用其他度量值的 Detail Rows Expression，以避免重复编写。 例如，你可以用 `CALCULATETABLE` 将该表达式包起来以应用额外筛选，用 `ADDCOLUMNS` 添加派生值，或调用 `DETAILROWS` 复用其他度量值的 Detail Rows Expression，以避免重复编写。
 
 ### 步骤 4：保存模型
 
@@ -116,7 +116,7 @@ SELECTCOLUMNS(
 
 ## 用度量值级别的表达式进行覆盖
 
-如果某个特定度量值需要不同的一组明细列，你可以直接在该度量值上定义 **Detail Rows Expression**。 这会仅对该度量值生效，从而覆盖表级表达式。
+如果某个特定度量值需要不同的一组明细列，你可以直接在该度量值上定义 **Detail Rows Expression**。 这会仅对该度量值生效，从而覆盖表级表达式。 这会仅对该度量值生效，从而覆盖表级表达式。
 
 1. 在 **TOM Explorer** 中，展开表并选择该度量值——例如 `Orders` 下的 `Quantity`。
 2. 在 **Properties** 面板中，找到 **Detail Rows Expression** 字段。
@@ -143,13 +143,15 @@ SELECTCOLUMNS(
 ## 故障排除
 
 **钻取仍显示原始列**
+添加表达式后，模型可能尚未保存并重新部署。 **钻取仍显示原始列**
 添加表达式后，模型可能尚未保存并重新部署。 保存模型，重新部署，并在测试前重新连接 Excel。
 
 **表达式未应用到特定度量值**
+如果你同时定义了表级和度量值级表达式，则以度量值级为准。 **表达式未应用到特定度量值**
 如果你同时定义了表级和度量值级表达式，则以度量值级为准。 在 **属性** 面板中选中该度量值，然后查看 **Detail Rows Expression** 字段，确认当前生效的是哪个表达式。
 
 **`RELATED()` 返回错误**
-`RELATED()` 需要从源表到所引用维度表存在一条活动的多对一关系。 检查你的模型中该关系是否存在且处于活动状态。
+`RELATED()` 需要从源表到所引用维度表存在一条活动的多对一关系。 检查你的模型中该关系是否存在且处于活动状态。 检查你的模型中该关系是否存在且处于活动状态。
 
 ## 延伸阅读
 
