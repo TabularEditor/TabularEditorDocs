@@ -113,7 +113,7 @@ applies_to:
   ![File Menu New](~/content/assets/images/file-menu-new.png)
 
 > [!IMPORTANT]
-> **新建 > 模型...** 选项在 Tabular Editor 3 桌面版中不可用，因为该版本只能作为 Power BI Desktop 的外部工具使用。 [更多信息](xref:editions)。 [更多信息](xref:editions)。
+> **新建 > 模型...** 选项在 Tabular Editor 3 桌面版中不可用，因为该版本只能作为 Power BI Desktop 的外部工具使用。 [更多信息](xref:editions)。
 
 - **打开**：打开一个子菜单，提供从多种来源加载数据模型的选项，以及一个用于加载任何其他类型文件的选项。 子菜单项包括：
 
