@@ -463,7 +463,7 @@ start /wait TabularEditor.exe "localhost" "AdventureWorks" -S "c:\Projects\Autog
 ## 根据分区源元数据创建数据列
 
 > [!NOTE]
-> 下文所述的 `RefreshDataColumns()` 方法仅在 **Tabular Editor 2** 中可用。 在 Tabular Editor 3 中，请改用 **Import Table...** 功能。 在 Tabular Editor 3 中，请改用 **Import Table...** 功能。
+> 下文所述的 `RefreshDataColumns()` 方法仅在 **Tabular Editor 2** 中可用。 在 Tabular Editor 3 中，请改用 **Import Table...** 功能。
 
 如果某个表使用基于 OLE DB Provider数据源的查询分区，我们可以通过执行以下代码片段来自动刷新该表的列元数据：
 
