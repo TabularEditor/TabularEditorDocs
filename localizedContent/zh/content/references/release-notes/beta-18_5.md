@@ -1,7 +1,7 @@
 # Tabular Editor 3 BETA-18.5
 
 > [!IMPORTANT]
-> 已有更新版本的 Tabular Editor 可用。 你可以在 [这里](https://docs.tabulareditor.com/references/release-notes) 找到最新版本。 你可以在 [这里](https://docs.tabulareditor.com/references/release-notes) 找到最新版本。
+> 已有更新版本的 Tabular Editor 可用。 你可以在 [这里](https://docs.tabulareditor.com/references/release-notes) 找到最新版本。
 
 - 下载 [Tabular Editor 3 BETA-18.5](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.5.x86.msi)
 - 下载 [Tabular Editor 3 BETA-18.5（64 位）](https://cdn.tabulareditor.com/files/TabularEditor.3.BETA-18.5.x64.msi)
@@ -9,7 +9,7 @@
 
 ## BETA-18.5 中的新功能：
 
-- “搜索”对话框（CTRL+F）现在支持搜索整个模型。 在下拉菜单中选择该选项后，会出现另一个下拉菜单，供你选择要搜索哪些对象属性。 “搜索”对话框（CTRL+F）现在支持搜索整个模型。 在下拉菜单中选择该选项后，会出现另一个下拉菜单，供你选择要搜索哪些对象属性。 同时还提供正则表达式、反斜杠表达式，以及[类似 Tabular Editor 2.x 的 Dynamic LINQ 搜索](https://docs.tabulareditor.com/Advanced-Filtering-of-the-Explorer-Tree.html)（也可以在“查找内容”字段中以 `:` 作为第一个字符来启用 Dynamic LINQ）。 搜索结果会显示在单独的窗口中；在搜索结果窗口中双击某个项，会直接跳转到该项，并在属性网格中高亮显示相关属性： 搜索结果会显示在单独的窗口中；在搜索结果窗口中双击某个项，会直接跳转到该项，并在属性网格中高亮显示相关属性：
+- “搜索”对话框（CTRL+F）现在支持搜索整个模型。 在下拉菜单中选择该选项后，会出现另一个下拉菜单，供你选择要搜索哪些对象属性。 同时还提供正则表达式、反斜杠表达式，以及[类似 Tabular Editor 2.x 的 Dynamic LINQ 搜索](https://docs.tabulareditor.com/Advanced-Filtering-of-the-Explorer-Tree.html)（也可以在“查找内容”字段中以 `:` 作为第一个字符来启用 Dynamic LINQ）。 搜索结果会显示在单独的窗口中；在搜索结果窗口中双击某个项，会直接跳转到该项，并在属性网格中高亮显示相关属性：
 
 ![image](https://user-images.githubusercontent.com/30911111/119983803-edd94f80-bfc0-11eb-91cb-aee084e0c83d.png)
 
