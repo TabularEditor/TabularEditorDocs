@@ -41,7 +41,7 @@ applies_to:
 
 这两个文件 **.pbix** 和 **.pbit** 都可以在 Power BI Desktop 中打开，并且基本上定义了与 Power BI Report 相关的所有内容：数据源、Power Query 转换、表格式 Data model、报表页面、Visual、Bookmark 等。
 
-主要区别在于：**.pbix 和 .pbip 文件包含模型数据**，而 **.pbit 文件不包含任何数据**。 另外，**.pbix** 文件不以这种格式包含模型元数据，因此，**无法以任何方式将 .pbix 文件直接加载到 Tabular Editor 中**。 相反，你需要改用“外部工具”集成；这要求你按下文所述在 Power BI Desktop 中加载 .pbix 文件。 另外，**.pbix** 文件不以这种格式包含模型元数据，因此，**无法以任何方式将 .pbix 文件直接加载到 Tabular Editor 中**。 相反，你需要改用“外部工具”集成；这要求你按下文所述在 Power BI Desktop 中加载 .pbix 文件。
+主要区别在于：**.pbix 和 .pbip 文件包含模型数据**，而 **.pbit 文件不包含任何数据**。 另外，**.pbix** 文件不以这种格式包含模型元数据，因此，**无法以任何方式将 .pbix 文件直接加载到 Tabular Editor 中**。 相反，你需要改用“外部工具”集成；这要求你按下文所述在 Power BI Desktop 中加载 .pbix 文件。
 
 > [!WARNING]
 > 尽管从技术上讲可以在 .pbit 文件中加载和保存模型元数据，但 Power BI Desktop 不支持这种做法。 因此，修改 .pbit 文件始终存在风险：可能导致 Power BI Desktop 无法加载该文件，或在加载后引发稳定性问题。 在这种情况下，Microsoft 支持将无法为你提供帮助。 因此，修改 .pbit 文件始终存在风险：可能导致 Power BI Desktop 无法加载该文件，或在加载后引发稳定性问题。 在这种情况下，Microsoft 支持将无法为你提供帮助。
