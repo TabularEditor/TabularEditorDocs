@@ -22,6 +22,7 @@ applies_to:
 
 本操作指南演示如何将新的 Metric View 维度（字段）添加到已加载的 Metric View 中。
 类似的方法也适用于所有 Metric View 集合。
+类似的方法也适用于所有 Metric View 集合。
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
