@@ -83,7 +83,7 @@ Para más información, consulta <xref:user-interface>.
 
 ### Nuevo editor de DAX y capacidades semánticas
 
-Tabular Editor 3 incorpora su propio motor de análisis sintáctico de DAX (también conocido como el "analizador semántico"), lo que significa que la herramienta ahora entiende la semántica de cualquier código DAX de tu modelo. Por supuesto, el editor es altamente configurable, lo que te permite ajustarlo para que se adapte a tu estilo de programación de DAX. Este motor también se usa para impulsar nuestro editor de DAX (nombre en clave "Daxscilla"), y para habilitar funciones como el resaltado de sintaxis, el formato automático, el autocompletado de código, los calltips, la refactorización y mucho más.
+Tabular Editor 3 incorpora su propio motor de análisis sintáctico de DAX (también conocido como el "analizador semántico"), lo que significa que la herramienta ahora entiende la semántica de cualquier código DAX de tu modelo. Este motor también se usa para impulsar nuestro editor de DAX (nombre en clave "Daxscilla"), y para habilitar funciones como el resaltado de sintaxis, el formato automático, el autocompletado de código, los calltips, la refactorización y mucho más. Este motor también se usa para impulsar nuestro editor de DAX (nombre en clave "Daxscilla"), y para habilitar funciones como el resaltado de sintaxis, el formato automático, el autocompletado de código, los calltips, la refactorización y mucho más.
 
 Para obtener más información sobre el nuevo editor de DAX, consulta <xref:dax-editor>.
 
