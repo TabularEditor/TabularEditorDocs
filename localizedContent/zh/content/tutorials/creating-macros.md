@@ -22,7 +22,6 @@ applies_to:
 
 宏是保存在 Tabular Editor 中的 C# Script，可以在不同语义模型之间轻松复用。
 将脚本保存为宏后，在 TOM Explorer 中右键单击对象即可使用该宏，从而轻松将脚本应用到模型中。
-将脚本保存为宏后，在 TOM Explorer 中右键单击对象即可使用该宏，从而轻松将脚本应用到模型中。
 
 > [!NOTE]
 > 在 Tabular Editor 2 中，用于复用 C# Script 的功能叫做 @custom-actions。
@@ -33,9 +32,6 @@ applies_to:
 
 > [!TIP]
 > 开始进行 C# Script 编写的一个简单方法是使用内置的录制功能，它会记录你在 TOM Explorer 中执行的操作。
-> 这样你就能看到如何与不同的模型对象交互，并创建可复用的脚本。
-> 另一种方法是复用现有脚本，例如我们的[脚本库](xref:csharp-script-library)中的脚本。
-> 在本教程中，我们使用脚本 [Format Numeric Measures](xref:script-format-numeric-measures) 来演示宏功能。
 > 这样你就能看到如何与不同的模型对象交互，并创建可复用的脚本。
 > 另一种方法是复用现有脚本，例如我们的[脚本库](xref:csharp-script-library)中的脚本。
 > 在本教程中，我们使用脚本 [Format Numeric Measures](xref:script-format-numeric-measures) 来演示宏功能。
@@ -52,13 +48,13 @@ applies_to:
 
 ![宏保存信息框](~/content/assets/images/features/macros/macro_tutorial_save_window.png)
 
-在上面的示例中，宏将保存到名为 Formatting\Beginner 的文件夹中，脚本名为“格式化数字度量值”。 它会保存在“度量值”上下文中。 它会保存在“度量值”上下文中。
+在上面的示例中，宏将保存到名为 Formatting\Beginner 的文件夹中，脚本名为“格式化数字度量值”。 它会保存在“度量值”上下文中。
 
 ### 宏上下文
 
 宏会保存在一个“有效上下文”中，该上下文决定脚本可以应用到模型中的哪些对象。
 
-之后，在 TOM Explorer 中右键单击某个度量值时即可使用该宏。 保存宏时所选择的上下文决定：在哪些对象上右键单击时会显示该宏。 保存宏时所选择的上下文决定：在哪些对象上右键单击时会显示该宏。
+之后，在 TOM Explorer 中右键单击某个度量值时即可使用该宏。 保存宏时所选择的上下文决定：在哪些对象上右键单击时会显示该宏。
 
 Tabular Editor 会根据正在保存的脚本建议一个上下文。
 
@@ -72,10 +68,10 @@ Tabular Editor 会根据正在保存的脚本建议一个上下文。
 
 ## 宏 JSON 文件
 
-宏以名为 MacroActions.json 的 JSON 文件形式存储在 %LocalAppFolder%/TabularEditor3 中。 有关 Tabular Editor 中包括宏在内的文件类型的更多信息，请参阅 [支持的文件类型](xref:supported-files#macroactionsjson) 有关 Tabular Editor 中包括宏在内的文件类型的更多信息，请参阅 [支持的文件类型](xref:supported-files#macroactionsjson)
+宏以名为 MacroActions.json 的 JSON 文件形式存储在 %LocalAppFolder%/TabularEditor3 中。 有关 Tabular Editor 中包括宏在内的文件类型的更多信息，请参阅 [支持的文件类型](xref:supported-files#macroactionsjson)
 
 ## 宏文件示例
 
-你可以在此处找到一个宏文件 MacroActions.json 示例。 你可以在此处找到一个宏文件 MacroActions.json 示例。 其中包含我们脚本库中的多个 C# Script: [下载示例 MacroActions 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
+你可以在此处找到一个宏文件 MacroActions.json 示例。 其中包含我们脚本库中的多个 C# Script: [下载示例 MacroActions 文件](https://raw.githubusercontent.com/TabularEditor/TabularEditorDocs/main/content/assets/file-types/MacroActions.json)
 
 
