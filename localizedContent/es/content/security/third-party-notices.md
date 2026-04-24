@@ -164,13 +164,13 @@ proporcione el Software hacerlo, sujeto a las siguientes condiciones:
 El aviso de copyright anterior y este aviso de permiso deberán incluirse
 en todas las copias o partes sustanciales del Software.
 
-EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O
-IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD,
-IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y LA INEXISTENCIA DE INFRACCIÓN. EN NINGÚN CASO LOS
-AUTORES O TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRA
-RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, EXTRACONTRACTUAL O DE OTRO TIPO, QUE SURJA DE,
-SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O EL USO U OTROS TRATOS CON EL
-SOFTWARE.
+EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA
+O IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD,
+IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO
+LOS AUTORES O LOS TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRA
+RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, DE RESPONSABILIDAD EXTRACONTRACTUAL O DE CUALQUIER OTRA ÍNDOLE, QUE SURJA
+DE, SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O CON EL USO U OTRAS OPERACIONES
+RELACIONADAS CON EL SOFTWARE.
 
 -----------------------------------------------------------------
 
@@ -192,10 +192,10 @@ las copias o partes sustanciales del Software.
 
 EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O
 IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD,
-IDONEIDAD PARA UN FIN DETERMINADO Y NO INFRACCIÓN. EN NINGÚN CASO LOS
-AUTORES O LOS TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑO U OTRA
-RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, EXTRACONTRACTUAL O DE CUALQUIER OTRO TIPO, QUE SURJA DE,
-SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O CON EL USO U OTRO TIPO DE OPERACIONES CON EL
+IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO
+LOS AUTORES O LOS TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRA
+RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, DE RESPONSABILIDAD EXTRACONTRACTUAL O DE CUALQUIER OTRA ÍNDOLE, QUE SURJA DE,
+SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O CON EL USO U OTRAS OPERACIONES RELACIONADAS CON EL
 SOFTWARE.
 
 -----------------------------------------------------------------
@@ -220,13 +220,13 @@ les proporcione el Software lo hagan, con sujeción a las siguientes condiciones
 El aviso de copyright anterior y este aviso de permiso deberán incluirse en todas
 las copias o partes sustanciales del Software.
 
-EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA
-O IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD,
+EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O
+IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD,
 IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO
 LOS AUTORES O LOS TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRA
-RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, DE RESPONSABILIDAD EXTRACONTRACTUAL O DE CUALQUIER OTRA ÍNDOLE, QUE SURJA
-DE, SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O CON EL USO U OTRAS OPERACIONES
-RELACIONADAS CON EL SOFTWARE.
+RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, DE RESPONSABILIDAD EXTRACONTRACTUAL O DE CUALQUIER OTRA ÍNDOLE, QUE SURJA DE,
+SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O CON EL USO U OTRAS OPERACIONES RELACIONADAS CON EL
+SOFTWARE.
 
 -----------------------------------------------------------------
 
@@ -250,10 +250,10 @@ las copias o partes sustanciales del Software.
 
 EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O
 IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD,
-IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO
-LOS AUTORES O LOS TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRA
-RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, DE RESPONSABILIDAD EXTRACONTRACTUAL O DE CUALQUIER OTRA ÍNDOLE, QUE SURJA DE,
-SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O CON EL USO U OTRAS OPERACIONES RELACIONADAS CON EL
+IDONEIDAD PARA UN FIN DETERMINADO Y DE NO INFRACCIÓN. EN NINGÚN CASO LOS
+AUTORES O LOS TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRA
+RESPONSABILIDAD, YA SEA POR CONTRATO, RESPONSABILIDAD EXTRACONTRACTUAL O DE OTRO TIPO, QUE SE DERIVE DE,
+SE ORIGINE EN O ESTÉ RELACIONADA CON EL SOFTWARE O CON SU USO U OTROS TRATOS CON EL
 SOFTWARE.
 
 -----------------------------------------------------------------
@@ -267,14 +267,14 @@ Microsoft Public License (MS-PL)
 El proyecto inicial fue creado originalmente por Armand du Plessis <armand@dotnet.org.za>
 en 2004 y, en la actualidad, Tulpep lo amplía y mantiene.
 
-Esta licencia regula el uso del software adjunto. Si usas el software, aceptas esta licencia. Si no aceptas la licencia, no uses el software.
+Esta licencia regula el uso del software adjunto. Si usa el software, acepta esta licencia. Si no acepta la licencia, no utilice el software.
 
 1. Definiciones
-   Los términos "reproducir", "reproducción", "obras derivadas" y "distribución" tienen el
-   mismo significado aquí que en la legislación de Estados Unidos. sobre derechos de autor.
-   Una "contribución" es el software original o cualquier adición o cambio al software.
+   Los términos "reproducir", "reproducción", "obras derivadas" y "distribución" tienen aquí el
+   mismo significado que en la legislación de Estados Unidos. en materia de derechos de autor.
+   Una "contribución" es el software original, o cualquier adición o cambio al software.
    Un "colaborador" es cualquier persona que distribuya su contribución bajo esta licencia.
-   Las "patentes con licencia" son las reivindicaciones de patente de un colaborador que se aplican directamente a su contribución.
+   Las "patentes licenciadas" son las reivindicaciones de patente de un colaborador que se aplican directamente a su contribución.
 
 2. Concesión de derechos
    (A) Concesión de derechos de autor: Sujeto a los términos de esta licencia, incluidas las condiciones
@@ -325,10 +325,10 @@ las copias o partes sustanciales del Software.
 
 EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O
 IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD,
-IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO
-LOS AUTORES O LOS TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRA
-RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, DE RESPONSABILIDAD EXTRACONTRACTUAL O DE CUALQUIER OTRA ÍNDOLE, QUE SURJA DE,
-SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O CON EL USO U OTRAS OPERACIONES RELACIONADAS CON EL
+IDONEIDAD PARA UN FIN DETERMINADO Y NO INFRACCIÓN. EN NINGÚN CASO LOS
+AUTORES O LOS TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑO U OTRA
+RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, EXTRACONTRACTUAL O DE CUALQUIER OTRO TIPO, QUE SURJA DE,
+SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O CON EL USO U OTRO TIPO DE OPERACIONES CON EL
 SOFTWARE.
 
 -----------------------------------------------------------------
@@ -339,14 +339,14 @@ https://github.com/ninject/Ninject?tab=License-1-ov-file#readme
 
 Licencia Pública de Microsoft (Ms-PL)
 
-Esta licencia regula el uso del software adjunto. Si usa el software, acepta esta licencia. Si no acepta la licencia, no utilice el software.
+Esta licencia regula el uso del software adjunto. Si usas el software, aceptas esta licencia. Si no aceptas la licencia, no uses el software.
 
 1. Definiciones
-   Los términos "reproducir", "reproducción", "obras derivadas" y "distribución" tienen aquí el
-   mismo significado que en la legislación de Estados Unidos. en materia de derechos de autor.
-   Una "contribución" es el software original, o cualquier adición o cambio al software.
+   Los términos "reproducir", "reproducción", "obras derivadas" y "distribución" tienen el
+   mismo significado aquí que en la legislación de Estados Unidos. sobre derechos de autor.
+   Una "contribución" es el software original o cualquier adición o cambio al software.
    Un "colaborador" es cualquier persona que distribuya su contribución bajo esta licencia.
-   Las "patentes licenciadas" son las reivindicaciones de patente de un colaborador que se aplican directamente a su contribución.
+   Las "patentes con licencia" son las reivindicaciones de patente de un colaborador que se aplican directamente a su contribución.
 
 2. Concesión de derechos
    (A) Concesión de derechos de autor: Sujeta a los términos de esta licencia, incluidas las condiciones de la licencia y
@@ -380,11 +380,9 @@ Esta licencia regula el uso del software adjunto. Si usa el software, acepta est
 ## Licencia para Snowflake.Data
 
                                ```
-                                                          ```
-                                                                                     Licencia Apache
-                                                                                 Versión 2.0, enero de 2004
-                                                                              http://www.apache.org/licenses/
-                                                          ```
+                                                          Licencia Apache
+                                                      Versión 2.0, enero de 2004
+                                                   http://www.apache.org/licenses/
                                ```
 
 TÉRMINOS Y CONDICIONES PARA EL USO, LA REPRODUCCIÓN Y LA DISTRIBUCIÓN
@@ -397,12 +395,12 @@ TÉRMINOS Y CONDICIONES PARA EL USO, LA REPRODUCCIÓN Y LA DISTRIBUCIÓN
    "Licenciante" se entenderá como el titular de los derechos de autor o la entidad autorizada por
    el titular de los derechos de autor que concede la Licencia.
 
-   "Entidad jurídica" significará la unión de la entidad actuante y todas
-   las demás entidades que controlen a dicha entidad, estén controladas por ella o estén bajo control
-   común con ella. A efectos de esta definición,
-   "control" significa (i) el poder, directo o indirecto, de dirigir o causar la
-   dirección o gestión de dicha entidad, ya sea por contrato o
-   de otro modo; o (ii) la propiedad del cincuenta por ciento (50%) o más de las
+   "Entidad jurídica" se entenderá como la unión de la entidad que actúa y todas
+   las demás entidades que la controlan, están controladas por ella o están bajo control
+   común con ella. A los efectos de esta definición,
+   "control" significa (i) el poder, directo o indirecto, de determinar la
+   dirección o gestión de dicha entidad, ya sea por contrato o de otro modo; o (ii) la
+   propiedad del cincuenta por ciento (50%) o más de las
    acciones en circulación; o (iii) la titularidad real de dicha entidad.
 
    "Tú" (o "tu") se entenderá como una persona física o una Entidad jurídica
@@ -420,220 +418,6 @@ TÉRMINOS Y CONDICIONES PARA EL USO, LA REPRODUCCIÓN Y LA DISTRIBUCIÓN
    "Obra" se entenderá como la obra de autoría, ya sea en forma "Fuente" o
    "Objeto", puesta a disposición en virtud de la Licencia, según se indique en un
    aviso de derechos de autor incluido en la Obra o adjunto a ella
-   (se proporciona un ejemplo en el Apéndice a continuación).
-
-   "Obras derivadas" significará cualquier obra, ya sea en forma Fuente o en forma Objeto,
-   que esté basada en (o derivada de) la Obra y para la cual las
-   revisiones editoriales, anotaciones, elaboraciones u otras modificaciones
-   representen, en su conjunto, una obra original de autoría. A efectos
-   de esta Licencia, las Obras derivadas no incluirán obras que permanezcan
-   separables de la Obra o que simplemente enlacen (o se vinculen por nombre) con las interfaces de
-   la Obra y sus Obras derivadas.
-
-   "Contribución" significará cualquier obra de autoría, incluida
-   la versión original de la Obra y cualquier modificación o adición
-   a dicha Obra o a sus Obras derivadas, que se envíe de forma intencionada
-   al Licenciante para su inclusión en la Obra por el titular del copyright
-   o por una persona física o Entidad jurídica autorizada a enviar en nombre del
-   titular del copyright. A los efectos de esta definición, "submitted"
-   significa cualquier forma de comunicación electrónica, verbal o escrita enviada
-   al Licenciante o a sus representantes, incluidas, entre otras,
-   las comunicaciones en listas de correo electrónicas, sistemas de control de código fuente
-   y sistemas de seguimiento de incidencias que sean gestionados por el Licenciante, o en su nombre,
-   con el fin de debatir y mejorar la Obra, pero
-   excluyendo la comunicación que esté claramente marcada o que el titular de los derechos de autor
-   haya designado de otro modo por escrito como "Not a Contribution."
-
-   "Colaborador" se entenderá como el Licenciante y cualquier persona física o Entidad jurídica
-   en cuyo nombre el Licenciante haya recibido una Contribución y que
-   posteriormente se haya incorporado a la Obra.
-
-2. Concesión de licencia de derechos de autor. Sujeto a los términos y condiciones de
-   esta Licencia, cada Colaborador le concede por la presente a Usted una licencia de derechos de autor perpetua,
-   mundial, no exclusiva, sin cargo, libre de regalías e irrevocable
-   para reproducir, preparar Obras Derivadas,
-   mostrar públicamente, ejecutar públicamente, otorgar sublicencias y distribuir la
-   Obra y dichas Obras Derivadas en forma de Código Fuente o de Objeto.
-
-3. Concesión de licencia de patentes. Sujeto a los términos y condiciones de
-   esta Licencia, cada Colaborador le concede por la presente a Usted una licencia de patentes perpetua,
-   mundial, no exclusiva, sin cargo, libre de regalías e irrevocable
-   (salvo lo indicado en esta sección) para fabricar, mandar fabricar,
-   usar, ofrecer para la venta, vender, importar y, de cualquier otro modo, transferir la Obra,
-   cuando dicha licencia se aplique únicamente a aquellas reivindicaciones de patente licenciables
-   por dicho Colaborador que se infrinjan necesariamente por sus
-   Contribución(es) por sí mismas o por la combinación de sus Contribución(es)
-   con la Obra a la que se haya enviado dichas Contribución(es). Si Usted
-   interpone un litigio de patentes contra cualquier entidad (incluida una
-   demanda cruzada o una reconvención en una demanda) alegando que la Obra
-   o una Contribución incorporada a la Obra constituye una infracción de patente directa
-   o contributiva, entonces cualquier licencia de patentes
-   concedida a Usted en virtud de esta Licencia para esa Obra se extinguirá
-   a partir de la fecha en que se presente dicho litigio.
-
-4. Redistribución. Usted puede reproducir y distribuir copias de la
-   Obra o de sus Obras Derivadas en cualquier medio, con o sin
-   modificaciones, y en forma de Código Fuente o de Objeto, siempre que
-   cumpla las condiciones siguientes:
-
-   (a) Debes entregar a cualquier otro destinatario de la Obra o de las
-   Obras Derivadas una copia de esta Licencia; y
-
-   (b) Debes hacer que cualquier archivo modificado incluya avisos
-   destacados indicando que has cambiado los archivos; y
-
-   (c) Debes conservar, en la forma de Código Fuente de cualquier Obra Derivada
-   que distribuyas, todos los avisos de derechos de autor, patentes, marcas comerciales y
-   atribución presentes en la forma de Código Fuente de la Obra,
-   excluyendo aquellos avisos que no se refieran a ninguna parte de
-   las Obras Derivadas; y
-
-   (d) Si la Obra incluye un archivo de texto "NOTICE" como parte de su
-   distribución, entonces cualquier Obra Derivada que distribuya debe
-   incluir una copia legible de los avisos de atribución contenidos
-   en dicho archivo NOTICE, excepto aquellos avisos que no
-   se refieran a ninguna parte de las Obras Derivadas, en al menos uno
-   de los lugares siguientes: dentro de un archivo de texto NOTICE distribuido
-   como parte de las Obras Derivadas; dentro de la forma de Código Fuente o
-   de la documentación, si se proporciona junto con las Obras Derivadas; o,
-   dentro de una pantalla generada por las Obras Derivadas, si y
-   en la medida en que dichos avisos de terceros aparezcan normalmente. El contenido
-   del archivo NOTICE tiene únicamente fines informativos y
-   no modifica la Licencia. Usted puede añadir sus propios avisos de atribución
-   dentro de las Obras Derivadas que distribuya, junto con
-   o como anexo al texto NOTICE de la Obra, siempre
-   que dichos avisos de atribución adicionales no puedan interpretarse
-   como una modificación de la Licencia.
-
-   Puedes añadir tu propia declaración de derechos de autor a tus modificaciones y
-   puedes proporcionar términos y condiciones de licencia adicionales o diferentes
-   para el uso, reproducción o distribución de tus modificaciones, o
-   de cualquier Obra Derivada en su conjunto, siempre que tu uso,
-   reproducción y distribución de la Obra, por lo demás, cumpla
-   las condiciones establecidas en esta Licencia.
-
-5. Presentación de Contribuciones. A menos que indiques explícitamente lo contrario,
-   cualquier Contribución que envíes intencionadamente al Licenciante para su inclusión en la Obra
-   estará sujeta a los términos y condiciones de
-   esta Licencia, sin términos ni condiciones adicionales.
-   Sin perjuicio de lo anterior, nada de lo aquí dispuesto prevalecerá sobre ni modificará
-   los términos de cualquier acuerdo de licencia independiente que puedas haber suscrito
-   con el Licenciante en relación con dichas Contribuciones.
-
-6. Marcas comerciales. Esta Licencia no concede permiso para utilizar los
-   nombres comerciales, marcas comerciales, marcas de servicio o nombres de producto del Licenciante,
-   salvo en la medida necesaria para un uso razonable y habitual al describir el
-   origen de la Obra y reproducir el contenido del archivo NOTICE.
-
-7. Exención de garantías. Salvo que lo exija la legislación aplicable o
-   se acuerde por escrito, el Licenciante proporciona la Obra (y cada
-   Colaborador proporciona sus Contribuciones) en el estado "AS IS",
-   SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o
-   implícitas, incluidas, sin limitación, cualesquiera garantías o condiciones
-   de TÍTULO, NO INFRACCIÓN, COMERCIABILIDAD o IDONEIDAD PARA UN
-   PROPÓSITO PARTICULAR. Usted es el único responsable de determinar la
-   idoneidad de usar o redistribuir la Obra y asume cualquier
-   riesgo asociado al ejercicio de los permisos que le otorga esta Licencia.
-
-8. Limitación de responsabilidad. En ningún caso y bajo ninguna teoría legal,
-   ya sea por responsabilidad extracontractual (incluida la negligencia), contrato o de otro modo,
-   salvo que lo exija la legislación aplicable (como actos deliberados o de negligencia grave)
-   o se acuerde por escrito, ningún Colaborador será responsable ante ti por daños,
-   incluidos cualesquiera daños directos, indirectos, especiales,
-   incidentales o consecuentes de cualquier naturaleza que se deriven como
-   resultado de esta Licencia o del uso o la imposibilidad de usar la
-   Obra (incluidos, entre otros, los daños por pérdida de fondo de comercio,
-   interrupción del trabajo, fallo o mal funcionamiento del equipo informático, o cualesquiera
-   otros daños o pérdidas comerciales), incluso si dicho Colaborador
-   hubiera sido advertido de la posibilidad de tales daños.
-
-9. Aceptación de garantía o responsabilidad adicional. Al redistribuir
-   la Obra o sus Obras Derivadas, Usted puede optar por ofrecer
-   y cobrar una tarifa por la prestación de soporte, garantía, indemnización
-   u otras obligaciones y/o derechos de responsabilidad coherentes con esta
-   Licencia. Sin embargo, al aceptar dichas obligaciones, solo podrá actuar
-   en su propio nombre y bajo su exclusiva responsabilidad, no en nombre
-   de ningún otro Colaborador, y únicamente si acepta indemnizar,
-   defender y mantener indemne a cada Colaborador frente a cualquier responsabilidad
-   en que incurra, o reclamación formulada contra, dicho Colaborador por razón
-   de haber aceptado cualquiera de esas garantías o responsabilidades adicionales.
-
-FIN DE LOS TÉRMINOS Y CONDICIONES
-
-APÉNDICE: Cómo aplicar la Licencia Apache a su trabajo.
-
-          Para aplicar la Licencia Apache a su trabajo, adjunte el siguiente
-          aviso estándar, sustituyendo los campos entre llaves "{}"
-          por su propia información identificativa. (No incluya
-          las llaves).  El texto debe incluirse con la sintaxis de
-          comentario adecuada para el formato del archivo. También recomendamos que
-          el nombre del archivo o de la clase y la descripción de su finalidad se incluyan en la
-          misma "página impresa" que el aviso de copyright para facilitar
-          la identificación en archivos de terceros.
-
-Copyright (c) 2017 Snowflake Computing Inc. Todos los derechos reservados.
-
-Con licencia conforme a la Licencia Apache, Versión 2.0 (la "Licencia");
-no podrá usar este archivo salvo en cumplimiento de la Licencia.
-Puede obtener una copia de la Licencia en
-
-       ```
-          ```
-             http://www.apache.org/licenses/LICENSE-2.0
-          ```
-       ```
-
-Salvo que lo exija la legislación aplicable o se acuerde por escrito, el software
-distribuido bajo la Licencia se distribuye "TAL CUAL",
-SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
-Consulte la Licencia para conocer el lenguaje específico que rige los permisos y
-las limitaciones bajo la Licencia.
-
------------------------------------------------------------------
-
-## Licencia para Dynamic-LINQ.net
-
-                                 ```
-                                                              ```
-                                                                                           Licencia Apache
-                                                                                     Versión 2.0, enero de 2004
-                                                                                  http://www.apache.org/licenses/
-                                                              ```
-                                 ```
-
-TÉRMINOS Y CONDICIONES DE USO, REPRODUCCIÓN Y DISTRIBUCIÓN
-
-1. Definiciones.
-
-   "Licencia" significará los términos y condiciones de uso, reproducción
-   y distribución según se definen en las Secciones 1 a 9 de este documento.
-
-   "Licenciante" significará el titular del copyright o la entidad autorizada por
-   el titular del copyright que concede la Licencia.
-
-   "Entidad jurídica" se entenderá como la unión de la entidad que actúa y todas
-   las demás entidades que la controlan, están controladas por ella o están bajo control
-   común con ella. A los efectos de esta definición,
-   "control" significa (i) el poder, directo o indirecto, de determinar la
-   dirección o gestión de dicha entidad, ya sea por contrato o de otro modo; o (ii) la
-   propiedad del cincuenta por ciento (50%) o más de las
-   acciones en circulación; o (iii) la titularidad real de dicha entidad.
-
-   "Usted" (o "Su") significará una persona física o una Entidad jurídica
-   que ejerza los permisos concedidos por esta Licencia.
-
-   "Fuente" significará la forma preferida para realizar modificaciones,
-   incluidos, entre otros, el código fuente del software, el código fuente de la documentación
-   y los archivos de configuración.
-
-   "Objeto" significará cualquier forma resultante de la transformación mecánica
-   o traducción de una forma Fuente, incluidos, entre otros,
-   el código objeto compilado, la documentación generada
-   y las conversiones a otros tipos de medios.
-
-   "Obra" significará la obra de autoría, ya sea en forma Fuente o
-   en forma Objeto, puesta a disposición bajo la Licencia, según se indique mediante un
-   aviso de copyright que se incluya en la obra o se adjunte a ella
    (se proporciona un ejemplo en el Apéndice a continuación).
 
    "Obras derivadas" se entenderá como cualquier obra, ya sea en forma "Fuente" o "Objeto",
@@ -658,9 +442,9 @@ TÉRMINOS Y CONDICIONES DE USO, REPRODUCCIÓN Y DISTRIBUCIÓN
    excluyendo las comunicaciones que estén marcadas de forma visible o que, de otro modo,
    hayan sido designadas por escrito por el titular de los derechos de autor como "No es una contribución".
 
-   "Colaborador" se referirá al Licenciante y a cualquier persona física o Entidad Jurídica
-   en cuyo nombre el Licenciante haya recibido una Contribución, la cual
-   posteriormente haya sido incorporada a la Obra.
+   "Colaborador" se entenderá como el Licenciante y cualquier persona física o Entidad jurídica
+   en cuyo nombre el Licenciante haya recibido una Contribución y que
+   posteriormente se haya incorporado a la Obra.
 
 2. Concesión de licencia de derechos de autor. Sujeto a los términos y condiciones de
    esta Licencia, cada Colaborador te otorga por la presente una licencia de
@@ -690,16 +474,16 @@ TÉRMINOS Y CONDICIONES DE USO, REPRODUCCIÓN Y DISTRIBUCIÓN
    modificaciones, y en forma de Código Fuente u Objeto, siempre que cumplas
    las siguientes condiciones:
 
-   (a) Debe proporcionar a cualquier otro destinatario de la Obra o de las
+   (a) Debes entregar a cualquier otro destinatario de la Obra o de las
    Obras Derivadas una copia de esta Licencia; y
 
-   (b) Debe asegurarse de que cualquier archivo modificado incluya avisos destacados
-   indicando que Usted ha modificado los archivos; y
+   (b) Debes hacer que cualquier archivo modificado incluya avisos
+   destacados indicando que has cambiado los archivos; y
 
-   (c) Debe conservar, en la forma de Código Fuente de cualquier Obra Derivada
-   que distribuya, todos los avisos de derechos de autor, patentes, marcas comerciales y
-   atribución de la forma de Código Fuente de la Obra,
-   excepto aquellos avisos que no se refieran a ninguna parte de
+   (c) Debes conservar, en la forma de Código Fuente de cualquier Obra Derivada
+   que distribuyas, todos los avisos de derechos de autor, patentes, marcas comerciales y
+   atribución presentes en la forma de Código Fuente de la Obra,
+   excluyendo aquellos avisos que no se refieran a ninguna parte de
    las Obras Derivadas; y
 
    (d) Si la Obra incluye un archivo de texto "NOTICE" como parte de su
@@ -719,19 +503,19 @@ TÉRMINOS Y CONDICIONES DE USO, REPRODUCCIÓN Y DISTRIBUCIÓN
    dichos avisos de atribución adicionales no puedan interpretarse
    como una modificación de la Licencia.
 
-   Usted puede añadir su propia declaración de derechos de autor a sus modificaciones y
-   puede proporcionar términos y condiciones de licencia adicionales o diferentes
-   para el uso, la reproducción o la distribución de sus modificaciones, o
-   para cualquiera de dichas Obras Derivadas en su conjunto, siempre que su uso,
+   Puedes añadir tu propia declaración de derechos de autor a tus modificaciones y
+   puedes proporcionar términos y condiciones de licencia adicionales o diferentes
+   para el uso, reproducción o distribución de tus modificaciones, o
+   de cualquier Obra Derivada en su conjunto, siempre que tu uso,
    reproducción y distribución de la Obra, por lo demás, cumpla
    las condiciones establecidas en esta Licencia.
 
-5. Envío de Contribuciones. Salvo que Usted indique explícitamente lo contrario,
-   cualquier Contribución que Usted envíe intencionadamente al Licenciante para su inclusión en la Obra
-   se regirá por los términos y condiciones de
+5. Presentación de Contribuciones. A menos que indiques explícitamente lo contrario,
+   cualquier Contribución que envíes intencionadamente al Licenciante para su inclusión en la Obra
+   estará sujeta a los términos y condiciones de
    esta Licencia, sin términos ni condiciones adicionales.
-   No obstante lo anterior, nada de lo aquí dispuesto prevalecerá sobre ni modificará
-   los términos de cualquier acuerdo de licencia independiente que Usted haya suscrito
+   Sin perjuicio de lo anterior, nada de lo aquí dispuesto prevalecerá sobre ni modificará
+   los términos de cualquier acuerdo de licencia independiente que puedas haber suscrito
    con el Licenciante en relación con dichas Contribuciones.
 
 6. Marcas comerciales. Esta Licencia no concede permiso para usar los
@@ -749,13 +533,13 @@ TÉRMINOS Y CONDICIONES DE USO, REPRODUCCIÓN Y DISTRIBUCIÓN
    conveniencia de usar o redistribuir la Obra y asumes todos los
    riesgos asociados con el ejercicio de los permisos que se te conceden en virtud de esta Licencia.
 
-8. Limitación de responsabilidad. En ningún caso y bajo ninguna teoría jurídica,
-   ya sea por responsabilidad extracontractual (incluida la negligencia), contractual o de otro tipo,
-   salvo que lo exija la legislación aplicable (como actos deliberados o de
-   negligencia grave) o se acuerde por escrito, ningún Colaborador será
-   responsable frente a Usted de daños, incluidos cualesquiera daños directos, indirectos, especiales,
-   incidentales o consecuentes, de cualquier naturaleza, que surjan como
-   resultado de esta Licencia o del uso, o de la imposibilidad de usar, la
+8. Limitación de responsabilidad. En ningún caso y bajo ninguna teoría legal,
+   ya sea por responsabilidad extracontractual (incluida la negligencia), contrato o de otro modo,
+   salvo que lo exija la legislación aplicable (como actos deliberados o de negligencia grave)
+   o se acuerde por escrito, ningún Colaborador será responsable ante ti por daños,
+   incluidos cualesquiera daños directos, indirectos, especiales,
+   incidentales o consecuentes de cualquier naturaleza que se deriven como
+   resultado de esta Licencia o del uso o la imposibilidad de usar la
    Obra (incluidos, entre otros, los daños por pérdida de fondo de comercio,
    interrupción del trabajo, fallo o mal funcionamiento del equipo informático, o cualesquiera
    otros daños o pérdidas comerciales), incluso si dicho Colaborador
@@ -774,33 +558,241 @@ TÉRMINOS Y CONDICIONES DE USO, REPRODUCCIÓN Y DISTRIBUCIÓN
 
 FIN DE LOS TÉRMINOS Y CONDICIONES
 
-APÉNDICE: Cómo aplicar la Licencia Apache a su obra.
+APÉNDICE: Cómo aplicar la Licencia Apache a su trabajo.
 
-          Para aplicar la Licencia Apache a su obra, adjunte el siguiente
-          aviso estándar, con los campos entre corchetes "[]"
-          sustituidos por su propia información identificativa. (No incluya
-          los corchetes).  El texto debe ir incluido en la sintaxis de
-          comentario adecuada para el formato del archivo. También recomendamos que
-          se incluya un nombre de archivo o de clase y una descripción del propósito en la
-          misma "página impresa" que el aviso de copyright, para facilitar
-          la identificación en archivos de terceros.
+        Para aplicar la Licencia Apache a su trabajo, adjunte el siguiente
+        aviso estándar, sustituyendo los campos entre llaves "{}"
+        por su propia información identificativa. (No incluya
+        las llaves).  El texto debe incluirse con la sintaxis de
+        comentario adecuada para el formato del archivo. También recomendamos que
+        el nombre del archivo o de la clase y la descripción de su finalidad se incluyan en la
+        misma "página impresa" que el aviso de copyright para facilitar
+        la identificación en archivos de terceros.
 
-Copyright [2016] [Stef Heyenrath]
+Copyright (c) 2017 Snowflake Computing Inc. Todos los derechos reservados.
 
 Con licencia bajo la Licencia Apache, Versión 2.0 (la "Licencia");
 no podrá usar este archivo salvo en cumplimiento de la Licencia.
 Puede obtener una copia de la Licencia en
 
        ```
-          ```
-             http://www.apache.org/licenses/LICENSE-2.0
-          ```
+          http://www.apache.org/licenses/LICENSE-2.0
        ```
 
 Salvo que lo exija la legislación aplicable o se acuerde por escrito, el software
 distribuido bajo la Licencia se distribuye "TAL CUAL",
 SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
 Consulta la Licencia para conocer el texto específico que rige los permisos y
+las limitaciones bajo la Licencia.
+
+-----------------------------------------------------------------
+
+## Licencia para Dynamic-LINQ.net
+
+                                 ```
+                                                              Licencia Apache
+                                                        Versión 2.0, enero de 2004
+                                                     http://www.apache.org/licenses/
+                                 ```
+
+TÉRMINOS Y CONDICIONES DE USO, REPRODUCCIÓN Y DISTRIBUCIÓN
+
+1. Definiciones.
+
+   "Licencia" significará los términos y condiciones de uso, reproducción
+   y distribución según se definen en las Secciones 1 a 9 de este documento.
+
+   "Licenciante" significará el titular del copyright o la entidad autorizada por
+   el titular del copyright que concede la Licencia.
+
+   "Entidad jurídica" significará la unión de la entidad actuante y todas
+   las demás entidades que controlen a dicha entidad, estén controladas por ella o estén bajo control
+   común con ella. A efectos de esta definición,
+   "control" significa (i) el poder, directo o indirecto, de dirigir o causar la
+   dirección o gestión de dicha entidad, ya sea por contrato o
+   de otro modo; o (ii) la propiedad del cincuenta por ciento (50%) o más de las
+   acciones en circulación; o (iii) la titularidad real de dicha entidad.
+
+   "Usted" (o "Su") significará una persona física o una Entidad jurídica
+   que ejerza los permisos concedidos por esta Licencia.
+
+   "Fuente" significará la forma preferida para realizar modificaciones,
+   incluidos, entre otros, el código fuente del software, el código fuente de la documentación
+   y los archivos de configuración.
+
+   "Objeto" significará cualquier forma resultante de la transformación mecánica
+   o traducción de una forma Fuente, incluidos, entre otros,
+   el código objeto compilado, la documentación generada
+   y las conversiones a otros tipos de medios.
+
+   "Obra" significará la obra de autoría, ya sea en forma Fuente o
+   en forma Objeto, puesta a disposición bajo la Licencia, según se indique mediante un
+   aviso de copyright que se incluya en la obra o se adjunte a ella
+   (se proporciona un ejemplo en el Apéndice a continuación).
+
+   "Obras derivadas" significará cualquier obra, ya sea en forma Fuente o en forma Objeto,
+   que esté basada en (o derivada de) la Obra y para la cual las
+   revisiones editoriales, anotaciones, elaboraciones u otras modificaciones
+   representen, en su conjunto, una obra original de autoría. A efectos
+   de esta Licencia, las Obras derivadas no incluirán obras que permanezcan
+   separables de la Obra o que simplemente enlacen (o se vinculen por nombre) con las interfaces de
+   la Obra y sus Obras derivadas.
+
+   "Contribución" significará cualquier obra de autoría, incluida
+   la versión original de la Obra y cualquier modificación o adición
+   a dicha Obra o a sus Obras derivadas, que se envíe de forma intencionada
+   al Licenciante para su inclusión en la Obra por el titular del copyright
+   o por una persona física o Entidad jurídica autorizada a enviar en nombre del
+   titular del copyright. A los efectos de esta definición, "submitted"
+   significa cualquier forma de comunicación electrónica, verbal o escrita enviada
+   al Licenciante o a sus representantes, incluidas, entre otras,
+   las comunicaciones en listas de correo electrónicas, sistemas de control de código fuente
+   y sistemas de seguimiento de incidencias que sean gestionados por el Licenciante, o en su nombre,
+   con el fin de debatir y mejorar la Obra, pero
+   excluyendo la comunicación que esté claramente marcada o que el titular de los derechos de autor
+   haya designado de otro modo por escrito como "Not a Contribution."
+
+   "Colaborador" se referirá al Licenciante y a cualquier persona física o Entidad Jurídica
+   en cuyo nombre el Licenciante haya recibido una Contribución, la cual
+   posteriormente haya sido incorporada a la Obra.
+
+2. Concesión de licencia de derechos de autor. Sujeto a los términos y condiciones de
+   esta Licencia, cada Colaborador le concede por la presente a Usted una licencia de derechos de autor perpetua,
+   mundial, no exclusiva, sin cargo, libre de regalías e irrevocable
+   para reproducir, preparar Obras Derivadas,
+   mostrar públicamente, ejecutar públicamente, otorgar sublicencias y distribuir la
+   Obra y dichas Obras Derivadas en forma de Código Fuente o de Objeto.
+
+3. Concesión de licencia de patentes. Sujeto a los términos y condiciones de
+   esta Licencia, cada Colaborador le concede por la presente a Usted una licencia de patentes perpetua,
+   mundial, no exclusiva, sin cargo, libre de regalías e irrevocable
+   (salvo lo indicado en esta sección) para fabricar, mandar fabricar,
+   usar, ofrecer para la venta, vender, importar y, de cualquier otro modo, transferir la Obra,
+   cuando dicha licencia se aplique únicamente a aquellas reivindicaciones de patente licenciables
+   por dicho Colaborador que se infrinjan necesariamente por sus
+   Contribución(es) por sí mismas o por la combinación de sus Contribución(es)
+   con la Obra a la que se haya enviado dichas Contribución(es). Si Usted
+   interpone un litigio de patentes contra cualquier entidad (incluida una
+   demanda cruzada o una reconvención en una demanda) alegando que la Obra
+   o una Contribución incorporada a la Obra constituye una infracción de patente directa
+   o contributiva, entonces cualquier licencia de patentes
+   concedida a Usted en virtud de esta Licencia para esa Obra se extinguirá
+   a partir de la fecha en que se presente dicho litigio.
+
+4. Redistribución. Usted puede reproducir y distribuir copias de la
+   Obra o de sus Obras Derivadas en cualquier medio, con o sin
+   modificaciones, y en forma de Código Fuente o de Objeto, siempre que
+   cumpla las condiciones siguientes:
+
+   (a) Debe proporcionar a cualquier otro destinatario de la Obra o de las
+   Obras Derivadas una copia de esta Licencia; y
+
+   (b) Debe asegurarse de que cualquier archivo modificado incluya avisos destacados
+   indicando que Usted ha modificado los archivos; y
+
+   (c) Debe conservar, en la forma de Código Fuente de cualquier Obra Derivada
+   que distribuya, todos los avisos de derechos de autor, patentes, marcas comerciales y
+   atribución de la forma de Código Fuente de la Obra,
+   excepto aquellos avisos que no se refieran a ninguna parte de
+   las Obras Derivadas; y
+
+   (d) Si la Obra incluye un archivo de texto "NOTICE" como parte de su
+   distribución, entonces cualquier Obra Derivada que distribuya debe
+   incluir una copia legible de los avisos de atribución contenidos
+   en dicho archivo NOTICE, excepto aquellos avisos que no
+   se refieran a ninguna parte de las Obras Derivadas, en al menos uno
+   de los lugares siguientes: dentro de un archivo de texto NOTICE distribuido
+   como parte de las Obras Derivadas; dentro de la forma de Código Fuente o
+   de la documentación, si se proporciona junto con las Obras Derivadas; o,
+   dentro de una pantalla generada por las Obras Derivadas, si y
+   en la medida en que dichos avisos de terceros aparezcan normalmente. El contenido
+   del archivo NOTICE tiene únicamente fines informativos y
+   no modifica la Licencia. Usted puede añadir sus propios avisos de atribución
+   dentro de las Obras Derivadas que distribuya, junto con
+   o como anexo al texto NOTICE de la Obra, siempre
+   que dichos avisos de atribución adicionales no puedan interpretarse
+   como una modificación de la Licencia.
+
+   Usted puede añadir su propia declaración de derechos de autor a sus modificaciones y
+   puede proporcionar términos y condiciones de licencia adicionales o diferentes
+   para el uso, la reproducción o la distribución de sus modificaciones, o
+   para cualquiera de dichas Obras Derivadas en su conjunto, siempre que su uso,
+   reproducción y distribución de la Obra, por lo demás, cumpla
+   las condiciones establecidas en esta Licencia.
+
+5. Envío de Contribuciones. Salvo que Usted indique explícitamente lo contrario,
+   cualquier Contribución que Usted envíe intencionadamente al Licenciante para su inclusión en la Obra
+   se regirá por los términos y condiciones de
+   esta Licencia, sin términos ni condiciones adicionales.
+   No obstante lo anterior, nada de lo aquí dispuesto prevalecerá sobre ni modificará
+   los términos de cualquier acuerdo de licencia independiente que Usted haya suscrito
+   con el Licenciante en relación con dichas Contribuciones.
+
+6. Marcas comerciales. Esta Licencia no concede permiso para utilizar los
+   nombres comerciales, marcas comerciales, marcas de servicio o nombres de producto del Licenciante,
+   salvo en la medida necesaria para un uso razonable y habitual al describir el
+   origen de la Obra y reproducir el contenido del archivo NOTICE.
+
+7. Exención de garantías. Salvo que lo exija la legislación aplicable o
+   se acuerde por escrito, el Licenciante proporciona la Obra (y cada
+   Colaborador proporciona sus Contribuciones) en el estado "AS IS",
+   SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o
+   implícitas, incluidas, sin limitación, cualesquiera garantías o condiciones
+   de TÍTULO, NO INFRACCIÓN, COMERCIABILIDAD o IDONEIDAD PARA UN
+   PROPÓSITO PARTICULAR. Usted es el único responsable de determinar la
+   idoneidad de usar o redistribuir la Obra y asume cualquier
+   riesgo asociado al ejercicio de los permisos que le otorga esta Licencia.
+
+8. Limitación de responsabilidad. En ningún caso y bajo ninguna teoría jurídica,
+   ya sea por responsabilidad extracontractual (incluida la negligencia), contractual o de otro tipo,
+   salvo que lo exija la legislación aplicable (como actos deliberados o de
+   negligencia grave) o se acuerde por escrito, ningún Colaborador será
+   responsable frente a Usted de daños, incluidos cualesquiera daños directos, indirectos, especiales,
+   incidentales o consecuentes, de cualquier naturaleza, que surjan como
+   resultado de esta Licencia o del uso, o de la imposibilidad de usar, la
+   Obra (incluidos, entre otros, los daños por pérdida de fondo de comercio,
+   interrupción del trabajo, fallo o mal funcionamiento del equipo informático, o cualesquiera
+   otros daños o pérdidas comerciales), incluso si dicho Colaborador
+   hubiera sido advertido de la posibilidad de tales daños.
+
+9. Aceptación de garantía o responsabilidad adicional. Al redistribuir
+   la Obra o sus Obras Derivadas, Usted puede optar por ofrecer
+   y cobrar una tarifa por la prestación de soporte, garantía, indemnización
+   u otras obligaciones y/o derechos de responsabilidad coherentes con esta
+   Licencia. Sin embargo, al aceptar dichas obligaciones, solo podrá actuar
+   en su propio nombre y bajo su exclusiva responsabilidad, no en nombre
+   de ningún otro Colaborador, y únicamente si acepta indemnizar,
+   defender y mantener indemne a cada Colaborador frente a cualquier responsabilidad
+   en que incurra, o reclamación formulada contra, dicho Colaborador por razón
+   de haber aceptado cualquiera de esas garantías o responsabilidades adicionales.
+
+FIN DE LOS TÉRMINOS Y CONDICIONES
+
+APÉNDICE: Cómo aplicar la Licencia Apache a su obra.
+
+        Para aplicar la Licencia Apache a su obra, adjunte el siguiente
+        aviso estándar, con los campos entre corchetes "[]"
+        sustituidos por su propia información identificativa. (No incluya
+        los corchetes).  El texto debe ir incluido en la sintaxis de
+        comentario adecuada para el formato del archivo. También recomendamos que
+        se incluya un nombre de archivo o de clase y una descripción del propósito en la
+        misma "página impresa" que el aviso de copyright, para facilitar
+        la identificación en archivos de terceros.
+
+Copyright [2016] [Stef Heyenrath]
+
+Con licencia conforme a la Licencia Apache, Versión 2.0 (la "Licencia");
+no podrá usar este archivo salvo en cumplimiento de la Licencia.
+Puede obtener una copia de la Licencia en
+
+       ```
+          http://www.apache.org/licenses/LICENSE-2.0
+       ```
+
+Salvo que lo exija la legislación aplicable o se acuerde por escrito, el software
+distribuido bajo la Licencia se distribuye "TAL CUAL",
+SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
+Consulte la Licencia para conocer el lenguaje específico que rige los permisos y
 las limitaciones bajo la Licencia.
 
 -----------------------------------------------------------------
@@ -823,10 +815,10 @@ las copias o partes sustanciales del Software.
 
 EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O
 IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD,
-IDONEIDAD PARA UN FIN DETERMINADO Y NO INFRACCIÓN. EN NINGÚN CASO LOS
-AUTORES O TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS NI OTRA
-RESPONSABILIDAD, YA SEA POR ACCIÓN CONTRACTUAL, EXTRACONTRACTUAL O DE OTRO TIPO, QUE SURJA DE,
-SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O CON EL USO U OTROS TRATOS EN EL
+IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y LA INEXISTENCIA DE INFRACCIÓN. EN NINGÚN CASO LOS
+AUTORES O TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRA
+RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, EXTRACONTRACTUAL O DE OTRO TIPO, QUE SURJA DE,
+SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O EL USO U OTROS TRATOS CON EL
 SOFTWARE.
 
 -----------------------------------------------------------------
@@ -875,10 +867,10 @@ las copias o partes sustanciales del Software.
 
 EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O
 IMPLÍCITA, INCLUIDAS, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD,
-IDONEIDAD PARA UN FIN DETERMINADO Y DE NO INFRACCIÓN. EN NINGÚN CASO LOS
-AUTORES O LOS TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRA
-RESPONSABILIDAD, YA SEA POR CONTRATO, RESPONSABILIDAD EXTRACONTRACTUAL O DE OTRO TIPO, QUE SE DERIVE DE,
-SE ORIGINE EN O ESTÉ RELACIONADA CON EL SOFTWARE O CON SU USO U OTROS TRATOS CON EL
+IDONEIDAD PARA UN FIN DETERMINADO Y NO INFRACCIÓN. EN NINGÚN CASO LOS
+AUTORES O TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS NI OTRA
+RESPONSABILIDAD, YA SEA POR ACCIÓN CONTRACTUAL, EXTRACONTRACTUAL O DE OTRO TIPO, QUE SURJA DE,
+SE DERIVE DE O ESTÉ RELACIONADA CON EL SOFTWARE O CON EL USO U OTROS TRATOS EN EL
 SOFTWARE.
 
 -----------------------------------------------------------------
