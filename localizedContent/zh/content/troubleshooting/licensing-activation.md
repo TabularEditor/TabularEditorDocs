@@ -33,7 +33,7 @@ applies_to:
 
 ## 激活你的安装
 
-Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabulareditor.com)查看价格详情和购买选项。 如果你之前没有使用过 Tabular Editor 3，则可免费试用 30 天。
+Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabulareditor.com)查看价格详情和购买选项。 如果你之前没有使用过 Tabular Editor 3，则可免费试用 30 天。 访问我们的[主页](https://tabulareditor.com)查看价格详情和购买选项。 如果你之前没有使用过 Tabular Editor 3，则可免费试用 30 天。
 
 在新设备上首次启动 Tabular Editor 3 时，系统会提示你激活产品。
 
@@ -41,26 +41,26 @@ Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabularedito
 
 ### 使用现有许可证密钥激活
 
-购买 Tabular Editor 3 许可证后，你会收到一封电子邮件，其中包含一段 25 个字符的字符串，即你的许可证密钥。 出现提示时，输入许可证密钥，然后点击“下一步 >”激活产品。
+购买 Tabular Editor 3 许可证后，你会收到一封电子邮件，其中包含一段 25 个字符的字符串，即你的许可证密钥。 出现提示时，输入许可证密钥，然后点击“下一步 >”激活产品。 出现提示时，输入许可证密钥，然后点击“下一步 >”激活产品。
 
 ![输入许可证密钥](~/content/assets/images/getting-started/enter-license-key.png)
 
 > [!NOTE]
-> 对于多用户许可证类型，除了许可证密钥外，还需要输入电子邮件地址。 如果你输入的许可证密钥对应多用户许可证，Tabular Editor 3 会提示你输入电子邮件地址。
+> 对于多用户许可证类型，除了许可证密钥外，还需要输入电子邮件地址。 如果你输入的许可证密钥对应多用户许可证，Tabular Editor 3 会提示你输入电子邮件地址。 如果你输入的许可证密钥对应多用户许可证，Tabular Editor 3 会提示你输入电子邮件地址。
 
 #### 企业版更换席位
 
-要更换企业版席位，必须先通过 [Tabular Editor 自助服务门户](https://tabulareditor.com/my-account/) 将现有用户从该席位取消注册。 订阅所有者或许可证管理员可以创建账号，或使用现有账号登录，以管理许可证席位。
+要更换企业版席位，必须先通过 [Tabular Editor 自助服务门户](https://tabulareditor.com/my-account/) 将现有用户从该席位取消注册。 订阅所有者或许可证管理员可以创建账号，或使用现有账号登录，以管理许可证席位。 订阅所有者或许可证管理员可以创建账号，或使用现有账号登录，以管理许可证席位。
 
 > [!NOTE]
 > 仅企业版支持更换用户。
 
 ### 申请试用许可证
 
-如果你之前没有使用过 Tabular Editor 3，你可以免费试用 30 天。 选择此选项后，系统会提示你输入电子邮件地址。 我们会使用该电子邮件地址来验证你是否已激活过 Tabular Editor 3。
+如果你之前没有使用过 Tabular Editor 3，你可以免费试用 30 天。 选择此选项后，系统会提示你输入电子邮件地址。 我们会使用该电子邮件地址来验证你是否已激活过 Tabular Editor 3。 选择此选项后，系统会提示你输入电子邮件地址。 我们会使用该电子邮件地址来验证你是否已激活过 Tabular Editor 3。
 
 > [!NOTE]
-> 注册 30 天试用许可证时，Tabular Editor ApS 不会发送未经请求的电子邮件，也不会将你的电子邮件地址转交给第三方。 更多信息请查看我们的 @privacy-policy。
+> 注册 30 天试用许可证时，Tabular Editor ApS 不会发送未经请求的电子邮件，也不会将你的电子邮件地址转交给第三方。 更多信息请查看我们的 @privacy-policy。 更多信息请查看我们的 @privacy-policy。
 
 ### 更改许可证密钥
 
