@@ -151,7 +151,7 @@ En las expresiones de reglas de BPA, la sintaxis difiere de la de LINQ en C#. Dy
 | --------------------------------------------- | ----------------------------------------------------------- |
 | `m.IsHidden`                                  | `IsHidden`                                                  |
 | `m.DataType == DataType.String`               | `DataType = "String"`                                       |
-| `&&` / \`\\                                 | `and` / `or` / `not`                                        |
+| `&&` / \\`\\                               | `and` / `or` / `not`                                        |
 | `==` / `!=`                                   | `=` / `!=` o `<>`                                           |
 | `table.Columns.Count(c => c.IsHidden)`        | `Columns.Count(IsHidden)`                                   |
 | `table.Medidas.Any(m => m.IsHidden)`          | `Medidas.Any(IsHidden)`                                     |
