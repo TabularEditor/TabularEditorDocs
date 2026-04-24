@@ -13,7 +13,7 @@ applies_to:
 
 # 如何使用 Selected 对象
 
-`Selected` 对象可访问 @tom-explorer-view-reference 树中当前选中的内容。 用它来编写脚本，使脚本操作用户选中的对象，而不是写死对象名称。
+`Selected` 对象可用于访问 @tom-explorer-view-reference 树中当前选中的内容。 用它来编写脚本，使脚本操作用户选中的对象，而不是写死对象名称。
 
 ## 快速参考
 
@@ -55,7 +55,7 @@ Selected.Measures.ForEach(m => m.DisplayFolder = "KPIs");
 | `Selected.Measure`  | 单个 `Measure`：度量值             | 如果选中了 0 个或 2 个以上度量值，则引发异常       |
 | `Selected.Measures` | `IEnumerable<Measure>`：度量值集合 | 返回的集合可能为空，但绝不会为 null。 可直接安全地迭代。 |
 
-当脚本要求恰好一个对象时，使用 **单数** 形式。 当脚本需要处理零个或多个对象时，使用 **复数** 形式。
+当脚本要求恰好一个对象时，使用 **单数** 形式。 当脚本需要处理零个或多个对象时，请使用 **复数** 形式。
 
 ## 卫语句
 

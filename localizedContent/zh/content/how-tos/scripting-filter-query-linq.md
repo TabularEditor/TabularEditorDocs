@@ -13,7 +13,7 @@ applies_to:
 
 # 如何使用 LINQ 筛选和查询对象
 
-C# Script 使用标准的 LINQ 方法来筛选、搜索和转换 TOM 对象集合。 这些模式是一些基本构件。 在 `foreach` 循环中使用返回集合的方法，在 `if` 条件中使用返回布尔值的方法，在变量赋值中使用返回标量的方法。
+C# Script 使用标准 LINQ 方法来筛选、搜索和转换 TOM 对象集合。 这些模式是一些基本构件。 在 `foreach` 循环中使用返回集合的方法，在 `if` 条件中使用返回布尔值的方法，在变量赋值中使用返回标量的方法。
 
 ## 快速参考
 
@@ -66,7 +66,7 @@ var undocumented = Model.Tables["Sales"].Columns
 
 ## 查找单个对象
 
-`First()` 返回第一个匹配项；如果不存在，则会引发异常。 `FirstOrDefault()` 则会返回 null，而不是引发异常。
+`First()` 返回第一个匹配项；如果不存在，则会引发异常。 `FirstOrDefault()` 会返回 null，而不是引发异常。
 
 ```csharp
 // Throws if "Sales" does not exist
@@ -115,7 +115,7 @@ Model.Tables["Sales"].Measures.ForEach(m => m.DisplayFolder = "Sales Metrics");
 
 ## 在修改集合之前先将其物化
 
-当你在循环中修改对象（删除、添加、移动）时，实际上是在改变正在迭代的集合。 请务必先调用 `.ToList()` 或 `.ToArray()` 生成快照。
+当你在循环中修改对象（删除、添加、移动）时，实际上是在改变正在迭代的集合。 一定要先调用 `.ToList()` 或 `.ToArray()` 来创建快照。
 
 ```csharp
 // WRONG: modifying collection during iteration
@@ -151,7 +151,7 @@ var tables = Selected.Measures
 | --------------------------------------------- | ----------------------------------- |
 | `m.IsHidden`                                  | `IsHidden`                          |
 | `m.DataType == DataType.String`               | `DataType = "String"`               |
-| `&&` / `\\|\\|` / `!`                       | `and` / `or` / `not`                |
+| `&&` / `\\\|\\\|` / `!`                   | `and` / `or` / `not`                |
 | `==` / `!=`                                   | `=` / `!=` 或 `<>`                   |
 | `table.Columns.Count(c => c.IsHidden)`        | `Columns.Count(IsHidden)`           |
 | `table.Measures.Any(m => m.IsHidden)`         | `Measures.Any(IsHidden)`            |

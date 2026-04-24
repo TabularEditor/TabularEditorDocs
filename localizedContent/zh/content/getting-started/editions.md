@@ -16,11 +16,11 @@ applies_to:
 本文档概述并对比 Tabular Editor 3 的不同版本。
 
 > [!NOTE]
-> Tabular Editor 3 许可证为**按开发者授权**。 换句话说，只有实际使用 Tabular Editor 3 产品的人才需要许可证。
+> Tabular Editor 3 的许可证为**按开发者授权**。 换句话说，只有实际使用 Tabular Editor 3 产品的人才需要许可证。
 
 ## 支持的 Data model 建模场景
 
-Tabular Editor 3 各版本的主要区别在于它们支持哪些表格 Data model 建模场景。 要理解这一差异，可以把 Analysis Services（Tabular）看作有多种不同的“形态”：
+Tabular Editor 3 各版本的主要区别在于它们支持哪些类型的表格 Data model 建模场景。 要理解这一差异，可以把 Analysis Services（Tabular）看作有多种不同的“形态”：
 
 - Power BI Desktop（请确保您了解[限制](xref:desktop-limitations)）
 - 通过 XMLA 终结点使用的 Power BI Premium（Premium Per User、**Premium 容量 [A、EM 或 P SKUs]**、**Fabric 容量 [F SKUs]**）
@@ -53,15 +53,15 @@ Tabular Editor 3 各版本的主要区别在于它们支持哪些表格 Data mod
 | [高级刷新对话框](xref:advanced-refresh)               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
 | [免费 DAX优化器许可证](xref:dax-optimizer-integration) | <span class="emoji">&#10060;</span> | <span class="emoji">&#10060;</span>   | <span class="emoji">&#10004;</span> |
 
-\*\*\*注意：\*\*如果 Analysis Services Data model 包含透视，或表包含多个分区，则需要企业版（不适用于 Power BI Desktop 或 Power BI Premium Per User 模型）。
+\*\*\*注意：\*\*如果 Analysis Services Data model 包含透视，或者某个表包含多个分区，则需要企业版（不适用于 Power BI Desktop 或 Power BI Premium Per User 模型）。
 
 \*\***注意：** 支持的文件格式包括：**.pbip**（Power BI Project）、**.pbit**（Power BI 模板）、**.bim**（Analysis Services 模型元数据）、**.vpax**（VertiPaq分析器）以及**Database.json**（Tabular Editor 文件夹结构）、**TMDL**（Tabular Model Definition Language，表格模型定义语言）。
 
-\*\*\*\*\*注意：\*\*工作区模式允许 Tabular Editor 3 将模型元数据同时保存到磁盘，并与所购买的 Tabular Editor 3 版本所支持的任意 Analysis Services 或 Power BI 版本上的数据库保持同步。
+\*\*\*\*\*注意：\*\*工作区模式允许 Tabular Editor 3 同时将模型元数据保存到磁盘，并让数据库与所购买的 Tabular Editor 3 版本支持的任意 Analysis Services 或 Power BI 版本保持同步。
 
 ## 建模限制
 
-我们在 Tabular Editor 3 中也会限制一些数据建模操作，以对应 Microsoft 某些服务层级（Azure Analysis Services _Basic 层级_、SQL Server Analysis Services _标准版_，以及 Power BI _Premium-Per-User_）的限制。
+我们也会在 Tabular Editor 3 中限制部分 Data model 建模操作，以与 Microsoft 某些服务层级（Azure Analysis Services _Basic Tier_、SQL Server Analysis Services _Standard Edition_，以及 Power BI _Premium-Per-User_）的限制保持一致。
 
 具体来说，[Azure AS Basic 层级和 SQL Server Analysis Services 标准版不支持透视、多个分区或 DirectQuery](https://azure.microsoft.com/en-us/pricing/details/analysis-services/)。因此，使用这些功能的 SSAS/Azure AS 模型需要 TE3 企业版。
 
@@ -78,9 +78,9 @@ Tabular Editor 3 各版本的主要区别在于它们支持哪些表格 Data mod
 | Power BI        | DirectQuery   | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span> |
 | Power BI        | Direct Lake   | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span> |
 
-\***注意：** SQL Server 标准版 2019 年之前的 Analysis Services 不支持 DirectQuery。 Azure AS 基本层也同样不支持 DirectQuery。 [了解更多](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models)。
+\***注意：** SQL Server 2019 之前的标准版 Analysis Services 不支持 DirectQuery。 Azure AS 基本层也同样不支持 DirectQuery。 [了解更多](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models)。
 
-\*\***注意：** 在商业版中，Power BI 模型支持透视和多分区，但模型的 `CompatibilityMode` 必须设置为 `PowerBI`。 有关操作说明，请参阅 [更改兼容模式](xref:change-compatibility-mode)。
+\*\***注意：** 在商业版中，Power BI 模型支持透视和多个分区，但模型的 `CompatibilityMode` 必须设置为 `PowerBI`。 有关操作说明，请参阅 [更改兼容模式](xref:change-compatibility-mode)。
 
 如果您在使用 TE3 商业版许可证时尝试打开一个应用了上述一项或多项建模限制的模型，将会看到以下错误信息：
 
@@ -89,7 +89,7 @@ Tabular Editor 3 各版本的主要区别在于它们支持哪些表格 Data mod
 除了上面列出的内容之外，Tabular Editor 3 各版本之间没有其他功能差异。
 
 > [!NOTE]
-> 注意，Power BI Desktop [目前并不支持所有 Data model 建模操作](xref:desktop-limitations)。 因此，Tabular Editor 3 默认会阻止 Power BI Desktop 不支持的操作。 不过，你可以在“工具 > 偏好 > Power BI”中解除该限制。
+> 请注意，Power BI Desktop [目前并不支持所有 Data model 建模操作](xref:desktop-limitations)。 因此，Tabular Editor 3 默认会阻止 Power BI Desktop 不支持的操作。 不过，你可以在“工具 > 偏好 > Power BI”中解除该限制。
 
 > [!IMPORTANT]
 > 仅当 Power BI Report（.pbix、.pbip 或 .pbit）文件包含 Data model（导入、DirectQuery 或复合模式）时，Tabular Editor 才能作为 Power BI Desktop 的外部工具使用。 **不支持使用 Live connection 的 Report**，因为这些 Report 不包含 Data model。 [更多信息](xref:desktop-limitations)。
@@ -111,7 +111,7 @@ Tabular Editor 3 各版本的主要区别在于它们支持哪些表格 Data mod
 > [!NOTE]
 > 在多位用户之间共享同一个许可证违反我们的[许可条款](https://tabulareditor.com/license-terms)。
 
-你可以随时在工具内停用现有安装：在“Help > About Tabular Editor”下选择“Change license key...”。 你也可以通过我们的[自助门户](https://tabulareditor.com/sign-in)停用安装：进入“Licenses”选项卡。
+你可以随时在工具中停用现有安装：在“帮助 > 关于 Tabular Editor”中选择“更改许可证密钥...”选项。 你也可以通过我们的[自助门户](https://tabulareditor.com/sign-in)停用安装：进入“Licenses”选项卡。
 
 如果您需要的 Tabular Editor 3 并发安装数量超过上述范围，请联系 [licensing@tabulareditor.com](mailto:licensing@tabulareditor.com)。
 

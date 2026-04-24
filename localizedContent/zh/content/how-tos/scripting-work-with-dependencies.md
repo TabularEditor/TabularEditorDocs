@@ -67,7 +67,7 @@ var usesDate = measure.DependsOn.Tables.Any(t => t.Name == "Date");
 
 ## `ReferencedBy`：哪些对象引用了这个对象？
 
-`ReferencedBy` 适用于任何 (xref:TabularEditor.TOMWrapper.IDaxObject) 对象。 这也包括自身没有 DAX 表达式的对象，例如 `DataColumn`；它们仍然可以在其他对象的 DAX 中通过名称被引用。
+`ReferencedBy` 适用于任何 (xref:TabularEditor.TOMWrapper.IDaxObject) 对象。 这也包括自身不含 DAX 表达式的对象，例如 `DataColumn`；它们仍可在其他对象的 DAX 中通过名称被引用。
 
 ```csharp
 var column = Model.Tables["Sales"].Columns["Amount"];

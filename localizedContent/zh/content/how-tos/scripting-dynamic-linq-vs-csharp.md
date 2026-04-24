@@ -13,7 +13,7 @@ applies_to:
 
 # Dynamic LINQ 与 C# LINQ 的区别
 
-C# Script 使用标准的 C# LINQ，并使用 Lambda 表达式。 Best Practice Analyzer (BPA) 规则和 Explorer 树筛选器使用 [Dynamic LINQ](https://dynamic-linq.net/expression-language)，这是一种基于字符串的表达式语言，其语法与 C# LINQ 不同。 本文提供两者之间的对照翻译指南。
+C# Script 使用标准的 C# LINQ，并使用 Lambda 表达式。 Best Practice Analyzer (BPA) 规则和 Explorer 树筛选器使用 [Dynamic LINQ](https://dynamic-linq.net/expression-language)，这是一种基于字符串的表达式语言，其语法与常规 LINQ 不同。 本文提供两者之间的对照翻译指南。
 
 ## 各自的使用场景
 
@@ -47,7 +47,7 @@ C# Script 使用标准的 C# LINQ，并使用 Lambda 表达式。 Best Practice 
 
 ## 枚举值比较
 
-C# 使用强类型的枚举值。 Dynamic LINQ 使用字符串来表示。
+C# 使用强类型的枚举值。 Dynamic LINQ 使用字符串表示形式。
 
 | C# LINQ                                                             | Dynamic LINQ                                |
 | ------------------------------------------------------------------- | ------------------------------------------- |
@@ -107,7 +107,7 @@ Columns.Count(Description = "") > 5
 Columns.Any(Name = outerIt.Name)
 ```
 
-在 C# 中，外层 lambda 参数 `t` 在内层 lambda 的整个函数体中始终都在作用域内。 内层 lambda `c => c.Name == t.Name` 可以直接引用 `t`，因为它会被闭包捕获。
+在 C# 中，外层 lambda 参数 `t` 在内层 lambda 的整个函数体中始终都在作用域内。 内层 lambda `c => c.Name == t.Name` 可以直接引用 `t`，因为它被闭包捕获了。
 
 ```csharp
 // C# equivalent -- t is accessible inside the inner lambda via closure

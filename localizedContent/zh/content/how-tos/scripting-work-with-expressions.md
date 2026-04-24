@@ -72,7 +72,7 @@ m.FormatString = "#,##0.00";
 | `DaxTableName`      | `'Sales'`         | `'Sales'`   | `'Sales'` |
 
 > [!NOTE]
-> 对于度量值，`DaxObjectFullName` 返回与 `DaxObjectName` (未限定) 相同的值。 在 DAX 中，度量值不需要表名限定。 对于列，`DaxObjectFullName` 包含表前缀。
+> 对于度量值，`DaxObjectFullName` 返回与 `DaxObjectName`（不带限定符）相同的值。 在 DAX 中，度量值不需要表名限定。 对于列，`DaxObjectFullName` 包含表前缀。
 
 生成 DAX 时，请使用以下属性以避免引号错误：
 
@@ -90,7 +90,7 @@ foreach (var col in Selected.Columns)
 
 ## IExpressionObject 接口
 
-包含表达式的对象会实现 (xref:TabularEditor.TOMWrapper.IExpressionObject) 接口。 在 Tabular Editor 2 中，此接口仅提供 `Expression` 属性。 在 Tabular Editor 3 中，它新增了 `GetExpression()`、`SetExpression()` 和 `GetExpressionProperties()`，用于在单个对象上处理多种表达式类型。
+包含表达式的对象会实现 (xref:TabularEditor.TOMWrapper.IExpressionObject) 接口。 在 Tabular Editor 2 中，此接口仅提供 `Expression` 属性。 在 Tabular Editor 3 中，该接口新增了 `GetExpression()`、`SetExpression()` 和 `GetExpressionProperties()`，用于在单个对象上处理多种表达式类型。
 
 ```csharp
 // Tabular Editor 2: use the Expression property directly
@@ -184,8 +184,8 @@ foreach (var m in Model.AllMeasures.Where(m => m.Expression.Contains("[Old Colum
 > [!IMPORTANT]
 >
 > - `DataColumn` 没有 `Expression` 属性。 只有 `CalculatedColumn`、`度量值`、`CalculationItem` 和 `分区` 具有表达式。 在 `DataColumn` 上访问 `Expression` 时，会因所处上下文不同而引发编译错误或运行时异常。
-> - `DaxObjectName` 返回未限定名称（例如 `[Revenue]`），而 `DaxObjectFullName` 会包含表名前缀（例如 `'Sales'[Revenue]`）。 在 DAX 中引用列时使用 `DaxObjectFullName`，在引用度量值且表限定可选时使用 `DaxObjectName`。
-> - Tabular Editor 2 中的 `FormatDax()` 会调用 daxformatter.com 的外部 API，因此需要联网。 Tabular Editor 3 默认使用内置格式化程序。 要在 TE3 中使用 daxformatter.com，请在偏好中启用它。
+> - `DaxObjectName` 返回未限定名称（例如 `[Revenue]`），而 `DaxObjectFullName` 包含表名前缀（例如 `'Sales'[Revenue]`）。 在 DAX 中引用列时使用 `DaxObjectFullName`，在引用度量值且表限定可选时使用 `DaxObjectName`。
+> - Tabular Editor 2 中的 `FormatDax()` 会调用外部的 daxformatter.com API，因此需要联网。 Tabular Editor 3 默认使用内置格式化程序。 要在 TE3 中使用 daxformatter.com，请在偏好中启用它。
 
 ## 另见
 

@@ -13,7 +13,7 @@ applies_to:
 
 # 如何导航 TOM 对象层次结构
 
-每个 C# Script 都从 `Model` 对象或 @csharp-scripts 中的 `Selected` 对象开始。 它们提供 Tabular Editor 的 TOM 包装器，该包装器封装了 Microsoft Analysis Services Tabular Object Model (TOM)。 有关完整的包装器文档，请参阅 (xref:TabularEditor.TOMWrapper) API 参考。
+每个 C# Script 都以 `Model` 对象或 @csharp-scripts 的 `Selected` 对象为起点。 它们提供 Tabular Editor 的 TOM 包装器，该包装器封装了 Microsoft Analysis Services Tabular Object Model (TOM)。 有关完整的包装器文档，请参阅 (xref:TabularEditor.TOMWrapper) API 参考。
 
 ## 快速参考
 
@@ -139,7 +139,7 @@ foreach (var rel in Model.Relationships)
 
 ## Dynamic LINQ 的等效写法
 
-在 Best Practice Analyzer (BPA) 规则表达式和 **TOM Explorer** 树筛选器中，你可以直接访问当前上下文对象上的属性。 父级导航使用点表示法。
+在 Best Practice Analyzer (BPA) 规则表达式和 **TOM Explorer** 树筛选器中，可直接访问当前上下文对象上的属性。 父级导航使用点表示法。
 
 | C# Script                             | Dynamic LINQ（BPA）        |
 | ------------------------------------- | ------------------------ |
@@ -149,7 +149,7 @@ foreach (var rel in Model.Relationships)
 | `table.Measures.Any(m => m.IsHidden)` | `Measures.Any(IsHidden)` |
 
 > [!NOTE]
-> BPA 规则中的 Dynamic LINQ 表达式一次只针对单个对象进行求值。 你无法访问 `Model` 或跨表的集合。 使用规则的 **适用于** 作用域，选择该表达式要针对哪种对象类型运行。
+> BPA 规则中的 Dynamic LINQ 表达式每次只会针对单个对象求值。 你无法访问 `Model` 或跨表的集合。 使用规则的 **适用于** 作用域，选择该表达式要针对哪种对象类型运行。
 
 ## 另见
 

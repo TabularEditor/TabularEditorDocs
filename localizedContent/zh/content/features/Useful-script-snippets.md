@@ -24,7 +24,7 @@ applies_to:
 另外，也别忘了看看我们的脚本库 @csharp-script-library，里面有更多贴近实际场景的示例，展示了你可以如何利用 Tabular Editor 的脚本功能。
 
 > [!TIP]
-> 如需查阅关于 C# Script 和 Dynamic LINQ 的结构化、按模式逐一讲解的参考资料，请参阅[脚本模式](/how-tos/scripting-navigate-tom-hierarchy)操作指南系列。 完整的 TOM 包装器 API 请参阅 @api-index。
+> 如需查阅关于 C# Script 和 Dynamic LINQ 的结构化、按模式逐一讲解的参考资料，请参阅[脚本模式](/how-tos/scripting-navigate-tom-hierarchy)的操作指南系列。 完整的 TOM 包装器 API 请参阅 @api-index。
 
 ***
 
@@ -158,7 +158,7 @@ foreach(var m in Selected.Measures) {
 
 ## 设置默认翻译
 
-有时，为所有（可见）对象应用默认翻译会很有用。 在这种情况下，默认翻译其实就是对象的原始名称/描述/显示文件夹。 这样做的一个好处是：以 JSON 格式导出翻译时会包含所有翻译对象，例如可用于 [SSAS Tabular Translator](https://www.sqlbi.com/tools/ssas-tabular-translator/)。
+有时，为所有（可见）对象应用默认翻译会很有用。 在这种情况下，默认翻译其实就是对象的原始名称/描述/显示文件夹。 这样做的一个好处是：以 JSON 格式导出翻译时，会包含所有翻译对象，即可用于 [SSAS Tabular Translator](https://www.sqlbi.com/tools/ssas-tabular-translator/)。
 
 以下脚本会遍历模型中的所有区域设置；对于每个可见对象，若尚无翻译，则会为其赋予默认值：
 
@@ -212,7 +212,7 @@ void ApplyDefaultTranslation(ITranslatableObject obj, Culture culture)
 
 ## 处理透视
 
-度量值、列、层级结构和表都提供 `InPerspective` 属性。该属性会为模型中的每个透视保存一个 True/False 值，用来指示给定对象是否属于该透视。 比如：
+度量值、列、层次结构和表都公开了 `InPerspective` 属性。该属性会为模型中的每个透视保存一个 True/False 值，用于指示给定对象是否属于该透视。 比如：
 
 ```csharp
 foreach(var measure in Selected.Measures)
@@ -264,11 +264,11 @@ foreach(var m in Selected.Measures) {
 
 ## 生成分区
 
-如果你需要对某个表进行自定义分区，C# Script 可以帮助你快速生成大量分区。 基本思路是：为表添加一个注释，其中包含一个 SQL 或 M 查询，作为每个分区的模板。 然后脚本会根据需要替换筛选参数。 例如，使用 SQL 分区时，你可以添加一个名为 `PartitionTemplateSQL` 的注释，并将其值设置为 `SELECT * FROM fact_ResellerSales WHERE CalendarID BETWEEN {0} AND {1}`。 在生成最终分区时，我们的脚本会替换 `{0}` 和 `{1}` 占位符。 在此例中，`CalendarID` 是整数；但一般来说，你需要确保最终得到的字符串是有效的 SQL（或 M）查询。
+如果你需要对某个表进行自定义分区，C# Script 可以帮你快速生成大量分区。 基本思路是：为表添加一个注释，其中包含一个 SQL 或 M 查询，作为每个分区的模板。 然后脚本会根据需要替换筛选参数。 例如，使用 SQL 分区时，你可以添加一个名为 `PartitionTemplateSQL` 的注释，并将其值设置为 `SELECT * FROM fact_ResellerSales WHERE CalendarID BETWEEN {0} AND {1}`。 在生成最终分区时，我们的脚本会替换 `{0}` 和 `{1}` 占位符。 在此例中，`CalendarID` 是整数；但一般来说，你需要确保最终得到的字符串是有效的 SQL（或 M）查询。
 
 ![](https://user-images.githubusercontent.com/8976200/70135273-07c6fa00-168a-11ea-84f6-90f0b3498ed8.png)
 
-这里的示例会按月生成分区。 选择一个带有 `PartitionTemplateSQL` 注释的表，然后运行该脚本。
+这里的示例会按月生成分区。 选择一个带有 `PartitionTemplateSQL` 分区注释的表，然后运行该脚本。
 
 ```csharp
 var firstPartition = new DateTime(2018,1,1); // 第一个分区日期
@@ -314,7 +314,7 @@ SaveFile("Exported Properties 1.tsv", tsv);
 ![image](https://user-images.githubusercontent.com/8976200/36632472-e8e96ef6-197e-11e8-8285-6816b09ad036.png)
 第一列（Object）中的内容是对该对象的引用。 如果更改了该列内容，后续导入这些属性时可能无法正常进行。 如果你想修改对象名称，只需更改第二列（Name）中的值。
 
-默认情况下，文件会保存到 TabularEditor.exe 所在的同一文件夹中。 默认情况下，仅导出以下属性（如适用，具体取决于所导出对象的类型）：
+默认情况下，文件会保存到 TabularEditor.exe 所在的文件夹中。 默认情况下，仅导出以下属性（如适用，具体取决于所导出对象的类型）：
 
 - 名称
 - 描述
@@ -386,7 +386,7 @@ SaveFile(@"c:\Project\ObjectTranslations.tsv", tsv);
 
 ## 生成文档
 
-如果你想为模型的全部或部分内容生成文档，也可以使用上面展示的 `ExportProperties` 方法。 下面的代码片段会从 Tabular 模型中所有可见的度量值或列提取一组属性，并将其保存为 TSV 文件：
+如果你想为模型的全部或部分内容生成文档，也可以使用上面展示的 `ExportProperties` 方法。 下面的代码片段会从 Tabular 模型中所有可见的度量值或列中提取一组属性，并将其保存为 TSV 文件：
 
 ```csharp
 // 构造所有可见列和度量值的列表：
@@ -600,7 +600,7 @@ Selected.Table.AddMeasure("DumpFilters", dax);
 
 ## 将 CamelCase 转换为 Proper Case
 
-在关系数据库中，列和表的一种常见命名方式是 CamelCase。 也就是说，名称中不含任何空格，且每个单词都以大写字母开头。 在 Tabular 模型中，未隐藏的表和列会对业务用户可见，因此通常更适合使用更“易读”的命名方式。 以下脚本会将 CamelCased 名称转换为 Proper Case。 连续的大写字母会原样保留（作为首字母缩写）。 例如，该脚本会将以下内容转换为：
+在关系数据库中，列和表常用的一种命名方式是 CamelCase。 也就是说，名称中不含任何空格，且每个单词都以大写字母开头。 在 Tabular 模型中，未隐藏的表和列会对业务用户可见，因此通常更适合使用更“易读”的命名方式。 以下脚本会将 CamelCased 名称转换为 Proper Case。 连续的大写字母会原样保留（作为首字母缩写）。 例如，该脚本会将以下内容转换为：
 
 - `CustomerWorkZipcode` 转换为 `Customer Work Zipcode`
 - `CustomerAccountID` 转换为 `Customer Account ID`
@@ -713,12 +713,12 @@ foreach(var col in aggTable.Columns)
 
 以下方法可用：
 
-| 方法                                                            | 描述                                                                                                                                                                                                                                                                                                |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | 这个方法会将指定的 TMSL 或 XMLA 脚本传递给已连接的 Analysis Services 实例。 当你想要刷新 AS 实例中某个表的数据时，这会很有用。 注意，如果你用这个方法更改模型元数据，本地模型元数据将与 AS 实例上的元数据不同步，并且下次尝试保存模型元数据时，你可能会收到版本冲突警告。 如果要发送 XMLA 脚本，请将 `isXmla` 参数设为 `true`。                                                                                                  |
-| `IDataReader ExecuteReader(string dax)`                       | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回得到的 [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) 对象。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。 注意，你不能同时打开多个数据读取器。 如果你忘记显式关闭或释放读取器，Tabular Editor 会自动关闭它们。  |
-| `Dataset ExecuteDax(string dax)`                              | 对已连接的 AS 数据库执行指定的 DAX _查询_，并返回一个 [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) 对象，其中包含查询返回的数据。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。 返回的 Dataset 对象中，每个 `EVALUATE` 语句都会对应一个 DataTable。 不建议返回超大的数据表，因为这可能会导致内存不足或其他稳定性问题。 |
-| `object EvaluateDax(string dax)`                              | 对已连接的 AS 数据库执行指定的 DAX _表达式_，并返回一个表示执行结果的对象。 如果 DAX 表达式是标量，则会返回相应类型的对象（string、long、decimal、double、DateTime）。 如果 DAX 表达式为表值，则会返回一个 [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6)。                                                            |
+| 方法                                                            | 描述                                                                                                                                                                                                                                                                                                 |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void ExecuteCommand(string tmslOrXmla, bool isXmla = false)` | 这个方法会将指定的 TMSL 或 XMLA 脚本传递给已连接的 Analysis Services 实例。 当你想要刷新 AS 实例中某个表的数据时，这会很有用。 注意，如果你用这个方法更改模型元数据，本地模型元数据将与 AS 实例上的元数据不同步，并且下次尝试保存模型元数据时，你可能会收到版本冲突警告。 如果要发送 XMLA 脚本，请将 `isXmla` 参数设为 `true`。                                                                                                   |
+| `IDataReader ExecuteReader(string dax)`                       | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回得到的 [AmoDataReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.amodatareader?view=analysisservices-dotnet) 对象。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。 注意，你不能同时打开多个数据读取器。 如果你忘记显式关闭或释放读取器，Tabular Editor 会自动关闭它们。   |
+| `Dataset ExecuteDax(string dax)`                              | 在已连接的 AS 数据库上执行指定的 DAX _查询_，并返回一个 [Dataset](https://docs.microsoft.com/en-us/dotnet/api/system.data.dataset?view=netframework-4.6) 对象，其中包含查询返回的数据。 DAX 查询由一个或多个 [`EVALUATE`](https://dax.guide/EVALUATE) 语句组成。 返回的 Dataset 对象中，每个 `EVALUATE` 语句都会对应一个 DataTable。 不建议返回超大的数据表，因为这可能会导致内存不足或其他稳定性问题。 |
+| `object EvaluateDax(string dax)`                              | 对已连接的 AS 数据库执行指定的 DAX _表达式_，并返回一个表示执行结果的对象。 如果 DAX 表达式是标量，则会返回相应类型的对象（string、long、decimal、double、DateTime）。 如果 DAX 表达式为表值，则会返回一个 [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable?view=netframework-4.6)。                                                             |
 
 这些方法属于 `Model.Database` 对象，但也可以不加任何前缀直接执行。
 

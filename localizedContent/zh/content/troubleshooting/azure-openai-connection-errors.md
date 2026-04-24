@@ -20,13 +20,13 @@ applies_to:
 
 # Azure OpenAI 连接错误
 
-本页介绍将 Azure OpenAI 用作 @ai-assistant 提供程序时常见的连接失败问题。 设置详情请参阅 [Azure OpenAI 配置部分](xref:ai-assistant#azure-openai)。
+本页介绍将 Azure OpenAI 用作 @ai-assistant 提供程序时常见的连接失败问题。 设置详情请参阅[Azure OpenAI 配置部分](xref:ai-assistant#azure-openai)。
 
 ## 403 "公共访问已禁用。 请配置专用终结点"
 
-此 403 错误直接来自 Azure OpenAI 本身，这表示 HTTP 请求到达的是公共终结点，而非您的专用终结点。 Azure 会拒绝该请求，因为此资源已禁用公共访问。
+此 403 错误来自 Azure OpenAI 本身，说明 HTTP 请求到达了公共终结点，而非你的专用终结点。 Azure 会拒绝该请求，因为此资源已禁用公共访问。
 
-常见原因是系统代理在 VPN 隧道之外解析 DNS。 您的工作站通过 Azure Private DNS 将 Azure OpenAI 主机名解析为专用 IP，但代理服务器使用自己的解析器，访问到公共 IP，因此被拒绝。
+常见原因是系统代理在 VPN 隧道之外解析 DNS。 你的工作站通过 Azure Private DNS 将 Azure OpenAI 主机名解析为专用 IP，但代理服务器使用自己的解析器，访问到公共 IP，因此被拒绝。
 
 要确认工作站上的 DNS 解析是否正确：
 
@@ -38,7 +38,7 @@ nslookup yourresource.openai.azure.com
 
 可用的解决办法：
 
-- 在 **工具 > 偏好设置 > 代理设置** 下，将您的 Azure OpenAI 主机名添加到绕过列表中，使请求跳过代理并直接通过 VPN 隧道发送。 多个主机名用分号分隔
+- 在 **工具 > 偏好设置 > 代理设置** 中，将你的 Azure OpenAI 主机名添加到绕过列表，让请求跳过代理并直接通过 VPN 隧道发送。 多个主机名用分号分隔
 - 让网络团队更新代理 PAC 文件，绕过 `*.openai.azure.com`；或者把代理服务器配置为能够解析 Azure Private DNS 区域
 - 使用拆分隧道，使 Azure 专用终结点的 IP 范围直接路由，而不是经过代理
 
@@ -64,7 +64,7 @@ https://your-resource.openai.azure.com
 2. 打开 **部署**（如果资源已升级到 Foundry，则为 **模型 + 终结点**）
 3. 复制 **名称** 列中的值
 
-在你的组织采用 Azure AI Foundry 之前创建的部署，可能不会在门户中显示。 使用 Azure CLI 列出这些部署：
+在你的组织采用 Azure AI Foundry 之前创建的部署，可能不会显示在门户中。 使用 Azure CLI 列出这些部署：
 
 ```bash
 az cognitiveservices account deployment list --name "<resource-name>" --resource-group "<resource-group>" --output table

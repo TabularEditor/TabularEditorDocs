@@ -79,7 +79,7 @@ Model.AllMeasures
 
 ## 遍历对象上的所有注释
 
-`GetAnnotations()` 返回注释的名称。 使用 `GetAnnotation(name)` 获取值。
+`GetAnnotations()` 返回所有注释的名称。 使用 `GetAnnotation(name)` 获取值。
 
 ```csharp
 foreach (var name in m.GetAnnotations())

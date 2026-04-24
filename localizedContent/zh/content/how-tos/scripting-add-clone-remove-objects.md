@@ -13,7 +13,7 @@ applies_to:
 
 # 如何添加、克隆和删除对象
 
-C# Script 可以创建新的模型对象、克隆现有对象并删除对象。 本文介绍 Add、Clone 和 Delete 的常用模式。
+C# Script 可用于创建新的模型对象、克隆现有对象以及删除对象。 本文介绍 Add、Clone 和 Delete 的常用模式。
 
 ## 快速参考
 
@@ -160,7 +160,7 @@ var copy2 = original.Clone("Revenue Copy", true, Model.Tables["Reporting"]);
 
 ## 从列生成度量值
 
-一种常见模式：遍历所选列并创建派生度量值。 请注意这里使用了 `DaxObjectFullName`。它会返回完全限定且正确加引号的 DAX 引用（例如 `'Sales'[Amount]`），以避免引号错误。
+一种常见模式：遍历所选列并创建派生度量值。 注意这里用了 `DaxObjectFullName`。它会返回完全限定且已正确加引号的 DAX 引用（例如 `'Sales'[Amount]`），以避免引号错误。
 
 ```csharp
 foreach (var col in Selected.Columns)

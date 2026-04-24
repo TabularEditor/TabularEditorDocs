@@ -13,7 +13,7 @@ applies_to:
 
 # 如何使用透视和翻译
 
-透视用于控制哪些对象会显示在特定的客户端视图中。 翻译（区域设置）提供本地化的名称、描述和显示文件夹。 两者都使用 TOM 对象上的索引器属性。 有关如何访问 TOM 对象及其索引器的详细信息，详见 @how-to-navigate-tom-hierarchy。
+透视用于控制哪些对象会显示在特定的客户端视图中。 翻译（区域设置）提供本地化的名称、描述和显示文件夹。 两者都使用 TOM 对象上的索引器属性。 有关访问 TOM 对象及其索引器的详细信息，请参阅 @how-to-navigate-tom-hierarchy。
 
 ## 快速参考
 
@@ -72,7 +72,7 @@ Model.Perspectives["Old View"].Delete();
 
 ## 设置翻译
 
-翻译索引器可用于实现 (xref:TabularEditor.TOMWrapper.ITranslatableObject) 的对象（表、列、度量值、层次结构、级别）。 显示文件夹的翻译需要对象实现 (xref:TabularEditor.TOMWrapper.IFolderObject)（度量值、列、层次结构）。
+翻译索引器适用于实现 (xref:TabularEditor.TOMWrapper.ITranslatableObject) 接口的对象（表、列、度量值、层次结构、级别）。 显示文件夹的翻译需要对象实现 (xref:TabularEditor.TOMWrapper.IFolderObject)（度量值、列、层次结构）。
 
 ```csharp
 var m = Model.AllMeasures.First(m => m.Name == "Revenue");

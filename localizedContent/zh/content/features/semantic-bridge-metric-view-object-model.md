@@ -33,7 +33,7 @@ SUMMARY: Overview of the Metric View object model built into the Semantic Bridge
 Semantic Bridge 包含一个用于表示 Databricks Metric View 的对象模型。
 这使你可以通过 C# Script 以编程方式处理 Metric View，类似于通过 TOMWrapper 操作 Tabular 模型。
 
-除 [导入 GUI](xref:semantic-bridge#interface) 外，对 Metric View 的所有访问与交互都需要通过 C# Script 进行。
+除 [导入 GUI](xref:semantic-bridge#interface) 外，所有对 Metric View 的访问与交互都需通过 C# Script 进行。
 本文档中的所有内容均指你将在 [C# Script](xref:csharp-scripts) 中使用的 C# 代码。
 
 <a name="loading-and-accessing-the-metric-view"></a>
@@ -53,7 +53,7 @@ var view = SemanticBridge.MetricView.Model;
 Output($"Metric View version: {view.Version}\r\nSource: {view.Source}");
 ```
 
-与 Tabular 模型类似、但不同于你在 C# Script 中常用的大多数其他对象，Metric View 会在多次脚本执行之间持续保留。
+与 Tabular 模型类似，但不同于你在 C# Script 中常见的大多数其他对象，Metric View 会在多次脚本执行之间保持持久化。
 这意味着你只需加载一次指标视图，后续脚本执行时即可引用它，而无需每次都重新加载。
 任意时刻只会加载一个指标视图；如上所述，所有脚本都可以通过 `SemanticBridge.MetricView.Model` 访问它。
 这种行为类似于 C# Script 中的表格模型，它始终可以直接通过 `Model` 访问。
@@ -71,7 +71,7 @@ Output($"Metric View version: {view.Version}\r\nSource: {view.Source}");
 | [`度量值`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure)         | 表示业务逻辑的聚合定义     |
 
 > [!NOTE]
-> 在对象模型中，我们遵循 C# 的命名约定，因此，对象模型中的所有类型和属性名称都使用 `PascalCase`。
+> 在对象模型中，我们遵循 C# 的命名约定，因此对象模型中的所有类型和属性名称都使用 `PascalCase`。
 > 指标视图 YAML 规范遵循 `snake_case` 的命名约定。
 > 总体而言，我们主要关注作为 Semantic Bridge 组件的 C# 对象模型。
 > 除了更改大小写之外，我们不会改变 YAML 中的任何命名约定。
@@ -103,12 +103,12 @@ Output(sb.ToString());
 
 #### `View` 翻译与验证
 
-`View.Source` 属性会成为表格模型中的事实表，命名为 `'Fact'`。
+`View.Source` 属性会成为 Tabular 模型中的事实表，名称为 `'Fact'`。
 如果 `Source` 是一个 3 段式表或视图引用，则会被翻译为一个 M 分区，通过名称访问该 SQL 对象。
 如果 `Source` 不是一个 3 段式表或视图引用，则会被翻译为一个包含内嵌 SQL 查询的 M 分区，并将整个 `Source` 字符串作为 SQL 查询。
 在翻译时会忽略 `Filter` 属性。
 
-为了评估验证规则，会先检查 `View`，然后按顺序验证各集合：先 `Joins`，再 `Dimensions`，最后 `Measures`。
+为了评估验证规则，会先检查 `View`，然后按顺序验证各个集合：先是 `Joins`，然后是 `Dimensions`，最后是 `Measures`。
 事实表 `Source` 的验证是在 `View` 对象的验证规则中完成的。
 
 ### 联接
@@ -228,7 +228,7 @@ Output(sb.ToString());
 
 ## Using 指令
 
-在 C# Script 中使用 Metric View 对象模型时，你可能需要添加 using 指令，以避免与 Tabular Object Model 中同名或名称相近的类型发生命名冲突。
+在 C# Script 中使用 Metric View 对象模型时，你可能需要添加 using 指令，以避免与 Tabular Object Model 中名称相同或相近的类型发生命名冲突。
 我们建议为命名空间设置别名：
 
 ```csharp
