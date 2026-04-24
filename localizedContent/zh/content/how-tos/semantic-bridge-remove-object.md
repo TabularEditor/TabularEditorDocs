@@ -22,13 +22,11 @@ applies_to:
 
 本文演示如何从已加载的 Metric View 中移除其维度。
 类似的方法适用于 Metric View 中的所有集合。
-类似的方法适用于 Metric View 中的所有集合。
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
 > [!NOTE]
 > 这里的每个移除脚本都会影响当前已加载的 Metric View。
-> 如果你想把这些脚本都运行一遍，请确保在每次移除操作前都先运行上面的 `Deserialize`。
 > 如果你想把这些脚本都运行一遍，请确保在每次移除操作前都先运行上面的 `Deserialize`。
 
 ## 按名称移除
@@ -119,8 +117,6 @@ Output(sb.ToString());
 
 > [!WARNING]
 > 此示例不保证能够移除所有且仅移除引用给定 Metric View Join 的 Metric View 维度。
-> Metric View 维度可能包含近乎任意的 SQL 表达式，也可能引用先前定义的 Metric View 维度。
-> 此示例仅用于说明。
 > Metric View 维度可能包含近乎任意的 SQL 表达式，也可能引用先前定义的 Metric View 维度。
 > 此示例仅用于说明。
 
