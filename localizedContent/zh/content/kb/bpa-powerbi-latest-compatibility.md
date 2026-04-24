@@ -10,7 +10,7 @@ description: 最佳实践规则：确保 Power BI 模型使用最新的兼容级
 
 ## 概述
 
-此规则用于识别未使用最新可用兼容级别的 Power BI 模型。 使用最新兼容级别可确保获得最新功能、性能优化以及错误修复。
+此规则用于识别未使用最新可用兼容级别的 Power BI 模型。 使用最新兼容级别可确保获得最新功能、性能优化以及错误修复。 使用最新兼容级别可确保获得最新功能、性能优化以及错误修复。
 
 - 类别：治理
 - 严重性：高（3）
@@ -37,7 +37,7 @@ and Model.Database.CompatibilityLevel<>[CurrentMaxLevel]
 
 ### 自动修复
 
-该最佳实践规则包含一个自动修复，会将兼容级别设置为当前安装的 Tabular Editor 3 所支持的最高可用级别。 如果您安装的是较旧版本的 Tabular Editor 3，请将其更新到最新版本。
+该最佳实践规则包含一个自动修复，会将兼容级别设置为当前安装的 Tabular Editor 3 所支持的最高可用级别。 如果您安装的是较旧版本的 Tabular Editor 3，请将其更新到最新版本。 如果您安装的是较旧版本的 Tabular Editor 3，请将其更新到最新版本。
 
 ```csharp
 Model.Database.CompatibilityLevel = [PowerBIMaxCompatibilityLevel]
