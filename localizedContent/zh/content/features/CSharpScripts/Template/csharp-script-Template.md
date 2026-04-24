@@ -16,7 +16,7 @@ applies_to:
 <br></br>
 
 > [!NOTE]
-> 由于 Power BI Desktop 外部工具的限制，当连接到 Power BI Desktop 模型时，此脚本无法运行。详见：[外部工具限制](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)。 你仍然可以通过在“文件 > 偏好”(TE2) 或“工具 > 偏好”(TE3) 下启用不受支持的建模操作来试验该脚本。 你仍然可以通过在“文件 > 偏好”(TE2) 或“工具 > 偏好”(TE3) 下启用不受支持的建模操作来试验该脚本。
+> 由于 Power BI Desktop 外部工具的限制，当连接到 Power BI Desktop 模型时，此脚本无法运行。详见：[外部工具限制](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)。 你仍然可以通过在“文件 > 偏好”(TE2) 或“工具 > 偏好”(TE3) 下启用不受支持的建模操作来试验该脚本。
 
 <br></br>
 
