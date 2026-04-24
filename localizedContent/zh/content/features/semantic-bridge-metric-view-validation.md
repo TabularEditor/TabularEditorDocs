@@ -45,13 +45,10 @@ SUMMARY: Describes the validation framework for Metric Views in the Semantic Bri
 验证是一个过程：将一组验证规则逐一应用于 Metric View 中的所有对象，并对其进行评估。
 每条验证规则都只针对一种指标视图对象类型，例如 `Join` 或 `Measure`。
 验证完成后，所有由规则违规产生的诊断信息都会返回给你，方便你进行后续处理。
-每条验证规则都只针对一种指标视图对象类型，例如 `Join` 或 `Measure`。
-验证完成后，所有由规则违规产生的诊断信息都会返回给你，方便你进行后续处理。
 
 ## 验证规则的构成
 
 验证规则都是 [`IMetricViewValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.Interfaces.IMetricViewValidationRule.html) 的实例。
-与其深入研究那个接口，不如通过这些辅助方法来理解和使用验证规则：
 与其深入研究那个接口，不如通过这些辅助方法来理解和使用验证规则：
 
 - [`MakeValidationRuleForDimension`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRuleForDimension_System_String_System_String_System_String_System_Func_TabularEditor_SemanticBridge_Platforms_Databricks_MetricView_Dimension_System_Boolean__)
@@ -61,7 +58,6 @@ SUMMARY: Describes the validation framework for Metric Views in the Semantic Bri
 - [`MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___)
 
 前四个都是专门用于为其名称对应的对象类型创建规则的方法。
-它们提供了一个更简化的接口，你只需要提供：
 它们提供了一个更简化的接口，你只需要提供：
 
 - `name`：用于标识该规则的简短唯一名称
@@ -118,8 +114,6 @@ Output(SemanticBridge.MetricView.Validate([myRule]));
 你可以看到，定义为 Metric View 维度的其中一个字段的名称中带有下划线。
 运行脚本时，在按照我们定义的规则完成验证后，你会看到一条诊断信息。
 你可以查看诊断信息中提供的详细内容：
-运行脚本时，在按照我们定义的规则完成验证后，你会看到一条诊断信息。
-你可以查看诊断信息中提供的详细内容：
 
 - Code、Context：当你使用这些帮助方法之一创建规则时，不会用到这两项
 - Message：你在规则中定义的信息
@@ -173,22 +167,14 @@ Output(SemanticBridge.MetricView.Validate([myRule]));
 
 建议创建更多简单规则，而不是更少但更复杂的规则。
 验证过程非常轻量，即使规则很多，也无需担心性能问题。
-建议创建更多简单规则，而不是更少但更复杂的规则。
-验证过程非常轻量，即使规则很多，也无需担心性能问题。
 例如，如果你想确保 Metric View 维度名称不采用 `camelCased`、不采用 `kebab-cased`，也不采用 `snake_cased`，最好分别创建三条规则，而不是试图在一条规则中检查所有这些条件。
-这样每条规则都能保持简单，信息也会更具体，因此更容易采取相应措施。
 这样每条规则都能保持简单，信息也会更具体，因此更容易采取相应措施。
 
 一般来说，一旦某条规则已经能捕获某个特定问题，最好保持不动，而不是去编辑它。
 如果你发现该规则遗漏了你想捕获的某个条件，只需新增一条小而简单的规则来覆盖这个新条件即可。
-如果你发现该规则遗漏了你想捕获的某个条件，只需新增一条小而简单的规则来覆盖这个新条件即可。
 
 你可以在一个 C# Script 中保存许多不同的规则，以便在不同的 Metric View 之间复用。
-你可以在一个 C# Script 中保存许多不同的规则，以便在不同的 Metric View 之间复用。
 由于[已加载的 Metric View 可在多个脚本中访问](xref:semantic-bridge-metric-view-object-model#loading-and-accessing-the-metric-view)，你可以保存仅用于定义规则的 C# Script，然后调用 `SemanticBridge.MetricView.Validate`，从而轻松复用这些验证脚本。
-请看下图：左侧的脚本“load-mv.csx”已经运行过，用于将一个 Metric View 加载到 Tabular Editor。
-然后，再运行右侧的第二个脚本“run-rules.csx”来执行验证。
-第二个脚本可以长期保留，供你所有的指标视图复用。
 请看下图：左侧的脚本“load-mv.csx”已经运行过，用于将一个 Metric View 加载到 Tabular Editor。
 然后，再运行右侧的第二个脚本“run-rules.csx”来执行验证。
 第二个脚本可以长期保留，供你所有的指标视图复用。
