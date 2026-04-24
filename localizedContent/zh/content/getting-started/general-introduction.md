@@ -78,7 +78,7 @@ TOM **对象属性**示例：
 
 大多数属性都是简单值（文本、true/false、从选项中选择其一，也称为。 枚举），但属性也可以引用其他对象（例如，`Sort By Column` 属性应引用一列）。 属性也可以是对象数组，例如模型角色对象上的 `Members` 属性。 枚举），但属性也可以引用其他对象（例如，`Sort By Column` 属性应引用一列）。 属性也可以是对象数组，例如模型角色对象上的 `Members` 属性。
 
-Tabular Editor 通常沿用 [Microsoft.AnalysisServices.Tabular 命名空间](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet) 中定义的对象和属性名称。 如果你想进一步了解特定的 TOM 对象或属性，请始终查阅命名空间文档。 例如，要了解“Summarize By”这一列属性的作用，先在 Microsoft 文档中找到“Column”类，然后展开“Properties”，再滚动到“SummarizeBy”。 然后你会看到[这篇文章](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet)。 如果你想进一步了解特定的 TOM 对象或属性，请始终查阅命名空间文档。 例如，要了解“Summarize By”这一列属性的作用，先在 Microsoft 文档中找到“Column”类，然后展开“Properties”，再滚动到“SummarizeBy”。 然后你会看到[这篇文章](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet)。
+Tabular Editor 通常沿用 [Microsoft.AnalysisServices.Tabular 命名空间](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular?view=analysisservices-dotnet) 中定义的对象和属性名称。 如果你想进一步了解特定的 TOM 对象或属性，请始终查阅命名空间文档。 例如，要了解“Summarize By”这一列属性的作用，先在 Microsoft 文档中找到“Column”类，然后展开“Properties”，再滚动到“SummarizeBy”。 然后你会看到[这篇文章](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.column.summarizeby?view=analysisservices-dotnet)。
 
 ![Microsoft 文档中的 SummarizeBy](~/content/assets/images/asdocs-summarizyby.png)
 
