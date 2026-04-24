@@ -23,16 +23,17 @@ applies_to:
 
 ---
 
-要设置增量刷新，你必须为该表配置一项新的刷新策略。 将 _EnableRefreshPolicy_ 设为 `True` 后，配置刷新策略属性即可：
+要设置增量刷新，你必须为该表配置一项新的刷新策略。 将 _EnableRefreshPolicy_ 设为 `True` 后，配置刷新策略属性即可： 将 _EnableRefreshPolicy_ 设为 `True` 后，配置刷新策略属性即可：
 
 > [!IMPORTANT]
 > 使用 Tabular Editor 3 设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。
+> 对于 Analysis Services，则需要自定义 [分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 > 对于 Analysis Services，则需要自定义 [分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ### 配置新的刷新策略
 
 1. **连接到模型：** 连接到 Workspace 的 Power BI XMLA endpoint，并打开要配置增量刷新的 Dataset。
-2. **创建 `RangeStart` 和 `RangeEnd` 参数：** 增量刷新要求先创建 `RangeStart` 和 `RangeEnd` 参数（[了解详情](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)）。 在 Tabular Editor 中新增两个共享表达式：
+2. **创建 `RangeStart` 和 `RangeEnd` 参数：** 增量刷新要求先创建 `RangeStart` 和 `RangeEnd` 参数（[了解详情](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)）。 在 Tabular Editor 中新增两个共享表达式： 在 Tabular Editor 中新增两个共享表达式：
 
 <img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 
@@ -74,7 +75,7 @@ applies_to:
 
 对于日期、字符串或整数类型的列，你仍然可以在保持查询折叠的同时进行筛选——只需使用函数将 `RangeStart` 或 `RangeEnd` 转换为相应的数据类型。 有关详细信息，请参阅[此处](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
-7. **配置刷新策略：** 根据你所需的增量刷新策略配置其余属性。 记得为 `SourceExpression` 属性指定一个 M 表达式（该表达式会添加到由增量刷新的刷新策略创建的分区中，并应使用 `RangeStart` 和 `RangeEnd` 参数在源中筛选数据）。 = 运算符只能用于 RangeStart 或 RangeEnd 其中之一，不能同时用于两者，否则可能导致数据重复。
+7. **配置刷新策略：** 根据你所需的增量刷新策略配置其余属性。 **配置刷新策略：** 根据你所需的增量刷新策略配置其余属性。 记得为 `SourceExpression` 属性指定一个 M 表达式（该表达式会添加到由增量刷新的刷新策略创建的分区中，并应使用 `RangeStart` 和 `RangeEnd` 参数在源中筛选数据）。 = 运算符只能用于 RangeStart 或 RangeEnd 其中之一，不能同时用于两者，否则可能导致数据重复。 = 运算符只能用于 RangeStart 或 RangeEnd 其中之一，不能同时用于两者，否则可能导致数据重复。
 
    - **Source Expression:** 将添加到由刷新策略创建的分区的 M 表达式。
    - **IncrementalWindowGranularity:** 增量（刷新）窗口的粒度。
@@ -83,13 +84,13 @@ applies_to:
    - **RollingWindowGranularity:** 滚动（归档）窗口的粒度。
    - **RollingWindowPeriods:** 需要归档的周期数（按上面指定的粒度）。
    - **Mode:** 是标准 `Import` 刷新策略还是 `Hybrid`，其中最后一个分区为 DirectQuery。
-   - **PollingExpression:** 用于检测数据更改的有效 M 表达式。 有关 _Polling Expression_ 或其他刷新策略属性的更多信息，请参阅[此处](xref:incremental-refresh-about#overview-of-all-properties)。
+   - **PollingExpression:** 用于检测数据更改的有效 M 表达式。 **PollingExpression:** 用于检测数据更改的有效 M 表达式。 有关 _Polling Expression_ 或其他刷新策略属性的更多信息，请参阅[此处](xref:incremental-refresh-about#overview-of-all-properties)。
 8. **Apply Model Changes:** 保存模型（Ctrl+S）。
 9. **应用刷新策略：** 右键单击该表，然后选择“应用刷新策略”。
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 
-**就这样！** 此时你应该会看到，Power BI 服务已根据你指定的策略，自动为表生成了分区。 剩下的就是刷新所有分区。
+**就这样！** 此时你应该会看到，Power BI 服务已根据你指定的策略，自动为表生成了分区。 剩下的就是刷新所有分区。 剩下的就是刷新所有分区。
 
 <img src="~/content/assets/images/generated-partitions-te3.png" class="noscale" alt="Refresh All Partitions" style="width:400px !important"/>
 
@@ -113,7 +114,7 @@ applies_to:
         Date.Year(DateValue) * 10000 + Date.Month(DateValue) * 100 + Date.Day(DateValue)
 ```
 
-2. **创建筛选步骤：** 使用该自定义函数在筛选表达式中将 `RangeStart` 和 `RangeEnd` 转换为整数。 除此之外，该筛选步骤与日期列为 DateTime 类型时完全相同：
+2. **创建筛选步骤：** 使用该自定义函数在筛选表达式中将 `RangeStart` 和 `RangeEnd` 转换为整数。 除此之外，该筛选步骤与日期列为 DateTime 类型时完全相同： 除此之外，该筛选步骤与日期列为 DateTime 类型时完全相同：
 
 ```M
 let
@@ -205,7 +206,7 @@ in
    #"Incremental Refresh" 
 ```
 
-另请参阅 Power Query 中 `Date.FromText` 函数的文档：[此处](https://learn.microsoft.com/en-us/powerquery-m/date-fromtext)。 如果无法在保留查询折叠的同时内联转换日期列，也可以按下文所述，通过本机查询来配置增量刷新。
+另请参阅 Power Query 中 `Date.FromText` 函数的文档：[此处](https://learn.microsoft.com/en-us/powerquery-m/date-fromtext)。 如果无法在保留查询折叠的同时内联转换日期列，也可以按下文所述，通过本机查询来配置增量刷新。 如果无法在保留查询折叠的同时内联转换日期列，也可以按下文所述，通过本机查询来配置增量刷新。
 
 -------------
 
@@ -225,7 +226,7 @@ in
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-native-query-formatted.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>
 
-3. **添加 `RangeStart` 和 `RangeEnd`：** 在 `WHERE` 子句中拼接 "RangeStart" 和 "RangeEnd"，替换占位字段，并使用 `Date.From` 将参数转换为日期，再通过 `Date.ToText` 将 `Format` 选项设为 `"yyyy-MM-dd`，把它们转换为字符串数据类型。 别忘了在拼接结果两侧加上单引号 `'`。 下面是最终查询的示例：
+3. **添加 `RangeStart` 和 `RangeEnd`：** 在 `WHERE` 子句中拼接 "RangeStart" 和 "RangeEnd"，替换占位字段，并使用 `Date.From` 将参数转换为日期，再通过 `Date.ToText` 将 `Format` 选项设为 `"yyyy-MM-dd`，把它们转换为字符串数据类型。 别忘了在拼接结果两侧加上单引号 `'`。 下面是最终查询的示例： 别忘了在拼接结果两侧加上单引号 `'`。 下面是最终查询的示例：
 
 ```M
 // 支持查询折叠并可用于增量刷新的完整本机查询示例
@@ -262,4 +263,4 @@ in
 
    这可能不是必需的，但根据本机查询中的转换情况，你也可以尝试按 Chris Webb 的[这篇文章](https://blog.crossjoin.co.uk/2021/02/21/query-folding-on-sql-queries-in-power-query-using-value-nativequery-and-enablefoldingtrue/)所述，添加参数 `[EnableFolding = True]`。
 
-5. **按正常流程继续后续步骤：** 然后你就可以用 _'Apply refresh policy'_ 配置并应用刷新策略，最后刷新所有分区。 刷新操作完成后，预览该表的数据以查看结果。
+5. **按正常流程继续后续步骤：** 然后你就可以用 _'Apply refresh policy'_ 配置并应用刷新策略，最后刷新所有分区。 刷新操作完成后，预览该表的数据以查看结果。 刷新操作完成后，预览该表的数据以查看结果。
