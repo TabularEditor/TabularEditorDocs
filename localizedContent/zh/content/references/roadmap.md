@@ -116,7 +116,7 @@ applies_to:
 
 ## 已于 2023 年发布
 
-✅ “保存到文件夹”默认使用 TMDL 作为文件格式。 （取决于 Microsoft 发布 TMDL 的时间） （取决于 Microsoft 发布 TMDL 的时间）
+✅ “保存到文件夹”默认使用 TMDL 作为文件格式。 （取决于 Microsoft 发布 TMDL 的时间）
 
 ✅ 导入表向导支持 Databricks（待用于获取元数据/架构的 REST 端点可用）
 
