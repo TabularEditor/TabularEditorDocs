@@ -122,7 +122,7 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
    ```
 
-   要包含 **AI Assistant** 功能，请在 `ADDLOCAL` 属性中指定它。 AI Assistant 默认不安装。 AI Assistant 默认不安装。
+   要包含 **AI Assistant** 功能，请在 `ADDLOCAL` 属性中指定它。 AI Assistant 默认不安装。
 
    ```powershell
    msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
@@ -133,7 +133,7 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
    | `MainFeature` | Tabular Editor 3 的核心应用程序            | 是（必需） |
    | `AIAssistant` | 适用于 Tabular Editor 3 的 AI Assistant | 否     |
 
-   > [!NOTE]> 使用 `ADDLOCAL` 时，除任何可选功能外，还必须包含 `MainFeature`。 只指定 `AIAssistant` 而不包含 `MainFeature` 会导致安装不完整。 只指定 `AIAssistant` 而不包含 `MainFeature` 会导致安装不完整。
+   > [!NOTE]> 使用 `ADDLOCAL` 时，除任何可选功能外，还必须包含 `MainFeature`。 只指定 `AIAssistant` 而不包含 `MainFeature` 会导致安装不完整。
 
 你也可以使用 `/package` 替代 `/i`。 将 `<version>` 替换为实际的版本字符串。 如适用，请使用 ARM64 MSI。
 
