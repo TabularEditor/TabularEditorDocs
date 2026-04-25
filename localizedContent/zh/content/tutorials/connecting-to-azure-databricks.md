@@ -32,20 +32,20 @@ Tabular Editor 3 supports connecting to Azure Databricks as a data source for yo
 - 你电脑上安装的 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)
 
 > [!IMPORTANT]
-> Databricks 已发布一款新的 ODBC 驱动程序，用以取代旧版 Simba Spark ODBC Driver。 我们建议安装新的 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)。 Tabular Editor 3.26.0 及更高版本支持这两种驱动程序，但从今往后建议优先使用新驱动程序。 旧版 Simba 驱动程序可从 [Databricks ODBC 驱动程序存档](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc) 下载。 我们建议安装新的 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)。 Tabular Editor 3.26.0 及更高版本支持这两种驱动程序，但从今往后建议优先使用新驱动程序。 旧版 Simba 驱动程序可从 [Databricks ODBC 驱动程序存档](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc) 下载。
+> Databricks 已发布一款新的 ODBC 驱动程序，用以取代旧版 Simba Spark ODBC Driver。 我们建议安装新的 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)。 Tabular Editor 3.26.0 及更高版本支持这两种驱动程序，但从今往后建议优先使用新驱动程序。 旧版 Simba 驱动程序可从 [Databricks ODBC 驱动程序存档](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc) 下载。
 
 ## 连接器实现方式
 
-Tabular Editor 使用 Power Query `Databricks.Catalogs()` 函数连接到 Databricks。 此函数支持两种连接器实现： 此函数支持两种连接器实现：
+Tabular Editor 使用 Power Query `Databricks.Catalogs()` 函数连接到 Databricks。 此函数支持两种连接器实现：
 
-- **实现 2.0 (ADBC)：** 使用 [Arrow Database Connectivity](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) 驱动程序。 这是 Tabular Editor 3.26.1 及更高版本中的默认实现，也与 Power BI Desktop 使用的默认设置一致。 较新的 Databricks Workspace 需要使用此实现。 这是 Tabular Editor 3.26.1 及更高版本中的默认实现，也与 Power BI Desktop 使用的默认设置一致。 较新的 Databricks Workspace 需要使用此实现。
-- **实现 1.0（旧版）：** 原始的连接器实现。 **实现 1.0（旧版）：** 原始的连接器实现。 它在较旧的 Databricks Workspace 中仍可运行，但在较新的 Workspace 中会因“目录为空”错误而失败。
+- **实现 2.0 (ADBC)：** 使用 [Arrow Database Connectivity](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview) 驱动程序。 这是 Tabular Editor 3.26.1 及更高版本中的默认实现，也与 Power BI Desktop 使用的默认设置一致。 较新的 Databricks Workspace 需要使用此实现。
+- **实现 1.0（旧版）：** 原始的连接器实现。 它在较旧的 Databricks Workspace 中仍可运行，但在较新的 Workspace 中会因“目录为空”错误而失败。
 
 > [!NOTE]
-> 运行 Tabular Editor 的计算机上无需安装 ADBC 驱动程序。 仅需 Databricks ODBC 驱动程序即可。 仅需 Databricks ODBC 驱动程序即可。
+> 运行 Tabular Editor 的计算机上无需安装 ADBC 驱动程序。 仅需 Databricks ODBC 驱动程序即可。
 
 > [!IMPORTANT]
-> 如果你已有使用 Tabular Editor 3.26.0 或更早版本创建的 M 查询，这些查询使用旧版实现（`Databricks.Catalogs()` 的第三个参数为 `null`）。 如果您在较新的 Databricks Workspace 中遇到刷新错误，请将这些查询更新为使用实现 2.0。 有关分步说明，请参阅 [Databricks 刷新因目录为空错误而失败](xref:databricks-refresh-empty-catalog)。 如果您在较新的 Databricks Workspace 中遇到刷新错误，请将这些查询更新为使用实现 2.0。 有关分步说明，请参阅 [Databricks 刷新因目录为空错误而失败](xref:databricks-refresh-empty-catalog)。
+> 如果你已有使用 Tabular Editor 3.26.0 或更早版本创建的 M 查询，这些查询使用旧版实现（`Databricks.Catalogs()` 的第三个参数为 `null`）。 如果您在较新的 Databricks Workspace 中遇到刷新错误，请将这些查询更新为使用实现 2.0。 有关分步说明，请参阅 [Databricks 刷新因目录为空错误而失败](xref:databricks-refresh-empty-catalog)。
 
 ## 身份验证方式
 
@@ -156,9 +156,9 @@ https://login.microsoftonline.com/organizations/v2.0/adminconsent?client_id=ea0f
    - 将令牌粘贴到 Token 字段中
    - 在 HTTP Path 中，指定你的 Databricks Warehouse 路径（例如 `/sql/1.0/warehouses/<warehouse-id>`）
 
-### 3) 3) OAuth 机器到机器（M2M）身份验证
+### 3) OAuth 机器到机器（M2M）身份验证
 
-从 Tabular Editor 3.26.1 起，你可以使用 OAuth 机器到机器（M2M）流，通过 Databricks 服务主体进行身份验证。 这对于无人值守场景很有用——例如计划刷新或 CI/CD 管道——因为您不希望连接绑定到某个特定用户的凭据。 OAuth (M2M) 适用于所有 Databricks 云平台（Azure、AWS 和 GCP）。 这对于无人值守场景很有用——例如计划刷新或 CI/CD 管道——因为您不希望连接绑定到某个特定用户的凭据。 OAuth (M2M) 适用于所有 Databricks 云平台（Azure、AWS 和 GCP）。
+从 Tabular Editor 3.26.1 起，你可以使用 OAuth 机器到机器（M2M）流，通过 Databricks 服务主体进行身份验证。 这对于无人值守场景很有用——例如计划刷新或 CI/CD 管道——因为您不希望连接绑定到某个特定用户的凭据。 OAuth (M2M) 适用于所有 Databricks 云平台（Azure、AWS 和 GCP）。
 
 #### 先决条件
 
