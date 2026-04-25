@@ -68,7 +68,7 @@ Info("Updated " + Selected.Measures.Count() + " measures.");
 | 字符串或基本类型                          | 简单的信息对话框      |
 
 > [!NOTE]
-> 字符串输出使用 Windows 行结束符。 使用 `\r\n` 或 `Environment.NewLine` 来插入换行符。 单独的 `\\n` 会渲染为一行。 这常让使用 M 表达式的用户出错：M 表达式使用 `\n`，但在 `Output()` 中会作为单行输出。 使用 `\r\n` 或 `Environment.NewLine` 来插入换行符。 单独的 `\\n` 会渲染为一行。 这常让使用 M 表达式的用户出错：M 表达式使用 `\n`，但在 `Output()` 中会作为单行输出。
+> 字符串输出使用 Windows 行结束符。 使用 `\r\n` 或 `Environment.NewLine` 来插入换行符。 单独的 `\\n` 会渲染为一行。 这常让使用 M 表达式的用户出错：M 表达式使用 `\n`，但在 `Output()` 中会作为单行输出。 使用 `\r\n` 或 `Environment.NewLine` 来插入换行符。 单独的 `\\n` 会渲染为一行。 This catches users out with M expressions, which use `\n` and print as a single line in `Output()`.
 
 ### 用于结构化输出的 DataTable
 
