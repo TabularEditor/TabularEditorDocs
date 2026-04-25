@@ -19,7 +19,7 @@ applies_to:
 
 # 语义模型类型
 
-Tabular Editor 可与多种不同的模型类型配合使用。 Below is an overview of which model types work with Tabular Editor and the capabilities that can be used with each model type.
+Tabular Editor can work with several different model types. Below is an overview of which model types work with Tabular Editor and the capabilities that can be used with each model type.
 
 | 模型类型                                   | 导入 | DirectQuery | OneLake 上的 Direct Lake                  | SQL 上的 Direct Lake                         | .pbix | .pbip |
 | -------------------------------------- | -- | ----------- | --------------------------------------- | ------------------------------------------ | --------------------- | --------------------- |
