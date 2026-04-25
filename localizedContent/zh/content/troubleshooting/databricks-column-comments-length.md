@@ -20,9 +20,9 @@ applies_to:
 # Databricks 列注释长度超限错误
 
 > [!TIP]
-> Databricks 已发布新的 ODBC 驱动程序，用于替代旧版 Simba Spark ODBC Driver。 新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) 可能没有下文所述的 `MaxCommentLen` 限制。 如果你遇到此问题，建议切换到新驱动程序，Tabular Editor 3.26.0 及更高版本已支持该驱动程序。 新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) 可能没有下文所述的 `MaxCommentLen` 限制。 如果你遇到此问题，建议切换到新驱动程序，Tabular Editor 3.26.0 及更高版本已支持该驱动程序。
+> Databricks 已发布新的 ODBC 驱动程序，用于替代旧版 Simba Spark ODBC Driver。 新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) 可能没有下文所述的 `MaxCommentLen` 限制。 如果你遇到此问题，建议切换到新驱动程序，Tabular Editor 3.26.0 及更高版本已支持该驱动程序。
 
-When using the Import Table Wizard to import tables from Databricks, you may encounter a connection error if column comments (descriptions) exceed 512 characters. 这一限制来自 Simba Spark ODBC Driver，尽管 Databricks Unity Catalog 允许更长的列注释。
+使用“导入表向导”从 Databricks 导入表时，如果列注释（说明）超过 512 个字符，可能会遇到连接错误。 这一限制来自 Simba Spark ODBC Driver，尽管 Databricks Unity Catalog 允许更长的列注释。
 
 典型的错误信息如下：
 
@@ -34,7 +34,7 @@ When using the Import Table Wizard to import tables from Databricks, you may enc
 
 ## 了解问题
 
-The Simba Spark ODBC Driver, which Tabular Editor uses to connect to Databricks, has a default limit of 512 characters for column comments. 无论 Databricks Unity Catalog 允许的长度是多少，这个限制都会被强制执行。
+Tabular Editor 通过 Simba Spark ODBC Driver 连接到 Databricks，该驱动对列注释的默认长度限制为 512 个字符。 无论 Databricks Unity Catalog 允许的长度是多少，这个限制都会被强制执行。
 
 ### 为什么会这样
 
@@ -204,13 +204,13 @@ The Simba Spark ODBC Driver, which Tabular Editor uses to connect to Databricks,
 
 如果以上步骤未能解决你的问题：
 
-1. **Verify ODBC driver version**: Ensure you have the latest version of the Simba Spark ODBC Driver installed. You can download it from the [Microsoft Azure Databricks ODBC download page](https://learn.microsoft.com/azure/databricks/integrations/odbc/download).
+1. **检查 ODBC 驱动程序版本**：确保已安装最新版本的 Simba Spark ODBC Driver。 你可以从 [Microsoft Azure Databricks ODBC 下载页面](https://learn.microsoft.com/azure/databricks/integrations/odbc/download) 下载该驱动程序。
 
 2. **检查 ODBC 数据源配置**：打开 Windows 的 ODBC 数据源管理器 (odbcad32.exe)，确认你的 Databricks 连接已正确配置。
 
 3. **用更简单的表测试**：尝试导入一张你确定列注释很短（或没有注释）的 Databricks 表，先确认连接本身是否正常。
 
-4. **Review ODBC driver logs**: The Simba Spark ODBC Driver can generate detailed logs. 参考驱动程序文档，按说明启用日志记录；日志可能会提供更多诊断信息。
+4. **查看 ODBC 驱动程序日志**：Simba Spark ODBC Driver 可以生成详细的日志。 参考驱动程序文档，按说明启用日志记录；日志可能会提供更多诊断信息。
 
 5. **联系支持**：联系 Tabular Editor 支持团队，并提供：
    - 完整的错误信息文本
