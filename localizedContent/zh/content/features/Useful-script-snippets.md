@@ -19,7 +19,7 @@ applies_to:
 
 # 实用脚本片段
 
-Here's a collection of small script snippets to get you started using the [Advanced Scripting functionality](/Advanced-Scripting) of Tabular Editor. 其中很多脚本都适合保存为 [自定义操作](/Custom-Actions)，这样你就可以通过上下文菜单轻松复用它们。'
+这里汇总了一些小脚本片段，帮助你快速上手 Tabular Editor 的 [高级脚本功能](/Advanced-Scripting)。 其中很多脚本都适合保存为 [自定义操作](/Custom-Actions)，这样你就可以通过上下文菜单轻松复用它们。'
 
 另外，也别忘了看看我们的脚本库 @csharp-script-library，里面有更多贴近实际场景的示例，展示了你可以如何利用 Tabular Editor 的脚本功能。
 
@@ -57,7 +57,7 @@ foreach(var c in Selected.Columns)
 
 ## 生成时间智能度量值
 
-First, create custom actions for individual Time Intelligence aggregations. 例如：
+首先，为每项时间智能聚合创建自定义操作。 例如：
 
 ```csharp
 // 为每个选中的度量值创建一个 TOTALYTD 度量值。
