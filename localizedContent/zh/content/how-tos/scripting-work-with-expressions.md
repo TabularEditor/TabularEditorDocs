@@ -72,7 +72,7 @@ m.FormatString = "#,##0.00";
 | `DaxTableName`      | `'Sales'`         | `'Sales'`   | `'Sales'` |
 
 > [!NOTE]
-> 对于度量值，`DaxObjectFullName` 返回与 `DaxObjectName`（不带限定符）相同的值。 在 DAX 中，度量值不需要表名限定。 对于列，`DaxObjectFullName` 包含表前缀。
+> For measures, `DaxObjectFullName` returns the same value as `DaxObjectName` (unqualified). 在 DAX 中，度量值不需要表名限定。 对于列，`DaxObjectFullName` 包含表前缀。
 
 生成 DAX 时，请使用以下属性以避免引号错误：
 
