@@ -199,7 +199,7 @@ in
 
 将 `<schema-name>` 替换为 Warehouse/Lakehouse 中的架构名称，并将 `<table/view-name>` 替换为你要导入的表或视图名称。 注意：导入模式下的表可以使用非物化视图作为数据源，因为刷新时会通过 SQL 端点查询数据。 注意：导入模式下的表可以使用非物化视图作为数据源，因为刷新时会通过 SQL 端点查询数据。
 
-3. **更新列元数据**：使用 Tabular Editor 的 **Update Table Schema** 功能更新该表的列元数据。 此操作会自动从 Lakehouse/Warehouse 获取列名和数据类型。 或者，手动创建数据列（Alt+4），并为每一列指定 `Name`、`Data Type`、`Source Column` 以及其他相关属性。
+3. **Update column metadata**: Use Tabular Editor's **Update Table Schema** feature to update the column metadata for the table. 此操作会自动从 Lakehouse/Warehouse 获取列名和数据类型。 或者，手动创建数据列（Alt+4），并为每一列指定 `Name`、`Data Type`、`Source Column` 以及其他相关属性。
 
 ## 在不同存储模式之间转换
 
