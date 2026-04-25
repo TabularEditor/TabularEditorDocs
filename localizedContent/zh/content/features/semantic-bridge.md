@@ -25,9 +25,9 @@ SUMMARY: Overview of the Semantic Bridge feature - a multi-platform semantic mod
 -->
 
 > [!NOTE]
-> 在 3.25.0 版本中发布的 Semantic Bridge 目前处于公共预览阶段。 它存在下文所述的限制，且 API 和功能范围可能会发生变化。 它存在下文所述的限制，且 API 和功能范围可能会发生变化。
+> 在 3.25.0 版本中发布的 Semantic Bridge 目前处于公共预览阶段。 它存在下文所述的限制，且 API 和功能范围可能会发生变化。
 
-The Semantic Bridge is a semantic model compiler, with the capability to translate the structure and expressions of a semantic model from one platform to another.
+Semantic Bridge 是一个语义模型编译器，能够将语义模型的结构和表达式从一个平台转换到另一个平台。
 这样你就能在多个数据平台上复用业务逻辑，支持终端用户，并在他们使用数据的场景中为其提供支持。
 它还支持平台间迁移。
 
@@ -49,17 +49,17 @@ The Semantic Bridge is a semantic model compiler, with the capability to transla
 
 你需要在此对话框中提供三项信息：
 
-1. The path to the Metric View YAML file.
+1. Metric View YAML 文件的路径。
    你可以粘贴该文件的路径，或使用 **浏览** 按钮来查找。
 2. Databricks 主机名。
    用于在为 Databricks 源系统生成的 M 分区中提供正确的参数。
-3. The HTTP path for Databricks.
-   This is to provide the correct argument in the M partition generated for the Databricks source system.
+3. Databricks 的 HTTP 路径。
+   这是为了在为 Databricks 源系统生成的 M 分区中提供正确的参数。
 
 如果你只是测试翻译功能，最后两项可以先用占位值填写，但在将数据刷新到你的 Tabular 模型之前，需要先修正 M 分区定义。
 
 填写完详细信息后，点击 **确定**。
-The Semantic Bridge will translate your Metric View to Tabular and create all the TOM objects for you.
+Semantic Bridge 会将您的 Metric View 转换为 Tabular，并为您创建所有 TOM 对象。
 
 ![导入对话框中的 Databricks 详细信息](~/content/assets/images/features/semantic-bridge/semantic-bridge-metric-view-details.png)
 
@@ -81,7 +81,7 @@ The Semantic Bridge will translate your Metric View to Tabular and create all th
 
 ![包含问题的导入成功通知](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-success-with-issues.png)
 
-If you click on **View Diagnostics**, you can see a list of messages describing the issues in translation.
+如果您点击 **查看诊断信息**，就会看到一份信息列表，用于描述翻译中存在的问题。
 这些诊断信息也可以在之后通过 C# Script 输出出来查看：
 
 ```csharp
@@ -104,12 +104,12 @@ SemanticBridge.MetricView.ImportDiagnostics.Output();
 1. 从磁盘读取 YAML 文件
 2. 对 YAML 进行反序列化
 3. 验证反序列化后的 YAML 是否为有效的 Metric View
-4. If it is a valid Metric View, store it as a the currently loaded Metric View, similar to how there is a loaded Tabular model that you interact with.
+4. 如果它是有效的 Metric View，就将其保存为当前加载的 Metric View，类似于您与已加载的 Tabular 模型交互的方式。
    如果它不是有效的 Metric View，流程将在此停止，并会提供信息。
 5. 分析 Metric View，并尝试将其转换为一种中间表示
 6. 尝试将中间表示转换为 Tabular 模型
 
-The import GUI described above handles all of this for you, but you can also use C# scripts to customize different steps of the process and operate on the Metric View programatically, similarly to how you are used to doing with a Tabular model.
+上文所述的导入 GUI 会为您处理这些工作；不过，您也可以使用 C# Script 来自定义流程中的不同步骤，并以编程方式操作 Metric View，就像您平时操作 Tabular 模型一样。
 具体来说，你可以
 
 - 使用 [`SemanticBridge.MetricView.Load`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Load_System_String_) 从磁盘加载 Metric View：加载后可在 C# Script 中通过 [`SemanticBridge.MetricView.Model`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Model) 访问，但不会将结构导入 Tabular 模型
@@ -128,7 +128,6 @@ The import GUI described above handles all of this for you, but you can also use
 
 在公共预览版中，我们支持将 Databricks Metric View 翻译为 Tabular 模型。
 具体来说，我们支持 Databricks Metric View 的以下内容：
-具体来说，我们支持 Databricks Metric View 的以下内容：
 
 - v0.1 Metric View 属性：
   - 支持：
@@ -140,17 +139,17 @@ The import GUI described above handles all of this for you, but you can also use
     - `filter`：用于 Metric View 的 SQL 筛选表达式
 
 公开预览版不支持任何 v1.1 元数据。
-Any v1.1 metadata is silently ignored upon deserialization of a Metric View, so it will not be visible in a C# script and it will not affect the translation to Tabular in any way.
+在对 Metric View 进行反序列化时，任何 v1.1 元数据都会被静默忽略，因此这些元数据在 C# Script 中不可见，也不会以任何方式影响翻译到 Tabular。
 
 > [!WARNING]
-> Because the v1.1 metadata is silently ignored, a Metric View that you deserialize and then serialize will be missing this metadata.
+> 由于 v1.1 元数据会被静默忽略，因此你反序列化后再序列化的 Metric View 将缺少这些元数据。
 > 注意不要在 C# Script 中覆盖 v1.1 源 YAML 文件，否则会移除所有 v1.1 元数据。
 
 ### 从 SQL 翻译的限制
 
 Metric View 在 SQL 表达式之上提供了一个结构化层，因此翻译 Metric View 的一部分工作是在 Tabular 模型中将 SQL 转换为 DAX 和 M。
 
-- Metric View `joins` with nested `joins` are not supported.
+- 不支持在 Metric View `joins` 中使用嵌套 `joins`。
   换句话说，翻译仅支持严格的星型架构；不支持雪花模型
 - 不支持使用 `using` 作为联接条件的 Metric View `joins`；仅支持通过 `on` 属性在单个键字段上进行等值联接。
 - 包含 SQL 表达式的 Metric View `dimensions` 不会翻译为 M 或 DAX；它们会以 Tabular 模型计算列的形式呈现，并将其 SQL 表达式注释掉
@@ -160,18 +159,17 @@ Metric View 在 SQL 表达式之上提供了一个结构化层，因此翻译 Me
 
 > [!WARNING]
 > 注意，SQL 和 DAX 是不同的语言，语义也不同。
-> We can make no guarantee that a translated measure will behave identically between the Metric View SQL and the Tabular DAX we generate.
+> 我们无法保证转换后的度量值在 Metric View SQL 与我们生成的 Tabular DAX 中的行为完全一致。
 > 定义在事实表字段上的基础聚合通常表现一致；而定义在维度表字段上的聚合更可能产生非预期结果。
 
 ### 连接
 
 公共预览版不会连接除 Tabular 之外的任何平台，而是完全基于本地文件运行。
 你必须自行创建 Metric View YAML，然后将其放到 Tabular Editor 能够访问的位置。
-你必须自行创建 Metric View YAML，然后将其放到 Tabular Editor 能够访问的位置。
 
 ### C# API
 
-The C# interface has been built to optimize for the automatic translation workflow.
+该 C# 接口在设计时针对自动翻译工作流进行了优化。
 因此，与当前加载的 Metric View 交互的支持较为有限，某些类型的操作也比较繁琐。
 
 ## 命名法附录
@@ -188,11 +186,11 @@ The C# interface has been built to optimize for the automatic translation workfl
 ### 定义
 
 - _语义模型_：单独使用时，始终指通用概念——用于支撑报表与分析的数据、元数据与业务逻辑的集合。
-  If and only if it is immediately preceded by "Fabric" or "Power BI", then it is referring to that artifact type in that platform, specifically a Tabular model that is saved as TMDL or BIM and using M and DAX; we tend to prefer to use the term Tabular model to refer to the Power BI / Fabric semantic model to avoid this confusion where possible, because the Tabular model is shared across Power BI / Fabric as well as Analysis Serviced Tabular.
+  仅当其前面紧跟“Fabric”或“Power BI”时，它才指该平台中的那种项目类型——具体而言，是以 TMDL 或 BIM 保存、并使用 M 和 DAX 的 Tabular 模型。为尽可能避免混淆，我们通常更倾向于用“Tabular 模型”来指代 Power BI / Fabric 的语义模型，因为 Tabular 模型不仅用于 Power BI / Fabric，也用于 Analysis Services Tabular。
 - _平台_：具有语义层、并承载通用语义模型的技术解决方案。
-  Databricks Metric Views represent a platform; Fabric / Power BI represent a platform; Analysis Services Tabular is a platform; Analysis Services Multidimensional is a platform which we have no support for in the Semantic Bridge today.
+  Databricks Metric Views 是一种平台；Fabric / Power BI 是一种平台；Analysis Services Tabular 是一种平台；Analysis Services Multidimensional 也是一种平台，但 Semantic Bridge 目前不支持它。
 - _序列化格式_：一种将语义模型以文本形式表示并存储到磁盘上的方式。
-  TMDL and TMSL (.bim) are two serialization formats for a Power BI semantic model; YAML is the serialization format for a Databricks Metric View.
+  TMDL 和 TMSL (.bim) 是 Power BI 语义模型的两种序列化格式；YAML 是 Databricks Metric View 的序列化格式。
 - _对象模型_：语义模型在内存中的表示形式。我们通过 Semantic Bridge 在 Tabular Editor 中对它进行操作——既可以通过 GUI 操作，也可以通过 C# Script。
   TOM 或 Tabular Object Model 对现有 Tabular Editor 用户来说应该并不陌生。
   我们还为 Databricks Metric Views 创建了一个对象模型，以便在我们的工具中操作它们。
@@ -209,16 +207,16 @@ The C# interface has been built to optimize for the automatic translation workfl
 ### Metric Views 与 Tabular 模型中的常见通用术语
 
 对于可能不熟悉 Metric Views 或 Tabular 模型的用户，我们在下方提供了一份不完整的术语对照表。
-We refer to the names of Metric View objects based on their representation in YAML, and Tabular based on the name of the type of object in TMDL/TMSL.
+我们对 Metric View 对象的称呼基于它们在 YAML 中的表示；对 Tabular 对象的称呼则基于该对象类型在 TMDL/TMSL 中的名称。
 
-| 通用术语  | Tabular 中的名称 | Metric View 中的名称                                     | 描述                             | 备注                                                                                                                                                                 |
-| ----- | ------------ | ---------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 事实表   | 表            | `source`                                             | 用于存放维度外键以及可聚合的数值字段的表           | a Metric View has a single fact which is unnamed and captured as the root-level `source` attribute in YAML. Tabular 模型不会区分表的类型：某个表是否为事实表只能通过推断才能确定 |
-| 维度    | 表            | `join`                                               | 用于存放描述性属性以及一个主键的表，事实表通过该主键与其关联 | Tabular 模型同样不会区分，因此“维度”的角色也只能像事实表一样通过推断得出。                                                                                                                         |
-| 分区    | 分区           | `source`（仅用于 `join`）                                 | 用于数据管理的对象，保存表中的一部分数据           | Tabular 模型中的表可以有多个分区，并且至少要有一个分区。 如上所述，Metric View 的事实表完全以 `source` 的形式定义；但 Metric View 的 `join` 也有一个 `source` 属性，其作用大致类似于分区                                        |
-| 字段    | 列            | 维度                                                   | 表格中的一列                         |                                                                                                                                                                    |
-| 度量值   | 度量值          | 度量值                                                  | 在模型中按业务逻辑进行汇总的定量值              | 表格模型中的度量值使用 DAX 编写，而在 Metric View 中使用 SQL 编写                                                                                                                       |
-| 联接或关系 | 关系           | join.on 或 join.using | 一个表中的外键与另一个表中的主键之间的对应关系        | 在表格模型中，关系是显式对象；而在 Metric View YAML 中，它被隐式定义为 `join` 对象的一个属性                                                                                                        |
+| 通用术语  | Tabular 中的名称 | Metric View 中的名称                                     | 描述                             | 备注                                                                                                                          |
+| ----- | ------------ | ---------------------------------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| 事实表   | 表            | `source`                                             | 用于存放维度外键以及可聚合的数值字段的表           | 一个 Metric View 只有一个未命名的事实表，并在 YAML 中表示为根级 `source` 属性。 Tabular 模型不会区分表的类型：某个表是否为事实表只能通过推断才能确定                               |
+| 维度    | 表            | `join`                                               | 用于存放描述性属性以及一个主键的表，事实表通过该主键与其关联 | Tabular 模型同样不会区分，因此“维度”的角色也只能像事实表一样通过推断得出。                                                                                  |
+| 分区    | 分区           | `source`（仅用于 `join`）                                 | 用于数据管理的对象，保存表中的一部分数据           | Tabular 模型中的表可以有多个分区，并且至少要有一个分区。 如上所述，Metric View 的事实表完全以 `source` 的形式定义；但 Metric View 的 `join` 也有一个 `source` 属性，其作用大致类似于分区 |
+| 字段    | 列            | 维度                                                   | 表格中的一列                         |                                                                                                                             |
+| 度量值   | 度量值          | 度量值                                                  | 在模型中按业务逻辑进行汇总的定量值              | 表格模型中的度量值使用 DAX 编写，而在 Metric View 中使用 SQL 编写                                                                                |
+| 联接或关系 | 关系           | join.on 或 join.using | 一个表中的外键与另一个表中的主键之间的对应关系        | 在表格模型中，关系是显式对象；而在 Metric View YAML 中，它被隐式定义为 `join` 对象的一个属性                                                                 |
 
 ## 更多资源
 
