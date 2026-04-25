@@ -37,7 +37,7 @@ applies_to:
 
 ## 激活安装
 
-Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabulareditor.com)，了解定价详情和购买选项。 如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。 访问我们的[主页](https://tabulareditor.com)，了解定价详情和购买选项。 如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。
+Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabulareditor.com)，了解定价详情和购买选项。 如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。
 
 首次在新设备上启动 Tabular Editor 3 时，系统会提示进行产品激活。
 
@@ -45,12 +45,12 @@ Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabularedito
 
 ### 使用现有许可证密钥进行激活
 
-购买 Tabular Editor 3 许可证后，您将收到一封电子邮件，其中包含一串 25 个字符的代码，也就是您的许可证密钥。 按提示输入许可证密钥，然后点击“下一步 >”以激活产品。 按提示输入许可证密钥，然后点击“下一步 >”以激活产品。
+购买 Tabular Editor 3 许可证后，您将收到一封电子邮件，其中包含一串 25 个字符的代码，也就是您的许可证密钥。 按提示输入许可证密钥，然后点击“下一步 >”以激活产品。
 
 ![输入许可证密钥](~/content/assets/images/getting-started/enter-license-key.png)
 
 > [!NOTE]
-> 对于多用户许可证类型，除了许可证密钥之外，您还需要输入电子邮件地址。 如果您输入的许可证密钥对应多用户许可证，Tabular Editor 3 会提示您输入电子邮件地址。 如果您输入的许可证密钥对应多用户许可证，Tabular Editor 3 会提示您输入电子邮件地址。
+> 对于多用户许可证类型，除了许可证密钥之外，您还需要输入电子邮件地址。 如果您输入的许可证密钥对应多用户许可证，Tabular Editor 3 会提示您输入电子邮件地址。
 
 请注意，Tabular Editor 3 的安装是**按用户**激活的。 换句话说，如果多个用户共用同一台计算机，则每个用户都必须在各自的 Windows 用户配置文件中激活产品。
 
@@ -135,7 +135,7 @@ REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 
    > [!NOTE]> 使用 `ADDLOCAL` 时，除任何可选功能外，还必须包含 `MainFeature`。 只指定 `AIAssistant` 而不包含 `MainFeature` 会导致安装不完整。 只指定 `AIAssistant` 而不包含 `MainFeature` 会导致安装不完整。
 
-你也可以使用 `/package` 替代 `/i`。 将 `<version>` 替换为实际的版本字符串。 如适用，请使用 ARM64 MSI。 将 `<version>` 替换为实际的版本字符串。 如适用，请使用 ARM64 MSI。
+你也可以使用 `/package` 替代 `/i`。 将 `<version>` 替换为实际的版本字符串。 如适用，请使用 ARM64 MSI。
 
 有关可用的 MSI 命令行选项的详细信息，请参阅 Microsoft 官方文档：
 [Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
