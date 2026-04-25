@@ -25,7 +25,7 @@ SQL 语义模型上的 Direct Lake 可通过 SQL 端点直接连接到存储在 
 > As of [Tabular Editor 3.22.0](../../references/release-notes/3_22_0.md), Tabular Editor 3 supports Direct Lake on OneLake, which is recommended in most scenarios. 更多信息请参阅我们的 [Direct Lake 指南](xref:direct-lake-guidance)。
 
 Tabular Editor 3 可以创建并连接此类模型。 For a tutorial on this please refer to our blog article: [Direct Lake semantic models: How to use them with Tabular Editor](https://blog.tabulareditor.com/2023/09/26/fabric-direct-lake-with-tabular-editor-part-2-creation/).
-Tabular Editor 3 可以通过 Lakehouse 和 Warehouse 的 SQL 端点创建 Direct Lake 语义模型。
+Tabular Editor 3 can create Direct Lake semantic models with both the Lakehouse and Datawarehouse SQL Endpoint.
 
 Tabular Editor 2 可以连接到 Direct Lake 语义模型，但不提供用于创建新表或 Direct Lake 语义模型的内置功能。 这需要手动完成，或使用 C# Script 来实现。 这需要手动完成，或使用 C# Script 来实现。
 
