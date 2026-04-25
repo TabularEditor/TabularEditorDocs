@@ -57,7 +57,7 @@ foreach(var c in Selected.Columns)
 
 ## 生成时间智能度量值
 
-首先，为各个时间智能聚合分别创建自定义操作。 例如：
+First, create custom actions for individual Time Intelligence aggregations. 例如：
 
 ```csharp
 // 为每个选中的度量值创建一个 TOTALYTD 度量值。
