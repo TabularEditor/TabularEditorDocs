@@ -23,7 +23,7 @@ Tabular Editor 3.26.1 **.NET 8** 下载：
 ## 安装说明
 
 1. 下载 .exe 安装程序文件。
-2. 运行此 .exe 安装程序。 安装向导将引导你完成安装。
+2. Run the .exe installer. 安装向导将引导你完成安装。
 3. 有关如何激活产品或更换许可证密钥的说明，请参阅我们的[入门指南](xref:getting-started)。
 
 升级到更新版本的 Tabular Editor 3 时，无需卸载之前安装的版本。
@@ -34,7 +34,7 @@ Tabular Editor 3.26.1 **.NET 8** 下载：
   - .NET 8 安装程序（.exe）：[x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.Installer.ARM64.Net8.exe)
   - .NET 8 便携版（.zip）：[x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.ARM64.Net8.zip)
   - .NET 8 安装程序（.msi）：[x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.ARM64.Net8.msi)
-- 2026-03-25 **Tabular Editor 3.26.0** (_[发布说明](release-notes/3_26_0.md)_)
+- 2026-03-25 **Tabular Editor 3.26.0** (_[Release notes](release-notes/3_26_0.md)_)
   - .NET 8 安装程序（.exe）：[x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.Installer.x64.Net8.exe)，[ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.Installer.ARM64.Net8.exe)
   - .NET 8 便携版（.zip）：[x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.x64.Net8.zip)，[ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.ARM64.Net8.zip)
   - .NET 8 安装程序（.msi）：[x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.x64.Net8.msi)，[ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.0.ARM64.Net8.msi)
