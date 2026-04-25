@@ -99,7 +99,7 @@ foreach (var col in Model.AllColumns)
 >
 > - `Column` 是抽象类型，但你无需进行类型转换，也可以访问基类型上定义的所有属性（`Name`、`DataType`、`FormatString`、`IsHidden`、`Description`、`DisplayFolder`）。 只有在你需要子类型特有的属性（例如 `CalculatedColumn` 上的 `Expression`）时，才将其转换为该子类型。
 > - `OfType<T>()` 会同时进行筛选和类型转换。 `Where(x => x is T)` 只会筛选，结果仍然是基类型。 当你需要访问子类型属性时，优先使用 `OfType<T>()`。
-> - 计算表格的列会自动维护。 要添加或更改列，就编辑计算表格的 `Expression`。 你不能直接添加这些列。
+> - 计算表格的列会自动管理。 要添加或更改列，就编辑计算表格的 `Expression`。 你不能直接添加这些列。
 
 ## 另见
 
