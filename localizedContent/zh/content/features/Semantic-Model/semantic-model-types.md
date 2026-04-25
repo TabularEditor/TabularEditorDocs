@@ -19,7 +19,7 @@ applies_to:
 
 # 语义模型类型
 
-Tabular Editor can work with several different model types. Below is an overview of which model types work with Tabular Editor and the capabilities that can be used with each model type.
+Tabular Editor 支持多种不同的模型类型。 下面概述了哪些模型类型可与 Tabular Editor 一起使用，以及每种模型类型可使用哪些功能。
 
 | 模型类型                                   | 导入 | DirectQuery | OneLake 上的 Direct Lake                  | SQL 上的 Direct Lake                         | .pbix | .pbip |
 | -------------------------------------- | -- | ----------- | --------------------------------------- | ------------------------------------------ | --------------------- | --------------------- |
@@ -60,7 +60,7 @@ Tabular Editor can work with several different model types. Below is an overview
 > 2025 年六月发布的 Power BI Desktop 版本已解除对第三方工具的所有建模限制。 在此之前，许多建模操作都不受支持。 见 [Power BI Desktop 限制](xref:desktop-limitations)。
 
 > [!TIP]
-> For further details on restrictions on Direct Lake models refer to Microsoft's [Direct Lake documentation](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)
+> 如需了解 Direct Lake 模型限制的更多详细信息，请参阅 Microsoft 的 [Direct Lake 文档](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-overview)
 
 ## 不受支持的语义模型类型
 
