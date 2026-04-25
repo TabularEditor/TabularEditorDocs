@@ -21,7 +21,7 @@ applies_to:
 > 此脚本需要 Databricks ODBC 驱动程序。 我们推荐使用新版 [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download)，它将取代旧版 Simba Spark ODBC Driver。 该脚本会自动检测已安装的驱动程序，并自动使用相应的驱动程序。
 
 每次运行该脚本时，都会提示用户输入 Databricks 个人访问令牌。 这用于对 Databricks 进行身份验证。
-The script utilises the information_schema tables in Unity Catalog to retrieve relationship information, so you may need to double check with your Databricks administrator to make sure you have permission to query these tables. <br></br>
+该脚本会使用 Unity Catalog 中的 information_schema 表来检索关系信息，因此您可能需要再与 Databricks 管理员确认一下，确保您有权限查询这些表。 <br></br>
 
 ## 脚本
 
