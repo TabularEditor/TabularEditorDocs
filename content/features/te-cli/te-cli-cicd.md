@@ -2,7 +2,7 @@
 uid: te-cli-cicd
 title: CI/CD Integration
 author: Peer Grønnerup
-updated: 2026-04-20
+updated: 2026-05-06
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -205,7 +205,7 @@ Commit these artifacts to git, upload them to the pipeline's artifact storage, o
 | Approach | When to use | Notes |
 | -- | -- | -- |
 | Service principal via env vars (`AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`, `--auth env`) | General CI/CD | Map pipeline secrets to environment variables at the step or job level. Never pass secrets in command arguments. |
-| Service principal via flags (`te auth login -u ... -p -`, reading secret from stdin) | One-off automation | Pipe the secret rather than interpolating it: `echo $SECRET | te auth login -u $ID -p - -t $TENANT`. |
+| Service principal via `te auth login` once per job (`echo $SECRET \| te auth login -u $ID -p - -t $TENANT`) | Multi-step jobs | The login is cached, so subsequent `te` commands acquire tokens silently — no need to set `AZURE_CLIENT_*` for every step or re-pass `-u/-p/-t`. Pipe the secret via stdin rather than interpolating it. |
 | Managed identity (`--auth managed-identity`) | Azure VMs, Container Apps, Azure Functions | No secrets to manage. Preferred in Azure-hosted environments. |
 | Certificate (`--certificate <path>`) | Enterprise scenarios with cert rotation | Mount the certificate as a secure file step; pass `--certificate-password` via env. |
 

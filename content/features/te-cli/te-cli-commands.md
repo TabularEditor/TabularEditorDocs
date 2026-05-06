@@ -2,7 +2,7 @@
 uid: te-cli-commands
 title: Command Reference
 author: Peer Grønnerup
-updated: 2026-04-20
+updated: 2026-05-06
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -47,7 +47,7 @@ These flags are available on every command and sit before or after the subcomman
 | `-s, --server <endpoint>` | Workspace name or endpoint (e.g., `MyWorkspace`, `powerbi://...`, `asazure://...`, `localhost`). |
 | `-d, --database <name>` | Semantic model name on the workspace. |
 | `--local` | Connect to a locally running Power BI Desktop instance (Windows only). |
-| `--auth <method>` | Auth method: `auto`, `interactive`, `device-code`, `env`, `managed-identity` (default: `auto`). |
+| `--auth <method>` | Auth method: `auto`, `interactive`, `spn`, `env`, `managed-identity` (default: `auto`). |
 | `--output <format>` | Output format: `auto`, `text`, `json`, `csv` (default: `auto` — text for TTY, JSON for pipes). |
 | `--recent [N]` | Use a recently used model. No value = interactive picker; `N` = Nth most recent (1 = last used). |
 | `--non-interactive` | Disable all interactive prompts. Fail with an actionable error if required input is missing. |
@@ -69,27 +69,24 @@ te load -s MyWorkspace -d MyModel          # Remote workspace
 
 ### save
 
-Save a model to disk in a specified format.
+Save a model to disk. Use it to write a remote workspace model to local files, convert formats, or persist edits back to the source.
 
-- `-o, --output-path <path>` — target file or folder (required).
-- `--format <fmt>` — `tmdl` (default), `bim`, `te-folder`, `pbip`, `database.json`.
-- `--force` — skip validation and overwrite existing output.
+- `-o, --output-path <path>` — target file or folder. **Optional** — when omitted, `te save` writes back to the source location, preserving the original format.
+- `--format <fmt>` — `tmdl`, `bim`, `te-folder`, `pbip`, `database.json`. Defaults to inferring from the loaded model (BIM source → BIM, TMDL `SemanticModel/` → TMDL under `definition/`).
+- `--force` — skip validation and overwrite existing output. Some refusals (ambiguous containers, multi-`SemanticModel` project roots) fire even under `--force`.
 - `--skip-bpa` / `--fix-bpa` — bypass or auto-fix the BPA gate.
+- `--skip-validation` — skip DAX semantic analysis and validation for fast passthrough downloads.
 - `--supporting-files` — generate Fabric supporting files (`.platform`, `definition.pbism`).
 
 ```bash
+te save                                    # Save back to source (no -o needed)
 te save ./model.bim -o ./tmdl-out          # Convert BIM to TMDL
 te save -o ./project --format pbip         # Save as a PBIP project
+te save -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
 ```
 
-### export
-
-Export a model from a workspace to local disk.
-
-```bash
-te export -o ./out -s my-workspace -d my-model
-te export -o ./model.bim --format bim
-```
+> [!TIP]
+> Use `te save -o <path> -s <workspace> -d <model>` to download a remote model to disk. Pair with `--skip-validation` for the fastest passthrough when you only need the bytes (no DAX semantic analysis).
 
 ### open
 
@@ -124,13 +121,16 @@ te set Sales -q isHidden -i true --save
 
 ### add
 
-Add an object to the model. The type is inferred from the `.Type` suffix on the path:
-`.Measure`, `.Table`, `.CalculatedColumn`, `.Role`, plus relationship shorthand
-`"Sales[Key]->Dim[Key]"`.
+Add an object to the model. Pass the object path and the type via `-t` / `--type`. Relationships keep their shorthand syntax (`Sales[Key]->Dim[Key]`).
+
+- `-t, --type <type>` — object type. Common values: `Table`, `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Role`, `Perspective`, `Culture`, `CalculationGroup`, `CalculationItem`. Tab-completion is supported; full list in `te add --help`.
+- `--if-not-exists` — exit `0` without error if the object already exists. Use this for idempotent CI/CD pipelines.
 
 ```bash
-te add Sales/Revenue.Measure -i "SUM(Sales[Amount])" --save
-te add "Sales[ProdKey]->Product[ProdKey]" --save
+te add Sales/Revenue -t Measure -i "SUM(Sales[Amount])" --save
+te add Sales -t Table --save
+te add "Sales[ProdKey]->Product[ProdKey]" --save                           # Relationship shorthand
+te add Sales/MarketingFlag -t CalculatedColumn -i "..." --if-not-exists --save
 ```
 
 For data-bound tables, `te add` also supports schema detection from SQL, Lakehouse, or Warehouse sources. See `te add --help` for `--source`, `--endpoint`, `--source-table`, `--columns`, etc.
@@ -170,14 +170,15 @@ te replace "SUM" "SUMX" --regex --in expressions --save
 
 ### ls
 
-List objects with filesystem-like navigation.
+List objects with filesystem-like navigation. Both model-level containers (`Tables`, `Measures`, `Columns`, `Hierarchies`, `Relationships`, `Roles`, `Perspectives`, `Cultures`) and table-scoped containers (`Sales/Measures`, `Sales/Columns`, …) are supported.
 
 ```bash
 te ls                           # Tables (active model)
 te ls Sales                     # Columns and measures in Sales
-te ls Sales/Measures            # Only measures
-te ls --type measure            # All measures across tables
-te ls --paths-only              # One path per line, suitable for piping
+te ls Sales/Measures            # Measures in Sales
+te ls Measures                  # All measures across the model
+te ls Columns --paths-only      # One Table/Column per line, suitable for piping
+te ls --type measure            # Same as `te ls Measures`
 ```
 
 ### get
@@ -214,10 +215,15 @@ te diff old.bim new.bim
 
 ### deps
 
-Analyze an object's upstream and downstream dependencies.
+Analyze an object's upstream and downstream dependencies, or surface unused objects across the model.
+
+- `--unused` — list measures, calculated columns, and **all data columns** that no DAX references and that aren't used in any relationship, hierarchy level, sort-by, variation, AlternateOf base, or calendar time role. Each result shows `(hidden)` in text mode and an `isHidden` field in JSON.
+- `--hidden` — narrow `--unused` to hidden objects only. Hidden, unused objects are the safest prune candidates because nothing user-facing depends on them.
 
 ```bash
-te deps "Sales/Revenue"
+te deps "Sales/Revenue"                   # Upstream + downstream for one object
+te deps --unused                          # All unused measures and columns
+te deps --unused --hidden                 # Only hidden, unused objects
 ```
 
 ## Analysis and quality
@@ -338,6 +344,18 @@ te macro rm <name-or-id>       # Remove a macro
 te macro sort                  # Sort and re-assign IDs
 ```
 
+`te macro run` accepts:
+
+- `--on <object-path>` — set the macro's selection context to one or more model objects (comma-separated paths). Equivalent to right-clicking objects in TE3 and invoking the macro from the context menu.
+- `--save` / `--save-to` — persist any changes the macro makes.
+
+Macros that emit tables via `dataTable.Output()` render formatted output in the terminal, so DAX-style query macros work the same in `te macro run` as they do in TE3.
+
+```bash
+te macro run "Hide all measures"
+te macro run "Format DAX" --on "Sales/Revenue,Sales/Margin" --save
+```
+
 ## Deployment and refresh
 
 ### deploy
@@ -427,6 +445,23 @@ te connect my-workspace my-model   # Remote
 te connect ./model                 # Local
 te connect --local                 # Power BI Desktop (Windows)
 te connect --profile prod          # Activate a saved profile
+te connect --clear                 # Clear the active connection (and any workspace mirror)
+```
+
+#### Workspace mode (`-w` / `--workspace`)
+
+Pair a primary source with a secondary target so every subsequent `--save` mirrors the model between the two. Useful for keeping a local working copy of a remote workspace, or pushing local edits to a workspace as you save.
+
+- `te connect <ws> <model> -w ./src` — primary is remote; `./src` receives an initial TMDL export and mirrors every save.
+- `te connect ./src -w <ws> <model>` — primary is local; an initial deploy pushes the model to the workspace, and subsequent saves re-deploy automatically.
+- `--workspace-format <bim|tmdl>` — choose the on-disk format when mirroring to a folder/file (e.g., `-w ./model.bim` infers BIM).
+- `--force` — required when the target already exists (non-empty folder, existing database). Without it, `te connect` shows an interactive `y/n` prompt with `n` as the safe default.
+
+Once active, `te set --save`, `te rm --save`, `te script --save`, etc. all dual-save transparently. Save order is always **local first, then remote** so the on-disk copy reflects the latest user change even if the server push fails. Clear the mirror with `te connect --clear`.
+
+```bash
+te connect Finance "Revenue Model" -w ./revenue-model    # Mirror remote → local TMDL
+te connect ./revenue-model -w Finance "Revenue Model"    # Mirror local → remote
 ```
 
 ### auth login / status / logout

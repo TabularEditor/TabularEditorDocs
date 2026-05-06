@@ -2,7 +2,7 @@
 uid: te-cli-auth
 title: Authentication and Connections
 author: Peer Grønnerup
-updated: 2026-04-20
+updated: 2026-05-06
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,13 +25,14 @@ The CLI supports the full Azure Identity credential chain:
 | Method | When to use | `--auth` value |
 | -- | -- | -- |
 | Interactive browser | Local development — opens the system browser | `interactive` (default) |
-| Device code | SSH sessions, headless VMs, devcontainers | `device-code` |
-| Service principal (client secret) | Automation, CI/CD | `env` or pass `-u / -p / -t` |
-| Service principal (certificate) | Automation with certificate-based auth | Pass `--certificate` |
+| Service principal (client secret) | Automation, CI/CD, headless / SSH / WSL | `spn` (with `-u / -p / -t`) or `env` |
+| Service principal (certificate) | Automation with certificate-based auth | `spn` (with `-u / -t / --certificate`) |
 | Environment variables | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID` | `env` |
 | Managed identity | Azure VMs, Azure Container Apps, Azure Functions | `managed-identity` |
 
 The default (`auto`) tries environment credentials first, then falls back to interactive browser.
+
+For headless, SSH, WSL, or devcontainer scenarios, use a service principal — `te auth login -u <id> -p <secret> -t <tenant>` (or `--certificate`). The login is cached, so subsequent commands acquire tokens silently with `--auth auto`.
 
 ## `te auth login`
 
@@ -40,9 +41,6 @@ Authenticate and cache the result for subsequent commands:
 ```bash
 # Browser-based interactive login (default)
 te auth login
-
-# Device code flow (headless / SSH / CI)
-te auth login --device-code
 
 # Service principal with client secret
 te auth login -u <app-id> -p <secret> -t <tenant>
@@ -56,6 +54,8 @@ te auth login -u <app-id> -t <tenant> --certificate ./sp.pfx --certificate-passw
 # Managed identity (Azure-hosted)
 te auth login --identity
 ```
+
+After a successful service-principal login the CLI **caches the SP record** so every subsequent `te` command can acquire tokens silently — no need to re-pass `-u / -p / -t` or set the `AZURE_CLIENT_*` environment variables. Pass `--save=false` for a one-shot login that doesn't update the cache, or run `te auth logout` to clear it.
 
 > [!WARNING]
 > Passing secrets directly on the command line is visible in `ps` output and shell history. Prefer the `AZURE_CLIENT_SECRET` environment variable, or pipe the secret via stdin with `-p -`.
@@ -81,15 +81,15 @@ te auth logout
 
 ## Credential storage
 
-Tokens are cached under your home directory. File permissions are restricted to the current user (`0600` on POSIX):
+Tokens and service-principal records are cached under your home directory. File permissions are restricted to the current user (`0600` on POSIX):
 
 | Platform | Location | Notes |
 | -- | -- | -- |
-| Windows | `%USERPROFILE%\.te-cli\auth-record.json` | Token cache encrypted via DPAPI through Azure.Identity |
-| Linux | `~/.te-cli/auth-record.json` | Token cache via libsecret through Azure.Identity |
-| macOS | `~/.te-cli/token-cache.bin` | File-based cache (bypasses Keychain to avoid repeated prompts) |
+| Windows | `%USERPROFILE%\.te-cli\auth-record.json`, `auth-record-spn.json` | DPAPI-encrypted via Azure.Identity |
+| Linux | `~/.te-cli/auth-record.json`, `auth-record-spn.json` | Token cache via libsecret through Azure.Identity; SP record file-mode `0600` |
+| macOS | `~/.te-cli/token-cache.bin`, `auth-record-spn.json` | File-based cache (bypasses Keychain to avoid repeated prompts); SP record file-mode `0600` |
 
-Device-code and interactive browser flows use separate record files so they can coexist.
+Interactive browser and service-principal flows use separate record files so they can coexist. `te auth logout` clears all cached records.
 
 ## `te connect` — set the active connection
 
@@ -99,7 +99,7 @@ Device-code and interactive browser flows use separate record files so they can 
 # Remote workspace
 te connect my-workspace my-model
 
-# Local TMDL folder or .bim file
+# Local TMDL folder, .bim file, or .SemanticModel container
 te connect ./my-model
 
 # Connect to a running Power BI Desktop instance (Windows only)
@@ -107,9 +107,26 @@ te connect --local
 
 # Show the active connection
 te connect
+
+# Clear the active connection (and any workspace mirror)
+te connect --clear
 ```
 
 Active-connection state is per-terminal-session: opening a new terminal starts fresh.
+
+### Workspace mode (`-w` / `--workspace`)
+
+`te connect -w <target>` pairs a primary source with a secondary mirror so every subsequent `--save` writes to both. Use it to keep a local working copy of a remote model in sync, or to push local edits to a workspace as you save:
+
+```bash
+# Mirror remote workspace ↔ local TMDL folder
+te connect Finance "Revenue Model" -w ./revenue-model
+
+# Mirror local source ↔ remote workspace (initial deploy + auto-redeploy on save)
+te connect ./revenue-model -w Finance "Revenue Model"
+```
+
+Save order is always **local first, then remote**, so the on-disk copy reflects the latest user change even if the server push fails. See @te-cli-commands#workspace-mode-w--workspace for `--workspace-format`, overwrite semantics, and clearing the mirror.
 
 ## Connecting to different clouds
 

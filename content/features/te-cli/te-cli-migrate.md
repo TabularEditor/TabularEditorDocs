@@ -2,7 +2,7 @@
 uid: te-cli-migrate
 title: Migrating from the TE2 Command Line
 author: Peer Grønnerup
-updated: 2026-04-20
+updated: 2026-05-06
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -81,7 +81,7 @@ A non-exhaustive summary of the most commonly used flags. Run `te migrate` for t
 | `-W` / `-WARN` | (default) | Warnings always reported in deploy results. |
 | `-E` / `-ERR` | (default) | Deploy returns non-zero exit on DAX errors. |
 | `-SC` / `-SCHEMACHECK` | *Not yet implemented.* | TE2 schema check connects to actual data sources. Different from `te validate` (DAX semantic validation, no data source connection). |
-| `-L` / `-LOGIN <user> <pass>` (after `-D`) | *Not yet implemented.* | Use `te auth login` with service principal or env-based credentials instead — see @te-cli-auth. |
+| `-L` / `-LOGIN <user> <pass>` (after `-D`) | `te auth login -u <id> -p <secret> -t <tenant>` | Use service principal or env-based credentials. The login is cached, so subsequent commands acquire tokens silently — see @te-cli-auth. |
 
 ## Migration playbook
 

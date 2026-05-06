@@ -2,7 +2,7 @@
 uid: te-cli-install
 title: Installation and Setup
 author: Peer Grønnerup
-updated: 2026-04-20
+updated: 2026-05-06
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -68,11 +68,7 @@ chmod +x ~/.local/bin/te
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc   # or ~/.bashrc
 ```
 
-On macOS, the first run may trigger a Gatekeeper quarantine warning. Remove the quarantine attribute with:
-
-```bash
-xattr -d com.apple.quarantine ~/.local/bin/te
-```
+On macOS, the binary is signed with our Apple Developer ID and notarized by Apple, so the first run completes without a "cannot verify developer" Gatekeeper warning. Network access on first run is recommended so Gatekeeper can fetch the notarization ticket; offline first-runs may briefly prompt before being unblocked once network returns.
 
 ## Verify
 

@@ -2,7 +2,7 @@
 uid: te-cli-automation
 title: Automation and Scripting
 author: Peer Grønnerup
-updated: 2026-04-20
+updated: 2026-05-06
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -173,11 +173,12 @@ The resulting TMSL can be reviewed in a pull request, committed, executed by the
 
 ## Useful patterns
 
-- **Idempotent removes.** `te rm Sales/OldMeasure --if-exists --save` exits `0` whether or not the object existed — safe to re-run.
+- **Idempotent creates and removes.** `te add Sales/Marker -t Measure -i "0" --if-not-exists --save` and `te rm Sales/OldMeasure --if-exists --save` both exit `0` whether or not the object existed — safe to re-run in CI.
 - **Dry-run diffs.** `te replace` is dry-run by default; add `--save` only when you're satisfied with the preview.
 - **Emit TMSL for review.** `te deploy ./model --xmla deploy.tmsl` produces the deployment script without touching the server — useful for DBA review or manual apply.
-- **Path-only output.** `te ls --paths-only` and `te find --paths-only` emit one object path per line, ideal for piping to `xargs`, `te get`, or `te set`.
+- **Path-only output.** `te ls --paths-only` and `te find --paths-only` emit one object path per line, ideal for piping to `xargs`, `te get`, or `te set`. The model-level containers (`te ls Measures`, `te ls Columns`) compose well with this for whole-model sweeps.
 - **Benchmarking queries.** `te query --trace --cold --runs 5` runs a DAX query with cold cache, five iterations, and captures FE/SE trace events.
+- **Step timings in CI logs.** Long-running commands (`te deploy`, `te refresh`, `te script`, `te validate`) include a `durationMs` field in JSON output — useful for surfacing per-step timings in pipeline summaries.
 
 ## Related pages
 

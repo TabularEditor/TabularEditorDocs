@@ -2,7 +2,7 @@
 uid: te-cli
 title: Tabular Editor CLI (Limited Public Preview)
 author: Peer Grønnerup
-updated: 2026-04-20
+updated: 2026-05-06
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -36,7 +36,7 @@ The CLI organizes more than 50 commands into 10 families. Each family maps to a 
 
 | Family | What it does | Example commands |
 | -- | -- | -- |
-| [Model I/O](xref:te-cli-commands#model-io) | Load, save, export, initialize models | [`te load`](xref:te-cli-commands#load), [`te save`](xref:te-cli-commands#save), [`te export`](xref:te-cli-commands#export) |
+| [Model I/O](xref:te-cli-commands#model-io) | Load, save, convert, initialize models | [`te load`](xref:te-cli-commands#load), [`te save`](xref:te-cli-commands#save), [`te init`](xref:te-cli-commands#init) |
 | [Model Editing](xref:te-cli-commands#model-editing) | Get/set properties, add/remove/move objects | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te rm`](xref:te-cli-commands#rm), [`te mv`](xref:te-cli-commands#mv) |
 | [Inspection](xref:te-cli-commands#inspection) | List objects, search, diff, dependency analysis | [`te ls`](xref:te-cli-commands#ls), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps) |
 | [Analysis & Quality](xref:te-cli-commands#analysis-and-quality) | Validate, run BPA, format DAX, analyze storage | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te format`](xref:te-cli-commands#format), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
