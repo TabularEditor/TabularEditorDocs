@@ -63,6 +63,16 @@
 
 # Command Line and Integration
 ## @command-line-options
+## Tabular Editor CLI (Limited PuPr)
+### [Overview](xref:te-cli)
+### [Installation and Setup](xref:te-cli-install)
+### [Authentication and Connections](xref:te-cli-auth)
+### [Command Reference](xref:te-cli-commands)
+### [Custom Configuration](xref:te-cli-config)
+### [Interactive Mode](xref:te-cli-interactive)
+### [Automation and Scripting](xref:te-cli-automation)
+### [CI/CD Integration](xref:te-cli-cicd)
+### [Migrating from TE2 CLI](xref:te-cli-migrate)
 
 # Semantic Bridge for cross-platform translations
 ## @semantic-bridge
