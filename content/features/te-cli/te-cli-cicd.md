@@ -167,7 +167,7 @@ te deploy ./model -s my-ws -d my-model --fix-bpa --force --ci github
 te deploy ./model -s my-ws -d my-model --skip-bpa --force --ci github
 ```
 
-See @te-cli-config for controlling the BPA gate globally via `bpaOnDeploy` / `bpaOnSave` config keys.
+See @te-cli-config for controlling the BPA gate globally via `bpa.onDeploy` / `bpa.onSave` config keys.
 
 ## Refresh patterns
 

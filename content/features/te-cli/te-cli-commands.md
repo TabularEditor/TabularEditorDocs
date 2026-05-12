@@ -75,6 +75,7 @@ Save a model to disk. Use it to write a remote workspace model to local files, c
 - `--format <fmt>` — `tmdl`, `bim`, `te-folder`, `pbip`, `database.json`. Defaults to inferring from the loaded model (BIM source → BIM, TMDL `SemanticModel/` → TMDL under `definition/`).
 - `--force` — skip validation and overwrite existing output. Some refusals (ambiguous containers, multi-`SemanticModel` project roots) fire even under `--force`.
 - `--skip-bpa` / `--fix-bpa` — bypass or auto-fix the BPA gate.
+- `--bpa-rules <path>` — repeatable; override `bpa.rules` from your CLI config for this single save. Built-in rules still apply unless `bpa.builtInRules` is `false`.
 - `--skip-validation` — skip DAX semantic analysis and validation for fast passthrough downloads.
 - `--supporting-files` — generate Fabric supporting files (`.platform`, `definition.pbism`).
 
@@ -258,13 +259,65 @@ te bpa run --rule PERF_UNUSED_HIDDEN_COLUMN
 
 ### bpa rules
 
-List and inspect BPA rules from all sources (built-in, user, machine, model).
+List, inspect, initialize, and toggle BPA rules. Built-in rules are read-only — to skip one without losing the rest, use `te bpa rules disable` (do not edit the built-in set directly).
+
+#### bpa rules list
+
+List rules from all sources (built-in, user, model).
+
+- (default) Active rules only.
+- `--all` — include disabled and ignored rules.
+- `--disabled` — only built-in rule IDs the user has disabled via `te bpa rules disable`.
+- `--ignored` — only rules whose IDs appear in `BestPracticeAnalyzer_IgnoreRules` on the model.
+- `--no-defaults` — exclude built-in rules from output.
 
 ```bash
 te bpa rules list              # Active rules
 te bpa rules list --all        # Include disabled and ignored rules
 te bpa rules list --ignored
 ```
+
+Disabled built-in rules are flagged with a `[disabled]` marker next to the rule ID.
+
+#### bpa rules init
+
+Create an empty BPA rules file (`[]`) at the configured path. Use this once before invoking `te bpa rules set` / `te bpa rules rm` against a path that does not yet exist.
+
+- `--force` — overwrite an existing file with `[]`. Required if the target file exists.
+- `--rules-file <path>` — target file path. Can appear before or after the `init` subcommand.
+
+Path resolution (first match wins): `--rules-file` → `TE_BPA_PATH` env var → first entry of `bpa.rules[]` in your CLI config → `./BPARules.json` (current working directory).
+
+```bash
+te bpa rules init
+te bpa rules init --rules-file ./MyRules.json
+te bpa rules init --force
+```
+
+#### bpa rules disable
+
+Disable an individual built-in BPA rule. The rule ID is added to `bpa.disabledBuiltInRuleIds` in your CLI config. Subsequent gate runs (deploy, save, mutation) and `te bpa run` skip the disabled rule.
+
+- Idempotent: running `disable` against an already-disabled rule succeeds without modifying the config.
+- Errors with exit code `1` if `<rule-id>` is not a built-in rule. Use `te bpa rules list` to see valid built-in IDs.
+
+```bash
+te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
+```
+
+#### bpa rules enable
+
+Re-enable a previously disabled built-in BPA rule. Removes the rule ID from `bpa.disabledBuiltInRuleIds`.
+
+- Errors with exit code `1` if `<rule-id>` is not currently in `bpa.disabledBuiltInRuleIds`.
+
+```bash
+te bpa rules enable TE3_BUILT_IN_DATE_TABLE_EXISTS
+```
+
+#### bpa rules set / rm — built-in guard
+
+`te bpa rules set` and `te bpa rules rm` refuse to mutate built-in rule IDs. Attempting to do so exits with code `1` and points at `te bpa rules disable`. To customize a rule's behavior, copy it into your local rules file as a new rule with a different ID and disable the built-in.
 
 ### vertipaq
 
@@ -333,7 +386,7 @@ echo "Info(Model.Name);" | te script -e -
 
 ### macro
 
-Manage and run Tabular Editor 3 macros from `MacroActions.json`.
+Manage and run macros from a macros JSON file (typically `MacroActions.json`). The macros file is resolved in this order: `--macros <path>` → `TE_MACROS_PATH` env var → `macros` in CLI config → `./MacroActions.json`.
 
 ```bash
 te macro list                  # List macros
@@ -342,6 +395,20 @@ te macro add <name>            # Add a macro
 te macro set <name-or-id>      # Update macro properties
 te macro rm <name-or-id>       # Remove a macro
 te macro sort                  # Sort and re-assign IDs
+te macro init                  # Create an empty macros file at the resolved path
+```
+
+#### macro init
+
+Create an empty macros file (`{"Actions":[]}`) at the configured path. Use this once when the resolved macros file does not yet exist.
+
+- `--force` — overwrite an existing file. Required if the target exists.
+- `--macros <path>` — target file path. Can appear before or after the `init` subcommand.
+
+```bash
+te macro init
+te macro init --macros ./project-macros.json
+te macro init --force
 ```
 
 `te macro run` accepts:
@@ -367,6 +434,7 @@ Deploy a semantic model to Power BI, Fabric, or Azure Analysis Services.
 - `--deploy-connections`, `--deploy-partitions`, `--skip-refresh-policy`, `--deploy-roles`, `--deploy-role-members`, `--deploy-shared-expressions`, `--create-only`.
 - `--xmla <file>` — generate XMLA/TMSL script instead of deploying (`-` for stdout).
 - `--skip-bpa` / `--fix-bpa` — bypass or auto-fix the BPA gate.
+- `--bpa-rules <path>` — repeatable; override `bpa.rules` from your CLI config for this single deploy. Built-in rules still apply unless `bpa.builtInRules` is `false`.
 - `--force` — skip interactive confirmation (required for CI).
 - `--ci <fmt>` — `vsts` or `github`.
 - `--profile <name>` — one-shot use of a saved @te-cli-auth profile.
