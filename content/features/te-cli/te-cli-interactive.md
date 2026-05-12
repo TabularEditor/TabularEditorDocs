@@ -2,7 +2,7 @@
 uid: te-cli-interactive
 title: Interactive Mode
 author: Peer Grønnerup
-updated: 2026-04-20
+updated: 2026-05-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -50,6 +50,21 @@ Each command accepts `--help` the same way it does outside the session:
 ```
 te [MyModel]> deploy --help
 ```
+
+## Quoting and DAX-style paths
+
+The REPL line splitter recognises the same quoting forms as [object paths](xref:te-cli-commands#object-paths) so DAX-shaped references survive the trip through the parser as a single argument:
+
+- `'...'` and `"..."` — single- and double-quoted segments. The quote characters are stripped, doubled quotes escape a literal occurrence.
+- `[...]` — bracketed segment. **Brackets are preserved** in the resulting argument so a path like `'Internet Sales'[Sales Amount]` reaches the command as one token that the path parser can re-interpret as a DAX reference. Doubled closing brackets (`]]`) stay verbatim for the same reason.
+
+```
+te [MyModel]> get 'Internet Sales'[Sales Amount]   # One argument, DAX form
+te [MyModel]> get [Total Sales]                    # Lone-bracket model-wide lookup
+te [MyModel]> ls 'Net Sales'/'Sales Amount'        # Quoted segments with a slash separator
+```
+
+Unterminated groups absorb to end of line, so a stray opening quote or bracket fails with an explicit error rather than splitting silently.
 
 ## Built-in REPL commands
 

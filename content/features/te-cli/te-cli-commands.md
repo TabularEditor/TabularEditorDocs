@@ -2,7 +2,7 @@
 uid: te-cli-commands
 title: Command Reference
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-05-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,16 +26,95 @@ te <command> <subcommand> --help
 > [!NOTE]
 > During preview, the CLI's `--help` output is the authoritative reference for flags and options. The content on this page is hand-curated and will lag `--help` for anything added between preview releases.
 
-## Object path syntax
+## Object paths
 
-Most commands accept object paths of the form:
+Object addressing in the CLI uses a single grammar that's shared across every command. Two flavours of path appear in the reference below:
 
-- `Sales` — a table.
-- `Sales/Revenue` — a measure or column.
-- `Sales/Measures` — a sub-container inside a table (`Measures`, `Columns`, `Partitions`, `Hierarchies`).
-- `Relationships`, `Roles`, `Perspectives`, `Cultures` — model-level containers.
+- **`<path>`** — resolves to **exactly one** object or container. Used by commands that operate on a single target: `te get`, `te set`, `te add`, `te rm`, `te mv`, `te format -p`, `te deps`, `te macro run --on`.
+- **`<path-filter>`** — resolves to **zero or more** objects, with wildcard support. Used by commands that operate on a set: `te ls`, `te bpa run --path`, and other inspection-style commands.
 
-Paths are consistent across `te get`, `te set`, `te add`, `te rm`, `te mv`, `te find`, `te replace`, and `te ls`.
+The two share the same lexer; the only differences are that filter paths permit `*` wildcards while object paths do not, and object paths permit DAX bracket-suffix while filter paths do not.
+
+### Segments and separators
+
+A path is a slash-separated sequence of **segments**. Each segment names a single step — a table, a child object, or a container keyword.
+
+```
+Sales                        # one segment
+Sales/Revenue                # two segments
+Roles/Admin/Members/bob      # four segments
+```
+
+Empty input and `.` both mean "the model root" — the implicit starting point for filter paths and the explicit subject for `te get .`-style queries.
+
+### Quoting
+
+Bare segments cover the common case. When a name contains spaces, slashes, brackets, or any character that would otherwise be parsed as syntax, **quote** the segment. The CLI follows DAX quoting conventions, so quoting in `te` paths matches what you'd type inside a DAX expression:
+
+| Form | Use for | Escape rule |
+| -- | -- | -- |
+| `'Net Sales'` | Tables, named objects with spaces. | Double the quote (`'Bob''s'` → `Bob's`). |
+| `"Net Sales"` | Same as above; cross-shell convenience when single-quote escaping is awkward. | Double the quote (`"He said ""hi"""` → `He said "hi"`). |
+| `[Sales Amount]` | DAX bracket-suffix on a table (`'Sales'[Sales Amount]`) or a lone-bracket model-wide reference (`[Total Sales]`). Object paths only. | Double the closing bracket (`[foo]]bar]` → `foo]bar`). |
+
+Wildcards inside quoted segments are literal. `'Sa*'` matches a table named exactly `Sa*` — quoting disables glob matching for that segment.
+
+### DAX-style references (object paths only)
+
+Two DAX-shaped forms are accepted anywhere a `<path>` is allowed:
+
+- **`'Table'[Member]`** — equivalent to `Table/Member`. The bracket-suffix biases ambiguous matches toward columns and measures over hierarchies/partitions.
+- **`[Member]`** — a *lone* bracket, with no preceding table. Searches the whole model for a measure or column with that name. Measures win when both exist.
+
+```bash
+te get "'Sales'[Amount]"             # Same as te get Sales/Amount
+te get "'Net Sales'[Sales Amount]"   # Spaced names via DAX form
+te get "[Total Sales]"               # Model-wide measure-or-column lookup
+```
+
+### Containers and keywords
+
+Several bare names act as **container keywords**. A keyword can stand alone (listing the whole container) or appear inside a path (jumping into that sub-collection on the current parent).
+
+| Keyword | Scope | Meaning |
+| -- | -- | -- |
+| `Tables`, `Measures`, `Columns`, `Hierarchies`, `Partitions` | Model | All objects of that kind across the model. |
+| `Relationships`, `Roles`, `Perspectives`, `Cultures`, `DataSources`, `Expressions`, `CalculationGroups`, `Functions`, `Annotations` | Model | Model-level containers. |
+| `Measures`, `Columns`, `Hierarchies`, `Partitions`, `Calendars`, `CalculationItems` | Table | Sub-containers under a table. |
+| `Levels` | Hierarchy | Levels of a hierarchy. |
+| `Members`, `TablePermissions` (alias `Permissions`) | Role | Children of a role. |
+
+A few examples make the difference between bare and container-scoped paths concrete:
+
+```bash
+te get Sales/Revenue                       # Measure or column on Sales
+te get Sales/Measures/Revenue              # Same, container-scoped — disambiguates if other kinds share the name
+te get Sales/Geography/Levels/Year         # Specific level of a hierarchy
+te get Roles/Admin/Members/bob@example.com # Role member
+te get Sales/refreshPolicy                 # Refresh-policy sub-object on a table
+te get "Measures/Revenue/KPI"              # KPI sub-object of a measure
+```
+
+Quote a segment to force literal-name matching when a real object name happens to coincide with a keyword. The table literally named `Tables` is `'Tables'`, addressed by `te get "'Tables'"`.
+
+### Wildcards in filter paths
+
+Filter paths add a single wildcard character — `*` — that matches any run of characters within one segment (greedy, single-segment). Wildcards are how `te ls` and similar commands narrow their results.
+
+```bash
+te ls Sa*                          # Tables whose name starts with Sa
+te ls Sales/*Amount                # Children of Sales whose name ends with Amount
+te ls */Amount                     # An Amount column/measure across every table
+te ls Roles/Re*/Members            # Members of every role matching Re*
+```
+
+A filter path with **N segments** produces **N-level-deep** results — wildcards never auto-expand a level beyond what you typed. The single-segment shortcut `te ls Sales` is the exception: an unqualified, non-wildcarded table name expands to the table's direct children to match the "show me what's in Sales" intent. `te ls Sa*`, in contrast, returns just the matching tables — no expansion.
+
+DAX bracket-suffix is rejected in filter paths; quote names containing `[` and `]` if you need to match them literally.
+
+### Errors and hints
+
+Misspelled segments emit a contextual error with a "did you mean" hint when the CLI can guess what you meant. Missing-parent paths fail before the leaf check, so the message points at the segment that's actually wrong. Empty containers (e.g., `te ls Hierarchies` on a model with none) emit a dim "nothing here" hint rather than an error.
 
 ## Global options
 
@@ -48,7 +127,7 @@ These flags are available on every command and sit before or after the subcomman
 | `-d, --database <name>` | Semantic model name on the workspace. |
 | `--local` | Connect to a locally running Power BI Desktop instance (Windows only). |
 | `--auth <method>` | Auth method: `auto`, `interactive`, `spn`, `env`, `managed-identity` (default: `auto`). |
-| `--output <format>` | Output format: `auto`, `text`, `json`, `csv` (default: `auto` — text for TTY, JSON for pipes). |
+| `--output <format>` | Output format: `auto`, `text`, `json`, `csv`, `tmsl` (alias `bim`), `tmdl` (default: `auto` — text for TTY, JSON for pipes). `tmsl`/`tmdl` are accepted by `te get` and `te ls` for whole-object serialization. |
 | `--recent [N]` | Use a recently used model. No value = interactive picker; `N` = Nth most recent (1 = last used). |
 | `--non-interactive` | Disable all interactive prompts. Fail with an actionable error if required input is missing. |
 | `--debug` | Enable debug logging to stderr (connection strings, auth flow, timing). |
@@ -108,7 +187,7 @@ te init ./new-model
 
 ### set
 
-Set a property on a model object.
+Set a property on a model object. Accepts a `<path>`.
 
 - `-q <property>` — property name (e.g., `expression`, `formatString`, `description`, `isHidden`).
 - `-i <value>` — value (use `-` to read from stdin).
@@ -116,12 +195,13 @@ Set a property on a model object.
 
 ```bash
 te set Sales/Amount -q expression -i "SUM(Sales[Amt])" --save
+te set "'Net Sales'[Sales Amount]" -q formatString -i "#,0" --save   # DAX form with spaced names
 te set Sales -q isHidden -i true --save
 ```
 
 ### add
 
-Add an object to the model. Pass the object path and the type via `-t` / `--type`. Relationships keep their shorthand syntax (`Sales[Key]->Dim[Key]`).
+Add an object to the model. Pass a `<path>` for the new object (the parent must already exist; the trailing segment is the new name) and the type via `-t` / `--type`. Relationships keep their shorthand syntax (`Sales[Key]->Dim[Key]`).
 
 - `-t, --type <type>` — object type. Common values: `Table`, `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Role`, `Perspective`, `Culture`, `CalculationGroup`, `CalculationItem`. Tab-completion is supported; full list in `te add --help`.
 - `--if-not-exists` — exit `0` without error if the object already exists. Use this for idempotent CI/CD pipelines.
@@ -131,23 +211,26 @@ te add Sales/Revenue -t Measure -i "SUM(Sales[Amount])" --save
 te add Sales -t Table --save
 te add "Sales[ProdKey]->Product[ProdKey]" --save                           # Relationship shorthand
 te add Sales/MarketingFlag -t CalculatedColumn -i "..." --if-not-exists --save
+te add Perspectives/Default/Sales --save                                   # Include Sales in the Default perspective
+te add Roles/Reader -t Role --save                                         # New role at the model level
 ```
 
 For data-bound tables, `te add` also supports schema detection from SQL, Lakehouse, or Warehouse sources. See `te add --help` for `--source`, `--endpoint`, `--source-table`, `--columns`, etc.
 
 ### rm
 
-Remove an object. Checks dependents by default; use `--force` to bypass, `--if-exists` for idempotent removes.
+Remove an object. Accepts a `<path>`. Checks dependents by default; use `--force` to bypass, `--if-exists` for idempotent removes.
 
 ```bash
 te rm Sales/Revenue --save
+te rm "'Sales'[Revenue]" --save              # DAX form
 te rm Sales/Revenue --dry-run                # Preview only
 te rm Sales/OldMeasure --if-exists --save    # Idempotent
 ```
 
 ### mv
 
-Move or rename a model object.
+Move or rename a model object. Both source and destination are `<path>` arguments.
 
 ```bash
 te mv Sales/Revenue Finance/Revenue --save    # Move measure to another table
@@ -161,6 +244,8 @@ Find and replace text across model objects. Dry-run by default; add `--save` to 
 - `--in <scope>` — `names`, `expressions`, `descriptions`, `displayFolders`, `formatStrings`, `annotations`, `all`.
 - `--regex`, `--case-sensitive`.
 
+`--in expressions` walks every expression-bearing property: measure `Expression` and `DetailRowsExpression`, KPI `TargetExpression` / `StatusExpression` / `TrendExpression`, partition source and polling M, table-permission `FilterExpression`, calculation-group selection expressions, and calculated-column DAX. Adding new expression-shaped properties to the model surfaces them automatically.
+
 ```bash
 te replace "OldTable" "NewTable" --in expressions --save
 te replace "SUM" "SUMX" --regex --in expressions --save
@@ -170,25 +255,48 @@ te replace "SUM" "SUMX" --regex --in expressions --save
 
 ### ls
 
-List objects with filesystem-like navigation. Both model-level containers (`Tables`, `Measures`, `Columns`, `Hierarchies`, `Relationships`, `Roles`, `Perspectives`, `Cultures`) and table-scoped containers (`Sales/Measures`, `Sales/Columns`, …) are supported.
+List objects with filesystem-like navigation. Takes a `<path-filter>` argument supporting wildcards. Both model-level containers (`Tables`, `Measures`, `Columns`, `Hierarchies`, `Relationships`, `Roles`, `Perspectives`, `Cultures`) and table-scoped containers (`Sales/Measures`, `Sales/Columns`, …) are supported.
+
+- `--type <kind>` — narrow to one object kind (`table`, `measure`, `column`, `hierarchy`, `partition`, `relationship`, `role`, `perspective`, `culture`). With no `<path-filter>` this is equivalent to typing the matching container keyword.
+- `--paths-only` — emit one object path per line, suitable for piping to `xargs`, `te get`, or `te set`.
+- `--no-multiline` — collapse multi-line cells (typically DAX or M expressions) to a single line and truncate, so rows stay scannable in wide tables. Text output only; JSON/CSV/TMSL output is unaffected.
+- `--output tmsl` (alias `bim`) — emit the matching objects as a TMSL/BIM script. Useful for `te ls Tables --output bim > tables.json`. `--output tmdl` is not supported by `ls` (TMDL is single-object only — use `te get`).
 
 ```bash
-te ls                           # Tables (active model)
-te ls Sales                     # Columns and measures in Sales
-te ls Sales/Measures            # Measures in Sales
-te ls Measures                  # All measures across the model
-te ls Columns --paths-only      # One Table/Column per line, suitable for piping
-te ls --type measure            # Same as `te ls Measures`
+te ls                                     # All tables in the model
+te ls Sales                               # All children of Sales (columns + measures + hierarchies + partitions)
+te ls Sales/Measures                      # Just Sales's measures
+te ls Sales/*Amount                       # Children of Sales whose name ends with Amount
+te ls Sa*                                 # Tables whose name starts with Sa (no auto-expansion)
+te ls */Amount                            # An Amount column/measure across every table
+te ls Roles/Re*/Members                   # Members of every role matching Re*
+te ls Sales/Geography/Levels              # All levels of the Geography hierarchy
+te ls "'Net Sales'/'Sales Amount'"        # Quote names containing spaces
+te ls Measures --paths-only               # One Table/Measure per line for piping
+te ls --type measure                      # Same as `te ls Measures`
+te ls Measures --no-multiline             # Wide table with column dividers, single-line DAX
+te ls Tables --output bim > tables.json   # All tables emitted as TMSL/BIM
 ```
 
 ### get
 
-Get properties of a model object.
+Get properties of a model object. Takes a `<path>`.
 
 - `-q, --query <property>` — fetch a single property (e.g. `expression`, `formatString`).
+- `-t, --type <kind>` — disambiguate when the path matches multiple table-children (e.g. a column and a hierarchy with the same name). Values: `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `Partition`, `CalculationItem`.
+- `--output tmsl` (alias `bim`) — emit the resolved object as TMSL/BIM JSON.
+- `--output tmdl` — emit the resolved object as TMDL (named objects only).
+
+`te get` and `te ls` share a single descriptor catalog, so every property surfaces the same way across formats — the text table, JSON, and CSV all see the same set, and adding a new property to the model exposes it everywhere.
 
 ```bash
-te get Sales/Amount -q expression          # Print DAX
+te get Sales/Amount -q expression                # Print DAX
+te get "'Sales'[Amount]"                         # DAX form: same as Sales/Amount
+te get "[Total Sales]"                           # Lone-bracket: model-wide measure-or-column
+te get "'Net Sales'[Sales Amount]" -q expression # DAX form with spaced names
+te get "Sales/Revenue/KPI"                       # KPI sub-object of a measure
+te get Sales --output tmdl                       # Emit the table as TMDL
+te get Sales --output bim                        # Emit the table as TMSL/BIM
 te get Model -q description
 ```
 
@@ -198,10 +306,14 @@ Search for text across model objects.
 
 - `--in <scope>` — as per `te replace` (default `all`).
 - `--regex`, `--case-sensitive`, `--paths-only`.
+- `--no-multiline` — collapse multi-line match context to a single line. Text output only.
+
+`--in expressions` covers every `IExpressionObject` in the model — including KPI `TargetExpression` / `StatusExpression` / `TrendExpression`, measure `DetailRowsExpression`, partition source/polling M, table-permission `FilterExpression`, and calculation-group `MultipleOrEmptySelection` / `NoSelection` expressions — so a literal like `123` set on a KPI's target turns up the same way a measure body would.
 
 ```bash
 te find "CALCULATE" --in expressions
 te find "Revenue" --in names
+te find "CALCULATE" --in expressions --paths-only | xargs -I{} te get {} -q expression
 ```
 
 ### diff
@@ -215,13 +327,14 @@ te diff old.bim new.bim
 
 ### deps
 
-Analyze an object's upstream and downstream dependencies, or surface unused objects across the model.
+Analyze an object's upstream and downstream dependencies, or surface unused objects across the model. The single-object form takes a `<path>`.
 
 - `--unused` — list measures, calculated columns, and **all data columns** that no DAX references and that aren't used in any relationship, hierarchy level, sort-by, variation, AlternateOf base, or calendar time role. Each result shows `(hidden)` in text mode and an `isHidden` field in JSON.
 - `--hidden` — narrow `--unused` to hidden objects only. Hidden, unused objects are the safest prune candidates because nothing user-facing depends on them.
 
 ```bash
-te deps "Sales/Revenue"                   # Upstream + downstream for one object
+te deps Sales/Revenue                     # Upstream + downstream for one object
+te deps "'Sales'[Revenue]"                # DAX form is accepted everywhere a <path> is
 te deps --unused                          # All unused measures and columns
 te deps --unused --hidden                 # Only hidden, unused objects
 ```
@@ -248,12 +361,17 @@ Run Best Practice Analyzer rules against a model.
 - `--fix` — apply auto-fix expressions where rules define them.
 - `--fail-on <severity>` — `error` (default) or `warning`.
 - `--ci <fmt>` / `--trx <path>` — CI annotations and TRX output.
-- `--skip-bpa`, `--no-model-rules`, `--no-defaults`, `--rule <id>`, `--path <objectPath>`, `--vpax <file>`, `--vpa-rules`.
+- `--path <path-filter>` — limit analysis to the tables containing the matched objects. Accepts wildcards and container keywords; same grammar as `te ls`.
+- `--no-multiline` — collapse multi-line cells in the violations table to a single line. Text output only.
+- `--skip-bpa`, `--no-model-rules`, `--no-defaults`, `--rule <id>`, `--vpax <file>`, `--vpa-rules`.
 
 ```bash
 te bpa run --fail-on error --ci github
 te bpa run --fix --save
 te bpa run --rule PERF_UNUSED_HIDDEN_COLUMN
+te bpa run --path Sales            # Tables touched by the Sales filter only
+te bpa run --path 'Sa*'            # Wildcard — every table starting with Sa
+te bpa run --path Sales/Measures   # Path filter applied to the matched tables
 ```
 
 ### bpa rules
@@ -287,7 +405,7 @@ te vertipaq --import stats.vpax  # Analyze offline
 Format DAX or M/Power Query expressions.
 
 - `-e, --expression <text>` — format a single inline expression.
-- `-p, --path <objectPath>` — format a specific measure/column.
+- `-p, --path <path>` — format a specific measure/column.
 - `--lang <dax|m>` — default `dax`.
 - `--save` / `--save-to` — persist formatted expressions.
 
@@ -318,7 +436,7 @@ te query -f query.dax --output json
 
 ### script
 
-Execute one or more C# scripts against a semantic model.
+Execute one or more C# scripts against a semantic model. The CLI uses the same scripting host as Tabular Editor 3 Desktop, so a script that runs in TE3 runs unchanged here.
 
 - `-S, --script <file>` — `.cs` / `.csx` file (repeatable).
 - `-e, --expression <code>` — inline C# (use `-` for stdin).
@@ -330,6 +448,12 @@ te script --script fix.cs --save
 te script -e "Info(Model.Tables.Count)"
 echo "Info(Model.Name);" | te script -e -
 ```
+
+> [!IMPORTANT]
+> Two behavioral details to know if you're porting an older script:
+>
+> - **No interactive selection in CLI scripts.** The TE3-Desktop helpers `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, and `SelectObjects()` throw `NotSupportedException` when called from `te script` — the CLI has no UI to pop up. Pre-resolve the object(s) outside the script and pass them in, or wrap the call in `try/catch` if the script is shared with TE3.
+> - **Default `using` directives match TE3 Desktop.** Scripts that use `DataTable`, `File`, `StringBuilder`, or `Regex` must include the corresponding `using System.Data;` / `using System.IO;` / `using System.Text;` / `using System.Text.RegularExpressions;` directive explicitly. The previous wider CLI-only defaults are gone.
 
 ### macro
 
@@ -346,14 +470,15 @@ te macro sort                  # Sort and re-assign IDs
 
 `te macro run` accepts:
 
-- `--on <object-path>` — set the macro's selection context to one or more model objects (comma-separated paths). Equivalent to right-clicking objects in TE3 and invoking the macro from the context menu.
+- `--on <path>` — set the macro's selection context to a single named object (a table, measure, column, …). Equivalent to right-clicking that object in TE3 and invoking the macro from the context menu.
 - `--save` / `--save-to` — persist any changes the macro makes.
 
 Macros that emit tables via `dataTable.Output()` render formatted output in the terminal, so DAX-style query macros work the same in `te macro run` as they do in TE3.
 
 ```bash
 te macro run "Hide all measures"
-te macro run "Format DAX" --on "Sales/Revenue,Sales/Margin" --save
+te macro run "Format DAX" --on Sales/Revenue --save
+te macro run "Format DAX" --on "'Net Sales'[Sales Amount]" --save   # DAX form works in --on too
 ```
 
 ## Deployment and refresh
@@ -487,11 +612,7 @@ te config set autoFormat true
 
 ### license
 
-Manage CLI license state.
-
-```bash
-te license activate <key>
-```
+`te license` is reserved for the GA release and is not available in this preview build. The command is still wired up to the parser — so existing scripts that invoke it won't blow up at parse time — but every subcommand exits with status `1` and a "not available in this preview build" message. See the [Preview notice](xref:te-cli#preview-notice) on the overview page for the broader licensing outlook.
 
 ### migrate
 
@@ -514,6 +635,8 @@ te interactive                                # Connect later
 te interactive ./model                        # Start with a local model
 te interactive -s MyWorkspace -d MyModel      # Start with a remote model
 ```
+
+Quoting and DAX-style references work the same as outside the session — see the [Object paths](#object-paths) section above and @te-cli-interactive for details on bracket-aware argv splitting inside the REPL.
 
 ### completion
 
