@@ -61,7 +61,7 @@ te config set hidePreviewNotice true
 te config set macros null              # Clear a path override
 ```
 
-Unknown or removed keys fail with exit code `1` and an error that lists the valid keys.
+Unknown keys fail with exit code `1` and an error that lists the valid keys.
 
 If no config file exists, `te config set` auto-creates one at the resolved path (`$TE_CONFIG` if set, otherwise `~/.config/te/config.json`) before applying the change.
 
@@ -111,9 +111,6 @@ If no config file exists, `te config set` auto-creates one at the resolved path 
 | `bpa.rules` | Ordered list of BPA rule files / URLs the gate loads. The gate uses every existing entry. Comma-separated values on `te config set bpa.rules ...` are split into the array. |
 | `te3ExePath` | Explicit path to the TE3 desktop executable (`TabularEditor.exe`). Used **only** by `te open`; safe to leave unset on Linux/macOS or when you don't use `te open`. |
 
-> [!NOTE]
-> The CLI no longer auto-discovers TE3 data folders. Earlier preview keys `te3DataDir`, `preferences`, and `bpaMachineRules` have been removed — see [Removed keys](#removed-keys) below.
-
 ### Path resolution priority
 
 For each user-provided file (macros, BPA rules), the CLI resolves the path in this order:
@@ -149,19 +146,7 @@ te config set bpa.builtInRules false
 te config set bpa.disabledBuiltInRuleIds "TE3_BUILT_IN_DATE_TABLE_EXISTS,TE3_BUILT_IN_HIDE_FOREIGN_KEYS"
 ```
 
-### Removed keys
-
-The following keys were recognized by earlier CLI previews and have been removed. `te config set` rejects them with exit code `1`; existing entries in your config file are silently ignored on load.
-
-| Removed key | Replacement |
-| -- | -- |
-| `te3DataDir` | None. TE3 data folders are no longer auto-discovered. |
-| `preferences` | None. The CLI no longer parses TE3's `Preferences.json`. |
-| `bpaMachineRules` | List machine-wide rule files in `bpa.rules` instead. |
-| `bpaRules` (flat) | Now under `bpa.rules` (string array). |
-| `bpaOnDeploy` (flat) | Now under `bpa.onDeploy`. |
-| `bpaOnSave` (flat) | Now under `bpa.onSave`. |
-| `bpaOnMutation` (flat) | Now under `bpa.onMutation`. |
+### Other schema keys
 
 `formatVersion` is set by the CLI when writing the file and is **not** user-settable via `te config set`. The CLI refuses to load a file whose `formatVersion` is higher than the build understands, so an older CLI cannot silently clobber a newer config.
 
