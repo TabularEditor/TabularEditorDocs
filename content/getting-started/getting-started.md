@@ -1,8 +1,8 @@
-﻿---
+---
 uid: getting-started
 title: Installation and Activation
 author: Morten Lønskov
-updated: 2026-03-27
+updated: 2026-05-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,21 +22,25 @@ applies_to:
 
 Download the latest version of Tabular Editor 3 from our [downloads page](xref:downloads).
 
-## Prerequisites
+We recommend the MSI 64-bit installer for most scenarios. Once downloaded, double-click the MSI file and complete the installer pages.
+
+![Install](~/content/assets/images/getting-started/install.png)
+
+### Prerequisites
 
 None.
 
-## System requirements
+### System requirements
 
 - **Operating system:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 or newer
-- **Architecture:** x64,  ARM64 (native from 3.23.0)
+- **Architecture:** x64, ARM64 (native from 3.23.0)
 - **.NET Runtime:** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
 See the .NET supported OS policy for current Windows versions supported by each runtime.
 
 ## Activating your installation
 
-Tabular Editor 3 is commercial software. Visit our [home page](https://tabulareditor.com) for pricing details and purchase options. If you haven't previously used Tabular Editor 3 you are eligible for a free 30-day trial.
+Tabular Editor 3 is commercial software. Visit our [home page](https://tabulareditor.com) for pricing details and purchase options. If you have not previously used Tabular Editor 3, you are eligible for a free 30-day trial.
 
 The first time you launch Tabular Editor 3 on a new machine, you are prompted to activate the product.
 
@@ -44,115 +48,90 @@ The first time you launch Tabular Editor 3 on a new machine, you are prompted to
 
 ### Activating using an existing license key
 
-Once you purchase a license for Tabular Editor 3, you should receive an e-mail with a 25-character string which is your license key. When prompted, enter the license key and hit "Next >" to activate the product.
+Once you purchase a license for Tabular Editor 3, you receive an e-mail with a 25-character string which is your license key. When prompted, enter the license key and click **Next >** to activate the product.
 
 ![Enter License Key](~/content/assets/images/getting-started/enter-license-key.png)
 
 > [!NOTE]
-> For multi-user license types, you will need to enter your e-mail address in addition to the license key. Tabular Editor 3 will prompt you to do so, if the license key you enter represents a multi-user license.
+> For multi-user license types, you also enter your e-mail address in addition to the license key. Tabular Editor 3 prompts you to do so when the license key represents a multi-user license.
 
-Note that Tabular Editor 3 installations are activated **per user**. In other words, if multiple users share the same machine, each user will have to activate the product on their Windows user profile.
+Tabular Editor 3 installations are activated **per user**. If multiple users share the same machine, each user activates the product on their own Windows user profile.
+
+### Windows account vs Power BI / Entra account
+
+The Windows account that runs Tabular Editor 3 is independent from the Microsoft Entra account used to authenticate against a Power BI / Fabric workspace.
+
+- **License activation** is stored in the Windows Registry under `HKEY_CURRENT_USER` of the Windows user that activated the product. The license is not tied to any cloud identity.
+- **Workspace authentication** happens at connection time in the **Load Semantic Model from Database** dialog. You sign in with the Microsoft Entra account that has permission on the workspace.
+
+You do not need to launch Tabular Editor 3 with **Run as** under a different Windows account just because you use a separate Entra account (for example a non-mail-enabled admin account) to manage the Power BI workspace. Launch Tabular Editor 3 under your normal Windows account, activate it with your license key under that account, and provide your admin Entra credentials in the connection dialog.
+
+For details on how Tabular Editor authenticates to the XMLA endpoint and how to pick the right authentication mode (for example **Microsoft Entra MFA** when your Windows login does not match your Power BI account), see @xmla-as-connectivity.
 
 ### Requesting a trial license
 
-If you haven't used Tabular Editor 3 before, you are eligible for a free 30-day trial. When choosing this option, you will be prompted for an e-mail address. We use the e-mail address to validate whether or not you have an existing activation of Tabular Editor 3.
+If you have not used Tabular Editor 3 before, you are eligible for a free 30-day trial. When you choose this option, you are prompted for an e-mail address. We use the e-mail address to validate whether you have an existing activation of Tabular Editor 3.
 
 > [!NOTE]
-> Tabular Editor ApS will not send unsolicited e-mails or forward your e-mail address to third parties, when signing up for a 30-day trial license. View our @privacy-policy for more information.
+> Tabular Editor ApS does not send unsolicited e-mails or forward your e-mail address to third parties when you sign up for a 30-day trial license. View our @privacy-policy for more information.
 
 ### Changing a license key
 
-When Tabular Editor 3 is activated, you may change your license key in the Help menu by choosing "About Tabular Editor".
+When Tabular Editor 3 is activated, you change your license key in the Help menu by choosing **About Tabular Editor**.
 
 ![About Te3](~/content/assets/images/getting-started/about-te3.png)
 
-In the dialog, select "Change license key". Note that this option is only available if no model is loaded in Tabular Editor. If you already loaded a model you can close it under File > Close model. Once you click "Change license key", Tabular Editor will prompt you whether you want to remove the current license:
+In the dialog, select **Change license key**. This option is only available when no model is loaded in Tabular Editor. If a model is open, close it under **File > Close model**. Once you click **Change license key**, Tabular Editor prompts you whether you want to remove the current license:
 
 ![image](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
 
-By accepting this, the current license is removed, and you will have to re-enter a license key to use the product.
+If you accept, the current license is removed and you re-enter a license key to use the product.
 
 > [!IMPORTANT]
-> Once a license key is removed, as described above, the product will not be usable by the current user on that machine until a new license key is entered.
+> Once a license key is removed, the product is not usable by the current user on that machine until a new license key is entered.
 
-<a name="registry-details"></a>
-#### Registry details
+## Post-install configuration
 
-Tabular Editor 3 uses the Windows Registry to store activation details.
+Tabular Editor 3 provides many configuration options. The default settings are sufficient for most development scenarios, but review the options below.
 
-To view the current license key assigned to the machine, run the following command in the Windows Command Prompt (Start > Run > cmd.exe):
+### Check for updates on start-up
 
-```cmd
-REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
-```
+By default, whenever Tabular Editor 3 is launched, the tool checks online to see if a newer version is available. You control how this update check is performed under **Tools > Preferences > Updates and Feedback**.
 
-You can also use `regedit.exe` (Windows Registry Editor) and navigate to `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` to view and modify the **LicenseKey** and **User** values.
+> [!NOTE]
+> Always use the latest version of Tabular Editor 3. Our support team assumes you are on the latest version before submitting a bug report.
 
-A system administrator may also proactively assign Tabular Editor 3 licenses to a machine by specifying the **LicenseKey** and **User** values under each user’s `SOFTWARE\Kapacity\Tabular Editor 3` registry key.
+### Opting out of telemetry collection
 
-![Registry Editor](~/content/assets/images/troubleshooting/registry-editor.png)
+Tabular Editor 3 collects anonymous usage data and telemetry, which helps us improve the product. You opt out at any time by launching Tabular Editor 3 and navigating to **Tools > Preferences > Updates and Feedback**. Uncheck the **Help improve Tabular Editor by collecting anonymous usage data** checkbox to opt out.
 
-### Changing a license key through the registry
+![Collect Telemetry](~/content/assets/images/getting-started/collect-telemetry.png)
 
-If, for any reason, you are unable to change the license key using the procedure outlined above, you can always reset the license assigned to Tabular Editor 3 by using the Registry Editor:
+### Proxy settings
 
-1. Close all instances of Tabular Editor 3.  
-2. Open the Registry Editor in Windows (Start > Run > regedit.msc).  
-3. Locate `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (see screenshot above).  
-4. Delete all values within this key.  
-5. Close the Registry Editor and restart Tabular Editor 3.
+If you are on a network with limited internet connectivity, specify the address, username, and password of a proxy server under **Tools > Preferences > Proxy Settings**. This is required before Tabular Editor 3 can use any features that rely on outgoing web requests. Specifically:
 
-Alternatively, run the following command in a Windows Command Prompt (Start > Run > cmd.exe):
+- Update checks
+- Product activation
+- DAX Formatting
+- Download of Best Practice Rules from external URLs
 
-```cmd
-REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
-```
+> [!TIP]
+> The proxy settings can at times interfere with authentication dialog boxes or other external prompts. Try switching the proxy setting between **System** and **None**, then close and reopen Tabular Editor 3 to verify.
 
-The next time you launch Tabular Editor 3, you will be prompted for a license key, just as when the tool was first installed on the machine.
+### Other preferences
 
-### Silent installation and license pre-provisioning
+Tabular Editor 3 contains many other settings for controlling application behavior. To learn more, see @preferences.
 
-You can deploy Tabular Editor silently and pre-provision the license through the Windows Registry.
+## Advanced scenarios
 
-1. **Install silently** (no UI, no reboot):
-   ```powershell
-   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
-   ```
-
-   To include the **AI Assistant** feature, specify the `ADDLOCAL` property. The AI Assistant is not installed by default.
-   ```powershell
-   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
-   ```
-
-   | MSI Feature | Description | Installed by default |
-   |-------------|-------------|----------------------|
-   | `MainFeature` | Core Tabular Editor 3 application | Yes (Required) |
-   | `AIAssistant` | AI Assistant for Tabular Editor 3 | No |
-
-   > [!NOTE]
-   > When using `ADDLOCAL`, you must include `MainFeature` alongside any optional features. Specifying only `AIAssistant` without `MainFeature` results in an incomplete installation.
-
-You may also use `/package` instead of `/i`. Replace `<version>` with the actual version string. Use the ARM64 MSI if applicable.
-
-For details on available MSI command-line options, see the official Microsoft documentation:
-[Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
-
-2. **Write the license to the Registry** **before the first launch** of the application:
-   ```bat
-   REM Per-user license key (HKCU)
-   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
-   ```
-
-   If you are using an **Enterprise Edition** license key, also set the licensed user’s e‑mail:
-   ```bat
-   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
-   ```
-
-**Notes**
-- The installer does **not** accept a license parameter; licensing is handled via the Registry entries above.
-- Keys are stored under **HKCU** (per-user). Ensure the commands run in the context of the target user (e.g., via logon script or similar) so the values are written to the correct profile.
-- For additional keys and values, see the [Registry details](#registry-details).
+For manual (no-internet) activation, registry-based license management, silent deployment, and Enterprise seat administration, see @installation-activation-basic.
 
 ## Next steps
 
 - [Overview of Tabular Editor 3's user interface](xref:user-interface)
+- @xmla-as-connectivity
+- @migrate-from-vs
+- @migrate-from-desktop
+- @migrate-from-te2
+- @installation-activation-basic

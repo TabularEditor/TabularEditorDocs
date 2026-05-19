@@ -1,15 +1,13 @@
 ﻿# [Welcome](index.md)
 
-# Introduction to Tabular Editor
+# Getting Started with Tabular Editor 3
 ## @general-introduction
+## @getting-started
 ## @installation-activation-basic
 ## @migrate-from-vs
 ## @migrate-from-desktop
 ## @migrate-from-te2
 ## @azure-marketplace
-
-# Getting Started with Tabular Editor 3
-## @getting-started
 ## @editions
 ## @training-telearn
 
