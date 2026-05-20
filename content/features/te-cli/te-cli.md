@@ -2,7 +2,7 @@
 uid: te-cli
 title: Tabular Editor CLI (Limited Public Preview)
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-05-12
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -44,7 +44,7 @@ The CLI organizes more than 50 commands into 10 families. Each family maps to a 
 | [Deployment & Refresh](xref:te-cli-commands#deployment-and-refresh) | Deploy to workspace, trigger refresh, incremental refresh | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te incremental-refresh`](xref:te-cli-commands#incremental-refresh) |
 | [Testing](xref:te-cli-commands#testing) | Assertion tests, snapshots, A/B comparison | [`te test run`](xref:te-cli-commands#test-run) |
 | [Connection & Auth](xref:te-cli-commands#connection-and-auth) | Connect to workspaces, manage authentication and profiles | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove) |
-| [Configuration](xref:te-cli-commands#configuration) | Settings and licensing | [`te config`](xref:te-cli-commands#config-show--paths--init--set), [`te license`](xref:te-cli-commands#license) |
+| [Configuration](xref:te-cli-commands#configuration) | Settings and licensing | [`te config`](xref:te-cli-commands#config-show--paths--init--set) |
 | [Shell](xref:te-cli-commands#shell) | Interactive mode, shell completions | [`te interactive`](xref:te-cli-commands#interactive), [`te completion`](xref:te-cli-commands#completion) |
 
 See @te-cli-commands for a full command reference with syntax, options, and examples for each command.
