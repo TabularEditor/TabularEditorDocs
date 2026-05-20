@@ -17,10 +17,14 @@ applies_to:
           full: true
 ---
 # Locale Not Supported
-You may encounter the warning message:
+You may encounter any of the following warning messages:
 
 ```plaintext
 The XXXX locale is not supported
+```
+
+```plaintext
+XXXX is an invalid culture identifier
 ```
 
 in the Tabular Editor 3 Message view.
