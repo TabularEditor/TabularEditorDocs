@@ -19,7 +19,12 @@ applies_to:
 The Tabular Editor CLI is designed for unattended execution in continuous integration and delivery pipelines. A single binary, structured output, non-interactive mode, native CI annotations for GitHub Actions and Azure DevOps, and VSTEST-compatible test results make it a natural replacement for ad-hoc TE2 invocations.
 
 > [!WARNING]
-> During preview, we recommend against using the CLI in **production** pipelines. Commands, flags, and outputs may change before GA. Build and evaluate in non-production pipelines first; share feedback so the GA shape matches your needs.
+> **Do not use the CLI in production pipelines during Limited Public Preview.** Two concrete reasons bite pipeline owners:
+>
+> - **Hard expiry.** The preview binary stops functioning on **2026-09-30** - any pipeline depending on it will fail on that date, regardless of your release calendar.
+> - **No backwards-compatibility guarantee.** Commands, flags, output shapes, and exit codes may change between preview builds, so pipeline steps may need updating when you refresh the vendored binary.
+>
+> Build and evaluate in non-production pipelines, and share feedback so the GA shape matches your needs.
 
 ## What makes the CLI CI-friendly
 
@@ -30,9 +35,28 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 - **`--trx <file>`.** Produce VSTEST results consumable by Azure DevOps test publishing.
 - **Structured errors.** `--output json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
 
+## Adding the CLI to your repo
+
+During Limited Public Preview, the CLI is gated behind sign-in on [tabulareditor.com](https://tabulareditor.com), so pipelines cannot fetch the archive from a public URL. The simplest reproducible approach is to commit the binary that matches your runner into your repository and reference it from each pipeline step.
+
+A common layout:
+
+```
+your-repo/
+└── tools/
+    └── te/
+        ├── te         # Linux / macOS binary (needs chmod +x at runtime)
+        └── te.exe     # Windows binary
+```
+
+Place the **extracted** binary - not the archive - so the pipeline can call it directly. Pick the build that matches your runner OS/arch; see @te-cli-install for the filename table. The self-contained binary is ~70 MB; consider Git LFS if your repo is sensitive to size.
+
+> [!NOTE]
+> Committing the binary also pins the CLI version to whatever you checked in, which is desirable for CI reproducibility. To upgrade, replace the binary in `tools/te/` and commit it - the commit message is your version log. Keep in mind that the preview binary still expires on **2026-09-30** regardless of when you committed it, so a vendored copy is not a permanent dependency - plan to refresh it (and re-validate your pipeline against the new API surface) on preview-build cadence.
+
 ## GitHub Actions
 
-A complete deploy + test workflow. The example assumes a service principal stored in repository secrets (`AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_TENANT_ID`).
+A complete deploy + test workflow. The example assumes the Linux `te` binary is committed at `tools/te/te`, and a service principal is stored in repository secrets (`AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_TENANT_ID`).
 
 ```yaml
 name: Deploy semantic model
@@ -51,13 +75,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download Tabular Editor CLI
+      - name: Set up Tabular Editor CLI
         run: |
-          # TBD: replace with the official download URL once confirmed.
-          curl -L -o te.zip "<download-url-linux-x64>"
-          unzip te.zip -d $HOME/.local/bin
-          chmod +x $HOME/.local/bin/te
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          chmod +x ./tools/te/te
+          echo "$GITHUB_WORKSPACE/tools/te" >> $GITHUB_PATH
 
       - name: Validate
         run: te validate ./model --ci github --trx validate.trx
@@ -93,7 +114,7 @@ jobs:
 
 ## Azure DevOps Pipelines
 
-Equivalent YAML for Azure DevOps. `--ci vsts` emits `##vso[...]` commands that the pipeline interprets as errors, warnings, and task-status updates.
+Equivalent YAML for Azure DevOps. The example assumes `te.exe` is committed at `tools\te\te.exe`. `--ci vsts` emits `##vso[...]` commands that the pipeline interprets as errors, warnings, and task-status updates.
 
 ```yaml
 trigger:
@@ -108,15 +129,8 @@ variables:
 steps:
   - checkout: self
 
-  - task: PowerShell@2
-    displayName: 'Install Tabular Editor CLI'
-    inputs:
-      targetType: 'inline'
-      script: |
-        # TBD: replace with the official download URL once confirmed.
-        Invoke-WebRequest -Uri "<download-url-win-x64>" -OutFile te.zip
-        Expand-Archive te.zip -DestinationPath $(Agent.ToolsDirectory)\te
-        Write-Host "##vso[task.prependpath]$(Agent.ToolsDirectory)\te"
+  - powershell: Write-Host "##vso[task.prependpath]$(Build.SourcesDirectory)\tools\te"
+    displayName: 'Set up Tabular Editor CLI'
 
   - script: te validate ./model --ci vsts --trx validate.trx
     displayName: 'Validate'

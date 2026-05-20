@@ -23,11 +23,11 @@ The Tabular Editor CLI ships as a single self-contained executable named `te` (`
 1. Sign in at [tabulareditor.com](https://tabulareditor.com) with a Tabular Editor account.
 2. Download the archive for your platform and architecture:
 
-   | Platform | 64-bit (Intel/AMD) | ARM64 |
-   | -- | -- | -- |
-   | Windows | `win-x64` | `win-arm64` |
-   | macOS | `osx-x64` (Intel) | `osx-arm64` (Apple Silicon) |
-   | Linux | `linux-x64` | `linux-arm64` |
+   | Platform | 64-bit (Intel/AMD) | ARM64 | Archive |
+   | -- | -- | -- | -- |
+   | Windows | `te-win-x64.zip` | `te-win-arm64.zip` | `.zip` |
+   | macOS | `te-osx-x64.tar.gz` (Intel) | `te-osx-arm64.tar.gz` (Apple Silicon) | `.tar.gz` |
+   | Linux | `te-linux-x64.tar.gz` | `te-linux-arm64.tar.gz` | `.tar.gz` |
 
    Pick the ARM64 build on Apple Silicon Macs (M1 and newer), Windows on ARM devices, and ARM-based Linux servers (including AWS Graviton, Azure Ampere, and Raspberry Pi 64-bit). Pick the `x64` build on everything else.
 
@@ -40,7 +40,7 @@ Unzip the archive into a folder of your choice and add that folder to `PATH` so 
 ### Windows (PowerShell)
 
 ```powershell
-# Substitute te-win-x64.zip or te-win-arm64.zip depending on your machine.
+# Substitute the .zip filename below with the archive you downloaded.
 Expand-Archive te-win-x64.zip -DestinationPath "$env:LOCALAPPDATA\Programs\te"
 
 # Add to PATH (current user, persistent)
@@ -55,13 +55,9 @@ Restart the terminal for the PATH change to take effect.
 ### macOS / Linux
 
 ```bash
-# Substitute the archive that matches your platform/arch:
-#   macOS Apple Silicon: te-osx-arm64.zip
-#   macOS Intel:         te-osx-x64.zip
-#   Linux x64:           te-linux-x64.zip
-#   Linux ARM64:         te-linux-arm64.zip
+# Substitute the .tar.gz filename below with the archive you downloaded.
 mkdir -p ~/.local/bin
-unzip te-osx-arm64.zip -d ~/.local/bin
+tar -xzf te-osx-arm64.tar.gz -C ~/.local/bin
 chmod +x ~/.local/bin/te
 
 # Ensure ~/.local/bin is on PATH
