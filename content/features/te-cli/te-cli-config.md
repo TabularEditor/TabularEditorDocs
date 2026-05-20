@@ -18,7 +18,7 @@ applies_to:
 
 The Tabular Editor CLI reads optional configuration from a JSON file. Configuration controls three things: where the CLI looks for Tabular Editor 3's shared data files (Preferences, macros, BPA rules), behavioral defaults (BPA gates, auto-format, validation), and the list of saved connection profiles.
 
-Most users don't need to edit the file directly — `te config show`, `te config set <key> <value>`, and `te profile set` cover the common operations.
+Most users don't need to edit the file directly - `te config show`, `te config set <key> <value>`, and `te profile set` cover the common operations.
 
 ## Config file location
 
@@ -26,7 +26,7 @@ Resolution order:
 
 1. `$TE_CONFIG` environment variable (if set and the file exists).
 2. `~/.config/te/config.json` (on Windows, `%USERPROFILE%\.config\te\config.json`).
-3. No config file — the CLI uses built-in defaults.
+3. No config file - the CLI uses built-in defaults.
 
 To create a default config:
 
@@ -43,7 +43,7 @@ te config show --output json           # Machine-readable
 te config paths                        # Show resolved TE3 file paths
 ```
 
-`te config paths` resolves where the CLI will actually look for TE3 data files — useful when debugging missing macros or BPA rules.
+`te config paths` resolves where the CLI will actually look for TE3 data files - useful when debugging missing macros or BPA rules.
 
 ## Setting values
 
@@ -101,10 +101,10 @@ Unknown keys fail with an error that lists the valid keys.
 
 For each TE3 file (Preferences, macros, BPA rules), the CLI resolves the path in this order:
 
-1. **CLI config override** — the explicit entry above (`preferences`, `macros`, …).
-2. **Environment variable** — e.g., `TE_MACROS_PATH`, `TE_BPA_RULES_PATH`.
-3. **`te3DataDir`** — joined with the default filename.
-4. **Auto-detect** — Windows `%LOCALAPPDATA%\TabularEditor3\...`, or the equivalent on macOS/Linux; on macOS we also probe a Parallels-style mapping if present.
+1. **CLI config override** - the explicit entry above (`preferences`, `macros`, …).
+2. **Environment variable** - e.g., `TE_MACROS_PATH`, `TE_BPA_RULES_PATH`.
+3. **`te3DataDir`** - joined with the default filename.
+4. **Auto-detect** - Windows `%LOCALAPPDATA%\TabularEditor3\...`, or the equivalent on macOS/Linux; on macOS we also probe a Parallels-style mapping if present.
 
 Run `te config paths` to see which file the CLI actually resolved for each TE3 asset.
 
@@ -139,7 +139,7 @@ Applied whenever the CLI invokes the DAX Formatter (for `te format` and, when en
 
 ### Profiles
 
-Saved connection profiles live under the `profiles` key. Don't edit them by hand — use `te profile set / remove / list`. See @te-cli-auth for profile management.
+Saved connection profiles live under the `profiles` key. Don't edit them by hand - use `te profile set / remove / list`. See @te-cli-auth for profile management.
 
 Profiles can carry **overrides** that override the behavioral defaults above whenever the profile is active. This is how a dev profile can relax validation and BPA while a prod profile keeps them strict:
 
@@ -152,15 +152,15 @@ te profile set prod --auto-format true
 
 The BPA gate is the safety net that prevents a model with rule violations from being saved or deployed. It runs automatically when:
 
-- `te deploy` executes — unless `--skip-bpa` is passed or `bpaOnDeploy` is `false`.
-- `te save` executes — unless `--skip-bpa` is passed or `bpaOnSave` is `false`.
-- `te add` / `te set` / `te mv` / `te macro run` executes — only when `bpaOnMutation` is `true`.
+- `te deploy` executes - unless `--skip-bpa` is passed or `bpaOnDeploy` is `false`.
+- `te save` executes - unless `--skip-bpa` is passed or `bpaOnSave` is `false`.
+- `te add` / `te set` / `te mv` / `te macro run` executes - only when `bpaOnMutation` is `true`.
 
 When the gate fires and finds violations at severity ≥ `error`, the command fails with exit code `1` and a summary of the violations. Options to resolve:
 
-- `--fix-bpa` — apply the rule's `fixExpression` in memory for the deploy/save artifact; source files are not modified.
-- `--skip-bpa` — disable the gate for this one command.
-- `.te-bpa.json` in the model directory — project-local BPA gate configuration (replacement for editing Preferences). <!-- TBD: confirm shape/scope of .te-bpa.json with Peer before publishing. -->
+- `--fix-bpa` - apply the rule's `fixExpression` in memory for the deploy/save artifact; source files are not modified.
+- `--skip-bpa` - disable the gate for this one command.
+- `.te-bpa.json` in the model directory - project-local BPA gate configuration (replacement for editing Preferences). <!-- TBD: confirm shape/scope of .te-bpa.json with Peer before publishing. -->
 
 Run `te bpa run` independently to preview the gate's behavior without deploying:
 
@@ -173,10 +173,10 @@ te bpa run ./model --fix --save     # Apply fixes to the source
 
 When you run a mutating command (`te add`, `te set`, `te mv`, `te replace --save`, `te macro run`), the CLI performs these checks automatically:
 
-1. **TOM errors** are always surfaced — invalid DAX or M in measures, columns, partitions, calculation items. These always fail the command.
-2. **Schema validation** (`validateOnMutation`, default `true`) — verifies that `Table[Column]` references in DAX still resolve. Cross-check of metadata consistency.
-3. **DAX auto-format** (`autoFormat`, default `false`) — when enabled, formats any expressions touched by the mutation via the built-in DAX Formatter.
-4. **BPA on mutation** (`bpaOnMutation`, default `false`) — when enabled, runs BPA after the mutation and warns/fails based on `--fail-on`.
+1. **TOM errors** are always surfaced - invalid DAX or M in measures, columns, partitions, calculation items. These always fail the command.
+2. **Schema validation** (`validateOnMutation`, default `true`) - verifies that `Table[Column]` references in DAX still resolve. Cross-check of metadata consistency.
+3. **DAX auto-format** (`autoFormat`, default `false`) - when enabled, formats any expressions touched by the mutation via the built-in DAX Formatter.
+4. **BPA on mutation** (`bpaOnMutation`, default `false`) - when enabled, runs BPA after the mutation and warns/fails based on `--fail-on`.
 
 Disable a check with `te config set <key> false`, or scope the relaxation to a specific environment via a profile.
 
@@ -186,12 +186,12 @@ Disable a check with `te config set <key> false`, or scope the relaxation to a s
 | -- | -- |
 | `TE_CONFIG` | Path to an alternative config file. Overrides `~/.config/te/config.json`. |
 | `TE_DEBUG` | Set to `1` to enable debug logging globally (same as `--debug` or `debug: true` in config). |
-| `TE_COMPAT` | Set to `te2` to force TE2-compatibility mode — see @te-cli-migrate. |
+| `TE_COMPAT` | Set to `te2` to force TE2-compatibility mode - see @te-cli-migrate. |
 | `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_TENANT_ID` | Service principal credentials, used by `--auth env`. |
-| `TE_MACROS_PATH`, `TE_BPA_RULES_PATH`, ... | Per-file overrides for TE3 asset paths (second in resolution order — see above). |
+| `TE_MACROS_PATH`, `TE_BPA_RULES_PATH`, ... | Per-file overrides for TE3 asset paths (second in resolution order - see above). |
 
 ## Related pages
 
-- @te-cli-auth — profiles, authentication, and credential storage.
-- @te-cli-commands — `te config` subcommands.
-- @te-cli-cicd — configuring the BPA gate for pipelines.
+- @te-cli-auth - profiles, authentication, and credential storage.
+- @te-cli-commands - `te config` subcommands.
+- @te-cli-cicd - configuring the BPA gate for pipelines.

@@ -51,10 +51,10 @@ te deploy ./model --non-interactive --force --ci github
 | Exit | Meaning |
 | -- | -- |
 | `0` | Success. |
-| `1` | Generic failure — invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity ≥ error. |
+| `1` | Generic failure - invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity ≥ error. |
 | `2` | Used by `te diff` to indicate models differ (distinct from `0` identical and non-zero errors). |
 
-Combine exit codes with `--ci <vsts\|github>` annotations and `--trx <file>` to surface rich failure information in CI — see @te-cli-cicd.
+Combine exit codes with `--ci <vsts\|github>` annotations and `--trx <file>` to surface rich failure information in CI - see @te-cli-cicd.
 
 ## Errors on stderr
 
@@ -108,7 +108,7 @@ result = subprocess.run(
 if result.returncode != 0:
     try:
         err = json.loads(result.stderr.strip().splitlines()[-1])
-        print("Deploy failed:", err.get("error"), "— hint:", err.get("hint"))
+        print("Deploy failed:", err.get("error"), "- hint:", err.get("hint"))
     except json.JSONDecodeError:
         print("Deploy failed:\n", result.stderr)
 ```
@@ -173,15 +173,15 @@ The resulting TMSL can be reviewed in a pull request, committed, executed by the
 
 ## Useful patterns
 
-- **Idempotent creates and removes.** `te add Sales/Marker -t Measure -i "0" --if-not-exists --save` and `te rm Sales/OldMeasure --if-exists --save` both exit `0` whether or not the object existed — safe to re-run in CI.
+- **Idempotent creates and removes.** `te add Sales/Marker -t Measure -i "0" --if-not-exists --save` and `te rm Sales/OldMeasure --if-exists --save` both exit `0` whether or not the object existed - safe to re-run in CI.
 - **Dry-run diffs.** `te replace` is dry-run by default; add `--save` only when you're satisfied with the preview.
-- **Emit TMSL for review.** `te deploy ./model --xmla deploy.tmsl` produces the deployment script without touching the server — useful for DBA review or manual apply.
+- **Emit TMSL for review.** `te deploy ./model --xmla deploy.tmsl` produces the deployment script without touching the server - useful for DBA review or manual apply.
 - **Path-only output.** `te ls --paths-only` and `te find --paths-only` emit one object path per line, ideal for piping to `xargs`, `te get`, or `te set`. The model-level containers (`te ls Measures`, `te ls Columns`) compose well with this for whole-model sweeps.
 - **Benchmarking queries.** `te query --trace --cold --runs 5` runs a DAX query with cold cache, five iterations, and captures FE/SE trace events.
-- **Step timings in CI logs.** Long-running commands (`te deploy`, `te refresh`, `te script`, `te validate`) include a `durationMs` field in JSON output — useful for surfacing per-step timings in pipeline summaries.
+- **Step timings in CI logs.** Long-running commands (`te deploy`, `te refresh`, `te script`, `te validate`) include a `durationMs` field in JSON output - useful for surfacing per-step timings in pipeline summaries.
 
 ## Related pages
 
-- @te-cli-cicd — pipeline-specific patterns and YAML examples.
-- @te-cli-commands — full command reference.
-- @te-cli-interactive — when interactive mode fits better than scripting.
+- @te-cli-cicd - pipeline-specific patterns and YAML examples.
+- @te-cli-commands - full command reference.
+- @te-cli-interactive - when interactive mode fits better than scripting.

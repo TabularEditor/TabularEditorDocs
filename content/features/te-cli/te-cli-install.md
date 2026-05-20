@@ -140,6 +140,6 @@ To update to a newer preview build, download the latest archive and overwrite th
 
 ## Next steps
 
-- @te-cli-auth — authenticate to Power BI, Fabric, or Azure Analysis Services.
-- @te-cli-commands — full command reference.
-- @te-cli-interactive — guided REPL mode.
+- @te-cli-auth - authenticate to Power BI, Fabric, or Azure Analysis Services.
+- @te-cli-commands - full command reference.
+- @te-cli-interactive - guided REPL mode.

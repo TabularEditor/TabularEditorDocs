@@ -73,6 +73,7 @@
 ### [Automation and Scripting](xref:te-cli-automation)
 ### [CI/CD Integration](xref:te-cli-cicd)
 ### [Migrating from TE2 CLI](xref:te-cli-migrate)
+### [Known Limitations](xref:te-cli-limitations)
 
 # Semantic Bridge for cross-platform translations
 ## @semantic-bridge

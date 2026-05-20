@@ -32,7 +32,7 @@ The session prints a welcome banner, shows the active model, and drops you at a 
 te [MyModel]>
 ```
 
-If no model is set, the prompt is just `te>` — use `connect <path>` or `connect <workspace> <model>` inside the session to bind one.
+If no model is set, the prompt is just `te>` - use `connect <path>` or `connect <workspace> <model>` inside the session to bind one.
 
 ## Commands inside the session
 
@@ -73,10 +73,10 @@ To disable prompts for a single command inside the session, pass `--non-interact
 - **Interactive mode** is best for exploration, learning the CLI, one-off bulk edits against a single model, and demos.
 - **Non-interactive mode** (the default outside `te interactive`) is what you reach for when scripting, automating, or running in CI. See @te-cli-automation and @te-cli-cicd.
 
-The two share the same command tree — anything you run inside `te interactive` can be pasted into a shell script by prefixing it with `te`.
+The two share the same command tree - anything you run inside `te interactive` can be pasted into a shell script by prefixing it with `te`.
 
 ## Related pages
 
-- @te-cli-commands — full command reference.
-- @te-cli-auth — connect to workspaces and manage profiles.
-- @te-cli-automation — when to leave interactive mode.
+- @te-cli-commands - full command reference.
+- @te-cli-auth - connect to workspaces and manage profiles.
+- @te-cli-automation - when to leave interactive mode.

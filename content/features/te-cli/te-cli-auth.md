@@ -24,7 +24,7 @@ The CLI supports the full Azure Identity credential chain:
 
 | Method | When to use | `--auth` value |
 | -- | -- | -- |
-| Interactive browser | Local development — opens the system browser | `interactive` (default) |
+| Interactive browser | Local development - opens the system browser | `interactive` (default) |
 | Service principal (client secret) | Automation, CI/CD, headless / SSH / WSL | `spn` (with `-u / -p / -t`) or `env` |
 | Service principal (certificate) | Automation with certificate-based auth | `spn` (with `-u / -t / --certificate`) |
 | Environment variables | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID` | `env` |
@@ -32,7 +32,7 @@ The CLI supports the full Azure Identity credential chain:
 
 The default (`auto`) tries environment credentials first, then falls back to interactive browser.
 
-For headless, SSH, WSL, or devcontainer scenarios, use a service principal — `te auth login -u <id> -p <secret> -t <tenant>` (or `--certificate`). The login is cached, so subsequent commands acquire tokens silently with `--auth auto`.
+For headless, SSH, WSL, or devcontainer scenarios, use a service principal - `te auth login -u <id> -p <secret> -t <tenant>` (or `--certificate`). The login is cached, so subsequent commands acquire tokens silently with `--auth auto`.
 
 ## `te auth login`
 
@@ -45,7 +45,7 @@ te auth login
 # Service principal with client secret
 te auth login -u <app-id> -p <secret> -t <tenant>
 
-# Service principal — read secret from stdin
+# Service principal - read secret from stdin
 echo $AZURE_CLIENT_SECRET | te auth login -u <app-id> -p - -t <tenant>
 
 # Service principal with certificate
@@ -55,7 +55,7 @@ te auth login -u <app-id> -t <tenant> --certificate ./sp.pfx --certificate-passw
 te auth login --identity
 ```
 
-After a successful service-principal login the CLI **caches the SP record** so every subsequent `te` command can acquire tokens silently — no need to re-pass `-u / -p / -t` or set the `AZURE_CLIENT_*` environment variables. Pass `--save=false` for a one-shot login that doesn't update the cache, or run `te auth logout` to clear it.
+After a successful service-principal login the CLI **caches the SP record** so every subsequent `te` command can acquire tokens silently - no need to re-pass `-u / -p / -t` or set the `AZURE_CLIENT_*` environment variables. Pass `--save=false` for a one-shot login that doesn't update the cache, or run `te auth logout` to clear it.
 
 > [!WARNING]
 > Passing secrets directly on the command line is visible in `ps` output and shell history. Prefer the `AZURE_CLIENT_SECRET` environment variable, or pipe the secret via stdin with `-p -`.
@@ -91,7 +91,7 @@ Tokens and service-principal records are cached under your home directory. File 
 
 Interactive browser and service-principal flows use separate record files so they can coexist. `te auth logout` clears all cached records.
 
-## `te connect` — set the active connection
+## `te connect` - set the active connection
 
 `te connect` persists an active connection for the current terminal session. Subsequent commands that take `-s` / `-d` can omit them:
 
@@ -134,7 +134,7 @@ The CLI detects the correct scope from the server URL for:
 
 - Power BI Service and Fabric (commercial, US Gov, China, Germany clouds)
 - Azure Analysis Services (`asazure://...`)
-- Local SSAS (`localhost`, named instances — Windows only)
+- Local SSAS (`localhost`, named instances - Windows only)
 
 Pass an XMLA endpoint, workspace name, or `powerbi://` URL as `--server`:
 
@@ -146,7 +146,7 @@ te connect localhost "AdventureWorks"
 
 ## Connection profiles
 
-For repeated use of the same connection — especially when you deploy to multiple environments — save named profiles:
+For repeated use of the same connection - especially when you deploy to multiple environments - save named profiles:
 
 ```bash
 # Save remote and local profiles
@@ -204,12 +204,12 @@ See @te-cli-cicd for complete GitHub Actions and Azure DevOps Pipelines examples
 | Variable | Purpose |
 | -- | -- |
 | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID` | Service principal credentials (used by `--auth env`). |
-| `TE_CONFIG` | Override the config file path — see @te-cli-config. |
-| `TE_COMPAT=te2` | Force TE2-compatibility mode — see @te-cli-migrate. |
+| `TE_CONFIG` | Override the config file path - see @te-cli-config. |
+| `TE_COMPAT=te2` | Force TE2-compatibility mode - see @te-cli-migrate. |
 | `TE_DEBUG=1` | Enable debug logging to stderr (connection strings, auth flow, timing). |
 
 ## Next steps
 
-- @te-cli-commands — what you can do once connected.
-- @te-cli-config — configuration and profile behavior.
-- @te-cli-cicd — pipeline examples using service principals and managed identity.
+- @te-cli-commands - what you can do once connected.
+- @te-cli-config - configuration and profile behavior.
+- @te-cli-cicd - pipeline examples using service principals and managed identity.

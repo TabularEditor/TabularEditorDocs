@@ -152,9 +152,9 @@ steps:
 
 `te deploy` and `te save` run the Best Practice Analyzer as a pre-flight gate by default. Three behaviors are worth picking up front:
 
-- **Enforce** — the default. Pipeline fails if BPA finds violations at severity ≥ error. Pair with `--fail-on warning` on a standalone `te bpa run` step if you want warnings to fail too.
-- **Auto-fix** — `--fix-bpa` applies `fixExpression`s in memory for the deployed artifact. Source files are not modified. Useful when the source of truth lives in the model and you want deploys to normalize style without developer intervention.
-- **Bypass** — `--skip-bpa` disables the gate for a single command. Useful for emergency hotfixes; not recommended as a default.
+- **Enforce** - the default. Pipeline fails if BPA finds violations at severity ≥ error. Pair with `--fail-on warning` on a standalone `te bpa run` step if you want warnings to fail too.
+- **Auto-fix** - `--fix-bpa` applies `fixExpression`s in memory for the deployed artifact. Source files are not modified. Useful when the source of truth lives in the model and you want deploys to normalize style without developer intervention.
+- **Bypass** - `--skip-bpa` disables the gate for a single command. Useful for emergency hotfixes; not recommended as a default.
 
 ```bash
 # Treat warnings as failures in PR validation
@@ -191,10 +191,10 @@ For incremental refresh workflows, combine `--apply-refresh-policy`, `--effectiv
 Emit TMSL or XMLA as an artifact without deploying, so DBAs or a later job can review or apply it:
 
 ```bash
-# Produce the XMLA/TMSL script that would deploy — do not deploy
+# Produce the XMLA/TMSL script that would deploy - do not deploy
 te deploy ./model -s my-ws -d my-model --xmla deploy.tmsl --force
 
-# Produce the TMSL refresh command — do not execute
+# Produce the TMSL refresh command - do not execute
 te refresh -s my-ws -d my-model --type full --dry-run > refresh.tmsl
 ```
 
@@ -205,16 +205,16 @@ Commit these artifacts to git, upload them to the pipeline's artifact storage, o
 | Approach | When to use | Notes |
 | -- | -- | -- |
 | Service principal via env vars (`AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`, `--auth env`) | General CI/CD | Map pipeline secrets to environment variables at the step or job level. Never pass secrets in command arguments. |
-| Service principal via `te auth login` once per job (`echo $SECRET \| te auth login -u $ID -p - -t $TENANT`) | Multi-step jobs | The login is cached, so subsequent `te` commands acquire tokens silently — no need to set `AZURE_CLIENT_*` for every step or re-pass `-u/-p/-t`. Pipe the secret via stdin rather than interpolating it. |
+| Service principal via `te auth login` once per job (`echo $SECRET \| te auth login -u $ID -p - -t $TENANT`) | Multi-step jobs | The login is cached, so subsequent `te` commands acquire tokens silently - no need to set `AZURE_CLIENT_*` for every step or re-pass `-u/-p/-t`. Pipe the secret via stdin rather than interpolating it. |
 | Managed identity (`--auth managed-identity`) | Azure VMs, Container Apps, Azure Functions | No secrets to manage. Preferred in Azure-hosted environments. |
 | Certificate (`--certificate <path>`) | Enterprise scenarios with cert rotation | Mount the certificate as a secure file step; pass `--certificate-password` via env. |
 
 > [!WARNING]
-> Do not echo secrets or the output of `te auth status` to pipeline logs. The CLI writes warnings to stderr when secrets are passed on the command line — respect those warnings in CI.
+> Do not echo secrets or the output of `te auth status` to pipeline logs. The CLI writes warnings to stderr when secrets are passed on the command line - respect those warnings in CI.
 
 ## Related pages
 
-- @te-cli-auth — authentication methods in detail.
-- @te-cli-config — configuration and profile overrides.
-- @te-cli-automation — general scripting patterns.
-- @te-cli-migrate — migrating an existing TE2-based pipeline.
+- @te-cli-auth - authentication methods in detail.
+- @te-cli-config - configuration and profile overrides.
+- @te-cli-automation - general scripting patterns.
+- @te-cli-migrate - migrating an existing TE2-based pipeline.

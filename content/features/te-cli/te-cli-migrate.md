@@ -29,7 +29,7 @@ TE2 compatibility mode is activated in any of three ways:
 3. **Auto-detection.** If the first argument isn't a `te` subcommand (`load`, `deploy`, …) and at least one recognized TE2 flag appears somewhere in the argument list, the CLI auto-routes to TE2 mode. This means most existing TE2 invocations work without any changes.
 
 ```bash
-# All three are equivalent — each runs in TE2 mode
+# All three are equivalent - each runs in TE2 mode
 ./te2 Model.bim -S fix.csx -D localhost\tabular MyDB -O
 TE_COMPAT=te2 te Model.bim -S fix.csx -D localhost\tabular MyDB -O
 te Model.bim -S fix.csx -D localhost\tabular MyDB -O
@@ -48,7 +48,7 @@ te migrate -A                # Look up a single flag
 te migrate --output json     # Machine-readable mapping
 ```
 
-Prefer `te migrate` over this page when you need the current mapping — it reflects the CLI version you have installed.
+Prefer `te migrate` over this page when you need the current mapping - it reflects the CLI version you have installed.
 
 ## Flag mapping (curated subset)
 
@@ -63,7 +63,7 @@ A non-exhaustive summary of the most commonly used flags. Run `te migrate` for t
 | `-A` / `-ANALYZE` | `te bpa run --rules <file-or-url>` | Supports `--fail-on`, `--fix`, multiple rule files. |
 | `-AX` / `-ANALYZEX` | `te bpa run --rules <file>` (without `--model-rules`) | Excluding model-embedded rules is the new default. |
 | `-B` / `-BIM` | `te save <model> -o <file.bim> --format bim` | |
-| `-F` / `-FOLDER` | `te save <model> -o <dir> --format te-folder` | After `-D`, TE2's `-F` means `-FULL` — see `--deploy-full`. |
+| `-F` / `-FOLDER` | `te save <model> -o <dir> --format te-folder` | After `-D`, TE2's `-F` means `-FULL` - see `--deploy-full`. |
 | `-TMDL` | `te save <model> -o <dir> --format tmdl` | TMDL is the default save format. |
 | `-D` / `-DEPLOY` | `te deploy <server> <database> <model>` | Separate command with named options. |
 | `-O` / `-OVERWRITE` | (default) or `--create-only` to opt out | Overwrite is the default in the new CLI. |
@@ -81,30 +81,30 @@ A non-exhaustive summary of the most commonly used flags. Run `te migrate` for t
 | `-W` / `-WARN` | (default) | Warnings always reported in deploy results. |
 | `-E` / `-ERR` | (default) | Deploy returns non-zero exit on DAX errors. |
 | `-SC` / `-SCHEMACHECK` | *Not yet implemented.* | TE2 schema check connects to actual data sources. Different from `te validate` (DAX semantic validation, no data source connection). |
-| `-L` / `-LOGIN <user> <pass>` (after `-D`) | `te auth login -u <id> -p <secret> -t <tenant>` | Use service principal or env-based credentials. The login is cached, so subsequent commands acquire tokens silently — see @te-cli-auth. |
+| `-L` / `-LOGIN <user> <pass>` (after `-D`) | `te auth login -u <id> -p <secret> -t <tenant>` | Use service principal or env-based credentials. The login is cached, so subsequent commands acquire tokens silently - see @te-cli-auth. |
 
 ## Migration playbook
 
 The recommended path from a TE2-based pipeline to the new CLI:
 
-1. **Drop-in replacement.** Replace `TabularEditor.exe` with `te` (or `te2`) in your existing pipeline. Verify the pipeline still runs — TE2 compatibility handles most invocations unchanged.
+1. **Drop-in replacement.** Replace `TabularEditor.exe` with `te` (or `te2`) in your existing pipeline. Verify the pipeline still runs - TE2 compatibility handles most invocations unchanged.
 2. **Replace flags incrementally.** Convert one flag group at a time:
    - Start with `-A` / `-AX` → `te bpa run` to pick up richer BPA output (`--fail-on`, `--fix`, `--trx`).
    - Then `-D` → `te deploy` for fine-grained deploy control.
    - Finally `-V` / `-G` → `--ci vsts` / `--ci github`.
-3. **Switch to non-interactive CI flags.** Add `--non-interactive --ci <vsts|github>` to every `te` command and remove any `start /wait` wrappers — the new CLI is a regular console binary and doesn't need them.
+3. **Switch to non-interactive CI flags.** Add `--non-interactive --ci <vsts|github>` to every `te` command and remove any `start /wait` wrappers - the new CLI is a regular console binary and doesn't need them.
 4. **Adopt service principal auth.** Replace `-D -L <user> <pass>` with `te auth login -u ... -p ... -t ...` or an environment-credential pipeline step. See @te-cli-auth.
 
 ## Differences worth knowing
 
 - **BPA gate on deploy.** `te deploy` now runs BPA as a pre-flight gate by default. Use `--skip-bpa` to preserve the old behavior, or `--fix-bpa` to auto-fix violations before deploy. See @te-cli-config.
 - **Interactive confirmation on deploy.** `te deploy` prompts for confirmation by default (with `n` as the safe default answer). CI pipelines must pass `--force`.
-- **Structured output.** Every command supports `--output json` for machine-readable output — see @te-cli-automation.
+- **Structured output.** Every command supports `--output json` for machine-readable output - see @te-cli-automation.
 - **No `start /wait` needed.** The new CLI is a regular console binary; invoke it directly in shell scripts, PowerShell, and CI tasks.
 - **Cross-platform.** The CLI runs on Windows, macOS, and Linux. Local SSAS and Power BI Desktop connections remain Windows-only.
 
 ## Related pages
 
-- @command-line-options — the legacy TE2 command-line reference.
-- @te-cli-commands — the new CLI's full command reference.
-- @te-cli-cicd — pipeline examples for GitHub Actions and Azure DevOps.
+- @command-line-options - the legacy TE2 command-line reference.
+- @te-cli-commands - the new CLI's full command reference.
+- @te-cli-cicd - pipeline examples for GitHub Actions and Azure DevOps.
