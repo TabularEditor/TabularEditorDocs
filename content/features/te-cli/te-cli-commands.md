@@ -127,7 +127,8 @@ These flags are available on every command and sit before or after the subcomman
 | `-d, --database <name>` | Semantic model name on the workspace. |
 | `--local` | Connect to a locally running Power BI Desktop instance (Windows only). |
 | `--auth <method>` | Auth method: `auto`, `interactive`, `spn`, `env`, `managed-identity` (default: `auto`). |
-| `--output <format>` | Output format: `auto`, `text`, `json`, `csv`, `tmsl` (alias `bim`), `tmdl` (default: `auto` - text for TTY, JSON for pipes). `tmsl`/`tmdl` are accepted by `te get` and `te ls` for whole-object serialization. |
+| `--output-format <format>` | Stdout format: `text` (default), `json`, `csv`, `tmsl` (alias `bim`), `tmdl`. `csv` is honored by commands that emit tabular data; `tmsl`/`tmdl` only by `te get` and `te ls` for whole-object serialization. Commands reject formats they don't support. |
+| `--error-format <format>` | Stderr format for errors, warnings, and hints: `text` (default) or `json`. Other values fall back to text. Independent of `--output-format`, so you can pair JSON stdout with plain-text errors (or vice versa). |
 | `--recent [N]` | Use a recently used model. No value = interactive picker; `N` = Nth most recent (1 = last used). |
 | `--non-interactive` | Disable all interactive prompts. Fail with an actionable error if required input is missing. |
 | `--debug` | Enable debug logging to stderr (connection strings, auth flow, timing). |
@@ -151,7 +152,7 @@ te load -s MyWorkspace -d MyModel          # Remote workspace
 Save a model to disk. Use it to write a remote workspace model to local files, convert formats, or persist edits back to the source.
 
 - `-o, --output-path <path>` - target file or folder. **Optional** - when omitted, `te save` writes back to the source location, preserving the original format.
-- `--format <fmt>` - `tmdl`, `bim`, `te-folder`, `pbip`, `database.json`. Defaults to inferring from the loaded model (BIM source → BIM, TMDL `SemanticModel/` → TMDL under `definition/`).
+- `--serialization <fmt>` - `tmdl`, `bim`, `te-folder`, `pbip`, `database.json`. Defaults to inferring from the loaded model (BIM source → BIM, TMDL `SemanticModel/` → TMDL under `definition/`).
 - `--force` - skip validation and overwrite existing output. Some refusals (ambiguous containers, multi-`SemanticModel` project roots) fire even under `--force`.
 - `--skip-bpa` / `--fix-bpa` - bypass or auto-fix the BPA gate.
 - `--bpa-rules <path>` - repeatable; override `bpa.rules` from your CLI config for this single save. Built-in rules still apply unless `bpa.builtInRules` is `false`.
@@ -161,7 +162,7 @@ Save a model to disk. Use it to write a remote workspace model to local files, c
 ```bash
 te save                                    # Save back to source (no -o needed)
 te save ./model.bim -o ./tmdl-out          # Convert BIM to TMDL
-te save -o ./project --format pbip         # Save as a PBIP project
+te save -o ./project --serialization pbip         # Save as a PBIP project
 te save -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
 ```
 
@@ -261,7 +262,7 @@ List objects with filesystem-like navigation. Takes a `<path-filter>` argument s
 - `--type <kind>` - narrow to one object kind (`table`, `measure`, `column`, `hierarchy`, `partition`, `relationship`, `role`, `perspective`, `culture`). With no `<path-filter>` this is equivalent to typing the matching container keyword.
 - `--paths-only` - emit one object path per line, suitable for piping to `xargs`, `te get`, or `te set`.
 - `--no-multiline` - collapse multi-line cells (typically DAX or M expressions) to a single line and truncate, so rows stay scannable in wide tables. Text output only; JSON/CSV/TMSL output is unaffected.
-- `--output tmsl` (alias `bim`) - emit the matching objects as a TMSL/BIM script. Useful for `te ls Tables --output bim > tables.json`. `--output tmdl` is not supported by `ls` (TMDL is single-object only - use `te get`).
+- `--output-format tmsl` (alias `bim`) - emit the matching objects as a TMSL/BIM script. Useful for `te ls Tables --output-format bim > tables.json`. `--output-format tmdl` is not supported by `ls` (TMDL is single-object only - use `te get`).
 
 ```bash
 te ls                                     # All tables in the model
@@ -276,7 +277,7 @@ te ls "'Net Sales'/'Sales Amount'"        # Quote names containing spaces
 te ls Measures --paths-only               # One Table/Measure per line for piping
 te ls --type measure                      # Same as `te ls Measures`
 te ls Measures --no-multiline             # Wide table with column dividers, single-line DAX
-te ls Tables --output bim > tables.json   # All tables emitted as TMSL/BIM
+te ls Tables --output-format bim > tables.json   # All tables emitted as TMSL/BIM
 ```
 
 ### get
@@ -285,8 +286,8 @@ Get properties of a model object. Takes a `<path>`.
 
 - `-q, --query <property>` - fetch a single property (e.g. `expression`, `formatString`).
 - `-t, --type <kind>` - disambiguate when the path matches multiple table-children (e.g. a column and a hierarchy with the same name). Values: `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `Partition`, `CalculationItem`.
-- `--output tmsl` (alias `bim`) - emit the resolved object as TMSL/BIM JSON.
-- `--output tmdl` - emit the resolved object as TMDL (named objects only).
+- `--output-format tmsl` (alias `bim`) - emit the resolved object as TMSL/BIM JSON.
+- `--output-format tmdl` - emit the resolved object as TMDL (named objects only).
 
 `te get` and `te ls` share a single descriptor catalog, so every property surfaces the same way across formats - the text table, JSON, and CSV all see the same set, and adding a new property to the model exposes it everywhere.
 
@@ -296,8 +297,8 @@ te get "'Sales'[Amount]"                         # DAX form: same as Sales/Amoun
 te get "[Total Sales]"                           # Lone-bracket: model-wide measure-or-column
 te get "'Net Sales'[Sales Amount]" -q expression # DAX form with spaced names
 te get "Sales/Revenue/KPI"                       # KPI sub-object of a measure
-te get Sales --output tmdl                       # Emit the table as TMDL
-te get Sales --output bim                        # Emit the table as TMSL/BIM
+te get Sales --output-format tmdl                       # Emit the table as TMDL
+te get Sales --output-format bim                        # Emit the table as TMSL/BIM
 te get Model -q description
 ```
 
@@ -476,7 +477,7 @@ te format --lang m --save                                  # Format M
 Execute a DAX query against a deployed model.
 
 - `-q, --query <dax>` - inline query.
-- `-f, --file <file.dax>` - query from file.
+- `--file <file.dax>` - query from file.
 - `--limit <N>` - default 100.
 - `-o, --output-file <path>` - write results to file (`.csv`, `.tsv`, `.json`, `.dax`).
 - `--trace`, `--cold`, `--plan`, `--runs <N>` - performance tracing and benchmarking.
@@ -484,7 +485,7 @@ Execute a DAX query against a deployed model.
 
 ```bash
 te query -q "EVALUATE TOPN(5, 'Sales')" -s my-ws -d my-model
-te query -f query.dax --output json
+te query --file query.dax --output-format json
 ```
 
 ### script
@@ -493,7 +494,7 @@ Execute one or more C# scripts against a semantic model. The CLI uses the same s
 
 - `-S, --script <file>` - `.cs` / `.csx` file (repeatable).
 - `-e, --expression <code>` - inline C# (use `-` for stdin).
-- `--save` / `--save-to` / `--format`.
+- `--save` / `--save-to` / `--serialization`.
 - `--dry-run`, `--timeout <seconds>`.
 
 ```bash
@@ -689,7 +690,7 @@ Reference guide showing how legacy Tabular Editor 2 CLI flags map to the new CLI
 ```bash
 te migrate                   # Full flag mapping table
 te migrate -A                # Look up a single TE2 flag
-te migrate --output json     # Machine-readable mapping
+te migrate --output-format json     # Machine-readable mapping
 ```
 
 ## Shell

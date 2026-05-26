@@ -20,23 +20,24 @@ The Tabular Editor CLI is designed as a composable building block. Every command
 
 ## Structured output
 
-Use `--output` to switch any command between text (human-readable) and machine-readable formats:
+Use `--output-format` to switch any command between text (human-readable) and machine-readable formats:
 
 | Format | Use for | Notes |
 | -- | -- | -- |
-| `auto` (default) | General use | Text for TTY, JSON when stdout is piped or redirected. |
-| `text` | Force text output | Useful when you want text in a CI log. |
-| `json` | Programmatic consumers | Always valid JSON to stdout; errors and warnings go to stderr as separate JSON objects. |
-| `csv` | Tabular results (`query`, `bpa`, `vertipaq`) | RFC 4180 escaping. |
+| `text` (default) | Human-readable use | Plain text on stdout regardless of whether the stream is a TTY or piped. |
+| `json` | Programmatic consumers | Always valid JSON to stdout. Use `--error-format json` if you also want machine-readable errors on stderr. |
+| `csv` | Tabular results (`query`, `bpa run`, `bpa rules`, `vertipaq`, `validate`, `test`, `refresh`, `profile list`, `session list`, `find`, `replace`, `get`, `ls`) | RFC 4180 escaping. |
+| `tmsl` (alias `bim`) | Whole-object TMSL/BIM serialization | Accepted by `te get` and `te ls`. |
+| `tmdl` | Whole-object TMDL serialization | Accepted by `te get` only (single object). |
 
 ```bash
-te ls --output json
-te query -q "EVALUATE VALUES('Date'[Year])" --output csv
-te bpa run --output json
+te ls --output-format json
+te query -q "EVALUATE VALUES('Date'[Year])" --output-format csv
+te bpa run --output-format json
 ```
 
-> [!TIP]
-> When stdout is piped, `auto` already emits JSON. Explicit `--output json` is only necessary when you want JSON on a TTY, or when a consumer expects it regardless of how the command is invoked.
+> [!NOTE]
+> `--output-format` and `--error-format` are independent. Setting `--output-format json` does *not* switch stderr to JSON; pass `--error-format json` for that. There is no automatic format switching when stdout is redirected - the default is always `text` unless you ask otherwise.
 
 ## Non-interactive mode
 
@@ -61,8 +62,8 @@ Combine exit codes with `--ci <vsts\|github>` annotations and `--trx <file>` to 
 Errors, warnings, and the preview banner are written to **stderr**; structured data is written to **stdout**. This means you can pipe JSON safely without it being contaminated by progress indicators or diagnostic messages:
 
 ```bash
-te ls --output json | jq '.[] | .name'
-te vertipaq --output json > stats.json
+te ls --output-format json | jq '.[] | .name'
+te vertipaq --output-format json > stats.json
 ```
 
 ## Python
@@ -79,7 +80,7 @@ def query(server: str, database: str, dax: str) -> list[dict]:
          "-s", server,
          "-d", database,
          "-q", dax,
-         "--output", "json",
+         "--output-format", "json",
          "--non-interactive"],
         check=True,
         capture_output=True,
@@ -101,7 +102,7 @@ import subprocess
 result = subprocess.run(
     ["te", "deploy", "./model",
      "-s", "Finance", "-d", "Revenue",
-     "--output", "json", "--non-interactive", "--force"],
+     "--output-format", "json", "--non-interactive", "--force"],
     capture_output=True, text=True,
 )
 
@@ -118,7 +119,7 @@ if result.returncode != 0:
 PowerShell handles JSON natively. Because `te` is a normal console binary, there is no need for the `start /wait` dance required by `TabularEditor.exe`:
 
 ```powershell
-$rows = te query -s Finance -d Revenue -q "EVALUATE TOPN(10, 'Sales')" --output json --non-interactive
+$rows = te query -s Finance -d Revenue -q "EVALUATE TOPN(10, 'Sales')" --output-format json --non-interactive
   | ConvertFrom-Json
 
 $rows | Format-Table
@@ -144,18 +145,18 @@ te deploy ./model `
 
 ## Bash
 
-Compose commands with pipes and `jq`. The CLI's text output is colorized for humans, but switching to `--output json` gives you a clean shape to work with:
+Compose commands with pipes and `jq`. The CLI's text output is colorized for humans, but switching to `--output-format json` gives you a clean shape to work with:
 
 ```bash
 # Count measures per table
-te ls --type measure --output json \
+te ls --type measure --output-format json \
   | jq -r '.[] | .table' \
   | sort | uniq -c | sort -rn
 ```
 
 ```bash
 # Fail the shell script if BPA finds any errors
-te bpa run --fail-on error --output json > bpa.json \
+te bpa run --fail-on error --output-format json > bpa.json \
   || { echo "BPA gate failed"; jq '.violations' bpa.json; exit 1; }
 ```
 

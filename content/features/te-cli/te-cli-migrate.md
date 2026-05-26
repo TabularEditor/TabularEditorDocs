@@ -45,7 +45,7 @@ Use `te migrate` as a live reference for how TE2 flags map to the new CLI. It pr
 ```bash
 te migrate                   # Full flag mapping table
 te migrate -A                # Look up a single flag
-te migrate --output json     # Machine-readable mapping
+te migrate --output-format json     # Machine-readable mapping
 ```
 
 Prefer `te migrate` over this page when you need the current mapping - it reflects the CLI version you have installed.
@@ -62,9 +62,9 @@ A non-exhaustive summary of the most commonly used flags. Run `te migrate` for t
 | `-S` / `-SCRIPT` | `te script -s <file.csx>` or `-e "code"` | Supports multiple scripts, inline code, and stdin. |
 | `-A` / `-ANALYZE` | `te bpa run --rules <file-or-url>` | Supports `--fail-on`, `--fix`, multiple rule files. |
 | `-AX` / `-ANALYZEX` | `te bpa run --rules <file>` (without `--model-rules`) | Excluding model-embedded rules is the new default. |
-| `-B` / `-BIM` | `te save <model> -o <file.bim> --format bim` | |
-| `-F` / `-FOLDER` | `te save <model> -o <dir> --format te-folder` | After `-D`, TE2's `-F` means `-FULL` - see `--deploy-full`. |
-| `-TMDL` | `te save <model> -o <dir> --format tmdl` | TMDL is the default save format. |
+| `-B` / `-BIM` | `te save <model> -o <file.bim> --serialization bim` | |
+| `-F` / `-FOLDER` | `te save <model> -o <dir> --serialization te-folder` | After `-D`, TE2's `-F` means `-FULL` - see `--deploy-full`. |
+| `-TMDL` | `te save <model> -o <dir> --serialization tmdl` | TMDL is the default save format. |
 | `-D` / `-DEPLOY` | `te deploy <server> <database> <model>` | Separate command with named options. |
 | `-O` / `-OVERWRITE` | (default) or `--create-only` to opt out | Overwrite is the default in the new CLI. |
 | `-C` / `-CONNECTIONS` | `te deploy --deploy-connections` | |
@@ -99,7 +99,7 @@ The recommended path from a TE2-based pipeline to the new CLI:
 
 - **BPA gate on deploy.** `te deploy` now runs BPA as a pre-flight gate by default. Use `--skip-bpa` to preserve the old behavior, or `--fix-bpa` to auto-fix violations before deploy. See @te-cli-config.
 - **Interactive confirmation on deploy.** `te deploy` prompts for confirmation by default (with `n` as the safe default answer). CI pipelines must pass `--force`.
-- **Structured output.** Every command supports `--output json` for machine-readable output - see @te-cli-automation.
+- **Structured output.** Every command supports `--output-format json` for machine-readable output - see @te-cli-automation.
 - **No `start /wait` needed.** The new CLI is a regular console binary; invoke it directly in shell scripts, PowerShell, and CI tasks.
 - **Cross-platform.** The CLI runs on Windows, macOS, and Linux. Local SSAS and Power BI Desktop connections remain Windows-only.
 
