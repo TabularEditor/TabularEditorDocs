@@ -51,7 +51,7 @@ See @te-cli-commands for a full command reference with syntax, options, and exam
 
 ## Getting started
 
-1. **Sign up or sign in** at [tabulareditor.com](https://tabulareditor.com) with a Tabular Editor account.
+1. **Sign up or sign in** at [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) with a Tabular Editor account.
 2. **Download and install** - see @te-cli-install for Windows, macOS, and Linux instructions.
 3. **Authenticate** - run `te auth login` to connect to Power BI or Fabric. See @te-cli-auth.
 4. **Run your first command** - `te --help` lists every command; `te <command> --help` shows detailed options.
