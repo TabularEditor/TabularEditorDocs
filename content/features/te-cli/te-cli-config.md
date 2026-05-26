@@ -65,6 +65,9 @@ Unknown keys fail with exit code `1` and an error that lists the valid keys.
 
 If no config file exists, `te config set` auto-creates one at the resolved path (`$TE_CONFIG` if set, otherwise `~/.config/te/config.json`) before applying the change.
 
+> [!NOTE]
+> Not every schema key is settable via `te config set`. The settable keys are: `macros`, `autoFormat`, `validateOnMutation`, `vertipaqOnRefresh`, `spinner`, `debug`, `hidePreviewNotice`, `interactiveEditMode`, `disableTelemetry`, and the `bpa.*` keys (`rules`, `onMutation`, `onDeploy`, `onSave`, `builtInRules`, `disabledBuiltInRuleIds`). The remaining keys - `te3ExePath`, `queryLog`, and `formatOptions.*` - must be edited directly in the JSON config file. Run `te config paths` to find it.
+
 ## Full schema
 
 ```json
@@ -95,6 +98,7 @@ If no config file exists, `te config set` auto-creates one at the resolved path 
   "hidePreviewNotice": false,
   "spinner": true,
   "debug": false,
+  "disableTelemetry": false,
 
   "queryLog": null,
   "te3ExePath": null,
@@ -109,18 +113,18 @@ If no config file exists, `te config set` auto-creates one at the resolved path 
 | -- | -- |
 | `macros` | Explicit path to a macros JSON file (typically `MacroActions.json`). Resolved by `te macro` commands. |
 | `bpa.rules` | Ordered list of BPA rule files / URLs the gate loads. The gate uses every existing entry. Comma-separated values on `te config set bpa.rules ...` are split into the array. |
-| `te3ExePath` | Explicit path to the TE3 desktop executable (`TabularEditor.exe`). Used **only** by `te open`; safe to leave unset on Linux/macOS or when you don't use `te open`. |
+| `te3ExePath` | Explicit path to the TE3 desktop executable (`TabularEditor.exe`). Used **only** by `te open`; safe to leave unset on Linux/macOS or when you don't use `te open`. Edit JSON directly to set. |
+| `queryLog` | Path to a log file where every `te query` invocation appends its query text and execution metadata. Supports `~` for the home directory (e.g., `~/.config/te/queries.log`). Edit JSON directly to set. |
 
 ### Path resolution priority
 
 For each user-provided file (macros, BPA rules), the CLI resolves the path in this order:
 
 1. **Command-line flag** - `--macros <path>` for macro commands; `--bpa-rules <path>` for the deploy/save gate; `--rules-file <path>` for `te bpa rules` subcommands.
-2. **Environment variable** - `TE_MACROS_PATH` for macros, `TE_BPA_PATH` for BPA rules.
+2. **Environment variable** - `TE_MACROS_PATH` for macros, `TE_BPA_RULES` for BPA rules.
 3. **CLI config** - `macros` for macros, the first existing entry of `bpa.rules[]` for BPA rules.
-4. **Working-directory fallback** - `./MacroActions.json` for `te macro init`, `./BPARules.json` for `te bpa rules init`.
 
-The CLI does not auto-detect any TE3 install location - configure these explicitly or use the `init` commands.
+The CLI does not auto-detect any TE3 install location - configure these explicitly. To start from a default file in the current working directory, run `te macro init` (creates `./MacroActions.json`) or `te bpa rules init` (creates `./BPARules.json`).
 
 Run `te config paths` to see which file the CLI actually resolved.
 
@@ -138,6 +142,8 @@ All BPA-related settings live under the `bpa` object and are addressed via dotte
 | `bpa.builtInRules` | `true` | Include the built-in BPA rule set whenever the gate runs. |
 | `bpa.disabledBuiltInRuleIds` | `null` | IDs of individual built-in rules to exclude from the gate. Mutated by `te bpa rules disable` / `te bpa rules enable`. |
 | `vertipaqOnRefresh` | `false` | Capture VertiPaq stats after a successful refresh. |
+| `interactiveEditMode` | `stage` | Default behavior for in-memory mutations inside `te interactive`. Values: `stage` (keep mutations in memory until `save`), `save` (write to source after every mutating command), `revert` (discard mutations unless `--save` or `--stage` was passed). Per-command `--save` / `--revert` / `--stage` flags override. |
+| `disableTelemetry` | `false` | Disable anonymous usage telemetry. Set to `true` to opt out. |
 
 ```bash
 te config set bpa.rules "/etc/te/team.json,/etc/te/strict.json"
@@ -145,12 +151,6 @@ te config set bpa.onDeploy true
 te config set bpa.builtInRules false
 te config set bpa.disabledBuiltInRuleIds "TE3_BUILT_IN_DATE_TABLE_EXISTS,TE3_BUILT_IN_HIDE_FOREIGN_KEYS"
 ```
-
-### Other schema keys
-
-`formatVersion` is set by the CLI when writing the file and is **not** user-settable via `te config set`. The CLI refuses to load a file whose `formatVersion` is higher than the build understands, so an older CLI cannot silently clobber a newer config.
-
-`interactiveEditMode` comes from the interactive-staging feature (`stage` / `save` / `revert`); it can be set via `te config set interactiveEditMode <mode>` and is documented in that feature's release notes.
 
 ### Format options
 
@@ -223,14 +223,20 @@ Disable a check with `te config set <key> false`, or scope the relaxation to a s
 
 ## Environment variables
 
+CLI-specific environment variables for paths, behavior, and diagnostics. For Azure authentication variables (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_CERTIFICATE_PATH`, etc.), see @te-cli-auth.
+
 | Variable | Purpose |
 | -- | -- |
 | `TE_CONFIG` | Path to an alternative config file. Honored by every `te config` operation (`show`, `set`, `init`, `paths`). |
+| `TE_MACROS_PATH` | Override the macros file path (second in resolution order - see above). Read by `te macro` commands. |
+| `TE_BPA_RULES` | Override the BPA rules file/URL list used by `te bpa run` and `te bpa rules` subcommands. |
+| `TE_BPA_CONFIG` | Override the path to the BPA gate config (`.te-bpa.json`) the deploy/save gate reads. |
+| `TE3_EXE_PATH` | Path to the Tabular Editor 3 desktop binary. Used **only** by `te open`; safe to leave unset on Linux/macOS or when you don't use `te open`. Falls back to `PATH` lookup. |
 | `TE_DEBUG` | Set to `1` to enable debug logging globally (same as `--debug` or `debug: true` in config). |
+| `NO_SPINNER` | Set to `1` or `true` to disable animated progress indicators (alternative to `spinner: false` in config). |
+| `CI` | Auto-detected. When `1` or `true`, the CLI disables the spinner and switches to plain output. Most CI runners set this automatically. |
+| `TE_SESSION` | Override the per-terminal session ID used for active-connection state. Useful for running multiple isolated CLI sessions inside the same shell, e.g. in parallel CI matrix jobs. |
 | `TE_COMPAT` | Set to `te2` to force TE2-compatibility mode - see @te-cli-migrate. |
-| `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_TENANT_ID` | Service principal credentials, used by `--auth env`. |
-| `TE_MACROS_PATH` | Per-invocation override for the macros file path (second in resolution order - see above). |
-| `TE_BPA_PATH` | Per-invocation override for the BPA rules file path used by `te bpa rules` subcommands. |
 
 ## Related pages
 

@@ -20,7 +20,7 @@ The Tabular Editor CLI ships as a single self-contained executable named `te` (`
 
 ## Download
 
-1. Sign in at [tabulareditor.com](https://tabulareditor.com) with a Tabular Editor account.
+1. Sign in at [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) with a Tabular Editor account.
 2. Download the archive for your platform and architecture:
 
    | Platform | 64-bit (Intel/AMD) | ARM64 | Archive |
@@ -30,8 +30,6 @@ The Tabular Editor CLI ships as a single self-contained executable named `te` (`
    | Linux | `te-linux-x64.tar.gz` | `te-linux-arm64.tar.gz` | `.tar.gz` |
 
    Pick the ARM64 build on Apple Silicon Macs (M1 and newer), Windows on ARM devices, and ARM-based Linux servers (including AWS Graviton, Azure Ampere, and Raspberry Pi 64-bit). Pick the `x64` build on everything else.
-
-<!-- TBD: replace with the official download URL once confirmed with marketing. -->
 
 ## Install
 
@@ -131,8 +129,13 @@ To update to a newer preview build, download the latest archive and overwrite th
 1. Delete the install folder.
 2. Remove the PATH entry.
 3. (Optional) Clear cached credentials and config:
-   - Windows / Linux: `~/.te-cli/`, `~/.config/te/`
-   - macOS: `~/.te-cli/token-cache.bin`, `~/.config/te/`
+   - Run `te auth logout` first - it removes all cached tokens and SPN records from the active backend (OS keystore or file fallback).
+   - Delete `~/.config/te/` (config and saved profiles).
+   - Delete `~/.te-cli/` (residual cache files; only present when the file fallback was in use, or as legacy from older CLI builds).
+   - To also purge the OS-native keystore entries - usually unnecessary, since `te auth logout` already clears them - see:
+     - **Windows:** Credential Manager → Windows Credentials → entries named `com.tabulareditor.cli...` or `te-cli`.
+     - **Linux:** `secret-tool search Component te-cli` and `secret-tool clear ...`, or use seahorse.
+     - **macOS:** Keychain Access → search for `com.tabulareditor.cli`.
 
 ## Next steps
 

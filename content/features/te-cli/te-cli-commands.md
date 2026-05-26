@@ -509,6 +509,28 @@ echo "Info(Model.Name);" | te script -e -
 > - **No interactive selection in CLI scripts.** The TE3-Desktop helpers `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, and `SelectObjects()` throw `NotSupportedException` when called from `te script` - the CLI has no UI to pop up. Pre-resolve the object(s) outside the script and pass them in, or wrap the call in `try/catch` if the script is shared with TE3.
 > - **Default `using` directives match TE3 Desktop.** Scripts that use `DataTable`, `File`, `StringBuilder`, or `Regex` must include the corresponding `using System.Data;` / `using System.IO;` / `using System.Text;` / `using System.Text.RegularExpressions;` directive explicitly. The previous wider CLI-only defaults are gone.
 
+> [!NOTE]
+> **Preprocessor symbols for cross-host scripts.** Scripts compiled by `te script` have the symbol `TECLI` defined. TE3 Desktop scripts have `TE3` defined instead, plus version-bracketed symbols like `TE3_3_10_OR_GREATER` ... `TE3_3_X_OR_GREATER` for the current TE3 minor version. TE2 defines neither symbol. Use these to write portable scripts:
+>
+> ```csharp
+> #if TECLI
+>     // CLI-only code - no UI calls
+>     Info($"Running under the CLI on {Environment.OSVersion.Platform}");
+> #elif TE3
+>     // TE3 Desktop-only code - UI APIs available
+>     ShowMessage("Hello from TE3");
+> #else
+>     // TE2 (legacy) - neither TECLI nor TE3 is defined
+>     Info("Hello from TE2");
+> #endif
+>
+> #if TE3_3_15_OR_GREATER
+>     // Gated on a specific TE3 minor version
+> #endif
+> ```
+>
+> See @csharp-scripts for the broader cross-version scripting story.
+
 ### macro
 
 Manage and run macros from a macros JSON file (typically `MacroActions.json`). The macros file is resolved in this order: `--macros <path>` → `TE_MACROS_PATH` env var → `macros` in CLI config → `./MacroActions.json`.

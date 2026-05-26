@@ -30,7 +30,8 @@ The CLI supports the full Azure Identity credential chain:
 | Environment variables | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID` | `env` |
 | Managed identity | Azure VMs, Azure Container Apps, Azure Functions | `managed-identity` |
 
-The default (`auto`) tries environment credentials first, then falls back to interactive browser.
+> [!NOTE]
+> `--auth` is a **global** option, available on every `te` command - not just `te auth login`. Pass it to `te deploy`, `te refresh`, `te query`, `te connect`, `te export`, or any other command that connects to a remote endpoint, to override the default chain for that invocation. The default (`auto`) tries environment credentials first, then falls back to the cached or interactive browser login.
 
 For headless, SSH, WSL, or devcontainer scenarios, use a service principal - `te auth login -u <id> -p <secret> -t <tenant>` (or `--certificate`). The login is cached, so subsequent commands acquire tokens silently with `--auth auto`.
 
@@ -81,15 +82,18 @@ te auth logout
 
 ## Credential storage
 
-Tokens and service-principal records are cached under your home directory. File permissions are restricted to the current user (`0600` on POSIX):
+The CLI stores access/refresh tokens and service-principal records in the **OS-native secure store** by default. A `0600` file fallback is selected automatically only when the OS keystore is unavailable (e.g., headless Linux without libsecret/D-Bus).
 
-| Platform | Location | Notes |
+| Platform | Backend | Storage location |
 | -- | -- | -- |
-| Windows | `%USERPROFILE%\.te-cli\auth-record.json`, `auth-record-spn.json` | DPAPI-encrypted via Azure.Identity |
-| Linux | `~/.te-cli/auth-record.json`, `auth-record-spn.json` | Token cache via libsecret through Azure.Identity; SP record file-mode `0600` |
-| macOS | `~/.te-cli/token-cache.bin`, `auth-record-spn.json` | File-based cache (bypasses Keychain to avoid repeated prompts); SP record file-mode `0600` |
+| Windows | DPAPI | Per-user, managed by MSAL |
+| Linux | libsecret (system keyring) | Per-user, managed by MSAL |
+| macOS | Keychain | Service `com.tabulareditor.cli.*`, account `te-msal-cache.bin` |
+| Any (fallback) | `0600` file | `~/.te-cli/te-msal-cache.bin` and per-key `.bin` blobs |
 
-Interactive browser and service-principal flows use separate record files so they can coexist. `te auth logout` clears all cached records.
+Interactive browser and service-principal flows share the same cache; MSAL's account model distinguishes them - there are no separate `auth-record*.json` sidecar files. Run any command with `--debug` to see which backend was selected at startup.
+
+`te auth logout` clears every cached record (both the MSAL token cache and any SPN blobs) regardless of which backend is in use.
 
 ## `te connect` - set the active connection
 
@@ -199,14 +203,19 @@ te deploy ./model -s my-workspace -d my-model \
 
 See @te-cli-cicd for complete GitHub Actions and Azure DevOps Pipelines examples.
 
-## Environment variable overrides
+## Authentication environment variables
+
+The CLI honors the standard Azure.Identity environment variables when you use `--auth env` (and as part of the `auto` chain):
 
 | Variable | Purpose |
 | -- | -- |
-| `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID` | Service principal credentials (used by `--auth env`). |
-| `TE_CONFIG` | Override the config file path - see @te-cli-config. |
-| `TE_COMPAT=te2` | Force TE2-compatibility mode - see @te-cli-migrate. |
-| `TE_DEBUG=1` | Enable debug logging to stderr (connection strings, auth flow, timing). |
+| `AZURE_CLIENT_ID` | Service principal application ID. |
+| `AZURE_CLIENT_SECRET` | Service principal client secret. Used together with `AZURE_CLIENT_ID` and `AZURE_TENANT_ID`. |
+| `AZURE_TENANT_ID` | Service principal tenant (directory) ID. |
+| `AZURE_CLIENT_CERTIFICATE_PATH` | Path to a PEM or PKCS12 certificate file for certificate-based service principal auth. Used together with `AZURE_CLIENT_ID` and `AZURE_TENANT_ID`. |
+| `AZURE_AUTHORITY_HOST` | Override the authority host for sovereign clouds (e.g., `login.microsoftonline.us`, `login.partner.microsoftonline.cn`, `login.microsoftonline.de`). Defaults to the commercial cloud. |
+
+For CLI-specific environment variables (config paths, debug logging, TE2 compatibility), see @te-cli-config.
 
 ## Next steps
 

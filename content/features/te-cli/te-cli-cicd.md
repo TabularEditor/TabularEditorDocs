@@ -37,7 +37,7 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 
 ## Adding the CLI to your repo
 
-During Limited Public Preview, the CLI is gated behind sign-in on [tabulareditor.com](https://tabulareditor.com), so pipelines cannot fetch the archive from a public URL. The simplest reproducible approach is to commit the binary that matches your runner into your repository and reference it from each pipeline step.
+During Limited Public Preview, the CLI is gated behind sign-in on [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli), so pipelines cannot fetch the archive from a public URL. The simplest reproducible approach is to commit the binary that matches your runner into your repository and reference it from each pipeline step.
 
 A common layout:
 
@@ -189,7 +189,7 @@ Refresh in pipelines is typically a follow-up step after deploy. Use `--non-inte
 
 ```bash
 # Full refresh of the whole model after deploy
-te refresh -s my-ws -d my-model --type full --non-interactive --ci github
+te refresh -s my-ws -d my-model --type full --non-interactive
 
 # Refresh a single fact table (e.g., daily incremental pipeline)
 te refresh -s my-ws -d my-model --table Sales --type full --non-interactive

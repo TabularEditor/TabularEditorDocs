@@ -77,8 +77,6 @@ The banner **always** reappears within 14 days of the expiry date (2026-09-30), 
 
 During Limited Public Preview, the CLI does not require a license; you only need a Tabular Editor account to download it. At general availability the CLI will require a license; pricing is still being finalized and will be announced ahead of GA.
 
-<!-- TBD: confirm exact license-outlook wording with marketing before publishing. -->
-
 ## Feedback and community
 
 During the preview, bug reports, feature requests, and general discussion happen in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository on GitHub:
@@ -98,5 +96,3 @@ The repository does not host the CLI source code; it exists to give the communit
 - @te-cli-automation - structured output, scripting patterns for Python, PowerShell, and Bash.
 - @te-cli-cicd - GitHub Actions and Azure DevOps pipeline examples.
 - @te-cli-migrate - migrating from the Tabular Editor 2 command line.
-
-<!-- TBD: add official download URL once confirmed. Blog draft says "Get it here"/"Download Tabular Editor CLI" - link not yet final. -->
