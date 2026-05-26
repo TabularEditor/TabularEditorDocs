@@ -43,14 +43,14 @@ te config init --force     # Overwrite existing config
 
 ```bash
 te config show                         # Display all settings
-te config show --output json           # Machine-readable
+te config show --output-format json           # Machine-readable
 te config paths                        # Show resolved macros and BPA rule paths
 ```
 
 `te config paths` resolves the files the CLI will actually use for macros and BPA rules - useful when debugging missing data files. The output shows two rows: `macros` (the resolved macros file path or `[not set]`) and `bpa.rules` (the first existing BPA rules file resolved by the path resolver, or `[not set]`).
 
 > [!NOTE]
-> `te config paths` emits `null` fields explicitly in `--output json` mode (e.g., `{"macros": null, "bpa": {"rules": null}}`). Reporting resolution outcomes is the command's whole purpose, so `null` is a meaningful "tried but resolved to nothing" answer. `te config show --output json` strips null fields by default, so consumers should parse it tolerantly.
+> `te config paths` emits `null` fields explicitly in `--output-format json` mode (e.g., `{"macros": null, "bpa": {"rules": null}}`). Reporting resolution outcomes is the command's whole purpose, so `null` is a meaningful "tried but resolved to nothing" answer. `te config show --output-format json` strips null fields by default, so consumers should parse it tolerantly.
 
 ## Setting values
 

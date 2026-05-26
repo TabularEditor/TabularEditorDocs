@@ -33,7 +33,7 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 - **`--force`** on mutating commands (`te deploy`, `te refresh`) skips confirmation prompts.
 - **`--ci vsts` / `--ci github`.** Emit native pipeline annotations to stderr.
 - **`--trx <file>`.** Produce VSTEST results consumable by Azure DevOps test publishing.
-- **Structured errors.** `--output json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
+- **Structured errors.** `--output-format json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
 
 ## Adding the CLI to your repo
 

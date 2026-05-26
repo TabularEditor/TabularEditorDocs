@@ -66,7 +66,7 @@ Display the current authentication state without opening a browser:
 
 ```bash
 te auth status
-te auth status --output json
+te auth status --output-format json
 ```
 
 Exit code is `0` when a valid session exists, `1` when not logged in or expired.
