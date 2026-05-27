@@ -2,7 +2,7 @@
 uid: semantic-bridge-metric-view-validation
 title: Semantic Bridge Metric View Validation
 author: Greg Baldini
-updated: 2025-01-23
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,7 +27,7 @@ There is a validation framework built into the Semantic Bridge to allow users to
 This validation is shared at every stage of the translation pipeline, from first deserializing the Metric View, through to errors in translation to DAX and Tabular.
 
 > [!NOTE]
-> The Semantic Bridge is currently in its MVP phase, so interfaces may change as the feature matures.
+> The Semantic Bridge is currently in public preview, so interfaces may change as the feature matures.
 > For now, the only interface to validation is through C# scripts.
 
 ## Validation process

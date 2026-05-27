@@ -2,7 +2,7 @@
 uid: script-add-databricks-metadata-descriptions
 title: Agregar descripciones de metadatos de Databricks
 author: Johnny Winter
-updated: 2025-09-04
+updated: 2026-04-08
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -18,9 +18,10 @@ applies_to:
 Este script se creó como parte de la serie Tabular Editor x Databricks. En Unity Catalog es posible proporcionar comentarios descriptivos para tablas y columnas. Este script puede reutilizar esta información para rellenar automáticamente las descripciones de tablas y columnas en su modelo semántico. <br></br>
 
 > [!NOTE]
-> Este script requiere tener instalado el Simba Spark ODBC Driver (descarga desde https://www.databricks.com/spark/odbc-drivers-download)
-> Cada ejecución del script solicitará al usuario un token de acceso personal de Databricks. Esto es necesario para autenticarse en Databricks.
-> El script utiliza las tablas information_schema de Unity Catalog para obtener información sobre las relaciones, así que quizá deba consultarlo con su administrador de Databricks para asegurarse de que tiene permisos para consultar estas tablas. <br></br>
+> Este script requiere un controlador ODBC de Databricks. Recomendamos el nuevo [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download), que sustituye al controlador Simba Spark ODBC Driver heredado. El script detecta automáticamente qué controlador está instalado y usa el que corresponda.
+
+Cada vez que ejecutes el script, te pedirá un token de acceso personal de Databricks. Esto es necesario para autenticarse en Databricks.
+El script utiliza las tablas information_schema de Unity Catalog para obtener información sobre las relaciones, así que quizá deba consultarlo con su administrador de Databricks para asegurarse de que tiene permisos para consultar estas tablas. <br></br>
 
 ## Script
 
@@ -33,15 +34,16 @@ Este script se creó como parte de la serie Tabular Editor x Databricks. En Unit
  *
  * Este script, al ejecutarse, recorrerá las tablas seleccionadas actualmente y enviará una consulta a Databricks para comprobar si cada tabla tiene descripciones de metadatos definidas en Unity Catalog.
  * Cuando exista una descripción, se agregará a la descripción del modelo semántico.
- * Paso 1:  Seleccione una o varias tablas en el modelo
- * Paso 2:  Ejecute este script
- * Paso 3:  Introduzca su token de acceso personal de Databricks cuando se le solicite
+ * Paso 1:  Selecciona una o varias tablas en el modelo
+ * Paso 2:  Ejecuta este script
+ * Paso 3:  Introduce tu token de acceso personal de Databricks cuando se te pida
  * Paso 4:  El script se conectará a Databricks y actualizará las descripciones de tablas y columnas cuando existan. 
- *          Para cada tabla procesada, un cuadro de mensaje mostrará el número de descripciones actualizadas.
- *          Haga clic en OK para continuar con la siguiente tabla.
+ *          Para cada tabla procesada, aparecerá un cuadro de mensaje con el número de descripciones actualizadas.
+ *          Haz clic en Aceptar para continuar con la siguiente tabla.
  * Notas:
- *  -   Este script requiere tener instalado el Simba Spark ODBC Driver (descarga desde https://www.databricks.com/spark/odbc-drivers-download)
- *  -   Cada ejecución del script solicitará al usuario un token de acceso personal de Databricks
+ *  -   Este script requiere que tengas instalado el Databricks ODBC Driver (recomendado) o el controlador heredado Simba Spark ODBC Driver (descárgalo en https://www.databricks.com/spark/odbc-drivers-download)
+ *  -   El script detecta automáticamente qué controlador está instalado
+ *  -   Cada vez que ejecutes el script, te pedirá un token de acceso personal de Databricks
  */
 #r "Microsoft.VisualBasic"
 using System;
@@ -76,7 +78,7 @@ public partial class PasswordInputForm : Form
         this.MaximizeBox = false;
         this.MinimizeBox = false;
 
-        // Etiqueta del aviso
+        // Etiqueta del mensaje
         promptLabel = new Label();
         promptLabel.Text = prompt;
         promptLabel.Location = new System.Drawing.Point(12, 15);
@@ -115,11 +117,11 @@ public partial class PasswordInputForm : Form
         cancelButton.Click += CancelButton_Click;
         this.Controls.Add(cancelButton);
 
-        // Establecer botones predeterminado y de cancelación
+        // Establecer los botones predeterminado y de cancelación
         this.AcceptButton = okButton;
         this.CancelButton = cancelButton;
 
-        // Enfocar el cuadro de texto cuando se carga el formulario
+        // Establecer el foco en el cuadro de texto al cargar el formulario
         this.Load += (s, e) => passwordTextBox.Focus();
     }
 
@@ -211,7 +213,7 @@ public static class MaskedInputHelper
     }
 }
 
-//Código para recuperar la información de conexión a Databricks desde la consulta M en una partición de tabla
+//Código para recuperar la información de conexión de Databricks desde la consulta M de una partición de tabla
 public class DatabricksConnectionInfo
 {
     public string ServerHostname { get; set; }
@@ -222,11 +224,11 @@ public class DatabricksConnectionInfo
 
     public override string ToString()
     {
-        return $"Server: {ServerHostname}\n"
-            + $"HTTP Path: {HttpPath}\n"
-            + $"Database: {DatabaseName}\n"
-            + $"Schema: {SchemaName}\n"
-            + $"Table: {TableName}";
+        return $"Servidor: {ServerHostname}\n"
+            + $"Ruta HTTP: {HttpPath}\n"
+            + $"Base de datos: {DatabaseName}\n"
+            + $"Esquema: {SchemaName}\n"
+            + $"Tabla: {TableName}";
     }
 }
 
@@ -241,16 +243,16 @@ public class PowerQueryMParser
 
         try
         {
-            // Analiza la línea Source para extraer el nombre de host del servidor y el HTTP Path
+            // Analizar la línea Source para extraer el nombre de host del servidor y la ruta HTTP
             ParseSourceLine(mQuery, connectionInfo);
 
-            // Analiza la línea Database para extraer el nombre de la base de datos
+            // Analizar la línea Database para extraer el nombre de la base de datos
             ParseDatabaseLine(mQuery, connectionInfo);
 
-            // Analiza la línea Schema para extraer el nombre del esquema
+            // Analizar la línea Schema para extraer el nombre del esquema
             ParseSchemaLine(mQuery, connectionInfo);
 
-            // Analiza la línea Data para extraer el nombre de la tabla
+            // Analizar la línea Data para extraer el nombre de la tabla
             ParseDataLine(mQuery, connectionInfo);
 
             return connectionInfo;
@@ -263,7 +265,7 @@ public class PowerQueryMParser
 
     private static void ParseSourceLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        // Patrón para hacer coincidir ambos casos:
+        // Patrón para encontrar ambas opciones:
         // Source = DatabricksMultiCloud.Catalogs("hostname", "httppath", null),
         // Source = Databricks.Catalogs("hostname", "httppath", null),
         var sourcePattern =
@@ -276,7 +278,7 @@ public class PowerQueryMParser
 
         if (!sourceMatch.Success)
             throw new FormatException(
-                "No se pudo encontrar una definición Source válida en la consulta M (admite los conectores Databricks y DatabricksMultiCloud)"
+                "No se pudo encontrar una definición válida de Source en la consulta M (admite los conectores Databricks y DatabricksMultiCloud)"
             );
 
         connectionInfo.ServerHostname = sourceMatch.Groups[1].Value;
@@ -285,7 +287,7 @@ public class PowerQueryMParser
 
     private static void ParseDatabaseLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        // Patrón para hacer coincidir: Database = Source{[Name="databasename",Kind="Database"]}[Data],
+        // Patrón para encontrar: Database = Source{[Name="databasename",Kind="Database"]}[Data],
         var databasePattern =
             @"Database\s*=\s*Source\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Database""\s*\]\s*}\s*\[\s*Data\s*\]";
         var databaseMatch = Regex.Match(
@@ -295,14 +297,14 @@ public class PowerQueryMParser
         );
 
         if (!databaseMatch.Success)
-            throw new FormatException("No se pudo encontrar una definición Database válida en la consulta M");
+            throw new FormatException("No se pudo encontrar una definición válida de Database en la consulta M");
 
         connectionInfo.DatabaseName = databaseMatch.Groups[1].Value;
     }
 
     private static void ParseSchemaLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        // Patrón para hacer coincidir: Schema = Database{[Name="schemaname",Kind="Schema"]}[Data],
+        // Patrón para encontrar: Schema = Database{[Name="schemaname",Kind="Schema"]}[Data],
         var schemaPattern =
             @"Schema\s*=\s*Database\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Schema""\s*\]\s*}\s*\[\s*Data\s*\]";
         var schemaMatch = Regex.Match(
@@ -312,14 +314,14 @@ public class PowerQueryMParser
         );
 
         if (!schemaMatch.Success)
-            throw new FormatException("No se pudo encontrar una definición Schema válida en la consulta M");
+            throw new FormatException("No se pudo encontrar una definición válida de Schema en la consulta M");
 
         connectionInfo.SchemaName = schemaMatch.Groups[1].Value;
     }
 
     private static void ParseDataLine(string mQuery, DatabricksConnectionInfo connectionInfo)
     {
-        // Patrón para hacer coincidir: Data = Schema{[Name="tablename",Kind="Table"]}[Data]
+        // Patrón para encontrar: Data = Schema{[Name="tablename",Kind="Table"]}[Data]
         var dataPattern =
             @"Data\s*=\s*Schema\s*{\s*\[\s*Name\s*=\s*""([^""]+)""\s*,\s*Kind\s*=\s*""Table""\s*\]\s*}\s*\[\s*Data\s*\]";
         var dataMatch = Regex.Match(
@@ -329,7 +331,7 @@ public class PowerQueryMParser
         );
 
         if (!dataMatch.Success)
-            throw new FormatException("No se pudo encontrar una definición Data válida en la consulta M");
+            throw new FormatException("No se pudo encontrar una definición válida de Data en la consulta M");
 
         connectionInfo.TableName = dataMatch.Groups[1].Value;
     }
@@ -340,23 +342,23 @@ public class PowerQueryMParser
 
 
 
-//comprueba que el usuario tenga una tabla seleccionada
+//comprobar que has seleccionado una tabla
 if (Selected.Tables.Count == 0)
 {
-    // alterna el indicador giratorio de 'Running Macro'
+    // alternar el indicador giratorio de 'Running Macro'
     ScriptHelper.WaitFormVisible = false;
-    Interaction.MsgBox("Seleccione una o varias tablas", MsgBoxStyle.Critical, "Se requiere una tabla");
+    Interaction.MsgBox("Selecciona una o varias tablas", MsgBoxStyle.Critical, "Se requiere una tabla");
     return;
 }
 
-//solicita el token de acceso personal: se requiere para autenticarse en Databricks
+//solicitar el token de acceso personal: necesario para autenticarse en Databricks
 string dbxPAT;
 do
 {
-    // alterna el indicador giratorio de 'Running Macro'
+    // alternar el indicador giratorio de 'Running Macro'
     ScriptHelper.WaitFormVisible = false;
     dbxPAT = MaskedInputHelper.GetMaskedInput(
-        "Introduzca su token de acceso personal de Databricks (necesario para conectarse al SQL Endpoint)",
+        "Introduce tu token de acceso personal de Databricks (necesario para conectarte al punto de conexión SQL)",
         "Token de acceso personal"
     );
 
@@ -376,32 +378,63 @@ do
     }
 } while (string.IsNullOrWhiteSpace(dbxPAT));
 
-// alterna el indicador giratorio de 'Running Macro'
+// alternar el indicador giratorio de 'Running Macro'
 ScriptHelper.WaitFormVisible = true;
 
-//para cada tabla seleccionada, obtiene la información de conexión a Databricks desde la información de la partición
+// detectar automáticamente el controlador ODBC de Databricks
+string driverPath;
+string newDriverPath = @"C:\Program Files\Databricks ODBC Driver";
+string legacyDriverPath = @"C:\Program Files\Simba Spark ODBC Driver";
+
+if (System.IO.Directory.Exists(newDriverPath))
+{
+    driverPath = newDriverPath;
+}
+else if (System.IO.Directory.Exists(legacyDriverPath))
+{
+    driverPath = legacyDriverPath;
+}
+else
+{
+    ScriptHelper.WaitFormVisible = false;
+    Interaction.MsgBox(
+        @"No se encontró ningún controlador ODBC de Databricks.
+
+Instala Databricks ODBC Driver desde:
+https://www.databricks.com/spark/odbc-drivers-download
+
+Rutas de instalación esperadas:
+  " + newDriverPath + @"
+  " + legacyDriverPath,
+        MsgBoxStyle.Critical,
+        "No se encontró el controlador ODBC"
+    );
+    return;
+}
+
+//para cada tabla seleccionada, obtener la información de conexión de Databricks de la información de la partición
 foreach (var t in Selected.Tables)
 {
     string mQuery = t.Partitions[t.Name].Expression;
     var connectionInfo = PowerQueryMParser.ParseMQuery(mQuery);
     var columnDescriptions = 0;
     var tableDescriptions = 0;
-    // Accede a componentes individuales
+    // Acceder a los componentes individuales
     string serverHostname = connectionInfo.ServerHostname;
     string httpPath = connectionInfo.HttpPath;
     string databaseName = connectionInfo.DatabaseName;
     string schemaName = connectionInfo.SchemaName;
     string tableName = connectionInfo.TableName;
-    //establece la cadena de conexión a DBX
+    //establecer la cadena de conexión DBX
     var odbcConnStr =
-        @"DSN=Simba Spark;driver=C:\Program Files\Simba Spark ODBC Driver;host="
+        @"Driver=" + driverPath + ";Host="
         + serverHostname
-        + ";port=443;httppath="
+        + ";Port=443;HTTPPath="
         + httpPath
-        + ";thrifttransport=2;ssl=1;authmech=3;uid=token;pwd="
+        + ";SSL=1;ThriftTransport=2;AuthMech=3;UID=token;PWD="
         + dbxPAT;
 
-    //prueba la conexión
+    //probar la conexión
     OdbcConnection conn = new OdbcConnection(odbcConnStr);
     try
     {
@@ -409,34 +442,32 @@ foreach (var t in Selected.Tables)
     }
     catch
     {
-        // alterna el indicador giratorio de 'Running Macro'
+        // alternar el indicador giratorio de 'Running Macro'
         ScriptHelper.WaitFormVisible = false;
         Interaction.MsgBox(
-            @"Conexión fallida
+            @"Error de conexión (con el controlador: " + driverPath + @")
 
-Compruebe los siguientes requisitos previos:
+Comprueba los siguientes requisitos previos:
     
-- debe tener instalado el Simba Spark ODBC Driver 
-(descarga desde https://www.databricks.com/spark/odbc-drivers-download)
+- debes tener instalado Databricks ODBC Driver 
+(descárgalo en https://www.databricks.com/spark/odbc-drivers-download)
 
-- el controlador ODBC debe estar instalado en la ruta C:\Program Files\Simba Spark ODBC Driver
-
-- compruebe que el nombre del servidor de Databricks "
+- comprueba que el nombre del servidor de Databricks "
                 + serverHostname
-                + @" es correcto
+                + @" sea correcto
 
-- compruebe que el SQL endpoint / HTTP Path de Databricks "
+- comprueba que el punto de conexión SQL / ruta HTTP de Databricks "
                 + httpPath
-                + @" es correcto
+                + @" sea correcto
 
-- compruebe que ha utilizado un token de acceso personal válido",
+- comprueba que has usado un token de acceso personal válido",
             MsgBoxStyle.Critical,
             "Error de conexión"
         );
         return;
     }
 
-    //obtiene metadatos de la tabla
+    //obtener los metadatos de la tabla
     var tableQuery =
         "SELECT comment FROM "
         + databaseName
@@ -454,12 +485,12 @@ Compruebe los siguientes requisitos previos:
     }
     catch
     {
-        // alterna el indicador giratorio de 'Running Macro'
+        // alternar el indicador giratorio de 'Running Macro'
         ScriptHelper.WaitFormVisible = false;
         Interaction.MsgBox(
-            @"Conexión fallida
+            @"Error de conexión
 
-O bien: 
+Posibles causas: 
     - la tabla "
                 + schemaName
                 + "."
@@ -467,11 +498,11 @@ O bien:
                 + " no existe"
                 + @"
     
-    - no tiene permisos para consultar esta tabla
+    - no tienes permisos para consultar esta tabla
     
-    - la conexión agotó el tiempo de espera. Compruebe que el clúster del SQL Endpoint esté en ejecución",
+    - se agotó el tiempo de espera de la conexión. Comprueba que el clúster del punto de conexión SQL esté en ejecución",
             MsgBoxStyle.Critical,
-            "Error de conexión: metadatos de tabla"
+            "Error de conexión: metadatos de la tabla"
         );
         return;
     }
@@ -481,11 +512,11 @@ O bien:
         if (t.Description != row["comment"].ToString())
         {
             t.Description = row["comment"].ToString();
-            tableUpdate = t.Name + " descripción de la tabla actualizada.";
+            tableUpdate = "Se actualizó la descripción de la tabla " + t.Name + ".";
         }
     }
 
-    //obtiene metadatos de las columnas
+    //obtener metadatos de columnas
     var columnsQuery = @"DESCRIBE " + databaseName + "." + schemaName + "." + tableName;
     OdbcDataAdapter da = new OdbcDataAdapter(columnsQuery, conn);
     var dbxColumns = new sysData.DataTable();
@@ -496,12 +527,12 @@ O bien:
     }
     catch
     {
-        // alterna el indicador giratorio de 'Running Macro'
+        // alternar el indicador giratorio de 'Running Macro'
         ScriptHelper.WaitFormVisible = false;
         Interaction.MsgBox(
-            @"Conexión fallida
+            @"Error de conexión
 
-O bien: 
+Posibles causas: 
     - la tabla "
                 + schemaName
                 + "."
@@ -509,16 +540,16 @@ O bien:
                 + " no existe"
                 + @"
     
-    - no tiene permisos para consultar esta tabla
+    - no tienes permisos para consultar esta tabla
     
-    - la conexión agotó el tiempo de espera. Compruebe que el clúster del SQL Endpoint esté en ejecución",
+    - se agotó el tiempo de espera de la conexión. Comprueba que el clúster del punto de conexión SQL esté en ejecución",
             MsgBoxStyle.Critical,
             "Error de conexión: metadatos de columnas"
         );
         return;
     }
 
-    //actualiza las descripciones de columnas
+    //actualizar descripciones de columnas
     int counter = 0;
     foreach (sysData.DataRow row in dbxColumns.Rows)
     {
@@ -551,10 +582,10 @@ O bien:
     {
         msg = counter + " descripciones actualizadas en " + t.Name;
     }
-    // alterna el indicador giratorio de 'Running Macro'
+    // alternar el indicador giratorio de 'Running Macro'
     ScriptHelper.WaitFormVisible = false;
     Interaction.MsgBox(msg, MsgBoxStyle.Information, "Actualizar descripciones de metadatos");
-    // alterna el indicador giratorio de 'Running Macro'
+    // alternar el indicador giratorio de 'Running Macro'
     ScriptHelper.WaitFormVisible = true;
     conn.Close();
 }
@@ -562,7 +593,7 @@ O bien:
 
 ### Explicación
 
-El script usa WinForms para solicitar un token de acceso personal de Databricks, que se utiliza para autenticarse en Databricks. Para cada tabla seleccionada, el script recupera la información de la cadena de conexión de Databricks, así como el nombre del esquema y de la tabla, a partir de la consulta M en la partición de la tabla seleccionada. A continuación, mediante el controlador Spark ODBC, envía a Databricks una consulta SQL que consulta las tablas information_schema para devolver la descripción de la tabla definida en Unity Catalog. A continuación, se actualiza la descripción de la tabla en el modelo semántico. También se envía a la tabla seleccionada una segunda consulta SQL con el comando DESCRIBE para obtener las descripciones de las columnas. Los resultados se recorren en un bucle y se añaden descripciones al modelo. Una vez que el script se ha ejecutado en cada tabla seleccionada, se muestra un cuadro de diálogo con el número de descripciones actualizadas.
+El script usa WinForms para solicitar un token de acceso personal de Databricks, que se utiliza para autenticarse en Databricks. Detecta automáticamente si está instalado el nuevo Databricks ODBC Driver o el controlador heredado Simba Spark ODBC Driver. Para cada tabla seleccionada, el script recupera la información de la cadena de conexión de Databricks, así como el nombre del esquema y de la tabla, a partir de la consulta M en la partición de la tabla seleccionada. A continuación, con el controlador ODBC detectado, envía a Databricks una consulta SQL que interroga las tablas information_schema para obtener la descripción de la tabla definida en Unity Catalog. A continuación, se actualiza la descripción de la tabla en el modelo semántico. También se envía a la tabla seleccionada una segunda consulta SQL con el comando DESCRIBE para obtener las descripciones de las columnas. Los resultados se recorren en un bucle y se añaden descripciones al modelo. Una vez que el script se ha ejecutado en cada tabla seleccionada, se muestra un cuadro de diálogo con el número de descripciones actualizadas.
 
 ## Salida de ejemplo
 

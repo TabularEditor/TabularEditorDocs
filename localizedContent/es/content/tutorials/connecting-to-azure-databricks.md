@@ -2,7 +2,7 @@
 uid: connecting-to-azure-databricks
 title: Conexión a Azure Databricks
 author: David Bojsen
-updated: 2025-08-05
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -29,10 +29,27 @@ Antes de empezar, asegúrate de tener lo siguiente:
 - Un Workspace válido de Azure Databricks
 - Permisos adecuados para acceder a los datos de Databricks
 - Tabular Editor 3 (edición Desktop, Business o Edición Enterprise)
+- El [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download) instalado en tu equipo
+
+> [!IMPORTANT]
+> Databricks ha lanzado un nuevo controlador ODBC que sustituye al Simba Spark ODBC Driver heredado. Te recomendamos instalar el nuevo [Databricks ODBC Driver](https://www.databricks.com/spark/odbc-drivers-download). Tabular Editor 3.26.0 y versiones posteriores admiten ambos controladores, pero el nuevo controlador es la opción recomendada en adelante. El controlador heredado de Simba está disponible en el [archivo de controladores ODBC de Databricks](https://www.databricks.com/spark/odbc-drivers-archive#simba_odbc).
+
+## Implementación del conector
+
+Tabular Editor usa la función `Databricks.Catalogs()` de Power Query para conectarse a Databricks. Esta función admite dos implementaciones del conector:
+
+- **Implementación 2,0 (ADBC):** Usa el controlador [Arrow Database Connectivity](https://learn.microsoft.com/en-us/power-query/connectors/databricks#arrow-database-connectivity-driver-connector-implementation-preview). Es la opción predeterminada en Tabular Editor 3.26.1 y versiones posteriores, y coincide con la opción predeterminada de Power BI Desktop. Los Workspaces de Databricks más recientes requieren esta implementación.
+- **Implementación 1,0 (heredada):** La implementación original del conector. Sigue funcionando en Workspaces antiguos de Databricks, pero falla en los más recientes con un error de catálogo vacío.
+
+> [!NOTE]
+> No es necesario instalar el controlador ADBC en la máquina donde se ejecuta Tabular Editor. Solo se requiere el controlador ODBC de Databricks.
+
+> [!IMPORTANT]
+> Si tienes consultas M existentes creadas con Tabular Editor 3.26.0 o una versión anterior, usan la implementación heredada (`null` como tercer parámetro de `Databricks.Catalogs()`). Si encuentras errores de actualización en un Workspace de Databricks más reciente, actualiza estas consultas para que usen la implementación 2,0. Consulta [Error de actualización de Databricks con catálogo vacío](xref:databricks-refresh-empty-catalog) para ver instrucciones paso a paso.
 
 ## Métodos de autenticación
 
-Al conectarte a Azure Databricks, tienes dos métodos principales de autenticación:
+Al conectarte a Azure Databricks, puedes usar varios métodos de autenticación:
 
 ### 1. Autenticación de Microsoft Entra ID (antes Azure AD)
 
@@ -139,6 +156,28 @@ Si la integración con Microsoft Entra ID no está disponible o si prefieres la 
    - Pega tu token en el campo **Token**
    - En HTTP Path, especifica la ruta a tu clúster de Databricks (p. ej., `/sql/1.0/warehouses/<warehouse-id>`)
 
+### 3) Autenticación OAuth de máquina a máquina (M2M)
+
+A partir de Tabular Editor 3.26.1, puedes autenticarte con una entidad de servicio de Databricks mediante el flujo OAuth de máquina a máquina (M2M). Esto resulta útil en escenarios desatendidos, como actualizaciones programadas o canalizaciones de CI/CD, donde no quieres que la conexión quede vinculada a las credenciales de un usuario concreto. OAuth (M2M) está disponible en todas las nubes de Databricks (Azure, AWS y GCP).
+
+#### Requisitos previos
+
+- Una entidad de servicio de Databricks con permisos **Can Use** en el SQL Warehouse de destino
+- Un **Client ID** y un **Client Secret** de OAuth para la entidad de servicio, generados en la consola de la cuenta de Databricks o en la configuración del Workspace
+
+#### Pasos para la autenticación OAuth (M2M):
+
+1. En Tabular Editor 3, ve a **Model** > **Import tables...**
+2. Selecciona **New Source** > **Databricks**
+3. En el cuadro de diálogo de conexión:
+   - Escribe la URL de tu Workspace de Databricks
+   - Selecciona **OAuth (M2M)** como método de autenticación
+   - Introduce el **Client ID** y el **Client Secret** del principal de servicio
+   - En HTTP Path, especifica la ruta a tu SQL Warehouse (p. ej., `/sql/1.0/warehouses/<warehouse-id>`)
+
+> [!NOTE]
+> El controlador ODBC de Databricks gestiona automáticamente la obtención y la renovación del token de OAuth; no se requiere ninguna configuración adicional en Tabular Editor.
+
 ## Cómo encontrar tu HTTP Path
 
 El parámetro HTTP Path es esencial para conectarte a tu Databricks SQL Warehouse. Para encontrar este valor:
@@ -167,10 +206,15 @@ Una vez que hayas configurado la conexión:
 Si tienes problemas para conectarte a Azure Databricks:
 
 - Comprueba que la URL de tu Workspace sea correcta y accesible
-- Asegúrate de que tu token de acceso personal, Personal Access Token, no haya caducado (si usas la autenticación PAT)
+- Asegúrate de que tu Personal Access Token no haya caducado (si usas la autenticación PAT)
 - Comprueba que tu cuenta de usuario tiene los permisos necesarios en Databricks
 - Comprueba que la ruta HTTP apunte a un SQL Warehouse activo
 - Asegúrate de que tu red permita conexiones al servicio de Databricks
+
+### Guías de solución de problemas específicas de Databricks
+
+- [La actualización de Databricks falla con el error de catálogo vacío](xref:databricks-refresh-empty-catalog) -- la actualización falla tras importar desde un Workspace de Databricks más reciente
+- [Error de longitud en los comentarios de columnas de Databricks](xref:databricks-column-comments-length) -- la importación falla cuando los comentarios de las columnas superan los 512 caracteres
 
 ### Solución de problemas de autenticación de Microsoft Entra ID
 
@@ -210,4 +254,3 @@ Para actualizar el esquema:
 3. Revisa los cambios detectados y aplícalos según sea necesario
 
 Para consultas complejas o si tienes problemas con la detección del esquema, considera habilitar la opción **Usar Analysis Services para la detección de cambios** en **Herramientas** > **Preferencias** > **Comparación de esquemas**, tal como se describe en la documentación [Actualización del esquema de la tabla](xref:importing-tables#updating-table-schema-through-analysis-services).
-

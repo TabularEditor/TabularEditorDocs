@@ -2,7 +2,7 @@
 uid: semantic-bridge-validate-default
 title: Validar una vista de métricas con las reglas predeterminadas
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,21 +26,21 @@ Esta guía muestra cómo validar una vista de métricas cargada con las reglas d
 
 El Semantic Bridge incluye estas reglas de validación integradas:
 
-| Regla                      | Descripción                                                                                                              |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| JoinNameRequired           | La unión de la vista de métricas debe tener un nombre                                                                    |
-| UniqueJoinName             | Los nombres de las uniones de la vista de métricas deben ser únicos                                                      |
-| JoinSourceRequired         | La unión de la vista de métricas debe tener un origen                                                                    |
-| JoinOnOrUsingRequired      | La unión de la vista de métricas debe especificar `on` o `using`                                                         |
-| JoinOnOrUsingExclusivity   | Una unión de Metric View no puede especificar simultáneamente `on` y `using`                                             |
-| JoinOnFormat               | La cláusula `on` de la unión de Metric View debe ser una expresión de equiunión válida                                   |
-| JoinUsingColumnCOUNT       | La cláusula `using` de la unión de Metric View debe tener exactamente una columna (limitación de MVP) |
-| DimensionNameRequired      | La dimensión de Metric View debe tener un nombre                                                                         |
-| UniqueDimensionName        | Los nombres de las dimensiones de Metric View deben ser únicos                                                           |
-| DimensionExprRequired      | La dimensión de Metric View debe tener una expresión                                                                     |
-| NombreDeMedidaRequerido    | La medida de Metric View debe tener un nombre                                                                            |
-| NombreDeMedidaUnico        | Los nombres de las medidas de Metric View deben ser únicos                                                               |
-| ExpresionDeMedidaRequerida | La medida de Metric View debe tener una expresión                                                                        |
+| Regla                      | Descripción                                                                                                                            |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| JoinNameRequired           | La unión de la vista de métricas debe tener un nombre                                                                                  |
+| UniqueJoinName             | Los nombres de las uniones de la vista de métricas deben ser únicos                                                                    |
+| JoinSourceRequired         | La unión de la vista de métricas debe tener un origen                                                                                  |
+| JoinOnOrUsingRequired      | La unión de la vista de métricas debe especificar `on` o `using`                                                                       |
+| JoinOnOrUsingExclusivity   | Una unión de Metric View no puede especificar simultáneamente `on` y `using`                                                           |
+| JoinOnFormat               | La cláusula `on` de la unión de Metric View debe ser una expresión de equiunión válida                                                 |
+| JoinUsingColumnCOUNT       | La cláusula `using` del Metric View Join debe tener exactamente una columna (limitación de la vista previa pública) |
+| DimensionNameRequired      | La dimensión de Metric View debe tener un nombre                                                                                       |
+| UniqueDimensionName        | Los nombres de las dimensiones de Metric View deben ser únicos                                                                         |
+| DimensionExprRequired      | La dimensión de Metric View debe tener una expresión                                                                                   |
+| NombreDeMedidaRequerido    | La medida de Metric View debe tener un nombre                                                                                          |
+| NombreDeMedidaUnico        | Los nombres de las medidas de Metric View deben ser únicos                                                                             |
+| ExpresionDeMedidaRequerida | La medida de Metric View debe tener una expresión                                                                                      |
 
 ## Ejecutar la validación con las reglas predeterminadas
 

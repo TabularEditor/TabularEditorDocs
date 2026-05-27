@@ -22,7 +22,18 @@ applies_to:
 模型的 **兼容级别** 决定你可以使用哪些 Tabular Object Model (TOM) 功能。 当 Microsoft 引入自定义日历或 DAX 用户定义函数等新功能时，这些功能通常需要在较新的兼容级别下才会开放。 你需要先升级，这些功能才会出现在 Tabular Editor 中。
 
 > [!WARNING]
-> 兼容级别升级是单向的。 你可以升级，但无法可靠地降级。 将其视为一次架构升级，并先验证你的部署目标。
+> 兼容级别升级是不可逆的。 你可以升级，但无法可靠地降级。 将其视为一次架构升级，并先验证你的部署目标。
+
+## 兼容级别与兼容模式
+
+兼容级别和兼容模式是两个独立的属性，用途不同：
+
+| 属性                            | 控制内容                            | 值                                              |
+| ----------------------------- | ------------------------------- | ---------------------------------------------- |
+| `Database.CompatibilityLevel` | 可用的 TOM 功能（例如自定义日历、DAX UDF 等）   | `1200`、`1500`、`1600`、`1701`、`1702` 等。          |
+| `Database.CompatibilityMode`  | 模型面向的平台、可用的 TOM 对象和属性，以及适用的版本限制 | `Unknown`、`AnalysisServices`、`PowerBI`、`Excel` |
+
+如果你需要更改目标平台，而不是解锁新的 TOM 功能，请参阅[更改兼容模式](xref:change-compatibility-mode)。
 
 ## 何时升级
 
@@ -43,7 +54,7 @@ applies_to:
 
 ### 确认目标端支持情况
 
-不同平台（SSAS、Azure Analysis Services、Fabric/Power BI Premium）对兼容级别的支持情况不同。 如果你的部署目标不支持所选级别，将无法部署。 参阅 [Analysis Services 中表格模型的兼容级别](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
+不同平台（SSAS、Azure Analysis Services、Fabric/Power BI Premium）对兼容级别的支持情况不同。 如果你的部署目标不支持所选级别，将无法部署。 请参阅 [Analysis Services 中表格模型的兼容级别](https://learn.microsoft.com/en-us/analysis-services/tabular-models/compatibility-level-for-tabular-models-in-analysis-services)
 
 ## 更新兼容级别
 
@@ -77,7 +88,7 @@ applies_to:
 - **DAX UDFs：** 1702+
 
 > [!NOTE]
-> 随着平台演进，某些功能所需的最低级别可能会发生变化。 始终在最新文档中核对前置条件。 部分级别/功能仅适用于 Power BI，在 SSAS/AAS 上可能不可用。
+> 随着平台演进，某些功能所需的最低级别可能会发生变化。 始终在最新文档中核对前置条件。 某些级别/功能仅适用于 Power BI，在 SSAS/AAS 上可能不可用。
 
 ### 保存
 

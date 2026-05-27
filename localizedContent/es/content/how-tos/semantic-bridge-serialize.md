@@ -2,7 +2,7 @@
 uid: semantic-bridge-serialize
 title: Serializar una Metric View en formato YAML
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-04-17
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,7 +23,7 @@ applies_to:
 Este procedimiento explica cómo volver a serializar una Metric View al formato YAML, ya sea como una cadena o guardándola en un archivo.
 
 > [!WARNING]
-> El MVP solo admite propiedades de Metric View v0.1. Cualquier metadato v1.1 presente en una Metric View cargada se omite sin avisar y se perderá al serializar.
+> La vista previa pública solo admite las propiedades de Metric View v0.1. Cualquier metadato v1.1 presente en una Metric View cargada se omite sin avisar y se perderá al serializar.
 > No sobrescriba un archivo YAML de origen que contenga metadatos v1.1.
 
 [!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]

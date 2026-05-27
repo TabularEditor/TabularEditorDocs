@@ -6,7 +6,7 @@ updated: 2023-10-18
 applies_to:
   products:
     - product: Tabular Editor 2
-      none: true
+      full: true
     - product: Tabular Editor 3
       editions:
         - edition: Desktop
