@@ -25,7 +25,7 @@ Use `--output-format` to switch any command between text (human-readable) and ma
 | Format | Use for | Notes |
 | -- | -- | -- |
 | `text` (default) | Human-readable use | Plain text on stdout regardless of whether the stream is a TTY or piped. |
-| `json` | Programmatic consumers | Always valid JSON to stdout. Use `--error-format json` if you also want machine-readable errors on stderr. |
+| `json` | Machine-readable use | Always valid JSON to stdout. Use `--error-format json` if you also want machine-readable errors on stderr. |
 | `csv` | Tabular results (`query`, `bpa run`, `bpa rules`, `vertipaq`, `validate`, `test`, `refresh`, `profile list`, `session list`, `find`, `replace`, `get`, `ls`) | RFC 4180 escaping. |
 | `tmsl` (alias `bim`) | Whole-object TMSL/BIM serialization | Accepted by `te get` and `te ls`. |
 | `tmdl` | Whole-object TMDL serialization | Accepted by `te get` only (single object). |
@@ -49,6 +49,8 @@ te deploy ./model --non-interactive --force --ci github
 
 ## Exit codes
 
+Every `te` command exits with a predictable status code so callers can branch on success or failure without parsing stdout.
+
 | Exit | Meaning |
 | -- | -- |
 | `0` | Success. |
@@ -68,7 +70,7 @@ te vertipaq --output-format json > stats.json
 
 ## Python
 
-Invoke the CLI from Python with `subprocess.run`, request JSON, and parse stdout:
+Python is a natural host for orchestrating CLI calls from data pipelines, notebooks, or test harnesses. Invoke `te` with `subprocess.run`, request JSON, and parse stdout:
 
 ```python
 import json
