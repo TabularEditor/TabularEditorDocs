@@ -49,7 +49,7 @@ Empty input and `.` both mean "the model root" - the implicit starting point for
 
 ### Quoting
 
-Bare segments cover the common case. When a name contains spaces, slashes, brackets, or any character that would otherwise be parsed as syntax, **quote** the segment. The CLI follows DAX quoting conventions, so quoting in `te` paths matches what you'd type inside a DAX expression:
+Most segment names work as-is. **Quote** a segment when its name contains spaces, slashes, brackets, or any character that would otherwise be parsed as syntax. The CLI follows DAX quoting conventions, so quoting in `te` paths matches what you'd type inside a DAX expression:
 
 | Form | Use for | Escape rule |
 | -- | -- | -- |

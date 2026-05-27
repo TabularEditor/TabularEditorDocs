@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2026-03-19
+updated: 2026-05-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,6 +15,8 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
+    - product: Tabular Editor CLI
+      full: true
 ---
 # C# Scripts
 
@@ -366,17 +368,26 @@ Info($"Configured model for {environment} environment");
 <a name="compatibility"></a>
 ## Compatibility
 
-The scripting APIs for Tabular Editor 2 and Tabular Editor 3 are mostly compatible, however, there are cases where you want to conditionally compile code depending on which version you're using. For this, you can use preprocessor directives, which were introduced in Tabular Editor 3.10.0.
+The scripting APIs for Tabular Editor 2, Tabular Editor 3 (Desktop), and the Tabular Editor CLI are mostly compatible, but there are cases where you want to conditionally compile code depending on which host is running. The CLI host defines a `TECLI` preprocessor symbol; TE3 Desktop defines `TE3` (and version-bracketed symbols like `TE3_3_15_OR_GREATER` for the active minor); TE2 defines neither. Preprocessor directives were introduced in Tabular Editor 3.10.0. Use them to write portable scripts:
 
 ```csharp
-#if TE3
-    // This code will only be compiled when the script is running in TE3 (version 3.10.0 or newer).
-    Info("Hello from TE3!");
+#if TECLI
+    // CLI host - no UI APIs available
+    Info($"Running under the CLI on {Environment.OSVersion.Platform}");
+#elif TE3
+    // TE3 Desktop - UI APIs are available
+    ShowMessage("Hello from TE3");
 #else
-    // This code will be compiled in all other cases.
-    Info("Hello from TE2!");
+    // TE2 (legacy) - neither TECLI nor TE3 is defined
+    Info("Hello from TE2");
+#endif
+
+#if TE3_3_15_OR_GREATER
+    // Gated on a specific TE3 minor version
 #endif
 ```
+
+One CLI-specific caveat: the TE3-Desktop UI helpers `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, and `SelectObjects()` throw `NotSupportedException` under `te script` since the CLI has no UI to pop up. Wrap such calls in `#if TE3` (or `try/catch`) when sharing scripts across hosts.
 
 If you need to know the exact version of Tabular Editor at script runtime, you can inspect the assembly version:
 
