@@ -188,7 +188,7 @@ The AI Assistant has access to your model context and can perform the following 
 
 - **Model exploration**: Query model metadata including tables, columns, measures, relationships and their properties
 - **DAX query writing**: Generate DAX queries and execute them against your connected model, returning result sets directly in the chat
-- **C# script generation**: Create C# scripts for model modifications that open in a new editor window. When you click **Execute** in the chat, the [preview changes](xref:csharp-scripts#running-scripts-with-preview) dialog is shown by default, letting you review all model metadata changes before accepting them. You can also open the script in the editor and run it from the script toolbar, with or without the preview. Model metadata changes can be undone with **Ctrl+Z**
+- **C# script generation**: Create C# scripts for model modifications that open in a new editor window. When you click **Execute** in the chat, the [preview changes](xref:csharp-scripts#run-c-scripts-with-preview) dialog is shown by default, letting you review all model metadata changes before accepting them. You can also open the script in the editor and run it from the script toolbar, with or without the preview. Model metadata changes can be undone with **Ctrl+Z**
 - **Best Practice Analyzer**: Run BPA analysis, view rule violations and create or modify BPA rules
 - **VertiPaq Analyzer**: Query memory usage statistics and column cardinality
 - **Document access**: Read and modify open documents such as DAX scripts and DAX queries
