@@ -19,7 +19,7 @@ applies_to:
 The Tabular Editor CLI is designed for unattended execution in continuous integration and delivery pipelines. A single binary, structured output, non-interactive mode, native CI annotations for GitHub Actions and Azure DevOps, and VSTEST-compatible test results make it a natural replacement for ad-hoc TE2 invocations.
 
 > [!WARNING]
-> **Do not use the CLI in production pipelines during Limited Public Preview.** Two concrete reasons bite pipeline owners:
+> **Do not use the CLI in production pipelines during Limited Public Preview.** Two preview-specific risks apply to pipeline owners:
 >
 > - **Hard expiry.** The preview binary stops functioning on **2026-09-30** - any pipeline depending on it will fail on that date, regardless of your release calendar.
 > - **No backwards-compatibility guarantee.** Commands, flags, output shapes, and exit codes may change between preview builds, so pipeline steps may need updating when you refresh the vendored binary.
