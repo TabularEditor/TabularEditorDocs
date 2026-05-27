@@ -53,12 +53,6 @@ The CLI runs C# scripts (`te script`) against the same `Model` object you use in
 | -- | -- |
 | **`te validate` cannot auto-fix Code Action violations** | `te validate` reports Code Action violations but offers no CLI flag to apply the suggested fix. Apply the fix in Tabular Editor 3, or use `te bpa run --fix` for the subset of Code Actions that overlap with BPA rules. |
 
-## DAX Formatting
-
-| Limitation | Notes / Workaround |
-| -- | -- |
-| **DAX Formatter is offline only** | The CLI ships only the built-in offline formatter - there are no calls to the daxformatter.com web service. This applies to both [`te format`](xref:te-cli-commands#format) and the `FormatDax` / `CallDaxFormatter` script helpers. Output may differ subtly from the online service. |
-
 ## Model I/O
 
 | Limitation | Notes / Workaround |
