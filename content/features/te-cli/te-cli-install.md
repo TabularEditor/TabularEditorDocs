@@ -118,7 +118,8 @@ Most features are identical across platforms. A handful depend on Windows-only t
 | Connect to local SSAS instance (TCP transport) | Yes | No |
 | Connect to Power BI Desktop (named-pipe transport) | Yes | No |
 
-Local SSAS and Power BI Desktop connections rely on Windows-only transport protocols. All cloud-based workflows (Power BI Service, Fabric, Azure Analysis Services) work on every platform.
+> [!IMPORTANT]
+> Local SSAS and Power BI Desktop connections rely on Windows-only transport protocols. All cloud-based workflows (Power BI Service, Fabric, Azure Analysis Services) work on every platform.
 
 ## Updating
 
