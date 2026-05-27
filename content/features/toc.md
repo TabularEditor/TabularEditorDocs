@@ -62,7 +62,6 @@
 ## @refresh-overrides
 
 # Command Line and Integration
-## @command-line-options
 ## Tabular Editor CLI (Limited PuPr)
 ### [Overview](xref:te-cli)
 ### [Installation and Setup](xref:te-cli-install)
@@ -74,6 +73,7 @@
 ### [CI/CD Integration](xref:te-cli-cicd)
 ### [Migrating from TE2 CLI](xref:te-cli-migrate)
 ### [Known Limitations](xref:te-cli-limitations)
+## @command-line-options
 
 # Semantic Bridge for cross-platform translations
 ## @semantic-bridge

@@ -71,7 +71,8 @@ Every command prints a yellow preview banner on stderr by default. To quiet it d
 te config set hidePreviewNotice true
 ```
 
-The banner **always** reappears within 14 days of the expiry date (2026-09-30), regardless of this setting, to give you a clear runway to update.
+> [!WARNING]
+> The banner reappears on every command within **14 days of expiry** (2026-09-30), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
 
 ## License outlook
 
