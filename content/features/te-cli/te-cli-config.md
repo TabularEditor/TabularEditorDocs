@@ -43,7 +43,7 @@ te config init --force     # Overwrite existing config
 
 ```bash
 te config show                         # Display all settings
-te config show --output-format json           # Machine-readable
+te config show --output-format json    # Machine-readable
 te config paths                        # Show resolved macros and BPA rule paths
 ```
 
@@ -66,7 +66,7 @@ Unknown keys fail with exit code `1` and an error that lists the valid keys.
 If no config file exists, `te config set` auto-creates one at the resolved path (`$TE_CONFIG` if set, otherwise `~/.config/te/config.json`) before applying the change.
 
 > [!NOTE]
-> Not every schema key is settable via `te config set`. The settable keys are: `macros`, `autoFormat`, `validateOnMutation`, `vertipaqOnRefresh`, `spinner`, `debug`, `hidePreviewNotice`, `interactiveEditMode`, `disableTelemetry`, and the `bpa.*` keys (`rules`, `onMutation`, `onDeploy`, `onSave`, `builtInRules`, `disabledBuiltInRuleIds`). The remaining keys - `te3ExePath`, `queryLog`, and `formatOptions.*` - must be edited directly in the JSON config file. Run `te config paths` to find it.
+> Every key in the schema is settable via `te config set`, including nested keys via dotted paths (`bpa.onDeploy`, `formatOptions.useSqlBiDaxFormatter`, etc.). The only exception is `formatVersion`, which the CLI manages automatically. Run `te config paths` to find the config file if you'd rather edit the JSON directly.
 
 ## Full schema
 
@@ -92,7 +92,8 @@ If no config file exists, `te config set` auto-creates one at the resolved path 
   "formatOptions": {
     "useSemicolons": false,
     "shortFormat": false,
-    "skipSpaceAfterFunction": false
+    "skipSpaceAfterFunction": false,
+    "useSqlBiDaxFormatter": false
   },
 
   "hidePreviewNotice": false,
@@ -111,10 +112,10 @@ If no config file exists, `te config set` auto-creates one at the resolved path 
 
 | Key | Meaning |
 | -- | -- |
-| `macros` | Explicit path to a macros JSON file (typically `MacroActions.json`). Resolved by `te macro` commands. |
-| `bpa.rules` | Ordered list of BPA rule files / URLs the gate loads. The gate uses every existing entry. Comma-separated values on `te config set bpa.rules ...` are split into the array. |
-| `te3ExePath` | Explicit path to the TE3 desktop executable (`TabularEditor.exe`). Used **only** by `te open`; safe to leave unset on Linux/macOS or when you don't use `te open`. Edit JSON directly to set. |
-| `queryLog` | Path to a log file where every `te query` invocation appends its query text and execution metadata. Supports `~` for the home directory (e.g., `~/.config/te/queries.log`). Edit JSON directly to set. |
+| `macros` | Explicit path to a macros JSON file (typically `MacroActions.json`). Resolved by every `te macro` command. Point at a shared file (network share, repo-local, or even the TE3 desktop file) to reuse the same set of macros across machines and between the CLI and TE3 Desktop. |
+| `bpa.rules` | Ordered list of paths or URLs to BPA rule files. The deploy/save gate loads **every** existing entry; `te bpa rules list` and `te config paths` use the first existing entry. Comma-separated values on `te config set bpa.rules ...` are split into the array. |
+| `te3ExePath` | Explicit path to the Tabular Editor 3 Desktop executable (`TabularEditor.exe`). Used **only** by `te open` to launch the desktop app; safe to leave unset on Linux/macOS or when you don't use `te open`. If unset, `te open` falls back to a `PATH` lookup. |
+| `queryLog` | Path to a log file where every `te query` invocation appends its query text and execution metadata. Useful for audit trails or analyzing query patterns over time. Supports `~` for the home directory (e.g., `~/.config/te/queries.log`). |
 
 ### Path resolution priority
 
@@ -134,16 +135,16 @@ All BPA-related settings live under the `bpa` object and are addressed via dotte
 
 | Key | Default | Description |
 | -- | -- | -- |
-| `autoFormat` | `false` | Run DAX Formatter on modified expressions after `te add` / `te set` / `te mv` / `te macro run`. |
-| `validateOnMutation` | `true` | Validate `Table[Column]` references after any mutating command. |
-| `bpa.onMutation` | `false` | Run BPA after mutating commands (`set`, `add`, `mv`, `rm`, `macro run`). |
-| `bpa.onDeploy` | `true` | Run BPA as a gate before `te deploy`. Bypass with `--skip-bpa`. |
-| `bpa.onSave` | `true` | Run BPA as a gate before `te save`. Bypass with `--skip-bpa` or `--force`. |
-| `bpa.builtInRules` | `true` | Include the built-in BPA rule set whenever the gate runs. |
-| `bpa.disabledBuiltInRuleIds` | `null` | IDs of individual built-in rules to exclude from the gate. Mutated by `te bpa rules disable` / `te bpa rules enable`. |
-| `vertipaqOnRefresh` | `false` | Capture VertiPaq stats after a successful refresh. |
-| `interactiveEditMode` | `stage` | Default behavior for in-memory mutations inside `te interactive`. Values: `stage` (keep mutations in memory until `save`), `save` (write to source after every mutating command), `revert` (discard mutations unless `--save` or `--stage` was passed). Per-command `--save` / `--revert` / `--stage` flags override. |
-| `disableTelemetry` | `false` | Disable anonymous usage telemetry. Set to `true` to opt out. |
+| `autoFormat` | `false` | Run the DAX Formatter on modified expressions after `te add` / `te set` / `te mv` / `te macro run`. Uses the in-house formatter by default; opt into the SQL BI web service via `formatOptions.useSqlBiDaxFormatter`. |
+| `validateOnMutation` | `true` | After a mutating command (`add`, `set`, `mv`, `replace --save`, `macro run`), check that every `Table[Column]` reference in the model still resolves. Catches dangling references introduced by renames or removals before they reach deploy. |
+| `bpa.onMutation` | `false` | Run a scoped BPA analysis after each mutating command (`set`, `add`, `mv`, `rm`, `macro run`). Only the affected table's objects are checked, not the whole model - useful for fast feedback during iterative edits. |
+| `bpa.onDeploy` | `true` | Run the BPA gate before `te deploy` executes. The deploy is aborted if any rule fires at severity ≥ error. Bypass per-invocation with `--skip-bpa`, or auto-fix with `--fix-bpa`. |
+| `bpa.onSave` | `true` | Run the BPA gate before `te save -o` writes to disk. Bypass per-invocation with `--skip-bpa` or `--force`. |
+| `bpa.builtInRules` | `true` | Include the curated built-in BPA rule set whenever the gate runs. Set to `false` to ignore built-ins entirely; the gate then runs only the rules configured via `bpa.rules` and any model-embedded rules. |
+| `bpa.disabledBuiltInRuleIds` | `null` | IDs of individual built-in rules to exclude from the gate. Mutated by `te bpa rules disable <id>` / `te bpa rules enable <id>` - prefer those over editing the array directly. |
+| `vertipaqOnRefresh` | `false` | After a successful refresh (`full`, `dataonly`, `automatic`, or `add`), automatically run VertiPaq analysis to show storage stats for the refreshed tables. Useful for catching unexpected cardinality or memory regressions immediately. |
+| `interactiveEditMode` | `stage` | Default behavior for in-memory mutations inside `te interactive`. `stage` keeps mutations in memory until `save` is invoked (safest); `save` writes to source after every mutating command (use with care on remote sources - every `set` triggers an XMLA write); `revert` discards mutations after each command unless `--save` or `--stage` was passed. Per-command `--save` / `--revert` / `--stage` flags always override. |
+| `disableTelemetry` | `false` | Opt out of anonymous usage telemetry. The CLI collects coarse-grained command usage data (command name, exit code, duration) to inform feature priority - never model content, paths, or query text. |
 
 ```bash
 te config set bpa.rules "/etc/te/team.json,/etc/te/strict.json"
@@ -154,13 +155,14 @@ te config set bpa.disabledBuiltInRuleIds "TE3_BUILT_IN_DATE_TABLE_EXISTS,TE3_BUI
 
 ### Format options
 
-Applied whenever the CLI invokes the DAX Formatter (for `te format` and, when enabled, `autoFormat` on mutations).
+Applied whenever the CLI invokes a DAX formatter (for `te format` and, when enabled, `autoFormat` on mutations). The CLI ships with an in-house formatter that works fully offline; opt into the SQL BI [daxformatter.com](https://www.daxformatter.com) web service via `formatOptions.useSqlBiDaxFormatter` if you need that style or want to match the desktop UI's "Send to SQL BI" behavior.
 
 | Key | Default | Description |
 | -- | -- | -- |
-| `formatOptions.useSemicolons` | `false` | Use `;` as the list separator (European locale). |
-| `formatOptions.shortFormat` | `false` | Use the compact layout variant. |
-| `formatOptions.skipSpaceAfterFunction` | `false` | Omit the space between a function name and its opening parenthesis. |
+| `formatOptions.useSemicolons` | `false` | Use `;` as the list separator (European/EU locale convention). The default `,` matches the en-US locale. |
+| `formatOptions.shortFormat` | `false` | Prefer short, single-line formatting where possible instead of the default multi-line layout. |
+| `formatOptions.skipSpaceAfterFunction` | `false` | Omit the space between a function name and its opening parenthesis (e.g. `SUM(x)` instead of `SUM (x)`). |
+| `formatOptions.useSqlBiDaxFormatter` | `false` | Format DAX via the [SQL BI daxformatter.com](https://www.daxformatter.com) web service instead of the in-house formatter. Requires internet access. The in-house formatter (default) works offline and matches the Tabular Editor 3 Desktop default. |
 
 ### Display
 
