@@ -63,9 +63,15 @@ te auth login
 te ls -s MyWorkspace -d MyModel
 ```
 
+![Tabular Editor CLI te ls example output](~/content/assets/images/features/cli/cli-command-ls.png)
+
 ## Preview notice
 
-Every command prints a yellow preview banner on stderr by default. To quiet it down:
+Every command prints a yellow preview banner on stderr by default:
+
+![Tabular Editor CLI preview notice banner](~/content/assets/images/features/cli/cli-preview-notice.png)
+
+To quiet it down:
 
 ```bash
 te config set hidePreviewNotice true
