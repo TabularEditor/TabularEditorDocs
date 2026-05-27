@@ -144,6 +144,7 @@ Pass an XMLA endpoint, workspace name, or `powerbi://` URL as `--server`:
 
 ```bash
 te connect "powerbi://api.powerbi.com/v1.0/myorg/Finance" "Revenue Model"
+te connect "powerbi://api.powerbi.com/v1.0/SpaceParts/Finance" "Revenue Model"
 te connect "asazure://westeurope.asazure.windows.net/myaas" "MyModel"
 te connect localhost "AdventureWorks"
 ```
