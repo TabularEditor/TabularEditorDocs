@@ -16,19 +16,19 @@ applies_to:
 
 The Tabular Editor CLI (`te`) is a cross-platform command-line interface for Power BI and Analysis Services semantic models. It runs on Windows, macOS, and Linux as a single self-contained executable and wraps the same model engine (TOMWrapper) that powers Tabular Editor 3.
 
-Use it to inspect, edit, validate, deploy, refresh, and test semantic models from a terminal - against local TMDL or BIM files, Power BI Desktop, or semantic models in Fabric and Power BI Service workspaces.
+With the Tabular Editor CLI you can inspect, edit, validate, deploy, refresh, and test semantic models from a terminal - against local TMDL or BIM files, Power BI Desktop, or semantic models in Fabric and Power BI Service workspaces.
+
+Unlike the Windows-only `TabularEditor.exe` command-line options (TE2) - which were designed primarily to automate C# scripts and macros from a desktop binary - `te` is a purpose-built, cross-platform CLI with structured output, predictable exit codes, and an interactive shell. That unlocks scenarios the existing tooling can't cover well: terminal-driven model work on macOS and Linux, AI agents driving model changes directly, and clean drop-in for any modern CI runner.
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
 ## Built for three audiences
 
-The CLI was designed to serve three consumers from the same binary:
+Three design pillars run through every command: **structured output** (JSON, CSV, TMDL, TMSL alongside default human-readable text), a global **`--non-interactive`** mode that disables prompts and fails fast, and **clear errors** written to stderr with predictable exit codes. Together they make the same binary work well for three very different audiences:
 
 - **Humans** - scripting bulk edits, exploring a model from the terminal, composing commands in shell pipelines.
-- **AI agents** - token-lean structured output, predictable exit codes, machine-parseable errors.
-- **CI/CD pipelines** - non-interactive mode, GitHub Actions and Azure DevOps annotations, VSTEST-compatible test results.
-
-The same design choices - structured JSON output, a `--non-interactive` global flag, clear errors - serve all three.
+- **AI agents** - token-lean JSON, machine-parseable error shapes, exit codes that signal success or failure without parsing stdout.
+- **CI/CD pipelines** - non-interactive execution, GitHub Actions and Azure DevOps annotations, VSTEST-compatible test results.
 
 ## What the CLI can do
 

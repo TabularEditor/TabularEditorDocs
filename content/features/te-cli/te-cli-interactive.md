@@ -18,6 +18,7 @@ applies_to:
 
 Interactive mode is a guided REPL (read-eval-print loop) for exploring a model from the terminal. It's the gentlest on-ramp for users who are new to command lines, and a convenient workspace for ad-hoc sessions against a single model.
 
+
 ## Starting a session
 
 ```bash
@@ -28,11 +29,9 @@ te interactive -s MyWorkspace -d MyModel    # Start with a remote model
 
 The session prints a welcome banner, shows the active model, and drops you at a model-aware prompt:
 
-```
-te [MyModel]>
-```
+![Tabular Editor CLI interactive mode session](~/content/assets/images/features/cli/cli-interactive-mode.png)
 
-If no model is set, the prompt is just `te>` - use `connect <path>` or `connect <workspace> <model>` inside the session to bind one.
+If no model is set, the prompt is just `te>` - use bare `connect` for connection picker, `connect <path>` or `connect <workspace> <model>` to bind one.
 
 ## Commands inside the session
 

@@ -24,7 +24,7 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 > - **Hard expiry.** The preview binary stops functioning on **2026-09-30** - any pipeline depending on it will fail on that date, regardless of your release calendar.
 > - **No backwards-compatibility guarantee.** Commands, flags, output shapes, and exit codes may change between preview builds, so pipeline steps may need updating when you refresh the vendored binary.
 >
-> Build and evaluate in non-production pipelines, and share feedback so the GA shape matches your needs.
+> Build and evaluate in non-production pipelines, and share feedback in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository so the GA shape matches your needs.
 
 ## What makes the CLI CI-friendly
 
