@@ -16,10 +16,12 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-Interactive mode is a guided REPL (read-eval-print loop) for exploring a model from the terminal. It's the gentlest on-ramp for users who are new to command lines, and a convenient workspace for ad-hoc sessions against a single model.
+Interactive mode is a guided read-eval-print loop (REPL) for exploring a model from the terminal. It's the gentlest on-ramp for users who are new to command lines, and a convenient workspace for ad-hoc sessions against a single model.
 
 
 ## Starting a session
+
+To Start a session run any of these commands:
 
 ```bash
 te interactive                              # Start and connect to a model later
@@ -27,40 +29,40 @@ te interactive ./model                      # Start with a local model
 te interactive -s MyWorkspace -d MyModel    # Start with a remote model
 ```
 
-The session prints a welcome banner, shows the active model, and drops you at a model-aware prompt:
+The session prints a welcome banner, shows the active model, and opens you at a model-aware prompt:
 
 ![Tabular Editor CLI interactive mode session](~/content/assets/images/features/cli/cli-interactive-mode.png)
 
-If no model is set, the prompt is just `te>` - use bare `connect` for connection picker, `connect <path>` or `connect <workspace> <model>` to bind one.
+If no model is set, the prompt is just `te>` - simply use `connect` for connection picker, `connect <path>` or `connect <workspace> <model>` to connect to one.
 
 ## Commands inside the session
 
-Every `te` subcommand is available **without the `te` prefix**:
+Once a REPL has started, every `te` subcommand is available **without the `te` prefix**:
 
 ```
-te [MyModel]> ls tables
-te [MyModel]> get "Sales/Revenue" -q expression
-te [MyModel]> query -q "EVALUATE TOPN(5, 'Sales')"
-te [MyModel]> bpa run --fail-on error
+ls tables
+get "Sales/Revenue" -q expression
+query -q "EVALUATE TOPN(5, 'Sales')"
+bpa run --fail-on error
 ```
 
 Each command accepts `--help` the same way it does outside the session:
 
 ```
-te [MyModel]> deploy --help
+deploy --help
 ```
 
 ## Quoting and DAX-style paths
 
-The REPL line splitter recognises the same quoting forms as [object paths](xref:te-cli-commands#object-paths) so DAX-shaped references survive the trip through the parser as a single argument:
+The REPL line splitter recognises the same quoting forms as [object paths](xref:te-cli-commands#object-paths) so DAX-shaped references are interpreted as a single argument:
 
 - `'...'` and `"..."` - single- and double-quoted segments. The quote characters are stripped, doubled quotes escape a literal occurrence.
 - `[...]` - bracketed segment. **Brackets are preserved** in the resulting argument so a path like `'Internet Sales'[Sales Amount]` reaches the command as one token that the path parser can re-interpret as a DAX reference. Doubled closing brackets (`]]`) stay verbatim for the same reason.
 
 ```
-te [MyModel]> get 'Internet Sales'[Sales Amount]   # One argument, DAX form
-te [MyModel]> get [Total Sales]                    # Lone-bracket model-wide lookup
-te [MyModel]> ls 'Net Sales'/'Sales Amount'        # Quoted segments with a slash separator
+get 'Internet Sales'[Sales Amount]   # One argument, DAX form
+get [Total Sales]                    # Lone-bracket model-wide lookup
+ls 'Net Sales'/'Sales Amount'        # Quoted segments with a slash separator
 ```
 
 Unterminated groups absorb to end of line, so a stray opening quote or bracket fails with an explicit error rather than splitting silently.

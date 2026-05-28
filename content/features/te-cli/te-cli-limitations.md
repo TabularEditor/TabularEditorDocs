@@ -16,26 +16,26 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-This page lists known limitations of the Tabular Editor CLI (`te`) so you can plan around them and avoid common pitfalls. It is updated with each release; if you hit something that is not listed here, please file an issue in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository.
+This page lists known limitations of the Tabular Editor CLI (`te`) so you can plan around them and avoid common pitfalls. It is updated with each release; if you find an issue that is not listed here, please file it in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository.
 
 > [!NOTE]
-> Limitations are grouped by area. Each entry describes the constraint and - where one exists - a workaround or the recommended CLI-friendly alternative.
+> Limitations are grouped by area. Each entry describes the constraint and, where one exists, a workaround or the recommended CLI-friendly alternative.
 
 ## Scripting
 
-The CLI runs C# scripts (`te script`) against the same `Model` object you use in Tabular Editor 2 and 3, but it is a headless console host. Anything that depends on a Windows Forms UI, on the TOM Explorer selection, or on a live UI-side service (macro registry, online DAX Formatter, live VertiPaq Analyzer) behaves differently - usually by being empty, no-op, or throwing.
+The CLI runs C# scripts (`te script`) against the same `Model` object you use in Tabular Editor 2 and 3, but it is a headless console host. Anything that depends on a Windows Forms UI, on the TOM Explorer selection, or on a live UI-side service (macro registry, online DAX Formatter, live VertiPaq Analyzer) behaves differently - usually by being empty, no-op, or returning an error.
 
 | Limitation | Notes / Workaround |
 | -- | -- |
 | **`System.Windows.Forms` not loaded** | The CLI uses a cross-platform `TOMWrapper` build that strips all WinForms-coupled code; the WinForms assembly is never loaded into the AppDomain. Scripts that reference `System.Windows.Forms` types (`MessageBox`, `Form`, file pickers, custom dialogs, …) fail to compile. Refactor any UI interaction into script arguments, environment variables, or stdin. |
 | **`Selected.<Plural>` returns an empty enumerable** | `Selected.Tables`, `Selected.Measures`, `Selected.Columns`, `Selected.Hierarchies`, etc. iterate to nothing in the CLI - no compile or runtime error, just no rows. Replace with explicit lookups: `Model.AllMeasures.Where(...)`, `Model.Tables["Sales"].Measures`, or pass object paths via `te script --args`. |
-| **`Selected.<Singular>` throws at runtime** | `Selected.Table`, `Selected.Measure`, `Selected.Column`, `Selected.Hierarchy`, etc. throw because they require exactly one selected object of that type and the CLI selection is always empty. Reference the object directly - e.g. `Model.Tables["Sales"]`. |
+| **`Selected.<Singular>` throws an error at runtime** | `Selected.Table`, `Selected.Measure`, `Selected.Column`, `Selected.Hierarchy`, etc. return an error because they require exactly one selected object of that type and the CLI selection is always empty. Reference the object directly - e.g. `Model.Tables["Sales"]`. |
 | **`Selected.ActivePerspectives` and `Selected.ActiveCulture`** | Always return an empty collection and `null` respectively. Set the perspective or culture explicitly in the script if needed. |
-| **`Select<Object>` dialogs throw `NotSupportedException`** | `SelectTable`, `SelectColumn`, `SelectMeasure`, `SelectObject`, `SelectObjects` (and all overloads) throw with: *"Object selection dialogs … are not available in CLI scripts. Pre-select the object by name or path before scripting."* Resolve targets up front from script arguments, config, or by querying the model. |
+| **`Select<Object>` dialogs throw `NotSupportedException`** | `SelectTable`, `SelectColumn`, `SelectMeasure`, `SelectObject`, `SelectObjects` (and all overloads) return the following error: *"Object selection dialogs … are not available in CLI scripts. Pre-select the object by name or path before scripting."* Resolve targets up front from script arguments, config, or by querying the model. |
 | **`Info` / `Warning` / `Error` / `Output` write to the console** | These still work, but route to stdout/stderr instead of opening a dialog. They never block and never offer an "ignore further popups" prompt. Safe to use in CI. |
 | **`ShowPrompt(...)` always returns `Cancel`** | No interactive confirmation is possible. Pre-decide the answer via script arguments or configuration. |
 | **`SuspendWaitForm` / `WaitFormVisible` are no-ops** | The "Please wait" spinner is a TE3 UI element. `WaitFormVisible` is a settable flag with no visual effect, and `SuspendWaitForm` is silently ignored - existing scripts continue to compile. |
-| **`host.Macro(...)` / `CustomAction(...)` throws** | The CLI does not load `%APPDATA%/TabularEditor3/MacroActions.json`, so invoking a macro from inside a script throws. Inline the macro logic, or call the macro's underlying script file directly. |
+| **`host.Macro(...)` / `CustomAction(...)` throws and error** | The CLI does not load `%APPDATA%/TabularEditor3/MacroActions.json`, so invoking a macro from inside a script returns an error. Inline the macro logic, or call the macro's underlying script file directly. |
 | **`table.GetCardinality()` / `column.GetTotalSize()` return 0** | The in-script VertiPaq cardinality helpers have no live VPA in the CLI host. For VPA statistics, load a VPAX explicitly and use `host.Vpa.*`, or run [`te vertipaq`](xref:te-cli-commands#vertipaq). |
 
 ## Best Practice Analyzer
@@ -63,7 +63,7 @@ The CLI runs C# scripts (`te script`) against the same `Model` object you use in
 
 | Limitation | Notes / Workaround |
 | -- | -- |
-| **Only one cached identity per auth method** | The CLI caches one UPN (interactive) identity and one SPN (service principal) identity at a time. Switching to a different user or tenant under the same auth method requires `te auth logout` followed by `te auth login` again, which invalidates the previous cache. Per-profile identity pinning for multi-tenant / consultant workflows is planned for GA. |
+| **Only one cached identity per auth method** | The CLI caches one UPN (interactive) identity and one SPN (service principal) identity at a time. Switching to a different user or tenant under the same auth method requires `te auth logout` followed by `te auth login` again, which invalidates the previous cache. |
 
 ## Command-line input
 

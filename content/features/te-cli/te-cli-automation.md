@@ -16,7 +16,7 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-The Tabular Editor CLI is designed as a composable building block. Every command supports structured output, disables interactive prompts on demand, and returns predictable exit codes. The same primitives work equally well for shell pipelines, Python scripts, PowerShell automation, and agent-driven workflows.
+The Tabular Editor CLI is composable; every command supports structured output, disables interactive prompts on demand, and returns predictable exit codes. The same primitives work equally well for shell pipelines, Python scripts, PowerShell automation, and agent-driven workflows.
 
 ## Structured output
 
@@ -95,7 +95,7 @@ for row in rows:
     print(row)
 ```
 
-Capture structured errors from stderr:
+To capture structured errors from stderr:
 
 ```python
 import json
@@ -118,7 +118,7 @@ if result.returncode != 0:
 
 ## PowerShell
 
-PowerShell handles JSON natively. Because `te` is a normal console binary, there is no need for the `start /wait` dance required by `TabularEditor.exe`:
+PowerShell handles JSON natively. `te` is a regular console binary that works directly in PowerShell pipelines (see @te-cli-migrate if you're porting from the older `TabularEditor.exe` CLI):
 
 ```powershell
 $rows = te query -s Finance -d Revenue -q "EVALUATE TOPN(10, 'Sales')" --output-format json --non-interactive
@@ -136,9 +136,9 @@ if ($LASTEXITCODE -ne 0) {
 Read secrets from the environment rather than passing them as plaintext:
 
 ```powershell
-$env:AZURE_CLIENT_ID     = "<app-id>"
-$env:AZURE_CLIENT_SECRET = "<secret>"
-$env:AZURE_TENANT_ID     = "<tenant>"
+$env:AZURE_CLIENT_ID     = "your-app-id"
+$env:AZURE_CLIENT_SECRET = "your-client-secret"
+$env:AZURE_TENANT_ID     = "your-tenant-id"
 
 te deploy ./model `
   -s my-workspace -d my-model `
@@ -175,6 +175,8 @@ cat refresh.tmsl
 The resulting TMSL can be reviewed in a pull request, committed, executed by the CLI (`te refresh --type full`), handed to a DBA, or applied by any XMLA-compatible tool. The CLI becomes a building block rather than a black box.
 
 ## Useful patterns
+
+A handful of small idioms that come up often when composing `te` commands in scripts or pipelines:
 
 - **Idempotent creates and removes.** `te add Sales/Marker -t Measure -i "0" --if-not-exists --save` and `te rm Sales/OldMeasure --if-exists --save` both exit `0` whether or not the object existed - safe to re-run in CI.
 - **Dry-run diffs.** `te replace` is dry-run by default; add `--save` only when you're satisfied with the preview.

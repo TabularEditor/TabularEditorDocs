@@ -185,13 +185,13 @@ te profile set prod --auto-format true
 
 ## BPA gate
 
-The BPA gate is the safety net that prevents a model with rule violations from being saved or deployed. It runs automatically when:
+The BPA gate is the safety net that prevents a model with rule violations from being saved or deployed. It runs automatically when the following commands are executed:
 
-- `te deploy` executes - unless `--skip-bpa` is passed or `bpa.onDeploy` is `false`.
-- `te save` executes - unless `--skip-bpa` (or `--force`) is passed or `bpa.onSave` is `false`.
-- `te add` / `te set` / `te mv` / `te macro run` executes - only when `bpa.onMutation` is `true`.
+- `te deploy` runs the gate unless `--skip-bpa` is passed or `bpa.onDeploy` is `false`.
+- `te save` runs the gate unless `--skip-bpa` (or `--force`) is passed or `bpa.onSave` is `false`.
+- `te add`, `te set`, `te mv`, `te macro run` run the gate only when `bpa.onMutation` is `true`.
 
-The gate loads BPA rules from `bpa.rules` plus, by default, the built-in rule set (controlled by `bpa.builtInRules`). Built-in rules can be individually excluded via `bpa.disabledBuiltInRuleIds` - managed with `te bpa rules disable <id>` / `te bpa rules enable <id>`.
+The gate loads BPA rules from `bpa.rules` and, by default, the built-in rule set (controlled by `bpa.builtInRules`). Built-in rules can be individually excluded via `bpa.disabledBuiltInRuleIds` - managed with `te bpa rules disable <id>` / `te bpa rules enable <id>`.
 
 When the gate fires and finds violations at severity ≥ `error`, the command fails with exit code `1` and a summary of the violations. Options to resolve:
 
@@ -216,16 +216,16 @@ Both `bpa.builtInRules` and `bpa.disabledBuiltInRuleIds` apply consistently to t
 
 When you run a mutating command (`te add`, `te set`, `te mv`, `te replace --save`, `te macro run`), the CLI performs these checks automatically:
 
-1. **TOM errors** are always surfaced - invalid DAX or M in measures, columns, partitions, calculation items. These always fail the command.
-2. **Schema validation** (`validateOnMutation`, default `true`) - verifies that `Table[Column]` references in DAX still resolve. Cross-check of metadata consistency.
-3. **DAX auto-format** (`autoFormat`, default `false`) - when enabled, formats any expressions touched by the mutation via the built-in DAX Formatter.
-4. **BPA on mutation** (`bpa.onMutation`, default `false`) - when enabled, runs BPA after the mutation and warns/fails based on `--fail-on`.
+1. **TOM errors** are always surfaced. Invalid DAX or M in measures, columns, partitions, or calculation items always fails the command.
+2. **Schema validation** (`validateOnMutation`, default `true`) verifies that `Table[Column]` references in DAX still resolve, cross-checking metadata consistency.
+3. **DAX auto-format** (`autoFormat`, default `false`) formats any expressions touched by the mutation via the built-in DAX Formatter when enabled.
+4. **BPA on mutation** (`bpa.onMutation`, default `false`) runs BPA after the mutation when enabled, warning or failing based on `--fail-on`.
 
 Disable a check with `te config set <key> false`, or scope the relaxation to a specific environment via a profile.
 
 ## Environment variables
 
-CLI-specific environment variables for paths, behavior, and diagnostics. For Azure authentication variables (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_CERTIFICATE_PATH`, etc.), see @te-cli-auth.
+Use the following CLI-specific environment variables for paths, behavior, and diagnostics. For Azure authentication variables (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_CERTIFICATE_PATH`, etc.), see @te-cli-auth.
 
 | Variable | Purpose |
 | -- | -- |

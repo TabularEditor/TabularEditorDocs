@@ -24,7 +24,7 @@ The Tabular Editor CLI is designed for unattended execution in continuous integr
 > - **Hard expiry.** The preview binary stops functioning on **2026-09-30** - any pipeline depending on it will fail on that date, regardless of your release calendar.
 > - **No backwards-compatibility guarantee.** Commands, flags, output shapes, and exit codes may change between preview builds, so pipeline steps may need updating when you refresh the vendored binary.
 >
-> Build and evaluate in non-production pipelines, and share feedback in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository so the GA shape matches your needs.
+> Build and evaluate in non-production pipelines, and share feedback in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository so the GA version matches your needs.
 
 ## What makes the CLI CI-friendly
 
@@ -114,7 +114,7 @@ jobs:
 
 ## Azure DevOps Pipelines
 
-Equivalent YAML for Azure DevOps. The example assumes `te.exe` is committed at `tools\te\te.exe`. `--ci vsts` emits `##vso[...]` commands that the pipeline interprets as errors, warnings, and task-status updates.
+The Azure DevOps Pipelines equivalent of the GitHub Actions workflow above. The example assumes `te.exe` is committed at `tools\te\te.exe`. `--ci vsts` emits `##vso[...]` commands that the pipeline interprets as errors, warnings, and task-status updates.
 
 ```yaml
 trigger:
@@ -164,7 +164,7 @@ steps:
 
 ## BPA gate patterns
 
-`te deploy` and `te save` run the Best Practice Analyzer as a pre-flight gate by default. Three behaviors are worth picking up front:
+`te deploy` and `te save` run the Best Practice Analyzer as a pre-flight gate by default. Three behaviors are worth determining up-front:
 
 - **Enforce** - the default. Pipeline fails if BPA finds violations at severity ≥ error. Pair with `--fail-on warning` on a standalone `te bpa run` step if you want warnings to fail too.
 - **Auto-fix** - `--fix-bpa` applies `fixExpression`s in memory for the deployed artifact. Source files are not modified. Useful when the source of truth lives in the model and you want deploys to normalize style without developer intervention.
@@ -185,7 +185,7 @@ See @te-cli-config for controlling the BPA gate globally via `bpa.onDeploy` / `b
 
 ## Refresh patterns
 
-Refresh in pipelines is typically a follow-up step after deploy. Use `--non-interactive` and pick a deterministic `--type`:
+Refresh in pipelines is typically a follow-up step after deployment. Use `--non-interactive` and pick a deterministic `--type`:
 
 ```bash
 # Full refresh of the whole model after deploy

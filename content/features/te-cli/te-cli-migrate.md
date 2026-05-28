@@ -30,9 +30,9 @@ TE2 compatibility mode is activated in any of three ways:
 
 ```bash
 # All three are equivalent - each runs in TE2 mode
-./te2 Model.bim -S fix.csx -D localhost\tabular MyDB -O
-TE_COMPAT=te2 te Model.bim -S fix.csx -D localhost\tabular MyDB -O
-te Model.bim -S fix.csx -D localhost\tabular MyDB -O
+./te2 Model.bim -S fix.csx -D "localhost\tabular" MyDB -O
+TE_COMPAT=te2 te Model.bim -S fix.csx -D "localhost\tabular" MyDB -O
+te Model.bim -S fix.csx -D "localhost\tabular" MyDB -O
 ```
 
 > [!NOTE]
@@ -48,7 +48,7 @@ te migrate -A                # Look up a single flag
 te migrate --output-format json     # Machine-readable mapping
 ```
 
-Prefer `te migrate` over this page when you need the current mapping - it reflects the CLI version you have installed.
+Refer to the output of the `te migrate` command for the current mapping that reflects the CLI version you have installed.
 
 ## Flag mapping (curated subset)
 
@@ -95,7 +95,7 @@ The recommended path from a TE2-based pipeline to the new CLI:
 3. **Switch to non-interactive CI flags.** Add `--non-interactive --ci <vsts|github>` to every `te` command and remove any `start /wait` wrappers - the new CLI is a regular console binary and doesn't need them.
 4. **Adopt service principal auth.** Replace `-D -L <user> <pass>` with `te auth login -u ... -p ... -t ...` or an environment-credential pipeline step. See @te-cli-auth.
 
-## Differences worth knowing
+## Important differences
 
 - **BPA gate on deploy.** `te deploy` now runs BPA as a pre-flight gate by default. Use `--skip-bpa` to preserve the old behavior, or `--fix-bpa` to auto-fix violations before deploy. See @te-cli-config.
 - **Interactive confirmation on deploy.** `te deploy` prompts for confirmation by default (with `n` as the safe default answer). CI pipelines must pass `--force`.
