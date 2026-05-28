@@ -37,32 +37,70 @@ Unzip the archive into a folder of your choice and add that folder to `PATH` so 
 
 ### Windows (PowerShell)
 
-```powershell
-# Substitute the .zip filename below with the archive you downloaded.
-Expand-Archive te-win-x64.zip -DestinationPath "$env:LOCALAPPDATA\Programs\te"
+#### x64
 
-# Add to PATH (current user, persistent)
+```powershell
+Expand-Archive te-win-x64.zip -DestinationPath "$env:LOCALAPPDATA\Programs\te"
 [Environment]::SetEnvironmentVariable(
   "PATH",
   [Environment]::GetEnvironmentVariable("PATH", "User") + ";$env:LOCALAPPDATA\Programs\te",
   "User")
 ```
 
-Restart the terminal for the PATH change to take effect.
+#### ARM64
 
-### macOS / Linux
+```powershell
+Expand-Archive te-win-arm64.zip -DestinationPath "$env:LOCALAPPDATA\Programs\te"
+[Environment]::SetEnvironmentVariable(
+  "PATH",
+  [Environment]::GetEnvironmentVariable("PATH", "User") + ";$env:LOCALAPPDATA\Programs\te",
+  "User")
+```
+
+### macOS
+
+#### Apple Silicon (ARM64)
 
 ```bash
-# Substitute the .tar.gz filename below with the archive you downloaded.
 mkdir -p ~/.local/bin
 tar -xzf te-osx-arm64.tar.gz -C ~/.local/bin
 chmod +x ~/.local/bin/te
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc   # or ~/.bashrc
+```
 
-# Ensure ~/.local/bin is on PATH
+#### Intel (x64)
+
+```bash
+mkdir -p ~/.local/bin
+tar -xzf te-osx-x64.tar.gz -C ~/.local/bin
+chmod +x ~/.local/bin/te
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc   # or ~/.bashrc
 ```
 
 On macOS, the binary is signed with our Apple Developer ID and notarized by Apple, so the first run completes without a "cannot verify developer" Gatekeeper warning. Network access on first run is recommended so Gatekeeper can fetch the notarization ticket; offline first-runs may briefly prompt before being unblocked once network returns.
+
+### Linux
+
+#### x64
+
+```bash
+mkdir -p ~/.local/bin
+tar -xzf te-linux-x64.tar.gz -C ~/.local/bin
+chmod +x ~/.local/bin/te
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc   # or ~/.zshrc
+```
+
+#### ARM64
+
+```bash
+mkdir -p ~/.local/bin
+tar -xzf te-linux-arm64.tar.gz -C ~/.local/bin
+chmod +x ~/.local/bin/te
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc   # or ~/.zshrc
+```
+
+> [!NOTE]
+> The PATH change takes effect in **new** shell sessions. To run `te` in the shell where you ran the install, open a new terminal, or reload your profile: `source ~/.bashrc` / `source ~/.zshrc` on macOS/Linux, or close and reopen PowerShell on Windows.
 
 ## Verify
 
@@ -82,24 +120,41 @@ te bpa run --help
 
 ## Hide the preview banner
 
-The CLI prints a yellow preview banner on stderr by default. To suppress it for routine commands:
+The CLI prints a yellow preview banner on stderr by default. To suppress it run:
 
 ```bash
 te config set hidePreviewNotice true
 ```
 
 > [!WARNING]
-> The banner reappears on every command within **14 days of expiry** (2026-09-30), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
+> The banner reappears on every command within **14 days of the preview end date** (2026-09-30), regardless of `hidePreviewNotice`. This ensures you have visible warning before the CLI stops functioning.
 
 ## Shell completion
 
-Generate a shell completion script for your shell of choice:
+The CLI provides tab-completion scripts for **Bash**, **Zsh**, and **PowerShell**. Pick the block that matches your shell — each one installs the completion persistently for new shell sessions.
+
+### Bash (macOS/Linux)
 
 ```bash
-te completion bash    > /etc/bash_completion.d/te
-te completion zsh     > "${fpath[1]}/_te"
-te completion pwsh   | Out-String | Invoke-Expression
+mkdir -p ~/.local/share/bash-completion/completions
+te completion bash > ~/.local/share/bash-completion/completions/te
 ```
+
+### Zsh (macOS/Linux)
+
+```zsh
+mkdir -p ~/.zfunc
+te completion zsh > ~/.zfunc/_te
+echo 'fpath=(~/.zfunc $fpath); autoload -U compinit; compinit' >> ~/.zshrc
+```
+
+### PowerShell (Windows/macOS/Linux)
+
+```powershell
+Add-Content $PROFILE 'te completion pwsh | Out-String | Invoke-Expression'
+```
+
+Open a new shell session for completion to take effect.
 
 Completion covers subcommands, global flags, and model paths (where tab-completion against the filesystem is meaningful).
 
@@ -114,16 +169,16 @@ Most features are identical across platforms. A handful depend on Windows-only t
 | Best Practice Analyzer and VertiPaq Analyzer | Yes | Yes |
 | C# scripting | Yes | Yes |
 | DAX queries against cloud models | Yes | Yes |
-| Auth: browser, device-code, service principal, env, managed identity | Yes | Yes |
-| Connect to local SSAS instance (TCP transport) | Yes | No |
-| Connect to Power BI Desktop (named-pipe transport) | Yes | No |
+| Authentication: browser, device-code, service principal, env, managed identity | Yes | Yes |
+| Connect to local SSAS instance (TCP transport) | Yes | **No** |
+| Connect to Power BI Desktop (named-pipe transport) | Yes | **No** |
 
 > [!IMPORTANT]
 > Local SSAS and Power BI Desktop connections rely on Windows-only transport protocols. All cloud-based workflows (Power BI Service, Fabric, Azure Analysis Services) work on every platform.
 
 ## Updating
 
-To update to a newer preview build, download the latest archive and overwrite the previous installation. Configuration and cached credentials are stored outside the install folder (see @te-cli-config and @te-cli-auth) and are preserved across updates.
+To update to a newer preview build, download the latest archive and overwrite the previous installation. Configuration and cached credentials are stored outside the install folder (see <xref:te-cli-config> and <xref:te-cli-auth>) and are preserved across updates.
 
 ## Uninstalling
 
