@@ -19,8 +19,8 @@ applies_to:
 This page gives a short description and one example per command. Every command accepts `--help` for exhaustive flag documentation:
 
 ```bash
-te <command> --help
-te <command> <subcommand> --help
+te deploy --help            # Help for a single command
+te bpa run --help           # Help for a command with subcommands
 ```
 
 > [!NOTE]
@@ -33,23 +33,24 @@ Object addressing in the CLI uses a single grammar that's shared across every co
 - **`<path>`** - resolves to **exactly one** object or container. Used by commands that operate on a single target: `te get`, `te set`, `te add`, `te rm`, `te mv`, `te format -p`, `te deps`, `te macro run --on`.
 - **`<path-filter>`** - resolves to **zero or more** objects, with wildcard support. Used by commands that operate on a set: `te ls`, `te bpa run --path`, and other inspection-style commands.
 
-The two share the same lexer; the only differences are that filter paths permit `*` wildcards while object paths do not, and object paths permit DAX bracket-suffix while filter paths do not.
+Both path forms share the same syntax rules; they differ in only two places:
+
+- Filter paths allow `*` wildcards; object paths do not.
+- Object paths allow DAX bracket-suffix (e.g. `Sales[Amount]`); filter paths do not.
 
 ### Segments and separators
 
 A path is a slash-separated sequence of **segments**. Each segment names a single step - a table, a child object, or a container keyword.
 
-```
-Sales                        # one segment
-Sales/Revenue                # two segments
-Roles/Admin/Members/bob      # four segments
-```
+- `Sales` — one segment
+- `Sales/Revenue` — two segments
+- `Roles/Admin/Members/bob` — four segments
 
 Empty input and `.` both mean "the model root" - the implicit starting point for filter paths and the explicit subject for `te get .`-style queries.
 
 ### Quoting
 
-Most segment names work as-is. **Quote** a segment when its name contains spaces, slashes, brackets, or any character that would otherwise be parsed as syntax. The CLI follows DAX quoting conventions, so quoting in `te` paths matches what you'd type inside a DAX expression:
+Most segment names work as-is. Quote a segment when its name contains spaces, slashes, brackets, or any character that would otherwise be parsed as syntax. The CLI follows DAX quoting conventions, so quoting in `te` paths matches what you'd type inside a DAX expression:
 
 | Form | Use for | Escape rule |
 | -- | -- | -- |
@@ -57,14 +58,14 @@ Most segment names work as-is. **Quote** a segment when its name contains spaces
 | `"Net Sales"` | Same as above; cross-shell convenience when single-quote escaping is awkward. | Double the quote (`"He said ""hi"""` → `He said "hi"`). |
 | `[Sales Amount]` | DAX bracket-suffix on a table (`'Sales'[Sales Amount]`) or a lone-bracket model-wide reference (`[Total Sales]`). Object paths only. | Double the closing bracket (`[foo]]bar]` → `foo]bar`). |
 
-Wildcards inside quoted segments are literal. `'Sa*'` matches a table named exactly `Sa*` - quoting disables glob matching for that segment.
+Inside quoted segments, `*` is treated as a literal character, not a wildcard. So `'Sa*'` matches a table named exactly `Sa*`.
 
 ### DAX-style references (object paths only)
 
 Two DAX-shaped forms are accepted anywhere a `<path>` is allowed:
 
 - **`'Table'[Member]`** - equivalent to `Table/Member`. The bracket-suffix biases ambiguous matches toward columns and measures over hierarchies/partitions.
-- **`[Member]`** - a *lone* bracket, with no preceding table. Searches the whole model for a measure or column with that name. Measures win when both exist.
+- **`[Member]`** - a *lone* measure or column, with no preceding table. Searches the whole model for a measure or column with that name. Measures win when both exist.
 
 ```bash
 te get "'Sales'[Amount]"             # Same as te get Sales/Amount
@@ -74,7 +75,7 @@ te get "[Total Sales]"               # Model-wide measure-or-column lookup
 
 ### Containers and keywords
 
-Several bare names act as **container keywords**. A keyword can stand alone (listing the whole container) or appear inside a path (jumping into that sub-collection on the current parent).
+Several names act as container keywords. A keyword can stand alone (listing the whole container) or appear inside a path (jumping into that sub-collection on the current parent).
 
 | Keyword | Scope | Meaning |
 | -- | -- | -- |
@@ -84,7 +85,7 @@ Several bare names act as **container keywords**. A keyword can stand alone (lis
 | `Levels` | Hierarchy | Levels of a hierarchy. |
 | `Members`, `TablePermissions` (alias `Permissions`) | Role | Children of a role. |
 
-A few examples make the difference between bare and container-scoped paths concrete:
+A few examples show how plain and container-scoped paths differ:
 
 ```bash
 te get Sales/Revenue                       # Measure or column on Sales
@@ -102,10 +103,10 @@ Quote a segment to force literal-name matching when a real object name happens t
 Filter paths add a single wildcard character - `*` - that matches any run of characters within one segment (greedy, single-segment). Wildcards are how `te ls` and similar commands narrow their results.
 
 ```bash
-te ls Sa*                          # Tables whose name starts with Sa
-te ls Sales/*Amount                # Children of Sales whose name ends with Amount
-te ls */Amount                     # An Amount column/measure across every table
-te ls Roles/Re*/Members            # Members of every role matching Re*
+te ls 'Sa*'                          # Tables whose name starts with Sa
+te ls 'Sales/*Amount'                # Children of Sales whose name ends with Amount
+te ls '*/Amount'                     # An Amount column/measure across every table
+te ls 'Roles/Re*/Members'            # Members of every role matching Re*
 ```
 
 A filter path with **N segments** produces **N-level-deep** results - wildcards never auto-expand a level beyond what you typed. The single-segment shortcut `te ls Sales` is the exception: an unqualified, non-wildcarded table name expands to the table's direct children to match the "show me what's in Sales" intent. `te ls Sa*`, in contrast, returns just the matching tables - no expansion.
@@ -114,7 +115,7 @@ DAX bracket-suffix is rejected in filter paths; quote names containing `[` and `
 
 ### Errors and hints
 
-Misspelled segments emit a contextual error with a "did you mean" hint when the CLI can guess what you meant. Missing-parent paths fail before the leaf check, so the message points at the segment that's actually wrong. Empty containers (e.g., `te ls Hierarchies` on a model with none) emit a dim "nothing here" hint rather than an error.
+Misspelled segments emit a contextual error with a "did you mean" hint when the CLI can guess what you meant. Missing-parent paths fail before the leaf check, so the message points at the segment that's actually wrong. Empty containers (e.g., `te ls Hierarchies` on a model without hierarchies) emit a simply "nothing here" hint rather than an error.
 
 ## Global options
 
@@ -133,13 +134,15 @@ These flags are available on every command and sit before or after the subcomman
 | `--non-interactive` | Disable all interactive prompts. Fail with an actionable error if required input is missing. |
 | `--debug` | Enable debug logging to stderr (connection strings, auth flow, timing). |
 
-For commands that read a model, the resolution order is: positional `<model>` argument → `--model` global flag → `--server`/`--database` (remote) → active connection from `te connect` → `--recent`.
+For commands that read a model, the resolution order is:
+
+positional `<model>` argument → `--model` global flag → `--server`/`--database` (remote) → active connection from `te connect` → `--recent`.
 
 ## Model I/O
 
 ### load
 
-Load a semantic model and display a summary.
+Load a semantic model and display a summary of the model — name, compatibility level, and high-level object counts (tables, measures, columns).
 
 ```bash
 te load ./model                            # TMDL folder
@@ -151,10 +154,13 @@ te load -s MyWorkspace -d MyModel          # Remote workspace
 
 Save a model to disk. Use it to write a remote workspace model to local files, convert formats, or persist edits back to the source.
 
+`te save` accepts:
+
 - `-o, --output-path <path>` - target file or folder. **Optional** - when omitted, `te save` writes back to the source location, preserving the original format.
 - `--serialization <fmt>` - `tmdl`, `bim`, `te-folder`, `pbip`, `database.json`. Defaults to inferring from the loaded model (BIM source → BIM, TMDL `SemanticModel/` → TMDL under `definition/`).
 - `--force` - skip validation and overwrite existing output. Some refusals (ambiguous containers, multi-`SemanticModel` project roots) fire even under `--force`.
-- `--skip-bpa` / `--fix-bpa` - bypass or auto-fix the BPA gate.
+- `--skip-bpa` - bypass the BPA gate entirely.
+- `--fix-bpa` - auto-fix BPA violations where rules define a fix expression.
 - `--bpa-rules <path>` - repeatable; override `bpa.rules` from your CLI config for this single save. Built-in rules still apply unless `bpa.builtInRules` is `false`.
 - `--skip-validation` - skip DAX semantic analysis and validation for fast passthrough downloads.
 - `--supporting-files` - generate Fabric supporting files (`.platform`, `definition.pbism`).
@@ -171,7 +177,7 @@ te save -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
 
 ### open
 
-Open a model in Tabular Editor 3 Desktop (requires TE3 to be installed).
+Open a model in Tabular Editor 3 Desktop. **Windows only** (requires TE3 to be installed).
 
 ```bash
 te open ./my-model
@@ -191,6 +197,8 @@ te init ./new-model
 
 Set a property on a model object. Accepts a `<path>`.
 
+`te set` accepts:
+
 - `-q <property>` - property name (e.g., `expression`, `formatString`, `description`, `isHidden`).
 - `-i <value>` - value (use `-` to read from stdin).
 - `--save` / `--save-to <path>` - persist changes.
@@ -203,16 +211,18 @@ te set Sales -q isHidden -i true --save
 
 ### add
 
-Add an object to the model. Pass a `<path>` for the new object (the parent must already exist; the trailing segment is the new name) and the type via `-t` / `--type`. Relationships keep their shorthand syntax (`Sales[Key]->Dim[Key]`).
+Add an object to the model. Pass a `<path>` for the new object (the parent must already exist; the leaf segment is the new name) and the type via `-t` / `--type`. Relationships keep their shorthand syntax (`Sales[Key]->Dim[Key]`).
 
-- `-t, --type <type>` - object type. Common values: `Table`, `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Role`, `Perspective`, `Culture`, `CalculationGroup`, `CalculationItem`. Tab-completion is supported; full list in `te add --help`.
+`te add` accepts:
+
+- `-t, --type <type>` - object type. Common values: `Table`, `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Role`, `Perspective`, `Culture`, `CalculationGroup`, `CalculationItem`. Tab-completion is supported; the full list can be retrieved by running `te add --help`.
 - `--if-not-exists` - exit `0` without error if the object already exists. Use this for idempotent CI/CD pipelines.
 
 ```bash
 te add Sales/Revenue -t Measure -i "SUM(Sales[Amount])" --save
 te add Sales -t Table --save
 te add "Sales[ProdKey]->Product[ProdKey]" --save                           # Relationship shorthand
-te add Sales/MarketingFlag -t CalculatedColumn -i "..." --if-not-exists --save
+te add Sales/MarketingFlag -t CalculatedColumn -i "Sales[Amount] > 1000" --if-not-exists --save
 te add Perspectives/Default/Sales --save                                   # Include Sales in the Default perspective
 te add Roles/Reader -t Role --save                                         # New role at the model level
 ```
@@ -221,7 +231,15 @@ For data-bound tables, `te add` also supports schema detection from SQL, Lakehou
 
 ### rm
 
-Remove an object. Accepts a `<path>`. Checks dependents by default; use `--force` to bypass, `--if-exists` for idempotent removes.
+Remove an object. Checks dependents by default to prevent breaking existing references.
+
+`te rm` accepts:
+
+- `<path>` — positional argument: the object to remove.
+- `--force` — bypass the dependents check.
+- `--if-exists` — exit `0` without error if the object doesn't exist. Use this for idempotent CI/CD pipelines.
+- `--dry-run` — preview the removal without applying it.
+- `--save` — persist the change to the loaded model.
 
 ```bash
 te rm Sales/Revenue --save
@@ -243,10 +261,27 @@ te mv Sales/Revenue Sales/TotalRevenue --save # Rename measure
 
 Find and replace text across model objects. Dry-run by default; add `--save` to apply.
 
-- `--in <scope>` - `names`, `expressions`, `descriptions`, `displayFolders`, `formatStrings`, `annotations`, `all`.
-- `--regex`, `--case-sensitive`.
+`te replace` accepts:
 
-`--in expressions` walks every expression-bearing property: measure `Expression` and `DetailRowsExpression`, KPI `TargetExpression` / `StatusExpression` / `TrendExpression`, partition source and polling M, table-permission `FilterExpression`, calculation-group selection expressions, and calculated-column DAX. Adding new expression-shaped properties to the model surfaces them automatically.
+- `--in <scope>` - scope: `names`, `expressions`, `descriptions`, `displayFolders`, `formatStrings`, `annotations`, `all` (default: `all`).
+- `--regex` - treat the find pattern as a regular expression.
+- `--case-sensitive` - enable case-sensitive matching.
+- `--dry-run` - preview changes without applying. Default behavior.
+- `--save` - persist the mutation to the source location. Mutually exclusive with `--revert` and `--stage`.
+- `--save-to <path>` - save to a different path (implies `--save`).
+- `--serialization <fmt>` - model serialization: `tmdl`, `bim`, `te-folder`.
+- `--force` - save even if the replacement introduces DAX validation errors.
+
+`--in expressions` walks every expression-bearing property:
+
+- **Measure**: `Expression`, `DetailRowsExpression`
+- **KPI**: `TargetExpression`, `StatusExpression`, `TrendExpression`
+- **Partition**: source M, polling M
+- **Table permission**: `FilterExpression`
+- **Calculation group**: selection expressions
+- **Calculated column**: DAX expression
+
+Adding new expression-shaped properties to the model surfaces them automatically.
 
 ```bash
 te replace "OldTable" "NewTable" --in expressions --save
@@ -259,6 +294,8 @@ te replace "SUM" "SUMX" --regex --in expressions --save
 
 List objects with filesystem-like navigation. Takes a `<path-filter>` argument supporting wildcards. Both model-level containers (`Tables`, `Measures`, `Columns`, `Hierarchies`, `Relationships`, `Roles`, `Perspectives`, `Cultures`) and table-scoped containers (`Sales/Measures`, `Sales/Columns`, …) are supported.
 
+`te ls` accepts:
+
 - `--type <kind>` - narrow to one object kind (`table`, `measure`, `column`, `hierarchy`, `partition`, `relationship`, `role`, `perspective`, `culture`). With no `<path-filter>` this is equivalent to typing the matching container keyword.
 - `--paths-only` - emit one object path per line, suitable for piping to `xargs`, `te get`, or `te set`.
 - `--no-multiline` - collapse multi-line cells (typically DAX or M expressions) to a single line and truncate, so rows stay scannable in wide tables. Text output only; JSON/CSV/TMSL output is unaffected.
@@ -268,10 +305,10 @@ List objects with filesystem-like navigation. Takes a `<path-filter>` argument s
 te ls                                     # All tables in the model
 te ls Sales                               # All children of Sales (columns + measures + hierarchies + partitions)
 te ls Sales/Measures                      # Just Sales's measures
-te ls Sales/*Amount                       # Children of Sales whose name ends with Amount
-te ls Sa*                                 # Tables whose name starts with Sa (no auto-expansion)
-te ls */Amount                            # An Amount column/measure across every table
-te ls Roles/Re*/Members                   # Members of every role matching Re*
+te ls 'Sales/*Amount'                     # Children of Sales whose name ends with Amount
+te ls 'Sa*'                               # Tables whose name starts with Sa (no auto-expansion)
+te ls '*/Amount'                          # An Amount column/measure across every table
+te ls 'Roles/Re*/Members'                 # Members of every role matching Re*
 te ls Sales/Geography/Levels              # All levels of the Geography hierarchy
 te ls "'Net Sales'/'Sales Amount'"        # Quote names containing spaces
 te ls Measures --paths-only               # One Table/Measure per line for piping
@@ -283,6 +320,8 @@ te ls Tables --output-format bim > tables.json   # All tables emitted as TMSL/BI
 ### get
 
 Get properties of a model object. Takes a `<path>`.
+
+`te get` accepts:
 
 - `-q, --query <property>` - fetch a single property (e.g. `expression`, `formatString`).
 - `-t, --type <kind>` - disambiguate when the path matches multiple table-children (e.g. a column and a hierarchy with the same name). Values: `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `Partition`, `CalculationItem`.
@@ -306,6 +345,8 @@ te get Model -q description
 
 Search for text across model objects.
 
+`te find` accepts:
+
 - `--in <scope>` - as per `te replace` (default `all`).
 - `--regex`, `--case-sensitive`, `--paths-only`.
 - `--no-multiline` - collapse multi-line match context to a single line. Text output only.
@@ -320,7 +361,7 @@ te find "CALCULATE" --in expressions --paths-only | xargs -I{} te get {} -q expr
 
 ### diff
 
-Compare two models for structural differences. Exit codes: `0` = identical, `1` = differences found, `2` = error.
+Compare two models for structural differences. Returns the following exit codes: `0` = identical, `1` = differences found, `2` = error.
 
 ```bash
 te diff ./model-v1 ./model-v2
@@ -330,6 +371,8 @@ te diff old.bim new.bim
 ### deps
 
 Analyze an object's upstream and downstream dependencies, or surface unused objects across the model. The single-object form takes a `<path>`.
+
+`te deps` accepts:
 
 - `--unused` - list measures, calculated columns, and **all data columns** that no DAX references and that aren't used in any relationship, hierarchy level, sort-by, variation, AlternateOf base, or calendar time role. Each result shows `(hidden)` in text mode and an `isHidden` field in JSON.
 - `--hidden` - narrow `--unused` to hidden objects only. Hidden, unused objects are the safest prune candidates because nothing user-facing depends on them.
@@ -347,6 +390,8 @@ te deps --unused --hidden                 # Only hidden, unused objects
 
 Validate model expressions, schema integrity, and TOM errors.
 
+`te validate` accepts:
+
 - `--ci <fmt>` - emit CI annotations to stderr: `vsts` or `github`.
 - `--trx <path>` - write results as a VSTEST `.trx` file.
 
@@ -359,13 +404,25 @@ te validate --ci github --trx results.trx
 
 Run Best Practice Analyzer rules against a model.
 
-- `-r, --rules <file-or-url>` - additional BPA rule file(s); repeatable.
-- `--fix` - apply auto-fix expressions where rules define them.
-- `--fail-on <severity>` - `error` (default) or `warning`.
-- `--ci <fmt>` / `--trx <path>` - CI annotations and TRX output.
-- `--path <path-filter>` - limit analysis to the tables containing the matched objects. Accepts wildcards and container keywords; same grammar as `te ls`.
-- `--no-multiline` - collapse multi-line cells in the violations table to a single line. Text output only.
-- `--skip-bpa`, `--no-model-rules`, `--no-defaults`, `--rule <id>`, `--vpax <file>`, `--vpa-rules`.
+`te bpa run` accepts:
+
+- `<model>` - positional argument: path to model (alternative to the `--model` global flag).
+- `-r, --rules <file-or-url>` - path(s) or URL(s) to additional BPA rule file(s) in JSON format. Repeatable.
+- `--no-model-rules` - exclude BPA rules embedded in the model's annotations.
+- `--no-defaults` - exclude built-in default BPA rules.
+- `--vpax <file>` - load VertiPaq Analyzer stats from a `.vpax` file to enable VPA-aware rules.
+- `--vpa-rules` - include built-in VPA-aware rules (requires `--vpax` or a pre-annotated model).
+- `--allow-external-rules` - allow fetching BPA rule files from URLs embedded in model annotations.
+- `--rule <id>` - run only specific rule(s) by ID. Repeatable.
+- `--path <path-filter>` - limit analysis to the tables containing the matched objects. Accepts literal names, container keywords, and wildcards (e.g., `'Sales'`, `'Sa*'`, `'Sales/Measures'`, `'*/Amount'`).
+- `--fix` - apply fix expressions to auto-fix violations where possible.
+- `--save` - save the model back to source after applying fixes.
+- `--save-to <path>` - save the model to a different path after applying fixes.
+- `--serialization <fmt>` - model serialization: `tmdl`, `bim`, `te-folder`.
+- `--fail-on <severity>` - failure threshold: `error` (default) or `warning`. Exits with code `1` when violations meet the threshold.
+- `--ci <fmt>` - emit CI logging commands to stderr: `vsts` (Azure DevOps), `github` (GitHub Actions).
+- `--trx <path>` - write results as a VSTEST `.trx` file to the specified path.
+- `--no-multiline` - collapse multi-line cell content in the violations table to a single line. Text output only.
 
 ```bash
 te bpa run --fail-on error --ci github
@@ -378,11 +435,40 @@ te bpa run --path Sales/Measures   # Path filter applied to the matched tables
 
 ### bpa rules
 
-List, inspect, initialize, and toggle BPA rules. Built-in rules are read-only - to skip one without losing the rest, use `te bpa rules disable` (do not edit the built-in set directly).
+Manage BPA rule collections — list, inspect, initialize, and toggle rules in your local rules file or in model annotations. Built-in rules are read-only - to skip one without losing the rest, use `te bpa rules disable` (do not edit the built-in set directly).
+
+Subcommands:
+
+| Subcommand | Purpose |
+| -- | -- |
+| `add <id> [model]` | Add a new BPA rule. |
+| [`disable`](#bpa-rules-disable) | Disable a built-in BPA rule for the current user. |
+| [`enable`](#bpa-rules-enable) | Re-enable a previously disabled built-in BPA rule. |
+| `ignore <rule-id> [model]` | Add a rule to the model's ignore list. |
+| [`init`](#bpa-rules-init) | Create an empty BPA rules file at the resolved path. |
+| [`list`](#bpa-rules-list) | List BPA rules from all sources with status. |
+| `rm <rule-id> [model]` | Remove a BPA rule. |
+| `set <rule-id> [model]` | Update a BPA rule's properties. |
+| `unignore <rule-id> [model]` | Remove a rule from the model's ignore list. |
+
+All `te bpa rules` subcommands accept:
+
+- `--rules-file <path>` - path to a BPA rules JSON file. Defaults to the first existing entry of `bpa.rules` in your CLI config (`~/.config/te/config.json`), or the `TE_BPA_RULES` environment variable.
+- `--model-rules` - operate on rules embedded in the model annotation instead of a file.
+
+> [!IMPORTANT]
+> `te bpa rules set` and `te bpa rules rm` refuse to mutate built-in rule IDs. Attempting to do so exits with code `1` and points at `te bpa rules disable`. To customize a built-in rule's behavior, disable the built-in and add a custom copy with a different ID:
+>
+> ```bash
+> te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
+> te bpa rules add MY_DATE_TABLE_EXISTS
+> ```
 
 #### bpa rules list
 
 List rules from all sources (built-in, user, model).
+
+`te bpa rules list` accepts:
 
 - (default) Active rules only.
 - `--all` - include disabled and ignored rules.
@@ -402,10 +488,12 @@ Disabled built-in rules are flagged with a `[disabled]` marker next to the rule 
 
 Create an empty BPA rules file (`[]`) at the configured path. Use this once before invoking `te bpa rules set` / `te bpa rules rm` against a path that does not yet exist.
 
+`te bpa rules init` accepts:
+
 - `--force` - overwrite an existing file with `[]`. Required if the target file exists.
 - `--rules-file <path>` - target file path. Can appear before or after the `init` subcommand.
 
-Path resolution (first match wins): `--rules-file` → `TE_BPA_PATH` env var → first entry of `bpa.rules[]` in your CLI config → `./BPARules.json` (current working directory).
+Path resolution (first match wins): `--rules-file` → `TE_BPA_RULES` env var → first entry of `bpa.rules[]` in your CLI config → `./BPARules.json` (current working directory).
 
 ```bash
 te bpa rules init
@@ -417,8 +505,7 @@ te bpa rules init --force
 
 Disable an individual built-in BPA rule. The rule ID is added to `bpa.disabledBuiltInRuleIds` in your CLI config. Subsequent gate runs (deploy, save, mutation) and `te bpa run` skip the disabled rule.
 
-- Idempotent: running `disable` against an already-disabled rule succeeds without modifying the config.
-- Errors with exit code `1` if `<rule-id>` is not a built-in rule. Use `te bpa rules list` to see valid built-in IDs.
+The command is idempotent — running `disable` against an already-disabled rule succeeds without modifying the config. It exits with code `1` if `<rule-id>` is not a built-in rule; use `te bpa rules list` to see valid built-in IDs.
 
 ```bash
 te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
@@ -426,24 +513,21 @@ te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
 
 #### bpa rules enable
 
-Re-enable a previously disabled built-in BPA rule. Removes the rule ID from `bpa.disabledBuiltInRuleIds`.
-
-- Errors with exit code `1` if `<rule-id>` is not currently in `bpa.disabledBuiltInRuleIds`.
+Re-enable a previously disabled built-in BPA rule by removing the rule ID from `bpa.disabledBuiltInRuleIds`. Exits with code `1` if the rule isn't currently disabled.
 
 ```bash
 te bpa rules enable TE3_BUILT_IN_DATE_TABLE_EXISTS
 ```
 
-#### bpa rules set / rm - built-in guard
-
-`te bpa rules set` and `te bpa rules rm` refuse to mutate built-in rule IDs. Attempting to do so exits with code `1` and points at `te bpa rules disable`. To customize a rule's behavior, copy it into your local rules file as a new rule with a different ID and disable the built-in.
-
 ### vertipaq
 
 Analyze VertiPaq storage statistics.
 
+`te vertipaq` accepts:
+
 - `--columns`, `--relationships`, `--partitions`, `--all`.
-- `--export <file.vpax>` / `--import <file.vpax>` - round-trip to VPAX.
+- `--export <file.vpax>` - export VertiPaq stats to a `.vpax` file for offline analysis.
+- `--import <file.vpax>` - load a previously exported `.vpax` file and analyze it offline.
 - `--obfuscate` - obfuscate names and expressions in exported VPAX.
 - `--top <N>`, `--stats`, `--annotate`, `--save`.
 
@@ -457,6 +541,8 @@ te vertipaq --import stats.vpax  # Analyze offline
 ### format
 
 Format DAX or M/Power Query expressions.
+
+`te format` accepts:
 
 - `-e, --expression <text>` - format a single inline expression.
 - `-p, --path <path>` - format a specific measure/column.
@@ -476,6 +562,8 @@ te format --lang m --save                                  # Format M
 
 Execute a DAX query against a deployed model.
 
+`te query` accepts:
+
 - `-q, --query <dax>` - inline query.
 - `--file <file.dax>` - query from file.
 - `--limit <N>` - default 100.
@@ -492,6 +580,8 @@ te query --file query.dax --output-format json
 
 Execute one or more C# scripts against a semantic model. The CLI uses the same scripting host as Tabular Editor 3 Desktop, so a script that runs in TE3 runs unchanged here.
 
+`te script` accepts:
+
 - `-S, --script <file>` - `.cs` / `.csx` file (repeatable).
 - `-e, --expression <code>` - inline C# (use `-` for stdin).
 - `--save` / `--save-to` / `--serialization`.
@@ -506,8 +596,8 @@ echo "Info(Model.Name);" | te script -e -
 > [!IMPORTANT]
 > Two behavioral details to know if you're porting an older script:
 >
-> - **No interactive selection in CLI scripts.** The TE3-Desktop helpers `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, and `SelectObjects()` throw `NotSupportedException` when called from `te script` - the CLI has no UI to pop up. Pre-resolve the object(s) outside the script and pass them in, or wrap the call in `try/catch` if the script is shared with TE3.
-> - **Default `using` directives match TE3 Desktop.** Scripts that use `DataTable`, `File`, `StringBuilder`, or `Regex` must include the corresponding `using System.Data;` / `using System.IO;` / `using System.Text;` / `using System.Text.RegularExpressions;` directive explicitly. The previous wider CLI-only defaults are gone.
+> - **No interactive selection in CLI scripts.** The TE3 Desktop helpers `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, and `SelectObjects()` throw `NotSupportedException` when called from `te script` - the CLI has no UI to pop up. Pre-resolve the object(s) outside the script and pass them in, or wrap the call in `try/catch` if the script is shared with TE3.
+> - **Default `using` directives match TE3 Desktop.** Scripts that use `DataTable`, `File`, `StringBuilder`, or `Regex` must include the corresponding `using System.Data;` / `using System.IO;` / `using System.Text;` / `using System.Text.RegularExpressions;` directive explicitly.
 
 > [!NOTE]
 > **Preprocessor symbols for cross-host scripts.** Scripts compiled by `te script` have the symbol `TECLI` defined. TE3 Desktop scripts have `TE3` defined instead, plus version-bracketed symbols like `TE3_3_10_OR_GREATER` ... `TE3_3_X_OR_GREATER` for the current TE3 minor version. TE2 defines neither symbol. Use these to write portable scripts:
@@ -535,19 +625,23 @@ echo "Info(Model.Name);" | te script -e -
 
 Manage and run macros from a macros JSON file (typically `MacroActions.json`). The macros file is resolved in this order: `--macros <path>` → `TE_MACROS_PATH` env var → `macros` in CLI config → `./MacroActions.json`.
 
-```bash
-te macro list                  # List macros
-te macro run <name-or-id>      # Run a macro
-te macro add <name>            # Add a macro
-te macro set <name-or-id>      # Update macro properties
-te macro rm <name-or-id>       # Remove a macro
-te macro sort                  # Sort and re-assign IDs
-te macro init                  # Create an empty macros file at the resolved path
-```
+Subcommands:
+
+| Subcommand | Purpose |
+| -- | -- |
+| `list` | List macros. |
+| [`run <name-or-id>`](#macro-run) | Run a macro. |
+| `add <name>` | Add a macro. |
+| `set <name-or-id>` | Update macro properties. |
+| `rm <name-or-id>` | Remove a macro. |
+| `sort` | Sort and re-assign IDs. |
+| [`init`](#macro-init) | Create an empty macros file at the resolved path. |
 
 #### macro init
 
 Create an empty macros file (`{"Actions":[]}`) at the configured path. Use this once when the resolved macros file does not yet exist.
+
+`te macro init` accepts:
 
 - `--force` - overwrite an existing file. Required if the target exists.
 - `--macros <path>` - target file path. Can appear before or after the `init` subcommand.
@@ -558,12 +652,14 @@ te macro init --macros ./project-macros.json
 te macro init --force
 ```
 
+#### macro run
+
+Run a macro. Macros that emit tables via `dataTable.Output()` render formatted output in the terminal, so DAX-style query macros work the same in `te macro run` as they do in TE3.
+
 `te macro run` accepts:
 
 - `--on <path>` - set the macro's selection context to a single named object (a table, measure, column, …). Equivalent to right-clicking that object in TE3 and invoking the macro from the context menu.
 - `--save` / `--save-to` - persist any changes the macro makes.
-
-Macros that emit tables via `dataTable.Output()` render formatted output in the terminal, so DAX-style query macros work the same in `te macro run` as they do in TE3.
 
 ```bash
 te macro run "Hide all measures"
@@ -577,11 +673,20 @@ te macro run "Format DAX" --on "'Net Sales'[Sales Amount]" --save   # DAX form w
 
 Deploy a semantic model to Power BI, Fabric, or Azure Analysis Services.
 
+`te deploy` accepts:
+
 - `-s, --server` / `-d, --database` - target workspace and model.
 - `--deploy-full` - overwrite + connections + partitions + shared expressions + roles + role members.
-- `--deploy-connections`, `--deploy-partitions`, `--skip-refresh-policy`, `--deploy-roles`, `--deploy-role-members`, `--deploy-shared-expressions`, `--create-only`.
+- `--deploy-connections`
+- `--deploy-partitions`
+- `--skip-refresh-policy`
+- `--deploy-roles`
+- `--deploy-role-members`
+- `--deploy-shared-expressions`
+- `--create-only`
 - `--xmla <file>` - generate XMLA/TMSL script instead of deploying (`-` for stdout).
-- `--skip-bpa` / `--fix-bpa` - bypass or auto-fix the BPA gate.
+- `--skip-bpa` - bypass the BPA gate entirely.
+- `--fix-bpa` - auto-fix BPA violations where rules define a fix expression.
 - `--bpa-rules <path>` - repeatable; override `bpa.rules` from your CLI config for this single deploy. Built-in rules still apply unless `bpa.builtInRules` is `false`.
 - `--force` - skip interactive confirmation (required for CI).
 - `--ci <fmt>` - `vsts` or `github`.
@@ -600,10 +705,14 @@ te deploy ./model --profile staging --force
 
 Trigger a data refresh on a deployed model.
 
+`te refresh` accepts:
+
 - `--type <type>` - `full`, `dataonly`, `automatic`, `calculate`, `clearvalues`, `defragment`, `add` (default: `automatic`).
 - `--table <name>` - refresh specific table(s); repeatable.
 - `--partition <Table.Partition>` - refresh specific partition(s).
-- `--apply-refresh-policy`, `--effective-date <yyyy-MM-dd>`, `--max-parallelism <N>`.
+- `--apply-refresh-policy` - apply the incremental refresh policy to determine which partitions are refreshed.
+- `--effective-date <yyyy-MM-dd>` - set the effective date used by the refresh policy.
+- `--max-parallelism <N>` - set the maximum number of partitions to refresh in parallel.
 - `--dry-run` - output the TMSL script without executing.
 - `--no-progress`, `--trace [path]`.
 
@@ -629,6 +738,8 @@ Additional subcommands (`set`, `remove`, `apply`) are documented via `te increme
 
 Run a suite of DAX assertion tests against a deployed model.
 
+`te test run` accepts:
+
 - `--suite <path>` - test-suite directory (default: `.te-tests/`).
 - `--tag <tag>` - only tests with this tag.
 - `--fail-on <severity>` - `error` (default) or `warning`.
@@ -649,7 +760,7 @@ te test spec                       # Print the full assertion format reference
 te test init --from-model --model ./my-model  # Generate stubs from your measures
 ```
 
-## Connection and auth
+## Connection and authentication
 
 ### connect
 
