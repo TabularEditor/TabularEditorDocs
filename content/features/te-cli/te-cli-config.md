@@ -16,15 +16,19 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-The Tabular Editor CLI reads optional configuration from a JSON file. Configuration controls three things: where the CLI looks for its own data files (macros, BPA rules), behavioral defaults (BPA gates, auto-format, validation), and the list of saved connection profiles.
+The Tabular Editor CLI reads optional configuration from a JSON file. Configuration controls three things:
 
-The CLI is self-contained - it does not read from or write to any Tabular Editor 3 desktop install path. BPA rules and macros files must be set explicitly via this config (or initialized on demand with `te bpa rules init` / `te macro init`); there is no auto-detection of `%LocalAppData%\TabularEditor3\` or `%ProgramData%\TabularEditor3\`.
+- **File paths** — where the CLI reads macros, BPA rules, and (optionally) the TE3 Desktop executable, and where to write the query log.
+- **Behavioral defaults** — BPA gates, auto-format, validation.
+- **Saved connection profiles** — the list of named profiles you can switch between.
 
-Most users don't need to edit the file directly - `te config show`, `te config set <key> <value>`, and `te profile set` cover the common operations.
+The CLI is self-contained - it does not read from or write to any Tabular Editor 3 desktop install path. BPA rules and macros files must be set explicitly via this config (or initialized on demand with `te bpa rules init` / `te macro init`).
+
+Most users don't need to edit the config file directly - `te config show`, `te config set <key> <value>`, and `te profile set` cover the common operations.
 
 ## Config file location
 
-Resolution order:
+The following locations are checked in this order:
 
 1. `$TE_CONFIG` environment variable (if set and the file exists).
 2. `~/.config/te/config.json` (on Windows, `%USERPROFILE%\.config\te\config.json`).
@@ -47,7 +51,7 @@ te config show --output-format json    # Machine-readable
 te config paths                        # Show resolved macros and BPA rule paths
 ```
 
-`te config paths` resolves the files the CLI will actually use for macros and BPA rules - useful when debugging missing data files. The output shows two rows: `macros` (the resolved macros file path or `[not set]`) and `bpa.rules` (the first existing BPA rules file resolved by the path resolver, or `[not set]`).
+Use `te config paths` to see which files the CLI will actually use for macros and BPA rules. It's handy when debugging missing data files. The output shows two rows: `macros` (the resolved macros file path or `[not set]`) and `bpa.rules` (the first existing BPA rules file resolved by the path resolver, or `[not set]`).
 
 > [!NOTE]
 > `te config paths` emits `null` fields explicitly in `--output-format json` mode (e.g., `{"macros": null, "bpa": {"rules": null}}`). Reporting resolution outcomes is the command's whole purpose, so `null` is a meaningful "tried but resolved to nothing" answer. `te config show --output-format json` strips null fields by default, so consumers should parse it tolerantly.
@@ -69,6 +73,8 @@ If no config file exists, `te config set` auto-creates one at the resolved path 
 > Every key in the schema is settable via `te config set`, including nested keys via dotted paths (`bpa.onDeploy`, `formatOptions.useSqlBiDaxFormatter`, etc.). The only exception is `formatVersion`, which the CLI manages automatically. Run `te config paths` to find the config file if you'd rather edit the JSON directly.
 
 ## Full schema
+
+The complete JSON config schema with all keys at their default values. Use this as a reference when editing the config file directly, or when looking up the dotted path for a `te config set` call.
 
 ```json
 {
@@ -108,7 +114,9 @@ If no config file exists, `te config set` auto-creates one at the resolved path 
 }
 ```
 
-### Path overrides
+### File paths
+
+Set these in your config to avoid passing the same paths on every command. Per-command flags and environment variables override config values; see [Path resolution priority](#path-resolution-priority) below.
 
 | Key | Meaning |
 | -- | -- |
@@ -144,7 +152,7 @@ All BPA-related settings live under the `bpa` object and are addressed via dotte
 | `bpa.disabledBuiltInRuleIds` | `null` | IDs of individual built-in rules to exclude from the gate. Mutated by `te bpa rules disable <id>` / `te bpa rules enable <id>` - prefer those over editing the array directly. |
 | `vertipaqOnRefresh` | `false` | After a successful refresh (`full`, `dataonly`, `automatic`, or `add`), automatically run VertiPaq analysis to show storage stats for the refreshed tables. Useful for catching unexpected cardinality or memory regressions immediately. |
 | `interactiveEditMode` | `stage` | Default behavior for in-memory mutations inside `te interactive`. `stage` keeps mutations in memory until `save` is invoked (safest); `save` writes to source after every mutating command (use with care on remote sources - every `set` triggers an XMLA write); `revert` discards mutations after each command unless `--save` or `--stage` was passed. Per-command `--save` / `--revert` / `--stage` flags always override. |
-| `disableTelemetry` | `false` | Opt out of anonymous usage telemetry. The CLI collects coarse-grained command usage data (command name, exit code, duration) to inform feature priority - never model content, paths, or query text. |
+| `disableTelemetry` | `false` | Opt out of anonymous usage telemetry. The CLI collects coarse-grained command usage data (command name, exit code, duration) to inform feature priority. The CLI never collects model content, paths, or query text. |
 
 ```bash
 te config set bpa.rules "/etc/te/team.json,/etc/te/strict.json"
@@ -155,7 +163,7 @@ te config set bpa.disabledBuiltInRuleIds "TE3_BUILT_IN_DATE_TABLE_EXISTS,TE3_BUI
 
 ### Format options
 
-Applied whenever the CLI invokes a DAX formatter (for `te format` and, when enabled, `autoFormat` on mutations). The CLI ships with an in-house formatter that works fully offline; opt into the SQL BI [daxformatter.com](https://www.daxformatter.com) web service via `formatOptions.useSqlBiDaxFormatter` if you need that style or want to match the desktop UI's "Send to SQL BI" behavior.
+Applied whenever the CLI invokes a DAX formatter (for `te format` and, when enabled, `autoFormat` on mutations). The CLI ships with an in-house formatter that works fully offline; opt into the SQL BI [daxformatter.com](https://www.daxformatter.com) web service via `formatOptions.useSqlBiDaxFormatter` if you need that style or want to match the behavior of TE2 or TE3 with "Use daxformatter.com..." enabled.
 
 | Key | Default | Description |
 | -- | -- | -- |
@@ -165,6 +173,8 @@ Applied whenever the CLI invokes a DAX formatter (for `te format` and, when enab
 | `formatOptions.useSqlBiDaxFormatter` | `false` | Format DAX via the [SQL BI daxformatter.com](https://www.daxformatter.com) web service instead of the in-house formatter. Requires internet access. The in-house formatter (default) works offline and matches the Tabular Editor 3 Desktop default. |
 
 ### Display
+
+Settings that control the CLI's terminal output and diagnostic verbosity.
 
 | Key | Default | Description |
 | -- | -- | -- |

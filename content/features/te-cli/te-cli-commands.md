@@ -119,7 +119,7 @@ Misspelled segments emit a contextual error with a "did you mean" hint when the 
 
 ## Global options
 
-These flags are available on every command and sit before or after the subcommand name.
+These flags are available on every command and can be used before or after the subcommand name.
 
 | Option | Description |
 | -- | -- |
