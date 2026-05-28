@@ -31,7 +31,7 @@ The CLI supports the full Azure Identity credential chain:
 | Managed identity | Azure VMs, Azure Container Apps, Azure Functions | `managed-identity` |
 
 > [!NOTE]
-> `--auth` is a **global** option, available on every `te` command - not just `te auth login`. Pass it to `te deploy`, `te refresh`, `te query`, `te connect`, `te export`, or any other command that connects to a remote endpoint, to override the default chain for that invocation. The default (`auto`) tries environment credentials first, then falls back to the cached or interactive browser login.
+> `--auth` is a **global** option, available on every `te` command - not just `te auth login`. Pass it to [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te query`](xref:te-cli-commands#query), [`te connect`](xref:te-cli-commands#connect), or any other command that connects to a remote endpoint, to override the default chain for that invocation. The default (`auto`) tries environment credentials first, then falls back to the cached or interactive browser login.
 
 For headless, SSH, WSL, or devcontainer scenarios, use a service principal - `te auth login -u <id> -p <secret> -t <tenant>` (or `--certificate`). The login is cached, so subsequent commands acquire tokens silently with `--auth auto`.
 
@@ -44,13 +44,13 @@ Authenticate and cache the result for subsequent commands:
 te auth login
 
 # Service principal with client secret
-te auth login -u <app-id> -p <secret> -t <tenant>
+te auth login -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" -t "$AZURE_TENANT_ID"
 
 # Service principal - read secret from stdin
-echo $AZURE_CLIENT_SECRET | te auth login -u <app-id> -p - -t <tenant>
+echo "$AZURE_CLIENT_SECRET" | te auth login -u "$AZURE_CLIENT_ID" -p - -t "$AZURE_TENANT_ID"
 
 # Service principal with certificate
-te auth login -u <app-id> -t <tenant> --certificate ./sp.pfx --certificate-password ...
+te auth login -u "$AZURE_CLIENT_ID" -t "$AZURE_TENANT_ID" --certificate ./sp.pfx --certificate-password "$CERT_PASSWORD"
 
 # Managed identity (Azure-hosted)
 te auth login --identity
@@ -59,7 +59,7 @@ te auth login --identity
 After a successful service-principal login the CLI **caches the credentials** so every subsequent `te` command can acquire tokens silently - no need to re-pass `-u / -p / -t` or set the `AZURE_CLIENT_*` environment variables. Pass `--save=false` for a one-shot login that doesn't update the cache, or run `te auth logout` to clear it.
 
 > [!WARNING]
-> Passing secrets directly on the command line is visible in `ps` output and shell history. Prefer the `AZURE_CLIENT_SECRET` environment variable, or pipe the secret via stdin with `-p -`.
+> Passing secrets directly on the command line exposes them to process listings and shell history. Prefer the `AZURE_CLIENT_SECRET` environment variable, or pipe the secret via stdin with `-p -`.
 
 ## `te auth status`
 
@@ -70,7 +70,7 @@ te auth status
 te auth status --output-format json
 ```
 
-Exit code is `0` when a valid session exists, `1` when not logged in or expired.
+This returns an exit code of `0` when a valid session exists, `1` when not logged in or expired.
 
 ## `te auth logout`
 
@@ -191,9 +191,9 @@ For CI/CD pipelines, agents, or any unattended context, avoid interactive flows 
 Environment-based example for a pipeline:
 
 ```bash
-export AZURE_CLIENT_ID=<app-id>
-export AZURE_CLIENT_SECRET=<secret>
-export AZURE_TENANT_ID=<tenant>
+export AZURE_CLIENT_ID="your-app-id"
+export AZURE_CLIENT_SECRET="your-client-secret"
+export AZURE_TENANT_ID="your-tenant-id"
 
 te deploy ./model -s my-workspace -d my-model \
   --auth env \
