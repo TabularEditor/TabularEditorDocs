@@ -2,7 +2,7 @@
 uid: pivot-grid
 title: Pivot Grids
 author: Daniel Otykier
-updated: 2024-05-28
+updated: 2026-05-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -165,3 +165,5 @@ Below is a list of known limitations and issues with Pivot Grids in Tabular Edit
 
 - Format rules (such as icon sets, data bars, etc.) are not properly persisted when saving a Pivot Grid layout as a `.te3pivot` file.
 - If you open a .te3pivot file on a model different from the one the layout was saved from, fields that do not exist in the current model will be removed from the layout. Hitting Save (Ctrl+S) will save the layout with the removed fields removed. We may change this behavior in a future release so that the .te3pivot file is not overwritten without explicit confirmation.
+- Columns that use the **Group By Columns** property (including field parameter columns) cannot be added to the Row Area or Column Area on their own. Doing so produces the error *"Column X is part of a composite key, but not all columns of the composite key are included in the expression or its dependent expression"*. This is a general limitation of MDX clients and also occurs when using such a column in an Excel PivotTable. To work around it, add the related Group By Column to the Pivot Grid *before* adding the dependent column. For example, if `[ProductKey]` is configured as the Group By Column of `[ProductName]`, add `[ProductKey]` to the Row Area or Column Area first, then add `[ProductName]`.
+- Applying an explicit ascending or descending sort to a column in the Row Area or Column Area sorts values alphabetically as strings, regardless of the column data type. Dates formatted as long date (for example "May 4, 2024") and integers are sorted lexicographically rather than chronologically or numerically. This is a limitation of how MDX clients sort and the same behavior occurs in an Excel PivotTable connected to the model. To get chronological or numerical ordering, rely on the column's natural sort (do not apply an explicit sort) or use the **Sort By Column** property on the model column to point at a column with a sortable underlying value.
