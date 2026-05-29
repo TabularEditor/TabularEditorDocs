@@ -1,6 +1,6 @@
 ---
 uid: pivot-grid
-title: Pivot Grids
+title: Pivot Grid
 author: Daniel Otykier
 updated: 2026-05-27
 applies_to:
@@ -17,155 +17,155 @@ applies_to:
           full: true
 ---
 
-# Pivot Grids
+# Pivot Grid
 
 > [!NOTE]
-> Information in this article relates to Tabular Editor 3.16.0 or newer. Please make sure you are using the latest version of Tabular Editor 3 to take advantage of the new features and improvements.
+> La información de este artículo se aplica a Tabular Editor 3.16.0 o versiones posteriores. Asegúrate de estar usando la versión más reciente de Tabular Editor 3 para aprovechar las nuevas funciones y mejoras.
 
-While developing semantic models, you may often want to test that your DAX expressions return the expected values. Traditionally, this was done using client tools such as Excel or Power BI. With Tabular Editor 3, you can use **Pivot Grids** which behave much like the widely known PivotTables in Excel. The Pivot Grid lets you quickly create summarized views of the data in your model, allowing you to test the behavior of your DAX measures when filtering and slicing by various columns and hierarchies.
+Al desarrollar modelos semánticos, a menudo querrás comprobar que tus expresiones DAX devuelven los valores esperados. Tradicionalmente, esto se hacía con herramientas cliente como Excel o Power BI. Con Tabular Editor 3, puedes usar **Pivot Grids**, que se comportan de forma muy similar a las conocidas tablas dinámicas de Excel. El Pivot Grid te permite crear rápidamente vistas resumidas de los datos de tu modelo y probar el comportamiento de tus medidas DAX al filtrar y segmentar por distintas columnas y jerarquías.
 
-![Pivot Grid Example](~/content/assets/images/pivot-grid-example.png)
+![Ejemplo de Pivot Grid](~/content/assets/images/pivot-grid-example.png)
 
-The screenshot above shows a Pivot Grid containing two measures, `[Total Net Order Value]` and `[Net Orders]`, which is sliced horizontally by Year, filtered to 2021 and 2022, and vertically by the Product Hierarchy. Tabular Editor 3 users can use this feature to ensure that DAX expressions behind the measures are working as expected and to quickly validate the data in the model.
+La captura de pantalla anterior muestra un Pivot Grid que contiene dos medidas, `[Total Net Order Value]` y `[Net Orders]`, segmentado horizontalmente por Año, filtrado a 2021 y 2022, y verticalmente por la jerarquía de productos. Los usuarios de Tabular Editor 3 pueden usar esta característica para asegurarse de que las expresiones DAX de las medidas funcionan como se espera y para validar rápidamente los datos del modelo.
 
-By default, the Pivot Grid auto-updates every time you save changes to the semantic model (Ctrl+S). Thus, you can quickly iterate on your DAX expressions and see the results in the Pivot Grid without having to wait for the model to refresh by changing your measures, saving the model, and directly seeing the new measure definition reflected in the Pivot Grid. A good workflow is to open the Pivot Grid in a separate window while working on DAX expressions in the **Expression Editor** or using a **DAX Script**.
+De forma predeterminada, el Pivot Grid se actualiza automáticamente cada vez que guardas cambios en el modelo semántico (Ctrl+S). Así, puedes iterar rápidamente sobre tus expresiones DAX y ver los resultados en el Pivot Grid sin tener que esperar a que se actualice el modelo: cambia tus medidas, guarda el modelo y verás directamente la nueva definición de la medida reflejada en el Pivot Grid. Un buen flujo de trabajo es abrir el Pivot Grid en una ventana independiente mientras trabajas en expresiones DAX en el **Editor de expresiones** o con un **Script DAX**.
 
 > [!TIP]
-> Some clarifications on terminology:
+> Algunas aclaraciones sobre la terminología:
 >
-> - **Fields** refers to model measures, KPIs, columns and hierarchies. In other words, anything that can be dragged into the Pivot Grid.
-> - **KPIs** are a special type of measure that can be created in Tabular Editor. They are displayed in the Pivot Grid just like measures, but with a special icon to indicate that they are KPIs. Each KPI can have up to 3 different values (target, trend, and status), which are displayed separately in the Pivot Grid.
-> - **Columns** in the Pivot Grid (such as in the term "Column Area") should not be confused with columns in the model. In the Pivot Grid, columns are used to slice the data horizontally, while rows are used to slice the data vertically.
-> - **Cells** in the Pivot Grid are the individual data points where a row and a column intersect. Each cell contains a single value, which is the result of the DAX expression of the specific measure, evaluated under the filter context produced by values in the _Row Area_ and _Column Area_, in combination with any filters applied to fields in the _Filter Area_.
+> - El término **Campos** se refiere a las medidas, los KPI, las columnas y las jerarquías del modelo. En otras palabras, cualquier elemento que se pueda arrastrar al Pivot Grid.
+> - **Los KPI** son un tipo especial de medida que puedes crear en Tabular Editor. Se muestran en el Pivot Grid igual que las medidas, pero con un icono especial que indica que son KPI. Cada KPI puede tener hasta 3 valores diferentes (objetivo, tendencia y estado), que se muestran por separado en el Pivot Grid.
+> - **Las columnas** en el Pivot Grid (como en el término "Área de columnas") no deben confundirse con las columnas del modelo. En el Pivot Grid, las columnas se usan para segmentar los datos horizontalmente, mientras que las filas se usan para segmentarlos verticalmente.
+> - **Las celdas** del Pivot Grid son los puntos de datos individuales donde se cruzan una fila y una columna. Cada celda contiene un único valor, que es el resultado de la expresión DAX de la medida concreta, evaluada en el contexto de filtro generado por los valores del _Área de filas_ y del _Área de columnas_, en combinación con cualquier filtro aplicado a los campos del _Área de filtros_.
 
 > [!NOTE]
-> Developers with a multidimensional background may be more familiar with the terms _Dimensions_ and _Attributes_. In semantic models, _Dimensions_ are represented by model _tables_, and _Attributes_ are represented by model _columns_. _Hierarchies_ in a semantic model, is just a way to group columns together, such as in a calendar hierarchy: Year > Quarter > Month > Day. Such hierarchies used to be called _Attribute Hierarchies_ or _User-Defined Hierarchies_ in multidimensional models.
+> Los desarrolladores con experiencia en modelos multidimensionales pueden estar más familiarizados con los términos _Dimensiones_ y _Atributos_. En los modelos semánticos, las _Dimensiones_ se representan mediante _tablas_ del modelo, y los _Atributos_ mediante _columnas_ del modelo. Las _Jerarquías_ de un modelo semántico son simplemente una forma de agrupar columnas, como en una jerarquía de calendario: Año > Trimestre > Mes > Día. Estas jerarquías solían llamarse _Jerarquías de atributos_ o _Jerarquías definidas por el usuario_ en los modelos multidimensionales.
 
-## Creating a Pivot Grid
+## Crear un Pivot Grid
 
-You can create a new, empty Pivot Grid through the **File > New > New Pivot Grid** menu option. Alternatively, select one or more measures in the **TOM Explorer**, right-click or go to the **Measure** menu and select **Add to Pivot Grid**, to create a new Pivot Grid with the selected measures.
+Puedes crear un nuevo Pivot Grid vacío mediante la opción de menú **Archivo > Nuevo > Nuevo Pivot Grid**. Como alternativa, selecciona una o más medidas en el **Explorador TOM** y haz clic con el botón derecho, o ve al menú **Medida** y selecciona **Agregar a Pivot Grid** para crear un nuevo Pivot Grid con las medidas seleccionadas.
 
-![Create Pivot Grid From TOM Explorer](~/content/assets/images/create-pivot-grid-from-TOM-Explorer.png)
+![Crear Pivot Grid desde el Explorador TOM](~/content/assets/images/create-pivot-grid-from-TOM-Explorer.png)
 
-You can create as many Pivot Grids as you like.
-
-> [!IMPORTANT]
-> The option to create a Pivot Grid is only available while Tabular Editor 3 is connected to an instance of Analysis Services or the Power BI / Fabric XMLA endpoint.
-
-## Pivot Grid layout
-
-The Pivot Grid is divided into 4 areas: **Filter Area**, **Column Area**, **Row Area**, and **Data Area**. You can drag fields from the **Field List** or the **TOM Explorer** into these areas to create a Pivot Grid layout. The **Data Area** area is where you place measures or KPIs, while the **Row Area** and **Column Area** are used to slice the data by hierarchies and columns. The **Filter Area** is used to filter the data based on values in columns or hierarchies.
-
-![Empty Pivot Grid Highlighted](~/content/assets/images/empty-pivot-grid-highlighted.png)
-
-The screenshot above shows an empty Pivot Grid layout. The 4 empty boxes at the bottom of the Field List represent the 4 areas of the Pivot Grid. You can drag fields from the Field List into these listboxes to create a Pivot Grid layout. Alternatively, you can drag fields directly into the Pivot Grid.
-
-## Pivot Grid menu and toolbar
-
-By default, when a Pivot Grid is the active window in Tabular Editor 3, a **Pivot Grid** menu and toolbar are available. The menu contains the same actions as the toolbar.
-
-![Pivot Grid Toolbar](~/content/assets/images/pivot-grid-toolbar.png)
-
-![Pivot Grid Menu](~/content/assets/images/pivot-grid-menu.png)
-
-These actions are:
-
-- **Impersonation...**: Displays a dialog that allows you to specify a role or user to impersonate through the Pivot Grid. This is useful when you want to test the behavior of your model for different users or roles, such as when [RLS or OLS](xref:data-security-about) has been applied to the model.
-- **Refresh**: Re-execute the query generated by the Pivot Grid. This is useful when auto-refresh is disabled, or if changes have been made to the model outside of Tabular Editor 3.
-- **Auto Refresh**: Toggles auto-refresh on or off. When auto-refresh is enabled, the Pivot Grid will automatically refresh every time you save changes to the model, or when a [Data Refresh operation](xref:data-refresh-view) completes.
-- **Clear filters**: Clears all filters from the Pivot Grid.
-- **Clear**: Removes all fields from the Pivot Grid.
-- **Show empty values on columns**: Toggles whether empty values should be shown in the Pivot Grid, for fields that are added to the Pivot Grids Column Area.
-- **Show empty values on rows**: Toggles whether empty values should be shown in the Pivot Grid, for fields that are added to the Pivot Grids Row Area.
-- **Field List**: Toggle Field list on/off.
-
-## Field List
-
-By default, the Field List is displayed on the right side of the Pivot Grid. The Field List contains all the fields (measures, KPIs, columns, and hierarchies) that are available in the model. You can drag fields from the Field List into the Pivot Grid to create a layout. You can also drag fields between the different areas of the Pivot Grid to rearrange the layout.
-
-The Field List itself can be docked to the left or right side of the Pivot Grid, above or below, it can be hidden, or it can be undocked so that it "floats" as a separate window. If you have multiple Pivot Grids open, each Pivot Grid has its own Field List.
-
-If you would like the Field List to not be shown by default, uncheck the **Always show field list** option under **Tools > Preferences > Data Browsing > Pivot Grid > Field List**.
-
-You can change the default layout of the Field List under **Tools > Preferences > Data Browsing > Pivot Grid > Field List > Layout**. You can also change the layout of any field lists, by right-clicking in an empty area of the Field List and choosing the desired layout from the context menu.
-
-![Field List Settings](~/content/assets/images/field-list-settings.png)
-
-By default, any field you add to the Pivot Grid remains visible in the Field List. If you would like to hide fields that are added to the Pivot Grid, you can uncheck the **Keep fields visible** option under **Tools > Preferences > Data Browsing > Pivot Grid > Field List** (this behavior is similar to how Pivot Grid worked prior to Tabular Editor v. 3.16.0).
-
-If you are working on a large, complex model, and you are expecting measures used in the Pivot Grid to be relatively slow, you can check the **Defer Layout Update** option at the bottom of the Field List. This will prevent the Pivot Grid from updating the layout every time you add or remove a field, which can be useful, if you intend to make multiple changes to the Pivot Grid layout before updating it. Hit the **Update** button to apply the changes to the Pivot Grid.
+Puedes crear tantos Pivot Grid como quieras.
 
 > [!IMPORTANT]
-> Columns without an attribute hierarchy (IsAvailableIn MDX = false) cannot be used in the Pivot Grid and are not shown in the Field list.
+> La opción para crear un Pivot Grid solo está disponible mientras Tabular Editor 3 esté conectado a una instancia de Analysis Services o al punto de conexión XMLA de Power BI / Fabric.
 
-## Customizing Pivot Grids
+## Diseño del Pivot Grid
 
-### Adding fields
+El Pivot Grid se divide en 4 áreas: **Área de filtro**, **Área de columnas**, **Área de filas** y **Área de datos**. Puedes arrastrar campos desde la **Lista de campos** o el **Explorador TOM** a estas áreas para crear un diseño de Pivot Grid. El **Área de datos** es donde se colocan las medidas o los KPI, mientras que el **Área de filas** y el **Área de columnas** se usan para segmentar los datos por jerarquías y columnas. El **Área de filtro** se usa para filtrar los datos en función de los valores de columnas o jerarquías.
 
-There are several ways to add a field to a Pivot Grid:
+![Pivot Grid vacío resaltado](~/content/assets/images/empty-pivot-grid-highlighted.png)
 
-**From the TOM Explorer:**
+La captura de pantalla anterior muestra un diseño de Pivot Grid vacío. Los 4 cuadros vacíos de la parte inferior de la Lista de campos representan las 4 áreas del Pivot Grid. Puedes arrastrar campos desde la Lista de campos a estos cuadros de lista para crear un diseño de Pivot Grid. Como alternativa, puedes arrastrar campos directamente al Pivot Grid.
 
-- Right-click on one or more _measures_ and choose **Add to Pivot Grid**.
-- Right-click on a _column_ or _hierarchy_ and choose any of the **Add to pivot**-options (choose between rows, columns, or filters).
-- If a measure, column or hierarchy is already shown in the Pivot Grid, the right-click options will allow you to **Remove from Pivot Grid**. in addition, you will see options to move columns or hierarchies between the different areas of the Pivot Grid.
-- All of the options above are also available through the **Measure**, **Column**, and **Hierarchy** menus (respectively), when one or more such objects are selected in the TOM Explorer.
-- In addition to the above, you can also drag one or more measures, columns, or hierarchies from the TOM Explorer into the Pivot Grid areas.
+## Menú y barra de herramientas del Pivot Grid
 
-![Add hierarchy to Pivot Grid through TOM Explorer](~/content/assets/images/add-through-tom-explorer.png)
+De forma predeterminada, cuando un Pivot Grid es la ventana activa en Tabular Editor 3, están disponibles un menú **Pivot Grid** y una barra de herramientas. El menú contiene las mismas acciones que la barra de herramientas.
 
-**From the Field List:**
+![Barra de herramientas de Pivot Grid](~/content/assets/images/pivot-grid-toolbar.png)
 
-- Drag a field from the Field List into the Pivot Grid.
-- Drag a field from the Field List into the area listboxes at the bottom of the Field List to add it to the Pivot Grid.
-- Right-click on a field in the Field List for options to add it to the Pivot Grid.
-- If a field is already showing in the Pivot Grid, the right-click context menu will also have an option to remove the field, or move it to a different area (column/hierarchy fields only).
-- Double-clicking on a field will immediately add it to the Pivot Grid. Measures/KPIs are added to the Data Area, while columns and hierarchies are added to the Filter Area.
+![Menú de Pivot Grid](~/content/assets/images/pivot-grid-menu.png)
 
-![Add Through Field List](~/content/assets/images/add-through-field-list.png)
+Estas acciones son:
 
-### Adjusting fields
+- **Suplantación...**: Muestra un cuadro de diálogo que te permite especificar un rol o un usuario que quieres suplantar a través del Pivot Grid. Esto es útil cuando quieres probar el comportamiento del modelo para distintos usuarios o roles, por ejemplo, cuando se ha aplicado [RLS u OLS](xref:data-security-about) al modelo.
+- **Actualizar**: Vuelve a ejecutar la consulta generada por el Pivot Grid. Esto es útil cuando la actualización automática está desactivada o si se han realizado cambios en el modelo fuera de Tabular Editor 3.
+- **Actualización automática**: Activa o desactiva la actualización automática. Cuando la actualización automática está activada, el Pivot Grid se actualizará automáticamente cada vez que guardes cambios en el modelo o cuando finalice una [operación de actualización de datos](xref:data-refresh-view).
+- **Borrar filtros**: Borra todos los filtros del Pivot Grid.
+- **Borrar**: Elimina todos los campos del Pivot Grid.
+- **Mostrar valores vacíos en columnas**: Activa o desactiva la visualización de valores vacíos en el Pivot Grid para los campos que se agregan a su área de columnas.
+- **Mostrar valores vacíos en filas**: Activa o desactiva la visualización de valores vacíos en el Pivot Grid para los campos que se agregan a su área de filas.
+- **Lista de campos**: Muestra u oculta la lista de campos.
 
-After fields have been added to the Pivot Grid, you can adjust the width of columns to better accommodate their content. Double-clicking on a column header separator will automatically adjust the column width to fit the content of the column. You can also drag the column header separator to manually adjust the column width. Lastly, you can use the **Best Fit** or **Set width...** context menu options by right-clicking on the column header.
+## Lista de campos
 
-![Best Fit Columns 2](~/content/assets/images/best-fit-columns-2.png)
+De forma predeterminada, la Lista de campos se muestra a la derecha del Pivot Grid. La Lista de campos contiene todos los campos (medidas, KPI, columnas y jerarquías) que están disponibles en el modelo. Puedes arrastrar campos desde la Lista de campos al Pivot Grid para crear una disposición. También puedes arrastrar campos entre las distintas áreas del Pivot Grid para reorganizar la disposición.
 
-To apply a "Best Fit" or set a specific pixel width for all columns in the Pivot Grid simultaneously, right-click on the "Values" header and select the desired option from the context menu.
+La propia Lista de campos puede acoplarse al lado izquierdo o derecho del Pivot Grid, arriba o abajo; también puede ocultarse o desacoplarse para que "flote" como una ventana independiente. Si tienes varios Pivot Grid abiertos, cada Pivot Grid tiene su propia Lista de campos.
 
-By default, field headers will expand vertically to fit the content of the field name. If you would like to limit the height of field headers to one row, you can disable the **Word wrap field headers**-option under **Tools > Preferences > Pivot Grid > Field Headers**.
+Si no quieres que la Lista de campos se muestre de forma predeterminada, desactiva la opción **Mostrar siempre la lista de campos** en **Herramientas > Preferencias > Exploración de datos > Pivot Grid > Lista de campos**.
 
-To change the order of fields in the Pivot Grid, you can drag fields between the different areas of the Pivot Grid. You can also drag fields within the same area to change their order. To remove a field from the Pivot Grid, drag it back to the Field List or right-click on the field and choose **Remove from Pivot Grid** from the context menu.
+Puedes cambiar la disposición predeterminada de la Lista de campos en **Herramientas > Preferencias > Exploración de datos > Pivot Grid > Lista de campos > Disposición**. También puedes cambiar la disposición de cualquier lista de campos haciendo clic con el botón derecho en un área vacía de la Lista de campos y eligiendo la disposición deseada en el menú contextual.
 
-If you want measures to be displayed on rows rather than on columns, drag the "Values" field from the Column Area to the Row Area.
+![Configuración de la lista de campos](~/content/assets/images/field-list-settings.png)
 
-### Visualization rules
+De forma predeterminada, cualquier campo que agregues al Pivot Grid permanece visible en la Lista de campos. Si quieres ocultar los campos que se agregan al Pivot Grid, puedes desactivar la opción **Mantener los campos visibles** en **Herramientas > Preferencias > Exploración de datos > Pivot Grid > Lista de campos** (este comportamiento es similar a cómo funcionaba el Pivot Grid antes de Tabular Editor v. 3.16.0).
 
-You can add visualization rules to cells in the Pivot Grids, which is useful for highlighting cells based on their values, for example in order to better spot outliers. To add visualization rules, right-click on any Data Area cell in the Pivot Grid, and choose which rules to apply from the context menu (see screenshot below).
+Si estás trabajando en un modelo grande y complejo, y esperas que las medidas usadas en el Pivot Grid sean relativamente lentas, puedes activar la opción **Aplazar la actualización del diseño** en la parte inferior de la lista de campos. Esto evita que el Pivot Grid actualice el diseño cada vez que agregas o quitas un campo, lo que puede ser útil si piensas hacer varios cambios en el diseño del Pivot Grid antes de actualizarlo. Haz clic en el botón **Actualizar** para aplicar los cambios al Pivot Grid.
 
-![Customizing Pivot Grids](~/content/assets/images/customizing-pivot-grids.png)
+> [!IMPORTANT]
+> Las columnas sin jerarquía de atributos (IsAvailableIn MDX = false) no se pueden usar en el Pivot Grid y no se muestran en la Lista de campos.
 
-## Persisting Pivot Grid layouts
+## Personalización de Pivot Grids
 
-When you close a Pivot Grid, Tabular Editor will prompt you to save the layout of the Pivot Grid. If you choose to save the layout, the next time you open the Pivot Grid, it will be restored to the same layout as when you closed it. You can also save the layout of a Pivot Grid manually by hitting (Ctrl+S) or using the **File > Save** option, while the Pivot Grid is the active window.
+### Agregar campos
 
-The file extension used for saving Pivot Grid layouts is `.te3pivot`. This is a simple json file that specifies which model objects are shown in the Pivot Grid, and in which areas they are placed. Objects are referenced by name and lineage tag (if present), so the Pivot Grid layout can generally be restored even if the model has been modified since the layout was saved.
+Hay varias formas de agregar un campo al Pivot Grid:
+
+**Desde el Explorador TOM:**
+
+- Haz clic con el botón derecho en una o varias _medidas_ y elige **Agregar al Pivot Grid**.
+- Haz clic con el botón derecho en una _columna_ o _jerarquía_ y elige cualquiera de las opciones de **Agregar al Pivot Grid** (filas, columnas o filtros).
+- Si una medida, columna o jerarquía ya se muestra en el Pivot Grid, las opciones al hacer clic con el botón derecho te permitirán **Quitar del Pivot Grid**. además, verás opciones para mover columnas o jerarquías entre las distintas áreas del Pivot Grid.
+- Todas las opciones anteriores también están disponibles en los menús **medida**, **Columna** y **Jerarquía** (respectivamente) cuando seleccionas uno o varios objetos de ese tipo en el Explorador TOM.
+- Además de lo anterior, también puedes arrastrar una o varias medidas, columnas o jerarquías desde el Explorador TOM hasta las áreas del Pivot Grid.
+
+![Agregar jerarquía al Pivot Grid desde el Explorador TOM](~/content/assets/images/add-through-tom-explorer.png)
+
+**Desde la Lista de campos:**
+
+- Arrastra un campo desde la Lista de campos hasta el Pivot Grid.
+- Arrastra un campo desde la Lista de campos hasta los cuadros de lista de áreas, en la parte inferior de la Lista de campos, para agregarlo al Pivot Grid.
+- Haz clic con el botón derecho en un campo de la Lista de campos para ver opciones que permiten agregarlo al Pivot Grid.
+- Si un campo ya se muestra en el Pivot Grid, el menú contextual que aparece al hacer clic con el botón derecho también incluirá una opción para quitar el campo o moverlo a otra área (solo para campos de columna o jerarquía).
+- Al hacer doble clic en un campo, se agregará inmediatamente al Pivot Grid. Las medidas y los KPI se agregan al Área de datos, mientras que las columnas y las jerarquías se agregan al Área de filtros.
+
+![Agregar desde la Lista de campos](~/content/assets/images/add-through-field-list.png)
+
+### Ajustar campos
+
+Después de agregar campos al Pivot Grid, puedes ajustar el ancho de las columnas para adaptarlo mejor a su contenido. Al hacer doble clic en el separador del encabezado de una columna, el ancho de la columna se ajustará automáticamente al contenido. También puedes arrastrar el separador del encabezado de la columna para ajustar manualmente el ancho de la columna. Por último, puedes usar las opciones **Ajuste óptimo** o **Establecer ancho...** del menú contextual haciendo clic con el botón derecho en el encabezado de la columna.
+
+![Columnas con ajuste óptimo 2](~/content/assets/images/best-fit-columns-2.png)
+
+Para aplicar un "Ajuste óptimo" o establecer un ancho específico en píxeles para todas las columnas del Pivot Grid al mismo tiempo, haz clic con el botón derecho en el encabezado "Valores" y selecciona la opción deseada en el menú contextual.
+
+De forma predeterminada, los encabezados de campo se expanden verticalmente para ajustarse al contenido del nombre del campo. Si quieres limitar la altura de los encabezados de campo a una sola fila, puedes desactivar la opción **Ajustar texto en encabezados de campo** en **Herramientas > Preferencia > Pivot Grid > Encabezados de campo**.
+
+Para cambiar el orden de los campos en el Pivot Grid, puedes arrastrarlos entre las distintas áreas del Pivot Grid. También puedes arrastrar campos dentro de la misma área para cambiar su orden. Para quitar un campo del Pivot Grid, arrástralo de vuelta a la Lista de campos o haz clic con el botón derecho en el campo y elige **Quitar del Pivot Grid** en el menú contextual.
+
+Si quieres que las medidas se muestren en filas en lugar de en columnas, arrastra el campo "Valores" del Área de columnas al Área de filas.
+
+### Reglas de visualización
+
+Puedes agregar reglas de visualización a las celdas de los Pivot Grids, lo que resulta útil para resaltarlas en función de sus valores; por ejemplo, para detectar mejor los valores atípicos. Para agregar reglas de visualización, haz clic con el botón derecho en cualquier celda del Área de datos del Pivot Grid y elige las reglas que desees aplicar en el menú contextual (consulta la siguiente captura de pantalla).
+
+![Personalización de Pivot Grids](~/content/assets/images/customizing-pivot-grids.png)
+
+## Conservar diseños de Pivot Grid
+
+Al cerrar un Pivot Grid, Tabular Editor te pedirá que guardes el diseño del Pivot Grid. Si decides guardar el diseño, la próxima vez que abras el Pivot Grid se restaurará con el mismo diseño que tenía al cerrarlo. También puedes guardar manualmente el diseño de un Pivot Grid pulsando (Ctrl+S) o usando la opción **Archivo > Guardar**, mientras el Pivot Grid es la ventana activa.
+
+La extensión de archivo que se usa para guardar diseños de Pivot Grid es `.te3pivot`. Se trata de un archivo json sencillo que especifica qué objetos del modelo se muestran en el Pivot Grid y en qué áreas se ubican. Los objetos se referencian por su nombre y su etiqueta de linaje (si existe), por lo que el diseño del Pivot Grid, por lo general, puede restaurarse incluso si el modelo se ha modificado desde que se guardó el diseño.
 
 > [!NOTE]
-> It is possible to open a Pivot Grid layout that was created in a different model, but be aware that the fields in the layout may not exist in the model you are currently connected to. In such cases, the Pivot Grid will show a warning message, and any fields that do not exist in the model will be removed from the layout. The warning message may be toggled off under **Tools > Preferences > Data Browsing > Pivot Grid > Show warning if Pivot Grid doesn't match model**.
+> Es posible abrir un diseño de Pivot Grid que se haya creado en otro modelo, pero ten en cuenta que los campos del diseño pueden no existir en el modelo al que estás conectado actualmente. En esos casos, el Pivot Grid mostrará un mensaje de advertencia y todos los campos que no existan en el modelo se quitarán del diseño. Puedes desactivar el mensaje de advertencia en **Herramientas > Preferencia > Exploración de datos > Pivot Grid > Mostrar advertencia si Pivot Grid no coincide con el modelo**.
 
-## Additional features
+## Funciones adicionales
 
-The Pivot Grid has a few more features that are useful to know about:
+El Pivot Grid tiene algunas funciones adicionales que es útil conocer:
 
-- If you right-click on a field, you will have the option to **Go to** that field. This brings the TOM Explorer into focus, with the equivalent model object selected. For measures and calculated columns, the **Expression Editor** will be brought into focus, with the DAX expression of the measure displayed.
-- If you right-click on a cell in the Pivot Grid, you can select the option to **Debug this value**. This will launch the [**DAX Debugger**](xref:dax-debugger) starting from the specific measure and filter context that produced the value in the cell.
-- While a Pivot Grid is **refreshing**, certain toolbar items are disabled and context menu actions are temporarily unavailable.
+- Si haces clic con el botón derecho en un campo, tendrás la opción de **Ir a** ese campo. Esto llevará el foco al Explorador TOM, con el objeto del modelo equivalente seleccionado. En el caso de las medidas y las columnas calculadas, el **Editor de expresiones** pasará a primer plano y se mostrará la expresión DAX correspondiente.
+- Si haces clic con el botón derecho en una celda del Pivot Grid, puedes seleccionar la opción **Depurar este valor**. Esto iniciará el [**DAX Debugger**](xref:dax-debugger) a partir de la medida concreta y del contexto de filtro que produjeron el valor de la celda.
+- Mientras un Pivot Grid se está **actualizando**, algunos elementos de la barra de herramientas se deshabilitan y las acciones del menú contextual dejan de estar disponibles temporalmente.
 
-## Limitations and known issues
+## Limitaciones y problemas conocidos
 
-Below is a list of known limitations and issues with Pivot Grids in Tabular Editor 3.16.0, which we are working to address in future releases:
+A continuación tienes una lista de las limitaciones y los problemas conocidos de los Pivot Grid en Tabular Editor 3.16.0 que estamos trabajando para corregir en versiones futuras:
 
-- Format rules (such as icon sets, data bars, etc.) are not properly persisted when saving a Pivot Grid layout as a `.te3pivot` file.
-- If you open a .te3pivot file on a model different from the one the layout was saved from, fields that do not exist in the current model will be removed from the layout. Hitting Save (Ctrl+S) will save the layout with the removed fields removed. We may change this behavior in a future release so that the .te3pivot file is not overwritten without explicit confirmation.
-- Columns that use the **Group By Columns** property (including field parameter columns) cannot be added to the Row Area or Column Area on their own. Doing so produces the error _"Column X is part of a composite key, but not all columns of the composite key are included in the expression or its dependent expression"_. This is a general limitation of MDX clients and also occurs when using such a column in an Excel PivotTable. To work around it, add the related Group By Column to the Pivot Grid _before_ adding the dependent column. For example, if `[ProductKey]` is configured as the Group By Column of `[ProductName]`, add `[ProductKey]` to the Row Area or Column Area first, then add `[ProductName]`.
-- Applying an explicit ascending or descending sort to a column in the Row Area or Column Area sorts values alphabetically as strings, regardless of the column data type. Dates formatted as long date (for example "May 4, 2024") and integers are sorted lexicographically rather than chronologically or numerically. This is a limitation of how MDX clients sort and the same behavior occurs in an Excel PivotTable connected to the model. To get chronological or numerical ordering, rely on the column's natural sort (do not apply an explicit sort) or use the **Sort By Column** property on the model column to point at a column with a sortable underlying value.
+- Las reglas de formato (como conjuntos de iconos, barras de datos, etc.) no se conservan correctamente al guardar un diseño de Pivot Grid como archivo `.te3pivot`.
+- Si abres un archivo .te3pivot en un modelo distinto de aquel del que se guardó el diseño, los campos que no existan en el modelo actual se eliminarán del diseño. Al pulsar Guardar (Ctrl+S), se guardará el diseño con esos campos eliminados. Es posible que cambiemos este comportamiento en una versión futura para que el archivo .te3pivot no se sobrescriba sin una confirmación explícita.
+- Las columnas que usan la propiedad **Group By Columns** (incluidas las columnas de parámetros de campo) no se pueden agregar por sí solas al Área de filas ni al Área de columnas. Si lo haces, se producirá el error _"Column X is part of a composite key, but not all columns of the composite key are included in the expression or its dependent expression"_. Esta es una limitación general de los clientes MDX y también se produce al usar una columna de este tipo en una tabla dinámica de Excel. Para evitarlo, agrega la columna Group By Column relacionada al Pivot Grid _antes_ de agregar la columna dependiente. Por ejemplo, si `[ProductKey]` está configurado como la Group By Column de `[ProductName]`, agrega primero `[ProductKey]` al Área de filas o al Área de columnas y, después, agrega `[ProductName]`.
+- Al aplicar una ordenación ascendente o descendente explícita a una columna del Área de filas o del Área de columnas, los valores se ordenan alfabéticamente como cadenas, independientemente del tipo de datos de la columna. Las fechas con formato de fecha larga (por ejemplo, "4 de mayo de 2024") y los enteros se ordenan lexicográficamente en lugar de cronológicamente o numéricamente. Esta es una limitación de cómo ordenan los clientes MDX, y el mismo comportamiento se produce en una tabla dinámica de Excel conectada al modelo. Para obtener un orden cronológico o numérico, confía en la ordenación natural de la columna (no apliques una ordenación explícita) o usa la propiedad **Ordenar por columna** de la columna del modelo para que apunte a otra columna con un valor subyacente que se pueda ordenar.
