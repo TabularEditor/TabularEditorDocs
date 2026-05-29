@@ -8,13 +8,7 @@ applies_to:
     - product: Tabular Editor 2
       none: true
     - product: Tabular Editor 3
-      editions:
-        - edition: Desktop
-          full: true
-        - edition: Business
-          full: true
-        - edition: Enterprise
-          full: true
+      full: true
     - product: TE CLI
       full: true
 ---
