@@ -72,7 +72,7 @@ exports.transform = function (model) {
   model.__footer = {
     buttons: [
       {
-        text: "Try Tabular Editor 3 for free",
+        text: "Try Tabular Editor 3",
         url: "https://www.tabulareditor.com/downloads",
         uiStringKey: "footer.button1"
       },
@@ -89,6 +89,16 @@ exports.transform = function (model) {
         uiStringKey: "footer.aboutUs"
       },
       {
+        text: "Career",
+        url: "https://tabulareditor.com/career",
+        uiStringKey: "footer.career"
+      },
+      {
+        text: "Newsroom",
+        url: "https://tabulareditor.com/newsroom",
+        uiStringKey: "footer.newsroom"
+      },
+      {
         text: "Contact us",
         url: "https://tabulareditor.com/contact",
         uiStringKey: "footer.contactUs"
@@ -99,6 +109,11 @@ exports.transform = function (model) {
         rel: "noopener noreferrer",
         target: "_blank",
         uiStringKey: "footer.technicalSupport"
+      },
+      {
+        text: "Security & Trust Center",
+        url: "https://trust.tabulareditor.com",
+        uiStringKey: "footer.securityTrust"
       }
     ],
     rightLinks: [
@@ -115,19 +130,24 @@ exports.transform = function (model) {
     ],
     bottomLinks: [
       {
-        text: "Privacy & Cookie policy",
+        text: "Privacy policy",
         url: "https://tabulareditor.com/privacy-policy",
         uiStringKey: "footer.privacyPolicy"
       },
       {
-        text: "Terms & Conditions",
-        url: "https://tabulareditor.com/terms",
-        uiStringKey: "footer.termsConditions"
+        text: "Cookie policy",
+        url: "https://tabulareditor.com/cookie-policy",
+        uiStringKey: "footer.cookiePolicy"
       },
       {
-        text: "License terms",
-        url: "https://tabulareditor.com/license-terms",
-        uiStringKey: "footer.licenseTerms"
+        text: "Site Terms",
+        url: "https://tabulareditor.com/terms",
+        uiStringKey: "footer.siteTerms"
+      },
+      {
+        text: "Commercial Terms & Conditions",
+        url: "https://tabulareditor.com/commercial-terms",
+        uiStringKey: "footer.commercialTerms"
       }
     ]
   }

@@ -5,7 +5,7 @@
     "redirects": {
       "/tmdl": "/en/features/tmdl.html",
       "/roslyn": "/en/how-tos/Advanced-Scripting.html#compiling-with-roslyn",
-      "/eula": "/en/security/te3-eula.html",
+      "/eula": "/en/security/terms.html",
       "/tmuo": "/en/references/user-options.html",
       "/workspace": "/en/tutorials/workspace-mode.html",
       "/privacy-policy.html": "/en/security/privacy-policy.html",
@@ -224,7 +224,7 @@
       "/te3/other/release-notes/beta-18_4.html": "/en/references/release-notes/beta-18_4.html",
       "/te3/other/release-notes/beta-18_5.html": "/en/references/release-notes/beta-18_5.html",
       "/te3/other/roadmap.html": "/en/references/roadmap.html",
-      "/te3/other/te3-eula.html": "/en/security/te3-eula.html",
+      "/te3/other/te3-eula.html": "/en/security/terms.html",
       "/te3/other/third-party-notices.html": "/en/security/third-party-notices.html",
       "/te3/powerbi-xmla-pbix-workaround.html": "/en/how-tos/powerbi-xmla-pbix-workaround.html",
       "/te3/powerbi-xmla.html": "/en/tutorials/powerbi-xmla.html",

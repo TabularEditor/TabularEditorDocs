@@ -143,7 +143,7 @@ If a key is missing from a language's file, or no `_ui-strings.json` exists at a
 | `header.button1` | `Free trial` | Primary header CTA button |
 | `header.button2` | `Main page` | Secondary header button |
 | `footer.heading` | `Ready to get started?` | Footer section heading |
-| `footer.button1` | `Try Tabular Editor 3 for free` | Footer CTA button |
+| `footer.button1` | `Try Tabular Editor 3` | Footer CTA button |
 | `footer.button2` | `Buy Tabular Editor 3` | Footer CTA button |
 | `footer.aboutUs` | `About us` | Footer left link |
 | `footer.contactUs` | `Contact us` | Footer left link |
