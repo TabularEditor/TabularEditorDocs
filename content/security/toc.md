@@ -1,7 +1,7 @@
 # @security-privacy
 
 # Legal
-## @te3-eula
+## @terms
 ## @third-party-notices
 ## @privacy-policy
 ## @gdpr-delete
