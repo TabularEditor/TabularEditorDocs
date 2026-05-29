@@ -1,6 +1,6 @@
 ---
 uid: dax-package-manager
-title: DAX Package Manager
+title: Administrador de paquete DAX
 author: Daniel Otykier
 updated: 2025-11-03
 applies_to:
@@ -17,186 +17,186 @@ applies_to:
           full: true
 ---
 
-# DAX Package Manager
+# Administrador de paquetes DAX
 
-## Overview
+## Información general
 
-The **DAX Package Manager** (DPM) in Tabular Editor allows users to easily discover, install, update, and manage [DAX User-Defined Function (UDF)](xref:udfs) libraries (called DAX Packages), directly within the application.  
-These libraries extend your DAX capabilities with reusable functions, making it easier to build consistent and maintainable Power BI semantic models.
+El **Administrador de paquetes DAX** (DPM) en Tabular Editor permite a los usuarios descubrir, instalar, actualizar y administrar fácilmente bibliotecas de [funciones DAX definidas por el usuario (UDF)](xref:udfs) (denominadas paquetes DAX), directamente dentro de la aplicación.  
+Estas bibliotecas amplían tus capacidades de DAX con funciones reutilizables, lo que facilita la creación de modelos semánticos de Power BI coherentes y fáciles de mantener.
 
-As the name suggests, this feature acts like a package manager similar to how NuGet or npm manage code libraries for developers. The source of the DAX packages is https://daxlib.org, which is an open-source, non-profit project by [SQLBI](https://sqlbi.com).
+Como su nombre indica, esta característica actúa como un administrador de paquetes, similar a cómo NuGet o npm gestionan bibliotecas de código para los desarrolladores. La fuente de los paquetes DAX es https://daxlib.org, un proyecto de código abierto y sin ánimo de lucro de [SQLBI](https://sqlbi.com).
 
-You can use the DAX Package Manager with any model that supports DAX User-Defined Functions, that is, the Compatibility Level of the model must be 1702 or higher.
+Puedes usar el Administrador de paquetes DAX con cualquier modelo que admita funciones DAX definidas por el usuario; es decir, el nivel de compatibilidad del modelo debe ser 1702 o superior.
 
 > [!WARNING]
-> DAX User-Defined Functions is currently (as of November 2025) a preview feature of Power BI. Consider their [limitations](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions#considerations-and-limitations) before use.
+> Las funciones DAX definidas por el usuario están actualmente (a noviembre de 2025) en versión preliminar en Power BI. Ten en cuenta sus [limitaciones](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions#considerations-and-limitations) antes de usarlas.
 
 ---
 
-![DAX Package Manager](~/content/assets/images/dax-package-manager-overview.png)
+![Administrador de paquetes DAX](~/content/assets/images/dax-package-manager-overview.png)
 
-## Interface Layout
+## Diseño de la interfaz
 
-### 1. Launching the DAX Package Manager
+### 1. Abrir el Administrador de paquetes DAX
 
-You can open the DPM panel through the **View** menu. It is also possible to assign a custom shortcut to the `View.DaxPackageManager` command, through **Tools > Preferences > Keyboard**.
+Puedes abrir el panel del Administrador de paquetes DAX desde el menú **Ver**. También puedes asignar un atajo personalizado al comando `View.DaxPackageManager` desde **Herramientas > Preferencias > Teclado**.
 
-- **Menu:** `View → DAX Package Manager`
-- **Shortcut:** _(if assigned in Preferences)_
-
----
-
-### 2. Package lists
-
-On the left of the screen, you'll find the following three tabs. Each tab is accompanied by a list of packages relevant to its context:
-
-| Tab           | Description                                                                                                                                    |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Browse**    | Discover available DAX packages from the provider (e.g., `api.daxlib.org`). |
-| **Installed** | View all currently installed packages and their versions.                                                                      |
-| **Updates**   | See packages for which newer versions are available.                                                                           |
-
-Each package entry includes:
-
-- **Name and short description**
-- **Version number**
-- **Authors or owners**
-- **Provider URL**
-- **Install / Remove / Update buttons**
-- **Popularity indicator (downloads count)**
+- **Menú:** `Ver → Administrador de paquetes DAX`
+- **Atajo:** _(si lo has asignado en Preferencias)_
 
 ---
 
-### 3. Search bar
+### 2. Listas de paquetes
 
-Enter your search keywords or the (partial) name of the package, to filter the list of items to only those that match the search terms. This feature applies to all three tabs, i.e., **Browse**, **Installed**, and **Updates**.
+En la parte izquierda de la pantalla, encontrarás las tres pestañas siguientes. Cada pestaña va acompañada de una lista de paquetes pertinente para su contexto:
+
+| Pestaña             | Descripción                                                                                                                                        |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Examinar**        | Descubre los paquetes DAX disponibles del proveedor (p. ej., `api.daxlib.org`). |
+| **Instalados**      | Consulta todos los paquetes instalados actualmente y sus versiones.                                                                |
+| **Actualizaciones** | Consulta los paquetes para los que hay versiones más recientes disponibles.                                                        |
+
+Cada entrada del paquete incluye:
+
+- **Nombre y breve descripción**
+- **Número de versión**
+- **Autores o propietarios**
+- **URL del proveedor**
+- **Botones de Instalar / Quitar / Actualizar**
+- **Indicador de popularidad (número de descargas)**
+
+---
+
+### 3. Barra de búsqueda
+
+Introduce tus palabras clave de búsqueda o el nombre (parcial) del paquete para filtrar la lista y mostrar solo los elementos que coincidan con los términos de búsqueda. Esta función se aplica a las tres pestañas: **Examinar**, **Instalados** y **Actualizaciones**.
 
 > [!NOTE]
-> We currently only show the top 20 packages matching the search criteria. There is no pagination feature yet - this will come in a future update. If you need to browse all available packages, go to the source, e.g. https://daxlib.org.
+> Actualmente solo mostramos los 20 primeros paquetes que coinciden con los criterios de búsqueda. Aún no hay paginación; llegará en una actualización futura. Si necesitas examinar todos los paquetes disponibles, consulta la fuente; por ejemplo, https://daxlib.org.
 
 ---
 
-### 4. Package Detail Pane
+### 4. Panel de detalles del paquete
 
-Selecting a package displays detailed information:
+Al seleccionar un paquete, se muestra información detallada:
 
-| Field                           | Description                                                                              |
-| ------------------------------- | ---------------------------------------------------------------------------------------- |
-| **Installed / Version**         | Current version and available updates.                                   |
-| **Description**                 | Summary of what the library provides.                                    |
-| **Release Notes**               | Information about new features or changes in the latest version.         |
-| **Provider / Owners / Authors** | Attribution metadata.                                                    |
-| **Tags**                        | Helpful for categorization and search.                                   |
-| **URLs**                        | Direct links to the project’s documentation, API, and GitHub repository. |
-| **Publish Date**                | Timestamp of the current release.                                        |
-| **Downloads**                   | Total installs from all users.                                           |
+| Campo                                  | Descripción                                                                                          |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Instalado / Versión**                | Versión actual y actualizaciones disponibles.                                        |
+| **Descripción**                        | Resumen de lo que proporciona la biblioteca.                                         |
+| **Notas de la versión**                | Información sobre las nuevas funciones o los cambios de la versión más reciente.     |
+| **Proveedor / Propietarios / Autores** | Metadatos de atribución.                                                             |
+| **Etiquetas**                          | Útil para la categorización y la búsqueda.                                           |
+| **Direcciones URL**                    | Enlaces directos a la documentación del proyecto, la API y el repositorio de GitHub. |
+| **Fecha de publicación**               | Marca de tiempo de la versión actual.                                                |
+| **Descargas**                          | Total de instalaciones realizadas por todos los usuarios.                            |
 
-A package that is not installed, will show an **“Install”** button. Clicking this button will instantly add the UDFs in the package to your model.
+Un paquete que no esté instalado mostrará un botón **“Instalar”**. Al hacer clic en este botón, las UDF del paquete se añadirán al instante a tu modelo.
 
-Packages that are already installed will show a **“Remove”** button.
+Los paquetes que ya estén instalados mostrarán un botón **“Quitar”**.
 
-Packages for which newer versions are available, will show an **“Update”** button.
+Los paquetes para los que haya versiones más recientes disponibles mostrarán un botón **“Actualizar”**.
 
 > [!WARNING]
-> If you remove or update a package in which you have made modifications to the DAX expression of one or more UDFs, you will see a warning message indicating that your changes will be lost.
+> Si quitas o actualizas un paquete en el que has modificado la expresión DAX de una o varias UDF, verás un mensaje de advertencia que indica que se perderán tus cambios.
 
 ---
 
-### 5. Update notifications
+### 5. Notificaciones de actualización
 
-When opening a model that uses a package for which an update is available, you will see an update notification at the bottom of the **TOM Explorer**.
+Al abrir un modelo que usa un paquete para el que hay una actualización disponible, verás una notificación de actualización en la parte inferior del **Explorador TOM**.
 
-Click on the update notification or open the DAX Package Manager view, to view and install the update.
-
----
-
-## Installing Packages
-
-1. Open **DAX Package Manager**.
-2. In the **Browse** tab, select a package (e.g., `DaxLib.SVG`). Use the search bar to refine the search as needed.
-3. Click **Install**.
-4. Once installed, the package and its functions will appear in the TOM Explorer.
-
-You can also select specific **versions** before installing — useful for regression testing or ensuring compatibility with older models.
+Haz clic en la notificación de actualización o abre la vista del **Administrador de paquetes DAX** para ver e instalar la actualización.
 
 ---
 
-## Updating Packages
+## Instalación de paquetes
 
-1. Navigate to the **Updates** tab or select a package with a newer version available.
-2. Click **Update All** to update all installed packages, or **Update** on a specific one.
-3. DPM fetches the latest definitions and replaces existing functions automatically.
+1. Abre el **Administrador de paquetes DAX**.
+2. En la pestaña **Examinar**, selecciona un paquete (por ejemplo, `DaxLib.SVG`). Usa la barra de búsqueda para acotar la búsqueda según lo necesites.
+3. Haz clic en **Instalar**.
+4. Una vez instalado, el paquete y sus funciones aparecerán en el Explorador TOM.
+
+También puedes seleccionar **versiones** específicas antes de instalar, lo que resulta útil para las pruebas de regresión o para garantizar la compatibilidad con modelos antiguos.
 
 ---
 
-## Removing Packages
+## Actualización de paquetes
 
-1. Go to the **Installed** tab.
-2. Select the package you wish to remove.
-3. Click **Remove**.
+1. Ve a la pestaña **Actualizaciones** o selecciona un paquete que tenga una versión más reciente disponible.
+2. Haz clic en **Actualizar todo** para actualizar todos los paquetes instalados, o en **Actualizar** para uno concreto.
+3. DPM obtiene las definiciones más recientes y reemplaza automáticamente las funciones existentes.
 
-All associated UDFs will be removed from the model.
+---
+
+## Eliminar paquetes
+
+1. Ve a la pestaña **Instalados**.
+2. Selecciona el paquete que deseas eliminar.
+3. Haz clic en **Quitar**.
+
+Todas las UDF asociadas se eliminarán del modelo.
 
 > [!CAUTION]
-> Removing UDFs may cause DAX expressions in other areas of the model (measures, calculation columns, etc.) to become invalid. If this happens, you can always hit **Undo** (Ctrl+Z) to undo the package removal. Use the **Show dependencies** (Shift+F12) feature to identify where the UDFs are used before removing a package.
+> Eliminar UDFs puede provocar que las expresiones DAX en otras áreas del modelo (medidas, columnas calculadas, etc.) dejen de ser válidas. Si esto ocurre, siempre puedes pulsar **Deshacer** (Ctrl+Z) para deshacer la eliminación del paquete. Usa la función **Mostrar dependencias** (Mayús+F12) para identificar dónde se usan las UDF antes de eliminar un paquete.
 
 ---
 
-## Technical considerations
+## Consideraciones técnicas
 
-The DAX Package Manager uses [extended properties](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.extendedproperty?view=analysisservices-dotnet) to keep track of installed packages. Extended properties are similar to annotations, but are better suited for storing custom metadata in JSON format.
+El DAX Package Manager usa [propiedades extendidas](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.extendedproperty?view=analysisservices-dotnet) para llevar un registro de los paquetes instalados. Las propiedades extendidas son similares a las anotaciones, pero se adaptan mejor al almacenamiento de metadatos personalizados en formato JSON.
 
-The DAX Package Manager creates the following extended properties on the **Model** object:
+DAX Package Manager crea las siguientes propiedades extendidas en el objeto **Modelo**:
 
-| Property Name                    | Description                                                                                                                                                                                                                                         |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TabularEditor_ModelDaxPkgTable` | A JSON dictionary with one entry for each installed package. The key is a sequential integer, while the value contains information about the package provider, package ID within the provider, and package version. |
-| `TabularEditor_ModelDaxPkgSeq`   | An integer value that is incremented each time a package is installed. This is used to generate unique keys for the `TabularEditor_ModelDaxPkgTable` property.                                                      |
+| Nombre de la propiedad           | Descripción                                                                                                                                                                                                                                                                              |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TabularEditor_ModelDaxPkgTable` | Un diccionario JSON con una entrada por cada paquete instalado. La clave es un entero secuencial, mientras que el valor contiene información sobre el proveedor del paquete, el identificador del paquete dentro del proveedor y la versión del paquete. |
+| `TabularEditor_ModelDaxPkgSeq`   | Un valor entero que se incrementa cada vez que se instala un paquete. Se usa para generar claves únicas para la propiedad `TabularEditor_ModelDaxPkgTable`.                                                                                              |
 
-Moreover, each UDFs imported through the DAX Package Manager will have the following extended properties assigned:
+Además, cada UDF importada a través del DAX Package Manager tendrá asignadas las siguientes propiedades extendidas:
 
-| Property Name                        | Description                                                                                                                                                                                                                                        |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TabularEditor_ObjDaxPkgHandle`      | An integer value that corresponds to the key in the `TabularEditor_ModelDaxPkgTable` property on the model. This allows Tabular Editor to identify which package a UDF belongs to.                                 |
-| `TabularEditor_ObjDaxPkgContentHash` | A hash value computed from the DAX expression of the UDF at the time of installation. This is used to detect if a UDF has been modified since installation, which is important when updating or removing packages. |
+| Nombre de la propiedad               | Descripción                                                                                                                                                                                                                                                            |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TabularEditor_ObjDaxPkgHandle`      | Un valor entero que corresponde a la clave de la propiedad `TabularEditor_ModelDaxPkgTable` en el modelo. Esto permite a Tabular Editor identificar a qué paquete pertenece una UDF.                                                   |
+| `TabularEditor_ObjDaxPkgContentHash` | Un valor de hash calculado a partir de la expresión DAX de la UDF en el momento de la instalación. Se utiliza para detectar si una UDF se ha modificado desde la instalación, lo cual es importante al actualizar o eliminar paquetes. |
 
 > [!CAUTION]
-> Modifying or deleting these extended properties manually may lead to unexpected behavior in the DAX Package Manager.
+> Modificar o eliminar manualmente estas propiedades extendidas puede provocar un comportamiento inesperado en el Administrador de paquetes DAX.
 
-## Handling conflicts
+## Gestión de conflictos
 
-### Modifying UDFs from packages
+### Modificar UDF de paquetes
 
-If you modify the DAX expression of a UDF imported from a DAX package, you will see the following prompt upon upgrading or removing the package:
+Si modificas la expresión DAX de una UDF importada desde un paquete DAX, verás el siguiente mensaje al actualizar o eliminar el paquete:
 
-![Update modified UDF](~/content/assets/images/dax-package-manager-update-modified.png)
+![Actualizar UDF modificada](~/content/assets/images/dax-package-manager-update-modified.png)
 
-You have the following options:
+Tienes las siguientes opciones:
 
-- **Yes**: The update will proceed, overwriting the changes you made to the UDF with its definition from the DAX Package Manager source.
-- **No**: The update will proceed, but the modified UDF(s) will remain untouched, which may potentially cause issues if the package update included breaking changes.
-- **Cancel**: Cancels the update.
+- **Sí**: La actualización continuará y sobrescribirá los cambios que hiciste en la UDF con su definición del origen del Administrador de paquetes DAX.
+- **No**: La actualización continuará, pero las UDF(s) modificadas permanecerán intactas, lo que podría causar problemas si la actualización del paquete incluyó cambios importantes.
+- **Cancelar**: Cancela la actualización.
 
 > [!TIP]
-> If you wish to "unlink" existing UDFs from the DAX Package Manager, remove the extended properties `TabularEditor_ObjDaxPkgHandle` and `TabularEditor_ObjDaxPkgContentHash` from the UDF objects. This way, the DAX Package Manager will no longer track these UDFs, and they will not be affected by future package updates or removals. However, you still need to be aware of name conflicts.
+> Si quieres "desvincular" las UDF existentes del Administrador de paquetes DAX, elimina las propiedades extendidas `TabularEditor_ObjDaxPkgHandle` y `TabularEditor_ObjDaxPkgContentHash` de los objetos UDF. De este modo, el Administrador de paquetes DAX dejará de realizar el seguimiento de estas UDF y no se verán afectadas por futuras actualizaciones o eliminaciones de paquetes. Aun así, debes seguir teniendo en cuenta los conflictos de nombres.
 
-### Installing a package with name conflicts
+### Instalar un paquete con conflictos de nombres
 
-If you attempt to install a package containing a UDF that has the same name as an existing UDF in the model (regardless of whether it was imported from another package or created manually), you will see the following prompt:
+Si intentas instalar un paquete que contenga una UDF con el mismo nombre que una UDF existente en el modelo (independientemente de si se importó desde otro paquete o se creó manualmente), verás el siguiente mensaje:
 
-![Install package name conflict](~/content/assets/images/dax-package-manager-install-conflict.png)
+![Conflicto de nombres al instalar un paquete](~/content/assets/images/dax-package-manager-install-conflict.png)
 
-You have the following options:
+Tienes las siguientes opciones:
 
-- **Yes**: The installation will proceed, and the UDF from the package will overwrite the existing UDF in the model.
-- **No**: The installation will proceed, but the conflicting UDF(s) from the package will be skipped.
-- **Cancel**: Cancels the installation.
+- **Sí**: La instalación continuará y la UDF del paquete sobrescribirá la UDF existente en el modelo.
+- **No**: La instalación continuará, pero se omitirán las UDF(s) en conflicto del paquete.
+- **Cancelar**: Cancela la instalación.
 
 ---
 
-## Additional Resources
+## Recursos adicionales
 
-- [DaxLib Project Site](https://daxlib.org)
-- [DaxLib GitHub Repository](https://github.com/daxlib/daxlib)
-- [DAX User-Defined Functions (Microsoft Learn)](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions)
-- [User-Defined Functions in Tabular Editor 3](xref:udfs)
+- [Sitio del proyecto de DaxLib](https://daxlib.org)
+- [Repositorio de GitHub de DaxLib](https://github.com/daxlib/daxlib)
+- [Funciones DAX definidas por el usuario (Microsoft Learn)](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions)
+- [Funciones definidas por el usuario en Tabular Editor 3](xref:udfs)
