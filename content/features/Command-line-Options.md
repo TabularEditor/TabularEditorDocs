@@ -1,6 +1,6 @@
-﻿---
+---
 uid: command-line-options
-title: Command Line
+title: Command Line (Tabular Editor 2)
 author: Daniel Otykier
 updated: 2021-08-26
 applies_to:
@@ -10,7 +10,10 @@ applies_to:
     - product: Tabular Editor 3
       none: true
 ---
-# Command Line
+# Command Line (Tabular Editor 2)
+
+> [!TIP]
+> Looking for the new cross-platform CLI? See @te-cli for the Tabular Editor CLI (Limited Public Preview), a successor that runs on Windows, macOS, and Linux.
 
 Tabular Editor can be executed from the command-line to perform various tasks, which may be useful in Automated Build and Deployment scenarios, etc.
 
