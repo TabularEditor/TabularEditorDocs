@@ -89,6 +89,16 @@ exports.transform = function (model) {
         uiStringKey: "footer.aboutUs"
       },
       {
+        text: "Career",
+        url: "https://tabulareditor.com/career",
+        uiStringKey: "footer.career"
+      },
+      {
+        text: "Newsroom",
+        url: "https://tabulareditor.com/newsroom",
+        uiStringKey: "footer.newsroom"
+      },
+      {
         text: "Contact us",
         url: "https://tabulareditor.com/contact",
         uiStringKey: "footer.contactUs"
@@ -99,6 +109,11 @@ exports.transform = function (model) {
         rel: "noopener noreferrer",
         target: "_blank",
         uiStringKey: "footer.technicalSupport"
+      },
+      {
+        text: "Security & Trust Center",
+        url: "https://trust.tabulareditor.com",
+        uiStringKey: "footer.securityTrust"
       }
     ],
     rightLinks: [
