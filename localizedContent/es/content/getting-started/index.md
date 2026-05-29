@@ -1,7 +1,8 @@
 ---
 uid: onboarding-te3
 title: Te damos la bienvenida
-author: Daniel Otykier
+author: Morten Lønskov
+updated: 2026-05-19
 ---
 
 # Te damos la bienvenida
@@ -12,57 +13,70 @@ author: Daniel Otykier
 
 **¡Gracias por elegir Tabular Editor 3!**
 
-Para ayudarte a sacarle el máximo partido a la herramienta, hemos reunido todo nuestro material de introducción en esta sección de primeros pasos, que esperamos que disfrutes. Recomendamos a todos los nuevos usuarios de Tabular Editor 3 que lean esta guía y se salten los temas con los que ya estén familiarizados.
+Para ayudarte a sacar el máximo partido a la herramienta, hemos reunido todo nuestro material de incorporación en esta sección de primeros pasos. Si eres nuevo en Tabular Editor 3, te recomendamos que leas esta guía y te saltes los temas que ya conozcas.
 
 > [!NOTE]
-> Algunos artículos de esta guía hacen referencia a Tabular Editor 2, en concreto a la interfaz de línea de comandos (CLI), para fines de implementación y pruebas automatizadas. Está previsto publicar más adelante una aplicación CLI independiente para acompañar a Tabular Editor 3.
+> Algunos artículos de esta guía hacen referencia a Tabular Editor 2, en concreto a la interfaz de línea de comandos (CLI), para el despliegue y las pruebas automatizados. Está previsto publicar más adelante una aplicación CLI independiente para complementar Tabular Editor 3.
 
-Como este material de formación se centra en el producto Tabular Editor, asumimos que ya tienes una comprensión básica del modelado de datos tabulares (ya sea con Power BI Desktop, Visual Studio o Tabular Editor 2.x). Si eres nuevo en el modelado de datos tabulares, te recomendamos encarecidamente que consultes material de formación y cursos ofrecidos por terceros como [sqlbi.com](https://sqlbi.com).
+Este material de formación se centra en el producto Tabular Editor, por lo que damos por hecho que ya tienes conocimientos básicos de Data model tabular (ya sea con Power BI Desktop, Visual Studio o Tabular Editor 2.x). Si te estás iniciando en el Data model tabular, te recomendamos el material de formación y los cursos ofrecidos por terceros, como [sqlbi.com](https://sqlbi.com).
 
 **Temas tratados en esta guía:**
 
-- @general-introduction
-  - @installation-activation-basic
-  - @migrate-from-vs
-  - @migrate-from-desktop
-  - @migrate-from-te2
+**Primeros pasos con Tabular Editor 3**
 
+- @general-introduction
 - @getting-started
-  - @editions
-  - @training-telearn
+- @installation-activation-basic
+- @migrate-from-vs
+- @migrate-from-desktop
+- @migrate-from-te2
+- @azure-marketplace
+- @editions
+- @training-telearn
+
+**Tabular Editor 2**
 
 - @getting-started-te2
 
-- @desktop-integration
-  - @desktop-limitations
+**Power BI Desktop y Tabular Editor**
 
-- @user-interface
-  - @bpa-view
-  - @data-refresh-view
-  - @find-replace
-  - @macros-view
-  - @messages-view
-  - @properties-view
-  - @tom-explorer-view
-  - @diagram-view
+- @integración con Desktop
+- @limitaciones de Desktop
 
-- @parallel-development
-  - @optimizing-workflow-workspace-mode
+**Interfaz de usuario**
+
+- @referencia de la interfaz de usuario
+- @bpa-view-reference
+- @referencia de la vista de actualización de datos
+- @referencia de la función Buscar y reemplazar
+- @referencia de la vista de macros
+- @referencia de la vista de mensajes
+- @referencia de la vista de propiedades
+- @tom-explorer-view-reference
+- @referencia de la vista de diagrama
+
+**Desarrollo en paralelo**
+
+- @desarrollo en paralelo
+- @optimización del flujo de trabajo en el modo de espacio de trabajo
+
+**Crea modelos más rápido con Tabular Editor**
 
 - @boosting-productivity-te3
-  - @importing-tables-data-modeling
-  - @refresh-preview-query
-  - @creating-and-testing-dax
-  - @dax-script-introduction
-  - @bpa
-  - @cs-scripts-and-macros
-  - @personalizing-te3
+- @importación de tablas para el modelado de datos
+- @actualización de la vista previa de la consulta
+- @creating-and-testing-dax
+- @dax-script-introduction
+- @bpa
+- @scripts de C# y macros
+- @personalizing-te3
 
 **Recursos adicionales:**
 
-- [Documentación de referencia de TE3](xref:getting-started)
+- [Primeros pasos con Tabular Editor 3](xref:getting-started)
+- [Instalación y activación avanzadas](xref:installation-activation-basic)
 - [Descargar Tabular Editor](https://tabulareditor.com/download)
-- [Tabular Editor Learn](https://tabulareditor.com/learn)
+- [Aprende Tabular Editor](https://tabulareditor.com/learn)
 - [Soporte dedicado (solo para clientes de la Edición Enterprise)](mailto:support@tabulareditor.com)
 - [Soporte de la comunidad](https://github.com/TabularEditor/TabularEditor3/issues)
 - [Discusiones de la comunidad](https://github.com/TabularEditor/TabularEditor3/discussions)
