@@ -17,155 +17,155 @@ applies_to:
           full: true
 ---
 
-# Pivot Grids
+# Pivot Grid
 
 > [!NOTE]
-> Information in this article relates to Tabular Editor 3.16.0 or newer. Please make sure you are using the latest version of Tabular Editor 3 to take advantage of the new features and improvements.
+> 本文中的信息适用于 Tabular Editor 3.16.0 或更高版本。 请确保你使用的是最新版本的 Tabular Editor 3，以充分利用新功能和各项改进。
 
-While developing semantic models, you may often want to test that your DAX expressions return the expected values. Traditionally, this was done using client tools such as Excel or Power BI. With Tabular Editor 3, you can use **Pivot Grids** which behave much like the widely known PivotTables in Excel. The Pivot Grid lets you quickly create summarized views of the data in your model, allowing you to test the behavior of your DAX measures when filtering and slicing by various columns and hierarchies.
+在开发语义模型时，你可能经常需要测试 DAX 表达式是否返回预期的值。 传统上，这通常是借助 Excel 或 Power BI 等客户端工具来完成的。 在 Tabular Editor 3 中，你可以使用 **Pivot Grid**，其行为与 Excel 中广为人知的数据透视表非常相似。 Pivot Grid 可让你快速为模型中的数据创建汇总视图，从而在按不同列和层次结构进行筛选与切片时，测试 DAX 度量值的表现。
 
-![Pivot Grid Example](~/content/assets/images/pivot-grid-example.png)
+![Pivot Grid 示例](~/content/assets/images/pivot-grid-example.png)
 
-The screenshot above shows a Pivot Grid containing two measures, `[Total Net Order Value]` and `[Net Orders]`, which is sliced horizontally by Year, filtered to 2021 and 2022, and vertically by the Product Hierarchy. Tabular Editor 3 users can use this feature to ensure that DAX expressions behind the measures are working as expected and to quickly validate the data in the model.
+上面的屏幕截图展示了一个 Pivot Grid，其中包含两个度量值 `[Total Net Order Value]` 和 `[Net Orders]`；它在水平方向按 Year 进行切片，并筛选为 2021 和 2022；在垂直方向按 Product Hierarchy 进行切片。 Tabular Editor 3 用户可以使用此功能来确保度量值背后的 DAX 表达式按预期工作，并快速验证模型中的数据。
 
-By default, the Pivot Grid auto-updates every time you save changes to the semantic model (Ctrl+S). Thus, you can quickly iterate on your DAX expressions and see the results in the Pivot Grid without having to wait for the model to refresh by changing your measures, saving the model, and directly seeing the new measure definition reflected in the Pivot Grid. A good workflow is to open the Pivot Grid in a separate window while working on DAX expressions in the **Expression Editor** or using a **DAX Script**.
+默认情况下，每次保存对语义模型的更改时（Ctrl+S），Pivot Grid 都会自动更新。 因此，你可以快速迭代 DAX 表达式并在 Pivot Grid 中查看结果：只需修改度量值并保存模型，无需等待模型刷新，Pivot Grid 就会立即反映新的度量值定义。 一个不错的工作流是：在 **表达式编辑器** 中编写 DAX 表达式或使用 **DAX脚本** 时，将 Pivot Grid 在单独的窗口中打开。
 
 > [!TIP]
-> Some clarifications on terminology:
+> 关于术语，这里做几点说明：
 >
-> - **Fields** refers to model measures, KPIs, columns and hierarchies. In other words, anything that can be dragged into the Pivot Grid.
-> - **KPIs** are a special type of measure that can be created in Tabular Editor. They are displayed in the Pivot Grid just like measures, but with a special icon to indicate that they are KPIs. Each KPI can have up to 3 different values (target, trend, and status), which are displayed separately in the Pivot Grid.
-> - **Columns** in the Pivot Grid (such as in the term "Column Area") should not be confused with columns in the model. In the Pivot Grid, columns are used to slice the data horizontally, while rows are used to slice the data vertically.
-> - **Cells** in the Pivot Grid are the individual data points where a row and a column intersect. Each cell contains a single value, which is the result of the DAX expression of the specific measure, evaluated under the filter context produced by values in the _Row Area_ and _Column Area_, in combination with any filters applied to fields in the _Filter Area_.
+> - **字段** 指的是模型中的度量值、KPI、列和层次结构。 换句话说，就是任何可以拖入 Pivot Grid 的内容。
+> - **KPI** 是一种可在 Tabular Editor 中创建的特殊度量值。 它们在 Pivot Grid 中的显示方式与度量值相同，但会带有特殊图标，以表明它们是 KPI。 每个 KPI 最多可以有 3 个不同的值（目标、趋势和状态），它们会在 Pivot Grid 中分别显示。
+> - Pivot Grid 中的 **列**（例如术语“列区域”中的“列”）不要与模型中的列混淆。 在 Pivot Grid 中，列用于在水平方向切分数据，而行用于在垂直方向切分数据。
+> - Pivot Grid 中的 **单元格** 是行与列交叉处的单个数据点。 每个单元格都包含一个值。该值是特定度量值的 DAX 表达式在由 _行区域_ 和 _列区域_ 中的值所产生的筛选语境下，并结合应用于 _筛选区域_ 中字段的任何筛选条件计算得到的结果。
 
 > [!NOTE]
-> Developers with a multidimensional background may be more familiar with the terms _Dimensions_ and _Attributes_. In semantic models, _Dimensions_ are represented by model _tables_, and _Attributes_ are represented by model _columns_. _Hierarchies_ in a semantic model, is just a way to group columns together, such as in a calendar hierarchy: Year > Quarter > Month > Day. Such hierarchies used to be called _Attribute Hierarchies_ or _User-Defined Hierarchies_ in multidimensional models.
+> 有多维背景的开发人员可能会更熟悉 _Dimensions_ 和 _Attributes_ 这两个术语。 在语义模型中，_Dimensions_ 由模型 _表_ 表示，而 _Attributes_ 由模型 _列_ 表示。 语义模型中的_层次结构_只是将列归为一组的一种方式，例如日历层次结构：年 > 季度 > 月 > 日。 在多维模型中，这类层次结构过去称为_属性层次结构_或_用户定义的层次结构_。
 
-## Creating a Pivot Grid
+## 创建 Pivot Grid
 
-You can create a new, empty Pivot Grid through the **File > New > New Pivot Grid** menu option. Alternatively, select one or more measures in the **TOM Explorer**, right-click or go to the **Measure** menu and select **Add to Pivot Grid**, to create a new Pivot Grid with the selected measures.
+你可以通过 **文件 > 新建 > 新建 Pivot Grid** 菜单创建一个新的空 Pivot Grid。 或者，在 **TOM Explorer** 中选择一个或多个度量值，右键单击，或转到 **度量值** 菜单并选择 **添加到 Pivot Grid**，以创建一个包含所选度量值的新 Pivot Grid。
 
-![Create Pivot Grid From TOM Explorer](~/content/assets/images/create-pivot-grid-from-TOM-Explorer.png)
+![通过 TOM Explorer 创建 Pivot Grid](~/content/assets/images/create-pivot-grid-from-TOM-Explorer.png)
 
-You can create as many Pivot Grids as you like.
-
-> [!IMPORTANT]
-> The option to create a Pivot Grid is only available while Tabular Editor 3 is connected to an instance of Analysis Services or the Power BI / Fabric XMLA endpoint.
-
-## Pivot Grid layout
-
-The Pivot Grid is divided into 4 areas: **Filter Area**, **Column Area**, **Row Area**, and **Data Area**. You can drag fields from the **Field List** or the **TOM Explorer** into these areas to create a Pivot Grid layout. The **Data Area** area is where you place measures or KPIs, while the **Row Area** and **Column Area** are used to slice the data by hierarchies and columns. The **Filter Area** is used to filter the data based on values in columns or hierarchies.
-
-![Empty Pivot Grid Highlighted](~/content/assets/images/empty-pivot-grid-highlighted.png)
-
-The screenshot above shows an empty Pivot Grid layout. The 4 empty boxes at the bottom of the Field List represent the 4 areas of the Pivot Grid. You can drag fields from the Field List into these listboxes to create a Pivot Grid layout. Alternatively, you can drag fields directly into the Pivot Grid.
-
-## Pivot Grid menu and toolbar
-
-By default, when a Pivot Grid is the active window in Tabular Editor 3, a **Pivot Grid** menu and toolbar are available. The menu contains the same actions as the toolbar.
-
-![Pivot Grid Toolbar](~/content/assets/images/pivot-grid-toolbar.png)
-
-![Pivot Grid Menu](~/content/assets/images/pivot-grid-menu.png)
-
-These actions are:
-
-- **Impersonation...**: Displays a dialog that allows you to specify a role or user to impersonate through the Pivot Grid. This is useful when you want to test the behavior of your model for different users or roles, such as when [RLS or OLS](xref:data-security-about) has been applied to the model.
-- **Refresh**: Re-execute the query generated by the Pivot Grid. This is useful when auto-refresh is disabled, or if changes have been made to the model outside of Tabular Editor 3.
-- **Auto Refresh**: Toggles auto-refresh on or off. When auto-refresh is enabled, the Pivot Grid will automatically refresh every time you save changes to the model, or when a [Data Refresh operation](xref:data-refresh-view) completes.
-- **Clear filters**: Clears all filters from the Pivot Grid.
-- **Clear**: Removes all fields from the Pivot Grid.
-- **Show empty values on columns**: Toggles whether empty values should be shown in the Pivot Grid, for fields that are added to the Pivot Grids Column Area.
-- **Show empty values on rows**: Toggles whether empty values should be shown in the Pivot Grid, for fields that are added to the Pivot Grids Row Area.
-- **Field List**: Toggle Field list on/off.
-
-## Field List
-
-By default, the Field List is displayed on the right side of the Pivot Grid. The Field List contains all the fields (measures, KPIs, columns, and hierarchies) that are available in the model. You can drag fields from the Field List into the Pivot Grid to create a layout. You can also drag fields between the different areas of the Pivot Grid to rearrange the layout.
-
-The Field List itself can be docked to the left or right side of the Pivot Grid, above or below, it can be hidden, or it can be undocked so that it "floats" as a separate window. If you have multiple Pivot Grids open, each Pivot Grid has its own Field List.
-
-If you would like the Field List to not be shown by default, uncheck the **Always show field list** option under **Tools > Preferences > Data Browsing > Pivot Grid > Field List**.
-
-You can change the default layout of the Field List under **Tools > Preferences > Data Browsing > Pivot Grid > Field List > Layout**. You can also change the layout of any field lists, by right-clicking in an empty area of the Field List and choosing the desired layout from the context menu.
-
-![Field List Settings](~/content/assets/images/field-list-settings.png)
-
-By default, any field you add to the Pivot Grid remains visible in the Field List. If you would like to hide fields that are added to the Pivot Grid, you can uncheck the **Keep fields visible** option under **Tools > Preferences > Data Browsing > Pivot Grid > Field List** (this behavior is similar to how Pivot Grid worked prior to Tabular Editor v. 3.16.0).
-
-If you are working on a large, complex model, and you are expecting measures used in the Pivot Grid to be relatively slow, you can check the **Defer Layout Update** option at the bottom of the Field List. This will prevent the Pivot Grid from updating the layout every time you add or remove a field, which can be useful, if you intend to make multiple changes to the Pivot Grid layout before updating it. Hit the **Update** button to apply the changes to the Pivot Grid.
+你可以根据需要创建任意数量的 Pivot Grid。
 
 > [!IMPORTANT]
-> Columns without an attribute hierarchy (IsAvailableIn MDX = false) cannot be used in the Pivot Grid and are not shown in the Field list.
+> 只有当 Tabular Editor 3 连接到 Analysis Services 实例或 Power BI / Fabric XMLA endpoint 时，才会显示用于创建 Pivot Grid 的选项。
 
-## Customizing Pivot Grids
+## Pivot Grid 布局
 
-### Adding fields
+Pivot Grid 分为 4 个区域：**筛选区域**、**列区域**、**行区域**和**数据区域**。 你可以将 **字段列表** 或 **TOM Explorer** 中的字段拖到这些区域中，以创建 Pivot Grid 布局。 **数据区域**用于放置度量值或 KPI，而 **行区域** 和 **列区域** 用于按层次结构和列对数据进行切片。 **筛选区域**用于根据列或层次结构中的值筛选数据。
 
-There are several ways to add a field to a Pivot Grid:
+![高亮显示的空白 Pivot Grid](~/content/assets/images/empty-pivot-grid-highlighted.png)
 
-**From the TOM Explorer:**
+上面的屏幕截图显示了一个空白的 Pivot Grid 布局。 字段列表底部的 4 个空框表示 Pivot Grid 的 4 个区域。 你可以将字段从字段列表拖到这些列表框中，以创建 Pivot Grid 布局。 或者，你也可以将字段直接拖到 Pivot Grid 中。
 
-- Right-click on one or more _measures_ and choose **Add to Pivot Grid**.
-- Right-click on a _column_ or _hierarchy_ and choose any of the **Add to pivot**-options (choose between rows, columns, or filters).
-- If a measure, column or hierarchy is already shown in the Pivot Grid, the right-click options will allow you to **Remove from Pivot Grid**. in addition, you will see options to move columns or hierarchies between the different areas of the Pivot Grid.
-- All of the options above are also available through the **Measure**, **Column**, and **Hierarchy** menus (respectively), when one or more such objects are selected in the TOM Explorer.
-- In addition to the above, you can also drag one or more measures, columns, or hierarchies from the TOM Explorer into the Pivot Grid areas.
+## Pivot Grid 菜单和工具栏
 
-![Add hierarchy to Pivot Grid through TOM Explorer](~/content/assets/images/add-through-tom-explorer.png)
+默认情况下，当 Pivot Grid 是 Tabular Editor 3 中的活动窗口时，会显示 **Pivot Grid** 菜单和工具栏。 该菜单包含与工具栏相同的操作。
 
-**From the Field List:**
+![Pivot Grid 工具栏](~/content/assets/images/pivot-grid-toolbar.png)
 
-- Drag a field from the Field List into the Pivot Grid.
-- Drag a field from the Field List into the area listboxes at the bottom of the Field List to add it to the Pivot Grid.
-- Right-click on a field in the Field List for options to add it to the Pivot Grid.
-- If a field is already showing in the Pivot Grid, the right-click context menu will also have an option to remove the field, or move it to a different area (column/hierarchy fields only).
-- Double-clicking on a field will immediately add it to the Pivot Grid. Measures/KPIs are added to the Data Area, while columns and hierarchies are added to the Filter Area.
+![Pivot Grid 菜单](~/content/assets/images/pivot-grid-menu.png)
 
-![Add Through Field List](~/content/assets/images/add-through-field-list.png)
+这些操作包括：
 
-### Adjusting fields
+- **身份模拟...**：显示一个对话框，可让你指定要在 Pivot Grid 中模拟的角色或用户。 当你想测试模型在不同用户或角色下的行为时，例如在模型已应用 [RLS 或 OLS](xref:data-security-about) 的情况下，这会很有用。
+- **刷新**：重新执行由 Pivot Grid 生成的查询。 在禁用自动刷新时，或在 Tabular Editor 3 之外对模型进行了更改时，这会很有用。
+- **自动刷新**：打开或关闭自动刷新。 启用自动刷新后，每次你保存对模型的更改，或某个 [数据刷新操作](xref:data-refresh-view) 完成时，Pivot Grid 都会自动刷新。
+- **清除筛选器**：清除 Pivot Grid 中的所有筛选器。
+- **清除**：从 Pivot Grid 中移除所有字段。
+- **在列中显示空值**：切换是否要在 Pivot Grid 中显示空值，适用于已添加到 Pivot Grid 列区域的字段。
+- **在行中显示空值**：切换是否要在 Pivot Grid 中显示空值，适用于已添加到 Pivot Grid 行区域的字段。
+- **字段列表**：显示或隐藏字段列表。
 
-After fields have been added to the Pivot Grid, you can adjust the width of columns to better accommodate their content. Double-clicking on a column header separator will automatically adjust the column width to fit the content of the column. You can also drag the column header separator to manually adjust the column width. Lastly, you can use the **Best Fit** or **Set width...** context menu options by right-clicking on the column header.
+## 字段列表
 
-![Best Fit Columns 2](~/content/assets/images/best-fit-columns-2.png)
+默认情况下，字段列表显示在 Pivot Grid 的右侧。 字段列表包含模型中所有可用字段（度量值、KPI、列和层次结构）。 你可以将字段从字段列表拖到 Pivot Grid 中，以创建布局。 你也可以在 Pivot Grid 的不同区域之间拖动字段，以重新排列布局。
 
-To apply a "Best Fit" or set a specific pixel width for all columns in the Pivot Grid simultaneously, right-click on the "Values" header and select the desired option from the context menu.
+字段列表本身可以停靠在 Pivot Grid 的左侧或右侧、上方或下方，也可以隐藏，或者取消停靠，使其作为单独窗口“浮动”显示。 如果你同时打开了多个 Pivot Grid，每个 Pivot Grid 都有各自的字段列表。
 
-By default, field headers will expand vertically to fit the content of the field name. If you would like to limit the height of field headers to one row, you can disable the **Word wrap field headers**-option under **Tools > Preferences > Pivot Grid > Field Headers**.
+如果你不希望默认显示字段列表，请在 **工具 > 偏好 > 数据浏览 > Pivot Grid > 字段列表** 下取消选中 **始终显示字段列表** 选项。
 
-To change the order of fields in the Pivot Grid, you can drag fields between the different areas of the Pivot Grid. You can also drag fields within the same area to change their order. To remove a field from the Pivot Grid, drag it back to the Field List or right-click on the field and choose **Remove from Pivot Grid** from the context menu.
+你可以在 **工具 > 偏好 > 数据浏览 > Pivot Grid > 字段列表 > 布局** 下更改字段列表的默认布局。 你也可以在字段列表的空白区域右键单击，然后从上下文菜单中选择所需布局，以更改任意字段列表的布局。
 
-If you want measures to be displayed on rows rather than on columns, drag the "Values" field from the Column Area to the Row Area.
+![字段列表设置](~/content/assets/images/field-list-settings.png)
 
-### Visualization rules
+默认情况下，你添加到 Pivot Grid 的任何字段都会在字段列表中保持可见。 如果你希望隐藏已添加到 Pivot Grid 的字段，可以取消选中 **工具 > 偏好 > 数据浏览 > Pivot Grid > 字段列表** 下的 **保持字段可见** 选项（此行为类似于 Tabular Editor v. 3.16.0 之前的 Pivot Grid 工作方式）。
 
-You can add visualization rules to cells in the Pivot Grids, which is useful for highlighting cells based on their values, for example in order to better spot outliers. To add visualization rules, right-click on any Data Area cell in the Pivot Grid, and choose which rules to apply from the context menu (see screenshot below).
+如果你正在处理一个大型且复杂的模型，并且预计 Pivot Grid 中使用的度量值计算起来会比较慢，可以勾选字段列表底部的 **延迟布局更新** 选项。 这会阻止 Pivot Grid 在每次添加或移除字段时都更新布局。如果你打算在更新前对 Pivot Grid 布局进行多项更改，这会很有用。 单击 **更新** 按钮，将更改应用到 Pivot Grid。
 
-![Customizing Pivot Grids](~/content/assets/images/customizing-pivot-grids.png)
+> [!IMPORTANT]
+> 没有属性层次结构的列（IsAvailableIn MDX = false）无法在 Pivot Grid 中使用，也不会显示在字段列表中。
 
-## Persisting Pivot Grid layouts
+## 自定义 Pivot Grid
 
-When you close a Pivot Grid, Tabular Editor will prompt you to save the layout of the Pivot Grid. If you choose to save the layout, the next time you open the Pivot Grid, it will be restored to the same layout as when you closed it. You can also save the layout of a Pivot Grid manually by hitting (Ctrl+S) or using the **File > Save** option, while the Pivot Grid is the active window.
+### 添加字段
 
-The file extension used for saving Pivot Grid layouts is `.te3pivot`. This is a simple json file that specifies which model objects are shown in the Pivot Grid, and in which areas they are placed. Objects are referenced by name and lineage tag (if present), so the Pivot Grid layout can generally be restored even if the model has been modified since the layout was saved.
+将字段添加到 Pivot Grid 有多种方式：
+
+**从 TOM Explorer：**
+
+- 右键单击一个或多个 _度量值_，然后选择 **添加到 Pivot Grid**。
+- 右键单击某个 _列_ 或 _层次结构_，然后选择任一 **Add to pivot** 选项（可选择添加到行、列或筛选器）。
+- 如果某个度量值、列或层次结构已显示在 Pivot Grid 中，右键菜单中也会显示 **从 Pivot Grid 中移除** 选项。 此外，你还会看到可在 Pivot Grid 不同区域之间移动列或层次结构的选项。
+- 当你在 TOM Explorer 中选择了一个或多个此类对象时，也可以分别通过 **度量值**、**列** 和 **层次结构** 菜单 (分别) 使用上述所有选项。
+- 除了上述方法外，你还可以将一个或多个度量值、列或层次结构从 TOM Explorer 拖放到 Pivot Grid 的各个区域中。
+
+![通过 TOM Explorer 将层次结构添加到 Pivot Grid](~/content/assets/images/add-through-tom-explorer.png)
+
+**从字段列表：**
+
+- 将字段从字段列表拖入 Pivot Grid。
+- 将字段从字段列表拖到字段列表底部的各区域列表框中，即可将其添加到 Pivot Grid。
+- 右键单击字段列表中的某个字段，可查看将其添加到 Pivot Grid 的选项。
+- 如果某个字段已显示在 Pivot Grid 中，右键快捷菜单中也会提供移除该字段，或将其移动到其他区域的选项（仅限列/层次结构字段）。
+- 双击某个字段会立即将其添加到 Pivot Grid。 度量值/KPI 会添加到数据区域，而列和层次结构会添加到筛选区域。
+
+![通过字段列表添加](~/content/assets/images/add-through-field-list.png)
+
+### 调整字段
+
+将字段添加到 Pivot Grid 后，你可以调整列宽，以便更好地适应其内容。 双击列标题之间的分隔线会自动调整列宽，使其适应该列内容。 你也可以拖动列标题分隔线来手动调整列宽。 最后，你还可以右键单击列标题，在上下文菜单中选择 **最适合** 或 **设置宽度...**。
+
+![最适合列 2](~/content/assets/images/best-fit-columns-2.png)
+
+若要一次性对 Pivot Grid 中的所有列应用“最适合”或设置指定的像素宽度，请右键单击“值”标题，然后从右键菜单中选择所需选项。
+
+默认情况下，字段标题会在垂直方向自动展开，以容纳字段名称的内容。 如果你希望将字段标题的高度限制为一行，可以在 **工具 > 偏好 > Pivot Grid > 字段标题** 中禁用 **字段标题自动换行** 选项。
+
+若要更改 Pivot Grid 中字段的顺序，可以在 Pivot Grid 的不同区域之间拖动字段。 你也可以在同一区域内拖动字段来更改其顺序。 若要从 Pivot Grid 中移除字段，可将其拖回“字段列表”，或右键单击该字段，然后在右键菜单中选择 **从 Pivot Grid 中移除**。
+
+如果你希望度量值显示在行而不是列上，请将“值”字段从“列区域”拖到“行区域”。
+
+### 可视化规则
+
+你可以为 Pivot Grid 中的单元格添加可视化规则，这有助于根据单元格的值突出显示单元格，例如更容易发现异常值。 若要添加可视化规则，请右键单击 Pivot Grid 数据区域中的任意单元格，然后在右键菜单中选择要应用的规则（见下图）。
+
+![自定义 Pivot Grid](~/content/assets/images/customizing-pivot-grids.png)
+
+## 保存 Pivot Grid 布局
+
+关闭 Pivot Grid 时，Tabular Editor 会提示你保存该 Pivot Grid 的布局。 如果你选择保存布局，下次打开 Pivot Grid 时，它会恢复到关闭时的相同布局。 当 Pivot Grid 为活动窗口时，你也可以按 (Ctrl+S) 或使用 **文件 > 保存** 选项来手动保存 Pivot Grid 的布局。
+
+用于保存 Pivot Grid 布局的文件扩展名是 `.te3pivot`。 这是一个简单的 json 文件，用于指定 Pivot Grid 中显示哪些模型对象，以及它们放置在哪些区域。 对象通过名称和 Lineage tag（如果存在）进行引用，因此即使模型在保存布局后已被修改，Pivot Grid 布局通常仍可恢复。
 
 > [!NOTE]
-> It is possible to open a Pivot Grid layout that was created in a different model, but be aware that the fields in the layout may not exist in the model you are currently connected to. In such cases, the Pivot Grid will show a warning message, and any fields that do not exist in the model will be removed from the layout. The warning message may be toggled off under **Tools > Preferences > Data Browsing > Pivot Grid > Show warning if Pivot Grid doesn't match model**.
+> 可以打开在其他模型中创建的 Pivot Grid 布局，但请注意，布局中的字段可能在你当前连接的模型中不存在。 在这种情况下，Pivot Grid 会显示警告信息，且模型中不存在的字段会从布局中移除。 你可以在 **工具 > 偏好 > 数据浏览 > Pivot Grid > 如果 Pivot Grid 与模型不匹配则显示警告** 中关闭此警告信息。
 
-## Additional features
+## 其他功能
 
-The Pivot Grid has a few more features that are useful to know about:
+Pivot Grid 还有一些值得了解的实用功能：
 
-- If you right-click on a field, you will have the option to **Go to** that field. This brings the TOM Explorer into focus, with the equivalent model object selected. For measures and calculated columns, the **Expression Editor** will be brought into focus, with the DAX expression of the measure displayed.
-- If you right-click on a cell in the Pivot Grid, you can select the option to **Debug this value**. This will launch the [**DAX Debugger**](xref:dax-debugger) starting from the specific measure and filter context that produced the value in the cell.
-- While a Pivot Grid is **refreshing**, certain toolbar items are disabled and context menu actions are temporarily unavailable.
+- 如果你右键单击某个字段，可以选择 **转到** 该字段。 这会将焦点切换到 TOM Explorer，并选中对应的模型对象。 对于度量值和计算列，焦点会切换到 **表达式编辑器**，并显示该度量值或列的 DAX 表达式。
+- 如果你右键单击 Pivot Grid 中的某个单元格，可以选择 **调试此值** 选项。 这将启动 [**DAX 调试器**](xref:dax-debugger)，并以生成该单元格值的特定度量值和筛选语境为起点。
+- 当 Pivot Grid 正在**刷新**时，某些工具栏项会被禁用，右键菜单操作也会暂时不可用。
 
-## Limitations and known issues
+## 限制与已知问题
 
-Below is a list of known limitations and issues with Pivot Grids in Tabular Editor 3.16.0, which we are working to address in future releases:
+以下列出了 Tabular Editor 3.16.0 中 Pivot Grid 的已知限制和问题，我们正在后续版本中逐步解决这些问题：
 
-- Format rules (such as icon sets, data bars, etc.) are not properly persisted when saving a Pivot Grid layout as a `.te3pivot` file.
-- If you open a .te3pivot file on a model different from the one the layout was saved from, fields that do not exist in the current model will be removed from the layout. Hitting Save (Ctrl+S) will save the layout with the removed fields removed. We may change this behavior in a future release so that the .te3pivot file is not overwritten without explicit confirmation.
-- Columns that use the **Group By Columns** property (including field parameter columns) cannot be added to the Row Area or Column Area on their own. Doing so produces the error _"Column X is part of a composite key, but not all columns of the composite key are included in the expression or its dependent expression"_. This is a general limitation of MDX clients and also occurs when using such a column in an Excel PivotTable. To work around it, add the related Group By Column to the Pivot Grid _before_ adding the dependent column. For example, if `[ProductKey]` is configured as the Group By Column of `[ProductName]`, add `[ProductKey]` to the Row Area or Column Area first, then add `[ProductName]`.
-- Applying an explicit ascending or descending sort to a column in the Row Area or Column Area sorts values alphabetically as strings, regardless of the column data type. Dates formatted as long date (for example "May 4, 2024") and integers are sorted lexicographically rather than chronologically or numerically. This is a limitation of how MDX clients sort and the same behavior occurs in an Excel PivotTable connected to the model. To get chronological or numerical ordering, rely on the column's natural sort (do not apply an explicit sort) or use the **Sort By Column** property on the model column to point at a column with a sortable underlying value.
+- 格式规则（如图标集、数据条等） 在将 Pivot Grid 布局保存为 `.te3pivot` 文件时，不会被正确保留。
+- 如果你在与保存该布局时所用模型不同的模型上打开 .te3pivot 文件，当前模型中不存在的字段将从布局中移除。 按下“保存”(Ctrl+S) 后，布局会以移除这些字段后的状态保存。 我们可能会在未来版本中更改此行为，以避免在未明确确认的情况下覆盖 .te3pivot 文件。
+- 使用 **Group By Columns** 属性的列（包括字段参数列）不能单独添加到行区域或列区域。 这样做会产生错误 _“列 X 是复合键的一部分，但表达式或其依赖表达式中并未包含该复合键的所有列”_。 这是 MDX 客户端的通用限制，在 Excel 数据透视表中使用此类列时也会出现相同情况。 要临时解决此问题，请在添加依赖列_之前_，先将相关的 Group By Column 添加到 Pivot Grid。 例如，如果 `[ProductKey]` 被配置为 `[ProductName]` 的 Group By Column，先将 `[ProductKey]` 添加到行区域或列区域，再添加 `[ProductName]`。
+- 对行区域或列区域中的列显式应用升序或降序排序时，无论该列的数据类型如何，值都会按字符串的字典顺序排序。 采用长日期格式的日期（例如“May 4, 2024”）和整数会按字典序排序，而不是按时间顺序或数值大小排序。 这是 MDX 客户端排序方式的限制，连接到该模型的 Excel 数据透视表中也会出现相同的行为。 若要按时间顺序或数值顺序排序，请使用该列的自然排序（不要显式应用排序），或在模型列上使用 **按列排序** 属性，将其指向一个底层值可排序的列。
