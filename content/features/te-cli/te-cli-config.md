@@ -121,7 +121,7 @@ Set these in your config to avoid passing the same paths on every command. Per-c
 | Key | Meaning |
 | -- | -- |
 | `macros` | Explicit path to a macros JSON file (typically `MacroActions.json`). Resolved by every `te macro` command. Point at a shared file (network share, repo-local, or even the TE3 desktop file) to reuse the same set of macros across machines and between the CLI and TE3 Desktop. |
-| `bpa.rules` | Ordered list of paths or URLs to BPA rule files. The deploy/save gate loads **every** existing entry; `te bpa rules list` and `te config paths` use the first existing entry. Comma-separated values on `te config set bpa.rules ...` are split into the array. |
+| `bpa.rules` | Ordered list of paths or URLs to BPA rule files. `te bpa run` and the deploy/save gate load **every** existing entry; `te bpa rules list` and `te config paths` use the first existing entry. Comma-separated values on `te config set bpa.rules ...` are split into the array. |
 | `te3ExePath` | Explicit path to the Tabular Editor 3 Desktop executable (`TabularEditor.exe`). Used **only** by `te open` to launch the desktop app; safe to leave unset on Linux/macOS or when you don't use `te open`. If unset, `te open` falls back to a `PATH` lookup. |
 | `queryLog` | Path to a log file where every `te query` invocation appends its query text and execution metadata. Useful for audit trails or analyzing query patterns over time. Supports `~` for the home directory (e.g., `~/.config/te/queries.log`). |
 
