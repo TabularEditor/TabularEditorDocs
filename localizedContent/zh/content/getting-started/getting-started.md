@@ -1,8 +1,8 @@
 ---
 uid: getting-started
-title: 安装和激活
+title: 安装与激活
 author: Morten Lønskov
-updated: 2026-05-19
+updated: 2026-03-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,122 +17,148 @@ applies_to:
           full: true
 ---
 
-# 入门
+# 快速入门
 
 ## 安装
 
-请从我们的[下载页面](xref:downloads)下载 Tabular Editor 3 的最新版本。
+从我们的[下载页面](xref:downloads)下载最新版本的 Tabular Editor 3。
 
-我们建议在大多数情况下使用 64 位 MSI 安装程序。 下载完成后，双击 MSI 文件，并按安装向导的提示完成安装。
-
-![安装](~/content/assets/images/getting-started/install.png)
-
-### 先决条件
+## 先决条件
 
 无。
 
-### 系统要求
+## 系统要求
 
 - **操作系统：** Windows 10、Windows 11、Windows Server 2016、Windows Server 2019 或更高版本
-- **架构：** x64、ARM64（自 3.23.0 起原生支持）
-- **.NET 运行时：**[.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- **体系结构：** x64、ARM64（自 3.23.0 起提供原生支持）
+- **.NET 运行时：** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
-有关每个运行时当前支持的 Windows 版本，请参阅 .NET 支持的操作系统策略。
+有关各运行时当前支持的 Windows 版本，请参阅 .NET 支持的 OS 策略。
 
 ## 激活安装
 
 Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabulareditor.com)，了解定价详情和购买选项。 如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。
 
-首次在新计算机上启动 Tabular Editor 3 时，系统会提示你激活产品。
+首次在新设备上启动 Tabular Editor 3 时，系统会提示进行产品激活。
 
 ![产品激活](~/content/assets/images/getting-started/product-activation.png)
 
-### 使用现有许可证密钥激活
+### 使用现有许可证密钥进行激活
 
-购买 Tabular Editor 3 的许可证后，你会收到一封电子邮件，其中包含一段 25 个字符的字符串，这就是你的许可证密钥。 出现提示时，输入许可证密钥，然后点击 **下一步 >** 以激活产品。
+购买 Tabular Editor 3 许可证后，您将收到一封电子邮件，其中包含一串 25 个字符的代码，也就是您的许可证密钥。 按提示输入许可证密钥，然后点击“下一步 >”以激活产品。
 
 ![输入许可证密钥](~/content/assets/images/getting-started/enter-license-key.png)
 
 > [!NOTE]
-> 对于多用户许可证类型，除了许可证密钥之外，你还需要输入电子邮件地址。 当许可证密钥对应的是多用户许可证时，Tabular Editor 3 会提示你这样做。
+> 对于多用户许可证类型，除了许可证密钥之外，您还需要输入电子邮件地址。 如果您输入的许可证密钥对应多用户许可证，Tabular Editor 3 会提示您输入电子邮件地址。
 
-Tabular Editor 3 的安装是按 **用户** 激活的。 如果多个用户共享同一台计算机，则每位用户都需要在各自的 Windows 用户配置文件中激活产品。
-
-### Windows 帐户与 Power BI / Entra 帐户
-
-安装 Tabular Editor 3 的 Windows 帐户，与用于登录 Power BI / Fabric Workspace 的 Microsoft Entra 帐户彼此独立。
-
-- **许可证激活** 信息存储在 Windows 注册表中，即激活该产品的 Windows 用户的 `HKEY_CURRENT_USER` 下。 许可证不与任何云身份绑定。
-- **Workspace 身份验证**会在连接时于 **从数据库加载语义模型** 对话框中完成。 你需要使用对该 Workspace 具有权限的 Microsoft Entra 帐户登录。
-
-即使你使用单独的 Entra 帐户（例如未启用邮箱的管理员帐户）来管理 Power BI Workspace，也不需要仅因为这一点就通过 **以其他用户身份运行** 在其他 Windows 帐户下启动 Tabular Editor 3。 在你平常使用的 Windows 帐户下启动 Tabular Editor 3，在该帐户下使用许可证密钥激活，然后在连接对话框中提供管理员 Entra 凭据。
-
-有关 Tabular Editor 如何对 XMLA endpoint 进行身份验证，以及如何选择正确的身份验证模式的详细信息（例如，当你的 Windows 登录与 Power BI 帐户不一致时使用 **Microsoft Entra MFA**），请参阅 @xmla-as-connectivity。
+请注意，Tabular Editor 3 的安装是**按用户**激活的。 换句话说，如果多个用户共用同一台计算机，则每个用户都必须在各自的 Windows 用户配置文件中激活产品。
 
 ### 申请试用许可证
 
-如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。 选择此选项时，系统会提示你输入电子邮件地址。 我们会使用该电子邮件地址来验证你是否已有 Tabular Editor 3 的激活记录。
+如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。 选择此选项时，系统会提示您输入电子邮件地址。 我们会使用该电子邮件地址来验证您是否已经激活过 Tabular Editor 3。
 
 > [!NOTE]
-> 在申请 30 天试用许可证时，Tabular Editor ApS 不会发送未经请求的电子邮件，也不会将你的电子邮件地址提供给第三方。 更多信息见我们的 @privacy-policy。
+> 在申请 30 天试用许可证时，Tabular Editor ApS 不会发送未经请求的电子邮件，也不会将你的电子邮件地址提供给第三方。 查看我们的 @privacy-policy 以了解更多信息。
 
 ### 更改许可证密钥
 
-激活 Tabular Editor 3 后，你可以在“帮助”菜单中选择 **关于 Tabular Editor** 来更改许可证密钥。
+Tabular Editor 3 激活后，您可以在“帮助”菜单中选择“关于 Tabular Editor”来更改许可证密钥。
 
-![About Te3](~/content/assets/images/getting-started/about-te3.png)
+![关于 Te3](~/content/assets/images/getting-started/about-te3.png)
 
-在该对话框中，选择 **更改许可证密钥**。 此选项仅在 Tabular Editor 中未加载任何模型时可用。 如果某个模型已打开，先通过 **文件 > 关闭模型** 将其关闭。 点击 **更改许可证密钥** 后，Tabular Editor 会提示你是否要删除当前许可证：
+在对话框中，选择“更改许可证密钥”。 请注意，只有在 Tabular Editor 中未加载任何模型时，此选项才可用。 如果您已加载模型，可以通过“文件 > 关闭模型”将其关闭。 单击“更改许可证密钥”后，Tabular Editor 会询问您是否要删除当前许可证：
 
-![image](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
+![图片](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
 
-如果你确认，当前许可证将被删除，你需要重新输入许可证密钥才能使用该产品。
+确认后，将删除当前许可证，并且您必须重新输入许可证密钥才能使用产品。
 
 > [!IMPORTANT]
-> 删除许可证密钥后，在该计算机上，当前用户将无法使用该产品，直到输入新的许可证密钥为止。
+> 按上述方式删除许可证密钥后，在该计算机上的当前用户重新输入新的许可证密钥之前，将无法使用该产品。
 
-## 安装后配置
+<a name="registry-details"></a>
 
-Tabular Editor 3 提供了许多配置选项。 默认设置已足以满足大多数开发场景，但仍建议查看以下选项。
+#### 注册表详细信息
 
-### 启动时检查更新
+Tabular Editor 3 使用 Windows 注册表来存储激活详细信息。
 
-默认情况下，每次启动 Tabular Editor 3 时，工具都会联机检查是否有新版本可用。 你可以在 **工具 > 偏好 > 更新和反馈** 中控制更新检查的执行方式。
+要查看分配给该计算机的当前许可证密钥，请在 Windows 命令提示符（开始 > 运行 > cmd.exe）中运行以下命令：
 
-> [!NOTE]
-> 请始终使用最新版本的 Tabular Editor 3。 在提交 Bug Report 之前，我们的支持团队会默认你使用的是最新版本。
+```cmd
+REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
+```
 
-### 退出遥测数据收集
+你也可以使用 `regedit.exe`（Windows 注册表编辑器），前往 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`，查看并修改 **LicenseKey** 和 **User** 的值。
 
-Tabular Editor 3 会收集匿名使用数据和遥测信息，用来帮助我们改进产品。 你可以随时启动 Tabular Editor 3，并依次前往 **工具 > 偏好 > 更新和反馈** 以选择退出。 如需退出，请取消选中 **通过收集匿名使用数据帮助改进 Tabular Editor** 复选框。
+系统管理员也可以在每个用户的 `SOFTWARE\Kapacity\Tabular Editor 3` 注册表键下指定 **LicenseKey** 和 **User** 的值，提前为某台计算机分配 Tabular Editor 3 许可证。
 
-![收集遥测数据](~/content/assets/images/getting-started/collect-telemetry.png)
+![注册表编辑器](~/content/assets/images/troubleshooting/registry-editor.png)
 
-### 代理设置
+### 通过注册表更改许可证密钥
 
-如果你所在的网络互联网连接受限，请在 **工具 > 偏好 > 代理设置** 中指定代理服务器的地址、用户名和密码。 在 Tabular Editor 3 使用任何依赖出站 Web 请求的功能之前，必须先完成此设置。 具体包括：
+如果出于任何原因，你无法按上述流程更改许可证密钥，也可以随时通过注册表编辑器重置分配给 Tabular Editor 3 的许可证：
 
-- 检查更新
-- 产品激活
-- DAX 格式化
-- 从外部 URL 下载最佳实践规则
+1. 关闭所有 Tabular Editor 3 实例。
+2. 在 Windows 中打开注册表编辑器（开始 > 运行 > regedit.msc）。
+3. 定位到 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`（见上方截图）。
+4. 删除该项下的所有值。
+5. 关闭注册表编辑器，然后重新启动 Tabular Editor 3。
 
-> [!TIP]
-> 代理设置有时会影响身份验证对话框或其他外部提示。 尝试在 **System** 和 **None** 之间切换代理设置，然后关闭并重新打开 Tabular Editor 3 以进行验证。
+或者，在 Windows 命令提示符中运行以下命令（开始 > 运行 > cmd.exe）：
 
-### 其他偏好设置
+```cmd
+REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
+```
 
-Tabular Editor 3 还包含许多用于控制应用程序行为的设置。 若要了解详细信息，请参阅 @preferences。
+下次启动 Tabular Editor 3 时，系统会提示你输入许可证密钥，就像该工具首次安装到此计算机上时一样。
 
-## 高级场景
+### 静默安装与许可证预配置
 
-有关手动（无互联网）激活、基于注册表的许可证管理、静默部署和 Enterprise 席位管理，请参阅 @installation-activation-basic。
+你可以以静默方式部署 Tabular Editor，并通过 Windows 注册表预先配置许可证。
+
+1. **静默安装**（无 UI，不重启）：
+
+   ```powershell
+   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
+   ```
+
+   要包含 **AI Assistant** 功能，请在 `ADDLOCAL` 属性中指定它。 AI Assistant 默认不安装。
+
+   ```powershell
+   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
+   ```
+
+   | MSI 功能        | 说明                                  | 默认安装  |
+   | ------------- | ----------------------------------- | ----- |
+   | `MainFeature` | Tabular Editor 3 的核心应用程序            | 是（必需） |
+   | `AIAssistant` | 适用于 Tabular Editor 3 的 AI Assistant | 否     |
+
+   > [!NOTE]> 使用 `ADDLOCAL` 时，除任何可选功能外，还必须包含 `MainFeature`。 只指定 `AIAssistant` 而不包含 `MainFeature` 会导致安装不完整。
+
+你也可以使用 `/package` 替代 `/i`。 将 `<version>` 替换为实际的版本字符串。 如适用，请使用 ARM64 MSI。
+
+有关可用的 MSI 命令行选项的详细信息，请参阅 Microsoft 官方文档：
+[Microsoft Standard Installer command-line options - Win32 apps | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
+
+2. **在应用程序首次启动之前**，**将许可证写入注册表**：
+
+   ```bat
+   REM Per-user license key (HKCU)
+   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
+   ```
+
+   如果你使用的是 **企业版** 许可证密钥，还需要设置获授权用户的电子邮件：
+
+   ```bat
+   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
+   ```
+
+**备注**
+
+- 安装程序**不**接受许可证参数；许可证通过上述注册表项进行处理。
+- 注册表项存储在 **HKCU** 下（每用户）。 请确保这些命令在目标用户的上下文中运行（例如通过登录脚本等方式），以便将值写入正确的用户配置文件。
+- 有关更多键和值，请参阅[注册表详细信息](#registry-details)。
 
 ## 后续步骤
 
-- [Tabular Editor 3 用户界面概述](xref:user-interface)
-- @xmla-as-connectivity
-- @migrate-from-vs
-- @migrate-from-desktop
-- @migrate-from-te2
-- @installation-activation-basic
+- [Tabular Editor 3 用户界面概览](xref:user-interface)
