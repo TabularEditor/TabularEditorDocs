@@ -305,10 +305,11 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 
 ## Limitations
 
-- UDFs are currently a preview feature and may have limitations in certain deployment scenarios
 - Not all Power BI environments support UDFs (requires specific builds)
 - UDFs cannot be recursive (call themselves)
-- UDFs do not support optional parameters, parameters with default values, or parameter overloading
+
+> [!NOTE]
+> As of June 2026, UDFs are [generally available](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738). As part of this, UDFs now support default expressions / optional parameters. However, Tabular Editor 3 currently displays a false error message when the default expression syntax is used. This issue will be fixed in our next update of Tabular Editor 3.
 
 ---
 
