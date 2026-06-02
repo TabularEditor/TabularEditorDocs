@@ -122,7 +122,7 @@ Tabular Editor 3.18.0 引入了一项名为 **代码操作** 的新功能。 该
 | DR011 | [使用 ISBLANK 重写](xref:DR011)          | 与其将表达式同 [`BLANK()`](https://dax.guide/BLANK) 进行比较，不如使用 [`ISBLANK`](https://dax.guide/ISBLANK) 函数。 示例：<br>`IF([Sales] = BLANK(), [Budget], [Sales])` -> `IF(ISBLANK([Sales], [Budget], [Sales])`                                                                      |
 | DR012 | [移除不必要的 BLANK](xref:DR012)           | 某些 DAX 函数（例如 [`IF`](https://dax.guide/IF) 和 [`SWITCH`](https://dax.guide/SWITCH)）在条件为 false 时本身就会返回 `BLANK()`，因此无需显式指定 `BLANK()`。 示例：<br>`IF(a > b, a, BLANK())` -> `IF(a > b, a)`                                                                                   |
 | DR013 | [简化取反逻辑](xref:DR013)                 | 当逻辑表达式取反时，通常用取反后的运算符重写该表达式会更易读。 示例：<br>`NOT(a = b)` -> `a <> b`                                                                                                                                                                                                      |
-| DR014 | [使用 IN 简化](xref:DR014)               | 使用 [`IN`](https://dax.guide/IN) 运算符来重写复合谓词（即针对同一表达式的相等比较，并通过 [`OR`](https://dax.guide/OR) 或 [`\\|\\|`](https://dax.guide/op/or/) 进行组合）。 示例：<br>`a = 1 \\|\\| a = 2 \\|\\| a = 100` -> `a IN { 1, 2, 100 }`                                                     |
+| DR014 | [使用 IN 简化](xref:DR014)               | 使用 [`IN`](https://dax.guide/IN) 运算符来重写复合谓词（即针对同一表达式的相等比较，并通过 [`OR`](https://dax.guide/OR) 或 [`\|\|`](https://dax.guide/op/or/) 进行组合）。 示例：<br>`a = 1 \|\| a = 2 \|\| a = 100` -> `a IN { 1, 2, 100 }`                                                                 |
 
 ### 重写
 
