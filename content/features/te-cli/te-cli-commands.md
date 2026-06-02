@@ -441,7 +441,7 @@ Each `te bpa run` invocation assembles rules from three independent layers:
    - `-r, --rules <path-or-url>` flag (highest)
    - `TE_BPA_RULES` environment variable
    - `bpa.rules` array from CLI config (`~/.config/te/config.json`)
-2. **Built-in defaults** - loaded unless `--no-defaults` is passed or [`bpa.builtInRules`](xref:te-cli-config#bpa-gate-keys) is `false` in config. Individual built-ins listed in `bpa.disabledBuiltInRuleIds` are skipped.
+2. **Built-in defaults** - loaded unless `--no-defaults` is passed or [`bpa.builtInRules`](xref:te-cli-config#built-in-bpa-rules) is `false` in config. Individual built-ins listed in `bpa.disabledBuiltInRuleIds` are skipped.
 3. **Model-embedded rules** - rules in the model's `BestPracticeAnalyzer_Rules` annotation, loaded unless `--no-model-rules` is passed. External URL annotations are skipped unless `--allow-external-rules` is also passed.
 
 Duplicate rule IDs are de-duplicated (user rules win over built-ins). Rule IDs in the model's `BestPracticeAnalyzer_IgnoreRules` annotation are then removed.
