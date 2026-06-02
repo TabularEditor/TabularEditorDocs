@@ -1,8 +1,8 @@
 ---
 uid: installation-activation-basic
-title: Instalación y activación avanzadas
-author: Morten Lønskov
-updated: 2026-05-19
+title: Instalación, activación y configuración básica
+author: Daniel Otykier
+updated: 2021-09-30
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,119 +17,97 @@ applies_to:
           full: true
 ---
 
-## Información general
+## Instalación
 
-En esta página se tratan escenarios avanzados de instalación y activación para Tabular Editor 3: activación manual (sin conexión), administración de licencias basada en el Registro, implementación silenciosa y administración de asientos de la edición Enterprise.
+Para instalar Tabular Editor 3, descarga la versión más reciente desde nuestra [página de descargas](xref:downloads).
 
-Para el flujo de activación estándar, consulta @getting-started.
+Recomendamos descargar el instalador MSI de 64 bits, que es adecuado para la mayoría de los casos. Una vez descargado, haz doble clic en el archivo MSI y sigue los pasos del asistente de instalación.
+
+![Instalar](~/content/assets/images/getting-started/install.png)
+
+## Activar la instalación
+
+La primera vez que inicias Tabular Editor 3 en un equipo nuevo, se te pedirá que actives el producto.
+
+![Activación del producto](~/content/assets/images/getting-started/product-activation.png)
+
+### Activación con una clave de licencia existente
+
+Una vez que compres una licencia de Tabular Editor 3, deberías recibir un correo electrónico con una cadena de 25 caracteres; esa es tu clave de licencia. Cuando se te solicite, introduce la clave de licencia y haz clic en "Siguiente >" para activar el producto.
+
+![Introducir clave de licencia](~/content/assets/images/getting-started/enter-license-key.png)
+
+> [!NOTE]
+> Para los tipos de licencia para varios usuarios, tendrás que introducir tu dirección de correo electrónico además de la clave de licencia. Tabular Editor 3 te lo solicitará si la clave de licencia que introduces corresponde a una licencia multiusuario.
 
 <a name="manual-activation-no-internet"></a>
 
-## Activación manual (sin Internet)
+#### Activación manual (sin Internet)
 
-Si no tienes acceso a Internet, por ejemplo, por un proxy, Tabular Editor te solicitará que realices una activación manual.
+Si no tienes acceso a Internet, por ejemplo, debido a un proxy, Tabular Editor te pedirá que realices una activación manual.
 
-![Mensaje de activación manual](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
+![Aviso de activación manual](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
 
-Después de introducir tu correo electrónico, aparece un cuadro de diálogo con un enlace a una clave de activación. Copia la URL y ábrela en un navegador web que tenga conexión a Internet.
+Después de introducir tu correo electrónico, aparece un cuadro de diálogo con un enlace a una clave de activación.
+Copia la URL y ábrela en un navegador web conectado a Internet.
 
 La URL devuelve un objeto JSON:
 
 ![Objeto JSON de activación manual](~/content/assets/images/getting-started/activation_manual_jsonobject.png)
 
-Copia el objeto JSON completo y pégalo en el cuadro de diálogo. El cuadro de diálogo de activación manual se verá como en la captura de pantalla siguiente.
+Copia el objeto JSON completo y pégalo en el cuadro de diálogo.
+El cuadro de diálogo de activación manual debería quedar como el que se muestra a continuación.
 
 ![Activación manual completada](~/content/assets/images/getting-started/activation_manual_dialogbox_filled.png)
 
-A continuación, se verifica tu licencia de Tabular Editor 3.
+De este modo, se verificará tu licencia de Tabular Editor 3.
 
-## Cambiar asientos en la Edición Enterprise
+### Cambiar una clave de licencia
 
-Para cambiar un asiento de la edición Enterprise, anula el registro del usuario actual de ese asiento a través del [portal de autoservicio de Tabular Editor](https://tabulareditor.com/my-account/). El propietario de la suscripción o el administrador de licencias crea una cuenta o inicia sesión con una existente para administrar los asientos de licencia.
+Cuando Tabular Editor 3 está activado, puedes cambiar la clave de licencia en el menú Ayuda seleccionando "Acerca de Tabular Editor".
+
+![Acerca de Te3](~/content/assets/images/getting-started/about-te3.png)
+
+En el cuadro de diálogo, selecciona "Cambiar clave de licencia". Ten en cuenta que esta opción solo está disponible si no hay ningún modelo cargado en Tabular Editor. Si ya has cargado un modelo, puedes cerrarlo en Archivo > Cerrar modelo.
+
+Para obtener más detalles sobre la administración de las claves de licencia, consulta [Detalles del registro](xref:getting-started#registry-details).
+
+## Configuración básica
+
+Después de activar Tabular Editor 3, te recomendamos dedicar unos minutos a familiarizarte con la [interfaz básica](xref:user-interface). Además, Tabular Editor 3 ofrece muchas opciones de configuración. La configuración predeterminada es suficiente para la mayoría de los escenarios de desarrollo, pero hay algunas opciones de configuración importantes que deberías revisar siempre.
+
+### Buscar actualizaciones al iniciar
+
+De forma predeterminada, cada vez que inicias Tabular Editor 3, la herramienta comprueba en línea si hay una versión más reciente disponible. Puedes controlar cómo se realiza esta comprobación de actualizaciones en **Herramientas > Preferencias > Actualizaciones y comentarios**.
 
 > [!NOTE]
-> Cambiar de usuario solo es posible en la Edición Enterprise.
+> Recomendamos usar siempre la versión más reciente de Tabular Editor 3. Por lo general, nuestro equipo de soporte asumirá que siempre estás usando la versión más reciente antes de enviar un Report de errores.
 
-<a name="registry-details"></a>
+### No participar en la recopilación de telemetría
 
-## Detalles del Registro
+Tabular Editor 3 recopila datos de uso anónimos y telemetría, lo que nos ayuda a mejorar el producto. Puedes optar por no participar en cualquier momento: abre Tabular Editor 3 y ve a **Herramientas > Preferencias > Actualizaciones y comentarios**. Desmarca la casilla **Ayuda a mejorar Tabular Editor recopilando datos de uso anónimos** para no participar.
 
-Tabular Editor 3 usa el Registro de Windows para almacenar los datos de activación.
+![Recopilar telemetría](~/content/assets/images/getting-started/collect-telemetry.png)
 
-Para ver la clave de licencia actual asignada al equipo, ejecuta el siguiente comando en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
+### Configuración del proxy
 
-```cmd
-REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
-```
+Si estás en una red con conectividad a Internet limitada, puedes especificar la dirección, el nombre de usuario y la contraseña de un servidor proxy en **Herramientas > Preferencias > Configuración del proxy**. Esto es necesario antes de que Tabular Editor 3 pueda usar cualquier función que dependa de solicitudes web salientes. En concreto, son:
 
-También puedes usar `regedit.exe` (Editor del Registro de Windows) y navegar hasta `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` para ver y modificar los valores **LicenseKey** y **User**.
+- Comprobación de actualizaciones
+- Activación del producto
+- Formato de DAX
+- Descarga de reglas de prácticas recomendadas desde URL externas
 
-![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
+> [!TIP]
+> En ocasiones, la configuración del proxy puede interferir con los cuadros de diálogo de autenticación u otras indicaciones externas.
+> Intenta cambiar la configuración del proxy entre "Sistema" y "Ninguno"; cierra y vuelve a abrir Tabular Editor 3 para comprobarlo.
 
-Un administrador del sistema también puede asignar de forma proactiva licencias de Tabular Editor 3 a un equipo especificando los valores **LicenseKey** y **User** en la clave del registro `SOFTWARE\Kapacity\Tabular Editor 3` de cada usuario. Consulta [Instalación desatendida y preaprovisionamiento de licencias](#instalacion-desatendida-y-preaprovisionamiento-de-licencias) para ver el procedimiento de implementación completo.
+### Otras preferencias
 
-## Cambiar una clave de licencia a través del Registro
+Además de la configuración mencionada anteriormente, Tabular Editor 3 incluye muchas otras opciones para controlar distintos comportamientos de la aplicación, lo que te permite ajustar la herramienta a tus necesidades. Para obtener más información sobre estas otras preferencias, consulta @preferences.
 
-Si, por cualquier motivo, no puedes cambiar la clave de licencia mediante la opción estándar **Cambiar clave de licencia** del cuadro de diálogo **Acerca de Tabular Editor**, restablece la licencia desde el Editor del Registro:
+## Siguientes pasos
 
-1. Cierra todas las instancias de Tabular Editor 3.
-2. Abre el Editor del Registro en Windows (Inicio > Ejecutar > regedit.msc).
-3. Busca `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (consulta la captura de pantalla anterior).
-4. Elimina todos los valores dentro de esta clave.
-5. Cierra el Editor del Registro y reinicia Tabular Editor 3.
-
-Como alternativa, ejecuta el siguiente comando en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
-
-```cmd
-REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
-```
-
-La próxima vez que inicies Tabular Editor 3, se te solicitará una clave de licencia, igual que cuando la herramienta se instaló por primera vez en el equipo.
-
-## Instalación desatendida y preaprovisionamiento de licencias
-
-Puedes implementar Tabular Editor de forma desatendida y preaprovisionar la licencia mediante el Registro de Windows.
-
-1. **Instalar de forma silenciosa** (sin interfaz de usuario, sin reinicio):
-
-   ```powershell
-   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart /l*v C:\Temp\TE3_install.log
-   ```
-
-   Para incluir la característica **Asistente de IA**, especifica la propiedad `ADDLOCAL`. El Asistente de IA no se instala de forma predeterminada.
-
-   ```powershell
-   msiexec /i TabularEditor.<version>.x64.Net8.msi /qn /norestart ADDLOCAL=MainFeature,AIAssistant /l*v C:\Temp\TE3_install.log
-   ```
-
-   | Característica MSI | Descripción                           | Instalado de forma predeterminada   |
-   | ------------------ | ------------------------------------- | ----------------------------------- |
-   | `MainFeature`      | Aplicación base de Tabular Editor 3   | Sí (obligatorio) |
-   | `AIAssistant`      | Asistente de IA para Tabular Editor 3 | No                                  |
-
-   > [!NOTE]> Al usar `ADDLOCAL`, incluye `MainFeature` junto con cualquier característica opcional. Si especificas solo `AIAssistant` sin `MainFeature`, la instalación quedará incompleta.
-
-También puedes usar `/package` en lugar de `/i`. Reemplaza `<version>` por la cadena de la versión real. Usa el MSI de ARM64 si corresponde.
-
-Para obtener más información sobre las opciones de línea de comandos de MSI disponibles, consulta la documentación oficial de Microsoft:
-[Opciones de línea de comandos de Microsoft Standard Installer: aplicaciones Win32 | Microsoft Learn](https://learn.microsoft.com/windows/win32/msi/command-line-options)
-
-2. **Escribe la licencia en el Registro** **antes de iniciar la aplicación por primera vez**:
-
-   ```bat
-   REM Per-user license key (HKCU)
-   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey /t REG_SZ /d YOUR-25-CHAR-KEY /f
-   ```
-
-   Si usas una clave de licencia de la **Edición Enterprise**, establece también el correo electrónico del usuario con licencia:
-
-   ```bat
-   REG ADD "HKCU\Software\Kapacity\Tabular Editor 3" /v User /t REG_SZ /d user@example.com /f
-   ```
-
-**Notas**
-
-- El instalador no acepta un parámetro de licencia; la licencia se administra mediante las entradas del Registro indicadas arriba.
-- Las claves se almacenan en **HKCU** (por usuario). Asegúrate de que los comandos se ejecuten en el contexto del usuario de destino (por ejemplo, mediante un script de inicio de sesión) para que los valores se escriban en el perfil correcto.
-- Para ver más claves y valores, consulta [detalles del Registro](#registry-details).
-
+- @migrate-from-vs
+- @migrate-from-desktop
+- @migrate-from-te2
