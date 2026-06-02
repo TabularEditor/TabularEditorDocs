@@ -1,14 +1,14 @@
 # Seguridad
 
-This section contains information about security, privacy, and licensing.
+Esta sección contiene información sobre seguridad, privacidad y licencias.
 
-## In this section
+## En esta sección
 
-- @security-privacy - Security and privacy considerations of Tabular Editor 3
-- @privacy-policy - Privacy policy and data handling
-- @gdpr-delete - User Data Deletion
-- @terms - The latest version of our Terms & Conditions
-- @third-party-notices - Third-party component licenses and notices
+- @security-privacy - Consideraciones de seguridad y privacidad de Tabular Editor 3
+- @privacy-policy - Política de privacidad y tratamiento de datos
+- @gdpr-delete - Eliminación de datos del usuario
+- @te3-eula - La versión más reciente de nuestros términos de licencia
+- @third-party-notices - Licencias y avisos de componentes de terceros
 
 ---
 
