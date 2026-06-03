@@ -407,7 +407,7 @@ Run Best Practice Analyzer rules against a model.
 `te bpa run` accepts:
 
 - `<model>` - positional argument: path to model (alternative to the `--model` global flag).
-- `-r, --rules <file-or-url>` - path(s) or URL(s) to additional BPA rule file(s) in JSON format. Repeatable.
+- `-r, --rules <rules>` - path(s) or URL(s) to BPA rule file(s) in JSON format. Repeatable. Replaces the user-rule layer for this invocation: see [Rule sources and resolution](#rule-sources-and-resolution) below.
 - `--no-model-rules` - exclude BPA rules embedded in the model's annotations.
 - `--no-defaults` - exclude built-in default BPA rules.
 - `--vpax <file>` - load VertiPaq Analyzer stats from a `.vpax` file to enable VPA-aware rules.
@@ -431,6 +431,25 @@ te bpa run --rule PERF_UNUSED_HIDDEN_COLUMN
 te bpa run --path Sales            # Tables touched by the Sales filter only
 te bpa run --path 'Sa*'            # Wildcard - every table starting with Sa
 te bpa run --path Sales/Measures   # Path filter applied to the matched tables
+```
+
+#### Rule sources and resolution
+
+Each `te bpa run` invocation assembles rules from three independent layers:
+
+1. **User rules** - exactly one source wins, in priority order:
+   - `-r, --rules <rules>` flag, accepts a file path or URL (highest)
+   - `TE_BPA_RULES` environment variable
+   - `bpa.rules` array from CLI config (`~/.config/te/config.json`)
+2. **Built-in defaults** - loaded unless `--no-defaults` is passed or [`bpa.builtInRules`](xref:te-cli-config#built-in-bpa-rules) is `false` in config. Individual built-ins listed in `bpa.disabledBuiltInRuleIds` are skipped.
+3. **Model-embedded rules** - rules in the model's `BestPracticeAnalyzer_Rules` annotation, loaded unless `--no-model-rules` is passed. External URL annotations are skipped unless `--allow-external-rules` is also passed.
+
+Duplicate rule IDs are de-duplicated (user rules win over built-ins). Rule IDs in the model's `BestPracticeAnalyzer_IgnoreRules` annotation are then removed.
+
+The `Rules loaded:` line in the output attributes each contributing layer, for example:
+
+```
+Rules loaded: 41 from 1 file(s) from bpa.rules config + built-in defaults + model annotations
 ```
 
 ### bpa rules
