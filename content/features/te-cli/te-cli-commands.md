@@ -407,7 +407,7 @@ Run Best Practice Analyzer rules against a model.
 `te bpa run` accepts:
 
 - `<model>` - positional argument: path to model (alternative to the `--model` global flag).
-- `-r, --rules <file-or-url>` - path(s) or URL(s) to BPA rule file(s) in JSON format. Repeatable. Replaces the user-rule layer for this invocation: see [Rule sources and resolution](#rule-sources-and-resolution) below.
+- `-r, --rules <rules>` - path(s) or URL(s) to BPA rule file(s) in JSON format. Repeatable. Replaces the user-rule layer for this invocation: see [Rule sources and resolution](#rule-sources-and-resolution) below.
 - `--no-model-rules` - exclude BPA rules embedded in the model's annotations.
 - `--no-defaults` - exclude built-in default BPA rules.
 - `--vpax <file>` - load VertiPaq Analyzer stats from a `.vpax` file to enable VPA-aware rules.
@@ -438,7 +438,7 @@ te bpa run --path Sales/Measures   # Path filter applied to the matched tables
 Each `te bpa run` invocation assembles rules from three independent layers:
 
 1. **User rules** - exactly one source wins, in priority order:
-   - `-r, --rules <path-or-url>` flag (highest)
+   - `-r, --rules <rules>` flag, accepts a file path or URL (highest)
    - `TE_BPA_RULES` environment variable
    - `bpa.rules` array from CLI config (`~/.config/te/config.json`)
 2. **Built-in defaults** - loaded unless `--no-defaults` is passed or [`bpa.builtInRules`](xref:te-cli-config#built-in-bpa-rules) is `false` in config. Individual built-ins listed in `bpa.disabledBuiltInRuleIds` are skipped.
