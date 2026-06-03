@@ -1,6 +1,6 @@
 ---
 uid: te-cli-config
-title: Custom Configuration
+title: 自定义配置
 author: Peer Grønnerup
 updated: 2026-04-20
 applies_to:
@@ -13,38 +13,38 @@ applies_to:
       full: true
 ---
 
-# Custom Configuration
+# 自定义配置
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-The Tabular Editor CLI reads optional configuration from a JSON file. Configuration controls three things:
+Tabular Editor CLI 可从 JSON 文件读取可选配置。 配置控制三类内容：
 
-- **File paths** — where the CLI reads macros, BPA rules, and (optionally) the TE3 Desktop executable, and where to write the query log.
-- **Behavioral defaults** — BPA gates, auto-format, validation.
-- **Saved connection profiles** — the list of named profiles you can switch between.
+- **文件路径** — CLI 在何处读取宏、BPA 规则和 (可选) TE3 Desktop 可执行文件，以及在何处写入查询日志。
+- **行为默认值** — BPA 门控、自动格式化、验证。
+- **已保存的连接配置文件** — 可在不同命名配置文件之间切换的列表。
 
-The CLI is self-contained - it does not read from or write to any Tabular Editor 3 desktop install path. BPA rules and macros files must be set explicitly via this config (or initialized on demand with `te bpa rules init` / `te macro init`).
+CLI 是自包含的 - 它不会从任何 Tabular Editor 3 桌面版安装路径读取或写入任何内容。 BPA 规则和宏文件必须通过此配置显式设置（或按需使用 `te bpa rules init` / `te macro init` 进行初始化）。
 
-Most users don't need to edit the config file directly - `te config show`, `te config set <key> <value>`, and `te profile set` cover the common operations.
+大多数用户无需直接编辑配置文件；`te config show`、`te config set <key> <value>` 和 `te profile set` 已涵盖常见操作。
 
-## Config file location
+## 配置文件位置
 
-The following locations are checked in this order:
+将按以下顺序检查这些位置：
 
-1. `$TE_CONFIG` environment variable (if set and the file exists).
-2. `~/.config/te/config.json` (on Windows, `%USERPROFILE%\.config\te\config.json`).
-3. No config file - the CLI uses built-in defaults.
+1. `$TE_CONFIG` 环境变量（如果已设置且文件存在）。
+2. `~/.config/te/config.json`（在 Windows 上为 `%USERPROFILE%\.config\te\config.json`）。
+3. 如果没有配置文件，CLI 将使用内置默认值。
 
-`TE_CONFIG` is honored consistently by every config-file operation - `te config show`, `te config set`, `te config init`, and `te config paths` all read and write at the resolved path. This is primarily intended for testing, scripted installs, and per-environment configuration.
+`TE_CONFIG` 在所有配置文件相关操作中都会被一致地遵循；`te config show`、`te config set`、`te config init` 和 `te config paths` 都会在解析后的 PATH 上进行读写。 这主要用于测试、脚本化安装以及按环境进行配置。
 
-To create a default config:
+要创建默认配置：
 
 ```bash
 te config init             # Create config at TE_CONFIG (or ~/.config/te/config.json)
 te config init --force     # Overwrite existing config
 ```
 
-## Viewing configuration
+## 查看配置
 
 ```bash
 te config show                         # Display all settings
@@ -52,12 +52,12 @@ te config show --output-format json    # Machine-readable
 te config paths                        # Show resolved macros and BPA rule paths
 ```
 
-Use `te config paths` to see which files the CLI will actually use for macros and BPA rules. It's handy when debugging missing data files. The output shows two rows: `macros` (the resolved macros file path or `[not set]`) and `bpa.rules` (the first existing BPA rules file resolved by the path resolver, or `[not set]`).
+使用 `te config paths` 查看 CLI 实际会为宏和 BPA 规则使用哪些文件。 这在调试缺失的数据文件时很有用。 输出会显示两行：`macros` (解析后的宏文件路径或 `[not set]`) 和 `bpa.rules` (由路径解析器解析出的第一个存在的 BPA 规则文件，或 `[not set]`)。
 
 > [!NOTE]
-> `te config paths` emits `null` fields explicitly in `--output-format json` mode (e.g., `{"macros": null, "bpa": {"rules": null}}`). Reporting resolution outcomes is the command's whole purpose, so `null` is a meaningful "tried but resolved to nothing" answer. `te config show --output-format json` strips null fields by default, so consumers should parse it tolerantly.
+> 在 `--output-format json` 模式下，`te config paths` 会显式输出值为 `null` 的字段 (例如 `{"macros": null, "bpa": {"rules": null}}`)。 报告解析结果本来就是此命令的全部用途，因此 `null` 表示“尝试过，但未解析到任何内容”，这是一个有意义的结果。 `te config show --output-format json` 默认会剔除值为 `null` 的字段，因此使用方应以容错方式解析。
 
-## Setting values
+## 设置值
 
 ```bash
 te config set autoFormat true
@@ -66,16 +66,16 @@ te config set hidePreviewNotice true
 te config set macros null              # Clear a path override
 ```
 
-Unknown keys fail with exit code `1` and an error that lists the valid keys.
+如果键未知，命令将以退出码 `1` 失败，并返回一条列出有效键的错误信息。
 
-If no config file exists, `te config set` auto-creates one at the resolved path (`$TE_CONFIG` if set, otherwise `~/.config/te/config.json`) before applying the change.
+如果配置文件不存在，`te config set` 会先在解析后的路径自动创建一个配置文件 (若设置了则为 `$TE_CONFIG`，否则为 `~/.config/te/config.json`)，然后再应用更改。
 
 > [!NOTE]
-> Every key in the schema is settable via `te config set`, including nested keys via dotted paths (`bpa.onDeploy`, `formatOptions.useSqlBiDaxFormatter`, etc.). The only exception is `formatVersion`, which the CLI manages automatically. Run `te config paths` to find the config file if you'd rather edit the JSON directly.
+> 架构中的每个键都可以通过 `te config set` 设置，包括通过点分路径设置嵌套键 (`bpa.onDeploy`、`formatOptions.useSqlBiDaxFormatter` 等)。 唯一的例外是 `formatVersion`，它由 CLI 自动管理。 如果你更愿意直接编辑 JSON，可运行 `te config paths` 来找到配置文件。
 
-## Full schema
+## 完整 Schema
 
-The complete JSON config schema with all keys at their default values. Use this as a reference when editing the config file directly, or when looking up the dotted path for a `te config set` call.
+完整的 JSON 配置 Schema，包含所有键及其默认值。 直接编辑配置文件时可将其作为参考，或在为 `te config set` 调用查找点分路径时使用。
 
 ```json
 {
@@ -115,45 +115,45 @@ The complete JSON config schema with all keys at their default values. Use this 
 }
 ```
 
-### File paths
+### 文件路径
 
-Set these in your config to avoid passing the same paths on every command. Per-command flags and environment variables override config values; see [Path resolution priority](#path-resolution-priority) below.
+在配置中设置这些路径，以避免每次执行命令都传入相同的路径。 每个命令的标志和环境变量都会覆盖配置值；请参阅下方的[路径解析优先级](#path-resolution-priority)。
 
-| Key          | Meaning                                                                                                                                                                                                                                                                                                                                                                |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `macros`     | Explicit path to a macros JSON file (typically `MacroActions.json`). Resolved by every `te macro` command. Point at a shared file (network share, repo-local, or even the TE3 desktop file) to reuse the same set of macros across machines and between the CLI and TE3 Desktop. |
-| `bpa.rules`  | Ordered list of paths or URLs to BPA rule files. The deploy/save gate loads **every** existing entry; `te bpa rules list` and `te config paths` use the first existing entry. Comma-separated values on `te config set bpa.rules ...` are split into the array.                                                        |
-| `te3ExePath` | Explicit path to the Tabular Editor 3 Desktop executable (`TabularEditor.exe`). Used **only** by `te open` to launch the desktop app; safe to leave unset on Linux/macOS or when you don't use `te open`. If unset, `te open` falls back to a `PATH` lookup.                                        |
-| `queryLog`   | Path to a log file where every `te query` invocation appends its query text and execution metadata. Useful for audit trails or analyzing query patterns over time. Supports `~` for the home directory (e.g., `~/.config/te/queries.log`).                          |
+| 键            | 含义                                                                                                                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `macros`     | 宏 JSON 文件的显式路径 (通常为 `MacroActions.json`)。 每个 `te macro` 命令都会解析它。 可将其指向共享文件（网络共享、仓库内文件，甚至 TE3 Desktop 的文件），以便在不同计算机之间以及在 CLI 与 TE3 Desktop 之间复用同一组宏。                |
+| `bpa.rules`  | 指向 BPA 规则文件的路径或 URL 的有序列表。 `te bpa run` 和 deploy/save gate 会加载**所有**现有条目；`te bpa rules list` 和 `te config paths` 使用第一个现有条目。 在 `te config set bpa.rules ...` 中使用逗号分隔的值时，会将其拆分为数组。      |
+| `te3ExePath` | Tabular Editor 3 Desktop 可执行文件 (`TabularEditor.exe`) 的显式路径。 **仅** `te open` 在启动桌面应用时才会用到；在 Linux/macOS 上，或不使用 `te open` 时，可安全留空。 如果未设置，`te open` 会回退到在 `PATH` 中查找。 |
+| `queryLog`   | 日志文件路径，每次调用 `te query` 时都会将其查询文本和执行元数据追加到该文件中。 可用于审计追踪，或分析随时间变化的查询模式。 支持使用 `~` 表示主目录（例如 `~/.config/te/queries.log`）。                                                                  |
 
-### Path resolution priority
+### 路径解析优先级
 
-For each user-provided file (macros, BPA rules), the CLI resolves the path in this order:
+对于每个用户提供的文件 (宏、BPA 规则)，CLI 会按以下顺序解析路径：
 
-1. **Command-line flag** - `--macros <path>` for macro commands; `--bpa-rules <path>` for the deploy/save gate; `--rules-file <path>` for `te bpa rules` subcommands.
-2. **Environment variable** - `TE_MACROS_PATH` for macros, `TE_BPA_RULES` for BPA rules.
-3. **CLI config** - `macros` for macros, the first existing entry of `bpa.rules[]` for BPA rules.
+1. **命令行标志** - 宏命令使用 `--macros <path>`；部署/保存 gate 使用 `--bpa-rules <path>`；`te bpa rules` 子命令使用 `--rules-file <path>`。
+2. **环境变量**：宏使用 `TE_MACROS_PATH`，BPA 规则使用 `TE_BPA_RULES`。
+3. **CLI 配置**：宏使用 `macros`，BPA 规则使用 `bpa.rules[]` 中第一个现有条目。
 
-The CLI does not auto-detect any TE3 install location - configure these explicitly. To start from a default file in the current working directory, run `te macro init` (creates `./MacroActions.json`) or `te bpa rules init` (creates `./BPARules.json`).
+CLI 不会自动检测 TE3 的任何安装位置——请显式配置这些项。 若要从当前工作目录中的默认文件开始，可运行 `te macro init`（创建 `./MacroActions.json`）或 `te bpa rules init`（创建 `./BPARules.json`）。
 
-Run `te config paths` to see which file the CLI actually resolved.
+运行 `te config paths` 可查看 CLI 实际解析到的是哪个文件。
 
-### Behavioral defaults
+### 行为默认值
 
-All BPA-related settings live under the `bpa` object and are addressed via dotted keys on `te config set`.
+所有与 BPA 相关的设置都位于 `bpa` 对象下，并可在 `te config set` 中使用点号分隔的键进行设置。
 
-| Key                          | Default | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ---------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `autoFormat`                 | `false` | Run the DAX Formatter on modified expressions after `te add` / `te set` / `te mv` / `te macro run`. Uses the in-house formatter by default; opt into the SQL BI web service via `formatOptions.useSqlBiDaxFormatter`.                                                                                                                                                                                                                                                                 |
-| `validateOnMutation`         | `true`  | After a mutating command (`add`, `set`, `mv`, `replace --save`, `macro run`), check that every `Table[Column]` reference in the model still resolves. Catches dangling references introduced by renames or removals before they reach deploy.                                                                                                                                                                                                                      |
-| `bpa.onMutation`             | `false` | Run a scoped BPA analysis after each mutating command (`set`, `add`, `mv`, `rm`, `macro run`). Only the affected table's objects are checked, not the whole model - useful for fast feedback during iterative edits.                                                                                                                                                                                                                                               |
-| `bpa.onDeploy`               | `true`  | Run the BPA gate before `te deploy` executes. The deploy is aborted if any rule fires at severity ≥ error. Bypass per-invocation with `--skip-bpa`, or auto-fix with `--fix-bpa`.                                                                                                                                                                                                                                                                                     |
-| `bpa.onSave`                 | `true`  | Run the BPA gate before `te save -o` writes to disk. Bypass per-invocation with `--skip-bpa` or `--force`.                                                                                                                                                                                                                                                                                                                                                                            |
-| `bpa.builtInRules`           | `true`  | Include the curated built-in BPA rule set whenever the gate runs. Set to `false` to ignore built-ins entirely; the gate then runs only the rules configured via `bpa.rules` and any model-embedded rules.                                                                                                                                                                                                                                                                             |
-| `bpa.disabledBuiltInRuleIds` | `null`  | IDs of individual built-in rules to exclude from the gate. Mutated by `te bpa rules disable <id>` / `te bpa rules enable <id>` - prefer those over editing the array directly.                                                                                                                                                                                                                                                                                                        |
-| `vertipaqOnRefresh`          | `false` | After a successful refresh (`full`, `dataonly`, `automatic`, or `add`), automatically run VertiPaq analysis to show storage stats for the refreshed tables. Useful for catching unexpected cardinality or memory regressions immediately.                                                                                                                                                                                                                          |
-| `interactiveEditMode`        | `stage` | Default behavior for in-memory mutations inside `te interactive`. `stage` keeps mutations in memory until `save` is invoked (safest); `save` writes to source after every mutating command (use with care on remote sources - every `set` triggers an XMLA write); `revert` discards mutations after each command unless `--save` or `--stage` was passed. Per-command `--save` / `--revert` / `--stage` flags always override. |
-| `disableTelemetry`           | `false` | Opt out of anonymous usage telemetry. The CLI collects coarse-grained command usage data (command name, exit code, duration) to inform feature priority. The CLI never collects model content, paths, or query text.                                                                                                                                                                                                                               |
+| 键名                           | 默认值     | 说明                                                                                                                                                                                                                                      |
+| ---------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `autoFormat`                 | `false` | 在执行 `te add` / `te set` / `te mv` / `te macro run` 之后，对修改过的表达式运行 DAX Formatter。 默认使用内置格式化程序；可通过 `formatOptions.useSqlBiDaxFormatter` 改用 SQL BI Web 服务。                                                                                  |
+| `validateOnMutation`         | `true`  | 在执行更改命令（`add`、`set`、`mv`、`replace --save`、`macro run`）后，检查模型中的每个 `Table[Column]` 引用是否仍可解析。 可在部署前捕获因重命名或删除而引入的悬空引用。                                                                                                                      |
+| `bpa.onMutation`             | `false` | 在每次更改命令（`set`、`add`、`mv`、`rm`、`macro run`）后，运行一次限定范围的 BPA 分析。 只检查受影响表中的对象，而不是整个模型——这对于迭代编辑时获得快速反馈很有用。                                                                                                                                   |
+| `bpa.onDeploy`               | `true`  | 在执行 `te deploy` 之前运行 BPA 关卡检查。 如果有任一规则触发且严重级别 ≥ error，则中止部署。 可通过 `--skip-bpa` 在单次调用中跳过，或通过 `--fix-bpa` 自动修复。                                                                                                                            |
+| `bpa.onSave`                 | `true`  | 在 `te save -o` 写入磁盘之前运行 BPA 关卡检查。 可通过 `--skip-bpa` 或 `--force` 在单次调用中跳过。                                                                                                                                                                |
+| `bpa.builtInRules`           | `true`  | 每次运行关卡检查时，都包含精选的内置 BPA 规则集。 设为 `false` 可完全忽略内置规则；此时关卡检查只运行通过 `bpa.rules` 配置的规则以及嵌入模型中的规则。                                                                                                                                               |
+| `bpa.disabledBuiltInRuleIds` | `null`  | 要从门禁中排除的各个内置规则的 ID。 可通过 `te bpa rules disable <id>` / `te bpa rules enable <id>` 修改——优先使用这些命令，而不是直接编辑该数组。                                                                                                                               |
+| `vertipaqOnRefresh`          | `false` | 成功刷新后（`full`、`dataonly`、`automatic` 或 `add`），自动运行 VertiPaq 分析，以显示已刷新表的存储统计信息。 有助于立即发现意外的基数变化或内存回归。                                                                                                                                      |
+| `interactiveEditMode`        | `stage` | 在 `te interactive` 中对内存中变更的默认处理方式。 `stage` 会将变更保留在内存中，直到调用 `save`（最安全）；`save` 会在每次产生变更的命令后写回源（对远程源请谨慎使用——每次 `set` 都会触发一次 XMLA 写入）；`revert` 会在每条命令后丢弃变更，除非传入了 `--save` 或 `--stage`。 每个命令上的 `--save` / `--revert` / `--stage` 标志始终会覆盖此设置。 |
+| `disableTelemetry`           | `false` | 选择不参与匿名使用遥测数据收集。 CLI 会收集粗粒度的命令使用数据（命令名称、退出代码、持续时间），用于确定功能优先级。 CLI 绝不会收集模型内容、PATH 或查询文本。                                                                                                                                                 |
 
 ```bash
 te config set bpa.rules "/etc/te/team.json,/etc/te/strict.json"
@@ -162,97 +162,97 @@ te config set bpa.builtInRules false
 te config set bpa.disabledBuiltInRuleIds "TE3_BUILT_IN_DATE_TABLE_EXISTS,TE3_BUILT_IN_HIDE_FOREIGN_KEYS"
 ```
 
-### Format options
+### 格式选项
 
-Applied whenever the CLI invokes a DAX formatter (for `te format` and, when enabled, `autoFormat` on mutations). The CLI ships with an in-house formatter that works fully offline; opt into the SQL BI [daxformatter.com](https://www.daxformatter.com) web service via `formatOptions.useSqlBiDaxFormatter` if you need that style or want to match the behavior of TE2 or TE3 with "Use daxformatter.com..." enabled.
+每当 CLI 调用 DAX 格式化程序时都会应用（用于 `te format`，以及在启用 `autoFormat` 时对变更进行格式化）。 CLI 附带一个可完全离线工作的自研格式化器；如果你需要那种风格，或希望在启用 "Use daxformatter.com..." 时与 TE2 或 TE3 的行为一致，可通过 `formatOptions.useSqlBiDaxFormatter` 选择使用 SQL BI 的 [daxformatter.com](https://www.daxformatter.com) Web 服务。
 
-| Key                                    | Default | Description                                                                                                                                                                                                                                                                                                                             |
-| -------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `formatOptions.useSemicolons`          | `false` | Use `;` as the list separator (European/EU locale convention). The default `,` matches the en-US locale.                                                                                                                                                                             |
-| `formatOptions.shortFormat`            | `false` | Prefer short, single-line formatting where possible instead of the default multi-line layout.                                                                                                                                                                                                                           |
-| `formatOptions.skipSpaceAfterFunction` | `false` | Omit the space between a function name and its opening parenthesis (e.g. `SUM(x)` instead of `SUM (x)`).                                                                                                                                                             |
-| `formatOptions.useSqlBiDaxFormatter`   | `false` | Format DAX via the [SQL BI daxformatter.com](https://www.daxformatter.com) web service instead of the in-house formatter. Requires internet access. The in-house formatter (default) works offline and matches the Tabular Editor 3 Desktop default. |
+| 键                                      | 默认值     | 说明                                                                                                                                                                   |
+| -------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `formatOptions.useSemicolons`          | `false` | 使用 `;` 作为列表分隔符（欧洲/欧盟区域设置惯例）。 默认的 `,` 与 en-US 区域设置一致。                                                                                                                 |
+| `formatOptions.shortFormat`            | `false` | 尽可能优先使用简短的单行格式，而不是默认的多行布局。                                                                                                                                           |
+| `formatOptions.skipSpaceAfterFunction` | `false` | 省略函数名称与左括号之间的空格（例如使用 `SUM(x)`，而不是 `SUM (x)`）。                                                                                                                        |
+| `formatOptions.useSqlBiDaxFormatter`   | `false` | 通过 [SQL BI daxformatter.com](https://www.daxformatter.com) Web 服务格式化 DAX，而不是使用内部格式化程序。 需要联网。 内置格式化器（默认）可离线使用，其效果与 Tabular Editor 3 Desktop 的默认格式化一致。 |
 
-### Display
+### 显示
 
-Settings that control the CLI's terminal output and diagnostic verbosity.
+控制 CLI 终端输出和诊断详细程度的设置。
 
-| Key                 | Default | Description                                                                                               |
-| ------------------- | ------- | --------------------------------------------------------------------------------------------------------- |
-| `hidePreviewNotice` | `false` | Suppress the yellow preview banner. **Ignored within 14 days of expiry.** |
-| `spinner`           | `true`  | Show animated progress indicators in the terminal. Disable for CI.        |
-| `debug`             | `false` | Always enable debug logging (same as passing `--debug`).               |
+| 键                   | 默认值     | 说明                                 |
+| ------------------- | ------- | ---------------------------------- |
+| `hidePreviewNotice` | `false` | 隐藏黄色预览横幅。 **距离到期不足 14 天时，将忽略此设置。** |
+| `spinner`           | `true`  | 在终端中显示动画进度指示器。 在 CI 环境中禁用。         |
+| `debug`             | `false` | 始终启用调试日志（等同于传入 `--debug`）。         |
 
-### Profiles
+### 配置文件
 
-Saved connection profiles live under the `profiles` key. Don't edit them by hand - use `te profile set / remove / list`. See @te-cli-auth for profile management.
+已保存的连接配置文件存放在 `profiles` 键下。 不要手动编辑——请使用 `te profile set / remove / list`。 配置文件管理见 @te-cli-auth。
 
-Profiles can carry **overrides** that override the behavioral defaults above whenever the profile is active. This is how a dev profile can relax validation and BPA while a prod profile keeps them strict:
+配置文件可以包含 **覆盖项**，在配置文件处于启用状态时，用来覆盖上述默认行为。 这样一来，开发配置文件可以放宽验证和 BPA，而生产配置文件则保持严格：
 
 ```bash
 te profile set dev --validate-on-mutation false --bpa-on-deploy false
 te profile set prod --auto-format true
 ```
 
-## BPA gate
+## BPA 闸门
 
-The BPA gate is the safety net that prevents a model with rule violations from being saved or deployed. It runs automatically when the following commands are executed:
+BPA 闸门是一道安全防线，用于防止存在规则违规的模型被保存或部署。 执行以下命令时，它会自动运行：
 
-- `te deploy` runs the gate unless `--skip-bpa` is passed or `bpa.onDeploy` is `false`.
-- `te save` runs the gate unless `--skip-bpa` (or `--force`) is passed or `bpa.onSave` is `false`.
-- `te add`, `te set`, `te mv`, `te macro run` run the gate only when `bpa.onMutation` is `true`.
+- `te deploy` 会触发闸门检查，除非传入 `--skip-bpa` 或 `bpa.onDeploy` 为 `false`。
+- `te save` 会触发闸门检查，除非传入 `--skip-bpa`（或 `--force`）或 `bpa.onSave` 为 `false`。
+- `te add`、`te set`、`te mv`、`te macro run` 仅在 `bpa.onMutation` 为 `true` 时才会运行闸门。
 
-The gate loads BPA rules from `bpa.rules` and, by default, the built-in rule set (controlled by `bpa.builtInRules`). Built-in rules can be individually excluded via `bpa.disabledBuiltInRuleIds` - managed with `te bpa rules disable <id>` / `te bpa rules enable <id>`.
+闸门检查会从 `bpa.rules` 加载 BPA 规则，并且默认还会加载内置规则集（由 `bpa.builtInRules` 控制）。 可通过 `bpa.disabledBuiltInRuleIds` 单独排除内置规则——可使用 `te bpa rules disable <id>` / `te bpa rules enable <id>` 管理。
 
-When the gate fires and finds violations at severity ≥ `error`, the command fails with exit code `1` and a summary of the violations. Options to resolve:
+当闸门检查触发并发现严重性 ≥ `error` 的违规项时，命令会失败，退出代码为 `1`，并输出违规摘要。 处理选项：
 
-- `--fix-bpa` - apply the rule's `fixExpression` in memory for the deploy/save artifact; source files are not modified.
-- `--skip-bpa` - disable the gate for this one command.
-- `--bpa-rules <path>` - repeatable; override `bpa.rules` for this single `te deploy` or `te save` invocation. Built-in rules still apply unless `bpa.builtInRules` is `false`.
+- `--fix-bpa` - 在内存中将规则的 `fixExpression` 应用于部署/保存产物；不会修改源文件。
+- `--skip-bpa` - 仅对本次命令禁用闸门检查。
+- `--bpa-rules <path>` - 可重复指定；仅在本次调用 `te deploy` 或 `te save` 时覆盖 `bpa.rules`。 除非 `bpa.builtInRules` 为 `false`，否则内置规则仍会生效。
 
-Run `te bpa run` independently to preview the gate's behavior without deploying:
+可单独运行 `te bpa run`，在不部署的情况下预览闸门检查的行为：
 
 ```bash
 te bpa run ./model --fail-on error
 te bpa run ./model --fix --save     # Apply fixes to the source
 ```
 
-### Built-in BPA rules
+### 内置 BPA 规则
 
-The CLI ships a single canonical set of built-in BPA rules embedded as a JSON resource. Built-in rules are read-only - `te bpa rules set` and `te bpa rules rm` refuse to mutate built-in IDs and point users at `te bpa rules disable` instead. To customize a built-in rule's behavior, copy it into your local rules file as a new rule with a different ID and disable the built-in.
+CLI 随附一套权威的内置 BPA 规则集，并以 JSON 资源的形式嵌入其中。 内置规则是只读的：`te bpa rules set` 和 `te bpa rules rm` 拒绝修改内置 ID，并引导用户改用 `te bpa rules disable`。 如果想自定义内置规则的行为，可以把它复制到本地规则文件中，作为一个使用不同 ID 的新规则，然后再禁用内置规则。
 
-Both `bpa.builtInRules` and `bpa.disabledBuiltInRuleIds` apply consistently to the deploy/save/mutation gate **and** the manual `te bpa run` command - disabling a rule once via `te bpa rules disable` excludes it everywhere.
+`bpa.builtInRules` 和 `bpa.disabledBuiltInRuleIds` 会一致地应用于部署/保存/变更的门控检查 **以及** 手动执行的 `te bpa run` 命令——通过 `te bpa rules disable` 禁用一次后，该规则将在所有场景中被排除。
 
-## Post-mutation behavior
+## 变更后行为
 
-When you run a mutating command (`te add`, `te set`, `te mv`, `te replace --save`, `te macro run`), the CLI performs these checks automatically:
+运行会产生变更的命令（`te add`、`te set`、`te mv`、`te replace --save`、`te macro run`）时，CLI 会自动执行以下检查：
 
-1. **TOM errors** are always surfaced. Invalid DAX or M in measures, columns, partitions, or calculation items always fails the command.
-2. **Schema validation** (`validateOnMutation`, default `true`) verifies that `Table[Column]` references in DAX still resolve, cross-checking metadata consistency.
-3. **DAX auto-format** (`autoFormat`, default `false`) formats any expressions touched by the mutation via the built-in DAX Formatter when enabled.
-4. **BPA on mutation** (`bpa.onMutation`, default `false`) runs BPA after the mutation when enabled, warning or failing based on `--fail-on`.
+1. **TOM 错误**始终会被提示。 度量值、列、分区或计算项中的无效 DAX 或 M 始终会导致命令失败。
+2. **架构验证** (`validateOnMutation`，默认值为 `true`) 会验证 DAX 中的 `Table[Column]` 引用是否仍可解析，并交叉检查元数据一致性。
+3. **DAX 自动格式化** (`autoFormat`，默认值为 `false`) 在启用时会通过内置的 DAX Formatter 格式化此次变更涉及的所有表达式。
+4. **变更时运行 BPA** (`bpa.onMutation`，默认值为 `false`) 在启用时会在变更后运行 BPA，并根据 `--fail-on` 发出警告或使命令失败。
 
-Disable a check with `te config set <key> false`, or scope the relaxation to a specific environment via a profile.
+可使用 `te config set <key> false` 禁用某项检查，或通过配置文件将放宽范围限定到特定环境。
 
-## Environment variables
+## 环境变量
 
-Use the following CLI-specific environment variables for paths, behavior, and diagnostics. For Azure authentication variables (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_CERTIFICATE_PATH`, etc.), see @te-cli-auth.
+使用以下 CLI 专用环境变量来设置路径、行为和诊断。 有关 Azure 身份验证变量（`AZURE_CLIENT_ID`、`AZURE_TENANT_ID`、`AZURE_CLIENT_CERTIFICATE_PATH` 等），见 @te-cli-auth。
 
-| Variable         | Purpose                                                                                                                                                                                                                                          |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `TE_CONFIG`      | Path to an alternative config file. Honored by every `te config` operation (`show`, `set`, `init`, `paths`).                                                                                  |
-| `TE_MACROS_PATH` | Override the macros file path (second in resolution order - see above). Read by `te macro` commands.                                                                                          |
-| `TE_BPA_RULES`   | Override the BPA rules file/URL list used by `te bpa run` and `te bpa rules` subcommands.                                                                                                                                        |
-| `TE_BPA_CONFIG`  | Override the path to the BPA gate config (`.te-bpa.json`) the deploy/save gate reads.                                                                                                                         |
-| `TE3_EXE_PATH`   | Path to the Tabular Editor 3 desktop binary. Used **only** by `te open`; safe to leave unset on Linux/macOS or when you don't use `te open`. Falls back to `PATH` lookup.                        |
-| `TE_DEBUG`       | Set to `1` to enable debug logging globally (same as `--debug` or `debug: true` in config).                                                                                                                   |
-| `NO_SPINNER`     | Set to `1` or `true` to disable animated progress indicators (alternative to `spinner: false` in config).                                                                                                     |
-| `CI`             | Auto-detected. When `1` or `true`, the CLI disables the spinner and switches to plain output. Most CI runners set this automatically.                                                            |
-| `TE_SESSION`     | Override the per-terminal session ID used for active-connection state. Useful for running multiple isolated CLI sessions inside the same shell, e.g. in parallel CI matrix jobs. |
-| `TE_COMPAT`      | Set to `te2` to force TE2-compatibility mode - see @te-cli-migrate.                                                                                                                                                 |
+| 变量               | 用途                                                                                                         |
+| ---------------- | ---------------------------------------------------------------------------------------------------------- |
+| `TE_CONFIG`      | 替代配置文件的路径。 所有 `te config` 操作（`show`、`set`、`init`、`paths`）都会遵循该变量的设置。                                       |
+| `TE_MACROS_PATH` | 覆盖宏文件路径（在解析顺序中排第二，见上文）。 由 `te macro` 命令读取。                                                                 |
+| `TE_BPA_RULES`   | 覆盖 `te bpa run` 和 `te bpa rules` 子命令使用的 BPA 规则文件/URL 列表。                                                   |
+| `TE_BPA_CONFIG`  | 覆盖 deploy/save 门禁读取的 BPA 门禁配置 (`.te-bpa.json`) 的路径。                                     |
+| `TE3_EXE_PATH`   | Tabular Editor 3 桌面版二进制文件的路径。 此项 **仅** 用于 `te open`；在 Linux/macOS 上或不使用 `te open` 时，可安全留空。 会回退到 `PATH` 查找。 |
+| `TE_DEBUG`       | 设为 `1` 可全局启用调试日志（等同于 `--debug` 或配置中的 `debug: true`）。                                                       |
+| `NO_SPINNER`     | 设为 `1` 或 `true` 可禁用动画进度指示器（可替代配置中的 `spinner: false`）。                                                      |
+| `CI`             | 自动检测。 当设为 `1` 或 `true` 时，CLI 会禁用动画进度指示器，并切换为纯文本输出。 大多数 CI 运行器都会自动设置此项。                                     |
+| `TE_SESSION`     | 覆盖用于活动连接状态的按终端划分的会话 ID。 适用于在同一个 shell 中运行多个相互隔离的 CLI 会话，例如并行的 CI 矩阵作业。                                     |
+| `TE_COMPAT`      | 设为 `te2` 可强制启用 TE2 兼容模式；参见 @te-cli-migrate。                                                   |
 
-## Related pages
+## 相关页面
 
-- @te-cli-auth - profiles, authentication, and credential storage.
-- @te-cli-commands - `te config` subcommands.
-- @te-cli-cicd - configuring the BPA gate for pipelines.
+- @te-cli-auth - 配置文件、身份验证和凭据存储。
+- @te-cli-commands - `te config` 子命令。
+- @te-cli-cicd - 为管道配置 BPA 门禁。
