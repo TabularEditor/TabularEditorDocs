@@ -14,7 +14,7 @@ applies_to:
 ---
 # Authentication and Connections
 
-[!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
+[!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)] 
 
 The Tabular Editor CLI authenticates to Power BI Service, Microsoft Fabric, and Azure Analysis Services using the same Power BI Desktop client ID that Tabular Editor 3 uses. Tokens are cached locally so you authenticate once and re-run commands silently until the refresh token expires (typically 90 days).
 

@@ -36,6 +36,9 @@ Together they make the same binary work well for three very different audiences:
 - **AI agents** - token-lean JSON, machine-parseable error shapes, exit codes that signal success or failure without parsing stdout.
 - **CI/CD pipelines** - non-interactive execution, GitHub Actions and Azure DevOps annotations, VSTEST-compatible test results.
 
+> [!Note]
+> When using the TE CLI with agents use the TE CLI [skill for AI coding agents](https://github.com/TabularEditor/CLI/tree/main/skill) that wraps the TE CLI end-to-end. 
+
 ## What the CLI can do
 
 The CLI organizes more than 50 commands into 10 families. Each family maps to a concrete stage of the semantic-model lifecycle.

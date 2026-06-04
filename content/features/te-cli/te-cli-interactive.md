@@ -17,7 +17,7 @@ applies_to:
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
 Interactive mode is a guided read-eval-print loop (REPL) for exploring a model from the terminal. It's the gentlest on-ramp for users who are new to command lines, and a convenient workspace for ad-hoc sessions against a single model.
-
+ 
 
 ## Starting a session
 

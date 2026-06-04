@@ -17,7 +17,7 @@ applies_to:
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
 The Tabular Editor CLI ships as a single self-contained executable named `te` (`te.exe` on Windows). It has no external runtime dependencies.
-
+ 
 ## Download
 
 1. Sign in at [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) with a Tabular Editor account.

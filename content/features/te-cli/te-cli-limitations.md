@@ -17,7 +17,7 @@ applies_to:
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
 This page lists known limitations of the Tabular Editor CLI (`te`) so you can plan around them and avoid common pitfalls. It is updated with each release; if you find an issue that is not listed here, please file it in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository.
-
+ 
 > [!NOTE]
 > Limitations are grouped by area. Each entry describes the constraint and, where one exists, a workaround or the recommended CLI-friendly alternative.
 

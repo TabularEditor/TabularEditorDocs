@@ -185,7 +185,7 @@ A handful of small idioms that come up often when composing `te` commands in scr
 - **Benchmarking queries.** `te query --trace --cold --runs 5` runs a DAX query with cold cache, five iterations, and captures FE/SE trace events.
 - **Step timings in CI logs.** Long-running commands (`te deploy`, `te refresh`, `te script`, `te validate`) include a `durationMs` field in JSON output - useful for surfacing per-step timings in pipeline summaries.
 
-## Related pages
+## Related pages 
 
 - @te-cli-cicd - pipeline-specific patterns and YAML examples.
 - @te-cli-commands - full command reference.
