@@ -317,10 +317,11 @@ Tabular Editor 3 会自动识别所有注释，并在自动完成建议和工具
 
 ## 局限性
 
-- UDF 目前为预览功能，在某些部署场景中可能会有局限
 - 并非所有 Power BI 环境都支持 UDF（需要特定构建版本）
 - UDF 不能递归（调用自身）
-- UDF 不支持可选参数、带默认值的参数或参数重载
+
+> [!NOTE]
+> 截至 2026 年六月，UDF 已 [正式可用](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738)。 作为其中的一部分，UDF 现已支持默认表达式和可选参数。 但是，在使用默认表达式语法时，Tabular Editor 3 目前会误报一条错误信息。 此问题将在 Tabular Editor 3 的下一次更新中修复。
 
 ---
 

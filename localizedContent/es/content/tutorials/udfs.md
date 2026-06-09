@@ -317,10 +317,11 @@ Tabular Editor 3 detecta automáticamente cualquier comentario y lo muestra corr
 
 ## Limitaciones
 
-- Las UDFs son actualmente una funcionalidad en versión preliminar y pueden tener limitaciones en determinados escenarios de despliegue
 - No todos los entornos de Power BI admiten UDFs (requiere compilaciones específicas)
 - Las UDFs no pueden ser recursivas (llamarse a sí mismas)
-- Las UDFs no admiten parámetros opcionales, parámetros con valores predeterminados ni sobrecarga de parámetros
+
+> [!NOTE]
+> A partir de junio de 2026, las UDF están [disponibles de forma general](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738). Como parte de esto, las UDF ahora admiten expresiones predeterminadas y parámetros opcionales. Sin embargo, Tabular Editor 3 muestra actualmente un mensaje de error incorrecto cuando se usa la sintaxis de la expresión predeterminada. Este problema se corregirá en nuestra próxima actualización de Tabular Editor 3.
 
 ---
 

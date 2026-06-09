@@ -1,0 +1,226 @@
+---
+uid: te-cli-auth
+title: Authentication and Connections
+author: Peer Grønnerup
+updated: 2026-05-06
+applies_to:
+  products:
+    - product: Tabular Editor 2
+      none: true
+    - product: Tabular Editor 3
+      none: true
+    - product: Tabular Editor CLI
+      full: true
+---
+
+# Authentication and Connections
+
+[!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
+
+The Tabular Editor CLI authenticates to Power BI Service, Microsoft Fabric, and Azure Analysis Services using the same Power BI Desktop client ID that Tabular Editor 3 uses. Tokens are cached locally so you authenticate once and re-run commands silently until the refresh token expires (typically 90 days).
+
+## Authentication methods
+
+The CLI supports the full Azure Identity credential chain:
+
+| Method                                               | When to use                                                   | `--auth` value                                            |
+| ---------------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------- |
+| Interactive browser                                  | Local development - opens the system browser                  | `interactive` (default)                |
+| Service principal (client secret) | Automation, CI/CD, headless / SSH / WSL                       | `spn` (with `-u / -p / -t`) or `env`   |
+| Service principal (certificate)   | Automation with certificate-based auth                        | `spn` (with `-u / -t / --certificate`) |
+| Environment variables                                | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID` | `env`                                                     |
+| Managed identity                                     | Azure VMs, Azure Container Apps, Azure Functions              | `managed-identity`                                        |
+
+> [!NOTE]
+> `--auth` is a **global** option, available on every `te` command - not just `te auth login`. Pass it to [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te query`](xref:te-cli-commands#query), [`te connect`](xref:te-cli-commands#connect), or any other command that connects to a remote endpoint, to override the default chain for that invocation. The default (`auto`) tries environment credentials first, then falls back to the cached or interactive browser login.
+
+For headless, SSH, WSL, or devcontainer scenarios, use a service principal - `te auth login -u <id> -p <secret> -t <tenant>` (or `--certificate`). The login is cached, so subsequent commands acquire tokens silently with `--auth auto`.
+
+## `te auth login`
+
+Authenticate and cache the result for subsequent commands:
+
+```bash
+# Browser-based interactive login (default)
+te auth login
+
+# Service principal with client secret
+te auth login -u "$AZURE_CLIENT_ID" -p "$AZURE_CLIENT_SECRET" -t "$AZURE_TENANT_ID"
+
+# Service principal - read secret from stdin
+echo "$AZURE_CLIENT_SECRET" | te auth login -u "$AZURE_CLIENT_ID" -p - -t "$AZURE_TENANT_ID"
+
+# Service principal with certificate
+te auth login -u "$AZURE_CLIENT_ID" -t "$AZURE_TENANT_ID" --certificate ./sp.pfx --certificate-password "$CERT_PASSWORD"
+
+# Managed identity (Azure-hosted)
+te auth login --identity
+```
+
+After a successful service-principal login the CLI **caches the credentials** so every subsequent `te` command can acquire tokens silently - no need to re-pass `-u / -p / -t` or set the `AZURE_CLIENT_*` environment variables. Pass `--save=false` for a one-shot login that doesn't update the cache, or run `te auth logout` to clear it.
+
+> [!WARNING]
+> Passing secrets directly on the command line exposes them to process listings and shell history. Prefer the `AZURE_CLIENT_SECRET` environment variable, or pipe the secret via stdin with `-p -`.
+
+## `te auth status`
+
+Display the current authentication state without opening a browser:
+
+```bash
+te auth status
+te auth status --output-format json
+```
+
+This returns an exit code of `0` when a valid session exists, `1` when not logged in or expired.
+
+## `te auth logout`
+
+Clear all cached credentials:
+
+```bash
+te auth logout
+```
+
+## Credential storage
+
+The CLI stores access/refresh tokens and service-principal records in the **OS-native secure store** by default. A `0600` file fallback is selected automatically only when the OS keystore is unavailable (e.g., headless Linux without libsecret/D-Bus).
+
+| Platform                          | Backend                                       | Storage location                                               |
+| --------------------------------- | --------------------------------------------- | -------------------------------------------------------------- |
+| Windows                           | DPAPI                                         | Per-user, managed by MSAL                                      |
+| Linux                             | libsecret (system keyring) | Per-user, managed by MSAL                                      |
+| macOS                             | Keychain                                      | Service `com.tabulareditor.cli.*`, account `te-msal-cache.bin` |
+| Any (fallback) | `0600` file                                   | `~/.te-cli/te-msal-cache.bin` and per-key `.bin` blobs         |
+
+Interactive browser and service-principal flows share the same cache; MSAL's account model distinguishes them - there are no separate `auth-record*.json` sidecar files. Run any command with `--debug` to see which backend was selected at startup.
+
+`te auth logout` clears every cached record (both the MSAL token cache and any SPN blobs) regardless of which backend is in use.
+
+## `te connect` - set the active connection
+
+`te connect` persists an active connection for the current terminal session. Subsequent commands that take `-s` / `-d` can omit them:
+
+```bash
+# Remote workspace
+te connect my-workspace my-model
+
+# Local TMDL folder, .bim file, or .SemanticModel container
+te connect ./my-model
+
+# Connect to a running Power BI Desktop instance (Windows only)
+te connect --local
+
+# Show the active connection
+te connect
+
+# Clear the active connection (and any workspace mirror)
+te connect --clear
+```
+
+Active-connection state is per-terminal-session: opening a new terminal starts fresh.
+
+### Workspace mode (`-w` / `--workspace`)
+
+`te connect -w <target>` pairs a primary source with a secondary mirror so every subsequent `--save` writes to both. Use it to keep a local working copy of a remote model in sync, or to push local edits to a workspace as you save:
+
+```bash
+# Mirror remote workspace ↔ local TMDL folder
+te connect Finance "Revenue Model" -w ./revenue-model
+
+# Mirror local source ↔ remote workspace (initial deploy + auto-redeploy on save)
+te connect ./revenue-model -w Finance "Revenue Model"
+```
+
+Save order is always **local first, then remote**, so the on-disk copy reflects the latest user change even if the server push fails. See @te-cli-commands#workspace-mode-w--workspace for `--workspace-format`, overwrite semantics, and clearing the mirror.
+
+## Connecting to different clouds
+
+The CLI detects the correct scope from the server URL for:
+
+- Power BI Service and Fabric (commercial, US Gov, China, Germany clouds)
+- Azure Analysis Services (`asazure://...`)
+- Local SSAS (`localhost`, named instances - Windows only)
+
+Pass an XMLA endpoint, workspace name, or `powerbi://` URL as `--server`:
+
+```bash
+te connect "powerbi://api.powerbi.com/v1.0/myorg/Finance" "Revenue Model"
+te connect "powerbi://api.powerbi.com/v1.0/SpaceParts/Finance" "Revenue Model"
+te connect "asazure://westeurope.asazure.windows.net/myaas" "MyModel"
+te connect localhost "AdventureWorks"
+```
+
+## Connection profiles
+
+For repeated use of the same connection - especially when you deploy to multiple environments - save named profiles:
+
+```bash
+# Save remote and local profiles
+te profile set prod -s my-workspace -d my-model --description "Production"
+te profile set dev --model ./model --description "Local dev TMDL"
+
+# List and inspect
+te profile list
+te profile show prod
+
+# Use a profile as the active connection
+te connect --profile prod
+
+# One-shot use without changing the active connection
+te deploy ./model --profile staging --force
+```
+
+Profiles can also carry behavioral overrides that take effect whenever the profile is active:
+
+```bash
+# In dev, disable the BPA gate on deploy and loosen validation
+te profile set dev --bpa-on-deploy false --validate-on-mutation false
+
+# In prod, force auto-format before any mutation
+te profile set prod --auto-format true
+```
+
+See @te-cli-config for the full list of overridable behaviors.
+
+## Non-interactive authentication
+
+For CI/CD pipelines, agents, or any unattended context, avoid interactive flows by combining:
+
+- The `--non-interactive` global flag (fails fast instead of prompting).
+- One of the non-interactive auth methods: `env`, `managed-identity`, or explicit service principal credentials.
+
+Environment-based example for a pipeline:
+
+```bash
+export AZURE_CLIENT_ID="your-app-id"
+export AZURE_CLIENT_SECRET="your-client-secret"
+export AZURE_TENANT_ID="your-tenant-id"
+
+te deploy ./model -s my-workspace -d my-model \
+  --auth env \
+  --non-interactive \
+  --force \
+  --ci github
+```
+
+See @te-cli-cicd for complete GitHub Actions and Azure DevOps Pipelines examples.
+
+## Authentication environment variables
+
+The CLI honors the standard Azure.Identity environment variables when you use `--auth env` (and as part of the `auto` chain):
+
+| Variable                        | Purpose                                                                                                                                                                                                                                                                   |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AZURE_CLIENT_ID`               | Service principal application ID.                                                                                                                                                                                                                         |
+| `AZURE_CLIENT_SECRET`           | Service principal client secret. Used together with `AZURE_CLIENT_ID` and `AZURE_TENANT_ID`.                                                                                                                                              |
+| `AZURE_TENANT_ID`               | Service principal tenant (directory) ID.                                                                                                                                                                                               |
+| `AZURE_CLIENT_CERTIFICATE_PATH` | Path to a PEM or PKCS12 certificate file for certificate-based service principal auth. Used together with `AZURE_CLIENT_ID` and `AZURE_TENANT_ID`.                                                                                        |
+| `AZURE_AUTHORITY_HOST`          | Override the authority host for sovereign clouds (e.g., `login.microsoftonline.us`, `login.partner.microsoftonline.cn`, `login.microsoftonline.de`). Defaults to the commercial cloud. |
+
+For CLI-specific environment variables (config paths, debug logging, TE2 compatibility), see @te-cli-config.
+
+## Next steps
+
+- @te-cli-commands - what you can do once connected.
+- @te-cli-config - configuration and profile behavior.
+- @te-cli-cicd - pipeline examples using service principals and managed identity.
