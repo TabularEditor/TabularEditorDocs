@@ -78,7 +78,7 @@ The final path is `<your-project>/.claude/skills/te-cli/SKILL.md`.
 > [!NOTE]
 > Claude Code watches skill directories and picks up new or edited skills within the current session - no restart needed. The exception is creating a `.claude/skills/` directory that did not exist when the session started: restart Claude Code once so it begins watching the new directory.
 
-### Verify it loaded
+### Verify the skill loaded
 
 Inside a Claude Code session, run:
 
