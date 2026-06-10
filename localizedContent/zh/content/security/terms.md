@@ -1,6 +1,6 @@
 ---
 uid: terms
-title: Terms and Conditions
+title: 条款与条件
 author: Søren Toft Joensen
 updated: 2026-05-29
 applies_to:
@@ -13,10 +13,10 @@ applies_to:
       full: true
 ---
 
-# Terms and Conditions
+# 条款与条件
 
-Please find the latest version of our terms and conditions below:
+请在下方查看我们最新版本的条款与条件：
 
-- [Commercial Terms & Conditions](https://tabulareditor.com/commercial-terms)
-- [Tabular Editor 3 EULA](https://tabulareditor.com/eula-te3)
-- [Tabular Editor CLI EULA](https://tabulareditor.com/eula-cli)
+- [商业条款与条件](https://tabulareditor.com/commercial-terms)
+- [Tabular Editor 3 最终用户许可协议](https://tabulareditor.com/eula-te3)
+- [Tabular Editor CLI 最终用户许可协议](https://tabulareditor.com/eula-cli)
