@@ -1,6 +1,6 @@
 ---
 uid: te-cli-auth
-title: Authentication and Connections
+title: Autenticación y conexiones
 author: Peer Grønnerup
 updated: 2026-05-06
 applies_to:
@@ -13,32 +13,32 @@ applies_to:
       full: true
 ---
 
-# Authentication and Connections
+# Autenticación y conexiones
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-The Tabular Editor CLI authenticates to Power BI Service, Microsoft Fabric, and Azure Analysis Services using the same Power BI Desktop client ID that Tabular Editor 3 uses. Tokens are cached locally so you authenticate once and re-run commands silently until the refresh token expires (typically 90 days).
+La CLI de Tabular Editor se autentica en Power BI Service, Microsoft Fabric y Azure Analysis Services con el mismo identificador de cliente de Power BI Desktop que utiliza Tabular Editor 3. Los tokens se almacenan en caché localmente, por lo que solo tienes que autenticarte una vez y puedes volver a ejecutar los comandos sin interacción hasta que caduque el token de actualización (normalmente a los 90 días).
 
-## Authentication methods
+## Métodos de autenticación
 
-The CLI supports the full Azure Identity credential chain:
+La CLI admite la cadena completa de credenciales de Azure Identity:
 
-| Method                                               | When to use                                                   | `--auth` value                                            |
-| ---------------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------- |
-| Interactive browser                                  | Local development - opens the system browser                  | `interactive` (default)                |
-| Service principal (client secret) | Automation, CI/CD, headless / SSH / WSL                       | `spn` (with `-u / -p / -t`) or `env`   |
-| Service principal (certificate)   | Automation with certificate-based auth                        | `spn` (with `-u / -t / --certificate`) |
-| Environment variables                                | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID` | `env`                                                     |
-| Managed identity                                     | Azure VMs, Azure Container Apps, Azure Functions              | `managed-identity`                                        |
+| Método                                                        | Cuándo usarlo                                                       | Valor de `--auth`                                        |
+| ------------------------------------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------- |
+| Navegador interactivo                                         | Desarrollo local: abre el navegador del sistema     | `interactive` (predeterminado)        |
+| Principal de servicio (secreto de cliente) | Automatización, CI/CD, sin interfaz gráfica / SSH / WSL             | `spn` (con `-u / -p / -t`) o `env`    |
+| Principal de servicio (certificado)        | Automatización con autenticación basada en certificados             | `spn` (con `-u / -t / --certificate`) |
+| Variables de entorno                                          | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`       | `env`                                                    |
+| Identidad administrada                                        | Máquinas virtuales de Azure, Azure Container Apps y Azure Functions | `managed-identity`                                       |
 
 > [!NOTE]
-> `--auth` is a **global** option, available on every `te` command - not just `te auth login`. Pass it to [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te query`](xref:te-cli-commands#query), [`te connect`](xref:te-cli-commands#connect), or any other command that connects to a remote endpoint, to override the default chain for that invocation. The default (`auto`) tries environment credentials first, then falls back to the cached or interactive browser login.
+> `--auth` es una opción **global**, disponible en todos los comandos `te`, no solo en `te auth login`. Úsalo en [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te query`](xref:te-cli-commands#query), [`te connect`](xref:te-cli-commands#connect) o en cualquier otro comando que se conecte a un punto de conexión remoto para sustituir la cadena predeterminada en esa ejecución. La opción predeterminada (`auto`) intenta primero las credenciales del entorno y, si no están disponibles, recurre al inicio de sesión en caché o interactivo en el navegador.
 
-For headless, SSH, WSL, or devcontainer scenarios, use a service principal - `te auth login -u <id> -p <secret> -t <tenant>` (or `--certificate`). The login is cached, so subsequent commands acquire tokens silently with `--auth auto`.
+En escenarios sin interfaz gráfica, con SSH, WSL o devcontainer, usa una entidad de servicio: `te auth login -u <id> -p <secret> -t <tenant>` (o `--certificate`). El inicio de sesión se guarda en caché, por lo que los comandos posteriores obtienen tokens de forma silenciosa con `--auth auto`.
 
 ## `te auth login`
 
-Authenticate and cache the result for subsequent commands:
+Autentícate y guarda el resultado en caché para los comandos posteriores:
 
 ```bash
 # Browser-based interactive login (default)
@@ -57,48 +57,48 @@ te auth login -u "$AZURE_CLIENT_ID" -t "$AZURE_TENANT_ID" --certificate ./sp.pfx
 te auth login --identity
 ```
 
-After a successful service-principal login the CLI **caches the credentials** so every subsequent `te` command can acquire tokens silently - no need to re-pass `-u / -p / -t` or set the `AZURE_CLIENT_*` environment variables. Pass `--save=false` for a one-shot login that doesn't update the cache, or run `te auth logout` to clear it.
+Después de iniciar sesión correctamente con una entidad de servicio, la CLI **almacena las credenciales en caché** para que todos los comandos `te` posteriores puedan adquirir tokens de forma silenciosa; no hace falta volver a pasar `-u / -p / -t` ni establecer las variables de entorno `AZURE_CLIENT_*`. Pasa `--save=false` para iniciar sesión una sola vez sin actualizar la caché, o ejecuta `te auth logout` para borrarla.
 
 > [!WARNING]
-> Passing secrets directly on the command line exposes them to process listings and shell history. Prefer the `AZURE_CLIENT_SECRET` environment variable, or pipe the secret via stdin with `-p -`.
+> Pasar secretos directamente en la línea de comandos los expone a los listados de procesos y al historial del shell. Es preferible usar la variable de entorno `AZURE_CLIENT_SECRET`, o pasar el secreto por stdin con `-p -`.
 
 ## `te auth status`
 
-Display the current authentication state without opening a browser:
+Muestra el estado actual de la autenticación sin abrir un navegador:
 
 ```bash
 te auth status
 te auth status --output-format json
 ```
 
-This returns an exit code of `0` when a valid session exists, `1` when not logged in or expired.
+Esto devuelve un código de salida `0` cuando existe una sesión válida y `1` cuando no se ha iniciado sesión o ha expirado.
 
 ## `te auth logout`
 
-Clear all cached credentials:
+Borra todas las credenciales almacenadas en caché:
 
 ```bash
 te auth logout
 ```
 
-## Credential storage
+## Almacenamiento de credenciales
 
-The CLI stores access/refresh tokens and service-principal records in the **OS-native secure store** by default. A `0600` file fallback is selected automatically only when the OS keystore is unavailable (e.g., headless Linux without libsecret/D-Bus).
+De forma predeterminada, la CLI almacena los tokens de acceso y de actualización, así como los registros de entidades de servicio, en el **almacén seguro nativo del sistema operativo**. Se selecciona automáticamente como alternativa un archivo `0600` solo cuando el almacén de claves del sistema operativo no está disponible (por ejemplo, en Linux sin entorno gráfico y sin libsecret/D-Bus).
 
-| Platform                          | Backend                                       | Storage location                                               |
-| --------------------------------- | --------------------------------------------- | -------------------------------------------------------------- |
-| Windows                           | DPAPI                                         | Per-user, managed by MSAL                                      |
-| Linux                             | libsecret (system keyring) | Per-user, managed by MSAL                                      |
-| macOS                             | Keychain                                      | Service `com.tabulareditor.cli.*`, account `te-msal-cache.bin` |
-| Any (fallback) | `0600` file                                   | `~/.te-cli/te-msal-cache.bin` and per-key `.bin` blobs         |
+| Plataforma                                  | Backend                                            | Ubicación de almacenamiento                                    |
+| ------------------------------------------- | -------------------------------------------------- | -------------------------------------------------------------- |
+| Windows                                     | DPAPI                                              | Por usuario, administrado por MSAL                             |
+| Linux                                       | libsecret (llavero del sistema) | Por usuario, administrado por MSAL                             |
+| macOS                                       | Llavero                                            | Servicio `com.tabulareditor.cli.*`, cuenta `te-msal-cache.bin` |
+| Cualquiera (alternativo) | archivo `0600`                                     | `~/.te-cli/te-msal-cache.bin` y blobs `.bin` por clave         |
 
-Interactive browser and service-principal flows share the same cache; MSAL's account model distinguishes them - there are no separate `auth-record*.json` sidecar files. Run any command with `--debug` to see which backend was selected at startup.
+Los flujos de navegador interactivo y de principal de servicio comparten la misma caché; el modelo de cuentas de MSAL los distingue: no hay archivos auxiliares `auth-record*.json` separados. Ejecuta cualquier comando con `--debug` para ver qué backend se seleccionó al iniciar.
 
-`te auth logout` clears every cached record (both the MSAL token cache and any SPN blobs) regardless of which backend is in use.
+`te auth logout` borra todos los registros almacenados en caché (tanto la caché de tokens de MSAL como cualquier blob de SPN), independientemente del backend que se esté usando.
 
-## `te connect` - set the active connection
+## `te connect` - establece la conexión activa
 
-`te connect` persists an active connection for the current terminal session. Subsequent commands that take `-s` / `-d` can omit them:
+`te connect` guarda una conexión activa para la sesión actual del terminal. Los comandos posteriores que aceptan `-s` / `-d` pueden omitirlos:
 
 ```bash
 # Remote workspace
@@ -117,11 +117,11 @@ te connect
 te connect --clear
 ```
 
-Active-connection state is per-terminal-session: opening a new terminal starts fresh.
+El estado de la conexión activa es específico de cada sesión de terminal: al abrir un terminal nuevo, se empieza desde cero.
 
-### Workspace mode (`-w` / `--workspace`)
+### Modo del área de trabajo (`-w` / `--workspace`)
 
-`te connect -w <target>` pairs a primary source with a secondary mirror so every subsequent `--save` writes to both. Use it to keep a local working copy of a remote model in sync, or to push local edits to a workspace as you save:
+`te connect -w <target>` vincula un origen principal con un espejo secundario, de modo que cada `--save` posterior guarde en ambos. Úsalo para mantener sincronizada una copia de trabajo local de un modelo remoto, o para enviar ediciones locales a un Workspace a medida que guardas:
 
 ```bash
 # Mirror remote workspace ↔ local TMDL folder
@@ -131,17 +131,17 @@ te connect Finance "Revenue Model" -w ./revenue-model
 te connect ./revenue-model -w Finance "Revenue Model"
 ```
 
-Save order is always **local first, then remote**, so the on-disk copy reflects the latest user change even if the server push fails. See @te-cli-commands#workspace-mode-w--workspace for `--workspace-format`, overwrite semantics, and clearing the mirror.
+El orden de guardado siempre es **primero local y después remoto**, para que la copia en disco refleje el cambio más reciente incluso si falla el envío al servidor. Consulta @te-cli-commands#workspace-mode-w--workspace para `--workspace-format`, la semántica de sobrescritura y cómo vaciar el mirror del Workspace.
 
-## Connecting to different clouds
+## Conexión a distintas nubes
 
-The CLI detects the correct scope from the server URL for:
+La CLI detecta el ámbito correcto a partir de la URL del servidor para:
 
-- Power BI Service and Fabric (commercial, US Gov, China, Germany clouds)
+- Power BI Service y Fabric (nubes: comercial, US Gov, China y Alemania)
 - Azure Analysis Services (`asazure://...`)
-- Local SSAS (`localhost`, named instances - Windows only)
+- SSAS local (`localhost`, instancias con nombre; solo en Windows)
 
-Pass an XMLA endpoint, workspace name, or `powerbi://` URL as `--server`:
+Pasa un punto de conexión XMLA, un nombre de Workspace o una URL `powerbi://` como `--server`:
 
 ```bash
 te connect "powerbi://api.powerbi.com/v1.0/myorg/Finance" "Revenue Model"
@@ -150,9 +150,9 @@ te connect "asazure://westeurope.asazure.windows.net/myaas" "MyModel"
 te connect localhost "AdventureWorks"
 ```
 
-## Connection profiles
+## Perfiles de conexión
 
-For repeated use of the same connection - especially when you deploy to multiple environments - save named profiles:
+Si usas la misma conexión repetidamente —especialmente al implementar en varios entornos—, guarda perfiles con nombre:
 
 ```bash
 # Save remote and local profiles
@@ -170,7 +170,7 @@ te connect --profile prod
 te deploy ./model --profile staging --force
 ```
 
-Profiles can also carry behavioral overrides that take effect whenever the profile is active:
+Los perfiles también pueden incluir sobrescrituras de comportamiento que se aplican siempre que el perfil esté activo:
 
 ```bash
 # In dev, disable the BPA gate on deploy and loosen validation
@@ -180,16 +180,16 @@ te profile set dev --bpa-on-deploy false --validate-on-mutation false
 te profile set prod --auto-format true
 ```
 
-See @te-cli-config for the full list of overridable behaviors.
+Consulta @te-cli-config para ver la lista completa de comportamientos anulables.
 
-## Non-interactive authentication
+## Autenticación no interactiva
 
-For CI/CD pipelines, agents, or any unattended context, avoid interactive flows by combining:
+En canalizaciones de CI/CD, agentes o cualquier contexto desatendido, evita los flujos interactivos combinando lo siguiente:
 
-- The `--non-interactive` global flag (fails fast instead of prompting).
-- One of the non-interactive auth methods: `env`, `managed-identity`, or explicit service principal credentials.
+- La opción global `--non-interactive` (falla de inmediato en lugar de pedir datos).
+- Uno de los métodos de autenticación no interactiva: `env`, `managed-identity` o credenciales explícitas de una entidad de servicio.
 
-Environment-based example for a pipeline:
+Ejemplo basado en variables de entorno para una canalización:
 
 ```bash
 export AZURE_CLIENT_ID="your-app-id"
@@ -203,24 +203,24 @@ te deploy ./model -s my-workspace -d my-model \
   --ci github
 ```
 
-See @te-cli-cicd for complete GitHub Actions and Azure DevOps Pipelines examples.
+Consulta @te-cli-cicd para ver ejemplos completos de GitHub Actions y Azure DevOps Pipelines.
 
-## Authentication environment variables
+## Variables de entorno de autenticación
 
-The CLI honors the standard Azure.Identity environment variables when you use `--auth env` (and as part of the `auto` chain):
+La CLI tiene en cuenta las variables de entorno estándar de Azure.Identity cuando usas `--auth env` (y como parte de la cadena `auto`):
 
-| Variable                        | Purpose                                                                                                                                                                                                                                                                   |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AZURE_CLIENT_ID`               | Service principal application ID.                                                                                                                                                                                                                         |
-| `AZURE_CLIENT_SECRET`           | Service principal client secret. Used together with `AZURE_CLIENT_ID` and `AZURE_TENANT_ID`.                                                                                                                                              |
-| `AZURE_TENANT_ID`               | Service principal tenant (directory) ID.                                                                                                                                                                                               |
-| `AZURE_CLIENT_CERTIFICATE_PATH` | Path to a PEM or PKCS12 certificate file for certificate-based service principal auth. Used together with `AZURE_CLIENT_ID` and `AZURE_TENANT_ID`.                                                                                        |
-| `AZURE_AUTHORITY_HOST`          | Override the authority host for sovereign clouds (e.g., `login.microsoftonline.us`, `login.partner.microsoftonline.cn`, `login.microsoftonline.de`). Defaults to the commercial cloud. |
+| Variable                        | Propósito                                                                                                                                                                                                                                                                                   |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AZURE_CLIENT_ID`               | ID de aplicación de la entidad de servicio.                                                                                                                                                                                                                                 |
+| `AZURE_CLIENT_SECRET`           | Secreto de cliente de la entidad de servicio. Se usa junto con `AZURE_CLIENT_ID` y `AZURE_TENANT_ID`.                                                                                                                                                       |
+| `AZURE_TENANT_ID`               | ID del inquilino (directorio) del principal de servicio.                                                                                                                                                                                                 |
+| `AZURE_CLIENT_CERTIFICATE_PATH` | PATH a un archivo de certificado PEM o PKCS12 para la autenticación del principal de servicio basada en certificados. Se usa junto con `AZURE_CLIENT_ID` y `AZURE_TENANT_ID`.                                                                               |
+| `AZURE_AUTHORITY_HOST`          | Anula el host de autoridad para nubes soberanas (p. ej., `login.microsoftonline.us`, `login.partner.microsoftonline.cn`, `login.microsoftonline.de`). De forma predeterminada, se usa la nube comercial. |
 
-For CLI-specific environment variables (config paths, debug logging, TE2 compatibility), see @te-cli-config.
+Para las variables de entorno específicas de la CLI (PATHs de configuración, registro de depuración, compatibilidad con TE2), consulta @te-cli-config.
 
-## Next steps
+## Próximos pasos
 
-- @te-cli-commands - what you can do once connected.
-- @te-cli-config - configuration and profile behavior.
-- @te-cli-cicd - pipeline examples using service principals and managed identity.
+- @te-cli-commands - qué puedes hacer una vez conectado.
+- @te-cli-config - configuración y comportamiento de los perfiles.
+- @te-cli-cicd - ejemplos de canalizaciones que usan principales de servicio e identidad administrada.
