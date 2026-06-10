@@ -1,6 +1,6 @@
 ---
 uid: te-cli-automation
-title: Automation and Scripting
+title: 自动化和脚本
 author: Peer Grønnerup
 updated: 2026-05-06
 applies_to:
@@ -13,23 +13,23 @@ applies_to:
       full: true
 ---
 
-# Automation and Scripting
+# 自动化和脚本
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-The Tabular Editor CLI is composable; every command supports structured output, disables interactive prompts on demand, and returns predictable exit codes. The same primitives work equally well for shell pipelines, Python scripts, PowerShell automation, and agent-driven workflows.
+Tabular Editor CLI 具备可组合性；每个命令都支持结构化输出，可按需禁用交互式提示，并返回可预测的退出代码。 这些基础能力同样适用于 shell 管道、Python 脚本、PowerShell 自动化以及由代理驱动的工作流。
 
-## Structured output
+## 结构化输出
 
-Use `--output-format` to switch any command between text (human-readable) and machine-readable formats:
+使用 `--output-format` 可将任意命令在文本（供人阅读）和机器可读格式之间切换：
 
-| Format                                  | Use for                                                                                                                                                                         | Notes                                                                                                                                      |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `text` (default)     | Human-readable use                                                                                                                                                              | Plain text on stdout regardless of whether the stream is a TTY or piped.                                                   |
-| `json`                                  | Machine-readable use                                                                                                                                                            | Always valid JSON to stdout. Use `--error-format json` if you also want machine-readable errors on stderr. |
-| `csv`                                   | Tabular results (`query`, `bpa run`, `bpa rules`, `vertipaq`, `validate`, `test`, `refresh`, `profile list`, `session list`, `find`, `replace`, `get`, `ls`) | RFC 4180 escaping.                                                                                                         |
-| `tmsl` (alias `bim`) | Whole-object TMSL/BIM serialization                                                                                                                                             | Accepted by `te get` and `te ls`.                                                                                          |
-| `tmdl`                                  | Whole-object TMDL serialization                                                                                                                                                 | Accepted by `te get` only (single object).                                                              |
+| 格式               | 用途                                                                                                                                   | 说明                                                                           |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| `text`（默认）       | 人工阅读                                                                                                                                 | 无论是连接到 TTY 还是通过管道传输，stdout 都输出纯文本。                                           |
+| `json`           | 机器可读                                                                                                                                 | 始终向 stdout 输出有效的 JSON。 如果还需要在 stderr 上输出机器可读的错误信息，请使用 `--error-format json`。 |
+| `csv`            | 表格结果（`query`、`bpa run`、`bpa rules`、`vertipaq`、`validate`、`test`、`refresh`、`profile list`、`session list`、`find`、`replace`、`get`、`ls`） | 采用 RFC 4180 转义。                                                              |
+| `tmsl`（别名 `bim`） | 整个对象的 TMSL/BIM 序列化                                                                                                                   | `te get` 和 `te ls` 接受此格式。                                                    |
+| `tmdl`           | 整个对象的 TMDL 序列化                                                                                                                       | 仅 `te get` 支持（单个对象）。                                                         |
 
 ```bash
 te ls --output-format json
@@ -38,31 +38,31 @@ te bpa run --output-format json
 ```
 
 > [!NOTE]
-> `--output-format` and `--error-format` are independent. Setting `--output-format json` does _not_ switch stderr to JSON; pass `--error-format json` for that. There is no automatic format switching when stdout is redirected - the default is always `text` unless you ask otherwise.
+> `--output-format` 和 `--error-format` 相互独立。 设置 `--output-format json` _不会_ 将 stderr 切换为 JSON；若要这样做，请传入 `--error-format json`。 重定向 stdout 时不会自动切换格式；除非你另行指定，否则默认始终为 `text`。
 
-## Non-interactive mode
+## 非交互模式
 
-Add `--non-interactive` to any command to disable confirmation prompts, credential picklists, and guided wizards. If the command needs input it cannot resolve from flags, environment, or config, it exits non-zero with an actionable error instead of hanging.
+为任意命令添加 `--non-interactive`，以禁用确认提示、凭据选择列表和引导式向导。 如果命令需要的输入无法通过参数、环境变量或配置确定，它会以非零状态退出，并返回可操作的错误信息，而不是一直挂起。
 
 ```bash
 te deploy ./model --non-interactive --force --ci github
 ```
 
-## Exit codes
+## 退出代码
 
-Every `te` command exits with a predictable status code so callers can branch on success or failure without parsing stdout.
+每个 `te` 命令都会使用可预测的状态代码退出，因此调用方无需解析 stdout，就能根据成功或失败执行分支逻辑。
 
-| Exit | Meaning                                                                                                                                    |
-| ---- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `0`  | Success.                                                                                                                   |
-| `1`  | Generic failure - invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity ≥ error. |
-| `2`  | Used by `te diff` to indicate models differ (distinct from `0` identical and non-zero errors).          |
+| 退出代码 | 含义                                                     |
+| ---- | ------------------------------------------------------ |
+| `0`  | 成功。                                                    |
+| `1`  | 通用失败：参数无效、命令失败、验证错误、身份验证失败，或 BPA 门禁在严重级别 ≥ error 时未通过。 |
+| `2`  | `te diff` 使用该代码表示模型存在差异（区别于 `0` 表示相同，以及其他非零错误代码）。      |
 
-Combine exit codes with `--ci <vsts\|github>` annotations and `--trx <file>` to surface rich failure information in CI - see @te-cli-cicd.
+将退出代码与 `--ci <vsts\|github>` 注释以及 `--trx <file>` 结合使用，可在 CI 中展示更丰富的失败信息——请参阅 @te-cli-cicd。
 
-## Errors on stderr
+## 在 stderr 上的错误
 
-Errors, warnings, and the preview banner are written to **stderr**; structured data is written to **stdout**. This means you can pipe JSON safely without it being contaminated by progress indicators or diagnostic messages:
+错误、警告和预览横幅会写入 **stderr**；结构化数据会写入 **stdout**。 这意味着你可以安全地通过管道传递 JSON，而不用担心其中混入进度指示或诊断信息：
 
 ```bash
 te ls --output-format json | jq '.[] | .name'
@@ -71,7 +71,7 @@ te vertipaq --output-format json > stats.json
 
 ## Python
 
-Python is a natural host for orchestrating CLI calls from data pipelines, notebooks, or test harnesses. Invoke `te` with `subprocess.run`, request JSON, and parse stdout:
+在数据管道、笔记本或测试框架中编排 CLI 调用时，Python 是很自然的选择。 使用 `subprocess.run` 调用 `te`，请求 JSON 输出，并解析 stdout：
 
 ```python
 import json
@@ -96,7 +96,7 @@ for row in rows:
     print(row)
 ```
 
-To capture structured errors from stderr:
+要从 stderr 捕获结构化错误：
 
 ```python
 import json
@@ -119,7 +119,7 @@ if result.returncode != 0:
 
 ## PowerShell
 
-PowerShell handles JSON natively. `te` is a regular console binary that works directly in PowerShell pipelines (see @te-cli-migrate if you're porting from the older `TabularEditor.exe` CLI):
+PowerShell 原生支持 JSON。 `te` 是一个普通的控制台可执行文件，可直接在 PowerShell 管道中使用（如果你正从较旧的 `TabularEditor.exe` CLI 迁移，请参阅 @te-cli-migrate）：
 
 ```powershell
 $rows = te query -s Finance -d Revenue -q "EVALUATE TOPN(10, 'Sales')" --output-format json --non-interactive
@@ -134,7 +134,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 ```
 
-Read secrets from the environment rather than passing them as plaintext:
+从环境变量中读取密钥，而不是以明文传递：
 
 ```powershell
 $env:AZURE_CLIENT_ID     = "your-app-id"
@@ -148,7 +148,7 @@ te deploy ./model `
 
 ## Bash
 
-Compose commands with pipes and `jq`. The CLI's text output is colorized for humans, but switching to `--output-format json` gives you a clean shape to work with:
+使用管道和 `jq` 组合命令。 CLI 的文本输出带有颜色，便于阅读；但切换到 `--output-format json` 后，你会得到一个干净、便于处理的结构：
 
 ```bash
 # Count measures per table
@@ -163,9 +163,9 @@ te bpa run --fail-on error --output-format json > bpa.json \
   || { echo "BPA gate failed"; jq '.violations' bpa.json; exit 1; }
 ```
 
-## Composability example
+## 可组合性示例
 
-Generating a refresh TMSL script and version-controlling it is three commands:
+生成刷新 TMSL 脚本并将其纳入版本控制，只需三条命令：
 
 ```bash
 te connect MyWorkspace MyModel
@@ -173,21 +173,21 @@ te refresh --type full --dry-run > refresh.tmsl
 cat refresh.tmsl
 ```
 
-The resulting TMSL can be reviewed in a pull request, committed, executed by the CLI (`te refresh --type full`), handed to a DBA, or applied by any XMLA-compatible tool. The CLI becomes a building block rather than a black box.
+生成的 TMSL 可在 Pull Request 中审查、提交到版本库、由 CLI 执行（`te refresh --type full`）、交给 DBA，或用任何兼容 XMLA 的工具应用。 CLI 不再是黑盒，而是可组合的组件。
 
-## Useful patterns
+## 常用模式
 
-A handful of small idioms that come up often when composing `te` commands in scripts or pipelines:
+下面这些小技巧，是在脚本或管道中组合 `te` 命令时经常会用到的：
 
-- **Idempotent creates and removes.** `te add Sales/Marker -t Measure -i "0" --if-not-exists --save` and `te rm Sales/OldMeasure --if-exists --save` both exit `0` whether or not the object existed - safe to re-run in CI.
-- **Dry-run diffs.** `te replace` is dry-run by default; add `--save` only when you're satisfied with the preview.
-- **Emit TMSL for review.** `te deploy ./model --xmla deploy.tmsl` produces the deployment script without touching the server - useful for DBA review or manual apply.
-- **Path-only output.** `te ls --paths-only` and `te find --paths-only` emit one object path per line, ideal for piping to `xargs`, `te get`, or `te set`. The model-level containers (`te ls Measures`, `te ls Columns`) compose well with this for whole-model sweeps.
-- **Benchmarking queries.** `te query --trace --cold --runs 5` runs a DAX query with cold cache, five iterations, and captures FE/SE trace events.
-- **Step timings in CI logs.** Long-running commands (`te deploy`, `te refresh`, `te script`, `te validate`) include a `durationMs` field in JSON output - useful for surfacing per-step timings in pipeline summaries.
+- **幂等的创建与删除。** `te add Sales/Marker -t Measure -i "0" --if-not-exists --save` 用于创建度量值，`te rm Sales/OldMeasure --if-exists --save` 用于删除度量值；无论对象是否存在，两者都会以 `0` 退出——可在 CI 中安全地重复运行。
+- **试运行查看差异。** `te replace` 默认会先试运行；只有在你对预览结果满意时才添加 `--save`。
+- **输出供审查的 TMSL。** `te deploy ./model --xmla deploy.tmsl` 会生成部署脚本，而不会更改服务器——适合 DBA 审查或手动应用。
+- **仅输出路径。** `te ls --paths-only` 和 `te find --paths-only` 每行输出一个对象路径，非常适合通过管道传给 `xargs`、`te get` 或 `te set`。 模型级容器（`te ls Measures`、`te ls Columns`）与此配合良好，适合对整个模型进行一次全面扫描。
+- **查询基准测试。** `te query --trace --cold --runs 5` 会在冷缓存下运行 DAX 查询，迭代五次，并捕获 FE/SE 跟踪事件。
+- **CI 日志中的步骤耗时。** 长时间运行的命令（`te deploy`、`te refresh`、`te script`、`te validate`）会在 JSON 输出中包含 `durationMs` 字段——便于在管道摘要中展示各步骤耗时。
 
-## Related pages
+## 相关页面
 
-- @te-cli-cicd - pipeline-specific patterns and YAML examples.
-- @te-cli-commands - full command reference.
-- @te-cli-interactive - when interactive mode fits better than scripting.
+- @te-cli-cicd - 面向流水线的模式和 YAML 示例。
+- @te-cli-commands - 完整命令参考。
+- @te-cli-interactive - 在哪些情况下交互模式比编写脚本更合适。
