@@ -1,6 +1,6 @@
 ---
 uid: te-cli-cicd
-title: CI/CD Integration
+title: Integración de CI/CD
 author: Peer Grønnerup
 updated: 2026-05-06
 applies_to:
@@ -13,34 +13,34 @@ applies_to:
       full: true
 ---
 
-# CI/CD Integration
+# Integración de CI/CD
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-The Tabular Editor CLI is designed for unattended execution in continuous integration and delivery pipelines. A single binary, structured output, non-interactive mode, native CI annotations for GitHub Actions and Azure DevOps, and VSTEST-compatible test results make it a natural replacement for ad-hoc TE2 invocations.
+La CLI de Tabular Editor está diseñada para ejecutarse sin supervisión en pipelines de integración y entrega continuas. Un único binario, una salida estructurada, un modo no interactivo, anotaciones de CI nativas para GitHub Actions y Azure DevOps, y resultados de pruebas compatibles con VSTEST hacen que la CLI sea un reemplazo natural de las invocaciones ad hoc de TE2.
 
 > [!WARNING]
-> **Do not use the CLI in production pipelines during Limited Public Preview.** Two preview-specific risks apply to pipeline owners:
+> **No uses la CLI en pipelines de producción durante la versión preliminar pública limitada.** Hay dos riesgos específicos de esta versión preliminar que afectan a los propietarios de pipelines:
 >
-> - **Hard expiry.** The preview binary stops functioning on **2026-09-30** - any pipeline depending on it will fail on that date, regardless of your release calendar.
-> - **No backwards-compatibility guarantee.** Commands, flags, output shapes, and exit codes may change between preview builds, so pipeline steps may need updating when you refresh the vendored binary.
+> - **Caducidad estricta.** El binario preliminar deja de funcionar el **2026-09-30**; cualquier pipeline que dependa de él fallará en esa fecha, independientemente de tu calendario de versiones.
+> - **Sin garantía de compatibilidad con versiones anteriores.** Los comandos, las opciones, los formatos de salida y los códigos de salida pueden cambiar entre compilaciones preliminares, así que quizá tengas que actualizar los pasos del pipeline cuando actualices el binario incluido en el repositorio.
 >
-> Build and evaluate in non-production pipelines, and share feedback in the public [TabularEditor/CLI](https://github.com/TabularEditor/CLI) repository so the GA version matches your needs.
+> Compila y evalúa en pipelines que no sean de producción, y comparte tus comentarios en el repositorio público [TabularEditor/CLI](https://github.com/TabularEditor/CLI) para que la versión GA se ajuste a tus necesidades.
 
-## What makes the CLI CI-friendly
+## Qué hace que la CLI sea adecuada para CI
 
-- **Single self-contained binary.** No runtime install, no `TabularEditor.exe`, no `start /wait`.
-- **`--non-interactive` global flag.** Disables every prompt; fails fast with actionable errors.
-- **`--force`** on mutating commands (`te deploy`, `te refresh`) skips confirmation prompts.
-- **`--ci vsts` / `--ci github`.** Emit native pipeline annotations to stderr.
-- **`--trx <file>`.** Produce VSTEST results consumable by Azure DevOps test publishing.
-- **Structured errors.** `--output-format json` emits `{"error": "...", "hint": "..."}` to stderr so pipeline steps can fail with a useful message.
+- **Un único binario autocontenido.** Sin necesidad de instalar un entorno de ejecución, sin `TabularEditor.exe`, sin `start /wait`.
+- **Opción global `--non-interactive`.** Desactiva todas las indicaciones; falla de inmediato con errores claros y útiles.
+- **`--force`** en comandos que realizan cambios (`te deploy`, `te refresh`) omite las indicaciones de confirmación.
+- **`--ci vsts` / `--ci github`.** Emite anotaciones nativas del pipeline en stderr.
+- **`--trx <file>`.** Genera resultados VSTEST que Azure DevOps puede consumir al publicar los resultados de pruebas.
+- **Errores estructurados.** `--output-format json` emite `{"error": "...", "hint": "..."}` en stderr para que los pasos del pipeline puedan fallar con mensajes útiles.
 
-## Adding the CLI to your repo
+## Agregar la CLI a tu repositorio
 
-During Limited Public Preview, the CLI is gated behind sign-in on [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli), so pipelines cannot fetch the archive from a public URL. The simplest reproducible approach is to commit the binary that matches your runner into your repository and reference it from each pipeline step.
+Durante la versión preliminar pública limitada, el acceso a la CLI requiere iniciar sesión en [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli), por lo que los pipelines no pueden descargar el archivo desde una URL pública. La forma reproducible más sencilla es incluir en tu repositorio el binario que corresponda a tu runner y hacer referencia a él desde cada paso del pipeline.
 
-A common layout:
+Una estructura habitual:
 
 ```
 your-repo/
@@ -50,14 +50,14 @@ your-repo/
         └── te.exe     # Windows binary
 ```
 
-Place the **extracted** binary - not the archive - so the pipeline can call it directly. Pick the build that matches your runner OS/arch; see @te-cli-install for the filename table. The self-contained binary is ~70 MB; consider Git LFS if your repo is sensitive to size.
+Coloca el binario **extraído** —no el archivo comprimido— para que el pipeline pueda invocarlo directamente. Elige la compilación que coincida con el SO y la arquitectura de tu runner; consulta @te-cli-install para ver la tabla de nombres de archivo. El binario autocontenido ocupa ~70 MB; considera usar Git LFS si tu repositorio es sensible al tamaño.
 
 > [!NOTE]
-> Committing the binary also pins the CLI version to whatever you checked in, which is desirable for CI reproducibility. To upgrade, replace the binary in `tools/te/` and commit it - the commit message is your version log. Keep in mind that the preview binary still expires on **2026-09-30** regardless of when you committed it, so a vendored copy is not a permanent dependency - plan to refresh it (and re-validate your pipeline against the new API surface) on preview-build cadence.
+> Al hacer commit del binario, también dejas fijada la versión de la CLI que hayas incluido en el repositorio, lo cual es deseable para la reproducibilidad de la CI. Para actualizar, sustituye el binario en `tools/te/` y haz commit: los mensajes del commit serán tu registro de versiones. Ten en cuenta que el binario preliminar caduca el **2026-09-30** independientemente de cuándo lo hayas incorporado al repositorio, así que una copia incluida en el repositorio no es una dependencia permanente; planifica renovarla (y volver a validar tu pipeline con la nueva superficie de la API) siguiendo la cadencia de las compilaciones preliminares.
 
 ## GitHub Actions
 
-A complete deploy + test workflow. The example assumes the Linux `te` binary is committed at `tools/te/te`, and a service principal is stored in repository secrets (`AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_TENANT_ID`).
+Un flujo de trabajo completo de despliegue y pruebas. El ejemplo asume que el binario `te` de Linux está incluido en `tools/te/te` y que las credenciales de una entidad de servicio se guardan en los secretos del repositorio (`AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_TENANT_ID`).
 
 ```yaml
 name: Deploy semantic model
@@ -115,7 +115,7 @@ jobs:
 
 ## Azure DevOps Pipelines
 
-The Azure DevOps Pipelines equivalent of the GitHub Actions workflow above. The example assumes `te.exe` is committed at `tools\te\te.exe`. `--ci vsts` emits `##vso[...]` commands that the pipeline interprets as errors, warnings, and task-status updates.
+El equivalente en Azure DevOps Pipelines del flujo de trabajo de GitHub Actions anterior. El ejemplo asume que `te.exe` está incluido en `tools\te\te.exe`. `--ci vsts` emite comandos `##vso[...]` que el pipeline interpreta como errores, advertencias y actualizaciones del estado de la tarea.
 
 ```yaml
 trigger:
@@ -163,13 +163,13 @@ steps:
       testResultsFiles: '*.trx'
 ```
 
-## BPA gate patterns
+## Patrones de compuerta del BPA
 
-`te deploy` and `te save` run the Best Practice Analyzer as a pre-flight gate by default. Three behaviors are worth determining up-front:
+`te deploy` y `te save` ejecutan el Best Practice Analyzer como compuerta de verificación previa de forma predeterminada. Hay tres comportamientos que conviene definir de antemano:
 
-- **Enforce** - the default. Pipeline fails if BPA finds violations at severity ≥ error. Pair with `--fail-on warning` on a standalone `te bpa run` step if you want warnings to fail too.
-- **Auto-fix** - `--fix-bpa` applies `fixExpression`s in memory for the deployed artifact. Source files are not modified. Useful when the source of truth lives in the model and you want deploys to normalize style without developer intervention.
-- **Bypass** - `--skip-bpa` disables the gate for a single command. Useful for emergency hotfixes; not recommended as a default.
+- **Aplicar**: el valor predeterminado. El pipeline falla si el BPA encuentra infracciones con severidad ≥ error. Combínalo con `--fail-on warning` en un paso independiente de `te bpa run` si quieres que las advertencias también hagan fallar el pipeline.
+- **Corrección automática**: `--fix-bpa` aplica las `fixExpression`s en memoria al artefacto desplegado. Los archivos de origen no se modifican. Es útil cuando la fuente de verdad está en el modelo y quieres que los despliegues normalicen el estilo sin intervención del desarrollador.
+- **Omitir**: `--skip-bpa` desactiva el control para un solo comando. Útil para correcciones urgentes de emergencia; no se recomienda como valor predeterminado.
 
 ```bash
 # Treat warnings as failures in PR validation
@@ -182,11 +182,11 @@ te deploy ./model -s my-ws -d my-model --fix-bpa --force --ci github
 te deploy ./model -s my-ws -d my-model --skip-bpa --force --ci github
 ```
 
-See @te-cli-config for controlling the BPA gate globally via `bpa.onDeploy` / `bpa.onSave` config keys.
+Consulta @te-cli-config para controlar globalmente el control del BPA mediante las claves de configuración `bpa.onDeploy` / `bpa.onSave`.
 
-## Refresh patterns
+## Patrones de actualización
 
-Refresh in pipelines is typically a follow-up step after deployment. Use `--non-interactive` and pick a deterministic `--type`:
+La actualización en los pipelines suele ser un paso posterior al despliegue. Usa `--non-interactive` y elige un `--type` determinista:
 
 ```bash
 # Full refresh of the whole model after deploy
@@ -199,11 +199,11 @@ te refresh -s my-ws -d my-model --table Sales --type full --non-interactive
 te refresh -s my-ws -d my-model --type calculate --non-interactive
 ```
 
-For incremental refresh workflows, combine `--apply-refresh-policy`, `--effective-date <yyyy-MM-dd>`, and `--partition <Table.Partition>` flags. See @te-cli-commands for details.
+Para flujos de trabajo de actualización incremental, combina las opciones `--apply-refresh-policy`, `--effective-date <yyyy-MM-dd>` y `--partition <Table.Partition>`. Consulta @te-cli-commands para más detalles.
 
-## Artifact patterns
+## Patrones de artefactos
 
-Emit TMSL or XMLA as an artifact without deploying, so DBAs or a later job can review or apply it:
+Genera TMSL o XMLA como artefacto sin desplegarlo, para que los DBA o un trabajo posterior puedan revisarlo o aplicarlo:
 
 ```bash
 # Produce the XMLA/TMSL script that would deploy - do not deploy
@@ -213,23 +213,23 @@ te deploy ./model -s my-ws -d my-model --xmla deploy.tmsl --force
 te refresh -s my-ws -d my-model --type full --dry-run > refresh.tmsl
 ```
 
-Commit these artifacts to git, upload them to the pipeline's artifact storage, or pass them between jobs. They're plain text and diff cleanly in pull requests.
+Confirma estos artefactos en git, súbelos al almacenamiento de artefactos del pipeline o pásalos entre trabajos. Son texto sin formato y se pueden comparar fácilmente en las pull requests.
 
-## Secret handling
+## Gestión de secretos
 
-| Approach                                                                                                                        | When to use                                | Notes                                                                                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Service principal via env vars (`AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`, `--auth env`) | General CI/CD                              | Map pipeline secrets to environment variables at the step or job level. Never pass secrets in command arguments.                                                                                         |
-| Service principal via `te auth login` once per job (`echo $SECRET \| te auth login -u $ID -p - -t $TENANT`)  | Multi-step jobs                            | The login is cached, so subsequent `te` commands acquire tokens silently - no need to set `AZURE_CLIENT_*` for every step or re-pass `-u/-p/-t`. Pipe the secret via stdin rather than interpolating it. |
-| Managed identity (`--auth managed-identity`)                                                                 | Azure VMs, Container Apps, Azure Functions | No secrets to manage. Preferred in Azure-hosted environments.                                                                                                                                            |
-| Certificate (`--certificate <path>`)                                                                         | Enterprise scenarios with cert rotation    | Mount the certificate as a secure file step; pass `--certificate-password` via env.                                                                                                                                      |
+| Enfoque                                                                                                                                              | Cuándo usarlo                                                       | Notas                                                                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Principal de servicio mediante variables de entorno (`AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`, `--auth env`) | CI/CD general                                                       | Asigna los secretos del pipeline a variables de entorno a nivel de paso o de trabajo. Nunca pases secretos en los argumentos de comandos.                                                                                                                                 |
+| Entidad de servicio mediante `te auth login`, una vez por trabajo (`echo $SECRET \| te auth login -u $ID -p - -t $TENANT`)        | Trabajos de varios pasos                                            | El inicio de sesión se almacena en caché, así que los comandos `te` posteriores obtienen tokens de forma silenciosa; no hace falta establecer `AZURE_CLIENT_*` en cada paso ni volver a pasar `-u/-p/-t`. Canaliza el secreto a través de stdin en lugar de interpolarlo. |
+| Identidad administrada (`--auth managed-identity`)                                                                                | Máquinas virtuales de Azure, Azure Container Apps y Azure Functions | No hay secretos que gestionar. Se prefiere en entornos alojados en Azure.                                                                                                                                                                                                 |
+| Certificado (`--certificate <path>`)                                                                                              | Escenarios empresariales con rotación de certificados               | Monta el certificado como un paso de archivo seguro; pasa `--certificate-password` mediante variables de entorno.                                                                                                                                                                         |
 
 > [!WARNING]
-> Do not echo secrets or the output of `te auth status` to pipeline logs. The CLI writes warnings to stderr when secrets are passed on the command line - respect those warnings in CI.
+> No hagas echo de secretos ni de la salida de `te auth status` en los registros del pipeline. La CLI escribe advertencias en stderr cuando se pasan secretos en la línea de comandos; haz caso a esas advertencias en CI.
 
-## Related pages
+## Páginas relacionadas
 
-- @te-cli-auth - authentication methods in detail.
-- @te-cli-config - configuration and profile overrides.
-- @te-cli-automation - general scripting patterns.
-- @te-cli-migrate - migrating an existing TE2-based pipeline.
+- @te-cli-auth - métodos de autenticación en detalle.
+- @te-cli-config - configuración y reemplazos del perfil.
+- @te-cli-automation - patrones generales de scripting.
+- @te-cli-migrate - migración de un pipeline existente basado en TE2.
