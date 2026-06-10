@@ -15,7 +15,7 @@ applies_to:
 # Migrating from the TE2 Command Line
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
-
+ 
 Teams with existing build pipelines that invoke `TabularEditor.exe` with TE2-style flags (`-S`, `-A`, `-D`, `-O`, `-C`, etc.) can adopt the new CLI incrementally. The Tabular Editor CLI accepts both command shapes: the new subcommand-based form (`te deploy`, `te bpa run`, …) and the legacy TE2 flag syntax, via a built-in compatibility layer.
 
 For the legacy TE2 Windows command-line reference, see @command-line-options.

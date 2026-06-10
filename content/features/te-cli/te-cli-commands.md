@@ -15,7 +15,7 @@ applies_to:
 # Command Reference
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
-
+ 
 This page gives a short description and one example per command. Every command accepts `--help` for exhaustive flag documentation:
 
 ```bash

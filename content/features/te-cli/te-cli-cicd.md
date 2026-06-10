@@ -14,7 +14,7 @@ applies_to:
 ---
 # CI/CD Integration
 
-[!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
+[!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)] 
 
 The Tabular Editor CLI is designed for unattended execution in continuous integration and delivery pipelines. A single binary, structured output, non-interactive mode, native CI annotations for GitHub Actions and Azure DevOps, and VSTEST-compatible test results make it a natural replacement for ad-hoc TE2 invocations.
 

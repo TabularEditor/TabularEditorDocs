@@ -17,7 +17,7 @@ applies_to:
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
 The Tabular Editor CLI reads optional configuration from a JSON file. Configuration controls three things:
-
+ 
 - **File paths** — where the CLI reads macros, BPA rules, and (optionally) the TE3 Desktop executable, and where to write the query log.
 - **Behavioral defaults** — BPA gates, auto-format, validation.
 - **Saved connection profiles** — the list of named profiles you can switch between.
