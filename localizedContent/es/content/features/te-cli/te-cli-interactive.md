@@ -1,6 +1,6 @@
 ---
 uid: te-cli-interactive
-title: Interactive Mode
+title: Modo interactivo
 author: Peer Grønnerup
 updated: 2026-05-12
 applies_to:
@@ -13,15 +13,15 @@ applies_to:
       full: true
 ---
 
-# Interactive Mode
+# Modo interactivo
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-Interactive mode is a guided read-eval-print loop (REPL) for exploring a model from the terminal. It's the gentlest on-ramp for users who are new to command lines, and a convenient workspace for ad-hoc sessions against a single model.
+El modo interactivo es un bucle guiado de lectura, evaluación e impresión (REPL) para explorar un modelo desde la terminal. Es la forma más sencilla de iniciarte si eres nuevo en la línea de comandos y un Workspace práctico para sesiones ad hoc con un único modelo.
 
-## Starting a session
+## Iniciar una sesión
 
-To Start a session run any of these commands:
+Para iniciar una sesión, ejecuta cualquiera de estos comandos:
 
 ```bash
 te interactive                              # Start and connect to a model later
@@ -29,15 +29,15 @@ te interactive ./model                      # Start with a local model
 te interactive -s MyWorkspace -d MyModel    # Start with a remote model
 ```
 
-The session prints a welcome banner, shows the active model, and opens you at a model-aware prompt:
+La sesión imprime un banner de bienvenida, muestra el modelo activo y te sitúa en un prompt con contexto del modelo:
 
-![Tabular Editor CLI interactive mode session](~/content/assets/images/features/cli/cli-interactive-mode.png)
+![Sesión del modo interactivo de Tabular Editor CLI](~/content/assets/images/features/cli/cli-interactive-mode.png)
 
-If no model is set, the prompt is just `te>` - simply use `connect` for connection picker, `connect <path>` or `connect <workspace> <model>` to connect to one.
+Si no hay ningún modelo establecido, el prompt es simplemente `te>`; usa `connect` para abrir el selector de conexiones, `connect <path>` o `connect <Workspace> <model>` para conectarte a uno.
 
-## Commands inside the session
+## Comandos dentro de la sesión
 
-Once a REPL has started, every `te` subcommand is available **without the `te` prefix**:
+Una vez iniciado un REPL, todos los subcomandos de `te` están disponibles **sin el prefijo `te`**:
 
 ```
 ls tables
@@ -46,18 +46,18 @@ query -q "EVALUATE TOPN(5, 'Sales')"
 bpa run --fail-on error
 ```
 
-Each command accepts `--help` the same way it does outside the session:
+Cada comando acepta `--help` igual que fuera de la sesión:
 
 ```
 deploy --help
 ```
 
-## Quoting and DAX-style paths
+## Comillas y rutas de estilo DAX
 
-The REPL line splitter recognises the same quoting forms as [object paths](xref:te-cli-commands#object-paths) so DAX-shaped references are interpreted as a single argument:
+El separador de línea del REPL reconoce las mismas formas de comillas que las [rutas de objeto](xref:te-cli-commands#object-paths), de modo que las referencias con forma de DAX se interpretan como un único argumento:
 
-- `'...'` and `"..."` - single- and double-quoted segments. The quote characters are stripped, doubled quotes escape a literal occurrence.
-- `[...]` - bracketed segment. **Brackets are preserved** in the resulting argument so a path like `'Internet Sales'[Sales Amount]` reaches the command as one token that the path parser can re-interpret as a DAX reference. Doubled closing brackets (`]]`) stay verbatim for the same reason.
+- `'...'` y `"..."`: segmentos entre comillas simples y dobles. Se eliminan los caracteres de comilla y las comillas duplicadas permiten incluir una comilla literal.
+- `[...]`: segmento entre corchetes. **Los corchetes se conservan** en el argumento resultante, de modo que una ruta como `'Internet Sales'[Sales Amount]` llega al comando como un único token que el analizador de rutas puede volver a interpretar como una referencia DAX. Los corchetes de cierre duplicados (`]]`) se mantienen literalmente por la misma razón.
 
 ```
 get 'Internet Sales'[Sales Amount]   # One argument, DAX form
@@ -65,34 +65,34 @@ get [Total Sales]                    # Lone-bracket model-wide lookup
 ls 'Net Sales'/'Sales Amount'        # Quoted segments with a slash separator
 ```
 
-Unterminated groups absorb to end of line, so a stray opening quote or bracket fails with an explicit error rather than splitting silently.
+Los grupos sin cerrar abarcan hasta el final de la línea, por lo que una comilla o un corchete de apertura sueltos provocan un error explícito en lugar de dividir la entrada sin avisar.
 
-## Built-in REPL commands
+## Comandos integrados del REPL
 
-These are handled by the REPL itself, not the regular command tree:
+Estos comandos los gestiona el propio REPL, no el árbol de comandos habitual:
 
-| Command                | Purpose                                           |
-| ---------------------- | ------------------------------------------------- |
-| `help` or `?`          | List available commands.          |
-| `status` or `pwd`      | Show the active model/connection. |
-| `clear` or `cls`       | Clear the screen.                 |
-| `exit`, `quit`, or `q` | Exit interactive mode.            |
+| Comando              | Propósito                                               |
+| -------------------- | ------------------------------------------------------- |
+| `help` o `?`         | Lista los comandos disponibles.         |
+| `status` o `pwd`     | Muestra el modelo o la conexión en uso. |
+| `clear` o `cls`      | Limpia la pantalla.                     |
+| `exit`, `quit` o `q` | Sale del modo interactivo.              |
 
-## Guided prompts
+## Indicaciones guiadas
 
-When interactive mode is active, commands that need missing input prompt for it instead of failing. Running `auth` without a subcommand opens a picker for Login / Status / Logout; running `deploy` without `--force` shows a summary and asks for confirmation (`n` is the safe default).
+Cuando el modo interactivo está activo, los comandos que necesitan información faltante la solicitan en lugar de fallar. Ejecutar `auth` sin un subcomando abre un menú para Iniciar sesión / Estado / Cerrar sesión; ejecutar `deploy` sin `--force` muestra un resumen y pide confirmación (`n` es la opción predeterminada más segura).
 
-To disable prompts for a single command inside the session, pass `--non-interactive`.
+Para desactivar las indicaciones en un único comando dentro de la sesión, pasa `--non-interactive`.
 
-## When to use interactive vs. non-interactive
+## Cuándo usar el modo interactivo frente al no interactivo
 
-- **Interactive mode** is best for exploration, learning the CLI, one-off bulk edits against a single model, and demos.
-- **Non-interactive mode** (the default outside `te interactive`) is what you reach for when scripting, automating, or running in CI. See @te-cli-automation and @te-cli-cicd.
+- **El modo interactivo** es ideal para explorar, aprender la CLI, hacer ediciones masivas puntuales sobre un único modelo y realizar demos.
+- **El modo no interactivo** (el predeterminado fuera de `te interactive`) es el indicado para escribir scripts, automatizar o ejecutar en CI. Consulta @te-cli-automation y @te-cli-cicd.
 
-The two share the same command tree - anything you run inside `te interactive` can be pasted into a shell script by prefixing it with `te`.
+Ambos comparten el mismo árbol de comandos: cualquier comando que ejecutes dentro de `te interactive` puedes pegarlo en un script de shell anteponiendo `te`.
 
-## Related pages
+## Páginas relacionadas
 
-- @te-cli-commands - full command reference.
-- @te-cli-auth - connect to workspaces and manage profiles.
-- @te-cli-automation - when to leave interactive mode.
+- @te-cli-commands - referencia completa de comandos.
+- @te-cli-auth - conéctate a los Workspace y administra perfiles.
+- @te-cli-automation - cuándo salir del modo interactivo.
