@@ -1,6 +1,6 @@
 ---
 uid: te-cli-migrate
-title: Migrating from the TE2 Command Line
+title: Migración desde la línea de comandos de TE2
 author: Peer Grønnerup
 updated: 2026-05-06
 applies_to:
@@ -13,21 +13,21 @@ applies_to:
       full: true
 ---
 
-# Migrating from the TE2 Command Line
+# Migración desde la línea de comandos de TE2
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-Teams with existing build pipelines that invoke `TabularEditor.exe` with TE2-style flags (`-S`, `-A`, `-D`, `-O`, `-C`, etc.) can adopt the new CLI incrementally. The Tabular Editor CLI accepts both command shapes: the new subcommand-based form (`te deploy`, `te bpa run`, …) and the legacy TE2 flag syntax, via a built-in compatibility layer.
+Los equipos con canalizaciones de compilación existentes que invocan `TabularEditor.exe` con opciones al estilo de TE2 (`-S`, `-A`, `-D`, `-O`, `-C`, etc.) pueden adoptar la nueva CLI de forma gradual. La CLI de Tabular Editor acepta ambos formatos de comandos: la nueva forma basada en subcomandos (`te deploy`, `te bpa run`, …) y la sintaxis heredada de opciones de TE2, mediante una capa de compatibilidad integrada.
 
-For the legacy TE2 Windows command-line reference, see @command-line-options.
+Para consultar la referencia heredada de la línea de comandos de TE2 para Windows, ve a @command-line-options.
 
-## How TE2 compatibility works
+## Cómo funciona la compatibilidad con TE2
 
-TE2 compatibility mode is activated in any of three ways:
+El modo de compatibilidad con TE2 se activa de cualquiera de estas tres maneras:
 
-1. **Binary name.** Rename `te` to `te2` (or symlink it) and the CLI runs in TE2-exact mode. This is the drop-in replacement path: swap `TabularEditor.exe` for `te2` in your existing pipeline and the same arguments work.
-2. **Environment variable.** Set `TE_COMPAT=te2` before invoking `te` to force TE2 mode.
-3. **Auto-detection.** If the first argument isn't a `te` subcommand (`load`, `deploy`, …) and at least one recognized TE2 flag appears somewhere in the argument list, the CLI auto-routes to TE2 mode. This means most existing TE2 invocations work without any changes.
+1. **Nombre del binario.** Cambia el nombre de `te` a `te2` (o crea un enlace simbólico) y la CLI se ejecutará en el modo exacto de TE2. Esta es la vía de reemplazo directo: sustituye `TabularEditor.exe` por `te2` en tu canalización existente y los mismos argumentos funcionarán.
+2. **Variable de entorno.** Establece `TE_COMPAT=te2` antes de invocar `te` para forzar el modo TE2.
+3. **Detección automática.** Si el primer argumento no es un subcomando de `te` (`load`, `deploy`, …) y aparece al menos una opción de TE2 reconocida en algún punto de la lista de argumentos, la CLI redirige automáticamente al modo TE2. Esto significa que la mayoría de las invocaciones existentes de TE2 funcionan sin ningún cambio.
 
 ```bash
 # All three are equivalent - each runs in TE2 mode
@@ -37,11 +37,11 @@ te Model.bim -S fix.csx -D "localhost\tabular" MyDB -O
 ```
 
 > [!NOTE]
-> TE2 mode runs the same `Load → Scripts → Schema Check → Save → BPA → Deploy → TRX` pipeline as `TabularEditor.exe`, including context-sensitive flag behavior (e.g., `-S` after `-D` means `-SHARED`, not `-SCRIPT`).
+> El modo TE2 ejecuta la misma canalización `Load → Scripts → Schema Check → Save → BPA → Deploy → TRX` que `TabularEditor.exe`, incluido el comportamiento de las opciones en función del contexto (por ejemplo, `-S` después de `-D` significa `-SHARED`, no `-SCRIPT`).
 
-## The migrate command
+## El comando `migrate`
 
-Use `te migrate` as a live reference for how TE2 flags map to the new CLI. It prints a colorized table of every known TE2 flag, its status (supported, renamed, planned), and the equivalent `te` command.
+Usa `te migrate` como referencia práctica de cómo las opciones de TE2 se asignan a la nueva CLI. Muestra una tabla en color con todas las opciones conocidas de TE2, su estado (compatible, renombrada, prevista) y el comando `te` equivalente.
 
 ```bash
 te migrate                   # Full flag mapping table
@@ -49,63 +49,63 @@ te migrate -A                # Look up a single flag
 te migrate --output-format json     # Machine-readable mapping
 ```
 
-Refer to the output of the `te migrate` command for the current mapping that reflects the CLI version you have installed.
+Consulta la salida del comando `te migrate` para ver el mapeo actual, que refleja la versión de la CLI que tienes instalada.
 
-## Flag mapping (curated subset)
+## Mapeo de flags (subconjunto seleccionado)
 
-A non-exhaustive summary of the most commonly used flags. Run `te migrate` for the full list.
+Un resumen no exhaustivo de los flags más usados. Ejecuta `te migrate` para ver la lista completa.
 
-| TE2 flag                                                      | New CLI equivalent                                                       | Notes                                                                                                                                                                                   |
-| ------------------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `file` (positional)                        | `te <command> <path>` or global `--model`                                | First positional arg on most commands.                                                                                                                                  |
-| `server`, `database`                                          | `te connect <server>` or `te deploy <server> <database>`                 | Server is no longer a global positional.                                                                                                                                |
-| `-L` / `-LOCAL`                                               | `te connect --local`                                                     | Windows only.                                                                                                                                                           |
-| `-S` / `-SCRIPT`                                              | `te script -s <file.csx>` or `-e "code"`                                 | Supports multiple scripts, inline code, and stdin.                                                                                                                      |
-| `-A` / `-ANALYZE`                                             | `te bpa run --rules <file-or-url>`                                       | Supports `--fail-on`, `--fix`, multiple rule files.                                                                                                                     |
-| `-AX` / `-ANALYZEX`                                           | `te bpa run --rules <file>` (without `--model-rules`) | Excluding model-embedded rules is the new default.                                                                                                                      |
-| `-B` / `-BIM`                                                 | `te save <model> -o <file.bim> --serialization bim`                      |                                                                                                                                                                                         |
-| `-F` / `-FOLDER`                                              | `te save <model> -o <dir> --serialization te-folder`                     | After `-D`, TE2's `-F` means `-FULL` - see `--deploy-full`.                                                                                                             |
-| `-TMDL`                                                       | `te save <model> -o <dir> --serialization tmdl`                          | TMDL is the default save format.                                                                                                                                        |
-| `-D` / `-DEPLOY`                                              | `te deploy <server> <database> <model>`                                  | Separate command with named options.                                                                                                                                    |
-| `-O` / `-OVERWRITE`                                           | (default) or `--create-only` to opt out               | Overwrite is the default in the new CLI.                                                                                                                                |
-| `-C` / `-CONNECTIONS`                                         | `te deploy --deploy-connections`                                         |                                                                                                                                                                                         |
-| `-P` / `-PARTITIONS`                                          | `te deploy --deploy-partitions`                                          |                                                                                                                                                                                         |
-| `-Y` / `-SKIPPOLICY`                                          | `te deploy --deploy-partitions --skip-refresh-policy`                    | Requires `--deploy-partitions`.                                                                                                                                         |
-| `-SHARED`                                                     | `te deploy --deploy-shared-expressions`                                  | After `-D`, TE2's `-S` means `-SHARED`.                                                                                                                                 |
-| `-R` / `-ROLES`                                               | `te deploy --deploy-roles`                                               |                                                                                                                                                                                         |
-| `-M` / `-MEMBERS`                                             | `te deploy --deploy-role-members`                                        |                                                                                                                                                                                         |
-| `-FULL` (after `-D`)                       | `te deploy --deploy-full`                                                | Equivalent to overwrite + connections + partitions + shared + roles + role-members.                                                                                     |
-| `-X` / `-XMLA <file>`                                         | `te deploy ... --xmla <file>`                                            | Use `-` for stdout.                                                                                                                                                     |
-| `-V` / `-VSTS`                                                | `--ci vsts` on `validate`, `bpa run`, `deploy`                           | Emits `##vso[...]` annotations to stderr.                                                                                                                               |
-| `-G` / `-GITHUB`                                              | `--ci github`                                                            | Emits `::error::` / `::warning::` annotations.                                                                                                                          |
-| `-T` / `-TRX <file>`                                          | `--trx <file>` on `validate`, `bpa run`, `test run`                      | VSTEST `.trx` file for Azure DevOps test publishing.                                                                                                                    |
-| `-W` / `-WARN`                                                | (default)                                             | Warnings always reported in deploy results.                                                                                                                             |
-| `-E` / `-ERR`                                                 | (default)                                             | Deploy returns non-zero exit on DAX errors.                                                                                                                             |
-| `-SC` / `-SCHEMACHECK`                                        | _Not yet implemented._                                   | TE2 schema check connects to actual data sources. Different from `te validate` (DAX semantic validation, no data source connection). |
-| `-L` / `-LOGIN <user> <pass>` (after `-D`) | `te auth login -u <id> -p <secret> -t <tenant>`                          | Use service principal or env-based credentials. The login is cached, so subsequent commands acquire tokens silently - see @te-cli-auth.    |
+| Flag de TE2                                                        | Nuevo equivalente en la CLI                                             | Notas                                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `file` (posicional)                             | `te <command> <path>` o el flag global `--model`                        | Primer argumento posicional en la mayoría de los comandos.                                                                                                                                                                                    |
+| `server`, `database`                                               | `te connect <server>` o `te deploy <server> <database>`                 | El servidor ya no es un argumento posicional global.                                                                                                                                                                                          |
+| `-L` / `-LOCAL`                                                    | `te connect --local`                                                    | Solo para Windows.                                                                                                                                                                                                                            |
+| `-S` / `-SCRIPT`                                                   | `te script -s <file.csx>` o `-e "code"`                                 | Admite varios scripts, código en línea y stdin.                                                                                                                                                                                               |
+| `-A` / `-ANALYZE`                                                  | `te bpa run --rules <file-or-url>`                                      | Admite `--fail-on`, `--fix` y varios archivos de reglas.                                                                                                                                                                                      |
+| `-AX` / `-ANALYZEX`                                                | `te bpa run --rules <file>` (sin `--model-rules`)    | Excluir las reglas incrustadas en el modelo es ahora el comportamiento predeterminado.                                                                                                                                                        |
+| `-B` / `-BIM`                                                      | `te save <model> -o <file.bim> --serialization bim`                     |                                                                                                                                                                                                                                                               |
+| `-F` / `-FOLDER`                                                   | `te save <model> -o <dir> --serialization te-folder`                    | Tras `-D`, el `-F` de TE2 significa `-FULL`. Consulta `--deploy-full`.                                                                                                                                                        |
+| `-TMDL`                                                            | `te save <model> -o <dir> --serialization tmdl`                         | TMDL es el formato de guardado predeterminado.                                                                                                                                                                                                |
+| `-D` / `-DEPLOY`                                                   | `te deploy <server> <database> <model>`                                 | Comando independiente con opciones con nombre.                                                                                                                                                                                                |
+| `-O` / `-OVERWRITE`                                                | (predeterminado) o `--create-only` para no aplicarlo | La sobrescritura es el comportamiento predeterminado en la nueva CLI.                                                                                                                                                                         |
+| `-C` / `-CONNECTIONS`                                              | `te deploy --deploy-connections`                                        |                                                                                                                                                                                                                                                               |
+| `-P` / `-PARTITIONS`                                               | `te deploy --deploy-partitions`                                         |                                                                                                                                                                                                                                                               |
+| `-Y` / `-SKIPPOLICY`                                               | `te deploy --deploy-partitions --skip-refresh-policy`                   | Requiere `--deploy-partitions`.                                                                                                                                                                                                               |
+| `-SHARED`                                                          | `te deploy --deploy-shared-expressions`                                 | Después de `-D`, `-S` en TE2 significa `-SHARED`.                                                                                                                                                                                             |
+| `-R` / `-ROLES`                                                    | `te deploy --deploy-roles`                                              |                                                                                                                                                                                                                                                               |
+| `-M` / `-MEMBERS`                                                  | `te deploy --deploy-role-members`                                       |                                                                                                                                                                                                                                                               |
+| `-FULL` (después de `-D`)                       | `te deploy --deploy-full`                                               | Equivale a: sobrescritura + conexiones + particiones + elementos compartidos + roles + miembros de rol.                                                                                                                       |
+| `-X` / `-XMLA <file>`                                              | `te deploy ... --xmla <file>`                                           | Usa `-` para stdout.                                                                                                                                                                                                                          |
+| `-V` / `-VSTS`                                                     | `--ci vsts` en `validate`, `bpa run`, `deploy`                          | Emite anotaciones `##vso[...]` en stderr.                                                                                                                                                                                                     |
+| `-G` / `-GITHUB`                                                   | `--ci github`                                                           | Emite anotaciones `::error::` / `::warning::`.                                                                                                                                                                                                |
+| `-T` / `-TRX <file>`                                               | `--trx <file>` en `validate`, `bpa run`, `test run`                     | Archivo `.trx` de VSTEST para publicar pruebas en Azure DevOps.                                                                                                                                                                               |
+| `-W` / `-WARN`                                                     | (predeterminado)                                     | Las advertencias siempre se incluyen en el Report de resultados de la implementación.                                                                                                                                                         |
+| `-E` / `-ERR`                                                      | (predeterminado)                                     | La implementación devuelve un código de salida distinto de cero cuando hay errores de DAX.                                                                                                                                                    |
+| `-SC` / `-SCHEMACHECK`                                             | _Aún no se ha implementado._                            | La comprobación del esquema de TE2 se conecta a los Data source reales. A diferencia de `te validate` (validación semántica de DAX, sin conexión al Data source).                                          |
+| `-L` / `-LOGIN <user> <pass>` (después de `-D`) | `te auth login -u <id> -p <secret> -t <tenant>`                         | Usa una entidad de servicio o credenciales basadas en variables de entorno. El inicio de sesión se guarda en caché, así que los comandos posteriores obtienen tokens de forma silenciosa; consulta @te-cli-auth. |
 
-## Migration playbook
+## Guía de migración
 
-The recommended path from a TE2-based pipeline to the new CLI:
+La ruta recomendada para pasar de un pipeline basado en TE2 al nuevo CLI:
 
-1. **Drop-in replacement.** Replace `TabularEditor.exe` with `te` (or `te2`) in your existing pipeline. Verify the pipeline still runs - TE2 compatibility handles most invocations unchanged.
-2. **Replace flags incrementally.** Convert one flag group at a time:
-   - Start with `-A` / `-AX` → `te bpa run` to pick up richer BPA output (`--fail-on`, `--fix`, `--trx`).
-   - Then `-D` → `te deploy` for fine-grained deploy control.
-   - Finally `-V` / `-G` → `--ci vsts` / `--ci github`.
-3. **Switch to non-interactive CI flags.** Add `--non-interactive --ci <vsts|github>` to every `te` command and remove any `start /wait` wrappers - the new CLI is a regular console binary and doesn't need them.
-4. **Adopt service principal auth.** Replace `-D -L <user> <pass>` with `te auth login -u ... -p ... -t ...` or an environment-credential pipeline step. See @te-cli-auth.
+1. **Reemplazo directo.** Sustituye `TabularEditor.exe` por `te` (o `te2`) en tu pipeline actual. Comprueba que el pipeline siga funcionando: la compatibilidad con TE2 mantiene intacta la mayoría de las invocaciones.
+2. **Sustituye las opciones de forma gradual.** Convierte un grupo de opciones cada vez:
+   - Empieza con `-A` / `-AX` → `te bpa run` para obtener una salida de BPA más completa (`--fail-on`, `--fix`, `--trx`).
+   - Después, `-D` → `te deploy` para un control de despliegue más detallado.
+   - Por último, `-V` / `-G` → `--ci vsts` / `--ci github`.
+3. **Cambia a flags de CI no interactivos.** Añade `--non-interactive --ci <vsts|github>` a todos los comandos `te` y elimina cualquier wrapper `start /wait`: el nuevo CLI es un binario de consola estándar y no los necesita.
+4. **Adopta la autenticación con entidad de servicio.** Sustituye `-D -L <user> <pass>` por `te auth login -u ... -p ... -t ...` o un paso del pipeline con credenciales de entorno. Consulta @te-cli-auth.
 
-## Important differences
+## Diferencias importantes
 
-- **BPA gate on deploy.** `te deploy` now runs BPA as a pre-flight gate by default. Use `--skip-bpa` to preserve the old behavior, or `--fix-bpa` to auto-fix violations before deploy. See @te-cli-config.
-- **Interactive confirmation on deploy.** `te deploy` prompts for confirmation by default (with `n` as the safe default answer). CI pipelines must pass `--force`.
-- **Structured output.** Every command supports `--output-format json` for machine-readable output - see @te-cli-automation.
-- **No `start /wait` needed.** The new CLI is a regular console binary; invoke it directly in shell scripts, PowerShell, and CI tasks.
-- **Cross-platform.** The CLI runs on Windows, macOS, and Linux. Local SSAS and Power BI Desktop connections remain Windows-only.
+- **BPA como control previo al despliegue.** `te deploy` ahora ejecuta BPA como comprobación previa de forma predeterminada. Usa `--skip-bpa` para mantener el comportamiento anterior, o `--fix-bpa` para corregir automáticamente los incumplimientos antes del despliegue. Consulta @te-cli-config.
+- **Confirmación interactiva al desplegar.** `te deploy` pide confirmación de forma predeterminada (siendo `n` la respuesta predeterminada segura). Las canalizaciones de CI deben especificar `--force`.
+- **Salida estructurada.** Todos los comandos admiten `--output-format json` para una salida procesable por máquinas; consulta @te-cli-automation.
+- **No hace falta `start /wait`.** La nueva CLI es un binario de consola normal; ejecútalo directamente en scripts de shell, PowerShell y tareas de CI.
+- **Multiplataforma.** La CLI funciona en Windows, macOS y Linux. Las conexiones locales a SSAS y Power BI Desktop siguen estando disponibles solo en Windows.
 
-## Related pages
+## Páginas relacionadas
 
-- @command-line-options - the legacy TE2 command-line reference.
-- @te-cli-commands - the new CLI's full command reference.
-- @te-cli-cicd - pipeline examples for GitHub Actions and Azure DevOps.
+- @command-line-options - la referencia heredada de la línea de comandos de TE2.
+- @te-cli-commands - la referencia completa de comandos de la nueva CLI.
+- @te-cli-cicd - ejemplos de canalizaciones para GitHub Actions y Azure DevOps.
