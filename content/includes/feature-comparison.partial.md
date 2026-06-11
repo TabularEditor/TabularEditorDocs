@@ -6,7 +6,7 @@
 |Undo/redo data modeling operations|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>||
 |Load/save model metadata to disk|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>|
 |Save-to-folder|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>|
-|[daxformatter.com](https://daxformatter.com) integration|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>||
+|Built in DAX Formating||<span class="emoji">&#10004;</span>||
 |Advanced data modeling (OLS, Perspectives, Calculation Groups, Metadata Translations, etc.)|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>\*|<span class="emoji">&#10004;</span>|
 |Syntax highlighting and automatic formula fixup|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>||
 |View DAX dependencies between objects|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
