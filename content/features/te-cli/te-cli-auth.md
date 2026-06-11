@@ -2,7 +2,7 @@
 uid: te-cli-auth
 title: Authentication and Connections
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,7 +24,8 @@ The CLI supports the full Azure Identity credential chain:
 
 | Method | When to use | `--auth` value |
 | -- | -- | -- |
-| Interactive browser | Local development - opens the system browser | `interactive` (default) |
+| Automatic | Tries environment credentials, then cached or interactive browser login | `auto` (default) |
+| Interactive browser | Local development - opens the system browser | `interactive` |
 | Service principal (client secret) | Automation, CI/CD, headless / SSH / WSL | `spn` (with `-u / -p / -t`) or `env` |
 | Service principal (certificate) | Automation with certificate-based auth | `spn` (with `-u / -t / --certificate`) |
 | Environment variables | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID` | `env` |
@@ -53,7 +54,7 @@ echo "$AZURE_CLIENT_SECRET" | te auth login -u "$AZURE_CLIENT_ID" -p - -t "$AZUR
 te auth login -u "$AZURE_CLIENT_ID" -t "$AZURE_TENANT_ID" --certificate ./sp.pfx --certificate-password "$CERT_PASSWORD"
 
 # Managed identity (Azure-hosted)
-te auth login --identity
+te auth login --identity     # Alias: -I
 ```
 
 After a successful service-principal login the CLI **caches the credentials** so every subsequent `te` command can acquire tokens silently - no need to re-pass `-u / -p / -t` or set the `AZURE_CLIENT_*` environment variables. Pass `--save=false` for a one-shot login that doesn't update the cache, or run `te auth logout` to clear it.
@@ -116,7 +117,7 @@ te connect
 te connect --clear
 ```
 
-Active-connection state is per-terminal-session: opening a new terminal starts fresh.
+Active-connection state is per-terminal-session: opening a new terminal starts fresh. Inspect or clean up session state with [`te session`](xref:te-cli-commands#session).
 
 ### Workspace mode (`-w` / `--workspace`)
 

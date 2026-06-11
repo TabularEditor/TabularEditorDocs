@@ -2,7 +2,7 @@
 uid: te-cli-commands
 title: Command Reference
 author: Peer Grønnerup
-updated: 2026-05-12
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -134,6 +134,8 @@ These flags are available on every command and can be used before or after the s
 | `--non-interactive` | Disable all interactive prompts. Fail with an actionable error if required input is missing. |
 | `--debug` | Enable debug logging to stderr (connection strings, auth flow, timing). |
 
+`te --version` prints the CLI version and exits.
+
 For commands that read a model, the resolution order is:
 
 positional `<model>` argument → `--model` global flag → `--server`/`--database` (remote) → active connection from `te connect` → `--recent`.
@@ -185,10 +187,22 @@ te open ./my-model
 
 ### init
 
-Create a new empty semantic model at the given path.
+Create a new empty semantic model at the given path. Defaults to a TMDL model in `PowerBI` compatibility mode at compatibility level 1702.
+
+`te init` accepts:
+
+- `<output-path>` - positional argument: directory to create the model in (omit to use the global `--model` path).
+- `--compatibility-mode <mode>` - `PowerBI` (default) or `AnalysisServices`.
+- `--compatibility-level <N>` (alias `--compat`) - compatibility level. Defaults to `1702` when the mode is `PowerBI`, `1500` otherwise. See @update-compatibility-level.
+- `--name <name>` - model/database name (default: the directory name).
+- `--serialization <fmt>` - `tmdl` (default), `bim`, `te-folder`, `pbip`.
+- `--force` - replace any existing file or directory at the target path.
 
 ```bash
-te init ./new-model
+te init ./new-model                                       # TMDL, PowerBI mode, compat 1702
+te init ./new-model --serialization bim                   # Single-file BIM model
+te init ./as-model --compatibility-mode AnalysisServices  # AS model, compat 1500
+te init ./existing-dir --force                            # Overwrite non-empty directory
 ```
 
 ## Model editing
@@ -324,7 +338,7 @@ Get properties of a model object. Takes a `<path>`.
 `te get` accepts:
 
 - `-q, --query <property>` - fetch a single property (e.g. `expression`, `formatString`).
-- `-t, --type <kind>` - disambiguate when the path matches multiple table-children (e.g. a column and a hierarchy with the same name). Values: `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `Partition`, `CalculationItem`.
+- `-t, --type <kind>` - disambiguate when the path matches multiple table-children (e.g., a column and a hierarchy with the same name). Values: `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `Partition`, `CalculationItem`.
 - `--output-format tmsl` (alias `bim`) - emit the resolved object as TMSL/BIM JSON.
 - `--output-format tmdl` - emit the resolved object as TMDL (named objects only).
 
@@ -374,12 +388,18 @@ Analyze an object's upstream and downstream dependencies, or surface unused obje
 
 `te deps` accepts:
 
+- `--upstream` - show only upstream dependencies (what this object uses).
+- `--downstream` - show only downstream dependents (what uses this object).
+- `--deep` - show the recursive dependency tree instead of direct dependencies only.
+- `--max-depth <N>` - maximum depth for `--deep` traversal (default: `10`).
+- `-t, --type <kind>` - disambiguate when the path matches multiple table-children (e.g., a column and a hierarchy with the same name).
 - `--unused` - list measures, calculated columns, and **all data columns** that no DAX references and that aren't used in any relationship, hierarchy level, sort-by, variation, AlternateOf base, or calendar time role. Each result shows `(hidden)` in text mode and an `isHidden` field in JSON.
 - `--hidden` - narrow `--unused` to hidden objects only. Hidden, unused objects are the safest prune candidates because nothing user-facing depends on them.
 
 ```bash
 te deps Sales/Revenue                     # Upstream + downstream for one object
 te deps "'Sales'[Revenue]"                # DAX form is accepted everywhere a <path> is
+te deps Sales/Revenue --downstream --deep # Everything that depends on Revenue, recursively
 te deps --unused                          # All unused measures and columns
 te deps --unused --hidden                 # Only hidden, unused objects
 ```
@@ -394,10 +414,16 @@ Validate model expressions, schema integrity, and TOM errors.
 
 - `--ci <fmt>` - emit CI annotations to stderr: `vsts` or `github`.
 - `--trx <path>` - write results as a VSTEST `.trx` file.
+- `--errors-only` - shorthand for `--no-warnings --no-antipatterns`: only show errors.
+- `--no-warnings` - hide warnings from the semantic analyzer.
+- `--no-antipatterns` - hide anti-pattern suggestions (DAX best-practice hints).
+- `--server-only` - only show errors reported by the connected server; skip local semantic analysis.
+- `--no-multiline` - collapse multi-line cell content (error messages, expressions) to a single line. Text output only.
 
 ```bash
 te validate ./model
 te validate --ci github --trx results.trx
+te validate --errors-only                 # Hide warnings and anti-pattern hints
 ```
 
 ### bpa run
@@ -545,6 +571,8 @@ Analyze VertiPaq storage statistics.
 `te vertipaq` accepts:
 
 - `--columns`, `--relationships`, `--partitions`, `--all`.
+- `--detail` - show expanded columns (data/dict/hierarchy size breakdown, encoding, segments).
+- `--fields <list>` - comma-separated fields to display (e.g., `--fields name,card,size,%tbl,%db,bar`). Available fields vary by view.
 - `--export <file.vpax>` - export VertiPaq stats to a `.vpax` file for offline analysis.
 - `--import <file.vpax>` - load a previously exported `.vpax` file and analyze it offline.
 - `--obfuscate` - obfuscate names and expressions in exported VPAX.
@@ -565,7 +593,11 @@ Format DAX or M/Power Query expressions.
 
 - `-e, --expression <text>` - format a single inline expression.
 - `-p, --path <path>` - format a specific measure/column.
-- `--lang <dax|m>` - default `dax`.
+- `-t, --type <kind>` - disambiguate when the path matches multiple table-children.
+- `--lang <lang>` - expression language: `dax` (default) or `m`/`pq` for Power Query.
+- `--semicolons` - use semicolons as list separators (European locale).
+- `--long` - use long format (more line breaks). Default is short.
+- `--no-space-after-function` - skip the space after function names.
 - `--save` / `--save-to` - persist formatted expressions.
 
 ```bash
@@ -604,7 +636,7 @@ Execute one or more C# scripts against a semantic model. The CLI uses the same s
 - `-S, --script <file>` - `.cs` / `.csx` file (repeatable).
 - `-e, --expression <code>` - inline C# (use `-` for stdin).
 - `--save` / `--save-to` / `--serialization`.
-- `--dry-run`, `--timeout <seconds>`.
+- `--dry-run` - compile the script(s) and report errors without executing them.
 
 ```bash
 te script --script fix.cs --save
@@ -615,7 +647,7 @@ echo "Info(Model.Name);" | te script -e -
 > [!IMPORTANT]
 > Two behavioral details to know if you're porting an older script:
 >
-> - **No interactive selection in CLI scripts.** The TE3 Desktop helpers `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, and `SelectObjects()` throw `NotSupportedException` when called from `te script` - the CLI has no UI to pop up. Pre-resolve the object(s) outside the script and pass them in, or wrap the call in `try/catch` if the script is shared with TE3.
+> - **No interactive selection in CLI scripts.** The TE3 Desktop helpers `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, and `SelectObjects()` throw `NotSupportedException` when called from `te script` - the CLI has no UI to pop up. Pre-resolve the object(s) outside the script and pass them in via environment variables or stdin, or wrap the call in `try/catch` if the script is shared with TE3.
 > - **Default `using` directives match TE3 Desktop.** Scripts that use `DataTable`, `File`, `StringBuilder`, or `Regex` must include the corresponding `using System.Data;` / `using System.IO;` / `using System.Text;` / `using System.Text.RegularExpressions;` directive explicitly.
 
 > [!NOTE]
@@ -749,7 +781,7 @@ Manage incremental refresh policies on tables.
 te incremental-refresh show <table>
 ```
 
-Additional subcommands (`set`, `remove`, `apply`) are documented via `te incremental-refresh --help`.
+Additional subcommands (`set`, `rm`, `apply`) are documented via `te incremental-refresh --help`.
 
 ## Testing
 
@@ -801,6 +833,7 @@ Pair a primary source with a secondary target so every subsequent `--save` mirro
 - `te connect <ws> <model> -w ./src` - primary is remote; `./src` receives an initial TMDL export and mirrors every save.
 - `te connect ./src -w <ws> <model>` - primary is local; an initial deploy pushes the model to the workspace, and subsequent saves re-deploy automatically.
 - `--workspace-format <bim|tmdl>` - choose the on-disk format when mirroring to a folder/file (e.g., `-w ./model.bim` infers BIM).
+- `--workspace-auth <method>` - auth method for a remote workspace target when the primary is local. Defaults to `--auth` if set, else `auto`.
 - `--force` - required when the target already exists (non-empty folder, existing database). Without it, `te connect` shows an interactive `y/n` prompt with `n` as the safe default.
 
 Once active, `te set --save`, `te rm --save`, `te script --save`, etc. all dual-save transparently. Save order is always **local first, then remote** so the on-disk copy reflects the latest user change even if the server push fails. Clear the mirror with `te connect --clear`.
@@ -859,14 +892,41 @@ te interactive -s MyWorkspace -d MyModel      # Start with a remote model
 
 Quoting and DAX-style references work the same as outside the session - see the [Object paths](#object-paths) section above and @te-cli-interactive for details on bracket-aware argv splitting inside the REPL.
 
+### session
+
+Show or manage the current terminal session. The CLI keeps per-terminal state (active connection, active profile, active test suite) in a session file, isolated per shell process. Set the `TE_SESSION` environment variable to share one named session across shells.
+
+Subcommands:
+
+| Subcommand | Purpose |
+| -- | -- |
+| `show` | Show current session details (ID, file path, active state). Default when no subcommand is given. |
+| `list` | List all session files. |
+| `clear` | Clear active state for the current session. |
+| `prune` | Delete session files whose shell process is no longer running. |
+
+`te session prune` accepts:
+
+- `--all` - also remove sessions with live shells and named (`TE_SESSION`) sessions. The current session is always kept.
+- `--dry-run` - show what would be removed without doing it.
+
+```bash
+te session                        # Show current session details
+te session list                   # List all session files
+te session clear                  # Clear active state for this session
+te session prune                  # Remove sessions whose shell is dead
+te session prune --all --dry-run  # Preview a full cleanup
+```
+
 ### completion
 
-Generate a shell completion script. See @te-cli-install.
+Generate a shell completion script for `bash`, `zsh`, `powershell` (alias `pwsh`) or `fish`. See @te-cli-install.
 
 ```bash
 te completion bash
 te completion zsh
 te completion pwsh
+te completion fish
 ```
 
 ## Exit codes
@@ -874,8 +934,8 @@ te completion pwsh
 | Exit | Meaning |
 | -- | -- |
 | `0` | Success. |
-| `1` | Generic failure (invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity ≥ error). |
-| `2` | Non-zero diff (`te diff`) - models differ. |
+| `1` | Generic failure (invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity ≥ error). For `te diff`: differences found. |
+| `2` | `te diff` only: an error occurred while comparing, so the difference status is unknown. |
 
 For fine-grained control in CI pipelines, combine exit codes with `--ci <vsts/github>` annotations and `--trx` results files - see @te-cli-cicd.
 
