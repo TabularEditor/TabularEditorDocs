@@ -49,6 +49,11 @@
             "_disableContribution": true
         },
         "markdownEngineName": "markdig",
+        "sitemap": {
+            "baseUrl": "https://docs.tabulareditor.com",
+            "changefreq": "weekly",
+            "priority": 0.5
+        },
         "dest": "_site",
         "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ]
     }

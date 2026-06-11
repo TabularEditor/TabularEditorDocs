@@ -152,6 +152,39 @@ def get_default_language(config: dict | None = None) -> str:
     return config.get("defaultLanguage", "en")
 
 
+def get_base_url(config: dict | None = None) -> str:
+    """Get the canonical base URL of the published site, without trailing slash.
+
+    Used for canonical/hreflang tags, per-language sitemap baseUrls, and the
+    site-wide sitemap index. Languages are served under /{code}/ beneath this.
+    """
+    if config is None:
+        config = load_build_config()
+    return config.get("baseUrl", "https://docs.tabulareditor.com").rstrip("/")
+
+
+def get_sitemap_downrank(config: dict | None = None) -> list[dict]:
+    """Get sitemap downrank rules: a list of {match, priority} dicts.
+
+    Each rule lowers the <priority> of sitemap URLs whose path contains the
+    'match' substring. Rules are evaluated in order; the first match wins.
+    """
+    if config is None:
+        config = load_build_config()
+    return config.get("sitemap", {}).get("downrank", [])
+
+
+def get_sitemap_exclude(config: dict | None = None) -> list[dict]:
+    """Get sitemap exclude rules: a list of {match} dicts.
+
+    Each rule removes sitemap URLs whose path contains the 'match' substring.
+    Used to drop legacy Tabular Editor 2-only pages from the published sitemap.
+    """
+    if config is None:
+        config = load_build_config()
+    return config.get("sitemap", {}).get("exclude", [])
+
+
 def compute_file_hash(file_path: Path | str) -> str:
     """Compute SHA256 hash of a file's contents.
     
