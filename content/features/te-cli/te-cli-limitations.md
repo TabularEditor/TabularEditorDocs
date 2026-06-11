@@ -2,7 +2,7 @@
 uid: te-cli-limitations
 title: Known Limitations
 author: Peer Grønnerup
-updated: 2026-05-20
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -27,13 +27,13 @@ The CLI runs C# scripts (`te script`) against the same `Model` object you use in
 
 | Limitation | Notes / Workaround |
 | -- | -- |
-| **`System.Windows.Forms` not loaded** | The CLI uses a cross-platform `TOMWrapper` build that strips all WinForms-coupled code; the WinForms assembly is never loaded into the AppDomain. Scripts that reference `System.Windows.Forms` types (`MessageBox`, `Form`, file pickers, custom dialogs, …) fail to compile. Refactor any UI interaction into script arguments, environment variables, or stdin. |
-| **`Selected.<Plural>` returns an empty enumerable** | `Selected.Tables`, `Selected.Measures`, `Selected.Columns`, `Selected.Hierarchies`, etc. iterate to nothing in the CLI - no compile or runtime error, just no rows. Replace with explicit lookups: `Model.AllMeasures.Where(...)`, `Model.Tables["Sales"].Measures`, or pass object paths via `te script --args`. |
+| **`System.Windows.Forms` not loaded** | The CLI uses a cross-platform `TOMWrapper` build that strips all WinForms-coupled code; the WinForms assembly is never loaded into the AppDomain. Scripts that reference `System.Windows.Forms` types (`MessageBox`, `Form`, file pickers, custom dialogs, …) fail to compile. Refactor any UI interaction into environment variables or stdin input. |
+| **`Selected.<Plural>` returns an empty enumerable** | `Selected.Tables`, `Selected.Measures`, `Selected.Columns`, `Selected.Hierarchies`, etc. iterate to nothing in the CLI - no compile or runtime error, just no rows. Replace with explicit lookups: `Model.AllMeasures.Where(...)`, `Model.Tables["Sales"].Measures`, or pass object paths into the script via environment variables or stdin. |
 | **`Selected.<Singular>` throws an error at runtime** | `Selected.Table`, `Selected.Measure`, `Selected.Column`, `Selected.Hierarchy`, etc. return an error because they require exactly one selected object of that type and the CLI selection is always empty. Reference the object directly - e.g. `Model.Tables["Sales"]`. |
 | **`Selected.ActivePerspectives` and `Selected.ActiveCulture`** | Always return an empty collection and `null` respectively. Set the perspective or culture explicitly in the script if needed. |
-| **`Select<Object>` dialogs throw `NotSupportedException`** | `SelectTable`, `SelectColumn`, `SelectMeasure`, `SelectObject`, `SelectObjects` (and all overloads) return the following error: *"Object selection dialogs … are not available in CLI scripts. Pre-select the object by name or path before scripting."* Resolve targets up front from script arguments, config, or by querying the model. |
+| **`Select<Object>` dialogs throw `NotSupportedException`** | `SelectTable`, `SelectColumn`, `SelectMeasure`, `SelectObject`, `SelectObjects` (and all overloads) return the following error: *"Object selection dialogs … are not available in CLI scripts. Pre-select the object by name or path before scripting."* Resolve targets up front from environment variables, config, or by querying the model. |
 | **`Info` / `Warning` / `Error` / `Output` write to the console** | These still work, but route to stdout/stderr instead of opening a dialog. They never block and never offer an "ignore further popups" prompt. Safe to use in CI. |
-| **`ShowPrompt(...)` always returns `Cancel`** | No interactive confirmation is possible. Pre-decide the answer via script arguments or configuration. |
+| **`ShowPrompt(...)` always returns `Cancel`** | No interactive confirmation is possible. Pre-decide the answer via environment variables or configuration. |
 | **`SuspendWaitForm` / `WaitFormVisible` are no-ops** | The "Please wait" spinner is a TE3 UI element. `WaitFormVisible` is a settable flag with no visual effect, and `SuspendWaitForm` is silently ignored - existing scripts continue to compile. |
 | **`host.Macro(...)` / `CustomAction(...)` throws and error** | The CLI does not load `%APPDATA%/TabularEditor3/MacroActions.json`, so invoking a macro from inside a script returns an error. Inline the macro logic, or call the macro's underlying script file directly. |
 | **`table.GetCardinality()` / `column.GetTotalSize()` return 0** | The in-script VertiPaq cardinality helpers have no live VPA in the CLI host. For VPA statistics, load a VPAX explicitly and use `host.Vpa.*`, or run [`te vertipaq`](xref:te-cli-commands#vertipaq). |

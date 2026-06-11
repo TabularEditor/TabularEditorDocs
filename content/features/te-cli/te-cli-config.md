@@ -2,7 +2,7 @@
 uid: te-cli-config
 title: Custom Configuration
 author: Peer Grønnerup
-updated: 2026-04-20
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -247,7 +247,7 @@ Use the following CLI-specific environment variables for paths, behavior, and di
 | `TE_DEBUG` | Set to `1` to enable debug logging globally (same as `--debug` or `debug: true` in config). |
 | `NO_SPINNER` | Set to `1` or `true` to disable animated progress indicators (alternative to `spinner: false` in config). |
 | `CI` | Auto-detected. When `1` or `true`, the CLI disables the spinner and switches to plain output. Most CI runners set this automatically. |
-| `TE_SESSION` | Override the per-terminal session ID used for active-connection state. Useful for running multiple isolated CLI sessions inside the same shell, e.g. in parallel CI matrix jobs. |
+| `TE_SESSION` | Override the per-terminal session ID used for active-connection state. Useful for running multiple isolated CLI sessions inside the same shell, e.g. in parallel CI matrix jobs. Inspect and manage sessions with [`te session`](xref:te-cli-commands#session). |
 | `TE_COMPAT` | Set to `te2` to force TE2-compatibility mode - see @te-cli-migrate. |
 
 ## Related pages

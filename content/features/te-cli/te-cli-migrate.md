@@ -2,7 +2,7 @@
 uid: te-cli-migrate
 title: Migrating from the TE2 Command Line
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -59,7 +59,7 @@ A non-exhaustive summary of the most commonly used flags. Run `te migrate` for t
 | `file` (positional) | `te <command> <path>` or global `--model` | First positional arg on most commands. |
 | `server`, `database` | `te connect <server>` or `te deploy <server> <database>` | Server is no longer a global positional. |
 | `-L` / `-LOCAL` | `te connect --local` | Windows only. |
-| `-S` / `-SCRIPT` | `te script -s <file.csx>` or `-e "code"` | Supports multiple scripts, inline code, and stdin. |
+| `-S` / `-SCRIPT` | `te script -S <file.csx>` or `-e "code"` | Supports multiple scripts, inline code, and stdin. Note: uppercase `-S` - lowercase `-s` is the global `--server` option. |
 | `-A` / `-ANALYZE` | `te bpa run --rules <file-or-url>` | Supports `--fail-on`, `--fix`, multiple rule files. |
 | `-AX` / `-ANALYZEX` | `te bpa run --rules <file>` (without `--model-rules`) | Excluding model-embedded rules is the new default. |
 | `-B` / `-BIM` | `te save <model> -o <file.bim> --serialization bim` | |
