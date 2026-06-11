@@ -19,6 +19,8 @@ import os
 import sys
 import traceback
 
+from config_loader import get_base_url, get_default_language
+
 
 def get_available_languages() -> list[str]:
     """Scan localizedContent/ folder and return list of language codes (excluding 'en')."""
@@ -69,6 +71,10 @@ def generate_localized_config(template: dict, lang: str) -> dict:
     # Set output destination to language subfolder (relative to project root)
     # From localizedContent/{lang}/, we go up twice to reach project root
     build["dest"] = f"../../_site/{lang}"
+
+    # The published sitemap covers the default (English) language only, so
+    # non-default languages do not emit their own sitemap.xml.
+    build.pop("sitemap", None)
     
     # Update template paths - need to go up two levels to reach project root
     if "template" in build:
@@ -112,6 +118,10 @@ def generate_redirects_config(template: dict) -> dict:
 
     # Set English output destination (relative to localizedContent/en/)
     config["build"]["dest"] = "../../_site/en"
+
+    # Point the sitemap at the default language's URL prefix
+    if "sitemap" in config["build"]:
+        config["build"]["sitemap"]["baseUrl"] = f"{get_base_url()}/{get_default_language()}"
 
     # Update template paths - need to go up two levels to reach project root
     if "template" in config["build"]:
