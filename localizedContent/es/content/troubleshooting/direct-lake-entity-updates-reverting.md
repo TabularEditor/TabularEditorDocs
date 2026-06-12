@@ -55,7 +55,7 @@ Power BI vincula las tablas Direct Lake a su origen mediante la propiedad `Sourc
 - El indicador `ChangedProperties` solo es necesario en tablas Direct Lake (y otras tablas compuestas); los modelos heredados en Import mode no lo requieren.
 - Estos comportamientos se deben a las reglas de sincronización de metadatos de Power BI, no al almacenamiento de TE3.
 
-## Automatiza actualizaciones masivas con C\#
+## Automatiza actualizaciones masivas con C\\#
 
 Cuando tienes muchas tablas Direct Lake que ajustar, puedes ejecutar el siguiente script de TE3. Te pide nuevos nombres de entidad, actualiza cada tabla seleccionada, sincroniza el `SourceLineageTag` y marca los metadatos modificados.
 
