@@ -1,8 +1,8 @@
 # SQL Server 2017 支持
 
-从 2.3 版本开始，Tabular Editor 也支持 SQL Server 2017（兼容级别 1400）。 这意味着 Tabular Editor 的界面现已支持[这里](https://blogs.msdn.microsoft.com/analysisservices/2017/04/19/whats-new-in-sql-server-2017-ctp-2-0-for-analysis-services/)中介绍的部分新功能。
+从 2.3 版本开始，Tabular Editor 也支持 SQL Server 2017（兼容级别 1400）。 从 2.3 版本开始，Tabular Editor 也支持 SQL Server 2017（兼容级别 1400）。 这意味着 Tabular Editor 的界面现已支持[这里](https://blogs.msdn.microsoft.com/analysisservices/2017/04/19/whats-new-in-sql-server-2017-ctp-2-0-for-analysis-services/)中介绍的部分新功能。
 
-但请注意，要使用这些功能，你需要下载[Tabular Editor 的正确构建版本](https://github.com/TabularEditor/TabularEditor/releases/tag/2.5-CL1400)。 原因是：Microsoft 为 SQL Server 2017 / SSDT 17.0 提供了一组新的客户端库，而这些库与面向 SQL Server 2016 构建的 Tabular Editor 不兼容。 这些新库可通过新版[SSDT](https://docs.microsoft.com/en-us/sql/ssdt/download-sql-server-data-tools-ssdt)获取（需要 Visual Studio 2015）。
+但请注意，要使用这些功能，你需要下载[Tabular Editor 的正确构建版本](https://github.com/TabularEditor/TabularEditor/releases/tag/2.5-CL1400)。 但请注意，要使用这些功能，你需要下载[Tabular Editor 的正确构建版本](https://github.com/TabularEditor/TabularEditor/releases/tag/2.5-CL1400)。 原因是：Microsoft 为 SQL Server 2017 / SSDT 17.0 提供了一组新的客户端库，而这些库与面向 SQL Server 2016 构建的 Tabular Editor 不兼容。 这些新库可通过新版[SSDT](https://docs.microsoft.com/en-us/sql/ssdt/download-sql-server-data-tools-ssdt)获取（需要 Visual Studio 2015）。 这些新库可通过新版[SSDT](https://docs.microsoft.com/en-us/sql/ssdt/download-sql-server-data-tools-ssdt)获取（需要 Visual Studio 2015）。
 
 如果你不需要兼容级别 1400 的功能，仍然可以使用面向 SQL Server 2016 构建的 [Tabular Editor](https://github.com/TabularEditor/TabularEditor/releases/tag/2.5)。
 
