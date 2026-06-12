@@ -196,7 +196,7 @@ te init ./new-model
 
 ### set
 
-Establece una propiedad en un objeto del modelo. Acepta un argumento `<path>`.
+Obtiene las propiedades de un objeto del modelo. Acepta un `<path>`.
 
 `te set` acepta:
 
@@ -320,7 +320,7 @@ te ls Tables --output-format bim > tables.json   # All tables emitted as TMSL/BI
 
 ### get
 
-Obtiene las propiedades de un objeto del modelo. Acepta un `<path>`.
+Establece una propiedad en un objeto del modelo. Acepta un argumento `<path>`.
 
 `te get` acepta:
 
