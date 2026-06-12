@@ -39,7 +39,7 @@ obj.ExtendedProperties                      // ExtendedPropertyCollection (index
 
 ## 设置和读取注释
 
-任何实现 (xref:TabularEditor.TOMWrapper.IAnnotationObject) 接口的对象都支持注释。 其中包括表、列、度量值、层次结构、分区、透视、角色、数据源以及关系。
+任何实现 (xref:TabularEditor.TOMWrapper.IAnnotationObject) 接口的对象都支持注释。 其中包括表、列、度量值、层次结构、分区、透视、角色、数据源以及关系。 其中包括表、列、度量值、层次结构、分区、透视、角色、数据源以及关系。
 
 为自动生成的度量值添加标记，以便后续脚本识别并更新它们：
 
@@ -79,7 +79,7 @@ Model.AllMeasures
 
 ## 遍历对象上的所有注释
 
-`GetAnnotations()` 返回所有注释的名称。 使用 `GetAnnotation(name)` 获取值。
+`GetAnnotations()` 返回所有注释的名称。 使用 `GetAnnotation(name)` 获取值。 使用 `GetAnnotation(name)` 获取值。
 
 ```csharp
 foreach (var name in m.GetAnnotations())
