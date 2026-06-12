@@ -163,6 +163,7 @@ applies_to:
 Tabular Editor 3 支持通过重新绑定现有快捷键或添加新快捷键来自定义快捷键。
 
 可通过 **工具 -> 偏好设置 -> 键盘** 来设置快捷键：找到需要绑定快捷键的命令，然后在界面中设置相应绑定。
+可通过 **工具 -> 偏好设置 -> 键盘** 来设置快捷键：找到需要绑定快捷键的命令，然后在界面中设置相应绑定。
 Tabular Editor 3 的许多部分都可以设置快捷键，包括 [宏](xref:creating-macros)，让 C# Script 触手可及。
 
 ![Dax 脚本](~/content/assets/images/SetShortcuts.png)
