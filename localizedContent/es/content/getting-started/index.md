@@ -1,7 +1,8 @@
 ---
 uid: onboarding-te3
 title: Te damos la bienvenida
-author: Daniel Otykier
+author: Morten Lønskov
+updated: 2026-05-19
 ---
 
 # Te damos la bienvenida
@@ -21,46 +22,59 @@ Como este material de formación se centra en el producto Tabular Editor, asumim
 
 **Temas tratados en esta guía:**
 
-- @general-introduction
-  - @installation-activation-basic
-  - @migrate-from-vs
-  - @migrate-from-desktop
-  - @migrate-from-te2
+**Primeros pasos con Tabular Editor 3**
 
+- @general-introduction
 - @getting-started
-  - @editions
-  - @training-telearn
+- @installation-activation-basic
+- @migrate-from-vs
+- @migrate-from-desktop
+- @migrate-from-te2
+- @azure-marketplace
+- @editions
+- @training-telearn
+
+**Tabular Editor 2**
 
 - @getting-started-te2
 
+**Power BI Desktop y Tabular Editor**
+
 - @desktop-integration
-  - @desktop-limitations
+- @desktop-limitations
+
+Daniel Otykier
 
 - @user-interface
-  - @bpa-view
-  - @data-refresh-view
-  - @find-replace
-  - @macros-view
-  - @messages-view
-  - @properties-view
-  - @tom-explorer-view
-  - @diagram-view
+- @bpa-view
+- @data-refresh-view
+- @find-replace
+- @macros-view
+- @messages-view
+- @properties-view
+- @tom-explorer-view
+- @diagram-view
+
+**Desarrollo paralelo**
 
 - @parallel-development
-  - @optimizing-workflow-workspace-mode
+- @optimizing-workflow-workspace-mode
+
+**Crea modelos más rápido con Tabular Editor**
 
 - @boosting-productivity-te3
-  - @importing-tables-data-modeling
-  - @refresh-preview-query
-  - @creating-and-testing-dax
-  - @dax-script-introduction
-  - @bpa
-  - @cs-scripts-and-macros
-  - @personalizing-te3
+- @importing-tables-data-modeling
+- @refresh-preview-query
+- @creating-and-testing-dax
+- @dax-script-introduction
+- @bpa
+- @cs-scripts-and-macros
+- @personalizing-te3
 
 **Recursos adicionales:**
 
 - [Documentación de referencia de TE3](xref:getting-started)
+- [Instalación y activación avanzadas](xref:installation-activation-basic)
 - [Descargar Tabular Editor](https://tabulareditor.com/download)
 - [Tabular Editor Learn](https://tabulareditor.com/learn)
 - [Soporte dedicado (solo para clientes de la Edición Enterprise)](mailto:support@tabulareditor.com)
