@@ -26,7 +26,7 @@ applies_to:
 **通过调整刷新策略属性来更改增量刷新。** 具体要更改哪一项，就调整相应的属性。 这些属性的完整概览见[此处](xref:incremental-refresh-about#overview-of-all-properties)。
 
 > [!IMPORTANT]
-> 在 Tabular Editor 3 中配置增量刷新仅限于托管在 Power BI Datasets 服务中的 Dataset。 对于 Analysis Services，必须进行自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
+> 在 Tabular Editor 3 中配置增量刷新仅限于托管在 Power BI Datasets 服务中的 Dataset。 对于 Analysis Services，必须进行自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。 对于 Analysis Services，必须进行自定义[分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ---
 
@@ -42,7 +42,7 @@ applies_to:
 
     <img src="~/content/assets/images/tutorials/Incremental-refresh-properties.png" class="noscale" alt="Properties of Incremental Refresh" style="width:704px !important"/>
 
-4. **更改属性：** 根据要更改的内容，在下方各节中修改指定的 **Property**。 有关所有刷新策略属性及其作用的概览，请参阅[此处](xref:incremental-refresh-about#overview-of-all-properties)。
+4. **更改属性：** 根据要更改的内容，在下方各节中修改指定的 **Property**。 **更改属性：** 根据要更改的内容，在下方各节中修改指定的 **Property**。 有关所有刷新策略属性及其作用的概览，请参阅[此处](xref:incremental-refresh-about#overview-of-all-properties)。
 
 5. **应用更改：** 部署模型更改。
 
@@ -62,7 +62,7 @@ applies_to:
 
 **目的：** 增加或减少模型中的数据量。
 
-**属性：** <span style="color:#BC4A47">_RollingWindowPeriods_</span>。 增大该值可扩展窗口（更多数据）；减小该值可缩小窗口（更少数据）。
+**属性：** <span style="color:#BC4A47">_RollingWindowPeriods_</span>。 增大该值可扩展窗口（更多数据）；减小该值可缩小窗口（更少数据）。 增大该值可扩展窗口（更多数据）；减小该值可缩小窗口（更少数据）。
 
 **注意：** 你也可以更改 <span style="color:#BC4A47">_RollingWindowGranularity_</span> 来进行更细粒度的选择，例如从 3 年改为 36 个月。
 
@@ -76,7 +76,7 @@ applies_to:
 
 **目的：** 在计划刷新操作中，增加或减少要刷新的数据量。
 
-**属性：** <span style="color:#455C86">_IncrementalWindowPeriods_</span>。 增大该值可扩展窗口（更多数据）；减小该值可缩小窗口（更少数据）。
+**属性：** <span style="color:#455C86">_IncrementalWindowPeriods_</span>。 增大该值可扩展窗口（更多数据）；减小该值可缩小窗口（更少数据）。 增大该值可扩展窗口（更多数据）；减小该值可缩小窗口（更少数据）。
 
 **注意：** 你也可以更改 <span style="color:#455C86">_IncrementalWindowGranularity_</span> 来进行更细粒度的选择，例如从 3 年改为 36 个月。
 
@@ -90,7 +90,7 @@ applies_to:
 
 **目的：** 从 <span style="color:#BC4A47">滚动窗口</span> 中排除不完整（未完成）的周期
 
-**属性：** <span style="color:#455C86">_IncrementalWindowPeriodsOffset_</span>。 将值设为 `-1`，即可将周期偏移 1，从而排除当前周期。
+**属性：** <span style="color:#455C86">_IncrementalWindowPeriodsOffset_</span>。 将值设为 `-1`，即可将周期偏移 1，从而排除当前周期。 将值设为 `-1`，即可将周期偏移 1，从而排除当前周期。
 
 **注意：** 你还可以进一步偏移该窗口，例如只刷新最近一个完整周期之前的那些周期。
 
@@ -158,7 +158,7 @@ in
 5. 按住 Shift 键并单击以选择所有分区。 右键单击，然后选择 _刷新 > 完全刷新（分区）_。 你可以右键单击该表并选择 _“预览数据”_ 来查看结果。
 
 > [!WARNING]
-> 如果某个值等于该列中的最大值，则相关记录都会更新。 并不一定会因为该值发生变化而更新，也不一定会因为该值等于刷新日期而更新。
+> 如果某个值等于该列中的最大值，则相关记录都会更新。 并不一定会因为该值发生变化而更新，也不一定会因为该值等于刷新日期而更新。 并不一定会因为该值发生变化而更新，也不一定会因为该值等于刷新日期而更新。
 
 <br></br>
 
@@ -196,10 +196,10 @@ Selected.Table.ApplyRefreshPolicy(effectiveDate);
 
 **注意：** 要禁用增量刷新，按以下步骤操作：
 
-1. **复制 _源表达式_：** 选中表后，在 _表达式编辑器_ 窗口中，从左上角下拉列表选择 _源表达式_。 将 _源表达式_ 复制到单独的文本编辑器窗口中。
+1. **复制 _源表达式_：** 选中表后，在 _表达式编辑器_ 窗口中，从左上角下拉列表选择 _源表达式_。 **复制 _源表达式_：** 选中表后，在 _表达式编辑器_ 窗口中，从左上角下拉列表选择 _源表达式_。 将 _源表达式_ 复制到单独的文本编辑器窗口中。
 2. **禁用刷新策略：** 将 _EnableRefreshPolicy_ 更改为 `False`
 3. **移除所有 Policy Range 分区：** 选择并删除所有 Policy Range 分区
-4. **创建新的 M 分区：** 右键单击表，然后选择 _创建 > 新建分区_。 将分区的 _kind_ 属性设置为 `M`。
+4. **创建新的 M 分区：** 右键单击表，然后选择 _创建 > 新建分区_。 将分区的 _kind_ 属性设置为 `M`。 将分区的 _kind_ 属性设置为 `M`。
 5. **粘贴 _源表达式_：** 选中新分区后，将 **步骤 6** 中的 _源表达式_ 复制到 _表达式编辑器_，并将其作为 _M 表达式_ 粘贴。
 6. **应用更改：** 部署模型的更改。
 7. **刷新表：** 选中表格并右键单击。 选择 _刷新 > 完全刷新（表）_。 你可以右键单击表格，并选择 _“预览数据”_ 来查看结果。
