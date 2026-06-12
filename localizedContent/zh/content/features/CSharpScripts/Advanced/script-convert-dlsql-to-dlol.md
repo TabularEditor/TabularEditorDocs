@@ -15,11 +15,11 @@ applies_to:
 
 ## 脚本用途
 
-此脚本会将使用 Direct Lake on SQL (DL/SQL) 的模型转换为 Direct Lake on OneLake (DL/OL)。 如 [Direct Lake 指南文章](xref:direct-lake-guidance) 所述，这只需更新模型中 Direct Lake 分区使用的共享表达式上的 M 查询，使其使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) 连接器，而不是 [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database) 连接器。
+此脚本会将使用 Direct Lake on SQL (DL/SQL) 的模型转换为 Direct Lake on OneLake (DL/OL)。 如 [Direct Lake 指南文章](xref:direct-lake-guidance) 所述，这只需更新模型中 Direct Lake 分区使用的共享表达式上的 M 查询，使其使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) 连接器，而不是 [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database) 连接器。 如 [Direct Lake 指南文章](xref:direct-lake-guidance) 所述，这只需更新模型中 Direct Lake 分区使用的共享表达式上的 M 查询，使其使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake) 连接器，而不是 [`Sql.Database`](https://learn.microsoft.com/en-us/powerquery-m/sql-database) 连接器。
 
 ## 先决条件
 
-你需要 **Workspace ID**，以及 Fabric Warehouse 或 Lakehouse 的 **Resource ID**。 这两个值都是 GUID，在 Fabric 门户中导航到 Warehouse 或 Lakehouse 时，它们会出现在 URL 中：
+你需要 **Workspace ID**，以及 Fabric Warehouse 或 Lakehouse 的 **Resource ID**。 这两个值都是 GUID，在 Fabric 门户中导航到 Warehouse 或 Lakehouse 时，它们会出现在 URL 中： 这两个值都是 GUID，在 Fabric 门户中导航到 Warehouse 或 Lakehouse 时，它们会出现在 URL 中：
 
 ![Lakehouse 和 Warehouse 的 URL](~/content/assets/images/lakehouse-warehouse-url.png)
 
@@ -150,6 +150,6 @@ public class UrlNameDialog : Form
 
 该脚本首先会尝试定位一个配置为 Direct Lake 模式且具有 Expression Source（指向 Shared Expression 的引用）的 EntityPartition 分区。 如果找不到此类分区，脚本会显示一条警告信息并退出。 此外，被引用的共享表达式必须指定 `Sql.Database` 连接器，这表明该模型当前正在使用 Direct Lake on SQL。
 
-脚本确认模型使用 Direct Lake on SQL 后，会提示用户输入 Fabric Warehouse 或 Lakehouse 的 **Workspace ID** 和 **Resource ID**。 随后，脚本会在共享表达式中将 `Sql.Database` 连接器替换为 `AzureStorage.DataLake` 连接器，并使用所提供的 ID。
+脚本确认模型使用 Direct Lake on SQL 后，会提示用户输入 Fabric Warehouse 或 Lakehouse 的 **Workspace ID** 和 **Resource ID**。 脚本确认模型使用 Direct Lake on SQL 后，会提示用户输入 Fabric Warehouse 或 Lakehouse 的 **Workspace ID** 和 **Resource ID**。 随后，脚本会在共享表达式中将 `Sql.Database` 连接器替换为 `AzureStorage.DataLake` 连接器，并使用所提供的 ID。
 
-最后，如果模型已设置排序规则，脚本会将其清除，因为此更改需要新的排序规则。 随后，脚本会通知用户，该模型已成功转换为 OneLake 上的 Direct Lake。
+最后，如果模型已设置排序规则，脚本会将其清除，因为此更改需要新的排序规则。 最后，如果模型已设置排序规则，脚本会将其清除，因为此更改需要新的排序规则。 随后，脚本会通知用户，该模型已成功转换为 OneLake 上的 Direct Lake。
