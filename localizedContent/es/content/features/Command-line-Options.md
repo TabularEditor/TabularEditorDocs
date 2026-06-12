@@ -1,6 +1,6 @@
 ---
 uid: command-line-options
-title: Línea de comandos
+title: Línea de comandos (Tabular Editor 2)
 author: Daniel Otykier
 updated: 2021-08-26
 applies_to:
@@ -11,7 +11,10 @@ applies_to:
       none: true
 ---
 
-# Línea de comandos
+# Línea de comandos (Tabular Editor 2)
+
+> [!TIP]
+> ¿Busca la nueva CLI multiplataforma? Consulte @te-cli para obtener la CLI de Tabular Editor (versión preliminar pública limitada), su sucesora que se ejecuta en Windows, macOS y Linux.
 
 Tabular Editor se puede ejecutar desde la línea de comandos para realizar diversas tareas, lo que puede ser útil en escenarios de compilación e implementación automatizadas, etc.
 
@@ -316,9 +319,9 @@ La línea de comandos proporciona varios detalles, en función de los parámetro
 | Error       | -ANALYZE                        | No se encontró el archivo de reglas: ...               |                                                                                                                                                                                                                                                          |
 | Error       | -ANALYZE                        | Archivo de reglas no válido: ...                       | El archivo de reglas de BPA especificado está dañado o no contiene un JSON válido.                                                                                                                                                       |
 | Información | -ANALYZE                        | ... viola la regla ... | Resultados del Best Practice Analyzer para reglas con un nivel de gravedad de 1 o inferior.                                                                                                                                              |
-| Advertencia | -ANALYZE                        | ... viola la regla ... | Resultados del Best Practice Analyzer para reglas con un nivel de gravedad de 2.                                                                                                                                                         |
+| Advertencia | -ANALYZE                        | ... ¡Falló el despliegue!                                              | Resultados del Best Practice Analyzer para reglas con un nivel de gravedad de 2.                                                                                                                                                         |
 | Error       | -ANALYZE                        | ... viola la regla ... | Resultados del Best Practice Analyzer para reglas con un nivel de gravedad de 3 o superior.                                                                                                                                              |
-| Error       | -DEPLOY                         | ¡Falló el despliegue! ...                                              | Motivo del fallo devuelto directamente por la instancia de Analysis Service (por ejemplo: base de datos no encontrada, no se permite sobrescribir la base de datos, etc.)                             |
+| Error       | -DEPLOY                         | viola la regla ... ... | Motivo del fallo devuelto directamente por la instancia de Analysis Service (por ejemplo: base de datos no encontrada, no se permite sobrescribir la base de datos, etc.)                             |
 | Información | -DEPLOY                         | Objeto sin procesar: ...                               | Objetos que están en el estado "NoData" o "CalculationNeeded" tras una implementación correcta. Utilice el modificador -W para tratarlos como Nivel=Advertencia.                                                         |
 | Advertencia | -DEPLOY                         | El objeto no está en estado "Ready": ...               | Objetos que se encuentran en estado "DependencyError", "EvaluationError" o "SemanticError" después de un despliegue correcto. Si usa la opción -W, también incluye los objetos en estado "NoData" o "CalculationNeeded". |
 | Advertencia | -DEPLOY                         | Error en X:...                                         | Objetos que contienen DAX no válido después de un despliegue correcto (medidas, columnas calculadas, tablas calculadas, roles). Use la opción -E para tratarlos como Level=Error.                     |
