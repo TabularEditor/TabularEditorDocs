@@ -23,7 +23,7 @@ applies_to:
 
 ---
 
-**通过调整为表定义的角色或表格权限即可更改 RLS。** 在特定角色中选择某个表格权限时，可在“表达式编辑器”窗口中查看此 DAX _筛选表达式_。 此筛选表达式是 RLS 配置中最关键的部分，用于决定用户能看到哪些数据。
+**通过调整为表定义的角色或表格权限即可更改 RLS。** 在特定角色中选择某个表格权限时，可在“表达式编辑器”窗口中查看此 DAX _筛选表达式_。 此筛选表达式是 RLS 配置中最关键的部分，用于决定用户能看到哪些数据。 此筛选表达式是 RLS 配置中最关键的部分，用于决定用户能看到哪些数据。
 
 ---
 
@@ -40,7 +40,7 @@ _下面概述了对现有 RLS 常见的一些修改：_
 
 ---
 
-### 1。 删除角色
+### 1。 1。 删除角色
 
 要从模型中删除角色，只需选中角色对象后按 `Del`，或右键并选择“删除”。
 
@@ -53,7 +53,7 @@ _下面概述了对现有 RLS 常见的一些修改：_
 
 ---
 
-### 2。 添加新角色
+### 2。 2。 添加新角色
 
 要在模型中添加角色：
 
@@ -74,16 +74,16 @@ _下面概述了对现有 RLS 常见的一些修改：_
 
 ---
 
-### 3。 移除 RLS
+### 3。 3。 移除 RLS
 
-要从模型中移除 RLS，必须删除所有表格权限。 要从模型中移除数据安全性，必须删除所有角色。
+要从模型中移除 RLS，必须删除所有表格权限。 要从模型中移除数据安全性，必须删除所有角色。 要从模型中移除数据安全性，必须删除所有角色。
 
 > [!NOTE]
 > 删除所有角色后，只要用户对 Dataset 具有 _Read_ 权限，就能看到所有数据。
 
 ---
 
-### 4。 修改表格权限
+### 4。 4。 修改表格权限
 
 要修改某个角色的现有表格权限：
 
@@ -100,10 +100,11 @@ _下面概述了对现有 RLS 常见的一些修改：_
 - 在 `ADDCOLUMNS` 语句中，将其作为 Expression，用于遍历某个表或其子集。
 - 执行并观察结果。
 - 在动态 RLS 中，将 `USERNAME()` 或 `USERPRINCIPALNAME()` 替换为安全表中的已知值。
-- 重新运行 DAX 查询，并验证结果是否符合预期。 重复以上步骤，直到满意为止。
+- 重新运行 DAX 查询，并验证结果是否符合预期。 重复以上步骤，直到满意为止。 重复以上步骤，直到满意为止。
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/data-security/data-security-rls-validation.png" alt="Data Security Validation" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 5：</strong>演示如何在 DAX 查询窗口中，通过在针对表（或表的一部分，例如用户别名）的迭代器中使用 FILTER 筛选表达式来验证 RLS。 在此示例中，表格权限中的原始 RLS Filter Expression 已被修改 (Yellow)，改为在 dataset 中显式添加用户主体名称，以进行测试 (Green)。 RLS 代码在 ADDCOLUMNS 迭代器中执行，该迭代器遍历表中相关的部分。 勾号表示计算结果为 TRUE 的行。 该测试表明：对于此 UPN，RLS 按预期运行，因为在提供该 UPN 时，只有 <i>Gal Aehad</i> 返回 TRUE。</figcaption>
+ 在此示例中，表格权限中的原始 RLS Filter Expression 已被修改 (Yellow)，改为在 dataset 中显式添加用户主体名称，以进行测试 (Green)。 RLS 代码在 ADDCOLUMNS 迭代器中执行，该迭代器遍历表中相关的部分。 勾号表示计算结果为 TRUE 的行。 该测试表明：对于此 UPN，RLS 按预期运行，因为在提供该 UPN 时，只有 <i>Gal Aehad</i> 返回 TRUE。</figcaption>
 </figure>
 
 ```dax
@@ -138,7 +139,7 @@ ORDER BY [@RLS-Validation] DESC
 
 ---
 
-### 5。 为角色添加新的表格权限
+### 5。 5。 为角色添加新的表格权限
 
 要添加新的表格权限：
 
@@ -146,20 +147,21 @@ ORDER BY [@RLS-Validation] DESC
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/data-security/data-security-table-permissions.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 6：</strong>在 Tabular Editor 中，RLS 的表格权限显示在角色下。 通过右键单击角色并选择 <i>“添加表分区...”</i> 即可创建新的表格权限。</figcaption>
+ 通过右键单击角色并选择 <i>“添加表分区...”</i> 即可创建新的表格权限。</figcaption>
 </figure>
 
 2. **选择表并点击“确定”：** 选择要为其创建权限的表。
-3. **编写 FILTER 筛选表达式 / RLS 表格权限：** 为 FILTER 筛选表达式编写 DAX。 同上，你需要验证此筛选表达式（见 **图 5**）：
+3. **编写 FILTER 筛选表达式 / RLS 表格权限：** 为 FILTER 筛选表达式编写 DAX。 同上，你需要验证此筛选表达式（见 **图 5**）： 同上，你需要验证此筛选表达式（见 **图 5**）：
 
 - 将 FILTER 筛选表达式复制到新的 DAX 查询窗口，并放在 `EVALUATE` 语句下。
 - 将其作为 `ADDCOLUMNS` 语句的表达式，并对表或表的一部分进行迭代。
 - 执行并查看结果。
 - 将动态 RLS 中的 `USERNAME()` 或 `USERPRINCIPALNAME()` 替换为安全表中的已知值。
-- 重新运行 DAX 查询，并验证结果是否符合预期。 重复以上步骤，直到满意为止。
+- 重新运行 DAX 查询，并验证结果是否符合预期。 重复以上步骤，直到满意为止。 重复以上步骤，直到满意为止。
 
 ---
 
-### 6。 为角色分配或移除用户
+### 6。 6。 为角色分配或移除用户
 
 你可以在 Tabular Editor 中为角色分配或移除用户/组。
 
@@ -167,6 +169,7 @@ ORDER BY [@RLS-Validation] DESC
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/data-security/data-security-edit-members.png" alt="Data Security Create Role" style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 7：</strong>通过右键单击某个角色并选择<i>“编辑成员……”</i>即可将用户分配到该角色</figcaption>
+</figcaption>
 </figure>
 
 2. 在“添加 Windows AD 成员”按钮上单击__下拉按钮__，然后选择__Azure AD 成员__：
@@ -183,6 +186,6 @@ ORDER BY [@RLS-Validation] DESC
 > 如果您的组织在 SQL Server Analysis Services 中使用本地 Active Directory，则需要使用__Windows AD 成员__选项，而不是__Azure AD 成员__。
 
 > [!NOTE]
-> 将 Power BI Dataset 发布到 Power BI 服务后，您还可以通过[Dataset 安全设置](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#manage-security-on-your-model)来管理角色成员。 此外，您还可以通过 [SQL Server Management Studio](https://learn.microsoft.com/en-us/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) 来管理角色成员（除 Power BI Dataset 外，这也适用于 AAS/SSAS 模型）。
+> 将 Power BI Dataset 发布到 Power BI 服务后，您还可以通过[Dataset 安全设置](https://learn.microsoft.com/en-us/power-bi/enterprise/service-admin-rls#manage-security-on-your-model)来管理角色成员。 此外，您还可以通过 [SQL Server Management Studio](https://learn.microsoft.com/en-us/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) 来管理角色成员（除 Power BI Dataset 外，这也适用于 AAS/SSAS 模型）。 此外，您还可以通过 [SQL Server Management Studio](https://learn.microsoft.com/en-us/analysis-services/tabular-models/manage-roles-by-using-ssms-ssas-tabular?view=asallproducts-allversions) 来管理角色成员（除 Power BI Dataset 外，这也适用于 AAS/SSAS 模型）。
 
 ---

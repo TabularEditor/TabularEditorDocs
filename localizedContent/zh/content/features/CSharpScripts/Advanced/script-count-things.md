@@ -198,9 +198,11 @@ Info ( "在该模型中，我们看到以下对象：\n\n"
 
 这段代码会遍历模型并统计不同类型对象的数量，然后以手动构造的分层“节点树”格式展示出来。
 你可以把不需要的部分注释掉。
+你可以把不需要的部分注释掉。
 
 ## 示例输出
 
 <figure style="padding-top: 15px;">
   <img class="noscale" src="~/content/assets/images/Cscripts/script-count-things-output.png" alt="Example of the dialog pop-up that informs the user of how many rows are in the selected table upon running the script." style="width: 550px;"/><figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>图 1：</strong>Info 信息框输出示例。脚本执行后，会向用户显示模型中各类对象的数量。 如果对某些对象不感兴趣，用户可以在脚本中将其注释掉或删除，然后重新运行。</figcaption>
+ 如果对某些对象不感兴趣，用户可以在脚本中将其注释掉或删除，然后重新运行。</figcaption>
 </figure>

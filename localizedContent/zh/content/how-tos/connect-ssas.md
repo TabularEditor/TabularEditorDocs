@@ -15,7 +15,7 @@ applies_to:
 
 ![](https://raw.githubusercontent.com/TabularEditor/TabularEditor/master/Documentation/Connect.png)
 
-该对话框也支持连接到 Azure Analysis Services 实例：只要提供 Azure AS 实例的完整名称，并以“azureas://”开头即可。 “本地实例”下拉列表可用于浏览并连接到任何正在运行的 Power BI Desktop 或 Visual Studio 集成工作区实例。 **注意：尽管 Tabular Editor 可以通过 TOM 对 Power BI 模型进行更改，但这不受 Microsoft 支持，而且可能会损坏你的 .pbix 文件。 请自行承担风险！**
+该对话框也支持连接到 Azure Analysis Services 实例：只要提供 Azure AS 实例的完整名称，并以“azureas://”开头即可。 “本地实例”下拉列表可用于浏览并连接到任何正在运行的 Power BI Desktop 或 Visual Studio 集成工作区实例。 **注意：尽管 Tabular Editor 可以通过 TOM 对 Power BI 模型进行更改，但这不受 Microsoft 支持，而且可能会损坏你的 .pbix 文件。 请自行承担风险！** “本地实例”下拉列表可用于浏览并连接到任何正在运行的 Power BI Desktop 或 Visual Studio 集成工作区实例。 **注意：尽管 Tabular Editor 可以通过 TOM 对 Power BI 模型进行更改，但这不受 Microsoft 支持，而且可能会损坏你的 .pbix 文件。 请自行承担风险！**
 
 在数据库加载完成后，只要你按下 CTRL+S，Tabular Editor 就会将你所做的更改更新到数据库中。 客户端工具（Excel、Power BI、DAX Studio 等） 这些工具随后应能立即在数据库中看到这些更改。 注意：根据你做的更改，你可能需要手动重新计算模型中的对象，才能成功查询模型。
 

@@ -32,7 +32,7 @@ applies_to:
 
 打开透视编辑器时，随附的工具栏提供以下选项：
 
-- ![Perspective Editor Add Perspective](~/content/assets/images/perspective-editor-add-perspective.png) **新建透视**：此按钮会向模型添加一个新的透视。 该透视将显示在透视编辑器中。
+- ![Perspective Editor Add Perspective](~/content/assets/images/perspective-editor-add-perspective.png) **新建透视**：此按钮会向模型添加一个新的透视。 该透视将显示在透视编辑器中。 该透视将显示在透视编辑器中。
 - ![Perspective Editor Hide Members](~/content/assets/images/perspective-editor-hide-members.png) **显示/隐藏隐藏选项**：如果你想在透视编辑器中查看包括隐藏对象在内的所有对象，请启用此选项。
 - ![Perspective Editor Folder](~/content/assets/images/perspective-editor-folder.png) **显示/隐藏显示文件夹**：如果你希望透视编辑器按显示文件夹对表对象（度量值、层次结构、列）进行分组，请启用此切换按钮。
 

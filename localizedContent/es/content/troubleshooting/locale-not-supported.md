@@ -25,6 +25,10 @@ Es posible que veas el siguiente mensaje de advertencia en los mensajes:
 La configuración regional XXXX no es compatible
 ```
 
+```plaintext
+XXXX no es un identificador de configuración regional válido
+```
+
 en la vista de mensajes de Tabular Editor 3.
 
 ![Mensaje de configuración regional no admitida en mensajes](~/content/assets/images/troubleshooting/locale-not-supported-message-view.png)
