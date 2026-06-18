@@ -30,7 +30,7 @@ applies_to:
 - 你的 Data model 的目标位置必须是以下之一：
   - SQL Server 2016（或更高版本）的 Analysis Services Tabular
   - Azure Analysis Services
-  - a Power BI workspace assigned to a Fabric capacity, Power BI Embedded capacity, legacy Premium capacity or Premium Per User license, with [XMLA read/write enabled](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) (the default since June 2025)
+  - 已分配到 Fabric capacity、Power BI Embedded capacity、旧版 Premium capacity 或 Premium Per User 许可证，并已[启用 XMLA 读/写](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write)（自 2025 年六月起默认为启用）的 Power BI Workspace
 - 所有团队成员都能访问的 Git repository（本地部署或托管在 Azure DevOps、GitHub 等）
 
 ## 将 TOM 视为源代码
@@ -107,7 +107,7 @@ Tabular Editor 的目标是简化这一过程：无论模型是 Analysis Service
 要实现并行开发，我们必须能够将模型元数据存储为上述某种基于文本的（JSON）格式（Model.bim 或 Database.json）。 要实现并行开发，我们必须能够将模型元数据存储为上述某种基于文本的（JSON）格式（Model.bim 或 Database.json）。 无法从这种基于文本的格式“重建” .pbix 或 .pbit 文件，因此**一旦决定走这条路线，就无法再使用 Power BI Desktop 来编辑 Data model**。 取而代之的是，我们必须依赖能够使用基于 JSON 的格式的工具——这正是 Tabular Editor 的用途所在。 取而代之的是，我们必须依赖能够使用基于 JSON 的格式的工具——这正是 Tabular Editor 的用途所在。
 
 > [!WARNING]
-> If you do not have access to a workspace assigned to a capacity or Premium Per User license, you will not be able to publish the model metadata stored in the JSON files, since this operation requires access to the [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools).
+> 如果你无法访问分配给容量或 Premium Per User 许可证的 Workspace，则无法发布存储在 JSON 文件中的模型元数据，因为此操作需要访问 [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools)。
 
 > [!NOTE]
 > 创建 Report 的 Visual 部分仍然需要 Power BI Desktop。 始终将 Report 与模型分离是一项[最佳实践](https://docs.microsoft.com/en-us/power-bi/guidance/report-separate-from-model)。 [!NOTE]
