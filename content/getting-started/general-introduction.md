@@ -2,7 +2,7 @@
 uid: general-introduction
 title: General introduction and architecture
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -39,10 +39,10 @@ Tabular Editor can load model metadata from the following sources:
 - [3] .pbit files (Power BI Template)
 - [4] A database on SQL Server Analysis Services (Tabular)
 - [5] A database on Azure Analysis Services
-- [6] A dataset in a Power BI Premium* Workspace
+- [6] A semantic model in a Power BI workspace assigned to a capacity*
 - [7] A Power BI Desktop report in Import/DirectQuery mode
 
-*Power BI Premium/Embedded Capacity or Power BI Premium-Per-User is required in order to enable the [XMLA Endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools). The XMLA Endpoint must be enabled for any third party tool to connect to Power BI datasets.
+*Third party tools connect to Power BI semantic models through the [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools). It requires a Microsoft Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User license. XMLA read/write is enabled by default on all capacity SKUs since June 2025; see @xmla-as-connectivity if you can't connect.
 
 > [!IMPORTANT]
 > Tabular Editor 2.x supports all sources 1-7 above. Tabular Editor 3 supports only some sources depending on which [edition of Tabular Editor 3](xref:editions) you are using.
