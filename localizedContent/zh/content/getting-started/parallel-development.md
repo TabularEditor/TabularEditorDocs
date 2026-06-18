@@ -2,7 +2,7 @@
 uid: parallel-development
 title: 通过 Git 和“保存到文件夹”实现并行开发
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,7 +30,7 @@ applies_to:
 - 你的 Data model 的目标位置必须是以下之一：
   - SQL Server 2016（或更高版本）的 Analysis Services Tabular
   - Azure Analysis Services
-  - Fabric/Power BI Premium 容量/已启用 [XMLA 读/写](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write) 的 Power BI Premium-per-user
+  - a Power BI workspace assigned to a Fabric capacity, Power BI Embedded capacity, legacy Premium capacity or Premium Per User license, with [XMLA read/write enabled](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) (the default since June 2025)
 - 所有团队成员都能访问的 Git repository（本地部署或托管在 Azure DevOps、GitHub 等）
 
 ## 将 TOM 视为源代码
@@ -39,7 +39,7 @@ applies_to:
 
 使用基于文本的文件格式，可以借助版本控制系统中常见的各种差异对比工具，更优雅地处理冲突变更。 这种变更冲突解决方式在传统软件开发中非常常见，因为所有源代码都分散在大量的小型文本文件中。 因此，大多数主流版本控制系统都针对这类文件做了优化，用于变更检测和（自动）冲突解决。 这种变更冲突解决方式在传统软件开发中非常常见，因为所有源代码都分散在大量的小型文本文件中。 因此，大多数主流版本控制系统都针对这类文件做了优化，用于变更检测和（自动）冲突解决。
 
-对于表格模型开发而言，“源代码”就是我们基于 JSON 的 TOM 元数据。 对于表格模型开发而言，“源代码”就是我们基于 JSON 的 TOM 元数据。 在较早版本的 Visual Studio 中开发表格模型时，Model.bim 这个 JSON 文件中会额外包含关于谁在何时修改了哪些内容的信息。 这些信息只是作为附加属性，存储在文件中各处的 JSON 对象里。 这会带来问题：这些信息不仅是冗余的（因为文件本身也有元数据，用来描述最后一次编辑它的人是谁，以及最后一次编辑发生在什么时候），而且从版本控制的透视来看，这些元数据并没有任何_语义意义_。 换句话说，即使你把文件中的所有修改元数据都移除，得到的仍然是一个完全有效的 TOM JSON 文件；你可以将其部署到 Analysis Services 或发布到 Power BI，而不会影响模型的功能和业务逻辑。 这些信息只是作为附加属性，存储在文件中各处的 JSON 对象里。 这会带来问题：这些信息不仅是冗余的（因为文件本身也有元数据，用来描述最后一次编辑它的人是谁，以及最后一次编辑发生在什么时候），而且从版本控制的透视来看，这些元数据并没有任何_语义意义_。 换句话说，即使你把文件中的所有修改元数据都移除，得到的仍然是一个完全有效的 TOM JSON 文件；你可以将其部署到 Analysis Services 或发布到 Power BI，而不会影响模型的功能和业务逻辑。
+对于表格模型开发而言，“源代码”就是我们基于 JSON 的 TOM 元数据。 对于表格模型开发而言，“源代码”就是我们基于 JSON 的 TOM 元数据。 在较早版本的 Visual Studio 中开发表格模型时，Model.bim 这个 JSON 文件中会额外包含关于谁在何时修改了哪些内容的信息。 这些信息只是作为附加属性，存储在文件中各处的 JSON 对象里。 这会带来问题：这些信息不仅是冗余的（因为文件本身也有元数据，用来描述最后一次编辑它的人是谁，以及最后一次编辑发生在什么时候），而且从版本控制的透视来看，这些元数据并没有任何_语义意义_。 换句话说，即使你把文件中的所有修改元数据都移除，得到的仍然是一个完全有效的 TOM JSON 文件；你可以将其部署到 Analysis Services 或发布到 Power BI，而不会影响模型的功能和业务逻辑。 这些信息只是作为附加属性，存储在文件中各处的 JSON 对象里。 这会带来问题：这些信息不仅是冗余的（因为文件本身也有元数据，用来描述最后一次编辑它的人是谁，以及最后一次编辑发生在什么时候），而且从版本控制的透视来看，这些元数据并没有任&#x4F55;_&#x8BED;义意义_。 换句话说，即使你把文件中的所有修改元数据都移除，得到的仍然是一个完全有效的 TOM JSON 文件；你可以将其部署到 Analysis Services 或发布到 Power BI，而不会影响模型的功能和业务逻辑。
 
 就像传统软件开发的源代码一样，我们不希望这类信息“污染”我们的模型元数据。 事实上，版本控制系统能更细致地展示改了什么、谁改的、何时改的以及为何改，因此没有理由把这些信息作为被版本控制的文件内容之一。
 
@@ -107,7 +107,7 @@ Tabular Editor 的目标是简化这一过程：无论模型是 Analysis Service
 要实现并行开发，我们必须能够将模型元数据存储为上述某种基于文本的（JSON）格式（Model.bim 或 Database.json）。 要实现并行开发，我们必须能够将模型元数据存储为上述某种基于文本的（JSON）格式（Model.bim 或 Database.json）。 无法从这种基于文本的格式“重建” .pbix 或 .pbit 文件，因此**一旦决定走这条路线，就无法再使用 Power BI Desktop 来编辑 Data model**。 取而代之的是，我们必须依赖能够使用基于 JSON 的格式的工具——这正是 Tabular Editor 的用途所在。 取而代之的是，我们必须依赖能够使用基于 JSON 的格式的工具——这正是 Tabular Editor 的用途所在。
 
 > [!WARNING]
-> 如果你无法访问 Power BI Premium Workspace（Premium 容量或 Premium-Per-User），就无法发布存储在 JSON 文件中的模型元数据，因为此操作需要访问 [XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools)。
+> If you do not have access to a workspace assigned to a capacity or Premium Per User license, you will not be able to publish the model metadata stored in the JSON files, since this operation requires access to the [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools).
 
 > [!NOTE]
 > 创建 Report 的 Visual 部分仍然需要 Power BI Desktop。 始终将 Report 与模型分离是一项[最佳实践](https://docs.microsoft.com/en-us/power-bi/guidance/report-separate-from-model)。 [!NOTE]
