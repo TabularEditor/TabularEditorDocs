@@ -23,7 +23,7 @@ applies_to:
 本页将带你从零开始，使用 Tabular Editor 3 创建一个全新的 Power BI 语义模型。
 
 > [!IMPORTANT]
-> Tabular Editor 3 Business Edition is limited to [Power BI Premium Per User](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-per-user-faq). For Fabric, Power BI Premium or Embedded capacity, you must upgrade to Tabular Editor 3 Enterprise Edition. In either case, the target workspace must allow [XMLA read/write access](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) - the default on all capacity SKUs since June 2025.
+> Tabular Editor 3 商业版仅限于 [Power BI Premium Per User](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-per-user-faq)。 如果使用 Fabric、Power BI Premium 或 Embedded 容量，则必须升级到 Tabular Editor 3 企业版。 无论哪种情况，目标 Workspace 都必须允许 [XMLA 读/写访问](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write)——自 2025 年六月起，这已成为所有容量 SKU 的默认设置。
 >
 > Tabular Editor 3 桌面版不支持 Power BI 语义模型。
 >
