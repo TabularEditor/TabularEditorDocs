@@ -2,7 +2,7 @@
 uid: xmla-as-connectivity
 title: XMLA / Analysis Services 连接性
 author: Daniel Otykier
-updated: 2024-05-01
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -70,28 +70,28 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 
 ## Fabric/Power BI XMLA 设置
 
-要在 Fabric/Power BI 中启用 XMLA endpoint，必须启用两个管理员设置。
+XMLA read/write is enabled by default on all Fabric and Power BI capacities since June 2025. If you can't connect through the XMLA endpoint, verify that an admin hasn't disabled one of these two settings.
 
-### 启用租户 XMLA endpoint
+### Tenant XMLA endpoint setting
 
-在 Fabric/Power BI 管理门户中，必须启用集成设置“允许 XMLA endpoints，并使用本地语义模型在 Excel 中进行分析”
+In the Fabric/Power BI admin portal, the integration setting "Allow XMLA endpoints and Analyze in Excel with on-premises semantic models" must be enabled.
 
 在租户级别，该设置可能会被限制为仅允许特定用户使用。 在租户级别，该设置可能会被限制为仅允许特定用户使用。 如果你的组织对该设置做了限制，请确保所有需要的用户都被允许在租户级别使用 XMLA endpoint。
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
+![Tenant admin setting](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
 
-### 在容量上启用 XMLA 读写
+### XMLA read/write on the capacity
 
-要使用 XMLA endpoint，承载语义模型的 Workspace 必须分配到容量（FSku 或 Power BI Premium Per User），并且该容量必须在容量设置中将 XMLA 设置为 ["Read Write" enabled in the capacity settings.](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#enable-xmla-read-write)
+To use the XMLA endpoint, assign the workspace that hosts the semantic model to a Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User (PPU) license. The capacity must have the XMLA endpoint set to [**Read Write** in the capacity settings](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). This is the default since June 2025.
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
+![Capacity admin setting](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
-要在 Admin Portal 中启用 Read Write，请依次导航至
+If read/write has been switched off, ask your capacity admin to re-enable it in the Admin Portal:
 
-1. 容量设置
-2. 选择容量类型
-3. 选择相应的容量
-4. 转到 Power BI Workloads，向下滚动找到 XMLA endpoint 设置，然后选择“Read Write”
+1. Open **Capacity Settings**.
+2. Choose the type of capacity.
+3. Select the relevant capacity.
+4. Navigate to **Power BI Workloads** and set **XMLA Endpoint** to **Read Write**.
 
 ### Workspace 级别的用户权限
 
@@ -121,7 +121,7 @@ Provider=MSOLAP;Data Source=servername;Initial Catalog=databasename;Integrated S
 
 如果除语义模型所有者之外的其他用户需要通过 XMLA endpoint 编辑该模型，则必须在 Fabric/Power BI 中禁用名为“阻止重新发布并禁用组件刷新”的安全管理员设置。
 
-![租户管理员设置-禁用组件刷新](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
+![Block republish and disable package refresh setting](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
 
 ## 不支持的模型类型
 
