@@ -2,7 +2,7 @@
 uid: new-pbi-model
 title: Crear un modelo semántico de Power BI
 author: Daniel Otykier
-updated: 2021-09-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,7 +23,7 @@ applies_to:
 Esta página te guía paso a paso por el proceso de crear un nuevo modelo semántico de Power BI desde cero con Tabular Editor 3.
 
 > [!IMPORTANT]
-> La Edición Business de Tabular Editor 3 está limitada a [Power BI Premium por usuario](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-per-user-faq). Para usar una capacidad de Fabric/Power BI Premium o Embedded, debes actualizar a la Edición Enterprise de Tabular Editor 3. En cualquiera de los casos, el Workspace de Power BI en el que se vaya a implementar el modelo semántico debe tener habilitado el [punto de conexión XMLA de lectura/escritura](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write).
+> Tabular Editor 3 Business Edition is limited to [Power BI Premium Per User](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-per-user-faq). For Fabric, Power BI Premium or Embedded capacity, you must upgrade to Tabular Editor 3 Enterprise Edition. In either case, the target workspace must allow [XMLA read/write access](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) - the default on all capacity SKUs since June 2025.
 >
 > La Edición de escritorio de Tabular Editor 3 no admite modelos semánticos de Power BI.
 >
