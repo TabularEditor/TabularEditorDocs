@@ -70,28 +70,28 @@ La mayoría de las instancias de Analysis Services admiten varios idiomas. Consu
 
 ## Configuración de XMLA de Fabric/Power BI
 
-XMLA read/write is enabled by default on all Fabric and Power BI capacities since June 2025. If you can't connect through the XMLA endpoint, verify that an admin hasn't disabled one of these two settings.
+La lectura/escritura de XMLA está habilitada de forma predeterminada en todas las capacidades de Fabric y Power BI desde junio de 2025. Si no puedes conectarte a través del punto de conexión XMLA, comprueba que un administrador no haya deshabilitado una de estas dos configuraciones.
 
-### Tenant XMLA endpoint setting
+### Configuración del punto de conexión XMLA del inquilino
 
-In the Fabric/Power BI admin portal, the integration setting "Allow XMLA endpoints and Analyze in Excel with on-premises semantic models" must be enabled.
+En el portal de administración de Fabric/Power BI, se debe habilitar la configuración de integración "Permitir puntos de conexión XMLA y Analizar en Excel con modelos semánticos locales".
 
 A nivel de inquilino, la configuración puede estar restringida a ciertos usuarios. Si en tu organización esta configuración está restringida, asegúrate de que todos los usuarios necesarios tengan permiso para usar el punto de conexión XMLA a nivel de inquilino.
 
-![Tenant admin setting](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
+![Configuración de administrador del inquilino](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
 
-### XMLA read/write on the capacity
+### Lectura/escritura de XMLA en la capacidad
 
-To use the XMLA endpoint, assign the workspace that hosts the semantic model to a Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User (PPU) license. The capacity must have the XMLA endpoint set to [**Read Write** in the capacity settings](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). This is the default since June 2025.
+Para usar el punto de conexión XMLA, asigna el Workspace que aloja el modelo semántico a una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium por usuario (PPU). La capacidad debe tener el punto de conexión XMLA configurado como [**Lectura y escritura** en la configuración de la capacidad](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). Es la configuración predeterminada desde junio de 2025.
 
-![Capacity admin setting](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
+![Configuración del administrador de la capacidad](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
-If read/write has been switched off, ask your capacity admin to re-enable it in the Admin Portal:
+Si la lectura/escritura se ha desactivado, pide al administrador de la capacidad que la vuelva a habilitar en el portal de administración:
 
-1. Open **Capacity Settings**.
-2. Choose the type of capacity.
-3. Select the relevant capacity.
-4. Navigate to **Power BI Workloads** and set **XMLA Endpoint** to **Read Write**.
+1. Abre **Configuración de capacidad**.
+2. Elige el tipo de capacidad.
+3. Selecciona la capacidad correspondiente.
+4. Ve a **Cargas de trabajo de Power BI** y establece **punto de conexión XMLA** en **Lectura y escritura**.
 
 ### Permisos de usuario a nivel de Workspace
 
@@ -121,7 +121,7 @@ Para garantizar la mejor experiencia al editar modelos usando el punto de conexi
 
 Si un usuario distinto del propietario del modelo semántico necesita editar el modelo a través del punto de conexión XMLA, debe deshabilitarse la configuración de administración de seguridad de Fabric/Power BI denominada "Bloquear la republicación y deshabilitar la actualización del paquete".
 
-![Block republish and disable package refresh setting](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
+![Configuración para bloquear la republicación y desactivar la actualización del paquete](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
 
 ## Tipos de modelo no compatibles
 
