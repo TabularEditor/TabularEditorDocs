@@ -2,7 +2,7 @@
 uid: xmla-as-connectivity
 title: Conectividad con XMLA / Analysis Services
 author: Daniel Otykier
-updated: 2024-05-01
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -70,28 +70,28 @@ La mayoría de las instancias de Analysis Services admiten varios idiomas. Consu
 
 ## Configuración de XMLA de Fabric/Power BI
 
-Hay que activar dos configuraciones de administrador para habilitar el punto de conexión XMLA en Fabric/Power BI.
+XMLA read/write is enabled by default on all Fabric and Power BI capacities since June 2025. If you can't connect through the XMLA endpoint, verify that an admin hasn't disabled one of these two settings.
 
-### Habilitar el punto de conexión XMLA del inquilino
+### Tenant XMLA endpoint setting
 
-En el portal de administración de Fabric/Power BI, se debe habilitar la configuración de integración "Permitir puntos de conexión XMLA y Analizar en Excel con modelos semánticos locales"
+In the Fabric/Power BI admin portal, the integration setting "Allow XMLA endpoints and Analyze in Excel with on-premises semantic models" must be enabled.
 
 A nivel de inquilino, la configuración puede estar restringida a ciertos usuarios. Si en tu organización esta configuración está restringida, asegúrate de que todos los usuarios necesarios tengan permiso para usar el punto de conexión XMLA a nivel de inquilino.
 
-![Configuración de administrador del inquilino](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
+![Tenant admin setting](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
 
-### Habilitar lectura y escritura de XMLA en la capacidad
+### XMLA read/write on the capacity
 
-Para usar el punto de conexión XMLA, el Workspace que hospeda un modelo semántico debe estar asignado a una capacidad (FSku o Power BI Premium Per User) y la capacidad debe tener XMLA con ["Read Write" habilitado en la configuración de la capacidad.](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#enable-xmla-read-write)
+To use the XMLA endpoint, assign the workspace that hosts the semantic model to a Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User (PPU) license. The capacity must have the XMLA endpoint set to [**Read Write** in the capacity settings](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). This is the default since June 2025.
 
-![Configuración del administrador del inquilino](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
+![Capacity admin setting](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
-La opción "Read Write" se habilita en el portal de administración, yendo a
+If read/write has been switched off, ask your capacity admin to re-enable it in the Admin Portal:
 
-1. Configuración de capacidad
-2. Elegir el tipo de capacidad
-3. Seleccionar la capacidad correspondiente
-4. Ve a Cargas de trabajo de Power BI y desplázate hacia abajo hasta encontrar la configuración del punto de conexión XMLA y elige "Read Write"
+1. Open **Capacity Settings**.
+2. Choose the type of capacity.
+3. Select the relevant capacity.
+4. Navigate to **Power BI Workloads** and set **XMLA Endpoint** to **Read Write**.
 
 ### Permisos de usuario a nivel de Workspace
 
@@ -121,7 +121,7 @@ Para garantizar la mejor experiencia al editar modelos usando el punto de conexi
 
 Si un usuario distinto del propietario del modelo semántico necesita editar el modelo a través del punto de conexión XMLA, debe deshabilitarse la configuración de administración de seguridad de Fabric/Power BI denominada "Bloquear la republicación y deshabilitar la actualización del paquete".
 
-![Configuración del administrador del inquilino](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
+![Block republish and disable package refresh setting](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
 
 ## Tipos de modelo no compatibles
 
