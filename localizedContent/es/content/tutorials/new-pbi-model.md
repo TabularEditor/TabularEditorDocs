@@ -23,7 +23,7 @@ applies_to:
 Esta página te guía paso a paso por el proceso de crear un nuevo modelo semántico de Power BI desde cero con Tabular Editor 3.
 
 > [!IMPORTANT]
-> Tabular Editor 3 Business Edition is limited to [Power BI Premium Per User](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-per-user-faq). For Fabric, Power BI Premium or Embedded capacity, you must upgrade to Tabular Editor 3 Enterprise Edition. In either case, the target workspace must allow [XMLA read/write access](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) - the default on all capacity SKUs since June 2025.
+> La Edición Business de Tabular Editor 3 está limitada a [Power BI Premium Per User](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-per-user-faq). Para Fabric, Power BI Premium o una capacidad Embedded, debes actualizar a la Edición Enterprise de Tabular Editor 3. En cualquier caso, el Workspace de destino debe permitir el [acceso de lectura y escritura de XMLA](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write), que es el valor predeterminado en todas las SKU de capacidad desde junio de 2025.
 >
 > La Edición de escritorio de Tabular Editor 3 no admite modelos semánticos de Power BI.
 >
