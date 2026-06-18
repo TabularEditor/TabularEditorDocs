@@ -40,10 +40,10 @@ Tabular Editor 可从以下来源加载模型元数据：
 - [3] .pbit 文件（Power BI 模板）
 - [4] SQL Server Analysis Services（表格模式）上的数据库
 - [5] Azure Analysis Services 上的数据库
-- [6] A semantic model in a Power BI workspace assigned to a capacity\*
+- [6] 已分配到容量的 Power BI Workspace 中的语义模型\*
 - [7] Import/DirectQuery 模式下的 Power BI Desktop Report
 
-\*Third party tools connect to Power BI semantic models through the [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools). It requires a Microsoft Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User license. XMLA read/write is enabled by default on all capacity SKUs since June 2025; see @xmla-as-connectivity if you can't connect.
+\*第三方工具通过 [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools) 连接到 Power BI 语义模型。 这需要 Microsoft Fabric capacity（F SKU）、Power BI Embedded 容量（A 或 EM SKU）、旧版 Premium 容量（P SKU）或 Premium Per User 许可证。 自 2025 年六月起，所有容量 SKU 默认已启用 XMLA 读取/写入；如果无法连接，请参阅 @xmla-as-connectivity。
 
 > [!IMPORTANT]
 > Tabular Editor 2.x 支持以上 1-7 的所有来源。 [!IMPORTANT]
