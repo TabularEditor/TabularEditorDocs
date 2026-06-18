@@ -2,7 +2,7 @@
 uid: xmla-as-connectivity
 title: XMLA / Analysis Services connectivity
 author: Daniel Otykier
-updated: 2024-05-01
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -70,27 +70,27 @@ Most Analysis Services instances support several languages. See [this page for a
 
 ## Fabric/Power BI XMLA Settings
 
-Two admin settings must be switched on to enable the XMLA endpoint in Fabric/Power BI. 
+XMLA read/write is enabled by default on all Fabric and Power BI capacities since June 2025. If you can't connect through the XMLA endpoint, verify that an admin hasn't disabled one of these two settings.
 
-### Enable Tennant XMLA Endpoint 
+### Tenant XMLA endpoint setting
 
-In the Fabric/Power BI admin portal, the integration setting "Allow XMLA endpoints and Analyze in Excel with on-premises semantic models" must be enabled
+In the Fabric/Power BI admin portal, the integration setting "Allow XMLA endpoints and Analyze in Excel with on-premises semantic models" must be enabled.
 
 At the tenant level, the setting may be restricted to only certain users. If the setting is restricted in your organization, ensure all required users are allowed to use the XMLA endpoint at the tenant level.
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
+![Tenant admin setting](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
 
-### Enable XMLA Read Write on Capacity
+### XMLA read/write on the capacity
 
-To use the XMLA endpoint, the workspace that hosts a semantic model must be assigned to a capacity (FSku or Power BI Premium Per User), and the capacity must have XMLA ["Read Write" enabled in the capacity settings.](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#enable-xmla-read-write)
+To use the XMLA endpoint, assign the workspace that hosts the semantic model to a Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User (PPU) license. The capacity must have the XMLA endpoint set to [**Read Write** in the capacity settings](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). This is the default since June 2025.
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
+![Capacity admin setting](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
-Read Write is enabled in the Admin Portal by navigating to 
-1. Capacity Settings
-1. Choosing the type of capacity
-3. Selecting the relevant Capacity
-4. Navigating to Power BI Workloads and scrolling down to find the XMLA Endpoint setting choosing "Read Write"
+If read/write has been switched off, ask your capacity admin to re-enable it in the Admin Portal:
+1. Open **Capacity Settings**.
+2. Choose the type of capacity.
+3. Select the relevant capacity.
+4. Navigate to **Power BI Workloads** and set **XMLA Endpoint** to **Read Write**.
 
 ### Workspace Level User Rights
 To edit models using the XMLA endpoint the user's account needs to have access to the workspace as either **Contributor**, **Member** or **Admin**. In the workspace choose 'Manage Access' and add the user account or a Entra ID group that the user belongs to with the required role. For more information on roles in workspaces please see Microsoft's Documentation: [Roles in Workspaces](https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces)
@@ -118,7 +118,7 @@ To ensure the best experience while editing models using the XMLA endpoint the w
 
 If another user, other than the semantic model's owner, needs to edit the model through the XMLA endpoint, the security admin setting in Fabric/Power BI called "Block republish and disable package refresh" must be disabled.
 
-![Tennant Admin Setting](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
+![Block republish and disable package refresh setting](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
 
 
 ## Unsupported model types

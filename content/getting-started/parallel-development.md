@@ -2,7 +2,7 @@
 uid: parallel-development
 title: Enabling parallel development using Git and Save to Folder
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,7 +28,7 @@ This article describes the principles of parallel model development (that is, th
 - The destination of your data model must be one of the following:
   - SQL Server 2016 (or newer) Analysis Services Tabular
   - Azure Analysis Services
-  - Fabric/Power BI Premium Capacity/Power BI Premium-per-user with [XMLA read/write enabled](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write)
+  - a Power BI workspace assigned to a Fabric capacity, Power BI Embedded capacity, legacy Premium capacity or Premium Per User license, with [XMLA read/write enabled](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) (the default since June 2025)
 - Git repository accessible by all team members (on-premises or hosted in Azure DevOps, GitHub, etc.)
 
 ## TOM as source code
@@ -104,7 +104,7 @@ These limitations are:
 To enable parallel development, we must be able to store the model metadata in one of the text-based (JSON) formats mentioned above (Model.bim or Database.json). There is no way to "recreate" a .pbix or .pbit file from the text-based format, so **once we decide to go this route, we will no longer be able to use Power BI Desktop for editing the data model**. Instead, we will have to rely on tools that can use the JSON-based format, which is exactly the purpose of Tabular Editor.
 
 > [!WARNING]
-> If you do not have access to a Power BI Premium workspace (either Premium capacity or Premium-Per-User), you will not be able to publish the model metadata stored in the JSON files, since this operation requires access to the [XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools).
+> If you do not have access to a workspace assigned to a capacity or Premium Per User license, you will not be able to publish the model metadata stored in the JSON files, since this operation requires access to the [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools).
 
 > [!NOTE]
 > Power BI Desktop is still needed for purpose of creating the visual part of the report. It is a [best practice to always separate reports from models](https://docs.microsoft.com/en-us/power-bi/guidance/report-separate-from-model). In case you have an existing Power BI file that contains both, [this blog post](https://powerbi.tips/2020/06/split-an-existing-power-bi-file-into-a-model-and-report/) ([video](https://www.youtube.com/watch?v=PlrtBm9YN_Q))  describes how to split it into a model file and a report file.
