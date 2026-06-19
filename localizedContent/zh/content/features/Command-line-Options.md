@@ -17,65 +17,65 @@ applies_to:
 
 Tabular Editor 可通过命令行执行以执行各种任务，这在自动化构建和部署等场景中可能很有用。
 
-## How the tools fit together
+## 这些工具如何配合使用
 
-Tabular Editor 3 is a desktop application for developers. It has no command-line interface of its own. For automated deployments and CI/CD pipelines, use either `TabularEditor.exe` (the Tabular Editor 2 CLI documented on this page) or the new cross-platform [Tabular Editor CLI](xref:te-cli) (`te`).
+Tabular Editor 3 是面向开发人员的桌面应用程序。 它本身不提供命令行界面。 对于自动化部署和 CI/CD 管道，可以使用 `TabularEditor.exe`（本页介绍的 Tabular Editor 2 CLI），也可以使用新的跨平台 [Tabular Editor CLI](xref:te-cli)（`te`）。
 
-Running `TabularEditor.exe` in a CI/CD pipeline does not require a Tabular Editor 3 license. Only users of the Tabular Editor 3 application need a license.
+在 CI/CD 管道中运行 `TabularEditor.exe` 无需 Tabular Editor 3 许可证。 只有 Tabular Editor 3 应用程序的用户才需要许可证。
 
 > [!TIP]
 > 在寻找新的跨平台 CLI？ 请参阅 @te-cli 了解 Tabular Editor CLI（有限公开预览版）。它是可在 Windows、macOS 和 Linux 上运行的后继版本。
 
-## TabularEditor.exe vs. the Tabular Editor CLI
+## TabularEditor.exe 与 Tabular Editor CLI 对比
 
-The Tabular Editor CLI (`te`) is the cross-platform successor to `TabularEditor.exe`. It's not just a rewrite for macOS and Linux - it adds model editing, inspection, diffing, testing, refresh triggering, and VertiPaq analysis as first-class pipeline operations, none of which were possible with `TabularEditor.exe`. The `te` CLI is in Limited Public Preview (expires 2026-09-30); use `TabularEditor.exe` for production pipelines today.
+Tabular Editor CLI（`te`）是 `TabularEditor.exe` 的跨平台后继版本。 它不仅仅是面向 macOS 和 Linux 的重写版本——还将模型编辑、检查、差异对比、测试、触发刷新和 VertiPaq 分析作为管道中的一等公民操作引入，而这些都是 `TabularEditor.exe` 无法实现的。 `te` CLI 目前处于有限公开预览阶段（将于 2026-09-30 到期）；当前生产环境的管道请使用 `TabularEditor.exe`。
 
-|                                      | TE2 CLI (`TabularEditor.exe`)                         | TE CLI (`te`)                                                                                                                                |
-| ------------------------------------ | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 状态                                   | Stable, production-ready                                                 | Limited Public Preview (expires 2026-09-30)                                                                                                  |
-| 平台                                   | Windows only                                                             | Windows, macOS, Linux                                                                                                                                           |
-| License required                     | 否                                                                        | No (preview); TBD at GA                                                                                                                      |
-| Binary                               | WinForms app, requires `start /wait` wrapper                             | Purpose-built console binary, no wrapper needed                                                                                                                 |
-| **Authentication**                   |                                                                          |                                                                                                                                                                 |
-| Service Principal                    | Via MSOLAP connection string                                             | Native `--auth spn`, `--auth env`, `--auth managed-identity`; credentials via env vars, stdin, or certificate; OS-native secure credential store                |
-| Managed identity                     | 否                                                                        | Yes (`--auth managed-identity`), for Azure-hosted runners                                                                                    |
-| Interactive browser login            | 否                                                                        | Yes (`te auth login`)                                                                                                                        |
-| **CI/CD**                            |                                                                          |                                                                                                                                                                 |
-| CI annotations                       | `-V` (Azure DevOps), `-G` (GitHub) | `--ci vsts`, `--ci github` on every command                                                                                                                     |
-| 非交互模式                                | No explicit flag; errors may prompt                                      | `--non-interactive` global flag - fails fast, no prompts                                                                                                        |
-| Predictable exit codes               | Partial                                                                  | `0` = success, `1` = failure, `2` = diff mismatch                                                                                                               |
-| 结构化输出                                | 否                                                                        | `--output-format json/csv/tmdl/tmsl` on every command                                                                                                           |
-| VSTEST results                       | `-T` flag                                                                | 在 `validate`、`bpa run` 和 `test run` 命令中使用 `--trx <file>`                                                                                                        |
-| **Deployment**                       |                                                                          |                                                                                                                                                                 |
-| Deploy model                         | `-D` flag                                                                | `te deploy` with fine-grained flags (`--deploy-roles`, `--deploy-partitions`, `--deploy-connections`, `--deploy-full`, etc.) |
-| Generate XMLA/TMSL without deploying | `-X` flag                                                                | `te deploy --xmla <file>` or `--dry-run`                                                                                                                        |
-| BPA gate before deploy               | 否                                                                        | Built-in; `--skip-bpa` or `--fix-bpa` to override                                                                                                               |
-| 连接配置文件                               | 否                                                                        | `te profile set/list/show` - reusable named profiles per environment                                                                                            |
-| **Best Practice Analyzer**           |                                                                          |                                                                                                                                                                 |
-| Run BPA                              | `-A` / `-AX` flags                                                       | `te bpa run` with `--fail-on warning/error`, `--fix`, `--path` scoping, `--vpax` for VPA-aware rules                                                            |
-| BPA rule management                  | 否                                                                        | `te bpa rules add/rm/set/list/disable/enable/init`                                                                                                              |
-| **Model editing in pipeline**        |                                                                          |                                                                                                                                                                 |
-| Run C# scripts                       | `-S` flag                                                                | `te script` - multiple scripts, inline code, stdin, `--dry-run`, preprocessor symbols (`TECLI`)                                              |
-| Run macros                           | 否                                                                        | `te macro run` with `--on <object>` context                                                                                                                     |
-| Set/get properties                   | 否                                                                        | `te get`, `te set`, `te add`, `te rm`, `te mv`, `te replace`                                                                                                    |
-| DAX formatting                       | 否                                                                        | `te format` - all expressions or single object, DAX and M                                                                                                       |
-| **Inspection**                       |                                                                          |                                                                                                                                                                 |
-| List model objects                   | 否                                                                        | `te ls` with wildcard path filters, `--type`, `--paths-only`, `--output-format bim`                                                                             |
-| Search expressions/names             | 否                                                                        | `te find` with regex and scope (`--in expressions/names/descriptions`)                                                                       |
-| Diff two models                      | 否                                                                        | `te diff` - structural comparison with exit code `2` on any difference                                                                                          |
-| Dependency analysis                  | 否                                                                        | `te deps` - upstream/downstream for any object; `--unused` to find dead code                                                                                    |
-| **Refresh**                          |                                                                          |                                                                                                                                                                 |
-| Trigger refresh                      | 否                                                                        | `te refresh` with `--type`, `--table`, `--partition`, `--apply-refresh-policy`, `--dry-run`                                                                     |
-| **Testing**                          |                                                                          |                                                                                                                                                                 |
-| DAX assertion tests                  | 否                                                                        | `te test run` with `--tag`, `--trx`, `--ci`; `te test init/snapshot/compare`                                                                                    |
-| **VertiPaq analysis**                |                                                                          |                                                                                                                                                                 |
-| Storage statistics                   | 否                                                                        | `te vertipaq` - columns, relationships, partitions; `--export`/`--import` VPAX                                                                                  |
-| **Other**                            |                                                                          |                                                                                                                                                                 |
-| Interactive REPL                     | 否                                                                        | `te interactive` - model-aware shell with tab completion                                                                                                        |
-| Shell tab completion                 | 否                                                                        | `te completion bash/zsh/pwsh`                                                                                                                                   |
-| TE2 backward compatibility           | Native                                                                   | Built-in compatibility layer - existing `TabularEditor.exe` invocations work unchanged                                                                          |
+|                            | TE2 CLI (`TabularEditor.exe`) | TE CLI (`te`)                                                                                        |
+| -------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| 状态                         | 稳定，可用于生产环境                                       | 有限公开预览（将于 2026-09-30 到期）                                                                                                |
+| 平台                         | 仅限 Windows                                       | Windows、macOS、Linux                                                                                                     |
+| 需要许可证                      | 否                                                | 否（预览版）；正式发布时待定                                                                                                          |
+| 二进制文件                      | WinForms 应用，需要通过 `start /wait` 进行封装              | 专为控制台设计的二进制文件，无需包装器                                                                                                     |
+| **身份验证**                   |                                                  |                                                                                                                         |
+| 服务主体                       | 通过 MSOLAP 连接字符串                                  | 原生支持 `--auth spn`、`--auth env`、`--auth managed-identity`；凭据可通过环境变量、stdin 或证书提供；支持操作系统原生的安全凭据存储                          |
+| 托管标识                       | 否                                                | 是（`--auth managed-identity`），适用于 Azure 托管运行器                                                                            |
+| 交互式浏览器登录                   | 否                                                | 是（`te auth login`）                                                                                                      |
+| **CI/CD**                  |                                                  |                                                                                                                         |
+| CI 注释                      | `-V`（Azure DevOps）、`-G`（GitHub）                  | 每个命令都可使用 `--ci vsts`、`--ci github`                                                                                      |
+| 非交互模式                      | 无显式标志；出错时可能会提示                                   | 全局标志 `--non-interactive`——快速失败，不会出现提示                                                                                   |
+| 可预测的退出代码                   | 部分支持                                             | `0` = 成功，`1` = 失败，`2` = 差异不一致                                                                                           |
+| 结构化输出                      | 否                                                | 每个命令都支持 `--output-format json/csv/tmdl/tmsl`                                                                            |
+| VSTEST 结果                  | `-T` 标志                                          | 在 `validate`、`bpa run` 和 `test run` 命令中使用 `--trx <file>`                                                                |
+| **部署**                     |                                                  |                                                                                                                         |
+| 部署模型                       | `-D` 标志                                          | `te deploy` 提供细粒度标志（`--deploy-roles`、`--deploy-partitions`、`--deploy-connections`、`--deploy-full` 等），可分别部署角色、分区、连接或完整内容 |
+| 无需部署即可生成 XMLA/TMSL         | `-X` 标志                                          | `te deploy --xmla <file>` 或 `--dry-run`                                                                                 |
+| 部署前 BPA 门禁检查               | 否                                                | 内置；可用 `--skip-bpa` 或 `--fix-bpa` 覆盖默认行为                                                                                 |
+| 连接配置文件                     | 否                                                | `te profile set/list/show` - 为每个环境提供可复用的命名配置文件                                                                          |
+| **Best Practice Analyzer** |                                                  |                                                                                                                         |
+| 运行 BPA                     | `-A` / `-AX` 选项                                  | `te bpa run`，支持 `--fail-on warning/error`、`--fix`、`--path` 范围限定，以及用于 VPA 感知规则的 `--vpax`                                 |
+| BPA 规则管理                   | 否                                                | `te bpa rules add/rm/set/list/disable/enable/init`                                                                      |
+| **在流水线中编辑模型**              |                                                  |                                                                                                                         |
+| 运行 C# Script               | `-S` 选项                                          | `te script`：支持多个脚本、内联代码、stdin、`--dry-run` 以及预处理器符号（`TECLI`）                                                             |
+| 运行宏                        | 否                                                | `te macro run`，可通过 `--on <object>` 指定上下文                                                                                |
+| 设置/获取属性                    | 否                                                | `te get`, `te set`, `te add`, `te rm`, `te mv`, `te replace`                                                            |
+| DAX 格式化                    | 否                                                | `te format` - 格式化所有表达式或单个对象，支持 DAX 和 M                                                                                  |
+| **检查**                     |                                                  |                                                                                                                         |
+| 列出模型对象                     | 否                                                | `te ls`，支持通配符路径筛选、`--type`、`--paths-only`、`--output-format bim`                                                         |
+| 搜索表达式/名称                   | 否                                                | `te find`，支持正则表达式和搜索范围 (`--in expressions/names/descriptions`)                                       |
+| 比较两个模型的差异                  | 否                                                | `te diff` - 结构比较；如有任何差异则以退出代码 `2` 退出                                                                                    |
+| 依赖关系分析                     | 否                                                | `te deps` - 查看任何对象的上游/下游依赖；使用 `--unused` 查找死代码                                                                          |
+| **刷新**                     |                                                  |                                                                                                                         |
+| 触发刷新                       | 否                                                | `te refresh` 支持 `--type`、`--table`、`--partition`、`--apply-refresh-policy`、`--dry-run`                                   |
+| **测试**                     |                                                  |                                                                                                                         |
+| DAX 断言测试                   | 否                                                | `te test run` 支持 `--tag`、`--trx`、`--ci`；也可使用 `te test init/snapshot/compare`                                            |
+| **VertiPaq 分析**            |                                                  |                                                                                                                         |
+| 存储统计                       | 否                                                | `te vertipaq` - 列、关系、分区；`--export`/`--import` VPAX                                                                      |
+| **其他**                     |                                                  |                                                                                                                         |
+| 交互式 REPL                   | 否                                                | `te interactive` - 支持模型感知的 Shell，提供 Tab 补全                                                                              |
+| Shell Tab 自动补全             | 否                                                | `te completion bash/zsh/pwsh`                                                                                           |
+| TE2 向后兼容性                  | 原生                                               | 内置兼容层——现有 `TabularEditor.exe` 调用无需修改即可继续使用                                                                              |
 
-For a flag-by-flag mapping from TE2 syntax to the new CLI, see @te-cli-migrate.
+如需查看从 TE2 语法到新 CLI 的逐项标志映射，请参见 @te-cli-migrate。
 
 **注意：** 由于 TabularEditor.exe 是一个 WinForms 应用程序，直接从 Windows 命令提示符执行会导致线程立即返回到提示符。 这可能会在命令脚本等场景中引发问题。 如需等待 TabularEditor.exe 完成其命令行任务，请始终使用以下方式执行：`start /wait TabularEditor ...` 这可能会在命令脚本等场景中引发问题。 如需等待 TabularEditor.exe 完成其命令行任务，请始终使用以下方式执行：`start /wait TabularEditor ...`
 
