@@ -137,11 +137,11 @@ Total                      $ 10.950,00
 
 Si necesitas más de 100 puestos, <a href="mailto:sales@tabulareditor.com">contacta con ventas</a> para solicitar un presupuesto.
 
-## Command-line and CI/CD licensing
+## Licencias para la línea de comandos y para CI/CD
 
-Tabular Editor 3 is a desktop application. It has no command-line interface of its own. For automated deployments and CI/CD pipelines, use either `TabularEditor.exe` (the [Tabular Editor 2 command line](xref:command-line-options)) or the cross-platform [Tabular Editor CLI](xref:te-cli) (`te`). Both are separate from the Tabular Editor 3 desktop application.
+Tabular Editor 3 es una aplicación de escritorio. No tiene una interfaz de línea de comandos propia. Para implementaciones automatizadas y canalizaciones de CI/CD, utiliza `TabularEditor.exe` (la [línea de comandos de Tabular Editor 2](xref:command-line-options)) o la [Tabular Editor CLI](xref:te-cli) multiplataforma (`te`). Ambos son independientes de la aplicación de escritorio Tabular Editor 3.
 
-> **Do I need a license to run CI/CD pipelines?**
-> No. `TabularEditor.exe` (TE2 CLI) and the Tabular Editor CLI (`te`, during preview) do not require a Tabular Editor 3 license. Only developers using the Tabular Editor 3 desktop application need a license.
+> **¿Necesito una licencia para ejecutar canalizaciones de CI/CD?**
+> No. `TabularEditor.exe` (TE2 CLI) y Tabular Editor CLI (`te`, durante la vista previa) no requieren una licencia de Tabular Editor 3. Solo los desarrolladores que usan la aplicación de escritorio Tabular Editor 3 necesitan una licencia.
 
-At General Availability the Tabular Editor CLI will require a license; pricing is still being finalized and will be announced ahead of GA.
+En la disponibilidad general, Tabular Editor CLI requerirá una licencia; los precios aún se están ultimando y se anunciarán antes de GA.
