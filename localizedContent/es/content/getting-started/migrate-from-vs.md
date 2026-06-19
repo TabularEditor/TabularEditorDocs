@@ -2,7 +2,7 @@
 uid: migrate-from-vs
 title: Migración desde Visual Studio
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-06-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,13 +28,19 @@ Este artículo da por hecho que estás familiarizado con el desarrollo de modelo
 
 Tabular Editor 3 incluye funciones que te permiten prescindir por completo de Visual Studio para el desarrollo de modelos tabulares. Esto contrasta con Tabular Editor 2.x, donde algunos usuarios seguían prefiriendo usar Visual Studio para tareas como importar tablas, visualizar relaciones y previsualizar datos.
 
-Sin embargo, a medida que te familiarices con Tabular Editor 3, puede que te siga resultando útil abrir tus modelos tabulares en Visual Studio de vez en cuando. Esto es posible en cualquier momento, ya que Tabular Editor 3 no modifica el formato del archivo **Model.bim** (también conocido como [TOM JSON](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)) que usa Visual Studio, lo que garantiza la compatibilidad con Visual Studio.
+Sin embargo, a medida que te familiarices con Tabular Editor 3, puede que te siga resultando útil abrir tus modelos tabulares en Visual Studio de vez en cuando. This is possible at any time, since Tabular Editor 3 does not modify the **Model.bim** file format (aka. the [TOM JSON](https://learn.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions)) used by Visual Studio, thus ensuring compatibility with Visual Studio.
 
-La única excepción se da si decides usar la función [Guardar en carpeta](xref:parallel-development#what-is-save-to-folder) de Tabular Editor, ya que este formato de archivo no es compatible con Visual Studio. Sin embargo, puedes volver a crear fácilmente un archivo Model.bim para usarlo con Visual Studio, usando la opción **Archivo > Guardar como...** en Tabular Editor. También puedes hacer la conversión inversa cargando un archivo Model.bim en Tabular Editor y luego usando la opción **Archivo > Guardar en carpeta...**.
+The only exception is, if you decide to use Tabular Editor's [Save-to-folder](xref:save-to-folder) feature, as this file format is not supported by Visual Studio. Sin embargo, puedes volver a crear fácilmente un archivo Model.bim para usarlo con Visual Studio, usando la opción **Archivo > Guardar como...** en Tabular Editor. También puedes hacer la conversión inversa cargando un archivo Model.bim en Tabular Editor y luego usando la opción **Archivo > Guardar en carpeta...**.
+
+> [!TIP]
+> If you prefer a text-based, version-control-friendly format, use [Tabular Model Definition Language (TMDL)](xref:tmdl) instead of Model.bim. Tabular Editor 3 supports TMDL for both **File > Save to Folder...** and **File > Save As...**, and recent versions of the Analysis Services projects extension for Visual Studio also support TMDL. This lets you move models between the two tools without converting back to a single Model.bim file.
 
 ### Automatización de la conversión de formatos de archivo
 
-Si a menudo necesitas convertir de un lado a otro entre el formato basado en carpetas (Database.json) de Tabular Editor y el formato de archivo (model.bim) de Visual Studio, considera escribir un pequeño script de comandos de Windows usando la [CLI de Tabular Editor 2.x](xref:command-line-options) para automatizar el proceso de conversión.
+If you often face the need to convert back and forth between Tabular Editor's (database.json) folder-based format and Visual Studio's (model.bim) file format, consider writing a small Windows command script using the [Tabular Editor 2.x CLI](xref:command-line-options) to automate the conversion process.
+
+> [!TIP]
+> The cross-platform [Tabular Editor CLI](xref:te-cli) (`te`, in Limited Public Preview) can also convert between formats, including [TMDL](xref:tmdl), and runs on Windows, macOS and Linux.
 
 # [De Model.bim a carpeta](#tab/frombim)
 
@@ -55,7 +61,7 @@ tabulareditor.exe Database.json -B model.bim
 ***
 
 > [!NOTE]
-> El script de línea de comandos anterior asume que tienes instalado [Tabular Editor 2.x](xref:getting-started-te2). La ubicación de instalación de Tabular Editor 2.x también debe especificarse en tu [variable de entorno PATH](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/path).
+> El script de línea de comandos anterior asume que tienes instalado [Tabular Editor 2.x](xref:getting-started-te2). The installation location of Tabular Editor 2.x should also be specified as part of your [PATH environment variable](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/path).
 
 ## Servidor de Workspace Integrada
 
@@ -76,16 +82,12 @@ Si habilitas la opción **Usar base de datos del Workspace**, Tabular Editor te 
 
 ### Requisitos del nivel de compatibilidad
 
-Tabular Editor te permite elegir los siguientes niveles de compatibilidad para crear bases de datos de Analysis Services:
+Tabular Editor lets you create and edit models at compatibility level 1200 and higher, covering Analysis Services, Azure Analysis Services, and Power BI datasets deployed through the [XMLA endpoint](xref:powerbi-xmla). The set of available levels depends on your deployment target, and newer levels unlock features such as custom calendars and DAX user-defined functions.
 
-- 1200 (Azure Analysis Services / SQL Server 2016+)
-- 1400 (Azure Analysis Services / SQL Server 2017+)
-- 1500 (Azure Analysis Services / SQL Server 2019+)
-
-Además, Tabular Editor permite elegir niveles de compatibilidad adecuados para los Datasets de Power BI que se publicarán en el servicio de Power BI a través del [punto de conexión XMLA](xref:powerbi-xmla).
+For the full list of levels and guidance on choosing and changing them, see @update-compatibility-level.
 
 > [!NOTE]
-> Tabular Editor no admite niveles de compatibilidad inferiores a 1200, ya que estos no usan el formato de metadatos [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions). Si planea migrar el desarrollo de Visual Studio a Tabular Editor para un modelo con nivel de compatibilidad 1100 o 1103, **debe actualizar el nivel de compatibilidad al menos a 1200** antes de migrar a Tabular Editor. Al hacerlo, ya no podrá implementar el modelo en SQL Server 2014 Analysis Services.
+> Tabular Editor does not support compatibility levels below 1200, as these do not use the [Tabular Object Model (TOM)](https://learn.microsoft.com/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) metadata format. Si planea migrar el desarrollo de Visual Studio a Tabular Editor para un modelo con nivel de compatibilidad 1100 o 1103, **debe actualizar el nivel de compatibilidad al menos a 1200** antes de migrar a Tabular Editor. Al hacerlo, ya no podrá implementar el modelo en SQL Server 2014 Analysis Services.
 
 ## Proyectos de Visual Studio
 
@@ -105,10 +107,13 @@ Si quiere usar la función [Guardar en carpeta](xref:parallel-development#what-i
 
 ## Control de versiones
 
-Tabular Editor no incluye ninguna solución Integrada de control de versiones para los metadatos del modelo. Sin embargo, como todos los metadatos del modelo se almacenan en el disco como archivos de texto sin formato (JSON), resulta sencillo incluir los metadatos del modelo tabular en cualquier tipo de sistema de control de versiones. Por este motivo, la mayoría de los usuarios de Tabular Editor prefieren seguir teniendo Visual Studio instalado para acceder a [Visual Studio Team Explorer](https://docs.microsoft.com/en-us/azure/devops/user-guide/work-team-explorer?view=azure-devops) o, específicamente para Git, a la nueva [ventana Cambios de Git](https://docs.microsoft.com/en-us/visualstudio/version-control/git-with-visual-studio?view=vs-2019) de Visual Studio 2019.
+Tabular Editor stores all model metadata as simple text files on disk, so it is straightforward to include the tabular model metadata in any type of version control system. Tabular Editor 3 supports several text-based serialization formats designed for this purpose:
 
-> [!NOTE]
-> A día de hoy, parece que [git](https://git-scm.com/) es el sistema de control de versiones preferido por la mayoría de los desarrolladores. La integración con Git en Tabular Editor 3 está prevista para una actualización futura.
+- [Save to folder](xref:save-to-folder) breaks the model out into many small files, which minimizes merge conflicts during parallel development (see below).
+- [TMDL](xref:tmdl) is a concise, human-readable serialization format supported by Tabular Editor and recent versions of Visual Studio.
+- [Save with supporting files](xref:save-with-supporting-files) produces the folder structure required for [Git integration in Microsoft Fabric](xref:save-with-supporting-files).
+
+You can manage these files with [git](https://git-scm.com/) directly, or continue to use the version control tooling built into Visual Studio, such as the [Git Changes window](https://learn.microsoft.com/visualstudio/version-control/git-with-visual-studio).
 
 Una vez que migre a Tabular Editor, ya no necesita conservar el proyecto original del modelo Tabular ni los archivos de apoyo creados por Visual Studio. Aun así, puede usar Visual Studio Team Explorer o la ventana Cambios de Git para ver cambios en el código, administrar ramas del control de versiones, realizar check-ins, fusiones, etc.
 
@@ -168,7 +173,7 @@ En Tabular Editor, usamos la vista de mensajes para consolidar todos los mensaje
 
 En la captura anterior, fíjate en que hay tres fuentes diferentes que publican mensajes:
 
-- **Analysis Services**: Cuando se guardan cambios de metadatos en una instancia conectada de Analysis Services, el servidor actualiza los metadatos TOM para indicar si algún objeto está en un estado erróneo. En concreto, se actualizan las propiedades [State](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.state?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_State) y [ErrorMessage](https://docs.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.errormessage?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_ErrorMessage) de la medida. Tabular Editor muestra estos mensajes de error en la vista de mensajes. Estos mensajes no se muestran cuando Tabular Editor se usa sin conexión (es decir, sin conectarse a Analysis Services).
+- **Analysis Services**: Cuando se guardan cambios de metadatos en una instancia conectada de Analysis Services, el servidor actualiza los metadatos TOM para indicar si algún objeto está en un estado erróneo. Specifically, the [State](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.state?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_State) and [ErrorMessage](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.measure.errormessage?view=analysisservices-dotnet#Microsoft_AnalysisServices_Tabular_Measure_ErrorMessage) properties are updated. Tabular Editor muestra estos mensajes de error en la vista de mensajes. Estos mensajes no se muestran cuando Tabular Editor se usa sin conexión (es decir, sin conectarse a Analysis Services).
 - **Análisis semántico de Tabular Editor**: Además, Tabular Editor 3 realiza su propio análisis semántico de todas las expresiones DAX del modelo. Cualquier error de sintaxis o de semántica que se encuentre se informa aquí.
 - **Editor de expresiones**: Por último, si hay documentos abiertos en Tabular Editor 3, como el Editor de expresiones, cualquier error de sintaxis o de semántica de DAX que se encuentre en el documento se informa aquí.
 
@@ -214,10 +219,11 @@ Una vez agregadas las tablas al diagrama, puedes crear una relación entre colum
 
 Tabular Editor te permite implementar fácilmente los metadatos del modelo en cualquier instancia de Analysis Services. Puedes abrir el Asistente de implementación de Tabular Editor desde **Modelo > Implementar...** o pulsando CTRL+SHIFT+D.
 
-Para obtener más información, consulta [Implementación del modelo](../features/deployment.md).
+For more information, see [Model deployment](xref:deployment).
 
 ## Pasos siguientes
 
 - @migrate-from-te2
 - @parallel-development
+- @save-with-supporting-files
 - @boosting-productivity-te3
