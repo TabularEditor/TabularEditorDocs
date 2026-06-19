@@ -119,10 +119,9 @@ def generate_redirects_config(template: dict) -> dict:
     # Set English output destination (relative to localizedContent/en/)
     config["build"]["dest"] = "../../_site/en"
 
-    # Point the sitemap at the default language's URL prefix
+    # Point the sitemap at the English URL prefix
     if "sitemap" in config["build"]:
-        config["build"]["sitemap"]["baseUrl"] = f"{get_base_url()}/{get_default_language()}"
-
+        config["build"]["sitemap"]["baseUrl"] = f"{get_base_url()}/en"
     # Update template paths - need to go up two levels to reach project root
     if "template" in config["build"]:
         new_templates = []
