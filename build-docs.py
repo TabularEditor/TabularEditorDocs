@@ -330,9 +330,8 @@ def main() -> int:
         "Generating staticwebapp.config.json"
     )
 
-    # Generate site-wide sitemap index (references each language's sitemap.xml)
-    # and robots.txt. Runs last so all per-language sitemaps already exist.
-    run_command(
+    # Generate site-wide sitemap index (references the default language's sitemap.xml)
+    # and robots.txt. Runs last so the default language sitemap already exists.
         [sys.executable, "build_scripts/gen_sitemap_index.py"],
         "Generating sitemap index and robots.txt"
     )
