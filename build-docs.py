@@ -85,15 +85,24 @@ def prepare_localized_content(lang: str, sync: bool = False) -> int:
         )
 
     if sync:
-        return run_command(
+        result = run_command(
             [sys.executable, "build_scripts/sync-localized-content.py", "--sync", lang],
             f"Syncing {lang} content (fallback to English for outdated)"
         )
     else:
-        return run_command(
+        result = run_command(
             [sys.executable, "build_scripts/sync-localized-content.py", "--shared-only", lang],
             f"Syncing shared directories for {lang}"
         )
+    if result != 0:
+        return result
+
+    # Repair Crowdin-collapsed DocFX alerts (e.g. "> [!NOTE]> text") before docfx
+    # builds this language, so alerts render as styled boxes instead of plain quotes.
+    return run_command(
+        [sys.executable, "build_scripts/normalize-localized-alerts.py", lang],
+        f"Normalizing DocFX alerts for {lang}"
+    )
 
 
 def build_language(lang: str, sync: bool = False) -> int:

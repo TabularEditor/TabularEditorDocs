@@ -57,11 +57,12 @@ swa start _site
 1. **Generates DocFX configurations** - Runs `gen_redirects.py` to create `docfx.json` for each language
 2. **Generates language manifest** - Creates `metadata/languages.json` for runtime language switching
 3. **Syncs content** - Copies English source to `localizedContent/en/`. For other languages, only shared directories (assets, api) are synced by default since Crowdin manages translations. Use `--sync` to enable full English fallback for missing/outdated translations (useful for local development).
-4. **Builds documentation** - Runs DocFX for each requested language
-5. **Fixes API docs** - Patches xref links in generated API documentation
-6. **Copies API docs** - Shares English API docs with localized sites
-7. **Injects SEO tags** - Adds hreflang and canonical tags to HTML files
-8. **Generates SWA config** - Creates `staticwebapp.config.json` for Azure Static Web Apps routing
+4. **Normalizes DocFX alerts** - Runs `normalize-localized-alerts.py` on each non-English language to repair Crowdin-collapsed Note/Tip/etc. alerts before building (see [DocFX Alerts and Translations](#docfx-alerts-and-translations))
+5. **Builds documentation** - Runs DocFX for each requested language
+6. **Fixes API docs** - Patches xref links in generated API documentation
+7. **Copies API docs** - Shares English API docs with localized sites
+8. **Injects SEO tags** - Adds hreflang and canonical tags to HTML files
+9. **Generates SWA config** - Creates `staticwebapp.config.json` for Azure Static Web Apps routing
 
 # Project Structure
 
@@ -73,7 +74,8 @@ TEDoc/
 │   ├── gen_languages.py       # Generates language manifest
 │   ├── gen_staticwebapp_config.py
 │   ├── inject_seo_tags.py
-│   └── sync-localized-content.py
+│   ├── sync-localized-content.py
+│   └── normalize-localized-alerts.py  # Repairs Crowdin-collapsed DocFX alerts
 ├── content/                   # English source content (tracked in git)
 │   └── _ui-strings.json       # English UI strings (header, footer, banners)
 ├── localizedContent/          # Build directories for all languages
@@ -116,6 +118,28 @@ To prevent this, add an `<a name="..."></a>` tag above any heading that is refer
 ```
 
 Crowdin does not translate HTML `name` attributes, so the anchor remains stable across all languages. Only add these to headings that are actually linked to — there is no need to add them to every heading.
+
+# DocFX Alerts and Translations
+
+DocFX renders styled alert boxes (Note, Tip, Important, Warning, Caution) from a two-line blockquote where the marker stands alone on the first line:
+
+```markdown
+> [!NOTE]
+> Your note text here.
+```
+
+When an alert like this is nested inside a list item, Crowdin collapses the two lines into one on export, producing `> [!NOTE]> Your note text here.`. DocFX requires the marker to be alone on its line, so the collapsed form is downgraded to a plain `<blockquote>` — losing the styled box — and the build logs an `invalid-note-section` warning. Only list-nested alerts are affected; top-level alerts round-trip through Crowdin unchanged.
+
+`build_scripts/normalize-localized-alerts.py` repairs this by splitting the collapsed form back into two lines, preserving the original indentation so the alert stays inside its list item. It is idempotent and only rewrites the exact collapsed pattern (text inside fenced code blocks is left untouched), so it is safe to run repeatedly.
+
+The build runs it automatically for each non-English language before DocFX (step 4 of [What the Build Script Does](#what-the-build-script-does)). You can also run it manually after a Crowdin pull:
+
+```bash
+python build_scripts/normalize-localized-alerts.py            # fix all languages
+python build_scripts/normalize-localized-alerts.py --dry-run  # preview without writing
+python build_scripts/normalize-localized-alerts.py --check    # exit 1 if fixes are needed (CI)
+python build_scripts/normalize-localized-alerts.py es         # fix a single language
+```
 
 # Translating UI Strings
 
