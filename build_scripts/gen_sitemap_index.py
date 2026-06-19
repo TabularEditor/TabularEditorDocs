@@ -87,11 +87,15 @@ def apply_downrank(sitemap_path: Path, rules: list[dict], dry_run: bool = False)
             continue
         loc = loc_el.text
         for rule in rules:
-            if rule["match"] in loc:
+            match = rule.get("match")
+            priority = rule.get("priority")
+            if not match or priority is None:
+                continue
+            if match in loc:
                 priority_el = url.find(f"{{{SITEMAP_NS}}}priority")
                 if priority_el is None:
                     priority_el = ET.SubElement(url, f"{{{SITEMAP_NS}}}priority")
-                priority_el.text = f"{float(rule['priority']):.1f}"
+                priority_el.text = f"{float(priority):.1f}"
                 changed += 1
                 break
 
