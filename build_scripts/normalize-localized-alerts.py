@@ -44,24 +44,41 @@ LOCALIZED_DIR = TEDOC_ROOT / "localizedContent"
 # indentation, the marker, and the trailing content.
 COLLAPSED_ALERT_RE = re.compile(r"^([ \t]*)>[ \t]?(\[![A-Za-z]+\])>[ \t]?(.*)$")
 
-# Toggles fenced-code state so alert-looking text inside code samples is left alone.
-FENCE_RE = re.compile(r"^\s*(`{3,}|~{3,})")
+# A fenced-code delimiter: 3+ backticks or 3+ tildes, optionally indented.
+# Group 1 is the run of fence characters; group 2 is any trailing text
+# (an info string on an opener; must be blank on a valid closer).
+FENCE_RE = re.compile(r"^\s*(`{3,}|~{3,})(.*)$")
 
 
 def normalize_text(text: str, newline: str) -> tuple[str, int]:
-    """Return (new_text, fixes) with collapsed alerts split into two lines."""
+    """Return (new_text, fixes) with collapsed alerts split into two lines.
+
+    Fenced code blocks are tracked per CommonMark so alert-looking text inside a
+    code sample is never rewritten: a fence is only *closed* by a delimiter using
+    the same character, at least as long as the opener, with no trailing text.
+    This keeps state in sync across nested/mismatched fences (e.g. a ```` block
+    that contains ``` lines, or backtick and tilde fences mixed in one file).
+    """
     lines = text.split(newline)
     out: list[str] = []
-    in_fence = False
+    fence_char = ""  # "" when outside a fence, else the opener's char ("`"/"~")
+    fence_len = 0
     fixes = 0
 
     for line in lines:
-        if FENCE_RE.match(line):
-            in_fence = not in_fence
+        fence = FENCE_RE.match(line)
+        if fence:
+            run, tail = fence.group(1), fence.group(2)
+            char, length = run[0], len(run)
+            if not fence_char:
+                fence_char, fence_len = char, length  # opening fence
+            elif char == fence_char and length >= fence_len and not tail.strip():
+                fence_char, fence_len = "", 0  # matching closing fence
+            # Otherwise it's a fence-looking line inside the block: leave as content.
             out.append(line)
             continue
 
-        if not in_fence:
+        if not fence_char:
             m = COLLAPSED_ALERT_RE.match(line)
             if m:
                 indent, marker, rest = m.group(1), m.group(2), m.group(3)
