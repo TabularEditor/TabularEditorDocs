@@ -155,11 +155,13 @@ def build_language(lang: str, sync: bool = False) -> int:
     if result != 0:
         return result
     
-    # Build the documentation — fail if DocFX emits any warnings
+    # Build the documentation — fail on DocFX warnings only for English (the
+    # authored source). Localized content is Crowdin-managed and may carry
+    # translation warnings that must not block deployment.
     return run_command(
         ["docfx", config_path],
         f"Building {lang} documentation",
-        fail_on_warnings=True
+        fail_on_warnings=(lang == "en")
     )
 
 

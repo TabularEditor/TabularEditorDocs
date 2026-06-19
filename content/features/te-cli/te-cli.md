@@ -54,7 +54,7 @@ See @te-cli-commands for a full command reference with syntax, options, and exam
 | [Execution](xref:te-cli-commands#execution) | Run DAX queries, C# scripts, macros | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te macro`](xref:te-cli-commands#macro) |
 | [Deployment & Refresh](xref:te-cli-commands#deployment-and-refresh) | Deploy to workspace, trigger refresh, incremental refresh | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te incremental-refresh`](xref:te-cli-commands#incremental-refresh) |
 | [Testing](xref:te-cli-commands#testing) | Assertion tests, snapshots, A/B comparison | [`te test run`](xref:te-cli-commands#test-run) |
-| [Connection & Authentication](xref:te-cli-commands#connection-and-auth) | Connect to workspaces, manage authentication and profiles | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove) |
+| [Connection & Authentication](xref:te-cli-commands#connection-and-authentication) | Connect to workspaces, manage authentication and profiles | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove) |
 | [Configuration](xref:te-cli-commands#configuration) | Settings and licensing | [`te config`](xref:te-cli-commands#config-show--paths--init--set) |
 | [Shell](xref:te-cli-commands#shell) | Interactive mode, shell completions | [`te interactive`](xref:te-cli-commands#interactive), [`te completion`](xref:te-cli-commands#completion) |
 

@@ -130,7 +130,7 @@ te connect Finance "Revenue Model" -w ./revenue-model
 te connect ./revenue-model -w Finance "Revenue Model"
 ```
 
-Save order is always **local first, then remote**, so the on-disk copy reflects the latest user change even if the server push fails. See @te-cli-commands#workspace-mode-w--workspace for `--workspace-format`, overwrite semantics, and clearing the mirror.
+Save order is always **local first, then remote**, so the on-disk copy reflects the latest user change even if the server push fails. See @te-cli-commands#workspace-mode--w----workspace for `--workspace-format`, overwrite semantics, and clearing the mirror.
 
 ## Connecting to different clouds
 
