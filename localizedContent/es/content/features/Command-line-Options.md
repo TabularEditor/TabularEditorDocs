@@ -2,21 +2,80 @@
 uid: command-line-options
 title: Línea de comandos (Tabular Editor 2)
 author: Daniel Otykier
-updated: 2021-08-26
+updated: 2026-06-09
 applies_to:
   products:
     - product: Tabular Editor 2
       full: true
     - product: Tabular Editor 3
       none: true
+    - product: Tabular Editor CLI
+      none: true
 ---
 
 # Línea de comandos (Tabular Editor 2)
 
+Tabular Editor se puede ejecutar desde la línea de comandos para realizar diversas tareas, lo que puede ser útil en escenarios de compilación e implementación automatizadas, etc.
+
+## How the tools fit together
+
+Tabular Editor 3 is a desktop application for developers. It has no command-line interface of its own. For automated deployments and CI/CD pipelines, use either `TabularEditor.exe` (the Tabular Editor 2 CLI documented on this page) or the new cross-platform [Tabular Editor CLI](xref:te-cli) (`te`).
+
+Running `TabularEditor.exe` in a CI/CD pipeline does not require a Tabular Editor 3 license. Only users of the Tabular Editor 3 application need a license.
+
 > [!TIP]
 > ¿Busca la nueva CLI multiplataforma? Consulte @te-cli para obtener la CLI de Tabular Editor (versión preliminar pública limitada), su sucesora que se ejecuta en Windows, macOS y Linux.
 
-Tabular Editor se puede ejecutar desde la línea de comandos para realizar diversas tareas, lo que puede ser útil en escenarios de compilación e implementación automatizadas, etc.
+## TabularEditor.exe vs. the Tabular Editor CLI
+
+The Tabular Editor CLI (`te`) is the cross-platform successor to `TabularEditor.exe`. It's not just a rewrite for macOS and Linux - it adds model editing, inspection, diffing, testing, refresh triggering, and VertiPaq analysis as first-class pipeline operations, none of which were possible with `TabularEditor.exe`. The `te` CLI is in Limited Public Preview (expires 2026-09-30); use `TabularEditor.exe` for production pipelines today.
+
+|                                      | TE2 CLI (`TabularEditor.exe`)                         | TE CLI (`te`)                                                                                                                                |
+| ------------------------------------ | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Estado                               | Stable, production-ready                                                 | Limited Public Preview (expires 2026-09-30)                                                                                                  |
+| Plataforma                           | Windows only                                                             | Windows, macOS, Linux                                                                                                                                           |
+| License required                     | No                                                                       | No (preview); TBD at GA                                                                                                                      |
+| Binary                               | WinForms app, requires `start /wait` wrapper                             | Purpose-built console binary, no wrapper needed                                                                                                                 |
+| **Authentication**                   |                                                                          |                                                                                                                                                                 |
+| Service Principal                    | Via MSOLAP connection string                                             | Native `--auth spn`, `--auth env`, `--auth managed-identity`; credentials via env vars, stdin, or certificate; OS-native secure credential store                |
+| Identidad administrada               | No                                                                       | Yes (`--auth managed-identity`), for Azure-hosted runners                                                                                    |
+| Interactive browser login            | No                                                                       | Yes (`te auth login`)                                                                                                                        |
+| **CI/CD**                            |                                                                          |                                                                                                                                                                 |
+| CI annotations                       | `-V` (Azure DevOps), `-G` (GitHub) | `--ci vsts`, `--ci github` on every command                                                                                                                     |
+| Modo no interactivo                  | No explicit flag; errors may prompt                                      | `--non-interactive` global flag - fails fast, no prompts                                                                                                        |
+| Predictable exit codes               | Partial                                                                  | `0` = success, `1` = failure, `2` = diff mismatch                                                                                                               |
+| Salida estructurada                  | No                                                                       | `--output-format json/csv/tmdl/tmsl` on every command                                                                                                           |
+| VSTEST results                       | `-T` flag                                                                | `--trx <file>` en `validate`, `bpa run`, `test run`                                                                                                             |
+| **Deployment**                       |                                                                          |                                                                                                                                                                 |
+| Deploy model                         | `-D` flag                                                                | `te deploy` with fine-grained flags (`--deploy-roles`, `--deploy-partitions`, `--deploy-connections`, `--deploy-full`, etc.) |
+| Generate XMLA/TMSL without deploying | `-X` flag                                                                | `te deploy --xmla <file>` or `--dry-run`                                                                                                                        |
+| BPA gate before deploy               | No                                                                       | Built-in; `--skip-bpa` or `--fix-bpa` to override                                                                                                               |
+| Perfiles de conexión                 | No                                                                       | `te profile set/list/show` - reusable named profiles per environment                                                                                            |
+| **Best Practice Analyzer**           |                                                                          |                                                                                                                                                                 |
+| Run BPA                              | `-A` / `-AX` flags                                                       | `te bpa run` with `--fail-on warning/error`, `--fix`, `--path` scoping, `--vpax` for VPA-aware rules                                                            |
+| BPA rule management                  | No                                                                       | `te bpa rules add/rm/set/list/disable/enable/init`                                                                                                              |
+| **Model editing in pipeline**        |                                                                          |                                                                                                                                                                 |
+| Run C# scripts                       | `-S` flag                                                                | `te script` - multiple scripts, inline code, stdin, `--dry-run`, preprocessor symbols (`TECLI`)                                              |
+| Run macros                           | No                                                                       | `te macro run` with `--on <object>` context                                                                                                                     |
+| Set/get properties                   | No                                                                       | `te get`, `te set`, `te add`, `te rm`, `te mv`, `te replace`                                                                                                    |
+| DAX formatting                       | No                                                                       | `te format` - all expressions or single object, DAX and M                                                                                                       |
+| **Inspection**                       |                                                                          |                                                                                                                                                                 |
+| List model objects                   | No                                                                       | `te ls` with wildcard path filters, `--type`, `--paths-only`, `--output-format bim`                                                                             |
+| Search expressions/names             | No                                                                       | `te find` with regex and scope (`--in expressions/names/descriptions`)                                                                       |
+| Diff two models                      | No                                                                       | `te diff` - structural comparison with exit code `2` on any difference                                                                                          |
+| Dependency analysis                  | No                                                                       | `te deps` - upstream/downstream for any object; `--unused` to find dead code                                                                                    |
+| **Refresh**                          |                                                                          |                                                                                                                                                                 |
+| Trigger refresh                      | No                                                                       | `te refresh` with `--type`, `--table`, `--partition`, `--apply-refresh-policy`, `--dry-run`                                                                     |
+| **Testing**                          |                                                                          |                                                                                                                                                                 |
+| DAX assertion tests                  | No                                                                       | `te test run` with `--tag`, `--trx`, `--ci`; `te test init/snapshot/compare`                                                                                    |
+| **VertiPaq analysis**                |                                                                          |                                                                                                                                                                 |
+| Storage statistics                   | No                                                                       | `te vertipaq` - columns, relationships, partitions; `--export`/`--import` VPAX                                                                                  |
+| **Other**                            |                                                                          |                                                                                                                                                                 |
+| Interactive REPL                     | No                                                                       | `te interactive` - model-aware shell with tab completion                                                                                                        |
+| Shell tab completion                 | No                                                                       | `te completion bash/zsh/pwsh`                                                                                                                                   |
+| TE2 backward compatibility           | Native                                                                   | Built-in compatibility layer - existing `TabularEditor.exe` invocations work unchanged                                                                          |
+
+For a flag-by-flag mapping from TE2 syntax to the new CLI, see @te-cli-migrate.
 
 **Nota:** Dado que TabularEditor.exe es una aplicación WinForms, si la ejecutas directamente desde un símbolo del sistema de Windows, el hilo volverá inmediatamente al símbolo del sistema. Esto puede provocar problemas en scripts de comandos, etc. Para esperar a que TabularEditor.exe termine sus tareas de línea de comandos, ejecútalo siempre así: `start /wait TabularEditor ...`
 
