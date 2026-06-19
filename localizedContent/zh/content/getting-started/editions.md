@@ -137,11 +137,11 @@ Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的
 
 如果您需要超过 100 个席位，请 <a href="mailto:sales@tabulareditor.com">联系销售</a> 获取报价。
 
-## Command-line and CI/CD licensing
+## 命令行与 CI/CD 授权许可
 
-Tabular Editor 3 is a desktop application. It has no command-line interface of its own. For automated deployments and CI/CD pipelines, use either `TabularEditor.exe` (the [Tabular Editor 2 command line](xref:command-line-options)) or the cross-platform [Tabular Editor CLI](xref:te-cli) (`te`). Both are separate from the Tabular Editor 3 desktop application.
+Tabular Editor 3 是一款桌面应用程序。 它本身没有命令行界面。 对于自动化部署和 CI/CD 流水线，可使用 `TabularEditor.exe`（[Tabular Editor 2 命令行](xref:command-line-options)）或跨平台的 [Tabular Editor CLI](xref:te-cli)（`te`）。 两者都独立于 Tabular Editor 3 桌面应用程序。
 
-> **Do I need a license to run CI/CD pipelines?**
-> No. `TabularEditor.exe` (TE2 CLI) and the Tabular Editor CLI (`te`, during preview) do not require a Tabular Editor 3 license. Only developers using the Tabular Editor 3 desktop application need a license.
+> **运行 CI/CD 管道需要许可证吗？**
+> 不需要。 `TabularEditor.exe`（TE2 CLI）和 Tabular Editor CLI（`te`，处于预览阶段）不需要 Tabular Editor 3 许可证。 只有使用 Tabular Editor 3 桌面应用程序的开发人员才需要许可证。
 
-At General Availability the Tabular Editor CLI will require a license; pricing is still being finalized and will be announced ahead of GA.
+Tabular Editor CLI 在正式发布（GA）时将需要许可证；定价仍在最终确定中，并会在 GA 之前公布。
