@@ -23,17 +23,16 @@ applies_to:
 
 ---
 
-要设置增量刷新，你必须为该表配置一项新的刷新策略。 将 _EnableRefreshPolicy_ 设为 `True` 后，配置刷新策略属性即可： 将 _EnableRefreshPolicy_ 设为 `True` 后，配置刷新策略属性即可：
+要设置增量刷新，你必须为该表配置一项新的刷新策略。 将 _EnableRefreshPolicy_ 设为 `True` 后，配置刷新策略属性即可：
 
 > [!IMPORTANT]
 > 使用 Tabular Editor 3 设置增量刷新仅适用于托管在 Power BI Datasets 服务中的 Dataset。
-> 对于 Analysis Services，则需要自定义 [分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 > 对于 Analysis Services，则需要自定义 [分区](https://learn.microsoft.com/en-us/analysis-services/tabular-models/partitions-ssas-tabular?view=asallproducts-allversions)。
 
 ### 配置新的刷新策略
 
 1. **连接到模型：** 连接到 Workspace 的 Power BI XMLA endpoint，并打开要配置增量刷新的 Dataset。
-2. **创建 `RangeStart` 和 `RangeEnd` 参数：** 增量刷新要求先创建 `RangeStart` 和 `RangeEnd` 参数（[了解详情](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)）。 在 Tabular Editor 中新增两个共享表达式： 在 Tabular Editor 中新增两个共享表达式：
+2. **创建 `RangeStart` 和 `RangeEnd` 参数：** 增量刷新要求先创建 `RangeStart` 和 `RangeEnd` 参数（[了解详情](https://docs.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-configure#create-parameters)）。 在 Tabular Editor 中新增两个共享表达式：
 
 <img src="~/content/assets/images/create-shared-expression-te3.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 
@@ -75,7 +74,7 @@ applies_to:
 
 对于日期、字符串或整数类型的列，你仍然可以在保持查询折叠的同时进行筛选——只需使用函数将 `RangeStart` 或 `RangeEnd` 转换为相应的数据类型。 有关详细信息，请参阅[此处](https://learn.microsoft.com/en-us/power-bi/connect-data/incremental-refresh-overview#supported-data-sources)
 
-7. **配置刷新策略：** 根据你所需的增量刷新策略配置其余属性。 **配置刷新策略：** 根据你所需的增量刷新策略配置其余属性。 记得为 `SourceExpression` 属性指定一个 M 表达式（该表达式会添加到由增量刷新的刷新策略创建的分区中，并应使用 `RangeStart` 和 `RangeEnd` 参数在源中筛选数据）。 = 运算符只能用于 RangeStart 或 RangeEnd 其中之一，不能同时用于两者，否则可能导致数据重复。 = 运算符只能用于 RangeStart 或 RangeEnd 其中之一，不能同时用于两者，否则可能导致数据重复。
+7. **配置刷新策略：** 根据你所需的增量刷新策略配置其余属性。 记得为 `SourceExpression` 属性指定一个 M 表达式（该表达式会添加到由增量刷新的刷新策略创建的分区中，并应使用 `RangeStart` 和 `RangeEnd` 参数在源中筛选数据）。 = 运算符只能用于 RangeStart 或 RangeEnd 其中之一，不能同时用于两者，否则可能导致数据重复。
 
    - **Source Expression:** 将添加到由刷新策略创建的分区的 M 表达式。
    - **IncrementalWindowGranularity:** 增量（刷新）窗口的粒度。
@@ -84,8 +83,10 @@ applies_to:
    - **RollingWindowGranularity:** 滚动（归档）窗口的粒度。
    - **RollingWindowPeriods:** 需要归档的周期数（按上面指定的粒度）。
    - **Mode:** 是标准 `Import` 刷新策略还是 `Hybrid`，其中最后一个分区为 DirectQuery。
-   - **PollingExpression:** 用于检测数据更改的有效 M 表达式。 **PollingExpression:** 用于检测数据更改的有效 M 表达式。 有关 _Polling Expression_ 或其他刷新策略属性的更多信息，请参阅[此处](xref:incremental-refresh-about#overview-of-all-properties)。
+   - **PollingExpression:** 用于检测数据更改的有效 M 表达式。 有关 _Polling Expression_ 或其他刷新策略属性的更多信息，请参阅[此处](xref:incremental-refresh-about#overview-of-all-properties)。
+
 8. **Apply Model Changes:** 保存模型（Ctrl+S）。
+
 9. **应用刷新策略：** 右键单击该表，然后选择“应用刷新策略”。
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
