@@ -80,7 +80,7 @@ Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的
 
 \***注：** SQL Server 标准版 2019 之前的 Analysis Services 不支持 DirectQuery。 Azure AS 基本层也同样不支持 DirectQuery。 [了解更多](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models)。 Azure AS 基本层也同样不支持 DirectQuery。 [了解更多](https://learn.microsoft.com/en-us/analysis-services/analysis-services-features-by-edition?view=asallproducts-allversions#tabular-models)。
 
-\*\***注意：** 在商业版中，Power BI 模型支持透视和多个分区，但模型的 `CompatibilityMode` 必须设置为 `PowerBI`。 有关操作说明，请参阅 [更改兼容模式](xref:change-compatibility-mode)。 有关操作说明，请参阅 [更改兼容模式](xref:change-compatibility-mode)。
+\*\***注意：** 在商业版中，Power BI 模型支持透视和多个分区，但模型的 `CompatibilityMode` 必须设置为 `PowerBI`。 有关操作说明，请参阅 [更改兼容模式](xref:change-compatibility-mode)。
 
 如果您在使用 TE3 商业版许可证时尝试打开一个应用了上述一项或多项建模限制的模型，将会看到以下错误信息：
 
