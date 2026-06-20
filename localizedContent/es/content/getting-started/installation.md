@@ -29,7 +29,7 @@ Para el flujo de activación estándar, consulta @getting-started.
 
 Si no tienes acceso a Internet, por ejemplo, debido a un proxy, Tabular Editor te pedirá que realices una activación manual.
 
-![Activación del producto](~/content/assets/images/getting-started/product-activation.png)
+![Aviso de activación manual](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
 
 Después de introducir tu correo electrónico, aparece un cuadro de diálogo con un enlace a una clave de activación. Copia la URL y ábrela en un navegador web conectado a Internet.
 
