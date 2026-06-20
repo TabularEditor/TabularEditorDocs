@@ -27,11 +27,11 @@ Recomendamos el instalador MSI de 64 bits para la mayoría de los casos. Una vez
 
 ![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
 
-### Requisitos del sistema
+### Requisitos previos
 
 Ninguno.
 
-### Requisitos previos
+### Requisitos del sistema
 
 - **Sistema operativo:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 o versiones posteriores
 - **Arquitectura:** x64, ARM64 (nativo a partir de 3.23.0)
