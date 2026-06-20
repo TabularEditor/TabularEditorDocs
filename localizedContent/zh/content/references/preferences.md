@@ -26,7 +26,7 @@ applies_to:
 要打开“偏好设置”对话框，请依次选择 **工具 > 偏好**。
 
 > [!NOTE]
-> 所有 Tabular Editor 偏好设置都会针对每个 Windows 用户配置文件分别存储在 `%localappdata%\\TabularEditor3` 文件夹中。 只需复制该文件夹中的内容，即可将你的设置迁移到另一台机器。 只需复制该文件夹中的内容，即可将你的设置迁移到另一台机器。
+> 所有 Tabular Editor 偏好设置都会针对每个 Windows 用户配置文件分别存储在 `%localappdata%\\TabularEditor3` 文件夹中。 只需复制该文件夹中的内容，即可将你的设置迁移到另一台机器。
 
 > [!TIP]
 > 在“偏好”对话框顶部使用搜索框，可快速找到特定设置。
