@@ -25,7 +25,7 @@ SUMMARY: Overview of the Semantic Bridge feature - a multi-platform semantic mod
 -->
 
 > [!NOTE]
-> 在 3.25.0 版本中发布的 Semantic Bridge 目前处于公共预览阶段。 它存在下文所述的限制，且 API 和功能范围可能会发生变化。 它存在下文所述的限制，且 API 和功能范围可能会发生变化。
+> 在 3.25.0 版本中发布的 Semantic Bridge 目前处于公共预览阶段。 它存在下文所述的限制，且 API 和功能范围可能会发生变化。
 
 Semantic Bridge 是一个语义模型编译器，能够将语义模型的结构和表达式从一个平台转换到另一个平台。
 这样你就能在多个数据平台上复用业务逻辑，支持终端用户，并在他们使用数据的场景中为其提供支持。
@@ -137,7 +137,6 @@ SemanticBridge.MetricView.ImportDiagnostics.Output();
 
 在公共预览版中，我们支持将 Databricks Metric View 翻译为 Tabular 模型。
 具体来说，我们支持 Databricks Metric View 的以下内容：
-具体来说，我们支持 Databricks Metric View 的以下内容：
 
 - v0.1 Metric View 属性：
   - 支持：
@@ -181,7 +180,6 @@ Metric View 在 SQL 表达式之上提供了一个结构化层，因此翻译 Me
 ### 连接
 
 公共预览版不会连接除 Tabular 之外的任何平台，而是完全基于本地文件运行。
-你必须自行创建 Metric View YAML，然后将其放到 Tabular Editor 能够访问的位置。
 你必须自行创建 Metric View YAML，然后将其放到 Tabular Editor 能够访问的位置。
 
 ### C# API
