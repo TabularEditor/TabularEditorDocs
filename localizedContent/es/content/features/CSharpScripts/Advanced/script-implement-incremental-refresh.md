@@ -25,7 +25,7 @@ Para usar el script, selecciona la columna de fecha de la tabla para la que quie
 > Asegúrate de comprobar que se ha hecho correctamente.
 >
 > Si tienes muchos pasos, asegúrate de mover este paso a un punto en el que pueda plegarse hasta la fuente de datos.
-> Asegúrate de ajustar todas las \\`#"Step References" en Power Query
+> Asegúrate de ajustar todas las \`#"Step References" en Power Query
 
 > [!NOTE]
 > Este script usa la entrada del usuario para generar la política de actualización.
