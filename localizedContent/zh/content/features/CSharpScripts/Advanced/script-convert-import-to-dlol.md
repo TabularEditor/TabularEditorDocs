@@ -15,11 +15,11 @@ applies_to:
 
 ## 脚本用途
 
-此脚本将导入模式表转换为 OneLake 上的 Direct Lake（DL/OL）。 正如 [Direct Lake 指南文章](xref:direct-lake-guidance) 中所述，我们需要将这类表的分区替换为单个 [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet)。该分区会指定 Fabric Lakehouse 或 Warehouse 中表/物化视图的名称和架构，并引用一个使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake)（OneLake）连接器的共享表达式（Shared Expression）。 正如 [Direct Lake 指南文章](xref:direct-lake-guidance) 中所述，我们需要将这类表的分区替换为单个 [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet)。该分区会指定 Fabric Lakehouse 或 Warehouse 中表/物化视图的名称和架构，并引用一个使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake)（OneLake）连接器的共享表达式（Shared Expression）。
+此脚本将导入模式表转换为 OneLake 上的 Direct Lake（DL/OL）。 正如 [Direct Lake 指南文章](xref:direct-lake-guidance) 中所述，我们需要将这类表的分区替换为单个 [EntityPartition](https://learn.microsoft.com/en-us/dotnet/api/microsoft.analysisservices.tabular.entitypartitionsource?view=analysisservices-dotnet)。该分区会指定 Fabric Lakehouse 或 Warehouse 中表/物化视图的名称和架构，并引用一个使用 [`AzureStorage.DataLake`](https://learn.microsoft.com/en-us/powerquery-m/azurestorage-datalake)（OneLake）连接器的共享表达式（Shared Expression）。
 
 ## 先决条件
 
-你需要 **Workspace ID**，以及 Fabric Warehouse 或 Lakehouse 的 **Resource ID**。 这两者都是 GUID，当你在 Fabric 门户中导航到 Warehouse 或 Lakehouse 时，它们会出现在 URL 中： 这两者都是 GUID，当你在 Fabric 门户中导航到 Warehouse 或 Lakehouse 时，它们会出现在 URL 中：
+你需要 **Workspace ID**，以及 Fabric Warehouse 或 Lakehouse 的 **Resource ID**。 这两者都是 GUID，当你在 Fabric 门户中导航到 Warehouse 或 Lakehouse 时，它们会出现在 URL 中：
 
 ![Lakehouse Warehouse URL](~/content/assets/images/lakehouse-warehouse-url.png)
 
@@ -28,8 +28,7 @@ applies_to:
 如果你要连接到支持架构的 Fabric Warehouse 或 Lakehouse，还需要知道你要连接的表/物化视图的 **Schema**。
 
 > [!WARNING]
-> 导入模式表可以在其分区中定义转换（使用 SQL 或 M 表达）。 [!WARNING]
-> 导入模式表可以在其分区中定义转换（使用 SQL 或 M 表达）。 当转换为 OneLake 上的 Direct Lake 模式时，这些转换将会丢失，因为 Direct Lake 分区必须与源表/物化视图中的列保持 1:1 映射。 因此，在运行此脚本之前，请确保源表/物化视图在 Fabric Warehouse 或 Lakehouse 中的名称与语义模型中的名称一致，并且列映射正确。 因此，在运行此脚本之前，请确保源表/物化视图在 Fabric Warehouse 或 Lakehouse 中的名称与语义模型中的名称一致，并且列映射正确。
+> 导入模式表可以在其分区中定义转换（使用 SQL 或 M 表达）。 当转换为 OneLake 上的 Direct Lake 模式时，这些转换将会丢失，因为 Direct Lake 分区必须与源表/物化视图中的列保持 1:1 映射。 因此，在运行此脚本之前，请确保源表/物化视图在 Fabric Warehouse 或 Lakehouse 中的名称与语义模型中的名称一致，并且列映射正确。
 
 ## 脚本
 
@@ -197,10 +196,10 @@ public class UrlNameDialog : Form
 
 ### 说明
 
-脚本首先判断：是转换模型中所有导入模式表，还是仅转换用户选中的表。 接着，脚本会检查是否存在此类表，并在继续之前提示用户确认。 接着，脚本会检查是否存在此类表，并在继续之前提示用户确认。
+脚本首先判断：是转换模型中所有导入模式表，还是仅转换用户选中的表。 接着，脚本会检查是否存在此类表，并在继续之前提示用户确认。
 
-脚本随后会尝试查找一个使用 `AzureStorage.DataLake` 连接器的共享表达式。 如果存在这样的表达式，它会从该表达式中提取 Workspace ID 和 Resource ID。 如果未找到这样的表达式，它会创建一个新的表达式。 如果存在这样的表达式，它会从该表达式中提取 Workspace ID 和 Resource ID。 如果未找到这样的表达式，它会创建一个新的表达式。
+脚本随后会尝试查找一个使用 `AzureStorage.DataLake` 连接器的共享表达式。 如果存在这样的表达式，它会从该表达式中提取 Workspace ID 和 Resource ID。 如果未找到这样的表达式，它会创建一个新的表达式。
 
-随后会提示用户输入 Fabric Warehouse 或 Lakehouse 的 Workspace ID 和 Resource ID，以及一个可选的 Schema 名称。 如果这些 ID 有所更改，脚本会用一个使用所提供 ID 的新共享表达式替换现有共享表达式。 如果这些 ID 有所更改，脚本会用一个使用所提供 ID 的新共享表达式替换现有共享表达式。
+随后会提示用户输入 Fabric Warehouse 或 Lakehouse 的 Workspace ID 和 Resource ID，以及一个可选的 Schema 名称。 如果这些 ID 有所更改，脚本会用一个使用所提供 ID 的新共享表达式替换现有共享表达式。
 
-最后，对于每个导入模式表，脚本都会创建一个新的 EntityPartition，并使用指定的名称和架构，同时引用共享表达式。 随后，它会删除表上除新创建的 EntityPartition 之外的所有现有分区。 随后，它会删除表上除新创建的 EntityPartition 之外的所有现有分区。
+最后，对于每个导入模式表，脚本都会创建一个新的 EntityPartition，并使用指定的名称和架构，同时引用共享表达式。 随后，它会删除表上除新创建的 EntityPartition 之外的所有现有分区。
