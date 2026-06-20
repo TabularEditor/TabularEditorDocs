@@ -31,7 +31,7 @@ applies_to:
 
 ![新建模型](https://user-images.githubusercontent.com/8976200/116813646-02a6fc80-ab55-11eb-89b0-8909b768ce7e.png)
 
-- 为模型命名，或使用默认名称。 为模型命名，或使用默认名称。 然后，根据你要面向的 Analysis Services 版本选择相应的兼容级别。 可选项如下： 可选项如下：
+- 为模型命名，或使用默认名称。 然后，根据你要面向的 Analysis Services 版本选择相应的兼容级别。 可选项如下：
   - 1200（适用于 SQL Server 2016 或更高版本，以及 Azure Analysis Services）
   - 1400（适用于 SQL Server 2017 或更高版本，以及 Azure Analysis Services）
   - 1500（适用于 SQL Server 2019 或 Azure Analysis Services）
