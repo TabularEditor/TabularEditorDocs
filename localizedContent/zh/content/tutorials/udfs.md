@@ -206,7 +206,7 @@ UDF 会显示在 **DAX 依赖项**（Shift+F12）视图中，同时展示：
 
 ### 命名空间
 
-DAX 中并没有“命名空间”的概念，但我们建议为 UDF 命名时尽量避免歧义，并让 UDF 的来源一目了然。 例如 `DaxLib.Convert.CelsiusToFahrenheit`（使用“.” 例如 `DaxLib.Convert.CelsiusToFahrenheit`（使用“.” 作为命名空间分隔符）。 当 UDF 采用这种命名方式时，TOM Explorer 会根据名称以层级结构显示 UDF。 作为命名空间分隔符）。 当 UDF 采用这种命名方式时，TOM Explorer 会根据名称以层级结构显示 UDF。 你可以使用 TOM Explorer 上方工具栏中的 **Group User-Defined Functions by namespace** 切换按钮，按命名空间对 UDF 的显示进行分组（注意：仅当处理兼容级别为 1702 或更高的模型时，才会显示该按钮）。
+DAX 中并没有“命名空间”的概念，但我们建议为 UDF 命名时尽量避免歧义，并让 UDF 的来源一目了然。 例如 `DaxLib.Convert.CelsiusToFahrenheit`（使用“.” 例如 `DaxLib.Convert.CelsiusToFahrenheit`（使用“.” 作为命名空间分隔符）。 当 UDF 采用这种命名方式时，TOM Explorer 会根据名称以层级结构显示 UDF。 你可以使用 TOM Explorer 上方工具栏中的 **Group User-Defined Functions by namespace** 切换按钮，按命名空间对 UDF 的显示进行分组（注意：仅当处理兼容级别为 1702 或更高的模型时，才会显示该按钮）。
 
 ![按命名空间分组的 DAX UDF](~/content/assets/images/udf-namespaces-tom-explorer.png)
 
@@ -321,7 +321,7 @@ Tabular Editor 3 会自动识别所有注释，并在自动完成建议和工具
 - UDF 不能递归（调用自身）
 
 > [!NOTE]
-> 截至 2026 年六月，UDF 已 [正式可用](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738)。 作为其中的一部分，UDF 现已支持默认表达式和可选参数。 但是，在使用默认表达式语法时，Tabular Editor 3 目前会误报一条错误信息。 此问题将在 Tabular Editor 3 的下一次更新中修复。 作为其中的一部分，UDF 现已支持默认表达式和可选参数。 但是，在使用默认表达式语法时，Tabular Editor 3 目前会误报一条错误信息。 此问题将在 Tabular Editor 3 的下一次更新中修复。
+> 截至 2026 年六月，UDF 已 [正式可用](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738)。 作为其中的一部分，UDF 现已支持默认表达式和可选参数。 但是，在使用默认表达式语法时，Tabular Editor 3 目前会误报一条错误信息。 此问题将在 Tabular Editor 3 的下一次更新中修复。
 
 ---
 
