@@ -11,7 +11,7 @@ updated: 2023-02-23
 
 ---
 
-本节包含由 Tabular Editor 团队验证并确认的官方 Tabular Editor 脚本。 本节包含由 Tabular Editor 团队验证并确认的官方 Tabular Editor 脚本。 这些脚本由 Tabular Editor 团队用于演示、会议和文档，并为方便您使用而在此维护。  使用这些脚本仍需由您自行承担责任。  使用这些脚本仍需由您自行承担责任。
+本节包含由 Tabular Editor 团队验证并确认的官方 Tabular Editor 脚本。 这些脚本由 Tabular Editor 团队用于演示、会议和文档，并为方便您使用而在此维护。  使用这些脚本仍需由您自行承担责任。
 
 此外，社区还维护着一些包含 C# Script 的在线资源，例如 PowerBI.tips 的优秀代码仓库：[PowerBI.Tips C# Script 代码仓库](https://github.com/PowerBI-tips/TabularEditor-Scripts)，以及 Michael Kovalsky 的优秀博客 [ElegantBI](https://www.elegantbi.com/) 和 [Tabular Scripts 代码仓库](https://github.com/m-kovalsky/Tabular)
 
@@ -24,7 +24,7 @@ updated: 2023-02-23
 <br></br>
 
 > [!NOTE]
-> 由于 Power BI Desktop 外部工具的限制，部分脚本在连接到 Power BI Desktop 模型时无法工作：[外部工具限制](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)。 你仍然可以在偏好设置中启用“不受支持的建模操作”，以试用该脚本。 <br></br> 你仍然可以在偏好设置中启用“不受支持的建模操作”，以试用该脚本。 <br></br>
+> 由于 Power BI Desktop 外部工具的限制，部分脚本在连接到 Power BI Desktop 模型时无法工作：[外部工具限制](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-external-tools#data-modeling-operations)。 你仍然可以在偏好设置中启用“不受支持的建模操作”，以试用该脚本。 <br></br>
 
 ### [Tabular Editor 2 偏好设置](#tab/TE2Preferences)
 
