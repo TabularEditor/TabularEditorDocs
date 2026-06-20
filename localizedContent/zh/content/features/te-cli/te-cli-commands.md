@@ -17,7 +17,7 @@ applies_to:
 
 [!INCLUDE [te-cli-preview-notice](includes/te-cli-preview-notice.md)]
 
-本页为每个命令提供简要说明和一个示例。 本页为每个命令提供简要说明和一个示例。 每个命令都支持 `--help`，可查看详尽的标志与选项说明：
+本页为每个命令提供简要说明和一个示例。 每个命令都支持 `--help`，可查看详尽的标志与选项说明：
 
 ```bash
 te deploy --help            # Help for a single command
@@ -25,14 +25,14 @@ te bpa run --help           # Help for a command with subcommands
 ```
 
 > [!NOTE]
-> 在预览版期间，CLI 的 `--help` 输出是标志和选项的权威参考。 本页内容由人工整理，因此在两次预览版本之间新增的内容，本页更新会比 `--help` 更晚。 本页内容由人工整理，因此在两次预览版本之间新增的内容，本页更新会比 `--help` 更晚。
+> 在预览版期间，CLI 的 `--help` 输出是标志和选项的权威参考。 本页内容由人工整理，因此在两次预览版本之间新增的内容，本页更新会比 `--help` 更晚。
 
 ## 对象路径
 
-CLI 中的对象定位在所有命令中都采用同一套语法。 以下参考中会出现两种路径形式： 以下参考中会出现两种路径形式：
+CLI 中的对象定位在所有命令中都采用同一套语法。 以下参考中会出现两种路径形式：
 
-- **`<path>`** - 解析为**恰好一个**对象或容器。 **`<path>`** - 解析为**恰好一个**对象或容器。 用于对单个目标执行操作的命令：`te get`、`te set`、`te add`、`te rm`、`te mv`、`te format -p`、`te deps`、`te macro run --on`。
-- **`<path-filter>`** - 解析为**零个或多个**对象，并支持通配符。 用于对一组对象执行操作的命令：`te ls`、`te bpa run --path` 以及其他用于检查的命令。 用于对一组对象执行操作的命令：`te ls`、`te bpa run --path` 以及其他用于检查的命令。
+- **`<path>`** - 解析为**恰好一个**对象或容器。 用于对单个目标执行操作的命令：`te get`、`te set`、`te add`、`te rm`、`te mv`、`te format -p`、`te deps`、`te macro run --on`。
+- **`<path-filter>`** - 解析为**零个或多个**对象，并支持通配符。 用于对一组对象执行操作的命令：`te ls`、`te bpa run --path` 以及其他用于检查的命令。
 
 两种路径形式共用同一套语法规则；仅有两处不同：
 
@@ -41,7 +41,7 @@ CLI 中的对象定位在所有命令中都采用同一套语法。 以下参考
 
 ### 分段和分隔符
 
-路径是由斜杠分隔的 **分段** 序列。 每个分段表示一个步骤：一个表、一个子对象，或一个容器关键字。 每个分段表示一个步骤：一个表、一个子对象，或一个容器关键字。
+路径是由斜杠分隔的 **分段** 序列。 每个分段表示一个步骤：一个表、一个子对象，或一个容器关键字。
 
 - `Sales` — 一个分段
 - `Sales/Revenue` — 两个分段
@@ -53,20 +53,20 @@ CLI 中的对象定位在所有命令中都采用同一套语法。 以下参考
 
 大多数分段名称无需加引号即可直接使用。 如果分段名称包含空格、斜杠、方括号，或任何其他会被解析为语法的字符，请将该分段用引号括起来。 CLI 遵循 DAX 的引号规则，因此在 `te` 路径中加引号的写法与在 DAX 表达式中输入的一致：
 
-| 形式               | 适用场景                                                                                                 | 转义规则                                         |
-| ---------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| `'Net Sales'`    | 表，以及名称中带空格的对象。                                                                                       | 将引号写两次（`'Bob''s'` → `Bob's`）。                |
-| `"Net Sales"`    | 同上；当单引号转义不方便时，跨不同 shell 使用会更省事。                                                                      | 将引号写两次（`"He said ""hi"""` → `He said "hi"`）。 |
-| `[Sales Amount]` | 表引用中的 DAX 方括号后缀（`'Sales'[Sales Amount]`），或不带表前缀、在整个模型范围内解析的单独方括号引用（`[Total Sales]`）。 仅限对象路径。 仅限对象路径。 | 将右方括号写两次（`[foo]]bar]` → `foo]bar`）。          |
+| 形式               | 适用场景                                                                                         | 转义规则                                         |
+| ---------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| `'Net Sales'`    | 表，以及名称中带空格的对象。                                                                               | 将引号写两次（`'Bob''s'` → `Bob's`）。                |
+| `"Net Sales"`    | 同上；当单引号转义不方便时，跨不同 shell 使用会更省事。                                                              | 将引号写两次（`"He said ""hi"""` → `He said "hi"`）。 |
+| `[Sales Amount]` | 表引用中的 DAX 方括号后缀（`'Sales'[Sales Amount]`），或不带表前缀、在整个模型范围内解析的单独方括号引用（`[Total Sales]`）。 仅限对象路径。 | 将右方括号写两次（`[foo]]bar]` → `foo]bar`）。          |
 
-在带引号的分段内，`*` 会被视为字面字符，而不是通配符。 在带引号的分段内，`*` 会被视为字面字符，而不是通配符。 因此，`'Sa*'` 会匹配名称恰好为 `Sa*` 的表。
+在带引号的分段内，`*` 会被视为字面字符，而不是通配符。 因此，`'Sa*'` 会匹配名称恰好为 `Sa*` 的表。
 
 ### DAX 风格的引用（仅对象路径）
 
 凡是允许使用 `<path>` 的位置，都接受两种 DAX 形式：
 
-- **`'Table'[Member]`**：等同于 `Table/Member`。 方括号后缀会在存在歧义时优先匹配列和度量值，而不是层次结构/分区。 方括号后缀会在存在歧义时优先匹配列和度量值，而不是层次结构/分区。
-- **`[Member]`**：一个_独立_的度量值或列，前面不带表名。 在整个模型中搜索具有该名称的度量值或列。 两者都存在时，优先选择度量值。
+- **`'Table'[Member]`**：等同于 `Table/Member`。 方括号后缀会在存在歧义时优先匹配列和度量值，而不是层次结构/分区。
+- **`[Member]`**：一&#x4E2A;_&#x72EC;&#x7ACB;_&#x7684;度量值或列，前面不带表名。 在整个模型中搜索具有该名称的度量值或列。 两者都存在时，优先选择度量值。
 
 ```bash
 te get "'Sales'[Amount]"             # Same as te get Sales/Amount
@@ -76,7 +76,7 @@ te get "[Total Sales]"               # Model-wide measure-or-column lookup
 
 ### 容器和关键字
 
-有一些名称可用作容器关键字。 有一些名称可用作容器关键字。 关键字既可以单独使用（列出整个容器），也可以出现在路径中（跳转到当前父级下的该子集合）。
+有一些名称可用作容器关键字。 关键字既可以单独使用（列出整个容器），也可以出现在路径中（跳转到当前父级下的该子集合）。
 
 | 关键字                                                                                                                   | 范围   | 含义           |
 | --------------------------------------------------------------------------------------------------------------------- | ---- | ------------ |
@@ -122,18 +122,18 @@ te ls 'Roles/Re*/Members'            # Members of every role matching Re*
 
 这些标志适用于每个命令，可在子命令名称之前或之后使用。
 
-| 选项                         | 说明                                                                                                                                                                                                                                                                    |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-m, --model <path>`       | 语义模型的路径（TMDL 文件夹、`.bim` 文件或 TE 文件夹）。                                                                                                                                                                                                                                  |
-| `-s, --server <endpoint>`  | Workspace 名称或终结点（例如 `MyWorkspace`、`powerbi://...`、`asazure://...`、`localhost`）。                                                                                                                                                                                       |
-| `-d, --database <name>`    | Workspace 上的语义模型名称。                                                                                                                                                                                                                                                   |
-| `--local`                  | 连接到本地运行的 Power BI Desktop 实例（仅限 Windows）。                                                                                                                                                                                                                             |
-| `--auth <method>`          | 身份验证方法：`auto`、`interactive`、`spn`、`env`、`managed-identity`（默认值：`auto`）。                                                                                                                                                                                               |
-| `--output-format <format>` | 标准输出格式：`text` (默认)、`json`、`csv`、`tmsl` (别名 `bim`)、`tmdl`。 `csv` 会被输出表格数据的命令采用；`tmsl`/`tmdl` 仅在 `te get` 和 `te ls` 中用于整个对象的序列化。 命令会拒绝其不支持的格式。 `csv` 会被输出表格数据的命令采用；`tmsl`/`tmdl` 仅在 `te get` 和 `te ls` 中用于整个对象的序列化。 命令会拒绝其不支持的格式。 |
-| `--error-format <format>`  | 用于错误、警告和提示的 stderr 格式：`text`（默认）或 `json`。 其他值将回退为 `text`。 用于错误、警告和提示的 stderr 格式：`text`（默认）或 `json`。 其他值将回退为 `text`。 它独立于 `--output-format`，因此你可以将 JSON 格式的 stdout 与纯文本错误配合使用（反之亦然）。                                                                                   |
-| `--recent [N]`             | 使用最近使用过的模型。 使用最近使用过的模型。 未提供值 = 进入交互式选择器；`N` = 最近使用列表中的第 N 个（1 = 最近一次使用）。                                                                                                                                                                                              |
-| `--non-interactive`        | 禁用所有交互式提示。 如果缺少必需输入，将给出可操作的错误提示并失败退出。                                                                                                                                                                                                                                 |
-| `--debug`                  | 启用调试日志并输出到 stderr（连接字符串、身份验证流程、耗时）。                                                                                                                                                                                                                                   |
+| 选项                         | 说明                                                                                                                                                                                 |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-m, --model <path>`       | 语义模型的路径（TMDL 文件夹、`.bim` 文件或 TE 文件夹）。                                                                                                                                               |
+| `-s, --server <endpoint>`  | Workspace 名称或终结点（例如 `MyWorkspace`、`powerbi://...`、`asazure://...`、`localhost`）。                                                                                                    |
+| `-d, --database <name>`    | Workspace 上的语义模型名称。                                                                                                                                                                |
+| `--local`                  | 连接到本地运行的 Power BI Desktop 实例（仅限 Windows）。                                                                                                                                          |
+| `--auth <method>`          | 身份验证方法：`auto`、`interactive`、`spn`、`env`、`managed-identity`（默认值：`auto`）。                                                                                                            |
+| `--output-format <format>` | 标准输出格式：`text` (默认)、`json`、`csv`、`tmsl` (别名 `bim`)、`tmdl`。 `csv` 会被输出表格数据的命令采用；`tmsl`/`tmdl` 仅在 `te get` 和 `te ls` 中用于整个对象的序列化。 命令会拒绝其不支持的格式。 |
+| `--error-format <format>`  | 用于错误、警告和提示的 stderr 格式：`text`（默认）或 `json`。 其他值将回退为 `text`。 它独立于 `--output-format`，因此你可以将 JSON 格式的 stdout 与纯文本错误配合使用（反之亦然）。                                                          |
+| `--recent [N]`             | 使用最近使用过的模型。 未提供值 = 进入交互式选择器；`N` = 最近使用列表中的第 N 个（1 = 最近一次使用）。                                                                                                                       |
+| `--non-interactive`        | 禁用所有交互式提示。 如果缺少必需输入，将给出可操作的错误提示并失败退出。                                                                                                                                              |
+| `--debug`                  | 启用调试日志并输出到 stderr（连接字符串、身份验证流程、耗时）。                                                                                                                                                |
 
 对于读取模型的命令，解析顺序如下：
 
@@ -153,16 +153,16 @@ te load -s MyWorkspace -d MyModel          # Remote workspace
 
 ### save
 
-将模型保存到磁盘。 将模型保存到磁盘。 可用于将远程 Workspace 中的模型写入本地文件、转换格式，或将编辑内容保存回源位置。
+将模型保存到磁盘。 可用于将远程 Workspace 中的模型写入本地文件、转换格式，或将编辑内容保存回源位置。
 
 `te save` 接受：
 
-- `-o, --output-path <path>` - 目标文件或文件夹。 **可选** - 若省略，`te save` 会写回源位置，保留原始格式。 **可选** - 若省略，`te save` 会写回源位置，保留原始格式。
-- `--serialization <fmt>` - `tmdl`, `bim`, `te-folder`, `pbip`, `database.json`。 默认会从已加载的模型中推断（BIM 源 → BIM；TMDL `SemanticModel/` → `definition/` 下的 TMDL）。 默认会从已加载的模型中推断（BIM 源 → BIM；TMDL `SemanticModel/` → `definition/` 下的 TMDL）。
+- `-o, --output-path <path>` - 目标文件或文件夹。 **可选** - 若省略，`te save` 会写回源位置，保留原始格式。
+- `--serialization <fmt>` - `tmdl`, `bim`, `te-folder`, `pbip`, `database.json`。 默认会从已加载的模型中推断（BIM 源 → BIM；TMDL `SemanticModel/` → `definition/` 下的 TMDL）。
 - `--force` - 跳过验证并覆盖现有输出。 某些拒绝情况（例如容器不明确、项目根目录中存在多个 `SemanticModel`）即使使用 `--force` 也会触发。
 - `--skip-bpa` - 完全绕过 BPA 检查。
 - `--fix-bpa` - 当规则定义了修复表达式时，自动修复 BPA 违规项。
-- `--bpa-rules <path>` - 可重复指定；仅对本次保存覆盖 CLI 配置中的 `bpa.rules`。 除非 `bpa.builtInRules` 为 `false`，否则内置规则仍会生效。 `--bpa-rules <PATH>` - 可重复指定；仅针对本次部署覆盖 CLI 配置中的 `bpa.rules`。 除非 `bpa.builtInRules` 为 `false`，否则内置规则仍会生效。
+- `--bpa-rules <path>` - 可重复指定；仅对本次保存覆盖 CLI 配置中的 `bpa.rules`。 除非 `bpa.builtInRules` 为 `false`，否则内置规则仍会生效。
 - `--skip-validation` - 跳过 DAX 语义分析和验证，以实现快速直通下载。
 - `--supporting-files` - 生成 Fabric 支持文件（`.platform`、`definition.pbism`）。
 
@@ -174,11 +174,11 @@ te save -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
 ```
 
 > [!TIP]
-> 你可以用 `te save -o <path> -s <Workspace> -d <model>` 把远程模型下载到磁盘。 如果你只需要原始字节数据（不做 DAX 语义分析），配合 `--skip-validation` 可实现最快的直通下载。 如果你只需要原始字节数据（不做 DAX 语义分析），配合 `--skip-validation` 可实现最快的直通下载。
+> 你可以用 `te save -o <path> -s <Workspace> -d <model>` 把远程模型下载到磁盘。 如果你只需要原始字节数据（不做 DAX 语义分析），配合 `--skip-validation` 可实现最快的直通下载。
 
 ### open
 
-在 Tabular Editor 3 桌面版中打开模型。 **仅限 Windows**（需要先安装 TE3）。 **仅限 Windows**（需要先安装 TE3）。
+在 Tabular Editor 3 桌面版中打开模型。 **仅限 Windows**（需要先安装 TE3）。
 
 ```bash
 te open ./my-model
@@ -212,7 +212,7 @@ te set Sales -q isHidden -i true --save
 
 ### 添加
 
-向模型添加对象。 向模型添加对象。 为新对象传入 `<path>`（父级必须已存在；最后一个分段就是新名称），并通过 `-t` / `--type` 指定类型。 关系仍使用其简写语法（`Sales[Key]->Dim[Key]`）。 关系仍使用其简写语法（`Sales[Key]->Dim[Key]`）。
+向模型添加对象。 为新对象传入 `<path>`（父级必须已存在；最后一个分段就是新名称），并通过 `-t` / `--type` 指定类型。 关系仍使用其简写语法（`Sales[Key]->Dim[Key]`）。
 
 `te add` 支持以下选项：
 
@@ -228,7 +228,7 @@ te add Perspectives/Default/Sales --save                                   # Inc
 te add Roles/Reader -t Role --save                                         # New role at the model level
 ```
 
-对于数据绑定表，`te add` 还支持从 SQL、Lakehouse 或 Warehouse 源推断架构。 有关 `--source`、`--endpoint`、`--source-table`、`--columns` 等参数，可查看 `te add --help`。 有关 `--source`、`--endpoint`、`--source-table`、`--columns` 等参数，可查看 `te add --help`。
+对于数据绑定表，`te add` 还支持从 SQL、Lakehouse 或 Warehouse 源推断架构。 有关 `--source`、`--endpoint`、`--source-table`、`--columns` 等参数，可查看 `te add --help`。
 
 ### rm
 
@@ -238,7 +238,7 @@ te add Roles/Reader -t Role --save                                         # New
 
 - `<path>` — 位置参数：要删除的对象。
 - `--force` — 跳过依赖对象检查。
-- `--if-not-exists` - 如果对象已存在，则直接以 `0` 退出且不报错。 可用于幂等的 CI/CD 管道。 可用于幂等的 CI/CD 管道。
+- `--if-exists` — 如果对象不存在，则直接以 `0` 退出且不报错。 可用于幂等的 CI/CD 管道。
 - `--dry-run` — 预览删除操作而不实际执行。
 - `--save` — 将更改保存到已加载的模型。
 
@@ -251,7 +251,7 @@ te rm Sales/OldMeasure --if-exists --save    # Idempotent
 
 ### mv
 
-移动或重命名模型对象。 源和目标都是 `<path>` 参数。 源和目标都是 `<path>` 参数。
+移动或重命名模型对象。 源和目标都是 `<path>` 参数。
 
 ```bash
 te mv Sales/Revenue Finance/Revenue --save    # Move measure to another table
@@ -260,15 +260,15 @@ te mv Sales/Revenue Sales/TotalRevenue --save # Rename measure
 
 ### replace
 
-在各个模型对象中查找并替换文本。 默认仅进行干运行；添加 `--save` 才会实际应用更改。 默认仅进行干运行；添加 `--save` 才会实际应用更改。
+在各个模型对象中查找并替换文本。 默认仅进行干运行；添加 `--save` 才会实际应用更改。
 
 `te replace` 接受：
 
 - `--in <scope>` - 作用域：`names`、`expressions`、`descriptions`、`displayFolders`、`formatStrings`、`annotations`、`all`（默认值：`all`）。
 - `--regex` - 将查找模式视为正则表达式。
 - `--case-sensitive` - 启用大小写敏感匹配。
-- `--dry-run` - 仅预览更改，不会实际应用。 默认行为。 默认行为。
-- `--save` - 将变更保存回源位置。 与 `--revert` 和 `--stage` 互斥。 与 `--revert` 和 `--stage` 互斥。
+- `--dry-run` - 仅预览更改，不会实际应用。 默认行为。
+- `--save` - 将变更保存回源位置。 与 `--revert` 和 `--stage` 互斥。
 - `--save-to <path>` - 保存到不同的路径（意味着 `--save`）。
 - `--serialization <fmt>` - 模型序列化格式：`tmdl`、`bim`、`te-folder`。
 - `--force` - 即使替换引入 DAX 验证错误，也会保存。
@@ -297,10 +297,10 @@ te replace "SUM" "SUMX" --regex --in expressions --save
 
 `te ls` 支持：
 
-- `--type <kind>` - 限定为一种对象类型（`table`, `measure`, `column`, `hierarchy`, `partition`, `relationship`, `role`, `perspective`, `culture`）。 如果不提供 `<path-filter>`，这等同于输入匹配的容器关键字。 如果不提供 `<path-filter>`，这等同于输入匹配的容器关键字。
+- `--type <kind>` - 限定为一种对象类型（`table`, `measure`, `column`, `hierarchy`, `partition`, `relationship`, `role`, `perspective`, `culture`）。 如果不提供 `<path-filter>`，这等同于输入匹配的容器关键字。
 - `--paths-only` - 每行输出一个对象路径，适合通过管道传给 `xargs`、`te get` 或 `te set`。
-- `--no-multiline` - 将多行单元格（通常是 DAX 或 M 表达式）折叠为单行并截断，让宽表中的各行仍便于浏览。 仅影响文本输出；JSON/CSV/TMSL 输出不受影响。 仅影响文本输出；JSON/CSV/TMSL 输出不受影响。
-- `--output-format tmsl`（别名 `bim`）- 将匹配的对象输出为 TMSL/BIM 脚本。 例如可用于 `te ls Tables --output-format bim > tables.json`。 `ls` 不支持 `--output-format tmdl`（TMDL 仅支持单对象输出——请使用 `te get`）。 例如可用于 `te ls Tables --output-format bim > tables.json`。 `ls` 不支持 `--output-format tmdl`（TMDL 仅支持单对象输出——请使用 `te get`）。
+- `--no-multiline` - 将多行单元格（通常是 DAX 或 M 表达式）折叠为单行并截断，让宽表中的各行仍便于浏览。 仅影响文本输出；JSON/CSV/TMSL 输出不受影响。
+- `--output-format tmsl`（别名 `bim`）- 将匹配的对象输出为 TMSL/BIM 脚本。 例如可用于 `te ls Tables --output-format bim > tables.json`。 `ls` 不支持 `--output-format tmdl`（TMDL 仅支持单对象输出——请使用 `te get`）。
 
 ```bash
 te ls                                     # All tables in the model
@@ -320,12 +320,12 @@ te ls Tables --output-format bim > tables.json   # All tables emitted as TMSL/BI
 
 ### get
 
-获取模型对象的属性。 接受一个 `<path>`。 接受一个 `<path>`。
+获取模型对象的属性。 接受一个 `<path>`。
 
 `te get` 支持：
 
 - `-q, --query <property>` - 获取单个属性（例如 `expression`、`formatString`）。
-- `-t, --type <kind>` - 当路径匹配到表下的多个子对象时，用于消除歧义（例如同名的列和层次结构）。 可选值：`Measure`、`Column`、`CalculatedColumn`、`Hierarchy`、`Calendar`、`Partition`、`CalculationItem`。 可选值：`Measure`、`Column`、`CalculatedColumn`、`Hierarchy`、`Calendar`、`Partition`、`CalculationItem`。
+- `-t, --type <kind>` - 当路径匹配到表下的多个子对象时，用于消除歧义（例如同名的列和层次结构）。 可选值：`Measure`、`Column`、`CalculatedColumn`、`Hierarchy`、`Calendar`、`Partition`、`CalculationItem`。
 - `--output-format tmsl`（别名 `bim`）- 将解析后的对象输出为 TMSL/BIM JSON。
 - `--output-format tmdl` - 将解析后的对象输出为 TMDL（仅限命名对象）。
 
@@ -350,7 +350,7 @@ te get Model -q description
 
 - `--in <scope>` - 与 `te replace` 相同（默认值为 `all`）。
 - `--regex`、`--case-sensitive`、`--paths-only`。
-- `--no-multiline` - 将多行匹配上下文折叠为单行。 仅适用于文本输出。 仅适用于文本输出。
+- `--no-multiline` - 将多行匹配上下文折叠为单行。 仅适用于文本输出。
 
 `--in expressions` 涵盖模型中的每个 `IExpressionObject`——包括 KPI 的 `TargetExpression` / `StatusExpression` / `TrendExpression`、度量值的 `DetailRowsExpression`、分区源/轮询的 M 表达式、表权限的 `FilterExpression`，以及计算组的 `MultipleOrEmptySelection` / `NoSelection` 表达式——因此，设置在 KPI 目标上的字面量（例如 `123`）也会像度量值正文一样被找到。
 
@@ -362,7 +362,7 @@ te find "CALCULATE" --in expressions --paths-only | xargs -I{} te get {} -q expr
 
 ### diff
 
-比较两个模型的结构差异。 比较两个模型的结构差异。 返回以下退出码：`0` 表示相同，`1` 表示发现差异，`2` 表示错误。
+比较两个模型的结构差异。 返回以下退出码：`0` 表示相同，`1` 表示发现差异，`2` 表示错误。
 
 ```bash
 te diff ./model-v1 ./model-v2
@@ -371,12 +371,12 @@ te diff old.bim new.bim
 
 ### deps
 
-分析对象的上游和下游依赖关系，或找出整个模型中未使用的对象。 单对象形式接受一个 `<path>`。 单对象形式接受一个 `<path>`。
+分析对象的上游和下游依赖关系，或找出整个模型中未使用的对象。 单对象形式接受一个 `<path>`。
 
 `te deps` 接受以下选项：
 
 - `--unused` - 列出未被任何 DAX 引用，且未用于任何关系、层次结构级别、排序依据、变体、AlternateOf 基对象或日历时间角色的度量值、计算列以及**所有数据列**。 每条结果在文本模式下会显示 `(hidden)`，在 JSON 中则包含 `isHidden` 字段。
-- `--hidden` - 将 `--unused` 限制为仅包含隐藏对象。 隐藏且未使用的对象是最安全的清理候选项，因为没有任何用户可见内容依赖它们。 隐藏且未使用的对象是最安全的清理候选项，因为没有任何用户可见内容依赖它们。
+- `--hidden` - 将 `--unused` 限制为仅包含隐藏对象。 隐藏且未使用的对象是最安全的清理候选项，因为没有任何用户可见内容依赖它们。
 
 ```bash
 te deps Sales/Revenue                     # Upstream + downstream for one object
@@ -408,22 +408,22 @@ te validate --ci github --trx results.trx
 `te bpa run` 接受以下选项：
 
 - `<model>` - 位置参数：模型路径（可替代全局标志 `--model`）。
-- `-r, --rules <rules>` - JSON 格式的 BPA 规则文件(s)的路径(s)或 URL(s)。 可重复指定。 替换本次调用的用户规则层：请参阅下文的 [规则源和解析](#rule-sources-and-resolution)。 可重复指定。 替换本次调用的用户规则层：请参阅下文的 [规则源和解析](#rule-sources-and-resolution)。
+- `-r, --rules <rules>` - JSON 格式的 BPA 规则文件(s)的路径(s)或 URL(s)。 可重复指定。 替换本次调用的用户规则层：请参阅下文的 [规则源和解析](#rule-sources-and-resolution)。
 - `--no-model-rules` - 排除嵌入在模型注释中的 BPA 规则。
 - `--no-defaults` - 排除内置的默认 BPA 规则。
 - `--vpax <file>` - 从 `.vpax` 文件加载 VertiPaq分析器统计信息，以启用可感知 VPA 的规则。
 - `--vpa-rules` - 包含内置的 VPA 感知规则（需要 `--vpax` 或预先标注的模型）。
 - `--allow-external-rules` - 允许从嵌入在模型注释中的 URL 获取 BPA 规则文件。
-- `--rule <id>` - 仅按 ID 运行指定规则(s)。 可重复指定。 可重复指定。
-- `--path <path-filter>` - 将分析限制为包含匹配对象的表。 支持字面名称、容器关键字和通配符（例如 `'Sales'`、`'Sa*'`、`'Sales/度量值'`、`'*/Amount'`）。 支持字面名称、容器关键字和通配符（例如 `'Sales'`、`'Sa*'`、`'Sales/度量值'`、`'*/Amount'`）。
+- `--rule <id>` - 仅按 ID 运行指定规则(s)。 可重复指定。
+- `--path <path-filter>` - 将分析限制为包含匹配对象的表。 支持字面名称、容器关键字和通配符（例如 `'Sales'`、`'Sa*'`、`'Sales/度量值'`、`'*/Amount'`）。
 - `--fix` - 应用修复表达式，在可能的情况下自动修复违规项。
 - `--save` - 应用修复后，将模型保存回原始位置。
 - `--save-to <path>` - 应用修复后，将模型保存到其他路径。
 - `--serialization <fmt>` - 模型序列化格式：`tmdl`、`bim`、`te-folder`。
-- `--fail-on <severity>` - 失败阈值：`error`（默认）或 `warning`。 当违规项达到该阈值时，将以退出代码 `1` 退出。 当违规项达到该阈值时，将以退出代码 `1` 退出。
+- `--fail-on <severity>` - 失败阈值：`error`（默认）或 `warning`。 当违规项达到该阈值时，将以退出代码 `1` 退出。
 - `--ci <fmt>` - 向 stderr 输出 CI 日志命令：`vsts`（Azure DevOps）、`github`（GitHub Actions）。
 - `--trx <path>` - 将结果作为 VSTEST `.trx` 文件写入指定路径。
-- `--no-multiline` - 将违规表中的多行单元格内容折叠为单行。 仅适用于文本输出。 仅适用于文本输出。
+- `--no-multiline` - 将违规表中的多行单元格内容折叠为单行。 仅适用于文本输出。
 
 ```bash
 te bpa run --fail-on error --ci github
@@ -442,10 +442,10 @@ te bpa run --path Sales/Measures   # Path filter applied to the matched tables
    - `-r, --rules <rules>` 标志，接受文件路径或 URL (优先级最高)
    - `TE_BPA_RULES` 环境变量
    - 来自 CLI 配置 (`~/.config/te/config.json`) 的 `bpa.rules` 数组
-2. **内置默认规则** - 除非传入 `--no-defaults`，或配置中的 [`bpa.builtInRules`](xref:te-cli-config#built-in-bpa-rules) 为 `false`，否则会加载。 `bpa.disabledBuiltInRuleIds` 中列出的单个内置规则会被跳过。 `bpa.disabledBuiltInRuleIds` 中列出的单个内置规则会被跳过。
-3. **模型嵌入规则** - 模型 `BestPracticeAnalyzer_Rules` 注释中的规则；除非传入 `--no-model-rules`，否则会加载。 除非同时传入 `--allow-external-rules` 参数，否则会跳过外部 URL 注释。 除非同时传入 `--allow-external-rules` 参数，否则会跳过外部 URL 注释。
+2. **内置默认规则** - 除非传入 `--no-defaults`，或配置中的 [`bpa.builtInRules`](xref:te-cli-config#built-in-bpa-rules) 为 `false`，否则会加载。 `bpa.disabledBuiltInRuleIds` 中列出的单个内置规则会被跳过。
+3. **模型嵌入规则** - 模型 `BestPracticeAnalyzer_Rules` 注释中的规则；除非传入 `--no-model-rules`，否则会加载。 除非同时传入 `--allow-external-rules` 参数，否则会跳过外部 URL 注释。
 
-重复的规则 ID 会被去重（用户规则优先于内置规则）。 重复的规则 ID 会被去重（用户规则优先于内置规则）。 然后会移除模型 `BestPracticeAnalyzer_IgnoreRules` 注释中的规则 ID。
+重复的规则 ID 会被去重（用户规则优先于内置规则）。 然后会移除模型 `BestPracticeAnalyzer_IgnoreRules` 注释中的规则 ID。
 
 输出中的 `Rules loaded:` 行会列出每个提供规则的层级，例如：
 
@@ -455,7 +455,7 @@ Rules loaded: 41 from 1 file(s) from bpa.rules config + built-in defaults + mode
 
 ### bpa 规则
 
-管理 BPA 规则集——在本地规则文件或模型注释中列出、检查、初始化，以及启用或禁用规则。 内置规则是只读的。要跳过其中某一条而保留其余规则，请使用 `te bpa rules disable`（不要直接编辑内置规则集）。 内置规则是只读的。要跳过其中某一条而保留其余规则，请使用 `te bpa rules disable`（不要直接编辑内置规则集）。
+管理 BPA 规则集——在本地规则文件或模型注释中列出、检查、初始化，以及启用或禁用规则。 内置规则是只读的。要跳过其中某一条而保留其余规则，请使用 `te bpa rules disable`（不要直接编辑内置规则集）。
 
 子命令：
 
@@ -473,11 +473,11 @@ Rules loaded: 41 from 1 file(s) from bpa.rules config + built-in defaults + mode
 
 `te bpa rules` 的所有子命令都接受以下选项：
 
-- `--rules-file <path>` - 指定 BPA 规则 JSON 文件的 PATH。 `--rules-file <path>` - 指定 BPA 规则 JSON 文件的 PATH。 默认使用你的 CLI 配置（`~/.config/te/config.json`）中 `bpa.rules` 的首个已存在条目，或使用 `TE_BPA_RULES` 环境变量。
+- `--rules-file <path>` - 指定 BPA 规则 JSON 文件的 PATH。 默认使用你的 CLI 配置（`~/.config/te/config.json`）中 `bpa.rules` 的首个已存在条目，或使用 `TE_BPA_RULES` 环境变量。
 - `--model-rules` - 操作嵌入在模型注释中的规则，而非文件中的规则。
 
 > [!IMPORTANT]
-> `te bpa rules set` 和 `te bpa rules rm` 会拒绝修改内置规则 ID。 如果尝试这样做，命令将以退出码 `1` 退出，并提示改用 `te bpa rules disable`。 要自定义内置规则的行为，先禁用该内置规则，再添加一个使用不同 ID 的自定义副本： 如果尝试这样做，命令将以退出码 `1` 退出，并提示改用 `te bpa rules disable`。 要自定义内置规则的行为，先禁用该内置规则，再添加一个使用不同 ID 的自定义副本：
+> `te bpa rules set` 和 `te bpa rules rm` 会拒绝修改内置规则 ID。 如果尝试这样做，命令将以退出码 `1` 退出，并提示改用 `te bpa rules disable`。 要自定义内置规则的行为，先禁用该内置规则，再添加一个使用不同 ID 的自定义副本：
 >
 > ```bash
 > te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
@@ -506,12 +506,12 @@ te bpa rules list --ignored
 
 #### bpa rules init
 
-在配置的 PATH 处创建一个空的 BPA 规则文件（`[]`）。 在配置的 PATH 处创建一个空的 BPA 规则文件（`[]`）。 在对尚不存在的路径执行 `te bpa rules set` / `te bpa rules rm` 之前，请先执行一次此命令。
+在配置的 PATH 处创建一个空的 BPA 规则文件（`[]`）。 在对尚不存在的路径执行 `te bpa rules set` / `te bpa rules rm` 之前，请先执行一次此命令。
 
 `te bpa rules init` 接受以下选项：
 
-- `--force` - 用 `[]` 覆盖现有文件。 如果目标文件已存在，则必须提供此选项。 如果目标文件已存在，则必须提供此选项。
-- `--rules-file <path>` - 目标文件路径。 可出现在 `init` 子命令之前或之后。 可出现在 `init` 子命令之前或之后。
+- `--force` - 用 `[]` 覆盖现有文件。 如果目标文件已存在，则必须提供此选项。
+- `--rules-file <path>` - 目标文件路径。 可出现在 `init` 子命令之前或之后。
 
 路径解析（先匹配到的优先）：`--rules-file` → `TE_BPA_RULES` 环境变量 → CLI 配置中 `bpa.rules[]` 的第一项 → `./BPARules.json` (当前工作目录)。
 
@@ -525,7 +525,7 @@ te bpa rules init --force
 
 禁用单个内置 BPA 规则。 该规则 ID 会添加到 CLI 配置中的 `bpa.disabledBuiltInRuleIds`。 后续的门禁执行（deploy、save、mutation）以及 `te bpa run` 都会跳过已禁用的规则。
 
-该命令是幂等的——对已禁用的规则再次运行 `disable` 会成功，但不会修改配置。 该命令是幂等的——对已禁用的规则再次运行 `disable` 会成功，但不会修改配置。 如果 `<rule-id>` 不是内置规则，命令会以退出代码 `1` 结束；可使用 `te bpa rules list` 查看有效的内置 ID。
+该命令是幂等的——对已禁用的规则再次运行 `disable` 会成功，但不会修改配置。 如果 `<rule-id>` 不是内置规则，命令会以退出代码 `1` 结束；可使用 `te bpa rules list` 查看有效的内置 ID。
 
 ```bash
 te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
@@ -533,7 +533,7 @@ te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
 
 #### bpa rules enable
 
-通过从 `bpa.disabledBuiltInRuleIds` 中移除规则 ID，重新启用此前已禁用的内置 BPA 规则。 如果该规则当前并未被禁用，则以退出代码 `1` 结束。 如果该规则当前并未被禁用，则以退出代码 `1` 结束。
+通过从 `bpa.disabledBuiltInRuleIds` 中移除规则 ID，重新启用此前已禁用的内置 BPA 规则。 如果该规则当前并未被禁用，则以退出代码 `1` 结束。
 
 ```bash
 te bpa rules enable TE3_BUILT_IN_DATE_TABLE_EXISTS
@@ -598,7 +598,7 @@ te query --file query.dax --output-format json
 
 ### 脚本
 
-针对语义模型执行一个或多个 C# Script。 针对语义模型执行一个或多个 C# Script。 CLI 使用与 Tabular Editor 3 Desktop 相同的脚本宿主，因此能在 TE3 中运行的脚本在这里也可原样运行。
+针对语义模型执行一个或多个 C# Script。 CLI 使用与 Tabular Editor 3 Desktop 相同的脚本宿主，因此能在 TE3 中运行的脚本在这里也可原样运行。
 
 `te script` 支持以下选项：
 
@@ -616,12 +616,11 @@ echo "Info(Model.Name);" | te script -e -
 > [!IMPORTANT]
 > 如果你要迁移旧脚本，需要了解以下两个行为差异：
 >
-> - **CLI 脚本中不支持交互式选择。** 从 `te script` 调用 TE3 Desktop 辅助方法 `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, 和 `SelectObjects()` 时，会抛出 `NotSupportedException`，因为 CLI 没有可弹出的 UI。 在脚本外预先解析对象(s) 并将其传入；如果脚本需要与 TE3 共享，请将该调用包裹在 `try/catch` 中。 在脚本外预先解析对象(s) 并将其传入；如果脚本需要与 TE3 共享，请将该调用包裹在 `try/catch` 中。
+> - **CLI 脚本中不支持交互式选择。** 从 `te script` 调用 TE3 Desktop 辅助方法 `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, 和 `SelectObjects()` 时，会抛出 `NotSupportedException`，因为 CLI 没有可弹出的 UI。 在脚本外预先解析对象(s) 并将其传入；如果脚本需要与 TE3 共享，请将该调用包裹在 `try/catch` 中。
 > - **默认的 `using` 指令与 TE3 Desktop 一致。** 使用 `DataTable`、`File`、`StringBuilder` 或 `Regex` 的脚本，必须显式包含对应的 `using System.Data;` / `using System.IO;` / `using System.Text;` / `using System.Text.RegularExpressions;` 指令。
 
 > [!NOTE]
-> **跨宿主脚本的预处理器符号。** 由 `te script` 编译的脚本会定义符号 `TECLI`。 [!NOTE]
-> **跨宿主脚本的预处理器符号。** 由 `te script` 编译的脚本会定义符号 `TECLI`。 TE3 Desktop 脚本会改为定义 `TE3`，并且还会定义带版本范围限定的符号，例如 `TE3_3_10_OR_GREATER` …… 当前 TE3 次版本对应的是 `TE3_3_X_OR_GREATER`。 TE2 不定义这两个符号。 使用这些符号可编写可移植脚本： TE2 不定义这两个符号。 使用这些符号可编写可移植脚本：
+> **跨宿主脚本的预处理器符号。** 由 `te script` 编译的脚本会定义符号 `TECLI`。 TE3 Desktop 脚本会改为定义 `TE3`，并且还会定义带版本范围限定的符号，例如 `TE3_3_10_OR_GREATER` …… 当前 TE3 次版本对应的是 `TE3_3_X_OR_GREATER`。 TE2 不定义这两个符号。 使用这些符号可编写可移植脚本：
 >
 > ```csharp
 > #if TECLI
@@ -644,7 +643,7 @@ echo "Info(Model.Name);" | te script -e -
 
 ### 宏
 
-通过宏 JSON 文件（通常为 `MacroActions.json`）管理和运行宏。 通过宏 JSON 文件（通常为 `MacroActions.json`）管理和运行宏。 宏文件的 PATH 按以下顺序解析：`--macros <path>` → 环境变量 `TE_MACROS_PATH` → CLI 配置中的 `macros` → `./MacroActions.json`。
+通过宏 JSON 文件（通常为 `MacroActions.json`）管理和运行宏。 宏文件的 PATH 按以下顺序解析：`--macros <path>` → 环境变量 `TE_MACROS_PATH` → CLI 配置中的 `macros` → `./MacroActions.json`。
 
 子命令：
 
@@ -660,12 +659,12 @@ echo "Info(Model.Name);" | te script -e -
 
 #### 宏 init
 
-在配置的路径下创建一个空的宏文件（`{\"Actions\":[]}`）。 当解析后的宏文件尚不存在时，只需运行一次该命令。 当解析后的宏文件尚不存在时，只需运行一次该命令。
+在配置的路径下创建一个空的宏文件（`{\"Actions\":[]}`）。 当解析后的宏文件尚不存在时，只需运行一次该命令。
 
 `te macro init` 接受：
 
 - `--force` - 覆盖现有文件。 如果目标已存在，则必须指定此参数。
-- `--macros <path>` - 目标文件路径。 可放在 `init` 子命令之前或之后。 可放在 `init` 子命令之前或之后。
+- `--macros <path>` - 目标文件路径。 可放在 `init` 子命令之前或之后。
 
 ```bash
 te macro init
@@ -675,11 +674,11 @@ te macro init --force
 
 #### 宏 run
 
-运行宏。 运行宏。 通过 `dataTable.Output()` 输出表格的宏会在终端中显示格式化输出，因此 DAX 风格的查询宏在 `te macro run` 中的行为与在 TE3 中相同。
+运行宏。 通过 `dataTable.Output()` 输出表格的宏会在终端中显示格式化输出，因此 DAX 风格的查询宏在 `te macro run` 中的行为与在 TE3 中相同。
 
 `te macro run` 接受：
 
-- `--on <path>` - 将宏的选择上下文设置为单个已命名对象（如表、度量值、列等…）。 这相当于在 TE3 中右键单击该对象，并从上下文菜单调用宏。 这相当于在 TE3 中右键单击该对象，并从上下文菜单调用宏。
+- `--on <path>` - 将宏的选择上下文设置为单个已命名对象（如表、度量值、列等…）。 这相当于在 TE3 中右键单击该对象，并从上下文菜单调用宏。
 - `--save` / `--save-to` - 将宏所做的所有更改持久化保存。
 
 ```bash
@@ -814,7 +813,7 @@ te connect ./revenue-model -w Finance "Revenue Model"    # Mirror local → remo
 
 ### auth login / status / logout
 
-管理缓存的身份验证信息。 参见 @te-cli-auth。 参见 @te-cli-auth。
+管理缓存的身份验证信息。 参见 @te-cli-auth。
 
 ### profile list / show / set / remove
 
@@ -824,7 +823,7 @@ te connect ./revenue-model -w Finance "Revenue Model"    # Mirror local → remo
 
 ### config show / paths / init / set
 
-查看和管理 CLI 配置以及 TE3 PATH 覆盖设置。 参见 @te-cli-config。 参见 @te-cli-config。
+查看和管理 CLI 配置以及 TE3 PATH 覆盖设置。 参见 @te-cli-config。
 
 ```bash
 te config show                          # Display all settings
@@ -835,7 +834,7 @@ te config set autoFormat true
 
 ### license
 
-`te license` 保留用于正式发布 GA 版，在此预览版本中不可用。 这个命令仍会被解析器识别——所以调用它的现有脚本不会在解析阶段报错——但所有子命令都会以状态 `1` 退出，并显示“此预览版本中不可用”的信息。 关于更全面的许可说明，请参见概述页面上的[预览说明](xref:te-cli#preview-notice)。 这个命令仍会被解析器识别——所以调用它的现有脚本不会在解析阶段报错——但所有子命令都会以状态 `1` 退出，并显示“此预览版本中不可用”的信息。 关于更全面的许可说明，请参见概述页面上的[预览说明](xref:te-cli#preview-notice)。
+`te license` 保留用于正式发布 GA 版，在此预览版本中不可用。 这个命令仍会被解析器识别——所以调用它的现有脚本不会在解析阶段报错——但所有子命令都会以状态 `1` 退出，并显示“此预览版本中不可用”的信息。 关于更全面的许可说明，请参见概述页面上的[预览说明](xref:te-cli#preview-notice)。
 
 ### migrate
 
@@ -863,7 +862,7 @@ te interactive -s MyWorkspace -d MyModel      # Start with a remote model
 
 ### 补全
 
-生成 shell 补全脚本。 参见 @te-cli-install。 参见 @te-cli-install。
+生成 shell 补全脚本。 参见 @te-cli-install。
 
 ```bash
 te completion bash
