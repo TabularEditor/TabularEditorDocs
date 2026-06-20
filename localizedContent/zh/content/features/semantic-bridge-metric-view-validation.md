@@ -30,7 +30,6 @@ SUMMARY: Describes the validation framework for Metric Views in the Semantic Bri
 > [!NOTE]
 > Semantic Bridge 目前处于公开预览阶段，因此随着功能逐步成熟，相关接口可能会发生变化。
 > 目前，验证只能通过 C# Script 来进行。
-> 目前，验证只能通过 C# Script 来进行。
 
 ## 验证流程
 
