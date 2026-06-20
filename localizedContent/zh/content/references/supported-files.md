@@ -30,7 +30,7 @@ Tabular Editor 3 使用多种不同的文件格式和文档类型，其中一些
 
 ## Dataset 文件类型
 
-Tabular Editor 支持语义模型的四种文件类型：.bim、Power BI 文件 (.pbit 和 .pbip)、.json 和 .tmdl。 每种文件类型都有不同的功能与限制，下面将逐一说明。 每种文件类型都有不同的功能与限制，下面将逐一说明。
+Tabular Editor 支持语义模型的四种文件类型：.bim、Power BI 文件 (.pbit 和 .pbip)、.json 和 .tmdl。 每种文件类型都有不同的功能与限制，下面将逐一说明。
 
 此外，Tabular Editor 3 的 Business 版和企业版支持通过“**保存并附带支持文件**”方式实现 Microsoft Fabric 的 Git 集成。 这会创建一个文件夹结构，在模型文件旁边包含 .platform 和 definition.pbism 元数据文件，从而支持与 Fabric Workspace 无缝同步。 详情见[保存并附带支持文件](xref:save-with-supporting-files)。
 
@@ -62,7 +62,7 @@ DatabaseName.SemanticModel/
 └── model.bim
 ```
 
-借助该结构，可将语义模型提交到 Git repository，并与 Fabric Workspace 同步。 完整文档见[保存并附带支持文件](xref:save-with-supporting-files)。 完整文档见[保存并附带支持文件](xref:save-with-supporting-files)。
+借助该结构，可将语义模型提交到 Git repository，并与 Fabric Workspace 同步。 完整文档见[保存并附带支持文件](xref:save-with-supporting-files)。
 
 ### [Power BI](#tab/PowerBI)
 
@@ -156,13 +156,13 @@ DatabaseName.SemanticModel/
     └── ……
 ```
 
-在使用 Fabric Git 集成时，便于阅读的 TMDL 格式特别适合用于版本控制和代码审查。 完整文档见[保存并附带支持文件](xref:save-with-supporting-files)。 完整文档见[保存并附带支持文件](xref:save-with-supporting-files)。
+在使用 Fabric Git 集成时，便于阅读的 TMDL 格式特别适合用于版本控制和代码审查。 完整文档见[保存并附带支持文件](xref:save-with-supporting-files)。
 
 ***
 
 ## Fabric Git 集成文件
 
-使用**保存并附带支持文件**功能（Business 版和企业版）时，Tabular Editor 会创建 Microsoft Fabric Git 集成所需的额外元数据文件。 这些文件由 Tabular Editor 自动生成并管理。 这些文件由 Tabular Editor 自动生成并管理。
+使用**保存并附带支持文件**功能（Business 版和企业版）时，Tabular Editor 会创建 Microsoft Fabric Git 集成所需的额外元数据文件。 这些文件由 Tabular Editor 自动生成并管理。
 
 ### .platform
 
@@ -177,9 +177,9 @@ DatabaseName.SemanticModel/
 
 ### definition.pbism
 
-该 definition.pbism 文件包含语义模型的整体定义和核心设置。 此文件与模型元数据（存储为 model.bim 或位于 definition/ 文件夹中）配合使用，为 Microsoft Fabric 提供所需的完整语义模型信息。 此文件与模型元数据（存储为 model.bim 或位于 definition/ 文件夹中）配合使用，为 Microsoft Fabric 提供所需的完整语义模型信息。
+该 definition.pbism 文件包含语义模型的整体定义和核心设置。 此文件与模型元数据（存储为 model.bim 或位于 definition/ 文件夹中）配合使用，为 Microsoft Fabric 提供所需的完整语义模型信息。
 
-在保存操作中勾选 **保存并包含支持文件** 选项后，这两个文件会自动创建。 在保存操作中勾选 **保存并包含支持文件** 选项后，这两个文件会自动创建。 生成的文件夹结构（带 .SemanticModel 后缀）可以提交到 Git repository，并与 Fabric Workspace 同步。
+在保存操作中勾选 **保存并包含支持文件** 选项后，这两个文件会自动创建。 生成的文件夹结构（带 .SemanticModel 后缀）可以提交到 Git repository，并与 Fabric Workspace 同步。
 
 有关此功能的完整文档，请参阅[保存并包含支持文件](xref:save-with-supporting-files)。
 
@@ -195,7 +195,7 @@ DatabaseName.SemanticModel/
 
 .te3diag 文件是一种文件格式，用于存储使用 TE3 创建的模型关系图。
 
-这些文件可用于记录模型结构与逻辑，方便参与同一项目的其他开发者查看与协作。 为了方便你访问和查阅，你可以把 .te3diag 文件保存在和模型文件同一个文件夹里。 为了方便你访问和查阅，你可以把 .te3diag 文件保存在和模型文件同一个文件夹里。
+这些文件可用于记录模型结构与逻辑，方便参与同一项目的其他开发者查看与协作。 为了方便你访问和查阅，你可以把 .te3diag 文件保存在和模型文件同一个文件夹里。
 
 关系图文件本质上以 JSON 格式存储，并保存在 Tabular Editor 3 扩展中。
 
