@@ -51,7 +51,7 @@ applies_to:
 如果希望确保 Tabular Editor 不会发起任何 Web 请求，请设置 `DisableUpdates`、`DisableBpaDownload`、`DisableWebDaxFormatter`、`DisableErrorReports`、`DisableTelemetry`、`DisableDaxOptimizer` 和 `DisableAi` 策略。
 
 > [!NOTE]
-> 即使已指定上述策略，Tabular Editor 3 仍会偶尔向 `https://api.tabulareditor.com` 发起请求，用于许可证验证。 如果 Tabular Editor 3 无法访问此端点（由于防火墙或代理），用户将不得不每 30 天对产品进行一次[手动激活](xref:installation-activation-basic#manual-activation-no-internet)。 如果 Tabular Editor 3 无法访问此端点（由于防火墙或代理），用户将不得不每 30 天对产品进行一次[手动激活](xref:installation-activation-basic#manual-activation-no-internet)。
+> 即使已指定上述策略，Tabular Editor 3 仍会偶尔向 `https://api.tabulareditor.com` 发起请求，用于许可证验证。 如果 Tabular Editor 3 无法访问此端点（由于防火墙或代理），用户将不得不每 30 天对产品进行一次[手动激活](xref:installation-activation-basic#manual-activation-no-internet)。
 
 ## 禁用自定义脚本
 
