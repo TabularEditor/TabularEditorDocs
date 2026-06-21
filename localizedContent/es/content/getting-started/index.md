@@ -13,12 +13,12 @@ updated: 2026-05-19
 
 **¡Gracias por elegir Tabular Editor 3!**
 
-Para ayudarte a sacarle el máximo partido a la herramienta, hemos reunido todo nuestro material de introducción en esta sección de primeros pasos, que esperamos que disfrutes. Recomendamos a todos los nuevos usuarios de Tabular Editor 3 que lean esta guía y se salten los temas con los que ya estén familiarizados.
+Para ayudarte a sacar el máximo partido a la herramienta, hemos reunido todo nuestro material de incorporación en esta sección de primeros pasos. Recomendamos a todos los nuevos usuarios de Tabular Editor 3 que lean esta guía y se salten los temas que ya conozcan.
 
 > [!NOTE]
 > Algunos artículos de esta guía hacen referencia a Tabular Editor 2, en concreto a la interfaz de línea de comandos (CLI), para fines de implementación y pruebas automatizadas. Está previsto publicar más adelante una aplicación CLI independiente para acompañar a Tabular Editor 3.
 
-Como este material de formación se centra en el producto Tabular Editor, asumimos que ya tienes una comprensión básica del modelado de datos tabulares (ya sea con Power BI Desktop, Visual Studio o Tabular Editor 2.x). Si eres nuevo en el modelado de datos tabulares, te recomendamos encarecidamente que consultes material de formación y cursos ofrecidos por terceros como [sqlbi.com](https://sqlbi.com).
+Este material de formación se centra en el producto Tabular Editor, por lo que asumimos que ya tienes una comprensión básica del modelado de datos tabulares (ya sea con Power BI Desktop, Visual Studio o Tabular Editor 2.x). Si estás empezando en el modelado de datos tabulares, te recomendamos el material de formación y los cursos ofrecidos por terceros, como [sqlbi.com](https://sqlbi.com).
 
 **Temas tratados en esta guía:**
 
@@ -43,17 +43,17 @@ Como este material de formación se centra en el producto Tabular Editor, asumim
 - @desktop-integration
 - @desktop-limitations
 
-Daniel Otykier
+**Interfaz de usuario**
 
-- @user-interface
-- @bpa-view
-- @data-refresh-view
-- @find-replace
-- @macros-view
-- @messages-view
-- @properties-view
-- @tom-explorer-view
-- @diagram-view
+- @user-interface-reference
+- @bpa-view-reference
+- @data-refresh-view-reference
+- @find-replace-reference
+- @macros-view-reference
+- @messages-view-reference
+- @properties-view-reference
+- @tom-explorer-view-reference
+- @diagram-view-reference
 
 **Desarrollo paralelo**
 
@@ -73,7 +73,7 @@ Daniel Otykier
 
 **Recursos adicionales:**
 
-- [Documentación de referencia de TE3](xref:getting-started)
+- [Primeros pasos con Tabular Editor 3](xref:getting-started)
 - [Instalación y activación avanzadas](xref:installation-activation-basic)
 - [Descargar Tabular Editor](https://tabulareditor.com/download)
 - [Tabular Editor Learn](https://tabulareditor.com/learn)
