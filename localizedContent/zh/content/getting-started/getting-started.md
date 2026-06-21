@@ -41,7 +41,7 @@ applies_to:
 
 ## 激活安装
 
-Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabulareditor.com)，了解定价详情和购买选项。 如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。 访问我们的[主页](https://tabulareditor.com)，了解定价详情和购买选项。 如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。 选择此选项时，系统会提示您输入电子邮件地址。 我们会使用该电子邮件地址来验证您是否已经激活过 Tabular Editor 3。
+Tabular Editor 3 是商业软件。 访问我们的[主页](https://tabulareditor.com)，了解定价详情和购买选项。 如果你之前未使用过 Tabular Editor 3，即可获得 30 天免费试用。 选择此选项时，系统会提示您输入电子邮件地址。 我们会使用该电子邮件地址来验证您是否已经激活过 Tabular Editor 3。
 
 首次在新设备上启动 Tabular Editor 3 时，系统会提示进行产品激活。
 
