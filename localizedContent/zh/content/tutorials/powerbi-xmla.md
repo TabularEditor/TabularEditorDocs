@@ -30,7 +30,7 @@ applies_to:
 Tabular Editor 要求 XMLA endpoint 同时允许读取和写入访问。 Microsoft 已于 2025 年六月在所有 Fabric 和 Power BI 容量 SKU 上默认启用 XMLA 读取/写入。 如果无法连接，请让 [你的容量管理员](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) 验证 @xmla-as-connectivity 中描述的设置。
 
 > [!IMPORTANT]
-> 如果你使用 Tabular Editor 3，请注意连接到 Power BI XMLA endpoint 的[许可证限制](xref:editions)。 根据你使用的 Power BI Workspace 类型，你至少需要 Tabular Editor 3 商业版或企业版。 根据你使用的 Power BI Workspace 类型，你至少需要 Tabular Editor 3 商业版或企业版。
+> 如果你使用 Tabular Editor 3，请注意连接到 Power BI XMLA endpoint 的[许可证限制](xref:editions)。 根据你使用的 Power BI Workspace 类型，你至少需要 Tabular Editor 3 商业版或企业版。
 
 ## 限制
 
@@ -38,7 +38,7 @@ Tabular Editor 要求 XMLA endpoint 同时允许读取和写入访问。 Microso
 
 ## 工作流
 
-Power BI XMLA endpoint 本质上相当于公开了一个 Analysis Services 实例，Tabular Editor 可以连接到该实例。 因此，你可以将 Power BI Workspace 视为 Analysis Services 的**服务器**，而 Workspace 中的每个 Power BI Dataset 则对应 Analysis Services 的**数据库**。 连接到 XMLA endpoint 后，Tabular Editor 的所有建模和管理功能都可用。 如果你决定使用 Tabular Editor 来构建并维护你的 Power BI Dataset，也应考虑为模型元数据使用某种版本控制系统。 因此，你可以将 Power BI Workspace 视为 Analysis Services **服务器**，而 Workspace 中的每个 Power BI 语义模型都对应一个 Analysis Services **数据库**。 连接到 XMLA endpoint 后，Tabular Editor 的所有建模和管理功能都可用。 如果你决定使用 Tabular Editor 来构建和维护 Power BI 语义模型，也应考虑为模型元数据使用某种版本控制系统。
+Power BI XMLA endpoint 本质上相当于公开了一个 Analysis Services 实例，Tabular Editor 可以连接到该实例。 因此，你可以将 Power BI Workspace 视为 Analysis Services **服务器**，而 Workspace 中的每个 Power BI 语义模型都对应一个 Analysis Services **数据库**。 连接到 XMLA endpoint 后，Tabular Editor 的所有建模和管理功能都可用。 如果你决定使用 Tabular Editor 来构建和维护 Power BI 语义模型，也应考虑为模型元数据使用某种版本控制系统。
 
 工作流如下：
 
