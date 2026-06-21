@@ -35,8 +35,8 @@ applies_to:
 
 ![新建模型](~/content/assets/images/tutorials/new-pbi-model.png)
 
-- 为模型指定名称，或使用默认值。 为模型指定名称，或使用默认值。 然后，将兼容级别设置为“1609（Power BI / Fabric）”。
-- 为了获得最佳开发体验，请勾选“使用 Workspace 数据库”选项。 这要求你在 Power BI 中有一个可用的开发 Workspace，并已启用 XMLA 读/写。 为了获得最佳开发体验，请勾选“使用 Workspace 数据库”选项。 这要求你在 Power BI 中有一个可用的开发 Workspace，并已启用 XMLA 读/写。 单击“确定”后，系统会提示你输入 Power BI Workspace 的连接字符串，以便在该 Power BI Workspace 中创建 Workspace 数据库。
+- 为模型指定名称，或使用默认值。 然后，将兼容级别设置为“1609（Power BI / Fabric）”。
+- 为了获得最佳开发体验，请勾选“使用 Workspace 数据库”选项。 这要求你在 Power BI 中有一个可用的开发 Workspace，并已启用 XMLA 读/写。 单击“确定”后，系统会提示你输入 Power BI Workspace 的连接字符串，以便在该 Power BI Workspace 中创建 Workspace 数据库。
 
 > [!NOTE]
-> 使用 Workspace 数据库，你可以验证 Power Query（M 表达式），并从 Power Query 表达式中导入表架构。 你还可以在 Workspace 数据库中刷新和查询数据，便于调试和测试 DAX 表达式。 你还可以在 Workspace 数据库中刷新和查询数据，便于调试和测试 DAX 表达式。
+> 使用 Workspace 数据库，你可以验证 Power Query（M 表达式），并从 Power Query 表达式中导入表架构。 你还可以在 Workspace 数据库中刷新和查询数据，便于调试和测试 DAX 表达式。
