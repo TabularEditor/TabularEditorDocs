@@ -131,7 +131,7 @@ te connect Finance "Revenue Model" -w ./revenue-model
 te connect ./revenue-model -w Finance "Revenue Model"
 ```
 
-保存顺序始终是 **先本地，后远程**，因此即使推送到服务器失败，磁盘上的副本也能反映用户的最新更改。 关于 `--workspace-format`、覆盖语义以及清空镜像，请参见 @te-cli-commands#workspace-mode-w--workspace 的 Workspace 模式部分。 有关 `--workspace-format`、覆盖规则以及如何清除镜像，请参见 @te-cli-commands#workspace-mode--w----workspace。
+保存顺序始终是 **先本地，后远程**，因此即使推送到服务器失败，磁盘上的副本也能反映用户的最新更改。 有关 `--workspace-format`、覆盖规则以及如何清除镜像，请参见 @te-cli-commands#workspace-mode--w----workspace。
 
 ## 连接到不同的云
 
@@ -209,13 +209,13 @@ te deploy ./model -s my-workspace -d my-model \
 
 当使用 `--auth env`（以及作为 `auto` 链的一部分）时，CLI 会遵循标准的 Azure.Identity 环境变量：
 
-| 变量                              | 用途                                                                                                                           |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `AZURE_CLIENT_ID`               | 服务主体应用程序 ID。                                                                                                                 |
-| `AZURE_CLIENT_SECRET`           | 服务主体客户端机密。 需与 `AZURE_CLIENT_ID` 和 `AZURE_TENANT_ID` 配合使用。                                                                    |
-| `AZURE_TENANT_ID`               | 服务主体的租户（目录）ID。                                                                                                               |
-| `AZURE_CLIENT_CERTIFICATE_PATH` | 用于基于证书的服务主体身份验证的 PEM 或 PKCS12 证书文件的 PATH。 服务主体客户端机密。 需与 `AZURE_CLIENT_ID` 和 `AZURE_TENANT_ID` 配合使用。                          |
-| `AZURE_AUTHORITY_HOST`          | 为主权云覆盖授权主机（例如 `login.microsoftonline.us`, `login.partner.microsoftonline.cn`, `login.microsoftonline.de`）。 默认使用商业云。 默认使用商业云。 |
+| 变量                              | 用途                                                                                                                  |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `AZURE_CLIENT_ID`               | 服务主体应用程序 ID。                                                                                                        |
+| `AZURE_CLIENT_SECRET`           | 服务主体客户端机密。 需与 `AZURE_CLIENT_ID` 和 `AZURE_TENANT_ID` 配合使用。                                                           |
+| `AZURE_TENANT_ID`               | 服务主体的租户（目录）ID。                                                                                                      |
+| `AZURE_CLIENT_CERTIFICATE_PATH` | 用于基于证书的服务主体身份验证的 PEM 或 PKCS12 证书文件的 PATH。 需与 `AZURE_CLIENT_ID` 和 `AZURE_TENANT_ID` 配合使用。                            |
+| `AZURE_AUTHORITY_HOST`          | 为主权云覆盖授权主机（例如 `login.microsoftonline.us`, `login.partner.microsoftonline.cn`, `login.microsoftonline.de`）。 默认使用商业云。 |
 
 有关 CLI 专用环境变量（配置 PATH、调试日志、TE2 兼容性），请参见 @te-cli-config。
 
