@@ -37,7 +37,7 @@ Consulta la matriz siguiente para ver el resumen completo de escenarios compatib
 | Escenario / Edición                                                       | Desktop                                                 | Business                                                  | Enterprise                                              |
 | ------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
 | Herramienta externa para Power BI Desktop                                 | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| Cargar/guardar metadatos del modelo en disco\*\*                          | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| Cargar/guardar los metadatos del modelo en disco\*\*                      | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
 | Modo del área de trabajo\*\*\*                                            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
 | Power BI Premium por usuario                                              | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
 | SQL Server Developer Edition - edición para desarrolladores               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
