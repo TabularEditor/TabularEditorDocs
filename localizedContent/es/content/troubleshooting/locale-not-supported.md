@@ -19,7 +19,7 @@ applies_to:
 
 # Configuración regional no admitida
 
-Es posible que veas el siguiente mensaje de advertencia en los mensajes:
+Puede que se muestre alguno de los siguientes mensajes de advertencia:
 
 ```plaintext
 La configuración regional XXXX no es compatible
