@@ -2,7 +2,7 @@
 uid: pivot-grid
 title: Pivot Grid
 author: Daniel Otykier
-updated: 2024-05-28
+updated: 2026-05-27
 applies_to:
   products:
     - product: Tabular Editor 2
