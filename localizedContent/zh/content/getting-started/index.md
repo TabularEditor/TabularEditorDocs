@@ -13,12 +13,12 @@ updated: 2026-05-19
 
 **感谢你选择 Tabular Editor 3！**
 
-为了帮助你充分利用这款工具，我们已将所有上手资料汇总到本入门部分。 为了帮助你充分发挥该工具的价值，我们已将所有入门资料汇总在本“快速开始”部分中，希望你会喜欢。 我们建议所有 Tabular Editor 3 的新用户通读本指南，跳过你已经熟悉的内容。
+为了帮助你充分利用这款工具，我们已将所有上手资料汇总到本入门部分。 我们建议所有 Tabular Editor 3 新用户通读本指南，并跳过你已经熟悉的主题。
 
 > [!NOTE]
 > 本指南中的部分文章会引用 Tabular Editor 2，尤其是其命令行界面 (CLI)，用于自动化部署和测试。 我们计划在稍后发布一款可与 Tabular Editor 3 配套使用的独立 CLI 应用程序。
 
-由于本培训资料侧重于 Tabular Editor 产品，我们假设你已对表格数据建模有基本了解（例如使用 Power BI Desktop、Visual Studio 或 Tabular Editor 2.x 进行建模）。 如果你刚开始接触表格数据建模，我们强烈建议你参考一些第三方提供的培训资料和课程，例如 [sqlbi.com](https://sqlbi.com)。 如果你刚接触表格数据建模，我们推荐第三方（如 [sqlbi.com](https://sqlbi.com)）提供的培训资料和课程。
+本培训资料侧重于 Tabular Editor 产品，因此我们假设你已经具备表格数据建模的基本知识（例如使用 Power BI Desktop、Visual Studio 或 Tabular Editor 2.x）。 如果你刚接触表格数据建模，我们推荐第三方（如 [sqlbi.com](https://sqlbi.com)）提供的培训资料和课程。
 
 **本指南涵盖的主题：**
 
@@ -43,17 +43,17 @@ updated: 2026-05-19
 - @desktop-integration
 - @desktop-limitations
 
-Daniel Otykier
+**用户界面**
 
-- @user-interface
-- @bpa-view
-- @数据刷新视图
-- @查找和替换
-- @宏视图
-- @消息视图
-- @属性视图
-- @tom-explorer-view
-- @图表视图
+- @user-interface-reference
+- @bpa-view-reference
+- @data-refresh-view-reference
+- @find-replace-reference
+- @macros-view-reference
+- @messages-view-reference
+- @properties-view-reference
+- @tom-explorer-view-reference
+- @diagram-view-reference
 
 **并行开发**
 
@@ -73,7 +73,7 @@ Daniel Otykier
 
 **更多资源：**
 
-- [TE3 参考文档](xref:getting-started)
+- [Tabular Editor 3 入门](xref:getting-started)
 - [高级安装和激活](xref:installation-activation-basic)
 - [下载 Tabular Editor](https://tabulareditor.com/download)
 - [Tabular Editor Learn 学习中心](https://tabulareditor.com/learn)
