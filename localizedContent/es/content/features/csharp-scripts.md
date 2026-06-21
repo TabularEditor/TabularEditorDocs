@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2026-03-19
+updated: 2026-05-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -379,7 +379,7 @@ Info($"Modelo configurado para el entorno {environment}");
 
 ## Compatibilidad
 
-Las API de scripting de Tabular Editor 2 y Tabular Editor 3 son en gran medida compatibles. Sin embargo, en algunos casos conviene compilar el código condicionalmente en función de la versión que estés usando. El host de la CLI define un símbolo de preprocesador `TECLI`; TE3 Desktop define `TE3` (y símbolos dependientes de la versión, como `TE3_3_15_OR_GREATER`, para la versión secundaria activa); TE2 no define ninguno de los dos. Para ello, puedes usar directivas de preprocesador, que se introdujeron en Tabular Editor 3.10.0. Úsalas para escribir scripts portátiles:
+Las API de scripting de Tabular Editor 2, Tabular Editor 3 (Desktop) y la CLI de Tabular Editor son compatibles en su mayor parte, pero hay casos en los que conviene compilar el código de forma condicional según el host en el que se ejecute. El host de la CLI define un símbolo de preprocesador `TECLI`; TE3 Desktop define `TE3` (y símbolos dependientes de la versión, como `TE3_3_15_OR_GREATER`, para la versión secundaria activa); TE2 no define ninguno de los dos. Las directivas de preprocesador se introdujeron en Tabular Editor 3.10.0. Úsalas para escribir scripts portátiles:
 
 ```csharp
 #if TECLI
