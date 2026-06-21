@@ -29,7 +29,7 @@ applies_to:
 
 如果你无法访问互联网，例如由于代理，Tabular Editor 会提示你进行手动激活。
 
-![产品激活](~/content/assets/images/getting-started/product-activation.png)
+![手动激活提示](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
 
 输入邮箱后，会弹出一个对话框，其中包含指向激活密钥的链接。
 复制该 URL，并在已连接互联网的网页浏览器中打开。 复制该 URL，并在可连接到互联网的 Web 浏览器中打开。
