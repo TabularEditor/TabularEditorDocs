@@ -2,7 +2,7 @@
 uid: getting-started
 title: Instalación y activación
 author: Morten Lønskov
-updated: 2026-03-27
+updated: 2026-05-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,7 +25,7 @@ Descarga la versión más reciente de Tabular Editor 3 desde nuestra [página de
 
 Recomendamos el instalador MSI de 64 bits para la mayoría de los casos. Una vez descargado, haz doble clic en el archivo MSI y completa las pantallas del instalador.
 
-![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
+![Instalar](~/content/assets/images/getting-started/install.png)
 
 ### Requisitos previos
 
@@ -34,14 +34,14 @@ Ninguno.
 ### Requisitos del sistema
 
 - **Sistema operativo:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 o versiones posteriores
-- **Arquitectura:** x64, ARM64 (nativo a partir de 3.23.0)
+- **Arquitectura:** x64, ARM64 (nativo desde la versión 3.23.0)
 - **Runtime de .NET:** [.NET Runtime de Escritorio 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
 Consulta la directiva de sistemas operativos compatibles de .NET para ver qué versiones actuales de Windows admite cada entorno de ejecución.
 
 ## Activación de su instalación
 
-Tabular Editor 3 es software comercial. Visita nuestra [página principal](https://tabulareditor.com) para conocer los precios y las opciones de compra. Si no ha usado Tabular Editor 3 previamente, puede optar a una prueba gratuita de 30 días.
+Tabular Editor 3 es software comercial. Visita nuestra [página principal](https://tabulareditor.com) para conocer los precios y las opciones de compra. Si no has usado antes Tabular Editor 3, puedes acceder a una prueba gratuita de 30 días.
 
 La primera vez que inicie Tabular Editor 3 en un equipo nuevo, se le pedirá que active el producto.
 
@@ -49,14 +49,14 @@ La primera vez que inicie Tabular Editor 3 en un equipo nuevo, se le pedirá que
 
 ### Activación con una clave de licencia existente
 
-Una vez que compres una licencia de Tabular Editor 3, deberías recibir un correo electrónico con una cadena de 25 caracteres; esa es tu clave de licencia. Cuando se te solicite, introduce la clave de licencia y pulsa "Siguiente >" para activar el producto.
+Cuando compres una licencia de Tabular Editor 3, recibirás un correo electrónico con una cadena de 25 caracteres, que es tu clave de licencia. Cuando se te solicite, escribe la clave de licencia y haz clic en **Siguiente >** para activar el producto.
 
 ![Introducir clave de licencia](~/content/assets/images/getting-started/enter-license-key.png)
 
 > [!NOTE]
-> Para los tipos de licencia multiusuario, tendrás que introducir tu dirección de correo electrónico además de la clave de licencia. Tabular Editor 3 te lo solicitará si la clave de licencia que introduces corresponde a una licencia multiusuario.
+> Para los tipos de licencia multiusuario, además de la clave de licencia también debes introducir tu dirección de correo electrónico. Tabular Editor 3 te lo solicitará cuando la clave de licencia corresponda a una licencia multiusuario.
 
-Ten en cuenta que las instalaciones de Tabular Editor 3 se activan **por usuario**. En otras palabras, si varios usuarios comparten el mismo equipo, cada uno tendrá que activar el producto en su perfil de usuario de Windows.
+Las instalaciones de Tabular Editor 3 se activan **por usuario**. Si varios usuarios comparten el mismo equipo, cada usuario debe activar el producto en su propio perfil de usuario de Windows.
 
 ### Cuenta de Windows vs. cuenta de Power BI / Entra
 
@@ -71,27 +71,27 @@ Para más información sobre cómo Tabular Editor se autentica en el punto de co
 
 ### Solicitar una licencia de prueba
 
-Si no ha usado Tabular Editor 3 antes, puede optar a una prueba gratuita de 30 días. Al elegir esta opción, se te solicitará una dirección de correo electrónico. Usamos la dirección de correo electrónico para validar si ya tienes una activación de Tabular Editor 3.
+Si no has usado antes Tabular Editor 3, puedes acceder a una prueba gratuita de 30 días. Al elegir esta opción, se te pedirá una dirección de correo electrónico. Usamos la dirección de correo electrónico para comprobar si ya tienes una activación previa de Tabular Editor 3.
 
 > [!NOTE]
-> Al registrarse para obtener una licencia de prueba de 30 días, Tabular Editor ApS no le enviará correos electrónicos no solicitados ni reenviará su dirección de correo electrónico a terceros. Consulta nuestra @privacy-policy para obtener más información.
+> Tabular Editor ApS no envía correos electrónicos no solicitados ni cede tu dirección de correo electrónico a terceros al registrarte para obtener una licencia de prueba de 30 días. Consulta nuestra @privacy-policy para obtener más información.
 
 ### Cambiar una clave de licencia
 
-Cuando Tabular Editor 3 esté activado, puedes cambiar tu clave de licencia en el menú Ayuda seleccionando "Acerca de Tabular Editor".
+Una vez activado Tabular Editor 3, puedes cambiar la clave de licencia en el menú Ayuda seleccionando **Acerca de Tabular Editor**.
 
 ![About Te3](~/content/assets/images/getting-started/about-te3.png)
 
-En el cuadro de diálogo, selecciona "Cambiar clave de licencia". Ten en cuenta que esta opción solo está disponible si no hay ningún modelo cargado en Tabular Editor. Si ya has cargado un modelo, puedes cerrarlo desde Archivo > Cerrar modelo. Cuando hagas clic en "Cambiar clave de licencia", Tabular Editor te preguntará si quieres eliminar la licencia actual:
+En el cuadro de diálogo, selecciona **Cambiar clave de licencia**. Esta opción solo está disponible cuando no hay ningún modelo cargado en Tabular Editor. Si hay un modelo abierto, ciérralo desde **Archivo > Cerrar modelo**. Al hacer clic en **Cambiar clave de licencia**, Tabular Editor te preguntará si quieres quitar la licencia actual:
 
 ![imagen](https://user-images.githubusercontent.com/8976200/146754154-e691810b-342d-4311-8278-33da240d8d08.png)
 
-Al aceptarlo, se quita la licencia actual y tendrás que volver a introducir una clave de licencia para usar el producto.
+Si aceptas, se quita la licencia actual y tendrás que volver a introducir una clave de licencia para usar el producto.
 
 > [!IMPORTANT]
-> Una vez que se quita una clave de licencia, tal como se describe arriba, el usuario actual no podrá usar el producto en ese equipo hasta que se introduzca una nueva clave de licencia.
+> Una vez eliminada una clave de licencia, el producto no puede ser utilizado por el usuario actual en ese equipo hasta que se introduzca una nueva clave de licencia.
 
-## Instalado de forma predeterminada
+## Configuración posterior a la instalación
 
 Tabular Editor 3 ofrece muchas opciones de configuración. La configuración predeterminada es suficiente para la mayoría de los escenarios de desarrollo, pero revisa las opciones siguientes.
 
@@ -99,7 +99,8 @@ Tabular Editor 3 ofrece muchas opciones de configuración. La configuración pre
 
 De forma predeterminada, cada vez que se inicia Tabular Editor 3, la herramienta comprueba en línea si hay una versión más reciente disponible. Puedes controlar cómo se realiza esta comprobación de actualizaciones en **Herramientas > Preferencias > Actualizaciones y comentarios**.
 
-> Cierra todas las instancias de Tabular Editor 3. Nuestro equipo de soporte asume que estás en la versión más reciente antes de enviar un Report de error.
+> [!NOTE]
+> Usa siempre la versión más reciente de Tabular Editor 3. Nuestro equipo de soporte asume que estás en la versión más reciente antes de enviar un Report de error.
 
 ### Desactivar la recopilación de telemetría
 
@@ -112,7 +113,7 @@ Tabular Editor 3 recopila datos de uso anónimos y telemetría, lo que nos ayuda
 Si estás en una red con conectividad a Internet limitada, especifica la dirección, el nombre de usuario y la contraseña de un servidor proxy en **Herramientas > Preferencias > Configuración del proxy**. Esto es necesario para que Tabular Editor 3 pueda usar cualquier funcionalidad que dependa de solicitudes web salientes. En concreto:
 
 - Comprobaciones de actualizaciones
-- Si utilizas una clave de licencia de **Edición Enterprise**, establece también el correo electrónico del usuario con licencia:
+- Activación del producto
 - Formato de DAX
 - Descarga de reglas de mejores prácticas desde direcciones URL externas
 
@@ -134,4 +135,4 @@ Para la activación manual (sin conexión a Internet), la administración de lic
 - @migrate-from-vs
 - @migrate-from-desktop
 - @migrate-from-te2
-- Instalación silenciosa y aprovisionamiento previo de licencias
+- @installation-activation-basic
