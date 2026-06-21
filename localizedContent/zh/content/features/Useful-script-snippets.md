@@ -367,7 +367,7 @@ var tsv = ExportProperties(Model.AllMeasures, "Name,InPerspective[Inventory]");
 SaveFile(@"c:\Project\MeasurePerspectiveInventory.tsv", tsv);
 ```
 
-同理，翻译、注释等也是如此。 同理，翻译、注释等也是如此。 例如，如果你想查看应用于表、列、层次结构、级别和度量值的所有丹麦语翻译：
+同理，翻译、注释等也是如此。 例如，如果你想查看应用于表、列、层次结构、级别和度量值的所有丹麦语翻译：
 
 ```csharp
 // 构造对象列表：
