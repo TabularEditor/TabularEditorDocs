@@ -91,7 +91,7 @@ applies_to:
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
 
-**就这样！** 此时你应该会看到，Power BI 服务已根据你指定的策略，自动为表生成了分区。 剩下的就是刷新所有分区。 剩下的就是刷新所有分区。
+**就这样！** 此时你应该会看到，Power BI 服务已根据你指定的策略，自动为表生成了分区。 剩下的就是刷新所有分区。
 
 <img src="~/content/assets/images/generated-partitions-te3.png" class="noscale" alt="Refresh All Partitions" style="width:400px !important"/>
 
@@ -115,7 +115,7 @@ applies_to:
         Date.Year(DateValue) * 10000 + Date.Month(DateValue) * 100 + Date.Day(DateValue)
 ```
 
-2. **创建筛选步骤：** 使用该自定义函数在筛选表达式中将 `RangeStart` 和 `RangeEnd` 转换为整数。 除此之外，该筛选步骤与日期列为 DateTime 类型时完全相同： 除此之外，该筛选步骤与日期列为 DateTime 类型时完全相同：
+2. **创建筛选步骤：** 使用该自定义函数在筛选表达式中将 `RangeStart` 和 `RangeEnd` 转换为整数。 除此之外，该筛选步骤与日期列为 DateTime 类型时完全相同：
 
 ```M
 let
@@ -207,7 +207,7 @@ in
    #"Incremental Refresh" 
 ```
 
-另请参阅 Power Query 中 `Date.FromText` 函数的文档：[此处](https://learn.microsoft.com/en-us/powerquery-m/date-fromtext)。 如果无法在保留查询折叠的同时内联转换日期列，也可以按下文所述，通过本机查询来配置增量刷新。 如果无法在保留查询折叠的同时内联转换日期列，也可以按下文所述，通过本机查询来配置增量刷新。
+另请参阅 Power Query 中 `Date.FromText` 函数的文档：[此处](https://learn.microsoft.com/en-us/powerquery-m/date-fromtext)。 如果无法在保留查询折叠的同时内联转换日期列，也可以按下文所述，通过本机查询来配置增量刷新。
 
 -------------
 
@@ -227,7 +227,7 @@ in
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-native-query-formatted.png" class="noscale" alt="Refresh All Partitions" style="width:650px !important"/>
 
-3. **添加 `RangeStart` 和 `RangeEnd`：** 在 `WHERE` 子句中拼接 "RangeStart" 和 "RangeEnd"，替换占位字段，并使用 `Date.From` 将参数转换为日期，再通过 `Date.ToText` 将 `Format` 选项设为 `"yyyy-MM-dd`，把它们转换为字符串数据类型。 别忘了在拼接结果两侧加上单引号 `'`。 下面是最终查询的示例： 别忘了在拼接结果两侧加上单引号 `'`。 下面是最终查询的示例：
+3. **添加 `RangeStart` 和 `RangeEnd`：** 在 `WHERE` 子句中拼接 "RangeStart" 和 "RangeEnd"，替换占位字段，并使用 `Date.From` 将参数转换为日期，再通过 `Date.ToText` 将 `Format` 选项设为 `"yyyy-MM-dd`，把它们转换为字符串数据类型。 别忘了在拼接结果两侧加上单引号 `'`。 下面是最终查询的示例：
 
 ```M
 // 支持查询折叠并可用于增量刷新的完整本机查询示例
@@ -264,4 +264,4 @@ in
 
    这可能不是必需的，但根据本机查询中的转换情况，你也可以尝试按 Chris Webb 的[这篇文章](https://blog.crossjoin.co.uk/2021/02/21/query-folding-on-sql-queries-in-power-query-using-value-nativequery-and-enablefoldingtrue/)所述，添加参数 `[EnableFolding = True]`。
 
-5. **按正常流程继续后续步骤：** 然后你就可以用 _'Apply refresh policy'_ 配置并应用刷新策略，最后刷新所有分区。 刷新操作完成后，预览该表的数据以查看结果。 刷新操作完成后，预览该表的数据以查看结果。
+5. **按正常流程继续后续步骤：** 然后你就可以用 _'Apply refresh policy'_ 配置并应用刷新策略，最后刷新所有分区。 刷新操作完成后，预览该表的数据以查看结果。
