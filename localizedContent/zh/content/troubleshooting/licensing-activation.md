@@ -17,27 +17,27 @@ applies_to:
           full: true
 ---
 
-# 购买 Tabular Editor 3 许可证后，你会收到一封电子邮件，其中包含一段 25 个字符的字符串，即你的许可证密钥。 出现提示时，输入许可证密钥，然后点击“下一步 >”激活产品。
+# 安装并激活 Tabular Editor 3
 
 本页介绍 Tabular Editor 3 常见的安装和激活问题，以及相应的解决方法。 有关标准激活流程，请参阅 @getting-started。 有关高级部署场景（静默安装、许可证预配置、安装后配置），请参阅 @installation-activation-basic。
 
-## 系统要求
+## 检查系统要求
 
 继续排查前，先确认这台计算机满足以下要求：
 
-- **操作系统：** Windows 7、Windows 8、Windows 10、Windows Server 2016、Windows Server 2019 或更高版本
+- **操作系统：** Windows 10、Windows 11、Windows Server 2016、Windows Server 2019 或更高版本
 - **体系结构：** x64、ARM64（自 3.23.0 起原生支持）
-- **.NET Framework：** [4.7.2](https://dotnet.microsoft.com/download/dotnet-framework)
+- **.NET 运行时：** [.NET Desktop Runtime 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
 请从 [下载页面](xref:downloads) 下载与你的体系结构相匹配的 MSI。 安装程序或体系结构不匹配，常常会导致安装失败，或在首次启动时出现依赖项缺失错误。
 
 <a name="inspect-the-activated-license"></a>
 
-## 使用现有许可证密钥激活
+## 检查已激活的许可证
 
-Tabular Editor 3 使用 Windows 注册表来存储激活详细信息。
+Tabular Editor 3 会将激活详细信息存储在 Windows 注册表 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` 下。
 
-要查看分配给此计算机的当前许可证密钥，请在 Windows 命令提示符中运行以下命令（开始 > 运行 > cmd.exe）：
+若要查看当前 Windows 用户的许可证密钥，请在 Windows 命令提示符（开始 > 运行 > cmd.exe）中运行以下命令：
 
 ```cmd
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
@@ -63,7 +63,7 @@ Tabular Editor 3 会在启动时以及之后定期访问 `https://api.tabularedi
 
 如果运行 Tabular Editor 的计算机无法访问激活端点，激活提示会提供手动激活流程。
 
-![产品激活](~/content/assets/images/getting-started/product-activation.png)
+![手动激活提示](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
 
 1. 输入您的电子邮箱。 系统会弹出一个对话框，其中包含指向激活密钥的链接。
 
@@ -73,23 +73,23 @@ Tabular Editor 3 会在启动时以及之后定期访问 `https://api.tabularedi
 
 3. 复制完整的 JSON 对象，并将其粘贴到离线计算机上的对话框中。
 
-   ![输入许可证密钥](~/content/assets/images/getting-started/enter-license-key.png)
+   ![已填写的手动激活信息](~/content/assets/images/getting-started/activation_manual_dialogbox_filled.png)
 
-激活 Tabular Editor 3 后，你可以在“帮助”菜单中选择“关于 Tabular Editor”，来更换许可证密钥。
+然后，Tabular Editor 3 会验证许可证。
 
-## 更改许可证密钥
+## 无法通过 UI 更改许可证密钥
 
 **帮助 > 关于 Tabular Editor** 下的 **更改许可证密钥** 按钮仅在未加载任何模型时才会启用。 如果该按钮显示为灰色，请通过 **文件 > 关闭模型** 关闭当前打开的模型，然后重试。
 
 如果 UI 选项仍然无效，请通过注册表编辑器重置许可证：
 
 1. 关闭所有 Tabular Editor 3 实例。
-2. 在 Windows 中打开“注册表编辑器”（开始 > 运行 > regedit.msc）。
-3. 找到 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`（见上方屏幕截图）。
+2. 打开注册表编辑器（开始 > 运行 > regedit.msc）。
+3. 定位到 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`。
 4. 删除此键下的所有值。
-5. 关闭“注册表编辑器”，然后重新启动 Tabular Editor 3。
+5. 重新启动 Tabular Editor 3。
 
-或者，你也可以在 Windows 命令提示符（开始 > 运行 > cmd.exe）中运行以下命令：
+或者，在 Windows 命令提示符中运行以下命令：
 
 ```cmd
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
@@ -137,4 +137,4 @@ Tabular Editor 3 会通过出站 Web 请求执行产品激活、检查更新、D
 
 ## 确认已更新至最新版本
 
-在新设备上首次启动 Tabular Editor 3 时，系统会提示你激活产品。 提交支持请求前，请先确认你使用的是最新版本。 你可以在 **工具 > 偏好 > 更新和反馈** 中检查更新，或从[下载页面](xref:downloads)下载最新的安装程序。
+与激活相关的问题有时会在较新的 Tabular Editor 3 版本中修复。 提交支持请求前，请先确认你使用的是最新版本。 你可以在 **工具 > 偏好 > 更新和反馈** 中检查更新，或从[下载页面](xref:downloads)下载最新的安装程序。
