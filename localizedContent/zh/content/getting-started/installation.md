@@ -1,8 +1,8 @@
 ---
 uid: installation-activation-basic
-title: 安装、激活与基础配置
+title: 高级安装与激活
 author: Morten Lønskov
-updated: 2021-09-30
+updated: 2026-05-19
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -25,25 +25,23 @@ applies_to:
 
 <a name="manual-activation-no-internet"></a>
 
-## 手动激活（无网络）
+## 手动激活（无网络连接）
 
-如果你无法访问互联网，例如由于代理，Tabular Editor 会提示你进行手动激活。
+如果您无法访问互联网(例如受代理限制)，Tabular Editor 会提示您进行手动激活。
 
 ![手动激活提示](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
 
-输入邮箱后，会弹出一个对话框，其中包含指向激活密钥的链接。
-复制该 URL，并在已连接互联网的网页浏览器中打开。 复制该 URL，并在可连接到互联网的 Web 浏览器中打开。
+输入邮箱后，会弹出一个对话框，其中包含指向激活密钥的链接。 复制该 URL，并在可连接到互联网的 Web 浏览器中打开。
 
 该 URL 会返回一个 JSON 对象：
 
 ![手动激活 JSON 对象](~/content/assets/images/getting-started/activation_manual_jsonobject.png)
 
-复制返回的完整 JSON 对象，并将其粘贴到对话框中。
-你的手动激活对话框最后会像下面这样。 完成后，手动激活对话框应如下方截图所示。
+复制完整的 JSON 对象，并将其粘贴到对话框中。 完成后，手动激活对话框应如下方截图所示。
 
 ![已填写的手动激活](~/content/assets/images/getting-started/activation_manual_dialogbox_filled.png)
 
-这样即可验证你的 Tabular Editor 3 许可证。
+随后将验证您的 Tabular Editor 3 许可证。
 
 ## 更换企业版席位
 
@@ -70,7 +68,7 @@ REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 
 系统管理员还可以通过在每个用户的 `SOFTWARE\Kapacity\Tabular Editor 3` 注册表项下设置 **LicenseKey** 和 **User** 值，提前为计算机分配 Tabular Editor 3 许可证。 完整部署过程见 [静默安装和许可证预配](#silent-installation-and-license-pre-provisioning)。
 
-## 更改许可证密钥
+## 在注册表中更改许可证密钥
 
 如果由于某种原因，你无法在 **关于 Tabular Editor** 对话框中使用标准的 **更改许可证密钥** 选项，请通过注册表编辑器重置许可证：
 
@@ -86,7 +84,7 @@ REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
 ```
 
-购买 Tabular Editor 3 的许可证后，你会收到一封电子邮件，其中包含一段 25 个字符的字符串，这就是你的许可证密钥。 出现提示时，输入许可证密钥并点击“下一步 >”以激活产品。
+下次启动 Tabular Editor 3 时，系统会像该工具首次安装在这台电脑上时一样提示你输入许可证密钥。
 
 ## 静默安装与许可证预配置
 
