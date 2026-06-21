@@ -87,39 +87,39 @@ Best Practice Analyzer 可访问模型的完整元数据，还能访问 VertiPaq
   - `%objectname%` 仅返回当前对象的名称
   - `%objecttype%` 返回当前对象的类型
 - **适用范围**：选择该规则应适用的对象类型(一个或多个)。
-- **表达式**：输入一个 [Dynamic LINQ](https://dynamic-linq.net/expression-language) 搜索表达式，该表达式应对那些(在 **适用范围** 下拉列表中选定的对象类型中)违反规则的对象计算为 `true`。 Dynamic LINQ 表达式可以访问所选对象类型上可用的 TOM 属性，也可以使用大量标准 .NET 方法和属性。 Dynamic LINQ 表达式可以访问所选对象类型上可用的 TOM 属性，也可以使用大量标准 .NET 方法和属性。
-- **最低兼容级别**：某些 TOM 属性并非在所有兼容级别中都可用。 如果你在创建通用规则，请使用此下拉列表指定该规则适用的模型的最低兼容级别。 如果你在创建通用规则，请使用此下拉列表指定该规则适用的模型的最低兼容级别。
+- **表达式**：输入一个 [Dynamic LINQ](https://dynamic-linq.net/expression-language) 搜索表达式，该表达式应对那些(在 **适用范围** 下拉列表中选定的对象类型中)违反规则的对象计算为 `true`。 Dynamic LINQ 表达式可以访问所选对象类型上可用的 TOM 属性，也可以使用大量标准 .NET 方法和属性。
+- **最低兼容级别**：某些 TOM 属性并非在所有兼容级别中都可用。 如果你在创建通用规则，请使用此下拉列表指定该规则适用的模型的最低兼容级别。
 
-当规则保存到磁盘上的规则集中时，上述所有属性都会以 JSON 格式存储。 你也可以通过编辑 JSON 文件来添加/编辑/删除规则，同时还能为规则指定 `FixExpression` 属性。 这是一个字符串，用于生成将应用到模型上的 [C# Script](xref:cs-scripts-and-macros)，以修复规则违规。 你也可以通过编辑 JSON 文件来添加/编辑/删除规则，同时还能为规则指定 `FixExpression` 属性。 这是一个字符串，用于生成将应用到模型上的 [C# Script](xref:cs-scripts-and-macros)，以修复规则违规。
+当规则保存到磁盘上的规则集中时，上述所有属性都会以 JSON 格式存储。 你也可以通过编辑 JSON 文件来添加/编辑/删除规则，同时还能为规则指定 `FixExpression` 属性。 这是一个字符串，用于生成将应用到模型上的 [C# Script](xref:cs-scripts-and-macros)，以修复规则违规。
 
 # 使用 Best Practice Analyzer 视图
 
-Tabular Editor 会在 **Best Practice Analyzer 视图**中显示最佳实践规则的违规情况。 你还可以在主窗口底部的状态栏中查看规则违规的数量。 要切换到该视图，可以使用 **视图 > Best Practice Analyzer** 菜单选项，或点击状态栏中的“# BP issues”按钮。 你还可以在主窗口底部的状态栏中查看规则违规的数量。 要切换到该视图，可以使用 **视图 > Best Practice Analyzer** 菜单选项，或点击状态栏中的“# BP issues”按钮。
+Tabular Editor 会在 **Best Practice Analyzer 视图**中显示最佳实践规则的违规情况。 你还可以在主窗口底部的状态栏中查看规则违规的数量。 要切换到该视图，可以使用 **视图 > Best Practice Analyzer** 菜单选项，或点击状态栏中的“# BP issues”按钮。
 
 ![Best Practice Analyzer 视图](~/content/assets/images/best-practice-analyzer-view.png)
 
-**Best Practice Analyzer 视图**会显示一个列表，其中包含所有存在违规对象的规则。 每条规则下方都会列出违规对象。 你可以在列表中双击某个对象，以在 **TOM Explorer** 中定位到该对象。 每条规则下方都会列出违规对象。 你可以在列表中双击某个对象，以在 **TOM Explorer** 中定位到该对象。
+**Best Practice Analyzer 视图**会显示一个列表，其中包含所有存在违规对象的规则。 每条规则下方都会列出违规对象。 你可以在列表中双击某个对象，以在 **TOM Explorer** 中定位到该对象。
 
 > [!TIP]
 > **企业版用户**：内置 BPA 规则会与你定义的任何自定义规则一同显示。 这些规则默认启用，并提供全面的最佳实践指导。 你可以通过 **工具 > 管理 BPA 规则...** 来管理内置规则；它们会显示在 **（内置规则）** 集合中。 有关详细信息，请参阅 [内置 BPA 规则](xref:built-in-bpa-rules)。 这些规则默认启用，并提供全面的最佳实践指导。 你可以通过 **工具 > 管理 BPA 规则...** 来管理内置规则；它们会显示在 **（内置规则）** 集合中。 有关详细信息，请参阅 [内置 BPA 规则](xref:built-in-bpa-rules)。
 
 ![项目选项](~/content/assets/images/bpa-options.png)
 
-右键点击某个对象时，你会看到如上所示的一组选项。 这些选项包括： 这些选项包括：
+右键点击某个对象时，你会看到如上所示的一组选项。 这些选项包括：
 
 - **转到对象**：这与双击对象的效果相同，可在 **TOM Explorer** 中定位到该对象。
-- **忽略对象**：这会在对象上添加一条注释，指示 Best Practice Analyzer 在该对象上忽略此特定规则。 被忽略的规则通过其 ID 指定。 被忽略的规则通过其 ID 指定。
-- **生成修复脚本**：仅当某条规则指定了 `FixExpression` 属性时，此选项才可用。 **生成修复脚本**：仅当某条规则指定了 `FixExpression` 属性时，此选项才可用。 选择此选项后，Tabular Editor 会基于所选规则(s)的 `FixExpression` 创建一个新的 C# Script。
-- **应用修复**：仅当某条规则指定了 `FixExpression` 属性时，此选项才可用。 选择此选项后，Tabular Editor 会执行所选规则(s)的 `FixExpression`，以自动修复该规则违规问题。 选择此选项后，Tabular Editor 会执行所选规则(s)的 `FixExpression`，以自动修复该规则违规问题。
+- **忽略对象**：这会在对象上添加一条注释，指示 Best Practice Analyzer 在该对象上忽略此特定规则。 被忽略的规则通过其 ID 指定。
+- **生成修复脚本**：仅当某条规则指定了 `FixExpression` 属性时，此选项才可用。 选择此选项后，Tabular Editor 会基于所选规则(s)的 `FixExpression` 创建一个新的 C# Script。
+- **应用修复**：仅当某条规则指定了 `FixExpression` 属性时，此选项才可用。 选择此选项后，Tabular Editor 会执行所选规则(s)的 `FixExpression`，以自动修复该规则违规问题。
 
 > [!NOTE]
 > 在 Best Practice Analyzer 视图中，你可以按住 Shift 或 Ctrl 键来多选对象。
 
-上述选项也会以工具栏按钮的形式出现在 **Best Practice Analyzer 视图** 顶部。 此外，还提供用于展开/折叠所有项、显示已忽略的规则/对象，以及执行手动刷新（禁用后台扫描时需要，见下文）的按钮。 此外，还提供用于展开/折叠所有项、显示已忽略的规则/对象，以及执行手动刷新（禁用后台扫描时需要，见下文）的按钮。
+上述选项也会以工具栏按钮的形式出现在 **Best Practice Analyzer 视图** 顶部。 此外，还提供用于展开/折叠所有项、显示已忽略的规则/对象，以及执行手动刷新（禁用后台扫描时需要，见下文）的按钮。
 
 # 禁用 Best Practice Analyzer
 
-在某些情况下，你可能希望禁用 Best Practice Analyzer 的后台扫描。 例如，当某些规则评估耗时较长，或你正在处理非常大的模型时。 例如，当某些规则评估耗时较长，或你正在处理非常大的模型时。
+在某些情况下，你可能希望禁用 Best Practice Analyzer 的后台扫描。 例如，当某些规则评估耗时较长，或你正在处理非常大的模型时。
 
 你可以在 **工具 > 偏好 > Best Practice Analyzer** 下，取消勾选 **在后台扫描最佳实践违规** 来禁用后台扫描。
 
