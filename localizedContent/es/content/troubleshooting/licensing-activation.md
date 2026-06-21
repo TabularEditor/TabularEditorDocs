@@ -17,33 +17,33 @@ applies_to:
           full: true
 ---
 
-# Activación de la instalación
+# Instalar y activar Tabular Editor 3
 
 Esta página explica los problemas habituales de instalación y activación de Tabular Editor 3 y cómo resolverlos. Para el flujo de activación estándar, consulta @getting-started. Para escenarios de implementación avanzada (instalación desatendida, aprovisionamiento previo de licencias y configuración posterior a la instalación), consulta @installation-activation-basic.
 
-## Requisitos del sistema
+## Verificar los requisitos del sistema
 
 Confirma que el equipo cumple los requisitos antes de seguir con la resolución de problemas:
 
-- **Sistema operativo:** Windows 7, Windows 8, Windows 10, Windows Server 2016, Windows Server 2019 o posterior
+- **Sistema operativo:** Windows 10, Windows 11, Windows Server 2016, Windows Server 2019 o versiones posteriores
 - **Arquitectura:** x64, ARM64 (nativo a partir de la versión 3.23.0)
-- **.NET Framework:** [4.7.2](https://dotnet.microsoft.com/download/dotnet-framework)
+- **.NET Runtime:** [.NET Runtime de Escritorio 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 
 Usa el MSI correspondiente a tu arquitectura de la [página de descargas](xref:downloads). Una incompatibilidad entre el instalador y la arquitectura es una causa frecuente de instalaciones fallidas y de errores por dependencias faltantes al primer inicio.
 
 <a name="inspect-the-activated-license"></a>
 
-## Solicitar una licencia de prueba
+## Inspeccionar la licencia activada
 
-Tabular Editor 3 usa el Registro de Windows para almacenar los detalles de activación.
+Tabular Editor 3 guarda los detalles de activación en el Registro de Windows, en `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
 
-Para ver la clave de licencia actual asignada al equipo, ejecuta el siguiente comando en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
+Para ver la clave de licencia actual del usuario de Windows activo, ejecuta lo siguiente en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
 
 ```cmd
 REG QUERY "HKCU\Software\Kapacity\Tabular Editor 3" /v LicenseKey
 ```
 
-También puedes usar `regedit.exe` (Editor del Registro de Windows) y navegar a `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` para ver y modificar los valores **LicenseKey** y **User**.
+También puedes inspeccionar y editar directamente los valores **LicenseKey** y **User** con `regedit.exe`.
 
 ![Editor del Registro](~/content/assets/images/troubleshooting/registry-editor.png)
 
@@ -63,7 +63,7 @@ Si los avisos de activación siguen apareciendo:
 
 Si el equipo donde se ejecuta Tabular Editor no puede acceder al punto de conexión de activación, el mensaje de activación ofrece un flujo manual.
 
-![Activación del producto](~/content/assets/images/getting-started/product-activation.png)
+![Aviso de activación manual](~/content/assets/images/getting-started/Activation_manual_firstprompt.png)
 
 1. Introduce tu correo electrónico. Aparece un cuadro de diálogo con un enlace a una clave de activación.
 
@@ -73,23 +73,23 @@ Si el equipo donde se ejecuta Tabular Editor no puede acceder al punto de conexi
 
 3. Copia el objeto JSON completo y pégalo en el cuadro de diálogo del equipo sin conexión.
 
-   ![Introducir la clave de licencia](~/content/assets/images/getting-started/enter-license-key.png)
+   ![Activación manual completada](~/content/assets/images/getting-started/activation_manual_dialogbox_filled.png)
 
-Cuando Tabular Editor 3 esté activado, puedes cambiar tu clave de licencia en el menú Ayuda seleccionando "Acerca de Tabular Editor".
+Después, Tabular Editor 3 verifica la licencia.
 
-## Cambiar una clave de licencia
+## No se puede cambiar una clave de licencia desde la interfaz de usuario
 
-En el cuadro de diálogo, selecciona "Cambiar clave de licencia". Ten en cuenta que esta opción solo está disponible si no hay ningún modelo cargado en Tabular Editor. Si ya has cargado un modelo, puedes cerrarlo en Archivo > Cerrar modelo.
+El botón **Cambiar clave de licencia** en **Ayuda > Acerca de Tabular Editor** solo está habilitado cuando no hay ningún modelo cargado. Si el botón aparece atenuado, cierra el modelo abierto en **Archivo > Cerrar modelo** e inténtalo de nuevo.
 
 Si la opción de la interfaz de usuario sigue fallando, restablece la licencia a través del Editor del Registro:
 
 1. Cierra todas las instancias de Tabular Editor 3.
-2. Abre el Editor del Registro en Windows (Inicio > Ejecutar > regedit.msc).
-3. Busca `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` (consulta la captura de pantalla anterior).
+2. Abre el Editor del Registro (Inicio > Ejecutar > regedit.msc).
+3. Ubica `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
 4. Elimina todos los valores de esta clave.
-5. Cierra el Editor del Registro y reinicia Tabular Editor 3.
+5. Reinicia Tabular Editor 3.
 
-Como alternativa, ejecuta el siguiente comando en el Símbolo del sistema de Windows (Inicio > Ejecutar > cmd.exe):
+Como alternativa, ejecuta lo siguiente en el Símbolo del sistema de Windows:
 
 ```cmd
 REG DELETE "HKCU\Software\Kapacity\Tabular Editor 3" /va
@@ -122,7 +122,7 @@ Para obtener información sobre cómo elegir el modo de autenticación adecuado 
 Las licencias Enterprise se asignan por puesto. Para activar Tabular Editor 3 para un nuevo usuario cuando todos los puestos están ocupados, primero hay que cancelar la asignación del puesto al usuario actual desde el [portal de autoservicio de Tabular Editor](https://tabulareditor.com/my-account/). Esta acción la realiza el propietario de la suscripción o el administrador de licencias.
 
 > [!NOTE]
-> Cambiar un usuario solo es posible en la Edición Enterprise.
+> La reasignación de puestos solo es posible en la Edición Enterprise.
 
 ## Activación detrás de un proxy
 
@@ -137,4 +137,4 @@ Tabular Editor 3 usa solicitudes web salientes para la activación del producto,
 
 ## Comprueba que usas la versión más reciente
 
-La primera vez que inicies Tabular Editor 3 en un equipo nuevo, se te pedirá que actives el producto. Comprueba que usas la versión más reciente antes de enviar una solicitud de soporte. Comprueba si hay actualizaciones en **Herramientas > Preferencia > Actualizaciones y comentarios**, o descarga el instalador más reciente desde la [página de descargas](xref:downloads).
+Los errores relacionados con la activación a veces se corrigen en versiones más recientes de Tabular Editor 3. Comprueba que usas la versión más reciente antes de enviar una solicitud de soporte. Comprueba si hay actualizaciones en **Herramientas > Preferencia > Actualizaciones y comentarios**, o descarga el instalador más reciente desde la [página de descargas](xref:downloads).
