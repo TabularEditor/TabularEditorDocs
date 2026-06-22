@@ -142,7 +142,7 @@ def process_file(loc_path: Path, lang: str, dry_run: bool):
         text = f.read()
     newline = "\r\n" if "\r\n" in text else "\n"
     norm = text.replace("\r\n", "\n")
-    had_bom = norm.startswith("﻿")
+    had_bom = norm.startswith("\ufeff")
     if had_bom:
         norm = norm[1:]
 
