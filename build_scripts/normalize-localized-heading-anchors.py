@@ -181,10 +181,11 @@ def process_file(loc_path: Path, lang: str, dry_run: bool):
     if had_bom:
         rebuilt = "\ufeff" + rebuilt
 
-    if rebuilt != text and not dry_run:
+    changed = rebuilt != text
+    if changed and not dry_run:
         with open(loc_path, "w", encoding="utf-8", newline="") as f:
             f.write(rebuilt)
-    return ("ok", len(inject_at))
+    return ("ok", len(inject_at) if changed else 0)
 
 
 def iter_languages(lang):
