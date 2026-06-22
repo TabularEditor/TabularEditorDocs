@@ -19,11 +19,11 @@ import json
 import re
 from pathlib import Path
 
-from config_loader import get_default_language
+from config_loader import get_default_language, get_base_url
 
 
-# Default base URL for the documentation site
-DEFAULT_BASE_URL = "https://docs.tabulareditor.com"
+# Default base URL for the documentation site (from metadata/build-config.json)
+DEFAULT_BASE_URL = get_base_url()
 
 # Default language (used for x-default hreflang) - loaded from config
 DEFAULT_LANGUAGE = get_default_language()

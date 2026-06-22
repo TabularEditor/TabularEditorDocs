@@ -160,7 +160,12 @@ def get_base_url(config: dict | None = None) -> str:
     """
     if config is None:
         config = load_build_config()
-    return config.get("baseUrl", "https://docs.tabulareditor.com").rstrip("/")
+    base_url = config.get("baseUrl")
+    if not base_url:
+        raise KeyError(
+            '"baseUrl" is missing from metadata/build-config.json'
+        )
+    return base_url.rstrip("/")
 
 
 def get_sitemap_downrank(config: dict | None = None) -> list[dict]:
