@@ -41,12 +41,12 @@ Tabular Editor 3 可以**连接**使用 **DirectQuery over Analysis Services (
 2. 选择 **添加 > 数据列**。
 3. 在 _属性_ 窗口中，设置：
 
-   - **SourceColumnName** – 必须与远程表中该列的 **Name** _完&#x5168;_&#x4E00;致。
+   - **SourceColumnName** – 必须与远程表中该列的 **Name** 完全一致。
    - **SourceLineageTag** – 从源列复制 **LineageTag** 值。
 4. 保存并部署模型。
 
 > [!NOTE]
-> 列名和 Lineage tag 必&#x987B;_&#x9010;字&#x7B26;_&#x5B8C;全一致。  任何不一致都会导致部署错误。
+> 列名和 Lineage tag 必须逐字符完全一致。  任何不一致都会导致部署错误。
 
 ### 2. 使用“Import tables from remote model” C# 脚本
 
