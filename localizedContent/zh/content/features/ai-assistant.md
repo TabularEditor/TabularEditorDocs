@@ -144,7 +144,7 @@ az cognitiveservices account deployment list --name "<resource-name>" --resource
 > 本地模型的响应质量取决于模型规模以及你的硬件配置。 更大的模型通常能产生更好的结果，但需要更多 RAM 和性能更强的 GPU。 AI Assistant 的工具调用能力需要使用支持 OpenAI 兼容格式函数调用的模型。
 
 > [!TIP]
-> 我们建议选择参数&#x91CF;_&#x81F3;&#x5C11;_&#x4E3A; 30B 的模型，但理想情况下至少应有 100B 参数。 例如，Qwen3.5-122B-A10B 模型在我们的内部测试中表现良好。
+> 我们建议选择参数量至少为 30B 的模型，但理想情况下至少应有 100B 参数。 例如，Qwen3.5-122B-A10B 模型在我们的内部测试中表现良好。
 
 ### 使用 Microsoft Foundry
 
