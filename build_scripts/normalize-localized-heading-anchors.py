@@ -179,7 +179,7 @@ def process_file(loc_path: Path, lang: str, dry_run: bool):
         out.append(ln)
     rebuilt = newline.join(out)
     if had_bom:
-        rebuilt = "﻿" + rebuilt
+        rebuilt = "\ufeff" + rebuilt
 
     if rebuilt != text and not dry_run:
         with open(loc_path, "w", encoding="utf-8", newline="") as f:
