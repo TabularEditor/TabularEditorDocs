@@ -210,7 +210,7 @@ te set "'Net Sales'[Sales Amount]" -q formatString -i "#,0" --save   # DAX form 
 te set Sales -q isHidden -i true --save
 ```
 
-### 添加
+### add
 
 向模型添加对象。 为新对象传入 `<path>`（父级必须已存在；最后一个分段就是新名称），并通过 `-t` / `--type` 指定类型。 关系仍使用其简写语法（`Sales[Key]->Dim[Key]`）。
 
@@ -453,7 +453,7 @@ te bpa run --path Sales/Measures   # Path filter applied to the matched tables
 Rules loaded: 41 from 1 file(s) from bpa.rules config + built-in defaults + model annotations
 ```
 
-### bpa 规则
+### bpa rules
 
 管理 BPA 规则集——在本地规则文件或模型注释中列出、检查、初始化，以及启用或禁用规则。 内置规则是只读的。要跳过其中某一条而保留其余规则，请使用 `te bpa rules disable`（不要直接编辑内置规则集）。
 
@@ -578,7 +578,7 @@ te format --lang m --save                                  # Format M
 
 ## 执行
 
-### 查询
+### query
 
 针对已部署的模型执行 DAX 查询。
 
@@ -596,7 +596,7 @@ te query -q "EVALUATE TOPN(5, 'Sales')" -s my-ws -d my-model
 te query --file query.dax --output-format json
 ```
 
-### 脚本
+### script
 
 针对语义模型执行一个或多个 C# Script。 CLI 使用与 Tabular Editor 3 Desktop 相同的脚本宿主，因此能在 TE3 中运行的脚本在这里也可原样运行。
 
@@ -641,7 +641,7 @@ echo "Info(Model.Name);" | te script -e -
 >
 > 更全面的跨版本脚本说明，见 @csharp-scripts。
 
-### 宏
+### macro
 
 通过宏 JSON 文件（通常为 `MacroActions.json`）管理和运行宏。 宏文件的 PATH 按以下顺序解析：`--macros <path>` → 环境变量 `TE_MACROS_PATH` → CLI 配置中的 `macros` → `./MacroActions.json`。
 
@@ -657,7 +657,7 @@ echo "Info(Model.Name);" | te script -e -
 | `sort`                             | 排序并重新分配 ID。         |
 | 宏：[`init`](#macro-init)            | 在解析得到的路径处创建一个空的宏文件。 |
 
-#### 宏 init
+#### macro init
 
 在配置的路径下创建一个空的宏文件（`{\"Actions\":[]}`）。 当解析后的宏文件尚不存在时，只需运行一次该命令。
 
@@ -672,7 +672,7 @@ te macro init --macros ./project-macros.json
 te macro init --force
 ```
 
-#### 宏 run
+#### macro run
 
 运行宏。 通过 `dataTable.Output()` 输出表格的宏会在终端中显示格式化输出，因此 DAX 风格的查询宏在 `te macro run` 中的行为与在 TE3 中相同。
 
@@ -721,7 +721,7 @@ te deploy ./model --profile staging --force
 > [!IMPORTANT]
 > `te deploy` 会在执行前运行 Best Practice Analyzer 作为门控检查。 在交互模式下，会显示摘要和确认提示，且 **默认安全选项为 `n`**。 在 CI 中，传入 `--force` 可跳过该提示。 BPA 门控配置请参见 @te-cli-config。
 
-### 刷新
+### refresh
 
 在已部署的模型上触发数据刷新。
 
@@ -848,7 +848,7 @@ te migrate --output-format json     # Machine-readable mapping
 
 ## Shell
 
-### 交互式
+### interactive
 
 使用具备模型感知能力的提示词启动引导式 REPL 会话。 参见 @te-cli-interactive。
 
@@ -860,7 +860,7 @@ te interactive -s MyWorkspace -d MyModel      # Start with a remote model
 
 引号和 DAX 风格的引用在会话内外的用法一致——有关 REPL 中支持括号感知的 argv 拆分的详细信息，请参见上文的[对象路径](#object-paths)一节以及 @te-cli-interactive。
 
-### 补全
+### completion
 
 生成 shell 补全脚本。 参见 @te-cli-install。
 
