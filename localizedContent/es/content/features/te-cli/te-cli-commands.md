@@ -210,7 +210,7 @@ te set "'Net Sales'[Sales Amount]" -q formatString -i "#,0" --save   # DAX form 
 te set Sales -q isHidden -i true --save
 ```
 
-### agregar
+### add
 
 Agrega un objeto al modelo. Especifica un `<path>` para el nuevo objeto (el elemento padre ya debe existir; el segmento final es el nuevo nombre) y el tipo mediante `-t` / `--type`. Las relaciones mantienen su sintaxis abreviada (`Sales[Key]->Dim[Key]`).
 
@@ -453,7 +453,7 @@ La línea `Rules loaded:` de la salida atribuye cada capa que contribuye, por ej
 Rules loaded: 41 from 1 file(s) from bpa.rules config + built-in defaults + model annotations
 ```
 
-### reglas de bpa
+### bpa rules
 
 Administra colecciones de reglas de BPA: enumera, inspecciona, inicializa y activa o desactiva reglas en tu archivo local de reglas o en las anotaciones del modelo. Las reglas integradas son de solo lectura; para omitir una sin perder el resto, usa `te bpa rules disable` (no edites directamente el conjunto integrado).
 
@@ -578,7 +578,7 @@ te format --lang m --save                                  # Format M
 
 ## Ejecución
 
-### consulta
+### query
 
 Ejecuta una consulta DAX contra un modelo implementado.
 
