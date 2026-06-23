@@ -2,7 +2,7 @@
 uid: te-cli-install
 title: 安装与设置
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -132,7 +132,7 @@ te config set hidePreviewNotice true
 
 ## Shell 自动补全
 
-CLI 为 **Bash**、**Zsh** 和 **PowerShell** 提供 Tab 自动补全脚本。 选择与你使用的 shell 对应的代码块——每个代码块都会将自动补全设置为持久生效，在新的 shell 会话中也能使用。
+The CLI provides tab-completion scripts for **Bash**, **Zsh**, **PowerShell** and **Fish**. 选择与你使用的 shell 对应的代码块——每个代码块都会将自动补全设置为持久生效，在新的 shell 会话中也能使用。
 
 ### Bash（macOS/Linux）
 
@@ -155,6 +155,12 @@ echo 'fpath=(~/.zfunc $fpath); autoload -U compinit; compinit' >> ~/.zshrc
 Add-Content $PROFILE 'te completion pwsh | Out-String | Invoke-Expression'
 ```
 
+### Fish (macOS/Linux)
+
+```bash
+te completion fish > ~/.config/fish/completions/te.fish
+```
+
 打开新的 shell 会话后，自动补全才会生效。
 
 自动补全涵盖子命令、全局标志以及模型路径（在需要针对文件系统进行 tab 补全时）。
@@ -165,12 +171,12 @@ Add-Content $PROFILE 'te completion pwsh | Out-String | Invoke-Expression'
 
 | 功能                                              | Windows | macOS / Linux |
 | ----------------------------------------------- | ------- | ------------- |
-| 加载/保存 BIM 和 TMDL                                | 是       | 是             |
-| 部署到 Power BI / Fabric / Azure Analysis Services | 是       | 是             |
-| Best Practice Analyzer 和 VertiPaq分析器            | 是       | 是             |
-| C# Script 脚本编写                                  | 是       | 是             |
-| 针对云端模型的 DAX 查询                                  | 是       | 是             |
-| 身份验证：浏览器、设备代码、服务主体、环境变量、托管身份                    | 是       | 是             |
+| 加载/保存 BIM 和 TMDL                                | 是的      | 是             |
+| 部署到 Power BI / Fabric / Azure Analysis Services | 是的      | 是             |
+| Best Practice Analyzer 和 VertiPaq分析器            | 是的      | 是             |
+| C# Script 脚本编写                                  | 是的      | 是             |
+| 针对云端模型的 DAX 查询                                  | 是的      | 是             |
+| 身份验证：浏览器、设备代码、服务主体、环境变量、托管身份                    | 是的      | 是             |
 | 连接到本地 SSAS 实例（TCP 传输）                           | 是       | **否**         |
 | 连接到 Power BI Desktop（命名管道传输）                    | 是       | **否**         |
 

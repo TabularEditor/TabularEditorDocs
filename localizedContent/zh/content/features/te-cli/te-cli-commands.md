@@ -2,7 +2,7 @@
 uid: te-cli-commands
 title: 命令参考
 author: Peer Grønnerup
-updated: 2026-05-12
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -135,6 +135,8 @@ te ls 'Roles/Re*/Members'            # Members of every role matching Re*
 | `--non-interactive`        | 禁用所有交互式提示。 如果缺少必需输入，将给出可操作的错误提示并失败退出。                                                                                                                                              |
 | `--debug`                  | 启用调试日志并输出到 stderr（连接字符串、身份验证流程、耗时）。                                                                                                                                                |
 
+`te --version` prints the CLI version and exits.
+
 对于读取模型的命令，解析顺序如下：
 
 位置参数 `<model>` → 全局选项 `--model` → `--server`/`--database`（远程）→ `te connect` 的当前活动连接 → `--recent`。
@@ -186,10 +188,22 @@ te open ./my-model
 
 ### init
 
-在指定路径创建一个新的空语义模型。
+在指定路径创建一个新的空语义模型。 Defaults to a TMDL model in `PowerBI` compatibility mode at compatibility level 1702.
+
+`te init` accepts:
+
+- `<output-path>` - positional argument: directory to create the model in (omit to use the global `--model` path).
+- `--compatibility-mode <mode>` - `PowerBI` (default) or `AnalysisServices`.
+- `--compatibility-level <N>` (alias `--compat`) - compatibility level. Defaults to `1702` when the mode is `PowerBI`, `1500` otherwise. See @update-compatibility-level.
+- `--name <name>` - model/database name (default: the directory name).
+- `--serialization <fmt>` - `tmdl` (default), `bim`, `te-folder`, `pbip`.
+- `--force` - replace any existing file or directory at the target path.
 
 ```bash
-te init ./new-model
+te init ./new-model                                       # TMDL, PowerBI mode, compat 1702
+te init ./new-model --serialization bim                   # Single-file BIM model
+te init ./as-model --compatibility-mode AnalysisServices  # AS model, compat 1500
+te init ./existing-dir --force                            # Overwrite non-empty directory
 ```
 
 ## 模型编辑
@@ -325,7 +339,7 @@ te ls Tables --output-format bim > tables.json   # All tables emitted as TMSL/BI
 `te get` 支持：
 
 - `-q, --query <property>` - 获取单个属性（例如 `expression`、`formatString`）。
-- `-t, --type <kind>` - 当路径匹配到表下的多个子对象时，用于消除歧义（例如同名的列和层次结构）。 可选值：`Measure`、`Column`、`CalculatedColumn`、`Hierarchy`、`Calendar`、`Partition`、`CalculationItem`。
+- `-t, --type <kind>` - disambiguate when the path matches multiple table-children (e.g., a column and a hierarchy with the same name). 可选值：`Measure`、`Column`、`CalculatedColumn`、`Hierarchy`、`Calendar`、`Partition`、`CalculationItem`。
 - `--output-format tmsl`（别名 `bim`）- 将解析后的对象输出为 TMSL/BIM JSON。
 - `--output-format tmdl` - 将解析后的对象输出为 TMDL（仅限命名对象）。
 
@@ -375,12 +389,18 @@ te diff old.bim new.bim
 
 `te deps` 接受以下选项：
 
+- `--upstream` - show only upstream dependencies (what this object uses).
+- `--downstream` - show only downstream dependents (what uses this object).
+- `--deep` - show the recursive dependency tree instead of direct dependencies only.
+- `--max-depth <N>` - maximum depth for `--deep` traversal (default: `10`).
+- `-t, --type <kind>` - disambiguate when the path matches multiple table-children (e.g., a column and a hierarchy with the same name).
 - `--unused` - 列出未被任何 DAX 引用，且未用于任何关系、层次结构级别、排序依据、变体、AlternateOf 基对象或日历时间角色的度量值、计算列以及**所有数据列**。 每条结果在文本模式下会显示 `(hidden)`，在 JSON 中则包含 `isHidden` 字段。
 - `--hidden` - 将 `--unused` 限制为仅包含隐藏对象。 隐藏且未使用的对象是最安全的清理候选项，因为没有任何用户可见内容依赖它们。
 
 ```bash
 te deps Sales/Revenue                     # Upstream + downstream for one object
 te deps "'Sales'[Revenue]"                # DAX form is accepted everywhere a <path> is
+te deps Sales/Revenue --downstream --deep # Everything that depends on Revenue, recursively
 te deps --unused                          # All unused measures and columns
 te deps --unused --hidden                 # Only hidden, unused objects
 ```
@@ -395,10 +415,16 @@ te deps --unused --hidden                 # Only hidden, unused objects
 
 - `--ci <fmt>` - 将 CI 注释输出到 stderr：`vsts` 或 `github`。
 - `--trx <PATH>` - 将结果写入 VSTEST `.trx` 文件。
+- `--errors-only` - shorthand for `--no-warnings --no-antipatterns`: only show errors.
+- `--no-warnings` - hide warnings from the semantic analyzer.
+- `--no-antipatterns` - hide anti-pattern suggestions (DAX best-practice hints).
+- `--server-only` - only show errors reported by the connected server; skip local semantic analysis.
+- `--no-multiline` - collapse multi-line cell content (error messages, expressions) to a single line. 仅适用于文本输出。
 
 ```bash
 te validate ./model
 te validate --ci github --trx results.trx
+te validate --errors-only                 # Hide warnings and anti-pattern hints
 ```
 
 ### bpa run
@@ -423,7 +449,7 @@ te validate --ci github --trx results.trx
 - `--fail-on <severity>` - 失败阈值：`error`（默认）或 `warning`。 当违规项达到该阈值时，将以退出代码 `1` 退出。
 - `--ci <fmt>` - 向 stderr 输出 CI 日志命令：`vsts`（Azure DevOps）、`github`（GitHub Actions）。
 - `--trx <path>` - 将结果作为 VSTEST `.trx` 文件写入指定路径。
-- `--no-multiline` - 将违规表中的多行单元格内容折叠为单行。 仅适用于文本输出。
+- `--no-multiline` - 将违规表中的多行单元格内容折叠为单行。 Text output only.
 
 ```bash
 te bpa run --fail-on error --ci github
@@ -546,6 +572,8 @@ te bpa rules enable TE3_BUILT_IN_DATE_TABLE_EXISTS
 `te vertipaq` 支持：
 
 - `--columns`, `--relationships`, `--partitions`, `--all`。
+- `--detail` - show expanded columns (data/dict/hierarchy size breakdown, encoding, segments).
+- `--fields <list>` - comma-separated fields to display (e.g., `--fields name,card,size,%tbl,%db,bar`). Available fields vary by view.
 - `--export <file.vpax>` - 将 VertiPaq 统计信息导出为 `.vpax` 文件，以便离线分析。
 - `--import <file.vpax>` - 加载之前导出的 `.vpax` 文件并进行离线分析。
 - `--obfuscate` - 对导出的 VPAX 中的名称和表达式进行混淆处理。
@@ -566,7 +594,11 @@ te vertipaq --import stats.vpax  # Analyze offline
 
 - `-e, --expression <text>` - 格式化单个内联表达式。
 - `-p, --path <path>` - 格式化指定的度量值或列。
-- `--lang <dax|m>` - 默认值为 `dax`。
+- `-t, --type <kind>` - disambiguate when the path matches multiple table-children.
+- `--lang <lang>` - expression language: `dax` (default) or `m`/`pq` for Power Query.
+- `--semicolons` - use semicolons as list separators (European locale).
+- `--long` - use long format (more line breaks). Default is short.
+- `--no-space-after-function` - skip the space after function names.
 - `--save` / `--save-to` - 持久化保存格式化后的表达式。
 
 ```bash
@@ -605,7 +637,7 @@ te query --file query.dax --output-format json
 - `-S, --script <file>` - `.cs` / `.csx` 文件（可重复指定）。
 - `-e, --expression <code>` - 内联 C#（使用 `-` 表示从 stdin 读取）。
 - `--save` / `--save-to` / `--serialization`。
-- `--dry-run`, `--timeout <seconds>`。
+- `--dry-run` - compile the script(s) and report errors without executing them.
 
 ```bash
 te script --script fix.cs --save
@@ -616,7 +648,7 @@ echo "Info(Model.Name);" | te script -e -
 > [!IMPORTANT]
 > 如果你要迁移旧脚本，需要了解以下两个行为差异：
 >
-> - **CLI 脚本中不支持交互式选择。** 从 `te script` 调用 TE3 Desktop 辅助方法 `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, 和 `SelectObjects()` 时，会抛出 `NotSupportedException`，因为 CLI 没有可弹出的 UI。 在脚本外预先解析对象(s) 并将其传入；如果脚本需要与 TE3 共享，请将该调用包裹在 `try/catch` 中。
+> - **CLI 脚本中不支持交互式选择。** 从 `te script` 调用 TE3 Desktop 辅助方法 `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()`, 和 `SelectObjects()` 时，会抛出 `NotSupportedException`，因为 CLI 没有可弹出的 UI。 Pre-resolve the object(s) outside the script and pass them in via environment variables or stdin, or wrap the call in `try/catch` if the script is shared with TE3.
 > - **默认的 `using` 指令与 TE3 Desktop 一致。** 使用 `DataTable`、`File`、`StringBuilder` 或 `Regex` 的脚本，必须显式包含对应的 `using System.Data;` / `using System.IO;` / `using System.Text;` / `using System.Text.RegularExpressions;` 指令。
 
 > [!NOTE]
@@ -750,7 +782,7 @@ te refresh --type full --dry-run > refresh.tmsl         # Emit TMSL only
 te incremental-refresh show <table>
 ```
 
-其他子命令（`set`、`remove`、`apply`）可通过 `te incremental-refresh --help` 查看说明。
+Additional subcommands (`set`, `rm`, `apply`) are documented via `te incremental-refresh --help`.
 
 ## 测试
 
@@ -802,6 +834,7 @@ te connect --clear                 # Clear the active connection (and any worksp
 - `te connect <ws> <model> -w ./src` - 主源为远程；`./src` 会接收初始 TMDL 导出，并在每次保存时保持镜像同步。
 - `te connect ./src -w <ws> <model>` - 主源为本地；首次部署会将模型推送到 Workspace，后续保存会自动重新部署。
 - `--workspace-format <bim|tmdl>` - 在镜像到文件夹/文件时选择磁盘上的格式（例如，`-w ./model.bim` 会推断为 BIM）。
+- `--workspace-auth <method>` - auth method for a remote workspace target when the primary is local. Defaults to `--auth` if set, else `auto`.
 - `--force` - 当目标已存在（例如文件夹非空或数据库已存在）时必须使用。 如果不使用它，`te connect` 会显示交互式 `y/n` 提示，并以 `n` 作为安全的默认选项。
 
 启用后，`te set --save`、`te rm --save`、`te script --save` 等都会透明地同时保存到本地和远程。 保存顺序始终是 **先本地，后远程**，因此即使推送到服务器失败，磁盘上的副本也会反映最新的用户更改。 使用 `te connect --clear` 清除镜像。
@@ -860,23 +893,50 @@ te interactive -s MyWorkspace -d MyModel      # Start with a remote model
 
 引号和 DAX 风格的引用在会话内外的用法一致——有关 REPL 中支持括号感知的 argv 拆分的详细信息，请参见上文的[对象路径](#object-paths)一节以及 @te-cli-interactive。
 
+### session
+
+Show or manage the current terminal session. The CLI keeps per-terminal state (active connection, active profile, active test suite) in a session file, isolated per shell process. Set the `TE_SESSION` environment variable to share one named session across shells.
+
+子命令：
+
+| 子命令     | 用途                                                                                                                                                  |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `show`  | Show current session details (ID, file path, active state). Default when no subcommand is given. |
+| `list`  | List all session files.                                                                                                             |
+| `clear` | Clear active state for the current session.                                                                                         |
+| `prune` | Delete session files whose shell process is no longer running.                                                                      |
+
+`te session prune` accepts:
+
+- `--all` - also remove sessions with live shells and named (`TE_SESSION`) sessions. The current session is always kept.
+- `--dry-run` - show what would be removed without doing it.
+
+```bash
+te session                        # Show current session details
+te session list                   # List all session files
+te session clear                  # Clear active state for this session
+te session prune                  # Remove sessions whose shell is dead
+te session prune --all --dry-run  # Preview a full cleanup
+```
+
 ### completion
 
-生成 shell 补全脚本。 参见 @te-cli-install。
+Generate a shell completion script for `bash`, `zsh`, `powershell` (alias `pwsh`) or `fish`. 参见 @te-cli-install。
 
 ```bash
 te completion bash
 te completion zsh
 te completion pwsh
+te completion fish
 ```
 
 ## 退出代码
 
-| 退出代码 | 含义                                                      |
-| ---- | ------------------------------------------------------- |
-| `0`  | 成功。                                                     |
-| `1`  | 通用失败（参数无效、命令执行失败、校验错误、身份验证失败、BPA 门禁在严重级别 ≥ error 时未通过）。 |
-| `2`  | 差异非零（`te diff`）——模型不一致。                                 |
+| 退出代码 | 含义                                                                                                                        |
+| ---- | ------------------------------------------------------------------------------------------------------------------------- |
+| `0`  | 成功。                                                                                                                       |
+| `1`  | 通用失败（参数无效、命令执行失败、校验错误、身份验证失败、BPA 门禁在严重级别 ≥ error 时未通过）。 For `te diff`: differences found. |
+| `2`  | `te diff` only: an error occurred while comparing, so the difference status is unknown.   |
 
 如需在 CI 管道中进行更细致的控制，可将退出代码与 `--ci <vsts/github>` 注释以及 `--trx` 结果文件结合使用——参见 @te-cli-cicd。
 

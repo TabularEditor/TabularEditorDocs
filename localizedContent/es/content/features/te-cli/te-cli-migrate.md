@@ -2,7 +2,7 @@
 uid: te-cli-migrate
 title: Migración desde la línea de comandos de TE2
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -60,7 +60,7 @@ Un resumen no exhaustivo de los flags más usados. Ejecuta `te migrate` para ver
 | `file` (posicional)                             | `te <command> <path>` o el flag global `--model`                        | Primer argumento posicional en la mayoría de los comandos.                                                                                                                                                                                    |
 | `server`, `database`                                               | `te connect <server>` o `te deploy <server> <database>`                 | El servidor ya no es un argumento posicional global.                                                                                                                                                                                          |
 | `-L` / `-LOCAL`                                                    | `te connect --local`                                                    | Solo para Windows.                                                                                                                                                                                                                            |
-| `-S` / `-SCRIPT`                                                   | `te script -s <file.csx>` o `-e "code"`                                 | Admite varios scripts, código en línea y stdin.                                                                                                                                                                                               |
+| `-S` / `-SCRIPT`                                                   | `te script -S <file.csx>` or `-e "code"`                                | Admite varios scripts, código en línea y stdin. Note: uppercase `-S` - lowercase `-s` is the global `--server` option.                                                                                        |
 | `-A` / `-ANALYZE`                                                  | `te bpa run --rules <file-or-url>`                                      | Admite `--fail-on`, `--fix` y varios archivos de reglas.                                                                                                                                                                                      |
 | `-AX` / `-ANALYZEX`                                                | `te bpa run --rules <file>` (sin `--model-rules`)    | Excluir las reglas incrustadas en el modelo es ahora el comportamiento predeterminado.                                                                                                                                                        |
 | `-B` / `-BIM`                                                      | `te save <model> -o <file.bim> --serialization bim`                     |                                                                                                                                                                                                                                                               |
