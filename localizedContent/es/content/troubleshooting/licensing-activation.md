@@ -31,8 +31,6 @@ Confirma que el equipo cumple los requisitos antes de seguir con la resolución 
 
 Usa el MSI correspondiente a tu arquitectura de la [página de descargas](xref:downloads). Una incompatibilidad entre el instalador y la arquitectura es una causa frecuente de instalaciones fallidas y de errores por dependencias faltantes al primer inicio.
 
-<a name="inspect-the-activated-license"></a>
-
 ## Inspeccionar la licencia activada
 
 Tabular Editor 3 guarda los detalles de activación en el Registro de Windows, en `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
@@ -56,8 +54,6 @@ Si los avisos de activación siguen apareciendo:
 1. Confirma que se puede acceder a `api.tabulareditor.com` desde el equipo afectado.
 2. Configura el proxy en **Herramientas > Preferencias > Configuración de proxy**. Consulta @proxy-settings para la solución de problemas específicos del proxy, incluida la anulación en **AnalysisServices.AppSettings.json** que habilita la compatibilidad de MSAL con proxies externos.
 3. Si la red bloquea el tráfico saliente hacia el punto de conexión de activación, usa la [activación manual](#manual-activation-no-internet) que se indica a continuación.
-
-<a name="manual-activation-no-internet"></a>
 
 ## Activación manual (sin conexión a Internet)
 
