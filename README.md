@@ -199,3 +199,4 @@ If a key is missing from a language's file, or no `_ui-strings.json` exists at a
 | `tableOfContents` | `Table of Contents` | Mobile TOC offcanvas title |
 | `selectLanguage` | `Select language` | Language picker label |
 | `copyCode` | `Copy code` | Code block copy button aria-label |
+
