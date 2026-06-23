@@ -15,7 +15,7 @@ applies_to:
           full: true
 ---
 
-## Model deployment
+# Model deployment
 
 Tabular Editor 3 (Business and Enterprise Edition) can take a copy of the currently loaded semantic model metadata, and deploy it to an Analysis Services instance, or the Power BI / Fabric XMLA endpoint.
 

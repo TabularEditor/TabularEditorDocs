@@ -17,6 +17,8 @@ applies_to:
           full: true
 ---
 
+# Advanced installation and activation
+
 ## Overview
 
 This page covers advanced installation and activation scenarios for Tabular Editor 3: manual (offline) activation, registry-based license management, silent deployment, and Enterprise seat administration.

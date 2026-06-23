@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Drag and drop objects
+# Drag and drop objects
 By far the most useful feature of Tabular Editor, when working on models with many measures/columns organised in display folders. Check out the animation below:
 
 ![](https://github.com/TabularEditor/TabularEditor/blob/master/Documentation/DragDropFolders.gif)
