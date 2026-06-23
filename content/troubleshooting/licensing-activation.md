@@ -30,7 +30,6 @@ Confirm the machine meets the requirements before further troubleshooting:
 
 Use the matching MSI for your architecture from the [downloads page](xref:downloads). An installer or architecture mismatch is a frequent cause of failed installs and missing-dependency errors at first launch.
 
-<a name="inspect-the-activated-license"></a>
 ## Inspect the activated license
 
 Tabular Editor 3 stores activation details in the Windows Registry under `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3`.
@@ -55,7 +54,6 @@ If activation prompts persist:
 2. Configure proxy settings under **Tools > Preferences > Proxy Settings**. See @proxy-settings for proxy-specific troubleshooting, including the **AnalysisServices.AppSettings.json** override that enables external MSAL proxy support.
 3. If the network blocks outbound traffic to the activation endpoint, use [Manual activation](#manual-activation-no-internet) below.
 
-<a name="manual-activation-no-internet"></a>
 ## Manual activation (no internet)
 
 If the machine running Tabular Editor cannot reach the activation endpoint, the activation prompt offers a manual flow.

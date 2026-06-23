@@ -17,7 +17,6 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-<a name="find"></a>
 # Find
 In Tabular Editor, you can use the advanced Find functionality to search for specific expressions throughout your open documents and dataset. The Find dialog box is accessible through the keyboard shortcut Ctrl+F.
 
@@ -47,7 +46,6 @@ Additionally, you can specify where to Look in, different areas of your Tabular 
 > [!TIP]
 > You can also use the search field in the TOM Explorer to search your dataset instead of the Find dialog
 
-<a name="replace"></a>
 ## Replace
 
 The Replace dialog allows you in the same way as Find to search for an expression and then replace it with a different expression. 

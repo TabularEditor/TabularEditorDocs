@@ -135,9 +135,19 @@ def prepare_localized_content(lang: str, sync: bool = False) -> int:
 
     # Repair Crowdin-collapsed DocFX alerts (e.g. "> [!NOTE]> text") before docfx
     # builds this language, so alerts render as styled boxes instead of plain quotes.
-    return run_command(
+    result = run_command(
         [sys.executable, "build_scripts/normalize-localized-alerts.py", lang],
         f"Normalizing DocFX alerts for {lang}"
+    )
+    if result != 0:
+        return result
+
+    # Stabilize heading anchors: inject English-slug bookmark anchors before
+    # translated headings so cross-reference links (#anchor) resolve even though
+    # the heading text is translated. Prevents InvalidBookmark warnings.
+    return run_command(
+        [sys.executable, "build_scripts/normalize-localized-heading-anchors.py", lang],
+        f"Stabilizing heading anchors for {lang}"
     )
 
 

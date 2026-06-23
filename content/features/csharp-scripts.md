@@ -284,7 +284,6 @@ In addition, the following .NET Framework assemblies are loaded by default:
 - TabularEditor.Exe
 - Microsoft.AnalysisServices.Tabular.Dll
 
-<a name="accessing-environment-variables"></a>
 ## Accessing Environment Variables
 
 When running C# scripts via the Tabular Editor CLI (especially in CI/CD pipelines), you can pass parameters to your scripts using environment variables. This is the recommended approach, as C# scripts executed by Tabular Editor CLI don't support traditional command-line arguments.
@@ -365,7 +364,6 @@ foreach(var table in Model.Tables)
 Info($"Configured model for {environment} environment");
 ```
 
-<a name="compatibility"></a>
 ## Compatibility
 
 The scripting APIs for Tabular Editor 2, Tabular Editor 3 (Desktop), and the Tabular Editor CLI are mostly compatible, but there are cases where you want to conditionally compile code depending on which host is running. The CLI host defines a `TECLI` preprocessor symbol; TE3 Desktop defines `TE3` (and version-bracketed symbols like `TE3_3_15_OR_GREATER` for the active minor); TE2 defines neither. Preprocessor directives were introduced in Tabular Editor 3.10.0. Use them to write portable scripts:

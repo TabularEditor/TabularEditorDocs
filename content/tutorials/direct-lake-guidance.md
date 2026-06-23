@@ -61,7 +61,6 @@ Direct Lake on OneLake also supports combining with DirectQuery tables through X
 > [!NOTE]
 > Direct Lake on SQL does not support composite models. You cannot combine Direct Lake on SQL tables with Import, DirectQuery or Dual storage mode tables in the same semantic model. However, you can use Power BI Desktop to create a composite model *on top of* a Direct Lake on SQL semantic model and extend it with new tables. See [Build a composite model on a semantic model](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-composite-models#building-a-composite-model-on-a-semantic-model-or-model) for more information.
 
-<a name="collation"></a>
 ## Collation
 
 When using **Direct Lake on OneLake**, the collation of the model is the same as for an Import model, which is case-insensitive by default.
