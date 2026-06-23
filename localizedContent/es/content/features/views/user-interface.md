@@ -42,8 +42,6 @@ Hay varias vistas adicionales disponibles, con distintos propósitos. Más infor
 
 Todos los elementos de la interfaz de usuario se pueden redimensionar o reorganizar para adaptarlos a tus necesidades. Incluso puedes arrastrar vistas individuales fuera de la vista principal, dividiendo así una instancia de Tabular Editor 3 entre varios monitores. Tabular Editor 3 guardará la personalización al cerrar la aplicación y la cargará automáticamente la próxima vez que se inicie.
 
-<a name="choosing-a-different-layout"></a>
-
 ### Elegir un diseño diferente
 
 Para restablecer la aplicación al diseño predeterminado, elige la opción **Ventana > Diseño predeterminado**. Los usuarios de Tabular Editor 2.x pueden preferir la opción **Ventana > Diseño clásico**, que coloca el Explorador TOM en el lado izquierdo de la pantalla y la vista de propiedades debajo del Editor de expresiones.
@@ -51,8 +49,6 @@ Para restablecer la aplicación al diseño predeterminado, elige la opción **Ve
 Usa la opción **"Ventana > Capturar diseño actual..."** para guardar un diseño personalizado, de modo que pase a estar disponible como una nueva opción de diseño en el menú Ventana, lo que te permite alternar rápidamente entre distintos diseños. Usa la opción **Ventana > Administrar diseños...** para abrir una lista de todos los diseños disponibles, lo que te permite cambiarles el nombre, guardarlos, eliminarlos, etc. Al guardar un diseño en disco, el resultado es un archivo .xml que puedes compartir con otros usuarios de Tabular Editor 3.
 
 ![Administrar diseños](~/content/assets/images/manage-layouts.png)
-
-<a name="changing-themes-and-palettes"></a>
 
 ### Opciones de acoplamiento de ventanas
 
@@ -88,8 +84,6 @@ Puedes cambiar el aspecto visual de Tabular Editor 3 eligiendo un tema o una pal
 Para los temas basados en vectores (Basic y Bezier), usa la opción de menú **Ventana > Paleta** para cambiar los colores del tema.
 
 ![Palettes](~/content/assets/images/palettes.png)
-
-<a name="menus"></a>
 
 # Menús
 
@@ -165,8 +159,6 @@ El menú **Editar** contiene los elementos de menú estándar de las aplicacione
 - **Seleccionar todo**: Selecciona todo el texto del documento activo o todos los objetos que pertenecen al mismo elemento padre en el Explorador TOM.
 - **Code Assist**: Esta opción está disponible cuando se edita código DAX. Proporciona un acceso directo a varias funciones de Code Assist relevantes para la edición de código DAX. Consulte [editor de DAX](xref:dax-editor#code-assist-features) para obtener más información.
 
-<a name="view"></a>
-
 ## Vista
 
 El menú **Vista** le permite navegar entre las distintas vistas de la interfaz de usuario de Tabular Editor 3. Si una vista está oculta, al hacer clic en el título de la vista en este menú se volverá a mostrar y pasará a primer plano. Ten en cuenta que los documentos no se muestran en el menú Ver. Para navegar entre documentos, usa el [menú Ventana](#window).
@@ -193,7 +185,7 @@ El menú **Modelo** muestra las acciones que se pueden realizar a nivel del obje
 > La opción **Deploy** no está disponible en la Edición de escritorio de Tabular Editor 3. Para más información, consulte @editions.
 
 - **Importar tablas...** Inicia el Asistente de importación de tablas de Tabular Editor 3. Para más información, consulte @importing-tables.
-- **Actualizar esquema de tabla...** Detecta cambios de esquema en el/los Data source(s) de la(s) tabla(s) o partición(es) seleccionada(s) actualmente, en comparación con las columnas importadas actualmente. Para más información, consulte @importing-tables#updating-table-schema.
+- **Actualizar esquema de tabla...** Detecta cambios de esquema en el/los Data source(s) de la(s) tabla(s) o partición(es) seleccionada(s) actualmente, en comparación con las columnas importadas actualmente. See [Updating table schema](xref:importing-tables#updating-table-schema) for more information.
 - **Script DAX**: Genera un script DAX para el/los objeto(s) seleccionados actualmente (o para todos los objetos DAX del modelo, si no se ha seleccionado nada). Para más información, consulte @dax-scripts.
 - **Actualizar modelo**: Cuando Tabular Editor está conectado a una instancia de Analysis Services, este submenú contiene opciones para iniciar una operación de actualización en segundo plano a nivel de modelo. El submenú incluye las siguientes opciones. Para más información, consulte [Comando Refresh (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request).
   - **Automático (modelo)**: Analysis Services determina qué objetos actualizar (solo los objetos que no están en el estado "Listo").
@@ -209,8 +201,6 @@ El menú **Herramientas** contiene opciones para controlar las preferencias y pe
 
 - **Personalizar...** Abre el cuadro de diálogo de personalización del diseño de la interfaz de usuario de Tabular Editor 3, que permite crear nuevas barras de herramientas, reorganizar y editar menús y botones de la barra de herramientas, etc.
 - **Preferencias...** Abre el cuadro de diálogo de Preferencias de Tabular Editor 3, que funciona como un centro para administrar todos los demás aspectos de Tabular Editor y sus características, como la comprobación de actualizaciones, la configuración del proxy, los límites de filas de consulta, los tiempos de espera de las solicitudes, etc. Consulte @preferences para obtener más información.
-
-<a name="window"></a>
 
 ## Ventana
 
