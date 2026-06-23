@@ -2,7 +2,7 @@
 uid: te-cli-automation
 title: Automation and Scripting
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -54,8 +54,8 @@ Every `te` command exits with a predictable status code so callers can branch on
 | Exit | Meaning |
 | -- | -- |
 | `0` | Success. |
-| `1` | Generic failure - invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity ≥ error. |
-| `2` | Used by `te diff` to indicate models differ (distinct from `0` identical and non-zero errors). |
+| `1` | Generic failure - invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity ≥ error. For `te diff`: differences found (like the `diff`/`cmp` convention). |
+| `2` | `te diff` only: an error occurred while comparing, so the difference status is unknown. |
 
 Combine exit codes with `--ci <vsts\|github>` annotations and `--trx <file>` to surface rich failure information in CI - see @te-cli-cicd.
 

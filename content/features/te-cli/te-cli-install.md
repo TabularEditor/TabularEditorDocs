@@ -2,7 +2,7 @@
 uid: te-cli-install
 title: Installation and Setup
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -131,7 +131,7 @@ te config set hidePreviewNotice true
 
 ## Shell completion
 
-The CLI provides tab-completion scripts for **Bash**, **Zsh**, and **PowerShell**. Pick the block that matches your shell — each one installs the completion persistently for new shell sessions.
+The CLI provides tab-completion scripts for **Bash**, **Zsh**, **PowerShell** and **Fish**. Pick the block that matches your shell — each one installs the completion persistently for new shell sessions.
 
 ### Bash (macOS/Linux)
 
@@ -152,6 +152,12 @@ echo 'fpath=(~/.zfunc $fpath); autoload -U compinit; compinit' >> ~/.zshrc
 
 ```powershell
 Add-Content $PROFILE 'te completion pwsh | Out-String | Invoke-Expression'
+```
+
+### Fish (macOS/Linux)
+
+```bash
+te completion fish > ~/.config/fish/completions/te.fish
 ```
 
 Open a new shell session for completion to take effect.

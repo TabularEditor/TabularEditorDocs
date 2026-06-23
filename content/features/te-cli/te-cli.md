@@ -2,7 +2,7 @@
 uid: te-cli
 title: Tabular Editor CLI (Limited Public Preview)
 author: Peer Grønnerup
-updated: 2026-05-12
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -56,7 +56,7 @@ See @te-cli-commands for a full command reference with syntax, options, and exam
 | [Testing](xref:te-cli-commands#testing) | Assertion tests, snapshots, A/B comparison | [`te test run`](xref:te-cli-commands#test-run) |
 | [Connection & Authentication](xref:te-cli-commands#connection-and-authentication) | Connect to workspaces, manage authentication and profiles | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove) |
 | [Configuration](xref:te-cli-commands#configuration) | Settings and licensing | [`te config`](xref:te-cli-commands#config-show--paths--init--set) |
-| [Shell](xref:te-cli-commands#shell) | Interactive mode, shell completions | [`te interactive`](xref:te-cli-commands#interactive), [`te completion`](xref:te-cli-commands#completion) |
+| [Shell](xref:te-cli-commands#shell) | Interactive mode, session state, shell completions | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion) |
 
 ## Getting started
 
