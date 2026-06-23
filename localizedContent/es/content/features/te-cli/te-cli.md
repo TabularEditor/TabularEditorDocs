@@ -2,7 +2,7 @@
 uid: te-cli
 title: Tabular Editor CLI (Vista previa pública limitada)
 author: Peer Grønnerup
-updated: 2026-05-12
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -57,7 +57,7 @@ Consulta @te-cli-commands para ver una referencia completa de los comandos, con 
 | [Pruebas](xref:te-cli-commands#testing)                                        | Pruebas de aserciones, instantáneas, comparación A/B                                            | [`te test run`](xref:te-cli-commands#test-run)                                                                                                                                           |
 | [Conexión y autenticación](xref:te-cli-commands#connection-and-authentication) | Conéctate a los Workspace y gestiona la autenticación y los perfiles                            | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove)         |
 | [Configuración](xref:te-cli-commands#configuration)                            | Configuración y licencias                                                                       | [`te config`](xref:te-cli-commands#config-show--paths--init--set)                                                                                                                        |
-| [Shell](xref:te-cli-commands#shell)                                            | Modo interactivo, autocompletado de la shell                                                    | [`te interactive`](xref:te-cli-commands#interactive), [`te completion`](xref:te-cli-commands#completion)                                                                                 |
+| [Shell](xref:te-cli-commands#shell)                                            | Interactive mode, session state, shell completions                                              | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion)                                   |
 
 ## Primeros pasos
 
