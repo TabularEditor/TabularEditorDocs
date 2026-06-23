@@ -17,6 +17,8 @@ applies_to:
           full: true
 ---
 
+# Analysis Services 上的直接查询
+
 ## 概述
 
 Tabular Editor 3 可以**连接**使用 **DirectQuery over Analysis Services (DQ‑over‑AS)** 的复合模型，但完整的建模支持**尚未提供**。  大多数创作任务都符合预期；但是，依赖与远程语义模型同步元数据的操作——例如 _更新表架构_——目前受到限制。
