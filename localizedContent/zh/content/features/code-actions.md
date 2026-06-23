@@ -74,8 +74,6 @@ Tabular Editor 3.18.0 引入了一项名为 **代码操作** 的新功能。 该
 
 ![代码操作 所有出现位置](~/content/assets/images/features/code-action-all-occurrences.png)
 
-<a name="list-of-code-actions"></a>
-
 ## 代码操作列表
 
 下表列出了当前所有可用的代码操作。 你可以在 **工具 > 偏好** 对话框的 **文本编辑器 > DAX编辑器 > 代码操作** 下关闭代码操作（后续更新将允许你单独开关各项操作，以获得更个性化的体验）。 某些代码操作还提供额外的配置选项，例如为变量名使用哪个前缀。
