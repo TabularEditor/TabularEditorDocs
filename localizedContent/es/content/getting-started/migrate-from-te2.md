@@ -67,8 +67,6 @@ El propio cuadro de diálogo de comparación de esquemas también incluye varias
 
 Para obtener más información, consulta <xref:importing-tables>.
 
-<a name="workspace-mode"></a>
-
 ### Modo del área de trabajo
 
 Tabular Editor 3 introduce el concepto de **modo del área de trabajo**, en el que los metadatos del modelo se cargan desde el disco (Model.bim o Database.json) y, a continuación, se despliegan inmediatamente en una instancia de Analysis Services que elijas. Cada vez que pulsas Guardar (CTRL+S), la base de datos de Workspace se sincroniza y los metadatos actualizados del modelo se guardan de nuevo en disco. La ventaja de este enfoque es que Tabular Editor se conecta a Analysis Services, lo que habilita las [funciones conectadas](#connected-features) que se enumeran a continuación, y al mismo tiempo facilita la actualización de los archivos de origen en el disco. Con Tabular Editor 2.x, tenías que abrir un modelo desde una base de datos y luego acordarte de guardarlo manualmente en el disco de vez en cuando.
@@ -76,8 +74,6 @@ Tabular Editor 3 introduce el concepto de **modo del área de trabajo**, en el q
 Este enfoque es ideal para habilitar el [desarrollo en paralelo](xref:parallel-development) y la integración de metadatos del modelo con sistemas de control de versiones.
 
 Para obtener más información, consulta <xref:workspace-mode>.
-
-<a name="connected-features"></a>
 
 ### Funciones conectadas
 
