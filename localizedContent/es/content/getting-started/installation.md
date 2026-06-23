@@ -17,13 +17,13 @@ applies_to:
           full: true
 ---
 
+# Instalación, activación y configuración básica
+
 ## Descripción general
 
 Esta página abarca escenarios avanzados de instalación y activación de Tabular Editor 3: activación manual (sin conexión), administración de licencias mediante el Registro, despliegue desatendido y administración de asientos de la Edición Enterprise.
 
 Para el flujo de activación estándar, consulta @getting-started.
-
-<a name="manual-activation-no-internet"></a>
 
 ## Activación manual (sin Internet)
 
@@ -49,8 +49,6 @@ Para cambiar un asiento de la Edición Enterprise, desasigna al usuario actual d
 
 > [!NOTE]
 > Solo se puede cambiar de usuario en la Edición Enterprise.
-
-<a name="registry-details"></a>
 
 ## Detalles del Registro
 
