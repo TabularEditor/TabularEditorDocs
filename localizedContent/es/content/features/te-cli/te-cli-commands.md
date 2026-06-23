@@ -2,7 +2,7 @@
 uid: te-cli-commands
 title: Referencia de comandos
 author: Peer Grønnerup
-updated: 2026-05-12
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -135,6 +135,8 @@ Estas opciones están disponibles en todos los comandos y se pueden usar antes o
 | `--non-interactive`        | Desactiva todas las indicaciones interactivas. Finaliza con un error accionable si falta algún dato obligatorio.                                                                                                                                                                                                                                                               |
 | `--debug`                  | Habilita el registro de depuración en stderr (cadenas de conexión, flujo de autenticación, tiempos).                                                                                                                                                                                                                                                                        |
 
+`te --version` prints the CLI version and exits.
+
 En los comandos que leen un modelo, el orden de resolución es:
 
 el argumento posicional `<model>` → la opción global `--model` → `--server`/`--database` (remoto) → conexión activa de `te connect` → `--recent`.
@@ -186,10 +188,22 @@ te open ./my-model
 
 ### init
 
-Crea un nuevo modelo semántico vacío en la ruta especificada.
+Crea un nuevo modelo semántico vacío en la ruta especificada. Defaults to a TMDL model in `PowerBI` compatibility mode at compatibility level 1702.
+
+`te init` accepts:
+
+- `<output-path>` - positional argument: directory to create the model in (omit to use the global `--model` path).
+- `--compatibility-mode <mode>` - `PowerBI` (default) or `AnalysisServices`.
+- `--compatibility-level <N>` (alias `--compat`) - compatibility level. Defaults to `1702` when the mode is `PowerBI`, `1500` otherwise. See @update-compatibility-level.
+- `--name <name>` - model/database name (default: the directory name).
+- `--serialization <fmt>` - `tmdl` (default), `bim`, `te-folder`, `pbip`.
+- `--force` - replace any existing file or directory at the target path.
 
 ```bash
-te init ./new-model
+te init ./new-model                                       # TMDL, PowerBI mode, compat 1702
+te init ./new-model --serialization bim                   # Single-file BIM model
+te init ./as-model --compatibility-mode AnalysisServices  # AS model, compat 1500
+te init ./existing-dir --force                            # Overwrite non-empty directory
 ```
 
 ## Edición del modelo
@@ -325,7 +339,7 @@ Obtiene las propiedades de un objeto del modelo. Acepta un `<path>`.
 `te get` acepta:
 
 - `-q, --query <property>` - obtiene una única propiedad (por ejemplo, `expression`, `formatString`).
-- `-t, --type <kind>` - desambigua cuando la ruta coincide con varios elementos secundarios de una tabla (p. ej., una columna y una jerarquía con el mismo nombre). Valores: `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `Partition`, `CalculationItem`.
+- `-t, --type <kind>` - disambiguate when the path matches multiple table-children (e.g., a column and a hierarchy with the same name). Valores: `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `Partition`, `CalculationItem`.
 - `--output-format tmsl` (alias `bim`) - genera el objeto resuelto como JSON TMSL/BIM.
 - `--output-format tmdl` - genera el objeto resuelto como TMDL (solo objetos con nombre).
 
@@ -375,12 +389,18 @@ Analiza las dependencias ascendentes y descendentes de un objeto, o detecta obje
 
 `te deps` admite:
 
+- `--upstream` - show only upstream dependencies (what this object uses).
+- `--downstream` - show only downstream dependents (what uses this object).
+- `--deep` - show the recursive dependency tree instead of direct dependencies only.
+- `--max-depth <N>` - maximum depth for `--deep` traversal (default: `10`).
+- `-t, --type <kind>` - disambiguate when the path matches multiple table-children (e.g., a column and a hierarchy with the same name).
 - `--unused` - enumera las medidas, las columnas calculadas y **todas las columnas de datos** a las que no hace referencia ninguna expresión DAX y que no se usan en ninguna relación, nivel de jerarquía, ordenación por columna, variación, base de AlternateOf ni rol de tiempo de calendario. Cada resultado muestra `(hidden)` en modo de texto y un campo `isHidden` en JSON.
 - `--hidden` - limita `--unused` a solo los objetos ocultos. Los objetos ocultos y sin usar son los candidatos más seguros para eliminar, porque ningún elemento visible para el usuario depende de ellos.
 
 ```bash
 te deps Sales/Revenue                     # Upstream + downstream for one object
 te deps "'Sales'[Revenue]"                # DAX form is accepted everywhere a <path> is
+te deps Sales/Revenue --downstream --deep # Everything that depends on Revenue, recursively
 te deps --unused                          # All unused measures and columns
 te deps --unused --hidden                 # Only hidden, unused objects
 ```
@@ -395,10 +415,16 @@ Valida las expresiones del modelo, la integridad del esquema y los errores de TO
 
 - `--ci <fmt>` - emite anotaciones de CI en stderr: `vsts` o `github`.
 - `--trx <PATH>` - escribe los resultados en un archivo `.trx` de VSTEST.
+- `--errors-only` - shorthand for `--no-warnings --no-antipatterns`: only show errors.
+- `--no-warnings` - hide warnings from the semantic analyzer.
+- `--no-antipatterns` - hide anti-pattern suggestions (DAX best-practice hints).
+- `--server-only` - only show errors reported by the connected server; skip local semantic analysis.
+- `--no-multiline` - collapse multi-line cell content (error messages, expressions) to a single line. Solo salida de texto.
 
 ```bash
 te validate ./model
 te validate --ci github --trx results.trx
+te validate --errors-only                 # Hide warnings and anti-pattern hints
 ```
 
 ### bpa run
@@ -423,7 +449,7 @@ Ejecuta reglas de Best Practice Analyzer contra un modelo.
 - `--fail-on <severity>` - umbral de fallo: `error` (predeterminado) o `warning`. Sale con el código `1` cuando las infracciones alcanzan el umbral.
 - `--ci <fmt>` - emitir comandos de registro de CI a stderr: `vsts` (Azure DevOps), `github` (GitHub Actions).
 - `--trx <path>` - escribir los resultados como un archivo `.trx` de VSTEST en la PATH especificada.
-- `--no-multiline` - contraer el contenido de varias líneas de las celdas de la tabla de infracciones en una sola línea. Solo salida de texto.
+- `--no-multiline` - contraer el contenido de varias líneas de las celdas de la tabla de infracciones en una sola línea. Solo para la salida de texto.
 
 ```bash
 te bpa run --fail-on error --ci github
@@ -546,6 +572,8 @@ Analiza las estadísticas de almacenamiento de VertiPaq.
 `te vertipaq` acepta:
 
 - `--columns`, `--relationships`, `--partitions`, `--all`.
+- `--detail` - show expanded columns (data/dict/hierarchy size breakdown, encoding, segments).
+- `--fields <list>` - comma-separated fields to display (e.g., `--fields name,card,size,%tbl,%db,bar`). Available fields vary by view.
 - `--export <file.vpax>` - exporta las estadísticas de VertiPaq a un archivo `.vpax` para analizarlas sin conexión.
 - `--import <file.vpax>` - carga un archivo `.vpax` exportado previamente y lo analiza sin conexión.
 - `--obfuscate` - ofusca nombres y expresiones en el VPAX exportado.
@@ -566,7 +594,11 @@ Da formato a expresiones DAX o M/Power Query.
 
 - `-e, --expression <text>` - da formato a una sola expresión en línea.
 - `-p, --path <path>` - da formato a una medida o columna específica mediante su ruta.
-- `--lang <dax|m>` - valor predeterminado: `dax`.
+- `-t, --type <kind>` - disambiguate when the path matches multiple table-children.
+- `--lang <lang>` - expression language: `dax` (default) or `m`/`pq` for Power Query.
+- `--semicolons` - use semicolons as list separators (European locale).
+- `--long` - use long format (more line breaks). Default is short.
+- `--no-space-after-function` - skip the space after function names.
 - `--save` / `--save-to` - guarda las expresiones formateadas.
 
 ```bash
@@ -605,7 +637,7 @@ Ejecuta uno o varios C# Scripts contra un modelo semántico. La CLI usa el mismo
 - `-S, --script <file>` - archivo `.cs` / `.csx` (repetible).
 - `-e, --expression <code>` - C# en línea (usa `-` para stdin).
 - `--save` / `--save-to` / `--serialization`.
-- `--dry-run`, `--timeout <seconds>`.
+- `--dry-run` - compile the script(s) and report errors without executing them.
 
 ```bash
 te script --script fix.cs --save
@@ -616,7 +648,7 @@ echo "Info(Model.Name);" | te script -e -
 > [!IMPORTANT]
 > Dos detalles de comportamiento que conviene conocer si vas a portar un script antiguo:
 >
-> - **No hay selección interactiva en los scripts de la CLI.** Los asistentes de TE3 Desktop `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()` y `SelectObjects()` lanzan `NotSupportedException` cuando se invocan desde `te script` - la CLI no tiene interfaz de usuario para mostrar una ventana emergente. Resuelve previamente el/los objeto(s) fuera del script y pásalos, o encapsula la llamada en `try/catch` si el script se comparte con TE3.
+> - **No hay selección interactiva en los scripts de la CLI.** Los asistentes de TE3 Desktop `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()` y `SelectObjects()` lanzan `NotSupportedException` cuando se invocan desde `te script` - la CLI no tiene interfaz de usuario para mostrar una ventana emergente. Pre-resolve the object(s) outside the script and pass them in via environment variables or stdin, or wrap the call in `try/catch` if the script is shared with TE3.
 > - **Las directivas `using` predeterminadas coinciden con las de TE3 Desktop.** Los scripts que usan `DataTable`, `File`, `StringBuilder` o `Regex` deben incluir explícitamente la directiva correspondiente `using System.Data;` / `using System.IO;` / `using System.Text;` / `using System.Text.RegularExpressions;`.
 
 > [!NOTE]
@@ -750,7 +782,7 @@ Gestiona las políticas de actualización para la actualización incremental de 
 te incremental-refresh show <table>
 ```
 
-Los subcomandos adicionales (`set`, `remove`, `apply`) están documentados en `te incremental-refresh --help`.
+Additional subcommands (`set`, `rm`, `apply`) are documented via `te incremental-refresh --help`.
 
 ## Pruebas
 
@@ -802,6 +834,7 @@ Empareja un origen principal con un destino secundario para que cada `--save` po
 - `te connect <ws> <model> -w ./src` - el origen principal es remoto; `./src` recibe una exportación inicial de TMDL y refleja cada guardado.
 - `te connect ./src -w <ws> <model>` - el origen principal es local; un despliegue inicial envía el modelo al Workspace, y los guardados posteriores lo vuelven a desplegar automáticamente.
 - `--workspace-format <bim|TMDL>` - elige el formato en disco al sincronizarlo con una carpeta o archivo (por ejemplo, `-w ./model.bim` deduce BIM).
+- `--workspace-auth <method>` - auth method for a remote workspace target when the primary is local. Defaults to `--auth` if set, else `auto`.
 - `--force`: obligatorio cuando el destino ya existe (carpeta no vacía o base de datos existente). Sin él, `te connect` muestra un prompt interactivo `y/n`, con `n` como opción segura predeterminada.
 
 Una vez activado, `te set --save`, `te rm --save`, `te script --save`, etc. guardan de forma transparente en ambos destinos. El orden de guardado siempre es **primero local y después remoto**, para que la copia en disco refleje el último cambio del usuario aunque falle el envío al servidor. Borra la réplica con `te connect --clear`.
@@ -860,23 +893,50 @@ te interactive -s MyWorkspace -d MyModel      # Start with a remote model
 
 Las comillas y las referencias de estilo DAX funcionan igual que fuera de la sesión - consulta la sección [Rutas de objetos](#object-paths) de arriba y @te-cli-interactive para más detalles sobre la división de argv con reconocimiento de corchetes dentro del REPL.
 
+### session
+
+Show or manage the current terminal session. The CLI keeps per-terminal state (active connection, active profile, active test suite) in a session file, isolated per shell process. Set the `TE_SESSION` environment variable to share one named session across shells.
+
+Subcommands:
+
+| Subcommand | Purpose                                                                                                                                             |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `show`     | Show current session details (ID, file path, active state). Default when no subcommand is given. |
+| `list`     | List all session files.                                                                                                             |
+| `clear`    | Clear active state for the current session.                                                                                         |
+| `prune`    | Delete session files whose shell process is no longer running.                                                                      |
+
+`te session prune` accepts:
+
+- `--all` - also remove sessions with live shells and named (`TE_SESSION`) sessions. The current session is always kept.
+- `--dry-run` - show what would be removed without doing it.
+
+```bash
+te session                        # Show current session details
+te session list                   # List all session files
+te session clear                  # Clear active state for this session
+te session prune                  # Remove sessions whose shell is dead
+te session prune --all --dry-run  # Preview a full cleanup
+```
+
 ### completion
 
-Genera un script de autocompletado para el shell. Consulta @te-cli-install.
+Generate a shell completion script for `bash`, `zsh`, `powershell` (alias `pwsh`) or `fish`. Consulta @te-cli-install.
 
 ```bash
 te completion bash
 te completion zsh
 te completion pwsh
+te completion fish
 ```
 
 ## Códigos de salida
 
-| Código de salida | Significado                                                                                                                                                                              |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `0`              | Éxito.                                                                                                                                                                   |
-| `1`              | Fallo genérico (argumentos no válidos, fallo del comando, errores de validación, fallo de autenticación, el BPA gate falló con una gravedad ≥ error). |
-| `2`              | Diff distinto de cero (`te diff`): los modelos difieren.                                                                              |
+| Código de salida | Significado                                                                                                                                                                                                                                                |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `0`              | Éxito.                                                                                                                                                                                                                                     |
+| `1`              | Fallo genérico (argumentos no válidos, fallo del comando, errores de validación, fallo de autenticación, el BPA gate falló con una gravedad ≥ error). For `te diff`: differences found. |
+| `2`              | `te diff` only: an error occurred while comparing, so the difference status is unknown.                                                                                                                                    |
 
 Para un control detallado en las canalizaciones de CI, combina los códigos de salida con las anotaciones `--ci <vsts/github>` y los archivos de resultados `--trx`; consulta @te-cli-cicd.
 
