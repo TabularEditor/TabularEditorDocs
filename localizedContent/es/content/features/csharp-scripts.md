@@ -293,8 +293,6 @@ Además, los siguientes ensamblados de .NET Framework se cargan de forma predete
 - TabularEditor.Exe
 - Microsoft.AnalysisServices.Tabular.Dll
 
-<a name="accessing-environment-variables"></a>
-
 ## Acceso a variables de entorno
 
 Al ejecutar scripts de C# mediante la CLI de Tabular Editor (especialmente en canalizaciones de CI/CD), puedes pasar parámetros a tus scripts usando variables de entorno. Este es el enfoque recomendado, ya que los C# Scripts ejecutados por Tabular Editor CLI no admiten argumentos tradicionales de línea de comandos.
@@ -374,8 +372,6 @@ foreach(var table in Model.Tables)
 
 Info($"Modelo configurado para el entorno {environment}");
 ```
-
-<a name="compatibility"></a>
 
 ## Compatibilidad
 
