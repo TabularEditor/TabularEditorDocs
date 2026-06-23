@@ -80,10 +80,11 @@ def slugify(text: str) -> str:
 
 
 def parse_headings(text: str):
-    """Return (heading_texts, heading_line_indices) for ATX headings, skipping
-    YAML frontmatter and fenced code blocks. Indices refer to `text.split(nl)`."""
+    """Return (heading_texts, heading_line_indices, heading_levels) for ATX
+    headings, skipping YAML frontmatter and fenced code blocks. Indices refer to
+    `text.split(nl)`; levels are the heading depth (1 for '#', 2 for '##', ...)."""
     lines = text.split("\n")
-    texts, indices = [], []
+    texts, indices, levels = [], [], []
     fence_char, fence_len = "", 0
     in_frontmatter = False
     for i, raw in enumerate(lines):
@@ -111,7 +112,8 @@ def parse_headings(text: str):
         if m:
             texts.append(m.group(2))
             indices.append(i)
-    return texts, indices
+            levels.append(len(m.group(1)))
+    return texts, indices, levels
 
 
 def dedup_slugs(texts):
@@ -155,8 +157,8 @@ def process_file(loc_path: Path, lang: str, dry_run: bool):
 
     with open(en_path, "r", encoding="utf-8-sig", newline="") as f:
         en_text = f.read().replace("\r\n", "\n")
-    en_texts, _ = parse_headings(en_text)
-    loc_texts, loc_indices = parse_headings("\n".join(cleaned_lines))
+    en_texts, _, _ = parse_headings(en_text)
+    loc_texts, loc_indices, loc_levels = parse_headings("\n".join(cleaned_lines))
 
     if len(en_texts) != len(loc_texts):
         # Still write back the cleaned file (stale anchors removed) so we never
@@ -170,7 +172,17 @@ def process_file(loc_path: Path, lang: str, dry_run: bool):
         return ("skip-mismatch", (len(en_texts), len(loc_texts)))
 
     en_slugs = dedup_slugs(en_texts)
-    inject_at = dict(zip(loc_indices, en_slugs))
+    # Skip level-1 headings: DocFX lifts the first <h1> into the page title
+    # (rawTitle) only when the <h1> is the leading element. An injected anchor
+    # renders as a <p> ahead of the <h1>, so DocFX no longer treats it as the
+    # title and the heading drops below the metadata block. The page title's own
+    # anchor is never cross-referenced (callers use the uid), so dropping it is
+    # safe. Positional slug alignment is unaffected; we only omit the injection.
+    inject_at = {
+        idx: slug
+        for idx, slug, level in zip(loc_indices, en_slugs, loc_levels)
+        if level != 1
+    }
 
     out = []
     for i, ln in enumerate(cleaned_lines):
