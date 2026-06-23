@@ -106,7 +106,7 @@ Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的
 | 可同时激活的安装数 | 1   | 2   | 3   |
 
 > [!NOTE]
-> 在多位用户之间共享同一个许可证违反我们的[许可条款](https://tabulareditor.com/license-terms)。
+> Sharing a single license among multiple users is against our [licensing terms](https://tabulareditor.com/eula-te3).
 
 你可以随时在工具内停用现有安装：在“帮助 > 关于 Tabular Editor”下选择“更改许可证密钥...”选项。 你也可以通过我们的[自助门户](https://tabulareditor.com/sign-in)停用安装：进入“Licenses”选项卡。
 

@@ -106,7 +106,7 @@ Cada usuario de Tabular Editor 3 puede instalar la herramienta en varias máquin
 | Instalaciones simultáneas | 1          | 2        | 3          |
 
 > [!NOTE]
-> Compartir una sola licencia entre varios usuarios va en contra de nuestros [términos de licencia](https://tabulareditor.com/license-terms).
+> Sharing a single license among multiple users is against our [licensing terms](https://tabulareditor.com/eula-te3).
 
 Puedes desactivar una instalación existente en cualquier momento desde la propia herramienta; para ello, elige la opción "Change license key..." en "Help > About Tabular Editor". También puedes desactivar una instalación a través de nuestro [portal de autoservicio](https://tabulareditor.com/sign-in) yendo a la pestaña "Licenses".
 

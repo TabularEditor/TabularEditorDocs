@@ -23,14 +23,14 @@ La CLI de Tabular Editor se autentica en Power BI Service, Microsoft Fabric y Az
 
 La CLI admite la cadena completa de credenciales de Azure Identity:
 
-| Método                                                        | Cuándo usarlo                                                           | Valor de `--auth`                                        |
-| ------------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------- |
-| Automatic                                                     | Tries environment credentials, then cached or interactive browser login | `auto` (default)                      |
-| Navegador interactivo                                         | Desarrollo local: abre el navegador del sistema         | `interactive`                                            |
-| Principal de servicio (secreto de cliente) | Automatización, CI/CD, sin interfaz gráfica / SSH / WSL                 | `spn` (con `-u / -p / -t`) o `env`    |
-| Principal de servicio (certificado)        | Automatización con autenticación basada en certificados                 | `spn` (con `-u / -t / --certificate`) |
-| Variables de entorno                                          | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`           | `env`                                                    |
-| Identidad administrada                                        | Máquinas virtuales de Azure, Azure Container Apps y Azure Functions     | `managed-identity`                                       |
+| Método                                                        | Cuándo usarlo                                                                                                                                         | Valor de `--auth`                                        |
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Automático                                                    | Prueba primero las credenciales del entorno y luego recurre al inicio de sesión en el navegador, ya sea con la sesión en caché o de forma interactiva | `auto` (predeterminado)               |
+| Navegador interactivo                                         | Desarrollo local: abre el navegador del sistema                                                                                       | `interactive`                                            |
+| Principal de servicio (secreto de cliente) | Automatización, CI/CD, sin interfaz gráfica / SSH / WSL                                                                                               | `spn` (con `-u / -p / -t`) o `env`    |
+| Principal de servicio (certificado)        | Automatización con autenticación basada en certificados                                                                                               | `spn` (con `-u / -t / --certificate`) |
+| Variables de entorno                                          | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`                                                                                         | `env`                                                    |
+| Identidad administrada                                        | Máquinas virtuales de Azure, Azure Container Apps y Azure Functions                                                                                   | `managed-identity`                                       |
 
 > [!NOTE]
 > `--auth` es una opción **global**, disponible en todos los comandos `te`, no solo en `te auth login`. Úsalo en [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te query`](xref:te-cli-commands#query), [`te connect`](xref:te-cli-commands#connect) o en cualquier otro comando que se conecte a un punto de conexión remoto para sustituir la cadena predeterminada en esa ejecución. La opción predeterminada (`auto`) intenta primero las credenciales del entorno y, si no están disponibles, recurre al inicio de sesión en caché o interactivo en el navegador.
@@ -118,7 +118,7 @@ te connect
 te connect --clear
 ```
 
-El estado de la conexión activa es específico de cada sesión de terminal: al abrir un terminal nuevo, se empieza desde cero. Inspect or clean up session state with [`te session`](xref:te-cli-commands#session).
+El estado de la conexión activa es específico de cada sesión de terminal: al abrir un terminal nuevo, se empieza desde cero. Inspecciona o limpia el estado de la sesión con [`te session`](xref:te-cli-commands#session).
 
 ### Modo del área de trabajo (`-w` / `--workspace`)
 
