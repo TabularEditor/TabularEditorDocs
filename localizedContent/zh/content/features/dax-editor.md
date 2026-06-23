@@ -21,7 +21,7 @@ applies_to:
 
 **DAX编辑器**是 Tabular Editor 3 的核心功能。
 
-它提供三种不同的_模式_：
+它提供三种不同的模式：
 
 - **表达式编辑器** 用于在 TOM Explorer 中对对象上的单个 DAX 表达式进行快速修改。
 - **DAX 查询**（连接功能）用于编写 DAX 查询，从已连接的 Analysis Services / Power BI 实例中获取数据。

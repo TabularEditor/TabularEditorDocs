@@ -91,7 +91,7 @@ applies_to:
 
 <a name="columns">1</a> - 使用外部工具连接到 AS 实例时，支持更改列的数据类型，但不支持重命名列。
 
-Power BI Desktop 的_项目文件_支持更广泛的写入操作。 通过将 Tabular Editor 用作外部工具时不支持的那些对象和操作，可能可以通过编辑 Power BI Desktop 项目文件来实现。 请参阅 Microsoft 文档了解更多信息：[Power BI Desktop projects - Model authoring](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring)。
+Power BI Desktop 的项目文件支持更广泛的写入操作。 通过将 Tabular Editor 用作外部工具时不支持的那些对象和操作，可能可以通过编辑 Power BI Desktop 项目文件来实现。 请参阅 Microsoft 文档了解更多信息：[Power BI Desktop projects - Model authoring](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview#model-authoring)。
 
 ### [2023 年六月之前](#tab/prejune2023)
 

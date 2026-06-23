@@ -2,7 +2,7 @@
 uid: editions
 title: 比较版本
 author: Søren Toft Joensen
-updated: 2025-02-07
+updated: 2026-06-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -88,9 +88,6 @@ Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的
 
 除了上面列出的内容之外，Tabular Editor 3 各版本之间没有其他功能差异。
 
-> [!NOTE]
-> 请注意，Power BI Desktop [目前不支持所有 Data model 建模操作](xref:desktop-limitations)。 因此，Tabular Editor 3 默认会阻止 Power BI Desktop 不支持的操作。 不过，你可以在“工具 > 偏好 > Power BI”中解除该限制。
-
 > [!IMPORTANT]
 > 只有当 Power BI Report（.pbix、.pbip 或 .pbit）文件包含 Data model（Import、DirectQuery 或 Composite）时，Tabular Editor 才能在 Power BI Desktop 中作为外部工具使用。 **不支持使用 Live connection 的 Report**，因为这些 Report 不包含 Data model。 [更多信息](xref:desktop-limitations)。
 
@@ -139,3 +136,12 @@ Tabular Editor 3 各版本之间的主要区别在于它们支持哪些类型的
 ```
 
 如果您需要超过 100 个席位，请 <a href="mailto:sales@tabulareditor.com">联系销售</a> 获取报价。
+
+## 命令行与 CI/CD 授权许可
+
+Tabular Editor 3 是一款桌面应用程序。 它本身没有命令行界面。 对于自动化部署和 CI/CD 流水线，可使用 `TabularEditor.exe`（[Tabular Editor 2 命令行](xref:command-line-options)）或跨平台的 [Tabular Editor CLI](xref:te-cli)（`te`）。 两者都独立于 Tabular Editor 3 桌面应用程序。
+
+> **运行 CI/CD 管道需要许可证吗？**
+> 不需要。 `TabularEditor.exe`（TE2 CLI）和 Tabular Editor CLI（`te`，处于预览阶段）不需要 Tabular Editor 3 许可证。 只有使用 Tabular Editor 3 桌面应用程序的开发人员才需要许可证。
+
+Tabular Editor CLI 在正式发布（GA）时将需要许可证；定价仍在最终确定中，并会在 GA 之前公布。

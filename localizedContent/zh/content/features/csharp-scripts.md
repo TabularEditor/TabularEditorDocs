@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Script
 author: Daniel Otykier
-updated: 2026-03-19
+updated: 2026-05-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,6 +15,8 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
+    - product: Tabular Editor CLI
+      full: true
 ---
 
 # C# Script
@@ -377,17 +379,26 @@ Info($"已为 {environment} 环境配置模型");
 
 ## 兼容性
 
-Tabular Editor 2 和 Tabular Editor 3 的脚本 API 大多兼容，但在某些情况下，你可能希望根据所使用的版本对代码进行条件编译。 为此，你可以使用预处理器指令，这些指令是在 Tabular Editor 3.10.0 中引入的。
+Tabular Editor 2、Tabular Editor 3（Desktop）和 Tabular Editor CLI 的脚本 API 基本兼容，但在某些情况下，你可能需要根据当前运行的宿主环境来有条件地编译代码。 CLI 宿主定义了 `TECLI` 预处理器符号；TE3 Desktop 定义了 `TE3`（以及与当前次版本对应的版本符号，例如 `TE3_3_15_OR_GREATER`）；而 TE2 两者都不定义。 预处理器指令是在 Tabular Editor 3.10.0 中引入的。 用它们来编写可移植脚本：
 
 ```csharp
-#if TE3
-    // 仅当脚本在 TE3（版本 3.10.0 或更高）中运行时才会编译此代码。
-    Info("Hello from TE3!");
+#if TECLI
+    // CLI 宿主 - 没有可用的 UI API
+    Info($"正在 {Environment.OSVersion.Platform} 上的 CLI 下运行");
+#elif TE3
+    // TE3 Desktop - UI API 可用
+    ShowMessage("来自 TE3 的问候");
 #else
-    // 在其他所有情况下都会编译此代码。
-    Info("Hello from TE2!");
+    // TE2（旧版）- 未定义 TECLI 和 TE3
+    Info("来自 TE2 的问候");
+#endif
+
+#if TE3_3_15_OR_GREATER
+    // 受特定 TE3 次版本限制
 #endif
 ```
+
+有一个 CLI 特有的注意事项：由于 CLI 没有可弹出的 UI，TE3-Desktop 的 UI 辅助方法 `SelectMeasure()`、`SelectTable()`、`SelectColumn()`、`SelectObject()` 和 `SelectObjects()` 在 `te script` 下会抛出 `NotSupportedException`。 在不同宿主之间共享脚本时，请用 `#if TE3`（或 `try/catch`）把这类调用包起来。
 
 如果你想在脚本运行时知道 Tabular Editor 的具体版本，可以查看程序集版本：
 

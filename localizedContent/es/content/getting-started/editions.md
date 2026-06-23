@@ -2,7 +2,7 @@
 uid: editions
 title: Comparar ediciones
 author: Søren Toft Joensen
-updated: 2025-02-07
+updated: 2026-06-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -37,7 +37,7 @@ Consulta la matriz siguiente para ver el resumen completo de escenarios compatib
 | Escenario / Edición                                                       | Desktop                                                 | Business                                                  | Enterprise                                              |
 | ------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
 | Herramienta externa para Power BI Desktop                                 | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
-| Cargar/guardar metadatos del modelo en disco\*\*                          | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
+| Cargar/guardar los metadatos del modelo en disco\*\*                      | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
 | Modo del área de trabajo\*\*\*                                            | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
 | Power BI Premium por usuario                                              | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>   | <span class="emoji">&#10004;</span> |
 | SQL Server Developer Edition - edición para desarrolladores               | <span class="emoji">&#10060;</span> | <span class="emoji">&#10004;</span>\* | <span class="emoji">&#10004;</span> |
@@ -88,9 +88,6 @@ Si intentas abrir un modelo que utiliza una o más de las restricciones de model
 
 No hay más diferencias de funcionalidades entre las ediciones de Tabular Editor 3 que las enumeradas arriba.
 
-> [!NOTE]
-> Tenga en cuenta que Power BI Desktop [actualmente no admite todas las operaciones de modelado de datos](xref:desktop-limitations). Por este motivo, Tabular Editor 3 bloquea, de forma predeterminada, las operaciones que Power BI Desktop no admite. Sin embargo, esta restricción se puede quitar en Herramientas > Preferencias > Power BI.
-
 > [!IMPORTANT]
 > Tabular Editor solo puede usarse como herramienta externa para Power BI Desktop cuando el archivo de Report de Power BI (.pbix, .pbip o .pbit) contiene un Data model (Importación, DirectQuery o compuesto). **No se admiten los Report que usan Live connection** porque estos Report no incluyen un Data model. [Más información](xref:desktop-limitations).
 
@@ -139,3 +136,12 @@ Total                      $ 10.950,00
 ```
 
 Si necesitas más de 100 puestos, <a href="mailto:sales@tabulareditor.com">contacta con ventas</a> para solicitar un presupuesto.
+
+## Licencias para la línea de comandos y para CI/CD
+
+Tabular Editor 3 es una aplicación de escritorio. No tiene una interfaz de línea de comandos propia. Para implementaciones automatizadas y canalizaciones de CI/CD, utiliza `TabularEditor.exe` (la [línea de comandos de Tabular Editor 2](xref:command-line-options)) o la [Tabular Editor CLI](xref:te-cli) multiplataforma (`te`). Ambos son independientes de la aplicación de escritorio Tabular Editor 3.
+
+> **¿Necesito una licencia para ejecutar canalizaciones de CI/CD?**
+> No. `TabularEditor.exe` (TE2 CLI) y Tabular Editor CLI (`te`, durante la vista previa) no requieren una licencia de Tabular Editor 3. Solo los desarrolladores que usan la aplicación de escritorio Tabular Editor 3 necesitan una licencia.
+
+En la disponibilidad general, Tabular Editor CLI requerirá una licencia; los precios aún se están ultimando y se anunciarán antes de GA.

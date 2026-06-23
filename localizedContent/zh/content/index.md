@@ -2,7 +2,7 @@
 uid: index
 title: Tabular Editor
 author: Daniel Otykier
-updated: 2021-09-09
+updated: 2026-06-10
 ---
 
 # Tabular Editor
@@ -73,51 +73,7 @@ Tabular Editor 2.x 是一款轻量级应用程序，可快速修改 Analysis Ser
 
 下表列出了两款工具的所有主要功能。
 
-|                                                                                | TE2（免费）                                                 | TE3（商业版）                                                  |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------- | --------------------------------------------------------- |
-| 编辑所有 TOM 对象和属性                                                                 | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| 批量编辑和重命名                                                                       | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| 支持复制粘贴和拖放                                                                      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| 撤销/重做数据建模操作                                                                    | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| 从磁盘加载/保存模型元数据                                                                  | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
-| 保存到文件夹                                                                         | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
-| [daxformatter.com](https://daxformatter.com) 集成                | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| 高级数据建模（OLS、透视、计算组、元数据翻译等）                                                      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
-| 语法高亮和公式自动修正                                                                    | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| 查看对象之间的 DAX 依赖关系                                                               | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| 导入表向导                                                                          | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| Deployment Wizard                                                              | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
-| 最佳实践分析器 (BPA)                                               | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| C# 脚本和自动化                                                                      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| 用作 Power BI Desktop 的外部工具                                                      | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>   |
-| 连接到 SSAS/Azure AS/Power BI Premium                                             | <span class="emoji">&#10004;</span> | <span class="emoji">&#10004;</span>\* |
-| 命令行界面                                                                          | <span class="emoji">&#10004;</span> |                                                           |
-| 高级且可自定义的用户界面，支持高 DPI、多显示器及主题                                                   |                                                         | <span class="emoji">&#10004;</span>   |
-| 一流的 DAX 编辑器，具备类似 IntelliSense<sup>TM</sup> 的功能，支持离线格式化等                        |                                                         | <span class="emoji">&#10004;</span>   |
-| 离线 DAX 语法检查与列/数据类型推断                                                           |                                                         | <span class="emoji">&#10004;</span>   |
-| 改进的表导入向导与表架构更新检查，并支持 Power Query                                               |                                                         | <span class="emoji">&#10004;</span>   |
-| DAX 查询、表格预览和 Pivot Grid                                                        |                                                         | <span class="emoji">&#10004;</span>   |
-| 创建图表，用于可视化和编辑表关系                                                               |                                                         | <span class="emoji">&#10004;</span>   |
-| 在后台执行数据刷新操作                                                                    |                                                         | <span class="emoji">&#10004;</span>\* |
-| C# 宏录制器                                                                        |                                                         | <span class="emoji">&#10004;</span>   |
-| 使用 [DAX脚本](xref:dax-scripts) 在同一文档中编辑多个 DAX 表达式                                |                                                         | <span class="emoji">&#10004;</span>   |
-| [VertiPaq分析器](https://www.sqlbi.com/tools/vertipaq-analyzer/) 集成               |                                                         | <span class="emoji">&#10004;</span>   |
-| [DAX调试器](xref:dax-debugger)                                                    |                                                         | <span class="emoji">&#10004;</span>   |
-| [元数据翻译编辑器](xref:metadata-translation-editor)                                   |                                                         | <span class="emoji">&#10004;</span>   |
-| [透视编辑器](xref:perspective-editor)                                               |                                                         | <span class="emoji">&#10004;</span>   |
-| [表格组](xref:table-groups)                                                       |                                                         | <span class="emoji">&#10004;</span>   |
-| [DAX优化器集成](xref:dax-optimizer-integration)                                     |                                                         | <span class="emoji">&#10004;</span>   |
-| [代码操作](xref:code-actions)                                                      |                                                         | <span class="emoji">&#10004;</span>   |
-| [DAX 用户自定义函数 (UDFs)](xref:udfs) 辅助功能、代码操作和命名空间              |                                                         | <span class="emoji">&#10004;</span>   |
-| 用于增强时间智能的[日历编辑器](xref:calendars)                                               |                                                         | <span class="emoji">&#10004;</span>   |
-| [DAX 组件管理器](xref:dax-package-manager)                                          |                                                         | <span class="emoji">&#10004;</span>   |
-| [内置的 Best Practice Analyzer 规则](xref:built-in-bpa-rules)                       |                                                         | <span class="emoji">&#10004;</span>   |
-| 支持[刷新覆盖配置文件](xref:refresh-overrides)的[高级刷新对话框](xref:advanced-refresh)（商业版/企业版） |                                                         | <span class="emoji">&#10004;</span>\* |
-| [为 Fabric 保存并包含支持文件](xref:save-with-supporting-files)                          |                                                         | <span class="emoji">&#10004;</span>   |
-| Databricks Metric Views 的语义桥接（企业版）                                             |                                                         | <span class="emoji">&#10004;</span>\* |
-| [本地化支持](xref:references-application-language)（中文、西班牙语、日语、德语、法语）                |                                                         | <span class="emoji">&#10004;</span>   |
-
-\***注意：** 具体限制取决于你使用的 Tabular Editor 3 [版本](xref:editions)。
+[!include[feature-comparison](includes/feature-comparison.partial.md)]
 
 ### 常见功能
 

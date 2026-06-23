@@ -19,10 +19,14 @@ applies_to:
 
 # 区域设置不受支持
 
-你可能会看到以下警告信息：
+你可能会遇到以下任意一条警告信息：
 
 ```plaintext
 不支持 XXXX 区域设置
+```
+
+```plaintext
+XXXX 不是有效的区域设置标识符
 ```
 
 在 Tabular Editor 3 的“信息视图”中。

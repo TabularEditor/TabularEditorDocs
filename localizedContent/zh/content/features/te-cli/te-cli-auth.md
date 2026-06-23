@@ -131,7 +131,7 @@ te connect Finance "Revenue Model" -w ./revenue-model
 te connect ./revenue-model -w Finance "Revenue Model"
 ```
 
-保存顺序始终是 **先本地，后远程**，因此即使推送到服务器失败，磁盘上的副本也能反映用户的最新更改。 关于 `--workspace-format`、覆盖语义以及清空镜像，请参见 @te-cli-commands#workspace-mode-w--workspace 的 Workspace 模式部分。
+保存顺序始终是 **先本地，后远程**，因此即使推送到服务器失败，磁盘上的副本也能反映用户的最新更改。 有关 `--workspace-format`、覆盖规则以及如何清除镜像，请参见 @te-cli-commands#workspace-mode--w----workspace。
 
 ## 连接到不同的云
 

@@ -2,7 +2,7 @@
 uid: pivot-grid
 title: Pivot Grids
 author: Daniel Otykier
-updated: 2024-05-28
+updated: 2026-05-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -167,3 +167,5 @@ A continuación se muestra una lista de limitaciones y problemas conocidos de lo
 
 - Reglas de formato (como conjuntos de iconos, barras de datos, etc.) no se conservan correctamente al guardar un diseño de Pivot Grid como archivo `.te3pivot`.
 - Si abre un archivo .te3pivot en un modelo distinto de aquel del que se guardó el diseño, los campos que no existan en el modelo actual se eliminarán del diseño. Al pulsar Guardar (Ctrl+S), se guardará el diseño con esos campos ya eliminados. Es posible que cambiemos este comportamiento en una versión futura para que el archivo .te3pivot no se sobrescriba sin una confirmación explícita.
+- Las columnas que usan la propiedad **Agrupar por columnas** (incluidas las columnas de parámetros de campo) no se pueden agregar por sí solas al Área de filas ni al Área de columnas. Al hacerlo, se produce el error _"La columna X forma parte de una clave compuesta, pero no se incluyen todas las columnas de la clave compuesta en la expresión o en su expresión dependiente"_. Esta es una limitación general de los clientes MDX y también sucede al usar una columna de este tipo en una tabla dinámica de Excel. Para evitarlo, agrega la columna de agrupación relacionada al Pivot Grid _antes_ de agregar la columna dependiente. Por ejemplo, si `[ProductKey]` está configurada como la columna de agrupación de `[ProductName]`, agrega primero `[ProductKey]` al Área de filas o al Área de columnas y, después, agrega `[ProductName]`.
+- Aplicar una ordenación ascendente o descendente explícita a una columna del Área de filas o del Área de columnas ordena los valores alfabéticamente como cadenas, independientemente del tipo de datos de la columna. Las fechas con formato de fecha larga (por ejemplo, "4 de mayo de 2024") y los enteros se ordenan de forma lexicográfica, no cronológica ni numérica. Esta es una limitación de la forma en que ordenan los clientes MDX, y el mismo comportamiento se produce en una tabla dinámica de Excel conectada al modelo. Para obtener una ordenación cronológica o numérica, usa la ordenación natural de la columna (no apliques una ordenación explícita) o usa la propiedad **Ordenar por columna** en la columna del modelo para que apunte a una columna con un valor subyacente ordenable.
