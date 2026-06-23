@@ -17,13 +17,13 @@ applies_to:
           full: true
 ---
 
+# 高级安装与激活
+
 ## 概述
 
 本页介绍 Tabular Editor 3 的高级安装和激活场景：手动（离线）激活、基于注册表的许可证管理、静默部署，以及企业版席位管理。
 
 如需了解标准激活流程，请参阅 @getting-started。
-
-<a name="manual-activation-no-internet"></a>
 
 ## 手动激活（无网络连接）
 
@@ -49,8 +49,6 @@ applies_to:
 
 > [!NOTE]
 > 仅企业版支持更换用户。
-
-<a name="registry-details"></a>
 
 ## 注册表详细信息
 
