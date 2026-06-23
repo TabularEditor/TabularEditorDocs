@@ -182,7 +182,7 @@ The **Model** menu displays actions that can be performed at the level of the Mo
 > The **Deploy** option is not available in Tabular Editor 3 Desktop Edition. For more information see @editions.
 
 - **Import tables...** Launches the Tabular Editor 3 Import Table Wizard. For more information, see @importing-tables.
-- **Update table schema...** Detects schema changes in the data source(s) for the currently selected table(s) or partition(s) compared to the currently imported columns. See @importing-tables#updating-table-schema for more information.
+- **Update table schema...** Detects schema changes in the data source(s) for the currently selected table(s) or partition(s) compared to the currently imported columns. See [Updating table schema](xref:importing-tables#updating-table-schema) for more information.
 - **Script DAX**: Generates a DAX script for the currently selected object(s) (or all DAX objects in the model, if nothing is selected). See @dax-scripts for more information.
 - **Refresh model**: When Tabular Editor is connected to an instance of Analysis Services, this submenu contains options for starting a background refresh operation at the model level. The submenu has the options below. For more information, see [Refresh command (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request).
   - **Automatic (model)**: Analysis Services determines which objects to refresh (only objects that are not in the "Ready" state).
