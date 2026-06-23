@@ -132,7 +132,7 @@ te config set hidePreviewNotice true
 
 ## Shell 自动补全
 
-The CLI provides tab-completion scripts for **Bash**, **Zsh**, **PowerShell** and **Fish**. 选择与你使用的 shell 对应的代码块——每个代码块都会将自动补全设置为持久生效，在新的 shell 会话中也能使用。
+CLI 提供适用于 **Bash**、**Zsh**、**PowerShell** 和 **Fish** 的 Tab 自动补全脚本。 选择与你使用的 shell 对应的代码块——每个代码块都会将自动补全设置为持久生效，在新的 shell 会话中也能使用。
 
 ### Bash（macOS/Linux）
 
@@ -155,7 +155,7 @@ echo 'fpath=(~/.zfunc $fpath); autoload -U compinit; compinit' >> ~/.zshrc
 Add-Content $PROFILE 'te completion pwsh | Out-String | Invoke-Expression'
 ```
 
-### Fish (macOS/Linux)
+### Fish（macOS/Linux）
 
 ```bash
 te completion fish > ~/.config/fish/completions/te.fish
