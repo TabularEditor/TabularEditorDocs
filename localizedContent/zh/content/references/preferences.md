@@ -792,7 +792,7 @@ DAX formatter 请求的超时时间，单位为毫秒。 如果你在使用 DAX 
 
 ##### _Fabric 端点基础 URL_（`https://api.fabric.microsoft.com`）
 
-用于调用 Microsoft Fabric API 的基础 URL。 Change this if you're working with a sovereign cloud or custom environment.
+用于调用 Microsoft Fabric API 的基础 URL。 如果你使用的是主权云或自定义环境，请更改此项。
 
 ##### _使用嵌入式浏览器进行身份验证_（已启用）
 
