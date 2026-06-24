@@ -185,7 +185,7 @@ El menú **Modelo** muestra las acciones que se pueden realizar a nivel del obje
 > La opción **Deploy** no está disponible en la Edición de escritorio de Tabular Editor 3. Para más información, consulte @editions.
 
 - **Importar tablas...** Inicia el Asistente de importación de tablas de Tabular Editor 3. Para más información, consulte @importing-tables.
-- **Actualizar esquema de tabla...** Detecta cambios de esquema en el/los Data source(s) de la(s) tabla(s) o partición(es) seleccionada(s) actualmente, en comparación con las columnas importadas actualmente. See [Updating table schema](xref:importing-tables#updating-table-schema) for more information.
+- **Actualizar esquema de tabla...** Detecta cambios de esquema en el/los Data source(s) de la(s) tabla(s) o partición(es) seleccionada(s) actualmente, en comparación con las columnas importadas actualmente. Consulta [Actualizar el esquema de la tabla](xref:importing-tables#updating-table-schema) para obtener más información.
 - **Script DAX**: Genera un script DAX para el/los objeto(s) seleccionados actualmente (o para todos los objetos DAX del modelo, si no se ha seleccionado nada). Para más información, consulte @dax-scripts.
 - **Actualizar modelo**: Cuando Tabular Editor está conectado a una instancia de Analysis Services, este submenú contiene opciones para iniciar una operación de actualización en segundo plano a nivel de modelo. El submenú incluye las siguientes opciones. Para más información, consulte [Comando Refresh (TMSL)](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request).
   - **Automático (modelo)**: Analysis Services determina qué objetos actualizar (solo los objetos que no están en el estado "Listo").
