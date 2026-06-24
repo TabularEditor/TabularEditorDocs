@@ -2,7 +2,7 @@
 uid: udfs
 title: DAX User-Defined Functions
 author: Daniel Otykier
-updated: 2026-06-11
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -132,7 +132,30 @@ In addition to specifying the evaluation mode, you can also constrain the parame
 
 These type specifications are optional, but if specified they will perform an implicit type conversion on arguments passed to the function, and will also affect the autocomplete suggestions in Tabular Editor 3 when writing DAX code that calls the function.
 
+Tabular Editor 3 validates arguments against the declared parameter types. If you call a UDF with an argument that doesn't match its parameter type — for example, passing a scalar value where a `TABLEREF` parameter is expected — the Semantic Analyzer reports a warning or error.
+
 Check the [Microsoft specification for UDFs](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) for the complete list of available constraints.
+
+### Optional Parameters with Default Expressions
+
+Starting from version 3.26.2, Tabular Editor 3 supports optional parameters with default expressions. Append `= expression` after the parameter name (and after any type or evaluation-mode hints) to make the parameter optional. When the caller omits the argument, the default expression supplies the value.
+
+```dax
+FUNCTION AddTax =
+    (
+        amount: NUMERIC,        // Required parameter
+        taxRate: NUMERIC = 0.1  // Optional parameter, defaults to 10%
+    )
+    => amount * (1 + taxRate)
+```
+
+Calling `AddTax(10)` returns `11`, while `AddTax(10, 0.25)` returns `12.5`.
+
+A few rules govern optional parameters:
+
+- Callers can leave an argument empty to fall back to its default, e.g. `MyFunc(1,,3)` omits the second argument. The minimum number of arguments is determined by the position of the rightmost required parameter.
+- A default expression can only reference names (columns, tables, measures, functions) visible where the function is defined, and it can't reference another parameter of the same function.
+- Type checking against a parameter's type hint is enforced only when the default expression is used; an explicitly passed argument is checked against the hint instead.
 
 ## Using UDFs in Your Model
 

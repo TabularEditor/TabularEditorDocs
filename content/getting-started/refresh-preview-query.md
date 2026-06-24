@@ -2,7 +2,7 @@
 uid: refresh-preview-query
 title: Refreshing, previewing and querying data
 author: Daniel Otykier
-updated: 2026-01-08
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -86,7 +86,15 @@ At certain points during DAX authoring and data model development, you may need 
 
 ![Preview Data](~/content/assets/images/preview-data-big.png)
 
-You can open multiple such table previews and arrange them anyway you like in the user interface. In addition, you can sort or filter individual columns. There is no practical limit to the number of rows that can be previewed. Tabular Editor simply executes a [`TOPNSKIP`](https://dax.guide/topnskip) DAX query against the model, to return just a small number of records suitable to fill the current view.
+You can open multiple such table previews and arrange them anyway you like in the user interface. In addition, you can sort or filter individual columns. Tabular Editor executes a DAX query against the model to return just a small number of records suitable to fill the current view, then pages in more rows as you scroll.
+
+How paging works depends on the storage mode and engine:
+
+- For Import tables on engines that support the [`WINDOW`](https://dax.guide/window) function, paging uses `WINDOW` against the table's primary key, so you can scroll through the full table.
+- If the engine doesn't support `WINDOW` or the table has no primary key, the preview shows the first rows and indicates that scrolling is disabled.
+- DirectQuery tables show the first rows only — pagination isn't possible — along with an informational message.
+
+Preview metadata is cached for the session, so reopening a preview doesn't re-query the server. Click **Refresh** to re-read the metadata, for example after the model has been processed outside of Tabular Editor.
 
 If one or more calculated columns are in an invalid state, those columns contain the text *(Calculation needed)*. You can recalculate the table by right-clicking on the column and choosing the **Recalculate table...** option.
 

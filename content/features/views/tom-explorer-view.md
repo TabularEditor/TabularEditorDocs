@@ -2,7 +2,7 @@
 uid: tom-explorer-view
 title: TOM Explorer view
 author: Morten Lønskov
-updated: 2026-03-19
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -48,7 +48,7 @@ Expands to a selection of possible refresh operation for the selected table. Thi
 Expands to a submenu allowing the creation of new measures, columns, hierarchies, display folders or calculation items under the selected object. The available options depends on the object type selected.
 
 - **Move to group**:
-Allows you to organize the table into a Table group within the TOM Explorer for easier model navigation. This option is only available for tables.
+Expands to a submenu for organizing the selected tables into a Table Group for easier model navigation. The submenu lists existing Table Groups, a **(New...)** entry that creates a new group from the selected tables and opens its name editor, and a **(None)** entry that removes the Table Group assignment. This option is only available for tables.
 
 - **Make invisible**:
 Marks the object as not visible in client tools. The table remains part of the model but is hidden from report authors. Alternative use the shortcut **Ctrl+I** to hide the object.

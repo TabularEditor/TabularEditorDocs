@@ -2,7 +2,7 @@
 uid: table-groups
 title: Table Groups
 author: Daniel Otykier
-updated: 2023-03-08
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ Table Groups is a new feature, available in Tabular Editor 3 starting from [vers
 ![Table groups](~/content/assets/images/user-interface/table-groups.png)
 
 You can set up Table Groups either by right-clicking on a table and choosing the **Create > Table group** menu option, or by specifying a name for the Table Group in the **Properties View**, while selecting one or more tables.
+
+You can also use the **Move to group** right-click submenu on one or more selected tables. The submenu lists existing Table Groups, a **(New...)** entry that creates a new group from the selected tables and opens its name editor, and a **(None)** entry that removes the Table Group assignment.
 
 Tables can be moved around between Table Groups by dragging and dropping in the TOM Explorer. Note that, unlike Display Folders for measures, columns and hierarchies, Table Groups cannot be nested.
 

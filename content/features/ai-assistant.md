@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: AI Assistant
 author: Morten Lønskov
-updated: 2026-04-17
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -44,11 +44,11 @@ The AI Assistant uses a bring-your-own-key model. You provide an API key from on
 
 ## Supported Providers
 
-Configure your AI provider under **Tools > Preferences > AI Assistant > AI Provider**. Select a provider from the dropdown — the default is **None (AI disabled)** until you configure one — enter your API key, and optionally override the default model. For OpenAI and Anthropic, the **Model name** field is a combo box pre-populated with known models; you can also type a custom model name.
+Configure your AI provider under **Tools > Preferences > AI Assistant > AI Provider**. Select a provider from the dropdown — the default is **None (AI disabled)** until you configure one — enter your API key, and optionally override the default model. For OpenAI and Anthropic, the **Model name** field is a combo box pre-populated with current models — including Anthropic's `claude-fable-5` and `claude-opus-4-8` and OpenAI's `gpt-5.5` and `gpt-5.5-pro` — so you can pick a recent model without typing a custom ID. You can also type a custom model name.
 
 | Provider | Default Model | Configuration Required |
 | -- | -- | -- |
-| OpenAI | gpt-4o | API key. Optional base URL, Organization ID and Project ID |
+| OpenAI | gpt-5.5 | API key. Optional base URL, Organization ID and Project ID |
 | Anthropic | claude-sonnet-4-6 | API key. Optional base URL |
 | Azure OpenAI | Deployment-dependent | API key, endpoint URL and deployment name |
 | Custom (OpenAI-compatible) | User-specified | API key and custom endpoint URL |
@@ -57,7 +57,7 @@ Configure your AI provider under **Tools > Preferences > AI Assistant > AI Provi
 
 ### OpenAI
 
-Select **OpenAI** as the provider and enter your API key. You can optionally specify an Organization ID and Project ID if your OpenAI account uses these. The default model is **gpt-4o**, but you can change it to any model available on your account.
+Select **OpenAI** as the provider and enter your API key. You can optionally specify an Organization ID and Project ID if your OpenAI account uses these. The default model is **gpt-5.5**, but you can change it to any model available on your account.
 
 ![AI Assistant OpenAI Configuration](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
 
