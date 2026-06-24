@@ -132,7 +132,7 @@ te connect Finance "Revenue Model" -w ./revenue-model
 te connect ./revenue-model -w Finance "Revenue Model"
 ```
 
-El orden de guardado siempre es **primero local y después remoto**, para que la copia en disco refleje el cambio más reciente incluso si falla el envío al servidor. See [Workspace mode](xref:te-cli-commands#workspace-mode--w----workspace) for `--workspace-format`, overwrite semantics, and clearing the mirror.
+El orden de guardado siempre es **primero local y después remoto**, para que la copia en disco refleje el cambio más reciente incluso si falla el envío al servidor. Consulta el [modo del área de trabajo](xref:te-cli-commands#workspace-mode--w----workspace) para conocer `--workspace-format`, el comportamiento de sobrescritura y cómo limpiar el espejo.
 
 ## Conexión a distintas nubes
 
