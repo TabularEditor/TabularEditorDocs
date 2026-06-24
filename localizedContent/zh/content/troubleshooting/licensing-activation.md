@@ -31,8 +31,6 @@ applies_to:
 
 请从 [下载页面](xref:downloads) 下载与你的体系结构相匹配的 MSI。 安装程序或体系结构不匹配，常常会导致安装失败，或在首次启动时出现依赖项缺失错误。
 
-<a name="inspect-the-activated-license"></a>
-
 ## 检查已激活的许可证
 
 Tabular Editor 3 会将激活详细信息存储在 Windows 注册表 `HKEY_CURRENT_USER\SOFTWARE\Kapacity\Tabular Editor 3` 下。
@@ -56,8 +54,6 @@ Tabular Editor 3 会在启动时以及之后定期访问 `https://api.tabularedi
 1. 确认受影响的计算机可以访问 `api.tabulareditor.com`。
 2. 在 **工具 > 偏好 > 代理设置** 中配置代理。 如需进行代理相关的故障排查，请参阅 @proxy-settings，其中包括用于启用外部 MSAL 代理支持的 **AnalysisServices.AppSettings.json** 覆盖设置。
 3. 如果网络阻止向激活端点的出站流量，请使用下方的[手动激活](#manual-activation-no-internet)。
-
-<a name="manual-activation-no-internet"></a>
 
 ## 手动激活（无网络连接）
 

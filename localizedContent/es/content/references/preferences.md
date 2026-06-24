@@ -214,8 +214,6 @@ Al guardar un modelo cargado desde un archivo PBIX, usa el nombre del archivo PB
 
 Crea automáticamente archivos .tmuo (Tabular Model User Options) para los modelos nuevos. Estos archivos almacenan ajustes específicos de cada usuario, como los diseños del diagrama y las posiciones de las ventanas.
 
-<a name="tabular-editor--keyboard"></a>
-
 ## Tabular Editor > Teclado
 
 ![Asignaciones de teclas](~/content/assets/images/keyboard-mappings.png)
@@ -541,8 +539,6 @@ Especifica la configuración regional para las funciones de DAX y el formato.
 
 Estas configuraciones solo son relevantes cuando Tabular Editor 3 no puede determinar la versión de Analysis Services utilizada, como ocurre cuando se carga directamente un archivo Model.bim. En este caso, Tabular Editor intenta deducir a qué versión se implementará el modelo, en función del nivel de compatibilidad. Si Tabular Editor genera un Report de errores semánticos o de sintaxis que no lo son, puede que debas ajustar esta configuración.
 
-Esta opción controla específicamente si debe aplicarse el formato automático de las llamadas a funciones (espaciado entre argumentos y paréntesis) al cerrar un paréntesis.
-
 ## Editor de DAX > Formato automático
 
 ![Configuración de formato automático](~/content/assets/images/auto-formatting-settings.png)
@@ -668,8 +664,6 @@ Para hacer referencia a ciertos nombres de tabla no es necesario encerrarlos ent
 
 Las columnas de extensión se pueden definir sin un nombre de tabla. Si se activa, el Editor de DAX siempre agregará el prefijo de tabla a una columna de extensión.
 
-_Disparador de sugerencias de llamada_
-
 ## Editor de DAX > Code Assist
 
 ![Marcador de posición: Captura de pantalla de la página de preferencias de Code Assist del Editor de DAX]
@@ -794,11 +788,11 @@ Número de columnas que se analizan en cada lote. Ajusta esto en función del ta
 
 ##### _URL base del punto de conexión de Power BI_ (`https://api.powerbi.com`)
 
-La URL base para las llamadas a la API de Power BI. Cámbiala si estás trabajando con una nube soberana o un entorno personalizado.
+La URL base para las llamadas a la API de Power BI. Cambia esto si trabajas con una nube soberana o un entorno personalizado.
 
 ##### _URL base del punto de conexión de Fabric_ (`https://api.fabric.microsoft.com`)
 
-La URL base para las llamadas a la API de Microsoft Fabric. Cambia esto si trabajas con una nube soberana o un entorno personalizado.
+La URL base para las llamadas a la API de Microsoft Fabric. Cámbiala si estás trabajando con una nube soberana o un entorno personalizado.
 
 ##### _Usar el navegador integrado para la autenticación_ (activado)
 

@@ -164,8 +164,6 @@ Cuando una columna de unidad de tiempo principal tiene definida una columna **Or
 
 Por ejemplo, si asignas una columna `MonthName` a "Mes del año" y `MonthName` se ordena según una columna `MonthNumber`, la columna `MonthNumber` se asocia automáticamente a la unidad de tiempo. No tienes que añadir manualmente la columna Ordenar por al panel Columnas asociadas: el Editor de calendario se encarga de ello automáticamente.
 
-<a name="time-related-columns"></a>
-
 ### Columnas relacionadas con el tiempo
 
 Además de asignar columnas a categorías específicas de unidades de tiempo, puedes marcar columnas como **relacionadas con el tiempo**. Las columnas relacionadas con el tiempo son columnas de tu tabla de fechas que no encajan en una categoría específica de unidad de tiempo, pero aun así deberían recibir un tratamiento especial durante los cálculos de inteligencia temporal.
