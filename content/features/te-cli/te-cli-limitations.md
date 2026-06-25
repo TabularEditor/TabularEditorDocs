@@ -57,7 +57,7 @@ The CLI runs C# scripts (`te script`) against the same `Model` object you use in
 
 | Limitation | Notes / Workaround |
 | -- | -- |
-| **`--serialization` cannot combine a serialization with a PBIP container** | The `--serialization` option on [`te save`](xref:te-cli-commands#save) treats `bim`, `tmdl`, `te-folder`, and `pbip` as mutually exclusive, so you cannot currently produce a PBIP container around a TMSL-serialized (`.bim`) model. Save TMDL inside PBIP, or save `.bim` outside a PBIP wrapper. |
+| **`--serialization` cannot combine a serialization with a PBIP container** | The `--serialization` option on [`te save`](xref:te-cli-commands#save) treats `bim`, `tmdl`, `database.json`, and `pbip` as mutually exclusive, so you cannot currently produce a PBIP container around a TMSL-serialized (`.bim`) model. Save TMDL inside PBIP, or save `.bim` outside a PBIP wrapper. |
 
 ## Authentication
 

@@ -26,9 +26,9 @@ Unlike the Windows-only `TabularEditor.exe` command-line options (TE2) - which w
 
 Three design pillars run through every command:
 
-- **Structured output** — JSON, CSV, TMDL, TMSL alongside default human-readable text.
-- **Non-interactive mode** — a global `--non-interactive` flag that disables prompts and fails fast.
-- **Clear errors** — written to stderr with predictable exit codes.
+- **Structured output** - JSON, CSV, TMDL, TMSL alongside default human-readable text.
+- **Non-interactive mode** - a global `--non-interactive` flag that disables prompts and fails fast.
+- **Clear errors** - written to stderr with predictable exit codes.
 
 Together they make the same binary work well for three very different audiences:
 
