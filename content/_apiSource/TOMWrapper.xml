@@ -95,6 +95,37 @@
             CTOR - only called from static factory methods on the class
             </summary>
         </member>
+        <member name="T:TabularEditor.TOMWrapper.DatabaseInfo">
+            <summary>
+            Lightweight, read-only snapshot of a database on an Analysis Services / Power BI server,
+            sourced from the DBSCHEMA_CATALOGS DMV. Use this instead of enumerating
+            <see cref="P:Microsoft.AnalysisServices.Tabular.Server.Databases"/> when you only need name/ID/CL/modified-date, since the
+            TOM enumeration causes models to be swapped into memory on the server.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.DatabaseInfo.ID">
+            <summary>Server-assigned database identifier (DATABASE_ID).</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.DatabaseInfo.Name">
+            <summary>Database (catalog) display name (CATALOG_NAME).</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.DatabaseInfo.CompatibilityLevel">
+            <summary>Compatibility level of the database (COMPATIBILITY_LEVEL).</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.DatabaseInfo.LastUpdate">
+            <summary>UTC timestamp of the last metadata modification (DATE_MODIFIED). Null when not requested.</summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.DatabaseInfo.Description">
+            <summary>Database description (DESCRIPTION). Null when not requested, empty string when set but empty.</summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.DatabaseInfo.GetDatabasesFromServer(Microsoft.AnalysisServices.Tabular.Server)">
+            <summary>
+            Returns the list of databases on the server by querying the DBSCHEMA_CATALOGS DMV.
+            Unlike enumerating <see cref="P:Microsoft.AnalysisServices.Tabular.Server.Databases"/>, this does not cause models to be
+            swapped into memory on the server (critical for the Power BI service, which may evict
+            other models to honor the implicit load).
+            </summary>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.Utils.TabularDeployer.Deploy(Microsoft.AnalysisServices.Tabular.Database,System.String,System.String,TabularEditor.TOMWrapper.Utils.DeploymentOptions,System.Threading.CancellationToken)">
             <summary>
             Deploys the specified database to the specified target server and database ID, using the specified options.
@@ -106,6 +137,12 @@
             <param name="options"></param>
             <param name="cancellationToken"></param>
             <returns></returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Utils.TabularDeployer.DetectRefreshPolicyChanges(Microsoft.AnalysisServices.Tabular.Model,Microsoft.AnalysisServices.Tabular.Model)">
+            <summary>
+            Compares RefreshPolicy expressions between source model and destination model.
+            Returns list of changes where SourceExpression or PollingExpression changed.
+            </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Utils.TabularDeployer.TransformCreateOrReplaceTmsl(Newtonsoft.Json.Linq.JObject,Microsoft.AnalysisServices.Tabular.Database,Microsoft.AnalysisServices.Tabular.Database,TabularEditor.TOMWrapper.Utils.DeploymentOptions)">
             <summary>
@@ -284,6 +321,33 @@
             This method transforms a JObject representing a Create TMSL script, so that the database is deployed
             using the proper ID and Name values. In addition, of the DeploymentOptions specify that roles should
             not be deployed, they are stripped from the TMSL script.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.Utils.RefreshPolicyChange">
+            <summary>
+            Represents a change detected in a table's RefreshPolicy expressions.
+            </summary>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Utils.RefreshPolicyChange.#ctor(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Represents a change detected in a table's RefreshPolicy expressions.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.Utils.RefreshPolicyChangeEventArgs">
+            <summary>
+            Event args for the RefreshPolicyChangePrompt callback, containing detected changes
+            and allowing the caller to approve or deny the deployment.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Utils.RefreshPolicyChangeEventArgs.Changes">
+            <summary>
+            List of tables with RefreshPolicy expression changes detected.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Utils.RefreshPolicyChangeEventArgs.ApproveChanges">
+            <summary>
+            Set to true to approve deploying the changes (which will reset incremental refresh partitions).
+            Set to false or leave default to cancel the deployment.
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Utils.DaxDependencyHelper.Tokenize(TabularEditor.TOMWrapper.IDaxDependantObject)">
@@ -609,6 +673,17 @@
         <member name="M:TabularEditor.TOMWrapper.AssociatedColumnCollection.Clear">
             <summary>
             Removes all columns from the collection of related columns
+            </summary>
+        </member>
+        <member name="T:TabularEditor.TOMWrapper.SpecificObjectType">
+            <summary>
+            A more specific version of <see cref="T:TabularEditor.TOMWrapper.ObjectType" /> that maps directly to specific TOMWrapper types, which
+            all are creatable (i.e. they have a public static `CreateNew` method).
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.ObjectMetadata.SpecificObjectParent">
+            <summary>
+            A dictionary that specifies the parent <see cref="T:TabularEditor.TOMWrapper.ObjectType" /> of each individual <see cref="T:TabularEditor.TOMWrapper.SpecificObjectType" />.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.AggregateFunction">
@@ -956,6 +1031,31 @@
             Enforces fallback. Uses DirectQuery unconditionally.
             </summary>
         </member>
+        <member name="T:TabularEditor.TOMWrapper.DirectLakeIndexingBehavior">
+            <summary>
+            Controls how the AnalysisServices engine builds and persists DirectLake specific indexes.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at Preview or above.</remarks>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DirectLakeIndexingBehavior.Auto">
+            <summary>
+            The semantic model might build in-memory index during data load or query execution.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DirectLakeIndexingBehavior.Explicit">
+            <summary>
+            The semantic model will build and persist the index only when explicitly requested via a refresh indexes operation. Refresh types other than refresh indexes do not perform indexing.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DirectLakeIndexingBehavior.Full">
+            <summary>
+            The semantic model builds and persists indexes as part of refresh full, refresh calculate and refresh indexes operations.
+            </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.DirectLakeIndexingBehavior.Default">
+            <summary>
+            Applies the semantic model default index building and persistence behavior.
+            </summary>
+        </member>
         <member name="T:TabularEditor.TOMWrapper.EncodingHintType">
             <summary>
             Encoding hint to suggest whether a column should use hash encoding.
@@ -976,24 +1076,19 @@
             Value encoding
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.EvaluationBehavior">
+        <member name="T:TabularEditor.TOMWrapper.ExpressionContext">
             <summary>
-            Evaluation behavior for calculated column.
-            </summary><remarks>This enum is only supported when the compatibility level of the database is at Preview or above.</remarks>
+            Expression Context for calculated column.
+            </summary><remarks>This enum is only supported when the compatibility level of the database is at 1705 or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Automatic">
+        <member name="F:TabularEditor.TOMWrapper.ExpressionContext.Standard">
             <summary>
-            Default value, used for backward compatibility. Maps to Static or Dynamic depending on the table properties.
+            Expression uses only standard functions.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Static">
+        <member name="F:TabularEditor.TOMWrapper.ExpressionContext.UserContext">
             <summary>
-            Evaluation is performed during processing and the result is materialized.
-            </summary>
-        </member>
-        <member name="F:TabularEditor.TOMWrapper.EvaluationBehavior.Dynamic">
-            <summary>
-            Evaluation is performed dynamically and the result is not materialized.
+            Expression can include user-context functions.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.ExpressionKind">
@@ -1071,29 +1166,29 @@
             Do not reference this member directly in your code. It supports the Analysis Services infrastructure.
             </summary>
         </member>
-        <member name="T:TabularEditor.TOMWrapper.IndexBuildingMode">
+        <member name="T:TabularEditor.TOMWrapper.IndexingBehavior">
             <summary>
-            Column index's building behavior.
+            Controls how the AnalysisServices engine builds and persists indexes.
             </summary><remarks>This enum is only supported when the compatibility level of the database is at Preview or above.</remarks>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.IndexBuildingMode.Off">
+        <member name="F:TabularEditor.TOMWrapper.IndexingBehavior.Off">
             <summary>
-            Default behavior - the server will not build string column's suffix index
+            Indexing is disabled. The semantic model will not perform indexing during refresh operations.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.IndexBuildingMode.Auto">
+        <member name="F:TabularEditor.TOMWrapper.IndexingBehavior.Auto">
             <summary>
-            The server will build but not persist string column's suffix index
+            The semantic model might build in-memory index during data load or query execution.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.IndexBuildingMode.Explicit">
+        <member name="F:TabularEditor.TOMWrapper.IndexingBehavior.Explicit">
             <summary>
-            The server will build and persist string column's suffix index by RefreshIndex command
+            The semantic model will build and persist the index only when explicitly requested via a refresh indexes operation. Refresh types other than refresh indexes do not perform indexing.
             </summary>
         </member>
-        <member name="F:TabularEditor.TOMWrapper.IndexBuildingMode.Full">
+        <member name="F:TabularEditor.TOMWrapper.IndexingBehavior.Full">
             <summary>
-            The server will build and persist string column's suffix index by either RefreshRecalc, RefreshFull or RefreshIndex command
+            The semantic model builds and persists indexes as part of refresh full, refresh calculate and refresh indexes operations.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.MetadataCategory">
@@ -1425,6 +1520,11 @@
             <summary>
             Defragment the data in the specified table. As data is added to or removed from a table, the dictionaries of each column can become polluted with values that no longer exist in the actual column values. The defragment option will clean up the values in the dictionaries that are no longer used.
             </summary>
+        </member>
+        <member name="F:TabularEditor.TOMWrapper.RefreshType.Indexes">
+            <summary>
+            Refresh indexes.
+            </summary><remarks>This value is only supported when the compatibility level of the database is at Preview or above.</remarks>
         </member>
         <member name="T:TabularEditor.TOMWrapper.RelationshipEndCardinality">
             <summary>
@@ -2040,10 +2140,10 @@
             The DAX expression that is evaluated for the calculated column.
             </summary>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.CalculatedColumn.EvaluationBehavior">
+        <member name="P:TabularEditor.TOMWrapper.CalculatedColumn.ExpressionContext">
             <summary>
-            Evaluation behavior for calculated column.
-            </summary><remarks>This property is only supported when the compatibility level of the database is at Preview or above.</remarks>
+            Expression context for calculated column.
+            </summary><remarks>This property is only supported when the compatibility level of the database is at 1705 or above.</remarks>
         </member>
         <member name="M:TabularEditor.TOMWrapper.CalculatedColumn.CreateNew(TabularEditor.TOMWrapper.Table,System.String)">
             <summary>
@@ -2309,7 +2409,7 @@
             A tag that represents the lineage of the source for the object.
             </summary><remarks>This property is only supported when the compatibility level of the database is at 1550 or above.</remarks>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.Column.StringIndex">
+        <member name="P:TabularEditor.TOMWrapper.Column.StringIndexingBehavior">
             <summary>
             This property allows building and persisting of string column's index. A column may use one of the following values: Off, Auto, Explicit or Full. Default value for the property is Auto. Setting it to Auto will build an index but not persist it. Setting it to Explicit will build and persist an index by running command RefreshIndex. Setting it to Full will build and persist an index by running either RefreshRecalc, RefreshFull or RefreshIndex command.
             </summary><remarks>This property is only supported when the compatibility level of the database is at Preview or above.</remarks>
@@ -2333,9 +2433,9 @@
             </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Column.InPerspective">
-            <Summary>
+            <summary>
             Collection of perspectives in which this Column is visible.
-            </Summary>
+            </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Column.TranslatedDescriptions">
             <summary>
@@ -2578,9 +2678,9 @@
             Sets the SourceLineageTag property of all objects in the collection at once.
             </summary>
         </member>
-        <member name="P:TabularEditor.TOMWrapper.ColumnCollection.StringIndex">
+        <member name="P:TabularEditor.TOMWrapper.ColumnCollection.StringIndexingBehavior">
             <summary>
-            Sets the StringIndex property of all objects in the collection at once.
+            Sets the StringIndexingBehavior property of all objects in the collection at once.
             </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.ColumnCollection.SortByColumn">
@@ -2914,6 +3014,9 @@
             Deletes this column mapping from the calendar.
             </summary>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.CalendarColumnGroup.OnPropertyChanged(System.String,System.Object,System.Object)">
+            <inheritdoc/>
+        </member>
         <member name="T:TabularEditor.TOMWrapper.CalendarColumnGroupCollection">
             <summary>
             Collection class for CalendarColumnGroup. Provides convenient properties for setting a property on multiple objects at once.
@@ -3001,6 +3104,9 @@
             with camel case splitting.</remarks>
             <returns>A string that represents the object. The format is either "(Unassigned)" if the primary column is null, or
             "<c>PrimaryColumn.DaxObjectName</c> (<c>TimeUnit</c>)" with the time unit formatted.</returns>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.TimeUnitColumnAssociation.OnPropertyChanged(System.String,System.Object,System.Object)">
+            <inheritdoc/>
         </member>
         <member name="T:TabularEditor.TOMWrapper.TimeRelatedColumnGroup">
             <summary>
@@ -3213,9 +3319,9 @@
             <summary>The parent table of the current Hierarchy.</summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Hierarchy.InPerspective">
-            <Summary>
+            <summary>
             Collection of perspectives in which this Hierarchy is visible.
-            </Summary>
+            </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Hierarchy.TranslatedDescriptions">
             <summary>
@@ -3948,9 +4054,9 @@
             <summary>The parent table of the current Measure.</summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Measure.InPerspective">
-            <Summary>
+            <summary>
             Collection of perspectives in which this Measure is visible.
-            </Summary>
+            </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Measure.TranslatedDescriptions">
             <summary>
@@ -4300,8 +4406,13 @@
         </member>
         <member name="P:TabularEditor.TOMWrapper.Model.MetadataAccessPolicy">
             <summary>
-            The policy that applies to the users with read permissions only and controls their access to various metadata elements.
+            The policy applies to users with read permissions only and controls their access to various metadata elements.
             </summary><remarks>This property is only supported when the compatibility level of the database is at 1703 or above.</remarks>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Model.DefaultDirectLakeIndexingBehavior">
+            <summary>
+            The default indexing behavior for Direct Lake.
+            </summary><remarks>This property is only supported when the compatibility level of the database is at Preview or above.</remarks>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Model.DefaultMeasure">
             <summary>
@@ -5865,10 +5976,15 @@
             An indication whether the table is excluded from the automatic aggregations feature.
             </summary><remarks>This property is only supported when the compatibility level of the database is at 1572 or above.</remarks>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.Table.DirectLakeIndexingBehavior">
+            <summary>
+            Table indexing behavior for Direct Lake.
+            </summary><remarks>This property is only supported when the compatibility level of the database is at Preview or above.</remarks>
+        </member>
         <member name="P:TabularEditor.TOMWrapper.Table.InPerspective">
-            <Summary>
+            <summary>
             Collection of perspectives in which this Table is visible.
-            </Summary>
+            </summary>
         </member>
         <member name="P:TabularEditor.TOMWrapper.Table.TranslatedDescriptions">
             <summary>
@@ -6278,6 +6394,11 @@
         <member name="P:TabularEditor.TOMWrapper.TableCollection.ExcludeFromAutomaticAggregations">
             <summary>
             Sets the ExcludeFromAutomaticAggregations property of all objects in the collection at once.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TableCollection.DirectLakeIndexingBehavior">
+            <summary>
+            Sets the DirectLakeIndexingBehavior property of all objects in the collection at once.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.WindowsModelRoleMember">
@@ -7428,6 +7549,12 @@
             <param name="column">The column to check</param>
             <returns>True if the column is in a time-related column group; otherwise, false</returns>
         </member>
+        <member name="M:TabularEditor.TOMWrapper.Calendar.OnPropertyChanging(System.String,System.Object,System.Boolean@,System.Boolean@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TabularEditor.TOMWrapper.Calendar.OnPropertyChanged(System.String,System.Object,System.Object)">
+            <inheritdoc/>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.Calendar.MoveTo(TabularEditor.TOMWrapper.Table)">
             <summary>
             Moves this calendar to a different table by deleting it and recreating it on the target table.
@@ -7497,6 +7624,9 @@
             "Calendar" property in the Property Grid, which will open the CalendarCollectionEditor when
             clicked.
             </summary>
+        </member>
+        <member name="E:TabularEditor.TOMWrapper.CalendarCollection.PropertyChanged">
+            <inheritdoc/>
         </member>
         <member name="P:TabularEditor.TOMWrapper.CalculatedTable.Expression">
             <summary>
@@ -8271,6 +8401,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:TabularEditor.TOMWrapper.TabularModelHandler.Version">
+            <summary>
+            -1 indicates that the TabularModelHandler is not connected, i.e. the TOM.Database object
+            does not have a connection to a TOM.Server object. Any other value indicates connection
+            (the value itself is tracked by the server).
+            </summary>
+        </member>
         <member name="M:TabularEditor.TOMWrapper.TabularModelHandler.BeginUpdate(System.String,TabularEditor.TOMWrapper.Undo.UndoGroup)">
             <summary>
             Begins a batch update
@@ -8439,6 +8576,16 @@
         <member name="P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.DisallowDirectLake">
             <summary>
             When this is set to true, the TOMWrapper will not allow you to create DirectLake partitions.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.TabularModelHandlerSettings.SynchronousSemanticAnalysisAfterRollback">
+            <summary>
+            When true, <see cref="M:TabularEditor.TOMWrapper.TabularModelHandler.EndUpdate(System.Boolean,System.Boolean,System.Boolean)"/> and <see cref="M:TabularEditor.TOMWrapper.TabularModelHandler.EndUpdateAll(System.Boolean)"/> synchronously runs and waits for a full
+            semantic re-analysis before returning, so subsequent mutations see a consistent
+            dependency graph (e.g. auto-fixup on a rename will correctly find DAX references to
+            the renamed object). The default (false) preserves async UI behaviour where the slight
+            delay before the analysis settles is acceptable; the CLI sets this to true so a
+            follow-up command never observes mid-rebuild state.
             </summary>
         </member>
         <member name="T:TabularEditor.TOMWrapper.TabularNamedObject">
@@ -8730,6 +8877,36 @@
         <member name="P:TabularEditor.TOMWrapper.Undo.UndoManager.AtCheckpoint">
             <summary>
             Returns true if no changes have been done relative to the last checkpoint set.
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Undo.UndoManager.UndoSize">
+            <summary>
+            The number of items in the UndoStack including batch action begin/end markers
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Undo.UndoManager.UndoActions">
+            <summary>
+            The number of atomic actions in the UndoStack (doesn't include batch action begin/end markers)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Undo.UndoManager.UndoSteps">
+            <summary>
+            The number of steps in the UndoStack. This only counts actions at the root level (i.e. a batch action is only counted once, regardless of how many actions is inside the batch)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Undo.UndoManager.RedoSize">
+            <summary>
+            The number of items in the RedoStack including batch action begin/end markers
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Undo.UndoManager.RedoActions">
+            <summary>
+            The number of atomic actions in the RedoStack (doesn't include batch action begin/end markers)
+            </summary>
+        </member>
+        <member name="P:TabularEditor.TOMWrapper.Undo.UndoManager.RedoSteps">
+            <summary>
+            The number of steps in the RedoStack. This only counts actions at the root level (i.e. a batch action is only counted once, regardless of how many actions is inside the batch)
             </summary>
         </member>
         <member name="M:TabularEditor.TOMWrapper.Undo.UndoManager.Rollback(System.Boolean)">
@@ -9049,6 +9226,11 @@
             {0}.
              </summary>
         </member>
+        <member name="P:TabularEditor.LocalizableStrings.UnableToQueryDatabasesFromServer">
+            <summary>
+              Looks up a localized string similar to Unable to query databases from server: {0}.
+            </summary>
+        </member>
         <member name="T:TabularEditor.NonLocalizableStrings">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -9083,47 +9265,6 @@
         <member name="P:TabularEditor.NonLocalizableStrings.ErrorWhileRemovingUnusedFilesTmdl">
             <summary>
               Looks up a localized string similar to Error while removing unused files from TMDL folder structure: {0}.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.PropertyGridUI.CollectionEditors.CultureCollectionEditor">
-            <summary>
-            This Collection Editor for Cultures doesn't allow new cultures to be defined without setting the 'Language' property
-            </summary>
-        </member>
-        <member name="T:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1">
-            <summary>
-            A CollectionEditor that automatically refreshes the parent PropertyGrid when the CollectionEditor form is closed.
-            Moreover, it will automatically call BeginUpdate and EndUpdate on the TabularModelHandler.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1.#ctor">
-            <summary>
-            A CollectionEditor that automatically refreshes the parent PropertyGrid when the CollectionEditor form is closed.
-            Moreover, it will automatically call BeginUpdate and EndUpdate on the TabularModelHandler.
-            </summary>
-        </member>
-        <member name="M:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1.GetEditableCollection(System.Object)">
-            <summary>
-            Provide the initial collection of items to be shown in the CollectionEditor form.
-            Note: items are not added/removed from this collection while the user is interacting
-            with the CollectionEditor form. Instead, the SetEditableCollection method is called
-            when the user hits the "OK" button. If you need to perform special actions when items
-            are added/removed, override the CreateInstance and DestroyInstance methods.
-            </summary>
-            <param name="editValue"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TabularEditor.PropertyGridUI.CollectionEditors.GenericCollectionEditor`1.SetEditableCollection(System.Collections.Generic.IList{`0})">
-            <summary>
-            Override this method to update the collection property of the object being edited
-            This is only called when the user hits the "OK" button in the CollectionEditor form.
-            You may also throw an exception here to prevent the user from closing the form.</summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="T:TabularEditor.PropertyGridUI.CollectionEditors.TabularObjectCollectionEditor`1">
-            <summary>
-            A CollectionEditor that works natively with TabularObjectCollections, and automatically refreshes the parent PropertyGrid when the CollectionEditor form is closed.
             </summary>
         </member>
         <member name="T:TabularEditor.PropertyGridUI.Converters.Currency">
@@ -9292,42 +9433,28 @@
             complex class that can be converter to and from the FormatString string.
             </summary>
         </member>
-        <member name="T:TabularEditor.PropertyGridUI.ICustomEditor">
-            <summary>
-            The CustomEditors static class, can be used to register custom editors that should be used when
-            a specified property is edited in the PropertyGrid. An editor provided this way, must implement
-            the ICustomEditor interface.
-            
-            An example of a custom editor is the FormDisplayFolderSelect which displays a hierarchical view
-            of Display Folders in a table. The editor is used for editing Display Folder strings in the
-            property grid.
-            
-            Properties that should be editable in a Custom Editors, must be decorated with the Editor attribute
-            like so:
-            
-                [Editor(typeof(CustomDialogEditor), typeof(System.Drawing.Design.UITypeEditor))]
-                public string FormatString { get; set; }
-            </summary>
-        </member>
         <member name="T:TabularEditor.PropertyGridUI.IExpandableIndexer">
             <summary>
-            This interface must be implemented by dictionary-type properties on a class, such as
-            annotations, translations, etc.
+            Stub for IExpandableIndexer. On Windows, this enables dictionary-type
+            properties to be expanded in the PropertyGrid.
             </summary>
-        </member>
-        <member name="M:TabularEditor.PropertyGridUI.IExpandableIndexer.GetDisplayName(System.String)">
-            <summary>
-            Gets the value to display for a given key. Note, this is not the value of the object represented by the key. 
-            </summary>
-            <param name="key"></param>
-            <returns></returns>
         </member>
         <member name="T:TabularEditor.PropertyGridUI.IDropDownProperties">
             <summary>
-            This interface must be implemented by objects containing one or more property that
-            should show up as a drop-down list in the PropertyGrid. The interface provides a
-            means for the DropDown typeconverter to get the list of string items to display in
-            the drop down.
+            Stub for IDropDownProperties. On Windows, this enables properties to
+            show as dropdown lists in the PropertyGrid.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.PropertyGridUI.IndexerConverter">
+            <summary>
+            Stub for IndexerConverter. The real implementation lives in DictionaryProperty.cs
+            which is WinForms-coupled and excluded from cross-platform builds.
+            </summary>
+        </member>
+        <member name="T:TabularEditor.PropertyGridUI.DataCoverageDefinitionConverter">
+            <summary>
+            Stub for DataCoverageDefinitionConverter. The real implementation lives in
+            AlternateOfEditor.cs which is WinForms-coupled.
             </summary>
         </member>
         <member name="T:TabularEditor.PropertyGridUI.NoMultiselectAttribute">
@@ -9346,20 +9473,6 @@
             <summary>
             Use this to indicate that a method call corresponds to resetting the property. This will set the <see cref="P:TabularEditor.PropertyGridUI.PropertyAction.IsResetAction"/> to true,
             indicating to clients that it is not necessary to show an explicit "Reset" menu option, when the action is available.
-            </summary>
-        </member>
-        <member name="T:TabularEditor.DesignerHost">
-            <summary>
-            The DesignerHost is a custom implementation of IDesignerHost and ISite, which is needed to hookup
-            any PropertyGrid components used in the UI to enable proper Undo/Redo functionality. Otherwise,
-            when changing the properties of multiple objects at once, the operation is not batched, meaning
-            that the UI will be updated when a property value is set for every object in the selection. This
-            will cause slow updates when many objects are selected, and furthermore, undoing the entire operation
-            is a hassle, as one Undo-action is needed per object.
-            
-            To set up a PropertyGrid to use this host, use the following code:
-            
-                MyPropertyGrid.Site = new DesignerHost();
             </summary>
         </member>
         <member name="M:TabularEditor.Semantics.SemanticAnalysisCascader.ApplyChanges">
@@ -9611,6 +9724,12 @@
             <returns></returns>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
+        <member name="M:TabularEditor.TabularNamedObjectExtension.GetObjectId(TabularEditor.TOMWrapper.TabularNamedObject)">
+            <summary>
+            Returns the server-assigned object ID of the underlying TOM metadata object,
+            or <c>null</c> if no ID has been assigned (e.g. the model is not connected to a server).
+            </summary>
+        </member>
         <member name="T:TabularEditor.XmlaResultExtension">
             <summary>
             Extension methods for <see cref="T:Microsoft.AnalysisServices.XmlaResultCollection"/>
@@ -9692,6 +9811,31 @@
         <member name="M:Microsoft.AnalysisServices.Tabular.Helper.MetadataObjectHelper.ValidateName(Microsoft.AnalysisServices.Tabular.NamedMetadataObject,System.String)">
             <summary>
             Throws an exception of the provided new name is invalid for the specified object.
+            </summary>
+        </member>
+        <member name="T:System.Drawing.Design.UITypeEditor">
+            <summary>
+            Stub for System.Drawing.Design.UITypeEditor (Windows Forms only).
+            </summary>
+        </member>
+        <member name="T:System.ComponentModel.Design.MultilineStringEditor">
+            <summary>
+            Stub for System.ComponentModel.Design.MultilineStringEditor (Windows Forms only).
+            </summary>
+        </member>
+        <member name="T:System.Windows.Forms.MessageBoxButtons">
+            <summary>
+            Stub for System.Windows.Forms.MessageBoxButtons (Windows Forms only).
+            </summary>
+        </member>
+        <member name="T:System.Windows.Forms.MessageBoxIcon">
+            <summary>
+            Stub for System.Windows.Forms.MessageBoxIcon (Windows Forms only).
+            </summary>
+        </member>
+        <member name="T:System.Windows.Forms.DialogResult">
+            <summary>
+            Stub for System.Windows.Forms.DialogResult (Windows Forms only).
             </summary>
         </member>
     </members>
