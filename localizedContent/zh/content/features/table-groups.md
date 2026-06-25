@@ -2,7 +2,7 @@
 uid: table-groups
 title: 表格组
 author: Daniel Otykier
-updated: 2023-03-08
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,6 +24,8 @@ applies_to:
 ![表格组](~/content/assets/images/user-interface/table-groups.png)
 
 你可以通过两种方式创建表格组：在表格上右键并选择 **创建 > 表格组** 菜单选项；或者在选中一个或多个表格时，在 **属性视图** 中为表格组指定名称。
+
+你也可以在选中一个或多个表后，通过右键菜单中的 **移至组** 子菜单进行操作。 该子菜单会列出现有的表格组、用于根据所选表创建新组并打开组名编辑器的 **(新建...)** 项，以及用于取消表格组归属的 **(无)** 项。
 
 你可以在 TOM Explorer 中通过拖放，将表格在不同表格组之间移动。 注意：与度量值、列和层次结构的显示文件夹不同，表格组不能嵌套。
 
