@@ -18,6 +18,10 @@ Options:
     --serve         Build and serve locally (English only, for development)
     --skip-gen      Skip running gen_redirects.py (use existing configs)
     --no-api-copy   Skip copying API docs to localized sites
+    --skip-api      Reuse existing content/api instead of regenerating API metadata
+                    (~30-40% faster). LOCAL markdown iteration ONLY, with --serve/--lang;
+                    never for testing, CI/CD, or release builds.
+    --permissive    Don't fail the English build on DocFX warnings (local iteration)
 """
 
 import argparse
@@ -79,6 +83,62 @@ def run_command(cmd: list[str], description: str, check: bool = True, fail_on_wa
         return result.returncode
 
     return result.returncode
+
+
+DOCFX: list[str] = []          # cache; populated on first ensure_docfx()
+
+
+def _local_docfx_available() -> bool:
+    """True if a dotnet tool manifest in cwd or an ancestor declares docfx.
+
+    Mirrors dotnet's manifest discovery (cwd upward, `.config/` or legacy path,
+    stop at an isRoot manifest). Filesystem-only — does not verify the tool is
+    restored; a missing restore surfaces as a clear `dotnet docfx` error at build time.
+    """
+    for d in (Path.cwd(), *Path.cwd().parents):
+        manifest = next((m for m in (d / ".config" / "dotnet-tools.json",
+                                      d / "dotnet-tools.json") if m.is_file()), None)
+        if manifest is None:
+            continue
+        try:
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        if "docfx" in {k.lower() for k in data.get("tools", {})}:
+            return True
+        if data.get("isRoot"):
+            break  # root manifest without docfx: dotnet stops searching here too
+    return False
+
+
+def resolve_docfx() -> list[str]:
+    """Resolve how to invoke docfx: $DOCFX override, then a repo-pinned local tool
+    (`dotnet docfx`), then a global/PATH `docfx`. Raises if none is available."""
+    override = os.environ.get("DOCFX")
+    if override:
+        return override.split()
+    if shutil.which("dotnet") and _local_docfx_available():
+        return ["dotnet", "docfx"]
+    if shutil.which("docfx"):
+        return ["docfx"]
+    raise SystemExit(
+        "Error: docfx not found.\n"
+        "  Local:  dotnet tool install docfx   (then `dotnet tool restore`)\n"
+        "  Global: dotnet tool install -g docfx"
+    )
+
+
+def ensure_docfx() -> list[str]:
+    """Return the docfx invocation prefix, resolving (and caching) it on first use."""
+    global DOCFX
+    if not DOCFX:
+        DOCFX = resolve_docfx()
+    return DOCFX
+
+
+def run_docfx(args: list[str], description: str, **kwargs) -> int:
+    """Run docfx with the resolved invocation prefix (global/PATH or `dotnet docfx`)."""
+    return run_command([*ensure_docfx(), *args], description, **kwargs)
 
 
 def get_available_languages() -> list[str]:
@@ -151,7 +211,7 @@ def prepare_localized_content(lang: str, sync: bool = False) -> int:
     )
 
 
-def build_language(lang: str, sync: bool = False) -> int:
+def build_language(lang: str, sync: bool = False, skip_api: bool = False, permissive: bool = False) -> int:
     """Build documentation for a specific language."""
     config_path = f"localizedContent/{lang}/docfx.json"
 
@@ -164,14 +224,20 @@ def build_language(lang: str, sync: bool = False) -> int:
     result = prepare_localized_content(lang, sync=sync)
     if result != 0:
         return result
-    
+
     # Build the documentation — fail on DocFX warnings only for English (the
     # authored source). Localized content is Crowdin-managed and may carry
-    # translation warnings that must not block deployment.
-    return run_command(
-        ["docfx", config_path],
+    # translation warnings that must not block deployment. `permissive` lifts the
+    # English gate too, for local iteration where transient warnings are expected
+    # (warnings are still printed, just not fatal); full/CI builds leave it off.
+    #
+    # `docfx build` skips API metadata regeneration and reuses the existing
+    # content/api/*.yml (the _apiSource DLLs don't change between content edits),
+    # which is ~30-40% faster; bare `docfx` regenerates metadata then builds.
+    return run_docfx(
+        [*(["build"] if skip_api else []), config_path],
         f"Building {lang} documentation",
-        fail_on_warnings=(lang == "en")
+        fail_on_warnings=(lang == "en" and not permissive)
     )
 
 
@@ -279,7 +345,9 @@ def main() -> int:
     parser.add_argument("--list", action="store_true", help="List available languages")
     parser.add_argument("--serve", action="store_true", help="Build English and serve locally")
     parser.add_argument("--skip-gen", action="store_true", help="Skip gen_redirects.py")
-    parser.add_argument("--no-api-copy", action="store_true", help="Skip copying API docs")
+    parser.add_argument("--no-api-copy", action="store_true", help="Skip copying API docs to localized sites")
+    parser.add_argument("--skip-api", action="store_true", help="LOCAL markdown iteration only (requires --serve/--lang): reuse existing content/api, ~30-40%% faster. NEVER for testing/CI/CD/releases")
+    parser.add_argument("--permissive", action="store_true", help="Don't treat English DocFX warnings as build failures (for local iteration; keep full/CI builds strict)")
     parser.add_argument("--sync", action="store_true", help="Sync English fallback for missing/outdated translations (for local dev)")
     
     args = parser.parse_args()
@@ -292,7 +360,39 @@ def main() -> int:
             suffix = " (default)" if lang == "en" else ""
             print(f"  {lang}{suffix}")
         return 0
-    
+
+    # Resolve docfx now so a missing install exits before any build work happens.
+    ensure_docfx()
+
+    # --skip-api is strictly a fast LOCAL iteration aid for editing markdown: it reuses
+    # the existing content/api/*.yml instead of regenerating API metadata. It must NEVER
+    # be used for full builds, testing, CI/CD, or releases (those must regenerate the API).
+    # Guard it conservatively: require an explicit single-target (--serve or --lang),
+    # forbid --all / the default all-languages build, and require API metadata to already
+    # exist so we never silently ship a site with missing or stale API docs.
+    if args.skip_api:
+        if args.all or not (args.serve or args.lang):
+            print(
+                "Error: --skip-api is for fast LOCAL iteration only and must target a single build.\n"
+                "       Use it with --serve or --lang (e.g. `--serve --skip-api`, `--lang en --skip-api`).\n"
+                "       Never use it for --all, testing, CI/CD, or release builds — omit it so API\n"
+                "       metadata is regenerated.",
+                file=sys.stderr,
+            )
+            return 1
+        if not list(Path("content/api").glob("*.yml")):
+            print(
+                "Error: --skip-api reuses existing API metadata, but content/api/*.yml is missing.\n"
+                "       Run a full build once (e.g. `python3 build-docs.py --lang en`) to generate it.",
+                file=sys.stderr,
+            )
+            return 1
+        print("\n" + "=" * 60)
+        print("  WARNING: --skip-api active — reusing existing content/api/*.yml.")
+        print("  Fast LOCAL markdown iteration ONLY; API docs may be stale.")
+        print("  NEVER use --skip-api for testing, CI/CD, or release builds.")
+        print("=" * 60)
+
     # Run gen_redirects.py first (unless skipped)
     if not args.skip_gen:
         result = run_command(
@@ -315,7 +415,7 @@ def main() -> int:
     
     if args.serve:
         # Build English only and serve
-        result = build_language("en", sync=True)
+        result = build_language("en", sync=True, skip_api=args.skip_api, permissive=args.permissive)
         if result != 0:
             return result
         
@@ -329,8 +429,8 @@ def main() -> int:
             shutil.copy(manifest_src, manifest_dest)
             print("Copied languages.json to _site/en/")
         
-        return run_command(
-            ["docfx", "serve", "_site/en"],
+        return run_docfx(
+            ["serve", "_site/en"],
             "Serving documentation locally"
         )
     
@@ -354,7 +454,7 @@ def main() -> int:
     
     # Build all requested languages
     for lang in build_langs:
-        result = build_language(lang, sync=args.sync)
+        result = build_language(lang, sync=args.sync, skip_api=args.skip_api, permissive=args.permissive)
         if result != 0:
             return result
         
