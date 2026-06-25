@@ -2,7 +2,7 @@
 uid: ai-assistant
 title: Asistente de IA
 author: Morten Lønskov
-updated: 2026-04-17
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -44,11 +44,11 @@ El Asistente de IA utiliza un modelo BYOK de clave aportada por el usuario. Tú 
 
 ## Proveedores compatibles
 
-Configura tu proveedor de IA en **Herramientas > Preferencias > Asistente de IA > Proveedor de IA**. Selecciona un proveedor en la lista desplegable — el valor predeterminado es **Ninguno (IA deshabilitada)** hasta que configures uno — introduce tu clave de API y, si lo deseas, reemplaza el modelo predeterminado. Para OpenAI y Anthropic, el campo **Nombre del modelo** es un cuadro combinado rellenado previamente con modelos conocidos; también puedes escribir un nombre de modelo personalizado.
+Configura tu proveedor de IA en **Herramientas > Preferencias > Asistente de IA > Proveedor de IA**. Selecciona un proveedor en la lista desplegable — el valor predeterminado es **Ninguno (IA deshabilitada)** hasta que configures uno — introduce tu clave de API y, si lo deseas, reemplaza el modelo predeterminado. Para OpenAI y Anthropic, el campo **Nombre del modelo** es un cuadro combinado que viene relleno con los modelos actuales —incluidos `claude-fable-5` y `claude-opus-4-8` de Anthropic, y `gpt-5.5` y `gpt-5.5-pro` de OpenAI—, de modo que puedes elegir un modelo reciente sin tener que escribir un ID personalizado. También puedes escribir un nombre de modelo personalizado.
 
 | Proveedor                                                | Modelo predeterminado            | Configuración necesaria                                                                |
 | -------------------------------------------------------- | -------------------------------- | -------------------------------------------------------------------------------------- |
-| OpenAI                                                   | gpt-4o                           | Clave de API. URL base, ID de organización e ID de proyecto opcionales |
+| OpenAI                                                   | gpt-5.5          | Clave de API. URL base, ID de organización e ID de proyecto opcionales |
 | Anthropic                                                | claude-sonnet-4-6                | Clave de API. URL base opcional                                        |
 | Azure OpenAI                                             | Dependiente de la implementación | Clave de API, URL del punto de conexión y nombre de la implementación                  |
 | Personalizado (compatible con OpenAI) | Especificado por el usuario      | Clave de API y URL personalizada del punto de conexión                                 |
@@ -57,7 +57,7 @@ Configura tu proveedor de IA en **Herramientas > Preferencias > Asistente de IA 
 
 ### OpenAI
 
-Selecciona **OpenAI** como proveedor e introduce tu clave de API. Opcionalmente, puedes especificar un ID de organización y un ID de proyecto si tu cuenta de OpenAI los usa. El modelo predeterminado es **gpt-4o**, pero puedes cambiarlo por cualquier modelo disponible en tu cuenta.
+Selecciona **OpenAI** como proveedor e introduce tu clave de API. Opcionalmente, puedes especificar un ID de organización y un ID de proyecto si tu cuenta de OpenAI los usa. El modelo predeterminado es **gpt-5.5**, pero puedes cambiarlo por cualquier modelo disponible en tu cuenta.
 
 ![Configuración de OpenAI en el Asistente de IA](~/content/assets/images/ai-assistant/ai-assistant-openai-config.png)
 
