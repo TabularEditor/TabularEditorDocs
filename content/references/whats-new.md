@@ -2,7 +2,7 @@
 uid: whats-new
 title: What's new
 author: Morten Lønskov
-updated: 2026-03-19
+updated: 2026-06-24
 ---
 <script>
     function resizeIframe(height) {
@@ -10,4 +10,4 @@ updated: 2026-03-19
       iframe.style.height = height + 'px';
     }
 </script>
-<iframe id="content-iframe" src="../whats-new/index.html?version=3.26.0" title="What's new" style="border:none;width:100%;"></iframe>
+<iframe id="content-iframe" src="../whats-new/index.html?version=3.26.2" title="What's new" style="border:none;width:100%;"></iframe>

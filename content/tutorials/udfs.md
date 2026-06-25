@@ -2,7 +2,7 @@
 uid: udfs
 title: DAX User-Defined Functions
 author: Daniel Otykier
-updated: 2026-03-19
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,7 +19,7 @@ applies_to:
 ---
 # DAX User-Defined Functions
 
-DAX User-Defined Functions (UDFs) is a new capability of semantic models introduced in Power BI Desktop with the September 2025 update.
+DAX User-Defined Functions (UDFs) are a capability of semantic models. The feature entered preview with the September 2025 update of Power BI Desktop and is [generally available](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) since the June 2026 release of Power BI.
 
 The feature lets you create reusable DAX functions that you can invoke from within any DAX expression of your model, even other functions. This powerful feature helps you maintain consistency, reduce code duplication, and create more maintainable DAX expressions.
 
@@ -132,7 +132,30 @@ In addition to specifying the evaluation mode, you can also constrain the parame
 
 These type specifications are optional, but if specified they will perform an implicit type conversion on arguments passed to the function, and will also affect the autocomplete suggestions in Tabular Editor 3 when writing DAX code that calls the function.
 
+Tabular Editor 3 validates arguments against the declared parameter types. If you call a UDF with an argument that doesn't match its parameter type — for example, passing a scalar value where a `TABLEREF` parameter is expected — the Semantic Analyzer reports a warning or error.
+
 Check the [Microsoft specification for UDFs](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions) for the complete list of available constraints.
+
+### Optional Parameters with Default Expressions
+
+Starting from version 3.26.2, Tabular Editor 3 supports optional parameters with default expressions. Append `= expression` after the parameter name (and after any type or evaluation-mode hints) to make the parameter optional. When the caller omits the argument, the default expression supplies the value.
+
+```dax
+FUNCTION AddTax =
+    (
+        amount: NUMERIC,        // Required parameter
+        taxRate: NUMERIC = 0.1  // Optional parameter, defaults to 10%
+    )
+    => amount * (1 + taxRate)
+```
+
+Calling `AddTax(10)` returns `11`, while `AddTax(10, 0.25)` returns `12.5`.
+
+A few rules govern optional parameters:
+
+- Callers can leave an argument empty to fall back to its default, e.g. `MyFunc(1,,3)` omits the second argument. The minimum number of arguments is determined by the position of the rightmost required parameter.
+- A default expression can only reference names (columns, tables, measures, functions) visible where the function is defined, and it can't reference another parameter of the same function.
+- Type checking against a parameter's type hint is enforced only when the default expression is used; an explicitly passed argument is checked against the hint instead.
 
 ## Using UDFs in Your Model
 
@@ -300,15 +323,15 @@ Tabular Editor 3 automatically picks up any comments and displays them appropria
 - Check the Microsoft documentation for supported constraint types
 
 **Function not working after deployment**
-- Verify your target environment supports UDFs (compatibility level 1702+). As of September 16th, 2025, the Power BI Service does not yet support UDFs, nor does Azure Analysis Services or SQL Server Analysis Services.
+- Verify your target environment supports UDFs (compatibility level 1702+). The Power BI Service supports UDFs as of the June 2026 release. Azure Analysis Services and SQL Server Analysis Services don't support UDFs.
 
 ## Limitations
 
-- Not all Power BI environments support UDFs (requires specific builds)
+- UDFs require compatibility level 1702 or higher; Azure Analysis Services and SQL Server Analysis Services don't support them
 - UDFs cannot be recursive (call themselves)
 
 > [!NOTE]
-> As of June 2026, UDFs are [generally available](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738). As part of this, UDFs now support default expressions / optional parameters. However, Tabular Editor 3 currently displays a false error message when the default expression syntax is used. This issue will be fixed in our next update of Tabular Editor 3.
+> With the [general availability](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738) of UDFs in June 2026, UDFs support optional parameters with default expressions. Tabular Editor 3 supports this syntax since version 3.26.2. Older versions display a false error message when you use the default expression syntax.
 
 ---
 
