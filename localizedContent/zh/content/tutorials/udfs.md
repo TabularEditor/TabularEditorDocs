@@ -2,7 +2,7 @@
 uid: udfs
 title: DAX 用户自定义函数
 author: Daniel Otykier
-updated: 2026-03-19
+updated: 2026-06-24
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -20,7 +20,7 @@ applies_to:
 
 # DAX 用户自定义函数
 
-DAX 用户自定义函数 (UDFs) 是语义模型的一项新功能，在 Power BI Desktop 的 2025 年九月更新中引入。
+DAX 用户自定义函数 (UDF) 是语义模型提供的一项能力。 该功能在 Power BI Desktop 2025 年九月更新中进入预览阶段，并自 Power BI 2026 年六月版本起[正式发布](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738)。
 
 该功能让你能够创建可复用的 DAX 函数，并可在模型中的任何 DAX 表达式里调用，甚至在其他函数中也能调用。 这个强大的功能可帮助你保持一致性、减少代码重复，并创建更易维护的 DAX 表达式。
 
@@ -133,7 +133,30 @@ ROW(
 
 这些类型说明是可选的，但一旦指定，它们会对传入函数的参数执行隐式类型转换；同时，也会影响在 Tabular Editor 3 中编写调用该函数的 DAX 代码时的自动完成建议。
 
+Tabular Editor 3 会根据已声明的参数类型验证实参。 如果你调用 UDF 时传入的实参与其参数类型不匹配——例如，在需要 `TABLEREF` 参数的位置传入标量值——语义分析器会 Report 警告或错误。
+
 可用约束的完整列表，请参阅 [Microsoft 的 UDF 规范](https://learn.microsoft.com/en-us/dax/best-practices/dax-user-defined-functions)。
+
+### 带默认表达式的可选参数
+
+从 3.26.2 版本开始，Tabular Editor 3 支持带默认表达式的可选参数。 在参数名称后（以及任何类型或求值模式提示之后）追加 `= expression`，即可将该参数设为可选。 调用方省略该实参时，将由默认表达式提供其值。
+
+```dax
+FUNCTION AddTax =
+    (
+        amount: NUMERIC,        // 必需参数
+        taxRate: NUMERIC = 0.1  // 可选参数，默认为 10%
+    )
+    => amount * (1 + taxRate)
+```
+
+调用 `AddTax(10)` 会返回 `11`，而 `AddTax(10, 0.25)` 会返回 `12.5`。
+
+可选参数遵循以下规则：
+
+- 调用方可以将实参留空，以回退到默认值，例如 `MyFunc(1,,3)` 省略了第二个实参。 最少参数个数由最右侧必需参数的位置决定。
+- 默认表达式只能引用在函数定义位置可见的名称（列、表、度量值、函数），并且不能引用同一函数的其他参数。
+- 只有在使用默认表达式时，才会按参数的类型提示进行类型检查；如果显式传入实参，则改为检查该实参是否符合该类型提示。
 
 ## 在模型中使用 UDF
 
@@ -311,15 +334,15 @@ Tabular Editor 3 会自动识别所有注释，并在自动完成建议和工具
 
 **部署后函数无法正常工作**
 
-- 确认目标环境支持 UDF（兼容级别 1702+）。 截至 2025 年九月十六日，Power BI 服务尚不支持 UDF，Azure Analysis Services 和 SQL Server Analysis Services 也同样不支持。
+- 确认目标环境支持 UDF（兼容级别 1702+）。 Power BI 服务自 2026 年六月版本起支持 UDF。 Azure Analysis Services 和 SQL Server Analysis Services 不支持 UDF。
 
 ## 局限性
 
-- 并非所有 Power BI 环境都支持 UDF（需要特定构建版本）
+- UDF 需要 1702 或更高的兼容级别；Azure Analysis Services 和 SQL Server Analysis Services 不支持 UDF
 - UDF 不能递归（调用自身）
 
 > [!NOTE]
-> 截至 2026 年六月，UDF 已 [正式可用](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738)。 作为其中的一部分，UDF 现已支持默认表达式和可选参数。 但是，在使用默认表达式语法时，Tabular Editor 3 目前会误报一条错误信息。 此问题将在 Tabular Editor 3 的下一次更新中修复。
+> 随着 UDF 于 2026 年六月[正式发布](https://community.fabric.microsoft.com/t5/Power-BI-Updates-Blog/DAX-User-Defined-Functions-Generally-Available/ba-p/5185738)，UDF 支持带默认表达式的可选参数。 Tabular Editor 3 自 3.26.2 版本起支持此语法。 较旧版本在使用默认表达式语法时会显示误报的错误信息。
 
 ---
 

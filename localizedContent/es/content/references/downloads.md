@@ -2,7 +2,7 @@
 uid: downloads
 title: Todas las descargas
 author: Daniel Otykier
-updated: 2026-04-17
+updated: 2026-06-25
 ---
 
 # Descargas de Tabular Editor 3
@@ -11,14 +11,14 @@ Esta página ofrece instrucciones de descarga e instalación para Tabular Editor
 
 ## Última versión
 
-Descargas de Tabular Editor 3.26.1 para **.NET 8**:
+Descargas de Tabular Editor 3.26.2 para **.NET 8**:
 
-- Descargar [Tabular Editor 3.26.1 (64 bits)](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.Installer.x64.Net8.exe) _(recomendado)_
-- Descargar [Tabular Editor 3.26.1 (ARM64)](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.Installer.ARM64.Net8.exe)
-- Versiones portátiles: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.ARM64.Net8.zip)
-- Versión MSI: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.ARM64.Net8.msi)
+- Descargar [Tabular Editor 3.26.2 (64 bits)](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.Installer.x64.Net8.exe) _(recomendado)_
+- Descargar [Tabular Editor 3.26.2 (ARM64)](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.Installer.ARM64.Net8.exe)
+- Versiones portátiles: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.ARM64.Net8.zip)
+- Versión MSI: [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.ARM64.Net8.msi)
 
-Lee las [últimas notas de la versión](release-notes/3_26_1.md).
+Lee las [notas de la versión más reciente](release-notes/3_26_2.md).
 
 ## Instrucciones de instalación
 
@@ -30,6 +30,10 @@ No es necesario desinstalar versiones anteriores al actualizar a una versión m�
 
 ## Historial
 
+- 2026-06-25 **Tabular Editor 3.26.2** (_[Notas de la versión](release-notes/3_26_2.md)_)
+  - .NET 8 instalador (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.Installer.ARM64.Net8.exe)
+  - .NET 8 portátil (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.ARM64.Net8.zip)
+  - .NET 8 instalador (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.x64.Net8.msi), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.2.ARM64.Net8.msi)
 - 2026-04-17 **Tabular Editor 3.26.1** (_[Notas de la versión](release-notes/3_26_1.md)_)
   - Instalador de .NET 8 (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.Installer.x64.Net8.exe), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.Installer.ARM64.Net8.exe)
   - Versión portátil de .NET 8 (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.x64.Net8.zip), [ARM64](https://cdn.tabulareditor.com/files/TabularEditor.3.26.1.ARM64.Net8.zip)
@@ -62,16 +66,5 @@ No es necesario desinstalar versiones anteriores al actualizar a una versión m�
   - .NET 8 instalador (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.22.1.Installer.x64.Net8.exe), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.22.1.Installer.x86.Net8.exe)
   - .NET 8 portátil (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.22.1.x64.Net8.zip), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.22.1.x86.Net8.zip)
   - .NET 8 instalador (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.22.1.x64.Net8.msi), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.22.1.x86.Net8.msi)
-- 2025-04-25 **Tabular Editor 3.21.0** (_[Notas de la versión](release-notes/3_21_0.md)_)
-  - .NET 8 instalador (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.21.0.Installer.x64.Net8.exe), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.21.0.Installer.x86.Net8.exe)
-  - .NET 8 portátil (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.21.0.x64.Net8.zip), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.21.0.x86.Net8.zip)
-  - .NET 8 instalador (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.21.0.x64.Net8.msi), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.21.0.x86.Net8.msi)
-- 2025-04-11 **Tabular Editor 3.20.1** (_[Notas de la versión](release-notes/3_20_1.md)_)
-  - .NET 8 instalador (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.Installer.x64.Net8.exe), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.Installer.x86.Net8.exe)
-  - .NET 8 portátil (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.x64.Net8.zip), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.x86.Net8.zip)
-  - .NET 8 instalador (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.x64.Net8.msi), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.x86.Net8.msi)
-  - .NET 6 instalador (.exe): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.Installer.x64.exe), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.Installer.x86.exe)
-  - .NET 6 portátil (.zip): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.x64.zip), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.x86.zip)
-  - .NET 6 instalador (.msi): [x64](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.x64.msi), [x86](https://cdn.tabulareditor.com/files/TabularEditor.3.20.1.x86.msi)
 
 Para versiones anteriores, consulta el [historial completo de versiones](release-history.md).
