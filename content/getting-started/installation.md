@@ -17,13 +17,14 @@ applies_to:
           full: true
 ---
 
+# Advanced installation and activation
+
 ## Overview
 
 This page covers advanced installation and activation scenarios for Tabular Editor 3: manual (offline) activation, registry-based license management, silent deployment, and Enterprise seat administration.
 
 For the standard activation flow, see @getting-started.
 
-<a name="manual-activation-no-internet"></a>
 ## Manual activation (no internet)
 
 If you do not have access to the internet, for example due to a proxy, Tabular Editor prompts you to do a manual activation.
@@ -49,7 +50,6 @@ To change an Enterprise seat, deregister the existing user from the seat through
 > [!NOTE]
 > Changing a user is only possible on the Enterprise Edition.
 
-<a name="registry-details"></a>
 ## Registry details
 
 Tabular Editor 3 uses the Windows Registry to store activation details.

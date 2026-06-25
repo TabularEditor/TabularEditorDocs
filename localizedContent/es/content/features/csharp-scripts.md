@@ -2,7 +2,7 @@
 uid: csharp-scripts
 title: C# Scripts
 author: Daniel Otykier
-updated: 2026-03-19
+updated: 2026-05-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -15,6 +15,8 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
+    - product: CLI de Tabular Editor
+      full: true
 ---
 
 # C# Scripts
@@ -291,8 +293,6 @@ Además, los siguientes ensamblados de .NET Framework se cargan de forma predete
 - TabularEditor.Exe
 - Microsoft.AnalysisServices.Tabular.Dll
 
-<a name="accessing-environment-variables"></a>
-
 ## Acceso a variables de entorno
 
 Al ejecutar scripts de C# mediante la CLI de Tabular Editor (especialmente en canalizaciones de CI/CD), puedes pasar parámetros a tus scripts usando variables de entorno. Este es el enfoque recomendado, ya que los C# Scripts ejecutados por Tabular Editor CLI no admiten argumentos tradicionales de línea de comandos.
@@ -373,21 +373,28 @@ foreach(var table in Model.Tables)
 Info($"Modelo configurado para el entorno {environment}");
 ```
 
-<a name="compatibility"></a>
-
 ## Compatibilidad
 
-Las API de scripting de Tabular Editor 2 y Tabular Editor 3 son en gran medida compatibles. Sin embargo, en algunos casos conviene compilar el código condicionalmente en función de la versión que estés usando. Para ello, puedes usar directivas de preprocesador, que se introdujeron en Tabular Editor 3.10.0.
+Las API de scripting de Tabular Editor 2, Tabular Editor 3 (Desktop) y la CLI de Tabular Editor son compatibles en su mayor parte, pero hay casos en los que conviene compilar el código de forma condicional según el host en el que se ejecute. El host de la CLI define un símbolo de preprocesador `TECLI`; TE3 Desktop define `TE3` (y símbolos dependientes de la versión, como `TE3_3_15_OR_GREATER`, para la versión secundaria activa); TE2 no define ninguno de los dos. Las directivas de preprocesador se introdujeron en Tabular Editor 3.10.0. Úsalas para escribir scripts portátiles:
 
 ```csharp
-#if TE3
-    // This code will only be compiled when the script is running in TE3 (version 3.10.0 or newer).
-    Info("Hello from TE3!");
+#if TECLI
+    // Host de la CLI: no hay APIs de UI disponibles
+    Info($"Se está ejecutando en la CLI en {Environment.OSVersion.Platform}");
+#elif TE3
+    // TE3 Desktop: hay APIs de UI disponibles
+    ShowMessage("Hola desde TE3");
 #else
-    // This code will be compiled in all other cases.
-    Info("Hello from TE2!");
+    // TE2 (heredado): no se define ni TECLI ni TE3
+    Info("Hola desde TE2");
+#endif
+
+#if TE3_3_15_OR_GREATER
+    // Condicionado a una versión secundaria específica de TE3
 #endif
 ```
+
+Una salvedad específica de la CLI: los ayudantes de UI de TE3 Desktop `SelectMeasure()`, `SelectTable()`, `SelectColumn()`, `SelectObject()` y `SelectObjects()` lanzan `NotSupportedException` al ejecutar `te script`, ya que la CLI no tiene una interfaz de usuario para mostrar. Envuelve esas llamadas en `#if TE3` (o en `try/catch`) cuando compartas scripts entre distintos hosts.
 
 Si necesitas conocer la versión exacta de Tabular Editor en tiempo de ejecución del script, puedes inspeccionar la versión del ensamblado:
 

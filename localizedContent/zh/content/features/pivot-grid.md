@@ -2,7 +2,7 @@
 uid: pivot-grid
 title: Pivot Grid
 author: Daniel Otykier
-updated: 2024-05-28
+updated: 2026-05-27
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -39,7 +39,7 @@ applies_to:
 > - Pivot Grid 中的**单元格**是行与列交叉处的单个数据点。 每个单元格仅包含一个值。该值是在由 _Row Area_ 和 _Column Area_ 中的值所产生的筛选语境下，并结合对 _Filter Area_ 中各字段应用的任何筛选条件，对特定度量值的 DAX 表达式求值得到的结果。
 
 > [!NOTE]
-> 具有多维模型背景的开发者可能更熟悉 _Dimensions_ 和 _Attributes_ 这两个术语。 在语义模型中，_Dimensions_ 由模型_表_表示，而 _Attributes_ 由模型_列_表示。 语义模型中的 _Hierarchies_ 只是将多列分组在一起的一种方式，例如日历层次结构：Year > Quarter > Month > Day。 在多维模型中，这类层次结构过去称为 _Attribute Hierarchies_ 或 _User-Defined Hierarchies_。
+> 具有多维模型背景的开发者可能更熟悉 _Dimensions_ 和 _Attributes_ 这两个术语。 在语义模型中，_Dimensions_ 由模型表表示，而 _Attributes_ 由模型列表示。 语义模型中的 _Hierarchies_ 只是将多列分组在一起的一种方式，例如日历层次结构：Year > Quarter > Month > Day。 在多维模型中，这类层次结构过去称为 _Attribute Hierarchies_ 或 _User-Defined Hierarchies_。
 
 ## 创建 Pivot Grid
 
@@ -167,3 +167,5 @@ Pivot Grid 还有一些值得了解的功能：
 
 - 格式规则（例如图标集、数据条等） 在将 Pivot Grid 布局保存为 `.te3pivot` 文件时，这些规则无法被正确保留。
 - 如果你在与保存布局时不同的模型上打开 `.te3pivot` 文件，当前模型中不存在的字段会从布局中移除。 按“保存”(Ctrl+S) 会保存该布局，并将已移除的字段也一并从文件中去除。 我们可能会在未来版本中更改此行为，让 `.te3pivot` 文件在你明确确认之前不会被覆盖。
+- 使用 **Group By Columns** 属性的列（包括字段参数列）不能单独添加到行区域或列区域。 这样做会出现错误 _"Column X is part of a composite key, but not all columns of the composite key are included in the expression or its dependent expression"_。 这是 MDX 客户端的普遍限制，在 Excel 数据透视表中使用此类列时也会出现同样的情况。 为绕过此问题，请在添加依赖列之前，先将相关的 Group By Column 添加到 Pivot Grid，然后再添加依赖列。 例如，如果 `[ProductKey]` 被配置为 `[ProductName]` 的 Group By Column，先将 `[ProductKey]` 添加到行区域或列区域，再添加 `[ProductName]`。
+- 对行区域或列区域中的列显式应用升序或降序排序时，无论列的数据类型如何，值都会按字符串的字典序排序。 以长日期格式显示的日期（例如“2024 年 五月 4 日”）和整数会按字典序排序，而不是按时间顺序或数值顺序排序。 这是 MDX 客户端排序方式的限制；连接到该模型的 Excel 数据透视表中也会出现相同的行为。 要按时间顺序或数值顺序排序，请使用列的自然排序（不要显式设置排序），或在模型列上使用 **Sort By Column** 属性，将其指向一个底层值可用于排序的列。

@@ -2,7 +2,7 @@
 uid: te-cli-migrate
 title: 从 TE2 命令行迁移
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -60,7 +60,7 @@ te migrate --output-format json     # Machine-readable mapping
 | `file`（位置参数）                              | `te <command> <path>` 或使用全局参数 `--model`                           | 在大多数命令中，这是第一个位置参数。                                                     |
 | `server`、`database`                       | `te connect <server>` 或 `te deploy <server> <database>`           | Server 参数不再是全局位置参数。                                                    |
 | `-L` / `-LOCAL`                           | `te connect --local`                                              | 仅限 Windows。                                                            |
-| `-S` / `-SCRIPT`                          | `te script -s <file.csx>` 或 `-e "code"`                           | 支持多个脚本、内联代码和 stdin。                                                    |
+| `-S` / `-SCRIPT`                          | `te script -S <file.csx>` 或 `-e "code"`                           | 支持多个脚本、内联代码和 stdin。 注意：请使用大写 `-S`；小写 `-s` 是全局 `--server` 选项。           |
 | `-A` / `-ANALYZE`                         | `te bpa run --rules <file-or-url>`                                | 支持 `--fail-on`、`--fix` 和多个规则文件。                                        |
 | `-AX` / `-ANALYZEX`                       | `te bpa run --rules <file>`（不带 `--model-rules`）                   | 现在默认会排除嵌入模型的规则。                                                        |
 | `-B` / `-BIM`                             | `te save <model> -o <file.bim> --serialization bim`               |                                                                        |

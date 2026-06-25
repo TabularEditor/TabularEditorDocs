@@ -2,7 +2,7 @@
 uid: te-cli-config
 title: Configuración personalizada
 author: Peer Grønnerup
-updated: 2026-04-20
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -238,18 +238,18 @@ Deshabilita una comprobación con `te config set <key> false`, o limita esa rela
 
 Usa las siguientes variables de entorno específicas de la CLI para PATH, comportamiento y diagnósticos. Para las variables de autenticación de Azure (`AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_CERTIFICATE_PATH`, etc.), consulta @te-cli-auth.
 
-| Variable         | Propósito                                                                                                                                                                                                                                                                |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `TE_CONFIG`      | Ruta de acceso a un archivo de configuración alternativo. Se respeta en todas las operaciones de `te config` (`show`, `set`, `init`, `paths`).                                                                        |
-| `TE_MACROS_PATH` | Anula la ruta del archivo de macros (segundo en el orden de resolución; ver arriba). La leen los comandos `te macro`.                                                                                                 |
-| `TE_BPA_RULES`   | Anula la lista de archivos/URL de reglas de BPA utilizada por los subcomandos `te bpa run` y `te bpa rules`.                                                                                                                                             |
-| `TE_BPA_CONFIG`  | Anula la ruta de acceso a la configuración del gate de BPA (`.te-bpa.json`) que lee el gate de despliegue/guardado.                                                                                                                   |
-| `TE3_EXE_PATH`   | Ruta al binario de escritorio de Tabular Editor 3. Se usa **solo** con `te open`; puedes dejarla sin definir en Linux/macOS o si no usas `te open`. Si no se especifica, se usa la búsqueda en `PATH`.                   |
-| `TE_DEBUG`       | Establece el valor en `1` para habilitar el registro de depuración globalmente (igual que `--debug` o `debug: true` en la configuración).                                                                                             |
-| `NO_SPINNER`     | Establece el valor en `1` o `true` para desactivar los indicadores de progreso animados (alternativa a `spinner: false` en la configuración).                                                                                         |
-| `CI`             | Se detecta automáticamente. Cuando vale `1` o `true`, la CLI desactiva el spinner y cambia a una salida de texto sin formato. La mayoría de los runners de CI lo configuran automáticamente.                             |
-| `TE_SESSION`     | Sobrescribe el identificador de sesión por terminal que se usa para el estado de la conexión activa. Útil para ejecutar varias sesiones aisladas de la CLI dentro del mismo shell, por ejemplo, en trabajos de matriz de CI en paralelo. |
-| `TE_COMPAT`      | Establécela en `te2` para forzar el modo de compatibilidad con TE2; consulta @te-cli-migrate.                                                                                                                                               |
+| Variable         | Propósito                                                                                                                                                                                                                                                                                                                                                                      |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `TE_CONFIG`      | Ruta de acceso a un archivo de configuración alternativo. Se respeta en todas las operaciones de `te config` (`show`, `set`, `init`, `paths`).                                                                                                                                                                              |
+| `TE_MACROS_PATH` | Anula la ruta del archivo de macros (segundo en el orden de resolución; ver arriba). La leen los comandos `te macro`.                                                                                                                                                                                                       |
+| `TE_BPA_RULES`   | Anula la lista de archivos/URL de reglas de BPA utilizada por los subcomandos `te bpa run` y `te bpa rules`.                                                                                                                                                                                                                                                   |
+| `TE_BPA_CONFIG`  | Anula la ruta de acceso a la configuración del gate de BPA (`.te-bpa.json`) que lee el gate de despliegue/guardado.                                                                                                                                                                                                                         |
+| `TE3_EXE_PATH`   | Ruta al binario de escritorio de Tabular Editor 3. Se usa **solo** con `te open`; puedes dejarla sin definir en Linux/macOS o si no usas `te open`. Si no se especifica, se usa la búsqueda en `PATH`.                                                                                                                         |
+| `TE_DEBUG`       | Establece el valor en `1` para habilitar el registro de depuración globalmente (igual que `--debug` o `debug: true` en la configuración).                                                                                                                                                                                                   |
+| `NO_SPINNER`     | Establece el valor en `1` o `true` para desactivar los indicadores de progreso animados (alternativa a `spinner: false` en la configuración).                                                                                                                                                                                               |
+| `CI`             | Se detecta automáticamente. Cuando vale `1` o `true`, la CLI desactiva el spinner y cambia a una salida de texto sin formato. La mayoría de los runners de CI lo configuran automáticamente.                                                                                                                                   |
+| `TE_SESSION`     | Sobrescribe el identificador de sesión por terminal que se usa para el estado de la conexión activa. Útil para ejecutar varias sesiones aisladas de la CLI dentro del mismo shell, por ejemplo, en trabajos de matriz de CI en paralelo. Inspecciona y gestiona las sesiones con [`te session`](xref:te-cli-commands#session). |
+| `TE_COMPAT`      | Establécela en `te2` para forzar el modo de compatibilidad con TE2; consulta @te-cli-migrate.                                                                                                                                                                                                                                                     |
 
 ## Páginas relacionadas
 

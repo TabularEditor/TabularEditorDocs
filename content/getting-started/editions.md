@@ -2,7 +2,7 @@
 uid: editions
 title: Compare editions
 author: Søren Toft Joensen
-updated: 2025-02-07
+updated: 2026-06-09
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -87,8 +87,6 @@ If you attempt to open a model that uses one or more of the modeling restriction
 
 There are no other feature differences between the Tabular Editor 3 editions, than the ones listed above.
 
-> [!NOTE]
-> Please keep in mind that Power BI Desktop [currently does not support all Data modeling operations](xref:desktop-limitations). For this reason, Tabular Editor 3 by default blocks operations that are not supported by Power BI Desktop. However, this restriction can be removed under Tools > Preferences > Power BI.
 
 > [!IMPORTANT]
 > Tabular Editor can only be used as an external tool for Power BI Desktop when the Power BI report (.pbix, .pbip or .pbit) file contains a data model (Import, DirectQuery or Composite). **Reports using Live connection are not supported** since these reports do not contain a data model. [More information](xref:desktop-limitations).
@@ -108,7 +106,7 @@ Each Tabular Editor 3 user is allowed to install the tool on multiple machines d
 |Simultaneous installations|1|2|3|
 
 > [!NOTE]
-> Sharing a single license among multiple users is against our [licensing terms](https://tabulareditor.com/license-terms).
+> Sharing a single license among multiple users is against our [licensing terms](https://tabulareditor.com/eula-te3).
 
 You can deactivate an existing installation at any time from within the tool itself, by choosing the "Change license key..." option under "Help > About Tabular Editor". You can also deactivate an installation through our [self-service portal](https://tabulareditor.com/sign-in) by navigating to the "Licenses" tab.
 
@@ -138,3 +136,13 @@ Total                      $ 10,950.00
 ```
 
 If you require more than 100 seats, please <a href="mailto:sales@tabulareditor.com">contact sales</a> for a quote.
+
+
+## Command-line and CI/CD licensing
+
+Tabular Editor 3 is a desktop application. It has no command-line interface of its own. For automated deployments and CI/CD pipelines, use either `TabularEditor.exe` (the [Tabular Editor 2 command line](xref:command-line-options)) or the cross-platform [Tabular Editor CLI](xref:te-cli) (`te`). Both are separate from the Tabular Editor 3 desktop application.
+
+> **Do I need a license to run CI/CD pipelines?**
+> No. `TabularEditor.exe` (TE2 CLI) and the Tabular Editor CLI (`te`, during preview) do not require a Tabular Editor 3 license. Only developers using the Tabular Editor 3 desktop application need a license.
+
+At General Availability the Tabular Editor CLI will require a license; pricing is still being finalized and will be announced ahead of GA.

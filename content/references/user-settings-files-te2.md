@@ -9,7 +9,7 @@ applies_to:
       none: true
 ---
 
-## User Settings Files Tabular Editor 2
+# User Settings Files Tabular Editor 2
 
 When Tabular Editor 2 is started, it writes some additional files to the disk at various locations. What follows is a description of these files and their content:
 

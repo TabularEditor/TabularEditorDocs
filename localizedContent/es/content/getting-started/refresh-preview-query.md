@@ -36,8 +36,6 @@ En resumen, estas funciones conectadas son:
 - Consulta DAX
 - Analizador VertiPaq
 
-<a name="refreshing-data"></a>
-
 # Actualización de datos
 
 Tabular Editor no inicia automáticamente operaciones de actualización en Analysis Services cuando se realizan cambios en el Data model. Esto se hace así por diseño, para garantizar que guardar los cambios de metadatos en Analysis Services no lleve demasiado tiempo. Una operación de actualización puede tardar mucho en completarse; durante ese tiempo, no se puede actualizar ningún metadato adicional en el servidor. Como contrapartida, puede hacer cambios con Tabular Editor, lo que hace que el modelo pase a un estado en el que solo se puede consultar parcialmente o no se puede consultar en absoluto. Según el tipo de cambio realizado en el Data model, puede que necesites aplicar distintos niveles de actualización.
@@ -80,8 +78,6 @@ Tabular Editor 3 admite operaciones de actualización en distintos tipos de obje
 
 Consulta [Tipos de actualización](https://docs.microsoft.com/en-us/analysis-services/tmsl/refresh-command-tmsl?view=asallproducts-allversions#request) para obtener más información sobre los tipos de operaciones de actualización compatibles con Analysis Services / Power BI.
 
-<a name="previewing-table-data"></a>
-
 # Vista previa de los datos de la tabla
 
 En determinados momentos, durante la creación de DAX y el desarrollo del Data model, es posible que necesites inspeccionar el contenido de tus tablas fila por fila. Por supuesto, podrías escribir una consulta DAX para hacerlo, pero Tabular Editor 3 lo pone aún más fácil al permitirte previsualizar los datos de la tabla directamente. Para ello, haz clic con el botón derecho en una tabla y elige la opción **Vista previa de datos**.
@@ -93,8 +89,6 @@ Puedes abrir varias vistas previas de tabla y organizarlas como quieras en la in
 Si una o más columnas calculadas están en un estado no válido, esas columnas contienen el texto _(Calculation needed)_. Puedes recalcular la tabla haciendo clic con el botón derecho en la columna y eligiendo la opción **Recalcular tabla...**.
 
 ![Recalculate Table](~/content/assets/images/recalculate-table.png)
-
-<a name="pivot-grids"></a>
 
 # Pivot Grid
 
@@ -109,8 +103,6 @@ A medida que se arrastran campos a la Pivot Grid, Tabular Editor genera consulta
 ![Personalizar Pivot Grid](~/content/assets/images/customizing-pivot-grids.png)
 
 El Pivot Grid se actualiza automáticamente cuando se realiza un cambio en el modelo o finaliza una operación de actualización. Puedes activar o desactivar esta actualización automática en el menú **Pivot Grid**.
-
-<a name="dax-queries"></a>
 
 # Consultas DAX
 

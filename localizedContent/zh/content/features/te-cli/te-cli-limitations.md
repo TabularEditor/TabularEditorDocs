@@ -2,7 +2,7 @@
 uid: te-cli-limitations
 title: 已知限制
 author: Peer Grønnerup
-updated: 2026-05-20
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -26,18 +26,18 @@ applies_to:
 
 CLI 会针对你在 Tabular Editor 2 和 3 中使用的同一个 `Model` 对象运行 C# Script（`te script`），但它是无界面的控制台宿主程序。 任何依赖 Windows Forms UI、TOM Explorer 的选择内容，或实时的 UI 端服务（宏注册表、在线 DAX Formatter、实时 VertiPaq分析器）的功能，其行为都会不同——通常表现为空、无操作，或直接报错。
 
-| 限制                                                                          | 说明 / 变通方法                                                                                                                                                                                                                        |
-| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **未加载 `System.Windows.Forms`**                                              | CLI 使用的是跨平台 `TOMWrapper` 版本，其中剥离了所有与 WinForms 耦合的代码；WinForms 程序集不会被加载到 AppDomain 中。 引用 `System.Windows.Forms` 类型（`MessageBox`、`Form`、文件选择器、自定义对话框等）的脚本 将无法编译。 将所有 UI 交互重构为脚本参数、环境变量或标准输入 stdin。                                  |
-| **`Selected.<Plural>` 返回空的可枚举对象**                                           | 在 CLI 中，`Selected.Tables`、`Selected.Measures`、`Selected.Columns`、`Selected.Hierarchies` 等的枚举结果都为空——不会出现编译或运行时错误，只是不会返回任何项。 改为显式查找：`Model.AllMeasures.Where(...)`、`Model.Tables["Sales"].Measures`，或通过 `te script --args` 传递对象路径。 |
-| **`Selected.<Singular>` 会在运行时抛出错误**                                         | `Selected.Table`、`Selected.Measure`、`Selected.Column`、`Selected.Hierarchy` 等都会报错，因为它们要求恰好选中一个该类型的对象，而 CLI 中的选择始终为空。 直接引用该对象，例如 `Model.Tables["Sales"]`。                                                                          |
-| **`Selected.ActivePerspectives` 和 `Selected.ActiveCulture`**：分别为活动透视和活动区域设置 | 它们分别始终返回空集合和 `null`。 如果需要，就在脚本中显式设置透视或区域设置。                                                                                                                                                                                      |
-| **`Select<Object>` 对话框会抛出 `NotSupportedException`**                         | `SelectTable`、`SelectColumn`、`SelectMeasure`、`SelectObject`、`SelectObjects`（以及所有重载）都会返回以下错误：_"对象选择对话框… 在 CLI 脚本中不可用。 在编写脚本前，先按名称或路径预先选定对象。"_ 通过脚本参数、配置或查询模型来提前解析目标。                                                              |
-| **`Info` / `Warning` / `Error` / `Output` 会写入控制台**                          | 这些仍然可用，但会输出到 stdout/stderr，而不是打开对话框。 它们不会阻塞，也不会提供“忽略后续弹窗”的提示。 可安全用于 CI。                                                                                                                                                          |
-| **`ShowPrompt(...)` 始终返回 `Cancel`**                                         | 无法进行交互式确认。 通过脚本参数或配置预先确定答案。                                                                                                                                                                                                      |
-| **`SuspendWaitForm` / `WaitFormVisible` 都是空操作**                             | “请稍候”加载指示器是 TE3 的一个 UI 元素。 `WaitFormVisible` 是一个可设置的标志位，但没有任何 Visual 效果；`SuspendWaitForm` 会被静默忽略——现有脚本仍可继续编译。                                                                                                                    |
-| **`host.Macro(...)` / `CustomAction(...)` 会抛出错误**                           | CLI 不会加载 `%APPDATA%/TabularEditor3/MacroActions.json`，因此在脚本内部调用宏会报错。 把宏逻辑直接写进脚本里，或直接调用该宏底层的脚本文件。                                                                                                                                 |
-| **`table.GetCardinality()` / `column.GetTotalSize()` 返回 0**                 | CLI 主机中没有实时 VPA，因此脚本内的 VertiPaq 基数辅助函数无法使用。 如果要查看 VPA 统计信息，显式加载 VPAX 并使用 `host.Vpa.*`，或运行 [`te vertipaq`](xref:te-cli-commands#vertipaq)。                                                                                        |
+| 限制                                                                          | 说明 / 变通方法                                                                                                                                                                                                                   |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **未加载 `System.Windows.Forms`**                                              | CLI 使用的是跨平台 `TOMWrapper` 版本，其中剥离了所有与 WinForms 耦合的代码；WinForms 程序集不会被加载到 AppDomain 中。 引用 `System.Windows.Forms` 类型（`MessageBox`、`Form`、文件选择器、自定义对话框等）的脚本 将无法编译。 将所有 UI 交互重构为通过环境变量或 stdin 提供输入。                               |
+| **`Selected.<Plural>` 返回空的可枚举对象**                                           | 在 CLI 中，`Selected.Tables`、`Selected.Measures`、`Selected.Columns`、`Selected.Hierarchies` 等的枚举结果都为空——不会出现编译或运行时错误，只是不会返回任何项。 改用显式查找：`Model.AllMeasures.Where(...)`、`Model.Tables["Sales"].Measures`；或通过环境变量或 stdin 将对象路径传入脚本。 |
+| **`Selected.<Singular>` 会在运行时抛出错误**                                         | `Selected.Table`、`Selected.Measure`、`Selected.Column`、`Selected.Hierarchy` 等都会报错，因为它们要求恰好选中一个该类型的对象，而 CLI 中的选择始终为空。 直接引用该对象，例如 `Model.Tables["Sales"]`。                                                                     |
+| **`Selected.ActivePerspectives` 和 `Selected.ActiveCulture`**：分别为活动透视和活动区域设置 | 它们分别始终返回空集合和 `null`。 如果需要，就在脚本中显式设置透视或区域设置。                                                                                                                                                                                 |
+| **`Select<Object>` 对话框会抛出 `NotSupportedException`**                         | `SelectTable`、`SelectColumn`、`SelectMeasure`、`SelectObject`、`SelectObjects`（以及所有重载）都会返回以下错误：_"对象选择对话框… 在 CLI 脚本中不可用。 在编写脚本前，先按名称或路径预先选定对象。_ 通过环境变量、配置或查询模型，提前解析目标。                                                          |
+| **`Info` / `Warning` / `Error` / `Output` 会写入控制台**                          | 这些仍然可用，但会输出到 stdout/stderr，而不是打开对话框。 它们不会阻塞，也不会提供“忽略后续弹窗”的提示。 可安全用于 CI。                                                                                                                                                     |
+| **`ShowPrompt(...)` 始终返回 `Cancel`**                                         | 无法进行交互式确认。 通过环境变量或配置预先确定答案。                                                                                                                                                                                                 |
+| **`SuspendWaitForm` / `WaitFormVisible` 都是空操作**                             | “请稍候”加载指示器是 TE3 的一个 UI 元素。 `WaitFormVisible` 是一个可设置的标志位，但没有任何 Visual 效果；`SuspendWaitForm` 会被静默忽略——现有脚本仍可继续编译。                                                                                                               |
+| **`host.Macro(...)` / `CustomAction(...)` 会抛出错误**                           | CLI 不会加载 `%APPDATA%/TabularEditor3/MacroActions.json`，因此在脚本内部调用宏会报错。 把宏逻辑直接写进脚本里，或直接调用该宏底层的脚本文件。                                                                                                                            |
+| **`table.GetCardinality()` / `column.GetTotalSize()` 返回 0**                 | CLI 主机中没有实时 VPA，因此脚本内的 VertiPaq 基数辅助函数无法使用。 如果要查看 VPA 统计信息，显式加载 VPAX 并使用 `host.Vpa.*`，或运行 [`te vertipaq`](xref:te-cli-commands#vertipaq)。                                                                                   |
 
 ## Best Practice Analyzer
 

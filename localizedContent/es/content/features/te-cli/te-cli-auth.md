@@ -2,7 +2,7 @@
 uid: te-cli-auth
 title: Autenticación y conexiones
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -23,13 +23,14 @@ La CLI de Tabular Editor se autentica en Power BI Service, Microsoft Fabric y Az
 
 La CLI admite la cadena completa de credenciales de Azure Identity:
 
-| Método                                                        | Cuándo usarlo                                                       | Valor de `--auth`                                        |
-| ------------------------------------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------- |
-| Navegador interactivo                                         | Desarrollo local: abre el navegador del sistema     | `interactive` (predeterminado)        |
-| Principal de servicio (secreto de cliente) | Automatización, CI/CD, sin interfaz gráfica / SSH / WSL             | `spn` (con `-u / -p / -t`) o `env`    |
-| Principal de servicio (certificado)        | Automatización con autenticación basada en certificados             | `spn` (con `-u / -t / --certificate`) |
-| Variables de entorno                                          | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`       | `env`                                                    |
-| Identidad administrada                                        | Máquinas virtuales de Azure, Azure Container Apps y Azure Functions | `managed-identity`                                       |
+| Método                                                        | Cuándo usarlo                                                                                                                                         | Valor de `--auth`                                        |
+| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| Automático                                                    | Prueba primero las credenciales del entorno y luego recurre al inicio de sesión en el navegador, ya sea con la sesión en caché o de forma interactiva | `auto` (predeterminado)               |
+| Navegador interactivo                                         | Desarrollo local: abre el navegador del sistema                                                                                       | `interactive`                                            |
+| Principal de servicio (secreto de cliente) | Automatización, CI/CD, sin interfaz gráfica / SSH / WSL                                                                                               | `spn` (con `-u / -p / -t`) o `env`    |
+| Principal de servicio (certificado)        | Automatización con autenticación basada en certificados                                                                                               | `spn` (con `-u / -t / --certificate`) |
+| Variables de entorno                                          | `AZURE_CLIENT_ID` / `AZURE_CLIENT_SECRET` / `AZURE_TENANT_ID`                                                                                         | `env`                                                    |
+| Identidad administrada                                        | Máquinas virtuales de Azure, Azure Container Apps y Azure Functions                                                                                   | `managed-identity`                                       |
 
 > [!NOTE]
 > `--auth` es una opción **global**, disponible en todos los comandos `te`, no solo en `te auth login`. Úsalo en [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te query`](xref:te-cli-commands#query), [`te connect`](xref:te-cli-commands#connect) o en cualquier otro comando que se conecte a un punto de conexión remoto para sustituir la cadena predeterminada en esa ejecución. La opción predeterminada (`auto`) intenta primero las credenciales del entorno y, si no están disponibles, recurre al inicio de sesión en caché o interactivo en el navegador.
@@ -54,7 +55,7 @@ echo "$AZURE_CLIENT_SECRET" | te auth login -u "$AZURE_CLIENT_ID" -p - -t "$AZUR
 te auth login -u "$AZURE_CLIENT_ID" -t "$AZURE_TENANT_ID" --certificate ./sp.pfx --certificate-password "$CERT_PASSWORD"
 
 # Managed identity (Azure-hosted)
-te auth login --identity
+te auth login --identity     # Alias: -I
 ```
 
 Después de iniciar sesión correctamente con una entidad de servicio, la CLI **almacena las credenciales en caché** para que todos los comandos `te` posteriores puedan adquirir tokens de forma silenciosa; no hace falta volver a pasar `-u / -p / -t` ni establecer las variables de entorno `AZURE_CLIENT_*`. Pasa `--save=false` para iniciar sesión una sola vez sin actualizar la caché, o ejecuta `te auth logout` para borrarla.
@@ -117,7 +118,7 @@ te connect
 te connect --clear
 ```
 
-El estado de la conexión activa es específico de cada sesión de terminal: al abrir un terminal nuevo, se empieza desde cero.
+El estado de la conexión activa es específico de cada sesión de terminal: al abrir un terminal nuevo, se empieza desde cero. Inspecciona o limpia el estado de la sesión con [`te session`](xref:te-cli-commands#session).
 
 ### Modo del área de trabajo (`-w` / `--workspace`)
 
@@ -131,7 +132,7 @@ te connect Finance "Revenue Model" -w ./revenue-model
 te connect ./revenue-model -w Finance "Revenue Model"
 ```
 
-El orden de guardado siempre es **primero local y después remoto**, para que la copia en disco refleje el cambio más reciente incluso si falla el envío al servidor. Consulta @te-cli-commands#workspace-mode-w--workspace para `--workspace-format`, la semántica de sobrescritura y cómo vaciar el mirror del Workspace.
+El orden de guardado siempre es **primero local y después remoto**, para que la copia en disco refleje el cambio más reciente incluso si falla el envío al servidor. Consulta el [modo del área de trabajo](xref:te-cli-commands#workspace-mode--w----workspace) para conocer `--workspace-format`, el comportamiento de sobrescritura y cómo limpiar el espejo.
 
 ## Conexión a distintas nubes
 

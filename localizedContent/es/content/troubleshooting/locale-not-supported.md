@@ -19,10 +19,14 @@ applies_to:
 
 # Configuración regional no admitida
 
-Es posible que veas el siguiente mensaje de advertencia en los mensajes:
+Puede que se muestre alguno de los siguientes mensajes de advertencia:
 
 ```plaintext
 La configuración regional XXXX no es compatible
+```
+
+```plaintext
+XXXX no es un identificador de configuración regional válido
 ```
 
 en la vista de mensajes de Tabular Editor 3.

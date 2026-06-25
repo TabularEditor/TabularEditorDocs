@@ -199,7 +199,6 @@ in
 
 ***
 
-<a name="overview-of-all-properties"></a>
 #### Overview of all properties
 
 _Below is an overview of the TOM Properties in a data model used to configure Incremental Refresh:_

@@ -102,7 +102,7 @@ Setup or Modification of OLS is trivial for Columns and Table. You just have to 
   <figcaption style="font-size: 12px; padding-top: 10px; padding-bottom: 15px; padding-left: 75px; padding-right: 75px; color:#00766e"><strong>Figure 4:</strong> The Object-Level Security property can be changed with an adjacent drop-down, allowing selection of <i>Default</i>, <i>None</i> or <i>Read</i>.</figcaption>
 </figure>
 
---- 
+---
 
 ### 5. Combine OLS with RLS
 Successfully combining RLS with OLS requires designing a model and Data Security / Access Management strategy that align. Since RLS and OLS cannot combine across roles, this means if you plan on implementing both RLS and OLS, users are limited to a single role. 

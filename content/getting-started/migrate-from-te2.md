@@ -2,7 +2,7 @@
 uid: migrate-from-te2
 title: Migrating from Tabular Editor 2.x
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-06-10
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -29,37 +29,7 @@ Tabular Editor 3 has a different product code than Tabular Editor 2.x. This mean
 
 In terms of features, Tabular Editor 3 is essentially a superset of Tabular Editor 2.x, with few exceptions. The table below compares all major features of the two tools:
 
-||Tabular Editor 2.x|Tabular Editor 3|
-|---|---|---|
-|Edit all TOM objects and properties|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Batch editing and renaming|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Copy/paste and drag/drop support|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Undo/redo data modeling operations|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Load/save model metadata to disk|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|Save-to-folder|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|[daxformatter.com](https://daxformatter.com) integration|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Advanced data modeling (OLS, Perspectives, Calculation Groups, Metadata Translations, etc.)|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|Syntax highlighting and automatic formula fixup|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|View DAX dependencies between objects|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Import Table Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Deployment Wizard|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|Best Practice Analyzer|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|C# scripting and automation|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Use as External Tool for Power BI Desktop|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>|
-|Connect to SSAS/Azure AS/Power BI Premium|<span class="emoji">&#10004;</span>|<span class="emoji">&#10004;</span>*|
-|Command-line interface|<span class="emoji">&#10004;</span>|*[Coming soon](xref:roadmap)*|
-|Premium, customizable user-interface with high-DPI, multi-monitor and theming support||<span class="emoji">&#10004;</span>|
-|World-class DAX editor with IntelliSense<sup>TM</sup>-like features||<span class="emoji">&#10004;</span>|
-|Offline DAX syntax checking and column/data type inference||<span class="emoji">&#10004;</span>|
-|Improved Table Import Wizard and Table Schema Update check with Power Query support||<span class="emoji">&#10004;</span>|
-|DAX querying, table preview and Pivot Grids||<span class="emoji">&#10004;</span>|
-|Create diagrams for visualizing and editing table relationships||<span class="emoji">&#10004;</span>|
-|Execute data refresh operations in the background||<span class="emoji">&#10004;</span>*|
-|C# macro recorder||<span class="emoji">&#10004;</span>|
-|Edit multiple DAX expressions in a single document using DAX scripting||<span class="emoji">&#10004;</span>|
-|[VertiPaq Analyzer](https://www.sqlbi.com/tools/vertipaq-analyzer/) integration||<span class="emoji">&#10004;</span>|
-
-\***Note:** Limitations apply depending on which [edition](xref:editions) of Tabular Editor 3 you are using.
+[!include[feature-comparison](../includes/feature-comparison.partial.md)]
 
 ## Feature differences
 
@@ -71,7 +41,7 @@ The first thing you will notice when launching Tabular Editor 3, is the new Visu
 
 In general, though, interface elements that exist in Tabular Editor 2.x have the same name in Tabular Editor 3, so it should be relatively easy to navigate the new interface. A few important differences are listed below:
 
-- The **Advanced Scripting** tab in Tabular Editor 2.x is gone. In Tabular Editor 3, you instead create *C# Scripts** using the **File > New** menu. You are not limited to working on a single script at a time. In addition, **Custom actions** have been renamed to **Macros**.
+- The **Advanced Scripting** tab in Tabular Editor 2.x is gone. In Tabular Editor 3, you instead create **C# Scripts** using the **File > New** menu. You are not limited to working on a single script at a time. In addition, **Custom actions** have been renamed to **Macros**.
 - **Dynamic LINQ filtering** is not currently available within the TOM Explorer. Instead, if you want to find objects using [Dynamic LINQ](https://dynamic-linq.net/expression-language) you have to bring up the **Find and replace** dialog by pressing CTRL+F.
 - If you close the **Expression Editor** you can bring it back by doubleclicking on the icon of an object in the **TOM Explorer**, or by choosing the **View > Expression Editor** menu option.
 - When using the default layout in Tabular Editor 3, the **Best Practice Analyzer** will be located as a tab next to the **TOM Explorer**. Here, you will also find the new **Data Refresh** view (which lets you view the queue of background refresh operations) and the **Macros** view (which lets you manage any macros that were previously saved from C# scripts).
@@ -97,7 +67,6 @@ The schema compare dialog itself also has a number of improvements, for example 
 
 To learn more, see <xref:importing-tables>.
 
-<a name="workspace-mode"></a>
 ### Workspace mode
 
 Tabular Editor 3 introduces the concept of **workspace mode**, in which model metadata is loaded from disk (Model.bim or Database.json), and then immediately deployed to an Analysis Services instance of your choice. Whenever you hit Save (CTRL+S), the workspace database is synchronized and updated model metadata is saved back to the disk. The advantage of this approach, is that Tabular Editor is connected to Analysis Services, thus enabling the [connected features](#connected-features) listed below, while also making it easy to update the source files on disk. With Tabular Editor 2.x, you had to open a model from a database, and then remember to manually save to disk once in a while.
@@ -106,7 +75,6 @@ This approach is ideal to enable [parallel development](xref:parallel-developmen
 
 For more information, see <xref:workspace-mode>.
 
-<a name="connected-features"></a>
 ### Connected features
 
 Tabular Editor 3 includes a number of new connected features, allowing you to use it as a client tool for Analysis Services. These features are enabled whenever Tabular Editor 3 is connected to Analysis Services, either directly or when using the [workspace mode](#workspace-mode) feature.
@@ -147,8 +115,26 @@ When working in **connected** or **workspace** mode, DAX scripting is an incredi
 
 To learn more, see @dax-script-introduction.
 
+## Major additions since 2021
+
+Tabular Editor 3 has gained many features since this article was first written. The feature comparison table above is the canonical catalog. The highlights most relevant to developers coming from Tabular Editor 2.x are:
+
+- [DAX User-Defined Functions (UDFs)](xref:udfs) with authoring assistance, code actions and namespaces
+- [Calendar Editor](xref:calendars) for building date tables with enhanced time intelligence
+- [DAX Package Manager](xref:dax-package-manager) for installing and sharing reusable DAX
+- [Code Actions](xref:code-actions) for quick fixes and refactoring in the DAX editor
+- [DAX debugger](xref:dax-debugger) for stepping through expression evaluation
+- [DAX Optimizer integration](xref:dax-optimizer-integration) alongside VertiPaq Analyzer
+- [Table Groups](xref:table-groups) for organizing large models
+- [AI Assistant](xref:ai-assistant) for DAX and modeling help
+- [TMDL](xref:tmdl) serialization, [Save to folder](xref:save-to-folder) and [Save with supporting files](xref:save-with-supporting-files) for Fabric Git integration
+- Cross-platform [Tabular Editor CLI](xref:te-cli) (`te`, in Limited Public Preview) for automation and CI/CD
+- [Semantic Bridge](xref:semantic-bridge) for Databricks Metric Views (Enterprise Edition)
+- [Localization](xref:references-application-language) of the application interface
+
 ## Next steps
 
 - @migrate-from-vs
+- @te-cli-migrate
 - @parallel-development
 - @boosting-productivity-te3

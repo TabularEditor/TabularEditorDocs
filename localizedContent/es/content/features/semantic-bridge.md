@@ -31,8 +31,6 @@ El Puente semántico es un compilador de modelos semánticos capaz de traducir l
 Esto permite reutilizar la lógica de negocio en varias plataformas de datos, dar soporte a los usuarios finales y llegar hasta donde consumen los datos.
 También permite migraciones de una plataforma a otra.
 
-<a name="interface"></a>
-
 ## Interfaz
 
 ### Importar YAML de Metric View
@@ -119,8 +117,6 @@ En concreto, puedes
 - validar una Metric View usando un sistema similar al [Best Practice Analyzer](xref:best-practice-analyzer) con [`SemanticBridge.MetricView.Validate`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_Validate)
   - puedes crear tus propias reglas de validación personalizadas con [`SemanticBridge.MetricView.MakeValidationRule`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_MakeValidationRule__1_System_String_System_String_System_Func___0_TabularEditor_SemanticBridge_Platforms_Databricks_Validation_IReadOnlyValidationContext_System_Collections_Generic_IEnumerable_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___) y sus versiones más simples
 - importar una Metric View a un modelo tabular con [`SemanticBridge.MetricView.ImportToTabularFromFile`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabularFromFile_System_String_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), que hace exactamente lo mismo que la GUI mostrada arriba, o [`SemanticBridge.MetricView.ImportToTabular`](/api/TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.html#TabularEditor_SemanticBridge_Platforms_Databricks_DatabricksMetricViewService_ImportToTabular_TabularEditor_TOMWrapper_Model_System_String_System_String_System_Collections_Generic_List_TabularEditor_SemanticBridge_Orchestration_DiagnosticMessage___System_Boolean_), que es similar, pero opera sobre la Metric View cargada actualmente, en lugar de leer una desde el disco.
-
-<a name="public-preview-limitations"></a>
 
 ## Limitaciones de la versión preliminar pública
 

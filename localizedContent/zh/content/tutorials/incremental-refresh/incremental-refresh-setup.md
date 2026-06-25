@@ -84,7 +84,9 @@ applies_to:
    - **RollingWindowPeriods:** 需要归档的周期数（按上面指定的粒度）。
    - **Mode:** 是标准 `Import` 刷新策略还是 `Hybrid`，其中最后一个分区为 DirectQuery。
    - **PollingExpression:** 用于检测数据更改的有效 M 表达式。 有关 _Polling Expression_ 或其他刷新策略属性的更多信息，请参阅[此处](xref:incremental-refresh-about#overview-of-all-properties)。
+
 8. **Apply Model Changes:** 保存模型（Ctrl+S）。
+
 9. **应用刷新策略：** 右键单击该表，然后选择“应用刷新策略”。
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>

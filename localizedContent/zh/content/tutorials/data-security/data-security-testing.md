@@ -23,7 +23,7 @@ applies_to:
 
 ---
 
-**DAX 查询**、**Pivot Grid** 或 **预览数据** 可用于在 Tabular Editor 中测试数据安全。 建议每次更改配置后都_务必_测试数据安全，以降低 RLS/OLS 实施不当及其后果带来的风险。
+**DAX 查询**、**Pivot Grid** 或 **预览数据** 可用于在 Tabular Editor 中测试数据安全。 建议每次更改配置后都务必测试数据安全，以降低 RLS/OLS 实施不当及其后果带来的风险。
 
 > [!IMPORTANT]
 > 在 Tabular Editor 3 中使用模拟来测试数据安全，仅适用于托管在 Analysis Services 实例或 Power BI 服务中的 Dataset。 Tabular Editor 3 桌面版许可证无法使用此功能。

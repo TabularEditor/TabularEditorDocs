@@ -2,7 +2,7 @@
 uid: powerbi-xmla
 title: Editing through XMLA endpoint
 author: Daniel Otykier
-updated: 2021-10-01
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -17,35 +17,35 @@ applies_to:
         - edition: Enterprise
           full: true
 ---
-# Editing a Power BI dataset through the XMLA endpoint
+# Editing a Power BI semantic model through the XMLA endpoint
 
-You can use Tabular Editor 3 to connect to a Power BI dataset published to the Power BI service through the [XMLA endpoint](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools). The XMLA endpoint is available for Power BI Premium Capacity workspaces (i.e. workspaces assigned to a Px, Ax or EMx SKU), or Power BI Premium-Per-User (PPU) workspaces.
+You can use Tabular Editor 3 to connect to a Power BI semantic model published to the Power BI service through the [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools). The XMLA endpoint is available for workspaces assigned to a Microsoft Fabric capacity (F SKU), a Power BI Embedded capacity (A or EM SKU), a legacy Premium capacity (P SKU) or a Premium Per User (PPU) license.
 
 > [!NOTE]
-> Power BI Pro licenses are not sufficient for accessing Power BI datasets in a shared workspace. Premium/Embedded capacity or Premium-Per-User Power BI licensing is required for XMLA access.
+> Power BI Pro licenses are not sufficient for accessing Power BI semantic models in a shared workspace. A Fabric capacity, Embedded capacity, legacy Premium capacity or Premium Per User license is required for XMLA access.
 
 ## Prerequisites
 
-Tabular Editor requires the XMLA endpoint to allow both read/write access. This setting is controlled by [your capacity admin](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write).
+Tabular Editor requires the XMLA endpoint to allow both read and write access. Microsoft enabled XMLA read/write by default on all Fabric and Power BI capacity SKUs in June 2025. If you can't connect, ask [your capacity admin](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) to verify the settings described in @xmla-as-connectivity.
 
 > [!IMPORTANT]
 > If using Tabular Editor 3 be aware of the [license limitations](xref:editions) for connecting to the Power BI XMLA endpoint. You need at least Tabular Editor 3 Business or Enterprise Edition depending on the type of Power BI Workspace used.
 
 ## Limitations
 
-When connecting to a dataset through the XMLA endpoint, all data modeling operations supported by the [Tabular Object Model (TOM)](https://docs.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) are available for editing. In other words, the [Power BI Desktop Limitations](xref:desktop-limitations) do not apply when editing a dataset through the XMLA endpoint of the Power BI Service.
+When connecting to a semantic model through the XMLA endpoint, all data modeling operations supported by the [Tabular Object Model (TOM)](https://learn.microsoft.com/en-us/analysis-services/tom/introduction-to-the-tabular-object-model-tom-in-analysis-services-amo?view=asallproducts-allversions) are available for editing. In other words, the [Power BI Desktop Limitations](xref:desktop-limitations) do not apply when editing a semantic model through the XMLA endpoint of the Power BI Service.
 
 
 ## Workflow
 
-The Power BI XMLA endpoint essentially exposes an instance of Analysis Services that Tabular Editor can connect to. As such, you can treat the Power BI workspace as the Analysis Services **server** with each Power BI dataset in the workspace corresponding to an Analysis Services **database**. All of Tabular Editor's modeling and management features are available when connecting to the XMLA endpoint. If you decide to use Tabular Editor to build and maintain your Power BI datasets, you should also consider some kind of version control system for your model metadata.
+The Power BI XMLA endpoint essentially exposes an instance of Analysis Services that Tabular Editor can connect to. As such, you can treat the Power BI workspace as the Analysis Services **server** with each Power BI semantic model in the workspace corresponding to an Analysis Services **database**. All of Tabular Editor's modeling and management features are available when connecting to the XMLA endpoint. If you decide to use Tabular Editor to build and maintain your Power BI semantic models, you should also consider some kind of version control system for your model metadata.
 
 The workflow is then:
 
-1. Create a new data model in Tabular Editor or connect to an existing dataset through the Power BI XMLA endpoint
+1. Create a new data model in Tabular Editor or connect to an existing semantic model through the Power BI XMLA endpoint
 2. Save this model as a **Model.bim** file or use Tabular Editor's [Save to folder](xref:save-to-folder) option.
 3. Whenever you want to make changes to the model, load the file/folder you saved in step 2. The first time you do this, decide whether you want to use a [workspace database](xref:workspace-mode) or not.
-4. Once you are ready to publish your changes to the Power BI service, perform a deployment through Tabular Editor (**Model > Deploy...**), thus creating a new or overwriting an existing dataset in a Power BI workspace.
+4. Once you are ready to publish your changes to the Power BI service, perform a deployment through Tabular Editor (**Model > Deploy...**), thus creating a new or overwriting an existing semantic model in a Power BI workspace.
 
 ## Next steps
 

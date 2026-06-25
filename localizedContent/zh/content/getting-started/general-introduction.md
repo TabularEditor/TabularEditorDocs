@@ -2,7 +2,7 @@
 uid: general-introduction
 title: 总体介绍和体系结构
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -39,10 +39,10 @@ Tabular Editor 可从以下来源加载模型元数据：
 - [3] .pbit 文件（Power BI 模板）
 - [4] SQL Server Analysis Services（表格模式）上的数据库
 - [5] Azure Analysis Services 上的数据库
-- [6] Power BI Premium\* Workspace 中的 Dataset
+- [6] 已分配到容量的 Power BI Workspace 中的语义模型\*
 - [7] Import/DirectQuery 模式下的 Power BI Desktop Report
 
-\*要启用 [XMLA 端点](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools)，必须拥有 Power BI Premium/Embedded 容量或 Power BI Premium-Per-User。 任何第三方工具要连接到 Power BI Dataset，都必须启用 XMLA 端点。
+\*第三方工具通过 [XMLA endpoint](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools) 连接到 Power BI 语义模型。 这需要 Microsoft Fabric capacity（F SKU）、Power BI Embedded 容量（A 或 EM SKU）、旧版 Premium 容量（P SKU）或 Premium Per User 许可证。 自 2025 年六月起，所有容量 SKU 默认已启用 XMLA 读取/写入；如果无法连接，请参阅 @xmla-as-connectivity。
 
 > [!IMPORTANT]
 > Tabular Editor 2.x 支持以上 1-7 的所有来源。 Tabular Editor 3 仅支持其中部分来源，具体取决于你使用的是哪种 [Tabular Editor 3 版本](xref:editions)。

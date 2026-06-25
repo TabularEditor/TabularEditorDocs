@@ -2,7 +2,7 @@
 uid: te-cli-install
 title: Instalación y configuración
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -132,7 +132,7 @@ te config set hidePreviewNotice true
 
 ## Autocompletado del shell
 
-La CLI proporciona scripts de autocompletado para **Bash**, **Zsh** y **PowerShell**. Elige el bloque que corresponda a tu shell: cada uno instala el autocompletado de forma persistente para las nuevas sesiones de shell.
+La CLI proporciona scripts de autocompletado para **Bash**, **Zsh**, **PowerShell** y **Fish**. Elige el bloque que corresponda a tu shell: cada uno instala el autocompletado de forma persistente para las nuevas sesiones de shell.
 
 ### Bash (macOS/Linux)
 
@@ -153,6 +153,12 @@ echo 'fpath=(~/.zfunc $fpath); autoload -U compinit; compinit' >> ~/.zshrc
 
 ```powershell
 Add-Content $PROFILE 'te completion pwsh | Out-String | Invoke-Expression'
+```
+
+### Fish (macOS/Linux)
+
+```bash
+te completion fish > ~/.config/fish/completions/te.fish
 ```
 
 Abre una nueva sesión del shell para que el autocompletado surta efecto.

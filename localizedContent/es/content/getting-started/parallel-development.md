@@ -2,7 +2,7 @@
 uid: parallel-development
 title: Habilitar el desarrollo en paralelo con Git y Guardar en carpeta
 author: Daniel Otykier
-updated: 2021-09-30
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -30,7 +30,7 @@ Este artículo describe los principios del desarrollo en paralelo de modelos (es
 - El destino de su Data model debe ser uno de los siguientes:
   - SQL Server 2016 (o posterior) Analysis Services Tabular
   - Azure Analysis Services
-  - Fabric/Power BI Premium Capacity/Power BI Premium-per-user con [XMLA de lectura/escritura habilitado](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools#enable-xmla-read-write)
+  - un Workspace de Power BI asignado a una capacidad de Fabric, Power BI Embedded, Premium heredada o a una licencia Premium Per User, con la [lectura y escritura de XMLA habilitada](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write) (la opción predeterminada desde junio de 2025)
 - Repositorio Git accesible para todos los miembros del equipo (en las instalaciones o alojado en Azure DevOps, GitHub, etc.)
 
 ## TOM como código fuente
@@ -48,8 +48,6 @@ Cuando se creó Tabular Editor por primera vez, no había ninguna opción para d
 Los desarrolladores de Datasets de Power BI lo tienen mucho peor, ya que ni siquiera tienen acceso a un archivo de texto que contenga los metadatos del modelo. Lo mejor que pueden hacer es exportar su Report de Power BI como un [archivo de plantilla de Power BI (.pbit)](https://docs.microsoft.com/en-us/power-bi/create-reports/desktop-templates#creating-report-templates), que básicamente es un archivo ZIP que contiene las páginas del Report, las definiciones del Data model y las definiciones de las consultas. Desde la perspectiva de un sistema de control de versiones, un archivo zip es un archivo binario, y los archivos binarios no se pueden hacer diff, comparar ni fusionar de la misma forma que los archivos de texto. Esto obliga a los desarrolladores de Power BI a usar herramientas de terceros o a idear scripts o procesos elaborados para versionar correctamente sus Data models, especialmente si quieren poder fusionar ramas de desarrollo paralelas dentro del mismo archivo.
 
 Tabular Editor busca simplificar este proceso ofreciendo una forma sencilla de extraer únicamente los metadatos semánticamente relevantes del Tabular Object Model, independientemente de si ese modelo es un modelo tabular de Analysis Services o un Dataset de Power BI. Además, Tabular Editor puede dividir estos metadatos en varios archivos más pequeños mediante su función Guardar en carpeta.
-
-<a name="what-is-save-to-folder"></a>
 
 ## ¿Qué es Guardar en carpeta?
 
@@ -107,7 +105,7 @@ Estas limitaciones son:
 Para habilitar el desarrollo en paralelo, debemos poder almacenar los metadatos del modelo en uno de los formatos basados en texto (JSON) mencionados anteriormente (Model.bim o Database.json). No hay forma de "recrear" un archivo .pbix o .pbit a partir del formato basado en texto, así que **una vez que decidamos seguir esta ruta, ya no podremos usar Power BI Desktop para editar el Data model**. En su lugar, tendremos que apoyarnos en herramientas que puedan usar el formato basado en JSON, que es precisamente el propósito de Tabular Editor.
 
 > [!WARNING]
-> Si no tienes acceso a un Workspace de Power BI Premium (ya sea capacidad Premium o Premium-Per-User), no podrás publicar los metadatos del modelo almacenados en los archivos JSON, ya que esta operación requiere acceso al [punto de conexión XMLA](https://docs.microsoft.com/en-us/power-bi/admin/service-premium-connect-tools).
+> Si no tiene acceso a un Workspace de Power BI asignado a una capacidad o a una licencia Premium Per User, no podrá publicar los metadatos del modelo almacenados en los archivos JSON, ya que esta operación requiere acceso al [punto de conexión XMLA](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools).
 
 > [!NOTE]
 > Power BI Desktop sigue siendo necesario para crear la parte Visual del Report. Es una [buena práctica separar siempre los Report de los modelos](https://docs.microsoft.com/en-us/power-bi/guidance/report-separate-from-model). Si tienes un archivo de Power BI existente que incluye ambos, [esta entrada de blog](https://powerbi.tips/2020/06/split-an-existing-power-bi-file-into-a-model-and-report/) ([vídeo](https://www.youtube.com/watch?v=PlrtBm9YN_Q)) describe cómo dividirlo en un archivo de modelo y un archivo de Report.

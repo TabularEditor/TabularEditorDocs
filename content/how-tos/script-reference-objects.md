@@ -9,7 +9,7 @@ applies_to:
       full: true
 ---
 
-## Scripting/referencing objects
+# Scripting/referencing objects
 You can use drag-and-drop functionality, to script out objects in the following ways:
 
 * Drag one or more objects to another Windows application (text editor or SSMS)

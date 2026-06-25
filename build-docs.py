@@ -23,25 +23,61 @@ Options:
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 
-def run_command(cmd: list[str], description: str, check: bool = True) -> int:
-    """Run a command and return exit code."""
+_DOCFX_WARNING_RE = re.compile(r': warning ', re.IGNORECASE)
+
+
+def run_command(cmd: list[str], description: str, check: bool = True, fail_on_warnings: bool = False) -> int:
+    """Run a command and return exit code.
+
+    If fail_on_warnings=True, streams output line-by-line, counts DocFX warning
+    diagnostics (lines matching ': warning '), and returns exit code 1 if any
+    are found — even when the process itself exits 0.
+    """
     print(f"\n{'='*60}")
     print(f"  {description}")
     print(f"{'='*60}")
     print(f"Running: {' '.join(cmd)}\n")
-    
+
+    if fail_on_warnings:
+        warning_count = 0
+        process = subprocess.Popen(
+            cmd,
+            shell=(os.name == 'nt'),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            encoding='utf-8',
+            errors='replace'
+        )
+        for line in process.stdout:
+            print(line, end='', flush=True)
+            if _DOCFX_WARNING_RE.search(line):
+                warning_count += 1
+        process.wait()
+
+        if check and process.returncode != 0:
+            print(f"Error: Command failed with exit code {process.returncode}")
+            return process.returncode
+
+        if warning_count > 0:
+            print(f"\nError: DocFX produced {warning_count} warning(s). Failing build.")
+            return 1
+
+        return process.returncode
+
     result = subprocess.run(cmd, shell=(os.name == 'nt'))
-    
+
     if check and result.returncode != 0:
         print(f"Error: Command failed with exit code {result.returncode}")
         return result.returncode
-    
+
     return result.returncode
 
 
@@ -85,15 +121,34 @@ def prepare_localized_content(lang: str, sync: bool = False) -> int:
         )
 
     if sync:
-        return run_command(
+        result = run_command(
             [sys.executable, "build_scripts/sync-localized-content.py", "--sync", lang],
             f"Syncing {lang} content (fallback to English for outdated)"
         )
     else:
-        return run_command(
+        result = run_command(
             [sys.executable, "build_scripts/sync-localized-content.py", "--shared-only", lang],
             f"Syncing shared directories for {lang}"
         )
+    if result != 0:
+        return result
+
+    # Repair Crowdin-collapsed DocFX alerts (e.g. "> [!NOTE]> text") before docfx
+    # builds this language, so alerts render as styled boxes instead of plain quotes.
+    result = run_command(
+        [sys.executable, "build_scripts/normalize-localized-alerts.py", lang],
+        f"Normalizing DocFX alerts for {lang}"
+    )
+    if result != 0:
+        return result
+
+    # Stabilize heading anchors: inject English-slug bookmark anchors before
+    # translated headings so cross-reference links (#anchor) resolve even though
+    # the heading text is translated. Prevents InvalidBookmark warnings.
+    return run_command(
+        [sys.executable, "build_scripts/normalize-localized-heading-anchors.py", lang],
+        f"Stabilizing heading anchors for {lang}"
+    )
 
 
 def build_language(lang: str, sync: bool = False) -> int:
@@ -110,10 +165,13 @@ def build_language(lang: str, sync: bool = False) -> int:
     if result != 0:
         return result
     
-    # Build the documentation
+    # Build the documentation — fail on DocFX warnings only for English (the
+    # authored source). Localized content is Crowdin-managed and may carry
+    # translation warnings that must not block deployment.
     return run_command(
         ["docfx", config_path],
-        f"Building {lang} documentation"
+        f"Building {lang} documentation",
+        fail_on_warnings=(lang == "en")
     )
 
 

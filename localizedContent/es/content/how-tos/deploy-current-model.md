@@ -9,6 +9,8 @@ applies_to:
       full: true
 ---
 
+# Implementar el modelo cargado actualmente
+
 ## Implementación
 
 Si quieres implementar el modelo cargado actualmente en una nueva base de datos o sobrescribir una base de datos existente con los cambios del modelo (por ejemplo, al cargarlo desde un archivo Model.bim), usa el Asistente de implementación en "Model" > "Deploy...".

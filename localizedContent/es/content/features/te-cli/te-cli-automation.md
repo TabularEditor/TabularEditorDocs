@@ -2,7 +2,7 @@
 uid: te-cli-automation
 title: Automatización y scripts
 author: Peer Grønnerup
-updated: 2026-05-06
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -52,11 +52,11 @@ te deploy ./model --non-interactive --force --ci github
 
 Todos los comandos de `te` finalizan con un código de estado predecible, para que quien los invoque pueda tomar decisiones según el éxito o el error sin tener que analizar stdout.
 
-| Código de salida | Significado                                                                                                                                                                                    |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `0`              | Éxito.                                                                                                                                                                         |
-| `1`              | Error genérico: argumentos inválidos, fallo del comando, errores de validación, error de autenticación, fallo en la comprobación de BPA con severidad ≥ error. |
-| `2`              | Lo usa `te diff` para indicar que los modelos difieren (a diferencia de `0`, que significa idénticos, y de otros errores con códigos distintos de cero).    |
+| Código de salida | Significado                                                                                                                                                                                                                                                                                                                      |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `0`              | Éxito.                                                                                                                                                                                                                                                                                                           |
+| `1`              | Error genérico: argumentos inválidos, fallo del comando, errores de validación, error de autenticación, fallo en la comprobación de BPA con severidad ≥ error. En `te diff`: se encontraron diferencias (como en la convención `diff`/`cmp`). |
+| `2`              | Solo en `te diff`: se produjo un error durante la comparación, por lo que se desconoce el estado de las diferencias.                                                                                                                                                                             |
 
 Combina los códigos de salida con las anotaciones `--ci <vsts\|github>` y `--trx <file>` para mostrar información detallada sobre los errores en CI; consulta @te-cli-cicd.
 

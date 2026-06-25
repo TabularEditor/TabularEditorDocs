@@ -17,6 +17,8 @@ applies_to:
           full: true
 ---
 
+# Direct Query over Analysis Services
+
 ## Overview
 
 Tabular Editor 3 can **connect** to composite models that leverage **DirectQuery over Analysis Services (DQ‑over‑AS)**, but full modeling support is **not yet available**.  Most authoring tasks work as expected; however, operations that rely on synchronising metadata with the remote semantic model—such as *Update table schema*—are currently limited.

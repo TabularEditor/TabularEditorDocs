@@ -2,7 +2,7 @@
 uid: xmla-as-connectivity
 title: Conectividad con XMLA / Analysis Services
 author: Daniel Otykier
-updated: 2024-05-01
+updated: 2026-06-11
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -70,28 +70,28 @@ La mayoría de las instancias de Analysis Services admiten varios idiomas. Consu
 
 ## Configuración de XMLA de Fabric/Power BI
 
-Hay que activar dos configuraciones de administrador para habilitar el punto de conexión XMLA en Fabric/Power BI.
+La lectura/escritura de XMLA está habilitada de forma predeterminada en todas las capacidades de Fabric y Power BI desde junio de 2025. Si no puedes conectarte a través del punto de conexión XMLA, comprueba que un administrador no haya deshabilitado una de estas dos configuraciones.
 
-### Habilitar el punto de conexión XMLA del inquilino
+### Configuración del punto de conexión XMLA del inquilino
 
-En el portal de administración de Fabric/Power BI, se debe habilitar la configuración de integración "Permitir puntos de conexión XMLA y Analizar en Excel con modelos semánticos locales"
+En el portal de administración de Fabric/Power BI, se debe habilitar la configuración de integración "Permitir puntos de conexión XMLA y Analizar en Excel con modelos semánticos locales".
 
 A nivel de inquilino, la configuración puede estar restringida a ciertos usuarios. Si en tu organización esta configuración está restringida, asegúrate de que todos los usuarios necesarios tengan permiso para usar el punto de conexión XMLA a nivel de inquilino.
 
 ![Configuración de administrador del inquilino](~/content/assets/images/common/XMLASettings/TennantAdminSetting.png)
 
-### Habilitar lectura y escritura de XMLA en la capacidad
+### Lectura/escritura de XMLA en la capacidad
 
-Para usar el punto de conexión XMLA, el Workspace que hospeda un modelo semántico debe estar asignado a una capacidad (FSku o Power BI Premium Per User) y la capacidad debe tener XMLA con ["Read Write" habilitado en la configuración de la capacidad.](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#enable-xmla-read-write)
+Para usar el punto de conexión XMLA, asigna el Workspace que aloja el modelo semántico a una capacidad de Fabric (SKU F), una capacidad de Power BI Embedded (SKU A o EM), una capacidad Premium heredada (SKU P) o una licencia Premium por usuario (PPU). La capacidad debe tener el punto de conexión XMLA configurado como [**Lectura y escritura** en la configuración de la capacidad](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-connect-tools#enable-xmla-read-write). Es la configuración predeterminada desde junio de 2025.
 
-![Configuración del administrador del inquilino](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
+![Configuración del administrador de la capacidad](~/content/assets/images/common/XMLASettings/CapacityAdminSetting.png)
 
-La opción "Read Write" se habilita en el portal de administración, yendo a
+Si la lectura/escritura se ha desactivado, pide al administrador de la capacidad que la vuelva a habilitar en el portal de administración:
 
-1. Configuración de capacidad
-2. Elegir el tipo de capacidad
-3. Seleccionar la capacidad correspondiente
-4. Ve a Cargas de trabajo de Power BI y desplázate hacia abajo hasta encontrar la configuración del punto de conexión XMLA y elige "Read Write"
+1. Abre **Configuración de capacidad**.
+2. Elige el tipo de capacidad.
+3. Selecciona la capacidad correspondiente.
+4. Ve a **Cargas de trabajo de Power BI** y establece **punto de conexión XMLA** en **Lectura y escritura**.
 
 ### Permisos de usuario a nivel de Workspace
 
@@ -121,7 +121,7 @@ Para garantizar la mejor experiencia al editar modelos usando el punto de conexi
 
 Si un usuario distinto del propietario del modelo semántico necesita editar el modelo a través del punto de conexión XMLA, debe deshabilitarse la configuración de administración de seguridad de Fabric/Power BI denominada "Bloquear la republicación y deshabilitar la actualización del paquete".
 
-![Configuración del administrador del inquilino](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
+![Configuración para bloquear la republicación y desactivar la actualización del paquete](~/content/assets/images/common/XMLASettings/DisablePackageRefresh.png)
 
 ## Tipos de modelo no compatibles
 
@@ -138,8 +138,6 @@ No se puede acceder a los siguientes modelos semánticos mediante el punto de co
 En Fabric, el modelo semántico predeterminado de un Lakehouse o un Warehouse se puede abrir o conectar desde Tabular Editor, pero [no se puede editar](https://learn.microsoft.com/en-us/power-bi/enterprise/service-premium-connect-tools#considerations-and-limitations). Además, algunas operaciones que requieren acceso de lectura a determinadas [DMVs](https://learn.microsoft.com/en-us/analysis-services/instances/use-dynamic-management-views-dmvs-to-monitor-analysis-services?view=asallproducts-allversions), como recopilar estadísticas del Analizador VertiPaq, podrían no estar admitidas en los modelos semánticos predeterminados.
 
 ## Solución de problemas de conexiones XMLA
-
-<a name="testing-a-simple-connection"></a>
 
 ### Probar una conexión sencilla
 

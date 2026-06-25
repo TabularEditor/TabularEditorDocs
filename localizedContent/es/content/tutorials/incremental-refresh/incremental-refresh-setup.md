@@ -84,7 +84,9 @@ Las columnas de tipo fecha, cadena o entero también se pueden filtrar mantenien
    - **RollingWindowPeriods:** Número de períodos (con la granularidad indicada más arriba) durante los cuales se deben archivar los datos.
    - **Mode:** Si es una política de actualización `Import` estándar o `Hybrid`, en la que la última partición es DirectQuery.
    - **PollingExpression:** Una expresión M válida configurada para detectar cambios en los datos. Para más información sobre _Polling Expression_ u otras propiedades de la política de actualización, consulta [aquí](xref:incremental-refresh-about#overview-of-all-properties).
+
 8. **Aplicar cambios al modelo:** Guarda el modelo (Ctrl+S).
+
 9. **Aplicar política de actualización:** Haz clic con el botón derecho en la tabla y elige "Aplicar política de actualización".
 
 <img src="~/content/assets/images/tutorials/incremental-refresh-apply-refresh-policy.png" class="noscale" alt="Apply Refresh Policy" style="width:400px !important"/>
