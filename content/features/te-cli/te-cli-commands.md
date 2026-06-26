@@ -42,9 +42,9 @@ Both path forms share the same syntax rules; they differ in only two places:
 
 A path is a slash-separated sequence of **segments**. Each segment names a single step - a table, a child object, or a container keyword.
 
-- `Sales` — one segment
-- `Sales/Revenue` — two segments
-- `Roles/Admin/Members/bob` — four segments
+- `Sales` - one segment
+- `Sales/Revenue` - two segments
+- `Roles/Admin/Members/bob` - four segments
 
 Empty input and `.` both mean "the model root" - the implicit starting point for filter paths and the explicit subject for `te get .`-style queries.
 
@@ -144,7 +144,7 @@ positional `<model>` argument → `--model` global flag → `--server`/`--databa
 
 ### load
 
-Load a semantic model and display a summary of the model — name, compatibility level, and high-level object counts (tables, measures, columns).
+Load a semantic model and display a summary of the model - name, compatibility level, and high-level object counts (tables, measures, columns).
 
 ```bash
 te load ./model                            # TMDL folder
@@ -158,8 +158,8 @@ Save a model to disk. Use it to write a remote workspace model to local files, c
 
 `te save` accepts:
 
-- `-o, --output-path <path>` - target file or folder. **Optional** - when omitted, `te save` writes back to the source location, preserving the original format.
-- `--serialization <fmt>` - `tmdl`, `bim`, `te-folder`, `pbip`, `database.json`. Defaults to inferring from the loaded model (BIM source → BIM, TMDL `SemanticModel/` → TMDL under `definition/`).
+- `-o, --output-path <path>` - target file or folder. **Optional** - when omitted, `te save` writes back to the source location, preserving the original format. The file extension also drives format inference: `.bim` writes a single-file BIM, `.json` writes a `database.json` folder, and a bare path writes a TMDL folder.
+- `--serialization <fmt>` - `tmdl`, `bim` (alias `tmsl`), `database.json`, `pbip`. When omitted, the format is inferred from the `-o` path extension (or from the loaded model when `-o` is omitted entirely).
 - `--force` - skip validation and overwrite existing output. Some refusals (ambiguous containers, multi-`SemanticModel` project roots) fire even under `--force`.
 - `--skip-bpa` - bypass the BPA gate entirely.
 - `--fix-bpa` - auto-fix BPA violations where rules define a fix expression.
@@ -179,10 +179,12 @@ te save -o ./out -s my-workspace -d my-model --skip-validation   # Fast download
 
 ### open
 
-Open a model in Tabular Editor 3 Desktop. **Windows only** (requires TE3 to be installed).
+Open a model in Tabular Editor 3 Desktop. **Windows only** (requires TE3 to be installed). With no arguments, launches TE3 with a blank workspace.
 
 ```bash
-te open ./my-model
+te open                  # Launch TE3 with a blank workspace
+te open ./my-model       # Open a TMDL folder in TE3
+te open ./model.bim      # Open a BIM file in TE3
 ```
 
 ### init
@@ -195,7 +197,7 @@ Create a new empty semantic model at the given path. Defaults to a TMDL model in
 - `--compatibility-mode <mode>` - `PowerBI` (default) or `AnalysisServices`.
 - `--compatibility-level <N>` (alias `--compat`) - compatibility level. Defaults to `1702` when the mode is `PowerBI`, `1500` otherwise. See @update-compatibility-level.
 - `--name <name>` - model/database name (default: the directory name).
-- `--serialization <fmt>` - `tmdl` (default), `bim`, `te-folder`, `pbip`.
+- `--serialization <fmt>` - `tmdl` (default), `bim` (alias `tmsl`), `database.json`, `pbip`.
 - `--force` - replace any existing file or directory at the target path.
 
 ```bash
@@ -213,14 +215,18 @@ Set a property on a model object. Accepts a `<path>`.
 
 `te set` accepts:
 
-- `-q <property>` - property name (e.g., `expression`, `formatString`, `description`, `isHidden`).
-- `-i <value>` - value (use `-` to read from stdin).
+- `-q <property>` - property name (e.g., `expression`, `formatString`, `description`, `isHidden`). **Repeatable** - pair each `-q` with a following `-i` to set multiple properties in one command.
+- `-i <value>` - value (use `-` to read from stdin). One `-i` per `-q`.
+- `-t, --type <kind>` - disambiguation when the same path could resolve to multiple object kinds (`Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Calendar`, `Partition`, `CalculationItem`).
 - `--save` / `--save-to <path>` - persist changes.
+- `--serialization <fmt>` - override the serialization when saving (`tmdl`, `bim` (alias `tmsl`), `database.json`).
+- `--force` - save even if the mutation introduces DAX validation errors.
 
 ```bash
 te set Sales/Amount -q expression -i "SUM(Sales[Amt])" --save
 te set "'Net Sales'[Sales Amount]" -q formatString -i "#,0" --save   # DAX form with spaced names
 te set Sales -q isHidden -i true --save
+te set Sales/Amount -q formatString -i "#,0" -q description -i "Net sales" --save   # Multi-property
 ```
 
 ### add
@@ -230,7 +236,14 @@ Add an object to the model. Pass a `<path>` for the new object (the parent must 
 `te add` accepts:
 
 - `-t, --type <type>` - object type. Common values: `Table`, `Measure`, `Column`, `CalculatedColumn`, `Hierarchy`, `Role`, `Perspective`, `Culture`, `CalculationGroup`, `CalculationItem`. Tab-completion is supported; the full list can be retrieved by running `te add --help`.
+- `-i <value>` - expression or value to assign to the new object (DAX for measures/calculated columns, M for partitions, etc.). Pair with `-q` to set additional properties on the new object in the same command.
+- `-q <property>` - additional property to set on the new object (repeatable; pairs with `-i`).
+- `--file <path>` - read the expression for `-i` from a file instead of inline.
+- `--mode <mode>` - storage mode for new tables: `import` (default), `directQuery`, `dual`, `directLake`.
 - `--if-not-exists` - exit `0` without error if the object already exists. Use this for idempotent CI/CD pipelines.
+- `--save` / `--save-to <path>` - persist changes.
+- `--serialization <fmt>` - override the serialization when saving (`tmdl`, `bim` (alias `tmsl`), `database.json`).
+- `--force` - save even if the mutation introduces DAX validation errors.
 
 ```bash
 te add Sales/Revenue -t Measure -i "SUM(Sales[Amount])" --save
@@ -249,11 +262,13 @@ Remove an object. Checks dependents by default to prevent breaking existing refe
 
 `te rm` accepts:
 
-- `<path>` — positional argument: the object to remove.
-- `--force` — bypass the dependents check.
-- `--if-exists` — exit `0` without error if the object doesn't exist. Use this for idempotent CI/CD pipelines.
-- `--dry-run` — preview the removal without applying it.
-- `--save` — persist the change to the loaded model.
+- `<path>` - positional argument: the object to remove.
+- `-t, --type <kind>` - disambiguate when the path matches multiple table-children (e.g., a column and a hierarchy with the same name).
+- `--force` - bypass the dependents check.
+- `--if-exists` - exit `0` without error if the object doesn't exist. Use this for idempotent CI/CD pipelines.
+- `--dry-run` - preview the removal without applying it.
+- `--save` / `--save-to <path>` - persist the change.
+- `--serialization <fmt>` - override the serialization when saving (`tmdl`, `bim` (alias `tmsl`), `database.json`).
 
 ```bash
 te rm Sales/Revenue --save
@@ -266,9 +281,17 @@ te rm Sales/OldMeasure --if-exists --save    # Idempotent
 
 Move or rename a model object. Both source and destination are `<path>` arguments.
 
+`te mv` accepts:
+
+- `-t, --type <kind>` - disambiguate when the source path matches multiple object kinds (e.g., a column and a hierarchy with the same name).
+- `--save` / `--save-to <path>` - persist the change.
+- `--serialization <fmt>` - override the serialization when saving (`tmdl`, `bim` (alias `tmsl`), `database.json`).
+- `--force` - save even if the mutation introduces DAX validation errors.
+
 ```bash
-te mv Sales/Revenue Finance/Revenue --save    # Move measure to another table
-te mv Sales/Revenue Sales/TotalRevenue --save # Rename measure
+te mv Sales/Revenue Finance/Revenue --save                # Move measure to another table
+te mv Sales/Revenue Sales/TotalRevenue --save             # Rename measure
+te mv Sales/Date Sales/CalendarDate -t Hierarchy --save   # Disambiguate hierarchy from column
 ```
 
 ### replace
@@ -283,7 +306,7 @@ Find and replace text across model objects. Dry-run by default; add `--save` to 
 - `--dry-run` - preview changes without applying. Default behavior.
 - `--save` - persist the mutation to the source location. Mutually exclusive with `--revert` and `--stage`.
 - `--save-to <path>` - save to a different path (implies `--save`).
-- `--serialization <fmt>` - model serialization: `tmdl`, `bim`, `te-folder`.
+- `--serialization <fmt>` - model serialization: `tmdl`, `bim` (alias `tmsl`), `database.json`.
 - `--force` - save even if the replacement introduces DAX validation errors.
 
 `--in expressions` walks every expression-bearing property:
@@ -306,7 +329,7 @@ te replace "SUM" "SUMX" --regex --in expressions --save
 
 ### ls
 
-List objects with filesystem-like navigation. Takes a `<path-filter>` argument supporting wildcards. Both model-level containers (`Tables`, `Measures`, `Columns`, `Hierarchies`, `Relationships`, `Roles`, `Perspectives`, `Cultures`) and table-scoped containers (`Sales/Measures`, `Sales/Columns`, …) are supported.
+List objects with filesystem-like navigation. Takes a `<path-filter>` argument supporting wildcards. Both model-level containers and table-scoped containers are supported - see the [container keyword table](#containers-and-keywords) above for the full list.
 
 `te ls` accepts:
 
@@ -380,6 +403,12 @@ Compare two models for structural differences. Returns the following exit codes:
 ```bash
 te diff ./model-v1 ./model-v2
 te diff old.bim new.bim
+
+# Branch on exit code (POSIX sh):
+te diff ./a ./b; case $? in 0) echo same;; 1) echo different;; *) echo error;; esac
+
+# Branch on exit code (PowerShell):
+te diff ./a ./b; switch ($LASTEXITCODE) { 0 { 'same' } 1 { 'different' } default { 'error' } }
 ```
 
 ### deps
@@ -444,7 +473,7 @@ Run Best Practice Analyzer rules against a model.
 - `--fix` - apply fix expressions to auto-fix violations where possible.
 - `--save` - save the model back to source after applying fixes.
 - `--save-to <path>` - save the model to a different path after applying fixes.
-- `--serialization <fmt>` - model serialization: `tmdl`, `bim`, `te-folder`.
+- `--serialization <fmt>` - model serialization: `tmdl`, `bim` (alias `tmsl`), `database.json`.
 - `--fail-on <severity>` - failure threshold: `error` (default) or `warning`. Exits with code `1` when violations meet the threshold.
 - `--ci <fmt>` - emit CI logging commands to stderr: `vsts` (Azure DevOps), `github` (GitHub Actions).
 - `--trx <path>` - write results as a VSTEST `.trx` file to the specified path.
@@ -480,7 +509,7 @@ Rules loaded: 41 from 1 file(s) from bpa.rules config + built-in defaults + mode
 
 ### bpa rules
 
-Manage BPA rule collections — list, inspect, initialize, and toggle rules in your local rules file or in model annotations. Built-in rules are read-only - to skip one without losing the rest, use `te bpa rules disable` (do not edit the built-in set directly).
+Manage BPA rule collections - list, inspect, initialize, and toggle rules in your local rules file or in model annotations. Built-in rules are read-only - to skip one without losing the rest, use `te bpa rules disable` (do not edit the built-in set directly).
 
 Subcommands:
 
@@ -502,7 +531,7 @@ All `te bpa rules` subcommands accept:
 - `--model-rules` - operate on rules embedded in the model annotation instead of a file.
 
 > [!IMPORTANT]
-> `te bpa rules set` and `te bpa rules rm` refuse to mutate built-in rule IDs. Attempting to do so exits with code `1` and points at `te bpa rules disable`. To customize a built-in rule's behavior, disable the built-in and add a custom copy with a different ID:
+> `te bpa rules set` and `te bpa rules remove` refuse to mutate built-in rule IDs. Attempting to do so exits with code `1` and points at `te bpa rules disable`. To customize a built-in rule's behavior, disable the built-in and add a custom copy with a different ID:
 >
 > ```bash
 > te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
@@ -531,7 +560,7 @@ Disabled built-in rules are flagged with a `[disabled]` marker next to the rule 
 
 #### bpa rules init
 
-Create an empty BPA rules file (`[]`) at the configured path. Use this once before invoking `te bpa rules set` / `te bpa rules rm` against a path that does not yet exist.
+Create an empty BPA rules file (`[]`) at the configured path. Use this once before invoking `te bpa rules set` / `te bpa rules remove` against a path that does not yet exist.
 
 `te bpa rules init` accepts:
 
@@ -546,11 +575,27 @@ te bpa rules init --rules-file ./MyRules.json
 te bpa rules init --force
 ```
 
+#### bpa rules add / set / remove / ignore / unignore
+
+Mutate the rules file (`add`, `set`, `remove`) or model-embedded ignore list (`ignore`, `unignore`). All three mutating subcommands operate on `--rules-file <path>` or `--model-rules` and refuse to touch built-in rule IDs.
+
+- `te bpa rules add <id>` - create a new rule. Pass each property with `-q <name> -i <value>` pairs. Property names: `name`, `expression`, `scope`, `category`, `severity`, `description`, `fixExpression`.
+- `te bpa rules set <id>` - update properties on an existing rule. Same `-q`/`-i` pairs as `add` (repeatable).
+- `te bpa rules remove <id>` - remove a rule.
+- `te bpa rules ignore <id>` - add a rule ID to the model's `BestPracticeAnalyzer_IgnoreRules` annotation.
+- `te bpa rules unignore <id>` - remove a rule ID from the model's ignore list.
+
+```bash
+te bpa rules add MY_RULE -q name -i "My rule" -q expression -i "Measure" -q severity -i 2
+te bpa rules set MY_RULE -q severity -i 3
+te bpa rules remove MY_RULE
+```
+
 #### bpa rules disable
 
 Disable an individual built-in BPA rule. The rule ID is added to `bpa.disabledBuiltInRuleIds` in your CLI config. Subsequent gate runs (deploy, save, mutation) and `te bpa run` skip the disabled rule.
 
-The command is idempotent — running `disable` against an already-disabled rule succeeds without modifying the config. It exits with code `1` if `<rule-id>` is not a built-in rule; use `te bpa rules list` to see valid built-in IDs.
+The command is idempotent - running `disable` against an already-disabled rule succeeds without modifying the config. It exits with code `1` if `<rule-id>` is not a built-in rule; use `te bpa rules list` to see valid built-in IDs.
 
 ```bash
 te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
@@ -570,6 +615,7 @@ Analyze VertiPaq storage statistics.
 
 `te vertipaq` accepts:
 
+- `<path>` - optional positional argument: a table name to filter the analysis to a single table.
 - `--columns`, `--relationships`, `--partitions`, `--all`.
 - `--detail` - show expanded columns (data/dict/hierarchy size breakdown, encoding, segments).
 - `--fields <list>` - comma-separated fields to display (e.g., `--fields name,card,size,%tbl,%db,bar`). Available fields vary by view.
@@ -577,10 +623,12 @@ Analyze VertiPaq storage statistics.
 - `--import <file.vpax>` - load a previously exported `.vpax` file and analyze it offline.
 - `--obfuscate` - obfuscate names and expressions in exported VPAX.
 - `--top <N>`, `--stats`, `--annotate`, `--save`.
+- `--auth <method>` - auth method override when connecting to a remote model.
 
 ```bash
-te vertipaq                    # Columns by size (default)
-te vertipaq --all              # Tables, columns, relationships, partitions
+te vertipaq                      # Columns by size (default)
+te vertipaq Sales                # Stats limited to the Sales table
+te vertipaq --all                # Tables, columns, relationships, partitions
 te vertipaq --export stats.vpax
 te vertipaq --import stats.vpax  # Analyze offline
 ```
@@ -615,7 +663,8 @@ Execute a DAX query against a deployed model.
 
 `te query` accepts:
 
-- `-q, --query <dax>` - inline query.
+- `<dax>` - positional argument: the DAX query to execute. Equivalent to passing `-q`. Use whichever shape reads better; explicit `-q` wins if both are supplied.
+- `-q, --query <dax>` - inline query (named-flag form of the positional above).
 - `--file <file.dax>` - query from file.
 - `--limit <N>` - default 100.
 - `-o, --output-file <path>` - write results to file (`.csv`, `.tsv`, `.json`, `.dax`).
@@ -623,7 +672,8 @@ Execute a DAX query against a deployed model.
 - `--no-validate` - skip pre-execution DAX semantic validation.
 
 ```bash
-te query -q "EVALUATE TOPN(5, 'Sales')" -s my-ws -d my-model
+te query "EVALUATE TOPN(5, 'Sales')" -s my-ws -d my-model           # Positional DAX
+te query -q "EVALUATE TOPN(5, 'Sales')" -s my-ws -d my-model        # Named-flag form
 te query --file query.dax --output-format json
 ```
 
@@ -688,6 +738,20 @@ Subcommands:
 | `sort` | Sort and re-assign IDs. |
 | [`init`](#macro-init) | Create an empty macros file at the resolved path. |
 
+#### macro add / set / remove
+
+Mutate the macros file (`add`, `set`, `remove`). All three operate on `--macros <path>` (or the resolved macros file).
+
+- `te macro add <name>` - create a new macro. Provide the script body via `-e "<code>"` (inline) or `-s <file.cs>` (script file). Optional: `--tooltip <text>`, `--contexts <list>` (where the macro applies, e.g., `Table,Measure`), `--enabled true|false`.
+- `te macro set <name-or-id>` - update macro properties. Use `-q <property> -i <value>` pairs (repeatable). Property names: `name`, `execute`, `enabled`, `tooltip`, `validContexts`.
+- `te macro remove <name-or-id>` - remove a macro.
+
+```bash
+te macro add MyMacro -e "Info(Selected.Measure.Name);" --tooltip "Print measure name" --contexts Measure
+te macro set MyMacro -q tooltip -i "Updated tooltip"
+te macro remove MyMacro
+```
+
 #### macro init
 
 Create an empty macros file (`{"Actions":[]}`) at the configured path. Use this once when the resolved macros file does not yet exist.
@@ -741,7 +805,7 @@ Deploy a semantic model to Power BI, Fabric, or Azure Analysis Services.
 - `--bpa-rules <path>` - repeatable; override `bpa.rules` from your CLI config for this single deploy. Built-in rules still apply unless `bpa.builtInRules` is `false`.
 - `--force` - skip interactive confirmation (required for CI).
 - `--ci <fmt>` - `vsts` or `github`.
-- `--profile <name>` - one-shot use of a saved @te-cli-auth profile.
+- `-p, --profile <name>` - one-shot use of a saved @te-cli-auth profile.
 
 ```bash
 te deploy ./model -s my-workspace -d my-model --force --ci github
@@ -758,12 +822,12 @@ Trigger a data refresh on a deployed model.
 
 `te refresh` accepts:
 
-- `--type <type>` - `full`, `dataonly`, `automatic`, `calculate`, `clearvalues`, `defragment`, `add` (default: `automatic`).
+- `--type <type>` - `full`, `dataonly` (alias `data-only`, `data`), `automatic` (alias `auto`), `calculate` (alias `calc`), `clearvalues` (alias `clear`), `defragment` (alias `defrag`), `add` (default: `automatic`).
 - `--table <name>` - refresh specific table(s); repeatable.
 - `--partition <Table.Partition>` - refresh specific partition(s).
 - `--apply-refresh-policy` - apply the incremental refresh policy to determine which partitions are refreshed.
 - `--effective-date <yyyy-MM-dd>` - set the effective date used by the refresh policy.
-- `--max-parallelism <N>` - set the maximum number of partitions to refresh in parallel.
+- `--max-parallelism <N>` - set the maximum number of partitions to refresh in parallel. Wraps the refresh in a TMSL `sequence` command.
 - `--dry-run` - output the TMSL script without executing.
 - `--no-progress`, `--trace [path]`.
 
@@ -818,12 +882,14 @@ te test init --from-model --model ./my-model  # Generate stubs from your measure
 Set (or display) the active connection for the current terminal session. See @te-cli-auth.
 
 ```bash
-te connect                         # Show current active connection
-te connect my-workspace my-model   # Remote
-te connect ./model                 # Local
-te connect --local                 # Power BI Desktop (Windows)
-te connect --profile prod          # Activate a saved profile
-te connect --clear                 # Clear the active connection (and any workspace mirror)
+te connect                                # Show current active connection
+te connect my-workspace my-model          # Remote (positional)
+te connect -s my-workspace -d my-model    # Remote (named-flag form)
+te connect ./model                        # Local
+te connect --local                        # Power BI Desktop (Windows)
+te connect --local my-report              # Filter by report name (multiple PBI Desktop instances)
+te connect --profile prod                 # Activate a saved profile
+te connect --clear                        # Clear the active connection (and any workspace mirror)
 ```
 
 #### Workspace mode (`-w` / `--workspace`)
@@ -832,7 +898,7 @@ Pair a primary source with a secondary target so every subsequent `--save` mirro
 
 - `te connect <ws> <model> -w ./src` - primary is remote; `./src` receives an initial TMDL export and mirrors every save.
 - `te connect ./src -w <ws> <model>` - primary is local; an initial deploy pushes the model to the workspace, and subsequent saves re-deploy automatically.
-- `--workspace-format <bim|tmdl>` - choose the on-disk format when mirroring to a folder/file (e.g., `-w ./model.bim` infers BIM).
+- `--workspace-format <fmt>` - choose the on-disk format when mirroring to a folder/file: `tmdl`, `bim` (alias `tmsl`), or `database.json`. When omitted, the format is inferred from the workspace target path (e.g., `-w ./model.bim` infers BIM).
 - `--workspace-auth <method>` - auth method for a remote workspace target when the primary is local. Defaults to `--auth` if set, else `auto`.
 - `--force` - required when the target already exists (non-empty folder, existing database). Without it, `te connect` shows an interactive `y/n` prompt with `n` as the safe default.
 
@@ -863,10 +929,6 @@ te config paths                         # Resolved TE3 file paths
 te config init                          # Create default config
 te config set autoFormat true
 ```
-
-### license
-
-`te license` is reserved for the GA release and is not available in this preview build. The command is still wired up to the parser - so existing scripts that invoke it won't blow up at parse time - but every subcommand exits with status `1` and a "not available in this preview build" message. See the [Preview notice](xref:te-cli#preview-notice) on the overview page for the broader licensing outlook.
 
 ### migrate
 
@@ -934,7 +996,7 @@ te completion fish
 | Exit | Meaning |
 | -- | -- |
 | `0` | Success. |
-| `1` | Generic failure (invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity ≥ error). For `te diff`: differences found. |
+| `1` | Generic failure (invalid arguments, command failed, validation errors, auth failure, BPA gate failed at severity >= error). For `te diff`: differences found. |
 | `2` | `te diff` only: an error occurred while comparing, so the difference status is unknown. |
 
 For fine-grained control in CI pipelines, combine exit codes with `--ci <vsts/github>` annotations and `--trx` results files - see @te-cli-cicd.

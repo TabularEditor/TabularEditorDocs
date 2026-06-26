@@ -18,9 +18,9 @@ applies_to:
 
 The Tabular Editor CLI reads optional configuration from a JSON file. Configuration controls three things:
  
-- **File paths** — where the CLI reads macros, BPA rules, and (optionally) the TE3 Desktop executable, and where to write the query log.
-- **Behavioral defaults** — BPA gates, auto-format, validation.
-- **Saved connection profiles** — the list of named profiles you can switch between.
+- **File paths** - where the CLI reads macros, BPA rules, and (optionally) the TE3 Desktop executable, and where to write the query log.
+- **Behavioral defaults** - BPA gates, auto-format, validation.
+- **Saved connection profiles** - the list of named profiles you can switch between.
 
 The CLI is self-contained - it does not read from or write to any Tabular Editor 3 desktop install path. BPA rules and macros files must be set explicitly via this config (or initialized on demand with `te bpa rules init` / `te macro init`).
 
@@ -78,7 +78,7 @@ The complete JSON config schema with all keys at their default values. Use this 
 
 ```json
 {
-  "formatVersion": 1,
+  "formatVersion": 2,
   "macros": null,
   "autoFormat": false,
   "validateOnMutation": true,
@@ -146,7 +146,7 @@ All BPA-related settings live under the `bpa` object and are addressed via dotte
 | `autoFormat` | `false` | Run the DAX Formatter on modified expressions after `te add` / `te set` / `te mv` / `te macro run`. Uses the in-house formatter by default; opt into the SQL BI web service via `formatOptions.useSqlBiDaxFormatter`. |
 | `validateOnMutation` | `true` | After a mutating command (`add`, `set`, `mv`, `replace --save`, `macro run`), check that every `Table[Column]` reference in the model still resolves. Catches dangling references introduced by renames or removals before they reach deploy. |
 | `bpa.onMutation` | `false` | Run a scoped BPA analysis after each mutating command (`set`, `add`, `mv`, `rm`, `macro run`). Only the affected table's objects are checked, not the whole model - useful for fast feedback during iterative edits. |
-| `bpa.onDeploy` | `true` | Run the BPA gate before `te deploy` executes. The deploy is aborted if any rule fires at severity ≥ error. Bypass per-invocation with `--skip-bpa`, or auto-fix with `--fix-bpa`. |
+| `bpa.onDeploy` | `true` | Run the BPA gate before `te deploy` executes. The deploy is aborted if any rule fires at severity >= error. Bypass per-invocation with `--skip-bpa`, or auto-fix with `--fix-bpa`. |
 | `bpa.onSave` | `true` | Run the BPA gate before `te save -o` writes to disk. Bypass per-invocation with `--skip-bpa` or `--force`. |
 | `bpa.builtInRules` | `true` | Include the curated built-in BPA rule set whenever the gate runs. Set to `false` to ignore built-ins entirely; the gate then runs only the rules configured via `bpa.rules` and any model-embedded rules. |
 | `bpa.disabledBuiltInRuleIds` | `null` | IDs of individual built-in rules to exclude from the gate. Mutated by `te bpa rules disable <id>` / `te bpa rules enable <id>` - prefer those over editing the array directly. |
@@ -203,7 +203,7 @@ The BPA gate is the safety net that prevents a model with rule violations from b
 
 The gate loads BPA rules from `bpa.rules` and, by default, the built-in rule set (controlled by `bpa.builtInRules`). Built-in rules can be individually excluded via `bpa.disabledBuiltInRuleIds` - managed with `te bpa rules disable <id>` / `te bpa rules enable <id>`.
 
-When the gate fires and finds violations at severity ≥ `error`, the command fails with exit code `1` and a summary of the violations. Options to resolve:
+When the gate fires and finds violations at severity >= `error`, the command fails with exit code `1` and a summary of the violations. Options to resolve:
 
 - `--fix-bpa` - apply the rule's `fixExpression` in memory for the deploy/save artifact; source files are not modified.
 - `--skip-bpa` - disable the gate for this one command.
@@ -218,7 +218,7 @@ te bpa run ./model --fix --save     # Apply fixes to the source
 
 ### Built-in BPA rules
 
-The CLI ships a single canonical set of built-in BPA rules embedded as a JSON resource. Built-in rules are read-only - `te bpa rules set` and `te bpa rules rm` refuse to mutate built-in IDs and point users at `te bpa rules disable` instead. To customize a built-in rule's behavior, copy it into your local rules file as a new rule with a different ID and disable the built-in.
+The CLI ships a single canonical set of built-in BPA rules embedded as a JSON resource. Built-in rules are read-only - `te bpa rules set` and `te bpa rules remove` refuse to mutate built-in IDs and point users at `te bpa rules disable` instead. To customize a built-in rule's behavior, copy it into your local rules file as a new rule with a different ID and disable the built-in.
 
 Both `bpa.builtInRules` and `bpa.disabledBuiltInRuleIds` apply consistently to the deploy/save/mutation gate **and** the manual `te bpa run` command - disabling a rule once via `te bpa rules disable` excludes it everywhere.
 

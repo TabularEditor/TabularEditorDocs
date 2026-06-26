@@ -131,7 +131,7 @@ te config set hidePreviewNotice true
 
 ## Shell completion
 
-The CLI provides tab-completion scripts for **Bash**, **Zsh**, **PowerShell** and **Fish**. Pick the block that matches your shell — each one installs the completion persistently for new shell sessions.
+The CLI provides tab-completion scripts for **Bash**, **Zsh**, **PowerShell** and **Fish**. Pick the block that matches your shell - each one installs the completion persistently for new shell sessions.
 
 ### Bash (macOS/Linux)
 
