@@ -218,7 +218,7 @@ te bpa run ./model --fix --save     # Apply fixes to the source
 
 ### Built-in BPA rules
 
-The CLI ships a single canonical set of built-in BPA rules embedded as a JSON resource. Built-in rules are read-only - `te bpa rules set` and `te bpa rules rm` refuse to mutate built-in IDs and point users at `te bpa rules disable` instead. To customize a built-in rule's behavior, copy it into your local rules file as a new rule with a different ID and disable the built-in.
+The CLI ships a single canonical set of built-in BPA rules embedded as a JSON resource. Built-in rules are read-only - `te bpa rules set` and `te bpa rules remove` refuse to mutate built-in IDs and point users at `te bpa rules disable` instead. To customize a built-in rule's behavior, copy it into your local rules file as a new rule with a different ID and disable the built-in.
 
 Both `bpa.builtInRules` and `bpa.disabledBuiltInRuleIds` apply consistently to the deploy/save/mutation gate **and** the manual `te bpa run` command - disabling a rule once via `te bpa rules disable` excludes it everywhere.
 

@@ -531,7 +531,7 @@ All `te bpa rules` subcommands accept:
 - `--model-rules` - operate on rules embedded in the model annotation instead of a file.
 
 > [!IMPORTANT]
-> `te bpa rules set` and `te bpa rules rm` refuse to mutate built-in rule IDs. Attempting to do so exits with code `1` and points at `te bpa rules disable`. To customize a built-in rule's behavior, disable the built-in and add a custom copy with a different ID:
+> `te bpa rules set` and `te bpa rules remove` refuse to mutate built-in rule IDs. Attempting to do so exits with code `1` and points at `te bpa rules disable`. To customize a built-in rule's behavior, disable the built-in and add a custom copy with a different ID:
 >
 > ```bash
 > te bpa rules disable TE3_BUILT_IN_DATE_TABLE_EXISTS
@@ -560,7 +560,7 @@ Disabled built-in rules are flagged with a `[disabled]` marker next to the rule 
 
 #### bpa rules init
 
-Create an empty BPA rules file (`[]`) at the configured path. Use this once before invoking `te bpa rules set` / `te bpa rules rm` against a path that does not yet exist.
+Create an empty BPA rules file (`[]`) at the configured path. Use this once before invoking `te bpa rules set` / `te bpa rules remove` against a path that does not yet exist.
 
 `te bpa rules init` accepts:
 
@@ -575,20 +575,20 @@ te bpa rules init --rules-file ./MyRules.json
 te bpa rules init --force
 ```
 
-#### bpa rules add / set / rm / ignore / unignore
+#### bpa rules add / set / remove / ignore / unignore
 
-Mutate the rules file (`add`, `set`, `rm`) or model-embedded ignore list (`ignore`, `unignore`). All three mutating subcommands operate on `--rules-file <path>` or `--model-rules` and refuse to touch built-in rule IDs.
+Mutate the rules file (`add`, `set`, `remove`) or model-embedded ignore list (`ignore`, `unignore`). All three mutating subcommands operate on `--rules-file <path>` or `--model-rules` and refuse to touch built-in rule IDs.
 
 - `te bpa rules add <id>` - create a new rule. Pass each property with `-q <name> -i <value>` pairs. Property names: `name`, `expression`, `scope`, `category`, `severity`, `description`, `fixExpression`.
 - `te bpa rules set <id>` - update properties on an existing rule. Same `-q`/`-i` pairs as `add` (repeatable).
-- `te bpa rules rm <id>` - remove a rule.
+- `te bpa rules remove <id>` - remove a rule.
 - `te bpa rules ignore <id>` - add a rule ID to the model's `BestPracticeAnalyzer_IgnoreRules` annotation.
 - `te bpa rules unignore <id>` - remove a rule ID from the model's ignore list.
 
 ```bash
 te bpa rules add MY_RULE -q name -i "My rule" -q expression -i "Measure" -q severity -i 2
 te bpa rules set MY_RULE -q severity -i 3
-te bpa rules rm MY_RULE
+te bpa rules remove MY_RULE
 ```
 
 #### bpa rules disable
@@ -738,18 +738,18 @@ Subcommands:
 | `sort` | Sort and re-assign IDs. |
 | [`init`](#macro-init) | Create an empty macros file at the resolved path. |
 
-#### macro add / set / rm
+#### macro add / set / remove
 
-Mutate the macros file (`add`, `set`, `rm`). All three operate on `--macros <path>` (or the resolved macros file).
+Mutate the macros file (`add`, `set`, `remove`). All three operate on `--macros <path>` (or the resolved macros file).
 
 - `te macro add <name>` - create a new macro. Provide the script body via `-e "<code>"` (inline) or `-s <file.cs>` (script file). Optional: `--tooltip <text>`, `--contexts <list>` (where the macro applies, e.g., `Table,Measure`), `--enabled true|false`.
 - `te macro set <name-or-id>` - update macro properties. Use `-q <property> -i <value>` pairs (repeatable). Property names: `name`, `execute`, `enabled`, `tooltip`, `validContexts`.
-- `te macro rm <name-or-id>` - remove a macro.
+- `te macro remove <name-or-id>` - remove a macro.
 
 ```bash
 te macro add MyMacro -e "Info(Selected.Measure.Name);" --tooltip "Print measure name" --contexts Measure
 te macro set MyMacro -q tooltip -i "Updated tooltip"
-te macro rm MyMacro
+te macro remove MyMacro
 ```
 
 #### macro init
