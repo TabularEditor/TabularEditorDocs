@@ -32,6 +32,10 @@ apiRules:
 - exclude:
     uidRegex: ^TabularEditor\.SemanticBridge\.Platforms\.Databricks\.Mapping
     type: Namespace
+# ANTLR-generated SQL lexer/parser/visitor types (public by generation, not public API)
+- exclude:
+    uidRegex: ^TabularEditor\.SemanticBridge\.Platforms\.Databricks\.Sql
+    type: Namespace
 - exclude:
     uidRegex: ^TabularEditor\.SemanticBridge\.Platforms\.Databricks\.MetricView\.Extensions
     type: Namespace
