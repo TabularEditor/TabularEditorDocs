@@ -1,6 +1,18 @@
 {
   "_comment": "Shared build configuration for all build scripts. Edit this file to add/remove content directories.",
   "defaultLanguage": "en",
+  "baseUrl": "https://docs.tabulareditor.com",
+  "sitemap": {
+    "_comment": "Published sitemap covers the default language only. 'exclude' removes URLs whose path contains 'match' entirely. 'downrank' lowers <priority> for URLs whose path contains 'match' (first matching rule wins). Exclude is applied first.",
+    "exclude": [
+      { "match": "/features/Command-line-Options.html" },
+      { "match": "/getting-started/Getting-Started-te2.html" },
+      { "match": "/references/user-settings-files-te2.html" }
+    ],
+    "downrank": [
+      { "match": "/api/", "priority": 0.1 }
+    ]
+  },
   "contentDirectories": {
     "_comment": "Directories that contain translatable content (markdown and HTML files)",
     "directories": [
