@@ -22,7 +22,7 @@ applies_to:
 This how-to demonstrates how to rename Metric View dimensions using a copy-modify pattern for bulk transformations.
 The same patterns apply to all collections in a Metric View.
 
-[!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## The copy-modify pattern
 

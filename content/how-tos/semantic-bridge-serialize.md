@@ -26,7 +26,7 @@ This how-to demonstrates how to serialize a Metric View back to YAML format, eit
 > Do not overwrite a source YAML file that contains v1.1 metadata.
 
 
-[!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Serialize to a string
 

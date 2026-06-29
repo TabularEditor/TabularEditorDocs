@@ -22,7 +22,7 @@ applies_to:
 This how-to demonstrates how to remove Metric View dimensions from a loaded Metric View.
 Similar approaches apply to all collections in a Metric View.
 
-[!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
 > [!NOTE]
 > Each removal script here affects the currently loaded Metric View.

@@ -22,7 +22,7 @@ applies_to:
 This how-to demonstrates how to add a new Metric View dimension (field) to a loaded Metric View.
 Similar patterns apply to all Metric View collections.
 
-[!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
+[!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Create a new Metric View Dimension object
 

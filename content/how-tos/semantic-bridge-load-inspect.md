@@ -22,23 +22,7 @@ applies_to:
 This how-to demonstrates how to load a Databricks Metric View into Tabular Editor and explore its structure using C# scripts.
 This is the foundational skill for all other Metric View operations.
 
-## Sample Metric View
-
 [!INCLUDE [Sample Metric View](includes/sample-metricview.md)]
-
-## Load a Metric View from a file
-
-Use `SemanticBridge.MetricView.Load` to load a Metric View from a YAML file on disk.
-
-```csharp
-// Load from a file path
-SemanticBridge.MetricView.Load("C:/MetricViews/sales-metrics.yaml");
-
-// Confirm it loaded
-Output($"Loaded Metric View version: {SemanticBridge.MetricView.Model.Version}");
-```
-
-[!INCLUDE [deserialize](includes/sample-metricview-deserialize.md)]
 
 ## Access the loaded Metric View
 
