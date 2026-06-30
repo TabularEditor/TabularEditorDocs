@@ -24,7 +24,7 @@ The Tabular Editor CLI reads optional configuration from a JSON file. Configurat
 
 The CLI is self-contained - it does not read from or write to any Tabular Editor 3 desktop install path. BPA rules and macros files must be set explicitly via this config (or initialized on demand with `te bpa rules init` / `te macro init`).
 
-Most users don't need to edit the config file directly - `te config show`, `te config set <key> <value>`, and `te profile set` cover the common operations.
+Most users don't need to edit the config file directly - `te config list`, `te config set <key> <value>`, and `te profile set` cover the common operations.
 
 ## Config file location
 
@@ -34,7 +34,7 @@ The following locations are checked in this order:
 2. `~/.config/te/config.json` (on Windows, `%USERPROFILE%\.config\te\config.json`).
 3. No config file - the CLI uses built-in defaults.
 
-`TE_CONFIG` is honored consistently by every config-file operation - `te config show`, `te config set`, `te config init`, and `te config paths` all read and write at the resolved path. This is primarily intended for testing, scripted installs, and per-environment configuration.
+`TE_CONFIG` is honored consistently by every config-file operation - `te config list`, `te config set`, `te config init`, and `te config paths` all read and write at the resolved path. This is primarily intended for testing, scripted installs, and per-environment configuration.
 
 To create a default config:
 
@@ -46,15 +46,15 @@ te config init --force     # Overwrite existing config
 ## Viewing configuration
 
 ```bash
-te config show                         # Display all settings
-te config show --output-format json    # Machine-readable
+te config list                         # Display all settings
+te config list --output-format json    # Machine-readable
 te config paths                        # Show resolved macros and BPA rule paths
 ```
 
 Use `te config paths` to see which files the CLI will actually use for macros and BPA rules. It's handy when debugging missing data files. The output shows two rows: `macros` (the resolved macros file path or `[not set]`) and `bpa.rules` (the first existing BPA rules file resolved by the path resolver, or `[not set]`).
 
 > [!NOTE]
-> `te config paths` emits `null` fields explicitly in `--output-format json` mode (e.g., `{"macros": null, "bpa": {"rules": null}}`). Reporting resolution outcomes is the command's whole purpose, so `null` is a meaningful "tried but resolved to nothing" answer. `te config show --output-format json` strips null fields by default, so consumers should parse it tolerantly.
+> `te config paths` emits `null` fields explicitly in `--output-format json` mode (e.g., `{"macros": null, "bpa": {"rules": null}}`). Reporting resolution outcomes is the command's whole purpose, so `null` is a meaningful "tried but resolved to nothing" answer. `te config list --output-format json` strips null fields by default, so consumers should parse it tolerantly.
 
 ## Setting values
 
@@ -143,7 +143,7 @@ All BPA-related settings live under the `bpa` object and are addressed via dotte
 
 | Key | Default | Description |
 | -- | -- | -- |
-| `autoFormat` | `false` | Run the DAX Formatter on modified expressions after `te add` / `te set` / `te mv` / `te macro run`. Uses the in-house formatter by default; opt into the SQL BI web service via `formatOptions.useSqlBiDaxFormatter`. |
+| `autoFormat` | `false` | Run the DAX Formatter on modified expressions after `te add` / `te set` / `te move` / `te macro run`. Uses the in-house formatter by default; opt into the SQL BI web service via `formatOptions.useSqlBiDaxFormatter`. |
 | `validateOnMutation` | `true` | After a mutating command (`add`, `set`, `mv`, `replace --save`, `macro run`), check that every `Table[Column]` reference in the model still resolves. Catches dangling references introduced by renames or removals before they reach deploy. |
 | `bpa.onMutation` | `false` | Run a scoped BPA analysis after each mutating command (`set`, `add`, `mv`, `rm`, `macro run`). Only the affected table's objects are checked, not the whole model - useful for fast feedback during iterative edits. |
 | `bpa.onDeploy` | `true` | Run the BPA gate before `te deploy` executes. The deploy is aborted if any rule fires at severity >= error. Bypass per-invocation with `--skip-bpa`, or auto-fix with `--fix-bpa`. |
@@ -199,7 +199,7 @@ The BPA gate is the safety net that prevents a model with rule violations from b
 
 - `te deploy` runs the gate unless `--skip-bpa` is passed or `bpa.onDeploy` is `false`.
 - `te save` runs the gate unless `--skip-bpa` (or `--force`) is passed or `bpa.onSave` is `false`.
-- `te add`, `te set`, `te mv`, `te macro run` run the gate only when `bpa.onMutation` is `true`.
+- `te add`, `te set`, `te move`, `te macro run` run the gate only when `bpa.onMutation` is `true`.
 
 The gate loads BPA rules from `bpa.rules` and, by default, the built-in rule set (controlled by `bpa.builtInRules`). Built-in rules can be individually excluded via `bpa.disabledBuiltInRuleIds` - managed with `te bpa rules disable <id>` / `te bpa rules enable <id>`.
 
@@ -224,7 +224,7 @@ Both `bpa.builtInRules` and `bpa.disabledBuiltInRuleIds` apply consistently to t
 
 ## Post-mutation behavior
 
-When you run a mutating command (`te add`, `te set`, `te mv`, `te replace --save`, `te macro run`), the CLI performs these checks automatically:
+When you run a mutating command (`te add`, `te set`, `te move`, `te replace --save`, `te macro run`), the CLI performs these checks automatically:
 
 1. **TOM errors** are always surfaced. Invalid DAX or M in measures, columns, partitions, or calculation items always fails the command.
 2. **Schema validation** (`validateOnMutation`, default `true`) verifies that `Table[Column]` references in DAX still resolve, cross-checking metadata consistency.
