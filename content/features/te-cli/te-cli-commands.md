@@ -124,7 +124,7 @@ These flags are available on every command and can be used before or after the s
 | Option | Description |
 | -- | -- |
 | `-m, --model <path>` | Path to semantic model (TMDL folder, `.bim` file, or TE folder). |
-| `-s, --server <endpoint>` | Workspace name or endpoint (e.g., `MyWorkspace`, `powerbi://...`, `asazure://...`, `localhost`). |
+| `-s, --server <endpoint>` | Analysis Services endpoint or Power BI workspace. A server name/FQDN (`MY.SERVER.COM`), IP address (`192.168.1.1`), `host:port`, `localhost`, `SERVER\INSTANCE`, `asazure://...`, or an MSOLAP connection string connects directly to Analysis Services / AAS. A bare single-token name (`MyWorkspace`), a Fabric `Name.Workspace[/Model.SemanticModel]` path, or a `powerbi://...` URL targets a Power BI workspace. A workspace name containing a dot is indistinguishable from a server name, so it is treated as a server and the CLI prints a warning; use its `.Workspace` form or full `powerbi://` URL to target Power BI. |
 | `-d, --database <name>` | Semantic model name on the workspace. |
 | `--local` | Connect to a locally running Power BI Desktop instance (Windows only). |
 | `--auth <method>` | Auth method: `auto`, `interactive`, `spn`, `env`, `managed-identity` (default: `auto`). |
@@ -789,11 +789,11 @@ te macro run "Format DAX" --on "'Net Sales'[Sales Amount]" --save   # DAX form w
 
 ### deploy
 
-Deploy a semantic model to Power BI, Fabric, or Azure Analysis Services.
+Deploy a semantic model to Power BI, Fabric, Azure Analysis Services, or on-prem SQL Server Analysis Services.
 
 `te deploy` accepts:
 
-- `-s, --server` / `-d, --database` - target workspace and model.
+- `-s, --server` / `-d, --database` - target server/workspace and model. A server name, FQDN, IP address, or MSOLAP connection string deploys to Analysis Services (Windows Integrated auth for on-prem); a workspace name or `powerbi://...` URL deploys to Power BI. See the [global options](#global-options) table for how `-s` is interpreted.
 - `--deploy-full` - overwrite + connections + partitions + shared expressions + roles + role members.
 - `--deploy-connections`
 - `--deploy-partitions`
@@ -812,6 +812,7 @@ Deploy a semantic model to Power BI, Fabric, or Azure Analysis Services.
 
 ```bash
 te deploy ./model -s my-workspace -d my-model --force --ci github
+te deploy ./model -s MY.SERVER.COM -d my-model --force    # On-prem SSAS (Integrated auth)
 te deploy ./model --xmla script.tmsl    # Generate TMSL only
 te deploy ./model --profile staging --force
 ```
