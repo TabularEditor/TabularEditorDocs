@@ -123,7 +123,7 @@ These flags are available on every command and can be used before or after the s
 
 | Option | Description |
 | -- | -- |
-| `-m, --model <path>` | Path to semantic model (TMDL folder, `.bim` file, or TE folder). |
+| `-m, --model <path>` | Path to semantic model (TMDL folder, `.bim` file, `database.json` folder, or `.SemanticModel` folder). |
 | `-s, --server <endpoint>` | Workspace name or endpoint (e.g., `MyWorkspace`, `powerbi://...`, `asazure://...`, `localhost`). |
 | `-d, --database <name>` | Semantic model name on the workspace. |
 | `--local` | Connect to a locally running Power BI Desktop instance (Windows only). |
@@ -139,6 +139,12 @@ These flags are available on every command and can be used before or after the s
 For commands that read a model, the resolution order is:
 
 positional `<model>` argument → `--model` global flag → `--server`/`--database` (remote) → active connection from `te connect` → `--recent`.
+
+> [!NOTE]
+> **Mistyped options are rejected up front.** If you pass a `--flag` that isn't recognised on the command you invoked, the CLI exits with an actionable error rather than silently absorbing the token as a positional argument. This catches typos like `--force ` accidentally becoming `--forec` in CI scripts.
+
+> [!NOTE]
+> **Dotted server names.** `-s`/`--server` treats a dotted name (e.g. `Sales.2026`) as an Analysis Services server hostname, not a Power BI workspace. A warning fires when the CLI has to make this call, with a hint to append `.Workspace` (e.g. `Sales.2026.Workspace`) or use a full `powerbi://` URL if you meant the Power BI workspace. Applies to `te connect`, `te deploy`, `te refresh`, `te query`, `te vertipaq`, and `te test run`.
 
 ## Model I/O
 
@@ -243,6 +249,7 @@ Add an object to the model. Pass a `<path>` for the new object (the parent must 
 - `--if-not-exists` - exit `0` without error if the object already exists. Use this for idempotent CI/CD pipelines.
 - `--save` / `--save-to <path>` - persist changes.
 - `--serialization <fmt>` - override the serialization when saving (`tmdl`, `bim` (alias `tmsl`), `database.json`).
+- `--source-type <kind>` - initial partition source type on a new table: `m`, `query`, or `calculated`. Overrides heuristic detection. `calculated` is only valid with `-t CalculatedTable`.
 - `--force` - save even if the mutation introduces DAX validation errors.
 
 ```bash
@@ -279,7 +286,7 @@ te remove Sales/OldMeasure --if-exists --save    # Idempotent
 
 ### move
 
-Move or rename a model object. Both source and destination are `<path>` arguments. (Alias: `mv`.)
+Move or rename a model object. Both source and destination are `<path>` arguments. (Aliases: `mv`, `rename`.)
 
 `te move` accepts:
 
@@ -524,7 +531,7 @@ Subcommands:
 | `ignore <rule-id> [model]` | Add a rule to the model's ignore list. |
 | [`init`](#bpa-rules-init) | Create an empty BPA rules file at the resolved path. |
 | [`list`](#bpa-rules-list) | List BPA rules from all sources with status. |
-| `rm <rule-id> [model]` | Remove a BPA rule. |
+| `remove <rule-id> [model]` (alias `rm`) | Remove a BPA rule. |
 | `set <rule-id> [model]` | Update a BPA rule's properties. |
 | `unignore <rule-id> [model]` | Remove a rule from the model's ignore list. |
 
@@ -582,16 +589,33 @@ te bpa rules init --force
 
 Mutate the rules file (`add`, `set`, `remove` (alias `rm`)) or model-embedded ignore list (`ignore`, `unignore`). All three mutating subcommands operate on `--rules-file <path>` or `--model-rules` and refuse to touch built-in rule IDs.
 
-- `te bpa rules add <id>` - create a new rule. Pass each property with `-q <name> -i <value>` pairs. Property names: `name`, `expression`, `scope`, `category`, `severity`, `description`, `fixExpression`.
-- `te bpa rules set <id>` - update properties on an existing rule. Same `-q`/`-i` pairs as `add` (repeatable).
+- `te bpa rules add <id>` - create a new rule. Pass each property as a named option:
+  - `--name <text>` - human-readable rule name (required).
+  - `--scope <list>` - comma-separated object kinds the rule applies to: `Measure`, `Column`, `Table`, `Hierarchy`, `Partition`, `Relationship`, `Role`, `Perspective`, `Culture`, etc. (required).
+  - `--expression <text>` - Dynamic LINQ predicate. Returns `true` for objects that violate the rule (required).
+  - `--category <text>` - grouping label (e.g. `Performance`, `Naming`, `DAX Expressions`).
+  - `--severity <1|2|3>` - `1` (info), `2` (warning, default), `3` (error).
+  - `--description <text>` - user-facing description shown when the rule fires.
+  - `--fix-expression <text>` - Dynamic LINQ expression used by `te bpa run --fix` to auto-remediate.
+- `te bpa rules set <id>` - update properties on an existing rule. Uses `-q <property> -i <value>` pairs (repeatable). Property names: `name`, `expression`, `scope`, `category`, `severity`, `description`, `fixExpression`.
 - `te bpa rules remove <id>` - remove a rule.
 - `te bpa rules ignore <id>` - add a rule ID to the model's `BestPracticeAnalyzer_IgnoreRules` annotation.
 - `te bpa rules unignore <id>` - remove a rule ID from the model's ignore list.
 
 ```bash
-te bpa rules add MY_RULE -q name -i "My rule" -q expression -i "Measure" -q severity -i 2
-te bpa rules set MY_RULE -q severity -i 3
-te bpa rules remove MY_RULE
+# Add a rule: measures that are not hidden and have no description
+te bpa rules add MEASURE_NEEDS_DESCRIPTION \
+    --name "Measures should have a description" \
+    --scope Measure \
+    --expression "not IsHidden and string.IsNullOrEmpty(Description)" \
+    --severity 2 \
+    --category Metadata
+
+# Update severity on an existing rule
+te bpa rules set MEASURE_NEEDS_DESCRIPTION -q severity -i 3
+
+# Remove the rule
+te bpa rules remove MEASURE_NEEDS_DESCRIPTION
 ```
 
 #### bpa rules disable
@@ -737,7 +761,7 @@ Subcommands:
 | [`run <name-or-id>`](#macro-run) | Run a macro. |
 | `add <name>` | Add a macro. |
 | `set <name-or-id>` | Update macro properties. |
-| `rm <name-or-id>` | Remove a macro. |
+| `remove <name-or-id>` (alias `rm`) | Remove a macro. |
 | `sort` | Sort and re-assign IDs. |
 | [`init`](#macro-init) | Create an empty macros file at the resolved path. |
 
@@ -927,7 +951,7 @@ Manage named connection profiles. See @te-cli-auth.
 
 ### config list / paths / init / set
 
-View and manage CLI configuration and TE3 path overrides. (`te config list` aliases: `show`, `ls`.) See @te-cli-config.
+View and manage CLI configuration and TE3 path overrides. (`te config list` alias: `ls`.) See @te-cli-config.
 
 ```bash
 te config list                          # Display all settings
@@ -952,10 +976,19 @@ te migrate --output-format json     # Machine-readable mapping
 
 Start a guided REPL session with a model-aware prompt. See @te-cli-interactive.
 
+`te interactive` accepts:
+
+- `<model>` - optional positional argument: start the session with a local model, `.bim` file, or `.SemanticModel` folder loaded.
+- `--no-banner` - skip the welcome banner on startup. Useful when driving the REPL from scripts.
+- `--echo` - echo each executed command to stdout before its output. Helpful when piping commands via stdin so the log shows what was run.
+- `--batch` - non-interactive batch mode: read commands from stdin line by line, execute each, and exit on EOF. Automatically enabled when stdin is redirected.
+- `--no-batch` - force interactive TTY mode even when stdin is redirected (mutually exclusive with `--batch`).
+
 ```bash
 te interactive                                # Connect later
 te interactive ./model                        # Start with a local model
 te interactive -s MyWorkspace -d MyModel      # Start with a remote model
+printf "list Measures\nexit\n" | te interactive ./model   # Pipe commands via stdin
 ```
 
 Quoting and DAX-style references work the same as outside the session - see the [Object paths](#object-paths) section above and @te-cli-interactive for details on bracket-aware argv splitting inside the REPL.

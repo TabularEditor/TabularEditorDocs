@@ -29,6 +29,13 @@ te interactive ./model                      # Start with a local model
 te interactive -s MyWorkspace -d MyModel    # Start with a remote model
 ```
 
+`te interactive` accepts a few flags for tuning the session:
+
+- `--no-banner` - skip the welcome banner on startup.
+- `--echo` - echo each executed command to stdout before its output. Useful for logging when driving the REPL from a script.
+- `--batch` - non-interactive batch mode: read commands from stdin line by line, execute each, and exit on EOF. Automatically enabled when stdin is redirected.
+- `--no-batch` - force interactive TTY mode even when stdin is redirected (mutually exclusive with `--batch`).
+
 The session prints a welcome banner, shows the active model, and opens you at a model-aware prompt:
 
 ![Tabular Editor CLI interactive mode session](~/content/assets/images/features/cli/cli-interactive-mode.png)
