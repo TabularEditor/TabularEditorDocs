@@ -55,6 +55,7 @@
 
 # [Semantic Bridge](semantic-bridge-how-tos.md)
 ## @semantic-bridge-load-inspect
+## @semantic-bridge-metric-view-import-from-file
 ## @semantic-bridge-import
 ## @semantic-bridge-validate-default
 ## @semantic-bridge-validate-simple-rules

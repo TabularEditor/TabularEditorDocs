@@ -1,5 +1,7 @@
 ## Load the sample Metric View for these code samples
 
+Before starting, make sure you have Tabular Editor 3 open and have a Tabular model opened, or create a new model.
+
 This how-to uses a sample e-commerce Metric View representing sales data with three dimension tables (product, customer, date) joined to a fact table (orders).
 Use either method below to load it (either "download and load" or "copy and deserialize"),
 then follow along with the rest of this how-to.
@@ -29,10 +31,7 @@ Copy the definition below and pass it to `Deserialize` as a string:
 
 ```csharp
 SemanticBridge.MetricView.Deserialize("""
-    version: 1.1
-    #... TRUNCATED: copy the full definition from below
-      - name: unique_customers
-        expr: COUNT(DISTINCT customer_id)
+    <PLACEHOLDER: copy and paste the YAML shown below, indented within the triple quotes here>
     """);
 ```
 

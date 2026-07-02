@@ -2,7 +2,7 @@
 uid: semantic-bridge-validate-simple-rules
 title: Create Simple Validation Rules
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -22,13 +22,17 @@ applies_to:
 This how-to demonstrates how to create simple predicate-based validation rules to enforce naming conventions and structural requirements.
 These rules are for illustrative purposes only and do not necessarily reflect hard technical requirements of either Metric Views or the Semantic Bridge.
 
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
+
 ## The four rule helpers
 
 There is a helper method for each type of Metric View object:
 
 - `MakeValidationRuleForView` - rules for the root View object
 - `MakeValidationRuleForJoin` - rules for Join objects
-- `MakeValidationRuleForDimension` - rules for Dimension objects
+- `MakeValidationRuleForField` - rules for Field objects
 - `MakeValidationRuleForMeasure` - rules for Measure objects
 
 Each helper takes four parameters:
@@ -64,16 +68,16 @@ var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
 );
 ```
 
-## Rule for Metric View Dimension
+## Rule for Metric View Field
 
-Check that Metric View dimension names do not contain underscores:
+Check that Metric View field names do not contain underscores:
 
 ```csharp
-var dimensionNameRule = SemanticBridge.MetricView.MakeValidationRuleForDimension(
+var fieldNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "no_underscores",
     "naming",
-    "Dimension names should use spaces, not underscores",
-    (dim) => dim.Name.Contains('_')
+    "Field names should use spaces, not underscores",
+    (field) => field.Name.Contains('_')
 );
 ```
 
@@ -104,8 +108,8 @@ SemanticBridge.MetricView.Deserialize("""
       - name: customer
         source: customer_table
         on: source.customer_id = customer.customer_id
-    dimensions:
-      # dimensionNameRule violations - contains underscores
+    fields:
+      # fieldNameRule violations - contains underscores
       - name: product_name
         expr: source.product_name
       - name: order_date
@@ -136,11 +140,11 @@ var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
     (join) => !join.Source.Contains('.')
 );
 
-var dimensionNameRule = SemanticBridge.MetricView.MakeValidationRuleForDimension(
+var fieldNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "no_underscores",
     "naming",
-    "Dimension names should use spaces, not underscores",
-    (dim) => dim.Name.Contains('_')
+    "Field names should use spaces, not underscores",
+    (field) => field.Name.Contains('_')
 );
 
 var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
@@ -154,7 +158,7 @@ var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
 var diagnostics = SemanticBridge.MetricView.Validate([
     versionRule,
     joinSourceRule,
-    dimensionNameRule,
+    fieldNameRule,
     measureExprRule
 ]).ToList();
 
@@ -182,16 +186,16 @@ CUSTOM VALIDATION RESULTS
 
 Found 5 issue(s):
 
-[Error] MetricView: Metric View version must be 0.1 or 1.1
-[Error] MetricView.Joins['customer']: Join source must be a fully qualified table name (e.g., `catalog.schema.table`)
-[Error] MetricView.Dimensions['product_name']: Dimension names should use spaces, not underscores
-[Error] MetricView.Dimensions['order_date']: Dimension names should use spaces, not underscores
-[Error] MetricView.Measures['complex_calc']: Measure expressions should not contain SELECT subqueries
+[Error] Model: Metric View version must be 0.1 or 1.1
+[Error] Model.Joins["customer"]: Join source must be a fully qualified table name (e.g., `catalog.schema.table`)
+[Error] Model.Fields["product_name"]: Field names should use spaces, not underscores
+[Error] Model.Fields["order_date"]: Field names should use spaces, not underscores
+[Error] Model.Measures["complex_calc"]: Measure expressions should not contain SELECT subqueries
 ```
 
 ## Next steps
 
-- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules) for cross-object checks like duplicate detection
+- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules) for cross-object checks
 
 ## See also
 

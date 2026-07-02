@@ -2,7 +2,7 @@
 uid: semantic-bridge-remove-object
 title: Remove an Object from a Metric View
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -19,8 +19,12 @@ applies_to:
 ---
 # Remove an object from a Metric View
 
-This how-to demonstrates how to remove Metric View dimensions from a loaded Metric View.
+This how-to demonstrates removing Metric View fields and measures.
 Similar approaches apply to all collections in a Metric View.
+
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not necessarily support the v1.1 Metric View features shown here.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
@@ -30,68 +34,88 @@ Similar approaches apply to all collections in a Metric View.
 
 ## Remove by name
 
-Find the Metric View dimension and remove it from the collection:
+Get the Metric View field and delete it.
+After you delete an object, you should not attempt to modify it.
+You can still read properties off of the deleted object (other than its `View` pointer and `Path`).
+It is safe to call `Delete()` on an object multiple times; after the first, these are no-ops.
 
 ```csharp
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Dimensions before: {view.Dimensions.Count}");
+sb.AppendLine($"Fields before: {view.Fields.Count}");
 
-var dimToRemove = view.Dimensions.FirstOrDefault(d => d.Name == "order_month");
-if (dimToRemove != null)
-{
-    view.Dimensions.Remove(dimToRemove);
-    sb.AppendLine($"Removed: {dimToRemove.Name}");
-}
+var fieldToRemove = view.Fields["order_month"];
+fieldToRemove.Delete();
+fieldToRemove.Delete(); // note we can call Delete twice safely
+sb.AppendLine($"Removed: {fieldToRemove.Name}");
 
-sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
+sb.AppendLine($"Fields after: {view.Fields.Count}");
 Output(sb.ToString());
 ```
 
 **Output:**
 
 ```
-Dimensions before: 6
+Fields before: 6
 Removed: order_month
-Dimensions after: 5
+Fields after: 5
 ```
 
-Observe that if you run the script above twice in a row, there is no additional removal; the before and after counts are both 5.
+Observe that there are multiple calls to `Delete()` but only one removal.
 
-## Remove multiple Metric View dimensions
+## Remove a measure
 
-Use LINQ to filter and rebuild the collection:
+Measures are removed the same way: get a reference to the measure and delete it.
 
 ```csharp
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
-
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Dimensions before: {view.Dimensions.Count}");
+sb.AppendLine($"Measures before: {view.Measures.Count}");
 
-// Remove all date-related dimensions
+var measureToRemove = view.Measures["gross_margin"];
+measureToRemove.Delete();
+sb.AppendLine($"Removed: {measureToRemove.Name}");
+
+sb.AppendLine($"Measures after: {view.Measures.Count}");
+Output(sb.ToString());
+```
+
+**Output:**
+
+```
+Measures before: 6
+Removed: gross_margin
+Measures after: 5
+```
+
+## Remove multiple Metric View fields
+
+Filter to the fields you want to remove, snapshot them with `ToList`, then delete each one.
+Snapshotting first avoids modifying the collection while iterating it.
+
+```csharp
+var view = SemanticBridge.MetricView.Model;
+
+var sb = new System.Text.StringBuilder();
+sb.AppendLine($"Fields before: {view.Fields.Count}");
+
+// Remove all date-related fields
 string[] toRemove = ["order_date", "order_year", "order_month"];
 
-var toKeep = view.Dimensions
-    .Where(d => !toRemove.Contains(d.Name))
-    .ToList();
-
-// Clear and repopulate
-view.Dimensions.Clear();
-foreach (var dim in toKeep)
+foreach (var field in view.Fields.Where(f => toRemove.Contains(f.Name)).ToList())
 {
-    view.Dimensions.Add(dim);
+    field.Delete();
 }
 
-sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
+sb.AppendLine($"Fields after: {view.Fields.Count}");
 sb.AppendLine();
-sb.AppendLine("Remaining dimensions:");
-sb.AppendLine("---------------------");
-foreach (var dim in view.Dimensions)
+sb.AppendLine("Remaining fields:");
+sb.AppendLine("-----------------");
+foreach (var field in view.Fields)
 {
-    sb.AppendLine($"  {dim.Name}");
+    sb.AppendLine($"  {field.Name}");
 }
 
 Output(sb.ToString());
@@ -100,53 +124,49 @@ Output(sb.ToString());
 **Output:**
 
 ```
-Dimensions before: 6
-Dimensions after: 3
+Fields before: 6
+Fields after: 3
 
-Remaining dimensions:
----------------------
+Remaining fields:
+-----------------
   product_name
   product_category
   customer_segment
 ```
 
-## Remove Metric View dimensions from a specific table
+## Remove Metric View fields from a specific table
 
-Remove all Metric View dimensions that reference the date table.
+Remove all Metric View fields that reference the date table.
 
 > [!WARNING]
-> This example is not guaranteed to remove all and exclusively Metric View dimensions which reference a given Metric View Join.
-> Metric View Dimensions may include near-arbitrary SQL expressions, and may also reference previously defined Metric View Dimensions.
+> This example is not guaranteed to remove all and exclusively Metric View fields which reference a given Metric View Join.
+> Metric View fields may include near-arbitrary SQL expressions, and may also reference previously defined Metric View fields.
 > This example is for illustrative purposes only.
 
 ```csharp
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
-sb.AppendLine($"Dimensions before: {view.Dimensions.Count}");
+sb.AppendLine($"Fields before: {view.Fields.Count}");
 
-var toRemove = view.Dimensions
-    .Where(d => d.Expr.StartsWith("date."))
-    .ToList();
-
-foreach (var dim in toRemove)
+foreach (var field in view.Fields.Where(f => f.Expr.StartsWith("date.")).ToList())
 {
-    view.Dimensions.Remove(dim);
-    sb.AppendLine($"Removed: {dim.Name} ({dim.Expr})");
+    field.Delete();
+    sb.AppendLine($"Removed: {field.Name} ({field.Expr})");
 }
 
-sb.AppendLine($"Dimensions after: {view.Dimensions.Count}");
+sb.AppendLine($"Fields after: {view.Fields.Count}");
 Output(sb.ToString());
 ```
 
 **Output:**
 
 ```
-Dimensions before: 6
+Fields before: 6
 Removed: order_date (date.full_date)
 Removed: order_year (date.year)
 Removed: order_month (date.month_name)
-Dimensions after: 3
+Fields after: 3
 ```
 
 ## See also

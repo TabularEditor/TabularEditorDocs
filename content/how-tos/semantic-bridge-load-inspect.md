@@ -2,7 +2,7 @@
 uid: semantic-bridge-load-inspect
 title: Load and Inspect a Metric View
 author: Greg Baldini
-updated: 2025-01-27
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,6 +21,10 @@ applies_to:
 
 This how-to demonstrates how to load a Databricks Metric View into Tabular Editor and explore its structure using C# scripts.
 This is the foundational skill for all other Metric View operations.
+
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not necessarily support the v1.1 Metric View features shown here.
 
 [!INCLUDE [Sample Metric View](includes/sample-metricview.md)]
 
@@ -46,14 +50,15 @@ The Metric View `Joins` property contains the dimension tables joined to the fac
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Number of joins: {view.Joins?.Count ?? 0}");
+sb.AppendLine($"Number of joins: {view.Joins.Count}");
 sb.AppendLine("");
 
-foreach (var join in view.Joins ?? [])
+foreach (var join in view.Joins)
 {
     sb.AppendLine($"Join: {join.Name}");
     sb.AppendLine($"  Source: {join.Source}");
     sb.AppendLine($"  On: {join.On}");
+    sb.AppendLine($"  Cardinality: {join.Cardinality?.ToString() ?? "ManyToOne (default)"}");
     sb.AppendLine("");
 }
 
@@ -67,31 +72,34 @@ Number of joins: 3
 
 Join: product
   Source: sales.dim.product
-  On: product_id = product.product_id
+  On: source.product_id = product.product_id
+  Cardinality: ManyToOne
 
 Join: customer
   Source: sales.dim.customer
-  On: customer_id = customer.customer_id
+  On: source.customer_id = customer.customer_id
+  Cardinality: ManyToOne
 
 Join: date
   Source: sales.dim.date
-  On: order_date = date.date_key
+  On: source.order_date = date.date_key
+  Cardinality: ManyToOne
 ```
 
-## Inspect Metric View dimensions (fields)
+## Inspect Metric View fields
 
-The Metric View `Dimensions` property contains all field definitions.
+The Metric View `Fields` property contains all field definitions.
 
 ```csharp
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Number of dimensions: {view.Dimensions?.Count ?? 0}");
+sb.AppendLine($"Number of fields: {view.Fields.Count}");
 sb.AppendLine("");
 
-foreach (var dim in view.Dimensions ?? [])
+foreach (var field in view.Fields)
 {
-    sb.AppendLine($"{dim.Name,-20} <- {dim.Expr}");
+    sb.AppendLine($"{field.Name,-20} <- {field.Expr}");
 }
 
 Output(sb.ToString());
@@ -100,7 +108,7 @@ Output(sb.ToString());
 **Output:**
 
 ```
-Number of dimensions: 6
+Number of fields: 6
 
 product_name         <- product.product_name
 product_category     <- product.category
@@ -118,10 +126,10 @@ The Metric View `Measures` property contains all Metric View measure definitions
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
-sb.AppendLine($"Number of measures: {view.Measures?.Count ?? 0}");
+sb.AppendLine($"Number of measures: {view.Measures.Count}");
 sb.AppendLine("");
 
-foreach (var measure in view.Measures ?? [])
+foreach (var measure in view.Measures)
 {
     sb.AppendLine($"{measure.Name,-20} = {measure.Expr}");
 }
@@ -132,11 +140,13 @@ Output(sb.ToString());
 **Output:**
 
 ```
-Number of measures: 4
+Number of measures: 6
 
 total_revenue        = SUM(revenue)
-order_count          = COUNT(order_id)
+gross_margin         = SUM(revenue) - SUM(cost)
+order_count          = COUNT(*)
 avg_order_value      = AVG(revenue)
+revenue_to_budget    = (SUM(revenue) - SUM(budget)) / SUM(budget)
 unique_customers     = COUNT(DISTINCT customer_id)
 ```
 
@@ -156,27 +166,27 @@ sb.AppendLine($"Fact Source: {view.Source}");
 sb.AppendLine("");
 
 // Joins
-sb.AppendLine($"JOINS ({view.Joins?.Count ?? 0})");
+sb.AppendLine($"JOINS ({view.Joins.Count})");
 sb.AppendLine("---------");
-foreach (var join in view.Joins ?? [])
+foreach (var join in view.Joins)
 {
     sb.AppendLine($"  {join.Name,-15} -> {join.Source}");
 }
 sb.AppendLine("");
 
-// Dimensions
-sb.AppendLine($"DIMENSIONS ({view.Dimensions?.Count ?? 0})");
+// Fields
+sb.AppendLine($"FIELDS ({view.Fields.Count})");
 sb.AppendLine("--------------");
-foreach (var dim in view.Dimensions ?? [])
+foreach (var field in view.Fields)
 {
-    sb.AppendLine($"  {dim.Name,-20} <- {dim.Expr}");
+    sb.AppendLine($"  {field.Name,-20} <- {field.Expr}");
 }
 sb.AppendLine("");
 
 // Measures
-sb.AppendLine($"MEASURES ({view.Measures?.Count ?? 0})");
+sb.AppendLine($"MEASURES ({view.Measures.Count})");
 sb.AppendLine("------------");
-foreach (var measure in view.Measures ?? [])
+foreach (var measure in view.Measures)
 {
     sb.AppendLine($"  {measure.Name,-20} = {measure.Expr}");
 }

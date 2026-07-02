@@ -2,7 +2,7 @@
 uid: semantic-bridge-serialize
 title: Serialize a Metric View to YAML
 author: Greg Baldini
-updated: 2026-04-17
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -21,16 +21,16 @@ applies_to:
 
 This how-to demonstrates how to serialize a Metric View back to YAML format, either as a string or saved to a file.
 
-> [!WARNING]
-> The public preview only supports v0.1 Metric View properties. Any v1.1 metadata present in a loaded Metric View is silently ignored and will be lost when you serialize.
-> Do not overwrite a source YAML file that contains v1.1 metadata.
-
+> [!NOTE]
+> These how-tos target Tabular Editor 3.26.2 and later.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
 ## Serialize to a string
 
-Use `Serialize()` to get the YAML representation:
+Use `Serialize()` to get the YAML representation.
+This simply re-serializes the YAML you loaded above.
 
 ```csharp
 var yaml = SemanticBridge.MetricView.Serialize();
@@ -44,7 +44,8 @@ Output(sb.ToString());
 
 ## Save to a file
 
-Use `Save(path)` to write the YAML directly to disk:
+Use `Save(path)` to write the YAML directly to disk.
+This will write the metric view you loaded above to disk.
 
 ```csharp
 var path = "C:/MetricViews/updated-sales-metrics.yaml";
@@ -59,28 +60,11 @@ Output($"Metric View saved to: {path}");
 A common workflow is to load, modify, and save a Metric View:
 
 ```csharp
-using System.Globalization;
-using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
-
-// The Metric View is already loaded from the include above
-
 var view = SemanticBridge.MetricView.Model;
-var textInfo = CultureInfo.CurrentCulture.TextInfo;
 
-// Modify: rename dimensions from snake_case to Title Case
-var renamed = view.Dimensions.Select(dim => new MetricView.Dimension
-{
-    Name = textInfo.ToTitleCase(dim.Name.Replace('_', ' ')),
-    Expr = dim.Expr
-}).ToList();
+// set a display name on a field, then serialize to confirm it round-trips
+view.Fields["order_month"].DisplayName = "Order Month";
 
-view.Dimensions.Clear();
-foreach (var dim in renamed)
-{
-    view.Dimensions.Add(dim);
-}
-
-// Serialize to see the result
 var yaml = SemanticBridge.MetricView.Serialize();
 
 var sb = new System.Text.StringBuilder();
@@ -93,42 +77,7 @@ Output(sb.ToString());
 **Output:**
 
 ```
-Modified YAML:
---------------
-version: 0.1
-source: sales.fact.orders
-joins:
-- name: product
-  source: sales.dim.product
-  on: source.product_id = product.product_id
-- name: customer
-  source: sales.dim.customer
-  on: source.customer_id = customer.customer_id
-- name: date
-  source: sales.dim.date
-  on: source.order_date = date.date_key
-dimensions:
-- name: Product Name
-  expr: product.product_name
-- name: Product Category
-  expr: product.category
-- name: Customer Segment
-  expr: customer.segment
-- name: Order Date
-  expr: date.full_date
-- name: Order Year
-  expr: date.year
-- name: Order Month
-  expr: date.month_name
-measures:
-- name: total_revenue
-  expr: SUM(revenue)
-- name: order_count
-  expr: COUNT(order_id)
-- name: avg_order_value
-  expr: AVG(revenue)
-- name: unique_customers
-  expr: COUNT(DISTINCT customer_id)
+<!-- TODO: capture serialized YAML from a run -->
 ```
 
 ## See also
