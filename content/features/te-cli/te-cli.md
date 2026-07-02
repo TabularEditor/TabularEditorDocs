@@ -58,6 +58,9 @@ See @te-cli-commands for a full command reference with syntax, options, and exam
 | [Configuration](xref:te-cli-commands#configuration) | Settings and licensing | [`te config`](xref:te-cli-commands#config-list--paths--init--set) |
 | [Shell](xref:te-cli-commands#shell) | Interactive mode, session state, shell completions | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion) |
 
+> [!TIP]
+> The docs use canonical long-form verbs (`list`, `remove`, `move`), but the classic short forms still work as aliases (`ls`, `rm`, `mv`, `rename`). This applies to top-level commands and to `remove` / `list` subcommands under groups like `te bpa rules`, `te macro`, `te config`, `te profile`, `te session`, and `te test`. See @te-cli-commands#command-aliases for the full mapping.
+
 ## Getting started
 
 1. **Sign up or sign in** at [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) with a Tabular Editor account.

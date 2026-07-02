@@ -117,6 +117,29 @@ DAX bracket-suffix is rejected in filter paths; quote names containing `[` and `
 
 Misspelled segments emit a contextual error with a "did you mean" hint when the CLI can guess what you meant. Missing-parent paths fail before the leaf check, so the message points at the segment that's actually wrong. Empty containers (e.g., `te list Hierarchies` on a model without hierarchies) emit a simply "nothing here" hint rather than an error.
 
+## Command aliases
+
+Most long-form verbs also accept a short alias so existing scripts and muscle memory keep working. Every alias in the table below is real and current; canonical names are what the docs use in prose and examples.
+
+| Canonical | Aliases |
+| -- | -- |
+| `te list` | `ls` |
+| `te remove` | `rm` |
+| `te move` | `mv`, `rename` |
+| `te bpa rules list` | `ls` |
+| `te bpa rules remove` | `rm` |
+| `te config list` | `ls` |
+| `te macro list` | `ls` |
+| `te macro remove` | `rm` |
+| `te incremental-refresh remove` | `rm` |
+| `te profile list` | `ls` |
+| `te profile remove` | `rm` |
+| `te session list` | `ls` |
+| `te test list` | `ls` |
+
+> [!NOTE]
+> `te config show` is **not** an alias for `te config list` - it was removed. Update any scripts that call `te config show`.
+
 ## Global options
 
 These flags are available on every command and can be used before or after the subcommand name.
@@ -530,7 +553,7 @@ Subcommands:
 | [`enable`](#bpa-rules-enable) | Re-enable a previously disabled built-in BPA rule. |
 | `ignore <rule-id> [model]` | Add a rule to the model's ignore list. |
 | [`init`](#bpa-rules-init) | Create an empty BPA rules file at the resolved path. |
-| [`list`](#bpa-rules-list) | List BPA rules from all sources with status. |
+| [`list`](#bpa-rules-list) (alias `ls`) | List BPA rules from all sources with status. |
 | `remove <rule-id> [model]` (alias `rm`) | Remove a BPA rule. |
 | `set <rule-id> [model]` | Update a BPA rule's properties. |
 | `unignore <rule-id> [model]` | Remove a rule from the model's ignore list. |
@@ -550,7 +573,7 @@ All `te bpa rules` subcommands accept:
 
 #### bpa rules list
 
-List rules from all sources (built-in, user, model).
+List rules from all sources (built-in, user, model). (Alias: `ls`.)
 
 `te bpa rules list` accepts:
 
@@ -757,7 +780,7 @@ Subcommands:
 
 | Subcommand | Purpose |
 | -- | -- |
-| `list` | List macros. |
+| `list` (alias `ls`) | List macros. |
 | [`run <name-or-id>`](#macro-run) | Run a macro. |
 | `add <name>` | Add a macro. |
 | `set <name-or-id>` | Update macro properties. |
@@ -897,6 +920,8 @@ te test run --tag revenue
 
 ### test init / spec / use / list / snapshot / compare
 
+`te test list` also accepts the `ls` alias.
+
 Additional subcommands scaffold tests, print the assertion spec format, switch the active suite, list suites, capture snapshots, and compare models. See `te test --help` for details.
 
 ```bash
@@ -945,7 +970,7 @@ Manage cached authentication. See @te-cli-auth.
 
 ### profile list / show / set / remove
 
-Manage named connection profiles. See @te-cli-auth.
+Manage named connection profiles. (`te profile list` alias: `ls`; `te profile remove` alias: `rm`.) See @te-cli-auth.
 
 ## Configuration
 
@@ -1002,7 +1027,7 @@ Subcommands:
 | Subcommand | Purpose |
 | -- | -- |
 | `show` | Show current session details (ID, file path, active state). Default when no subcommand is given. |
-| `list` | List all session files. |
+| `list` (alias `ls`) | List all session files. |
 | `clear` | Clear active state for the current session. |
 | `prune` | Delete session files whose shell process is no longer running. |
 
