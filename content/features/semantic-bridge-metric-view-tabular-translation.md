@@ -101,11 +101,12 @@ these are query optimization metadata for executing queries on Databricks and no
 `On` equijoins (e.g., `source.fk = dimTable.pk`) become TOM relationships.
 Any other predicate in an `On` property is not translated as a relationship.
 
-Trees of `Join`s in a Metric View are translated as TOM tables in a chain of N:1 relationships, where the cardinalities are supported.
+Trees of `Join`s in a Metric View are translated as TOM tables in a chain of N:1 relationships, where the cardinalities are supported (see note on cardinality below).
 This represents a snowflake model schema.
 
 `Cardinality` of `ManyToOne` is translated as a TOM N:1 relationship.
-Other values for `Cardinality` are not yet supported for translation.
+An unpopulated `Cardinality` or a `Join` without this property set is treated as `ManyToOne` by default, in accordance with Databricks docs.
+Other values for `Cardinality` are not yet supported for translation as a relationship.
 
 `Using` joins are not supported for translation; these do not yield a TOM relationship.
 

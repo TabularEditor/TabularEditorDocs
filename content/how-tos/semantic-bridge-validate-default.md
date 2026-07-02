@@ -137,8 +137,8 @@ Output(sb.ToString());
 
 ## Next steps
 
-- [Create simple validation rules](xref:semantic-bridge-validate-simple-rules) to enforce your own conventions
-- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules) for cross-object checks
+- [Create simple validation rules](xref:semantic-bridge-validate-simple-rules)
+- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules)
 
 ## See also
 

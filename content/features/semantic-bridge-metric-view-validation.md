@@ -67,6 +67,10 @@ They offer a simplified interface where you provide:
 
 The name and category are intended to make it easier to deal with collections of rules, as you will do in C# scripts that utilize custom rules.
 
+Each of these helpers also has an overload with a final `minVersion` argument.
+This argument would take a version string, such as "0.1" or "1.1".
+Rules with `minVersion` set are only evaluated for Metric Views at or above that version.
+
 This is easier to understand with an example:
 
 ```csharp

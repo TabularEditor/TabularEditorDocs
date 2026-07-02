@@ -64,3 +64,4 @@
 ## @semantic-bridge-remove-object
 ## @semantic-bridge-rename-objects
 ## @semantic-bridge-serialize
+## @semantic-bridge-metric-view-handle-failures

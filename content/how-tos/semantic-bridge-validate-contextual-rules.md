@@ -263,5 +263,3 @@ Output(sb.ToString());
 ## See also
 
 - [Semantic Bridge Validation](xref:semantic-bridge-metric-view-validation)
-- [Create Simple Validation Rules](xref:semantic-bridge-validate-simple-rules)
-- [Validate with Default Rules](xref:semantic-bridge-validate-default)

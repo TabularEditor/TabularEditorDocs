@@ -42,3 +42,7 @@ These how-tos are focused on interacting with the [Databricks Metric View object
 ## Serialization
 
 - @semantic-bridge-serialize: Serialize a Metric View back to YAML
+
+## Troubleshooting
+
+- @semantic-bridge-metric-view-handle-failures: Handle invalid input, missing files, and imports that don't complete

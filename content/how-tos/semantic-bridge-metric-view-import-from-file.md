@@ -54,8 +54,11 @@ sb.AppendLine($"Diagnostics: {diagnostics.Count}");
 Output(sb.ToString());
 ```
 
+## Next steps
+
+- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
+- [Import a Metric View and view diagnostics](xref:semantic-bridge-import)
+
 ## See also
 
-- @semantic-bridge-import
-- @semantic-bridge-load-inspect
-- @semantic-bridge
+- [Semantic Bridge Overview](xref:semantic-bridge)

@@ -94,6 +94,23 @@ var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
 );
 ```
 
+## Rules for specific Metric View versions
+
+Each helper has an overload that takes a final `minVersion` argument, a string such as "0.1" or "1.1".
+Rules defined with a `minVersion` only run against Metric Views at or above that version.
+This is useful for a rule that checks a property introduced in a later version,
+such as `display_name` (added in v1.1):
+
+```csharp
+var displayNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
+    "field_display_name_required",
+    "naming",
+    "Fields should have a display name set",
+    (field) => string.IsNullOrEmpty(field.DisplayName),
+    "1.1"
+);
+```
+
 ## Complete example
 
 This Metric View has violations for each of the rules defined above:
@@ -195,9 +212,8 @@ Found 5 issue(s):
 
 ## Next steps
 
-- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules) for cross-object checks
+- [Create contextual validation rules](xref:semantic-bridge-validate-contextual-rules)
 
 ## See also
 
 - [Semantic Bridge Validation](xref:semantic-bridge-metric-view-validation)
-- [Validate with Default Rules](xref:semantic-bridge-validate-default)

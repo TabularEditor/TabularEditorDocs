@@ -45,7 +45,7 @@ Output(sb.ToString());
 ## Save to a file
 
 Use `Save(path)` to write the YAML directly to disk.
-This will write the metric view you loaded above to disk.
+This will write the Metric View you loaded above to disk.
 
 ```csharp
 var path = "C:/MetricViews/updated-sales-metrics.yaml";
@@ -80,8 +80,11 @@ Output(sb.ToString());
 <!-- TODO: capture serialized YAML from a run -->
 ```
 
+## Next steps
+
+- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
+- [Import a Metric View to Tabular](xref:semantic-bridge-import)
+
 ## See also
 
-- @semantic-bridge-load-inspect
-- @semantic-bridge-import
-- @semantic-bridge
+- [Semantic Bridge Overview](xref:semantic-bridge)

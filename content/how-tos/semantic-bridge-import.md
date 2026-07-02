@@ -91,7 +91,7 @@ view.Measures["total_revenue"].Window =
     new MetricView.Window
     {
         Order = "order_date",
-        Range = "trailing 3 months",
+        Range = "trailing 3 month",
         Semiadditive = MetricView.Window.SemiadditiveType.Last
     }
 ];
@@ -119,9 +119,12 @@ Output(sb.ToString());
 <!-- TODO: capture from a run; expect a MEASURE_WINDOW_UNSUPPORTED warning -->
 ```
 
+## Next steps
+
+- [Import a Metric View from a file](xref:semantic-bridge-metric-view-import-from-file)
+- [Load and inspect a Metric View](xref:semantic-bridge-load-inspect)
+- [Validate a Metric View](xref:semantic-bridge-validate-default)
+
 ## See also
 
 - [Semantic Bridge Overview](xref:semantic-bridge)
-- [Import a Metric View from a file](xref:semantic-bridge-metric-view-import-from-file)
-- [Validate a Metric View](xref:semantic-bridge-validate-default)
-- [Load and Inspect a Metric View](xref:semantic-bridge-load-inspect)

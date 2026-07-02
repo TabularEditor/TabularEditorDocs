@@ -24,7 +24,7 @@ Similar patterns apply to all Metric View collections.
 
 > [!NOTE]
 > These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not necessarily support the v1.1 Metric View features shown here.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
@@ -68,6 +68,10 @@ supplier.On = "source.supplier_id = supplier.supplier_id";
 supplier.Cardinality = MetricView.JoinCardinality.ManyToOne;
 ```
 
+`AddJoin` is also a method on any existing `Join`.
+You would use this to create nested joins, for example, `supplier.AddJoin("region", "sales.dim.region")`,
+which models a snowflake dimension.
+
 ## Add and configure a `Measure`
 
 [`AddMeasure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddMeasure%2A) works similarly to the other `Add` methods.
@@ -96,8 +100,12 @@ Output(sb.ToString());
 total_cost format: <!-- TODO: capture record ToString() from a run -->
 ```
 
+## Next steps
+
+- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
+- [Rename a field](xref:semantic-bridge-rename-objects)
+- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
+
 ## See also
 
-- @semantic-bridge-remove-object
-- @semantic-bridge-rename-objects
-- @semantic-bridge-serialize
+- [Metric View Object Model](xref:semantic-bridge-metric-view-object-model)

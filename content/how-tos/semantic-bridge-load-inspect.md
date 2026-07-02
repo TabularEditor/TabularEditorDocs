@@ -24,7 +24,7 @@ This is the foundational skill for all other Metric View operations.
 
 > [!NOTE]
 > These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not necessarily support the v1.1 Metric View features shown here.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
 [!INCLUDE [Sample Metric View](includes/sample-metricview.md)]
 
@@ -198,8 +198,11 @@ Output(sb.ToString());
 
 Now that you can load and inspect a Metric View, you can:
 
-- [Validate the Metric View](xref:semantic-bridge-metric-view-validation) to check for issues
-- [Import the Metric View to Tabular](xref:semantic-bridge) to create tables, columns, and measures
+- [Add objects to a Metric View](xref:semantic-bridge-add-object)
+- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
+- [Rename a field](xref:semantic-bridge-rename-objects)
+- [Validate the Metric View](xref:semantic-bridge-validate-default)
+- [Import the Metric View to Tabular](xref:semantic-bridge-import)
 
 ## See also
 

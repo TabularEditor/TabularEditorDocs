@@ -25,7 +25,7 @@ SUMMARY: Overview of the Metric View object model built into the Semantic Bridge
 
 > [!NOTE]
 > The Semantic Bridge is in public preview.
-> The metric view object model represents the full current metric view specification as of the time of the Tabular Editor 3 3.26.2 release (June 2026).
+> The 3.25.0 release supports Metric View v0.1 metadata, and the 3.26.2 release supports Metric View v1.1 metadata.
 
 The Semantic Bridge includes an object model representing a Databricks Metric View.
 This allows you to work with Metric Views programmatically through C# scripts, similar to how you work with a Tabular model through the TOMWrapper.
@@ -66,9 +66,9 @@ and our [own API reference for the object model](xref:TabularEditor.SemanticBrid
 | [`Field`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field)     | A field definition (column) in the Metric View             |
 | [`Measure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure) | An aggregation definition representing business logic      |
 
-Most properties and attributes of a metric view have a structured representation in the object model,
+Most properties and attributes of a Metric View have a structured representation in the object model,
 but we defer discussion of these in this document,
-as those are all direct representations of the metric view spec and documented in our API reference, mentioned above.
+as those are all direct representations of the Metric View spec and documented in our API reference, mentioned above.
 
 > [!NOTE]
 > The object model was introduced in Tabular Editor 3.25.0 with support for Metric View v0.1.
@@ -90,7 +90,7 @@ as those are all direct representations of the metric view spec and documented i
 - `Version`: The Metric View specification version (e.g., "1.1")
 - `Source`: The source data for the fact table (e.g., "catalog.schema.table")
 - `Filter`: Optional SQL boolean expression that applies to all queries
-- `Comment`: Optional description of the metric view
+- `Comment`: Optional description of the Metric View
 - `Joins`: Collection of join definitions; non-null empty collection if there are no `Join`s
 - `Fields`: Collection of field definitions; non-null empty collection if there are no `Field`s
 - `Measures`: Collection of measure definitions; non-null empty collection if there are no `Measure`s
@@ -144,7 +144,7 @@ Output(sb.ToString());
 
 [A `Field`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field) represents a field (column) in the Metric View:
 
-- `Name`: The name of the field, referenced in metric view expressions
+- `Name`: The name of the field, referenced in Metric View expressions
 - `Expr`: The SQL expression defining the field (either a column reference or a SQL expression)
 - `Comment`: Optional description of the field
 - `DisplayName`: Optional human-readable display name for the field
@@ -168,7 +168,7 @@ Output(sb.ToString());
 
 [A `Measure`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Measure) represents a named aggregation with business logic:
 
-- `Name`: The name of the measure, referenced in metric view expressions as `MEASURE(<name>)`
+- `Name`: The name of the measure, referenced in Metric View expressions as `MEASURE(<name>)`
 - `Expr`: The SQL aggregate expression defining the measure
 - `Comment`: Optional description of the measure
 - `DisplayName`: Optional human-readable display name for the measure
@@ -211,18 +211,18 @@ foreach (MetricView.Field field in view.Fields)
 ## Interacting with the object model
 
 This document describes the patterns of using the object model.
-See [the semantic bridge how-tos for detailed copy and paste-able examples](xref:semantic-bridge-how-tos).
+See [the Semantic Bridge how-tos for detailed copy and paste-able examples](xref:semantic-bridge-how-tos).
 
 ### `View` parent pointer
 
-All core metric view objects described in this document inherit from [`MetricViewObjectBase`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase) for their core functionality.
-Among other things, this means that each holds a `View` pointer back up to the metric view they are defined in.
-This allows you to inspect the whole metric view when holding any of these objects.
+All core Metric View objects described in this document inherit from [`MetricViewObjectBase`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase) for their core functionality.
+Among other things, this means that each holds a `View` pointer back up to the Metric View they are defined in.
+This allows you to inspect the whole Metric View when holding any of these objects.
 
 ```csharp
 SemanticBridge.MetricView.Load("C:/path/to/metricview.yaml");
-var v = SemanticBridge.MetricView.Model; // alias the metric view as v just for concision
-var f = v.Fields.FirstOrDefault(); // f is the first field defined in the metric view
+var v = SemanticBridge.MetricView.Model; // alias the Metric View as v just for concision
+var f = v.Fields.FirstOrDefault(); // f is the first field defined in the Metric View
 Output(f.View == v); // the field, f, lets you navigate up to the containing view
 ```
 
@@ -231,7 +231,7 @@ Output(f.View == v); // the field, f, lets you navigate up to the containing vie
 You never instantiate a `View`, `Join`, `Field`, or `Measure` directly.
 Instead, deserialize or load a base `View`, or use the various `Add` methods:
 
-- New metric view:
+- New Metric View:
   - [`Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Deserialize%2A) YAML in a string
   - [`Load`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Load%2A) a YAML file from disk
 - Add objects
@@ -245,7 +245,7 @@ this mirrors the interaction with TOM objects you are already familiar with in C
 
 ### Modify properties
 
-The metric view object model is mutable throughout, so you can simply set properties directly.
+The Metric View object model is mutable throughout, so you can simply set properties directly.
 C# autocompletion in Tabular Editor 3 will help with finding the right properties and types to use.
 All properties and their types are in [the API documentation](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView).
 
@@ -255,14 +255,14 @@ The root `View` contains collections for `Joins`, `Fields`, and `Measures`.
 Each `Join` contains a child `Joins` collection.
 Each of these can be indexed by name;
 this looks up the child object by its `Name` property.
-This lookup is case sensitive.
+This lookup is case insensitive, matching the default in Databricks SQL.
 
-### Metric view versions
+### Metric View versions
 
 We track the [Databricks Metric View documentation](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/) to stay up to date with the specification.
 All properties are annotated with the version that they were introduced.
 Thanks to this, the object model will raise exceptions and surface diagnostics if you attempt to set a property that is not allowed for a given version of the spec.
-We recommend always running [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) after modifying a metric view in a C# script;
+We recommend always running [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) after modifying a Metric View in a C# script;
 this will check all default validation rules for correctness.
 
 ## References
@@ -271,6 +271,6 @@ this will check all default validation rules for correctness.
 - @semantic-bridge-metric-view-fields-and-dimensions
 - @semantic-bridge-metric-view-validation
 - @semantic-bridge-metric-view-tabular-translation
-- [Semantic bridge how-tos for detailed examples](xref:semantic-bridge-how-tos)
+- [Semantic Bridge how-tos for detailed examples](xref:semantic-bridge-how-tos)
 - [Databricks Metric View documentation](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/)
 - [Databricks Metric View YAML specification](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/metric-views/yaml-reference)

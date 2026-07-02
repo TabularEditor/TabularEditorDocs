@@ -24,7 +24,7 @@ Similar approaches apply to all collections in a Metric View.
 
 > [!NOTE]
 > These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not necessarily support the v1.1 Metric View features shown here.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
@@ -36,7 +36,7 @@ Similar approaches apply to all collections in a Metric View.
 
 Get the Metric View field and delete it.
 After you delete an object, you should not attempt to modify it.
-You can still read properties off of the deleted object (other than its `View` pointer and `Path`).
+You can still read properties off of the deleted object.
 It is safe to call `Delete()` on an object multiple times; after the first, these are no-ops.
 
 ```csharp
@@ -169,8 +169,12 @@ Removed: order_month (date.month_name)
 Fields after: 3
 ```
 
+## Next steps
+
+- [Add objects to a Metric View](xref:semantic-bridge-add-object)
+- [Rename a field](xref:semantic-bridge-rename-objects)
+- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
+
 ## See also
 
-- @semantic-bridge-add-object
-- @semantic-bridge-rename-objects
-- @semantic-bridge-serialize
+- [Metric View Object Model](xref:semantic-bridge-metric-view-object-model)

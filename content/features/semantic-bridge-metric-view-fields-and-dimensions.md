@@ -51,6 +51,9 @@ We emit a warning upon deserialization when a Metric View's top-level keyword is
 The canonical keyword is `dimensions` before v1.1 and `fields` from v1.1 onward.
 So we warn when a pre-v1.1 (v0.1) Metric View uses `fields`, and when a v1.1 or later Metric View uses `dimensions`.
 The canonical pairings, `dimensions` before v1.1 and `fields` at v1.1 and later, deserialize without a warning.
+Emitting `dimensions` by default at v1.1 while also warning about it upon deserialization is deliberate:
+we emit based on the earliest documented v1.1 spec to avoid breaking any other tooling that is not up to date with the latest spec,
+and we warn because the latest spec now prefers `fields`.
 These warnings do not affect any operations you might want to perform with the Semantic Bridge or the Metric View object model.
 
 When we read a Metric View definition, we track the keyword used in the YAML, so that we can preserve the same keyword upon re-serializing the definition.

@@ -24,7 +24,7 @@ The same patterns apply to all collections in a Metric View.
 
 > [!NOTE]
 > These how-tos target Tabular Editor 3.26.2 and later.
-> Earlier versions do not necessarily support the v1.1 Metric View features shown here.
+> Earlier versions do not support the v1.1 Metric View features shown here.
 
 [!INCLUDE [sample](includes/sample-metricview.md)]
 
@@ -69,8 +69,12 @@ Fields:
 
 The re-added field moves to the end of the collection.
 
+## Next steps
+
+- [Add objects to a Metric View](xref:semantic-bridge-add-object)
+- [Remove objects from a Metric View](xref:semantic-bridge-remove-object)
+- [Serialize a Metric View to YAML](xref:semantic-bridge-serialize)
+
 ## See also
 
-- @semantic-bridge-add-object
-- @semantic-bridge-remove-object
-- @semantic-bridge-serialize
+- [Metric View Object Model](xref:semantic-bridge-metric-view-object-model)
