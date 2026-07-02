@@ -58,12 +58,15 @@ See @te-cli-commands for a full command reference with syntax, options, and exam
 | [Configuration](xref:te-cli-commands#configuration) | Settings and licensing | [`te config`](xref:te-cli-commands#config-list--paths--init--set) |
 | [Shell](xref:te-cli-commands#shell) | Interactive mode, session state, shell completions | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion) |
 
+> [!TIP]
+> The docs use canonical long-form verbs (`list`, `remove`, `move`), but the classic short forms still work as aliases (`ls`, `rm`, `mv`, `rename`). This applies to top-level commands and to `remove` / `list` subcommands under groups like `te bpa rules`, `te macro`, `te config`, `te profile`, `te session`, and `te test`. See @te-cli-commands#command-aliases for the full mapping.
+
 ## Getting started
 
 1. **Sign up or sign in** at [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) with a Tabular Editor account.
 2. **Download and install** - see @te-cli-install for Windows, macOS, and Linux instructions.
 3. **Authenticate** - run `te auth login` to connect to Power BI or Fabric. See @te-cli-auth.
-4. **Run your first command** - `te --help` lists every command; `te <command> --help` shows detailed options.
+4. **Run your first command** - `te --help` lists every command; `te <command> --help` shows detailed options. Tip: running `te` on its own in a terminal drops you into the interactive REPL - a friendly way to explore a model. See @te-cli-interactive.
 
 A first look at a live model takes two commands:
 

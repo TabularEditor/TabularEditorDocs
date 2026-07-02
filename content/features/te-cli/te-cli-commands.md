@@ -117,6 +117,26 @@ DAX bracket-suffix is rejected in filter paths; quote names containing `[` and `
 
 Misspelled segments emit a contextual error with a "did you mean" hint when the CLI can guess what you meant. Missing-parent paths fail before the leaf check, so the message points at the segment that's actually wrong. Empty containers (e.g., `te list Hierarchies` on a model without hierarchies) emit a simply "nothing here" hint rather than an error.
 
+## Command aliases
+
+Most long-form verbs also accept a short alias. Each row shows the canonical command and the equivalent short-form command it accepts as an alias.
+
+| Canonical | Aliased form(s) |
+| -- | -- |
+| `te list` | `te ls` |
+| `te remove` | `te rm` |
+| `te move` | `te mv`, `te rename` |
+| `te bpa rules list` | `te bpa rules ls` |
+| `te bpa rules remove` | `te bpa rules rm` |
+| `te config list` | `te config ls` |
+| `te macro list` | `te macro ls` |
+| `te macro remove` | `te macro rm` |
+| `te incremental-refresh remove` | `te incremental-refresh rm` |
+| `te profile list` | `te profile ls` |
+| `te profile remove` | `te profile rm` |
+| `te session list` | `te session ls` |
+| `te test list` | `te test ls` |
+
 ## Global options
 
 These flags are available on every command and can be used before or after the subcommand name.
@@ -530,7 +550,7 @@ Subcommands:
 | [`enable`](#bpa-rules-enable) | Re-enable a previously disabled built-in BPA rule. |
 | `ignore <rule-id> [model]` | Add a rule to the model's ignore list. |
 | [`init`](#bpa-rules-init) | Create an empty BPA rules file at the resolved path. |
-| [`list`](#bpa-rules-list) | List BPA rules from all sources with status. |
+| [`list`](#bpa-rules-list) (alias `ls`) | List BPA rules from all sources with status. |
 | `remove <rule-id> [model]` (alias `rm`) | Remove a BPA rule. |
 | `set <rule-id> [model]` | Update a BPA rule's properties. |
 | `unignore <rule-id> [model]` | Remove a rule from the model's ignore list. |
@@ -550,7 +570,7 @@ All `te bpa rules` subcommands accept:
 
 #### bpa rules list
 
-List rules from all sources (built-in, user, model).
+List rules from all sources (built-in, user, model). (Alias: `ls`.)
 
 `te bpa rules list` accepts:
 
@@ -757,7 +777,7 @@ Subcommands:
 
 | Subcommand | Purpose |
 | -- | -- |
-| `list` | List macros. |
+| `list` (alias `ls`) | List macros. |
 | [`run <name-or-id>`](#macro-run) | Run a macro. |
 | `add <name>` | Add a macro. |
 | `set <name-or-id>` | Update macro properties. |
@@ -897,6 +917,8 @@ te test run --tag revenue
 
 ### test init / spec / use / list / snapshot / compare
 
+`te test list` also accepts the `ls` alias.
+
 Additional subcommands scaffold tests, print the assertion spec format, switch the active suite, list suites, capture snapshots, and compare models. See `te test --help` for details.
 
 ```bash
@@ -945,7 +967,7 @@ Manage cached authentication. See @te-cli-auth.
 
 ### profile list / show / set / remove
 
-Manage named connection profiles. See @te-cli-auth.
+Manage named connection profiles. (`te profile list` alias: `ls`; `te profile remove` alias: `rm`.) See @te-cli-auth.
 
 ## Configuration
 
@@ -976,6 +998,9 @@ te migrate --output-format json     # Machine-readable mapping
 
 Start a guided REPL session with a model-aware prompt. See @te-cli-interactive.
 
+> [!TIP]
+> Running `te` in a terminal with no arguments also drops you into the REPL by default (as if you ran `te interactive`). Controlled by the `launchInteractiveMode` config key - see @te-cli-interactive#auto-launch-on-empty-invocation.
+
 `te interactive` accepts:
 
 - `<model>` - optional positional argument: start the session with a local model, `.bim` file, or `.SemanticModel` folder loaded.
@@ -1002,7 +1027,7 @@ Subcommands:
 | Subcommand | Purpose |
 | -- | -- |
 | `show` | Show current session details (ID, file path, active state). Default when no subcommand is given. |
-| `list` | List all session files. |
+| `list` (alias `ls`) | List all session files. |
 | `clear` | Clear active state for the current session. |
 | `prune` | Delete session files whose shell process is no longer running. |
 
