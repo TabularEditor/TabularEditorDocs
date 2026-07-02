@@ -118,6 +118,26 @@ El sufijo entre corchetes de DAX se rechaza en las rutas de filtro; pon entre co
 
 Los segmentos mal escritos generan un error contextual con una sugerencia de "quizás quisiste decir" cuando la CLI puede deducir lo que querías decir. Las rutas a las que les falta el elemento padre fallan antes de la comprobación del elemento hoja, así que los mensajes señalan el segmento que realmente está mal. Empty containers (e.g., `te list Hierarchies` on a model without hierarchies) emit a simply "nothing here" hint rather than an error.
 
+## Command aliases
+
+Most long-form verbs also accept a short alias. Each row shows the canonical command and the equivalent short-form command it accepts as an alias.
+
+| Canonical                       | Aliased form(s) |
+| ------------------------------- | ---------------------------------- |
+| `te list`                       | `te ls`                            |
+| `te remove`                     | `te rm`                            |
+| `te move`                       | `te mv`, `te rename`               |
+| `te bpa rules list`             | `te bpa rules ls`                  |
+| `te bpa rules remove`           | `te bpa rules rm`                  |
+| `te config list`                | `te config ls`                     |
+| `te macro list`                 | `te macro ls`                      |
+| `te macro remove`               | `te macro rm`                      |
+| `te incremental-refresh remove` | `te incremental-refresh rm`        |
+| `te profile list`               | `te profile ls`                    |
+| `te profile remove`             | `te profile rm`                    |
+| `te session list`               | `te session ls`                    |
+| `te test list`                  | `te test ls`                       |
+
 ## Opciones globales
 
 Estas opciones están disponibles en todos los comandos y se pueden usar antes o después del nombre del subcomando.
@@ -531,7 +551,7 @@ Subcomandos:
 | [`enable`](#bpa-rules-enable)                              | Vuelve a activar una regla de BPA integrada que se había desactivado antes. |
 | `ignore <rule-id> [model]`                                 | Agrega una regla a la lista de ignorados del modelo.                        |
 | [`init`](#bpa-rules-init)                                  | Crea un archivo vacío de reglas de BPA en la ruta PATH resuelta.            |
-| [`list`](#bpa-rules-list)                                  | Enumera las reglas de BPA de todos los orígenes con su estado.              |
+| [`list`](#bpa-rules-list) (alias `ls`)  | Enumera las reglas de BPA de todos los orígenes con su estado.              |
 | `remove <rule-id> [model]` (alias `rm`) | Elimina una regla de BPA.                                                   |
 | `set <rule-id> [model]`                                    | Actualiza las propiedades de una regla del BPA.                             |
 | `unignore <rule-id> [model]`                               | Elimina una regla de la lista de reglas ignoradas del modelo.               |
@@ -551,7 +571,7 @@ Todos los subcomandos de `te bpa rules` aceptan:
 
 #### bpa rules list
 
-Muestra las reglas de todos los orígenes (integradas, de usuario y del modelo).
+Muestra las reglas de todos los orígenes (integradas, de usuario y del modelo). (Alias: `ls`.)
 
 `te bpa rules list` acepta:
 
@@ -758,7 +778,7 @@ Subcomandos:
 
 | Subcomando                                            | Propósito                                                             |
 | ----------------------------------------------------- | --------------------------------------------------------------------- |
-| `list`                                                | Listar macros.                                        |
+| `list` (alias `ls`)                | Listar macros.                                        |
 | [`run <name-or-id>`](#macro-run)                      | Ejecutar una macro.                                   |
 | `add <name>`                                          | Agregar una macro.                                    |
 | `set <name-or-id>`                                    | Actualizar las propiedades de la macro.               |
@@ -898,6 +918,8 @@ te test run --tag revenue
 
 ### test init / spec / use / list / snapshot / compare
 
+`te test list` also accepts the `ls` alias.
+
 Los subcomandos adicionales permiten crear la estructura de las pruebas, imprimir el formato de la especificación de aserciones, cambiar la suite activa, listar las suites, capturar instantáneas y comparar modelos. Consulta `te test --help` para más detalles.
 
 ```bash
@@ -946,7 +968,7 @@ Administra la autenticación almacenada en caché. Consulta @te-cli-auth.
 
 ### profile list / show / set / remove
 
-Administra perfiles de conexión con nombre. Consulta @te-cli-auth.
+Administra perfiles de conexión con nombre. (`te profile list` alias: `ls`; `te profile remove` alias: `rm`.) Consulta @te-cli-auth.
 
 ## Configuración
 
@@ -977,6 +999,9 @@ te migrate --output-format json     # Machine-readable mapping
 
 Inicia una sesión REPL guiada con un prompt adaptado al modelo. Consulta @te-cli-interactive.
 
+> [!TIP]
+> Running `te` in a terminal with no arguments also drops you into the REPL by default (as if you ran `te interactive`). Controlled by the `launchInteractiveMode` config key - see @te-cli-interactive#auto-launch-on-empty-invocation.
+
 `te interactive` accepts:
 
 - `<model>` - optional positional argument: start the session with a local model, `.bim` file, or `.SemanticModel` folder loaded.
@@ -1000,12 +1025,12 @@ Muestra o administra la sesión actual del terminal. La CLI guarda el estado de 
 
 Subcomandos:
 
-| Subcomando | Propósito                                                                                                                                                                                                 |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `show`     | Muestra los detalles de la sesión actual (ID, ruta de archivo, estado activo). Es la opción predeterminada cuando no se proporciona ningún subcomando. |
-| `list`     | Lista todos los archivos de sesión.                                                                                                                                                       |
-| `clear`    | Borra el estado activo de la sesión actual.                                                                                                                                               |
-| `prune`    | Elimina los archivos de sesión cuyo proceso de shell ya no está en ejecución.                                                                                                             |
+| Subcomando                             | Propósito                                                                                                                                                                                                 |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `show`                                 | Muestra los detalles de la sesión actual (ID, ruta de archivo, estado activo). Es la opción predeterminada cuando no se proporciona ningún subcomando. |
+| `list` (alias `ls`) | Lista todos los archivos de sesión.                                                                                                                                                       |
+| `clear`                                | Borra el estado activo de la sesión actual.                                                                                                                                               |
+| `prune`                                | Elimina los archivos de sesión cuyo proceso de shell ya no está en ejecución.                                                                                                             |
 
 `te session prune` acepta:
 
