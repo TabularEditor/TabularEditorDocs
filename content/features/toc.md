@@ -79,5 +79,6 @@
 # Semantic Bridge for cross-platform translations
 ## @semantic-bridge
 ## @semantic-bridge-metric-view-object-model
+## @semantic-bridge-metric-view-tabular-translation
 ## @semantic-bridge-metric-view-validation
 ## @semantic-bridge-fields-and-dimensions

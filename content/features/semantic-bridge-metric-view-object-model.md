@@ -70,6 +70,17 @@ Most properties and attributes of a metric view have a structured representation
 but we defer discussion of these in this document,
 as those are all direct representations of the metric view spec and documented in our API reference, mentioned above.
 
+All core metric view objects described in this document inherit from [`MetricViewObjectBase`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.MetricViewObjectBase) for their core functionality.
+Among other things, this means that each holds a `View` pointer back up to the metric view they are defined in.
+This allows you to inspect the whole metric view when holding any of these objects.
+
+```csharp
+SemanticBridge.MetricView.Load("C:/path/to/metricview.yaml");
+var v = SemanticBridge.MetricView.Model; // alias the metric view as v just for concision
+var f = v.Fields.FirstOrDefault(); // f is the first field defined in the metric view
+Output(f.View == v); // the field, f, lets you navigate up to the containing view
+```
+
 > [!NOTE]
 > The object model was introduced in Tabular Editor 3.25.0 with support for Metric View v0.1.
 > Support for Metric View v1.1 was added in Tabular Editor 3.26.2;
