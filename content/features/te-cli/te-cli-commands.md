@@ -119,26 +119,23 @@ Misspelled segments emit a contextual error with a "did you mean" hint when the 
 
 ## Command aliases
 
-Most long-form verbs also accept a short alias so existing scripts and muscle memory keep working. Every alias in the table below is real and current; canonical names are what the docs use in prose and examples.
+Most long-form verbs also accept a short alias so existing scripts and muscle memory keep working. Each row shows the canonical command and the equivalent short-form command it accepts as an alias.
 
-| Canonical | Aliases |
+| Canonical | Aliased form(s) |
 | -- | -- |
-| `te list` | `ls` |
-| `te remove` | `rm` |
-| `te move` | `mv`, `rename` |
-| `te bpa rules list` | `ls` |
-| `te bpa rules remove` | `rm` |
-| `te config list` | `ls` |
-| `te macro list` | `ls` |
-| `te macro remove` | `rm` |
-| `te incremental-refresh remove` | `rm` |
-| `te profile list` | `ls` |
-| `te profile remove` | `rm` |
-| `te session list` | `ls` |
-| `te test list` | `ls` |
-
-> [!NOTE]
-> `te config show` is **not** an alias for `te config list` - it was removed. Update any scripts that call `te config show`.
+| `te list` | `te ls` |
+| `te remove` | `te rm` |
+| `te move` | `te mv`, `te rename` |
+| `te bpa rules list` | `te bpa rules ls` |
+| `te bpa rules remove` | `te bpa rules rm` |
+| `te config list` | `te config ls` |
+| `te macro list` | `te macro ls` |
+| `te macro remove` | `te macro rm` |
+| `te incremental-refresh remove` | `te incremental-refresh rm` |
+| `te profile list` | `te profile ls` |
+| `te profile remove` | `te profile rm` |
+| `te session list` | `te session ls` |
+| `te test list` | `te test ls` |
 
 ## Global options
 
