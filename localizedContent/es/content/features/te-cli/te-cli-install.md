@@ -132,7 +132,7 @@ te config set hidePreviewNotice true
 
 ## Autocompletado del shell
 
-La CLI proporciona scripts de autocompletado para **Bash**, **Zsh**, **PowerShell** y **Fish**. Elige el bloque que corresponda a tu shell: cada uno instala el autocompletado de forma persistente para las nuevas sesiones de shell.
+La CLI proporciona scripts de autocompletado para **Bash**, **Zsh**, **PowerShell** y **Fish**. Pick the block that matches your shell - each one installs the completion persistently for new shell sessions.
 
 ### Bash (macOS/Linux)
 
