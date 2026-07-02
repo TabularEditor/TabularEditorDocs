@@ -119,7 +119,7 @@ Misspelled segments emit a contextual error with a "did you mean" hint when the 
 
 ## Command aliases
 
-Most long-form verbs also accept a short alias so existing scripts and muscle memory keep working. Each row shows the canonical command and the equivalent short-form command it accepts as an alias.
+Most long-form verbs also accept a short alias. Each row shows the canonical command and the equivalent short-form command it accepts as an alias.
 
 | Canonical | Aliased form(s) |
 | -- | -- |
