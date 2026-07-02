@@ -26,9 +26,9 @@ Unlike the Windows-only `TabularEditor.exe` command-line options (TE2) - which w
 
 Three design pillars run through every command:
 
-- **Structured output** — JSON, CSV, TMDL, TMSL alongside default human-readable text.
-- **Non-interactive mode** — a global `--non-interactive` flag that disables prompts and fails fast.
-- **Clear errors** — written to stderr with predictable exit codes.
+- **Structured output** - JSON, CSV, TMDL, TMSL alongside default human-readable text.
+- **Non-interactive mode** - a global `--non-interactive` flag that disables prompts and fails fast.
+- **Clear errors** - written to stderr with predictable exit codes.
 
 Together they make the same binary work well for three very different audiences:
 
@@ -48,14 +48,14 @@ See @te-cli-commands for a full command reference with syntax, options, and exam
 | Family | What it does | Example commands |
 | -- | -- | -- |
 | [Model I/O](xref:te-cli-commands#model-io) | Load, save, convert, initialize models | [`te load`](xref:te-cli-commands#load), [`te save`](xref:te-cli-commands#save), [`te init`](xref:te-cli-commands#init) |
-| [Model Editing](xref:te-cli-commands#model-editing) | Get/set properties, add/remove/move objects | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te rm`](xref:te-cli-commands#rm), [`te mv`](xref:te-cli-commands#mv) |
-| [Inspection](xref:te-cli-commands#inspection) | List objects, search, diff, dependency analysis | [`te ls`](xref:te-cli-commands#ls), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps) |
+| [Model Editing](xref:te-cli-commands#model-editing) | Get/set properties, add/remove/move objects | [`te set`](xref:te-cli-commands#set), [`te add`](xref:te-cli-commands#add), [`te remove`](xref:te-cli-commands#remove), [`te move`](xref:te-cli-commands#move) |
+| [Inspection](xref:te-cli-commands#inspection) | List objects, search, diff, dependency analysis | [`te list`](xref:te-cli-commands#list), [`te find`](xref:te-cli-commands#find), [`te diff`](xref:te-cli-commands#diff), [`te deps`](xref:te-cli-commands#deps) |
 | [Analysis & Quality](xref:te-cli-commands#analysis-and-quality) | Validate, run BPA, format DAX, analyze storage | [`te validate`](xref:te-cli-commands#validate), [`te bpa run`](xref:te-cli-commands#bpa-run), [`te format`](xref:te-cli-commands#format), [`te vertipaq`](xref:te-cli-commands#vertipaq) |
 | [Execution](xref:te-cli-commands#execution) | Run DAX queries, C# scripts, macros | [`te query`](xref:te-cli-commands#query), [`te script`](xref:te-cli-commands#script), [`te macro`](xref:te-cli-commands#macro) |
 | [Deployment & Refresh](xref:te-cli-commands#deployment-and-refresh) | Deploy to workspace, trigger refresh, incremental refresh | [`te deploy`](xref:te-cli-commands#deploy), [`te refresh`](xref:te-cli-commands#refresh), [`te incremental-refresh`](xref:te-cli-commands#incremental-refresh) |
 | [Testing](xref:te-cli-commands#testing) | Assertion tests, snapshots, A/B comparison | [`te test run`](xref:te-cli-commands#test-run) |
 | [Connection & Authentication](xref:te-cli-commands#connection-and-authentication) | Connect to workspaces, manage authentication and profiles | [`te connect`](xref:te-cli-commands#connect), [`te auth`](xref:te-cli-commands#auth-login--status--logout), [`te profile`](xref:te-cli-commands#profile-list--show--set--remove) |
-| [Configuration](xref:te-cli-commands#configuration) | Settings and licensing | [`te config`](xref:te-cli-commands#config-show--paths--init--set) |
+| [Configuration](xref:te-cli-commands#configuration) | Settings and licensing | [`te config`](xref:te-cli-commands#config-list--paths--init--set) |
 | [Shell](xref:te-cli-commands#shell) | Interactive mode, session state, shell completions | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion) |
 
 ## Getting started
@@ -69,10 +69,10 @@ A first look at a live model takes two commands:
 
 ```bash
 te auth login
-te ls -s MyWorkspace -d MyModel
+te list -s MyWorkspace -d MyModel
 ```
 
-![Tabular Editor CLI te ls example output](~/content/assets/images/features/cli/cli-command-ls.png)
+![Tabular Editor CLI te list example output](~/content/assets/images/features/cli/cli-command-ls.png)
 
 ## Preview notice
 

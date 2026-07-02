@@ -42,9 +42,9 @@ The CLI runs C# scripts (`te script`) against the same `Model` object you use in
 
 | Limitation | Notes / Workaround |
 | -- | -- |
-| **BPA rule sources must be HTTPS URLs or local file paths** | Only `https://` URLs and bare local file paths are accepted. `http://` is recognized but deliberately rejected at load time with a clear error - BPA rules are executable rule expressions, and fetching them over an unauthenticated channel would be a tampering risk. Other URL schemes (`file://`, `ftp://`, …) are not supported. Applies to both `te bpa run --rules` and the rule list configured via [`te config set`](xref:te-cli-commands#config-show--paths--init--set). |
+| **BPA rule sources must be HTTPS URLs or local file paths** | Only `https://` URLs and bare local file paths are accepted. `http://` is recognized but deliberately rejected at load time with a clear error - BPA rules are executable rule expressions, and fetching them over an unauthenticated channel would be a tampering risk. Other URL schemes (`file://`, `ftp://`, …) are not supported. Applies to both `te bpa run --rules` and the rule list configured via [`te config set`](xref:te-cli-commands#config-list--paths--init--set). |
 | **Rule-URL validation runs at gate time, not on `te config set`** | A typo such as `http://` is accepted by `te config set` and only surfaces when BPA actually runs. After editing the configured rule sources, run `te bpa run` (or `te validate`) once to verify each URL loads. |
-| **`--rules` does not suppress built-in rules** | When `te bpa run --rules <path-or-url>` is passed, the supplied rules replace the entries in [`bpa.rules`](xref:te-cli-commands#config-show--paths--init--set) and `TE_BPA_RULES` for that invocation, but the built-in defaults still load alongside. To run only the explicit rule file, also pass `--no-defaults`. |
+| **`--rules` does not suppress built-in rules** | When `te bpa run --rules <path-or-url>` is passed, the supplied rules replace the entries in [`bpa.rules`](xref:te-cli-commands#config-list--paths--init--set) and `TE_BPA_RULES` for that invocation, but the built-in defaults still load alongside. To run only the explicit rule file, also pass `--no-defaults`. |
 | **No per-invocation flag to skip `bpa.rules` config** | Once `bpa.rules` is configured, every `te bpa run` loads those rules in addition to the built-ins. There is currently no flag to skip the configured rule files for a single run. Workaround: pass `--rules <path-or-url>` explicitly - the flag fully replaces `bpa.rules` and `TE_BPA_RULES` for that invocation. |
 
 ## Validation
@@ -57,7 +57,7 @@ The CLI runs C# scripts (`te script`) against the same `Model` object you use in
 
 | Limitation | Notes / Workaround |
 | -- | -- |
-| **`--serialization` cannot combine a serialization with a PBIP container** | The `--serialization` option on [`te save`](xref:te-cli-commands#save) treats `bim`, `tmdl`, `te-folder`, and `pbip` as mutually exclusive, so you cannot currently produce a PBIP container around a TMSL-serialized (`.bim`) model. Save TMDL inside PBIP, or save `.bim` outside a PBIP wrapper. |
+| **`--serialization` cannot combine a serialization with a PBIP container** | The `--serialization` option on [`te save`](xref:te-cli-commands#save) treats `bim`, `tmdl`, `database.json`, and `pbip` as mutually exclusive, so you cannot currently produce a PBIP container around a TMSL-serialized (`.bim`) model. Save TMDL inside PBIP, or save `.bim` outside a PBIP wrapper. |
 
 ## Authentication
 

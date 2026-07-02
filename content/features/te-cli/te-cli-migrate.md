@@ -57,15 +57,15 @@ A non-exhaustive summary of the most commonly used flags. Run `te migrate` for t
 | TE2 flag | New CLI equivalent | Notes |
 | -- | -- | -- |
 | `file` (positional) | `te <command> <path>` or global `--model` | First positional arg on most commands. |
-| `server`, `database` | `te connect <server>` or `te deploy <server> <database>` | Server is no longer a global positional. |
+| `server`, `database` | `te connect <server> <database>` or `te deploy <model> -s <server> -d <database>` | Server is no longer a global positional; `te deploy` takes only `<model>` positionally, with server and database as named flags. |
 | `-L` / `-LOCAL` | `te connect --local` | Windows only. |
 | `-S` / `-SCRIPT` | `te script -S <file.csx>` or `-e "code"` | Supports multiple scripts, inline code, and stdin. Note: uppercase `-S` - lowercase `-s` is the global `--server` option. |
 | `-A` / `-ANALYZE` | `te bpa run --rules <file-or-url>` | Supports `--fail-on`, `--fix`, multiple rule files. |
 | `-AX` / `-ANALYZEX` | `te bpa run --rules <file>` (without `--model-rules`) | Excluding model-embedded rules is the new default. |
 | `-B` / `-BIM` | `te save <model> -o <file.bim> --serialization bim` | |
-| `-F` / `-FOLDER` | `te save <model> -o <dir> --serialization te-folder` | After `-D`, TE2's `-F` means `-FULL` - see `--deploy-full`. |
+| `-F` / `-FOLDER` | `te save <model> -o <dir> --serialization database.json` | After `-D`, TE2's `-F` means `-FULL` - see `--deploy-full`. |
 | `-TMDL` | `te save <model> -o <dir> --serialization tmdl` | TMDL is the default save format. |
-| `-D` / `-DEPLOY` | `te deploy <server> <database> <model>` | Separate command with named options. |
+| `-D` / `-DEPLOY` | `te deploy <model> -s <server> -d <database>` | Separate command with named options; only `<model>` is positional. |
 | `-O` / `-OVERWRITE` | (default) or `--create-only` to opt out | Overwrite is the default in the new CLI. |
 | `-C` / `-CONNECTIONS` | `te deploy --deploy-connections` | |
 | `-P` / `-PARTITIONS` | `te deploy --deploy-partitions` | |

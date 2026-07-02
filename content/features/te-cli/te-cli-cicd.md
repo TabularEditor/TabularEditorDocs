@@ -166,7 +166,7 @@ steps:
 
 `te deploy` and `te save` run the Best Practice Analyzer as a pre-flight gate by default. Three behaviors are worth determining up-front:
 
-- **Enforce** - the default. Pipeline fails if BPA finds violations at severity ≥ error. Pair with `--fail-on warning` on a standalone `te bpa run` step if you want warnings to fail too.
+- **Enforce** - the default. Pipeline fails if BPA finds violations at severity >= error. Pair with `--fail-on warning` on a standalone `te bpa run` step if you want warnings to fail too.
 - **Auto-fix** - `--fix-bpa` applies `fixExpression`s in memory for the deployed artifact. Source files are not modified. Useful when the source of truth lives in the model and you want deploys to normalize style without developer intervention.
 - **Bypass** - `--skip-bpa` disables the gate for a single command. Useful for emergency hotfixes; not recommended as a default.
 
