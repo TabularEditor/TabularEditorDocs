@@ -20,15 +20,15 @@ applies_to:
 # Metric View to Tabular translation
 
 <!--
-SUMMARY: Describes the process and specifics of translating a metric view to a TOM model.
+SUMMARY: Describes the process and specifics of translating a Metric View to a TOM model.
 -->
 
 > [!NOTE]
-> The Semantic Bridge as released in 3.25.0 and through 3.26.2 is in public preview.
-> The 3.25.0 release supports metric view v0.1 metadata, and the 3.26.2 release supports metric view v1.1 metadata.
+> The Semantic Bridge is in public preview.
+> The 3.25.0 release supports Metric View v0.1 metadata, and the 3.26.2 release supports Metric View v1.1 metadata.
 > Limitations are described below.
 
-This page describes how translation works when importing a metric view definition into a Tabular model.
+This page describes how translation works when importing a Metric View definition into a Tabular model.
 
 ## Translation process
 
@@ -42,25 +42,25 @@ Translating a Metric View to a Tabular model happens in several steps:
 5. Analyze the Metric View and attempt to transform it to an intermediate representation
 6. Attempt to transform the intermediate representation to a Tabular model
 
-The import GUI handles all of this for you, but you can also use C# scripts to customize different steps of the process and operate on the Metric View programatically, similarly to how you are used to doing with a Tabular model.
+The import GUI handles all of this for you, but you can also use C# scripts to customize different steps of the process and operate on the Metric View programmatically, similarly to how you are used to doing with a Tabular model.
 Specifically, you can
 
 - load a Metric View from disk with [`SemanticBridge.MetricView.Load`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Load%2A): loading makes it available in C# scripts as [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model), but does not import the structure into the Tabular model
-- deserialize a Metric view from a string with [`SemanticBridge.MetricView.Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Deserialize%2A): similar to loading, the model is available as [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model), but is not imported
+- deserialize a Metric View from a string with [`SemanticBridge.MetricView.Deserialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Deserialize%2A): similar to loading, the model is available as [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model), but is not imported
 - save a Metric View to disk with [`SemanticBridge.MetricView.Save`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Save%2A)
 - serialize a Metric View to a string with [`SemanticBridge.MetricView.Serialize`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Serialize%2A).
 - validate a Metric View using a system that is similar to the [Best Practice Analyzer](xref:best-practice-analyzer) with [`SemanticBridge.MetricView.Validate`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate%2A)
 	- you can create your own custom validation rules with [`SemanticBridge.MetricView.MakeValidationRule`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.MakeValidationRule%2A) and its simpler versions
-- import a Metric View to Tabular with [`SemanticBridge.MetricView.ImportToTabularFromFile`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabularFromFile%2A), which does the exact same as the GUI shown above, or [`SemanticBridge.MetricView.ImportToTabular`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabular%2A), which is similar, but operates on the currently loaded Metric View, rather than reading one from disk.
+- import a Metric View to Tabular with [`SemanticBridge.MetricView.ImportToTabularFromFile`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabularFromFile%2A), which does the exact same as the import GUI, or [`SemanticBridge.MetricView.ImportToTabular`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.ImportToTabular%2A), which is similar, but operates on the currently loaded Metric View, rather than reading one from disk.
 
 ### Per object translation notes
 
-The four items below, `View`, `Join`, `Field`, and `Measure`, are the core objects of a metric view definition that become TOM objects.
-Other metadata in the metric view definition are either ignored or modify exactly how these objects are translated.
+The four items below, `View`, `Join`, `Field`, and `Measure`, are the core objects of a Metric View definition that become TOM objects.
+Other metadata in the Metric View definition are either ignored or modify exactly how these objects are translated.
 
 > [!NOTE]
-> The translation is performed upon the metric view object model, so we discuss everything in these terms.
-> See [the metric view object model docs](xref:semantic-bridge-metric-view-object-model) for specifics of the object model and how it aligns to the YAML spec.
+> The translation is performed upon the Metric View object model, so we discuss everything in these terms.
+> See [the Metric View object model docs](xref:semantic-bridge-metric-view-object-model) for specifics of the object model and how it aligns to the YAML spec.
 
 #### `View` translation
 
@@ -79,7 +79,7 @@ If the `Source` is not a 3-part table or view reference, it is translated to an 
 
 The `Filter` property is ignored for purposes of translation;
 if you need the logic included in `Filter`, you will have to manually add this.
-The `Filter` expression applies to all queries against the metric view, and so a full automated translation would require joining all tables named in `Joins` in generated M code in TOM.
+The `Filter` expression applies to all queries against the Metric View, and so a full automated translation would require joining all tables named in `Joins` in generated M code in TOM.
 
 Any defined `Materialization` is ignored for the purposes of translation;
 these are query optimization metadata for executing queries on Databricks and not relevant to a TOM model.
@@ -101,7 +101,7 @@ these are query optimization metadata for executing queries on Databricks and no
 `On` equijoins (e.g., `source.fk = dimTable.pk`) become TOM relationships.
 Any other predicate in an `On` property is not translated as a relationship.
 
-Trees of `Join`s in a metric view are translated as TOM tables in a chain of N:1 relationships, where the cardinalities are supported.
+Trees of `Join`s in a Metric View are translated as TOM tables in a chain of N:1 relationships, where the cardinalities are supported.
 This represents a snowflake model schema.
 
 `Cardinality` of `ManyToOne` is translated as a TOM N:1 relationship.
@@ -111,7 +111,7 @@ Other values for `Cardinality` are not yet supported for translation.
 
 `Rely` is not propagated into the TOM model in any way.
 
-In cases where a TOM relationship is not created, we still create a TOM table and translate all metric view `Fields` to TOM columns as described elsewhere.
+In cases where a TOM relationship is not created, we still create a TOM table and translate all Metric View `Fields` to TOM columns as described elsewhere.
 
 > [!NOTE]
 > Databricks has recently introduced a new pattern using `OneToMany` cardinality against multiple `Join` sub-trees to implement a multi-fact model.
@@ -176,8 +176,8 @@ Some examples:
 
 All measures are added to the fact table.
 
-The TOM measure's `Name` is the metric view's `Measure.DisplayName` if it exists,
-otherwise it is the metric view's `Measure.Name`.
+The TOM measure's `Name` is the Metric View's `Measure.DisplayName` if it exists,
+otherwise it is the Metric View's `Measure.Name`.
 
 `Expr` is translated to DAX or passed through as a comment in cases where we cannot automatically translate the measure.
 We identify all field references in the SQL expression and add those to the Tabular model as `DataColumn`s if they do not already exist as a Metric View `Field`.
@@ -186,7 +186,7 @@ Window specifications are not translated and cause fallback to a DAX comment, re
 
 ### `Format` translation
 
-A metric view `Format` is translated to a TOM `FormatString` on the object that carries it.
+A Metric View `Format` is translated to a TOM `FormatString` on the object that carries it.
 The target is a VBA-style format string, as used in TOM models.
 The translation is best-effort:
 if we can create a format string that exactly matches the configuration of the `Format`, then we do so;
@@ -218,7 +218,7 @@ Basic arithmetic, common counting patterns, measure references, and parenthesis 
 > We can make no guarantee that a translated measure will behave identically between the Metric View SQL and the Tabular DAX we generate.
 > Basic aggregates defined on fact table fields should behave the same, whereas aggregates defined on fields in dimension tables are more likely to produce undesired results.
 
-### Common terms across Metric Views and Tabular models
+## Common terms across Metric Views and Tabular models
 
 For those of our users who may be unfamiliar with either Metric Views or Tabular models, we provide an incomplete rosetta stone below.
 We refer to the names of Metric View objects based on their representation in YAML, and Tabular based on the name of the type of object in TMDL/TMSL.
@@ -231,3 +231,11 @@ We refer to the names of Metric View objects based on their representation in YA
 | field                | column          | field                 | A column in a table                                                                                  |                                                                                                                                                                                                                                            |
 | measure              | measure         | measure               | A quantitative value that is aggregated according to business logic in the model                     | Measures in a Tabular model are written in DAX, and in a Metric View in SQL                                                                                                                                                                |
 | join or relationship | relationship    | join.on or join.using | A correspondence between key fields in two tables, a foreign key in one and primary key in the other | Relationships are explicit objects in a Tabular model, and implicitly defined as a property of the `join` object in Metric View YAML                                                                                                       |
+
+## Additional references
+
+- @semantic-bridge
+- @semantic-bridge-metric-view-object-model
+- @semantic-bridge-metric-view-validation
+- @semantic-bridge-how-tos
+- [Metric View API docs](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView)

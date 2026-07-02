@@ -2,7 +2,7 @@
 uid: semantic-bridge
 title: Semantic Bridge
 author: Greg Baldini
-updated: 2026-06-30
+updated: 2026-07-02
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -24,7 +24,7 @@ SUMMARY: Overview of the Semantic Bridge feature - a multi-platform semantic mod
 -->
 
 > [!NOTE]
-> The Semantic Bridge as released in 3.25.0 and through 3.26.2 is in public preview.
+> The Semantic Bridge is in public preview.
 > It has limitations as documented below, and the API and feature surface area are subject to change.
 
 The Semantic Bridge is a semantic model compiler, with the capability to translate the structure and expressions of a semantic model from one platform to another.
@@ -104,7 +104,7 @@ In the public preview, we support translations from a Databricks Metric View to 
 ### Connectivity
 
 The public preview does not connect to any platforms besides Fabric, Power BI, and Analysis Services.
-Working with models from other platforms, e.g., Databricks metric views, is based on local source files, such as a metric view YAML definition.
+Working with models from other platforms, e.g., Databricks Metric Views, is based on local source files, such as a Metric View YAML definition.
 
 ## Appendix on nomenclature
 
@@ -144,5 +144,5 @@ If the term is ever used without being accompanied by a platform's name, then we
 - @semantic-bridge-metric-view-tabular-translation
 - @semantic-bridge-metric-view-object-model
 - @semantic-bridge-metric-view-validation
-- @semantic-bridge-fields-and-dimensions
+- @semantic-bridge-metric-view-fields-and-dimensions
 - @semantic-bridge-how-tos

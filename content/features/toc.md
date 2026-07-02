@@ -76,9 +76,9 @@
 ### [Known Limitations](xref:te-cli-limitations)
 ## @command-line-options
 
-# Semantic Bridge for cross-platform translations
+# [Semantic Bridge for cross-platform translations](xref:semantic-bridge)
 ## @semantic-bridge
 ## @semantic-bridge-metric-view-object-model
 ## @semantic-bridge-metric-view-tabular-translation
 ## @semantic-bridge-metric-view-validation
-## @semantic-bridge-fields-and-dimensions
+## @semantic-bridge-metric-view-fields-and-dimensions

@@ -1,5 +1,5 @@
 ---
-uid: semantic-bridge-fields-and-dimensions
+uid: semantic-bridge-metric-view-fields-and-dimensions
 title: Fields and Dimensions in Metric Views
 author: Greg Baldini
 updated: 2026-06-25
@@ -25,57 +25,57 @@ matching Semantic Bridge C# API rename (Dimension -> Field): what changed, that 
 still work, migration guidance, and what Tabular Editor emits on round-trip.
 -->
 
-In spring 2026, Databricks redefined a canonical top-level key in the metric view YAML specification from `dimensions` (now legacy) to `fields`.
-These both refer to the collection of columns—whether direct references to source columns or defined by a SQL expression—that is available to query in the metric view.
+In spring 2026, Databricks redefined a canonical top-level key in the Metric View YAML specification from `dimensions` (now legacy) to `fields`.
+These both refer to the collection of columns—whether direct references to source columns or defined by a SQL expression—that is available to query in the Metric View.
 [According to Databricks, `fields` is to be preferred, but both terms remain valid](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/metric-views/yaml-reference#dimensions).
-We have updated the metric view object model in the Semantic Bridge to align with this.
+We have updated the Metric View object model in the Semantic Bridge to align with this.
 Serialization and deserialization continue to work with either key in conformance with the Databricks spec.
 We offer backward-compatibility shims in the object model for the old "dimension"-associated names.
 Users of the object model in C# scripts should migrate to "field"-associated names when they can.
 
-**Who this affects**: anyone writing metric view YAML by hand, anyone using the metric view object model in C# scripts in Tabular Editor.
+**Who this affects**: anyone writing Metric View YAML by hand, anyone using the Metric View object model in C# scripts in Tabular Editor.
 
 ## Versioning
 
 This change came after the v1.1 spec was published, and with no new spec version.
-As such, we take a conservative approach in the semantic bridge.
-We treat `dimensions` as the default for v0.1 and v1.1 metric views.
-In the future, we will treat `fields` as the default for any newer-versioned metric views.
+As such, we take a conservative approach in the Semantic Bridge.
+We treat `dimensions` as the default for v0.1 and v1.1 Metric Views.
+In the future, we will treat `fields` as the default for any newer-versioned Metric Views.
 This is out of caution and a desire to offer the most interoperability with any other tools that may not be up to date with the latest published spec from Databricks.
 
 ## Serialization and deserialization
 
-Per Databricks documentation, both keys remain valid for serializing metric views.
+Per Databricks documentation, both keys remain valid for serializing Metric Views.
 
-We emit a warning upon deserialization when a metric view's top-level keyword is not what was documented for that version.
+We emit a warning upon deserialization when a Metric View's top-level keyword is not what was documented for that version.
 The canonical keyword is `dimensions` before v1.1 and `fields` from v1.1 onward.
-So we warn when a pre-v1.1 (v0.1) metric view uses `fields`, and when a v1.1 or later metric view uses `dimensions`.
+So we warn when a pre-v1.1 (v0.1) Metric View uses `fields`, and when a v1.1 or later Metric View uses `dimensions`.
 The canonical pairings, `dimensions` before v1.1 and `fields` at v1.1 and later, deserialize without a warning.
-These warnings do not affect any operations you might want to perform with the semantic bridge or the metric view object model.
+These warnings do not affect any operations you might want to perform with the Semantic Bridge or the Metric View object model.
 
-When we read a metric view definition, we track the keyword used in the YAML, so that we can preserve the same keyword upon re-serializing the definition.
-This guarantees that metric view definitions have round-trip fidelity in our deserializer and serializer; e.g., if you have a v0.1 metric view using `fields`, we will serialize it using the same keyword so you get the same YAML back out.
+When we read a Metric View definition, we track the keyword used in the YAML, so that we can preserve the same keyword upon re-serializing the definition.
+This guarantees that Metric View definitions have round-trip fidelity in our deserializer and serializer; e.g., if you have a v0.1 Metric View using `fields`, we will serialize it using the same keyword so you get the same YAML back out.
 
-The semantic bridge default of `dimensions` for v0.1 and v1.1 comes into play if you deserialize a metric view with neither of `dimensions` or `fields` defined.
-In this case, we apply our default logic if you add fields to the metric view via a C# script and then later serialize the metric view to YAML.
+The Semantic Bridge default of `dimensions` for v0.1 and v1.1 comes into play if you deserialize a Metric View with neither of `dimensions` or `fields` defined.
+In this case, we apply our default logic if you add fields to the Metric View via a C# script and then later serialize the Metric View to YAML.
 
-We will continue to support both keywords in all metric view versions unless a future Databricks spec update indicates otherwise.
+We will continue to support both keywords in all Metric View versions unless a future Databricks spec update indicates otherwise.
 You can continue to freely use either as you prefer, with notes about the warnings and defaults above for serialization and deserialization.
 
-We treat the case of both keys in a definition as an error and will fail to deserialize such a metric view.
-We are aware of no way to generate such a case other than by hand-editing YAML; certainly you cannot accidentally do this via the semantic bridge or any operations we expose.
-Such a metric view definition, which uses both `dimensions` and `fields`, will need manual remediation.
+We treat the case of both keys in a definition as an error and will fail to deserialize such a Metric View.
+We are aware of no way to generate such a case other than by hand-editing YAML; certainly you cannot accidentally do this via the Semantic Bridge or any operations we expose.
+Such a Metric View definition, which uses both `dimensions` and `fields`, will need manual remediation.
 
-An important note on the `materialization` block of the metric view YAML definition: this section of YAML continues to use only `dimensions` regardless of the top-level key used.
+An important note on the `materialization` block of the Metric View YAML definition: this section of YAML continues to use only `dimensions` regardless of the top-level key used.
 [See the Databricks documentation for authoritative guidance on materialization](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/metric-views/yaml-reference#materialization).
 
 Finally, there is no behavior or semantic difference in using either of `dimensions` or `fields`.
 These keywords are simply synonyms, with Databricks guidance that `fields` is to be preferred.
 
-## Metric view object model API change: `Dimension` to `Field`
+## Metric View object model API change: `Dimension` to `Field`
 
-In light of Databricks's guidance that `fields` is to be preferred, we have aligned to this throughout the semantic bridge.
-We ship a [metric view object model for programmatic interaction with a metric view](xref:semantic-bridge-metric-view-object-model), necessary for implementing the translations in the semantic bridge.
+In light of Databricks's guidance that `fields` is to be preferred, we have aligned to this throughout the Semantic Bridge.
+We ship a [Metric View object model for programmatic interaction with a Metric View](xref:semantic-bridge-metric-view-object-model), necessary for implementing the translations in the Semantic Bridge.
 We have deprecated the `Dimension` object, and all associated methods and properties that used "dimension" or "dimensions" in their name.
 We have created a new `Field` object, and new "field"-named methods and properties.
 The `Dimension` object and associated methods and properties will now give you a warning about their obsolete state.
@@ -124,3 +124,4 @@ The following table lists each deprecated `Dimension`-based name and its canonic
 - @semantic-bridge
 - @semantic-bridge-metric-view-object-model
 - @semantic-bridge-metric-view-validation
+- [Metric View API](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView)

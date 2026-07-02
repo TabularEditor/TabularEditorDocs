@@ -245,5 +245,5 @@ Output(SemanticBridge.MetricView.Validate([simpleRule, contextualRule]));
 ## References
 
 - @semantic-bridge-metric-view-object-model
-- @semantic-bridge-fields-and-dimensions
+- @semantic-bridge-metric-view-fields-and-dimensions
 - @semantic-bridge-how-tos
