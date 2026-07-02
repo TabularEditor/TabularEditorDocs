@@ -118,6 +118,26 @@ te list 'Roles/Re*/Members'            # Members of every role matching Re*
 
 分段拼写错误时会给出一条与上下文相关的错误；如果 CLI 能猜到你的意图，还会附带“你是不是想输入……”的提示。 缺少父级的路径会在检查叶节点之前失败，因此信息会指向真正出错的分段。 Empty containers (e.g., `te list Hierarchies` on a model without hierarchies) emit a simply "nothing here" hint rather than an error.
 
+## Command aliases
+
+Most long-form verbs also accept a short alias. Each row shows the canonical command and the equivalent short-form command it accepts as an alias.
+
+| Canonical                       | Aliased form(s) |
+| ------------------------------- | ---------------------------------- |
+| `te list`                       | `te ls`                            |
+| `te remove`                     | `te rm`                            |
+| `te move`                       | `te mv`, `te rename`               |
+| `te bpa rules list`             | `te bpa rules ls`                  |
+| `te bpa rules remove`           | `te bpa rules rm`                  |
+| `te config list`                | `te config ls`                     |
+| `te macro list`                 | `te macro ls`                      |
+| `te macro remove`               | `te macro rm`                      |
+| `te incremental-refresh remove` | `te incremental-refresh rm`        |
+| `te profile list`               | `te profile ls`                    |
+| `te profile remove`             | `te profile rm`                    |
+| `te session list`               | `te session ls`                    |
+| `te test list`                  | `te test ls`                       |
+
 ## 全局选项
 
 这些标志适用于每个命令，可在子命令名称之前或之后使用。
@@ -531,7 +551,7 @@ Manage BPA rule collections - list, inspect, initialize, and toggle rules in you
 | [`enable`](#bpa-rules-enable)                              | 重新启用先前已禁用的内置 BPA 规则。         |
 | `ignore <rule-id> [model]`                                 | 将规则添加到模型的忽略列表。               |
 | [`init`](#bpa-rules-init)                                  | 在解析后的 PATH 下创建一个空的 BPA 规则文件。 |
-| [`list`](#bpa-rules-list)                                  | 列出来自所有来源的 BPA 规则及其状态。        |
+| [`list`](#bpa-rules-list) (alias `ls`)  | 列出来自所有来源的 BPA 规则及其状态。        |
 | `remove <rule-id> [model]` (alias `rm`) | 删除一条 BPA 规则。                 |
 | `set <rule-id> [model]`                                    | 更新 BPA 规则的属性。                |
 | `unignore <rule-id> [model]`                               | 从模型的忽略列表中移除一条规则。             |
@@ -551,7 +571,7 @@ Manage BPA rule collections - list, inspect, initialize, and toggle rules in you
 
 #### bpa rules list
 
-列出来自所有来源的规则（内置、用户、模型）。
+列出来自所有来源的规则（内置、用户、模型）。 (Alias: `ls`.)
 
 `te bpa rules list` 接受以下选项：
 
@@ -758,7 +778,7 @@ echo "Info(Model.Name);" | te script -e -
 
 | 子命令                                                   | 用途                  |
 | ----------------------------------------------------- | ------------------- |
-| `list`                                                | 列出宏。                |
+| `list` (alias `ls`)                | 列出宏。                |
 | 宏：[`run <name-or-id>`](#macro-run)                    | 运行宏。                |
 | `add <name>`                                          | 添加宏。                |
 | `set <name-or-id>`                                    | 更新宏属性。              |
@@ -898,6 +918,8 @@ te test run --tag revenue
 
 ### test init / spec / use / list / snapshot / compare
 
+`te test list` also accepts the `ls` alias.
+
 其他子命令可用于搭建测试脚手架、打印断言规范格式、切换当前活动套件、列出套件、捕获快照以及比较模型。 查看 `te test --help` 了解详情。
 
 ```bash
@@ -946,7 +968,7 @@ te connect ./revenue-model -w Finance "Revenue Model"    # Mirror local → remo
 
 ### profile list / show / set / remove
 
-管理命名连接配置文件。 参见 @te-cli-auth。
+管理命名连接配置文件。 (`te profile list` alias: `ls`; `te profile remove` alias: `rm`.) 参见 @te-cli-auth。
 
 ## 配置
 
@@ -977,6 +999,9 @@ te migrate --output-format json     # Machine-readable mapping
 
 使用具备模型感知能力的提示词启动引导式 REPL 会话。 参见 @te-cli-interactive。
 
+> [!TIP]
+> Running `te` in a terminal with no arguments also drops you into the REPL by default (as if you ran `te interactive`). Controlled by the `launchInteractiveMode` config key - see @te-cli-interactive#auto-launch-on-empty-invocation.
+
 `te interactive` accepts:
 
 - `<model>` - optional positional argument: start the session with a local model, `.bim` file, or `.SemanticModel` folder loaded.
@@ -1000,12 +1025,12 @@ printf "list Measures\nexit\n" | te interactive ./model   # Pipe commands via st
 
 子命令：
 
-| 子命令     | 用途                                       |
-| ------- | ---------------------------------------- |
-| `show`  | 显示当前会话的详细信息（ID、文件路径、活动状态）。 未提供子命令时的默认行为。 |
-| `list`  | 列出所有会话文件。                                |
-| `clear` | 清除当前会话的活动状态。                             |
-| `prune` | 删除其 shell 进程已停止运行的会话文件。                  |
+| 子命令                                    | 用途                                       |
+| -------------------------------------- | ---------------------------------------- |
+| `show`                                 | 显示当前会话的详细信息（ID、文件路径、活动状态）。 未提供子命令时的默认行为。 |
+| `list` (alias `ls`) | 列出所有会话文件。                                |
+| `clear`                                | 清除当前会话的活动状态。                             |
+| `prune`                                | 删除其 shell 进程已停止运行的会话文件。                  |
 
 `te session prune` 支持以下选项：
 
