@@ -39,7 +39,7 @@ You can load a Metric View with [`SemanticBridge.MetricView.Load`](xref:TabularE
 This stores the deserialized Metric View as [`SemanticBridge.MetricView.Model`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Model).
 This property returns a [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) object, which is the root of the Metric View object graph.
 
-```csharp
+```csharp {compile}
 // Load a Metric View from disk
 SemanticBridge.MetricView.Load("C:/path/to/metricview.yaml");
 
@@ -52,6 +52,8 @@ Similar to a Tabular model and dissimilar to most other objects you may be used 
 This means that you can load a Metric View once, and reference it from subsequent script executions without re-loading it every time.
 There is only ever a single Metric View loaded, and it is available in all scripts as `SemanticBridge.MetricView.Model` as mentioned above.
 This behavior is similar to the Tabular model in C# scripts, which is always available simply as `Model`.
+
+[!INCLUDE [sample](../how-tos/includes/sample-metricview.md)]
 
 ## Domain objects
 
@@ -96,7 +98,7 @@ as those are all direct representations of the Metric View spec and documented i
 - `Measures`: Collection of measure definitions; non-null empty collection if there are no `Measure`s
 - `Materialization`: Materialization configuration for query acceleration when hosted on Databricks; [see the `Materialization` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Materialization)
 
-```csharp
+```csharp {run id=view-props setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
@@ -108,6 +110,17 @@ sb.AppendLine($"Fields: {view.Fields.Count}");
 sb.AppendLine($"Measures: {view.Measures.Count}");
 
 Output(sb.ToString());
+```
+
+**Output**
+
+```
+Version: 1.1
+Source: sales.fact.orders
+Filter: (none)
+Joins: 3
+Fields: 6
+Measures: 6
 ```
 
 ### Join
@@ -123,7 +136,7 @@ Output(sb.ToString());
 - `Cardinality`: controls the relationship between `View.Source` or `ParentJoin` and this `Join`; [see the `JoinCardinality` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.JoinCardinality)
 - `Rely`: Optimizer hints about the `Join`'s relationship to its parent; [see the `Rely` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Rely)
 
-```csharp
+```csharp {run id=join-props setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
@@ -140,6 +153,20 @@ foreach (var join in view.Joins)
 Output(sb.ToString());
 ```
 
+**Output**
+
+```
+Join: product
+  Source: sales.dim.product
+  On: source.product_id = product.product_id
+Join: customer
+  Source: sales.dim.customer
+  On: source.customer_id = customer.customer_id
+Join: date
+  Source: sales.dim.date
+  On: source.order_date = date.date_key
+```
+
 ### Field
 
 [A `Field`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Field) represents a field (column) in the Metric View:
@@ -151,7 +178,7 @@ Output(sb.ToString());
 - `Synonyms`: Optional alternative names for the field, used by AI and BI tools
 - `Format`: Optional display format specification for the field's values; [see the `Format` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Format)
 
-```csharp
+```csharp {run id=field-props setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
@@ -162,6 +189,23 @@ foreach (var field in view.Fields)
 }
 
 Output(sb.ToString());
+```
+
+**Output**
+
+```
+Field: product_name
+  Expression: product.product_name
+Field: product_category
+  Expression: product.category
+Field: customer_segment
+  Expression: customer.segment
+Field: order_date
+  Expression: date.full_date
+Field: order_year
+  Expression: date.year
+Field: order_month
+  Expression: date.month_name
 ```
 
 ### Measure
@@ -176,7 +220,7 @@ Output(sb.ToString());
 - `Format`: Optional display format specification for the measure's values; [see the `Format` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Format)
 - `Window`: Optional list of window specifications for windowed or semi-additive aggregation; [see the `Window` API reference](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Window)
 
-```csharp
+```csharp {run id=measure-props setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
@@ -189,12 +233,29 @@ foreach (var measure in view.Measures)
 Output(sb.ToString());
 ```
 
+**Output**
+
+```
+Measure: total_revenue
+  Expression: SUM(revenue)
+Measure: gross_margin
+  Expression: SUM(revenue) - SUM(cost)
+Measure: order_count
+  Expression: COUNT(*)
+Measure: avg_order_value
+  Expression: AVG(revenue)
+Measure: revenue_to_budget
+  Expression: (SUM(revenue) - SUM(budget)) / SUM(budget)
+Measure: unique_customers
+  Expression: COUNT(DISTINCT customer_id)
+```
+
 ## Using directives
 
 When working with the Metric View object model in C# scripts, you may need to add a using directive to avoid naming conflicts with similarly-named types in the Tabular Object Model.
 We recommend aliasing the namespace:
 
-```csharp
+```csharp {compile}
 // Alias to avoid conflicts with TOM types like Measure
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
@@ -219,7 +280,7 @@ All core Metric View objects described in this document inherit from [`MetricVie
 Among other things, this means that each holds a `View` pointer back up to the Metric View they are defined in.
 This allows you to inspect the whole Metric View when holding any of these objects.
 
-```csharp
+```csharp {compile}
 SemanticBridge.MetricView.Load("C:/path/to/metricview.yaml");
 var v = SemanticBridge.MetricView.Model; // alias the Metric View as v just for concision
 var f = v.Fields.FirstOrDefault(); // f is the first field defined in the Metric View

@@ -82,9 +82,16 @@ After either success type, you can use undo/redo functionality like normal in Ta
 If you click on **View Diagnostics**, you can see a list of messages describing the issues in translation.
 These diagnostics are available for review later by outputting them from a C# script:
 
-```csharp
+```csharp {compile}
 // Show all diagnostic messages from the last attempted import of a Metric View
-SemanticBridge.MetricView.ImportDiagnostics.Output();
+var sb = new System.Text.StringBuilder();
+foreach (var d in SemanticBridge.MetricView.ImportDiagnostics)
+{
+    sb.AppendLine($"[{d.Severity}] {d.Code} {d.Path}");
+    sb.AppendLine($"    {d.Context} {d.Message}");
+    sb.AppendLine();
+}
+Output(sb.ToString());
 ```
 
 ![Import diagnostics](~/content/assets/images/features/semantic-bridge/semantic-bridge-import-diagnostics.png)

@@ -39,7 +39,7 @@ After you delete an object, you should not attempt to modify it.
 You can still read properties off of the deleted object.
 It is safe to call `Delete()` on an object multiple times; after the first, these are no-ops.
 
-```csharp
+```csharp {run id=removefield setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
@@ -68,7 +68,7 @@ Observe that there are multiple calls to `Delete()` but only one removal.
 
 Measures are removed the same way: get a reference to the measure and delete it.
 
-```csharp
+```csharp {run id=removemeasure setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
@@ -95,7 +95,7 @@ Measures after: 5
 Filter to the fields you want to remove, snapshot them with `ToList`, then delete each one.
 Snapshotting first avoids modifying the collection while iterating it.
 
-```csharp
+```csharp {run id=removemultiple setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();
@@ -143,7 +143,7 @@ Remove all Metric View fields that reference the date table.
 > Metric View fields may include near-arbitrary SQL expressions, and may also reference previously defined Metric View fields.
 > This example is for illustrative purposes only.
 
-```csharp
+```csharp {run id=remove-by-table setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var sb = new System.Text.StringBuilder();

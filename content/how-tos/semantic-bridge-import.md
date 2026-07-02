@@ -38,7 +38,7 @@ This how-to demonstrates importing a loaded Metric View into a Tabular model wit
 The Databricks hostname and HTTP path are used when we build the M partition expressions;
 for a quick test you can pass placeholder values and fix them before refreshing data.
 
-```csharp
+```csharp {run id=import setup=mv-sample after=none output=true}
 var success = SemanticBridge.MetricView.ImportToTabular(
     Model,
     "your-workspace.azuredatabricks.net",
@@ -60,15 +60,21 @@ Output(sb.ToString());
 **Output:**
 
 ```
-<!-- TODO: capture import result from a run -->
+Imported 15 fields and 6 measures.
+Import successful.
+Diagnostics: 0
 ```
+
+Note that the number of fields imported includes join keys and implicit column references from the Metric View definition,
+so it is larger than the number of explicit `Fields` in the Metric View definition.
 
 ## Review the last import's diagnostics
 
 The diagnostics from the most recent import are available at any time through `ImportDiagnostics`, including after an import done through the GUI.
 
-```csharp
-SemanticBridge.MetricView.ImportDiagnostics.Output();
+```csharp {compile}
+foreach (var d in SemanticBridge.MetricView.ImportDiagnostics)
+    Output($"[{d.Severity}] {d.Code}: {d.Message}");
 ```
 
 ## See a translation diagnostic
@@ -80,7 +86,7 @@ and reports a diagnostic warning to you.
 
 Add a window spec to a measure, then import to see the diagnostic:
 
-```csharp
+```csharp {run id=window-diagnostic setup=mv-sample after=none output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 var view = SemanticBridge.MetricView.Model;
@@ -109,14 +115,39 @@ foreach (var diag in diagnostics)
 {
     sb.AppendLine($"  [{diag.Severity}] {diag.Code}: {diag.Message}");
 }
-sb.AppendLine($"TOM measure expression: {Model.AllMeasures.First(m => m.Name == "total_revenue").Expression}");
+// note that we search for the DisplayName, as that is what is translated to TOM
+sb.AppendLine($"TOM measure expression: {Model.AllMeasures.First(m => m.Name == "Total Revenue").Expression}");
 Output(sb.ToString());
 ```
 
 **Output:**
 
 ```
-<!-- TODO: capture from a run; expect a MEASURE_WINDOW_UNSUPPORTED warning -->
+Import succeeded with issues.
+  [Warning] MEASURE_WINDOW_UNSUPPORTED: Measure 'Total Revenue' uses a window specification that is not currently supported; it has been left inert with the original definition preserved as a comment.
+TOM measure expression: // This measure uses a window specification (windowed / cumulative / semiadditive),
+// which is not currently supported when importing Databricks Metric Views.
+// The measure has been left blank - review the details below and author the DAX
+// manually. The translated DAX does NOT account for the window spec; you will most
+// likely need to wrap it in CALCULATE (or similar) to apply the windowing.
+//
+// Original source expression (Databricks SQL):
+/*
+SUM(revenue)
+*/
+//
+// Suggested DAX translation (window spec NOT applied):
+/*
+SUM('Fact'[revenue])
+*/
+//
+// Window specification:
+/*
+- order: order_date
+  range: trailing 3 month
+  semiadditive: last
+
+*/
 ```
 
 ## Next steps

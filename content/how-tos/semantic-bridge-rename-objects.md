@@ -33,7 +33,7 @@ The same patterns apply to all collections in a Metric View.
 Rename a field by adding a new field under the new name, copying its other properties across, then removing the original.
 [`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) sets only the name and expression, so copy the remaining properties (`Comment`, `DisplayName`, `Synonyms`, `Format`) yourself.
 
-```csharp
+```csharp {run id=rename setup=mv-sample after=none output=true}
 var view = SemanticBridge.MetricView.Model;
 
 var old = view.Fields["order_month"];

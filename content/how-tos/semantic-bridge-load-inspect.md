@@ -33,7 +33,7 @@ This is the foundational skill for all other Metric View operations.
 After loading, the Metric View is available in any script as `SemanticBridge.MetricView.Model`.
 This returns a Metric View [`View`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View) object, the root of the [Metric View object graph](xref:semantic-bridge-metric-view-object-model).
 
-```csharp
+```csharp {run id=basic setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
@@ -42,11 +42,18 @@ sb.AppendLine($"Source (fact table): {view.Source}");
 Output(sb.ToString());
 ```
 
+**Output**
+
+```
+Version: 1.1
+Source (fact table): sales.fact.orders
+```
+
 ## Inspect Metric View joins (dimension tables)
 
 The Metric View `Joins` property contains the dimension tables joined to the fact.
 
-```csharp
+```csharp {run id=joins setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
@@ -90,7 +97,7 @@ Join: date
 
 The Metric View `Fields` property contains all field definitions.
 
-```csharp
+```csharp {run id=fields setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
@@ -122,7 +129,7 @@ order_month          <- date.month_name
 
 The Metric View `Measures` property contains all Metric View measure definitions with their aggregation expressions.
 
-```csharp
+```csharp {run id=measures setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
@@ -154,7 +161,7 @@ unique_customers     = COUNT(DISTINCT customer_id)
 
 Here is a complete script that outputs a formatted summary of the entire Metric View.
 
-```csharp
+```csharp {run id=summary setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
@@ -192,6 +199,40 @@ foreach (var measure in view.Measures)
 }
 
 Output(sb.ToString());
+```
+
+**Output**
+
+```
+METRIC VIEW SUMMARY
+===================
+
+Version: 1.1
+Fact Source: sales.fact.orders
+
+JOINS (3)
+---------
+  product         -> sales.dim.product
+  customer        -> sales.dim.customer
+  date            -> sales.dim.date
+
+FIELDS (6)
+--------------
+  product_name         <- product.product_name
+  product_category     <- product.category
+  customer_segment     <- customer.segment
+  order_date           <- date.full_date
+  order_year           <- date.year
+  order_month          <- date.month_name
+
+MEASURES (6)
+------------
+  total_revenue        = SUM(revenue)
+  gross_margin         = SUM(revenue) - SUM(cost)
+  order_count          = COUNT(*)
+  avg_order_value      = AVG(revenue)
+  revenue_to_budget    = (SUM(revenue) - SUM(budget)) / SUM(budget)
+  unique_customers     = COUNT(DISTINCT customer_id)
 ```
 
 ## Next steps

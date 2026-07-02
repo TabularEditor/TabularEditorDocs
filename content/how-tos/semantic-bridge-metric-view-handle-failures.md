@@ -33,7 +33,7 @@ The exception itself only signals that loading failed;
 the specific reasons are captured in `ImportDiagnostics`.
 On failure, the current Metric View (`SemanticBridge.MetricView.Model`) is set to `null`.
 
-```csharp
+```csharp {run id=failed-deserialize setup=none after=none output=true}
 try
 {
     // This Metric View is missing the required `source`, so it fails to deserialize.
@@ -59,7 +59,8 @@ catch (System.IO.InvalidDataException)
 **Output**
 
 ```
-todo
+Could not load the Metric View:
+  [Error] VIEW_SOURCE_REQUIRED: View source cannot be empty
 ```
 
 > [!NOTE]
@@ -73,7 +74,7 @@ todo
 
 Run this script in a fresh Tabular Editor 3 instance to ensure you have no loaded Metric View:
 
-```csharp
+```csharp {run id=guard-no-model setup=none after=none output=true}
 if (SemanticBridge.MetricView.Model == null)
 {
     Output("No Metric View is loaded. Load or deserialize one first.");
@@ -88,7 +89,7 @@ else
 **Output**
 
 ```
-todo
+No Metric View is loaded. Load or deserialize one first.
 ```
 
 Without the guard, calling `SemanticBridge.MetricView.Validate()` with nothing loaded throws `InvalidOperationException`.
@@ -105,7 +106,7 @@ the import stops before translating and returns `false`,
 with the reasons in the `out` diagnostics.
 A Tabular model must be open.
 
-```csharp
+```csharp {run id=import-incomplete setup=none after=none output=true}
 // Load a valid Metric View, then make it invalid
 SemanticBridge.MetricView.Deserialize("""
     version: 1.1
@@ -147,7 +148,8 @@ Output(sb.ToString());
 **Output**
 
 ```
-todo
+Import did not complete:
+  [Error] FIELD_EXPR_REQUIRED: Field 'order_year' expr cannot be empty
 ```
 
 Pass `failOnValidationErrors: false` at your own risk if you'd like to import despite validation issues.

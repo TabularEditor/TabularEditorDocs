@@ -46,7 +46,7 @@ Each helper takes four parameters:
 
 Check that the Metric View version is the expected value:
 
-```csharp
+```csharp {compile}
 var versionRule = SemanticBridge.MetricView.MakeValidationRuleForView(
     "version_check",
     "structure",
@@ -59,7 +59,7 @@ var versionRule = SemanticBridge.MetricView.MakeValidationRuleForView(
 
 Check that Metric View join sources use fully qualified table names (contain a dot):
 
-```csharp
+```csharp {compile}
 var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
     "qualified_source",
     "structure",
@@ -72,7 +72,7 @@ var joinSourceRule = SemanticBridge.MetricView.MakeValidationRuleForJoin(
 
 Check that Metric View field names do not contain underscores:
 
-```csharp
+```csharp {compile}
 var fieldNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "no_underscores",
     "naming",
@@ -85,7 +85,7 @@ var fieldNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
 
 Check that Metric View measure expressions do not contain SELECT (to avoid accidental subqueries):
 
-```csharp
+```csharp {compile}
 var measureExprRule = SemanticBridge.MetricView.MakeValidationRuleForMeasure(
     "no_select_subquery",
     "structure",
@@ -101,7 +101,7 @@ Rules defined with a `minVersion` only run against Metric Views at or above that
 This is useful for a rule that checks a property introduced in a later version,
 such as `display_name` (added in v1.1):
 
-```csharp
+```csharp {compile}
 var displayNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     "field_display_name_required",
     "naming",
@@ -115,7 +115,7 @@ var displayNameRule = SemanticBridge.MetricView.MakeValidationRuleForField(
 
 This Metric View has violations for each of the rules defined above:
 
-```csharp
+```csharp {run id=complete setup=mv-sample after=none output=true}
 // Create a Metric View with violations for each rule
 SemanticBridge.MetricView.Deserialize("""
     version: 0.2

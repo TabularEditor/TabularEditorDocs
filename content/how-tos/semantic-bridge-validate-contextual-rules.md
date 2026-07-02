@@ -40,7 +40,7 @@ Use contextual rules when you need to:
 
 The generic `MakeValidationRule<T>` method provides access to the validation context:
 
-```csharp
+```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(  // or Field, Join, View
@@ -67,7 +67,7 @@ Because you create the diagnostic message in the body of the validation function
 
 Add this using directive to reference Metric View types:
 
-```csharp
+```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 ```
 
@@ -75,7 +75,7 @@ using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 Fields are validated before measures, so when a measure is checked, `context.FieldNames` already holds every field name.
 
-```csharp
+```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 var measureNameRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(
@@ -95,7 +95,7 @@ var measureNameRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Me
 
 Joins are validated first, so `context.JoinNames` holds every join name by the time measures are checked.
 
-```csharp
+```csharp {compile}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 var measureNotJoinRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Measure>(
@@ -124,7 +124,7 @@ Notice that we created two separate rules instead of one combined rule. This is 
 
 This Metric View has naming conflicts that will trigger both contextual rules:
 
-```csharp
+```csharp {run id=complete setup=mv-sample after=none output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 // Create a Metric View with names reused across object types
@@ -216,7 +216,7 @@ Found 2 issue(s):
 
 You can run contextual rules alongside the default validation rules by calling `Validate` twice:
 
-```csharp
+```csharp {run id=combined setup=mv-sample after=complete output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 var customRules = new[] {
@@ -257,7 +257,8 @@ Output(sb.ToString());
 **Output**
 
 ```
-<!--TODO-->
+Default rule issues: 0
+Custom rule issues: 2
 ```
 
 ## See also

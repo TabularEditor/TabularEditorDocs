@@ -32,7 +32,7 @@ Similar patterns apply to all Metric View collections.
 
 Use [`AddField`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.View.AddField%2A) to create and return a new `Field` you can manipulate.
 
-```csharp
+```csharp {run id=addfield setup=mv-sample after=none output=true}
 var sb = new System.Text.StringBuilder();
 var view = SemanticBridge.MetricView.Model;
 
@@ -57,7 +57,7 @@ Fields after adding: 7
 works similarly to `AddField`: it constructs the object, adds it to the Metric View, and returns it so you can set further properties.
 Set the cardinality with the [`JoinCardinality`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.JoinCardinality) enum.
 
-```csharp
+```csharp {run id=addjoin setup=mv-sample after=none output=false}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 var view = SemanticBridge.MetricView.Model;
@@ -79,7 +79,7 @@ which models a snowflake dimension.
 Some properties, such as a field or measure `Format`, have their own types you need to construct to set the property.
 Create the [`Format`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView.Format) variant you want, such as `Format.Currency` or `Format.Percentage`, and assign it.
 
-```csharp
+```csharp {run id=addmeasure setup=mv-sample after=none output=true}
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
 
 var sb = new System.Text.StringBuilder();
@@ -97,7 +97,7 @@ Output(sb.ToString());
 **Output**
 
 ```
-total_cost format: <!-- TODO: capture record ToString() from a run -->
+total_cost format: Currency { Type = Currency, DecimalPlaces = , HideGroupSeparator = , Abbreviation = , CurrencyCode = USD }
 ```
 
 ## Next steps

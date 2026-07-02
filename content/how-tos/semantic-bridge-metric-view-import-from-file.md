@@ -39,7 +39,7 @@ For this how-to, specifically, you only need to save the file; you do not need t
 Update the placeholder in the script below (`<PLACEHOLDER>`) with the path where you saved the YAML.
 The Databricks hostname and HTTP path are used to build the M partition expressions; for a quick test you can pass placeholder values and fix them before refreshing data.
 
-```csharp
+```csharp {compile}
 var success = SemanticBridge.MetricView.ImportToTabularFromFile(
     "<PLACEHOLDER>",
     Model,

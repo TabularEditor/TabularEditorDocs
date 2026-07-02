@@ -73,7 +73,7 @@ Rules with `minVersion` set are only evaluated for Metric Views at or above that
 
 This is easier to understand with an example:
 
-```csharp
+```csharp {compile}
 // create a rule to check for underscores in field names
 var myRule = SemanticBridge.MetricView.MakeValidationRuleForField(
 	"no_underscores",
@@ -91,7 +91,7 @@ The last argument defines a function that will be called for each Metric View fi
 
 Here's a full script that defines a Metric View inline, and then deserializes and validates it, showing how this rule is used.
 
-```csharp
+```csharp {run id=simple setup=none after=none output=true}
 // create a new simple Metric View
 SemanticBridge.MetricView.Deserialize("""
     version: 1.1
@@ -112,14 +112,29 @@ var myRule = SemanticBridge.MetricView.MakeValidationRuleForField(
     );
 
 // run validation with the rule defined above and output the diagnostic messages
-Output(SemanticBridge.MetricView.Validate([myRule]));
+var sb = new System.Text.StringBuilder();
+foreach (var d in SemanticBridge.MetricView.Validate([myRule]))
+{
+    sb.AppendLine($"[{d.Severity}] {d.Code} {d.Path}");
+    sb.AppendLine($"    {d.Context} {d.Message}");
+    sb.AppendLine();
+}
+Output(sb.ToString());
+```
+
+**Output**
+
+```
+[Error] no_underscores Model.Fields["first_field"]
+     Do not include underscores in field names. Use user-friendly names with spaces.
 ```
 
 You can see that one of the Metric View fields has an underscore in its name.
 When you run the script, you can see one diagnostic message after validating with the rule we defined.
 You can see the details that are provided in the diagnostic message:
 
-- Code, Context: not used when you use one of these helper methods to make your rule
+- Code: the name you assign to your rule
+- Context: not set by these helpers
 - Message: the message you defined in the rule
 - Path: a representation of where you find that object in the Metric View
 - Severity: set to Error by default with these helpers
@@ -128,7 +143,7 @@ You can see the details that are provided in the diagnostic message:
 
 If you want more control over the diagnostic message and more flexibility in the function for your validation, you can use `MakeValidationRule` mentioned above to make a contextual validation rule.
 
-```csharp
+```csharp {run id=contextual setup=none after=none output=true}
 // necessary to use the Metric View object model
 // aliasing to avoid conflicts with same-named TOM objects
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -160,7 +175,21 @@ var myRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Field>(
     });
 
 // run validation with the rule defined above and output the diagnostic messages
-Output(SemanticBridge.MetricView.Validate([myRule]));
+var sb = new System.Text.StringBuilder();
+foreach (var d in SemanticBridge.MetricView.Validate([myRule]))
+{
+    sb.AppendLine($"[{d.Severity}] {d.Code} {d.Path}");
+    sb.AppendLine($"    {d.Context} {d.Message}");
+    sb.AppendLine();
+}
+Output(sb.ToString());
+```
+
+**Output**
+
+```
+[Error] field_alias Model.Fields["repeat_customer"]
+     Field 'repeat_customer' reuses source expression 'source.customer_id', already used by field 'customer'.
 ```
 
 This helper method requires you to pass the object type as a type parameter, and the validation function now is a two-parameter function, defined with the signature `(metricViewObject, context)`.
@@ -188,7 +217,7 @@ If you find that the rule is missing some condition you'd like to catch, just ad
 
 You can save many different rules in a C# script for re-use with different Metric Views.
 Because [a loaded Metric View is accessible in multiple scripts](xref:semantic-bridge-metric-view-object-model#loading-and-accessing-the-metric-view) you can save C# scripts that only define rules and then call `SemanticBridge.MetricView.Validate`, and re-use those validation scripts easily.
-See the image below, where the script on the left, "load-mv.csx" has already been run, to load a Metric View to Tabular Editor.
+See the image below, where the script on the left, "deserialize-mv.csx" has already been run, to load a Metric View to Tabular Editor.
 Then, the second script, on the right, "run-rules.csx", is run second to validate.
 This second script could be one that you keep around for all of your Metric Views.
 
@@ -197,9 +226,9 @@ This second script could be one that you keep around for all of your Metric View
 
 The scripts are copied below for convenience, but are just rearrangements of scripts we saw above.
 
-**"load-mv.csx"**
+**"deserialize-mv.csx"**
 
-```csharp
+```csharp {run id=deserialize setup=none after=none output=false}
 // create a new simple Metric View
 SemanticBridge.MetricView.Deserialize("""
     version: 1.1
@@ -214,7 +243,7 @@ SemanticBridge.MetricView.Deserialize("""
 
 **"run-rules.csx"**
 
-```csharp
+```csharp {run id=run-rules setup=none after=deserialize output=true}
 // necessary to use the Metric View object model
 // aliasing to avoid conflicts with same-named TOM objects
 using MetricView = TabularEditor.SemanticBridge.Platforms.Databricks.MetricView;
@@ -243,7 +272,24 @@ var contextualRule = SemanticBridge.MetricView.MakeValidationRule<MetricView.Fie
     });
 
 // run validation with the rules defined above and output the diagnostic messages
-Output(SemanticBridge.MetricView.Validate([simpleRule, contextualRule]));
+var sb = new System.Text.StringBuilder();
+foreach (var d in SemanticBridge.MetricView.Validate([simpleRule, contextualRule]))
+{
+    sb.AppendLine($"[{d.Severity}] {d.Code} {d.Path}");
+    sb.AppendLine($"    {d.Context} {d.Message}");
+    sb.AppendLine();
+}
+Output(sb.ToString());
+```
+
+**Output**
+
+```
+[Error] no_underscores Model.Fields["repeat_customer"]
+     Do not include underscores in field names. Use user-friendly names with spaces.
+
+[Error] field_alias Model.Fields["repeat_customer"]
+     Field 'repeat_customer' reuses source expression 'source.customer_id', already used by field 'customer'.
 ```
 
 ## References
