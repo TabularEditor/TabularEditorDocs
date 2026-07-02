@@ -59,12 +59,15 @@ Consulta @te-cli-commands para ver una referencia completa de los comandos, con 
 | [Configuración](xref:te-cli-commands#configuration)                            | Configuración y licencias                                                                       | [`te config`](xref:te-cli-commands#config-list--paths--init--set)                                                                                                                        |
 | [Shell](xref:te-cli-commands#shell)                                            | Modo interactivo, estado de la sesión, completado automático del shell                          | [`te interactive`](xref:te-cli-commands#interactive), [`te session`](xref:te-cli-commands#session), [`te completion`](xref:te-cli-commands#completion)                                   |
 
+> [!TIP]
+> The docs use canonical long-form verbs (`list`, `remove`, `move`), but the classic short forms still work as aliases (`ls`, `rm`, `mv`, `rename`). This applies to top-level commands and to `remove` / `list` subcommands under groups like `te bpa rules`, `te macro`, `te config`, `te profile`, `te session`, and `te test`. See @te-cli-commands#command-aliases for the full mapping.
+
 ## Primeros pasos
 
 1. **Regístrate o inicia sesión** en [tabulareditor.com](https://tabulareditor.com/download-tabular-editor-cli) con una cuenta de Tabular Editor.
 2. **Descarga e instala**: consulta @te-cli-install para ver las instrucciones para Windows, macOS y Linux.
 3. **Autentícate**: ejecuta `te auth login` para conectarte a Power BI o Fabric. Consulta @te-cli-auth.
-4. **Ejecuta tu primer comando**: `te --help` enumera todos los comandos; `te <command> --help` muestra las opciones detalladas.
+4. **Ejecuta tu primer comando**: `te --help` enumera todos los comandos; `te <command> --help` muestra las opciones detalladas. Tip: running `te` on its own in a terminal drops you into the interactive REPL - a friendly way to explore a model. Consulta @te-cli-interactive.
 
 Para ver por primera vez un modelo en vivo, solo necesitas dos comandos:
 
