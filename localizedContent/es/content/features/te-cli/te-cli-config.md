@@ -19,13 +19,13 @@ applies_to:
 
 La CLI de Tabular Editor lee una configuración opcional desde un archivo JSON. La configuración controla tres cosas:
 
-- **PATH de archivos** — donde la CLI lee las macros, las reglas de BPA y (opcionalmente) el ejecutable de TE3 Desktop, y donde escribe el registro de consultas.
-- **Valores predeterminados de comportamiento** — umbrales de BPA, formato automático y validación.
-- **Perfiles de conexión guardados** — la lista de perfiles con nombre entre los que puedes alternar.
+- **File paths** - where the CLI reads macros, BPA rules, and (optionally) the TE3 Desktop executable, and where to write the query log.
+- **Behavioral defaults** - BPA gates, auto-format, validation.
+- **Saved connection profiles** - the list of named profiles you can switch between.
 
 La CLI es independiente: no lee ni escribe en ningún PATH de instalación de la versión de escritorio de Tabular Editor 3. Los archivos de reglas de BPA y de macros deben definirse explícitamente en esta configuración (o inicializarse cuando haga falta con `te bpa rules init` / `te macro init`).
 
-La mayoría de los usuarios no necesitan editar el archivo de configuración directamente: `te config show`, `te config set <key> <value>` y `te profile set` cubren las operaciones habituales.
+Most users don't need to edit the config file directly - `te config list`, `te config set <key> <value>`, and `te profile set` cover the common operations.
 
 ## Ubicación del archivo de configuración
 
@@ -35,7 +35,7 @@ Se comprueban las siguientes ubicaciones en este orden:
 2. `~/.config/te/config.json` (en Windows, `%USERPROFILE%\.config\te\config.json`).
 3. Si no hay archivo de configuración, la CLI usa los valores predeterminados integrados.
 
-`TE_CONFIG` se tiene en cuenta de forma coherente en todas las operaciones del archivo de configuración: `te config show`, `te config set`, `te config init` y `te config paths` leen y escriben en el PATH resuelto. Está pensado principalmente para pruebas, instalaciones mediante scripts y configuración por entorno.
+`TE_CONFIG` is honored consistently by every config-file operation - `te config list`, `te config set`, `te config init`, and `te config paths` all read and write at the resolved path. Está pensado principalmente para pruebas, instalaciones mediante scripts y configuración por entorno.
 
 Para crear una configuración predeterminada:
 
@@ -47,15 +47,15 @@ te config init --force     # Overwrite existing config
 ## Ver la configuración
 
 ```bash
-te config show                         # Display all settings
-te config show --output-format json    # Machine-readable
+te config list                         # Display all settings
+te config list --output-format json    # Machine-readable
 te config paths                        # Show resolved macros and BPA rule paths
 ```
 
 Usa `te config paths` para ver qué archivos usará realmente la CLI para las macros y las reglas de BPA. Es útil para depurar por qué faltan archivos de datos. La salida muestra dos filas: `macros` (la ruta del archivo de macros resuelta o `[not set]`) y `bpa.rules` (el primer archivo de reglas de BPA existente resuelto por el resolvedor de rutas, o `[not set]`).
 
 > [!NOTE]
-> `te config paths` emite campos `null` explícitamente en el modo `--output-format json` (por ejemplo, `{"macros": null, "bpa": {"rules": null}}`). Informar de los resultados de la resolución es precisamente el propósito del comando, así que `null` es una respuesta significativa: «se intentó, pero no se resolvió nada». `te config show --output-format json` elimina los campos `null` de forma predeterminada, así que quienes lo consuman deberían parsearlo de forma tolerante.
+> `te config paths` emite campos `null` explícitamente en el modo `--output-format json` (por ejemplo, `{"macros": null, "bpa": {"rules": null}}`). Informar de los resultados de la resolución es precisamente el propósito del comando, así que `null` es una respuesta significativa: «se intentó, pero no se resolvió nada». `te config list --output-format json` strips null fields by default, so consumers should parse it tolerantly.
 
 ## Configurar valores
 
@@ -79,7 +79,7 @@ El esquema completo de configuración JSON con todas las claves en sus valores p
 
 ```json
 {
-  "formatVersion": 1,
+  "formatVersion": 2,
   "macros": null,
   "autoFormat": false,
   "validateOnMutation": true,
@@ -144,10 +144,10 @@ Toda la configuración relacionada con BPA está en el objeto `bpa` y se referen
 
 | Clave                        | Predeterminado | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ---------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `autoFormat`                 | `false`        | Ejecuta DAX Formatter sobre las expresiones modificadas después de `te add` / `te set` / `te mv` / `te macro run`. Usa el formateador interno de forma predeterminada; puedes optar por el servicio web de SQL BI mediante `formatOptions.useSqlBiDaxFormatter`.                                                                                                                                                                                                                                                                                                                                                    |
+| `autoFormat`                 | `false`        | Run the DAX Formatter on modified expressions after `te add` / `te set` / `te move` / `te macro run`. Usa el formateador interno de forma predeterminada; puedes optar por el servicio web de SQL BI mediante `formatOptions.useSqlBiDaxFormatter`.                                                                                                                                                                                                                                                                                                                                                                 |
 | `validateOnMutation`         | `true`         | Después de un comando de modificación (`add`, `set`, `mv`, `replace --save`, `macro run`), comprueba que todas las referencias `Table[Column]` del modelo se sigan resolviendo. Detecta referencias huérfanas introducidas por cambios de nombre o eliminaciones antes de llegar al despliegue.                                                                                                                                                                                                                                                                                                  |
 | `bpa.onMutation`             | `false`        | Ejecuta un análisis de BPA acotado después de cada comando de modificación (`set`, `add`, `mv`, `rm`, `macro run`). Solo se comprueban los objetos de la tabla afectada, no los de todo el modelo; útil para obtener retroalimentación rápida durante ediciones iterativas.                                                                                                                                                                                                                                                                                                                      |
-| `bpa.onDeploy`               | `true`         | Ejecuta el control de BPA antes de que se ejecute `te deploy`. El despliegue se cancela si alguna regla se activa con una severidad ≥ error. Omítelo en una invocación concreta con `--skip-bpa`, o corrígelo automáticamente con `--fix-bpa`.                                                                                                                                                                                                                                                                                                                                                      |
+| `bpa.onDeploy`               | `true`         | Ejecuta el control de BPA antes de que se ejecute `te deploy`. The deploy is aborted if any rule fires at severity >= error. Omítelo en una invocación concreta con `--skip-bpa`, o corrígelo automáticamente con `--fix-bpa`.                                                                                                                                                                                                                                                                                                                                                                      |
 | `bpa.onSave`                 | `true`         | Ejecuta el control de BPA antes de que `te save -o` escriba en disco. Omítelo en una invocación concreta con `--skip-bpa` o `--force`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | `bpa.builtInRules`           | `true`         | Incluye el conjunto depurado de reglas integradas de BPA cada vez que se ejecute el control. Configúralo en `false` para ignorar por completo las reglas integradas; entonces el control ejecutará solo las reglas configuradas mediante `bpa.rules` y cualquier regla incrustada en el modelo.                                                                                                                                                                                                                                                                                                                     |
 | `bpa.disabledBuiltInRuleIds` | `null`         | ID de reglas integradas individuales que se excluirán de la puerta de calidad. Este valor se modifica mediante `te bpa rules disable <id>` / `te bpa rules enable <id>`; es preferible usar esos comandos en lugar de editar el arreglo directamente.                                                                                                                                                                                                                                                                                                                                                               |
@@ -200,11 +200,11 @@ El control BPA es la red de seguridad que impide que se guarde o se despliegue u
 
 - `te deploy` ejecuta el control, a menos que se pase `--skip-bpa` o que `bpa.onDeploy` sea `false`.
 - `te save` ejecuta el control, a menos que se pase `--skip-bpa` (o `--force`) o que `bpa.onSave` sea `false`.
-- `te add`, `te set`, `te mv`, `te macro run` ejecutan el control solo cuando `bpa.onMutation` es `true`.
+- `te add`, `te set`, `te move`, `te macro run` run the gate only when `bpa.onMutation` is `true`.
 
 El control carga las reglas de BPA desde `bpa.rules` y, de forma predeterminada, el conjunto de reglas integrado (controlado por `bpa.builtInRules`). Las reglas integradas pueden excluirse individualmente mediante `bpa.disabledBuiltInRuleIds`; se administran con `te bpa rules disable <id>` / `te bpa rules enable <id>`.
 
-Cuando el control se activa y encuentra infracciones con gravedad ≥ `error`, el comando falla con el código de salida `1` y un resumen de las infracciones. Opciones para resolverlo:
+When the gate fires and finds violations at severity >= `error`, the command fails with exit code `1` and a summary of the violations. Opciones para resolverlo:
 
 - `--fix-bpa` - aplica en memoria la `fixExpression` de la regla al artefacto que se va a desplegar o guardar; los archivos fuente no se modifican.
 - `--skip-bpa` - desactiva el control solo para este comando.
@@ -219,13 +219,13 @@ te bpa run ./model --fix --save     # Apply fixes to the source
 
 ### Reglas de BPA integradas
 
-La CLI incluye un único conjunto canónico de reglas de BPA integradas, incrustado como recurso JSON. Las reglas integradas son de solo lectura: `te bpa rules set` y `te bpa rules rm` se niegan a modificar los ID integrados y remiten a los usuarios a `te bpa rules disable` en su lugar. Para personalizar el comportamiento de una regla integrada, cópiala en tu archivo local de reglas como una regla nueva con un ID distinto y deshabilita la regla integrada.
+La CLI incluye un único conjunto canónico de reglas de BPA integradas, incrustado como recurso JSON. Built-in rules are read-only - `te bpa rules set` and `te bpa rules remove` refuse to mutate built-in IDs and point users at `te bpa rules disable` instead. Para personalizar el comportamiento de una regla integrada, cópiala en tu archivo local de reglas como una regla nueva con un ID distinto y deshabilita la regla integrada.
 
 Tanto `bpa.builtInRules` como `bpa.disabledBuiltInRuleIds` se aplican de forma coherente a la validación de implementación/guardado/mutación **y** al comando manual `te bpa run`: si deshabilitas una regla una vez con `te bpa rules disable`, queda excluida en todas partes.
 
 ## Comportamiento tras la mutación
 
-Cuando ejecutas un comando que modifica (`te add`, `te set`, `te mv`, `te replace --save`, `te macro run`), la CLI realiza estas comprobaciones automáticamente:
+When you run a mutating command (`te add`, `te set`, `te move`, `te replace --save`, `te macro run`), the CLI performs these checks automatically:
 
 1. **Los errores de TOM** siempre se muestran. Un DAX o M no válidos en medidas, columnas, particiones o elementos de cálculo siempre hacen que el comando falle.
 2. **La validación del esquema** (`validateOnMutation`, valor predeterminado `true`) comprueba que las referencias `Table[Column]` en DAX sigan resolviéndose y verifica la consistencia de los metadatos.

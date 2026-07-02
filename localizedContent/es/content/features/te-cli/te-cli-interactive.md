@@ -2,7 +2,7 @@
 uid: te-cli-interactive
 title: Modo interactivo
 author: Peer Grønnerup
-updated: 2026-05-12
+updated: 2026-06-26
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -28,6 +28,13 @@ te interactive                              # Start and connect to a model later
 te interactive ./model                      # Start with a local model
 te interactive -s MyWorkspace -d MyModel    # Start with a remote model
 ```
+
+`te interactive` accepts a few flags for tuning the session:
+
+- `--no-banner` - skip the welcome banner on startup.
+- `--echo` - echo each executed command to stdout before its output. Useful for logging when driving the REPL from a script.
+- `--batch` - non-interactive batch mode: read commands from stdin line by line, execute each, and exit on EOF. Automatically enabled when stdin is redirected.
+- `--no-batch` - force interactive TTY mode even when stdin is redirected (mutually exclusive with `--batch`).
 
 La sesión imprime un banner de bienvenida, muestra el modelo activo y te sitúa en un prompt con contexto del modelo:
 
@@ -83,6 +90,64 @@ Estos comandos los gestiona el propio REPL, no el árbol de comandos habitual:
 Cuando el modo interactivo está activo, los comandos que necesitan información faltante la solicitan en lugar de fallar. Ejecutar `auth` sin un subcomando abre un menú para Iniciar sesión / Estado / Cerrar sesión; ejecutar `deploy` sin `--force` muestra un resumen y pide confirmación (`n` es la opción predeterminada más segura).
 
 Para desactivar las indicaciones en un único comando dentro de la sesión, pasa `--non-interactive`.
+
+## Piped and redirected input
+
+Interactive mode also accepts piped or redirected stdin, so the same REPL can be driven from a script instead of typed by hand. Each line of input is run as a command, exactly as if you had entered it at the prompt, and the session exits when input is exhausted (or when it reaches an `exit` line).
+
+```bash
+printf "ls\nexit\n" | te interactive ./model        # bash / git-bash
+te interactive ./model < script.te                  # redirected file
+```
+
+```bat
+(echo ls & echo exit) | te interactive .\model      :: Windows cmd.exe
+```
+
+Lines that start with `#` are treated as comments and skipped, so you can annotate a script file:
+
+```
+# script.te - inspect the model, then exit
+ls tables
+ls measures
+exit
+```
+
+### Batch mode and exit codes
+
+When stdin is piped, `--batch` is the **default**: the session stops at the first command that fails and exits with a non-zero code, which makes a piped run safe to use as a build or CI step. Pass `--no-batch` to keep running the remaining lines even after a command fails. The process exit code is `0` for a clean run and non-zero when a command fails under batch mode.
+
+```bash
+# Default when piped: stop at the first failing command, exit non-zero
+printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./model
+
+# Run every line regardless of failures
+printf "bpa run --fail-on error\ndeploy --force\nexit\n" | te interactive ./model --no-batch
+```
+
+### Readable transcripts
+
+`--echo` writes each input line to stdout ahead of its output, which is handy when capturing a transcript of a piped run. Comment lines are not echoed.
+
+```bash
+printf "ls tables\nexit\n" | te interactive ./model --echo
+```
+
+### Opciones
+
+| Opción        | Descripción                                                                                                  |
+| ------------- | ------------------------------------------------------------------------------------------------------------ |
+| `--no-banner` | Suppress the welcome banner.                                                                 |
+| `--echo`      | Echo each input line to stdout (useful for piped transcripts).            |
+| `--batch`     | Exit non-zero on the first failing command (default when stdin is piped). |
+| `--no-batch`  | Continue after errors even when stdin is piped.                                              |
+
+### Welcome banner vs. preview notice
+
+Two separate messages can appear at the start of a session - don't conflate them:
+
+- The **welcome banner** is the interactive splash described under [Starting a session](#starting-a-session). It is suppressed with `--no-banner`. When stdin is piped, no welcome banner is emitted in the first place, so `--no-banner` has a visible effect only in a true interactive (TTY) session.
+- The **preview-expiry notice** (`This is an early preview release ...`) is a different message. It is always written to **stderr** and is **not** affected by `--no-banner`. Suppress it with `te config set hidePreviewNotice true`.
 
 ## Cuándo usar el modo interactivo frente al no interactivo
 
