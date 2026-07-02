@@ -502,7 +502,7 @@ def main(argv: list[str]) -> int:
         return 2
     try:
         return COMMANDS[argv[0]](argv[1:])
-    except (OSError, ValueError) as exc:
+    except (OSError, ValueError, RuntimeError) as exc:
         print(f"csharp_doctest: {exc}", file=sys.stderr)
         return 1
 
