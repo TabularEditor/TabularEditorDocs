@@ -998,6 +998,9 @@ te migrate --output-format json     # Machine-readable mapping
 
 Start a guided REPL session with a model-aware prompt. See @te-cli-interactive.
 
+> [!TIP]
+> Running `te` in a terminal with no arguments also drops you into the REPL by default (as if you ran `te interactive`). Controlled by the `launchInteractiveMode` config key - see @te-cli-interactive#auto-launch-on-empty-invocation.
+
 `te interactive` accepts:
 
 - `<model>` - optional positional argument: start the session with a local model, `.bim` file, or `.SemanticModel` folder loaded.

@@ -149,6 +149,27 @@ Two separate messages can appear at the start of a session - don't conflate them
 - The **welcome banner** is the interactive splash described under [Starting a session](#starting-a-session). It is suppressed with `--no-banner`. When stdin is piped, no welcome banner is emitted in the first place, so `--no-banner` has a visible effect only in a true interactive (TTY) session.
 - The **preview-expiry notice** (`This is an early preview release ...`) is a different message. It is always written to **stderr** and is **not** affected by `--no-banner`. Suppress it with `te config set hidePreviewNotice true`.
 
+## Auto-launch on empty invocation
+
+Running `te` in a terminal with no arguments drops you straight into the interactive REPL, so exploring a model is as fast as opening a shell and typing `te`. When stdin, stdout, or stderr is redirected (piped output, CI pipelines, scripts), the CLI falls through to its normal parse and prints help instead - so shell scripts that invoke `te` without a subcommand keep behaving the same way.
+
+The behavior is controlled by the `launchInteractiveMode` config key with three values:
+
+| Value | Effect |
+| -- | -- |
+| `auto` (default) | Launch the REPL only when all three streams are attached to a TTY. Otherwise fall through to normal parse. |
+| `always` | Launch the REPL regardless of stream redirection. Useful when you always want an interactive session. |
+| `never` | Never auto-launch the REPL. `te` on its own prints help, matching the pre-0.6.0 behavior. |
+
+Change it globally with:
+
+```bash
+te config set launchInteractiveMode never    # keep the classic help-on-empty behavior
+te config set launchInteractiveMode auto     # restore the default
+```
+
+Override for a single invocation via the `TE_INTERACTIVE` environment variable (same values), or pass `--non-interactive` on the command line - both force `never` for that call, so `te --non-interactive` prints help instead of launching the REPL.
+
 ## When to use interactive vs. non-interactive
 
 - **Interactive mode** is best for exploration, learning the CLI, one-off bulk edits against a single model, and demos.

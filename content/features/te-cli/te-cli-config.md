@@ -94,6 +94,7 @@ The complete JSON config schema with all keys at their default values. Use this 
   },
 
   "interactiveEditMode": "stage",
+  "launchInteractiveMode": "auto",
 
   "formatOptions": {
     "useSemicolons": false,
@@ -152,6 +153,7 @@ All BPA-related settings live under the `bpa` object and are addressed via dotte
 | `bpa.disabledBuiltInRuleIds` | `null` | IDs of individual built-in rules to exclude from the gate. Mutated by `te bpa rules disable <id>` / `te bpa rules enable <id>` - prefer those over editing the array directly. |
 | `vertipaqOnRefresh` | `false` | After a successful refresh (`full`, `dataonly`, `automatic`, or `add`), automatically run VertiPaq analysis to show storage stats for the refreshed tables. Useful for catching unexpected cardinality or memory regressions immediately. |
 | `interactiveEditMode` | `stage` | Default behavior for in-memory mutations inside `te interactive`. `stage` keeps mutations in memory until `save` is invoked (safest); `save` writes to source after every mutating command (use with care on remote sources - every `set` triggers an XMLA write); `revert` discards mutations after each command unless `--save` or `--stage` was passed. Per-command `--save` / `--revert` / `--stage` flags always override. |
+| `launchInteractiveMode` | `auto` | Whether running `te` in a terminal with no arguments launches the interactive REPL. `auto` (default) launches the REPL only when all three streams (stdin, stdout, stderr) are attached to a TTY, so scripts and CI pipelines fall through to normal parse. `always` launches the REPL regardless of redirection. `never` disables the auto-launch entirely, restoring the traditional help-on-empty behavior. The global `--non-interactive` flag forces `never` for a single invocation. Can also be set for one invocation via the `TE_INTERACTIVE` environment variable. |
 | `disableTelemetry` | `false` | Opt out of anonymous usage telemetry. The CLI collects coarse-grained command usage data (command name, exit code, duration) to inform feature priority. The CLI never collects model content, paths, or query text. |
 
 ```bash
@@ -248,6 +250,7 @@ Use the following CLI-specific environment variables for paths, behavior, and di
 | `NO_SPINNER` | Set to `1` or `true` to disable animated progress indicators (alternative to `spinner: false` in config). |
 | `CI` | Auto-detected. When `1` or `true`, the CLI disables the spinner and switches to plain output. Most CI runners set this automatically. |
 | `TE_SESSION` | Override the per-terminal session ID used for active-connection state. Useful for running multiple isolated CLI sessions inside the same shell, e.g. in parallel CI matrix jobs. Inspect and manage sessions with [`te session`](xref:te-cli-commands#session). |
+| `TE_INTERACTIVE` | Override `launchInteractiveMode` for a single invocation. Accepts `auto`, `always`, or `never`. Handy for one-off scripts that want the interactive REPL (`TE_INTERACTIVE=always`) or want to force the classic help-on-empty behavior (`TE_INTERACTIVE=never`) without touching the config file. |
 | `TE_COMPAT` | Set to `te2` to force TE2-compatibility mode - see @te-cli-migrate. |
 
 ## Related pages
