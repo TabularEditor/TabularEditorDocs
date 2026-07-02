@@ -34,6 +34,7 @@ import difflib
 import re
 import sys
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 from typing import ClassVar, NamedTuple
@@ -422,12 +423,17 @@ def _report(outcomes: list[Outcome]) -> int:
 def _process(path: str, mode: str) -> int:
     """Run one subcommand mode over every block in a doc via block.check(). Imperative shell.
 
-    Any fence edits the blocks return (update mode) are applied to the file in place.
+    Each block shells out to te against its own isolated model, so blocks are checked
+    concurrently (one thread per block -- a doc has few). Results are gathered in
+    document order; any fence edits (update mode) are then applied to the file in place,
+    single-threaded.
     """
     text = Path(path).read_text(encoding="utf-8")
     blocks = build_blocks(parse_fences(text))
     runs = index_runs(blocks)
-    outcomes = [outcome for block in blocks if (outcome := block.check(mode, runs)) is not None]
+    with ThreadPoolExecutor(max_workers=max(1, len(blocks))) as pool:
+        results = list(pool.map(lambda block: block.check(mode, runs), blocks))
+    outcomes = [outcome for outcome in results if outcome is not None]
     edits = [outcome.edit for outcome in outcomes if outcome.edit is not None]
     if edits:
         _write_with_edits(path, text, edits)
@@ -448,8 +454,8 @@ def cmd_validate(args: list[str]) -> int:
     build_blocks is the validation pass; it raises on any malformed block, so the
     report is printed only when every {compile}/{run} block is valid.
     """
-    if not args:
-        raise ValueError("validate requires a markdown file path")
+    if len(args) != 1:
+        raise ValueError("validate requires exactly one markdown file path")
     fences = parse_fences(Path(args[0]).read_text(encoding="utf-8"))
     blocks = build_blocks(fences)
     for block in blocks:
@@ -463,22 +469,22 @@ def cmd_validate(args: list[str]) -> int:
 
 def cmd_compile(args: list[str]) -> int:
     """Compile-check every {compile} and {run} block in <file> against the live TE CLI (no execution)."""
-    if not args:
-        raise ValueError("compile requires a markdown file path")
+    if len(args) != 1:
+        raise ValueError("compile requires exactly one markdown file path")
     return _process(args[0], "compile")
 
 
 def cmd_compare(args: list[str]) -> int:
     """Execute every {run} block in <file> and diff Output() vs the documented fence; also compile {compile} blocks."""
-    if not args:
-        raise ValueError("compare requires a markdown file path")
+    if len(args) != 1:
+        raise ValueError("compare requires exactly one markdown file path")
     return _process(args[0], "compare")
 
 
 def cmd_update(args: list[str]) -> int:
     """Execute every {run} block in <file> and rewrite each documented fence in place with produced Output(); also compile {compile} blocks."""
-    if not args:
-        raise ValueError("update requires a markdown file path")
+    if len(args) != 1:
+        raise ValueError("update requires exactly one markdown file path")
     return _process(args[0], "update")
 
 
