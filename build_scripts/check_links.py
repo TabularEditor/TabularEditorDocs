@@ -18,7 +18,7 @@ import signal
 import sys
 import urllib.error
 import urllib.request
-from collections import defaultdict, deque
+from collections import Counter, defaultdict, deque
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from html.parser import HTMLParser
@@ -701,8 +701,8 @@ def report(failures: list[Failure], root: Path, content_only: bool = True) -> in
 
         WARNINGS -- 1 broken external reference(s) across 1 file(s)
         ...
-        External URLs to verify:
-          https://example.com/gone
+        External URLs to verify (url, docs, instances):
+          https://example.com/gone  3  5
     """
     errors: dict[str, list[tuple[Failure, list[int]]]] = {}
     warnings: dict[str, list[tuple[Failure, list[int]]]] = {}
@@ -741,26 +741,101 @@ def report(failures: list[Failure], root: Path, content_only: bool = True) -> in
         print()
 
     if warnings:
-        urls = {_display_url(failure.target) for breaks in warnings.values() for failure, _ in breaks}
-        print("External URLs to verify:")
-        for url in sorted(urls):
-            print(url)
+        files: dict[str, set[str]] = defaultdict(set)
+        instances: dict[str, int] = defaultdict(int)
+        for source, breaks in warnings.items():
+            for failure, lines in breaks:
+                # For a reachable-but-fragment/text failure the bare URL works, so keep the fragment that broke;
+                # for an unreachable URL the fragment is moot, so show it bare.
+                shown = _display_url(failure.target)
+                if failure.reason in ("missing anchor", "missing text"):
+                    shown += _fragment_suffix(failure.target)
+                files[shown].add(source)
+                instances[shown] += len(lines)
+        print("External URLs to verify (url, docs, instances):")
+        for url in sorted(files):
+            print(f"{url}  {len(files[url])}  {instances[url]}")
 
     return 1 if errors else 0
 
 
-def print_diagnostics(stats: dict[str, HostStats], elapsed: float) -> None:
-    """Print per-host fetch diagnostics: requests, 429s, cooldown time, HEAD fallbacks, final cap, Retry-After set."""
+_FEATURED_STATUS = (401, 403, 404)  # broken out as their own per-host columns; the rest fold into "5xx/other"
+
+
+class Outcome(NamedTuple):
+    """Per-host validation outcomes for external URLs."""
+
+    ok: int  # reachable, and any fragment/text check passed
+    partial: int  # reachable (url+path), but a fragment or text check on it failed
+    status: Counter[int]  # failing HTTP status code -> count (e.g. 404 -> 3)
+    transport: int  # non-HTTP failures: DNS, TLS, timeout, connection reset (no HTTP status)
+
+    @property
+    def total(self) -> int:
+        """Every external URL seen for this host: successes, fragment/text issues, and unreachable."""
+        return self.ok + self.partial + self.broken
+
+    @property
+    def broken(self) -> int:
+        """Total unreachable: every failing HTTP status plus the transport failures."""
+        return sum(self.status.values()) + self.transport
+
+    @property
+    def other_http(self) -> int:
+        """Failing HTTP statuses beyond the featured columns (5xx, and any 4xx that is not 401/403/404)."""
+        return sum(count for code, count in self.status.items() if code not in _FEATURED_STATUS)
+
+
+def summarize_outcomes(external_results: dict[str, FetchResult], failures: list[Failure]) -> dict[str, Outcome]:
+    """Reduce fetch results and validation failures to a per-host Outcome. Partial hangs off `failures` because a
+    missing fragment/text is only knowable after validation, not from the fetch alone."""
+    frag_urls = {
+        f.target.resource
+        for f in failures
+        if f.target.kind == "external" and f.reason in ("missing anchor", "missing text")
+    }
+    ok: Counter[str] = Counter()
+    partial: Counter[str] = Counter()
+    transport: Counter[str] = Counter()
+    status: defaultdict[str, Counter[int]] = defaultdict(Counter)
+    for url, result in external_results.items():
+        host = _host_of(url)
+        if not result.ok:
+            if result.status == 0:
+                transport[host] += 1  # DNS, TLS, timeout, connection reset -- no HTTP status to bucket
+            else:
+                status[host][result.status] += 1
+        elif url in frag_urls:
+            partial[host] += 1
+        else:
+            ok[host] += 1
+    hosts = set(ok) | set(partial) | set(transport) | set(status)
+    return {h: Outcome(ok[h], partial[h], status.get(h, Counter()), transport[h]) for h in hosts}
+
+
+def print_diagnostics(stats: dict[str, HostStats], outcomes: dict[str, Outcome], elapsed: float) -> None:
+    """Print the combined per-host stats table: validation outcomes (ok/frag/bad, per-status failures, non-HTTP
+    failures) alongside fetch mechanics (reqs/429s/cooldown/HEAD fallbacks/cap). Hosts sort worst-first."""
     active = {host: stat for host, stat in stats.items() if stat.requests}
     if not active:  # interrupted before any fetch happened; a header with no rows is just noise
         return
-    print(f"\n--- fetch diagnostics ({elapsed:.1f}s, {len(active)} hosts) ---")
-    print(f"{'reqs':>5} {'429s':>5} {'wait(s)':>8} {'fb':>4} {'cap':>4}  host  [retry-after seen]")
-    ranked = sorted(active.items(), key=lambda kv: (kv[1].rate_limited, kv[1].wait_seconds), reverse=True)
-    for host, stat in ranked:
+    empty = Outcome(0, 0, Counter(), 0)
+
+    def rank(item: tuple[str, HostStats]) -> tuple[int, int, int, float]:
+        host, stat = item
+        outcome = outcomes.get(host, empty)
+        return outcome.broken, outcome.partial, stat.rate_limited, stat.wait_seconds
+
+    print(f"\n--- stats ({elapsed:.1f}s, {len(active)} hosts) ---")
+    print(f"{'total':>5} {'ok':>5} {'frag':>5} {'bad':>5} {'reqs':>5} {'429':>4} {'401':>4} {'403':>4} {'404':>4} "
+          f"{'oth':>4} {'net':>4} {'wait(s)':>8} {'fb':>4} {'cap':>4}  host  [retry-after seen]")
+    for host, stat in sorted(active.items(), key=rank, reverse=True):
+        oc = outcomes.get(host, empty)
         seen = sorted(stat.retry_after_seen)
         tail = f"  {seen}" if stat.rate_limited else ""
-        print(f"{stat.requests:>5} {stat.rate_limited:>5} {stat.wait_seconds:>8.1f} "
+        print(f"{oc.total:>5} {oc.ok:>5} {oc.partial:>5} {oc.broken:>5} {stat.requests:>5} {stat.rate_limited:>4} "
+              f"{oc.status.get(401, 0):>4} {oc.status.get(403, 0):>4} {oc.status.get(404, 0):>4} "
+              f"{oc.other_http:>4} {oc.transport:>4} {stat.wait_seconds:>8.1f} "
               f"{stat.head_fallbacks:>4} {stat.final_cap:>4}  {host}{tail}")
 
 
@@ -803,9 +878,10 @@ def cmd_validate(args: list[str], progress: _Progress) -> int:
         refs = {t: s for t, s in refs.items() if t.kind != "external" or t.resource in external}
 
     progress.phase = "validating"
-    exit_code = report(validate(refs, anchors_by_file, existing, external), root, content_only="all" not in flags)
+    failures = validate(refs, anchors_by_file, existing, external)
+    exit_code = report(failures, root, content_only="all" not in flags)
     if "stats" in flags:
-        print_diagnostics(stats, elapsed)
+        print_diagnostics(stats, summarize_outcomes(external, failures), elapsed)
     return exit_code
 
 
