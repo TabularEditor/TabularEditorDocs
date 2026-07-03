@@ -47,8 +47,8 @@ The code block annotations can be used in any doc.
 
 Runs (or compile-checks) C# snippets against a throwaway, empty `.bim` model.
 Output:
-- stdout: the snippets' `Output()`, including C# script exceptions and runtime errors
-- stderr: te's own stderr stream, and error from the script runner itself
+- stdout: the snippets' `Output()` only (te messages at level `output`), newline-joined
+- stderr: te's own stderr stream (always passed through), plus the runner's diagnostics parsed from te's JSON -- `[compile-error]`, `[runtime-error]`, and `[<level>]` for other non-output messages
 
 ```shell
 $ python3 build_scripts/te_script_runner.py run   -e '<expr>'    # execute (also -f <file>, or stdin)
@@ -109,9 +109,9 @@ Exit codes:
 - `1`: a block failed (output mismatch, compile error, runtime error)
 - `2`: malformed doc or bad usage (validate bails before any CLI calls).
 
-Output:
-- stdout: the report (verdicts + diffs);
-- stderr: te's stderr and harness/operational errors.
+Output (note: the opposite split from `te_script_runner.py` -- here the whole report, errors included, is on stdout):
+- stdout: the full report -- per-block verdicts, diffs, and compile/runtime error detail
+- stderr: te's own stderr (passed through) and harness/operational errors (bad usage, unreadable file)
 
 Sweep all docs with annotated code blocks for valid annotations, bailing on first error:
 

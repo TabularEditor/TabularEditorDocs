@@ -94,7 +94,7 @@ class Outcome(NamedTuple):
     block: "Block"
     action: str  # verb shown in the report: "compile" | "compare" | "update"
     passed: bool
-    detail: list[str]  # lines emitted to stderr when it fails
+    detail: list[str]  # failure detail (diffs, compile/runtime errors) printed under the report line on stdout
     note: str = ""  # short status shown inline on the report line (e.g. "updated")
     edit: "Edit | None" = None  # a fence rewrite, applied in update mode
 
