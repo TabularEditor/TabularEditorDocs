@@ -12,18 +12,90 @@ The functional core (extract, resolve, validate) is pure; the imperative shell
 does filesystem, HTTP, and reporting.
 """
 
+import http.client
 import os
+import signal
 import sys
 import urllib.error
 import urllib.request
 from collections import defaultdict, deque
+from collections.abc import Callable
+from dataclasses import dataclass, field
 from html.parser import HTMLParser
 from pathlib import Path
 from queue import Empty, Queue
-from threading import Thread
+from threading import Event, Thread
 from time import monotonic
-from typing import NamedTuple
+from types import FrameType
+from typing import Any, NamedTuple
 from urllib.parse import unquote, urldefrag, urlsplit
+
+# Interactive control: a shared progress view that `main` reads for a Ctrl-T status line, and a stop flag it sets on
+# Ctrl-C so the running command can wind down and still emit a partial report. Commands populate the view as they go.
+
+_STOP_POLL = 1.0  # max seconds the fetch scheduler blocks between stop-flag checks, so Ctrl-C stays responsive
+
+# Terminal keys that print a status line, by platform: Ctrl-T (BSD/macOS), Ctrl-\ (POSIX; overrides the quit/core
+# dump), Ctrl-Break (Windows). We bind whichever the platform defines, so a status key exists everywhere.
+_STATUS_SIGNALS = ("SIGINFO", "SIGQUIT", "SIGBREAK")
+
+_SignalHandler = Callable[[int, FrameType | None], None]
+
+
+@dataclass
+class _Progress:
+    """Live counters for the running command. `main` reads them for the status signal and sets `stop` on Ctrl-C;
+    commands advance the phase, bump the counters, and check `stop` to bail out early for a partial report."""
+
+    phase: str = "starting"
+    pages: int = 0  # built HTML pages scanned (enumerate phase)
+    links: int = 0  # link references seen while scanning
+    targets: int = 0  # unique targets discovered to check
+    urls_total: int = 0  # external URLs queued to fetch
+    urls_done: int = 0  # external URLs fetched so far
+    dispatched: int = 0  # URLs handed to the queue but not yet resolved (>= the few workers actively fetching)
+    workers: int = 0  # size of the fetch worker pool
+    cooling: dict[str, float] = field(default_factory=dict)  # host -> monotonic deadline it is eligible again
+    started: float = 0.0  # monotonic start time, for elapsed
+    stop: Event = field(default_factory=Event)
+
+
+def _status_line(progress: _Progress, now: float) -> str:
+    """A one-line snapshot of our own work for the Ctrl-T status signal (about the run, not OS resource stats)."""
+    p = progress
+    head = f"[check_links] phase={p.phase} elapsed={now - p.started:.0f}s"
+    if p.phase != "fetching external":
+        return f"{head} pages={p.pages} links={p.links} targets={p.targets}"
+    cooling = sorted(
+        ((host, deadline - now) for host, deadline in p.cooling.items() if deadline > now),
+        key=lambda hw: hw[1],
+        reverse=True,
+    )
+    detail = "".join(f" {host}({wait:.1f}s)" for host, wait in cooling)  # wide when many hosts cool at once; fine
+    return (
+        f"{head} fetched={p.urls_done}/{p.urls_total} dispatched={p.dispatched} "
+        f"workers={p.workers} cooling={len(cooling)}{detail}"
+    )
+
+
+def _install_signal_handlers(on_stop: _SignalHandler, on_status: _SignalHandler) -> dict[int, Any]:
+    """Wire SIGINT (Ctrl-C, clean stop) and every available status signal (see `_STATUS_SIGNALS`), returning the
+    prior handlers for restoration. A no-op off the main thread, where handlers cannot be installed."""
+    previous: dict[int, Any] = {}
+    try:
+        previous[signal.SIGINT] = signal.signal(signal.SIGINT, on_stop)
+        for name in _STATUS_SIGNALS:
+            signum = getattr(signal, name, None)
+            if signum is not None:
+                previous[signum] = signal.signal(signum, on_status)
+    except ValueError:
+        pass  # not the main thread; interactive control is simply unavailable
+    return previous
+
+
+def _restore_signal_handlers(previous: dict[int, Any]) -> None:
+    for signum, handler in previous.items():
+        signal.signal(signum, handler)
 
 
 def _normalize_text(text: str) -> str:
@@ -77,7 +149,7 @@ def extract(html: str) -> tuple[list[tuple[str, int]], set[str]]:
     return parser.links, parser.anchors
 
 
-def cmd_extract(args: list[str]) -> int:
+def cmd_extract(args: list[str], progress: _Progress) -> int:
     """Print the links (with line numbers) and fragment targets extracted from an HTML file."""
     links, anchors = extract(Path(args[0]).read_text(encoding="utf-8"))
     for href, line in links:
@@ -179,7 +251,7 @@ def resolve(href: str, source_page: Path, site_root: Path) -> Target | None:
     return Target("local", os.path.normpath(base), fragment, text_targets)
 
 
-def cmd_resolve(args: list[str]) -> int:
+def cmd_resolve(args: list[str], progress: _Progress) -> int:
     """Print the resolved Target (or 'skip') for a raw href found in a source page."""
     href, source_page = args[0], Path(args[1])
     site_root = Path(args[2]) if len(args) > 2 else Path("_site")
@@ -192,15 +264,20 @@ def cmd_resolve(args: list[str]) -> int:
 
 
 def enumerate_site(
-    root: Path, source_prefix: str | None = None
+    root: Path, source_prefix: str | None = None, progress: _Progress | None = None
 ) -> tuple[dict[Target, dict[str, list[int]]], dict[str, set[str]]]:
     """Walk the built site under `root`: return (target -> {referring page -> line numbers}) and (page -> anchors).
 
     Anchors are indexed for every page so fragment targets anywhere resolve, but links are collected only from pages
-    whose path starts with `source_prefix` (when given) -- a way to check just a subset of the docs."""
+    whose path starts with `source_prefix` (when given) -- a way to check just a subset of the docs. Counts flow into
+    `progress` for the status signal, and a Ctrl-C (its stop flag) ends the walk early for a partial report."""
+    progress = progress or _Progress()
     refs: dict[Target, dict[str, list[int]]] = {}
     anchors_by_file: dict[str, set[str]] = {}
     for page in root.rglob("*.html"):
+        if progress.stop.is_set():
+            break
+        progress.pages += 1
         source = os.path.normpath(page)
         links, anchors = extract(page.read_text(encoding="utf-8"))
         anchors_by_file[source] = anchors
@@ -210,13 +287,15 @@ def enumerate_site(
             target = resolve(href, page, root)
             if target is not None:
                 refs.setdefault(target, {}).setdefault(source, []).append(line)
+        progress.links += len(links)
+        progress.targets = len(refs)
     return refs, anchors_by_file
 
 
-def cmd_enumerate(args: list[str]) -> int:
+def cmd_enumerate(args: list[str], progress: _Progress) -> int:
     """Print summary counts for the site's links and fragment targets."""
     root = Path(args[0]) if args else Path("_site")
-    refs, anchors_by_file = enumerate_site(root)
+    refs, anchors_by_file = enumerate_site(root, progress=progress)
     local = sum(1 for target in refs if target.kind == "local")
     external = sum(1 for target in refs if target.kind == "external")
     site = sum(1 for target in refs if target.kind == "site")
@@ -232,6 +311,10 @@ _USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
+
+# Cap the body we read for anchor/text checks. The 20s socket timeout bounds a stalled read, but not a server that
+# steadily streams an endless (or huge) body; this bounds it. HTML pages we check are far smaller.
+_MAX_BODY_BYTES = 10 * 1024 * 1024
 
 
 class FetchResult(NamedTuple):
@@ -278,7 +361,7 @@ def fetch_external(url: str, need_body: bool) -> FetchResult:
                 if method == "GET" and need_body:
                     charset = response.headers.get_content_charset() or "utf-8"
                     parser = _LinkAnchorParser(collect_text=True)
-                    parser.feed(response.read().decode(charset, "replace"))
+                    parser.feed(response.read(_MAX_BODY_BYTES).decode(charset, "replace"))
                     anchors, text = parser.anchors, _normalize_text(parser.text)
                 return FetchResult(True, response.status, "", anchors, 0, method, text)
         except urllib.error.HTTPError as error:
@@ -286,7 +369,9 @@ def fetch_external(url: str, need_body: bool) -> FetchResult:
                 continue  # HEAD is only a probe; reconfirm the failure with a GET
             retry_after = _parse_retry_after(error.headers.get("Retry-After")) if error.code == 429 else 0
             return FetchResult(False, error.code, f"HTTP {error.code} {error.reason}", set(), retry_after, method, "")
-        except (urllib.error.URLError, TimeoutError, ValueError) as error:
+        except (OSError, http.client.HTTPException, ValueError) as error:
+            # OSError covers URLError/TimeoutError/connection resets; HTTPException covers a peer that closes
+            # mid-response (RemoteDisconnected), which urllib does not wrap when it happens during getresponse().
             if method == "HEAD":
                 continue  # reconfirm transport failures with a GET too
             return FetchResult(False, 0, str(getattr(error, "reason", error)), set(), 0, method, "")
@@ -328,7 +413,10 @@ def _next_cooldown_wait(pending: dict[str, deque[_Task]], cooldown: dict[str, fl
 
 
 def fetch_all_external(
-    refs: dict[Target, dict[str, list[int]]], max_per_host: int = 8, max_workers: int = 16
+    refs: dict[Target, dict[str, list[int]]],
+    max_per_host: int = 8,
+    max_workers: int = 12,
+    progress: _Progress | None = None,
 ) -> tuple[dict[str, FetchResult], dict[str, HostStats]]:
     """Fetch every unique external URL once. `max_workers` threads drain a shared work queue kept as full as
     eligibility allows; admission holds each host to its current cap (starting at `max_per_host`). A 429 cools the
@@ -337,7 +425,9 @@ def fetch_all_external(
 
     All scheduling state is owned by this thread alone (workers only pull tasks and push results), so it needs no
     locks. On a 429 we also reclaim that host's not-yet-claimed tasks from the queue; any a worker already grabbed
-    slip through, which is a bounded, acceptable miss."""
+    slip through, which is a bounded, acceptable miss. Progress counts flow into `progress` for the status signal,
+    and a Ctrl-C (its stop flag) ends the loop early, returning whatever has been fetched for a partial report."""
+    progress = progress or _Progress()
     need_body: dict[str, bool] = {}
     for target in refs:
         if target.kind == "external":
@@ -365,7 +455,11 @@ def fetch_all_external(
 
     def worker() -> None:
         while (task := work_q.get()) is not None:
-            done_q.put((task, fetch_external(task.url, task.need_body)))
+            try:
+                result = fetch_external(task.url, task.need_body)
+            except Exception as error:  # never die with a task in hand: that result would never come and hang us
+                result = FetchResult(False, 0, f"fetch crashed: {error!r}", set(), 0, "", "")
+            done_q.put((task, result))
 
     def admit() -> None:
         now = monotonic()
@@ -390,17 +484,23 @@ def fetch_all_external(
         for task in kept:
             work_q.put(task)
 
-    workers = [Thread(target=worker) for _ in range(max_workers)]
+    # Daemon workers so a second Ctrl-C (which raises in the main thread) can abandon in-flight requests and exit.
+    workers = [Thread(target=worker, daemon=True) for _ in range(max_workers)]
     for thread in workers:
         thread.start()
 
     remaining = len(need_body)
+    progress.urls_total = remaining
+    progress.workers = max_workers
+    progress.cooling = cooldown  # a live reference; the status handler reads it on the same thread, so no lock
     admit()
-    while remaining:
+    while remaining and not progress.stop.is_set():
+        wait = _next_cooldown_wait(pending, cooldown, monotonic())
+        wait = _STOP_POLL if wait is None else min(wait, _STOP_POLL)  # cap the block so the stop flag is seen promptly
         try:
-            task, result = done_q.get(timeout=_next_cooldown_wait(pending, cooldown, monotonic()))
+            task, result = done_q.get(timeout=wait)
         except Empty:
-            admit()  # a cooldown expired; that host is eligible again
+            admit()  # a cooldown expired (or the poll ticked); recheck eligibility
             continue
         outstanding[task.host] -= 1
         requests[task.host] += 1
@@ -420,11 +520,16 @@ def fetch_all_external(
             results[task.url] = result
             remaining -= 1
         admit()
+        progress.urls_done = len(results)
+        progress.dispatched = sum(outstanding.values())
 
-    for _ in workers:
-        work_q.put(None)
-    for thread in workers:
-        thread.join()
+    if not progress.stop.is_set():  # normal completion: retire the workers cleanly
+        for _ in workers:
+            work_q.put(None)
+        for thread in workers:
+            thread.join()
+    # On Ctrl-C we skip the join: a daemon worker may be mid-request, and blocking on a slow socket would stall the
+    # partial report. The workers are abandoned and reaped at interpreter exit; `results` is the partial set.
 
     stats = {
         host: HostStats(
@@ -440,7 +545,7 @@ def fetch_all_external(
     return results, stats
 
 
-def cmd_fetch(args: list[str]) -> int:
+def cmd_fetch(args: list[str], progress: _Progress) -> int:
     """Fetch a single external URL (pass a second arg to force a body-parsing GET) and print the result."""
     url = args[0]
     need_body = len(args) > 1
@@ -647,6 +752,8 @@ def report(failures: list[Failure], root: Path, content_only: bool = True) -> in
 def print_diagnostics(stats: dict[str, HostStats], elapsed: float) -> None:
     """Print per-host fetch diagnostics: requests, 429s, cooldown time, HEAD fallbacks, final cap, Retry-After set."""
     active = {host: stat for host, stat in stats.items() if stat.requests}
+    if not active:  # interrupted before any fetch happened; a header with no rows is just noise
+        return
     print(f"\n--- fetch diagnostics ({elapsed:.1f}s, {len(active)} hosts) ---")
     print(f"{'reqs':>5} {'429s':>5} {'wait(s)':>8} {'fb':>4} {'cap':>4}  host  [retry-after seen]")
     ranked = sorted(active.items(), key=lambda kv: (kv[1].rate_limited, kv[1].wait_seconds), reverse=True)
@@ -657,7 +764,7 @@ def print_diagnostics(stats: dict[str, HostStats], elapsed: float) -> None:
               f"{stat.head_fallbacks:>4} {stat.final_cap:>4}  {host}{tail}")
 
 
-def cmd_validate(args: list[str]) -> int:
+def cmd_validate(args: list[str], progress: _Progress) -> int:
     """Validate a built site and report broken references.
 
     Usage: validate [root] [local] [all] [stats] [under=<subpath>]
@@ -672,8 +779,10 @@ def cmd_validate(args: list[str]) -> int:
     root = Path(positional[0]) if positional else Path("_site")
     source_prefix = os.path.normpath(root / under) if under else None
 
-    refs, anchors_by_file = enumerate_site(root, source_prefix)
+    progress.phase = "enumerating"
+    refs, anchors_by_file = enumerate_site(root, source_prefix, progress)
     existing = _existing_files(root)
+    progress.phase = "resolving"
     refs = resolve_site_targets(refs, existing, root, live="local" not in flags)
     stats: dict[str, HostStats] = {}
     started = monotonic()
@@ -681,16 +790,26 @@ def cmd_validate(args: list[str]) -> int:
         refs = {target: sources for target, sources in refs.items() if target.kind == "local"}
         external: dict[str, FetchResult] = {}
     else:
-        external, stats = fetch_all_external(refs)
+        progress.phase = "fetching external"
+        external, stats = fetch_all_external(refs, progress=progress)
     elapsed = monotonic() - started
 
+    if progress.stop.is_set():  # Ctrl-C: drop the not-yet-fetched externals and flag the report as partial
+        external_urls = {target.resource for target in refs if target.kind == "external"}
+        print(
+            f"\nInterrupted: fetched {len(external)}/{len(external_urls)} external URL(s); report is partial.",
+            file=sys.stderr,
+        )
+        refs = {t: s for t, s in refs.items() if t.kind != "external" or t.resource in external}
+
+    progress.phase = "validating"
     exit_code = report(validate(refs, anchors_by_file, existing, external), root, content_only="all" not in flags)
     if "stats" in flags:
         print_diagnostics(stats, elapsed)
     return exit_code
 
 
-COMMANDS = {
+COMMANDS: dict[str, Callable[[list[str], _Progress], int]] = {
     "extract": cmd_extract,
     "resolve": cmd_resolve,
     "enumerate": cmd_enumerate,
@@ -703,7 +822,24 @@ def main(argv: list[str]) -> int:
     if not argv or argv[0] not in COMMANDS:
         print(f"usage: {Path(sys.argv[0]).name} <{'|'.join(COMMANDS)}> [args]", file=sys.stderr)
         return 2
-    return COMMANDS[argv[0]](argv[1:])
+
+    progress = _Progress(started=monotonic())
+
+    def on_stop(signum: int, frame: FrameType | None) -> None:
+        # Ctrl-C: ask the running command to wind down for a partial report; a second Ctrl-C force-quits.
+        if progress.stop.is_set():
+            os._exit(130)  # 128 + SIGINT: abandon in-flight work and exit now, no traceback
+        progress.stop.set()
+        print("\nstopping (Ctrl-C again to force-quit)...", file=sys.stderr)
+
+    def on_status(signum: int, frame: FrameType | None) -> None:
+        print(_status_line(progress, monotonic()), file=sys.stderr)
+
+    previous_handlers = _install_signal_handlers(on_stop, on_status)
+    try:
+        return COMMANDS[argv[0]](argv[1:], progress)
+    finally:
+        _restore_signal_handlers(previous_handlers)
 
 
 if __name__ == "__main__":
