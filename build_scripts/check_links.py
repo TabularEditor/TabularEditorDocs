@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Standalone dead-link checker for the generated `_site`.
 
