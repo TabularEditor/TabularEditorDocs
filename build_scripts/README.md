@@ -112,14 +112,16 @@ Broken link checks:
 - fragments: ensure the `#anchor` is defined in the body of the target page (local file or fetched external page)
 - text links: ensure the literal `:~:text=` string is in the body of the target page (local file or fetched external page)
 
-Internal failures are errors (nonzero exit) -- own-site links, i.e. local files and root-absolute links (the latter checked over HTTP).
+Internal failures are errors (nonzero exit): own-site links, i.e. local files and root-absolute links (the latter checked over HTTP).
 External failures are warnings (network issues may be transient, or the target blocks bots),
-listed as a set of URLs to verify by hand.
+listed at the end as URLs to verify by hand, each with two counts:
+how many docs reference it and how many total times.
+Fragment/text failures keep their `#anchor` / `:~:text=` in that list (the bare URL works; the fragment is what broke); a wholly unreachable URL is listed bare.
 
 ```shell
 $ check_links.py validate                  # check _site: authored content, on-disk + external
 $ check_links.py validate local            # on-disk checks only, skip external fetching
-$ check_links.py validate all              # also include generated API and localized pages
+$ check_links.py validate all              # also include generated API and localized pages; noisy, likely unnecessary
 $ check_links.py validate stats            # add per-host external-fetch diagnostics
 $ check_links.py validate _site under=en   # only check links from pages under _site/en
 ```
@@ -128,6 +130,13 @@ $ check_links.py validate _site under=en   # only check links from pages under _
 - `all` = include generated API and localized pages (default: authored `content/*.md` only).
 - `stats` = print per-host external-fetch diagnostics.
 - `under=<subpath>` = only check links from pages under `<root>/<subpath>`.
+
+Every built HTML page under `_site` is walked (to index fragment anchors and collect links site-wide).
+But by default only *failures on authored English content* are reported:
+pages under `_site/en/` that map back to `content/*.md`,
+excluding generated API reference (`en/api/`).
+The other-language pages are near-duplicate translations,
+so they and the generated API are hidden unless you pass `all` (which floods the report with those duplicates).
 
 `extract`, `resolve`, `enumerate`, and `fetch` expose the internal stages for testing.
 
@@ -146,4 +155,26 @@ so it never pulls installers or images just to check a link.
 A failed `HEAD` falls back to `GET` (some hosts reject `HEAD`),
 and known HEAD-hostile hosts skip straight to `GET`.
 
-Including `stats` will show per-host statistics: `python3 build_scripts/check_links.py validate stats`.
+#### Reading the `stats` table
+
+`stats` prints one row per host, worst-first. Columns:
+
+- `total`: external URLs seen for the host
+- `ok`: reachable, and any `#anchor` / `:~:text=` check passed; `total == ok` means all links to this domain were good
+- `frag`: reachable (url+path), but a fragment or text check failed
+- `bad`: unreachable, total (`= 401 + 403 + 404 + oth + net`)
+- `reqs`: fetch attempts, including retries; `total == reqs` means everything succeeded on first fetch
+- `429`: rate-limited responses seen
+- `401` / `403` / `404`: per-host counts of those statuses
+- `oth`: other failing HTTP (5xx, and 4xx that is not 401/403/404)
+- `net`: non-HTTP failures (DNS, TLS, timeout, connection reset)
+- `wait(s)`: total cooldown time applied to the host (rate limiting on our side for 429s)
+- `fb`: HEAD requests that fell back to GET (candidates for the GET-only list)
+- `cap`: ending in-flight cap (below the start value means it was throttled down)
+
+#### Interactive control (long runs)
+
+A full external run takes minutes; the terminal can query or stop it:
+
+- Status line (phase, counts, in-flight, cooling hosts) on **Ctrl-T** (macOS/BSD `SIGINFO`), **Ctrl-\\** (`SIGQUIT`, Linux/macOS), or **Ctrl-Break** (Windows `SIGBREAK`).
+- **Ctrl-C** stops cleanly and prints a partial report over what was fetched; a second **Ctrl-C** force-quits.
