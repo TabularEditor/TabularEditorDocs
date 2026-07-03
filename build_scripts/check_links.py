@@ -103,6 +103,10 @@ _SKIP_SCHEMES = ("mailto:", "tel:", "javascript:", "data:")
 # heuristic covers most (api.openai.com, *.api.daxoptimizer.com, ...); add other non-gettable hosts explicitly.
 _UNCHECKED_HOSTS: set[str] = set()
 
+# Any hosts where we observe 429s when we use `stats` get a lower max for
+# in-flight requests. Try to be a good citizen of the web.
+_HOST_MAX_IN_FLIGHT_OVERRIDES = {"github.com": 6}
+
 # Where root-absolute ("site") links resolve on the deployed site. Ones missing from the local build are checked
 # here, because the deployed site's redirects (Azure SWA) make many of them valid even without a matching file.
 _LIVE_SITE_BASE = "https://docs.tabulareditor.com"
@@ -324,7 +328,7 @@ def _next_cooldown_wait(pending: dict[str, deque[_Task]], cooldown: dict[str, fl
 
 
 def fetch_all_external(
-    refs: dict[Target, dict[str, list[int]]], max_per_host: int = 8, max_workers: int = 8
+    refs: dict[Target, dict[str, list[int]]], max_per_host: int = 8, max_workers: int = 16
 ) -> tuple[dict[str, FetchResult], dict[str, HostStats]]:
     """Fetch every unique external URL once. `max_workers` threads drain a shared work queue kept as full as
     eligibility allows; admission holds each host to its current cap (starting at `max_per_host`). A 429 cools the
@@ -349,6 +353,7 @@ def fetch_all_external(
     done_q: Queue[tuple[_Task, FetchResult]] = Queue()
     outstanding: dict[str, int] = defaultdict(int)
     host_cap: dict[str, int] = defaultdict(lambda: max_per_host)
+    host_cap.update(_HOST_MAX_IN_FLIGHT_OVERRIDES)
     cooldown: dict[str, float] = {}
     results: dict[str, FetchResult] = {}
 
