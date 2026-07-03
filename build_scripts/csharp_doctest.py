@@ -18,16 +18,17 @@ Semantics:
 
 Design: fences are parsed once into typed Block objects (the base Block is a skipped
 block; CompileBlock and RunBlock add behavior). Only the parser (_classify_fence) and
-the ref validator know the concrete kinds. A subcommand runs by calling block.check(mode) on every block: each block does
-its own work for that mode (skip: nothing; compile: compile-check; run: compile /
-execute-and-compare / execute-and-update) and reports an Outcome, which may carry an
-in-place fence edit (update mode). The functional core (parsing, plan, normalize,
-RunBlock._diff) is pure and independently testable; the imperative shell (Block.check,
-_write_with_edits, _report, cmd_* wrappers) does subprocess and file IO. Every layer is
-a COMMANDS subcommand.
+the ref validator know the concrete kinds. Every command runs the same validate-first
+gate (_validate); validate then reports coverage, while compile/compare/update call
+block.check(mode) on every block -- each does its own work for that mode (skip: nothing;
+compile: compile-check; run: compile / execute-and-compare / execute-and-update) and
+reports an Outcome, which may carry an in-place fence edit (update mode). The functional
+core (parsing, plan, normalize, RunBlock._diff) is pure and independently testable; the
+imperative shell (Block.check, _run_mode, _write_with_edits, _report, main) does
+subprocess and file IO.
 
 Usage:
-    csharp_doctest.py <command> [args]
+    csharp_doctest.py <validate|compile|compare|update> <file>
 """
 
 import difflib
@@ -61,6 +62,11 @@ SETUP_SCRIPTS = {
 # A {run} block must set exactly these options, in this order (no defaults).
 RUN_OPTIONS = ("id", "setup", "after", "output")
 _ALLOWED_SETUPS = {*SETUP_SCRIPTS, "none"}
+
+# Subcommands. compile/compare/update execute against te and double as the modes passed
+# to Block.check; validate only parses and reports coverage.
+_EXECUTE_MODES = ("compile", "compare", "update")
+_COMMANDS = ("validate", *_EXECUTE_MODES)
 
 
 class Fence(NamedTuple):
@@ -130,7 +136,7 @@ class CompileBlock(Block):
     def check(self, mode: str, runs: "dict[str, RunBlock]") -> "Outcome | None":
         # Compiled in every mode that implies compilation; strict otherwise, so an
         # unrecognized mode fails loudly rather than silently skipping the block.
-        if mode in ("compile", "compare", "update"):
+        if mode in _EXECUTE_MODES:
             return _compile_check(self)
         raise ValueError(f"unknown mode: {mode}")
 
@@ -183,7 +189,9 @@ class RunBlock(Block):
     def check(self, mode: str, runs: "dict[str, RunBlock]") -> "Outcome | None":
         if mode == "compile":
             return _compile_check(self)
-        result = run_snippets([Snippet("expr", script) for script in self.plan(runs)])
+        # last_only: report only this block's Output(), not the setup/after replay that
+        # shares its te session (otherwise a dependency's output leaks into the diff).
+        result = run_snippets([Snippet("expr", script) for script in self.plan(runs)], last_only=True)
         if mode == "compare":
             return self._compare(result)
         if mode == "update":
@@ -405,7 +413,12 @@ def _compile_check(block: Block) -> Outcome:
 
 
 def _report(outcomes: list[Outcome]) -> int:
-    """Print PASS/FAIL per outcome (failure detail to stderr) and a summary; return 1 if any failed. Imperative shell."""
+    """Print each outcome and a summary; return 1 if any failed. Imperative shell.
+
+    Verdicts, failure detail (diffs, compile/runtime errors), and the summary are the
+    report -- all on stdout. Only harness-operational problems go to stderr (raised and
+    handled in main), matching how test runners like pytest/go test stream results.
+    """
     failures = 0
     for outcome in outcomes:
         status = "PASS" if outcome.passed else "FAIL"
@@ -415,21 +428,31 @@ def _report(outcomes: list[Outcome]) -> int:
         if not outcome.passed:
             failures += 1
             for line in outcome.detail:
-                print(f"    {line}", file=sys.stderr)
+                print(f"    {line}")
     print(f"# {len(outcomes)} block(s): {len(outcomes) - failures} pass, {failures} fail")
     return 1 if failures else 0
 
 
-def _process(path: str, mode: str) -> int:
-    """Run one subcommand mode over every block in a doc via block.check(). Imperative shell.
+def _validate(path: str) -> tuple[str, list[Fence], list[Block]]:
+    """Parse and validate a doc's code-block annotations. Returns (text, fences, blocks). Imperative shell (reads the file).
+
+    build_blocks raises on any malformed block, so this is the gate every command runs
+    first -- compile/compare/update never touch te for a doc whose annotations are invalid.
+    """
+    text = Path(path).read_text(encoding="utf-8")
+    fences = parse_fences(text)
+    blocks = build_blocks(fences)
+    return text, fences, blocks
+
+
+def _run_mode(path: str, text: str, blocks: list[Block], mode: str) -> int:
+    """Run compile/compare/update over already-validated blocks; apply edits; report. Imperative shell.
 
     Each block shells out to te against its own isolated model, so blocks are checked
     concurrently (one thread per block -- a doc has few). Results are gathered in
     document order; any fence edits (update mode) are then applied to the file in place,
     single-threaded.
     """
-    text = Path(path).read_text(encoding="utf-8")
-    blocks = build_blocks(parse_fences(text))
     runs = index_runs(blocks)
     with ThreadPoolExecutor(max_workers=max(1, len(blocks))) as pool:
         results = list(pool.map(lambda block: block.check(mode, runs), blocks))
@@ -448,60 +471,36 @@ def _write_with_edits(path: str, text: str, edits: list[Edit]) -> None:
     Path(path).write_text("\n".join(lines) + ("\n" if text.endswith("\n") else ""), encoding="utf-8")
 
 
-def cmd_validate(args: list[str]) -> int:
-    """Validate the code-block annotations in a how-to <file> and report coverage counts.
-
-    build_blocks is the validation pass; it raises on any malformed block, so the
-    report is printed only when every {compile}/{run} block is valid.
-    """
-    if len(args) != 1:
-        raise ValueError("validate requires exactly one markdown file path")
-    fences = parse_fences(Path(args[0]).read_text(encoding="utf-8"))
-    blocks = build_blocks(fences)
+def _coverage(fences: list[Fence], blocks: list[Block]) -> None:
+    """Print the validate report: one line per block plus coverage counts. Imperative shell."""
     for block in blocks:
         print(block.summary())
     counts = kind_counts(blocks)
     csharp = sum(1 for fence in fences if fence.lang == "csharp")
     breakdown = ", ".join(f"{counts[kind]} {kind}" for kind in ("run", "compile", "skip"))
     print(f"# {len(fences)} code blocks found ({csharp} csharp) | valid: {breakdown}")
-    return 0
-
-
-def cmd_compile(args: list[str]) -> int:
-    """Compile-check every {compile} and {run} block in <file> against the live TE CLI (no execution)."""
-    if len(args) != 1:
-        raise ValueError("compile requires exactly one markdown file path")
-    return _process(args[0], "compile")
-
-
-def cmd_compare(args: list[str]) -> int:
-    """Execute every {run} block in <file> and diff Output() vs the documented fence; also compile {compile} blocks."""
-    if len(args) != 1:
-        raise ValueError("compare requires exactly one markdown file path")
-    return _process(args[0], "compare")
-
-
-def cmd_update(args: list[str]) -> int:
-    """Execute every {run} block in <file> and rewrite each documented fence in place with produced Output(); also compile {compile} blocks."""
-    if len(args) != 1:
-        raise ValueError("update requires exactly one markdown file path")
-    return _process(args[0], "update")
-
-
-COMMANDS = {
-    "validate": cmd_validate,
-    "compile": cmd_compile,
-    "compare": cmd_compare,
-    "update": cmd_update,
-}
 
 
 def main(argv: list[str]) -> int:
-    if not argv or argv[0] not in COMMANDS:
-        print(f"usage: {Path(sys.argv[0]).name} <{'|'.join(COMMANDS)}> [args]", file=sys.stderr)
+    # One dispatcher for every subcommand. They share the single-path contract, the
+    # filename header (so batch runs like `xargs -n1` attribute each result to its file),
+    # and the validate-first gate. validate stops after the coverage report; the execute
+    # commands pass their own name to _run_mode as the block.check() mode.
+    if not argv or argv[0] not in _COMMANDS:
+        print(f"usage: {Path(sys.argv[0]).name} <{'|'.join(_COMMANDS)}> <file>", file=sys.stderr)
         return 2
+    command, rest = argv[0], argv[1:]
+    if len(rest) != 1:
+        print(f"{command} requires exactly one markdown file path", file=sys.stderr)
+        return 2
+    path = rest[0]
+    print(path)
     try:
-        return COMMANDS[argv[0]](argv[1:])
+        text, fences, blocks = _validate(path)
+        if command == "validate":
+            _coverage(fences, blocks)
+            return 0
+        return _run_mode(path, text, blocks, command)
     except (OSError, ValueError, RuntimeError) as exc:
         print(f"csharp_doctest: {exc}", file=sys.stderr)
         return 1

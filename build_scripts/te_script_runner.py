@@ -38,6 +38,9 @@ from typing import Any, NamedTuple
 
 DEFAULT_TE_BIN = "te"
 _WORKDIR_PREFIX = "te-script-run."
+# Emitted between the next-to-last and last script when last_only is set, so the runner
+# can report only the final script's output. Chosen to be absent from any real output.
+_OUTPUT_BOUNDARY = "<<<te-script-runner-output-boundary>>>"
 
 
 class Result(NamedTuple):
@@ -245,20 +248,50 @@ def run_te_script(
     return proc.returncode, proc.stdout
 
 
+def _keep_after_boundary(result: Result) -> Result:
+    """Drop everything up to and including the last-only boundary marker. Pure.
+
+    The scripts run in one te session (the only way shared state, e.g. a loaded Metric
+    View, survives), so te reports every script's output in one flat list. To report
+    only the final script's output, a boundary marker is emitted just before it and
+    everything up to it is dropped here.
+
+    A failed run (any script errors -> te stops) is returned unchanged, with the full
+    output and diagnostics -- the whole invocation failed. If the run succeeded but the
+    marker is missing, that is also treated as a failure rather than silently trusted.
+    """
+    if not result.success:
+        return result
+    lines = result.output.split("\n") if result.output else []
+    if _OUTPUT_BOUNDARY not in lines:
+        return result._replace(
+            exit_code=result.exit_code or 1,
+            success=False,
+            diagnostics=[*result.diagnostics, "[harness] output boundary marker missing"],
+        )
+    cut = len(lines) - 1 - lines[::-1].index(_OUTPUT_BOUNDARY)  # last occurrence is ours
+    return result._replace(output="\n".join(lines[cut + 1 :]))
+
+
 def run_snippets(
     snippets: Sequence[Snippet],
     *,
     te_bin: str = DEFAULT_TE_BIN,
     keep_workdir: bool = False,
     dry_run: bool = False,
+    last_only: bool = False,
 ) -> Result:
     """Run snippets in order against one fresh, empty .bim model; return a Result. Imperative shell.
 
-    This is the importable entry point. With dry_run the snippets are compiled but
-    not executed (Result.output is empty; compile errors land in Result.diagnostics).
-    It adds no output of its own (only te's inherited stderr streams through), so an
-    orchestrator can consume the Result as data. The throwaway directory is always
-    removed unless keep_workdir. Raises if te is missing or the model cannot be created.
+    This is the importable entry point. With dry_run the snippets are compiled but not
+    executed (Result.output is empty; compile errors land in Result.diagnostics). With
+    last_only, only the final snippet's Output() is reported (earlier snippets are setup
+    whose output is noise); this is done by emitting a boundary marker before the last
+    script and dropping everything up to it -- necessary because the snippets share one
+    te session and te reports all their output in one flat list. It adds no output of its
+    own (only te's inherited stderr streams through), so an orchestrator can consume the
+    Result as data. The throwaway directory is always removed unless keep_workdir. Raises
+    if te is missing or the model cannot be created.
     """
     if not snippets:
         raise ValueError("run_snippets requires at least one snippet")
@@ -267,9 +300,16 @@ def run_snippets(
     workdir = Path(tempfile.mkdtemp(prefix=_WORKDIR_PREFIX))
     try:
         model_path = init_model(workdir / "model.bim", te_bin=te_bin)
-        script_files = materialize(snippets, workdir / "snippets")
+        snippet_dir = workdir / "snippets"
+        script_files = materialize(snippets, snippet_dir)
+        bounded = last_only and not dry_run and len(script_files) > 1
+        if bounded:
+            boundary = snippet_dir / "00-boundary.cs"
+            boundary.write_text(f'Output("{_OUTPUT_BOUNDARY}");\n', encoding="utf-8")
+            script_files = [*script_files[:-1], boundary, script_files[-1]]
         exit_code, stdout = run_te_script(model_path, script_files, te_bin=te_bin, dry_run=dry_run)
-        return summarize(stdout, exit_code)
+        result = summarize(stdout, exit_code)
+        return _keep_after_boundary(result) if bounded else result
     finally:
         if keep_workdir:
             print(f"[keep] throwaway dir retained: {workdir}", file=sys.stderr)
