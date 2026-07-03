@@ -2,7 +2,7 @@
 uid: parallel-development
 title: Enabling parallel development using Git and Save to Folder
 author: Daniel Otykier
-updated: 2026-06-11
+updated: 2026-07-03
 applies_to:
   products:
     - product: Tabular Editor 2
@@ -125,66 +125,128 @@ What follows is a discussion of branching strategies to employ when developing t
 
 The branching strategy will dictate what the daily development workflow will be like, and in many cases, branches will tie directly into the project methods used by your team. For example, using the [agile process within Azure DevOps](https://docs.microsoft.com/en-us/azure/devops/boards/work-items/guidance/agile-process-workflow?view=azure-devops), your backlog would consist of **Epics**, **Features**, **User Stories**, **Tasks** and **Bugs**.
 
-In the agile terminology, a **User Story** is a deliverable, testable piece of work. The User Story may consist of several **Tasks**, that are smaller pieces of work that need to be performed, typically by a developer, before the User Story may be delivered. In the ideal world, all User Stories have been broken down into manageable tasks, each taking only a couple of hours to complete, adding up to no more than a handful of days for the entire User Story. This would make a User Story an ideal candidate for a so-called Topic Branch, where the developer could make one or more commits for each of the tasks within the User Story. Once all tasks are done, you want to deliver the User Story to the client, at which time the topic branch is merged into a delivery branch (for example, a "Test" branch), and the code deployed to a testing environment.
+In the agile terminology, a **User Story** is a deliverable, testable piece of work. The User Story may consist of several **Tasks** — smaller pieces of work performed by a developer before the User Story can be delivered. In an ideal world, all User Stories are broken down into manageable tasks, each taking only a couple of hours to complete, adding up to no more than a handful of days for the entire User Story. This makes a User Story an ideal candidate for a short-lived feature branch, where the developer makes one or more commits per task before the branch is merged and the code deployed for testing.
 
-Determining a suitable branching strategy depends on many different factors. In general, Microsoft recommends the [Trunk-based Development](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops) ([video](https://youtu.be/t_4lLR6F_yk?t=232)) strategy, for agile and continuous delivery of small increments. The main idea is to create branches off the "Main" branch for every new feature or bugfix (see image below). Code review processes are enforced through pull requests from feature branches into Main, and using the Branch Policy feature of Azure DevOps, we can set up rules that require code to build cleanly before a pull request can be completed.
+Determining a suitable branching strategy depends on many different factors: team size, release cadence, regulatory constraints, how many semantic models you maintain, and how mature your CI/CD setup already is. This article presents three strategies:
 
-![Trunk Based Development](~/content/assets/images/trunk-based-development.png)
+- **[GitHub Flow + Octopus Merge](#github-flow--octopus-merge)** — our recommended approach for most semantic model teams, and the primary focus of this article.
+- **[GitFlow](#gitflow-branching-and-deployment-environments)** — a valid alternative, particularly suited to teams with formal, infrequent release cycles or regulatory sign-off requirements.
+- **[Plain trunk-based development](#trunk-based-development)** — the simplest approach, worth understanding as a baseline even if most BI teams will want the additional structure GitHub Flow provides.
 
-### Trunk-based Development
+> [!NOTE]
+> Tabular Editor is agnostic to branching strategy. Save to Folder and Workspace Mode work identically regardless of which of the strategies below you choose — the recommendation in this article is based on patterns we've seen succeed across enterprise engagements, not a constraint imposed by the tool.
 
-However, such a strategy might not be feasible in a Business Intelligence development teams, for a number of reasons:
+## GitHub Flow + Octopus Merge
 
-- New features often require prolonged testing and validation by business users, which may take several weeks to complete. As such, you will likely need a user-facing test environment.
-- BI solutions are multi-tiered, typically consisting of a Data Warehouse tier with ETL, a Master Data Management tier, a semantic layer and reports. Dependencies exist between these layers, that further complicate testing and deployment.
-- The BI team may be responsible for developing and maintaining several different semantic models, serving different areas of business (Sales, Inventory, Logistics, Finance, HR, etc.), at different maturity stages and at varying development pace.
-- The most important aspect of a BI solution is the data! As a BI developer, you do not have the luxury of simply checking out the code from source control, hitting F5 and having a full solution up and running in the few minutes it takes to compile the code. Your solution needs data, and that data has to be loaded, ETL'ed or processed across several layers to make it to the end user. Including data in your DevOps workflows could blow up build and deployment times from minutes to hours or even days. In some scenarios, it might not even be possible, due to resource or economy constraints.
+For teams building semantic models with Tabular Editor and Power BI, we recommend **[GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow)** combined with an **Octopus Merge** pattern for continuous integration testing.
 
-There is no doubt that a BI team would benefit from a branching strategy that supports parallel development on any of the layers in the full BI solution, in a way that lets them mix and match features that are ready for testing. But especially due to the last bullet point above, we need to think carefully about how we are going to handle the data. If we add a new attribute to a dimension, for example, do we want to automatically load the dimension as part of our build and deployment pipelines? If it only takes a few minutes to load such a dimension, that would probably be fine, but what if we are adding a new column to a multi-billion row fact table? And if developers are working on new features in parallel, should each developer have their own development database, or how do we otherwise prevent them from stepping on each others toes in a shared database?
+GitHub Flow is a lightweight branching model with a single hard rule: **`main` is always deployable.** All work happens on a short-lived feature branch created off `main`; nobody commits directly to `main`; branches are merged back via pull request after review and automated checks pass. Unlike GitFlow, there's no `develop` branch and no separate branch per environment — environment promotion (dev → test → UAT → production) is handled by the deployment pipeline, not by long-lived branches.
 
-There is no easy answer to the questions above - especially when considering all the tiers of a BI solution, and the different constellations and preferred workflows of BI teams across the planet. Also, when we dive into actual build, deployment and test automation, we are going to focus mostly on Analysis Services. The ETL- and database tiers have their own challenges from a DevOps perspective, which are outside the scope of this article. But before we move on, let us take a look at another branching strategy, and how it could potentially be adopted to BI workflows.
+```mermaid
+gitGraph
+    commit id: "initial"
+    branch "feature/add-tax-calculation"
+    commit id: "add measure"
+    commit id: "add column"
+    checkout main
+    merge "feature/add-tax-calculation" id: "PR merged: tax calculation"
+    branch "feature/fix-rls"
+    commit id: "fix role"
+    checkout main
+    merge "feature/fix-rls" id: "PR merged: fix RLS"
+    branch "feature/new-report-page"
+    commit id: "wip"
+    checkout main
+    commit id: "hotfix"
+    merge "feature/new-report-page" id: "PR merged: new report page"
+```
 
-### GitFlow branching and deployment environments
+`main` stays on a single line and is always deployable; short feature branches fork off it and merge straight back via pull request. Contrast this with the GitFlow diagram further down the page, which has five parallel, long-lived lines.
+
+On its own, GitHub Flow doesn't answer a question specific to BI teams: what does your shared test environment reflect at any given moment, when several developers each have an open pull request? **Octopus Merge** answers this: a CI pipeline continuously merges every currently open pull request into a disposable branch and deploys the result to a shared test environment — so business users always validate the combination of everything in progress, not just one feature in isolation. See [GitHub Flow and the Octopus Merge pattern](xref:github-flow) for how the pattern works and how to build it.
+
+A few reasons this combination fits semantic model development particularly well:
+
+- **Simpler mental model.** Two branch concepts instead of GitFlow's five means less onboarding overhead, particularly on teams that include report authors and business analysts alongside model developers.
+- **`main` is always deployable.** If you need to ship an urgent fix — a broken measure, a security-related RLS change — you don't need to reason about which of several long-lived branches currently reflects production.
+- **Environment promotion lives in the pipeline, not the branch structure.** Adding a new environment is a pipeline change, not a new permanent branch every developer has to remember to merge into.
+- **Short-lived branches reduce merge conflicts** — important for Octopus Merge, since it merges every open branch together for integration testing. The shorter each branch lives, the smaller the surface area for conflicts.
+- **Better fit for continuous delivery of data products** than GitFlow's versioned release-train model, since semantic models tend to evolve incrementally rather than ship in discrete releases.
+
+None of this means GitFlow is wrong — see [GitFlow branching and deployment environments](#gitflow-branching-and-deployment-environments) below for when it's still a good fit.
+
+### Key principles
+
+- `main` is always in a deployable state.
+- Feature branches are short-lived and independent.
+- The test environment always reflects the combination of everything currently in progress — not just one feature in isolation. See [GitHub Flow and the Octopus Merge pattern](xref:github-flow) for how.
+- Fabric Git integration should **not** be enabled on any workspace used for Tabular Editor workspace databases — Tabular Editor writes to workspace databases directly through the XMLA endpoint, and those writes have no relationship to your Git branches. This is also called out in the [Workspace Mode documentation](xref:workspace-mode).
+
+## GitFlow branching and deployment environments
+
+GitFlow remains a solid choice for teams with a genuine need for the structure it provides — for example, formal versioned releases, regulatory sign-off gates tied to specific branches, or infrequent (e.g. monthly or quarterly) release cycles where a persistent `develop` branch and release branches map naturally onto your process. If that describes your team, the approach below is well worth using.
 
 The strategy described below is based on [GitFlow by Vincent Driessen](https://nvie.com/posts/a-successful-git-branching-model/).
 
 ![Gitflow](~/content/assets/images/gitflow.png)
 
-Implementing a branching strategy similar to this, can help solve some of the DevOps problems typically encountered by BI teams, provided you put some thought into how the branches correlate to your deployment environments. In an ideal world, you would need at least 4 different environments to fully support GitFlow:
+Implementing a branching strategy similar to this can help solve some of the DevOps problems typically encountered by BI teams, provided you put some thought into how the branches correlate to your deployment environments. In an ideal world, you would need at least 4 different environments to fully support GitFlow:
 
 - The **production** environment, which should always contain the code at the HEAD of the master branch.
 - A **canary** environment, which should always contain the code at the HEAD of the develop branch. This is where you typically schedule nightly deployments and run your integration testing, to make sure that the features going into the next release to production play nicely together.
 - One or more **UAT** environments where you and your business users test and validate new features. Deployment happens directly from the feature branch containing the code that needs to be tested. You will need multiple test environments if you want to test multiple new features in parallel. With some coordination effort, a single test environment is usually enough, as long as you carefully consider the dependencies between your BI tiers.
 - One or more **sandbox** environments where you and your team can develop new features, without impacting any of the environments above. As with the test environment, it is usually enough to have a single, shared, sandbox environment.
 
-We must emphasize that there is really no "one-size-fits-all" solution to these considerations. Maybe you are not building your solution in the Cloud, and therefore do not have the scalability or flexibility to spin up new resources in seconds or minutes. Or maybe your data volumes are very large, making it impractical to replicate environments due to resource/economy/time constraints. Before moving on, also make sure to ask yourself the question of whether you truly need to support parallel development and testing. This is rarely the case for small teams with only a few stakeholders, in which case you can still benefit from CI/CD, but where GitFlow branching might be overkill.
+We must emphasize that there is really no "one-size-fits-all" solution to these considerations. Maybe you are not building your solution in the Cloud, and therefore do not have the scalability or flexibility to spin up new resources in seconds or minutes. Or maybe your data volumes are very large, making it impractical to replicate environments due to resource/economy/time constraints.
 
-Even if you do need to support parallel development, you may find that multiple developers can easily share the same development or sandbox environment, without encountering too much trouble. Specifically for tabular models, though, we recommend that developers still use individual [workspace databases](xref:workspace-mode) to avoid "stepping over each others toes".
+Even if you do need to support parallel development, you may find that multiple developers can easily share the same development or sandbox environment, without encountering too much trouble. Specifically for tabular models, though, we recommend that developers still use individual [workspace databases](xref:workspace-mode) to avoid "stepping over each others toes."
+
+> [!NOTE]
+> If you're evaluating GitFlow primarily because you need a shared, always-current test environment reflecting in-progress work, consider whether [GitHub Flow + Octopus Merge](#github-flow--octopus-merge) might achieve the same outcome with less branch-management overhead. GitFlow's `develop`/canary branch and Octopus Merge's disposable test branch solve a similar problem in different ways.
+
+## Trunk-based development
+
+Trunk-based development is the simplest possible branching model: developers commit small, frequent changes either directly to `main`, or via very short-lived feature branches that are merged back within hours. Microsoft recommends [trunk-based development](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops) ([video](https://youtu.be/t_4lLR6F_yk?t=232)) generally for agile, continuous delivery of small increments.
+
+![Trunk Based Development](~/content/assets/images/trunk-based-development.png)
+
+In its purest form, trunk-based development can run into real friction for BI teams:
+
+- New features often require prolonged testing and validation by business users, which may take several weeks — so you need somewhere for in-progress work to be validated that isn't `main` itself.
+- BI solutions are multi-tiered (Data Warehouse/ETL, Master Data Management, semantic layer, reports), with dependencies between layers that complicate testing and deployment.
+- A BI team may maintain several semantic models at different maturity stages and paces.
+- Data — not just code — has to be loaded, ETL'd, and processed to make a change testable. Including full data refreshes in every build could blow up pipeline runtimes from minutes to hours, and isn't always feasible at all for very large fact tables.
+
+**GitHub Flow + Octopus Merge, described above, is best understood as a refinement of trunk-based development that directly addresses these concerns** — rather than a departure from it. It keeps trunk-based development's core simplicity (one long-lived branch, short-lived feature branches, no release trains) while adding exactly the missing piece BI teams need: a shared test environment, populated by the pipeline rather than by a long-lived branch, that always reflects the current combined state of in-progress work. If you're choosing between the three strategies on this page, GitHub Flow + Octopus Merge is generally where we'd point a team that likes the simplicity of trunk-based development but has run into the limitations above.
 
 ## Common workflow
 
-Assuming you already have a git repository set up and aligned to your branching strategy, adding your tabular model "source code" to the repository is simply a matter of using Tabular Editor to save the metadata to a new branch in a local repository. Then, you stage and commit the new files, push your branch to the remote repository and create a pull request to get your branch merged into the main branch.
+Assuming you already have a git repository set up and aligned to your branching strategy, adding your tabular model "source code" to the repository is simply a matter of using Tabular Editor to save the metadata to a new branch in a local repository. Then, you stage and commit the new files, push your branch to the remote repository, and create a pull request to get your branch merged into the main branch.
 
-The exact workflow depends on your branching strategy and how your git repositories have been set up. In general, the workflow would look something like this:
+The exact commands are the same regardless of which strategy above you choose — what differs is what happens *after* the pull request is opened (see [GitHub Flow and the Octopus Merge pattern](xref:github-flow) for the GitHub Flow case, or your release/canary process for GitFlow). In general, the workflow looks like this:
 
-1. Before starting work on a new feature, create a new feature branch in git. In a trunk-based development scenario, you would need the following git commands to checkout the main branch, get the latest version of the code, and create the feature branch from there:
-   ```cmd
-   git checkout main
-   git pull
-   git checkout -b "feature\AddTaxCalculation"
-   ```
+1. Before starting work on a new feature, create a new feature branch in git:
+
+```cmd
+git checkout main
+git pull
+git checkout -b feature/add-tax-calculation
+```
+
 2. Open your model metadata from the local git repository in Tabular Editor. Ideally, use a [workspace database](xref:workspace-mode), to make it easier to test and debug DAX code.
 3. Make the necessary changes to your model using Tabular Editor. Continuously save the changes (CTRL+S). Regularly commit code changes to git after you save, to avoid losing work and to keep a full history of all changes that were made:
-   ```cmd
-   git add .
-   git commit -m "Description of what was changed and why since last commit"
-   git push
-   ```
-4. If you are not using a workspace database, use Tabular Editor's **Model > Deploy...** option to deploy to a sandbox/development environment, in order to test the changes made to the model metadata.
-6. When done, and all code has been committed and pushed to the remote repository, you submit a pull request in order to get your code integrated with the main branch. If a merge conflict is encountered, you will have to resolve it locally, using for example the Visual Studio Team Explorer or by simply opening the .json files in a text editor to resolve the conflicts (git inserts conflict markers to indicate which part of the code has conflicts).
-7. Once all conflicts are resolved, there may be a process of code review, automated build/test execution based on branch policies, etc. to get the pull request completed. This, however, depends on your branching strategy and overall setup.
 
-We present more details about how to configure git branch policies, set up automated build and deployment pipelines, etc. using Azure DevOps in the following articles. Similar techniques can be used in other automated build and git hosting environments, such as TeamCity, GitHub, etc.
+```cmd
+git add .
+git commit -m "Description of what was changed and why since last commit"
+git push
+```
+
+4. If you are not using a workspace database, use Tabular Editor's **Model > Deploy...** option to deploy to a sandbox/development environment, in order to test the changes made to the model metadata.
+5. When done, and all code has been committed and pushed to the remote repository, you submit a pull request in order to get your code integrated with the main branch. If a merge conflict is encountered, you will have to resolve it locally, using for example the Visual Studio Team Explorer or by simply opening the .json files in a text editor to resolve the conflicts (git inserts conflict markers to indicate which part of the code has conflicts).
+6. Once all conflicts are resolved, there may be a process of code review and automated build/test execution — including, if you're using the GitHub Flow approach above, the Octopus Merge test deployment — before the pull request can be completed.
+
+We present more details about how to configure git branch policies, set up automated build and deployment pipelines, etc. using Azure DevOps and GitHub Actions in the following articles. Similar techniques can be used in other automated build and git hosting environments, such as TeamCity, GitLab, etc.
 
 ## Next steps
 
