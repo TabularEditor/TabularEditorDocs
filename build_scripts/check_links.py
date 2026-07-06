@@ -30,6 +30,8 @@ from types import FrameType
 from typing import Any, NamedTuple
 from urllib.parse import unquote, urldefrag, urlsplit
 
+import config_loader
+
 # Interactive control: a shared progress view that `main` reads for a Ctrl-T status line, and a stop flag it sets on
 # Ctrl-C so the running command can wind down and still emit a partial report. Commands populate the view as they go.
 
@@ -178,10 +180,6 @@ _UNCHECKED_HOSTS: set[str] = set()
 # Any hosts where we observe 429s when we use `stats` get a lower max for
 # in-flight requests. Try to be a good citizen of the web.
 _HOST_MAX_IN_FLIGHT_OVERRIDES = {"github.com": 6}
-
-# Where root-absolute ("site") links resolve on the deployed site. Ones missing from the local build are checked
-# here, because the deployed site's redirects (Azure SWA) make many of them valid even without a matching file.
-_LIVE_SITE_BASE = "https://docs.tabulareditor.com"
 
 # Some encoders (DocFX/Markdig) percent-encode the ~ in the :~: text-fragment delimiter, so it must be normalized
 # before the split -- partitioning the still-encoded fragment would miss the delimiter entirely.
@@ -610,19 +608,20 @@ def _existing_files(root: Path) -> set[str]:
 
 
 def resolve_site_targets(
-    refs: dict[Target, dict[str, list[int]]], existing_files: set[str], site_root: Path, live: bool
+    refs: dict[Target, dict[str, list[int]]], existing_files: set[str], site_root: Path, base_url: str
 ) -> dict[Target, dict[str, list[int]]]:
     """Resolve root-absolute ("site") links against the built tree: those present on disk become ordinary local
-    checks; those absent are checked against the live site (its redirects usually make them valid) and, being our
-    own links, a failure there is an error, not a warning. With `live` false (offline mode) absent links stay
-    on-disk errors. Non-site targets pass through unchanged."""
+    checks. When `base_url` is set (the deployed site root, from build-config), links absent on disk are checked
+    live at that domain -- its redirects usually make them valid -- and, being our own links, a failure there is an
+    error, not a warning. When `base_url` is empty (offline mode) absent links stay on-disk errors. Non-site targets
+    pass through unchanged."""
     resolved: dict[Target, dict[str, list[int]]] = {}
     for target, sources in refs.items():
         reclassified = target
         if target.kind == "site":
             disk_path = os.path.normpath(site_root / target.resource.lstrip("/"))
-            if live and _find_local_file(disk_path, existing_files) is None:
-                url = _LIVE_SITE_BASE + target.resource
+            if base_url and _find_local_file(disk_path, existing_files) is None:
+                url = base_url + target.resource
                 reclassified = Target("external", url, target.fragment, target.text_targets, internal=True)
             else:
                 reclassified = target._replace(kind="local", resource=disk_path)
@@ -656,10 +655,10 @@ def _fragment_suffix(target: Target) -> str:
     return f"#:~:{directive}" if directive else ""
 
 
-def humanize(target: Target) -> str:
+def humanize(target: Target, base_url: str) -> str:
     """A greppable rendering of the destination for finding it in the markdown source (best-effort for API anchors)."""
     if target.kind == "external":
-        return _display_url(target) + _fragment_suffix(target)
+        return _display_url(target, base_url) + _fragment_suffix(target)
     stem = os.path.basename(target.resource).removesuffix(".html")
     if not target.fragment:
         return stem
@@ -668,17 +667,17 @@ def humanize(target: Target) -> str:
     return f"{type_name}.{member}" if member else f"{type_name} (#{target.fragment})"
 
 
-def _display_url(target: Target) -> str:
+def _display_url(target: Target, base_url: str) -> str:
     """The path or URL shown for a target. Internal (live-checked own-site) links show the authored root-absolute
     path rather than the live URL; protocol-relative externals get an https scheme."""
     if target.internal:
-        return target.resource.removeprefix(_LIVE_SITE_BASE)
+        return target.resource.removeprefix(base_url)
     if target.kind == "external" and target.resource.startswith("//"):
         return "https:" + target.resource
     return target.resource
 
 
-def report(failures: list[Failure], root: Path, content_only: bool = True) -> int:
+def report(failures: list[Failure], root: Path, base_url: str, content_only: bool = True) -> int:
     """Print broken references grouped by source file and return an exit code (nonzero if any on-disk error).
 
     On-disk breaks are errors; external breaks are warnings with a trailing copy-paste URL list. Each break shows
@@ -735,8 +734,8 @@ def report(failures: list[Failure], root: Path, content_only: bool = True) -> in
                     target = target._replace(fragment="", text_targets=())
                 locations = "  ".join(f"{source}:{line}" for line in lines)
                 print(f"  {failure.reason}  (x{len(lines)})")
-                print(f"    md grep: {humanize(target)}")
-                print(f"    html:    {_display_url(target)}{_fragment_suffix(target)}")
+                print(f"    md grep: {humanize(target, base_url)}")
+                print(f"    html:    {_display_url(target, base_url)}{_fragment_suffix(target)}")
                 print(f"    at:      {locations}")
         print()
 
@@ -747,7 +746,7 @@ def report(failures: list[Failure], root: Path, content_only: bool = True) -> in
             for failure, lines in breaks:
                 # For a reachable-but-fragment/text failure the bare URL works, so keep the fragment that broke;
                 # for an unreachable URL the fragment is moot, so show it bare.
-                shown = _display_url(failure.target)
+                shown = _display_url(failure.target, base_url)
                 if failure.reason in ("missing anchor", "missing text"):
                     shown += _fragment_suffix(failure.target)
                 files[shown].add(source)
@@ -839,7 +838,7 @@ def print_diagnostics(stats: dict[str, HostStats], outcomes: dict[str, Outcome],
               f"{stat.head_fallbacks:>4} {stat.final_cap:>4}  {host}{tail}")
 
 
-def cmd_validate(args: list[str], progress: _Progress) -> int:
+def cmd_validate(args: list[str], progress: _Progress, base_url: "Callable[[], str]") -> int:
     """Validate a built site and report broken references.
 
     Usage: validate [root] [local] [all] [stats] [under=<subpath>]
@@ -858,7 +857,9 @@ def cmd_validate(args: list[str], progress: _Progress) -> int:
     refs, anchors_by_file = enumerate_site(root, source_prefix, progress)
     existing = _existing_files(root)
     progress.phase = "resolving"
-    refs = resolve_site_targets(refs, existing, root, live="local" not in flags)
+    # Resolve the base URL only when needed: local mode never checks live, so it stays offline and config-free.
+    site_base = "" if "local" in flags else base_url()
+    refs = resolve_site_targets(refs, existing, root, site_base)
     stats: dict[str, HostStats] = {}
     started = monotonic()
     if "local" in flags:
@@ -879,18 +880,33 @@ def cmd_validate(args: list[str], progress: _Progress) -> int:
 
     progress.phase = "validating"
     failures = validate(refs, anchors_by_file, existing, external)
-    exit_code = report(failures, root, content_only="all" not in flags)
+    exit_code = report(failures, root, site_base, content_only="all" not in flags)
     if "stats" in flags:
         print_diagnostics(stats, summarize_outcomes(external, failures), elapsed)
     return exit_code
 
 
-COMMANDS: dict[str, Callable[[list[str], _Progress], int]] = {
-    "extract": cmd_extract,
-    "resolve": cmd_resolve,
-    "enumerate": cmd_enumerate,
-    "fetch": cmd_fetch,
-    "validate": cmd_validate,
+class Plain(NamedTuple):
+    """A command needing only args + progress."""
+
+    run: Callable[[list[str], _Progress], int]
+
+
+class Site(NamedTuple):
+    """A command that resolves links against the live site, so it also gets a base-URL provider (called lazily,
+    so a command that turns out not to need it -- e.g. `validate local` -- never triggers the config read)."""
+
+    run: Callable[[list[str], _Progress, Callable[[], str]], int]
+
+
+Command = Plain | Site
+
+COMMANDS: dict[str, Command] = {
+    "extract": Plain(cmd_extract),
+    "resolve": Plain(cmd_resolve),
+    "enumerate": Plain(cmd_enumerate),
+    "fetch": Plain(cmd_fetch),
+    "validate": Site(cmd_validate),
 }
 
 
@@ -913,7 +929,13 @@ def main(argv: list[str]) -> int:
 
     previous_handlers = _install_signal_handlers(on_stop, on_status)
     try:
-        return COMMANDS[argv[0]](argv[1:], progress)
+        # Match by capability, not per-command: a new Plain command needs no new arm. A future variant with no
+        # arm here falls through without returning, so mypy flags the missing return -- exhaustiveness for free.
+        match COMMANDS[argv[0]]:
+            case Plain(run):
+                return run(argv[1:], progress)
+            case Site(run):
+                return run(argv[1:], progress, config_loader.get_base_url)
     finally:
         _restore_signal_handlers(previous_handlers)
 
