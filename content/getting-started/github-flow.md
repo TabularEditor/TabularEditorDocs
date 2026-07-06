@@ -186,6 +186,8 @@ git reset --hard --quiet
 git checkout main --quiet
 git branch -D octopus/temp --quiet
 git checkout -b octopus/temp --quiet
+git config user.email "octopus-merge@users.noreply.github.com"
+git config user.name "Octopus Merge"
 git commit --allow-empty -m "init" --quiet
 git push origin octopus/temp --quiet
 ```
