@@ -227,11 +227,11 @@ The exact commands are the same regardless of which strategy above you choose â€
 
 1. Before starting work on a new feature, create a new feature branch in git:
 
-```cmd
-git checkout main
-git pull
-git checkout -b feature/add-tax-calculation
-```
+   ```cmd
+   git checkout main
+   git pull
+   git checkout -b feature/add-tax-calculation
+   ```
 
 2. Open your model metadata from the local git repository in Tabular Editor. Ideally, use a [workspace database](xref:workspace-mode), to make it easier to test and debug DAX code.
 3. Make the necessary changes to your model using Tabular Editor. Continuously save the changes (CTRL+S). Regularly commit code changes to git after you save, to avoid losing work and to keep a full history of all changes that were made:
