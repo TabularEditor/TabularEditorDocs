@@ -236,11 +236,11 @@ The exact commands are the same regardless of which strategy above you choose â€
 2. Open your model metadata from the local git repository in Tabular Editor. Ideally, use a [workspace database](xref:workspace-mode), to make it easier to test and debug DAX code.
 3. Make the necessary changes to your model using Tabular Editor. Continuously save the changes (CTRL+S). Regularly commit code changes to git after you save, to avoid losing work and to keep a full history of all changes that were made:
 
-```cmd
-git add .
-git commit -m "Description of what was changed and why since last commit"
-git push
-```
+   ```cmd
+   git add .
+   git commit -m "Description of what was changed and why since last commit"
+   git push
+   ```
 
 4. If you are not using a workspace database, use Tabular Editor's **Model > Deploy...** option to deploy to a sandbox/development environment, in order to test the changes made to the model metadata.
 5. When done, and all code has been committed and pushed to the remote repository, you submit a pull request in order to get your code integrated with the main branch. If a merge conflict is encountered, you will have to resolve it locally, using for example the Visual Studio Team Explorer or by simply opening the .json files in a text editor to resolve the conflicts (git inserts conflict markers to indicate which part of the code has conflicts).
