@@ -16,7 +16,7 @@ applies_to:
           full: true
         - edition: Enterprise
           full: true
-description: Enterprise Edition feature providing 28 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
+description: Providing 28 curated best practice rules hardcoded into Tabular Editor 3 with knowledge base integration.
 ---
 
 # Built-in BPA Rules
