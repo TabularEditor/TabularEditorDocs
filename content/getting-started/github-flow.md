@@ -256,7 +256,7 @@ A few things worth calling out:
 - The `-O -P -R -W -V -E` flags cover overwrite, processing, roles, warnings, verification, and error handling — see the [Tabular Editor CLI reference](xref:command-line-options) for the full flag list if you need to adjust any of these for your own setup.
 
 > [!NOTE]
-> Business reviewers signing off in the shared test environment are validating a report, not a raw XMLA connection — in practice, something still needs to deploy and bind Power BI reports to the freshly deployed test model (and, optionally, update any published Power BI Apps) before that sign-off can happen. Whether every report is redeployed on every run, or only the ones affected by the current changes, is the kind of decision that varies enough by organization to be out of scope here — see [Power BI CI/CD with Azure DevOps and Tabular Editor](xref:powerbi-cicd) for that part of the pipeline.
+> Business reviewers signing off in the shared test environment are validating a report, not a raw XMLA connection — in practice, something still needs to deploy and bind Power BI reports to the freshly deployed test model (and, optionally, update any published Power BI Apps) before that sign-off can happen. Whether every report is redeployed on every run, or only the ones affected by the current changes, is the kind of decision that varies enough by organization to be out of scope here — see @powerbi-cicd for that part of the pipeline.
 
 ### Full workflow diagram
 
@@ -306,5 +306,5 @@ flowchart TB
 
 - [Enabling parallel development using Git and Save to Folder](xref:parallel-development) — the branching strategy this pipeline supports.
 - [CI/CD Integration](xref:te-cli-cicd) — the new Tabular Editor CLI's CI/CD patterns, currently in Limited Public Preview.
-- [Power BI CI/CD with Azure DevOps and Tabular Editor](xref:powerbi-cicd)
-- [Analysis Services CI/CD with Azure DevOps and Tabular Editor](xref:as-cicd)
+- @powerbi-cicd
+- @as-cicd
