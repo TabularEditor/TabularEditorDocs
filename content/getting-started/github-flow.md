@@ -35,7 +35,7 @@ git checkout -b feature/add-tax-calculation
 
 **Local development.** The developer works in Tabular Editor 3. Two things happen every time they hit **Ctrl+S**:
 
-- The model metadata is saved to disk in [Save to Folder (database.json) format](xref:parallel-development#what-is-save-to-folder) and committed to the feature branch in Git.
+- The model metadata is saved to disk in [Save to Folder (database.json) format](xref:parallel-development#what-is-save-to-folder), ready to be staged and committed to the feature branch in Git.
 - If [Workspace Mode](xref:workspace-mode) is enabled, the model is simultaneously synced to the developer's personal workspace database in a shared dev workspace — allowing live testing in Tabular Editor, and letting Power BI Desktop connect [directly to the workspace database](xref:workspace-mode#advantages-of-workspace-mode) for report-side validation.
 
 ```cmd
