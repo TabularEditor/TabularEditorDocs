@@ -19,8 +19,8 @@ REDIRECTS_CONFIG_PATH = "metadata/redirects.json"
 LANGUAGE_METADATA_PATH = "metadata/language-metadata.json"
 
 # Cached configs
-_build_config: dict | None = None
-_redirects_config: dict | None = None
+_build_config: dict[str, Any] | None = None
+_redirects_config: dict[str, Any] | None = None
 
 
 def load_build_config(config_path: Path | str | None = None) -> dict[str, Any]:
@@ -45,7 +45,7 @@ def load_build_config(config_path: Path | str | None = None) -> dict[str, Any]:
         raise FileNotFoundError(f"Build config not found: {config_path}")
     
     with open(config_path, encoding="utf-8") as f:
-        config = json.load(f)
+        config: dict[str, Any] = json.load(f)
     
     if config_path == Path(BUILD_CONFIG_PATH):
         _build_config = config
@@ -74,7 +74,7 @@ def load_redirects_config(config_path: Path | str | None = None) -> dict[str, An
         raise FileNotFoundError(f"Redirects config not found: {config_path}")
     
     with open(config_path, encoding="utf-8") as f:
-        config = json.load(f)
+        config: dict[str, Any] = json.load(f)
     
     if config_path == Path(REDIRECTS_CONFIG_PATH):
         _redirects_config = config
@@ -82,28 +82,31 @@ def load_redirects_config(config_path: Path | str | None = None) -> dict[str, An
     return config
 
 
-def get_content_directories(config: dict | None = None) -> list[str]:
+def get_content_directories(config: dict[str, Any] | None = None) -> list[str]:
     """Get list of content directories that should be localized."""
     if config is None:
         config = load_build_config()
-    return config.get("contentDirectories", {}).get("directories", [])
+    directories: list[str] = config.get("contentDirectories", {}).get("directories", [])
+    return directories
 
 
-def get_shared_directories(config: dict | None = None) -> list[str]:
+def get_shared_directories(config: dict[str, Any] | None = None) -> list[str]:
     """Get list of shared directories (assets, api) that aren't translated."""
     if config is None:
         config = load_build_config()
-    return config.get("sharedDirectories", {}).get("directories", [])
+    directories: list[str] = config.get("sharedDirectories", {}).get("directories", [])
+    return directories
 
 
-def get_root_files(config: dict | None = None) -> list[str]:
+def get_root_files(config: dict[str, Any] | None = None) -> list[str]:
     """Get list of root-level files to copy/localize."""
     if config is None:
         config = load_build_config()
-    return config.get("rootFiles", {}).get("files", [])
+    files: list[str] = config.get("rootFiles", {}).get("files", [])
+    return files
 
 
-def get_legacy_shortcuts(config: dict | None = None) -> dict[str, str]:
+def get_legacy_shortcuts(config: dict[str, Any] | None = None) -> dict[str, str]:
     """Get legacy shortcut redirects (old URL → new URL).
     
     These are server-side 301 redirects for high-priority/vanity URLs.
@@ -116,7 +119,7 @@ def get_legacy_shortcuts(config: dict | None = None) -> dict[str, str]:
     return {k: v for k, v in redirects.items() if not k.startswith("_")}
 
 
-def get_client_redirects(config: dict | None = None) -> dict[str, str]:
+def get_client_redirects(config: dict[str, Any] | None = None) -> dict[str, str]:
     """Get client-side redirects for legacy content URLs.
     
     These are meta-refresh HTML redirects for content migration.
@@ -130,7 +133,7 @@ def get_client_redirects(config: dict | None = None) -> dict[str, str]:
     return {k: v for k, v in redirects.items() if not k.startswith("_")}
 
 
-def get_all_redirects(config: dict | None = None) -> dict[str, str]:
+def get_all_redirects(config: dict[str, Any] | None = None) -> dict[str, str]:
     """Get all redirects (both server and client) merged together.
     
     Returns a combined dict of all redirects. Server redirects take precedence
@@ -145,14 +148,15 @@ def get_all_redirects(config: dict | None = None) -> dict[str, str]:
     return all_redirects
 
 
-def get_default_language(config: dict | None = None) -> str:
+def get_default_language(config: dict[str, Any] | None = None) -> str:
     """Get the default language code."""
     if config is None:
         config = load_build_config()
-    return config.get("defaultLanguage", "en")
+    language: str = config.get("defaultLanguage", "en")
+    return language
 
 
-def get_base_url(config: dict | None = None) -> str:
+def get_base_url(config: dict[str, Any] | None = None) -> str:
     """Get the canonical base URL of the published site, without trailing slash.
 
     Used for canonical/hreflang tags, per-language sitemap baseUrls, and the
@@ -160,7 +164,7 @@ def get_base_url(config: dict | None = None) -> str:
     """
     if config is None:
         config = load_build_config()
-    base_url = config.get("baseUrl")
+    base_url: str | None = config.get("baseUrl")
     if not base_url:
         raise KeyError(
             '"baseUrl" is missing from metadata/build-config.json'
@@ -168,7 +172,7 @@ def get_base_url(config: dict | None = None) -> str:
     return base_url.rstrip("/")
 
 
-def get_sitemap_downrank(config: dict | None = None) -> list[dict]:
+def get_sitemap_downrank(config: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     """Get sitemap downrank rules: a list of {match, priority} dicts.
 
     Each rule lowers the <priority> of sitemap URLs whose path contains the
@@ -176,10 +180,11 @@ def get_sitemap_downrank(config: dict | None = None) -> list[dict]:
     """
     if config is None:
         config = load_build_config()
-    return config.get("sitemap", {}).get("downrank", [])
+    downrank: list[dict[str, Any]] = config.get("sitemap", {}).get("downrank", [])
+    return downrank
 
 
-def get_sitemap_exclude(config: dict | None = None) -> list[dict]:
+def get_sitemap_exclude(config: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     """Get sitemap exclude rules: a list of {match} dicts.
 
     Each rule removes sitemap URLs whose path contains the 'match' substring.
@@ -187,7 +192,8 @@ def get_sitemap_exclude(config: dict | None = None) -> list[dict]:
     """
     if config is None:
         config = load_build_config()
-    return config.get("sitemap", {}).get("exclude", [])
+    exclude: list[dict[str, Any]] = config.get("sitemap", {}).get("exclude", [])
+    return exclude
 
 
 def compute_file_hash(file_path: Path | str) -> str:
@@ -220,7 +226,7 @@ def get_all_content_files(content_dir: Path | str) -> list[Path]:
     if not content_dir.exists():
         return []
     
-    files = []
+    files: list[Path] = []
     for pattern in ["**/*.md", "**/*.yml", "**/*.yaml"]:
         files.extend(content_dir.glob(pattern))
     
