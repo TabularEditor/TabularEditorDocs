@@ -1,0 +1,1 @@
+{"dryRun":true,"scripts":[{"source":"01-inline.cs","success":false,"errors":["error: no method 'Foo'"]},{"source":"02-inline.cs","success":true,"errors":[]}]}
