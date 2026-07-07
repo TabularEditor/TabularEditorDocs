@@ -105,7 +105,7 @@ Trees of `Join`s in a Metric View are translated as TOM tables in a chain of N:1
 This represents a snowflake model schema.
 
 `Cardinality` of `ManyToOne` is translated as a TOM N:1 relationship.
-An unpopulated `Cardinality` or a `Join` without this property set is treated as `ManyToOne` by default, in accordance with Databricks docs.
+An unpopulated `Cardinality` or a `Join` without this property set is treated as `ManyToOne` by default, in accordance with [Metric View docs](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference#joins).
 Other values for `Cardinality` are not yet supported for translation as a relationship.
 
 `Using` joins are not supported for translation; these do not yield a TOM relationship.

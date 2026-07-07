@@ -146,8 +146,8 @@ If the term is ever used without being accompanied by a platform's name, then we
 
 ## Additional Resources
 
-- [Databricks Metric View documentation](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/)
-- [Databricks Metric View YAML reference](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/metric-views/yaml-reference)
+- [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/)
+- [Metric View YAML reference](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference)
 - @semantic-bridge-metric-view-tabular-translation
 - @semantic-bridge-metric-view-object-model
 - @semantic-bridge-metric-view-validation

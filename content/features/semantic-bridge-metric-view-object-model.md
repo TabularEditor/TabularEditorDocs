@@ -27,7 +27,7 @@ SUMMARY: Overview of the Metric View object model built into the Semantic Bridge
 > The Semantic Bridge is in public preview.
 > The 3.25.0 release supports Metric View v0.1 metadata, and the 3.26.2 release supports Metric View v1.1 metadata.
 
-The Semantic Bridge includes an object model representing a Databricks Metric View.
+The Semantic Bridge includes an object model representing a [Metric View](https://learn.microsoft.com/azure/databricks/business-semantics/).
 This allows you to work with Metric Views programmatically through C# scripts, similar to how you work with a Tabular model through the TOMWrapper.
 
 Other than the [import GUI](xref:semantic-bridge#interface), all access to and interaction with a Metric View is through C# scripts.
@@ -58,7 +58,7 @@ This behavior is similar to the Tabular model in C# scripts, which is always ava
 ## Domain objects
 
 The object model consists of four main types that correspond to the structure of a Metric View YAML file.
-We do not repeat the entire specification here, so we encourage you to reference the [Databricks Metric View documentation](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/)
+We do not repeat the entire specification here, so we encourage you to reference the [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/)
 and our [own API reference for the object model](xref:TabularEditor.SemanticBridge.Platforms.Databricks.MetricView).
 
 | API Reference                                                                          | Description                                                |
@@ -320,7 +320,7 @@ This lookup is case insensitive, matching the default in Databricks SQL.
 
 ### Metric View versions
 
-We track the [Databricks Metric View documentation](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/) to stay up to date with the specification.
+We track the [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/) to stay up to date with the specification.
 All properties are annotated with the version that they were introduced.
 Thanks to this, the object model will raise exceptions and surface diagnostics if you attempt to set a property that is not allowed for a given version of the spec.
 We recommend always running [`SemanticBridge.MetricView.Validate();`](xref:TabularEditor.SemanticBridge.Platforms.Databricks.DatabricksMetricViewService.Validate) after modifying a Metric View in a C# script;
@@ -333,5 +333,5 @@ this will check all default validation rules for correctness.
 - @semantic-bridge-metric-view-validation
 - @semantic-bridge-metric-view-tabular-translation
 - [Semantic Bridge how-tos for detailed examples](xref:semantic-bridge-how-tos)
-- [Databricks Metric View documentation](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/)
-- [Databricks Metric View YAML specification](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/metric-views/yaml-reference)
+- [Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/)
+- [Metric View YAML specification](https://learn.microsoft.com/azure/databricks/business-semantics/metric-views/yaml-reference)

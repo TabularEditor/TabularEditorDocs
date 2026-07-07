@@ -29,7 +29,7 @@ This how-to demonstrates validating a loaded Metric View using the built-in vali
 
 ## Default validation rules
 
-The Semantic Bridge includes built-in rules that validate a Metric View definition against rules defined in [the Databricks documentation](https://learn.microsoft.com/en-us/azure/databricks/business-semantics/).
+The Semantic Bridge includes built-in rules that validate a Metric View definition against rules defined in [the Metric View documentation](https://learn.microsoft.com/azure/databricks/business-semantics/).
 These rules are automatically run upon deserialization, whether via `Deserialize` directly or any method that reads a Metric View, such as `Load` or `ImportToTabularFromFile`.
 Diagnostics from those automatic runs remain available afterward through `SemanticBridge.MetricView.ImportDiagnostics`.
 You can also run these rules on demand against the loaded Metric View, which this document covers.
